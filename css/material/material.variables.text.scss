@@ -1,0 +1,41 @@
+$gm-font-noto:                      "Noto Sans", sans-serif;
+$gm-font-noto-italic:               "Noto Sans Italic", sans-serif;
+$gm-font-noto-bold:                 "Noto Sans Bold", sans-serif;
+$gm-font-noto-bold-italic:          "Noto Sans Bold", sans-serif;
+
+$gm-font-roboto:                    "Roboto",        "Noto Sans",      sans-serif;
+$gm-font-roboto-thin:               "Roboto Thin",   "Noto Sans",      sans-serif;
+$gm-font-roboto-light:              "Roboto Light",  "Noto Sans",      sans-serif;
+$gm-font-roboto-medium:             "Roboto Medium", "Noto Sans",      sans-serif;
+$gm-font-roboto-bold:               "Roboto Bold",   "Noto Sans Bold", sans-serif;
+$gm-font-roboto-black:              "Roboto Black",  "Noto Sans Bold", sans-serif;
+
+$gm-font-roboto-italic:             "Roboto Italic",        "Noto Sans Italic",      sans-serif;
+$gm-font-roboto-thin-italic:        "Roboto Thin Italic",   "Noto Sans Italic",      sans-serif;
+$gm-font-roboto-light-italic:       "Roboto Light Italic",  "Noto Sans Italic",      sans-serif;
+$gm-font-roboto-medium-italic:      "Roboto Medium Italic", "Noto Sans Italic",      sans-serif;
+$gm-font-roboto-bold-italic:        "Roboto Bold Italic",   "Noto Sans Bold Italic", sans-serif;
+$gm-font-roboto-black-italic:       "Roboto Black Italic",  "Noto Sans Bold Italic", sans-serif;
+
+@mixin ellipsis()
+{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/*
+ToDo: Figure this out
+$gm-text-wrap-header-4:           @include ellipsis;
+$gm-text-wrap-header-3:           @include ellipsis;
+$gm-text-wrap-header-2:           normal;
+$gm-text-wrap-header-1:           normal;
+$gm-text-wrap-headline:           normal;
+$gm-text-wrap-title:              @include ellipsis;
+$gm-text-wrap-subhead:            normal;
+$gm-text-wrap-body:               normal;
+$gm-text-wrap-caption:            @include ellipsis;
+$gm-text-wrap-button:             @include ellipsis;
+*/
+
+$gm-contrast-ratio: 4.5;

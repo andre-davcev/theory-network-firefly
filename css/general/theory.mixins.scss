@@ -1,0 +1,4 @@
+@mixin text-border($color, $width: 1px)
+{
+    text-shadow: -$width 0 0 $color, 0 $width 0 $color, $width 0 0 $color, 0 -$width 0 $color;
+}

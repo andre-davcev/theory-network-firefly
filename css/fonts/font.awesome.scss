@@ -1,0 +1,11 @@
+@font-face
+{
+    font-family: $fa-font-face-name-font-awesome;
+    src: $fa-font-face-url-font-awesome;
+}
+
+.tn-ico.fa-icon:before
+{
+    font-family: $fa-font-face-name-font-awesome;
+    font-size: $fa-font-size;
+}

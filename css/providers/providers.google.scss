@@ -1,0 +1,28 @@
+.tn-provider.tn-google
+{
+    &.tn-button
+    {
+        background-color: $google-button-color-background;
+
+        &:not([disabled]):hover
+        {
+            background-color: $google-button-color-background;
+        }
+
+        &.md-focused
+        {
+            background-color: $google-button-color-background;
+        }
+
+        > .tn-item
+        {
+            &:before
+            {
+                color: $google-button-icon-color-text;
+                content: $google-button-icon-content;
+                padding-top: 0.5rem; padding-left: 0.1rem;
+                font-size: $google-button-icon-font-size;
+            }
+        }
+    }
+}

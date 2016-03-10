@@ -1,0 +1,20 @@
+.angular-google-map
+{
+	height: 100%; width: 100%;
+    margin-top: $bar-height;
+}
+
+.angular-google-map-container
+{
+	height: 100%; width: 100%;
+}
+
+.tabs-bottom .angular-google-map > .angular-google-map
+{
+	padding-bottom: $tabs-height + $bar-height;
+}
+
+.gm-style-iw + div
+{
+	display: none;
+}

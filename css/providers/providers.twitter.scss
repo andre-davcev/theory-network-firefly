@@ -1,0 +1,27 @@
+.tn-provider.tn-twitter
+{
+    &.tn-button
+    {
+        background-color: $twitter-button-color-background;
+
+        &:not([disabled]):hover
+        {
+            background-color: $twitter-button-color-background;
+        }
+
+        &.md-focused
+        {
+            background-color: $twitter-button-color-background;
+        }
+
+        > .tn-item
+        {
+            &:before
+            {
+                color: $twitter-button-icon-color-text;
+                content: $twitter-button-icon-content;
+                padding-top: 0.3rem; padding-left: 0.0rem;
+            }
+        }
+    }
+}

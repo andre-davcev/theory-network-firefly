@@ -1,0 +1,19 @@
+<table class="tn-table">
+    <thead class="tn-section tn-header">
+        <tr class="tn-row">
+            <th class="tn-column" ng-repeat="header in headers | orderBy:'order'" ng-click="clickedHeader(header, $index)" ng-class="{'tn-sort' : header.key && $index !== selectedColumn, 'tn-sort tn-ascending' : header.key && $index === selectedColumn && !reverse, 'tn-sort tn-descending' : header.key && $index === selectedColumn && reverse, 'tn-hide' : !header.visible}">{{header.title}}</th>
+        </tr>
+    </thead>
+
+    <tbody class="tn-section tn-body" ng-if="template">
+        <tr class="tn-row" ng-if="rowTemplate" ng-repeat="row in filtered" ng-click="clickedRow(row, $index)" ng-include="template" ng-class="{'tn-selected' : $index === selectedRow}" ng-cloak></tr>
+    </tbody>
+
+    <tbody class="tn-section tn-body {{bodyClasses}}" ng-if="!template && rowTemplate">
+        <tr class="tn-row" ng-repeat="row in filtered" ng-click="clickedRow(row, $index)" ng-class="{'tn-selected' : $index === selectedRow}" tn-compile="{{rowTemplate}}"></tr> 
+    </tbody>
+
+    <tfoot class="tn-section tn-footer" ng-if="footer && templateFooter">
+        <tr class="tn-row" tn-compile="{{templateFooter}}"></tr>
+    </tfoot>
+</table>

@@ -1,0 +1,6 @@
+<div class="item item-image" ng-class="classes">
+	<img name="photo" ng-src="{{photo}}" ng-show="photo" ng-click="getPhoto()" ng-model="photo">
+	<div class="placeholder tn-align" ng-show="!photo" ng-click="getPhoto()">
+	    <span class="text tn-align-fixed">{{::dictionary.tnPhotoAdd}}<br>{{placeholder}}</span> 
+	</div>
+</div>

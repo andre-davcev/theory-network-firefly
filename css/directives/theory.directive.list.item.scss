@@ -1,0 +1,47 @@
+.tn-list-item
+{
+    display: block;
+    position: relative;
+    height: $tn-directive-list-item-height; width: 100%;
+
+    > .tn-transclude
+    {
+        transform: translate3d(0px, 0px, 0px) scale(1);
+        z-index: 2;
+        background-color: $tn-directive-list-item-color-background;
+
+        &.tn-input
+        {
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 0;
+            background-color: transparent;
+            outline: none;
+        }
+    }
+
+    > .tn-button
+    {
+        &.tn-delete
+        {
+            z-index: 1;
+            position: absolute;
+            top: 0; right: 0;
+            line-height: $tn-directive-list-item-height;
+            color: $ios-list-item-button-delete-font-color;
+            font-size: $ios-list-item-button-delete-font-size;
+            font-family: $ios-list-item-button-delete-font-family;
+        }
+    }
+
+    > .tn-animate
+    {
+        transition-duration: $tn-transition-duration-none;
+
+        &.ff-animate
+        {
+            transition-duration: $tn-transition-duration-hover;
+            transition-timing-function: ease-out;
+        }
+    }
+}

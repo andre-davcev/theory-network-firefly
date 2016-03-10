@@ -1,0 +1,63 @@
+.tn-align
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > .tn-align-item
+    {
+        flex: 1;
+
+        &.tn-align-top      {align-self: flex-start;}
+        &.tn-align-bottom   {align-self: flex-end;}
+        &.tn-align-fixed    {flex: none; max-width: 100%;}
+    }
+
+    &.tn-align-vertical
+    {
+        justify-content: stretch;
+    }
+
+    &.tn-align-horizontal
+    {
+        align-items: stretch;
+    }
+}
+
+.tn-flex
+{
+    display: flex;
+    flex-direction: row;
+
+    .tn-vertical
+    {
+        flex-direction: column;
+    }
+}
+
+.tn-align-left
+{
+    align-self: flex-start;
+    flex: 1;
+}
+
+.tn-align-right
+{
+    align-self: flex-end;
+    flex: none;
+}
+
+.tn-container
+{
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+.tn-container-reset
+{
+    position: relative;
+    flex: none;
+    display: flex;
+}

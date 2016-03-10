@@ -1,0 +1,87 @@
+$gm-color-black:                    #000000;
+$gm-color-white:                    #FFFFFF;
+
+$gm-color-dark:                     $gm-color-black;
+$gm-color-dark-text:                rgba(0, 0, 0, 0.87);
+$gm-color-dark-text-secondary:      rgba(0, 0, 0, 0.54);
+$gm-color-dark-icons:               $gm-color-dark-text-secondary;
+$gm-color-dark-dividers:            rgba(0, 0, 0, 0.12);
+$gm-color-dark-disabled:            rgba(0, 0, 0, 0.26);
+$gm-color-dark-hint:                $gm-color-dark-disabled;
+
+$gm-color-light:                    $gm-color-white;
+$gm-color-light-text:               $gm-color-white;
+$gm-color-light-text-secondary:     rgba(255, 255, 255, 0.70);
+$gm-color-light-icons:              $gm-color-white;
+$gm-color-light-dividers:           rgba(255, 255, 255, 0.12);
+$gm-color-light-disabled:           rgba(255, 255, 255, 0.30);
+$gm-color-light-hint:               $gm-color-light-disabled;
+
+$gm-color-primary:                  $gm-color-indigo;
+$gm-color-primary-light:            $gm-color-indigo-100;
+$gm-color-primary-dark:             $gm-color-indigo-700;
+
+$gm-color-accent:                   $gm-color-pink-a200;
+$gm-color-accent-light:             $gm-color-pink-a100;
+$gm-color-accent-dark:              $gm-color-pink-a400;
+
+$gm-color-toolbar:                  $gm-color-primary;
+$gm-color-status-bar:               $gm-color-primary-dark;
+$gm-color-button-action-primary:    $gm-color-accent;
+$gm-color-switch:                   $gm-color-accent;
+$gm-color-slider:                   $gm-color-accent;
+$gm-color-link:                     $gm-color-accent;
+$gm-color-primary-text-white:       $gm-color-white;
+$gm-color-primary-text-black:       $gm-color-dark-text-secondary;
+
+$gm-font-family-text:               $gm-font-roboto;
+$gm-font-family-header-4:           $gm-font-roboto-light;
+$gm-font-family-header-3:           $gm-font-family-text;
+$gm-font-family-header-2:           $gm-font-family-text;
+$gm-font-family-header-1:           $gm-font-family-text;
+$gm-font-family-headline:           $gm-font-family-text;
+$gm-font-family-title:              $gm-font-roboto-medium;
+$gm-font-family-subhead:            $gm-font-family-text;
+$gm-font-family-subhead-desktop:    $gm-font-family-text;
+$gm-font-family-body:               $gm-font-family-text;
+$gm-font-family-body-desktop:       $gm-font-family-text;
+$gm-font-family-body-2:             $gm-font-roboto-medium;
+$gm-font-family-caption:            $gm-font-family-text;
+$gm-font-family-button:             $gm-font-family-text;
+
+$gm-font-size-header-4:             11.2rem;
+$gm-font-size-header-3:              5.6rem;
+$gm-font-size-header-2:              4.5rem;
+$gm-font-size-header-1:              3.4rem;
+$gm-font-size-headline:              2.4rem;
+$gm-font-size-title:                 2.0rem;
+$gm-font-size-subhead:               1.6rem;
+$gm-font-size-subhead-desktop:       1.5rem;
+$gm-font-size-body:                  1.4rem;
+$gm-font-size-body-desktop:          1.3rem;
+$gm-font-size-caption:               1.2rem;
+$gm-font-size-button:               $gm-font-size-body;
+
+$gm-line-height-header-4:           $gm-font-size-header-4;
+$gm-line-height-header-3:           $gm-font-size-header-3;
+$gm-line-height-header-2:           $gm-font-size-header-2;
+$gm-line-height-header-1:           $gm-font-size-header-1;
+$gm-line-height-headline:           $gm-font-size-headline;
+$gm-line-height-title:              $gm-font-size-title;
+$gm-line-height-subhead:            $gm-font-size-subhead;
+$gm-line-height-subhead-desktop:    $gm-font-size-subhead-desktop;
+$gm-line-height-body:               $gm-font-size-body;
+$gm-line-height-desktop:            $gm-font-size-body-desktop;
+$gm-line-height-caption:            $gm-font-size-caption;
+$gm-line-height-button:             $gm-font-size-button;
+
+$gm-font-color-header-4:            $gm-color-dark-text-secondary;
+$gm-font-color-header-3:            $gm-color-dark-text-secondary;
+$gm-font-color-header-2:            $gm-color-dark-text-secondary;
+$gm-font-color-header-1:            $gm-color-dark-text-secondary;
+$gm-font-color-headline:            $gm-color-dark-text;
+$gm-font-color-title:               $gm-color-dark-text;
+$gm-font-color-subhead:             $gm-color-dark-text;
+$gm-font-color-body:                $gm-color-dark-text;
+$gm-font-color-caption:             $gm-color-dark-text-secondary;
+$gm-font-color-button:              $gm-color-dark-text;

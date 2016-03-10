@@ -1,0 +1,32 @@
+.tn-tooltip
+{
+    display: block;
+    position: absolute;
+    top: 0px; left: -9999px;
+    background-color: $tn-tooltip-color-background;
+    padding: ($tn-tooltip-padding - 6) $tn-tooltip-padding;
+    border-radius: $tn-tooltip-border-radius;
+    margin-top: -13px;
+    box-shadow: 0 0 3px $tn-tooltip-color-box-shadow;
+    z-index: $tn-tooltip-z-index;
+
+    &:after,
+    &.tn-north:after
+    {
+        display: inline;
+        width: 100%;
+        line-height: 1;
+        color: $tn-tooltip-arrow-color;
+        position: absolute;
+        pointer-events: none;
+        margin: -8px 0 0 0;
+        top: 100%;
+        left: 0;
+        text-align: center;
+        font-family: $tn-tooltip-arrow-font-family;
+        font-size: $tn-tooltip-arrow-font-size;
+        content: $tn-tooltip-arrow-icon;
+        text-shadow: 0 3px 0 $tn-tooltip-arrow-color-text-shadow;
+        z-index: -1;
+    }
+}

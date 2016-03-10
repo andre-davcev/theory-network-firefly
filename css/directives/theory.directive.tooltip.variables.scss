@@ -1,0 +1,11 @@
+$tn-tooltip-color-background:           rgba(255, 255, 255, 0.85);
+$tn-tooltip-color-box-shadow:           #A2A2A2;
+$tn-tooltip-padding:                    22px;
+$tn-tooltip-border-radius:              3px;
+$tn-tooltip-z-index:                    10000;
+
+$tn-tooltip-arrow-color:                $tn-tooltip-color-background;
+$tn-tooltip-arrow-font-family:          $tn-icons-ionic;
+$tn-tooltip-arrow-font-size:            24px;
+$tn-tooltip-arrow-icon:                 $tn-icon-arrow-down;
+$tn-tooltip-arrow-color-text-shadow:    rgba(200, 200, 200, 0.4);
