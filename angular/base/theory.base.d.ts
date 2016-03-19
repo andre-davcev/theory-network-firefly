@@ -1,0 +1,1 @@
+export {TNObject} from './theory.base.object';

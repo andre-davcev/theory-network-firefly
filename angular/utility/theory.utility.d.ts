@@ -1,0 +1,1 @@
+export {TNConfiguration} from './theory.utility.configuration';

@@ -1,10 +1,15 @@
-class TNObject
+export class TNObject
 {
     private _properties:Object;
 
     constructor(options:Object)
     {
         this.options(options);
+    }
+
+    initialize(options:Object)
+    {
+        
     }
 
     extend(object:Object, options:Object): Object
