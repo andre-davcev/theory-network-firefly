@@ -1,7 +1,20 @@
-import {TNObject} from '../base/theory.base.d';
+import {Http, Headers, Response} from 'angular2/http';
+import {Observable}              from 'rxjs/Rx';
+import {Platform}                from 'ionic-angular';
+import {Globalization}           from 'ionic-native';
+//ToDo: $locale
+//ToDo: $log
+
+import {TNObject}          from '../base/theory.base.d';
+import {TNFirebaseUtility} from '../firebase/theory.firebase.d';
 
 export class TNConfiguration extends TNObject
 {
+    static get parameters()
+    {
+        return [[Http], [Observable], [Platform], [Globalization]];
+    }
+
     constructor(options:Object)
     {
         super(

@@ -2,12 +2,12 @@ export class TNObject
 {
     private _properties:Object;
 
-    constructor(options:Object)
+    constructor(options?:Object)
     {
         this.options(options);
     }
 
-    initialize(options:Object)
+    initialize(options?:Object)
     {
         
     }
@@ -22,9 +22,16 @@ export class TNObject
         return object;
     }
 
-    options(options:Object): Object
+    options(options?:Object): Object
     {
-        return this.extend(this.properties, options);
+        let extended:Object;
+
+        if (options != null)
+        {
+            extended = this.extend(this.properties, options);
+        }
+
+        return extended;
     }
 
     property(key:string, property:Object): any
