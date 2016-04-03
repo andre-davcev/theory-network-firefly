@@ -1,10 +1,12 @@
-import {Observable}     from 'rxjs/Rx';
+import {Injectable} from 'angular2/core';
+import {Observable} from 'rxjs/Rx';
 
 //ToDo: $locale
 //ToDo: $log
 
-import {TNObject} from '../base/theory.base.d';
+import {TNObject} from '../base/theory.base.object';
 
+@Injectable()
 export class TNFirebaseUtility extends TNObject
 {
     static get parameters()
@@ -18,69 +20,56 @@ export class TNFirebaseUtility extends TNObject
 
         this.options(options);
     }
-}
 
-/*
-
-factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log, TNObject, TNDate, TNFirebase)
-{
-    var
-    TNFirebaseUtility = function(options)
+    service(name:string)
     {
-        TNFirebaseUtility.parent.call(this);
+        return this.properties['services'][name];
+    }
 
-        this.options(options);
-    };
-
-    TNInheritance.extend(TNFirebaseUtility, TNObject);
-
-    TNFirebaseUtility.prototype.service = function(name)
+    services(services?:Object) : Object
     {
-        return this.properties.services[name];
-    };
-
-    TNFirebaseUtility.prototype.services = function(services)
-    {
-        if (services)
+        if (services != null)
         {
-            this.properties.services = services;
+            this.properties['services'] = services;
         }
 
-        return this.properties.services;
-    };
+        return this.properties['services'];
+    }
 
-    TNFirebaseUtility.prototype.provider = function(name)
+    provider(name:string)
     {
-        return this.properties.providers[name];
-    };
+        return this.properties['providers'][name];
+    }
 
-    TNFirebaseUtility.prototype.providers = function(providers)
+    providers(providers?:Object) : Object
     {
         if (providers)
         {
-            this.properties.providers = providers;
+            this.properties['providers'] = providers;
         }
 
-        return this.properties.providers;
-    };
+        return this.properties['providers'];
+    }
 
-    TNFirebaseUtility.prototype.merge = function(destination, source)
+    merge(destination:Object, source:Object) : Object
     {
-        var
+        let
         self = this,
+        item,
         value;
 
         // For each item in the source object
-        angular.forEach(source, function(item, key)
+        for (let key in Object.keys(source))
         {
             // Get the destination value
+            item  = source[key];
             value = destination[key];
 
             // If the value is defined
-            if (angular.isDefined(value))
+            if (value != value)
             {
                 // If the destination value is an object, merge it with the parallel source item
-                if (angular.isObject(value))
+                if (value instanceof Object)
                 {
                     destination[key] = self.merge(value, item);
                 }
@@ -90,24 +79,24 @@ factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log,
             {
                 destination[key] = item;
             }
-        });
+        };
 
         return destination;
-    };
+    }
 
-    TNFirebaseUtility.prototype.eval = function(options)
+    eval(options:Object) : Object
     {
         // Split the key into pieces
-        var
-        separator = options.separator ? options.separator : '/',
-        item      = options.object,
-        drilldown = options.key.split(separator),
+        let
+        separator = options['separator'] != null ? options['separator'] : '/',
+        item      = options['object'],
+        drilldown = options['key'].split(separator),
         key       = drilldown.shift(),
-        results   = {},
+        results,
         main;
 
         // Cycle through the object key by key
-        while (item[key])
+        while (item[key] != null)
         {
             item = item[key];
             main = key;
@@ -115,26 +104,26 @@ factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log,
         }
 
         // If the options value is passed in
-        if (angular.isDefined(options.value))
+        if (options['value'] != null)
         {
-            item[main] = options.value;
+            item[main] = options['value'];
         }
 
         // Return the key and child object
-        angular.extend(results,
+        results =
         {
             key    : main,
             object : item
-        });
+        };
 
         return results;
-    };
+    }
 
-    TNFirebaseUtility.prototype.setForeignTable = function(options)
+    setForeignTable(options:Object)
     {
-        var
-        item    = options.item,
-        remove  = options.remove,
+        let
+        item    = options['item'],
+        remove  = options['remove'],
         service = this.service(item.name()),
         parent  = item.parent(),
 
@@ -143,10 +132,11 @@ factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log,
         firebaseDictionary,
         foreignTable,
         foreignDictionary,
-        keysOld;
+        keysOld,
+        key;
 
         // If the parent exists
-        if (parent)
+        if (parent != null)
         {
             // If this is a foreign table
             if (service.foreignTable)
@@ -165,30 +155,32 @@ factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log,
                 itemKey            = this.service(parent.name()).service;
 
                 // Add this one key to a key array
-                options.keys = [options.key];
+                options['keys'] = [options['key']];
 
                 // If we're passing in an old key that means this is a new object
-                if (angular.isDefined(options.keyOld))
+                if (options['keyOld'] != null)
                 {
-                    options.keysOld = [options.keyOld];
+                    options['keyOld'] = [options['keyOld']];
                 }
             }
 
             // Set the old keys if they exist
-            keysOld = options.keysOld;
+            keysOld = options['keyOld'];
 
             // Get the foreign key object and key
             foreignTable = this.eval({key : itemKey, object : firebaseDictionary.object()});
 
             // If we have a set of keys
-            if (options.keys)
+            if (options['keys'])
             {
                 // Get the foreign dictionary object
                 foreignDictionary = firebase.obj;
 
                 // Cycle over the keys
-                angular.forEach(options.keys, function(key, index)
+                for (let index in options['keys'])
                 {
+                    key = options['keys']['key'];
+
                     // If the remove flag is set, remove it from the foreign dictionary as well
                     if (remove)
                     {
@@ -221,15 +213,15 @@ factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log,
         }
 
         return parent;
-    };
-
-    TNFirebaseUtility.prototype.getObject = function(options)
+    }
+/*
+    getObject(options:Object)
     {
-        var
+        let
         q         = $q.defer(),
-        service   = options.service,
-        url       = angular.isDefined(options.key) ? service.url + '/' + options.key : service.url,
-        reference = options.reference ? options.reference : new Firebase(url),
+        service   = options['service'],
+        url       = options['key'] != null ? service.url + '/' + options['key'] : service.url,
+        reference = options['reference'] != null ? options['reference'] : new Firebase(url),
         object    = service.type === 'array' ? $firebaseArray(reference) : $firebaseObject(reference);
 
         // Try to load the object from firebase
@@ -239,15 +231,15 @@ factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log,
         });
 
         return q.promise;
-    };
+    }
 
-    TNFirebaseUtility.prototype.get = function(options)
+    get(options:Object)
     {
         var
         self     = this,
-        service  = options.service,
-        keys     = options.keys,
-        key      = options.key,
+        service  = options['service'],
+        keys     = options['keys'],
+        key      = options['key'],
         name     = service.name,
         promises = [],
         promise  = $q.defer(),
@@ -262,16 +254,45 @@ factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log,
         },
         child,
         firebase,
-        hasKey;
+        hasKey,
+
+        observable = Observable.create((observer) =>
+        {
+            setTimeout(() =>
+            {
+                observer.onNext('here');
+                observer.onCompleted();
+            }, 1000);
+
+            console.log('observation started');
+        }),
+
+        subscriber = observable.subscribe
+        (
+            (data) =>
+            {
+                console.log('data received');
+            },
+
+            (error) =>
+            {
+                console.log('error happened');
+            },
+
+            () =>
+            {
+                console.log('observation completed');
+            }
+        );
 
         // If this isn't a dictionary and we don't have a key,
         // try to get the key from an existing object
-        if (!keys && !angular.isDefined(key) && service.data)
+        if (keys == null && key == null && service.data != null)
         {
             key = service.data.key();
         }
 
-        hasKey = angular.isDefined(key);
+        hasKey = key != null;
 
         // If keys are set
         if (keys)
@@ -280,7 +301,7 @@ factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log,
             child = service.children[Object.keys(service.children)[0]];
 
             // Loop over the keys
-            angular.forEach(keys, function(key)
+            for (let key of keys)
             {
                 var
                 q = $q.defer();
@@ -398,8 +419,14 @@ factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log,
         });
 
         return promise.promise;
-    };
+    }
+*/
+}
 
+/*
+
+factory('TNFirebaseUtility', function($firebaseObject, $firebaseArray, $q, $log, TNObject, TNDate, TNFirebase)
+{
     TNFirebaseUtility.prototype.getURL = function(name)
     {
         var

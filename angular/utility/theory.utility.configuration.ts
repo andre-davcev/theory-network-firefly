@@ -1,104 +1,91 @@
-import {Http, Headers, Response} from 'angular2/http';
-import {Observable}              from 'rxjs/Rx';
-import {Platform}                from 'ionic-angular';
-import {Globalization}           from 'ionic-native';
+import {Http, Response} from 'angular2/http';
+import {Observable}     from 'rxjs/Rx';
+import {Platform}       from 'ionic-angular';
+import {Globalization}  from 'ionic-native';
 //ToDo: $locale
 //ToDo: $log
 
-import {TNObject}          from '../base/theory.base.d';
-import {TNFirebaseUtility} from '../firebase/theory.firebase.d';
+import {TNObject}          from '../base/theory.base.object';
+import {TNFirebaseUtility} from '../firebase/theory.firebase.utility';
 
 export class TNConfiguration extends TNObject
 {
-    static get parameters()
-    {
-        return [[Http], [Observable], [Platform], [Globalization]];
-    }
+    http            : Http;
+    platform        : Platform;
+    firebaseUtility : TNFirebaseUtility;
 
-    constructor(options:Object)
+    constructor(options?:Object, http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility)
     {
         super(
         {
-            path            : 'data',
-            dependencies    : [],
-            model           : {settings : {}},
-            setup           : false,
-            loading         : false,
-            loaded          : false,
-            loadingPromises : []
+            path         : 'data',
+            dependencies : [],
+            model        : {settings : {}},
+            setup        : false,
+            loading      : false,
+            loaded       : false
         });
 
         this.options(options);
         this.initialize(options);
+
+        this.http            = http;
+        this.platform        = platform;
+        this.firebaseUtility = firebaseUtility;
     }
-}
 
-/*
-
-// TNConfiguration application object
-factory('TNConfiguration', function($http, $q, $ionicPlatform, $cordovaGlobalization, $locale, $log, TNObject, TNFirebaseUtility)
-{
-    var
-    TNConfiguration = function(options)
+    configureProviders(data:Object)
     {
-        TNConfiguration.parent.call(this,
+        let
+        providers = data['providers'];
+
+        if (providers != null)
         {
-            path            : 'data',
-            dependencies    : [],
-            model           : {settings : {}},
-            setup           : false,
-            loading         : false,
-            loaded          : false,
-            loadingPromises : []
-        });
-
-        this.options(options);
-
-        this.initialize(options);
-    };
-
-    TNConfiguration.prototype.configureProviders = function(data)
-    {
-        if (data.providers)
-        {
-            var
-            instance  = data.settings.instance,
+            let
+            instance  = data['settings']['instance'],
             processed = {},
+            provider,
             item;
 
-            angular.forEach(data.providers, function(provider, name)
+            for (let key in Object.keys(providers))
             {
-                item = processed[name] =
+                provider = providers[key];
+
+                item = processed[key] =
                 {
                     url  : provider.domain[instance],
                     type : provider.type
                 };
             });
 
-            data.providers = processed;
+            providers = processed;
         }
-    };
+    }
 
-    TNConfiguration.prototype.configureServices = function(data)
+    configureServices(data:Object)
     {
-        if (data.services)
+        let
+        services = data['services'];
+
+        if (services != null)
         {
-            var
+            let
             provider,
-            providers = data.providers,
-            services  = data.services,
+            providers = data['providers'],
             providerType,
             heirarchy,
             proper,
             parent,
             exclusions,
             blank,
-            fk;
+            fk,
+            service,
+            level;
 
-            // Cycle through all the services
-            angular.forEach(services, function(service, name)
+            for (let name in Object.keys(services))
             {
                 // Get the service name
+                service      = services[name];
                 service.name = name;
 
                 // If the service provider is not runtime
@@ -114,7 +101,7 @@ factory('TNConfiguration', function($http, $q, $ionicPlatform, $cordovaGlobaliza
                     if (providerType === 'firebase')
                     {
                         // Set the blank object if it's not defined
-                        if (!angular.isDefined(service.blank))
+                        if (service.blank == null)
                         {
                             service.blank = {};
                         }
@@ -123,9 +110,9 @@ factory('TNConfiguration', function($http, $q, $ionicPlatform, $cordovaGlobaliza
                         blank = service.blank;
 
                         // Check the blank object types (array, object, primitive)
-                        if (angular.isObject(blank))
+                        if (blank instanceof Object)
                         {
-                            if (angular.isArray(blank))
+                            if (blank instanceof Array)
                             {
                                 service.type = 'array';
                             }
@@ -140,14 +127,14 @@ factory('TNConfiguration', function($http, $q, $ionicPlatform, $cordovaGlobaliza
                         }
 
                         // If we have exclusions replace the exclusions array with object
-                        if (angular.isDefined(service.exclusions))
+                        if (service.exclusions != null)
                         {
                             exclusions = {};
 
-                            angular.forEach(service.exclusions, function(exclusion)
+                            for (let exclusion of service.exclusions)
                             {
                                 exclusions[exclusion] = exclusion;
-                            });
+                            };
 
                             service.exclusions = exclusions;
                         }
@@ -156,9 +143,11 @@ factory('TNConfiguration', function($http, $q, $ionicPlatform, $cordovaGlobaliza
                         heirarchy = name.split('.');
 
                         // Build the proper name (camel case) by cycling through the heirarchy
-                        angular.forEach(heirarchy, function(level, index)
+                        for (let index in heirarchy)
                         {
-                            if (index === 0)
+                            level = heirarchy[index];
+
+                            if (index === '0')
                             {
                                 proper = level;
                             }
@@ -166,14 +155,11 @@ factory('TNConfiguration', function($http, $q, $ionicPlatform, $cordovaGlobaliza
                             {
                                 proper += level.charAt(0).toUpperCase() + level.slice(1);
                             }
-                        });
+                        };
 
                         // Set the proper name and initialize to blank children object
-                        angular.extend(service,
-                        {
-                            proper   : proper,
-                            children : {}
-                        });
+                        service.proper   = proper;
+                        service.children = {};
 
                         // If we are not the top level then we have a parent
                         if (heirarchy.length > 1)
@@ -198,13 +184,13 @@ factory('TNConfiguration', function($http, $q, $ionicPlatform, $cordovaGlobaliza
                             // whether the parent object reference is a primitive or object
                             if (service.foreignTable)
                             {
-                                fk = TNFirebaseUtility.eval({key : service.service, object : parent.blank});
+                                fk = this.firebaseUtility.eval({key : service.service, object : parent.blank});
 
-                                if (!angular.isObject(fk.object))
+                                if (!(fk.object instanceof Object))
                                 {
                                     service.type = 'primitive';
                                 }
-                                else if (angular.isArray(fk.object))
+                                else if (fk.object instanceof Array)
                                 {
                                     service.type = 'array';
                                 }
@@ -222,52 +208,41 @@ factory('TNConfiguration', function($http, $q, $ionicPlatform, $cordovaGlobaliza
                         service.url = provider.url + '/' + service.service;
 
                         // Set reload to false if no reload is set
-                        if (!angular.isDefined(service.reload))
+                        if (service.reload == null)
                         {
                             service.reload = false;
                         }
                     }
                 }
-            });
+            };
 
             // Give the providers and services to the firebase utility
-            TNFirebaseUtility.options({providers : providers, services : services});
+            this.firebaseUtility.options({providers : providers, services : services});
         }
-    };
+    }
 
-    TNConfiguration.prototype.getLanguage = function(language)
+    getLanguage(language:string) : Observable<Object>
     {
-        var
-        q = $q.defer();
+        return this.http.get(this.filePath('localize.' + language)).map((response:Response) => response.json());
+    }
 
-        $http.get(this.filePath('localize.' + language)).then(function(response)
-        {
-            q.resolve(response.data);
-        }).
-        catch(function(error)
-        {
-            q.reject(error);
-        });
-
-        return q.promise;
-    };
-
-    TNConfiguration.prototype.processLanguage = function(language, model)
+    processLanguage(language:string, model:Object)
     {
-        var
-        views = model.views,
+        let
+        views = model['views'],
+        dictionary,
 
-        processView = function(key, dictionary)
+        function processView(key:string, dictionary:Object)
         {
-            var
+            let
             include = dictionary['#include'];
 
             if (include)
             {
-                angular.forEach(include, function(view)
+                for (let view of include)
                 {
-                    angular.extend(dictionary, processView(view, views[view]));
-                });
+                    TNObject.extend(dictionary, processView(view, views[view]));
+                }
 
                 delete dictionary['#include'];
             }
@@ -275,310 +250,335 @@ factory('TNConfiguration', function($http, $q, $ionicPlatform, $cordovaGlobaliza
             return dictionary;
         };
 
-        this.properties.model.dictionary = model;
+        this.properties['model'].dictionary = model;
 
-        angular.forEach(views, function(dictionary, key)
+        for (let key in Object.keys(views))
         {
-            angular.extend(dictionary, processView(key, dictionary));
-            delete dictionary['#include'];
-        });
-    };
+            dictionary = views[key];
 
-    TNConfiguration.prototype.configureLanguage = function()
+            TNObject.extend(dictionary, processView(key, dictionary));
+
+            delete dictionary['#include'];
+        }
+    }
+
+    configureLanguage() : Observable<Object>
     {
-        var
-        q     = $q.defer(),
-        self  = this,
-        model = this.properties.model,
+        let
+        model = this.properties['model'],
 
         getDefault = function(language)
         {
             language = model.settings.language;
 
-            $log.info('Defaulting to language: "' + language + '"');
+            console.log('Defaulting to language: "' + language + '"');
 
-            self.getLanguage(language).then(function(dictionary)
+            return this.getLanguage(language).
+
+            map(dictionary =>
             {
-                $log.info('Found default language: "' + language + '"');
+                console.log('Found default language: "' + language + '"');
 
-                self.processLanguage(language, dictionary);
+                this.processLanguage(language, dictionary);
 
-                q.resolve(language);
+                return dictionary;
             }).
-            catch(function(error)
-            {
-                $log.error('Unable to find default language: "' + language + '"');
 
-                q.reject();
+            catch(error =>
+            {
+                console.log('Unable to find default language: "' + language + '"');
             });
         },
 
         getLanguage = function(language)
         {
-            $log.info('Searching for language: "' + language + '"');
+            console.log('Searching for language: "' + language + '"');
 
-            self.getLanguage(language).then(function(dictionary)
+            return this.getLanguage(language).
+
+            map(dictionary =>
             {
-                $log.info('Found language file: "' + language + '"');
+                console.log('Found language file: "' + language + '"');
 
-                self.processLanguage(language, dictionary);
+                this.processLanguage(language, dictionary);
 
-                q.resolve(language);
+                return dictionary;
             }).
-            catch(function(error)
+
+            catch(error =>
             {
-                var
+                let
                 lang = language.split('-');
 
                 if (lang.length === 2)
                 {
                     language = lang[0];
 
-                    $log.info('Searching for non country specific language: "' + language + '"');
+                    console.log('Searching for non country specific language: "' + language + '"');
 
-                    self.getLanguage(language).then(function(dictionary)
+                    return this.getLanguage(language).
+
+                    map(dictionary =>
                     {
-                        $log.info('Found non country specific language: "' + language + '"');
+                        console.log('Found non country specific language: "' + language + '"');
 
-                        self.processLanguage(language, dictionary);
+                        this.processLanguage(language, dictionary);
 
-                        q.resolve(language);
+                        return dictionary;
                     }).
-                    catch(function(error)
-                    {
-                        $log.info('Unable to find non country specific language: "' + language + '"');
 
-                        getDefault(language);
+                    catch(error =>
+                    {
+                        console.log('Unable to find non country specific language: "' + language + '"');
+
+                        return getDefault(language);
                     });
                 }
                 else
                 {
-                    $log.info('Unable to find language: "' + language + '"');
+                    console.log('Unable to find language: "' + language + '"');
 
-                    getDefault(language);
+                    return getDefault(language);
                 }
             });
         };
 
-        if ($ionicPlatform.is('cordova'))
+        if (this.platform.is('cordova'))
         {
-            $cordovaGlobalization.getLocaleName().then(function(result)
+            let
+            observable = Observable.create((observer) =>
             {
-                getLanguage(result.toLowerCase());
-            },
+                Globalization.getLocaleName().then(function(result)
+                {
+                    getLanguage(result.toLowerCase()).
 
-            function(error)
-            {
-                $log.error('Unable to get local name');
+                    subscribe(() => 
+                    {
+                        observer.onNext();
+                        observer.onComplete();
+                    });
+                },
 
-                getLanguage(model.settings.language);
+                function(error)
+                {
+                    console.log('Unable to get local name');
+
+                    getLanguage(getLanguage(model.settings.language)).
+
+                    subscribe(() => 
+                    {
+                        observer.onNext();
+                        observer.onComplete();
+                    });
+                });
             });
+
+            return observable;
         }
         else
         {
-            getLanguage($locale.id);
+            // ToDo: Once $locale is implemented with Angular 2 implement it
+//            getLanguage($locale.id);
+            return getLanguage('en');
         }
+    }
 
-        return q.promise;
-    };
-
-    TNConfiguration.prototype.setup = function(options)
+    setup(options:Object)
     {
-        var
-        self            = this,
-        q               = $q.defer(),
-        properties      = this.properties,
-        model           = properties.model,
-        promiseConfig   = $q.defer(),
-        promiseInstance = $q.defer();
-
-        properties.setup = true;
-
-        $http.get(self.filePath('configuration')).then(function(response)
-        {
-            angular.extend(model, response.data);
-
-            angular.extend(model.settings,
-            {
-                language : model.language
-            });
-
-            promiseConfig.resolve();
-        });
-
-        $http.get(self.filePath('instance')).then(function(response)
-        {
-            angular.extend(model.settings, response.data);
-
-            promiseInstance.resolve();
-        });
-
-        $q.all([promiseConfig.promise, promiseInstance.promise]).then(function()
-        {
-            self.configureProviders(model);
-            self.configureServices(model);
-
-            angular.extend(properties.model, model);
-
-            self.configureLanguage().then(function(language)
-            {
-                properties.model.settings.language = language;
-
-                q.resolve();
-            });
-        });
-
-        self.addDependency(q.promise);
-    };
-
-    TNConfiguration.prototype.filePath = function(filename)
-    {
-        var
+        let
         properties = this.properties,
-        filePath   = properties.path + '/' + filename + '.json';
+        model      = properties['model'],
 
-        return filePath;
-    };
+        observable,
+        observableConfig,
+        observableInstance;
 
-    TNConfiguration.prototype.addDependency = function(dependency)
+        properties['setup'] = true;
+
+        observableConfig = this.http.get(this.filePath('configuration')).
+
+        map((response:Response) => response.json()).
+
+        map((data) =>
+        {
+            TNObject.extend(model, data);
+
+            model.settings.language = model.language;
+
+            return data;
+        });
+
+        observableInstance = this.http.get(this.filePath('instance')).
+
+        map((response:Response) => response.json()).
+
+        map((data) =>
+        {
+            TNObject.extend(model.settings, data);
+
+            model.settings.language = model.language;
+
+            return data;
+        });
+
+        observable = Observable.create((observer) =>
+        {
+            Observable.forkJoin(observableConfig, observableInstance).
+
+            subscribe(() =>
+            {
+                this.configureProviders(model);
+                this.configureServices(model);
+
+                TNObject.extend(properties['model'], model);
+
+                this.configureLanguage().subscribe((language) =>
+                {
+                    properties['model'].settings.language = language;
+
+                    observer.onNext();
+                    observer.onComplete();
+                });
+            });
+        });
+
+        this.addDependency(observable);
+    }
+
+    filePath(filename:string):string
     {
-        this.properties.dependencies.push(dependency);
-    };
+        return this.properties['path'] + '/' + filename + '.json';
+    }
+
+    addDependency(dependency)
+    {
+        this.properties['dependencies'].push(dependency);
+    }
 
     // Load the application json config file
-    TNConfiguration.prototype.load = function(options)
+    load(options?:Object)
     {
-        var
-        q          = $q.defer(),
+        let
         properties = this.properties;
 
-        if (properties.loaded)
-        {
-            q.resolve();
-        }
-        else if (properties.loading)
-        {
-            var
-            loading = $q.defer();
-
-            properties.loadingPromises.push(loading);
-
-            return loading.promise;
-        }
-        else
+        if (!properties['loaded'] && !properties['loading'])
         {
             this.setup(options);
 
-            properties.loading = true;
+            properties['loading'] = true;
 
-            $q.all(this.properties.dependencies).then(function()
+            properties['observableDependencies'] = Observable.forkJoin(properties['dependencies']).
+
+            map(() =>
             {
-                properties.loaded = true;
-
-                angular.forEach(properties.loadingPromises, function(promise)
-                {
-                    promise.resolve();
-                });
-
-                q.resolve();
+                properties['loaded'] = true;
             });
         }
 
-        return q.promise;
-    };
+        return properties['observableDependencies'];
+    }
 
     // Load the application json config file
-    TNConfiguration.prototype.localizeService = function(options)
+    localizeService(options:Object)
     {
-        var
-        name    = options.name,
-        model   = options.model,
-        service = options.service,
-        data    = options.data,
+        let
+        name    = options['name'],
+        model   = options['model'],
+        service = options['service'],
+        data    = options['data'],
+
+        item,
         dictionary;
 
         if (service.localize)
         {
             dictionary = model.dictionary[name];
 
-            if (angular.isArray(data))
+            if (data instanceof Array)
             {
-                angular.forEach(data, function(item, index)
+                for (let item of data)
                 {
                     item.display = dictionary[item.id];
-                });
+                }
             }
             else
             {
-                angular.forEach(data, function(item, key)
+                for (let key in Object.keys(item))
                 {
-                    angular.extend(item,
-                    {
-                        id      : key,
-                        display : dictionary[key]
-                    });
-                });
+                    item = data[key];
+
+                    item.id      = key;
+                    item.display = dictionary[key];
+                }
             }
         }
 
         return data;
-    };
+    }
 
-    TNConfiguration.prototype.getHTTP = function(options)
+    getHTTP(options:Object)
     {
-        var
-        self    = this,
-        q       = $q.defer(),
-        service = options.service;
+        let
+        service = options['service'];
 
-        $http.get(service.url).then(function(response)
+        return this.http.get(service.url).
+
+        map((response:Response) => response.json()).
+
+        map((data) =>
         {
-            angular.extend(options,
-            {
-                data : response.data
-            });
+            options['data'] = data;
 
-            service.data = self.localizeService(options);
+            service.data = this.localizeService(options);
 
-            q.resolve(service.data);
+            return service.data;
         });
+    }
 
-        return q.promise;
-    };
-
-    TNConfiguration.prototype.get = function(options)
+    get(options:Object)
     {
         var
-        name    = options.name,
-        model   = this.properties.model,
+        name    = options['name'],
+        model   = this.properties['model'],
         service = model.services[name],
-        q;
+
+        observable;
 
         if (service.providerType === 'firebase')
         {
-            q = TNFirebaseUtility.getFirebase({name : name});
+//            observable = TNFirebaseUtility.getFirebase({name : name});
         }
         else
         {
-            q = this.getHTTP({name : name, service : service, model : model});
+            observable = this.getHTTP({name : name, service : service, model : model});
         }
 
-        return q;
-    };
+        return observable;
+    }
 
-    TNConfiguration.prototype.dictionary = function(view, scope)
+    setKey(options:Object)
     {
         var
-        dictionary = this.properties.model.dictionary.views[view];
+        name     = options['name'],
+        services = this.properties['model'].services,
+        service  = services[name],
+        key      = options['key'],
+        reload   = key !== service.key ? true : false,
+        item;
 
-        if (scope)
+        if (reload)
         {
-            scope.dictionary = dictionary;
+            for (let serviceName in Object.keys(services))
+            {
+                item = services[serviceName];
+
+                if (serviceName.indexOf(name) === 0)
+                {
+                    item.reload = true;
+                }
+            }
         }
 
-        return dictionary;
+        service.key = key;
     };
-
-    return TNConfiguration;
-});
-*/
+}

@@ -14,10 +14,10 @@ export class TNObject
 
     extend(object:Object, options:Object): Object
     {
-        Object.keys(options).forEach(key =>
+        for (let key in Object.keys(options))
         {
             object[key] = options[key];
-        });
+        }
 
         return object;
     }
@@ -50,6 +50,14 @@ export class TNObject
         }
 
         return value;
+    }
+
+    static extend(source:Object, destination:Object) 
+    {
+        for (let key in Object.keys(destination))
+        {
+            source[key] = destination[key];
+        }
     }
 
     get properties(): Object
