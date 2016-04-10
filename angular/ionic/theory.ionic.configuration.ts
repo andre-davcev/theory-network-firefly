@@ -199,7 +199,7 @@ export class IonicConfiguration extends TNConfiguration
             scope = options['scope'],
             state = options['state'],
             model = this.properties['model'],
-            name  = state.current.name,
+            name  = state,
             view  = model.views[name],
             keys  = options['keys'],
             scopeKey;
