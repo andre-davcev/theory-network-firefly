@@ -1,1 +1,0 @@
-export {TNFirebaseUtility} from './theory.firebase.utility';
