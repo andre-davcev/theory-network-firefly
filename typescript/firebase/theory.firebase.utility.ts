@@ -9,11 +9,6 @@ import {TNObject} from '../base/theory.base.object';
 @Injectable()
 export class TNFirebaseUtility extends TNObject
 {
-    static get parameters()
-    {
-        return [];
-    }
-
     constructor(options?:Object)
     {
         super();
@@ -208,7 +203,7 @@ export class TNFirebaseUtility extends TNObject
             // Otherwise the foreign key is key value pair.  Remove or set the value
             else
             {
-                foreignTable.obj[foreignTable.key] = remove ? null : options.key;
+                foreignTable.obj[foreignTable.key] = remove ? null : options['key'];
             }
         }
 

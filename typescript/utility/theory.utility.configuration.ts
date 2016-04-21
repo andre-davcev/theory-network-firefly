@@ -230,7 +230,7 @@ export class TNConfiguration extends TNObject
     {
         let
         views = model['views'],
-        dictionary,
+        dictionary;
 
         function processView(key:string, dictionary:Object)
         {
@@ -350,7 +350,7 @@ export class TNConfiguration extends TNObject
             {
                 Globalization.getLocaleName().then(function(result)
                 {
-                    getLanguage(result.toLowerCase()).
+                    getLanguage(result.value.toLowerCase()).
 
                     subscribe(() => 
                     {
