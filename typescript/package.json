@@ -1,5 +1,7 @@
 {
     "name"    : "theory-network",
     "author"  : "Theory Network",
-    "version" : "1.0.0"
+    "version" : "1.0.0",
+    "main"    : "./library/typescript/index.js",
+    "typings" : "./library/typescript/index.d.ts"
 }
