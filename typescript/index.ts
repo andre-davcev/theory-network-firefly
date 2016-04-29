@@ -1,3 +1,5 @@
+///<reference path="../../node_modules/angular2/typings/browser.d.ts"/>
+
 export * from './base/theory.base';
 //export * from './canvas/theory.canvas';
 //export * from './directives/theory.directives';

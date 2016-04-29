@@ -1,0 +1,27 @@
+{
+    "compilerOptions" :
+    {
+        "module"                 : "commonjs",
+        "emitDecoratorMetadata"  : true,
+        "experimentalDecorators" : true,
+        "sourceMap"              : true,
+        "declaration"            : true
+    },
+
+    "filesGlob" :
+    [
+        "library/typescript/*.ts",
+        "!node_modules/**",
+        "!app/build/app/**/node_modules/**",
+        "!app/build/app/**/typings/**",
+        "!web/grunt/node_modules/**",
+        "!web/grunt/typings/**"
+    ],
+
+    "atom" :
+    {
+        "rewriteTsconfig" : false
+    },
+
+    "compileOnSave" : false
+}
