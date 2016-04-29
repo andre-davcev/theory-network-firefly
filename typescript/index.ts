@@ -6,6 +6,6 @@ export * from './base/theory.base';
 export * from './firebase/theory.firebase';
 //export * from './geolocation/theory.geolocation';
 //export * from './google/theory.google';
-export * from './ionic/theory.ionic';
+export * from './mobile/theory.mobile';
 //export * from './pipes/theory.pipes';
 export * from './utility/theory.utility';

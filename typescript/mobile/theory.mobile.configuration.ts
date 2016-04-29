@@ -10,7 +10,7 @@ import {TNObject}          from '../base/theory.base.object';
 import {TNFirebaseUtility} from '../firebase/theory.firebase.utility';
 import {TNConfiguration}   from '../utility/theory.utility.configuration';
 
-export class IonicConfiguration extends TNConfiguration
+export class MobileConfiguration extends TNConfiguration
 {
     constructor(options:Object, http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility)
     {
