@@ -9,11 +9,12 @@ import {TNObject} from '../base/theory.base.object';
 @Injectable()
 export class TNFirebaseUtility extends TNObject
 {
-    constructor(options?:Object)
+//    constructor(options?:Object)
+    constructor()
     {
         super();
 
-        this.options(options);
+//        this.options(options);
     }
 
     service(name:string)

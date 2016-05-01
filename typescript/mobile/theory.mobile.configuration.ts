@@ -12,9 +12,9 @@ import {TNConfiguration}   from '../utility/theory.utility.configuration';
 
 export class MobileConfiguration extends TNConfiguration
 {
-    constructor(options:Object, http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility)
+    constructor(http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility, options?:Object)
     {
-        super(
+        super(http, platform, firebaseUtility,
         {
             statusBarStyle : 0,  // -1 - Use Hex
             //  0 - Default
@@ -28,7 +28,7 @@ export class MobileConfiguration extends TNConfiguration
             getLocation : false,
 
             locationFound : false
-        }, http, platform, firebaseUtility);
+        });
 
         this.options(options);
     }

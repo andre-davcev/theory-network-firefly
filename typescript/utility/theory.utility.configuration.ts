@@ -14,7 +14,7 @@ export class TNConfiguration extends TNObject
     platform        : Platform;
     firebaseUtility : TNFirebaseUtility;
 
-    constructor(options:Object, http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility)
+    constructor(http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility, options?:Object)
     {
         super(
         {
