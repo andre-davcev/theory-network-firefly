@@ -14,9 +14,12 @@ export class TNObject
 
     extend(object:Object, options:Object): Object
     {
-        for (let key in Object.keys(options))
+        if (object != null && options != null)
         {
-            object[key] = options[key];
+            for (let key in Object.keys(options))
+            {
+                object[key] = options[key];
+            }
         }
 
         return object;
