@@ -55,7 +55,7 @@ export class TNFirebaseUtility extends TNObject
         value;
 
         // For each item in the source object
-        for (let key in Object.keys(source))
+        for (let key of Object.keys(source))
         {
             // Get the destination value
             item  = source[key];

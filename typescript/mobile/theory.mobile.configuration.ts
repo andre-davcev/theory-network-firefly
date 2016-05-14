@@ -212,7 +212,7 @@ export class MobileConfiguration extends TNConfiguration
                 dictionary : model.dictionary.views[name]
             });
 
-            for (let serviceKey in Object.keys(keys))
+            for (let serviceKey of Object.keys(keys))
             {
                 scopeKey = keys[serviceKey];
 

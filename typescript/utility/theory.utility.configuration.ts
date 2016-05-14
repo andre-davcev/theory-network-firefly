@@ -47,7 +47,7 @@ export class TNConfiguration extends TNObject
             provider,
             item;
 
-            for (let key in Object.keys(providers))
+            for (let key of Object.keys(providers))
             {
                 provider = providers[key];
 
@@ -503,7 +503,7 @@ export class TNConfiguration extends TNObject
             }
             else
             {
-                for (let key in Object.keys(item))
+                for (let key of Object.keys(item))
                 {
                     item = data[key];
 
@@ -568,7 +568,7 @@ export class TNConfiguration extends TNObject
 
         if (reload)
         {
-            for (let serviceName in Object.keys(services))
+            for (let serviceName of Object.keys(services))
             {
                 item = services[serviceName];
 

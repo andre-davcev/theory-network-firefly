@@ -1,6 +1,6 @@
 export class TNObject
 {
-    private _properties:Object;
+    private _properties:Object = {};
 
     constructor(options?:Object)
     {
@@ -12,35 +12,31 @@ export class TNObject
         
     }
 
-    extend(object:Object, options:Object): Object
+    static extend(source:Object, destination:Object)
     {
-        if (object != null && options != null)
+        if (source != null && destination != null)
         {
-            for (let key in Object.keys(options))
+            for (let key of Object.keys(destination))
             {
-                object[key] = options[key];
+                source[key] = destination[key];
             }
         }
-
-        return object;
     }
 
     options(options?:Object): Object
     {
-        let extended:Object;
-
         if (options != null)
         {
-            extended = this.extend(this.properties, options);
+            TNObject.extend(this.properties, options);
         }
 
-        return extended;
+        return this.properties;
     }
 
     property(key:string, property:Object): any
     {
         let
-        value;
+        value; 
 
         if (property != null)
         {
@@ -53,14 +49,6 @@ export class TNObject
         }
 
         return value;
-    }
-
-    static extend(source:Object, destination:Object) 
-    {
-        for (let key in Object.keys(destination))
-        {
-            source[key] = destination[key];
-        }
     }
 
     get properties(): Object
