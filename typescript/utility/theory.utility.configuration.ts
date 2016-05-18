@@ -230,14 +230,14 @@ export class TNConfiguration extends TNObject
     {
         let
         views = model['views'],
-        dictionary;
+        dictionary,
 
-        function processView(key:string, dictionary:Object)
+        processView = (key:string, dictionary:Object) =>
         {
             let
             include = dictionary['#include'];
 
-            if (include)
+            if (include != null)
             {
                 for (let view of include)
                 {
@@ -252,7 +252,7 @@ export class TNConfiguration extends TNObject
 
         this.properties['model'].dictionary = model;
 
-        for (let key in Object.keys(views))
+        for (let key of Object.keys(views))
         {
             dictionary = views[key];
 
@@ -281,6 +281,8 @@ export class TNConfiguration extends TNObject
 
                 this.processLanguage(language, dictionary);
 
+                console.log(this.properties['model'].dictionary);
+
                 return dictionary;
             }).
 
@@ -288,11 +290,7 @@ export class TNConfiguration extends TNObject
             {
                 console.log('Unable to find default language: "' + language + '"');
 
-                return Observable.create((observer) =>
-                {
-                    observer.onNext({});
-                    observer.onCompleted();
-                });
+                return Observable.throw(error);
             });
         },
 
@@ -360,8 +358,8 @@ export class TNConfiguration extends TNObject
 
                     subscribe(() => 
                     {
-                        observer.onNext();
-                        observer.onComplete();
+                        observer.next();
+                        observer.complete();
                     });
                 },
 
@@ -373,8 +371,8 @@ export class TNConfiguration extends TNObject
 
                     subscribe(() => 
                     {
-                        observer.onNext();
-                        observer.onComplete();
+                        observer.next();
+                        observer.complete();
                     });
                 });
             });
@@ -427,7 +425,7 @@ export class TNConfiguration extends TNObject
             return data;
         });
 
-        observable = Observable.create((observer) =>
+        observable = Observable.create(observer =>
         {
             Observable.forkJoin(observableConfig, observableInstance).
 
@@ -442,8 +440,15 @@ export class TNConfiguration extends TNObject
                 {
                     properties['model'].settings.language = language;
 
-                    observer.onNext();
-                    observer.onComplete();
+                    console.log('setup complete')
+
+                    observer.next();
+                    observer.complete();
+                },
+
+                (error) =>
+                {
+                    console.log(error)
                 });
             });
         });
@@ -473,12 +478,20 @@ export class TNConfiguration extends TNObject
 
             properties['loading'] = true;
 
+            console.log(properties['dependencies']);
+
             properties['observableDependencies'] = Observable.forkJoin(properties['dependencies']).
 
-            map(() =>
-            {
-                properties['loaded'] = true;
-            });
+            subscribe
+            (
+                data => {}, 
+                error => console.error(error), 
+                () => 
+                {
+                    console.log('hit');
+                    properties['loaded'] = true;
+                }
+            );
         }
 
         return properties['observableDependencies'];
@@ -586,5 +599,18 @@ export class TNConfiguration extends TNObject
         }
 
         service.key = key;
-    };
+    }
+
+    dictionary(view:string, scope:Object)
+    {
+        let
+        dictionary = this.properties['model'].dictionary.views[view];
+
+        if (scope != null)
+        {
+            scope['dictionary'] = dictionary;
+        }
+
+        return dictionary;
+    }
 }

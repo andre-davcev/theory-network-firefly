@@ -89,8 +89,9 @@ export class MobileConfiguration extends TNConfiguration
                     }
                 }
 
-                observer.onNext();
-                observer.onComplete();
+                console.log('platform is ready');
+                observer.next();
+                observer.complete();
             });
         });
 
@@ -230,14 +231,14 @@ export class MobileConfiguration extends TNConfiguration
 
                     this.getDependencies({scope : scope, dependencies : view.silent});
 
-                    observer.onNext();
-                    observer.onComplete();
+                    observer.next();
+                    observer.complete();
                 });
             }
             else
             {
-                observer.onNext();
-                observer.onComplete();
+                observer.next();
+                observer.complete();
             }
         });
 

@@ -256,8 +256,8 @@ export class TNFirebaseUtility extends TNObject
         {
             setTimeout(() =>
             {
-                observer.onNext('here');
-                observer.onCompleted();
+                observer.next('here');
+                observer.completed();
             }, 1000);
 
             console.log('observation started');
