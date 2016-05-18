@@ -82,7 +82,7 @@ export class TNConfiguration extends TNObject
             service,
             level;
 
-            for (let name in Object.keys(services))
+            for (let name of Object.keys(services))
             {
                 // Get the service name
                 service      = services[name];
@@ -267,7 +267,7 @@ export class TNConfiguration extends TNObject
         let
         model = this.properties['model'],
 
-        getDefault = function(language)
+        getDefault = (language:string) : Observable<Object> =>
         {
             language = model.settings.language;
 
@@ -287,10 +287,16 @@ export class TNConfiguration extends TNObject
             catch(error =>
             {
                 console.log('Unable to find default language: "' + language + '"');
+
+                return Observable.create((observer) =>
+                {
+                    observer.onNext({});
+                    observer.onCompleted();
+                });
             });
         },
 
-        getLanguage = function(language)
+        getLanguage = (language:string) : Observable<Object> =>
         {
             console.log('Searching for language: "' + language + '"');
 
@@ -363,7 +369,7 @@ export class TNConfiguration extends TNObject
                 {
                     console.log('Unable to get local name');
 
-                    getLanguage(getLanguage(model.settings.language)).
+                    getLanguage(model.settings.language).
 
                     subscribe(() => 
                     {
