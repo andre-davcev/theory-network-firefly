@@ -89,7 +89,6 @@ export class MobileConfiguration extends TNConfiguration
                     }
                 }
 
-                console.log('platform is ready');
                 observer.next();
                 observer.complete();
             });
@@ -109,15 +108,16 @@ export class MobileConfiguration extends TNConfiguration
             {
                 properties['positionFound'] = true;
 
-                Geolocation.getCurrentPosition().then(function(position)
+                Geolocation.getCurrentPosition().then((position) =>
                 {
-                    this.properties.model.services.position.data =
+                    this.properties['model'].services.position.data =
                     {
                         latitude  : position.coords.latitude,
                         longitude : position.coords.longitude
                     };
-                },
-                function(error)
+                }).
+
+                catch((error) =>
                 {
                     console.log('Unable to get current geolocation position');
                 });

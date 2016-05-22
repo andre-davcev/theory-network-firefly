@@ -440,8 +440,6 @@ export class TNConfiguration extends TNObject
                 {
                     properties['model'].settings.language = language;
 
-                    console.log('setup complete')
-
                     observer.next();
                     observer.complete();
                 },
@@ -478,20 +476,12 @@ export class TNConfiguration extends TNObject
 
             properties['loading'] = true;
 
-            console.log(properties['dependencies']);
-
             properties['observableDependencies'] = Observable.forkJoin(properties['dependencies']).
 
-            subscribe
-            (
-                data => {}, 
-                error => console.error(error), 
-                () => 
-                {
-                    console.log('hit');
-                    properties['loaded'] = true;
-                }
-            );
+            map(data =>
+            {
+                properties['loaded'] = true;
+            });
         }
 
         return properties['observableDependencies'];
