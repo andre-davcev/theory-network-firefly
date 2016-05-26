@@ -1,11 +1,20 @@
 ///<reference path="../../node_modules/angular2/typings/browser.d.ts"/>
 
 export * from './base/theory.base';
+
 //export * from './canvas/theory.canvas';
-//export * from './directives/theory.directives';
+
+export * from './directives/theory.directive';
+export * from './directives/theory.directive.keyboard';
+
 export * from './firebase/theory.firebase';
+
 //export * from './geolocation/theory.geolocation';
+
 //export * from './google/theory.google';
+
 export * from './mobile/theory.mobile';
+
 //export * from './pipes/theory.pipes';
+
 export * from './utility/theory.utility';
