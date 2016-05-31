@@ -1,157 +1,120 @@
-/*
-    <tn-input type="password" name="name" value="value" placeholder="placeholder" clear="clear"></tn-input>
-*/
+import {Input, Output, EventEmitter, ViewChild, OnInit, OnChanges, SimpleChange}    from '@angular/core';
+import {NgForm, Control, Validators, NgModel}                                       from '@angular/common';
 
-/*
-constant('REGEX_EMAIL', '^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$').
+import {TNDirective}  from './theory.directive';
 
-directive('tnInput', function($timeout, tnDirective, REGEX_EMAIL, TNController)
+export class TNInput extends TNDirective implements OnChanges
 {
-    var
-    tnInput = function(options)
+    showClear:boolean = false;
+    state:string      = '';
+    validators        = [];
+
+    valueControl:Control;
+
+    @ViewChild('input') input;
+    @ViewChild('form')  form;
+
+    @Input('tn-name')            name:string           = '';
+    @Input('tn-value')           value:any;
+    @Input('tn-placeholder')     placeholder:string    = '';
+
+    // Validators
+    @Input('tn-required')        required:boolean      = false;
+    @Input('tn-min-length')      minLength:number      = 1;
+    @Input('tn-max-length')      maxLength:number      = -1;
+    @Input('tn-pattern')         pattern:string        = '.*';
+
+    @Input('tn-trim')            trim:boolean          = true;
+    @Input('tn-clear')           clear:boolean         = false;
+    @Input('tn-validate')        validate:boolean      = false;
+    @Input('tn-verifying')       verifying:boolean     = false;
+    @Input('tn-valid-input')     validInput:boolean    = true;
+    @Input('tn-spinner')         spinner:string        = 'spiral'; // android, ios, ios-small, bubbles, circles, crescent, dots, lines, ripple, spiral
+    @Input('tn-spinner-classes') spinnerClasses:string = '';
+    @Input('tn-rounded-icons')   roundedIcons:boolean  = false;
+
+    @Output('tn-change') change:EventEmitter<any> = new EventEmitter();
+
+    constructor()
     {
-        var
-        self = this,
-        defaults = {},
-        defaultValues =
-        {
-            type           : 'text',
-            name           : '',
-            viewValue      : '',
-            placeholder    : '',
-            required       : false,
-            minLength      : 1,
-            maxLength      : -1,
-            trim           : true,
-            change         : function()
-            {
+        super();
+    }
 
-            },
-
-            clear          : false,
-            validate       : false,
-            verifying      : false,
-            validInput     : true,
-            spinner        : 'spiral', // android, ios, ios-small, bubbles, circles, crescent, dots, lines, ripple, spiral
-            spinnerClasses : '',
-            roundedIcons   : false
-        },
-        scope =
-        {
-            type           : '@',
-            name           : '=?',
-            value          : '=',
-            viewValue      : '=?',
-            placeholder    : '=?',
-            required       : '=?',
-            minLength      : '=?',
-            maxLength      : '=?',
-            pattern        : '@',
-            change         : '=?',
-            trim           : '=?',
-
-            clear          : '=?',
-            validate       : '=?',
-            verifying      : '=?',
-            validInput     : '=?',
-            spinner        : '=?',
-            spinnerClasses : '@',
-            roundedIcons   : '=?'
-        };
-
-        tnInput.parent.call(this);
-
-        angular.extend(this,
-        {
-            templateUrl : function(element, attributes)
-            {
-                return self.getTemplateUrl(attributes, 'tn-input-' + attributes.type);
-            }
-        });
-
-        this.options(defaults);
-        this.options(options);
-        this.extendDirective(defaultValues, scope);
-    };
-
-    TNInheritance.extend(tnInput, tnDirective);
-
-    tnInput.prototype.linkingFunction = function(scope, element, attributes, controller)
+    initialize(options?:Object)
     {
-        tnInput.parent.prototype.linkingFunction.call(this, scope, element, attributes, controller);
+        super.initialize(options);
 
-        if (scope.clear)
+        this.validators =
+        [
+            Validators.minLength(this.minLength),
+            Validators.maxLength(this.maxLength)
+        ];
+
+        if (this.required)
         {
-            TNController.watcher(scope, scope.$watch('form.input.$viewValue', function(current)
+            this.validators.push(Validators.required);
+        }
+
+        if (this.pattern != null)
+        {
+            this.validators.push(Validators.pattern(this.pattern));
+        }
+
+        this.valueControl = new Control(this.value, Validators.compose(this.validators));
+    }
+
+    ngOnChanges(changes: {[propName: string]: SimpleChange})
+    {
+        let
+        valueProperties = changes['value'];
+
+        if (this.clear && valueProperties != null)
+        {
+            let
+            value = valueProperties.currentValue;
+
+            if (value != null)
             {
-                if (current)
+                if (value.length > 0)
                 {
-                    if (current.length > 0)
-                    {
-                        scope.showClear = true;
-                    }
-                    else
-                    {
-                        scope.showClear = false;
-                    }
+                    this.showClear = true;
                 }
                 else
                 {
-                    scope.showClear = false;
+                    this.showClear = false;
                 }
-
-                scope.viewValue  = current;
-                scope.validInput = scope.form.input.$valid;
-
-                scope.change(current);
-            }));
-
-            scope.clearValue = function()
-            {
-                scope.showClear = false;
-                scope.value     = '';
-
-                $timeout(function()
-                {
-                    element.find('input').focus();
-                });
-            };
-        }
-
-        if (!scope.pattern)
-        {
-            if (scope.type === 'email')
-            {
-                scope.pattern = REGEX_EMAIL;
             }
             else
             {
-                scope.pattern = '';
+                this.showClear = false;
             }
+
+            this.validInput = this.valueControl.valid;
+
+            this.change.next(value);
         }
+    }
 
-        if (scope.validate)
-        {
-            angular.extend(scope,
-            {
-                isVerified : function()
-                {
-                    return scope.validate && !scope.verifying && scope.form.input.$dirty && scope.form.input.$valid;
-                },
+    clearValue()
+    {
+        this.showClear = false;
+        this.value     = '';
 
-                isError : function()
-                {
-                    return scope.validate && !scope.verifying && scope.form.input.$dirty && scope.form.input.$invalid;
-                },
+        this.input.focus();
+    }
 
-                isVerifying : function()
-                {
-                    return scope.validate && scope.state === 'verifying';
-                }
-            });
-        }
-    };
+    isVerified()
+    {
+        return this.validate && !this.verifying && this.valueControl.dirty && this.valueControl.valid;
+    }
 
-    return new tnInput();
-});
-*/
+    isError()
+    {
+        return this.validate && !this.verifying && this.valueControl.dirty && !this.valueControl.valid;
+    }
+
+    isVerifying()
+    {
+        return this.validate && this.state === 'verifying';
+    }
+}

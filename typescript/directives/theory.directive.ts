@@ -7,10 +7,11 @@ export class TNDirective extends TNObject
         super({});
 
         this.options(options);
+        this.initialize();
     }
 
-    ngOnInit()
+    initialize(options?:Object)
     {
-        this.initialize();
+        super.initialize(options);
     }
 }

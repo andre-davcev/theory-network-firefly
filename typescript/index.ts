@@ -6,6 +6,10 @@ export * from './base/theory.base';
 
 export * from './directives/theory.directive';
 export * from './directives/theory.directive.keyboard';
+export * from './directives/theory.directive.input';
+export * from './directives/theory.directive.input.email';
+export * from './directives/theory.directive.input.password';
+export * from './directives/theory.directive.input.text';
 
 export * from './firebase/theory.firebase';
 
