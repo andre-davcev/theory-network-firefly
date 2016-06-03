@@ -1,5 +1,5 @@
-import {Input, Output, EventEmitter, ViewChild, OnInit, OnChanges, SimpleChange}    from '@angular/core';
-import {NgForm, Control, Validators, NgModel}                                       from '@angular/common';
+import {Input, Output, EventEmitter, ViewChild, OnInit, OnChanges, SimpleChange, HostBinding}    from '@angular/core';
+import {NgForm, Control, Validators, NgModel}                                                    from '@angular/common';
 
 import {TNDirective}  from './theory.directive';
 
@@ -10,6 +10,8 @@ export class TNInput extends TNDirective implements OnChanges
     validators        = [];
 
     valueControl:Control;
+
+    @HostBinding() host;
 
     @ViewChild('input') input;
     @ViewChild('form')  form;
