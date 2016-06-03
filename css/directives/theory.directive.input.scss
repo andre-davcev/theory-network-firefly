@@ -55,16 +55,11 @@ $tn-input-icon-clear-width:         $tn-input-icon-font-size;
         }
     }
 
-    > .spinner
+    > .spinner-crescent
     {
         display: block;
         position: absolute;
         top: $tn-input-spinner-margin; right: -($tn-input-spinner-margin-right);
-
-        > svg
-        {
-            height: $tn-input-spinner-height; width: $tn-input-spinner-width;
-        }
     }
 
     > .tn-input-clear
