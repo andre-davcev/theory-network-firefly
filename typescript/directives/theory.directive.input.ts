@@ -19,6 +19,7 @@ export class TNInput extends TNDirective implements OnChanges
     @Input('tn-name')            name:string           = '';
     @Input('tn-value')           value:any;
     @Input('tn-placeholder')     placeholder:string    = '';
+    @Input('tn-host-classes')    hostClasses:string    = '';
 
     // Validators
     @Input('tn-required')        required:boolean      = false;
