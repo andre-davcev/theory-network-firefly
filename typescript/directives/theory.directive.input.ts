@@ -3,7 +3,7 @@ import {NgForm, Control, Validators, NgModel}                                   
 
 import {TNDirective}  from './theory.directive';
 
-export class TNInput extends TNDirective implements OnChanges
+export class TNInput extends TNDirective
 {
     showClear:boolean = false;
     state:string      = '';
@@ -14,7 +14,7 @@ export class TNInput extends TNDirective implements OnChanges
     @HostBinding() host;
 
     @ViewChild('input') input;
-    @ViewChild('form')  form;
+    @ViewChild('form')  form; 
 
     @Input('tn-name')            name:string           = '';
     @Input('tn-value')           value:any;
@@ -66,44 +66,12 @@ export class TNInput extends TNDirective implements OnChanges
         this.valueControl = new Control(this.value, Validators.compose(this.validators));
     }
 
-    ngOnChanges(changes: {[propName: string]: SimpleChange})
-    {
-        let
-        valueProperties = changes['value'];
-
-        if (this.clear && valueProperties != null)
-        {
-            let
-            value = valueProperties.currentValue;
-
-            if (value != null)
-            {
-                if (value.length > 0)
-                {
-                    this.showClear = true;
-                }
-                else
-                {
-                    this.showClear = false;
-                }
-            }
-            else
-            {
-                this.showClear = false;
-            }
-
-            this.validInput = this.valueControl.valid;
-
-            this.change.next(value);
-        }
-    }
-
     clearValue()
     {
         this.showClear = false;
         this.value     = '';
 
-        this.input.focus();
+        this.input.nativeElement.focus();
     }
 
     isVerified()
@@ -119,5 +87,35 @@ export class TNInput extends TNDirective implements OnChanges
     isVerifying()
     {
         return this.validate && this.state === 'verifying';
+    }
+
+    onChange(value:string)
+    {
+        if (this.trim)
+        {
+            this.value = value.trim();
+        }
+        else
+        {
+            this.value = value;
+        }
+
+        value = this.value;
+
+        if (this.clear)
+        {
+            if (value != null && value.length > 0)
+            {
+                this.showClear = true;
+            }
+            else
+            {
+                this.showClear = false;
+            }
+
+            this.validInput = this.valueControl.valid;
+
+            this.change.next(value);
+        }
     }
 }
