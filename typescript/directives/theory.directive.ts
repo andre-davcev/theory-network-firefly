@@ -10,8 +10,8 @@ export class TNDirective extends TNObject
         this.initialize();
     }
 
-    initialize(options?:Object)
+    initialize()
     {
-        super.initialize(options);
-    }
+        super.initialize();
+    } 
 }

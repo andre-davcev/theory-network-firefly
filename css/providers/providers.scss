@@ -16,6 +16,7 @@
 
             &:before
             {
+                box-sizing: border-box;
                 display: block;
                 position: absolute;
                 top: -0.3rem; left: 0.4rem;

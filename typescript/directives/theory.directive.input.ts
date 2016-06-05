@@ -1,20 +1,19 @@
-import {Input, Output, EventEmitter, ViewChild, OnInit, OnChanges, SimpleChange, HostBinding}    from '@angular/core';
-import {NgForm, Control, Validators, NgModel}                                                    from '@angular/common';
+import {Input, Output, EventEmitter, ViewChild, OnInit, SimpleChange, HostBinding}    from '@angular/core';
+import {NgFormModel, ControlGroup, Control, Validators, NgModel}                      from '@angular/common';
 
 import {TNDirective}  from './theory.directive';
 
-export class TNInput extends TNDirective
+export class TNInput extends TNDirective implements OnInit
 {
     showClear:boolean = false;
     state:string      = '';
     validators        = [];
 
-    valueControl:Control;
-
-    @HostBinding() host;
+    form:ControlGroup;
 
     @ViewChild('input') input;
-    @ViewChild('form')  form; 
+
+    @HostBinding() host;
 
     @Input('tn-name')            name:string           = '';
     @Input('tn-value')           value:any;
@@ -43,10 +42,8 @@ export class TNInput extends TNDirective
         super();
     }
 
-    initialize(options?:Object)
+    ngOnInit()
     {
-        super.initialize(options);
-
         this.validators =
         [
             Validators.minLength(this.minLength),
@@ -63,7 +60,12 @@ export class TNInput extends TNDirective
             this.validators.push(Validators.pattern(this.pattern));
         }
 
-        this.valueControl = new Control(this.value, Validators.compose(this.validators));
+        this.input = new Control(this.value, Validators.compose(this.validators));
+
+        this.form = new ControlGroup
+        ({
+            input : this.input
+        });
     }
 
     clearValue()
@@ -71,22 +73,22 @@ export class TNInput extends TNDirective
         this.showClear = false;
         this.value     = '';
 
-        this.input.nativeElement.focus();
+        this.input.valueAccessor._elementRef.nativeElement.focus();
     }
 
     isVerified()
     {
-        return this.validate && !this.verifying && this.valueControl.dirty && this.valueControl.valid;
+        return this.validate && !this.verifying && this.form.dirty && this.form.valid;
     }
 
     isError()
     {
-        return this.validate && !this.verifying && this.valueControl.dirty && !this.valueControl.valid;
+        return this.validate && !this.verifying && this.form.dirty && !this.form.valid;
     }
 
     isVerifying()
     {
-        return this.validate && this.state === 'verifying';
+        return this.validate && this.verifying;
     }
 
     onChange(value:string)
@@ -113,9 +115,12 @@ export class TNInput extends TNDirective
                 this.showClear = false;
             }
 
-            this.validInput = this.valueControl.valid;
-
-            this.change.next(value);
+            this.validInput = this.form.valid;
         }
+
+        console.log(this.form);
+        console.log(this.input);
+
+        this.change.next(value);
     }
 }
