@@ -1,5 +1,5 @@
-import {Input, Output, EventEmitter, ViewChild, OnInit, SimpleChange, HostBinding}    from '@angular/core';
-import {NgFormModel, ControlGroup, Control, Validators, NgModel}                      from '@angular/common';
+import {Input, Output, EventEmitter, ViewChild, OnInit, SimpleChange, HostBinding, ElementRef}    from '@angular/core';
+import {NgFormModel, ControlGroup, Control, Validators, NgModel}                                  from '@angular/common';
 
 import {TNDirective}  from './theory.directive';
 
@@ -10,8 +10,9 @@ export class TNInput extends TNDirective implements OnInit
     validators        = [];
 
     form:ControlGroup;
+    input:Control;
 
-    @ViewChild('input') input;
+    @ViewChild('input') inputElement:ElementRef;
 
     @HostBinding() host;
 
@@ -22,8 +23,8 @@ export class TNInput extends TNDirective implements OnInit
 
     // Validators
     @Input('tn-required')        required:boolean      = false;
-    @Input('tn-min-length')      minLength:number      = 1;
-    @Input('tn-max-length')      maxLength:number      = -1;
+    @Input('tn-min-length')      minLength:number;
+    @Input('tn-max-length')      maxLength:number;
     @Input('tn-pattern')         pattern:string        = '.*';
 
     @Input('tn-trim')            trim:boolean          = true;
@@ -44,11 +45,15 @@ export class TNInput extends TNDirective implements OnInit
 
     ngOnInit()
     {
-        this.validators =
-        [
-            Validators.minLength(this.minLength),
-            Validators.maxLength(this.maxLength)
-        ];
+        if (this.minLength != null)
+        {
+            this.validators.push(Validators.minLength(this.minLength));
+        }
+
+        if (this.maxLength != null)
+        {
+            this.validators.push(Validators.maxLength(this.maxLength));
+        }
 
         if (this.required)
         {
@@ -73,7 +78,7 @@ export class TNInput extends TNDirective implements OnInit
         this.showClear = false;
         this.value     = '';
 
-        this.input.valueAccessor._elementRef.nativeElement.focus();
+        this.inputElement.nativeElement.focus();
     }
 
     isVerified()
