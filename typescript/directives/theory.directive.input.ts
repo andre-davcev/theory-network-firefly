@@ -122,10 +122,7 @@ export class TNInput extends TNDirective implements OnInit
 
             this.validInput = this.form.valid;
         }
-
-        console.log(this.form);
-        console.log(this.input);
-
+        
         this.change.next(value);
     }
 }
