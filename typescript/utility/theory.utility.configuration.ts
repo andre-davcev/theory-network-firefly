@@ -591,7 +591,7 @@ export class TNConfiguration extends TNObject
         service.key = key;
     }
 
-    dictionary(view:string, scope:Object)
+    dictionary(view:string, scope?:Object)
     {
         let
         dictionary = this.properties['model'].dictionary.views[view];
