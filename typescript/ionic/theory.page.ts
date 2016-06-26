@@ -2,9 +2,9 @@ import {MobileConfiguration} from '../mobile/theory.mobile.configuration';
 
 export class TNPage
 {
-    configuration:MobileConfiguration;
-    dictionary:Object;
-    key:string;
+    protected configuration:MobileConfiguration;
+    protected dictionary:Object = {};
+    protected key:string;
 
     constructor(configuration:MobileConfiguration, key?:string)
     {
