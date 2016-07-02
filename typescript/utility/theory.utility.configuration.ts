@@ -468,7 +468,8 @@ export class TNConfiguration extends TNObject
     load(options?:Object)
     {
         let
-        properties = this.properties;
+        properties = this.properties,
+        observableDependencies;
 
         if (!properties['loaded'] && !properties['loading'])
         {
@@ -476,11 +477,19 @@ export class TNConfiguration extends TNObject
 
             properties['loading'] = true;
 
-            properties['observableDependencies'] = Observable.forkJoin(properties['dependencies']).
+            observableDependencies = properties['observableDependencies'] = Observable.forkJoin(properties['dependencies']).
 
             map(data =>
             {
                 properties['loaded'] = true;
+            });
+        }
+        else
+        {
+            observableDependencies = properties['observableDependencies'] = Observable.create((observer) =>
+            {
+                observer.next();
+                observer.complete();
             });
         }
 
