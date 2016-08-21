@@ -1,5 +1,4 @@
-///<reference path="../../node_modules/angular2/typings/browser.d.ts"/>
-///<reference path="../../node_modules/angularfire2/firebase3.d.ts"/>
+///<reference path="../../typings/index.d.ts"/>
 
 export * from './base/theory.base';
 //export * from './canvas/theory.canvas';

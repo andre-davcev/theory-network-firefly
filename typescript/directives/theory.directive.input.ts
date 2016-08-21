@@ -1,5 +1,6 @@
-import {Input, Output, EventEmitter, ViewChild, OnInit, SimpleChange, HostBinding, ElementRef}    from '@angular/core';
-import {NgFormModel, ControlGroup, Control, Validators, NgModel}                                  from '@angular/common';
+import {Input, Output, EventEmitter, ViewChild, OnInit, SimpleChange, HostBinding, ElementRef} from '@angular/core';
+import {NgModel}                                                                               from '@angular/common';
+import {FormGroup, FormControl, Validators}                                                    from '@angular/forms';
 
 import {TNDirective}  from './theory.directive';
 
@@ -9,8 +10,8 @@ export class TNInput extends TNDirective implements OnInit
     state:string      = '';
     validators        = [];
 
-    form:ControlGroup;
-    input:Control;
+    form:FormGroup;
+    input:FormControl;
 
     @ViewChild('input') inputElement:ElementRef;
 
@@ -65,9 +66,9 @@ export class TNInput extends TNDirective implements OnInit
             this.validators.push(Validators.pattern(this.pattern));
         }
 
-        this.input = new Control(this.value, Validators.compose(this.validators));
+        this.input = new FormControl(this.value, Validators.compose(this.validators));
 
-        this.form = new ControlGroup
+        this.form = new FormGroup
         ({
             input : this.input
         });
