@@ -11,24 +11,93 @@ export class TNFirebaseAuth extends TNObject
     private _username:string       = '';
     private _authData:Object       = null;
 
-    constructor()
+    constructor(private angularFire:AngularFire)
     {
         super();
     }
 
-    login(options:Object) : Observable<Object>
-    {
 /*
+    public session() : Observable<Object>
+    {
         var
-        self        = this,
-        provider    = options.provider,
-        authOptions = {session : this.properties.session},
-        q           = $q.defer(),
-        username    = options.username,
-        password    = options.password,
-        foundUser   = options.found,
-        authPromise,
+        q        = $q.defer(),
+        authData = this.getAuth();
 
+        if (authData)
+        {
+            User.find(authData.uid).then(function(userData)
+            {
+                if (userData.uid)
+                {
+                    authorization = authData;
+
+                    User.current(userData);
+
+                    q.resolve({auth : authData, user : userData});
+                }
+                else
+                {
+                    q.reject('Session found but is not a valid user');
+                }
+            });
+        }
+        else
+        {
+            q.reject('No sessions found');
+        }
+
+        return q.promise;
+    }
+*/
+
+/*
+    public usernameIsValid(username:String) : Observable<Object>
+    {
+        var
+        q           = $q.defer(),
+        isValid     = false,
+        usernames   = this.properties.usernames,
+        findingUser = this.findingUser;
+
+        if (findingUser && findingUser.reject)
+        {
+            findingUser.reject();
+        }
+
+        angular.forEach(usernames, function(email)
+        {
+            if (email === username)
+            {
+                isValid = true;
+            }
+        });
+
+        if (isValid)
+        {
+            q.resolve(true);
+        }
+        else
+        {
+            this.findingUser = Username.find(username).then(function(data)
+            {
+                if (data.uid)
+                {
+                    q.resolve(true);
+                }
+                else
+                {
+                    q.resolve(false);
+                }
+            });
+        }
+
+        return q.promise;
+    }
+*/
+
+/*
+    public login(options:Object) : Observable<Object>
+    {
         runAuthPromise = function()
         {
             authPromise.then(function(authData)
@@ -137,171 +206,67 @@ export class TNFirebaseAuth extends TNObject
 
         return q.promise;
 */
-    }
-
-    logout() : Observable<Object>
-    {
-
-    }
-
-    usernameIsValid(username:String) : Observable<Object>
-    {
-
-    }
-
-    session() : Observable<Object>
-    {
-
-    }
-
-    setUserFromAuth(options:Object) : Observable<Object>
-    {
-
-    }
-
-    createUser(options:Object) : Observable<Object>
-    {
-
-    }
-
-    get authenticated():boolean
-    {
-        return this._authenticated;
-    }
-    
-    set authenticated(authenticated:boolean)
-    {
-        this._authenticated = authenticated;
-    }
-
-    get username():boolean
-    {
-        return this._username;
-    }
-    
-    set username(username:boolean)
-    {
-        this._username = username;
-    }
-
-    get authData():Object
-    {
-        return this._authData;
-    }
-    
-    set authData(authData:boolean)
-    {
-        this._authData = authData;
-    }
-}
-
 /*
+        let
 
-factory('TNFirebaseAuth', function($firebaseAuth, $firebaseObject, $q, TNObject, User, Username, FIREBASE_URL, PROVIDER_SIMPLE, PROVIDER_FACEBOOK, PROVIDER_TWITTER, PROVIDER_GOOGLE, PROVIDER_GITHUB)
-{
-    TNFirebaseAuth.prototype.login = function(options)
-    {
-        var
-        self        = this,
-        provider    = options.provider,
-        authOptions = {session : this.properties.session},
-        q           = $q.defer(),
-        username    = options.username,
-        password    = options.password,
-        foundUser   = options.found,
-        authPromise,
+        provider:number         = options['provider'],
+        username:string         = options['username'],
+        password:string         = options['password'],
+        foundUser:boolean       = options['found'],
+        angularFire:AngularFire = this.angularFire,
 
-        runAuthPromise = function()
+        observable,
+        authObservable;
+
+        angularFire.auth.subscribe(auth =>
         {
-            authPromise.then(function(authData)
-            {
-                self.setUserFromAuth({authData : authData, username : username}).then(function(data)
-                {
-                    q.resolve(data);
-                }).
+            console.log(auth);
+        },
 
-                catch(function(error)
+        error =>
+        {
+            console.log(error);
+        });
+
+        if (provider !== AuthMethods.Password)
+        {
+            if (provider === AuthProviders.Facebook)
+            {
+            
+            }
+            else
+            {
+                angularFire.auth.login(
                 {
-                    q.reject(error);
+                    provider : provider,
+                    method   : AuthMethods.Popup
                 });
-            }).
-
-            catch(function(error)
-            {
-                q.reject(error);
-            });
-        },
-
-        createUser = function()
-        {
-            self.createUser({username : username, password : password}).then(function(data)
-            {
-                authWithPassword();
-            });
-        },
-
-        authWithPassword = function()
-        {
-            authPromise = firebaseAuth.$authWithPassword({email : username, password : password}, authOptions);
-
-            runAuthPromise();
-        },
-
-        checkAndAuthUser = function()
-        {
-            if (foundUser)
-            {
-                authWithPassword();
             }
-            else
-            {
-                createUser();
-            }
-        },
 
-        findAndAuthUser = function()
-        {
-            Username.find(username).then(function(usernameData)
-            {
-                console.log(usernameData);
-
-                if (usernameData.username)
-                {
-                    foundUser = true;
-                }
-
-                checkAndAuthUser();
-            });
-        };
-
-        if (provider !== PROVIDER_SIMPLE)
-        {
-            authPromise = firebaseAuth.$authWithOAuthPopup(provider, authOptions);
-
-            runAuthPromise();
+            this.runAuthPromise();
         }
-        else if (username && password)
+        else if (username != null && password != null)
         {
-            if (options.register)
+            if (options['register'])
             {
                 if (options.checkUser)
                 {
-                    findAndAuthUser();
+                    this.findAndAuthUser();
                 }
                 else
                 {
-                    checkAndAuthUser();
+                    this.checkAndAuthUser();
                 }
             }
             else
             {
                 if (options.checkUser)
                 {
-                    findAndAuthUser();
+                    this.findAndAuthUser();
                 }
                 else
                 {
-                    authWithPassword();
+                    this.authWithPassword();
                 }
             }
         }
@@ -316,11 +281,11 @@ factory('TNFirebaseAuth', function($firebaseAuth, $firebaseObject, $q, TNObject,
                 q.reject('Invalid password');
             }
         }
+    }
+*/
 
-        return q.promise;
-    };
-
-    TNFirebaseAuth.prototype.logout = function()
+/*
+    public logout() : Observable<Object>
     {
         var
         q = $q.defer();
@@ -341,84 +306,12 @@ factory('TNFirebaseAuth', function($firebaseAuth, $firebaseObject, $q, TNObject,
         });
 
         return q.promise;
-    };
 
-    TNFirebaseAuth.prototype.usernameIsValid = function(username)
-    {
-        var
-        q           = $q.defer(),
-        isValid     = false,
-        usernames   = this.properties.usernames,
-        findingUser = this.findingUser;
+    }
+*/
 
-        if (findingUser && findingUser.reject)
-        {
-            findingUser.reject();
-        }
-
-        angular.forEach(usernames, function(email)
-        {
-            if (email === username)
-            {
-                isValid = true;
-            }
-        });
-
-        if (isValid)
-        {
-            q.resolve(true);
-        }
-        else
-        {
-            this.findingUser = Username.find(username).then(function(data)
-            {
-                if (data.uid)
-                {
-                    q.resolve(true);
-                }
-                else
-                {
-                    q.resolve(false);
-                }
-            });
-        }
-
-        return q.promise;
-    };
-
-    TNFirebaseAuth.prototype.getSession = function()
-    {
-        var
-        q        = $q.defer(),
-        authData = this.getAuth();
-
-        if (authData)
-        {
-            User.find(authData.uid).then(function(userData)
-            {
-                if (userData.uid)
-                {
-                    authorization = authData;
-
-                    User.current(userData);
-
-                    q.resolve({auth : authData, user : userData});
-                }
-                else
-                {
-                    q.reject('Session found but is not a valid user');
-                }
-            });
-        }
-        else
-        {
-            q.reject('No sessions found');
-        }
-
-        return q.promise;
-    };
-
-    TNFirebaseAuth.prototype.setUserFromAuth = function(options)
+/*
+    setUserFromAuth(options:Object) : Observable<Object>
     {
         var
         q           = $q.defer(),
@@ -462,9 +355,11 @@ factory('TNFirebaseAuth', function($firebaseAuth, $firebaseObject, $q, TNObject,
         });
 
         return q.promise;
-    };
+    }
+*/
 
-    TNFirebaseAuth.prototype.createUser = function(options)
+/*
+    public createUser(options:Object) : Observable<Object>
     {
         var
         q = $q.defer();
@@ -480,8 +375,37 @@ factory('TNFirebaseAuth', function($firebaseAuth, $firebaseObject, $q, TNObject,
         });
 
         return q.promise;
-    };
-
-    return TNFirebaseAuth;
-});
+    }
 */
+/*
+    get authenticated():boolean
+    {
+        return this._authenticated;
+    }
+    
+    set authenticated(authenticated:boolean)
+    {
+        this._authenticated = authenticated;
+    }
+
+    get username():boolean
+    {
+        return this._username;
+    }
+    
+    set username(username:boolean)
+    {
+        this._username = username;
+    }
+
+    get authData():Object
+    {
+        return this._authData;
+    }
+    
+    set authData(authData:boolean)
+    {
+        this._authData = authData;
+    }
+*/
+}
