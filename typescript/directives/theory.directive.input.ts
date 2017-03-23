@@ -1,5 +1,4 @@
 import {Input, Output, EventEmitter, ViewChild, OnInit, SimpleChange, HostBinding, ElementRef} from '@angular/core';
-import {NgModel}                                                                               from '@angular/common';
 import {FormGroup, FormControl, Validators}                                                    from '@angular/forms';
 
 import {TNDirective}  from './theory.directive';

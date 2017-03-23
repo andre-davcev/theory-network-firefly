@@ -1,7 +1,7 @@
 import {Http, Response} from '@angular/http';
 import {Observable}     from 'rxjs/Rx';
 import {Platform}       from 'ionic-angular';
-import {Globalization}  from 'ionic-native';
+import {Globalization}  from '@ionic-native/globalization';
 //ToDo: $locale
 //ToDo: $log
 

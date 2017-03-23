@@ -1,9 +1,9 @@
 import {Http, Response} from '@angular/http';
 import {Observable}     from 'rxjs/Rx';
 import {Platform}       from 'ionic-angular';
-import {Geolocation}    from 'ionic-native';
-import {StatusBar}      from 'ionic-native';
-import {Keyboard}       from 'ionic-native';
+import {Geolocation}    from '@ionic-native/geolocation';
+import {StatusBar}      from '@ionic-native/status-bar';
+import {Keyboard}       from '@ionic-native/keyboard';
 //ToDo: $log
 
 import {TNObject}          from '../base/theory.base.object';
