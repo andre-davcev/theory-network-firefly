@@ -1,6 +1,7 @@
 import {Http, Response} from '@angular/http';
 import {Observable}     from 'rxjs/Rx';
 import {Platform}       from 'ionic-angular';
+import {Globalization}  from '@ionic-native/globalization';
 import {Geolocation}    from '@ionic-native/geolocation';
 import {StatusBar}      from '@ionic-native/status-bar';
 import {Keyboard}       from '@ionic-native/keyboard';
@@ -12,9 +13,12 @@ import {TNConfiguration}   from '../utility/theory.utility.configuration';
 
 export class MobileConfiguration extends TNConfiguration
 {
-    constructor(http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility, options?:Object)
+    statusBar:StatusBar;
+    geolocation:Geolocation;
+
+    constructor(http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility, globalization:Globalization, statusBar:StatusBar, geolocation:Geolocation, options?:Object)
     {
-        super(http, platform, firebaseUtility,
+        super(http, platform, firebaseUtility, globalization,
         {
             statusBarStyle : 0,  // -1 - Use Hex
             //  0 - Default
@@ -29,6 +33,9 @@ export class MobileConfiguration extends TNConfiguration
 
             locationFound : false
         });
+
+        this.statusBar   = statusBar;
+        this.geolocation = geolocation;
 
         this.options(options);
     }
@@ -60,7 +67,7 @@ export class MobileConfiguration extends TNConfiguration
                     // org.apache.cordova.statusbar required
                     if (properties['statusBarStyle'] === -1)
                     {
-                        StatusBar.backgroundColorByHexString(properties['statusBarHex']);
+                        this.statusBar.backgroundColorByHexString(properties['statusBarHex']);
                     }
                     else
                     {
@@ -69,25 +76,25 @@ export class MobileConfiguration extends TNConfiguration
 
                         if (statusBarStyle === 0)
                         {
-                            StatusBar.styleDefault();
+                            this.statusBar.styleDefault();
                         }
                         else if (statusBarStyle === 1)
                         {
-                            StatusBar.styleLightContent();
+                            this.statusBar.styleLightContent();
                         }
                         else if (statusBarStyle === 2)
                         {
-                            StatusBar.styleBlackTranslucent();
+                            this.statusBar.styleBlackTranslucent();
                         }
                         else if (statusBarStyle === 3)
                         {
-                            StatusBar.styleBlackOpaque();
+                            this.statusBar.styleBlackOpaque();
                         }
                     }
 
                     if (properties['statusBarHide'])
                     {
-                        StatusBar.hide();
+                        this.statusBar.hide();
                     }
                 }
 
@@ -110,7 +117,7 @@ export class MobileConfiguration extends TNConfiguration
             {
                 properties['positionFound'] = true;
 
-                Geolocation.getCurrentPosition().then((position) =>
+                this.geolocation.getCurrentPosition().then((position) =>
                 {
                     this.properties['model'].services.position.data =
                     {

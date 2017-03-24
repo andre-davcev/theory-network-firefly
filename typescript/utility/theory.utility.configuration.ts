@@ -13,8 +13,9 @@ export class TNConfiguration extends TNObject
     http            : Http;
     platform        : Platform;
     firebaseUtility : TNFirebaseUtility;
+    globalization   : Globalization;
 
-    constructor(http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility, options?:Object)
+    constructor(http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility, globalization:Globalization, options?:Object)
     {
         super(
         {
@@ -32,6 +33,7 @@ export class TNConfiguration extends TNObject
         this.http            = http;
         this.platform        = platform;
         this.firebaseUtility = firebaseUtility;
+        this.globalization   = globalization;
     }
 
     configureProviders(data:Object)
@@ -352,7 +354,7 @@ export class TNConfiguration extends TNObject
             let
             observable = Observable.create((observer) =>
             {
-                Globalization.getLocaleName().then(function(result)
+                this.globalization.getLocaleName().then(function(result)
                 {
                     getLanguage(result.value.toLowerCase()).
 
