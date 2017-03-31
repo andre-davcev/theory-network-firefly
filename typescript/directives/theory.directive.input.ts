@@ -14,8 +14,6 @@ export class TNInput extends TNDirective implements OnInit
 
     @ViewChild('input') inputElement:ElementRef;
 
-    @HostBinding() host;
-
     @Input('tn-name')            name:string           = '';
     @Input('tn-value')           value:any;
     @Input('tn-placeholder')     placeholder:string    = '';
@@ -31,6 +29,7 @@ export class TNInput extends TNDirective implements OnInit
     @Input('tn-clear')           clear:boolean         = false;
     @Input('tn-validate')        validate:boolean      = false;
     @Input('tn-verifying')       verifying:boolean     = false;
+    @Input('tn-valid')           valid:boolean         = false;
     @Input('tn-valid-input')     validInput:boolean    = true;
     @Input('tn-spinner')         spinner:string        = 'spiral'; // android, ios, ios-small, bubbles, circles, crescent, dots, lines, ripple, spiral
     @Input('tn-spinner-classes') spinnerClasses:string = '';
