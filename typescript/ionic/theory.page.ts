@@ -10,10 +10,7 @@ export class TNPage
     {
         this.configuration = configuration;
         this.key           = key;
-    }
 
-    onPageLoaded()
-    {
         this.configuration.load().subscribe
         (
             (data) =>
