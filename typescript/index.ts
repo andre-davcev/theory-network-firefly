@@ -1,4 +1,4 @@
-///<reference path="../../typings/index.d.ts"/>
+///<reference path="../../node_modules/typescript/lib/lib.es6.d.ts"/> 
 
 export * from './base/theory.base';
 //export * from './canvas/theory.canvas';

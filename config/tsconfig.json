@@ -12,17 +12,13 @@
     [
         "library/typescript/*.ts",
         "!node_modules/**",
-        "!typings/**",
         "!app/build/app/**/node_modules/**",
-        "!app/build/app/**/typings/**",
-        "!web/grunt/node_modules/**",
-        "!web/grunt/typings/**"
+        "!web/grunt/node_modules/**"
     ],
 
     "exclude" :
     [
-        "node_modules",
-        "typings"
+        "node_modules"
     ],
 
     "atom" :
