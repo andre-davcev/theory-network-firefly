@@ -53,6 +53,12 @@
     flex: 1;
     display: flex;
     flex-direction: row;
+
+    &.tn-fill
+    {
+        height: 100%;
+        width: 100%;
+    }
 }
 
 .tn-container-reset
