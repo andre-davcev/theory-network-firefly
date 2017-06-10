@@ -8,11 +8,9 @@
         "declaration"            : true
     },
 
-    "filesGlob" :
+    "include" :
     [
-        "../library/typescript/*.ts",
-        "!node_modules/**",
-        "!/build/app/**/node_modules/**"
+        "build/modules/theory-network/*.ts"
     ],
 
     "exclude" :
