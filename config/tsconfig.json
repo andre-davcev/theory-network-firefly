@@ -10,9 +10,10 @@
 
     "filesGlob" :
     [
-        "../library/typescript/*.ts",
+        "library/typescript/*.ts",
         "!node_modules/**",
-        "!/build/app/**/node_modules/**"
+        "!app/build/app/**/node_modules/**",
+        "!web/grunt/node_modules/**"
     ],
 
     "exclude" :
