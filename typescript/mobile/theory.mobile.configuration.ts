@@ -1,60 +1,72 @@
-import {Http, Response} from '@angular/http';
 import {Observable}     from 'rxjs/Rx';
-import {Platform}       from 'ionic-angular';
-import {Globalization}  from '@ionic-native/globalization';
 import {Geolocation}    from '@ionic-native/geolocation';
 import {StatusBar}      from '@ionic-native/status-bar';
-import {Keyboard}       from '@ionic-native/keyboard';
+//import {Keyboard}       from '@ionic-native/keyboard';
 //ToDo: $log
 
-import {TNObject}          from '../base/theory.base.object';
-import {TNFirebaseUtility} from '../firebase/theory.firebase.utility';
-import {TNConfiguration}   from '../utility/theory.utility.configuration';
+import {TNObject}        from '../base/theory.base.object';
+import {TNConfiguration} from '../utility/theory.utility.configuration';
+import {TNConfigOptions} from '../utility/theory.utility.configuration';
+import {TNModel}         from '../utility/theory.utility.configuration';
+import {TNModelService}  from '../utility/theory.utility.configuration';
+import {TNModelView}     from '../utility/theory.utility.configuration';
+
+export interface TNMobileConfigOptions extends TNConfigOptions
+{
+    statusBar       : StatusBar,
+    geolocation     : Geolocation,
+    statusBarStyle? : number,
+    statusBarHide?  : boolean,
+    statusBarHex?   : string,
+    getLocation?    : boolean,
+    locationFound?  : boolean
+}
+
+export enum TNStatusBarStyle
+{
+    Default,
+    Light,
+    BlackTranslucent,
+    BlackOpaque
+}
 
 export class MobileConfiguration extends TNConfiguration
 {
-    statusBar:StatusBar;
-    geolocation:Geolocation;
+    protected statusBar:StatusBar;
+    protected geolocation:Geolocation;
 
-    constructor(http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility, globalization:Globalization, statusBar:StatusBar, geolocation:Geolocation, options?:Object)
+    protected statusBarStyle:number;
+    protected statusBarHide:boolean;
+    protected statusBarHex:string;
+    protected getLocation:boolean;
+    protected locationFound:boolean;
+
+    constructor(options:TNMobileConfigOptions)
     {
-        super(http, platform, firebaseUtility, globalization,
-        {
-            statusBarStyle : 0,  // -1 - Use Hex
-            //  0 - Default
-            //  1 - Light
-            //  2 - Black, translucent
-            //  3 - Black, opaque
-            statusBarHide : false,
+        super(options);
 
-            statusBarHex : '#FFFFFF',
+        this.statusBar   = options.statusBar;
+        this.geolocation = options.geolocation;
 
-            getLocation : false,
-
-            locationFound : false
-        });
-
-        this.statusBar   = statusBar;
-        this.geolocation = geolocation;
-
-        this.options(options);
+        this.statusBarStyle = options.statusBarStyle == null ? TNStatusBarStyle.Default : options.statusBarStyle;
+        this.statusBarHide  = options.statusBarHide  == null ? false                    : options.statusBarHide;
+        this.statusBarHex   = options.statusBarHex   == null ? '#FFFFFF'                : options.statusBarHex;
+        this.getLocation    = options.getLocation    == null ? false                    : options.getLocation;
+        this.locationFound  = options.locationFound  == null ? false                    : options.locationFound;
     }
 
-    initialize(options:Object)
+    protected initialize(options:TNMobileConfigOptions)
     {
         super.initialize(options);
 
-        let
-        properties = this.properties,
-
-        observable = Observable.create((observer) =>
+        let observable:Observable<any> = Observable.create((observer) =>
         {
             this.platform.ready().then(() => 
             {
                 if (this.platform.is('cordova'))
-                {
-                    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
+                {      
 /*
+                    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard for form inputs)
                     if (window['cordova'].plugins.Keyboard != null)
                     {
                         Keyboard.hideKeyboardAccessoryBar(true);
@@ -65,14 +77,13 @@ export class MobileConfiguration extends TNConfiguration
                 if (window['StatusBar'] != null)
                 {
                     // org.apache.cordova.statusbar required
-                    if (properties['statusBarStyle'] === -1)
+                    if (this.statusBarStyle == -1)
                     {
-                        this.statusBar.backgroundColorByHexString(properties['statusBarHex']);
+                        this.statusBar.backgroundColorByHexString(this.statusBarHex);
                     }
                     else
                     {
-                        let
-                        statusBarStyle = properties['statusBarStyle'];
+                        let statusBarStyle = this.statusBarStyle;
 
                         if (statusBarStyle === 0)
                         {
@@ -92,7 +103,7 @@ export class MobileConfiguration extends TNConfiguration
                         }
                     }
 
-                    if (properties['statusBarHide'])
+                    if (this.statusBarHide)
                     {
                         this.statusBar.hide();
                     }
@@ -106,20 +117,17 @@ export class MobileConfiguration extends TNConfiguration
         this.addDependency(observable);
     }
 
-    load(options?:Object)
+    public load(options?:Object)
     {
         return super.load(options).map(() =>
         {
-            let
-            properties = this.properties;
-
-            if (properties['getLocation'] && !properties['positionFound'])
+            if (this.getLocation && !this.locationFound)
             {
-                properties['positionFound'] = true;
+                this.locationFound = true;
 
                 this.geolocation.getCurrentPosition().then((position) =>
                 {
-                    this.properties['model'].services.position.data =
+                    this.model.services.position.data =
                     {
                         latitude  : position.coords.latitude,
                         longitude : position.coords.longitude
@@ -134,19 +142,16 @@ export class MobileConfiguration extends TNConfiguration
         });
     }
 
-    getDependencies(options:Object)
+    protected getDependencies(scope:any, dependencies:Array<string>) : Observable<any>
     {
-        let
-        scope       = options['scope'],
-        services    = this.properties['model'].services,
-        observables = [],
-        observable;
+        let services:{[id:string]:TNModelService} = this.model.services;
+        let observables:Array<Observable<any>> = [];
+        let observable:Observable<any>;
 
-        for (let dependency of options['dependencies'])
+        for (let dependency of dependencies)
         {
-            let
-            service = services[dependency],
-            data    = service.data;
+            let service:TNModelService = services[dependency];
+            let data:any               = service.data;
 
             if (data != null && ((service.providerType === 'firebase' && !data.reload()) || (service.providerType !== 'firebase' && !service.reload)))
             {
@@ -154,10 +159,9 @@ export class MobileConfiguration extends TNConfiguration
                 {
                     scope[service.proper] = service.data;
 
-                    let
-                    parent = service.parent;
+                    let parent:TNModelService = service.parent;
 
-                    while (parent)
+                    while (parent != null)
                     {
                         scope[parent.proper] = parent.data;
 
@@ -171,16 +175,15 @@ export class MobileConfiguration extends TNConfiguration
             }
             else
             {
-                observable = this.get({name : dependency}).map((data) =>
+                observable = this.get(dependency).map((data) =>
                 {
                     if (service.providerType === 'firebase')
                     {
                         scope[service.proper] = service.data;
 
-                        let
-                        parent = service.parent;
+                        let parent:TNModelService = service.parent;
 
-                        while (parent)
+                        while (parent != null)
                         {
                             scope[parent.proper] = parent.data;
 
@@ -200,45 +203,46 @@ export class MobileConfiguration extends TNConfiguration
         return Observable.forkJoin(observables);
     }
 
-    view(options:Object)
+    public view(scope:any, keys:{[id:string]:string}, stateName:string, stateParams?:any) : Observable<any>
     {
-        let
-        observable = Observable.create((observer) =>
+        return Observable.create((observer) =>
         {
-            let
-            scope = options['scope'],
-            state = options['state'],
-            model = this.properties['model'],
-            name  = state,
-            view  = model.views[name],
-            keys  = options['keys'],
-            scopeKey;
+            let model:TNModel    = this.model;
+            let view:TNModelView = model.views[stateName];
+            let scopeKey:string;
 
-            TNObject.extend(scope, options['stateParams']);
+
+            if (stateParams != null)
+            {
+                TNObject.extend(scope, stateParams);
+            }
 
             TNObject.extend(scope,
             {
                 name       : name,
-                dictionary : model.dictionary.views[name]
+                dictionary : model.dictionary.views[stateName]
             });
 
             for (let serviceKey of Object.keys(keys))
             {
                 scopeKey = keys[serviceKey];
 
-                this.setKey({name : serviceKey, key : scope[scopeKey]});
+                this.setKey(serviceKey, scope[scopeKey]);
             }
 
             if (view)
             {
-                this.getDependencies({scope : scope, dependencies : view.dependencies}).subscribe(() =>
+                this.getDependencies(scope, view.dependencies).subscribe(() =>
                 {
                     for (let directive of view.directives)
                     {
-                        TNObject.extend(model.dictionary.views[name], model.dictionary.directives[directive]);
+                        TNObject.extend(model.dictionary.views[stateName], model.dictionary.directives[directive]);
                     }
 
-                    this.getDependencies({scope : scope, dependencies : view.silent});
+                    if (view.silent == null)
+                    {
+                        this.getDependencies(scope, view.silent);
+                    }
 
                     observer.next();
                     observer.complete();
@@ -250,7 +254,5 @@ export class MobileConfiguration extends TNConfiguration
                 observer.complete();
             }
         });
-
-        return observable;
     }
 }

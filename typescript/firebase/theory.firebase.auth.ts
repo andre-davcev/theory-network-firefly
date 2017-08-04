@@ -1,6 +1,5 @@
-import {Injectable}                                 from '@angular/core';
-import {Observable}                                 from 'rxjs/Rx';
-import {AngularFire, AuthProviders, AuthMethods}    from 'angularfire2';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
 
 import {TNObject} from '../base/theory.base.object';
 
@@ -11,7 +10,7 @@ export class TNFirebaseAuth extends TNObject
     private _username:string       = '';
     private _authData:Object       = null;
 
-    constructor(private angularFire:AngularFire)
+    constructor()
     {
         super();
     }

@@ -1,0 +1,39 @@
+{
+  "name": "TheoryNetwork",
+  "version": "0.0.0",
+  "description": "Theory Network",
+  "main": "Gruntfile.js",
+  "author": "Andre Davcev",
+  "license": "ISC",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theorynetwork/com.theory.library.git"
+  },
+  "dependencies": {
+    "@angular/common": "4.3.1",
+    "@angular/compiler": "4.3.1",
+    "@angular/compiler-cli": "4.3.1",
+    "@angular/core": "4.3.1",
+    "@angular/forms": "4.3.1",
+    "@angular/http": "4.3.1",
+    "@angular/platform-browser": "4.3.1",
+    "@angular/platform-browser-dynamic": "4.3.1",
+    "@ionic-native/core": "4.1.0",
+    "@ionic-native/geolocation": "4.1.0",
+    "@ionic-native/globalization": "4.1.0",
+    "@ionic-native/in-app-browser": "4.1.0",
+    "@ionic-native/keyboard": "4.1.0",
+    "@ionic-native/splash-screen": "4.1.0",
+    "@ionic-native/status-bar": "4.1.0",
+    "@ionic/storage": "2.0.1",
+    "angularfire2": "^4.0.0-rc.1",
+    "es6-shim": "^0.35.3",
+    "firebase": "^4.1.5",
+    "ionic-angular": "3.5.3",
+    "ionicons": "^3.0.0",
+    "rxjs": "5.4.2",
+    "sw-toolbox": "3.6.0",
+    "zone.js": "0.8.14"
+  }
+}

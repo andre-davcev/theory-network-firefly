@@ -8,87 +8,191 @@ import {Globalization}  from '@ionic-native/globalization';
 import {TNObject}          from '../base/theory.base.object';
 import {TNFirebaseUtility} from '../firebase/theory.firebase.utility';
 
-export class TNConfiguration extends TNObject
+
+export interface TNConfigOptions
 {
-    http            : Http;
-    platform        : Platform;
-    firebaseUtility : TNFirebaseUtility;
-    globalization   : Globalization;
+    http             : Http,
+    platform         : Platform,
+    globalization    : Globalization,
+    firebaseUtility  : TNFirebaseUtility,
+    path?            : string,
+    dependencies?    : Array<Observable<any>>
+}
 
-    constructor(http:Http, platform:Platform, firebaseUtility:TNFirebaseUtility, globalization:Globalization, options?:Object)
+
+export interface TNConfigProvider
+{
+    type   : string,
+    domain : {[id:string]:string}
+}
+
+export interface TNConfigService
+{
+    provider      : string,
+    service?      : string,
+    data?         : any,
+    localize?     : boolean,
+    blank?        : any,
+    foreignTable? : string,
+    exclusions?   : Array<string>,
+    reload?       : boolean
+}
+
+export interface TNConfigView
+{
+    dependencies : Array<string>,
+    directives?  : Array<string>
+}
+
+export interface TNConfig
+{
+    providers : {[id:string]:TNConfigProvider},
+    language  : string,
+    services  : {[id:string]:TNConfigService},
+    views     : {[id:string]:TNConfigView}
+}
+
+
+export interface TNModelSettings
+{
+    language  : string,
+    instance? : string
+}
+
+export interface TNModelProvider
+{
+    url  : string,
+    type : string
+}
+
+export interface TNModelService
+{
+    provider      : string,
+    service?      : string,
+    data?         : any,
+    localize?     : boolean,
+    blank?        : any,
+    foreignTable? : string,
+    reload?       : boolean,
+
+    name          : string,
+    providerType? : string,
+    type?         : 'array' | 'object' | 'primitive',
+    exclusions?   : {[id:string]:string},
+    proper?       : string,
+    children?     : {[id:string]:TNModelService},
+    parent?       : TNModelService,
+    url?          : string,
+    key?          : string
+}
+
+export interface TNModelView
+{
+    dependencies : Array<string>,
+    silent?      : Array<string>,
+    directives?  : Array<string>
+}
+
+export interface TNModel
+{
+    settings    : TNModelSettings,
+    providers?  : {[id:string]:TNModelProvider},
+    services?   : {[id:string]:TNModelService},
+    views?      : {[id:string]:TNModelView},
+    dictionary? : {[id:string]:any}
+}
+
+export class TNConfiguration
+{
+    protected http            : Http;
+    protected platform        : Platform;
+    protected firebaseUtility : TNFirebaseUtility;
+    protected globalization   : Globalization;
+
+    protected path                   : string;
+    protected dependencies           : Array<Observable<any>>;
+    protected observableDependencies : Observable<any>;
+
+    protected isSetup : boolean = false;
+    protected loading : boolean = false;
+    protected loaded  : boolean = false;
+
+    protected model : TNModel = {settings : {language : 'en'}};
+
+    constructor(options:TNConfigOptions)
     {
-        super(
-        {
-            path         : 'data',
-            dependencies : [],
-            model        : {settings : {}},
-            setup        : false,
-            loading      : false,
-            loaded       : false
-        });
+        this.http            = options.http;
+        this.platform        = options.platform;
+        this.firebaseUtility = options.firebaseUtility;
+        this.globalization   = options.globalization;
 
-        this.options(options);
+        this.path         = options.path         != null ? options.path         : 'data';
+        this.dependencies = options.dependencies != null ? options.dependencies : [];
+
         this.initialize(options);
-
-        this.http            = http;
-        this.platform        = platform;
-        this.firebaseUtility = firebaseUtility;
-        this.globalization   = globalization;
     }
 
-    configureProviders(data:Object)
+    protected initialize(options:TNConfigOptions)
     {
-        let
-        providers = data['providers'];
+        
+    }
+
+    protected configureProviders(data:TNConfig)
+    {
+        let providers:{[id:string]:TNConfigProvider} = data.providers;
 
         if (providers != null)
         {
-            let
-            instance  = data['settings']['instance'],
-            processed = {},
-            provider,
-            item;
+            let instance:string                         = this.model.settings.instance;
+            let processed:{[id:string]:TNModelProvider} = {};
+
+            let provider:TNConfigProvider;
 
             for (let key of Object.keys(providers))
             {
                 provider = providers[key];
 
-                item = processed[key] =
+                processed[key] =
                 {
                     url  : provider.domain[instance],
                     type : provider.type
                 };
             };
 
-            providers = processed;
+            this.model.providers = processed;
         }
     }
 
-    configureServices(data:Object)
+    protected configureServices(data:TNConfig)
     {
-        let
-        services = data['services'];
+        let configServices:{[id:string]:TNConfigService} = data.services;
 
-        if (services != null)
+        if (configServices != null)
         {
-            let
-            provider,
-            providers = data['providers'],
-            providerType,
-            heirarchy,
-            proper,
-            parent,
-            exclusions,
-            blank,
-            fk,
-            service,
-            level;
+            let services:{[id:string]:TNModelService} = {};
+            let provider:TNModelProvider;
+            let providers:{[id:string]:TNModelProvider} = this.model.providers;
+            let providerType:string;
+            let heirarchy:Array<string>;
+            let proper:string;
+            let parent:TNModelService;
+            let exclusions:{[id:string]:string};
+            let blank:any;
+            let fk;
+            let current:TNConfigService;
+            let service:TNModelService;
+            let level;
 
-            for (let name of Object.keys(services))
+            for (let name of Object.keys(configServices))
             {
                 // Get the service name
-                service      = services[name];
-                service.name = name;
+                current = configServices[name];
+
+                service =
+                {
+                    name     : name,
+                    provider : current.provider
+                };
 
                 // If the service provider is not runtime
                 if (service.provider !== 'runtime')
@@ -102,14 +206,8 @@ export class TNConfiguration extends TNObject
                     // If this has a firebase provider
                     if (providerType === 'firebase')
                     {
-                        // Set the blank object if it's not defined
-                        if (service.blank == null)
-                        {
-                            service.blank = {};
-                        }
-
                         // Get the blank object
-                        blank = service.blank;
+                        blank = service.blank = current.blank == null ? {} : current.blank;
 
                         // Check the blank object types (array, object, primitive)
                         if (blank instanceof Object)
@@ -129,14 +227,14 @@ export class TNConfiguration extends TNObject
                         }
 
                         // If we have exclusions replace the exclusions array with object
-                        if (service.exclusions != null)
+                        if (current.exclusions != null)
                         {
                             exclusions = {};
 
-                            for (let exclusion of service.exclusions)
+                            for (let exclusion of current.exclusions)
                             {
                                 exclusions[exclusion] = exclusion;
-                            };
+                            }
 
                             service.exclusions = exclusions;
                         }
@@ -160,8 +258,13 @@ export class TNConfiguration extends TNObject
                         };
 
                         // Set the proper name and initialize to blank children object
-                        service.proper   = proper;
-                        service.children = {};
+                        service.proper       = proper;
+                        service.children     = {};
+                        service.foreignTable = current.foreignTable;
+                        service.service      = current.service;
+                        service.data         = current.data;
+                        service.localize     = current.localize;
+                        service.reload       = current.reload;
 
                         // If we are not the top level then we have a parent
                         if (heirarchy.length > 1)
@@ -186,6 +289,8 @@ export class TNConfiguration extends TNObject
                             // whether the parent object reference is a primitive or object
                             if (service.foreignTable)
                             {
+                                // ToDo put this back
+/*
                                 fk = this.firebaseUtility.eval({key : service.service, object : parent.blank});
 
                                 if (!(fk.object instanceof Object))
@@ -200,6 +305,7 @@ export class TNConfiguration extends TNObject
                                 {
                                     service.type = 'object';
                                 }
+*/
                             }
                         }
                     }
@@ -216,60 +322,63 @@ export class TNConfiguration extends TNObject
                         }
                     }
                 }
+
+                services[name] = service;
             };
 
             // Give the providers and services to the firebase utility
-            this.firebaseUtility.options({providers : providers, services : services});
+//            this.firebaseUtility.options({providers : providers, services : services});
         }
     }
 
-    getLanguage(language:string) : Observable<Object>
+    protected getLanguage(language:string) : Observable<any>
     {
-        return this.http.get(this.filePath('localize.' + language)).map((response:Response) => response.json());
+        return this.http.
+
+        get(this.filePath('localize.' + language)).
+
+        map((response:Response) => response.json());
     }
 
-    processLanguage(language:string, model:Object)
+    protected processLanguage(language:string, dictionary:{[id:string]:any})
     {
-        let
-        views = model['views'],
-        dictionary,
+        let views:{[id:string]:any} = dictionary.views;
+        let viewDictionary:{[id:string]:any};
 
-        processView = (key:string, dictionary:Object) =>
+        let processView = (key:string, viewDictionary:{[id:string]:any}) =>
         {
-            let
-            include = dictionary['#include'];
+            let include = viewDictionary['#include'];
 
             if (include != null)
             {
                 for (let view of include)
                 {
-                    TNObject.extend(dictionary, processView(view, views[view]));
+                    TNObject.extend(viewDictionary, processView(view, views[view]));
                 }
 
-                delete dictionary['#include'];
+                delete viewDictionary['#include'];
             }
 
-            return dictionary;
+            return viewDictionary;
         };
 
-        this.properties['model'].dictionary = model;
+        this.model.dictionary = dictionary;
 
         for (let key of Object.keys(views))
         {
-            dictionary = views[key];
+            viewDictionary = views[key];
 
-            TNObject.extend(dictionary, processView(key, dictionary));
+            TNObject.extend(viewDictionary, processView(key, viewDictionary));
 
-            delete dictionary['#include'];
+            delete viewDictionary['#include'];
         }
     }
 
-    configureLanguage() : Observable<Object>
+    protected configureLanguage() : Observable<Object>
     {
-        let
-        model = this.properties['model'],
+        let model:TNModel = this.model;
 
-        getDefault = (language:string) : Observable<Object> =>
+        let getDefault = (language:string) : Observable<Object> =>
         {
             language = model.settings.language;
 
@@ -277,13 +386,13 @@ export class TNConfiguration extends TNObject
 
             return this.getLanguage(language).
 
-            map(dictionary =>
+            map((dictionary:{[id:string]:any}) =>
             {
                 console.log('Found default language: "' + language + '"');
 
                 this.processLanguage(language, dictionary);
 
-                console.log(this.properties['model'].dictionary);
+                console.log(model.dictionary);
 
                 return dictionary;
             }).
@@ -294,15 +403,15 @@ export class TNConfiguration extends TNObject
 
                 return Observable.throw(error);
             });
-        },
+        };
 
-        getLanguage = (language:string) : Observable<Object> =>
+        let getLanguage = (language:string) : Observable<Object> =>
         {
             console.log('Searching for language: "' + language + '"');
 
             return this.getLanguage(language).
 
-            map(dictionary =>
+            map((dictionary:{[id:string]:any}) =>
             {
                 console.log('Found language file: "' + language + '"');
 
@@ -313,8 +422,7 @@ export class TNConfiguration extends TNObject
 
             catch(error =>
             {
-                let
-                lang = language.split('-');
+                let lang:Array<string> = language.split('-');
 
                 if (lang.length === 2)
                 {
@@ -324,7 +432,7 @@ export class TNConfiguration extends TNObject
 
                     return this.getLanguage(language).
 
-                    map(dictionary =>
+                    map((dictionary:{[id:string]:any}) =>
                     {
                         console.log('Found non country specific language: "' + language + '"');
 
@@ -351,8 +459,7 @@ export class TNConfiguration extends TNObject
 
         if (this.platform.is('cordova'))
         {
-            let
-            observable = Observable.create((observer) =>
+            let observable = Observable.create((observer) =>
             {
                 this.globalization.getLocaleName().then(function(result)
                 {
@@ -389,40 +496,41 @@ export class TNConfiguration extends TNObject
         }
     }
 
-    setup(options:Object)
+    protected setup(options:Object)
     {
-        let
-        properties = this.properties,
-        model      = properties['model'],
+        let model:TNModel = this.model;
+        let config:TNConfig;
 
-        observable,
-        observableConfig,
-        observableInstance;
+        let observable;
+        let observableConfig;
+        let observableInstance;
 
-        properties['setup'] = true;
+        this.isSetup = true;
 
-        observableConfig = this.http.get(this.filePath('configuration')).
+        observableConfig = this.http.
+
+        get(this.filePath('configuration')).
 
         map((response:Response) => response.json()).
 
-        map((data) =>
+        map((data:TNConfig) =>
         {
-            TNObject.extend(model, data);
+            config = data;
 
-            model.settings.language = model.language;
+            model.settings.language = data.language;
 
             return data;
         });
 
-        observableInstance = this.http.get(this.filePath('instance')).
+        observableInstance = this.http.
+
+        get(this.filePath('instance')).
 
         map((response:Response) => response.json()).
 
-        map((data) =>
+        map((data:any) =>
         {
-            TNObject.extend(model.settings, data);
-
-            model.settings.language = model.language;
+            model.settings.instance = data.instance;
 
             return data;
         });
@@ -433,14 +541,12 @@ export class TNConfiguration extends TNObject
 
             subscribe(() =>
             {
-                this.configureProviders(model);
-                this.configureServices(model);
+                this.configureProviders(config);
+                this.configureServices(config);
 
-                TNObject.extend(properties['model'], model);
-
-                this.configureLanguage().subscribe((language) =>
+                this.configureLanguage().subscribe((language:string) =>
                 {
-                    properties['model'].settings.language = language;
+                    model.settings.language = language;
 
                     observer.next();
                     observer.complete();
@@ -456,59 +562,21 @@ export class TNConfiguration extends TNObject
         this.addDependency(observable);
     }
 
-    filePath(filename:string):string
+    protected filePath(filename:string):string
     {
-        return this.properties['path'] + '/' + filename + '.json';
+        return this.path + '/' + filename + '.json';
     }
 
-    addDependency(dependency)
+    protected addDependency(dependency)
     {
-        this.properties['dependencies'].push(dependency);
-    }
-
-    // Load the application json config file
-    load(options?:Object)
-    {
-        let
-        properties = this.properties,
-        observableDependencies;
-
-        if (!properties['loaded'] && !properties['loading'])
-        {
-            this.setup(options);
-
-            properties['loading'] = true;
-
-            observableDependencies = properties['observableDependencies'] = Observable.forkJoin(properties['dependencies']).
-
-            map(data =>
-            {
-                properties['loaded'] = true;
-            });
-        }
-        else
-        {
-            observableDependencies = properties['observableDependencies'] = Observable.create((observer) =>
-            {
-                observer.next();
-                observer.complete();
-            });
-        }
-
-        return properties['observableDependencies'];
+        this.dependencies.push(dependency);
     }
 
     // Load the application json config file
-    localizeService(options:Object)
+    protected localizeService(name:string, model:TNModel, service:TNModelService, data:any)
     {
-        let
-        name    = options['name'],
-        model   = options['model'],
-        service = options['service'],
-        data    = options['data'],
-
-        item,
-        dictionary;
+        let item:any;
+        let dictionary:{[id:string]:string};
 
         if (service.localize)
         {
@@ -536,33 +604,26 @@ export class TNConfiguration extends TNObject
         return data;
     }
 
-    getHTTP(options:Object)
+    protected getHTTP(name:string, service:TNModelService, model:TNModel)
     {
-        let
-        service = options['service'];
-
         return this.http.get(service.url).
 
         map((response:Response) => response.json()).
 
         map((data) =>
         {
-            options['data'] = data;
-
-            service.data = this.localizeService(options);
+            service.data = this.localizeService(name, model, service, data);
 
             return service.data;
         });
     }
 
-    get(options:Object)
+    protected get(name:string) : Observable<any>
     {
-        var
-        name    = options['name'],
-        model   = this.properties['model'],
-        service = model.services[name],
+        let model:TNModel          = this.model;
+        let service:TNModelService = model.services[name];
 
-        observable;
+        let observable:Observable<any>;
 
         if (service.providerType === 'firebase')
         {
@@ -570,21 +631,18 @@ export class TNConfiguration extends TNObject
         }
         else
         {
-            observable = this.getHTTP({name : name, service : service, model : model});
+            observable = this.getHTTP(name, service, model);
         }
 
         return observable;
     }
 
-    setKey(options:Object)
+    public setKey(name:string, key:string)
     {
-        var
-        name     = options['name'],
-        services = this.properties['model'].services,
-        service  = services[name],
-        key      = options['key'],
-        reload   = key !== service.key ? true : false,
-        item;
+        let services:{[id:string]:TNModelService} = this.model.services;
+        let service:TNModelService                = services[name];
+        let reload:boolean                        = key != service.key ? true : false;
+        let item:TNModelService;
 
         if (reload)
         {
@@ -602,16 +660,43 @@ export class TNConfiguration extends TNObject
         service.key = key;
     }
 
-    dictionary(view:string, scope?:Object)
+    public dictionary(view:string, scope?:any) : {[id:string]:string}
     {
-        let
-        dictionary = this.properties['model'].dictionary.views[view];
+        let dictionary:{[id:string]:string} = this.model.dictionary.views[view];
 
         if (scope != null)
         {
-            scope['dictionary'] = dictionary;
+            scope.dictionary = dictionary;
         }
 
         return dictionary;
+    }
+
+    // Load the application json config file
+    public load(options?:Object)
+    {
+        if (!this.loaded && !this.loading)
+        {
+            this.setup(options);
+
+            this.loading = true;
+
+            this.observableDependencies = Observable.forkJoin(this.dependencies).
+
+            map((data:any) =>
+            {
+                this.loaded = true;
+            });
+        }
+        else
+        {
+            this.observableDependencies = Observable.create((observer) =>
+            {
+                observer.next();
+                observer.complete();
+            });
+        }
+
+        return this.observableDependencies;
     }
 }
