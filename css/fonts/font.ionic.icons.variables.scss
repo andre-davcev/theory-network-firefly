@@ -1,4 +1,9 @@
-$tn-font-face-name-ionic-icons:     "Ionicons";
-$tn-font-face-url-ionic-icons:      url(../fonts/ionic.icons/font.awesome.ttf);
-$tn-font-family-ionic-icons:        $tn-font-face-name-ionic-icons;
-$tn-font-size-ionic-icons:          $tn-icon-font-size;
+$tn-font-face-name-ionic-icons:         "Ionicons";
+$tn-font-face-name-ionic-icons-2:       "Ionicons 2";
+$tn-font-family-ionic-icons:            $tn-font-face-name-ionic-icons;
+$tn-font-size-ionic-icons:              $tn-icon-font-size;
+
+$tn-font-face-url-ionic-icons-eot:      url(../fonts/ion.icons/2.0.1/ionicons.eot);
+$tn-font-face-url-ionic-icons-ttf:      url(../fonts/ion.icons/2.0.1/ionicons.ttf);
+$tn-font-face-url-ionic-icons-woff:     url(../fonts/ion.icons/2.0.1/ionicons.woff);
+$tn-font-face-url-ionic-icons-svg:      url(../fonts/ion.icons/2.0.1/ionicons.svg);

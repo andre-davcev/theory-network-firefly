@@ -1,11 +1,9 @@
+
 @font-face
 {
-    font-family: $tn-font-face-name-ionic-icons;
-    src: $tn-font-face-url-ionic-icons;
-}
-
-.tn-ico.fa-icon:before
-{
-    font-family: $tn-font-face-name-ionic-icons;
-    font-size: $tn-font-ionic-icons;
+    font-family: $tn-font-face-name-ionic-icons-2;
+    src: $tn-font-face-url-ionic-icons-eot format("embedded-opentype"), 
+         $tn-font-face-url-ionic-icons-ttf format("truetype"),
+         $tn-font-face-url-ionic-icons-woff format("woff"),
+         $tn-font-face-url-ionic-icons-svg format("svg");
 }
