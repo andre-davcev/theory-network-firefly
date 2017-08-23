@@ -1,0 +1,45 @@
+tn-rating
+{
+    ion-icon
+    {
+        &:before
+        {
+            font-size: $tn-rating-icon-size;
+            line-height: $tn-rating-icon-size;
+        }
+
+        &.tn-star
+        {
+            &:before
+            {
+                color: $ff-color-primary;
+            }
+
+            + .tn-star-outline
+            {
+                margin-left: -$tn-rating-icon-size - 0.2rem;
+            }
+        }
+
+        &.tn-star-half
+        {
+            &:before
+            {
+                color: $ff-color-primary;
+            }
+
+            + .tn-star-outline
+            {
+                margin-left: -$tn-rating-icon-size - 0.2rem;
+            }
+        }
+
+        &.tn-star-outline
+        {
+            &:before
+            {
+                color: $tn-rating-icon-color-border;
+            }
+        }
+    }
+}
