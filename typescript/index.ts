@@ -5,6 +5,7 @@ export * from './base/theory.base';
 export * from './components/component';
 export * from './components/icon/icon';
 export * from './components/rating/rating';
+export * from './components/rating/rating.popover';
 export * from './directives/theory.directives';
 export * from './firebase/theory.firebase';
 export * from './ionic/theory.ionic';

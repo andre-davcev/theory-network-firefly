@@ -1,5 +1,7 @@
 tn-rating
 {
+    cursor: pointer;
+
     ion-icon
     {
         &:before
@@ -38,7 +40,29 @@ tn-rating
         {
             &:before
             {
-                color: $tn-rating-icon-color-border;
+                color: $tn-rating-icon-color-border-inactive;
+            }
+        }
+    }
+
+    .tn-count
+    {
+        display: inline-block;
+        height: 100%;
+        line-height: 100%;
+        vertical-align: middle;
+    }
+
+    &.tn-active
+    {
+        ion-icon
+        {
+            &.tn-star-outline
+            {
+                &:before
+                {
+                    color: $tn-rating-icon-color-border;
+                }
             }
         }
     }

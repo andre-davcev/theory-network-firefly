@@ -4,8 +4,12 @@ import {SimpleChanges} from '@angular/core';
 import {Component}     from '@angular/core';
 import {ElementRef}    from '@angular/core';
 import {Renderer}      from '@angular/core';
+import {HostListener}  from '@angular/core';
 
-import {TNComponent} from '../component';
+import {PopoverController} from 'ionic-angular';
+
+import {TNComponent}         from '../component';
+import {TNRatingPopoverPage} from './rating.popover';
 
 /**
  * @name TNRating
@@ -38,9 +42,10 @@ import {TNComponent} from '../component';
     <ion-icon class="tn-star-half" name="star-half" *ngIf="halfs[4]"></ion-icon>
     <ion-icon class="tn-star-outline" name="star-outline"></ion-icon>
 
-    <div>{{ratingCount}}</div>
+    <label class="tn-count" *ngIf="ratingCount != null">{{ratingCount}}</label>
     `
 })
+
 
 export class TNRating extends TNComponent implements OnChanges
 {
@@ -49,6 +54,12 @@ export class TNRating extends TNComponent implements OnChanges
 
     @Input()
     protected ratingCount:number;
+
+    @Input()
+    protected ratingUser:number;
+
+    @Input()
+    protected edit:boolean = false;
 
     protected stars:Array<boolean> =
     [
@@ -68,21 +79,21 @@ export class TNRating extends TNComponent implements OnChanges
         false
     ];
 
-    constructor(elementRef:ElementRef, renderer: Renderer)
+    constructor(elementRef:ElementRef, renderer: Renderer, protected popoverController:PopoverController)
     {
         super
         ({
             elementRef : elementRef,
-            renderer   : renderer
+            renderer   : renderer,
+            component  : 'rating'
         });
     }
 
     ngOnChanges(changes: SimpleChanges)
     {
-        if (changes['rating'] != null)
-        {
-            this.changeRating(changes['rating'].currentValue);
-        }
+        let rating = changes['rating'] == null ? 0 : changes['rating'].currentValue;
+
+        this.changeRating(rating);
     }
 
     protected changeRating(rating:number)
@@ -109,6 +120,17 @@ export class TNRating extends TNComponent implements OnChanges
             {
                 halfs[i] = true;
             }
+        }
+    }
+
+    @HostListener('click', ['$event'])
+    click(event)
+    {
+        if (this.edit)
+        {
+            let popover = this.popoverController.create(TNRatingPopoverPage, {rating : this.ratingUser});
+
+            popover.present();
         }
     }
 }
