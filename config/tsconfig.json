@@ -10,7 +10,7 @@
 
     "include" :
     [
-        "build/modules/theory-network/*.ts"
+        "build/core/modules/theory-network/*.ts"
     ],
 
     "exclude" :
