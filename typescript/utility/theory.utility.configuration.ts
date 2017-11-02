@@ -5,8 +5,7 @@ import {Globalization}  from '@ionic-native/globalization';
 //ToDo: $locale
 //ToDo: $log
 
-import {TNObject}          from '../base/theory.base.object';
-import {TNFirebaseUtility} from '../firebase/theory.firebase.utility';
+import {TNObject} from '../base/theory.base.object';
 
 
 export interface TNConfigOptions
@@ -14,7 +13,6 @@ export interface TNConfigOptions
     http             : Http,
     platform         : Platform,
     globalization    : Globalization,
-    firebaseUtility  : TNFirebaseUtility,
     path?            : string,
     dependencies?    : Array<Observable<any>>
 }
@@ -104,10 +102,9 @@ export interface TNModel
 
 export class TNConfiguration
 {
-    protected http            : Http;
-    protected platform        : Platform;
-    protected firebaseUtility : TNFirebaseUtility;
-    protected globalization   : Globalization;
+    protected http          : Http;
+    protected platform      : Platform;
+    protected globalization : Globalization;
 
     protected path                   : string;
     protected dependencies           : Array<Observable<any>>;
@@ -123,7 +120,6 @@ export class TNConfiguration
     {
         this.http            = options.http;
         this.platform        = options.platform;
-        this.firebaseUtility = options.firebaseUtility;
         this.globalization   = options.globalization;
 
         this.path         = options.path         != null ? options.path         : 'data';
@@ -673,30 +669,36 @@ export class TNConfiguration
     }
 
     // Load the application json config file
-    public load(options?:Object)
+    public load(options?:Object):Observable<any>
     {
-        if (!this.loaded && !this.loading)
+        let observable:Observable<any>;
+
+        if (this.loaded)
+        {
+            observable = Observable.create((observer) =>
+            {
+                observer.next();
+                observer.complete();
+            });
+        }
+        else if (this.loading)
+        {
+            observable = this.observableDependencies;
+        }
+        else
         {
             this.setup(options);
 
             this.loading = true;
 
-            this.observableDependencies = Observable.forkJoin(this.dependencies).
+            observable = this.observableDependencies = Observable.forkJoin(this.dependencies).
 
             map((data:any) =>
             {
                 this.loaded = true;
             });
         }
-        else
-        {
-            this.observableDependencies = Observable.create((observer) =>
-            {
-                observer.next();
-                observer.complete();
-            });
-        }
 
-        return this.observableDependencies;
+        return observable;
     }
 }
