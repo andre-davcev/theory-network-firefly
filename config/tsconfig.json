@@ -5,12 +5,13 @@
         "emitDecoratorMetadata"  : true,
         "experimentalDecorators" : true,
         "sourceMap"              : true,
-        "declaration"            : true
+        "declaration"            : true,
+        "rootDir"                : "build/modules/theory-network"
     },
 
     "include" :
     [
-        "app/build/modules/core/theory-network/*.ts"
+        "*.ts"
     ],
 
     "exclude" :
