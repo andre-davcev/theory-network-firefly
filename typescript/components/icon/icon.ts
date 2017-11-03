@@ -2,7 +2,7 @@ import {Input}  from '@angular/core';
 import {OnInit} from '@angular/core';
 
 import {TNComponent}        from '../component';
-import {TNComponentOptions} from '../component';
+import {TNComponentOptions} from '../component.options';
 
 /**
  * @name TNIcon

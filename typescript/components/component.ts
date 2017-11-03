@@ -3,15 +3,7 @@ import {Renderer}    from '@angular/core';
 import {Input}       from '@angular/core';
 import {HostBinding} from '@angular/core';
 
-export interface TNComponentOptions
-{
-    elementRef:ElementRef,
-    renderer:Renderer,
-    component?:string,
-    prefix?:string,
-    active?:boolean,
-    visible?:boolean
-}
+import {TNComponentOptions} from './component.options';
 
 /**
  * Base class for all Theory Network components.
