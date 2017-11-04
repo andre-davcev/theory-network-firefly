@@ -16,8 +16,7 @@
 
     "exclude" :
     [
-        "node_modules",
-        "module"
+        "node_modules"
     ],
 
     "atom" :
