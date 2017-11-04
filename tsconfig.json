@@ -1,39 +1,23 @@
 {
     "compilerOptions" :
     {
-        "target"                       : "es5",
-        "module"                       : "es2015",
-        "emitDecoratorMetadata"        : true,
-        "experimentalDecorators"       : true,
-        "allowSyntheticDefaultImports" : true,
-        "declaration"                  : false,
-        "moduleResolution"             : "node",
-        "noUnusedLocals"               : true,
-        "strict"                       : true,
-        "sourceMap"                    : true,
-
-        "lib" :
-        [
-            "dom",
-            "es2015"
-        ],
-
-        "typeRoots" :
-        [
-            "node_modules/@types"
-        ],
-
-        "types" :
-        [
-            "firebase"
-        ]
+        "module"                 : "commonjs",
+        "emitDecoratorMetadata"  : true,
+        "experimentalDecorators" : true,
+        "sourceMap"              : true,
+        "declaration"            : true,
+        "rootDir"                : "typescript"
     },
 
-    "filesGlob" :
+    "include" :
     [
-        "**/*.ts",
-        "!node_modules/**/*",
-        "node_modules/firebase/firebase.d.ts"
+        "index.ts"
+    ],
+
+    "exclude" :
+    [
+        "node_modules",
+        "module"
     ],
 
     "atom" :
