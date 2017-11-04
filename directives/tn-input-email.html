@@ -1,6 +1,0 @@
-<form class="tn-input-container tn-email" name="form" ng-class="{'tn-input-status-verified' : isVerified(), 'tn-input-status-error' : isError(), 'tn-input-icon-rounded' : roundedIcons}">
-    <input class="tn-input" type="email" name="input" ng-model="value" placeholder="{{placeholder}}" ng-required="required" ng-minlength="2" ng-maxlength="{{maxLength}}" ng-pattern="{{pattern}}" ng-trim="trim">
-
-    <ion-spinner icon="spiral" class="spinner spinner-spiral {{spinnerClasses}}" ng-show="verifying"></ion-spinner>
-    <div class="tn-input-clear" ng-show="clear && showClear" ng-click="clearValue()"></div>
-</div>
