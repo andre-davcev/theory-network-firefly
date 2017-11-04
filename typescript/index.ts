@@ -30,7 +30,16 @@ import {TNUtilModule}       from './utility/module';
     ],
 
     declarations : [],
-    exports      : []
+    
+    exports :
+    [
+        TNBaseModule,
+        TNComponentModule,
+        TNConfigModule,
+        TNDirectivesModule,
+        TNIonicModule,
+        TNUtilModule
+    ]
 })
 
 export class TheoryNetworkModule
