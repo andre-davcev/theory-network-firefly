@@ -1,9 +1,7 @@
 import {Input, Output, EventEmitter, ViewChild, OnInit, ElementRef} from '@angular/core';
 import {FormGroup, FormControl, Validators}                         from '@angular/forms';
 
-import {TNDirective}  from './directive';
-
-export class TNInput extends TNDirective implements OnInit
+export class TNInput implements OnInit
 {
     showClear:boolean = false;
     state:string      = '';
@@ -39,7 +37,7 @@ export class TNInput extends TNDirective implements OnInit
 
     constructor()
     {
-        super();
+
     }
 
     ngOnInit()

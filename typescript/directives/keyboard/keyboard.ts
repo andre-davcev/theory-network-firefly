@@ -1,7 +1,4 @@
-import {Directive}    from '@angular/core';
-
-import {TNDirective}  from '../components/input/directive';
-
+import {Directive} from '@angular/core';
 
 @Directive
 ({
@@ -17,14 +14,14 @@ import {TNDirective}  from '../components/input/directive';
     }
 }) 
 
-export class TNKeyboard extends TNDirective
+export class TNKeyboard
 {
     keyboard:boolean      = false;
     keyboardShown:boolean = false;
 
     constructor()
     {
-        super();
+
     }
 
     keyboardShow()

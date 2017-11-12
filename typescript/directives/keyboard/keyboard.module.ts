@@ -10,13 +10,7 @@ import {TNKeyboard} from './keyboard';
     exports      : []
 })
 
-export class TNDirectivesModule
+export class TNModuleKeyboard
 {
-    static forRoot():ModuleWithProviders
-    {
-        return {
-            ngModule  : TNDirectivesModule,
-            providers : []
-        }
-    }
+
 }

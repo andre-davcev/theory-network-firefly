@@ -1,6 +1,6 @@
 import {Component}    from '@angular/core';
 
-import {TNInput}  from './input';
+import {TNInput}  from '../input';
 
 @Component
 ({

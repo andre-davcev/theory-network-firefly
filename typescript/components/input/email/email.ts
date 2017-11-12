@@ -1,7 +1,7 @@
 import {Component, OnInit}    from '@angular/core';
 
-import {TNRegex}  from '../../utility/regex';
-import {TNInput}  from './input';
+import {TNRegex}  from '../../../utility/regex';
+import {TNInput}  from '../input';
 
 @Component
 ({
