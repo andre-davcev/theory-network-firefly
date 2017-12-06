@@ -23,6 +23,11 @@ export class TNObject
         }
     }
 
+    static clone<T>(value: T): T
+    {
+        return JSON.parse(JSON.stringify(value));
+    }
+
     options(options?:Object): Object
     {
         if (options != null)

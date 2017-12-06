@@ -27,9 +27,7 @@ import {TNRating}            from './rating';
     [
         TNRatingPopoverPage,
         TNRating
-    ],
-
-    entryComponents : [TNRatingPopoverPage]
+    ]
 })
 
 export class TNModuleRating

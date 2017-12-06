@@ -35,6 +35,12 @@ export {TNStatusBarStyle}      from './config/status.bar.style';
 export {TNModuleKeyboard} from './directives/keyboard/keyboard.module';
 export {TNKeyboard}       from './directives/keyboard/keyboard';
 
+export {Version}     from './directives/version/version';
+export {VersionUtil} from './directives/version/version.util';
+
+export {TNObjectFirestore} from './firebase/models/object';
+export {TNUtilFirebase}    from './firebase/providers/util';
+
 export {TNPage} from './ionic/page';
 
 export {TNRegex} from './utility/regex';
