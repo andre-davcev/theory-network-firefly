@@ -14,7 +14,7 @@ import {NavParams} from 'ionic-angular';
     `
 })
 
-export class TNRatingPopoverPage
+export class RatingPopoverPage
 {
     rating:number;
 

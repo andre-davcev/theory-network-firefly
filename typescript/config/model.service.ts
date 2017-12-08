@@ -1,4 +1,4 @@
-export interface TNModelService
+export interface ModelService
 {
     provider      : string,
     service?      : string,
@@ -13,8 +13,8 @@ export interface TNModelService
     type?         : 'array' | 'object' | 'primitive',
     exclusions?   : {[id:string]:string},
     proper?       : string,
-    children?     : {[id:string]:TNModelService},
-    parent?       : TNModelService,
+    children?     : {[id:string]:ModelService},
+    parent?       : ModelService,
     url?          : string,
     key?          : string
 }

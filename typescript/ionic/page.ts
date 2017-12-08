@@ -1,6 +1,6 @@
 import {MobileConfiguration} from '../config/config.mobile';
 
-export class TNPage
+export class Page
 {
     protected configuration:MobileConfiguration;
     protected dictionary:any = {};

@@ -1,7 +1,7 @@
-import {Component, OnInit}    from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import {TNRegex}  from '../../../utility/regex';
-import {TNInput}  from '../input';
+import {Regex}   from '../../../utility/regex';
+import {TNInput} from '../input';
 
 @Component
 ({
@@ -18,7 +18,7 @@ import {TNInput}  from '../input';
     `
 })
 
-export class TNInputEmail extends TNInput implements OnInit
+export class InputEmail extends TNInput implements OnInit
 {
     constructor()
     {
@@ -27,7 +27,7 @@ export class TNInputEmail extends TNInput implements OnInit
 
     ngOnInit()
     {
-        this.pattern = TNRegex.email;
+        this.pattern = Regex.email;
 
         super.ngOnInit();
     }

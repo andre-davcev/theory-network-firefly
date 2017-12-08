@@ -14,7 +14,7 @@ import {Directive} from '@angular/core';
     }
 }) 
 
-export class TNKeyboard
+export class Keyboard
 {
     keyboard:boolean      = false;
     keyboardShown:boolean = false;

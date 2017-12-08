@@ -8,15 +8,15 @@ import {Globalization}  from '@ionic-native/globalization';
 
 import {TNObject} from '../base/object';
 
-import {TNConfigOptions}  from './config.options';
-import {TNConfigProvider} from './config.provider';
-import {TNConfigService}  from './config.service';
-import {TNModelProvider}  from './model.provider';
-import {TNModelService}   from './model.service';
-import {TNModel}          from './model';
-import {TNConfig}         from './config.config';
+import {ConfigOptions}  from './config.options';
+import {ConfigProvider} from './config.provider';
+import {ConfigService}  from './config.service';
+import {ModelProvider}  from './model.provider';
+import {ModelService}   from './model.service';
+import {Model}          from './model';
+import {Config}         from './config.config';
 
-export class TNConfiguration
+export class Configuration
 {
     protected http          : Http;
     protected platform      : Platform;
@@ -30,9 +30,9 @@ export class TNConfiguration
     protected loading : boolean = false;
     protected loaded  : boolean = false;
 
-    protected model : TNModel = {settings : {language : 'en'}};
+    protected model : Model = {settings : {language : 'en'}};
 
-    constructor(options:TNConfigOptions)
+    constructor(options:ConfigOptions)
     {
         this.http            = options.http;
         this.platform        = options.platform;
@@ -44,21 +44,21 @@ export class TNConfiguration
         this.initialize(options);
     }
 
-    protected initialize(options:TNConfigOptions)
+    protected initialize(options:ConfigOptions)
     {
         
     }
 
-    protected configureProviders(data:TNConfig)
+    protected configureProviders(data:Config)
     {
-        let providers:{[id:string]:TNConfigProvider} = data.providers;
+        let providers:{[id:string]:ConfigProvider} = data.providers;
 
         if (providers != null)
         {
             let instance:string                         = this.model.settings.instance;
-            let processed:{[id:string]:TNModelProvider} = {};
+            let processed:{[id:string]:ModelProvider} = {};
 
-            let provider:TNConfigProvider;
+            let provider:ConfigProvider;
 
             for (let key of Object.keys(providers))
             {
@@ -75,23 +75,23 @@ export class TNConfiguration
         }
     }
 
-    protected configureServices(data:TNConfig)
+    protected configureServices(data:Config)
     {
-        let configServices:{[id:string]:TNConfigService} = data.services;
+        let configServices:{[id:string]:ConfigService} = data.services;
 
         if (configServices != null)
         {
-            let services:{[id:string]:TNModelService} = {};
-            let provider:TNModelProvider;
-            let providers:{[id:string]:TNModelProvider} = this.model.providers;
+            let services:{[id:string]:ModelService} = {};
+            let provider:ModelProvider;
+            let providers:{[id:string]:ModelProvider} = this.model.providers;
             let providerType:string;
             let heirarchy:Array<string>;
             let proper:string;
-            let parent:TNModelService;
+            let parent:ModelService;
             let exclusions:{[id:string]:string};
             let blank:any;
-            let current:TNConfigService;
-            let service:TNModelService;
+            let current:ConfigService;
+            let service:ModelService;
             let level;
 
             for (let name of Object.keys(configServices))
@@ -287,7 +287,7 @@ export class TNConfiguration
 
     protected configureLanguage() : Observable<Object>
     {
-        let model:TNModel = this.model;
+        let model:Model = this.model;
 
         let getDefault = (language:string) : Observable<Object> =>
         {
@@ -409,8 +409,8 @@ export class TNConfiguration
 
     protected setup(options:Object)
     {
-        let model:TNModel = this.model;
-        let config:TNConfig;
+        let model:Model = this.model;
+        let config:Config;
 
         let observable;
         let observableConfig;
@@ -424,7 +424,7 @@ export class TNConfiguration
 
         map((response:Response) => response.json()).
 
-        map((data:TNConfig) =>
+        map((data:Config) =>
         {
             config = data;
 
@@ -484,7 +484,7 @@ export class TNConfiguration
     }
 
     // Load the application json config file
-    protected localizeService(name:string, model:TNModel, service:TNModelService, data:any)
+    protected localizeService(name:string, model:Model, service:ModelService, data:any)
     {
         let item:any;
         let dictionary:{[id:string]:string};
@@ -515,7 +515,7 @@ export class TNConfiguration
         return data;
     }
 
-    protected getHTTP(name:string, service:TNModelService, model:TNModel)
+    protected getHTTP(name:string, service:ModelService, model:Model)
     {
         return this.http.get(service.url).
 
@@ -531,8 +531,8 @@ export class TNConfiguration
 
     protected get(name:string) : Observable<any>
     {
-        let model:TNModel          = this.model;
-        let service:TNModelService = model.services[name];
+        let model:Model          = this.model;
+        let service:ModelService = model.services[name];
 
         let observable:Observable<any>;
 
@@ -550,10 +550,10 @@ export class TNConfiguration
 
     public setKey(name:string, key:string)
     {
-        let services:{[id:string]:TNModelService} = this.model.services;
-        let service:TNModelService                = services[name];
-        let reload:boolean                        = key != service.key ? true : false;
-        let item:TNModelService;
+        let services:{[id:string]:ModelService} = this.model.services;
+        let service:ModelService                = services[name];
+        let reload:boolean                      = key != service.key ? true : false;
+        let item:ModelService;
 
         if (reload)
         {

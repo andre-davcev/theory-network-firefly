@@ -1,4 +1,4 @@
-export interface TNModelView
+export interface ModelView
 {
     dependencies : Array<string>,
     silent?      : Array<string>,

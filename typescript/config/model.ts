@@ -1,13 +1,13 @@
-import {TNModelSettings}  from './model.settings';
-import {TNModelProvider}  from './model.provider';
-import {TNModelService}   from './model.service';
-import {TNModelView}      from './model.view';
+import {ModelSettings}  from './model.settings';
+import {ModelProvider}  from './model.provider';
+import {ModelService}   from './model.service';
+import {ModelView}      from './model.view';
 
-export interface TNModel
+export interface Model
 {
-    settings    : TNModelSettings,
-    providers?  : {[id:string]:TNModelProvider},
-    services?   : {[id:string]:TNModelService},
-    views?      : {[id:string]:TNModelView},
+    settings    : ModelSettings,
+    providers?  : {[id:string]:ModelProvider},
+    services?   : {[id:string]:ModelService},
+    views?      : {[id:string]:ModelView},
     dictionary? : {[id:string]:any}
 }

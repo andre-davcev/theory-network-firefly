@@ -1,9 +1,9 @@
 import {Geolocation} from '@ionic-native/geolocation';
 import {StatusBar}   from '@ionic-native/status-bar';
 
-import {TNConfigOptions} from './config.options';
+import {ConfigOptions} from './config.options';
 
-export interface TNMobileConfigOptions extends TNConfigOptions
+export interface MobileConfigOptions extends ConfigOptions
 {
     statusBar       : StatusBar,
     geolocation     : Geolocation,

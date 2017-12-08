@@ -3,7 +3,7 @@ import {Observable}     from 'rxjs/Rx';
 import {Platform}       from 'ionic-angular';
 import {Globalization}  from '@ionic-native/globalization';
 
-export interface TNConfigOptions
+export interface ConfigOptions
 {
     http             : Http,
     platform         : Platform,

@@ -1,4 +1,4 @@
-export enum TNStatusBarStyle
+export enum StatusBarStyle
 {
     Default,
     Light,

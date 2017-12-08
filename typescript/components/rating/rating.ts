@@ -8,11 +8,11 @@ import {HostListener}  from '@angular/core';
 
 import {PopoverController} from 'ionic-angular';
 
-import {TNComponent}         from '../component';
-import {TNRatingPopoverPage} from './rating.popover';
+import {Component as TNComponent} from '../component';
+import {RatingPopoverPage}        from './rating.popover';
 
 /**
- * @name TNRating
+ * @name Rating
  * @description
  */
 
@@ -47,7 +47,7 @@ import {TNRatingPopoverPage} from './rating.popover';
 })
 
 
-export class TNRating extends TNComponent implements OnChanges
+export class Rating extends TNComponent implements OnChanges
 {
     @Input()
     protected rating:number;
@@ -128,7 +128,7 @@ export class TNRating extends TNComponent implements OnChanges
     {
         if (this.edit)
         {
-            let popover = this.popoverController.create(TNRatingPopoverPage, {rating : this.ratingUser});
+            let popover = this.popoverController.create(RatingPopoverPage, {rating : this.ratingUser});
 
             popover.present();
         }

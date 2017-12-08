@@ -6,8 +6,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 
 import {IonicModule} from 'ionic-angular';
 
-import {TNRatingPopoverPage} from './rating.popover';
-import {TNRating}            from './rating';
+import {RatingPopoverPage} from './rating.popover';
+import {Rating}            from './rating';
 
 @NgModule
 ({
@@ -19,18 +19,18 @@ import {TNRating}            from './rating';
 
     declarations :
     [
-        TNRatingPopoverPage,
-        TNRating
+        RatingPopoverPage,
+        Rating
     ],
 
     exports :
     [
-        TNRatingPopoverPage,
-        TNRating
+        RatingPopoverPage,
+        Rating
     ]
 })
 
-export class TNModuleRating
+export class ModuleRating
 {
 
 }

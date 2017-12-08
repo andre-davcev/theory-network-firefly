@@ -1,20 +1,20 @@
 import {Input}  from '@angular/core';
 import {OnInit} from '@angular/core';
 
-import {TNComponent}        from '../component';
-import {TNComponentOptions} from '../component.options';
+import {Component}        from '../component';
+import {ComponentOptions} from '../component.options';
 
 /**
- * @name TNIcon
+ * @name Icon
  * @description
  */
 
-export class TNIcon extends TNComponent implements OnInit
+export class Icon extends Component implements OnInit
 {
     @Input()
     public name:string;
 
-    constructor(options:TNComponentOptions)
+    constructor(options:ComponentOptions)
     {
         super
         ({

@@ -4,16 +4,16 @@ import {StatusBar}      from '@ionic-native/status-bar';
 //import {Keyboard}       from '@ionic-native/keyboard';
 //ToDo: $log
 
-import {TNObject}        from '../base/object';
-import {TNConfiguration} from './config';
-import {TNModel}         from './model';
-import {TNModelService}  from './model.service';
-import {TNModelView}     from './model.view';
+import {TNObject}      from '../base/object';
+import {Configuration} from './config';
+import {Model}         from './model';
+import {ModelService}  from './model.service';
+import {ModelView}     from './model.view';
 
-import {TNMobileConfigOptions} from './config.mobile.options';
-import {TNStatusBarStyle}      from './status.bar.style';
+import {MobileConfigOptions} from './config.mobile.options';
+import {StatusBarStyle}      from './status.bar.style';
 
-export class MobileConfiguration extends TNConfiguration
+export class MobileConfiguration extends Configuration
 {
     protected statusBar:StatusBar;
     protected geolocation:Geolocation;
@@ -24,21 +24,21 @@ export class MobileConfiguration extends TNConfiguration
     protected getLocation:boolean;
     protected locationFound:boolean;
 
-    constructor(options:TNMobileConfigOptions)
+    constructor(options:MobileConfigOptions)
     {
         super(options);
 
         this.statusBar   = options.statusBar;
         this.geolocation = options.geolocation;
 
-        this.statusBarStyle = options.statusBarStyle == null ? TNStatusBarStyle.Default : options.statusBarStyle;
-        this.statusBarHide  = options.statusBarHide  == null ? false                    : options.statusBarHide;
-        this.statusBarHex   = options.statusBarHex   == null ? '#FFFFFF'                : options.statusBarHex;
-        this.getLocation    = options.getLocation    == null ? false                    : options.getLocation;
-        this.locationFound  = options.locationFound  == null ? false                    : options.locationFound;
+        this.statusBarStyle = options.statusBarStyle == null ? StatusBarStyle.Default : options.statusBarStyle;
+        this.statusBarHide  = options.statusBarHide  == null ? false                  : options.statusBarHide;
+        this.statusBarHex   = options.statusBarHex   == null ? '#FFFFFF'              : options.statusBarHex;
+        this.getLocation    = options.getLocation    == null ? false                  : options.getLocation;
+        this.locationFound  = options.locationFound  == null ? false                  : options.locationFound;
     }
 
-    protected initialize(options:TNMobileConfigOptions)
+    protected initialize(options:MobileConfigOptions)
     {
         super.initialize(options);
 
@@ -127,13 +127,13 @@ export class MobileConfiguration extends TNConfiguration
 
     protected getDependencies(scope:any, dependencies:Array<string>) : Observable<any>
     {
-        let services:{[id:string]:TNModelService} = this.model.services;
+        let services:{[id:string]:ModelService} = this.model.services;
         let observables:Array<Observable<any>> = [];
         let observable:Observable<any>;
 
         for (let dependency of dependencies)
         {
-            let service:TNModelService = services[dependency];
+            let service:ModelService = services[dependency];
             let data:any               = service.data;
 
             if (data != null && ((service.providerType === 'firebase' && !data.reload()) || (service.providerType !== 'firebase' && !service.reload)))
@@ -142,7 +142,7 @@ export class MobileConfiguration extends TNConfiguration
                 {
                     scope[service.proper] = service.data;
 
-                    let parent:TNModelService = service.parent;
+                    let parent:ModelService = service.parent;
 
                     while (parent != null)
                     {
@@ -164,7 +164,7 @@ export class MobileConfiguration extends TNConfiguration
                     {
                         scope[service.proper] = service.data;
 
-                        let parent:TNModelService = service.parent;
+                        let parent:ModelService = service.parent;
 
                         while (parent != null)
                         {
@@ -190,8 +190,8 @@ export class MobileConfiguration extends TNConfiguration
     {
         return Observable.create((observer) =>
         {
-            let model:TNModel    = this.model;
-            let view:TNModelView = model.views[stateName];
+            let model:Model    = this.model;
+            let view:ModelView = model.views[stateName];
             let scopeKey:string;
 
 

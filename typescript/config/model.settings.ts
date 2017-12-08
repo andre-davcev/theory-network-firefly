@@ -1,4 +1,4 @@
-export interface TNModelSettings
+export interface ModelSettings
 {
     language  : string,
     instance? : string

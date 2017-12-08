@@ -1,4 +1,4 @@
-export interface TNConfigService
+export interface ConfigService
 {
     provider      : string,
     service?      : string,

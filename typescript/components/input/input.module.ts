@@ -6,9 +6,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 
 import {IonicModule} from 'ionic-angular';
 
-import {TNInputEmail}    from './email/email';
-import {TNInputPassword} from './password/password';
-import {TNInputText}     from './text/text';
+import {InputEmail}    from './email/email';
+import {InputPassword} from './password/password';
+import {InputText}     from './text/text';
 
 @NgModule
 ({
@@ -22,20 +22,20 @@ import {TNInputText}     from './text/text';
 
     declarations :
     [
-        TNInputEmail,
-        TNInputPassword,
-        TNInputText
+        InputEmail,
+        InputPassword,
+        InputText
     ],
 
     exports :
     [
-        TNInputEmail,
-        TNInputPassword,
-        TNInputText
+        InputEmail,
+        InputPassword,
+        InputText
     ]
 })
 
-export class TNModuleInput
+export class ModuleInput
 {
 
 }

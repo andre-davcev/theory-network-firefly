@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs/Subscription';
 
 export class AppComponent implements OnDestroy
 {
-    private subscriptions: Array<Subscription> = [];
+    private _subscriptions: Array<Subscription> = [];
 
     constructor()
     {
@@ -12,7 +12,7 @@ export class AppComponent implements OnDestroy
 
     ngOnDestroy()
     {
-        for (const subscription of this.subscriptions)
+        for (const subscription of this._subscriptions)
         {
             subscription.unsubscribe();
         }
@@ -20,8 +20,8 @@ export class AppComponent implements OnDestroy
 
     public subscriptionsAdd(subscription: Subscription) : number
     {
-        this.subscriptions.push(subscription);
+        this._subscriptions.push(subscription);
 
-        return this.subscriptions.length - 1;
+        return this._subscriptions.length - 1;
     }
 }

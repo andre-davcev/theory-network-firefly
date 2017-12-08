@@ -1,7 +1,7 @@
 import {ElementRef}  from '@angular/core';
 import {Renderer}    from '@angular/core';
 
-export interface TNComponentOptions
+export interface ComponentOptions
 {
     elementRef:ElementRef,
     renderer:Renderer,

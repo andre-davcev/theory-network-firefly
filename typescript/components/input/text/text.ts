@@ -1,6 +1,6 @@
-import {Component}    from '@angular/core';
+import {Component} from '@angular/core';
 
-import {TNInput}  from '../input';
+import {TNInput} from '../input';
 
 @Component
 ({
@@ -17,7 +17,7 @@ import {TNInput}  from '../input';
     `
 })
 
-export class TNInputText extends TNInput
+export class InputText extends TNInput
 {
     constructor()
     {

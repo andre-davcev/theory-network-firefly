@@ -3,14 +3,14 @@ import {Renderer}    from '@angular/core';
 import {Input}       from '@angular/core';
 import {HostBinding} from '@angular/core';
 
-import {TNComponentOptions} from './component.options';
+import {ComponentOptions} from './component.options';
 
 /**
  * Base class for all Theory Network components.
  */
 
 /** @hidden */
-export class TNComponent
+export class Component
 {
     /** @hidden */
     protected elementRef:ElementRef;
@@ -34,7 +34,7 @@ export class TNComponent
     @Input()
     protected visible:boolean = true;
 
-    constructor(options:TNComponentOptions)
+    constructor(options:ComponentOptions)
     {
         this.elementRef = options.elementRef;
         this.renderer   = options.renderer;
