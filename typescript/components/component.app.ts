@@ -18,10 +18,8 @@ export class AppComponent implements OnDestroy
         }
     }
 
-    public subscriptionsAdd(subscription: Subscription) : number
+    public subscriptionsAdd(...subscriptions: Array<Subscription>)
     {
-        this._subscriptions.push(subscription);
-
-        return this._subscriptions.length - 1;
+        this._subscriptions.concat(subscriptions);
     }
 }
