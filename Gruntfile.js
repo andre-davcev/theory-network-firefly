@@ -13,7 +13,7 @@ module.exports = function(grunt)
         {
             name   : 'theory-network',
             path   : '.',
-            source : '<%= module.path %>/typescript',
+            source : '<%= module.path %>/ts',
             build  : '../app/modules/<%= module.name %>'
         },
 
