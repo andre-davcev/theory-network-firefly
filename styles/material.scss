@@ -1,4 +1,35 @@
-.gm-text.gm-header-4                {font-size: $gm-font-size-header-4;        font-family: $gm-font-family-header-4;        font-color: $gm-font-color-header-4; white-space: $gm-text-wrap-header-4;}
+// Elevation
+.gm-elevated-1  {box-shadow: $gm-elevated-1;}
+.gm-elevated-2  {box-shadow: $gm-elevated-2;}
+.gm-elevated-3  {box-shadow: $gm-elevated-3;}
+.gm-elevated-4  {box-shadow: $gm-elevated-4;}
+.gm-elevated-5  {box-shadow: $gm-elevated-5;}
+.gm-elevated-6  {box-shadow: $gm-elevated-6;}
+.gm-elevated-7  {box-shadow: $gm-elevated-7;}
+.gm-elevated-8  {box-shadow: $gm-elevated-8;}
+
+.gm-elevated-1-up  {box-shadow: $gm-elevated-1-up;}
+.gm-elevated-2-up  {box-shadow: $gm-elevated-2-up;}
+.gm-elevated-3-up  {box-shadow: $gm-elevated-3-up;}
+.gm-elevated-4-up  {box-shadow: $gm-elevated-4-up;}
+.gm-elevated-5-up  {box-shadow: $gm-elevated-5-up;}
+.gm-elevated-6-up  {box-shadow: $gm-elevated-6-up;}
+.gm-elevated-7-up  {box-shadow: $gm-elevated-7-up;}
+.gm-elevated-8-up  {box-shadow: $gm-elevated-8-up;}
+
+.gm-bar-nav                         {box-shadow: $gm-elevated-4;}
+.gm-bar-tab                         {box-shadow: $gm-elevated-4-up;}
+.gm-button-raised                   {box-shadow: $gm-elevated-2;}
+.gm-button-raised:active            {box-shadow: $gm-elevated-6;}
+.gm-button-raised:hover             {box-shadow: $gm-elevated-6;}
+.gm-button-action-floating          {box-shadow: $gm-elevated-8;}
+.gm-button-action-floating:active   {box-shadow: $gm-elevated-14;}
+.gm-button-action-floating:active   {box-shadow: $gm-elevated-14;}
+.gm-card                            {box-shadow: $gm-elevated-2;}
+
+/*
+// Text
+// .gm-text.gm-header-4                {font-size: $gm-font-size-header-4;        font-family: $gm-font-family-header-4;        font-color: $gm-font-color-header-4; white-space: $gm-text-wrap-header-4;}
 .gm-text.gm-header-3                {font-size: $gm-font-size-header-3;        font-family: $gm-font-family-header-3;        font-color: $gm-font-color-header-3; white-space: $gm-text-wrap-header-3;}
 .gm-text.gm-header-2                {font-size: $gm-font-size-header-2;        font-family: $gm-font-family-header-2;        font-color: $gm-font-color-header-2; white-space: $gm-text-wrap-header-2;}
 .gm-text.gm-header-1                {font-size: $gm-font-size-header-1;        font-family: $gm-font-family-header-1;        font-color: $gm-font-color-header-1; white-space: $gm-text-wrap-header-1;}
@@ -14,3 +45,4 @@
 .gm-text.gm-button                  {font-size: $gm-font-size-button;          font-family: $gm-font-family-button;          font-color: $gm-font-color-button;   white-space: $gm-text-wrap-button; text-transform: uppercase;}
 
 .gm-app-bar .gm-text                {font-size: $gm-font-size-title;           font-family: $gm-font-family-title;           font-color: $gm-font-color-title;    white-space: $gm-text-wrap-title;}
+*/
