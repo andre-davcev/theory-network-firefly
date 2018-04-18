@@ -1,3 +1,9 @@
+$core-auth-logo-height:           5.7rem;
+$core-auth-logo-width:            $core-auth-logo-height;
+
+$core-firefly-color-primary:      $app-color-primary;
+$core-firefly-color-light:        $gm-color-green-light-a400;
+
 @keyframes firefly
 {
      0% {fill: $core-firefly-color-primary;}
