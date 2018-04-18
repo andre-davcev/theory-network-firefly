@@ -30,6 +30,13 @@
       "tags": []
     },
     {
+      "name": "firefly/state",
+      "root": "libs/firefly/state/src",
+      "test": "../../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "library/classes",
       "root": "libs/library/classes/src",
       "test": "../../../../test.js",
