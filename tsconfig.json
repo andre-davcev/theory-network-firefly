@@ -1,28 +1,28 @@
 {
-    "compilerOptions" :
-    {
-        "module"                 : "commonjs",
-        "emitDecoratorMetadata"  : true,
-        "experimentalDecorators" : true,
-        "sourceMap"              : true,
-        "declaration"            : true,
-        "rootDir"                : "ts"
-    },
-
-    "include" :
-    [
-        "index.ts"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
     ],
-
-    "exclude" :
-    [
-        "node_modules"
+    "lib": [
+      "es2017",
+      "dom"
     ],
-
-    "atom" :
-    {
-        "rewriteTsconfig" : false
-    },
-
-    "compileOnSave" : false
+    "baseUrl": ".",
+    "paths": {
+      "@theory/*": [
+        "libs/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
