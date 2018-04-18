@@ -1,0 +1,35 @@
+import { EventEmitter, OnInit, ElementRef } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+export declare class TNInput implements OnInit {
+    showClear: boolean;
+    state: string;
+    validators: any[];
+    form: FormGroup;
+    input: FormControl;
+    inputElement: ElementRef;
+    name: string;
+    value: any;
+    placeholder: string;
+    hostClasses: string;
+    required: boolean;
+    minLength: number;
+    maxLength: number;
+    pattern: string;
+    trim: boolean;
+    clear: boolean;
+    validate: boolean;
+    verifying: boolean;
+    valid: boolean;
+    validInput: boolean;
+    spinner: string;
+    spinnerClasses: string;
+    roundedIcons: boolean;
+    change: EventEmitter<any>;
+    constructor();
+    ngOnInit(): void;
+    clearValue(): void;
+    isVerified(): boolean;
+    isError(): boolean;
+    isVerifying(): boolean;
+    onChange(value: string): void;
+}

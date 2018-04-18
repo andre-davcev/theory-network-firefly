@@ -1,0 +1,18 @@
+<img class="c-background-image" [src]="iconUrl">
+<div class="c-background"></div>
+
+<div class="c-icon-container" (click)="clickedIcon()">
+    <img class="c-icon" [src]="iconUrl">
+    <p class="c-icon-placeholder" *ngIf="edit && !icon">{{iconPlaceholder}}</p>
+</div>
+
+<form class="c-container" novalidate [formGroup]="formGroup" *ngIf="edit">
+    <input class="c-icon-hidden" type="hidden" formControlName="icon">
+    <input class="c-title"       type="text"   formControlName="title"    [placeholder]="titlePlaceholder">
+    <input class="c-subtitle"    type="text"   formControlName="subtitle" [placeholder]="subtitlePlaceholder">
+</form>
+
+<div class="c-container" *ngIf="!edit">
+    <h3 class="c-title">{{title}}</h3>
+    <h4 class="c-subtitle">{{subtitle}}</h4>
+</div>

@@ -1,0 +1,6 @@
+<ion-list>
+    <button ion-item *ngFor="let beacon of beacons" (click)="go(beacon)">
+        <ion-label>{{'pages.publisher.beacon.minor.majorLabel' | translate}}</ion-label>
+        <ion-note item-end>{{'pages.publisher.beacon.minor.major' | translate}}</ion-note>
+    </button>
+</ion-list>

@@ -1,0 +1,144 @@
+.app-detail-header
+{
+    background-color: $app-color-black; //$app-color-white;
+    min-height: $app-detail-header-height;
+    text-align: center;
+    padding: 16px;
+    width: 100%;
+
+    .ff-icon
+    {
+        max-width: 200px;
+        min-height: 115px;
+        margin-left: -15px;
+        padding: 25px 0 20px 0;
+    }
+}
+
+.scroll-content
+{
+    .ff-list
+    {
+        box-shadow: none;
+
+        > .item
+        {
+            &:first-child
+            {
+                .card
+                {
+                    margin-top: 1.2rem;
+                }
+            }
+
+            .card
+            {
+                margin-top: 0;
+            }
+        }
+
+        .input-wrapper
+        {
+            > .label
+            {
+                margin-bottom: 0;
+
+                .card
+                {
+                    box-shadow: $app-list-box-shadow;
+                    border-radius: $app-list-card-border-radius;
+
+                    .row
+                    {
+                        .col
+                        {
+                            .button
+                            {
+                                color: $app-color-dark;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.scroll-content
+{
+    .list
+    {
+        .item 
+        {
+            color: $app-list-item-font-color;
+            border: none;
+
+            &:first-child,
+            &:last-child
+            {
+                border: none;
+            }
+
+            .item-inner
+            {
+                border: none;
+            }
+    
+            .note
+            {
+                color: $app-list-item-font-color-note;
+            }
+        }
+    }
+}
+
+ion-item-group
+{
+    box-shadow: $app-list-box-shadow;
+    margin-bottom: 0.3rem;
+}
+
+ion-list
+{
+    .item
+    {
+        &.item-md
+        {
+            > ion-icon
+            {
+                &[item-start]
+                {
+                    + .item-inner
+                    {
+                        margin-left: 8px;
+                    }
+                }
+            }
+        }
+
+        > ion-icon
+        {
+            color: $app-list-item-icon-color;
+            font-size: 3.4rem;
+
+            &[item-start]
+            {
+                min-width: 3.4rem;
+                margin-top: 5px;
+                margin-bottom: 5px;
+
+                &.ion-md-lock,
+                &.ion-ios-lock
+                {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        ion-label
+        {
+            font-size: 1.7rem;
+            letter-spacing: -0.4px;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "compilerOptions" :
+    {
+        "module"                 : "commonjs",
+        "emitDecoratorMetadata"  : true,
+        "experimentalDecorators" : true,
+        "sourceMap"              : true,
+        "declaration"            : true,
+        "rootDir"                : "ts"
+    },
+
+    "include" :
+    [
+        "index.ts"
+    ],
+
+    "exclude" :
+    [
+        "node_modules"
+    ],
+
+    "atom" :
+    {
+        "rewriteTsconfig" : false
+    },
+
+    "compileOnSave" : false
+}

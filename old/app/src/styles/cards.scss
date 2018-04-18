@@ -1,0 +1,133 @@
+ion-slide
+{
+    background-color: transparent;
+
+    .slide-zoom
+    {
+        height: 100%;
+
+        .ff-card
+        {
+            background-color: $app-slide-color-background;
+            height: calc(100% - #{$app-slide-height-margin});
+            width: calc(100% - #{$app-slide-width-margin});
+            margin: $app-slide-margin;
+            margin-top: $app-slide-margin-top;
+            margin-bottom: $app-slide-margin-bottom;
+            box-shadow: 0 1.5rem 2.5rem 0 rgba(0,0,0,0.20);
+            border-radius: 1.4rem;
+            padding: $app-slide-padding;
+
+/*
+            &:before
+            {
+                display: block;
+                position: absolute;
+                content: '';
+                height: $app-slide-close-size;
+                width: $app-slide-close-size;
+                top: -$app-slide-close-size-half + $app-slide-margin-top;
+                left: -$app-slide-close-size-half + $app-slide-margin;
+                border-radius: $app-slide-close-size-half;
+                background-color: $app-slide-color-background;
+                border-color: $app-slide-close-border-color;
+                border-style: solid;
+                border-width: $app-slide-close-border-width;
+                box-shadow: $app-slide-close-box-shadow;
+                cursor: pointer;
+            }
+
+            &:after
+            {
+                display: block;
+                position: absolute;
+                content: '\d7';
+                height: $app-slide-close-size;
+                width: $app-slide-close-size;
+                top: -$app-slide-close-size-half + $app-slide-margin-top - 0.2rem;
+                left: -$app-slide-close-size-half + $app-slide-margin;
+                font-size: $app-slide-close-size + 0.6rem; 
+                color: $app-slide-close-border-color;
+                line-height: $app-slide-close-size;
+                text-align: center;
+                cursor: pointer;
+            }
+*/
+            > .ff-title
+            {
+                margin: 0;
+                margin-top: 1.5rem;
+                line-height: 2.6rem;
+                font-size: 2.0rem;
+                font-weight: 400;
+                text-transform: uppercase;
+                color: rgba(0, 0, 0, 0.7);
+            }
+
+            > .ff-short
+            {
+                margin: 0;
+                margin-top: 0.8rem;
+                font-size: 1.8rem;
+                font-weight: 400;
+                line-height: 2.1rem;
+                color: rgba(0, 0, 0, 0.54);
+            }
+
+            > .ff-image
+            {
+                width: 100%;
+                margin-top: 2.7rem;
+                box-shadow: 0 1.5rem 3.0rem rgba(0, 0, 0, 0.25);
+            }
+
+            > .ff-button
+            {
+                padding: 0;
+                margin: 0;
+                margin-top: 4.1rem;
+                text-transform: uppercase;
+                background-color: $app-color-primary;
+                color: $app-color-white;
+                font-size: 1.6rem;
+                line-height: 1.6rem;
+                font-weight: 900;
+                padding: 1.6rem 2.4rem;
+                border-radius: 2.4rem;
+            }
+
+            > .ff-paragraph
+            {
+                margin: 0;
+                margin-top: 1.3rem;
+                font-size: 1.4rem;
+                line-height: 1.7rem;
+                color: rgba(0, 0, 0, 0.54);
+            }
+        }
+    }
+}
+
+ion-slides
+{
+    .swiper-pagination-bullet-active
+    {
+        background-color: $app-color-white;
+    }
+
+    .swiper-container
+    {
+        .swiper-pagination
+        {
+            bottom: 2.8rem;
+        } 
+    }
+}
+
+.card
+{
+    .button 
+    {
+        height: $app-card-height;
+    }
+}
