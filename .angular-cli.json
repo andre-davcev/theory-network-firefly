@@ -30,6 +30,13 @@
       "tags": []
     },
     {
+      "name": "library/classes",
+      "root": "libs/library/classes/src",
+      "test": "../../../../test.js",
+      "appRoot": "",
+      "tags": []
+    },
+    {
       "name": "$workspaceRoot",
       "root": ".",
       "appRoot": ""

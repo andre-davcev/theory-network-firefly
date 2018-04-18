@@ -6,12 +6,12 @@ import {HostBinding}   from '@angular/core';
 
 import {Subscription} from 'rxjs/Subscription';
 
-export class AppComponent implements OnChanges, OnDestroy
+export class ComponentApp implements OnChanges, OnDestroy
 {
     @HostBinding('class')
     @Input()
     public class: string;
-  
+
     private _classPrefix = 'app-';
     public classes: { [id: string]: string } = {};
 
@@ -57,10 +57,10 @@ export class AppComponent implements OnChanges, OnDestroy
             this.classes[elementClass] = '';
           }
         }
-    
+
         this.classesRender();
     }
-    
+
     public classesRemove(...classes: Array<string>): void
     {
         for (const elementClass of classes)
@@ -70,20 +70,20 @@ export class AppComponent implements OnChanges, OnDestroy
                 delete this.classes[elementClass];
             }
         }
-    
+
         this.classesRender();
     }
-    
+
     private classesRender()
     {
         this.class = Object.keys(this.classes).join(' ');
     }
-    
+
     get classPrefix(): string
     {
         return this._classPrefix;
     }
-    
+
     set classPrefix(classPrefix: string)
     {
         this._classPrefix = classPrefix;
