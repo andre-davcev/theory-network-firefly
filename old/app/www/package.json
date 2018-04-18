@@ -1,0 +1,11 @@
+{
+    "name": "Firefly",
+    "version": "0.0.1",
+    "author": "Ionic Framework",
+    "homepage": "http://ionicframework.com/",
+    "private": true,
+    "dependencies": {
+      "font-awesome": "4.7.0"
+    }
+  }
+  

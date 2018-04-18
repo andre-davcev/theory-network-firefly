@@ -1,0 +1,167 @@
+$c-item-header-height:                      167px;
+$c-item-header-color-background:          white;
+$c-item-header-color-font:                white;
+$c-item-header-padding:                     1.6rem;     // $content-padding
+$c-item-header-blur:                        10px;
+$c-item-header-background-image:            rgba(0, 0, 0, 0.3);
+
+$c-item-header-title-font-size:             2.0rem;
+$c-item-header-title-font-color:            $c-item-header-color-font;
+$c-item-header-title-letter-spacing:        -0.48px;
+
+$c-item-header-subtitle-font-size:          1.6rem;
+$c-item-header-subtitle-font-color:         $c-item-header-color-font;
+$c-item-header-subtitle-letter-spacing:     -0.34px;
+
+$c-item-header-placeholder-font-color:      $c-item-header-color-font;
+
+$c-item-header-selection-color-font:        $app-color-dark;
+$c-item-header-selection-color-background:  $c-item-header-color-font;
+
+$c-item-header-icon-size:                   9.2rem;
+$c-item-header-icon-placeholder-font-color: $c-item-header-color-font;
+$c-item-header-icon-placeholder-font-size:  $c-item-header-title-font-size;
+
+app-item-header
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: $c-item-header-height;
+    background-color: $c-item-header-color-background;
+    padding: $c-item-header-padding - 0.4rem;
+    align-items: center;
+    overflow: hidden;
+
+    mask-image: linear-gradient(black 0%, black 100%);
+
+    > .c-background-image,
+    > .c-background
+    {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+    }
+
+    > .c-background-image
+    {
+        width: 100%;
+        height: auto;
+        top: -63%;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        background-position: 50% 50%;
+        filter: blur($c-item-header-blur);
+    }
+
+    > .c-background
+    {
+        background: $c-item-header-background-image;
+    }
+
+    > .c-icon-container
+    {
+        position: relative;
+        display: flex;
+        width: $c-item-header-icon-size;
+        height: $c-item-header-icon-size;
+        margin-bottom: 8px;
+        align-items: center;
+        flex-direction: column;
+
+        > .c-icon
+        {
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border-width: 3px;
+            border-color: $c-item-header-color-font;
+            border-style: solid;
+        }
+
+        > .c-icon-placeholder
+        {
+            position: relative;
+            display: block;
+            color: $c-item-header-icon-placeholder-font-color;
+            font-size: $c-item-header-icon-placeholder-font-size;
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+            opacity: 0.9;
+            padding-top: 1px;
+        }
+    }
+
+    div.c-container
+    {
+        > .c-title
+        {
+            margin-bottom: 8px;
+        }
+    }
+
+    > .c-container
+    {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+
+        > .c-title,
+        > .c-subtitle
+        {
+            position: relative;
+            display: block;
+            background-color: transparent;
+            font-weight: 600;
+            margin: 0;
+            padding: 0;
+            color: $c-item-header-color-font;
+            border: none;
+            width: 80%;
+            text-align: center;
+            
+            &::placeholder
+            {
+                color: $c-item-header-placeholder-font-color;
+                opacity: 0.8;
+                text-align: center;
+            }
+
+            &::selection
+            {
+                color: $c-item-header-selection-color-font; 
+                background: $c-item-header-selection-color-background;
+            }
+
+            &:focus
+            {
+                outline: none;
+            }
+        }
+    
+        > .c-title
+        {
+            font-size: $c-item-header-title-font-size;
+            line-height: $c-item-header-title-font-size;
+            letter-spacing: $c-item-header-title-letter-spacing;
+            margin-bottom: 3px;
+        }
+    
+        > .c-subtitle
+        {
+            font-size: $c-item-header-subtitle-font-size;
+            line-height: $c-item-header-subtitle-font-size;
+            letter-spacing:$c-item-header-subtitle-letter-spacing;
+        }
+    }
+}

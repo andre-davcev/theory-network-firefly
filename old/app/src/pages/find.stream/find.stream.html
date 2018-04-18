@@ -1,0 +1,31 @@
+<ion-list class="ff-list">
+    <ion-item no-lines class="ff-primary-background" *ngFor="let subscription of subscriptions" (click)="go()">
+        <ion-card>
+            <img [src]="subscription.photo">
+
+            <ion-item>
+                <h2>{{subscription.name}}</h2>
+                <p>{{subscription.tagline}}</p>
+            </ion-item>
+
+            <ion-row>
+                <ion-col>
+                    <button ion-button clear icon-start (click)="subscribe(subscription)">
+                        <ff-icon name="check" [active]="subscription.subscribed"></ff-icon>
+                        {{subscription.subscribed ? 'pages.find.stream.subscribed' : 'pages.find.stream.subscribe' | translate}}
+                    </button>
+                </ion-col>
+
+                <ion-col text-right>
+                    <button ion-button icon-start clear>
+
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ion-item>
+</ion-list>
+
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>

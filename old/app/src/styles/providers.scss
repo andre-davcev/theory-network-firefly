@@ -1,0 +1,119 @@
+.tn-provider
+{
+    &.tn-button
+    {
+        color: $tn-provider-button-color-text;
+        font-size: $tn-provider-button-font-size;
+        font-family: $tn-provider-button-font-family;
+        text-shadow: $tn-provider-button-text-shadow;
+
+        .tn-item
+        {
+            position: relative;
+            display: inline-block;
+            line-height: $tn-line-height-none;
+            padding-left: $tn-provider-button-icon-width-with-margin;
+
+            &:before
+            {
+                box-sizing: border-box;
+                display: block;
+                position: absolute;
+                top: -0.3rem; left: 0.4rem;
+                height: $tn-provider-button-icon-height; width: $tn-provider-button-icon-width;
+                font-family: $tn-provider-button-icon-font-family;
+                font-size: $tn-provider-button-icon-font-size;
+                border-radius: $tn-provider-button-icon-border-radius;
+                background-color: $tn-provider-button-icon-color-background;
+                text-shadow: none;
+                text-align: center;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    &.tn-twitter
+    {
+        &.tn-button
+        {
+            background-color: $twitter-button-color-background;
+
+            &:not([disabled]):hover
+            {
+                background-color: $twitter-button-color-background;
+            }
+
+            &.md-focused
+            {
+                background-color: $twitter-button-color-background;
+            }
+
+            .tn-item
+            {
+                &:before
+                {
+                    color: $twitter-button-icon-color-text;
+                    content: $twitter-button-icon-content;
+                    padding-top: 0.3rem; padding-left: 0.0rem;
+                }
+            }
+        }
+    }
+
+    &.tn-google
+    {
+        &.tn-button
+        {
+            background-color: $google-button-color-background;
+    
+            &:not([disabled]):hover
+            {
+                background-color: $google-button-color-background;
+            }
+    
+            &.md-focused
+            {
+                background-color: $google-button-color-background;
+            }
+    
+            .tn-item
+            {
+                &:before
+                {
+                    color: $google-button-icon-color-text;
+                    content: $google-button-icon-content;
+                    padding-top: 0.5rem; padding-left: 0.1rem;
+                    font-size: $google-button-icon-font-size;
+                }
+            }
+        }
+    }
+    
+    &.tn-facebook
+    {
+        &.tn-button
+        {
+            background-color: $fb-button-color-background;
+
+            &:not([disabled]):hover
+            {
+                background-color: $fb-button-color-background;
+            }
+
+            &.md-focused
+            {
+                background-color: $fb-button-color-background;
+            }
+
+            .tn-item
+            {
+                &:before
+                {
+                    color: $fb-button-icon-color-text;
+                    content: $fb-button-icon-content;
+                    padding-top: 0.5rem; padding-left: 0.4rem;
+                }
+            }
+        }
+    }
+}
