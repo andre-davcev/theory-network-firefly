@@ -22,14 +22,6 @@
     {
       "project": "apps/firefly/mobile/e2e/tsconfig.e2e.json",
       "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "apps/firefly/web/src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "apps/firefly/web/e2e/tsconfig.e2e.json",
-      "exclude": "**/node_modules/**"
     }
   ],
   "test": {
@@ -42,32 +34,6 @@
       "name": "firefly/mobile",
       "root": "apps/firefly/mobile/src",
       "outDir": "dist/apps/firefly/mobile",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "../../../../test.js",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "../../../../tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
-        "styles.css"
-      ],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      },
-      "tags": []
-    },
-    {
-      "name": "firefly/web",
-      "root": "apps/firefly/web/src",
-      "outDir": "dist/apps/firefly/web",
       "assets": [
         "assets",
         "favicon.ico"
