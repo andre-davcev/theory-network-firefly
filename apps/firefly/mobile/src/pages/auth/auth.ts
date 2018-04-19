@@ -8,12 +8,12 @@ import {Observable} from 'rxjs/Observable';
 import {Observer}   from 'rxjs/Observer';
 import {filter, switchMap, take, tap} from 'rxjs/operators';
 
-import {AppComponent} from 'theory-network';
+import {ComponentApp} from '@theory/library/classes';
 
 import {PageTabs} from '../tabs/tabs';
 import {User}     from '../../models/user';
 
-import {AuthProvider}  from '../../enums/auth.provider'; 
+import {AuthProvider}  from '../../enums/auth.provider';
 import {Email}         from '../../models/email';
 import {Password}      from '../../models/password';
 
@@ -30,8 +30,8 @@ import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail, UserCreate, S
     templateUrl : 'auth.html'
 })
 
-export class PageLogin extends AppComponent
-{    
+export class PageLogin extends ComponentApp
+{
     public AuthProvider: any = AuthProvider;
 
     @Select(StateUser.authenticated) userAuthenticated$: Observable<boolean>;
@@ -72,7 +72,7 @@ export class PageLogin extends AppComponent
                     take(1)
                 )
             ).
-            
+
             subscribe(() => this.ready = true)
         );
     }

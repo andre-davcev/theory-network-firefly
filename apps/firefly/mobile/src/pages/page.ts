@@ -1,7 +1,7 @@
 
-import {AppComponent} from 'theory-network';
+import {ComponentApp} from '@theory/library/classes';
 
-export class Page extends AppComponent
+export class Page extends ComponentApp
 {
     constructor()
     {

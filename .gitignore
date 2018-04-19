@@ -7,8 +7,6 @@
 
 # dependencies
 /node_modules
-**/node_modules
-**/plugins
 
 # IDEs and editors
 /.idea
@@ -42,3 +40,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Ionic
+**/node_modules
+**/plugins
+**/www/build

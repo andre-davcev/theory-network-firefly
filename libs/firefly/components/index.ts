@@ -1,1 +1,1 @@
-export { ComponentsModule } from './src/components.module';
+export { ModuleComponents } from './src/components.module';
