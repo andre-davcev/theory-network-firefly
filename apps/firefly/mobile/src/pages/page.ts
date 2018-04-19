@@ -1,5 +1,5 @@
 
-import {ComponentApp} from '@theory/library/classes';
+import {ComponentApp} from '@theory/core/classes';
 
 export class Page extends ComponentApp
 {

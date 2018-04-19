@@ -24,7 +24,7 @@
     "postinstall": "./node_modules/.bin/nx postinstall",
     "help": "./node_modules/.bin/nx help",
 
-    "ionic": "cd ./apps/firefly/mobile && ionic"
+    "firefly-mobile": "cd ./apps/firefly/mobile && ionic"
   },
   "private": true,
   "dependencies": {
@@ -37,8 +37,8 @@
     "@angular/platform-browser-dynamic": "5.2.9",
     "@angular/router": "5.2.9",
     "core-js": "^2.4.1",
-    "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19",
+    "rxjs": "^5.5.8",
+    "zone.js": "^0.8.20",
     "@nrwl/nx": "1.0.0",
     "@ngrx/effects": "5.2.0",
     "@ngrx/router-store": "5.0.1",

@@ -2,7 +2,7 @@ import {Directive}  from '@angular/core';
 import {ElementRef} from '@angular/core';
 import {Renderer}   from '@angular/core';
 
-import {Icon} from '@theory/library/classes';
+import {Icon} from '@theory/core/classes';
 
 @Directive
 ({
