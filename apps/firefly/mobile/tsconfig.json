@@ -14,12 +14,13 @@
         "lib" :
         [
             "dom",
-            "es2017"
+            "es2015"
         ],
 
         "paths" :
         {
-            "*" : ["modules/*"]
+            "@theory/*" : ["../../../libs/*"],
+            "@app/env"  : ["src/environments/environment"]
         },
 
         "typeRoots" :
@@ -43,7 +44,7 @@
     [
         "node_modules"
     ],
-    
+
     "compileOnSave" : false,
 
     "atom":

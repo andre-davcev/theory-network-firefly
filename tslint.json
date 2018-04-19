@@ -46,7 +46,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
     "no-misused-new": true,
@@ -88,8 +88,8 @@
     "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
-    "component-class-suffix": true,
-    "directive-class-suffix": true,
+    "component-class-suffix": false,
+    "directive-class-suffix": false,
 
     "nx-enforce-module-boundaries": [
       true,

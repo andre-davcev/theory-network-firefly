@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FireflyComponent } from './firefly/firefly.component';
+import { ComponentFirefly } from './firefly/firefly.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [FireflyComponent]
+  declarations: [ComponentFirefly]
 })
-export class ComponentsModule {}
+export class ModuleComponents {}

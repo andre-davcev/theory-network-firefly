@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './firefly.component.html',
   styleUrls: ['./firefly.component.scss']
 })
-export class FireflyComponent implements OnInit {
+export class ComponentFirefly implements OnInit {
   constructor() {}
 
   ngOnInit() {}

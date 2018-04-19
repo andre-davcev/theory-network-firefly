@@ -1,7 +1,7 @@
-import { ComponentsModule } from './components.module';
+import { ModuleComponents } from './components.module';
 
-describe('ComponentsModule', () => {
+describe('ModuleComponents', () => {
   it('should work', () => {
-    expect(new ComponentsModule()).toBeDefined();
+    expect(new ModuleComponents()).toBeDefined();
   });
 });
