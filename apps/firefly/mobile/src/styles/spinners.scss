@@ -1,0 +1,10 @@
+.spinner-crescent
+{
+    > svg
+    {
+        > circle
+        {
+            stroke: $app-color-primary;
+        }
+    }
+}

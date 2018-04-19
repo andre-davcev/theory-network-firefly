@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{'pages.publisher.beacon.title' | translate}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only>
+                <ion-icon name="cloud-upload"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+  
+<ion-content>
+    <ion-item-group>
+        <ion-item-divider color="primary"></ion-item-divider>
+
+        <ion-item>
+            <ion-toggle checked="true" color="secondary"></ion-toggle>
+            <ion-label>{{'pages.publisher.beacon.private' | translate}}</ion-label>
+        </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+        <ion-item-divider color="primary">{{'pages.publisher.beacon.major' | translate}}</ion-item-divider>
+
+        <ion-item>
+            <ion-label>{{'pages.publisher.beacon.label' | translate}}</ion-label>
+            <ion-input type="text" value=""></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>{{'pages.publisher.beacon.value' | translate}}</ion-label>
+            <ion-input type="number" value=""></ion-input>
+        </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+        <ion-item-divider color="primary">{{'pages.publisher.beacon.minor' | translate}}</ion-item-divider>
+
+        <ion-item>
+            <ion-label>{{'pages.publisher.beacon.label' | translate}}</ion-label>
+            <ion-input type="text" value=""></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>{{'pages.publisher.beacon.value' | translate}}</ion-label>
+            <ion-input type="number" value=""></ion-input>
+        </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+        <ion-item-divider color="primary">{{dictionary.minor}}</ion-item-divider>
+
+        <ion-item>
+            <ion-label>{{'pages.publisher.beacon.label' | translate}}</ion-label>
+            <ion-input type="text" value=""></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>{{'pages.publisher.beacon.value' | translate}}</ion-label>
+            <ion-input type="number" value=""></ion-input>
+        </ion-item>
+    </ion-item-group>
+</ion-content>
