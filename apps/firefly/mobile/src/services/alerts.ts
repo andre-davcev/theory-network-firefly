@@ -1,0 +1,64 @@
+import {Injectable}     from '@angular/core';
+
+import {Alert} from '../models/alert';
+import {Temp}  from './temp';
+
+@Injectable()
+export class Alerts
+{
+    alerts:Array<Alert>;
+    unviewed:number;
+
+    constructor(temp:Temp)
+    {
+        this.alerts = temp.alerts;
+
+        let unviewed = this.alerts.length;
+
+        for (let alert of this.alerts)
+        {
+            if (alert.viewed)
+            {
+                unviewed++;
+            }
+        }
+
+        this.unviewed = unviewed;
+    }
+
+    view(index:number)
+    {
+        console.log(this.alerts);
+        console.log(index);
+        if (!this.alerts[index].viewed)
+        {
+            this.unviewed--;
+
+            this.alerts[index].viewed = true;
+        }
+
+        if (this.unviewed == 0)
+        {
+            this.unviewed = -1;
+        }
+    }
+
+    delete(index:number)
+    {
+        let size = this.alerts.length;
+
+        this.alerts.splice(index, 1);
+
+        if (size > 1)
+        {
+            if (index == (size - 1))
+            {
+                this.view(index - 1);
+            }
+            else
+            {
+                this.view(index);
+            }
+        }
+    }
+}

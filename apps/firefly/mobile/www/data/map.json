@@ -1,0 +1,81 @@
+{
+    "position" : {},
+
+    "control" : {},
+
+    "zoom" : 13,
+
+    "options" :
+    {
+        "streetViewControl"  : false,
+        "panControl"         : false,
+        "mapTypeControl"     : false,
+        "zoomControl"        : false,
+        "zoomControlOptions" :
+        {
+            "position" : 4
+        },
+        "styles" :
+        [
+            {"featureType" : "landscape.man_made",              "stylers" : [{ "color" : "#F9F5ED" }]},
+            {"featureType" : "landscape.natural",               "stylers" : [{ "color" : "#F9F5ED" }]},
+            {"featureType" : "water",                           "stylers" : [{ "hue"   : "#A1D9F1" }, {"saturation" : 30}]},
+            {"featureType" : "poi.business",                    "stylers" : [{ "hue"   : "#FBCADD" }, {"saturation" : 30}]},
+            {"featureType" : "poi.government",                  "stylers" : [{ "hue"   : "#F9F5ED" }, {"saturation" : 30}]},
+            {"featureType" : "poi.park",                        "stylers" : [{ "hue"   : "#B6DFA2" }, {"saturation" : 30}]},
+            {"featureType" : "poi.medical",                     "stylers" : [{ "hue"   : "#FBCADD" }, {"saturation" : 30}]},
+            {"featureType" : "poi.school",                      "stylers" : [{ "hue"   : "#EBDFC7" }, {"saturation" : 30}]},
+            {"featureType" : "poi.sports_complex",              "stylers" : [{ "hue"   : "#F9F5ED" }, {"saturation" : 30}, {"lightness" : 100}]},
+            {"featureType" : "road.highway",                    "stylers" : [{ "hue"   : "#FCFCDD" }, {"saturation" : 30}, {"lightness" : -20}]},
+            {"featureType" : "road.highway.controlled_access",  "stylers" : [{ "hue"   : "#FADC00" }, {"saturation" : 30}, {"lightness" : 25}]},
+            {"featureType" : "road.arterial",                   "stylers" : [{ "hue"   : "#FBFAF9" }, {"saturation" : 30}, {"lightness" : 30}]},
+            {"featureType" : "road.local",                      "stylers" : [{ "hue"   : "#D1CEC8" }, {"saturation" : 30}, {"lightness" : 30}]},
+            {"featureType" : "transit.station.airport",         "stylers" : [{ "hue"   : "#CEB2DA" }, {"saturation" : 30}]}
+        ]
+    },
+
+    "markerOptions" :
+    {
+        "labelClass" : "ff-marker",
+        "title" : "Needed for Protractor"
+    },
+
+    "infoWindow" :
+    {
+        "closeBoxURL" : "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+    },
+
+    "orb" :
+    {
+        "labelClass"  : "tn-map-style tn-map-orb",
+        "labelAnchor" : "10 10",
+
+        "labelStyle" :
+        {
+            "opacity" : 1
+        },
+
+        "icon" :
+        {
+            "path"  : 0,
+            "scale" : 0
+        }
+    },
+
+    "orbPulse" :
+    {
+        "labelClass"  : "tn-map-style tn-map-orb-pulse",
+        "labelAnchor" : "30 30",
+        
+        "labelStyle" :
+        {
+            "opacity" : 1
+        },
+
+        "icon" :
+        {
+            "path"  : 0,
+            "scale" : 0
+        }
+    }
+}

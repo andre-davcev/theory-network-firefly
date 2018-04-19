@@ -1,8 +1,17 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
+export const environment =
+{
+    production : false,
+    language   : 'en',
+    version    : '0.0.0',
+    pathJson   : 'data',
 
-export const environment = {
-  production: false
+    firebase :
+    {
+        apiKey            : '***REMOVED-FIREBASE-API-KEY***',
+        authDomain        : '1388625286411.firebaseapp.com',
+        databaseURL       : 'https://1388625286411.firebaseio.com',
+        projectId         : 'project-4334231676697990915',
+        storageBucket     : 'project-4334231676697990915.appspot.com',
+        messagingSenderId : '671375922961'
+    }
 };
