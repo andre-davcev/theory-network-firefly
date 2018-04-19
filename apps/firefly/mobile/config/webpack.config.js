@@ -14,9 +14,9 @@ const paths = require('tsconfig-paths-webpack-plugin');
 
 const resolveConfig =
 {
-    extensions: ['.ts', '.js', '.json'],
-    modules: [path.resolve('../../../node_modules'), path.resolve('node_modules')],
-    plugins: [new paths({/*configFile: "./path/to/tsconfig.json" */})]
+    extensions : ['.ts', '.js', '.json'],
+    modules    : [path.resolve('node_modules')],
+    plugins    : [new paths({})]
 };
 
 const config = require('../node_modules/@ionic/app-scripts/config/webpack.config');
@@ -24,5 +24,5 @@ const config = require('../node_modules/@ionic/app-scripts/config/webpack.config
 config.dev.resolve  = resolveConfig;
 config.prod.resolve = resolveConfig;
 
-config.dev.resolve.alias  = {"@app/env": path.resolve('../src/environments/environment.ts')};
-config.prod.resolve.alias = {"@app/env": path.resolve('../src/environments/environment.prod.ts')};
+config.dev.resolve.alias  = {'@app/env': path.resolve('../src/environments/environment.ts')};
+config.prod.resolve.alias = {'@app/env': path.resolve('../src/environments/environment.prod.ts')};
