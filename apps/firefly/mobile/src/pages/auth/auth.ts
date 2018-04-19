@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import {Observer}   from 'rxjs/Observer';
 import {filter, switchMap, take, tap} from 'rxjs/operators';
 
-import {ComponentApp} from '@theory/library/classes';
+import {ComponentApp} from '@theory/core/classes';
 
 import {PageTabs} from '../tabs/tabs';
 import {User}     from '../../models/user';

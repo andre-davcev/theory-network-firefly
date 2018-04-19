@@ -3,7 +3,7 @@
 
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
-$font-path: "../assets/fonts";
+$font-path: '../assets/fonts';
 
 
 // The app direction is used to include
@@ -11,24 +11,21 @@ $font-path: "../assets/fonts";
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
 
-@import "ionic.globals";
+@import 'ionic.globals';
 
 @import
 
 // Variables
-"../../node_modules/font-awesome/scss/_variables",
-'../../../library/sass/variables/variables-index',
-"../../../library/ts/components/icon/icon.variables",
-"../../../core/fonts/firefly/firefly.font.variables",
-"../styles/variables.scss",
-"../../../core/ts/components/firefly/firefly.component.variables",
+'../../node_modules/font-awesome/scss/_variables',
+'../../../../../libs/core/styles/variables',
+'../../../../../libs/firefly/core/fonts/firefly/firefly.font.variables',
+'../styles/variables.scss',
 
 // Styles
-"../../../library/sass/styles/styles-index",
-"../../../core/ts/components/firefly/firefly.component",
-"../../../library/ts/components/icon/icon",
-"../../../core/fonts/firefly/firefly.font",
-"../styles/global",
+'../../../../../libs/core/styles/styles',
+'../../../../../libs/firefly/core/components/src/firefly/firefly.component',
+'../../../../../libs/firefly/core/fonts/firefly/firefly.font',
+'../styles/global',
 
 // http://ionicframework.com/docs/v2/theming/
 
@@ -39,10 +36,10 @@ $app-direction: ltr;
 // By default each design mode includes these shared imports.
 // App Shared Sass variables belong in app.variables.scss.
 
-"../app/components/components",
+'../app/components/components',
 
 // Firefly - Pages
-"../pages/pages";
+'../pages/pages';
 
 /*
     FUTURE STATE
@@ -73,7 +70,7 @@ $app-direction: ltr;
 // It's highly recommended to change the default colors
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
-// The "primary" color is the only required color in the map.
+// The 'primary' color is the only required color in the map.
 
 $colors:
 (
@@ -89,7 +86,7 @@ $colors:
     white:    #FFFFFF
 );
 
-@import "ionic.components";
+@import 'ionic.components';
 
 // App Theme
 // --------------------------------------------------
@@ -98,7 +95,7 @@ $colors:
 // so that the above variables are used and Ionic's
 // default are overridden.
 
-@import "ionic.theme.default";
+@import 'ionic.theme.default';
 
 
 // Ionicons
@@ -106,7 +103,7 @@ $colors:
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
 
-@import "ionic.ionicons";
+@import 'ionic.ionicons';
 
 
 // Fonts
@@ -114,5 +111,5 @@ $colors:
 // Roboto font is used by default for Material Design. Noto sans
 // is used by default for Windows.
 
-@import "roboto";
-@import "noto-sans";
+@import 'roboto';
+@import 'noto-sans';
