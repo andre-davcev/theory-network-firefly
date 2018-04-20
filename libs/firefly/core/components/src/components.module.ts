@@ -4,6 +4,7 @@ import { ComponentFirefly } from './firefly/firefly.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [ComponentFirefly]
+  declarations: [ComponentFirefly],
+  exports: [ComponentFirefly]
 })
 export class ModuleComponents {}

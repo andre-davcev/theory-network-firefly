@@ -1,6 +1,12 @@
 {
 	"folders": [
 		{
+			"path": "../design"
+		},
+		{
+			"path": "../functions"
+		},
+		{
 			"path": "."
 		}
 	],

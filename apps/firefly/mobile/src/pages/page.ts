@@ -1,10 +1,7 @@
-
-import {ComponentApp} from '@theory/core/classes';
-
-export class Page extends ComponentApp
+export class Page
 {
     constructor()
     {
-        super();
+
     }
 }
