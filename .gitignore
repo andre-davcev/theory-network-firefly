@@ -45,3 +45,5 @@ Thumbs.db
 **/node_modules
 **/plugins
 **/www/build
+**/.tmp
+**/.sourcemaps

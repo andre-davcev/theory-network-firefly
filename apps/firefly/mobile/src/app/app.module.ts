@@ -34,8 +34,6 @@ import {Alerts}          from '../services/alerts';
 import {ServiceBeacons}  from '../services/beacons';
 import {Temp}            from '../services/temp';
 
-import {AppVersion}       from '../services/version';
-import {DirectiveVersion} from '../directives/version';
 import {environment}      from '../environments/environment';
 
 import {EffectsApp}              from '../redux/app/effects';
@@ -59,6 +57,7 @@ import { StateApp } from '../ngxs/app.state';
 import { StateLocation } from '../ngxs/location.state';
 import { StateLanguage } from '../ngxs/language.state';
 import { StateUser } from '../ngxs/user.state';
+import { ModuleComponents } from '@theory/firefly/core/components';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -75,7 +74,7 @@ export class AppErrorHandler implements ErrorHandler
     handleError(error:any):void
     {
         console.log(error);
-        
+
         IonicPro.monitoring.handleNewError(error);
     }
 }
@@ -119,37 +118,23 @@ export class AppErrorHandler implements ErrorHandler
         NgxsReduxDevtoolsPluginModule.forRoot
         ({
             disabled: environment.production
-        })
-/*
-        NgxsModule.forRoot
-        ([
-            StateApp,
-            StateLanguage,
-            StateLocation,
-            StateUser
-        ]),
+        }),
 
-        NgxsReduxDevtoolsPluginModule.forRoot
-        ({
-            disabled: environment.production
-        })
-*/
+        ModuleComponents
     ],
 
     declarations :
     [
-        App,
-
-        DirectiveVersion
+        App
     ],
-  
+
     bootstrap : [IonicApp],
-  
+
     entryComponents :
     [
         App
     ],
-  
+
     providers :
     [
         Globalization,
@@ -164,8 +149,6 @@ export class AppErrorHandler implements ErrorHandler
         Alerts,
         ServiceBeacons,
         Temp,
-
-        AppVersion,
 
         [{provide: ErrorHandler, useClass: AppErrorHandler}]
     ]

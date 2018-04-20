@@ -8,8 +8,6 @@ import {Observable} from 'rxjs/Observable';
 import {Observer}   from 'rxjs/Observer';
 import {filter, switchMap, take, tap} from 'rxjs/operators';
 
-import {ComponentApp} from '@theory/core/classes';
-
 import {PageTabs} from '../tabs/tabs';
 import {User}     from '../../models/user';
 
@@ -30,7 +28,7 @@ import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail, UserCreate, S
     templateUrl : 'auth.html'
 })
 
-export class PageLogin extends ComponentApp
+export class PageLogin
 {
     public AuthProvider: any = AuthProvider;
 
@@ -41,13 +39,13 @@ export class PageLogin extends ComponentApp
 
     constructor(private nav:NavController, private platform:Platform, private store: Store)
     {
-        super();
+
     }
 
     public ionViewDidLoad()
     {
-        this.subscriptionsAdd
-        (
+//        this.subscriptionsAdd
+//        (
             this.userFound$.pipe
             (
                 filter((userFound: boolean) => userFound),
@@ -57,7 +55,7 @@ export class PageLogin extends ComponentApp
             subscribe((userFound: boolean) =>
             {
                 this.nav.push('PageTabs');
-            }),
+            });
 
             forkJoin
             (
@@ -73,8 +71,8 @@ export class PageLogin extends ComponentApp
                 )
             ).
 
-            subscribe(() => this.ready = true)
-        );
+            subscribe(() => this.ready = true);
+//        );
     }
 
     login(provider: AuthProvider)
