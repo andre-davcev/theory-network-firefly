@@ -58,6 +58,9 @@ import { StateLocation } from '../ngxs/location.state';
 import { StateLanguage } from '../ngxs/language.state';
 import { StateUser } from '../ngxs/user.state';
 import { ModuleComponents } from '@theory/firefly/core/components';
+import { FormCluster } from './forms/cluster.form';
+import { StateCluster } from '../ngxs/cluster/cluster.state';
+import { ClusterService } from '../services/services.cluster';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -112,7 +115,8 @@ export class AppErrorHandler implements ErrorHandler
             StateApp,
             StateLanguage,
             StateLocation,
-            StateUser
+            StateUser,
+            StateCluster
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot
@@ -149,6 +153,9 @@ export class AppErrorHandler implements ErrorHandler
         Alerts,
         ServiceBeacons,
         Temp,
+
+        FormCluster,
+        ClusterService,
 
         [{provide: ErrorHandler, useClass: AppErrorHandler}]
     ]

@@ -10,8 +10,6 @@ import {Storage} from '@ionic/storage';
 
 import {PageTabs} from '../tabs/tabs';
 
-import {Page} from '../page';
-
 @IonicPage()
 @Component
 ({
@@ -19,7 +17,7 @@ import {Page} from '../page';
     templateUrl : 'tutorial.html'
 })
 
-export class PageTutorial extends Page
+export class PageTutorial
 {
     public showSkip = true;
 
@@ -28,7 +26,7 @@ export class PageTutorial extends Page
 
     constructor(public navCtrl: NavController, public menu: MenuController, public storage: Storage)
     {
-        super();
+
     }
 
     startApp()

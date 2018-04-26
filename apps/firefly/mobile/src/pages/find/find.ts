@@ -15,20 +15,19 @@ import { SetCluster } from '../../ngxs/cluster/cluster.state';
     templateUrl : 'find.html'
 })
 
-export class PageFind extends Page
+export class PageFind
 {
     public segment:string = 'stream';
 
     constructor(private store:Store)
     {
-        super();
+        const cluster: Cluster =
+        {
+            userId      : 'testUser',
+            name        : 'My First Cluster',
+            description : 'My description'
+        };
 
-          const cluster:Cluster = {
-                        userId      : 'testUser',
-                        name        : 'My First Cluster',
-                        description : 'My description'
-                    };
-
-                    this.store.dispatch(new SetCluster(cluster));
+        this.store.dispatch(new SetCluster(cluster));
     }
 }

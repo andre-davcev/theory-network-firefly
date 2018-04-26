@@ -9,13 +9,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     //  styleUrls: ['./item-header.component.scss'],
 })
 
-export class ComponentItemHeader implements OnInit
+export class ComponentItemHeader
 {
-    @Input() edit: boolean = false;
+    @Input() form: FormGroup;
 
     @Input() icon            : string;
-    @Input() iconEmpty       : string;
     @Input() iconPlaceholder : string = '';
+    @Input() iconUrlEmpty    : string;
 
     @Input() title            : string;
     @Input() titlePlaceholder : string = '';
@@ -23,37 +23,62 @@ export class ComponentItemHeader implements OnInit
     @Input() subtitle            : string;
     @Input() subtitlePlaceholder : string = '';
 
-    @Output() form: EventEmitter<FormGroup> = new EventEmitter();
-
-    public formGroup: FormGroup;
-    
-    constructor(private formBuilder: FormBuilder) {}
-
-    public ngOnInit(): void
-    {
-        if (this.edit)
-        {
-            this.formGroup = this.formBuilder.group
-            ({
-                icon     : [this.icon,     [Validators.required, Validators.minLength(1)]],
-                title    : [this.title,    [Validators.required, Validators.minLength(1)]],
-                subtitle : [this.subtitle, [Validators.required, Validators.minLength(1)]],
-            });
-
-            this.form.emit(this.formGroup);
-        }
-    }
+    constructor() {}
 
     public clickedIcon(): void
     {
         if (this.edit)
         {
-            this.icon = this.icon == null || this.icon === 'temp/icons/coffee-icon-blue.png' ? 'temp/icons/coffee-icon-pink.png' : 'temp/icons/coffee-icon-blue.png';
+            this.iconValue = this.iconValue == null || this.iconValue === 'temp/icons/coffee-icon-blue.png' ? 'temp/icons/coffee-icon-pink.png' : 'temp/icons/coffee-icon-blue.png';
         }
+    }
+
+    public get edit(): boolean
+    {
+        return this.form != null;
     }
 
     public get iconUrl(): string
     {
-        return this.edit ? (this.icon == null ? this.iconEmpty : this.icon) : this.icon;
+        return this.edit ? (this.iconValue == null ? this.iconUrlEmpty : this.iconValue) : this.iconValue;
+    }
+
+    public get iconValue(): string
+    {
+        return this.edit ? this.form.get(this.icon).value : this.icon;
+    }
+
+    public set iconValue(icon: string)
+    {
+        if (this.edit)
+        {
+            this.form.get(this.icon).setValue(icon);
+        }
+    }
+
+    public get titleValue(): string
+    {
+        return this.edit ? this.form.get(this.title).value : this.title;
+    }
+
+    public set titleValue(title: string)
+    {
+        if (this.edit)
+        {
+            this.form.get(this.title).setValue(title);
+        }
+    }
+
+    public get subtitleValue(): string
+    {
+        return this.edit ? this.form.get(this.subtitle).value : this.subtitle;
+    }
+
+    public set subtitleValue(subtitle: string)
+    {
+        if (this.edit)
+        {
+            this.form.get(this.subtitle).setValue(subtitle);
+        }
     }
 }

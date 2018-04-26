@@ -4,8 +4,6 @@ import {IonicPage} from 'ionic-angular';
 
 import {Beacon} from '../../models/beacon';
 
-import {Page} from '../page';
-
 @IonicPage()
 @Component
 ({
@@ -13,10 +11,7 @@ import {Page} from '../page';
     templateUrl : 'publisher.beacon.html'
 })
 
-export class PagePublisherBeacon extends Page
+export class PagePublisherBeacon
 {
-    constructor()
-    {
-        super();
-    }
+
 }

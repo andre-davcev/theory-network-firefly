@@ -2,8 +2,6 @@ import {Component} from '@angular/core';
 
 import {IonicPage} from 'ionic-angular';
 
-import {Page} from '../page';
-
 @IonicPage()
 @Component
 ({
@@ -11,12 +9,7 @@ import {Page} from '../page';
     templateUrl : 'user.html'
 })
 
-export class PageUser extends Page
+export class PageUser
 {
     segment:string = 'profile';
-
-    constructor()
-    {
-        super();        
-    }
 }

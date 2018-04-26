@@ -5,8 +5,6 @@ import {IonicPage} from 'ionic-angular';
 import {Cluster} from '../../models/cluster';
 import {Temp}    from '../../services/temp';
 
-import {Page} from '../page';
-
 @IonicPage()
 @Component
 ({
@@ -14,14 +12,12 @@ import {Page} from '../page';
     templateUrl : 'publisher.clusters.html'
 })
 
-export class PagePublisherClusters extends Page
+export class PagePublisherClusters
 {
     public clusters:Array<Cluster>;
 
     constructor(temp:Temp)
     {
-        super();
-
         this.clusters = temp.subscriptions;
 
         console.log(this.clusters);

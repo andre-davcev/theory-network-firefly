@@ -5,8 +5,6 @@ import {IonicPage} from 'ionic-angular';
 import {Subscription} from '../../models/subscription';
 import {Temp}         from '../../services/temp';
 
-import {Page} from '../page';
-
 @IonicPage()
 @Component
 ({
@@ -14,14 +12,12 @@ import {Page} from '../page';
     templateUrl : 'find.stream.html'
 })
 
-export class PageFindStream extends Page
+export class PageFindStream
 {
     public subscriptions:Array<Subscription> = [];
-    
+
     constructor(temp:Temp)
     {
-        super();
-
         this.subscriptions = temp.subscriptions;
     }
 
@@ -37,7 +33,7 @@ export class PageFindStream extends Page
             }
 
             console.log('Async operation has ended');
-      
+
             infiniteScroll.complete();
         }, 500);
     }
