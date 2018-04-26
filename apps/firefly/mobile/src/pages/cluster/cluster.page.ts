@@ -2,8 +2,10 @@ import {Component, AfterViewInit} from '@angular/core';
 
 import {IonicPage} from 'ionic-angular';
 
-import {Page} from '../page';
 import { FormGroup } from '@angular/forms';
+import { StateCluster, SetClusterId } from '../../ngxs/cluster/cluster.state';
+import { Observable } from 'rxjs/Observable';
+import { Select, Store } from '@ngxs/store';
 
 @IonicPage()
 @Component
@@ -12,26 +14,14 @@ import { FormGroup } from '@angular/forms';
     templateUrl : 'cluster.page.html'
 })
 
-export class PagePublisherCluster extends Page implements AfterViewInit
+export class PagePublisherCluster
 {
+    @Select(StateCluster.form) form$: Observable<FormGroup>;
+
     segment:string = 'clusters';
 
-    constructor()
+    constructor(private store: Store)
     {
-        super();
-    }
-
-    public formHeader(formHeader: FormGroup): void
-    {
-        console.log(formHeader);
-    }
-
-    public ngAfterViewInit(): void
-    {
-        console.log('ngAfterViewInit');
-/*
-        this.form.addControl('childForm', this.childComponent.form);
-  this.childComponent.form.setParent(this.form);
-*/
+        this.store.dispatch(new SetClusterId('new'));
     }
 }

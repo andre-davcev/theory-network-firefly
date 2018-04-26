@@ -5,18 +5,19 @@
 </ion-header>
 
 <ion-content class="app-color-white">
-    <app-item-header iconEmpty="icons/avatar-empty.svg" 
+    <app-item-header iconUrlEmpty="icons/avatar-empty.svg"
+                     [form]="form$ | async"
+                     title="name"
                      [titlePlaceholder]="'pages.cluster.titlePlaceholder' | translate"
+                     subtitle="tagline"
                      [subtitlePlaceholder]="'pages.cluster.subtitlePlaceholder' | translate"
-                     [iconPlaceholder]="'pages.cluster.iconPlaceholder' | translate"
-                     [edit]="true"
-                     (form)="formHeader($event)"></app-item-header>
-<!--    
+                     icon="icon"
+                     [iconPlaceholder]="'pages.cluster.iconPlaceholder' | translate"></app-item-header>
+<!--
     <app-item-header icon="temp/icons/coffee-icon-blue.png"
                      title="My cluster title!"
                      subtitle="My subtitle"></app-item-header>
 -->
-
     <app-item-map [title]="'pages.cluster.locations' | translate"></app-item-map>
 
     <div class="c-detail" fxLayout="column">

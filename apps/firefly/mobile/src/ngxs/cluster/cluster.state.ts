@@ -3,21 +3,26 @@ import { Injectable } from "@angular/core";
 //import { ClusterService } from "../../services/services.cluster";
 import { catchError, map, switchMap, tap} from "rxjs/operators";
 import { of } from "rxjs/observable/of";
-import * as clusterServiceFrom from "../../services/services.cluster"
 import { Observable } from "rxjs/Observable";
 import { State, StateContext } from "@ngxs/store";
 import { Action } from "@ngxs/store";
 import { Selector } from "@ngxs/store";
 import { StateUser } from "../user.state";
+import { FormGroup } from "@angular/forms";
 import { Select } from "@ngxs/store";
 import { User } from "../../models/user";
+import { ClusterService } from "../../services/services.cluster";
+import { FormCluster } from "../../app/forms/cluster.form";
 
-export class GetClusters {}
-export class SetCluster  {constructor(public payload: Cluster) {}}
+export class GetClusters  {}
+export class SetClusterId {constructor(public payload: string)  {}}
+export class SetCluster   {constructor(public payload: Cluster) {}}
 
 export interface StateClusterModel
 {
-    entities: {[id: string]: Cluster};
+    id       : string;
+    form     : FormGroup;
+    entities : {[id: string]: Cluster};
 }
 
 @State<StateClusterModel>
@@ -26,23 +31,28 @@ export interface StateClusterModel
 
     defaults :
     {
+        id       : undefined,
+        form     : undefined,
         entities : {}
     }
 })
 
 
-export class StateCluster 
+export class StateCluster
 {
-    constructor(
-        private clusterService: clusterServiceFrom.ClusterService
-    ){}
+    constructor(private clusterService: ClusterService, private formCluster: FormCluster) {}
 
     @Selector() static entities(state: StateClusterModel) {return state.entities;}
+    @Selector() static id(state: StateClusterModel)       {return state.id;}
+    @Selector() static form(state: StateClusterModel)     {return state.form;}
+
+    @Selector() static entity(state: StateClusterModel) {return state.entities[state.id];}
+
     @Select(StateUser.user) user$:Observable<User>;
 
     @Action(GetClusters)
     getClusters({ patchState, dispatch} : StateContext<StateClusterModel>)
-    {       
+    {
         return this.user$.pipe(
             map((user:User) => user.uidInternal),
             switchMap(uidInternal => {
@@ -61,15 +71,30 @@ export class StateCluster
                     })
                 )
             })
-        ) 
+        )
     }
-    
+
+    @Action(SetClusterId)
+    setClusterId({patchState, getState} : StateContext<StateClusterModel>, { payload }: SetClusterId)
+    {
+        const id    : string            = payload;
+        const state : StateClusterModel = getState();
+
+        patchState
+        ({
+            id,
+            form: id === 'new' ? this.formCluster.build() : this.formCluster.build(state.entities[id])
+        });
+
+        console.log(getState());
+    }
+
     @Action(SetCluster)
     setCluster({patchState, dispatch} : StateContext<StateClusterModel>, { payload }: SetCluster)
     {
         return this.clusterService
         .setCluster(payload)
-        .pipe( 
+        .pipe(
             map((cluster:Cluster) => {
                 const entities:{ [id: number]: Cluster } = {};
                 entities[cluster.id] = cluster;

@@ -4,8 +4,6 @@ import {IonicPage} from 'ionic-angular';
 
 import {Beacon} from '../../models/beacon';
 
-import {Page} from '../page';
-
 @IonicPage()
 @Component
 ({
@@ -13,7 +11,7 @@ import {Page} from '../page';
     templateUrl : 'publisher.beacon.minor.html'
 })
 
-export class PagePublisherBeaconMinor extends Page
+export class PagePublisherBeaconMinor
 {
     public beacons:Array<Beacon> =
     [
@@ -26,9 +24,4 @@ export class PagePublisherBeaconMinor extends Page
             uuidLabel  : 'Center Left'
         }
     ];
-
-    constructor()
-    {
-        super();
-    }
 }

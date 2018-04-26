@@ -10,8 +10,6 @@ import {PageAlerts}      from '../alerts/alerts';
 import {PagePublisher}   from '../publisher/publisher';
 import {PageUser}        from '../user/user';
 
-import {Page} from '../page';
-
 @IonicPage()
 @Component
 ({
@@ -19,7 +17,7 @@ import {Page} from '../page';
     templateUrl : 'tabs.html'
 })
 
-export class PageTabs extends Page
+export class PageTabs
 {
     tabs:Array<any> =
     [
@@ -34,8 +32,6 @@ export class PageTabs extends Page
 
     constructor(navParams: NavParams, public alerts: Alerts)
     {
-        super();
-
         this.selected = navParams.data.tabIndex || 0;
     }
 }

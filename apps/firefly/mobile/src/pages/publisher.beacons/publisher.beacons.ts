@@ -15,7 +15,7 @@ import {Page} from '../page';
     templateUrl : 'publisher.beacons.html'
 })
 
-export class PagePublisherBeacons extends Page implements OnInit
+export class PagePublisherBeacons implements OnInit
 {
     public beacons:Array<Beacon> =
     [
@@ -31,7 +31,7 @@ export class PagePublisherBeacons extends Page implements OnInit
 
     constructor(public beaconsService:ServiceBeacons)
     {
-        super();
+
     }
 
     ngOnInit()

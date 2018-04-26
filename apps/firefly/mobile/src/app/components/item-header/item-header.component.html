@@ -6,13 +6,13 @@
     <p class="c-icon-placeholder" *ngIf="edit && !icon">{{iconPlaceholder}}</p>
 </div>
 
-<form class="c-container" novalidate [formGroup]="formGroup" *ngIf="edit">
-    <input class="c-icon-hidden" type="hidden" formControlName="icon">
-    <input class="c-title"       type="text"   formControlName="title"    [placeholder]="titlePlaceholder">
-    <input class="c-subtitle"    type="text"   formControlName="subtitle" [placeholder]="subtitlePlaceholder">
+<form novalidate class="c-container" [formGroup]="form" *ngIf="edit">
+    <input class="c-icon-hidden" type="hidden" [formControlName]="icon">
+    <input class="c-title"       type="text"   [formControlName]="title"    [placeholder]="titlePlaceholder">
+    <input class="c-subtitle"    type="text"   [formControlName]="subtitle" [placeholder]="subtitlePlaceholder">
 </form>
 
 <div class="c-container" *ngIf="!edit">
-    <h3 class="c-title">{{title}}</h3>
-    <h4 class="c-subtitle">{{subtitle}}</h4>
+    <h3 class="c-title">{{titleValue}}</h3>
+    <h4 class="c-subtitle">{{subtitleValue}}</h4>
 </div>

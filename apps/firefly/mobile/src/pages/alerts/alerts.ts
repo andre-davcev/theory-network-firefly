@@ -7,7 +7,6 @@ import {IonicPage}       from 'ionic-angular';
 
 import {Alert}           from '../../models/alert';
 import {Alerts}          from '../../services/alerts';
-import {Page}            from '../../pages/page';
 
 @Component
 ({
@@ -16,7 +15,7 @@ import {Page}            from '../../pages/page';
 })
 
 @IonicPage()
-export class PageAlerts extends Page
+export class PageAlerts
 {
     @ViewChild(Slides) slides:Slides;
 
@@ -26,8 +25,6 @@ export class PageAlerts extends Page
 
     constructor(public alertController:AlertController, public alertsObject:Alerts)
     {
-        super();
-
         this.alerts = alertsObject.alerts;
 
         alertsObject.view(0);

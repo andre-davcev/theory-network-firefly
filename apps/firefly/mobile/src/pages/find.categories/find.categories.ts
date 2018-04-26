@@ -2,8 +2,6 @@ import {Component} from '@angular/core';
 
 import {IonicPage} from 'ionic-angular';
 
-import {Page} from '../page';
-
 @IonicPage()
 @Component
 ({
@@ -11,10 +9,7 @@ import {Page} from '../page';
     templateUrl : 'find.categories.html'
 })
 
-export class PageFindCategories extends Page
+export class PageFindCategories
 {
-    constructor()
-    {
-        super();
-    }
+
 }

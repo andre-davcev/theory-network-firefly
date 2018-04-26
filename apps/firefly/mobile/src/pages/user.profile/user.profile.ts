@@ -4,8 +4,6 @@ import {IonicPage} from 'ionic-angular';
 
 import {Observable} from 'rxjs/Observable';
 
-import {Page} from '../page';
-
 @IonicPage()
 @Component
 ({
@@ -13,10 +11,7 @@ import {Page} from '../page';
     templateUrl : 'user.profile.html'
 })
 
-export class PageUserProfile extends Page
+export class PageUserProfile
 {
-    constructor()
-    {
-        super();        
-    }
+
 }

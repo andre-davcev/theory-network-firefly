@@ -4,7 +4,7 @@ import {Model} from './model';
 
 export interface Cluster extends Model
 {
-    userId       : string;
+    userId?      : string;
     draft?       : boolean;
     name         : string;
     tagline?     : string;
