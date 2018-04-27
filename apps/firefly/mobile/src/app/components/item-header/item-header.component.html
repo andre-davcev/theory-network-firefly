@@ -1,18 +1,18 @@
-<img class="c-background-image" [src]="iconUrl">
-<div class="c-background"></div>
+<img class="comp-background-image" [src]="iconUrl">
+<div class="comp-background"></div>
 
-<div class="c-icon-container" (click)="clickedIcon()">
-    <img class="c-icon" [src]="iconUrl">
-    <p class="c-icon-placeholder" *ngIf="edit && !icon">{{iconPlaceholder}}</p>
+<div class="comp-icon-container" (click)="clickedIcon()">
+    <img class="comp-icon" [src]="iconUrl">
+    <p class="comp-icon-placeholder" *ngIf="edit && !icon">{{iconPlaceholder}}</p>
 </div>
 
-<form novalidate class="c-container" [formGroup]="form" *ngIf="edit">
-    <input class="c-icon-hidden" type="hidden" [formControlName]="icon">
-    <input class="c-title"       type="text"   [formControlName]="title"    [placeholder]="titlePlaceholder">
-    <input class="c-subtitle"    type="text"   [formControlName]="subtitle" [placeholder]="subtitlePlaceholder">
+<form novalidate class="comp-container" [formGroup]="form" *ngIf="edit">
+    <input class="comp-icon-hidden" type="hidden" [formControlName]="icon">
+    <input class="comp-title"       type="text"   [formControlName]="title"    [placeholder]="titlePlaceholder">
+    <input class="comp-subtitle"    type="text"   [formControlName]="subtitle" [placeholder]="subtitlePlaceholder">
 </form>
 
-<div class="c-container" *ngIf="!edit">
-    <h3 class="c-title">{{titleValue}}</h3>
-    <h4 class="c-subtitle">{{subtitleValue}}</h4>
+<div class="comp-container" *ngIf="!edit">
+    <h3 class="comp-title">{{title}}</h3>
+    <h4 class="comp-subtitle">{{subtitle}}</h4>
 </div>

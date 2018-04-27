@@ -10,6 +10,6 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class ComponentItemMap
 {
     @Input() title : string;
-    
+
     constructor() { }
 }

@@ -10,15 +10,17 @@ import { ModuleComponents } from '../../app/components/components.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ModuleItemHeader } from '../../app/components/item-header/item-header.module';
 import { ModuleItemMap } from '../../app/components/item-map/item-map.module';
+import { ModuleItemDescription } from '../../app/components/item-description/item-description.module';
 
 @NgModule
 ({
-    imports : 
+    imports :
     [
         IonicPageModule.forChild(PagePublisherCluster),
         TranslateModule,
         ModuleItemHeader,
-        ModuleItemMap
+        ModuleItemMap,
+        ModuleItemDescription
     ],
 
     declarations :
@@ -28,6 +30,6 @@ import { ModuleItemMap } from '../../app/components/item-map/item-map.module';
 })
 
 export class ModulePagePublisherCluster
-{ 
+{
 
 }
