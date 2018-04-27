@@ -414,12 +414,17 @@ $app-font-color-body:                $gm-font-color-body;
 $app-font-color-caption:             $gm-font-color-caption;
 $app-font-color-button:              $gm-font-color-button;
 
+// GUTTER
+
+$app-gutter:                            1.6rem;
+
 // GENERAL
 
 $balanced:                               #56C71D !default;
 
 $app-color-dark:                         #212221;
 $app-color-grey-light:                   #E5E5E5;
+$app-color-grey-lighter-font:            #8F8E94;
 $app-color-grey-lighter:                 rgba(190, 199, 195, 0.7);
 $app-color-grey-lightest:                rgba(255, 255, 255, 0.2);
 $app-color-grey-dark:                    rgba(5, 24, 28, 0.8);
@@ -482,7 +487,7 @@ $app-card-height:                                    4.8rem;
 
 $app-detail-header-height:                       167px;
 $app-list-item-font-color:                     #030303;
-$app-list-item-font-color-note:                #8F8E94;
+$app-list-item-font-color-note:                  $app-color-grey-lighter;
 $app-list-box-shadow:                            $gm-elevated-1;
 $app-list-card-border-radius:                    0.3rem;
 
@@ -491,7 +496,7 @@ $list-md-activated-background-color:            #F9F9F9;
 
 // LIST ITEMS
 
-$app-list-item-icon-color:                                $app-color-grey-lighter;
+$app-list-item-icon-color:                      $app-color-grey-lighter;
 
 
 // TOOLBARS

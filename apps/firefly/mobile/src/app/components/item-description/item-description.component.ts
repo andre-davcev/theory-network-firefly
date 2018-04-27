@@ -16,7 +16,6 @@ export class ItemDescriptionComponent
 
     @Input() image            : string;
     @Input() imagePlaceholder : string = '';
-    @Input() imageUrlEmpty    : string;
 
     @Input() description            : string;
     @Input() descriptionPlaceholder : string = '';
@@ -27,18 +26,13 @@ export class ItemDescriptionComponent
     {
         if (this.edit)
         {
-            this.imageValue = this.imageValue == null || this.imageValue === 'temp/icons/coffee-icon-blue.png' ? 'temp/icons/coffee-icon-pink.png' : 'temp/icons/coffee-icon-blue.png';
+            this.imageValue = this.imageValue == null || this.imageValue === 'temp/images/subscriptions/pokemon-go.jpg' ? 'temp/images/subscriptions/lilac-festival.jpg' : 'temp/images/subscriptions/pokemon-go.jpg';
         }
     }
 
     public get edit(): boolean
     {
         return this.form != null;
-    }
-
-    public get imageUrl(): string
-    {
-        return this.edit ? (this.imageValue == null ? this.imageUrlEmpty : this.imageValue) : this.imageValue;
     }
 
     public get imageValue(): string
