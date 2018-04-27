@@ -1,26 +1,26 @@
-$c-item-map-font-color:                 $app-color-light-text;
-$c-item-map-font-color:                 17px;
-$c-item-map-line-height:                20px;
+$comp-item-map-font-color:                 $app-color-light-text;
+$comp-item-map-font-size:                 17px;
+$comp-item-map-line-height:                20px;
 
-$c-item-map-window-height:              155px;
-$c-item-map-border-radius:              5px;
+$comp-item-map-window-height:              155px;
+$comp-item-map-border-radius:              5px;
 
 app-item-map
 {
-    .c-title
+    .comp-title
     {
-        color: $c-item-map-font-color;
-        font-size: $c-item-map-font-color;
+        color: $comp-item-map-font-color;
+        font-size: $comp-item-map-font-size;
         font-weight: normal;
-        line-height: $c-item-map-line-height;
+        line-height: $comp-item-map-line-height;
         margin-bottom: 8px;
     }
 
-    .c-map-window
+    .comp-map-window
     {
         width: 100%;
-        height: $c-item-map-window-height;
-        border-radius: $c-item-map-border-radius;
+        height: $comp-item-map-window-height;
+        border-radius: $comp-item-map-border-radius;
         background-color: black;
     }
 }

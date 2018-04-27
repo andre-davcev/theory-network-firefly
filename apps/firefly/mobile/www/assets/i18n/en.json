@@ -1,9 +1,13 @@
 {
-    "general":
+  "general":
     {
-        "delete": "Delete"
+        "delete"      : "Delete",
+        "locations"   : "Locations",
+        "description" : "Description",
+        "categories"  : "Categories",
+        "isPrivate"   : "Is Private"
     },
-    
+
     "tabs":
     {
         "app":
@@ -81,8 +85,7 @@
             "title"               : "Cluster",
             "titlePlaceholder"    : "Add your title",
             "subtitlePlaceholder" : "Add your subtitle",
-            "iconPlaceholder"     : "select icon",
-            "locations"           : "Locations"
+            "iconPlaceholder"     : "select icon"
         }
     },
 

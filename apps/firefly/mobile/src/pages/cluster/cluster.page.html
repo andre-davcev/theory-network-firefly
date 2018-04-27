@@ -4,44 +4,59 @@
     </ion-navbar>
 </ion-header>
 
+
 <ion-content class="app-color-white">
-    <app-item-header iconUrlEmpty="icons/avatar-empty.svg"
-                     [form]="form$ | async"
-                     title="name"
-                     [titlePlaceholder]="'pages.cluster.titlePlaceholder' | translate"
-                     subtitle="tagline"
-                     [subtitlePlaceholder]="'pages.cluster.subtitlePlaceholder' | translate"
-                     icon="icon"
-                     [iconPlaceholder]="'pages.cluster.iconPlaceholder' | translate"></app-item-header>
-<!--
-    <app-item-header icon="temp/icons/coffee-icon-blue.png"
-                     title="My cluster title!"
-                     subtitle="My subtitle"></app-item-header>
--->
-    <app-item-map [title]="'pages.cluster.locations' | translate"></app-item-map>
+    <form novalidate [formGroup]="form$ | async">
+        <app-item-header [form]="form$ | async"
+                        title="name"
+                        [titlePlaceholder]="'pages.cluster.titlePlaceholder' | translate"
+                        subtitle="tagline"
+                        [subtitlePlaceholder]="'pages.cluster.subtitlePlaceholder' | translate"
+                        icon="icon"
+                        [iconPlaceholder]="'pages.cluster.iconPlaceholder' | translate"
+                        iconUrlEmpty="icons/avatar-empty.svg">
+        </app-item-header>
 
-    <div class="c-detail" fxLayout="column">
-        <ion-list>
-            <button ion-item>
-                <ion-icon name="logo-buffer" item-start></ion-icon>
-                <ion-label>Categories</ion-label>
-            </button>
+        <app-item-header icon="temp/icons/coffee-icon-blue.png"
+                         title="My cluster title!"
+                         subtitle="My subtitle">
+        </app-item-header>
 
-            <ion-item>
-                <ion-icon name="lock" item-start></ion-icon>
-                <ion-label>Is Private</ion-label>
-                <ion-toggle checked="true"></ion-toggle>
-            </ion-item>
-        </ion-list>
+        <app-item-map [title]="'general.locations' | translate"></app-item-map>
 
-        <p padding class="c-description">
-            The Ionic Conference is a one-day conference featuring talks from the
-            Ionic team. It is focused on Ionic applications being built with
-            Ionic 2. This includes migrating apps from Ionic 1 to Ionic 2,
-            Angular concepts, Webpack, Sass, and many other technologies used
-            in Ionic 2. Tickets are completely sold out, and we’re expecting
-            more than 1000 developers – making this the largest Ionic
-            conference ever!
-        </p>
-    </div>
+        <div class="c-detail" fxLayout="column">
+            <ion-list>
+                <button ion-item>
+                    <ion-icon name="logo-buffer" item-start></ion-icon>
+                    <ion-label>{{'general.categories' | translate}}</ion-label>
+                </button>
+
+                <ion-item>
+                    <ion-icon name="lock" item-start></ion-icon>
+                    <ion-label>{{'general.isPrivate' | translate}}</ion-label>
+                    <ion-toggle formControlName="private" checked="true"></ion-toggle>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <app-item-description [form]="form$ | async"
+                              [title]="'general.description' | translate"
+                              description="description"
+                              [descriptionPlaceholder]="'pages.cluster.subtitlePlaceholder' | translate"
+                              image="photo"
+                              [imagePlaceholder]="'pages.cluster.iconPlaceholder' | translate"
+                              imageUrlEmpty="icons/avatar-empty.svg">
+        </app-item-description>
+
+        <app-item-description [title]="'general.description' | translate"
+                              description="The Ionic Conference is a one-day conference featuring talks from the
+                              Ionic team. It is focused on Ionic applications being built with
+                              Ionic 2. This includes migrating apps from Ionic 1 to Ionic 2,
+                              Angular concepts, Webpack, Sass, and many other technologies used
+                              in Ionic 2. Tickets are completely sold out, and we’re expecting
+                              more than 1000 developers – making this the largest Ionic
+                              conference ever!"
+                              image="temp/icons/coffee-icon-blue.png">
+        </app-item-description>
+    </form>
 </ion-content>

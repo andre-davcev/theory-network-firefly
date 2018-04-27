@@ -46,7 +46,8 @@ export class StateCluster
     @Selector() static id(state: StateClusterModel)       {return state.id;}
     @Selector() static form(state: StateClusterModel)     {return state.form;}
 
-    @Selector() static entity(state: StateClusterModel) {return state.entities[state.id];}
+    @Selector() static clusters(state: StateClusterModel) {return Object.keys(state.entities).map(id => state.entities[id]);}
+    @Selector() static entity(state: StateClusterModel)   {return state.entities[state.id];}
 
     @Select(StateUser.user) user$:Observable<User>;
 

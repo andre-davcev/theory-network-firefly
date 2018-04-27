@@ -55,30 +55,4 @@ export class ComponentItemHeader
             this.form.get(this.icon).setValue(icon);
         }
     }
-
-    public get titleValue(): string
-    {
-        return this.edit ? this.form.get(this.title).value : this.title;
-    }
-
-    public set titleValue(title: string)
-    {
-        if (this.edit)
-        {
-            this.form.get(this.title).setValue(title);
-        }
-    }
-
-    public get subtitleValue(): string
-    {
-        return this.edit ? this.form.get(this.subtitle).value : this.subtitle;
-    }
-
-    public set subtitleValue(subtitle: string)
-    {
-        if (this.edit)
-        {
-            this.form.get(this.subtitle).setValue(subtitle);
-        }
-    }
 }
