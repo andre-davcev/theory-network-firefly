@@ -1,18 +1,16 @@
-$comp-item-description-padding:                          1.6rem;
-
 $comp-item-description-title-font-color:                 $app-color-light-text;
 $comp-item-description-title-font-size:                  17px;
 $comp-item-description-title-line-height:                20px;
 $comp-item-description-title-letter-spacing:             -0.4px;
 
-$comp-item-description-desc-font-color:                  #8F8E94;
+$comp-item-description-desc-font-color:                  $app-color-grey-lighter-font;
 $comp-item-description-desc-font-size:                   1.5rem;
 $comp-item-description-desc-line-height:                 1.2em;
 $comp-item-description-desc-letter-spacing:              -0.2px;
 
 $comp-item-description-image-window-height:              155px;
 $comp-item-description-image-border-radius:              5px;
-$comp-item-description-image-color-background:           black;
+$comp-item-description-image-color-background:           $app-color-grey-lighter;
 $comp-item-description-image-placeholder-font-color:     white;
 $comp-item-description-image-placeholder-font-size:      2.0rem;
 
@@ -22,7 +20,27 @@ app-item-description
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: $comp-item-description-padding - 0.4rem;
+    padding: $app-gutter;
+    padding-top: 0;
+
+    .input
+    {
+        textarea
+        {
+            margin: 0;
+            width: 100%;
+        }
+    }
+
+    p
+    {
+        margin: 0;
+    }
+
+    h4
+    {
+        margin: 0;
+    }
 
     .comp-container
     {
@@ -43,12 +61,33 @@ app-item-description
         margin-bottom: 8px;
     }
 
-    .comp-image
+    .comp-image,
+    .comp-image-container
     {
         width: 100%;
-        height: $comp-item-description-image-window-height;
         border-radius: $comp-item-description-image-border-radius;
         background-color: $comp-item-description-image-color-background;
+    }
+
+    .comp-image-container
+    {
+        position: relative;
+        display: block;
+        height: $comp-item-description-image-window-height;
+        color: $comp-item-description-image-placeholder-font-color;
+        font-size: $comp-item-description-image-placeholder-font-size;
+        font-weight: 600;
+        text-align: center;
+
+        &.comp-image-valid
+        {
+            height: auto;
+        }
+    }
+
+    .comp-image-placeholder
+    {
+        margin: 0;
     }
 
     .comp-description
@@ -57,5 +96,15 @@ app-item-description
         font-size: $comp-item-description-desc-font-size;
         line-height: $comp-item-description-desc-line-height;
         letter-spacing: $comp-item-description-desc-letter-spacing;
+
+        &.comp-empty
+        {
+            opacity: 0.9;
+        }
+    }
+
+    p.comp-description
+    {
+        margin-bottom: $app-gutter;
     }
 }

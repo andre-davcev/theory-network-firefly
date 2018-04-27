@@ -16,11 +16,12 @@
                         [iconPlaceholder]="'pages.cluster.iconPlaceholder' | translate"
                         iconUrlEmpty="icons/avatar-empty.svg">
         </app-item-header>
-
+<!--
         <app-item-header icon="temp/icons/coffee-icon-blue.png"
                          title="My cluster title!"
                          subtitle="My subtitle">
         </app-item-header>
+-->
 
         <app-item-map [title]="'general.locations' | translate"></app-item-map>
 
@@ -42,12 +43,11 @@
         <app-item-description [form]="form$ | async"
                               [title]="'general.description' | translate"
                               description="description"
-                              [descriptionPlaceholder]="'pages.cluster.subtitlePlaceholder' | translate"
+                              [descriptionPlaceholder]="'pages.cluster.descriptionPlaceholder' | translate"
                               image="photo"
-                              [imagePlaceholder]="'pages.cluster.iconPlaceholder' | translate"
-                              imageUrlEmpty="icons/avatar-empty.svg">
+                              [imagePlaceholder]="'pages.cluster.imagePlaceholder' | translate">
         </app-item-description>
-
+<!--
         <app-item-description [title]="'general.description' | translate"
                               description="The Ionic Conference is a one-day conference featuring talks from the
                               Ionic team. It is focused on Ionic applications being built with
@@ -56,7 +56,8 @@
                               in Ionic 2. Tickets are completely sold out, and we’re expecting
                               more than 1000 developers – making this the largest Ionic
                               conference ever!"
-                              image="temp/icons/coffee-icon-blue.png">
+                              image="temp/images/subscriptions/pokemon-go.jpg">
         </app-item-description>
+-->
     </form>
 </ion-content>

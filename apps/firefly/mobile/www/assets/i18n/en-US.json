@@ -82,10 +82,12 @@
 
         "cluster" :
         {
-            "title"               : "Cluster",
-            "titlePlaceholder"    : "Add your title",
-            "subtitlePlaceholder" : "Add your subtitle",
-            "iconPlaceholder"     : "select icon"
+            "title"                  : "Cluster",
+            "titlePlaceholder"       : "Add your title",
+            "subtitlePlaceholder"    : "Add your subtitle",
+            "iconPlaceholder"        : "select icon",
+            "imagePlaceholder"       : "select image",
+            "descriptionPlaceholder" : "Write a description"
         }
     },
 
