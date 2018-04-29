@@ -88,6 +88,11 @@
             "iconPlaceholder"        : "select icon",
             "imagePlaceholder"       : "select image",
             "descriptionPlaceholder" : "Write a description"
+        },
+
+        "cluster-categories" :
+        {
+            "title" : "Categories"
         }
     },
 
