@@ -3,11 +3,17 @@ import {Component, AfterViewInit} from '@angular/core';
 import {IonicPage} from 'ionic-angular';
 
 import { FormGroup } from '@angular/forms';
-import { StateCluster } from '../../ngxs/cluster/cluster.state';
 import { Observable } from 'rxjs/Observable';
 import { Select, Store } from '@ngxs/store';
 
-import { MapOptions, tileLayer, latLng } from 'leaflet';
+import { Plugins, GeolocationPosition } from '@capacitor/core';
+const { Geolocation } = Plugins;
+
+import { StateCluster } from '../../ngxs/cluster/cluster.state';
+
+
+import { MapOptions, tileLayer, latLng, LatLng } from 'leaflet';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 
 @IonicPage()
 @Component
@@ -31,8 +37,19 @@ export class PagePublisherClusterLocations
         center: latLng(46.879966, -121.726909)
     };
 
+    public center: LatLng = latLng(46.879966, -121.726909);
+
     constructor(private store: Store)
     {
 
+    }
+
+    public ionViewDidLoad(): void
+    {
+        fromPromise(Geolocation.getCurrentPosition()).
+
+        subscribe((coordinates: GeolocationPosition) => {
+            this.center = latLng(coordinates.coords.latitude, coordinates.coords.longitude);
+        });
     }
 }
