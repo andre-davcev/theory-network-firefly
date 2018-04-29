@@ -27,6 +27,8 @@ import {TranslateModule}     from '@ngx-translate/core';
 import {TranslateLoader}     from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 import {CoreModule} from '../core/core.module';
 import {App}        from './app';
 
@@ -124,7 +126,9 @@ export class AppErrorHandler implements ErrorHandler
             disabled: environment.production
         }),
 
-        ModuleComponents
+        ModuleComponents,
+
+        LeafletModule.forRoot()
     ],
 
     declarations :
