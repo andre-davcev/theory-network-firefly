@@ -4,19 +4,19 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {IonicPageModule} from 'ionic-angular';
 
-import {PagePublisherClusterCategories} from './cluster-categories.page';
+import {PagePublisherClusterLocations} from './cluster-locations.page';
 
 @NgModule
 ({
     imports :
     [
-        IonicPageModule.forChild(PagePublisherClusterCategories),
+        IonicPageModule.forChild(PagePublisherClusterLocations),
         TranslateModule
     ],
 
     declarations :
     [
-        PagePublisherClusterCategories
+      PagePublisherClusterLocations
     ]
 })
 

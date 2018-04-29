@@ -29,4 +29,9 @@ export class PagePublisherCluster
     {
         this.nav.push('PagePublisherClusterCategories');
     }
+
+    public navigateLocations(): void
+    {
+        this.nav.push('PagePublisherClusterLocations');
+    }
 }

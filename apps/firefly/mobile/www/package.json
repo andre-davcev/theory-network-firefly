@@ -1,5 +1,5 @@
 {
-    "name": "Firefly",
+    "name": "firefly",
     "version": "0.0.1",
     "author": "Ionic Framework",
     "homepage": "http://ionicframework.com/",
@@ -8,4 +8,3 @@
       "font-awesome": "4.7.0"
     }
   }
-  

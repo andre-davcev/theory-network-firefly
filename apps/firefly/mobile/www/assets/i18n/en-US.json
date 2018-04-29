@@ -93,6 +93,11 @@
         "cluster-categories" :
         {
             "title" : "Categories"
+        },
+
+        "cluster-locations" :
+        {
+            "title" : "Locations"
         }
     },
 
