@@ -23,7 +23,7 @@
         </app-item-header>
 -->
 
-        <app-item-map [title]="'general.locations' | translate"></app-item-map>
+        <app-item-map [title]="'general.locations' | translate" (click)="navigateLocations()"></app-item-map>
 
         <div class="c-detail" fxLayout="column">
             <ion-list>

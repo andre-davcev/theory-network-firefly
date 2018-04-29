@@ -10,11 +10,11 @@ import { Select, Store } from '@ngxs/store';
 @IonicPage()
 @Component
 ({
-    selector    : 'app-page-cluster-categories',
-    templateUrl : 'cluster-categories.page.html'
+    selector    : 'app-page-cluster-locations',
+    templateUrl : 'cluster-locations.page.html'
 })
 
-export class PagePublisherClusterCategories
+export class PagePublisherClusterLocations
 {
     @Select(StateCluster.form) form$: Observable<FormGroup>;
 
