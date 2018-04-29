@@ -1,6 +1,6 @@
 import {Component, AfterViewInit} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
+import {IonicPage, NavController} from 'ionic-angular';
 
 import { FormGroup } from '@angular/forms';
 import { StateCluster, SetClusterId } from '../../ngxs/cluster/cluster.state';
@@ -20,8 +20,13 @@ export class PagePublisherCluster
 
     segment:string = 'clusters';
 
-    constructor(private store: Store)
+    constructor(private store: Store, private nav: NavController)
     {
         this.store.dispatch(new SetClusterId('new'));
+    }
+
+    public navigateCategories(): void
+    {
+        this.nav.push('PagePublisherClusterCategories');
     }
 }
