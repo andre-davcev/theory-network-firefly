@@ -85,12 +85,6 @@ $tn-font-family-lato-italic:                $tn-font-face-name-lato-italic;
 $tn-font-family-lato-light:                 $tn-font-face-name-lato-light;
 $tn-font-family-lato-light-italic:          $tn-font-face-name-lato-light-italic;
 
-// Material Icons
-
-$tn-font-face-name-material-icons:      "Material Icons";
-$tn-font-face-url-material-icons:       url(../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf);
-$tn-font-family-material-icons:         $tn-font-face-name-material-icons;
-
 // Roboto
 
 $tn-font-face-name-roboto:                  "Roboto";
@@ -319,7 +313,7 @@ $twitter-button-icon-content:           "\f099";
 // CORE
 
 $core-font-firefly-face-name:         'Firefly';
-$core-font-firefly-face-url:          url(fonts/firefly.font.ttf);
+$core-font-firefly-face-url:          url(../fonts/firefly/firefly.ttf);
 $core-font-firefly-family:            $core-font-firefly-face-name;
 $core-font-firefly-size:              1.2rem;
 
