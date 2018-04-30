@@ -7,10 +7,6 @@
 
 <ion-content>
     <form novalidate [formGroup]="form$ | async">
-      <div style="height: 300px;"
-      leaflet
-      [leafletOptions]="options"
-      [leafletCenter]="center">
- </div>
+        <app-map></app-map>
     </form>
 </ion-content>

@@ -4,9 +4,8 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {IonicPageModule} from 'ionic-angular';
 
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-
 import {PagePublisherClusterLocations} from './cluster-locations.page';
+import { MapModule } from '../../app/components/map/map.module';
 
 @NgModule
 ({
@@ -14,7 +13,7 @@ import {PagePublisherClusterLocations} from './cluster-locations.page';
     [
         IonicPageModule.forChild(PagePublisherClusterLocations),
         TranslateModule,
-        LeafletModule
+        MapModule
     ],
 
     declarations :
