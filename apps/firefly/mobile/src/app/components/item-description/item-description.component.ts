@@ -1,6 +1,13 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
+/*
+import { Plugins, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { map } from 'rxjs/operators';
+*/
+
 @Component
 ({
     selector        : 'app-item-description',
@@ -21,13 +28,26 @@ export class ItemDescriptionComponent
     @Input() descriptionPlaceholder : string = '';
 
     constructor() { }
+//    constructor(private sanitizer: DomSanitizer) { }
 
     public clickedImage(): void
     {
-        if (this.edit)
+/*
+        const { Camera } = Plugins;
+
+        fromPromise(Camera.getPhoto
+        ({
+            quality      : 100,
+            allowEditing : true,
+            resultType   : CameraResultType.Base64,
+            source       : CameraSource.Photos
+        })).
+        subscribe((cameraPhoto: CameraPhoto) =>
         {
-            this.imageValue = this.imageValue == null || this.imageValue === 'temp/images/subscriptions/pokemon-go.jpg' ? 'temp/images/subscriptions/lilac-festival.jpg' : 'temp/images/subscriptions/pokemon-go.jpg';
-        }
+            console.log(cameraPhoto);
+        });
+*/
+        this.imageValue = this.imageValue == null || this.imageValue === 'temp/images/subscriptions/pokemon-go.jpg' ? 'temp/images/subscriptions/lilac-festival.jpg' : 'temp/images/subscriptions/pokemon-go.jpg';
     }
 
     public get edit(): boolean
