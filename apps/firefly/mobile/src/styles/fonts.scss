@@ -17,7 +17,7 @@
 @font-face
 {
     font-family: $tn-font-face-name-ionic-icons-2;
-    src: $tn-font-face-url-ionic-icons-eot format("embedded-opentype"), 
+    src: $tn-font-face-url-ionic-icons-eot format("embedded-opentype"),
          $tn-font-face-url-ionic-icons-ttf format("truetype"),
          $tn-font-face-url-ionic-icons-woff format("woff"),
          $tn-font-face-url-ionic-icons-svg format("svg");
@@ -286,4 +286,39 @@
 {
     font-family: $tn-font-face-name-san-francisco-text-semibold-italic;
     src: $tn-font-face-url-san-francisco-text-semibold-italic;
+}
+
+
+@font-face
+{
+    font-family: $core-font-firefly-face-name;
+    src: $core-font-firefly-face-url;
+}
+
+.ff-icon
+{
+    &:before
+    {
+        display: inline-block;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        text-rendering: auto;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        font-family: $core-font-firefly-face-name;
+        font-size: $core-font-firefly-size;
+    }
+
+    &.ff-icon-firefly
+    {
+        &:before
+        {
+            content: $core-font-firefly-icon-firefly;
+        }
+    }
 }
