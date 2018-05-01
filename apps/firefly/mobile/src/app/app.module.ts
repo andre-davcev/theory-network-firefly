@@ -12,10 +12,7 @@ import {IonicErrorHandler} from 'ionic-angular';
 import {IonicStorageModule} from '@ionic/storage';
 import {Pro}                from '@ionic/pro';
 
-import {Geolocation}   from '@ionic-native/geolocation';
 import {Globalization} from '@ionic-native/globalization';
-import {Keyboard}      from '@ionic-native/keyboard';
-import {SplashScreen}  from '@ionic-native/splash-screen';
 import {StatusBar}     from '@ionic-native/status-bar';
 import {Facebook}      from '@ionic-native/facebook';
 import {GooglePlus}    from '@ionic-native/google-plus';
@@ -147,9 +144,6 @@ export class AppErrorHandler implements ErrorHandler
     [
         Globalization,
         StatusBar,
-        Geolocation,
-        SplashScreen,
-        Keyboard,
 
         Facebook,
         GooglePlus,

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Plugins, GeolocationPosition } from '@capacitor/core';
 import { MapOptions, tileLayer, latLng, LatLng } from 'leaflet';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { Store, Select } from '@ngxs/store';
+import { StateLocation } from '../../../ngxs/location.state';
+import { Observable } from 'rxjs/Observable';
+import { filter, switchMap } from 'rxjs/operators';
+import { GeolocationPosition } from '@capacitor/core';
+
 
 @Component
 ({
@@ -10,8 +14,11 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
     templateUrl : './map.component.html',
 //    styleUrls   : ['./map.component.scss']
 })
-export class MapComponent implements OnInit
+export class ComponentMap implements OnInit
 {
+    @Select(StateLocation.loading)  loading$  : Observable<boolean>;
+    @Select(StateLocation.location) location$ : Observable<GeolocationPosition>;
+
     public options: MapOptions =
     {
         layers :
@@ -19,24 +26,22 @@ export class MapComponent implements OnInit
             tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
         ],
 
-        zoom: 5,
-        center: latLng(46.879966, -121.726909)
+        zoom: 11
     };
 
-    public center: LatLng = latLng(46.879966, -121.726909);
-
-    constructor() { }
+    constructor(private store: Store) { }
 
     ngOnInit()
     {
-        const { Geolocation } = Plugins;
+        this.loading$.pipe
+        (
+            filter((loading: boolean) => !loading),
+            switchMap((loading: boolean) => this.location$)
+        ).
 
-        fromPromise(Geolocation.getCurrentPosition()).
-
-        subscribe((coordinates: GeolocationPosition) =>
+        subscribe((position: GeolocationPosition) =>
         {
-            this.center = latLng(coordinates.coords.latitude, coordinates.coords.longitude);
+            this.options.center = latLng(position.coords.latitude, position.coords.longitude);
         });
     }
-
 }

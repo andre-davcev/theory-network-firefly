@@ -1,12 +1,15 @@
-import {Component, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
+import {IonicPage, LoadingController, Loading} from 'ionic-angular';
 
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Select, Store } from '@ngxs/store';
 
 import { StateCluster } from '../../ngxs/cluster/cluster.state';
+import { ComponentMap } from '../../app/components/map/map.component';
+import { filter, take } from 'rxjs/operators';
+import { StateLocation } from '../../ngxs/location.state';
 
 @IonicPage()
 @Component
@@ -15,12 +18,31 @@ import { StateCluster } from '../../ngxs/cluster/cluster.state';
     templateUrl : 'cluster-locations.page.html'
 })
 
-export class PagePublisherClusterLocations
+export class PagePublisherClusterLocations implements OnInit
 {
-    @Select(StateCluster.form) form$: Observable<FormGroup>;
+    @Select(StateCluster.form)     form$:            Observable<FormGroup>;
+    @Select(StateLocation.loading) loadingLocation$: Observable<boolean>;
 
-    constructor(private store: Store)
+    private loading: Loading;
+
+    constructor(private store: Store, private loadingController: LoadingController)
     {
 
+    }
+
+    public ngOnInit(): void
+    {
+        this.loadingLocation$.pipe(filter((loading: boolean) => loading), take(1)).
+
+        subscribe(() =>
+        {
+            this.loading = this.loadingController.create({spinner: 'crescent'});
+
+            this.loading.present();
+        });
+
+        this.loadingLocation$.pipe(filter((loading: boolean) => !loading && this.loading != null), take(1)).
+
+        subscribe(() => this.loading.dismiss());
     }
 }
