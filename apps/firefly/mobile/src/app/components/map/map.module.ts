@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { MapComponent } from './map.component';
+import { ComponentMap } from './map.component';
 
 @NgModule
 ({
@@ -11,7 +11,7 @@ import { MapComponent } from './map.component';
         LeafletModule
     ],
 
-    declarations: [MapComponent],
-    exports: [MapComponent]
+    declarations: [ComponentMap],
+    exports: [ComponentMap]
 })
 export class MapModule { }

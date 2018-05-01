@@ -3,12 +3,12 @@ import {Component, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
 import {Events, MenuController, Nav, Platform} from 'ionic-angular';
-import {SplashScreen}                          from '@ionic-native/splash-screen';
-import {Keyboard}                              from '@ionic-native/keyboard';
 import {Storage}                               from '@ionic/storage';
 
 import {PageTabs}  from '../pages/tabs/tabs';
 import {PageLogin} from '../pages/auth/auth';
+import { Store } from '@ngxs/store';
+import { AppInitialize } from '../ngxs/app.state';
 
 export interface PageInterface
 {
@@ -35,7 +35,7 @@ export class App
 
     loggedInPages : PageInterface[] =
     [
-        {title: 'Logout', name: 'TabsPage', component: PageTabs, icon: 'log-out'} 
+        {title: 'Logout', name: 'TabsPage', component: PageTabs, icon: 'log-out'}
     ];
 
     loggedOutPages : PageInterface[] =
@@ -45,11 +45,19 @@ export class App
 
     rootPage:string;
 
-    constructor(public events:Events, public menu:MenuController, public platform:Platform, public storage:Storage, public splashScreen:SplashScreen, public keyboard:Keyboard, private translate: TranslateService)
+    constructor
+    (
+        private events    : Events,
+        private menu      : MenuController,
+        private platform  : Platform,
+        private storage   : Storage,
+        private translate : TranslateService,
+        private store     : Store
+    )
     {
-        translate.setDefaultLang('en');
-
         this.rootPage = 'PageLogin';
+
+        this.store.dispatch(new AppInitialize());
 
 /*
         // Check if the user has already seen the tutorial
@@ -73,8 +81,7 @@ export class App
 
     openPage(page:PageInterface)
     {
-        let
-        params = {};
+        let params = {};
 
         // the nav component was found using @ViewChild(Nav)
         // reset the nav to remove previous pages and only have this page
@@ -101,26 +108,6 @@ export class App
         }
     }
 
-    openTutorial()
-    {
-//        this.nav.setRoot(TutorialPage);
-    }
-
-    platformReady()
-    {
-        if (this.platform.is('cordova'))
-        {
-            // Call any initial plugins when ready
-            this.platform.ready().then(() =>
-            {
-                this.nav.setRoot(this.rootPage).then(() =>
-                {
-                    this.splashScreen.hide();
-                }); 
-            });
-        }
-    }
-
     isActive(page: PageInterface)
     {
         let childNav = this.nav.getActiveChildNavs()[0];
@@ -132,7 +119,7 @@ export class App
             {
                 return 'primary';
             }
-        
+
             return;
         }
 

@@ -2,19 +2,18 @@
 import {State, Selector, Action, StateContext} from '@ngxs/store';
 
 import {Observable} from 'rxjs/Observable';
-import {filter, map, catchError} from 'rxjs/operators';
-
-import {Geolocation, Geoposition} from '@ionic-native/geolocation';
-
+import { fromCallback } from 'rxjs/observable/fromCallback';
 import { of } from 'rxjs/observable/of';
+import {filter, map, catchError, tap} from 'rxjs/operators';
+
+import { Plugins, GeolocationPosition } from '@capacitor/core';
 
 // Actions
-export class LocationGet {}
+export class LocationWatch {}
 
 export interface StateLocationModel
 {
-    location  : Partial<Geoposition>;
-    permitted : boolean;
+    location  : GeolocationPosition;
     error     : Error;
 }
 
@@ -25,39 +24,39 @@ export interface StateLocationModel
     defaults :
     {
         location  : undefined,
-        permitted : false,
         error     : undefined
     }
 })
 
 export class StateLocation
 {
-    constructor(private geolocation: Geolocation) {}
+    constructor() {}
 
     @Selector() static location(state: StateLocationModel)  {return state.location;}
-    @Selector() static permitted(state: StateLocationModel) {return state.permitted;}
     @Selector() static error(state: StateLocationModel)     {return state.error;}
 
+    @Selector() static loading(state: StateLocationModel) {return state.location == null;}
     @Selector() static errored(state: StateLocationModel) {return state.error != null;}
 
-    @Action(LocationGet)
-    locationGet({ getState, setState }: StateContext<StateLocationModel>)
+    @Action(LocationWatch)
+    locationWatch({ patchState }: StateContext<StateLocationModel>)
     {
-        return this.geolocation.watchPosition().pipe
-        (
-            filter((position) => position.coords !== undefined),
+        Plugins.Geolocation.
 
-            map((position: Geoposition) =>
+        watchPosition({enableHighAccuracy: true},
+
+        (location, error) =>
+        {
+            if (error != null)
             {
-                setState
-                ({
-                    ...getState(),
-                    location: position,
-                    permitted: true
-                });
-            }),
-
-            catchError((error: Error) => of(setState({...getState(), error: error})))
-        );
+                console.log(location);
+                patchState({error});
+            }
+            else
+            {
+                console.log(location);
+                patchState({location});
+            }
+        });
     }
 }

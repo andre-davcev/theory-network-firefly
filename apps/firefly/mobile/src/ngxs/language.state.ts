@@ -11,8 +11,9 @@ import {TranslateService} from '@ngx-translate/core';
 
 import { PlatformEnum } from '../enums/platform.enum';
 
-export class LanguageGet {}
-export class LanguageSet {constructor(public payload: string) {}}
+export class LanguageInitialize {}
+export class LanguageGet        {}
+export class LanguageSet        {constructor(public payload: string) {}}
 
 export interface StateLanguageModel
 {
@@ -40,6 +41,12 @@ export class StateLanguage
 
     @Selector() static errored(state: StateLanguageModel) {return state.error != null;}
 
+    @Action(LanguageInitialize)
+    languageInitialize()
+    {
+        this.translate.setDefaultLang('en');
+    }
+
     @Action(LanguageGet)
     languageGet({ patchState, dispatch }: StateContext<StateLanguageModel>)
     {
@@ -53,11 +60,11 @@ export class StateLanguage
         {
             observable = Observable.of({value: navigator.language});
         }
- 
+
         return observable.pipe
         (
             switchMap((language: {value:string}) => dispatch(new LanguageSet(language.value))),
-    
+
             catchError((error: Error) => of(patchState({error: error})))
         )
     }
