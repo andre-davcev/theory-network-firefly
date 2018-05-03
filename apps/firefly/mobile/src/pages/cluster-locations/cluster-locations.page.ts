@@ -45,4 +45,9 @@ export class PagePublisherClusterLocations implements OnInit
 
         subscribe(() => this.loading.dismiss());
     }
+
+    public addLocations(): void
+    {
+
+    }
 }

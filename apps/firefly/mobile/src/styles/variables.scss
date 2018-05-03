@@ -239,15 +239,6 @@ $tn-input-icon-error-width:         $tn-input-icon-font-size * 0.75;
 $tn-input-icon-error-margin:        $tn-input-icon-error-width + (($tn-input-directive-space-right - $tn-input-icon-error-width) / 2);
 $tn-input-icon-clear-width:         $tn-input-icon-font-size;
 
-// Map Orb
-
-$tn-orb-size:                               1.0rem;
-$tn-orb-color-border:                       $ios-map-color-orb-border;
-$tn-orb-color:                              $ios-map-color-orb;
-$tn-orb-color-pulse: 		                $ios-map-color-orb-pulse;
-$tn-duration-pulse:                         3s;
-$tn-duration-dot:                           $tn-duration-pulse;
-
 // Map Pin
 
 $tn-map-pin-icon:                           $fa-var-map-marker;
@@ -438,11 +429,6 @@ $app-color-dark-text-inactive:           #929292;
 $app-color-dark-text-border:             rgba(0, 0, 0, 0.5);
 
 $app-color-light-text:                   #030303;
-
-$app-color-map-orb:                      $balanced;
-$app-color-map-orb-pulse:                rgba(86, 199, 29, 0.5);
-$tn-orb-color:                           $app-color-map-orb;
-$tn-orb-color-pulse:                     $app-color-map-orb-pulse;
 
 $tn-input-icon-verified-color:           $app-color-primary;
 
