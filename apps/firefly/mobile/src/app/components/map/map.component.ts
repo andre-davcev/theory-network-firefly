@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
-import { MapOptions, tileLayer, latLng, LatLng } from 'leaflet';
+import { MapOptions, tileLayer, latLng, LatLng, divIcon, DivIcon, marker, Marker } from 'leaflet';
 import { Store, Select } from '@ngxs/store';
 import { StateLocation } from '../../../ngxs/location.state';
 import { Observable } from 'rxjs/Observable';
 import { filter, switchMap } from 'rxjs/operators';
 import { GeolocationPosition } from '@capacitor/core';
+import { ComponentMapOrb } from '../map-orb/map-orb.component';
+import { LeafletDirective } from '@asymmetrik/ngx-leaflet';
 
 
 @Component
@@ -14,10 +16,17 @@ import { GeolocationPosition } from '@capacitor/core';
     templateUrl : './map.component.html',
 //    styleUrls   : ['./map.component.scss']
 })
-export class ComponentMap implements OnInit
+export class ComponentMap implements OnInit, AfterViewInit
 {
     @Select(StateLocation.loading)  loading$  : Observable<boolean>;
     @Select(StateLocation.location) location$ : Observable<GeolocationPosition>;
+
+    @ViewChild(LeafletDirective)
+    public leafletDirective: LeafletDirective;
+
+    @ViewChild(ComponentMapOrb)
+    public mapOrbComponent: ComponentMapOrb;
+    private mapOrbMarker: Marker;
 
     public options: MapOptions =
     {
@@ -43,5 +52,23 @@ export class ComponentMap implements OnInit
         {
             this.options.center = latLng(position.coords.latitude, position.coords.longitude);
         });
+    }
+
+    ngAfterViewInit(): void
+    {
+/*
+        const mapOrbIcon: DivIcon = divIcon
+        ({
+            iconSize : null,
+            html     : this.mapOrbComponent.html()
+        });
+
+        this.mapOrbMarker = marker(latLng(59.915, 10.735), {icon: mapOrbIcon}).addTo(this.leafletDirective.getMap());
+
+        this.location$.subscribe((position: GeolocationPosition) =>
+        {
+            this.mapOrbMarker.setLatLng(latLng(position.coords.latitude, position.coords.longitude));
+        });
+*/
     }
 }
