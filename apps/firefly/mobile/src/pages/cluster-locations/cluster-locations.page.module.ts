@@ -5,7 +5,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {IonicPageModule} from 'ionic-angular';
 
 import {PagePublisherClusterLocations} from './cluster-locations.page';
-import { MapModule } from '../../app/components/map/map.module';
+import { ModuleMap } from '../../app/components/map/map.module';
 
 @NgModule
 ({
@@ -13,7 +13,7 @@ import { MapModule } from '../../app/components/map/map.module';
     [
         IonicPageModule.forChild(PagePublisherClusterLocations),
         TranslateModule,
-        MapModule
+        ModuleMap
     ],
 
     declarations :

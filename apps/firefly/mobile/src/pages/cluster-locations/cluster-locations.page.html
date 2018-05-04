@@ -6,7 +6,7 @@
 
 
 <ion-content>
-    <form novalidate [formGroup]="form$ | async">
+    <form class="comp-form" novalidate [formGroup]="form$ | async">
         <app-map></app-map>
 
         <ion-fab bottom right (click)="addLocations()">

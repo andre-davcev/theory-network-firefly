@@ -2,9 +2,9 @@ app-map
 {
     position: relative;
 
-    .comp-map
+    mgl-map
     {
-        height: 100vh;
+        height: 100%;
         width: 100%;
     }
 }
