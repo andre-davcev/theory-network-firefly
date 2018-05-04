@@ -4,7 +4,7 @@
         <title>Firefly</title>
 
         <meta charset="UTF-8">
-        <meta http-equiv="Content-Security-Policy" content="script-src * 'unsafe-inline' 'unsafe-eval'">
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' 'self'; script-src * 'unsafe-inline' 'unsafe-eval' blob:; img-src * 'self' data: blob:;"/>
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -15,8 +15,9 @@
         <link rel="manifest" href="manifest.json">
         <link rel="apple-touch-icon" href="assets/img/appicon.png">
 
+        <link href="styles/mapbox-gl.css" rel="stylesheet">
+        <link href="styles/mapbox-gl-geocoder.css" rel="stylesheet">
         <link href="build/main.css" rel="stylesheet">
-        <link href="styles/leaflet.css" rel="stylesheet">
 
 <!-- un-comment this code to enable service worker
         <script>

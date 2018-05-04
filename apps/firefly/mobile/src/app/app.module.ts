@@ -24,7 +24,7 @@ import {TranslateModule}     from '@ngx-translate/core';
 import {TranslateLoader}     from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 import {CoreModule} from '../core/core.module';
 import {App}        from './app';
@@ -125,7 +125,10 @@ export class AppErrorHandler implements ErrorHandler
 
         ModuleComponents,
 
-        LeafletModule.forRoot()
+        NgxMapboxGLModule.forRoot
+        ({
+            accessToken: '***REMOVED-MAPBOX-TOKEN***'
+        })
     ],
 
     declarations :

@@ -1,6 +1,6 @@
-<div class="comp-map"
-     leaflet
-     [leafletOptions]="options"
-     [leafletCenter]="options.center"
-     *ngIf="location$ | async">
-</div>
+<mgl-map *ngIf="location"
+         [style]="'mapbox://styles/mapbox/streets-v9'"
+         [zoom]="10"
+         [center]="[location.coords.longitude, location.coords.latitude]" >
+         <mgl-control mglNavigation position="top-left"></mgl-control>
+</mgl-map>

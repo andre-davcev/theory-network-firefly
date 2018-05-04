@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { ComponentMap } from './map.component';
+import { ModuleMapOrb } from '../map-orb/map-orb.module';
 
 @NgModule
 ({
     imports :
     [
         CommonModule,
-        LeafletModule
+        ModuleMapOrb,
+        NgxMapboxGLModule
     ],
 
     declarations: [ComponentMap],
     exports: [ComponentMap]
 })
-export class MapModule { }
+export class ModuleMap { }
