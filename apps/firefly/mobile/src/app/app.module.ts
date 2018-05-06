@@ -60,6 +60,7 @@ import { ModuleComponents } from '@theory/firefly/core/components';
 import { FormCluster } from './forms/cluster.form';
 import { StateCluster } from '../state/cluster/cluster.state';
 import { ClusterService } from '../services/services.cluster';
+import { ModulePagePublisherClusterLocationsAdd } from '../pages/cluster-locations-add/cluster-locations-add.module';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -128,7 +129,9 @@ export class AppErrorHandler implements ErrorHandler
         NgxMapboxGLModule.forRoot
         ({
             accessToken: '***REMOVED-MAPBOX-TOKEN***'
-        })
+        }),
+
+        ModulePagePublisherClusterLocationsAdd
     ],
 
     declarations :

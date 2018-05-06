@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {IonicPage, LoadingController, Loading} from 'ionic-angular';
+import {IonicPage, LoadingController, Loading, ModalController} from 'ionic-angular';
 
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +10,7 @@ import { StateCluster } from '../../state/cluster/cluster.state';
 import { ComponentMap } from '../../app/components/map/map.component';
 import { filter, take } from 'rxjs/operators';
 import { StateLocation } from '../../state/location.state';
+import { PagePublisherClusterLocationsAdd } from '../cluster-locations-add/cluster-locations-add.page';
 
 @IonicPage()
 @Component
@@ -25,13 +26,17 @@ export class PagePublisherClusterLocations implements OnInit
 
     private loading: Loading;
 
-    constructor(private store: Store, private loadingController: LoadingController)
+    public modal: any;
+
+    constructor(private store: Store, private loadingController: LoadingController, public modalController: ModalController)
     {
 
     }
 
     public ngOnInit(): void
     {
+        this.modal = this.modalController.create(PagePublisherClusterLocationsAdd);
+
         this.loadingLocation$.pipe(filter((loading: boolean) => loading), take(1)).
 
         subscribe(() =>
@@ -48,6 +53,6 @@ export class PagePublisherClusterLocations implements OnInit
 
     public addLocations(): void
     {
-
+        this.modal.present();
     }
 }
