@@ -44,35 +44,32 @@ export class PageLogin
 
     public ionViewDidLoad()
     {
-//        this.subscriptionsAdd
-//        (
-            this.userFound$.pipe
+        this.userFound$.pipe
+        (
+            filter((userFound: boolean) => userFound),
+            take(1)
+        ).
+
+        subscribe((userFound: boolean) =>
+        {
+            this.nav.push('PageTabs');
+        });
+
+        forkJoin
+        (
+            timer(1875),
+
+            this.store.dispatch(new UserAuthenticate()).pipe
             (
-                filter((userFound: boolean) => userFound),
+                switchMap(() => this.userAuthenticated$),
+
+                switchMap((authenticated: boolean) => authenticated ? this.userFound$.pipe(filter((found: boolean) => found)) : of(authenticated)),
+
                 take(1)
-            ).
+            )
+        ).
 
-            subscribe((userFound: boolean) =>
-            {
-                this.nav.push('PageTabs');
-            });
-
-            forkJoin
-            (
-                timer(1875),
-
-                this.store.dispatch(new UserAuthenticate()).pipe
-                (
-                    switchMap(() => this.userAuthenticated$),
-
-                    switchMap((authenticated: boolean) => authenticated ? this.userFound$.pipe(filter((found: boolean) => found)) : of(authenticated)),
-
-                    take(1)
-                )
-            ).
-
-            subscribe(() => this.ready = true);
-//        );
+        subscribe(() => this.ready = true);
     }
 
     login(provider: AuthProvider)

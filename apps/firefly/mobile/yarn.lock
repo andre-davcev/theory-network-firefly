@@ -551,13 +551,13 @@
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@ngx-translate/http-loader/-/http-loader-2.0.1.tgz#aa67788e64bfa8652691a77b022b3b4031209113"
 
-"@ngxs/devtools-plugin@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@ngxs/devtools-plugin/-/devtools-plugin-2.0.0.tgz#fcbf39d2c57ffd635b447c7932ae102d1654114b"
+"@ngxs/devtools-plugin@^2.1.0-beta.9":
+  version "2.1.0-dev.f876ab3"
+  resolved "https://registry.yarnpkg.com/@ngxs/devtools-plugin/-/devtools-plugin-2.1.0-dev.f876ab3.tgz#578ccccc157200f0c0a9410af90e0515f266008d"
   dependencies:
     tslib "^1.7.1"
 
-"@ngxs/store@^2.1.0-beta.7":
+"@ngxs/store@^2.1.0-beta.9":
   version "2.1.0-dev.f876ab3"
   resolved "https://registry.yarnpkg.com/@ngxs/store/-/store-2.1.0-dev.f876ab3.tgz#9f66c9e406c04758fdeb06585da11811306ed6d8"
   dependencies:
