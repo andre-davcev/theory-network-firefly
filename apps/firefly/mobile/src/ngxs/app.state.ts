@@ -2,6 +2,7 @@ import {State, Action, Store, StateContext} from '@ngxs/store';
 
 import { LocationWatch } from './location.state';
 import { LanguageInitialize } from './language.state';
+import { UserAuthenticate } from './user.state';
 
 export class AppInitialize   {constructor() {}}
 

@@ -85,12 +85,13 @@ export class StateUser
                 }
                 else
                 {
-                    console.log(authData);
                     patchState({authData: authData});
 
                     return dispatch(new UserGet(authData));
                 }
             }),
+
+            take(1),
 
             catchError((error: Error) => of(patchState({error: error})))
         );
