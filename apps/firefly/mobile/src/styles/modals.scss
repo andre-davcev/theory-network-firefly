@@ -1,0 +1,12 @@
+.ion-page
+{
+    > .app-transparent
+    {
+        background-color: transparent;
+
+        .scroll-content
+        {
+            background-color: transparent;
+        }
+    }
+}
