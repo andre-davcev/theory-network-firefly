@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "Angular.ng-template",
+        "EditorConfig.editorconfig",
+        "eg2.tslint",
+        "msjsdiag.debugger-for-chrome",
+        "christian-kohler.path-intellisense",
+        "natewallace.angular2-inline",
+        "glen-84.sass-lint",
+        "PKief.material-icon-theme",
+        "johnpapa.winteriscoming",
+        "eamodio.gitlens",
+        "CoenraadS.bracket-pair-colorizer",
+        "oderwat.indent-rainbow"
+    ]
+}

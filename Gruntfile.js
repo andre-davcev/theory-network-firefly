@@ -128,11 +128,7 @@ module.exports = function(grunt)
         }
     });
 
-    //////////////////////////////////////////////////////////////
-    //  Shared tasks between projects
-    //////////////////////////////////////////////////////////////
-
-    // Export sketch doc 
+    // Export sketch doc resources
     grunt.registerTask('exports',
     [
         'sketch_export:exports',
