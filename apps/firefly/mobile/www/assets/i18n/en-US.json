@@ -5,7 +5,10 @@
         "locations"   : "Locations",
         "description" : "Description",
         "categories"  : "Categories",
-        "isPrivate"   : "Is Private"
+        "isPrivate"   : "Is Private",
+        "add"         : "Add",
+        "cancel"      : "Cancel",
+        "done"        : "Done"
     },
 
     "tabs":

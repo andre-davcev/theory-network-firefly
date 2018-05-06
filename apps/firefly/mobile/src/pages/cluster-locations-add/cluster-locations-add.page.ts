@@ -9,13 +9,13 @@ import { ViewController } from 'ionic-angular';
 
 export class PagePublisherClusterLocationsAdd
 {
-    public  searchQuery : string = '';
-    private items       : Array<string>;
-    private searching   : boolean = true;
+    public searchQuery : string = '';
+    public items       : Array<string> = [];
+    private searching  : boolean = true;
 
     constructor(public viewController: ViewController)
     {
-        this.initializeItems();
+
     }
 
     private initializeItems()
@@ -25,16 +25,21 @@ export class PagePublisherClusterLocationsAdd
             'Amsterdam',
             'Bogota'
         ];
-      }
+    }
 
-    public dismissModal(): void
+    public dismissModalWithCheck(): void
     {
         if (!this.searching)
         {
-            this.viewController.dismiss();
+            this.dismissModal();
         }
 
         this.searching = false;
+    }
+
+    public dismissModal(): void
+    {
+        this.viewController.dismiss();
     }
 
     public clickedSearch(): void
@@ -44,9 +49,6 @@ export class PagePublisherClusterLocationsAdd
 
     public filter(event: any): void
     {
-
-        console.log(event.target.value);
-
         // Reset items back to all of the items
         this.initializeItems();
 
@@ -61,5 +63,14 @@ export class PagePublisherClusterLocationsAdd
                 return (item.toLowerCase().indexOf(value.toLowerCase()) > -1);
             })
         }
+        else
+        {
+            this.items = [];
+        }
+    }
+
+    public addItems(): void
+    {
+        this.dismissModal();
     }
 }
