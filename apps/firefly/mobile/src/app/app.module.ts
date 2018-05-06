@@ -52,13 +52,13 @@ import { reducers } from '../redux/app/store';
 import {NgxsModule}                    from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 
-import { StateApp } from '../ngxs/app.state';
-import { StateLocation } from '../ngxs/location.state';
-import { StateLanguage } from '../ngxs/language.state';
-import { StateUser } from '../ngxs/user.state';
+import { StateApp } from '../state/app.state';
+import { StateLocation } from '../state/location.state';
+import { StateLanguage } from '../state/language.state';
+import { StateUser } from '../state/user.state';
 import { ModuleComponents } from '@theory/firefly/core/components';
 import { FormCluster } from './forms/cluster.form';
-import { StateCluster } from '../ngxs/cluster/cluster.state';
+import { StateCluster } from '../state/cluster/cluster.state';
 import { ClusterService } from '../services/services.cluster';
 
 export function HttpLoaderFactory(http: HttpClient)
