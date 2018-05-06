@@ -42,7 +42,7 @@ export class PagePublisherClusterLocationsAdd
         this.searching = true;
     }
 
-    public filter(event: any): Array<string>
+    public filter(event: any): void
     {
 
         console.log(event.target.value);
@@ -61,7 +61,5 @@ export class PagePublisherClusterLocationsAdd
                 return (item.toLowerCase().indexOf(value.toLowerCase()) > -1);
             })
         }
-
-        return [];
     }
 }

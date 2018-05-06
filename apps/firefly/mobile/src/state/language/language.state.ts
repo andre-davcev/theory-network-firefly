@@ -9,11 +9,8 @@ import {Globalization}    from '@ionic-native/globalization';
 import {Platform}         from 'ionic-angular';
 import {TranslateService} from '@ngx-translate/core';
 
-import { PlatformEnum } from '../enums/platform.enum';
-
-export class LanguageInitialize {}
-export class LanguageGet        {}
-export class LanguageSet        {constructor(public payload: string) {}}
+import { PlatformEnum } from '../../enums/platform.enum';
+import { LanguageInitialize, LanguageGet, LanguageSet } from './language.actions';
 
 export interface StateLanguageModel
 {

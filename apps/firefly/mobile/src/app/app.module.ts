@@ -52,10 +52,10 @@ import { reducers } from '../redux/app/store';
 import {NgxsModule}                    from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 
-import { StateApp } from '../state/app.state';
-import { StateLocation } from '../state/location.state';
-import { StateLanguage } from '../state/language.state';
-import { StateUser } from '../state/user.state';
+import { StateApp } from '../state/app/app.state';
+import { StateLocation } from '../state/location/location.state';
+import { StateLanguage } from '../state/language/language.state';
+import { StateUser } from '../state/user/user.state';
 import { ModuleComponents } from '@theory/firefly/core/components';
 import { FormCluster } from './forms/cluster.form';
 import { StateCluster } from '../state/cluster/cluster.state';

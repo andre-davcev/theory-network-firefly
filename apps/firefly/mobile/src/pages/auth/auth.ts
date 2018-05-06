@@ -19,7 +19,8 @@ import { timer } from 'rxjs/observable/timer';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { of } from 'rxjs/observable/of';
 import { Store, Select } from '@ngxs/store';
-import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail, UserCreate, StateUser } from '../../state/user.state';
+import { StateUser } from '../../state/user/user.state';
+import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail, UserCreate } from '../../state/user/user.actions';
 
 @IonicPage()
 @Component
