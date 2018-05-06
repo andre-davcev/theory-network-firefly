@@ -90,7 +90,7 @@ export class AppErrorHandler implements ErrorHandler
         BrowserModule,
         HttpClientModule,
 
-        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireModule.initializeApp(environment.apis.firebase),
         IonicStorageModule.forRoot(),
 
         IonicModule.forRoot(App,
@@ -128,7 +128,7 @@ export class AppErrorHandler implements ErrorHandler
 
         NgxMapboxGLModule.forRoot
         ({
-            accessToken: 'pk.eyJ1IjoidGhlb3J5bmV0d29yayIsImEiOiJjamdwem04eGwwMXVsMnZwaGR2YzZxdGxvIn0.1mwIacOT0bTANo6lueSQmg'
+            accessToken: environment.apis.maps.accessToken
         }),
 
         ModulePagePublisherClusterLocationsAdd
