@@ -6,7 +6,7 @@ import {Page} from '../page';
 
 import {Store} from '@ngxs/store';
 import { Cluster } from '../../models/cluster';
-import { SetCluster } from '../../ngxs/cluster/cluster.state';
+import { SetCluster } from '../../state/cluster/cluster.state';
 
 @IonicPage()
 @Component

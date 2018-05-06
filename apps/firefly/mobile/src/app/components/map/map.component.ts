@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 
 import { Store, Select } from '@ngxs/store';
-import { StateLocation } from '../../../ngxs/location.state';
+import { StateLocation } from '../../../state/location.state';
 import { Observable } from 'rxjs/Observable';
 import { filter, switchMap } from 'rxjs/operators';
 import { GeolocationPosition } from '@capacitor/core';

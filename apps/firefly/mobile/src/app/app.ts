@@ -8,7 +8,7 @@ import {Storage}                               from '@ionic/storage';
 import {PageTabs}  from '../pages/tabs/tabs';
 import {PageLogin} from '../pages/auth/auth';
 import { Store } from '@ngxs/store';
-import { AppInitialize } from '../ngxs/app.state';
+import { AppInitialize } from '../state/app.state';
 
 export interface PageInterface
 {
