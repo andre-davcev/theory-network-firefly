@@ -1,6 +1,10 @@
 <mgl-map *ngIf="location"
          [style]="'mapbox://styles/mapbox/streets-v9'"
          [zoom]="10"
-         [center]="[location.coords.longitude, location.coords.latitude]" >
+         [center]="center">
+
          <mgl-control mglNavigation position="top-left"></mgl-control>
+         <mgl-marker [lngLat]="center">
+            <app-map-orb></app-map-orb>
+         </mgl-marker>
 </mgl-map>
