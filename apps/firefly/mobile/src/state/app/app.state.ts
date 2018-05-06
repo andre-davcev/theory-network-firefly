@@ -1,10 +1,9 @@
 import {State, Action, Store, StateContext} from '@ngxs/store';
 
-import { LocationWatch } from './location.state';
-import { LanguageInitialize } from './language.state';
-import { UserAuthenticate } from './user.state';
-
-export class AppInitialize   {constructor() {}}
+import { LocationWatch } from '../location/location.actions';
+import { LanguageInitialize } from '../language/language.actions';
+import { UserAuthenticate } from '../user/user.actions';
+import { AppInitialize } from './app.actions';
 
 export interface StateAppModel
 {

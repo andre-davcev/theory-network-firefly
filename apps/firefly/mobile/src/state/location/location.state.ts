@@ -7,9 +7,7 @@ import { of } from 'rxjs/observable/of';
 import {filter, map, catchError, tap} from 'rxjs/operators';
 
 import { Plugins, GeolocationPosition } from '@capacitor/core';
-
-// Actions
-export class LocationWatch {}
+import { LocationWatch } from './location.actions';
 
 export interface StateLocationModel
 {

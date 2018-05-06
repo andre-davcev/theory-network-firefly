@@ -9,7 +9,7 @@ import { Select, Store } from '@ngxs/store';
 import { StateCluster } from '../../state/cluster/cluster.state';
 import { ComponentMap } from '../../app/components/map/map.component';
 import { filter, take } from 'rxjs/operators';
-import { StateLocation } from '../../state/location.state';
+import { StateLocation } from '../../state/location/location.state';
 import { PagePublisherClusterLocationsAdd } from '../cluster-locations-add/cluster-locations-add.page';
 
 @IonicPage()

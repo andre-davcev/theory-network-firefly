@@ -7,16 +7,15 @@ import { Observable } from "rxjs/Observable";
 import { State, StateContext } from "@ngxs/store";
 import { Action } from "@ngxs/store";
 import { Selector } from "@ngxs/store";
-import { StateUser } from "../user.state";
+import { StateUser } from "../user/user.state";
 import { FormGroup } from "@angular/forms";
 import { Select } from "@ngxs/store";
 import { User } from "../../models/user";
 import { ClusterService } from "../../services/services.cluster";
 import { FormCluster } from "../../app/forms/cluster.form";
+import { GetClusters, SetClusterId, SetCluster } from "./cluster.actions";
 
-export class GetClusters  {}
-export class SetClusterId {constructor(public payload: string)  {}}
-export class SetCluster   {constructor(public payload: Cluster) {}}
+
 
 export interface StateClusterModel
 {
@@ -86,8 +85,6 @@ export class StateCluster
             id,
             form: id === 'new' ? this.formCluster.build() : this.formCluster.build(state.entities[id])
         });
-
-        console.log(getState());
     }
 
     @Action(SetCluster)
@@ -96,13 +93,12 @@ export class StateCluster
         return this.clusterService
         .setCluster(payload)
         .pipe(
-            map((cluster:Cluster) => {
+            map((cluster:Cluster) =>
+            {
                 const entities:{ [id: number]: Cluster } = {};
                 entities[cluster.id] = cluster;
 
-                patchState({
-                        entities
-                    });
+                patchState({entities});
             })
         )
     }

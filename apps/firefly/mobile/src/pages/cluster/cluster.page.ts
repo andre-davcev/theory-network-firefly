@@ -3,7 +3,8 @@ import {Component, AfterViewInit} from '@angular/core';
 import {IonicPage, NavController} from 'ionic-angular';
 
 import { FormGroup } from '@angular/forms';
-import { StateCluster, SetClusterId } from '../../state/cluster/cluster.state';
+import { StateCluster } from '../../state/cluster/cluster.state';
+import { SetClusterId } from '../../state/cluster/cluster.actions';
 import { Observable } from 'rxjs/Observable';
 import { Select, Store } from '@ngxs/store';
 

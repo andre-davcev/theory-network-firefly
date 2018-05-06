@@ -9,31 +9,18 @@ import {Platform} from 'ionic-angular';
 
 import * as firebase from 'firebase';
 
-import { PlatformEnum } from '../enums/platform.enum';
+import { PlatformEnum } from '../../enums/platform.enum';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Select } from '@ngxs/store';
-import { StateLanguage, LanguageGet, LanguageSet } from './language.state';
-import { AuthProvider } from '../enums/auth.provider';
-import { Credentials } from '../models/credentials';
-import { User } from '../models/user';
-
-// Actions
-export class UserAuthenticate      {}
-export class UserAuthenticateCheck {constructor(public payload: firebase.User) {}}
-export class UserGet               {constructor(public payload: firebase.User) {}}
-export class UserCreate            {}
-export class LoginEmail            {constructor(public payload: Credentials) {}}
-export class LoginFacebook         {}
-export class LoginFacebookBrowser  {}
-export class LoginFacebookDevice   {}
-export class LoginGoogle           {}
-export class LoginGoogleBrowser    {}
-export class LoginGoogleDevice     {}
-export class UserLogout            {}
-export class UserSet               {constructor(public payload: User){}}
+import { StateLanguage } from '../language/language.state';
+import { LanguageGet, LanguageSet } from '../language/language.actions';
+import { AuthProvider } from '../../enums/auth.provider';
+import { Credentials } from '../../models/credentials';
+import { User } from '../../models/user';
+import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, LoginFacebook, LoginFacebookBrowser, LoginFacebookDevice, LoginGoogle, LoginGoogleBrowser, LoginGoogleDevice, UserLogout } from './user.actions';
 
 export interface StateUserModel
 {
@@ -109,36 +96,36 @@ export class StateUser
             tap((language: string) =>
             {
                 const authData: firebase.User = payload;
-                
+
                 if (authData == null)
                 {
                     patchState({authData: undefined, authenticated: false, error: {name: 'Failed Login', message: 'Unable to login'}});
                 }
-                else 
+                else
                 {
                     const user : Partial<User> =
                     {
                         uid      : authData.uid,
                         language : language
                     };
-    
+
                     console.log(authData);
-    
+
                     const providerData : firebase.UserInfo = authData.providerData[0];
-    
+
                     const displayName : string = providerData.displayName;
                     const email       : string = providerData.email;
                     const phoneNumber : string = providerData.phoneNumber;
                     const photoURL    : string = providerData.photoURL;
                     const providerId  : string = providerData.providerId;
-    
+
                     if (displayName != null) {user.displayName = displayName;}
                     if (email       != null) {user.email       = email;}
                     if (phoneNumber != null) {user.phoneNumber = phoneNumber;}
                     if (photoURL    != null) {user.photoURL    = photoURL;}
-    
+
                     user.uidInternal = providerId + ':' + providerId === AuthProvider.Email ? email : user.uid;
-    
+
                     patchState({authData: authData, authenticated: true, user: user as User});
                 }
             })
@@ -186,13 +173,13 @@ export class StateUser
             catchError((error: Error) => of(patchState({error: error})))
         );
     }
-    
+
     @Action(LoginFacebook)
     loginFacebook({ dispatch }: StateContext<StateUserModel>)
     {
         return this.platform.is(PlatformEnum.Cordova) ? dispatch(new LoginFacebookDevice()) : dispatch(new LoginFacebookBrowser());
     }
-    
+
     @Action(LoginFacebookBrowser)
     loginFacebookBrowser({ patchState, dispatch }: StateContext<StateUserModel>)
     {
@@ -219,14 +206,14 @@ export class StateUser
             switchMap((response: FacebookLoginResponse) =>
             {
                 const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-        
+
                 return Observable.fromPromise(firebase.auth().signInWithCredential(credential));
             }),
-            
+
             switchMap((response: any) =>
             {
                 const authData: firebase.User = response as firebase.User;
-        
+
                 return dispatch(new UserAuthenticateCheck(authData));
             }),
 
@@ -239,7 +226,7 @@ export class StateUser
     {
         return this.platform.is(PlatformEnum.Cordova) ? dispatch(new LoginGoogleDevice()) : dispatch(new LoginGoogleBrowser());
     }
-    
+
     @Action(LoginGoogleBrowser)
     loginGoogleBrowser({ patchState, dispatch }: StateContext<StateUserModel>)
     {
@@ -266,14 +253,14 @@ export class StateUser
             switchMap((response: FacebookLoginResponse) =>
             {
                 const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-        
+
                 return Observable.fromPromise(firebase.auth().signInWithCredential(credential));
             }),
-            
+
             switchMap((response: any) =>
             {
                 const authData: firebase.User = response as firebase.User;
-        
+
                 return dispatch(new UserAuthenticateCheck(authData));
             }),
 
