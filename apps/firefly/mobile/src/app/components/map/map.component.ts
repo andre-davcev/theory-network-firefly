@@ -20,6 +20,7 @@ export class ComponentMap implements OnInit
     @Select(StateLocation.location) location$ : Observable<GeolocationPosition>;
 
     public location: GeolocationPosition;
+    public center: Array<number>;
 
     private componentMapOrb: ComponentMapOrb;
 
@@ -27,6 +28,15 @@ export class ComponentMap implements OnInit
 
     ngOnInit()
     {
-        this.location$.subscribe((position: GeolocationPosition) => this.location = position);
+        this.location$.subscribe((position: GeolocationPosition) =>
+        {
+            this.location = position;
+
+            this.center =
+            [
+                position.coords.longitude,
+                position.coords.latitude
+            ]
+        });
     }
 }
