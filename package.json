@@ -23,7 +23,13 @@
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "postinstall": "./node_modules/.bin/nx postinstall",
     "help": "./node_modules/.bin/nx help",
-    "firefly-mobile": "cd ./apps/firefly/mobile && ionic"
+
+    "fire-mobile-serve": "cd ./apps/firefly/mobile && ionic serve",
+    "fire-design-icon": "grunt sketch_export:icon",
+    "fire-design-splash": "grunt sketch_export:splash",
+    "fire-design-logo": "grunt sketch_export:logo",
+    "fire-design-text": "grunt sketch_export:text",
+    "fire-design-exports": "grunt exports"
   },
   "private": true,
   "dependencies": {
@@ -68,6 +74,14 @@
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
-    "typescript": "2.6.2"
+    "typescript": "2.6.2",
+
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-rename": "0.0.3",
+    "grunt-sketch": "^1.0.5",
+    "load-grunt-tasks": "^3.5.2",
+    "time-grunt": "^1.4.0"
   }
 }
