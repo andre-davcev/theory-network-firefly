@@ -47,3 +47,7 @@ Thumbs.db
 **/www/build
 **/.tmp
 **/.sourcemaps
+
+# Custom
+yarn.lock
+**/yarn.lock
