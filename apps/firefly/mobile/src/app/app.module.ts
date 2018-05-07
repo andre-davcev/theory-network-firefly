@@ -61,6 +61,8 @@ import { FormCluster } from './forms/cluster.form';
 import { StateCluster } from '../state/cluster/cluster.state';
 import { ClusterService } from '../services/services.cluster';
 import { ModulePagePublisherClusterLocationsAdd } from '../pages/cluster-locations-add/cluster-locations-add.module';
+import { StatePlaces } from '../state/places/places.state';
+import { AgmCoreModule } from '@agm/core';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -116,7 +118,8 @@ export class AppErrorHandler implements ErrorHandler
             StateLanguage,
             StateLocation,
             StateUser,
-            StateCluster
+            StateCluster,
+            StatePlaces
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot
@@ -129,6 +132,12 @@ export class AppErrorHandler implements ErrorHandler
         NgxMapboxGLModule.forRoot
         ({
             accessToken: environment.apis.maps.accessToken
+        }),
+
+        AgmCoreModule.forRoot
+        ({
+            apiKey    : environment.apis.places.apiKey,
+            libraries : ['places']
         }),
 
         ModulePagePublisherClusterLocationsAdd
@@ -150,6 +159,7 @@ export class AppErrorHandler implements ErrorHandler
     [
         Globalization,
         StatusBar,
+
 
         Facebook,
         GooglePlus,
