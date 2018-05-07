@@ -21,7 +21,7 @@ export const environment: Environment =
 
         places :
         {
-            apiKey: 'AIzaSyCiJwtZoYiPRN3uEsW5B7UqyON9wgNJAZ8'
+            apiKey: 'AIzaSyDA3InhwoYDZy5fDFhE_JlBKQoO2ucS_B0'
         },
 
         maps :

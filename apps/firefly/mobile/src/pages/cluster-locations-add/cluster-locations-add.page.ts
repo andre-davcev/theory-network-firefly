@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import { ViewController, Searchbar } from 'ionic-angular';
+import { Store } from '@ngxs/store';
+import { AutocompleteBind, AutocompleteUnbind } from '../../state/places/places.actions';
 
 @Component
 ({
@@ -13,9 +15,22 @@ export class PagePublisherClusterLocationsAdd
     public items       : Array<string> = [];
     private searching  : boolean = true;
 
-    constructor(public viewController: ViewController)
+    @ViewChild('searchBar')
+    public searchBarElement: Searchbar;
+
+    constructor(private viewController: ViewController, private store: Store)
     {
 
+    }
+
+    public ngOnInit(): void
+    {
+        this.store.dispatch(new AutocompleteBind(this.searchBarElement._elementRef.nativeElement.querySelector('.searchbar-input')));
+    }
+
+    public ngOnDestroy(): void
+    {
+        this.store.dispatch(new AutocompleteUnbind());
     }
 
     private initializeItems()
