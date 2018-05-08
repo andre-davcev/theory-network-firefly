@@ -39,7 +39,7 @@ export class StateLocation
     @Action(LocationWatch)
     locationWatch({ patchState }: StateContext<StateLocationModel>)
     {
-        Plugins.Geolocation.
+        return Plugins.Geolocation.
 
         watchPosition({enableHighAccuracy: true},
 
