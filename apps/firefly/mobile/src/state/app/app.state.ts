@@ -5,6 +5,7 @@ import { LanguageInitialize } from '../language/language.actions';
 import { UserAuthenticate } from '../user/user.actions';
 import { AppInitialize } from './app.actions';
 import { PlacesInitialize } from '../places/places.actions';
+import { DeviceInitialize } from '../device/device.actions';
 
 export interface StateAppModel
 {
@@ -28,6 +29,7 @@ export class StateApp
     @Action(AppInitialize)
     appInitialize({ dispatch} : StateContext<StateAppModel>)
     {
+        dispatch(new DeviceInitialize());
         dispatch(new LanguageInitialize());
         dispatch(new LocationWatch());
         dispatch(new PlacesInitialize());
