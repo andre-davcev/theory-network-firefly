@@ -3,7 +3,8 @@
          [zoom]="10"
          [center]="center">
 
-         <mgl-control mglNavigation position="top-left"></mgl-control>
+         <mgl-control mglNavigation position="top-left" *ngIf="web$ | async"></mgl-control>
+
          <mgl-marker [lngLat]="center">
             <app-map-orb></app-map-orb>
          </mgl-marker>
