@@ -63,6 +63,7 @@ import { ClusterService } from '../services/services.cluster';
 import { ModulePagePublisherClusterLocationsAdd } from '../pages/cluster-locations-add/cluster-locations-add.module';
 import { StatePlaces } from '../state/places/places.state';
 import { AgmCoreModule } from '@agm/core';
+import { StateDevice } from '../state/device/device.state';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -117,6 +118,7 @@ export class AppErrorHandler implements ErrorHandler
             StateApp,
             StateLanguage,
             StateLocation,
+            StateDevice,
             StateUser,
             StateCluster,
             StatePlaces
