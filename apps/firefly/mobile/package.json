@@ -50,6 +50,7 @@
     "@ngxs/devtools-plugin": "^2.1.0-beta.9",
     "@ngxs/store": "^2.1.0-beta.9",
     "angularfire2": "^5.0.0-rc.3",
+    "cordova-plugin-globalization": "^1.11.0",
     "firebase": "4.12.0",
     "font-awesome": "4.7.0",
     "ionic-angular": "3.9.2",
@@ -95,5 +96,10 @@
     "ionic_aot_write_to_disk": true,
     "ionic_watch": "./config/watch.config.js",
     "ionic_webpack": "./config/webpack.config.js"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-globalization": {}
+    }
   }
 }
