@@ -1,8 +1,12 @@
 export enum ActionsPlaces
 {
-    PlacesInitialize   = '[Places] Places Initialize',
-    AutocompleteBind   = '[Places] Autocomplete Bind',
-    AutocompleteUnbind = '[Places] Autocomplete Unbind',
+    PlacesInitialize = '[Places] Places Initialize',
+
+    PlacesAutocompleteBind   = '[Places] Places Autocomplete Bind',
+    PlacesAutocompleteUnbind = '[Places] Places Autocomplete Unbind',
+
+    PlaceSearch         = '[Places] Place Search',
+    PlaceSearchExtended = '[Places] Place Search Extended'
 }
 
 export class PlacesInitialize
@@ -12,16 +16,30 @@ export class PlacesInitialize
     constructor() {}
 }
 
-export class AutocompleteBind
+export class PlacesAutocompleteBind
 {
-    static readonly type = ActionsPlaces.AutocompleteBind;
+    static readonly type = ActionsPlaces.PlacesAutocompleteBind;
 
     constructor(public payload: HTMLInputElement) {}
 }
 
-export class AutocompleteUnbind
+export class PlacesAutocompleteUnbind
 {
-    static readonly type = ActionsPlaces.AutocompleteUnbind;
+    static readonly type = ActionsPlaces.PlacesAutocompleteUnbind;
 
     constructor() {}
+}
+
+export class PlaceSearch
+{
+    static readonly type = ActionsPlaces.PlaceSearch;
+
+    constructor(public payload: string) {}
+}
+
+export class PlaceSearchExtended
+{
+    static readonly type = ActionsPlaces.PlaceSearch;
+
+    constructor(public payload: string) {}
 }

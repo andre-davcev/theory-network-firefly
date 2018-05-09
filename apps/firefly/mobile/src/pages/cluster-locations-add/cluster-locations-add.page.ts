@@ -1,7 +1,9 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import { ViewController, Searchbar } from 'ionic-angular';
-import { Store } from '@ngxs/store';
-import { AutocompleteBind, AutocompleteUnbind } from '../../state/places/places.actions';
+import { Store, Select } from '@ngxs/store';
+import { PlaceSearch } from '../../state/places/places.actions';
+import { StatePlaces } from '../../state/places/places.state';
+import { Observable } from 'rxjs/Observable';
 
 @Component
 ({
@@ -11,35 +13,15 @@ import { AutocompleteBind, AutocompleteUnbind } from '../../state/places/places.
 
 export class PagePublisherClusterLocationsAdd
 {
-    public searchQuery : string = '';
-    public items       : Array<string> = [];
-    private searching  : boolean = true;
+    @Select(StatePlaces.results) results$ : Observable<Array<google.maps.places.QueryAutocompletePrediction>>;
 
-    @ViewChild('searchBar')
-    public searchBarElement: Searchbar;
+    private searching : boolean = false;
 
-    constructor(private viewController: ViewController, private store: Store)
+    constructor(private viewController: ViewController, private store: Store) {}
+
+    public ionViewDidLoad()
     {
-
-    }
-
-    public ngOnInit(): void
-    {
-        this.store.dispatch(new AutocompleteBind(this.searchBarElement._elementRef.nativeElement.querySelector('.searchbar-input')));
-    }
-
-    public ngOnDestroy(): void
-    {
-        this.store.dispatch(new AutocompleteUnbind());
-    }
-
-    private initializeItems()
-    {
-        this.items =
-        [
-            'Amsterdam',
-            'Bogota'
-        ];
+        this.results$.subscribe(v => console.log(v));
     }
 
     public dismissModalWithCheck(): void
@@ -54,6 +36,7 @@ export class PagePublisherClusterLocationsAdd
 
     public dismissModal(): void
     {
+        this.store.dispatch(new PlaceSearch(''));
         this.viewController.dismiss();
     }
 
@@ -62,30 +45,17 @@ export class PagePublisherClusterLocationsAdd
         this.searching = true;
     }
 
-    public filter(event: any): void
+    public search(event: any): void
     {
-        // Reset items back to all of the items
-        this.initializeItems();
-
-        // set val to the value of the searchbar
-        const value:any = event.target.value;
-
-        // if the value is an empty string don't filter the items
-        if (value && value.trim() !== '')
-        {
-            this.items = this.items.filter((item) =>
-            {
-                return (item.toLowerCase().indexOf(value.toLowerCase()) > -1);
-            })
-        }
-        else
-        {
-            this.items = [];
-        }
+        this.store.dispatch(new PlaceSearch(event.target.value));
     }
 
-    public addItems(): void
+    public add(place: google.maps.places.QueryAutocompletePrediction): void
     {
+        console.log(place);
+
+        this.searching = true;
+
         this.dismissModal();
     }
 }

@@ -1,5 +1,5 @@
 import {State, Action, Store, StateContext, Selector} from '@ngxs/store';
-import { PlacesInitialize, AutocompleteBind, AutocompleteUnbind } from './places.actions';
+import { PlacesInitialize, PlacesAutocompleteBind, PlacesAutocompleteUnbind, PlaceSearch, PlaceSearchExtended } from './places.actions';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import { NgZone } from '@angular/core';
@@ -11,7 +11,8 @@ export interface StatePlacesModel
 {
     loading      : boolean;
     autocomplete : google.maps.places.Autocomplete;
-    results      : Array<string>;
+    search       : google.maps.places.AutocompleteService;
+    results      : Array<google.maps.places.QueryAutocompletePrediction>;
 }
 
 @State<StatePlacesModel>
@@ -21,6 +22,7 @@ export interface StatePlacesModel
     defaults :
     {
         autocomplete : undefined,
+        search       : undefined,
         loading      : false,
         results      : []
     }
@@ -40,12 +42,12 @@ export class StatePlaces
 
         return fromPromise(this.mapsAPILoader.load()).pipe
         (
-            tap(() => patchState({loading: false}))
+            tap(() => patchState({loading: false, search: new google.maps.places.AutocompleteService()}))
         );
     }
 
-    @Action(AutocompleteBind)
-    autocompleteBind({ patchState }: StateContext<StatePlacesModel>,  { payload }: AutocompleteBind)
+    @Action(PlacesAutocompleteBind)
+    autocompleteBind({ patchState }: StateContext<StatePlacesModel>,  { payload }: PlacesAutocompleteBind)
     {
         const autocomplete: google.maps.places.Autocomplete = new google.maps.places.Autocomplete(payload);
 
@@ -67,7 +69,7 @@ export class StatePlaces
         });
     }
 
-    @Action(AutocompleteUnbind)
+    @Action(PlacesAutocompleteUnbind)
     autocompleteUnbind({ getState, patchState }: StateContext<StatePlacesModel>)
     {
         const state: StatePlacesModel = getState();
@@ -75,5 +77,55 @@ export class StatePlaces
         getState().autocomplete.unbindAll();
 
         patchState({autocomplete: undefined});
+    }
+
+    @Action(PlaceSearch)
+    placeSearch({ getState, patchState }: StateContext<StatePlacesModel>, { payload }: PlaceSearch)
+    {
+        const results = (predictions, status) =>
+        {
+            if (status != google.maps.places.PlacesServiceStatus.OK)
+            {
+                patchState({results: []});
+            }
+            else
+            {
+                patchState({results: predictions});
+            }
+        };
+
+        if (payload == null || payload.trim().length === 0)
+        {
+            patchState({results: []});
+        }
+        else
+        {
+            getState().search.getPlacePredictions({ input: payload }, results);
+        }
+    }
+
+    @Action(PlaceSearchExtended)
+    placeSearchExtended({ getState, patchState }: StateContext<StatePlacesModel>, { payload }: PlaceSearchExtended)
+    {
+        const results = (predictions, status) =>
+        {
+            if (status != google.maps.places.PlacesServiceStatus.OK)
+            {
+                patchState({results: []});
+            }
+            else
+            {
+                patchState({results: predictions});
+            }
+        };
+
+        if (payload == null || payload.trim().length === 0)
+        {
+            patchState({results: []});
+        }
+        else
+        {
+            getState().search.getQueryPredictions({ input: payload }, results);
+        }
     }
 }

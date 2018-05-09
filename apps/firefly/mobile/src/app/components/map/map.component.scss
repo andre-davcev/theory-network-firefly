@@ -7,4 +7,12 @@ app-map
         height: 100%;
         width: 100%;
     }
+
+    .mapboxgl-ctrl-group
+    {
+        .mapboxgl-ctrl-compass
+        {
+            display: none;
+        }
+    }
 }
