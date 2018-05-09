@@ -101,6 +101,11 @@
         "cluster-locations" :
         {
             "title" : "Locations"
+        },
+
+        "cluster-locations-add" :
+        {
+            "title": "Search Locations"
         }
     },
 

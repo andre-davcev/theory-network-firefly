@@ -1,20 +1,44 @@
-app-page-cluster-locations
+app-page-cluster-locations-add
 {
-    .comp-form
+    .searchbar
     {
-        height: 100%;
-        width: 100%;
-        display: block;
+        border: 0;
+    }
 
-        app-map
+    .page-list
+    {
+        margin: $app-gutter / 2;
+        margin-top: 0;
+        opacity: 0.85;
+
+        > .item
         {
-            height: 100%;
-            width: 100%;
+            cursor: pointer;
+            padding-left: 4px;
 
-            mgl-map
+            > ion-icon[item-start]
             {
-                height: 100%;
-                width: 100%;
+                margin-right: 0;
+                color: $app-color-accent;
+                opacity: 0.5;
+
+                + .item-inner
+                {
+                    margin-left: 3px;
+                }
+            }
+
+
+            &:first-child
+            {
+                border-top-left-radius: $app-border-radius;
+                border-top-right-radius: $app-border-radius;
+            }
+
+            &:last-child
+            {
+                border-bottom-left-radius: $app-border-radius;
+                border-bottom-right-radius: $app-border-radius;
             }
         }
     }

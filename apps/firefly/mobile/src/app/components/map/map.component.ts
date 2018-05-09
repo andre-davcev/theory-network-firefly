@@ -20,7 +20,6 @@ export class ComponentMap implements OnInit
     @Select(StateLocation.loading)  loading$  : Observable<boolean>;
     @Select(StateLocation.location) location$ : Observable<GeolocationPosition>;
     @Select(StateDevice.web)        web$      : Observable<boolean>;
-    @Select(StateDevice.info)        info$      : Observable<DeviceInfo>;
 
     public location: GeolocationPosition;
     public center: Array<number>;
@@ -31,7 +30,6 @@ export class ComponentMap implements OnInit
 
     ngOnInit()
     {
-        this.info$.subscribe(val => console.log(val));
         this.location$.subscribe((position: GeolocationPosition) =>
         {
             this.location = position;
