@@ -1,8 +1,8 @@
 {
-    "name"         : "Firefly",
-    "app_id"       : "1e5146ca",
-    "type"         : "ionic-angular",
-    "integrations" :
-    {
-    }
+  "name": "Firefly",
+  "app_id": "1e5146ca",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
