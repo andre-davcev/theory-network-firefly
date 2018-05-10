@@ -21,7 +21,9 @@ export const environment: Environment =
 
         places :
         {
-            apiKey: 'AIzaSyCiJwtZoYiPRN3uEsW5B7UqyON9wgNJAZ8'
+            clientId     : '0OTN4VI0TZMQGRTJPWOUVDYUJK0VHH3YCDRQO0CAEUKG43FI',
+            clientSecret : 'B0OICO4SNQ1EXRKWZSZ0JN0K3QXZCSUBP3PS1MN1NFC4YPQD',
+            url          : 'https://api.foursquare.com/v2/venues'
         },
 
         maps :
