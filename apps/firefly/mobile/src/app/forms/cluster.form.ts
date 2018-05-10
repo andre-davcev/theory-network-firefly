@@ -46,4 +46,9 @@ export class FormCluster
 
         return formGroup;
     }
+
+    public addLocation(formGroup: FormGroup): void
+    {
+
+    }
 }

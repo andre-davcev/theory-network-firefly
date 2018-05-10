@@ -11,12 +11,14 @@ export interface EnvironmentApis
 {
     firebase : EnvironmentFirebase;
     maps     : EnvironmentAccessToken;
-    places   : EnvironmentAPI;
+    places   : EnvironmentPlaces;
 }
 
-export interface EnvironmentAPI
+export interface EnvironmentPlaces
 {
-    apiKey: string;
+    clientId     : string;
+    clientSecret : string;
+    url          : string;
 }
 
 export interface EnvironmentAccessToken
@@ -24,8 +26,9 @@ export interface EnvironmentAccessToken
     accessToken: string;
 }
 
-export interface EnvironmentFirebase extends EnvironmentAPI
+export interface EnvironmentFirebase
 {
+    apiKey            : string;
     authDomain        : string;
     databaseURL       : string;
     projectId         : string;

@@ -62,7 +62,6 @@ import { StateCluster } from '../state/cluster/cluster.state';
 import { ClusterService } from '../services/services.cluster';
 import { ModulePagePublisherClusterLocationsAdd } from '../pages/cluster-locations-add/cluster-locations-add.module';
 import { StatePlaces } from '../state/places/places.state';
-import { AgmCoreModule } from '@agm/core';
 import { StateDevice } from '../state/device/device.state';
 
 export function HttpLoaderFactory(http: HttpClient)
@@ -134,12 +133,6 @@ export class AppErrorHandler implements ErrorHandler
         NgxMapboxGLModule.forRoot
         ({
             accessToken: environment.apis.maps.accessToken
-        }),
-
-        AgmCoreModule.forRoot
-        ({
-            apiKey    : environment.apis.places.apiKey,
-            libraries : ['places']
         }),
 
         ModulePagePublisherClusterLocationsAdd

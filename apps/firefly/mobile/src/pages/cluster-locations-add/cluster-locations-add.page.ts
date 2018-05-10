@@ -1,7 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import { ViewController, Searchbar } from 'ionic-angular';
 import { Store, Select } from '@ngxs/store';
-import { PlaceSearch } from '../../state/places/places.actions';
+import { PlaceSearch, PlaceDetails } from '../../state/places/places.actions';
 import { StatePlaces } from '../../state/places/places.state';
 import { Observable } from 'rxjs/Observable';
 
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 
 export class PagePublisherClusterLocationsAdd
 {
-    @Select(StatePlaces.results) results$ : Observable<Array<google.maps.places.QueryAutocompletePrediction>>;
+    @Select(StatePlaces.results) results$ : Observable<Array<any>>;
 
     private searching : boolean = false;
 
@@ -47,14 +47,17 @@ export class PagePublisherClusterLocationsAdd
 
     public search(event: any): void
     {
+        console.log(event);
         this.store.dispatch(new PlaceSearch(event.target.value));
     }
 
-    public add(place: google.maps.places.QueryAutocompletePrediction): void
+    public add(place: any): void
     {
         console.log(place);
 
         this.searching = true;
+
+        this.store.dispatch(new PlaceDetails(''));
 
         this.dismissModal();
     }
