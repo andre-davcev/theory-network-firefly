@@ -9,6 +9,7 @@ import {PagePublisherClusters} from '../publisher.clusters/publisher.clusters';
 import {PagePublisherBeacons}  from '../publisher.beacons/publisher.beacons';
 import { ModuleComponents } from '../../app/components/components.module';
 import { ModuleList } from '../../app/components/list/list.module';
+import { PagePublisherAssets } from '../publisher-assets/publisher-assets';
 
 @NgModule
 ({
@@ -23,7 +24,8 @@ import { ModuleList } from '../../app/components/list/list.module';
     [
         PagePublisher,
         PagePublisherClusters,
-        PagePublisherBeacons
+        PagePublisherBeacons,
+        PagePublisherAssets
     ]
 })
 

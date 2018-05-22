@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@app/env';
 import { StateLocation } from '../location/location.state';
 import { GeolocationPosition } from '@capacitor/core';
+import { ResponseVenueSearch } from '../../foursquare/response-venue-search.model';
 
 export interface StatePlacesModel
 {
@@ -61,7 +62,7 @@ export class StatePlaces
                 }
             }).pipe
             (
-                tap((results: any) =>
+                tap((results: ResponseVenueSearch) =>
                 {
                     console.log(results);
                 })

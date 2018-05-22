@@ -31,8 +31,7 @@
         "publisher" :
         {
             "clusters" : "Clusters",
-            "beacons"  : "Beacons",
-            "coupons"  : "Coupons"
+            "assets"   : "Assets"
         },
 
         "user" :
@@ -106,6 +105,23 @@
         "cluster-locations-add" :
         {
             "title": "Search Locations"
+        },
+
+        "assets":
+        {
+            "title"              : "Assets",
+            "icons"              : "Icons",
+            "iconsDescription"   : "Your icon assets which are shown in list views",
+            "images"             : "Images",
+            "imagesDescription"  : "Photos and images that are used in card views",
+            "coupons"            : "Coupons",
+            "couponsDescription" : "Deals and coupons used once your alerts are fired",
+            "beacons"            : "Beacons",
+            "beaconsDescription" : "Your inventory of bluetooth Beacon devices",
+            "places"             : "Places",
+            "placesDescription"  : "A collection of your places tied to map locations",
+            "events"             : "Events",
+            "eventsDescription"  : "All of your public and private events"
         }
     },
 
