@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 
 import {NavController, ActionSheet, ActionSheetController} from 'ionic-angular';
 import {IonicPage}     from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component
@@ -14,7 +15,7 @@ export class PagePublisher
 {
     public segment:string = 'clusters';
 
-    constructor(private nav:NavController, private actionSheetController: ActionSheetController)
+    constructor(private nav:NavController, private actionSheetController: ActionSheetController, private translate: TranslateService)
     {
 
     }
@@ -37,19 +38,36 @@ export class PagePublisher
 
     public presentActionSheet()
     {
-        const actionSheet: ActionSheet = this.actionSheetController.create
-        ({
-            title                 : 'Modify your album',
-            enableBackdropDismiss : true,
+        this.translate.get
+        ([
+            'pages.assets.add',
+            'pages.assets.icon',
+            'pages.assets.image',
+            'pages.assets.coupon',
+            'pages.assets.beacon',
+            'pages.assets.place',
+            'pages.assets.event',
+            'general.cancel'
+        ]).subscribe((translations: Array<string>) =>
+        {
+            const actionSheet: ActionSheet = this.actionSheetController.create
+            ({
+                title                 : translations['pages.assets.add'],
+                enableBackdropDismiss : true,
 
-            buttons:
-            [
-                {text: 'Destructive', handler: () => {}},
-                {text: 'Archive',     handler: () => {}},
-                {text: 'Cancel',      role: 'cancel'}
-            ]
+                buttons:
+                [
+                    {text: translations['pages.assets.icon'],   handler: () => {}},
+                    {text: translations['pages.assets.image'],  handler: () => {}},
+                    {text: translations['pages.assets.coupon'], handler: () => {}},
+                    {text: translations['pages.assets.beacon'], handler: () => {}},
+                    {text: translations['pages.assets.place'],  handler: () => {}},
+                    {text: translations['pages.assets.event'],  handler: () => {}},
+                    {text: translations['general.cancel'],      role: 'cancel'}
+                ]
+            });
+
+            actionSheet.present();
         });
-
-        actionSheet.present();
     }
 }

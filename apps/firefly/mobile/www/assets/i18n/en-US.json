@@ -110,16 +110,23 @@
         "assets":
         {
             "title"              : "Assets",
+            "add"                : "Add Asset",
+            "icon"               : "Icon",
             "icons"              : "Icons",
             "iconsDescription"   : "Your icon assets which are shown in list views",
+            "image"              : "Image",
             "images"             : "Images",
             "imagesDescription"  : "Photos and images that are used in card views",
+            "coupon"             : "Coupon",
             "coupons"            : "Coupons",
             "couponsDescription" : "Deals and coupons used once your alerts are fired",
+            "beacon"             : "Beacon",
             "beacons"            : "Beacons",
             "beaconsDescription" : "Your inventory of bluetooth Beacon devices",
+            "place"              : "Place",
             "places"             : "Places",
             "placesDescription"  : "A collection of your places tied to map locations",
+            "event"              : "Event",
             "events"             : "Events",
             "eventsDescription"  : "All of your public and private events"
         }
