@@ -94,12 +94,13 @@
 
 ion-item-group
 {
-    box-shadow: $app-list-box-shadow;
     margin-bottom: 0.3rem;
 }
 
 ion-list
 {
+    box-shadow: $gm-elevated-1-up, $app-list-box-shadow;
+
     .item
     {
         &.item-md

@@ -2,9 +2,7 @@
     <ion-navbar dark>
         <ion-segment [(ngModel)]="segment">
             <ion-segment-button value="clusters">{{'tabs.publisher.clusters' | translate}}</ion-segment-button>
-            <!--
-            <ion-segment-button value="beacons">{{'tabs.publisher.beacons' | translate}}</ion-segment-button>
-            -->
+            <ion-segment-button value="assets">{{'tabs.publisher.assets' | translate}}</ion-segment-button>
         </ion-segment>
     </ion-navbar>
 </ion-header>
@@ -19,9 +17,9 @@
     <div *ngSwitchCase="'clusters'">
         <app-page-publisher-clusters></app-page-publisher-clusters>
     </div>
-<!--
-    <div *ngSwitchCase="'beacons'">
-        <app-page-publisher-beacons></app-page-publisher-beacons>
+
+    <div *ngSwitchCase="'assets'">
+        <app-page-publisher-assets></app-page-publisher-assets>
     </div>
--->
+
 </ion-content>
