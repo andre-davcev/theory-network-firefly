@@ -48,7 +48,9 @@ export class PagePublisher
             'pages.assets.place',
             'pages.assets.event',
             'general.cancel'
-        ]).subscribe((translations: Array<string>) =>
+        ]).
+
+        subscribe((translations: Array<string>) =>
         {
             const actionSheet: ActionSheet = this.actionSheetController.create
             ({
