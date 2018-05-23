@@ -1,6 +1,8 @@
 import { Credentials } from "../../models/credentials";
 import { User } from "../../models/user";
 
+import * as firebase from 'firebase/app';
+
 export enum ActionsUser
 {
     UserAuthenticate      = '[User] User Authenticate',

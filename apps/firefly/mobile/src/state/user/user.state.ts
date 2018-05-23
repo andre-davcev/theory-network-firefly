@@ -7,7 +7,7 @@ import {of}                         from 'rxjs/observable/of';
 
 import {Platform} from 'ionic-angular';
 
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 
 import { PlatformEnum } from '../../enums/platform.enum';
 import { AngularFireAuth } from 'angularfire2/auth';

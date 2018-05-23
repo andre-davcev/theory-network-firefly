@@ -51,3 +51,8 @@ Thumbs.db
 # Custom
 yarn.lock
 **/yarn.lock
+
+# Platform Files
+**/package-lock.json
+apps/**/mobile/ios
+apps/**/mobile/android
