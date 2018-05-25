@@ -4,20 +4,20 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {IonicPageModule} from 'ionic-angular';
 
-import {PagePublisherBeacons} from './publisher';
+import {PagePublisherBeaconMinor} from './publisher.beacon.minor';
 
 @NgModule
 ({
     imports :
     [
         TranslateModule,
-        IonicPageModule.forChild(PagePublisherBeacons)
+        IonicPageModule.forChild(PagePublisherBeaconMinor)
     ],
-    
-    declarations : [PagePublisherBeacons]
+
+    declarations : [PagePublisherBeaconMinor]
 })
 
 export class ModulePagePublisherBeacons
-{ 
+{
 
 }

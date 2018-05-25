@@ -4,9 +4,9 @@ import { Store, Select } from '@ngxs/store';
 import { StateLocation } from '../../../state/location/location.state';
 import { Observable } from 'rxjs/Observable';
 import { filter, switchMap } from 'rxjs/operators';
-import { GeolocationPosition, DeviceInfo } from '@capacitor/core';
 import { ComponentMapOrb } from '../map-orb/map-orb.component';
 import { StateDevice } from '../../../state/device/device.state';
+import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
 
 
 @Component
@@ -18,10 +18,10 @@ import { StateDevice } from '../../../state/device/device.state';
 export class ComponentMap implements OnInit
 {
     @Select(StateLocation.loading)  loading$  : Observable<boolean>;
-    @Select(StateLocation.location) location$ : Observable<GeolocationPosition>;
+    @Select(StateLocation.location) location$ : Observable<BackgroundGeolocationResponse>;
     @Select(StateDevice.web)        web$      : Observable<boolean>;
 
-    public location: GeolocationPosition;
+    public location: BackgroundGeolocationResponse;
     public center: Array<number>;
 
     private componentMapOrb: ComponentMapOrb;
@@ -30,7 +30,7 @@ export class ComponentMap implements OnInit
 
     ngOnInit()
     {
-        this.location$.subscribe((position: GeolocationPosition) =>
+        this.location$.subscribe((position: BackgroundGeolocationResponse) =>
         {
             this.location = position;
 

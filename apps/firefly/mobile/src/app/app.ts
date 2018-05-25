@@ -9,6 +9,8 @@ import {PageTabs}  from '../pages/tabs/tabs';
 import {PageLogin} from '../pages/auth/auth';
 import { Store } from '@ngxs/store';
 import { AppInitialize } from '../state/app/app.actions';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 export interface PageInterface
 {
@@ -52,31 +54,23 @@ export class App
         private platform  : Platform,
         private storage   : Storage,
         private translate : TranslateService,
-        private store     : Store
+        private store     : Store,
+
+        statusBar: StatusBar,
+        splashScreen: SplashScreen
     )
     {
         this.rootPage = 'PageLogin';
 
-        this.store.dispatch(new AppInitialize());
-
-/*
-        // Check if the user has already seen the tutorial
-        this.storage.get('hasSeenTutorial').then((hasSeenTutorial) =>
+        platform.ready().then(() =>
         {
-            this.rootPage = 'PageLogin';
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            statusBar.styleDefault();
+            splashScreen.hide();
 
-            if (hasSeenTutorial)
-            {
-//                this.rootPage = 'LoginPage';
-            }
-            else
-            {
-//                this.rootPage = 'TutorialPage';
-            }
-
-            this.platformReady()
+            this.store.dispatch(new AppInitialize());
         });
-*/
     }
 
     openPage(page:PageInterface)
