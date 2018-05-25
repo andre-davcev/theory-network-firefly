@@ -56,3 +56,8 @@ yarn.lock
 **/package-lock.json
 apps/**/mobile/ios
 apps/**/mobile/android
+apps/**/mobile/platforms/ios
+apps/**/mobile/platforms/android
+apps/**/mobile/resources/ios
+apps/**/mobile/resources/android
+apps/**/mobile/resources/*.md5

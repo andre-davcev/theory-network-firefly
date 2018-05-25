@@ -8,8 +8,8 @@ import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@app/env';
 import { StateLocation } from '../location/location.state';
-import { GeolocationPosition } from '@capacitor/core';
 import { ResponseVenueSearch } from '../../foursquare/response-venue-search.model';
+import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
 
 export interface StatePlacesModel
 {
@@ -38,8 +38,8 @@ export class StatePlaces
     @Action(PlaceSearch)
     placeSearch({ getState, patchState }: StateContext<StatePlacesModel>, { payload }: PlaceSearch)
     {
-        const searchText : string              = payload == null ? '' : payload.trim();
-        const location   : GeolocationPosition = this.store.selectSnapshot(StateLocation.location);
+        const searchText : string                        = payload == null ? '' : payload.trim();
+        const location   : BackgroundGeolocationResponse = this.store.selectSnapshot(StateLocation.location);
 
         if (searchText.length === 0)
         {

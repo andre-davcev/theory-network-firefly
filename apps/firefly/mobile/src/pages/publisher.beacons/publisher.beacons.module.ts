@@ -4,13 +4,13 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {IonicPageModule} from 'ionic-angular';
 
-import {PagePublisherBeacons} from './publisher';
+import {PagePublisherBeacons} from './publisher.beacons';
 
 import {ReducerBeaconsPublished} from '../../redux/beacons-published/reducer';
 
 @NgModule
 ({
-    
+
     imports :
     [
         TranslateModule,
@@ -24,6 +24,6 @@ import {ReducerBeaconsPublished} from '../../redux/beacons-published/reducer';
 })
 
 export class ModulePagePublisherBeacons
-{ 
+{
 
 }

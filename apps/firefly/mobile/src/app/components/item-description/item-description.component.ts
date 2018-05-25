@@ -1,13 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-/*
-import { Plugins, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import { map } from 'rxjs/operators';
-*/
-
 @Component
 ({
     selector        : 'app-item-description',

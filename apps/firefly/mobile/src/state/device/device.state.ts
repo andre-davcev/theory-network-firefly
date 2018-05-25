@@ -1,14 +1,16 @@
 import {State, Action, Store, StateContext, Selector} from '@ngxs/store';
 import { DeviceInitialize } from './device.actions';
-import { DeviceInfo, Plugins } from '@capacitor/core';
 import { tap, take } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { DeviceEnum } from '../../enums/device.enum';
+import { Platform } from 'ionic-angular';
 
 export interface StateDeviceModel
 {
     loading : boolean;
-    info    : DeviceInfo;
+    device  : boolean;
+    ios     : boolean;
+    android : boolean;
 }
 
 @State<StateDeviceModel>
@@ -18,29 +20,32 @@ export interface StateDeviceModel
     defaults :
     {
         loading : false,
-        info    : undefined
+        device  : false,
+        ios     : false,
+        android : false
     }
 })
 
 export class StateDevice
 {
-    @Selector() static info(state: StateDeviceModel)    {return state.info;}
     @Selector() static loading(state: StateDeviceModel) {return state.loading;}
 
-    @Selector() static device(state: StateDeviceModel) {return state.info != null && state.info.platform !== DeviceEnum.Web;}
-    @Selector() static web(state: StateDeviceModel)    {return state.info != null && state.info.platform === DeviceEnum.Web;}
+    @Selector() static device(state: StateDeviceModel) {return this.device;}
+    @Selector() static web(state: StateDeviceModel)    {return !this.device;}
 
-    @Selector() static android(state: StateDeviceModel) {return state.info != null && state.info.platform === DeviceEnum.Android;}
-    @Selector() static ios(state: StateDeviceModel)     {return state.info != null && state.info.platform === DeviceEnum.iOS;}
+    @Selector() static android(state: StateDeviceModel) {return this.android;}
+    @Selector() static ios(state: StateDeviceModel)     {return this.ios;}
 
-    constructor() {}
+    constructor(public platform: Platform) {}
 
     @Action(DeviceInitialize)
     deviceInitialize({ patchState } : StateContext<StateDeviceModel>)
     {
-        return fromPromise(Plugins.Device.getInfo()).pipe
-        (
-            tap((info: DeviceInfo) => patchState({ info }))
-        );
+        patchState
+        ({
+            device  : this.platform.is('cordova'),
+            ios     : this.platform.is('ios'),
+            android : this.platform.is('android'),
+        });
     }
 }

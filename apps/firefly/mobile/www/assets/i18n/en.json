@@ -1,11 +1,14 @@
 {
-  "general":
+    "general":
     {
         "delete"      : "Delete",
         "locations"   : "Locations",
         "description" : "Description",
         "categories"  : "Categories",
-        "isPrivate"   : "Is Private"
+        "isPrivate"   : "Is Private",
+        "add"         : "Add",
+        "cancel"      : "Cancel",
+        "done"        : "Done"
     },
 
     "tabs":
@@ -28,8 +31,7 @@
         "publisher" :
         {
             "clusters" : "Clusters",
-            "beacons"  : "Beacons",
-            "coupons"  : "Coupons"
+            "assets"   : "Assets"
         },
 
         "user" :
@@ -82,10 +84,51 @@
 
         "cluster" :
         {
-            "title"               : "Cluster",
-            "titlePlaceholder"    : "Add your title",
-            "subtitlePlaceholder" : "Add your subtitle",
-            "iconPlaceholder"     : "select icon"
+            "title"                  : "Cluster",
+            "titlePlaceholder"       : "Add your title",
+            "subtitlePlaceholder"    : "Add your subtitle",
+            "iconPlaceholder"        : "select icon",
+            "imagePlaceholder"       : "select image",
+            "descriptionPlaceholder" : "Write a description"
+        },
+
+        "cluster-categories" :
+        {
+            "title" : "Categories"
+        },
+
+        "cluster-locations" :
+        {
+            "title" : "Locations"
+        },
+
+        "cluster-locations-add" :
+        {
+            "title": "Search Locations"
+        },
+
+        "assets":
+        {
+            "title"              : "Assets",
+            "add"                : "Add Asset",
+            "icon"               : "Icon",
+            "icons"              : "Icons",
+            "iconsDescription"   : "Your icon assets which are shown in list views",
+            "image"              : "Image",
+            "images"             : "Images",
+            "imagesDescription"  : "Photos and images that are used in card views",
+            "coupon"             : "Coupon",
+            "coupons"            : "Coupons",
+            "couponsDescription" : "Deals and coupons used once your alerts are fired",
+            "beacon"             : "Beacon",
+            "beacons"            : "Beacons",
+            "beaconsDescription" : "Your inventory of bluetooth Beacon devices",
+            "place"              : "Place",
+            "places"             : "Places",
+            "placesDescription"  : "A collection of your places tied to map locations",
+            "event"              : "Event",
+            "events"             : "Events",
+            "eventsDescription"  : "All of your public and private events"
         }
     },
 

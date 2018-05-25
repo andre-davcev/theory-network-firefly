@@ -63,6 +63,7 @@ import { ClusterService } from '../services/services.cluster';
 import { ModulePagePublisherClusterLocationsAdd } from '../pages/cluster-locations-add/cluster-locations-add.module';
 import { StatePlaces } from '../state/places/places.state';
 import { StateDevice } from '../state/device/device.state';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -154,7 +155,7 @@ export class AppErrorHandler implements ErrorHandler
     [
         Globalization,
         StatusBar,
-
+        SplashScreen,
 
         Facebook,
         GooglePlus,

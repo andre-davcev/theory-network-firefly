@@ -4,7 +4,7 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {IonicPageModule} from 'ionic-angular';
 
-import {PagePublisherAssets} from './publisher.beacon';
+import {PagePublisherAssets} from './publisher-assets';
 
 @NgModule
 ({

@@ -24,9 +24,6 @@
     "@angular/platform-browser": "5.2.9",
     "@angular/platform-browser-dynamic": "5.2.9",
     "@angular/tsc-wrapped": "4.4.6",
-    "@capacitor/cli": "^1.0.0-alpha.38",
-    "@capacitor/core": "^1.0.0-alpha.38",
-    "@capacitor/ios": "^1.0.0-alpha.38",
     "@firebase/app": "0.1.10",
     "@firebase/auth": "0.4.0",
     "@firebase/database": "0.2.0",
@@ -36,11 +33,12 @@
     "@firebase/storage": "0.1.8",
     "@firebase/util": "0.1.10",
     "@firebase/webchannel-wrapper": "^0.2.6",
+    "@ionic-native/background-geolocation": "^4.7.0",
     "@ionic-native/core": "4.7.0",
     "@ionic-native/facebook": "^4.6.0",
     "@ionic-native/globalization": "4.6.0",
     "@ionic-native/google-plus": "^4.6.0",
-    "@ionic-native/splash-screen": "4.7.0",
+    "@ionic-native/splash-screen": "^4.7.0",
     "@ionic-native/status-bar": "4.7.0",
     "@ionic/pro": "1.0.20",
     "@ionic/storage": "2.1.3",
@@ -49,7 +47,16 @@
     "@ngxs/devtools-plugin": "^2.1.0-beta.9",
     "@ngxs/store": "^2.1.0-beta.9",
     "angularfire2": "5.0.0-rc.3",
+    "cordova-ios": "4.5.4",
+    "cordova-plugin-device": "2.0.2",
     "cordova-plugin-globalization": "^1.11.0",
+    "cordova-plugin-ionic": "^4.1.0",
+    "cordova-plugin-ionic-keyboard": "2.0.5",
+    "cordova-plugin-ionic-webview": "1.1.19",
+    "cordova-plugin-mauron85-background-geolocation": "^2.3.5",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-whitelist": "1.3.3",
     "firebase": "4.12.0",
     "font-awesome": "4.7.0",
     "ionic-angular": "3.9.2",
@@ -92,6 +99,7 @@
   "config": {
     "ionic_aot_write_to_disk": true,
     "ionic_watch": "./config/watch.config.js",
+    "ionic_copy": "./config/copy.config.js",
     "ionic_webpack": "./config/webpack.config.js"
   },
   "cordova": {
@@ -101,12 +109,22 @@
         "APP_ID": "1e5146ca",
         "CHANNEL_NAME": "Master",
         "UPDATE_METHOD": "background",
-        "MAX_STORE": "2"
+        "MAX_STORE": "2",
+        "UPDATE_API": "https://api.ionicjs.com"
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-globalization": {}
-    }
+      "cordova-plugin-globalization": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-mauron85-background-geolocation": {
+        "ALWAYS_USAGE_DESCRIPTION": "This app always requires location tracking"
+      }
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ]
   }
 }

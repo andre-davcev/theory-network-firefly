@@ -6,12 +6,13 @@ import { fromCallback } from 'rxjs/observable/fromCallback';
 import { of } from 'rxjs/observable/of';
 import {filter, map, catchError, tap} from 'rxjs/operators';
 
-import { Plugins, GeolocationPosition } from '@capacitor/core';
 import { LocationWatch } from './location.actions';
+
+import {BackgroundGeolocationResponse} from '@ionic-native/background-geolocation';
 
 export interface StateLocationModel
 {
-    location  : GeolocationPosition;
+    location  : BackgroundGeolocationResponse;
     error     : Error;
 }
 
@@ -39,6 +40,7 @@ export class StateLocation
     @Action(LocationWatch)
     locationWatch({ patchState }: StateContext<StateLocationModel>)
     {
+/*
         return Plugins.Geolocation.
 
         watchPosition({enableHighAccuracy: true},
@@ -56,5 +58,6 @@ export class StateLocation
                 patchState({location});
             }
         });
+*/
     }
 }
