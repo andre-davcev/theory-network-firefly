@@ -67,7 +67,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
-    return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 export const IonicPro = Pro.init('1e5146ca',
