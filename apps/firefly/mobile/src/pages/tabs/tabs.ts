@@ -9,6 +9,7 @@ import {PageFind}        from '../find/find';
 import {PageAlerts}      from '../alerts/alerts';
 import {PagePublisher}   from '../publisher/publisher';
 import {PageUser}        from '../user/user';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @IonicPage()
 @Component
@@ -30,7 +31,7 @@ export class PageTabs
     selected:number;
     dict:Object;
 
-    constructor(navParams: NavParams, public alerts: Alerts)
+    constructor(navParams: NavParams, public alerts: Alerts, private statusBar: StatusBar)
     {
         this.selected = navParams.data.tabIndex || 0;
     }

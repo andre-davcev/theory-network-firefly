@@ -6,10 +6,15 @@ import {PageUser} from './user';
 
 import {PageUserProfile}  from '../user.profile/user.profile';
 import {PageUserSettings} from '../user.settings/user.settings';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule
 ({
-    imports : [IonicPageModule.forChild(PageUser)],
+    imports :
+    [
+        IonicPageModule.forChild(PageUser),
+        TranslateModule
+    ],
 
     declarations :
     [
@@ -21,6 +26,6 @@ import {PageUserSettings} from '../user.settings/user.settings';
 })
 
 export class ModulePageUser
-{ 
+{
 
 }

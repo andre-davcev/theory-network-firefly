@@ -7,6 +7,7 @@ import { StateCluster } from '../../state/cluster/cluster.state';
 import { SetClusterId } from '../../state/cluster/cluster.actions';
 import { Observable } from 'rxjs/Observable';
 import { Select, Store } from '@ngxs/store';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @IonicPage()
 @Component
@@ -21,9 +22,14 @@ export class PagePublisherCluster
 
     segment:string = 'clusters';
 
-    constructor(private store: Store, private nav: NavController)
+    constructor(private store: Store, private nav: NavController, private statusBar: StatusBar)
     {
         this.store.dispatch(new SetClusterId('new'));
+    }
+
+    ionViewWillEnter()
+    {
+        this.statusBar.styleDefault();
     }
 
     public navigateCategories(): void

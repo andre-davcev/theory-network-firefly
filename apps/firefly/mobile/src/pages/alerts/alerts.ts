@@ -7,6 +7,7 @@ import {IonicPage}       from 'ionic-angular';
 
 import {Alert}           from '../../models/alert';
 import {Alerts}          from '../../services/alerts';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component
 ({
@@ -23,11 +24,16 @@ export class PageAlerts
 
     alerts:Array<Alert>;
 
-    constructor(public alertController:AlertController, public alertsObject:Alerts)
+    constructor(public alertController:AlertController, public alertsObject:Alerts, private statusBar: StatusBar)
     {
         this.alerts = alertsObject.alerts;
 
         alertsObject.view(0);
+    }
+
+    ionViewWillEnter()
+    {
+        this.statusBar.styleDefault();
     }
 
     slideChanged()

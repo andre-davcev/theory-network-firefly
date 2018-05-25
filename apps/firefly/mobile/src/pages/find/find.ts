@@ -7,6 +7,7 @@ import {Page} from '../page';
 import {Store} from '@ngxs/store';
 import { Cluster } from '../../models/cluster';
 import { SetCluster } from '../../state/cluster/cluster.actions';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @IonicPage()
 @Component
@@ -19,7 +20,7 @@ export class PageFind
 {
     public segment:string = 'stream';
 
-    constructor(private store:Store)
+    constructor(private store:Store, private statusBar: StatusBar)
     {
         const cluster: Cluster =
         {
@@ -29,5 +30,10 @@ export class PageFind
         };
 
         this.store.dispatch(new SetCluster(cluster));
+    }
+
+    ionViewWillEnter()
+    {
+        this.statusBar.styleLightContent();
     }
 }
