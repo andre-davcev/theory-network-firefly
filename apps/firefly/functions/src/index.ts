@@ -57,37 +57,33 @@ function createIndex(title) {
     return searchableIndex
 }
 
-// ToDo: Uncomment these
-
-/*
 exports.userCreate = functions.firestore.
-document('users/{tokenId}').
-onCreate((snapshot: DocumentSnapshot, context: functions.EventContext) => {
+document('users/{uidInternal}').
+onCreate((snapshot: DocumentSnapshot, context: functions.EventContext) =>
+{
     const timestamp: admin.firestore.FieldValue = admin.firestore.FieldValue.serverTimestamp();
 
-    return snapshot.ref.update({
+    return snapshot.ref.update
+    ({
         dateCreated: timestamp,
         dateUpdated: timestamp
     });
 });
 
-exports.userUpdate = functions.firestore.
-document('users/{tokenId}').
-onUpdate(async (change: functions.Change<DocumentSnapshot>, context: functions.EventContext) => {
-    return change.before.ref.update({
-        dateUpdated: admin.firestore.FieldValue.serverTimestamp()
-    });
-});
-
+/*
 exports.notificationCreate = functions.firestore.
 document('notifications/{notificationId}').
-onCreate((snapshot: DocumentSnapshot, context: functions.EventContext) => {
-    return snapshot.ref.update({
+onCreate((snapshot: DocumentSnapshot, context: functions.EventContext) =>
+{
+    return snapshot.ref.update
+    ({
         id: snapshot.id,
         dateCreated: admin.firestore.FieldValue.serverTimestamp()
     });
 });
+*/
 
+/*
 exports.notificationPush = functions.firestore.
 document('notifications/{notificationId}').
 onUpdate(async (change: functions.Change<DocumentSnapshot>, context: functions.EventContext) => {
