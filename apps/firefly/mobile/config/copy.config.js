@@ -7,4 +7,16 @@ exports.copyIndexContent =
     dest : '{{WWW}}/assets/i18n/en.json'
 };
 */
+
+exports.copyFirebaseCloudMessaging =
+{
+    src :
+    [
+        '{{ROOT}}/config/' + process.env.IONIC_ENV + '/google-services.json',
+        '{{ROOT}}/config/' + process.env.IONIC_ENV + '/GoogleService-Info.plist',
+    ],
+
+    dest: '{{ROOT}}'
+};
+
 module.exports = exports;

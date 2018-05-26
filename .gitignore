@@ -61,3 +61,7 @@ apps/**/mobile/platforms/android
 apps/**/mobile/resources/ios
 apps/**/mobile/resources/android
 apps/**/mobile/resources/*.md5
+
+# Firebase Cloud Messaging
+google-services.json
+GoogleService-Info.plist

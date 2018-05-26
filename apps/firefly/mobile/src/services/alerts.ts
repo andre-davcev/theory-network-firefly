@@ -17,7 +17,7 @@ export class Alerts
 
         for (let alert of this.alerts)
         {
-            if (alert.viewed)
+            if (alert.read)
             {
                 unviewed++;
             }
@@ -30,11 +30,11 @@ export class Alerts
     {
         console.log(this.alerts);
         console.log(index);
-        if (!this.alerts[index].viewed)
+        if (!this.alerts[index].read)
         {
             this.unviewed--;
 
-            this.alerts[index].viewed = true;
+            this.alerts[index].read = true;
         }
 
         if (this.unviewed == 0)
