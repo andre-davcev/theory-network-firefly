@@ -64,6 +64,7 @@ import { ModulePagePublisherClusterLocationsAdd } from '../pages/cluster-locatio
 import { StatePlaces } from '../state/places/places.state';
 import { StateDevice } from '../state/device/device.state';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { StateNotifications } from '../state/notifications/notifications.state';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -121,7 +122,8 @@ export class AppErrorHandler implements ErrorHandler
             StateDevice,
             StateUser,
             StateCluster,
-            StatePlaces
+            StatePlaces,
+            StateNotifications
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot

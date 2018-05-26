@@ -1,5 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import { DocumentSnapshot } from '@google-cloud/firestore';
+
 admin.initializeApp(functions.config().firebase);
 
 exports.createCluster = functions.firestore
@@ -17,10 +19,10 @@ exports.createCluster = functions.firestore
     const db = admin.firestore()
 
     // Create a document reference
-    var docRef = db.collection('clusters').doc(clusterId);
+    const docRef = db.collection('clusters').doc(clusterId);
 
     // Update the timestamp field with the value from the server
-    var updateTimestamp = docRef.update({
+    const updateTimestamp = docRef.update({
         dateCreated: admin.firestore.FieldValue.serverTimestamp(),
         dateUpdated: admin.firestore.FieldValue.serverTimestamp(),
         v: version
@@ -54,9 +56,69 @@ function createIndex(title) {
 
     return searchableIndex
 }
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+
+// ToDo: Uncomment these
+
+/*
+exports.userCreate = functions.firestore.
+document('users/{tokenId}').
+onCreate((snapshot: DocumentSnapshot, context: functions.EventContext) => {
+    const timestamp: admin.firestore.FieldValue = admin.firestore.FieldValue.serverTimestamp();
+
+    return snapshot.ref.update({
+        dateCreated: timestamp,
+        dateUpdated: timestamp
+    });
+});
+
+exports.userUpdate = functions.firestore.
+document('users/{tokenId}').
+onUpdate(async (change: functions.Change<DocumentSnapshot>, context: functions.EventContext) => {
+    return change.before.ref.update({
+        dateUpdated: admin.firestore.FieldValue.serverTimestamp()
+    });
+});
+
+exports.notificationCreate = functions.firestore.
+document('notifications/{notificationId}').
+onCreate((snapshot: DocumentSnapshot, context: functions.EventContext) => {
+    return snapshot.ref.update({
+        id: snapshot.id,
+        dateCreated: admin.firestore.FieldValue.serverTimestamp()
+    });
+});
+
+exports.notificationPush = functions.firestore.
+document('notifications/{notificationId}').
+onUpdate(async (change: functions.Change<DocumentSnapshot>, context: functions.EventContext) => {
+    const notification: Notification = change.after.data() as Notification;
+    const notificationId: string = context.params.notificationId;
+    const eventId: number = notification.eventId;
+
+    // Notification content
+    let payload: any = {
+        notification: {
+            title: notification.title,
+            body: notification.body
+        },
+
+        data: {
+            notificationId
+        }
+    };
+
+    if (eventId != null) {
+        payload.data.eventId = '' + eventId;
+    }
+
+    // ref to the device collection for the user
+    const firestore: FirebaseFirestore.Firestore = admin.firestore();
+    const usersRef: FirebaseFirestore.CollectionReference = firestore.collection('users');
+
+    // Get the user's tokens and send notifications
+    const users: FirebaseFirestore.QuerySnapshot = await usersRef.get();
+    const tokens: Array<string> = users.docs.map((snapshot: FirebaseFirestore.QueryDocumentSnapshot) => snapshot.data().id);
+
+    return admin.messaging().sendToDevice(tokens, payload);
+});
+*/

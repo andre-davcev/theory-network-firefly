@@ -1,0 +1,69 @@
+
+import {State, Selector, Action, StateContext} from '@ngxs/store';
+
+import { NotificationsWatch } from './notifications.actions';
+import { Observable } from 'rxjs/Observable';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { Notification } from '../../models/notification.model';
+import { Platform } from 'ionic-angular';
+import { Firebase } from '@ionic-native/firebase';
+import { switchMap, filter, tap } from 'rxjs/operators';
+import { UserAddToken } from '../user/user.actions';
+import { of } from 'rxjs/observable/of';
+
+export interface StateNotificationsModel
+{
+    notifications : Array<Notification>;
+    notification  : Notification;
+}
+
+@State<StateNotificationsModel>
+({
+    name : 'notifications',
+
+    defaults :
+    {
+        notifications : [],
+        notification  : undefined
+    }
+})
+
+export class StateNotifications
+{
+    constructor(private firebaseNative: Firebase, private platform: Platform) {}
+
+    @Selector() static notifications(state: StateNotificationsModel) {return state.notifications;}
+    @Selector() static notification(state: StateNotificationsModel)  {return state.notification;}
+
+    @Selector() static hasNotifications(state: StateNotificationsModel)  {return state.notifications.length > 0;}
+
+    @Action(NotificationsWatch)
+    notificationsWatch({ patchState, getState, dispatch }: StateContext<StateNotificationsModel>)
+    {
+        this.firebaseNative.onNotificationOpen().pipe
+        (
+            tap((notification: Notification) =>
+                patchState
+                ({
+                    notification,
+
+                    notifications :
+                    [
+                        ...getState().notifications,
+                        notification
+                    ]
+                })
+            )
+        );
+
+        const permission$: Observable<any> = this.platform.is('ios')     ? fromPromise(this.firebaseNative.grantPermission()) : of(undefined);
+        const token$:      Observable<any> = this.platform.is('cordova') ? fromPromise(this.firebaseNative.getToken())        : of(undefined);
+
+        return permission$.pipe
+        (
+            switchMap(() => token$),
+            filter((token: string) => token != null),
+            switchMap((token: string) => dispatch(new UserAddToken(token)))
+        );
+    }
+}

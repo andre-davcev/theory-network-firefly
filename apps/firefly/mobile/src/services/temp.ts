@@ -9,27 +9,27 @@ export class Temp
     alerts:Array<Alert> =
     [
         {
-            image  : 'temp/images/alerts/rusted.root.jpg',
-            title  : 'Rusted Root',
-            short  : "Sahlen's Music Stage",
-            date   : 'May 12, 2017 at 7:00pm',
-            viewed : false
+            image : 'temp/images/alerts/rusted.root.jpg',
+            title : 'Rusted Root',
+            body  : "Sahlen's Music Stage",
+            read  : false,
+            date  : 'May 12, 2017 at 7:00pm'
         },
 
         {
             image : 'temp/images/alerts/foster.the.people.jpg',
             title : 'Foster The People',
-            short : "Ommegang Brewery Cooperstown",
-            date  : 'June 10, 2017 at 7:00pm',
-            viewed : false
+            body  : "Ommegang Brewery Cooperstown",
+            read  : false,
+            date  : 'June 10, 2017 at 7:00pm'
         },
 
         {
-            image  : 'temp/images/alerts/blondie.jpg',
-            title  : 'Blondie',
-            short  : "Artpark",
-            date   : 'July 25, 2016 at 6:30pm',
-            viewed : false
+            image : 'temp/images/alerts/blondie.jpg',
+            title : 'Blondie',
+            body  : "Artpark",
+            read  : false,
+            date  : 'July 25, 2016 at 6:30pm'
         }
     ];
 
@@ -81,5 +81,5 @@ export class Temp
     constructor()
     {
 
-    } 
+    }
 }

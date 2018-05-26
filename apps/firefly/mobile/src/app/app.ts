@@ -2,15 +2,19 @@ import {Component, ViewChild} from '@angular/core';
 
 import {TranslateService} from '@ngx-translate/core';
 
-import {Events, MenuController, Nav, Platform} from 'ionic-angular';
+import {Events, MenuController, Nav, Platform, ToastController} from 'ionic-angular';
 import {Storage}                               from '@ionic/storage';
 
 import {PageTabs}  from '../pages/tabs/tabs';
 import {PageLogin} from '../pages/auth/auth';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { AppInitialize } from '../state/app/app.actions';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { StateNotifications } from '../state/notifications/notifications.state';
+import { Observable } from 'rxjs/Observable';
+import { Notification } from '../models/notification.model';
+import { filter } from 'rxjs/operators';
 
 export interface PageInterface
 {
@@ -35,6 +39,8 @@ export class App
     @ViewChild(Nav)
     public nav: Nav;
 
+    @Select(StateNotifications.notification) pushNotifications$: Observable<Notification>;
+
     loggedInPages : PageInterface[] =
     [
         {title: 'Logout', name: 'TabsPage', component: PageTabs, icon: 'log-out'}
@@ -56,8 +62,10 @@ export class App
         private translate : TranslateService,
         private store     : Store,
 
-        statusBar: StatusBar,
-        splashScreen: SplashScreen
+        app             : App,
+        toastController : ToastController,
+        statusBar       : StatusBar,
+        splashScreen    : SplashScreen
     )
     {
         this.rootPage = 'PageLogin';
@@ -69,6 +77,26 @@ export class App
             splashScreen.hide();
 
             this.store.dispatch(new AppInitialize());
+
+            this.pushNotifications$.
+            pipe(filter((push: Notification) => push != null)).
+            subscribe((push: Notification) =>
+            {
+                // If we opened app from notification or in the background
+                if (push.tap)
+                {
+                    app.nav.push('PageAlerts');
+                }
+                // If the application is already in the foreground
+                else
+                {
+                    toastController.create
+                    ({
+                        message: `${push.aps.alert.title}: ${push.aps.alert.body}`,
+                        duration: 4000
+                    }).present();
+                }
+            });
         });
     }
 

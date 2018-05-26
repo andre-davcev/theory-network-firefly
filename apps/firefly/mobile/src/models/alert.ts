@@ -2,9 +2,10 @@ import {Model} from './model';
 
 export interface Alert extends Model
 {
-    image  : string,
-    title  : string,
-    short  : string,
-    date   : string,
-    viewed : boolean
+    title : string;
+    body  : string;
+    image : string;
+    read  : boolean;
+
+    date: string;
 }

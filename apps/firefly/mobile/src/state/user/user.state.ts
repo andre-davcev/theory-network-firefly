@@ -20,7 +20,8 @@ import { LanguageGet, LanguageSet } from '../language/language.actions';
 import { AuthProvider } from '../../enums/auth.provider';
 import { Credentials } from '../../models/credentials';
 import { User } from '../../models/user';
-import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, LoginFacebook, LoginFacebookBrowser, LoginFacebookDevice, LoginGoogle, LoginGoogleBrowser, LoginGoogleDevice, UserLogout } from './user.actions';
+import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, LoginFacebook, LoginFacebookBrowser, LoginFacebookDevice, LoginGoogle, LoginGoogleBrowser, LoginGoogleDevice, UserLogout, UserAddToken} from './user.actions';
+import { AlertsGet } from '../alert/alert.actions';
 
 export interface StateUserModel
 {
@@ -153,14 +154,28 @@ export class StateUser
                 }
                 else
                 {
-                    dispatch(new LanguageSet(user.language));
-
                     patchState({user: user, authenticated: true});
+
+                    // ToDo: Move to ngxs side effects
+                    dispatch(new LanguageSet(user.language));
+                    dispatch(new AlertsGet());
                 }
             }),
 
             catchError((error: Error) => of(patchState({error: error})))
         );
+    }
+
+    @Action(UserAddToken)
+    userAddToken({ getState }: StateContext<StateUserModel>, { payload }: UserAddToken)
+    {
+        const user   : User                   = getState().user;
+        const token  : string                 = payload;
+        const tokens : {[id: string]: string} = user.tokens == null ? {} : user.tokens;
+
+        tokens[token] = token;
+
+        return user.tokens == null ? of(null) : this.firestore.collection<User>('user').doc(user.uidInternal).update({tokens});
     }
 
     @Action(LoginEmail)

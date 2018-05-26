@@ -1,5 +1,5 @@
-import { Credentials } from "../../models/credentials";
-import { User } from "../../models/user";
+import { Credentials } from '../../models/credentials';
+import { User } from '../../models/user';
 
 import * as firebase from 'firebase/app';
 
@@ -9,6 +9,7 @@ export enum ActionsUser
     UserAuthenticateCheck = '[User] User Authenticate Check',
     UserGet               = '[User] User Get',
     UserCreate            = '[User] User Create',
+    UserAddToken          = '[User] User Add Token',
     LoginEmail            = '[User] Login Email',
     LoginFacebook         = '[User] Login Facebook',
     LoginFacebookBrowser  = '[User] Login Facebook Browser',
@@ -46,6 +47,13 @@ export class UserCreate
     static readonly type = ActionsUser.UserCreate;
 
     constructor() {}
+}
+
+export class UserAddToken
+{
+    static readonly type = ActionsUser.UserAddToken;
+
+    constructor(public payload: string) {}
 }
 
 export class LoginEmail
