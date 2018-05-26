@@ -1,4 +1,4 @@
-export interface Notification
+export interface PushNotification
 {
     'gcm.message_id' : string;
     tap?             : boolean;

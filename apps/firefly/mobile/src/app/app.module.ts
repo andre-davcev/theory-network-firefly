@@ -27,7 +27,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 import {CoreModule} from '../core/core.module';
-import {App}        from './app';
+import {ComponentApp}        from './app';
 
 import {Alerts}          from '../services/alerts';
 import {ServiceBeacons}  from '../services/beacons';
@@ -65,6 +65,7 @@ import { StatePlaces } from '../state/places/places.state';
 import { StateDevice } from '../state/device/device.state';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StateNotifications } from '../state/notifications/notifications.state';
+import { Firebase } from '@ionic-native/firebase';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -97,7 +98,7 @@ export class AppErrorHandler implements ErrorHandler
         AngularFireModule.initializeApp(environment.apis.firebase),
         IonicStorageModule.forRoot(),
 
-        IonicModule.forRoot(App,
+        IonicModule.forRoot(ComponentApp,
         {
             tabsHideOnSubPages: true
         }),
@@ -143,14 +144,14 @@ export class AppErrorHandler implements ErrorHandler
 
     declarations :
     [
-        App
+        ComponentApp
     ],
 
     bootstrap : [IonicApp],
 
     entryComponents :
     [
-        App
+        ComponentApp
     ],
 
     providers :
@@ -161,6 +162,8 @@ export class AppErrorHandler implements ErrorHandler
 
         Facebook,
         GooglePlus,
+
+        Firebase,
 
         Alerts,
         ServiceBeacons,
