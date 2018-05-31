@@ -15,4 +15,9 @@ export class PageAssetsPlaces
     {
 
     }
+
+    add(): void
+    {
+
+    }
 }
