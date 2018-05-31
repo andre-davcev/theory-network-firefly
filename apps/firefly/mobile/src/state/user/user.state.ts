@@ -22,6 +22,7 @@ import { Credentials } from '../../models/credentials';
 import { User } from '../../models/user';
 import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, LoginFacebook, LoginFacebookBrowser, LoginFacebookDevice, LoginGoogle, LoginGoogleBrowser, LoginGoogleDevice, UserLogout, UserAddToken} from './user.actions';
 import { AlertsGet } from '../alert/alert.actions';
+import { NotificationsWatch } from '../notifications/notifications.actions';
 
 export interface StateUserModel
 {
@@ -159,6 +160,7 @@ export class StateUser
                     // ToDo: Move to ngxs side effects
                     dispatch(new LanguageSet(user.language));
                     dispatch(new AlertsGet());
+                    dispatch(new NotificationsWatch());
                 }
             }),
 
@@ -175,7 +177,10 @@ export class StateUser
 
         tokens[token] = token;
 
-        return user.tokens == null ? of(null) : this.firestore.collection<User>('user').doc(user.uidInternal).update({tokens});
+        // ToDo: Register token
+        console.log(token);
+
+        return user.tokens == null || user.tokens[token] != null ? of(null) : this.firestore.collection<User>('user').doc(user.uidInternal).update({tokens});
     }
 
     @Action(LoginEmail)
