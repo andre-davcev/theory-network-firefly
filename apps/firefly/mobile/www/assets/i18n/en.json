@@ -129,6 +129,36 @@
             "event"              : "Event",
             "events"             : "Events",
             "eventsDescription"  : "All of your public and private events"
+        },
+
+        "assets-icons":
+        {
+            "title": "Icons"
+        },
+
+        "assets-images":
+        {
+            "title": "Images"
+        },
+
+        "assets-coupons":
+        {
+            "title": "Coupons"
+        },
+
+        "assets-beacons":
+        {
+            "title": "Beacons"
+        },
+
+        "assets-places":
+        {
+            "title": "Places"
+        },
+
+        "assets-events":
+        {
+            "title": "Events"
         }
     },
 
