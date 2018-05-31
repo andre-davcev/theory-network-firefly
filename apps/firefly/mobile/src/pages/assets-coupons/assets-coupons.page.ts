@@ -15,4 +15,9 @@ export class PageAssetsCoupons
     {
 
     }
+
+    add(): void
+    {
+
+    }
 }

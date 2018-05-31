@@ -15,4 +15,9 @@ export class PageAssetsBeacons
     {
 
     }
+
+    add(): void
+    {
+
+    }
 }

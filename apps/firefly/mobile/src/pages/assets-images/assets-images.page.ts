@@ -15,4 +15,9 @@ export class PageAssetsImages
     {
 
     }
+
+    add(): void
+    {
+
+    }
 }

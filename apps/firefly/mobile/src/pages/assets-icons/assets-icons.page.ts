@@ -15,4 +15,9 @@ export class PageAssetsIcons
     {
 
     }
+
+    add(): void
+    {
+
+    }
 }

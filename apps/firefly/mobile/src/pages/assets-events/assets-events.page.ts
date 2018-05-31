@@ -15,4 +15,9 @@ export class PageAssetsEvents
     {
 
     }
+
+    add(): void
+    {
+
+    }
 }
