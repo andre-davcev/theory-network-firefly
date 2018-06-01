@@ -177,10 +177,7 @@ export class StateUser
 
         tokens[token] = token;
 
-        // ToDo: Register token
-        console.log(token);
-
-        return user.tokens == null || user.tokens[token] != null ? of(null) : this.firestore.collection<User>('user').doc(user.uidInternal).update({tokens});
+        return user.tokens != null && user.tokens[token] != null ? of(null) : this.firestore.collection<User>('user').doc(user.uidInternal).update({tokens});
     }
 
     @Action(LoginEmail)
