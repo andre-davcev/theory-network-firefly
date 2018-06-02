@@ -1,6 +1,6 @@
-<ion-tabs [selectedIndex]="selected" [color]="dark">
-    <ion-tab [root]="tabs[0]" tabTitle="{{'tabs.app.find' | translate}}"      tabIcon="bug"></ion-tab>
-    <ion-tab [root]="tabs[1]" tabTitle="{{'tabs.app.alerts' | translate}}"    tabIcon="pin" [tabBadge]="alerts.unviewed" tabBadgeStyle="secondary"></ion-tab>
+<ion-tabs [selectedIndex]="selected">
+    <ion-tab [root]="tabs[0]" tabTitle="{{'tabs.app.alerts' | translate}}"    tabIcon="pin" [tabBadge]="alerts.unviewed" tabBadgeStyle="secondary"></ion-tab>
+    <ion-tab [root]="tabs[1]" tabTitle="{{'tabs.app.find' | translate}}"      tabIcon="bug"></ion-tab>
     <ion-tab [root]="tabs[2]" tabTitle="{{'tabs.app.publisher' | translate}}" tabIcon="logo-rss"></ion-tab>
     <ion-tab [root]="tabs[3]" tabTitle="{{'tabs.app.user' | translate}}"      tabIcon="person"></ion-tab>
 </ion-tabs>
