@@ -27,8 +27,8 @@ export class PageTabs
 {
     tabs:Array<any> =
     [
-        'PageFind',
         'PageAlerts',
+        'PageFind',
         'PagePublisher',
         'PageUser'
     ];
