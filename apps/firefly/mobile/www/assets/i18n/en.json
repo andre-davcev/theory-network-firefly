@@ -1,24 +1,25 @@
 {
     "general":
     {
-        "delete"      : "Delete",
-        "locations"   : "Locations",
-        "description" : "Description",
-        "categories"  : "Categories",
-        "isPrivate"   : "Is Private",
-        "add"         : "Add",
-        "cancel"      : "Cancel",
-        "done"        : "Done"
+        "delete"        : "Delete",
+        "locations"     : "Locations",
+        "description"   : "Description",
+        "categories"    : "Categories",
+        "isPrivate"     : "Is Private",
+        "add"           : "Add",
+        "cancel"        : "Cancel",
+        "done"          : "Done",
+        "notifications" : "Notifications",
+        "settings"      : "Settings"
     },
 
     "tabs":
     {
         "app":
         {
-            "find"      : "Find",
-            "alerts"    : "Alerts",
-            "publisher" : "Publish",
-            "user"      : "User"
+            "notifications" : "Notifications",
+            "publisher"     : "Publish",
+            "settings"      : "Settings"
         },
 
         "find" :
@@ -34,10 +35,10 @@
             "assets"   : "Assets"
         },
 
-        "user" :
+        "settings" :
         {
-            "profile"  : "Profile",
-            "settings" : "Settings"
+            "profile" : "Profile",
+            "rules"   : "Rules"
         }
     },
 
@@ -71,7 +72,7 @@
             }
         },
 
-        "alerts" :
+        "notifications" :
         {
             "tabFired"              : "Fired",
             "tabSubscriptions"      : "Subscriptions",
@@ -119,7 +120,7 @@
             "imagesDescription"  : "Photos and images that are used in card views",
             "coupon"             : "Coupon",
             "coupons"            : "Coupons",
-            "couponsDescription" : "Deals and coupons used once your alerts are fired",
+            "couponsDescription" : "Deals and coupons used once your notifications are fired",
             "beacon"             : "Beacon",
             "beacons"            : "Beacons",
             "beaconsDescription" : "Your inventory of bluetooth Beacon devices",

@@ -1,10 +1,12 @@
 <ion-header class="app-transparent ff-page-alerts">
     <ion-navbar transparent>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="deleteConfirm()">
-                <ion-icon name="trash"></ion-icon>
+        <ion-buttons start>
+            <button ion-button icon-only color="white" (click)="find()">
+                <ion-icon name="search"></ion-icon>
             </button>
-            <button ion-button icon-only>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button icon-only color="white" (click)="subscriptions()">
                 <ion-icon name="options"></ion-icon>
             </button>
         </ion-buttons>
@@ -18,7 +20,7 @@
                 <h1 class="ff-title">{{alert.title}}</h1>
                 <h2 class="ff-short">{{alert.body}}</h2>
                 <img class="ff-image" [src]="alert.image">
-                <button class="ff-button">{{'pages.alerts.addCoupon' | translate}}</button>
+                <button class="ff-button">{{'pages.notifications.addCoupon' | translate}}</button>
                 <p class="ff-paragraph">{{alert.date}}</p>
             </div>
         </ion-slide>

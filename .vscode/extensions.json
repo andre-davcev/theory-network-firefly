@@ -11,6 +11,13 @@
         "johnpapa.winteriscoming",
         "eamodio.gitlens",
         "CoenraadS.bracket-pair-colorizer",
-        "oderwat.indent-rainbow"
+        "oderwat.indent-rainbow",
+        "esbenp.prettier-vscode",
+        "WallabyJs.wallaby-vscode",
+        "AngularDoc.angulardoc-vscode",
+        "quicktype.quicktype",
+        "alefragnani.numbered-bookmarks",
+        "mikael.angular-beastcode",
+        "johnpapa.angular2"
     ]
 }
