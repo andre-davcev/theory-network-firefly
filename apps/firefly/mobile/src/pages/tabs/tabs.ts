@@ -5,10 +5,10 @@ import {IonicPage} from 'ionic-angular';
 
 import {Alerts} from '../../services/alerts';
 
-import {PageFind}        from '../find/find';
-import {PageAlerts}      from '../alerts/alerts';
-import {PagePublisher}   from '../publisher/publisher';
-import {PageUser}        from '../user/user';
+import {PageFind}          from '../find/find';
+import {PageNotifications} from '../alerts/alerts';
+import {PagePublisher}     from '../publisher/publisher';
+import {PageUser}          from '../user/user';
 import { StatusBar } from '@ionic-native/status-bar';
 import { filter } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
@@ -27,8 +27,7 @@ export class PageTabs
 {
     tabs:Array<any> =
     [
-        'PageAlerts',
-        'PageFind',
+        'PageNotifications',
         'PagePublisher',
         'PageUser'
     ];
@@ -51,7 +50,7 @@ export class PageTabs
             // If we opened app from notification or in the background
             if (push.tap)
             {
-                this.app.getActiveNav().push('PageAlerts');
+                this.app.getActiveNav().push('PageNotifications');
             }
             // If the application is already in the foreground
             else

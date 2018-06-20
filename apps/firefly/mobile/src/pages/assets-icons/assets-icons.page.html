@@ -1,14 +1,21 @@
-<ion-header>
-    <ion-navbar>
+<ion-header class="app-transparent">
+    <ion-navbar color='white'>
         <ion-title>{{'pages.assets-icons.title' | translate}}</ion-title>
     </ion-navbar>
 </ion-header>
 
-
-<ion-content>
+<ion-content class="app-color-white">
     <ion-fab bottom right (click)="add()">
         <button ion-fab color="secondary">
             <ion-icon name="md-add"></ion-icon>
         </button>
     </ion-fab>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-3 *ngFor="let icon of icons">
+                <img class="comp-icon" [src]="icon">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

@@ -4,23 +4,23 @@ import {IonicPageModule} from 'ionic-angular';
 
 import {TranslateModule} from '@ngx-translate/core';
 
-import {PageAlerts} from './alerts';
+import {PageNotifications} from './alerts';
 
 @NgModule
 ({
     imports :
     [
         TranslateModule,
-        IonicPageModule.forChild(PageAlerts)
+        IonicPageModule.forChild(PageNotifications)
     ],
 
     declarations : 
     [
-        PageAlerts
+        PageNotifications
     ]
 })
 
-export class ModulePageAlerts
+export class ModulePageNotifications
 { 
 
 }

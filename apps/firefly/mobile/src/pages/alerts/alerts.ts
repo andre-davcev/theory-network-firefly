@@ -16,7 +16,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 })
 
 @IonicPage()
-export class PageAlerts
+export class PageNotifications
 {
     @ViewChild(Slides) slides:Slides;
 
@@ -77,5 +77,15 @@ export class PageAlerts
 
         confirm.present();
                 */
+    }
+
+    find(): void
+    {
+
+    }
+
+    subscriptions(): void
+    {
+
     }
 }

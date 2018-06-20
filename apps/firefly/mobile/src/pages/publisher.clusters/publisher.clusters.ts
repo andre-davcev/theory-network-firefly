@@ -4,6 +4,7 @@ import {IonicPage} from 'ionic-angular';
 
 import {Cluster} from '../../models/cluster';
 import {Temp}    from '../../services/temp';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @IonicPage()
 @Component
@@ -16,11 +17,16 @@ export class PagePublisherClusters
 {
     public clusters:Array<Cluster>;
 
-    constructor(temp:Temp)
+    constructor(private statusBar: StatusBar, temp:Temp)
     {
         this.clusters = temp.subscriptions;
 
         console.log(this.clusters);
+    }
+
+    ionViewWillEnter()
+    {
+        this.statusBar.styleLightContent();
     }
 
     public clicked(cluster: Cluster)
