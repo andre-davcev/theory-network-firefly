@@ -1,0 +1,17 @@
+app-page-alerts
+{
+    ion-buttons
+    {
+        &[start]
+        {
+            margin-left: 28px;
+            margin-top: 6px;
+        }
+
+        &[end]
+        {
+            margin-right: 32px;
+            margin-top: 4px;
+        }
+    }
+}
