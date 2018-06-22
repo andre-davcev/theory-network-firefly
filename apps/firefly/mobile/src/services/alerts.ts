@@ -28,8 +28,6 @@ export class Alerts
 
     view(index:number)
     {
-        console.log(this.alerts);
-        console.log(index);
         if (!this.alerts[index].read)
         {
             this.unviewed--;
@@ -37,9 +35,9 @@ export class Alerts
             this.alerts[index].read = true;
         }
 
-        if (this.unviewed == 0)
+        if (this.unviewed === 0)
         {
-            this.unviewed = -1;
+            this.unviewed = null;
         }
     }
 

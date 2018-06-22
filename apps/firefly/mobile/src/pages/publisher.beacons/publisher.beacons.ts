@@ -17,8 +17,10 @@ import {Page} from '../page';
 
 export class PagePublisherBeacons implements OnInit
 {
+
     public beacons:Array<Beacon> =
     [
+/*
         {
             major      : 5315,
             majorLabel : 'Music Stages',
@@ -27,6 +29,7 @@ export class PagePublisherBeacons implements OnInit
             uuid       : 'b9407f30-f5f8-466e-aff9-25556b57fe6d',
             uuidLabel  : 'Center Left'
         }
+*/
     ];
 
     constructor(public beaconsService:ServiceBeacons)

@@ -16,9 +16,7 @@ export class PageAssetsIcons
     [
         'temp/icons/coffee-icon-blue.png',
         'temp/icons/coffee-icon-pink.png',
-        'temp/icons/coffee-icon-brown.png',
-        'temp/icons/coffee-icon-blue.png',
-        'temp/icons/coffee-icon-pink.png'
+        'temp/icons/coffee-icon-brown.png'
     ];
 
     constructor(private statusBar: StatusBar)
@@ -28,7 +26,7 @@ export class PageAssetsIcons
 
     ionViewWillEnter()
     {
-        this.statusBar.styleDefault();
+        this.statusBar.styleBlackTranslucent();
     }
 
     add(): void
