@@ -1,6 +1,6 @@
-import {Model} from './model';
+import { Asset } from './asset.model';
 
-export interface Beacon extends Model
+export interface Beacon extends Asset
 {
     major      : number;
     majorLabel : string;
