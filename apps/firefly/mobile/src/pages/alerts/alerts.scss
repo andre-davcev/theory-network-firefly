@@ -2,16 +2,19 @@ app-page-alerts
 {
     ion-buttons
     {
+        position: relative;
+        width: 100%;
+
         &[start]
         {
-            margin-left: 28px;
-            margin-top: 6px;
-        }
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
 
-        &[end]
-        {
+            margin-left: 28px;
             margin-right: 32px;
-            margin-top: 4px;
+            margin-top: 6px;
         }
     }
 }

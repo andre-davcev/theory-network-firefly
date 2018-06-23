@@ -29,7 +29,7 @@ export interface StateIconsModel
 })
 
 
-export class StateCluster
+export class StateIcons
 {
     constructor(private serviceIcons: ServiceIcons, private formIcon: FormIcon) {}
 

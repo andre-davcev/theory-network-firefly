@@ -1,11 +1,11 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-navbar dark>
         <ion-segment [(ngModel)]="segment">
             <ion-segment-button value="stream">{{'tabs.find.stream' | translate}}</ion-segment-button>
             <ion-segment-button value="discover">{{'tabs.find.discover' | translate}}</ion-segment-button>
             <ion-segment-button value="categories">{{'tabs.find.categories' | translate}}</ion-segment-button>
         </ion-segment>
-    </ion-toolbar>
+    </ion-navbar>
 </ion-header>
 
 <ion-content [ngSwitch]="segment">

@@ -1,16 +1,20 @@
 <ion-header class="app-transparent ff-page-alerts">
-    <ion-navbar transparent>
+    <ion-toolbar transparent>
         <ion-buttons start>
-            <button ion-button icon-only color="white" (click)="find()">
+            <button ion-button icon-only (click)="find()">
                 <ion-icon name="search" color="dark"></ion-icon>
             </button>
-        </ion-buttons>
-        <ion-buttons end>
-            <button ion-button icon-only color="white" (click)="subscriptions()">
+            <button ion-button icon-only (click)="publish()">
+                <ion-icon name="md-add" color="dark"></ion-icon>
+            </button>
+            <button ion-button icon-only (click)="subscriptions()">
                 <ion-icon name="options" color="dark"></ion-icon>
             </button>
+            <button ion-button icon-only (click)="settings()">
+                <ion-icon name="settings" color="dark"></ion-icon>
+            </button>
         </ion-buttons>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content class="ff-primary-background">

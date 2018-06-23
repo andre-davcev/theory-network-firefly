@@ -67,8 +67,10 @@ export class PagePublisher
                 [
                     {text: translations['pages.assets.icon'],   handler: () => {}},
                     {text: translations['pages.assets.image'],  handler: () => {}},
+/*
                     {text: translations['pages.assets.coupon'], handler: () => {}},
                     {text: translations['pages.assets.beacon'], handler: () => {}},
+*/
                     {text: translations['pages.assets.place'],  handler: () => {}},
                     {text: translations['pages.assets.event'],  handler: () => {}},
                     {text: translations['general.cancel'],      role: 'cancel'}
