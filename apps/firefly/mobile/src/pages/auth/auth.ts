@@ -53,7 +53,7 @@ export class PageLogin
 
         subscribe((userFound: boolean) =>
         {
-            this.nav.push('PageTabs');
+            this.nav.push('PageNotifications');
         });
 
         forkJoin

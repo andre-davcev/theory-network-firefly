@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ViewChild} from '@angular/core';
 
-import {Slides}          from 'ionic-angular';
+import {Slides, NavController}          from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
 import {IonicPage}       from 'ionic-angular';
 
@@ -24,7 +24,7 @@ export class PageNotifications
 
     alerts:Array<Alert>;
 
-    constructor(public alertController:AlertController, public alertsObject:Alerts, private statusBar: StatusBar)
+    constructor(public alertController:AlertController, public alertsObject:Alerts, private statusBar: StatusBar, private nav: NavController)
     {
         this.alerts = alertsObject.alerts;
 
@@ -81,11 +81,21 @@ export class PageNotifications
 
     find(): void
     {
+        this.nav.push('PageFind');
+    }
 
+    publish(): void
+    {
+        this.nav.push('PagePublisher');
     }
 
     subscriptions(): void
     {
 
+    }
+
+    settings(): void
+    {
+        this.nav.push('PageUser');
     }
 }

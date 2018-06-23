@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
+import {IonicPage, NavController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 
 @IonicPage()
@@ -19,7 +19,7 @@ export class PageAssetsIcons
         'temp/icons/coffee-icon-brown.png'
     ];
 
-    constructor(private statusBar: StatusBar)
+    constructor(private statusBar: StatusBar, private nav: NavController, )
     {
 
     }
@@ -31,6 +31,6 @@ export class PageAssetsIcons
 
     add(): void
     {
-
+        this.nav.push('PageAssetsIcon');
     }
 }

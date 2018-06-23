@@ -157,7 +157,6 @@ export class StateUser
                 {
                     patchState({user: user, authenticated: true});
 
-                    // ToDo: Move to ngxs side effects
                     dispatch(new LanguageSet(user.language));
                     dispatch(new AlertsGet());
                     dispatch(new NotificationsWatch());
