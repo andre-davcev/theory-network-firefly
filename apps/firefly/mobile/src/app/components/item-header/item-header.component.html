@@ -3,7 +3,7 @@
 
 <div class="comp-icon-container" (click)="clickedIcon()">
     <img class="comp-icon" [src]="iconUrl">
-    <p class="comp-icon-placeholder" *ngIf="edit && !icon">{{iconPlaceholder}}</p>
+    <p class="comp-icon-placeholder" *ngIf="edit && !iconValue">{{iconPlaceholder}}</p>
 </div>
 
 <form novalidate class="comp-container" [formGroup]="form" *ngIf="edit">

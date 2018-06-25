@@ -21,7 +21,6 @@ export class PageAssetsIcon
 
     constructor(private store: Store, private statusBar: StatusBar)
     {
-        // ToDo: This should probably remove?
         this.store.dispatch(new SetIconId('new'));
     }
 

@@ -132,6 +132,14 @@
             "eventsDescription"  : "All of your public and private events"
         },
 
+        "assets-icon" :
+        {
+            "title"                  : "Icon Details",
+            "namePlaceholder"        : "Name",
+            "descriptionPlaceholder" : "Description",
+            "iconPlaceholder"        : "select icon"
+        },
+
         "assets-icons":
         {
             "title": "Icons"
