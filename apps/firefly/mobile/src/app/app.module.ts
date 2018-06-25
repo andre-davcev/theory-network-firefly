@@ -66,6 +66,9 @@ import { StateDevice } from '../state/device/device.state';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StateNotifications } from '../state/notifications/notifications.state';
 import { Firebase } from '@ionic-native/firebase';
+import { StateIcons } from '../state/icons/icons.state';
+import { ServiceIcons } from '../services/icons.service';
+import { FormIcon } from './forms/icon.form';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -124,7 +127,8 @@ export class AppErrorHandler implements ErrorHandler
             StateUser,
             StateCluster,
             StatePlaces,
-            StateNotifications
+            StateNotifications,
+            StateIcons
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot
@@ -171,6 +175,9 @@ export class AppErrorHandler implements ErrorHandler
 
         FormCluster,
         ClusterService,
+
+        ServiceIcons,
+        FormIcon,
 
         [{provide: ErrorHandler, useClass: AppErrorHandler}]
     ]

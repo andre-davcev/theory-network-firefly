@@ -1,6 +1,6 @@
 <ion-header class="app-transparent">
     <ion-navbar color='white'>
-        <ion-title>{{'pages.cluster.title' | translate}}</ion-title>
+        <ion-title>{{'pages.assets-icon.title' | translate}}</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -9,13 +9,13 @@
 
     <form novalidate [formGroup]="form$ | async">
         <app-item-header [form]="form$ | async"
-                        title="name"
-                        [titlePlaceholder]="'pages.cluster.titlePlaceholder' | translate"
-                        subtitle="tagline"
-                        [subtitlePlaceholder]="'pages.cluster.subtitlePlaceholder' | translate"
-                        icon="icon"
-                        [iconPlaceholder]="'pages.cluster.iconPlaceholder' | translate"
-                        iconUrlEmpty="icons/avatar-empty.svg">
+                         title="name"
+                         [titlePlaceholder]="'pages.assets-icon.namePlaceholder' | translate"
+                         subtitle="description"
+                         [subtitlePlaceholder]="'pages.assets-icon.descriptionPlaceholder' | translate"
+                         icon="url"
+                         [iconPlaceholder]="'pages.assets-icon.iconPlaceholder' | translate"
+                         iconUrlEmpty="icons/avatar-empty.svg">
         </app-item-header>
 <!--
         <app-item-header icon="temp/icons/coffee-icon-blue.png"
