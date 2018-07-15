@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {IonicPage, LoadingController, Loading, ModalController} from 'ionic-angular';
+import {IonicPage, LoadingController, Loading, ModalController, Modal} from 'ionic-angular';
 
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -26,7 +26,7 @@ export class PagePublisherClusterLocations implements OnInit
 
     private loading: Loading;
 
-    public modal: any;
+    public modal: Modal;
 
     constructor(private store: Store, private loadingController: LoadingController, public modalController: ModalController)
     {

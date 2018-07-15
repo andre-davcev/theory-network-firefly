@@ -18,6 +18,7 @@
         "quicktype.quicktype",
         "alefragnani.numbered-bookmarks",
         "mikael.angular-beastcode",
-        "johnpapa.angular2"
+        "johnpapa.angular2",
+        "shan.code-settings-sync"
     ]
 }

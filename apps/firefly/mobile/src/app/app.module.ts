@@ -7,7 +7,6 @@ import {ErrorHandler}     from '@angular/core';
 
 import {IonicApp}          from 'ionic-angular';
 import {IonicModule}       from 'ionic-angular';
-import {IonicErrorHandler} from 'ionic-angular';
 
 import {IonicStorageModule} from '@ionic/storage';
 import {Pro}                from '@ionic/pro';
@@ -18,7 +17,6 @@ import {Facebook}      from '@ionic-native/facebook';
 import {GooglePlus}    from '@ionic-native/google-plus';
 
 import {AngularFireModule}     from 'angularfire2';
-import {AngularFireAuthModule} from 'angularfire2/auth';
 
 import {TranslateModule}     from '@ngx-translate/core';
 import {TranslateLoader}     from '@ngx-translate/core';
@@ -35,19 +33,7 @@ import {Temp}            from '../services/temp';
 
 import {environment}      from '../environments/environment';
 
-import {EffectsApp}              from '../redux/app/effects';
-import {EffectsUser}             from '../redux/user/effects';
-import {EffectsLanguage}         from '../redux/language/effects';
-import {EffectsBeaconsPublished} from '../redux/beacons-published/effects';
-
-import {ReducerApp}              from '../redux/app/reducer';
-import {ReducerUser}             from '../redux/user/reducer';
-import {ReducerLanguage}         from '../redux/language/reducer';
-import {ReducerBeaconsPublished} from '../redux/beacons-published/reducer';
 import { CommonModule } from '@angular/common';
-import { EffectsLocation } from '../redux/location/effects';
-import { ReducerLocation } from '../redux/location/reducer';
-import { reducers } from '../redux/app/store';
 
 import {NgxsModule}                    from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
@@ -69,6 +55,11 @@ import { Firebase } from '@ionic-native/firebase';
 import { StateIcons } from '../state/icons/icons.state';
 import { ServiceIcons } from '../services/icons.service';
 import { FormIcon } from './forms/icon.form';
+import { ModulePageFind } from '../pages/find/find.module';
+import { ModulePageSearch } from '../pages/search/search.page.module';
+import { ModulePagePublisher } from '../pages/publisher/publisher.module';
+import { ModulePageSubscriptions } from '../pages/subscriptions/subscriptions.page.module';
+import { ModulePageUser } from '../pages/user/user.module';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -143,7 +134,13 @@ export class AppErrorHandler implements ErrorHandler
             accessToken: environment.apis.maps.accessToken
         }),
 
-        ModulePagePublisherClusterLocationsAdd
+        ModulePagePublisherClusterLocationsAdd,
+
+        ModulePageFind,
+        ModulePageSearch,
+        ModulePagePublisher,
+        ModulePageSubscriptions,
+        ModulePageUser
     ],
 
     declarations :
