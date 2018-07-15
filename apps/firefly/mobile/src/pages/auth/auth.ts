@@ -5,22 +5,16 @@ import {Platform}      from 'ionic-angular';
 import {IonicPage}     from 'ionic-angular';
 
 import {Observable} from 'rxjs/Observable';
-import {Observer}   from 'rxjs/Observer';
-import {filter, switchMap, take, tap} from 'rxjs/operators';
-
-import {PageTabs} from '../tabs/tabs';
-import {User}     from '../../models/user';
+import {filter, switchMap, take} from 'rxjs/operators';
 
 import {AuthProvider}  from '../../enums/auth.provider';
-import {Email}         from '../../models/email';
-import {Password}      from '../../models/password';
 
 import { timer } from 'rxjs/observable/timer';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { of } from 'rxjs/observable/of';
 import { Store, Select } from '@ngxs/store';
 import { StateUser } from '../../state/user/user.state';
-import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail, UserCreate } from '../../state/user/user.actions';
+import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail } from '../../state/user/user.actions';
 
 @IonicPage()
 @Component

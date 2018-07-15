@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar dark>
-        <ion-title>{{'pages.find.title' | translate}}</ion-title>
+        <ion-title>{{'pages.stream.title' | translate}}</ion-title>
 
         <ion-buttons end>
             <button ion-button (click)="dismissModal()">{{'general.done' | translate}}</button>
@@ -23,7 +23,7 @@
                     <ion-col>
                         <button ion-button clear icon-start (click)="subscribe(subscription)">
                             <ff-icon name="check" [active]="subscription.subscribed"></ff-icon>
-                            {{subscription.subscribed ? 'pages.find.subscribed' : 'pages.find.subscribe' | translate}}
+                            {{(subscription.subscribed ? 'pages.stream.subscribed' : 'pages.stream.subscribe') | translate}}
                         </button>
                     </ion-col>
 

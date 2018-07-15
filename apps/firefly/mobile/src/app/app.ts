@@ -1,18 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
 
-import {TranslateService} from '@ngx-translate/core';
-
-import {Events, MenuController, Nav, Platform, ToastController, App} from 'ionic-angular';
-import {Storage}                               from '@ionic/storage';
-
-import {PageTabs}  from '../pages/tabs/tabs';
-import {PageLogin} from '../pages/auth/auth';
-import { Store, Select } from '@ngxs/store';
-import { AppInitialize } from '../state/app/app.actions';
-import { StatusBar } from '@ionic-native/status-bar';
+import {Nav, Platform} from 'ionic-angular';
+import { Store } from '@ngxs/store';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Observable } from 'rxjs/Observable';
-import { filter } from 'rxjs/operators';
+
+import { AppInitialize } from '../state/app/app.actions';
 
 export interface PageInterface
 {
@@ -37,92 +29,24 @@ export class ComponentApp
     @ViewChild(Nav)
     public nav: Nav;
 
-    loggedInPages : PageInterface[] =
-    [
-        {title: 'Logout', name: 'TabsPage', component: PageTabs, icon: 'log-out'}
-    ];
-
-    loggedOutPages : PageInterface[] =
-    [
-        {title: 'Login',  name: 'LoginPage', component : PageLogin,  icon: 'log-in'}
-    ];
-
     rootPage:string;
 
-    constructor
-    (
-        private events    : Events,
-        private menu      : MenuController,
-        private platform  : Platform,
-        private storage   : Storage,
-        private translate : TranslateService,
-        private store     : Store,
+    constructor(private platform  : Platform, private store : Store, private splashScreen : SplashScreen)
+    {
+        this.initialize();
+    }
 
-        statusBar       : StatusBar,
-        splashScreen    : SplashScreen,
-    )
+    private initialize(): void
     {
         this.rootPage = 'PageLogin';
 
-        platform.ready().then(() =>
+        this.platform.ready().then(() =>
         {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            splashScreen.hide();
+            this.splashScreen.hide();
 
             this.store.dispatch(new AppInitialize());
         });
-    }
-
-    openPage(page:PageInterface)
-    {
-        let params = {};
-
-        // the nav component was found using @ViewChild(Nav)
-        // reset the nav to remove previous pages and only have this page
-        // we wouldn't want the back button to show in this scenario
-        if (page.index)
-        {
-            params = {tabIndex: page.index};
-        }
-
-        // If we are already on tabs just change the selected tab
-        // don't setRoot again, this maintains the history stack of the
-        // tabs even if changing them from the menu
-        if (this.nav.getActiveChildNav() && page.index != undefined)
-        {
-            // Set the root of the nav with params if it's a tab index
-            this.nav.getActiveChildNav().select(page.index);
-        }
-        else
-        {
-            this.nav.setRoot(page.name, params).catch((err: any) =>
-            {
-                console.log(`Didn't set nav root: ${err}`);
-            });
-        }
-    }
-
-    isActive(page: PageInterface)
-    {
-        let childNav = this.nav.getActiveChildNavs()[0];
-
-        // Tabs are a special case because they have their own navigation
-        if (childNav)
-        {
-            if (childNav.getSelected() && childNav.getSelected().root === page.tabName)
-            {
-                return 'primary';
-            }
-
-            return;
-        }
-
-        if (this.nav.getActive() && this.nav.getActive().name === page.name)
-        {
-            return 'primary';
-        }
-
-        return;
     }
 }

@@ -22,13 +22,6 @@
             "settings"      : "Settings"
         },
 
-        "find" :
-        {
-            "discover"   : "Discover",
-            "stream"     : "Stream",
-            "categories" : "Categories"
-        },
-
         "publisher" :
         {
             "clusters" : "Clusters",
@@ -37,8 +30,8 @@
 
         "settings" :
         {
-            "profile"  : "Profile",
-            "clusters" : "Clusters"
+            "profile" : "Profile",
+            "assets"  : "Assets"
         }
     },
 
@@ -63,14 +56,11 @@
             "signUp"              : "Sign up here"
         },
 
-        "find" :
+        "stream" :
         {
-            "stream" :
-            {
-                "title"      : "Stream",
-                "subscribe"  : "Subscribe",
-                "subscribed" : "Subscribed"
-            }
+            "title"      : "Feed",
+            "subscribe"  : "Subscribe",
+            "subscribed" : "Subscribed"
         },
 
         "notifications" :
@@ -82,6 +72,11 @@
             "deleteConfirmMessage"  : "This will permanently delete this alert",
             "deleteConfirmAgree"    : "Delete",
             "deleteConfirmDisagree" : "Cancel"
+        },
+
+        "subscriptions" :
+        {
+            "title" : "Manage Subscriptions"
         },
 
         "cluster" :
@@ -111,26 +106,29 @@
 
         "assets":
         {
-            "title"              : "Assets",
-            "add"                : "Add Asset",
-            "icon"               : "Icon",
-            "icons"              : "Icons",
-            "iconsDescription"   : "Your icon assets which are shown in list views",
-            "image"              : "Image",
-            "images"             : "Images",
-            "imagesDescription"  : "Photos and images that are used in card views",
-            "coupon"             : "Coupon",
-            "coupons"            : "Coupons",
-            "couponsDescription" : "Deals and coupons used once your notifications are fired",
-            "beacon"             : "Beacon",
-            "beacons"            : "Beacons",
-            "beaconsDescription" : "Your inventory of bluetooth Beacon devices",
-            "place"              : "Place",
-            "places"             : "Places",
-            "placesDescription"  : "A collection of your places tied to map locations",
-            "event"              : "Event",
-            "events"             : "Events",
-            "eventsDescription"  : "All of your public and private events"
+            "title"               : "Assets",
+            "add"                 : "Add Asset",
+            "icon"                : "Icon",
+            "icons"               : "Icons",
+            "iconsDescription"    : "Your icon assets which are shown in list views",
+            "image"               : "Image",
+            "images"              : "Images",
+            "imagesDescription"   : "Photos and images that are used in card views",
+            "coupon"              : "Coupon",
+            "coupons"             : "Coupons",
+            "couponsDescription"  : "Deals and coupons used once your notifications are fired",
+            "beacon"              : "Beacon",
+            "beacons"             : "Beacons",
+            "beaconsDescription"  : "Your inventory of bluetooth Beacon devices",
+            "place"               : "Place",
+            "places"              : "Places",
+            "placesDescription"   : "A collection of your places tied to map locations",
+            "event"               : "Event",
+            "events"              : "Events",
+            "eventsDescription"   : "All of your public and private events",
+            "cluster"             : "Cluster",
+            "clusters"            : "Clusters",
+            "clustersDescription" : "Firefly clusters used to fire notifications"
         },
 
         "assets-icon" :

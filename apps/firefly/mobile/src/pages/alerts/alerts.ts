@@ -9,7 +9,7 @@ import {Alert}           from '../../models/alert';
 import {Alerts}          from '../../services/alerts';
 import {AlertsModalType} from './alerts-modal.enum';
 import {StatusBar}       from '@ionic-native/status-bar';
-import { PageFind } from '../find/find';
+import { PageStream } from '../stream/stream.page';
 import { PagePublisher } from '../publisher/publisher';
 import { PageUser } from '../user/user';
 import { PageSearch } from '../search/search.page';
@@ -43,7 +43,7 @@ export class PageNotifications
 
     public pages: Array<any> =
     [
-        PageFind,
+        PageStream,
         PageSearch,
         PagePublisher,
         PageSubscriptions,
