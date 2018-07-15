@@ -55,7 +55,7 @@ import { Firebase } from '@ionic-native/firebase';
 import { StateIcons } from '../state/icons/icons.state';
 import { ServiceIcons } from '../services/icons.service';
 import { FormIcon } from './forms/icon.form';
-import { ModulePageFind } from '../pages/find/find.module';
+import { ModulePageStream } from '../pages/stream/stream.page.module';
 import { ModulePageSearch } from '../pages/search/search.page.module';
 import { ModulePagePublisher } from '../pages/publisher/publisher.module';
 import { ModulePageSubscriptions } from '../pages/subscriptions/subscriptions.page.module';
@@ -136,7 +136,7 @@ export class AppErrorHandler implements ErrorHandler
 
         ModulePagePublisherClusterLocationsAdd,
 
-        ModulePageFind,
+        ModulePageStream,
         ModulePageSearch,
         ModulePagePublisher,
         ModulePageSubscriptions,

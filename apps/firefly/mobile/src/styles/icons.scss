@@ -69,10 +69,37 @@
                 font-family: $tn-font-face-name-ionic-icons;
                 display: inline-block;
                 content: "\f3ff";
-                
+
                 top: -0.3rem;
                 font-size: $app-icon-size + 0.4rem;
             }
+        }
+    }
+}
+
+.content
+{
+    .ion-ios-bug,
+    .ion-md-bug
+    {
+        &:before
+        {
+            display: inline-block;
+            position: relative;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            text-rendering: auto;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-left: 0.3rem;
+
+            font-family: $core-font-firefly-face-name;
+
+            content: $core-font-firefly-icon-firefly;
         }
     }
 }

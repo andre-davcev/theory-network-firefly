@@ -14,11 +14,11 @@ import { Temp } from '../../services/temp';
 @IonicPage()
 @Component
 ({
-    selector    : 'app-page-find',
-    templateUrl : 'find.html'
+    selector    : 'app-page-stream',
+    templateUrl : 'stream.page.html'
 })
 
-export class PageFind
+export class PageStream
 {
     public subscriptions:Array<Subscription> = [];
 

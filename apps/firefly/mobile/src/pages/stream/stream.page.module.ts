@@ -6,25 +6,25 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {FFIcon} from '../../app/directives/icon/icon';
 
-import {PageFind} from './find';
+import {PageStream} from './stream.page';
 
 @NgModule
 ({
     imports :
     [
         TranslateModule,
-        IonicPageModule.forChild(PageFind)
+        IonicPageModule.forChild(PageStream)
     ],
 
     declarations :
     [
         FFIcon,
 
-        PageFind
+        PageStream
     ]
 })
 
-export class ModulePageFind
+export class ModulePageStream
 {
 
 }

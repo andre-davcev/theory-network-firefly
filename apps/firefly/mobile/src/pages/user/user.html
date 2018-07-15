@@ -2,7 +2,7 @@
     <ion-navbar dark>
         <ion-segment [(ngModel)]="segment">
             <ion-segment-button value="profile">{{'tabs.settings.profile' | translate}}</ion-segment-button>
-            <ion-segment-button value="settings">{{'tabs.settings.clusters' | translate}}</ion-segment-button>
+            <ion-segment-button value="assets">{{'tabs.settings.assets' | translate}}</ion-segment-button>
         </ion-segment>
 
         <ion-buttons end>
@@ -16,7 +16,7 @@
         <app-page-user-profile></app-page-user-profile>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'settings'">
+    <ion-list *ngSwitchCase="'assets'">
         <app-page-user-settings></app-page-user-settings>
     </ion-list>
 </ion-content>
