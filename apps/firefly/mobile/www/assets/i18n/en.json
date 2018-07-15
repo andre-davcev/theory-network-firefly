@@ -37,8 +37,8 @@
 
         "settings" :
         {
-            "profile" : "Profile",
-            "rules"   : "Rules"
+            "profile"  : "Profile",
+            "clusters" : "Clusters"
         }
     },
 
@@ -67,6 +67,7 @@
         {
             "stream" :
             {
+                "title"      : "Stream",
                 "subscribe"  : "Subscribe",
                 "subscribed" : "Subscribed"
             }

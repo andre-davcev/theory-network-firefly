@@ -4,6 +4,10 @@
             <ion-segment-button value="clusters">{{'tabs.publisher.clusters' | translate}}</ion-segment-button>
             <ion-segment-button value="assets">{{'tabs.publisher.assets' | translate}}</ion-segment-button>
         </ion-segment>
+
+        <ion-buttons end>
+            <button ion-button (click)="dismissModal()">{{'general.done' | translate}}</button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 

@@ -1,23 +1,43 @@
 <ion-header>
     <ion-navbar dark>
-        <ion-segment [(ngModel)]="segment">
-            <ion-segment-button value="stream">{{'tabs.find.stream' | translate}}</ion-segment-button>
-            <ion-segment-button value="discover">{{'tabs.find.discover' | translate}}</ion-segment-button>
-            <ion-segment-button value="categories">{{'tabs.find.categories' | translate}}</ion-segment-button>
-        </ion-segment>
+        <ion-title>{{'pages.find.title' | translate}}</ion-title>
+
+        <ion-buttons end>
+            <button ion-button (click)="dismissModal()">{{'general.done' | translate}}</button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
-<ion-content [ngSwitch]="segment">
-    <div class="scroll-content" *ngSwitchCase="'stream'">
-        <app-page-find-stream></app-page-find-stream>
-    </div>
+<ion-content>
+    <ion-list class="ff-list">
+        <ion-item no-lines class="ff-primary-background" *ngFor="let subscription of subscriptions" (click)="go()">
+            <ion-card>
+                <img [src]="subscription.photo">
 
-    <div class="scroll-content" *ngSwitchCase="'discover'">
-        <app-page-find-discover></app-page-find-discover>
-    </div>
+                <ion-item>
+                    <h2>{{subscription.name}}</h2>
+                    <p>{{subscription.tagline}}</p>
+                </ion-item>
 
-    <div class="scroll-content" *ngSwitchCase="'categories'">
-        <app-page-find-categories></app-page-find-categories>
-    </div>
+                <ion-row>
+                    <ion-col>
+                        <button ion-button clear icon-start (click)="subscribe(subscription)">
+                            <ff-icon name="check" [active]="subscription.subscribed"></ff-icon>
+                            {{subscription.subscribed ? 'pages.find.subscribed' : 'pages.find.subscribe' | translate}}
+                        </button>
+                    </ion-col>
+
+                    <ion-col text-right>
+                        <button ion-button icon-start clear>
+
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

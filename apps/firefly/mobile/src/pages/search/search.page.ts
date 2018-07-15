@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
-
 import {IonicPage, ViewController} from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
+import {StatusBar} from '@ionic-native/status-bar';
 
-@IonicPage()
 @Component
 ({
-    selector    : 'app-page-user',
-    templateUrl : 'user.html'
+    selector    : 'app-page-search',
+    templateUrl : 'search.page.html'
 })
 
-export class PageUser
+@IonicPage()
+export class PageSearch
 {
-    segment:string = 'profile';
-
     constructor(private statusBar: StatusBar, private viewController: ViewController)
     {
 
@@ -21,12 +18,11 @@ export class PageUser
 
     ionViewWillEnter()
     {
-        this.statusBar.styleLightContent();
+        this.statusBar.styleDefault();
     }
 
     public dismissModal(): void
     {
         this.viewController.dismiss();
-        this.statusBar.styleDefault();
     }
 }

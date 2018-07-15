@@ -2,8 +2,12 @@
     <ion-navbar dark>
         <ion-segment [(ngModel)]="segment">
             <ion-segment-button value="profile">{{'tabs.settings.profile' | translate}}</ion-segment-button>
-            <ion-segment-button value="settings">{{'tabs.settings.rules' | translate}}</ion-segment-button>
+            <ion-segment-button value="settings">{{'tabs.settings.clusters' | translate}}</ion-segment-button>
         </ion-segment>
+
+        <ion-buttons end>
+            <button ion-button (click)="dismissModal()">{{'general.done' | translate}}</button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 

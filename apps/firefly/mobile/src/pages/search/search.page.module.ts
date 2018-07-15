@@ -4,27 +4,23 @@ import {IonicPageModule} from 'ionic-angular';
 
 import {TranslateModule} from '@ngx-translate/core';
 
-import {FFIcon} from '../../app/directives/icon/icon';
-
-import {PageFind} from './find';
+import { PageSearch } from './search.page';
 
 @NgModule
 ({
     imports :
     [
         TranslateModule,
-        IonicPageModule.forChild(PageFind)
+        IonicPageModule.forChild(PageSearch)
     ],
 
     declarations :
     [
-        FFIcon,
-
-        PageFind
+        PageSearch
     ]
 })
 
-export class ModulePageFind
+export class ModulePageSearch
 {
 
 }
