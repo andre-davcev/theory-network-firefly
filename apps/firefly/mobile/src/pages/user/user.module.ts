@@ -5,8 +5,8 @@ import {IonicPageModule} from 'ionic-angular';
 import {PageUser} from './user';
 
 import {PageUserProfile}  from '../user.profile/user.profile';
-import {PageUserSettings} from '../user.settings/user.settings';
 import { TranslateModule } from '@ngx-translate/core';
+import { PagePublisherAssets } from '../publisher-assets/publisher-assets';
 
 @NgModule
 ({
@@ -21,7 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
         PageUser,
 
         PageUserProfile,
-        PageUserSettings
+        PagePublisherAssets
     ]
 })
 

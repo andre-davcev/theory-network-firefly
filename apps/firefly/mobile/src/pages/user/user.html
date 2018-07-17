@@ -1,8 +1,8 @@
 <ion-header>
     <ion-navbar dark>
         <ion-segment [(ngModel)]="segment">
-            <ion-segment-button value="profile">{{'tabs.settings.profile' | translate}}</ion-segment-button>
             <ion-segment-button value="assets">{{'tabs.settings.assets' | translate}}</ion-segment-button>
+            <ion-segment-button value="profile">{{'tabs.settings.profile' | translate}}</ion-segment-button>
         </ion-segment>
 
         <ion-buttons end>
@@ -12,11 +12,17 @@
 </ion-header>
 
 <ion-content [ngSwitch]="segment">
-    <ion-list *ngSwitchCase="'profile'">
-        <app-page-user-profile></app-page-user-profile>
-    </ion-list>
+    <ion-fab bottom right *ngIf="segment === 'assets'" (click)="add()">
+        <button ion-fab color="secondary">
+            <ion-icon name="md-add"></ion-icon>
+        </button>
+    </ion-fab>
 
     <ion-list *ngSwitchCase="'assets'">
-        <app-page-user-settings></app-page-user-settings>
+        <app-page-publisher-assets></app-page-publisher-assets>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'profile'">
+        <app-page-user-profile></app-page-user-profile>
     </ion-list>
 </ion-content>

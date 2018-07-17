@@ -5,6 +5,7 @@ import {IonicPageModule} from 'ionic-angular';
 import {TranslateModule} from '@ngx-translate/core';
 
 import {PageNotifications} from './alerts';
+import { PagePublisherCluster } from '../cluster/cluster.page';
 
 @NgModule
 ({
@@ -14,13 +15,13 @@ import {PageNotifications} from './alerts';
         IonicPageModule.forChild(PageNotifications)
     ],
 
-    declarations : 
+    declarations :
     [
         PageNotifications
     ]
 })
 
 export class ModulePageNotifications
-{ 
+{
 
 }

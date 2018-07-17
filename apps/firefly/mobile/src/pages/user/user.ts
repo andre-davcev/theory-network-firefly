@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 
-import {IonicPage, ViewController} from 'ionic-angular';
+import {IonicPage, ViewController, NavController, ActionSheetController, ActionSheet} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
+import { TranslateService } from '../../../node_modules/@ngx-translate/core';
 
 @IonicPage()
 @Component
@@ -12,9 +13,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 export class PageUser
 {
-    segment:string = 'profile';
+    public segment:string = 'assets';
 
-    constructor(private statusBar: StatusBar, private viewController: ViewController)
+    constructor(private nav: NavController, private actionSheetController: ActionSheetController, private translate: TranslateService, private statusBar: StatusBar, private viewController: ViewController)
     {
 
     }
@@ -22,6 +23,65 @@ export class PageUser
     ionViewWillEnter()
     {
         this.statusBar.styleLightContent();
+    }
+
+    public add()
+    {
+        const segment:string = this.segment.substring(0, this.segment.length - 1);
+
+        if (segment === 'assets')
+        {
+            const page:string = 'PagePublisher' + segment.charAt(0).toUpperCase() + segment.slice(1);
+
+            this.nav.push(page);
+        }
+        else
+        {
+            this.presentActionSheet();
+        }
+    }
+
+    public presentActionSheet()
+    {
+        this.translate.get
+        ([
+            'pages.assets.add',
+            'pages.assets.icon',
+            'pages.assets.image',
+            'pages.assets.coupon',
+            'pages.assets.beacon',
+            'pages.assets.place',
+            'pages.assets.event',
+            'pages.assets.cluster',
+            'general.cancel'
+        ]).
+
+        subscribe((translations: Array<string>) =>
+        {
+            const actionSheet: ActionSheet = this.actionSheetController.create
+            ({
+                title                 : translations['pages.assets.add'],
+                enableBackdropDismiss : true,
+
+                buttons:
+                [
+                    {text: translations['pages.assets.icon'],   handler: () => {}},
+                    {text: translations['pages.assets.image'],  handler: () => {}},
+/*
+                    {text: translations['pages.assets.coupon'], handler: () => {}},
+                    {text: translations['pages.assets.beacon'], handler: () => {}},
+*/
+                    {text: translations['pages.assets.place'],   handler: () => {}},
+                    {text: translations['pages.assets.event'],   handler: () => {}},
+                    {text: translations['pages.assets.cluster'], handler: () => {}},
+
+                    {text: translations['general.cancel'], role: 'cancel'}
+                ]
+            });
+
+            actionSheet.present();
+        });
+
     }
 
     public dismissModal(): void
