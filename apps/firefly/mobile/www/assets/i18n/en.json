@@ -128,7 +128,7 @@
             "eventsDescription"   : "All of your public and private events",
             "cluster"             : "Cluster",
             "clusters"            : "Clusters",
-            "clustersDescription" : "Firefly clusters used to fire notifications"
+            "clustersDescription" : "Locations and events which users subscribe to"
         },
 
         "assets-icon" :
@@ -167,6 +167,11 @@
         "assets-events":
         {
             "title": "Events"
+        },
+
+        "assets-clusters":
+        {
+            "title": "Clusters"
         }
     },
 

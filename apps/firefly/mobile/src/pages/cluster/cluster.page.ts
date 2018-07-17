@@ -1,6 +1,6 @@
 import {Component, AfterViewInit} from '@angular/core';
 
-import {IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController, ViewController} from 'ionic-angular';
 
 import { FormGroup } from '@angular/forms';
 import { StateCluster } from '../../state/cluster/cluster.state';
@@ -22,7 +22,7 @@ export class PagePublisherCluster
 
     segment:string = 'clusters';
 
-    constructor(private store: Store, private nav: NavController, private statusBar: StatusBar)
+    constructor(private store: Store, private nav: NavController, private statusBar: StatusBar, private viewController: ViewController)
     {
         this.store.dispatch(new SetClusterId('new'));
     }
@@ -40,5 +40,11 @@ export class PagePublisherCluster
     public navigateLocations(): void
     {
         this.nav.push('PagePublisherClusterLocations');
+    }
+
+    public dismissModal(): void
+    {
+        this.viewController.dismiss();
+        this.statusBar.styleDefault();
     }
 }

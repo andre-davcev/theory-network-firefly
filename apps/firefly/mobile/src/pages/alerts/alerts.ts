@@ -7,13 +7,22 @@ import {IonicPage}       from 'ionic-angular';
 
 import {Alert}           from '../../models/alert';
 import {Alerts}          from '../../services/alerts';
-import {AlertsModalType} from './alerts-modal.enum';
 import {StatusBar}       from '@ionic-native/status-bar';
 import { PageStream } from '../stream/stream.page';
 import { PagePublisher } from '../publisher/publisher';
 import { PageUser } from '../user/user';
 import { PageSearch } from '../search/search.page';
 import { PageSubscriptions } from '../subscriptions/subscriptions.page';
+import { PagePublisherCluster } from '../cluster/cluster.page';
+
+export enum AlertsModalType
+{
+    Feed,
+    Search,
+    Publish,
+    Subscriptions,
+    Settings
+}
 
 @Component
 ({
@@ -45,7 +54,7 @@ export class PageNotifications
     [
         PageStream,
         PageSearch,
-        PagePublisher,
+        PagePublisherCluster,
         PageSubscriptions,
         PageUser
     ];

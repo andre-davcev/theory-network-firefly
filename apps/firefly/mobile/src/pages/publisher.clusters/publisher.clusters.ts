@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
+import {IonicPage, NavController} from 'ionic-angular';
 
 import {Cluster} from '../../models/cluster';
 import {Temp}    from '../../services/temp';
@@ -17,7 +17,7 @@ export class PagePublisherClusters
 {
     public clusters:Array<Cluster>;
 
-    constructor(private statusBar: StatusBar, temp:Temp)
+    constructor(private nav: NavController, private statusBar: StatusBar, temp:Temp)
     {
         this.clusters = temp.subscriptions;
 
@@ -37,5 +37,10 @@ export class PagePublisherClusters
     public deleted(cluster: Cluster)
     {
         console.log(cluster);
+    }
+
+    public add(): void
+    {
+        this.nav.push('PagePublisherCluster');
     }
 }

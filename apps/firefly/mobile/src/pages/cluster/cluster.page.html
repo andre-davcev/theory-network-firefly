@@ -1,6 +1,10 @@
 <ion-header class="app-transparent">
     <ion-navbar color='white'>
         <ion-title>{{'pages.cluster.title' | translate}}</ion-title>
+
+        <ion-buttons end>
+            <button ion-button (click)="dismissModal()">{{'general.cancel' | translate}}</button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 

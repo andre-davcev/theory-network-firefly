@@ -26,6 +26,11 @@ import { ModuleItemDescription } from '../../app/components/item-description/ite
     declarations :
     [
         PagePublisherCluster
+    ],
+
+    exports :
+    [
+        PagePublisherCluster
     ]
 })
 

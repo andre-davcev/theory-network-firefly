@@ -1,15 +1,16 @@
 import {Component} from '@angular/core';
 
-import {IonicPage, ActionSheetController, ActionSheet, NavController} from 'ionic-angular';
+import {IonicPage, NavController} from 'ionic-angular';
 
 export enum PagesAssets
 {
-    Icons   = 'PageAssetsIcons',
-    Images  = 'PageAssetsImages',
-    Coupons = 'PageAssetsCoupons',
-    Beacons = 'PageAssetsBeacons',
-    Places  = 'PageAssetsPlaces',
-    Events  = 'PageAssetsEvents'
+    Icons    = 'PageAssetsIcons',
+    Images   = 'PageAssetsImages',
+    Coupons  = 'PageAssetsCoupons',
+    Beacons  = 'PageAssetsBeacons',
+    Places   = 'PageAssetsPlaces',
+    Events   = 'PageAssetsEvents',
+    Clusters = 'PagePublisherClusters'
 }
 
 @IonicPage()
