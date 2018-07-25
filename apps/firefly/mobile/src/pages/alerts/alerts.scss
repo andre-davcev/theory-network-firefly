@@ -48,4 +48,17 @@ app-page-alerts
 */
         }
     }
+
+    ion-fab
+    {
+        &[left]
+        {
+            left: calc(20px + env(safe-area-inset-left));
+        }
+
+        &[right]
+        {
+            right: calc(20px + env(safe-area-inset-right));
+        }
+    }
 }
