@@ -1,0 +1,29 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "module": "es2015",
+    "baseUrl": "./",
+    "paths": {
+        "@theory/*": [
+          "../../../libs/*"
+        ],
+        "@theory/ionic": [
+          "../../../xplat/ionic/index.ts"
+        ],
+        "@theory/ionic/*": [
+          "../../../xplat/ionic/*"
+        ],
+        "@theory/web": [
+          "../../../xplat/web/index.ts"
+        ],
+        "@theory/web/*": [
+          "../../../xplat/web/*"
+        ]
+    }
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}
