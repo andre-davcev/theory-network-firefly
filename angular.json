@@ -58,6 +58,17 @@
           }
         }
       }
+    },
+    "ionic-firefly": {
+      "root": "apps/ionic-firefly/",
+      "sourceRoot": "apps/ionic-firefly/src",
+      "projectType": "application",
+      "prefix": "tn",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

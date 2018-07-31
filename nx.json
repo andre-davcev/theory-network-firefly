@@ -13,6 +13,9 @@
     },
     "xplat": {
       "tags": []
+    },
+    "ionic-firefly": {
+      "tags": []
     }
   }
 }
