@@ -1,6 +1,6 @@
 {
-  "appId": "com.example.app",
-  "appName": "example",
+  "appId": "com.theorynetwork.Firefly",
+  "appName": "Firefly",
   "bundledWebRuntime": false,
   "webDir": "www"
 }
