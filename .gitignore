@@ -30,38 +30,10 @@
 /coverage
 /libpeerconnection.log
 npm-debug.log
+yarn-error.log
 testem.log
 /typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
 
 # System Files
 .DS_Store
 Thumbs.db
-
-# Ionic
-**/node_modules
-**/plugins
-**/www/build
-**/.tmp
-**/.sourcemaps
-
-# Custom
-yarn.lock
-**/yarn.lock
-
-# Platform Files
-**/package-lock.json
-apps/**/mobile/ios
-apps/**/mobile/android
-apps/**/mobile/platforms/ios
-apps/**/mobile/platforms/android
-apps/**/mobile/resources/ios
-apps/**/mobile/resources/android
-apps/**/mobile/resources/*.md5
-
-# Firebase Cloud Messaging
-google-services.json
-GoogleService-Info.plist

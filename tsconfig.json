@@ -16,9 +16,6 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@theory/*": [
-        "libs/*"
-      ]
     }
   },
   "exclude": [
