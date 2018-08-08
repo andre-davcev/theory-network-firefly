@@ -25,8 +25,8 @@
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "help": "./node_modules/.bin/nx help",
 
-    "npm-global-linux": "sudo npm install -g @angular/cli @nrwl/schematics ionic",
-    "npm-global": "npm install -g @angular/cli @nrwl/schematics ionic",
+    "npm-global-install-linux": "sudo npm install -g @angular/cli @nrwl/schematics ionic",
+    "npm-global-install": "npm install -g @angular/cli @nrwl/schematics ionic",
     "firefly-mobile-create": "cd apps/firefly && ionic start Firefly blank --type=angular && mv Firefly mobile"
   },
   "private": true,
