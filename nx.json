@@ -7,5 +7,12 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "firefly-mobile": {
+      "tags": []
+    },
+    "firefly-mobile-e2e": {
+      "tags": []
+    }
+  }
 }
