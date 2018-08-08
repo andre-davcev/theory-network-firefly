@@ -1,17 +1,19 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../dist/out-tsc/apps/firefly/mobile",
+    "outDir": "../out-tsc/spec",
+    "baseUrl": "./",
+    "module": "commonjs",
     "types": [
       "jasmine",
       "node"
     ]
   },
   "files": [
-    "src/test.ts",
-    "src/polyfills.ts"
+    "test.ts"
   ],
   "include": [
+    "polyfills.ts",
     "**/*.spec.ts",
     "**/*.d.ts"
   ]
