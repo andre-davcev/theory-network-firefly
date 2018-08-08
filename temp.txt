@@ -1,4 +1,0 @@
-# custom
-package-lock.json
-**/ios
-**/android
