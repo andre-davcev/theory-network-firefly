@@ -34,7 +34,7 @@
               {
                 "glob": "**/*.svg",
                 "input": "node_modules/@ionic/angular/dist/ionic/svg",
-                "output": "apps/firefly/mobile/svg"
+                "output": "svg"
               }
             ],
             "styles": [
