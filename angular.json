@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "www",
+            "outputPath": "dist/apps/firefly/mobile",
             "index": "apps/firefly/mobile/src/index.html",
             "main": "apps/firefly/mobile/src/main.ts",
             "polyfills": "apps/firefly/mobile/src/polyfills.ts",
