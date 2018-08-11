@@ -26,8 +26,16 @@
             "polyfills": "apps/firefly/mobile/src/polyfills.ts",
             "tsConfig": "apps/firefly/mobile/src/tsconfig.app.json",
             "assets": [
-              "apps/firefly/mobile/src/favicon.ico",
-              "apps/firefly/mobile/src/assets"
+              {
+                "glob": "**/*",
+                "input": "apps/firefly/mobile/src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/@ionic/angular/dist/ionic/svg",
+                "output": "apps/firefly/mobile/svg"
+              }
             ],
             "styles": [
               {
@@ -38,22 +46,6 @@
               }
             ],
             "scripts": []
-          },
-
-          "options": {
-            "tsConfig": "src/tsconfig.app.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "assets"
-              },
-              {
-                "glob": "**/*.svg",
-                "input": "node_modules/@ionic/angular/dist/ionic/svg",
-                "output": "./svg"
-              }
-            ]
           },
 
           "configurations": {
@@ -98,15 +90,23 @@
           "options": {
             "main": "apps/firefly/mobile/src/test.ts",
             "polyfills": "apps/firefly/mobile/src/polyfills.ts",
-            "tsConfig": "apps/firefly/mobile/tsconfig.spec.json",
-            "karmaConfig": "apps/firefly/mobile/karma.conf.js",
+            "tsConfig": "apps/firefly/mobile/src/tsconfig.spec.json",
+            "karmaConfig": "apps/firefly/mobile/src/karma.conf.js",
             "styles": [
               "apps/firefly/mobile/src/styles.css"
             ],
             "scripts": [],
             "assets": [
-              "apps/firefly/mobile/src/favicon.ico",
-              "apps/firefly/mobile/src/assets"
+              {
+                "glob": "favicon.ico",
+                "input": "apps/firefly/mobile/src/",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "apps/firefly/mobile/src/assets",
+                "output": "/assets"
+              }
             ]
           }
         },
@@ -114,12 +114,36 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/firefly/mobile/tsconfig.app.json",
-              "apps/firefly/mobile/tsconfig.spec.json"
+              "apps/firefly/mobile/src/tsconfig.app.json",
+              "apps/firefly/mobile/src/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/ng-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "firefly-mobile:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "firefly-mobile:build:production"
+            }
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/ng-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "firefly-mobile:ionic-cordova-build",
+            "devServerTarget": "firefly-mobile:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "firefly-mobile:ionic-cordova-build:production",
+              "devServerTarget": "firefly-mobile:serve:production"
+            }
           }
         }
       }
@@ -160,117 +184,4 @@
     "defaultCollection": "@nrwl/schematics"
   },
   "defaultProject": "firefly-mobile"
-}
-
-
-{
-  "projects": {
-    "app": {
-      "architect": {
-        "build": {
-
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "app:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "app:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "app:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "styles.css"
-            ],
-            "scripts": [],
-            "assets": [
-              {
-                "glob": "favicon.ico",
-                "input": "src/",
-                "output": "/"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
-              }
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "ionic-cordova-build": {
-          "builder": "@ionic/ng-toolkit:cordova-build",
-          "options": {
-            "browserTarget": "app:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "app:build:production"
-            }
-          }
-        },
-        "ionic-cordova-serve": {
-          "builder": "@ionic/ng-toolkit:cordova-serve",
-          "options": {
-            "cordovaBuildTarget": "app:ionic-cordova-build",
-            "devServerTarget": "app:serve"
-          },
-          "configurations": {
-            "production": {
-              "cordovaBuildTarget": "app:ionic-cordova-build:production",
-              "devServerTarget": "app:serve:production"
-            }
-          }
-        }
-      }
-    },
-    "app-e2e": {
-
-    }
-  }
 }
