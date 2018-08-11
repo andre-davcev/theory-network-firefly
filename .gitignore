@@ -38,7 +38,23 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# custom
-package-lock.json
+# Ionic
+*.sw[mnpcod]
+*.log
+*.tmp
+*.tmp.*
+.ionic/
+.sourcemaps/
+.tmp/
+.versions/
+coverage/
+www/
+temp/
+platforms/
+plugins/
+plugins/android.json
+plugins/ios.json
+
+# Custom
 **/ios
 **/android
