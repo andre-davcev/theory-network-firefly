@@ -56,5 +56,6 @@ plugins/android.json
 plugins/ios.json
 
 # Custom
-**/ios
-**/android
+/ios
+/android
+.gradle
