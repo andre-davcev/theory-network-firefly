@@ -32,6 +32,12 @@
     "fire-functions-build": "cd apps/firefly/functions && tsc",
     "fire-functions-deploy": "firebase deploy --only functions",
 
+    "fire-design-icon": "grunt sketch_export:icon",
+    "fire-design-splash": "grunt sketch_export:splash",
+    "fire-design-logo": "grunt sketch_export:logo",
+    "fire-design-text": "grunt sketch_export:text",
+    "fire-design-exports": "grunt exports",
+
     "capacitor-update": "npx cap update",
     "capacitor-add-ios": "npx cap add ios",
     "capacitor-add-android": "npx cap add android",
