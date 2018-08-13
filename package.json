@@ -73,6 +73,8 @@
     "firebase-admin": "^6.0.0",
     "firebase-functions": "^2.0.4",
     "font-awesome": "^4.7.0",
+    "mapbox-gl": "^0.47.0",
+    "ngx-mapbox-gl": "^2.0.0",
     "rxjs": "^6.2.2",
     "zone.js": "^0.8.26"
   },
