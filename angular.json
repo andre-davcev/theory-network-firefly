@@ -229,6 +229,17 @@
           }
         }
       }
+    },
+    "ionic-firefly": {
+      "root": "apps/ionic-firefly/",
+      "sourceRoot": "apps/ionic-firefly/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
