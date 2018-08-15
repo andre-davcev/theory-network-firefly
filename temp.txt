@@ -1,4 +1,0 @@
-    "@angular-devkit/architect": "file:../../node_modules/@angular-devkit/architect",
-    "@angular-devkit/build-angular": "file:../../node_modules/@angular-devkit/build-angular",
-    "@angular-devkit/core": "file:../../node_modules/@angular-devkit/core",
-    "@angular-devkit/schematics": "file:../../node_modules/@angular-devkit/schematics",
