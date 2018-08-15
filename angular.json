@@ -47,7 +47,6 @@
             ],
             "scripts": []
           },
-
           "configurations": {
             "production": {
               "fileReplacements": [
@@ -181,7 +180,7 @@
       "typescriptMismatch": false,
       "versionMismatch": false
     },
-    "defaultCollection": "@nrwl/schematics"
+    "defaultCollection": "@nstudio/schematics"
   },
   "defaultProject": "firefly-mobile"
 }

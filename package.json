@@ -94,6 +94,7 @@
     "@ngrx/store-devtools": "6.0.1",
     "@ngxs/devtools-plugin": "^3.2.0",
     "@nrwl/schematics": "6.2.0",
+    "@nstudio/schematics": "^6.2.1",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/mapbox-gl": "^0.47.0",
