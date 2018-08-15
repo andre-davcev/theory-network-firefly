@@ -1,6 +1,7 @@
 {
-  "name": "exampleApp",
-  "type": "angular",
+  "name": "Firefly",
   "integrations": {},
-  "app_id": ""
+  "type": "angular",
+  "pro_id": "1e5146ca",
+  "app_id": "com.theorynetwork.Firefly"
 }
