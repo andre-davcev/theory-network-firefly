@@ -39,7 +39,8 @@
     "capacitor-add-ios": "npx cap add ios",
     "capacitor-add-android": "npx cap add android",
     "npm-global-install-linux": "sudo npm install -g @angular/cli @nrwl/schematics ionic",
-    "npm-global-install": "npm install -g @angular/cli @nrwl/schematics ionic"
+    "npm-global-install": "npm install -g @angular/cli @nrwl/schematics ionic",
+    "clean.shared": "cd libs/ && git clean -dfX && cd ../xplat/ && git clean -dfX"
   },
   "private": true,
   "dependencies": {
@@ -67,8 +68,8 @@
     "@ngrx/effects": "6.0.1",
     "@ngrx/router-store": "6.0.1",
     "@ngrx/store": "6.0.1",
-    "@ngx-translate/core": "^10.0.2",
-    "@ngx-translate/http-loader": "^3.0.1",
+    "@ngx-translate/core": "~10.0.1",
+    "@ngx-translate/http-loader": "~3.0.1",
     "@ngxs/store": "^3.2.0",
     "@nrwl/nx": "6.2.0",
     "angularfire2": "^5.0.0-rc.11",
@@ -80,7 +81,14 @@
     "mapbox-gl": "^0.47.0",
     "ngx-mapbox-gl": "^2.0.0",
     "rxjs": "^6.2.2",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "@theory/scss": "file:libs/scss",
+    "nativescript-angular": "~6.1.0",
+    "nativescript-ngx-fonticon": "^4.2.0",
+    "nativescript-theme-core": "^1.0.4",
+    "reflect-metadata": "^0.1.12",
+    "rxjs-compat": "^6.2.2",
+    "tns-core-modules": "~4.2.0"
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.7.2",
@@ -114,6 +122,10 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~2.7.2"
+    "typescript": "~2.7.2",
+    "tns-platform-declarations": "~4.2.0"
+  },
+  "xplat": {
+    "prefix": "app"
   }
 }
