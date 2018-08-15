@@ -8,10 +8,10 @@ module.exports = function(grunt)
     grunt.initConfig(
     {
         package : grunt.file.readJSON('package.json'),
-        
+
         dirs :
         {
-            base      : './apps/firefly/design',
+            base      : './apps/design-firefly',
             icons     : '<%= dirs.base %>/icons',
             images    : '<%= dirs.base %>/images',
             sketch    : '<%= dirs.base %>/sketch',
@@ -46,7 +46,7 @@ module.exports = function(grunt)
                 src : '<%= dirs.sketch %>/design.sketch',
                 dest : '<%= dirs.resources %>'
             },
-            
+
             splash :
             {
                 options :
@@ -85,7 +85,7 @@ module.exports = function(grunt)
                 },
 
                 src  : '<%= dirs.sketch %>/design.sketch',
-                dest : '<%= dirs.images %>'  
+                dest : '<%= dirs.images %>'
             },
 
             exports :

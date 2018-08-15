@@ -56,9 +56,6 @@ plugins/android.json
 plugins/ios.json
 
 # Custom
-/ios
-/android
-.gradle
 /old
 
 # nativescript
@@ -71,7 +68,7 @@ libs/**/*.d.ts
 libs/**/*.metadata.json
 libs/**/*.ngfactory.ts
 libs/**/*.ngsummary.json
-      
+
 # xplat
 xplat/**/*.js
 xplat/**/*.map
@@ -79,4 +76,3 @@ xplat/**/*.d.ts
 xplat/**/*.metadata.json
 xplat/**/*.ngfactory.ts
 xplat/**/*.ngsummary.json
-      
