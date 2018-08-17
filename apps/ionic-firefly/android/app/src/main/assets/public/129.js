@@ -62,282 +62,83 @@ function debounce(e, n) {
 
 /***/ }),
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-84d4beeb.js":
-/*!***************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-84d4beeb.js ***!
-  \***************************************************************************************************************************/
-/*! exports provided: a, b, c */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/input-shims.js":
+/*!************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/input-shims.js ***!
+  \************************************************************************************************************************/
+/*! exports provided: startInputShims */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return lifecycle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return setPageHidden; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return transition; });
-/* harmony import */ var _chunk_db5a015e_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-db5a015e.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-db5a015e.js");
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startInputShims", function() { return startInputShims; });
+/* harmony import */ var _chunk_76b36062_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-76b36062.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-76b36062.js");
+
+var RELOCATED_KEY = "$ionRelocated";
+function relocateInput(t, e, n, o) {
+    if (o === void 0) { o = 0; }
+    if (t[RELOCATED_KEY] !== n) {
+        if (e.value, n) {
+            cloneInputComponent(t, e);
+            var n_1 = "rtl" === t.ownerDocument.dir ? 9999 : -9999;
+            e.style.transform = "translate3d(" + n_1 + "px," + o + "px,0)";
+        }
+        else
+            removeClone(t, e);
+        t[RELOCATED_KEY] = n;
     }
-};
-
-var iosTransitionAnimation = function () { return __webpack_require__.e(/*! import() */ 124).then(__webpack_require__.bind(null, /*! ./ios.transition.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ios.transition.js")); }, mdTransitionAnimation = function () { return __webpack_require__.e(/*! import() */ 125).then(__webpack_require__.bind(null, /*! ./md.transition.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/md.transition.js")); };
-function transition(i) {
-    var _this = this;
-    return new Promise(function (n) { i.queue.write(function () { return __awaiter(_this, void 0, void 0, function () { var e, a; return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                beforeTransition(i);
-                return [4 /*yield*/, getAnimationBuilder(i)];
-            case 1:
-                e = _a.sent(), a = e ? animation(e, i) : noAnimation(i);
-                n(a);
-                return [2 /*return*/];
-        }
-    }); }); }); });
 }
-function getAnimationBuilder(i) {
-    return __awaiter(this, void 0, void 0, function () { var _a, _b; return __generator(this, function (_c) {
-        switch (_c.label) {
-            case 0:
-                if (!(i.leavingEl && !1 !== i.animated && 0 !== i.duration)) return [3 /*break*/, 7];
-                if (!i.animationBuilder) return [3 /*break*/, 1];
-                _a = i.animationBuilder;
-                return [3 /*break*/, 6];
-            case 1:
-                if (!("ios" === i.mode)) return [3 /*break*/, 3];
-                return [4 /*yield*/, iosTransitionAnimation()];
-            case 2:
-                _b = (_c.sent()).iosTransitionAnimation;
-                return [3 /*break*/, 5];
-            case 3: return [4 /*yield*/, mdTransitionAnimation()];
-            case 4:
-                _b = (_c.sent()).mdTransitionAnimation;
-                _c.label = 5;
-            case 5:
-                _a = _b;
-                _c.label = 6;
-            case 6: return [2 /*return*/, _a];
-            case 7: return [2 /*return*/];
-        }
-    }); });
-}
-function beforeTransition(i) { var n = i.enteringEl, e = i.leavingEl; setZIndex(n, e, i.direction), i.showGoBack ? n.classList.add("can-go-back") : n.classList.remove("can-go-back"), setPageHidden(n, !1), e && setPageHidden(e, !1); }
-function setPageHidden(i, n) { n ? (i.setAttribute("aria-hidden", "true"), i.classList.add("ion-page-hidden")) : (i.hidden = !1, i.removeAttribute("aria-hidden"), i.classList.remove("ion-page-hidden")); }
-function animation(i, n) {
-    return __awaiter(this, void 0, void 0, function () { var e; return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, waitForReady(n, !0)];
-            case 1:
-                _a.sent();
-                return [4 /*yield*/, n.animationCtrl.create(i, n.baseEl, n)];
-            case 2:
-                e = _a.sent();
-                fireWillEvents(n.window, n.enteringEl, n.leavingEl);
-                return [4 /*yield*/, playTransition(e, n)];
-            case 3: return [2 /*return*/, (_a.sent(), e.hasCompleted && fireDidEvents(n.window, n.enteringEl, n.leavingEl), e)];
-        }
-    }); });
-}
-function noAnimation(i) {
-    return __awaiter(this, void 0, void 0, function () { var n, e; return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                n = i.enteringEl, e = i.leavingEl;
-                n && n.classList.remove("ion-page-invisible"), e && e.classList.remove("ion-page-invisible");
-                return [4 /*yield*/, waitForReady(i, !1)];
-            case 1: return [2 /*return*/, (_a.sent(), fireWillEvents(i.window, n, e), fireDidEvents(i.window, n, e), null)];
-        }
-    }); });
-}
-function waitForReady(i, n) {
-    return __awaiter(this, void 0, void 0, function () { var e; return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                e = (null != i.deepWait ? i.deepWait : n) ? [deepReady(i.enteringEl), deepReady(i.leavingEl)] : [shallowReady(i.enteringEl), shallowReady(i.leavingEl)];
-                return [4 /*yield*/, Promise.all(e)];
-            case 1:
-                _a.sent();
-                return [4 /*yield*/, notifyViewReady(i.viewIsReady, i.enteringEl)];
-            case 2:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    }); });
-}
-function notifyViewReady(i, n) {
-    return __awaiter(this, void 0, void 0, function () { var _a; return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _a = i;
-                if (!_a) return [3 /*break*/, 2];
-                return [4 /*yield*/, i(n)];
-            case 1:
-                _a = (_b.sent());
-                _b.label = 2;
-            case 2:
-                _a;
-                return [2 /*return*/];
-        }
-    }); });
-}
-function playTransition(i, n) { var e = n.progressCallback, a = new Promise(function (n) { return i.onFinish(n); }); return e ? (i.progressStart(), e(i)) : i.play(), a; }
-function fireWillEvents(i, n, e) { lifecycle(i, e, "ionViewWillLeave"), lifecycle(i, n, "ionViewWillEnter"); }
-function fireDidEvents(i, n, e) { lifecycle(i, n, "ionViewDidEnter"), lifecycle(i, e, "ionViewDidLeave"); }
-function lifecycle(i, n, e) { if (n) {
-    var a = new (0, i.CustomEvent)(e, { bubbles: !1, cancelable: !1 });
-    n.dispatchEvent(a);
-} }
-function shallowReady(i) { return i && i.componentOnReady ? i.componentOnReady() : Promise.resolve(); }
-function deepReady(i) {
-    return __awaiter(this, void 0, void 0, function () { var n, _a; return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                n = i;
-                if (!n) return [3 /*break*/, 4];
-                _a = n.componentOnReady;
-                if (!_a) return [3 /*break*/, 2];
-                return [4 /*yield*/, n.componentOnReady()];
-            case 1:
-                _a = (_b.sent());
-                _b.label = 2;
-            case 2:
-                if (_a)
-                    return [2 /*return*/];
-                return [4 /*yield*/, Promise.all(Array.from(n.children).map(deepReady))];
-            case 3:
-                _b.sent();
-                _b.label = 4;
-            case 4: return [2 /*return*/];
-        }
-    }); });
-}
-function setZIndex(i, n, e) { i && (i.style.zIndex = "back" === e ? "99" : "101"), n && (n.style.zIndex = "100"); }
-
-
-
-/***/ }),
-
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-db5a015e.js":
-/*!***************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-db5a015e.js ***!
-  \***************************************************************************************************************************/
-/*! exports provided: a, b, c, d */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return hapticSelectionChanged; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hapticSelectionEnd; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hapticSelectionStart; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return hapticSelection; });
-function hapticSelection() { var n = window.TapticEngine; n && n.selection(); }
-function hapticSelectionStart() { var n = window.TapticEngine; n && n.gestureSelectionStart(); }
-function hapticSelectionChanged() { var n = window.TapticEngine; n && n.gestureSelectionChanged(); }
-function hapticSelectionEnd() { var n = window.TapticEngine; n && n.gestureSelectionEnd(); }
-
-
-
-/***/ }),
-
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-f7b6af08.js":
-/*!***************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-f7b6af08.js ***!
-  \***************************************************************************************************************************/
-/*! exports provided: a, b, c, d, e */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createColorClasses; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return createThemedClasses; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return openURL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return hostContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getClassMap; });
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+function isFocused(t) { return t === t.ownerDocument.activeElement; }
+function removeClone(t, e) { t && t.parentElement && (Array.from(t.parentElement.querySelectorAll(".cloned-input")).forEach(function (t) { return t.remove(); }), t.style.pointerEvents = ""), e.style.transform = "", e.style.opacity = ""; }
+function cloneInputComponent(t, e) { var _a, _b; var n = t.parentElement, o = t.ownerDocument; if (t && n) {
+    var r = t.offsetTop, i = t.offsetLeft, s = t.offsetWidth, l = t.offsetHeight, a = o.createElement("div"), c = a.style;
+    (_a = a.classList).add.apply(_a, Array.from(t.classList)), a.classList.add("cloned-input"), a.setAttribute("aria-hidden", "true"), c.pointerEvents = "none", c.position = "absolute", c.top = r + "px", c.left = i + "px", c.width = s + "px", c.height = l + "px";
+    var u = o.createElement("input");
+    (_b = u.classList).add.apply(_b, Array.from(e.classList)), u.value = e.value, u.type = e.type, u.placeholder = e.placeholder, u.tabIndex = -1, a.appendChild(u), n.appendChild(a), t.style.pointerEvents = "none";
+} e.style.transform = "scale(0)"; }
+function enableHideCaretOnScroll(t, e, n) { if (!n || !e)
+    return function () { }; var o = function (n) { isFocused(e) && relocateInput(t, e, n); }, r = function () { return relocateInput(t, e, !1); }, i = function () { return o(!0); }, s = function () { return o(!1); }; return n && (n.addEventListener("ionScrollStart", i), n.addEventListener("ionScrollEnd", s)), e.addEventListener("blur", r), function () { n.removeEventListener("ionScrollStart", i), n.removeEventListener("ionScrollEnd", s), e.addEventListener("ionBlur", r); }; }
+var SKIP_SELECTOR = "input, textarea, [no-blur]";
+function enableInputBlurring(t) { var e = !0, n = !1; function o() { n = !0; } function r() { e = !0; } function i(o) { if (n)
+    return void (n = !1); var r = t.activeElement; if (!r)
+    return; if (r.matches(SKIP_SELECTOR))
+    return; var i = o.target; i !== r && (i.matches(SKIP_SELECTOR) || i.closest(SKIP_SELECTOR) || i.classList.contains("input-cover") || (e = !1, setTimeout(function () { e || r.blur(); }, 50))); } return t.addEventListener("ionScrollStart", o), t.addEventListener("focusin", r, !0), t.addEventListener("touchend", i, !1), function () { t.removeEventListener("ionScrollStart", o, !0), t.removeEventListener("focusin", r, !0), t.removeEventListener("touchend", i, !1); }; }
+var SCROLL_ASSIST_SPEED = .3;
+function getScrollData(t, e, n) { return e ? calcScrollData((t.closest("ion-item,[ion-item]") || t).getBoundingClientRect(), e.getBoundingClientRect(), n, window.innerHeight) : { scrollAmount: 0, scrollPadding: 0, scrollDuration: 0, inputSafeY: 0 }; }
+function calcScrollData(t, e, n, o) { var r = t.top, i = t.bottom, s = e.top + 10, l = Math.min(e.bottom, o - n) / 2 - i, a = s - r, c = Math.round(l < 0 ? -l : a > 0 ? -a : 0), u = Math.abs(c) / SCROLL_ASSIST_SPEED; return { scrollAmount: c, scrollDuration: Math.min(400, Math.max(150, u)), scrollPadding: n, inputSafeY: 4 - (r - s) }; }
+function enableScrollAssist(t, e, n, o) { var r; var i = function (t) { r = Object(_chunk_76b36062_js__WEBPACK_IMPORTED_MODULE_0__["j"])(t), t.type; }, s = function (i) { if (i.type, !r)
+    return; var s = Object(_chunk_76b36062_js__WEBPACK_IMPORTED_MODULE_0__["j"])(i); hasPointerMoved(6, r, s) || isFocused(e) || (i.preventDefault(), i.stopPropagation(), jsSetFocus(t, e, n, o)); }; return t.addEventListener("touchstart", i, !0), t.addEventListener("touchend", s, !0), function () { t.removeEventListener("touchstart", i, !0), t.removeEventListener("touchend", s, !0); }; }
+function jsSetFocus(t, e, n, o) { var r = getScrollData(t, n, o); Math.abs(r.scrollAmount) < 4 ? e.focus() : (relocateInput(t, e, !0, r.inputSafeY), e.focus(), n.scrollByPoint(0, r.scrollAmount, r.scrollDuration).then(function () { relocateInput(t, e, !1, r.inputSafeY), e.focus(); })); }
+function hasPointerMoved(t, e, n) { if (e && n) {
+    var o = e.x - n.x, r = e.y - n.y;
+    return o * o + r * r > t * t;
+} return !1; }
+var PADDING_TIMER_KEY = "$ionPaddingTimer";
+function enableScrollPadding(t, e) { function n(t) { setScrollPadding(t.target, e); } function o(t) { setScrollPadding(t.target, 0); } return t.addEventListener("focusin", n), t.addEventListener("focusout", o), function () { t.removeEventListener("focusin", n), t.removeEventListener("focusout", o); }; }
+function setScrollPadding(t, e) { if ("INPUT" !== t.tagName)
+    return; if (t.parentElement && "ION-INPUT" === t.parentElement.tagName)
+    return; var n = t.closest("ion-content"); if (!n)
+    return; var o = n[PADDING_TIMER_KEY]; o && clearTimeout(o), e > 0 ? n.style.setProperty("--keyboard-offset", e + "px") : n[PADDING_TIMER_KEY] = setTimeout(function () { n.style.setProperty("--keyboard-offset", "0px"); }, 120); }
+var INPUT_BLURRING = !0, SCROLL_PADDING = !0;
+function startInputShims(t, e) { var n = e.getNumber("keyboardHeight", 290), o = e.getBoolean("scrollAssist", !0), r = e.getBoolean("hideCaretOnScroll", !0), i = e.getBoolean("inputBlurring", !0), s = e.getBoolean("scrollPadding", !0), l = new WeakMap, a = new WeakMap; function c(t) { var e = (t.shadowRoot || t).querySelector("input"), i = t.closest("ion-content"); if (e) {
+    if (i && r && !l.has(t)) {
+        var n_2 = enableHideCaretOnScroll(t, e, i);
+        l.set(t, n_2);
     }
-};
-function hostContext(e, t) { return !!t.closest(e); }
-function createColorClasses(e) { var _a; return e ? (_a = { "ion-color": !0 }, _a["ion-color-" + e] = !0, _a) : null; }
-function createThemedClasses(e, t) { var _a; return _a = {}, _a[t] = !0, _a[t + "-" + e] = !!e, _a; }
-function getClassList(e) { return e ? (Array.isArray(e) ? e : e.split(" ")).filter(function (e) { return null != e; }).map(function (e) { return e.trim(); }).filter(function (e) { return "" !== e; }) : []; }
-function getClassMap(e) { var t = {}; return getClassList(e).forEach(function (e) { return t[e] = !0; }), t; }
-function openURL(e, t, r, s) {
-    return __awaiter(this, void 0, void 0, function () { var o; return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                if (!(t && "#" !== t[0] && -1 === t.indexOf("://"))) return [3 /*break*/, 2];
-                o = e.document.querySelector("ion-router");
-                if (!o) return [3 /*break*/, 2];
-                r && r.preventDefault();
-                return [4 /*yield*/, o.componentOnReady()];
-            case 1: return [2 /*return*/, (_a.sent(), o.push(t, s))];
-            case 2: return [2 /*return*/, Promise.resolve()];
-        }
-    }); });
-}
+    if (i && o && !a.has(t)) {
+        var o_1 = enableScrollAssist(t, e, i, n);
+        a.set(t, o_1);
+    }
+} } i && INPUT_BLURRING && enableInputBlurring(t), s && SCROLL_PADDING && enableScrollPadding(t, n); var u = Array.from(t.querySelectorAll("ion-input")); for (var _i = 0, u_1 = u; _i < u_1.length; _i++) {
+    var t_1 = u_1[_i];
+    c(t_1);
+} t.body.addEventListener("ionInputDidLoad", function (t) { c(t.target); }), t.body.addEventListener("ionInputDidUnload", function (t) { !function (t) { if (r) {
+    var e_1 = l.get(t);
+    e_1 && e_1(), l.delete(t);
+} if (o) {
+    var e_2 = a.get(t);
+    e_2 && e_2(), a.delete(t);
+} }(t.target); }); }
 
 
 
