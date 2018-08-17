@@ -148,19 +148,19 @@ function isMatch(i) { if (!i)
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isAndroid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isCordova; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return isElectron; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return isIOS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return isIpad; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return isIphone; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return isPhablet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return isTablet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return matchMedia$1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return isDevice; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return isHybrid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return isStandaloneMode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return needInputShims; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isDevice; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isHybrid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return isStandaloneMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return needInputShims; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return isAndroid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return isCordova; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return isElectron; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return isIOS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return isIpad; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return isIphone; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return isPhablet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return isTablet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return matchMedia$1; });
 function isIpad(i) { return testUserAgent(i, /iPad/i); }
 function isIphone(i) { return testUserAgent(i, /iPhone/i); }
 function isIOS(i) { return testUserAgent(i, /iPad|iPhone|iPod/i); }

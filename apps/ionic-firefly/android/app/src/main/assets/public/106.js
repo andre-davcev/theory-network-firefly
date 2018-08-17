@@ -9,8 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createColorClasses; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return createThemedClasses; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createThemedClasses; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return createColorClasses; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return openURL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return hostContext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getClassMap; });
@@ -73,10 +73,10 @@ function openURL(e, t, r, s) {
 
 /***/ }),
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/dmkv3jge.js":
-/*!*********************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/dmkv3jge.js ***!
-  \*********************************************************************************************************************/
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/pjxyesd2.sc.js":
+/*!************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/pjxyesd2.sc.js ***!
+  \************************************************************************************************************************/
 /*! exports provided: IonText */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var Text=function(){function e(){}return e.prototype.hostData=function(){return{class:Object(_chunk_f7b6af08_js__WEBPACK_IMPORTED_MODULE_1__["a"])(this.color)}},e.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(e,"is",{get:function(){return"ion-text"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{color:{type:String,attr:"color"},mode:{type:String,attr:"mode"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return":host{--ion-color-base:currentColor;color:var(--ion-color-base)}"},enumerable:!0,configurable:!0}),e}();
+var Text=function(){function e(){}return e.prototype.hostData=function(){return{class:Object(_chunk_f7b6af08_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this.color)}},e.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(e,"is",{get:function(){return"ion-text"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{color:{type:String,attr:"color"},mode:{type:String,attr:"mode"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".ion-color.sc-ion-text-h{color:var(--ion-color-base)}"},enumerable:!0,configurable:!0}),e}();
 
 /***/ })
 

@@ -1,96 +1,71 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[127],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-76b36062.js":
-/*!***************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-76b36062.js ***!
-  \***************************************************************************************************************************/
-/*! exports provided: a, b, c, d, e, f, g, h, i, j */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/status-tap.js":
+/*!***********************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/status-tap.js ***!
+  \***********************************************************************************************************************/
+/*! exports provided: startStatusTap */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return now; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hasShadowDom; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return deferEvent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return renderHiddenInput; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return debounceEvent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return isEndSide; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return assert; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return clamp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return debounce; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return pointerCoord; });
-function hasShadowDom(e) { return !!e.shadowRoot && !!e.attachShadow; }
-function renderHiddenInput(e, n, t, o) { if (hasShadowDom(e)) {
-    var r = e.querySelector("input.aux-input");
-    r || ((r = e.ownerDocument.createElement("input")).type = "hidden", r.classList.add("aux-input"), e.appendChild(r)), r.disabled = o, r.name = n, r.value = t;
-} }
-function clamp(e, n, t) { return Math.max(e, Math.min(n, t)); }
-function assert(e, n) { if (!e) {
-    var e_1 = "ASSERT: " + n;
-    throw console.error(e_1), new Error(e_1);
-} }
-function now(e) { return e.timeStamp || Date.now(); }
-function pointerCoord(e) { if (e) {
-    var n = e.changedTouches;
-    if (n && n.length > 0) {
-        var e_2 = n[0];
-        return { x: e_2.clientX, y: e_2.clientY };
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startStatusTap", function() { return startStatusTap; });
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
-    if (void 0 !== e.pageX)
-        return { x: e.pageX, y: e.pageY };
-} return { x: 0, y: 0 }; }
-function isEndSide(e, n) { var t = "rtl" === e.document.dir; switch (n) {
-    case "start": return t;
-    case "end": return !t;
-    default: throw new Error("\"" + n + "\" is not a valid value for [side]. Use \"start\" or \"end\" instead.");
-} }
-function deferEvent(e) { return debounceEvent(e, 0); }
-function debounceEvent(e, n) { var t = e._original || e; return { _original: e, emit: debounce(t.emit.bind(t), n) }; }
-function debounce(e, n) {
-    if (n === void 0) { n = 0; }
-    var t;
-    return function () {
-        var o = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            o[_i] = arguments[_i];
+};
+function startStatusTap(t, n) {
+    var _this = this;
+    n.read(function () { return __awaiter(_this, void 0, void 0, function () { var o, e, r, i, _a; return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                o = t.innerWidth, e = t.innerWidth, r = t.document.elementFromPoint(o / 2, e / 2);
+                if (!r)
+                    return [2 /*return*/];
+                i = r.closest("ion-content");
+                _a = i;
+                if (!_a) return [3 /*break*/, 2];
+                return [4 /*yield*/, i.componentOnReady()];
+            case 1:
+                _a = (_b.sent(), n.write(function () { i.scrollToTop(300); }));
+                _b.label = 2;
+            case 2:
+                _a;
+                return [2 /*return*/];
         }
-        clearTimeout(t), t = setTimeout.apply(void 0, [e, n].concat(o));
-    };
+    }); }); });
 }
-
-
-
-/***/ }),
-
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/tap-click.js":
-/*!**********************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/tap-click.js ***!
-  \**********************************************************************************************************************/
-/*! exports provided: startTapClick */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startTapClick", function() { return startTapClick; });
-/* harmony import */ var _chunk_76b36062_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-76b36062.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-76b36062.js");
-
-function startTapClick(t) { var e, n, o = 10 * -MOUSE_WAIT, i = 0, a = !1; var s = new WeakMap; function c(t) { o = Object(_chunk_76b36062_js__WEBPACK_IMPORTED_MODULE_0__["a"])(t), d(t); } function r() { clearTimeout(n), e && (l(!1), e = void 0), a = !0; } function E(t) { e || (a = !1, u(getActivatableTarget(t.target), t)); } function d(t) { u(void 0, t), a && t.cancelable && t.preventDefault(); } function u(t, o) { if (t && t === e)
-    return; clearTimeout(n), n = void 0; var _a = Object(_chunk_76b36062_js__WEBPACK_IMPORTED_MODULE_0__["j"])(o), i = _a.x, a = _a.y; if (e) {
-    if (s.has(e))
-        throw new Error("internal error");
-    e.classList.contains(ACTIVATED) || T(e, i, a), l(!0);
-} if (t) {
-    var e_1 = s.get(t);
-    e_1 && (clearTimeout(e_1), s.delete(t)), t.classList.remove(ACTIVATED), n = setTimeout(function () { T(t, i, a), n = void 0; }, ADD_ACTIVATED_DEFERS);
-} e = t; } function T(t, e, n) { i = Date.now(), t.classList.add(ACTIVATED); var o = new CustomEvent("ionActivated", { bubbles: !1, detail: { x: e, y: n } }); t.dispatchEvent(o); } function l(t) { var n = e; if (!n)
-    return; var o = CLEAR_STATE_DEFERS - Date.now() + i; if (t && o > 0) {
-    var t_1 = setTimeout(function () { n.classList.remove(ACTIVATED), s.delete(n); }, CLEAR_STATE_DEFERS);
-    s.set(n, t_1);
-}
-else
-    n.classList.remove(ACTIVATED); } t.body.addEventListener("click", function (t) { a && (t.preventDefault(), t.stopPropagation()); }, !0), t.body.addEventListener("ionScrollStart", r), t.body.addEventListener("ionGestureCaptured", r), t.addEventListener("touchstart", function (t) { o = Object(_chunk_76b36062_js__WEBPACK_IMPORTED_MODULE_0__["a"])(t), E(t); }, !0), t.addEventListener("touchcancel", c, !0), t.addEventListener("touchend", c, !0), t.addEventListener("mousedown", function (t) { var e = Object(_chunk_76b36062_js__WEBPACK_IMPORTED_MODULE_0__["a"])(t) - MOUSE_WAIT; o < e && E(t); }, !0), t.addEventListener("mouseup", function (t) { var e = Object(_chunk_76b36062_js__WEBPACK_IMPORTED_MODULE_0__["a"])(t) - MOUSE_WAIT; o < e && d(t); }, !0); }
-function getActivatableTarget(t) { return t.closest(":not([tappable]) > a, :not([tappable]) > button, [tappable]"); }
-var ACTIVATED = "activated", ADD_ACTIVATED_DEFERS = 200, CLEAR_STATE_DEFERS = 200, MOUSE_WAIT = 2500;
 
 
 
