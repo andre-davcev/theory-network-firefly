@@ -113,7 +113,7 @@
     "@nstudio/schematics": "^6.2.1",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
-    "@types/mapbox-gl": "^0.47.0",
+    "@types/mapbox-gl": "^0.47.1",
     "@types/node": "~10.5.2",
     "@types/supercluster": "^3.0.2",
     "codelyzer": "~4.4.2",
@@ -128,10 +128,10 @@
     "ngrx-store-freeze": "0.2.4",
     "prettier": "1.13.7",
     "protractor": "~5.4.0",
+    "tns-platform-declarations": "~4.2.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~2.7.2",
-    "tns-platform-declarations": "~4.2.0"
+    "typescript": "~2.7.2"
   },
   "xplat": {
     "prefix": "app"
