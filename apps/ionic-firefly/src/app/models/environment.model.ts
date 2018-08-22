@@ -1,10 +1,11 @@
 export interface Environment
 {
-    production : boolean;
-    language   : string;
-    version    : string;
-    pathJson   : string;
-    apis       : EnvironmentApis;
+    production  : boolean;
+    environment : string;
+    language    : string;
+    version     : string;
+    pathJson    : string;
+    apis        : EnvironmentApis;
 };
 
 export interface EnvironmentApis
