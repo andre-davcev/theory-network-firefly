@@ -1,11 +1,11 @@
 import {State, Action, Store, StateContext, Selector} from '@ngxs/store';
 import { AlertsGet } from './alert.actions';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { tap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { StateUserModel } from '../user/user.state';
 
 import * as firebase from 'firebase/app';
-import { Alert } from '../../models/alert';
+import { Alert } from '../../models/alert.model';
 
 export interface StateAlertModel
 {

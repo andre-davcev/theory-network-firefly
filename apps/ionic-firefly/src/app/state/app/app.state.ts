@@ -1,8 +1,7 @@
-import {State, Action, Store, StateContext} from '@ngxs/store';
+import {State, Action, StateContext} from '@ngxs/store';
 
 import { LocationWatch } from '../location/location.actions';
 import { LanguageInitialize } from '../language/language.actions';
-import { UserAuthenticate } from '../user/user.actions';
 import { AppInitialize } from './app.actions';
 import { DeviceInitialize } from '../device/device.actions';
 

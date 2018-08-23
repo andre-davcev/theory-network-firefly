@@ -1,4 +1,4 @@
-import { Cluster } from "../../models/cluster";
+import { Cluster } from '../../models/cluster.model';
 
 export enum ActionsCluster
 {
