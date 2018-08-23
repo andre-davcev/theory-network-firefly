@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [CoreModule, SharedModule, AppRoutingModule],
+
   declarations: [AppComponent],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
