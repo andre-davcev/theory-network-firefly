@@ -1,6 +1,6 @@
-import { Groups } from './groups.model';
+import { FoursquareGroups } from './foursquare-groups.interface';
 
-export interface User
+export interface FoursquareUser
 {
     id: string;
     firstName: string;
@@ -8,7 +8,7 @@ export interface User
     photo: {prefix: string; suffix;};
     type: string;
     tips: {count: number;};
-    lists: {groups: Array<Groups>;};
+    lists: {groups: Array<FoursquareGroups>;};
     homeCity: string;
     bio: string;
     contact: {twitter: string; facebook: string;};

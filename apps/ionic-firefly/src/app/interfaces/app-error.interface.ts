@@ -1,4 +1,4 @@
-import {ErrorCodeApp} from '../enums/error.code.app';
+import { ErrorCodeApp } from '../enums/error-code-app.enum';
 
 export interface AppError
 {

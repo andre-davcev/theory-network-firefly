@@ -1,4 +1,4 @@
-export interface Category
+export interface FoursquareCategory
 {
     id         : string;
     name       : string;

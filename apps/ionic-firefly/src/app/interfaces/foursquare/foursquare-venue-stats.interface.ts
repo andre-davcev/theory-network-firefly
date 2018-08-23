@@ -1,4 +1,4 @@
-export interface VenueStats
+export interface FoursquareVenueStats
 {
     checkinsCount : number;
     usersCount    : number;

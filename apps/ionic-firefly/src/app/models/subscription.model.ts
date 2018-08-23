@@ -1,4 +1,4 @@
-import {Cluster} from './cluster';
+import { Cluster } from './cluster.model';
 
 export interface Subscription extends Cluster
 {

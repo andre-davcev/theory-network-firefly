@@ -1,5 +1,6 @@
 import {Model} from './model';
 import * as firebase from 'firebase/app';
+
 export interface User extends Model
 {
     uid            : string;

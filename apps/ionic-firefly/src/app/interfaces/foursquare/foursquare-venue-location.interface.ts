@@ -1,4 +1,4 @@
-export interface VenueLocation
+export interface FoursquareVenueLocation
 {
     address          : string;
     crossStreet      : string;

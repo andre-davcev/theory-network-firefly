@@ -1,4 +1,4 @@
-export interface PageInfo
+export interface FoursquarePageInfo
 {
     description: string;
     banner: string;

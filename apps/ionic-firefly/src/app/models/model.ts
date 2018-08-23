@@ -1,4 +1,4 @@
-import { FirestoreTimestamp } from './firestore-timestamp';
+import { FirestoreTimestamp } from '../types/firestore-timestamp.type';
 
 export interface Model
 {
