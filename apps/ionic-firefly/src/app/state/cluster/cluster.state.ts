@@ -1,19 +1,12 @@
-import { Cluster } from "../../models/cluster";
-import { Injectable } from "@angular/core";
-//import { ClusterService } from "../../services/services.cluster";
-import { catchError, map, switchMap, tap} from "rxjs/operators";
-import { of } from "rxjs/observable/of";
-import { Observable } from "rxjs/Observable";
-import { State, StateContext } from "@ngxs/store";
-import { Action } from "@ngxs/store";
-import { Selector } from "@ngxs/store";
-import { FormGroup } from "@angular/forms";
-import { Select } from "@ngxs/store";
-import { StateUser } from "../user/user.state";
-import { User } from "../../models/user";
-import { ClusterService } from "../../services/services.cluster";
-import { FormCluster } from "../../app/forms/cluster.form";
-import { GetClusters, SetClusterId, SetCluster } from "./cluster.actions";
+import { map, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { State, StateContext } from '@ngxs/store';
+import { Action } from '@ngxs/store';
+import { Selector } from '@ngxs/store';
+import { FormGroup } from '@angular/forms';
+import { Select } from '@ngxs/store';
+import { StateUser } from '../user/user.state';
+import { GetClusters, SetClusterId, SetCluster } from './cluster.actions';
 
 
 
