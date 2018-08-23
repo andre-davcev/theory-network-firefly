@@ -1,0 +1,66 @@
+{
+  "project_info": {
+    "project_number": "671375922961",
+    "firebase_url": "https://1388625286411.firebaseio.com",
+    "project_id": "project-4334231676697990915",
+    "storage_bucket": "project-4334231676697990915.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671375922961:android:f7a38b786df8de0f",
+        "android_client_info": {
+          "package_name": "com.theorynetwork.Firefly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671375922961-nvdpqhvc29dqk2p8jjedfhpgknl56bme.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theorynetwork.Firefly",
+            "certificate_hash": "ebdbfb0b3b41d87177795b69b6e6f179b65272c5"
+          }
+        },
+        {
+          "client_id": "671375922961-at9qq56jv3j7efsubspestv3mhrqa2oq.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "671375922961-764mqapq958o7ftchpto6cn6qat5j206.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy9aTbpXpSigbVY7WQgRpt-mTyfXbhzno"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671375922961-flp4eac97fk4lcbss1bnhg5240c7iruj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theorynetwork.Firefly"
+              }
+            },
+            {
+              "client_id": "671375922961-764mqapq958o7ftchpto6cn6qat5j206.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "827673030572",
+    "firebase_url": "https://firefly-b1072.firebaseio.com",
+    "project_id": "firefly-b1072",
+    "storage_bucket": "firefly-b1072.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827673030572:android:f7a38b786df8de0f",
+        "android_client_info": {
+          "package_name": "com.theorynetwork.Firefly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827673030572-088n559394k37h2kojkgqjj9dgbdqhht.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "827673030572-088n559394k37h2kojkgqjj9dgbdqhht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDg217gsFGblugORRj6xJVBDL9KhFGbEg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
