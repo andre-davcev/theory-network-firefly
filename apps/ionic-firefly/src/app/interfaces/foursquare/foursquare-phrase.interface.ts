@@ -1,4 +1,4 @@
-export interface Phrase
+export interface FoursquarePhrase
 {
     phrase : string;
     sample : {entities: Array<{indices: Array<number>; type: string;}>; text: string;};

@@ -1,4 +1,4 @@
-export interface Timeframe
+export interface FoursquareTimeframe
 {
     days          : string;
     includesToday : boolean;

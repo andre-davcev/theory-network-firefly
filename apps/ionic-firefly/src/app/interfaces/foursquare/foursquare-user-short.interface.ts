@@ -1,4 +1,4 @@
-export interface UserShort
+export interface FoursquareUserShort
 {
     id        : string;
     firstName : string;

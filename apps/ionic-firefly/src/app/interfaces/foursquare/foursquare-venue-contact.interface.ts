@@ -1,4 +1,4 @@
-export interface VenueContact
+export interface FoursquareVenueContact
 {
     phone            : string;
     formattedPhone   : string;

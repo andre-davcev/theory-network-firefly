@@ -1,6 +1,6 @@
-import { UserShort } from './user-short.model';
+import { FoursquareUserShort } from './foursquare-user-short.interface';
 
-export interface Photo
+export interface FoursquarePhoto
 {
     id         : string;
     createdAt  : number;
@@ -9,6 +9,6 @@ export interface Photo
     suffix     : string;
     width      : number;
     height     : number;
-    user?      : UserShort;
+    user?      : FoursquareUserShort;
     visibility : string;
 }

@@ -1,4 +1,4 @@
-export interface Groups
+export interface FoursquareGroups
 {
     type     : string;
     name     : string;

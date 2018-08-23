@@ -55,9 +55,6 @@ plugins/
 plugins/android.json
 plugins/ios.json
 
-# Custom
-/old
-
 # nativescript
 hooks
 
