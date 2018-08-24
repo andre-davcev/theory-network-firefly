@@ -4,13 +4,15 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ComponentMapOrb } from '../map-orb/map-orb.component';
 import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
+import { StateLocation } from '../../state/location/location.state';
+import { StateDevice } from '../../state/device/device.state';
 
 
 @Component
 ({
     selector    : 'app-map',
     templateUrl : './map.component.html',
-//    styleUrls   : ['./map.component.scss']
+    styleUrls   : ['./map.component.scss']
 })
 export class ComponentMap implements OnInit
 {
