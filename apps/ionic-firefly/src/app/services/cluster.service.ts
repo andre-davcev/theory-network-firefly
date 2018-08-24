@@ -1,11 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from "rxjs/Observable";
-import { Cluster } from "../models/cluster";
-import { fromPromise } from "rxjs/observable/fromPromise";
-import { catchError, switchMap, take, filter } from "rxjs/operators";
-import { of } from "rxjs/observable/of";
+import { Observable } from 'rxjs';
+import { Cluster } from '../models/cluster.model';
+import { switchMap, take, filter, map } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 
 @Injectable()
 export class ClusterService
@@ -16,19 +15,20 @@ export class ClusterService
         this.clustersCollection = afs.collection<Cluster>('clusters');
     }
 
-    getClusters(userid:String): Observable<Cluster[]> 
+    getClusters(userid:String): Observable<Cluster[]>
     {
         return this.afs.collection<Cluster>('clusters', ref => {
             return ref.where('userid', '==', userid)
         })
         .snapshotChanges()
-        .map(actions => {
+        .pipe(
+          map(actions => {
             return actions.map(a => {
                 const data = a.payload.doc.data() as Cluster;
                 const id = a.payload.doc.id;
                 return { id, ...data };
             })
-        });
+        }));
     }
 
     updateCluster()
@@ -41,7 +41,7 @@ export class ClusterService
         const id = this.afs.createId();
         cluster.id = id;
         const document: AngularFirestoreDocument<Cluster> = this.clustersCollection.doc(id) as AngularFirestoreDocument<Cluster>;
-        
+
         return fromPromise(document.set(cluster)).pipe
         (
             switchMap(() => document.valueChanges()),

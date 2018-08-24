@@ -1,15 +1,12 @@
 import {State, Action, Store, StateContext, Selector} from '@ngxs/store';
-import { PlaceSearch, PlaceDetails } from './places.actions';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { PlaceSearch } from './places.actions';
 
-import { NgZone } from '@angular/core';
-import { MapsAPILoader } from '@agm/core';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@app/env';
 import { StateLocation } from '../location/location.state';
-import { ResponseVenueSearch } from '../../foursquare/response-venue-search.model';
 import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
+import { environment } from '../../../environments/environment';
+import { FoursquareResponseVenueSearch } from '../../interfaces/foursquare/foursquare-response-venue-search.interface';
 
 export interface StatePlacesModel
 {
@@ -62,7 +59,7 @@ export class StatePlaces
                 }
             }).pipe
             (
-                tap((results: ResponseVenueSearch) =>
+                tap((results: FoursquareResponseVenueSearch) =>
                 {
                     console.log(results);
                 })

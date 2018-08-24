@@ -1,7 +1,6 @@
-import { Credentials } from '../../models/credentials';
-import { User } from '../../models/user';
-
 import * as firebase from 'firebase/app';
+import { Credentials } from '../../interfaces/credentials.interface';
+import { User } from '../../models/user.model';
 
 export enum ActionsUser
 {
