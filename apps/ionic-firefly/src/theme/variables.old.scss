@@ -1,0 +1,138 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/v2/theming/
+
+// Font path is used to include ionicons,
+// roboto, and noto sans fonts
+$font-path: '../assets/fonts';
+
+
+// The app direction is used to include
+// rtl styles in your app. For more info, please see:
+// http://ionicframework.com/docs/theming/rtl-support/
+$app-direction: ltr;
+
+@import 'ionic.globals';
+
+@import
+
+// Variables
+'../../node_modules/font-awesome/scss/_variables',
+'../../../../../libs/core/styles/variables',
+'../styles/variables.scss',
+
+// Styles
+'../../../../../libs/core/styles/styles',
+'../../../../../libs/firefly/core/components/src/firefly/firefly.component',
+'../styles/global',
+
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Shared Imports
+// --------------------------------------------------
+// These are the various page imports which make up this app.
+// By default each design mode includes these shared imports.
+// App Shared Sass variables belong in app.variables.scss.
+
+'../app/components/components',
+
+// Firefly - Pages
+'../pages/pages';
+
+/*
+    FUTURE STATE
+    1) Library overrides
+    2) Library
+    3) Core overrides
+    4) Core
+    5) App
+    6) Ionic Overrides
+    7) Ionic theme import
+    8) App vars depending on Ionic
+*/
+
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The 'primary' color is the only required color in the map.
+
+$colors:
+(
+    primary:    $app-color-primary,
+    secondary:  $app-color-accent,
+    danger:     #f53d3d,
+    light:      #f4f4f4,
+    dark:       $app-color-dark,
+    favorite:   #69BB7B,
+    twitter:    #1da1f4,
+    google:     #dc4a38,
+    facebook:   #3b5998,
+    white:      #FFFFFF,
+    transparent: transparent
+);
+
+@import 'ionic.components';
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import 'ionic.theme.default';
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+
+@import 'ionic.ionicons';
+
+
+// Fonts
+// --------------------------------------------------
+// Roboto font is used by default for Material Design. Noto sans
+// is used by default for Windows.
+
+@import 'roboto';
+@import 'noto-sans';
+
+@media only screen and (max-width: 767px)
+{
+    .ios > .ion-page > ion-header > .toolbar.statusbar-padding:first-child
+    {
+        padding-top: calc(20px + 4px);
+        padding-top: calc(constant(safe-area-inset-top) + 4px);
+        padding-top: calc(env(safe-area-inset-top) + 4px);
+        min-height: calc(44px + 20px);
+        min-height: calc(44px + constant(safe-area-inset-top));
+        min-height: calc(44px + env(safe-area-inset-top));
+
+        ion-modal
+        {
+            ~ .ion-page
+            {
+                .toolbar-title
+                {
+                    padding-top: $cordova-ios-statusbar-padding;
+                }
+            }
+        }
+    }
+}
