@@ -1,13 +1,15 @@
 
 import {State, Selector, Action, StateContext} from '@ngxs/store';
 
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
 
 import {TranslateService} from '@ngx-translate/core';
 
 import { PlatformEnum } from '../../enums/platform.enum';
 import { LanguageInitialize, LanguageGet, LanguageSet } from './language.actions';
+import { Platform } from '@ionic/angular';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 
 export interface StateLanguageModel
 {
@@ -48,11 +50,11 @@ export class StateLanguage
 
         if (this.platform.is(PlatformEnum.Cordova))
         {
-            observable = Observable.fromPromise(this.globalization.getLocaleName());
+            observable = fromPromise(this.globalization.getLocaleName());
         }
         else
         {
-            observable = Observable.of({value: navigator.language});
+            observable = of({value: navigator.language});
         }
 
         return observable.pipe

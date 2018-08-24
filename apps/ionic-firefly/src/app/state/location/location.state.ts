@@ -1,11 +1,6 @@
 
 import {State, Selector, Action, StateContext} from '@ngxs/store';
 
-import {Observable} from 'rxjs/Observable';
-import { fromCallback } from 'rxjs/observable/fromCallback';
-import { of } from 'rxjs/observable/of';
-import {filter, map, catchError, tap} from 'rxjs/operators';
-
 import { LocationWatch } from './location.actions';
 
 import {BackgroundGeolocationResponse} from '@ionic-native/background-geolocation';

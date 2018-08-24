@@ -1,0 +1,105 @@
+.tn-ico:before
+{
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    font-size: $tn-icon-font-size;
+}
+
+.ff-icon
+{
+    position: relative;
+    width: $app-icon-size;
+    height: $app-icon-size;
+    display: inline-block;
+    opacity: 0;
+
+    &.tn-visible
+    {
+        opacity: 1;
+    }
+
+    &.ff-check
+    {
+        border-style: solid;
+        border-width: 0.2rem;
+        border-radius: $app-icon-size / 2;
+        border-color: #030303;
+        background-color: transparent;
+
+        transition-timing-function: $tn-transition-timing-function-default;
+        transition-duration: 0.1s;
+        transition-property: background-color;
+        backface-visibility: hidden;
+        transform: translate3d(0, 0, 0);
+        perspective: 1000;
+
+        &:before
+        {
+            display: inline-block;
+            position: absolute;
+            top: 0.5rem;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            vertical-align: middle;
+            text-align: center;
+            font-size: $app-icon-size - 1.1rem;
+            color: #030303;
+
+            font-family: $tn-font-face-name-ionic-icons-2;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            text-rendering: auto;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+
+            content: "\f2a6";
+        }
+
+        &.tn-active
+        {
+            background-color: $app-color-primary;
+
+            &:before
+            {
+                font-family: $tn-font-face-name-ionic-icons;
+                display: inline-block;
+                content: "\f3ff";
+
+                top: -0.3rem;
+                font-size: $app-icon-size + 0.4rem;
+            }
+        }
+    }
+}
+
+.content
+{
+    .ion-ios-bug,
+    .ion-md-bug
+    {
+        &:before
+        {
+            display: inline-block;
+            position: relative;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            text-rendering: auto;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-left: 0.3rem;
+
+            font-family: $core-font-firefly-face-name;
+
+            content: $core-font-firefly-icon-firefly;
+        }
+    }
+}

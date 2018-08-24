@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{'page.assets-icons.title' | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab bottom right (click)="add()">
+        <button ion-fab color="secondary">
+            <ion-icon name="md-add"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-3 *ngFor="let icon of icons">
+                <img class="comp-icon" [src]="icon">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
