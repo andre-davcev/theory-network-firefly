@@ -1,0 +1,46 @@
+$c-list-icon-size:                50px;
+
+$c-list-title-font-size:          1.6rem;
+$c-list-title-font-color:         #000000;
+
+$c-list-subtitle-font-size:       1.4rem;
+$c-list-subtitle-font-color:      rgba(0, 0, 0, 0.54);
+
+app-list
+{
+    > .list
+    {
+        box-shadow: $app-list-box-shadow;
+    }
+
+    .item
+    {
+        ion-avatar
+        {
+            ion-img,
+            img
+            {
+                height: $c-list-icon-size;
+                width: $c-list-icon-size;
+            }
+
+            &[item-start]
+            {
+                margin-top: 11px;
+                margin-bottom: 11px;
+            }
+        }
+
+        h3
+        {
+            font-size: $c-list-title-font-size;
+            color: $c-list-title-font-color;
+        }
+
+        p
+        {
+            font-size: $c-list-subtitle-font-size;
+            color: $c-list-subtitle-font-color;
+        }
+    }
+}

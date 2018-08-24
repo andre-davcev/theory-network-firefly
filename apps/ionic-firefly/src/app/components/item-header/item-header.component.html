@@ -1,0 +1,18 @@
+<img class="comp-background-image" [src]="iconUrl">
+<div class="comp-background"></div>
+
+<div class="comp-icon-container" (click)="clickedIcon()">
+    <img class="comp-icon" [src]="iconUrl">
+    <p class="comp-icon-placeholder" *ngIf="edit && !iconValue">{{iconPlaceholder}}</p>
+</div>
+
+<form novalidate class="comp-container" [formGroup]="form" *ngIf="edit">
+    <input class="comp-icon-hidden" type="hidden" [formControlName]="icon">
+    <input class="comp-title"       type="text"   [formControlName]="title"    [placeholder]="titlePlaceholder">
+    <input class="comp-subtitle"    type="text"   [formControlName]="subtitle" [placeholder]="subtitlePlaceholder">
+</form>
+
+<div class="comp-container" *ngIf="!edit">
+    <h3 class="comp-title">{{title}}</h3>
+    <h4 class="comp-subtitle">{{subtitle}}</h4>
+</div>

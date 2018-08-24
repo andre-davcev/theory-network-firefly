@@ -1,9 +1,6 @@
 import {State, Action, Store, StateContext, Selector} from '@ngxs/store';
 import { DeviceInitialize } from './device.actions';
-import { tap, take } from 'rxjs/operators';
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import { DeviceEnum } from '../../enums/device.enum';
-import { Platform } from 'ionic-angular';
+import { Platform } from '@ionic/angular';
 
 export interface StateDeviceModel
 {

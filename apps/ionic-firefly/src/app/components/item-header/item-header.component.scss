@@ -1,0 +1,167 @@
+$comp-item-header-height:                      167px;
+$comp-item-header-color-background:          white;
+$comp-item-header-color-font:                white;
+$comp-item-header-padding:                     1.6rem;     // $content-padding
+$comp-item-header-blur:                        10px;
+$comp-item-header-background-image:            rgba(0, 0, 0, 0.3);
+
+$comp-item-header-title-font-size:             2.0rem;
+$comp-item-header-title-font-color:            $comp-item-header-color-font;
+$comp-item-header-title-letter-spacing:        -0.48px;
+
+$comp-item-header-subtitle-font-size:          1.6rem;
+$comp-item-header-subtitle-font-color:         $comp-item-header-color-font;
+$comp-item-header-subtitle-letter-spacing:     -0.34px;
+
+$comp-item-header-placeholder-font-color:      $comp-item-header-color-font;
+
+$comp-item-header-selection-color-font:        $app-color-dark;
+$comp-item-header-selection-color-background:  $comp-item-header-color-font;
+
+$comp-item-header-icon-size:                   9.2rem;
+$comp-item-header-icon-placeholder-font-color: $comp-item-header-color-font;
+$comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size;
+
+app-item-header
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: $comp-item-header-height;
+    background-color: $comp-item-header-color-background;
+    padding: $comp-item-header-padding - 0.4rem;
+    align-items: center;
+    overflow: hidden;
+
+    mask-image: linear-gradient(black 0%, black 100%);
+
+    > .comp-background-image,
+    > .comp-background
+    {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+    }
+
+    > .comp-background-image
+    {
+        width: 100%;
+        height: auto;
+        top: -63%;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        background-position: 50% 50%;
+        filter: blur($comp-item-header-blur);
+    }
+
+    > .comp-background
+    {
+        background: $comp-item-header-background-image;
+    }
+
+    > .comp-icon-container
+    {
+        position: relative;
+        display: flex;
+        width: $comp-item-header-icon-size;
+        height: $comp-item-header-icon-size;
+        margin-bottom: 8px;
+        align-items: center;
+        flex-direction: column;
+
+        > .comp-icon
+        {
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border-width: 3px;
+            border-color: $comp-item-header-color-font;
+            border-style: solid;
+        }
+
+        > .comp-icon-placeholder
+        {
+            position: relative;
+            display: block;
+            color: $comp-item-header-icon-placeholder-font-color;
+            font-size: $comp-item-header-icon-placeholder-font-size;
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+            opacity: 0.9;
+            padding-top: 1px;
+        }
+    }
+
+    div.comp-container
+    {
+        > .comp-title
+        {
+            margin-bottom: 8px;
+        }
+    }
+
+    > .comp-container
+    {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+
+        > .comp-title,
+        > .comp-subtitle
+        {
+            position: relative;
+            display: block;
+            background-color: transparent;
+            font-weight: 600;
+            margin: 0;
+            padding: 0;
+            color: $comp-item-header-color-font;
+            border: none;
+            width: 80%;
+            text-align: center;
+
+            &::placeholder
+            {
+                color: $comp-item-header-placeholder-font-color;
+                opacity: 0.8;
+                text-align: center;
+            }
+
+            &::selection
+            {
+                color: $comp-item-header-selection-color-font;
+                background: $comp-item-header-selection-color-background;
+            }
+
+            &:focus
+            {
+                outline: none;
+            }
+        }
+
+        > .comp-title
+        {
+            font-size: $comp-item-header-title-font-size;
+            line-height: $comp-item-header-title-font-size;
+            letter-spacing: $comp-item-header-title-letter-spacing;
+            margin-bottom: 3px;
+        }
+
+        > .comp-subtitle
+        {
+            font-size: $comp-item-header-subtitle-font-size;
+            line-height: $comp-item-header-subtitle-font-size;
+            letter-spacing:$comp-item-header-subtitle-letter-spacing;
+        }
+    }
+}

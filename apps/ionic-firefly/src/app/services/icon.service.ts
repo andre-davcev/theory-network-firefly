@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from 'angularfire2/firestore';
 import { Icon } from '../models/icon.model';
 import { Observable } from 'rxjs';
-import { DocumentChangeAction } from 'angularfire2/firestore/interfaces';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { switchMap, filter, take } from 'rxjs/operators';
+import { switchMap, filter, take, map } from 'rxjs/operators';
 
 @Injectable()
 export class ServiceIcons
@@ -25,8 +24,8 @@ export class ServiceIcons
 
         snapshotChanges().
 
-        map((actions: Array<DocumentChangeAction>) =>
-        {
+        pipe(
+          map((actions: Array<DocumentChangeAction<any>>) => {
             return actions.map(action =>
             {
                 const data: Icon = action.payload.doc.data() as Icon;
@@ -34,7 +33,7 @@ export class ServiceIcons
 
                 return { id, ...data };
             })
-        });
+        }));
     }
 
     update()

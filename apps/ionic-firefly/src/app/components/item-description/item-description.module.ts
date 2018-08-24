@@ -1,0 +1,21 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ItemDescriptionComponent } from './item-description.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from 'ionic-angular';
+
+@NgModule
+({
+    imports :
+    [
+        CommonModule,
+        FlexLayoutModule,
+        ReactiveFormsModule,
+        IonicModule
+    ],
+
+    declarations : [ItemDescriptionComponent],
+    exports      : [ItemDescriptionComponent]
+})
+export class ModuleItemDescription { }

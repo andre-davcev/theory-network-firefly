@@ -1,12 +1,9 @@
 
 import {State, Selector, Action, StateContext} from '@ngxs/store';
 
-import {Observable}                 from 'rxjs/Observable';
-import {map, catchError, switchMap} from 'rxjs/operators';
-import {of}                         from 'rxjs/observable/of';
+import {Observable} from 'rxjs';
+import {catchError, switchMap} from 'rxjs/operators';
 
-import {Globalization}    from '@ionic-native/globalization';
-import {Platform}         from 'ionic-angular';
 import {TranslateService} from '@ngx-translate/core';
 
 import { PlatformEnum } from '../../enums/platform.enum';

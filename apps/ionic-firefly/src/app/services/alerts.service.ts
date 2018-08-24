@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
-import {Temp}  from './temp';
+import {Temp}  from './temp.service';
+import { Alert } from '../models/alert.model';
 
 @Injectable()
 export class Alerts

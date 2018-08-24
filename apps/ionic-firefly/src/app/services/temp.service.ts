@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-
-import {Alert}        from '../models/alert';
-import {Subscription} from '../models/subscription';
+import { Alert } from '../models/alert.model';
+import { Subscription } from '../models/subscription.model';
 
 @Injectable()
 export class Temp
