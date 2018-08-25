@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import {IonicPage, ViewController} from 'ionic-angular';
+import {ViewController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 
 @Component
 ({
     selector    : 'app-page-search',
-    templateUrl : 'search.page.html'
+    templateUrl : 'search.page.html',
+    styleUrls   : ['./search.page.scss']
 })
 
-@IonicPage()
 export class PageSearch
 {
     constructor(private statusBar: StatusBar, private viewController: ViewController)

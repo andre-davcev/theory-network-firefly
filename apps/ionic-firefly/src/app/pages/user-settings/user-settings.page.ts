@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
-
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-user-settings',
-    templateUrl : 'user.settings.html'
+    templateUrl : 'user-settings.page.html',
+    styleUrls   : ['./user-profile.page.scss']
 })
 
 export class PageUserSettings

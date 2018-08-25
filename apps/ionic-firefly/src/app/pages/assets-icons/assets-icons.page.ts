@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
 
-import {IonicPage, NavController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-assets-icons',
-    templateUrl : 'assets-icons.page.html'
+    templateUrl : 'assets-icons.page.html',
+    styleUrls   : ['./assets-icons.page.scss']
 })
 
 export class PageAssetsIcons

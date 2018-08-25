@@ -3,13 +3,11 @@ import {ViewChild} from '@angular/core';
 
 import {Slides, NavController, ModalController, Modal}          from 'ionic-angular';
 import {AlertController} from 'ionic-angular';
-import {IonicPage}       from 'ionic-angular';
 
 import {Alert}           from '../../models/alert';
 import {Alerts}          from '../../services/alerts';
 import {StatusBar}       from '@ionic-native/status-bar';
 import { PageStream } from '../stream/stream.page';
-import { PagePublisher } from '../publisher/publisher';
 import { PageUser } from '../user/user';
 import { PageSearch } from '../search/search.page';
 import { PageSubscriptions } from '../subscriptions/subscriptions.page';
@@ -27,10 +25,10 @@ export enum AlertsModalType
 @Component
 ({
     selector    : 'app-page-alerts',
-    templateUrl : 'alerts.html'
+    templateUrl : 'alerts.page.html',
+    styleUrls   : ['./alerts.page.scss']
 })
 
-@IonicPage()
 export class PageNotifications
 {
     @ViewChild(Slides) slides:Slides;

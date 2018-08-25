@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
-
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-assets-events',
-    templateUrl : 'assets-events.page.html'
+    templateUrl : 'assets-events.page.html',
+    styleUrls   : ['./assets-events.page.scss']
 })
 
 export class PageAssetsEvents

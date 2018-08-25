@@ -20,7 +20,8 @@ import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail } from '../../
 @Component
 ({
     selector    : 'app-page-auth',
-    templateUrl : 'auth.html'
+    templateUrl : 'auth.page.html',
+    styleUrls   : ['./auth.page.scss']
 })
 
 export class PageLogin

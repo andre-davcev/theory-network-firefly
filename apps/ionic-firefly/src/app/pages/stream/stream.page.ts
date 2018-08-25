@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 
-import {IonicPage, ViewController} from 'ionic-angular';
+import {ViewController} from 'ionic-angular';
 
-import {Page} from '../page';
 
 import {Store} from '@ngxs/store';
 import { Cluster } from '../../models/cluster';
@@ -11,11 +10,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Subscription } from '../../models/subscription';
 import { Temp } from '../../services/temp';
 
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-stream',
-    templateUrl : 'stream.page.html'
+    templateUrl : 'stream.page.html',
+    styleUrls   : ['./stream.page.scss']
 })
 
 export class PageStream

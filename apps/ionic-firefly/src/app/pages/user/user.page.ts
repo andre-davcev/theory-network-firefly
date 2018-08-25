@@ -8,7 +8,8 @@ import { TranslateService } from '../../../node_modules/@ngx-translate/core';
 @Component
 ({
     selector    : 'app-page-user',
-    templateUrl : 'user.html'
+    templateUrl : 'user.page.html',
+    styleUrls   : ['./user.page.scss']
 })
 
 export class PageUser

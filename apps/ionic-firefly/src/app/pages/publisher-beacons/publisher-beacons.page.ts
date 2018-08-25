@@ -1,18 +1,14 @@
 import {Component} from '@angular/core';
 import {OnInit}    from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
-
 import {Beacon}         from '../../models/beacon';
 import {ServiceBeacons} from '../../services/beacons';
 
-import {Page} from '../page';
-
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-publisher-beacons',
-    templateUrl : 'publisher.beacons.html'
+    templateUrl : 'publisher-beacons.page.html',
+    styleUrls   : ['./publisher-beacons.page.scss']
 })
 
 export class PagePublisherBeacons implements OnInit

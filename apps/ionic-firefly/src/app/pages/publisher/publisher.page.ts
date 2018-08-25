@@ -1,15 +1,14 @@
 import {Component} from '@angular/core';
 
 import {NavController, ActionSheet, ActionSheetController, ViewController} from 'ionic-angular';
-import {IonicPage}     from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusBar } from '@ionic-native/status-bar';
 
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-publisher',
-    templateUrl : 'publisher.html'
+    templateUrl : 'publisher.page.html',
+    styleUrls   : ['./publisher.page.scss']
 })
 
 export class PagePublisher

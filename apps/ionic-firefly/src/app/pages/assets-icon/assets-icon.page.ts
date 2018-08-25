@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Select, Store } from '@ngxs/store';
 import { StateIcons } from '../../state/icons/icons.state';
@@ -8,11 +7,11 @@ import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { SetIconId } from '../../state/icons/icons.actions';
 
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-assets-icon',
-    templateUrl : 'assets-icon.page.html'
+    templateUrl : 'assets-icon.page.html',
+    styleUrls   : ['./assets-icon.page.scss']
 })
 
 export class PageAssetsIcon
