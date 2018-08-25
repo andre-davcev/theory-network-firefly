@@ -4,8 +4,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 ({
     selector        : 'app-item-map',
     templateUrl     : './item-map.component.html',
+    styleUrls       : ['./item-map.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
-    //  styleUrls: ['./item-map.component.scss'],
+
 })
 export class ComponentItemMap
 {

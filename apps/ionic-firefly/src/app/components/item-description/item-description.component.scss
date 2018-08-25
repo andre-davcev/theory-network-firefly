@@ -14,7 +14,7 @@ $comp-item-description-image-color-background:           $app-color-grey-middle;
 $comp-item-description-image-placeholder-font-color:     white;
 $comp-item-description-image-placeholder-font-size:      2.0rem;
 
-app-item-description
+:host
 {
     position: relative;
     display: flex;

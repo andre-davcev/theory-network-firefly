@@ -5,8 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 ({
     selector        : 'app-item-header',
     templateUrl     : './item-header.component.html',
+    styleUrls       : ['./item-header.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
-    //  styleUrls: ['./item-header.component.scss'],
 })
 
 export class ComponentItemHeader
