@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
 
-import {IonicPage, NavController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 
 import {Cluster} from '../../models/cluster';
 import {Temp}    from '../../services/temp';
 import { StatusBar } from '@ionic-native/status-bar';
 
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-publisher-clusters',
-    templateUrl : 'publisher.clusters.html'
+    templateUrl : 'publisher-clusters.page.html',
+    styleUrls   : ['./publisher-clusters.page.scss']
 })
 
 export class PagePublisherClusters

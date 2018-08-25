@@ -1,14 +1,12 @@
 import {Component} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
-
 import {Beacon} from '../../models/beacon';
 
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-publisher-beacon-minor',
-    templateUrl : 'publisher.beacon.minor.html'
+    templateUrl : 'publisher-beacon-minor.page.html',
+    styleUrls   : ['./publisher-beacon-minor.page.scss']
 })
 
 export class PagePublisherBeaconMinor

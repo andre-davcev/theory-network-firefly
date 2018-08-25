@@ -5,7 +5,8 @@ import {StatusBar} from '@ionic-native/status-bar';
 @Component
 ({
     selector    : 'app-page-subscriptions',
-    templateUrl : 'subscriptions.page.html'
+    templateUrl : 'subscriptions.page.html',
+    styleUrls   : ['./subscriptions.page.scss']
 })
 
 @IonicPage()

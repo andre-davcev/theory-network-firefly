@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
-
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-assets-places',
-    templateUrl : 'assets-places.page.html'
+    templateUrl : 'assets-places.page.html',
+    styleUrls   : ['./assets-places.page.scss']
 })
 
 export class PageAssetsPlaces

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {IonicPage, NavController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 
 export enum PagesAssets
 {
@@ -13,11 +13,11 @@ export enum PagesAssets
     Clusters = 'PagePublisherClusters'
 }
 
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-publisher-assets',
-    templateUrl : 'publisher-assets.html'
+    templateUrl : 'publisher-assets.page.html',
+    styleUrls   : ['./publisher-assets.page.scss']
 })
 
 export class PagePublisherAssets

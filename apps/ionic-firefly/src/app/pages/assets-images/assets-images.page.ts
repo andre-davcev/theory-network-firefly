@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
 
-import {IonicPage} from 'ionic-angular';
-
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-assets-images',
-    templateUrl : 'assets-images.page.html'
+    templateUrl : 'assets-images.page.html',
+    styleUrls   : ['./assets-images.page.scss']
 })
 
 export class PageAssetsImages

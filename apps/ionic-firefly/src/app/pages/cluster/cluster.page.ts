@@ -1,6 +1,6 @@
-import {Component, AfterViewInit} from '@angular/core';
+import {Component} from '@angular/core';
 
-import {IonicPage, NavController, ViewController} from 'ionic-angular';
+import {NavController, ViewController} from 'ionic-angular';
 
 import { FormGroup } from '@angular/forms';
 import { StateCluster } from '../../state/cluster/cluster.state';
@@ -9,11 +9,11 @@ import { Observable } from 'rxjs/Observable';
 import { Select, Store } from '@ngxs/store';
 import { StatusBar } from '@ionic-native/status-bar';
 
-@IonicPage()
 @Component
 ({
     selector    : 'app-page-cluster',
-    templateUrl : 'cluster.page.html'
+    templateUrl : 'cluster.page.html',
+    styleUrls   : ['./cluster.page.scss']
 })
 
 export class PagePublisherCluster
