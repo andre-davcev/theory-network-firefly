@@ -4,7 +4,7 @@ $app-map-orb-color-pulse:               rgba(86, 199, 29, 0.5);
 $app-map-orb-size:                        2.0rem;
 $app-map-orb-duration:                    3s;
 
-app-map-orb
+:host
 {
     position: relative;
     display: block;

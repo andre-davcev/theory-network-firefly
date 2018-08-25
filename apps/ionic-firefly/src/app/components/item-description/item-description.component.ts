@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 ({
     selector        : 'app-item-description',
     templateUrl     : './item-description.component.html',
-//    styleUrls       : ['./item-description.component.scss'],
+    styleUrls       : ['./item-description.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class ItemDescriptionComponent

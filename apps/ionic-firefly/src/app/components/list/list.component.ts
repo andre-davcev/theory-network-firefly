@@ -5,8 +5,8 @@ import { ServiceUtil } from '../../services/util.service';
 ({
     selector        : 'app-list',
     templateUrl     : './list.component.html',
-    changeDetection : ChangeDetectionStrategy.Default,
-//    styleUrls       : ['./list.component.scss']
+    styleUrls       : ['./list.component.scss'],
+    changeDetection : ChangeDetectionStrategy.Default
 })
 
 export class ComponentList implements OnChanges

@@ -22,7 +22,7 @@ $comp-item-header-icon-size:                   9.2rem;
 $comp-item-header-icon-placeholder-font-color: $comp-item-header-color-font;
 $comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size;
 
-app-item-header
+:host
 {
     position: relative;
     display: flex;
