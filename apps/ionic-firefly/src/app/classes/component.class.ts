@@ -1,9 +1,5 @@
-import {ElementRef}  from '@angular/core';
-import {Renderer}    from '@angular/core';
-import {Input}       from '@angular/core';
-import {HostBinding} from '@angular/core';
-
-import {ComponentOptions} from './component-options.interface';
+import {ElementRef, Renderer, Input, HostBinding}  from '@angular/core';
+import { ComponentOptions } from '../interfaces/component-options.interface';
 
 /**
  * Base class for all Theory Network components.
