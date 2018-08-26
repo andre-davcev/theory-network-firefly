@@ -1,26 +1,26 @@
-$comp-item-map-font-color:                 $app-color-light-text;
-$comp-item-map-font-size:                 17px;
-$comp-item-map-line-height:                20px;
+$cpt-item-map-font-color:                 $app-color-light-text;
+$cpt-item-map-font-size:                 17px;
+$cpt-item-map-line-height:                20px;
 
-$comp-item-map-window-height:              155px;
-$comp-item-map-border-radius:              5px;
+$cpt-item-map-window-height:              155px;
+$cpt-item-map-border-radius:              5px;
 
 :host
 {
-    .comp-title
+    .cpt-title
     {
-        color: $comp-item-map-font-color;
-        font-size: $comp-item-map-font-size;
+        color: $cpt-item-map-font-color;
+        font-size: $cpt-item-map-font-size;
         font-weight: normal;
-        line-height: $comp-item-map-line-height;
+        line-height: $cpt-item-map-line-height;
         margin-bottom: 8px;
     }
 
-    .comp-map-window
+    .cpt-map-window
     {
         width: 100%;
-        height: $comp-item-map-window-height;
-        border-radius: $comp-item-map-border-radius;
+        height: $cpt-item-map-window-height;
+        border-radius: $cpt-item-map-border-radius;
         background-color: black;
     }
 }

@@ -22,16 +22,16 @@ $core-firefly-color-light:        $gm-color-green-light-a400;
    100% {opacity: 1;}
 }
 
-firefly
+:host
 {
     position: relative;
     display: block;
 
-    &.ff-animate
+    &.fir-animate
     {
-        > .ff-firefly
+        > .fir-firefly
         {
-            .ff-body
+            .fir-body
             {
                 animation-name:             firefly;
                 animation-duration:         1500ms;
@@ -39,7 +39,7 @@ firefly
                 animation-iteration-count:  infinite;
             }
 
-            .ff-tentacles.ff-inside > .ff-tentacle
+            .fir-tentacles.fir-inside > .fir-tentacle
             {
                 animation-name:             firefly-tentacles;
                 animation-duration:         1500ms;
@@ -49,19 +49,19 @@ firefly
         }
     }
 
-    &.ff-color-primary
+    &.fir-color-primary
     {
-        > .ff-firefly
+        > .fir-firefly
         {
-            > .ff-group
+            > .fir-group
             {
-                > .ff-part
+                > .fir-part
                 {
                     fill: $core-firefly-color-primary;
                     opacity: 1;
                 }
 
-                > .ff-tentacles.ff-inside > .ff-tentacle
+                > .fir-tentacles.fir-inside > .fir-tentacle
                 {
                     fill:   $core-firefly-color-primary;
                     stroke: $core-firefly-color-primary;
@@ -72,38 +72,38 @@ firefly
     }
 }
 
-.ff-firefly
+.fir-firefly
 {
     position: relative;
     display: block;
     height: $core-auth-logo-height; width: $core-auth-logo-width;
     margin: 0 auto;
 
-    > .ff-group
+    > .fir-group
     {
-        > .ff-part
+        > .fir-part
         {
             stroke:         $app-border-accent-color-base;
             stroke-opacity: $app-border-accent-opacity;
             stroke-width:   $app-border-accent-width;
         }
 
-        > .ff-tentacles
+        > .fir-tentacles
         {
-            > .ff-tentacle
+            > .fir-tentacle
             {
                 stroke-linecap:  round;
                 stroke-linejoin: round;
             }
 
-            &.ff-border > .ff-tentacle
+            &.fir-border > .fir-tentacle
             {
                 stroke:         $app-border-accent-color-base;
                 stroke-opacity: $app-border-accent-opacity;
                 stroke-width:   2.25;
             }
 
-            &.ff-inside > .ff-tentacle
+            &.fir-inside > .fir-tentacle
             {
                 stroke-width: $app-border-accent-width;
             }
