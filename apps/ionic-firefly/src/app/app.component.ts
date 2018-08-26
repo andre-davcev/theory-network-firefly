@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { isCapacitorNative } from '@ionic/core';
 import { Platform } from '@ionic/angular';
 import { Plugins, StatusBarStyle } from '@capacitor/core';
+import { AppInitialize } from './state/app/app.actions';
+import { Store } from '@ngxs/store';
 const { StatusBar } = Plugins;
 
 @Component({
@@ -10,7 +12,7 @@ const { StatusBar } = Plugins;
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  constructor(private platform: Platform) {
+  constructor(private platform: Platform, private store: Store) {
     this.initializeApp();
   }
 
@@ -21,6 +23,8 @@ export class AppComponent {
           style: StatusBarStyle.Dark
         });
       }
+
+      this.store.dispatch(new AppInitialize());
     });
   }
 }

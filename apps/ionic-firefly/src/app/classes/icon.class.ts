@@ -1,8 +1,8 @@
 import {Input}  from '@angular/core';
 import {OnInit} from '@angular/core';
 
-import {Component}        from './component.class';
-import {ComponentOptions} from './component-options.interface';
+import {Component} from './component.class';
+import { ComponentOptions } from '../interfaces/component-options.interface';
 
 /**
  * @name Icon
@@ -14,7 +14,7 @@ export class Icon extends Component implements OnInit
     @Input()
     public name:string;
 
-    constructor(options:ComponentOptions)
+    constructor(options: ComponentOptions)
     {
         super
         ({
