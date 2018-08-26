@@ -1,37 +1,43 @@
-$core-auth-logo-height:           5.7rem;
-$core-auth-logo-width:            $core-auth-logo-height;
 
-$core-firefly-color-primary:      $app-color-primary;
-$core-firefly-color-light:        $gm-color-green-light-a400;
-
-@keyframes firefly
-{
-     0% {fill: $core-firefly-color-primary;}
-    25% {fill: lighten($core-firefly-color-light, 10%);}
-    50% {fill: $core-firefly-color-primary;}
-    75% {opacity: 0.5;}
-   100% {opacity: 1;}
-}
-
-@keyframes firefly-tentacles
-{
-     0% {fill: $core-firefly-color-primary; stroke: $core-firefly-color-primary;}
-    25% {fill: lighten($core-firefly-color-light, 10%); stroke: lighten($core-firefly-color-light, 10%);}
-    50% {fill: $core-firefly-color-primary; stroke: $core-firefly-color-primary;}
-    75% {opacity: 0.5;}
-   100% {opacity: 1;}
-}
 
 :host
 {
+    --cpt-height:             5.7rem;
+    --cpt-width:              var(--cpt-height);
+
+    --cpt-color-primary:      $app-color-primary;
+    --cpt-color-light:        $gm-color-green-light-a400;
+
+    --cpt-stroke:             $app-border-accent-color-base;
+    --cpt-stroke-opacity:     $app-border-accent-opacity;
+    --cpt-stroke-width:       $app-border-accent-width;
+
     position: relative;
     display: block;
 
-    &.fir-animate
+    @keyframes firefly
     {
-        > .fir-firefly
+         0% {fill: var(--cpt-color-primary);}
+        25% {fill: lighten(var(--cpt-color-light, 10%));}
+        50% {fill: var(--cpt-color-primary);}
+        75% {opacity: 0.5;}
+       100% {opacity: 1;}
+    }
+
+    @keyframes firefly-tentacles
+    {
+         0% {fill: var(--cpt-color-primary); stroke: var(--cpt-color-primary);}
+        25% {fill: lighten(var(--cpt-color-light), 10%); stroke: lighten(var(--cpt-color-light), 10%);}
+        50% {fill: var(--cpt-color-primary); stroke: var(--cpt-color-primary);}
+        75% {opacity: 0.5;}
+       100% {opacity: 1;}
+    }
+
+    &.cpt-animate
+    {
+        > .cpt-firefly
         {
-            .fir-body
+            .cpt-body
             {
                 animation-name:             firefly;
                 animation-duration:         1500ms;
@@ -39,7 +45,7 @@ $core-firefly-color-light:        $gm-color-green-light-a400;
                 animation-iteration-count:  infinite;
             }
 
-            .fir-tentacles.fir-inside > .fir-tentacle
+            .cpt-tentacles.cpt-inside > .cpt-tentacle
             {
                 animation-name:             firefly-tentacles;
                 animation-duration:         1500ms;
@@ -49,22 +55,22 @@ $core-firefly-color-light:        $gm-color-green-light-a400;
         }
     }
 
-    &.fir-color-primary
+    &.cpt-color-primary
     {
-        > .fir-firefly
+        > .cpt-firefly
         {
-            > .fir-group
+            > .cpt-group
             {
-                > .fir-part
+                > .cpt-part
                 {
-                    fill: $core-firefly-color-primary;
+                    fill: var(--cpt-color-primary);
                     opacity: 1;
                 }
 
-                > .fir-tentacles.fir-inside > .fir-tentacle
+                > .cpt-tentacles.cpt-inside > .cpt-tentacle
                 {
-                    fill:   $core-firefly-color-primary;
-                    stroke: $core-firefly-color-primary;
+                    fill: var(--cpt-color-primary);
+                    stroke: var(--cpt-color-primary);
                     opacity: 1;
                 }
             }
@@ -72,40 +78,40 @@ $core-firefly-color-light:        $gm-color-green-light-a400;
     }
 }
 
-.fir-firefly
+.cpt-firefly
 {
     position: relative;
     display: block;
-    height: $core-auth-logo-height; width: $core-auth-logo-width;
+    height: var(--cpt-height); width: var(--cpt-width);
     margin: 0 auto;
 
-    > .fir-group
+    > .cpt-group
     {
-        > .fir-part
+        > .cpt-part
         {
-            stroke:         $app-border-accent-color-base;
-            stroke-opacity: $app-border-accent-opacity;
-            stroke-width:   $app-border-accent-width;
+            stroke:         var(--cpt-stroke);
+            stroke-opacity: var(--cpt-stroke-opacity);
+            stroke-width:   var(--cpt-stroke-width);
         }
 
-        > .fir-tentacles
+        > .cpt-tentacles
         {
-            > .fir-tentacle
+            > .cpt-tentacle
             {
                 stroke-linecap:  round;
                 stroke-linejoin: round;
             }
 
-            &.fir-border > .fir-tentacle
+            &.cpt-border > .cpt-tentacle
             {
-                stroke:         $app-border-accent-color-base;
-                stroke-opacity: $app-border-accent-opacity;
+                stroke:         var(--cpt-stroke);
+                stroke-opacity: var(--cpt-stroke-opacity);
                 stroke-width:   2.25;
             }
 
-            &.fir-inside > .fir-tentacle
+            &.cpt-inside > .cpt-tentacle
             {
-                stroke-width: $app-border-accent-width;
+                stroke-width: var(--cpt-stroke-width);
             }
         }
     }
