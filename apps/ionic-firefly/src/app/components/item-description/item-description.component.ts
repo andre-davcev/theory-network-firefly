@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
     styleUrls       : ['./item-description.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
 })
-export class ItemDescriptionComponent
+export class ComponentItemDescription
 {
     @Input() form : FormGroup;
 

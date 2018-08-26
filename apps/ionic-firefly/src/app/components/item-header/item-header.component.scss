@@ -1,42 +1,42 @@
-$comp-item-header-height:                      167px;
-$comp-item-header-color-background:          white;
-$comp-item-header-color-font:                white;
-$comp-item-header-padding:                     1.6rem;     // $content-padding
-$comp-item-header-blur:                        10px;
-$comp-item-header-background-image:            rgba(0, 0, 0, 0.3);
+$cpt-item-header-height:                      167px;
+$cpt-item-header-color-background:          white;
+$cpt-item-header-color-font:                white;
+$cpt-item-header-padding:                     1.6rem;     // $content-padding
+$cpt-item-header-blur:                        10px;
+$cpt-item-header-background-image:            rgba(0, 0, 0, 0.3);
 
-$comp-item-header-title-font-size:             2.0rem;
-$comp-item-header-title-font-color:            $comp-item-header-color-font;
-$comp-item-header-title-letter-spacing:        -0.48px;
+$cpt-item-header-title-font-size:             2.0rem;
+$cpt-item-header-title-font-color:            $cpt-item-header-color-font;
+$cpt-item-header-title-letter-spacing:        -0.48px;
 
-$comp-item-header-subtitle-font-size:          1.6rem;
-$comp-item-header-subtitle-font-color:         $comp-item-header-color-font;
-$comp-item-header-subtitle-letter-spacing:     -0.34px;
+$cpt-item-header-subtitle-font-size:          1.6rem;
+$cpt-item-header-subtitle-font-color:         $cpt-item-header-color-font;
+$cpt-item-header-subtitle-letter-spacing:     -0.34px;
 
-$comp-item-header-placeholder-font-color:      $comp-item-header-color-font;
+$cpt-item-header-placeholder-font-color:      $cpt-item-header-color-font;
 
-$comp-item-header-selection-color-font:        $app-color-dark;
-$comp-item-header-selection-color-background:  $comp-item-header-color-font;
+$cpt-item-header-selection-color-font:        $app-color-dark;
+$cpt-item-header-selection-color-background:  $cpt-item-header-color-font;
 
-$comp-item-header-icon-size:                   9.2rem;
-$comp-item-header-icon-placeholder-font-color: $comp-item-header-color-font;
-$comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size;
+$cpt-item-header-icon-size:                   9.2rem;
+$cpt-item-header-icon-placeholder-font-color: $cpt-item-header-color-font;
+$cpt-item-header-icon-placeholder-font-size:  $cpt-item-header-title-font-size;
 
 :host
 {
     position: relative;
     display: flex;
     flex-direction: column;
-    height: $comp-item-header-height;
-    background-color: $comp-item-header-color-background;
-    padding: $comp-item-header-padding - 0.4rem;
+    height: $cpt-item-header-height;
+    background-color: $cpt-item-header-color-background;
+    padding: $cpt-item-header-padding - 0.4rem;
     align-items: center;
     overflow: hidden;
 
     mask-image: linear-gradient(black 0%, black 100%);
 
-    > .comp-background-image,
-    > .comp-background
+    > .cpt-background-image,
+    > .cpt-background
     {
         position: absolute;
         left: 0;
@@ -46,7 +46,7 @@ $comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size
         z-index: -1;
     }
 
-    > .comp-background-image
+    > .cpt-background-image
     {
         width: 100%;
         height: auto;
@@ -54,25 +54,25 @@ $comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size
         background-repeat: no-repeat;
         background-size: auto 100%;
         background-position: 50% 50%;
-        filter: blur($comp-item-header-blur);
+        filter: blur($cpt-item-header-blur);
     }
 
-    > .comp-background
+    > .cpt-background
     {
-        background: $comp-item-header-background-image;
+        background: $cpt-item-header-background-image;
     }
 
-    > .comp-icon-container
+    > .cpt-icon-container
     {
         position: relative;
         display: flex;
-        width: $comp-item-header-icon-size;
-        height: $comp-item-header-icon-size;
+        width: $cpt-item-header-icon-size;
+        height: $cpt-item-header-icon-size;
         margin-bottom: 8px;
         align-items: center;
         flex-direction: column;
 
-        > .comp-icon
+        > .cpt-icon
         {
             position: absolute;
             display: block;
@@ -82,16 +82,16 @@ $comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size
             height: 100%;
             border-radius: 50%;
             border-width: 3px;
-            border-color: $comp-item-header-color-font;
+            border-color: $cpt-item-header-color-font;
             border-style: solid;
         }
 
-        > .comp-icon-placeholder
+        > .cpt-icon-placeholder
         {
             position: relative;
             display: block;
-            color: $comp-item-header-icon-placeholder-font-color;
-            font-size: $comp-item-header-icon-placeholder-font-size;
+            color: $cpt-item-header-icon-placeholder-font-color;
+            font-size: $cpt-item-header-icon-placeholder-font-size;
             font-weight: 600;
             width: 100%;
             text-align: center;
@@ -100,15 +100,15 @@ $comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size
         }
     }
 
-    div.comp-container
+    div.cpt-container
     {
-        > .comp-title
+        > .cpt-title
         {
             margin-bottom: 8px;
         }
     }
 
-    > .comp-container
+    > .cpt-container
     {
         position: relative;
         display: flex;
@@ -116,8 +116,8 @@ $comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size
         width: 100%;
         align-items: center;
 
-        > .comp-title,
-        > .comp-subtitle
+        > .cpt-title,
+        > .cpt-subtitle
         {
             position: relative;
             display: block;
@@ -125,22 +125,22 @@ $comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size
             font-weight: 600;
             margin: 0;
             padding: 0;
-            color: $comp-item-header-color-font;
+            color: $cpt-item-header-color-font;
             border: none;
             width: 80%;
             text-align: center;
 
             &::placeholder
             {
-                color: $comp-item-header-placeholder-font-color;
+                color: $cpt-item-header-placeholder-font-color;
                 opacity: 0.8;
                 text-align: center;
             }
 
             &::selection
             {
-                color: $comp-item-header-selection-color-font;
-                background: $comp-item-header-selection-color-background;
+                color: $cpt-item-header-selection-color-font;
+                background: $cpt-item-header-selection-color-background;
             }
 
             &:focus
@@ -149,19 +149,19 @@ $comp-item-header-icon-placeholder-font-size:  $comp-item-header-title-font-size
             }
         }
 
-        > .comp-title
+        > .cpt-title
         {
-            font-size: $comp-item-header-title-font-size;
-            line-height: $comp-item-header-title-font-size;
-            letter-spacing: $comp-item-header-title-letter-spacing;
+            font-size: $cpt-item-header-title-font-size;
+            line-height: $cpt-item-header-title-font-size;
+            letter-spacing: $cpt-item-header-title-letter-spacing;
             margin-bottom: 3px;
         }
 
-        > .comp-subtitle
+        > .cpt-subtitle
         {
-            font-size: $comp-item-header-subtitle-font-size;
-            line-height: $comp-item-header-subtitle-font-size;
-            letter-spacing:$comp-item-header-subtitle-letter-spacing;
+            font-size: $cpt-item-header-subtitle-font-size;
+            line-height: $cpt-item-header-subtitle-font-size;
+            letter-spacing:$cpt-item-header-subtitle-letter-spacing;
         }
     }
 }

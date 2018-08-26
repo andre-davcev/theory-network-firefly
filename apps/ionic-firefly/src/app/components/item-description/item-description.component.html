@@ -1,20 +1,20 @@
-<form novalidate class="comp-container" [formGroup]="form" *ngIf="edit">
-    <h4 class="comp-title" fxFlexAlign="center">{{title}}</h4>
+<form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
+    <h4 class="cpt-title" fxFlexAlign="center">{{title}}</h4>
 
-    <ion-textarea class="comp-description" [placeholder]="descriptionPlaceholder" [formControlName]="description" [class.comp-empty]="!imageValue"></ion-textarea>
+    <ion-textarea class="cpt-description" [placeholder]="descriptionPlaceholder" [formControlName]="description" [class.cpt-empty]="!imageValue"></ion-textarea>
 
-    <input class="comp-image-hidden" type="hidden" [formControlName]="image">
+    <input class="cpt-image-hidden" type="hidden" [formControlName]="image">
 
-    <section class="comp-image-container" fxLayout="column" fxLayoutAlign="center" (click)="clickedImage()" [class.comp-image-valid]="imageValue">
-        <h4 class="comp-image-placeholder" *ngIf="!imageValue">{{imagePlaceholder}}</h4>
-        <img class="comp-image" [src]="imageValue" *ngIf="imageValue">
+    <section class="cpt-image-container" fxLayout="column" fxLayoutAlign="center" (click)="clickedImage()" [class.cpt-image-valid]="imageValue">
+        <h4 class="cpt-image-placeholder" *ngIf="!imageValue">{{imagePlaceholder}}</h4>
+        <img class="cpt-image" [src]="imageValue" *ngIf="imageValue">
     </section>
 </form>
 
-<div class="comp-container" *ngIf="!edit">
-    <h4 class="comp-title" >{{title}}</h4>
+<div class="cpt-container" *ngIf="!edit">
+    <h4 class="cpt-title" >{{title}}</h4>
 
-    <p class="comp-description">{{description}}</p>
+    <p class="cpt-description">{{description}}</p>
 
-    <img class="comp-image" [src]="imageValue">
+    <img class="cpt-image" [src]="imageValue">
 </div>
