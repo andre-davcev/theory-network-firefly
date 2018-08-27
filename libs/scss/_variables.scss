@@ -3,5 +3,7 @@
  * You may define a set of global variables accessible across entire workspace here
  */
 
-// could use a base theme here, for example:
-// @import '~@angular/material/theming';
+@import 'variables/general';
+@import 'variables/color';
+@import 'variables/ios';
+@import 'variables/material';
