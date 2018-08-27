@@ -1,3 +1,5 @@
+@import '~@theory/scss/index';
+
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
@@ -66,7 +68,7 @@
   --ion-color-medium-contrast-rgb: 0,0,0;
   --ion-color-medium-shade: #86888f;
   --ion-color-medium-tint: #a2a4ab;
-  
+
   /** dark **/
   --ion-color-dark: #222;
   --ion-color-dark-rgb: 34,34,34;
