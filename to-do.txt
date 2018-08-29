@@ -14,7 +14,10 @@ ToDo:
 - ionic color scheme
 - shadow dom
 - angular migration from 4 to 6
+- ionic push/pop to angular routing
 - ionic migration from 3 to 4
+- https://beta.ionicframework.com/docs/building/migration/
+- https://github.com/ionic-team/v4-migration-tslint
 - filename normalization
 - local import paths to @theory/feature paths
 - firebase messaging config file copy
