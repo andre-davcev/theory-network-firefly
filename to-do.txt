@@ -1,0 +1,22 @@
+Discuss:
+- nx nrwl
+- xplat
+- nested packag.json
+- xplat folder structure / architecture
+- capacitor / cordova
+- merge to develop?
+
+ToDo:
+- fix compile errors
+- move libs to local path
+- implement xplat features?
+- sass cleanup
+- ionic color scheme
+- shadow dom
+- angular migration from 4 to 6
+- ionic migration from 3 to 4
+- filename normalization
+- local import paths to @theory/feature paths
+- firebase messaging config file copy
+- do we need config.xml?
+- Run on devices ios / android
