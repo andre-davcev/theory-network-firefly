@@ -1,6 +1,6 @@
 .tn-animate
 {
-    transition-timing-function: $tn-transition-timing-function-default;
+    transition-timing-function: $app-transition-timing-function-default;
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
     perspective: 1000;
@@ -8,49 +8,49 @@
 
     &.tn-align-items
     {
-        transition-duration: $tn-transition-duration-move;
+        transition-duration: $app-transition-duration-move;
         transition-property: align-items;
     }
 
     &.tn-justify-content
     {
-        transition-duration: $tn-transition-duration-move;
+        transition-duration: $app-transition-duration-move;
         transition-property: justify-content;
 
         &.tn-align-items
         {
-            transition-duration: $tn-transition-duration-move;
+            transition-duration: $app-transition-duration-move;
             transition-property: justify-content, align-items;
         }
     }
 
     &.tn-margin
     {
-        transition-duration: $tn-transition-duration-move;
+        transition-duration: $app-transition-duration-move;
         transition-property: margin;
     }
 
     &.tn-transform
     {
-        transition-duration: $tn-transition-duration-move;
+        transition-duration: $app-transition-duration-move;
         transition-property: transform;
     }
 
     &.tn-opacity
     {
-        transition-duration: $tn-transition-duration-move;
+        transition-duration: $app-transition-duration-move;
         transition-property: opacity;
 
         &.tn-transform
         {
-            transition-duration: $tn-transition-duration-move;
+            transition-duration: $app-transition-duration-move;
             transition-property: opacity, transform;
         }
     }
 
     &.tn-dimensions
     {
-        transition-duration: $tn-transition-duration-move;
+        transition-duration: $app-transition-duration-move;
         transition-property: height, width;
 
         &.tn-margin
@@ -71,7 +71,7 @@
 
     &.tn-height
     {
-        transition-duration: $tn-transition-duration-move;
+        transition-duration: $app-transition-duration-move;
         transition-property: height;
 
         &.tn-margin
@@ -92,7 +92,7 @@
 
     &.tn-width
     {
-        transition-duration: $tn-transition-duration-move;
+        transition-duration: $app-transition-duration-move;
         transition-property: width;
 
         &.tn-margin

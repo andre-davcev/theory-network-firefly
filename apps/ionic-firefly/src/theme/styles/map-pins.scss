@@ -4,19 +4,19 @@
     display: block;
     box-sizing: border-box;
     background-color: transparent;
-    height: $tn-map-pin-icon-height; width: $tn-map-pin-icon-width;
+    height: $app-map-pin-icon-height; width: $app-map-pin-icon-width;
 
     &:before
     {
-        content: $tn-map-pin-icon;
+        content: $app-map-pin-icon;
         position: absolute;
         top: 0; left: 0;
         height: 100%; width: 100%;
         line-height: 1em;
-        font-family: $tn-map-pin-icon-font-family;
-        font-size: $tn-map-pin-icon-font-size;
-        color: $tn-map-pin-icon-color;
-        text-shadow: $tn-map-pin-icon-box-shadow;
+        font-family: $app-map-pin-icon-font-family;
+        font-size: $app-map-pin-icon-font-size;
+        color: $app-map-pin-icon-color;
+        text-shadow: $app-map-pin-icon-box-shadow;
     }
 
 
@@ -24,9 +24,9 @@
     {
         &:before
         {
-            background-image: linear-gradient($tn-map-pin-icon-color, $tn-map-pin-icon-color);
+            background-image: linear-gradient($app-map-pin-icon-color, $app-map-pin-icon-color);
             background-repeat: no-repeat;
-            background-size: ($tn-map-pin-icon-inner-font-size + 0.1) ($tn-map-pin-icon-inner-font-size + 0.1);
+            background-size: ($app-map-pin-icon-inner-font-size + 0.1) ($app-map-pin-icon-inner-font-size + 0.1);
             background-position: 0.4rem 0.6rem;
         }
 
@@ -34,21 +34,21 @@
         {
             position: absolute;
             top: 0.7rem; left: 0.6rem;
-            height: $tn-map-pin-icon-inner-font-size - 0.2; width: $tn-map-pin-icon-inner-font-size - 0.2;
+            height: $app-map-pin-icon-inner-font-size - 0.2; width: $app-map-pin-icon-inner-font-size - 0.2;
             line-height: 1em;
-            font-family: $tn-map-pin-icon-inner-font-family;
-            font-size: $tn-map-pin-icon-inner-font-size;
-            color: $tn-map-pin-icon-inner-color;
+            font-family: $app-map-pin-icon-inner-font-family;
+            font-size: $app-map-pin-icon-inner-font-size;
+            color: $app-map-pin-icon-inner-color;
 
-            text-shadow: $tn-map-pin-icon-inner-shadow-top,
-                         $tn-map-pin-icon-inner-shadow-bottom;
+            text-shadow: $app-map-pin-icon-inner-shadow-top,
+                         $app-map-pin-icon-inner-shadow-bottom;
         }
 
         &.tn-icon-plus
         {
             &:after
             {
-                content: $tn-map-pin-icon-plus;
+                content: $app-map-pin-icon-plus;
             }
         }
 
@@ -56,7 +56,7 @@
         {
             &:after
             {
-                content: $tn-map-pin-icon-check;
+                content: $app-map-pin-icon-check;
             }
         }
     }
