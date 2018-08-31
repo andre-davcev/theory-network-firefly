@@ -1,15 +1,12 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Version } from '../interfaces/version.interface';
 
-import {Version} from './version.model';
-
-export class VersionUtil
+@Injectable()
+export class ServiceVersion
 {
     private _version : Version;
 
-    constructor()
-    {
-        
-    }
+    constructor() {}
 
     static parse(version: string) : Version
     {
@@ -45,7 +42,7 @@ export class VersionUtil
 
     public setVersion(version: string) : Version
     {
-        this._version = VersionUtil.parse(version);
+        this._version = ServiceVersion.parse(version);
 
         return this.getVersion();
     }
@@ -53,7 +50,7 @@ export class VersionUtil
     public check(version: string) : boolean
     {
         const current: Version = this.getVersion();
-        const compare: Version = VersionUtil.parse(version);
+        const compare: Version = ServiceVersion.parse(version);
 
         let show = false;
 

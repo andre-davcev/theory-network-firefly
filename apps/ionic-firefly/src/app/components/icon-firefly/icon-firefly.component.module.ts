@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComponentFireflyIcon } from './firefly-icon.component';
+import { ComponentIconFirefly } from './icon-firefly.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [ComponentFireflyIcon],
-  exports: [ComponentFireflyIcon]
+  declarations: [ComponentIconFirefly],
+  exports: [ComponentIconFirefly]
 })
 export class ModuleFireflyIcon {}

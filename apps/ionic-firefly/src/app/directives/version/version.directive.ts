@@ -1,9 +1,5 @@
-import {Directive}        from '@angular/core';
-import {Input}            from '@angular/core';
-import {TemplateRef}      from '@angular/core';
-import {ViewContainerRef} from '@angular/core';
-
-import {Version} from './version.model';
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ServiceVersion } from '../../services/version.service';
 
 @Directive
 ({
@@ -14,10 +10,7 @@ export class DirectiveVersion
 {
     private hasView = false;
 
-    constructor(private templateRef:TemplateRef<any>, private viewContainer:ViewContainerRef, private version:AppVersion) 
-    {
-
-    }
+    constructor(private templateRef:TemplateRef<any>, private viewContainer:ViewContainerRef, private version: ServiceVersion) {}
 
     @Input()
     set appVersion(version: string)
@@ -34,5 +27,5 @@ export class DirectiveVersion
             this.viewContainer.clear();
             this.hasView = false;
         }
-  }
+    }
 }
