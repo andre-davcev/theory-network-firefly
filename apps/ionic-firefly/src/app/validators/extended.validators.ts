@@ -1,6 +1,6 @@
 import { ValidatorFn, AbstractControl, Validators } from '@angular/forms';
 
-export class ValidatorsCustom
+export class ValidatorsExtended
 {
     static minLength(minLength: number): ValidatorFn
     {

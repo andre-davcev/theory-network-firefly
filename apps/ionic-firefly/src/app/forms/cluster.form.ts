@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { Cluster } from '../../models/cluster';
-import { ValidatorsCustom } from '../validators/validators-custom.service';
+import { Cluster } from '../models/cluster.model';
+import { ValidatorsExtended } from '../validators/extended.validators';
 
 @Injectable()
 export class FormCluster
@@ -34,9 +33,9 @@ export class FormCluster
         const formGroup: FormGroup = this.formBuilder.group
         ({
             draft       : cluster.draft,
-            name        : [cluster.name,        ValidatorsCustom.minLength(1)],
-            tagline     : [cluster.tagline,     ValidatorsCustom.minLength(1)],
-            description : [cluster.description, ValidatorsCustom.minLength(1)],
+            name        : [cluster.name,        ValidatorsExtended.minLength(1)],
+            tagline     : [cluster.tagline,     ValidatorsExtended.minLength(1)],
+            description : [cluster.description, ValidatorsExtended.minLength(1)],
             icon        : [cluster.icon,        Validators.required],
             photo       : [cluster.photo,       Validators.required],
             categories  : [cluster.categories,  Validators.minLength(1)],

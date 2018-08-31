@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { ValidatorsCustom } from '../validators/validators-custom.service';
-import { Icon } from '../../models/icon.model';
+import { Icon } from '../models/icon.model';
+import { ValidatorsExtended } from '../validators/extended.validators';
 
 @Injectable()
 export class FormIcon
@@ -30,8 +29,8 @@ export class FormIcon
         const formGroup: FormGroup = this.formBuilder.group
         ({
             draft       : icon.draft,
-            name        : [icon.name,        ValidatorsCustom.minLength(1)],
-            description : [icon.description, ValidatorsCustom.minLength(1)],
+            name        : [icon.name,        ValidatorsExtended.minLength(1)],
+            description : [icon.description, ValidatorsExtended.minLength(1)],
             private     : icon.private,
             url         : [icon.url,        Validators.required]
         });
