@@ -3,7 +3,7 @@
     display: block;
     position: absolute;
     top: 0; left: 0;
-    font-size: $tn-icon-font-size;
+    font-size: $app-icon-font-size;
 }
 
 app-icon
@@ -16,7 +16,7 @@ app-icon
         border-color: #030303;
         background-color: transparent;
 
-        transition-timing-function: $tn-transition-timing-function-default;
+        transition-timing-function: $app-transition-timing-function-default;
         transition-duration: 0.1s;
         transition-property: background-color;
         backface-visibility: hidden;
@@ -36,7 +36,7 @@ app-icon
             font-size: $app-icon-size - 1.1rem;
             color: #030303;
 
-            font-family: $tn-font-face-name-ionic-icons-2;
+            font-family: $app-font-ionic-icons-2;
             speak: none;
             font-style: normal;
             font-weight: normal;
@@ -55,7 +55,7 @@ app-icon
 
             &:before
             {
-                font-family: $tn-font-face-name-ionic-icons;
+                font-family: $app-font-face-name-ionic-icons;
                 display: inline-block;
                 content: "\f3ff";
 
@@ -86,7 +86,7 @@ app-icon
             -moz-osx-font-smoothing: grayscale;
             margin-left: 0.3rem;
 
-            font-family: $app-font-firefly-face-name;
+            font-family: $app-font-firefly;
 
             content: $app-font-firefly-icon-firefly;
         }

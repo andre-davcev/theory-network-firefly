@@ -2,95 +2,95 @@
 
 @font-face
 {
-    font-family: $fa-font-face-name-font-awesome;
-    src: $fa-font-face-url-font-awesome;
+    font-family: $app-font-font-awesome;
+    src: $app-font-font-awesome-url;
 }
 
 .tn-ico.fa-icon:before
 {
-    font-family: $fa-font-face-name-font-awesome;
-    font-size: $fa-font-size;
+    font-family: $app-font-font-awesome;
+    font-size: $app-font-font-awesome-size;
 }
 
 // Ionic Icons
 
 @font-face
 {
-    font-family: $tn-font-face-name-ionic-icons-2;
-    src: $tn-font-face-url-ionic-icons-eot format("embedded-opentype"),
-         $tn-font-face-url-ionic-icons-ttf format("truetype"),
-         $tn-font-face-url-ionic-icons-woff format("woff"),
-         $tn-font-face-url-ionic-icons-svg format("svg");
+    font-family: $app-font-ionic-icons-2;
+    src: $app-font-ionic-icons-url-eot format("embedded-opentype"),
+         $app-font-ionic-icons-url-ttf format("truetype"),
+         $app-font-ionic-icons-url-woff format("woff"),
+         $app-font-ionic-icons-url-svg format("svg");
 }
 
 // Lato
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato;
-    src: $tn-font-face-url-lato;
+    font-family: $app-font-lato;
+    src: $app-font-lato-url;
 }
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato-black;
-    src: $tn-font-face-url-lato-black;
+    font-family: $app-font-lato-black;
+    src: $app-font-lato-url-black;
 }
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato-black-italic;
-    src: $tn-font-face-url-lato-black-italic;
+    font-family: $app-font-lato-black-italic;
+    src: $app-font-lato-url-black-italic;
 }
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato-bold;
-    src: $tn-font-face-url-lato-bold;
+    font-family: $app-font-lato-bold;
+    src: $app-font-lato-url-bold;
 }
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato-bold-italic;
-    src: $tn-font-face-url-lato-bold-italic;
+    font-family: $app-font-lato-bold-italic;
+    src: $app-font-lato-url-bold-italic;
 }
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato-hairline;
-    src: $tn-font-face-url-lato-hairline;
+    font-family: $app-font-lato-hairline;
+    src: $app-font-lato-url-hairline;
 }
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato-hairline-italic;
-    src: $tn-font-face-url-lato-hairline-italic;
+    font-family: $app-font-lato-hairline-italic;
+    src: $app-font-lato-url-hairline-italic;
 }
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato-italic;
-    src: $tn-font-face-url-lato-italic;
+    font-family: $app-font-lato-italic;
+    src: $app-font-lato-url-italic;
 }
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato-light;
-    src: $tn-font-face-url-lato-light;
+    font-family: $app-font-lato-light;
+    src: $app-font-lato-url-light;
 }
 
 @font-face
 {
-    font-family: $tn-font-face-name-lato-light-italic;
-    src: $tn-font-face-url-lato-light-italic;
+    font-family: $app-font-lato-light-italic;
+    src: $app-font-lato-url-light-italic;
 }
 
 // Firefly Font
 
 @font-face
 {
-    font-family: $app-font-firefly-face-name;
-    src: $app-font-firefly-face-url;
+    font-family: $app-font-firefly;
+    src: $app-font-firefly-url;
 }
 
 app-icon

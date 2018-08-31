@@ -2,90 +2,76 @@
 
 // Animations
 
-$tn-transition-duration-move:               1.5s;
-$tn-transition-duration-hover:              0.3s;
-$tn-transition-duration-none:               0.0s;
-$tn-transition-timing-function-default:     linear;
+$app-transition-duration-move:               1.5s;
+$app-transition-duration-hover:              0.3s;
+$app-transition-duration-none:               0.0s;
+$app-transition-timing-function-default:     linear;
 
 // Shadows
-$tn-text-shadow-dark-background:            0px 2px 3px rgba(0, 0, 0, 0.28);
-$tn-text-shadow-light-background:           0px 2px 3px rgba(0, 0, 0, 0.18);
+$app-text-shadow-dark-background:            0px 2px 3px rgba(0, 0, 0, 0.28);
+$app-text-shadow-light-background:           0px 2px 3px rgba(0, 0, 0, 0.18);
 
-$tn-box-shadow-dark-background:             0px 1px 1px rgba(0, 0, 0, 0.36);
-$tn-box-shadow-light-background:            0px 1px 1px rgba(0, 0, 0, 0.10);
+$app-box-shadow-dark-background:             0px 1px 1px rgba(0, 0, 0, 0.36);
+$app-box-shadow-light-background:            0px 1px 1px rgba(0, 0, 0, 0.10);
 
 // Icons
 
-$tn-icon-font-size:                         1.2rem;
+$app-icon-font-size:                         1.2rem;
 
 // Font Awesome
-
-$fa-font-face-name-font-awesome:            "Font Awesome";
-$fa-font-face-url-font-awesome:             url(../fonts/font.awesome/font.awesome.ttf);
-$fa-font-family-font-awesome:               $fa-font-face-name-font-awesome;
-$fa-font-size:                              $tn-icon-font-size;
+$app-font-font-awesome:               "Font Awesome";
+$app-font-font-awesome-url:           url(../fonts/font.awesome/font.awesome.ttf);
+$app-font-font-awesome-size:          $app-icon-font-size;
 
 // Helvetican Neue
-$tn-font-family-helvetica-neue:                     "Helvetica Neue",                                                                        Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-bold:                "HelveticaNeue-Bold",              "Helvetica Neue Bold",              "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-bold-italic:         "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-condensed-black:     "HelveticaNeue-Condensed-Black",   "Helvetica Neue Condensed Black",   "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-condensed-bold:      "HelveticaNeue-Condensed-Bold",    "Helvetica Neue Condensed Bold",    "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-light:               "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-light-italic:        "HelveticaNeue-Light-Italic",      "Helvetica Neue Light Italic",      "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-medium:              "HelveticaNeue-Medium",            "Helvetica Neue Medium",            "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-medium-italic:       "HelveticaNeue-Medium-Italic",     "Helvetica Neue Medium Italic",     "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-thin:                "HelveticaNeue-Thin",              "Helvetica Neue Thin",              "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-thin-italic:         "HelveticaNeue-Thin-Italic",       "Helvetica Neue Thin Italic",       "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-ultra-light:         "HelveticaNeue-UltraLight",        "Helvetica Neue UltraLight",        "Helvetica Neue", Helvetica, Arial, sans-serif;
-$tn-font-family-helvetica-neue-ultra-light-italic:  "HelveticaNeue-UltraLight-Italic", "Helvetica Neue UltraLight Italic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue:                     "Helvetica Neue",                                                                        Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-bold:                "HelveticaNeue-Bold",              "Helvetica Neue Bold",              "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-bold-italic:         "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-condensed-black:     "HelveticaNeue-Condensed-Black",   "Helvetica Neue Condensed Black",   "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-condensed-bold:      "HelveticaNeue-Condensed-Bold",    "Helvetica Neue Condensed Bold",    "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-light:               "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-light-italic:        "HelveticaNeue-Light-Italic",      "Helvetica Neue Light Italic",      "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-medium:              "HelveticaNeue-Medium",            "Helvetica Neue Medium",            "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-medium-italic:       "HelveticaNeue-Medium-Italic",     "Helvetica Neue Medium Italic",     "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-thin:                "HelveticaNeue-Thin",              "Helvetica Neue Thin",              "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-thin-italic:         "HelveticaNeue-Thin-Italic",       "Helvetica Neue Thin Italic",       "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-ultra-light:         "HelveticaNeue-UltraLight",        "Helvetica Neue UltraLight",        "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-ultra-light-italic:  "HelveticaNeue-UltraLight-Italic", "Helvetica Neue UltraLight Italic", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Ion Icons
 
-$tn-font-face-name-ionic-icons:         "Ionicons";
-$tn-font-face-name-ionic-icons-2:       "Ionicons 2";
-$tn-font-family-ionic-icons:            $tn-font-face-name-ionic-icons;
-$tn-font-size-ionic-icons:              $tn-icon-font-size;
+$app-font-ionic-icons-2:         "Ionicons 2";
+$app-font-ionic-icons:           "Ionicons";
+$app-font-ionic-icons-size:      $app-icon-font-size;
 
-$tn-font-face-url-ionic-icons-eot:      url(../fonts/ion.icons/2.0.1/ionicons.eot);
-$tn-font-face-url-ionic-icons-ttf:      url(../fonts/ion.icons/2.0.1/ionicons.ttf);
-$tn-font-face-url-ionic-icons-woff:     url(../fonts/ion.icons/2.0.1/ionicons.woff);
-$tn-font-face-url-ionic-icons-svg:      url(../fonts/ion.icons/2.0.1/ionicons.svg);
+$app-font-ionic-icons-url-eot:      url(../fonts/ion.icons/2.0.1/ionicons.eot);
+$app-font-ionic-icons-url-ttf:      url(../fonts/ion.icons/2.0.1/ionicons.ttf);
+$app-font-ionic-icons-url-woff:     url(../fonts/ion.icons/2.0.1/ionicons.woff);
+$app-font-ionic-icons-url-svg:      url(../fonts/ion.icons/2.0.1/ionicons.svg);
 
 // Lato
 
-$tn-font-face-name-lato:                    "Lato";
-$tn-font-face-name-lato-black:              "Lato Black";
-$tn-font-face-name-lato-black-italic:       "Lato Black Italic";
-$tn-font-face-name-lato-bold:               "Lato Bold";
-$tn-font-face-name-lato-bold-italic:        "Lato Bold Italic";
-$tn-font-face-name-lato-hairline:           "Lato Hairline";
-$tn-font-face-name-lato-hairline-italic:    "Lato Hairline Italic";
-$tn-font-face-name-lato-italic:             "Lato Italic";
-$tn-font-face-name-lato-light:              "Lato Light";
-$tn-font-face-name-lato-light-italic:       "Lato Light Italic";
+$app-font-lato:                    "Lato";
+$app-font-lato-black:              "Lato Black";
+$app-font-lato-black-italic:       "Lato Black Italic";
+$app-font-lato-bold:               "Lato Bold";
+$app-font-lato-bold-italic:        "Lato Bold Italic";
+$app-font-lato-hairline:           "Lato Hairline";
+$app-font-lato-hairline-italic:    "Lato Hairline Italic";
+$app-font-lato-italic:             "Lato Italic";
+$app-font-lato-light:              "Lato Light";
+$app-font-lato-light-italic:       "Lato Light Italic";
 
-$tn-font-face-url-lato:                     url(../fonts/lato/lato.ttf);
-$tn-font-face-url-lato-black:               url(../fonts/lato/lato.black.ttf);
-$tn-font-face-url-lato-black-italic:        url(../fonts/lato/lato.black.italic.ttf);
-$tn-font-face-url-lato-bold:                url(../fonts/lato/lato.bold.ttf);
-$tn-font-face-url-lato-bold-italic:         url(../fonts/lato/lato.bold.italic.ttf);
-$tn-font-face-url-lato-hairline:            url(../fonts/lato/lato.hairline.ttf);
-$tn-font-face-url-lato-hairline-italic:     url(../fonts/lato/lato.hairline.italic.ttf);
-$tn-font-face-url-lato-italic:              url(../fonts/lato/lato.italic.ttf);
-$tn-font-face-url-lato-light:               url(../fonts/lato/lato.light.ttf);
-$tn-font-face-url-lato-light-italic:        url(../fonts/lato/lato.light.italic.ttf);
-
-$tn-font-family-lato:                       $tn-font-face-name-lato;
-$tn-font-family-lato-black:                 $tn-font-face-name-lato-black;
-$tn-font-family-lato-black-italic:          $tn-font-face-name-lato-black-italic;
-$tn-font-family-lato-bold:                  $tn-font-face-name-lato-bold;
-$tn-font-family-lato-bold-italic:           $tn-font-face-name-lato-bold-italic;
-$tn-font-family-lato-hairline:              $tn-font-face-name-lato-hairline;
-$tn-font-family-lato-hairline-italic:       $tn-font-face-name-lato-hairline-italic;
-$tn-font-family-lato-italic:                $tn-font-face-name-lato-italic;
-$tn-font-family-lato-light:                 $tn-font-face-name-lato-light;
-$tn-font-family-lato-light-italic:          $tn-font-face-name-lato-light-italic;
+$app-font-lato-url:                     url(../fonts/lato/lato.ttf);
+$app-font-lato-url-black:               url(../fonts/lato/lato.black.ttf);
+$app-font-lato-url-black-italic:        url(../fonts/lato/lato.black.italic.ttf);
+$app-font-lato-url-bold:                url(../fonts/lato/lato.bold.ttf);
+$app-font-lato-url-bold-italic:         url(../fonts/lato/lato.bold.italic.ttf);
+$app-font-lato-url-hairline:            url(../fonts/lato/lato.hairline.ttf);
+$app-font-lato-url-hairline-italic:     url(../fonts/lato/lato.hairline.italic.ttf);
+$app-font-lato-url-italic:              url(../fonts/lato/lato.italic.ttf);
+$app-font-lato-url-light:               url(../fonts/lato/lato.light.ttf);
+$app-font-lato-url-light-italic:        url(../fonts/lato/lato.light.italic.ttf);
 
 // Buttons
 
@@ -97,110 +83,101 @@ $app-button-delete-color-background:         $ios-list-item-button-delete-color-
 
 // Inputs
 
-$tn-input-height:                           3.4rem;
-$tn-input-line-height:                      $tn-line-height;
+$app-input-height:                           3.4rem;
+$app-input-line-height:                      $tn-line-height;
 
-$tn-input-directive-height:                 $tn-input-height;
-$tn-input-directive-space-right:            $tn-input-height + 0.9;
+$app-input-directive-height:                 $app-input-height;
+$app-input-directive-space-right:            $app-input-height + 0.9;
 
-$tn-input-icon-font-family:                 $tn-font-family-ionic-icons;
-$tn-input-icon-line-height:                 $tn-input-directive-height;
-$tn-input-icon-verified-color:              $gm-color-green-light-a400;
-$tn-input-icon-error-color:                 $gm-color-red-800;
-$tn-input-icon-clear-color:                 $gm-color-grey-400;
+$app-input-icon-font-family:                 $app-font-ionic-icons;
+$app-input-icon-line-height:                 $app-input-directive-height;
+$app-input-icon-verified-color:              $gm-color-green-light-a400;
+$app-input-icon-error-color:                 $gm-color-red-800;
+$app-input-icon-clear-color:                 $gm-color-grey-400;
 
-$tn-input-icon-verified:                    '\f2bc';    // $ionicon-var-checkmark
-$tn-input-icon-error:                       '\f2c0';    // $ionicon-var-close
-$tn-input-icon-verified-round:              '\f2bb';    // $ionicon-var-checkmark-round
-$tn-input-icon-error-round:                 '\f14e';    // $ionicon-var-close-round
-$tn-input-icon-clear:                       '\f2bf';    // $ionicon-var-close-circled
+$app-input-icon-verified:                    '\f2bc';    // $ionicon-var-checkmark
+$app-input-icon-error:                       '\f2c0';    // $ionicon-var-close
+$app-input-icon-verified-round:              '\f2bb';    // $ionicon-var-checkmark-round
+$app-input-icon-error-round:                 '\f14e';    // $ionicon-var-close-round
+$app-input-icon-clear:                       '\f2bf';    // $ionicon-var-close-circled
 
-$tn-input-spinner-height:           if(ceil($tn-input-directive-height / $tn-golden-ratio) % 2 == 0, ceil($tn-input-directive-height / $tn-golden-ratio), floor($tn-input-directive-height / $tn-golden-ratio));
-$tn-input-spinner-width:            $tn-input-spinner-height;
-$tn-input-spinner-margin:           ($tn-input-directive-height - $tn-input-spinner-height) / 2;
-$tn-input-spinner-margin-right:     $tn-input-spinner-width + (($tn-input-directive-space-right - $tn-input-spinner-width) / 2);
+$app-input-spinner-height:           if(ceil($app-input-directive-height / $tn-golden-ratio) % 2 == 0, ceil($app-input-directive-height / $tn-golden-ratio), floor($app-input-directive-height / $tn-golden-ratio));
+$app-input-spinner-width:            $app-input-spinner-height;
+$app-input-spinner-margin:           ($app-input-directive-height - $app-input-spinner-height) / 2;
+$app-input-spinner-margin-right:     $app-input-spinner-width + (($app-input-directive-space-right - $app-input-spinner-width) / 2);
 
-$tn-input-icon-font-size:           $tn-input-spinner-height;
+$app-input-icon-font-size:           $app-input-spinner-height;
 
-$tn-input-icon-verified-width:      $tn-input-icon-font-size * 0.8125;
-$tn-input-icon-verified-margin:     $tn-input-icon-verified-width + (($tn-input-directive-space-right - $tn-input-icon-verified-width) / 2);
-$tn-input-icon-error-width:         $tn-input-icon-font-size * 0.75;
-$tn-input-icon-error-margin:        $tn-input-icon-error-width + (($tn-input-directive-space-right - $tn-input-icon-error-width) / 2);
-$tn-input-icon-clear-width:         $tn-input-icon-font-size;
+$app-input-icon-verified-width:      $app-input-icon-font-size * 0.8125;
+$app-input-icon-verified-margin:     $app-input-icon-verified-width + (($app-input-directive-space-right - $app-input-icon-verified-width) / 2);
+$app-input-icon-error-width:         $app-input-icon-font-size * 0.75;
+$app-input-icon-error-margin:        $app-input-icon-error-width + (($app-input-directive-space-right - $app-input-icon-error-width) / 2);
+$app-input-icon-clear-width:         $app-input-icon-font-size;
 
 // Map Pin
 
-$tn-map-pin-icon:                           $fa-var-map-marker;
-$tn-map-pin-icon-color:                     $gm-color-black;
-$tn-map-pin-icon-font-family:               $fa-font-family-font-awesome;
-$tn-map-pin-icon-font-size:                 3.4rem;
-$tn-map-pin-icon-height:                    $tn-map-pin-icon-font-size;
-$tn-map-pin-icon-width:                     2.0rem;
-$tn-map-pin-icon-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
+$app-map-pin-icon:                           $fa-var-map-marker;
+$app-map-pin-icon-color:                     $gm-color-black;
+$app-map-pin-icon-font-family:               $app-font-font-awesome;
+$app-map-pin-icon-font-size:                 3.4rem;
+$app-map-pin-icon-height:                    $app-map-pin-icon-font-size;
+$app-map-pin-icon-width:                     2.0rem;
+$app-map-pin-icon-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
 
-$tn-map-pin-icon-inner-font-family:         $fa-font-family-font-awesome;
-$tn-map-pin-icon-inner-font-size:           1.1rem;
-$tn-map-pin-icon-inner-color:               $gm-color-white;
+$app-map-pin-icon-inner-font-family:         $app-font-font-awesome;
+$app-map-pin-icon-inner-font-size:           1.1rem;
+$app-map-pin-icon-inner-color:               $gm-color-white;
 
-$tn-map-pin-icon-inner-shadow-top:          0 -1px 0 rgba(0,    0,    0, 0.21);
-$tn-map-pin-icon-inner-shadow-bottom:       0  1px 0 rgba(255, 255, 255, 0.21);
+$app-map-pin-icon-inner-shadow-top:          0 -1px 0 rgba(0,    0,    0, 0.21);
+$app-map-pin-icon-inner-shadow-bottom:       0  1px 0 rgba(255, 255, 255, 0.21);
 
-$tn-map-pin-icon-check:                     $fa-var-check-circle;
-$tn-map-pin-icon-plus:                      $fa-var-plus-circle;
+$app-map-pin-icon-check:                     $fa-var-check-circle;
+$app-map-pin-icon-plus:                      $fa-var-plus-circle;
 
 // Providers
 
-$tn-provider-button-color-text:             $gm-color-white;
-$tn-provider-button-font-size:              1.0rem;
-$tn-provider-button-font-family:            $tn-font-family-helvetica-neue;
-$tn-provider-button-text-shadow:            $tn-box-shadow-light-background;
+$app-provider-button-color-text:             $gm-color-white;
+$app-provider-button-font-size:              1.0rem;
+$app-provider-button-font-family:            $app-font-helvetica-neue;
+$app-provider-button-text-shadow:            $app-box-shadow-light-background;
 
-$tn-provider-button-icon-font-size:          1.6rem;
-$tn-provider-button-icon-font-family:        $fa-font-family-font-awesome;
-$tn-provider-button-icon-height:             1.7rem;
-$tn-provider-button-icon-width:              1.6rem;
-$tn-provider-button-icon-width-with-margin:  2.6rem;
-$tn-provider-button-icon-color-background:   $gm-color-white;
-$tn-provider-button-icon-border-radius:      0.2rem;
+$app-provider-button-icon-font-size:          1.6rem;
+$app-provider-button-icon-font-family:        $app-font-font-awesome;
+$app-provider-button-icon-height:             1.7rem;
+$app-provider-button-icon-width:              1.6rem;
+$app-provider-button-icon-width-with-margin:  2.6rem;
+$app-provider-button-icon-color-background:   $gm-color-white;
+$app-provider-button-icon-border-radius:      0.2rem;
 
 // Facebook
 
-$fb-color:                          $tn-color-brand-facebook;
-
-$fb-button-color-background:        $fb-color;
-$fb-button-icon-color-text:         $fb-color;
-$fb-button-icon-content:            "\f09a";
+$app-facebook-button-color-background:        $tn-color-brand-facebook;
+$app-facebook-button-icon-color-text:         $tn-color-brand-facebook;
+$app-facebook-button-icon-content:            "\f09a";
 
 // Google
 
-$google-color:                          $tn-color-brand-google;
-
-$google-button-color-background:        $google-color;
-$google-button-icon-color-text:         $google-color;
-$google-button-icon-content:            "\f0d5";
-
-$google-button-icon-font-size:          $tn-provider-button-icon-font-size - 0.1;
+$app-google-button-color-background:            $tn-color-brand-google;
+$app-google-button-icon-color-text:             $tn-color-brand-google;
+$app-google-button-icon-content:                "\f0d5";
+$app-google-button-icon-font-size:              $app-provider-button-icon-font-size - 0.1;
 
 // Twitter
 
-$twitter-color:                         $tn-color-brand-twitter;
-
-$twitter-button-color-background:       $twitter-color;
-$twitter-button-icon-color-text:        $twitter-color;
-$twitter-button-icon-content:           "\f099";
+$app-twitter-button-color-background:           $tn-color-brand-twitter;
+$app-twitter-button-icon-color-text:            $tn-color-brand-twitter;
+$app-twitter-button-icon-content:               "\f099";
 
 
-// CORE
+// Firefly Font
 
-$app-font-firefly-face-name:         'Firefly';
-$app-font-firefly-face-url:          url(../fonts/firefly/firefly.ttf);
-$app-font-firefly-family:            $app-font-firefly-face-name;
-$app-font-firefly-size:              1.2rem;
+$app-font-firefly:                      'Firefly';
+$app-font-firefly-url:                  url(../fonts/firefly/firefly.ttf);
+$app-font-firefly-size:                 1.2rem;
+$app-font-firefly-icon-firefly:         "b";
 
-$app-font-firefly-icon-firefly:      "b";
+// Theme
 
-
-// THEME
 $app-color-black:                    $gm-color-black;
 $app-color-white:                    $gm-color-white;
 
@@ -244,20 +221,20 @@ $app-color-primary-text-white:       $gm-color-primary-text-white;
 $app-color-primary-text-black:       $gm-color-primary-text-black;
 $app-color-inactive:                 $gm-color-grey-500;
 
-$app-font-family-text:               -apple-system-font, "Helvetica Neue", HelveticaNeue, "Roboto", "Segoe UI", sans-serif;
-$app-font-family-header-4:           $gm-font-family-header-4;
-$app-font-family-header-3:           $gm-font-family-header-3;
-$app-font-family-header-2:           $gm-font-family-header-2;
-$app-font-family-header-1:           $gm-font-family-header-1;
-$app-font-family-headline:           $gm-font-family-headline;
-$app-font-family-title:              $gm-font-family-title;
-$app-font-family-subhead:            $gm-font-family-subhead;
-$app-font-family-subhead-desktop:    $gm-font-family-subhead-desktop;
-$app-font-family-body:               $gm-font-family-body;
-$app-font-family-body-desktop:       $gm-font-family-body-desktop;
-$app-font-family-body-2:             $gm-font-family-body-2;
-$app-font-family-caption:            $gm-font-family-caption;
-$app-font-family-button:             $gm-font-family-button;
+$app-font-text:               -apple-system-font, "Helvetica Neue", HelveticaNeue, "Roboto", "Segoe UI", sans-serif;
+$app-font-header-4:           $gm-font-family-header-4;
+$app-font-header-3:           $gm-font-family-header-3;
+$app-font-header-2:           $gm-font-family-header-2;
+$app-font-header-1:           $gm-font-family-header-1;
+$app-font-headline:           $gm-font-family-headline;
+$app-font-title:              $gm-font-family-title;
+$app-font-subhead:            $gm-font-family-subhead;
+$app-font-subhead-desktop:    $gm-font-family-subhead-desktop;
+$app-font-body:               $gm-font-family-body;
+$app-font-body-desktop:       $gm-font-family-body-desktop;
+$app-font-body-2:             $gm-font-family-body-2;
+$app-font-caption:            $gm-font-family-caption;
+$app-font-button:             $gm-font-family-button;
 
 $app-font-size-header-4:             $gm-font-size-header-4;
 $app-font-size-header-3:             $gm-font-size-header-3;
@@ -296,11 +273,11 @@ $app-font-color-body:                $gm-font-color-body;
 $app-font-color-caption:             $gm-font-color-caption;
 $app-font-color-button:              $gm-font-color-button;
 
-// GUTTER
+// Gutter
 
 $app-gutter:                            1.6rem;
 
-// GENERAL
+// General
 
 $balanced:                               #56C71D !default;
 
@@ -319,7 +296,7 @@ $app-color-dark-text-border:             rgba(0, 0, 0, 0.5);
 
 $app-color-light-text:                   #030303;
 
-$tn-input-icon-verified-color:           $app-color-primary;
+$app-input-icon-verified-color:           $app-color-primary;
 
 $app-border-accent-color:                1px solid rgba(0,0,0,0.50);
 $app-border-accent-color-base:           #000000;
@@ -421,8 +398,8 @@ $segment-button-ios-text-color:                     $app-color-dark;
 
 // MAP PINS
 
-$tn-map-pin-icon-height:                            $tn-map-pin-icon-height;
-$tn-map-pin-icon-width:                             $tn-map-pin-icon-width + 0.2;
+$app-map-pin-icon-height:                            $app-map-pin-icon-height;
+$app-map-pin-icon-width:                             $app-map-pin-icon-width + 0.2;
 
 $app-map-pin-icon-color:                             #54504F;
 $app-map-pin-icon-border-color:                      rgba(255, 255, 255, 0.11);
