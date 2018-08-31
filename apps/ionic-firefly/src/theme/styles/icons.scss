@@ -6,19 +6,8 @@
     font-size: $tn-icon-font-size;
 }
 
-.ff-icon
+app-icon
 {
-    position: relative;
-    width: $app-icon-size;
-    height: $app-icon-size;
-    display: inline-block;
-    opacity: 0;
-
-    &.tn-visible
-    {
-        opacity: 1;
-    }
-
     &.ff-check
     {
         border-style: solid;
@@ -97,9 +86,9 @@
             -moz-osx-font-smoothing: grayscale;
             margin-left: 0.3rem;
 
-            font-family: $core-font-firefly-face-name;
+            font-family: $app-font-firefly-face-name;
 
-            content: $core-font-firefly-icon-firefly;
+            content: $app-font-firefly-icon-firefly;
         }
     }
 }

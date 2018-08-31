@@ -22,7 +22,7 @@
                 <ion-row>
                     <ion-col>
                         <button ion-button clear icon-start (click)="subscribe(subscription)">
-                            <ff-icon name="check" [active]="subscription.subscribed"></ff-icon>
+                            <app-icon name="check" [active]="subscription.subscribed"></app-icon>
                             {{(subscription.subscribed ? 'page.stream.subscribed' : 'page.stream.subscribe') | translate}}
                         </button>
                     </ion-col>

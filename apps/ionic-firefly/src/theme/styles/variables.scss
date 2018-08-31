@@ -192,12 +192,12 @@ $twitter-button-icon-content:           "\f099";
 
 // CORE
 
-$core-font-firefly-face-name:         'Firefly';
-$core-font-firefly-face-url:          url(../fonts/firefly/firefly.ttf);
-$core-font-firefly-family:            $core-font-firefly-face-name;
-$core-font-firefly-size:              1.2rem;
+$app-font-firefly-face-name:         'Firefly';
+$app-font-firefly-face-url:          url(../fonts/firefly/firefly.ttf);
+$app-font-firefly-family:            $app-font-firefly-face-name;
+$app-font-firefly-size:              1.2rem;
 
-$core-font-firefly-icon-firefly:      "b";
+$app-font-firefly-icon-firefly:      "b";
 
 
 // THEME
@@ -332,10 +332,6 @@ $app-font-size-tiny:                     0.8rem;
 $app-color-text-white-background:      rgba(74, 79, 76, 0.8);
 
 $app-border-radius:                      4px;
-
-// ICONS
-
-$app-icon-size:                                      3.2rem;
 
 // BUTTONS
 

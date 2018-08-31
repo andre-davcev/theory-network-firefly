@@ -1,5 +1,18 @@
 :host
 {
+    --cpt-icon-size: 32px;
+
+    position: relative;
+    width: var(--cpt-icon-size);
+    height: var(--cpt-icon-size);
+    display: inline-block;
+    opacity: 0;
+
+    &.tn-visible
+    {
+        opacity: 1;
+    }
+
     &:before
     {
         display: inline-block;
@@ -13,7 +26,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
 
-        font-family: $core-font-firefly-face-name;
-        font-size: $core-font-firefly-size;
+        font-family: $app-font-firefly-face-name;
+        font-size: $app-font-firefly-size;
     }
 }
