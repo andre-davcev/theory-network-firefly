@@ -1,6 +1,6 @@
 .tn-animate
 {
-    transition-timing-function: $app-transition-timing-function-default;
+    transition-timing-function: linear;
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
     perspective: 1000;
