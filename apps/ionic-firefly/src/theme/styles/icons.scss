@@ -16,7 +16,7 @@ app-icon
         border-color: #030303;
         background-color: transparent;
 
-        transition-timing-function: $app-transition-timing-function-default;
+        transition-timing-function: linear;
         transition-duration: 0.1s;
         transition-property: background-color;
         backface-visibility: hidden;
