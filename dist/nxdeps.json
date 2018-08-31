@@ -1,0 +1,12 @@
+{
+  "firefly-mobile-e2e": [
+    {
+      "projectName": "firefly-mobile",
+      "type": "implicit"
+    }
+  ],
+  "firefly-mobile": [],
+  "ionic-firefly": [],
+  "xplat": [],
+  "libs": []
+}

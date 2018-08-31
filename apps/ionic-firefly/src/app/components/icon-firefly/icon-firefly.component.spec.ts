@@ -1,21 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentIconFirefly } from './icon-firefly.component';
 
-import { ComponentFireflyIcon } from './firefly-icon.component';
-
-describe('FireflyComponent', () => {
-  let component: ComponentFireflyIcon;
-  let fixture: ComponentFixture<ComponentFireflyIcon>;
+describe('ComponentIconFirefly', () => {
+  let component: ComponentIconFirefly;
+  let fixture: ComponentFixture<ComponentIconFirefly>;
 
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
-        declarations: [ComponentFireflyIcon]
+        declarations: [ComponentIconFirefly]
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComponentFireflyIcon);
+    fixture = TestBed.createComponent(ComponentIconFirefly);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
