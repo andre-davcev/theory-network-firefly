@@ -1,35 +1,37 @@
-$cpt-item-header-height:                      167px;
-$cpt-item-header-color-background:          white;
-$cpt-item-header-color-font:                white;
-$cpt-item-header-padding:                     1.6rem;     // $content-padding
-$cpt-item-header-blur:                        10px;
-$cpt-item-header-background-image:            rgba(0, 0, 0, 0.3);
 
-$cpt-item-header-title-font-size:             2.0rem;
-$cpt-item-header-title-font-color:            $cpt-item-header-color-font;
-$cpt-item-header-title-letter-spacing:        -0.48px;
-
-$cpt-item-header-subtitle-font-size:          1.6rem;
-$cpt-item-header-subtitle-font-color:         $cpt-item-header-color-font;
-$cpt-item-header-subtitle-letter-spacing:     -0.34px;
-
-$cpt-item-header-placeholder-font-color:      $cpt-item-header-color-font;
-
-$cpt-item-header-selection-color-font:        $app-color-dark;
-$cpt-item-header-selection-color-background:  $cpt-item-header-color-font;
-
-$cpt-item-header-icon-size:                   9.2rem;
-$cpt-item-header-icon-placeholder-font-color: $cpt-item-header-color-font;
-$cpt-item-header-icon-placeholder-font-size:  $cpt-item-header-title-font-size;
 
 :host
 {
+    --cpt-height:                      167px;
+    --cpt-color-background:          white;
+    --cpt-color-font:                white;
+    --cpt-padding:                     16px;     // $content-padding
+    --cpt-blur:                        10px;
+    --cpt-background-image:            rgba(0, 0, 0, 0.3);
+
+    --cpt-title-font-size:             20px;
+    --cpt-title-font-color:            var(--cpt-color-font);
+    --cpt-title-letter-spacing:        -0.48px;
+
+    --cpt-subtitle-font-size:          16px;
+    --cpt-subtitle-font-color:         var(--cpt-color-font);
+    --cpt-subtitle-letter-spacing:     -0.34px;
+
+    --cpt-placeholder-font-color:      var(--cpt-color-font);
+
+    --cpt-selection-color-font:        $app-color-dark;
+    --cpt-selection-color-background:  var(--cpt-color-font);
+
+    --cpt-icon-size:                   92px;
+    --cpt-icon-placeholder-font-color: var(--cpt-color-font);
+    --cpt-icon-placeholder-font-size:  var(--cpt-title-font-size);
+
     position: relative;
     display: flex;
     flex-direction: column;
-    height: $cpt-item-header-height;
-    background-color: $cpt-item-header-color-background;
-    padding: $cpt-item-header-padding - 0.4rem;
+    height: var(--cpt-height);
+    background-color: var(--cpt-color-background);
+    padding: var(--cpt-padding) - 4px;
     align-items: center;
     overflow: hidden;
 
@@ -54,20 +56,20 @@ $cpt-item-header-icon-placeholder-font-size:  $cpt-item-header-title-font-size;
         background-repeat: no-repeat;
         background-size: auto 100%;
         background-position: 50% 50%;
-        filter: blur($cpt-item-header-blur);
+        filter: blur(var(--cpt-blur));
     }
 
     > .cpt-background
     {
-        background: $cpt-item-header-background-image;
+        background: var(--cpt-background-image);
     }
 
     > .cpt-icon-container
     {
         position: relative;
         display: flex;
-        width: $cpt-item-header-icon-size;
-        height: $cpt-item-header-icon-size;
+        width: var(--cpt-icon-size);
+        height: var(--cpt-icon-size);
         margin-bottom: 8px;
         align-items: center;
         flex-direction: column;
@@ -82,7 +84,7 @@ $cpt-item-header-icon-placeholder-font-size:  $cpt-item-header-title-font-size;
             height: 100%;
             border-radius: 50%;
             border-width: 3px;
-            border-color: $cpt-item-header-color-font;
+            border-color: var(--cpt-color-font);
             border-style: solid;
         }
 
@@ -90,8 +92,8 @@ $cpt-item-header-icon-placeholder-font-size:  $cpt-item-header-title-font-size;
         {
             position: relative;
             display: block;
-            color: $cpt-item-header-icon-placeholder-font-color;
-            font-size: $cpt-item-header-icon-placeholder-font-size;
+            color: var(--cpt-icon-placeholder-font-color);
+            font-size: var(--cpt-icon-placeholder-font-size);
             font-weight: 600;
             width: 100%;
             text-align: center;
@@ -125,22 +127,22 @@ $cpt-item-header-icon-placeholder-font-size:  $cpt-item-header-title-font-size;
             font-weight: 600;
             margin: 0;
             padding: 0;
-            color: $cpt-item-header-color-font;
+            color: var(--cpt-color-font);
             border: none;
             width: 80%;
             text-align: center;
 
             &::placeholder
             {
-                color: $cpt-item-header-placeholder-font-color;
+                color: var(--cpt-placeholder-font-color);
                 opacity: 0.8;
                 text-align: center;
             }
 
             &::selection
             {
-                color: $cpt-item-header-selection-color-font;
-                background: $cpt-item-header-selection-color-background;
+                color: var(--cpt-selection-color-font);
+                background: var(--cpt-selection-color-background);
             }
 
             &:focus
@@ -151,17 +153,17 @@ $cpt-item-header-icon-placeholder-font-size:  $cpt-item-header-title-font-size;
 
         > .cpt-title
         {
-            font-size: $cpt-item-header-title-font-size;
-            line-height: $cpt-item-header-title-font-size;
-            letter-spacing: $cpt-item-header-title-letter-spacing;
+            font-size: var(--cpt-title-font-size);
+            line-height: var(--cpt-title-font-size);
+            letter-spacing: var(--cpt-title-letter-spacing);
             margin-bottom: 3px;
         }
 
         > .cpt-subtitle
         {
-            font-size: $cpt-item-header-subtitle-font-size;
-            line-height: $cpt-item-header-subtitle-font-size;
-            letter-spacing:$cpt-item-header-subtitle-letter-spacing;
+            font-size: var(--cpt-subtitle-font-size);
+            line-height: var(--cpt-subtitle-font-size);
+            letter-spacing: var(--cpt-subtitle-letter-spacing);
         }
     }
 }

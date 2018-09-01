@@ -7,4 +7,4 @@ import { ComponentIcon } from './icon.component';
     declarations: [ComponentIcon],
     exports: [ComponentIcon]
 })
-export class ModuleIcon { }
+export class ModuleComponentIcon { }

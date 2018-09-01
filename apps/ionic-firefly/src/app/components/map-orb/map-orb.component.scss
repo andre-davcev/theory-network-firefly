@@ -1,16 +1,18 @@
-$app-map-orb-color:                       $app-color-primary;
-$app-map-orb-color-border:                $ios-map-color-orb-border;
-$app-map-orb-color-pulse:               rgba(86, 199, 29, 0.5);
-$app-map-orb-size:                        2.0rem;
-$app-map-orb-duration:                    3s;
+@import "variables";
 
 :host
 {
+    --cpt-color:                       $app-color-primary;
+    --cpt-color-border:                $ios-map-color-orb-border;
+    --cpt-color-pulse:               rgba(86, 199, 29, 0.5);
+    --cpt-size:                        20px;
+    --cpt-duration:                    3s;
+
     position: relative;
     display: block;
 
-    height: $app-map-orb-size;
-    width: $app-map-orb-size;
+    height: var(--cpt-size);
+    width: var(--cpt-size);
 
     .app-map-orb
     {
@@ -20,24 +22,24 @@ $app-map-orb-duration:                    3s;
         height: 100%;
         width: 100%;
         box-sizing: border-box;
-        background: $app-map-orb-color;
+        background: var(--cpt-color);
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        border: 4px solid $app-map-orb-color-border;
+        border: 4px solid var(--cpt-color-border);
         border-radius: 50%;
-        animation: appAnimationOrb $app-map-orb-duration ease;
+        animation: appAnimationOrb var(--cpt-duration) ease;
         animation-iteration-count: infinite;
     }
 
     .app-map-orb-pulse
     {
         position: absolute;
-        top: -$app-map-orb-size;
-        left: -$app-map-orb-size;
+        top: -var(--cpt-size);
+        left: -var(--cpt-size);
         height: 300%;
         width: 300%;
-        background-color: $app-map-orb-color-pulse;
+        background-color: var(--cpt-color-pulse);
         border-radius: 50%;
-        animation: appAnimationOrbPulse $app-map-orb-duration ease-out infinite;
+        animation: appAnimationOrbPulse var(--cpt-duration) ease-out infinite;
     }
 }
 

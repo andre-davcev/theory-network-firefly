@@ -1,16 +1,20 @@
-$c-list-icon-size:                50px;
-
-$c-list-title-font-size:          1.6rem;
-$c-list-title-font-color:         #000000;
-
-$c-list-subtitle-font-size:       1.4rem;
-$c-list-subtitle-font-color:      rgba(0, 0, 0, 0.54);
+@import "variables";
 
 :host
 {
+    --cpt-icon-size:                50px;
+
+    --cpt-title-font-size:          16px;
+    --cpt-title-font-color:         #000000;
+
+    --cpt-subtitle-font-size:       14px;
+    --cpt-subtitle-font-color:      rgba(0, 0, 0, 0.54);
+
+    --cpt-shadow:                   $app-list-box-shadow;
+
     > .list
     {
-        box-shadow: $app-list-box-shadow;
+        box-shadow: var(--cpt-shadow);
     }
 
     .item
@@ -20,8 +24,8 @@ $c-list-subtitle-font-color:      rgba(0, 0, 0, 0.54);
             ion-img,
             img
             {
-                height: $c-list-icon-size;
-                width: $c-list-icon-size;
+                height: var(--cpt-icon-size);
+                width: var(--cpt-icon-size);
             }
 
             &[item-start]
@@ -33,14 +37,14 @@ $c-list-subtitle-font-color:      rgba(0, 0, 0, 0.54);
 
         h3
         {
-            font-size: $c-list-title-font-size;
-            color: $c-list-title-font-color;
+            font-size: var(--cpt-title-font-size);
+            color: var(--cpt-title-font-color);
         }
 
         p
         {
-            font-size: $c-list-subtitle-font-size;
-            color: $c-list-subtitle-font-color;
+            font-size: var(--cpt-subtitle-font-size);
+            color: var(--cpt-subtitle-font-color);
         }
     }
 }

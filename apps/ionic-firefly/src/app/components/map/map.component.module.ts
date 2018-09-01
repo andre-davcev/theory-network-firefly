@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+
 import { ComponentMap } from './map.component';
-import { ModuleMapOrb } from '../map-orb/map-orb.component.module';
+import { ModuleComponentMapOrb } from '../map-orb/map-orb.component.module';
 
 @NgModule
 ({
     imports :
     [
         CommonModule,
-        ModuleMapOrb,
+        ModuleComponentMapOrb,
         NgxMapboxGLModule
     ],
 
     declarations: [ComponentMap],
     exports: [ComponentMap]
 })
-export class ModuleMap { }
+export class ModuleComponentMap { }

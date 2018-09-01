@@ -8,4 +8,4 @@ import { ComponentIconFirefly } from './icon-firefly.component';
   declarations: [ComponentIconFirefly],
   exports: [ComponentIconFirefly]
 })
-export class ModuleFireflyIcon {}
+export class ModuleComponentIconFirefly {}

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { ComponentList } from './list.component';
 import { IonicModule } from '@ionic/angular';
+
+import { ComponentList } from './list.component';
 
 @NgModule
 ({
@@ -16,4 +17,4 @@ import { IonicModule } from '@ionic/angular';
     declarations : [ComponentList],
     exports      : [ComponentList]
 })
-export class ModuleList { }
+export class ModuleComponentList { }
