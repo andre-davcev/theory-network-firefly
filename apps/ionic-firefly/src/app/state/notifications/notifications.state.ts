@@ -1,14 +1,15 @@
 
-import {State, Selector, Action, StateContext} from '@ngxs/store';
-
-import { NotificationsWatch } from './notifications.actions';
+import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { Firebase } from '@ionic-native/firebase';
 import { switchMap, filter, tap } from 'rxjs/operators';
-import { UserAddToken } from '../user/user.actions';
-import { of } from 'rxjs/observable/of';
+import { Firebase } from '@ionic-native/firebase';
+import { Platform } from '@ionic/angular';
+
 import { PushNotification } from '../../interfaces/push-notification.interface';
+import { NotificationsWatch } from './notifications.actions';
+import { UserAddToken } from '../user/user.actions';
+import { of } from 'rxjs';
 
 export interface StateNotificationsModel
 {

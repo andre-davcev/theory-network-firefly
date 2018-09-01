@@ -1,4 +1,4 @@
-import {State, Action, StateContext} from '@ngxs/store';
+import { State, Action, StateContext } from '@ngxs/store';
 
 import { LocationWatch } from '../location/location.actions';
 import { LanguageInitialize } from '../language/language.actions';

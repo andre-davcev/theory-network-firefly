@@ -1,15 +1,15 @@
 
-import {State, Selector, Action, StateContext} from '@ngxs/store';
-
-import {Observable, of} from 'rxjs';
-import {catchError, switchMap} from 'rxjs/operators';
-
-import {TranslateService} from '@ngx-translate/core';
+import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { Platform } from '@ionic/angular';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { Globalization } from '@ionic-native/globalization';
 
 import { PlatformEnum } from '../../enums/platform.enum';
 import { LanguageInitialize, LanguageGet, LanguageSet } from './language.actions';
-import { Platform } from '@ionic/angular';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+
 
 export interface StateLanguageModel
 {

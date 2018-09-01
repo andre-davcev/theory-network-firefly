@@ -1,10 +1,10 @@
 ToDo:
-- pages/state folders
+- pages folder
 - app.module.old.ts
 - global sass variables & styles
-- change component styles to remove variables and provide overrides in global sass files
 - angular 4 to 6
 - ionic 3 to ionic 4
+- change component styles to remove variables and provide overrides in global sass files
 - move libs to local path or xplat features?
 - ionic color scheme
 - shadow dom

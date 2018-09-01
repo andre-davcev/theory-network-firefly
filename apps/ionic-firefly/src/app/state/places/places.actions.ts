@@ -1,7 +1,7 @@
 export enum ActionsPlaces
 {
-    PlaceSearch = '[Places] Place Search',
-    PlaceDetails = '[Places]'
+    PlaceSearch  = '[Places] Place Search',
+    PlaceDetails = '[Places] Place Details'
 }
 
 export class PlaceSearch

@@ -1,28 +1,23 @@
-
-import {State, Selector, Action, StateContext} from '@ngxs/store';
-
-import {Observable}                 from 'rxjs/Observable';
-import {map, catchError, switchMap, take, filter, tap} from 'rxjs/operators';
-import {of}                         from 'rxjs/observable/of';
-
-import {Platform} from 'ionic-angular';
-
 import * as firebase from 'firebase/app';
 
-import { PlatformEnum } from '../../enums/platform.enum';
+import { State, Selector, Action, StateContext, Select} from '@ngxs/store';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap, take, filter, tap } from 'rxjs/operators';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { Select } from '@ngxs/store';
+
+import { PlatformEnum } from '../../enums/platform.enum';
 import { StateLanguage } from '../language/language.state';
 import { LanguageGet, LanguageSet } from '../language/language.actions';
-import { AuthProvider } from '../../enums/auth.provider';
-import { Credentials } from '../../models/credentials';
-import { User } from '../../models/user';
 import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, LoginFacebook, LoginFacebookBrowser, LoginFacebookDevice, LoginGoogle, LoginGoogleBrowser, LoginGoogleDevice, UserLogout, UserAddToken} from './user.actions';
 import { AlertsGet } from '../alert/alert.actions';
 import { NotificationsWatch } from '../notifications/notifications.actions';
+import { User } from '../../models/user.model';
+import { Platform } from '@ionic/angular';
+import { AuthProvider } from '../../enums/auth-provider.enum';
 
 export interface StateUserModel
 {
@@ -47,7 +42,7 @@ export interface StateUserModel
 
 export class StateUser
 {
-    constructor(private auth: AngularFireAuth, private firestore: AngularFirestore, private facebook: Facebook, private googlePlus: GooglePlus, private platform:Platform) {}
+    constructor(private auth: AngularFireAuth, private firestore: AngularFirestore, private facebook: Facebook, private googlePlus: GooglePlus, private platform: Platform) {}
 
     @Select(StateLanguage.language) language$: Observable<string>;
 
@@ -182,7 +177,7 @@ export class StateUser
     @Action(LoginEmail)
     loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: LoginEmail)
     {
-        return Observable.fromPromise(firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
+        return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             switchMap((authData: firebase.User) => dispatch(new UserAuthenticateCheck(authData))),
 
@@ -199,7 +194,7 @@ export class StateUser
     @Action(LoginFacebookBrowser)
     loginFacebookBrowser({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        return Observable.fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())).pipe
+        return fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())).pipe
         (
             switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))),
 
@@ -210,20 +205,20 @@ export class StateUser
     @Action(LoginFacebookDevice)
     loginFacebookDevice({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        return Observable.fromPromise(this.facebook.login(['email'])).pipe
+        return fromPromise(this.facebook.login(['email'])).pipe
         (
             switchMap((response: FacebookLoginResponse) =>
             {
                 const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
-                return Observable.fromPromise(firebase.auth().signInWithCredential(credential));
+                return fromPromise(firebase.auth().signInWithCredential(credential));
             }),
 
             switchMap((response: FacebookLoginResponse) =>
             {
                 const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
-                return Observable.fromPromise(firebase.auth().signInWithCredential(credential));
+                return fromPromise(firebase.auth().signInWithCredential(credential));
             }),
 
             switchMap((response: any) =>
@@ -246,7 +241,7 @@ export class StateUser
     @Action(LoginGoogleBrowser)
     loginGoogleBrowser({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        return Observable.fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())).pipe
+        return fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())).pipe
         (
             switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))),
 
@@ -257,20 +252,20 @@ export class StateUser
     @Action(LoginGoogleDevice)
     loginGoogleDevice({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        return Observable.fromPromise(this.facebook.login(['email'])).pipe
+        return fromPromise(this.facebook.login(['email'])).pipe
         (
             switchMap((response: FacebookLoginResponse) =>
             {
                 const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
-                return Observable.fromPromise(firebase.auth().signInWithCredential(credential));
+                return fromPromise(firebase.auth().signInWithCredential(credential));
             }),
 
             switchMap((response: FacebookLoginResponse) =>
             {
                 const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
-                return Observable.fromPromise(firebase.auth().signInWithCredential(credential));
+                return fromPromise(firebase.auth().signInWithCredential(credential));
             }),
 
             switchMap((response: any) =>
@@ -287,7 +282,7 @@ export class StateUser
     @Action(UserLogout)
     userLogout({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        return Observable.of(this.auth.auth.signOut()).pipe
+        return of(this.auth.auth.signOut()).pipe
         (
             tap(() =>
             {

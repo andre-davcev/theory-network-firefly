@@ -1,9 +1,8 @@
 
-import {State, Selector, Action, StateContext} from '@ngxs/store';
+import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
 
 import { LocationWatch } from './location.actions';
-
-import {BackgroundGeolocationResponse} from '@ionic-native/background-geolocation';
 
 export interface StateLocationModel
 {
