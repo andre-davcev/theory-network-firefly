@@ -1,16 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PagePublisherClusterCategories} from './cluster-categories.page';
+import { PagePublisherClusterCategories } from './cluster-categories.page';
 
 @NgModule
 ({
     imports :
     [
-        IonicPageModule.forChild(PagePublisherClusterCategories),
         TranslateModule
     ],
 
@@ -20,7 +16,4 @@ import {PagePublisherClusterCategories} from './cluster-categories.page';
     ]
 })
 
-export class ModulePagePublisherCluster
-{
-
-}
+export class ModulePagePublisherCluster { }

@@ -1,13 +1,14 @@
-import {Component} from '@angular/core';
-
-import {NavController, ViewController} from 'ionic-angular';
-
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { NavController } from '@ionic/angular';
+import { ViewController } from '@ionic/core';
+import { Router } from '@angular/router';
+
 import { StateCluster } from '../../state/cluster/cluster.state';
 import { SetClusterId } from '../../state/cluster/cluster.actions';
-import { Observable } from 'rxjs/Observable';
-import { Select, Store } from '@ngxs/store';
-import { StatusBar } from '@ionic-native/status-bar';
+
 
 @Component
 ({
@@ -22,29 +23,29 @@ export class PagePublisherCluster
 
     segment:string = 'clusters';
 
-    constructor(private store: Store, private nav: NavController, private statusBar: StatusBar, private viewController: ViewController)
+    constructor(private store: Store, private nav: NavController, private viewController: ViewController, private router: Router)
     {
         this.store.dispatch(new SetClusterId('new'));
     }
 
     ionViewWillEnter()
     {
-        this.statusBar.styleDefault();
+//        this.statusBar.styleDefault();
     }
 
     public navigateCategories(): void
     {
-        this.nav.push('PagePublisherClusterCategories');
+        this.router.navigate(['/publisher/cluster/categories']);
     }
 
     public navigateLocations(): void
     {
-        this.nav.push('PagePublisherClusterLocations');
+        this.router.navigate(['/publisher/cluster/locations']);
     }
 
     public dismissModal(): void
     {
-        this.viewController.dismiss();
-        this.statusBar.styleDefault();
+//        this.viewController.dismiss();
+//        this.statusBar.styleDefault();
     }
 }

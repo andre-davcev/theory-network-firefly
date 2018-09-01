@@ -67,6 +67,7 @@
     "cordova-plugin-googleplus": "file:../../node_modules/cordova-plugin-googleplus",
     "cordova-plugin-ionic": "file:../../node_modules/cordova-plugin-ionic",
     "cordova-plugin-mauron85-background-geolocation": "file:../../node_modules/cordova-plugin-mauron85-background-geolocation",
+    "cordova-plugin-statusbar": "file:../../node_modules/cordova-plugin-statusbar",
     "firebase": "file:../../node_modules/firebase",
     "font-awesome": "file:../../node_modules/font-awesome",
     "mapbox-gl": "file:../../node_modules/mapbox-gl",

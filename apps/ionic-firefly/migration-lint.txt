@@ -1,0 +1,153 @@
+
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/app.module.old.ts[8, 34]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/app.module.old.ts[9, 34]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.ts[87, 21]: The present method of overlay controllers now returns a promise. 
+Please ensure that you are handling this promise correctly.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.ts[93, 11]: The present method of overlay controllers now returns a promise. 
+Please ensure that you are handling this promise correctly.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/assets-beacons/assets-beacons.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/assets-coupons/assets-coupons.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/assets-events/assets-events.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/assets-icon/assets-icon.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/assets-icons/assets-icons.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/assets-icons/assets-icons.page.ts[3, 30]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/assets-images/assets-images.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/assets-places/assets-places.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/auth/auth.page.module.ts[3, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/auth/auth.page.ts[3, 30]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/auth/auth.page.ts[4, 30]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/auth/auth.page.ts[5, 30]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster-categories/cluster-categories.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster-locations-add/cluster-locations-add.module.ts[6, 30]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster-locations-add/cluster-locations-add.page.ts[2, 33]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster-locations/cluster-locations.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster-locations/cluster-locations.page.ts[3, 67]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster-locations/cluster-locations.page.ts[43, 28]: The create method of overlay controllers now returns a promise. 
+Please ensure that you are handling this promise correctly.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster-locations/cluster-locations.page.ts[45, 13]: The present method of overlay controllers now returns a promise. 
+Please ensure that you are handling this promise correctly.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster-locations/cluster-locations.page.ts[55, 9]: The present method of overlay controllers now returns a promise. 
+Please ensure that you are handling this promise correctly.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster/cluster.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/cluster/cluster.page.ts[3, 46]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher-assets/publisher-assets.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher-assets/publisher-assets.page.ts[3, 30]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher-beacon-minor/publisher-beacon-minor.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher-beacon/publisher-beacon.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher-beacons/publisher-beacons.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher-clusters/publisher-clusters.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher-clusters/publisher-clusters.page.ts[3, 30]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.module.ts[5, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.ts[3, 82]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.ts[60, 46]: The create method of overlay controllers now returns a promise. 
+Please ensure that you are handling this promise correctly.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.ts[62, 17]: Property title has been renamed to header.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.ts[79, 13]: The present method of overlay controllers now returns a promise. 
+Please ensure that you are handling this promise correctly.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/search/search.page.module.ts[3, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/search/search.page.ts[2, 31]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/stream/stream.page.module.ts[3, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/stream/stream.page.ts[3, 31]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/subscriptions/subscriptions.page.module.ts[3, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/subscriptions/subscriptions.page.ts[2, 42]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/user-profile/user-profile.page.module.ts[3, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/user-settings/user-settings.page.module.ts[3, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/user/user.page.module.ts[3, 32]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/user/user.page.ts[3, 93]: outdated import path
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/user/user.page.ts[62, 46]: The create method of overlay controllers now returns a promise. 
+Please ensure that you are handling this promise correctly.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/user/user.page.ts[64, 17]: Property title has been renamed to header.
+ERROR: /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/app/pages/user/user.page.ts[83, 13]: The present method of overlay controllers now returns a promise. 
+Please ensure that you are handling this promise correctly.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/components/list/list.component.html[3, 16]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/components/list/list.component.html[13, 13]: Buttons within ion-item-options are now ion-item-option elements instead of Angular directives.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/components/list/list.component.html[13, 20]: ion-button is now an ion-button element instead of an Angular directive.
+WARNING: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[2, 5]: The back button in an ion-toolbar is no longer automatically added.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[3, 21]: The start attribute of ion-buttons has been renamed. Use slot="secondary" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[4, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[7, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[10, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[13, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[16, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[36, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[36, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[37, 16]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[42, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[42, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/alerts/alerts.page.html[43, 16]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-beacons/assets-beacons.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-beacons/assets-beacons.page.html[9, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-beacons/assets-beacons.page.html[9, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-beacons/assets-beacons.page.html[10, 16]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-coupons/assets-coupons.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-coupons/assets-coupons.page.html[9, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-coupons/assets-coupons.page.html[9, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-coupons/assets-coupons.page.html[10, 16]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-events/assets-events.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-events/assets-events.page.html[9, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-events/assets-events.page.html[9, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-events/assets-events.page.html[10, 16]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-icon/assets-icon.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-icons/assets-icons.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-icons/assets-icons.page.html[8, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-icons/assets-icons.page.html[8, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-icons/assets-icons.page.html[9, 16]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-icons/assets-icons.page.html[16, 21]: The col-3 attribute of ion-col has been renamed. Use size="3" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-images/assets-images.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-images/assets-images.page.html[9, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-images/assets-images.page.html[9, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-images/assets-images.page.html[10, 16]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-places/assets-places.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-places/assets-places.page.html[9, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-places/assets-places.page.html[9, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/assets-places/assets-places.page.html[10, 16]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster-categories/cluster-categories.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster-locations-add/cluster-locations-add.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster-locations-add/cluster-locations-add.page.html[5, 21]: The end attribute of ion-buttons has been renamed. Use slot="primary" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster-locations-add/cluster-locations-add.page.html[6, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster-locations-add/cluster-locations-add.page.html[15, 16]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster-locations/cluster-locations.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster-locations/cluster-locations.page.html[12, 9]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster-locations/cluster-locations.page.html[12, 17]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster-locations/cluster-locations.page.html[13, 18]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster/cluster.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster/cluster.page.html[5, 21]: The end attribute of ion-buttons has been renamed. Use slot="primary" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster/cluster.page.html[6, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/cluster/cluster.page.html[34, 24]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-assets/publisher-assets.page.html[2, 12]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-assets/publisher-assets.page.html[8, 12]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-assets/publisher-assets.page.html[26, 12]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-assets/publisher-assets.page.html[32, 12]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-assets/publisher-assets.page.html[38, 12]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-beacon-minor/publisher-beacon-minor.page.html[2, 12]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-beacons/publisher-beacons.page.html[2, 12]: ion-item is now an ion-item element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-clusters/publisher-clusters.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-clusters/publisher-clusters.page.html[9, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-clusters/publisher-clusters.page.html[9, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher-clusters/publisher-clusters.page.html[10, 16]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.html[7, 21]: The end attribute of ion-buttons has been renamed. Use slot="primary" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.html[8, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.html[14, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.html[14, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/publisher/publisher.page.html[15, 16]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+WARNING: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/search/search.page.html[2, 5]: The back button in an ion-toolbar is no longer automatically added.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/search/search.page.html[3, 21]: The end attribute of ion-buttons has been renamed. Use slot="primary" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/search/search.page.html[4, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/stream/stream.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/stream/stream.page.html[5, 21]: The end attribute of ion-buttons has been renamed. Use slot="primary" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/stream/stream.page.html[6, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/stream/stream.page.html[13, 9]: The ion-item requires an ion-label component. It is no longer automatically added.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/stream/stream.page.html[17, 17]: The ion-item requires an ion-label component. It is no longer automatically added.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/stream/stream.page.html[24, 32]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/stream/stream.page.html[31, 32]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/subscriptions/subscriptions.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/subscriptions/subscriptions.page.html[5, 21]: The end attribute of ion-buttons has been renamed. Use slot="primary" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/subscriptions/subscriptions.page.html[6, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/user/user.page.html[2, 5]: The ion-navbar component is now named ion-toolbar.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/user/user.page.html[8, 21]: The end attribute of ion-buttons has been renamed. Use slot="primary" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/user/user.page.html[9, 20]: ion-button is now an ion-button element instead of an Angular directive.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/user/user.page.html[15, 5]: The ion-fab container is no longer fixed by default. Use slot="fixed".
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/user/user.page.html[15, 13]: The bottom attribute of ion-fab has been renamed. Use vertical="bottom" instead.
+ERROR: /users/andredavcev/files/theory/apps/ionic-firefly/src/app/pages/user/user.page.html[16, 16]: ion-fab is now an ion-fab-button element instead of an Angular directive.
+

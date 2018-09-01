@@ -1,16 +1,13 @@
-import {NgModule} from '@angular/core';
-
-import {TranslateModule} from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { PagePublisherClusterLocationsAdd } from '../cluster-locations-add/cluster-locations-add.page';
-import { IonicModule } from 'ionic-angular';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule,
-        IonicModule
+        TranslateModule
     ],
 
     declarations :
@@ -29,7 +26,4 @@ import { IonicModule } from 'ionic-angular';
     ]
 })
 
-export class ModulePagePublisherClusterLocationsAdd
-{
-
-}
+export class ModulePagePublisherClusterLocationsAdd { }

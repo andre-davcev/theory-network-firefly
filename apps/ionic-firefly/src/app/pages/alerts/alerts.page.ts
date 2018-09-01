@@ -1,17 +1,15 @@
-import {Component} from '@angular/core';
-import {ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { tap } from 'rxjs/operators';
+import { Slides, NavController, AlertController, ModalController } from '@ionic/angular';
 
-import {Slides, NavController, ModalController, Modal}          from 'ionic-angular';
-import {AlertController} from 'ionic-angular';
-
-import {Alert}           from '../../models/alert';
-import {Alerts}          from '../../services/alerts';
-import {StatusBar}       from '@ionic-native/status-bar';
 import { PageStream } from '../stream/stream.page';
-import { PageUser } from '../user/user';
 import { PageSearch } from '../search/search.page';
 import { PageSubscriptions } from '../subscriptions/subscriptions.page';
 import { PagePublisherCluster } from '../cluster/cluster.page';
+import { Alert } from '../../models/alert.model';
+import { PageUser } from '../user/user.page';
+import { Alerts } from '../../services/alerts.service';
 
 export enum AlertsModalType
 {
@@ -31,7 +29,7 @@ export enum AlertsModalType
 
 export class PageNotifications
 {
-    @ViewChild(Slides) slides:Slides;
+    @ViewChild(Slides) slides: Slides;
 
     segment:string = 'fired';
 
@@ -39,7 +37,7 @@ export class PageNotifications
 
     public AlertsModalType: any = AlertsModalType;
 
-    public modals: Array<Modal> =
+    public modals: Array<HTMLIonModalElement> =
     [
         null,
         null,
@@ -57,7 +55,7 @@ export class PageNotifications
         PageUser
     ];
 
-    constructor(public alertController:AlertController, public alertsObject:Alerts, private statusBar: StatusBar, private nav: NavController, public modalController: ModalController)
+    constructor(public alertController: AlertController, public alertsObject: Alerts, private nav: NavController, public modalController: ModalController)
     {
         this.alerts = alertsObject.alerts;
 
@@ -66,7 +64,7 @@ export class PageNotifications
 
     ionViewWillEnter()
     {
-        this.statusBar.styleDefault();
+//        this.statusBar.styleDefault();
     }
 
     slideChanged()
@@ -76,14 +74,24 @@ export class PageNotifications
 
     navigate(type: AlertsModalType): void
     {
-        let modal: Modal = this.modals[type];
+        let modal: HTMLIonModalElement = this.modals[type];
 
         if (modal == null)
         {
-            modal = this.modals[type] = this.modalController.create(this.pages[type]);
-        }
+            fromPromise(this.modalController.create(this.pages[type])).pipe
+            (
+                tap((element: HTMLIonModalElement) =>
+                {
+                    modal = this.modals[type] = element;
 
-        modal.present();
+                    modal.present();
+                })
+            )
+        }
+        else
+        {
+          modal.present();
+        }
     }
 
     deleteConfirm()

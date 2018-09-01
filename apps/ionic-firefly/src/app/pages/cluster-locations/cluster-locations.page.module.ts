@@ -1,21 +1,15 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PagePublisherClusterLocations} from './cluster-locations.page';
-import { ModuleMap } from '../../app/components/map/map.module';
-import { PagePublisherClusterLocationsAdd } from '../cluster-locations-add/cluster-locations-add.page';
-import { ModulePagePublisherClusterLocationsAdd } from '../cluster-locations-add/cluster-locations-add.module';
+import { PagePublisherClusterLocations } from './cluster-locations.page';
+import { ModuleComponentMap } from '../../components/map/map.component.module';
 
 @NgModule
 ({
     imports :
     [
-        IonicPageModule.forChild(PagePublisherClusterLocations),
         TranslateModule,
-        ModuleMap
+        ModuleComponentMap
     ],
 
     declarations :
@@ -24,7 +18,4 @@ import { ModulePagePublisherClusterLocationsAdd } from '../cluster-locations-add
     ]
 })
 
-export class ModulePagePublisherClusterLocations
-{
-
-}
+export class ModulePagePublisherClusterLocations { }

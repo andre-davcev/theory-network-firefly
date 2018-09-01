@@ -1,9 +1,9 @@
-import {Component, AfterViewInit} from '@angular/core';
-
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { StateCluster } from '../../state/cluster/cluster.state';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
+
+import { StateCluster } from '../../state/cluster/cluster.state';
 
 @Component
 ({
@@ -15,9 +15,4 @@ import { Select, Store } from '@ngxs/store';
 export class PagePublisherClusterCategories
 {
     @Select(StateCluster.form) form$: Observable<FormGroup>;
-
-    constructor(private store: Store)
-    {
-
-    }
 }

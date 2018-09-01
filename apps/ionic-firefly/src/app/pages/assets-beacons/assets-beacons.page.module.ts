@@ -1,16 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PageAssetsBeacons} from './assets-beacons.page';
+import { PageAssetsBeacons } from './assets-beacons.page';
 
 @NgModule
 ({
     imports :
     [
-        IonicPageModule.forChild(PageAssetsBeacons),
         TranslateModule
     ],
 
@@ -19,8 +15,4 @@ import {PageAssetsBeacons} from './assets-beacons.page';
         PageAssetsBeacons
     ]
 })
-
-export class ModulePageAssetsBeacons
-{
-
-}
+export class ModulePageAssetsBeacons { }

@@ -1,29 +1,16 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {IonicPageModule} from 'ionic-angular';
-
-import {ModuleComponents} from '@theory/firefly/core/components';
-
-import {PageLogin} from './auth';
-
-import {TranslateModule} from '@ngx-translate/core';
-
+import { PageLogin } from './auth.page';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule,
-
-        ModuleComponents,
-
-        IonicPageModule.forChild(PageLogin)
+        TranslateModule
     ],
 
     declarations : [PageLogin]
 })
 
-export class ModulePageLogin
-{
-
-}
+export class ModulePageLogin { }

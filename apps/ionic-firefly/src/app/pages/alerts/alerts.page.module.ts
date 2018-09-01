@@ -1,18 +1,13 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {IonicPageModule} from 'ionic-angular';
-
-import {TranslateModule} from '@ngx-translate/core';
-
-import {PageNotifications} from './alerts';
-import { PagePublisherCluster } from '../cluster/cluster.page';
+import { PageNotifications } from './alerts.page';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule,
-        IonicPageModule.forChild(PageNotifications)
+        TranslateModule
     ],
 
     declarations :
@@ -21,7 +16,4 @@ import { PagePublisherCluster } from '../cluster/cluster.page';
     ]
 })
 
-export class ModulePageNotifications
-{
-
-}
+export class ModulePageNotifications { }

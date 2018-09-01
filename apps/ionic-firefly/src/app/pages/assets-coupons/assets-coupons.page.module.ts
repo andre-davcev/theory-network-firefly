@@ -1,16 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PageAssetsCoupons} from './assets-coupons.page';
+import { PageAssetsCoupons } from './assets-coupons.page';
 
 @NgModule
 ({
     imports :
     [
-        IonicPageModule.forChild(PageAssetsCoupons),
         TranslateModule
     ],
 
@@ -20,7 +16,4 @@ import {PageAssetsCoupons} from './assets-coupons.page';
     ]
 })
 
-export class ModulePageAssetsCoupons
-{
-
-}
+export class ModulePageAssetsCoupons { }

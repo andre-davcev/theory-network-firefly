@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { ViewController } from '@ionic/core';
+
 import { PlaceSearch, PlaceDetails } from '../../state/places/places.actions';
 import { StatePlaces } from '../../state/places/places.state';
-import { Observable } from 'rxjs/Observable';
+
 
 @Component
 ({
@@ -38,7 +40,7 @@ export class PagePublisherClusterLocationsAdd
     public dismissModal(): void
     {
         this.store.dispatch(new PlaceSearch(''));
-        this.viewController.dismiss();
+//        this.viewController.dismiss();
     }
 
     public clickedSearch(): void
