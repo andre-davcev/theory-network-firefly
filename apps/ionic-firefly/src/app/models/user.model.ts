@@ -1,5 +1,7 @@
-import {Model} from './model';
+
 import * as firebase from 'firebase/app';
+
+import { Model } from './model';
 
 export interface User extends Model
 {

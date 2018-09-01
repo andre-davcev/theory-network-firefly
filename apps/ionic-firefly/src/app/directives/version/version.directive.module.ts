@@ -6,4 +6,4 @@ import { DirectiveVersion } from './version.directive';
     declarations: [DirectiveVersion],
     exports: [DirectiveVersion]
 })
-export class ModuleVersion { }
+export class ModuleDirectiveVersion { }

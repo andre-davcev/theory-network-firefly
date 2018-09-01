@@ -1,6 +1,6 @@
 import * as firebase from 'firebase/app';
 
-import {Model} from './model';
+import { Model } from './model';
 
 export interface Cluster extends Model
 {
