@@ -1,26 +1,30 @@
-$cpt-item-description-title-font-color:                 $app-color-light-text;
-$cpt-item-description-title-font-size:                  17px;
-$cpt-item-description-title-line-height:                20px;
-$cpt-item-description-title-letter-spacing:             -0.4px;
-
-$cpt-item-description-desc-font-color:                  $app-color-grey-lighter-font;
-$cpt-item-description-desc-font-size:                   1.5rem;
-$cpt-item-description-desc-line-height:                 1.2em;
-$cpt-item-description-desc-letter-spacing:              -0.2px;
-
-$cpt-item-description-image-window-height:              155px;
-$cpt-item-description-image-border-radius:              5px;
-$cpt-item-description-image-color-background:           $app-color-grey-middle;
-$cpt-item-description-image-placeholder-font-color:     white;
-$cpt-item-description-image-placeholder-font-size:      2.0rem;
+@import "variables";
 
 :host
 {
+    --cpt-title-font-color:                 $app-color-light-text;
+    --cpt-title-font-size:                  17px;
+    --cpt-title-line-height:                20px;
+    --cpt-title-letter-spacing:             -0.4px;
+
+    --cpt-description-font-color:           $app-color-grey-lighter-font;
+    --cpt-description-font-size:            15px;
+    --cpt-description-line-height:          1.2em;
+    --cpt-description-letter-spacing:       -0.2px;
+
+    --cpt-image-window-height:              155px;
+    --cpt-image-border-radius:              5px;
+    --cpt-image-color-background:           $app-color-grey-middle;
+    --cpt-image-placeholder-font-color:     white;
+    --cpt-image-placeholder-font-size:      20px;
+
+    --cpt-gutter:                           $app-gutter;
+
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: $app-gutter;
+    padding: var(--cpt-gutter);
     padding-top: 0;
 
     .input
@@ -53,11 +57,11 @@ $cpt-item-description-image-placeholder-font-size:      2.0rem;
 
     .cpt-title
     {
-        color: $cpt-item-description-title-font-color;
-        font-size: $cpt-item-description-title-font-size;
+        color: var(--cpt-title-font-color);
+        font-size: var(--cpt-title-font-size);
         font-weight: normal;
-        line-height: $cpt-item-description-title-line-height;
-        letter-spacing: $cpt-item-description-title-letter-spacing;
+        line-height: var(--cpt-title-line-height);
+        letter-spacing: var(--cpt-title-letter-spacing);
         margin-bottom: 8px;
     }
 
@@ -65,17 +69,17 @@ $cpt-item-description-image-placeholder-font-size:      2.0rem;
     .cpt-image-container
     {
         width: 100%;
-        border-radius: $cpt-item-description-image-border-radius;
-        background-color: $cpt-item-description-image-color-background;
+        border-radius: var(--cpt-image-border-radius);
+        background-color: var(--cpt-image-color-background);
     }
 
     .cpt-image-container
     {
         position: relative;
         display: block;
-        height: $cpt-item-description-image-window-height;
-        color: $cpt-item-description-image-placeholder-font-color;
-        font-size: $cpt-item-description-image-placeholder-font-size;
+        height: var(--cpt-image-window-height);
+        color: var(--cpt-image-placeholder-font-color);
+        font-size: var(--cpt-image-placeholder-font-size);
         font-weight: 600;
         text-align: center;
 
@@ -92,10 +96,10 @@ $cpt-item-description-image-placeholder-font-size:      2.0rem;
 
     .cpt-description
     {
-        color: $cpt-item-description-desc-font-color;
-        font-size: $cpt-item-description-desc-font-size;
-        line-height: $cpt-item-description-desc-line-height;
-        letter-spacing: $cpt-item-description-desc-letter-spacing;
+        color: var(--cpt-description-font-color);
+        font-size: var(--cpt-description-font-size);
+        line-height: var(--cpt-description-line-height);
+        letter-spacing: var(--cpt-description-letter-spacing);
 
         &.cpt-empty
         {
@@ -105,6 +109,6 @@ $cpt-item-description-image-placeholder-font-size:      2.0rem;
 
     p.cpt-description
     {
-        margin-bottom: $app-gutter;
+        margin-bottom: --cpt-gutter;
     }
 }

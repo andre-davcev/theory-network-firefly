@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComponentItemHeader } from './item-header.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { ComponentItemHeader } from './item-header.component';
 
 @NgModule
 ({
@@ -10,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         CommonModule,
         ReactiveFormsModule
     ],
-    
+
     declarations : [ComponentItemHeader],
     exports      : [ComponentItemHeader]
 })

@@ -1,8 +1,9 @@
 
+@import "variables";
 
 :host
 {
-    --cpt-height:             5.7rem;
+    --cpt-height:             57px;
     --cpt-width:              var(--cpt-height);
 
     --cpt-color-primary:      $app-color-primary;
