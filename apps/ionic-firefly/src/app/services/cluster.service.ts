@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { Cluster } from '../models/cluster.model';
 import { switchMap, take, filter, map } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
+
+import { Cluster } from '../models/cluster.model';
 
 @Injectable()
 export class ClusterService
