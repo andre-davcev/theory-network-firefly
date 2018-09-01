@@ -1,20 +1,15 @@
-import {NgModule} from '@angular/core';
-
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PagePublisher}         from './publisher';
-import {PagePublisherBeacons}  from '../publisher.beacons/publisher.beacons';
-import { ModuleList } from '../../app/components/list/list.module';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { ModuleComponentList } from '../../components/list/list.component.module';
+import { PagePublisher } from './publisher.page';
+import { PagePublisherBeacons } from '../publisher-beacons/publisher-beacons.page';
 
 @NgModule
 ({
     imports :
     [
         TranslateModule,
-        IonicPageModule.forChild(PagePublisher),
-        ModuleList
+        ModuleComponentList
     ],
 
     declarations :

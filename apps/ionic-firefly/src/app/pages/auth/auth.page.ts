@@ -1,22 +1,15 @@
-import {Component} from '@angular/core';
-
-import {NavController} from 'ionic-angular';
-import {Platform}      from 'ionic-angular';
-import {IonicPage}     from 'ionic-angular';
-
-import {Observable} from 'rxjs/Observable';
-import {filter, switchMap, take} from 'rxjs/operators';
-
-import {AuthProvider}  from '../../enums/auth.provider';
-
-import { timer } from 'rxjs/observable/timer';
-import { forkJoin } from 'rxjs/observable/forkJoin';
-import { of } from 'rxjs/observable/of';
+import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
+import { Observable, forkJoin, timer, of } from 'rxjs';
+import { filter, switchMap, take } from 'rxjs/operators';
+import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
 import { StateUser } from '../../state/user/user.state';
 import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail } from '../../state/user/user.actions';
+import { AuthProvider } from '../../enums/auth-provider.enum';
 
-@IonicPage()
+
 @Component
 ({
     selector    : 'app-page-auth',
@@ -33,7 +26,7 @@ export class PageLogin
 
     public ready: boolean = false;
 
-    constructor(private nav:NavController, private platform:Platform, private store: Store)
+    constructor(private nav: NavController, private store: Store, private router: Router)
     {
 
     }
@@ -48,7 +41,7 @@ export class PageLogin
 
         subscribe((userFound: boolean) =>
         {
-            this.nav.push('PageNotifications');
+            this.router.navigate(['/notifications']);
         });
 
         forkJoin

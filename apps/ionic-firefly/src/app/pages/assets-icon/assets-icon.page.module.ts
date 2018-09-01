@@ -1,18 +1,14 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PageAssetsIcon} from './assets-icon.page';
-import { ModuleItemHeader } from '../../app/components/item-header/item-header.module';
+import { PageAssetsIcon } from './assets-icon.page';
+import { ModuleComponentItemHeader } from '../../components/item-header/item-header.component.module';
 
 @NgModule
 ({
     imports :
     [
-        IonicPageModule.forChild(PageAssetsIcon),
-        ModuleItemHeader,
+        ModuleComponentItemHeader,
         TranslateModule
     ],
 
@@ -22,7 +18,4 @@ import { ModuleItemHeader } from '../../app/components/item-header/item-header.m
     ]
 })
 
-export class ModulePageAssetsIcon
-{
-
-}
+export class ModulePageAssetsIcon { }

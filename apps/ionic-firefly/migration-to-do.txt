@@ -1,8 +1,13 @@
 ToDo:
 - pages folder
+- implement capacitor status bar
+- setup routing
+- replace this.viewController.dismiss()
+- pages scss
 - app.module.old.ts
 - global sass variables & styles
 - angular 4 to 6
+- npx tslint -c ionic-migration.json -p tsconfig.json > migration.txt
 - ionic 3 to ionic 4
 - change component styles to remove variables and provide overrides in global sass files
 - move libs to local path or xplat features?

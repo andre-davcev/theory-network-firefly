@@ -61,6 +61,8 @@ import { ModulePagePublisher } from '../pages/publisher/publisher.module';
 import { ModulePageSubscriptions } from '../pages/subscriptions/subscriptions.page.module';
 import { ModulePageUser } from '../pages/user/user.module';
 import { ModulePagePublisherCluster } from '../pages/cluster/cluster.page.module';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 export function HttpLoaderFactory(http: HttpClient)
 {
@@ -92,6 +94,9 @@ export class AppErrorHandler implements ErrorHandler
 
         AngularFireModule.initializeApp(environment.apis.firebase),
         IonicStorageModule.forRoot(),
+
+        AngularFireAuthModule,
+        AngularFirestoreModule,
 
         IonicModule.forRoot(ComponentApp,
         {

@@ -1,8 +1,5 @@
-import {NgModule} from '@angular/core';
-
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import {PageAssetsIcons} from './assets-icons.page';
 
@@ -10,7 +7,6 @@ import {PageAssetsIcons} from './assets-icons.page';
 ({
     imports :
     [
-        IonicPageModule.forChild(PageAssetsIcons),
         TranslateModule
     ],
 
@@ -20,7 +16,4 @@ import {PageAssetsIcons} from './assets-icons.page';
     ]
 })
 
-export class ModulePageAssetsIcons
-{
-
-}
+export class ModulePageAssetsIcons { }

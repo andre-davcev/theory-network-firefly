@@ -1,8 +1,7 @@
-import {Component} from '@angular/core';
-
-import {NavController, ActionSheet, ActionSheetController, ViewController} from 'ionic-angular';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { StatusBar } from '@ionic-native/status-bar';
+import { NavController, ActionSheetController } from '@ionic/angular';
+import { ViewController } from '@ionic/core';
 
 @Component
 ({
@@ -15,14 +14,14 @@ export class PagePublisher
 {
     public segment:string = 'clusters';
 
-    constructor(private nav:NavController, private actionSheetController: ActionSheetController, private translate: TranslateService, private statusBar: StatusBar, private viewController: ViewController)
+    constructor(private nav: NavController, private actionSheetController: ActionSheetController, private translate: TranslateService, private viewController: ViewController)
     {
 
     }
 
     ionViewWillEnter()
     {
-        this.statusBar.styleLightContent();
+//        this.statusBar.styleLightContent();
     }
 
     public add()

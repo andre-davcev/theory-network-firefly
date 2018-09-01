@@ -1,16 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PageAssetsEvents} from './assets-events.page';
+import { PageAssetsEvents } from './assets-events.page';
 
 @NgModule
 ({
     imports :
     [
-        IonicPageModule.forChild(PageAssetsEvents),
         TranslateModule
     ],
 
@@ -19,8 +15,4 @@ import {PageAssetsEvents} from './assets-events.page';
         PageAssetsEvents
     ]
 })
-
-export class ModulePageAssetsEvents
-{
-
-}
+export class ModulePageAssetsEvents { }

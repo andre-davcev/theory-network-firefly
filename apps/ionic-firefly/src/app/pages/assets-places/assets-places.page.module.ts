@@ -1,16 +1,12 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PageAssetsPlaces} from './assets-places.page';
+import { PageAssetsPlaces } from './assets-places.page';
 
 @NgModule
 ({
     imports :
     [
-        IonicPageModule.forChild(PageAssetsPlaces),
         TranslateModule
     ],
 
@@ -20,7 +16,4 @@ import {PageAssetsPlaces} from './assets-places.page';
     ]
 })
 
-export class ModulePageAssetsPlaces
-{
-
-}
+export class ModulePageAssetsPlaces { }
