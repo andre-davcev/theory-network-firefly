@@ -15,4 +15,4 @@ import { ComponentItemHeader } from './item-header.component';
     declarations : [ComponentItemHeader],
     exports      : [ComponentItemHeader]
 })
-export class ModuleItemHeader { }
+export class ModuleComponentItemHeader { }

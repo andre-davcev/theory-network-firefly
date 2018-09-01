@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { ComponentItemMap } from './item-map.component';
 
 @NgModule
@@ -14,4 +15,4 @@ import { ComponentItemMap } from './item-map.component';
     declarations : [ComponentItemMap],
     exports      : [ComponentItemMap]
 })
-export class ModuleItemMap { }
+export class ModuleComponentItemMap { }

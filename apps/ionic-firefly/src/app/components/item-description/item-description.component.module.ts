@@ -19,4 +19,4 @@ import { ComponentItemDescription } from './item-description.component';
     declarations : [ComponentItemDescription],
     exports      : [ComponentItemDescription]
 })
-export class ModuleItemDescription { }
+export class ModuleComponentItemDescription { }

@@ -1,26 +1,30 @@
-$cpt-item-map-font-color:                 $app-color-light-text;
-$cpt-item-map-font-size:                 17px;
-$cpt-item-map-line-height:                20px;
-
-$cpt-item-map-window-height:              155px;
-$cpt-item-map-border-radius:              5px;
+@import "variables";
 
 :host
 {
+    --cpt-font-color:           $app-color-light-text;
+    --cpt-font-size:            17px;
+    --cpt-line-height:          20px;
+
+    --cpt-window-height:        155px;
+    --cpt-border-radius:        5px;
+
+    --cpt-background-color:    black;
+
     .cpt-title
     {
-        color: $cpt-item-map-font-color;
-        font-size: $cpt-item-map-font-size;
+        color: var(--cpt-font-color);
+        font-size: var(--cpt-font-size);
         font-weight: normal;
-        line-height: $cpt-item-map-line-height;
+        line-height: var(--cpt-line-height);
         margin-bottom: 8px;
     }
 
     .cpt-map-window
     {
         width: 100%;
-        height: $cpt-item-map-window-height;
-        border-radius: $cpt-item-map-border-radius;
+        height: var(--cpt-window-height);
+        border-radius: var(--cpt-border-radius);
         background-color: black;
     }
 }
