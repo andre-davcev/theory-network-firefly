@@ -1,6 +1,11 @@
+@import "variables";
+
 :host
 {
     --cpt-icon-size: 32px;
+    --cpt-font-family: $app-font-firefly;
+    --cpt-font-size: $app-font-firefly-size;
+    --cpt-line-height: 1;
 
     position: relative;
     width: var(--cpt-icon-size);
@@ -8,7 +13,7 @@
     display: inline-block;
     opacity: 0;
 
-    &.tn-visible
+    &.cpt-visible
     {
         opacity: 1;
     }
@@ -22,11 +27,11 @@
         font-variant: normal;
         text-transform: none;
         text-rendering: auto;
-        line-height: 1;
+        line-height: var(--cpt-line-height);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
 
-        font-family: $app-font-firefly;
-        font-size: $app-font-firefly-size;
+        font-family: var(--cpt-font-family);
+        font-size: var(--cpt-font-size);
     }
 }

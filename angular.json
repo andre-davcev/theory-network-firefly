@@ -3,177 +3,6 @@
   "version": 1,
   "newProjectRoot": "",
   "projects": {
-    "firefly-mobile": {
-      "root": "apps/firefly/mobile/",
-      "sourceRoot": "apps/firefly/mobile/src",
-      "projectType": "application",
-      "prefix": "app",
-      "schematics": {
-        "@ionic/schematics-angular:component": {
-          "styleext": "scss"
-        },
-        "@ionic/schematics-angular:page": {
-          "styleext": "scss"
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/firefly/mobile",
-            "index": "apps/firefly/mobile/src/index.html",
-            "main": "apps/firefly/mobile/src/main.ts",
-            "polyfills": "apps/firefly/mobile/src/polyfills.ts",
-            "tsConfig": "apps/firefly/mobile/src/tsconfig.app.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "apps/firefly/mobile/src/assets",
-                "output": "assets"
-              },
-              {
-                "glob": "**/*.svg",
-                "input": "node_modules/@ionic/angular/dist/ionic/svg",
-                "output": "svg"
-              }
-            ],
-            "styles": [
-              {
-                "input": "apps/firefly/mobile/src/theme/variables.scss"
-              },
-              {
-                "input": "apps/firefly/mobile/src/global.scss"
-              }
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/firefly/mobile/src/environments/environment.ts",
-                  "with": "apps/firefly/mobile/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "firefly-mobile:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "firefly-mobile:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "firefly-mobile:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "apps/firefly/mobile/src/test.ts",
-            "polyfills": "apps/firefly/mobile/src/polyfills.ts",
-            "tsConfig": "apps/firefly/mobile/src/tsconfig.spec.json",
-            "karmaConfig": "apps/firefly/mobile/src/karma.conf.js",
-            "styles": [
-              "apps/firefly/mobile/src/styles.css"
-            ],
-            "scripts": [],
-            "assets": [
-              {
-                "glob": "favicon.ico",
-                "input": "apps/firefly/mobile/src/",
-                "output": "/"
-              },
-              {
-                "glob": "**/*",
-                "input": "apps/firefly/mobile/src/assets",
-                "output": "/assets"
-              }
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/firefly/mobile/src/tsconfig.app.json",
-              "apps/firefly/mobile/src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "ionic-cordova-build": {
-          "builder": "@ionic/ng-toolkit:cordova-build",
-          "options": {
-            "browserTarget": "firefly-mobile:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "firefly-mobile:build:production"
-            }
-          }
-        },
-        "ionic-cordova-serve": {
-          "builder": "@ionic/ng-toolkit:cordova-serve",
-          "options": {
-            "cordovaBuildTarget": "firefly-mobile:ionic-cordova-build",
-            "devServerTarget": "firefly-mobile:serve"
-          },
-          "configurations": {
-            "production": {
-              "cordovaBuildTarget": "firefly-mobile:ionic-cordova-build:production",
-              "devServerTarget": "firefly-mobile:serve:production"
-            }
-          }
-        }
-      }
-    },
-    "firefly-mobile-e2e": {
-      "root": "apps/firefly/mobile/e2e/",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "apps/firefly/mobile/e2e/protractor.conf.js",
-            "devServerTarget": "firefly-mobile:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "firefly-mobile:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "apps/firefly/mobile/e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "libs": {
       "root": "libs",
       "sourceRoot": "libs",
@@ -238,6 +67,18 @@
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/theme/styles"
+              ]
+            }
+          }
         }
       }
     }
