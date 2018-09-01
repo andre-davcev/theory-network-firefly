@@ -1,25 +1,11 @@
-Discuss:
-- nx nrwl
-- xplat
-- nested packag.json
-- xplat folder structure / architecture
-- capacitor / cordova
-- merge to develop?
-
 ToDo:
-- fix compile errors
-- move libs to local path
-- implement xplat features?
-- sass cleanup
+- pages/state folders
+- app.module.old.ts
+- global sass variables & styles
+- change component styles to remove variables and provide overrides in global sass files
+- angular 4 to 6
+- ionic 3 to ionic 4
+- move libs to local path or xplat features?
 - ionic color scheme
 - shadow dom
-- angular migration from 4 to 6
-- ionic push/pop to angular routing
-- ionic migration from 3 to 4
-- https://beta.ionicframework.com/docs/building/migration/
-- https://github.com/ionic-team/v4-migration-tslint
-- filename normalization
-- local import paths to @theory/feature paths
-- firebase messaging config file copy
-- do we need config.xml?
-- Run on devices ios / android
+- Test on devices ios / android
