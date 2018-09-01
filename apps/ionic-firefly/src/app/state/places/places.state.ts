@@ -1,12 +1,12 @@
-import {State, Action, Store, StateContext, Selector} from '@ngxs/store';
-import { PlaceSearch } from './places.actions';
-
+import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { StateLocation } from '../location/location.state';
 import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
+
+import { StateLocation } from '../location/location.state';
 import { environment } from '../../../environments/environment';
 import { FoursquareResponseVenueSearch } from '../../interfaces/foursquare/foursquare-response-venue-search.interface';
+import { PlaceSearch } from './places.actions';
 
 export interface StatePlacesModel
 {

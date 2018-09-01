@@ -1,6 +1,6 @@
-import {State, Action, Store, StateContext, Selector} from '@ngxs/store';
-import { DeviceInitialize } from './device.actions';
+import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Platform } from '@ionic/angular';
+import { DeviceInitialize } from './device.actions';
 
 export interface StateDeviceModel
 {

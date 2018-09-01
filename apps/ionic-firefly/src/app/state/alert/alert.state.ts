@@ -1,10 +1,11 @@
-import {State, Action, Store, StateContext, Selector} from '@ngxs/store';
-import { AlertsGet } from './alert.actions';
+import * as firebase from 'firebase/app';
+
+import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
-import { StateUserModel } from '../user/user.state';
 
-import * as firebase from 'firebase/app';
+import { StateUserModel } from '../user/user.state';
+import { AlertsGet } from './alert.actions';
 import { Alert } from '../../models/alert.model';
 
 export interface StateAlertModel
@@ -46,7 +47,7 @@ export class StateAlerts
             {
                 const filtered: Array<Alert> = alerts.
                 filter((alert: Alert) => alert.dateCreated != null).
-                sort((a: Alert, b: Alert) => (b.dateCreated as Date).getTime() - (a.dateCreated as Date).getTime());
+                sort((a: Alert, b: Alert) => b.dateCreated.toDate().getTime() - a.dateCreated.toDate().getTime());
 
                 const entities:{[id: number]: Alert} = {};
 

@@ -1,13 +1,14 @@
 import { FormGroup } from '@angular/forms';
-import { Icon } from '../../models/icon.model';
 import { State, Selector, Select, Action, StateContext } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { StateUser } from '../user/user.state';
-import { GetIcons, SetIconId, SetIcon } from './icons.actions';
 import { map, switchMap } from 'rxjs/operators';
+
 import { ServiceIcons } from '../../services/icon.service';
+import { GetIcons, SetIconId, SetIcon } from './icons.actions';
 import { FormIcon } from '../../forms/icon.form';
+import { StateUser } from '../user/user.state';
 import { User } from '../../models/user.model';
+import { Icon } from '../../models/icon.model';
 
 export interface StateIconsModel
 {
