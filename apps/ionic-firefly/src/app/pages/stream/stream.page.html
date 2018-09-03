@@ -1,16 +1,16 @@
 <ion-header>
-    <ion-navbar dark>
+    <ion-nav dark>
         <ion-title>{{'page.stream.title' | translate}}</ion-title>
 
         <ion-buttons end>
             <button ion-button (click)="dismissModal()">{{'general.done' | translate}}</button>
         </ion-buttons>
-    </ion-navbar>
+    </ion-nav>
 </ion-header>
 
 <ion-content>
     <ion-list class="ff-list">
-        <ion-item no-lines class="ff-primary-background" *ngFor="let subscription of subscriptions" (click)="go()">
+        <ion-item no-lines class="ff-primary-background" *ngFor="let subscription of subscriptions">
             <ion-card>
                 <img [src]="subscription.photo">
 

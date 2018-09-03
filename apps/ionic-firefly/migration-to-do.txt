@@ -1,7 +1,8 @@
 ToDo:
-- pages folder
-- implement capacitor status bar
+- re-review pages
 - setup routing
+- replace this.router.navigate with routerLink
+- implement capacitor status bar
 - replace this.viewController.dismiss()
 - pages scss
 - app.module.old.ts

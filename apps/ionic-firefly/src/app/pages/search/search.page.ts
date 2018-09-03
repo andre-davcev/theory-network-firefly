@@ -1,6 +1,4 @@
-import {Component} from '@angular/core';
-import {ViewController} from 'ionic-angular';
-import {StatusBar} from '@ionic-native/status-bar';
+import { Component } from '@angular/core';
 
 @Component
 ({
@@ -11,18 +9,18 @@ import {StatusBar} from '@ionic-native/status-bar';
 
 export class PageSearch
 {
-    constructor(private statusBar: StatusBar, private viewController: ViewController)
+    constructor()
     {
 
     }
 
     ionViewWillEnter()
     {
-        this.statusBar.styleDefault();
+//        this.statusBar.styleDefault();
     }
 
     public dismissModal(): void
     {
-        this.viewController.dismiss();
+//        this.viewController.dismiss();
     }
 }

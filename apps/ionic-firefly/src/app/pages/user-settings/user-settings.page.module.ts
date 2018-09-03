@@ -1,16 +1,15 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {IonicPageModule} from 'ionic-angular';
-
-import {PageUserSettings} from './user.settings';
+import { ModulePage } from '../page.module';
+import { PageUserSettings } from './user-settings.page';
 
 @NgModule
 ({
-    declarations : [PageUserSettings],
-    imports      : [IonicPageModule.forChild(PageUserSettings)]
+    imports: [ModulePage],
+    declarations : [PageUserSettings]
 })
 
 export class ModulePageUserSettings
-{ 
+{
 
 }

@@ -1,10 +1,8 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import {NavController} from 'ionic-angular';
-
-import {Cluster} from '../../models/cluster';
-import {Temp}    from '../../services/temp';
-import { StatusBar } from '@ionic-native/status-bar';
+import { Cluster } from '../../models/cluster.model';
+import { Temp } from '../../services/temp.service';
 
 @Component
 ({
@@ -17,16 +15,14 @@ export class PagePublisherClusters
 {
     public clusters:Array<Cluster>;
 
-    constructor(private nav: NavController, private statusBar: StatusBar, temp:Temp)
+    constructor(private router: Router, temp: Temp)
     {
         this.clusters = temp.subscriptions;
-
-        console.log(this.clusters);
     }
 
     ionViewWillEnter()
     {
-        this.statusBar.styleLightContent();
+//        this.statusBar.styleLightContent();
     }
 
     public clicked(cluster: Cluster)
@@ -41,6 +37,6 @@ export class PagePublisherClusters
 
     public add(): void
     {
-        this.nav.push('PagePublisherCluster');
+        this.router.navigate(['/publisher/cluster']);
     }
 }

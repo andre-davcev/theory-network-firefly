@@ -1,8 +1,7 @@
-import {Component} from '@angular/core';
-import {OnInit}    from '@angular/core';
+import { Component } from '@angular/core';
 
-import {Beacon}         from '../../models/beacon';
-import {ServiceBeacons} from '../../services/beacons';
+import { Beacon } from '../../models/beacon.model';
+
 
 @Component
 ({
@@ -11,9 +10,8 @@ import {ServiceBeacons} from '../../services/beacons';
     styleUrls   : ['./publisher-beacons.page.scss']
 })
 
-export class PagePublisherBeacons implements OnInit
+export class PagePublisherBeacons
 {
-
     public beacons:Array<Beacon> =
     [
 /*
@@ -28,13 +26,5 @@ export class PagePublisherBeacons implements OnInit
 */
     ];
 
-    constructor(public beaconsService:ServiceBeacons)
-    {
-
-    }
-
-    ngOnInit()
-    {
-        this.beaconsService.beaconsGet();
-    }
+    constructor() { }
 }

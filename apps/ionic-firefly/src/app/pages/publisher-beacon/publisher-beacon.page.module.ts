@@ -1,23 +1,16 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PagePublisherBeacon} from './publisher.beacon';
+import { PagePublisherBeacon } from './publisher.beacon.page';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule,
-        IonicPageModule.forChild(PagePublisherBeacon)
+        TranslateModule
     ],
 
     declarations : [PagePublisherBeacon]
 })
 
-export class ModulePagePublisherBeacon
-{ 
-
-}
+export class ModulePagePublisherBeacon { }

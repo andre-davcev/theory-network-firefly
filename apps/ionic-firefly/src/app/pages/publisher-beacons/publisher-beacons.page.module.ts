@@ -1,12 +1,8 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PagePublisherBeacons} from './publisher.beacons';
-
-import {ReducerBeaconsPublished} from '../../redux/beacons-published/reducer';
+import { PagePublisherBeacons } from './publisher-beacons.page';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule
 ({
@@ -14,7 +10,7 @@ import {ReducerBeaconsPublished} from '../../redux/beacons-published/reducer';
     imports :
     [
         TranslateModule,
-        IonicPageModule.forChild(PagePublisherBeacons)
+        IonicModule
     ],
 
     declarations :

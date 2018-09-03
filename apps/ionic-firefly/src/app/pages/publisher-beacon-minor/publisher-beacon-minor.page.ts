@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {Beacon} from '../../models/beacon';
+import { Beacon } from '../../models/beacon.model';
 
 @Component
 ({

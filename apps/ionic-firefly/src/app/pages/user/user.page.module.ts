@@ -1,19 +1,15 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {IonicPageModule} from 'ionic-angular';
-
-import {PageUser} from './user';
-
-import {PageUserProfile}  from '../user.profile/user.profile';
-import { TranslateModule } from '@ngx-translate/core';
-import { PagePublisherAssets } from '../publisher-assets/publisher-assets';
+import { ModulePage } from '../page.module';
+import { PageUser } from './user.page';
+import { PageUserProfile } from '../user-profile/user-profile.page';
+import { PagePublisherAssets } from '../publisher-assets/publisher-assets.page';
 
 @NgModule
 ({
     imports :
     [
-        IonicPageModule.forChild(PageUser),
-        TranslateModule
+        ModulePage
     ],
 
     declarations :

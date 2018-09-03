@@ -1,20 +1,15 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-import {TranslateModule} from '@ngx-translate/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {PagePublisherClusters} from './publisher.clusters';
-import { ComponentList } from '../../app/components/list/list.component';
-import { ModuleList } from '../../app/components/list/list.module';
+import { ModuleComponentList } from '../../components/list/list.component.module';
+import { PagePublisherClusters } from './publisher-clusters.page';
 
 @NgModule
 ({
     imports :
     [
         TranslateModule,
-        IonicPageModule.forChild(PagePublisherClusters),
-        ModuleList
+        ModuleComponentList
     ],
 
     declarations : [PagePublisherClusters]
