@@ -5,9 +5,15 @@ import { PageUserProfile } from './user-profile.page';
 
 @NgModule
 ({
-    imports : [ModulePage],
+    imports :
+    [
+        ModulePage
+    ],
 
-    declarations : [PageUserProfile]
+    declarations :
+    [
+        PageUserProfile
+    ]
 })
 
 export class ModulePageUserProfile

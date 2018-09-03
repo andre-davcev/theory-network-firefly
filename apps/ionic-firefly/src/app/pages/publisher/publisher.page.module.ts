@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+
 import { ModuleComponentList } from '../../components/list/list.component.module';
 import { PagePublisher } from './publisher.page';
 import { PagePublisherBeacons } from '../publisher-beacons/publisher-beacons.page';
+import { ModulePage } from '../page.module';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule,
+        ModulePage,
         ModuleComponentList
     ],
 

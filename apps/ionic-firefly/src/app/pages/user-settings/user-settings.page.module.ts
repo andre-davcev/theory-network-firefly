@@ -5,8 +5,15 @@ import { PageUserSettings } from './user-settings.page';
 
 @NgModule
 ({
-    imports: [ModulePage],
-    declarations : [PageUserSettings]
+    imports :
+    [
+        ModulePage
+    ],
+
+    declarations :
+    [
+        PageUserSettings
+    ]
 })
 
 export class ModulePageUserSettings

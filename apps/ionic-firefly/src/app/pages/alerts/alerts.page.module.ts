@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { PageNotifications } from './alerts.page';
+import { ModulePage } from '../page.module';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule
+        ModulePage
     ],
 
     declarations :

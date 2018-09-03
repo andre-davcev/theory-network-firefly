@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { PagePublisherBeacons } from './publisher-beacons.page';
-import { IonicModule } from '@ionic/angular';
+import { ModulePage } from '../page.module';
 
 @NgModule
 ({
 
     imports :
     [
-        TranslateModule,
-        IonicModule
+        ModulePage
     ],
 
     declarations :

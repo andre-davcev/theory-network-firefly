@@ -1,26 +1,16 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { PagePublisherClusterLocationsAdd } from '../cluster-locations-add/cluster-locations-add.page';
+import { ModulePage } from '../page.module';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule
+        ModulePage
     ],
 
     declarations :
-    [
-        PagePublisherClusterLocationsAdd
-    ],
-
-    exports :
-    [
-        PagePublisherClusterLocationsAdd
-    ],
-
-    entryComponents :
     [
         PagePublisherClusterLocationsAdd
     ]
