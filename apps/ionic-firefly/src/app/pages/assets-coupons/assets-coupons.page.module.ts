@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { PageAssetsCoupons } from './assets-coupons.page';
+import { ModulePage } from '../page.module';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule
+        ModulePage
     ],
 
     declarations :

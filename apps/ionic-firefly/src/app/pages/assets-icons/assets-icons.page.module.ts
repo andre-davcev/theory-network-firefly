@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 
-import {PageAssetsIcons} from './assets-icons.page';
+import { PageAssetsIcons } from './assets-icons.page';
+import { ModulePage } from '../page.module';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule
+        ModulePage
     ],
 
     declarations :
