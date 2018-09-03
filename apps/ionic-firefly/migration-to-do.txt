@@ -1,11 +1,15 @@
 ToDo:
-- re-review pages
 - setup routing
 - replace this.router.navigate with routerLink
+- target ion component selectors (ion-tabs instead of .tabbar)
+- pages scss
+- move material.scss in lib to mix in
+- move global scss to mixins
+- global scss
 - implement capacitor status bar
 - replace this.viewController.dismiss()
-- pages scss
 - app.module.old.ts
+- variables.old.scss
 - global sass variables & styles
 - angular 4 to 6
 - npx tslint -c ionic-migration.json -p tsconfig.json > migration.txt
