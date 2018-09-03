@@ -1,17 +1,15 @@
-import {NgModule} from '@angular/core';
-
-import {IonicPageModule} from 'ionic-angular';
-
-import {TranslateModule} from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { PageSubscriptions } from './subscriptions.page';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule
 ({
     imports :
     [
         TranslateModule,
-        IonicPageModule.forChild(PageSubscriptions)
+        IonicModule
     ],
 
     declarations :

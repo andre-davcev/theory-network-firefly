@@ -1,14 +1,10 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
 
-import {ViewController} from 'ionic-angular';
-
-
-import {Store} from '@ngxs/store';
-import { Cluster } from '../../models/cluster';
 import { SetCluster } from '../../state/cluster/cluster.actions';
-import { StatusBar } from '@ionic-native/status-bar';
-import { Subscription } from '../../models/subscription';
-import { Temp } from '../../services/temp';
+import { Subscription } from '../../models/subscription.model';
+import { Temp } from '../../services/temp.service';
+import { Cluster } from '../../models/cluster.model';
 
 @Component
 ({
@@ -21,7 +17,7 @@ export class PageStream
 {
     public subscriptions:Array<Subscription> = [];
 
-    constructor(private store:Store, private statusBar: StatusBar, private viewController: ViewController, temp: Temp)
+    constructor(private store:Store, temp: Temp)
     {
         const cluster: Cluster =
         {
@@ -37,7 +33,7 @@ export class PageStream
 
     public ionViewWillEnter(): void
     {
-        this.statusBar.styleLightContent();
+//        this.statusBar.styleLightContent();
     }
 
     public doInfinite(infiniteScroll: any): void
@@ -59,8 +55,8 @@ export class PageStream
 
     public dismissModal(): void
     {
-        this.viewController.dismiss();
-        this.statusBar.styleDefault();
+//        this.viewController.dismiss();
+//        this.statusBar.styleDefault();
     }
 
     public subscribe(subscription: Subscription)

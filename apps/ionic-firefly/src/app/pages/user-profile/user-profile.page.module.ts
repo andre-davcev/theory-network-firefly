@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 
-import {IonicPageModule} from 'ionic-angular';
-
-import {PageUserProfile} from './user.profile';
+import { ModulePage } from '../page.module';
+import { PageUserProfile } from './user-profile.page';
 
 @NgModule
 ({
-    declarations : [PageUserProfile],
-    imports      : [IonicPageModule.forChild(PageUserProfile)]
+    imports : [ModulePage],
+
+    declarations : [PageUserProfile]
 })
 
 export class ModulePageUserProfile
-{ 
+{
 
 }

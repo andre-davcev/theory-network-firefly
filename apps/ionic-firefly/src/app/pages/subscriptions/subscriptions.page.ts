@@ -1,6 +1,4 @@
-import {Component} from '@angular/core';
-import {IonicPage, ViewController} from 'ionic-angular';
-import {StatusBar} from '@ionic-native/status-bar';
+import { Component } from '@angular/core';
 
 @Component
 ({
@@ -9,22 +7,21 @@ import {StatusBar} from '@ionic-native/status-bar';
     styleUrls   : ['./subscriptions.page.scss']
 })
 
-@IonicPage()
 export class PageSubscriptions
 {
-    constructor(private statusBar: StatusBar, private viewController: ViewController)
+    constructor()
     {
 
     }
 
     ionViewWillEnter()
     {
-        this.statusBar.styleLightContent();
+//        this.statusBar.styleLightContent();
     }
 
     public dismissModal(): void
     {
-        this.viewController.dismiss();
-        this.statusBar.styleDefault();
+//        this.viewController.dismiss();
+//        this.statusBar.styleDefault();
     }
 }

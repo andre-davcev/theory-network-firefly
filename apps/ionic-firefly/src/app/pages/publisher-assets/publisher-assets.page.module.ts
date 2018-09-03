@@ -1,23 +1,16 @@
 import {NgModule} from '@angular/core';
-
 import {TranslateModule} from '@ngx-translate/core';
 
-import {IonicPageModule} from 'ionic-angular';
-
-import {PagePublisherAssets} from './publisher-assets';
+import { PagePublisherAssets } from './publisher-assets.page';
 
 @NgModule
 ({
     imports :
     [
-        TranslateModule,
-        IonicPageModule.forChild(PagePublisherAssets)
+        TranslateModule
     ],
 
     declarations : [PagePublisherAssets]
 })
 
-export class ModulePagePublisherAssets
-{
-
-}
+export class ModulePagePublisherAssets { }
