@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ViewController } from '@ionic/core';
@@ -14,7 +14,7 @@ import { StatePlaces } from '../../state/places/places.state';
     styleUrls   : ['./cluster-locations-add.page.scss']
 })
 
-export class PagePublisherClusterLocationsAdd
+export class PagePublisherClusterLocationsAdd implements OnInit
 {
     @Select(StatePlaces.results) results$ : Observable<Array<any>>;
 
@@ -22,7 +22,7 @@ export class PagePublisherClusterLocationsAdd
 
     constructor(private viewController: ViewController, private store: Store) {}
 
-    public ionViewDidLoad()
+    public ngOnInit(): void
     {
         this.results$.subscribe(v => console.log(v));
     }

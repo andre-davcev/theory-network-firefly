@@ -7,9 +7,9 @@
 
 <ion-content>
     <ion-fab bottom right [routerLink]="['/publisher/cluster']">
-        <button ion-fab color="secondary">
+        <ion-fab-button color="secondary">
             <ion-icon name="md-add"></ion-icon>
-        </button>
+        </ion-fab-button>
     </ion-fab>
 
     <app-list title="name" subtitle="tagline" icon="icon" [data]="clusters" (clicked)="clicked($event)" (deleted)="deleted($event)"></app-list>

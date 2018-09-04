@@ -1,19 +1,19 @@
 <ion-list no-lines>
     <ion-item-sliding *ngFor="let row of flattened; let i = index">
-        <button ion-item (click)="eventClicked(data[i])">
+        <ion-button ion-item (click)="eventClicked(data[i])">
             <ion-avatar item-start>
                 <img [src]="row.icon">
             </ion-avatar>
 
             <h3>{{row.title}}</h3>
             <p>{{row.subtitle}}</p>
-        </button>
+        </ion-button>
 
         <ion-item-options>
-            <button ion-button color="secondary" (click)="eventDeleted(data[i])">
+            <ion-button color="secondary" (click)="eventDeleted(data[i])">
                 <ion-icon name="trash"></ion-icon>
                 {{'general.delete' | translate}}
-            </button>
+            </ion-button>
         </ion-item-options>
     </ion-item-sliding>
 </ion-list>

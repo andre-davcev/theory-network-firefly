@@ -5,16 +5,16 @@
         </ion-nav>
 
         <ion-buttons end>
-            <button ion-button (click)="dismissModal()">{{'general.done' | translate}}</button>
+            <ion-button (click)="dismissModal()">{{'general.done' | translate}}</ion-button>
         </ion-buttons>
     </ion-nav>
 </ion-header>
 
 <ion-content [ngSwitch]="segment">
     <ion-fab bottom right (click)="add()">
-        <button ion-fab color="secondary">
+        <ion-fab-button color="secondary">
             <ion-icon name="md-add"></ion-icon>
-        </button>
+        </ion-fab-button>
     </ion-fab>
 
     <div *ngSwitchCase="'clusters'">
