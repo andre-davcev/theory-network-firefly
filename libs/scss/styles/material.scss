@@ -1,18 +1,11 @@
-// Elevation
-.gm-elevated-1  {box-shadow: $gm-elevated-1;}
-.gm-elevated-2  {box-shadow: $gm-elevated-2;}
-.gm-elevated-3  {box-shadow: $gm-elevated-3;}
-.gm-elevated-4  {box-shadow: $gm-elevated-4;}
-.gm-elevated-5  {box-shadow: $gm-elevated-5;}
-.gm-elevated-6  {box-shadow: $gm-elevated-6;}
-.gm-elevated-7  {box-shadow: $gm-elevated-7;}
-.gm-elevated-8  {box-shadow: $gm-elevated-8;}
-
-.gm-elevated-1-up  {box-shadow: $gm-elevated-1-up;}
-.gm-elevated-2-up  {box-shadow: $gm-elevated-2-up;}
-.gm-elevated-3-up  {box-shadow: $gm-elevated-3-up;}
-.gm-elevated-4-up  {box-shadow: $gm-elevated-4-up;}
-.gm-elevated-5-up  {box-shadow: $gm-elevated-5-up;}
-.gm-elevated-6-up  {box-shadow: $gm-elevated-6-up;}
-.gm-elevated-7-up  {box-shadow: $gm-elevated-7-up;}
-.gm-elevated-8-up  {box-shadow: $gm-elevated-8-up;}
+@mixin gm-elevate($level: 1, $up: false)
+{
+    @if $up
+    {
+        box-shadow: $gm-elevated-#{$border-position}-up;
+    }
+    @else
+    {
+        box-shadow: $gm-elevated-#{$border-position};
+    }
+}
