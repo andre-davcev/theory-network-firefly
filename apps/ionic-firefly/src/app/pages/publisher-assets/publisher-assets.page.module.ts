@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { PagePublisherAssets } from './publisher-assets.page';
 import { ModulePage } from '../page.module';

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { ModuleComponentList } from '../../components/list/list.component.module';
 import { PagePublisherClusters } from './publisher-clusters.page';
@@ -8,6 +9,7 @@ import { ModulePage } from '../page.module';
 ({
     imports :
     [
+        RouterModule,
         ModulePage,
         ModuleComponentList
     ],
