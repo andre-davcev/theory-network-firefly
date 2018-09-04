@@ -1,4 +1,5 @@
 ToDo:
+- app.module.old.ts
 - setup routing
 - target ion component selectors (ion-tabs instead of .tabbar)
 - pages scss
@@ -6,10 +7,7 @@ ToDo:
 - global scss
 - implement capacitor status bar
 - replace this.viewController.dismiss()
-- app.module.old.ts
-- variables.old.scss
 - global sass variables & styles
-- angular 4 to 6
 - npx tslint -c ionic-migration.json -p tsconfig.json > migration.txt
 - ionic 3 to ionic 4
 - change component styles to remove variables and provide overrides in global sass files

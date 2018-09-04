@@ -1,5 +1,4 @@
 import {BrowserModule}    from '@angular/platform-browser';
-import {HttpModule}       from '@angular/http';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClient}       from '@angular/common/http';
 import {NgModule}         from '@angular/core';
@@ -57,7 +56,6 @@ import { ServiceIcons } from '../services/icons.service';
 import { FormIcon } from './forms/icon.form';
 import { ModulePageStream } from '../pages/stream/stream.page.module';
 import { ModulePageSearch } from '../pages/search/search.page.module';
-import { ModulePagePublisher } from '../pages/publisher/publisher.module';
 import { ModulePageSubscriptions } from '../pages/subscriptions/subscriptions.page.module';
 import { ModulePageUser } from '../pages/user/user.module';
 import { ModulePagePublisherCluster } from '../pages/cluster/cluster.page.module';
