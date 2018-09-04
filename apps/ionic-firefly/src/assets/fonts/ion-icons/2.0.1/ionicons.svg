@@ -1634,12 +1634,12 @@ c-1 0 -1 1 -2 1c-3 1 -5 3 -7 5v23c0 61 57 111 127 112h5z" />
     <glyph glyph-name="ion-music-note" unicode="&#xf20c;" horiz-adv-x="384" 
 d="M362 416c12 0 22 -9 22 -21v-303s-3 -43 -12 -55v0c-9 -15 -25 -21 -43 -21h-37c-28 0 -52 20 -52 48s24 48 52 48h60v192l-208 -38v-232c0 -8 -3 -27 -13 -41c-1 -2 -2 -3 -3 -5c0 -1 -1 -1 -2 -2v0c-9 -11 -23 -18 -38 -18h-37c-28 0 -51 20 -51 48s23 48 51 48v0h61
 v286c1 14 13 28 27 32l218 33s3 1 5 1z" />
-    <glyph glyph-name="ion-navicon-round" unicode="&#xf20d;" horiz-adv-x="384" 
+    <glyph glyph-name="ion-toolbaricon-round" unicode="&#xf20d;" horiz-adv-x="384" 
 d="M353 224c17 0 31 -14 31 -32s-14 -32 -31 -32h-322c-17 0 -31 14 -31 32s14 32 31 32h322zM353 352c17 0 31 -14 31 -32s-14 -32 -31 -32h-322c-17 0 -31 14 -31 32s14 32 31 32h322zM353 96c17 0 31 -14 31 -32s-14 -32 -31 -32h-322c-17 0 -31 14 -31 32s14 32 31 32
 h322z" />
-    <glyph glyph-name="ion-navicon" unicode="&#xf20e;" horiz-adv-x="320" 
+    <glyph glyph-name="ion-toolbaricon" unicode="&#xf20e;" horiz-adv-x="320" 
 d="M0 175v32h320v-32h-320zM0 271v32h320v-32h-320zM0 79v32h320v-32h-320z" />
-    <glyph glyph-name="ion-navigate" unicode="&#xf2a3;" 
+    <glyph glyph-name="ion-toolbarigate" unicode="&#xf2a3;" 
 d="M448 416l-192 -448v256h-256z" />
     <glyph glyph-name="ion-network" unicode="&#xf341;" horiz-adv-x="384" 
 d="M384 352c0 -24 -13 -44 -32 -55v-93l-128 -64v-53c19 -11 32 -31 32 -55c0 -35 -29 -64 -64 -64s-64 29 -64 64c0 24 13 44 32 55v53l-128 64v93c-19 11 -32 31 -32 55c0 35 29 64 64 64s64 -29 64 -64c0 -24 -13 -44 -32 -55v-53l96 -48l96 48v53c-19 11 -32 31 -32 55
