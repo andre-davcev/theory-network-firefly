@@ -4,7 +4,7 @@ import { Temp }  from './temp.service';
 import { Alert } from '../models/alert.model';
 
 @Injectable()
-export class Alerts
+export class ServiceAlerts
 {
     alerts:Array<Alert>;
     unviewed:number;

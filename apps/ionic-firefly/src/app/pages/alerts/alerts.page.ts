@@ -9,7 +9,7 @@ import { PageSubscriptions } from '../subscriptions/subscriptions.page';
 import { PagePublisherCluster } from '../cluster/cluster.page';
 import { Alert } from '../../models/alert.model';
 import { PageUser } from '../user/user.page';
-import { Alerts } from '../../services/alerts.service';
+import { ServiceAlerts } from '../../services/alerts.service';
 
 export enum AlertsModalType
 {
@@ -55,7 +55,7 @@ export class PageNotifications
         PageUser
     ];
 
-    constructor(public alertController: AlertController, public alertsObject: Alerts, private nav: NavController, public modalController: ModalController)
+    constructor(public alertController: AlertController, public alertsObject: ServiceAlerts, private nav: NavController, public modalController: ModalController)
     {
         this.alerts = alertsObject.alerts;
 

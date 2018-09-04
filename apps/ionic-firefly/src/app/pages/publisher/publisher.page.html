@@ -1,13 +1,13 @@
 <ion-header>
-    <ion-nav dark>
-        <ion-nav>
+    <ion-toolbar dark>
+        <ion-toolbar>
             <ion-title>{{'tabs.publisher.clusters' | translate}}</ion-title>
-        </ion-nav>
+        </ion-toolbar>
 
         <ion-buttons end>
             <ion-button (click)="dismissModal()">{{'general.done' | translate}}</ion-button>
         </ion-buttons>
-    </ion-nav>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [ngSwitch]="segment">
