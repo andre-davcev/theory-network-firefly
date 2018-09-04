@@ -1,6 +1,5 @@
 ToDo:
 - setup routing
-- replace this.router.navigate with routerLink
 - target ion component selectors (ion-tabs instead of .tabbar)
 - pages scss
 - move global scss to mixins

@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { PagePublisherCluster } from './cluster.page';
 import { ModuleComponentItemHeader } from '../../components/item-header/item-header.component.module';
@@ -10,6 +12,8 @@ import { ModulePage } from '../page.module';
 ({
     imports :
     [
+        ReactiveFormsModule,
+        RouterModule,
         ModulePage,
         ModuleComponentItemHeader,
         ModuleComponentItemMap,

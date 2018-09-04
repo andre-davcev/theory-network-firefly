@@ -1,11 +1,11 @@
 <ion-header class="app-transparent">
-    <ion-navbar color='white'>
+    <ion-nav color='white'>
         <ion-title>{{'page.cluster.title' | translate}}</ion-title>
 
         <ion-buttons end>
             <button ion-button (click)="dismissModal()">{{'general.cancel' | translate}}</button>
         </ion-buttons>
-    </ion-navbar>
+    </ion-nav>
 </ion-header>
 
 
@@ -27,11 +27,11 @@
         </app-item-header>
 -->
 
-        <app-item-map [title]="'general.locations' | translate" (click)="navigateLocations()"></app-item-map>
+        <app-item-map [title]="'general.locations' | translate" [routerLink]="['/publisher/cluster/locations']"></app-item-map>
 
         <div class="c-detail" fxLayout="column">
             <ion-list>
-                <button ion-item (click)="navigateCategories()">
+                <button ion-item [routerLink]="['/publisher/cluster/categories']">
                     <ion-icon name="logo-buffer" item-start></ion-icon>
                     <ion-label>{{'general.categories' | translate}}</ion-label>
                 </button>
