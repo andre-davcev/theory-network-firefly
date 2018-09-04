@@ -1,5 +1,5 @@
 ToDo:
-- app.module.old.ts
+- app.module.ts
 - setup routing
 - target ion component selectors (ion-tabs instead of .tabbar)
 - pages scss
