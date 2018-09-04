@@ -3,7 +3,7 @@
         <ion-title>{{'page.stream.title' | translate}}</ion-title>
 
         <ion-buttons end>
-            <button ion-button (click)="dismissModal()">{{'general.done' | translate}}</button>
+            <ion-button (click)="dismissModal()">{{'general.done' | translate}}</ion-button>
         </ion-buttons>
     </ion-nav>
 </ion-header>
@@ -21,16 +21,16 @@
 
                 <ion-row>
                     <ion-col>
-                        <button ion-button clear icon-start (click)="subscribe(subscription)">
+                        <ion-button clear icon-start (click)="subscribe(subscription)">
                             <app-icon name="check" [active]="subscription.subscribed"></app-icon>
                             {{(subscription.subscribed ? 'page.stream.subscribed' : 'page.stream.subscribe') | translate}}
-                        </button>
+                        </ion-button>
                     </ion-col>
 
                     <ion-col text-right>
-                        <button ion-button icon-start clear>
+                        <ion-button icon-start clear>
 
-                        </button>
+                        </ion-button>
                     </ion-col>
                 </ion-row>
             </ion-card>

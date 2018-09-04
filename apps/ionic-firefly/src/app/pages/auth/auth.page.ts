@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable, forkJoin, timer, of } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { AuthProvider } from '../../enums/auth-provider.enum';
     styleUrls   : ['./auth.page.scss']
 })
 
-export class PageLogin
+export class PageLogin implements OnInit
 {
     public AuthProvider: any = AuthProvider;
 
@@ -31,7 +31,7 @@ export class PageLogin
 
     }
 
-    public ionViewDidLoad()
+    public ngOnInit(): void
     {
         this.userFound$.pipe
         (

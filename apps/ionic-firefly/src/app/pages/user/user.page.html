@@ -6,16 +6,16 @@
         </ion-segment>
 
         <ion-buttons end>
-            <button ion-button>{{'general.done' | translate}}</button>
+            <ion-button>{{'general.done' | translate}}</ion-button>
         </ion-buttons>
     </ion-nav>
 </ion-header>
 
 <ion-content [ngSwitch]="segment">
     <ion-fab bottom right *ngIf="segment === 'assets'">
-        <button ion-fab color="secondary">
+        <ion-fab-button color="secondary">
             <ion-icon name="md-add"></ion-icon>
-        </button>
+        </ion-fab-button>
     </ion-fab>
 
     <ion-list *ngSwitchCase="'assets'">
