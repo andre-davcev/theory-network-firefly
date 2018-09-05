@@ -38,7 +38,7 @@
     "@capacitor/ios": "^1.0.0-beta.6",
     "@ionic-native/background-geolocation": "file:../../node_modules/@ionic-native/background-geolocation",
     "@ionic-native/core": "file:../../node_modules/@ionic-native/core",
-    "@ionic-native/facebook": "file:../../node_modules@ionic-native/facebook",
+    "@ionic-native/facebook": "file:../../node_modules/@ionic-native/facebook",
     "@ionic-native/firebase": "file:../../node_modules/@ionic-native/firebase",
     "@ionic-native/globalization": "file:../../node_modules/@ionic-native/globalization",
     "@ionic-native/google-plus": "file:../../node_modules/@ionic-native/google-plus",
