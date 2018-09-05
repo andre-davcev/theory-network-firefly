@@ -6,8 +6,8 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import { Cluster } from '../models/cluster.model';
 
-@Injectable()
-export class ClusterService
+@Injectable({providedIn: 'root'})
+export class ServiceCluster
 {
     private clustersCollection: AngularFirestoreCollection<Cluster>;
 

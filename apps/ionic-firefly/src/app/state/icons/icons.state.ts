@@ -3,7 +3,7 @@ import { State, Selector, Select, Action, StateContext } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { ServiceIcons } from '../../services/icon.service';
+import { ServiceIcon } from '../../services/icon.service';
 import { GetIcons, SetIconId, SetIcon } from './icons.actions';
 import { FormIcon } from '../../forms/icon.form';
 import { StateUser } from '../user/user.state';
@@ -32,7 +32,7 @@ export interface StateIconsModel
 
 export class StateIcons
 {
-    constructor(private serviceIcons: ServiceIcons, private formIcon: FormIcon) {}
+    constructor(private serviceIcons: ServiceIcon, private formIcon: FormIcon) {}
 
     @Selector() static entities(state: StateIconsModel) {return state.entities;}
     @Selector() static id(state: StateIconsModel)       {return state.id;}

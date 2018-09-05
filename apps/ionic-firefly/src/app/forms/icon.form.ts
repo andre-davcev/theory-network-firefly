@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Icon } from '../models/icon.model';
 import { ValidatorsExtended } from '../validators/extended.validators';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class FormIcon
 {
     constructor(private formBuilder: FormBuilder) { }

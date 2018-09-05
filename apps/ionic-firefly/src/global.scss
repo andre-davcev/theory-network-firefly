@@ -17,5 +17,7 @@
 @import 'theme/variables';
 
 // Global Styles
-@import '~mapbox-gl/dist/mapbox-gl.css';
 @import '~@theory/ionic/scss/index';
+
+@import "~mapbox-gl/dist/mapbox-gl.css";
+@import "~@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css";

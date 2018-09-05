@@ -6,8 +6,8 @@ import { switchMap, filter, take, map } from 'rxjs/operators';
 
 import { Icon } from '../models/icon.model';
 
-@Injectable()
-export class ServiceIcons
+@Injectable({providedIn: 'root'})
+export class ServiceIcon
 {
     private icons: AngularFirestoreCollection<Icon>;
 

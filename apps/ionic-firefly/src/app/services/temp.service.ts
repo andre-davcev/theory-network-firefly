@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+
 import { Alert } from '../models/alert.model';
 import { Subscription } from '../models/subscription.model';
 
-@Injectable()
-export class Temp
+@Injectable({providedIn: 'root'})
+export class ServiceTemp
 {
     alerts:Array<Alert> =
     [
