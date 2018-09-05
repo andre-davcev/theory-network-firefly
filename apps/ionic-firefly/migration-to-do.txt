@@ -10,6 +10,6 @@ ToDo:
 - global sass variables & styles
 - change component styles to remove variables and provide overrides in global sass files
 - move libs to local path or xplat features?
-- ionic color scheme
 - shadow dom
+- migrate modal controller present to use angular routing & new modal animations
 - Test on devices ios / android

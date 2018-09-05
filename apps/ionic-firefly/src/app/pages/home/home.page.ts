@@ -22,12 +22,12 @@ export enum AlertsModalType
 
 @Component
 ({
-    selector    : 'app-page-alerts',
-    templateUrl : 'alerts.page.html',
-    styleUrls   : ['./alerts.page.scss']
+    selector    : 'app-page-home',
+    templateUrl : 'home.page.html',
+    styleUrls   : ['./home.page.scss']
 })
 
-export class PageNotifications
+export class PageHome
 {
     @ViewChild(Slides) slides: Slides;
 
