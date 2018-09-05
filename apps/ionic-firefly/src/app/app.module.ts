@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { ModuleCore } from './core/core.module';
-import { ModuleShared } from './features/shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './features/shared/shared.module';
 import { ModuleRoutingApp } from './app-routing.module';
 import { ComponentApp } from './app.component';
 
@@ -9,8 +9,8 @@ import { ComponentApp } from './app.component';
 ({
     imports :
     [
-        ModuleCore,
-        ModuleShared,
+        CoreModule,
+        SharedModule,
         ModuleRoutingApp
     ],
 

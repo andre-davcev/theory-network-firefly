@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes =
 [
-    { path: '', loadChildren: './pages/home/home.module#HomeModule'}
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+    { path: 'auth', loadChildren: './pages/auth/auth.page.module#ModulePageLogin' },
+    { path: 'home', loadChildren: './pages/home/home.page.module#ModulePageHome' }
 ];
 
 @NgModule

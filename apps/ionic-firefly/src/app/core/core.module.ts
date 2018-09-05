@@ -11,6 +11,7 @@ import { IonicRouteStrategy } from '@ionic/angular';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { Pro } from '@ionic/pro';
 
 import { AppIonicCoreModule } from '@theory/ionic';
 import { environment } from '../../environments/environment';
@@ -24,9 +25,8 @@ import { StateNotifications } from '../state/notifications/notifications.state';
 import { StateCluster } from '../state/cluster/cluster.state';
 import { StatePlaces } from '../state/places/places.state';
 import { StateIcons } from '../state/icons/icons.state';
-import { Pro } from '@ionic/pro';
 
-Pro.init('YOUR_APP_ID',
+Pro.init('1e5146ca',
 {
     appVersion: '1.0.0'
 });
@@ -68,4 +68,4 @@ Pro.init('YOUR_APP_ID',
         { provide: ErrorHandler,       useClass: ErrorHandlerApp }
     ]
 })
-export class ModuleCore {}
+export class CoreModule {}
