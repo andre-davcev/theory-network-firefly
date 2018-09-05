@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { Temp }  from './temp.service';
+import { ServiceTemp }  from './temp.service';
 import { Alert } from '../models/alert.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ServiceAlerts
 {
     alerts:Array<Alert>;
     unviewed:number;
 
-    constructor(temp:Temp)
+    constructor(temp:ServiceTemp)
     {
         this.alerts = temp.alerts;
 

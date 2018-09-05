@@ -3,7 +3,7 @@ import { Store } from '@ngxs/store';
 
 import { SetCluster } from '../../state/cluster/cluster.actions';
 import { Subscription } from '../../models/subscription.model';
-import { Temp } from '../../services/temp.service';
+import { ServiceTemp } from '../../services/temp.service';
 import { Cluster } from '../../models/cluster.model';
 
 @Component
@@ -17,7 +17,7 @@ export class PageStream
 {
     public subscriptions:Array<Subscription> = [];
 
-    constructor(private store:Store, temp: Temp)
+    constructor(private store:Store, temp: ServiceTemp)
     {
         const cluster: Cluster =
         {

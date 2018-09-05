@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
 import { StateUser } from '../user/user.state';
 import { GetClusters, SetClusterId, SetCluster } from './cluster.actions';
 import { Cluster } from '../../models/cluster.model';
-import { ClusterService } from '../../services/cluster.service';
+import { ServiceCluster } from '../../services/cluster.service';
 import { FormCluster } from '../../forms/cluster.form';
 import { User } from '../../models/user.model';
 
@@ -32,7 +32,7 @@ export interface StateClusterModel
 
 export class StateCluster
 {
-    constructor(private clusterService: ClusterService, private formCluster: FormCluster) {}
+    constructor(private clusterService: ServiceCluster, private formCluster: FormCluster) {}
 
     @Selector() static entities(state: StateClusterModel) {return state.entities;}
     @Selector() static id(state: StateClusterModel)       {return state.id;}

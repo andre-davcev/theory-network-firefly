@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Cluster } from '../../models/cluster.model';
-import { Temp } from '../../services/temp.service';
+import { ServiceTemp } from '../../services/temp.service';
 
 @Component
 ({
@@ -14,7 +14,7 @@ export class PagePublisherClusters
 {
     public clusters:Array<Cluster>;
 
-    constructor(temp: Temp)
+    constructor(temp: ServiceTemp)
     {
         this.clusters = temp.subscriptions;
     }

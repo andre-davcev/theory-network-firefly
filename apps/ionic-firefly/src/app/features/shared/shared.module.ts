@@ -10,4 +10,4 @@ const MODULES = [
   imports: [...MODULES],
   exports: [...MODULES]
 })
-export class SharedModule {}
+export class ModuleShared {}
