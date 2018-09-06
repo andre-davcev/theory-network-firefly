@@ -1,7 +1,4 @@
-import {Component} from '@angular/core';
-
-import {NavController} from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
+import { Component } from '@angular/core';
 
 @Component
 ({
@@ -19,19 +16,8 @@ export class PageAssetsIcons
         'temp/icons/coffee-icon-brown.png'
     ];
 
-    constructor(private statusBar: StatusBar, private nav: NavController, )
-    {
-
-    }
-
     ionViewWillEnter()
     {
-        this.statusBar.styleBlackTranslucent();
-    }
-
-    add(): void
-    {
-        // ToDo: Why is this erroring?
-        this.nav.push('PageAssetsIcon');
+//        this.statusBar.styleBlackTranslucent();
     }
 }
