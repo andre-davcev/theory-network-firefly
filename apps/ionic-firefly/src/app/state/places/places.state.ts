@@ -1,7 +1,7 @@
 import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
+import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
 
 import { StateLocation } from '../location/location.state';
 import { environment } from '../../../environments/environment';

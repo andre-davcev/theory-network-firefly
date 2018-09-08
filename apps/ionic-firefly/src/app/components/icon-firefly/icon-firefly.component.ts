@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component
 ({
     selector: 'app-icon-firefly',
-    templateUrl: './firefly-icon.component.html',
-    styleUrls: ['./firefly-icon.component.scss']
+    templateUrl: './icon-firefly.component.html',
+    styleUrls: ['./icon-firefly.component.scss']
 })
 export class ComponentIconFirefly
 {

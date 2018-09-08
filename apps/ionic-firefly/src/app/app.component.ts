@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { isCapacitorNative } from '@ionic/core';
+//import { isCapacitorNative } from '@ionic/core';
 import { Platform } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 import { Store } from '@ngxs/store';
@@ -23,10 +23,10 @@ export class ComponentApp
     {
         this.platform.ready().then(() =>
         {
-            if (isCapacitorNative(window))
-            {
+//            if (isCapacitorNative(window))
+//            {
                 StatusBar.setStyle({style: StatusBarStyle.Dark});
-            }
+//            }
 
             this.store.dispatch(new AppInitialize());
         });

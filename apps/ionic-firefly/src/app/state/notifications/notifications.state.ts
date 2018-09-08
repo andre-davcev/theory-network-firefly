@@ -3,7 +3,7 @@ import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { switchMap, filter, tap } from 'rxjs/operators';
-import { Firebase } from '@ionic-native/firebase';
+import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
 
 import { PushNotification } from '../../interfaces/push-notification.interface';

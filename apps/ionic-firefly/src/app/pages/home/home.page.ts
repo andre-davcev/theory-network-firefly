@@ -69,7 +69,9 @@ export class PageHome
 
     slideChanged()
     {
-        this.alertsObject.view(this.slides.getActiveIndex());
+        fromPromise(this.slides.getActiveIndex()).
+
+        pipe(tap((index: number) => this.alertsObject.view(index)));
     }
 
     navigate(type: AlertsModalType): void

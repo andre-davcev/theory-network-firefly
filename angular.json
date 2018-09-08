@@ -68,18 +68,6 @@
         "@schematics/angular:component": {
           "styleext": "scss"
         }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/theme/styles"
-              ]
-            }
-          }
-        }
       }
     }
   },

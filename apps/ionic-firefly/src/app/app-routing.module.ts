@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes =
 [
-    { path: '', redirectTo: '/auth', pathMatch: 'full' },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-    { path: 'auth', loadChildren: './pages/auth/auth.page.module#ModulePageLogin' },
-    { path: 'home', loadChildren: './pages/home/home.page.module#ModulePageHome' }
+    { path: 'login', loadChildren: './pages/login/login.page.module#ModulePageLogin' },
+    { path: 'home',  loadChildren: './pages/home/home.page.module#ModulePageHome' }
 ];
 
 @NgModule

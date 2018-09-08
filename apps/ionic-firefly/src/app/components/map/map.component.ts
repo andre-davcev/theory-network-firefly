@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation';
+import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
 
 import { ComponentMapOrb } from '../map-orb/map-orb.component';
 import { StateLocation } from '../../state/location/location.state';

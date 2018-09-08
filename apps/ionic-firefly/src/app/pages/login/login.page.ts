@@ -12,9 +12,9 @@ import { AuthProvider } from '../../enums/auth-provider.enum';
 
 @Component
 ({
-    selector    : 'app-page-auth',
-    templateUrl : 'auth.page.html',
-    styleUrls   : ['./auth.page.scss']
+    selector    : 'app-page-login',
+    templateUrl : 'login.page.html',
+    styleUrls   : ['./login.page.scss']
 })
 
 export class PageLogin implements OnInit
