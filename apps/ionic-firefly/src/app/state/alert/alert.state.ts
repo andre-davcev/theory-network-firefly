@@ -1,7 +1,7 @@
 import * as firebase from 'firebase/app';
 
 import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
 import { StateUserModel } from '../user/user.state';

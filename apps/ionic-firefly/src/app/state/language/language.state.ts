@@ -5,7 +5,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { Globalization } from '@ionic-native/globalization';
+import { Globalization } from '@ionic-native/globalization/ngx';
 
 import { PlatformEnum } from '../../enums/platform.enum';
 import { LanguageInitialize, LanguageGet, LanguageSet } from './language.actions';

@@ -1,3 +1,4 @@
+/*
 import { ErrorHandler } from '@angular/core';
 
 import { IonicPro } from '../constants/ionic-pro.const';
@@ -11,3 +12,4 @@ export class ErrorHandlerApp implements ErrorHandler
         IonicPro.monitoring.handleNewError(error);
     }
 }
+*/

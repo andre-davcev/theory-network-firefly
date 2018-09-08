@@ -11,5 +11,117 @@ ToDo:
 - change component styles to remove variables and provide overrides in global sass files
 - move libs to local path or xplat features?
 - shadow dom
-- migrate modal controller present to use angular routing & new modal animations
+- migrate modal controller present to use angular routing & new modal animations (ion-animation-controller)
 - Test on devices ios / android
+
+[info] Plugin cordova-plugin-facebook4 requires you to add
+  <key>FacebookAppID</key>
+  <string>$APP_ID</string>
+ to your Info.plist to work
+
+[info] Plugin cordova-plugin-facebook4 requires you to add
+  <key>FacebookDisplayName</key>
+  <string>$APP_NAME</string>
+ to your Info.plist to work
+
+[info] Plugin cordova-plugin-facebook4 might require you to add
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb$APP_ID</string>
+      </array>
+    </dict>
+   in the existing CFBundleURLTypes entry of your Info.plist to work
+
+[info] Plugin cordova-plugin-facebook4 might require you to add
+    <key>NSExceptionDomains</key>
+    <dict>
+      <key>facebook.com</key>
+      <key>fbcdn.net</key>
+      <key>akamaihd.net</key>
+      <dict>
+        <key>NSIncludesSubdomains</key>
+        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+        <true/>
+        <false/>
+      </dict>
+      <dict>
+        <key>NSIncludesSubdomains</key>
+        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+        <true/>
+        <false/>
+      </dict>
+      <dict>
+        <key>NSIncludesSubdomains</key>
+        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+        <true/>
+        <false/>
+      </dict>
+    </dict>
+   in the existing NSAppTransportSecurity entry of your Info.plist to work
+
+[info] Plugin cordova-plugin-facebook4 requires you to add
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+  </array>
+ to your Info.plist to work
+
+[info] Plugin cordova-plugin-firebase requires you to add
+  <key>FirebaseMessagingAutoInitEnabled</key>
+  <string>no</string>
+ to your Info.plist to work
+
+[info] Plugin cordova-plugin-firebase requires you to add
+  <key>firebase_performance_collection_enabled</key>
+  <false/>
+ to your Info.plist to work
+
+[info] Plugin cordova-plugin-firebase requires you to add
+  <key>firebase_crashlytics_collection_enabled</key>
+  <false/>
+ to your Info.plist to work
+
+[info] Plugin cordova-plugin-googleplus might require you to add
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <key>CFBundleURLName</key>
+      <key>CFBundleURLSchemes</key>
+      <string>Editor</string>
+      <string>REVERSED_CLIENT_ID</string>
+      <array>
+        <string>$REVERSED_CLIENT_ID</string>
+      </array>
+    </dict>
+   in the existing CFBundleURLTypes entry of your Info.plist to work
+
+[info] Plugin cordova-plugin-mauron85-background-geolocation requires you to add
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>$ALWAYS_USAGE_DESCRIPTION</string>
+ to your Info.plist to work
+
+[info] Plugin cordova-plugin-mauron85-background-geolocation requires you to add
+  <key>NSMotionUsageDescription</key>
+  <string>$MOTION_USAGE_DESCRIPTION</string>
+ to your Info.plist to work
+
+[info] Plugin cordova-plugin-mauron85-background-geolocation requires you to add
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
+ to your Info.plist to work
+
+[info] Plugin cordova-plugin-mauron85-background-geolocation might require you to add
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <key>CFBundleURLSchemes</key>
+      <string>Editor</string>
+      <array>
+        <string>prefs</string>
+      </array>
+    </dict>
+   in the existing CFBundleURLTypes entry of your Info.plist to work

@@ -1,9 +1,9 @@
-import { Environment } from './environment.model';
+import { Environment } from '../app/interfaces/environment/environment.interface';
 
 export const environment: Environment =
 {
     production  : true,
-    environment : 'prod'
+    environment : 'prod',
     language    : 'en',
     version     : '0.0.0',
     pathJson    : 'data',

@@ -4,10 +4,10 @@ import { State, Selector, Action, StateContext, Select} from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap, take, filter, tap } from 'rxjs/operators';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-import { GooglePlus } from '@ionic-native/google-plus';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 import { PlatformEnum } from '../../enums/platform.enum';
 import { StateLanguage } from '../language/language.state';
@@ -179,7 +179,7 @@ export class StateUser
     {
         return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
-            switchMap((authData: firebase.User) => dispatch(new UserAuthenticateCheck(authData))),
+            switchMap((authData: firebase.auth.UserCredential) => dispatch(new UserAuthenticateCheck(authData.user))),
 
             catchError((error: Error) => of(patchState({error: error})))
         );
@@ -214,19 +214,7 @@ export class StateUser
                 return fromPromise(firebase.auth().signInWithCredential(credential));
             }),
 
-            switchMap((response: FacebookLoginResponse) =>
-            {
-                const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-
-                return fromPromise(firebase.auth().signInWithCredential(credential));
-            }),
-
-            switchMap((response: any) =>
-            {
-                const authData: firebase.User = response as firebase.User;
-
-                return dispatch(new UserAuthenticateCheck(authData));
-            }),
+            switchMap((user: firebase.User) => dispatch(new UserAuthenticateCheck(user))),
 
             catchError((error: Error) => of(patchState({error: error})))
         );
@@ -258,21 +246,9 @@ export class StateUser
             {
                 const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
-                return fromPromise(firebase.auth().signInWithCredential(credential));
-            }),
+                return fromPromise(firebase.auth().signInWithCredential(credential)).
 
-            switchMap((response: FacebookLoginResponse) =>
-            {
-                const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-
-                return fromPromise(firebase.auth().signInWithCredential(credential));
-            }),
-
-            switchMap((response: any) =>
-            {
-                const authData: firebase.User = response as firebase.User;
-
-                return dispatch(new UserAuthenticateCheck(authData));
+                pipe(switchMap((user: firebase.User) => dispatch(new UserAuthenticateCheck(user))))
             }),
 
             catchError((error: Error) => of(patchState({error: error})))

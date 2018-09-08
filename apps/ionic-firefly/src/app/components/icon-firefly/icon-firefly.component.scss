@@ -19,7 +19,7 @@
     @keyframes firefly
     {
          0% {fill: var(--cpt-color-primary);}
-        25% {fill: lighten(var(--cpt-color-light, 10%));}
+        25% {fill: lighten($app-color-primary, 10%);}
         50% {fill: var(--cpt-color-primary);}
         75% {opacity: 0.5;}
        100% {opacity: 1;}
@@ -28,7 +28,7 @@
     @keyframes firefly-tentacles
     {
          0% {fill: var(--cpt-color-primary); stroke: var(--cpt-color-primary);}
-        25% {fill: lighten(var(--cpt-color-light), 10%); stroke: lighten(var(--cpt-color-light), 10%);}
+        25% {fill: lighten($app-color-primary, 10%); stroke: lighten($app-color-primary, 10%);}
         50% {fill: var(--cpt-color-primary); stroke: var(--cpt-color-primary);}
         75% {opacity: 0.5;}
        100% {opacity: 1;}
