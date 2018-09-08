@@ -19,7 +19,7 @@ $app-icon-font-size:                         1.2rem;
 
 // Font Awesome
 $app-font-font-awesome:               "Font Awesome";
-$app-font-font-awesome-url:           url(../fonts/font.awesome/font.awesome.ttf);
+$app-font-font-awesome-url:           url(assets/fonts/font.awesome/font.awesome.ttf);
 $app-font-font-awesome-size:          $app-icon-font-size;
 
 // Helvetican Neue
@@ -43,10 +43,10 @@ $app-font-ionic-icons-2:         "Ionicons 2";
 $app-font-ionic-icons:           "Ionicons";
 $app-font-ionic-icons-size:      $app-icon-font-size;
 
-$app-font-ionic-icons-url-eot:      url(../fonts/ion.icons/2.0.1/ionicons.eot);
-$app-font-ionic-icons-url-ttf:      url(../fonts/ion.icons/2.0.1/ionicons.ttf);
-$app-font-ionic-icons-url-woff:     url(../fonts/ion.icons/2.0.1/ionicons.woff);
-$app-font-ionic-icons-url-svg:      url(../fonts/ion.icons/2.0.1/ionicons.svg);
+$app-font-ionic-icons-url-eot:      url(assets/fonts/ion.icons/2.0.1/ionicons.eot);
+$app-font-ionic-icons-url-ttf:      url(assets/fonts/ion.icons/2.0.1/ionicons.ttf);
+$app-font-ionic-icons-url-woff:     url(assets/fonts/ion.icons/2.0.1/ionicons.woff);
+$app-font-ionic-icons-url-svg:      url(assets/fonts/ion.icons/2.0.1/ionicons.svg);
 
 // Lato
 
@@ -61,16 +61,16 @@ $app-font-lato-italic:             "Lato Italic";
 $app-font-lato-light:              "Lato Light";
 $app-font-lato-light-italic:       "Lato Light Italic";
 
-$app-font-lato-url:                     url(../fonts/lato/lato.ttf);
-$app-font-lato-url-black:               url(../fonts/lato/lato.black.ttf);
-$app-font-lato-url-black-italic:        url(../fonts/lato/lato.black.italic.ttf);
-$app-font-lato-url-bold:                url(../fonts/lato/lato.bold.ttf);
-$app-font-lato-url-bold-italic:         url(../fonts/lato/lato.bold.italic.ttf);
-$app-font-lato-url-hairline:            url(../fonts/lato/lato.hairline.ttf);
-$app-font-lato-url-hairline-italic:     url(../fonts/lato/lato.hairline.italic.ttf);
-$app-font-lato-url-italic:              url(../fonts/lato/lato.italic.ttf);
-$app-font-lato-url-light:               url(../fonts/lato/lato.light.ttf);
-$app-font-lato-url-light-italic:        url(../fonts/lato/lato.light.italic.ttf);
+$app-font-lato-url:                     url(assets/fonts/lato/lato.ttf);
+$app-font-lato-url-black:               url(assets/fonts/lato/lato.black.ttf);
+$app-font-lato-url-black-italic:        url(assets/fonts/lato/lato.black.italic.ttf);
+$app-font-lato-url-bold:                url(assets/fonts/lato/lato.bold.ttf);
+$app-font-lato-url-bold-italic:         url(assets/fonts/lato/lato.bold.italic.ttf);
+$app-font-lato-url-hairline:            url(assets/fonts/lato/lato.hairline.ttf);
+$app-font-lato-url-hairline-italic:     url(assets/fonts/lato/lato.hairline.italic.ttf);
+$app-font-lato-url-italic:              url(assets/fonts/lato/lato.italic.ttf);
+$app-font-lato-url-light:               url(assets/fonts/lato/lato.light.ttf);
+$app-font-lato-url-light-italic:        url(assets/fonts/lato/lato.light.italic.ttf);
 
 // Buttons
 
@@ -171,7 +171,7 @@ $app-twitter-button-icon-content:               "\f099";
 // Firefly Font
 
 $app-font-firefly:                      'Firefly';
-$app-font-firefly-url:                  url(../fonts/firefly/firefly.ttf);
+$app-font-firefly-url:                  url(assets/fonts/firefly/firefly.ttf);
 $app-font-firefly-size:                 1.2rem;
 $app-font-firefly-icon-firefly:         "b";
 
