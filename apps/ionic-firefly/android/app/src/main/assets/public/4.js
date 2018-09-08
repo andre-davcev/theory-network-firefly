@@ -1,21 +1,28 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/jx66mgie.js":
-/*!*********************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/jx66mgie.js ***!
-  \*********************************************************************************************************************/
-/*! exports provided: IonActionSheetController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/md.transition.js":
+/*!*************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/md.transition.js ***!
+  \*************************************************************************************************************************************/
+/*! exports provided: mdTransitionAnimation */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonActionSheetController", function() { return ActionSheetController; });
-/* harmony import */ var _chunk_13543983_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-13543983.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/chunk-13543983.js");
-/*!
- * (C) Ionic http://ionicframework.com - MIT License
- * Built with http://stenciljs.com
- */
-var ActionSheetController=function(){function e(){this.actionSheets=new Map}return e.prototype.actionSheetWillPresent=function(e){this.actionSheets.set(e.target.overlayId,e.target)},e.prototype.actionSheetWillDismiss=function(e){this.actionSheets.delete(e.target.overlayId)},e.prototype.escapeKeyUp=function(){Object(_chunk_13543983_js__WEBPACK_IMPORTED_MODULE_0__["d"])(this.actionSheets)},e.prototype.create=function(e){return Object(_chunk_13543983_js__WEBPACK_IMPORTED_MODULE_0__["a"])(this.doc.createElement("ion-action-sheet"),e)},e.prototype.dismiss=function(e,t,o){return void 0===o&&(o=-1),Object(_chunk_13543983_js__WEBPACK_IMPORTED_MODULE_0__["b"])(e,t,this.actionSheets,o)},e.prototype.getTop=function(){return Object(_chunk_13543983_js__WEBPACK_IMPORTED_MODULE_0__["c"])(this.actionSheets)},Object.defineProperty(e,"is",{get:function(){return"ion-action-sheet-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{create:{method:!0},dismiss:{method:!0},doc:{context:"document"},getTop:{method:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"body:ionActionSheetWillPresent",method:"actionSheetWillPresent"},{name:"body:ionActionSheetWillDismiss",method:"actionSheetWillDismiss"},{name:"body:ionActionSheetDidUnload",method:"actionSheetWillDismiss"},{name:"body:keyup.escape",method:"escapeKeyUp"}]},enumerable:!0,configurable:!0}),e}();
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mdTransitionAnimation", function() { return mdTransitionAnimation; });
+var TRANSLATEY = "translateY", OFF_BOTTOM = "40px", CENTER = "0px";
+function mdTransitionAnimation(e, n, o) { var i = o.enteringEl, t = o.leavingEl, a = getIonPageElement(i), r = new e; r.addElement(a).beforeRemoveClass("ion-page-invisible"); var c = "back" === o.direction; c ? r.duration(o.duration || 200).easing("cubic-bezier(0.47,0,0.745,0.715)") : r.duration(o.duration || 280).easing("cubic-bezier(0.36,0.66,0.04,1)").fromTo(TRANSLATEY, OFF_BOTTOM, CENTER, !0).fromTo("opacity", .01, 1, !0); var s = a.querySelector("ion-toolbar"); if (s) {
+    var n_1 = new e;
+    n_1.addElement(s), r.add(n_1);
+} if (t && c) {
+    r.duration(o.duration || 200).easing("cubic-bezier(0.47,0,0.745,0.715)");
+    var n_2 = new e;
+    n_2.addElement(getIonPageElement(t)).fromTo(TRANSLATEY, CENTER, OFF_BOTTOM).fromTo("opacity", 1, 0), r.add(n_2);
+} return Promise.resolve(r); }
+function getIonPageElement(e) { if (e.classList.contains("ion-page"))
+    return e; return e.querySelector(":scope > .ion-page, :scope > ion-nav, :scope > ion-tabs") || e; }
+
+
 
 /***/ })
 
