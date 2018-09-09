@@ -29,7 +29,7 @@ export class ComponentItemHeader
     {
         if (this.edit)
         {
-            this.iconValue = this.iconValue == null || this.iconValue === 'assets/temp/icons/coffee-icon-blue.png' ? 'assets/temp/icons/coffee-icon-pink.png' : 'assets/temp/icons/coffee-icon-blue.png';
+            this.iconValue = this.iconValue == null || this.iconValue === 'assets/icons/temp-coffee-icon-blue.png' ? 'assets/icons/temp-coffee-icon-pink.png' : 'assets/icons/temp-coffee-icon-blue.png';
         }
     }
 

@@ -40,7 +40,7 @@ export class ComponentItemDescription
             console.log(cameraPhoto);
         });
 */
-        this.imageValue = this.imageValue == null || this.imageValue === 'assets/temp/images/subscriptions/pokemon-go.jpg' ? 'assets/temp/images/subscriptions/lilac-festival.jpg' : 'assets/temp/images/subscriptions/pokemon-go.jpg';
+        this.imageValue = this.imageValue == null || this.imageValue === 'assets/images/temp-subscriptions-pokemon-go.jpg' ? 'assets/images/temp-subscriptions-lilac-festival.jpg' : 'assets/images/temp-subscriptions-pokemon-go.jpg';
     }
 
     public get edit(): boolean
