@@ -14,7 +14,7 @@ import { StateLanguage } from '../language/language.state';
 import { LanguageGet, LanguageSet } from '../language/language.actions';
 import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, LoginFacebook, LoginFacebookBrowser, LoginFacebookDevice, LoginGoogle, LoginGoogleBrowser, LoginGoogleDevice, UserLogout, UserAddToken} from './user.actions';
 import { AlertsGet } from '../alert/alert.actions';
-import { NotificationsWatch, NotificationsGet } from '../notifications/notifications.actions';
+import { NotificationsGet } from '../notifications/notifications.actions';
 import { User } from '../../models/user.model';
 import { Platform } from '@ionic/angular';
 import { AuthProvider } from '../../enums/auth-provider.enum';
@@ -154,7 +154,7 @@ export class StateUser
 
                     dispatch(new LanguageSet(user.language));
                     dispatch(new AlertsGet());
-                    dispatch(new NotificationsWatch());
+//                    dispatch(new NotificationsWatch());
                     dispatch(new NotificationsGet());
                 }
             }),

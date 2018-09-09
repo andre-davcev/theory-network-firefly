@@ -2373,25 +2373,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/facebook/ngx */ "../../node_modules/@ionic-native/facebook/ngx/index.js");
 /* harmony import */ var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/google-plus/ngx */ "../../node_modules/@ionic-native/google-plus/ngx/index.js");
 /* harmony import */ var _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/firebase/ngx */ "../../node_modules/@ionic-native/firebase/ngx/index.js");
-/* harmony import */ var _theory_ionic__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @theory/ionic */ "../../xplat/ionic/index.ts");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _state_app_app_state__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../state/app/app.state */ "./src/app/state/app/app.state.ts");
-/* harmony import */ var _state_language_language_state__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../state/language/language.state */ "./src/app/state/language/language.state.ts");
-/* harmony import */ var _state_location_location_state__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../state/location/location.state */ "./src/app/state/location/location.state.ts");
-/* harmony import */ var _state_device_device_state__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../state/device/device.state */ "./src/app/state/device/device.state.ts");
-/* harmony import */ var _state_user_user_state__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../state/user/user.state */ "./src/app/state/user/user.state.ts");
-/* harmony import */ var _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../state/notifications/notifications.state */ "./src/app/state/notifications/notifications.state.ts");
-/* harmony import */ var _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../state/cluster/cluster.state */ "./src/app/state/cluster/cluster.state.ts");
-/* harmony import */ var _state_places_places_state__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../state/places/places.state */ "./src/app/state/places/places.state.ts");
-/* harmony import */ var _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../state/icons/icons.state */ "./src/app/state/icons/icons.state.ts");
-/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/fire/auth */ "../../node_modules/@angular/fire/auth/index.js");
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/auth */ "../../node_modules/@angular/fire/auth/index.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
+/* harmony import */ var _theory_ionic__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @theory/ionic */ "../../xplat/ionic/index.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _state_app_app_state__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../state/app/app.state */ "./src/app/state/app/app.state.ts");
+/* harmony import */ var _state_language_language_state__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../state/language/language.state */ "./src/app/state/language/language.state.ts");
+/* harmony import */ var _state_location_location_state__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../state/location/location.state */ "./src/app/state/location/location.state.ts");
+/* harmony import */ var _state_device_device_state__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../state/device/device.state */ "./src/app/state/device/device.state.ts");
+/* harmony import */ var _state_user_user_state__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../state/user/user.state */ "./src/app/state/user/user.state.ts");
+/* harmony import */ var _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../state/notifications/notifications.state */ "./src/app/state/notifications/notifications.state.ts");
+/* harmony import */ var _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../state/cluster/cluster.state */ "./src/app/state/cluster/cluster.state.ts");
+/* harmony import */ var _state_places_places_state__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../state/places/places.state */ "./src/app/state/places/places.state.ts");
+/* harmony import */ var _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../state/icons/icons.state */ "./src/app/state/icons/icons.state.ts");
+/* harmony import */ var _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../state/subscriptions/subscriptions.state */ "./src/app/state/subscriptions/subscriptions.state.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -2417,7 +2420,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 /*
 Pro.init('1e5146ca',
 {
@@ -2430,23 +2432,24 @@ var CoreModule = /** @class */ (function () {
     CoreModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
-                _theory_ionic__WEBPACK_IMPORTED_MODULE_11__["AppIonicCoreModule"],
-                _angular_fire__WEBPACK_IMPORTED_MODULE_1__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].apis.firebase),
-                _angular_fire_auth__WEBPACK_IMPORTED_MODULE_22__["AngularFireAuthModule"],
-                _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_23__["AngularFirestoreModule"],
+                _theory_ionic__WEBPACK_IMPORTED_MODULE_13__["AppIonicCoreModule"],
+                _angular_fire__WEBPACK_IMPORTED_MODULE_1__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].apis.firebase),
+                _angular_fire_auth__WEBPACK_IMPORTED_MODULE_11__["AngularFireAuthModule"],
+                _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_12__["AngularFirestoreModule"],
                 _ngxs_store__WEBPACK_IMPORTED_MODULE_4__["NgxsModule"].forRoot([
-                    _state_app_app_state__WEBPACK_IMPORTED_MODULE_13__["StateApp"],
-                    _state_language_language_state__WEBPACK_IMPORTED_MODULE_14__["StateLanguage"],
-                    _state_location_location_state__WEBPACK_IMPORTED_MODULE_15__["StateLocation"],
-                    _state_device_device_state__WEBPACK_IMPORTED_MODULE_16__["StateDevice"],
-                    _state_user_user_state__WEBPACK_IMPORTED_MODULE_17__["StateUser"],
-                    _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_18__["StateNotifications"],
-                    _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_19__["StateCluster"],
-                    _state_places_places_state__WEBPACK_IMPORTED_MODULE_20__["StatePlaces"],
-                    _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_21__["StateIcons"]
+                    _state_app_app_state__WEBPACK_IMPORTED_MODULE_15__["StateApp"],
+                    _state_language_language_state__WEBPACK_IMPORTED_MODULE_16__["StateLanguage"],
+                    _state_location_location_state__WEBPACK_IMPORTED_MODULE_17__["StateLocation"],
+                    _state_device_device_state__WEBPACK_IMPORTED_MODULE_18__["StateDevice"],
+                    _state_user_user_state__WEBPACK_IMPORTED_MODULE_19__["StateUser"],
+                    _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_20__["StateNotifications"],
+                    _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_21__["StateCluster"],
+                    _state_places_places_state__WEBPACK_IMPORTED_MODULE_22__["StatePlaces"],
+                    _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_23__["StateIcons"],
+                    _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_24__["StateSubscriptions"]
                 ]),
-                _ngxs_devtools_plugin__WEBPACK_IMPORTED_MODULE_5__["NgxsReduxDevtoolsPluginModule"].forRoot({ disabled: _environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].production }),
-                ngx_mapbox_gl__WEBPACK_IMPORTED_MODULE_6__["NgxMapboxGLModule"].withConfig({ accessToken: _environments_environment__WEBPACK_IMPORTED_MODULE_12__["environment"].apis.maps.accessToken })
+                _ngxs_devtools_plugin__WEBPACK_IMPORTED_MODULE_5__["NgxsReduxDevtoolsPluginModule"].forRoot({ disabled: _environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].production }),
+                ngx_mapbox_gl__WEBPACK_IMPORTED_MODULE_6__["NgxMapboxGLModule"].withConfig({ accessToken: _environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].apis.maps.accessToken })
             ],
             providers: [
                 _ionic_native_globalization_ngx__WEBPACK_IMPORTED_MODULE_7__["Globalization"],
@@ -2827,6 +2830,150 @@ var ServiceIcon = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__["AngularFirestore"]])
     ], ServiceIcon);
     return ServiceIcon;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/notifications.service.ts":
+/*!***************************************************!*\
+  !*** ./src/app/services/notifications.service.ts ***!
+  \***************************************************/
+/*! exports provided: ServiceNotifications */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceNotifications", function() { return ServiceNotifications; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ServiceNotifications = /** @class */ (function () {
+    function ServiceNotifications() {
+    }
+    ServiceNotifications.prototype.get = function () {
+        var notifications = [
+            {
+                image: 'assets/images/temp-notifications-rusted.root.jpg',
+                title: 'Rusted Root',
+                body: "Sahlen's Music Stage",
+                read: false,
+                date: 'May 12, 2017 at 7:00pm'
+            },
+            {
+                image: 'assets/images/temp-notifications-foster.the.people.jpg',
+                title: 'Foster The People',
+                body: "Ommegang Brewery Cooperstown",
+                read: false,
+                date: 'June 10, 2017 at 7:00pm'
+            },
+            {
+                image: 'assets/images/temp-notifications-blondie.jpg',
+                title: 'Blondie',
+                body: "Artpark",
+                read: false,
+                date: 'July 25, 2016 at 6:30pm'
+            }
+        ];
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(notifications);
+    };
+    ServiceNotifications = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
+        __metadata("design:paramtypes", [])
+    ], ServiceNotifications);
+    return ServiceNotifications;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/subscriptions.service.ts":
+/*!***************************************************!*\
+  !*** ./src/app/services/subscriptions.service.ts ***!
+  \***************************************************/
+/*! exports provided: ServiceSubscriptions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceSubscriptions", function() { return ServiceSubscriptions; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ServiceSubscriptions = /** @class */ (function () {
+    function ServiceSubscriptions() {
+    }
+    ServiceSubscriptions.prototype.get = function () {
+        var subscriptions = [
+            {
+                name: 'Pokemon Go Rochester Nests',
+                tagline: 'Get alerts for all your favorite Pokemon nests',
+                description: '',
+                icon: 'assets/icons/temp-icon.java.1.png',
+                photo: 'assets/images/temp-subscriptions-pokemon-go.jpg',
+                categories: '',
+                private: false,
+                locations: [],
+                subscribed: true,
+                draft: false,
+                userId: ''
+            },
+            {
+                name: 'Lilac Festival',
+                tagline: 'Alerts about all the Lilac Festival events and activities',
+                description: '',
+                icon: 'assets/icons/temp-icon.java.2.png',
+                photo: 'assets/images/temp-subscriptions-lilac-festival.jpg',
+                categories: '',
+                private: false,
+                locations: [],
+                subscribed: false,
+                draft: false,
+                userId: ''
+            },
+            {
+                name: 'Music Festivals Rochester',
+                tagline: 'Get alerts about Rochester music festivals',
+                description: '',
+                icon: 'assets/icons/temp-icon.java.3.png',
+                photo: 'assets/images/temp-subscriptions-lollapalooza.png',
+                categories: '',
+                private: false,
+                locations: [],
+                subscribed: false,
+                draft: false,
+                userId: ''
+            }
+        ];
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(subscriptions);
+    };
+    ServiceSubscriptions = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
+        __metadata("design:paramtypes", [])
+    ], ServiceSubscriptions);
+    return ServiceSubscriptions;
 }());
 
 
@@ -3754,22 +3901,31 @@ var StateLocation = /** @class */ (function () {
 /*!**************************************************************!*\
   !*** ./src/app/state/notifications/notifications.actions.ts ***!
   \**************************************************************/
-/*! exports provided: ActionsNotifications, NotificationsWatch */
+/*! exports provided: ActionsNotifications, NotificationsWatch, NotificationsGet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionsNotifications", function() { return ActionsNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotificationsWatch", function() { return NotificationsWatch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotificationsGet", function() { return NotificationsGet; });
 var ActionsNotifications;
 (function (ActionsNotifications) {
-    ActionsNotifications["NotificationsWatch"] = "[App] Notifications Watch";
+    ActionsNotifications["NotificationsWatch"] = "[Notifications] Watch";
+    ActionsNotifications["NotificationsGet"] = "[Notifications] Get";
 })(ActionsNotifications || (ActionsNotifications = {}));
 var NotificationsWatch = /** @class */ (function () {
     function NotificationsWatch() {
     }
     NotificationsWatch.type = ActionsNotifications.NotificationsWatch;
     return NotificationsWatch;
+}());
+
+var NotificationsGet = /** @class */ (function () {
+    function NotificationsGet() {
+    }
+    NotificationsGet.type = ActionsNotifications.NotificationsGet;
+    return NotificationsGet;
 }());
 
 
@@ -3787,13 +3943,14 @@ var NotificationsWatch = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateNotifications", function() { return StateNotifications; });
 /* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
-/* harmony import */ var rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/observable/fromPromise */ "../../node_modules/rxjs-compat/_esm5/observable/fromPromise.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/firebase/ngx */ "../../node_modules/@ionic-native/firebase/ngx/index.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _notifications_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./notifications.actions */ "./src/app/state/notifications/notifications.actions.ts");
-/* harmony import */ var _user_user_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../user/user.actions */ "./src/app/state/user/user.actions.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/observable/fromPromise */ "../../node_modules/rxjs-compat/_esm5/observable/fromPromise.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/firebase/ngx */ "../../node_modules/@ionic-native/firebase/ngx/index.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
+/* harmony import */ var _notifications_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./notifications.actions */ "./src/app/state/notifications/notifications.actions.ts");
+/* harmony import */ var _user_user_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../user/user.actions */ "./src/app/state/user/user.actions.ts");
+/* harmony import */ var _services_notifications_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/notifications.service */ "./src/app/services/notifications.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3811,34 +3968,46 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var StateNotifications = /** @class */ (function () {
-    function StateNotifications(firebaseNative, platform) {
+    function StateNotifications(firebaseNative, platform, serviceNotifications) {
         this.firebaseNative = firebaseNative;
         this.platform = platform;
+        this.serviceNotifications = serviceNotifications;
     }
-    StateNotifications.notifications = function (state) { return state.notifications; };
-    StateNotifications.notification = function (state) { return state.notification; };
-    StateNotifications.hasNotifications = function (state) { return state.notifications.length > 0; };
+    StateNotifications.notifications = function (state) { return state.notificationsPush; };
+    StateNotifications.notification = function (state) { return state.notificationPush; };
+    StateNotifications.hasPushNotifications = function (state) { return state.notificationsPush.length > 0; };
     StateNotifications.prototype.notificationsWatch = function (_a) {
         var patchState = _a.patchState, getState = _a.getState, dispatch = _a.dispatch;
-        this.firebaseNative.onNotificationOpen().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (notification) {
+        this.firebaseNative.onNotificationOpen().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (notificationPush) {
             return patchState({
-                notification: notification,
-                notifications: getState().notifications.concat([
-                    notification
+                notificationPush: notificationPush,
+                notificationsPush: getState().notificationsPush.concat([
+                    notificationPush
                 ])
             });
         }));
-        var permission$ = this.platform.is('ios') ? Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_1__["fromPromise"])(this.firebaseNative.grantPermission()) : Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["of"])(undefined);
-        var token$ = this.platform.is('cordova') ? Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_1__["fromPromise"])(this.firebaseNative.getToken()) : Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["of"])(undefined);
-        return permission$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function () { return token$; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (token) { return token != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function (token) { return dispatch(new _user_user_actions__WEBPACK_IMPORTED_MODULE_6__["UserAddToken"](token)); }));
+        var permission$ = this.platform.is('ios') ? Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__["fromPromise"])(this.firebaseNative.grantPermission()) : Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(undefined);
+        var token$ = this.platform.is('cordova') ? Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__["fromPromise"])(this.firebaseNative.getToken()) : Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(undefined);
+        return permission$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function () { return token$; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (token) { return token != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (token) { return dispatch(new _user_user_actions__WEBPACK_IMPORTED_MODULE_7__["UserAddToken"](token)); }));
+    };
+    StateNotifications.prototype.notificationsGet = function (_a) {
+        var patchState = _a.patchState;
+        return this.serviceNotifications.get().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (notifications) { return patchState({ notifications: notifications }); }));
     };
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_notifications_actions__WEBPACK_IMPORTED_MODULE_5__["NotificationsWatch"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_notifications_actions__WEBPACK_IMPORTED_MODULE_6__["NotificationsWatch"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateNotifications.prototype, "notificationsWatch", null);
+    __decorate([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_notifications_actions__WEBPACK_IMPORTED_MODULE_6__["NotificationsGet"]),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], StateNotifications.prototype, "notificationsGet", null);
     __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Selector"])(),
         __metadata("design:type", Function),
@@ -3856,16 +4025,17 @@ var StateNotifications = /** @class */ (function () {
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
-    ], StateNotifications, "hasNotifications", null);
+    ], StateNotifications, "hasPushNotifications", null);
     StateNotifications = __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["State"])({
             name: 'notifications',
             defaults: {
                 notifications: [],
-                notification: undefined
+                notificationsPush: [],
+                notificationPush: undefined
             }
         }),
-        __metadata("design:paramtypes", [_ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_3__["Firebase"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"]])
+        __metadata("design:paramtypes", [_ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_4__["Firebase"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"], _services_notifications_service__WEBPACK_IMPORTED_MODULE_8__["ServiceNotifications"]])
     ], StateNotifications);
     return StateNotifications;
 }());
@@ -4003,6 +4173,96 @@ var StatePlaces = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Store"]])
     ], StatePlaces);
     return StatePlaces;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/state/subscriptions/subscriptions.actions.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/state/subscriptions/subscriptions.actions.ts ***!
+  \**************************************************************/
+/*! exports provided: ActionsSubscriptions, SubscriptionsGet */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionsSubscriptions", function() { return ActionsSubscriptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubscriptionsGet", function() { return SubscriptionsGet; });
+var ActionsSubscriptions;
+(function (ActionsSubscriptions) {
+    ActionsSubscriptions["SubscriptionsGet"] = "[Subscriptions] Get";
+})(ActionsSubscriptions || (ActionsSubscriptions = {}));
+var SubscriptionsGet = /** @class */ (function () {
+    function SubscriptionsGet() {
+    }
+    SubscriptionsGet.type = ActionsSubscriptions.SubscriptionsGet;
+    return SubscriptionsGet;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/state/subscriptions/subscriptions.state.ts":
+/*!************************************************************!*\
+  !*** ./src/app/state/subscriptions/subscriptions.state.ts ***!
+  \************************************************************/
+/*! exports provided: StateSubscriptions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateSubscriptions", function() { return StateSubscriptions; });
+/* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _subscriptions_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./subscriptions.actions */ "./src/app/state/subscriptions/subscriptions.actions.ts");
+/* harmony import */ var _services_subscriptions_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/subscriptions.service */ "./src/app/services/subscriptions.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var StateSubscriptions = /** @class */ (function () {
+    function StateSubscriptions(subscriptions) {
+        this.subscriptions = subscriptions;
+    }
+    StateSubscriptions.subscriptions = function (state) { return state.subscriptions; };
+    StateSubscriptions.prototype.subscriptionsGet = function (_a) {
+        var patchState = _a.patchState;
+        return this.subscriptions.get().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["tap"])(function (subscriptions) { return patchState({ subscriptions: subscriptions }); }));
+    };
+    __decorate([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_subscriptions_actions__WEBPACK_IMPORTED_MODULE_2__["SubscriptionsGet"]),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], StateSubscriptions.prototype, "subscriptionsGet", null);
+    __decorate([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Selector"])(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], StateSubscriptions, "subscriptions", null);
+    StateSubscriptions = __decorate([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["State"])({
+            name: 'subscriptions',
+            defaults: {
+                subscriptions: []
+            }
+        }),
+        __metadata("design:paramtypes", [_services_subscriptions_service__WEBPACK_IMPORTED_MODULE_3__["ServiceSubscriptions"]])
+    ], StateSubscriptions);
+    return StateSubscriptions;
 }());
 
 
@@ -4289,7 +4549,8 @@ var StateUser = /** @class */ (function () {
                 patchState({ user: user, authenticated: true });
                 dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_11__["LanguageSet"](user.language));
                 dispatch(new _alert_alert_actions__WEBPACK_IMPORTED_MODULE_13__["AlertsGet"]());
-                dispatch(new _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_14__["NotificationsWatch"]());
+                //                    dispatch(new NotificationsWatch());
+                dispatch(new _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_14__["NotificationsGet"]());
             }
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
     };
