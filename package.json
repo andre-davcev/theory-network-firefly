@@ -32,6 +32,7 @@
     "fire-design-logo": "grunt sketch_export:logo",
     "fire-design-text": "grunt sketch_export:text",
     "fire-design-exports": "grunt exports",
+    "fire-ionic-watch": "cd apps/ionic-firefly && ng build --watch",
     "capacitor-update": "npx cap update",
     "capacitor-add-ios": "npx cap add ios",
     "capacitor-add-android": "npx cap add android",
