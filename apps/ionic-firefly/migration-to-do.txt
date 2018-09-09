@@ -1,11 +1,9 @@
 ToDo:
-- comment out notifications state
-- add cordova plugin variables and re-add
+- run prepare for ios
 - fix login screen
 - setup routing for all pages
 - ionic 3 to ionic 4 (npx tslint -c ionic-migration.json -p tsconfig.json > migration.txt)
 - add new script (cd apps/ionic-firefly && ng build --watch)
-- merge assets folder
 - target ion component selectors (ion-tabs instead of .tabbar)
 - pages scss
 - move global scss to mixins

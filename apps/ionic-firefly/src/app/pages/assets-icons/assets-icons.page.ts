@@ -11,9 +11,9 @@ export class PageAssetsIcons
 {
     public icons: Array<string> =
     [
-        'assets/temp/icons/coffee-icon-blue.png',
-        'assets/temp/icons/coffee-icon-pink.png',
-        'assets/temp/icons/coffee-icon-brown.png'
+        'assets/icons/temp-coffee-icon-blue.png',
+        'assets/icons/temp-coffee-icon-pink.png',
+        'assets/icons/temp-coffee-icon-brown.png'
     ];
 
     ionViewWillEnter()

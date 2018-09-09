@@ -9,7 +9,7 @@ export class ServiceTemp
     alerts:Array<Alert> =
     [
         {
-            image : 'assets/temp/images/alerts/rusted.root.jpg',
+            image : 'assets/images/temp-notifications-rusted.root.jpg',
             title : 'Rusted Root',
             body  : "Sahlen's Music Stage",
             read  : false,
@@ -17,7 +17,7 @@ export class ServiceTemp
         },
 
         {
-            image : 'assets/temp/images/alerts/foster.the.people.jpg',
+            image : 'assets/images/temp-notifications-foster.the.people.jpg',
             title : 'Foster The People',
             body  : "Ommegang Brewery Cooperstown",
             read  : false,
@@ -25,7 +25,7 @@ export class ServiceTemp
         },
 
         {
-            image : 'assets/temp/images/alerts/blondie.jpg',
+            image : 'assets/images/temp-notifications-blondie.jpg',
             title : 'Blondie',
             body  : "Artpark",
             read  : false,
@@ -39,8 +39,8 @@ export class ServiceTemp
             name        : 'Pokemon Go Rochester Nests',
             tagline     : 'Get alerts for all your favorite Pokemon nests',
             description : '',
-            icon        : 'assets/temp/icons/icon.java.1.png',
-            photo       : 'assets/temp/images/subscriptions/pokemon-go.jpg',
+            icon        : 'assets/icons/temp-icon.java.1.png',
+            photo       : 'assets/images/temp-subscriptions-pokemon-go.jpg',
             categories  : '',
             private     : false,
             locations   : [],
@@ -53,8 +53,8 @@ export class ServiceTemp
             name        : 'Lilac Festival',
             tagline     : 'Alerts about all the Lilac Festival events and activities',
             description : '',
-            icon        : 'assets/temp/icons/icon.java.2.png',
-            photo       : 'assets/temp/images/subscriptions/lilac-festival.jpg',
+            icon        : 'assets/icons/temp-icon.java.2.png',
+            photo       : 'assets/images/temp-subscriptions-lilac-festival.jpg',
             categories  : '',
             private     : false,
             locations   : [],
@@ -67,8 +67,8 @@ export class ServiceTemp
             name        : 'Music Festivals Rochester',
             tagline     : 'Get alerts about Rochester music festivals',
             description : '',
-            icon        : 'assets/temp/icons/icon.java.3.png',
-            photo       : 'assets/temp/images/subscriptions/lollapalooza.png',
+            icon        : 'assets/icons/temp-icon.java.3.png',
+            photo       : 'assets/images/temp-subscriptions-lollapalooza.png',
             categories  : '',
             private     : false,
             locations   : [],
