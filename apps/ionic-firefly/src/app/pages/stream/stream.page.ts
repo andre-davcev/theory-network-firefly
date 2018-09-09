@@ -19,8 +19,7 @@ export class PageStream
 {
     @Select(StateSubscriptions.subscriptions) subscriptions$: Observable<Array<Subscription>>;
 
-
-    constructor(private store:Store)
+    constructor(private store: Store)
     {
         const cluster: Cluster =
         {
