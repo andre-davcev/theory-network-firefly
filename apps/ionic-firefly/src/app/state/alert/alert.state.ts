@@ -6,11 +6,11 @@ import { map } from 'rxjs/operators';
 
 import { StateUserModel } from '../user/user.state';
 import { AlertsGet } from './alert.actions';
-import { Alert } from '../../models/alert.model';
+import { Notification } from '../../models/notification.model';
 
 export interface StateAlertModel
 {
-    entities: {[id: string]: Alert};
+    entities: {[id: string]: Notification};
 }
 
 @State<StateAlertModel>
@@ -43,13 +43,13 @@ export class StateAlerts
         valueChanges().
         pipe
         (
-            map((alerts: Array<Alert>) =>
+            map((alerts: Array<Notification>) =>
             {
-                const filtered: Array<Alert> = alerts.
-                filter((alert: Alert) => alert.dateCreated != null).
-                sort((a: Alert, b: Alert) => b.dateCreated.toDate().getTime() - a.dateCreated.toDate().getTime());
+                const filtered: Array<Notification> = alerts.
+                filter((alert: Notification) => alert.dateCreated != null).
+                sort((a: Notification, b: Notification) => b.dateCreated.toDate().getTime() - a.dateCreated.toDate().getTime());
 
-                const entities:{[id: number]: Alert} = {};
+                const entities:{[id: number]: Notification} = {};
 
                 for (const alert of filtered)
                 {
