@@ -9,6 +9,8 @@ import { Globalization } from '@ionic-native/globalization/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 //import { Pro } from '@ionic/pro';
 
 import { AppIonicCoreModule } from '@theory/ionic';
@@ -23,8 +25,8 @@ import { StateNotifications } from '../state/notifications/notifications.state';
 import { StateCluster } from '../state/cluster/cluster.state';
 import { StatePlaces } from '../state/places/places.state';
 import { StateIcons } from '../state/icons/icons.state';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import { StateSubscriptions } from '../state/subscriptions/subscriptions.state';
 
 /*
 Pro.init('1e5146ca',
@@ -53,7 +55,8 @@ Pro.init('1e5146ca',
             StateNotifications,
             StateCluster,
             StatePlaces,
-            StateIcons
+            StateIcons,
+            StateSubscriptions
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),

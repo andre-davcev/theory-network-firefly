@@ -1,15 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { tap } from 'rxjs/operators';
-import { Slides, NavController, AlertController, ModalController } from '@ionic/angular';
+import { Slides, AlertController, ModalController } from '@ionic/angular';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 import { PageStream } from '../stream/stream.page';
 import { PageSearch } from '../search/search.page';
 import { PageSubscriptions } from '../subscriptions/subscriptions.page';
 import { PagePublisherCluster } from '../cluster/cluster.page';
-import { Alert } from '../../models/alert.model';
+import { Notification } from '../../models/notification.model';
 import { PageUser } from '../user/user.page';
-import { ServiceAlerts } from '../../services/alerts.service';
+import { StateNotifications } from '../../state/notifications/notifications.state';
 
 export enum AlertsModalType
 {
@@ -33,7 +35,7 @@ export class PageHome
 
     segment:string = 'fired';
 
-    alerts:Array<Alert>;
+    @Select(StateNotifications.notifications) notifications$: Observable<Array<Notification>>;
 
     public AlertsModalType: any = AlertsModalType;
 
@@ -55,12 +57,7 @@ export class PageHome
         PageUser
     ];
 
-    constructor(public alertController: AlertController, public alertsObject: ServiceAlerts, private nav: NavController, public modalController: ModalController)
-    {
-        this.alerts = alertsObject.alerts;
-
-        alertsObject.view(0);
-    }
+    constructor(public alertController: AlertController, private modalController: ModalController) { }
 
     ionViewWillEnter()
     {
@@ -71,7 +68,7 @@ export class PageHome
     {
         fromPromise(this.slides.getActiveIndex()).
 
-        pipe(tap((index: number) => this.alertsObject.view(index)));
+        pipe(tap((index: number) => console.log('Slide Changed: ' + index)));
     }
 
     navigate(type: AlertsModalType): void
@@ -92,7 +89,7 @@ export class PageHome
         }
         else
         {
-          modal.present();
+            modal.present();
         }
     }
 

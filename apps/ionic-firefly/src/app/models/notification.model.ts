@@ -1,6 +1,6 @@
 import { Model } from './model';
 
-export interface Alert extends Model
+export interface Notification extends Model
 {
     title : string;
     body  : string;

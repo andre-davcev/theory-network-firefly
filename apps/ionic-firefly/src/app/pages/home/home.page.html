@@ -22,13 +22,13 @@
 
 <ion-content class="ff-primary-background">
   <ion-slides ion-fixed pager (ionSlideDidChange)="slideChanged()">
-      <ion-slide *ngFor="let alert of alerts">
+      <ion-slide *ngFor="let notification of notifications$ | async">
           <div class="ff-card">
-              <h1 class="ff-title">{{alert.title}}</h1>
-              <h2 class="ff-short">{{alert.body}}</h2>
-              <img class="ff-image" [src]="alert.image">
+              <h1 class="ff-title">{{notification.title}}</h1>
+              <h2 class="ff-short">{{notification.body}}</h2>
+              <img class="ff-image" [src]="notification.image">
               <button class="ff-button">{{'page.notifications.addCoupon' | translate}}</button>
-              <p class="ff-paragraph">{{alert.date}}</p>
+              <p class="ff-paragraph">{{notification.date}}</p>
           </div>
       </ion-slide>
   </ion-slides>

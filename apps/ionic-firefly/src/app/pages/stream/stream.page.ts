@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 import { SetCluster } from '../../state/cluster/cluster.actions';
 import { Subscription } from '../../models/subscription.model';
-import { ServiceTemp } from '../../services/temp.service';
 import { Cluster } from '../../models/cluster.model';
+import { StateSubscriptions } from '../../state/subscriptions/subscriptions.state';
+
 
 @Component
 ({
@@ -15,9 +17,10 @@ import { Cluster } from '../../models/cluster.model';
 
 export class PageStream
 {
-    public subscriptions:Array<Subscription> = [];
+    @Select(StateSubscriptions.subscriptions) subscriptions$: Observable<Array<Subscription>>;
 
-    constructor(private store:Store, temp: ServiceTemp)
+
+    constructor(private store:Store)
     {
         const cluster: Cluster =
         {
@@ -26,31 +29,12 @@ export class PageStream
             description : 'My description'
         };
 
-        this.subscriptions = temp.subscriptions;
-
         this.store.dispatch(new SetCluster(cluster));
     }
 
     public ionViewWillEnter(): void
     {
 //        this.statusBar.styleLightContent();
-    }
-
-    public doInfinite(infiniteScroll: any): void
-    {
-        console.log('Begin async operation');
-
-        setTimeout(() =>
-        {
-            for (let i = 0; i < 30; i++)
-            {
-                this.subscriptions.push(this.subscriptions[i]);
-            }
-
-            console.log('Async operation has ended');
-
-            infiniteScroll.complete();
-        }, 500);
     }
 
     public dismissModal(): void
