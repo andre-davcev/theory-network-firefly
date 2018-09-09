@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
+import { Subscription } from '../../models/subscription.model';
+import { StateSubscriptions } from '../../state/subscriptions/subscriptions.state';
 import { Cluster } from '../../models/cluster.model';
-import { ServiceTemp } from '../../services/temp.service';
 
 @Component
 ({
@@ -12,12 +15,9 @@ import { ServiceTemp } from '../../services/temp.service';
 
 export class PagePublisherClusters
 {
-    public clusters:Array<Cluster>;
+    @Select(StateSubscriptions.subscriptions) subscriptions$: Observable<Array<Subscription>>;
 
-    constructor(temp: ServiceTemp)
-    {
-        this.clusters = temp.subscriptions;
-    }
+    constructor() { }
 
     ionViewWillEnter()
     {
