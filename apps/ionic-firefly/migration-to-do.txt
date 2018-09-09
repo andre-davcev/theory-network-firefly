@@ -1,6 +1,5 @@
 ToDo:
-- run prepare for ios
-- fix login screen
+- login screen styling
 - setup routing for all pages
 - ionic 3 to ionic 4 (npx tslint -c ionic-migration.json -p tsconfig.json > migration.txt)
 - target ion component selectors (ion-tabs instead of .tabbar)
