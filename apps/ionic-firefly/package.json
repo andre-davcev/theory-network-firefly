@@ -61,7 +61,6 @@
     "@theory/scss": "file:../../libs/scss",
     "@theory/web": "file:../../xplat/web",
     "cordova-plugin-facebook4": "file:../../node_modules/cordova-plugin-facebook4",
-    "cordova-plugin-firebase": "file:../../node_modules/cordova-plugin-firebase",
     "cordova-plugin-globalization": "file:../../node_modules/cordova-plugin-globalization",
     "cordova-plugin-mauron85-background-geolocation": "file:../../node_modules/cordova-plugin-mauron85-background-geolocation",
     "firebase": "file:../../node_modules/firebase",
