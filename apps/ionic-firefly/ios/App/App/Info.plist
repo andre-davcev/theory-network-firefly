@@ -28,20 +28,28 @@
 				<string>capacitor</string>
 			</array>
 		</dict>
-    <dict>
+		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb290928347614299</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>REVERSED_CLIENT_ID</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.671375922961-flp4eac97fk4lcbss1bnhg5240c7iruj</string>
+			</array>
+		</dict>
     <dict>
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
-      <key>CFBundleURLName</key>
-      <string>REVERSED_CLIENT_ID</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>com.googleusercontent.apps.671375922961-flp4eac97fk4lcbss1bnhg5240c7iruj</string>
+        <string>prefs</string>
       </array>
     </dict>
 	</array>
@@ -130,5 +138,11 @@
 	<false/>
 	<key>firebase_crashlytics_collection_enabled</key>
 	<false/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Firefly requires your location to let life come to you</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 </dict>
 </plist>
