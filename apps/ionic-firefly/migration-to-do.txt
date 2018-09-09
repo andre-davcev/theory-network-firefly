@@ -19,21 +19,6 @@ ToDo:
 - migrate modal controller present to use angular routing & new modal animations (ion-animation-controller)
 - Test on devices ios / android
 
-[info] Plugin cordova-plugin-firebase requires you to add
-  <key>FirebaseMessagingAutoInitEnabled</key>
-  <string>no</string>
- to your Info.plist to work
-
-[info] Plugin cordova-plugin-firebase requires you to add
-  <key>firebase_performance_collection_enabled</key>
-  <false/>
- to your Info.plist to work
-
-[info] Plugin cordova-plugin-firebase requires you to add
-  <key>firebase_crashlytics_collection_enabled</key>
-  <false/>
- to your Info.plist to work
-
 [info] Plugin cordova-plugin-googleplus might require you to add
     <dict>
       <key>CFBundleTypeRole</key>

@@ -109,5 +109,11 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
+	<key>FirebaseMessagingAutoInitEnabled</key>
+	<string>no</string>
+	<key>firebase_performance_collection_enabled</key>
+	<false/>
+	<key>firebase_crashlytics_collection_enabled</key>
+	<false/>
 </dict>
 </plist>
