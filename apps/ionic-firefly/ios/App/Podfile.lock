@@ -33,7 +33,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 93fe0f060c771ee521f5146973b5e1511ab9a9bf
   CapacitorCordova: 1127cc709c470cbfde4678cd1023e790cdd74313
-  CordovaPlugins: 3766c7316e00864622090b0ddbe6699c520e8949
+  CordovaPlugins: 4766b7c6b83cb38bf45b07f7e7448f18f412a0bc
   CordovaPluginsResources: 83a99c2e0c802a4d8f9c424879e6692629089500
   GCDWebServer: 8d67ee9f634b4bb91eb4b8aee440318a5fc6debd
 
