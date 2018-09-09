@@ -41,7 +41,7 @@ export class PageLogin implements OnInit
 
         subscribe((userFound: boolean) =>
         {
-            this.router.navigate(['/home']);
+//            this.router.navigate(['/home']);
         });
 
         forkJoin

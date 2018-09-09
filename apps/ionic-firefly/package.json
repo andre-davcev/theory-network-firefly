@@ -60,8 +60,6 @@
     "@theory/ionic": "file:../../xplat/ionic",
     "@theory/scss": "file:../../libs/scss",
     "@theory/web": "file:../../xplat/web",
-    "cordova-plugin-file": "file:../../node_modules/cordova-plugin-file",
-    "cordova-plugin-file-transfer": "file:../../node_modules/cordova-plugin-file-transfer",
     "cordova-plugin-globalization": "file:../../node_modules/cordova-plugin-globalization",
     "cordova-plugin-mauron85-background-geolocation": "file:../../node_modules/cordova-plugin-mauron85-background-geolocation",
     "firebase": "file:../../node_modules/firebase",
