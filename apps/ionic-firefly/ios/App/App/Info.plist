@@ -25,10 +25,25 @@
 			<string>com.getcapacitor.capacitor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb290928347614299</string>
 				<string>capacitor</string>
 			</array>
 		</dict>
+    <dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb290928347614299</string>
+			</array>
+		</dict>
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>CFBundleURLName</key>
+      <string>REVERSED_CLIENT_ID</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>com.googleusercontent.apps.671375922961-flp4eac97fk4lcbss1bnhg5240c7iruj</string>
+      </array>
+    </dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
