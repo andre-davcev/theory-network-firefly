@@ -72,7 +72,393 @@ $app-auth-footer-font-size:                  $app-font-size-tiny;
 $app-auth-footer-item-line-height:           $tn-line-height-none;
 $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
 
-.ff-splash
+.tn-ico:before
+{
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    font-size: $app-icon-font-size;
+}
+
+
+.tn-input-container
+{
+    position: relative;
+    display: block;
+
+    &:after
+    {
+        display: none;
+        position: absolute;
+        top: 0; right: 0;
+        font-family: $app-input-icon-font-family;
+        font-size: $app-input-icon-font-size;
+        line-height: $app-input-icon-line-height;
+    }
+
+    &.tn-input-status-verified
+    {
+        &:after
+        {
+            display: block;
+            content: $app-input-icon-verified;
+            color: $app-input-icon-verified-color;
+            right: -($app-input-icon-verified-margin);
+        }
+
+        &.tn-input-icon-rounded:after
+        {
+            content: $app-input-icon-verified-round;
+        }
+    }
+
+    &.tn-input-status-error
+    {
+        &:after
+        {
+            display: block;
+            content: $app-input-icon-error;
+            color: $app-input-icon-error-color;
+            right: -($app-input-icon-error-margin);
+        }
+
+        &.tn-input-icon-rounded:after
+        {
+            content: $app-input-icon-error-round;
+        }
+    }
+
+    > .spinner-crescent
+    {
+        display: block;
+        position: absolute;
+        top: $app-input-spinner-margin; right: -($app-input-spinner-margin-right);
+    }
+
+    > .tn-input-clear
+    {
+        &:after
+        {
+            display: block;
+            position: absolute;
+            top: 0; right: $app-input-spinner-margin;
+            font-family: $app-input-icon-font-family;
+            font-size: $app-input-icon-font-size;
+            line-height: $app-input-icon-line-height;
+            content: $app-input-icon-clear;
+            color: $app-input-icon-clear-color;
+        }
+    }
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"]
+{
+    &.tn-input
+    {
+        position: relative;
+        display: block;
+        border: none;
+        background-color: transparent;
+        line-height: $app-input-line-height;
+    }
+}
+
+.tn-animate
+{
+    transition-timing-function: linear;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    perspective: 1000;
+    transition-property: none;
+
+    &.tn-align-items
+    {
+        transition-duration: $app-transition-duration-move;
+        transition-property: align-items;
+    }
+
+    &.tn-justify-content
+    {
+        transition-duration: $app-transition-duration-move;
+        transition-property: justify-content;
+
+        &.tn-align-items
+        {
+            transition-duration: $app-transition-duration-move;
+            transition-property: justify-content, align-items;
+        }
+    }
+
+    &.tn-margin
+    {
+        transition-duration: $app-transition-duration-move;
+        transition-property: margin;
+    }
+
+    &.tn-transform
+    {
+        transition-duration: $app-transition-duration-move;
+        transition-property: transform;
+    }
+
+    &.tn-opacity
+    {
+        transition-duration: $app-transition-duration-move;
+        transition-property: opacity;
+
+        &.tn-transform
+        {
+            transition-duration: $app-transition-duration-move;
+            transition-property: opacity, transform;
+        }
+    }
+
+    &.tn-dimensions
+    {
+        transition-duration: $app-transition-duration-move;
+        transition-property: height, width;
+
+        &.tn-margin
+        {
+            transition-property: height, width, margin;
+
+            &.tn-opacity
+            {
+                transition-property: height, width, margin, opacity;
+            }
+        }
+
+        &.tn-opacity
+        {
+            transition-property: height, width, opacity;
+        }
+    }
+
+    &.tn-height
+    {
+        transition-duration: $app-transition-duration-move;
+        transition-property: height;
+
+        &.tn-margin
+        {
+            transition-property: height, margin;
+
+            &.tn-opacity
+            {
+                transition-property: height, margin, opacity;
+            }
+        }
+
+        &.tn-opacity
+        {
+            transition-property: height, opacity;
+        }
+    }
+
+    &.tn-width
+    {
+        transition-duration: $app-transition-duration-move;
+        transition-property: width;
+
+        &.tn-margin
+        {
+            transition-property: width, margin;
+
+            &.tn-opacity
+            {
+                transition-property: width, margin, opacity;
+            }
+        }
+
+        &.tn-opacity
+        {
+            transition-property: width, opacity;
+        }
+    }
+}
+
+
+.tn-container
+{
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+
+    &.tn-fill
+    {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.tn-container-reset
+{
+    position: relative;
+    flex: none;
+    display: flex;
+}
+
+.tn-provider
+{
+    &.tn-button
+    {
+        color: $app-provider-button-color-text;
+        font-size: $app-provider-button-font-size;
+        font-family: $app-provider-button-font-family;
+        text-shadow: $app-provider-button-text-shadow;
+
+        .tn-item
+        {
+            position: relative;
+            display: inline-block;
+            line-height: $tn-line-height-none;
+            padding-left: $app-provider-button-icon-width-with-margin;
+
+            &:before
+            {
+                box-sizing: border-box;
+                display: block;
+                position: absolute;
+                top: -0.3rem; left: 0.4rem;
+                height: $app-provider-button-icon-height; width: $app-provider-button-icon-width;
+                font-family: $app-provider-button-icon-font-family;
+                font-size: $app-provider-button-icon-font-size;
+                border-radius: $app-provider-button-icon-border-radius;
+                background-color: $app-provider-button-icon-color-background;
+                text-shadow: none;
+                text-align: center;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    &.tn-twitter
+    {
+        &.tn-button
+        {
+            background-color: $app-twitter-button-color-background;
+
+            &:not([disabled]):hover
+            {
+                background-color: $app-twitter-button-color-background;
+            }
+
+            &.md-focused
+            {
+                background-color: $app-twitter-button-color-background;
+            }
+
+            .tn-item
+            {
+                &:before
+                {
+                    color: $app-twitter-button-icon-color-text;
+                    content: $app-twitter-button-icon-content;
+                    padding-top: 0.3rem; padding-left: 0.0rem;
+                }
+            }
+        }
+    }
+
+    &.tn-google
+    {
+        &.tn-button
+        {
+            background-color: $app-google-button-color-background;
+
+            &:not([disabled]):hover
+            {
+                background-color: $app-google-button-color-background;
+            }
+
+            &.md-focused
+            {
+                background-color: $app-google-button-color-background;
+            }
+
+            .tn-item
+            {
+                &:before
+                {
+                    color: $app-google-button-icon-color-text;
+                    content: $app-google-button-icon-content;
+                    padding-top: 0.5rem; padding-left: 0.1rem;
+                    font-size: $app-google-button-icon-font-size;
+                }
+            }
+        }
+    }
+
+    &.tn-facebook
+    {
+        &.tn-button
+        {
+            background-color: $app-facebook-button-color-background;
+
+            &:not([disabled]):hover
+            {
+                background-color: $app-facebook-button-color-background;
+            }
+
+            &.md-focused
+            {
+                background-color: $app-facebook-button-color-background;
+            }
+
+            .tn-item
+            {
+                &:before
+                {
+                    color: $app-facebook-button-icon-color-text;
+                    content: $app-facebook-button-icon-content;
+                    padding-top: 0.5rem; padding-left: 0.4rem;
+                }
+            }
+        }
+    }
+}
+
+.tn-button
+{
+    position: relative;
+    display: block;
+    border: none;
+    background-color: transparent;
+    line-height: $tn-line-height-none;
+    text-align: center;
+    vertical-align: middle;
+
+    &.tn-delete
+    {
+        position: absolute;
+        top: 0; right: 0;
+        height: $app-button-delete-height; width: $app-button-delete-width;
+        background-color: $app-button-delete-color-background;
+    }
+}
+
+.button.tn-button
+{
+    text-transform: none;
+    margin: 0;
+}
+
+:host
 {
     position: relative;
     display: flex;
@@ -85,7 +471,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
         transform: translate3d(0, 50%, 0);
     }
 
-    > .ff-container-app-title
+    > .cpt-container-app-title
     {
         margin-top: -3.5rem; margin-left: -0.1rem;
 
@@ -95,12 +481,12 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
             height: $app-auth-container-title-height;
             margin-left: 0.3rem; margin-top: -1.0rem;
 
-            > .ff-container-logo
+            > .cpt-container-logo
             {
                 position: relative;
             }
 
-            > .ff-app-title
+            > .cpt-app-title
             {
                 position: relative;
                 height: $app-auth-app-title-height; width: $app-auth-app-title-width;
@@ -109,7 +495,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
                 margin-top: 1.8rem; margin-left: 0.3rem;
             }
 
-            > .ff-tagline
+            > .cpt-tagline
             {
                 position: relative;
                 display: block;
@@ -129,7 +515,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
         }
     }
 
-    > .ff-container-auth
+    > .cpt-container-auth
     {
         position: relative;
         width: 100%;
@@ -139,12 +525,12 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
         flex-direction: column;
         justify-content: flex-end;
 
-        > .ff-auth-email
+        > .cpt-auth-email
         {
             position: relative;
             width: 100%;
 
-            > .ff-container-inputs
+            > .cpt-container-inputs
             {
                 margin-bottom: $app-auth-margin-elements-subgroup;
                 background-color: $app-auth-input-color-background;
@@ -156,7 +542,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
                     padding-top: 0.1rem;
                 }
 
-                > .ff-divider
+                > .cpt-divider
                 {
                     height: $app-auth-input-divider-height; width: $app-auth-input-divider-width;
                     background-color: $app-auth-input-divider-color;
@@ -173,7 +559,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
             }
         }
 
-        > .ff-divider
+        > .cpt-divider
         {
             position: relative;
             color: $app-auth-item-color-light;
@@ -212,7 +598,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
             }
         }
 
-        > .ff-buttons
+        > .cpt-buttons
         {
             position: relative;
             width: 100%;
@@ -232,7 +618,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
             }
         }
 
-        > .ff-footer
+        > .cpt-footer
         {
             position: relative;
             width: $app-auth-footer-width;
@@ -241,17 +627,17 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
             font-family: $app-auth-footer-font-family;
             font-size: $app-auth-footer-font-size;
 
-            .ff-underline
+            .cpt-underline
             {
                 text-decoration: underline;
             }
 
-            > .ff-item
+            > .cpt-item
             {
                 height: $app-auth-footer-item-line-height;
             }
 
-            .ff-item
+            .cpt-item
             {
                 position: relative;
                 line-height: $app-auth-footer-item-line-height;
@@ -293,23 +679,23 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
         }
     }
 
-    &.ff-login
+    &.cpt-ready
     {
         > .tn-container
         {
             transform: translate3d(0, 0, 0);
         }
 
-        > .ff-container-app-title
+        > .cpt-container-app-title
         {
             > .tn-align-item
             {
-                > .ff-app-title
+                > .cpt-app-title
                 {
                     transform: translate3d(0, $app-auth-app-title-translate-login, 0) scale($app-auth-app-title-scale-login);
                 }
 
-                > .ff-container-logo
+                > .cpt-container-logo
                 {
                     > firefly
                     {
@@ -317,7 +703,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
                     }
                 }
 
-                > .ff-tagline
+                > .cpt-tagline
                 {
                     transform: translate3d(0, $app-auth-app-title-translate-login - 0.6rem, 0);
                     opacity: 1;
@@ -325,7 +711,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
             }
         }
 
-        > .ff-container-auth
+        > .cpt-container-auth
         {
             opacity: 1;
         }
@@ -334,11 +720,13 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
 
 .tn-keyboard
 {
-    .ff-splash
+    .cpt-splash
     {
-        > .ff-container-app-title
+        > .cpt-container-app-title
         {
             transform: translate3d(0, 40%, 0);
         }
     }
 }
+
+

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable, forkJoin, timer, of } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
@@ -24,12 +24,10 @@ export class PageLogin implements OnInit
     @Select(StateUser.authenticated) userAuthenticated$: Observable<boolean>;
     @Select(StateUser.userFound)     userFound$:         Observable<boolean>;
 
+    @HostBinding('class.cpt-active')
     public ready: boolean = false;
 
-    constructor(private nav: NavController, private store: Store, private router: Router)
-    {
-
-    }
+    constructor(private nav: NavController, private store: Store, private router: Router) { }
 
     public ngOnInit(): void
     {

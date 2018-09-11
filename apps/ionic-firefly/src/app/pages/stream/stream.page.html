@@ -9,8 +9,8 @@
 </ion-header>
 
 <ion-content>
-    <ion-list class="ff-list">
-        <ion-item no-lines class="ff-primary-background" *ngFor="let subscription of subscriptions$ | async">
+    <ion-list>
+        <ion-item no-lines class="app-primary-background" *ngFor="let subscription of subscriptions$ | async">
             <ion-card>
                 <img [src]="subscription.photo">
 

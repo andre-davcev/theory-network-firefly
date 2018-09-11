@@ -1,69 +1,66 @@
-<div class="ff-splash" [class.ff-login]="ready">
-    <div class="tn-container ff-container-app-title tn-align tn-animate tn-transform">
-        <div class="tn-align-item tn-align-fixed">
-            <div class="ff-container-logo tn-align">
-                <app-icon-firefly class="ff-color-primary tn-animate tn-transform tn-align-item" [class.ff-animate]="!ready"></app-icon-firefly>
-            </div>
-
-            <img class="ff-app-title tn-animate tn-transform" src="assets/images/app.title@2x.png">
-            <span class="ff-tagline tn-animate tn-transform tn-opacity">{{ 'page.auth.tagline' | translate }}</span>
+<div class="tn-container cpt-container-app-title tn-animate tn-transform">
+    <div class="tn-align-item tn-align-fixed">
+        <div class="cpt-container-logo tn-align">
+            <app-icon-firefly class="cpt-color-primary tn-animate tn-transform tn-align-item" [class.cpt-animate]="!ready"></app-icon-firefly>
         </div>
+
+        <img class="cpt-app-title tn-animate tn-transform" src="assets/images/app.title@2x.png">
+        <span class="cpt-tagline tn-animate tn-transform tn-opacity">{{ 'page.auth.tagline' | translate }}</span>
+    </div>
+</div>
+
+<div class="tn-container cpt-container-auth tn-animate tn-opacity tn-transform">
+    <div class="cpt-auth-email">
+<!--
+        <div class="cpt-container-inputs">
+            <tn-input-email [tn-host-classes]="'tn-ico fa-icon fa-envelope-o'" [(tn-value)]="user.email.value" [tn-placeholder]="'page.auth.placeholderEmail' | translate" [tn-clear]="user.email.clear" [tn-validate]="user.email.validate" [tn-verifying]="user.email.verifying" [tn-required]="true" [tn-spinner-classes]="spinner-light" [tn-valid]="user.email.valid" [tn-valid-input]="user.email.validInput" (tn-change)="user.email.changed"></tn-input-email>
+
+            <div class="cpt-divider"></div>
+
+            <tn-input-password [tn-host-classes]="'tn-ico fa-icon fa-lock'" [(tn-value)]="user.password.value" [tn-placeholder]="'page.auth.placeholderPassword' | translate" [tn-required]="true" [tn-clear]="user.password.clear" [tn-validate]="user.password.validate" [tn-valid-input]="user.password.validInput"></tn-input-password>
+        </div>
+-->
+
+        <button class="tn-button cpt-button" (click)="login(AuthProvider.Email)">
+            <span class="cpt-text">{{'page.auth.signIn' | translate}}</span>
+        </button>
     </div>
 
-    <div class="tn-container ff-container-auth tn-animate tn-opacity tn-transform">
-        <div class="ff-auth-email">
+    <div class="cpt-divider tn-align">
+        <span class="tn-align-item tn-align-fixed">{{'page.auth.divider' | translate}}</span>
+    </div>
+
+    <div class="tn-container-reset cpt-buttons">
 <!--
-            <div class="ff-container-inputs">
-                <tn-input-email [tn-host-classes]="'tn-ico fa-icon fa-envelope-o'" [(tn-value)]="user.email.value" [tn-placeholder]="'page.auth.placeholderEmail' | translate" [tn-clear]="user.email.clear" [tn-validate]="user.email.validate" [tn-verifying]="user.email.verifying" [tn-required]="true" [tn-spinner-classes]="spinner-light" [tn-valid]="user.email.valid" [tn-valid-input]="user.email.validInput" (tn-change)="user.email.changed"></tn-input-email>
+        <button class="tn-button tn-provider tn-facebook" (click)="create()" [disabled]="(userAuthenticating$ | async)">
+            <span class="tn-item">{{'page.auth.create' | translate}}</span>
+        </button>
 
-                <div class="ff-divider"></div>
+        <button class="tn-button tn-provider tn-facebook" (click)="login(AuthProvider.Facebook)" [disabled]="(userAuthenticating$ | async)">
+            <span class="tn-item">{{'page.auth.facebook' | translate}}</span>
+        </button>
 
-                <tn-input-password [tn-host-classes]="'tn-ico fa-icon fa-lock'" [(tn-value)]="user.password.value" [tn-placeholder]="'page.auth.placeholderPassword' | translate" [tn-required]="true" [tn-clear]="user.password.clear" [tn-validate]="user.password.validate" [tn-valid-input]="user.password.validInput"></tn-input-password>
-            </div>
--->
+        <button class="tn-button tn-provider tn-google" (click)="login(AuthProvider.Google)" [disabled]="(userAuthenticating$ | async)">
+            <span class="tn-item">{{'page.auth.google' | translate}}</span>
+        </button>
 
-            <button class="tn-button ff-button" (click)="login(AuthProvider.Email)">
-                <span class="ff-text">{{'page.auth.signIn' | translate}}</span>
-            </button>
-        </div>
-
-        <div class="ff-divider tn-align">
-            <span class="tn-align-item tn-align-fixed">{{'page.auth.divider' | translate}}</span>
-        </div>
-
-        <div class="tn-container-reset ff-buttons">
-<!--
-            <button class="tn-button tn-provider tn-facebook" (click)="create()" [disabled]="(userAuthenticating$ | async)">
-                <span class="tn-item">{{'page.auth.create' | translate}}</span>
-            </button>
-
-            <button class="tn-button tn-provider tn-facebook" (click)="login(AuthProvider.Facebook)" [disabled]="(userAuthenticating$ | async)">
-                <span class="tn-item">{{'page.auth.facebook' | translate}}</span>
-            </button>
-
-            <button class="tn-button tn-provider tn-google" (click)="login(AuthProvider.Google)" [disabled]="(userAuthenticating$ | async)">
-                <span class="tn-item">{{'page.auth.google' | translate}}</span>
-            </button>
--->
-<!--
-            <button class="tn-button tn-provider tn-twitter" (click)="login(AuthProvider.Twitter)" [disabled]="(userAuthenticating$ | async)">
-                <span class="tn-item">{{'page.auth.twitter' | translate}}</span>
-            </button>
-        -->
-        </div>
-<!--
-        <div class="ff-footer tn-flex">
-            <div class="ff-item tn-align-left">
-                <a class="ff-item ff-link">{{'page.auth.forgotPassword' | translate}}</a>
-                <span class="ff-item">|</span>
-                <a class="ff-item ff-link">{{'page.auth.forgotName' | translate}}</a>
-            </div>
-
-            <div class="ff-item tn-align-right">
-                <span class="ff-item">{{'page.auth.newUser' | translate}}</span>
-                <a class="ff-item ff-link ff-underline">{{'page.auth.signUp' | translate}}</a>
-            </div>
-        </div>
+        <button class="tn-button tn-provider tn-twitter" (click)="login(AuthProvider.Twitter)" [disabled]="(userAuthenticating$ | async)">
+            <span class="tn-item">{{'page.auth.twitter' | translate}}</span>
+        </button>
 -->
     </div>
+<!--
+    <div class="cpt-footer tn-flex">
+        <div class="cpt-item tn-align-left">
+            <a class="cpt-item cpt-link">{{'page.auth.forgotPassword' | translate}}</a>
+            <span class="cpt-item">|</span>
+            <a class="cpt-item cpt-link">{{'page.auth.forgotName' | translate}}</a>
+        </div>
+
+        <div class="cpt-item tn-align-right">
+            <span class="cpt-item">{{'page.auth.newUser' | translate}}</span>
+            <a class="cpt-item cpt-link cpt-underline">{{'page.auth.signUp' | translate}}</a>
+        </div>
+    </div>
+-->
 </div>

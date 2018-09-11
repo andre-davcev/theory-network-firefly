@@ -1,16 +1,14 @@
 ToDo:
 - login screen styling
+- implement capacitor status bar
 - setup routing for all pages
 - ionic 3 to ionic 4 (npx tslint -c ionic-migration.json -p tsconfig.json > migration.txt)
 - target ion component selectors (ion-tabs instead of .tabbar)
 - pages scss
 - move global scss to mixins
-- global scss
-- implement capacitor status bar
-- replace this.viewController.dismiss()
-- global sass variables & styles
 - change component styles to remove variables and provide overrides in global sass files
+- replace this.viewController.dismiss()
 - move libs to local path or xplat features?
 - shadow dom
 - migrate modal controller present to use angular routing & new modal animations (ion-animation-controller)
-- Test on devices ios / android
+- test on android
