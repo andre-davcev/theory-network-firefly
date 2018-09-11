@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { StatusBarStyle } from '@capacitor/core';
+
+import { StatusBar } from '../../constants/capacitor.const';
 
 @Component
 ({
@@ -16,7 +19,7 @@ export class PageSearch
 
     ionViewWillEnter()
     {
-//        this.statusBar.styleDefault();
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     public dismissModal(): void

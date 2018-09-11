@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { StatusBarStyle } from '@capacitor/core';
+
+import { StatusBar } from '../../constants/capacitor.const';
 
 @Component
 ({
@@ -18,6 +21,6 @@ export class PageAssetsIcons
 
     ionViewWillEnter()
     {
-//        this.statusBar.styleBlackTranslucent();
+        StatusBar.setStyle({style: StatusBarStyle.Light});
     }
 }

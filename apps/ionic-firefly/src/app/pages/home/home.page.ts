@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 import { Slides, AlertController, ModalController } from '@ionic/angular';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { StatusBarStyle } from '@capacitor/core';
 
 import { PageStream } from '../stream/stream.page';
 import { PageSearch } from '../search/search.page';
@@ -12,6 +13,7 @@ import { PagePublisherCluster } from '../cluster/cluster.page';
 import { Notification } from '../../models/notification.model';
 import { PageUser } from '../user/user.page';
 import { StateNotifications } from '../../state/notifications/notifications.state';
+import { StatusBar } from '../../constants/capacitor.const';
 
 export enum AlertsModalType
 {
@@ -61,7 +63,7 @@ export class PageHome
 
     ionViewWillEnter()
     {
-//        this.statusBar.styleDefault();
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     slideChanged()

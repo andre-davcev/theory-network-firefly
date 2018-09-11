@@ -4,6 +4,9 @@ import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { tap } from 'rxjs/operators';
+import { StatusBarStyle } from '@capacitor/core';
+
+import { StatusBar } from '../../constants/capacitor.const';
 
 @Component
 ({
@@ -37,7 +40,7 @@ export class PagePublisher implements OnInit
 
     ionViewWillEnter()
     {
-//        this.statusBar.styleLightContent();
+                StatusBar.setStyle({style: StatusBarStyle.Light});
     }
 
     public add()
@@ -81,6 +84,6 @@ export class PagePublisher implements OnInit
     public dismissModal(): void
     {
 //        this.viewController.dismiss();
-//        this.statusBar.styleDefault();
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 }
