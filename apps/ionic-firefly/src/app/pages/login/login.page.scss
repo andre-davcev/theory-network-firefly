@@ -28,12 +28,12 @@ $app-auth-divider-height:                    1px;
 $app-auth-divider-width:                     4.7rem;
 $app-auth-divider-margin:                    2.1rem;
 $app-auth-divider-line-height:               $tn-line-height-none;
-$app-auth-divider-font-family:               $app-font-lato;
+$app-auth-divider-font-family:               $app-font-base;
 $app-auth-divider-font-size:                 0.9rem;
 
 $app-auth-color-background:                  $app-color-dark;
 
-$app-auth-app-title-font-family:             $app-font-lato-light;
+$app-auth-app-title-font-family:             $app-font-base;
 $app-auth-app-title-font-size:               5.2rem;
 $app-auth-app-title-letter-spacing:          1.5rem;
 $app-auth-app-title-line-height:             $tn-line-height-none;
@@ -66,7 +66,7 @@ $app-auth-item-color-dark:                   $app-color-black;
 
 $app-auth-footer-width:                      100%;
 $app-auth-footer-color-text:                 $app-color-white;
-$app-auth-footer-font-family:                $app-font-lato;
+$app-auth-footer-font-family:                $app-font-base;
 $app-auth-footer-font-size:                  $app-font-size-tiny;
 
 $app-auth-footer-item-line-height:           $tn-line-height-none;
@@ -729,4 +729,8 @@ input[type="color"]
     }
 }
 
-
+.tn-ico.fa-icon:before
+{
+    font-family: $app-font-font-awesome;
+    font-size: $app-font-font-awesome-size;
+}

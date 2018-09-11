@@ -17,6 +17,9 @@ $app-box-shadow-light-background:            0px 1px 1px rgba(0, 0, 0, 0.10);
 
 $app-icon-font-size:                         1.2rem;
 
+// Font Base
+$app-font-base:                       -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
 // Font Awesome
 $app-font-font-awesome:               "Font Awesome";
 $app-font-font-awesome-url:           url(assets/fonts/font.awesome/font.awesome.ttf);
@@ -47,30 +50,6 @@ $app-font-ionic-icons-url-eot:      url(assets/fonts/ion.icons/2.0.1/ionicons.eo
 $app-font-ionic-icons-url-ttf:      url(assets/fonts/ion.icons/2.0.1/ionicons.ttf);
 $app-font-ionic-icons-url-woff:     url(assets/fonts/ion.icons/2.0.1/ionicons.woff);
 $app-font-ionic-icons-url-svg:      url(assets/fonts/ion.icons/2.0.1/ionicons.svg);
-
-// Lato
-
-$app-font-lato:                    "Lato";
-$app-font-lato-black:              "Lato Black";
-$app-font-lato-black-italic:       "Lato Black Italic";
-$app-font-lato-bold:               "Lato Bold";
-$app-font-lato-bold-italic:        "Lato Bold Italic";
-$app-font-lato-hairline:           "Lato Hairline";
-$app-font-lato-hairline-italic:    "Lato Hairline Italic";
-$app-font-lato-italic:             "Lato Italic";
-$app-font-lato-light:              "Lato Light";
-$app-font-lato-light-italic:       "Lato Light Italic";
-
-$app-font-lato-url:                     url(assets/fonts/lato/lato.ttf);
-$app-font-lato-url-black:               url(assets/fonts/lato/lato.black.ttf);
-$app-font-lato-url-black-italic:        url(assets/fonts/lato/lato.black.italic.ttf);
-$app-font-lato-url-bold:                url(assets/fonts/lato/lato.bold.ttf);
-$app-font-lato-url-bold-italic:         url(assets/fonts/lato/lato.bold.italic.ttf);
-$app-font-lato-url-hairline:            url(assets/fonts/lato/lato.hairline.ttf);
-$app-font-lato-url-hairline-italic:     url(assets/fonts/lato/lato.hairline.italic.ttf);
-$app-font-lato-url-italic:              url(assets/fonts/lato/lato.italic.ttf);
-$app-font-lato-url-light:               url(assets/fonts/lato/lato.light.ttf);
-$app-font-lato-url-light-italic:        url(assets/fonts/lato/lato.light.italic.ttf);
 
 // Buttons
 

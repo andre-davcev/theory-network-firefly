@@ -1,5 +1,5 @@
-<ion-header class="app-transparent ff-page-alerts">
-  <ion-toolbar transparent>
+<ion-header>
+  <ion-toolbar>
       <ion-buttons start>
           <ion-button icon-only (click)="navigate(AlertsModalType.Search)">
               <ion-icon name="search" color="dark"></ion-icon>
@@ -20,14 +20,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="app-primary-background">
+<ion-content>
   <ion-slides ion-fixed pager (ionSlideDidChange)="slideChanged()">
       <ion-slide *ngFor="let notification of notifications$ | async">
-          <div class="ff-card">
-              <h1 class="ff-title">{{notification.title}}</h1>
-              <h2 class="ff-short">{{notification.body}}</h2>
-              <img class="ff-image" [src]="notification.image">
-              <p class="ff-paragraph">{{notification.date}}</p>
+          <div class="cpt-card">
+              <h1 class="cpt-title">{{notification.title}}</h1>
+              <h2 class="cpt-short">{{notification.body}}</h2>
+              <img class="cpt-image" [src]="notification.image">
+              <p class="cpt-paragraph">{{notification.date}}</p>
           </div>
       </ion-slide>
   </ion-slides>
