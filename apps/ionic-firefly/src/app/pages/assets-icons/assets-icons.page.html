@@ -1,19 +1,22 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>{{'page.assets-icons.title' | translate}}</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-fab bottom right href="/icons">
-        <ion-fab color="secondary">
+    <ion-fab slot="fixed" vertical="bottom" right href="/icons">
+        <ion-fab slot="fixed" color="secondary">
             <ion-icon name="md-add"></ion-icon>
         </ion-fab>
     </ion-fab>
 
     <ion-grid>
         <ion-row>
-            <ion-col col-3 *ngFor="let icon of icons">
+            <ion-col size="3" *ngFor="let icon of icons">
                 <img class="cpt-icon" [src]="icon">
             </ion-col>
         </ion-row>

@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Select, Store } from '@ngxs/store';
@@ -23,7 +23,7 @@ export class PagePublisherClusterLocations implements OnInit
 
     private loading: HTMLIonLoadingElement;
 
-    constructor(private store: Store, private loadingController: LoadingController, public modalController: ModalController) { }
+    constructor(private loadingController: LoadingController) { }
 
     public ngOnInit(): void
     {
@@ -36,7 +36,11 @@ export class PagePublisherClusterLocations implements OnInit
             switchMap(() => fromPromise(this.loadingController.create({spinner: 'crescent'})))
         ).
 
-        subscribe((loading: HTMLIonLoadingElement) => loading.present());
+        subscribe((loading: HTMLIonLoadingElement) => {
+          this.loading = loading;
+
+          loading.present();
+        });
 
         this.loadingLocation$.
         pipe

@@ -1,12 +1,15 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>{{'page.assets-places.title' | translate}}</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-    <ion-fab bottom right (click)="add()">
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="add()">
         <ion-fab-button color="secondary">
             <ion-icon name="md-add"></ion-icon>
         </ion-fab-button>

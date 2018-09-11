@@ -5,14 +5,14 @@
             <ion-segment-button value="profile">{{'tabs.settings.profile' | translate}}</ion-segment-button>
         </ion-segment>
 
-        <ion-buttons end>
+        <ion-buttons slot="primary">
             <ion-button>{{'general.done' | translate}}</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [ngSwitch]="segment">
-    <ion-fab bottom right *ngIf="segment === 'assets'">
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="segment === 'assets'">
         <ion-fab-button color="secondary">
             <ion-icon name="md-add"></ion-icon>
         </ion-fab-button>

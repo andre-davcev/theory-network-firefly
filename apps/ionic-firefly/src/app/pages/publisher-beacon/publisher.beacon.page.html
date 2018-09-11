@@ -1,7 +1,11 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>{{'page.publisher.beacon.title' | translate}}</ion-title>
-        <ion-buttons end>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+
+        <ion-buttons slot="primary">
             <ion-button icon-only>
                 <ion-icon name="cloud-upload"></ion-icon>
             </ion-button>
