@@ -1,4 +1,4 @@
-@import "variables";
+@import "app-variables";
 
 :host
 {
@@ -21,7 +21,6 @@
     &:before
     {
         display: inline-block;
-        speak: none;
         font-style: normal;
         font-weight: normal;
         font-variant: normal;

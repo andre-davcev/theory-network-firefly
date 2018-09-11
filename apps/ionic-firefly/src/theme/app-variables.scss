@@ -1,4 +1,6 @@
-@import '~@theory/scss/index';
+
+@import '~font-awesome/scss/variables';
+@import '~@theory/scss/variables';
 
 // Animations
 
@@ -22,7 +24,7 @@ $app-font-base:                       -apple-system, BlinkMacSystemFont, "Segoe 
 
 // Font Awesome
 $app-font-font-awesome:               "Font Awesome";
-$app-font-font-awesome-url:           url(assets/fonts/font.awesome/font.awesome.ttf);
+$app-font-font-awesome-url:           url(assets/fonts/font-awesome/font-awesome.ttf);
 $app-font-font-awesome-size:          $app-icon-font-size;
 
 // Helvetican Neue
@@ -46,10 +48,10 @@ $app-font-ionic-icons-2:         "Ionicons 2";
 $app-font-ionic-icons:           "Ionicons";
 $app-font-ionic-icons-size:      $app-icon-font-size;
 
-$app-font-ionic-icons-url-eot:      url(assets/fonts/ion.icons/2.0.1/ionicons.eot);
-$app-font-ionic-icons-url-ttf:      url(assets/fonts/ion.icons/2.0.1/ionicons.ttf);
-$app-font-ionic-icons-url-woff:     url(assets/fonts/ion.icons/2.0.1/ionicons.woff);
-$app-font-ionic-icons-url-svg:      url(assets/fonts/ion.icons/2.0.1/ionicons.svg);
+$app-font-ionic-icons-url-eot:      url(assets/fonts/ion-icons/2.0.1/ionicons.eot);
+$app-font-ionic-icons-url-ttf:      url(assets/fonts/ion-icons/2.0.1/ionicons.ttf);
+$app-font-ionic-icons-url-woff:     url(assets/fonts/ion-icons/2.0.1/ionicons.woff);
+$app-font-ionic-icons-url-svg:      url(assets/fonts/ion-icons/2.0.1/ionicons.svg);
 
 // Buttons
 
