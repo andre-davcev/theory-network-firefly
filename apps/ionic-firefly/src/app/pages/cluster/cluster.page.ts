@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
+import { StatusBarStyle } from '@capacitor/core';
 
 import { StateCluster } from '../../state/cluster/cluster.state';
 import { SetClusterId } from '../../state/cluster/cluster.actions';
+import { StatusBar } from '../../constants/capacitor.const';
 
 @Component
 ({
@@ -26,12 +28,12 @@ export class PagePublisherCluster
 
     ionViewWillEnter()
     {
-//        this.statusBar.styleDefault();
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     public dismissModal(): void
     {
 //        this.viewController.dismiss();
-//        this.statusBar.styleDefault();
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 }

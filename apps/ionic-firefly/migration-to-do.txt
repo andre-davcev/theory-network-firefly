@@ -1,9 +1,0 @@
-ToDo:
-- login screen
-- implement capacitor status bar
-- review all css
-- migrate modal controller present to use angular routing & new modal animations (ion-animation-controller)
-- test on android
-
-- move libs to local path or xplat features?
-

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { StatusBarStyle } from '@capacitor/core';
 
 import { SetCluster } from '../../state/cluster/cluster.actions';
 import { Subscription } from '../../models/subscription.model';
 import { Cluster } from '../../models/cluster.model';
 import { StateSubscriptions } from '../../state/subscriptions/subscriptions.state';
-
+import { StatusBar } from '../../constants/capacitor.const';
 
 @Component
 ({
@@ -33,13 +34,13 @@ export class PageStream
 
     public ionViewWillEnter(): void
     {
-//        this.statusBar.styleLightContent();
+        StatusBar.setStyle({style: StatusBarStyle.Light});
     }
 
     public dismissModal(): void
     {
 //        this.viewController.dismiss();
-//        this.statusBar.styleDefault();
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     public subscribe(subscription: Subscription)
