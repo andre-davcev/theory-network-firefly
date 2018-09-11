@@ -1,12 +1,11 @@
-<ion-header class="app-transparent">
+<ion-header>
     <ion-toolbar color='white'>
         <ion-title>{{'page.assets-icon.title' | translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
 
-<ion-content class="app-color-white">
-
+<ion-content>
     <form novalidate [formGroup]="form$ | async">
         <app-item-header [form]="form$ | async"
                          title="name"

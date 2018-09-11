@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { PagePublisherClusterCategories } from './cluster-categories.page';
 import { ModulePage } from '../page.module';
@@ -7,7 +8,8 @@ import { ModulePage } from '../page.module';
 ({
     imports :
     [
-        ModulePage
+        ModulePage,
+        ReactiveFormsModule
     ],
 
     declarations :

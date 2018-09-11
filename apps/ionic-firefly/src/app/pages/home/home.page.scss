@@ -6,7 +6,7 @@ ion-slide
     {
         height: 100%;
 
-        .ff-card
+        .cpt-card
         {
             background-color: $app-slide-color-background;
             height: calc(100% - #{$app-slide-height-margin});
@@ -53,7 +53,7 @@ ion-slide
                 cursor: pointer;
             }
 */
-            > .ff-title
+            > .cpt-title
             {
                 margin: 0;
                 margin-top: 1.5rem;
@@ -64,7 +64,7 @@ ion-slide
                 color: rgba(0, 0, 0, 0.7);
             }
 
-            > .ff-short
+            > .cpt-short
             {
                 margin: 0;
                 margin-top: 0.8rem;
@@ -74,14 +74,14 @@ ion-slide
                 color: rgba(0, 0, 0, 0.54);
             }
 
-            > .ff-image
+            > .cpt-image
             {
                 width: 100%;
                 margin-top: 2.7rem;
                 box-shadow: 0 1.5rem 3.0rem rgba(0, 0, 0, 0.25);
             }
 
-            > .ff-button
+            > .cpt-button
             {
                 padding: 0;
                 margin: 0;
@@ -96,7 +96,7 @@ ion-slide
                 border-radius: 2.4rem;
             }
 
-            > .ff-paragraph
+            > .cpt-paragraph
             {
                 margin: 0;
                 margin-top: 1.3rem;

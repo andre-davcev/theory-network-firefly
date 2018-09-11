@@ -16,8 +16,12 @@
 // All Variables
 @import 'theme/variables';
 
-// Global Styles
-@import '~@theory/ionic/scss/index';
-
+// Mapbox
 @import "~mapbox-gl/dist/mapbox-gl.css";
 @import "~@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css";
+
+// Global Ionic Styles
+@import '~@theory/ionic/scss/index';
+
+// App Styles
+@import 'theme/app-global-font-faces';

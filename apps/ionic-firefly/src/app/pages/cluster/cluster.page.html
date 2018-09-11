@@ -1,4 +1,4 @@
-<ion-header class="app-transparent">
+<ion-header>
     <ion-toolbar color='white'>
         <ion-title>{{'page.cluster.title' | translate}}</ion-title>
 
@@ -9,7 +9,7 @@
 </ion-header>
 
 
-<ion-content class="app-color-white">
+<ion-content>
     <form novalidate [formGroup]="form$ | async">
         <app-item-header [form]="form$ | async"
                         title="name"
@@ -29,7 +29,7 @@
 
         <app-item-map [title]="'general.locations' | translate" [routerLink]="['/publisher/cluster/locations']"></app-item-map>
 
-        <div class="c-detail" fxLayout="column">
+        <div class="cpt-detail" fxLayout="column">
             <ion-list>
                 <button ion-item [routerLink]="['/publisher/cluster/categories']">
                     <ion-icon name="logo-buffer" item-start></ion-icon>

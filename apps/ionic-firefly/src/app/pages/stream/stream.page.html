@@ -10,7 +10,7 @@
 
 <ion-content>
     <ion-list>
-        <ion-item no-lines class="app-primary-background" *ngFor="let subscription of subscriptions$ | async">
+        <ion-item no-lines *ngFor="let subscription of subscriptions$ | async">
             <ion-card>
                 <img [src]="subscription.photo">
 
