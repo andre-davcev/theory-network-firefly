@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons start>
+      <ion-buttons slot="secondary">
           <ion-button icon-only (click)="navigate(AlertsModalType.Search)">
               <ion-icon name="search" color="dark"></ion-icon>
           </ion-button>
@@ -32,13 +32,13 @@
       </ion-slide>
   </ion-slides>
 
-  <ion-fab bottom left>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
       <ion-button icon-only color="transparent">
           <ion-icon name="md-globe" color="dark"></ion-icon>
       </ion-button>
   </ion-fab>
 
-  <ion-fab bottom right>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
       <ion-button icon-only color="transparent">
           <ion-icon name="md-trash" color="dark"></ion-icon>
       </ion-button>

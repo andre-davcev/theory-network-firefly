@@ -2,7 +2,7 @@
     <ion-toolbar color='white'>
         <ion-title>{{'page.cluster.title' | translate}}</ion-title>
 
-        <ion-buttons end>
+        <ion-buttons slot="start">
             <ion-button (click)="dismissModal()">{{'general.cancel' | translate}}</ion-button>
         </ion-buttons>
     </ion-toolbar>
@@ -31,10 +31,10 @@
 
         <div class="cpt-detail" fxLayout="column">
             <ion-list>
-                <button ion-item [routerLink]="['/publisher/cluster/categories']">
+                <ion-item [routerLink]="['/publisher/cluster/categories']">
                     <ion-icon name="logo-buffer" item-start></ion-icon>
                     <ion-label>{{'general.categories' | translate}}</ion-label>
-                </button>
+                </ion-item>
 
                 <ion-item>
                     <ion-icon name="lock" item-start></ion-icon>

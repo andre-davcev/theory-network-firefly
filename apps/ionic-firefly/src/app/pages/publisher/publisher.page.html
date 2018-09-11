@@ -4,14 +4,14 @@
             <ion-title>{{'tabs.publisher.clusters' | translate}}</ion-title>
         </ion-toolbar>
 
-        <ion-buttons end>
+        <ion-buttons slot="primary">
             <ion-button (click)="dismissModal()">{{'general.done' | translate}}</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [ngSwitch]="segment">
-    <ion-fab bottom right (click)="add()">
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="add()">
         <ion-fab-button color="secondary">
             <ion-icon name="md-add"></ion-icon>
         </ion-fab-button>

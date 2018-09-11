@@ -2,7 +2,7 @@
     <ion-toolbar dark>
         <ion-title>{{'page.stream.title' | translate}}</ion-title>
 
-        <ion-buttons end>
+        <ion-buttons slot="primary">
             <ion-button (click)="dismissModal()">{{'general.done' | translate}}</ion-button>
         </ion-buttons>
     </ion-toolbar>
@@ -15,20 +15,22 @@
                 <img [src]="subscription.photo">
 
                 <ion-item>
-                    <h2>{{subscription.name}}</h2>
-                    <p>{{subscription.tagline}}</p>
+                    <ion-label>
+                        <h2>{{subscription.name}}</h2>
+                        <p>{{subscription.tagline}}</p>
+                    </ion-label>
                 </ion-item>
 
                 <ion-row>
                     <ion-col>
-                        <ion-button clear icon-start (click)="subscribe(subscription)">
+                        <ion-button slot="start" fill="clear" (click)="subscribe(subscription)">
                             <app-icon name="check" [active]="subscription.subscribed"></app-icon>
                             {{(subscription.subscribed ? 'page.stream.subscribed' : 'page.stream.subscribe') | translate}}
                         </ion-button>
                     </ion-col>
 
                     <ion-col text-right>
-                        <ion-button icon-start clear>
+                        <ion-button slot="start" fill="clear">
 
                         </ion-button>
                     </ion-col>
