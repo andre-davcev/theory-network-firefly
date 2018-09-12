@@ -3,15 +3,19 @@
 
 :host
 {
-    --cpt-height:             57px;
-    --cpt-width:              var(--cpt-height);
+    --cpt-height:                 57px;
+    --cpt-width:                  var(--cpt-height);
 
-    --cpt-color-primary:      $app-color-primary;
-    --cpt-color-light:        $gm-color-green-light-a400;
+    --cpt-color-primary:          #{$app-color-primary};
+    --cpt-color-primary-lighter:  lighten($app-color-primary, 10%);
+    --cpt-color-light:            #{$gm-color-green-light-a400};
 
-    --cpt-stroke:             $app-border-accent-color-base;
-    --cpt-stroke-opacity:     $app-border-accent-opacity;
-    --cpt-stroke-width:       $app-border-accent-width;
+    --cpt-stroke:                 #{$app-border-accent-color-base};
+    --cpt-stroke-opacity:         #{$app-border-accent-opacity};
+    --cpt-stroke-width:           #{$app-border-accent-width};
+
+    --cpt-transition-duration:    #{$app-transition-duration-move};
+
 
     position: relative;
     display: block;
@@ -19,7 +23,7 @@
     @keyframes firefly
     {
          0% {fill: var(--cpt-color-primary);}
-        25% {fill: lighten($app-color-primary, 10%);}
+        25% {fill: var(--cpt-color-primary-lighter);}
         50% {fill: var(--cpt-color-primary);}
         75% {opacity: 0.5;}
        100% {opacity: 1;}
@@ -27,15 +31,23 @@
 
     @keyframes firefly-tentacles
     {
-         0% {fill: var(--cpt-color-primary); stroke: var(--cpt-color-primary);}
-        25% {fill: lighten($app-color-primary, 10%); stroke: lighten($app-color-primary, 10%);}
-        50% {fill: var(--cpt-color-primary); stroke: var(--cpt-color-primary);}
+         0% {fill: var(--cpt-color-primary);         stroke: var(--cpt-color-primary);}
+        25% {fill: var(--cpt-color-primary-lighter); stroke: var(--cpt-color-primary-lighter);}
+        50% {fill: var(--cpt-color-primary);         stroke: var(--cpt-color-primary);}
         75% {opacity: 0.5;}
        100% {opacity: 1;}
     }
 
     &.cpt-animate
     {
+        transition-timing-function: linear;
+        backface-visibility: hidden;
+        transform: translate3d(0, 0, 0);
+        perspective: 1000;
+        transition-property: justify-content, align-items;
+        transition-duration: var(--cpt-transition-duration);
+        transition-property: transform;
+
         > .cpt-firefly
         {
             .cpt-body
@@ -55,28 +67,6 @@
             }
         }
     }
-
-    &.cpt-color-primary
-    {
-        > .cpt-firefly
-        {
-            > .cpt-group
-            {
-                > .cpt-part
-                {
-                    fill: var(--cpt-color-primary);
-                    opacity: 1;
-                }
-
-                > .cpt-tentacles.cpt-inside > .cpt-tentacle
-                {
-                    fill: var(--cpt-color-primary);
-                    stroke: var(--cpt-color-primary);
-                    opacity: 1;
-                }
-            }
-        }
-    }
 }
 
 .cpt-firefly
@@ -90,29 +80,34 @@
     {
         > .cpt-part
         {
-            stroke:         var(--cpt-stroke);
+            fill: var(--cpt-color-primary);
+            stroke: var(--cpt-stroke);
             stroke-opacity: var(--cpt-stroke-opacity);
-            stroke-width:   var(--cpt-stroke-width);
+            stroke-width: var(--cpt-stroke-width);
+            opacity: 1;
         }
 
         > .cpt-tentacles
         {
             > .cpt-tentacle
             {
-                stroke-linecap:  round;
+                stroke-linecap: round;
                 stroke-linejoin: round;
             }
 
             &.cpt-border > .cpt-tentacle
             {
-                stroke:         var(--cpt-stroke);
+                stroke: var(--cpt-stroke);
                 stroke-opacity: var(--cpt-stroke-opacity);
-                stroke-width:   2.25;
+                stroke-width: 2.25;
             }
 
             &.cpt-inside > .cpt-tentacle
             {
+                fill: var(--cpt-color-primary);
+                stroke: var(--cpt-color-primary);
                 stroke-width: var(--cpt-stroke-width);
+                opacity: 1;
             }
         }
     }

@@ -4480,16 +4480,18 @@ var StateUser = /** @class */ (function () {
         this.platform = platform;
     }
     StateUser.authData = function (state) { return state.authData; };
-    StateUser.user = function (state) { return state.authenticated; };
-    StateUser.authenticated = function (state) { return state.user; };
+    StateUser.user = function (state) { return state.user; };
+    StateUser.authenticated = function (state) { return state.authenticated; };
+    StateUser.authenticating = function (state) { return state.authenticating; };
     StateUser.error = function (state) { return state.error; };
     StateUser.errored = function (state) { return state.error != null; };
     StateUser.userFound = function (state) { return state.user != null; };
     StateUser.prototype.userAuthenticate = function (_a) {
         var patchState = _a.patchState, dispatch = _a.dispatch;
+        patchState({ authenticating: true });
         return this.auth.authState.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) {
             if (authData == null) {
-                patchState({ authenticated: false, authData: authData });
+                patchState({ authenticated: false, authData: authData, authenticating: false });
                 return dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_11__["LanguageGet"]());
             }
             else {
@@ -4499,7 +4501,7 @@ var StateUser = /** @class */ (function () {
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
     };
     StateUser.prototype.userAuthenticateCheck = function (_a, _b) {
-        var patchState = _a.patchState, dispatch = _a.dispatch;
+        var patchState = _a.patchState;
         var payload = _b.payload;
         return this.language$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (language) { return language != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (language) {
             var authData = payload;
@@ -4531,7 +4533,7 @@ var StateUser = /** @class */ (function () {
                     user.photoURL = photoURL;
                 }
                 user.uidInternal = providerId + ':' + providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_16__["AuthProvider"].Email ? email : user.uid;
-                patchState({ authData: authData, authenticated: true, user: user });
+                patchState({ authData: authData, authenticated: true, user: user, authenticating: false });
             }
         }));
     };
@@ -4546,7 +4548,7 @@ var StateUser = /** @class */ (function () {
                 patchState({ error: { name: 'Could not find user', message: 'Could not find user' } });
             }
             else {
-                patchState({ user: user, authenticated: true });
+                patchState({ user: user, authenticated: true, authenticating: false });
                 dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_11__["LanguageSet"](user.language));
                 dispatch(new _alert_alert_actions__WEBPACK_IMPORTED_MODULE_13__["AlertsGet"]());
                 //                    dispatch(new NotificationsWatch());
@@ -4566,38 +4568,45 @@ var StateUser = /** @class */ (function () {
     StateUser.prototype.loginEmail = function (_a, _b) {
         var patchState = _a.patchState, dispatch = _a.dispatch;
         var payload = _b.payload;
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithEmailAndPassword(payload.id, payload.password)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](authData.user)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
+        patchState({ authenticating: true });
+        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithEmailAndPassword(payload.id, payload.password)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](authData.user)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
     };
     StateUser.prototype.loginFacebook = function (_a) {
-        var dispatch = _a.dispatch;
-        return this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_9__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginFacebookDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginFacebookBrowser"]());
+        var patchState = _a.patchState, dispatch = _a.dispatch;
+        patchState({ authenticating: true });
+        var login$ = this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_9__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginFacebookDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginFacebookBrowser"]());
+        return login$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
     };
     StateUser.prototype.loginFacebookBrowser = function (_a) {
-        var patchState = _a.patchState, dispatch = _a.dispatch;
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider())).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](response.user)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
+        var dispatch = _a.dispatch;
+        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider())).
+            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](response.user)); }));
     };
     StateUser.prototype.loginFacebookDevice = function (_a) {
-        var patchState = _a.patchState, dispatch = _a.dispatch;
+        var dispatch = _a.dispatch;
         return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.facebook.login(['email'])).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) {
             var credential = firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider.credential(response.authResponse.accessToken);
             return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithCredential(credential));
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](user)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](user)); }));
     };
     StateUser.prototype.loginGoogle = function (_a) {
-        var dispatch = _a.dispatch;
-        return this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_9__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginGoogleDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginGoogleBrowser"]());
+        var patchState = _a.patchState, dispatch = _a.dispatch;
+        patchState({ authenticating: true });
+        var login$ = this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_9__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginGoogleDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginGoogleBrowser"]());
+        return login$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
     };
     StateUser.prototype.loginGoogleBrowser = function (_a) {
-        var patchState = _a.patchState, dispatch = _a.dispatch;
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].GoogleAuthProvider())).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](response.user)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
+        var dispatch = _a.dispatch;
+        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].GoogleAuthProvider())).
+            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](response.user)); }));
     };
     StateUser.prototype.loginGoogleDevice = function (_a) {
-        var patchState = _a.patchState, dispatch = _a.dispatch;
+        var dispatch = _a.dispatch;
         return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.facebook.login(['email'])).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) {
             var credential = firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider.credential(response.authResponse.accessToken);
             return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithCredential(credential)).
                 pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](user)); }));
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
+        }));
     };
     StateUser.prototype.userLogout = function (_a) {
         var patchState = _a.patchState, dispatch = _a.dispatch;
@@ -4709,6 +4718,12 @@ var StateUser = /** @class */ (function () {
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
+    ], StateUser, "authenticating", null);
+    __decorate([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Selector"])(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
     ], StateUser, "error", null);
     __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Selector"])(),
@@ -4729,7 +4744,8 @@ var StateUser = /** @class */ (function () {
                 authData: undefined,
                 user: undefined,
                 error: undefined,
-                authenticated: false
+                authenticated: false,
+                authenticating: false
             }
         }),
         __metadata("design:paramtypes", [_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__["AngularFireAuth"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__["AngularFirestore"], _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_7__["Facebook"], _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_8__["GooglePlus"], _ionic_angular__WEBPACK_IMPORTED_MODULE_15__["Platform"]])
