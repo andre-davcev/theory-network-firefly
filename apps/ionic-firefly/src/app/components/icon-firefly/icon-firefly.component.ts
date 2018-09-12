@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component
 ({
@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
 })
 export class ComponentIconFirefly
 {
+    @HostBinding('class.cpt-animate')
+    @Input()
+    public animate: boolean = false;
+
     constructor() {}
 }

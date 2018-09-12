@@ -21,13 +21,11 @@ export class PageLogin implements OnInit
 {
     public AuthProvider: any = AuthProvider;
 
-    @Select(StateUser.authenticated) userAuthenticated$: Observable<boolean>;
-    @Select(StateUser.userFound)     userFound$:         Observable<boolean>;
+    @Select(StateUser.authenticated)  userAuthenticated$:  Observable<boolean>;
+    @Select(StateUser.authenticating) userAuthenticating$: Observable<boolean>;
+    @Select(StateUser.userFound)      userFound$:          Observable<boolean>;
 
-    @HostBinding('class.cpt-active')
-    public ready: boolean = false;
-
-    constructor(private nav: NavController, private store: Store, private router: Router) { }
+    constructor(private store: Store) { }
 
     public ngOnInit(): void
     {
@@ -42,21 +40,7 @@ export class PageLogin implements OnInit
 //            this.router.navigate(['/home']);
         });
 
-        forkJoin
-        (
-            timer(1875),
-
-            this.store.dispatch(new UserAuthenticate()).pipe
-            (
-                switchMap(() => this.userAuthenticated$),
-
-                switchMap((authenticated: boolean) => authenticated ? this.userFound$.pipe(filter((found: boolean) => found)) : of(authenticated)),
-
-                take(1)
-            )
-        ).
-
-        subscribe(() => this.ready = true);
+        this.store.dispatch(new UserAuthenticate());
     }
 
     login(provider: AuthProvider)

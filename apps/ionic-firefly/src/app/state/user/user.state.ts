@@ -21,10 +21,11 @@ import { AuthProvider } from '../../enums/auth-provider.enum';
 
 export interface StateUserModel
 {
-    authData      : firebase.User;
-    user          : User;
-    error         : Error;
-    authenticated : boolean;
+    authData       : firebase.User;
+    user           : User;
+    error          : Error;
+    authenticated  : boolean;
+    authenticating : boolean;
 }
 
 @State<StateUserModel>
@@ -33,10 +34,11 @@ export interface StateUserModel
 
     defaults :
     {
-        authData      : undefined,
-        user          : undefined,
-        error         : undefined,
-        authenticated : false
+        authData       : undefined,
+        user           : undefined,
+        error          : undefined,
+        authenticated  : false,
+        authenticating : false
     }
 })
 
@@ -46,10 +48,11 @@ export class StateUser
 
     @Select(StateLanguage.language) language$: Observable<string>;
 
-    @Selector() static authData(state: StateUserModel)      {return state.authData;}
-    @Selector() static user(state: StateUserModel)          {return state.authenticated;}
-    @Selector() static authenticated(state: StateUserModel) {return state.user;}
-    @Selector() static error(state: StateUserModel)         {return state.error;}
+    @Selector() static authData(state: StateUserModel)       {return state.authData;}
+    @Selector() static user(state: StateUserModel)           {return state.user;}
+    @Selector() static authenticated(state: StateUserModel)  {return state.authenticated;}
+    @Selector() static authenticating(state: StateUserModel) {return state.authenticating;}
+    @Selector() static error(state: StateUserModel)          {return state.error;}
 
     @Selector() static errored(state: StateUserModel)   {return state.error != null;}
     @Selector() static userFound(state: StateUserModel) {return state.user != null;}
@@ -57,13 +60,15 @@ export class StateUser
     @Action(UserAuthenticate)
     userAuthenticate({ patchState, dispatch }: StateContext<StateUserModel>)
     {
+        patchState({authenticating: true});
+
         return this.auth.authState.pipe
         (
             switchMap((authData: firebase.User) =>
             {
                 if (authData == null)
                 {
-                    patchState({authenticated: false, authData: authData});
+                    patchState({authenticated: false, authData: authData, authenticating: false});
 
                     return dispatch(new LanguageGet());
                 }
@@ -82,7 +87,7 @@ export class StateUser
     }
 
     @Action(UserAuthenticateCheck)
-    userAuthenticateCheck({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: UserAuthenticateCheck)
+    userAuthenticateCheck({ patchState }: StateContext<StateUserModel>, { payload }: UserAuthenticateCheck)
     {
         return this.language$.pipe
         (
@@ -123,7 +128,7 @@ export class StateUser
 
                     user.uidInternal = providerId + ':' + providerId === AuthProvider.Email ? email : user.uid;
 
-                    patchState({authData: authData, authenticated: true, user: user as User});
+                    patchState({authData: authData, authenticated: true, user: user as User, authenticating: false});
                 }
             })
         );
@@ -150,7 +155,7 @@ export class StateUser
                 }
                 else
                 {
-                    patchState({user: user, authenticated: true});
+                    patchState({user: user, authenticated: true, authenticating: false});
 
                     dispatch(new LanguageSet(user.language));
                     dispatch(new AlertsGet());
@@ -178,33 +183,36 @@ export class StateUser
     @Action(LoginEmail)
     loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: LoginEmail)
     {
+        patchState({authenticating: true});
+
         return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             switchMap((authData: firebase.auth.UserCredential) => dispatch(new UserAuthenticateCheck(authData.user))),
 
-            catchError((error: Error) => of(patchState({error: error})))
+            catchError((error: Error) => of(patchState({error: error, authenticating: false})))
         );
     }
 
     @Action(LoginFacebook)
-    loginFacebook({ dispatch }: StateContext<StateUserModel>)
+    loginFacebook({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        return this.platform.is(PlatformEnum.Cordova) ? dispatch(new LoginFacebookDevice()) : dispatch(new LoginFacebookBrowser());
+        patchState({authenticating: true});
+
+        const login$: Observable<void> = this.platform.is(PlatformEnum.Cordova) ? dispatch(new LoginFacebookDevice()) : dispatch(new LoginFacebookBrowser());
+
+        return login$.pipe(catchError((error: Error) => of(patchState({error: error, authenticating: false}))));
     }
 
     @Action(LoginFacebookBrowser)
-    loginFacebookBrowser({ patchState, dispatch }: StateContext<StateUserModel>)
+    loginFacebookBrowser({ dispatch }: StateContext<StateUserModel>)
     {
-        return fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())).pipe
-        (
-            switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))),
+        return fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())).
 
-            catchError((error: Error) => of(patchState({error: error})))
-        );
+        pipe(switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))));
     }
 
     @Action(LoginFacebookDevice)
-    loginFacebookDevice({ patchState, dispatch }: StateContext<StateUserModel>)
+    loginFacebookDevice({ dispatch }: StateContext<StateUserModel>)
     {
         return fromPromise(this.facebook.login(['email'])).pipe
         (
@@ -215,31 +223,30 @@ export class StateUser
                 return fromPromise(firebase.auth().signInWithCredential(credential));
             }),
 
-            switchMap((user: firebase.User) => dispatch(new UserAuthenticateCheck(user))),
-
-            catchError((error: Error) => of(patchState({error: error})))
+            switchMap((user: firebase.User) => dispatch(new UserAuthenticateCheck(user)))
         );
     }
 
     @Action(LoginGoogle)
-    loginGoogle({ dispatch }: StateContext<StateUserModel>)
+    loginGoogle({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        return this.platform.is(PlatformEnum.Cordova) ? dispatch(new LoginGoogleDevice()) : dispatch(new LoginGoogleBrowser());
+        patchState({authenticating: true});
+
+        const login$: Observable<void> = this.platform.is(PlatformEnum.Cordova) ? dispatch(new LoginGoogleDevice()) : dispatch(new LoginGoogleBrowser());
+
+        return login$.pipe(catchError((error: Error) => of(patchState({error: error, authenticating: false}))));
     }
 
     @Action(LoginGoogleBrowser)
-    loginGoogleBrowser({ patchState, dispatch }: StateContext<StateUserModel>)
+    loginGoogleBrowser({ dispatch }: StateContext<StateUserModel>)
     {
-        return fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())).pipe
-        (
-            switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))),
+        return fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())).
 
-            catchError((error: Error) => of(patchState({error: error})))
-        );
+        pipe(switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))));
     }
 
     @Action(LoginGoogleDevice)
-    loginGoogleDevice({ patchState, dispatch }: StateContext<StateUserModel>)
+    loginGoogleDevice({ dispatch }: StateContext<StateUserModel>)
     {
         return fromPromise(this.facebook.login(['email'])).pipe
         (
@@ -250,9 +257,7 @@ export class StateUser
                 return fromPromise(firebase.auth().signInWithCredential(credential)).
 
                 pipe(switchMap((user: firebase.User) => dispatch(new UserAuthenticateCheck(user))))
-            }),
-
-            catchError((error: Error) => of(patchState({error: error})))
+            })
         );
     }
 
