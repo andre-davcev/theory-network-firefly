@@ -72,6 +72,15 @@ $app-auth-footer-font-size:                  $app-font-size-tiny;
 $app-auth-footer-item-line-height:           $tn-line-height-none;
 $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
 
+:host
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
 .tn-ico:before
 {
     display: block;
@@ -79,7 +88,6 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
     top: 0; left: 0;
     font-size: $app-icon-font-size;
 }
-
 
 .tn-input-container
 {
@@ -456,11 +464,9 @@ input[type="color"]
     margin: 0;
 }
 
-:host
+.cpt-container
 {
     position: relative;
-    display: flex;
-    flex-direction: column;
     background-color: $app-auth-color-background;
     height: 100%;
 

@@ -2140,11 +2140,13 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./pages/home/home.page.module": [
 		"./src/app/pages/home/home.page.module.ts",
+		"default~pages-home-home-page-module~pages-login-login-page-module",
 		"common",
 		"pages-home-home-page-module"
 	],
 	"./pages/login/login.page.module": [
 		"./src/app/pages/login/login.page.module.ts",
+		"default~pages-home-home-page-module~pages-login-login-page-module",
 		"common",
 		"pages-login-login-page-module"
 	]

@@ -656,51 +656,6 @@ var ACTIVATED = "activated", ADD_ACTIVATED_DEFERS = 200, CLEAR_STATE_DEFERS = 20
 
 
 
-/***/ }),
-
-/***/ "./src/app/pages/page.module.ts":
-/*!**************************************!*\
-  !*** ./src/app/pages/page.module.ts ***!
-  \**************************************/
-/*! exports provided: ModulePage */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModulePage", function() { return ModulePage; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ngx-translate/core */ "../../node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-var modules = [
-    _angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"],
-    _ngx_translate_core__WEBPACK_IMPORTED_MODULE_1__["TranslateModule"],
-    _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonicModule"]
-];
-var ModulePage = /** @class */ (function () {
-    function ModulePage() {
-    }
-    ModulePage = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: modules,
-            exports: modules
-        })
-    ], ModulePage);
-    return ModulePage;
-}());
-
-
-
 /***/ })
 
 }]);
