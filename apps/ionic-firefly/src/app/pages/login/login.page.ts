@@ -1,8 +1,7 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable, forkJoin, timer, of } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
-import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { StateUser } from '../../state/user/user.state';
@@ -21,25 +20,19 @@ export class PageLogin implements OnInit
 {
     public AuthProvider: any = AuthProvider;
 
-    @Select(StateUser.authenticated)  userAuthenticated$:  Observable<boolean>;
-    @Select(StateUser.authenticating) userAuthenticating$: Observable<boolean>;
-    @Select(StateUser.userFound)      userFound$:          Observable<boolean>;
+    @Select(StateUser.authenticated)  userAuthenticated$: Observable<boolean>;
+    @Select(StateUser.loading)        userLoading$:       Observable<boolean>;
+    @Select(StateUser.userFound)      userFound$:         Observable<boolean>;
 
-    constructor(private store: Store) { }
+    constructor(private store: Store, public router: Router) { }
 
     public ngOnInit(): void
     {
-        this.userFound$.pipe
-        (
-            filter((userFound: boolean) => userFound),
-            take(1)
-        ).
-
-        subscribe((userFound: boolean) =>
-        {
-//            this.router.navigate(['/home']);
-        });
-
+/*
+        this.userFound$.
+        pipe(filter((userFound: boolean) => userFound), take(1)).
+        subscribe(() => this.router.navigate(['/home']));
+*/
         this.store.dispatch(new UserAuthenticate());
     }
 

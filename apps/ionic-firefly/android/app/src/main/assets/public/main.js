@@ -2111,7 +2111,7 @@ var UIModule = /** @class */ (function () {
 /*!**********************************************************!*\
   !*** /Users/andredavcev/Files/Theory/xplat/web/index.ts ***!
   \**********************************************************/
-/*! exports provided: AppCoreModule, UIModule, AppBaseComponent */
+/*! exports provided: AppCoreModule, AppBaseComponent, UIModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4485,22 +4485,23 @@ var StateUser = /** @class */ (function () {
     StateUser.user = function (state) { return state.user; };
     StateUser.authenticated = function (state) { return state.authenticated; };
     StateUser.authenticating = function (state) { return state.authenticating; };
+    StateUser.loading = function (state) { return state.authenticating || state.initializing; };
     StateUser.error = function (state) { return state.error; };
     StateUser.errored = function (state) { return state.error != null; };
     StateUser.userFound = function (state) { return state.user != null; };
     StateUser.prototype.userAuthenticate = function (_a) {
         var patchState = _a.patchState, dispatch = _a.dispatch;
-        patchState({ authenticating: true });
+        patchState({ authenticating: true, initializing: true });
         return this.auth.authState.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) {
             if (authData == null) {
                 patchState({ authenticated: false, authData: authData, authenticating: false });
                 return dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_11__["LanguageGet"]());
             }
             else {
-                patchState({ authData: authData });
+                patchState({ authData: authData, authenticating: false });
                 return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserGet"](authData));
             }
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () { return patchState({ initializing: false }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false, initializing: false })); }));
     };
     StateUser.prototype.userAuthenticateCheck = function (_a, _b) {
         var patchState = _a.patchState;
@@ -4545,17 +4546,17 @@ var StateUser = /** @class */ (function () {
         var providerData = payload.providerData[0];
         var providerId = providerData.providerId;
         var uidInternal = providerId + ':' + (providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_16__["AuthProvider"].Email ? providerData.email : providerData.uid);
-        return this.firestore.doc("user/" + uidInternal).valueChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (user) { return user != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (user) {
+        return this.firestore.doc("user/" + uidInternal).valueChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (user) { return user != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) {
+            var dependencies$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])();
             if (user == null) {
                 patchState({ error: { name: 'Could not find user', message: 'Could not find user' } });
             }
             else {
                 patchState({ user: user, authenticated: true, authenticating: false });
-                dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_11__["LanguageSet"](user.language));
-                dispatch(new _alert_alert_actions__WEBPACK_IMPORTED_MODULE_13__["AlertsGet"]());
+                dependencies$ = dispatch([new _language_language_actions__WEBPACK_IMPORTED_MODULE_11__["LanguageSet"](user.language), new _alert_alert_actions__WEBPACK_IMPORTED_MODULE_13__["AlertsGet"](), new _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_14__["NotificationsGet"]()]);
                 //                    dispatch(new NotificationsWatch());
-                dispatch(new _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_14__["NotificationsGet"]());
             }
+            return dependencies$;
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
     };
     StateUser.prototype.userAddToken = function (_a, _b) {
@@ -4726,6 +4727,12 @@ var StateUser = /** @class */ (function () {
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
+    ], StateUser, "loading", null);
+    __decorate([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Selector"])(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
     ], StateUser, "error", null);
     __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Selector"])(),
@@ -4747,7 +4754,8 @@ var StateUser = /** @class */ (function () {
                 user: undefined,
                 error: undefined,
                 authenticated: false,
-                authenticating: false
+                authenticating: false,
+                initializing: false
             }
         }),
         __metadata("design:paramtypes", [_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__["AngularFireAuth"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__["AngularFirestore"], _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_7__["Facebook"], _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_8__["GooglePlus"], _ionic_angular__WEBPACK_IMPORTED_MODULE_15__["Platform"]])
