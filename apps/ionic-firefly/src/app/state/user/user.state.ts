@@ -26,6 +26,7 @@ export interface StateUserModel
     error          : Error;
     authenticated  : boolean;
     authenticating : boolean;
+    initializing   : boolean;
 }
 
 @State<StateUserModel>
@@ -38,7 +39,8 @@ export interface StateUserModel
         user           : undefined,
         error          : undefined,
         authenticated  : false,
-        authenticating : false
+        authenticating : false,
+        initializing   : false
     }
 })
 
@@ -52,6 +54,7 @@ export class StateUser
     @Selector() static user(state: StateUserModel)           {return state.user;}
     @Selector() static authenticated(state: StateUserModel)  {return state.authenticated;}
     @Selector() static authenticating(state: StateUserModel) {return state.authenticating;}
+    @Selector() static loading(state: StateUserModel)        {return state.authenticating || state.initializing;}
     @Selector() static error(state: StateUserModel)          {return state.error;}
 
     @Selector() static errored(state: StateUserModel)   {return state.error != null;}
@@ -60,7 +63,7 @@ export class StateUser
     @Action(UserAuthenticate)
     userAuthenticate({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        patchState({authenticating: true});
+        patchState({authenticating: true, initializing: true});
 
         return this.auth.authState.pipe
         (
@@ -74,7 +77,7 @@ export class StateUser
                 }
                 else
                 {
-                    patchState({authData: authData});
+                    patchState({authData: authData, authenticating: false});
 
                     return dispatch(new UserGet(authData));
                 }
@@ -82,7 +85,9 @@ export class StateUser
 
             take(1),
 
-            catchError((error: Error) => of(patchState({error: error})))
+            tap(() => patchState({initializing: false})),
+
+            catchError((error: Error) => of(patchState({error: error, authenticating: false, initializing: false})))
         );
     }
 
@@ -147,8 +152,10 @@ export class StateUser
 
             take(1),
 
-            tap((user: User) =>
+            switchMap((user: User) =>
             {
+                let dependencies$: Observable<void> = of();
+
                 if (user == null)
                 {
                     patchState({error: {name: 'Could not find user', message: 'Could not find user'}});
@@ -157,11 +164,11 @@ export class StateUser
                 {
                     patchState({user: user, authenticated: true, authenticating: false});
 
-                    dispatch(new LanguageSet(user.language));
-                    dispatch(new AlertsGet());
+                    dependencies$ = dispatch([new LanguageSet(user.language), new AlertsGet(), new NotificationsGet()]);
 //                    dispatch(new NotificationsWatch());
-                    dispatch(new NotificationsGet());
                 }
+
+                return dependencies$;
             }),
 
             catchError((error: Error) => of(patchState({error: error})))
