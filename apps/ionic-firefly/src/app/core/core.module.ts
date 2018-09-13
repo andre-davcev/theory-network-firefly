@@ -11,6 +11,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { Pro } from '@ionic/pro';
 
 import { AppIonicCoreModule } from '@theory/ionic';
@@ -39,6 +40,7 @@ Pro.init('1e5146ca',
 ({
     imports :
     [
+        BrowserAnimationsModule,
         AppIonicCoreModule,
 
         AngularFireModule.initializeApp(environment.apis.firebase),
