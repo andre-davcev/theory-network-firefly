@@ -1,5 +1,23 @@
 @import "app-variables";
 
+:host
+{
+    ion-toolbar
+    {
+        --ion-toolbar-background-color: #{$app-color-primary};
+
+        &:last-child
+        {
+            --border-width: 0;
+        }
+    }
+
+    ion-content
+    {
+        --ion-background-color: #{$app-color-primary};
+    }
+}
+
 ion-slide
 {
     background-color: transparent;
