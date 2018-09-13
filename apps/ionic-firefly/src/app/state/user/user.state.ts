@@ -50,12 +50,13 @@ export class StateUser
 
     @Select(StateLanguage.language) language$: Observable<string>;
 
-    @Selector() static authData(state: StateUserModel)       {return state.authData;}
-    @Selector() static user(state: StateUserModel)           {return state.user;}
-    @Selector() static authenticated(state: StateUserModel)  {return state.authenticated;}
-    @Selector() static authenticating(state: StateUserModel) {return state.authenticating;}
-    @Selector() static loading(state: StateUserModel)        {return state.authenticating || state.initializing;}
-    @Selector() static error(state: StateUserModel)          {return state.error;}
+    @Selector() static authData(state: StateUserModel)               {return state.authData;}
+    @Selector() static user(state: StateUserModel)                   {return state.user;}
+    @Selector() static authenticated(state: StateUserModel)          {return state.authenticated;}
+    @Selector() static authenticating(state: StateUserModel)         {return state.authenticating;}
+    @Selector() static loading(state: StateUserModel)                {return state.authenticating || state.initializing;}
+    @Selector() static loadedNotAuthenticated(state: StateUserModel) {return !StateUser.loading && !StateUser.authenticated;}
+    @Selector() static error(state: StateUserModel)                  {return state.error;}
 
     @Selector() static errored(state: StateUserModel)   {return state.error != null;}
     @Selector() static userFound(state: StateUserModel) {return state.user != null;}

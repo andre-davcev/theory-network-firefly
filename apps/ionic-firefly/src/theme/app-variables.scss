@@ -17,7 +17,7 @@ $app-box-shadow-light-background:            0px 1px 1px rgba(0, 0, 0, 0.10);
 
 // Icons
 
-$app-icon-font-size:                         1.2rem;
+$app-icon-font-size:                         12px;
 
 // Font Base
 $app-font-base:                       -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -63,7 +63,7 @@ $app-button-delete-color-background:         $ios-list-item-button-delete-color-
 
 // Inputs
 
-$app-input-height:                           3.4rem;
+$app-input-height:                           34px;
 $app-input-line-height:                      $tn-line-height;
 
 $app-input-directive-height:                 $app-input-height;
@@ -99,13 +99,13 @@ $app-input-icon-clear-width:         $app-input-icon-font-size;
 $app-map-pin-icon:                           $fa-var-map-marker;
 $app-map-pin-icon-color:                     $gm-color-black;
 $app-map-pin-icon-font-family:               $app-font-font-awesome;
-$app-map-pin-icon-font-size:                 3.4rem;
+$app-map-pin-icon-font-size:                 34px;
 $app-map-pin-icon-height:                    $app-map-pin-icon-font-size;
-$app-map-pin-icon-width:                     2.0rem;
+$app-map-pin-icon-width:                     20px;
 $app-map-pin-icon-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
 
 $app-map-pin-icon-inner-font-family:         $app-font-font-awesome;
-$app-map-pin-icon-inner-font-size:           1.1rem;
+$app-map-pin-icon-inner-font-size:           11px;
 $app-map-pin-icon-inner-color:               $gm-color-white;
 
 $app-map-pin-icon-inner-shadow-top:          0 -1px 0 rgba(0,    0,    0, 0.21);
@@ -117,17 +117,17 @@ $app-map-pin-icon-plus:                      $fa-var-plus-circle;
 // Providers
 
 $app-provider-button-color-text:             $gm-color-white;
-$app-provider-button-font-size:              1.0rem;
+$app-provider-button-font-size:              10px;
 $app-provider-button-font-family:            $app-font-helvetica-neue;
 $app-provider-button-text-shadow:            $app-box-shadow-light-background;
 
-$app-provider-button-icon-font-size:          1.6rem;
+$app-provider-button-icon-font-size:          16px;
 $app-provider-button-icon-font-family:        $app-font-font-awesome;
-$app-provider-button-icon-height:             1.7rem;
-$app-provider-button-icon-width:              1.6rem;
-$app-provider-button-icon-width-with-margin:  2.6rem;
+$app-provider-button-icon-height:             17px;
+$app-provider-button-icon-width:              16px;
+$app-provider-button-icon-width-with-margin:  26px;
 $app-provider-button-icon-color-background:   $gm-color-white;
-$app-provider-button-icon-border-radius:      0.2rem;
+$app-provider-button-icon-border-radius:      2px;
 
 // Facebook
 
@@ -153,7 +153,7 @@ $app-twitter-button-icon-content:               "\f099";
 
 $app-font-firefly:                      'Firefly';
 $app-font-firefly-url:                  url(assets/fonts/firefly/firefly.ttf);
-$app-font-firefly-size:                 1.2rem;
+$app-font-firefly-size:                 12px;
 $app-font-firefly-icon-firefly:         "b";
 
 // Theme
@@ -255,7 +255,7 @@ $app-font-color-button:              $gm-font-color-button;
 
 // Gutter
 
-$app-gutter:                            1.6rem;
+$app-gutter:                            16px;
 
 // General
 
@@ -283,8 +283,8 @@ $app-border-accent-color-base:           #000000;
 $app-border-accent-opacity:              0.5;
 $app-border-accent-width:                1px;
 
-$app-font-size-small:                    1.2rem;
-$app-font-size-tiny:                     0.8rem;
+$app-font-size-small:                    12px;
+$app-font-size-tiny:                     8px;
 
 $app-color-text-white-background:      rgba(74, 79, 76, 0.8);
 
@@ -298,21 +298,21 @@ $app-button-delete-color-background:                 $app-color-accent-light;
 
 $app-slide-color-background:                         white;
 
-$app-slide-margin:                                   2.8rem;
-$app-slide-margin-top:                               1.3rem;
-$app-slide-margin-bottom:                            7.2rem;
-$app-slide-padding:                                  3.0rem;
+$app-slide-margin:                                   28px;
+$app-slide-margin-top:                               13px;
+$app-slide-margin-bottom:                            72px;
+$app-slide-padding:                                  30px;
 
 $app-slide-width-margin:                             $app-slide-margin * 2;
 $app-slide-height-margin:                            $app-slide-margin-top + $app-slide-margin-bottom;
 
-$app-slide-close-size:                               2.6rem;
+$app-slide-close-size:                               26px;
 $app-slide-close-size-half:                          $app-slide-close-size / 2;
 $app-slide-close-border-color:                       rgba(46, 47, 45, 0.7);
-$app-slide-close-border-width:                       0.2rem;
+$app-slide-close-border-width:                       2px;
 $app-slide-close-box-shadow:                         $gm-elevated-1;
 
-$app-card-height:                                    4.8rem;
+$app-card-height:                                    48px;
 
 // LISTS
 
@@ -320,7 +320,7 @@ $app-detail-header-height:                       167px;
 $app-list-item-font-color:                     #030303;
 $app-list-item-font-color-note:                  $app-color-grey-lighter;
 $app-list-box-shadow:                            $gm-elevated-1;
-$app-list-card-border-radius:                    0.3rem;
+$app-list-card-border-radius:                    3px;
 
 $list-ios-activated-background-color:           #F9F9F9;
 $list-md-activated-background-color:            #F9F9F9;
@@ -344,14 +344,14 @@ $app-tabs-height:                                49px;
 $app-tabs-text-color-active:                     $app-color-dark-text-active;
 $app-tabs-text-color-inactive:                   $app-color-dark-text-inactive;
 $app-tabs-text-color-border:                     $app-color-dark-text-border;
-$app-tabs-text-color-icon-font-size:             2.5rem;
+$app-tabs-text-color-icon-font-size:             25px;
 
 $app-tabs-top-height:                            44px;
 $app-tabs-top-text-color-active:                 $app-tabs-text-color-active;
 $app-tabs-top-text-color-inactive:               $app-color-dark-text;
 $app-tabs-top-text-color-border:                 $app-tabs-text-color-border;
 $app-tabs-top-text-color-icon-font-size:         $app-tabs-text-color-icon-font-size;
-$app-tabs-top-text-font-size:                    1.0rem;
+$app-tabs-top-text-font-size:                    10px;
 $app-tabs-top-text-font-weight:                  600;
 
 $app-tabs-bottom-height:                         $app-tabs-height;

@@ -2111,7 +2111,7 @@ var UIModule = /** @class */ (function () {
 /*!**********************************************************!*\
   !*** /Users/andredavcev/Files/Theory/xplat/web/index.ts ***!
   \**********************************************************/
-/*! exports provided: AppCoreModule, AppBaseComponent, UIModule */
+/*! exports provided: AppCoreModule, UIModule, AppBaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2377,24 +2377,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/firebase/ngx */ "../../node_modules/@ionic-native/firebase/ngx/index.js");
 /* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/auth */ "../../node_modules/@angular/fire/auth/index.js");
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
-/* harmony import */ var _theory_ionic__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @theory/ionic */ "../../xplat/ionic/index.ts");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _state_app_app_state__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../state/app/app.state */ "./src/app/state/app/app.state.ts");
-/* harmony import */ var _state_language_language_state__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../state/language/language.state */ "./src/app/state/language/language.state.ts");
-/* harmony import */ var _state_location_location_state__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../state/location/location.state */ "./src/app/state/location/location.state.ts");
-/* harmony import */ var _state_device_device_state__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../state/device/device.state */ "./src/app/state/device/device.state.ts");
-/* harmony import */ var _state_user_user_state__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../state/user/user.state */ "./src/app/state/user/user.state.ts");
-/* harmony import */ var _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../state/notifications/notifications.state */ "./src/app/state/notifications/notifications.state.ts");
-/* harmony import */ var _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../state/cluster/cluster.state */ "./src/app/state/cluster/cluster.state.ts");
-/* harmony import */ var _state_places_places_state__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../state/places/places.state */ "./src/app/state/places/places.state.ts");
-/* harmony import */ var _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../state/icons/icons.state */ "./src/app/state/icons/icons.state.ts");
-/* harmony import */ var _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../state/subscriptions/subscriptions.state */ "./src/app/state/subscriptions/subscriptions.state.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/platform-browser/animations */ "../../node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _theory_ionic__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @theory/ionic */ "../../xplat/ionic/index.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _state_app_app_state__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../state/app/app.state */ "./src/app/state/app/app.state.ts");
+/* harmony import */ var _state_language_language_state__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../state/language/language.state */ "./src/app/state/language/language.state.ts");
+/* harmony import */ var _state_location_location_state__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../state/location/location.state */ "./src/app/state/location/location.state.ts");
+/* harmony import */ var _state_device_device_state__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../state/device/device.state */ "./src/app/state/device/device.state.ts");
+/* harmony import */ var _state_user_user_state__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../state/user/user.state */ "./src/app/state/user/user.state.ts");
+/* harmony import */ var _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../state/notifications/notifications.state */ "./src/app/state/notifications/notifications.state.ts");
+/* harmony import */ var _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../state/cluster/cluster.state */ "./src/app/state/cluster/cluster.state.ts");
+/* harmony import */ var _state_places_places_state__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../state/places/places.state */ "./src/app/state/places/places.state.ts");
+/* harmony import */ var _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../state/icons/icons.state */ "./src/app/state/icons/icons.state.ts");
+/* harmony import */ var _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../state/subscriptions/subscriptions.state */ "./src/app/state/subscriptions/subscriptions.state.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -2434,24 +2436,25 @@ var CoreModule = /** @class */ (function () {
     CoreModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
-                _theory_ionic__WEBPACK_IMPORTED_MODULE_13__["AppIonicCoreModule"],
-                _angular_fire__WEBPACK_IMPORTED_MODULE_1__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].apis.firebase),
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_13__["BrowserAnimationsModule"],
+                _theory_ionic__WEBPACK_IMPORTED_MODULE_14__["AppIonicCoreModule"],
+                _angular_fire__WEBPACK_IMPORTED_MODULE_1__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_15__["environment"].apis.firebase),
                 _angular_fire_auth__WEBPACK_IMPORTED_MODULE_11__["AngularFireAuthModule"],
                 _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_12__["AngularFirestoreModule"],
                 _ngxs_store__WEBPACK_IMPORTED_MODULE_4__["NgxsModule"].forRoot([
-                    _state_app_app_state__WEBPACK_IMPORTED_MODULE_15__["StateApp"],
-                    _state_language_language_state__WEBPACK_IMPORTED_MODULE_16__["StateLanguage"],
-                    _state_location_location_state__WEBPACK_IMPORTED_MODULE_17__["StateLocation"],
-                    _state_device_device_state__WEBPACK_IMPORTED_MODULE_18__["StateDevice"],
-                    _state_user_user_state__WEBPACK_IMPORTED_MODULE_19__["StateUser"],
-                    _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_20__["StateNotifications"],
-                    _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_21__["StateCluster"],
-                    _state_places_places_state__WEBPACK_IMPORTED_MODULE_22__["StatePlaces"],
-                    _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_23__["StateIcons"],
-                    _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_24__["StateSubscriptions"]
+                    _state_app_app_state__WEBPACK_IMPORTED_MODULE_16__["StateApp"],
+                    _state_language_language_state__WEBPACK_IMPORTED_MODULE_17__["StateLanguage"],
+                    _state_location_location_state__WEBPACK_IMPORTED_MODULE_18__["StateLocation"],
+                    _state_device_device_state__WEBPACK_IMPORTED_MODULE_19__["StateDevice"],
+                    _state_user_user_state__WEBPACK_IMPORTED_MODULE_20__["StateUser"],
+                    _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_21__["StateNotifications"],
+                    _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_22__["StateCluster"],
+                    _state_places_places_state__WEBPACK_IMPORTED_MODULE_23__["StatePlaces"],
+                    _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_24__["StateIcons"],
+                    _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_25__["StateSubscriptions"]
                 ]),
-                _ngxs_devtools_plugin__WEBPACK_IMPORTED_MODULE_5__["NgxsReduxDevtoolsPluginModule"].forRoot({ disabled: _environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].production }),
-                ngx_mapbox_gl__WEBPACK_IMPORTED_MODULE_6__["NgxMapboxGLModule"].withConfig({ accessToken: _environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].apis.maps.accessToken })
+                _ngxs_devtools_plugin__WEBPACK_IMPORTED_MODULE_5__["NgxsReduxDevtoolsPluginModule"].forRoot({ disabled: _environments_environment__WEBPACK_IMPORTED_MODULE_15__["environment"].production }),
+                ngx_mapbox_gl__WEBPACK_IMPORTED_MODULE_6__["NgxMapboxGLModule"].withConfig({ accessToken: _environments_environment__WEBPACK_IMPORTED_MODULE_15__["environment"].apis.maps.accessToken })
             ],
             providers: [
                 _ionic_native_globalization_ngx__WEBPACK_IMPORTED_MODULE_7__["Globalization"],
@@ -4481,11 +4484,13 @@ var StateUser = /** @class */ (function () {
         this.googlePlus = googlePlus;
         this.platform = platform;
     }
+    StateUser_1 = StateUser;
     StateUser.authData = function (state) { return state.authData; };
     StateUser.user = function (state) { return state.user; };
     StateUser.authenticated = function (state) { return state.authenticated; };
     StateUser.authenticating = function (state) { return state.authenticating; };
     StateUser.loading = function (state) { return state.authenticating || state.initializing; };
+    StateUser.loadedNotAuthenticated = function (state) { return !StateUser_1.loading && !StateUser_1.authenticated; };
     StateUser.error = function (state) { return state.error; };
     StateUser.errored = function (state) { return state.error != null; };
     StateUser.userFound = function (state) { return state.user != null; };
@@ -4622,6 +4627,7 @@ var StateUser = /** @class */ (function () {
             dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserLogout"]());
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
     };
+    var StateUser_1;
     __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Select"])(_language_language_state__WEBPACK_IMPORTED_MODULE_10__["StateLanguage"].language),
         __metadata("design:type", rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"])
@@ -4733,6 +4739,12 @@ var StateUser = /** @class */ (function () {
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
+    ], StateUser, "loadedNotAuthenticated", null);
+    __decorate([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Selector"])(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
     ], StateUser, "error", null);
     __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Selector"])(),
@@ -4746,7 +4758,7 @@ var StateUser = /** @class */ (function () {
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateUser, "userFound", null);
-    StateUser = __decorate([
+    StateUser = StateUser_1 = __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["State"])({
             name: 'user',
             defaults: {

@@ -3,6 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 import { StateUser } from '../../state/user/user.state';
 import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail } from '../../state/user/user.actions';
@@ -20,19 +21,19 @@ export class PageLogin implements OnInit
 {
     public AuthProvider: any = AuthProvider;
 
-    @Select(StateUser.authenticated)  userAuthenticated$: Observable<boolean>;
-    @Select(StateUser.loading)        userLoading$:       Observable<boolean>;
-    @Select(StateUser.userFound)      userFound$:         Observable<boolean>;
+    @Select(StateUser.authenticated)          userAuthenticated$: Observable<boolean>;
+    @Select(StateUser.loading)                userLoading$:       Observable<boolean>;
+    @Select(StateUser.userFound)              userFound$:         Observable<boolean>;
+    @Select(StateUser.loadedNotAuthenticated) loadedNotAuthenticated$: Observable<boolean>;
 
-    constructor(private store: Store, public router: Router) { }
+    constructor(private store: Store, private router: Router, private nav: NavController) { }
 
     public ngOnInit(): void
     {
-/*
         this.userFound$.
         pipe(filter((userFound: boolean) => userFound), take(1)).
-        subscribe(() => this.router.navigate(['/home']));
-*/
+        subscribe(() => this.nav.navigateRoot('/home'));
+
         this.store.dispatch(new UserAuthenticate());
     }
 
