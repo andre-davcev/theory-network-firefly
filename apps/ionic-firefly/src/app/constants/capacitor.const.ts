@@ -1,3 +1,3 @@
 import { Plugins } from '@capacitor/core';
 
-export const { StatusBar } = Plugins;
+export const { StatusBar, SplashScreen } = Plugins;

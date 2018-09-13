@@ -2238,10 +2238,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComponentApp", function() { return ComponentApp; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/core */ "./node_modules/@capacitor/core/dist/esm/index.js");
-/* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
-/* harmony import */ var _state_app_app_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./state/app/app.actions */ "./src/app/state/app/app.actions.ts");
-/* harmony import */ var _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./constants/capacitor.const */ "./src/app/constants/capacitor.const.ts");
+/* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
+/* harmony import */ var _state_app_app_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./state/app/app.actions */ "./src/app/state/app/app.actions.ts");
+/* harmony import */ var _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants/capacitor.const */ "./src/app/constants/capacitor.const.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2257,7 +2256,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var ComponentApp = /** @class */ (function () {
     function ComponentApp(platform, store) {
         this.platform = platform;
@@ -2267,11 +2265,10 @@ var ComponentApp = /** @class */ (function () {
     ComponentApp.prototype.initializeApp = function () {
         var _this = this;
         this.platform.ready().then(function () {
-            //            if (isCapacitorNative(window))
-            //            {
-            _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_5__["StatusBar"].setStyle({ style: _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["StatusBarStyle"].Dark });
-            //            }
-            _this.store.dispatch(new _state_app_app_actions__WEBPACK_IMPORTED_MODULE_4__["AppInitialize"]());
+            // if (isCapacitorNative(window))
+            _this.store.dispatch(new _state_app_app_actions__WEBPACK_IMPORTED_MODULE_3__["AppInitialize"]());
+            //            fromPromise(StatusBar.show()).pipe(tap(() => StatusBar.setStyle({style: StatusBarStyle.Dark})));
+            _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"].hide();
         });
     };
     ComponentApp = __decorate([
@@ -2279,7 +2276,7 @@ var ComponentApp = /** @class */ (function () {
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html")
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"], _ngxs_store__WEBPACK_IMPORTED_MODULE_3__["Store"]])
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"], _ngxs_store__WEBPACK_IMPORTED_MODULE_2__["Store"]])
     ], ComponentApp);
     return ComponentApp;
 }());
@@ -2341,15 +2338,16 @@ var AppModule = /** @class */ (function () {
 /*!**********************************************!*\
   !*** ./src/app/constants/capacitor.const.ts ***!
   \**********************************************/
-/*! exports provided: StatusBar */
+/*! exports provided: StatusBar, SplashScreen */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatusBar", function() { return StatusBar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SplashScreen", function() { return SplashScreen; });
 /* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ "./node_modules/@capacitor/core/dist/esm/index.js");
 
-var StatusBar = _capacitor_core__WEBPACK_IMPORTED_MODULE_0__["Plugins"].StatusBar;
+var StatusBar = _capacitor_core__WEBPACK_IMPORTED_MODULE_0__["Plugins"].StatusBar, SplashScreen = _capacitor_core__WEBPACK_IMPORTED_MODULE_0__["Plugins"].SplashScreen;
 
 
 /***/ }),

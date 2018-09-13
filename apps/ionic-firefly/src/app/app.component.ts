@@ -5,7 +5,10 @@ import { StatusBarStyle } from '@capacitor/core';
 import { Store } from '@ngxs/store';
 
 import { AppInitialize } from './state/app/app.actions';
-import { StatusBar } from './constants/capacitor.const';
+import { StatusBar, SplashScreen } from './constants/capacitor.const';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { tap } from 'rxjs/operators';
+
 
 @Component
 ({
@@ -23,12 +26,11 @@ export class ComponentApp
     {
         this.platform.ready().then(() =>
         {
-//            if (isCapacitorNative(window))
-//            {
-                StatusBar.setStyle({style: StatusBarStyle.Dark});
-//            }
-
+            // if (isCapacitorNative(window))
             this.store.dispatch(new AppInitialize());
+
+//            fromPromise(StatusBar.show()).pipe(tap(() => StatusBar.setStyle({style: StatusBarStyle.Dark})));
+            SplashScreen.hide();
         });
     }
 }
