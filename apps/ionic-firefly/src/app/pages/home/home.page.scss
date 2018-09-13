@@ -16,8 +16,8 @@ ion-slide
             margin: $app-slide-margin;
             margin-top: $app-slide-margin-top;
             margin-bottom: $app-slide-margin-bottom;
-            box-shadow: 0 1.5rem 2.5rem 0 rgba(0,0,0,0.20);
-            border-radius: 1.4rem;
+            box-shadow: 0 15px 25px 0 rgba(0,0,0,0.20);
+            border-radius: 14px;
             padding: $app-slide-padding;
 
 /*
@@ -46,9 +46,9 @@ ion-slide
                 content: '\d7';
                 height: $app-slide-close-size;
                 width: $app-slide-close-size;
-                top: -$app-slide-close-size-half + $app-slide-margin-top - 0.2rem;
+                top: -$app-slide-close-size-half + $app-slide-margin-top - 2px;
                 left: -$app-slide-close-size-half + $app-slide-margin;
-                font-size: $app-slide-close-size + 0.6rem;
+                font-size: $app-slide-close-size + 6px;
                 color: $app-slide-close-border-color;
                 line-height: $app-slide-close-size;
                 text-align: center;
@@ -58,9 +58,9 @@ ion-slide
             > .cpt-title
             {
                 margin: 0;
-                margin-top: 1.5rem;
-                line-height: 2.6rem;
-                font-size: 2.0rem;
+                margin-top: 15px;
+                line-height: 26px;
+                font-size: 20px;
                 font-weight: 400;
                 text-transform: uppercase;
                 color: rgba(0, 0, 0, 0.7);
@@ -69,41 +69,41 @@ ion-slide
             > .cpt-short
             {
                 margin: 0;
-                margin-top: 0.8rem;
-                font-size: 1.8rem;
+                margin-top: 8px;
+                font-size: 18px;
                 font-weight: 400;
-                line-height: 2.1rem;
+                line-height: 21px;
                 color: rgba(0, 0, 0, 0.54);
             }
 
             > .cpt-image
             {
                 width: 100%;
-                margin-top: 2.7rem;
-                box-shadow: 0 1.5rem 3.0rem rgba(0, 0, 0, 0.25);
+                margin-top: 27px;
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
             }
 
             > .cpt-button
             {
                 padding: 0;
                 margin: 0;
-                margin-top: 4.1rem;
+                margin-top: 41px;
                 text-transform: uppercase;
                 background-color: $app-color-primary;
                 color: $app-color-white;
-                font-size: 1.6rem;
-                line-height: 1.6rem;
+                font-size: 16px;
+                line-height: 16px;
                 font-weight: 900;
-                padding: 1.6rem 2.4rem;
-                border-radius: 2.4rem;
+                padding: 16px 24px;
+                border-radius: 24px;
             }
 
             > .cpt-paragraph
             {
                 margin: 0;
-                margin-top: 1.3rem;
-                font-size: 1.4rem;
-                line-height: 1.7rem;
+                margin-top: 13px;
+                font-size: 14px;
+                line-height: 17px;
                 color: rgba(0, 0, 0, 0.54);
             }
         }
@@ -121,7 +121,7 @@ ion-slides
     {
         .swiper-pagination
         {
-            bottom: 2.8rem;
+            bottom: 28px;
         }
     }
 }

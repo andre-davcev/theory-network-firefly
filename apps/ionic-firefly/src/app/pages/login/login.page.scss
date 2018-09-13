@@ -1,6 +1,6 @@
 @import "app-variables";
 
-$app-auth-margin-elements-subgroup:          0.8rem;
+$app-auth-margin-elements-subgroup:          8px;
 
 $app-auth-button-login-height:               $app-input-directive-height;
 $app-auth-button-login-width:                100%;
@@ -25,26 +25,26 @@ $app-auth-input-divider-width:               $app-auth-input-login-width;
 
 $app-auth-divider-color:                     $app-color-grey-lightest;
 $app-auth-divider-height:                    1px;
-$app-auth-divider-width:                     4.7rem;
-$app-auth-divider-margin:                    2.1rem;
+$app-auth-divider-width:                     47px;
+$app-auth-divider-margin:                    21px;
 $app-auth-divider-line-height:               $tn-line-height-none;
 $app-auth-divider-font-family:               $app-font-base;
-$app-auth-divider-font-size:                 0.9rem;
+$app-auth-divider-font-size:                 9px;
 
 $app-auth-color-background:                  $app-color-dark;
 
 $app-auth-app-title-font-family:             $app-font-base;
-$app-auth-app-title-font-size:               5.2rem;
-$app-auth-app-title-letter-spacing:          1.5rem;
+$app-auth-app-title-font-size:               52px;
+$app-auth-app-title-letter-spacing:          15px;
 $app-auth-app-title-line-height:             $tn-line-height-none;
-$app-auth-app-title-height:                  3.4rem;
-$app-auth-app-title-width:                   24.6rem;
-$app-auth-app-title-height-login:            2.3rem;
-$app-auth-app-title-width-login:             17.6rem;
+$app-auth-app-title-height:                  76%;
+$app-auth-app-title-width:                   76%;
+$app-auth-app-title-height-login:            23px;
+$app-auth-app-title-width-login:             176px;
 $app-auth-app-title-scale-login:             0.71255060728745;
 $app-auth-app-title-translate-login:         -($app-auth-input-login-height + 0.2);
 
-$app-auth-logo-height-login:                 3.1rem;
+$app-auth-logo-height-login:                 31px;
 $app-auth-logo-width-login:                  $app-auth-logo-height-login;
 $app-auth-logo-scale:                        0.54385964912281;
 
@@ -57,8 +57,8 @@ $app-auth-tagline-font-size:                 $app-font-size-small;
 $app-auth-tagline-line-height:               $tn-line-height-none;
 $app-auth-tagline-letter-spacing:            1px;
 
-$app-auth-container-title-height:            6.8rem;
-$app-auth-container-auth-height:             40.8rem;
+$app-auth-container-title-height:            68px;
+$app-auth-container-auth-height:             408px;
 $app-auth-container-translate:               ($app-auth-container-auth-height - $app-auth-container-title-height) / 2;
 
 $app-auth-item-color-light:                  $app-color-white;
@@ -342,7 +342,7 @@ input[type="color"]
                 box-sizing: border-box;
                 display: block;
                 position: absolute;
-                top: -0.3rem; left: 0.4rem;
+                top: -3px; left: 4px;
                 height: $app-provider-button-icon-height; width: $app-provider-button-icon-width;
                 font-family: $app-provider-button-icon-font-family;
                 font-size: $app-provider-button-icon-font-size;
@@ -376,7 +376,7 @@ input[type="color"]
                 {
                     color: $app-twitter-button-icon-color-text;
                     content: $app-twitter-button-icon-content;
-                    padding-top: 0.3rem; padding-left: 0.0rem;
+                    padding-top: 3px; padding-left: 0;
                 }
             }
         }
@@ -404,7 +404,7 @@ input[type="color"]
                 {
                     color: $app-google-button-icon-color-text;
                     content: $app-google-button-icon-content;
-                    padding-top: 0.5rem; padding-left: 0.1rem;
+                    padding-top: 5px; padding-left: 1px;
                     font-size: $app-google-button-icon-font-size;
                 }
             }
@@ -433,7 +433,7 @@ input[type="color"]
                 {
                     color: $app-facebook-button-icon-color-text;
                     content: $app-facebook-button-icon-content;
-                    padding-top: 0.5rem; padding-left: 0.4rem;
+                    padding-top: 5px; padding-left: 4px;
                 }
             }
         }
@@ -477,44 +477,17 @@ input[type="color"]
 
     > .cpt-container-app-title
     {
-        margin-top: -3.5rem; margin-left: -0.1rem;
+        margin-top: -35px; margin-left: -1px;
 
         > .tn-align-item
         {
             position: relative;
             height: $app-auth-container-title-height;
-            margin-left: 0.3rem; margin-top: -1.0rem;
+            margin-left: 3px; margin-top: -10px;
 
             > .cpt-container-logo
             {
                 position: relative;
-            }
-
-            > .cpt-app-title
-            {
-                position: relative;
-                height: $app-auth-app-title-height; width: $app-auth-app-title-width;
-                position: relative;
-                display: block;
-                margin-top: 1.8rem; margin-left: 0.3rem;
-            }
-
-            > .cpt-tagline
-            {
-                position: relative;
-                display: block;
-                width: 100%;
-                margin-top: 0.8rem;
-                line-height: $app-auth-tagline-line-height;
-                color: $app-auth-tagline-color;
-                text-align: center;
-                font-family: $app-auth-tagline-font-family;
-                font-size: $app-auth-tagline-font-size;
-                letter-spacing: $app-auth-tagline-letter-spacing;
-                text-shadow: $app-auth-tagline-text-shadow;
-                transition-delay: $app-transition-duration-move;
-                transition-timing-function: ease-out;
-                opacity: 0;
             }
         }
     }
@@ -524,7 +497,7 @@ input[type="color"]
         position: relative;
         width: 100%;
         opacity: 0;
-        padding: 0 3.8rem;
+        padding: 0 38px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -543,7 +516,7 @@ input[type="color"]
 
                 .fa-envelope-o
                 {
-                    padding-top: 0.1rem;
+                    padding-top: 1px;
                 }
 
                 > .cpt-divider
@@ -567,7 +540,7 @@ input[type="color"]
         {
             position: relative;
             color: $app-auth-item-color-light;
-            margin: 3.2rem 0;
+            margin: 32px 0;
             text-align: center;
             line-height: $app-auth-divider-line-height;
             font-family: $app-auth-divider-font-family;
@@ -584,7 +557,7 @@ input[type="color"]
                 {
                     position: absolute;
                     display: inline-block;
-                    top: 0.4rem;
+                    top: 4px;
                     content: '';
                     height: $app-auth-divider-height; width: $app-auth-divider-width;
                     background-color: $app-auth-divider-color;
@@ -606,18 +579,18 @@ input[type="color"]
         {
             position: relative;
             width: 100%;
-            margin-bottom: 4.2rem;
+            margin-bottom: 42px;
 
             display: flex;
             flex-direction: column;
 
             > .tn-button
             {
-                margin-bottom: 0.8rem;
+                margin-bottom: 8px;
 
                 &:last-child
                 {
-                    margin-bottom: 0.0rem;
+                    margin-bottom: 0;
                 }
             }
         }
@@ -626,7 +599,7 @@ input[type="color"]
         {
             position: relative;
             width: $app-auth-footer-width;
-            margin-top: 3.0rem; margin-bottom: 3.8rem;
+            margin-top: 30px; margin-bottom: 38px;
             color: $app-auth-footer-color-text;
             font-family: $app-auth-footer-font-family;
             font-size: $app-auth-footer-font-size;
@@ -653,16 +626,16 @@ input[type="color"]
         {
             &:before
             {
-                left: 2.2rem; top: 0.1rem;
+                left: 22px; top: 1px;
                 line-height: $app-auth-input-login-height;
                 color: $app-auth-input-color-icon;
-                font-size: 1.2rem;
+                font-size: 12px;
             }
 
             > .tn-input
             {
                 height: $app-auth-input-login-height; width: $app-auth-input-login-width;
-                padding-left: 5.4rem;
+                padding-left: 54px;
                 color: $app-auth-input-color-text;
                 font-family: $app-auth-input-font-family;
                 font-size: $app-auth-input-font-size;
@@ -670,8 +643,8 @@ input[type="color"]
 
             &:last-child:before
             {
-                left: 2.3rem; top: -0.1rem;
-                font-size: 1.7rem;
+                left: 23px; top: -1px;
+                font-size: 17px;
             }
         }
 
@@ -703,13 +676,13 @@ input[type="color"]
                 {
                     > firefly
                     {
-                        transform: translate3d(-5.1rem, -0.3rem, 0) scale($app-auth-logo-scale);
+                        transform: translate3d(-51px, -3px, 0) scale($app-auth-logo-scale);
                     }
                 }
 
                 > .cpt-tagline
                 {
-                    transform: translate3d(0, $app-auth-app-title-translate-login - 0.6rem, 0);
+                    transform: translate3d(0, $app-auth-app-title-translate-login - 6px, 0);
                     opacity: 1;
                 }
             }
@@ -722,15 +695,30 @@ input[type="color"]
     }
 }
 
-.tn-keyboard
+.cpt-title
 {
-    .cpt-splash
-    {
-        > .cpt-container-app-title
-        {
-            transform: translate3d(0, 40%, 0);
-        }
-    }
+    position: relative;
+    height: $app-auth-app-title-height; width: $app-auth-app-title-width;
+    position: relative;
+    display: block;
+    margin-top: 18px; margin-left: 3px;
+}
+
+.cpt-tagline
+{
+    position: relative;
+    display: block;
+    margin-top: 8px;
+    line-height: $app-auth-tagline-line-height;
+    color: $app-auth-tagline-color;
+    text-align: center;
+    font-family: $app-auth-tagline-font-family;
+    font-size: $app-auth-tagline-font-size;
+    letter-spacing: $app-auth-tagline-letter-spacing;
+    text-shadow: $app-auth-tagline-text-shadow;
+    transition-delay: $app-transition-duration-move;
+    transition-timing-function: ease-out;
+    opacity: 0;
 }
 
 .tn-ico.fa-icon:before

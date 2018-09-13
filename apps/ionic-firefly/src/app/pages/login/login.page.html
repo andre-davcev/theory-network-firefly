@@ -1,16 +1,11 @@
 <section class="cpt-container" fxLayout="column" fxLayoutAlign="center">
-    <div class="tn-container cpt-container-app-title tn-animate tn-transform">
-        <div class="tn-align-item tn-align-fixed">
-            <div class="cpt-container-logo tn-align">
-                <app-icon-firefly [animate]="userLoading$ | async"></app-icon-firefly>
-            </div>
+    <section fxLayout="column" fxLayoutAlign="center center">
+        <app-icon-firefly [animate]="userLoading$ | async"></app-icon-firefly>
+        <img class="cpt-title" src="assets/images/app.title@2x.png">
+        <span class="cpt-tagline">{{ 'page.auth.tagline' | translate }}</span>
+    </section>
 
-            <img class="cpt-app-title tn-animate tn-transform" src="assets/images/app.title@2x.png">
-            <span class="cpt-tagline tn-animate tn-transform tn-opacity">{{ 'page.auth.tagline' | translate }}</span>
-        </div>
-    </div>
-
-    <div class="tn-container cpt-container-auth tn-animate tn-opacity tn-transform">
+    <section fxLayout="column" fxLayoutAlign="center" *ngIf="loadedNotAuthenticated$ | async">
         <div class="cpt-auth-email">
     <!--
             <div class="cpt-container-inputs">
@@ -50,5 +45,5 @@
             </button>
     -->
         </div>
-    </div>
+      </section>
 </section>
