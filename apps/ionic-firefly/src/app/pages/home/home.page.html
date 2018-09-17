@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="secondary">
+      <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
           <ion-button icon-only (click)="navigate(AlertsModalType.Search)">
               <ion-icon name="search" color="dark"></ion-icon>
           </ion-button>
@@ -20,27 +20,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-slides ion-fixed pager (ionSlideDidChange)="slideChanged()">
+<ion-content [scrollEvents]="true">
+  <ion-slides pager="true" (ionSlideDidChange)="slideChanged()">
       <ion-slide *ngFor="let notification of notifications$ | async">
           <div class="cpt-card">
-              <h1 class="cpt-title">{{notification.title}}</h1>
-              <h2 class="cpt-short">{{notification.body}}</h2>
+              <h1 class="cpt-title">{{ notification.title }}</h1>
+              <h2 class="cpt-short">{{ notification.body }}</h2>
               <img class="cpt-image" [src]="notification.image">
-              <p class="cpt-paragraph">{{notification.date}}</p>
+              <p class="cpt-paragraph">{{ notification.date }}</p>
           </div>
       </ion-slide>
   </ion-slides>
-
-  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
-      <ion-button icon-only color="transparent">
-          <ion-icon name="md-globe" color="dark"></ion-icon>
-      </ion-button>
-  </ion-fab>
-
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-button icon-only color="transparent">
-          <ion-icon name="md-trash" color="dark"></ion-icon>
-      </ion-button>
-  </ion-fab>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+      <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
+          <ion-button icon-only>
+              <ion-icon name="md-globe" color="dark"></ion-icon>
+          </ion-button>
+          <ion-button icon-only>
+              <ion-icon name="md-trash" color="dark"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

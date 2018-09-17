@@ -24,6 +24,11 @@ export class StateApp
 {
     constructor() {}
 
+    ngxsOnInit(context: StateContext<StateAppModel>)
+    {
+        context.dispatch(new AppInitialize());
+    }
+
     @Action(AppInitialize)
     appInitialize({ dispatch} : StateContext<StateAppModel>)
     {

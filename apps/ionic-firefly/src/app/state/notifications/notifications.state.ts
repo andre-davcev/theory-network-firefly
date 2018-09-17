@@ -17,8 +17,8 @@ import { ServiceNotifications } from '../../services/notifications.service';
 export interface StateNotificationsModel
 {
     notifications     : Array<Notification>;
-    notificationsPush : Array<PushNotification>;
-    notificationPush  : PushNotification;
+    pushNotifications : Array<PushNotification>;
+    pushNotification  : PushNotification;
 }
 
 @State<StateNotificationsModel>
@@ -28,8 +28,8 @@ export interface StateNotificationsModel
     defaults :
     {
         notifications     : [],
-        notificationsPush : [],
-        notificationPush  : undefined
+        pushNotifications : [],
+        pushNotification  : undefined
     }
 })
 
@@ -37,25 +37,26 @@ export class StateNotifications
 {
     constructor(private firebaseNative: Firebase, private platform: Platform, private serviceNotifications: ServiceNotifications) {}
 
-    @Selector() static notifications(state: StateNotificationsModel) {return state.notificationsPush;}
-    @Selector() static notification(state: StateNotificationsModel)  {return state.notificationPush;}
+    @Selector() static notifications(state: StateNotificationsModel): Array<Notification> {return state.notifications;}
+    @Selector() static pushNotifications(state: StateNotificationsModel): Array<PushNotification> {return state.pushNotifications;}
+    @Selector() static pushNotification(state: StateNotificationsModel): PushNotification {return state.pushNotification;}
 
-    @Selector() static hasPushNotifications(state: StateNotificationsModel)  {return state.notificationsPush.length > 0;}
+    @Selector() static hasPushNotifications(state: StateNotificationsModel)  {return state.pushNotifications.length > 0;}
 
     @Action(NotificationsWatch)
     notificationsWatch({ patchState, getState, dispatch }: StateContext<StateNotificationsModel>)
     {
         this.firebaseNative.onNotificationOpen().pipe
         (
-            tap((notificationPush: PushNotification) =>
+            tap((pushNotification: PushNotification) =>
                 patchState
                 ({
-                    notificationPush,
+                    pushNotification,
 
-                    notificationsPush :
+                    pushNotifications :
                     [
-                        ...getState().notificationsPush,
-                        notificationPush
+                        ...getState().pushNotifications,
+                        pushNotification
                     ]
                 })
             )
@@ -77,7 +78,8 @@ export class StateNotifications
     {
         return this.serviceNotifications.get().pipe
         (
-            tap((notifications: Array<Notification>) => patchState({notifications}))
+            tap((notifications: Array<Notification>) => patchState({notifications})),
+            tap((notifications: Array<Notification>) => console.log(notifications))
         );
     }
 }

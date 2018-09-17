@@ -63,7 +63,7 @@ export class PageHome
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
+        StatusBar.setStyle({style: StatusBarStyle.Light});
     }
 
     slideChanged()

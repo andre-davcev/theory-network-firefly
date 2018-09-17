@@ -2238,9 +2238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComponentApp", function() { return ComponentApp; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
-/* harmony import */ var _state_app_app_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./state/app/app.actions */ "./src/app/state/app/app.actions.ts");
-/* harmony import */ var _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants/capacitor.const */ "./src/app/constants/capacitor.const.ts");
+/* harmony import */ var _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants/capacitor.const */ "./src/app/constants/capacitor.const.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2251,24 +2249,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 //import { isCapacitorNative } from '@ionic/core';
 
-
-
-
 var ComponentApp = /** @class */ (function () {
-    function ComponentApp(platform, store) {
+    function ComponentApp(platform) {
         this.platform = platform;
-        this.store = store;
         this.initializeApp();
     }
     ComponentApp.prototype.initializeApp = function () {
-        var _this = this;
         this.platform.ready().then(function () {
             // if (isCapacitorNative(window))
-            _this.store.dispatch(new _state_app_app_actions__WEBPACK_IMPORTED_MODULE_3__["AppInitialize"]());
-            //            fromPromise(StatusBar.show()).pipe(tap(() => StatusBar.setStyle({style: StatusBarStyle.Dark})));
-            _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"].hide();
+            _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_2__["SplashScreen"].hide();
         });
     };
     ComponentApp = __decorate([
@@ -2276,7 +2268,7 @@ var ComponentApp = /** @class */ (function () {
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html")
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"], _ngxs_store__WEBPACK_IMPORTED_MODULE_2__["Store"]])
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"]])
     ], ComponentApp);
     return ComponentApp;
 }());
@@ -3067,6 +3059,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var StateApp = /** @class */ (function () {
     function StateApp() {
     }
+    StateApp.prototype.ngxsOnInit = function (context) {
+        context.dispatch(new _app_actions__WEBPACK_IMPORTED_MODULE_3__["AppInitialize"]());
+    };
     StateApp.prototype.appInitialize = function (_a) {
         var dispatch = _a.dispatch;
         dispatch(new _device_device_actions__WEBPACK_IMPORTED_MODULE_4__["DeviceInitialize"]());
@@ -3978,16 +3973,17 @@ var StateNotifications = /** @class */ (function () {
         this.platform = platform;
         this.serviceNotifications = serviceNotifications;
     }
-    StateNotifications.notifications = function (state) { return state.notificationsPush; };
-    StateNotifications.notification = function (state) { return state.notificationPush; };
-    StateNotifications.hasPushNotifications = function (state) { return state.notificationsPush.length > 0; };
+    StateNotifications.notifications = function (state) { return state.notifications; };
+    StateNotifications.pushNotifications = function (state) { return state.pushNotifications; };
+    StateNotifications.pushNotification = function (state) { return state.pushNotification; };
+    StateNotifications.hasPushNotifications = function (state) { return state.pushNotifications.length > 0; };
     StateNotifications.prototype.notificationsWatch = function (_a) {
         var patchState = _a.patchState, getState = _a.getState, dispatch = _a.dispatch;
-        this.firebaseNative.onNotificationOpen().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (notificationPush) {
+        this.firebaseNative.onNotificationOpen().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (pushNotification) {
             return patchState({
-                notificationPush: notificationPush,
-                notificationsPush: getState().notificationsPush.concat([
-                    notificationPush
+                pushNotification: pushNotification,
+                pushNotifications: getState().pushNotifications.concat([
+                    pushNotification
                 ])
             });
         }));
@@ -3997,7 +3993,7 @@ var StateNotifications = /** @class */ (function () {
     };
     StateNotifications.prototype.notificationsGet = function (_a) {
         var patchState = _a.patchState;
-        return this.serviceNotifications.get().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (notifications) { return patchState({ notifications: notifications }); }));
+        return this.serviceNotifications.get().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (notifications) { return patchState({ notifications: notifications }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (notifications) { return console.log(notifications); }));
     };
     __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_notifications_actions__WEBPACK_IMPORTED_MODULE_6__["NotificationsWatch"]),
@@ -4015,14 +4011,20 @@ var StateNotifications = /** @class */ (function () {
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Selector"])(),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
+        __metadata("design:returntype", Array)
     ], StateNotifications, "notifications", null);
     __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Selector"])(),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], StateNotifications, "notification", null);
+        __metadata("design:returntype", Array)
+    ], StateNotifications, "pushNotifications", null);
+    __decorate([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Selector"])(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", Object)
+    ], StateNotifications, "pushNotification", null);
     __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Selector"])(),
         __metadata("design:type", Function),
@@ -4034,8 +4036,8 @@ var StateNotifications = /** @class */ (function () {
             name: 'notifications',
             defaults: {
                 notifications: [],
-                notificationsPush: [],
-                notificationPush: undefined
+                pushNotifications: [],
+                pushNotification: undefined
             }
         }),
         __metadata("design:paramtypes", [_ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_4__["Firebase"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"], _services_notifications_service__WEBPACK_IMPORTED_MODULE_8__["ServiceNotifications"]])
