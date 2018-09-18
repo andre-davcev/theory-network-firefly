@@ -1,9 +1,41 @@
 @import "app-variables";
 
+$app-slide-color-background:                         white;
+
+$app-slide-margin:                                   28px;
+$app-slide-margin-top:                               18px;
+$app-slide-margin-bottom:                            0;
+$app-slide-padding:                                  30px;
+
+$app-slide-width-margin:                             $app-slide-margin * 2;
+$app-slide-height-margin:                            128px;
+
+$app-slide-close-size:                               26px;
+$app-slide-close-size-half:                          $app-slide-close-size / 2;
+$app-slide-close-border-color:                       rgba(46, 47, 45, 0.7);
+$app-slide-close-border-width:                       2px;
+$app-slide-close-box-shadow:                         $gm-elevated-1;
+
+$app-card-height:                                    48px;
+
 :host {
     ion-header {
         &.header-md::after {
             background-image: none;
+        }
+
+        ion-toolbar {
+            padding-top: 0.75rem;
+        }
+    }
+
+    ion-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        ion-toolbar {
+            padding-bottom: 0.5rem;
         }
     }
 
@@ -17,20 +49,18 @@
     }
 
     ion-slides {
-      background-color: $app-color-primary;
       --background: #{$app-color-primary};
-      --bullet-background: #{$app-color-white};
+      --bullet-background: #{$app-color-black};
       --bullet-background-active: #{$app-color-dark};
 
-      height: 100%;
-
-      height: calc(100% - 100px);
-  }
+      background-color: $app-color-primary;
+      height: calc(100% - 112px);
+    }
 }
 
 ion-slide {
-
     background-color: transparent;
+    align-items: start;
 
     .cpt-card
     {

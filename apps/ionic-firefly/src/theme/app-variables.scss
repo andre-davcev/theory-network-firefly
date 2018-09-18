@@ -294,26 +294,6 @@ $app-border-radius:                      4px;
 
 $app-button-delete-color-background:                 $app-color-accent-light;
 
-// CARDS
-
-$app-slide-color-background:                         white;
-
-$app-slide-margin:                                   28px;
-$app-slide-margin-top:                               68px;
-$app-slide-margin-bottom:                            88px;
-$app-slide-padding:                                  30px;
-
-$app-slide-width-margin:                             $app-slide-margin * 2;
-$app-slide-height-margin:                            $app-slide-margin-top + $app-slide-margin-bottom;
-
-$app-slide-close-size:                               26px;
-$app-slide-close-size-half:                          $app-slide-close-size / 2;
-$app-slide-close-border-color:                       rgba(46, 47, 45, 0.7);
-$app-slide-close-border-width:                       2px;
-$app-slide-close-box-shadow:                         $gm-elevated-1;
-
-$app-card-height:                                    48px;
-
 // LISTS
 
 $app-detail-header-height:                       167px;
