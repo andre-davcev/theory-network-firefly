@@ -1,24 +1,351 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[103],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/nkpqfhed.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/nkpqfhed.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonRadio, IonRadioGroup */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rywx7u7y.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rywx7u7y.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRadio", function() { return Radio; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRadioGroup", function() { return RadioGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonInput", function() { return Input; });
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-276e047f.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-276e047f.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var Radio=function(){function e(){this.inputId="ion-rb-"+radioButtonIds++,this.keyFocus=!1,this.name=this.inputId,this.disabled=!1,this.checked=!1}return e.prototype.componentWillLoad=function(){this.ionSelect=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.ionSelect),this.ionStyle=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.ionStyle),null==this.value&&(this.value=this.inputId),this.emitStyle()},e.prototype.componentDidLoad=function(){this.ionRadioDidLoad.emit(),this.nativeInput.checked=this.checked;var e=this.nativeInput.closest("ion-item");if(e){var t=e.querySelector("ion-label");t&&(t.id=this.inputId+"-lbl",this.nativeInput.setAttribute("aria-labelledby",t.id))}},e.prototype.componentDidUnload=function(){this.ionRadioDidUnload.emit()},e.prototype.colorChanged=function(){this.emitStyle()},e.prototype.checkedChanged=function(e){this.nativeInput.checked!==e&&(this.nativeInput.checked=e),e&&this.ionSelect.emit({checked:!0,value:this.value}),this.emitStyle()},e.prototype.disabledChanged=function(e){this.nativeInput.disabled=e,this.emitStyle()},e.prototype.emitStyle=function(){this.ionStyle.emit({"radio-checked":this.checked,"interactive-disabled":this.disabled})},e.prototype.onClick=function(){this.checkedChanged(!0)},e.prototype.onChange=function(){this.checked=!0,this.nativeInput.focus()},e.prototype.onKeyUp=function(){this.keyFocus=!0},e.prototype.onFocus=function(){this.ionFocus.emit()},e.prototype.onBlur=function(){this.keyFocus=!1,this.ionBlur.emit()},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.color),{"in-item":Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["n"])(".item",this.el),interactive:!0,"radio-checked":this.checked,"radio-disabled":this.disabled,"radio-key":this.keyFocus})}},e.prototype.render=function(){var e=this;return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"radio-icon"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"radio-inner"})),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input",{type:"radio",onClick:this.onClick.bind(this),onChange:this.onChange.bind(this),onFocus:this.onFocus.bind(this),onBlur:this.onBlur.bind(this),onKeyUp:this.onKeyUp.bind(this),id:this.inputId,name:this.name,value:this.value,disabled:this.disabled,ref:function(t){return e.nativeInput=t}})]},Object.defineProperty(e,"is",{get:function(){return"ion-radio"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{checked:{type:Boolean,attr:"checked",mutable:!0,watchCallbacks:["checkedChanged"]},color:{type:String,attr:"color",watchCallbacks:["colorChanged"]},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},el:{elementRef:!0},keyFocus:{state:!0},mode:{type:String,attr:"mode"},name:{type:String,attr:"name"},value:{type:"Any",attr:"value",mutable:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionRadioDidLoad",method:"ionRadioDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionRadioDidUnload",method:"ionRadioDidUnload",bubbles:!0,cancelable:!0,composed:!0},{name:"ionStyle",method:"ionStyle",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSelect",method:"ionSelect",bubbles:!0,cancelable:!0,composed:!0},{name:"ionFocus",method:"ionFocus",bubbles:!0,cancelable:!0,composed:!0},{name:"ionBlur",method:"ionBlur",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-radio-md-h{display:inline-block;position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--color:var(--ion-text-color-step-600, #999999);--color-checked:var(--ion-color-primary, #3880ff);--width:16px;--height:16px}.radio-disabled.sc-ion-radio-md-h{pointer-events:none;opacity:.3}input.sc-ion-radio-md{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.radio-icon.sc-ion-radio-md, .radio-inner.sc-ion-radio-md{-webkit-box-sizing:border-box;box-sizing:border-box}.ion-color.sc-ion-radio-md-h   .radio-inner.sc-ion-radio-md{background:var(--ion-color-base)}.ion-color.radio-checked.sc-ion-radio-md-h   .radio-icon.sc-ion-radio-md{border-color:var(--ion-color-base)}.radio-icon.sc-ion-radio-md{display:block;position:relative;width:var(--width);height:var(--height);contain:layout size style;left:0;top:0;margin:0;border-radius:50%;border-width:2px;border-style:solid;border-color:var(--color)}.radio-inner.sc-ion-radio-md{left:2px;top:2px;border-radius:50%;position:absolute;width:8px;height:8px;-webkit-transform:scale3d(0,0,0);transform:scale3d(0,0,0);-webkit-transition:-webkit-transform 280ms cubic-bezier(.4,0,.2,1);transition:-webkit-transform 280ms cubic-bezier(.4,0,.2,1);transition:transform 280ms cubic-bezier(.4,0,.2,1);transition:transform 280ms cubic-bezier(.4,0,.2,1),-webkit-transform 280ms cubic-bezier(.4,0,.2,1);background:var(--color-checked)}.radio-checked.sc-ion-radio-md-h   .radio-icon.sc-ion-radio-md{border-color:var(--color-checked)}.radio-checked.sc-ion-radio-md-h   .radio-inner.sc-ion-radio-md{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}.radio-key.sc-ion-radio-md-h   .radio-icon.sc-ion-radio-md::after{border-radius:50%;left:-12px;top:-12px;display:block;position:absolute;width:36px;height:36px;background:var(--ion-color-primary-tint,#4c8dff);content:\"\";opacity:.2}.in-item.sc-ion-radio-md-h{margin:9px 10px 9px 0;display:block;position:static}.in-item[slot=start].sc-ion-radio-md-h{margin:11px 36px 10px 4px}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),e}(),radioButtonIds=0,RadioGroup=function(){function e(){this.inputId="ion-rg-"+radioGroupIds++,this.labelId=this.inputId+"-lbl",this.radios=[],this.allowEmptySelection=!1,this.name=this.inputId,this.disabled=!1}return e.prototype.disabledChanged=function(){for(var e=0,t=this.radios;e<t.length;e++)t[e].disabled=this.disabled},e.prototype.valueChanged=function(e){this.updateRadios(),this.ionChange.emit({value:e})},e.prototype.onRadioDidLoad=function(e){var t=e.target;t.name=this.name,this.radios.push(t),null==this.value&&t.checked?this.value=t.value:this.updateRadios()},e.prototype.onRadioDidUnload=function(e){var t=this.radios.indexOf(e.target);t>-1&&this.radios.splice(t,1)},e.prototype.onRadioSelect=function(e){var t=e.target;t&&(this.value=t.value)},e.prototype.componentDidLoad=function(){var e=this.el.querySelector("ion-list-header");if(e||(e=this.el.querySelector("ion-item-divider")),e){var t=e.querySelector("ion-label");t&&(this.labelId=t.id=this.name+"-lbl")}this.disabledChanged(),this.updateRadios()},e.prototype.updateRadios=function(){for(var e=this.value,t=!1,i=0,o=this.radios;i<o.length;i++){var n=o[i];t||n.value!==e?n.checked=!1:(t=!0,n.checked=!0)}},e.prototype.hostData=function(){return{role:"radiogroup","aria-labelledby":this.labelId}},Object.defineProperty(e,"is",{get:function(){return"ion-radio-group"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{allowEmptySelection:{type:Boolean,attr:"allow-empty-selection"},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},el:{elementRef:!0},name:{type:String,attr:"name"},value:{type:"Any",attr:"value",mutable:!0,watchCallbacks:["valueChanged"]}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionChange",method:"ionChange",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionRadioDidLoad",method:"onRadioDidLoad"},{name:"ionRadioDidUnload",method:"onRadioDidUnload"},{name:"ionSelect",method:"onRadioSelect"}]},enumerable:!0,configurable:!0}),e}(),radioGroupIds=0;
+
+
+
+var Input = /** @class */ (function () {
+    function Input() {
+        this.inputId = "ion-input-" + inputIds++;
+        this.didBlurAfterEdit = false;
+        this.hasFocus = false;
+        this.autocapitalize = 'none';
+        this.autocomplete = 'off';
+        this.autocorrect = 'off';
+        this.autofocus = false;
+        this.clearInput = false;
+        this.debounce = 0;
+        this.disabled = false;
+        this.name = this.inputId;
+        this.readonly = false;
+        this.required = false;
+        this.spellcheck = false;
+        this.type = 'text';
+        this.value = '';
+    }
+    Input.prototype.debounceChanged = function () {
+        this.ionChange = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["g"])(this.ionChange, this.debounce);
+    };
+    Input.prototype.disabledChanged = function () {
+        this.emitStyle();
+    };
+    Input.prototype.valueChanged = function () {
+        var inputEl = this.nativeInput;
+        var value = this.getValue();
+        if (inputEl && inputEl.value !== value) {
+            inputEl.value = value;
+        }
+        this.emitStyle();
+        this.ionChange.emit({ value: value });
+    };
+    Input.prototype.componentWillLoad = function () {
+        if (this.clearOnEdit === undefined && this.type === 'password') {
+            this.clearOnEdit = true;
+        }
+    };
+    Input.prototype.componentDidLoad = function () {
+        this.ionStyle = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["e"])(this.ionStyle);
+        this.debounceChanged();
+        this.emitStyle();
+        this.ionInputDidLoad.emit();
+    };
+    Input.prototype.componentDidUnload = function () {
+        this.nativeInput = undefined;
+        this.ionInputDidUnload.emit();
+    };
+    Input.prototype.focus = function () {
+        if (this.nativeInput) {
+            this.nativeInput.focus();
+        }
+    };
+    Input.prototype.getValue = function () {
+        return this.value || '';
+    };
+    Input.prototype.emitStyle = function () {
+        this.ionStyle.emit({
+            'interactive': true,
+            'input': true,
+            'has-value': this.hasValue(),
+            'has-focus': this.hasFocus,
+            'interactive-disabled': this.disabled,
+        });
+    };
+    Input.prototype.onInput = function (ev) {
+        var input = ev.target;
+        if (input) {
+            this.value = input.value || '';
+        }
+        this.ionInput.emit(ev);
+    };
+    Input.prototype.onBlur = function () {
+        this.hasFocus = false;
+        this.focusChanged();
+        this.emitStyle();
+        this.ionBlur.emit();
+    };
+    Input.prototype.onFocus = function () {
+        this.hasFocus = true;
+        this.focusChanged();
+        this.emitStyle();
+        this.ionFocus.emit();
+    };
+    Input.prototype.focusChanged = function () {
+        if (this.clearOnEdit && !this.hasFocus && this.hasValue()) {
+            this.didBlurAfterEdit = true;
+        }
+    };
+    Input.prototype.onKeydown = function () {
+        if (this.clearOnEdit) {
+            if (this.didBlurAfterEdit && this.hasValue()) {
+                this.clearTextInput();
+            }
+            this.didBlurAfterEdit = false;
+        }
+    };
+    Input.prototype.clearTextInput = function () {
+        this.value = '';
+    };
+    Input.prototype.hasValue = function () {
+        return this.getValue().length > 0;
+    };
+    Input.prototype.hostData = function () {
+        return {
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), { 'in-item': Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["f"])('ion-item', this.el), 'has-value': this.hasValue(), 'has-focus': this.hasFocus })
+        };
+    };
+    Input.prototype.render = function () {
+        var _this = this;
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["f"])(this.el, this.name, this.getValue(), this.disabled);
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input", { ref: function (input) { return _this.nativeInput = input; }, "aria-disabled": this.disabled ? 'true' : null, accept: this.accept, autoCapitalize: this.autocapitalize, autoComplete: this.autocomplete, autoCorrect: this.autocorrect, autoFocus: this.autofocus, class: "native-input", disabled: this.disabled, inputMode: this.inputmode, min: this.min, max: this.max, minLength: this.minlength, maxLength: this.maxlength, multiple: this.multiple, name: this.name, pattern: this.pattern, placeholder: this.placeholder, results: this.results, readOnly: this.readonly, required: this.required, spellCheck: this.spellcheck, step: this.step, size: this.size, type: this.type, value: this.getValue(), onInput: this.onInput.bind(this), onBlur: this.onBlur.bind(this), onFocus: this.onFocus.bind(this), onKeyDown: this.onKeydown.bind(this) }),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null),
+            (this.clearInput && !this.readonly && !this.disabled) && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", { type: "button", class: "input-clear-icon", onTouchStart: this.clearTextInput.bind(this), onMouseDown: this.clearTextInput.bind(this) })
+        ];
+    };
+    Object.defineProperty(Input, "is", {
+        get: function () { return "ion-input"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input, "properties", {
+        get: function () {
+            return {
+                "accept": {
+                    "type": String,
+                    "attr": "accept"
+                },
+                "autocapitalize": {
+                    "type": String,
+                    "attr": "autocapitalize"
+                },
+                "autocomplete": {
+                    "type": String,
+                    "attr": "autocomplete"
+                },
+                "autocorrect": {
+                    "type": String,
+                    "attr": "autocorrect"
+                },
+                "autofocus": {
+                    "type": Boolean,
+                    "attr": "autofocus"
+                },
+                "clearInput": {
+                    "type": Boolean,
+                    "attr": "clear-input"
+                },
+                "clearOnEdit": {
+                    "type": Boolean,
+                    "attr": "clear-on-edit",
+                    "mutable": true
+                },
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "debounce": {
+                    "type": Number,
+                    "attr": "debounce",
+                    "watchCallbacks": ["debounceChanged"]
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "focus": {
+                    "method": true
+                },
+                "hasFocus": {
+                    "state": true
+                },
+                "inputmode": {
+                    "type": String,
+                    "attr": "inputmode"
+                },
+                "max": {
+                    "type": String,
+                    "attr": "max"
+                },
+                "maxlength": {
+                    "type": Number,
+                    "attr": "maxlength"
+                },
+                "min": {
+                    "type": String,
+                    "attr": "min"
+                },
+                "minlength": {
+                    "type": Number,
+                    "attr": "minlength"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "multiple": {
+                    "type": Boolean,
+                    "attr": "multiple"
+                },
+                "name": {
+                    "type": String,
+                    "attr": "name"
+                },
+                "pattern": {
+                    "type": String,
+                    "attr": "pattern"
+                },
+                "placeholder": {
+                    "type": String,
+                    "attr": "placeholder"
+                },
+                "readonly": {
+                    "type": Boolean,
+                    "attr": "readonly"
+                },
+                "required": {
+                    "type": Boolean,
+                    "attr": "required"
+                },
+                "results": {
+                    "type": Number,
+                    "attr": "results"
+                },
+                "size": {
+                    "type": Number,
+                    "attr": "size"
+                },
+                "spellcheck": {
+                    "type": Boolean,
+                    "attr": "spellcheck"
+                },
+                "step": {
+                    "type": String,
+                    "attr": "step"
+                },
+                "type": {
+                    "type": String,
+                    "attr": "type"
+                },
+                "value": {
+                    "type": String,
+                    "attr": "value",
+                    "mutable": true,
+                    "watchCallbacks": ["valueChanged"]
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input, "events", {
+        get: function () {
+            return [{
+                    "name": "ionInput",
+                    "method": "ionInput",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionChange",
+                    "method": "ionChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionStyle",
+                    "method": "ionStyle",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionBlur",
+                    "method": "ionBlur",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionFocus",
+                    "method": "ionFocus",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionInputDidLoad",
+                    "method": "ionInputDidLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionInputDidUnload",
+                    "method": "ionInputDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input, "style", {
+        get: function () { return ":host{--placeholder-color:currentColor;--placeholder-font-style:inherit;--placeholder-font-weight:inherit;--placeholder-opacity:.5;--padding-top:0;--padding-end:0;--padding-bottom:0;--padding-start:0;--border-radius:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;padding:0!important;font-family:var(--ion-font-family,inherit);--padding-top:11px;--padding-end:8px;--padding-bottom:11px;--padding-start:8px;font-size:inherit}:host(.ion-color){color:var(--ion-color-base)}.native-input{border-radius:var(--border-radius);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:inline-block;-webkit-box-flex:1;-ms-flex:1;flex:1;width:100%;border:0;outline:0;background:0 0;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none}.native-input::-webkit-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input:-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input::-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input::placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input:-webkit-autofill{background-color:transparent}.native-input[disabled]{opacity:.4}.input-cover{left:0;top:0;position:absolute;width:100%;height:100%}:host([disabled]) .input-cover{pointer-events:none}.input-clear-icon{margin:0;padding:0;background-position:center;border:0;outline:0;background-color:transparent;background-repeat:no-repeat;visibility:hidden;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url(\"data:image/svg+xml;charset=utf-8,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'><polygon%20fill='var(--ion-text-color-step-400,%20%23666666)'%20points='405,136.798%20375.202,107%20256,226.202%20136.798,107%20107,136.798%20226.202,256%20107,375.202%20136.798,405%20256,285.798%20375.202,405%20405,375.202%20285.798,256'/></svg>\");width:30px;height:30px;background-size:22px}:host(.has-focus.has-value) .input-clear-icon{visibility:visible}:host(.has-focus) .input-cover{display:none}:host(.has-focus){pointer-events:none}:host(.has-focus) a,:host(.has-focus) button,:host(.has-focus) input{pointer-events:auto}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Input;
+}());
+var inputIds = 0;
+
+
 
 /***/ })
 

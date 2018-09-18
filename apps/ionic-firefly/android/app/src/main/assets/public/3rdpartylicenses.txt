@@ -127,7 +127,7 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 
 END OF TERMS AND CONDITIONS
 
-webpack@4.17.2
+webpack@4.19.0
 MIT
 Copyright JS Foundation and other contributors
 

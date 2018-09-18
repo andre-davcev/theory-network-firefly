@@ -1,8 +1,7 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Platform } from '@ionic/angular';
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { Globalization } from '@ionic-native/globalization/ngx';
@@ -50,7 +49,7 @@ export class StateLanguage
 
         if (this.platform.is(PlatformEnum.Cordova))
         {
-            observable = fromPromise(this.globalization.getLocaleName());
+            observable = from(this.globalization.getLocaleName());
         }
         else
         {

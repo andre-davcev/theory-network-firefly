@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { Observable, from } from 'rxjs';
 import { switchMap, filter, take, map } from 'rxjs/operators';
 
 import { Icon } from '../models/icon.model';
@@ -49,7 +48,7 @@ export class ServiceIcon
         icon.id = id;
         const document: AngularFirestoreDocument<Icon> = this.icons.doc(id) as AngularFirestoreDocument<Icon>;
 
-        return fromPromise(document.set(icon)).pipe
+        return from(document.set(icon)).pipe
         (
             switchMap(() => document.valueChanges()),
 

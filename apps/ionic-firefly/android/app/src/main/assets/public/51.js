@@ -1,23 +1,296 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[51],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dko6k9zg.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dko6k9zg.js ***!
-  \********************************************************************************************************************************/
-/*! exports provided: IonInput */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eilluzs6.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eilluzs6.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonCol, IonGrid, IonRow */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonInput", function() { return Input; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCol", function() { return Col; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonGrid", function() { return Grid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRow", function() { return Row; });
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-276e047f.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-276e047f.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var Input=function(){function t(){this.inputId="ion-input-"+inputIds++,this.didBlurAfterEdit=!1,this.hasFocus=!1,this.autocapitalize="none",this.autocomplete="off",this.autocorrect="off",this.autofocus=!1,this.clearInput=!1,this.debounce=0,this.disabled=!1,this.name=this.inputId,this.readonly=!1,this.required=!1,this.spellcheck=!1,this.type="text",this.value=""}return t.prototype.debounceChanged=function(){this.ionChange=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["f"])(this.ionChange,this.debounce)},t.prototype.disabledChanged=function(){this.emitStyle()},t.prototype.valueChanged=function(){var t=this.nativeInput,e=this.value;t&&t.value!==e&&(t.value=e),this.emitStyle(),this.ionChange.emit({value:e})},t.prototype.componentWillLoad=function(){void 0===this.clearOnEdit&&"password"===this.type&&(this.clearOnEdit=!0)},t.prototype.componentDidLoad=function(){this.ionStyle=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.ionStyle),this.debounceChanged(),this.emitStyle(),this.ionInputDidLoad.emit()},t.prototype.componentDidUnload=function(){this.nativeInput=void 0,this.ionInputDidUnload.emit()},t.prototype.focus=function(){this.nativeInput&&this.nativeInput.focus()},t.prototype.emitStyle=function(){this.ionStyle.emit({interactive:!0,input:!0,"has-value":this.hasValue(),"has-focus":this.hasFocus,"interactive-disabled":this.disabled})},t.prototype.onInput=function(t){var e=t.target;e&&(this.value=e.value||""),this.ionInput.emit(t)},t.prototype.onBlur=function(){this.hasFocus=!1,this.focusChanged(),this.emitStyle(),this.ionBlur.emit()},t.prototype.onFocus=function(){this.hasFocus=!0,this.focusChanged(),this.emitStyle(),this.ionFocus.emit()},t.prototype.focusChanged=function(){this.clearOnEdit&&!this.hasFocus&&this.hasValue()&&(this.didBlurAfterEdit=!0)},t.prototype.onKeydown=function(){this.clearOnEdit&&(this.didBlurAfterEdit&&this.hasValue()&&this.clearTextInput(),this.didBlurAfterEdit=!1)},t.prototype.clearTextInput=function(){this.value=""},t.prototype.hasValue=function(){return this.value.length>0},t.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.color),{"in-item":Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["n"])(".item",this.el),"has-value":this.hasValue(),"has-focus":this.hasFocus})}},t.prototype.render=function(){var t=this;return Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["e"])(this.el,this.name,this.value,this.disabled),[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input",{ref:function(e){return t.nativeInput=e},"aria-disabled":this.disabled?"true":null,accept:this.accept,autoCapitalize:this.autocapitalize,autoComplete:this.autocomplete,autoCorrect:this.autocorrect,autoFocus:this.autofocus,class:"native-input",disabled:this.disabled,inputMode:this.inputmode,min:this.min,max:this.max,minLength:this.minlength,maxLength:this.maxlength,multiple:this.multiple,name:this.name,pattern:this.pattern,placeholder:this.placeholder,results:this.results,readOnly:this.readonly,required:this.required,spellCheck:this.spellcheck,step:this.step,size:this.size,type:this.type,value:this.value,onInput:this.onInput.bind(this),onBlur:this.onBlur.bind(this),onFocus:this.onFocus.bind(this),onKeyDown:this.onKeydown.bind(this)}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null),this.clearInput&&!this.readonly&&!this.disabled&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button",{type:"button",class:"input-clear-icon",onTouchStart:this.clearTextInput.bind(this),onMouseDown:this.clearTextInput.bind(this)})]},Object.defineProperty(t,"is",{get:function(){return"ion-input"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{accept:{type:String,attr:"accept"},autocapitalize:{type:String,attr:"autocapitalize"},autocomplete:{type:String,attr:"autocomplete"},autocorrect:{type:String,attr:"autocorrect"},autofocus:{type:Boolean,attr:"autofocus"},clearInput:{type:Boolean,attr:"clear-input"},clearOnEdit:{type:Boolean,attr:"clear-on-edit",mutable:!0},color:{type:String,attr:"color"},debounce:{type:Number,attr:"debounce",watchCallbacks:["debounceChanged"]},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},el:{elementRef:!0},focus:{method:!0},hasFocus:{state:!0},inputmode:{type:String,attr:"inputmode"},max:{type:String,attr:"max"},maxlength:{type:Number,attr:"maxlength"},min:{type:String,attr:"min"},minlength:{type:Number,attr:"minlength"},mode:{type:String,attr:"mode"},multiple:{type:Boolean,attr:"multiple"},name:{type:String,attr:"name"},pattern:{type:String,attr:"pattern"},placeholder:{type:String,attr:"placeholder"},readonly:{type:Boolean,attr:"readonly"},required:{type:Boolean,attr:"required"},results:{type:Number,attr:"results"},size:{type:Number,attr:"size"},spellcheck:{type:Boolean,attr:"spellcheck"},step:{type:String,attr:"step"},type:{type:String,attr:"type"},value:{type:String,attr:"value",mutable:!0,watchCallbacks:["valueChanged"]}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"events",{get:function(){return[{name:"ionInput",method:"ionInput",bubbles:!0,cancelable:!0,composed:!0},{name:"ionChange",method:"ionChange",bubbles:!0,cancelable:!0,composed:!0},{name:"ionStyle",method:"ionStyle",bubbles:!0,cancelable:!0,composed:!0},{name:"ionBlur",method:"ionBlur",bubbles:!0,cancelable:!0,composed:!0},{name:"ionFocus",method:"ionFocus",bubbles:!0,cancelable:!0,composed:!0},{name:"ionInputDidLoad",method:"ionInputDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionInputDidUnload",method:"ionInputDidUnload",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return":host{--placeholder-color:currentColor;--placeholder-font-style:inherit;--placeholder-font-weight:inherit;--placeholder-opacity:.5;--padding-top:0;--padding-end:0;--padding-bottom:0;--padding-start:0;--border-radius:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;padding:0!important;font-family:var(--ion-font-family,inherit);--padding-top:11px;--padding-end:8px;--padding-bottom:11px;--padding-start:8px;font-size:inherit}:host(.ion-color){color:var(--ion-color-base)}.native-input{border-radius:var(--border-radius);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:inline-block;-webkit-box-flex:1;-ms-flex:1;flex:1;width:100%;border:0;outline:0;background:0 0;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none}.native-input::-webkit-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input:-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input::-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input::placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.native-input:-webkit-autofill{background-color:transparent}.native-input[disabled]{opacity:.4}.input-cover{left:0;top:0;position:absolute;width:100%;height:100%}:host([disabled]) .input-cover{pointer-events:none}.input-clear-icon{margin:0;padding:0;background-position:center;border:0;outline:0;background-color:transparent;background-repeat:no-repeat;visibility:hidden;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url(\"data:image/svg+xml;charset=utf-8,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'><polygon%20fill='var(--ion-text-color-step-400,%20%23666666)'%20points='405,136.798%20375.202,107%20256,226.202%20136.798,107%20107,136.798%20226.202,256%20107,375.202%20136.798,405%20256,285.798%20375.202,405%20405,375.202%20285.798,256'/></svg>\");width:30px;height:30px;background-size:22px}:host(.has-focus.has-value) .input-clear-icon{visibility:visible}:host(.has-focus) .input-cover{display:none}:host(.has-focus){pointer-events:none}:host(.has-focus) a,:host(.has-focus) button,:host(.has-focus) input{pointer-events:auto}"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),t}(),inputIds=0;
+
+
+var SUPPORTS_VARS = !!(CSS && CSS.supports && CSS.supports('--a: 0'));
+var BREAKPOINTS = ['', 'xs', 'sm', 'md', 'lg', 'xl'];
+var Col = /** @class */ (function () {
+    function Col() {
+    }
+    Col.prototype.onResize = function () {
+        this.el.forceUpdate();
+    };
+    Col.prototype.getColumns = function (property) {
+        var matched;
+        for (var _i = 0, BREAKPOINTS_1 = BREAKPOINTS; _i < BREAKPOINTS_1.length; _i++) {
+            var breakpoint = BREAKPOINTS_1[_i];
+            var matches = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["a"])(this.win, breakpoint);
+            var columns = this[property + breakpoint.charAt(0).toUpperCase() + breakpoint.slice(1)];
+            if (matches && columns !== undefined) {
+                matched = columns;
+            }
+        }
+        return matched;
+    };
+    Col.prototype.calculateSize = function () {
+        var columns = this.getColumns('size');
+        if (!columns || columns === '') {
+            return;
+        }
+        var colSize = (columns === 'auto')
+            ? 'auto'
+            : SUPPORTS_VARS ? "calc(calc(" + columns + " / var(--ion-grid-columns, 12)) * 100%)"
+                : ((columns / 12) * 100) + '%';
+        return {
+            'flex': "0 0 " + colSize,
+            'width': "" + colSize,
+            'max-width': "" + colSize
+        };
+    };
+    Col.prototype.calculatePosition = function (property, modifier) {
+        var _a;
+        var columns = this.getColumns(property);
+        if (!columns) {
+            return;
+        }
+        var amount = SUPPORTS_VARS
+            ? "calc(calc(" + columns + " / var(--ion-grid-columns, 12)) * 100%)"
+            : (columns > 0 && columns < 12) ? (columns / 12 * 100) + '%' : 'auto';
+        return _a = {},
+            _a[modifier] = amount,
+            _a;
+    };
+    Col.prototype.calculateOffset = function () {
+        return this.calculatePosition('offset', 'margin-left');
+    };
+    Col.prototype.calculatePull = function () {
+        return this.calculatePosition('pull', 'right');
+    };
+    Col.prototype.calculatePush = function () {
+        return this.calculatePosition('push', 'left');
+    };
+    Col.prototype.hostData = function () {
+        return {
+            style: Object.assign({}, this.calculateOffset(), this.calculatePull(), this.calculatePush(), this.calculateSize())
+        };
+    };
+    Col.prototype.render = function () {
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    };
+    Object.defineProperty(Col, "is", {
+        get: function () { return "ion-col"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Col, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Col, "properties", {
+        get: function () {
+            return {
+                "el": {
+                    "elementRef": true
+                },
+                "offset": {
+                    "type": String,
+                    "attr": "offset"
+                },
+                "offsetLg": {
+                    "type": String,
+                    "attr": "offset-lg"
+                },
+                "offsetMd": {
+                    "type": String,
+                    "attr": "offset-md"
+                },
+                "offsetSm": {
+                    "type": String,
+                    "attr": "offset-sm"
+                },
+                "offsetXl": {
+                    "type": String,
+                    "attr": "offset-xl"
+                },
+                "offsetXs": {
+                    "type": String,
+                    "attr": "offset-xs"
+                },
+                "pull": {
+                    "type": String,
+                    "attr": "pull"
+                },
+                "pullLg": {
+                    "type": String,
+                    "attr": "pull-lg"
+                },
+                "pullMd": {
+                    "type": String,
+                    "attr": "pull-md"
+                },
+                "pullSm": {
+                    "type": String,
+                    "attr": "pull-sm"
+                },
+                "pullXl": {
+                    "type": String,
+                    "attr": "pull-xl"
+                },
+                "pullXs": {
+                    "type": String,
+                    "attr": "pull-xs"
+                },
+                "push": {
+                    "type": String,
+                    "attr": "push"
+                },
+                "pushLg": {
+                    "type": String,
+                    "attr": "push-lg"
+                },
+                "pushMd": {
+                    "type": String,
+                    "attr": "push-md"
+                },
+                "pushSm": {
+                    "type": String,
+                    "attr": "push-sm"
+                },
+                "pushXl": {
+                    "type": String,
+                    "attr": "push-xl"
+                },
+                "pushXs": {
+                    "type": String,
+                    "attr": "push-xs"
+                },
+                "size": {
+                    "type": String,
+                    "attr": "size"
+                },
+                "sizeLg": {
+                    "type": String,
+                    "attr": "size-lg"
+                },
+                "sizeMd": {
+                    "type": String,
+                    "attr": "size-md"
+                },
+                "sizeSm": {
+                    "type": String,
+                    "attr": "size-sm"
+                },
+                "sizeXl": {
+                    "type": String,
+                    "attr": "size-xl"
+                },
+                "sizeXs": {
+                    "type": String,
+                    "attr": "size-xs"
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Col, "listeners", {
+        get: function () {
+            return [{
+                    "name": "window:resize",
+                    "method": "onResize",
+                    "passive": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Col, "style", {
+        get: function () { return ":host{padding:var(--ion-grid-column-padding-xs,var(--ion-grid-column-padding,5px));margin:0;-webkit-box-sizing:border-box;box-sizing:border-box;position:relative;-ms-flex-preferred-size:0;flex-basis:0;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;width:100%;max-width:100%;min-height:1px}\@media (min-width:576px){:host{padding:var(--ion-grid-column-padding-sm,var(--ion-grid-column-padding,5px))}}\@media (min-width:768px){:host{padding:var(--ion-grid-column-padding-md,var(--ion-grid-column-padding,5px))}}\@media (min-width:992px){:host{padding:var(--ion-grid-column-padding-lg,var(--ion-grid-column-padding,5px))}}\@media (min-width:1200px){:host{padding:var(--ion-grid-column-padding-xl,var(--ion-grid-column-padding,5px))}}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Col;
+}());
+var Grid = /** @class */ (function () {
+    function Grid() {
+        this.fixed = false;
+    }
+    Grid.prototype.hostData = function () {
+        return {
+            class: {
+                'grid-fixed': this.fixed
+            }
+        };
+    };
+    Grid.prototype.render = function () {
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    };
+    Object.defineProperty(Grid, "is", {
+        get: function () { return "ion-grid"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Grid, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Grid, "properties", {
+        get: function () {
+            return {
+                "fixed": {
+                    "type": Boolean,
+                    "attr": "fixed"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Grid, "style", {
+        get: function () { return ":host{padding:var(--ion-grid-padding-xs,var(--ion-grid-padding,5px));margin-left:auto;margin-right:auto;display:block}:host(.grid-fixed){width:var(--ion-grid-width-xs,var(--ion-grid-width,100%));max-width:100%}\@media (min-width:576px){:host{padding:var(--ion-grid-padding-sm,var(--ion-grid-padding,5px))}:host(.grid-fixed){width:var(--ion-grid-width-sm,var(--ion-grid-width,540px))}}\@media (min-width:768px){:host{padding:var(--ion-grid-padding-md,var(--ion-grid-padding,5px))}:host(.grid-fixed){width:var(--ion-grid-width-md,var(--ion-grid-width,720px))}}\@media (min-width:992px){:host{padding:var(--ion-grid-padding-lg,var(--ion-grid-padding,5px))}:host(.grid-fixed){width:var(--ion-grid-width-lg,var(--ion-grid-width,960px))}}\@media (min-width:1200px){:host{padding:var(--ion-grid-padding-xl,var(--ion-grid-padding,5px))}:host(.grid-fixed){width:var(--ion-grid-width-xl,var(--ion-grid-width,1140px))}}:host([no-padding]){padding:0}:host([no-padding]) ::slotted(ion-col){padding:0}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Grid;
+}());
+var Row = /** @class */ (function () {
+    function Row() {
+    }
+    Row.prototype.render = function () {
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    };
+    Object.defineProperty(Row, "is", {
+        get: function () { return "ion-row"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Row, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Row, "style", {
+        get: function () { return ":host{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Row;
+}());
+
+
 
 /***/ })
 

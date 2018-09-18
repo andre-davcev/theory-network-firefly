@@ -1,23 +1,660 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[94],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/lk8d4yol.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/lk8d4yol.js ***!
-  \********************************************************************************************************************************/
-/*! exports provided: IonRefresher, IonRefresherContent */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/om5i0dsm.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/om5i0dsm.sc.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonSelect, IonSelectOption, IonSelectPopover */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRefresher", function() { return Refresher; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRefresherContent", function() { return RefresherContent; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSelect", function() { return Select; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSelectOption", function() { return SelectOption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSelectPopover", function() { return SelectPopover; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,r,n){return new(r||(r=Promise))(function(s,i){function o(e){try{a(n.next(e))}catch(e){i(e)}}function l(e){try{a(n.throw(e))}catch(e){i(e)}}function a(e){e.done?s(e.value):new r(function(t){t(e.value)}).then(o,l)}a((n=n.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var r,n,s,i,o={label:0,sent:function(){if(1&s[0])throw s[1];return s[1]},trys:[],ops:[]};return i={next:l(0),throw:l(1),return:l(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function l(i){return function(l){return function(i){if(r)throw new TypeError("Generator is already executing.");for(;o;)try{if(r=1,n&&(s=2&i[0]?n.return:i[0]?n.throw||((s=n.return)&&s.call(n),0):n.next)&&!(s=s.call(n,i[1])).done)return s;switch(n=0,s&&(i=[2&i[0],s.value]),i[0]){case 0:case 1:s=i;break;case 4:return o.label++,{value:i[1],done:!1};case 5:o.label++,n=i[1],i=[0];continue;case 7:i=o.ops.pop(),o.trys.pop();continue;default:if(!(s=(s=o.trys).length>0&&s[s.length-1])&&(6===i[0]||2===i[0])){o=0;continue}if(3===i[0]&&(!s||i[1]>s[0]&&i[1]<s[3])){o.label=i[1];break}if(6===i[0]&&o.label<s[1]){o.label=s[1],s=i;break}if(s&&o.label<s[2]){o.label=s[2],o.ops.push(i);break}s[2]&&o.ops.pop(),o.trys.pop();continue}i=t.call(e,o)}catch(e){i=[6,e],n=0}finally{r=s=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,l])}}};var Refresher=function(){function e(){this.appliedStyles=!1,this.didStart=!1,this.progress=0,this.state=1,this.pullMin=60,this.pullMax=this.pullMin+60,this.closeDuration="280ms",this.snapbackDuration="280ms",this.disabled=!1}return e.prototype.disabledChanged=function(){this.gesture&&this.gesture.setDisabled(this.disabled)},e.prototype.componentDidLoad=function(){return __awaiter(this,void 0,void 0,function(){var e,t,r,n=this;return __generator(this,function(s){switch(s.label){case 0:return"fixed"!==this.el.getAttribute("slot")?(console.error('Make sure you use: <ion-refresher slot="fixed">'),[2]):(e=this.el.closest("ion-content"))?[4,e.componentOnReady()]:[3,3];case 1:return s.sent(),t=this,[4,e.getScrollElement()];case 2:return t.scrollEl=s.sent(),[3,4];case 3:console.error("ion-refresher did not attach, make sure the parent is an ion-content."),s.label=4;case 4:return r=this,[4,__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/gesture.js"))];case 5:return r.gesture=s.sent().createGesture({el:this.el.closest("ion-content"),queue:this.queue,gestureName:"refresher",gesturePriority:10,direction:"y",threshold:20,passive:!1,canStart:function(){return n.canStart()},onStart:function(){return n.onStart()},onMove:function(e){return n.onMove(e)},onEnd:function(){return n.onEnd()}}),this.disabledChanged(),[2]}})})},e.prototype.componentDidUnload=function(){this.scrollEl=void 0},e.prototype.complete=function(){this.close(32,"120ms")},e.prototype.cancel=function(){this.close(16,"")},e.prototype.getProgress=function(){return Promise.resolve(this.progress)},e.prototype.canStart=function(){return!(!this.scrollEl||1!==this.state||this.scrollEl.scrollTop>0)},e.prototype.onStart=function(){console.log("start"),this.progress=0,this.state=1},e.prototype.onMove=function(e){if(this.scrollEl){var t=e.event;if(!(t.touches&&t.touches.length>1)&&0==(56&this.state)){var r=e.deltaY;if(r<=0)return this.progress=0,this.state=1,this.appliedStyles?void this.setCss(0,"",!1,""):void 0;if(1===this.state){if(this.scrollEl.scrollTop>0)return void(this.progress=0);this.state=2}if(t.preventDefault(),this.setCss(r,"0ms",!0,""),0!==r){var n=this.pullMin;this.progress=r/n,this.didStart||(this.didStart=!0,this.ionStart.emit()),this.ionPull.emit(),r<n?this.state=2:r>this.pullMax?this.beginRefresh():this.state=4}else this.progress=0}}},e.prototype.onEnd=function(){4===this.state?this.beginRefresh():2===this.state&&this.cancel()},e.prototype.beginRefresh=function(){this.state=8,this.setCss(this.pullMin,this.snapbackDuration,!0,""),this.ionRefresh.emit()},e.prototype.close=function(e,t){var r=this;setTimeout(function(){r.state=1,r.progress=0,r.didStart=!1,r.setCss(0,"0ms",!1,"")},600),this.state=e,this.setCss(0,"",!0,t)},e.prototype.setCss=function(e,t,r,n){var s=this;this.appliedStyles=e>0,this.queue.write(function(){if(s.scrollEl){var i=s.scrollEl.style;i.transform=e>0?"translateY("+e+"px) translateZ(0px)":"translateZ(0px)",i.transitionDuration=t,i.transitionDelay=n,i.overflow=r?"hidden":""}})},e.prototype.hostData=function(){return{slot:"fixed",class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["m"])(this.mode,"refresher"),{"refresher-active":1!==this.state,"refresher-pulling":2===this.state,"refresher-ready":4===this.state,"refresher-refreshing":8===this.state,"refresher-cancelling":16===this.state,"refresher-completing":32===this.state})}},Object.defineProperty(e,"is",{get:function(){return"ion-refresher"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{cancel:{method:!0},closeDuration:{type:String,attr:"close-duration"},complete:{method:!0},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},el:{elementRef:!0},getProgress:{method:!0},pullMax:{type:Number,attr:"pull-max"},pullMin:{type:Number,attr:"pull-min"},queue:{context:"queue"},snapbackDuration:{type:String,attr:"snapback-duration"},state:{state:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionRefresh",method:"ionRefresh",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPull",method:"ionPull",bubbles:!0,cancelable:!0,composed:!0},{name:"ionStart",method:"ionStart",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-refresher{left:0;top:0;display:none;position:absolute;width:100%;height:60px;z-index:0}ion-refresher.refresher-active{display:block}ion-refresher-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%}.refresher-pulling,.refresher-refreshing{display:none;width:100%}.refresher-pulling-icon,.refresher-refreshing-icon{-webkit-transform-origin:center;transform-origin:center;-webkit-transition:.2s;transition:.2s;font-size:30px;text-align:center}.refresher-pulling-text,.refresher-refreshing-text{font-size:16px;text-align:center}.refresher-pulling ion-refresher-content .refresher-pulling,.refresher-ready ion-refresher-content .refresher-pulling{display:block}.refresher-ready ion-refresher-content .refresher-pulling-icon{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.refresher-cancelling ion-refresher-content .refresher-pulling,.refresher-refreshing ion-refresher-content .refresher-refreshing{display:block}.refresher-cancelling ion-refresher-content .refresher-pulling-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-completing ion-refresher-content .refresher-refreshing{display:block}.refresher-completing ion-refresher-content .refresher-refreshing-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-ios .refresher-pulling-icon,.refresher-ios .refresher-pulling-text,.refresher-ios .refresher-refreshing-icon,.refresher-ios .refresher-refreshing-text{color:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-crescent circle,.refresher-ios .refresher-refreshing .spinner-lines-ios line,.refresher-ios .refresher-refreshing .spinner-lines-small-ios line{stroke:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-bubbles circle,.refresher-ios .refresher-refreshing .spinner-circles circle,.refresher-ios .refresher-refreshing .spinner-dots circle{fill:var(--ion-text-color,#000)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),RefresherContent=function(){function e(){}return e.prototype.componentDidLoad=function(){void 0===this.pullingIcon&&(this.pullingIcon=this.config.get("refreshingIcon","arrow-down")),void 0===this.refreshingSpinner&&(this.refreshingSpinner=this.config.get("refreshingSpinner",this.config.get("spinner","lines")))},e.prototype.render=function(){return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"refresher-pulling"},this.pullingIcon&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"refresher-pulling-icon"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon",{icon:this.pullingIcon,lazy:!1})),this.pullingText&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"refresher-pulling-text",innerHTML:this.pullingText})),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"refresher-refreshing"},this.refreshingSpinner&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"refresher-refreshing-icon"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-spinner",{name:this.refreshingSpinner})),this.refreshingText&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"refresher-refreshing-text",innerHTML:this.refreshingText}))]},Object.defineProperty(e,"is",{get:function(){return"ion-refresher-content"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{config:{context:"config"},pullingIcon:{type:String,attr:"pulling-icon",mutable:!0},pullingText:{type:String,attr:"pulling-text"},refreshingSpinner:{type:String,attr:"refreshing-spinner",mutable:!0},refreshingText:{type:String,attr:"refreshing-text"}}},enumerable:!0,configurable:!0}),e}();
+
+
+
+var Select = /** @class */ (function () {
+    function Select() {
+        this.childOpts = [];
+        this.inputId = "ion-sel-" + selectIds++;
+        this.isExpanded = false;
+        this.keyFocus = false;
+        this.disabled = false;
+        this.cancelText = 'Cancel';
+        this.okText = 'OK';
+        this.name = this.inputId;
+        this.multiple = false;
+        this.interface = 'alert';
+        this.interfaceOptions = {};
+    }
+    Select.prototype.disabledChanged = function () {
+        this.emitStyle();
+    };
+    Select.prototype.valueChanged = function () {
+        var _this = this;
+        if (this.value === undefined) {
+            this.childOpts.filter(function (o) { return o.selected; }).forEach(function (selectOption) {
+                selectOption.selected = false;
+            });
+            this.text = '';
+        }
+        else {
+            var hasChecked_1 = false;
+            var texts_1 = [];
+            this.childOpts.forEach(function (selectOption) {
+                if ((Array.isArray(_this.value) && _this.value.includes(selectOption.value)) || (selectOption.value === _this.value)) {
+                    if (!selectOption.selected && (_this.multiple || !hasChecked_1)) {
+                        selectOption.selected = true;
+                    }
+                    else if (!_this.multiple && hasChecked_1 && selectOption.selected) {
+                        selectOption.selected = false;
+                    }
+                    hasChecked_1 = true;
+                }
+                else if (selectOption.selected) {
+                    selectOption.selected = false;
+                }
+                if (selectOption.selected) {
+                    texts_1.push(selectOption.textContent || '');
+                }
+            });
+            this.text = texts_1.join(', ');
+        }
+        this.ionChange.emit({
+            value: this.value,
+            text: this.text
+        });
+        this.emitStyle();
+    };
+    Select.prototype.optLoad = function (ev) {
+        var selectOption = ev.target;
+        this.childOpts = Array.from(this.el.querySelectorAll('ion-select-option'));
+        if (this.value != null && (Array.isArray(this.value) && this.value.includes(selectOption.value)) || (selectOption.value === this.value)) {
+            selectOption.selected = true;
+        }
+        else if (Array.isArray(this.value) && this.multiple && selectOption.selected) {
+            this.value.push(selectOption.value);
+        }
+        else if (this.value === undefined && selectOption.selected) {
+            this.value = selectOption.value;
+        }
+        else if (selectOption.selected) {
+            selectOption.selected = false;
+        }
+    };
+    Select.prototype.optUnload = function (ev) {
+        var index = this.childOpts.indexOf(ev.target);
+        if (index > -1) {
+            this.childOpts.splice(index, 1);
+        }
+    };
+    Select.prototype.onSelect = function (ev) {
+        var _this = this;
+        this.childOpts.forEach(function (selectOption) {
+            if (selectOption === ev.target) {
+                _this.value = selectOption.value;
+            }
+            else {
+                selectOption.selected = false;
+            }
+        });
+    };
+    Select.prototype.componentWillLoad = function () {
+        if (!this.value) {
+            this.value = this.multiple ? [] : undefined;
+        }
+    };
+    Select.prototype.componentDidLoad = function () {
+        var _this = this;
+        this.ionStyle = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.ionStyle);
+        var label = this.getLabel();
+        if (label) {
+            this.labelId = label.id = this.name + '-lbl';
+        }
+        if (this.multiple) {
+            var checked = this.childOpts.filter(function (o) { return o.selected; });
+            this.value.length = 0;
+            checked.forEach(function (o) {
+                _this.value.push(o.value);
+            });
+            this.text = checked.map(function (o) { return o.textContent; }).join(', ');
+        }
+        else {
+            var checked = this.childOpts.find(function (o) { return o.selected; });
+            if (checked) {
+                this.value = checked.value;
+                this.text = checked.textContent || '';
+            }
+        }
+        this.emitStyle();
+    };
+    Select.prototype.open = function (ev) {
+        var selectInterface = this.interface;
+        if ((selectInterface === 'action-sheet' || selectInterface === 'popover') && this.multiple) {
+            console.warn("Select interface cannot be \"" + selectInterface + "\" with a multi-value select. Using the \"alert\" interface instead.");
+            selectInterface = 'alert';
+        }
+        if (selectInterface === 'popover' && !ev) {
+            console.warn('Select interface cannot be a "popover" without passing an event. Using the "alert" interface instead.');
+            selectInterface = 'alert';
+        }
+        if (selectInterface === 'popover') {
+            return this.openPopover(ev);
+        }
+        if (selectInterface === 'action-sheet') {
+            return this.openActionSheet();
+        }
+        return this.openAlert();
+    };
+    Select.prototype.getLabel = function () {
+        var item = this.el.closest('ion-item');
+        if (item) {
+            return item.querySelector('ion-label');
+        }
+        return null;
+    };
+    Select.prototype.openPopover = function (ev) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var interfaceOptions, popoverOpts, popover, _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        interfaceOptions = this.interfaceOptions;
+                        popoverOpts = Object.assign({}, interfaceOptions, { component: 'ion-select-popover', cssClass: ['select-popover', interfaceOptions.cssClass], event: ev, componentProps: {
+                                header: interfaceOptions.header,
+                                subHeader: interfaceOptions.subHeader,
+                                message: interfaceOptions.message,
+                                value: this.value,
+                                options: this.childOpts.map(function (o) {
+                                    return {
+                                        text: o.textContent,
+                                        value: o.value,
+                                        checked: o.selected,
+                                        disabled: o.disabled,
+                                        handler: function () {
+                                            _this.value = o.value;
+                                            _this.close();
+                                        }
+                                    };
+                                })
+                            } });
+                        _a = this;
+                        return [4 /*yield*/, this.popoverCtrl.create(popoverOpts)];
+                    case 1:
+                        popover = _a.overlay = _b.sent();
+                        return [4 /*yield*/, popover.present()];
+                    case 2:
+                        _b.sent();
+                        this.isExpanded = true;
+                        return [2 /*return*/, popover];
+                }
+            });
+        });
+    };
+    Select.prototype.openActionSheet = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var actionSheetButtons, interfaceOptions, actionSheetOpts, actionSheet, _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        actionSheetButtons = this.childOpts.map(function (option) {
+                            return {
+                                role: (option.selected ? 'selected' : ''),
+                                text: option.textContent,
+                                handler: function () {
+                                    _this.value = option.value;
+                                }
+                            };
+                        });
+                        actionSheetButtons.push({
+                            text: this.cancelText,
+                            role: 'cancel',
+                            handler: function () {
+                                _this.ionCancel.emit();
+                            }
+                        });
+                        interfaceOptions = this.interfaceOptions;
+                        actionSheetOpts = Object.assign({}, interfaceOptions, { buttons: actionSheetButtons, cssClass: ['select-action-sheet', interfaceOptions.cssClass] });
+                        _a = this;
+                        return [4 /*yield*/, this.actionSheetCtrl.create(actionSheetOpts)];
+                    case 1:
+                        actionSheet = _a.overlay = _b.sent();
+                        return [4 /*yield*/, actionSheet.present()];
+                    case 2:
+                        _b.sent();
+                        this.isExpanded = true;
+                        return [2 /*return*/, actionSheet];
+                }
+            });
+        });
+    };
+    Select.prototype.openAlert = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var label, labelText, interfaceOptions, inputType, alertOpts, alert, _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        label = this.getLabel();
+                        labelText = (label) ? label.textContent : null;
+                        interfaceOptions = this.interfaceOptions;
+                        inputType = (this.multiple ? 'checkbox' : 'radio');
+                        alertOpts = Object.assign({}, interfaceOptions, { header: interfaceOptions.header ? interfaceOptions.header : labelText, inputs: this.childOpts.map(function (o) {
+                                return {
+                                    type: inputType,
+                                    label: o.textContent,
+                                    value: o.value,
+                                    checked: o.selected,
+                                    disabled: o.disabled
+                                };
+                            }), buttons: [
+                                {
+                                    text: this.cancelText,
+                                    role: 'cancel',
+                                    handler: function () {
+                                        _this.ionCancel.emit();
+                                    }
+                                },
+                                {
+                                    text: this.okText,
+                                    handler: function (selectedValues) {
+                                        _this.value = selectedValues;
+                                    }
+                                }
+                            ], cssClass: ['select-alert', interfaceOptions.cssClass,
+                                (this.multiple ? 'multiple-select-alert' : 'single-select-alert')] });
+                        _a = this;
+                        return [4 /*yield*/, this.alertCtrl.create(alertOpts)];
+                    case 1:
+                        alert = _a.overlay = _b.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _b.sent();
+                        this.isExpanded = true;
+                        return [2 /*return*/, alert];
+                }
+            });
+        });
+    };
+    Select.prototype.close = function () {
+        if (!this.overlay) {
+            return Promise.resolve(false);
+        }
+        var overlay = this.overlay;
+        this.overlay = undefined;
+        this.isExpanded = false;
+        return overlay.dismiss();
+    };
+    Select.prototype.onKeyUp = function () {
+        this.keyFocus = true;
+    };
+    Select.prototype.onFocus = function () {
+        this.ionFocus.emit();
+    };
+    Select.prototype.onBlur = function () {
+        this.keyFocus = false;
+        this.ionBlur.emit();
+    };
+    Select.prototype.hasValue = function () {
+        if (Array.isArray(this.value)) {
+            return this.value.length > 0;
+        }
+        return (this.value != null && this.value !== undefined && this.value !== '');
+    };
+    Select.prototype.emitStyle = function () {
+        this.ionStyle.emit({
+            'interactive': true,
+            'select': true,
+            'has-value': this.hasValue(),
+            'interactive-disabled': this.disabled,
+            'select-disabled': this.disabled
+        });
+    };
+    Select.prototype.hostData = function () {
+        return {
+            class: {
+                'in-item': Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["f"])('ion-item', this.el),
+                'select-disabled': this.disabled,
+                'select-key': this.keyFocus
+            }
+        };
+    };
+    Select.prototype.render = function () {
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.el, this.name, parseValue(this.value), this.disabled);
+        var addPlaceholderClass = false;
+        var selectText = this.selectedText || this.text;
+        if (selectText === undefined && this.placeholder !== undefined) {
+            selectText = this.placeholder;
+            addPlaceholderClass = true;
+        }
+        var selectTextClasses = {
+            'select-text': true,
+            'select-placeholder': addPlaceholderClass
+        };
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { role: "textbox", "aria-multiline": "false", class: selectTextClasses }, selectText),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "select-icon", role: "presentation" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "select-icon-inner" })),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", role: "combobox", "aria-haspopup": "dialog", "aria-labelledby": this.labelId, "aria-expanded": this.isExpanded ? 'true' : null, "aria-disabled": this.disabled ? 'true' : null, onClick: this.open.bind(this), onKeyUp: this.onKeyUp.bind(this), onFocus: this.onFocus.bind(this), onBlur: this.onBlur.bind(this), class: "select-cover" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null))
+        ];
+    };
+    Object.defineProperty(Select, "is", {
+        get: function () { return "ion-select"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Select, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Select, "properties", {
+        get: function () {
+            return {
+                "actionSheetCtrl": {
+                    "connect": "ion-action-sheet-controller"
+                },
+                "alertCtrl": {
+                    "connect": "ion-alert-controller"
+                },
+                "cancelText": {
+                    "type": String,
+                    "attr": "cancel-text"
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "interface": {
+                    "type": String,
+                    "attr": "interface"
+                },
+                "interfaceOptions": {
+                    "type": "Any",
+                    "attr": "interface-options"
+                },
+                "isExpanded": {
+                    "state": true
+                },
+                "keyFocus": {
+                    "state": true
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "multiple": {
+                    "type": Boolean,
+                    "attr": "multiple"
+                },
+                "name": {
+                    "type": String,
+                    "attr": "name"
+                },
+                "okText": {
+                    "type": String,
+                    "attr": "ok-text"
+                },
+                "open": {
+                    "method": true
+                },
+                "placeholder": {
+                    "type": String,
+                    "attr": "placeholder"
+                },
+                "popoverCtrl": {
+                    "connect": "ion-popover-controller"
+                },
+                "selectedText": {
+                    "type": String,
+                    "attr": "selected-text"
+                },
+                "text": {
+                    "state": true
+                },
+                "value": {
+                    "type": "Any",
+                    "attr": "value",
+                    "mutable": true,
+                    "watchCallbacks": ["valueChanged"]
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Select, "events", {
+        get: function () {
+            return [{
+                    "name": "ionChange",
+                    "method": "ionChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionCancel",
+                    "method": "ionCancel",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionFocus",
+                    "method": "ionFocus",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionBlur",
+                    "method": "ionBlur",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionStyle",
+                    "method": "ionStyle",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Select, "listeners", {
+        get: function () {
+            return [{
+                    "name": "ionSelectOptionDidLoad",
+                    "method": "optLoad"
+                }, {
+                    "name": "ionSelectOptionDidUnload",
+                    "method": "optUnload"
+                }, {
+                    "name": "ionSelect",
+                    "method": "onSelect"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Select, "style", {
+        get: function () { return ".sc-ion-select-md-h{padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:-webkit-box;display:-ms-flexbox;display:flex;color:var(--color);font-family:var(--ion-font-family,inherit);overflow:hidden;--color:var(--ion-text-color, #000);--icon-color:var(--ion-text-color-step-600, #999999);--padding-top:11px;--padding-end:8px;--padding-bottom:11px;--padding-start:16px;--placeholder-color:var(--ion-text-color-step-600, #999999)}.in-item.sc-ion-select-md-h{max-width:45%}.select-disabled.sc-ion-select-md-h{opacity:.4;pointer-events:none}.select-key.sc-ion-select-md-h   button.sc-ion-select-md{border:2px solid #5e9ed6}.select-placeholder.sc-ion-select-md{color:var(--placeholder-color)}.select-cover.sc-ion-select-md{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.select-icon.sc-ion-select-md{position:relative}.select-text.sc-ion-select-md{-webkit-box-flex:1;-ms-flex:1;flex:1;min-width:16px;font-size:inherit;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.select-icon-inner.sc-ion-select-md{left:5px;top:50%;margin-top:-3px;position:absolute;width:0;height:0;border-top:5px solid;border-right:5px solid transparent;border-left:5px solid transparent;color:var(--icon-color);pointer-events:none}.sc-ion-select-md-s > ion-select-option{display:none}button.sc-ion-select-md:focus{outline:0}.select-icon.sc-ion-select-md{width:12px;height:19px}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Select, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Select;
+}());
+function parseValue(value) {
+    if (value == null) {
+        return undefined;
+    }
+    if (Array.isArray(value)) {
+        return value.join(',');
+    }
+    return value.toString();
+}
+var selectIds = 0;
+var SelectOption = /** @class */ (function () {
+    function SelectOption() {
+        this.inputId = "ion-selopt-" + selectOptionIds++;
+        this.disabled = false;
+        this.selected = false;
+    }
+    SelectOption.prototype.componentWillLoad = function () {
+        if (this.value == null) {
+            this.value = this.el.textContent || '';
+        }
+    };
+    SelectOption.prototype.componentDidLoad = function () {
+        this.ionSelectOptionDidLoad.emit();
+    };
+    SelectOption.prototype.componentDidUnload = function () {
+        this.ionSelectOptionDidUnload.emit();
+    };
+    SelectOption.prototype.hostData = function () {
+        return {
+            'role': 'option',
+            'id': this.inputId
+        };
+    };
+    Object.defineProperty(SelectOption, "is", {
+        get: function () { return "ion-select-option"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectOption, "properties", {
+        get: function () {
+            return {
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "selected": {
+                    "type": Boolean,
+                    "attr": "selected"
+                },
+                "value": {
+                    "type": "Any",
+                    "attr": "value",
+                    "mutable": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectOption, "events", {
+        get: function () {
+            return [{
+                    "name": "ionSelectOptionDidLoad",
+                    "method": "ionSelectOptionDidLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionSelectOptionDidUnload",
+                    "method": "ionSelectOptionDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return SelectOption;
+}());
+var selectOptionIds = 0;
+var SelectPopover = /** @class */ (function () {
+    function SelectPopover() {
+        this.options = [];
+    }
+    SelectPopover.prototype.onSelect = function (ev) {
+        var option = this.options.find(function (o) { return o.value === ev.target.value; });
+        if (option && option.handler) {
+            option.handler();
+        }
+    };
+    SelectPopover.prototype.hostData = function () {
+        return {
+            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.mode, 'select-popover')
+        };
+    };
+    SelectPopover.prototype.render = function () {
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-list", null, this.header !== undefined && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-list-header", null, this.header), (this.subHeader !== undefined || this.message !== undefined) &&
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-item", null, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-label", { "text-wrap": true }, this.subHeader !== undefined && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("h3", null, this.subHeader), this.message !== undefined && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("p", null, this.message))), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-radio-group", null, this.options.map(function (option) { return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-item", null, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-label", null, option.text), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-radio", { checked: option.checked, value: option.value, disabled: option.disabled })); }))));
+    };
+    Object.defineProperty(SelectPopover, "is", {
+        get: function () { return "ion-select-popover"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectPopover, "properties", {
+        get: function () {
+            return {
+                "header": {
+                    "type": String,
+                    "attr": "header"
+                },
+                "message": {
+                    "type": String,
+                    "attr": "message"
+                },
+                "options": {
+                    "type": "Any",
+                    "attr": "options"
+                },
+                "subHeader": {
+                    "type": String,
+                    "attr": "sub-header"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectPopover, "listeners", {
+        get: function () {
+            return [{
+                    "name": "ionSelect",
+                    "method": "onSelect"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectPopover, "style", {
+        get: function () { return ":host ::slotted(ion-list){margin:-1px 0}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return SelectPopover;
+}());
+
+
 
 /***/ })
 

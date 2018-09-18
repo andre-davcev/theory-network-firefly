@@ -1,24 +1,414 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[117],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pfyzszvb.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pfyzszvb.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonToast, IonToastController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ueuxuisb.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ueuxuisb.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonModal, IonModalController */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToast", function() { return Toast; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToastController", function() { return ToastController; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-ca273e40.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-ca273e40.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonModal", function() { return Modal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonModalController", function() { return ModalController; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
+/* harmony import */ var _chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-5f438245.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-5f438245.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,o,n){return new(o||(o=Promise))(function(i,a){function r(e){try{l(n.next(e))}catch(e){a(e)}}function s(e){try{l(n.throw(e))}catch(e){a(e)}}function l(e){e.done?i(e.value):new o(function(t){t(e.value)}).then(r,s)}l((n=n.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var o,n,i,a,r={label:0,sent:function(){if(1&i[0])throw i[1];return i[1]},trys:[],ops:[]};return a={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(a[Symbol.iterator]=function(){return this}),a;function s(a){return function(s){return function(a){if(o)throw new TypeError("Generator is already executing.");for(;r;)try{if(o=1,n&&(i=2&a[0]?n.return:a[0]?n.throw||((i=n.return)&&i.call(n),0):n.next)&&!(i=i.call(n,a[1])).done)return i;switch(n=0,i&&(a=[2&a[0],i.value]),a[0]){case 0:case 1:i=a;break;case 4:return r.label++,{value:a[1],done:!1};case 5:r.label++,n=a[1],a=[0];continue;case 7:a=r.ops.pop(),r.trys.pop();continue;default:if(!(i=(i=r.trys).length>0&&i[i.length-1])&&(6===a[0]||2===a[0])){r=0;continue}if(3===a[0]&&(!i||a[1]>i[0]&&a[1]<i[3])){r.label=a[1];break}if(6===a[0]&&r.label<i[1]){r.label=i[1],i=a;break}if(i&&r.label<i[2]){r.label=i[2],r.ops.push(a);break}i[2]&&r.ops.pop(),r.trys.pop();continue}a=t.call(e,r)}catch(e){a=[6,e],n=0}finally{o=i=0}if(5&a[0])throw a[1];return{value:a[0]?a[1]:void 0,done:!0}}([a,s])}}};function iosEnterAnimation(e,t,o){var n=new e,i=new e,a=t.querySelector(".toast-wrapper");switch(i.addElement(a),o){case"top":i.fromTo("translateY","-100%","calc(10px + var(--ion-safe-area-top, 0px))");break;case"middle":var r=Math.floor(t.clientHeight/2-a.clientHeight/2);a.style.top=r+"px",i.fromTo("opacity",.01,1);break;default:i.fromTo("translateY","100%","calc(-10px - var(--ion-safe-area-bottom, 0px))")}return Promise.resolve(n.addElement(t).easing("cubic-bezier(.155,1.105,.295,1.12)").duration(400).add(i))}function iosLeaveAnimation(e,t,o){var n=new e,i=new e,a=t.querySelector(".toast-wrapper");switch(i.addElement(a),o){case"top":i.fromTo("translateY","calc(10px + var(--ion-safe-area-top, 0px))","-100%");break;case"middle":i.fromTo("opacity",.99,0);break;default:i.fromTo("translateY","calc(-10px - var(--ion-safe-area-bottom, 0px))","100%")}return Promise.resolve(n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(300).add(i))}function mdEnterAnimation(e,t,o){var n=new e,i=new e,a=t.querySelector(".toast-wrapper");switch(i.addElement(a),o){case"top":i.fromTo("translateY","-100%","0%");break;case"middle":var r=Math.floor(t.clientHeight/2-a.clientHeight/2);a.style.top=r+"px",i.fromTo("opacity",.01,1);break;default:i.fromTo("translateY","100%","0%")}return Promise.resolve(n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(400).add(i))}function mdLeaveAnimation(e,t,o){var n=new e,i=new e,a=t.querySelector(".toast-wrapper");switch(i.addElement(a),o){case"top":i.fromTo("translateY","0px","-100%");break;case"middle":i.fromTo("opacity",.99,0);break;default:i.fromTo("translateY","0px","100%")}return Promise.resolve(n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(300).add(i))}var Toast=function(){function e(){this.presented=!1,this.duration=0,this.keyboardClose=!1,this.position="bottom",this.showCloseButton=!1,this.translucent=!1,this.animated=!0}return e.prototype.componentDidLoad=function(){this.ionToastDidLoad.emit()},e.prototype.componentDidUnload=function(){this.ionToastDidUnload.emit()},e.prototype.onDismiss=function(e){return e.stopPropagation(),e.preventDefault(),this.dismiss()},e.prototype.present=function(){return __awaiter(this,void 0,void 0,function(){var e=this;return __generator(this,function(t){switch(t.label){case 0:return[4,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["e"])(this,"toastEnter",iosEnterAnimation,mdEnterAnimation,this.position)];case 1:return t.sent(),this.duration>0&&(this.durationTimeout=setTimeout(function(){return e.dismiss()},this.duration)),[2]}})})},e.prototype.dismiss=function(e,t){return this.durationTimeout&&clearTimeout(this.durationTimeout),Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this,e,t,"toastLeave",iosLeaveAnimation,mdLeaveAnimation,this.position)},e.prototype.onDidDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["c"])(this.el,"ionToastDidDismiss")},e.prototype.onWillDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["c"])(this.el,"ionToastWillDismiss")},e.prototype.hostData=function(){var e=this.translucent?Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"toast-translucent"):{};return{class:Object.assign({},e,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"toast"),Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["j"])(this.cssClass))}},e.prototype.render=function(){var e,t=this,o=((e={"toast-wrapper":!0})["toast-"+this.position]=!0,e);return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:o},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toast-container"},void 0!==this.message&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toast-message"},this.message),this.showCloseButton&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-button",{fill:"clear",color:"light","ion-activable":!0,class:"toast-button",onClick:function(){return t.dismiss()}},this.closeButtonText||"Close")))},Object.defineProperty(e,"is",{get:function(){return"ion-toast"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{animated:{type:Boolean,attr:"animated"},animationCtrl:{connect:"ion-animation-controller"},closeButtonText:{type:String,attr:"close-button-text"},config:{context:"config"},cssClass:{type:String,attr:"css-class"},dismiss:{method:!0},duration:{type:Number,attr:"duration"},el:{elementRef:!0},enterAnimation:{type:"Any",attr:"enter-animation"},keyboardClose:{type:Boolean,attr:"keyboard-close"},leaveAnimation:{type:"Any",attr:"leave-animation"},message:{type:String,attr:"message"},mode:{type:String,attr:"mode"},onDidDismiss:{method:!0},onWillDismiss:{method:!0},overlayIndex:{type:Number,attr:"overlay-index"},position:{type:String,attr:"position"},present:{method:!0},showCloseButton:{type:Boolean,attr:"show-close-button"},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionToastDidLoad",method:"ionToastDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastDidPresent",method:"didPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastWillPresent",method:"willPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastWillDismiss",method:"willDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastDidDismiss",method:"didDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastDidUnload",method:"ionToastDidUnload",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionDismiss",method:"onDismiss"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-toast{left:0;top:0;display:block;position:absolute;width:100%;height:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:strict;z-index:1000;pointer-events:none}.toast-wrapper{background:var(--background)}.toast-wrapper.toast-top{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0);top:0}.toast-wrapper.toast-bottom{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);bottom:0}.toast-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;pointer-events:auto;contain:content}.toast-button{font-size:15px}.toast-message{-webkit-box-flex:1;-ms-flex:1;flex:1}.toast-ios{--background:var(--ion-background-color-step-50, #f2f2f2);--button-color:var(--ion-text-color-step-400, #666666);--color:var(--ion-text-color-step-150, #262626);font-size:14px}.toast-ios .toast-wrapper{left:10px;right:10px;margin:auto;border-radius:14px;display:block;position:absolute;max-width:700px;z-index:10}.toast-translucent-ios .toast-wrapper{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.toast-ios .toast-wrapper.toast-middle{opacity:.01}.toast-ios .toast-message{padding:15px}.toast-ios .toast-button{color:var(--button-color)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),ToastController=function(){function e(){}return e.prototype.create=function(e){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["f"])(this.doc.createElement("ion-toast"),e)},e.prototype.dismiss=function(e,t,o){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["g"])(this.doc,e,t,"ion-toast",o)},e.prototype.getTop=function(){return __awaiter(this,void 0,void 0,function(){return __generator(this,function(e){return[2,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.doc,"ion-toast")]})})},Object.defineProperty(e,"is",{get:function(){return"ion-toast-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{create:{method:!0},dismiss:{method:!0},doc:{context:"document"},getTop:{method:!0}}},enumerable:!0,configurable:!0}),e}();
+
+
+
+
+function iosEnterAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.modal-wrapper'));
+    wrapperAnimation.beforeStyles({ 'opacity': 1 })
+        .fromTo('translateY', '100%', '0%');
+    backdropAnimation.fromTo('opacity', 0.01, 0.4);
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.36,0.66,0.04,1)')
+        .duration(400)
+        .beforeAddClass('show-modal')
+        .add(backdropAnimation)
+        .add(wrapperAnimation));
+}
+function iosLeaveAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    var wrapperEl = baseEl.querySelector('.modal-wrapper');
+    wrapperAnimation.addElement(wrapperEl);
+    var wrapperElRect = wrapperEl.getBoundingClientRect();
+    wrapperAnimation.beforeStyles({ 'opacity': 1 })
+        .fromTo('translateY', '0%', window.innerHeight - wrapperElRect.top + "px");
+    backdropAnimation.fromTo('opacity', 0.4, 0.0);
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('ease-out')
+        .duration(250)
+        .add(backdropAnimation)
+        .add(wrapperAnimation));
+}
+function mdEnterAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.modal-wrapper'));
+    wrapperAnimation
+        .fromTo('opacity', 0.01, 1)
+        .fromTo('translateY', '40px', '0px');
+    backdropAnimation.fromTo('opacity', 0.01, 0.4);
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.36,0.66,0.04,1)')
+        .duration(280)
+        .beforeAddClass('show-modal')
+        .add(backdropAnimation)
+        .add(wrapperAnimation));
+}
+function mdLeaveAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    var wrapperEl = baseEl.querySelector('.modal-wrapper');
+    wrapperAnimation.addElement(wrapperEl);
+    wrapperAnimation
+        .fromTo('opacity', 0.99, 0)
+        .fromTo('translateY', '0px', '40px');
+    backdropAnimation.fromTo('opacity', 0.4, 0.0);
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.47,0,0.745,0.715)')
+        .duration(200)
+        .add(backdropAnimation)
+        .add(wrapperAnimation));
+}
+var Modal = /** @class */ (function () {
+    function Modal() {
+        this.presented = false;
+        this.keyboardClose = true;
+        this.backdropDismiss = true;
+        this.showBackdrop = true;
+        this.animated = true;
+    }
+    Modal.prototype.componentDidLoad = function () {
+        this.ionModalDidLoad.emit();
+    };
+    Modal.prototype.componentDidUnload = function () {
+        this.ionModalDidUnload.emit();
+    };
+    Modal.prototype.onDismiss = function (ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        this.dismiss();
+    };
+    Modal.prototype.onBackdropTap = function () {
+        this.dismiss(undefined, _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_3__["a"]);
+    };
+    Modal.prototype.lifecycle = function (modalEvent) {
+        var el = this.usersElement;
+        var name = LIFECYCLE_MAP[modalEvent.type];
+        if (el && name) {
+            var ev = new CustomEvent(name, {
+                bubbles: false,
+                cancelable: false,
+                detail: modalEvent.detail
+            });
+            el.dispatchEvent(ev);
+        }
+    };
+    Modal.prototype.present = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var container, componentProps, _a;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (this.presented) {
+                            return [2 /*return*/];
+                        }
+                        container = this.el.querySelector(".modal-wrapper");
+                        if (!container) {
+                            throw new Error('container is undefined');
+                        }
+                        componentProps = Object.assign({}, this.componentProps, { modal: this.el });
+                        _a = this;
+                        return [4 /*yield*/, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["a"])(this.delegate, container, this.component, ['ion-page'], componentProps)];
+                    case 1:
+                        _a.usersElement = _b.sent();
+                        return [4 /*yield*/, Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__["a"])(this.usersElement)];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_3__["e"])(this, 'modalEnter', iosEnterAnimation, mdEnterAnimation)];
+                }
+            });
+        });
+    };
+    Modal.prototype.dismiss = function (data, role) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var dismissed;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_3__["b"])(this, data, role, 'modalLeave', iosLeaveAnimation, mdLeaveAnimation)];
+                    case 1:
+                        dismissed = _a.sent();
+                        if (!dismissed) return [3 /*break*/, 3];
+                        return [4 /*yield*/, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this.delegate, this.usersElement)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/, dismissed];
+                }
+            });
+        });
+    };
+    Modal.prototype.onDidDismiss = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.el, 'ionModalDidDismiss');
+    };
+    Modal.prototype.onWillDismiss = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.el, 'ionModalWillDismiss');
+    };
+    Modal.prototype.hostData = function () {
+        return {
+            'no-router': true,
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'modal'), Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.cssClass)),
+            style: {
+                zIndex: 20000 + this.overlayIndex,
+            }
+        };
+    };
+    Modal.prototype.render = function () {
+        var dialogClasses = Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'modal-wrapper');
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop", { visible: this.showBackdrop, tappable: this.backdropDismiss }),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { role: "dialog", class: dialogClasses })
+        ];
+    };
+    Object.defineProperty(Modal, "is", {
+        get: function () { return "ion-modal"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Modal, "properties", {
+        get: function () {
+            return {
+                "animated": {
+                    "type": Boolean,
+                    "attr": "animated"
+                },
+                "animationCtrl": {
+                    "connect": "ion-animation-controller"
+                },
+                "backdropDismiss": {
+                    "type": Boolean,
+                    "attr": "backdrop-dismiss"
+                },
+                "component": {
+                    "type": String,
+                    "attr": "component"
+                },
+                "componentProps": {
+                    "type": "Any",
+                    "attr": "component-props"
+                },
+                "config": {
+                    "context": "config"
+                },
+                "cssClass": {
+                    "type": String,
+                    "attr": "css-class"
+                },
+                "delegate": {
+                    "type": "Any",
+                    "attr": "delegate"
+                },
+                "dismiss": {
+                    "method": true
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "enterAnimation": {
+                    "type": "Any",
+                    "attr": "enter-animation"
+                },
+                "keyboardClose": {
+                    "type": Boolean,
+                    "attr": "keyboard-close"
+                },
+                "leaveAnimation": {
+                    "type": "Any",
+                    "attr": "leave-animation"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "onDidDismiss": {
+                    "method": true
+                },
+                "onWillDismiss": {
+                    "method": true
+                },
+                "overlayIndex": {
+                    "type": Number,
+                    "attr": "overlay-index"
+                },
+                "present": {
+                    "method": true
+                },
+                "showBackdrop": {
+                    "type": Boolean,
+                    "attr": "show-backdrop"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Modal, "events", {
+        get: function () {
+            return [{
+                    "name": "ionModalDidLoad",
+                    "method": "ionModalDidLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionModalDidUnload",
+                    "method": "ionModalDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionModalDidPresent",
+                    "method": "didPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionModalWillPresent",
+                    "method": "willPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionModalWillDismiss",
+                    "method": "willDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionModalDidDismiss",
+                    "method": "didDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Modal, "listeners", {
+        get: function () {
+            return [{
+                    "name": "ionDismiss",
+                    "method": "onDismiss"
+                }, {
+                    "name": "ionBackdropTap",
+                    "method": "onBackdropTap"
+                }, {
+                    "name": "ionModalDidPresent",
+                    "method": "lifecycle"
+                }, {
+                    "name": "ionModalWillPresent",
+                    "method": "lifecycle"
+                }, {
+                    "name": "ionModalWillDismiss",
+                    "method": "lifecycle"
+                }, {
+                    "name": "ionModalDidDismiss",
+                    "method": "lifecycle"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Modal, "style", {
+        get: function () { return "ion-modal{left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;contain:strict}ion-modal-controller{display:none}\@media not all and (min-width:768px) and (min-height:600px){ion-modal ion-backdrop{display:none}}.modal-wrapper{width:100%;height:100%;contain:strict;z-index:10}\@media only screen and (min-width:768px) and (min-height:600px){.modal-wrapper{width:600px;height:500px}.modal-wrapper-ios{border-radius:10px;overflow:hidden}}\@media only screen and (min-width:768px) and (min-height:768px){.modal-wrapper{width:600px;height:600px}}.modal-wrapper-ios{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Modal, "styleMode", {
+        get: function () { return "ios"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Modal;
+}());
+var LIFECYCLE_MAP = {
+    'ionModalDidPresent': 'ionViewDidEnter',
+    'ionModalWillPresent': 'ionViewWillEnter',
+    'ionModalWillDismiss': 'ionViewWillDismiss',
+    'ionModalDidDismiss': 'ionViewDidDismiss',
+};
+var ModalController = /** @class */ (function () {
+    function ModalController() {
+    }
+    ModalController.prototype.create = function (opts) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_3__["f"])(this.doc.createElement('ion-modal'), opts);
+    };
+    ModalController.prototype.dismiss = function (data, role, id) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.doc, data, role, 'ion-modal', id);
+    };
+    ModalController.prototype.getTop = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return [2 /*return*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_3__["h"])(this.doc, 'ion-modal')];
+            });
+        });
+    };
+    Object.defineProperty(ModalController, "is", {
+        get: function () { return "ion-modal-controller"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ModalController, "properties", {
+        get: function () {
+            return {
+                "create": {
+                    "method": true
+                },
+                "dismiss": {
+                    "method": true
+                },
+                "doc": {
+                    "context": "document"
+                },
+                "getTop": {
+                    "method": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ModalController;
+}());
+
+
 
 /***/ })
 

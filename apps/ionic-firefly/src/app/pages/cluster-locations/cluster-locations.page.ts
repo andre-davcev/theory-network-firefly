@@ -7,7 +7,7 @@ import { Select, Store } from '@ngxs/store';
 import { StateCluster } from '../../state/cluster/cluster.state';
 import { filter, take, switchMap } from 'rxjs/operators';
 import { StateLocation } from '../../state/location/location.state';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { from } from 'rxjs';
 
 @Component
 ({
@@ -33,7 +33,7 @@ export class PagePublisherClusterLocations implements OnInit
         (
             filter((loading: boolean) => loading),
             take(1),
-            switchMap(() => fromPromise(this.loadingController.create({spinner: 'crescent'})))
+            switchMap(() => from(this.loadingController.create({spinner: 'crescent'})))
         ).
 
         subscribe((loading: HTMLIonLoadingElement) => {

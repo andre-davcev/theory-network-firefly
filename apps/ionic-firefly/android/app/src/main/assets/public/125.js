@@ -1,24 +1,1015 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[125],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/rihgbjgj.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/rihgbjgj.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonFab, IonFabButton, IonFabList */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/usxnqnjo.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/usxnqnjo.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonNav, IonNavPop, IonNavPush, IonNavSetRoot */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFab", function() { return Fab; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFabButton", function() { return FabButton; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFabList", function() { return FabList; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonNav", function() { return Nav; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonNavPop", function() { return NavPop; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonNavPush", function() { return NavPush; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonNavSetRoot", function() { return NavSetRoot; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-5f438245.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-5f438245.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var Fab=function(){function t(){this.edge=!1,this.activated=!1}return t.prototype.activatedChanged=function(){var t=this.activated,e=this.el.querySelector("ion-fab-button");e&&(e.activated=t),Array.from(this.el.querySelectorAll("ion-fab-list")).forEach(function(e){e.activated=t})},t.prototype.componentDidLoad=function(){this.activatedChanged()},t.prototype.onClick=function(){this.el.querySelector("ion-fab-list")&&(this.activated=!this.activated)},t.prototype.close=function(){this.activated=!1},t.prototype.hostData=function(){var t;return{class:(t={},t["fab-horizontal-"+this.horizontal]=!!this.horizontal,t["fab-vertical-"+this.vertical]=!!this.vertical,t["fab-edge"]=this.edge,t)}},t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-fab"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{activated:{type:Boolean,attr:"activated",mutable:!0,watchCallbacks:["activatedChanged"]},close:{method:!0},edge:{type:Boolean,attr:"edge"},el:{elementRef:!0},horizontal:{type:String,attr:"horizontal"},vertical:{type:String,attr:"vertical"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"listeners",{get:function(){return[{name:"click",method:"onClick"}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-fab-h{position:absolute;z-index:999}.fab-horizontal-center.sc-ion-fab-h{left:50%;margin-left:-28px}.fab-horizontal-start.sc-ion-fab-h{left:10px;left:calc(env(safe-area-inset-left) + 10px)}.fab-horizontal-end.sc-ion-fab-h{right:10px;right:calc(env(safe-area-inset-right) + 10px)}.fab-vertical-top.sc-ion-fab-h{top:10px}.fab-vertical-top.fab-edge.sc-ion-fab-h{top:-28px}.fab-vertical-bottom.sc-ion-fab-h{bottom:10px}.fab-vertical-bottom.fab-edge.sc-ion-fab-h{bottom:-28px}.fab-vertical-center.sc-ion-fab-h{margin-top:-28px;top:50%}"},enumerable:!0,configurable:!0}),t}(),FabButton=function(){function t(){this.inList=!1,this.activated=!1,this.disabled=!1,this.translucent=!1,this.show=!1}return t.prototype.componentWillLoad=function(){var t=this.el.parentNode,e=t?t.nodeName:null;this.inList="ION-FAB-LIST"===e},t.prototype.getFabClassMap=function(){return{"fab-button-in-list":this.inList,"fab-button-translucent-in-list":this.inList&&this.translucent,"fab-button-close-active":this.activated,"fab-button-show":this.show}},t.prototype.hostData=function(){return{"ion-activable":!this.disabled,class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["k"])(this.color),this.getFabClassMap(),{"fab-button-disabled":this.disabled,"fab-button-translucent":this.translucent})}},t.prototype.render=function(){var t=void 0===this.href?"button":"a";return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(t,{class:"fab-button-native",disabled:this.disabled,href:this.href},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span",{class:"fab-button-close-icon"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon",{name:"close",lazy:!1})),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span",{class:"fab-button-inner"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)),"md"===this.mode&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect",null))},Object.defineProperty(t,"is",{get:function(){return"ion-fab-button"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{activated:{type:Boolean,attr:"activated"},color:{type:String,attr:"color"},disabled:{type:Boolean,attr:"disabled"},el:{elementRef:!0},href:{type:String,attr:"href"},mode:{type:String,attr:"mode"},show:{type:Boolean,attr:"show"},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-fab-button-md-h{--ion-color-base:var(--ion-color-primary, #3880ff);--ion-color-contrast:var(--ion-color-primary-contrast, #fff);--ion-color-tint:var(--ion-color-primary-tint, #4c8dff);--size:56px;--background:var(--ion-color-base);--transition:background-color,opacity 100ms linear;--padding-start:calc((56px - var(--size)) / 2);--padding-end:calc((56px - var(--size)) / 2);--padding-top:calc((56px - var(--size)) / 2);--padding-bottom:calc((56px - var(--size)) / 2);display:block;color:var(--ion-color-contrast);font-size:14px;text-align:center;text-overflow:ellipsis;text-transform:none;white-space:nowrap;-webkit-font-kerning:none;font-kerning:none;--box-shadow:0 4px 6px 0 rgba(0, 0, 0, 0.14),0 4px 5px rgba(0, 0, 0, 0.1);--transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),color 300ms cubic-bezier(0.4, 0, 0.2, 1)}.fab-button-disabled.sc-ion-fab-button-md-h{pointer-events:none}.activated.sc-ion-fab-button-md-h{--background:var(--ion-color-tint);--box-shadow:0 5px 15px 0 rgba(0, 0, 0, 0.4),0 4px 7px 0 rgba(0, 0, 0, 0.1)}.fab-button-native.sc-ion-fab-button-md{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;border-radius:50%;margin:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:block;position:relative;width:var(--size);height:var(--size);-webkit-transform:var(--transform);transform:var(--transform);-webkit-transition:var(--transition);transition:var(--transition);border:0;outline:0;background:var(--background);background-clip:padding-box;line-height:var(--size);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);contain:strict;cursor:pointer;overflow:hidden;z-index:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.fab-button-native[disabled].sc-ion-fab-button-md{cursor:default;opacity:.5;pointer-events:none}.sc-ion-fab-button-md-s > ion-icon{line-height:1}.fab-button-inner.sc-ion-fab-button-md{left:0;right:0;top:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-transition:all ease-in-out .3s;transition:all ease-in-out .3s;-webkit-transition-property:opacity,-webkit-transform;transition-property:opacity,-webkit-transform;transition-property:transform,opacity;transition-property:transform,opacity,-webkit-transform}[mini].sc-ion-fab-button-md-h{--size:40px}.fab-button-close-icon.sc-ion-fab-button-md{left:0;right:0;top:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-transform:scale(.4) rotateZ(-45deg);transform:scale(.4) rotateZ(-45deg);-webkit-transition:all ease-in-out .3s;transition:all ease-in-out .3s;-webkit-transition-property:opacity,-webkit-transform;transition-property:opacity,-webkit-transform;transition-property:transform,opacity;transition-property:transform,opacity,-webkit-transform;opacity:0}.fab-button-close-active.sc-ion-fab-button-md-h   .fab-button-close-icon.sc-ion-fab-button-md{-webkit-transform:scale(1) rotateZ(0);transform:scale(1) rotateZ(0);opacity:1}.fab-button-close-active.sc-ion-fab-button-md-h   .fab-button-inner.sc-ion-fab-button-md{-webkit-transform:scale(.4) rotateZ(45deg);transform:scale(.4) rotateZ(45deg);opacity:0}ion-ripple-effect.sc-ion-fab-button-md{color:var(--ripple-color)}.fab-button-close-icon.sc-ion-fab-button-md, .sc-ion-fab-button-md-s > ion-icon{font-size:24px}.fab-button-in-list.sc-ion-fab-button-md-h{--ion-color-contrast:var(--ion-color-light-contrast, #000);--ion-color-base:var(--ion-color-light, #f4f5f8);--transition:transform 200ms ease 10ms,opacity 200ms ease 10ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),color 300ms cubic-bezier(0.4, 0, 0.2, 1)}.fab-button-in-list.activated.sc-ion-fab-button-md-h{--background:var(--ion-color-primary-tint, #4c8dff)}"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),t}(),FabList=function(){function t(){this.activated=!1,this.side="bottom"}return t.prototype.activatedChanged=function(t){var e=Array.from(this.el.querySelectorAll("ion-fab-button")),n=t?30:0;e.forEach(function(e,a){setTimeout(function(){return e.show=t},a*n)})},t.prototype.hostData=function(){var t;return{class:(t={"fab-list-active":this.activated},t["fab-list-side-"+this.side]=this.side,t)}},t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-fab-list"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{activated:{type:Boolean,attr:"activated",watchCallbacks:["activatedChanged"]},el:{elementRef:!0},side:{type:String,attr:"side"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-fab-list-h{margin:66px 0;display:none;position:absolute;top:0;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;min-width:56px;min-height:56px}.fab-list-active.sc-ion-fab-list-h{display:-webkit-box;display:-ms-flexbox;display:flex}.sc-ion-fab-list-s > .fab-button-in-list{--size:40px;-webkit-transform:scale(0);transform:scale(0);opacity:0;visibility:hidden}.sc-ion-fab-list-h.fab-list-side-bottom .sc-ion-fab-list-s > .fab-button-in-list, .sc-ion-fab-list-h.fab-list-side-top .sc-ion-fab-list-s > .fab-button-in-list{--padding-top:5px;--padding-bottom:5px}.sc-ion-fab-list-h.fab-list-side-end .sc-ion-fab-list-s > .fab-button-in-list, .sc-ion-fab-list-h.fab-list-side-start .sc-ion-fab-list-s > .fab-button-in-list{--padding-start:5px;--padding-end:5px}.sc-ion-fab-list-s > .fab-button-in-list.fab-button-show{-webkit-transform:scale(1);transform:scale(1);opacity:1;visibility:visible}.fab-list-side-top.sc-ion-fab-list-h{top:auto;bottom:0;-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.fab-list-side-start.sc-ion-fab-list-h{margin:0 66px;right:0;-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.fab-list-side-end.sc-ion-fab-list-h{margin:0 66px;left:0;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}"},enumerable:!0,configurable:!0}),t}();
+
+
+
+
+var ViewController = /** @class */ (function () {
+    function ViewController(component, params) {
+        this.component = component;
+        this.params = params;
+        this.state = 1;
+    }
+    ViewController.prototype.init = function (container) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var component, _a;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        this.state = 2;
+                        if (!!this.element) return [3 /*break*/, 2];
+                        component = this.component;
+                        _a = this;
+                        return [4 /*yield*/, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["a"])(this.delegate, container, component, ['ion-page', 'ion-page-invisible'], this.params)];
+                    case 1:
+                        _a.element = _b.sent();
+                        _b.label = 2;
+                    case 2: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ViewController.prototype._destroy = function () {
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(this.state !== 3, 'view state must be ATTACHED');
+        var element = this.element;
+        if (element) {
+            if (this.delegate) {
+                this.delegate.removeViewFromDom(element.parentElement, element);
+            }
+            else {
+                element.remove();
+            }
+        }
+        this.nav = undefined;
+        this.state = 3;
+    };
+    return ViewController;
+}());
+function matches(view, id, params) {
+    if (!view) {
+        return false;
+    }
+    if (view.component !== id) {
+        return false;
+    }
+    var currentParams = view.params;
+    if (currentParams === params) {
+        return true;
+    }
+    if (!currentParams && !params) {
+        return true;
+    }
+    if (!currentParams || !params) {
+        return false;
+    }
+    var keysA = Object.keys(currentParams);
+    var keysB = Object.keys(params);
+    if (keysA.length !== keysB.length) {
+        return false;
+    }
+    for (var _i = 0, keysA_1 = keysA; _i < keysA_1.length; _i++) {
+        var key = keysA_1[_i];
+        if (currentParams[key] !== params[key]) {
+            return false;
+        }
+    }
+    return true;
+}
+function convertToView(page, params) {
+    if (!page) {
+        return null;
+    }
+    if (page instanceof ViewController) {
+        return page;
+    }
+    return new ViewController(page, params);
+}
+function convertToViews(pages) {
+    return pages.map(function (page) {
+        if (page instanceof ViewController) {
+            return page;
+        }
+        if ('page' in page) {
+            return convertToView(page.page, page.params);
+        }
+        return convertToView(page, undefined);
+    }).filter(function (v) { return v !== null; });
+}
+var Nav = /** @class */ (function () {
+    function Nav() {
+        this.transInstr = [];
+        this.useRouter = false;
+        this.isTransitioning = false;
+        this.destroyed = false;
+        this.views = [];
+        this.animated = true;
+    }
+    Nav.prototype.swipeGestureChanged = function () {
+        if (this.gesture) {
+            this.gesture.setDisabled(this.swipeGesture !== true);
+        }
+    };
+    Nav.prototype.rootChanged = function () {
+        if (this.root !== undefined) {
+            if (!this.useRouter) {
+                this.setRoot(this.root, this.rootParams);
+            }
+        }
+    };
+    Nav.prototype.componentWillLoad = function () {
+        this.useRouter =
+            !!this.win.document.querySelector('ion-router') &&
+                !this.el.closest('[no-router]');
+        if (this.swipeGesture === undefined) {
+            this.swipeGesture = this.config.getBoolean('swipeBackEnabled', this.mode === 'ios');
+        }
+        this.ionNavWillLoad.emit();
+    };
+    Nav.prototype.componentDidLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        this.rootChanged();
+                        _a = this;
+                        return [4 /*yield*/, __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/gesture.js"))];
+                    case 1:
+                        _a.gesture = (_b.sent()).createGesture({
+                            el: this.win.document.body,
+                            queue: this.queue,
+                            gestureName: 'goback-swipe',
+                            gesturePriority: 30,
+                            threshold: 10,
+                            canStart: function () { return _this.canStart(); },
+                            onStart: function () { return _this.onStart(); },
+                            onMove: function (ev) { return _this.onMove(ev); },
+                            onEnd: function (ev) { return _this.onEnd(ev); },
+                        });
+                        this.swipeGestureChanged();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Nav.prototype.componentDidUnload = function () {
+        for (var _i = 0, _a = this.views; _i < _a.length; _i++) {
+            var view = _a[_i];
+            Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__["b"])(this.win, view.element, "ionViewWillUnload");
+            view._destroy();
+        }
+        if (this.gesture) {
+            this.gesture.destroy();
+        }
+        if (this.sbTrns) {
+            this.sbTrns.destroy();
+        }
+        this.transInstr.length = this.views.length = 0;
+        this.sbTrns = undefined;
+        this.destroyed = true;
+    };
+    Nav.prototype.push = function (component, componentProps, opts, done) {
+        return this.queueTrns({
+            insertStart: -1,
+            insertViews: [{ page: component, params: componentProps }],
+            opts: opts
+        }, done);
+    };
+    Nav.prototype.insert = function (insertIndex, component, componentProps, opts, done) {
+        return this.queueTrns({
+            insertStart: insertIndex,
+            insertViews: [{ page: component, params: componentProps }],
+            opts: opts
+        }, done);
+    };
+    Nav.prototype.insertPages = function (insertIndex, insertComponents, opts, done) {
+        return this.queueTrns({
+            insertStart: insertIndex,
+            insertViews: insertComponents,
+            opts: opts
+        }, done);
+    };
+    Nav.prototype.pop = function (opts, done) {
+        return this.queueTrns({
+            removeStart: -1,
+            removeCount: 1,
+            opts: opts
+        }, done);
+    };
+    Nav.prototype.popTo = function (indexOrViewCtrl, opts, done) {
+        var config = {
+            removeStart: -1,
+            removeCount: -1,
+            opts: opts
+        };
+        if (typeof indexOrViewCtrl === 'object' && indexOrViewCtrl.component) {
+            config.removeView = indexOrViewCtrl;
+            config.removeStart = 1;
+        }
+        else if (typeof indexOrViewCtrl === 'number') {
+            config.removeStart = indexOrViewCtrl + 1;
+        }
+        return this.queueTrns(config, done);
+    };
+    Nav.prototype.popToRoot = function (opts, done) {
+        return this.queueTrns({
+            removeStart: 1,
+            removeCount: -1,
+            opts: opts
+        }, done);
+    };
+    Nav.prototype.removeIndex = function (startIndex, removeCount, opts, done) {
+        if (removeCount === void 0) { removeCount = 1; }
+        return this.queueTrns({
+            removeStart: startIndex,
+            removeCount: removeCount,
+            opts: opts
+        }, done);
+    };
+    Nav.prototype.setRoot = function (component, componentProps, opts, done) {
+        return this.setPages([{ page: component, params: componentProps }], opts, done);
+    };
+    Nav.prototype.setPages = function (views, opts, done) {
+        if (opts == null) {
+            opts = {};
+        }
+        if (opts.animated !== true) {
+            opts.animated = false;
+        }
+        return this.queueTrns({
+            insertStart: 0,
+            insertViews: views,
+            removeStart: 0,
+            removeCount: -1,
+            opts: opts
+        }, done);
+    };
+    Nav.prototype.setRouteId = function (id, params, direction) {
+        var _this = this;
+        var active = this.getActiveSync();
+        if (matches(active, id, params)) {
+            return Promise.resolve({
+                changed: false,
+                element: active.element
+            });
+        }
+        var resolve;
+        var promise = new Promise(function (r) { return (resolve = r); });
+        var finish;
+        var commonOpts = {
+            updateURL: false,
+            viewIsReady: function (enteringEl) {
+                var mark;
+                var p = new Promise(function (r) { return (mark = r); });
+                resolve({
+                    changed: true,
+                    element: enteringEl,
+                    markVisible: function () { return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    mark();
+                                    return [4 /*yield*/, finish];
+                                case 1:
+                                    _a.sent();
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); }
+                });
+                return p;
+            }
+        };
+        if (direction === 0) {
+            finish = this.setRoot(id, params, commonOpts);
+        }
+        else {
+            var viewController = this.views.find(function (v) { return matches(v, id, params); });
+            if (viewController) {
+                finish = this.popTo(viewController, Object.assign({}, commonOpts, { direction: 'back' }));
+            }
+            else if (direction === 1) {
+                finish = this.push(id, params, commonOpts);
+            }
+            else if (direction === -1) {
+                finish = this.setRoot(id, params, Object.assign({}, commonOpts, { direction: 'back', animated: true }));
+            }
+        }
+        return promise;
+    };
+    Nav.prototype.getRouteId = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var active;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                active = this.getActiveSync();
+                return [2 /*return*/, active
+                        ? {
+                            id: active.element.tagName,
+                            params: active.params,
+                            element: active.element
+                        }
+                        : undefined];
+            });
+        });
+    };
+    Nav.prototype.getActive = function () {
+        return Promise.resolve(this.getActiveSync());
+    };
+    Nav.prototype.getByIndex = function (index) {
+        return Promise.resolve(this.views[index]);
+    };
+    Nav.prototype.canGoBack = function (view) {
+        return Promise.resolve(this.canGoBackSync(view));
+    };
+    Nav.prototype.getPrevious = function (view) {
+        return Promise.resolve(this.getPreviousSync(view));
+    };
+    Nav.prototype.getLength = function () {
+        return this.views.length;
+    };
+    Nav.prototype.getActiveSync = function () {
+        return this.views[this.views.length - 1];
+    };
+    Nav.prototype.canGoBackSync = function (view) {
+        if (view === void 0) { view = this.getActiveSync(); }
+        return !!(view && this.getPreviousSync(view));
+    };
+    Nav.prototype.getPreviousSync = function (view) {
+        if (view === void 0) { view = this.getActiveSync(); }
+        if (!view) {
+            return undefined;
+        }
+        var views = this.views;
+        var index = views.indexOf(view);
+        return index > 0 ? views[index - 1] : undefined;
+    };
+    Nav.prototype.queueTrns = function (ti, done) {
+        if (this.isTransitioning && ti.opts != null && ti.opts.skipIfBusy) {
+            return Promise.resolve(false);
+        }
+        var promise = new Promise(function (resolve, reject) {
+            ti.resolve = resolve;
+            ti.reject = reject;
+        });
+        ti.done = done;
+        if (ti.insertViews && ti.insertViews.length === 0) {
+            ti.insertViews = undefined;
+        }
+        this.transInstr.push(ti);
+        this.nextTrns();
+        return promise;
+    };
+    Nav.prototype.success = function (result, ti) {
+        if (this.destroyed) {
+            this.fireError('nav controller was destroyed', ti);
+            return;
+        }
+        if (ti.done) {
+            ti.done(result.hasCompleted, result.requiresTransition, result.enteringView, result.leavingView, result.direction);
+        }
+        ti.resolve(result.hasCompleted);
+        if (ti.opts.updateURL !== false && this.useRouter) {
+            var router = this.win.document.querySelector('ion-router');
+            if (router) {
+                var direction = result.direction === 'back' ? -1 : 1;
+                router.navChanged(direction);
+            }
+        }
+    };
+    Nav.prototype.failed = function (rejectReason, ti) {
+        if (this.destroyed) {
+            this.fireError('nav controller was destroyed', ti);
+            return;
+        }
+        this.transInstr.length = 0;
+        this.fireError(rejectReason, ti);
+    };
+    Nav.prototype.fireError = function (rejectReason, ti) {
+        if (ti.done) {
+            ti.done(false, false, rejectReason);
+        }
+        if (ti.reject && !this.destroyed) {
+            ti.reject(rejectReason);
+        }
+        else {
+            ti.resolve(false);
+        }
+    };
+    Nav.prototype.nextTrns = function () {
+        if (this.isTransitioning) {
+            return false;
+        }
+        var ti = this.transInstr.shift();
+        if (!ti) {
+            return false;
+        }
+        this.runTransition(ti);
+        return true;
+    };
+    Nav.prototype.runTransition = function (ti) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var leavingView, enteringView, requiresTransition, result, _a, rejectReason_1;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 6, , 7]);
+                        this.ionNavWillChange.emit();
+                        this.isTransitioning = true;
+                        this.prepareTI(ti);
+                        leavingView = this.getActiveSync();
+                        enteringView = this.getEnteringView(ti, leavingView);
+                        if (!leavingView && !enteringView) {
+                            throw new Error('no views in the stack to be removed');
+                        }
+                        if (!(enteringView && enteringView.state === 1)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, enteringView.init(this.el)];
+                    case 1:
+                        _b.sent();
+                        _b.label = 2;
+                    case 2:
+                        this.postViewInit(enteringView, leavingView, ti);
+                        requiresTransition = (ti.enteringRequiresTransition || ti.leavingRequiresTransition) &&
+                            enteringView !== leavingView;
+                        if (!requiresTransition) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.transition(enteringView, leavingView, ti)];
+                    case 3:
+                        _a = _b.sent();
+                        return [3 /*break*/, 5];
+                    case 4:
+                        _a = {
+                            hasCompleted: true,
+                            requiresTransition: false
+                        };
+                        _b.label = 5;
+                    case 5:
+                        result = _a;
+                        this.success(result, ti);
+                        this.ionNavDidChange.emit();
+                        return [3 /*break*/, 7];
+                    case 6:
+                        rejectReason_1 = _b.sent();
+                        this.failed(rejectReason_1, ti);
+                        return [3 /*break*/, 7];
+                    case 7:
+                        this.isTransitioning = false;
+                        this.nextTrns();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Nav.prototype.prepareTI = function (ti) {
+        var viewsLength = this.views.length;
+        ti.opts = ti.opts || {};
+        if (ti.opts.delegate === undefined) {
+            ti.opts.delegate = this.delegate;
+        }
+        if (ti.removeView !== undefined) {
+            Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(ti.removeStart !== undefined, 'removeView needs removeStart');
+            Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(ti.removeCount !== undefined, 'removeView needs removeCount');
+            var index = this.views.indexOf(ti.removeView);
+            if (index < 0) {
+                throw new Error('removeView was not found');
+            }
+            ti.removeStart += index;
+        }
+        if (ti.removeStart !== undefined) {
+            if (ti.removeStart < 0) {
+                ti.removeStart = viewsLength - 1;
+            }
+            if (ti.removeCount < 0) {
+                ti.removeCount = viewsLength - ti.removeStart;
+            }
+            ti.leavingRequiresTransition =
+                ti.removeCount > 0 && ti.removeStart + ti.removeCount === viewsLength;
+        }
+        if (ti.insertViews) {
+            if (ti.insertStart < 0 || ti.insertStart > viewsLength) {
+                ti.insertStart = viewsLength;
+            }
+            ti.enteringRequiresTransition = ti.insertStart === viewsLength;
+        }
+        var insertViews = ti.insertViews;
+        if (!insertViews) {
+            return;
+        }
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(insertViews.length > 0, 'length can not be zero');
+        var viewControllers = convertToViews(insertViews);
+        if (viewControllers.length === 0) {
+            throw new Error('invalid views to insert');
+        }
+        for (var _i = 0, viewControllers_1 = viewControllers; _i < viewControllers_1.length; _i++) {
+            var view = viewControllers_1[_i];
+            view.delegate = ti.opts.delegate;
+            var nav = view.nav;
+            if (nav && nav !== this) {
+                throw new Error('inserted view was already inserted');
+            }
+            if (view.state === 3) {
+                throw new Error('inserted view was already destroyed');
+            }
+        }
+        ti.insertViews = viewControllers;
+    };
+    Nav.prototype.getEnteringView = function (ti, leavingView) {
+        var insertViews = ti.insertViews;
+        if (insertViews !== undefined) {
+            return insertViews[insertViews.length - 1];
+        }
+        var removeStart = ti.removeStart;
+        if (removeStart !== undefined) {
+            var views = this.views;
+            var removeEnd = removeStart + ti.removeCount;
+            for (var i = views.length - 1; i >= 0; i--) {
+                var view = views[i];
+                if ((i < removeStart || i >= removeEnd) && view !== leavingView) {
+                    return view;
+                }
+            }
+        }
+        return undefined;
+    };
+    Nav.prototype.postViewInit = function (enteringView, leavingView, ti) {
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(leavingView || enteringView, 'Both leavingView and enteringView are null');
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(ti.resolve, 'resolve must be valid');
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(ti.reject, 'reject must be valid');
+        var opts = ti.opts;
+        var insertViews = ti.insertViews;
+        var removeStart = ti.removeStart;
+        var removeCount = ti.removeCount;
+        var destroyQueue;
+        if (removeStart !== undefined && removeCount !== undefined) {
+            Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(removeStart >= 0, 'removeStart can not be negative');
+            Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(removeCount >= 0, 'removeCount can not be negative');
+            destroyQueue = [];
+            for (var i = 0; i < removeCount; i++) {
+                var view = this.views[i + removeStart];
+                if (view && view !== enteringView && view !== leavingView) {
+                    destroyQueue.push(view);
+                }
+            }
+            opts.direction = opts.direction || 'back';
+        }
+        var finalBalance = this.views.length +
+            (insertViews !== undefined ? insertViews.length : 0) -
+            (removeCount !== undefined ? removeCount : 0);
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(finalBalance >= 0, 'final balance can not be negative');
+        if (finalBalance === 0) {
+            console.warn("You can't remove all the pages in the navigation stack. nav.pop() is probably called too many times.", this, this.el);
+            throw new Error('navigation stack needs at least one root page');
+        }
+        if (insertViews) {
+            var insertIndex = ti.insertStart;
+            for (var _i = 0, insertViews_1 = insertViews; _i < insertViews_1.length; _i++) {
+                var view = insertViews_1[_i];
+                this.insertViewAt(view, insertIndex);
+                insertIndex++;
+            }
+            if (ti.enteringRequiresTransition) {
+                opts.direction = opts.direction || 'forward';
+            }
+        }
+        if (destroyQueue && destroyQueue.length > 0) {
+            for (var _a = 0, destroyQueue_1 = destroyQueue; _a < destroyQueue_1.length; _a++) {
+                var view = destroyQueue_1[_a];
+                Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__["b"])(this.win, view.element, "ionViewWillLeave");
+                Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__["b"])(this.win, view.element, "ionViewDidLeave");
+                Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__["b"])(this.win, view.element, "ionViewWillUnload");
+            }
+            for (var _b = 0, destroyQueue_2 = destroyQueue; _b < destroyQueue_2.length; _b++) {
+                var view = destroyQueue_2[_b];
+                this.destroyView(view);
+            }
+        }
+    };
+    Nav.prototype.transition = function (enteringView, leavingView, ti) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var opts, progressCallback, enteringEl, leavingEl, animated, animationOpts, hasCompleted;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (this.sbTrns) {
+                            this.sbTrns.destroy();
+                            this.sbTrns = undefined;
+                        }
+                        opts = ti.opts;
+                        progressCallback = opts.progressAnimation
+                            ? function (animation) {
+                                _this.sbTrns = animation;
+                            }
+                            : undefined;
+                        enteringEl = enteringView.element;
+                        leavingEl = leavingView && leavingView.element;
+                        animated = this.animated && this.config.getBoolean('animated', true);
+                        animationOpts = Object.assign({ mode: this.mode, showGoBack: this.canGoBackSync(enteringView), animationCtrl: this.animationCtrl, queue: this.queue, window: this.win, baseEl: this.el, progressCallback: progressCallback,
+                            animated: animated,
+                            enteringEl: enteringEl,
+                            leavingEl: leavingEl }, opts);
+                        return [4 /*yield*/, Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__["d"])(animationOpts)];
+                    case 1:
+                        hasCompleted = (_a.sent()).hasCompleted;
+                        return [2 /*return*/, this.transitionFinish(hasCompleted, enteringView, leavingView, opts)];
+                }
+            });
+        });
+    };
+    Nav.prototype.transitionFinish = function (hasCompleted, enteringView, leavingView, opts) {
+        var cleanupView = hasCompleted ? enteringView : leavingView;
+        if (cleanupView) {
+            this.cleanup(cleanupView);
+        }
+        return {
+            hasCompleted: hasCompleted,
+            requiresTransition: true,
+            enteringView: enteringView,
+            leavingView: leavingView,
+            direction: opts.direction
+        };
+    };
+    Nav.prototype.insertViewAt = function (view, index) {
+        var views = this.views;
+        var existingIndex = views.indexOf(view);
+        if (existingIndex > -1) {
+            Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(view.nav === this, 'view is not part of the nav');
+            views.splice(index, 0, views.splice(existingIndex, 1)[0]);
+        }
+        else {
+            Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(!view.nav, 'nav is used');
+            view.nav = this;
+            views.splice(index, 0, view);
+        }
+    };
+    Nav.prototype.removeView = function (view) {
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(view.state === 2 || view.state === 3, 'view state should be loaded or destroyed');
+        var views = this.views;
+        var index = views.indexOf(view);
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["i"])(index > -1, 'view must be part of the stack');
+        if (index >= 0) {
+            views.splice(index, 1);
+        }
+    };
+    Nav.prototype.destroyView = function (view) {
+        view._destroy();
+        this.removeView(view);
+    };
+    Nav.prototype.cleanup = function (activeView) {
+        if (this.destroyed) {
+            return;
+        }
+        var views = this.views;
+        var activeViewIndex = views.indexOf(activeView);
+        for (var i = views.length - 1; i >= 0; i--) {
+            var view = views[i];
+            var element = view.element;
+            if (i > activeViewIndex) {
+                Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__["b"])(this.win, element, "ionViewWillUnload");
+                this.destroyView(view);
+            }
+            else if (i < activeViewIndex) {
+                Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__["c"])(element, true);
+            }
+        }
+    };
+    Nav.prototype.canStart = function () {
+        return !!this.swipeGesture &&
+            !this.isTransitioning &&
+            this.canGoBackSync();
+    };
+    Nav.prototype.onStart = function () {
+        if (this.isTransitioning || this.transInstr.length > 0) {
+            return;
+        }
+        var opts = {
+            direction: 'back',
+            progressAnimation: true
+        };
+        this.queueTrns({
+            removeStart: -1,
+            removeCount: 1,
+            opts: opts
+        }, undefined);
+    };
+    Nav.prototype.onMove = function (detail) {
+        if (this.sbTrns) {
+            this.isTransitioning = true;
+            var delta = detail.deltaX;
+            var stepValue = delta / this.win.innerWidth;
+            this.sbTrns.progressStep(stepValue);
+        }
+    };
+    Nav.prototype.onEnd = function (detail) {
+        if (this.sbTrns) {
+            var delta = detail.deltaX;
+            var width = this.win.innerWidth;
+            var stepValue = delta / width;
+            var velocity = detail.velocityX;
+            var z = width / 2.0;
+            var shouldComplete = velocity >= 0 && (velocity > 0.2 || detail.deltaX > z);
+            var missing = shouldComplete ? 1 - stepValue : stepValue;
+            var missingDistance = missing * width;
+            var realDur = 0;
+            if (missingDistance > 5) {
+                var dur = missingDistance / Math.abs(velocity);
+                realDur = Math.min(dur, 300);
+            }
+            this.sbTrns.progressEnd(shouldComplete, stepValue, realDur);
+        }
+    };
+    Nav.prototype.render = function () {
+        return [
+            this.mode === 'ios' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "nav-decor" }),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)
+        ];
+    };
+    Object.defineProperty(Nav, "is", {
+        get: function () { return "ion-nav"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Nav, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Nav, "properties", {
+        get: function () {
+            return {
+                "animated": {
+                    "type": Boolean,
+                    "attr": "animated"
+                },
+                "animationCtrl": {
+                    "connect": "ion-animation-controller"
+                },
+                "canGoBack": {
+                    "method": true
+                },
+                "config": {
+                    "context": "config"
+                },
+                "delegate": {
+                    "type": "Any",
+                    "attr": "delegate"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "getActive": {
+                    "method": true
+                },
+                "getByIndex": {
+                    "method": true
+                },
+                "getPrevious": {
+                    "method": true
+                },
+                "getRouteId": {
+                    "method": true
+                },
+                "insert": {
+                    "method": true
+                },
+                "insertPages": {
+                    "method": true
+                },
+                "pop": {
+                    "method": true
+                },
+                "popTo": {
+                    "method": true
+                },
+                "popToRoot": {
+                    "method": true
+                },
+                "push": {
+                    "method": true
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "removeIndex": {
+                    "method": true
+                },
+                "root": {
+                    "type": String,
+                    "attr": "root",
+                    "watchCallbacks": ["rootChanged"]
+                },
+                "rootParams": {
+                    "type": "Any",
+                    "attr": "root-params"
+                },
+                "setPages": {
+                    "method": true
+                },
+                "setRoot": {
+                    "method": true
+                },
+                "setRouteId": {
+                    "method": true
+                },
+                "swipeGesture": {
+                    "type": Boolean,
+                    "attr": "swipe-gesture",
+                    "mutable": true,
+                    "watchCallbacks": ["swipeGestureChanged"]
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Nav, "events", {
+        get: function () {
+            return [{
+                    "name": "ionNavWillLoad",
+                    "method": "ionNavWillLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionNavWillChange",
+                    "method": "ionNavWillChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionNavDidChange",
+                    "method": "ionNavDidChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Nav, "style", {
+        get: function () { return ":host{left:0;right:0;top:0;bottom:0;position:absolute;contain:layout size style;overflow:hidden;z-index:0}.nav-decor{display:none}:host(.show-decor) .nav-decor{left:0;right:0;top:0;bottom:0;display:block;position:absolute;background:#000;z-index:0;pointer-events:none}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Nav;
+}());
+var NavPop = /** @class */ (function () {
+    function NavPop() {
+    }
+    NavPop.prototype.pop = function () {
+        var nav = this.el.closest('ion-nav');
+        if (nav) {
+            nav.pop({ skipIfBusy: true });
+        }
+    };
+    Object.defineProperty(NavPop, "is", {
+        get: function () { return "ion-nav-pop"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavPop, "properties", {
+        get: function () {
+            return {
+                "el": {
+                    "elementRef": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavPop, "listeners", {
+        get: function () {
+            return [{
+                    "name": "child:click",
+                    "method": "pop"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return NavPop;
+}());
+var NavPush = /** @class */ (function () {
+    function NavPush() {
+    }
+    NavPush.prototype.push = function () {
+        var nav = this.el.closest('ion-nav');
+        var toPush = this.component;
+        if (nav && toPush !== undefined) {
+            nav.push(toPush, this.componentProps, { skipIfBusy: true });
+        }
+    };
+    Object.defineProperty(NavPush, "is", {
+        get: function () { return "ion-nav-push"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavPush, "properties", {
+        get: function () {
+            return {
+                "component": {
+                    "type": String,
+                    "attr": "component"
+                },
+                "componentProps": {
+                    "type": "Any",
+                    "attr": "component-props"
+                },
+                "el": {
+                    "elementRef": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavPush, "listeners", {
+        get: function () {
+            return [{
+                    "name": "child:click",
+                    "method": "push"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return NavPush;
+}());
+var NavSetRoot = /** @class */ (function () {
+    function NavSetRoot() {
+    }
+    NavSetRoot.prototype.push = function () {
+        var nav = this.el.closest('ion-nav');
+        var toPush = this.component;
+        if (nav && toPush !== undefined) {
+            nav.setRoot(toPush, this.componentProps, { skipIfBusy: true });
+        }
+    };
+    Object.defineProperty(NavSetRoot, "is", {
+        get: function () { return "ion-nav-set-root"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavSetRoot, "properties", {
+        get: function () {
+            return {
+                "component": {
+                    "type": String,
+                    "attr": "component"
+                },
+                "componentProps": {
+                    "type": "Any",
+                    "attr": "component-props"
+                },
+                "el": {
+                    "elementRef": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NavSetRoot, "listeners", {
+        get: function () {
+            return [{
+                    "name": "child:click",
+                    "method": "push"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return NavSetRoot;
+}());
+
+
 
 /***/ })
 

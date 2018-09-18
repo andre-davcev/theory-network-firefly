@@ -1,23 +1,194 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[121],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pny5jgxt.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pny5jgxt.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonSegment, IonSegmentButton */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/umpoq86q.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/umpoq86q.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonChip, IonChipButton, IonChipIcon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSegment", function() { return Segment; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSegmentButton", function() { return SegmentButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonChip", function() { return Chip; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonChipButton", function() { return ChipButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonChipIcon", function() { return ChipIcon; });
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var Segment=function(){function e(){this.disabled=!1}return e.prototype.valueChanged=function(e){this.updateButtons(),this.ionChange.emit({value:e})},e.prototype.segmentClick=function(e){var t=e.target;this.value=t.value},e.prototype.componentDidLoad=function(){if(null==this.value){var e=this.getButtons().find(function(e){return e.checked});e&&(this.value=e.value)}this.updateButtons()},e.prototype.updateButtons=function(){for(var e=this.value,t=0,n=this.getButtons();t<n.length;t++){var o=n[t];o.checked=o.value===e}},e.prototype.getButtons=function(){return Array.from(this.el.querySelectorAll("ion-segment-button"))},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["k"])(this.color),{"segment-disabled":this.disabled,"in-toolbar":Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["n"])("ion-toolbar",this.el),"in-color-toolbar":Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["n"])("ion-toolbar.ion-color",this.el)})}},e.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(e,"is",{get:function(){return"ion-segment"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{color:{type:String,attr:"color"},disabled:{type:Boolean,attr:"disabled"},el:{elementRef:!0},mode:{type:String,attr:"mode"},value:{type:String,attr:"value",mutable:!0,watchCallbacks:["valueChanged"]}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionChange",method:"ionChange",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionSelect",method:"segmentClick"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-segment-ios-h{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;font-family:var(--ion-font-family,inherit);text-align:center;--background:transparent;--background-checked:var(--ion-color-primary, #3880ff);--border-color:currentColor;--border-color-checked:var(--ion-color-primary, #3880ff);--border-color-disabled:var(--ion-color-primary, #3880ff);--color:var(--ion-color-primary, #3880ff);--color-checked:var(--ion-color-primary-contrast, #fff);--color-disabled:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.3)}.segment-disabled.sc-ion-segment-ios-h{pointer-events:none;opacity:.4}.sc-ion-segment-ios-s > ion-segment-button{--color:inherit;--background:inherit;--border-color:inherit;--border-radius:4px;--border-width:1px;--border-style:solid;--transition:100ms all linear;--icon-size:26px;height:32px;font-size:13px;line-height:37px}.sc-ion-segment-ios-h.ion-color .sc-ion-segment-ios-s > ion-segment-button{--color:var(--ion-color-base)}.sc-ion-segment-ios-s > .segment-button-checked{--color:var(--color-checked);--background:var(--background-checked);--border-color:var(--border-color-checked)}.sc-ion-segment-ios-h.ion-color .sc-ion-segment-ios-s > .segment-button-checked{--background:var(--ion-color-base);--border-color:var(--ion-color-base);--color:var(--ion-color-contrast)}.sc-ion-segment-ios-s > .segment-button-disabled{pointer-events:none;--border-color:var(--border-color-disabled);--color:var(--color-disabled)}.sc-ion-segment-ios-h.ion-color .sc-ion-segment-ios-s > .segment-button-disabled{--border-color:var(--ion-color-base);--color:rgba(var(--ion-color-base-rgb), 0.5)}.in-toolbar.sc-ion-segment-ios-h{left:0;right:0;top:0;bottom:0;position:absolute}.sc-ion-segment-ios-h.in-toolbar .sc-ion-segment-ios-s > ion-segment-button{max-width:100px;height:30px;font-size:12px;line-height:22px}.in-color-toolbar.sc-ion-segment-ios-h:not(.ion-color){--color:var(--ion-color-contrast);--color-checked:var(--ion-color-base);--color-disabled:rgba(var(--ion-color-contrast-rgb), 0.3);--background-checked:var(--ion-color-contrast);--border-color-checked:var(--ion-color-contrast);--border-color-disabled:var(--ion-color-contrast)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),ids=0,SegmentButton=function(){function e(){this.checked=!1,this.disabled=!1,this.value="ion-sb-"+ids++}return e.prototype.checkedChanged=function(e,t){e&&!t&&this.ionSelect.emit()},e.prototype.hostData=function(){var e=this.disabled,t=this.checked,n=this.color;return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["k"])(n),{"segment-button-disabled":e,"segment-button-checked":t}),"ion-activable":!0}},e.prototype.render=function(){var e=this;return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button",{type:"button","aria-pressed":this.checked?"true":null,class:"segment-button-native",disabled:this.disabled,onClick:function(){return e.checked=!0}},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null),"md"===this.mode&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect",null))]},Object.defineProperty(e,"is",{get:function(){return"ion-segment-button"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{checked:{type:Boolean,attr:"checked",mutable:!0,watchCallbacks:["checkedChanged"]},color:{type:String,attr:"color"},disabled:{type:Boolean,attr:"disabled"},el:{elementRef:!0},mode:{type:String,attr:"mode"},value:{type:String,attr:"value"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionSelect",method:"ionSelect",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-segment-button-h{--padding-start:0;--padding-end:0;--padding-top:0;--padding-bottom:0;--icon-size:1em;-webkit-box-flex:1;-ms-flex:1;flex:1;color:var(--color);text-decoration:none;text-overflow:ellipsis;white-space:nowrap;-webkit-font-kerning:none;font-kerning:none}.sc-ion-segment-button-h:first-of-type   .segment-button-native.sc-ion-segment-button{--padding-end:0;border-top-left-radius:var(--border-radius);border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:var(--border-radius)}.sc-ion-segment-button-h:not(:first-of-type)   .segment-button-native.sc-ion-segment-button{border-left-width:0}.sc-ion-segment-button-h:last-of-type   .segment-button-native.sc-ion-segment-button{--padding-start:0;border-top-left-radius:0;border-top-right-radius:var(--border-radius);border-bottom-right-radius:var(--border-radius);border-bottom-left-radius:0}.segment-button-native.sc-ion-segment-button{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:block;position:relative;width:100%;height:100%;-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);color:inherit;contain:content;cursor:pointer;overflow:hidden}.segment-button-native.sc-ion-segment-button:active, .segment-button-native.sc-ion-segment-button:focus{outline:0}.sc-ion-segment-button-s > ion-icon{font-size:var(--icon-size)}"},enumerable:!0,configurable:!0}),e}();
+
+
+var Chip = /** @class */ (function () {
+    function Chip() {
+    }
+    Chip.prototype.hostData = function () {
+        return {
+            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color),
+        };
+    };
+    Object.defineProperty(Chip, "is", {
+        get: function () { return "ion-chip"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Chip, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Chip, "properties", {
+        get: function () {
+            return {
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Chip, "style", {
+        get: function () { return ".sc-ion-chip-md-h{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-item-align:center;align-self:center;background:var(--background);color:var(--color);font-family:var(--ion-font-family,inherit);font-weight:400;vertical-align:middle;-webkit-box-sizing:border-box;box-sizing:border-box;--background:rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);--color:var(--ion-text-color-step-150, #262626);--label-margin-top:0;--label-margin-end:10px;--label-margin-bottom:0;--label-margin-start:10px;--avatar-width:24px;--avatar-height:24px;--avatar-margin-top:0;--avatar-margin-end:4px;--avatar-margin-bottom:0;--avatar-margin-start:4px;border-radius:16px;margin:2px 0;height:32px;font-size:13px}.ion-color.sc-ion-chip-md-h{background:var(--ion-color-base);color:var(--ion-color-contrast)}.sc-ion-chip-md-h.ion-color.sc-ion-chip-md-s  ion-chip-button , .sc-ion-chip-md-h.ion-color.sc-ion-chip-md-s  ion-chip-icon {--color:currentColor}.sc-ion-chip-md-s  ion-label {margin:var(--label-margin-top) var(--label-margin-end) var(--label-margin-bottom) var(--label-margin-start)}.sc-ion-chip-md-s  ion-avatar {margin:var(--avatar-margin-top) var(--avatar-margin-end) var(--avatar-margin-bottom) var(--avatar-margin-start);width:var(--avatar-width);height:var(--avatar-height)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Chip, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Chip;
+}());
+var ChipButton = /** @class */ (function () {
+    function ChipButton() {
+        this.disabled = false;
+        this.fill = 'clear';
+    }
+    ChipButton.prototype.hostData = function () {
+        var _a;
+        return {
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color), (_a = {}, _a["chip-button-" + this.fill] = true, _a))
+        };
+    };
+    ChipButton.prototype.render = function () {
+        var TagType = this.href === undefined ? 'button' : 'a';
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, { type: "button", class: "chip-button-native", disabled: this.disabled, href: this.href }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "chip-button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null)));
+    };
+    Object.defineProperty(ChipButton, "is", {
+        get: function () { return "ion-chip-button"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ChipButton, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ChipButton, "properties", {
+        get: function () {
+            return {
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "fill": {
+                    "type": String,
+                    "attr": "fill"
+                },
+                "href": {
+                    "type": String,
+                    "attr": "href"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ChipButton, "style", {
+        get: function () { return ":host{--border-radius:50%;--margin-top:0;--margin-end:0;--margin-bottom:0;--margin-start:0;--width:32px;--height:100%;width:var(--width);height:var(--height);font-size:32px}:host(.chip-button-clear){--background:transparent;--color:var(--ion-text-color-step-400, #666666)}:host(.chip-button-solid){--background:var(--ion-color-primary, #3880ff);--color:var(--ion-color-primary-contrast, #fff)}:host(.chip-button-solid.ion-color) .chip-button-native{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.chip-button-clear.ion-color) .chip-button-native{background:0 0;color:var(--ion-color-base)}.chip-button-native{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;border-radius:var(--border-radius);margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);position:relative;width:var(--width);height:var(--height);border:0;outline:0;background:var(--background);color:var(--color);-webkit-appearance:none;-moz-appearance:none;appearance:none}.chip-button-inner{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return ChipButton;
+}());
+var ChipIcon = /** @class */ (function () {
+    function ChipIcon() {
+        this.fill = 'clear';
+    }
+    ChipIcon.prototype.hostData = function () {
+        var _a;
+        return {
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color), (_a = {}, _a["chip-icon-" + this.fill] = true, _a))
+        };
+    };
+    ChipIcon.prototype.render = function () {
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { name: this.name, src: this.src, mode: this.mode });
+    };
+    Object.defineProperty(ChipIcon, "is", {
+        get: function () { return "ion-chip-icon"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ChipIcon, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ChipIcon, "properties", {
+        get: function () {
+            return {
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "fill": {
+                    "type": String,
+                    "attr": "fill"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "name": {
+                    "type": String,
+                    "attr": "name"
+                },
+                "src": {
+                    "type": String,
+                    "attr": "src"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ChipIcon, "style", {
+        get: function () { return ":host{border-radius:50%;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:var(--width,32px);height:var(--height,32px);background:var(--background);color:var(--color);font-size:18px}:host(.chip-icon-clear){--background:transparent;--color:var(--ion-text-color-step-400, #666666)}:host(.chip-icon-solid){--background:var(--ion-color-primary, #3880ff);--color:var(--ion-color-primary-contrast, #fff)}:host(.chip-icon-solid.ion-color){background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.chip-icon-clear.ion-color){background:0 0;color:var(--ion-color-base)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return ChipIcon;
+}());
+
+
 
 /***/ })
 

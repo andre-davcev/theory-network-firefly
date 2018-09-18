@@ -1,24 +1,196 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[30],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8hc0amys.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8hc0amys.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonButton, IonIcon */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7l6puety.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7l6puety.sc.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonSplitPane */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonButton", function() { return Button; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonIcon", function() { return Icon; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-276e047f.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-276e047f.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
-/*!
- * (C) Ionic http://ionicframework.com - MIT License
- * Built with http://stenciljs.com
- */
-var Button=function(){function t(){this.keyFocus=!1,this.buttonType="button",this.disabled=!1,this.strong=!1,this.type="button"}return t.prototype.componentWillLoad=function(){void 0===this.fill&&(this.fill=this.el.closest("ion-buttons")?"clear":"solid")},t.prototype.onFocus=function(){this.ionFocus.emit()},t.prototype.onKeyUp=function(){this.keyFocus=!0},t.prototype.onBlur=function(){this.keyFocus=!1,this.ionBlur.emit()},t.prototype.onClick=function(t){if("button"===this.type)return Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["l"])(this.win,this.href,t,this.routerDirection);if(Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["c"])(this.el)){var e=this.el.closest("form");if(e){t.preventDefault(),t.stopPropagation();var o=document.createElement("button");o.type=this.type,o.style.display="none",e.appendChild(o),o.click(),o.remove()}}return Promise.resolve(!1)},t.prototype.hostData=function(){var t=this,e=t.buttonType,o=t.color,n=t.expand,i=t.fill,r=t.mode,s=t.shape,a=t.size,l=t.strong;return{class:Object.assign({},getButtonClassMap(e,r),getButtonTypeClassMap(e,n,r),getButtonTypeClassMap(e,a,r),getButtonTypeClassMap(e,s,r),getButtonTypeClassMap(e,l?"strong":void 0,r),getColorClassMap(e,o,i,r),{focused:this.keyFocus}),"ion-activable":!0}},t.prototype.render=function(){var t=void 0===this.href?"button":"a",e="button"===t?{type:this.type}:{href:this.href};return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(t,Object.assign({},e,{class:"button-native",disabled:this.disabled,onFocus:this.onFocus.bind(this),onKeyUp:this.onKeyUp.bind(this),onBlur:this.onBlur.bind(this),onClick:this.onClick.bind(this)}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span",{class:"button-inner"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",{name:"icon-only"}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",{name:"start"}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",{name:"end"})),"md"===this.mode&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect",null))},Object.defineProperty(t,"is",{get:function(){return"ion-button"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{buttonType:{type:String,attr:"button-type",mutable:!0},color:{type:String,attr:"color"},disabled:{type:Boolean,attr:"disabled",reflectToAttr:!0},el:{elementRef:!0},expand:{type:String,attr:"expand",reflectToAttr:!0},fill:{type:String,attr:"fill",reflectToAttr:!0,mutable:!0},href:{type:String,attr:"href"},keyFocus:{state:!0},mode:{type:String,attr:"mode"},routerDirection:{type:String,attr:"router-direction"},shape:{type:String,attr:"shape",reflectToAttr:!0},size:{type:String,attr:"size",reflectToAttr:!0},strong:{type:Boolean,attr:"strong"},type:{type:String,attr:"type"},win:{context:"window"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"events",{get:function(){return[{name:"ionFocus",method:"ionFocus",bubbles:!0,cancelable:!0,composed:!0},{name:"ionBlur",method:"ionBlur",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-button-ios-h{--overflow:hidden;--ripple-color:currentColor;display:inline-block;font-family:var(--ion-font-family,inherit);text-align:center;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:top;vertical-align:-webkit-baseline-middle;-webkit-font-kerning:none;font-kerning:none}[disabled].sc-ion-button-ios-h{pointer-events:none}.button-solid.sc-ion-button-ios-h{--background:var(--ion-color-primary, #3880ff);--background-activated:var(--ion-color-primary-shade, #3171e0);--background-focused:var(--ion-color-primary-shade, #3171e0);--color:var(--ion-color-primary-contrast, #fff);--color-activated:var(--ion-color-primary-contrast, #fff);--color-focused:var(--ion-color-primary-contrast, #fff)}.button-solid.ion-color.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{background:var(--ion-color-base);color:var(--ion-color-contrast)}.button-solid.ion-color.activated.sc-ion-button-ios-h   .button-native.sc-ion-button-ios, .button-solid.ion-color.focused.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{background:var(--ion-color-shade)}.button-outline.sc-ion-button-ios-h{--border-color:var(--ion-color-primary, #3880ff);--background:transparent;--color:var(--ion-color-primary, #3880ff);--color-focused:var(--ion-color-primary, #3880ff);--border-radius:12px;--border-width:1px;--border-style:solid;--background-activated:var(--ion-color-primary, #3880ff);--background-focused:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.1);--color-activated:var(--ion-color-primary-contrast, #fff)}.button-outline.ion-color.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{border-color:var(--ion-color-base);background:0 0;color:var(--ion-color-base)}.button-outline.focused.ion-color.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{background:rgba(var(--ion-color-base-rgb),.1);color:var(--ion-color-base)}.button-clear.sc-ion-button-ios-h{--border-width:0;--background:transparent;--color:var(--ion-color-primary, #3880ff);--background-activated:transparent;--background-focused:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.1);--color-activated:var(--ion-color-primary, #3880ff);--color-focused:var(--ion-color-primary, #3880ff)}.button-clear.ion-color.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{background:0 0;color:var(--ion-color-base)}.button-clear.focused.ion-color.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{background:rgba(var(--ion-color-base-rgb),.1);color:var(--ion-color-base)}.button-clear.activated.ion-color.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{background:0 0}.button-block.sc-ion-button-ios-h{display:block}.button-block.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{margin-left:0;margin-right:0;display:block;width:100%;clear:both;contain:strict}.button-block.sc-ion-button-ios-h   .button-native.sc-ion-button-ios::after{clear:both}.button-full.sc-ion-button-ios-h{display:block}.button-full.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{margin-left:0;margin-right:0;display:block;width:100%;contain:strict}.button-full.sc-ion-button-ios-h:not(.button-round)   .button-native.sc-ion-button-ios{border-radius:0;border-right-width:0;border-left-width:0}.button-native.sc-ion-button-ios{border-radius:var(--border-radius);-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:block;position:relative;width:var(--width);height:var(--height);-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);outline:0;background:var(--background);color:var(--color);line-height:1;-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);contain:content;cursor:pointer;opacity:var(--opacity);overflow:var(--overflow);z-index:0;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none}.button-native[disabled].sc-ion-button-ios{cursor:default;opacity:.5;pointer-events:none}.focused.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{background:var(--background-focused);color:var(--color-focused)}.activated.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{background:var(--background-activated);color:var(--color-activated)}.button-inner.sc-ion-button-ios{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.sc-ion-button-ios-s > ion-icon{font-size:1.4em;pointer-events:none}.sc-ion-button-ios-s > ion-icon[slot=start]{margin:0 .3em 0 -.3em}.sc-ion-button-ios-s > ion-icon[slot=end]{margin:0 -.2em 0 .3em}.sc-ion-button-ios-s > ion-icon[slot=icon-only]{font-size:1.8em}ion-ripple-effect.sc-ion-button-ios{color:var(--ripple-color)}.sc-ion-button-ios-h{--border-radius:12px;--margin-top:4px;--margin-bottom:4px;--margin-start:2px;--margin-end:2px;--padding-top:0;--padding-bottom:0;--padding-start:1em;--padding-end:1em;--height:2.8em;--transition:background-color,opacity 100ms linear;font-size:16px;font-weight:500;letter-spacing:-.03em}.button-solid.sc-ion-button-ios-h:hover{--opacity:0.8}.button-solid.activated.sc-ion-button-ios-h{--opacity:1}.button-outline.activated.ion-color.sc-ion-button-ios-h   .button-native.sc-ion-button-ios{background:var(--ion-color-base);color:var(--ion-color-contrast)}.button-clear.sc-ion-button-ios-h:hover{--opacity:0.6}.button-clear.activated.sc-ion-button-ios-h{--opacity:0.4}.button-round.sc-ion-button-ios-h{--border-radius:64px;--padding-top:0;--padding-start:26px;--padding-end:26px;--padding-bottom:0}.button-large.sc-ion-button-ios-h{--border-radius:14px;--padding-top:0;--padding-start:1em;--padding-end:1em;--padding-bottom:0;--height:2.8em;font-size:20px}.button-small.sc-ion-button-ios-h{--border-radius:8px;--padding-top:0;--padding-start:0.9em;--padding-end:0.9em;--padding-bottom:0;--height:2.1em;font-size:13px}.button-strong.sc-ion-button-ios-h{font-weight:600}"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),t}();function getButtonClassMap(t,e){var o;return void 0===t?{}:((o={})[t]=!0,o[t+"-"+e]=!0,o)}function getButtonTypeClassMap(t,e,o){var n;return void 0===e?{}:((n={})[t+"-"+e]=!0,n[t+"-"+e+"-"+o]=!0,n)}function getColorClassMap(t,e,o,n){var i,r=t;void 0!==o&&(r+="-"+o.toLowerCase());var s=((i={})[r]=!0,i[r+"-"+n]=!0,i);return void 0!==e&&(s["ion-color"]=!0,s["ion-color-"+e]=!0),s}var Icon=function(){function t(){this.isVisible=!1,this.lazy=!1}return t.prototype.componentWillLoad=function(){var t=this;this.waitUntilVisible(this.el,"50px",function(){t.isVisible=!0,t.loadIcon()})},t.prototype.componentDidUnload=function(){this.io&&(this.io.disconnect(),this.io=void 0)},t.prototype.waitUntilVisible=function(t,e,o){var n=this;if(this.lazy&&this.win&&this.win.IntersectionObserver){var i=this.io=new this.win.IntersectionObserver(function(t){t[0].isIntersecting&&(i.disconnect(),n.io=void 0,o())},{rootMargin:e});i.observe(t)}else o()},t.prototype.loadIcon=function(){var t=this;if(!this.isServer&&this.isVisible){var e=this.getUrl();e&&getSvgContent(e).then(function(e){t.svgContent=validateContent(t.doc,e,t.el["s-sc"])})}if(!this.ariaLabel){var o=getName(this.name,this.mode,this.ios,this.md);o&&(this.ariaLabel=o.replace("ios-","").replace("md-","").replace(/\-/g," "))}},t.prototype.getUrl=function(){var t=getSrc(this.src);return t||((t=getName(this.name,this.mode,this.ios,this.md))?this.getNamedUrl(t):(t=getSrc(this.icon))?t:(t=getName(this.icon,this.mode,this.ios,this.md))?this.getNamedUrl(t):null)},t.prototype.getNamedUrl=function(t){return this.resourcesUrl+"svg/"+t+".svg"},t.prototype.hostData=function(){var t;return{role:"img",class:Object.assign({},createColorClasses(this.color),(t={},t["icon-"+this.size]=!!this.size,t))}},t.prototype.render=function(){return!this.isServer&&this.svgContent?Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"icon-inner",innerHTML:this.svgContent}):Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"icon-inner"})},Object.defineProperty(t,"is",{get:function(){return"ion-icon"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{ariaLabel:{type:String,attr:"aria-label",reflectToAttr:!0,mutable:!0},color:{type:String,attr:"color"},doc:{context:"document"},el:{elementRef:!0},icon:{type:String,attr:"icon",watchCallbacks:["loadIcon"]},ios:{type:String,attr:"ios"},isServer:{context:"isServer"},isVisible:{state:!0},lazy:{type:Boolean,attr:"lazy"},md:{type:String,attr:"md"},mode:{type:String,attr:"mode"},name:{type:String,attr:"name",watchCallbacks:["loadIcon"]},resourcesUrl:{context:"resourcesUrl"},size:{type:String,attr:"size"},src:{type:String,attr:"src",watchCallbacks:["loadIcon"]},svgContent:{state:!0},win:{context:"window"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-icon-h{display:inline-block;width:1em;height:1em;contain:strict;-webkit-box-sizing:content-box!important;box-sizing:content-box!important}.ion-color.sc-ion-icon-h{color:var(--ion-color-base)!important}.icon-small.sc-ion-icon-h{font-size:var(--ion-icon-size-small,18px)!important}.icon-large.sc-ion-icon-h{font-size:var(--ion-icon-size-large,32px)!important}.icon-inner.sc-ion-icon, svg.sc-ion-icon{display:block;height:100%;width:100%}svg.sc-ion-icon{fill:currentColor;stroke:currentColor}.ion-color-primary.sc-ion-icon-h{--ion-color-base:var(--ion-color-primary, #3880ff)}.ion-color-secondary.sc-ion-icon-h{--ion-color-base:var(--ion-color-secondary, #0cd1e8)}.ion-color-tertiary.sc-ion-icon-h{--ion-color-base:var(--ion-color-tertiary, #f4a942)}.ion-color-success.sc-ion-icon-h{--ion-color-base:var(--ion-color-success, #10dc60)}.ion-color-warning.sc-ion-icon-h{--ion-color-base:var(--ion-color-warning, #ffce00)}.ion-color-danger.sc-ion-icon-h{--ion-color-base:var(--ion-color-danger, #f14141)}.ion-color-light.sc-ion-icon-h{--ion-color-base:var(--ion-color-light, #f4f5f8)}.ion-color-medium.sc-ion-icon-h{--ion-color-base:var(--ion-color-medium, #989aa2)}.ion-color-dark.sc-ion-icon-h{--ion-color-base:var(--ion-color-dark, #222428)}"},enumerable:!0,configurable:!0}),t}(),requests=new Map;function getSvgContent(t){var e=requests.get(t);return e||(e=fetch(t,{cache:"force-cache"}).then(function(t){return t.ok?t.text():Promise.resolve(null)}),requests.set(t,e)),e}function getName(t,e,o,n){return e=(e||"md").toLowerCase(),o&&"ios"===e?t=o.toLowerCase():n&&"md"===e?t=n.toLowerCase():t&&(t=t.toLowerCase(),/^md-|^ios-|^logo-/.test(t)||(t=e+"-"+t)),"string"!=typeof t||""===t.trim()?null:""!==t.replace(/[a-z]|-|\d/gi,"")?null:t}function getSrc(t){return"string"==typeof t&&(t=t.trim()).length>0&&/(\/|\.)/.test(t)?t:null}function validateContent(t,e,o){if(e){var n=t.createDocumentFragment(),i=t.createElement("div");i.innerHTML=e,n.appendChild(i);for(var r=i.childNodes.length-1;r>=0;r--)"svg"!==i.childNodes[r].nodeName.toLowerCase()&&i.removeChild(i.childNodes[r]);var s=i.firstElementChild;if(s&&"svg"===s.nodeName.toLowerCase()&&(o&&s.setAttribute("class",o),isValid(s)))return i.innerHTML}return""}function isValid(t){if(1===t.nodeType){if("script"===t.nodeName.toLowerCase())return!1;for(var e=0;e<t.attributes.length;e++){var o=t.attributes[e].value;if("string"==typeof o&&0===o.toLowerCase().indexOf("on"))return!1}for(e=0;e<t.childNodes.length;e++)if(!isValid(t.childNodes[e]))return!1}return!0}function createColorClasses(t){var e;return t?((e={"ion-color":!0})["ion-color-"+t]=!0,e):null}
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSplitPane", function() { return SplitPane; });
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
+var SPLIT_PANE_MAIN = 'split-pane-main';
+var SPLIT_PANE_SIDE = 'split-pane-side';
+var QUERY = {
+    'xs': '(min-width: 0px)',
+    'sm': '(min-width: 576px)',
+    'md': '(min-width: 768px)',
+    'lg': '(min-width: 992px)',
+    'xl': '(min-width: 1200px)',
+    'never': ''
+};
+var SplitPane = /** @class */ (function () {
+    function SplitPane() {
+        this.visible = false;
+        this.disabled = false;
+        this.when = QUERY['md'];
+    }
+    SplitPane.prototype.visibleChanged = function (visible) {
+        var detail = { visible: visible, isPane: this.isPane.bind(this) };
+        this.ionChange.emit(detail);
+        this.ionSplitPaneVisible.emit(detail);
+    };
+    SplitPane.prototype.componentDidLoad = function () {
+        this.styleChildren();
+        this.updateState();
+    };
+    SplitPane.prototype.componentDidUnload = function () {
+        if (this.rmL) {
+            this.rmL();
+            this.rmL = undefined;
+        }
+    };
+    SplitPane.prototype.updateState = function () {
+        var _this = this;
+        if (this.isServer) {
+            return;
+        }
+        if (this.rmL) {
+            this.rmL();
+            this.rmL = undefined;
+        }
+        if (this.disabled) {
+            this.visible = false;
+            return;
+        }
+        var query = this.when;
+        if (typeof query === 'boolean') {
+            this.visible = query;
+            return;
+        }
+        var mediaQuery = QUERY[query] || query;
+        if (mediaQuery.length === 0) {
+            this.visible = false;
+            return;
+        }
+        var callback = function (q) { return _this.visible = q.matches; };
+        var mediaList = this.win.matchMedia(mediaQuery);
+        mediaList.addListener(callback);
+        this.rmL = function () { return mediaList.removeListener(callback); };
+        this.visible = mediaList.matches;
+    };
+    SplitPane.prototype.isPane = function (element) {
+        if (!this.visible) {
+            return false;
+        }
+        return element.parentElement === this.el
+            && element.classList.contains(SPLIT_PANE_SIDE);
+    };
+    SplitPane.prototype.styleChildren = function () {
+        if (this.isServer) {
+            return;
+        }
+        var children = this.el.children;
+        var nu = this.el.childElementCount;
+        var foundMain = false;
+        for (var i = 0; i < nu; i++) {
+            var child = children[i];
+            var isMain = child.hasAttribute('main');
+            if (isMain) {
+                if (foundMain) {
+                    console.warn('split pane can not have more than one main node');
+                    return;
+                }
+                foundMain = true;
+            }
+            setPaneClass(child, isMain);
+        }
+        if (!foundMain) {
+            console.warn('split pane could not found any main node');
+        }
+    };
+    SplitPane.prototype.hostData = function () {
+        return {
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_0__["g"])(this.mode, 'split-pane'), { 'split-pane-visible': this.visible })
+        };
+    };
+    Object.defineProperty(SplitPane, "is", {
+        get: function () { return "ion-split-pane"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SplitPane, "properties", {
+        get: function () {
+            return {
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["updateState"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "isServer": {
+                    "context": "isServer"
+                },
+                "visible": {
+                    "state": true,
+                    "watchCallbacks": ["visibleChanged"]
+                },
+                "when": {
+                    "type": "Any",
+                    "attr": "when",
+                    "watchCallbacks": ["updateState"]
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SplitPane, "events", {
+        get: function () {
+            return [{
+                    "name": "ionChange",
+                    "method": "ionChange",
+                    "bubbles": false,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionSplitPaneVisible",
+                    "method": "ionSplitPaneVisible",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SplitPane, "style", {
+        get: function () { return ".split-pane{left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:nowrap;flex-wrap:nowrap;contain:strict}.split-pane-visible>.split-pane-main,.split-pane-visible>.split-pane-side{left:0;right:0;top:0;bottom:0;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-shadow:none!important;box-shadow:none!important;z-index:0}.split-pane-visible>.split-pane-side:not(ion-menu),.split-pane-visible>ion-menu.split-pane-side.menu-enabled{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-negative:0;flex-shrink:0}.split-pane-side:not(ion-menu){display:none}.split-pane-visible>.split-pane-side{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.split-pane-visible>.split-pane-side[side=end]{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}.split-pane-ios{--border:0.55px solid var(--ion-item-border-color, #c8c7cc)}.split-pane-ios.split-pane-visible>.split-pane-side{min-width:270px;max-width:28%;border-right:var(--border);border-left:0}.split-pane-ios.split-pane-visible>.split-pane-side[side=end]{min-width:270px;max-width:28%;border-right:0;border-left:var(--border)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SplitPane, "styleMode", {
+        get: function () { return "ios"; },
+        enumerable: true,
+        configurable: true
+    });
+    return SplitPane;
+}());
+function setPaneClass(el, isMain) {
+    var toAdd;
+    var toRemove;
+    if (isMain) {
+        toAdd = SPLIT_PANE_MAIN;
+        toRemove = SPLIT_PANE_SIDE;
+    }
+    else {
+        toAdd = SPLIT_PANE_SIDE;
+        toRemove = SPLIT_PANE_MAIN;
+    }
+    var classList = el.classList;
+    classList.add(toAdd);
+    classList.remove(toRemove);
+}
+
+
 
 /***/ })
 

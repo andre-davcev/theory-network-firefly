@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { switchMap, take, filter, map } from 'rxjs/operators';
-import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import { Cluster } from '../models/cluster.model';
 
@@ -42,7 +41,7 @@ export class ServiceCluster
         cluster.id = id;
         const document: AngularFirestoreDocument<Cluster> = this.clustersCollection.doc(id) as AngularFirestoreDocument<Cluster>;
 
-        return fromPromise(document.set(cluster)).pipe
+        return from(document.set(cluster)).pipe
         (
             switchMap(() => document.valueChanges()),
 

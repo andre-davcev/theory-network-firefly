@@ -1,28 +1,1140 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[49],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dcyhuhsu.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dcyhuhsu.js ***!
-  \********************************************************************************************************************************/
-/*! exports provided: IonDatetime, IonPicker, IonPickerColumn, IonPickerController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dotnjsqs.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dotnjsqs.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonRoute, IonRouteRedirect, IonRouter, IonRouterOutlet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonDatetime", function() { return Datetime; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPicker", function() { return Picker; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPickerColumn", function() { return PickerColumnCmp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPickerController", function() { return PickerController; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-276e047f.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-276e047f.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
-/* harmony import */ var _chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-ca273e40.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-ca273e40.js");
-/* harmony import */ var _chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-5f438245.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-5f438245.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRoute", function() { return Route; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRouteRedirect", function() { return RouteRedirect; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRouter", function() { return Router; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRouterOutlet", function() { return RouterOutlet; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
+/* harmony import */ var _chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-5f438245.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-5f438245.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,i,n){return new(i||(i=Promise))(function(r,o){function a(e){try{l(n.next(e))}catch(e){o(e)}}function s(e){try{l(n.throw(e))}catch(e){o(e)}}function l(e){e.done?r(e.value):new i(function(t){t(e.value)}).then(a,s)}l((n=n.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var i,n,r,o,a={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return o={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(o[Symbol.iterator]=function(){return this}),o;function s(o){return function(s){return function(o){if(i)throw new TypeError("Generator is already executing.");for(;a;)try{if(i=1,n&&(r=2&o[0]?n.return:o[0]?n.throw||((r=n.return)&&r.call(n),0):n.next)&&!(r=r.call(n,o[1])).done)return r;switch(n=0,r&&(o=[2&o[0],r.value]),o[0]){case 0:case 1:r=o;break;case 4:return a.label++,{value:o[1],done:!1};case 5:a.label++,n=o[1],o=[0];continue;case 7:o=a.ops.pop(),a.trys.pop();continue;default:if(!(r=(r=a.trys).length>0&&r[r.length-1])&&(6===o[0]||2===o[0])){a=0;continue}if(3===o[0]&&(!r||o[1]>r[0]&&o[1]<r[3])){a.label=o[1];break}if(6===o[0]&&a.label<r[1]){a.label=r[1],r=o;break}if(r&&a.label<r[2]){a.label=r[2],a.ops.push(o);break}r[2]&&a.ops.pop(),a.trys.pop();continue}o=t.call(e,a)}catch(e){o=[6,e],n=0}finally{i=r=0}if(5&o[0])throw o[1];return{value:o[0]?o[1]:void 0,done:!0}}([o,s])}}};function renderDatetime(e,t,i){if(void 0!==t){var n=[],r=!1;if(FORMAT_KEYS.forEach(function(o,a){if(e.indexOf(o.f)>-1){var s="{"+a+"}",l=renderTextFormat(o.f,t[o.k],t,i);r||void 0===l||null==t[o.k]||(r=!0),n.push(s,l||""),e=e.replace(o.f,s)}}),r){for(var o=0;o<n.length;o+=2)e=e.replace(n[o],n[o+1]);return e}}}function renderTextFormat(e,t,i,n){if(e!==FORMAT_DDDD&&e!==FORMAT_DDD){if(e===FORMAT_A)return void 0!==i&&void 0!==i.hour?i.hour<12?"AM":"PM":t?t.toUpperCase():"";if(e===FORMAT_a)return void 0!==i&&void 0!==i.hour?i.hour<12?"am":"pm":t||"";if(null==t)return"";if(e===FORMAT_YY||e===FORMAT_MM||e===FORMAT_DD||e===FORMAT_HH||e===FORMAT_mm||e===FORMAT_ss)return twoDigit(t);if(e===FORMAT_YYYY)return fourDigit(t);if(e===FORMAT_MMMM)return(n.monthNames?n.monthNames:MONTH_NAMES)[t-1];if(e===FORMAT_MMM)return(n.monthShortNames?n.monthShortNames:MONTH_SHORT_NAMES)[t-1];if(e===FORMAT_hh||e===FORMAT_h){if(0===t)return"12";if(t>12&&(t-=12),e===FORMAT_hh&&t<10)return"0"+t}return t.toString()}try{return t=new Date(i.year,i.month-1,i.day).getDay(),e===FORMAT_DDDD?(n.dayNames?n.dayNames:DAY_NAMES)[t]:(n.dayShortNames?n.dayShortNames:DAY_SHORT_NAMES)[t]}catch(e){}}function dateValueRange(e,t,i){var n=[];if(e===FORMAT_YYYY||e===FORMAT_YY){if(void 0===i.year||void 0===t.year)throw new Error("min and max year is undefined");for(var r=i.year;r>=t.year;r--)n.push(r)}else if(e===FORMAT_MMMM||e===FORMAT_MMM||e===FORMAT_MM||e===FORMAT_M||e===FORMAT_hh||e===FORMAT_h)for(r=1;r<13;r++)n.push(r);else if(e===FORMAT_DDDD||e===FORMAT_DDD||e===FORMAT_DD||e===FORMAT_D)for(r=1;r<32;r++)n.push(r);else if(e===FORMAT_HH||e===FORMAT_H)for(r=0;r<24;r++)n.push(r);else if(e===FORMAT_mm||e===FORMAT_m)for(r=0;r<60;r++)n.push(r);else if(e===FORMAT_ss||e===FORMAT_s)for(r=0;r<60;r++)n.push(r);else e!==FORMAT_A&&e!==FORMAT_a||n.push("am","pm");return n}function dateSortValue(e,t,i,n,r){return void 0===n&&(n=0),void 0===r&&(r=0),parseInt("1"+fourDigit(e)+twoDigit(t)+twoDigit(i)+twoDigit(n)+twoDigit(r),10)}function dateDataSortValue(e){return dateSortValue(e.year,e.month,e.day,e.hour,e.minute)}function daysInMonth(e,t){return 4===e||6===e||9===e||11===e?30:2===e?isLeapYear(t)?29:28:31}function isLeapYear(e){return e%4==0&&e%100!=0||e%400==0}var ISO_8601_REGEXP=/^(\d{4}|[+\-]\d{6})(?:-(\d{2})(?:-(\d{2}))?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(?:\.(\d{3}))?)?(?:(Z)|([+\-])(\d{2})(?::(\d{2}))?)?)?$/,TIME_REGEXP=/^((\d{2}):(\d{2})(?::(\d{2})(?:\.(\d{3}))?)?(?:(Z)|([+\-])(\d{2})(?::(\d{2}))?)?)?$/;function parseDate(e){var t=null;if(null!=e&&((t=TIME_REGEXP.exec(e))?(t.unshift(void 0,void 0),t[2]=t[3]=void 0):t=ISO_8601_REGEXP.exec(e)),null!==t){for(var i=1;i<8;i++)t[i]=void 0!==t[i]?parseInt(t[i],10):void 0;var n=0;return t[9]&&t[10]&&(n=60*parseInt(t[10],10),t[11]&&(n+=parseInt(t[11],10)),"-"===t[9]&&(n*=-1)),{year:t[1],month:t[2],day:t[3],hour:t[4],minute:t[5],second:t[6],millisecond:t[7],tzOffset:n}}}function updateDate(e,t){if(t&&""!==t){if("string"==typeof t){if(t=parseDate(t))return Object.assign(e,t),!0}else if(t.year||t.hour||t.month||t.day||t.minute||t.second){t.ampm&&t.hour&&(t.hour.value="pm"===t.ampm.value?12===t.hour.value?12:t.hour.value+12:12===t.hour.value?0:t.hour.value);for(var i=0,n=Object.keys(t);i<n.length;i++){var r=n[i];e[r]=t[r].value}return!0}console.warn('Error parsing date: "'+t+'". Please provide a valid ISO 8601 datetime format: https://www.w3.org/TR/NOTE-datetime')}else for(var o in e)e.hasOwnProperty(o)&&delete e[o];return!1}function parseTemplate(e){var t=[];e=e.replace(/[^\w\s]/gi," "),FORMAT_KEYS.forEach(function(t){t.f.length>1&&e.indexOf(t.f)>-1&&e.indexOf(t.f+t.f.charAt(0))<0&&(e=e.replace(t.f," "+t.f+" "))});var i=e.split(" ").filter(function(e){return e.length>0});return i.forEach(function(e,n){FORMAT_KEYS.forEach(function(r){if(e===r.f){if((e===FORMAT_A||e===FORMAT_a)&&(t.indexOf(FORMAT_h)<0&&t.indexOf(FORMAT_hh)<0||-1===VALID_AMPM_PREFIX.indexOf(i[n-1])))return;t.push(e)}})}),t}function getValueFromFormat(e,t){return t===FORMAT_A||t===FORMAT_a?e.hour<12?"am":"pm":t===FORMAT_hh||t===FORMAT_h?e.hour>12?e.hour-12:e.hour:e[convertFormatToKey(t)]}function convertFormatToKey(e){for(var t in FORMAT_KEYS)if(FORMAT_KEYS[t].f===e)return FORMAT_KEYS[t].k}function convertToArrayOfStrings(e,t){var i;if(null!=e)return"string"==typeof e&&(e=e.replace(/\[|\]/g,"").split(",")),Array.isArray(e)&&(i=e.map(function(e){return e.toString().trim()})),void 0!==i&&0!==i.length||console.warn('Invalid "'+t+'Names". Must be an array of strings, or a comma separated string.'),i}function convertToArrayOfNumbers(e,t){var i;return"string"==typeof e&&(e=e.replace(/\[|\]|\s/g,"").split(",")),0===(i=Array.isArray(e)?e.map(function(e){return parseInt(e,10)}).filter(isFinite):[e]).length&&console.warn('Invalid "'+t+'Values". Must be an array of numbers, or a comma separated string of numbers.'),i}function twoDigit(e){return("0"+(void 0!==e?Math.abs(e):"0")).slice(-2)}function fourDigit(e){return("000"+(void 0!==e?Math.abs(e):"0")).slice(-4)}var FORMAT_YYYY="YYYY",FORMAT_YY="YY",FORMAT_MMMM="MMMM",FORMAT_MMM="MMM",FORMAT_MM="MM",FORMAT_M="M",FORMAT_DDDD="DDDD",FORMAT_DDD="DDD",FORMAT_DD="DD",FORMAT_D="D",FORMAT_HH="HH",FORMAT_H="H",FORMAT_hh="hh",FORMAT_h="h",FORMAT_mm="mm",FORMAT_m="m",FORMAT_ss="ss",FORMAT_s="s",FORMAT_A="A",FORMAT_a="a",FORMAT_KEYS=[{f:FORMAT_YYYY,k:"year"},{f:FORMAT_MMMM,k:"month"},{f:FORMAT_DDDD,k:"day"},{f:FORMAT_MMM,k:"month"},{f:FORMAT_DDD,k:"day"},{f:FORMAT_YY,k:"year"},{f:FORMAT_MM,k:"month"},{f:FORMAT_DD,k:"day"},{f:FORMAT_HH,k:"hour"},{f:FORMAT_hh,k:"hour"},{f:FORMAT_mm,k:"minute"},{f:FORMAT_ss,k:"second"},{f:FORMAT_M,k:"month"},{f:FORMAT_D,k:"day"},{f:FORMAT_H,k:"hour"},{f:FORMAT_h,k:"hour"},{f:FORMAT_m,k:"minute"},{f:FORMAT_s,k:"second"},{f:FORMAT_A,k:"ampm"},{f:FORMAT_a,k:"ampm"}],DAY_NAMES=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],DAY_SHORT_NAMES=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],MONTH_NAMES=["January","February","March","April","May","June","July","August","September","October","November","December"],MONTH_SHORT_NAMES=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],VALID_AMPM_PREFIX=[FORMAT_hh,FORMAT_h,FORMAT_mm,FORMAT_m,FORMAT_ss,FORMAT_s],Datetime=function(){function e(){this.inputId="ion-dt-"+datetimeIds++,this.labelId=this.inputId+"-lbl",this.locale={},this.datetimeMin={},this.datetimeMax={},this.datetimeValue={},this.disabled=!1,this.displayFormat="MMM D, YYYY",this.cancelText="Cancel",this.doneText="Done"}return e.prototype.disabledChanged=function(){this.emitStyle()},e.prototype.valueChanged=function(){this.updateValue(),this.emitStyle(),this.ionChange.emit({value:this.value})},e.prototype.componentWillLoad=function(){this.ionStyle=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.ionStyle),this.locale={monthNames:convertToArrayOfStrings(this.monthNames,"monthNames"),monthShortNames:convertToArrayOfStrings(this.monthShortNames,"monthShortNames"),dayNames:convertToArrayOfStrings(this.dayNames,"dayNames"),dayShortNames:convertToArrayOfStrings(this.dayShortNames,"dayShortNames")},this.updateValue()},e.prototype.componentDidLoad=function(){this.emitStyle()},e.prototype.open=function(){return __awaiter(this,void 0,void 0,function(){var e,t;return __generator(this,function(i){switch(i.label){case 0:return this.disabled?[2]:(e=this.generatePickerOptions(),t=this,[4,this.pickerCtrl.create(e)]);case 1:return t.picker=i.sent(),[4,this.validate()];case 2:return i.sent(),[4,this.picker.present()];case 3:return i.sent(),[2]}})})},e.prototype.emitStyle=function(){this.ionStyle.emit({interactive:!0,datetime:!0,"has-value":this.hasValue(),"interactive-disabled":this.disabled})},e.prototype.updateValue=function(){updateDate(this.datetimeValue,this.value),this.updateText()},e.prototype.generatePickerOptions=function(){var e=this,t=Object.assign({},this.pickerOptions,{columns:this.generateColumns()}),i=t.buttons;return i&&0!==i.length||(t.buttons=[{text:this.cancelText,role:"cancel",handler:function(){return e.ionCancel.emit()}},{text:this.doneText,handler:function(t){e.value=t}}]),t},e.prototype.generateColumns=function(){var e=this,t=this.pickerFormat||this.displayFormat||DEFAULT_FORMAT;if(0===t.length)return[];this.calcMinMax(),-1===(t=t.replace("DDDD","{~}").replace("DDD","{~}")).indexOf("D")&&(t=t.replace("{~}","D"));var i=parseTemplate(t=t.replace(/{~}/g,"")).map(function(t){var i=convertFormatToKey(t),n=e,r=(n[i+"Values"]?convertToArrayOfNumbers(n[i+"Values"],i):dateValueRange(t,e.datetimeMin,e.datetimeMax)).map(function(i){return{value:i,text:renderTextFormat(t,i,void 0,e.locale)}}),o=getValueFromFormat(e.datetimeValue,t),a=r.findIndex(function(e){return e.value===o});return{name:i,selectedIndex:a>=0?a:0,options:r}}),n=this.datetimeMin,r=this.datetimeMax;return["month","day","hour","minute"].filter(function(e){return!i.find(function(t){return t.name===e})}).forEach(function(e){n[e]=0,r[e]=0}),divyColumns(i)},e.prototype.validate=function(){return __awaiter(this,void 0,void 0,function(){var e,t,i,n,r,o,a,s,l,u,c;return __generator(this,function(h){switch(h.label){case 0:return e=new Date,t=dateDataSortValue(this.datetimeMin),i=dateDataSortValue(this.datetimeMax),[4,this.picker.getColumn("year")];case 1:return n=h.sent(),r=e.getFullYear(),n&&(n.options.find(function(t){return t.value===e.getFullYear()})||(r=n.options[0].value),void 0!==(o=n.selectedIndex)&&(a=n.options[o])&&(r=a.value)),[4,this.validateColumn("month",1,t,i,[r,0,0,0,0],[r,12,31,23,59])];case 2:return s=h.sent(),l=daysInMonth(s,r),[4,this.validateColumn("day",2,t,i,[r,s,0,0,0],[r,s,l,23,59])];case 3:return u=h.sent(),[4,this.validateColumn("hour",3,t,i,[r,s,u,0,0],[r,s,u,23,59])];case 4:return c=h.sent(),[4,this.validateColumn("minute",4,t,i,[r,s,u,c,0],[r,s,u,c,59])];case 5:return h.sent(),[2]}})})},e.prototype.calcMinMax=function(e){var t=(e||new Date).getFullYear();if(void 0!==this.yearValues){var i=convertToArrayOfNumbers(this.yearValues,"year");void 0===this.min&&(this.min=Math.min.apply(Math,i)),void 0===this.max&&(this.max=Math.max.apply(Math,i))}else void 0===this.min&&(this.min=(t-100).toString()),void 0===this.max&&(this.max=t.toString());var n=this.datetimeMin=parseDate(this.min),r=this.datetimeMax=parseDate(this.max);n.year=n.year||t,r.year=r.year||t,n.month=n.month||1,r.month=r.month||12,n.day=n.day||1,r.day=r.day||31,n.hour=n.hour||0,r.hour=r.hour||23,n.minute=n.minute||0,r.minute=r.minute||59,n.second=n.second||0,r.second=r.second||59,n.year>r.year&&(console.error("min.year > max.year"),n.year=r.year-100),n.year===r.year&&(n.month>r.month?(console.error("min.month > max.month"),n.month=1):n.month===r.month&&n.day>r.day&&(console.error("min.day > max.day"),n.day=1))},e.prototype.validateColumn=function(e,t,i,n,r,o){return __awaiter(this,void 0,void 0,function(){var a,s,l,u,c,h,d,p,m,f,y;return __generator(this,function(v){switch(v.label){case 0:return[4,this.picker.getColumn(e)];case 1:if(!(a=v.sent()))return[2,0];for(s=r.slice(),l=o.slice(),u=a.options,c=u.length-1,h=0,d=0;d<u.length;d++)p=u[d],m=p.value,s[t]=p.value,l[t]=p.value,(p.disabled=m<r[t]||m>o[t]||dateSortValue(l[0],l[1],l[2],l[3],l[4])<i||dateSortValue(s[0],s[1],s[2],s[3],s[4])>n)||(c=Math.min(c,d),h=Math.max(h,d));return f=a.selectedIndex=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["i"])(c,a.selectedIndex,h),(y=a.options[f])?[2,y.value]:[2,0]}})})},e.prototype.updateText=function(){var e=this.displayFormat||this.pickerFormat||DEFAULT_FORMAT;this.text=renderDatetime(e,this.datetimeValue,this.locale)},e.prototype.hasValue=function(){var e=this.datetimeValue;return Object.keys(e).length>0},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"datetime"),{"datetime-disabled":this.disabled})}},e.prototype.render=function(){var e=!1,t=this.text;return void 0===t&&(void 0!==this.placeholder?(t=this.placeholder,e=!0):t=""),[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:{"datetime-text":!0,"datetime-placeholder":e}},t),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button",{type:"button","aria-haspopup":"true","aria-labelledby":this.labelId,"aria-disabled":this.disabled?"true":null,onClick:this.open.bind(this),class:"datetime-cover"},"md"===this.mode&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect",null))]},Object.defineProperty(e,"is",{get:function(){return"ion-datetime"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{cancelText:{type:String,attr:"cancel-text"},dayNames:{type:String,attr:"day-names"},dayShortNames:{type:String,attr:"day-short-names"},dayValues:{type:"Any",attr:"day-values"},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},displayFormat:{type:String,attr:"display-format"},doneText:{type:String,attr:"done-text"},hourValues:{type:"Any",attr:"hour-values"},max:{type:String,attr:"max",mutable:!0},min:{type:String,attr:"min",mutable:!0},minuteValues:{type:"Any",attr:"minute-values"},mode:{type:String,attr:"mode"},monthNames:{type:String,attr:"month-names"},monthShortNames:{type:String,attr:"month-short-names"},monthValues:{type:"Any",attr:"month-values"},open:{method:!0},pickerCtrl:{connect:"ion-picker-controller"},pickerFormat:{type:String,attr:"picker-format"},pickerOptions:{type:"Any",attr:"picker-options"},placeholder:{type:String,attr:"placeholder"},text:{state:!0},value:{type:"Any",attr:"value",mutable:!0,watchCallbacks:["valueChanged"]},yearValues:{type:"Any",attr:"year-values"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionCancel",method:"ionCancel",bubbles:!0,cancelable:!0,composed:!0},{name:"ionChange",method:"ionChange",bubbles:!0,cancelable:!0,composed:!0},{name:"ionStyle",method:"ionStyle",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-datetime{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;font-family:var(--ion-font-family,inherit);overflow:hidden}.datetime-cover{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.datetime-text{-webkit-box-flex:1;-ms-flex:1;flex:1;min-width:16px;min-height:1.2em;font-size:inherit;line-height:1.2;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.datetime-disabled,.item-datetime-disabled ion-label{opacity:.4;pointer-events:none}.item-label-floating ion-datetime,.item-label-stacked ion-datetime{padding-left:0;width:100%}.item .datetime{position:static}.datetime-md{padding:11px 8px 11px 16px}.datetime-md .datetime-placeholder{color:var(--ion-placeholder-text-color,#999)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),e}();function divyColumns(e){for(var t,i,n=[],r=0;r<e.length;r++){t=e[r],n.push(0);for(var o=0,a=t.options;o<a.length;o++)(i=a[o].text.length)>n[r]&&(n[r]=i)}return 2===n.length?(i=Math.max(n[0],n[1]),e[0].align="right",e[1].align="left",e[0].optionsWidth=e[1].optionsWidth=17*i+"px"):3===n.length&&(i=Math.max(n[0],n[2]),e[0].align="right",e[1].columnWidth=17*n[1]+"px",e[0].optionsWidth=e[2].optionsWidth=17*i+"px",e[2].align="left"),e}var datetimeIds=0,DEFAULT_FORMAT="MMM D, YYYY";function iosEnterAnimation(e,t){var i=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var r=new e;return r.addElement(t.querySelector(".picker-wrapper")),n.fromTo("opacity",.01,.26),r.fromTo("translateY","100%","0%"),Promise.resolve(i.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(400).add(n).add(r))}function iosLeaveAnimation(e,t){var i=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var r=new e;return r.addElement(t.querySelector(".picker-wrapper")),n.fromTo("opacity",.26,.01),r.fromTo("translateY","0%","100%"),Promise.resolve(i.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(400).add(n).add(r))}var Picker=function(){function e(){this.presented=!1,this.keyboardClose=!0,this.buttons=[],this.columns=[],this.duration=0,this.showBackdrop=!0,this.backdropDismiss=!0,this.animated=!0}return e.prototype.componentDidLoad=function(){this.ionPickerDidLoad.emit()},e.prototype.componentDidUnload=function(){this.ionPickerDidUnload.emit()},e.prototype.onBackdropTap=function(){var e=this.buttons.find(function(e){return"cancel"===e.role});return e?this.buttonClick(e):this.dismiss()},e.prototype.present=function(){return __awaiter(this,void 0,void 0,function(){var e=this;return __generator(this,function(t){switch(t.label){case 0:return[4,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_3__["e"])(this,"pickerEnter",iosEnterAnimation,iosEnterAnimation,void 0)];case 1:return t.sent(),this.duration>0&&(this.durationTimeout=setTimeout(function(){return e.dismiss()},this.duration)),[2]}})})},e.prototype.dismiss=function(e,t){return this.durationTimeout&&clearTimeout(this.durationTimeout),Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_3__["b"])(this,e,t,"pickerLeave",iosLeaveAnimation,iosLeaveAnimation)},e.prototype.onDidDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.el,"ionPickerDidDismiss")},e.prototype.onWillDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.el,"ionPickerWillDismiss")},e.prototype.getColumn=function(e){return Promise.resolve(this.columns.find(function(t){return t.name===e}))},e.prototype.buttonClick=function(e){var t=!0;return e.handler&&!1===e.handler(this.getSelected())&&(t=!1),t?this.dismiss():Promise.resolve(!1)},e.prototype.getSelected=function(){var e={};return this.columns.forEach(function(t,i){var n=void 0!==t.selectedIndex?t.options[t.selectedIndex]:void 0;e[t.name]={text:n?n.text:void 0,value:n?n.value:void 0,columnIndex:i}}),e},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"picker"),Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["j"])(this.cssClass)),style:{zIndex:2e4+this.overlayIndex}}},e.prototype.render=function(){var e=this;return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-backdrop",{visible:this.showBackdrop,tappable:this.backdropDismiss}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"picker-wrapper",role:"dialog"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"picker-toolbar"},this.buttons.map(function(t){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:buttonWrapperClass(t)},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button",{type:"button","ion-activable":!0,onClick:function(){return e.buttonClick(t)},class:buttonClass(t)},t.text))})),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"picker-columns"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"picker-above-highlight"}),this.columns.map(function(e){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-picker-column",{col:e})}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"picker-below-highlight"})))]},Object.defineProperty(e,"is",{get:function(){return"ion-picker"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{animated:{type:Boolean,attr:"animated"},animationCtrl:{connect:"ion-animation-controller"},backdropDismiss:{type:Boolean,attr:"backdrop-dismiss"},buttons:{type:"Any",attr:"buttons"},columns:{type:"Any",attr:"columns"},config:{context:"config"},cssClass:{type:String,attr:"css-class"},dismiss:{method:!0},duration:{type:Number,attr:"duration"},el:{elementRef:!0},enterAnimation:{type:"Any",attr:"enter-animation"},getColumn:{method:!0},keyboardClose:{type:Boolean,attr:"keyboard-close"},leaveAnimation:{type:"Any",attr:"leave-animation"},mode:{type:String,attr:"mode"},onDidDismiss:{method:!0},onWillDismiss:{method:!0},overlayIndex:{type:Number,attr:"overlay-index"},present:{method:!0},showBackdrop:{type:Boolean,attr:"show-backdrop"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionPickerDidLoad",method:"ionPickerDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPickerDidPresent",method:"didPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPickerWillPresent",method:"willPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPickerWillDismiss",method:"willDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPickerDidDismiss",method:"didDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPickerDidUnload",method:"ionPickerDidUnload",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionBackdropTap",method:"onBackdropTap"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-picker{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;left:0;top:0;display:block;position:absolute;width:100%;height:100%;font-family:var(--ion-font-family,inherit);contain:strict;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1000}.picker-toolbar{width:100%;contain:strict;z-index:1}.picker-wrapper{left:0;right:0;bottom:0;margin:auto;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;width:100%;max-width:500px;contain:strict;overflow:hidden;z-index:10}.picker-columns{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-bottom:var(--ion-safe-area-bottom,0);contain:strict;overflow:hidden}.picker-col{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-box-sizing:content-box;box-sizing:content-box;contain:content}.picker-opts{position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;max-width:100%}.picker-prefix{position:relative;-webkit-box-flex:2;-ms-flex:2;flex:2;min-width:45%;max-width:50%;text-align:end;white-space:nowrap}.picker-suffix{position:relative;-webkit-box-flex:2;-ms-flex:2;flex:2;min-width:45%;max-width:50%;text-align:start;white-space:nowrap}.picker-opt{left:0;top:0;display:block;position:absolute;width:100%;border:0;text-align:center;text-overflow:ellipsis;white-space:nowrap;contain:strict;overflow:hidden;will-change:transform}.picker-opt.picker-opt-disabled{pointer-events:none}.picker-opt-disabled{opacity:0}.picker-opts-left{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.picker-opts-right{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}.picker-above-highlight,.picker-below-highlight{display:none;pointer-events:none}.picker-button{border:0;font-family:inherit}.picker-button:active,.picker-button:focus,.picker-opt:active,.picker-opt:focus{outline:0}.picker-md .picker-wrapper{height:260px;border-top:.55px solid rgba(var(--ion-item-border-color-rgb,0,0,0),.13);background:var(--ion-background-color,#fff)}.picker-md .picker-toolbar{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;height:44px;background:var(--ion-background-color,#fff)}.picker-md .picker-button,.picker-md .picker-button.activated{margin:0;padding:0 1.1em;height:44px;background:0 0;color:var(--ion-color-primary,#3880ff);font-size:14px;font-weight:500;text-transform:uppercase;-webkit-box-shadow:none;box-shadow:none}.picker-md .picker-columns{height:216px;-webkit-perspective:1800px;perspective:1800px}.picker-md .picker-col{padding:0 8px;-webkit-transform-style:preserve-3d;transform-style:preserve-3d}.picker-md .picker-opts,.picker-md .picker-prefix,.picker-md .picker-suffix{top:77px;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;color:var(--ion-item-text-color,var(--ion-text-color,#000));font-size:22px;line-height:42px;pointer-events:none}.picker-md .picker-opt{margin:0;padding:0;height:43px;-webkit-transition-timing-function:ease-out;transition-timing-function:ease-out;background:0 0;color:var(--ion-item-text-color,var(--ion-text-color,#000));font-size:22px;line-height:42px;-webkit-backface-visibility:hidden;backface-visibility:hidden;pointer-events:auto}.picker-md .picker-opt.picker-opt-selected,.picker-md .picker-prefix,.picker-md .picker-suffix{color:var(--ion-color-primary,#3880ff)}.picker-md .picker-above-highlight{left:0;top:0;-webkit-transform:translate3d(0,0,90px);transform:translate3d(0,0,90px);position:absolute;width:100%;height:81px;border-bottom:1px solid rgba(var(--ion-item-border-color-rgb,0,0,0),.13);background:-webkit-gradient(linear,left top,left bottom,color-stop(20%,var(--ion-background-color,#fff)),to(rgba(var(--ion-background-color-rgb,255,255,255),.8)));background:linear-gradient(to bottom,var(--ion-background-color,#fff) 20%,rgba(var(--ion-background-color-rgb,255,255,255),.8) 100%);z-index:10}.picker-md .picker-below-highlight{left:0;top:115px;-webkit-transform:translate3d(0,0,90px);transform:translate3d(0,0,90px);position:absolute;width:100%;height:119px;border-top:1px solid rgba(var(--ion-item-border-color-rgb,0,0,0),.13);background:-webkit-gradient(linear,left bottom,left top,color-stop(30%,var(--ion-background-color,#fff)),to(rgba(var(--ion-background-color-rgb,255,255,255),.8)));background:linear-gradient(to top,var(--ion-background-color,#fff) 30%,rgba(var(--ion-background-color-rgb,255,255,255),.8) 100%);z-index:11}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),e}();function buttonWrapperClass(e){var t;return(t={})["picker-toolbar-"+e.role]=void 0!==e.role,t["picker-toolbar-button"]=!0,t}function buttonClass(e){return Object.assign({"picker-button":!0},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["j"])(e.cssClass))}var PickerColumnCmp=function(){function e(){this.optHeight=0,this.rotateFactor=0,this.scaleFactor=1,this.velocity=0,this.y=0}return e.prototype.componentWillLoad=function(){var e=0,t=.81;"ios"===this.mode&&(e=-.46,t=1),this.rotateFactor=e,this.scaleFactor=t},e.prototype.componentDidLoad=function(){return __awaiter(this,void 0,void 0,function(){var e,t,i=this;return __generator(this,function(n){switch(n.label){case 0:return e=this.optsEl,this.optHeight=e.firstElementChild?e.firstElementChild.clientHeight:0,this.refresh(),t=this,[4,__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/gesture.js"))];case 1:return t.gesture=n.sent().createGesture({el:this.el,queue:this.queue,gestureName:"picker-swipe",gesturePriority:100,threshold:0,onStart:function(e){return i.onStart(e)},onMove:function(e){return i.onMove(e)},onEnd:function(e){return i.onEnd(e)}}),this.gesture.setDisabled(!1),[2]}})})},e.prototype.setSelected=function(e,t){var i=e>-1?-e*this.optHeight:0;this.velocity=0,cancelAnimationFrame(this.rafId),this.update(i,t,!0)},e.prototype.update=function(e,t,i){for(var n=0,r=0,o=this.col,a=this.rotateFactor,s=o.selectedIndex=this.indexForY(-e),l=0===t?null:t+"ms",u="scale("+this.scaleFactor+")",c=this.optsEl.children,h=0;h<c.length;h++){var d=c[h],p=o.options[h],m=h*this.optHeight+e,f=!0,y="";if(0!==a){var v=m*a;Math.abs(v)>90?f=!1:(n=0,r=90,y="rotateX("+v+"deg) ")}else r=0,n=m,Math.abs(n)>170&&(f=!1);var M=s===h;f?(y+="translate3d(0px,"+n+"px,"+r+"px) ",1===this.scaleFactor||M||(y+=u)):y="translate3d(-9999px,0px,0px)",t!==p.duration&&(p.duration=t,d.style.transitionDuration=l),y!==p.transform&&(p.transform=y,d.style.transform=y),M!==p.selected&&(p.selected=M,M?d.classList.add(PICKER_OPT_SELECTED):d.classList.remove(PICKER_OPT_SELECTED))}this.col.prevSelected=s,i&&(this.y=e),this.lastIndex!==s&&(Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["c"])(),this.lastIndex=s)},e.prototype.decelerate=function(){var e=this;if(0!==this.velocity){this.velocity*=DECELERATION_FRICTION,this.velocity=this.velocity>0?Math.max(this.velocity,1):Math.min(this.velocity,-1);var t=this.y+this.velocity;t>this.minY?(t=this.minY,this.velocity=0):t<this.maxY&&(t=this.maxY,this.velocity=0),this.update(t,0,!0),(Math.round(t)%this.optHeight!=0||Math.abs(this.velocity)>1)&&(this.rafId=requestAnimationFrame(function(){return e.decelerate()}))}else if(this.y%this.optHeight!=0){var i=Math.abs(this.y%this.optHeight);this.velocity=i>this.optHeight/2?1:-1,this.decelerate()}},e.prototype.indexForY=function(e){return Math.min(Math.max(Math.abs(Math.round(e/this.optHeight)),0),this.col.options.length-1)},e.prototype.onStart=function(e){e.event.preventDefault(),e.event.stopPropagation(),cancelAnimationFrame(this.rafId);for(var t=this.col.options,i=t.length-1,n=0,r=0;r<t.length;r++)t[r].disabled||(i=Math.min(i,r),n=Math.max(n,r));this.minY=-i*this.optHeight,this.maxY=-n*this.optHeight},e.prototype.onMove=function(e){e.event.preventDefault(),e.event.stopPropagation();var t=this.y+e.deltaY;t>this.minY?(t=Math.pow(t,.8),this.bounceFrom=t):t<this.maxY?(t+=Math.pow(this.maxY-t,.9),this.bounceFrom=t):this.bounceFrom=0,this.update(t,0,!1)},e.prototype.onEnd=function(e){if(this.bounceFrom>0)this.update(this.minY,100,!0);else if(this.bounceFrom<0)this.update(this.maxY,100,!0);else if(this.velocity=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["i"])(-MAX_PICKER_SPEED,23*e.velocityY,MAX_PICKER_SPEED),0===this.velocity&&0===e.deltaY){var t=e.event.target.closest(".picker-opt");t&&t.hasAttribute("opt-index")&&this.setSelected(parseInt(t.getAttribute("opt-index"),10),150)}else this.y+=e.deltaY,this.decelerate()},e.prototype.refresh=function(){for(var e=this.col.options.length-1,t=0,i=this.col.options,n=0;n<i.length;n++)i[n].disabled||(e=Math.min(e,n),t=Math.max(t,n));var r=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["i"])(e,this.col.selectedIndex,t);if(this.col.prevSelected!==r){var o=r*this.optHeight*-1;this.velocity=0,this.update(o,150,!0)}},e.prototype.hostData=function(){return{class:{"picker-col":!0,"picker-opts-left":"left"===this.col.align,"picker-opts-right":"right"===this.col.align},style:{"max-width":this.col.columnWidth}}},e.prototype.render=function(){var e=this,t=this.col;return[t.prefix&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"picker-prefix",style:{width:t.prefixWidth}},t.prefix),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"picker-opts",style:{maxWidth:t.optionsWidth},ref:function(t){return e.optsEl=t}},t.options.map(function(e,t){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button",{type:"button",class:{"picker-opt":!0,"picker-opt-disabled":!!e.disabled},"opt-index":t},e.text)})),t.suffix&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"picker-suffix",style:{width:t.suffixWidth}},t.suffix)]},Object.defineProperty(e,"is",{get:function(){return"ion-picker-column"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{col:{type:"Any",attr:"col"},el:{elementRef:!0},queue:{context:"queue"}}},enumerable:!0,configurable:!0}),e}(),PICKER_OPT_SELECTED="picker-opt-selected",DECELERATION_FRICTION=.97,MAX_PICKER_SPEED=90,PickerController=function(){function e(){}return e.prototype.create=function(e){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_3__["f"])(this.doc.createElement("ion-picker"),e)},e.prototype.dismiss=function(e,t,i){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.doc,e,t,"ion-picker",i)},e.prototype.getTop=function(){return __awaiter(this,void 0,void 0,function(){return __generator(this,function(e){return[2,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_3__["h"])(this.doc,"ion-picker")]})})},Object.defineProperty(e,"is",{get:function(){return"ion-picker-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{create:{method:!0},dismiss:{method:!0},doc:{context:"document"},getTop:{method:!0}}},enumerable:!0,configurable:!0}),e}();
+
+
+
+
+
+var Route = /** @class */ (function () {
+    function Route() {
+        this.url = '';
+    }
+    Route.prototype.onUpdate = function (newValue) {
+        this.ionRouteDataChanged.emit(newValue);
+    };
+    Route.prototype.onComponentProps = function (newValue, oldValue) {
+        if (newValue === oldValue) {
+            return;
+        }
+        var keys1 = newValue ? Object.keys(newValue) : [];
+        var keys2 = oldValue ? Object.keys(oldValue) : [];
+        if (keys1.length !== keys2.length) {
+            this.onUpdate(newValue);
+            return;
+        }
+        for (var _i = 0, keys1_1 = keys1; _i < keys1_1.length; _i++) {
+            var key = keys1_1[_i];
+            if (newValue[key] !== oldValue[key]) {
+                this.onUpdate(newValue);
+                return;
+            }
+        }
+    };
+    Route.prototype.componentDidLoad = function () {
+        this.ionRouteDataChanged.emit();
+    };
+    Route.prototype.componentDidUnload = function () {
+        this.ionRouteDataChanged.emit();
+    };
+    Object.defineProperty(Route, "is", {
+        get: function () { return "ion-route"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Route, "properties", {
+        get: function () {
+            return {
+                "component": {
+                    "type": String,
+                    "attr": "component",
+                    "watchCallbacks": ["onUpdate"]
+                },
+                "componentProps": {
+                    "type": "Any",
+                    "attr": "component-props",
+                    "watchCallbacks": ["onComponentProps"]
+                },
+                "url": {
+                    "type": String,
+                    "attr": "url",
+                    "watchCallbacks": ["onUpdate"]
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Route, "events", {
+        get: function () {
+            return [{
+                    "name": "ionRouteDataChanged",
+                    "method": "ionRouteDataChanged",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Route;
+}());
+var RouteRedirect = /** @class */ (function () {
+    function RouteRedirect() {
+        this.from = '';
+    }
+    RouteRedirect.prototype.propDidChange = function () {
+        this.ionRouteRedirectChanged.emit();
+    };
+    RouteRedirect.prototype.componentDidLoad = function () {
+        this.ionRouteRedirectChanged.emit();
+    };
+    RouteRedirect.prototype.componentDidUnload = function () {
+        this.ionRouteRedirectChanged.emit();
+    };
+    Object.defineProperty(RouteRedirect, "is", {
+        get: function () { return "ion-route-redirect"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouteRedirect, "properties", {
+        get: function () {
+            return {
+                "from": {
+                    "type": String,
+                    "attr": "from",
+                    "watchCallbacks": ["propDidChange"]
+                },
+                "to": {
+                    "type": String,
+                    "attr": "to",
+                    "watchCallbacks": ["propDidChange"]
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouteRedirect, "events", {
+        get: function () {
+            return [{
+                    "name": "ionRouteRedirectChanged",
+                    "method": "ionRouteRedirectChanged",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return RouteRedirect;
+}());
+function generatePath(segments) {
+    var path = segments
+        .filter(function (s) { return s.length > 0; })
+        .join('/');
+    return '/' + path;
+}
+function chainToPath(chain) {
+    var path = [];
+    for (var _i = 0, chain_1 = chain; _i < chain_1.length; _i++) {
+        var route = chain_1[_i];
+        for (var _a = 0, _b = route.path; _a < _b.length; _a++) {
+            var segment = _b[_a];
+            if (segment[0] === ':') {
+                var param = route.params && route.params[segment.slice(1)];
+                if (!param) {
+                    return null;
+                }
+                path.push(param);
+            }
+            else if (segment !== '') {
+                path.push(segment);
+            }
+        }
+    }
+    return path;
+}
+function writePath(history, root, useHash, path, intent, state) {
+    var url = generatePath(parsePath(root).concat(path));
+    if (useHash) {
+        url = '#' + url;
+    }
+    if (intent === 1) {
+        history.pushState(state, '', url);
+    }
+    else {
+        history.replaceState(state, '', url);
+    }
+}
+function removePrefix(prefix, path) {
+    if (prefix.length > path.length) {
+        return null;
+    }
+    if (prefix.length <= 1 && prefix[0] === '') {
+        return path;
+    }
+    for (var i = 0; i < prefix.length; i++) {
+        if (prefix[i].length > 0 && prefix[i] !== path[i]) {
+            return null;
+        }
+    }
+    if (path.length === prefix.length) {
+        return [''];
+    }
+    return path.slice(prefix.length);
+}
+function readPath(loc, root, useHash) {
+    var pathname = loc.pathname;
+    if (useHash) {
+        var hash = loc.hash;
+        pathname = (hash[0] === '#')
+            ? hash.slice(1)
+            : '';
+    }
+    var prefix = parsePath(root);
+    var path = parsePath(pathname);
+    return removePrefix(prefix, path);
+}
+function parsePath(path) {
+    if (path == null) {
+        return [''];
+    }
+    var segments = path.split('/')
+        .map(function (s) { return s.trim(); })
+        .filter(function (s) { return s.length > 0; });
+    if (segments.length === 0) {
+        return [''];
+    }
+    else {
+        return segments;
+    }
+}
+function printRoutes(routes) {
+    console.group("[ion-core] ROUTES[" + routes.length + "]");
+    var _loop_1 = function (chain) {
+        var path = [];
+        chain.forEach(function (r) { return path.push.apply(path, r.path); });
+        var ids = chain.map(function (r) { return r.id; });
+        console.debug("%c " + generatePath(path), 'font-weight: bold; padding-left: 20px', '=>\t', "(" + ids.join(', ') + ")");
+    };
+    for (var _i = 0, routes_1 = routes; _i < routes_1.length; _i++) {
+        var chain = routes_1[_i];
+        _loop_1(chain);
+    }
+    console.groupEnd();
+}
+function printRedirects(redirects) {
+    console.group("[ion-core] REDIRECTS[" + redirects.length + "]");
+    for (var _i = 0, redirects_1 = redirects; _i < redirects_1.length; _i++) {
+        var redirect = redirects_1[_i];
+        if (redirect.to) {
+            console.debug('FROM: ', "$c " + generatePath(redirect.from), 'font-weight: bold', ' TO: ', "$c " + generatePath(redirect.to), 'font-weight: bold');
+        }
+    }
+    console.groupEnd();
+}
+function writeNavState(root, chain, intent, index, changed) {
+    if (changed === void 0) { changed = false; }
+    return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        var outlet, route, result, e_1;
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 6, , 7]);
+                    outlet = searchNavNode(root);
+                    if (index >= chain.length || !outlet) {
+                        return [2 /*return*/, changed];
+                    }
+                    return [4 /*yield*/, outlet.componentOnReady()];
+                case 1:
+                    _a.sent();
+                    route = chain[index];
+                    return [4 /*yield*/, outlet.setRouteId(route.id, route.params, intent)];
+                case 2:
+                    result = _a.sent();
+                    if (result.changed) {
+                        intent = 0;
+                        changed = true;
+                    }
+                    return [4 /*yield*/, writeNavState(result.element, chain, intent, index + 1, changed)];
+                case 3:
+                    changed = _a.sent();
+                    if (!result.markVisible) return [3 /*break*/, 5];
+                    return [4 /*yield*/, result.markVisible()];
+                case 4:
+                    _a.sent();
+                    _a.label = 5;
+                case 5: return [2 /*return*/, changed];
+                case 6:
+                    e_1 = _a.sent();
+                    console.error(e_1);
+                    return [2 /*return*/, false];
+                case 7: return [2 /*return*/];
+            }
+        });
+    });
+}
+function readNavState(root) {
+    return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        var ids, outlet, node, id;
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    ids = [];
+                    node = root;
+                    _a.label = 1;
+                case 1:
+                    if (false) {}
+                    outlet = searchNavNode(node);
+                    if (!outlet) return [3 /*break*/, 3];
+                    return [4 /*yield*/, outlet.getRouteId()];
+                case 2:
+                    id = _a.sent();
+                    if (id) {
+                        node = id.element;
+                        id.element = undefined;
+                        ids.push(id);
+                    }
+                    else {
+                        return [3 /*break*/, 5];
+                    }
+                    return [3 /*break*/, 4];
+                case 3: return [3 /*break*/, 5];
+                case 4: return [3 /*break*/, 1];
+                case 5: return [2 /*return*/, { ids: ids, outlet: outlet }];
+            }
+        });
+    });
+}
+function waitUntilNavNode(win) {
+    if (searchNavNode(win.document.body)) {
+        return Promise.resolve();
+    }
+    return new Promise(function (resolve) {
+        win.addEventListener('ionNavWillLoad', resolve, { once: true });
+    });
+}
+var QUERY = ':not([no-router]) ion-nav, :not([no-router]) ion-tabs, :not([no-router]) ion-router-outlet';
+function searchNavNode(root) {
+    if (!root) {
+        return undefined;
+    }
+    if (root.matches(QUERY)) {
+        return root;
+    }
+    var outlet = root.querySelector(QUERY);
+    return outlet ? outlet : undefined;
+}
+function matchesRedirect(input, route) {
+    var from = route.from, to = route.to;
+    if (to === undefined) {
+        return false;
+    }
+    if (from.length > input.length) {
+        return false;
+    }
+    for (var i = 0; i < from.length; i++) {
+        var expected = from[i];
+        if (expected === '*') {
+            return true;
+        }
+        if (expected !== input[i]) {
+            return false;
+        }
+    }
+    return from.length === input.length;
+}
+function routeRedirect(path, routes) {
+    return routes.find(function (route) { return matchesRedirect(path, route); });
+}
+function matchesIDs(ids, chain) {
+    var len = Math.min(ids.length, chain.length);
+    var i = 0;
+    for (; i < len; i++) {
+        if (ids[i].toLowerCase() !== chain[i].id) {
+            break;
+        }
+    }
+    return i;
+}
+function matchesPath(inputPath, chain) {
+    var segments = new RouterSegments(inputPath);
+    var matchesDefault = false;
+    var allparams;
+    for (var i = 0; i < chain.length; i++) {
+        var path = chain[i].path;
+        if (path[0] === '') {
+            matchesDefault = true;
+        }
+        else {
+            for (var _i = 0, path_1 = path; _i < path_1.length; _i++) {
+                var segment = path_1[_i];
+                var data = segments.next();
+                if (segment[0] === ':') {
+                    if (data === '') {
+                        return null;
+                    }
+                    allparams = allparams || [];
+                    var params = allparams[i] || (allparams[i] = {});
+                    params[segment.slice(1)] = data;
+                }
+                else if (data !== segment) {
+                    return null;
+                }
+            }
+            matchesDefault = false;
+        }
+    }
+    var matches = (matchesDefault)
+        ? matchesDefault === (segments.next() === '')
+        : true;
+    if (!matches) {
+        return null;
+    }
+    if (allparams) {
+        return chain.map(function (route, i) { return ({
+            id: route.id,
+            path: route.path,
+            params: mergeParams(route.params, allparams[i])
+        }); });
+    }
+    return chain;
+}
+function mergeParams(a, b) {
+    if (!a && b) {
+        return b;
+    }
+    else if (a && !b) {
+        return a;
+    }
+    else if (a && b) {
+        return Object.assign({}, a, b);
+    }
+    return undefined;
+}
+function routerIDsToChain(ids, chains) {
+    var match = null;
+    var maxMatches = 0;
+    var plainIDs = ids.map(function (i) { return i.id; });
+    for (var _i = 0, chains_1 = chains; _i < chains_1.length; _i++) {
+        var chain = chains_1[_i];
+        var score = matchesIDs(plainIDs, chain);
+        if (score > maxMatches) {
+            match = chain;
+            maxMatches = score;
+        }
+    }
+    if (match) {
+        return match.map(function (route, i) { return ({
+            id: route.id,
+            path: route.path,
+            params: mergeParams(route.params, ids[i] && ids[i].params)
+        }); });
+    }
+    return null;
+}
+function routerPathToChain(path, chains) {
+    var match = null;
+    var matches = 0;
+    for (var _i = 0, chains_2 = chains; _i < chains_2.length; _i++) {
+        var chain = chains_2[_i];
+        var matchedChain = matchesPath(path, chain);
+        if (matchedChain !== null) {
+            var score = computePriority(matchedChain);
+            if (score > matches) {
+                matches = score;
+                match = matchedChain;
+            }
+        }
+    }
+    return match;
+}
+function computePriority(chain) {
+    var score = 1;
+    var level = 1;
+    for (var _i = 0, chain_2 = chain; _i < chain_2.length; _i++) {
+        var route = chain_2[_i];
+        for (var _a = 0, _b = route.path; _a < _b.length; _a++) {
+            var path = _b[_a];
+            if (path[0] === ':') {
+                score += Math.pow(1, level);
+            }
+            else if (path !== '') {
+                score += Math.pow(2, level);
+            }
+            level++;
+        }
+    }
+    return score;
+}
+var RouterSegments = /** @class */ (function () {
+    function RouterSegments(path) {
+        this.path = path.slice();
+    }
+    RouterSegments.prototype.next = function () {
+        if (this.path.length > 0) {
+            return this.path.shift();
+        }
+        return '';
+    };
+    return RouterSegments;
+}());
+function readRedirects(root) {
+    return Array.from(root.children)
+        .filter(function (el) { return el.tagName === 'ION-ROUTE-REDIRECT'; })
+        .map(function (el) {
+        var to = readProp(el, 'to');
+        return {
+            from: parsePath(readProp(el, 'from')),
+            to: to == null ? undefined : parsePath(to),
+        };
+    });
+}
+function readRoutes(root) {
+    return flattenRouterTree(readRouteNodes(root));
+}
+function readRouteNodes(root, node) {
+    if (node === void 0) { node = root; }
+    return Array.from(node.children)
+        .filter(function (el) { return el.tagName === 'ION-ROUTE' && el.component; })
+        .map(function (el) {
+        var component = readProp(el, 'component');
+        if (component == null) {
+            throw new Error('component missing in ion-route');
+        }
+        return {
+            path: parsePath(readProp(el, 'url')),
+            id: component.toLowerCase(),
+            params: el.componentProps,
+            children: readRouteNodes(root, el)
+        };
+    });
+}
+function readProp(el, prop) {
+    if (prop in el) {
+        return el[prop];
+    }
+    if (el.hasAttribute(prop)) {
+        return el.getAttribute(prop);
+    }
+    return null;
+}
+function flattenRouterTree(nodes) {
+    var routes = [];
+    for (var _i = 0, nodes_1 = nodes; _i < nodes_1.length; _i++) {
+        var node = nodes_1[_i];
+        flattenNode([], routes, node);
+    }
+    return routes;
+}
+function flattenNode(chain, routes, node) {
+    var s = chain.slice();
+    s.push({
+        id: node.id,
+        path: node.path,
+        params: node.params
+    });
+    if (node.children.length === 0) {
+        routes.push(s);
+        return;
+    }
+    for (var _i = 0, _a = node.children; _i < _a.length; _i++) {
+        var sub = _a[_i];
+        flattenNode(s, routes, sub);
+    }
+}
+var Router = /** @class */ (function () {
+    function Router() {
+        this.previousPath = null;
+        this.busy = false;
+        this.state = 0;
+        this.lastState = 0;
+        this.root = '/';
+        this.useHash = true;
+    }
+    Router.prototype.componentWillLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.debug('[ion-router] router will load');
+                        return [4 /*yield*/, waitUntilNavNode(this.win)];
+                    case 1:
+                        _a.sent();
+                        console.debug('[ion-router] found nav');
+                        return [4 /*yield*/, this.onRoutesChanged()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Router.prototype.componentDidLoad = function () {
+        this.win.addEventListener('ionRouteRedirectChanged', Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.onRedirectChanged.bind(this), 10));
+        this.win.addEventListener('ionRouteDataChanged', Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.onRoutesChanged.bind(this), 100));
+    };
+    Router.prototype.onPopState = function () {
+        var direction = this.historyDirection();
+        var path = this.getPath();
+        console.debug('[ion-router] URL changed -> update nav', path, direction);
+        return this.writeNavStateRoot(path, direction);
+    };
+    Router.prototype.onBackButton = function (ev) {
+        var _this = this;
+        ev.detail.register(0, function () { return _this.goBack(); });
+    };
+    Router.prototype.push = function (url, direction) {
+        if (direction === void 0) { direction = 'forward'; }
+        if (url.startsWith('.')) {
+            url = (new URL(url, window.location.href)).pathname;
+        }
+        console.debug('[ion-router] URL pushed -> updating nav', url, direction);
+        var path = parsePath(url);
+        var intent = DIRECTION_TO_INTENT[direction];
+        this.setPath(path, intent);
+        return this.writeNavStateRoot(path, intent);
+    };
+    Router.prototype.goBack = function () {
+        this.win.history.back(1);
+        return Promise.resolve(this.waitPromise);
+    };
+    Router.prototype.printDebug = function () {
+        console.debug('CURRENT PATH', this.getPath());
+        console.debug('PREVIOUS PATH', this.previousPath);
+        printRoutes(readRoutes(this.el));
+        printRedirects(readRedirects(this.el));
+    };
+    Router.prototype.navChanged = function (intent) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _a, ids, outlet, routes, chain, path;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (this.busy) {
+                            console.warn('[ion-router] router is busy, navChanged was cancelled');
+                            return [2 /*return*/, false];
+                        }
+                        return [4 /*yield*/, readNavState(this.win.document.body)];
+                    case 1:
+                        _a = _b.sent(), ids = _a.ids, outlet = _a.outlet;
+                        routes = readRoutes(this.el);
+                        chain = routerIDsToChain(ids, routes);
+                        if (!chain) {
+                            console.warn('[ion-router] no matching URL for ', ids.map(function (i) { return i.id; }));
+                            return [2 /*return*/, false];
+                        }
+                        path = chainToPath(chain);
+                        if (!path) {
+                            console.warn('[ion-router] router could not match path because some required param is missing');
+                            return [2 /*return*/, false];
+                        }
+                        console.debug('[ion-router] nav changed -> update URL', ids, path);
+                        this.setPath(path, intent);
+                        return [4 /*yield*/, this.safeWriteNavState(outlet, chain, 0, path, null, ids.length)];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
+    Router.prototype.onRedirectChanged = function () {
+        var path = this.getPath();
+        if (path && routeRedirect(path, readRedirects(this.el))) {
+            this.writeNavStateRoot(path, 0);
+        }
+    };
+    Router.prototype.onRoutesChanged = function () {
+        return this.writeNavStateRoot(this.getPath(), 0);
+    };
+    Router.prototype.historyDirection = function () {
+        if (this.win.history.state === null) {
+            this.state++;
+            this.win.history.replaceState(this.state, this.win.document.title, this.win.document.location.href);
+        }
+        var state = this.win.history.state;
+        var lastState = this.lastState;
+        this.lastState = state;
+        if (state > lastState) {
+            return 1;
+        }
+        else if (state < lastState) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    };
+    Router.prototype.writeNavStateRoot = function (path, intent) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var redirects, redirect, redirectFrom, routes, chain;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                if (!path) {
+                    console.error('[ion-router] URL is not part of the routing set');
+                    return [2 /*return*/, false];
+                }
+                redirects = readRedirects(this.el);
+                redirect = routeRedirect(path, redirects);
+                redirectFrom = null;
+                if (redirect) {
+                    this.setPath(redirect.to, intent);
+                    redirectFrom = redirect.from;
+                    path = redirect.to;
+                }
+                routes = readRoutes(this.el);
+                chain = routerPathToChain(path, routes);
+                if (!chain) {
+                    console.error('[ion-router] the path does not match any route');
+                    return [2 /*return*/, false];
+                }
+                return [2 /*return*/, this.safeWriteNavState(this.win.document.body, chain, intent, path, redirectFrom)];
+            });
+        });
+    };
+    Router.prototype.safeWriteNavState = function (node, chain, intent, path, redirectFrom, index) {
+        if (index === void 0) { index = 0; }
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var unlock, changed, e_2;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.lock()];
+                    case 1:
+                        unlock = _a.sent();
+                        changed = false;
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, this.writeNavState(node, chain, intent, path, redirectFrom, index)];
+                    case 3:
+                        changed = _a.sent();
+                        return [3 /*break*/, 5];
+                    case 4:
+                        e_2 = _a.sent();
+                        console.error(e_2);
+                        return [3 /*break*/, 5];
+                    case 5:
+                        unlock();
+                        return [2 /*return*/, changed];
+                }
+            });
+        });
+    };
+    Router.prototype.lock = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var p, resolve;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        p = this.waitPromise;
+                        this.waitPromise = new Promise(function (r) { return resolve = r; });
+                        if (!(p !== undefined)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, p];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2: return [2 /*return*/, resolve];
+                }
+            });
+        });
+    };
+    Router.prototype.writeNavState = function (node, chain, intent, path, redirectFrom, index) {
+        if (index === void 0) { index = 0; }
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var routeEvent, changed;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (this.busy) {
+                            console.warn('[ion-router] router is busy, transition was cancelled');
+                            return [2 /*return*/, false];
+                        }
+                        this.busy = true;
+                        routeEvent = this.routeChangeEvent(path, redirectFrom);
+                        if (routeEvent) {
+                            this.ionRouteWillChange.emit(routeEvent);
+                        }
+                        return [4 /*yield*/, writeNavState(node, chain, intent, index)];
+                    case 1:
+                        changed = _a.sent();
+                        this.busy = false;
+                        if (changed) {
+                            console.debug('[ion-router] route changed', path);
+                        }
+                        if (routeEvent) {
+                            this.ionRouteDidChange.emit(routeEvent);
+                        }
+                        return [2 /*return*/, changed];
+                }
+            });
+        });
+    };
+    Router.prototype.setPath = function (path, intent) {
+        this.state++;
+        writePath(this.win.history, this.root, this.useHash, path, intent, this.state);
+    };
+    Router.prototype.getPath = function () {
+        return readPath(this.win.location, this.root, this.useHash);
+    };
+    Router.prototype.routeChangeEvent = function (path, redirectFromPath) {
+        var from = this.previousPath;
+        var to = generatePath(path);
+        this.previousPath = to;
+        if (to === from) {
+            return null;
+        }
+        var redirectedFrom = redirectFromPath ? generatePath(redirectFromPath) : null;
+        return {
+            from: from,
+            redirectedFrom: redirectedFrom,
+            to: to,
+        };
+    };
+    Object.defineProperty(Router, "is", {
+        get: function () { return "ion-router"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Router, "properties", {
+        get: function () {
+            return {
+                "config": {
+                    "context": "config"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "goBack": {
+                    "method": true
+                },
+                "navChanged": {
+                    "method": true
+                },
+                "printDebug": {
+                    "method": true
+                },
+                "push": {
+                    "method": true
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "root": {
+                    "type": String,
+                    "attr": "root"
+                },
+                "useHash": {
+                    "type": Boolean,
+                    "attr": "use-hash"
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Router, "events", {
+        get: function () {
+            return [{
+                    "name": "ionRouteWillChange",
+                    "method": "ionRouteWillChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionRouteDidChange",
+                    "method": "ionRouteDidChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Router, "listeners", {
+        get: function () {
+            return [{
+                    "name": "window:popstate",
+                    "method": "onPopState"
+                }, {
+                    "name": "document:ionBackButton",
+                    "method": "onBackButton"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Router;
+}());
+var DIRECTION_TO_INTENT = {
+    'back': -1,
+    'root': 0,
+    'forward': 1
+};
+var RouterOutlet = /** @class */ (function () {
+    function RouterOutlet() {
+        this.animated = true;
+    }
+    RouterOutlet.prototype.componentWillLoad = function () {
+        this.ionNavWillLoad.emit();
+    };
+    RouterOutlet.prototype.componentDidUnload = function () {
+        this.activeEl = this.activeComponent = undefined;
+    };
+    RouterOutlet.prototype.setRoot = function (component, params, opts) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var leavingEl, enteringEl;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (this.activeComponent === component) {
+                            return [2 /*return*/, false];
+                        }
+                        leavingEl = this.activeEl;
+                        return [4 /*yield*/, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["a"])(this.delegate, this.el, component, ['ion-page', 'ion-page-invisible'], params)];
+                    case 1:
+                        enteringEl = _a.sent();
+                        this.activeComponent = component;
+                        this.activeEl = enteringEl;
+                        return [4 /*yield*/, this.commit(enteringEl, leavingEl, opts)];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["b"])(this.delegate, leavingEl)];
+                    case 3:
+                        _a.sent();
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
+    RouterOutlet.prototype.commit = function (enteringEl, leavingEl, opts) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var unlock, changed, e_3;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.lock()];
+                    case 1:
+                        unlock = _a.sent();
+                        changed = false;
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, this.transition(enteringEl, leavingEl, opts)];
+                    case 3:
+                        changed = _a.sent();
+                        return [3 /*break*/, 5];
+                    case 4:
+                        e_3 = _a.sent();
+                        console.error(e_3);
+                        return [3 /*break*/, 5];
+                    case 5:
+                        unlock();
+                        return [2 /*return*/, changed];
+                }
+            });
+        });
+    };
+    RouterOutlet.prototype.setRouteId = function (id, params, direction) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var changed;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.setRoot(id, params, {
+                            duration: direction === 0 ? 0 : undefined,
+                            direction: direction === -1 ? 'back' : 'forward',
+                        })];
+                    case 1:
+                        changed = _a.sent();
+                        return [2 /*return*/, {
+                                changed: changed,
+                                element: this.activeEl
+                            }];
+                }
+            });
+        });
+    };
+    RouterOutlet.prototype.getRouteId = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var active;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                active = this.activeEl;
+                return [2 /*return*/, active ? {
+                        id: active.tagName,
+                        element: active,
+                    } : undefined];
+            });
+        });
+    };
+    RouterOutlet.prototype.lock = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var p, resolve;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        p = this.waitPromise;
+                        this.waitPromise = new Promise(function (r) { return resolve = r; });
+                        if (!(p !== undefined)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, p];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2: return [2 /*return*/, resolve];
+                }
+            });
+        });
+    };
+    RouterOutlet.prototype.transition = function (enteringEl, leavingEl, opts) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _a, mode, queue, animationCtrl, win, el, animated;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (leavingEl === enteringEl) {
+                            return [2 /*return*/, false];
+                        }
+                        this.ionNavWillChange.emit();
+                        opts = opts || {};
+                        _a = this, mode = _a.mode, queue = _a.queue, animationCtrl = _a.animationCtrl, win = _a.win, el = _a.el;
+                        animated = this.animated && this.config.getBoolean('animated', true);
+                        return [4 /*yield*/, Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_5__["d"])(Object.assign({ mode: mode,
+                                queue: queue,
+                                animated: animated,
+                                animationCtrl: animationCtrl, window: win, enteringEl: enteringEl,
+                                leavingEl: leavingEl, baseEl: el }, opts))];
+                    case 1:
+                        _b.sent();
+                        this.ionNavDidChange.emit();
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    };
+    RouterOutlet.prototype.render = function () {
+        return [
+            this.mode === 'ios' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "nav-decor" }),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)
+        ];
+    };
+    Object.defineProperty(RouterOutlet, "is", {
+        get: function () { return "ion-router-outlet"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouterOutlet, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouterOutlet, "properties", {
+        get: function () {
+            return {
+                "animated": {
+                    "type": Boolean,
+                    "attr": "animated"
+                },
+                "animationBuilder": {
+                    "type": "Any",
+                    "attr": "animation-builder"
+                },
+                "animationCtrl": {
+                    "connect": "ion-animation-controller"
+                },
+                "commit": {
+                    "method": true
+                },
+                "config": {
+                    "context": "config"
+                },
+                "delegate": {
+                    "type": "Any",
+                    "attr": "delegate"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "getRouteId": {
+                    "method": true
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "setRoot": {
+                    "method": true
+                },
+                "setRouteId": {
+                    "method": true
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouterOutlet, "events", {
+        get: function () {
+            return [{
+                    "name": "ionNavWillLoad",
+                    "method": "ionNavWillLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionNavWillChange",
+                    "method": "ionNavWillChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionNavDidChange",
+                    "method": "ionNavDidChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouterOutlet, "style", {
+        get: function () { return ":host{left:0;right:0;top:0;bottom:0;position:absolute;contain:layout size style;overflow:hidden;z-index:0}.nav-decor{display:none}:host(.show-decor) .nav-decor{left:0;right:0;top:0;bottom:0;display:block;position:absolute;background:#000;z-index:0;pointer-events:none}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return RouterOutlet;
+}());
+
+
 
 /***/ })
 

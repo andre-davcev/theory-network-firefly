@@ -776,816 +776,887 @@ function isNativeScript() {
 
 /***/ }),
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components lazy recursive ^\\.\\/.*\\.js$":
-/*!*******************************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components lazy ^\.\/.*\.js$ namespace object ***!
-  \*******************************************************************************************************************************************************/
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build lazy ^\.\/.*\.entry\.js$ include: \.entry\.js$ namespace object ***!
+  \*******************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./0iz6fign.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/0iz6fign.js",
-		"common",
-		11
-	],
-	"./0iz6fign.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/0iz6fign.sc.js",
-		"common",
-		12
-	],
-	"./1n9h5yax.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/1n9h5yax.js",
+	"./1lfoqrsh.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1lfoqrsh.entry.js",
+		0,
 		"common",
 		13
 	],
-	"./1n9h5yax.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/1n9h5yax.sc.js",
+	"./1lfoqrsh.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1lfoqrsh.sc.entry.js",
+		0,
 		"common",
 		14
 	],
-	"./1tyxckfi.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/1tyxckfi.js",
+	"./1lltkidp.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1lltkidp.entry.js",
+		0,
 		"common",
 		15
 	],
-	"./1tyxckfi.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/1tyxckfi.sc.js",
+	"./1lltkidp.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1lltkidp.sc.entry.js",
+		0,
 		"common",
 		16
 	],
-	"./1vurn78f.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/1vurn78f.js",
+	"./1nfzypqm.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1nfzypqm.entry.js",
+		0,
 		"common",
 		17
 	],
-	"./1vurn78f.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/1vurn78f.sc.js",
+	"./1nfzypqm.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1nfzypqm.sc.entry.js",
+		0,
 		"common",
 		18
 	],
-	"./1xdpom6f.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/1xdpom6f.js",
+	"./2pag0jtj.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2pag0jtj.entry.js",
+		0,
 		"common",
 		19
 	],
-	"./1xdpom6f.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/1xdpom6f.sc.js",
+	"./2pag0jtj.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2pag0jtj.sc.entry.js",
+		0,
 		"common",
 		20
 	],
-	"./2fvhq14d.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/2fvhq14d.js",
+	"./4afjwwlz.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4afjwwlz.entry.js",
+		0,
 		"common",
 		21
 	],
-	"./2fvhq14d.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/2fvhq14d.sc.js",
+	"./4afjwwlz.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4afjwwlz.sc.entry.js",
+		0,
 		"common",
 		22
 	],
-	"./5crjzoc5.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/5crjzoc5.js",
+	"./4fehonnh.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4fehonnh.entry.js",
+		0,
 		"common",
 		23
 	],
-	"./5crjzoc5.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/5crjzoc5.sc.js",
+	"./4fehonnh.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4fehonnh.sc.entry.js",
+		0,
 		"common",
 		24
 	],
-	"./7wrgypuz.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/7wrgypuz.js",
-		"common",
+	"./6lyikwjo.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/6lyikwjo.entry.js",
 		25
 	],
-	"./7wrgypuz.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/7wrgypuz.sc.js",
-		"common",
+	"./6lyikwjo.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/6lyikwjo.sc.entry.js",
 		26
 	],
-	"./8fuazfbn.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8fuazfbn.js",
+	"./72uhruqj.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/72uhruqj.entry.js",
+		0,
+		"common",
 		27
 	],
-	"./8fuazfbn.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8fuazfbn.sc.js",
+	"./72uhruqj.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/72uhruqj.sc.entry.js",
+		0,
+		"common",
 		28
 	],
-	"./8hc0amys.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8hc0amys.js",
+	"./7l6puety.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7l6puety.entry.js",
+		0,
 		"common",
 		29
 	],
-	"./8hc0amys.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8hc0amys.sc.js",
+	"./7l6puety.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7l6puety.sc.entry.js",
+		0,
 		"common",
 		30
 	],
-	"./8zjbpglr.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8zjbpglr.js",
+	"./7vzgoafc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7vzgoafc.entry.js",
+		0,
 		"common",
 		31
 	],
-	"./8zjbpglr.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8zjbpglr.sc.js",
+	"./7vzgoafc.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7vzgoafc.sc.entry.js",
+		0,
 		"common",
 		32
 	],
-	"./aeyzpkio.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/aeyzpkio.js",
-		"common",
+	"./8p7lgzsc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8p7lgzsc.entry.js",
 		33
 	],
-	"./aeyzpkio.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/aeyzpkio.sc.js",
-		"common",
+	"./8p7lgzsc.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8p7lgzsc.sc.entry.js",
 		34
 	],
-	"./ainrlibw.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ainrlibw.js",
+	"./8xoefha8.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8xoefha8.entry.js",
 		"common",
 		35
 	],
-	"./ainrlibw.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ainrlibw.sc.js",
+	"./8xoefha8.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8xoefha8.sc.entry.js",
 		"common",
 		36
 	],
-	"./al4ydocp.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/al4ydocp.js",
+	"./amegv4d5.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/amegv4d5.entry.js",
 		"common",
 		37
 	],
-	"./al4ydocp.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/al4ydocp.sc.js",
+	"./amegv4d5.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/amegv4d5.sc.entry.js",
 		"common",
 		38
 	],
-	"./b7vmm4bm.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/b7vmm4bm.js",
+	"./bfzinp9p.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/bfzinp9p.entry.js",
+		0,
 		"common",
 		39
 	],
-	"./b7vmm4bm.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/b7vmm4bm.sc.js",
+	"./bfzinp9p.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/bfzinp9p.sc.entry.js",
+		0,
 		"common",
 		40
 	],
-	"./bpxvc3nq.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/bpxvc3nq.js",
+	"./cccprf06.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/cccprf06.entry.js",
+		0,
 		"common",
 		41
 	],
-	"./bpxvc3nq.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/bpxvc3nq.sc.js",
+	"./cccprf06.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/cccprf06.sc.entry.js",
+		0,
 		"common",
 		42
 	],
-	"./carlzqik.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/carlzqik.js",
+	"./dcxguzfo.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dcxguzfo.entry.js",
+		0,
 		"common",
 		43
 	],
-	"./carlzqik.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/carlzqik.sc.js",
+	"./dcxguzfo.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dcxguzfo.sc.entry.js",
+		0,
 		"common",
 		44
 	],
-	"./chunk-276e047f.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-276e047f.js",
-		"common"
-	],
-	"./chunk-5f438245.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-5f438245.js",
-		"common"
-	],
-	"./chunk-a4253575.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js",
-		"common"
-	],
-	"./chunk-ca273e40.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-ca273e40.js",
-		"common"
-	],
-	"./chunk-db84a248.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-db84a248.js",
-		"common"
-	],
-	"./csqwq01c.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/csqwq01c.js",
+	"./deo10kje.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/deo10kje.entry.js",
 		"common",
 		45
 	],
-	"./csqwq01c.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/csqwq01c.sc.js",
+	"./deo10kje.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/deo10kje.sc.entry.js",
 		"common",
 		46
 	],
-	"./cvpumfnt.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/cvpumfnt.js",
+	"./dojt5vwf.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dojt5vwf.entry.js",
+		0,
 		"common",
 		47
 	],
-	"./cvpumfnt.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/cvpumfnt.sc.js",
+	"./dojt5vwf.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dojt5vwf.sc.entry.js",
+		0,
 		"common",
 		48
 	],
-	"./dcyhuhsu.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dcyhuhsu.js",
+	"./dotnjsqs.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dotnjsqs.entry.js",
+		0,
 		"common",
 		49
 	],
-	"./dcyhuhsu.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dcyhuhsu.sc.js",
+	"./dotnjsqs.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dotnjsqs.sc.entry.js",
+		0,
 		"common",
 		50
 	],
-	"./dko6k9zg.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dko6k9zg.js",
-		"common",
+	"./eilluzs6.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eilluzs6.entry.js",
 		51
 	],
-	"./dko6k9zg.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dko6k9zg.sc.js",
-		"common",
+	"./eilluzs6.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eilluzs6.sc.entry.js",
 		52
 	],
-	"./dovqtr4x.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dovqtr4x.js",
+	"./eqt7cuos.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eqt7cuos.entry.js",
+		0,
 		"common",
 		53
 	],
-	"./dovqtr4x.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dovqtr4x.sc.js",
+	"./eqt7cuos.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eqt7cuos.sc.entry.js",
+		0,
 		"common",
 		54
 	],
-	"./dq6scah8.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dq6scah8.js",
+	"./fhvo81yz.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fhvo81yz.entry.js",
+		0,
 		"common",
 		55
 	],
-	"./dq6scah8.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dq6scah8.sc.js",
+	"./fhvo81yz.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fhvo81yz.sc.entry.js",
+		0,
 		"common",
 		56
 	],
-	"./dubpmlw2.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dubpmlw2.js",
+	"./fmw4ybuv.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fmw4ybuv.entry.js",
+		0,
 		"common",
 		57
 	],
-	"./dubpmlw2.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dubpmlw2.sc.js",
+	"./fmw4ybuv.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fmw4ybuv.sc.entry.js",
+		0,
 		"common",
 		58
 	],
-	"./f4c6sdkg.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/f4c6sdkg.js",
+	"./fz9h7zdi.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fz9h7zdi.entry.js",
+		0,
 		"common",
 		59
 	],
-	"./f4c6sdkg.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/f4c6sdkg.sc.js",
+	"./fz9h7zdi.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fz9h7zdi.sc.entry.js",
+		0,
 		"common",
 		60
 	],
-	"./frurae9c.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/frurae9c.js",
+	"./hqo7rktj.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hqo7rktj.entry.js",
+		0,
 		"common",
 		61
 	],
-	"./frurae9c.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/frurae9c.sc.js",
+	"./hqo7rktj.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hqo7rktj.sc.entry.js",
+		0,
 		"common",
 		62
 	],
-	"./gesture.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/gesture.js",
-		0
-	],
-	"./gq8h5fwm.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/gq8h5fwm.js",
+	"./j9aljzr0.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j9aljzr0.entry.js",
+		0,
 		"common",
 		63
 	],
-	"./gq8h5fwm.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/gq8h5fwm.sc.js",
+	"./j9aljzr0.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j9aljzr0.sc.entry.js",
+		0,
 		"common",
 		64
 	],
-	"./h0wlf0bd.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/h0wlf0bd.js",
+	"./jc49rjp4.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jc49rjp4.entry.js",
 		"common",
 		65
 	],
-	"./h0wlf0bd.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/h0wlf0bd.sc.js",
+	"./jc49rjp4.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jc49rjp4.sc.entry.js",
 		"common",
 		66
 	],
-	"./hardware-back-button.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hardware-back-button.js",
-		1
-	],
-	"./hp3h1z0g.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hp3h1z0g.js",
+	"./jzof0l9g.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jzof0l9g.entry.js",
+		0,
 		"common",
 		67
 	],
-	"./hp3h1z0g.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hp3h1z0g.sc.js",
+	"./jzof0l9g.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jzof0l9g.sc.entry.js",
+		0,
 		"common",
 		68
 	],
-	"./hvtpn8k5.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hvtpn8k5.js",
+	"./k5xfzocc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/k5xfzocc.entry.js",
+		0,
 		"common",
 		69
 	],
-	"./hvtpn8k5.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hvtpn8k5.sc.js",
+	"./k5xfzocc.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/k5xfzocc.sc.entry.js",
+		0,
 		"common",
 		70
 	],
-	"./hx2ygwkr.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hx2ygwkr.js",
+	"./kuy3ry2b.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kuy3ry2b.entry.js",
+		0,
 		"common",
 		71
 	],
-	"./hx2ygwkr.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hx2ygwkr.sc.js",
+	"./kuy3ry2b.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kuy3ry2b.sc.entry.js",
+		0,
 		"common",
 		72
 	],
-	"./ic16lacj.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ic16lacj.js",
+	"./ldpcwjk1.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ldpcwjk1.entry.js",
+		0,
 		"common",
 		73
 	],
-	"./ic16lacj.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ic16lacj.sc.js",
+	"./ldpcwjk1.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ldpcwjk1.sc.entry.js",
+		0,
 		"common",
 		74
 	],
-	"./igx912x9.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/igx912x9.js",
+	"./lovgbjzt.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lovgbjzt.entry.js",
+		0,
+		"common",
 		75
 	],
-	"./igx912x9.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/igx912x9.sc.js",
+	"./lovgbjzt.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lovgbjzt.sc.entry.js",
+		0,
+		"common",
 		76
 	],
-	"./iihtgbhw.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/iihtgbhw.js",
+	"./lp9x6s2o.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lp9x6s2o.entry.js",
+		0,
 		"common",
 		77
 	],
-	"./iihtgbhw.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/iihtgbhw.sc.js",
+	"./lp9x6s2o.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lp9x6s2o.sc.entry.js",
+		0,
 		"common",
 		78
 	],
-	"./index.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/index.js",
+	"./m4wqmiey.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/m4wqmiey.entry.js",
+		0,
 		"common",
 		79
 	],
-	"./input-shims.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/input-shims.js",
-		"common"
-	],
-	"./ios.transition.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ios.transition.js",
-		3
-	],
-	"./j071tyom.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/j071tyom.js",
+	"./m4wqmiey.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/m4wqmiey.sc.entry.js",
+		0,
 		"common",
 		80
 	],
-	"./j071tyom.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/j071tyom.sc.js",
+	"./mjggusps.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mjggusps.entry.js",
+		0,
 		"common",
 		81
 	],
-	"./j8pysivw.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/j8pysivw.js",
+	"./mjggusps.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mjggusps.sc.entry.js",
+		0,
 		"common",
 		82
 	],
-	"./j8pysivw.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/j8pysivw.sc.js",
+	"./mqik6kmg.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mqik6kmg.entry.js",
+		0,
 		"common",
 		83
 	],
-	"./jwtki7yq.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/jwtki7yq.js",
+	"./mqik6kmg.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mqik6kmg.sc.entry.js",
+		0,
 		"common",
 		84
 	],
-	"./jwtki7yq.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/jwtki7yq.sc.js",
+	"./nhr77xez.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nhr77xez.entry.js",
+		0,
 		"common",
 		85
 	],
-	"./k3arey9z.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/k3arey9z.js",
+	"./nhr77xez.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nhr77xez.sc.entry.js",
+		0,
 		"common",
 		86
 	],
-	"./k3arey9z.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/k3arey9z.sc.js",
-		"common",
+	"./ntlsthn3.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ntlsthn3.entry.js",
 		87
 	],
-	"./kns6yxvk.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/kns6yxvk.js",
-		"common",
+	"./ntlsthn3.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ntlsthn3.sc.entry.js",
 		88
 	],
-	"./kns6yxvk.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/kns6yxvk.sc.js",
+	"./nxuqytzx.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nxuqytzx.entry.js",
+		0,
 		"common",
 		89
 	],
-	"./kqirdh6c.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/kqirdh6c.js",
+	"./nxuqytzx.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nxuqytzx.sc.entry.js",
+		0,
 		"common",
 		90
 	],
-	"./kqirdh6c.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/kqirdh6c.sc.js",
+	"./olkzc6dr.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/olkzc6dr.entry.js",
+		0,
 		"common",
 		91
 	],
-	"./kr2ks9ex.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/kr2ks9ex.js",
+	"./olkzc6dr.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/olkzc6dr.sc.entry.js",
+		0,
 		"common",
 		92
 	],
-	"./kr2ks9ex.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/kr2ks9ex.sc.js",
+	"./om5i0dsm.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/om5i0dsm.entry.js",
+		0,
 		"common",
 		93
 	],
-	"./lk8d4yol.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/lk8d4yol.js",
+	"./om5i0dsm.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/om5i0dsm.sc.entry.js",
+		0,
 		"common",
 		94
 	],
-	"./lk8d4yol.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/lk8d4yol.sc.js",
+	"./oszblgpf.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/oszblgpf.entry.js",
+		0,
 		"common",
 		95
 	],
-	"./lnqrftay.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/lnqrftay.js",
+	"./oszblgpf.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/oszblgpf.sc.entry.js",
+		0,
 		"common",
 		96
 	],
-	"./lnqrftay.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/lnqrftay.sc.js",
+	"./pze0hfsv.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/pze0hfsv.entry.js",
+		0,
 		"common",
 		97
 	],
-	"./lviwsafz.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/lviwsafz.js",
+	"./pze0hfsv.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/pze0hfsv.sc.entry.js",
+		0,
 		"common",
 		98
 	],
-	"./lviwsafz.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/lviwsafz.sc.js",
+	"./reriaxsx.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/reriaxsx.entry.js",
+		0,
 		"common",
 		99
 	],
-	"./md.transition.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/md.transition.js",
-		4
-	],
-	"./mgyaif1n.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/mgyaif1n.js",
+	"./reriaxsx.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/reriaxsx.sc.entry.js",
+		0,
 		"common",
 		100
 	],
-	"./mgyaif1n.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/mgyaif1n.sc.js",
+	"./rltleisd.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rltleisd.entry.js",
+		0,
 		"common",
 		101
 	],
-	"./nkpqfhed.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/nkpqfhed.js",
+	"./rltleisd.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rltleisd.sc.entry.js",
+		0,
 		"common",
 		102
 	],
-	"./nkpqfhed.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/nkpqfhed.sc.js",
+	"./rywx7u7y.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rywx7u7y.entry.js",
+		0,
 		"common",
 		103
 	],
-	"./o9bkx9ur.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/o9bkx9ur.js",
+	"./rywx7u7y.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rywx7u7y.sc.entry.js",
+		0,
 		"common",
 		104
 	],
-	"./o9bkx9ur.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/o9bkx9ur.sc.js",
+	"./s0ihs6g2.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s0ihs6g2.entry.js",
+		0,
 		"common",
 		105
 	],
-	"./ohlgz1zq.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ohlgz1zq.js",
+	"./s0ihs6g2.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s0ihs6g2.sc.entry.js",
+		0,
 		"common",
 		106
 	],
-	"./ohlgz1zq.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ohlgz1zq.sc.js",
+	"./s1a9daht.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s1a9daht.entry.js",
+		0,
 		"common",
 		107
 	],
-	"./ooo1yrih.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ooo1yrih.js",
+	"./s1a9daht.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s1a9daht.sc.entry.js",
+		0,
 		"common",
 		108
 	],
-	"./ooo1yrih.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ooo1yrih.sc.js",
+	"./skzvaxms.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/skzvaxms.entry.js",
+		0,
 		"common",
 		109
 	],
-	"./ouvzk56y.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ouvzk56y.js",
+	"./skzvaxms.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/skzvaxms.sc.entry.js",
+		0,
 		"common",
 		110
 	],
-	"./ouvzk56y.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ouvzk56y.sc.js",
+	"./tlkmuszx.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/tlkmuszx.entry.js",
+		0,
 		"common",
 		111
 	],
-	"./ov1xqesp.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ov1xqesp.js",
+	"./tlkmuszx.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/tlkmuszx.sc.entry.js",
+		0,
 		"common",
 		112
 	],
-	"./ov1xqesp.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ov1xqesp.sc.js",
+	"./u21wriwl.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u21wriwl.entry.js",
+		0,
 		"common",
 		113
 	],
-	"./ovd8bylq.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ovd8bylq.js",
+	"./u21wriwl.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u21wriwl.sc.entry.js",
+		0,
 		"common",
 		114
 	],
-	"./ovd8bylq.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ovd8bylq.sc.js",
+	"./u6vnpl3q.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u6vnpl3q.entry.js",
+		0,
 		"common",
 		115
 	],
-	"./pfyzszvb.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pfyzszvb.js",
+	"./u6vnpl3q.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u6vnpl3q.sc.entry.js",
+		0,
 		"common",
 		116
 	],
-	"./pfyzszvb.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pfyzszvb.sc.js",
+	"./ueuxuisb.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ueuxuisb.entry.js",
+		0,
 		"common",
 		117
 	],
-	"./plmzb2rd.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/plmzb2rd.js",
+	"./ueuxuisb.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ueuxuisb.sc.entry.js",
+		0,
 		"common",
 		118
 	],
-	"./plmzb2rd.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/plmzb2rd.sc.js",
+	"./uknv235c.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uknv235c.entry.js",
+		0,
 		"common",
 		119
 	],
-	"./pny5jgxt.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pny5jgxt.js",
+	"./uknv235c.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uknv235c.sc.entry.js",
+		0,
 		"common",
 		120
 	],
-	"./pny5jgxt.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pny5jgxt.sc.js",
+	"./umpoq86q.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/umpoq86q.entry.js",
+		0,
 		"common",
 		121
 	],
-	"./qphzv9lk.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/qphzv9lk.js",
+	"./umpoq86q.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/umpoq86q.sc.entry.js",
+		0,
 		"common",
 		122
 	],
-	"./qphzv9lk.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/qphzv9lk.sc.js",
+	"./uogyt54d.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uogyt54d.entry.js",
+		0,
 		"common",
 		123
 	],
-	"./rihgbjgj.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/rihgbjgj.js",
+	"./uogyt54d.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uogyt54d.sc.entry.js",
+		0,
 		"common",
 		124
 	],
-	"./rihgbjgj.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/rihgbjgj.sc.js",
+	"./usxnqnjo.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/usxnqnjo.entry.js",
+		0,
 		"common",
 		125
 	],
-	"./sm2zlrta.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/sm2zlrta.js",
+	"./usxnqnjo.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/usxnqnjo.sc.entry.js",
+		0,
 		"common",
 		126
 	],
-	"./sm2zlrta.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/sm2zlrta.sc.js",
+	"./uw0jxr9c.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uw0jxr9c.entry.js",
+		0,
 		"common",
 		127
 	],
-	"./sq9nnxm2.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/sq9nnxm2.js",
+	"./uw0jxr9c.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uw0jxr9c.sc.entry.js",
+		0,
 		"common",
 		128
 	],
-	"./sq9nnxm2.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/sq9nnxm2.sc.js",
+	"./v1osu2ys.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/v1osu2ys.entry.js",
+		0,
 		"common",
 		129
 	],
-	"./status-tap.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/status-tap.js",
-		2
-	],
-	"./stxlpqkl.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/stxlpqkl.js",
+	"./v1osu2ys.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/v1osu2ys.sc.entry.js",
+		0,
 		"common",
 		130
 	],
-	"./stxlpqkl.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/stxlpqkl.sc.js",
+	"./vjbd2d3z.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/vjbd2d3z.entry.js",
+		0,
 		"common",
 		131
 	],
-	"./tap-click.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/tap-click.js",
-		"common"
-	],
-	"./txfdhs2w.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/txfdhs2w.js",
+	"./vjbd2d3z.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/vjbd2d3z.sc.entry.js",
+		0,
 		"common",
 		132
 	],
-	"./txfdhs2w.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/txfdhs2w.sc.js",
+	"./w1w8ptyb.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/w1w8ptyb.entry.js",
+		0,
 		"common",
 		133
 	],
-	"./tyhluajn.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/tyhluajn.js",
+	"./w1w8ptyb.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/w1w8ptyb.sc.entry.js",
+		0,
 		"common",
 		134
 	],
-	"./tyhluajn.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/tyhluajn.sc.js",
-		"common",
+	"./wab4rq7o.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wab4rq7o.entry.js",
 		135
 	],
-	"./uelgtckt.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/uelgtckt.js",
-		"common",
+	"./wab4rq7o.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wab4rq7o.sc.entry.js",
 		136
 	],
-	"./uelgtckt.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/uelgtckt.sc.js",
+	"./wew8hsrw.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wew8hsrw.entry.js",
 		"common",
 		137
 	],
-	"./vnlqynwa.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/vnlqynwa.js",
+	"./wew8hsrw.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wew8hsrw.sc.entry.js",
 		"common",
 		138
 	],
-	"./vnlqynwa.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/vnlqynwa.sc.js",
+	"./wrcbpqdl.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wrcbpqdl.entry.js",
+		0,
 		"common",
 		139
 	],
-	"./w1mgqp47.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/w1mgqp47.js",
+	"./wrcbpqdl.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wrcbpqdl.sc.entry.js",
+		0,
 		"common",
 		140
 	],
-	"./w1mgqp47.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/w1mgqp47.sc.js",
+	"./wuyxdemq.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wuyxdemq.entry.js",
+		0,
 		"common",
 		141
 	],
-	"./woyxtltn.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/woyxtltn.js",
+	"./wuyxdemq.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wuyxdemq.sc.entry.js",
+		0,
 		"common",
 		142
 	],
-	"./woyxtltn.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/woyxtltn.sc.js",
-		"common",
+	"./xcsewabo.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xcsewabo.entry.js",
 		143
 	],
-	"./xcsewabo.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/xcsewabo.js",
+	"./xcsewabo.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xcsewabo.sc.entry.js",
 		144
 	],
-	"./xcsewabo.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/xcsewabo.sc.js",
+	"./xdo4bwvv.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xdo4bwvv.entry.js",
 		145
 	],
-	"./xnzdjmmg.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/xnzdjmmg.js",
+	"./xdo4bwvv.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xdo4bwvv.sc.entry.js",
 		146
 	],
-	"./xnzdjmmg.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/xnzdjmmg.sc.js",
+	"./xpzzevkf.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xpzzevkf.entry.js",
+		0,
+		"common",
 		147
 	],
-	"./xwmkkhy0.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/xwmkkhy0.js",
+	"./xpzzevkf.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xpzzevkf.sc.entry.js",
+		0,
 		"common",
 		148
 	],
-	"./xwmkkhy0.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/xwmkkhy0.sc.js",
+	"./xwqkxa1e.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xwqkxa1e.entry.js",
+		0,
 		"common",
 		149
 	],
-	"./xyjznrch.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/xyjznrch.js",
+	"./xwqkxa1e.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xwqkxa1e.sc.entry.js",
+		0,
 		"common",
 		150
 	],
-	"./xyjznrch.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/xyjznrch.sc.js",
+	"./yfd10cv9.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yfd10cv9.entry.js",
+		0,
 		"common",
 		151
 	],
-	"./yextj6m4.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/yextj6m4.js",
+	"./yfd10cv9.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yfd10cv9.sc.entry.js",
+		0,
 		"common",
 		152
 	],
-	"./yextj6m4.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/yextj6m4.sc.js",
+	"./ykcub6au.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ykcub6au.entry.js",
+		0,
 		"common",
 		153
 	],
-	"./ygot15ry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ygot15ry.js",
+	"./ykcub6au.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ykcub6au.sc.entry.js",
+		0,
 		"common",
 		154
 	],
-	"./ygot15ry.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ygot15ry.sc.js",
+	"./yph33izb.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yph33izb.entry.js",
+		0,
 		"common",
 		155
 	],
-	"./yrpxz1br.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/yrpxz1br.js",
+	"./yph33izb.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yph33izb.sc.entry.js",
+		0,
 		"common",
 		156
 	],
-	"./yrpxz1br.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/yrpxz1br.sc.js",
+	"./ysezf9rx.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ysezf9rx.entry.js",
+		0,
 		"common",
 		157
 	],
-	"./ywug4gy4.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ywug4gy4.js",
+	"./ysezf9rx.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ysezf9rx.sc.entry.js",
+		0,
 		"common",
 		158
 	],
-	"./ywug4gy4.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ywug4gy4.sc.js",
+	"./yzayvfxb.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yzayvfxb.entry.js",
+		0,
 		"common",
 		159
 	],
-	"./zaltzdmz.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/zaltzdmz.js",
+	"./yzayvfxb.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yzayvfxb.sc.entry.js",
+		0,
 		"common",
 		160
 	],
-	"./zaltzdmz.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/zaltzdmz.sc.js",
+	"./zjet0lju.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zjet0lju.entry.js",
+		0,
 		"common",
 		161
 	],
-	"./zvhrhv7a.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/zvhrhv7a.js",
+	"./zjet0lju.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zjet0lju.sc.entry.js",
+		0,
+		"common",
 		162
 	],
-	"./zvhrhv7a.sc.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/zvhrhv7a.sc.js",
+	"./zradig84.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zradig84.entry.js",
+		0,
+		"common",
 		163
+	],
+	"./zradig84.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zradig84.sc.entry.js",
+		0,
+		"common",
+		164
 	]
 };
 function webpackAsyncContext(req) {
@@ -1605,7 +1676,7 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components lazy recursive ^\\.\\/.*\\.js$";
+webpackAsyncContext.id = "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$";
 module.exports = webpackAsyncContext;
 
 /***/ }),
@@ -2261,6 +2332,7 @@ var ComponentApp = /** @class */ (function () {
         this.platform.ready().then(function () {
             // if (isCapacitorNative(window))
             _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_2__["SplashScreen"].hide();
+            _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_2__["StatusBar"].show();
         });
     };
     ComponentApp = __decorate([
@@ -2699,8 +2771,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceCluster", function() { return ServiceCluster; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/observable/fromPromise */ "../../node_modules/rxjs-compat/_esm5/observable/fromPromise.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
 var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -2732,7 +2804,7 @@ var ServiceCluster = /** @class */ (function () {
             return ref.where('userid', '==', userid);
         })
             .snapshotChanges()
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (actions) {
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (actions) {
             return actions.map(function (a) {
                 var data = a.payload.doc.data();
                 var id = a.payload.doc.id;
@@ -2746,7 +2818,7 @@ var ServiceCluster = /** @class */ (function () {
         var id = this.afs.createId();
         cluster.id = id;
         var document = this.clustersCollection.doc(id);
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_3__["fromPromise"])(document.set(cluster)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function () { return document.valueChanges(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (cluster) { return cluster.dateCreated != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1));
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(document.set(cluster)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function () { return document.valueChanges(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (cluster) { return cluster.dateCreated != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1));
     };
     ServiceCluster = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
@@ -2771,7 +2843,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServiceIcon", function() { return ServiceIcon; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
-/* harmony import */ var rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/observable/fromPromise */ "../../node_modules/rxjs-compat/_esm5/observable/fromPromise.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
 var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -2818,7 +2890,7 @@ var ServiceIcon = /** @class */ (function () {
         var id = this.firestore.createId();
         icon.id = id;
         var document = this.icons.doc(id);
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__["fromPromise"])(document.set(icon)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function () { return document.valueChanges(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (icon) { return icon.dateCreated != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1));
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(document.set(icon)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function () { return document.valueChanges(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (icon) { return icon.dateCreated != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1));
     };
     ServiceIcon = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
@@ -3662,13 +3734,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateLanguage", function() { return StateLanguage; });
 /* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/observable/fromPromise */ "../../node_modules/rxjs-compat/_esm5/observable/fromPromise.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngx-translate/core */ "../../node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
-/* harmony import */ var _ionic_native_globalization_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/globalization/ngx */ "../../node_modules/@ionic-native/globalization/ngx/index.js");
-/* harmony import */ var _enums_platform_enum__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../enums/platform.enum */ "./src/app/enums/platform.enum.ts");
-/* harmony import */ var _language_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./language.actions */ "./src/app/state/language/language.actions.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngx-translate/core */ "../../node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
+/* harmony import */ var _ionic_native_globalization_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/globalization/ngx */ "../../node_modules/@ionic-native/globalization/ngx/index.js");
+/* harmony import */ var _enums_platform_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../enums/platform.enum */ "./src/app/enums/platform.enum.ts");
+/* harmony import */ var _language_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./language.actions */ "./src/app/state/language/language.actions.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3678,7 +3749,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -3702,37 +3772,37 @@ var StateLanguage = /** @class */ (function () {
     StateLanguage.prototype.languageGet = function (_a) {
         var patchState = _a.patchState, dispatch = _a.dispatch;
         var observable;
-        if (this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_7__["PlatformEnum"].Cordova)) {
-            observable = Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__["fromPromise"])(this.globalization.getLocaleName());
+        if (this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_6__["PlatformEnum"].Cordova)) {
+            observable = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.globalization.getLocaleName());
         }
         else {
-            observable = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])({ value: navigator.language });
+            observable = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])({ value: navigator.language });
         }
-        return observable.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (language) { return dispatch(new _language_actions__WEBPACK_IMPORTED_MODULE_8__["LanguageSet"](language.value)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(patchState({ error: error })); }));
+        return observable.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (language) { return dispatch(new _language_actions__WEBPACK_IMPORTED_MODULE_7__["LanguageSet"](language.value)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
     };
     StateLanguage.prototype.languageSet = function (_a, _b) {
         var patchState = _a.patchState;
         var payload = _b.payload;
         var language = payload;
         this.translate.use(language);
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(patchState({ language: language }));
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ language: language }));
     };
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_language_actions__WEBPACK_IMPORTED_MODULE_8__["LanguageInitialize"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_language_actions__WEBPACK_IMPORTED_MODULE_7__["LanguageInitialize"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
     ], StateLanguage.prototype, "languageInitialize", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_language_actions__WEBPACK_IMPORTED_MODULE_8__["LanguageGet"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_language_actions__WEBPACK_IMPORTED_MODULE_7__["LanguageGet"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateLanguage.prototype, "languageGet", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_language_actions__WEBPACK_IMPORTED_MODULE_8__["LanguageSet"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_language_actions__WEBPACK_IMPORTED_MODULE_7__["LanguageSet"]),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, _language_actions__WEBPACK_IMPORTED_MODULE_8__["LanguageSet"]]),
+        __metadata("design:paramtypes", [Object, _language_actions__WEBPACK_IMPORTED_MODULE_7__["LanguageSet"]]),
         __metadata("design:returntype", void 0)
     ], StateLanguage.prototype, "languageSet", null);
     __decorate([
@@ -3761,7 +3831,7 @@ var StateLanguage = /** @class */ (function () {
                 error: undefined
             }
         }),
-        __metadata("design:paramtypes", [_ionic_native_globalization_ngx__WEBPACK_IMPORTED_MODULE_6__["Globalization"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__["TranslateService"]])
+        __metadata("design:paramtypes", [_ionic_native_globalization_ngx__WEBPACK_IMPORTED_MODULE_5__["Globalization"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslateService"]])
     ], StateLanguage);
     return StateLanguage;
 }());
@@ -3942,13 +4012,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateNotifications", function() { return StateNotifications; });
 /* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/observable/fromPromise */ "../../node_modules/rxjs-compat/_esm5/observable/fromPromise.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/firebase/ngx */ "../../node_modules/@ionic-native/firebase/ngx/index.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _notifications_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./notifications.actions */ "./src/app/state/notifications/notifications.actions.ts");
-/* harmony import */ var _user_user_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../user/user.actions */ "./src/app/state/user/user.actions.ts");
-/* harmony import */ var _services_notifications_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/notifications.service */ "./src/app/services/notifications.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/firebase/ngx */ "../../node_modules/@ionic-native/firebase/ngx/index.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
+/* harmony import */ var _notifications_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./notifications.actions */ "./src/app/state/notifications/notifications.actions.ts");
+/* harmony import */ var _user_user_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../user/user.actions */ "./src/app/state/user/user.actions.ts");
+/* harmony import */ var _services_notifications_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/notifications.service */ "./src/app/services/notifications.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3958,7 +4027,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -3979,7 +4047,7 @@ var StateNotifications = /** @class */ (function () {
     StateNotifications.hasPushNotifications = function (state) { return state.pushNotifications.length > 0; };
     StateNotifications.prototype.notificationsWatch = function (_a) {
         var patchState = _a.patchState, getState = _a.getState, dispatch = _a.dispatch;
-        this.firebaseNative.onNotificationOpen().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (pushNotification) {
+        this.firebaseNative.onNotificationOpen().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (pushNotification) {
             return patchState({
                 pushNotification: pushNotification,
                 pushNotifications: getState().pushNotifications.concat([
@@ -3987,22 +4055,22 @@ var StateNotifications = /** @class */ (function () {
                 ])
             });
         }));
-        var permission$ = this.platform.is('ios') ? Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__["fromPromise"])(this.firebaseNative.grantPermission()) : Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(undefined);
-        var token$ = this.platform.is('cordova') ? Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_2__["fromPromise"])(this.firebaseNative.getToken()) : Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(undefined);
-        return permission$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function () { return token$; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (token) { return token != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (token) { return dispatch(new _user_user_actions__WEBPACK_IMPORTED_MODULE_7__["UserAddToken"](token)); }));
+        var permission$ = this.platform.is('ios') ? Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(this.firebaseNative.grantPermission()) : Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(undefined);
+        var token$ = this.platform.is('cordova') ? Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["from"])(this.firebaseNative.getToken()) : Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(undefined);
+        return permission$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function () { return token$; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (token) { return token != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function (token) { return dispatch(new _user_user_actions__WEBPACK_IMPORTED_MODULE_6__["UserAddToken"](token)); }));
     };
     StateNotifications.prototype.notificationsGet = function (_a) {
         var patchState = _a.patchState;
-        return this.serviceNotifications.get().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (notifications) { return patchState({ notifications: notifications }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (notifications) { return console.log(notifications); }));
+        return this.serviceNotifications.get().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (notifications) { return patchState({ notifications: notifications }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (notifications) { return console.log(notifications); }));
     };
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_notifications_actions__WEBPACK_IMPORTED_MODULE_6__["NotificationsWatch"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_notifications_actions__WEBPACK_IMPORTED_MODULE_5__["NotificationsWatch"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateNotifications.prototype, "notificationsWatch", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_notifications_actions__WEBPACK_IMPORTED_MODULE_6__["NotificationsGet"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_notifications_actions__WEBPACK_IMPORTED_MODULE_5__["NotificationsGet"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
@@ -4040,7 +4108,7 @@ var StateNotifications = /** @class */ (function () {
                 pushNotification: undefined
             }
         }),
-        __metadata("design:paramtypes", [_ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_4__["Firebase"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"], _services_notifications_service__WEBPACK_IMPORTED_MODULE_8__["ServiceNotifications"]])
+        __metadata("design:paramtypes", [_ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_3__["Firebase"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"], _services_notifications_service__WEBPACK_IMPORTED_MODULE_7__["ServiceNotifications"]])
     ], StateNotifications);
     return StateNotifications;
 }());
@@ -4437,19 +4505,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/observable/fromPromise */ "../../node_modules/rxjs-compat/_esm5/observable/fromPromise.js");
-/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/auth */ "../../node_modules/@angular/fire/auth/index.js");
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
-/* harmony import */ var _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/facebook/ngx */ "../../node_modules/@ionic-native/facebook/ngx/index.js");
-/* harmony import */ var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/google-plus/ngx */ "../../node_modules/@ionic-native/google-plus/ngx/index.js");
-/* harmony import */ var _enums_platform_enum__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../enums/platform.enum */ "./src/app/enums/platform.enum.ts");
-/* harmony import */ var _language_language_state__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../language/language.state */ "./src/app/state/language/language.state.ts");
-/* harmony import */ var _language_language_actions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../language/language.actions */ "./src/app/state/language/language.actions.ts");
-/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./user.actions */ "./src/app/state/user/user.actions.ts");
-/* harmony import */ var _alert_alert_actions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../alert/alert.actions */ "./src/app/state/alert/alert.actions.ts");
-/* harmony import */ var _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../notifications/notifications.actions */ "./src/app/state/notifications/notifications.actions.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../enums/auth-provider.enum */ "./src/app/enums/auth-provider.enum.ts");
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/auth */ "../../node_modules/@angular/fire/auth/index.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
+/* harmony import */ var _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/facebook/ngx */ "../../node_modules/@ionic-native/facebook/ngx/index.js");
+/* harmony import */ var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/google-plus/ngx */ "../../node_modules/@ionic-native/google-plus/ngx/index.js");
+/* harmony import */ var _enums_platform_enum__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../enums/platform.enum */ "./src/app/enums/platform.enum.ts");
+/* harmony import */ var _language_language_state__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../language/language.state */ "./src/app/state/language/language.state.ts");
+/* harmony import */ var _language_language_actions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../language/language.actions */ "./src/app/state/language/language.actions.ts");
+/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./user.actions */ "./src/app/state/user/user.actions.ts");
+/* harmony import */ var _alert_alert_actions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../alert/alert.actions */ "./src/app/state/alert/alert.actions.ts");
+/* harmony import */ var _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../notifications/notifications.actions */ "./src/app/state/notifications/notifications.actions.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
+/* harmony import */ var _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../enums/auth-provider.enum */ "./src/app/enums/auth-provider.enum.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4459,7 +4526,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -4500,11 +4566,11 @@ var StateUser = /** @class */ (function () {
         return this.auth.authState.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) {
             if (authData == null) {
                 patchState({ authenticated: false, authData: authData, authenticating: false });
-                return dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_11__["LanguageGet"]());
+                return dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_10__["LanguageGet"]());
             }
             else {
                 patchState({ authData: authData, authenticating: false });
-                return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserGet"](authData));
+                return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserGet"](authData));
             }
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () { return patchState({ initializing: false }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false, initializing: false })); }));
     };
@@ -4540,7 +4606,7 @@ var StateUser = /** @class */ (function () {
                 if (photoURL != null) {
                     user.photoURL = photoURL;
                 }
-                user.uidInternal = providerId + ':' + providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_16__["AuthProvider"].Email ? email : user.uid;
+                user.uidInternal = providerId + ':' + providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_15__["AuthProvider"].Email ? email : user.uid;
                 patchState({ authData: authData, authenticated: true, user: user, authenticating: false });
             }
         }));
@@ -4550,7 +4616,7 @@ var StateUser = /** @class */ (function () {
         var payload = _b.payload;
         var providerData = payload.providerData[0];
         var providerId = providerData.providerId;
-        var uidInternal = providerId + ':' + (providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_16__["AuthProvider"].Email ? providerData.email : providerData.uid);
+        var uidInternal = providerId + ':' + (providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_15__["AuthProvider"].Email ? providerData.email : providerData.uid);
         return this.firestore.doc("user/" + uidInternal).valueChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (user) { return user != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) {
             var dependencies$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])();
             if (user == null) {
@@ -4558,7 +4624,7 @@ var StateUser = /** @class */ (function () {
             }
             else {
                 patchState({ user: user, authenticated: true, authenticating: false });
-                dependencies$ = dispatch([new _language_language_actions__WEBPACK_IMPORTED_MODULE_11__["LanguageSet"](user.language), new _alert_alert_actions__WEBPACK_IMPORTED_MODULE_13__["AlertsGet"](), new _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_14__["NotificationsGet"]()]);
+                dependencies$ = dispatch([new _language_language_actions__WEBPACK_IMPORTED_MODULE_10__["LanguageSet"](user.language), new _alert_alert_actions__WEBPACK_IMPORTED_MODULE_12__["AlertsGet"](), new _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_13__["NotificationsGet"]()]);
                 //                    dispatch(new NotificationsWatch());
             }
             return dependencies$;
@@ -4577,43 +4643,43 @@ var StateUser = /** @class */ (function () {
         var patchState = _a.patchState, dispatch = _a.dispatch;
         var payload = _b.payload;
         patchState({ authenticating: true });
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithEmailAndPassword(payload.id, payload.password)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](authData.user)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithEmailAndPassword(payload.id, payload.password)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](authData.user)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
     };
     StateUser.prototype.loginFacebook = function (_a) {
         var patchState = _a.patchState, dispatch = _a.dispatch;
         patchState({ authenticating: true });
-        var login$ = this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_9__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginFacebookDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginFacebookBrowser"]());
+        var login$ = this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_8__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebookDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebookBrowser"]());
         return login$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
     };
     StateUser.prototype.loginFacebookBrowser = function (_a) {
         var dispatch = _a.dispatch;
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider())).
-            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](response.user)); }));
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider())).
+            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](response.user)); }));
     };
     StateUser.prototype.loginFacebookDevice = function (_a) {
         var dispatch = _a.dispatch;
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.facebook.login(['email'])).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.facebook.login(['email'])).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) {
             var credential = firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider.credential(response.authResponse.accessToken);
-            return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithCredential(credential));
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](user)); }));
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithCredential(credential));
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](user)); }));
     };
     StateUser.prototype.loginGoogle = function (_a) {
         var patchState = _a.patchState, dispatch = _a.dispatch;
         patchState({ authenticating: true });
-        var login$ = this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_9__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginGoogleDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginGoogleBrowser"]());
+        var login$ = this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_8__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogleDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogleBrowser"]());
         return login$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
     };
     StateUser.prototype.loginGoogleBrowser = function (_a) {
         var dispatch = _a.dispatch;
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].GoogleAuthProvider())).
-            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](response.user)); }));
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].GoogleAuthProvider())).
+            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](response.user)); }));
     };
     StateUser.prototype.loginGoogleDevice = function (_a) {
         var dispatch = _a.dispatch;
-        return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(this.facebook.login(['email'])).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.facebook.login(['email'])).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) {
             var credential = firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider.credential(response.authResponse.accessToken);
-            return Object(rxjs_observable_fromPromise__WEBPACK_IMPORTED_MODULE_4__["fromPromise"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithCredential(credential)).
-                pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"](user)); }));
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithCredential(credential)).
+                pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](user)); }));
         }));
     };
     StateUser.prototype.userLogout = function (_a) {
@@ -4624,82 +4690,82 @@ var StateUser = /** @class */ (function () {
                 authData: undefined,
                 user: undefined
             });
-            dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserLogout"]());
+            dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserLogout"]());
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
     };
     var StateUser_1;
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Select"])(_language_language_state__WEBPACK_IMPORTED_MODULE_10__["StateLanguage"].language),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Select"])(_language_language_state__WEBPACK_IMPORTED_MODULE_9__["StateLanguage"].language),
         __metadata("design:type", rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"])
     ], StateUser.prototype, "language$", void 0);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticate"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticate"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "userAuthenticate", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"]),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAuthenticateCheck"]]),
+        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"]]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "userAuthenticateCheck", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["UserGet"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserGet"]),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserGet"]]),
+        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserGet"]]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "userGet", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAddToken"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAddToken"]),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_12__["UserAddToken"]]),
+        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAddToken"]]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "userAddToken", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginEmail"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginEmail"]),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginEmail"]]),
+        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginEmail"]]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "loginEmail", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginFacebook"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebook"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "loginFacebook", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginFacebookBrowser"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebookBrowser"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "loginFacebookBrowser", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginFacebookDevice"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebookDevice"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "loginFacebookDevice", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginGoogle"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogle"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "loginGoogle", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginGoogleBrowser"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogleBrowser"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "loginGoogleBrowser", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["LoginGoogleDevice"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogleDevice"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "loginGoogleDevice", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_12__["UserLogout"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserLogout"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
@@ -4770,7 +4836,7 @@ var StateUser = /** @class */ (function () {
                 initializing: false
             }
         }),
-        __metadata("design:paramtypes", [_angular_fire_auth__WEBPACK_IMPORTED_MODULE_5__["AngularFireAuth"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_6__["AngularFirestore"], _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_7__["Facebook"], _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_8__["GooglePlus"], _ionic_angular__WEBPACK_IMPORTED_MODULE_15__["Platform"]])
+        __metadata("design:paramtypes", [_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"], _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_6__["Facebook"], _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_7__["GooglePlus"], _ionic_angular__WEBPACK_IMPORTED_MODULE_14__["Platform"]])
     ], StateUser);
     return StateUser;
 }());
