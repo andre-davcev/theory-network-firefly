@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { from } from 'rxjs';
 //import { isCapacitorNative } from '@ionic/core';
 
 import { SplashScreen, StatusBar } from './constants/capacitor.const';
+import { switchMap, delay } from 'rxjs/operators';
 
 
 @Component
@@ -19,11 +21,12 @@ export class ComponentApp
 
     private initializeApp(): void
     {
-        this.platform.ready().then(() =>
-        {
-            // if (isCapacitorNative(window))
-            SplashScreen.hide();
-            StatusBar.show();
-        });
+        from(this.platform.ready()).
+        pipe
+        (
+            switchMap(() => from(StatusBar.show())),
+            delay(100)
+        ).
+        subscribe(() => SplashScreen.hide());
     }
 }

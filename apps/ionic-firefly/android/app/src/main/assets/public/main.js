@@ -2309,7 +2309,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComponentApp", function() { return ComponentApp; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants/capacitor.const */ "./src/app/constants/capacitor.const.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/capacitor.const */ "./src/app/constants/capacitor.const.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2321,7 +2323,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 //import { isCapacitorNative } from '@ionic/core';
+
 
 var ComponentApp = /** @class */ (function () {
     function ComponentApp(platform) {
@@ -2329,11 +2333,9 @@ var ComponentApp = /** @class */ (function () {
         this.initializeApp();
     }
     ComponentApp.prototype.initializeApp = function () {
-        this.platform.ready().then(function () {
-            // if (isCapacitorNative(window))
-            _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_2__["SplashScreen"].hide();
-            _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_2__["StatusBar"].show();
-        });
+        Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.platform.ready()).
+            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function () { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(_constants_capacitor_const__WEBPACK_IMPORTED_MODULE_3__["StatusBar"].show()); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["delay"])(100)).
+            subscribe(function () { return _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"].hide(); });
     };
     ComponentApp = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
