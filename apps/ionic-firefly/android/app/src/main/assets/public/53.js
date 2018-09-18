@@ -1,23 +1,363 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[53],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dovqtr4x.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dovqtr4x.js ***!
-  \********************************************************************************************************************************/
-/*! exports provided: IonSegment, IonSegmentButton */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eqt7cuos.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eqt7cuos.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonRefresher, IonRefresherContent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSegment", function() { return Segment; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSegmentButton", function() { return SegmentButton; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRefresher", function() { return Refresher; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRefresherContent", function() { return RefresherContent; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var Segment=function(){function e(){this.disabled=!1}return e.prototype.valueChanged=function(e){this.updateButtons(),this.ionChange.emit({value:e})},e.prototype.segmentClick=function(e){var t=e.target;this.value=t.value},e.prototype.componentDidLoad=function(){if(null==this.value){var e=this.getButtons().find(function(e){return e.checked});e&&(this.value=e.value)}this.updateButtons()},e.prototype.updateButtons=function(){for(var e=this.value,t=0,n=this.getButtons();t<n.length;t++){var o=n[t];o.checked=o.value===e}},e.prototype.getButtons=function(){return Array.from(this.el.querySelectorAll("ion-segment-button"))},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["k"])(this.color),{"segment-disabled":this.disabled,"in-toolbar":Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["n"])("ion-toolbar",this.el),"in-color-toolbar":Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["n"])("ion-toolbar.ion-color",this.el)})}},e.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(e,"is",{get:function(){return"ion-segment"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{color:{type:String,attr:"color"},disabled:{type:Boolean,attr:"disabled"},el:{elementRef:!0},mode:{type:String,attr:"mode"},value:{type:String,attr:"value",mutable:!0,watchCallbacks:["valueChanged"]}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionChange",method:"ionChange",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionSelect",method:"segmentClick"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return":host{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;font-family:var(--ion-font-family,inherit);text-align:center;--background:transparent;--background-checked:transparent;--border-color:rgba(0, 0, 0, 0.1);--color:var(--ion-toolbar-color-active, #4a4a4a);--color-checked:var(--ion-toolbar-color-active, #4a4a4a)}:host(.segment-disabled){pointer-events:none;opacity:.3}::slotted(ion-segment-button){--color:inherit;--background:inherit;--border-color:inherit;--padding-top:0;--padding-end:6px;--padding-bottom:0;--padding-start:6px;--border-width:0 0 2px 0;--border-style:solid;--opacity:0.7;--transition:100ms all linear;--icon-size:26px;height:42px;font-size:12px;font-weight:500;line-height:40px;text-transform:uppercase;opacity:.7}:host(.ion-color) ::slotted(ion-segment-button){--color:var(--ion-color-base)}::slotted(.segment-button-checked){--color:var(--color-checked);--background:var(--background-checked);--border-color:var(--border-color-checked)}:host(.ion-color) ::slotted(.segment-button-checked){--background:var(--ion-color-base);--border-color:var(--ion-color-base);--color:var(--ion-color-contrast);--background:transparent;--color:var(--ion-color-base)}::slotted(.activated),::slotted(.segment-button-checked){opacity:1}::slotted(.segment-button-disabled){pointer-events:none;opacity:.3}:host(.in-color-toolbar:not(.ion-color)){--color:var(--ion-color-contrast);--color-checked:var(--ion-color-contrast)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),e}(),ids=0,SegmentButton=function(){function e(){this.checked=!1,this.disabled=!1,this.value="ion-sb-"+ids++}return e.prototype.checkedChanged=function(e,t){e&&!t&&this.ionSelect.emit()},e.prototype.hostData=function(){var e=this.disabled,t=this.checked,n=this.color;return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["k"])(n),{"segment-button-disabled":e,"segment-button-checked":t}),"ion-activable":!0}},e.prototype.render=function(){var e=this;return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button",{type:"button","aria-pressed":this.checked?"true":null,class:"segment-button-native",disabled:this.disabled,onClick:function(){return e.checked=!0}},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null),"md"===this.mode&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect",null))]},Object.defineProperty(e,"is",{get:function(){return"ion-segment-button"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{checked:{type:Boolean,attr:"checked",mutable:!0,watchCallbacks:["checkedChanged"]},color:{type:String,attr:"color"},disabled:{type:Boolean,attr:"disabled"},el:{elementRef:!0},mode:{type:String,attr:"mode"},value:{type:String,attr:"value"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionSelect",method:"ionSelect",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return":host{--padding-start:0;--padding-end:0;--padding-top:0;--padding-bottom:0;--icon-size:1em;-webkit-box-flex:1;-ms-flex:1;flex:1;color:var(--color);text-decoration:none;text-overflow:ellipsis;white-space:nowrap;-webkit-font-kerning:none;font-kerning:none}:host(:first-of-type) .segment-button-native{--padding-end:0;border-top-left-radius:var(--border-radius);border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:var(--border-radius)}:host(:not(:first-of-type)) .segment-button-native{border-left-width:0}:host(:last-of-type) .segment-button-native{--padding-start:0;border-top-left-radius:0;border-top-right-radius:var(--border-radius);border-bottom-right-radius:var(--border-radius);border-bottom-left-radius:0}.segment-button-native{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:block;position:relative;width:100%;height:100%;-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);color:inherit;contain:content;cursor:pointer;overflow:hidden}.segment-button-native:active,.segment-button-native:focus{outline:0}::slotted(ion-icon){font-size:var(--icon-size)}"},enumerable:!0,configurable:!0}),e}();
+
+
+var Refresher = /** @class */ (function () {
+    function Refresher() {
+        this.appliedStyles = false;
+        this.didStart = false;
+        this.progress = 0;
+        this.state = 1;
+        this.pullMin = 60;
+        this.pullMax = this.pullMin + 60;
+        this.closeDuration = '280ms';
+        this.snapbackDuration = '280ms';
+        this.disabled = false;
+    }
+    Refresher.prototype.disabledChanged = function () {
+        if (this.gesture) {
+            this.gesture.setDisabled(this.disabled);
+        }
+    };
+    Refresher.prototype.componentDidLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var contentEl, _a, _b;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        if (this.el.getAttribute('slot') !== 'fixed') {
+                            console.error('Make sure you use: <ion-refresher slot="fixed">');
+                            return [2 /*return*/];
+                        }
+                        contentEl = this.el.closest('ion-content');
+                        if (!contentEl) return [3 /*break*/, 3];
+                        return [4 /*yield*/, contentEl.componentOnReady()];
+                    case 1:
+                        _c.sent();
+                        _a = this;
+                        return [4 /*yield*/, contentEl.getScrollElement()];
+                    case 2:
+                        _a.scrollEl = _c.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        console.error('ion-refresher did not attach, make sure the parent is an ion-content.');
+                        _c.label = 4;
+                    case 4:
+                        _b = this;
+                        return [4 /*yield*/, __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/gesture.js"))];
+                    case 5:
+                        _b.gesture = (_c.sent()).createGesture({
+                            el: this.el.closest('ion-content'),
+                            queue: this.queue,
+                            gestureName: 'refresher',
+                            gesturePriority: 10,
+                            direction: 'y',
+                            threshold: 20,
+                            passive: false,
+                            canStart: function () { return _this.canStart(); },
+                            onStart: function () { return _this.onStart(); },
+                            onMove: function (ev) { return _this.onMove(ev); },
+                            onEnd: function () { return _this.onEnd(); },
+                        });
+                        this.disabledChanged();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Refresher.prototype.componentDidUnload = function () {
+        this.scrollEl = undefined;
+    };
+    Refresher.prototype.complete = function () {
+        this.close(32, '120ms');
+    };
+    Refresher.prototype.cancel = function () {
+        this.close(16, '');
+    };
+    Refresher.prototype.getProgress = function () {
+        return Promise.resolve(this.progress);
+    };
+    Refresher.prototype.canStart = function () {
+        if (!this.scrollEl) {
+            return false;
+        }
+        if (this.state !== 1) {
+            return false;
+        }
+        if (this.scrollEl.scrollTop > 0) {
+            return false;
+        }
+        return true;
+    };
+    Refresher.prototype.onStart = function () {
+        console.log('start');
+        this.progress = 0;
+        this.state = 1;
+    };
+    Refresher.prototype.onMove = function (detail) {
+        if (!this.scrollEl) {
+            return;
+        }
+        var ev = detail.event;
+        if (ev.touches && ev.touches.length > 1) {
+            return;
+        }
+        if ((this.state & 56) !== 0) {
+            return;
+        }
+        var deltaY = detail.deltaY;
+        if (deltaY <= 0) {
+            this.progress = 0;
+            this.state = 1;
+            if (this.appliedStyles) {
+                this.setCss(0, '', false, '');
+                return;
+            }
+            return;
+        }
+        if (this.state === 1) {
+            var scrollHostScrollTop = this.scrollEl.scrollTop;
+            if (scrollHostScrollTop > 0) {
+                this.progress = 0;
+                return;
+            }
+            this.state = 2;
+        }
+        ev.preventDefault();
+        this.setCss(deltaY, '0ms', true, '');
+        if (deltaY === 0) {
+            this.progress = 0;
+            return;
+        }
+        var pullMin = this.pullMin;
+        this.progress = deltaY / pullMin;
+        if (!this.didStart) {
+            this.didStart = true;
+            this.ionStart.emit();
+        }
+        this.ionPull.emit();
+        if (deltaY < pullMin) {
+            this.state = 2;
+            return;
+        }
+        if (deltaY > this.pullMax) {
+            this.beginRefresh();
+            return;
+        }
+        this.state = 4;
+        return;
+    };
+    Refresher.prototype.onEnd = function () {
+        if (this.state === 4) {
+            this.beginRefresh();
+        }
+        else if (this.state === 2) {
+            this.cancel();
+        }
+    };
+    Refresher.prototype.beginRefresh = function () {
+        this.state = 8;
+        this.setCss(this.pullMin, this.snapbackDuration, true, '');
+        this.ionRefresh.emit();
+    };
+    Refresher.prototype.close = function (state, delay) {
+        var _this = this;
+        setTimeout(function () {
+            _this.state = 1;
+            _this.progress = 0;
+            _this.didStart = false;
+            _this.setCss(0, '0ms', false, '');
+        }, 600);
+        this.state = state;
+        this.setCss(0, '', true, delay);
+    };
+    Refresher.prototype.setCss = function (y, duration, overflowVisible, delay) {
+        var _this = this;
+        this.appliedStyles = (y > 0);
+        this.queue.write(function () {
+            if (_this.scrollEl) {
+                var style = _this.scrollEl.style;
+                style.transform = ((y > 0) ? "translateY(" + y + "px) translateZ(0px)" : 'translateZ(0px)');
+                style.transitionDuration = duration;
+                style.transitionDelay = delay;
+                style.overflow = (overflowVisible ? 'hidden' : '');
+            }
+        });
+    };
+    Refresher.prototype.hostData = function () {
+        return {
+            slot: 'fixed',
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'refresher'), { 'refresher-active': this.state !== 1, 'refresher-pulling': this.state === 2, 'refresher-ready': this.state === 4, 'refresher-refreshing': this.state === 8, 'refresher-cancelling': this.state === 16, 'refresher-completing': this.state === 32 })
+        };
+    };
+    Object.defineProperty(Refresher, "is", {
+        get: function () { return "ion-refresher"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Refresher, "properties", {
+        get: function () {
+            return {
+                "cancel": {
+                    "method": true
+                },
+                "closeDuration": {
+                    "type": String,
+                    "attr": "close-duration"
+                },
+                "complete": {
+                    "method": true
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "getProgress": {
+                    "method": true
+                },
+                "pullMax": {
+                    "type": Number,
+                    "attr": "pull-max"
+                },
+                "pullMin": {
+                    "type": Number,
+                    "attr": "pull-min"
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "snapbackDuration": {
+                    "type": String,
+                    "attr": "snapback-duration"
+                },
+                "state": {
+                    "state": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Refresher, "events", {
+        get: function () {
+            return [{
+                    "name": "ionRefresh",
+                    "method": "ionRefresh",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionPull",
+                    "method": "ionPull",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionStart",
+                    "method": "ionStart",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Refresher, "style", {
+        get: function () { return "ion-refresher{left:0;top:0;display:none;position:absolute;width:100%;height:60px;z-index:0}ion-refresher.refresher-active{display:block}ion-refresher-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%}.refresher-pulling,.refresher-refreshing{display:none;width:100%}.refresher-pulling-icon,.refresher-refreshing-icon{-webkit-transform-origin:center;transform-origin:center;-webkit-transition:.2s;transition:.2s;font-size:30px;text-align:center}.refresher-pulling-text,.refresher-refreshing-text{font-size:16px;text-align:center}.refresher-pulling ion-refresher-content .refresher-pulling,.refresher-ready ion-refresher-content .refresher-pulling{display:block}.refresher-ready ion-refresher-content .refresher-pulling-icon{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.refresher-cancelling ion-refresher-content .refresher-pulling,.refresher-refreshing ion-refresher-content .refresher-refreshing{display:block}.refresher-cancelling ion-refresher-content .refresher-pulling-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-completing ion-refresher-content .refresher-refreshing{display:block}.refresher-completing ion-refresher-content .refresher-refreshing-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-md .refresher-pulling-icon,.refresher-md .refresher-pulling-text,.refresher-md .refresher-refreshing-icon,.refresher-md .refresher-refreshing-text{color:var(--ion-text-color,#000)}.refresher-md .refresher-refreshing .spinner-crescent circle,.refresher-md .refresher-refreshing .spinner-lines-md line,.refresher-md .refresher-refreshing .spinner-lines-small-md line{stroke:var(--ion-text-color,#000)}.refresher-md .refresher-refreshing .spinner-bubbles circle,.refresher-md .refresher-refreshing .spinner-circles circle,.refresher-md .refresher-refreshing .spinner-dots circle{fill:var(--ion-text-color,#000)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Refresher, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Refresher;
+}());
+var RefresherContent = /** @class */ (function () {
+    function RefresherContent() {
+    }
+    RefresherContent.prototype.componentDidLoad = function () {
+        if (this.pullingIcon === undefined) {
+            this.pullingIcon = this.config.get('refreshingIcon', 'arrow-down');
+        }
+        if (this.refreshingSpinner === undefined) {
+            this.refreshingSpinner = this.config.get('refreshingSpinner', this.config.get('spinner', 'lines'));
+        }
+    };
+    RefresherContent.prototype.render = function () {
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-pulling" }, this.pullingIcon &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-pulling-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: this.pullingIcon, lazy: false })), this.pullingText &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-pulling-text", innerHTML: this.pullingText })),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-refreshing" }, this.refreshingSpinner &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-refreshing-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-spinner", { name: this.refreshingSpinner })), this.refreshingText &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-refreshing-text", innerHTML: this.refreshingText }))
+        ];
+    };
+    Object.defineProperty(RefresherContent, "is", {
+        get: function () { return "ion-refresher-content"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RefresherContent, "properties", {
+        get: function () {
+            return {
+                "config": {
+                    "context": "config"
+                },
+                "pullingIcon": {
+                    "type": String,
+                    "attr": "pulling-icon",
+                    "mutable": true
+                },
+                "pullingText": {
+                    "type": String,
+                    "attr": "pulling-text"
+                },
+                "refreshingSpinner": {
+                    "type": String,
+                    "attr": "refreshing-spinner",
+                    "mutable": true
+                },
+                "refreshingText": {
+                    "type": String,
+                    "attr": "refreshing-text"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return RefresherContent;
+}());
+
+
 
 /***/ })
 

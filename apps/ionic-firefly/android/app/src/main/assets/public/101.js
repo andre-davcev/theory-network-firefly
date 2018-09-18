@@ -1,24 +1,261 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[101],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/mgyaif1n.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/mgyaif1n.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonCol, IonGrid, IonRow */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rltleisd.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rltleisd.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonInfiniteScroll, IonInfiniteScrollContent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCol", function() { return Col; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonGrid", function() { return Grid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRow", function() { return Row; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_db84a248_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-db84a248.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-db84a248.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonInfiniteScroll", function() { return InfiniteScroll; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonInfiniteScrollContent", function() { return InfiniteScrollContent; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var SUPPORTS_VARS=!!(CSS&&CSS.supports&&CSS.supports("--a: 0")),BREAKPOINTS=["","xs","sm","md","lg","xl"],Col=function(){function t(){}return t.prototype.onResize=function(){this.el.forceUpdate()},t.prototype.getColumns=function(t){for(var e,r=0,n=BREAKPOINTS;r<n.length;r++){var i=n[r],o=Object(_chunk_db84a248_js__WEBPACK_IMPORTED_MODULE_1__["a"])(this.win,i),l=this[t+i.charAt(0).toUpperCase()+i.slice(1)];o&&void 0!==l&&(e=l)}return e},t.prototype.calculateSize=function(){var t=this.getColumns("size");if(t&&""!==t){var e="auto"===t?"auto":SUPPORTS_VARS?"calc(calc("+t+" / var(--ion-grid-columns, 12)) * 100%)":t/12*100+"%";return{flex:"0 0 "+e,width:""+e,"max-width":""+e}}},t.prototype.calculatePosition=function(t,e){var r,n=this.getColumns(t);if(n)return(r={})[e]=SUPPORTS_VARS?"calc(calc("+n+" / var(--ion-grid-columns, 12)) * 100%)":n>0&&n<12?n/12*100+"%":"auto",r},t.prototype.calculateOffset=function(){return this.calculatePosition("offset","margin-left")},t.prototype.calculatePull=function(){return this.calculatePosition("pull","right")},t.prototype.calculatePush=function(){return this.calculatePosition("push","left")},t.prototype.hostData=function(){return{style:Object.assign({},this.calculateOffset(),this.calculatePull(),this.calculatePush(),this.calculateSize())}},t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-col"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{el:{elementRef:!0},offset:{type:String,attr:"offset"},offsetLg:{type:String,attr:"offset-lg"},offsetMd:{type:String,attr:"offset-md"},offsetSm:{type:String,attr:"offset-sm"},offsetXl:{type:String,attr:"offset-xl"},offsetXs:{type:String,attr:"offset-xs"},pull:{type:String,attr:"pull"},pullLg:{type:String,attr:"pull-lg"},pullMd:{type:String,attr:"pull-md"},pullSm:{type:String,attr:"pull-sm"},pullXl:{type:String,attr:"pull-xl"},pullXs:{type:String,attr:"pull-xs"},push:{type:String,attr:"push"},pushLg:{type:String,attr:"push-lg"},pushMd:{type:String,attr:"push-md"},pushSm:{type:String,attr:"push-sm"},pushXl:{type:String,attr:"push-xl"},pushXs:{type:String,attr:"push-xs"},size:{type:String,attr:"size"},sizeLg:{type:String,attr:"size-lg"},sizeMd:{type:String,attr:"size-md"},sizeSm:{type:String,attr:"size-sm"},sizeXl:{type:String,attr:"size-xl"},sizeXs:{type:String,attr:"size-xs"},win:{context:"window"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"listeners",{get:function(){return[{name:"window:resize",method:"onResize",passive:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-col-h{padding:var(--ion-grid-column-padding-xs,var(--ion-grid-column-padding,5px));margin:0;-webkit-box-sizing:border-box;box-sizing:border-box;position:relative;-ms-flex-preferred-size:0;flex-basis:0;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;width:100%;max-width:100%;min-height:1px}\@media (min-width:576px){.sc-ion-col-h{padding:var(--ion-grid-column-padding-sm,var(--ion-grid-column-padding,5px))}}\@media (min-width:768px){.sc-ion-col-h{padding:var(--ion-grid-column-padding-md,var(--ion-grid-column-padding,5px))}}\@media (min-width:992px){.sc-ion-col-h{padding:var(--ion-grid-column-padding-lg,var(--ion-grid-column-padding,5px))}}\@media (min-width:1200px){.sc-ion-col-h{padding:var(--ion-grid-column-padding-xl,var(--ion-grid-column-padding,5px))}}"},enumerable:!0,configurable:!0}),t}(),Grid=function(){function t(){this.fixed=!1}return t.prototype.hostData=function(){return{class:{"grid-fixed":this.fixed}}},t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-grid"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{fixed:{type:Boolean,attr:"fixed"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-grid-h{padding:var(--ion-grid-padding-xs,var(--ion-grid-padding,5px));margin-left:auto;margin-right:auto;display:block}.grid-fixed.sc-ion-grid-h{width:var(--ion-grid-width-xs,var(--ion-grid-width,100%));max-width:100%}\@media (min-width:576px){.sc-ion-grid-h{padding:var(--ion-grid-padding-sm,var(--ion-grid-padding,5px))}.grid-fixed.sc-ion-grid-h{width:var(--ion-grid-width-sm,var(--ion-grid-width,540px))}}\@media (min-width:768px){.sc-ion-grid-h{padding:var(--ion-grid-padding-md,var(--ion-grid-padding,5px))}.grid-fixed.sc-ion-grid-h{width:var(--ion-grid-width-md,var(--ion-grid-width,720px))}}\@media (min-width:992px){.sc-ion-grid-h{padding:var(--ion-grid-padding-lg,var(--ion-grid-padding,5px))}.grid-fixed.sc-ion-grid-h{width:var(--ion-grid-width-lg,var(--ion-grid-width,960px))}}\@media (min-width:1200px){.sc-ion-grid-h{padding:var(--ion-grid-padding-xl,var(--ion-grid-padding,5px))}.grid-fixed.sc-ion-grid-h{width:var(--ion-grid-width-xl,var(--ion-grid-width,1140px))}}[no-padding].sc-ion-grid-h{padding:0}.sc-ion-grid-h[no-padding] .sc-ion-grid-s > ion-col{padding:0}"},enumerable:!0,configurable:!0}),t}(),Row=function(){function t(){}return t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-row"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-row-h{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}"},enumerable:!0,configurable:!0}),t}();
+
+
+var InfiniteScroll = /** @class */ (function () {
+    function InfiniteScroll() {
+        this.thrPx = 0;
+        this.thrPc = 0;
+        this.didFire = false;
+        this.isBusy = false;
+        this.isLoading = false;
+        this.threshold = '15%';
+        this.disabled = false;
+        this.position = 'bottom';
+    }
+    InfiniteScroll.prototype.thresholdChanged = function (val) {
+        if (val.lastIndexOf('%') > -1) {
+            this.thrPx = 0;
+            this.thrPc = (parseFloat(val) / 100);
+        }
+        else {
+            this.thrPx = parseFloat(val);
+            this.thrPc = 0;
+        }
+    };
+    InfiniteScroll.prototype.disabledChanged = function (val) {
+        this.enableScrollEvents(!val);
+    };
+    InfiniteScroll.prototype.componentDidLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var contentEl, _a;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        contentEl = this.el.closest('ion-content');
+                        if (!contentEl) return [3 /*break*/, 3];
+                        return [4 /*yield*/, contentEl.componentOnReady()];
+                    case 1:
+                        _b.sent();
+                        _a = this;
+                        return [4 /*yield*/, contentEl.getScrollElement()];
+                    case 2:
+                        _a.scrollEl = _b.sent();
+                        _b.label = 3;
+                    case 3:
+                        this.thresholdChanged(this.threshold);
+                        this.enableScrollEvents(!this.disabled);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    InfiniteScroll.prototype.componentDidUnload = function () {
+        this.scrollEl = undefined;
+    };
+    InfiniteScroll.prototype.onScroll = function () {
+        var scrollEl = this.scrollEl;
+        if (!scrollEl || !this.canStart()) {
+            return 1;
+        }
+        var infiniteHeight = this.el.offsetHeight;
+        if (infiniteHeight === 0) {
+            return 2;
+        }
+        var scrollTop = scrollEl.scrollTop;
+        var scrollHeight = scrollEl.scrollHeight;
+        var height = scrollEl.offsetHeight;
+        var threshold = this.thrPc !== 0 ? (height * this.thrPc) : this.thrPx;
+        var distanceFromInfinite = (this.position === 'bottom')
+            ? scrollHeight - infiniteHeight - scrollTop - threshold - height
+            : scrollTop - infiniteHeight - threshold;
+        if (distanceFromInfinite < 0) {
+            if (!this.didFire) {
+                this.isLoading = true;
+                this.didFire = true;
+                this.ionInfinite.emit();
+                return 3;
+            }
+        }
+        else {
+            this.didFire = false;
+        }
+        return 4;
+    };
+    InfiniteScroll.prototype.complete = function () {
+        var scrollEl = this.scrollEl;
+        if (!this.isLoading || !scrollEl) {
+            return;
+        }
+        this.isLoading = false;
+    };
+    InfiniteScroll.prototype.canStart = function () {
+        return (!this.disabled &&
+            !this.isBusy &&
+            !!this.scrollEl &&
+            !this.isLoading);
+    };
+    InfiniteScroll.prototype.enableScrollEvents = function (shouldListen) {
+        if (this.scrollEl) {
+            this.enableListener(this, 'scroll', shouldListen, this.scrollEl);
+        }
+    };
+    InfiniteScroll.prototype.hostData = function () {
+        return {
+            class: {
+                'infinite-scroll-loading': this.isLoading,
+                'infinite-scroll-enabled': !this.disabled
+            }
+        };
+    };
+    Object.defineProperty(InfiniteScroll, "is", {
+        get: function () { return "ion-infinite-scroll"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScroll, "properties", {
+        get: function () {
+            return {
+                "complete": {
+                    "method": true
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "enableListener": {
+                    "context": "enableListener"
+                },
+                "isLoading": {
+                    "state": true
+                },
+                "position": {
+                    "type": String,
+                    "attr": "position"
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "threshold": {
+                    "type": String,
+                    "attr": "threshold",
+                    "watchCallbacks": ["thresholdChanged"]
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScroll, "events", {
+        get: function () {
+            return [{
+                    "name": "ionInfinite",
+                    "method": "ionInfinite",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScroll, "listeners", {
+        get: function () {
+            return [{
+                    "name": "scroll",
+                    "method": "onScroll",
+                    "disabled": true,
+                    "passive": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScroll, "style", {
+        get: function () { return "ion-infinite-scroll{display:none;width:100%}.infinite-scroll-enabled{display:block}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return InfiniteScroll;
+}());
+var InfiniteScrollContent = /** @class */ (function () {
+    function InfiniteScrollContent() {
+    }
+    InfiniteScrollContent.prototype.componentDidLoad = function () {
+        if (this.loadingSpinner === undefined) {
+            this.loadingSpinner = this.config.get('infiniteLoadingSpinner', this.config.get('spinner', 'lines'));
+        }
+    };
+    InfiniteScrollContent.prototype.hostData = function () {
+        return {
+            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'infinite-scroll-content')
+        };
+    };
+    InfiniteScrollContent.prototype.render = function () {
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "infinite-loading" }, this.loadingSpinner && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "infinite-loading-spinner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-spinner", { name: this.loadingSpinner }))), this.loadingText && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "infinite-loading-text", innerHTML: this.loadingText }))));
+    };
+    Object.defineProperty(InfiniteScrollContent, "is", {
+        get: function () { return "ion-infinite-scroll-content"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScrollContent, "properties", {
+        get: function () {
+            return {
+                "config": {
+                    "context": "config"
+                },
+                "loadingSpinner": {
+                    "type": String,
+                    "attr": "loading-spinner",
+                    "mutable": true
+                },
+                "loadingText": {
+                    "type": String,
+                    "attr": "loading-text"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScrollContent, "style", {
+        get: function () { return "ion-infinite-scroll-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;min-height:84px;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.infinite-loading{margin:0 0 32px;display:none;width:100%}.infinite-loading-text{margin:4px 32px 0}.infinite-scroll-loading ion-infinite-scroll-content>.infinite-loading{display:block}.infinite-scroll-content-ios .infinite-loading-text{color:var(--ion-text-color-step-400,#666)}.infinite-scroll-content-ios .infinite-loading-spinner .spinner-crescent circle,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-lines-ios line,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-lines-small-ios line{stroke:var(--ion-text-color-step-400,#666)}.infinite-scroll-content-ios .infinite-loading-spinner .spinner-bubbles circle,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-circles circle,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-dots circle{fill:var(--ion-text-color-step-400,#666)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScrollContent, "styleMode", {
+        get: function () { return "ios"; },
+        enumerable: true,
+        configurable: true
+    });
+    return InfiniteScrollContent;
+}());
+
+
 
 /***/ })
 

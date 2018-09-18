@@ -1,23 +1,179 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[109],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ooo1yrih.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ooo1yrih.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonToggle */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/skzvaxms.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/skzvaxms.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonAnchor, IonBackButton */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToggle", function() { return Toggle; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
-/* harmony import */ var _chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-276e047f.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-276e047f.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonAnchor", function() { return Anchor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonBackButton", function() { return BackButton; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,n,o){return new(n||(n=Promise))(function(i,r){function a(e){try{c(o.next(e))}catch(e){r(e)}}function s(e){try{c(o.throw(e))}catch(e){r(e)}}function c(e){e.done?i(e.value):new n(function(t){t(e.value)}).then(a,s)}c((o=o.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var n,o,i,r,a={label:0,sent:function(){if(1&i[0])throw i[1];return i[1]},trys:[],ops:[]};return r={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(r[Symbol.iterator]=function(){return this}),r;function s(r){return function(s){return function(r){if(n)throw new TypeError("Generator is already executing.");for(;a;)try{if(n=1,o&&(i=2&r[0]?o.return:r[0]?o.throw||((i=o.return)&&i.call(o),0):o.next)&&!(i=i.call(o,r[1])).done)return i;switch(o=0,i&&(r=[2&r[0],i.value]),r[0]){case 0:case 1:i=r;break;case 4:return a.label++,{value:r[1],done:!1};case 5:a.label++,o=r[1],r=[0];continue;case 7:r=a.ops.pop(),a.trys.pop();continue;default:if(!(i=(i=a.trys).length>0&&i[i.length-1])&&(6===r[0]||2===r[0])){a=0;continue}if(3===r[0]&&(!i||r[1]>i[0]&&r[1]<i[3])){a.label=r[1];break}if(6===r[0]&&a.label<i[1]){a.label=i[1],i=r;break}if(i&&a.label<i[2]){a.label=i[2],a.ops.push(r);break}i[2]&&a.ops.pop(),a.trys.pop();continue}r=t.call(e,a)}catch(e){r=[6,e],o=0}finally{n=i=0}if(5&r[0])throw r[1];return{value:r[0]?r[1]:void 0,done:!0}}([r,s])}}};var Toggle=function(){function e(){this.inputId="ion-tg-"+toggleIds++,this.pivotX=0,this.activated=!1,this.keyFocus=!1,this.name=this.inputId,this.checked=!1,this.disabled=!1,this.value="on"}return e.prototype.checkedChanged=function(e){this.ionChange.emit({checked:e,value:this.value})},e.prototype.disabledChanged=function(){this.ionStyle.emit({"interactive-disabled":this.disabled}),this.gesture&&this.gesture.setDisabled(this.disabled)},e.prototype.componentWillLoad=function(){this.ionStyle=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.ionStyle)},e.prototype.componentDidLoad=function(){return __awaiter(this,void 0,void 0,function(){var e,t,n,o=this;return __generator(this,function(i){switch(i.label){case 0:return(e=this.nativeInput.closest("ion-item"))&&(t=e.querySelector("ion-label"))&&(t.id=this.inputId+"-lbl",this.nativeInput.setAttribute("aria-labelledby",t.id)),n=this,[4,__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/gesture.js"))];case 1:return n.gesture=i.sent().createGesture({el:this.el,queue:this.queue,gestureName:"toggle",gesturePriority:100,threshold:0,onStart:function(e){return o.onStart(e)},onMove:function(e){return o.onMove(e)},onEnd:function(e){return o.onEnd(e)}}),this.disabledChanged(),[2]}})})},e.prototype.onStart=function(e){return this.pivotX=e.currentX,this.activated=!0,e.event.preventDefault(),!0},e.prototype.onMove=function(e){var t=e.currentX;shouldToggle(this.checked,t-this.pivotX,-15)&&(this.checked=!this.checked,this.pivotX=t,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["f"])())},e.prototype.onEnd=function(e){var t=e.currentX-this.pivotX;shouldToggle(this.checked,t,4)&&(this.checked=!this.checked,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["f"])()),this.activated=!1,this.nativeInput.focus()},e.prototype.onChange=function(){this.checked=!this.checked},e.prototype.onKeyUp=function(){this.keyFocus=!0},e.prototype.onFocus=function(){this.ionFocus.emit()},e.prototype.onBlur=function(){this.keyFocus=!1,this.ionBlur.emit()},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["k"])(this.color),{"in-item":Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["n"])(".item",this.el),"toggle-activated":this.activated,"toggle-checked":this.checked,"toggle-disabled":this.disabled,"toggle-key":this.keyFocus,interactive:!0})}},e.prototype.render=function(){var e=this;return Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.el,this.name,this.checked?this.value:"",this.disabled),[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toggle-icon"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toggle-inner"})),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input",{type:"checkbox",onChange:this.onChange.bind(this),onFocus:this.onFocus.bind(this),onBlur:this.onBlur.bind(this),onKeyUp:this.onKeyUp.bind(this),checked:this.checked,id:this.inputId,name:this.name,value:this.value,disabled:this.disabled,ref:function(t){return e.nativeInput=t}}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)]},Object.defineProperty(e,"is",{get:function(){return"ion-toggle"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{activated:{state:!0},checked:{type:Boolean,attr:"checked",mutable:!0,watchCallbacks:["checkedChanged"]},color:{type:String,attr:"color"},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},el:{elementRef:!0},keyFocus:{state:!0},mode:{type:String,attr:"mode"},name:{type:String,attr:"name"},queue:{context:"queue"},value:{type:String,attr:"value"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionChange",method:"ionChange",bubbles:!0,cancelable:!0,composed:!0},{name:"ionFocus",method:"ionFocus",bubbles:!0,cancelable:!0,composed:!0},{name:"ionBlur",method:"ionBlur",bubbles:!0,cancelable:!0,composed:!0},{name:"ionStyle",method:"ionStyle",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-toggle-md-h{-webkit-box-sizing:content-box!important;box-sizing:content-box!important;display:inline-block;contain:content;cursor:pointer;-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--background:rgba(var(--ion-item-border-color-rgb, 0, 0, 0), 0.13);--background-checked:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.5);--handle-background:var(--ion-background-color, #fff);--handle-background-checked:var(--ion-color-primary, #3880ff);padding:12px;-webkit-box-sizing:content-box;box-sizing:content-box;position:relative;width:36px;height:14px;contain:strict}.toggle-key.sc-ion-toggle-md-h   input.sc-ion-toggle-md{border:2px solid #5e9ed6}.sc-ion-toggle-md-h:focus{outline:0}.toggle-disabled.sc-ion-toggle-md-h{pointer-events:none;opacity:.3}input.sc-ion-toggle-md{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0;pointer-events:none}.ion-color.toggle-checked.sc-ion-toggle-md-h   .toggle-icon.sc-ion-toggle-md{background:rgba(var(--ion-color-base-rgb),.5)}.ion-color.toggle-checked.sc-ion-toggle-md-h   .toggle-inner.sc-ion-toggle-md{background:var(--ion-color-base)}.toggle-icon.sc-ion-toggle-md{border-radius:14px;display:block;position:relative;width:100%;height:100%;-webkit-transition:background-color .3s;transition:background-color .3s;background:var(--background);pointer-events:none}.toggle-inner.sc-ion-toggle-md{left:0;top:-3px;border-radius:50%;position:absolute;width:20px;height:20px;-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:background-color,-webkit-transform;transition-property:background-color,-webkit-transform;transition-property:transform,background-color;transition-property:transform,background-color,-webkit-transform;background:var(--handle-background);-webkit-box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);will-change:transform,background-color;contain:strict}.toggle-checked.sc-ion-toggle-md-h   .toggle-icon.sc-ion-toggle-md{background:var(--background-checked)}.toggle-checked.sc-ion-toggle-md-h   .toggle-inner.sc-ion-toggle-md{-webkit-transform:translate3d(16px,0,0);transform:translate3d(16px,0,0);background:var(--handle-background-checked)}.in-item[slot].sc-ion-toggle-md-h{margin:0;padding:12px 8px 12px 16px;cursor:pointer}.in-item[slot=start].sc-ion-toggle-md-h{padding:12px 18px 12px 2px}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),e}();function shouldToggle(e,t,n){var o="rtl"===document.dir;return e?!o&&n>t||o&&-n<t:!o&&-n<t||o&&n>t}var toggleIds=0;
+
+
+var Anchor = /** @class */ (function () {
+    function Anchor() {
+    }
+    Anchor.prototype.hostData = function () {
+        return {
+            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color),
+            'ion-activatable': true
+        };
+    };
+    Anchor.prototype.render = function () {
+        var _this = this;
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("a", { href: this.href, onClick: function (ev) { return Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["e"])(_this.win, _this.href, ev, _this.routerDirection); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)));
+    };
+    Object.defineProperty(Anchor, "is", {
+        get: function () { return "ion-anchor"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Anchor, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Anchor, "properties", {
+        get: function () {
+            return {
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "href": {
+                    "type": String,
+                    "attr": "href"
+                },
+                "routerDirection": {
+                    "type": String,
+                    "attr": "router-direction"
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Anchor, "style", {
+        get: function () { return ":host{--background:transparent;--color:var(--ion-color-primary, #3880ff);background:var(--background);color:var(--color)}:host(.ion-color){color:var(--ion-color-base)}a{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Anchor;
+}());
+var BackButton = /** @class */ (function () {
+    function BackButton() {
+    }
+    BackButton.prototype.onClick = function (ev) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var nav, _a;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        nav = this.el.closest('ion-nav');
+                        ev.preventDefault();
+                        _a = nav;
+                        if (!_a) return [3 /*break*/, 2];
+                        return [4 /*yield*/, nav.canGoBack()];
+                    case 1:
+                        _a = (_b.sent());
+                        _b.label = 2;
+                    case 2:
+                        if (_a) {
+                            return [2 /*return*/, nav.pop({ skipIfBusy: true })];
+                        }
+                        return [2 /*return*/, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.win, this.defaultHref, ev, 'back')];
+                }
+            });
+        });
+    };
+    BackButton.prototype.hostData = function () {
+        var showBackButton = this.defaultHref !== undefined;
+        return {
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), { 'button': true, 'show-back-button': showBackButton }),
+            'ion-activatable': true,
+        };
+    };
+    BackButton.prototype.render = function () {
+        var _this = this;
+        var backButtonIcon = this.icon || this.config.get('backButtonIcon', 'arrow-back');
+        var backButtonText = this.text !== undefined ? this.text : this.config.get('backButtonText', 'Back');
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", class: "back-button-native", onClick: function (ev) { return _this.onClick(ev); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "back-button-inner" }, backButtonIcon && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: backButtonIcon, lazy: false }), this.mode === 'ios' && backButtonText && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "button-text" }, backButtonText), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null))));
+    };
+    Object.defineProperty(BackButton, "is", {
+        get: function () { return "ion-back-button"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BackButton, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BackButton, "properties", {
+        get: function () {
+            return {
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "config": {
+                    "context": "config"
+                },
+                "defaultHref": {
+                    "type": String,
+                    "attr": "default-href"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "icon": {
+                    "type": String,
+                    "attr": "icon"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "text": {
+                    "type": String,
+                    "attr": "text"
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BackButton, "style", {
+        get: function () { return ".sc-ion-back-button-md-h{display:none;color:var(--ion-color-base);pointer-events:all;text-align:center;text-decoration:none;text-overflow:ellipsis;text-transform:none;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-font-kerning:none;font-kerning:none;--ion-color-base:currentColor}.show-back-button.sc-ion-back-button-md-h, .can-go-back.sc-ion-back-button-md-h > ion-header.sc-ion-back-button-md, .can-go-back > ion-header   .sc-ion-back-button-md-h{display:block}.back-button-native.sc-ion-back-button-md{font-family:inherit;font-style:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:block;position:relative;-webkit-transition:background-color,opacity .1s linear;transition:background-color,opacity .1s linear;outline:0;line-height:1;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.back-button-inner.sc-ion-back-button-md{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.back-button-text.sc-ion-back-button-md{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.back-button-native.sc-ion-back-button-md{margin:1px 6px 0 0;padding:0 5px;min-width:44px;height:32px;border:0;background-color:transparent;font-size:14px;font-weight:500;text-transform:uppercase;-webkit-box-shadow:none;box-shadow:none}.back-button-native.activated.sc-ion-back-button-md{opacity:.4}ion-icon.sc-ion-back-button-md{padding-right:.3em;margin:0 6px;font-size:24px;font-weight:400;line-height:.67;text-align:start;pointer-events:none}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BackButton, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return BackButton;
+}());
+
+
 
 /***/ })
 

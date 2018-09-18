@@ -1,25 +1,196 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[107],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ohlgz1zq.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ohlgz1zq.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonPopover, IonPopoverController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s1a9daht.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s1a9daht.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonSplitPane */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPopover", function() { return Popover; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPopoverController", function() { return PopoverController; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
-/* harmony import */ var _chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-ca273e40.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-ca273e40.js");
-/* harmony import */ var _chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-5f438245.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-5f438245.js");
-/*!
- * (C) Ionic http://ionicframework.com - MIT License
- * Built with http://stenciljs.com
- */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,o,n){return new(o||(o=Promise))(function(r,i){function a(e){try{l(n.next(e))}catch(e){i(e)}}function s(e){try{l(n.throw(e))}catch(e){i(e)}}function l(e){e.done?r(e.value):new o(function(t){t(e.value)}).then(a,s)}l((n=n.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var o,n,r,i,a={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return i={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function s(i){return function(s){return function(i){if(o)throw new TypeError("Generator is already executing.");for(;a;)try{if(o=1,n&&(r=2&i[0]?n.return:i[0]?n.throw||((r=n.return)&&r.call(n),0):n.next)&&!(r=r.call(n,i[1])).done)return r;switch(n=0,r&&(i=[2&i[0],r.value]),i[0]){case 0:case 1:r=i;break;case 4:return a.label++,{value:i[1],done:!1};case 5:a.label++,n=i[1],i=[0];continue;case 7:i=a.ops.pop(),a.trys.pop();continue;default:if(!(r=(r=a.trys).length>0&&r[r.length-1])&&(6===i[0]||2===i[0])){a=0;continue}if(3===i[0]&&(!r||i[1]>r[0]&&i[1]<r[3])){a.label=i[1];break}if(6===i[0]&&a.label<r[1]){a.label=r[1],r=i;break}if(r&&a.label<r[2]){a.label=r[2],a.ops.push(i);break}r[2]&&a.ops.pop(),a.trys.pop();continue}i=t.call(e,a)}catch(e){i=[6,e],n=0}finally{o=r=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,s])}}};function iosEnterAnimation(e,t,o){var n="top",r="left",i=t.querySelector(".popover-content"),a=i.getBoundingClientRect(),s=a.width,l=a.height,p=window.innerWidth,c=window.innerHeight,d=o&&o.target&&o.target.getBoundingClientRect(),m=null!=d&&"top"in d?d.top:c/2-l/2,u=null!=d&&"left"in d?d.left:p/2,f=d&&d.width||0,h=d&&d.height||0,v=t.querySelector(".popover-arrow"),y=v.getBoundingClientRect(),b=y.width,P=y.height;null!=d&&(v.style.display="none");var D={top:m+h,left:u+f/2-b/2},g={top:m+h+(P-1),left:u+f/2-s/2},w=!1,O=!1;g.left<POPOVER_IOS_BODY_PADDING+25?(w=!0,g.left=POPOVER_IOS_BODY_PADDING):s+POPOVER_IOS_BODY_PADDING+g.left+25>p&&(O=!0,g.left=p-s-POPOVER_IOS_BODY_PADDING,r="right"),m+h+l>c&&m-l>0?(D.top=m-(P+1),console.log(D),console.log(m),console.log(l),g.top=m-l-(P-1),t.className=t.className+" popover-bottom",n="bottom"):m+h+l>c&&(i.style.bottom=POPOVER_IOS_BODY_PADDING+"%"),v.style.top=D.top+"px",v.style.left=D.left+"px",i.style.top=g.top+"px",i.style.left=g.left+"px",w&&(i.style.left="calc("+g.left+"px + var(--ion-safe-area-left, 0px)"),O&&(i.style.left="calc("+g.left+"px + var(--ion-safe-area-right, 0px)"),i.style.transformOrigin=n+" "+r;var _=new e,E=new e;E.addElement(t.querySelector("ion-backdrop")),E.fromTo("opacity",.01,.08);var A=new e;return A.addElement(t.querySelector(".popover-wrapper")),A.fromTo("opacity",.01,1),Promise.resolve(_.addElement(t).easing("ease").duration(100).add(E).add(A))}var POPOVER_IOS_BODY_PADDING=5;function iosLeaveAnimation(e,t){var o=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var r=new e;return r.addElement(t.querySelector(".popover-wrapper")),r.fromTo("opacity",.99,0),n.fromTo("opacity",.08,0),Promise.resolve(o.addElement(t).easing("ease").duration(500).add(n).add(r))}function mdEnterAnimation(e,t,o){var n="top",r="left",i=t.querySelector(".popover-content"),a=i.getBoundingClientRect(),s=a.width,l=a.height,p=window.innerWidth,c=window.innerHeight,d=o&&o.target&&o.target.getBoundingClientRect(),m=null!=d&&"top"in d?d.top:c/2-l/2,u=null!=d&&"left"in d?d.left:p/2-s/2,f=d&&d.height||0,h={top:m,left:u};h.left<POPOVER_MD_BODY_PADDING?h.left=POPOVER_MD_BODY_PADDING:s+POPOVER_MD_BODY_PADDING+h.left>p&&(h.left=p-s-POPOVER_MD_BODY_PADDING,r="right"),m+f+l>c&&m-l>0?(h.top=m-l,t.className=t.className+" popover-bottom",n="bottom"):m+f+l>c&&(i.style.bottom=POPOVER_MD_BODY_PADDING+"px"),i.style.top=h.top+"px",i.style.left=h.left+"px",i.style.transformOrigin=n+" "+r;var v=new e,y=new e;y.addElement(t.querySelector("ion-backdrop")),y.fromTo("opacity",.01,.08);var b=new e;b.addElement(t.querySelector(".popover-wrapper")),b.fromTo("opacity",.01,1);var P=new e;P.addElement(t.querySelector(".popover-content")),P.fromTo("scale",.001,1);var D=new e;return D.addElement(t.querySelector(".popover-viewport")),D.fromTo("opacity",.01,1),Promise.resolve(v.addElement(t).easing("cubic-bezier(0.36,0.66,0.04,1)").duration(300).add(y).add(b).add(P).add(D))}var POPOVER_MD_BODY_PADDING=12;function mdLeaveAnimation(e,t){var o=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var r=new e;return r.addElement(t.querySelector(".popover-wrapper")),r.fromTo("opacity",.99,0),n.fromTo("opacity",.08,0),Promise.resolve(o.addElement(t).easing("ease").duration(500).add(n).add(r))}var Popover=function(){function e(){this.presented=!1,this.keyboardClose=!0,this.backdropDismiss=!0,this.showBackdrop=!0,this.translucent=!1,this.animated=!0}return e.prototype.componentDidLoad=function(){this.ionPopoverDidLoad.emit()},e.prototype.componentDidUnload=function(){this.ionPopoverDidUnload.emit()},e.prototype.onDismiss=function(e){return e.stopPropagation(),e.preventDefault(),this.dismiss()},e.prototype.onBackdropTap=function(){return this.dismiss(null,_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["a"])},e.prototype.lifecycle=function(e){var t=this.usersElement,o=LIFECYCLE_MAP[e.type];if(t&&o){var n=new CustomEvent(o,{bubbles:!1,cancelable:!1,detail:e.detail});t.dispatchEvent(n)}},e.prototype.present=function(){return __awaiter(this,void 0,void 0,function(){var e,t,o;return __generator(this,function(n){switch(n.label){case 0:if(this.presented)return[2];if(!(e=this.el.querySelector(".popover-content")))throw new Error("container is undefined");return t=Object.assign({},this.componentProps,{popover:this.el}),o=this,[4,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["a"])(this.delegate,e,this.component,["popover-viewport"],t)];case 1:return o.usersElement=n.sent(),[4,Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_3__["a"])(this.usersElement)];case 2:return n.sent(),[2,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this,"popoverEnter",iosEnterAnimation,mdEnterAnimation,this.event)]}})})},e.prototype.dismiss=function(e,t){return __awaiter(this,void 0,void 0,function(){var o;return __generator(this,function(n){switch(n.label){case 0:return[4,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this,e,t,"popoverLeave",iosLeaveAnimation,mdLeaveAnimation,this.event)];case 1:return(o=n.sent())?[4,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this.delegate,this.usersElement)]:[3,3];case 2:n.sent(),n.label=3;case 3:return[2,o]}})})},e.prototype.onDidDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el,"ionPopoverDidDismiss")},e.prototype.onWillDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el,"ionPopoverWillDismiss")},e.prototype.hostData=function(){var e=this.translucent?Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["m"])(this.mode,"popover-translucent"):{};return{style:{zIndex:2e4+this.overlayIndex},"no-router":!0,class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["m"])(this.mode,"popover"),Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["j"])(this.cssClass),e)}},e.prototype.render=function(){var e=Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["m"])(this.mode,"popover-wrapper");return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-backdrop",{tappable:this.backdropDismiss}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:e},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"popover-arrow"}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"popover-content"}))]},Object.defineProperty(e,"is",{get:function(){return"ion-popover"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{animated:{type:Boolean,attr:"animated"},animationCtrl:{connect:"ion-animation-controller"},backdropDismiss:{type:Boolean,attr:"backdrop-dismiss"},component:{type:String,attr:"component"},componentProps:{type:"Any",attr:"component-props"},config:{context:"config"},cssClass:{type:String,attr:"css-class"},delegate:{type:"Any",attr:"delegate"},dismiss:{method:!0},el:{elementRef:!0},enterAnimation:{type:"Any",attr:"enter-animation"},event:{type:"Any",attr:"event"},keyboardClose:{type:Boolean,attr:"keyboard-close"},leaveAnimation:{type:"Any",attr:"leave-animation"},mode:{type:String,attr:"mode"},onDidDismiss:{method:!0},onWillDismiss:{method:!0},overlayIndex:{type:Number,attr:"overlay-index"},present:{method:!0},showBackdrop:{type:Boolean,attr:"show-backdrop"},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionPopoverDidLoad",method:"ionPopoverDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPopoverDidUnload",method:"ionPopoverDidUnload",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPopoverDidPresent",method:"didPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPopoverWillPresent",method:"willPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPopoverWillDismiss",method:"willDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPopoverDidDismiss",method:"didDismiss",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionDismiss",method:"onDismiss"},{name:"ionBackdropTap",method:"onBackdropTap"},{name:"ionPopoverDidPresent",method:"lifecycle"},{name:"ionPopoverWillPresent",method:"lifecycle"},{name:"ionPopoverWillDismiss",method:"lifecycle"},{name:"ionPopoverDidDismiss",method:"lifecycle"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-popover{left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;z-index:1000}.popover-wrapper{opacity:0;z-index:10}.popover-content{display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;overflow:auto;z-index:10}.popover-content ion-content{position:relative;contain:none}.popover-md .popover-content{border-radius:2px;-webkit-transform-origin:left top;transform-origin:left top;width:250px;min-width:0;min-height:0;max-height:90%;background:var(--ion-background-color,#fff);color:var(--ion-text-color,#000);-webkit-box-shadow:0 3px 12px 2px rgba(0,0,0,.3);box-shadow:0 3px 12px 2px rgba(0,0,0,.3)}.popover-md .popover-viewport{-webkit-transition-delay:.1s;transition-delay:.1s}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),e}(),LIFECYCLE_MAP={ionPopoverDidPresent:"ionViewDidEnter",ionPopoverWillPresent:"ionViewWillEnter",ionPopoverWillDismiss:"ionViewWillDismiss",ionPopoverDidDismiss:"ionViewDidDismiss"},PopoverController=function(){function e(){}return e.prototype.create=function(e){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement("ion-popover"),e)},e.prototype.dismiss=function(e,t,o){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc,e,t,"ion-popover",o)},e.prototype.getTop=function(){return __awaiter(this,void 0,void 0,function(){return __generator(this,function(e){return[2,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc,"ion-popover")]})})},Object.defineProperty(e,"is",{get:function(){return"ion-popover-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{create:{method:!0},dismiss:{method:!0},doc:{context:"document"},getTop:{method:!0}}},enumerable:!0,configurable:!0}),e}();
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSplitPane", function() { return SplitPane; });
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
+var SPLIT_PANE_MAIN = 'split-pane-main';
+var SPLIT_PANE_SIDE = 'split-pane-side';
+var QUERY = {
+    'xs': '(min-width: 0px)',
+    'sm': '(min-width: 576px)',
+    'md': '(min-width: 768px)',
+    'lg': '(min-width: 992px)',
+    'xl': '(min-width: 1200px)',
+    'never': ''
+};
+var SplitPane = /** @class */ (function () {
+    function SplitPane() {
+        this.visible = false;
+        this.disabled = false;
+        this.when = QUERY['md'];
+    }
+    SplitPane.prototype.visibleChanged = function (visible) {
+        var detail = { visible: visible, isPane: this.isPane.bind(this) };
+        this.ionChange.emit(detail);
+        this.ionSplitPaneVisible.emit(detail);
+    };
+    SplitPane.prototype.componentDidLoad = function () {
+        this.styleChildren();
+        this.updateState();
+    };
+    SplitPane.prototype.componentDidUnload = function () {
+        if (this.rmL) {
+            this.rmL();
+            this.rmL = undefined;
+        }
+    };
+    SplitPane.prototype.updateState = function () {
+        var _this = this;
+        if (this.isServer) {
+            return;
+        }
+        if (this.rmL) {
+            this.rmL();
+            this.rmL = undefined;
+        }
+        if (this.disabled) {
+            this.visible = false;
+            return;
+        }
+        var query = this.when;
+        if (typeof query === 'boolean') {
+            this.visible = query;
+            return;
+        }
+        var mediaQuery = QUERY[query] || query;
+        if (mediaQuery.length === 0) {
+            this.visible = false;
+            return;
+        }
+        var callback = function (q) { return _this.visible = q.matches; };
+        var mediaList = this.win.matchMedia(mediaQuery);
+        mediaList.addListener(callback);
+        this.rmL = function () { return mediaList.removeListener(callback); };
+        this.visible = mediaList.matches;
+    };
+    SplitPane.prototype.isPane = function (element) {
+        if (!this.visible) {
+            return false;
+        }
+        return element.parentElement === this.el
+            && element.classList.contains(SPLIT_PANE_SIDE);
+    };
+    SplitPane.prototype.styleChildren = function () {
+        if (this.isServer) {
+            return;
+        }
+        var children = this.el.children;
+        var nu = this.el.childElementCount;
+        var foundMain = false;
+        for (var i = 0; i < nu; i++) {
+            var child = children[i];
+            var isMain = child.hasAttribute('main');
+            if (isMain) {
+                if (foundMain) {
+                    console.warn('split pane can not have more than one main node');
+                    return;
+                }
+                foundMain = true;
+            }
+            setPaneClass(child, isMain);
+        }
+        if (!foundMain) {
+            console.warn('split pane could not found any main node');
+        }
+    };
+    SplitPane.prototype.hostData = function () {
+        return {
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_0__["g"])(this.mode, 'split-pane'), { 'split-pane-visible': this.visible })
+        };
+    };
+    Object.defineProperty(SplitPane, "is", {
+        get: function () { return "ion-split-pane"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SplitPane, "properties", {
+        get: function () {
+            return {
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["updateState"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "isServer": {
+                    "context": "isServer"
+                },
+                "visible": {
+                    "state": true,
+                    "watchCallbacks": ["visibleChanged"]
+                },
+                "when": {
+                    "type": "Any",
+                    "attr": "when",
+                    "watchCallbacks": ["updateState"]
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SplitPane, "events", {
+        get: function () {
+            return [{
+                    "name": "ionChange",
+                    "method": "ionChange",
+                    "bubbles": false,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionSplitPaneVisible",
+                    "method": "ionSplitPaneVisible",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SplitPane, "style", {
+        get: function () { return ".split-pane{left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:nowrap;flex-wrap:nowrap;contain:strict}.split-pane-visible>.split-pane-main,.split-pane-visible>.split-pane-side{left:0;right:0;top:0;bottom:0;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-shadow:none!important;box-shadow:none!important;z-index:0}.split-pane-visible>.split-pane-side:not(ion-menu),.split-pane-visible>ion-menu.split-pane-side.menu-enabled{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-negative:0;flex-shrink:0}.split-pane-side:not(ion-menu){display:none}.split-pane-visible>.split-pane-side{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.split-pane-visible>.split-pane-side[side=end]{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}.split-pane-md{--border:1px solid rgba(var(--ion-item-border-color-rgb, 0, 0, 0), 0.13)}.split-pane-md.split-pane-visible>.split-pane-side{min-width:270px;max-width:28%;border-right:var(--border);border-left:0}.split-pane-md.split-pane-visible>.split-pane-side[side=end]{min-width:270px;max-width:28%;border-right:0;border-left:var(--border)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SplitPane, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return SplitPane;
+}());
+function setPaneClass(el, isMain) {
+    var toAdd;
+    var toRemove;
+    if (isMain) {
+        toAdd = SPLIT_PANE_MAIN;
+        toRemove = SPLIT_PANE_SIDE;
+    }
+    else {
+        toAdd = SPLIT_PANE_SIDE;
+        toRemove = SPLIT_PANE_MAIN;
+    }
+    var classList = el.classList;
+    classList.add(toAdd);
+    classList.remove(toRemove);
+}
+
+
 
 /***/ })
 

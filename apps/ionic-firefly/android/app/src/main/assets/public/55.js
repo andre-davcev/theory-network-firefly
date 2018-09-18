@@ -1,24 +1,497 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[55],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dq6scah8.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/dq6scah8.js ***!
-  \********************************************************************************************************************************/
-/*! exports provided: IonRadio, IonRadioGroup */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fhvo81yz.entry.js":
+/*!*********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fhvo81yz.entry.js ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: IonItemOption, IonItemOptions, IonItemSliding */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRadio", function() { return Radio; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRadioGroup", function() { return RadioGroup; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-276e047f.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-276e047f.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonItemOption", function() { return ItemOption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonItemOptions", function() { return ItemOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonItemSliding", function() { return ItemSliding; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var Radio=function(){function e(){this.inputId="ion-rb-"+radioButtonIds++,this.keyFocus=!1,this.name=this.inputId,this.disabled=!1,this.checked=!1}return e.prototype.componentWillLoad=function(){this.ionSelect=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.ionSelect),this.ionStyle=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.ionStyle),null==this.value&&(this.value=this.inputId),this.emitStyle()},e.prototype.componentDidLoad=function(){this.ionRadioDidLoad.emit(),this.nativeInput.checked=this.checked;var e=this.nativeInput.closest("ion-item");if(e){var t=e.querySelector("ion-label");t&&(t.id=this.inputId+"-lbl",this.nativeInput.setAttribute("aria-labelledby",t.id))}},e.prototype.componentDidUnload=function(){this.ionRadioDidUnload.emit()},e.prototype.colorChanged=function(){this.emitStyle()},e.prototype.checkedChanged=function(e){this.nativeInput.checked!==e&&(this.nativeInput.checked=e),e&&this.ionSelect.emit({checked:!0,value:this.value}),this.emitStyle()},e.prototype.disabledChanged=function(e){this.nativeInput.disabled=e,this.emitStyle()},e.prototype.emitStyle=function(){this.ionStyle.emit({"radio-checked":this.checked,"interactive-disabled":this.disabled})},e.prototype.onClick=function(){this.checkedChanged(!0)},e.prototype.onChange=function(){this.checked=!0,this.nativeInput.focus()},e.prototype.onKeyUp=function(){this.keyFocus=!0},e.prototype.onFocus=function(){this.ionFocus.emit()},e.prototype.onBlur=function(){this.keyFocus=!1,this.ionBlur.emit()},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.color),{"in-item":Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["n"])(".item",this.el),interactive:!0,"radio-checked":this.checked,"radio-disabled":this.disabled,"radio-key":this.keyFocus})}},e.prototype.render=function(){var e=this;return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"radio-icon"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"radio-inner"})),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input",{type:"radio",onClick:this.onClick.bind(this),onChange:this.onChange.bind(this),onFocus:this.onFocus.bind(this),onBlur:this.onBlur.bind(this),onKeyUp:this.onKeyUp.bind(this),id:this.inputId,name:this.name,value:this.value,disabled:this.disabled,ref:function(t){return e.nativeInput=t}})]},Object.defineProperty(e,"is",{get:function(){return"ion-radio"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{checked:{type:Boolean,attr:"checked",mutable:!0,watchCallbacks:["checkedChanged"]},color:{type:String,attr:"color",watchCallbacks:["colorChanged"]},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},el:{elementRef:!0},keyFocus:{state:!0},mode:{type:String,attr:"mode"},name:{type:String,attr:"name"},value:{type:"Any",attr:"value",mutable:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionRadioDidLoad",method:"ionRadioDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionRadioDidUnload",method:"ionRadioDidUnload",bubbles:!0,cancelable:!0,composed:!0},{name:"ionStyle",method:"ionStyle",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSelect",method:"ionSelect",bubbles:!0,cancelable:!0,composed:!0},{name:"ionFocus",method:"ionFocus",bubbles:!0,cancelable:!0,composed:!0},{name:"ionBlur",method:"ionBlur",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return":host{display:inline-block;position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--color-checked:var(--ion-color-primary, #3880ff);--width:16px;--height:21px}:host(.radio-disabled){pointer-events:none;opacity:.3}.radio-icon{display:block;position:relative;width:var(--width);height:var(--height);contain:layout size style}input{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.radio-icon,.radio-inner{-webkit-box-sizing:border-box;box-sizing:border-box}:host(.ion-color.radio-checked) .radio-inner{border-color:var(--ion-color-base)}.item-radio.item-ios ion-label{margin-left:0}:host(.radio-checked) .radio-inner{left:7px;top:4px;position:absolute;width:5px;height:12px;-webkit-transform:rotate(45deg);transform:rotate(45deg);border-width:0 2px 2px 0;border-style:solid;border-color:var(--color-checked)}:host(.radio-key) .radio-icon::after{border-radius:50%;left:-9px;top:-8px;display:block;position:absolute;width:36px;height:36px;background:var(--ion-color-primary-tint,#4c8dff);content:\"\";opacity:.2}:host(.in-item){margin:8px 11px 8px 8px;display:block;position:static}:host(.in-item[slot=start]){margin:8px 21px 8px 3px}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),radioButtonIds=0,RadioGroup=function(){function e(){this.inputId="ion-rg-"+radioGroupIds++,this.labelId=this.inputId+"-lbl",this.radios=[],this.allowEmptySelection=!1,this.name=this.inputId,this.disabled=!1}return e.prototype.disabledChanged=function(){for(var e=0,t=this.radios;e<t.length;e++)t[e].disabled=this.disabled},e.prototype.valueChanged=function(e){this.updateRadios(),this.ionChange.emit({value:e})},e.prototype.onRadioDidLoad=function(e){var t=e.target;t.name=this.name,this.radios.push(t),null==this.value&&t.checked?this.value=t.value:this.updateRadios()},e.prototype.onRadioDidUnload=function(e){var t=this.radios.indexOf(e.target);t>-1&&this.radios.splice(t,1)},e.prototype.onRadioSelect=function(e){var t=e.target;t&&(this.value=t.value)},e.prototype.componentDidLoad=function(){var e=this.el.querySelector("ion-list-header");if(e||(e=this.el.querySelector("ion-item-divider")),e){var t=e.querySelector("ion-label");t&&(this.labelId=t.id=this.name+"-lbl")}this.disabledChanged(),this.updateRadios()},e.prototype.updateRadios=function(){for(var e=this.value,t=!1,i=0,o=this.radios;i<o.length;i++){var n=o[i];t||n.value!==e?n.checked=!1:(t=!0,n.checked=!0)}},e.prototype.hostData=function(){return{role:"radiogroup","aria-labelledby":this.labelId}},Object.defineProperty(e,"is",{get:function(){return"ion-radio-group"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{allowEmptySelection:{type:Boolean,attr:"allow-empty-selection"},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},el:{elementRef:!0},name:{type:String,attr:"name"},value:{type:"Any",attr:"value",mutable:!0,watchCallbacks:["valueChanged"]}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionChange",method:"ionChange",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionRadioDidLoad",method:"onRadioDidLoad"},{name:"ionRadioDidUnload",method:"onRadioDidUnload"},{name:"ionSelect",method:"onRadioSelect"}]},enumerable:!0,configurable:!0}),e}(),radioGroupIds=0;
+
+
+
+var ItemOption = /** @class */ (function () {
+    function ItemOption() {
+        this.disabled = false;
+        this.expandable = false;
+    }
+    ItemOption.prototype.clickedOptionButton = function (ev) {
+        var el = ev.target.closest('ion-item-option');
+        return !!el;
+    };
+    ItemOption.prototype.hostData = function () {
+        return {
+            'ion-activatable': true,
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), { 'item-option-expandable': this.expandable })
+        };
+    };
+    ItemOption.prototype.render = function () {
+        var TagType = this.href === undefined ? 'button' : 'a';
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])(TagType, { type: "button", class: "item-option-native", disabled: this.disabled, href: this.href, onClick: this.clickedOptionButton.bind(this) }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "item-option-button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "start" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "top" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "icon-only" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "bottom" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "end" })), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null)));
+    };
+    Object.defineProperty(ItemOption, "is", {
+        get: function () { return "ion-item-option"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemOption, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemOption, "properties", {
+        get: function () {
+            return {
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "expandable": {
+                    "type": Boolean,
+                    "attr": "expandable"
+                },
+                "href": {
+                    "type": String,
+                    "attr": "href"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemOption, "style", {
+        get: function () { return ":host{--ion-color-base:var(--ion-color-primary, #3880ff);--ion-color-contrast:var(--ion-color-primary-contrast, #fff);background:var(--ion-color-base);color:var(--ion-color-contrast);font-family:var(--ion-font-family,inherit)}.item-option-native{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;padding:0 .7em;position:relative;width:100%;height:100%;border:0;outline:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none}.item-option-button-inner{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%;font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:inherit}::slotted([slot=icon-only]){padding:0;margin:0 10px;min-width:.9em;font-size:1.8em}:host(.item-option-expandable){-ms-flex-negative:0;flex-shrink:0;-webkit-transition-duration:0;transition-duration:0;-webkit-transition-property:none;transition-property:none;-webkit-transition-timing-function:cubic-bezier(.65,.05,.36,1);transition-timing-function:cubic-bezier(.65,.05,.36,1)}:host{font-size:14px;font-weight:500;text-transform:uppercase}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemOption, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return ItemOption;
+}());
+var ItemOptions = /** @class */ (function () {
+    function ItemOptions() {
+        this.side = 'end';
+    }
+    ItemOptions.prototype.fireSwipeEvent = function () {
+        this.ionSwipe.emit({
+            side: this.side
+        });
+    };
+    ItemOptions.prototype.hostData = function () {
+        var isEnd = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["h"])(this.win, this.side);
+        return {
+            class: {
+                'item-options-start': !isEnd,
+                'item-options-end': isEnd
+            }
+        };
+    };
+    Object.defineProperty(ItemOptions, "is", {
+        get: function () { return "ion-item-options"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemOptions, "properties", {
+        get: function () {
+            return {
+                "el": {
+                    "elementRef": true
+                },
+                "fireSwipeEvent": {
+                    "method": true
+                },
+                "side": {
+                    "type": String,
+                    "attr": "side"
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemOptions, "events", {
+        get: function () {
+            return [{
+                    "name": "ionSwipe",
+                    "method": "ionSwipe",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemOptions, "style", {
+        get: function () { return "ion-item-options{top:0;right:0;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;display:none;position:absolute;height:100%;font-size:14px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1}.item-options-start{right:auto;left:0;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.item-sliding-active-slide ion-item-options{display:-webkit-box;display:-ms-flexbox;display:flex}.item-sliding-active-slide.item-sliding-active-options-end ion-item-options:not(.item-options-start),.item-sliding-active-slide.item-sliding-active-options-start .item-options-start{width:100%;visibility:visible}.item-options-md{border-bottom-width:0;border-bottom-style:solid;border-bottom-color:rgba(var(--ion-item-border-color-rgb,0,0,0),.13)}.list-md-lines-none .item-options-md{border-bottom-width:0}.list-md-lines-full .item-options-md,.list-md-lines-inset .item-options-md.item-options-end{border-bottom-width:1px}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemOptions, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return ItemOptions;
+}());
+var SWIPE_MARGIN = 30;
+var ELASTIC_FACTOR = 0.55;
+var openSlidingItem;
+var ItemSliding = /** @class */ (function () {
+    function ItemSliding() {
+        this.item = null;
+        this.openAmount = 0;
+        this.initialOpenAmount = 0;
+        this.optsWidthRightSide = 0;
+        this.optsWidthLeftSide = 0;
+        this.sides = 0;
+        this.optsDirty = true;
+        this.state = 2;
+        this.disabled = false;
+    }
+    ItemSliding.prototype.disabledChanged = function () {
+        if (this.gesture) {
+            this.gesture.setDisabled(this.disabled);
+        }
+    };
+    ItemSliding.prototype.componentDidLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        this.item = this.el.querySelector('ion-item');
+                        return [4 /*yield*/, this.updateOptions()];
+                    case 1:
+                        _b.sent();
+                        _a = this;
+                        return [4 /*yield*/, __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/gesture.js"))];
+                    case 2:
+                        _a.gesture = (_b.sent()).createGesture({
+                            el: this.el,
+                            queue: this.queue,
+                            gestureName: 'item-swipe',
+                            gesturePriority: 20,
+                            threshold: 5,
+                            canStart: function () { return _this.canStart(); },
+                            onStart: function () { return _this.onStart(); },
+                            onMove: function (ev) { return _this.onMove(ev); },
+                            onEnd: function (ev) { return _this.onEnd(ev); },
+                        });
+                        this.disabledChanged();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ItemSliding.prototype.componentDidUnload = function () {
+        if (this.gesture) {
+            this.gesture.destroy();
+        }
+        this.item = null;
+        this.leftOptions = this.rightOptions = undefined;
+    };
+    ItemSliding.prototype.getOpenAmount = function () {
+        return Promise.resolve(this.openAmount);
+    };
+    ItemSliding.prototype.getSlidingRatio = function () {
+        return Promise.resolve(this.getSlidingRatioSync());
+    };
+    ItemSliding.prototype.close = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.setOpenAmount(0, true);
+                return [2 /*return*/];
+            });
+        });
+    };
+    ItemSliding.prototype.closeOpened = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                if (openSlidingItem !== undefined) {
+                    openSlidingItem.close();
+                    return [2 /*return*/, true];
+                }
+                return [2 /*return*/, false];
+            });
+        });
+    };
+    ItemSliding.prototype.updateOptions = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var options, sides, i, option;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        options = this.el.querySelectorAll('ion-item-options');
+                        sides = 0;
+                        this.leftOptions = this.rightOptions = undefined;
+                        i = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(i < options.length)) return [3 /*break*/, 4];
+                        return [4 /*yield*/, options.item(i).componentOnReady()];
+                    case 2:
+                        option = _a.sent();
+                        if (option.side === 'start') {
+                            this.leftOptions = option;
+                            sides |= 1;
+                        }
+                        else {
+                            this.rightOptions = option;
+                            sides |= 2;
+                        }
+                        _a.label = 3;
+                    case 3:
+                        i++;
+                        return [3 /*break*/, 1];
+                    case 4:
+                        this.optsDirty = true;
+                        this.sides = sides;
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ItemSliding.prototype.canStart = function () {
+        var selected = openSlidingItem;
+        if (selected && selected !== this.el) {
+            this.closeOpened();
+            return false;
+        }
+        return !!(this.rightOptions || this.leftOptions);
+    };
+    ItemSliding.prototype.onStart = function () {
+        openSlidingItem = this.el;
+        if (this.tmr !== undefined) {
+            clearTimeout(this.tmr);
+            this.tmr = undefined;
+        }
+        if (this.openAmount === 0) {
+            this.optsDirty = true;
+            this.state = 4;
+        }
+        this.initialOpenAmount = this.openAmount;
+        if (this.item) {
+            this.item.style.transition = 'none';
+        }
+    };
+    ItemSliding.prototype.onMove = function (gesture) {
+        if (this.optsDirty) {
+            this.calculateOptsWidth();
+        }
+        var openAmount = this.initialOpenAmount - gesture.deltaX;
+        switch (this.sides) {
+            case 2:
+                openAmount = Math.max(0, openAmount);
+                break;
+            case 1:
+                openAmount = Math.min(0, openAmount);
+                break;
+            case 3: break;
+            case 0: return;
+            default:
+                console.warn('invalid ItemSideFlags value', this.sides);
+                break;
+        }
+        var optsWidth;
+        if (openAmount > this.optsWidthRightSide) {
+            optsWidth = this.optsWidthRightSide;
+            openAmount = optsWidth + (openAmount - optsWidth) * ELASTIC_FACTOR;
+        }
+        else if (openAmount < -this.optsWidthLeftSide) {
+            optsWidth = -this.optsWidthLeftSide;
+            openAmount = optsWidth + (openAmount - optsWidth) * ELASTIC_FACTOR;
+        }
+        this.setOpenAmount(openAmount, false);
+    };
+    ItemSliding.prototype.onEnd = function (gesture) {
+        var velocity = gesture.velocityX;
+        var restingPoint = (this.openAmount > 0)
+            ? this.optsWidthRightSide
+            : -this.optsWidthLeftSide;
+        var isResetDirection = (this.openAmount > 0) === !(velocity < 0);
+        var isMovingFast = Math.abs(velocity) > 0.3;
+        var isOnCloseZone = Math.abs(this.openAmount) < Math.abs(restingPoint / 2);
+        if (swipeShouldReset(isResetDirection, isMovingFast, isOnCloseZone)) {
+            restingPoint = 0;
+        }
+        var state = this.state;
+        this.setOpenAmount(restingPoint, true);
+        if ((state & 32) !== 0 && this.rightOptions) {
+            this.rightOptions.fireSwipeEvent();
+        }
+        else if ((state & 64) !== 0 && this.leftOptions) {
+            this.leftOptions.fireSwipeEvent();
+        }
+    };
+    ItemSliding.prototype.calculateOptsWidth = function () {
+        this.optsWidthRightSide = 0;
+        if (this.rightOptions) {
+            this.optsWidthRightSide = this.rightOptions.offsetWidth;
+        }
+        this.optsWidthLeftSide = 0;
+        if (this.leftOptions) {
+            this.optsWidthLeftSide = this.leftOptions.offsetWidth;
+        }
+        this.optsDirty = false;
+    };
+    ItemSliding.prototype.setOpenAmount = function (openAmount, isFinal) {
+        var _this = this;
+        if (this.tmr !== undefined) {
+            clearTimeout(this.tmr);
+            this.tmr = undefined;
+        }
+        if (!this.item) {
+            return;
+        }
+        var style = this.item.style;
+        this.openAmount = openAmount;
+        if (isFinal) {
+            style.transition = '';
+        }
+        if (openAmount > 0) {
+            this.state = (openAmount >= (this.optsWidthRightSide + SWIPE_MARGIN))
+                ? 8 | 32
+                : 8;
+        }
+        else if (openAmount < 0) {
+            this.state = (openAmount <= (-this.optsWidthLeftSide - SWIPE_MARGIN))
+                ? 16 | 64
+                : 16;
+        }
+        else {
+            this.tmr = window.setTimeout(function () {
+                _this.state = 2;
+                _this.tmr = undefined;
+            }, 600);
+            openSlidingItem = undefined;
+            style.transform = '';
+            return;
+        }
+        style.transform = "translate3d(" + -openAmount + "px,0,0)";
+        this.ionDrag.emit({
+            amount: openAmount,
+            ratio: this.getSlidingRatioSync()
+        });
+    };
+    ItemSliding.prototype.getSlidingRatioSync = function () {
+        if (this.openAmount > 0) {
+            return this.openAmount / this.optsWidthRightSide;
+        }
+        else if (this.openAmount < 0) {
+            return this.openAmount / this.optsWidthLeftSide;
+        }
+        else {
+            return 0;
+        }
+    };
+    ItemSliding.prototype.hostData = function () {
+        return {
+            class: {
+                'item-sliding-active-slide': (this.state !== 2),
+                'item-sliding-active-options-end': (this.state & 8) !== 0,
+                'item-sliding-active-options-start': (this.state & 16) !== 0,
+                'item-sliding-active-swipe-end': (this.state & 32) !== 0,
+                'item-sliding-active-swipe-start': (this.state & 64) !== 0
+            }
+        };
+    };
+    Object.defineProperty(ItemSliding, "is", {
+        get: function () { return "ion-item-sliding"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemSliding, "properties", {
+        get: function () {
+            return {
+                "close": {
+                    "method": true
+                },
+                "closeOpened": {
+                    "method": true
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "getOpenAmount": {
+                    "method": true
+                },
+                "getSlidingRatio": {
+                    "method": true
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "state": {
+                    "state": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemSliding, "events", {
+        get: function () {
+            return [{
+                    "name": "ionDrag",
+                    "method": "ionDrag",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ItemSliding, "style", {
+        get: function () { return "ion-item-sliding{display:block;position:relative;width:100%;overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}ion-item-sliding .item{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.item-sliding-active-slide .item{position:relative;-webkit-transition:-webkit-transform .5s cubic-bezier(.36,.66,.04,1);transition:-webkit-transform .5s cubic-bezier(.36,.66,.04,1);transition:transform .5s cubic-bezier(.36,.66,.04,1);transition:transform .5s cubic-bezier(.36,.66,.04,1),-webkit-transform .5s cubic-bezier(.36,.66,.04,1);background:var(--ion-item-background-color,var(--ion-background-color,#fff));opacity:1;z-index:2;pointer-events:none;will-change:transform}.item-sliding-active-swipe-end .item-options-end .item-option-expandable{padding-left:90%;-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1;-webkit-transition-duration:.6s;transition-duration:.6s;-webkit-transition-property:padding-left;transition-property:padding-left}.item-sliding-active-swipe-start .item-options-start .item-option-expandable{padding-right:90%;-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1;-webkit-transition-duration:.6s;transition-duration:.6s;-webkit-transition-property:padding-right;transition-property:padding-right}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return ItemSliding;
+}());
+function swipeShouldReset(isResetDirection, isMovingFast, isOnResetZone) {
+    return (!isMovingFast && isOnResetZone) || (isResetDirection && isMovingFast);
+}
+
+
 
 /***/ })
 

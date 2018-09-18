@@ -1,61 +1,71 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ios.transition.js":
-/*!**************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ios.transition.js ***!
-  \**************************************************************************************************************************************/
-/*! exports provided: shadow, iosTransitionAnimation */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hardware-back-button.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hardware-back-button.js ***!
+  \***************************************************************************************************************************************/
+/*! exports provided: startHardwareBackButton */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shadow", function() { return shadow; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "iosTransitionAnimation", function() { return iosTransitionAnimation; });
-var DURATION = 500, EASING = "cubic-bezier(0.36,0.66,0.04,1)", OPACITY = "opacity", TRANSFORM = "transform", TRANSLATEX = "translateX", CENTER = "0%", OFF_OPACITY = .8;
-function shadow(e) { return e.shadowRoot || e; }
-function iosTransitionAnimation(e, o, t) { var n = "rtl" === document.dir, r = n ? "-99.5%" : "99.5%", a = n ? "33%" : "-33%", d = t.enteringEl, l = t.leavingEl, T = new e; if (T.addElement(d).duration(t.duration || DURATION).easing(t.easing || EASING).beforeRemoveClass("ion-page-invisible"), l && o) {
-    var t_1 = new e;
-    t_1.addElement(o).beforeAddClass("show-decor").afterRemoveClass("show-decor"), T.add(t_1);
-} var s = "back" === t.direction, c = d.querySelector(":scope > ion-content"), i = d.querySelectorAll(":scope > ion-header > *:not(ion-toolbar), :scope > ion-footer > *"), A = d.querySelector(":scope > ion-header > ion-toolbar"), E = new e; if (c || A || 0 !== i.length ? (E.addElement(c), E.addElement(i)) : E.addElement(d.querySelector(":scope > .ion-page, :scope > ion-nav, :scope > ion-tabs")), T.add(E), s ? E.beforeClearStyles([OPACITY]).fromTo(TRANSLATEX, a, CENTER, !0).fromTo(OPACITY, OFF_OPACITY, 1, !0) : E.beforeClearStyles([OPACITY]).fromTo(TRANSLATEX, r, CENTER, !0), A) {
-    var o_1 = new e;
-    o_1.addElement(A), T.add(o_1);
-    var t_2 = new e;
-    t_2.addElement(A.querySelector("ion-title"));
-    var d_1 = new e;
-    d_1.addElement(A.querySelectorAll("ion-buttons,[menuToggle]"));
-    var l_1 = new e;
-    l_1.addElement(shadow(A).querySelector(".toolbar-background"));
-    var c_1 = new e, i_1 = A.querySelector("ion-back-button");
-    if (c_1.addElement(i_1), o_1.add(t_2).add(d_1).add(l_1).add(c_1), t_2.fromTo(OPACITY, .01, 1, !0), d_1.fromTo(OPACITY, .01, 1, !0), s)
-        t_2.fromTo(TRANSLATEX, a, CENTER, !0), c_1.fromTo(OPACITY, .01, 1, !0);
-    else if (t_2.fromTo(TRANSLATEX, r, CENTER, !0), l_1.beforeClearStyles([OPACITY]).fromTo(OPACITY, .01, 1, !0), c_1.fromTo(OPACITY, .01, 1, !0), i_1) {
-        var t_3 = new e;
-        t_3.addElement(shadow(i_1).querySelector(".button-text")).fromTo(TRANSLATEX, n ? "-100px" : "100px", "0px"), o_1.add(t_3);
-    }
-} if (l) {
-    var o_2 = new e;
-    o_2.addElement(l.querySelector(":scope > ion-content")), o_2.addElement(l.querySelectorAll(":scope > ion-header > *:not(ion-toolbar), :scope > ion-footer > *")), T.add(o_2), s ? o_2.beforeClearStyles([OPACITY]).fromTo(TRANSLATEX, CENTER, n ? "-100%" : "100%") : o_2.fromTo(TRANSLATEX, CENTER, a, !0).fromTo(OPACITY, 1, OFF_OPACITY, !0);
-    var t_4 = l.querySelector(":scope > ion-header > ion-toolbar");
-    if (t_4) {
-        var o_3 = new e;
-        o_3.addElement(t_4);
-        var r_1 = new e;
-        r_1.addElement(t_4.querySelector("ion-title"));
-        var d_2 = new e;
-        d_2.addElement(t_4.querySelectorAll("ion-buttons,[menuToggle]"));
-        var l_2 = new e;
-        l_2.addElement(shadow(t_4).querySelector(".toolbar-background"));
-        var c_2 = new e, i_2 = t_4.querySelector("ion-back-button");
-        if (c_2.addElement(i_2), o_3.add(r_1).add(d_2).add(c_2).add(l_2), T.add(o_3), c_2.fromTo(OPACITY, .99, 0, !0), r_1.fromTo(OPACITY, .99, 0, !0), d_2.fromTo(OPACITY, .99, 0, !0), s) {
-            if (r_1.fromTo(TRANSLATEX, CENTER, n ? "-100%" : "100%"), l_2.beforeClearStyles([OPACITY]).fromTo(OPACITY, 1, .01, !0), i_2) {
-                var t_5 = new e;
-                t_5.addElement(shadow(i_2).querySelector(".button-text")), t_5.fromTo(TRANSLATEX, CENTER, (n ? -124 : 124) + "px"), o_3.add(t_5);
-            }
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startHardwareBackButton", function() { return startHardwareBackButton; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+
+function startHardwareBackButton(win) {
+    var busy = false;
+    win.document.addEventListener('backbutton', function () {
+        if (busy) {
+            return;
         }
-        else
-            r_1.fromTo(TRANSLATEX, CENTER, a).afterClearStyles([TRANSFORM]), c_2.afterClearStyles([OPACITY]), r_1.afterClearStyles([OPACITY]), d_2.afterClearStyles([OPACITY]);
-    }
-} return Promise.resolve(T); }
+        var handlers = [];
+        var ev = new CustomEvent('ionBackButton', {
+            bubbles: false,
+            detail: {
+                register: function (priority, handler) {
+                    handlers.push({ priority: priority, handler: handler });
+                }
+            }
+        });
+        win.document.dispatchEvent(ev);
+        if (handlers.length > 0) {
+            var selectedPriority_1 = Number.MIN_SAFE_INTEGER;
+            var handler_1;
+            handlers.forEach(function (h) {
+                if (h.priority >= selectedPriority_1) {
+                    selectedPriority_1 = h.priority;
+                    handler_1 = h.handler;
+                }
+            });
+            busy = true;
+            executeAction(handler_1).then(function () { return busy = false; });
+        }
+    });
+}
+function executeAction(handler) {
+    return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+        var result, e_1;
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    if (!handler) return [3 /*break*/, 2];
+                    result = handler();
+                    if (!(result != null)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, result];
+                case 1:
+                    _a.sent();
+                    _a.label = 2;
+                case 2: return [3 /*break*/, 4];
+                case 3:
+                    e_1 = _a.sent();
+                    console.error(e_1);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
 
 
 

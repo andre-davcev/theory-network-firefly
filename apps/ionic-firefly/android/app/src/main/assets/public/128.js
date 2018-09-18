@@ -1,24 +1,501 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[128],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/sq9nnxm2.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/sq9nnxm2.js ***!
-  \********************************************************************************************************************************/
-/*! exports provided: IonTab, IonTabbar, IonTabs */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uw0jxr9c.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uw0jxr9c.sc.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonAlert, IonAlertController */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonTab", function() { return Tab; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonTabbar", function() { return Tabbar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonTabs", function() { return Tabs; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonAlert", function() { return Alert; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonAlertController", function() { return AlertController; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(t,e,n,a){return new(n||(n=Promise))(function(o,i){function r(t){try{l(a.next(t))}catch(t){i(t)}}function s(t){try{l(a.throw(t))}catch(t){i(t)}}function l(t){t.done?o(t.value):new n(function(e){e(t.value)}).then(r,s)}l((a=a.apply(t,e||[])).next())})},__generator=undefined&&undefined.__generator||function(t,e){var n,a,o,i,r={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return i={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function s(i){return function(s){return function(i){if(n)throw new TypeError("Generator is already executing.");for(;r;)try{if(n=1,a&&(o=2&i[0]?a.return:i[0]?a.throw||((o=a.return)&&o.call(a),0):a.next)&&!(o=o.call(a,i[1])).done)return o;switch(a=0,o&&(i=[2&i[0],o.value]),i[0]){case 0:case 1:o=i;break;case 4:return r.label++,{value:i[1],done:!1};case 5:r.label++,a=i[1],i=[0];continue;case 7:i=r.ops.pop(),r.trys.pop();continue;default:if(!(o=(o=r.trys).length>0&&o[o.length-1])&&(6===i[0]||2===i[0])){r=0;continue}if(3===i[0]&&(!o||i[1]>o[0]&&i[1]<o[3])){r.label=i[1];break}if(6===i[0]&&r.label<o[1]){r.label=o[1],o=i;break}if(o&&r.label<o[2]){r.label=o[2],r.ops.push(i);break}o[2]&&r.ops.pop(),r.trys.pop();continue}i=e.call(t,r)}catch(t){i=[6,t],a=0}finally{n=o=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,s])}}};var Tab=function(){function t(){this.loaded=!1,this.active=!1,this.disabled=!1,this.selected=!1,this.show=!0,this.tabsHideOnSubPages=!1}return t.prototype.selectedChanged=function(t){t&&this.ionSelect.emit()},t.prototype.componentWillLoad=function(){void 0===this.name&&"string"==typeof this.component&&(this.name=this.component)},t.prototype.onPropChanged=function(){this.ionTabMutated.emit()},t.prototype.setActive=function(){return __awaiter(this,void 0,void 0,function(){return __generator(this,function(t){switch(t.label){case 0:return[4,this.prepareLazyLoaded()];case 1:return t.sent(),this.active=!0,[2]}})})},t.prototype.prepareLazyLoaded=function(){return this.loaded||null==this.component?Promise.resolve():(this.loaded=!0,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["a"])(this.delegate,this.el,this.component,["ion-page"]))},t.prototype.hostData=function(){var t=this.btnId,e=this.active;return{"aria-labelledby":t,"aria-hidden":e?null:"true",role:"tabpanel",class:{"ion-page":void 0===this.component,"tab-hidden":!e}}},t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-tab"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{active:{type:Boolean,attr:"active",mutable:!0},badge:{type:String,attr:"badge",watchCallbacks:["onPropChanged"]},badgeColor:{type:String,attr:"badge-color",watchCallbacks:["onPropChanged"]},btnId:{type:String,attr:"btn-id"},component:{type:String,attr:"component"},delegate:{type:"Any",attr:"delegate"},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["onPropChanged"]},el:{elementRef:!0},href:{type:String,attr:"href",watchCallbacks:["onPropChanged"]},icon:{type:String,attr:"icon",watchCallbacks:["onPropChanged"]},label:{type:String,attr:"label",watchCallbacks:["onPropChanged"]},name:{type:String,attr:"name",mutable:!0},selected:{type:Boolean,attr:"selected",watchCallbacks:["selectedChanged"]},setActive:{method:!0},show:{type:Boolean,attr:"show",watchCallbacks:["onPropChanged"]},tabsHideOnSubPages:{type:Boolean,attr:"tabs-hide-on-sub-pages"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"events",{get:function(){return[{name:"ionSelect",method:"ionSelect",bubbles:!0,cancelable:!0,composed:!0},{name:"ionTabMutated",method:"ionTabMutated",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return":host(.tab-hidden){display:none!important}"},enumerable:!0,configurable:!0}),t}(),Tabbar=function(){function t(){this.canScrollLeft=!1,this.canScrollRight=!1,this.keyboardVisible=!1,this.layout="icon-top",this.placement="bottom",this.tabs=[],this.highlight=!1,this.translucent=!1}return t.prototype.onKeyboardWillHide=function(){var t=this;setTimeout(function(){return t.keyboardVisible=!1},50)},t.prototype.onKeyboardWillShow=function(){"bottom"===this.placement&&(this.keyboardVisible=!0)},t.prototype.componentDidLoad=function(){this.updateHighlight()},t.prototype.getSelectedButton=function(){return this.el.shadowRoot.querySelector(".tab-btn-selected")},t.prototype.updateHighlight=function(){var t=this;this.highlight&&this.queue.read(function(){var e=t.getSelectedButton(),n=t.el.shadowRoot.querySelector(".tabbar-highlight");e&&n&&(n.style.transform="translate3d("+e.offsetLeft+"px,0,0) scaleX("+e.offsetWidth+")")})},t.prototype.hostData=function(){var t,e=this,n=e.color,a=e.translucent,o=e.layout,i=e.placement,r=e.keyboardVisible;return{role:"tablist","aria-hidden":r?"true":null,class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["k"])(n),(t={"tabbar-translucent":a},t["layout-"+o]=!0,t["placement-"+i]=!0,t["tabbar-hidden"]=r,t))}},t.prototype.renderTabButton=function(t){var e=this,n=t.icon,a=t.label,o=t.disabled,i=t.badge,r=t.badgeColor,s=t.href,l=t===this.selectedTab,c=void 0!==a,b=void 0!==n;return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("a",{role:"tab","ion-activable":!0,"aria-selected":l?"true":null,href:s||"#",class:{"tab-btn":!0,"tab-btn-selected":l,"tab-btn-has-label":c,"tab-btn-has-icon":b,"tab-btn-has-label-only":c&&!b,"tab-btn-has-icon-only":b&&!c,"tab-btn-has-badge":void 0!==i,"tab-btn-disabled":o,"tab-btn-hidden":!t.show},onClick:function(n){t.disabled||e.ionTabbarClick.emit(t),n.preventDefault()}},n&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon",{class:"tab-btn-icon",icon:n,lazy:!1}),a&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span",{class:"tab-btn-text"},a),i&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-badge",{class:"tab-btn-badge",color:r},i),"md"===this.mode&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect",null))},t.prototype.render=function(){var t=this;return[this.tabs.map(function(e){return t.renderTabButton(e)}),this.highlight&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"animated tabbar-highlight"})]},Object.defineProperty(t,"is",{get:function(){return"ion-tabbar"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{canScrollLeft:{state:!0},canScrollRight:{state:!0},color:{type:String,attr:"color"},doc:{context:"document"},el:{elementRef:!0},highlight:{type:Boolean,attr:"highlight"},keyboardVisible:{state:!0},layout:{type:String,attr:"layout"},mode:{type:String,attr:"mode"},placement:{type:String,attr:"placement"},queue:{context:"queue"},selectedTab:{type:"Any",attr:"selected-tab",watchCallbacks:["updateHighlight"]},tabs:{type:"Any",attr:"tabs"},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"events",{get:function(){return[{name:"ionTabbarClick",method:"ionTabbarClick",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"listeners",{get:function(){return[{name:"body:keyboardWillHide",method:"onKeyboardWillHide"},{name:"body:keyboardWillShow",method:"onKeyboardWillShow"},{name:"window:resize",method:"updateHighlight",passive:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return":host{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1;width:100%;background:var(--background);color:var(--color);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:10}:host(.ion-color){--background:var(--ion-color-base);--color:rgba(var(--ion-color-contrast-rgb), 0.7);--color-selected:var(--ion-color-contrast)}:host(.tabbar-hidden){display:none!important}:host(.placement-top){-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}:host(.placement-bottom){padding-bottom:var(--ion-safe-area-bottom,0)}.tabbar-highlight{left:0;bottom:0;-webkit-transform-origin:0 0;transform-origin:0 0;display:block;position:absolute;width:1px;height:2px;-webkit-transform:translateZ(0);transform:translateZ(0);background:currentColor}.tabbar-highlight.animated{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:-webkit-transform;transition-property:-webkit-transform;transition-property:transform;transition-property:transform,-webkit-transform;-webkit-transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,.2,1);will-change:transform}:host(.placement-top) .tabbar-highlight{bottom:0}:host(.placement-bottom) .tabbar-highlight{top:0}:host(.layout-icon-start) .tab-btn{--flex-direction:row}:host(.layout-icon-end) .tab-btn{--flex-direction:row-reverse}:host(.layout-icon-bottom) .tab-btn{--flex-direction:column-reverse}:host(.layout-icon-end) .tab-btn,:host(.layout-icon-hide) .tab-btn,:host(.layout-icon-start) .tab-btn,:host(.layout-label-hide) .tab-btn{--justify-content:center}:host(.layout-icon-hide) .tab-btn{--icon-display:none}:host(.layout-label-hide) .tab-btn{--label-display:none;--icon-margin:0}:host(.layout-icon-bottom) .tab-btn,:host(.layout-icon-top) .tab-btn{--badge-end:calc(50% - 30px)}:host(.layout-icon-end) .tab-btn,:host(.layout-icon-hide) .tab-btn,:host(.layout-icon-start) .tab-btn{--badge-end:calc(50% - 50px);--label-margin-top:2px;--label-margin-bottom:2px;--label-font-size:14px;--label-line-height:1.1}.tab-btn{font-family:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;margin:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:var(--flex-direction,column);flex-direction:var(--flex-direction,column);-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:var(--justify-content,flex-start);-ms-flex-pack:var(--justify-content,flex-start);justify-content:var(--justify-content,flex-start);width:100%;height:100%;border:0;outline:0;background:0 0;text-decoration:none;cursor:pointer;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-drag:none}.tab-btn:focus-visible{background:var(--background-focused)}.tab-btn-selected,.tab-btn:hover{color:var(--color-selected)}.tab-btn-hidden{display:none!important}.tab-btn-disabled{pointer-events:none;opacity:.4}.tab-btn-text{margin-top:var(--label-margin-top);margin-bottom:var(--label-margin-bottom);display:var(--label-display,block);font-size:var(--label-font-size);line-height:var(--label-line-height)}.tab-btn-icon{margin-top:var(--icon-margin-top);margin-bottom:var(--icon-margin-bottom);display:var(--icon-display,block);min-width:var(--icon-min-width);height:var(--icon-height,1em);font-size:var(--icon-font-size)}.tab-btn-icon,.tab-btn-text{-ms-flex-item-align:center;align-self:center;min-width:26px;max-width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}.tab-btn-has-label-only .tab-btn-text{white-space:normal;margin:2px 0;font-size:14px;line-height:1.1}.tab-btn-has-icon-only,.tab-btn-has-label-only{--justify-content:center}.tab-btn-badge{right:4%;top:6%;right:var(--badge-end,calc(50% - 30px));padding:1px 6px;-webkit-box-sizing:border-box;box-sizing:border-box;position:absolute;height:auto;font-size:12px;line-height:16px}.tab-btn-has-label-only .tab-btn-badge{--badge-end:calc(50% - 50px)}.tab-btn-has-icon-only .tab-btn-badge{--badge-end:calc(50% - 30px)}.tab-btn-selected .tab-btn-icon{-webkit-transform:var(--icon-transform-selected);transform:var(--icon-transform-selected)}.tab-btn{padding:0 2px;max-width:240px;font-size:10px}.tab-btn-text{margin-top:0;margin-bottom:1px;min-height:11px}.tab-btn-icon{margin-top:4px;font-size:30px}.tab-btn-icon::before{vertical-align:top}:host{--background:var(--ion-tabbar-background-color, #f8f8f8);--background-rgb:var(--ion-tabbar-translucent-background-color-rgb, 248, 248, 248);--color:var(--ion-tabbar-text-color, #8c8c8c);--color-selected:var(--ion-color-primary, #3880ff);--background-focused:var(--ion-tabbar-background-color-focused, #dadada);-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:50px;border-top:.55px solid rgba(var(--ion-tabbar-border-color-rgb,0,0,0),.2);contain:strict}:host(.placement-top){border-top:0;border-bottom:.55px solid rgba(var(--ion-tabbar-border-color-rgb,0,0,0),.2)}:host(.tabbar-translucent){background-color:rgba(var(--ion-color-base-rgb),.8);-webkit-backdrop-filter:saturate(210%) blur(20px);backdrop-filter:saturate(210%) blur(20px)}:host(.layout-icon-end) .tab-btn,:host(.layout-icon-start) .tab-btn{--icon-margin-top:2px;--icon-margin-bottom:1px;--icon-min-width:24px;--icon-height:26px;--icon-font-size:24px}"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),t}(),Tabs=function(){function t(){this.ids=-1,this.transitioning=!1,this.tabsId=++tabIds,this.tabs=[],this.tabbarHidden=!1,this.translucent=!1,this.useRouter=!1}return t.prototype.componentWillLoad=function(){this.useRouter||(this.useRouter=!!this.doc.querySelector("ion-router")&&!this.el.closest("[no-router]")),this.loadConfig("tabbarPlacement","bottom"),this.loadConfig("tabbarLayout","icon-top"),this.loadConfig("tabbarHighlight",!1),this.initTabs(),this.ionNavWillLoad.emit()},t.prototype.componentDidLoad=function(){return this.initSelect()},t.prototype.componentDidUnload=function(){this.tabs.length=0,this.selectedTab=this.leavingTab=void 0},t.prototype.onTabMutated=function(){this.el.forceUpdate()},t.prototype.onTabClicked=function(t){var e=t.detail,n=e.href;if(this.useRouter&&void 0!==n){var a=this.doc.querySelector("ion-router");return a?a.push(n):Promise.resolve(!1)}return this.select(e)},t.prototype.select=function(t){return __awaiter(this,void 0,void 0,function(){var e;return __generator(this,function(n){switch(n.label){case 0:return[4,this.getTab(t)];case 1:return e=n.sent(),this.shouldSwitch(e)?[4,this.setActive(e)]:[2,!1];case 2:return n.sent(),[4,this.notifyRouter()];case 3:return n.sent(),this.tabSwitch(),[2,!0]}})})},t.prototype.setRouteId=function(t){return __awaiter(this,void 0,void 0,function(){var e,n=this;return __generator(this,function(a){switch(a.label){case 0:return[4,this.getTab(t)];case 1:return e=a.sent(),this.shouldSwitch(e)?[4,this.setActive(e)]:[2,{changed:!1,element:this.selectedTab}];case 2:return a.sent(),[2,{changed:!0,element:this.selectedTab,markVisible:function(){return n.tabSwitch()}}]}})})},t.prototype.getRouteId=function(){return __awaiter(this,void 0,void 0,function(){var t;return __generator(this,function(e){return[2,void 0!==(t=this.selectedTab&&this.selectedTab.name)?{id:t,element:this.selectedTab}:void 0]})})},t.prototype.getTab=function(t){return __awaiter(this,void 0,void 0,function(){return __generator(this,function(e){return"string"==typeof t?[2,this.tabs.find(function(e){return e.name===t})]:"number"==typeof t?[2,this.tabs[t]]:[2,t]})})},t.prototype.getSelected=function(){return Promise.resolve(this.selectedTab)},t.prototype.initTabs=function(){var t=this;(this.tabs=Array.from(this.el.querySelectorAll("ion-tab"))).forEach(function(e){var n="t-"+t.tabsId+"-"+ ++t.ids;e.btnId="tab-"+n,e.id="tabpanel-"+n})},t.prototype.initSelect=function(){return __awaiter(this,void 0,void 0,function(){var t,e,n,a,o;return __generator(this,function(i){switch(i.label){case 0:if(t=this.tabs,this.useRouter)return[2];for(e=t.find(function(t){return t.selected})||t.find(function(t){return t.show&&!t.disabled}),n=0,a=t;n<a.length;n++)(o=a[n])!==e&&(o.selected=!1);return e?[4,e.setActive()]:[3,2];case 1:i.sent(),i.label=2;case 2:return this.selectedTab=e,e&&(e.selected=!0,e.active=!0),[2]}})})},t.prototype.loadConfig=function(t,e){void 0===this[t]&&(this[t]=this.config.get(t,e))},t.prototype.setActive=function(t){if(this.transitioning)return Promise.reject("transitioning already happening");for(var e=0,n=this.tabs;e<n.length;e++){var a=n[e];t!==a&&(a.selected=!1)}return this.transitioning=!0,this.leavingTab=this.selectedTab,this.selectedTab=t,this.ionNavWillChange.emit(),t.setActive()},t.prototype.tabSwitch=function(){var t=this.selectedTab,e=this.leavingTab;this.leavingTab=void 0,this.transitioning=!1,t&&(t.selected=!0,e!==t&&(e&&(e.active=!1),this.ionChange.emit({tab:t}),this.ionNavDidChange.emit()))},t.prototype.notifyRouter=function(){if(this.useRouter){var t=this.doc.querySelector("ion-router");if(t)return t.navChanged(1)}return Promise.resolve(!1)},t.prototype.shouldSwitch=function(t){var e=this.selectedTab;return void 0!==t&&t!==e&&!this.transitioning},t.prototype.hostData=function(){return{class:Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["k"])(this.color)}},t.prototype.render=function(){return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"tabs-inner"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)),!this.tabbarHidden&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-tabbar",{tabs:this.tabs.slice(),color:this.color,selectedTab:this.selectedTab,highlight:this.tabbarHighlight,placement:this.tabbarPlacement,layout:this.tabbarLayout,translucent:this.translucent})]},Object.defineProperty(t,"is",{get:function(){return"ion-tabs"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{color:{type:String,attr:"color"},config:{context:"config"},doc:{context:"document"},el:{elementRef:!0},getRouteId:{method:!0},getSelected:{method:!0},getTab:{method:!0},name:{type:String,attr:"name"},select:{method:!0},selectedTab:{state:!0},setRouteId:{method:!0},tabbarHidden:{type:Boolean,attr:"tabbar-hidden"},tabbarHighlight:{type:Boolean,attr:"tabbar-highlight",mutable:!0},tabbarLayout:{type:String,attr:"tabbar-layout",mutable:!0},tabbarPlacement:{type:String,attr:"tabbar-placement",mutable:!0},tabs:{state:!0},translucent:{type:Boolean,attr:"translucent"},useRouter:{type:Boolean,attr:"use-router",mutable:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"events",{get:function(){return[{name:"ionChange",method:"ionChange",bubbles:!0,cancelable:!0,composed:!0},{name:"ionNavWillLoad",method:"ionNavWillLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionNavWillChange",method:"ionNavWillChange",bubbles:!0,cancelable:!0,composed:!0},{name:"ionNavDidChange",method:"ionNavDidChange",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"listeners",{get:function(){return[{name:"ionTabMutated",method:"onTabMutated"},{name:"ionTabbarClick",method:"onTabClicked"}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return":host{left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;width:100%;height:100%;contain:layout size style;z-index:0}.tabs-inner{position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;contain:layout size style}"},enumerable:!0,configurable:!0}),t}(),tabIds=-1;
+
+
+
+function iosEnterAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.alert-wrapper'));
+    backdropAnimation.fromTo('opacity', 0.01, 0.3);
+    wrapperAnimation.fromTo('opacity', 0.01, 1).fromTo('scale', 1.1, 1);
+    var ani = baseAnimation
+        .addElement(baseEl)
+        .easing('ease-in-out')
+        .duration(200)
+        .add(backdropAnimation)
+        .add(wrapperAnimation);
+    return Promise.resolve(ani);
+}
+function iosLeaveAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.alert-wrapper'));
+    backdropAnimation.fromTo('opacity', 0.3, 0);
+    wrapperAnimation.fromTo('opacity', 0.99, 0).fromTo('scale', 1, 0.9);
+    var ani = baseAnimation
+        .addElement(baseEl)
+        .easing('ease-in-out')
+        .duration(200)
+        .add(backdropAnimation)
+        .add(wrapperAnimation);
+    return Promise.resolve(ani);
+}
+function mdEnterAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.alert-wrapper'));
+    backdropAnimation.fromTo('opacity', 0.01, 0.5);
+    wrapperAnimation.fromTo('opacity', 0.01, 1).fromTo('scale', 1.1, 1);
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('ease-in-out')
+        .duration(200)
+        .add(backdropAnimation)
+        .add(wrapperAnimation));
+}
+function mdLeaveAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.alert-wrapper'));
+    backdropAnimation.fromTo('opacity', 0.5, 0);
+    wrapperAnimation.fromTo('opacity', 0.99, 0).fromTo('scale', 1, 0.9);
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('ease-in-out')
+        .duration(200)
+        .add(backdropAnimation)
+        .add(wrapperAnimation));
+}
+var Alert = /** @class */ (function () {
+    function Alert() {
+        this.processedInputs = [];
+        this.processedButtons = [];
+        this.presented = false;
+        this.keyboardClose = true;
+        this.buttons = [];
+        this.inputs = [];
+        this.backdropDismiss = true;
+        this.translucent = false;
+        this.animated = true;
+    }
+    Alert.prototype.buttonsChanged = function () {
+        var buttons = this.buttons;
+        this.processedButtons = buttons.map(function (btn) {
+            return (typeof btn === 'string')
+                ? { text: btn, role: btn.toLowerCase() === 'cancel' ? 'cancel' : undefined }
+                : btn;
+        });
+    };
+    Alert.prototype.inputsChanged = function () {
+        var _this = this;
+        var inputs = this.inputs;
+        var inputTypes = new Set(inputs.map(function (i) { return i.type; }));
+        if (inputTypes.has('checkbox') && inputTypes.has('radio')) {
+            console.warn("Alert cannot mix input types: " + (Array.from(inputTypes.values()).join('/')) + ". Please see alert docs for more info.");
+        }
+        this.inputType = inputTypes.values().next().value;
+        this.processedInputs = inputs.map(function (i, index) { return ({
+            type: i.type || 'text',
+            name: i.name || "" + index,
+            placeholder: i.placeholder || '',
+            value: i.value || '',
+            label: i.label,
+            checked: !!i.checked,
+            disabled: !!i.disabled,
+            id: i.id || "alert-input-" + _this.overlayIndex + "-" + index,
+            handler: i.handler,
+            min: i.min,
+            max: i.max
+        }); });
+    };
+    Alert.prototype.componentWillLoad = function () {
+        this.inputsChanged();
+        this.buttonsChanged();
+    };
+    Alert.prototype.componentDidLoad = function () {
+        this.ionAlertDidLoad.emit();
+    };
+    Alert.prototype.componentDidUnload = function () {
+        this.ionAlertDidUnload.emit();
+    };
+    Alert.prototype.onBackdropTap = function () {
+        this.dismiss(undefined, _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["a"]);
+    };
+    Alert.prototype.dispatchCancelHandler = function (ev) {
+        var role = ev.detail.role;
+        if (Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["d"])(role)) {
+            var cancelButton = this.processedButtons.find(function (b) { return b.role === 'cancel'; });
+            this.callButtonHandler(cancelButton);
+        }
+    };
+    Alert.prototype.present = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this, 'alertEnter', iosEnterAnimation, mdEnterAnimation);
+    };
+    Alert.prototype.dismiss = function (data, role) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this, data, role, 'alertLeave', iosLeaveAnimation, mdLeaveAnimation);
+    };
+    Alert.prototype.onDidDismiss = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionAlertDidDismiss');
+    };
+    Alert.prototype.onWillDismiss = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionAlertWillDismiss');
+    };
+    Alert.prototype.rbClick = function (selectedInput) {
+        for (var _i = 0, _a = this.processedInputs; _i < _a.length; _i++) {
+            var input = _a[_i];
+            input.checked = input === selectedInput;
+        }
+        this.activeId = selectedInput.id;
+        if (selectedInput.handler) {
+            selectedInput.handler(selectedInput);
+        }
+        this.el.forceUpdate();
+    };
+    Alert.prototype.cbClick = function (selectedInput) {
+        selectedInput.checked = !selectedInput.checked;
+        if (selectedInput.handler) {
+            selectedInput.handler(selectedInput);
+        }
+        this.el.forceUpdate();
+    };
+    Alert.prototype.buttonClick = function (button) {
+        var role = button.role;
+        var values = this.getValues();
+        if (Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["d"])(role)) {
+            return this.dismiss({ values: values }, role);
+        }
+        var returnData = this.callButtonHandler(button, values);
+        if (returnData !== false) {
+            return this.dismiss(Object.assign({ values: values }, returnData), button.role);
+        }
+        return Promise.resolve(false);
+    };
+    Alert.prototype.callButtonHandler = function (button, data) {
+        if (button && button.handler) {
+            var returnData = button.handler(data);
+            if (returnData === false) {
+                return false;
+            }
+            if (typeof returnData === 'object') {
+                return returnData;
+            }
+        }
+        return {};
+    };
+    Alert.prototype.getValues = function () {
+        if (this.processedInputs.length === 0) {
+            return undefined;
+        }
+        if (this.inputType === 'radio') {
+            var checkedInput = this.processedInputs.find(function (i) { return !!i.checked; });
+            return checkedInput ? checkedInput.value : undefined;
+        }
+        if (this.inputType === 'checkbox') {
+            return this.processedInputs.filter(function (i) { return i.checked; }).map(function (i) { return i.value; });
+        }
+        var values = {};
+        this.processedInputs.forEach(function (i) {
+            values[i.name] = i.value || '';
+        });
+        return values;
+    };
+    Alert.prototype.renderAlertInputs = function (labelledBy) {
+        switch (this.inputType) {
+            case 'checkbox': return this.renderCheckbox(labelledBy);
+            case 'radio': return this.renderRadio(labelledBy);
+            default: return this.renderInput(labelledBy);
+        }
+    };
+    Alert.prototype.renderCheckbox = function (labelledby) {
+        var _this = this;
+        var inputs = this.processedInputs;
+        if (inputs.length === 0) {
+            return null;
+        }
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-checkbox-group", "aria-labelledby": labelledby }, inputs.map(function (i) { return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", onClick: function () { return _this.cbClick(i); }, "aria-checked": i.checked ? 'true' : null, id: i.id, disabled: i.disabled, tabIndex: 0, role: "checkbox", class: "alert-tappable alert-checkbox alert-checkbox-button" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-checkbox-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-checkbox-inner" })), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-checkbox-label" }, i.label)), _this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null))); })));
+    };
+    Alert.prototype.renderRadio = function (labelledby) {
+        var _this = this;
+        var inputs = this.processedInputs;
+        if (inputs.length === 0) {
+            return null;
+        }
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-radio-group", role: "radiogroup", "aria-labelledby": labelledby, "aria-activedescendant": this.activeId }, inputs.map(function (i) { return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", onClick: function () { return _this.rbClick(i); }, "aria-checked": i.checked ? 'true' : null, disabled: i.disabled, id: i.id, tabIndex: 0, class: "alert-radio-button alert-tappable alert-radio", role: "radio" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-radio-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-radio-inner" })), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-radio-label" }, i.label)), _this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null))); })));
+    };
+    Alert.prototype.renderInput = function (labelledby) {
+        var inputs = this.processedInputs;
+        if (inputs.length === 0) {
+            return null;
+        }
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-input-group", "aria-labelledby": labelledby }, inputs.map(function (i) { return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-input-wrapper" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("input", { placeholder: i.placeholder, value: i.value, type: i.type, min: i.min, max: i.max, onInput: function (e) { return i.value = e.target.value; }, id: i.id, disabled: i.disabled, tabIndex: 0, class: "alert-input" }))); })));
+    };
+    Alert.prototype.hostData = function () {
+        return {
+            role: 'alertdialog',
+            style: {
+                zIndex: 20000 + this.overlayIndex,
+            },
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.cssClass), { 'alert-translucent': this.translucent })
+        };
+    };
+    Alert.prototype.renderAlertButtons = function () {
+        var _this = this;
+        var buttons = this.processedButtons;
+        var alertButtonGroupClass = {
+            'alert-button-group': true,
+            'alert-button-group-vertical': buttons.length > 2
+        };
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: alertButtonGroupClass }, buttons.map(function (button) { return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", "ion-activatable": true, class: buttonClass(button), tabIndex: 0, onClick: function () { return _this.buttonClick(button); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "alert-button-inner" }, button.text)); })));
+    };
+    Alert.prototype.render = function () {
+        var hdrId = "alert-" + this.overlayIndex + "-hdr";
+        var subHdrId = "alert-" + this.overlayIndex + "-sub-hdr";
+        var msgId = "alert-" + this.overlayIndex + "-msg";
+        var labelledById;
+        if (this.header !== undefined) {
+            labelledById = hdrId;
+        }
+        else if (this.subHeader !== undefined) {
+            labelledById = subHdrId;
+        }
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop", { tappable: this.backdropDismiss }),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-wrapper" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "alert-head" }, this.header && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("h2", { id: hdrId, class: "alert-title" }, this.header), this.subHeader && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("h2", { id: subHdrId, class: "alert-sub-title" }, this.subHeader)), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { id: msgId, class: "alert-message", innerHTML: this.message }), this.renderAlertInputs(labelledById), this.renderAlertButtons())
+        ];
+    };
+    Object.defineProperty(Alert, "is", {
+        get: function () { return "ion-alert"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alert, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alert, "properties", {
+        get: function () {
+            return {
+                "animated": {
+                    "type": Boolean,
+                    "attr": "animated"
+                },
+                "animationCtrl": {
+                    "connect": "ion-animation-controller"
+                },
+                "backdropDismiss": {
+                    "type": Boolean,
+                    "attr": "backdrop-dismiss"
+                },
+                "buttons": {
+                    "type": "Any",
+                    "attr": "buttons",
+                    "watchCallbacks": ["buttonsChanged"]
+                },
+                "config": {
+                    "context": "config"
+                },
+                "cssClass": {
+                    "type": String,
+                    "attr": "css-class"
+                },
+                "dismiss": {
+                    "method": true
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "enterAnimation": {
+                    "type": "Any",
+                    "attr": "enter-animation"
+                },
+                "header": {
+                    "type": String,
+                    "attr": "header"
+                },
+                "inputs": {
+                    "type": "Any",
+                    "attr": "inputs",
+                    "mutable": true,
+                    "watchCallbacks": ["inputsChanged"]
+                },
+                "keyboardClose": {
+                    "type": Boolean,
+                    "attr": "keyboard-close"
+                },
+                "leaveAnimation": {
+                    "type": "Any",
+                    "attr": "leave-animation"
+                },
+                "message": {
+                    "type": String,
+                    "attr": "message"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "onDidDismiss": {
+                    "method": true
+                },
+                "onWillDismiss": {
+                    "method": true
+                },
+                "overlayIndex": {
+                    "type": Number,
+                    "attr": "overlay-index"
+                },
+                "present": {
+                    "method": true
+                },
+                "subHeader": {
+                    "type": String,
+                    "attr": "sub-header"
+                },
+                "translucent": {
+                    "type": Boolean,
+                    "attr": "translucent"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alert, "events", {
+        get: function () {
+            return [{
+                    "name": "ionAlertDidLoad",
+                    "method": "ionAlertDidLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionAlertDidUnload",
+                    "method": "ionAlertDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionAlertDidPresent",
+                    "method": "didPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionAlertWillPresent",
+                    "method": "willPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionAlertWillDismiss",
+                    "method": "willDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionAlertDidDismiss",
+                    "method": "didDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alert, "listeners", {
+        get: function () {
+            return [{
+                    "name": "ionBackdropTap",
+                    "method": "onBackdropTap"
+                }, {
+                    "name": "ionAlertWillDismiss",
+                    "method": "dispatchCancelHandler"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alert, "style", {
+        get: function () { return ".sc-ion-alert-md-h{--min-width:250px;--max-height:90%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:fixed;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-family:var(--ion-font-family,inherit);contain:strict;-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1000}.alert-top.sc-ion-alert-md-h{padding-top:50px;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.alert-wrapper.sc-ion-alert-md{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;min-width:var(--min-width);max-width:var(--max-width);max-height:var(--max-height);background:var(--background);contain:content;opacity:0;z-index:10}.alert-title.sc-ion-alert-md{margin:0;padding:0}.alert-sub-title.sc-ion-alert-md{margin:5px 0 0;padding:0;font-weight:400}.alert-message.sc-ion-alert-md{-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-overflow-scrolling:touch;overflow-y:scroll;overscroll-behavior-y:contain}.alert-message.sc-ion-alert-md::-webkit-scrollbar{display:none}.alert-input.sc-ion-alert-md{padding:10px 0;width:100%;border:0;background:inherit;font:inherit;-webkit-box-sizing:border-box;box-sizing:border-box}.alert-button-group.sc-ion-alert-md{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;width:100%}.alert-button-group-vertical.sc-ion-alert-md{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-ms-flex-wrap:nowrap;flex-wrap:nowrap}.alert-button.sc-ion-alert-md{display:block;border:0;font-size:14px;line-height:20px;z-index:0}.alert-button-inner.sc-ion-alert-md{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.alert-tappable.sc-ion-alert-md{margin:0;padding:0;width:100%;border:0;background:0 0;font-size:inherit;line-height:initial;text-align:start;-webkit-appearance:none;-moz-appearance:none;appearance:none}.alert-button.sc-ion-alert-md:active, .alert-button.sc-ion-alert-md:focus, .alert-checkbox.sc-ion-alert-md:active, .alert-checkbox.sc-ion-alert-md:focus, .alert-input.sc-ion-alert-md:active, .alert-input.sc-ion-alert-md:focus, .alert-radio.sc-ion-alert-md:active, .alert-radio.sc-ion-alert-md:focus{outline:0}.alert-checkbox-icon.sc-ion-alert-md, .alert-checkbox-inner.sc-ion-alert-md, .alert-radio-icon.sc-ion-alert-md{-webkit-box-sizing:border-box;box-sizing:border-box}.sc-ion-alert-md-h{--background:var(--ion-overlay-background-color, #fafafa);--max-width:280px;font-size:14px}.alert-wrapper.sc-ion-alert-md{border-radius:2px;-webkit-box-shadow:0 16px 20px rgba(0,0,0,.4);box-shadow:0 16px 20px rgba(0,0,0,.4)}.alert-head.sc-ion-alert-md{padding:20px 23px 15px;text-align:start}.alert-title.sc-ion-alert-md{color:var(--ion-text-color,#000);font-size:20px;font-weight:500}.alert-sub-title.sc-ion-alert-md{color:var(--ion-text-color,#000);font-size:16px}.alert-input-group.sc-ion-alert-md, .alert-message.sc-ion-alert-md{padding:0 24px 24px;color:var(--ion-text-color-step-450,#737373)}.alert-message.sc-ion-alert-md{max-height:240px;font-size:15px}.alert-message.sc-ion-alert-md:empty{padding:0}.alert-input.sc-ion-alert-md{margin:5px 0;border-bottom:1px solid var(--ion-background-color-step-150,#d9d9d9);color:var(--ion-text-color,#000)}.alert-input.sc-ion-alert-md::-webkit-input-placeholder{color:var(--ion-placeholder-text-color,#999);font-family:inherit;font-weight:inherit}.alert-input.sc-ion-alert-md:-ms-input-placeholder{color:var(--ion-placeholder-text-color,#999);font-family:inherit;font-weight:inherit}.alert-input.sc-ion-alert-md::-ms-input-placeholder{color:var(--ion-placeholder-text-color,#999);font-family:inherit;font-weight:inherit}.alert-input.sc-ion-alert-md::placeholder{color:var(--ion-placeholder-text-color,#999);font-family:inherit;font-weight:inherit}.alert-input.sc-ion-alert-md:focus{margin-bottom:4px;border-bottom:2px solid var(--ion-color-primary,#3880ff)}.alert-checkbox-group.sc-ion-alert-md, .alert-radio-group.sc-ion-alert-md{position:relative;max-height:240px;border-top:1px solid var(--ion-background-color-step-150,#d9d9d9);border-bottom:1px solid var(--ion-background-color-step-150,#d9d9d9);overflow:auto}.alert-tappable.sc-ion-alert-md{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;height:44px;contain:strict;overflow:hidden}.alert-radio-label.sc-ion-alert-md{padding:13px 26px 13px 52px;-webkit-box-flex:1;-ms-flex:1;flex:1;color:var(--ion-text-color-step-150,#262626);font-size:16px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.alert-radio-icon.sc-ion-alert-md{left:26px;top:0;border-radius:50%;display:block;position:relative;width:20px;height:20px;border-width:2px;border-style:solid;border-color:var(--ion-text-color-step-450,#737373)}.alert-radio-inner.sc-ion-alert-md{left:3px;top:3px;border-radius:50%;position:absolute;width:10px;height:10px;-webkit-transform:scale3d(0,0,0);transform:scale3d(0,0,0);-webkit-transition:-webkit-transform 280ms cubic-bezier(.4,0,.2,1);transition:-webkit-transform 280ms cubic-bezier(.4,0,.2,1);transition:transform 280ms cubic-bezier(.4,0,.2,1);transition:transform 280ms cubic-bezier(.4,0,.2,1),-webkit-transform 280ms cubic-bezier(.4,0,.2,1);background-color:var(--ion-color-primary,#3880ff)}[aria-checked=true].sc-ion-alert-md   .alert-radio-label.sc-ion-alert-md{color:var(--ion-text-color-step-150,#262626)}[aria-checked=true].sc-ion-alert-md   .alert-radio-icon.sc-ion-alert-md{border-color:var(--ion-color-primary,#3880ff)}[aria-checked=true].sc-ion-alert-md   .alert-radio-inner.sc-ion-alert-md{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}.alert-checkbox-label.sc-ion-alert-md{padding:13px 26px 13px 53px;-webkit-box-flex:1;-ms-flex:1;flex:1;color:var(--ion-text-color-step-150,#262626);font-size:16px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.alert-checkbox-icon.sc-ion-alert-md{left:26px;top:0;border-radius:2px;position:relative;width:16px;height:16px;border-width:2px;border-style:solid;border-color:var(--ion-text-color-step-450,#737373);contain:strict}[aria-checked=true].sc-ion-alert-md   .alert-checkbox-icon.sc-ion-alert-md{border-color:var(--ion-color-primary,#3880ff);background-color:var(--ion-color-primary,#3880ff)}[aria-checked=true].sc-ion-alert-md   .alert-checkbox-inner.sc-ion-alert-md{left:3px;top:0;position:absolute;width:6px;height:10px;-webkit-transform:rotate(45deg);transform:rotate(45deg);border-width:0 2px 2px 0;border-style:solid;border-color:var(--ion-color-primary-contrast,#fff)}.alert-button-group.sc-ion-alert-md{padding:5px 12px 7px 24px;-webkit-box-sizing:border-box;box-sizing:border-box;-ms-flex-wrap:wrap-reverse;flex-wrap:wrap-reverse;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}.alert-button.sc-ion-alert-md{border-radius:2px;margin:0 8px 0 0;padding:10px;position:relative;background-color:transparent;color:var(--ion-color-primary,#3880ff);font-weight:500;text-align:end;text-transform:uppercase;overflow:hidden}.alert-button.activated.sc-ion-alert-md{background-color:var(--ion-background-color-step-400,#999)}.alert-button-inner.sc-ion-alert-md{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Alert, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Alert;
+}());
+function buttonClass(button) {
+    return Object.assign({ 'alert-button': true }, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["c"])(button.cssClass));
+}
+var AlertController = /** @class */ (function () {
+    function AlertController() {
+    }
+    AlertController.prototype.create = function (opts) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement('ion-alert'), opts);
+    };
+    AlertController.prototype.dismiss = function (data, role, id) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc, data, role, 'ion-alert', id);
+    };
+    AlertController.prototype.getTop = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return [2 /*return*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc, 'ion-alert')];
+            });
+        });
+    };
+    Object.defineProperty(AlertController, "is", {
+        get: function () { return "ion-alert-controller"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AlertController, "properties", {
+        get: function () {
+            return {
+                "create": {
+                    "method": true
+                },
+                "dismiss": {
+                    "method": true
+                },
+                "doc": {
+                    "context": "document"
+                },
+                "getTop": {
+                    "method": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return AlertController;
+}());
+
+
 
 /***/ })
 

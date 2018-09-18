@@ -1,9 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { fromPromise } from 'rxjs/observable/fromPromise';
 import { tap } from 'rxjs/operators';
 import { Slides, AlertController, ModalController } from '@ionic/angular';
 import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { PageStream } from '../stream/stream.page';
@@ -68,7 +67,7 @@ export class PageHome
 
     slideChanged()
     {
-        fromPromise(this.slides.getActiveIndex()).
+        from(this.slides.getActiveIndex()).
 
         pipe(tap((index: number) => console.log('Slide Changed: ' + index)));
     }
@@ -79,7 +78,7 @@ export class PageHome
 
         if (modal == null)
         {
-            fromPromise(this.modalController.create(this.pages[type])).pipe
+            from(this.modalController.create(this.pages[type])).pipe
             (
                 tap((element: HTMLIonModalElement) =>
                 {

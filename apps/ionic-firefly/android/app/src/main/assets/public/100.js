@@ -1,24 +1,384 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[100],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/mgyaif1n.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/mgyaif1n.js ***!
-  \********************************************************************************************************************************/
-/*! exports provided: IonCol, IonGrid, IonRow */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/reriaxsx.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/reriaxsx.sc.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonActionSheet, IonActionSheetController */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCol", function() { return Col; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonGrid", function() { return Grid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRow", function() { return Row; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_db84a248_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-db84a248.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-db84a248.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonActionSheet", function() { return ActionSheet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonActionSheetController", function() { return ActionSheetController; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var SUPPORTS_VARS=!!(CSS&&CSS.supports&&CSS.supports("--a: 0")),BREAKPOINTS=["","xs","sm","md","lg","xl"],Col=function(){function t(){}return t.prototype.onResize=function(){this.el.forceUpdate()},t.prototype.getColumns=function(t){for(var e,r=0,n=BREAKPOINTS;r<n.length;r++){var i=n[r],o=Object(_chunk_db84a248_js__WEBPACK_IMPORTED_MODULE_1__["a"])(this.win,i),l=this[t+i.charAt(0).toUpperCase()+i.slice(1)];o&&void 0!==l&&(e=l)}return e},t.prototype.calculateSize=function(){var t=this.getColumns("size");if(t&&""!==t){var e="auto"===t?"auto":SUPPORTS_VARS?"calc(calc("+t+" / var(--ion-grid-columns, 12)) * 100%)":t/12*100+"%";return{flex:"0 0 "+e,width:""+e,"max-width":""+e}}},t.prototype.calculatePosition=function(t,e){var r,n=this.getColumns(t);if(n)return(r={})[e]=SUPPORTS_VARS?"calc(calc("+n+" / var(--ion-grid-columns, 12)) * 100%)":n>0&&n<12?n/12*100+"%":"auto",r},t.prototype.calculateOffset=function(){return this.calculatePosition("offset","margin-left")},t.prototype.calculatePull=function(){return this.calculatePosition("pull","right")},t.prototype.calculatePush=function(){return this.calculatePosition("push","left")},t.prototype.hostData=function(){return{style:Object.assign({},this.calculateOffset(),this.calculatePull(),this.calculatePush(),this.calculateSize())}},t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-col"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{el:{elementRef:!0},offset:{type:String,attr:"offset"},offsetLg:{type:String,attr:"offset-lg"},offsetMd:{type:String,attr:"offset-md"},offsetSm:{type:String,attr:"offset-sm"},offsetXl:{type:String,attr:"offset-xl"},offsetXs:{type:String,attr:"offset-xs"},pull:{type:String,attr:"pull"},pullLg:{type:String,attr:"pull-lg"},pullMd:{type:String,attr:"pull-md"},pullSm:{type:String,attr:"pull-sm"},pullXl:{type:String,attr:"pull-xl"},pullXs:{type:String,attr:"pull-xs"},push:{type:String,attr:"push"},pushLg:{type:String,attr:"push-lg"},pushMd:{type:String,attr:"push-md"},pushSm:{type:String,attr:"push-sm"},pushXl:{type:String,attr:"push-xl"},pushXs:{type:String,attr:"push-xs"},size:{type:String,attr:"size"},sizeLg:{type:String,attr:"size-lg"},sizeMd:{type:String,attr:"size-md"},sizeSm:{type:String,attr:"size-sm"},sizeXl:{type:String,attr:"size-xl"},sizeXs:{type:String,attr:"size-xs"},win:{context:"window"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"listeners",{get:function(){return[{name:"window:resize",method:"onResize",passive:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return":host{padding:var(--ion-grid-column-padding-xs,var(--ion-grid-column-padding,5px));margin:0;-webkit-box-sizing:border-box;box-sizing:border-box;position:relative;-ms-flex-preferred-size:0;flex-basis:0;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;width:100%;max-width:100%;min-height:1px}\@media (min-width:576px){:host{padding:var(--ion-grid-column-padding-sm,var(--ion-grid-column-padding,5px))}}\@media (min-width:768px){:host{padding:var(--ion-grid-column-padding-md,var(--ion-grid-column-padding,5px))}}\@media (min-width:992px){:host{padding:var(--ion-grid-column-padding-lg,var(--ion-grid-column-padding,5px))}}\@media (min-width:1200px){:host{padding:var(--ion-grid-column-padding-xl,var(--ion-grid-column-padding,5px))}}"},enumerable:!0,configurable:!0}),t}(),Grid=function(){function t(){this.fixed=!1}return t.prototype.hostData=function(){return{class:{"grid-fixed":this.fixed}}},t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-grid"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{fixed:{type:Boolean,attr:"fixed"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return":host{padding:var(--ion-grid-padding-xs,var(--ion-grid-padding,5px));margin-left:auto;margin-right:auto;display:block}:host(.grid-fixed){width:var(--ion-grid-width-xs,var(--ion-grid-width,100%));max-width:100%}\@media (min-width:576px){:host{padding:var(--ion-grid-padding-sm,var(--ion-grid-padding,5px))}:host(.grid-fixed){width:var(--ion-grid-width-sm,var(--ion-grid-width,540px))}}\@media (min-width:768px){:host{padding:var(--ion-grid-padding-md,var(--ion-grid-padding,5px))}:host(.grid-fixed){width:var(--ion-grid-width-md,var(--ion-grid-width,720px))}}\@media (min-width:992px){:host{padding:var(--ion-grid-padding-lg,var(--ion-grid-padding,5px))}:host(.grid-fixed){width:var(--ion-grid-width-lg,var(--ion-grid-width,960px))}}\@media (min-width:1200px){:host{padding:var(--ion-grid-padding-xl,var(--ion-grid-padding,5px))}:host(.grid-fixed){width:var(--ion-grid-width-xl,var(--ion-grid-width,1140px))}}:host([no-padding]){padding:0}:host([no-padding]) ::slotted(ion-col){padding:0}"},enumerable:!0,configurable:!0}),t}(),Row=function(){function t(){}return t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-row"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return":host{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}"},enumerable:!0,configurable:!0}),t}();
+
+
+
+function iosEnterAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.action-sheet-wrapper'));
+    backdropAnimation.fromTo('opacity', 0.01, 0.4);
+    wrapperAnimation.fromTo('translateY', '100%', '0%');
+    var ani = baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(400)
+        .add(backdropAnimation)
+        .add(wrapperAnimation);
+    return Promise.resolve(ani);
+}
+function iosLeaveAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.action-sheet-wrapper'));
+    backdropAnimation.fromTo('opacity', 0.4, 0);
+    wrapperAnimation.fromTo('translateY', '0%', '100%');
+    var ani = baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(450)
+        .add(backdropAnimation)
+        .add(wrapperAnimation);
+    return Promise.resolve(ani);
+}
+function mdEnterAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.action-sheet-wrapper'));
+    backdropAnimation.fromTo('opacity', 0.01, 0.26);
+    wrapperAnimation.fromTo('translateY', '100%', '0%');
+    var ani = baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(400)
+        .add(backdropAnimation)
+        .add(wrapperAnimation);
+    return Promise.resolve(ani);
+}
+function mdLeaveAnimation(AnimationC, baseEl) {
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.action-sheet-wrapper'));
+    backdropAnimation.fromTo('opacity', 0.26, 0);
+    wrapperAnimation.fromTo('translateY', '0%', '100%');
+    var ani = baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(450)
+        .add(backdropAnimation)
+        .add(wrapperAnimation);
+    return Promise.resolve(ani);
+}
+var ActionSheet = /** @class */ (function () {
+    function ActionSheet() {
+        this.presented = false;
+        this.keyboardClose = true;
+        this.backdropDismiss = true;
+        this.translucent = false;
+        this.animated = true;
+    }
+    ActionSheet.prototype.componentDidLoad = function () {
+        this.ionActionSheetDidLoad.emit();
+    };
+    ActionSheet.prototype.componentDidUnload = function () {
+        this.ionActionSheetDidUnload.emit();
+    };
+    ActionSheet.prototype.onBackdropTap = function () {
+        this.dismiss(undefined, _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["a"]);
+    };
+    ActionSheet.prototype.dispatchCancelHandler = function (ev) {
+        var role = ev.detail.role;
+        if (Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["d"])(role)) {
+            var cancelButton = this.getButtons().find(function (b) { return b.role === 'cancel'; });
+            this.callButtonHandler(cancelButton);
+        }
+    };
+    ActionSheet.prototype.present = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this, 'actionSheetEnter', iosEnterAnimation, mdEnterAnimation);
+    };
+    ActionSheet.prototype.dismiss = function (data, role) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this, data, role, 'actionSheetLeave', iosLeaveAnimation, mdLeaveAnimation);
+    };
+    ActionSheet.prototype.onDidDismiss = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionActionSheetDidDismiss');
+    };
+    ActionSheet.prototype.onWillDismiss = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionActionSheetWillDismiss');
+    };
+    ActionSheet.prototype.buttonClick = function (button) {
+        var role = button.role;
+        if (Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["d"])(role)) {
+            return this.dismiss(undefined, role);
+        }
+        var shouldDismiss = this.callButtonHandler(button);
+        if (shouldDismiss) {
+            return this.dismiss(undefined, button.role);
+        }
+        return Promise.resolve();
+    };
+    ActionSheet.prototype.callButtonHandler = function (button) {
+        if (button && button.handler) {
+            try {
+                if (button.handler() === false) {
+                    return false;
+                }
+            }
+            catch (e) {
+                console.error(e);
+            }
+        }
+        return true;
+    };
+    ActionSheet.prototype.getButtons = function () {
+        return this.buttons.map(function (b) {
+            return (typeof b === 'string')
+                ? { text: b }
+                : b;
+        });
+    };
+    ActionSheet.prototype.hostData = function () {
+        return {
+            style: {
+                zIndex: 20000 + this.overlayIndex,
+            },
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.cssClass), { 'action-sheet-translucent': this.translucent })
+        };
+    };
+    ActionSheet.prototype.render = function () {
+        var _this = this;
+        var allButtons = this.getButtons();
+        var cancelButton = allButtons.find(function (b) { return b.role === 'cancel'; });
+        var buttons = allButtons.filter(function (b) { return b.role !== 'cancel'; });
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop", { tappable: this.backdropDismiss }),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-wrapper", role: "dialog" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-container" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-group" }, this.header !== undefined &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-title" }, this.header, this.subHeader && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-sub-title" }, this.subHeader)), buttons.map(function (b) { return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", "ion-activatable": true, class: buttonClass(b), onClick: function () { return _this.buttonClick(b); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "action-sheet-button-inner" }, b.icon && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: b.icon, lazy: false, class: "action-sheet-icon" }), b.text)); })), cancelButton &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-group action-sheet-group-cancel" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { "ion-activatable": true, type: "button", class: buttonClass(cancelButton), onClick: function () { return _this.buttonClick(cancelButton); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "action-sheet-button-inner" }, cancelButton.icon &&
+                    Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: cancelButton.icon, lazy: false, class: "action-sheet-icon" }), cancelButton.text)))))
+        ];
+    };
+    Object.defineProperty(ActionSheet, "is", {
+        get: function () { return "ion-action-sheet"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActionSheet, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActionSheet, "properties", {
+        get: function () {
+            return {
+                "animated": {
+                    "type": Boolean,
+                    "attr": "animated"
+                },
+                "animationCtrl": {
+                    "connect": "ion-animation-controller"
+                },
+                "backdropDismiss": {
+                    "type": Boolean,
+                    "attr": "backdrop-dismiss"
+                },
+                "buttons": {
+                    "type": "Any",
+                    "attr": "buttons"
+                },
+                "config": {
+                    "context": "config"
+                },
+                "cssClass": {
+                    "type": String,
+                    "attr": "css-class"
+                },
+                "dismiss": {
+                    "method": true
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "enterAnimation": {
+                    "type": "Any",
+                    "attr": "enter-animation"
+                },
+                "header": {
+                    "type": String,
+                    "attr": "header"
+                },
+                "keyboardClose": {
+                    "type": Boolean,
+                    "attr": "keyboard-close"
+                },
+                "leaveAnimation": {
+                    "type": "Any",
+                    "attr": "leave-animation"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "onDidDismiss": {
+                    "method": true
+                },
+                "onWillDismiss": {
+                    "method": true
+                },
+                "overlayIndex": {
+                    "type": Number,
+                    "attr": "overlay-index"
+                },
+                "present": {
+                    "method": true
+                },
+                "subHeader": {
+                    "type": String,
+                    "attr": "sub-header"
+                },
+                "translucent": {
+                    "type": Boolean,
+                    "attr": "translucent"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActionSheet, "events", {
+        get: function () {
+            return [{
+                    "name": "ionActionSheetDidLoad",
+                    "method": "ionActionSheetDidLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionActionSheetDidUnload",
+                    "method": "ionActionSheetDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionActionSheetDidPresent",
+                    "method": "didPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionActionSheetWillPresent",
+                    "method": "willPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionActionSheetWillDismiss",
+                    "method": "willDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionActionSheetDidDismiss",
+                    "method": "didDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActionSheet, "listeners", {
+        get: function () {
+            return [{
+                    "name": "ionBackdropTap",
+                    "method": "onBackdropTap"
+                }, {
+                    "name": "ionActionSheetWillDismiss",
+                    "method": "dispatchCancelHandler"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActionSheet, "style", {
+        get: function () { return ".sc-ion-action-sheet-ios-h{--width:100%;--max-width:500px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;left:0;right:0;top:0;bottom:0;display:block;position:fixed;font-family:var(--ion-font-family,inherit);-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1000;text-align:center}.action-sheet-wrapper.sc-ion-action-sheet-ios{left:0;right:0;top:0;bottom:0;margin:auto;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);display:block;position:absolute;width:var(--width);max-width:var(--max-width);z-index:10;pointer-events:none;margin:var(--ion-safe-area-top,0) auto var(--ion-safe-area-bottom,0)}.action-sheet-button.sc-ion-action-sheet-ios{width:var(--width);border:0;outline:0;font-family:inherit}.action-sheet-button-inner.sc-ion-action-sheet-ios{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.action-sheet-container.sc-ion-action-sheet-ios{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column;flex-flow:column;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;height:100%;max-height:100%;padding:0 10px}.action-sheet-group.sc-ion-action-sheet-ios{-ms-flex-negative:2;flex-shrink:2;overscroll-behavior-y:contain;overflow-y:scroll;-webkit-overflow-scrolling:touch;pointer-events:all;border-radius:13px;margin-bottom:8px;background:var(--ion-overlay-background-color,#f9f9f9)}.action-sheet-group.sc-ion-action-sheet-ios::-webkit-scrollbar{display:none}.action-sheet-group-cancel.sc-ion-action-sheet-ios{-ms-flex-negative:0;flex-shrink:0;overflow:hidden}.action-sheet-group.sc-ion-action-sheet-ios:first-child{margin-top:10px}.action-sheet-group.sc-ion-action-sheet-ios:last-child{margin-bottom:10px}.action-sheet-translucent.sc-ion-action-sheet-ios-h   .action-sheet-group.sc-ion-action-sheet-ios{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.action-sheet-title.sc-ion-action-sheet-ios{padding:14px 14px 13px;border-bottom:.55px solid rgba(var(--ion-text-color-rgb,0,0,0),.2);color:var(--ion-text-color-step-600,#999);font-size:13px;font-weight:400;text-align:center}.action-sheet-sub-title.sc-ion-action-sheet-ios{padding:15px 0 0;font-size:12px}.action-sheet-button.sc-ion-action-sheet-ios{margin:0;padding:18px;height:56px;border-bottom:.55px solid rgba(var(--ion-text-color-rgb,0,0,0),.2);background:0 0;color:var(--ion-color-primary,#3880ff);font-size:20px;contain:strict}.action-sheet-button.sc-ion-action-sheet-ios   .action-sheet-icon.sc-ion-action-sheet-ios{margin-right:.1em;font-size:28px}.action-sheet-button.sc-ion-action-sheet-ios:last-child{border-bottom-color:transparent}.action-sheet-button.activated.sc-ion-action-sheet-ios{margin-top:-.55px;border-top:.55px solid rgba(var(--ion-text-color-rgb,0,0,0),.1);border-bottom-color:rgba(var(--ion-text-color-rgb,0,0,0),.1);background:rgba(var(--ion-text-color-rgb,0,0,0),.1)}.action-sheet-selected.sc-ion-action-sheet-ios{background:var(--ion-background-color,#fff);font-weight:700}.action-sheet-destructive.sc-ion-action-sheet-ios{color:var(--ion-color-danger,#f04141)}.action-sheet-cancel.sc-ion-action-sheet-ios{background:var(--ion-background-color,#fff);font-weight:600}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActionSheet, "styleMode", {
+        get: function () { return "ios"; },
+        enumerable: true,
+        configurable: true
+    });
+    return ActionSheet;
+}());
+function buttonClass(button) {
+    var _a;
+    return Object.assign((_a = { 'action-sheet-button': true }, _a["action-sheet-" + button.role] = button.role !== undefined, _a), Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["c"])(button.cssClass));
+}
+var ActionSheetController = /** @class */ (function () {
+    function ActionSheetController() {
+    }
+    ActionSheetController.prototype.create = function (opts) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement('ion-action-sheet'), opts);
+    };
+    ActionSheetController.prototype.dismiss = function (data, role, id) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc, data, role, 'ion-action-sheet', id);
+    };
+    ActionSheetController.prototype.getTop = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return [2 /*return*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc, 'ion-action-sheet')];
+            });
+        });
+    };
+    Object.defineProperty(ActionSheetController, "is", {
+        get: function () { return "ion-action-sheet-controller"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActionSheetController, "properties", {
+        get: function () {
+            return {
+                "create": {
+                    "method": true
+                },
+                "dismiss": {
+                    "method": true
+                },
+                "doc": {
+                    "context": "document"
+                },
+                "getTop": {
+                    "method": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ActionSheetController;
+}());
+
+
 
 /***/ })
 

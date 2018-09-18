@@ -1,29 +1,363 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[32],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8zjbpglr.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/8zjbpglr.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonApp, IonButtons, IonContent, IonFooter, IonHeader, IonTitle, IonToolbar */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7vzgoafc.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7vzgoafc.sc.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonRefresher, IonRefresherContent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonApp", function() { return App; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonButtons", function() { return Buttons; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonContent", function() { return Content; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFooter", function() { return Footer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonHeader", function() { return Header; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonTitle", function() { return ToolbarTitle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToolbar", function() { return Toolbar; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-276e047f.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-276e047f.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRefresher", function() { return Refresher; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRefresherContent", function() { return RefresherContent; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,o,n){return new(o||(o=Promise))(function(r,l){function i(e){try{a(n.next(e))}catch(e){l(e)}}function c(e){try{a(n.throw(e))}catch(e){l(e)}}function a(e){e.done?r(e.value):new o(function(t){t(e.value)}).then(i,c)}a((n=n.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var o,n,r,l,i={label:0,sent:function(){if(1&r[0])throw r[1];return r[1]},trys:[],ops:[]};return l={next:c(0),throw:c(1),return:c(2)},"function"==typeof Symbol&&(l[Symbol.iterator]=function(){return this}),l;function c(l){return function(c){return function(l){if(o)throw new TypeError("Generator is already executing.");for(;i;)try{if(o=1,n&&(r=2&l[0]?n.return:l[0]?n.throw||((r=n.return)&&r.call(n),0):n.next)&&!(r=r.call(n,l[1])).done)return r;switch(n=0,r&&(l=[2&l[0],r.value]),l[0]){case 0:case 1:r=l;break;case 4:return i.label++,{value:l[1],done:!1};case 5:i.label++,n=l[1],l=[0];continue;case 7:l=i.ops.pop(),i.trys.pop();continue;default:if(!(r=(r=i.trys).length>0&&r[r.length-1])&&(6===l[0]||2===l[0])){i=0;continue}if(3===l[0]&&(!r||l[1]>r[0]&&l[1]<r[3])){i.label=l[1];break}if(6===l[0]&&i.label<r[1]){i.label=r[1],r=l;break}if(r&&i.label<r[2]){i.label=r[2],i.ops.push(l);break}r[2]&&i.ops.pop(),i.trys.pop();continue}l=t.call(e,i)}catch(e){l=[6,e],n=0}finally{o=r=0}if(5&l[0])throw l[1];return{value:l[0]?l[1]:void 0,done:!0}}([l,c])}}};var App=function(){function e(){}return e.prototype.componentDidLoad=function(){var e=this;Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["a"])(function(){importTapClick(e.win),importInputShims(e.win,e.config),importStatusTap(e.win,e.queue),importHardwareBackButton(e.win)})},e.prototype.hostData=function(){return{class:{"ion-page":!0}}},Object.defineProperty(e,"is",{get:function(){return"ion-app"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{config:{context:"config"},el:{elementRef:!0},queue:{context:"queue"},win:{context:"window"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"html.plt-mobile ion-app{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}"},enumerable:!0,configurable:!0}),e}();function importHardwareBackButton(e){Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["m"])(e,"hybrid")&&__webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./hardware-back-button.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hardware-back-button.js")).then(function(t){return t.startHardwareBackButton(e)})}function importStatusTap(e,t){Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["m"])(e,"hybrid")&&__webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./status-tap.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/status-tap.js")).then(function(o){return o.startStatusTap(e,t)})}function importTapClick(e){__webpack_require__.e(/*! import() */ "common").then(__webpack_require__.bind(null, /*! ./tap-click.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/tap-click.js")).then(function(t){return t.startTapClick(e.document)})}function importInputShims(e,t){t.getBoolean("inputShims",needInputShims(e))&&__webpack_require__.e(/*! import() */ "common").then(__webpack_require__.bind(null, /*! ./input-shims.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/input-shims.js")).then(function(o){return o.startInputShims(e.document,t)})}function needInputShims(e){return Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["m"])(e,"ios")&&Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["m"])(e,"mobile")}var Buttons=function(){function e(){}return Object.defineProperty(e,"is",{get:function(){return"ion-buttons"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"scoped"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-buttons-ios-h{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-transform:translateZ(0);transform:translateZ(0);z-index:99;pointer-events:none}.sc-ion-buttons-ios-s  .button {--margin-top:0;--margin-bottom:0;--margin-start:0;--margin-end:0;--padding-top:0;--padding-bottom:0;--padding-start:0;--padding-end:0;--box-shadow:none;margin-left:2px;margin-right:2px;pointer-events:auto;--padding-top:0;--padding-bottom:0;--padding-start:5px;--padding-end:5px;--height:32px;font-size:17px;font-weight:400}.sc-ion-buttons-ios-s  .button:not(.button-round) {--border-radius:4px}.sc-ion-buttons-ios-h.ion-color.sc-ion-buttons-ios-s  .button , .ion-color .sc-ion-buttons-ios-h.sc-ion-buttons-ios-s  .button {--color:currentColor;--color-activated:currentColor}.sc-ion-buttons-ios-s  .button-clear.activated {color:var(--ion-color-primary,#3880ff)}.sc-ion-buttons-ios-s  .button-solid-ios:hover {opacity:.4}.sc-ion-buttons-ios-s  ion-icon[slot=start] {margin:0 .3em 0 0;font-size:24px;line-height:.67;pointer-events:none}.sc-ion-buttons-ios-s  ion-icon[slot=end] {margin:0 0 0 .4em;font-size:24px;line-height:.67;pointer-events:none}.sc-ion-buttons-ios-s  ion-icon[slot=icon-only] {padding:0;margin:0;font-size:31px;line-height:.67;pointer-events:none}[slot=start].sc-ion-buttons-ios-h{-webkit-box-ordinal-group:3;-ms-flex-order:2;order:2}[slot=secondary].sc-ion-buttons-ios-h{-webkit-box-ordinal-group:4;-ms-flex-order:3;order:3}[slot=primary].sc-ion-buttons-ios-h{-webkit-box-ordinal-group:6;-ms-flex-order:5;order:5;text-align:end}[slot=end].sc-ion-buttons-ios-h{-webkit-box-ordinal-group:7;-ms-flex-order:6;order:6;text-align:end}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),Content=function(){function e(){this.isScrolling=!1,this.lastScroll=0,this.queued=!1,this.cTop=-1,this.cBottom=-1,this.detail={scrollTop:0,scrollLeft:0,type:"scroll",event:void 0,startX:0,startY:0,startTimeStamp:0,currentX:0,currentY:0,velocityX:0,velocityY:0,deltaX:0,deltaY:0,timeStamp:0,data:void 0,isScrolling:!0},this.fullscreen=!1,this.scrollX=!1,this.scrollY=!0,this.scrollEvents=!1}return e.prototype.onNavChanged=function(){this.resize()},e.prototype.componentWillLoad=function(){void 0===this.forceOverscroll&&(this.forceOverscroll="ios"===this.mode&&"ontouchstart"in this.win)},e.prototype.componentDidLoad=function(){this.resize()},e.prototype.componentDidUnload=function(){this.watchDog&&clearInterval(this.watchDog)},e.prototype.resize=function(){this.fullscreen?this.queue.read(this.readDimensions.bind(this)):0===this.cTop&&0===this.cBottom||(this.cTop=this.cBottom=0,this.el.forceUpdate())},e.prototype.readDimensions=function(){var e=getPageElement(this.el),t=Math.max(this.el.offsetTop,0),o=Math.max(e.offsetHeight-t-this.el.offsetHeight,0);(t!==this.cTop||o!==this.cBottom)&&(this.cTop=t,this.cBottom=o,this.el.forceUpdate())},e.prototype.onScroll=function(e){var t=this,o=Date.now(),n=!this.isScrolling;this.lastScroll=o,n&&this.onScrollStart(),!this.queued&&this.scrollEvents&&(this.queued=!0,this.queue.read(function(o){t.queued=!1,t.detail.event=e,updateScrollDetail(t.detail,t.scrollEl,o,n),t.ionScroll.emit(t.detail)}))},e.prototype.getScrollElement=function(){return Promise.resolve(this.scrollEl)},e.prototype.scrollToTop=function(e){return void 0===e&&(e=0),this.scrollToPoint(void 0,0,e)},e.prototype.scrollToBottom=function(e){void 0===e&&(e=0);var t=this.scrollEl.scrollHeight-this.scrollEl.clientHeight;return this.scrollToPoint(void 0,t,e)},e.prototype.scrollByPoint=function(e,t,o){return this.scrollToPoint(e+this.scrollEl.scrollLeft,t+this.scrollEl.scrollTop,o)},e.prototype.scrollToPoint=function(e,t,o){return void 0===o&&(o=0),__awaiter(this,void 0,void 0,function(){var n,r,l,i,c,a,s,u,f;return __generator(this,function(p){return n=this.scrollEl,o<32?(null!=t&&(n.scrollTop=t),null!=e&&(n.scrollLeft=e),[2]):(l=0,i=new Promise(function(e){return r=e}),c=n.scrollTop,a=n.scrollLeft,s=null!=t?t-c:0,u=null!=e?e-a:0,f=function(e){var t=Math.min(1,(e-l)/o)-1,i=Math.pow(t,3)+1;0!==s&&(n.scrollTop=Math.floor(i*s+c)),0!==u&&(n.scrollLeft=Math.floor(i*u+a)),i<1?requestAnimationFrame(f):r()},requestAnimationFrame(function(e){l=e,f(e)}),[2,i])})})},e.prototype.onScrollStart=function(){var e=this;this.isScrolling=!0,this.ionScrollStart.emit({isScrolling:!0}),this.watchDog&&clearInterval(this.watchDog),this.watchDog=setInterval(function(){e.lastScroll<Date.now()-120&&e.onScrollEnd()},100)},e.prototype.onScrollEnd=function(){clearInterval(this.watchDog),this.watchDog=null,this.isScrolling=!1,this.ionScrollEnd.emit({isScrolling:!1})},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.color),{overscroll:this.forceOverscroll}),style:{"--offset-top":this.cTop+"px","--offset-bottom":this.cBottom+"px"}}},e.prototype.render=function(){var e=this,t=this.scrollX,o=this.scrollY,n=this.forceOverscroll;return this.resize(),[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:{"inner-scroll":!0,"scroll-x":t,"scroll-y":o,overscroll:(t||o)&&!!n},ref:function(t){return e.scrollEl=t},onScroll:function(t){return e.onScroll(t)}},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",{name:"fixed"})]},Object.defineProperty(e,"is",{get:function(){return"ion-content"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{color:{type:String,attr:"color"},config:{context:"config"},el:{elementRef:!0},forceOverscroll:{type:Boolean,attr:"force-overscroll",mutable:!0},fullscreen:{type:Boolean,attr:"fullscreen"},getScrollElement:{method:!0},queue:{context:"queue"},scrollByPoint:{method:!0},scrollEvents:{type:Boolean,attr:"scroll-events"},scrollToBottom:{method:!0},scrollToPoint:{method:!0},scrollToTop:{method:!0},scrollX:{type:Boolean,attr:"scroll-x"},scrollY:{type:Boolean,attr:"scroll-y"},win:{context:"window"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionScrollStart",method:"ionScrollStart",bubbles:!0,cancelable:!0,composed:!0},{name:"ionScroll",method:"ionScroll",bubbles:!0,cancelable:!0,composed:!0},{name:"ionScrollEnd",method:"ionScrollEnd",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"body:ionNavDidChange",method:"onNavChanged"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-content-h{--background:var(--ion-background-color, #fff);--color:var(--ion-text-color, #000);--padding-top:0px;--padding-bottom:0px;--padding-start:0px;--padding-end:0px;--keyboard-offset:0px;--offset-top:0px;--offset-bottom:0px;display:block;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;padding:0!important;margin:0!important;background:var(--background);color:var(--color);font-family:var(--ion-font-family,inherit);contain:layout size style}.ion-color.sc-ion-content-h{background:var(--ion-color-base);color:var(--ion-color-contrast)}.outer-content.sc-ion-content-h{--background:var(--ion-background-color-step-50, #f2f2f2)}.inner-scroll.sc-ion-content{left:0;right:0;top:calc(var(--offset-top) * -1);bottom:calc(var(--offset-bottom) * -1);padding:calc(var(--padding-top) + var(--offset-top)) var(--padding-end) calc(var(--padding-bottom) + var(--keyboard-offset) + var(--offset-bottom)) var(--padding-start);position:absolute;-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.scroll-x.sc-ion-content, .scroll-y.sc-ion-content{-webkit-overflow-scrolling:touch;will-change:scroll-position;-ms-scroll-chaining:none;overscroll-behavior:contain}.scroll-y.sc-ion-content{overflow-y:auto}.scroll-x.sc-ion-content{overflow-x:auto}.overscroll.sc-ion-content::after, .overscroll.sc-ion-content::before{position:absolute;width:1px;height:1px;content:\"\"}.overscroll.sc-ion-content::before{bottom:-1px}.overscroll.sc-ion-content::after{top:-1px}"},enumerable:!0,configurable:!0}),e}();function getParentElement(e){return e.parentElement?e.parentElement:e.parentNode&&e.parentNode.host?e.parentNode.host:null}function getPageElement(e){var t=e.closest("ion-tabs");return t||(e.closest("ion-app,ion-page,.ion-page,page-inner")||getParentElement(e))}function updateScrollDetail(e,t,o,n){var r=e.currentX,l=e.currentY,i=e.timeStamp,c=t.scrollLeft,a=t.scrollTop;n&&(e.startTimeStamp=o,e.startX=c,e.startY=a,e.velocityX=e.velocityY=0),e.timeStamp=o,e.currentX=e.scrollLeft=c,e.currentY=e.scrollTop=a,e.deltaX=c-e.startX,e.deltaY=a-e.startY;var s=o-i;if(s>0&&s<100){var u=(c-r)/s,f=(a-l)/s;e.velocityX=.7*u+.3*e.velocityX,e.velocityY=.7*f+.3*e.velocityY}}var Footer=function(){function e(){this.translucent=!1}return e.prototype.hostData=function(){var e=Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"footer"),t=this.translucent?Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"footer-translucent"):null;return{class:Object.assign({},e,t)}},Object.defineProperty(e,"is",{get:function(){return"ion-footer"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{mode:{type:String,attr:"mode"},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-footer{display:block;position:relative;-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1;width:100%;z-index:10}ion-footer ion-toolbar:last-child{padding-bottom:var(--ion-safe-area-bottom,0)}.footer-ios ion-toolbar:first-child{--border-width:0.55px 0 0}.footer-ios[no-border] ion-toolbar:first-child{--border-width:0}.footer-translucent-ios{-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.footer-translucent-ios ion-toolbar{--opacity:.8;--backdrop-filter:saturate(180%) blur(20px)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),Header=function(){function e(){this.translucent=!1}return e.prototype.hostData=function(){var e=Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"header"),t=this.translucent?Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"header-translucent"):null;return{class:Object.assign({},e,t)}},Object.defineProperty(e,"is",{get:function(){return"ion-header"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{mode:{type:String,attr:"mode"},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-header{display:block;position:relative;-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1;width:100%;z-index:10}ion-header ion-toolbar:first-child{padding-top:var(--ion-safe-area-top,0)}.header-ios ion-toolbar:last-child{--border-width:0 0 0.55px}.header-ios[no-border] ion-toolbar:last-child{--border-width:0}.header-translucent-ios{-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.header-translucent-ios ion-toolbar{--opacity:.8;--backdrop-filter:saturate(180%) blur(20px)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),ToolbarTitle=function(){function e(){}return e.prototype.getMode=function(){var e=this.el.closest("ion-toolbar");return e&&e.mode||this.mode},e.prototype.hostData=function(){var e,t=this.getMode();return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.color),(e={},e["title-"+t]=!0,e))}},e.prototype.render=function(){return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toolbar-title"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null))]},Object.defineProperty(e,"is",{get:function(){return"ion-title"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{color:{type:String,attr:"color"},el:{elementRef:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-title-h{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-transform:translateZ(0);transform:translateZ(0)}.title-ios.sc-ion-title-h{left:0;top:0;padding:0 90px;position:absolute;width:100%;height:100%;-webkit-transform:translateZ(0);transform:translateZ(0);font-size:17px;font-weight:600;letter-spacing:-.03em;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;pointer-events:none}.title-md.sc-ion-title-h{padding:0 12px;font-size:20px;font-weight:500}.ion-color.sc-ion-title-h{color:var(--ion-color-base)}.toolbar-title.sc-ion-title{display:block;width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;pointer-events:auto}"},enumerable:!0,configurable:!0}),e}(),Toolbar=function(){function e(){}return e.prototype.hostData=function(){return{class:Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.color)}},e.prototype.render=function(){return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toolbar-background"}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toolbar-container"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",{name:"start"}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",{name:"secondary"}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toolbar-content"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null)),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",{name:"primary"}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",{name:"end"}))]},Object.defineProperty(e,"is",{get:function(){return"ion-toolbar"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{color:{type:String,attr:"color"},config:{context:"config"},mode:{type:String,attr:"mode"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-toolbar-ios-h{--border-width:0;--border-style:solid;--opacity:1;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:block;position:relative;width:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:content;z-index:10;-webkit-box-sizing:border-box;box-sizing:border-box;--background:var(--ion-toolbar-background-color, #f8f8f8);--color:var(--ion-toolbar-text-color, var(--ion-text-color, #000));--border-color:rgba(var(--ion-toolbar-border-color-rgb, 0, 0, 0), 0.2);--padding-top:4px;--padding-bottom:4px;--padding-start:4px;--padding-end:4px;--min-height:44px}.ion-color.sc-ion-toolbar-ios-h{color:var(--ion-color-contrast)}.ion-color.sc-ion-toolbar-ios-h   .toolbar-background.sc-ion-toolbar-ios{background:var(--ion-color-base)}.toolbar-container.sc-ion-toolbar-ios{padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;width:100%;min-height:var(--min-height);contain:content;overflow:hidden;z-index:10;-webkit-box-sizing:border-box;box-sizing:border-box}.toolbar-background.sc-ion-toolbar-ios{left:0;right:0;top:0;bottom:0;position:absolute;-webkit-transform:translateZ(0);transform:translateZ(0);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);contain:strict;opacity:var(--opacity);z-index:-1;pointer-events:none}.toolbar-content.sc-ion-toolbar-ios{-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-ordinal-group:5;-ms-flex-order:4;order:4;min-width:0}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}();
+
+
+var Refresher = /** @class */ (function () {
+    function Refresher() {
+        this.appliedStyles = false;
+        this.didStart = false;
+        this.progress = 0;
+        this.state = 1;
+        this.pullMin = 60;
+        this.pullMax = this.pullMin + 60;
+        this.closeDuration = '280ms';
+        this.snapbackDuration = '280ms';
+        this.disabled = false;
+    }
+    Refresher.prototype.disabledChanged = function () {
+        if (this.gesture) {
+            this.gesture.setDisabled(this.disabled);
+        }
+    };
+    Refresher.prototype.componentDidLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var contentEl, _a, _b;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        if (this.el.getAttribute('slot') !== 'fixed') {
+                            console.error('Make sure you use: <ion-refresher slot="fixed">');
+                            return [2 /*return*/];
+                        }
+                        contentEl = this.el.closest('ion-content');
+                        if (!contentEl) return [3 /*break*/, 3];
+                        return [4 /*yield*/, contentEl.componentOnReady()];
+                    case 1:
+                        _c.sent();
+                        _a = this;
+                        return [4 /*yield*/, contentEl.getScrollElement()];
+                    case 2:
+                        _a.scrollEl = _c.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        console.error('ion-refresher did not attach, make sure the parent is an ion-content.');
+                        _c.label = 4;
+                    case 4:
+                        _b = this;
+                        return [4 /*yield*/, __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/gesture.js"))];
+                    case 5:
+                        _b.gesture = (_c.sent()).createGesture({
+                            el: this.el.closest('ion-content'),
+                            queue: this.queue,
+                            gestureName: 'refresher',
+                            gesturePriority: 10,
+                            direction: 'y',
+                            threshold: 20,
+                            passive: false,
+                            canStart: function () { return _this.canStart(); },
+                            onStart: function () { return _this.onStart(); },
+                            onMove: function (ev) { return _this.onMove(ev); },
+                            onEnd: function () { return _this.onEnd(); },
+                        });
+                        this.disabledChanged();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Refresher.prototype.componentDidUnload = function () {
+        this.scrollEl = undefined;
+    };
+    Refresher.prototype.complete = function () {
+        this.close(32, '120ms');
+    };
+    Refresher.prototype.cancel = function () {
+        this.close(16, '');
+    };
+    Refresher.prototype.getProgress = function () {
+        return Promise.resolve(this.progress);
+    };
+    Refresher.prototype.canStart = function () {
+        if (!this.scrollEl) {
+            return false;
+        }
+        if (this.state !== 1) {
+            return false;
+        }
+        if (this.scrollEl.scrollTop > 0) {
+            return false;
+        }
+        return true;
+    };
+    Refresher.prototype.onStart = function () {
+        console.log('start');
+        this.progress = 0;
+        this.state = 1;
+    };
+    Refresher.prototype.onMove = function (detail) {
+        if (!this.scrollEl) {
+            return;
+        }
+        var ev = detail.event;
+        if (ev.touches && ev.touches.length > 1) {
+            return;
+        }
+        if ((this.state & 56) !== 0) {
+            return;
+        }
+        var deltaY = detail.deltaY;
+        if (deltaY <= 0) {
+            this.progress = 0;
+            this.state = 1;
+            if (this.appliedStyles) {
+                this.setCss(0, '', false, '');
+                return;
+            }
+            return;
+        }
+        if (this.state === 1) {
+            var scrollHostScrollTop = this.scrollEl.scrollTop;
+            if (scrollHostScrollTop > 0) {
+                this.progress = 0;
+                return;
+            }
+            this.state = 2;
+        }
+        ev.preventDefault();
+        this.setCss(deltaY, '0ms', true, '');
+        if (deltaY === 0) {
+            this.progress = 0;
+            return;
+        }
+        var pullMin = this.pullMin;
+        this.progress = deltaY / pullMin;
+        if (!this.didStart) {
+            this.didStart = true;
+            this.ionStart.emit();
+        }
+        this.ionPull.emit();
+        if (deltaY < pullMin) {
+            this.state = 2;
+            return;
+        }
+        if (deltaY > this.pullMax) {
+            this.beginRefresh();
+            return;
+        }
+        this.state = 4;
+        return;
+    };
+    Refresher.prototype.onEnd = function () {
+        if (this.state === 4) {
+            this.beginRefresh();
+        }
+        else if (this.state === 2) {
+            this.cancel();
+        }
+    };
+    Refresher.prototype.beginRefresh = function () {
+        this.state = 8;
+        this.setCss(this.pullMin, this.snapbackDuration, true, '');
+        this.ionRefresh.emit();
+    };
+    Refresher.prototype.close = function (state, delay) {
+        var _this = this;
+        setTimeout(function () {
+            _this.state = 1;
+            _this.progress = 0;
+            _this.didStart = false;
+            _this.setCss(0, '0ms', false, '');
+        }, 600);
+        this.state = state;
+        this.setCss(0, '', true, delay);
+    };
+    Refresher.prototype.setCss = function (y, duration, overflowVisible, delay) {
+        var _this = this;
+        this.appliedStyles = (y > 0);
+        this.queue.write(function () {
+            if (_this.scrollEl) {
+                var style = _this.scrollEl.style;
+                style.transform = ((y > 0) ? "translateY(" + y + "px) translateZ(0px)" : 'translateZ(0px)');
+                style.transitionDuration = duration;
+                style.transitionDelay = delay;
+                style.overflow = (overflowVisible ? 'hidden' : '');
+            }
+        });
+    };
+    Refresher.prototype.hostData = function () {
+        return {
+            slot: 'fixed',
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'refresher'), { 'refresher-active': this.state !== 1, 'refresher-pulling': this.state === 2, 'refresher-ready': this.state === 4, 'refresher-refreshing': this.state === 8, 'refresher-cancelling': this.state === 16, 'refresher-completing': this.state === 32 })
+        };
+    };
+    Object.defineProperty(Refresher, "is", {
+        get: function () { return "ion-refresher"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Refresher, "properties", {
+        get: function () {
+            return {
+                "cancel": {
+                    "method": true
+                },
+                "closeDuration": {
+                    "type": String,
+                    "attr": "close-duration"
+                },
+                "complete": {
+                    "method": true
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "getProgress": {
+                    "method": true
+                },
+                "pullMax": {
+                    "type": Number,
+                    "attr": "pull-max"
+                },
+                "pullMin": {
+                    "type": Number,
+                    "attr": "pull-min"
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "snapbackDuration": {
+                    "type": String,
+                    "attr": "snapback-duration"
+                },
+                "state": {
+                    "state": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Refresher, "events", {
+        get: function () {
+            return [{
+                    "name": "ionRefresh",
+                    "method": "ionRefresh",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionPull",
+                    "method": "ionPull",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionStart",
+                    "method": "ionStart",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Refresher, "style", {
+        get: function () { return "ion-refresher{left:0;top:0;display:none;position:absolute;width:100%;height:60px;z-index:0}ion-refresher.refresher-active{display:block}ion-refresher-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%}.refresher-pulling,.refresher-refreshing{display:none;width:100%}.refresher-pulling-icon,.refresher-refreshing-icon{-webkit-transform-origin:center;transform-origin:center;-webkit-transition:.2s;transition:.2s;font-size:30px;text-align:center}.refresher-pulling-text,.refresher-refreshing-text{font-size:16px;text-align:center}.refresher-pulling ion-refresher-content .refresher-pulling,.refresher-ready ion-refresher-content .refresher-pulling{display:block}.refresher-ready ion-refresher-content .refresher-pulling-icon{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.refresher-cancelling ion-refresher-content .refresher-pulling,.refresher-refreshing ion-refresher-content .refresher-refreshing{display:block}.refresher-cancelling ion-refresher-content .refresher-pulling-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-completing ion-refresher-content .refresher-refreshing{display:block}.refresher-completing ion-refresher-content .refresher-refreshing-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-ios .refresher-pulling-icon,.refresher-ios .refresher-pulling-text,.refresher-ios .refresher-refreshing-icon,.refresher-ios .refresher-refreshing-text{color:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-crescent circle,.refresher-ios .refresher-refreshing .spinner-lines-ios line,.refresher-ios .refresher-refreshing .spinner-lines-small-ios line{stroke:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-bubbles circle,.refresher-ios .refresher-refreshing .spinner-circles circle,.refresher-ios .refresher-refreshing .spinner-dots circle{fill:var(--ion-text-color,#000)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Refresher, "styleMode", {
+        get: function () { return "ios"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Refresher;
+}());
+var RefresherContent = /** @class */ (function () {
+    function RefresherContent() {
+    }
+    RefresherContent.prototype.componentDidLoad = function () {
+        if (this.pullingIcon === undefined) {
+            this.pullingIcon = this.config.get('refreshingIcon', 'arrow-down');
+        }
+        if (this.refreshingSpinner === undefined) {
+            this.refreshingSpinner = this.config.get('refreshingSpinner', this.config.get('spinner', 'lines'));
+        }
+    };
+    RefresherContent.prototype.render = function () {
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-pulling" }, this.pullingIcon &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-pulling-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: this.pullingIcon, lazy: false })), this.pullingText &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-pulling-text", innerHTML: this.pullingText })),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-refreshing" }, this.refreshingSpinner &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-refreshing-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-spinner", { name: this.refreshingSpinner })), this.refreshingText &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-refreshing-text", innerHTML: this.refreshingText }))
+        ];
+    };
+    Object.defineProperty(RefresherContent, "is", {
+        get: function () { return "ion-refresher-content"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RefresherContent, "properties", {
+        get: function () {
+            return {
+                "config": {
+                    "context": "config"
+                },
+                "pullingIcon": {
+                    "type": String,
+                    "attr": "pulling-icon",
+                    "mutable": true
+                },
+                "pullingText": {
+                    "type": String,
+                    "attr": "pulling-text"
+                },
+                "refreshingSpinner": {
+                    "type": String,
+                    "attr": "refreshing-spinner",
+                    "mutable": true
+                },
+                "refreshingText": {
+                    "type": String,
+                    "attr": "refreshing-text"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return RefresherContent;
+}());
+
+
 
 /***/ })
 

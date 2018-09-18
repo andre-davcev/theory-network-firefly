@@ -2,45 +2,43 @@
   <ion-toolbar>
       <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
           <ion-button icon-only (click)="navigate(AlertsModalType.Search)">
-              <ion-icon name="search" color="dark"></ion-icon>
+              <ion-icon name="search" color="dark" size="large"></ion-icon>
           </ion-button>
           <ion-button icon-only (click)="navigate(AlertsModalType.Feed)">
-              <ion-icon name="md-paper" color="dark"></ion-icon>
+              <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
           </ion-button>
           <ion-button icon-only (click)="navigate(AlertsModalType.Subscriptions)">
-              <ion-icon name="options" color="dark"></ion-icon>
+              <ion-icon name="options" color="dark" size="large"></ion-icon>
           </ion-button>
           <ion-button icon-only (click)="navigate(AlertsModalType.Publish)">
-              <ion-icon name="md-add" color="dark"></ion-icon>
+              <ion-icon name="md-add" color="dark" size="large"></ion-icon>
           </ion-button>
           <ion-button icon-only (click)="navigate(AlertsModalType.Settings)">
-              <ion-icon name="settings" color="dark"></ion-icon>
+              <ion-icon name="settings" color="dark" size="large"></ion-icon>
           </ion-button>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true">
-  <ion-slides pager="true" (ionSlideDidChange)="slideChanged()">
-      <ion-slide *ngFor="let notification of notifications$ | async">
-          <div class="cpt-card">
-              <h1 class="cpt-title">{{ notification.title }}</h1>
-              <h2 class="cpt-short">{{ notification.body }}</h2>
-              <img class="cpt-image" [src]="notification.image">
-              <p class="cpt-paragraph">{{ notification.date }}</p>
-          </div>
-      </ion-slide>
-  </ion-slides>
-</ion-content>
+<ion-slides pager="true" (ionSlideDidChange)="slideChanged()">
+    <ion-slide *ngFor="let notification of notifications$ | async">
+        <div class="cpt-card">
+            <h1 class="cpt-title">{{ notification.title }}</h1>
+            <h2 class="cpt-short">{{ notification.body }}</h2>
+            <img class="cpt-image" [src]="notification.image">
+            <p class="cpt-paragraph">{{ notification.date }}</p>
+        </div>
+    </ion-slide>
+</ion-slides>
 
 <ion-footer>
   <ion-toolbar>
       <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
           <ion-button icon-only>
-              <ion-icon name="md-globe" color="dark"></ion-icon>
+              <ion-icon name="md-globe" color="dark" size="large"></ion-icon>
           </ion-button>
           <ion-button icon-only>
-              <ion-icon name="md-trash" color="dark"></ion-icon>
+              <ion-icon name="md-trash" color="dark" size="large"></ion-icon>
           </ion-button>
       </ion-buttons>
   </ion-toolbar>

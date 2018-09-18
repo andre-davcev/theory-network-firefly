@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[116],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pfyzszvb.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/pfyzszvb.js ***!
-  \********************************************************************************************************************************/
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u6vnpl3q.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u6vnpl3q.sc.entry.js ***!
+  \************************************************************************************************************************************/
 /*! exports provided: IonToast, IonToastController */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11,14 +11,365 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToast", function() { return Toast; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToastController", function() { return ToastController; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-ca273e40.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-ca273e40.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,o,n){return new(o||(o=Promise))(function(i,a){function r(e){try{l(n.next(e))}catch(e){a(e)}}function s(e){try{l(n.throw(e))}catch(e){a(e)}}function l(e){e.done?i(e.value):new o(function(t){t(e.value)}).then(r,s)}l((n=n.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var o,n,i,a,r={label:0,sent:function(){if(1&i[0])throw i[1];return i[1]},trys:[],ops:[]};return a={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(a[Symbol.iterator]=function(){return this}),a;function s(a){return function(s){return function(a){if(o)throw new TypeError("Generator is already executing.");for(;r;)try{if(o=1,n&&(i=2&a[0]?n.return:a[0]?n.throw||((i=n.return)&&i.call(n),0):n.next)&&!(i=i.call(n,a[1])).done)return i;switch(n=0,i&&(a=[2&a[0],i.value]),a[0]){case 0:case 1:i=a;break;case 4:return r.label++,{value:a[1],done:!1};case 5:r.label++,n=a[1],a=[0];continue;case 7:a=r.ops.pop(),r.trys.pop();continue;default:if(!(i=(i=r.trys).length>0&&i[i.length-1])&&(6===a[0]||2===a[0])){r=0;continue}if(3===a[0]&&(!i||a[1]>i[0]&&a[1]<i[3])){r.label=a[1];break}if(6===a[0]&&r.label<i[1]){r.label=i[1],i=a;break}if(i&&r.label<i[2]){r.label=i[2],r.ops.push(a);break}i[2]&&r.ops.pop(),r.trys.pop();continue}a=t.call(e,r)}catch(e){a=[6,e],n=0}finally{o=i=0}if(5&a[0])throw a[1];return{value:a[0]?a[1]:void 0,done:!0}}([a,s])}}};function iosEnterAnimation(e,t,o){var n=new e,i=new e,a=t.querySelector(".toast-wrapper");switch(i.addElement(a),o){case"top":i.fromTo("translateY","-100%","calc(10px + var(--ion-safe-area-top, 0px))");break;case"middle":var r=Math.floor(t.clientHeight/2-a.clientHeight/2);a.style.top=r+"px",i.fromTo("opacity",.01,1);break;default:i.fromTo("translateY","100%","calc(-10px - var(--ion-safe-area-bottom, 0px))")}return Promise.resolve(n.addElement(t).easing("cubic-bezier(.155,1.105,.295,1.12)").duration(400).add(i))}function iosLeaveAnimation(e,t,o){var n=new e,i=new e,a=t.querySelector(".toast-wrapper");switch(i.addElement(a),o){case"top":i.fromTo("translateY","calc(10px + var(--ion-safe-area-top, 0px))","-100%");break;case"middle":i.fromTo("opacity",.99,0);break;default:i.fromTo("translateY","calc(-10px - var(--ion-safe-area-bottom, 0px))","100%")}return Promise.resolve(n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(300).add(i))}function mdEnterAnimation(e,t,o){var n=new e,i=new e,a=t.querySelector(".toast-wrapper");switch(i.addElement(a),o){case"top":i.fromTo("translateY","-100%","0%");break;case"middle":var r=Math.floor(t.clientHeight/2-a.clientHeight/2);a.style.top=r+"px",i.fromTo("opacity",.01,1);break;default:i.fromTo("translateY","100%","0%")}return Promise.resolve(n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(400).add(i))}function mdLeaveAnimation(e,t,o){var n=new e,i=new e,a=t.querySelector(".toast-wrapper");switch(i.addElement(a),o){case"top":i.fromTo("translateY","0px","-100%");break;case"middle":i.fromTo("opacity",.99,0);break;default:i.fromTo("translateY","0px","100%")}return Promise.resolve(n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(300).add(i))}var Toast=function(){function e(){this.presented=!1,this.duration=0,this.keyboardClose=!1,this.position="bottom",this.showCloseButton=!1,this.translucent=!1,this.animated=!0}return e.prototype.componentDidLoad=function(){this.ionToastDidLoad.emit()},e.prototype.componentDidUnload=function(){this.ionToastDidUnload.emit()},e.prototype.onDismiss=function(e){return e.stopPropagation(),e.preventDefault(),this.dismiss()},e.prototype.present=function(){return __awaiter(this,void 0,void 0,function(){var e=this;return __generator(this,function(t){switch(t.label){case 0:return[4,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["e"])(this,"toastEnter",iosEnterAnimation,mdEnterAnimation,this.position)];case 1:return t.sent(),this.duration>0&&(this.durationTimeout=setTimeout(function(){return e.dismiss()},this.duration)),[2]}})})},e.prototype.dismiss=function(e,t){return this.durationTimeout&&clearTimeout(this.durationTimeout),Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this,e,t,"toastLeave",iosLeaveAnimation,mdLeaveAnimation,this.position)},e.prototype.onDidDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["c"])(this.el,"ionToastDidDismiss")},e.prototype.onWillDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["c"])(this.el,"ionToastWillDismiss")},e.prototype.hostData=function(){var e=this.translucent?Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"toast-translucent"):{};return{class:Object.assign({},e,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["m"])(this.mode,"toast"),Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["j"])(this.cssClass))}},e.prototype.render=function(){var e,t=this,o=((e={"toast-wrapper":!0})["toast-"+this.position]=!0,e);return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:o},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toast-container"},void 0!==this.message&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"toast-message"},this.message),this.showCloseButton&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-button",{fill:"clear",color:"light","ion-activable":!0,class:"toast-button",onClick:function(){return t.dismiss()}},this.closeButtonText||"Close")))},Object.defineProperty(e,"is",{get:function(){return"ion-toast"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{animated:{type:Boolean,attr:"animated"},animationCtrl:{connect:"ion-animation-controller"},closeButtonText:{type:String,attr:"close-button-text"},config:{context:"config"},cssClass:{type:String,attr:"css-class"},dismiss:{method:!0},duration:{type:Number,attr:"duration"},el:{elementRef:!0},enterAnimation:{type:"Any",attr:"enter-animation"},keyboardClose:{type:Boolean,attr:"keyboard-close"},leaveAnimation:{type:"Any",attr:"leave-animation"},message:{type:String,attr:"message"},mode:{type:String,attr:"mode"},onDidDismiss:{method:!0},onWillDismiss:{method:!0},overlayIndex:{type:Number,attr:"overlay-index"},position:{type:String,attr:"position"},present:{method:!0},showCloseButton:{type:Boolean,attr:"show-close-button"},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionToastDidLoad",method:"ionToastDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastDidPresent",method:"didPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastWillPresent",method:"willPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastWillDismiss",method:"willDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastDidDismiss",method:"didDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionToastDidUnload",method:"ionToastDidUnload",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionDismiss",method:"onDismiss"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-toast{left:0;top:0;display:block;position:absolute;width:100%;height:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:strict;z-index:1000;pointer-events:none}.toast-wrapper{background:var(--background)}.toast-wrapper.toast-top{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0);top:0}.toast-wrapper.toast-bottom{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);bottom:0}.toast-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;pointer-events:auto;contain:content}.toast-button{font-size:15px}.toast-message{-webkit-box-flex:1;-ms-flex:1;flex:1}.toast-ios{--background:var(--ion-background-color-step-50, #f2f2f2);--button-color:var(--ion-text-color-step-400, #666666);--color:var(--ion-text-color-step-150, #262626);font-size:14px}.toast-ios .toast-wrapper{left:10px;right:10px;margin:auto;border-radius:14px;display:block;position:absolute;max-width:700px;z-index:10}.toast-translucent-ios .toast-wrapper{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.toast-ios .toast-wrapper.toast-middle{opacity:.01}.toast-ios .toast-message{padding:15px}.toast-ios .toast-button{color:var(--button-color)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),ToastController=function(){function e(){}return e.prototype.create=function(e){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["f"])(this.doc.createElement("ion-toast"),e)},e.prototype.dismiss=function(e,t,o){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["g"])(this.doc,e,t,"ion-toast",o)},e.prototype.getTop=function(){return __awaiter(this,void 0,void 0,function(){return __generator(this,function(e){return[2,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.doc,"ion-toast")]})})},Object.defineProperty(e,"is",{get:function(){return"ion-toast-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{create:{method:!0},dismiss:{method:!0},doc:{context:"document"},getTop:{method:!0}}},enumerable:!0,configurable:!0}),e}();
+
+
+
+function iosEnterAnimation(AnimationC, baseEl, position) {
+    var baseAnimation = new AnimationC();
+    var wrapperAnimation = new AnimationC();
+    var wrapperEle = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation.addElement(wrapperEle);
+    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('translateY', '-100%', top);
+            break;
+        case 'middle':
+            var topPosition = Math.floor(baseEl.clientHeight / 2 - wrapperEle.clientHeight / 2);
+            wrapperEle.style.top = topPosition + "px";
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        default:
+            wrapperAnimation.fromTo('translateY', '100%', bottom);
+            break;
+    }
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.155,1.105,.295,1.12)')
+        .duration(400)
+        .add(wrapperAnimation));
+}
+function iosLeaveAnimation(AnimationC, baseEl, position) {
+    var baseAnimation = new AnimationC();
+    var wrapperAnimation = new AnimationC();
+    var wrapperEle = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation.addElement(wrapperEle);
+    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('translateY', top, '-100%');
+            break;
+        case 'middle':
+            wrapperAnimation.fromTo('opacity', 0.99, 0);
+            break;
+        default:
+            wrapperAnimation.fromTo('translateY', bottom, '100%');
+            break;
+    }
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(300)
+        .add(wrapperAnimation));
+}
+function mdEnterAnimation(AnimationC, baseEl, position) {
+    var baseAnimation = new AnimationC();
+    var wrapperAnimation = new AnimationC();
+    var wrapperEle = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation.addElement(wrapperEle);
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('translateY', '-100%', '0%');
+            break;
+        case 'middle':
+            var topPosition = Math.floor(baseEl.clientHeight / 2 - wrapperEle.clientHeight / 2);
+            wrapperEle.style.top = topPosition + "px";
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        default:
+            wrapperAnimation.fromTo('translateY', '100%', '0%');
+            break;
+    }
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(400)
+        .add(wrapperAnimation));
+}
+function mdLeaveAnimation(AnimationC, baseEl, position) {
+    var baseAnimation = new AnimationC();
+    var wrapperAnimation = new AnimationC();
+    var wrapperEle = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation.addElement(wrapperEle);
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('translateY', '0px', '-100%');
+            break;
+        case 'middle':
+            wrapperAnimation.fromTo('opacity', 0.99, 0);
+            break;
+        default:
+            wrapperAnimation.fromTo('translateY', "0px", '100%');
+            break;
+    }
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(300)
+        .add(wrapperAnimation));
+}
+var Toast = /** @class */ (function () {
+    function Toast() {
+        this.presented = false;
+        this.duration = 0;
+        this.keyboardClose = false;
+        this.position = 'bottom';
+        this.showCloseButton = false;
+        this.translucent = false;
+        this.animated = true;
+    }
+    Toast.prototype.componentDidLoad = function () {
+        this.ionToastDidLoad.emit();
+    };
+    Toast.prototype.componentDidUnload = function () {
+        this.ionToastDidUnload.emit();
+    };
+    Toast.prototype.present = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this, 'toastEnter', iosEnterAnimation, mdEnterAnimation, this.position)];
+                    case 1:
+                        _a.sent();
+                        if (this.duration > 0) {
+                            this.durationTimeout = setTimeout(function () { return _this.dismiss(undefined, 'timeout'); }, this.duration);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Toast.prototype.dismiss = function (data, role) {
+        if (this.durationTimeout) {
+            clearTimeout(this.durationTimeout);
+        }
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this, data, role, 'toastLeave', iosLeaveAnimation, mdLeaveAnimation, this.position);
+    };
+    Toast.prototype.onDidDismiss = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionToastDidDismiss');
+    };
+    Toast.prototype.onWillDismiss = function () {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionToastWillDismiss');
+    };
+    Toast.prototype.hostData = function () {
+        var themedClasses = this.translucent ? Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.mode, 'toast-translucent') : {};
+        return {
+            style: {
+                zIndex: 60000 + this.overlayIndex,
+            },
+            class: Object.assign({}, themedClasses, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.mode, 'toast'), Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.cssClass))
+        };
+    };
+    Toast.prototype.render = function () {
+        var _this = this;
+        var _a;
+        var wrapperClass = (_a = {
+                'toast-wrapper': true
+            },
+            _a["toast-" + this.position] = true,
+            _a);
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: wrapperClass }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toast-container" }, this.message !== undefined &&
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toast-message" }, this.message), this.showCloseButton &&
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-button", { fill: "clear", color: "light", "ion-activatable": true, class: "toast-button", onClick: function () { return _this.dismiss(undefined, 'cancel'); } }, this.closeButtonText || 'Close'))));
+    };
+    Object.defineProperty(Toast, "is", {
+        get: function () { return "ion-toast"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Toast, "properties", {
+        get: function () {
+            return {
+                "animated": {
+                    "type": Boolean,
+                    "attr": "animated"
+                },
+                "animationCtrl": {
+                    "connect": "ion-animation-controller"
+                },
+                "closeButtonText": {
+                    "type": String,
+                    "attr": "close-button-text"
+                },
+                "config": {
+                    "context": "config"
+                },
+                "cssClass": {
+                    "type": String,
+                    "attr": "css-class"
+                },
+                "dismiss": {
+                    "method": true
+                },
+                "duration": {
+                    "type": Number,
+                    "attr": "duration"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "enterAnimation": {
+                    "type": "Any",
+                    "attr": "enter-animation"
+                },
+                "keyboardClose": {
+                    "type": Boolean,
+                    "attr": "keyboard-close"
+                },
+                "leaveAnimation": {
+                    "type": "Any",
+                    "attr": "leave-animation"
+                },
+                "message": {
+                    "type": String,
+                    "attr": "message"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "onDidDismiss": {
+                    "method": true
+                },
+                "onWillDismiss": {
+                    "method": true
+                },
+                "overlayIndex": {
+                    "type": Number,
+                    "attr": "overlay-index"
+                },
+                "position": {
+                    "type": String,
+                    "attr": "position"
+                },
+                "present": {
+                    "method": true
+                },
+                "showCloseButton": {
+                    "type": Boolean,
+                    "attr": "show-close-button"
+                },
+                "translucent": {
+                    "type": Boolean,
+                    "attr": "translucent"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Toast, "events", {
+        get: function () {
+            return [{
+                    "name": "ionToastDidLoad",
+                    "method": "ionToastDidLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastDidPresent",
+                    "method": "didPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastWillPresent",
+                    "method": "willPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastWillDismiss",
+                    "method": "willDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastDidDismiss",
+                    "method": "didDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastDidUnload",
+                    "method": "ionToastDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Toast, "style", {
+        get: function () { return "ion-toast{left:0;top:0;display:block;position:absolute;width:100%;height:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:strict;z-index:1000;pointer-events:none}.toast-wrapper{background:var(--background)}.toast-wrapper.toast-top{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0);top:0}.toast-wrapper.toast-bottom{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);bottom:0}.toast-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;pointer-events:auto;contain:content}.toast-button{font-size:15px}.toast-message{-webkit-box-flex:1;-ms-flex:1;flex:1}.toast-md{--background:var(--ion-text-color-step-150, #262626);--color:var(--ion-background-color, #fff);font-size:15px}.toast-md .toast-wrapper{left:0;right:0;margin:auto;display:block;position:absolute;width:100%;max-width:700px;z-index:10}.toast-md .toast-wrapper.toast-top{padding-top:var(--ion-safe-area-top,0)}.toast-md .toast-wrapper.toast-bottom{padding-bottom:var(--ion-safe-area-bottom,0)}.toast-md .toast-wrapper.toast-middle{opacity:.01}.toast-md .toast-message{padding:19px 16px 17px}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Toast, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Toast;
+}());
+var ToastController = /** @class */ (function () {
+    function ToastController() {
+    }
+    ToastController.prototype.create = function (opts) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement('ion-toast'), opts);
+    };
+    ToastController.prototype.dismiss = function (data, role, id) {
+        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc, data, role, 'ion-toast', id);
+    };
+    ToastController.prototype.getTop = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return [2 /*return*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc, 'ion-toast')];
+            });
+        });
+    };
+    Object.defineProperty(ToastController, "is", {
+        get: function () { return "ion-toast-controller"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ToastController, "properties", {
+        get: function () {
+            return {
+                "create": {
+                    "method": true
+                },
+                "dismiss": {
+                    "method": true
+                },
+                "doc": {
+                    "context": "document"
+                },
+                "getTop": {
+                    "method": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ToastController;
+}());
+
+
 
 /***/ })
 

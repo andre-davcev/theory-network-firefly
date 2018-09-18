@@ -1,24 +1,261 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[102],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/nkpqfhed.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/nkpqfhed.js ***!
-  \********************************************************************************************************************************/
-/*! exports provided: IonRadio, IonRadioGroup */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rltleisd.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rltleisd.sc.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonInfiniteScroll, IonInfiniteScrollContent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRadio", function() { return Radio; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRadioGroup", function() { return RadioGroup; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-276e047f.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-276e047f.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonInfiniteScroll", function() { return InfiniteScroll; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonInfiniteScrollContent", function() { return InfiniteScrollContent; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var Radio=function(){function e(){this.inputId="ion-rb-"+radioButtonIds++,this.keyFocus=!1,this.name=this.inputId,this.disabled=!1,this.checked=!1}return e.prototype.componentWillLoad=function(){this.ionSelect=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.ionSelect),this.ionStyle=Object(_chunk_276e047f_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.ionStyle),null==this.value&&(this.value=this.inputId),this.emitStyle()},e.prototype.componentDidLoad=function(){this.ionRadioDidLoad.emit(),this.nativeInput.checked=this.checked;var e=this.nativeInput.closest("ion-item");if(e){var t=e.querySelector("ion-label");t&&(t.id=this.inputId+"-lbl",this.nativeInput.setAttribute("aria-labelledby",t.id))}},e.prototype.componentDidUnload=function(){this.ionRadioDidUnload.emit()},e.prototype.colorChanged=function(){this.emitStyle()},e.prototype.checkedChanged=function(e){this.nativeInput.checked!==e&&(this.nativeInput.checked=e),e&&this.ionSelect.emit({checked:!0,value:this.value}),this.emitStyle()},e.prototype.disabledChanged=function(e){this.nativeInput.disabled=e,this.emitStyle()},e.prototype.emitStyle=function(){this.ionStyle.emit({"radio-checked":this.checked,"interactive-disabled":this.disabled})},e.prototype.onClick=function(){this.checkedChanged(!0)},e.prototype.onChange=function(){this.checked=!0,this.nativeInput.focus()},e.prototype.onKeyUp=function(){this.keyFocus=!0},e.prototype.onFocus=function(){this.ionFocus.emit()},e.prototype.onBlur=function(){this.keyFocus=!1,this.ionBlur.emit()},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.color),{"in-item":Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["n"])(".item",this.el),interactive:!0,"radio-checked":this.checked,"radio-disabled":this.disabled,"radio-key":this.keyFocus})}},e.prototype.render=function(){var e=this;return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"radio-icon"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"radio-inner"})),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input",{type:"radio",onClick:this.onClick.bind(this),onChange:this.onChange.bind(this),onFocus:this.onFocus.bind(this),onBlur:this.onBlur.bind(this),onKeyUp:this.onKeyUp.bind(this),id:this.inputId,name:this.name,value:this.value,disabled:this.disabled,ref:function(t){return e.nativeInput=t}})]},Object.defineProperty(e,"is",{get:function(){return"ion-radio"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{checked:{type:Boolean,attr:"checked",mutable:!0,watchCallbacks:["checkedChanged"]},color:{type:String,attr:"color",watchCallbacks:["colorChanged"]},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},el:{elementRef:!0},keyFocus:{state:!0},mode:{type:String,attr:"mode"},name:{type:String,attr:"name"},value:{type:"Any",attr:"value",mutable:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionRadioDidLoad",method:"ionRadioDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionRadioDidUnload",method:"ionRadioDidUnload",bubbles:!0,cancelable:!0,composed:!0},{name:"ionStyle",method:"ionStyle",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSelect",method:"ionSelect",bubbles:!0,cancelable:!0,composed:!0},{name:"ionFocus",method:"ionFocus",bubbles:!0,cancelable:!0,composed:!0},{name:"ionBlur",method:"ionBlur",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return":host{display:inline-block;position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--color:var(--ion-text-color-step-600, #999999);--color-checked:var(--ion-color-primary, #3880ff);--width:16px;--height:16px}:host(.radio-disabled){pointer-events:none;opacity:.3}input{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.radio-icon,.radio-inner{-webkit-box-sizing:border-box;box-sizing:border-box}:host(.ion-color) .radio-inner{background:var(--ion-color-base)}:host(.ion-color.radio-checked) .radio-icon{border-color:var(--ion-color-base)}.radio-icon{display:block;position:relative;width:var(--width);height:var(--height);contain:layout size style;left:0;top:0;margin:0;border-radius:50%;border-width:2px;border-style:solid;border-color:var(--color)}.radio-inner{left:2px;top:2px;border-radius:50%;position:absolute;width:8px;height:8px;-webkit-transform:scale3d(0,0,0);transform:scale3d(0,0,0);-webkit-transition:-webkit-transform 280ms cubic-bezier(.4,0,.2,1);transition:-webkit-transform 280ms cubic-bezier(.4,0,.2,1);transition:transform 280ms cubic-bezier(.4,0,.2,1);transition:transform 280ms cubic-bezier(.4,0,.2,1),-webkit-transform 280ms cubic-bezier(.4,0,.2,1);background:var(--color-checked)}:host(.radio-checked) .radio-icon{border-color:var(--color-checked)}:host(.radio-checked) .radio-inner{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}:host(.radio-key) .radio-icon::after{border-radius:50%;left:-12px;top:-12px;display:block;position:absolute;width:36px;height:36px;background:var(--ion-color-primary-tint,#4c8dff);content:\"\";opacity:.2}:host(.in-item){margin:9px 10px 9px 0;display:block;position:static}:host(.in-item[slot=start]){margin:11px 36px 10px 4px}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),e}(),radioButtonIds=0,RadioGroup=function(){function e(){this.inputId="ion-rg-"+radioGroupIds++,this.labelId=this.inputId+"-lbl",this.radios=[],this.allowEmptySelection=!1,this.name=this.inputId,this.disabled=!1}return e.prototype.disabledChanged=function(){for(var e=0,t=this.radios;e<t.length;e++)t[e].disabled=this.disabled},e.prototype.valueChanged=function(e){this.updateRadios(),this.ionChange.emit({value:e})},e.prototype.onRadioDidLoad=function(e){var t=e.target;t.name=this.name,this.radios.push(t),null==this.value&&t.checked?this.value=t.value:this.updateRadios()},e.prototype.onRadioDidUnload=function(e){var t=this.radios.indexOf(e.target);t>-1&&this.radios.splice(t,1)},e.prototype.onRadioSelect=function(e){var t=e.target;t&&(this.value=t.value)},e.prototype.componentDidLoad=function(){var e=this.el.querySelector("ion-list-header");if(e||(e=this.el.querySelector("ion-item-divider")),e){var t=e.querySelector("ion-label");t&&(this.labelId=t.id=this.name+"-lbl")}this.disabledChanged(),this.updateRadios()},e.prototype.updateRadios=function(){for(var e=this.value,t=!1,i=0,o=this.radios;i<o.length;i++){var n=o[i];t||n.value!==e?n.checked=!1:(t=!0,n.checked=!0)}},e.prototype.hostData=function(){return{role:"radiogroup","aria-labelledby":this.labelId}},Object.defineProperty(e,"is",{get:function(){return"ion-radio-group"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{allowEmptySelection:{type:Boolean,attr:"allow-empty-selection"},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},el:{elementRef:!0},name:{type:String,attr:"name"},value:{type:"Any",attr:"value",mutable:!0,watchCallbacks:["valueChanged"]}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionChange",method:"ionChange",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionRadioDidLoad",method:"onRadioDidLoad"},{name:"ionRadioDidUnload",method:"onRadioDidUnload"},{name:"ionSelect",method:"onRadioSelect"}]},enumerable:!0,configurable:!0}),e}(),radioGroupIds=0;
+
+
+var InfiniteScroll = /** @class */ (function () {
+    function InfiniteScroll() {
+        this.thrPx = 0;
+        this.thrPc = 0;
+        this.didFire = false;
+        this.isBusy = false;
+        this.isLoading = false;
+        this.threshold = '15%';
+        this.disabled = false;
+        this.position = 'bottom';
+    }
+    InfiniteScroll.prototype.thresholdChanged = function (val) {
+        if (val.lastIndexOf('%') > -1) {
+            this.thrPx = 0;
+            this.thrPc = (parseFloat(val) / 100);
+        }
+        else {
+            this.thrPx = parseFloat(val);
+            this.thrPc = 0;
+        }
+    };
+    InfiniteScroll.prototype.disabledChanged = function (val) {
+        this.enableScrollEvents(!val);
+    };
+    InfiniteScroll.prototype.componentDidLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var contentEl, _a;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        contentEl = this.el.closest('ion-content');
+                        if (!contentEl) return [3 /*break*/, 3];
+                        return [4 /*yield*/, contentEl.componentOnReady()];
+                    case 1:
+                        _b.sent();
+                        _a = this;
+                        return [4 /*yield*/, contentEl.getScrollElement()];
+                    case 2:
+                        _a.scrollEl = _b.sent();
+                        _b.label = 3;
+                    case 3:
+                        this.thresholdChanged(this.threshold);
+                        this.enableScrollEvents(!this.disabled);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    InfiniteScroll.prototype.componentDidUnload = function () {
+        this.scrollEl = undefined;
+    };
+    InfiniteScroll.prototype.onScroll = function () {
+        var scrollEl = this.scrollEl;
+        if (!scrollEl || !this.canStart()) {
+            return 1;
+        }
+        var infiniteHeight = this.el.offsetHeight;
+        if (infiniteHeight === 0) {
+            return 2;
+        }
+        var scrollTop = scrollEl.scrollTop;
+        var scrollHeight = scrollEl.scrollHeight;
+        var height = scrollEl.offsetHeight;
+        var threshold = this.thrPc !== 0 ? (height * this.thrPc) : this.thrPx;
+        var distanceFromInfinite = (this.position === 'bottom')
+            ? scrollHeight - infiniteHeight - scrollTop - threshold - height
+            : scrollTop - infiniteHeight - threshold;
+        if (distanceFromInfinite < 0) {
+            if (!this.didFire) {
+                this.isLoading = true;
+                this.didFire = true;
+                this.ionInfinite.emit();
+                return 3;
+            }
+        }
+        else {
+            this.didFire = false;
+        }
+        return 4;
+    };
+    InfiniteScroll.prototype.complete = function () {
+        var scrollEl = this.scrollEl;
+        if (!this.isLoading || !scrollEl) {
+            return;
+        }
+        this.isLoading = false;
+    };
+    InfiniteScroll.prototype.canStart = function () {
+        return (!this.disabled &&
+            !this.isBusy &&
+            !!this.scrollEl &&
+            !this.isLoading);
+    };
+    InfiniteScroll.prototype.enableScrollEvents = function (shouldListen) {
+        if (this.scrollEl) {
+            this.enableListener(this, 'scroll', shouldListen, this.scrollEl);
+        }
+    };
+    InfiniteScroll.prototype.hostData = function () {
+        return {
+            class: {
+                'infinite-scroll-loading': this.isLoading,
+                'infinite-scroll-enabled': !this.disabled
+            }
+        };
+    };
+    Object.defineProperty(InfiniteScroll, "is", {
+        get: function () { return "ion-infinite-scroll"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScroll, "properties", {
+        get: function () {
+            return {
+                "complete": {
+                    "method": true
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "enableListener": {
+                    "context": "enableListener"
+                },
+                "isLoading": {
+                    "state": true
+                },
+                "position": {
+                    "type": String,
+                    "attr": "position"
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "threshold": {
+                    "type": String,
+                    "attr": "threshold",
+                    "watchCallbacks": ["thresholdChanged"]
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScroll, "events", {
+        get: function () {
+            return [{
+                    "name": "ionInfinite",
+                    "method": "ionInfinite",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScroll, "listeners", {
+        get: function () {
+            return [{
+                    "name": "scroll",
+                    "method": "onScroll",
+                    "disabled": true,
+                    "passive": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScroll, "style", {
+        get: function () { return "ion-infinite-scroll{display:none;width:100%}.infinite-scroll-enabled{display:block}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return InfiniteScroll;
+}());
+var InfiniteScrollContent = /** @class */ (function () {
+    function InfiniteScrollContent() {
+    }
+    InfiniteScrollContent.prototype.componentDidLoad = function () {
+        if (this.loadingSpinner === undefined) {
+            this.loadingSpinner = this.config.get('infiniteLoadingSpinner', this.config.get('spinner', 'lines'));
+        }
+    };
+    InfiniteScrollContent.prototype.hostData = function () {
+        return {
+            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'infinite-scroll-content')
+        };
+    };
+    InfiniteScrollContent.prototype.render = function () {
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "infinite-loading" }, this.loadingSpinner && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "infinite-loading-spinner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-spinner", { name: this.loadingSpinner }))), this.loadingText && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "infinite-loading-text", innerHTML: this.loadingText }))));
+    };
+    Object.defineProperty(InfiniteScrollContent, "is", {
+        get: function () { return "ion-infinite-scroll-content"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScrollContent, "properties", {
+        get: function () {
+            return {
+                "config": {
+                    "context": "config"
+                },
+                "loadingSpinner": {
+                    "type": String,
+                    "attr": "loading-spinner",
+                    "mutable": true
+                },
+                "loadingText": {
+                    "type": String,
+                    "attr": "loading-text"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScrollContent, "style", {
+        get: function () { return "ion-infinite-scroll-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;min-height:84px;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.infinite-loading{margin:0 0 32px;display:none;width:100%}.infinite-loading-text{margin:4px 32px 0}.infinite-scroll-loading ion-infinite-scroll-content>.infinite-loading{display:block}.infinite-scroll-content-ios .infinite-loading-text{color:var(--ion-text-color-step-400,#666)}.infinite-scroll-content-ios .infinite-loading-spinner .spinner-crescent circle,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-lines-ios line,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-lines-small-ios line{stroke:var(--ion-text-color-step-400,#666)}.infinite-scroll-content-ios .infinite-loading-spinner .spinner-bubbles circle,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-circles circle,.infinite-scroll-content-ios .infinite-loading-spinner .spinner-dots circle{fill:var(--ion-text-color-step-400,#666)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InfiniteScrollContent, "styleMode", {
+        get: function () { return "ios"; },
+        enumerable: true,
+        configurable: true
+    });
+    return InfiniteScrollContent;
+}());
+
+
 
 /***/ })
 

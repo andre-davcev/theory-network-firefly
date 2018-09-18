@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 //import { isCapacitorNative } from '@ionic/core';
 
-import { SplashScreen } from './constants/capacitor.const';
+import { SplashScreen, StatusBar } from './constants/capacitor.const';
 
 
 @Component
@@ -23,6 +23,7 @@ export class ComponentApp
         {
             // if (isCapacitorNative(window))
             SplashScreen.hide();
+            StatusBar.show();
         });
     }
 }

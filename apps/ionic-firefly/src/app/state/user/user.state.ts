@@ -1,9 +1,8 @@
 import * as firebase from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select} from '@ngxs/store';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap, take, filter, tap } from 'rxjs/operators';
-import { fromPromise } from 'rxjs/observable/fromPromise';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
@@ -193,7 +192,7 @@ export class StateUser
     {
         patchState({authenticating: true});
 
-        return fromPromise(firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
+        return from(firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             switchMap((authData: firebase.auth.UserCredential) => dispatch(new UserAuthenticateCheck(authData.user))),
 
@@ -214,7 +213,7 @@ export class StateUser
     @Action(LoginFacebookBrowser)
     loginFacebookBrowser({ dispatch }: StateContext<StateUserModel>)
     {
-        return fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())).
+        return from(this.auth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())).
 
         pipe(switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))));
     }
@@ -222,13 +221,13 @@ export class StateUser
     @Action(LoginFacebookDevice)
     loginFacebookDevice({ dispatch }: StateContext<StateUserModel>)
     {
-        return fromPromise(this.facebook.login(['email'])).pipe
+        return from(this.facebook.login(['email'])).pipe
         (
             switchMap((response: FacebookLoginResponse) =>
             {
                 const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
-                return fromPromise(firebase.auth().signInWithCredential(credential));
+                return from(firebase.auth().signInWithCredential(credential));
             }),
 
             switchMap((user: firebase.User) => dispatch(new UserAuthenticateCheck(user)))
@@ -248,7 +247,7 @@ export class StateUser
     @Action(LoginGoogleBrowser)
     loginGoogleBrowser({ dispatch }: StateContext<StateUserModel>)
     {
-        return fromPromise(this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())).
+        return from(this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())).
 
         pipe(switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))));
     }
@@ -256,13 +255,13 @@ export class StateUser
     @Action(LoginGoogleDevice)
     loginGoogleDevice({ dispatch }: StateContext<StateUserModel>)
     {
-        return fromPromise(this.facebook.login(['email'])).pipe
+        return from(this.facebook.login(['email'])).pipe
         (
             switchMap((response: FacebookLoginResponse) =>
             {
                 const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
-                return fromPromise(firebase.auth().signInWithCredential(credential)).
+                return from(firebase.auth().signInWithCredential(credential)).
 
                 pipe(switchMap((user: firebase.User) => dispatch(new UserAuthenticateCheck(user))))
             })

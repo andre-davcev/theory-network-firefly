@@ -1,25 +1,337 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[114],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ovd8bylq.js":
-/*!********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/ovd8bylq.js ***!
-  \********************************************************************************************************************************/
-/*! exports provided: IonModal, IonModalController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u21wriwl.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u21wriwl.sc.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonSearchbar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonModal", function() { return Modal; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonModalController", function() { return ModalController; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSearchbar", function() { return Searchbar; });
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
-/* harmony import */ var _chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-ca273e40.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-ca273e40.js");
-/* harmony import */ var _chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-5f438245.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-5f438245.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,o,n){return new(o||(o=Promise))(function(i,r){function a(e){try{l(n.next(e))}catch(e){r(e)}}function s(e){try{l(n.throw(e))}catch(e){r(e)}}function l(e){e.done?i(e.value):new o(function(t){t(e.value)}).then(a,s)}l((n=n.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var o,n,i,r,a={label:0,sent:function(){if(1&i[0])throw i[1];return i[1]},trys:[],ops:[]};return r={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(r[Symbol.iterator]=function(){return this}),r;function s(r){return function(s){return function(r){if(o)throw new TypeError("Generator is already executing.");for(;a;)try{if(o=1,n&&(i=2&r[0]?n.return:r[0]?n.throw||((i=n.return)&&i.call(n),0):n.next)&&!(i=i.call(n,r[1])).done)return i;switch(n=0,i&&(r=[2&r[0],i.value]),r[0]){case 0:case 1:i=r;break;case 4:return a.label++,{value:r[1],done:!1};case 5:a.label++,n=r[1],r=[0];continue;case 7:r=a.ops.pop(),a.trys.pop();continue;default:if(!(i=(i=a.trys).length>0&&i[i.length-1])&&(6===r[0]||2===r[0])){a=0;continue}if(3===r[0]&&(!i||r[1]>i[0]&&r[1]<i[3])){a.label=r[1];break}if(6===r[0]&&a.label<i[1]){a.label=i[1],i=r;break}if(i&&a.label<i[2]){a.label=i[2],a.ops.push(r);break}i[2]&&a.ops.pop(),a.trys.pop();continue}r=t.call(e,a)}catch(e){r=[6,e],n=0}finally{o=i=0}if(5&r[0])throw r[1];return{value:r[0]?r[1]:void 0,done:!0}}([r,s])}}};function iosEnterAnimation(e,t){var o=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var i=new e;return i.addElement(t.querySelector(".modal-wrapper")),i.beforeStyles({opacity:1}).fromTo("translateY","100%","0%"),n.fromTo("opacity",.01,.4),Promise.resolve(o.addElement(t).easing("cubic-bezier(0.36,0.66,0.04,1)").duration(400).beforeAddClass("show-modal").add(n).add(i))}function iosLeaveAnimation(e,t){var o=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var i=new e,r=t.querySelector(".modal-wrapper");i.addElement(r);var a=r.getBoundingClientRect();return i.beforeStyles({opacity:1}).fromTo("translateY","0%",window.innerHeight-a.top+"px"),n.fromTo("opacity",.4,0),Promise.resolve(o.addElement(t).easing("ease-out").duration(250).add(n).add(i))}function mdEnterAnimation(e,t){var o=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var i=new e;return i.addElement(t.querySelector(".modal-wrapper")),i.fromTo("opacity",.01,1).fromTo("translateY","40px","0px"),n.fromTo("opacity",.01,.4),Promise.resolve(o.addElement(t).easing("cubic-bezier(0.36,0.66,0.04,1)").duration(280).beforeAddClass("show-modal").add(n).add(i))}function mdLeaveAnimation(e,t){var o=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var i=new e,r=t.querySelector(".modal-wrapper");return i.addElement(r),i.fromTo("opacity",.99,0).fromTo("translateY","0px","40px"),n.fromTo("opacity",.4,0),Promise.resolve(o.addElement(t).easing("cubic-bezier(0.47,0,0.745,0.715)").duration(200).add(n).add(i))}var Modal=function(){function e(){this.presented=!1,this.keyboardClose=!0,this.backdropDismiss=!0,this.showBackdrop=!0,this.animated=!0}return e.prototype.componentDidLoad=function(){this.ionModalDidLoad.emit()},e.prototype.componentDidUnload=function(){this.ionModalDidUnload.emit()},e.prototype.onDismiss=function(e){return e.stopPropagation(),e.preventDefault(),this.dismiss()},e.prototype.onBackdropTap=function(){return this.dismiss(null,_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["a"])},e.prototype.lifecycle=function(e){var t=this.usersElement,o=LIFECYCLE_MAP[e.type];if(t&&o){var n=new CustomEvent(o,{bubbles:!1,cancelable:!1,detail:e.detail});t.dispatchEvent(n)}},e.prototype.present=function(){return __awaiter(this,void 0,void 0,function(){var e,t,o;return __generator(this,function(n){switch(n.label){case 0:if(this.presented)return[2];if(!(e=this.el.querySelector(".modal-wrapper")))throw new Error("container is undefined");return t=Object.assign({},this.componentProps,{modal:this.el}),o=this,[4,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["a"])(this.delegate,e,this.component,["ion-page"],t)];case 1:return o.usersElement=n.sent(),[4,Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_3__["a"])(this.usersElement)];case 2:return n.sent(),[2,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this,"modalEnter",iosEnterAnimation,mdEnterAnimation)]}})})},e.prototype.dismiss=function(e,t){return __awaiter(this,void 0,void 0,function(){var o;return __generator(this,function(n){switch(n.label){case 0:return[4,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this,e,t,"modalLeave",iosLeaveAnimation,mdLeaveAnimation)];case 1:return(o=n.sent())?[4,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this.delegate,this.usersElement)]:[3,3];case 2:n.sent(),n.label=3;case 3:return[2,o]}})})},e.prototype.onDidDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el,"ionModalDidDismiss")},e.prototype.onWillDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el,"ionModalWillDismiss")},e.prototype.hostData=function(){return{"no-router":!0,class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["m"])(this.mode,"modal"),Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["j"])(this.cssClass)),style:{zIndex:2e4+this.overlayIndex}}},e.prototype.render=function(){var e=Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["m"])(this.mode,"modal-wrapper");return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-backdrop",{visible:this.showBackdrop,tappable:this.backdropDismiss}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{role:"dialog",class:e})]},Object.defineProperty(e,"is",{get:function(){return"ion-modal"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{animated:{type:Boolean,attr:"animated"},animationCtrl:{connect:"ion-animation-controller"},backdropDismiss:{type:Boolean,attr:"backdrop-dismiss"},component:{type:String,attr:"component"},componentProps:{type:"Any",attr:"component-props"},config:{context:"config"},cssClass:{type:String,attr:"css-class"},delegate:{type:"Any",attr:"delegate"},dismiss:{method:!0},el:{elementRef:!0},enterAnimation:{type:"Any",attr:"enter-animation"},keyboardClose:{type:Boolean,attr:"keyboard-close"},leaveAnimation:{type:"Any",attr:"leave-animation"},mode:{type:String,attr:"mode"},onDidDismiss:{method:!0},onWillDismiss:{method:!0},overlayIndex:{type:Number,attr:"overlay-index"},present:{method:!0},showBackdrop:{type:Boolean,attr:"show-backdrop"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionModalDidLoad",method:"ionModalDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionModalDidUnload",method:"ionModalDidUnload",bubbles:!0,cancelable:!0,composed:!0},{name:"ionModalDidPresent",method:"didPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionModalWillPresent",method:"willPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionModalWillDismiss",method:"willDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionModalDidDismiss",method:"didDismiss",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionDismiss",method:"onDismiss"},{name:"ionBackdropTap",method:"onBackdropTap"},{name:"ionModalDidPresent",method:"lifecycle"},{name:"ionModalWillPresent",method:"lifecycle"},{name:"ionModalWillDismiss",method:"lifecycle"},{name:"ionModalDidDismiss",method:"lifecycle"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-modal{left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;contain:strict}ion-modal-controller{display:none}\@media not all and (min-width:768px) and (min-height:600px){ion-modal ion-backdrop{display:none}}.modal-wrapper{width:100%;height:100%;contain:strict;z-index:10}\@media only screen and (min-width:768px) and (min-height:600px){.modal-wrapper{width:600px;height:500px}.modal-wrapper-md{border-radius:2px;-webkit-box-shadow:0 28px 48px rgba(0,0,0,.4);box-shadow:0 28px 48px rgba(0,0,0,.4);overflow:hidden}}\@media only screen and (min-width:768px) and (min-height:768px){.modal-wrapper{width:600px;height:600px}}.modal-wrapper-md{-webkit-transform:translate3d(0,40px,0);transform:translate3d(0,40px,0);opacity:.01}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"md"},enumerable:!0,configurable:!0}),e}(),LIFECYCLE_MAP={ionModalDidPresent:"ionViewDidEnter",ionModalWillPresent:"ionViewWillEnter",ionModalWillDismiss:"ionViewWillDismiss",ionModalDidDismiss:"ionViewDidDismiss"},ModalController=function(){function e(){}return e.prototype.create=function(e){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement("ion-modal"),e)},e.prototype.dismiss=function(e,t,o){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc,e,t,"ion-modal",o)},e.prototype.getTop=function(){return __awaiter(this,void 0,void 0,function(){return __generator(this,function(e){return[2,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc,"ion-modal")]})})},Object.defineProperty(e,"is",{get:function(){return"ion-modal-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{create:{method:!0},dismiss:{method:!0},doc:{context:"document"},getTop:{method:!0}}},enumerable:!0,configurable:!0}),e}();
+
+
+
+var Searchbar = /** @class */ (function () {
+    function Searchbar() {
+        this.isCancelVisible = false;
+        this.shouldAlignLeft = true;
+        this.focused = false;
+        this.animated = false;
+        this.autocomplete = 'off';
+        this.autocorrect = 'off';
+        this.cancelButtonIcon = 'md-arrow-back';
+        this.cancelButtonText = 'Cancel';
+        this.debounce = 250;
+        this.placeholder = 'Search';
+        this.showCancelButton = false;
+        this.spellcheck = false;
+        this.type = 'search';
+        this.value = '';
+    }
+    Searchbar.prototype.debounceChanged = function () {
+        this.ionChange = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["g"])(this.ionChange, this.debounce);
+    };
+    Searchbar.prototype.valueChanged = function () {
+        var inputEl = this.nativeInput;
+        var value = this.value;
+        if (inputEl.value !== value) {
+            inputEl.value = value;
+        }
+        this.ionChange.emit({ value: value });
+    };
+    Searchbar.prototype.componentDidLoad = function () {
+        this.positionElements();
+        this.debounceChanged();
+    };
+    Searchbar.prototype.focus = function () {
+        this.nativeInput.focus();
+    };
+    Searchbar.prototype.clearInput = function (ev) {
+        var _this = this;
+        this.ionClear.emit();
+        if (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+        }
+        setTimeout(function () {
+            var value = _this.value;
+            if (value !== '') {
+                _this.value = '';
+                _this.ionInput.emit();
+            }
+        }, 16 * 4);
+    };
+    Searchbar.prototype.cancelSearchbar = function (ev) {
+        if (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+        }
+        this.ionCancel.emit();
+        this.clearInput();
+        this.nativeInput.blur();
+    };
+    Searchbar.prototype.onInput = function (ev) {
+        var input = ev.target;
+        if (input) {
+            this.value = input.value;
+        }
+        this.ionInput.emit(ev);
+    };
+    Searchbar.prototype.onBlur = function () {
+        this.focused = false;
+        this.ionBlur.emit();
+        this.positionElements();
+    };
+    Searchbar.prototype.onFocus = function () {
+        this.focused = true;
+        this.ionFocus.emit();
+        this.positionElements();
+    };
+    Searchbar.prototype.positionElements = function () {
+        var prevAlignLeft = this.shouldAlignLeft;
+        var shouldAlignLeft = (!this.animated || (this.value && this.value.toString().trim() !== '') || !!this.focused);
+        this.shouldAlignLeft = shouldAlignLeft;
+        if (this.mode !== 'ios') {
+            return;
+        }
+        if (prevAlignLeft !== shouldAlignLeft) {
+            this.positionPlaceholder();
+        }
+        if (this.animated) {
+            this.positionCancelButton();
+        }
+    };
+    Searchbar.prototype.positionPlaceholder = function () {
+        var isRTL = this.doc.dir === 'rtl';
+        var inputEl = this.nativeInput;
+        var iconEl = (this.el.shadowRoot || this.el).querySelector('.searchbar-search-icon');
+        if (this.shouldAlignLeft) {
+            inputEl.removeAttribute('style');
+            iconEl.removeAttribute('style');
+        }
+        else {
+            var doc = this.doc;
+            var tempSpan = doc.createElement('span');
+            tempSpan.innerHTML = this.placeholder;
+            doc.body.appendChild(tempSpan);
+            var textWidth = tempSpan.offsetWidth;
+            tempSpan.remove();
+            var inputLeft = 'calc(50% - ' + (textWidth / 2) + 'px)';
+            var iconLeft = 'calc(50% - ' + ((textWidth / 2) + 30) + 'px)';
+            if (isRTL) {
+                inputEl.style.paddingRight = inputLeft;
+                iconEl.style.marginRight = iconLeft;
+            }
+            else {
+                inputEl.style.paddingLeft = inputLeft;
+                iconEl.style.marginLeft = iconLeft;
+            }
+        }
+    };
+    Searchbar.prototype.positionCancelButton = function () {
+        var isRTL = this.doc.dir === 'rtl';
+        var cancelButton = (this.el.shadowRoot || this.el).querySelector('.searchbar-cancel-button');
+        var shouldShowCancel = this.focused;
+        if (cancelButton && shouldShowCancel !== this.isCancelVisible) {
+            var cancelStyle = cancelButton.style;
+            this.isCancelVisible = shouldShowCancel;
+            if (shouldShowCancel) {
+                if (isRTL) {
+                    cancelStyle.marginLeft = '0';
+                }
+                else {
+                    cancelStyle.marginRight = '0';
+                }
+            }
+            else {
+                var offset = cancelButton.offsetWidth;
+                if (offset > 0) {
+                    if (isRTL) {
+                        cancelStyle.marginLeft = -offset + 'px';
+                    }
+                    else {
+                        cancelStyle.marginRight = -offset + 'px';
+                    }
+                }
+            }
+        }
+    };
+    Searchbar.prototype.hostData = function () {
+        return {
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), { 'searchbar-animated': this.animated, 'searchbar-has-value': (this.value !== ''), 'searchbar-show-cancel': this.showCancelButton, 'searchbar-left-aligned': this.shouldAlignLeft, 'searchbar-has-focus': this.focused })
+        };
+    };
+    Searchbar.prototype.render = function () {
+        var _this = this;
+        var clearIcon = this.clearIcon || (this.mode === 'ios' ? 'ios-close-circle' : 'md-close');
+        var searchIcon = this.searchIcon || 'search';
+        var cancelButton = this.showCancelButton && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", { type: "button", tabIndex: this.mode === 'ios' && !this.focused ? -1 : undefined, onMouseDown: this.cancelSearchbar.bind(this), onTouchStart: this.cancelSearchbar.bind(this), class: "searchbar-cancel-button" }, this.mode === 'md'
+            ? Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { mode: this.mode, icon: this.cancelButtonIcon, lazy: false })
+            : this.cancelButtonText));
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "searchbar-input-container" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input", { ref: function (el) { return _this.nativeInput = el; }, class: "searchbar-input", onInput: this.onInput.bind(this), onBlur: this.onBlur.bind(this), onFocus: this.onFocus.bind(this), placeholder: this.placeholder, type: this.type, value: this.value, autoComplete: this.autocomplete, autoCorrect: this.autocorrect, spellCheck: this.spellcheck }), this.mode === 'md' && cancelButton, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { mode: this.mode, icon: searchIcon, lazy: false, class: "searchbar-search-icon" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", { type: "button", "no-blur": true, class: "searchbar-clear-button", onMouseDown: this.clearInput.bind(this), onTouchStart: this.clearInput.bind(this) }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { mode: this.mode, icon: clearIcon, lazy: false, class: "searchbar-clear-icon" }))),
+            this.mode === 'ios' && cancelButton
+        ];
+    };
+    Object.defineProperty(Searchbar, "is", {
+        get: function () { return "ion-searchbar"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Searchbar, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Searchbar, "properties", {
+        get: function () {
+            return {
+                "animated": {
+                    "type": Boolean,
+                    "attr": "animated"
+                },
+                "autocomplete": {
+                    "type": String,
+                    "attr": "autocomplete"
+                },
+                "autocorrect": {
+                    "type": String,
+                    "attr": "autocorrect"
+                },
+                "cancelButtonIcon": {
+                    "type": String,
+                    "attr": "cancel-button-icon"
+                },
+                "cancelButtonText": {
+                    "type": String,
+                    "attr": "cancel-button-text"
+                },
+                "clearIcon": {
+                    "type": String,
+                    "attr": "clear-icon"
+                },
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "debounce": {
+                    "type": Number,
+                    "attr": "debounce",
+                    "watchCallbacks": ["debounceChanged"]
+                },
+                "doc": {
+                    "context": "document"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "focus": {
+                    "method": true
+                },
+                "focused": {
+                    "state": true
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "placeholder": {
+                    "type": String,
+                    "attr": "placeholder"
+                },
+                "searchIcon": {
+                    "type": String,
+                    "attr": "search-icon"
+                },
+                "showCancelButton": {
+                    "type": Boolean,
+                    "attr": "show-cancel-button"
+                },
+                "spellcheck": {
+                    "type": Boolean,
+                    "attr": "spellcheck"
+                },
+                "type": {
+                    "type": String,
+                    "attr": "type"
+                },
+                "value": {
+                    "type": String,
+                    "attr": "value",
+                    "mutable": true,
+                    "watchCallbacks": ["valueChanged"]
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Searchbar, "events", {
+        get: function () {
+            return [{
+                    "name": "ionInput",
+                    "method": "ionInput",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionChange",
+                    "method": "ionChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionCancel",
+                    "method": "ionCancel",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionClear",
+                    "method": "ionClear",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionBlur",
+                    "method": "ionBlur",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionFocus",
+                    "method": "ionFocus",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Searchbar, "style", {
+        get: function () { return ".sc-ion-searchbar-md-h{--placeholder-color:currentColor;--placeholder-font-style:inherit;--placeholder-font-weight:inherit;--placeholder-opacity:.5;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;color:var(--color);font-family:var(--ion-font-family,inherit);-webkit-box-sizing:border-box;box-sizing:border-box}.ion-color.sc-ion-searchbar-md-h{color:var(--ion-color-contrast)}.ion-color.sc-ion-searchbar-md-h   .searchbar-input.sc-ion-searchbar-md{background:var(--ion-color-base)}.ion-color.sc-ion-searchbar-md-h   .searchbar-cancel-button.sc-ion-searchbar-md, .ion-color.sc-ion-searchbar-md-h   .searchbar-clear-button.sc-ion-searchbar-md, .ion-color.sc-ion-searchbar-md-h   .searchbar-search-icon.sc-ion-searchbar-md{color:inherit}.searchbar-search-icon.sc-ion-searchbar-md{color:var(--icon-color);pointer-events:none}.searchbar-input-container.sc-ion-searchbar-md{display:block;position:relative;-ms-flex-negative:1;flex-shrink:1;width:100%}.searchbar-input.sc-ion-searchbar-md{font-family:inherit;font-style:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;-webkit-box-sizing:border-box;box-sizing:border-box;display:block;width:100%;border:0;outline:0;background:var(--background);font-family:inherit;-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-input.sc-ion-searchbar-md::-webkit-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md:-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::-webkit-search-cancel-button{display:none}.searchbar-cancel-button.sc-ion-searchbar-md{color:var(--cancel-button-color)}.searchbar-clear-button.sc-ion-searchbar-md{margin:0;display:none;min-height:0;outline:0;color:var(--clear-button-color);-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-has-value.searchbar-has-focus.sc-ion-searchbar-md-h   .searchbar-clear-button.sc-ion-searchbar-md{display:block}.sc-ion-searchbar-md-h{--clear-button-color:currentColor;--cancel-button-color:var(--ion-text-color-step-100, #1a1a1a);--color:var(--ion-text-color-step-150, #262626);--icon-color:var(--ion-text-color-step-400, #666666);--background:var(--ion-background-color, #fff);padding:8px;background:inherit}.searchbar-search-icon.sc-ion-searchbar-md{left:16px;top:11px;width:21px;height:21px}.searchbar-cancel-button.sc-ion-searchbar-md{left:10px;top:0;margin:0;display:none;height:100%;border:0;background-color:transparent;font-size:1.8em}.searchbar-cancel-button.sc-ion-searchbar-md, .searchbar-search-icon.sc-ion-searchbar-md{position:absolute}.searchbar-cancel-button.activated.sc-ion-searchbar-md, .searchbar-search-icon.activated.sc-ion-searchbar-md{background-color:transparent}.searchbar-input.sc-ion-searchbar-md{padding:6px 55px;border-radius:2px;background-position:left 8px center;height:auto;font-size:16px;font-weight:400;line-height:30px;-webkit-box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12)}.searchbar-clear-button.sc-ion-searchbar-md{right:13px;top:0;padding:0;position:absolute;height:100%;border:0;background-color:transparent}.searchbar-clear-button.activated.sc-ion-searchbar-md{background-color:transparent}.searchbar-clear-icon.sc-ion-searchbar-md{width:22px;height:100%}.searchbar-has-focus.searchbar-show-cancel.sc-ion-searchbar-md-h   .searchbar-search-icon.sc-ion-searchbar-md{display:none}.searchbar-has-focus.searchbar-show-cancel.sc-ion-searchbar-md-h   .searchbar-cancel-button.sc-ion-searchbar-md{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex}ion-toolbar.sc-ion-searchbar-md-h, ion-toolbar   .sc-ion-searchbar-md-h{padding:3px}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Searchbar, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Searchbar;
+}());
+
+
 
 /***/ })
 

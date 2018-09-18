@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { fromPromise } from 'rxjs/observable/fromPromise';
 import { tap } from 'rxjs/operators';
 import { StatusBarStyle } from '@capacitor/core';
+import { from } from 'rxjs';
 
 import { StatusBar } from '../../constants/capacitor.const';
 
@@ -61,7 +61,7 @@ export class PagePublisher implements OnInit
     {
         const translations: Array<string> = this.translations;
 
-        fromPromise(this.actionSheetController.create
+        from(this.actionSheetController.create
         ({
             header : translations['page.assets.add'],
 

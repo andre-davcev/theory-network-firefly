@@ -1,24 +1,176 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[72],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hx2ygwkr.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/hx2ygwkr.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonActionSheet, IonActionSheetController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kuy3ry2b.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kuy3ry2b.sc.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonCheckbox */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonActionSheet", function() { return ActionSheet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonActionSheetController", function() { return ActionSheetController; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCheckbox", function() { return Checkbox; });
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-ca273e40.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-ca273e40.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,n,o){return new(n||(n=Promise))(function(i,r){function a(e){try{c(o.next(e))}catch(e){r(e)}}function s(e){try{c(o.throw(e))}catch(e){r(e)}}function c(e){e.done?i(e.value):new n(function(t){t(e.value)}).then(a,s)}c((o=o.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var n,o,i,r,a={label:0,sent:function(){if(1&i[0])throw i[1];return i[1]},trys:[],ops:[]};return r={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(r[Symbol.iterator]=function(){return this}),r;function s(r){return function(s){return function(r){if(n)throw new TypeError("Generator is already executing.");for(;a;)try{if(n=1,o&&(i=2&r[0]?o.return:r[0]?o.throw||((i=o.return)&&i.call(o),0):o.next)&&!(i=i.call(o,r[1])).done)return i;switch(o=0,i&&(r=[2&r[0],i.value]),r[0]){case 0:case 1:i=r;break;case 4:return a.label++,{value:r[1],done:!1};case 5:a.label++,o=r[1],r=[0];continue;case 7:r=a.ops.pop(),a.trys.pop();continue;default:if(!(i=(i=a.trys).length>0&&i[i.length-1])&&(6===r[0]||2===r[0])){a=0;continue}if(3===r[0]&&(!i||r[1]>i[0]&&r[1]<i[3])){a.label=r[1];break}if(6===r[0]&&a.label<i[1]){a.label=i[1],i=r;break}if(i&&a.label<i[2]){a.label=i[2],a.ops.push(r);break}i[2]&&a.ops.pop(),a.trys.pop();continue}r=t.call(e,a)}catch(e){r=[6,e],o=0}finally{n=i=0}if(5&r[0])throw r[1];return{value:r[0]?r[1]:void 0,done:!0}}([r,s])}}};function iosEnterAnimation(e,t){var n=new e,o=new e;o.addElement(t.querySelector("ion-backdrop"));var i=new e;i.addElement(t.querySelector(".action-sheet-wrapper")),o.fromTo("opacity",.01,.4),i.fromTo("translateY","100%","0%");var r=n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(400).add(o).add(i);return Promise.resolve(r)}function iosLeaveAnimation(e,t){var n=new e,o=new e;o.addElement(t.querySelector("ion-backdrop"));var i=new e;i.addElement(t.querySelector(".action-sheet-wrapper")),o.fromTo("opacity",.4,0),i.fromTo("translateY","0%","100%");var r=n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(450).add(o).add(i);return Promise.resolve(r)}function mdEnterAnimation(e,t){var n=new e,o=new e;o.addElement(t.querySelector("ion-backdrop"));var i=new e;i.addElement(t.querySelector(".action-sheet-wrapper")),o.fromTo("opacity",.01,.26),i.fromTo("translateY","100%","0%");var r=n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(400).add(o).add(i);return Promise.resolve(r)}function mdLeaveAnimation(e,t){var n=new e,o=new e;o.addElement(t.querySelector("ion-backdrop"));var i=new e;i.addElement(t.querySelector(".action-sheet-wrapper")),o.fromTo("opacity",.26,0),i.fromTo("translateY","0%","100%");var r=n.addElement(t).easing("cubic-bezier(.36,.66,.04,1)").duration(450).add(o).add(i);return Promise.resolve(r)}var ActionSheet=function(){function e(){this.presented=!1,this.keyboardClose=!0,this.backdropDismiss=!0,this.translucent=!1,this.animated=!0}return e.prototype.componentDidLoad=function(){this.ionActionSheetDidLoad.emit()},e.prototype.componentDidUnload=function(){this.ionActionSheetDidUnload.emit()},e.prototype.onBackdropTap=function(){return this.dismiss(null,_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["a"])},e.prototype.dispatchCancelHandler=function(e){var t=e.detail.role;if(Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["d"])(t)){var n=this.getButtons().find(function(e){return"cancel"===e.role});this.callButtonHandler(n)}},e.prototype.present=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["e"])(this,"actionSheetEnter",iosEnterAnimation,mdEnterAnimation)},e.prototype.dismiss=function(e,t){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this,e,t,"actionSheetLeave",iosLeaveAnimation,mdLeaveAnimation)},e.prototype.onDidDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["c"])(this.el,"ionActionSheetDidDismiss")},e.prototype.onWillDismiss=function(){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["c"])(this.el,"ionActionSheetWillDismiss")},e.prototype.buttonClick=function(e){var t=e.role;return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["d"])(t)?this.dismiss(void 0,t):this.callButtonHandler(e)?this.dismiss(void 0,e.role):Promise.resolve()},e.prototype.callButtonHandler=function(e){if(e&&e.handler)try{if(!1===e.handler())return!1}catch(e){console.error(e)}return!0},e.prototype.getButtons=function(){return this.buttons.map(function(e){return"string"==typeof e?{text:e}:e})},e.prototype.hostData=function(){return{style:{zIndex:2e4+this.overlayIndex},class:Object.assign({},Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["j"])(this.cssClass),{"action-sheet-translucent":this.translucent})}},e.prototype.render=function(){var e=this,t=this.getButtons(),n=t.find(function(e){return"cancel"===e.role}),o=t.filter(function(e){return"cancel"!==e.role});return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-backdrop",{tappable:this.backdropDismiss}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"action-sheet-wrapper",role:"dialog"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"action-sheet-container"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"action-sheet-group"},void 0!==this.header&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"action-sheet-title"},this.header,this.subHeader&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"action-sheet-sub-title"},this.subHeader)),o.map(function(t){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button",{type:"button","ion-activable":!0,class:buttonClass(t),onClick:function(){return e.buttonClick(t)}},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span",{class:"action-sheet-button-inner"},t.icon&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon",{icon:t.icon,lazy:!1,class:"action-sheet-icon"}),t.text))})),n&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"action-sheet-group action-sheet-group-cancel"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button",{"ion-activable":!0,type:"button",class:buttonClass(n),onClick:function(){return e.buttonClick(n)}},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span",{class:"action-sheet-button-inner"},n.icon&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon",{icon:n.icon,lazy:!1,class:"action-sheet-icon"}),n.text)))))]},Object.defineProperty(e,"is",{get:function(){return"ion-action-sheet"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"scoped"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{animated:{type:Boolean,attr:"animated"},animationCtrl:{connect:"ion-animation-controller"},backdropDismiss:{type:Boolean,attr:"backdrop-dismiss"},buttons:{type:"Any",attr:"buttons"},config:{context:"config"},cssClass:{type:String,attr:"css-class"},dismiss:{method:!0},el:{elementRef:!0},enterAnimation:{type:"Any",attr:"enter-animation"},header:{type:String,attr:"header"},keyboardClose:{type:Boolean,attr:"keyboard-close"},leaveAnimation:{type:"Any",attr:"leave-animation"},mode:{type:String,attr:"mode"},onDidDismiss:{method:!0},onWillDismiss:{method:!0},overlayIndex:{type:Number,attr:"overlay-index"},present:{method:!0},subHeader:{type:String,attr:"sub-header"},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionActionSheetDidLoad",method:"ionActionSheetDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionActionSheetDidUnload",method:"ionActionSheetDidUnload",bubbles:!0,cancelable:!0,composed:!0},{name:"ionActionSheetDidPresent",method:"didPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionActionSheetWillPresent",method:"willPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionActionSheetWillDismiss",method:"willDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionActionSheetDidDismiss",method:"didDismiss",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionBackdropTap",method:"onBackdropTap"},{name:"ionActionSheetWillDismiss",method:"dispatchCancelHandler"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-action-sheet-ios-h{--width:100%;--max-width:500px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;left:0;right:0;top:0;bottom:0;display:block;position:fixed;font-family:var(--ion-font-family,inherit);-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1000;text-align:center}.action-sheet-wrapper.sc-ion-action-sheet-ios{left:0;right:0;top:0;bottom:0;margin:auto;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);display:block;position:absolute;width:var(--width);max-width:var(--max-width);z-index:10;pointer-events:none;margin:var(--ion-safe-area-top,0) auto var(--ion-safe-area-bottom,0)}.action-sheet-button.sc-ion-action-sheet-ios{width:var(--width);border:0;outline:0;font-family:inherit}.action-sheet-button-inner.sc-ion-action-sheet-ios{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.action-sheet-container.sc-ion-action-sheet-ios{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column;flex-flow:column;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;height:100%;max-height:100%;padding:0 10px}.action-sheet-group.sc-ion-action-sheet-ios{-ms-flex-negative:2;flex-shrink:2;overscroll-behavior-y:contain;overflow-y:scroll;-webkit-overflow-scrolling:touch;pointer-events:all;border-radius:13px;margin-bottom:8px;background:var(--ion-overlay-background-color,#f9f9f9)}.action-sheet-group.sc-ion-action-sheet-ios::-webkit-scrollbar{display:none}.action-sheet-group-cancel.sc-ion-action-sheet-ios{-ms-flex-negative:0;flex-shrink:0;overflow:hidden}.action-sheet-group.sc-ion-action-sheet-ios:first-child{margin-top:10px}.action-sheet-group.sc-ion-action-sheet-ios:last-child{margin-bottom:10px}.action-sheet-translucent.sc-ion-action-sheet-ios-h   .action-sheet-group.sc-ion-action-sheet-ios{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.action-sheet-title.sc-ion-action-sheet-ios{padding:14px 14px 13px;border-bottom:.55px solid rgba(var(--ion-text-color-rgb,0,0,0),.2);color:var(--ion-text-color-step-600,#999);font-size:13px;font-weight:400;text-align:center}.action-sheet-sub-title.sc-ion-action-sheet-ios{padding:15px 0 0;font-size:12px}.action-sheet-button.sc-ion-action-sheet-ios{margin:0;padding:18px;height:56px;border-bottom:.55px solid rgba(var(--ion-text-color-rgb,0,0,0),.2);background:0 0;color:var(--ion-color-primary,#3880ff);font-size:20px;contain:strict}.action-sheet-button.sc-ion-action-sheet-ios   .action-sheet-icon.sc-ion-action-sheet-ios{margin-right:.1em;font-size:28px}.action-sheet-button.sc-ion-action-sheet-ios:last-child{border-bottom-color:transparent}.action-sheet-button.activated.sc-ion-action-sheet-ios{margin-top:-.55px;border-top:.55px solid rgba(var(--ion-text-color-rgb,0,0,0),.1);border-bottom-color:rgba(var(--ion-text-color-rgb,0,0,0),.1);background:rgba(var(--ion-text-color-rgb,0,0,0),.1)}.action-sheet-selected.sc-ion-action-sheet-ios{background:var(--ion-background-color,#fff);font-weight:700}.action-sheet-destructive.sc-ion-action-sheet-ios{color:var(--ion-color-danger,#f04141)}.action-sheet-cancel.sc-ion-action-sheet-ios{background:var(--ion-background-color,#fff);font-weight:600}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}();function buttonClass(e){var t;return Object.assign(((t={"action-sheet-button":!0})["action-sheet-"+e.role]=void 0!==e.role,t),Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_2__["j"])(e.cssClass))}var ActionSheetController=function(){function e(){}return e.prototype.create=function(e){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["f"])(this.doc.createElement("ion-action-sheet"),e)},e.prototype.dismiss=function(e,t,n){return Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["g"])(this.doc,e,t,"ion-action-sheet",n)},e.prototype.getTop=function(){return __awaiter(this,void 0,void 0,function(){return __generator(this,function(e){return[2,Object(_chunk_ca273e40_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.doc,"ion-action-sheet")]})})},Object.defineProperty(e,"is",{get:function(){return"ion-action-sheet-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{create:{method:!0},dismiss:{method:!0},doc:{context:"document"},getTop:{method:!0}}},enumerable:!0,configurable:!0}),e}();
+
+
+
+var Checkbox = /** @class */ (function () {
+    function Checkbox() {
+        this.inputId = "ion-cb-" + checkboxIds++;
+        this.labelId = this.inputId + "-lbl";
+        this.keyFocus = false;
+        this.name = this.inputId;
+        this.checked = false;
+        this.disabled = false;
+        this.value = 'on';
+    }
+    Checkbox.prototype.componentWillLoad = function () {
+        this.emitStyle();
+    };
+    Checkbox.prototype.componentDidLoad = function () {
+        this.ionStyle = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["e"])(this.ionStyle);
+    };
+    Checkbox.prototype.checkedChanged = function (isChecked) {
+        this.ionChange.emit({
+            checked: isChecked,
+            value: this.value
+        });
+        this.emitStyle();
+    };
+    Checkbox.prototype.emitStyle = function () {
+        this.ionStyle.emit({
+            'checkbox-checked': this.checked,
+            'interactive-disabled': this.disabled,
+        });
+    };
+    Checkbox.prototype.onChange = function () {
+        this.checked = !this.checked;
+    };
+    Checkbox.prototype.onKeyUp = function () {
+        this.keyFocus = true;
+    };
+    Checkbox.prototype.onFocus = function () {
+        this.ionFocus.emit();
+    };
+    Checkbox.prototype.onBlur = function () {
+        this.keyFocus = false;
+        this.ionBlur.emit();
+    };
+    Checkbox.prototype.hostData = function () {
+        return {
+            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), { 'in-item': Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["f"])('ion-item', this.el), 'checkbox-checked': this.checked, 'checkbox-disabled': this.disabled, 'checkbox-key': this.keyFocus, 'interactive': true })
+        };
+    };
+    Checkbox.prototype.render = function () {
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["f"])(this.el, this.name, this.value, this.disabled);
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "checkbox-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "checkbox-inner" })),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input", { type: "checkbox", id: this.inputId, "aria-labelledby": this.labelId, onChange: this.onChange.bind(this), onFocus: this.onFocus.bind(this), onBlur: this.onBlur.bind(this), onKeyUp: this.onKeyUp.bind(this), checked: this.checked, name: this.name, value: this.value, disabled: this.disabled })
+        ];
+    };
+    Object.defineProperty(Checkbox, "is", {
+        get: function () { return "ion-checkbox"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Checkbox, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Checkbox, "properties", {
+        get: function () {
+            return {
+                "checked": {
+                    "type": Boolean,
+                    "attr": "checked",
+                    "mutable": true,
+                    "watchCallbacks": ["checkedChanged"]
+                },
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "watchCallbacks": ["emitStyle"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "keyFocus": {
+                    "state": true
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "name": {
+                    "type": String,
+                    "attr": "name"
+                },
+                "value": {
+                    "type": String,
+                    "attr": "value"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Checkbox, "events", {
+        get: function () {
+            return [{
+                    "name": "ionChange",
+                    "method": "ionChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionFocus",
+                    "method": "ionFocus",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionBlur",
+                    "method": "ionBlur",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionStyle",
+                    "method": "ionStyle",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Checkbox, "style", {
+        get: function () { return ".sc-ion-checkbox-md-h{--background-checked:var(--ion-color-primary, #3880ff);--border-color-checked:var(--ion-color-primary, #3880ff);--checkmark-color:var(--ion-color-primary-contrast, #fff);display:inline-block;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--size:16px;--border-radius:calc(var(--size) * .125);--border-width:2px;--border-style:solid;--border-color:var(--ion-border-color, #c1c4cd);--background:var(--ion-item-background-color, var(--ion-background-color, #fff));--transition:background 280ms cubic-bezier(0.4, 0, 0.2, 1)}.ion-color.sc-ion-checkbox-md-h{--background-checked:var(--ion-color-base);--border-color-checked:var(--ion-color-base);--checkmark-color:var(--ion-color-contrast)}input.sc-ion-checkbox-md{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.checkbox-icon.sc-ion-checkbox-md{border-radius:var(--border-radius);position:relative;width:var(--size);height:var(--size);-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);contain:strict}.checkbox-inner.sc-ion-checkbox-md{border-color:var(--checkmark-color);opacity:0}.checkbox-checked.sc-ion-checkbox-md-h   .checkbox-icon.sc-ion-checkbox-md{border-color:var(--border-color-checked);background:var(--background-checked)}.checkbox-checked.sc-ion-checkbox-md-h   .checkbox-inner.sc-ion-checkbox-md{opacity:1;left:calc(var(--size) * .3);top:calc(var(--size) * .05);position:absolute;width:calc(var(--size) * .3125);height:calc(var(--size) * .625);-webkit-transform:rotate(45deg);transform:rotate(45deg);border-width:calc(var(--size) * .125);border-top-width:0;border-left-width:0;border-style:solid}.checkbox-disabled.sc-ion-checkbox-md-h{pointer-events:none;opacity:.3}.checkbox-key.sc-ion-checkbox-md-h   .checkbox-icon.sc-ion-checkbox-md::after{border-radius:50%;left:-12px;top:-12px;display:block;position:absolute;width:36px;height:36px;background:var(--ion-color-primary-tint,#4c8dff);content:\"\";opacity:.2}.in-item.sc-ion-checkbox-md-h{margin:9px 36px 9px 4px;display:block;position:static}.in-item[slot=end].sc-ion-checkbox-md-h{margin:11px 10px 10px 0}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Checkbox, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Checkbox;
+}());
+var checkboxIds = 0;
+
+
 
 /***/ })
 

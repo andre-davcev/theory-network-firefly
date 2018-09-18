@@ -1,23 +1,809 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[38],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/al4ydocp.sc.js":
-/*!***********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/al4ydocp.sc.js ***!
-  \***********************************************************************************************************************************/
-/*! exports provided: IonReorder, IonReorderGroup */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/amegv4d5.sc.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/amegv4d5.sc.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonVirtualScroll */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonReorder", function() { return Reorder; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonReorderGroup", function() { return ReorderGroup; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-a4253575.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/chunk-a4253575.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonVirtualScroll", function() { return VirtualScroll; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
-var __awaiter=undefined&&undefined.__awaiter||function(e,t,r,o){return new(r||(r=Promise))(function(n,i){function l(e){try{a(o.next(e))}catch(e){i(e)}}function s(e){try{a(o.throw(e))}catch(e){i(e)}}function a(e){e.done?n(e.value):new r(function(t){t(e.value)}).then(l,s)}a((o=o.apply(e,t||[])).next())})},__generator=undefined&&undefined.__generator||function(e,t){var r,o,n,i,l={label:0,sent:function(){if(1&n[0])throw n[1];return n[1]},trys:[],ops:[]};return i={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(i[Symbol.iterator]=function(){return this}),i;function s(i){return function(s){return function(i){if(r)throw new TypeError("Generator is already executing.");for(;l;)try{if(r=1,o&&(n=2&i[0]?o.return:i[0]?o.throw||((n=o.return)&&n.call(o),0):o.next)&&!(n=n.call(o,i[1])).done)return n;switch(o=0,n&&(i=[2&i[0],n.value]),i[0]){case 0:case 1:n=i;break;case 4:return l.label++,{value:i[1],done:!1};case 5:l.label++,o=i[1],i=[0];continue;case 7:i=l.ops.pop(),l.trys.pop();continue;default:if(!(n=(n=l.trys).length>0&&n[n.length-1])&&(6===i[0]||2===i[0])){l=0;continue}if(3===i[0]&&(!n||i[1]>n[0]&&i[1]<n[3])){l.label=i[1];break}if(6===i[0]&&l.label<n[1]){l.label=n[1],n=i;break}if(n&&l.label<n[2]){l.label=n[2],l.ops.push(i);break}n[2]&&l.ops.pop(),l.trys.pop();continue}i=t.call(e,l)}catch(e){i=[6,e],o=0}finally{r=n=0}if(5&i[0])throw i[1];return{value:i[0]?i[1]:void 0,done:!0}}([i,s])}}};var Reorder=function(){function e(){}return e.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot",null,Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon",{name:"reorder",lazy:!1,class:"reorder-icon"}))},Object.defineProperty(e,"is",{get:function(){return"ion-reorder"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"[slot].sc-ion-reorder-ios-h{display:none;line-height:0;z-index:100}.reorder-icon.sc-ion-reorder-ios{display:block;font-size:34px;opacity:.4}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),ReorderGroup=function(){function e(){this.lastToIndex=-1,this.cachedHeights=[],this.scrollElTop=0,this.scrollElBottom=0,this.scrollElInitial=0,this.containerTop=0,this.containerBottom=0,this.activated=!1,this.disabled=!0}return e.prototype.disabledChanged=function(){this.gesture&&this.gesture.setDisabled(this.disabled)},e.prototype.componentDidLoad=function(){return __awaiter(this,void 0,void 0,function(){var e,t,r,o=this;return __generator(this,function(n){switch(n.label){case 0:return(e=this.el.closest("ion-content"))?[4,e.componentOnReady()]:[3,3];case 1:return n.sent(),t=this,[4,e.getScrollElement()];case 2:t.scrollEl=n.sent(),n.label=3;case 3:return r=this,[4,__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/components/gesture.js"))];case 4:return r.gesture=n.sent().createGesture({el:this.doc.body,queue:this.queue,gestureName:"reorder",gesturePriority:90,disableScroll:!0,threshold:0,direction:"y",passive:!1,canStart:function(e){return o.canStart(e)},onStart:function(e){return o.onStart(e)},onMove:function(e){return o.onMove(e)},onEnd:function(){return o.onEnd()}}),this.disabledChanged(),[2]}})})},e.prototype.componentDidUnload=function(){this.onEnd()},e.prototype.canStart=function(e){if(this.selectedItemEl)return!1;var t=e.event.target.closest("ion-reorder");if(!t)return!1;var r=findReorderItem(t,this.el);return r?(e.data=r,!0):(console.error("reorder node not found"),!1)},e.prototype.onStart=function(e){e.event.preventDefault();var t=this.selectedItemEl=e.data,r=this.cachedHeights;r.length=0;var o=this.el.children;if(o&&0!==o.length){for(var n=0,i=0;i<o.length;i++){var l=o[i];n+=l.offsetHeight,r.push(n),l.$ionIndex=i}var s=this.el.getBoundingClientRect();if(this.containerTop=s.top,this.containerBottom=s.bottom,this.scrollEl){var a=this.scrollEl.getBoundingClientRect();this.scrollElInitial=this.scrollEl.scrollTop,this.scrollElTop=a.top+AUTO_SCROLL_MARGIN,this.scrollElBottom=a.bottom-AUTO_SCROLL_MARGIN}else this.scrollElInitial=0,this.scrollElTop=0,this.scrollElBottom=0;this.lastToIndex=indexForItem(t),this.selectedItemHeight=t.offsetHeight,this.activated=!0,t.classList.add(ITEM_REORDER_SELECTED),Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["e"])()}},e.prototype.onMove=function(e){var t=this.selectedItemEl;if(t){var r=this.autoscroll(e.currentY),o=this.containerTop-r,n=this.containerBottom-r,i=Math.max(o,Math.min(e.currentY,n)),l=r+i-e.startY,s=i-o,a=this.itemIndexForTop(s);if(a!==this.lastToIndex){var c=indexForItem(t);this.lastToIndex=a,Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["c"])(),this.reorderMove(c,a)}t.style.transform="translateY("+l+"px)"}},e.prototype.onEnd=function(){var e=this;this.activated=!1;var t=this.selectedItemEl;if(t){var r=this.el.children,o=this.lastToIndex,n=indexForItem(t),i=n<o?r[o+1]:r[o];this.el.insertBefore(t,i);for(var l=r.length,s=0;s<l;s++)r[s].style.transform="";var a=function(){e.selectedItemEl&&(e.selectedItemEl.style.transition="",e.selectedItemEl.classList.remove(ITEM_REORDER_SELECTED),e.selectedItemEl=void 0)};o===n?(t.style.transition="transform 200ms ease-in-out",setTimeout(a,200)):(a(),this.ionItemReorder.emit({from:n,to:o})),Object(_chunk_a4253575_js__WEBPACK_IMPORTED_MODULE_1__["d"])()}},e.prototype.itemIndexForTop=function(e){var t=this.cachedHeights,r=0;for(r=0;r<t.length&&!(t[r]>e);r++);return r},e.prototype.reorderMove=function(e,t){for(var r=this.selectedItemHeight,o=this.el.children,n=0;n<o.length;n++){var i="";n>e&&n<=t?i="translateY("+-r+"px)":n<e&&n>=t&&(i="translateY("+r+"px)"),o[n].style.transform=i}},e.prototype.autoscroll=function(e){if(!this.scrollEl)return 0;var t=0;return e<this.scrollElTop?t=-SCROLL_JUMP:e>this.scrollElBottom&&(t=SCROLL_JUMP),0!==t&&this.scrollEl.scrollBy(0,t),this.scrollEl.scrollTop-this.scrollElInitial},e.prototype.hostData=function(){return{class:{"reorder-enabled":!this.disabled,"reorder-list-active":this.activated}}},Object.defineProperty(e,"is",{get:function(){return"ion-reorder-group"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{activated:{state:!0},disabled:{type:Boolean,attr:"disabled",watchCallbacks:["disabledChanged"]},doc:{context:"document"},el:{elementRef:!0},queue:{context:"queue"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionItemReorder",method:"ionItemReorder",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".reorder-list-active>*{-webkit-transition:-webkit-transform .3s;transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s,-webkit-transform .3s;will-change:transform}.reorder-enabled{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.reorder-enabled ion-reorder{display:block;cursor:-webkit-grab;cursor:grab;pointer-events:all;-ms-touch-action:none;touch-action:none}.reorder-selected,.reorder-selected ion-reorder{cursor:-webkit-grabbing;cursor:grabbing}.reorder-selected{position:relative;-webkit-transition:none!important;transition:none!important;-webkit-box-shadow:0 0 10px rgba(0,0,0,.4);box-shadow:0 0 10px rgba(0,0,0,.4);opacity:.8;z-index:100}.reorder-visible ion-reorder .reorder-icon{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}"},enumerable:!0,configurable:!0}),e}();function indexForItem(e){return e.$ionIndex}function findReorderItem(e,t){for(var r,o=0;e&&o<6;){if((r=e.parentNode)===t)return e;e=r,o++}}var AUTO_SCROLL_MARGIN=60,SCROLL_JUMP=10,ITEM_REORDER_SELECTED="reorder-selected";
+
+var MIN_READS = 2;
+function updateVDom(dom, heightIndex, cells, range) {
+    for (var _i = 0, dom_1 = dom; _i < dom_1.length; _i++) {
+        var node = dom_1[_i];
+        node.change = 0;
+        node.d = true;
+    }
+    var toMutate = [];
+    var end = range.offset + range.length;
+    var _loop_1 = function (i) {
+        var cell = cells[i];
+        var node = dom.find(function (n) { return n.d && n.cell === cell; });
+        if (node) {
+            var top = heightIndex[i];
+            if (top !== node.top) {
+                node.top = top;
+                node.change = 1;
+            }
+            node.d = false;
+        }
+        else {
+            toMutate.push(cell);
+        }
+    };
+    for (var i = range.offset; i < end; i++) {
+        _loop_1(i);
+    }
+    var pool = dom.filter(function (n) { return n.d; });
+    var _loop_2 = function (cell) {
+        var node = pool.find(function (n) { return n.d && n.cell.type === cell.type; });
+        var index = cell.index;
+        if (node) {
+            node.d = false;
+            node.change = 2;
+            node.cell = cell;
+            node.top = heightIndex[index];
+        }
+        else {
+            dom.push({
+                d: false,
+                cell: cell,
+                visible: true,
+                change: 2,
+                top: heightIndex[index],
+            });
+        }
+    };
+    for (var _a = 0, toMutate_1 = toMutate; _a < toMutate_1.length; _a++) {
+        var cell = toMutate_1[_a];
+        _loop_2(cell);
+    }
+    dom
+        .filter(function (n) { return n.d && n.top !== -9999; })
+        .forEach(function (n) {
+        n.change = 1;
+        n.top = -9999;
+    });
+}
+function doRender(el, nodeRender, dom, updateCellHeight) {
+    var children = Array.from(el.children).filter(function (n) { return n.tagName !== 'TEMPLATE'; });
+    var childrenNu = children.length;
+    var child;
+    for (var i = 0; i < dom.length; i++) {
+        var node = dom[i];
+        var cell = node.cell;
+        if (node.change === 2) {
+            if (i < childrenNu) {
+                child = children[i];
+                nodeRender(child, cell, i);
+            }
+            else {
+                var newChild = createNode(el, cell.type);
+                child = nodeRender(newChild, cell, i) || newChild;
+                child.classList.add('virtual-item');
+                el.appendChild(child);
+            }
+            child['$ionCell'] = cell;
+        }
+        else {
+            child = children[i];
+        }
+        if (node.change !== 0) {
+            child.style.transform = "translate3d(0," + node.top + "px,0)";
+        }
+        var visible = cell.visible;
+        if (node.visible !== visible) {
+            if (visible) {
+                child.classList.remove('virtual-loading');
+            }
+            else {
+                child.classList.add('virtual-loading');
+            }
+            node.visible = visible;
+        }
+        if (cell.reads > 0) {
+            updateCellHeight(cell, child);
+            cell.reads--;
+        }
+    }
+}
+function createNode(el, type) {
+    var template = getTemplate(el, type);
+    if (template) {
+        return el.ownerDocument.importNode(template.content, true).children[0];
+    }
+    return null;
+}
+function getTemplate(el, type) {
+    switch (type) {
+        case 0: return el.querySelector('template:not([name])');
+        case 1: return el.querySelector('template[name=header]');
+        case 2: return el.querySelector('template[name=footer]');
+    }
+}
+function getViewport(scrollTop, vierportHeight, margin) {
+    return {
+        top: Math.max(scrollTop - margin, 0),
+        bottom: scrollTop + vierportHeight + margin
+    };
+}
+function getRange(heightIndex, viewport, buffer) {
+    var topPos = viewport.top;
+    var bottomPos = viewport.bottom;
+    var i = 0;
+    for (; i < heightIndex.length; i++) {
+        if (heightIndex[i] > topPos) {
+            break;
+        }
+    }
+    var offset = Math.max(i - buffer - 1, 0);
+    for (; i < heightIndex.length; i++) {
+        if (heightIndex[i] >= bottomPos) {
+            break;
+        }
+    }
+    var end = Math.min(i + buffer, heightIndex.length);
+    var length = end - offset;
+    return { offset: offset, length: length };
+}
+function getShouldUpdate(dirtyIndex, currentRange, range) {
+    var end = range.offset + range.length;
+    return (dirtyIndex <= end ||
+        currentRange.offset !== range.offset ||
+        currentRange.length !== range.length);
+}
+function findCellIndex(cells, index) {
+    if (index === 0) {
+        return 0;
+    }
+    return cells.findIndex(function (c) { return c.index === index; });
+}
+function inplaceUpdate(dst, src, offset) {
+    if (offset === 0 && src.length >= dst.length) {
+        return src;
+    }
+    for (var i = 0; i < src.length; i++) {
+        dst[i + offset] = src[i];
+    }
+    return dst;
+}
+function calcCells(items, itemHeight, headerFn, footerFn, approxHeaderHeight, approxFooterHeight, approxItemHeight, j, offset, len) {
+    var cells = [];
+    var end = len + offset;
+    for (var i = offset; i < end; i++) {
+        var item = items[i];
+        if (headerFn) {
+            var value = headerFn(item, i, items);
+            if (value != null) {
+                cells.push({
+                    i: j++,
+                    type: 1,
+                    value: value,
+                    index: i,
+                    height: approxHeaderHeight,
+                    reads: MIN_READS,
+                    visible: false,
+                });
+            }
+        }
+        cells.push({
+            i: j++,
+            type: 0,
+            value: item,
+            index: i,
+            height: itemHeight ? itemHeight(item, i) : approxItemHeight,
+            reads: itemHeight ? 0 : MIN_READS,
+            visible: !!itemHeight,
+        });
+        if (footerFn) {
+            var value = footerFn(item, i, items);
+            if (value != null) {
+                cells.push({
+                    i: j++,
+                    type: 2,
+                    value: value,
+                    index: i,
+                    height: approxFooterHeight,
+                    reads: 2,
+                    visible: false,
+                });
+            }
+        }
+    }
+    return cells;
+}
+function calcHeightIndex(buf, cells, index) {
+    var acum = buf[index];
+    for (var i = index; i < buf.length; i++) {
+        buf[i] = acum;
+        acum += cells[i].height;
+    }
+    return acum;
+}
+function resizeBuffer(buf, len) {
+    if (!buf) {
+        return new Uint32Array(len);
+    }
+    if (buf.length === len) {
+        return buf;
+    }
+    else if (len > buf.length) {
+        var newBuf = new Uint32Array(len);
+        newBuf.set(buf);
+        return newBuf;
+    }
+    else {
+        return buf.subarray(0, len);
+    }
+}
+function positionForIndex(index, cells, heightIndex) {
+    var cell = cells.find(function (c) { return c.type === 0 && c.index === index; });
+    if (cell) {
+        return heightIndex[cell.i];
+    }
+    return -1;
+}
+var VirtualScroll = /** @class */ (function () {
+    function VirtualScroll() {
+        this.range = { offset: 0, length: 0 };
+        this.viewportHeight = 0;
+        this.cells = [];
+        this.virtualDom = [];
+        this.isEnabled = false;
+        this.viewportOffset = 0;
+        this.currentScrollTop = 0;
+        this.indexDirty = 0;
+        this.lastItemLen = 0;
+        this.totalHeight = 0;
+        this.approxItemHeight = 45;
+        this.approxHeaderHeight = 40;
+        this.approxFooterHeight = 40;
+    }
+    VirtualScroll.prototype.itemsChanged = function () {
+        this.calcCells();
+        this.updateVirtualScroll();
+    };
+    VirtualScroll.prototype.componentDidLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var contentEl, _a;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        contentEl = this.el.closest('ion-content');
+                        if (!contentEl) {
+                            console.error('virtual-scroll must be used inside ion-content');
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, contentEl.componentOnReady()];
+                    case 1:
+                        _b.sent();
+                        this.contentEl = contentEl;
+                        _a = this;
+                        return [4 /*yield*/, contentEl.getScrollElement()];
+                    case 2:
+                        _a.scrollEl = _b.sent();
+                        this.calcCells();
+                        this.updateState();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    VirtualScroll.prototype.componentDidUpdate = function () {
+        this.updateState();
+    };
+    VirtualScroll.prototype.componentDidUnload = function () {
+        this.scrollEl = undefined;
+    };
+    VirtualScroll.prototype.onScroll = function () {
+        this.updateVirtualScroll();
+    };
+    VirtualScroll.prototype.onResize = function () {
+        this.updateVirtualScroll();
+    };
+    VirtualScroll.prototype.positionForItem = function (index) {
+        return Promise.resolve(positionForIndex(index, this.cells, this.getHeightIndex()));
+    };
+    VirtualScroll.prototype.markDirty = function (offset, len) {
+        if (len === void 0) { len = -1; }
+        if (!this.items) {
+            return;
+        }
+        var length = (len === -1)
+            ? this.items.length - offset
+            : len;
+        var max = this.lastItemLen;
+        var j = 0;
+        if (offset > 0 && offset < max) {
+            j = findCellIndex(this.cells, offset);
+        }
+        else if (offset === 0) {
+            j = 0;
+        }
+        else if (offset === max) {
+            j = this.cells.length;
+        }
+        else {
+            console.warn('bad values for markDirty');
+            return;
+        }
+        var cells = calcCells(this.items, this.itemHeight, this.headerFn, this.footerFn, this.approxHeaderHeight, this.approxFooterHeight, this.approxItemHeight, j, offset, length);
+        console.debug('[virtual] cells recalculated', cells.length);
+        this.cells = inplaceUpdate(this.cells, cells, offset);
+        this.lastItemLen = this.items.length;
+        this.indexDirty = Math.max(offset - 1, 0);
+        this.scheduleUpdate();
+    };
+    VirtualScroll.prototype.markDirtyTail = function () {
+        if (this.items) {
+            var offset = this.lastItemLen;
+            this.markDirty(offset, this.items.length - offset);
+        }
+    };
+    VirtualScroll.prototype.updateVirtualScroll = function () {
+        if (!this.isEnabled || !this.scrollEl) {
+            return;
+        }
+        if (this.timerUpdate) {
+            clearTimeout(this.timerUpdate);
+            this.timerUpdate = undefined;
+        }
+        this.queue.read(this.readVS.bind(this));
+        this.queue.write(this.writeVS.bind(this));
+    };
+    VirtualScroll.prototype.readVS = function () {
+        var _a = this, contentEl = _a.contentEl, scrollEl = _a.scrollEl, el = _a.el;
+        var topOffset = 0;
+        var node = el;
+        while (node && node !== contentEl) {
+            topOffset += node.offsetTop;
+            node = node.parentElement;
+        }
+        this.viewportOffset = topOffset;
+        if (scrollEl) {
+            this.viewportHeight = scrollEl.offsetHeight;
+            this.currentScrollTop = scrollEl.scrollTop;
+        }
+    };
+    VirtualScroll.prototype.writeVS = function () {
+        var dirtyIndex = this.indexDirty;
+        var scrollTop = this.currentScrollTop - this.viewportOffset;
+        var viewport = getViewport(scrollTop, this.viewportHeight, 100);
+        var heightIndex = this.getHeightIndex();
+        var range = getRange(heightIndex, viewport, 2);
+        var shouldUpdate = getShouldUpdate(dirtyIndex, this.range, range);
+        if (!shouldUpdate) {
+            return;
+        }
+        this.range = range;
+        updateVDom(this.virtualDom, heightIndex, this.cells, range);
+        if (this.nodeRender) {
+            doRender(this.el, this.nodeRender, this.virtualDom, this.updateCellHeight.bind(this));
+        }
+        else if (this.domRender) {
+            this.domRender(this.virtualDom);
+        }
+        else if (this.renderItem) {
+            this.el.forceUpdate();
+        }
+    };
+    VirtualScroll.prototype.updateCellHeight = function (cell, node) {
+        var _this = this;
+        var update = function () {
+            if (node['$ionCell'] === cell) {
+                var style = _this.win.getComputedStyle(node);
+                var height = node.offsetHeight + parseFloat(style.getPropertyValue('margin-bottom'));
+                _this.setCellHeight(cell, height);
+            }
+        };
+        if (node && node.componentOnReady) {
+            node.componentOnReady().then(update);
+        }
+        else {
+            update();
+        }
+    };
+    VirtualScroll.prototype.setCellHeight = function (cell, height) {
+        var index = cell.i;
+        if (cell !== this.cells[index]) {
+            return;
+        }
+        cell.visible = true;
+        if (cell.height !== height) {
+            console.debug("[virtual] cell height changed " + cell.height + "px -> " + height + "px");
+            cell.height = height;
+            this.indexDirty = Math.min(this.indexDirty, index);
+            this.scheduleUpdate();
+        }
+    };
+    VirtualScroll.prototype.scheduleUpdate = function () {
+        var _this = this;
+        clearTimeout(this.timerUpdate);
+        this.timerUpdate = setTimeout(function () { return _this.updateVirtualScroll(); }, 100);
+    };
+    VirtualScroll.prototype.updateState = function () {
+        var shouldEnable = !!(this.scrollEl &&
+            this.cells);
+        if (shouldEnable !== this.isEnabled) {
+            this.enableScrollEvents(shouldEnable);
+            if (shouldEnable) {
+                this.updateVirtualScroll();
+            }
+        }
+    };
+    VirtualScroll.prototype.calcCells = function () {
+        if (!this.items) {
+            return;
+        }
+        this.lastItemLen = this.items.length;
+        this.cells = calcCells(this.items, this.itemHeight, this.headerFn, this.footerFn, this.approxHeaderHeight, this.approxFooterHeight, this.approxItemHeight, 0, 0, this.lastItemLen);
+        console.debug('[virtual] cells recalculated', this.cells.length);
+        this.indexDirty = 0;
+    };
+    VirtualScroll.prototype.getHeightIndex = function () {
+        if (this.indexDirty !== Infinity) {
+            this.calcHeightIndex(this.indexDirty);
+        }
+        return this.heightIndex;
+    };
+    VirtualScroll.prototype.calcHeightIndex = function (index) {
+        if (index === void 0) { index = 0; }
+        this.heightIndex = resizeBuffer(this.heightIndex, this.cells.length);
+        this.totalHeight = calcHeightIndex(this.heightIndex, this.cells, index);
+        console.debug('[virtual] height index recalculated', this.heightIndex.length - index);
+        this.indexDirty = Infinity;
+    };
+    VirtualScroll.prototype.enableScrollEvents = function (shouldListen) {
+        if (this.scrollEl) {
+            this.isEnabled = shouldListen;
+            this.enableListener(this, 'scroll', shouldListen, this.scrollEl);
+        }
+    };
+    VirtualScroll.prototype.renderVirtualNode = function (node) {
+        var _a = node.cell, type = _a.type, value = _a.value, index = _a.index;
+        switch (type) {
+            case 0: return this.renderItem(value, index);
+            case 1: return this.renderHeader(value, index);
+            case 2: return this.renderFooter(value, index);
+        }
+    };
+    VirtualScroll.prototype.hostData = function () {
+        return {
+            style: {
+                height: this.totalHeight + "px"
+            }
+        };
+    };
+    VirtualScroll.prototype.render = function () {
+        var _this = this;
+        if (this.renderItem) {
+            return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])(VirtualProxy, { dom: this.virtualDom }, this.virtualDom.map(function (node) { return _this.renderVirtualNode(node); })));
+        }
+        return undefined;
+    };
+    Object.defineProperty(VirtualScroll, "is", {
+        get: function () { return "ion-virtual-scroll"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(VirtualScroll, "properties", {
+        get: function () {
+            return {
+                "approxFooterHeight": {
+                    "type": Number,
+                    "attr": "approx-footer-height"
+                },
+                "approxHeaderHeight": {
+                    "type": Number,
+                    "attr": "approx-header-height"
+                },
+                "approxItemHeight": {
+                    "type": Number,
+                    "attr": "approx-item-height"
+                },
+                "domRender": {
+                    "type": "Any",
+                    "attr": "dom-render"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "enableListener": {
+                    "context": "enableListener"
+                },
+                "footerFn": {
+                    "type": "Any",
+                    "attr": "footer-fn"
+                },
+                "headerFn": {
+                    "type": "Any",
+                    "attr": "header-fn"
+                },
+                "itemHeight": {
+                    "type": "Any",
+                    "attr": "item-height",
+                    "watchCallbacks": ["itemsChanged"]
+                },
+                "items": {
+                    "type": "Any",
+                    "attr": "items",
+                    "watchCallbacks": ["itemsChanged"]
+                },
+                "markDirty": {
+                    "method": true
+                },
+                "markDirtyTail": {
+                    "method": true
+                },
+                "nodeRender": {
+                    "type": "Any",
+                    "attr": "node-render"
+                },
+                "positionForItem": {
+                    "method": true
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "renderFooter": {
+                    "type": "Any",
+                    "attr": "render-footer"
+                },
+                "renderHeader": {
+                    "type": "Any",
+                    "attr": "render-header"
+                },
+                "renderItem": {
+                    "type": "Any",
+                    "attr": "render-item"
+                },
+                "totalHeight": {
+                    "state": true
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(VirtualScroll, "listeners", {
+        get: function () {
+            return [{
+                    "name": "scroll",
+                    "method": "onScroll",
+                    "disabled": true
+                }, {
+                    "name": "window:resize",
+                    "method": "onResize",
+                    "passive": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(VirtualScroll, "style", {
+        get: function () { return "ion-virtual-scroll{display:block;position:relative;width:100%;contain:strict;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.virtual-loading{opacity:0}.virtual-item{left:0;right:0;top:0;position:absolute;-webkit-transition-duration:0s;transition-duration:0s;will-change:transform}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return VirtualScroll;
+}());
+var VirtualProxy = function (_a, children, utils) {
+    var dom = _a.dom;
+    return utils.map(children, function (child, i) {
+        var node = dom[i];
+        var vattrs = child.vattrs || {};
+        var classes = vattrs.class || '';
+        classes += 'virtual-item ';
+        if (!node.visible) {
+            classes += 'virtual-loading';
+        }
+        return Object.assign({}, child, { vattrs: Object.assign({}, vattrs, { class: classes, style: Object.assign({}, vattrs.style, { transform: "translate3d(0," + node.top + "px,0)" }) }) });
+    });
+};
+
+
+
+/***/ }),
+
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js":
+/*!****************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js ***!
+  \****************************************************************************************************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __await, __makeTemplateObject, __importStar, __importDefault */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__extends", function() { return __extends; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__assign", function() { return __assign; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__rest", function() { return __rest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__decorate", function() { return __decorate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__param", function() { return __param; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
+// REV: 9dd9aa322c893e5e0b3f1609b1126314ccf37bbb
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+  extendStatics = Object.setPrototypeOf ||
+      ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+      function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+  return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+  extendStatics(d, b);
+  function __() { this.constructor = d; }
+  d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function() {
+  __assign = Object.assign || function __assign(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+          s = arguments[i];
+          for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+      return t;
+  }
+  return __assign.apply(this, arguments);
+}
+
+function __rest(s, e) {
+  var t = {};
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+      t[p] = s[p];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+          t[p[i]] = s[p[i]];
+  return t;
+}
+
+function __decorate(decorators, target, key, desc) {
+  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+  else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+  return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+  return new (P || (P = Promise))(function (resolve, reject) {
+      function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+      function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+      function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+}
+
+function __generator(thisArg, body) {
+  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+  function verb(n) { return function (v) { return step([n, v]); }; }
+  function step(op) {
+      if (f) throw new TypeError("Generator is already executing.");
+      while (_) try {
+          if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+          if (y = 0, t) op = [op[0] & 2, t.value];
+          switch (op[0]) {
+              case 0: case 1: t = op; break;
+              case 4: _.label++; return { value: op[1], done: false };
+              case 5: _.label++; y = op[1]; op = [0]; continue;
+              case 7: op = _.ops.pop(); _.trys.pop(); continue;
+              default:
+                  if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                  if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                  if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                  if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                  if (t[2]) _.ops.pop();
+                  _.trys.pop(); continue;
+          }
+          op = body.call(thisArg, _);
+      } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+      if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+  }
+}
+
+function __exportStar(m, exports) {
+  for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+
+function __values(o) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+  if (m) return m.call(o);
+  return {
+      next: function () {
+          if (o && i >= o.length) o = void 0;
+          return { value: o && o[i++], done: !o };
+      }
+  };
+}
+
+function __read(o, n) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m) return o;
+  var i = m.call(o), r, ar = [], e;
+  try {
+      while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+  }
+  catch (error) { e = { error: error }; }
+  finally {
+      try {
+          if (r && !r.done && (m = i["return"])) m.call(i);
+      }
+      finally { if (e) throw e.error; }
+  }
+  return ar;
+}
+
+function __spread() {
+  for (var ar = [], i = 0; i < arguments.length; i++)
+      ar = ar.concat(__read(arguments[i]));
+  return ar;
+}
+
+function __await(v) {
+  return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
+function __makeTemplateObject(cooked, raw) {
+  if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+  return cooked;
+};
+
+function __importStar(mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result.default = mod;
+  return result;
+}
+
+function __importDefault(mod) {
+  return (mod && mod.__esModule) ? mod : { default: mod };
+}
 
 /***/ })
 

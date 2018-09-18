@@ -28,7 +28,7 @@ export class ComponentItemDescription
 /*
         const { Camera } = Plugins;
 
-        fromPromise(Camera.getPhoto
+        from(Camera.getPhoto
         ({
             quality      : 100,
             allowEditing : true,
