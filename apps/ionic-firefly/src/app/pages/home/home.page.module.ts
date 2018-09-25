@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PageHome } from './home.page';
 import { ModulePage } from '../page.module';
+import { ModuleComponentSlide } from '../../components/slide/slide.component.module';
 
 export const routes: Routes =
 [
@@ -14,7 +15,8 @@ export const routes: Routes =
     imports :
     [
         ModulePage,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        ModuleComponentSlide
     ],
 
     declarations: [PageHome]
