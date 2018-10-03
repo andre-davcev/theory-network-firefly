@@ -1,6 +1,6 @@
 export interface Slide {
     title: string;
     body: string;
-    imaage: string;
+    image: string;
     date: string;
 }
