@@ -36,6 +36,11 @@ export class StateLanguage
 
     @Selector() static errored(state: StateLanguageModel) {return state.error != null;}
 
+    ngxsOnInit(context: StateContext<StateLanguageModel>)
+    {
+        context.dispatch(new LanguageInitialize());
+    }
+
     @Action(LanguageInitialize)
     languageInitialize()
     {
