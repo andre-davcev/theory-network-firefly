@@ -8,7 +8,7 @@ import { NavController } from '@ionic/angular';
 import { StateUser } from '../../state/user/user.state';
 import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail } from '../../state/user/user.actions';
 import { AuthProvider } from '../../enums/auth-provider.enum';
-
+import { Page } from '../../classes/page.class';
 
 @Component
 ({
@@ -17,7 +17,7 @@ import { AuthProvider } from '../../enums/auth-provider.enum';
     styleUrls   : ['./login.page.scss']
 })
 
-export class PageLogin implements OnInit
+export class PageLogin extends Page implements OnInit
 {
     public AuthProvider: any = AuthProvider;
 
@@ -26,13 +26,19 @@ export class PageLogin implements OnInit
     @Select(StateUser.userFound)              userFound$:         Observable<boolean>;
     @Select(StateUser.loadedNotAuthenticated) loadedNotAuthenticated$: Observable<boolean>;
 
-    constructor(private store: Store, private router: Router, private nav: NavController) { }
+    constructor(private store: Store, private router: Router, private nav: NavController)
+    {
+        super();
+    }
 
     public ngOnInit(): void
     {
-        this.userFound$.
-        pipe(filter((userFound: boolean) => userFound), take(1)).
-        subscribe(() => this.nav.navigateRoot('/home'));
+        this.subscriptionsAdd
+        (
+            this.userFound$.
+            pipe(filter((userFound: boolean) => userFound), take(1)).
+            subscribe(() => this.nav.navigateRoot('/home'))
+        );
 
         this.store.dispatch(new UserAuthenticate());
     }
