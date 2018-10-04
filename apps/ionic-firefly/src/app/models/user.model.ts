@@ -13,6 +13,6 @@ export interface User extends Model
     phoneNumber?   : string;
     displayName?   : string;
     providerId?    : string;
-    tokens?        : {[id: string]: string};
-    notifications? : {[id: string]: firebase.firestore.DocumentReference};
+    tokens?        : Record<string, string>;
+    notifications? : Record<string, firebase.firestore.DocumentReference>;
 }

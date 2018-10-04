@@ -14,7 +14,7 @@ export interface StateIconsModel
 {
     id       : string;
     form     : FormGroup;
-    entities : {[id: string]: Icon};
+    entities : Record<string, Icon>;
 }
 
 @State<StateIconsModel>
@@ -60,7 +60,7 @@ export class StateIcons
                 (
                     map((icons: Array<Icon>) =>
                     {
-                        const entities:{ [id: number]: Icon } = {};
+                        const entities: Record<number, Icon> = {};
 
                         for(const icon of icons)
                         {
@@ -98,7 +98,7 @@ export class StateIcons
         (
             map((icon: Icon) =>
             {
-                const entities:{ [id: number]: Icon } = {};
+                const entities: Record<number, Icon> = {};
 
                 entities[icon.id] = icon;
 

@@ -10,7 +10,7 @@ import { Notification } from '../../models/notification.model';
 
 export interface StateAlertModel
 {
-    entities: {[id: string]: Notification};
+    entities: Record<string, Notification>;
 }
 
 @State<StateAlertModel>
@@ -49,7 +49,7 @@ export class StateAlerts
                 filter((alert: Notification) => alert.dateCreated != null).
                 sort((a: Notification, b: Notification) => b.dateCreated.toDate().getTime() - a.dateCreated.toDate().getTime());
 
-                const entities:{[id: number]: Notification} = {};
+                const entities: Record<number, Notification> = {};
 
                 for (const alert of filtered)
                 {
