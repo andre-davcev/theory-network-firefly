@@ -35,6 +35,11 @@ export class StateDevice
 
     constructor(public platform: Platform) {}
 
+    ngxsOnInit(context: StateContext<StateDeviceModel>)
+    {
+        context.dispatch(new DeviceInitialize());
+    }
+
     @Action(DeviceInitialize)
     deviceInitialize({ patchState } : StateContext<StateDeviceModel>)
     {

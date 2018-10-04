@@ -44,7 +44,7 @@ export class StateCluster
     @Select(StateUser.user) user$:Observable<User>;
 
     @Action(GetClusters)
-    getClusters({ patchState, dispatch } : StateContext<StateClusterModel>)
+    getClusters({ patchState } : StateContext<StateClusterModel>)
     {
         return this.user$.pipe(
             map((user:User) => user.uidInternal),

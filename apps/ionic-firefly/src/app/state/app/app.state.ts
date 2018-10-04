@@ -1,9 +1,4 @@
-import { State, Action, StateContext } from '@ngxs/store';
-
-import { LocationWatch } from '../location/location.actions';
-import { LanguageInitialize } from '../language/language.actions';
-import { AppInitialize } from './app.actions';
-import { DeviceInitialize } from '../device/device.actions';
+import { State } from '@ngxs/store';
 
 export interface StateAppModel
 {
@@ -23,17 +18,4 @@ export interface StateAppModel
 export class StateApp
 {
     constructor() {}
-
-    ngxsOnInit(context: StateContext<StateAppModel>)
-    {
-        context.dispatch(new AppInitialize());
-    }
-
-    @Action(AppInitialize)
-    appInitialize({ dispatch} : StateContext<StateAppModel>)
-    {
-        dispatch(new DeviceInitialize());
-        dispatch(new LanguageInitialize());
-        dispatch(new LocationWatch());
-    }
 }

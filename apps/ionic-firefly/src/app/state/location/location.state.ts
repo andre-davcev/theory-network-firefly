@@ -1,12 +1,14 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
+import { GeolocationPosition } from '@capacitor/core';
+// import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
 
 import { LocationWatch } from './location.actions';
+import { Geolocation } from '../../constants/capacitor.const';
 
 export interface StateLocationModel
 {
-    location  : BackgroundGeolocationResponse;
+    location  : GeolocationPosition;
     error     : Error;
 }
 
@@ -31,11 +33,15 @@ export class StateLocation
     @Selector() static loading(state: StateLocationModel) {return state.location == null;}
     @Selector() static errored(state: StateLocationModel) {return state.error != null;}
 
+    ngxsOnInit(context: StateContext<StateLocationModel>)
+    {
+        context.dispatch(new LocationWatch());
+    }
+
     @Action(LocationWatch)
     locationWatch({ patchState }: StateContext<StateLocationModel>)
     {
-/*
-        return Plugins.Geolocation.
+        return Geolocation.
 
         watchPosition({enableHighAccuracy: true},
 
@@ -52,6 +58,5 @@ export class StateLocation
                 patchState({location});
             }
         });
-*/
     }
 }
