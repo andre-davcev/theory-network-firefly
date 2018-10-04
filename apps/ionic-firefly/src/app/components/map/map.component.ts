@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
@@ -10,9 +10,10 @@ import { StateDevice } from '../../state/device/device.state';
 
 @Component
 ({
-    selector    : 'app-map',
-    templateUrl : './map.component.html',
-    styleUrls   : ['./map.component.scss']
+    selector        : 'app-map',
+    templateUrl     : './map.component.html',
+    styleUrls       : ['./map.component.scss'],
+    changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class ComponentMap implements OnInit
 {
