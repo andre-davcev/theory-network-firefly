@@ -180,7 +180,7 @@ export class StateUser
     {
         const user   : User                   = getState().user;
         const token  : string                 = payload;
-        const tokens : {[id: string]: string} = user.tokens == null ? {} : user.tokens;
+        const tokens : Record<string, string> = user.tokens == null ? {} : user.tokens;
 
         tokens[token] = token;
 

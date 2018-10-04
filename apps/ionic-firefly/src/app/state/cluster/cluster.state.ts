@@ -14,7 +14,7 @@ export interface StateClusterModel
 {
     id       : string;
     form     : FormGroup;
-    entities : {[id: string]: Cluster};
+    entities : Record<string, Cluster>;
 }
 
 @State<StateClusterModel>
@@ -53,7 +53,7 @@ export class StateCluster
                 .getClusters(uidInternal)
                 .pipe(
                     map((clusters:Cluster[]) => {
-                        const entities:{ [id: number]: Cluster } = {};
+                        const entities: Record<number, Cluster> = {};
                         for(const cluster of clusters){
                             entities[cluster.id] = cluster;
                         }
@@ -88,7 +88,7 @@ export class StateCluster
         .pipe(
             map((cluster:Cluster) =>
             {
-                const entities:{ [id: number]: Cluster } = {};
+                const entities: Record<number, Cluster> = {};
                 entities[cluster.id] = cluster;
 
                 patchState({entities});
