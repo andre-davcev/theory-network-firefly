@@ -1,11 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+
 import { Slide } from './slide.interface';
 
 @Component
 ({
     selector        : 'app-slide',
     templateUrl     : './slide.component.html',
-    styleUrls       : ['./slide.component.scss']
+    styleUrls       : ['./slide.component.scss'],
+    changeDetection : ChangeDetectionStrategy.OnPush
 })
 
 export class ComponentSlide
