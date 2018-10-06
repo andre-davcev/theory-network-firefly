@@ -11,12 +11,6 @@ export enum ActionsUser
     UserCreate            = '[User] User Create',
     UserAddToken          = '[User] User Add Token',
     LoginEmail            = '[User] Login Email',
-    LoginFacebook         = '[User] Login Facebook',
-    LoginFacebookBrowser  = '[User] Login Facebook Browser',
-    LoginFacebookDevice   = '[User] Login Facebook Device',
-    LoginGoogle           = '[User] Login Google',
-    LoginGoogleBrowser    = '[User] Login Google Browser',
-    LoginGoogleDevice     = '[User] Login Google Device',
     UserLogout            = '[User] User Logout',
     UserSet               = '[User] User Set'
 }
@@ -61,48 +55,6 @@ export class LoginEmail
     static readonly type = ActionsUser.LoginEmail;
 
     constructor(public payload: Credentials) {}
-}
-
-export class LoginFacebook
-{
-    static readonly type = ActionsUser.LoginFacebook;
-
-    constructor() {}
-}
-
-export class LoginFacebookBrowser
-{
-    static readonly type = ActionsUser.LoginFacebookBrowser;
-
-    constructor() {}
-}
-
-export class LoginFacebookDevice
-{
-    static readonly type = ActionsUser.LoginFacebookDevice;
-
-    constructor() {}
-}
-
-export class LoginGoogle
-{
-    static readonly type = ActionsUser.LoginGoogle;
-
-    constructor() {}
-}
-
-export class LoginGoogleBrowser
-{
-    static readonly type = ActionsUser.LoginGoogleBrowser;
-
-    constructor() {}
-}
-
-export class LoginGoogleDevice
-{
-    static readonly type = ActionsUser.LoginGoogleDevice;
-
-    constructor() {}
 }
 
 export class UserLogout

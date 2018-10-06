@@ -6,8 +6,6 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { Globalization } from '@ionic-native/globalization/ngx';
-import { Facebook } from '@ionic-native/facebook/ngx';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -68,8 +66,6 @@ Pro.init('1e5146ca',
     providers :
     [
         Globalization,
-        Facebook,
-        GooglePlus,
         Firebase,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
 //        { provide: ErrorHandler,       useClass: ErrorHandlerApp }

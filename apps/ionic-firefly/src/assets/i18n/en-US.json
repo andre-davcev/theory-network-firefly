@@ -27,8 +27,6 @@
   "page.auth.signInRegister"      : "Sign In / Register",
   "page.auth.divider"             : "OR",
   "page.auth.create"              : "Create",
-  "page.auth.facebook"            : "Facebook",
-  "page.auth.google"              : "Google+",
   "page.auth.forgotPassword"      : "Forgot Password?",
   "page.auth.forgotName"          : "Forgot Name?",
   "page.auth.newUser"             : "New User?",
