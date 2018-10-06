@@ -5,13 +5,11 @@ import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap, take, filter, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 import { PlatformEnum } from '../../enums/platform.enum';
 import { StateLanguage } from '../language/language.state';
 import { LanguageGet, LanguageSet } from '../language/language.actions';
-import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, LoginFacebook, LoginFacebookBrowser, LoginFacebookDevice, LoginGoogle, LoginGoogleBrowser, LoginGoogleDevice, UserLogout, UserAddToken} from './user.actions';
+import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, UserLogout, UserAddToken} from './user.actions';
 import { AlertsGet } from '../alert/alert.actions';
 import { NotificationsGet } from '../notifications/notifications.actions';
 import { User } from '../../models/user.model';
@@ -45,7 +43,7 @@ export interface StateUserModel
 
 export class StateUser
 {
-    constructor(private auth: AngularFireAuth, private firestore: AngularFirestore, private facebook: Facebook, private googlePlus: GooglePlus, private platform: Platform) {}
+    constructor(private auth: AngularFireAuth, private firestore: AngularFirestore) {}
 
     @Select(StateLanguage.language) language$: Observable<string>;
 
@@ -197,74 +195,6 @@ export class StateUser
             switchMap((authData: firebase.auth.UserCredential) => dispatch(new UserAuthenticateCheck(authData.user))),
 
             catchError((error: Error) => of(patchState({error: error, authenticating: false})))
-        );
-    }
-
-    @Action(LoginFacebook)
-    loginFacebook({ patchState, dispatch }: StateContext<StateUserModel>)
-    {
-        patchState({authenticating: true});
-
-        const login$: Observable<void> = this.platform.is(PlatformEnum.Cordova) ? dispatch(new LoginFacebookDevice()) : dispatch(new LoginFacebookBrowser());
-
-        return login$.pipe(catchError((error: Error) => of(patchState({error: error, authenticating: false}))));
-    }
-
-    @Action(LoginFacebookBrowser)
-    loginFacebookBrowser({ dispatch }: StateContext<StateUserModel>)
-    {
-        return from(this.auth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())).
-
-        pipe(switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))));
-    }
-
-    @Action(LoginFacebookDevice)
-    loginFacebookDevice({ dispatch }: StateContext<StateUserModel>)
-    {
-        return from(this.facebook.login(['email'])).pipe
-        (
-            switchMap((response: FacebookLoginResponse) =>
-            {
-                const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-
-                return from(firebase.auth().signInWithCredential(credential));
-            }),
-
-            switchMap((user: firebase.User) => dispatch(new UserAuthenticateCheck(user)))
-        );
-    }
-
-    @Action(LoginGoogle)
-    loginGoogle({ patchState, dispatch }: StateContext<StateUserModel>)
-    {
-        patchState({authenticating: true});
-
-        const login$: Observable<void> = this.platform.is(PlatformEnum.Cordova) ? dispatch(new LoginGoogleDevice()) : dispatch(new LoginGoogleBrowser());
-
-        return login$.pipe(catchError((error: Error) => of(patchState({error: error, authenticating: false}))));
-    }
-
-    @Action(LoginGoogleBrowser)
-    loginGoogleBrowser({ dispatch }: StateContext<StateUserModel>)
-    {
-        return from(this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())).
-
-        pipe(switchMap((response: any) => dispatch(new UserAuthenticateCheck(response.user))));
-    }
-
-    @Action(LoginGoogleDevice)
-    loginGoogleDevice({ dispatch }: StateContext<StateUserModel>)
-    {
-        return from(this.facebook.login(['email'])).pipe
-        (
-            switchMap((response: FacebookLoginResponse) =>
-            {
-                const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-
-                return from(firebase.auth().signInWithCredential(credential)).
-
-                pipe(switchMap((user: firebase.User) => dispatch(new UserAuthenticateCheck(user))))
-            })
         );
     }
 

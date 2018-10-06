@@ -6,8 +6,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 import { StateUser } from '../../state/user/user.state';
-import { UserAuthenticate, LoginFacebook, LoginGoogle, LoginEmail } from '../../state/user/user.actions';
-import { AuthProvider } from '../../enums/auth-provider.enum';
+import { UserAuthenticate, LoginEmail } from '../../state/user/user.actions';
 import { Page } from '../../classes/page.class';
 
 @Component
@@ -19,8 +18,6 @@ import { Page } from '../../classes/page.class';
 
 export class PageLogin extends Page implements OnInit
 {
-    public AuthProvider: any = AuthProvider;
-
     @Select(StateUser.authenticated)          userAuthenticated$: Observable<boolean>;
     @Select(StateUser.loading)                userLoading$:       Observable<boolean>;
     @Select(StateUser.userFound)              userFound$:         Observable<boolean>;
@@ -43,20 +40,9 @@ export class PageLogin extends Page implements OnInit
         this.store.dispatch(new UserAuthenticate());
     }
 
-    login(provider: AuthProvider)
+    login()
     {
-        if (provider === AuthProvider.Facebook)
-        {
-            this.store.dispatch(new LoginFacebook());
-        }
-        else if (provider === AuthProvider.Google)
-        {
-            this.store.dispatch(new LoginGoogle());
-        }
-        else if (provider === AuthProvider.Email)
-        {
-            this.store.dispatch(new LoginEmail({id: 'andre.davcev@gmail.com', password: 'weakpassword'}));
-        }
+        this.store.dispatch(new LoginEmail({id: 'andre.davcev@gmail.com', password: 'weakpassword'}));
     }
 
     create()
