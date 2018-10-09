@@ -1,142 +1,265 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[62],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hqo7rktj.sc.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hqo7rktj.sc.entry.js ***!
-  \************************************************************************************************************************************/
-/*! exports provided: IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fl5myp0s.sc.entry.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fl5myp0s.sc.entry.js ***!
+  \***************************************************************************************************************************************/
+/*! exports provided: IonToast, IonToastController */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCard", function() { return Card; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCardContent", function() { return CardContent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCardHeader", function() { return CardHeader; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCardSubtitle", function() { return CardSubtitle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCardTitle", function() { return CardTitle; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToast", function() { return Toast; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToastController", function() { return ToastController; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-05b9bd31.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-05b9bd31.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
 
 
-var Card = /** @class */ (function () {
-    function Card() {
+
+function iosEnterAnimation(AnimationC, baseEl, position) {
+    var baseAnimation = new AnimationC();
+    var wrapperAnimation = new AnimationC();
+    var wrapperEle = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation.addElement(wrapperEle);
+    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('translateY', '-100%', top);
+            break;
+        case 'middle':
+            var topPosition = Math.floor(baseEl.clientHeight / 2 - wrapperEle.clientHeight / 2);
+            wrapperEle.style.top = topPosition + "px";
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        default:
+            wrapperAnimation.fromTo('translateY', '100%', bottom);
+            break;
     }
-    Card.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color)
-        };
-    };
-    Object.defineProperty(Card, "is", {
-        get: function () { return "ion-card"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Card, "encapsulation", {
-        get: function () { return "scoped"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Card, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Card, "style", {
-        get: function () { return ".sc-ion-card-ios-h{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:block;position:relative;background:var(--background);color:var(--color);font-family:var(--ion-font-family,inherit);overflow:hidden;--background:var(--ion-item-background-color, transparent);--color:var(--ion-text-color-step-400, #666666);margin:30px 20px;border-radius:8px;-webkit-transform:translateZ(0);transform:translateZ(0);font-size:14px;-webkit-box-shadow:0 4px 16px rgba(0,0,0,.12);box-shadow:0 4px 16px rgba(0,0,0,.12)}.ion-color.sc-ion-card-ios-h{background:var(--ion-color-base);color:var(--ion-color-contrast)}.sc-ion-card-ios-h.ion-color.sc-ion-card-ios-s  ion-card-subtitle , .sc-ion-card-ios-h.ion-color.sc-ion-card-ios-s  ion-card-title {color:currentColor}.sc-ion-card-ios-s  img {display:block;width:100%}.sc-ion-card-ios-s  ion-list {margin:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Card, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Card;
-}());
-var CardContent = /** @class */ (function () {
-    function CardContent() {
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.155,1.105,.295,1.12)')
+        .duration(400)
+        .add(wrapperAnimation));
+}
+function iosLeaveAnimation(AnimationC, baseEl, position) {
+    var baseAnimation = new AnimationC();
+    var wrapperAnimation = new AnimationC();
+    var wrapperEle = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation.addElement(wrapperEle);
+    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
+    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('translateY', top, '-100%');
+            break;
+        case 'middle':
+            wrapperAnimation.fromTo('opacity', 0.99, 0);
+            break;
+        default:
+            wrapperAnimation.fromTo('translateY', bottom, '100%');
+            break;
     }
-    CardContent.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["g"])(this.mode, 'card-content')
-        };
-    };
-    Object.defineProperty(CardContent, "is", {
-        get: function () { return "ion-card-content"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardContent, "properties", {
-        get: function () {
-            return {
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardContent, "style", {
-        get: function () { return "ion-card-content{display:block;position:relative}.card-content-ios{padding:20px;font-size:16px;line-height:1.4}.card-content-ios h1{margin:0 0 2px;font-size:24px;font-weight:400}.card-content-ios h2{margin:2px 0;font-size:16px;font-weight:400}.card-content-ios h3,.card-content-ios h4,.card-content-ios h5,.card-content-ios h6{margin:2px 0;font-size:14px;font-weight:400}.card-content-ios p{margin:0 0 2px;font-size:14px}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardContent, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return CardContent;
-}());
-var CardHeader = /** @class */ (function () {
-    function CardHeader() {
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(300)
+        .add(wrapperAnimation));
+}
+function mdEnterAnimation(AnimationC, baseEl, position) {
+    var baseAnimation = new AnimationC();
+    var wrapperAnimation = new AnimationC();
+    var wrapperEle = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation.addElement(wrapperEle);
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('translateY', '-100%', '0%');
+            break;
+        case 'middle':
+            var topPosition = Math.floor(baseEl.clientHeight / 2 - wrapperEle.clientHeight / 2);
+            wrapperEle.style.top = topPosition + "px";
+            wrapperAnimation.fromTo('opacity', 0.01, 1);
+            break;
+        default:
+            wrapperAnimation.fromTo('translateY', '100%', '0%');
+            break;
+    }
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(400)
+        .add(wrapperAnimation));
+}
+function mdLeaveAnimation(AnimationC, baseEl, position) {
+    var baseAnimation = new AnimationC();
+    var wrapperAnimation = new AnimationC();
+    var wrapperEle = baseEl.querySelector('.toast-wrapper');
+    wrapperAnimation.addElement(wrapperEle);
+    switch (position) {
+        case 'top':
+            wrapperAnimation.fromTo('translateY', '0px', '-100%');
+            break;
+        case 'middle':
+            wrapperAnimation.fromTo('opacity', 0.99, 0);
+            break;
+        default:
+            wrapperAnimation.fromTo('translateY', "0px", '100%');
+            break;
+    }
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(.36,.66,.04,1)')
+        .duration(300)
+        .add(wrapperAnimation));
+}
+var Toast = /** @class */ (function () {
+    function Toast() {
+        this.presented = false;
+        this.duration = 0;
+        this.keyboardClose = false;
+        this.position = 'bottom';
+        this.showCloseButton = false;
         this.translucent = false;
+        this.animated = true;
     }
-    CardHeader.prototype.hostData = function () {
+    Toast.prototype.componentDidLoad = function () {
+        this.ionToastDidLoad.emit();
+    };
+    Toast.prototype.componentDidUnload = function () {
+        this.ionToastDidUnload.emit();
+    };
+    Toast.prototype.present = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this, 'toastEnter', iosEnterAnimation, mdEnterAnimation, this.position)];
+                    case 1:
+                        _a.sent();
+                        if (this.duration > 0) {
+                            this.durationTimeout = setTimeout(function () { return _this.dismiss(undefined, 'timeout'); }, this.duration);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Toast.prototype.dismiss = function (data, role) {
+        if (this.durationTimeout) {
+            clearTimeout(this.durationTimeout);
+        }
+        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this, data, role, 'toastLeave', iosLeaveAnimation, mdLeaveAnimation, this.position);
+    };
+    Toast.prototype.onDidDismiss = function () {
+        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionToastDidDismiss');
+    };
+    Toast.prototype.onWillDismiss = function () {
+        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionToastWillDismiss');
+    };
+    Toast.prototype.hostData = function () {
+        var themedClasses = this.translucent ? Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["k"])(this.mode, 'toast-translucent') : {};
         return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color), { 'card-header-translucent': this.translucent })
+            style: {
+                zIndex: 60000 + this.overlayIndex,
+            },
+            class: Object.assign({}, themedClasses, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["k"])(this.mode, 'toast'), Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.cssClass))
         };
     };
-    CardHeader.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    Toast.prototype.render = function () {
+        var _this = this;
+        var _a;
+        var wrapperClass = (_a = {
+                'toast-wrapper': true
+            },
+            _a["toast-" + this.position] = true,
+            _a);
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: wrapperClass }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toast-container" }, this.message !== undefined &&
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toast-message" }, this.message), this.showCloseButton &&
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-button", { fill: "clear", "ion-activatable": true, class: "toast-button", onClick: function () { return _this.dismiss(undefined, 'cancel'); } }, this.closeButtonText || 'Close'))));
     };
-    Object.defineProperty(CardHeader, "is", {
-        get: function () { return "ion-card-header"; },
+    Object.defineProperty(Toast, "is", {
+        get: function () { return "ion-toast"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CardHeader, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardHeader, "properties", {
+    Object.defineProperty(Toast, "properties", {
         get: function () {
             return {
-                "color": {
+                "animated": {
+                    "type": Boolean,
+                    "attr": "animated"
+                },
+                "animationCtrl": {
+                    "connect": "ion-animation-controller"
+                },
+                "closeButtonText": {
                     "type": String,
-                    "attr": "color"
+                    "attr": "close-button-text"
+                },
+                "config": {
+                    "context": "config"
+                },
+                "cssClass": {
+                    "type": String,
+                    "attr": "css-class"
+                },
+                "dismiss": {
+                    "method": true
+                },
+                "duration": {
+                    "type": Number,
+                    "attr": "duration"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "enterAnimation": {
+                    "type": "Any",
+                    "attr": "enter-animation"
+                },
+                "keyboardClose": {
+                    "type": Boolean,
+                    "attr": "keyboard-close"
+                },
+                "leaveAnimation": {
+                    "type": "Any",
+                    "attr": "leave-animation"
+                },
+                "message": {
+                    "type": String,
+                    "attr": "message"
                 },
                 "mode": {
                     "type": String,
                     "attr": "mode"
+                },
+                "onDidDismiss": {
+                    "method": true
+                },
+                "onWillDismiss": {
+                    "method": true
+                },
+                "overlayIndex": {
+                    "type": Number,
+                    "attr": "overlay-index"
+                },
+                "position": {
+                    "type": String,
+                    "attr": "position"
+                },
+                "present": {
+                    "method": true
+                },
+                "showCloseButton": {
+                    "type": Boolean,
+                    "attr": "show-close-button"
                 },
                 "translucent": {
                     "type": Boolean,
@@ -147,119 +270,103 @@ var CardHeader = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CardHeader, "style", {
-        get: function () { return ".sc-ion-card-header-ios-h{display:block;position:relative;padding:20px 20px 16px}.card-header-translucent.sc-ion-card-header-ios-h{background-color:rgba(var(--ion-background-color-rgb,255,255,255),.9);-webkit-backdrop-filter:saturate(180%) blur(30px);backdrop-filter:saturate(180%) blur(30px)}"; },
+    Object.defineProperty(Toast, "events", {
+        get: function () {
+            return [{
+                    "name": "ionToastDidLoad",
+                    "method": "ionToastDidLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastDidPresent",
+                    "method": "didPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastWillPresent",
+                    "method": "willPresent",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastWillDismiss",
+                    "method": "willDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastDidDismiss",
+                    "method": "didDismiss",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionToastDidUnload",
+                    "method": "ionToastDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CardHeader, "styleMode", {
+    Object.defineProperty(Toast, "style", {
+        get: function () { return "ion-toast{left:0;top:0;display:block;position:absolute;width:100%;height:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:strict;z-index:1000;pointer-events:none}.toast-wrapper{background:var(--background)}.toast-wrapper.toast-top{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0);top:0}.toast-wrapper.toast-bottom{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);bottom:0}.toast-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;pointer-events:auto;contain:content}.toast-button{--color:inherit;font-size:15px}.toast-message{-webkit-box-flex:1;-ms-flex:1;flex:1}.toast-ios{--background:var(--ion-background-color-step-50, #f2f2f2);--button-color:var(--ion-text-color-step-400, #666666);--color:var(--ion-text-color-step-150, #262626);font-size:14px}.toast-ios .toast-wrapper{left:10px;right:10px;margin:auto;border-radius:14px;display:block;position:absolute;max-width:700px;z-index:10}.toast-translucent-ios .toast-wrapper{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.toast-ios .toast-wrapper.toast-middle{opacity:.01}.toast-ios .toast-message{padding:15px}.toast-ios .toast-button{color:var(--button-color)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Toast, "styleMode", {
         get: function () { return "ios"; },
         enumerable: true,
         configurable: true
     });
-    return CardHeader;
+    return Toast;
 }());
-var CardSubtitle = /** @class */ (function () {
-    function CardSubtitle() {
+var ToastController = /** @class */ (function () {
+    function ToastController() {
     }
-    CardSubtitle.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color),
-            'role': 'heading',
-            'aria-level': '3'
-        };
+    ToastController.prototype.create = function (opts) {
+        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement('ion-toast'), opts);
     };
-    CardSubtitle.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    ToastController.prototype.dismiss = function (data, role, id) {
+        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc, data, role, 'ion-toast', id);
     };
-    Object.defineProperty(CardSubtitle, "is", {
-        get: function () { return "ion-card-subtitle"; },
+    ToastController.prototype.getTop = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return [2 /*return*/, Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc, 'ion-toast')];
+            });
+        });
+    };
+    Object.defineProperty(ToastController, "is", {
+        get: function () { return "ion-toast-controller"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CardSubtitle, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardSubtitle, "properties", {
+    Object.defineProperty(ToastController, "properties", {
         get: function () {
             return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
+                "create": {
+                    "method": true
                 },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
+                "dismiss": {
+                    "method": true
+                },
+                "doc": {
+                    "context": "document"
+                },
+                "getTop": {
+                    "method": true
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CardSubtitle, "style", {
-        get: function () { return ".sc-ion-card-subtitle-ios-h{display:block;position:relative;color:var(--color);--color:var(--ion-text-color-step-400, #666666);margin:0 0 4px;padding:0;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}.ion-color.sc-ion-card-subtitle-ios-h{color:var(--ion-color-base)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardSubtitle, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return CardSubtitle;
-}());
-var CardTitle = /** @class */ (function () {
-    function CardTitle() {
-    }
-    CardTitle.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color),
-            'role': 'heading',
-            'aria-level': '2'
-        };
-    };
-    CardTitle.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
-    };
-    Object.defineProperty(CardTitle, "is", {
-        get: function () { return "ion-card-title"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardTitle, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardTitle, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardTitle, "style", {
-        get: function () { return ".sc-ion-card-title-ios-h{display:block;position:relative;color:var(--color);--color:var(--ion-text-color, #000);margin:0;padding:0;font-size:28px;font-weight:700;line-height:1.2}.ion-color.sc-ion-card-title-ios-h{color:var(--ion-color-base)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardTitle, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return CardTitle;
+    return ToastController;
 }());
 
 

@@ -1,139 +1,192 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[107],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s1a9daht.entry.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s1a9daht.entry.js ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: IonSplitPane */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nbcumgqm.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nbcumgqm.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonFab, IonFabButton, IonFabList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSplitPane", function() { return SplitPane; });
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFab", function() { return Fab; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFabButton", function() { return FabButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFabList", function() { return FabList; });
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
+/*!
+ * (C) Ionic http://ionicframework.com - MIT License
+ * Built with http://stenciljs.com
+ */
 
-var SPLIT_PANE_MAIN = 'split-pane-main';
-var SPLIT_PANE_SIDE = 'split-pane-side';
-var QUERY = {
-    'xs': '(min-width: 0px)',
-    'sm': '(min-width: 576px)',
-    'md': '(min-width: 768px)',
-    'lg': '(min-width: 992px)',
-    'xl': '(min-width: 1200px)',
-    'never': ''
-};
-var SplitPane = /** @class */ (function () {
-    function SplitPane() {
-        this.visible = false;
-        this.disabled = false;
-        this.when = QUERY['md'];
+
+var Fab = /** @class */ (function () {
+    function Fab() {
+        this.edge = false;
+        this.activated = false;
     }
-    SplitPane.prototype.visibleChanged = function (visible) {
-        var detail = { visible: visible, isPane: this.isPane.bind(this) };
-        this.ionChange.emit(detail);
-        this.ionSplitPaneVisible.emit(detail);
+    Fab.prototype.activatedChanged = function () {
+        var activated = this.activated;
+        var fab = this.el.querySelector('ion-fab-button');
+        if (fab) {
+            fab.activated = activated;
+        }
+        Array.from(this.el.querySelectorAll('ion-fab-list')).forEach(function (list) {
+            list.activated = activated;
+        });
     };
-    SplitPane.prototype.componentDidLoad = function () {
-        this.styleChildren();
-        this.updateState();
-    };
-    SplitPane.prototype.componentDidUnload = function () {
-        if (this.rmL) {
-            this.rmL();
-            this.rmL = undefined;
-        }
-    };
-    SplitPane.prototype.updateState = function () {
-        var _this = this;
-        if (this.isServer) {
-            return;
-        }
-        if (this.rmL) {
-            this.rmL();
-            this.rmL = undefined;
-        }
-        if (this.disabled) {
-            this.visible = false;
-            return;
-        }
-        var query = this.when;
-        if (typeof query === 'boolean') {
-            this.visible = query;
-            return;
-        }
-        var mediaQuery = QUERY[query] || query;
-        if (mediaQuery.length === 0) {
-            this.visible = false;
-            return;
-        }
-        var callback = function (q) { return _this.visible = q.matches; };
-        var mediaList = this.win.matchMedia(mediaQuery);
-        mediaList.addListener(callback);
-        this.rmL = function () { return mediaList.removeListener(callback); };
-        this.visible = mediaList.matches;
-    };
-    SplitPane.prototype.isPane = function (element) {
-        if (!this.visible) {
-            return false;
-        }
-        return element.parentElement === this.el
-            && element.classList.contains(SPLIT_PANE_SIDE);
-    };
-    SplitPane.prototype.styleChildren = function () {
-        if (this.isServer) {
-            return;
-        }
-        var children = this.el.children;
-        var nu = this.el.childElementCount;
-        var foundMain = false;
-        for (var i = 0; i < nu; i++) {
-            var child = children[i];
-            var isMain = child.hasAttribute('main');
-            if (isMain) {
-                if (foundMain) {
-                    console.warn('split pane can not have more than one main node');
-                    return;
-                }
-                foundMain = true;
-            }
-            setPaneClass(child, isMain);
-        }
-        if (!foundMain) {
-            console.warn('split pane could not found any main node');
+    Fab.prototype.componentDidLoad = function () {
+        if (this.activated) {
+            this.activatedChanged();
         }
     };
-    SplitPane.prototype.hostData = function () {
+    Fab.prototype.onClick = function () {
+        var hasList = !!this.el.querySelector('ion-fab-list');
+        if (hasList) {
+            this.activated = !this.activated;
+        }
+    };
+    Fab.prototype.close = function () {
+        this.activated = false;
+    };
+    Fab.prototype.hostData = function () {
+        var _a;
         return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_0__["g"])(this.mode, 'split-pane'), { 'split-pane-visible': this.visible })
+            class: (_a = {},
+                _a["fab-horizontal-" + this.horizontal] = !!this.horizontal,
+                _a["fab-vertical-" + this.vertical] = !!this.vertical,
+                _a['fab-edge'] = this.edge,
+                _a)
         };
     };
-    Object.defineProperty(SplitPane, "is", {
-        get: function () { return "ion-split-pane"; },
+    Fab.prototype.render = function () {
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    };
+    Object.defineProperty(Fab, "is", {
+        get: function () { return "ion-fab"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(SplitPane, "properties", {
+    Object.defineProperty(Fab, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Fab, "properties", {
         get: function () {
             return {
-                "disabled": {
+                "activated": {
                     "type": Boolean,
-                    "attr": "disabled",
-                    "watchCallbacks": ["updateState"]
+                    "attr": "activated",
+                    "mutable": true,
+                    "watchCallbacks": ["activatedChanged"]
+                },
+                "close": {
+                    "method": true
+                },
+                "edge": {
+                    "type": Boolean,
+                    "attr": "edge"
                 },
                 "el": {
                     "elementRef": true
                 },
-                "isServer": {
-                    "context": "isServer"
+                "horizontal": {
+                    "type": String,
+                    "attr": "horizontal"
                 },
-                "visible": {
-                    "state": true,
-                    "watchCallbacks": ["visibleChanged"]
+                "vertical": {
+                    "type": String,
+                    "attr": "vertical"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Fab, "listeners", {
+        get: function () {
+            return [{
+                    "name": "click",
+                    "method": "onClick"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Fab, "style", {
+        get: function () { return ":host{position:absolute;z-index:999}:host(.fab-horizontal-center){left:50%;margin-left:-28px}:host(.fab-horizontal-start){left:calc(10px + var(--ion-safe-area-left,0px))}:host(.fab-horizontal-end){right:calc(10px + var(--ion-safe-area-right,0px))}:host(.fab-vertical-top){top:10px}:host(.fab-vertical-top.fab-edge){top:-28px}:host(.fab-vertical-bottom){bottom:10px}:host(.fab-vertical-bottom.fab-edge){bottom:-28px}:host(.fab-vertical-center){margin-top:-28px;top:50%}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Fab;
+}());
+var FabButton = /** @class */ (function () {
+    function FabButton() {
+        this.activated = false;
+        this.disabled = false;
+        this.translucent = false;
+        this.show = false;
+    }
+    FabButton.prototype.hostData = function () {
+        var inList = Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["j"])('ion-fab-list', this.el);
+        return {
+            'ion-activatable': true,
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.color), { 'fab-button-in-list': inList, 'fab-button-translucent-in-list': inList && this.translucent, 'fab-button-close-active': this.activated, 'fab-button-show': this.show, 'fab-button-disabled': this.disabled, 'fab-button-translucent': this.translucent })
+        };
+    };
+    FabButton.prototype.render = function () {
+        var _this = this;
+        var TagType = this.href === undefined ? 'button' : 'a';
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, { class: "button-native", disabled: this.disabled, href: this.href, onClick: function (ev) { return Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["i"])(_this.win, _this.href, ev, _this.routerDirection); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "close-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { name: "close", lazy: false })), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null)));
+    };
+    Object.defineProperty(FabButton, "is", {
+        get: function () { return "ion-fab-button"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FabButton, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FabButton, "properties", {
+        get: function () {
+            return {
+                "activated": {
+                    "type": Boolean,
+                    "attr": "activated"
                 },
-                "when": {
-                    "type": "Any",
-                    "attr": "when",
-                    "watchCallbacks": ["updateState"]
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "href": {
+                    "type": String,
+                    "attr": "href"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "routerDirection": {
+                    "type": String,
+                    "attr": "router-direction"
+                },
+                "show": {
+                    "type": Boolean,
+                    "attr": "show"
+                },
+                "translucent": {
+                    "type": Boolean,
+                    "attr": "translucent"
                 },
                 "win": {
                     "context": "window"
@@ -143,52 +196,80 @@ var SplitPane = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(SplitPane, "events", {
-        get: function () {
-            return [{
-                    "name": "ionChange",
-                    "method": "ionChange",
-                    "bubbles": false,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionSplitPaneVisible",
-                    "method": "ionSplitPaneVisible",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
+    Object.defineProperty(FabButton, "style", {
+        get: function () { return ":host{--ion-color-base:var(--ion-color-primary, #3880ff);--ion-color-contrast:var(--ion-color-primary-contrast, #fff);--ion-color-tint:var(--ion-color-primary-tint, #4c8dff);--size:56px;--background:var(--ion-color-base);--transition:background-color,opacity 100ms linear;--padding-start:calc((56px - var(--size)) / 2);--padding-end:calc((56px - var(--size)) / 2);--padding-top:calc((56px - var(--size)) / 2);--padding-bottom:calc((56px - var(--size)) / 2);display:block;color:var(--ion-color-contrast);font-size:14px;text-align:center;text-overflow:ellipsis;text-transform:none;white-space:nowrap;-webkit-font-kerning:none;font-kerning:none;--box-shadow:0 4px 6px 0 rgba(0, 0, 0, 0.14),0 4px 5px rgba(0, 0, 0, 0.1);--transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),color 300ms cubic-bezier(0.4, 0, 0.2, 1)}:host(.fab-button-disabled){pointer-events:none}:host(.activated){--background:var(--ion-color-tint);--box-shadow:0 5px 15px 0 rgba(0, 0, 0, 0.4),0 4px 7px 0 rgba(0, 0, 0, 0.1)}.button-native{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;border-radius:50%;margin:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:block;position:relative;width:var(--size);height:var(--size);-webkit-transform:var(--transform);transform:var(--transform);-webkit-transition:var(--transition);transition:var(--transition);border:0;outline:0;background:var(--background);background-clip:padding-box;line-height:var(--size);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);contain:strict;cursor:pointer;overflow:hidden;z-index:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.button-native[disabled]{cursor:default;opacity:.5;pointer-events:none}::slotted(ion-icon){line-height:1}.button-inner{left:0;right:0;top:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-transition:all ease-in-out .3s;transition:all ease-in-out .3s;-webkit-transition-property:opacity,-webkit-transform;transition-property:opacity,-webkit-transform;transition-property:transform,opacity;transition-property:transform,opacity,-webkit-transform}:host([mini]){--size:40px}.close-icon{left:0;right:0;top:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-transform:scale(.4) rotateZ(-45deg);transform:scale(.4) rotateZ(-45deg);-webkit-transition:all ease-in-out .3s;transition:all ease-in-out .3s;-webkit-transition-property:opacity,-webkit-transform;transition-property:opacity,-webkit-transform;transition-property:transform,opacity;transition-property:transform,opacity,-webkit-transform;opacity:0}:host(.fab-button-close-active) .close-icon{-webkit-transform:scale(1) rotateZ(0);transform:scale(1) rotateZ(0);opacity:1}:host(.fab-button-close-active) .button-inner{-webkit-transform:scale(.4) rotateZ(45deg);transform:scale(.4) rotateZ(45deg);opacity:0}ion-ripple-effect{color:var(--ripple-color)}.close-icon,::slotted(ion-icon){font-size:24px}:host(.fab-button-in-list){--ion-color-contrast:var(--ion-color-light-contrast, #000);--ion-color-base:var(--ion-color-light, #f4f5f8);--transition:transform 200ms ease 10ms,opacity 200ms ease 10ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),color 300ms cubic-bezier(0.4, 0, 0.2, 1)}:host(.fab-button-in-list.activated){--background:var(--ion-color-primary-tint, #4c8dff)}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(SplitPane, "style", {
-        get: function () { return ".split-pane{left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:nowrap;flex-wrap:nowrap;contain:strict}.split-pane-visible>.split-pane-main,.split-pane-visible>.split-pane-side{left:0;right:0;top:0;bottom:0;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-shadow:none!important;box-shadow:none!important;z-index:0}.split-pane-visible>.split-pane-side:not(ion-menu),.split-pane-visible>ion-menu.split-pane-side.menu-enabled{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-negative:0;flex-shrink:0}.split-pane-side:not(ion-menu){display:none}.split-pane-visible>.split-pane-side{-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}.split-pane-visible>.split-pane-side[side=end]{-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1}.split-pane-md{--border:1px solid rgba(var(--ion-item-border-color-rgb, 0, 0, 0), 0.13)}.split-pane-md.split-pane-visible>.split-pane-side{min-width:270px;max-width:28%;border-right:var(--border);border-left:0}.split-pane-md.split-pane-visible>.split-pane-side[side=end]{min-width:270px;max-width:28%;border-right:0;border-left:var(--border)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SplitPane, "styleMode", {
+    Object.defineProperty(FabButton, "styleMode", {
         get: function () { return "md"; },
         enumerable: true,
         configurable: true
     });
-    return SplitPane;
+    return FabButton;
 }());
-function setPaneClass(el, isMain) {
-    var toAdd;
-    var toRemove;
-    if (isMain) {
-        toAdd = SPLIT_PANE_MAIN;
-        toRemove = SPLIT_PANE_SIDE;
+var FabList = /** @class */ (function () {
+    function FabList() {
+        this.activated = false;
+        this.side = 'bottom';
     }
-    else {
-        toAdd = SPLIT_PANE_SIDE;
-        toRemove = SPLIT_PANE_MAIN;
-    }
-    var classList = el.classList;
-    classList.add(toAdd);
-    classList.remove(toRemove);
-}
+    FabList.prototype.activatedChanged = function (activated) {
+        var fabs = Array.from(this.el.querySelectorAll('ion-fab-button'));
+        var timeout = activated ? 30 : 0;
+        fabs.forEach(function (fab, i) {
+            setTimeout(function () { return fab.show = activated; }, i * timeout);
+        });
+    };
+    FabList.prototype.hostData = function () {
+        var _a;
+        return {
+            class: (_a = {
+                    'fab-list-active': this.activated
+                },
+                _a["fab-list-side-" + this.side] = true,
+                _a)
+        };
+    };
+    FabList.prototype.render = function () {
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    };
+    Object.defineProperty(FabList, "is", {
+        get: function () { return "ion-fab-list"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FabList, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FabList, "properties", {
+        get: function () {
+            return {
+                "activated": {
+                    "type": Boolean,
+                    "attr": "activated",
+                    "watchCallbacks": ["activatedChanged"]
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "side": {
+                    "type": String,
+                    "attr": "side"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FabList, "style", {
+        get: function () { return ":host{margin:66px 0;display:none;position:absolute;top:0;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;min-width:56px;min-height:56px}:host(.fab-list-active){display:-webkit-box;display:-ms-flexbox;display:flex}::slotted(.fab-button-in-list){--size:40px;-webkit-transform:scale(0);transform:scale(0);opacity:0;visibility:hidden}:host(.fab-list-side-bottom) ::slotted(.fab-button-in-list),:host(.fab-list-side-top) ::slotted(.fab-button-in-list){--padding-top:5px;--padding-bottom:5px}:host(.fab-list-side-end) ::slotted(.fab-button-in-list),:host(.fab-list-side-start) ::slotted(.fab-button-in-list){--padding-start:5px;--padding-end:5px}::slotted(.fab-button-in-list.fab-button-show){-webkit-transform:scale(1);transform:scale(1);opacity:1;visibility:visible}:host(.fab-list-side-top){top:auto;bottom:0;-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}:host(.fab-list-side-start){margin:0 66px;right:0;-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}:host(.fab-list-side-end){margin:0 66px;left:0;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return FabList;
+}());
 
 
 

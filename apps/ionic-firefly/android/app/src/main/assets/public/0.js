@@ -1,21 +1,25 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: a, b, c, d, e, f, g */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: a, b, c, d, e, f, g, h, i, j, k */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return attachComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return detachComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getClassMap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return createColorClasses; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return openURL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return hostContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return createThemedClasses; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hapticSelectionChanged; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return hapticSelectionEnd; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return hapticSelectionStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return hapticSelection; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getClassMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return createColorClasses; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return openURL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return hostContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return createThemedClasses; });
 /* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
 
 function attachComponent(delegate, container, component, cssClasses, componentProps) {
@@ -60,12 +64,36 @@ function detachComponent(delegate, element) {
     }
     return Promise.resolve();
 }
+function hapticSelection() {
+    var engine = window.TapticEngine;
+    if (engine) {
+        engine.selection();
+    }
+}
+function hapticSelectionStart() {
+    var engine = window.TapticEngine;
+    if (engine) {
+        engine.gestureSelectionStart();
+    }
+}
+function hapticSelectionChanged() {
+    var engine = window.TapticEngine;
+    if (engine) {
+        engine.gestureSelectionChanged();
+    }
+}
+function hapticSelectionEnd() {
+    var engine = window.TapticEngine;
+    if (engine) {
+        engine.gestureSelectionEnd();
+    }
+}
 function hostContext(selector, el) {
     return el.closest(selector) !== null;
 }
 function createColorClasses(color) {
     var _a;
-    return (color != null) ? (_a = {
+    return (typeof color === 'string' && color.length > 0) ? (_a = {
             'ion-color': true
         },
         _a["ion-color-" + color] = true,
@@ -120,9 +148,9 @@ function openURL(win, url, ev, direction) {
 /***/ }),
 
 /***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js":
-/*!****************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js ***!
-  \****************************************************************************************************************************/
+/*!*******************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js ***!
+  \*******************************************************************************************************************************/
 /*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __await, __makeTemplateObject, __importStar, __importDefault */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

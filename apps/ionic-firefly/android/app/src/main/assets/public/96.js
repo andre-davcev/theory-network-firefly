@@ -1,159 +1,97 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[96],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/oszblgpf.sc.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/oszblgpf.sc.entry.js ***!
-  \************************************************************************************************************************************/
-/*! exports provided: IonFab, IonFabButton, IonFabList */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ljmlrwjn.sc.entry.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ljmlrwjn.sc.entry.js ***!
+  \***************************************************************************************************************************************/
+/*! exports provided: IonCheckbox */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFab", function() { return Fab; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFabButton", function() { return FabButton; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFabList", function() { return FabList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCheckbox", function() { return Checkbox; });
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
 
 
-var Fab = /** @class */ (function () {
-    function Fab() {
-        this.edge = false;
-        this.activated = false;
+
+var Checkbox = /** @class */ (function () {
+    function Checkbox() {
+        this.inputId = "ion-cb-" + checkboxIds++;
+        this.labelId = this.inputId + "-lbl";
+        this.keyFocus = false;
+        this.name = this.inputId;
+        this.checked = false;
+        this.disabled = false;
+        this.value = 'on';
     }
-    Fab.prototype.activatedChanged = function () {
-        var activated = this.activated;
-        var fab = this.el.querySelector('ion-fab-button');
-        if (fab) {
-            fab.activated = activated;
-        }
-        Array.from(this.el.querySelectorAll('ion-fab-list')).forEach(function (list) {
-            list.activated = activated;
+    Checkbox.prototype.componentWillLoad = function () {
+        this.emitStyle();
+    };
+    Checkbox.prototype.componentDidLoad = function () {
+        this.ionStyle = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["e"])(this.ionStyle);
+    };
+    Checkbox.prototype.checkedChanged = function (isChecked) {
+        this.ionChange.emit({
+            checked: isChecked,
+            value: this.value
+        });
+        this.emitStyle();
+    };
+    Checkbox.prototype.emitStyle = function () {
+        this.ionStyle.emit({
+            'checkbox-checked': this.checked,
+            'interactive-disabled': this.disabled,
         });
     };
-    Fab.prototype.componentDidLoad = function () {
-        this.activatedChanged();
+    Checkbox.prototype.onChange = function () {
+        this.checked = !this.checked;
     };
-    Fab.prototype.onClick = function () {
-        var hasList = !!this.el.querySelector('ion-fab-list');
-        if (hasList) {
-            this.activated = !this.activated;
-        }
+    Checkbox.prototype.onKeyUp = function () {
+        this.keyFocus = true;
     };
-    Fab.prototype.close = function () {
-        this.activated = false;
+    Checkbox.prototype.onFocus = function () {
+        this.ionFocus.emit();
     };
-    Fab.prototype.hostData = function () {
-        var _a;
+    Checkbox.prototype.onBlur = function () {
+        this.keyFocus = false;
+        this.ionBlur.emit();
+    };
+    Checkbox.prototype.hostData = function () {
         return {
-            class: (_a = {},
-                _a["fab-horizontal-" + this.horizontal] = !!this.horizontal,
-                _a["fab-vertical-" + this.vertical] = !!this.vertical,
-                _a['fab-edge'] = this.edge,
-                _a)
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.color), { 'in-item': Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["j"])('ion-item', this.el), 'checkbox-checked': this.checked, 'checkbox-disabled': this.disabled, 'checkbox-key': this.keyFocus, 'interactive': true })
         };
     };
-    Fab.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    Checkbox.prototype.render = function () {
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["f"])(this.el, this.name, this.value, this.disabled);
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "checkbox-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "checkbox-inner" })),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input", { type: "checkbox", id: this.inputId, "aria-labelledby": this.labelId, onChange: this.onChange.bind(this), onFocus: this.onFocus.bind(this), onBlur: this.onBlur.bind(this), onKeyUp: this.onKeyUp.bind(this), checked: this.checked, name: this.name, value: this.value, disabled: this.disabled })
+        ];
     };
-    Object.defineProperty(Fab, "is", {
-        get: function () { return "ion-fab"; },
+    Object.defineProperty(Checkbox, "is", {
+        get: function () { return "ion-checkbox"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Fab, "encapsulation", {
+    Object.defineProperty(Checkbox, "encapsulation", {
         get: function () { return "shadow"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Fab, "properties", {
+    Object.defineProperty(Checkbox, "properties", {
         get: function () {
             return {
-                "activated": {
+                "checked": {
                     "type": Boolean,
-                    "attr": "activated",
+                    "attr": "checked",
                     "mutable": true,
-                    "watchCallbacks": ["activatedChanged"]
-                },
-                "close": {
-                    "method": true
-                },
-                "edge": {
-                    "type": Boolean,
-                    "attr": "edge"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "horizontal": {
-                    "type": String,
-                    "attr": "horizontal"
-                },
-                "vertical": {
-                    "type": String,
-                    "attr": "vertical"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Fab, "listeners", {
-        get: function () {
-            return [{
-                    "name": "click",
-                    "method": "onClick"
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Fab, "style", {
-        get: function () { return ".sc-ion-fab-h{position:absolute;z-index:999}.fab-horizontal-center.sc-ion-fab-h{left:50%;margin-left:-28px}.fab-horizontal-start.sc-ion-fab-h{left:10px;left:calc(env(safe-area-inset-left) + 10px)}.fab-horizontal-end.sc-ion-fab-h{right:10px;right:calc(env(safe-area-inset-right) + 10px)}.fab-vertical-top.sc-ion-fab-h{top:10px}.fab-vertical-top.fab-edge.sc-ion-fab-h{top:-28px}.fab-vertical-bottom.sc-ion-fab-h{bottom:10px}.fab-vertical-bottom.fab-edge.sc-ion-fab-h{bottom:-28px}.fab-vertical-center.sc-ion-fab-h{margin-top:-28px;top:50%}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Fab;
-}());
-var FabButton = /** @class */ (function () {
-    function FabButton() {
-        this.activated = false;
-        this.disabled = false;
-        this.translucent = false;
-        this.show = false;
-    }
-    FabButton.prototype.hostData = function () {
-        var inList = Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["f"])('ion-fab-list', this.el);
-        return {
-            'ion-activatable': true,
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color), { 'fab-button-in-list': inList, 'fab-button-translucent-in-list': inList && this.translucent, 'fab-button-close-active': this.activated, 'fab-button-show': this.show, 'fab-button-disabled': this.disabled, 'fab-button-translucent': this.translucent })
-        };
-    };
-    FabButton.prototype.render = function () {
-        var _this = this;
-        var TagType = this.href === undefined ? 'button' : 'a';
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, { class: "fab-button-native", disabled: this.disabled, href: this.href, onClick: function (ev) { return Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["e"])(_this.win, _this.href, ev, _this.routerDirection); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "fab-button-close-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { name: "close", lazy: false })), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "fab-button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null)));
-    };
-    Object.defineProperty(FabButton, "is", {
-        get: function () { return "ion-fab-button"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FabButton, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FabButton, "properties", {
-        get: function () {
-            return {
-                "activated": {
-                    "type": Boolean,
-                    "attr": "activated"
+                    "watchCallbacks": ["checkedChanged"]
                 },
                 "color": {
                     "type": String,
@@ -161,113 +99,76 @@ var FabButton = /** @class */ (function () {
                 },
                 "disabled": {
                     "type": Boolean,
-                    "attr": "disabled"
+                    "attr": "disabled",
+                    "watchCallbacks": ["emitStyle"]
                 },
                 "el": {
                     "elementRef": true
                 },
-                "href": {
-                    "type": String,
-                    "attr": "href"
+                "keyFocus": {
+                    "state": true
                 },
                 "mode": {
                     "type": String,
                     "attr": "mode"
                 },
-                "routerDirection": {
+                "name": {
                     "type": String,
-                    "attr": "router-direction"
+                    "attr": "name"
                 },
-                "show": {
-                    "type": Boolean,
-                    "attr": "show"
-                },
-                "translucent": {
-                    "type": Boolean,
-                    "attr": "translucent"
-                },
-                "win": {
-                    "context": "window"
+                "value": {
+                    "type": String,
+                    "attr": "value"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FabButton, "style", {
-        get: function () { return ".sc-ion-fab-button-ios-h{--ion-color-base:var(--ion-color-primary, #3880ff);--ion-color-contrast:var(--ion-color-primary-contrast, #fff);--ion-color-tint:var(--ion-color-primary-tint, #4c8dff);--size:56px;--background:var(--ion-color-base);--transition:background-color,opacity 100ms linear;--padding-start:calc((56px - var(--size)) / 2);--padding-end:calc((56px - var(--size)) / 2);--padding-top:calc((56px - var(--size)) / 2);--padding-bottom:calc((56px - var(--size)) / 2);display:block;color:var(--ion-color-contrast);font-size:14px;text-align:center;text-overflow:ellipsis;text-transform:none;white-space:nowrap;-webkit-font-kerning:none;font-kerning:none;--box-shadow:0 4px 16px rgba(0, 0, 0, 0.12);--transition:0.2s transform cubic-bezier(0.25, 1.11, 0.78, 1.59)}.fab-button-disabled.sc-ion-fab-button-ios-h{pointer-events:none}.activated.sc-ion-fab-button-ios-h{--background:var(--ion-color-tint);--background:var(--ion-color-tint);--box-shadow:0 4px 16px rgba(0, 0, 0, 0.12);--transform:scale(1.1);--transition:0.2s transform ease-out}.fab-button-native.sc-ion-fab-button-ios{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;border-radius:50%;margin:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:block;position:relative;width:var(--size);height:var(--size);-webkit-transform:var(--transform);transform:var(--transform);-webkit-transition:var(--transition);transition:var(--transition);border:0;outline:0;background:var(--background);background-clip:padding-box;line-height:var(--size);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);contain:strict;cursor:pointer;overflow:hidden;z-index:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.fab-button-native[disabled].sc-ion-fab-button-ios{cursor:default;opacity:.5;pointer-events:none}.sc-ion-fab-button-ios-s > ion-icon{line-height:1}.fab-button-inner.sc-ion-fab-button-ios{left:0;right:0;top:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-transition:all ease-in-out .3s;transition:all ease-in-out .3s;-webkit-transition-property:opacity,-webkit-transform;transition-property:opacity,-webkit-transform;transition-property:transform,opacity;transition-property:transform,opacity,-webkit-transform}[mini].sc-ion-fab-button-ios-h{--size:40px}.fab-button-close-icon.sc-ion-fab-button-ios{left:0;right:0;top:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-transform:scale(.4) rotateZ(-45deg);transform:scale(.4) rotateZ(-45deg);-webkit-transition:all ease-in-out .3s;transition:all ease-in-out .3s;-webkit-transition-property:opacity,-webkit-transform;transition-property:opacity,-webkit-transform;transition-property:transform,opacity;transition-property:transform,opacity,-webkit-transform;opacity:0}.fab-button-close-active.sc-ion-fab-button-ios-h   .fab-button-close-icon.sc-ion-fab-button-ios{-webkit-transform:scale(1) rotateZ(0);transform:scale(1) rotateZ(0);opacity:1}.fab-button-close-active.sc-ion-fab-button-ios-h   .fab-button-inner.sc-ion-fab-button-ios{-webkit-transform:scale(.4) rotateZ(45deg);transform:scale(.4) rotateZ(45deg);opacity:0}ion-ripple-effect.sc-ion-fab-button-ios{color:var(--ripple-color)}.fab-button-close-icon.sc-ion-fab-button-ios, .sc-ion-fab-button-ios-s > ion-icon{font-size:28px}.fab-button-in-list.sc-ion-fab-button-ios-h{--ion-color-contrast:var(--ion-color-light-contrast, #000);--ion-color-base:var(--ion-color-light, #f4f5f8);--transition:transform 200ms ease 10ms,opacity 200ms ease 10ms}.fab-button-in-list.activated.sc-ion-fab-button-ios-h{--background:var(--ion-color-primary-tint, #4c8dff)}.fab-translucent.sc-ion-fab-button-ios-h{--background:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.9);--backdrop-filter:saturate(180%) blur(20px)}.fab-translucent-in-list.sc-ion-fab-button-ios-h{--background:rgba(var(--ion-background-color-rgb, 255, 255, 255), 0.8)}"; },
+    Object.defineProperty(Checkbox, "events", {
+        get: function () {
+            return [{
+                    "name": "ionChange",
+                    "method": "ionChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionFocus",
+                    "method": "ionFocus",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionBlur",
+                    "method": "ionBlur",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionStyle",
+                    "method": "ionStyle",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FabButton, "styleMode", {
+    Object.defineProperty(Checkbox, "style", {
+        get: function () { return ".sc-ion-checkbox-ios-h{--background-checked:var(--ion-color-primary, #3880ff);--border-color-checked:var(--ion-color-primary, #3880ff);--checkmark-color:var(--ion-color-primary-contrast, #fff);display:inline-block;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--size:24px;--border-radius:50%;--border-width:1px;--border-style:solid;--border-color:var(--ion-item-border-color, #c8c7cc);--background:var(--ion-item-background-color, var(--ion-background-color, #fff))}.ion-color.sc-ion-checkbox-ios-h{--background-checked:var(--ion-color-base);--border-color-checked:var(--ion-color-base);--checkmark-color:var(--ion-color-contrast)}input.sc-ion-checkbox-ios{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.checkbox-icon.sc-ion-checkbox-ios{border-radius:var(--border-radius);position:relative;width:var(--size);height:var(--size);-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);background:var(--background);contain:strict}.checkbox-inner.sc-ion-checkbox-ios{border-color:var(--checkmark-color);opacity:0;left:calc(var(--size)/ 2.5 - 1px);top:calc(var(--size)/ 6);position:absolute;width:calc(var(--size)/ 6 + 1px);height:calc(var(--size)/ 2);-webkit-transform:rotate(45deg);transform:rotate(45deg);border-width:0 1px 1px 0;border-style:solid}.checkbox-checked.sc-ion-checkbox-ios-h   .checkbox-icon.sc-ion-checkbox-ios{border-color:var(--border-color-checked);background:var(--background-checked)}.checkbox-checked.sc-ion-checkbox-ios-h   .checkbox-inner.sc-ion-checkbox-ios{opacity:1}.checkbox-disabled.sc-ion-checkbox-ios-h{pointer-events:none;opacity:.3}.checkbox-key.sc-ion-checkbox-ios-h   .checkbox-icon.sc-ion-checkbox-ios::after{border-radius:50%;left:-9px;top:-9px;display:block;position:absolute;width:36px;height:36px;background:var(--ion-color-primary-tint,#4c8dff);content:\"\";opacity:.2}.in-item.sc-ion-checkbox-ios-h{margin:8px 16px 8px 2px;display:block;position:static}.in-item[slot=end].sc-ion-checkbox-ios-h{margin:10px 8px 9px 0}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Checkbox, "styleMode", {
         get: function () { return "ios"; },
         enumerable: true,
         configurable: true
     });
-    return FabButton;
+    return Checkbox;
 }());
-var FabList = /** @class */ (function () {
-    function FabList() {
-        this.activated = false;
-        this.side = 'bottom';
-    }
-    FabList.prototype.activatedChanged = function (activated) {
-        var fabs = Array.from(this.el.querySelectorAll('ion-fab-button'));
-        var timeout = activated ? 30 : 0;
-        fabs.forEach(function (fab, i) {
-            setTimeout(function () { return fab.show = activated; }, i * timeout);
-        });
-    };
-    FabList.prototype.hostData = function () {
-        var _a;
-        return {
-            class: (_a = {
-                    'fab-list-active': this.activated
-                },
-                _a["fab-list-side-" + this.side] = true,
-                _a)
-        };
-    };
-    FabList.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
-    };
-    Object.defineProperty(FabList, "is", {
-        get: function () { return "ion-fab-list"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FabList, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FabList, "properties", {
-        get: function () {
-            return {
-                "activated": {
-                    "type": Boolean,
-                    "attr": "activated",
-                    "watchCallbacks": ["activatedChanged"]
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "side": {
-                    "type": String,
-                    "attr": "side"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FabList, "style", {
-        get: function () { return ".sc-ion-fab-list-h{margin:66px 0;display:none;position:absolute;top:0;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;min-width:56px;min-height:56px}.fab-list-active.sc-ion-fab-list-h{display:-webkit-box;display:-ms-flexbox;display:flex}.sc-ion-fab-list-s > .fab-button-in-list{--size:40px;-webkit-transform:scale(0);transform:scale(0);opacity:0;visibility:hidden}.sc-ion-fab-list-h.fab-list-side-bottom .sc-ion-fab-list-s > .fab-button-in-list, .sc-ion-fab-list-h.fab-list-side-top .sc-ion-fab-list-s > .fab-button-in-list{--padding-top:5px;--padding-bottom:5px}.sc-ion-fab-list-h.fab-list-side-end .sc-ion-fab-list-s > .fab-button-in-list, .sc-ion-fab-list-h.fab-list-side-start .sc-ion-fab-list-s > .fab-button-in-list{--padding-start:5px;--padding-end:5px}.sc-ion-fab-list-s > .fab-button-in-list.fab-button-show{-webkit-transform:scale(1);transform:scale(1);opacity:1;visibility:visible}.fab-list-side-top.sc-ion-fab-list-h{top:auto;bottom:0;-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}.fab-list-side-start.sc-ion-fab-list-h{margin:0 66px;right:0;-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}.fab-list-side-end.sc-ion-fab-list-h{margin:0 66px;left:0;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return FabList;
-}());
+var checkboxIds = 0;
 
 
 

@@ -1,20 +1,21 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[116],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u6vnpl3q.sc.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u6vnpl3q.sc.entry.js ***!
-  \************************************************************************************************************************************/
-/*! exports provided: IonToast, IonToastController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/pjlyljxh.sc.entry.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/pjlyljxh.sc.entry.js ***!
+  \***************************************************************************************************************************************/
+/*! exports provided: IonPopover, IonPopoverController */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToast", function() { return Toast; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToastController", function() { return ToastController; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPopover", function() { return Popover; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPopoverController", function() { return PopoverController; });
 /* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
+/* harmony import */ var _chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-05b9bd31.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-05b9bd31.js");
+/* harmony import */ var _chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-5f438245.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-5f438245.js");
 
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
@@ -23,173 +24,290 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function iosEnterAnimation(AnimationC, baseEl, position) {
-    var baseAnimation = new AnimationC();
-    var wrapperAnimation = new AnimationC();
-    var wrapperEle = baseEl.querySelector('.toast-wrapper');
-    wrapperAnimation.addElement(wrapperEle);
-    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
-    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
-    switch (position) {
-        case 'top':
-            wrapperAnimation.fromTo('translateY', '-100%', top);
-            break;
-        case 'middle':
-            var topPosition = Math.floor(baseEl.clientHeight / 2 - wrapperEle.clientHeight / 2);
-            wrapperEle.style.top = topPosition + "px";
-            wrapperAnimation.fromTo('opacity', 0.01, 1);
-            break;
-        default:
-            wrapperAnimation.fromTo('translateY', '100%', bottom);
-            break;
+
+function iosEnterAnimation(AnimationC, baseEl, ev) {
+    var originY = 'top';
+    var originX = 'left';
+    var contentEl = baseEl.querySelector('.popover-content');
+    var contentDimentions = contentEl.getBoundingClientRect();
+    var contentWidth = contentDimentions.width;
+    var contentHeight = contentDimentions.height;
+    var bodyWidth = window.innerWidth;
+    var bodyHeight = window.innerHeight;
+    var targetDim = ev && ev.target && ev.target.getBoundingClientRect();
+    var targetTop = targetDim != null && 'top' in targetDim ? targetDim.top : bodyHeight / 2 - contentHeight / 2;
+    var targetLeft = targetDim != null && 'left' in targetDim ? targetDim.left : bodyWidth / 2;
+    var targetWidth = (targetDim && targetDim.width) || 0;
+    var targetHeight = (targetDim && targetDim.height) || 0;
+    var arrowEl = baseEl.querySelector('.popover-arrow');
+    var arrowDim = arrowEl.getBoundingClientRect();
+    var arrowWidth = arrowDim.width;
+    var arrowHeight = arrowDim.height;
+    if (targetDim == null) {
+        arrowEl.style.display = 'none';
     }
+    var arrowCSS = {
+        top: targetTop + targetHeight,
+        left: targetLeft + targetWidth / 2 - arrowWidth / 2
+    };
+    var popoverCSS = {
+        top: targetTop + targetHeight + (arrowHeight - 1),
+        left: targetLeft + targetWidth / 2 - contentWidth / 2
+    };
+    var checkSafeAreaLeft = false;
+    var checkSafeAreaRight = false;
+    if (popoverCSS.left < POPOVER_IOS_BODY_PADDING + 25) {
+        checkSafeAreaLeft = true;
+        popoverCSS.left = POPOVER_IOS_BODY_PADDING;
+    }
+    else if (contentWidth + POPOVER_IOS_BODY_PADDING + popoverCSS.left + 25 > bodyWidth) {
+        checkSafeAreaRight = true;
+        popoverCSS.left = bodyWidth - contentWidth - POPOVER_IOS_BODY_PADDING;
+        originX = 'right';
+    }
+    if (targetTop + targetHeight + contentHeight > bodyHeight && targetTop - contentHeight > 0) {
+        arrowCSS.top = targetTop - (arrowHeight + 1);
+        console.log(arrowCSS);
+        console.log(targetTop);
+        console.log(contentHeight);
+        popoverCSS.top = targetTop - contentHeight - (arrowHeight - 1);
+        baseEl.className = baseEl.className + ' popover-bottom';
+        originY = 'bottom';
+    }
+    else if (targetTop + targetHeight + contentHeight > bodyHeight) {
+        contentEl.style.bottom = POPOVER_IOS_BODY_PADDING + '%';
+    }
+    arrowEl.style.top = arrowCSS.top + 'px';
+    arrowEl.style.left = arrowCSS.left + 'px';
+    contentEl.style.top = popoverCSS.top + 'px';
+    contentEl.style.left = popoverCSS.left + 'px';
+    if (checkSafeAreaLeft) {
+        contentEl.style.left = "calc(" + popoverCSS.left + "px + var(--ion-safe-area-left, 0px))";
+    }
+    if (checkSafeAreaRight) {
+        contentEl.style.left = "calc(" + popoverCSS.left + "px - var(--ion-safe-area-right, 0px))";
+    }
+    contentEl.style.transformOrigin = originY + ' ' + originX;
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    backdropAnimation.fromTo('opacity', 0.01, 0.08);
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.popover-wrapper'));
+    wrapperAnimation.fromTo('opacity', 0.01, 1);
     return Promise.resolve(baseAnimation
         .addElement(baseEl)
-        .easing('cubic-bezier(.155,1.105,.295,1.12)')
-        .duration(400)
+        .easing('ease')
+        .duration(100)
+        .add(backdropAnimation)
         .add(wrapperAnimation));
 }
-function iosLeaveAnimation(AnimationC, baseEl, position) {
+var POPOVER_IOS_BODY_PADDING = 5;
+function iosLeaveAnimation(AnimationC, baseEl) {
     var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
     var wrapperAnimation = new AnimationC();
-    var wrapperEle = baseEl.querySelector('.toast-wrapper');
-    wrapperAnimation.addElement(wrapperEle);
-    var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
-    var top = "calc(10px + var(--ion-safe-area-top, 0px))";
-    switch (position) {
-        case 'top':
-            wrapperAnimation.fromTo('translateY', top, '-100%');
-            break;
-        case 'middle':
-            wrapperAnimation.fromTo('opacity', 0.99, 0);
-            break;
-        default:
-            wrapperAnimation.fromTo('translateY', bottom, '100%');
-            break;
-    }
+    wrapperAnimation.addElement(baseEl.querySelector('.popover-wrapper'));
+    wrapperAnimation.fromTo('opacity', 0.99, 0);
+    backdropAnimation.fromTo('opacity', 0.08, 0);
     return Promise.resolve(baseAnimation
         .addElement(baseEl)
-        .easing('cubic-bezier(.36,.66,.04,1)')
+        .easing('ease')
+        .duration(500)
+        .add(backdropAnimation)
+        .add(wrapperAnimation));
+}
+function mdEnterAnimation(AnimationC, baseEl, ev) {
+    var originY = 'top';
+    var originX = 'left';
+    var contentEl = baseEl.querySelector('.popover-content');
+    var contentDimentions = contentEl.getBoundingClientRect();
+    var contentWidth = contentDimentions.width;
+    var contentHeight = contentDimentions.height;
+    var bodyWidth = window.innerWidth;
+    var bodyHeight = window.innerHeight;
+    var targetDim = ev && ev.target && ev.target.getBoundingClientRect();
+    var targetTop = targetDim != null && 'top' in targetDim
+        ? targetDim.top
+        : bodyHeight / 2 - contentHeight / 2;
+    var targetLeft = targetDim != null && 'left' in targetDim
+        ? targetDim.left
+        : bodyWidth / 2 - contentWidth / 2;
+    var targetHeight = (targetDim && targetDim.height) || 0;
+    var popoverCSS = {
+        top: targetTop,
+        left: targetLeft
+    };
+    if (popoverCSS.left < POPOVER_MD_BODY_PADDING) {
+        popoverCSS.left = POPOVER_MD_BODY_PADDING;
+    }
+    else if (contentWidth + POPOVER_MD_BODY_PADDING + popoverCSS.left >
+        bodyWidth) {
+        popoverCSS.left = bodyWidth - contentWidth - POPOVER_MD_BODY_PADDING;
+        originX = 'right';
+    }
+    if (targetTop + targetHeight + contentHeight > bodyHeight &&
+        targetTop - contentHeight > 0) {
+        popoverCSS.top = targetTop - contentHeight;
+        baseEl.className = baseEl.className + ' popover-bottom';
+        originY = 'bottom';
+    }
+    else if (targetTop + targetHeight + contentHeight > bodyHeight) {
+        contentEl.style.bottom = POPOVER_MD_BODY_PADDING + 'px';
+    }
+    contentEl.style.top = popoverCSS.top + 'px';
+    contentEl.style.left = popoverCSS.left + 'px';
+    contentEl.style.transformOrigin = originY + ' ' + originX;
+    var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
+    backdropAnimation.fromTo('opacity', 0.01, 0.08);
+    var wrapperAnimation = new AnimationC();
+    wrapperAnimation.addElement(baseEl.querySelector('.popover-wrapper'));
+    wrapperAnimation.fromTo('opacity', 0.01, 1);
+    var contentAnimation = new AnimationC();
+    contentAnimation.addElement(baseEl.querySelector('.popover-content'));
+    contentAnimation.fromTo('scale', 0.001, 1);
+    var viewportAnimation = new AnimationC();
+    viewportAnimation.addElement(baseEl.querySelector('.popover-viewport'));
+    viewportAnimation.fromTo('opacity', 0.01, 1);
+    return Promise.resolve(baseAnimation
+        .addElement(baseEl)
+        .easing('cubic-bezier(0.36,0.66,0.04,1)')
         .duration(300)
-        .add(wrapperAnimation));
+        .add(backdropAnimation)
+        .add(wrapperAnimation)
+        .add(contentAnimation)
+        .add(viewportAnimation));
 }
-function mdEnterAnimation(AnimationC, baseEl, position) {
+var POPOVER_MD_BODY_PADDING = 12;
+function mdLeaveAnimation(AnimationC, baseEl) {
     var baseAnimation = new AnimationC();
+    var backdropAnimation = new AnimationC();
+    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
     var wrapperAnimation = new AnimationC();
-    var wrapperEle = baseEl.querySelector('.toast-wrapper');
-    wrapperAnimation.addElement(wrapperEle);
-    switch (position) {
-        case 'top':
-            wrapperAnimation.fromTo('translateY', '-100%', '0%');
-            break;
-        case 'middle':
-            var topPosition = Math.floor(baseEl.clientHeight / 2 - wrapperEle.clientHeight / 2);
-            wrapperEle.style.top = topPosition + "px";
-            wrapperAnimation.fromTo('opacity', 0.01, 1);
-            break;
-        default:
-            wrapperAnimation.fromTo('translateY', '100%', '0%');
-            break;
-    }
+    wrapperAnimation.addElement(baseEl.querySelector('.popover-wrapper'));
+    wrapperAnimation.fromTo('opacity', 0.99, 0);
+    backdropAnimation.fromTo('opacity', 0.08, 0);
     return Promise.resolve(baseAnimation
         .addElement(baseEl)
-        .easing('cubic-bezier(.36,.66,.04,1)')
-        .duration(400)
+        .easing('ease')
+        .duration(500)
+        .add(backdropAnimation)
         .add(wrapperAnimation));
 }
-function mdLeaveAnimation(AnimationC, baseEl, position) {
-    var baseAnimation = new AnimationC();
-    var wrapperAnimation = new AnimationC();
-    var wrapperEle = baseEl.querySelector('.toast-wrapper');
-    wrapperAnimation.addElement(wrapperEle);
-    switch (position) {
-        case 'top':
-            wrapperAnimation.fromTo('translateY', '0px', '-100%');
-            break;
-        case 'middle':
-            wrapperAnimation.fromTo('opacity', 0.99, 0);
-            break;
-        default:
-            wrapperAnimation.fromTo('translateY', "0px", '100%');
-            break;
-    }
-    return Promise.resolve(baseAnimation
-        .addElement(baseEl)
-        .easing('cubic-bezier(.36,.66,.04,1)')
-        .duration(300)
-        .add(wrapperAnimation));
-}
-var Toast = /** @class */ (function () {
-    function Toast() {
+var Popover = /** @class */ (function () {
+    function Popover() {
         this.presented = false;
-        this.duration = 0;
-        this.keyboardClose = false;
-        this.position = 'bottom';
-        this.showCloseButton = false;
+        this.keyboardClose = true;
+        this.backdropDismiss = true;
+        this.showBackdrop = true;
         this.translucent = false;
         this.animated = true;
     }
-    Toast.prototype.componentDidLoad = function () {
-        this.ionToastDidLoad.emit();
+    Popover.prototype.componentDidLoad = function () {
+        this.ionPopoverDidLoad.emit();
     };
-    Toast.prototype.componentDidUnload = function () {
-        this.ionToastDidUnload.emit();
+    Popover.prototype.componentDidUnload = function () {
+        this.ionPopoverDidUnload.emit();
     };
-    Toast.prototype.present = function () {
+    Popover.prototype.onDismiss = function (ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        this.dismiss();
+    };
+    Popover.prototype.onBackdropTap = function () {
+        this.dismiss(undefined, _chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_3__["a"]);
+    };
+    Popover.prototype.lifecycle = function (modalEvent) {
+        var el = this.usersElement;
+        var name = LIFECYCLE_MAP[modalEvent.type];
+        if (el && name) {
+            var event = new CustomEvent(name, {
+                bubbles: false,
+                cancelable: false,
+                detail: modalEvent.detail
+            });
+            el.dispatchEvent(event);
+        }
+    };
+    Popover.prototype.present = function () {
         return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _this = this;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this, 'toastEnter', iosEnterAnimation, mdEnterAnimation, this.position)];
-                    case 1:
-                        _a.sent();
-                        if (this.duration > 0) {
-                            this.durationTimeout = setTimeout(function () { return _this.dismiss(undefined, 'timeout'); }, this.duration);
+            var container, data, _a;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (this.presented) {
+                            return [2 /*return*/];
                         }
-                        return [2 /*return*/];
+                        container = this.el.querySelector('.popover-content');
+                        if (!container) {
+                            throw new Error('container is undefined');
+                        }
+                        data = Object.assign({}, this.componentProps, { popover: this.el });
+                        _a = this;
+                        return [4 /*yield*/, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["a"])(this.delegate, container, this.component, ['popover-viewport', this.el['s-sc']], data)];
+                    case 1:
+                        _a.usersElement = _b.sent();
+                        return [4 /*yield*/, Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_4__["a"])(this.usersElement)];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/, Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_3__["e"])(this, 'popoverEnter', iosEnterAnimation, mdEnterAnimation, this.event)];
                 }
             });
         });
     };
-    Toast.prototype.dismiss = function (data, role) {
-        if (this.durationTimeout) {
-            clearTimeout(this.durationTimeout);
-        }
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this, data, role, 'toastLeave', iosLeaveAnimation, mdLeaveAnimation, this.position);
+    Popover.prototype.dismiss = function (data, role) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var shouldDismiss;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_3__["b"])(this, data, role, 'popoverLeave', iosLeaveAnimation, mdLeaveAnimation, this.event)];
+                    case 1:
+                        shouldDismiss = _a.sent();
+                        if (!shouldDismiss) return [3 /*break*/, 3];
+                        return [4 /*yield*/, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this.delegate, this.usersElement)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/, shouldDismiss];
+                }
+            });
+        });
     };
-    Toast.prototype.onDidDismiss = function () {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionToastDidDismiss');
+    Popover.prototype.onDidDismiss = function () {
+        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.el, 'ionPopoverDidDismiss');
     };
-    Toast.prototype.onWillDismiss = function () {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionToastWillDismiss');
+    Popover.prototype.onWillDismiss = function () {
+        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.el, 'ionPopoverWillDismiss');
     };
-    Toast.prototype.hostData = function () {
-        var themedClasses = this.translucent ? Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.mode, 'toast-translucent') : {};
+    Popover.prototype.hostData = function () {
         return {
             style: {
-                zIndex: 60000 + this.overlayIndex,
+                zIndex: 20000 + this.overlayIndex,
             },
-            class: Object.assign({}, themedClasses, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.mode, 'toast'), Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.cssClass))
+            'no-router': true,
+            class: Object.assign({ 'popover-translucent': this.translucent }, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.cssClass))
         };
     };
-    Toast.prototype.render = function () {
-        var _this = this;
-        var _a;
-        var wrapperClass = (_a = {
-                'toast-wrapper': true
-            },
-            _a["toast-" + this.position] = true,
-            _a);
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: wrapperClass }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toast-container" }, this.message !== undefined &&
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toast-message" }, this.message), this.showCloseButton &&
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-button", { fill: "clear", color: "light", "ion-activatable": true, class: "toast-button", onClick: function () { return _this.dismiss(undefined, 'cancel'); } }, this.closeButtonText || 'Close'))));
+    Popover.prototype.render = function () {
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop", { tappable: this.backdropDismiss }),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "popover-wrapper" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "popover-arrow" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "popover-content" }))
+        ];
     };
-    Object.defineProperty(Toast, "is", {
-        get: function () { return "ion-toast"; },
+    Object.defineProperty(Popover, "is", {
+        get: function () { return "ion-popover"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Toast, "properties", {
+    Object.defineProperty(Popover, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Popover, "properties", {
         get: function () {
             return {
                 "animated": {
@@ -199,9 +317,17 @@ var Toast = /** @class */ (function () {
                 "animationCtrl": {
                     "connect": "ion-animation-controller"
                 },
-                "closeButtonText": {
+                "backdropDismiss": {
+                    "type": Boolean,
+                    "attr": "backdrop-dismiss"
+                },
+                "component": {
                     "type": String,
-                    "attr": "close-button-text"
+                    "attr": "component"
+                },
+                "componentProps": {
+                    "type": "Any",
+                    "attr": "component-props"
                 },
                 "config": {
                     "context": "config"
@@ -210,12 +336,12 @@ var Toast = /** @class */ (function () {
                     "type": String,
                     "attr": "css-class"
                 },
+                "delegate": {
+                    "type": "Any",
+                    "attr": "delegate"
+                },
                 "dismiss": {
                     "method": true
-                },
-                "duration": {
-                    "type": Number,
-                    "attr": "duration"
                 },
                 "el": {
                     "elementRef": true
@@ -224,6 +350,10 @@ var Toast = /** @class */ (function () {
                     "type": "Any",
                     "attr": "enter-animation"
                 },
+                "event": {
+                    "type": "Any",
+                    "attr": "event"
+                },
                 "keyboardClose": {
                     "type": Boolean,
                     "attr": "keyboard-close"
@@ -231,10 +361,6 @@ var Toast = /** @class */ (function () {
                 "leaveAnimation": {
                     "type": "Any",
                     "attr": "leave-animation"
-                },
-                "message": {
-                    "type": String,
-                    "attr": "message"
                 },
                 "mode": {
                     "type": String,
@@ -250,16 +376,12 @@ var Toast = /** @class */ (function () {
                     "type": Number,
                     "attr": "overlay-index"
                 },
-                "position": {
-                    "type": String,
-                    "attr": "position"
-                },
                 "present": {
                     "method": true
                 },
-                "showCloseButton": {
+                "showBackdrop": {
                     "type": Boolean,
-                    "attr": "show-close-button"
+                    "attr": "show-backdrop"
                 },
                 "translucent": {
                     "type": Boolean,
@@ -270,41 +392,41 @@ var Toast = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Toast, "events", {
+    Object.defineProperty(Popover, "events", {
         get: function () {
             return [{
-                    "name": "ionToastDidLoad",
-                    "method": "ionToastDidLoad",
+                    "name": "ionPopoverDidLoad",
+                    "method": "ionPopoverDidLoad",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionToastDidPresent",
+                    "name": "ionPopoverDidUnload",
+                    "method": "ionPopoverDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionPopoverDidPresent",
                     "method": "didPresent",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionToastWillPresent",
+                    "name": "ionPopoverWillPresent",
                     "method": "willPresent",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionToastWillDismiss",
+                    "name": "ionPopoverWillDismiss",
                     "method": "willDismiss",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionToastDidDismiss",
+                    "name": "ionPopoverDidDismiss",
                     "method": "didDismiss",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionToastDidUnload",
-                    "method": "ionToastDidUnload",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
@@ -313,40 +435,71 @@ var Toast = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Toast, "style", {
-        get: function () { return "ion-toast{left:0;top:0;display:block;position:absolute;width:100%;height:100%;color:var(--color);font-family:var(--ion-font-family,inherit);contain:strict;z-index:1000;pointer-events:none}.toast-wrapper{background:var(--background)}.toast-wrapper.toast-top{-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0);top:0}.toast-wrapper.toast-bottom{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);bottom:0}.toast-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;pointer-events:auto;contain:content}.toast-button{font-size:15px}.toast-message{-webkit-box-flex:1;-ms-flex:1;flex:1}.toast-md{--background:var(--ion-text-color-step-150, #262626);--color:var(--ion-background-color, #fff);font-size:15px}.toast-md .toast-wrapper{left:0;right:0;margin:auto;display:block;position:absolute;width:100%;max-width:700px;z-index:10}.toast-md .toast-wrapper.toast-top{padding-top:var(--ion-safe-area-top,0)}.toast-md .toast-wrapper.toast-bottom{padding-bottom:var(--ion-safe-area-bottom,0)}.toast-md .toast-wrapper.toast-middle{opacity:.01}.toast-md .toast-message{padding:19px 16px 17px}"; },
+    Object.defineProperty(Popover, "listeners", {
+        get: function () {
+            return [{
+                    "name": "ionDismiss",
+                    "method": "onDismiss"
+                }, {
+                    "name": "ionBackdropTap",
+                    "method": "onBackdropTap"
+                }, {
+                    "name": "ionPopoverDidPresent",
+                    "method": "lifecycle"
+                }, {
+                    "name": "ionPopoverWillPresent",
+                    "method": "lifecycle"
+                }, {
+                    "name": "ionPopoverWillDismiss",
+                    "method": "lifecycle"
+                }, {
+                    "name": "ionPopoverDidDismiss",
+                    "method": "lifecycle"
+                }];
+        },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Toast, "styleMode", {
-        get: function () { return "md"; },
+    Object.defineProperty(Popover, "style", {
+        get: function () { return ".sc-ion-popover-ios-h{left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;z-index:1000}.popover-wrapper.sc-ion-popover-ios{opacity:0;z-index:10}.popover-content.sc-ion-popover-ios{display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;overflow:auto;z-index:10;border-radius:10px;width:200px;min-width:0;min-height:0;max-height:90%;background-color:var(--ion-background-color,#fff);color:var(--ion-text-color,#000)}.popover-viewport.sc-ion-popover-ios{--ion-safe-area-top:0px;--ion-safe-area-right:0px;--ion-safe-area-bottom:0px;--ion-safe-area-left:0px}.popover-arrow.sc-ion-popover-ios{display:block;position:absolute;width:20px;height:10px;overflow:hidden}.popover-arrow.sc-ion-popover-ios::after{left:3px;top:3px;border-radius:3px;position:absolute;width:14px;height:14px;-webkit-transform:rotate(45deg);transform:rotate(45deg);background-color:var(--ion-background-color,#fff);content:\"\";z-index:10}.popover-bottom.sc-ion-popover-ios-h   .popover-arrow.sc-ion-popover-ios{top:auto;bottom:-10px}.popover-bottom.sc-ion-popover-ios-h   .popover-arrow.sc-ion-popover-ios::after{top:-6px}.popover-translucent.sc-ion-popover-ios-h   .popover-arrow.sc-ion-popover-ios::after, .popover-translucent.sc-ion-popover-ios-h   .popover-content.sc-ion-popover-ios{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}"; },
         enumerable: true,
         configurable: true
     });
-    return Toast;
+    Object.defineProperty(Popover, "styleMode", {
+        get: function () { return "ios"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Popover;
 }());
-var ToastController = /** @class */ (function () {
-    function ToastController() {
+var LIFECYCLE_MAP = {
+    'ionPopoverDidPresent': 'ionViewDidEnter',
+    'ionPopoverWillPresent': 'ionViewWillEnter',
+    'ionPopoverWillDismiss': 'ionViewWillDismiss',
+    'ionPopoverDidDismiss': 'ionViewDidDismiss',
+};
+var PopoverController = /** @class */ (function () {
+    function PopoverController() {
     }
-    ToastController.prototype.create = function (opts) {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement('ion-toast'), opts);
+    PopoverController.prototype.create = function (opts) {
+        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_3__["f"])(this.doc.createElement('ion-popover'), opts);
     };
-    ToastController.prototype.dismiss = function (data, role, id) {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc, data, role, 'ion-toast', id);
+    PopoverController.prototype.dismiss = function (data, role, id) {
+        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.doc, data, role, 'ion-popover', id);
     };
-    ToastController.prototype.getTop = function () {
+    PopoverController.prototype.getTop = function () {
         return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                return [2 /*return*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc, 'ion-toast')];
+                return [2 /*return*/, Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_3__["h"])(this.doc, 'ion-popover')];
             });
         });
     };
-    Object.defineProperty(ToastController, "is", {
-        get: function () { return "ion-toast-controller"; },
+    Object.defineProperty(PopoverController, "is", {
+        get: function () { return "ion-popover-controller"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ToastController, "properties", {
+    Object.defineProperty(PopoverController, "properties", {
         get: function () {
             return {
                 "create": {
@@ -366,7 +519,7 @@ var ToastController = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    return ToastController;
+    return PopoverController;
 }());
 
 

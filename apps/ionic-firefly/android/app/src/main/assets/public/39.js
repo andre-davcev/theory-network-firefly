@@ -1,179 +1,104 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[39],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/bfzinp9p.entry.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/bfzinp9p.entry.js ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: IonInfiniteScroll, IonInfiniteScrollContent */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/agpviox7.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/agpviox7.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonSegment, IonSegmentButton */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonInfiniteScroll", function() { return InfiniteScroll; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonInfiniteScrollContent", function() { return InfiniteScrollContent; });
-/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSegment", function() { return Segment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSegmentButton", function() { return SegmentButton; });
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
 
 
-var InfiniteScroll = /** @class */ (function () {
-    function InfiniteScroll() {
-        this.thrPx = 0;
-        this.thrPc = 0;
-        this.didFire = false;
-        this.isBusy = false;
-        this.isLoading = false;
-        this.threshold = '15%';
+var Segment = /** @class */ (function () {
+    function Segment() {
         this.disabled = false;
-        this.position = 'bottom';
     }
-    InfiniteScroll.prototype.thresholdChanged = function (val) {
-        if (val.lastIndexOf('%') > -1) {
-            this.thrPx = 0;
-            this.thrPc = (parseFloat(val) / 100);
-        }
-        else {
-            this.thrPx = parseFloat(val);
-            this.thrPc = 0;
-        }
+    Segment.prototype.valueChanged = function (value) {
+        this.updateButtons();
+        this.ionChange.emit({ value: value });
     };
-    InfiniteScroll.prototype.disabledChanged = function (val) {
-        this.enableScrollEvents(!val);
+    Segment.prototype.segmentClick = function (ev) {
+        var selectedButton = ev.target;
+        this.value = selectedButton.value;
     };
-    InfiniteScroll.prototype.componentDidLoad = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var contentEl, _a;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        contentEl = this.el.closest('ion-content');
-                        if (!contentEl) return [3 /*break*/, 3];
-                        return [4 /*yield*/, contentEl.componentOnReady()];
-                    case 1:
-                        _b.sent();
-                        _a = this;
-                        return [4 /*yield*/, contentEl.getScrollElement()];
-                    case 2:
-                        _a.scrollEl = _b.sent();
-                        _b.label = 3;
-                    case 3:
-                        this.thresholdChanged(this.threshold);
-                        this.enableScrollEvents(!this.disabled);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    InfiniteScroll.prototype.componentDidUnload = function () {
-        this.scrollEl = undefined;
-    };
-    InfiniteScroll.prototype.onScroll = function () {
-        var scrollEl = this.scrollEl;
-        if (!scrollEl || !this.canStart()) {
-            return 1;
-        }
-        var infiniteHeight = this.el.offsetHeight;
-        if (infiniteHeight === 0) {
-            return 2;
-        }
-        var scrollTop = scrollEl.scrollTop;
-        var scrollHeight = scrollEl.scrollHeight;
-        var height = scrollEl.offsetHeight;
-        var threshold = this.thrPc !== 0 ? (height * this.thrPc) : this.thrPx;
-        var distanceFromInfinite = (this.position === 'bottom')
-            ? scrollHeight - infiniteHeight - scrollTop - threshold - height
-            : scrollTop - infiniteHeight - threshold;
-        if (distanceFromInfinite < 0) {
-            if (!this.didFire) {
-                this.isLoading = true;
-                this.didFire = true;
-                this.ionInfinite.emit();
-                return 3;
+    Segment.prototype.componentDidLoad = function () {
+        if (this.value == null) {
+            var checked = this.getButtons().find(function (b) { return b.checked; });
+            if (checked) {
+                this.value = checked.value;
             }
         }
-        else {
-            this.didFire = false;
-        }
-        return 4;
+        this.updateButtons();
     };
-    InfiniteScroll.prototype.complete = function () {
-        var scrollEl = this.scrollEl;
-        if (!this.isLoading || !scrollEl) {
-            return;
-        }
-        this.isLoading = false;
-    };
-    InfiniteScroll.prototype.canStart = function () {
-        return (!this.disabled &&
-            !this.isBusy &&
-            !!this.scrollEl &&
-            !this.isLoading);
-    };
-    InfiniteScroll.prototype.enableScrollEvents = function (shouldListen) {
-        if (this.scrollEl) {
-            this.enableListener(this, 'scroll', shouldListen, this.scrollEl);
+    Segment.prototype.updateButtons = function () {
+        var value = this.value;
+        for (var _i = 0, _a = this.getButtons(); _i < _a.length; _i++) {
+            var button = _a[_i];
+            button.checked = (button.value === value);
         }
     };
-    InfiniteScroll.prototype.hostData = function () {
+    Segment.prototype.getButtons = function () {
+        return Array.from(this.el.querySelectorAll('ion-segment-button'));
+    };
+    Segment.prototype.hostData = function () {
         return {
-            class: {
-                'infinite-scroll-loading': this.isLoading,
-                'infinite-scroll-enabled': !this.disabled
-            }
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.color), { 'segment-disabled': this.disabled })
         };
     };
-    Object.defineProperty(InfiniteScroll, "is", {
-        get: function () { return "ion-infinite-scroll"; },
+    Object.defineProperty(Segment, "is", {
+        get: function () { return "ion-segment"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(InfiniteScroll, "properties", {
+    Object.defineProperty(Segment, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Segment, "properties", {
         get: function () {
             return {
-                "complete": {
-                    "method": true
+                "color": {
+                    "type": String,
+                    "attr": "color"
                 },
                 "disabled": {
                     "type": Boolean,
-                    "attr": "disabled",
-                    "watchCallbacks": ["disabledChanged"]
+                    "attr": "disabled"
                 },
                 "el": {
                     "elementRef": true
                 },
-                "enableListener": {
-                    "context": "enableListener"
-                },
-                "isLoading": {
-                    "state": true
-                },
-                "position": {
+                "mode": {
                     "type": String,
-                    "attr": "position"
+                    "attr": "mode"
                 },
-                "queue": {
-                    "context": "queue"
-                },
-                "threshold": {
+                "value": {
                     "type": String,
-                    "attr": "threshold",
-                    "watchCallbacks": ["thresholdChanged"]
+                    "attr": "value",
+                    "mutable": true,
+                    "watchCallbacks": ["valueChanged"]
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(InfiniteScroll, "events", {
+    Object.defineProperty(Segment, "events", {
         get: function () {
             return [{
-                    "name": "ionInfinite",
-                    "method": "ionInfinite",
+                    "name": "ionChange",
+                    "method": "ionChange",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
@@ -182,77 +107,115 @@ var InfiniteScroll = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(InfiniteScroll, "listeners", {
+    Object.defineProperty(Segment, "listeners", {
         get: function () {
             return [{
-                    "name": "scroll",
-                    "method": "onScroll",
-                    "disabled": true,
-                    "passive": true
+                    "name": "ionSelect",
+                    "method": "segmentClick"
                 }];
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(InfiniteScroll, "style", {
-        get: function () { return "ion-infinite-scroll{display:none;width:100%}.infinite-scroll-enabled{display:block}"; },
+    Object.defineProperty(Segment, "style", {
+        get: function () { return ".sc-ion-segment-ios-h{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;font-family:var(--ion-font-family,inherit);text-align:center;--background:transparent;--background-checked:var(--ion-color-primary, #3880ff);--border-color:currentColor;--border-color-checked:var(--ion-color-primary, #3880ff);--border-color-disabled:var(--ion-color-primary, #3880ff);--color:var(--ion-color-primary, #3880ff);--color-checked:var(--ion-color-primary-contrast, #fff);--color-disabled:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.3)}.sc-ion-segment-ios-s > ion-segment-button{--btn-background:var(--background);--btn-border-color:var(--border-color);color:var(--color);--border-radius:4px;--border-width:1px;--border-style:solid;--transition:100ms all linear;--icon-size:26px;height:32px;font-size:13px;line-height:37px}.sc-ion-segment-ios-s > .segment-button-checked{--btn-background:var(--background-checked);--btn-border-color:var(--border-color-checked);color:var(--color-checked)}.sc-ion-segment-ios-s > .segment-button-disabled, .segment-disabled.sc-ion-segment-ios-h{pointer-events:none}.segment-disabled.sc-ion-segment-ios-h{opacity:.4}.sc-ion-segment-ios-s > .segment-button-disabled{--btn-border-color:var(--border-color-disabled);color:var(--color-disabled)}.sc-ion-segment-ios-h.ion-color.sc-ion-segment-ios-s > ion-segment-button{color:var(--ion-color-base)}.sc-ion-segment-ios-h.ion-color.sc-ion-segment-ios-s > .segment-button-checked{--btn-background:var(--ion-color-base);--btn-border-color:var(--ion-color-base);color:var(--ion-color-contrast)}.sc-ion-segment-ios-h.ion-color.sc-ion-segment-ios-s > .segment-button-disabled{--btn-border-color:var(--ion-color-base);color:rgba(var(--ion-color-base-rgb),.5)}ion-toolbar.sc-ion-segment-ios-h, ion-toolbar   .sc-ion-segment-ios-h{left:0;right:0;top:0;bottom:0;margin:0;position:absolute}.sc-ion-segment-ios-hion-toolbar.sc-ion-segment-ios-s > ion-segment-button, ion-toolbar .sc-ion-segment-ios-h.sc-ion-segment-ios-s > ion-segment-button{max-width:100px;height:30px;font-size:12px;line-height:22px}ion-toolbar.ion-color.sc-ion-segment-ios-h:not(.ion-color), ion-toolbar.ion-color   .sc-ion-segment-ios-h:not(.ion-color){--color:var(--ion-color-contrast);--color-checked:var(--ion-color-base);--color-disabled:rgba(var(--ion-color-contrast-rgb), 0.3);--background-checked:var(--ion-color-contrast);--border-color-checked:var(--ion-color-contrast);--border-color-disabled:var(--ion-color-contrast)}"; },
         enumerable: true,
         configurable: true
     });
-    return InfiniteScroll;
+    Object.defineProperty(Segment, "styleMode", {
+        get: function () { return "ios"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Segment;
 }());
-var InfiniteScrollContent = /** @class */ (function () {
-    function InfiniteScrollContent() {
+var ids = 0;
+var SegmentButton = /** @class */ (function () {
+    function SegmentButton() {
+        this.checked = false;
+        this.disabled = false;
+        this.value = 'ion-sb-' + (ids++);
     }
-    InfiniteScrollContent.prototype.componentDidLoad = function () {
-        if (this.loadingSpinner === undefined) {
-            this.loadingSpinner = this.config.get('infiniteLoadingSpinner', this.config.get('spinner', 'lines'));
+    SegmentButton.prototype.checkedChanged = function (checked, prev) {
+        if (checked && !prev) {
+            this.ionSelect.emit();
         }
     };
-    InfiniteScrollContent.prototype.hostData = function () {
+    SegmentButton.prototype.hostData = function () {
+        var _a = this, disabled = _a.disabled, checked = _a.checked, color = _a.color;
         return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'infinite-scroll-content')
+            'ion-activatable': true,
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["h"])(color), { 'segment-button-disabled': disabled, 'segment-button-checked': checked })
         };
     };
-    InfiniteScrollContent.prototype.render = function () {
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "infinite-loading" }, this.loadingSpinner && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "infinite-loading-spinner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-spinner", { name: this.loadingSpinner }))), this.loadingText && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "infinite-loading-text", innerHTML: this.loadingText }))));
+    SegmentButton.prototype.render = function () {
+        var _this = this;
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", { type: "button", "aria-pressed": this.checked ? 'true' : null, class: "button-native", disabled: this.disabled, onClick: function () { return _this.checked = true; } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null))
+        ];
     };
-    Object.defineProperty(InfiniteScrollContent, "is", {
-        get: function () { return "ion-infinite-scroll-content"; },
+    Object.defineProperty(SegmentButton, "is", {
+        get: function () { return "ion-segment-button"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(InfiniteScrollContent, "properties", {
+    Object.defineProperty(SegmentButton, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SegmentButton, "properties", {
         get: function () {
             return {
-                "config": {
-                    "context": "config"
+                "checked": {
+                    "type": Boolean,
+                    "attr": "checked",
+                    "mutable": true,
+                    "watchCallbacks": ["checkedChanged"]
                 },
-                "loadingSpinner": {
+                "color": {
                     "type": String,
-                    "attr": "loading-spinner",
-                    "mutable": true
+                    "attr": "color"
                 },
-                "loadingText": {
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "mode": {
                     "type": String,
-                    "attr": "loading-text"
+                    "attr": "mode"
+                },
+                "value": {
+                    "type": String,
+                    "attr": "value"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(InfiniteScrollContent, "style", {
-        get: function () { return "ion-infinite-scroll-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;min-height:84px;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.infinite-loading{margin:0 0 32px;display:none;width:100%}.infinite-loading-text{margin:4px 32px 0}.infinite-scroll-loading ion-infinite-scroll-content>.infinite-loading{display:block}.infinite-scroll-content-md .infinite-loading-text{color:var(--ion-text-color-step-400,#666)}.infinite-scroll-content-md .infinite-loading-spinner .spinner-crescent circle,.infinite-scroll-content-md .infinite-loading-spinner .spinner-lines-md line,.infinite-scroll-content-md .infinite-loading-spinner .spinner-lines-small-md line{stroke:var(--ion-text-color-step-400,#666)}.infinite-scroll-content-md .infinite-loading-spinner .spinner-bubbles circle,.infinite-scroll-content-md .infinite-loading-spinner .spinner-circles circle,.infinite-scroll-content-md .infinite-loading-spinner .spinner-dots circle{fill:var(--ion-text-color-step-400,#666)}"; },
+    Object.defineProperty(SegmentButton, "events", {
+        get: function () {
+            return [{
+                    "name": "ionSelect",
+                    "method": "ionSelect",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(InfiniteScrollContent, "styleMode", {
-        get: function () { return "md"; },
+    Object.defineProperty(SegmentButton, "style", {
+        get: function () { return ":host{--padding-start:0;--padding-end:0;--padding-top:0;--padding-bottom:0;--icon-size:1em;--btn-background:inherit;--btn-border-color:inherit;-webkit-box-flex:1;-ms-flex:1;flex:1;color:inherit;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;-webkit-font-kerning:none;font-kerning:none}:host(:first-of-type) .button-native{--padding-end:0;border-top-left-radius:var(--border-radius);border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:var(--border-radius)}:host(:not(:first-of-type)) .button-native{border-left-width:0}:host(:last-of-type) .button-native{--padding-start:0;border-top-left-radius:0;border-top-right-radius:var(--border-radius);border-bottom-right-radius:var(--border-radius);border-bottom-left-radius:0}.button-native{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:block;position:relative;width:100%;height:100%;-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--btn-border-color);outline:0;background:var(--btn-background);contain:content;cursor:pointer;overflow:hidden}::slotted(ion-icon){font-size:var(--icon-size)}"; },
         enumerable: true,
         configurable: true
     });
-    return InfiniteScrollContent;
+    return SegmentButton;
 }());
 
 

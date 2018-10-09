@@ -1,7 +1,6 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { GeolocationPosition } from '@capacitor/core';
-// import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
 
 import { LocationWatch } from './location.actions';
 import { Geolocation } from '../../constants/capacitor.const';

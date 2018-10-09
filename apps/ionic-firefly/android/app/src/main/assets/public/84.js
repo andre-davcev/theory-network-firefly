@@ -1,125 +1,96 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[84],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mqik6kmg.sc.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mqik6kmg.sc.entry.js ***!
-  \************************************************************************************************************************************/
-/*! exports provided: IonAvatar, IonBadge, IonThumbnail */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j66fx9bc.sc.entry.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j66fx9bc.sc.entry.js ***!
+  \***************************************************************************************************************************************/
+/*! exports provided: IonRippleEffect */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonAvatar", function() { return Avatar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonBadge", function() { return Badge; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonThumbnail", function() { return Thumbnail; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
-/*!
- * (C) Ionic http://ionicframework.com - MIT License
- * Built with http://stenciljs.com
- */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRippleEffect", function() { return RippleEffect; });
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
 
-
-var Avatar = /** @class */ (function () {
-    function Avatar() {
+var RippleEffect = /** @class */ (function () {
+    function RippleEffect() {
     }
-    Avatar.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    RippleEffect.prototype.addRipple = function (pageX, pageY) {
+        var _this = this;
+        if (this.config.getBoolean('animated', true)) {
+            Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_0__["b"])(function () { return _this.prepareRipple(pageX, pageY); });
+        }
     };
-    Object.defineProperty(Avatar, "is", {
-        get: function () { return "ion-avatar"; },
+    RippleEffect.prototype.prepareRipple = function (pageX, pageY) {
+        var _this = this;
+        var x;
+        var y;
+        var size;
+        this.queue.read(function () {
+            var rect = _this.el.getBoundingClientRect();
+            var width = rect.width;
+            var height = rect.height;
+            size = Math.min(Math.sqrt(width * width + height * height) * 2, MAX_RIPPLE_DIAMETER);
+            x = pageX - rect.left - (size * 0.5);
+            y = pageY - rect.top - (size * 0.5);
+        });
+        this.queue.write(function () {
+            var div = _this.win.document.createElement('div');
+            div.classList.add('ripple-effect');
+            var style = div.style;
+            var duration = Math.max(RIPPLE_FACTOR * Math.sqrt(size), MIN_RIPPLE_DURATION);
+            style.top = y + 'px';
+            style.left = x + 'px';
+            style.width = style.height = size + 'px';
+            style.animationDuration = duration + 'ms';
+            var container = _this.el.shadowRoot || _this.el;
+            container.appendChild(div);
+            setTimeout(function () { return div.remove(); }, duration + 50);
+        });
+    };
+    Object.defineProperty(RippleEffect, "is", {
+        get: function () { return "ion-ripple-effect"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Avatar, "encapsulation", {
+    Object.defineProperty(RippleEffect, "encapsulation", {
         get: function () { return "shadow"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Avatar, "style", {
-        get: function () { return ".sc-ion-avatar-md-h{border-radius:var(--border-radius);display:block;--border-radius:50%;width:64px;height:64px}.sc-ion-avatar-md-s > img, .sc-ion-avatar-md-s > ion-img{border-radius:var(--border-radius);width:100%;height:100%;-o-object-fit:cover;object-fit:cover;overflow:hidden}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Avatar, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Avatar;
-}());
-var Badge = /** @class */ (function () {
-    function Badge() {
-    }
-    Badge.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color)
-        };
-    };
-    Badge.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
-    };
-    Object.defineProperty(Badge, "is", {
-        get: function () { return "ion-badge"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Badge, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Badge, "properties", {
+    Object.defineProperty(RippleEffect, "properties", {
         get: function () {
             return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
+                "addRipple": {
+                    "method": true
                 },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
+                "config": {
+                    "context": "config"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "queue": {
+                    "context": "queue"
+                },
+                "win": {
+                    "context": "window"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Badge, "style", {
-        get: function () { return ".sc-ion-badge-md-h{--background:var(--ion-color-primary, #3880ff);--color:var(--ion-color-primary-contrast, #fff);--padding-top:3px;--padding-end:8px;--padding-bottom:3px;--padding-start:8px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:inline-block;min-width:10px;background:var(--background);color:var(--color);font-family:var(--ion-font-family,inherit);font-size:13px;font-weight:700;line-height:1;text-align:center;white-space:nowrap;contain:content;vertical-align:baseline;border-radius:4px}.ion-color.sc-ion-badge-md-h{background:var(--ion-color-base);color:var(--ion-color-contrast)}.sc-ion-badge-md-h:empty{display:none}"; },
+    Object.defineProperty(RippleEffect, "style", {
+        get: function () { return ".sc-ion-ripple-effect-h{left:0;right:0;top:0;bottom:0;position:absolute;contain:strict}.ripple-effect.sc-ion-ripple-effect{border-radius:50%;position:absolute;background-color:currentColor;color:inherit;contain:strict;opacity:0;-webkit-animation-name:rippleAnimation;animation-name:rippleAnimation;-webkit-animation-duration:.2s;animation-duration:.2s;-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;will-change:transform,opacity;pointer-events:none}\@-webkit-keyframes rippleAnimation{0%{-webkit-transform:scale(.1);transform:scale(.1);opacity:.2}100%{-webkit-transform:scale(1);transform:scale(1);opacity:0}}\@keyframes rippleAnimation{0%{-webkit-transform:scale(.1);transform:scale(.1);opacity:.2}100%{-webkit-transform:scale(1);transform:scale(1);opacity:0}}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Badge, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Badge;
+    return RippleEffect;
 }());
-var Thumbnail = /** @class */ (function () {
-    function Thumbnail() {
-    }
-    Thumbnail.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
-    };
-    Object.defineProperty(Thumbnail, "is", {
-        get: function () { return "ion-thumbnail"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Thumbnail, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Thumbnail, "style", {
-        get: function () { return ".sc-ion-thumbnail-h{--size:48px;--border-radius:0;border-radius:var(--border-radius);display:block;width:var(--size);height:var(--size)}.sc-ion-thumbnail-s > img, .sc-ion-thumbnail-s > ion-img{border-radius:var(--border-radius);width:100%;height:100%;-o-object-fit:cover;object-fit:cover;overflow:hidden}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Thumbnail;
-}());
+var RIPPLE_FACTOR = 35;
+var MIN_RIPPLE_DURATION = 260;
+var MAX_RIPPLE_DIAMETER = 550;
 
 
 

@@ -1,16 +1,16 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[29],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7l6puety.entry.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7l6puety.entry.js ***!
-  \*********************************************************************************************************************************/
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7oweqjmw.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7oweqjmw.entry.js ***!
+  \************************************************************************************************************************************/
 /*! exports provided: IonSplitPane */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSplitPane", function() { return SplitPane; });
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 
 var SPLIT_PANE_MAIN = 'split-pane-main';
 var SPLIT_PANE_SIDE = 'split-pane-side';
@@ -26,7 +26,7 @@ var SplitPane = /** @class */ (function () {
     function SplitPane() {
         this.visible = false;
         this.disabled = false;
-        this.when = QUERY['md'];
+        this.when = QUERY['lg'];
     }
     SplitPane.prototype.visibleChanged = function (visible) {
         var detail = { visible: visible, isPane: this.isPane.bind(this) };
@@ -104,7 +104,7 @@ var SplitPane = /** @class */ (function () {
     };
     SplitPane.prototype.hostData = function () {
         return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_0__["g"])(this.mode, 'split-pane'), { 'split-pane-visible': this.visible })
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_0__["k"])(this.mode, 'split-pane'), { 'split-pane-visible': this.visible })
         };
     };
     Object.defineProperty(SplitPane, "is", {

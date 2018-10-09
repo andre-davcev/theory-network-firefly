@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["polyfills"],{
 
 /***/ "../../node_modules/zone.js/dist/zone.js":
-/*!*************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/zone.js/dist/zone.js ***!
-  \*************************************************************************/
+/*!****************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/zone.js/dist/zone.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5469,7 +5469,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! /Users/andredavcev/Projects/theory/apps/ionic-firefly/src/polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })

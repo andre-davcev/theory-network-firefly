@@ -1,21 +1,18 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[68],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jzof0l9g.sc.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jzof0l9g.sc.entry.js ***!
-  \************************************************************************************************************************************/
-/*! exports provided: IonActionSheet, IonActionSheetController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hk89kth4.sc.entry.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hk89kth4.sc.entry.js ***!
+  \***************************************************************************************************************************************/
+/*! exports provided: IonSearchbar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonActionSheet", function() { return ActionSheet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonActionSheetController", function() { return ActionSheetController; });
-/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSearchbar", function() { return Searchbar; });
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
@@ -23,280 +20,296 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function iosEnterAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.action-sheet-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.01, 0.4);
-    wrapperAnimation.fromTo('translateY', '100%', '0%');
-    var ani = baseAnimation
-        .addElement(baseEl)
-        .easing('cubic-bezier(.36,.66,.04,1)')
-        .duration(400)
-        .add(backdropAnimation)
-        .add(wrapperAnimation);
-    return Promise.resolve(ani);
-}
-function iosLeaveAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.action-sheet-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.4, 0);
-    wrapperAnimation.fromTo('translateY', '0%', '100%');
-    var ani = baseAnimation
-        .addElement(baseEl)
-        .easing('cubic-bezier(.36,.66,.04,1)')
-        .duration(450)
-        .add(backdropAnimation)
-        .add(wrapperAnimation);
-    return Promise.resolve(ani);
-}
-function mdEnterAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.action-sheet-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.01, 0.26);
-    wrapperAnimation.fromTo('translateY', '100%', '0%');
-    var ani = baseAnimation
-        .addElement(baseEl)
-        .easing('cubic-bezier(.36,.66,.04,1)')
-        .duration(400)
-        .add(backdropAnimation)
-        .add(wrapperAnimation);
-    return Promise.resolve(ani);
-}
-function mdLeaveAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.action-sheet-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.26, 0);
-    wrapperAnimation.fromTo('translateY', '0%', '100%');
-    var ani = baseAnimation
-        .addElement(baseEl)
-        .easing('cubic-bezier(.36,.66,.04,1)')
-        .duration(450)
-        .add(backdropAnimation)
-        .add(wrapperAnimation);
-    return Promise.resolve(ani);
-}
-var ActionSheet = /** @class */ (function () {
-    function ActionSheet() {
-        this.presented = false;
-        this.keyboardClose = true;
-        this.backdropDismiss = true;
-        this.translucent = false;
-        this.animated = true;
+var Searchbar = /** @class */ (function () {
+    function Searchbar() {
+        this.isCancelVisible = false;
+        this.shouldAlignLeft = true;
+        this.focused = false;
+        this.animated = false;
+        this.autocomplete = 'off';
+        this.autocorrect = 'off';
+        this.cancelButtonIcon = 'md-arrow-back';
+        this.cancelButtonText = 'Cancel';
+        this.debounce = 250;
+        this.placeholder = 'Search';
+        this.showCancelButton = false;
+        this.spellcheck = false;
+        this.type = 'search';
+        this.value = '';
     }
-    ActionSheet.prototype.componentDidLoad = function () {
-        this.ionActionSheetDidLoad.emit();
+    Searchbar.prototype.debounceChanged = function () {
+        this.ionChange = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["g"])(this.ionChange, this.debounce);
     };
-    ActionSheet.prototype.componentDidUnload = function () {
-        this.ionActionSheetDidUnload.emit();
+    Searchbar.prototype.valueChanged = function () {
+        var inputEl = this.nativeInput;
+        var value = this.value;
+        if (inputEl.value !== value) {
+            inputEl.value = value;
+        }
+        this.ionChange.emit({ value: value });
     };
-    ActionSheet.prototype.onBackdropTap = function () {
-        this.dismiss(undefined, _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["a"]);
+    Searchbar.prototype.componentDidLoad = function () {
+        this.positionElements();
+        this.debounceChanged();
     };
-    ActionSheet.prototype.dispatchCancelHandler = function (ev) {
-        var role = ev.detail.role;
-        if (Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["d"])(role)) {
-            var cancelButton = this.getButtons().find(function (b) { return b.role === 'cancel'; });
-            this.callButtonHandler(cancelButton);
+    Searchbar.prototype.focus = function () {
+        this.nativeInput.focus();
+    };
+    Searchbar.prototype.clearInput = function (ev) {
+        var _this = this;
+        this.ionClear.emit();
+        if (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+        }
+        setTimeout(function () {
+            var value = _this.value;
+            if (value !== '') {
+                _this.value = '';
+                _this.ionInput.emit();
+            }
+        }, 16 * 4);
+    };
+    Searchbar.prototype.cancelSearchbar = function (ev) {
+        if (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+        }
+        this.ionCancel.emit();
+        this.clearInput();
+        this.nativeInput.blur();
+    };
+    Searchbar.prototype.onInput = function (ev) {
+        var input = ev.target;
+        if (input) {
+            this.value = input.value;
+        }
+        this.ionInput.emit(ev);
+    };
+    Searchbar.prototype.onBlur = function () {
+        this.focused = false;
+        this.ionBlur.emit();
+        this.positionElements();
+    };
+    Searchbar.prototype.onFocus = function () {
+        this.focused = true;
+        this.ionFocus.emit();
+        this.positionElements();
+    };
+    Searchbar.prototype.positionElements = function () {
+        var prevAlignLeft = this.shouldAlignLeft;
+        var shouldAlignLeft = (!this.animated || (this.value && this.value.toString().trim() !== '') || !!this.focused);
+        this.shouldAlignLeft = shouldAlignLeft;
+        if (this.mode !== 'ios') {
+            return;
+        }
+        if (prevAlignLeft !== shouldAlignLeft) {
+            this.positionPlaceholder();
+        }
+        if (this.animated) {
+            this.positionCancelButton();
         }
     };
-    ActionSheet.prototype.present = function () {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this, 'actionSheetEnter', iosEnterAnimation, mdEnterAnimation);
-    };
-    ActionSheet.prototype.dismiss = function (data, role) {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this, data, role, 'actionSheetLeave', iosLeaveAnimation, mdLeaveAnimation);
-    };
-    ActionSheet.prototype.onDidDismiss = function () {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionActionSheetDidDismiss');
-    };
-    ActionSheet.prototype.onWillDismiss = function () {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionActionSheetWillDismiss');
-    };
-    ActionSheet.prototype.buttonClick = function (button) {
-        var role = button.role;
-        if (Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["d"])(role)) {
-            return this.dismiss(undefined, role);
+    Searchbar.prototype.positionPlaceholder = function () {
+        var isRTL = this.doc.dir === 'rtl';
+        var inputEl = this.nativeInput;
+        var iconEl = (this.el.shadowRoot || this.el).querySelector('.searchbar-search-icon');
+        if (this.shouldAlignLeft) {
+            inputEl.removeAttribute('style');
+            iconEl.removeAttribute('style');
         }
-        var shouldDismiss = this.callButtonHandler(button);
-        if (shouldDismiss) {
-            return this.dismiss(undefined, button.role);
+        else {
+            var doc = this.doc;
+            var tempSpan = doc.createElement('span');
+            tempSpan.innerHTML = this.placeholder;
+            doc.body.appendChild(tempSpan);
+            var textWidth = tempSpan.offsetWidth;
+            tempSpan.remove();
+            var inputLeft = 'calc(50% - ' + (textWidth / 2) + 'px)';
+            var iconLeft = 'calc(50% - ' + ((textWidth / 2) + 30) + 'px)';
+            if (isRTL) {
+                inputEl.style.paddingRight = inputLeft;
+                iconEl.style.marginRight = iconLeft;
+            }
+            else {
+                inputEl.style.paddingLeft = inputLeft;
+                iconEl.style.marginLeft = iconLeft;
+            }
         }
-        return Promise.resolve();
     };
-    ActionSheet.prototype.callButtonHandler = function (button) {
-        if (button && button.handler) {
-            try {
-                if (button.handler() === false) {
-                    return false;
+    Searchbar.prototype.positionCancelButton = function () {
+        var isRTL = this.doc.dir === 'rtl';
+        var cancelButton = (this.el.shadowRoot || this.el).querySelector('.searchbar-cancel-button');
+        var shouldShowCancel = this.focused;
+        if (cancelButton && shouldShowCancel !== this.isCancelVisible) {
+            var cancelStyle = cancelButton.style;
+            this.isCancelVisible = shouldShowCancel;
+            if (shouldShowCancel) {
+                if (isRTL) {
+                    cancelStyle.marginLeft = '0';
+                }
+                else {
+                    cancelStyle.marginRight = '0';
                 }
             }
-            catch (e) {
-                console.error(e);
+            else {
+                var offset = cancelButton.offsetWidth;
+                if (offset > 0) {
+                    if (isRTL) {
+                        cancelStyle.marginLeft = -offset + 'px';
+                    }
+                    else {
+                        cancelStyle.marginRight = -offset + 'px';
+                    }
+                }
             }
         }
-        return true;
     };
-    ActionSheet.prototype.getButtons = function () {
-        return this.buttons.map(function (b) {
-            return (typeof b === 'string')
-                ? { text: b }
-                : b;
-        });
-    };
-    ActionSheet.prototype.hostData = function () {
+    Searchbar.prototype.hostData = function () {
         return {
-            style: {
-                zIndex: 20000 + this.overlayIndex,
-            },
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.cssClass), { 'action-sheet-translucent': this.translucent })
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.color), { 'searchbar-animated': this.animated, 'searchbar-has-value': (this.value !== ''), 'searchbar-show-cancel': this.showCancelButton, 'searchbar-left-aligned': this.shouldAlignLeft, 'searchbar-has-focus': this.focused })
         };
     };
-    ActionSheet.prototype.render = function () {
+    Searchbar.prototype.render = function () {
         var _this = this;
-        var allButtons = this.getButtons();
-        var cancelButton = allButtons.find(function (b) { return b.role === 'cancel'; });
-        var buttons = allButtons.filter(function (b) { return b.role !== 'cancel'; });
+        var clearIcon = this.clearIcon || (this.mode === 'ios' ? 'ios-close-circle' : 'md-close');
+        var searchIcon = this.searchIcon || 'search';
+        var cancelButton = this.showCancelButton && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", { type: "button", tabIndex: this.mode === 'ios' && !this.focused ? -1 : undefined, onMouseDown: this.cancelSearchbar.bind(this), onTouchStart: this.cancelSearchbar.bind(this), class: "searchbar-cancel-button" }, this.mode === 'md'
+            ? Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { mode: this.mode, icon: this.cancelButtonIcon, lazy: false })
+            : this.cancelButtonText));
         return [
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop", { tappable: this.backdropDismiss }),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-wrapper", role: "dialog" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-container" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-group" }, this.header !== undefined &&
-                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-title" }, this.header, this.subHeader && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-sub-title" }, this.subHeader)), buttons.map(function (b) { return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", "ion-activatable": true, class: buttonClass(b), onClick: function () { return _this.buttonClick(b); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "action-sheet-button-inner" }, b.icon && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: b.icon, lazy: false, class: "action-sheet-icon" }), b.text)); })), cancelButton &&
-                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "action-sheet-group action-sheet-group-cancel" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { "ion-activatable": true, type: "button", class: buttonClass(cancelButton), onClick: function () { return _this.buttonClick(cancelButton); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "action-sheet-button-inner" }, cancelButton.icon &&
-                    Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: cancelButton.icon, lazy: false, class: "action-sheet-icon" }), cancelButton.text)))))
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "searchbar-input-container" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("input", { ref: function (el) { return _this.nativeInput = el; }, class: "searchbar-input", onInput: this.onInput.bind(this), onBlur: this.onBlur.bind(this), onFocus: this.onFocus.bind(this), placeholder: this.placeholder, type: this.type, value: this.value, autoComplete: this.autocomplete, autoCorrect: this.autocorrect, spellCheck: this.spellcheck }), this.mode === 'md' && cancelButton, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { mode: this.mode, icon: searchIcon, lazy: false, class: "searchbar-search-icon" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", { type: "button", "no-blur": true, class: "searchbar-clear-button", onMouseDown: this.clearInput.bind(this), onTouchStart: this.clearInput.bind(this) }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { mode: this.mode, icon: clearIcon, lazy: false, class: "searchbar-clear-icon" }))),
+            this.mode === 'ios' && cancelButton
         ];
     };
-    Object.defineProperty(ActionSheet, "is", {
-        get: function () { return "ion-action-sheet"; },
+    Object.defineProperty(Searchbar, "is", {
+        get: function () { return "ion-searchbar"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ActionSheet, "encapsulation", {
+    Object.defineProperty(Searchbar, "encapsulation", {
         get: function () { return "scoped"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ActionSheet, "properties", {
+    Object.defineProperty(Searchbar, "properties", {
         get: function () {
             return {
                 "animated": {
                     "type": Boolean,
                     "attr": "animated"
                 },
-                "animationCtrl": {
-                    "connect": "ion-animation-controller"
-                },
-                "backdropDismiss": {
-                    "type": Boolean,
-                    "attr": "backdrop-dismiss"
-                },
-                "buttons": {
-                    "type": "Any",
-                    "attr": "buttons"
-                },
-                "config": {
-                    "context": "config"
-                },
-                "cssClass": {
+                "autocomplete": {
                     "type": String,
-                    "attr": "css-class"
+                    "attr": "autocomplete"
                 },
-                "dismiss": {
-                    "method": true
+                "autocorrect": {
+                    "type": String,
+                    "attr": "autocorrect"
+                },
+                "cancelButtonIcon": {
+                    "type": String,
+                    "attr": "cancel-button-icon"
+                },
+                "cancelButtonText": {
+                    "type": String,
+                    "attr": "cancel-button-text"
+                },
+                "clearIcon": {
+                    "type": String,
+                    "attr": "clear-icon"
+                },
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "debounce": {
+                    "type": Number,
+                    "attr": "debounce",
+                    "watchCallbacks": ["debounceChanged"]
+                },
+                "doc": {
+                    "context": "document"
                 },
                 "el": {
                     "elementRef": true
                 },
-                "enterAnimation": {
-                    "type": "Any",
-                    "attr": "enter-animation"
+                "focus": {
+                    "method": true
                 },
-                "header": {
-                    "type": String,
-                    "attr": "header"
-                },
-                "keyboardClose": {
-                    "type": Boolean,
-                    "attr": "keyboard-close"
-                },
-                "leaveAnimation": {
-                    "type": "Any",
-                    "attr": "leave-animation"
+                "focused": {
+                    "state": true
                 },
                 "mode": {
                     "type": String,
                     "attr": "mode"
                 },
-                "onDidDismiss": {
-                    "method": true
-                },
-                "onWillDismiss": {
-                    "method": true
-                },
-                "overlayIndex": {
-                    "type": Number,
-                    "attr": "overlay-index"
-                },
-                "present": {
-                    "method": true
-                },
-                "subHeader": {
+                "placeholder": {
                     "type": String,
-                    "attr": "sub-header"
+                    "attr": "placeholder"
                 },
-                "translucent": {
+                "searchIcon": {
+                    "type": String,
+                    "attr": "search-icon"
+                },
+                "showCancelButton": {
                     "type": Boolean,
-                    "attr": "translucent"
+                    "attr": "show-cancel-button"
+                },
+                "spellcheck": {
+                    "type": Boolean,
+                    "attr": "spellcheck"
+                },
+                "type": {
+                    "type": String,
+                    "attr": "type"
+                },
+                "value": {
+                    "type": String,
+                    "attr": "value",
+                    "mutable": true,
+                    "watchCallbacks": ["valueChanged"]
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ActionSheet, "events", {
+    Object.defineProperty(Searchbar, "events", {
         get: function () {
             return [{
-                    "name": "ionActionSheetDidLoad",
-                    "method": "ionActionSheetDidLoad",
+                    "name": "ionInput",
+                    "method": "ionInput",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionActionSheetDidUnload",
-                    "method": "ionActionSheetDidUnload",
+                    "name": "ionChange",
+                    "method": "ionChange",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionActionSheetDidPresent",
-                    "method": "didPresent",
+                    "name": "ionCancel",
+                    "method": "ionCancel",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionActionSheetWillPresent",
-                    "method": "willPresent",
+                    "name": "ionClear",
+                    "method": "ionClear",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionActionSheetWillDismiss",
-                    "method": "willDismiss",
+                    "name": "ionBlur",
+                    "method": "ionBlur",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionActionSheetDidDismiss",
-                    "method": "didDismiss",
+                    "name": "ionFocus",
+                    "method": "ionFocus",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
@@ -305,77 +318,17 @@ var ActionSheet = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ActionSheet, "listeners", {
-        get: function () {
-            return [{
-                    "name": "ionBackdropTap",
-                    "method": "onBackdropTap"
-                }, {
-                    "name": "ionActionSheetWillDismiss",
-                    "method": "dispatchCancelHandler"
-                }];
-        },
+    Object.defineProperty(Searchbar, "style", {
+        get: function () { return ".sc-ion-searchbar-md-h{--placeholder-color:currentColor;--placeholder-font-style:inherit;--placeholder-font-weight:inherit;--placeholder-opacity:.5;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-align:center;-ms-flex-align:center;align-items:center;width:100%;color:var(--color);font-family:var(--ion-font-family,inherit);-webkit-box-sizing:border-box;box-sizing:border-box}.ion-color.sc-ion-searchbar-md-h{color:var(--ion-color-contrast)}.ion-color.sc-ion-searchbar-md-h   .searchbar-input.sc-ion-searchbar-md{background:var(--ion-color-base)}.ion-color.sc-ion-searchbar-md-h   .searchbar-cancel-button.sc-ion-searchbar-md, .ion-color.sc-ion-searchbar-md-h   .searchbar-clear-button.sc-ion-searchbar-md, .ion-color.sc-ion-searchbar-md-h   .searchbar-search-icon.sc-ion-searchbar-md{color:inherit}.searchbar-search-icon.sc-ion-searchbar-md{color:var(--icon-color);pointer-events:none}.searchbar-input-container.sc-ion-searchbar-md{display:block;position:relative;-ms-flex-negative:1;flex-shrink:1;width:100%}.searchbar-input.sc-ion-searchbar-md{font-family:inherit;font-style:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;-webkit-box-sizing:border-box;box-sizing:border-box;display:block;width:100%;border:0;outline:0;background:var(--background);font-family:inherit;-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-input.sc-ion-searchbar-md::-webkit-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md:-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::-ms-input-placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::placeholder{color:var(--placeholder-color);font-family:inherit;font-style:var(--placeholder-font-style);font-weight:var(--placeholder-font-weight);opacity:var(--placeholder-opacity)}.searchbar-input.sc-ion-searchbar-md::-webkit-search-cancel-button{display:none}.searchbar-cancel-button.sc-ion-searchbar-md{color:var(--cancel-button-color)}.searchbar-clear-button.sc-ion-searchbar-md{margin:0;display:none;min-height:0;outline:0;color:var(--clear-button-color);-webkit-appearance:none;-moz-appearance:none;appearance:none}.searchbar-has-value.searchbar-has-focus.sc-ion-searchbar-md-h   .searchbar-clear-button.sc-ion-searchbar-md{display:block}.sc-ion-searchbar-md-h{--clear-button-color:currentColor;--cancel-button-color:var(--ion-text-color-step-100, #1a1a1a);--color:var(--ion-text-color-step-150, #262626);--icon-color:var(--ion-text-color-step-400, #666666);--background:var(--ion-background-color, #fff);padding:8px;background:inherit}.searchbar-search-icon.sc-ion-searchbar-md{left:16px;top:11px;width:21px;height:21px}.searchbar-cancel-button.sc-ion-searchbar-md{left:10px;top:0;margin:0;display:none;height:100%;border:0;background-color:transparent;font-size:1.8em}.searchbar-cancel-button.sc-ion-searchbar-md, .searchbar-search-icon.sc-ion-searchbar-md{position:absolute}.searchbar-cancel-button.activated.sc-ion-searchbar-md, .searchbar-search-icon.activated.sc-ion-searchbar-md{background-color:transparent}.searchbar-input.sc-ion-searchbar-md{padding:6px 55px;border-radius:2px;background-position:left 8px center;height:auto;font-size:16px;font-weight:400;line-height:30px;-webkit-box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12)}.searchbar-clear-button.sc-ion-searchbar-md{right:13px;top:0;padding:0;position:absolute;height:100%;border:0;background-color:transparent}.searchbar-clear-button.activated.sc-ion-searchbar-md{background-color:transparent}.searchbar-clear-icon.sc-ion-searchbar-md{width:22px;height:100%}.searchbar-has-focus.searchbar-show-cancel.sc-ion-searchbar-md-h   .searchbar-search-icon.sc-ion-searchbar-md{display:none}.searchbar-has-focus.searchbar-show-cancel.sc-ion-searchbar-md-h   .searchbar-cancel-button.sc-ion-searchbar-md{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex}ion-toolbar.sc-ion-searchbar-md-h, ion-toolbar   .sc-ion-searchbar-md-h{padding:3px}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ActionSheet, "style", {
-        get: function () { return ".sc-ion-action-sheet-md-h{--width:100%;--max-width:500px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;left:0;right:0;top:0;bottom:0;display:block;position:fixed;font-family:var(--ion-font-family,inherit);-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1000}.action-sheet-wrapper.sc-ion-action-sheet-md{left:0;right:0;top:0;bottom:0;margin:auto;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);display:block;position:absolute;width:var(--width);max-width:var(--max-width);z-index:10;pointer-events:none}.action-sheet-button.sc-ion-action-sheet-md{width:var(--width);border:0;outline:0;font-family:inherit}.action-sheet-button-inner.sc-ion-action-sheet-md{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}.action-sheet-container.sc-ion-action-sheet-md{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column;flex-flow:column;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;height:100%;max-height:100%}.action-sheet-group.sc-ion-action-sheet-md{-ms-flex-negative:2;flex-shrink:2;overscroll-behavior-y:contain;overflow-y:scroll;-webkit-overflow-scrolling:touch;pointer-events:all;background-color:var(--ion-overlay-background-color,#fafafa)}.action-sheet-group.sc-ion-action-sheet-md::-webkit-scrollbar{display:none}.action-sheet-group-cancel.sc-ion-action-sheet-md{-ms-flex-negative:0;flex-shrink:0;overflow:hidden}.action-sheet-title.sc-ion-action-sheet-md{padding:11px 16px 17px;color:var(--ion-text-color-step-400,#666);font-size:16px;text-align:start}.action-sheet-sub-title.sc-ion-action-sheet-md{padding:16px 0 0;font-size:14px}.action-sheet-group.sc-ion-action-sheet-md:first-child{padding-top:8px}.action-sheet-group.sc-ion-action-sheet-md:last-child{padding-bottom:8px}.action-sheet-button.sc-ion-action-sheet-md{padding:0 16px;position:relative;height:48px;background:0 0;color:var(--ion-text-color-step-150,#262626);font-size:16px;text-align:start;contain:strict;overflow:hidden}.action-sheet-button.activated.sc-ion-action-sheet-md{background:var(--ion-background-color-step-50,#f2f2f2)}.action-sheet-icon.sc-ion-action-sheet-md{margin:0 32px 0 0;font-size:24px}.action-sheet-button-inner.sc-ion-action-sheet-md{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.action-sheet-selected.sc-ion-action-sheet-md{font-weight:700}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ActionSheet, "styleMode", {
+    Object.defineProperty(Searchbar, "styleMode", {
         get: function () { return "md"; },
         enumerable: true,
         configurable: true
     });
-    return ActionSheet;
-}());
-function buttonClass(button) {
-    var _a;
-    return Object.assign((_a = { 'action-sheet-button': true }, _a["action-sheet-" + button.role] = button.role !== undefined, _a), Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["c"])(button.cssClass));
-}
-var ActionSheetController = /** @class */ (function () {
-    function ActionSheetController() {
-    }
-    ActionSheetController.prototype.create = function (opts) {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement('ion-action-sheet'), opts);
-    };
-    ActionSheetController.prototype.dismiss = function (data, role, id) {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc, data, role, 'ion-action-sheet', id);
-    };
-    ActionSheetController.prototype.getTop = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                return [2 /*return*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc, 'ion-action-sheet')];
-            });
-        });
-    };
-    Object.defineProperty(ActionSheetController, "is", {
-        get: function () { return "ion-action-sheet-controller"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ActionSheetController, "properties", {
-        get: function () {
-            return {
-                "create": {
-                    "method": true
-                },
-                "dismiss": {
-                    "method": true
-                },
-                "doc": {
-                    "context": "document"
-                },
-                "getTop": {
-                    "method": true
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return ActionSheetController;
+    return Searchbar;
 }());
 
 

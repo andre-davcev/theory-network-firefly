@@ -1,352 +1,175 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[27],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/72uhruqj.entry.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/72uhruqj.entry.js ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: IonTab, IonTabbar, IonTabs */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7nk4bg8j.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7nk4bg8j.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonButton, IonIcon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonTab", function() { return Tab; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonTabbar", function() { return Tabbar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonTabs", function() { return Tabs; });
-/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonButton", function() { return Button; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonIcon", function() { return Icon; });
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
 
 
-var Tab = /** @class */ (function () {
-    function Tab() {
-        this.loaded = false;
-        this.active = false;
+
+var Button = /** @class */ (function () {
+    function Button() {
+        this.keyFocus = false;
+        this.buttonType = 'button';
         this.disabled = false;
-        this.selected = false;
-        this.show = true;
-        this.tabsHideOnSubPages = false;
+        this.strong = false;
+        this.type = 'button';
     }
-    Tab.prototype.selectedChanged = function (selected) {
-        if (selected) {
-            this.ionSelect.emit();
+    Button.prototype.componentWillLoad = function () {
+        if (this.fill === undefined) {
+            this.fill = this.el.closest('ion-buttons') ? 'clear' : 'solid';
         }
     };
-    Tab.prototype.componentWillLoad = function () {
-        if (this.name === undefined && typeof this.component === 'string') {
-            this.name = this.component;
+    Button.prototype.onFocus = function () {
+        this.ionFocus.emit();
+    };
+    Button.prototype.onKeyUp = function () {
+        this.keyFocus = true;
+    };
+    Button.prototype.onBlur = function () {
+        this.keyFocus = false;
+        this.ionBlur.emit();
+    };
+    Button.prototype.onClick = function (ev) {
+        if (this.type === 'button') {
+            return Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["i"])(this.win, this.href, ev, this.routerDirection);
         }
-    };
-    Tab.prototype.onPropChanged = function () {
-        this.ionTabMutated.emit();
-    };
-    Tab.prototype.setActive = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.prepareLazyLoaded()];
-                    case 1:
-                        _a.sent();
-                        this.active = true;
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Tab.prototype.prepareLazyLoaded = function () {
-        if (!this.loaded && this.component != null) {
-            this.loaded = true;
-            return Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["a"])(this.delegate, this.el, this.component, ['ion-page']);
-        }
-        return Promise.resolve();
-    };
-    Tab.prototype.hostData = function () {
-        var _a = this, btnId = _a.btnId, active = _a.active, component = _a.component;
-        return {
-            'aria-labelledby': btnId,
-            'aria-hidden': !active ? 'true' : null,
-            'role': 'tabpanel',
-            'class': {
-                'ion-page': component === undefined,
-                'tab-hidden': !active
-            }
-        };
-    };
-    Tab.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null);
-    };
-    Object.defineProperty(Tab, "is", {
-        get: function () { return "ion-tab"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Tab, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Tab, "properties", {
-        get: function () {
-            return {
-                "active": {
-                    "type": Boolean,
-                    "attr": "active",
-                    "mutable": true
-                },
-                "badge": {
-                    "type": String,
-                    "attr": "badge",
-                    "watchCallbacks": ["onPropChanged"]
-                },
-                "badgeColor": {
-                    "type": String,
-                    "attr": "badge-color",
-                    "watchCallbacks": ["onPropChanged"]
-                },
-                "btnId": {
-                    "type": String,
-                    "attr": "btn-id"
-                },
-                "component": {
-                    "type": String,
-                    "attr": "component"
-                },
-                "delegate": {
-                    "type": "Any",
-                    "attr": "delegate"
-                },
-                "disabled": {
-                    "type": Boolean,
-                    "attr": "disabled",
-                    "watchCallbacks": ["onPropChanged"]
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "href": {
-                    "type": String,
-                    "attr": "href",
-                    "watchCallbacks": ["onPropChanged"]
-                },
-                "icon": {
-                    "type": String,
-                    "attr": "icon",
-                    "watchCallbacks": ["onPropChanged"]
-                },
-                "label": {
-                    "type": String,
-                    "attr": "label",
-                    "watchCallbacks": ["onPropChanged"]
-                },
-                "name": {
-                    "type": String,
-                    "attr": "name",
-                    "mutable": true
-                },
-                "selected": {
-                    "type": Boolean,
-                    "attr": "selected",
-                    "watchCallbacks": ["selectedChanged"]
-                },
-                "setActive": {
-                    "method": true
-                },
-                "show": {
-                    "type": Boolean,
-                    "attr": "show",
-                    "watchCallbacks": ["onPropChanged"]
-                },
-                "tabsHideOnSubPages": {
-                    "type": Boolean,
-                    "attr": "tabs-hide-on-sub-pages"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Tab, "events", {
-        get: function () {
-            return [{
-                    "name": "ionSelect",
-                    "method": "ionSelect",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionTabMutated",
-                    "method": "ionTabMutated",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Tab, "style", {
-        get: function () { return ":host(.tab-hidden){display:none!important}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Tab;
-}());
-var Tabbar = /** @class */ (function () {
-    function Tabbar() {
-        this.canScrollLeft = false;
-        this.canScrollRight = false;
-        this.keyboardVisible = false;
-        this.layout = 'icon-top';
-        this.placement = 'bottom';
-        this.tabs = [];
-        this.highlight = false;
-        this.translucent = false;
-    }
-    Tabbar.prototype.onKeyboardWillHide = function () {
-        var _this = this;
-        setTimeout(function () { return _this.keyboardVisible = false; }, 50);
-    };
-    Tabbar.prototype.onKeyboardWillShow = function () {
-        if (this.placement === 'bottom') {
-            this.keyboardVisible = true;
-        }
-    };
-    Tabbar.prototype.componentDidLoad = function () {
-        this.updateHighlight();
-    };
-    Tabbar.prototype.getSelectedButton = function () {
-        return this.el.shadowRoot.querySelector('.tab-btn-selected');
-    };
-    Tabbar.prototype.updateHighlight = function () {
-        var _this = this;
-        if (!this.highlight) {
-            return;
-        }
-        this.queue.read(function () {
-            var btn = _this.getSelectedButton();
-            var highlight = _this.el.shadowRoot.querySelector('.tabbar-highlight');
-            if (btn && highlight) {
-                highlight.style.transform = "translate3d(" + btn.offsetLeft + "px,0,0) scaleX(" + btn.offsetWidth + ")";
-            }
-        });
-    };
-    Tabbar.prototype.hostData = function () {
-        var _a;
-        var _b = this, color = _b.color, translucent = _b.translucent, layout = _b.layout, placement = _b.placement, keyboardVisible = _b.keyboardVisible;
-        return {
-            role: 'tablist',
-            'aria-hidden': keyboardVisible ? 'true' : null,
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(color), (_a = { 'tabbar-translucent': translucent }, _a["layout-" + layout] = true, _a["placement-" + placement] = true, _a['tabbar-hidden'] = keyboardVisible, _a))
-        };
-    };
-    Tabbar.prototype.renderTabButton = function (tab) {
-        var _this = this;
-        var icon = tab.icon, label = tab.label, disabled = tab.disabled, badge = tab.badge, badgeColor = tab.badgeColor, href = tab.href;
-        var selected = tab === this.selectedTab;
-        var hasLabel = label !== undefined;
-        var hasIcon = icon !== undefined;
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("a", { role: "tab", "ion-activatable": true, "aria-selected": selected ? 'true' : null, href: href || '#', class: {
-                'tab-btn': true,
-                'tab-btn-selected': selected,
-                'tab-btn-has-label': hasLabel,
-                'tab-btn-has-icon': hasIcon,
-                'tab-btn-has-label-only': hasLabel && !hasIcon,
-                'tab-btn-has-icon-only': hasIcon && !hasLabel,
-                'tab-btn-has-badge': badge !== undefined,
-                'tab-btn-disabled': disabled,
-                'tab-btn-hidden': !tab.show
-            }, onClick: function (ev) {
-                if (!tab.disabled) {
-                    _this.ionTabbarClick.emit(tab);
-                }
+        else if (Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.el)) {
+            var form = this.el.closest('form');
+            if (form) {
                 ev.preventDefault();
-            } }, icon && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { class: "tab-btn-icon", icon: icon, lazy: false }), label && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "tab-btn-text" }, label), badge && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-badge", { class: "tab-btn-badge", color: badgeColor }, badge), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null)));
+                ev.stopPropagation();
+                var fakeButton = document.createElement('button');
+                fakeButton.type = this.type;
+                fakeButton.style.display = 'none';
+                form.appendChild(fakeButton);
+                fakeButton.click();
+                fakeButton.remove();
+            }
+        }
+        return Promise.resolve(false);
     };
-    Tabbar.prototype.render = function () {
-        var _this = this;
-        return [
-            this.tabs.map(function (tab) { return _this.renderTabButton(tab); }),
-            this.highlight && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "animated tabbar-highlight" })
-        ];
+    Button.prototype.hostData = function () {
+        var _a = this, buttonType = _a.buttonType, color = _a.color, expand = _a.expand, fill = _a.fill, mode = _a.mode, shape = _a.shape, size = _a.size, strong = _a.strong;
+        return {
+            'ion-activatable': true,
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["h"])(color), getButtonClassMap(buttonType, mode), getButtonTypeClassMap(buttonType, expand, mode), getButtonTypeClassMap(buttonType, size, mode), getButtonTypeClassMap(buttonType, shape, mode), getButtonTypeClassMap(buttonType, strong ? 'strong' : undefined, mode), getButtonTypeClassMap(buttonType, fill, mode), { 'focused': this.keyFocus })
+        };
     };
-    Object.defineProperty(Tabbar, "is", {
-        get: function () { return "ion-tabbar"; },
+    Button.prototype.render = function () {
+        var TagType = this.href === undefined ? 'button' : 'a';
+        var attrs = (TagType === 'button')
+            ? { type: this.type }
+            : { href: this.href };
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, Object.assign({}, attrs, { class: "button-native", disabled: this.disabled, onFocus: this.onFocus.bind(this), onKeyUp: this.onKeyUp.bind(this), onBlur: this.onBlur.bind(this), onClick: this.onClick.bind(this) }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", { name: "icon-only" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", { name: "start" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", { name: "end" })), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null)));
+    };
+    Object.defineProperty(Button, "is", {
+        get: function () { return "ion-button"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabbar, "encapsulation", {
+    Object.defineProperty(Button, "encapsulation", {
         get: function () { return "shadow"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabbar, "properties", {
+    Object.defineProperty(Button, "properties", {
         get: function () {
             return {
-                "canScrollLeft": {
-                    "state": true
-                },
-                "canScrollRight": {
-                    "state": true
+                "buttonType": {
+                    "type": String,
+                    "attr": "button-type",
+                    "mutable": true
                 },
                 "color": {
                     "type": String,
                     "attr": "color"
                 },
-                "doc": {
-                    "context": "document"
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled",
+                    "reflectToAttr": true
                 },
                 "el": {
                     "elementRef": true
                 },
-                "highlight": {
-                    "type": Boolean,
-                    "attr": "highlight"
-                },
-                "keyboardVisible": {
-                    "state": true
-                },
-                "layout": {
+                "expand": {
                     "type": String,
-                    "attr": "layout"
+                    "attr": "expand",
+                    "reflectToAttr": true
+                },
+                "fill": {
+                    "type": String,
+                    "attr": "fill",
+                    "reflectToAttr": true,
+                    "mutable": true
+                },
+                "href": {
+                    "type": String,
+                    "attr": "href"
+                },
+                "keyFocus": {
+                    "state": true
                 },
                 "mode": {
                     "type": String,
                     "attr": "mode"
                 },
-                "placement": {
+                "routerDirection": {
                     "type": String,
-                    "attr": "placement"
+                    "attr": "router-direction"
                 },
-                "queue": {
-                    "context": "queue"
+                "shape": {
+                    "type": String,
+                    "attr": "shape",
+                    "reflectToAttr": true
                 },
-                "selectedTab": {
-                    "type": "Any",
-                    "attr": "selected-tab",
-                    "watchCallbacks": ["updateHighlight"]
+                "size": {
+                    "type": String,
+                    "attr": "size",
+                    "reflectToAttr": true
                 },
-                "tabs": {
-                    "type": "Any",
-                    "attr": "tabs"
-                },
-                "translucent": {
+                "strong": {
                     "type": Boolean,
-                    "attr": "translucent"
+                    "attr": "strong"
+                },
+                "type": {
+                    "type": String,
+                    "attr": "type"
+                },
+                "win": {
+                    "context": "window"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabbar, "events", {
+    Object.defineProperty(Button, "events", {
         get: function () {
             return [{
-                    "name": "ionTabbarClick",
-                    "method": "ionTabbarClick",
+                    "name": "ionFocus",
+                    "method": "ionFocus",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionBlur",
+                    "method": "ionBlur",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
@@ -355,275 +178,200 @@ var Tabbar = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabbar, "listeners", {
-        get: function () {
-            return [{
-                    "name": "body:keyboardWillHide",
-                    "method": "onKeyboardWillHide"
-                }, {
-                    "name": "body:keyboardWillShow",
-                    "method": "onKeyboardWillShow"
-                }, {
-                    "name": "window:resize",
-                    "method": "updateHighlight",
-                    "passive": true
-                }];
-        },
+    Object.defineProperty(Button, "style", {
+        get: function () { return ":host{--width:auto;--overflow:hidden;--ripple-color:currentColor;display:inline-block;color:var(--color);font-family:var(--ion-font-family,inherit);pointer-events:auto;text-align:center;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:top;vertical-align:-webkit-baseline-middle;-webkit-font-kerning:none;font-kerning:none}:host([disabled]){pointer-events:none}:host(.button-solid){--background:var(--ion-color-primary, #3880ff);--background-activated:var(--ion-color-primary-shade, #3171e0);--background-focused:var(--ion-color-primary-shade, #3171e0);--color:var(--ion-color-primary-contrast, #fff);--color-activated:var(--ion-color-primary-contrast, #fff);--color-focused:var(--ion-color-primary-contrast, #fff);--box-shadow:0 2px 2px 0 rgba(0, 0, 0, 0.14),0 3px 1px -2px rgba(0, 0, 0, 0.2),0 1px 5px 0 rgba(0, 0, 0, 0.12)}:host(.button-solid.ion-color) .button-native{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.button-solid.ion-color.activated) .button-native,:host(.button-solid.ion-color.focused) .button-native{background:var(--ion-color-shade)}:host(.button-outline){--border-color:var(--ion-color-primary, #3880ff);--background:transparent;--color:var(--ion-color-primary, #3880ff);--color-focused:var(--ion-color-primary, #3880ff);--border-width:1px;--border-style:solid;--box-shadow:none;--background-activated:transparent;--background-focused:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.1);--color-activated:var(--ion-color-primary, #3880ff)}:host(.button-outline.ion-color) .button-native{border-color:var(--ion-color-base);background:0 0;color:var(--ion-color-base)}:host(.button-outline.focused.ion-color) .button-native{background:rgba(var(--ion-color-base-rgb),.1);color:var(--ion-color-base)}:host(.button-clear){--border-width:0;--background:transparent;--color:var(--ion-color-primary, #3880ff);--opacity:1;--background-activated:transparent;--background-focused:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.1);--color-activated:var(--ion-color-primary, #3880ff);--color-focused:var(--ion-color-primary, #3880ff)}:host(.button-clear.ion-color) .button-native{background:0 0;color:var(--ion-color-base)}:host(.button-clear.focused.ion-color) .button-native{background:rgba(var(--ion-color-base-rgb),.1);color:var(--ion-color-base)}:host(.button-clear.activated.ion-color) .button-native{background:0 0}:host(.button-block){display:block}:host(.button-block) .button-native{margin-left:0;margin-right:0;display:block;width:100%;clear:both;contain:strict}:host(.button-block) .button-native::after{clear:both}:host(.button-full){display:block}:host(.button-full) .button-native{margin-left:0;margin-right:0;display:block;width:100%;contain:strict}:host(.button-full:not(.button-round)) .button-native{border-radius:0;border-right-width:0;border-left-width:0}.button-native{border-radius:var(--border-radius);-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:block;position:relative;width:var(--width);height:var(--height);-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);outline:0;background:var(--background);line-height:1;-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);contain:content;cursor:pointer;opacity:var(--opacity);overflow:var(--overflow);z-index:0;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none}.button-native[disabled]{cursor:default;opacity:.5;pointer-events:none}:host(.focused) .button-native{background:var(--background-focused);color:var(--color-focused)}:host(.activated) .button-native{background:var(--background-activated);color:var(--color-activated)}.button-inner{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}::slotted(ion-icon){font-size:1.4em;pointer-events:none}::slotted(ion-icon[slot=start]){margin:0 .3em 0 -.3em}::slotted(ion-icon[slot=end]){margin:0 -.2em 0 .3em}::slotted(ion-icon[slot=icon-only]){font-size:1.8em;padding:0}ion-ripple-effect{color:var(--ripple-color)}:host{--border-radius:2px;--margin-top:4px;--margin-bottom:4px;--margin-start:2px;--margin-end:2px;--padding-top:0;--padding-bottom:0;--padding-start:1.1em;--padding-end:1.1em;--height:36px;--transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),color 300ms cubic-bezier(0.4, 0, 0.2, 1);font-size:14px;font-weight:500;letter-spacing:0;text-transform:uppercase}:host(.button-solid.activated){--box-shadow:0 3px 5px rgba(0, 0, 0, 0.14),0 3px 5px rgba(0, 0, 0, 0.21)}:host(.button-outline.activated.ion-color) .button-native{background:0 0}:host(.button-round){--border-radius:64px;--padding-top:0;--padding-start:26px;--padding-end:26px;--padding-bottom:0}:host(.button-large){--padding-top:0;--padding-start:1em;--padding-end:1em;--padding-bottom:0;--height:2.8em;font-size:20px}:host(.button-small){--padding-top:0;--padding-start:0.9em;--padding-end:0.9em;--padding-bottom:0;--height:2.1em;font-size:13px}:host(.button-strong){font-weight:700}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabbar, "style", {
-        get: function () { return ":host{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-ordinal-group:2;-ms-flex-order:1;order:1;width:100%;background:var(--background);color:var(--color);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:10}:host(.ion-color){--background:var(--ion-color-base);--color:rgba(var(--ion-color-contrast-rgb), 0.7);--color-selected:var(--ion-color-contrast)}:host(.tabbar-hidden){display:none!important}:host(.placement-top){-webkit-box-ordinal-group:0;-ms-flex-order:-1;order:-1}:host(.placement-bottom){padding-bottom:var(--ion-safe-area-bottom,0)}.tabbar-highlight{left:0;bottom:0;-webkit-transform-origin:0 0;transform-origin:0 0;display:block;position:absolute;width:1px;height:2px;-webkit-transform:translateZ(0);transform:translateZ(0);background:currentColor}.tabbar-highlight.animated{-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:-webkit-transform;transition-property:-webkit-transform;transition-property:transform;transition-property:transform,-webkit-transform;-webkit-transition-timing-function:cubic-bezier(.4,0,.2,1);transition-timing-function:cubic-bezier(.4,0,.2,1);will-change:transform}:host(.placement-top) .tabbar-highlight{bottom:0}:host(.placement-bottom) .tabbar-highlight{top:0}:host(.layout-icon-start) .tab-btn{--flex-direction:row}:host(.layout-icon-end) .tab-btn{--flex-direction:row-reverse}:host(.layout-icon-bottom) .tab-btn{--flex-direction:column-reverse}:host(.layout-icon-end) .tab-btn,:host(.layout-icon-hide) .tab-btn,:host(.layout-icon-start) .tab-btn,:host(.layout-label-hide) .tab-btn{--justify-content:center}:host(.layout-icon-hide) .tab-btn{--icon-display:none}:host(.layout-label-hide) .tab-btn{--label-display:none;--icon-margin:0}:host(.layout-icon-bottom) .tab-btn,:host(.layout-icon-top) .tab-btn{--badge-end:calc(50% - 30px)}:host(.layout-icon-end) .tab-btn,:host(.layout-icon-hide) .tab-btn,:host(.layout-icon-start) .tab-btn{--badge-end:calc(50% - 50px);--label-margin-top:2px;--label-margin-bottom:2px;--label-font-size:14px;--label-line-height:1.1}.tab-btn{font-family:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;margin:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:var(--flex-direction,column);flex-direction:var(--flex-direction,column);-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:var(--justify-content,flex-start);-ms-flex-pack:var(--justify-content,flex-start);justify-content:var(--justify-content,flex-start);width:100%;height:100%;border:0;outline:0;background:0 0;text-decoration:none;cursor:pointer;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-drag:none}.tab-btn:focus-visible{background:var(--background-focused)}.tab-btn-selected,.tab-btn:hover{color:var(--color-selected)}.tab-btn-hidden{display:none!important}.tab-btn-disabled{pointer-events:none;opacity:.4}.tab-btn-text{margin-top:var(--label-margin-top);margin-bottom:var(--label-margin-bottom);display:var(--label-display,block);font-size:var(--label-font-size);line-height:var(--label-line-height)}.tab-btn-icon{margin-top:var(--icon-margin-top);margin-bottom:var(--icon-margin-bottom);display:var(--icon-display,block);min-width:var(--icon-min-width);height:var(--icon-height,1em);font-size:var(--icon-font-size)}.tab-btn-icon,.tab-btn-text{-ms-flex-item-align:center;align-self:center;min-width:26px;max-width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}.tab-btn-has-label-only .tab-btn-text{white-space:normal;margin:2px 0;font-size:14px;line-height:1.1}.tab-btn-has-icon-only,.tab-btn-has-label-only{--justify-content:center}.tab-btn-badge{right:4%;top:6%;right:var(--badge-end,calc(50% - 30px));padding:1px 6px;-webkit-box-sizing:border-box;box-sizing:border-box;position:absolute;height:auto;font-size:12px;line-height:16px}.tab-btn-has-label-only .tab-btn-badge{--badge-end:calc(50% - 50px)}.tab-btn-has-icon-only .tab-btn-badge{--badge-end:calc(50% - 30px)}.tab-btn-selected .tab-btn-icon{-webkit-transform:var(--icon-transform-selected);transform:var(--icon-transform-selected)}.tab-btn{padding:0 2px;max-width:240px;font-size:10px}.tab-btn-text{margin-top:0;margin-bottom:1px;min-height:11px}.tab-btn-icon{margin-top:4px;font-size:30px}.tab-btn-icon::before{vertical-align:top}:host{--background:var(--ion-tabbar-background-color, #f8f8f8);--background-rgb:var(--ion-tabbar-translucent-background-color-rgb, 248, 248, 248);--color:var(--ion-tabbar-text-color, #8c8c8c);--color-selected:var(--ion-color-primary, #3880ff);--background-focused:var(--ion-tabbar-background-color-focused, #dadada);-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:50px;border-top:.55px solid rgba(var(--ion-tabbar-border-color-rgb,0,0,0),.2);contain:strict}:host(.placement-top){border-top:0;border-bottom:.55px solid rgba(var(--ion-tabbar-border-color-rgb,0,0,0),.2)}:host(.tabbar-translucent){background-color:rgba(var(--ion-color-base-rgb),.8);-webkit-backdrop-filter:saturate(210%) blur(20px);backdrop-filter:saturate(210%) blur(20px)}:host(.layout-icon-end) .tab-btn,:host(.layout-icon-start) .tab-btn{--icon-margin-top:2px;--icon-margin-bottom:1px;--icon-min-width:24px;--icon-height:26px;--icon-font-size:24px}"; },
+    Object.defineProperty(Button, "styleMode", {
+        get: function () { return "md"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabbar, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Tabbar;
+    return Button;
 }());
-var Tabs = /** @class */ (function () {
-    function Tabs() {
-        this.ids = -1;
-        this.transitioning = false;
-        this.tabsId = (++tabIds);
-        this.tabs = [];
-        this.tabbarHidden = false;
-        this.translucent = false;
-        this.useRouter = false;
+function getButtonClassMap(buttonType, mode) {
+    var _a;
+    if (buttonType === undefined) {
+        return {};
     }
-    Tabs.prototype.componentWillLoad = function () {
-        if (!this.useRouter) {
-            this.useRouter = !!this.doc.querySelector('ion-router') && !this.el.closest('[no-router]');
+    return _a = {},
+        _a[buttonType] = true,
+        _a[buttonType + "-" + mode] = true,
+        _a;
+}
+function getButtonTypeClassMap(buttonType, type, mode) {
+    var _a;
+    if (type === undefined) {
+        return {};
+    }
+    return _a = {},
+        _a[buttonType + "-" + type] = true,
+        _a[buttonType + "-" + type + "-" + mode] = true,
+        _a;
+}
+function getName(name, mode, ios, md) {
+    mode = (mode || 'md').toLowerCase();
+    if (ios && mode === 'ios') {
+        name = ios.toLowerCase();
+    }
+    else if (md && mode === 'md') {
+        name = md.toLowerCase();
+    }
+    else if (name) {
+        name = name.toLowerCase();
+        if (!/^md-|^ios-|^logo-/.test(name)) {
+            name = mode + "-" + name;
         }
-        this.loadConfig('tabbarPlacement', 'bottom');
-        this.loadConfig('tabbarLayout', 'icon-top');
-        this.loadConfig('tabbarHighlight', false);
-        this.initTabs();
-        this.ionNavWillLoad.emit();
-    };
-    Tabs.prototype.componentDidLoad = function () {
-        return this.initSelect();
-    };
-    Tabs.prototype.componentDidUnload = function () {
-        this.tabs.length = 0;
-        this.selectedTab = this.leavingTab = undefined;
-    };
-    Tabs.prototype.onTabMutated = function () {
-        this.el.forceUpdate();
-    };
-    Tabs.prototype.onTabClicked = function (ev) {
-        var selectedTab = ev.detail;
-        var href = selectedTab.href;
-        if (this.useRouter && href !== undefined) {
-            var router = this.doc.querySelector('ion-router');
-            if (router) {
-                router.push(href);
+    }
+    if (typeof name !== 'string' || name.trim() === '') {
+        return null;
+    }
+    var invalidChars = name.replace(/[a-z]|-|\d/gi, '');
+    if (invalidChars !== '') {
+        return null;
+    }
+    return name;
+}
+function getSrc(src) {
+    if (typeof src === 'string') {
+        src = src.trim();
+        if (src.length > 0 && /(\/|\.)/.test(src)) {
+            return src;
+        }
+    }
+    return null;
+}
+function isValid(elm) {
+    if (elm.nodeType === 1) {
+        if (elm.nodeName.toLowerCase() === 'script') {
+            return false;
+        }
+        for (var i = 0; i < elm.attributes.length; i++) {
+            var val = elm.attributes[i].value;
+            if (typeof val === 'string' && val.toLowerCase().indexOf('on') === 0) {
+                return false;
             }
+        }
+        for (var i = 0; i < elm.childNodes.length; i++) {
+            if (!isValid(elm.childNodes[i])) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+var Icon = /** @class */ (function () {
+    function Icon() {
+        this.isVisible = false;
+        this.lazy = false;
+    }
+    Icon.prototype.componentWillLoad = function () {
+        var _this = this;
+        this.waitUntilVisible(this.el, "50px", function () {
+            _this.isVisible = true;
+            _this.loadIcon();
+        });
+    };
+    Icon.prototype.componentDidUnload = function () {
+        if (this.io) {
+            this.io.disconnect();
+            this.io = undefined;
+        }
+    };
+    Icon.prototype.waitUntilVisible = function (el, rootMargin, cb) {
+        var _this = this;
+        if (this.lazy && this.win && this.win.IntersectionObserver) {
+            var io_1 = this.io = new this.win.IntersectionObserver(function (data) {
+                if (data[0].isIntersecting) {
+                    io_1.disconnect();
+                    _this.io = undefined;
+                    cb();
+                }
+            }, { rootMargin: rootMargin });
+            io_1.observe(el);
         }
         else {
-            this.select(selectedTab);
+            cb();
         }
     };
-    Tabs.prototype.select = function (tabOrIndex) {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var selectedTab;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getTab(tabOrIndex)];
-                    case 1:
-                        selectedTab = _a.sent();
-                        if (!this.shouldSwitch(selectedTab)) {
-                            return [2 /*return*/, false];
-                        }
-                        return [4 /*yield*/, this.setActive(selectedTab)];
-                    case 2:
-                        _a.sent();
-                        return [4 /*yield*/, this.notifyRouter()];
-                    case 3:
-                        _a.sent();
-                        this.tabSwitch();
-                        return [2 /*return*/, true];
-                }
-            });
-        });
-    };
-    Tabs.prototype.setRouteId = function (id) {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var selectedTab;
-            var _this = this;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getTab(id)];
-                    case 1:
-                        selectedTab = _a.sent();
-                        if (!this.shouldSwitch(selectedTab)) {
-                            return [2 /*return*/, { changed: false, element: this.selectedTab }];
-                        }
-                        return [4 /*yield*/, this.setActive(selectedTab)];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/, {
-                                changed: true,
-                                element: this.selectedTab,
-                                markVisible: function () { return _this.tabSwitch(); },
-                            }];
-                }
-            });
-        });
-    };
-    Tabs.prototype.getRouteId = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var id;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                id = this.selectedTab && this.selectedTab.name;
-                return [2 /*return*/, id !== undefined ? { id: id, element: this.selectedTab } : undefined];
-            });
-        });
-    };
-    Tabs.prototype.getTab = function (tabOrIndex) {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                if (typeof tabOrIndex === 'string') {
-                    return [2 /*return*/, this.tabs.find(function (tab) { return tab.name === tabOrIndex; })];
-                }
-                if (typeof tabOrIndex === 'number') {
-                    return [2 /*return*/, this.tabs[tabOrIndex]];
-                }
-                return [2 /*return*/, tabOrIndex];
-            });
-        });
-    };
-    Tabs.prototype.getSelected = function () {
-        return Promise.resolve(this.selectedTab);
-    };
-    Tabs.prototype.initTabs = function () {
+    Icon.prototype.loadIcon = function () {
         var _this = this;
-        var tabs = this.tabs = Array.from(this.el.querySelectorAll('ion-tab'));
-        tabs.forEach(function (tab) {
-            var id = "t-" + _this.tabsId + "-" + ++_this.ids;
-            tab.btnId = 'tab-' + id;
-            tab.id = 'tabpanel-' + id;
-        });
-    };
-    Tabs.prototype.initSelect = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var tabs, selectedTab, _i, tabs_1, tab;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        tabs = this.tabs;
-                        if (this.useRouter) {
-                            return [2 /*return*/];
-                        }
-                        selectedTab = tabs.find(function (t) { return t.selected; }) ||
-                            tabs.find(function (t) { return t.show && !t.disabled; });
-                        for (_i = 0, tabs_1 = tabs; _i < tabs_1.length; _i++) {
-                            tab = tabs_1[_i];
-                            if (tab !== selectedTab) {
-                                tab.selected = false;
-                            }
-                        }
-                        if (!selectedTab) return [3 /*break*/, 2];
-                        return [4 /*yield*/, selectedTab.setActive()];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2:
-                        this.selectedTab = selectedTab;
-                        if (selectedTab) {
-                            selectedTab.selected = true;
-                            selectedTab.active = true;
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Tabs.prototype.loadConfig = function (attrKey, fallback) {
-        var val = this[attrKey];
-        if (typeof val === 'undefined') {
-            this[attrKey] = this.config.get(attrKey, fallback);
-        }
-    };
-    Tabs.prototype.setActive = function (selectedTab) {
-        if (this.transitioning) {
-            return Promise.reject('transitioning already happening');
-        }
-        for (var _i = 0, _a = this.tabs; _i < _a.length; _i++) {
-            var tab = _a[_i];
-            if (selectedTab !== tab) {
-                tab.selected = false;
+        if (!this.isServer && this.isVisible) {
+            var url = this.getUrl();
+            if (url) {
+                getSvgContent(url).then(function (svgContent) {
+                    _this.svgContent = validateContent(_this.doc, svgContent, _this.el["s-sc"]);
+                });
             }
         }
-        this.transitioning = true;
-        this.leavingTab = this.selectedTab;
-        this.selectedTab = selectedTab;
-        this.ionNavWillChange.emit();
-        return selectedTab.setActive();
-    };
-    Tabs.prototype.tabSwitch = function () {
-        var selectedTab = this.selectedTab;
-        var leavingTab = this.leavingTab;
-        this.leavingTab = undefined;
-        this.transitioning = false;
-        if (!selectedTab) {
-            return;
-        }
-        selectedTab.selected = true;
-        if (leavingTab !== selectedTab) {
-            if (leavingTab) {
-                leavingTab.active = false;
-            }
-            this.ionChange.emit({ tab: selectedTab });
-            this.ionNavDidChange.emit();
-        }
-    };
-    Tabs.prototype.notifyRouter = function () {
-        if (this.useRouter) {
-            var router = this.doc.querySelector('ion-router');
-            if (router) {
-                return router.navChanged(1);
+        if (!this.ariaLabel) {
+            var name = getName(this.name, this.mode, this.ios, this.md);
+            if (name) {
+                this.ariaLabel = name
+                    .replace("ios-", "")
+                    .replace("md-", "")
+                    .replace(/\-/g, " ");
             }
         }
-        return Promise.resolve(false);
     };
-    Tabs.prototype.shouldSwitch = function (selectedTab) {
-        var leavingTab = this.selectedTab;
-        return selectedTab !== undefined && selectedTab !== leavingTab && !this.transitioning;
+    Icon.prototype.getUrl = function () {
+        var url = getSrc(this.src);
+        if (url) {
+            return url;
+        }
+        url = getName(this.name, this.mode, this.ios, this.md);
+        if (url) {
+            return this.getNamedUrl(url);
+        }
+        url = getSrc(this.icon);
+        if (url) {
+            return url;
+        }
+        url = getName(this.icon, this.mode, this.ios, this.md);
+        if (url) {
+            return this.getNamedUrl(url);
+        }
+        return null;
     };
-    Tabs.prototype.hostData = function () {
+    Icon.prototype.getNamedUrl = function (name) {
+        return this.resourcesUrl + "svg/" + name + ".svg";
+    };
+    Icon.prototype.hostData = function () {
+        var _a;
         return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color)
+            "role": "img",
+            class: Object.assign({}, createColorClasses$1(this.color), (_a = {}, _a["icon-" + this.size] = !!this.size, _a))
         };
     };
-    Tabs.prototype.render = function () {
-        return [
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "tabs-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)),
-            !this.tabbarHidden && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-tabbar", { tabs: this.tabs.slice(), color: this.color, selectedTab: this.selectedTab, highlight: this.tabbarHighlight, placement: this.tabbarPlacement, layout: this.tabbarLayout, translucent: this.translucent }))
-        ];
+    Icon.prototype.render = function () {
+        if (!this.isServer && this.svgContent) {
+            return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "icon-inner", innerHTML: this.svgContent });
+        }
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "icon-inner" });
     };
-    Object.defineProperty(Tabs, "is", {
-        get: function () { return "ion-tabs"; },
+    Object.defineProperty(Icon, "is", {
+        get: function () { return "ion-icon"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabs, "encapsulation", {
+    Object.defineProperty(Icon, "encapsulation", {
         get: function () { return "shadow"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabs, "properties", {
+    Object.defineProperty(Icon, "properties", {
         get: function () {
             return {
+                "ariaLabel": {
+                    "type": String,
+                    "attr": "aria-label",
+                    "reflectToAttr": true,
+                    "mutable": true
+                },
                 "color": {
                     "type": String,
                     "attr": "color"
-                },
-                "config": {
-                    "context": "config"
                 },
                 "doc": {
                     "context": "document"
@@ -631,116 +379,113 @@ var Tabs = /** @class */ (function () {
                 "el": {
                     "elementRef": true
                 },
-                "getRouteId": {
-                    "method": true
+                "icon": {
+                    "type": String,
+                    "attr": "icon",
+                    "watchCallbacks": ["loadIcon"]
                 },
-                "getSelected": {
-                    "method": true
+                "ios": {
+                    "type": String,
+                    "attr": "ios"
                 },
-                "getTab": {
-                    "method": true
+                "isServer": {
+                    "context": "isServer"
+                },
+                "isVisible": {
+                    "state": true
+                },
+                "lazy": {
+                    "type": Boolean,
+                    "attr": "lazy"
+                },
+                "md": {
+                    "type": String,
+                    "attr": "md"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
                 },
                 "name": {
                     "type": String,
-                    "attr": "name"
+                    "attr": "name",
+                    "watchCallbacks": ["loadIcon"]
                 },
-                "select": {
-                    "method": true
+                "resourcesUrl": {
+                    "context": "resourcesUrl"
                 },
-                "selectedTab": {
+                "size": {
+                    "type": String,
+                    "attr": "size"
+                },
+                "src": {
+                    "type": String,
+                    "attr": "src",
+                    "watchCallbacks": ["loadIcon"]
+                },
+                "svgContent": {
                     "state": true
                 },
-                "setRouteId": {
-                    "method": true
-                },
-                "tabbarHidden": {
-                    "type": Boolean,
-                    "attr": "tabbar-hidden"
-                },
-                "tabbarHighlight": {
-                    "type": Boolean,
-                    "attr": "tabbar-highlight",
-                    "mutable": true
-                },
-                "tabbarLayout": {
-                    "type": String,
-                    "attr": "tabbar-layout",
-                    "mutable": true
-                },
-                "tabbarPlacement": {
-                    "type": String,
-                    "attr": "tabbar-placement",
-                    "mutable": true
-                },
-                "tabs": {
-                    "state": true
-                },
-                "translucent": {
-                    "type": Boolean,
-                    "attr": "translucent"
-                },
-                "useRouter": {
-                    "type": Boolean,
-                    "attr": "use-router",
-                    "mutable": true
+                "win": {
+                    "context": "window"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabs, "events", {
-        get: function () {
-            return [{
-                    "name": "ionChange",
-                    "method": "ionChange",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionNavWillLoad",
-                    "method": "ionNavWillLoad",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionNavWillChange",
-                    "method": "ionNavWillChange",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionNavDidChange",
-                    "method": "ionNavDidChange",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
+    Object.defineProperty(Icon, "style", {
+        get: function () { return ":host{display:inline-block;width:1em;height:1em;contain:strict;-webkit-box-sizing:content-box!important;box-sizing:content-box!important}:host(.ion-color){color:var(--ion-color-base)!important}:host(.icon-small){font-size:var(--ion-icon-size-small,18px)!important}:host(.icon-large){font-size:var(--ion-icon-size-large,32px)!important}.icon-inner,svg{display:block;height:100%;width:100%}svg{fill:currentColor;stroke:currentColor}:host(.ion-color-primary){--ion-color-base:var(--ion-color-primary, #3880ff)}:host(.ion-color-secondary){--ion-color-base:var(--ion-color-secondary, #0cd1e8)}:host(.ion-color-tertiary){--ion-color-base:var(--ion-color-tertiary, #f4a942)}:host(.ion-color-success){--ion-color-base:var(--ion-color-success, #10dc60)}:host(.ion-color-warning){--ion-color-base:var(--ion-color-warning, #ffce00)}:host(.ion-color-danger){--ion-color-base:var(--ion-color-danger, #f14141)}:host(.ion-color-light){--ion-color-base:var(--ion-color-light, #f4f5f8)}:host(.ion-color-medium){--ion-color-base:var(--ion-color-medium, #989aa2)}:host(.ion-color-dark){--ion-color-base:var(--ion-color-dark, #222428)}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tabs, "listeners", {
-        get: function () {
-            return [{
-                    "name": "ionTabMutated",
-                    "method": "onTabMutated"
-                }, {
-                    "name": "ionTabbarClick",
-                    "method": "onTabClicked"
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Tabs, "style", {
-        get: function () { return ":host{left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;width:100%;height:100%;contain:layout size style;z-index:0}.tabs-inner{position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;contain:layout size style}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Tabs;
+    return Icon;
 }());
-var tabIds = -1;
+var requests = new Map();
+function getSvgContent(url) {
+    var req = requests.get(url);
+    if (!req) {
+        req = fetch(url, { cache: "force-cache" }).then(function (rsp) {
+            if (rsp.ok) {
+                return rsp.text();
+            }
+            return Promise.resolve(null);
+        });
+        requests.set(url, req);
+    }
+    return req;
+}
+function validateContent(document, svgContent, scopeId) {
+    if (svgContent) {
+        var frag = document.createDocumentFragment();
+        var div = document.createElement("div");
+        div.innerHTML = svgContent;
+        frag.appendChild(div);
+        for (var i = div.childNodes.length - 1; i >= 0; i--) {
+            if (div.childNodes[i].nodeName.toLowerCase() !== "svg") {
+                div.removeChild(div.childNodes[i]);
+            }
+        }
+        var svgElm = div.firstElementChild;
+        if (svgElm && svgElm.nodeName.toLowerCase() === "svg") {
+            if (scopeId) {
+                svgElm.setAttribute("class", scopeId);
+            }
+            if (isValid(svgElm)) {
+                return div.innerHTML;
+            }
+        }
+    }
+    return "";
+}
+function createColorClasses$1(color) {
+    var _a;
+    return (color) ? (_a = {
+            "ion-color": true
+        },
+        _a["ion-color-" + color] = true,
+        _a) : null;
+}
 
 
 

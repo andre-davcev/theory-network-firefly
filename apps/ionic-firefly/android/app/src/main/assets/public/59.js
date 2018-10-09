@@ -1,273 +1,203 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[59],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fz9h7zdi.entry.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fz9h7zdi.entry.js ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: IonFab, IonFabButton, IonFabList */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ezb8uns1.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ezb8uns1.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonSpinner */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFab", function() { return Fab; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFabButton", function() { return FabButton; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonFabList", function() { return FabList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSpinner", function() { return Spinner; });
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
 
 
-var Fab = /** @class */ (function () {
-    function Fab() {
-        this.edge = false;
-        this.activated = false;
-    }
-    Fab.prototype.activatedChanged = function () {
-        var activated = this.activated;
-        var fab = this.el.querySelector('ion-fab-button');
-        if (fab) {
-            fab.activated = activated;
-        }
-        Array.from(this.el.querySelectorAll('ion-fab-list')).forEach(function (list) {
-            list.activated = activated;
-        });
-    };
-    Fab.prototype.componentDidLoad = function () {
-        this.activatedChanged();
-    };
-    Fab.prototype.onClick = function () {
-        var hasList = !!this.el.querySelector('ion-fab-list');
-        if (hasList) {
-            this.activated = !this.activated;
-        }
-    };
-    Fab.prototype.close = function () {
-        this.activated = false;
-    };
-    Fab.prototype.hostData = function () {
-        var _a;
-        return {
-            class: (_a = {},
-                _a["fab-horizontal-" + this.horizontal] = !!this.horizontal,
-                _a["fab-vertical-" + this.vertical] = !!this.vertical,
-                _a['fab-edge'] = this.edge,
-                _a)
-        };
-    };
-    Fab.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
-    };
-    Object.defineProperty(Fab, "is", {
-        get: function () { return "ion-fab"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Fab, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Fab, "properties", {
-        get: function () {
+var spinners = {
+    'lines': {
+        dur: 1000,
+        lines: 12,
+        fn: function (dur, index, total) {
+            var transform = "rotate(" + (30 * index + (index < 6 ? 180 : -180)) + "deg)";
+            var animationDelay = (dur * index / total) - dur + "ms";
             return {
-                "activated": {
-                    "type": Boolean,
-                    "attr": "activated",
-                    "mutable": true,
-                    "watchCallbacks": ["activatedChanged"]
-                },
-                "close": {
-                    "method": true
-                },
-                "edge": {
-                    "type": Boolean,
-                    "attr": "edge"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "horizontal": {
-                    "type": String,
-                    "attr": "horizontal"
-                },
-                "vertical": {
-                    "type": String,
-                    "attr": "vertical"
+                y1: 17,
+                y2: 29,
+                style: {
+                    'transform': transform,
+                    'animation-delay': animationDelay,
                 }
             };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Fab, "listeners", {
-        get: function () {
-            return [{
-                    "name": "click",
-                    "method": "onClick"
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Fab, "style", {
-        get: function () { return ":host{position:absolute;z-index:999}:host(.fab-horizontal-center){left:50%;margin-left:-28px}:host(.fab-horizontal-start){left:10px;left:calc(env(safe-area-inset-left) + 10px)}:host(.fab-horizontal-end){right:10px;right:calc(env(safe-area-inset-right) + 10px)}:host(.fab-vertical-top){top:10px}:host(.fab-vertical-top.fab-edge){top:-28px}:host(.fab-vertical-bottom){bottom:10px}:host(.fab-vertical-bottom.fab-edge){bottom:-28px}:host(.fab-vertical-center){margin-top:-28px;top:50%}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Fab;
-}());
-var FabButton = /** @class */ (function () {
-    function FabButton() {
-        this.activated = false;
-        this.disabled = false;
-        this.translucent = false;
-        this.show = false;
+        }
+    },
+    'lines-small': {
+        dur: 1000,
+        lines: 12,
+        fn: function (dur, index, total) {
+            var transform = "rotate(" + (30 * index + (index < 6 ? 180 : -180)) + "deg)";
+            var animationDelay = (dur * index / total) - dur + "ms";
+            return {
+                y1: 12,
+                y2: 20,
+                style: {
+                    'transform': transform,
+                    'animation-delay': animationDelay,
+                }
+            };
+        }
+    },
+    'bubbles': {
+        dur: 1000,
+        circles: 9,
+        fn: function (dur, index, total) {
+            var animationDelay = (dur * index / total) - dur + "ms";
+            var angle = 2 * Math.PI * index / total;
+            return {
+                r: 5,
+                style: {
+                    'top': 9 * Math.sin(angle) + "px",
+                    'left': 9 * Math.cos(angle) + "px",
+                    'animation-delay': animationDelay,
+                }
+            };
+        }
+    },
+    'circles': {
+        dur: 1000,
+        circles: 8,
+        fn: function (dur, index, total) {
+            var step = index / total;
+            var animationDelay = (dur * step) - dur + "ms";
+            var angle = 2 * Math.PI * step;
+            return {
+                r: 5,
+                style: {
+                    'top': 9 * Math.sin(angle) + "px",
+                    'left': 9 * Math.cos(angle) + "px",
+                    'animation-delay': animationDelay,
+                }
+            };
+        }
+    },
+    'crescent': {
+        dur: 750,
+        circles: 1,
+        fn: function () {
+            return {
+                r: 26,
+                style: {}
+            };
+        }
+    },
+    'dots': {
+        dur: 750,
+        circles: 3,
+        fn: function (_, index) {
+            var animationDelay = -(110 * index) + 'ms';
+            return {
+                r: 6,
+                style: {
+                    'left': 9 - (9 * index) + "px",
+                    'animation-delay': animationDelay,
+                }
+            };
+        }
     }
-    FabButton.prototype.hostData = function () {
-        var inList = Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["f"])('ion-fab-list', this.el);
+};
+var SPINNERS = spinners;
+var Spinner = /** @class */ (function () {
+    function Spinner() {
+        this.paused = false;
+    }
+    Spinner.prototype.getName = function () {
+        var name = this.name || this.config.get('spinner');
+        if (name) {
+            return name;
+        }
+        return (this.mode === 'ios') ? 'lines' : 'crescent';
+    };
+    Spinner.prototype.hostData = function () {
+        var _a;
         return {
-            'ion-activatable': true,
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color), { 'fab-button-in-list': inList, 'fab-button-translucent-in-list': inList && this.translucent, 'fab-button-close-active': this.activated, 'fab-button-show': this.show, 'fab-button-disabled': this.disabled, 'fab-button-translucent': this.translucent })
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.color), (_a = {}, _a["spinner-" + this.getName()] = true, _a['spinner-paused'] = !!this.paused, _a))
         };
     };
-    FabButton.prototype.render = function () {
-        var _this = this;
-        var TagType = this.href === undefined ? 'button' : 'a';
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, { class: "fab-button-native", disabled: this.disabled, href: this.href, onClick: function (ev) { return Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["e"])(_this.win, _this.href, ev, _this.routerDirection); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "fab-button-close-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { name: "close", lazy: false })), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "fab-button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null)));
+    Spinner.prototype.render = function () {
+        var name = this.getName();
+        var spinner = SPINNERS[name] || SPINNERS['lines'];
+        var duration = (typeof this.duration === 'number' && this.duration > 10 ? this.duration : spinner.dur);
+        var svgs = [];
+        if (spinner.circles !== undefined) {
+            for (var i = 0; i < spinner.circles; i++) {
+                svgs.push(buildCircle(spinner, duration, i, spinner.circles));
+            }
+        }
+        else if (spinner.lines !== undefined) {
+            for (var i = 0; i < spinner.lines; i++) {
+                svgs.push(buildLine(spinner, duration, i, spinner.lines));
+            }
+        }
+        return svgs;
     };
-    Object.defineProperty(FabButton, "is", {
-        get: function () { return "ion-fab-button"; },
+    Object.defineProperty(Spinner, "is", {
+        get: function () { return "ion-spinner"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FabButton, "encapsulation", {
+    Object.defineProperty(Spinner, "encapsulation", {
         get: function () { return "shadow"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FabButton, "properties", {
+    Object.defineProperty(Spinner, "properties", {
         get: function () {
             return {
-                "activated": {
-                    "type": Boolean,
-                    "attr": "activated"
-                },
                 "color": {
                     "type": String,
                     "attr": "color"
                 },
-                "disabled": {
+                "config": {
+                    "context": "config"
+                },
+                "duration": {
+                    "type": Number,
+                    "attr": "duration"
+                },
+                "name": {
+                    "type": "Any",
+                    "attr": "name"
+                },
+                "paused": {
                     "type": Boolean,
-                    "attr": "disabled"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "href": {
-                    "type": String,
-                    "attr": "href"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                },
-                "routerDirection": {
-                    "type": String,
-                    "attr": "router-direction"
-                },
-                "show": {
-                    "type": Boolean,
-                    "attr": "show"
-                },
-                "translucent": {
-                    "type": Boolean,
-                    "attr": "translucent"
-                },
-                "win": {
-                    "context": "window"
+                    "attr": "paused"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FabButton, "style", {
-        get: function () { return ":host{--ion-color-base:var(--ion-color-primary, #3880ff);--ion-color-contrast:var(--ion-color-primary-contrast, #fff);--ion-color-tint:var(--ion-color-primary-tint, #4c8dff);--size:56px;--background:var(--ion-color-base);--transition:background-color,opacity 100ms linear;--padding-start:calc((56px - var(--size)) / 2);--padding-end:calc((56px - var(--size)) / 2);--padding-top:calc((56px - var(--size)) / 2);--padding-bottom:calc((56px - var(--size)) / 2);display:block;color:var(--ion-color-contrast);font-size:14px;text-align:center;text-overflow:ellipsis;text-transform:none;white-space:nowrap;-webkit-font-kerning:none;font-kerning:none;--box-shadow:0 4px 6px 0 rgba(0, 0, 0, 0.14),0 4px 5px rgba(0, 0, 0, 0.1);--transition:box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),color 300ms cubic-bezier(0.4, 0, 0.2, 1)}:host(.fab-button-disabled){pointer-events:none}:host(.activated){--background:var(--ion-color-tint);--box-shadow:0 5px 15px 0 rgba(0, 0, 0, 0.4),0 4px 7px 0 rgba(0, 0, 0, 0.1)}.fab-button-native{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;border-radius:50%;margin:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:block;position:relative;width:var(--size);height:var(--size);-webkit-transform:var(--transform);transform:var(--transform);-webkit-transition:var(--transition);transition:var(--transition);border:0;outline:0;background:var(--background);background-clip:padding-box;line-height:var(--size);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);contain:strict;cursor:pointer;overflow:hidden;z-index:0;-webkit-appearance:none;-moz-appearance:none;appearance:none}.fab-button-native[disabled]{cursor:default;opacity:.5;pointer-events:none}::slotted(ion-icon){line-height:1}.fab-button-inner{left:0;right:0;top:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-transition:all ease-in-out .3s;transition:all ease-in-out .3s;-webkit-transition-property:opacity,-webkit-transform;transition-property:opacity,-webkit-transform;transition-property:transform,opacity;transition-property:transform,opacity,-webkit-transform}:host([mini]){--size:40px}.fab-button-close-icon{left:0;right:0;top:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-transform:scale(.4) rotateZ(-45deg);transform:scale(.4) rotateZ(-45deg);-webkit-transition:all ease-in-out .3s;transition:all ease-in-out .3s;-webkit-transition-property:opacity,-webkit-transform;transition-property:opacity,-webkit-transform;transition-property:transform,opacity;transition-property:transform,opacity,-webkit-transform;opacity:0}:host(.fab-button-close-active) .fab-button-close-icon{-webkit-transform:scale(1) rotateZ(0);transform:scale(1) rotateZ(0);opacity:1}:host(.fab-button-close-active) .fab-button-inner{-webkit-transform:scale(.4) rotateZ(45deg);transform:scale(.4) rotateZ(45deg);opacity:0}ion-ripple-effect{color:var(--ripple-color)}.fab-button-close-icon,::slotted(ion-icon){font-size:24px}:host(.fab-button-in-list){--ion-color-contrast:var(--ion-color-light-contrast, #000);--ion-color-base:var(--ion-color-light, #f4f5f8);--transition:transform 200ms ease 10ms,opacity 200ms ease 10ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),color 300ms cubic-bezier(0.4, 0, 0.2, 1)}:host(.fab-button-in-list.activated){--background:var(--ion-color-primary-tint, #4c8dff)}"; },
+    Object.defineProperty(Spinner, "style", {
+        get: function () { return ":host{display:inline-block;position:relative;width:28px;height:28px;color:var(--color);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}:host(.ion-color){color:var(--ion-color-base)}svg{left:0;top:0;position:absolute;width:100%;height:100%;-webkit-transform:translateZ(0);transform:translateZ(0)}:host(.spinner-lines) line,:host(.spinner-lines-small) line{stroke-width:4px;stroke-linecap:round;stroke:currentColor}:host(.spinner-lines) svg,:host(.spinner-lines-small) svg{-webkit-animation:1s linear infinite spinner-fade-out;animation:1s linear infinite spinner-fade-out}:host(.spinner-bubbles) svg{-webkit-animation:1s linear infinite spinner-scale-out;animation:1s linear infinite spinner-scale-out;fill:currentColor}:host(.spinner-circles) svg{-webkit-animation:1s linear infinite spinner-fade-out;animation:1s linear infinite spinner-fade-out;fill:currentColor}:host(.spinner-crescent) circle{fill:transparent;stroke-width:4px;stroke-dasharray:128px;stroke-dashoffset:82px;stroke:currentColor}:host(.spinner-crescent) svg{-webkit-animation:1s linear infinite spinner-rotate;animation:1s linear infinite spinner-rotate}:host(.spinner-dots) circle{stroke-width:0;fill:currentColor}:host(.spinner-dots) svg{-webkit-transform-origin:center;transform-origin:center;-webkit-animation:1s linear infinite spinner-dots;animation:1s linear infinite spinner-dots}:host(.spinner-paused) svg{-webkit-animation-play-state:paused;animation-play-state:paused}\@-webkit-keyframes spinner-fade-out{0%{opacity:1}100%{opacity:0}}\@keyframes spinner-fade-out{0%{opacity:1}100%{opacity:0}}\@-webkit-keyframes spinner-scale-out{0%{-webkit-transform:scale(1,1);transform:scale(1,1)}100%{-webkit-transform:scale(0,0);transform:scale(0,0)}}\@keyframes spinner-scale-out{0%{-webkit-transform:scale(1,1);transform:scale(1,1)}100%{-webkit-transform:scale(0,0);transform:scale(0,0)}}\@-webkit-keyframes spinner-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}\@keyframes spinner-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}\@-webkit-keyframes spinner-dots{0%,100%{-webkit-transform:scale(1,1);transform:scale(1,1);opacity:.9}50%{-webkit-transform:scale(.4,.4);transform:scale(.4,.4);opacity:.3}}\@keyframes spinner-dots{0%,100%{-webkit-transform:scale(1,1);transform:scale(1,1);opacity:.9}50%{-webkit-transform:scale(.4,.4);transform:scale(.4,.4);opacity:.3}}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FabButton, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return FabButton;
+    return Spinner;
 }());
-var FabList = /** @class */ (function () {
-    function FabList() {
-        this.activated = false;
-        this.side = 'bottom';
-    }
-    FabList.prototype.activatedChanged = function (activated) {
-        var fabs = Array.from(this.el.querySelectorAll('ion-fab-button'));
-        var timeout = activated ? 30 : 0;
-        fabs.forEach(function (fab, i) {
-            setTimeout(function () { return fab.show = activated; }, i * timeout);
-        });
-    };
-    FabList.prototype.hostData = function () {
-        var _a;
-        return {
-            class: (_a = {
-                    'fab-list-active': this.activated
-                },
-                _a["fab-list-side-" + this.side] = true,
-                _a)
-        };
-    };
-    FabList.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
-    };
-    Object.defineProperty(FabList, "is", {
-        get: function () { return "ion-fab-list"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FabList, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FabList, "properties", {
-        get: function () {
-            return {
-                "activated": {
-                    "type": Boolean,
-                    "attr": "activated",
-                    "watchCallbacks": ["activatedChanged"]
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "side": {
-                    "type": String,
-                    "attr": "side"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FabList, "style", {
-        get: function () { return ":host{margin:66px 0;display:none;position:absolute;top:0;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;min-width:56px;min-height:56px}:host(.fab-list-active){display:-webkit-box;display:-ms-flexbox;display:flex}::slotted(.fab-button-in-list){--size:40px;-webkit-transform:scale(0);transform:scale(0);opacity:0;visibility:hidden}:host(.fab-list-side-bottom) ::slotted(.fab-button-in-list),:host(.fab-list-side-top) ::slotted(.fab-button-in-list){--padding-top:5px;--padding-bottom:5px}:host(.fab-list-side-end) ::slotted(.fab-button-in-list),:host(.fab-list-side-start) ::slotted(.fab-button-in-list){--padding-start:5px;--padding-end:5px}::slotted(.fab-button-in-list.fab-button-show){-webkit-transform:scale(1);transform:scale(1);opacity:1;visibility:visible}:host(.fab-list-side-top){top:auto;bottom:0;-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse}:host(.fab-list-side-start){margin:0 66px;right:0;-webkit-box-orient:horizontal;-webkit-box-direction:reverse;-ms-flex-direction:row-reverse;flex-direction:row-reverse}:host(.fab-list-side-end){margin:0 66px;left:0;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return FabList;
-}());
+function buildCircle(spinner, duration, index, total) {
+    var data = spinner.fn(duration, index, total);
+    data.style['animation-duration'] = duration + "ms";
+    return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("svg", { viewBox: "0 0 64 64", style: data.style }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("circle", { transform: "translate(32,32)", r: data.r })));
+}
+function buildLine(spinner, duration, index, total) {
+    var data = spinner.fn(duration, index, total);
+    data.style['animation-duration'] = duration + "ms";
+    return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("svg", { viewBox: "0 0 64 64", style: data.style }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("line", { transform: "translate(32,32)", y1: data.y1, y2: data.y2 })));
+}
 
 
 

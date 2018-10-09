@@ -580,8 +580,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/theme/variables.scss */"./src/theme/variables.scss");
-module.exports = __webpack_require__(/*! /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/global.scss */"./src/global.scss");
+__webpack_require__(/*! /Users/andredavcev/Projects/theory/apps/ionic-firefly/src/theme/variables.scss */"./src/theme/variables.scss");
+module.exports = __webpack_require__(/*! /Users/andredavcev/Projects/theory/apps/ionic-firefly/src/global.scss */"./src/global.scss");
 
 
 /***/ })

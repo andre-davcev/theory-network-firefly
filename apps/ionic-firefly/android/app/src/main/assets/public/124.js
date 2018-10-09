@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[124],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uogyt54d.sc.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uogyt54d.sc.entry.js ***!
-  \************************************************************************************************************************************/
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/qvwgwxx7.sc.entry.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/qvwgwxx7.sc.entry.js ***!
+  \***************************************************************************************************************************************/
 /*! exports provided: IonRadio, IonRadioGroup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13,7 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRadioGroup", function() { return RadioGroup; });
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
 /* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
@@ -96,7 +96,7 @@ var Radio = /** @class */ (function () {
     };
     Radio.prototype.hostData = function () {
         return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), { 'in-item': Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["f"])('ion-item', this.el), 'interactive': true, 'radio-checked': this.checked, 'radio-disabled': this.disabled, 'radio-key': this.keyFocus })
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.color), { 'in-item': Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["j"])('ion-item', this.el), 'interactive': true, 'radio-checked': this.checked, 'radio-disabled': this.disabled, 'radio-key': this.keyFocus })
         };
     };
     Radio.prototype.render = function () {
@@ -203,12 +203,12 @@ var Radio = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(Radio, "style", {
-        get: function () { return ".sc-ion-radio-ios-h{display:inline-block;position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--color-checked:var(--ion-color-primary, #3880ff);--width:16px;--height:21px}.radio-disabled.sc-ion-radio-ios-h{pointer-events:none;opacity:.3}.radio-icon.sc-ion-radio-ios{display:block;position:relative;width:var(--width);height:var(--height);contain:layout size style}input.sc-ion-radio-ios{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.radio-icon.sc-ion-radio-ios, .radio-inner.sc-ion-radio-ios{-webkit-box-sizing:border-box;box-sizing:border-box}.ion-color.radio-checked.sc-ion-radio-ios-h   .radio-inner.sc-ion-radio-ios{border-color:var(--ion-color-base)}.item-radio.item-ios.sc-ion-radio-ios   ion-label.sc-ion-radio-ios{margin-left:0}.radio-checked.sc-ion-radio-ios-h   .radio-inner.sc-ion-radio-ios{left:7px;top:4px;position:absolute;width:5px;height:12px;-webkit-transform:rotate(45deg);transform:rotate(45deg);border-width:0 2px 2px 0;border-style:solid;border-color:var(--color-checked)}.radio-key.sc-ion-radio-ios-h   .radio-icon.sc-ion-radio-ios::after{border-radius:50%;left:-9px;top:-8px;display:block;position:absolute;width:36px;height:36px;background:var(--ion-color-primary-tint,#4c8dff);content:\"\";opacity:.2}.in-item.sc-ion-radio-ios-h{margin:8px 11px 8px 8px;display:block;position:static}.in-item[slot=start].sc-ion-radio-ios-h{margin:8px 21px 8px 3px}"; },
+        get: function () { return ".sc-ion-radio-md-h{display:inline-block;position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--color:var(--ion-text-color-step-600, #999999);--color-checked:var(--ion-color-primary, #3880ff);--width:16px;--height:16px;--border-width:2px;--border-style:solid;--inner-width:calc(var(--width) - var(--border-width) * 4);--inner-height:calc(var(--height) - var(--border-width) * 4)}.radio-disabled.sc-ion-radio-md-h{pointer-events:none;opacity:.3}.radio-icon.sc-ion-radio-md{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:var(--width);height:var(--height);contain:layout size style}input.sc-ion-radio-md{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.radio-icon.sc-ion-radio-md, .radio-inner.sc-ion-radio-md{-webkit-box-sizing:border-box;box-sizing:border-box}.ion-color.sc-ion-radio-md-h   .radio-inner.sc-ion-radio-md{background:var(--ion-color-base)}.ion-color.radio-checked.sc-ion-radio-md-h   .radio-icon.sc-ion-radio-md{border-color:var(--ion-color-base)}.radio-icon.sc-ion-radio-md{margin:0;border-radius:50%;border-width:var(--border-width);border-style:var(--border-style);border-color:var(--color)}.radio-inner.sc-ion-radio-md{width:var(--inner-width);height:var(--inner-height);border-radius:50%;-webkit-transform:scale3d(0,0,0);transform:scale3d(0,0,0);-webkit-transition:-webkit-transform 280ms cubic-bezier(.4,0,.2,1);transition:-webkit-transform 280ms cubic-bezier(.4,0,.2,1);transition:transform 280ms cubic-bezier(.4,0,.2,1);transition:transform 280ms cubic-bezier(.4,0,.2,1),-webkit-transform 280ms cubic-bezier(.4,0,.2,1);background:var(--color-checked)}.radio-checked.sc-ion-radio-md-h   .radio-icon.sc-ion-radio-md{border-color:var(--color-checked)}.radio-checked.sc-ion-radio-md-h   .radio-inner.sc-ion-radio-md{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}.radio-key.sc-ion-radio-md-h   .radio-icon.sc-ion-radio-md::after{border-radius:50%;left:-12px;top:-12px;display:block;position:absolute;width:36px;height:36px;background:var(--ion-color-primary-tint,#4c8dff);content:\"\";opacity:.2}.in-item.sc-ion-radio-md-h{margin:9px 10px 9px 0;display:block;position:static}.in-item[slot=start].sc-ion-radio-md-h{margin:11px 36px 10px 4px}"; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Radio, "styleMode", {
-        get: function () { return "ios"; },
+        get: function () { return "md"; },
         enumerable: true,
         configurable: true
     });

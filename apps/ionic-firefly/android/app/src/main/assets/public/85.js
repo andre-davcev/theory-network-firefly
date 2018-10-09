@@ -1,175 +1,284 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[85],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nhr77xez.entry.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nhr77xez.entry.js ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: IonButton, IonIcon */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jnylf5ki.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jnylf5ki.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonRefresher, IonRefresherContent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonButton", function() { return Button; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonIcon", function() { return Icon; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRefresher", function() { return Refresher; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRefresherContent", function() { return RefresherContent; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
+
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
 
 
-
-var Button = /** @class */ (function () {
-    function Button() {
-        this.keyFocus = false;
-        this.buttonType = 'button';
+var Refresher = /** @class */ (function () {
+    function Refresher() {
+        this.appliedStyles = false;
+        this.didStart = false;
+        this.progress = 0;
+        this.state = 1;
+        this.pullMin = 60;
+        this.pullMax = this.pullMin + 60;
+        this.closeDuration = '280ms';
+        this.snapbackDuration = '280ms';
         this.disabled = false;
-        this.strong = false;
-        this.type = 'button';
     }
-    Button.prototype.componentWillLoad = function () {
-        if (this.fill === undefined) {
-            this.fill = this.el.closest('ion-buttons') ? 'clear' : 'solid';
+    Refresher.prototype.disabledChanged = function () {
+        if (this.gesture) {
+            this.gesture.setDisabled(this.disabled);
         }
     };
-    Button.prototype.onFocus = function () {
-        this.ionFocus.emit();
+    Refresher.prototype.componentDidLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var contentEl, _a, _b;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        if (this.el.getAttribute('slot') !== 'fixed') {
+                            console.error('Make sure you use: <ion-refresher slot="fixed">');
+                            return [2 /*return*/];
+                        }
+                        contentEl = this.el.closest('ion-content');
+                        if (!contentEl) return [3 /*break*/, 3];
+                        return [4 /*yield*/, contentEl.componentOnReady()];
+                    case 1:
+                        _c.sent();
+                        _a = this;
+                        return [4 /*yield*/, contentEl.getScrollElement()];
+                    case 2:
+                        _a.scrollEl = _c.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        console.error('ion-refresher did not attach, make sure the parent is an ion-content.');
+                        _c.label = 4;
+                    case 4:
+                        _b = this;
+                        return [4 /*yield*/, Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e("common")]).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/gesture.js"))];
+                    case 5:
+                        _b.gesture = (_c.sent()).createGesture({
+                            el: this.el.closest('ion-content'),
+                            queue: this.queue,
+                            gestureName: 'refresher',
+                            gesturePriority: 10,
+                            direction: 'y',
+                            threshold: 20,
+                            passive: false,
+                            canStart: function () { return _this.canStart(); },
+                            onStart: function () { return _this.onStart(); },
+                            onMove: function (ev) { return _this.onMove(ev); },
+                            onEnd: function () { return _this.onEnd(); },
+                        });
+                        this.disabledChanged();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
-    Button.prototype.onKeyUp = function () {
-        this.keyFocus = true;
+    Refresher.prototype.componentDidUnload = function () {
+        this.scrollEl = undefined;
     };
-    Button.prototype.onBlur = function () {
-        this.keyFocus = false;
-        this.ionBlur.emit();
+    Refresher.prototype.complete = function () {
+        this.close(32, '120ms');
     };
-    Button.prototype.onClick = function (ev) {
-        if (this.type === 'button') {
-            return Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.win, this.href, ev, this.routerDirection);
+    Refresher.prototype.cancel = function () {
+        this.close(16, '');
+    };
+    Refresher.prototype.getProgress = function () {
+        return Promise.resolve(this.progress);
+    };
+    Refresher.prototype.canStart = function () {
+        if (!this.scrollEl) {
+            return false;
         }
-        else if (Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.el)) {
-            var form = this.el.closest('form');
-            if (form) {
-                ev.preventDefault();
-                ev.stopPropagation();
-                var fakeButton = document.createElement('button');
-                fakeButton.type = this.type;
-                fakeButton.style.display = 'none';
-                form.appendChild(fakeButton);
-                fakeButton.click();
-                fakeButton.remove();
+        if (this.state !== 1) {
+            return false;
+        }
+        if (this.scrollEl.scrollTop > 0) {
+            return false;
+        }
+        return true;
+    };
+    Refresher.prototype.onStart = function () {
+        console.log('start');
+        this.progress = 0;
+        this.state = 1;
+    };
+    Refresher.prototype.onMove = function (detail) {
+        if (!this.scrollEl) {
+            return;
+        }
+        var ev = detail.event;
+        if (ev.touches && ev.touches.length > 1) {
+            return;
+        }
+        if ((this.state & 56) !== 0) {
+            return;
+        }
+        var deltaY = detail.deltaY;
+        if (deltaY <= 0) {
+            this.progress = 0;
+            this.state = 1;
+            if (this.appliedStyles) {
+                this.setCss(0, '', false, '');
+                return;
             }
+            return;
         }
-        return Promise.resolve(false);
+        if (this.state === 1) {
+            var scrollHostScrollTop = this.scrollEl.scrollTop;
+            if (scrollHostScrollTop > 0) {
+                this.progress = 0;
+                return;
+            }
+            this.state = 2;
+        }
+        ev.preventDefault();
+        this.setCss(deltaY, '0ms', true, '');
+        if (deltaY === 0) {
+            this.progress = 0;
+            return;
+        }
+        var pullMin = this.pullMin;
+        this.progress = deltaY / pullMin;
+        if (!this.didStart) {
+            this.didStart = true;
+            this.ionStart.emit();
+        }
+        this.ionPull.emit();
+        if (deltaY < pullMin) {
+            this.state = 2;
+            return;
+        }
+        if (deltaY > this.pullMax) {
+            this.beginRefresh();
+            return;
+        }
+        this.state = 4;
+        return;
     };
-    Button.prototype.hostData = function () {
-        var _a = this, buttonType = _a.buttonType, color = _a.color, expand = _a.expand, fill = _a.fill, mode = _a.mode, shape = _a.shape, size = _a.size, strong = _a.strong;
+    Refresher.prototype.onEnd = function () {
+        if (this.state === 4) {
+            this.beginRefresh();
+        }
+        else if (this.state === 2) {
+            this.cancel();
+        }
+    };
+    Refresher.prototype.beginRefresh = function () {
+        this.state = 8;
+        this.setCss(this.pullMin, this.snapbackDuration, true, '');
+        this.ionRefresh.emit();
+    };
+    Refresher.prototype.close = function (state, delay) {
+        var _this = this;
+        setTimeout(function () {
+            _this.state = 1;
+            _this.progress = 0;
+            _this.didStart = false;
+            _this.setCss(0, '0ms', false, '');
+        }, 600);
+        this.state = state;
+        this.setCss(0, '', true, delay);
+    };
+    Refresher.prototype.setCss = function (y, duration, overflowVisible, delay) {
+        var _this = this;
+        this.appliedStyles = (y > 0);
+        this.queue.write(function () {
+            if (_this.scrollEl) {
+                var style = _this.scrollEl.style;
+                style.transform = ((y > 0) ? "translateY(" + y + "px) translateZ(0px)" : 'translateZ(0px)');
+                style.transitionDuration = duration;
+                style.transitionDelay = delay;
+                style.overflow = (overflowVisible ? 'hidden' : '');
+            }
+        });
+    };
+    Refresher.prototype.hostData = function () {
         return {
-            'ion-activatable': true,
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(color), getButtonClassMap(buttonType, mode), getButtonTypeClassMap(buttonType, expand, mode), getButtonTypeClassMap(buttonType, size, mode), getButtonTypeClassMap(buttonType, shape, mode), getButtonTypeClassMap(buttonType, strong ? 'strong' : undefined, mode), getButtonTypeClassMap(buttonType, fill, mode), { 'focused': this.keyFocus })
+            slot: 'fixed',
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.mode, 'refresher'), { 'refresher-active': this.state !== 1, 'refresher-pulling': this.state === 2, 'refresher-ready': this.state === 4, 'refresher-refreshing': this.state === 8, 'refresher-cancelling': this.state === 16, 'refresher-completing': this.state === 32 })
         };
     };
-    Button.prototype.render = function () {
-        var TagType = this.href === undefined ? 'button' : 'a';
-        var attrs = (TagType === 'button')
-            ? { type: this.type }
-            : { href: this.href };
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, Object.assign({}, attrs, { class: "button-native", disabled: this.disabled, onFocus: this.onFocus.bind(this), onKeyUp: this.onKeyUp.bind(this), onBlur: this.onBlur.bind(this), onClick: this.onClick.bind(this) }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", { name: "icon-only" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", { name: "start" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", { name: "end" })), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null)));
-    };
-    Object.defineProperty(Button, "is", {
-        get: function () { return "ion-button"; },
+    Object.defineProperty(Refresher, "is", {
+        get: function () { return "ion-refresher"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Button, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Button, "properties", {
+    Object.defineProperty(Refresher, "properties", {
         get: function () {
             return {
-                "buttonType": {
-                    "type": String,
-                    "attr": "button-type",
-                    "mutable": true
+                "cancel": {
+                    "method": true
                 },
-                "color": {
+                "closeDuration": {
                     "type": String,
-                    "attr": "color"
+                    "attr": "close-duration"
+                },
+                "complete": {
+                    "method": true
                 },
                 "disabled": {
                     "type": Boolean,
                     "attr": "disabled",
-                    "reflectToAttr": true
+                    "watchCallbacks": ["disabledChanged"]
                 },
                 "el": {
                     "elementRef": true
                 },
-                "expand": {
-                    "type": String,
-                    "attr": "expand",
-                    "reflectToAttr": true
+                "getProgress": {
+                    "method": true
                 },
-                "fill": {
-                    "type": String,
-                    "attr": "fill",
-                    "reflectToAttr": true,
-                    "mutable": true
+                "pullMax": {
+                    "type": Number,
+                    "attr": "pull-max"
                 },
-                "href": {
-                    "type": String,
-                    "attr": "href"
+                "pullMin": {
+                    "type": Number,
+                    "attr": "pull-min"
                 },
-                "keyFocus": {
+                "queue": {
+                    "context": "queue"
+                },
+                "snapbackDuration": {
+                    "type": String,
+                    "attr": "snapback-duration"
+                },
+                "state": {
                     "state": true
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                },
-                "routerDirection": {
-                    "type": String,
-                    "attr": "router-direction"
-                },
-                "shape": {
-                    "type": String,
-                    "attr": "shape",
-                    "reflectToAttr": true
-                },
-                "size": {
-                    "type": String,
-                    "attr": "size",
-                    "reflectToAttr": true
-                },
-                "strong": {
-                    "type": Boolean,
-                    "attr": "strong"
-                },
-                "type": {
-                    "type": String,
-                    "attr": "type"
-                },
-                "win": {
-                    "context": "window"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Button, "events", {
+    Object.defineProperty(Refresher, "events", {
         get: function () {
             return [{
-                    "name": "ionFocus",
-                    "method": "ionFocus",
+                    "name": "ionRefresh",
+                    "method": "ionRefresh",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionBlur",
-                    "method": "ionBlur",
+                    "name": "ionPull",
+                    "method": "ionPull",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionStart",
+                    "method": "ionStart",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
@@ -178,345 +287,75 @@ var Button = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Button, "style", {
-        get: function () { return ":host{--overflow:hidden;--ripple-color:currentColor;display:inline-block;color:var(--color);font-family:var(--ion-font-family,inherit);text-align:center;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:top;vertical-align:-webkit-baseline-middle;-webkit-font-kerning:none;font-kerning:none}:host([disabled]){pointer-events:none}:host(.button-solid){--background:var(--ion-color-primary, #3880ff);--background-activated:var(--ion-color-primary-shade, #3171e0);--background-focused:var(--ion-color-primary-shade, #3171e0);--color:var(--ion-color-primary-contrast, #fff);--color-activated:var(--ion-color-primary-contrast, #fff);--color-focused:var(--ion-color-primary-contrast, #fff)}:host(.button-solid.ion-color) .button-native{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.button-solid.ion-color.activated) .button-native,:host(.button-solid.ion-color.focused) .button-native{background:var(--ion-color-shade)}:host(.button-outline){--border-color:var(--ion-color-primary, #3880ff);--background:transparent;--color:var(--ion-color-primary, #3880ff);--color-focused:var(--ion-color-primary, #3880ff);--border-radius:12px;--border-width:1px;--border-style:solid;--background-activated:var(--ion-color-primary, #3880ff);--background-focused:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.1);--color-activated:var(--ion-color-primary-contrast, #fff)}:host(.button-outline.ion-color) .button-native{border-color:var(--ion-color-base);background:0 0;color:var(--ion-color-base)}:host(.button-outline.focused.ion-color) .button-native{background:rgba(var(--ion-color-base-rgb),.1);color:var(--ion-color-base)}:host(.button-clear){--border-width:0;--background:transparent;--color:var(--ion-color-primary, #3880ff);--background-activated:transparent;--background-focused:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.1);--color-activated:var(--ion-color-primary, #3880ff);--color-focused:var(--ion-color-primary, #3880ff)}:host(.button-clear.ion-color) .button-native{background:0 0;color:var(--ion-color-base)}:host(.button-clear.focused.ion-color) .button-native{background:rgba(var(--ion-color-base-rgb),.1);color:var(--ion-color-base)}:host(.button-clear.activated.ion-color) .button-native{background:0 0}:host(.button-block){display:block}:host(.button-block) .button-native{margin-left:0;margin-right:0;display:block;width:100%;clear:both;contain:strict}:host(.button-block) .button-native::after{clear:both}:host(.button-full){display:block}:host(.button-full) .button-native{margin-left:0;margin-right:0;display:block;width:100%;contain:strict}:host(.button-full:not(.button-round)) .button-native{border-radius:0;border-right-width:0;border-left-width:0}.button-native{border-radius:var(--border-radius);-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:block;position:relative;width:var(--width);height:var(--height);-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);outline:0;background:var(--background);line-height:1;-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);contain:content;cursor:pointer;opacity:var(--opacity);overflow:var(--overflow);z-index:0;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none}.button-native[disabled]{cursor:default;opacity:.5;pointer-events:none}:host(.focused) .button-native{background:var(--background-focused);color:var(--color-focused)}:host(.activated) .button-native{background:var(--background-activated);color:var(--color-activated)}.button-inner{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}::slotted(ion-icon){font-size:1.4em;pointer-events:none}::slotted(ion-icon[slot=start]){margin:0 .3em 0 -.3em}::slotted(ion-icon[slot=end]){margin:0 -.2em 0 .3em}::slotted(ion-icon[slot=icon-only]){font-size:1.8em}ion-ripple-effect{color:var(--ripple-color)}:host{--border-radius:12px;--margin-top:4px;--margin-bottom:4px;--margin-start:2px;--margin-end:2px;--padding-top:0;--padding-bottom:0;--padding-start:1em;--padding-end:1em;--height:2.8em;--transition:background-color,opacity 100ms linear;font-size:16px;font-weight:500;letter-spacing:-.03em}:host(.button-solid:hover){--opacity:0.8}:host(.button-solid.activated){--opacity:1}:host(.button-outline.activated.ion-color) .button-native{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.button-clear:hover){--opacity:0.6}:host(.button-clear.activated){--opacity:0.4}:host(.button-round){--border-radius:64px;--padding-top:0;--padding-start:26px;--padding-end:26px;--padding-bottom:0}:host(.button-large){--border-radius:14px;--padding-top:0;--padding-start:1em;--padding-end:1em;--padding-bottom:0;--height:2.8em;font-size:20px}:host(.button-small){--border-radius:8px;--padding-top:0;--padding-start:0.9em;--padding-end:0.9em;--padding-bottom:0;--height:2.1em;font-size:13px}:host(.button-strong){font-weight:600}"; },
+    Object.defineProperty(Refresher, "style", {
+        get: function () { return "ion-refresher{left:0;top:0;display:none;position:absolute;width:100%;height:60px;z-index:0}ion-refresher.refresher-active{display:block}ion-refresher-content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%}.refresher-pulling,.refresher-refreshing{display:none;width:100%}.refresher-pulling-icon,.refresher-refreshing-icon{-webkit-transform-origin:center;transform-origin:center;-webkit-transition:.2s;transition:.2s;font-size:30px;text-align:center}.refresher-pulling-text,.refresher-refreshing-text{font-size:16px;text-align:center}.refresher-pulling ion-refresher-content .refresher-pulling,.refresher-ready ion-refresher-content .refresher-pulling{display:block}.refresher-ready ion-refresher-content .refresher-pulling-icon{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.refresher-cancelling ion-refresher-content .refresher-pulling,.refresher-refreshing ion-refresher-content .refresher-refreshing{display:block}.refresher-cancelling ion-refresher-content .refresher-pulling-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-completing ion-refresher-content .refresher-refreshing{display:block}.refresher-completing ion-refresher-content .refresher-refreshing-icon{-webkit-transform:scale(0);transform:scale(0)}.refresher-ios .refresher-pulling-icon,.refresher-ios .refresher-pulling-text,.refresher-ios .refresher-refreshing-icon,.refresher-ios .refresher-refreshing-text{color:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-crescent circle,.refresher-ios .refresher-refreshing .spinner-lines-ios line,.refresher-ios .refresher-refreshing .spinner-lines-small-ios line{stroke:var(--ion-text-color,#000)}.refresher-ios .refresher-refreshing .spinner-bubbles circle,.refresher-ios .refresher-refreshing .spinner-circles circle,.refresher-ios .refresher-refreshing .spinner-dots circle{fill:var(--ion-text-color,#000)}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Button, "styleMode", {
+    Object.defineProperty(Refresher, "styleMode", {
         get: function () { return "ios"; },
         enumerable: true,
         configurable: true
     });
-    return Button;
+    return Refresher;
 }());
-function getButtonClassMap(buttonType, mode) {
-    var _a;
-    if (buttonType === undefined) {
-        return {};
+var RefresherContent = /** @class */ (function () {
+    function RefresherContent() {
     }
-    return _a = {},
-        _a[buttonType] = true,
-        _a[buttonType + "-" + mode] = true,
-        _a;
-}
-function getButtonTypeClassMap(buttonType, type, mode) {
-    var _a;
-    if (type === undefined) {
-        return {};
-    }
-    return _a = {},
-        _a[buttonType + "-" + type] = true,
-        _a[buttonType + "-" + type + "-" + mode] = true,
-        _a;
-}
-var Icon = /** @class */ (function () {
-    function Icon() {
-        this.isVisible = false;
-        /**
-         * If enabled, ion-icon will be loaded lazily when it's visible in the viewport.
-         * Default, `false`.
-         */
-        this.lazy = false;
-    }
-    Icon.prototype.componentWillLoad = function () {
-        var _this = this;
-        // purposely do not return the promise here because loading
-        // the svg file should not hold up loading the app
-        // only load the svg if it's visible
-        this.waitUntilVisible(this.el, "50px", function () {
-            _this.isVisible = true;
-            _this.loadIcon();
-        });
-    };
-    Icon.prototype.componentDidUnload = function () {
-        if (this.io) {
-            this.io.disconnect();
-            this.io = undefined;
+    RefresherContent.prototype.componentDidLoad = function () {
+        if (this.pullingIcon === undefined) {
+            this.pullingIcon = this.config.get('refreshingIcon', 'arrow-down');
+        }
+        if (this.refreshingSpinner === undefined) {
+            this.refreshingSpinner = this.config.get('refreshingSpinner', this.config.get('spinner', 'lines'));
         }
     };
-    Icon.prototype.waitUntilVisible = function (el, rootMargin, cb) {
-        var _this = this;
-        if (this.lazy && this.win && this.win.IntersectionObserver) {
-            var io_1 = this.io = new this.win.IntersectionObserver(function (data) {
-                if (data[0].isIntersecting) {
-                    io_1.disconnect();
-                    _this.io = undefined;
-                    cb();
-                }
-            }, { rootMargin: rootMargin });
-            io_1.observe(el);
-        }
-        else {
-            // browser doesn't support IntersectionObserver
-            // so just fallback to always show it
-            cb();
-        }
+    RefresherContent.prototype.render = function () {
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-pulling" }, this.pullingIcon &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-pulling-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: this.pullingIcon, lazy: false })), this.pullingText &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-pulling-text", innerHTML: this.pullingText })),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-refreshing" }, this.refreshingSpinner &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-refreshing-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-spinner", { name: this.refreshingSpinner })), this.refreshingText &&
+                Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "refresher-refreshing-text", innerHTML: this.refreshingText }))
+        ];
     };
-    Icon.prototype.loadIcon = function () {
-        var _this = this;
-        if (!this.isServer && this.isVisible) {
-            var url = this.getUrl();
-            if (url) {
-                getSvgContent(url).then(function (svgContent) {
-                    _this.svgContent = validateContent(_this.doc, svgContent, _this.el["s-sc"]);
-                });
-            }
-        }
-        if (!this.ariaLabel) {
-            var name = getName(this.name, this.mode, this.ios, this.md);
-            // user did not provide a label
-            // come up with the label based on the icon name
-            if (name) {
-                this.ariaLabel = name
-                    .replace("ios-", "")
-                    .replace("md-", "")
-                    .replace(/\-/g, " ");
-            }
-        }
-    };
-    Icon.prototype.getUrl = function () {
-        var url = getSrc(this.src);
-        if (url) {
-            return url;
-        }
-        url = getName(this.name, this.mode, this.ios, this.md);
-        if (url) {
-            return this.getNamedUrl(url);
-        }
-        url = getSrc(this.icon);
-        if (url) {
-            return url;
-        }
-        url = getName(this.icon, this.mode, this.ios, this.md);
-        if (url) {
-            return this.getNamedUrl(url);
-        }
-        return null;
-    };
-    Icon.prototype.getNamedUrl = function (name) {
-        return this.resourcesUrl + "svg/" + name + ".svg";
-    };
-    Icon.prototype.hostData = function () {
-        var _a;
-        return {
-            "role": "img",
-            class: Object.assign({}, createColorClasses$1(this.color), (_a = {}, _a["icon-" + this.size] = !!this.size, _a))
-        };
-    };
-    Icon.prototype.render = function () {
-        if (!this.isServer && this.svgContent) {
-            // we've already loaded up this svg at one point
-            // and the svg content we've loaded and assigned checks out
-            // render this svg!!
-            return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "icon-inner", innerHTML: this.svgContent });
-        }
-        // actively requesting the svg
-        // or it's an SSR render
-        // so let's just render an empty div for now
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "icon-inner" });
-    };
-    Object.defineProperty(Icon, "is", {
-        get: function () { return "ion-icon"; },
+    Object.defineProperty(RefresherContent, "is", {
+        get: function () { return "ion-refresher-content"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Icon, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Icon, "properties", {
+    Object.defineProperty(RefresherContent, "properties", {
         get: function () {
             return {
-                "ariaLabel": {
+                "config": {
+                    "context": "config"
+                },
+                "pullingIcon": {
                     "type": String,
-                    "attr": "aria-label",
-                    "reflectToAttr": true,
+                    "attr": "pulling-icon",
                     "mutable": true
                 },
-                "color": {
+                "pullingText": {
                     "type": String,
-                    "attr": "color"
+                    "attr": "pulling-text"
                 },
-                "doc": {
-                    "context": "document"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "icon": {
+                "refreshingSpinner": {
                     "type": String,
-                    "attr": "icon",
-                    "watchCallbacks": ["loadIcon"]
+                    "attr": "refreshing-spinner",
+                    "mutable": true
                 },
-                "ios": {
+                "refreshingText": {
                     "type": String,
-                    "attr": "ios"
-                },
-                "isServer": {
-                    "context": "isServer"
-                },
-                "isVisible": {
-                    "state": true
-                },
-                "lazy": {
-                    "type": Boolean,
-                    "attr": "lazy"
-                },
-                "md": {
-                    "type": String,
-                    "attr": "md"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                },
-                "name": {
-                    "type": String,
-                    "attr": "name",
-                    "watchCallbacks": ["loadIcon"]
-                },
-                "resourcesUrl": {
-                    "context": "resourcesUrl"
-                },
-                "size": {
-                    "type": String,
-                    "attr": "size"
-                },
-                "src": {
-                    "type": String,
-                    "attr": "src",
-                    "watchCallbacks": ["loadIcon"]
-                },
-                "svgContent": {
-                    "state": true
-                },
-                "win": {
-                    "context": "window"
+                    "attr": "refreshing-text"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Icon, "style", {
-        get: function () { return ":host{display:inline-block;width:1em;height:1em;contain:strict;-webkit-box-sizing:content-box!important;box-sizing:content-box!important}:host(.ion-color){color:var(--ion-color-base)!important}:host(.icon-small){font-size:var(--ion-icon-size-small,18px)!important}:host(.icon-large){font-size:var(--ion-icon-size-large,32px)!important}.icon-inner,svg{display:block;height:100%;width:100%}svg{fill:currentColor;stroke:currentColor}:host(.ion-color-primary){--ion-color-base:var(--ion-color-primary, #3880ff)}:host(.ion-color-secondary){--ion-color-base:var(--ion-color-secondary, #0cd1e8)}:host(.ion-color-tertiary){--ion-color-base:var(--ion-color-tertiary, #f4a942)}:host(.ion-color-success){--ion-color-base:var(--ion-color-success, #10dc60)}:host(.ion-color-warning){--ion-color-base:var(--ion-color-warning, #ffce00)}:host(.ion-color-danger){--ion-color-base:var(--ion-color-danger, #f14141)}:host(.ion-color-light){--ion-color-base:var(--ion-color-light, #f4f5f8)}:host(.ion-color-medium){--ion-color-base:var(--ion-color-medium, #989aa2)}:host(.ion-color-dark){--ion-color-base:var(--ion-color-dark, #222428)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Icon;
+    return RefresherContent;
 }());
-var requests = new Map();
-function getSvgContent(url) {
-    // see if we already have a request for this url
-    var req = requests.get(url);
-    if (!req) {
-        // we don't already have a request
-        req = fetch(url, { cache: "force-cache" }).then(function (rsp) {
-            if (rsp.ok) {
-                return rsp.text();
-            }
-            return Promise.resolve(null);
-        });
-        // cache for the same requests
-        requests.set(url, req);
-    }
-    return req;
-}
-function getName(name, mode, ios, md) {
-    // default to "md" if somehow the mode wasn't set
-    mode = (mode || "md").toLowerCase();
-    // if an icon was passed in using the ios or md attributes
-    // set the iconName to whatever was passed in
-    if (ios && mode === "ios") {
-        name = ios.toLowerCase();
-    }
-    else if (md && mode === "md") {
-        name = md.toLowerCase();
-    }
-    else if (name) {
-        name = name.toLowerCase();
-        if (!/^md-|^ios-|^logo-/.test(name)) {
-            // this does not have one of the defaults
-            // so lets auto add in the mode prefix for them
-            name = mode + "-" + name;
-        }
-    }
-    if (typeof name !== "string" || name.trim() === "") {
-        return null;
-    }
-    // only allow alpha characters and dash
-    var invalidChars = name.replace(/[a-z]|-|\d/gi, "");
-    if (invalidChars !== "") {
-        return null;
-    }
-    return name;
-}
-function getSrc(src) {
-    if (typeof src === "string") {
-        src = src.trim();
-        if (src.length > 0 && /(\/|\.)/.test(src)) {
-            return src;
-        }
-    }
-    return null;
-}
-function validateContent(document, svgContent, scopeId) {
-    if (svgContent) {
-        var frag = document.createDocumentFragment();
-        var div = document.createElement("div");
-        div.innerHTML = svgContent;
-        frag.appendChild(div);
-        // setup this way to ensure it works on our buddy IE
-        for (var i = div.childNodes.length - 1; i >= 0; i--) {
-            if (div.childNodes[i].nodeName.toLowerCase() !== "svg") {
-                div.removeChild(div.childNodes[i]);
-            }
-        }
-        // must only have 1 root element
-        var svgElm = div.firstElementChild;
-        if (svgElm && svgElm.nodeName.toLowerCase() === "svg") {
-            if (scopeId) {
-                svgElm.setAttribute("class", scopeId);
-            }
-            // root element must be an svg
-            // lets double check we've got valid elements
-            // do not allow scripts
-            if (isValid(svgElm)) {
-                return div.innerHTML;
-            }
-        }
-    }
-    return "";
-}
-function isValid(elm) {
-    if (elm.nodeType === 1) {
-        if (elm.nodeName.toLowerCase() === "script") {
-            return false;
-        }
-        for (var i = 0; i < elm.attributes.length; i++) {
-            var val = elm.attributes[i].value;
-            if (typeof val === "string" && val.toLowerCase().indexOf("on") === 0) {
-                return false;
-            }
-        }
-        for (var i = 0; i < elm.childNodes.length; i++) {
-            if (!isValid(elm.childNodes[i])) {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-function createColorClasses$1(color) {
-    var _a;
-    return (color) ? (_a = {
-            "ion-color": true
-        },
-        _a["ion-color-" + color] = true,
-        _a) : null;
-}
 
 
 

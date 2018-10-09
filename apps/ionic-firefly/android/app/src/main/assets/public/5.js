@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
 /***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/tap-click.js":
-/*!****************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/tap-click.js ***!
-  \****************************************************************************************************************************/
+/*!*******************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/tap-click.js ***!
+  \*******************************************************************************************************************************/
 /*! exports provided: startTapClick */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16,11 +16,12 @@ function startTapClick(doc) {
     var lastTouch = -MOUSE_WAIT * 10;
     var lastActivated = 0;
     var cancelled = false;
+    var scrolling = false;
     var activatableEle;
     var activeDefer;
     var clearDefers = new WeakMap();
     function onBodyClick(ev) {
-        if (cancelled) {
+        if (cancelled || scrolling) {
             ev.preventDefault();
             ev.stopPropagation();
         }
@@ -47,6 +48,7 @@ function startTapClick(doc) {
     }
     function cancelActive() {
         clearTimeout(activeDefer);
+        activeDefer = undefined;
         if (activatableEle) {
             removeActivated(false);
             activatableEle = undefined;
@@ -54,13 +56,16 @@ function startTapClick(doc) {
         cancelled = true;
     }
     function pointerDown(ev) {
-        if (activatableEle) {
+        if (activatableEle || scrolling) {
             return;
         }
         cancelled = false;
         setActivatedElement(getActivatableTarget(ev), ev);
     }
     function pointerUp(ev) {
+        if (scrolling) {
+            return;
+        }
         setActivatedElement(undefined, ev);
         if (cancelled && ev.cancelable) {
             ev.preventDefault();
@@ -122,7 +127,13 @@ function startTapClick(doc) {
         }
     }
     doc.body.addEventListener('click', onBodyClick, true);
-    doc.body.addEventListener('ionScrollStart', cancelActive);
+    doc.body.addEventListener('ionScrollStart', function () {
+        scrolling = true;
+        cancelActive();
+    });
+    doc.body.addEventListener('ionScrollEnd', function () {
+        scrolling = false;
+    });
     doc.body.addEventListener('ionGestureCaptured', cancelActive);
     doc.addEventListener('touchstart', onTouchStart, true);
     doc.addEventListener('touchcancel', onTouchEnd, true);

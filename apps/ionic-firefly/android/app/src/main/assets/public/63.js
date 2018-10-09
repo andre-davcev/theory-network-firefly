@@ -1,25 +1,19 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[63],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j9aljzr0.entry.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j9aljzr0.entry.js ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: IonItem, IonItemDivider, IonItemGroup, IonLabel, IonList, IonListHeader, IonNote, IonSkeletonText */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fvg6ydme.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fvg6ydme.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonToggle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonItem", function() { return Item; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonItemDivider", function() { return ItemDivider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonItemGroup", function() { return ItemGroup; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonLabel", function() { return Label; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonList", function() { return List; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonListHeader", function() { return ListHeader; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonNote", function() { return Note; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSkeletonText", function() { return SkeletonText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToggle", function() { return Toggle; });
 /* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
 
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
@@ -27,301 +21,197 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-var Item = /** @class */ (function () {
-    function Item() {
-        this.itemStyles = new Map();
-        this.button = false;
-        this.detailIcon = 'ios-arrow-forward';
+
+var Toggle = /** @class */ (function () {
+    function Toggle() {
+        this.inputId = "ion-tg-" + toggleIds++;
+        this.pivotX = 0;
+        this.activated = false;
+        this.keyFocus = false;
+        this.name = this.inputId;
+        this.checked = false;
         this.disabled = false;
-        this.type = 'button';
+        this.value = 'on';
     }
-    Item.prototype.itemStyle = function (ev) {
-        ev.stopPropagation();
-        var tagName = ev.target.tagName;
-        var updatedStyles = ev.detail;
-        var updatedKeys = Object.keys(ev.detail);
-        var newStyles = {};
-        var childStyles = this.itemStyles.get(tagName) || {};
-        var hasStyleChange = false;
-        for (var _i = 0, updatedKeys_1 = updatedKeys; _i < updatedKeys_1.length; _i++) {
-            var key = updatedKeys_1[_i];
-            var itemKey = "item-" + key;
-            var newValue = updatedStyles[key];
-            if (newValue !== childStyles[itemKey]) {
-                hasStyleChange = true;
-            }
-            newStyles[itemKey] = newValue;
-        }
-        if (hasStyleChange) {
-            this.itemStyles.set(tagName, newStyles);
-            this.el.forceUpdate();
-        }
-    };
-    Item.prototype.componentDidLoad = function () {
-        Array.from(this.el.querySelectorAll('ion-button')).forEach(function (button) {
-            if (!button.size) {
-                button.size = 'small';
-            }
+    Toggle.prototype.checkedChanged = function (isChecked) {
+        this.ionChange.emit({
+            checked: isChecked,
+            value: this.value
         });
     };
-    Item.prototype.isClickable = function () {
-        return (this.href !== undefined || this.button);
-    };
-    Item.prototype.hostData = function () {
-        var _a;
-        var childStyles = {};
-        this.itemStyles.forEach(function (value) {
-            Object.assign(childStyles, value);
+    Toggle.prototype.disabledChanged = function () {
+        this.ionStyle.emit({
+            'interactive-disabled': this.disabled,
         });
+        if (this.gesture) {
+            this.gesture.setDisabled(this.disabled);
+        }
+    };
+    Toggle.prototype.componentWillLoad = function () {
+        this.ionStyle = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["e"])(this.ionStyle);
+    };
+    Toggle.prototype.componentDidLoad = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var parentItem, itemLabel, _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        parentItem = this.nativeInput.closest('ion-item');
+                        if (parentItem) {
+                            itemLabel = parentItem.querySelector('ion-label');
+                            if (itemLabel) {
+                                itemLabel.id = this.inputId + '-lbl';
+                                this.nativeInput.setAttribute('aria-labelledby', itemLabel.id);
+                            }
+                        }
+                        _a = this;
+                        return [4 /*yield*/, Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e("common")]).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/gesture.js"))];
+                    case 1:
+                        _a.gesture = (_b.sent()).createGesture({
+                            el: this.el,
+                            queue: this.queue,
+                            gestureName: 'toggle',
+                            gesturePriority: 100,
+                            threshold: 0,
+                            onStart: function (ev) { return _this.onStart(ev); },
+                            onMove: function (ev) { return _this.onMove(ev); },
+                            onEnd: function (ev) { return _this.onEnd(ev); },
+                        });
+                        this.disabledChanged();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Toggle.prototype.onStart = function (detail) {
+        this.pivotX = detail.currentX;
+        this.activated = true;
+        detail.event.preventDefault();
+        return true;
+    };
+    Toggle.prototype.onMove = function (detail) {
+        var currentX = detail.currentX;
+        if (shouldToggle(this.checked, currentX - this.pivotX, -15)) {
+            this.checked = !this.checked;
+            this.pivotX = currentX;
+            Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["f"])();
+        }
+    };
+    Toggle.prototype.onEnd = function (detail) {
+        var delta = detail.currentX - this.pivotX;
+        if (shouldToggle(this.checked, delta, 4)) {
+            this.checked = !this.checked;
+            Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["f"])();
+        }
+        this.activated = false;
+        this.nativeInput.focus();
+    };
+    Toggle.prototype.onChange = function () {
+        this.checked = !this.checked;
+    };
+    Toggle.prototype.onKeyUp = function () {
+        this.keyFocus = true;
+    };
+    Toggle.prototype.onFocus = function () {
+        this.ionFocus.emit();
+    };
+    Toggle.prototype.onBlur = function () {
+        this.keyFocus = false;
+        this.ionBlur.emit();
+    };
+    Toggle.prototype.hostData = function () {
         return {
-            'ion-activatable': this.isClickable(),
-            class: Object.assign({}, childStyles, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), (_a = {}, _a["item-lines-" + this.lines] = !!this.lines, _a['item-disabled'] = this.disabled, _a['in-list'] = Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["f"])('ion-list', this.el), _a['item'] = true, _a))
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.color), { 'in-item': Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["j"])('ion-item', this.el), 'toggle-activated': this.activated, 'toggle-checked': this.checked, 'toggle-disabled': this.disabled, 'toggle-key': this.keyFocus, 'interactive': true })
         };
     };
-    Item.prototype.render = function () {
-        var _a = this, href = _a.href, detail = _a.detail, mode = _a.mode, win = _a.win, state = _a.state, detailIcon = _a.detailIcon, routerDirection = _a.routerDirection, type = _a.type;
-        var clickable = this.isClickable();
-        var TagType = clickable ? (href === undefined ? 'button' : 'a') : 'div';
-        var attrs = TagType === 'button' ? { type: type } : { href: href };
-        var showDetail = detail !== undefined ? detail : mode === 'ios' && clickable;
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])(TagType, Object.assign({}, attrs, { class: "item-native", onClick: function (ev) { return Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["e"])(win, href, ev, routerDirection); } }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "start" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "item-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "input-wrapper" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "end" }), showDetail && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: detailIcon, lazy: false, class: "item-detail-icon" })), state && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "item-state" }), clickable && mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null)));
+    Toggle.prototype.render = function () {
+        var _this = this;
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["f"])(this.el, this.name, (this.checked ? this.value : ''), this.disabled);
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toggle-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toggle-inner" })),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("input", { type: "checkbox", onChange: this.onChange.bind(this), onFocus: this.onFocus.bind(this), onBlur: this.onBlur.bind(this), onKeyUp: this.onKeyUp.bind(this), checked: this.checked, id: this.inputId, name: this.name, value: this.value, disabled: this.disabled, ref: function (r) { return _this.nativeInput = r; } }),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)
+        ];
     };
-    Object.defineProperty(Item, "is", {
-        get: function () { return "ion-item"; },
+    Object.defineProperty(Toggle, "is", {
+        get: function () { return "ion-toggle"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Item, "encapsulation", {
+    Object.defineProperty(Toggle, "encapsulation", {
         get: function () { return "shadow"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Item, "properties", {
+    Object.defineProperty(Toggle, "properties", {
         get: function () {
             return {
-                "button": {
+                "activated": {
+                    "state": true
+                },
+                "checked": {
                     "type": Boolean,
-                    "attr": "button"
+                    "attr": "checked",
+                    "mutable": true,
+                    "watchCallbacks": ["checkedChanged"]
                 },
                 "color": {
                     "type": String,
                     "attr": "color"
-                },
-                "detail": {
-                    "type": Boolean,
-                    "attr": "detail"
-                },
-                "detailIcon": {
-                    "type": String,
-                    "attr": "detail-icon"
                 },
                 "disabled": {
                     "type": Boolean,
-                    "attr": "disabled"
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
                 },
                 "el": {
                     "elementRef": true
                 },
-                "href": {
-                    "type": String,
-                    "attr": "href"
-                },
-                "lines": {
-                    "type": String,
-                    "attr": "lines"
+                "keyFocus": {
+                    "state": true
                 },
                 "mode": {
                     "type": String,
                     "attr": "mode"
                 },
-                "routerDirection": {
+                "name": {
                     "type": String,
-                    "attr": "router-direction"
+                    "attr": "name"
                 },
-                "state": {
+                "queue": {
+                    "context": "queue"
+                },
+                "value": {
                     "type": String,
-                    "attr": "state"
-                },
-                "type": {
-                    "type": String,
-                    "attr": "type"
-                },
-                "win": {
-                    "context": "window"
+                    "attr": "value"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Item, "listeners", {
+    Object.defineProperty(Toggle, "events", {
         get: function () {
             return [{
-                    "name": "ionStyle",
-                    "method": "itemStyle"
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Item, "style", {
-        get: function () { return ":host{--min-height:44px;--background:var(--ion-color-base);--background-active:var(--ion-color-tint);--color:var(--ion-color-contrast);--detail-push-color:var(--ion-color-shade);--border-radius:0;--border-width:0;--border-style:solid;--border-color:var(--ion-color-shade);--inner-border-width:0;--padding-top:0;--padding-bottom:0;--padding-end:0;--padding-start:0;--inner-padding-top:0px;--inner-padding-bottom:0px;--inner-padding-start:0px;--inner-padding-end:0px;--box-shadow:none;--inner-box-shadow:none;--highlight-color-focus:var(--ion-color-primary, #3880ff);--highlight-color-valid:var(--ion-color-success, #10dc60);--highlight-color-invalid:var(--ion-color-danger, #f04141);--highlight-height:2px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:block;color:var(--ion-color-contrast);font-family:var(--ion-font-family,inherit);text-align:initial;text-decoration:none;-webkit-box-sizing:border-box;box-sizing:border-box}:host(.activated){--background:var(--background-active)}:host(.item-disabled){cursor:default;opacity:.3;pointer-events:none}.item-native{padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);border-radius:var(--border-radius);margin:0;font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;width:100%;min-height:var(--min-height);-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);outline:0;background-color:var(--background);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}a,button{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-user-drag:none}.item-state{left:0;right:0;bottom:0;position:absolute;height:var(--highlight-height)}.item-inner{margin:0;padding:var(--inner-padding-top) calc(var(--ion-safe-area-right,0px) + var(--inner-padding-end)) var(--inner-padding-bottom) calc(var(--ion-safe-area-left,0px) + var(--inner-padding-start));display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:inherit;-webkit-box-direction:inherit;-ms-flex-direction:inherit;flex-direction:inherit;-webkit-box-align:inherit;-ms-flex-align:inherit;align-items:inherit;-ms-flex-item-align:stretch;align-self:stretch;min-height:inherit;border-width:var(--inner-border-width);border-style:var(--border-style);border-color:var(--border-color);-webkit-box-shadow:var(--inner-box-shadow);box-shadow:var(--inner-box-shadow);overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}.input-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:inherit;-webkit-box-direction:inherit;-ms-flex-direction:inherit;flex-direction:inherit;-webkit-box-align:inherit;-ms-flex-align:inherit;align-items:inherit;-ms-flex-item-align:stretch;align-self:stretch;text-overflow:ellipsis;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}:host(.item-input),:host([vertical-align-top]){-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}::slotted(ion-icon){font-size:1.6em}::slotted(ion-button){--margin-top:0;--margin-bottom:0;--margin-start:0;--margin-end:0;z-index:1}:host(.item-label-floating) .input-wrapper,:host(.item-label-stacked) .input-wrapper{-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}:host(.item-label-floating) ::slotted(ion-select),:host(.item-label-stacked) ::slotted(ion-select){--padding-start:0;-ms-flex-item-align:stretch;align-self:stretch;width:100%;max-width:100%}:host(.item-multiple-inputs) ::slotted(ion-select){position:relative}:host(.item-textarea){-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}::slotted(ion-reorder[slot]){margin-top:0;margin-bottom:0}:host{--ion-color-base:var(--ion-item-background-color, transparent);--ion-color-contrast:var(--ion-item-text-color, var(--ion-text-color, #000));--ion-color-tint:var(--ion-item-background-color-active, #f1f1f1);--ion-color-shade:rgba(var(--ion-item-border-color-rgb, 0, 0, 0), 0.13);--transition:background-color 300ms cubic-bezier(.4, 0, .2, 1);--padding-start:16px;--inner-padding-end:8px;--padding-start:16px;font-size:16px;font-weight:400;text-transform:none}:host(.item-interactive){--border-width:0 0 1px 0}:host(.item-lines-full){--border-width:0 0 1px 0}:host(.item-lines-inset){--inner-border-width:0 0 1px 0}:host(.item-lines-inset),:host(.item-lines-none){--border-width:0}:host(.item-lines-full),:host(.item-lines-none){--inner-border-width:0}.item-detail-icon{color:var(--detail-push-color);font-size:20px}::slotted(:not(.interactive)[slot=end]),::slotted(:not(.interactive)[slot=start]){margin:2px 8px 2px 0}::slotted(ion-icon[slot=end]),::slotted(ion-icon[slot=start]){margin-left:0;margin-top:3px;margin-bottom:2px}::slotted(ion-icon[slot=start])+.item-inner,::slotted(ion-icon[slot=start])+.item-interactive{margin-left:24px}::slotted(ion-avatar[slot=start]),::slotted(ion-thumbnail[slot=start]){margin:8px 16px 8px 0}::slotted(ion-avatar[slot=end]),::slotted(ion-thumbnail[slot=end]){margin:8px}:host(.item-label-floating) ::slotted([slot=end]),:host(.item-label-stacked) ::slotted([slot=end]){margin-top:7px;margin-bottom:7px}::slotted(.button-small-md){--padding-top:0;--padding-bottom:0;--padding-start:.6em;--padding-end:.6em;--height:25px;font-size:12px}::slotted(.button-small-md) ion-icon[slot=icon-only]{padding:0}::slotted(ion-avatar){width:40px;height:40px}::slotted(ion-thumbnail){width:80px;height:80px}:host(.item-radio) ::slotted(ion-label),:host(.item-toggle) ::slotted(ion-label){margin-left:0}:host(.item-label-floating) ::slotted(ion-input),:host(.item-label-floating) ::slotted(ion-select),:host(.item-label-floating) ::slotted(ion-textarea),:host(.item-label-stacked) ::slotted(ion-input),:host(.item-label-stacked) ::slotted(ion-select),:host(.item-label-stacked) ::slotted(ion-textarea){--padding-top:8px;--padding-bottom:8px;--padding-start:0}:host(:not(.item-label)) ::slotted(ion-input),:host(:not(.item-label)) ::slotted(ion-textarea){--padding-start:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Item, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Item;
-}());
-var ItemDivider = /** @class */ (function () {
-    function ItemDivider() {
-    }
-    ItemDivider.prototype.componentDidLoad = function () {
-        Array.from(this.el.querySelectorAll('ion-button')).forEach(function (button) {
-            if (!button.size) {
-                button.size = 'small';
-            }
-        });
-    };
-    ItemDivider.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color)
-        };
-    };
-    ItemDivider.prototype.render = function () {
-        return [
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "start" }),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "item-divider-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "item-divider-wrapper" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "end" }))
-        ];
-    };
-    Object.defineProperty(ItemDivider, "is", {
-        get: function () { return "ion-item-divider"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemDivider, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemDivider, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemDivider, "style", {
-        get: function () { return ":host{--padding-start:0px;--padding-end:0px;--padding-top:0px;--padding-bottom:0px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:0;padding:var(--padding-top) calc(var(--padding-end) + var(--ion-safe-area-right,0px)) var(--padding-bottom) calc(var(--padding-start) + var(--ion-safe-area-left,0px));display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;width:100%;min-height:30px;background-color:var(--ion-color-base);color:var(--ion-color-contrast);font-family:var(--ion-font-family,inherit);overflow:hidden;z-index:100;-webkit-box-sizing:border-box;box-sizing:border-box}:host([sticky]){position:-webkit-sticky;position:sticky;top:0}.item-divider-inner{margin:0;padding:0 8px 0 0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:inherit;-webkit-box-direction:inherit;-ms-flex-direction:inherit;flex-direction:inherit;-webkit-box-align:inherit;-ms-flex-align:inherit;align-items:inherit;-ms-flex-item-align:stretch;align-self:stretch;min-height:inherit;border:0;overflow:hidden}.item-divider-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:inherit;-webkit-box-direction:inherit;-ms-flex-direction:inherit;flex-direction:inherit;-webkit-box-align:inherit;-ms-flex-align:inherit;align-items:inherit;-ms-flex-item-align:stretch;align-self:stretch;text-overflow:ellipsis;overflow:hidden}:host{--ion-color-base:var(--ion-background-color, #fff);--ion-color-contrast:var(--ion-text-color-step-600, #999999);--padding-start:16px;border-bottom:1px solid rgba(var(--ion-item-border-color-rgb,0,0,0),.13);font-size:14px}:host([slot=end]),:host([slot=start]){margin:2px 8px 2px 0}::slotted(ion-icon[slot=end]),::slotted(ion-icon[slot=start]){margin-left:0;margin-top:3px;margin-bottom:2px}::slotted(ion-avatar[slot=start]),::slotted(ion-thumbnail[slot=start]){margin:8px 16px 8px 0}::slotted(ion-avatar[slot=end]),::slotted(ion-thumbnail[slot=end]){margin:8px}::slotted(h1){margin:0 0 2px;font-size:24px;font-weight:400}::slotted(h2){margin:2px 0;font-size:16px;font-weight:400}::slotted(h3,h4,h5,h6){margin:2px 0;font-size:14px;font-weight:400;line-height:normal}::slotted(p){margin:0 0 2px;color:var(--ion-text-color-step-400,#666);font-size:14px;line-height:normal;text-overflow:inherit;overflow:inherit}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemDivider, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return ItemDivider;
-}());
-var ItemGroup = /** @class */ (function () {
-    function ItemGroup() {
-    }
-    ItemGroup.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'item-group')
-        };
-    };
-    Object.defineProperty(ItemGroup, "is", {
-        get: function () { return "ion-item-group"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemGroup, "style", {
-        get: function () { return "ion-item-group{display:block}.item-group-md ion-item-sliding:last-child ion-item,.item-group-md ion-item:last-child{--border-width:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemGroup, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return ItemGroup;
-}());
-var Label = /** @class */ (function () {
-    function Label() {
-    }
-    Label.prototype.componentDidLoad = function () {
-        this.positionChanged();
-    };
-    Label.prototype.positionChanged = function () {
-        var _a;
-        var position = this.position;
-        this.ionStyle.emit((_a = {
-                'label': true
-            },
-            _a["label-" + position] = !!position,
-            _a));
-    };
-    Label.prototype.hostData = function () {
-        var _a;
-        var position = this.position;
-        return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), (_a = {}, _a["label-" + position] = !!position, _a))
-        };
-    };
-    Object.defineProperty(Label, "is", {
-        get: function () { return "ion-label"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Label, "encapsulation", {
-        get: function () { return "scoped"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Label, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                },
-                "position": {
-                    "type": String,
-                    "attr": "position",
-                    "watchCallbacks": ["positionChanged"]
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Label, "events", {
-        get: function () {
-            return [{
+                    "name": "ionChange",
+                    "method": "ionChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionFocus",
+                    "method": "ionFocus",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionBlur",
+                    "method": "ionBlur",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
                     "name": "ionStyle",
                     "method": "ionStyle",
                     "bubbles": true,
@@ -332,222 +222,30 @@ var Label = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Label, "style", {
-        get: function () { return ".sc-ion-label-md-h{display:block;-webkit-box-flex:1;-ms-flex:1;flex:1;font-family:var(--ion-font-family,inherit);font-size:inherit;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;margin:11px 8px 11px 0}.ion-color.sc-ion-label-md-h{color:var(--ion-color-base)}[text-wrap].sc-ion-label-md-h{white-space:normal;font-size:14px;line-height:1.5}.item-interactive-disabled.sc-ion-label-md-h, .item-interactive-disabled   .sc-ion-label-md-h{cursor:default;opacity:.3;pointer-events:none}.item-input.sc-ion-label-md-h, .item-input   .sc-ion-label-md-h{-webkit-box-flex:initial;-ms-flex:initial;flex:initial;max-width:200px;pointer-events:none}.label-fixed.sc-ion-label-md-h{-webkit-box-flex:0;-ms-flex:0 0 100px;flex:0 0 100px;width:100px;min-width:100px;max-width:200px}.label-floating.sc-ion-label-md-h, .label-stacked.sc-ion-label-md-h{-ms-flex-item-align:stretch;align-self:stretch;width:auto;max-width:100%;margin-left:0;margin-bottom:0}.item-has-focus.label-floating.sc-ion-label-md-h, .item-has-focus   .label-floating.sc-ion-label-md-h, .item-has-value.label-floating.sc-ion-label-md-h, .item-has-value   .label-floating.sc-ion-label-md-h{-webkit-transform:translate3d(0,0,0) scale(.8);transform:translate3d(0,0,0) scale(.8)}.item-interactive.sc-ion-label-md-h, .item-interactive   .sc-ion-label-md-h{--ion-color-base:var(--ion-text-color-step-600, #999999)}.label-stacked.sc-ion-label-md-h{font-size:12px}.label-floating.sc-ion-label-md-h{-webkit-transform:translate3d(0,27px,0);transform:translate3d(0,27px,0);-webkit-transform-origin:left top;transform-origin:left top;-webkit-transition:-webkit-transform 150ms ease-in-out;transition:-webkit-transform 150ms ease-in-out;transition:transform 150ms ease-in-out;transition:transform 150ms ease-in-out,-webkit-transform 150ms ease-in-out}.item-has-focus.label-floating.sc-ion-label-md-h, .item-has-focus   .label-floating.sc-ion-label-md-h, .item-has-focus.label-stacked.sc-ion-label-md-h, .item-has-focus   .label-stacked.sc-ion-label-md-h{color:var(--ion-color-primary,#3880ff)}.sc-ion-label-md-s  h1 {margin:0 0 2px;font-size:24px;font-weight:400}.sc-ion-label-md-s  h2 {margin:2px 0;font-size:16px;font-weight:400}.sc-ion-label-md-s  h3 , .sc-ion-label-md-s  h4 , .sc-ion-label-md-s  h5 , .sc-ion-label-md-s  h6 {margin:2px 0;font-size:14px;font-weight:400;line-height:normal}.sc-ion-label-md-s  p {margin:0 0 2px;font-size:14px;line-height:normal;text-overflow:inherit;overflow:inherit}.sc-ion-label-md-s > p{color:var(--ion-text-color-step-400,#666)}.sc-ion-label-md-h.ion-color.sc-ion-label-md-s > p, .ion-color .sc-ion-label-md-h.sc-ion-label-md-s > p{color:inherit}"; },
+    Object.defineProperty(Toggle, "style", {
+        get: function () { return ":host{-webkit-box-sizing:content-box!important;box-sizing:content-box!important;display:inline-block;contain:content;cursor:pointer;-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--background:rgba(var(--ion-item-border-color-rgb, 0, 0, 0), 0.13);--background-checked:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.5);--handle-background:var(--ion-background-color, #fff);--handle-background-checked:var(--ion-color-primary, #3880ff);padding:12px;-webkit-box-sizing:content-box;box-sizing:content-box;position:relative;width:36px;height:14px;contain:strict}:host(.toggle-key) input{border:2px solid #5e9ed6}:host(:focus){outline:0}:host(.toggle-disabled){pointer-events:none;opacity:.3}input{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0;pointer-events:none}:host(.ion-color.toggle-checked) .toggle-icon{background:rgba(var(--ion-color-base-rgb),.5)}:host(.ion-color.toggle-checked) .toggle-inner{background:var(--ion-color-base)}.toggle-icon{border-radius:14px;display:block;position:relative;width:100%;height:100%;-webkit-transition:background-color .3s;transition:background-color .3s;background:var(--background);pointer-events:none}.toggle-inner{left:0;top:-3px;border-radius:50%;position:absolute;width:20px;height:20px;-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:background-color,-webkit-transform;transition-property:background-color,-webkit-transform;transition-property:transform,background-color;transition-property:transform,background-color,-webkit-transform;background:var(--handle-background);-webkit-box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);will-change:transform,background-color;contain:strict}:host(.toggle-checked) .toggle-icon{background:var(--background-checked)}:host(.toggle-checked) .toggle-inner{-webkit-transform:translate3d(16px,0,0);transform:translate3d(16px,0,0);background:var(--handle-background-checked)}:host(.in-item[slot]){margin:0;padding:12px 8px 12px 16px;cursor:pointer}:host(.in-item[slot=start]){padding:12px 18px 12px 2px}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Label, "styleMode", {
+    Object.defineProperty(Toggle, "styleMode", {
         get: function () { return "md"; },
         enumerable: true,
         configurable: true
     });
-    return Label;
+    return Toggle;
 }());
-var List = /** @class */ (function () {
-    function List() {
-        this.inset = false;
+function shouldToggle(checked, deltaX, margin) {
+    var isRTL = document.dir === 'rtl';
+    if (checked) {
+        return (!isRTL && (margin > deltaX)) ||
+            (isRTL && (-margin < deltaX));
     }
-    List.prototype.closeSlidingItems = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var item;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                item = this.el.querySelector('ion-item-sliding');
-                if (item && item.closeOpened) {
-                    return [2 /*return*/, item.closeOpened()];
-                }
-                return [2 /*return*/, false];
-            });
-        });
-    };
-    List.prototype.hostData = function () {
-        var _a;
-        return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'list'), (_a = {}, _a["list-lines-" + this.lines] = !!this.lines, _a['list-inset'] = this.inset, _a["list-" + this.mode + "-lines-" + this.lines] = !!this.lines, _a))
-        };
-    };
-    Object.defineProperty(List, "is", {
-        get: function () { return "ion-list"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(List, "properties", {
-        get: function () {
-            return {
-                "closeSlidingItems": {
-                    "method": true
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "inset": {
-                    "type": Boolean,
-                    "attr": "inset"
-                },
-                "lines": {
-                    "type": String,
-                    "attr": "lines"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(List, "style", {
-        get: function () { return "ion-list{margin:0;padding:0;display:block;background:var(--ion-item-background-color,var(--ion-background-color,#fff));contain:content;list-style-type:none}ion-list.list-inset{-webkit-transform:translateZ(0);transform:translateZ(0);overflow:hidden}.list-md{margin:-1px 0 16px}.list-md>.input:last-child::after{left:0}.list-md.list-inset{margin:16px;border-radius:2px}.list-md.list-inset ion-item:first-child{--border-radius:2px 2px 0 0;--border-width:0}.list-md.list-inset ion-item:last-child{--border-radius:0 0 2px,2px;--border-width:0}.list-md.list-inset .item-interactive{--padding-start:0;--padding-end:0}.list-md.list-inset+ion-list.list-inset{margin-top:0}.list-md-lines-none .item{--border-width:0;--inner-border-width:0}.list-md .item-lines-full,.list-md-lines-full .item{--border-width:0 0 1px 0}.list-md .item-lines-inset,.list-md-lines-inset .item{--inner-border-width:0 0 1px 0}.list-md .item-lines-full{--inner-border-width:0}.list-md .item-lines-inset{--border-width:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(List, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return List;
-}());
-var ListHeader = /** @class */ (function () {
-    function ListHeader() {
+    else {
+        return (!isRTL && (-margin < deltaX)) ||
+            (isRTL && (margin > deltaX));
     }
-    ListHeader.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color)
-        };
-    };
-    ListHeader.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null);
-    };
-    Object.defineProperty(ListHeader, "is", {
-        get: function () { return "ion-list-header"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ListHeader, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ListHeader, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ListHeader, "style", {
-        get: function () { return ":host{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:0 0 13px;padding:0 0 0 16px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;width:100%;min-height:40px;background:var(--background);color:var(--color);overflow:hidden;--background:transparent;--color:var(--ion-text-color-step-400, #666666);min-height:45px;font-size:14px}:host(.ion-color){background:var(--ion-color-base);color:var(--ion-color-contrast)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ListHeader, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return ListHeader;
-}());
-var Note = /** @class */ (function () {
-    function Note() {
-    }
-    Note.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color)
-        };
-    };
-    Note.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null);
-    };
-    Object.defineProperty(Note, "is", {
-        get: function () { return "ion-note"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Note, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Note, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Note, "style", {
-        get: function () { return ":host{color:var(--color);font-family:var(--ion-font-family,inherit);--color:var(--ion-text-color-step-800, #cccccc)}:host(.ion-color){color:var(--ion-color-base)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Note, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Note;
-}());
-var SkeletonText = /** @class */ (function () {
-    function SkeletonText() {
-        this.width = '100%';
-    }
-    SkeletonText.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { style: { width: this.width } }, "\u00A0");
-    };
-    Object.defineProperty(SkeletonText, "is", {
-        get: function () { return "ion-skeleton-text"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SkeletonText, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SkeletonText, "properties", {
-        get: function () {
-            return {
-                "width": {
-                    "type": String,
-                    "attr": "width"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SkeletonText, "style", {
-        get: function () { return ":host{display:inline-block;width:100%;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--background:var(--ion-text-color, #000)}span{display:inline-block;font-size:8px;background:var(--background);opacity:.1}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SkeletonText, "styleMode", {
-        get: function () { return "md"; },
-        enumerable: true,
-        configurable: true
-    });
-    return SkeletonText;
-}());
+}
+var toggleIds = 0;
 
 
 
