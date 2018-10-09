@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
 /***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/status-tap.js":
-/*!*****************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/status-tap.js ***!
-  \*****************************************************************************************************************************/
+/*!********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/status-tap.js ***!
+  \********************************************************************************************************************************/
 /*! exports provided: startStatusTap */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

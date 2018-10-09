@@ -1,236 +1,142 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[89],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nxuqytzx.entry.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nxuqytzx.entry.js ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: IonLoading, IonLoadingController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kbdajof4.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kbdajof4.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonLoading", function() { return Loading; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonLoadingController", function() { return LoadingController; });
-/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCard", function() { return Card; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCardContent", function() { return CardContent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCardHeader", function() { return CardHeader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCardSubtitle", function() { return CardSubtitle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonCardTitle", function() { return CardTitle; });
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
 
 
-
-function iosEnterAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.loading-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.01, 0.3);
-    wrapperAnimation.fromTo('opacity', 0.01, 1)
-        .fromTo('scale', 1.1, 1);
-    return Promise.resolve(baseAnimation
-        .addElement(baseEl)
-        .easing('ease-in-out')
-        .duration(200)
-        .add(backdropAnimation)
-        .add(wrapperAnimation));
-}
-function iosLeaveAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.loading-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.3, 0);
-    wrapperAnimation.fromTo('opacity', 0.99, 0)
-        .fromTo('scale', 1, 0.9);
-    return Promise.resolve(baseAnimation
-        .addElement(baseEl)
-        .easing('ease-in-out')
-        .duration(200)
-        .add(backdropAnimation)
-        .add(wrapperAnimation));
-}
-function mdEnterAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.loading-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.01, 0.5);
-    wrapperAnimation.fromTo('opacity', 0.01, 1).fromTo('scale', 1.1, 1);
-    return Promise.resolve(baseAnimation
-        .addElement(baseEl)
-        .easing('ease-in-out')
-        .duration(200)
-        .add(backdropAnimation)
-        .add(wrapperAnimation));
-}
-function mdLeaveAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.loading-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.5, 0);
-    wrapperAnimation.fromTo('opacity', 0.99, 0).fromTo('scale', 1, 0.9);
-    return Promise.resolve(baseAnimation
-        .addElement(baseEl)
-        .easing('ease-in-out')
-        .duration(200)
-        .add(backdropAnimation)
-        .add(wrapperAnimation));
-}
-var Loading = /** @class */ (function () {
-    function Loading() {
-        this.presented = false;
-        this.keyboardClose = true;
-        this.duration = 0;
-        this.backdropDismiss = false;
-        this.showBackdrop = true;
-        this.translucent = false;
-        this.animated = true;
+var Card = /** @class */ (function () {
+    function Card() {
     }
-    Loading.prototype.componentWillLoad = function () {
-        if (this.spinner === undefined) {
-            this.spinner = this.config.get('loadingSpinner', this.mode === 'ios' ? 'lines' : 'crescent');
-        }
-    };
-    Loading.prototype.componentDidLoad = function () {
-        this.ionLoadingDidLoad.emit();
-    };
-    Loading.prototype.componentDidUnload = function () {
-        this.ionLoadingDidUnload.emit();
-    };
-    Loading.prototype.onBackdropTap = function () {
-        this.dismiss(undefined, _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["a"]);
-    };
-    Loading.prototype.present = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _this = this;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this, 'loadingEnter', iosEnterAnimation, mdEnterAnimation, undefined)];
-                    case 1:
-                        _a.sent();
-                        if (this.duration > 0) {
-                            this.durationTimeout = setTimeout(function () { return _this.dismiss(); }, this.duration + 10);
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Loading.prototype.dismiss = function (data, role) {
-        if (this.durationTimeout) {
-            clearTimeout(this.durationTimeout);
-        }
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["b"])(this, data, role, 'loadingLeave', iosLeaveAnimation, mdLeaveAnimation);
-    };
-    Loading.prototype.onDidDismiss = function () {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionLoadingDidDismiss');
-    };
-    Loading.prototype.onWillDismiss = function () {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this.el, 'ionLoadingWillDismiss');
-    };
-    Loading.prototype.hostData = function () {
-        var themedClasses = this.translucent
-            ? Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.mode, 'loading-translucent')
-            : {};
+    Card.prototype.hostData = function () {
         return {
-            style: {
-                zIndex: 40000 + this.overlayIndex
-            },
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.mode, 'loading'), themedClasses, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["c"])(this.cssClass))
+            class: Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.color)
         };
     };
-    Loading.prototype.render = function () {
-        return [
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop", { visible: this.showBackdrop, tappable: false }),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "loading-wrapper", role: "dialog" }, this.spinner !== 'hide' && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "loading-spinner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-spinner", { name: this.spinner }))), this.message && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "loading-content" }, this.message))
-        ];
-    };
-    Object.defineProperty(Loading, "is", {
-        get: function () { return "ion-loading"; },
+    Object.defineProperty(Card, "is", {
+        get: function () { return "ion-card"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Loading, "properties", {
+    Object.defineProperty(Card, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Card, "properties", {
         get: function () {
             return {
-                "animated": {
-                    "type": Boolean,
-                    "attr": "animated"
-                },
-                "animationCtrl": {
-                    "connect": "ion-animation-controller"
-                },
-                "backdropDismiss": {
-                    "type": Boolean,
-                    "attr": "backdrop-dismiss"
-                },
-                "config": {
-                    "context": "config"
-                },
-                "cssClass": {
+                "color": {
                     "type": String,
-                    "attr": "css-class"
-                },
-                "dismiss": {
-                    "method": true
-                },
-                "duration": {
-                    "type": Number,
-                    "attr": "duration"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "enterAnimation": {
-                    "type": "Any",
-                    "attr": "enter-animation"
-                },
-                "keyboardClose": {
-                    "type": Boolean,
-                    "attr": "keyboard-close"
-                },
-                "leaveAnimation": {
-                    "type": "Any",
-                    "attr": "leave-animation"
-                },
-                "message": {
-                    "type": String,
-                    "attr": "message"
+                    "attr": "color"
                 },
                 "mode": {
                     "type": String,
                     "attr": "mode"
-                },
-                "onDidDismiss": {
-                    "method": true
-                },
-                "onWillDismiss": {
-                    "method": true
-                },
-                "overlayIndex": {
-                    "type": Number,
-                    "attr": "overlay-index"
-                },
-                "present": {
-                    "method": true
-                },
-                "showBackdrop": {
-                    "type": Boolean,
-                    "attr": "show-backdrop"
-                },
-                "spinner": {
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Card, "style", {
+        get: function () { return ".sc-ion-card-md-h{--ion-safe-area-left:0px;--ion-safe-area-right:0px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:block;position:relative;background:var(--background);color:var(--color);font-family:var(--ion-font-family,inherit);overflow:hidden;--background:var(--ion-item-background-color, transparent);--color:var(--ion-text-color-step-150, #262626);margin:10px;border-radius:2px;font-size:14px;-webkit-box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12)}.ion-color.sc-ion-card-md-h{background:var(--ion-color-base);color:var(--ion-color-contrast)}.sc-ion-card-md-h.ion-color.sc-ion-card-md-s  ion-card-subtitle , .sc-ion-card-md-h.ion-color.sc-ion-card-md-s  ion-card-title {color:currentColor}.sc-ion-card-md-s  img {display:block;width:100%}.sc-ion-card-md-s  ion-list {margin:0}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Card, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Card;
+}());
+var CardContent = /** @class */ (function () {
+    function CardContent() {
+    }
+    CardContent.prototype.hostData = function () {
+        return {
+            class: Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["k"])(this.mode, 'card-content')
+        };
+    };
+    Object.defineProperty(CardContent, "is", {
+        get: function () { return "ion-card-content"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardContent, "properties", {
+        get: function () {
+            return {
+                "mode": {
                     "type": String,
-                    "attr": "spinner",
-                    "mutable": true
+                    "attr": "mode"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardContent, "style", {
+        get: function () { return "ion-card-content{display:block;position:relative}.card-content-md{padding:13px 16px;font-size:14px;line-height:1.5}.card-content-md h1{margin:0 0 2px;font-size:24px;font-weight:400}.card-content-md h2{margin:2px 0;font-size:16px;font-weight:400}.card-content-md h3,.card-content-md h4,.card-content-md h5,.card-content-md h6{margin:2px 0;font-size:14px;font-weight:400}.card-content-md p{margin:0 0 2px;font-size:14px;font-weight:400;line-height:1.5}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardContent, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return CardContent;
+}());
+var CardHeader = /** @class */ (function () {
+    function CardHeader() {
+        this.translucent = false;
+    }
+    CardHeader.prototype.hostData = function () {
+        return {
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.color), { 'card-header-translucent': this.translucent })
+        };
+    };
+    CardHeader.prototype.render = function () {
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    };
+    Object.defineProperty(CardHeader, "is", {
+        get: function () { return "ion-card-header"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardHeader, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardHeader, "properties", {
+        get: function () {
+            return {
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
                 },
                 "translucent": {
                     "type": Boolean,
@@ -241,113 +147,119 @@ var Loading = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Loading, "events", {
-        get: function () {
-            return [{
-                    "name": "ionLoadingDidUnload",
-                    "method": "ionLoadingDidUnload",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionLoadingDidLoad",
-                    "method": "ionLoadingDidLoad",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionLoadingDidPresent",
-                    "method": "didPresent",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionLoadingWillPresent",
-                    "method": "willPresent",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionLoadingWillDismiss",
-                    "method": "willDismiss",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionLoadingDidDismiss",
-                    "method": "didDismiss",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
+    Object.defineProperty(CardHeader, "style", {
+        get: function () { return ":host{display:block;position:relative;padding:16px}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Loading, "listeners", {
-        get: function () {
-            return [{
-                    "name": "ionBackdropTap",
-                    "method": "onBackdropTap"
-                }];
-        },
+    Object.defineProperty(CardHeader, "styleMode", {
+        get: function () { return "md"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Loading, "style", {
-        get: function () { return "ion-loading{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;left:0;right:0;top:0;bottom:0;display:-webkit-box;display:-ms-flexbox;display:flex;position:fixed;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;font-family:var(--ion-font-family,inherit);contain:strict;-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1000}ion-loading-controller{display:none}.loading-wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;opacity:0;z-index:10}.loading-ios{font-size:14px}.loading-ios .loading-wrapper{border-radius:8px;padding:24px 34px;max-width:270px;max-height:90%;background-color:var(--ion-background-color-step-50,#f2f2f2);color:var(--ion-text-color,#000)}.loading-translucent-ios .loading-wrapper{background-color:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.loading-ios .loading-content{font-weight:700}.loading-ios .loading-spinner+.loading-content{margin-left:16px}.loading-ios .spinner-lines-ios line,.loading-ios .spinner-lines-small-ios line{stroke:var(--ion-text-color-step-400,#666)}.loading-ios .spinner-bubbles circle,.loading-ios .spinner-circles circle{fill:var(--ion-text-color-step-400,#666)}.loading-ios .spinner-crescent circle{stroke:var(--ion-text-color-step-400,#666)}.loading-ios .spinner-dots circle{fill:var(--ion-text-color-step-400,#666)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Loading, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Loading;
+    return CardHeader;
 }());
-var LoadingController = /** @class */ (function () {
-    function LoadingController() {
+var CardSubtitle = /** @class */ (function () {
+    function CardSubtitle() {
     }
-    LoadingController.prototype.create = function (opts) {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement('ion-loading'), opts);
+    CardSubtitle.prototype.hostData = function () {
+        return {
+            class: Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.color),
+            'role': 'heading',
+            'aria-level': '3'
+        };
     };
-    LoadingController.prototype.dismiss = function (data, role, id) {
-        return Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc, data, role, 'ion-loading', id);
+    CardSubtitle.prototype.render = function () {
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
     };
-    LoadingController.prototype.getTop = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                return [2 /*return*/, Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc, 'ion-loading')];
-            });
-        });
-    };
-    Object.defineProperty(LoadingController, "is", {
-        get: function () { return "ion-loading-controller"; },
+    Object.defineProperty(CardSubtitle, "is", {
+        get: function () { return "ion-card-subtitle"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(LoadingController, "properties", {
+    Object.defineProperty(CardSubtitle, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardSubtitle, "properties", {
         get: function () {
             return {
-                "create": {
-                    "method": true
+                "color": {
+                    "type": String,
+                    "attr": "color"
                 },
-                "dismiss": {
-                    "method": true
-                },
-                "doc": {
-                    "context": "document"
-                },
-                "getTop": {
-                    "method": true
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    return LoadingController;
+    Object.defineProperty(CardSubtitle, "style", {
+        get: function () { return ":host{display:block;position:relative;color:var(--color);--color:var(--ion-text-color-step-450, #737373);margin:0 0 8px;padding:0;font-size:14px}:host(.ion-color){color:var(--ion-color-base)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardSubtitle, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return CardSubtitle;
+}());
+var CardTitle = /** @class */ (function () {
+    function CardTitle() {
+    }
+    CardTitle.prototype.hostData = function () {
+        return {
+            class: Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_1__["h"])(this.color),
+            'role': 'heading',
+            'aria-level': '2'
+        };
+    };
+    CardTitle.prototype.render = function () {
+        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+    };
+    Object.defineProperty(CardTitle, "is", {
+        get: function () { return "ion-card-title"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardTitle, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardTitle, "properties", {
+        get: function () {
+            return {
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardTitle, "style", {
+        get: function () { return ":host{display:block;position:relative;color:var(--color);--color:var(--ion-text-color-step-150, #262626);margin:0;padding:0;font-size:24px;line-height:1.2}:host(.ion-color){color:var(--ion-color-base)}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CardTitle, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return CardTitle;
 }());
 
 

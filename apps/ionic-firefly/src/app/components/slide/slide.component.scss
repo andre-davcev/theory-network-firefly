@@ -21,109 +21,106 @@ $app-slide-close-box-shadow:                         $gm-elevated-1;
     position: relative;
     display: flex;
     flex-direction: column;
+    background-color: transparent;
+    align-items: start;
 
-    ion-slide {
-        background-color: transparent;
-        align-items: start;
+    .cpt-card
+    {
+        background-color: $app-slide-color-background;
+        height: calc(100% - #{$app-slide-height-margin});
+        width: calc(100% - #{$app-slide-width-margin});
+        margin: $app-slide-margin;
+        margin-top: $app-slide-margin-top;
+        margin-bottom: $app-slide-margin-bottom;
+        box-shadow: 0 15px 25px 0 rgba(0,0,0,0.20);
+        border-radius: 14px;
+        padding: $app-slide-padding;
 
-        .cpt-card
+/*
+      &:before
+      {
+          display: block;
+          position: absolute;
+          content: '';
+          height: $app-slide-close-size;
+          width: $app-slide-close-size;
+          top: -$app-slide-close-size-half + $app-slide-margin-top;
+          left: -$app-slide-close-size-half + $app-slide-margin;
+          border-radius: $app-slide-close-size-half;
+          background-color: $app-slide-color-background;
+          border-color: $app-slide-close-border-color;
+          border-style: solid;
+          border-width: $app-slide-close-border-width;
+          box-shadow: $app-slide-close-box-shadow;
+          cursor: pointer;
+      }
+
+      &:after
+      {
+          display: block;
+          position: absolute;
+          content: '\d7';
+          height: $app-slide-close-size;
+          width: $app-slide-close-size;
+          top: -$app-slide-close-size-half + $app-slide-margin-top - 2px;
+          left: -$app-slide-close-size-half + $app-slide-margin;
+          font-size: $app-slide-close-size + 6px;
+          color: $app-slide-close-border-color;
+          line-height: $app-slide-close-size;
+          text-align: center;
+          cursor: pointer;
+      }
+*/
+        > .cpt-title
         {
-            background-color: $app-slide-color-background;
-            height: calc(100% - #{$app-slide-height-margin});
-            width: calc(100% - #{$app-slide-width-margin});
-            margin: $app-slide-margin;
-            margin-top: $app-slide-margin-top;
-            margin-bottom: $app-slide-margin-bottom;
-            box-shadow: 0 15px 25px 0 rgba(0,0,0,0.20);
-            border-radius: 14px;
-            padding: $app-slide-padding;
+            margin: 0;
+            margin-top: 15px;
+            line-height: 26px;
+            font-size: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.7);
+        }
 
-  /*
-          &:before
-          {
-              display: block;
-              position: absolute;
-              content: '';
-              height: $app-slide-close-size;
-              width: $app-slide-close-size;
-              top: -$app-slide-close-size-half + $app-slide-margin-top;
-              left: -$app-slide-close-size-half + $app-slide-margin;
-              border-radius: $app-slide-close-size-half;
-              background-color: $app-slide-color-background;
-              border-color: $app-slide-close-border-color;
-              border-style: solid;
-              border-width: $app-slide-close-border-width;
-              box-shadow: $app-slide-close-box-shadow;
-              cursor: pointer;
-          }
+        > .cpt-short
+        {
+            margin: 0;
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 21px;
+            color: rgba(0, 0, 0, 0.54);
+        }
 
-          &:after
-          {
-              display: block;
-              position: absolute;
-              content: '\d7';
-              height: $app-slide-close-size;
-              width: $app-slide-close-size;
-              top: -$app-slide-close-size-half + $app-slide-margin-top - 2px;
-              left: -$app-slide-close-size-half + $app-slide-margin;
-              font-size: $app-slide-close-size + 6px;
-              color: $app-slide-close-border-color;
-              line-height: $app-slide-close-size;
-              text-align: center;
-              cursor: pointer;
-          }
-  */
-            > .cpt-title
-            {
-                margin: 0;
-                margin-top: 15px;
-                line-height: 26px;
-                font-size: 20px;
-                font-weight: 400;
-                text-transform: uppercase;
-                color: rgba(0, 0, 0, 0.7);
-            }
+        > .cpt-image
+        {
+            width: 100%;
+            margin-top: 27px;
+//            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
 
-            > .cpt-short
-            {
-                margin: 0;
-                margin-top: 8px;
-                font-size: 18px;
-                font-weight: 400;
-                line-height: 21px;
-                color: rgba(0, 0, 0, 0.54);
-            }
+        > .cpt-button
+        {
+            padding: 0;
+            margin: 0;
+            margin-top: 41px;
+            text-transform: uppercase;
+            background-color: $app-color-primary;
+            color: $app-color-white;
+            font-size: 16px;
+            line-height: 16px;
+            font-weight: 900;
+            padding: 16px 24px;
+            border-radius: 24px;
+        }
 
-            > .cpt-image
-            {
-                width: 100%;
-                margin-top: 27px;
-    //            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-            }
-
-            > .cpt-button
-            {
-                padding: 0;
-                margin: 0;
-                margin-top: 41px;
-                text-transform: uppercase;
-                background-color: $app-color-primary;
-                color: $app-color-white;
-                font-size: 16px;
-                line-height: 16px;
-                font-weight: 900;
-                padding: 16px 24px;
-                border-radius: 24px;
-            }
-
-            > .cpt-paragraph
-            {
-                margin: 0;
-                margin-top: 13px;
-                font-size: 14px;
-                line-height: 17px;
-                color: rgba(0, 0, 0, 0.54);
-            }
+        > .cpt-paragraph
+        {
+            margin: 0;
+            margin-top: 13px;
+            font-size: 14px;
+            line-height: 17px;
+            color: rgba(0, 0, 0, 0.54);
         }
     }
 }

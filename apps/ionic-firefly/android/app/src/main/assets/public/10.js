@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[10],{
 
 /***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/string.js":
-/*!*****************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/string.js ***!
-  \*****************************************************************************************************************************/
+/*!********************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/string.js ***!
+  \********************************************************************************************************************************/
 /*! exports provided: applyPolyfill */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

@@ -1,24 +1,21 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[50],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dotnjsqs.sc.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dotnjsqs.sc.entry.js ***!
-  \************************************************************************************************************************************/
-/*! exports provided: IonRoute, IonRouteRedirect, IonRouter, IonRouterOutlet */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/d8hu9v7u.sc.entry.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/d8hu9v7u.sc.entry.js ***!
+  \***************************************************************************************************************************************/
+/*! exports provided: IonSelect, IonSelectOption, IonSelectPopover */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRoute", function() { return Route; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRouteRedirect", function() { return RouteRedirect; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRouter", function() { return Router; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRouterOutlet", function() { return RouterOutlet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSelect", function() { return Select; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSelectOption", function() { return SelectOption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSelectPopover", function() { return SelectPopover; });
 /* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
 /* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
-/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
-/* harmony import */ var _chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-5f438245.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-5f438245.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
@@ -27,1097 +24,451 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-var Route = /** @class */ (function () {
-    function Route() {
-        this.url = '';
+var Select = /** @class */ (function () {
+    function Select() {
+        this.childOpts = [];
+        this.inputId = "ion-sel-" + selectIds++;
+        this.isExpanded = false;
+        this.keyFocus = false;
+        this.text = '';
+        this.disabled = false;
+        this.cancelText = 'Cancel';
+        this.okText = 'OK';
+        this.name = this.inputId;
+        this.multiple = false;
+        this.interface = 'alert';
+        this.interfaceOptions = {};
     }
-    Route.prototype.onUpdate = function (newValue) {
-        this.ionRouteDataChanged.emit(newValue);
+    Select.prototype.disabledChanged = function () {
+        this.emitStyle();
     };
-    Route.prototype.onComponentProps = function (newValue, oldValue) {
-        if (newValue === oldValue) {
-            return;
-        }
-        var keys1 = newValue ? Object.keys(newValue) : [];
-        var keys2 = oldValue ? Object.keys(oldValue) : [];
-        if (keys1.length !== keys2.length) {
-            this.onUpdate(newValue);
-            return;
-        }
-        for (var _i = 0, keys1_1 = keys1; _i < keys1_1.length; _i++) {
-            var key = keys1_1[_i];
-            if (newValue[key] !== oldValue[key]) {
-                this.onUpdate(newValue);
-                return;
-            }
-        }
-    };
-    Route.prototype.componentDidLoad = function () {
-        this.ionRouteDataChanged.emit();
-    };
-    Route.prototype.componentDidUnload = function () {
-        this.ionRouteDataChanged.emit();
-    };
-    Object.defineProperty(Route, "is", {
-        get: function () { return "ion-route"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Route, "properties", {
-        get: function () {
-            return {
-                "component": {
-                    "type": String,
-                    "attr": "component",
-                    "watchCallbacks": ["onUpdate"]
-                },
-                "componentProps": {
-                    "type": "Any",
-                    "attr": "component-props",
-                    "watchCallbacks": ["onComponentProps"]
-                },
-                "url": {
-                    "type": String,
-                    "attr": "url",
-                    "watchCallbacks": ["onUpdate"]
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Route, "events", {
-        get: function () {
-            return [{
-                    "name": "ionRouteDataChanged",
-                    "method": "ionRouteDataChanged",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Route;
-}());
-var RouteRedirect = /** @class */ (function () {
-    function RouteRedirect() {
-        this.from = '';
-    }
-    RouteRedirect.prototype.propDidChange = function () {
-        this.ionRouteRedirectChanged.emit();
-    };
-    RouteRedirect.prototype.componentDidLoad = function () {
-        this.ionRouteRedirectChanged.emit();
-    };
-    RouteRedirect.prototype.componentDidUnload = function () {
-        this.ionRouteRedirectChanged.emit();
-    };
-    Object.defineProperty(RouteRedirect, "is", {
-        get: function () { return "ion-route-redirect"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(RouteRedirect, "properties", {
-        get: function () {
-            return {
-                "from": {
-                    "type": String,
-                    "attr": "from",
-                    "watchCallbacks": ["propDidChange"]
-                },
-                "to": {
-                    "type": String,
-                    "attr": "to",
-                    "watchCallbacks": ["propDidChange"]
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(RouteRedirect, "events", {
-        get: function () {
-            return [{
-                    "name": "ionRouteRedirectChanged",
-                    "method": "ionRouteRedirectChanged",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return RouteRedirect;
-}());
-function generatePath(segments) {
-    var path = segments
-        .filter(function (s) { return s.length > 0; })
-        .join('/');
-    return '/' + path;
-}
-function chainToPath(chain) {
-    var path = [];
-    for (var _i = 0, chain_1 = chain; _i < chain_1.length; _i++) {
-        var route = chain_1[_i];
-        for (var _a = 0, _b = route.path; _a < _b.length; _a++) {
-            var segment = _b[_a];
-            if (segment[0] === ':') {
-                var param = route.params && route.params[segment.slice(1)];
-                if (!param) {
-                    return null;
-                }
-                path.push(param);
-            }
-            else if (segment !== '') {
-                path.push(segment);
-            }
-        }
-    }
-    return path;
-}
-function writePath(history, root, useHash, path, intent, state) {
-    var url = generatePath(parsePath(root).concat(path));
-    if (useHash) {
-        url = '#' + url;
-    }
-    if (intent === 1) {
-        history.pushState(state, '', url);
-    }
-    else {
-        history.replaceState(state, '', url);
-    }
-}
-function removePrefix(prefix, path) {
-    if (prefix.length > path.length) {
-        return null;
-    }
-    if (prefix.length <= 1 && prefix[0] === '') {
-        return path;
-    }
-    for (var i = 0; i < prefix.length; i++) {
-        if (prefix[i].length > 0 && prefix[i] !== path[i]) {
-            return null;
-        }
-    }
-    if (path.length === prefix.length) {
-        return [''];
-    }
-    return path.slice(prefix.length);
-}
-function readPath(loc, root, useHash) {
-    var pathname = loc.pathname;
-    if (useHash) {
-        var hash = loc.hash;
-        pathname = (hash[0] === '#')
-            ? hash.slice(1)
-            : '';
-    }
-    var prefix = parsePath(root);
-    var path = parsePath(pathname);
-    return removePrefix(prefix, path);
-}
-function parsePath(path) {
-    if (path == null) {
-        return [''];
-    }
-    var segments = path.split('/')
-        .map(function (s) { return s.trim(); })
-        .filter(function (s) { return s.length > 0; });
-    if (segments.length === 0) {
-        return [''];
-    }
-    else {
-        return segments;
-    }
-}
-function printRoutes(routes) {
-    console.group("[ion-core] ROUTES[" + routes.length + "]");
-    var _loop_1 = function (chain) {
-        var path = [];
-        chain.forEach(function (r) { return path.push.apply(path, r.path); });
-        var ids = chain.map(function (r) { return r.id; });
-        console.debug("%c " + generatePath(path), 'font-weight: bold; padding-left: 20px', '=>\t', "(" + ids.join(', ') + ")");
-    };
-    for (var _i = 0, routes_1 = routes; _i < routes_1.length; _i++) {
-        var chain = routes_1[_i];
-        _loop_1(chain);
-    }
-    console.groupEnd();
-}
-function printRedirects(redirects) {
-    console.group("[ion-core] REDIRECTS[" + redirects.length + "]");
-    for (var _i = 0, redirects_1 = redirects; _i < redirects_1.length; _i++) {
-        var redirect = redirects_1[_i];
-        if (redirect.to) {
-            console.debug('FROM: ', "$c " + generatePath(redirect.from), 'font-weight: bold', ' TO: ', "$c " + generatePath(redirect.to), 'font-weight: bold');
-        }
-    }
-    console.groupEnd();
-}
-function writeNavState(root, chain, intent, index, changed) {
-    if (changed === void 0) { changed = false; }
-    return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-        var outlet, route, result, e_1;
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 6, , 7]);
-                    outlet = searchNavNode(root);
-                    if (index >= chain.length || !outlet) {
-                        return [2 /*return*/, changed];
-                    }
-                    return [4 /*yield*/, outlet.componentOnReady()];
-                case 1:
-                    _a.sent();
-                    route = chain[index];
-                    return [4 /*yield*/, outlet.setRouteId(route.id, route.params, intent)];
-                case 2:
-                    result = _a.sent();
-                    if (result.changed) {
-                        intent = 0;
-                        changed = true;
-                    }
-                    return [4 /*yield*/, writeNavState(result.element, chain, intent, index + 1, changed)];
-                case 3:
-                    changed = _a.sent();
-                    if (!result.markVisible) return [3 /*break*/, 5];
-                    return [4 /*yield*/, result.markVisible()];
-                case 4:
-                    _a.sent();
-                    _a.label = 5;
-                case 5: return [2 /*return*/, changed];
-                case 6:
-                    e_1 = _a.sent();
-                    console.error(e_1);
-                    return [2 /*return*/, false];
-                case 7: return [2 /*return*/];
-            }
-        });
-    });
-}
-function readNavState(root) {
-    return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-        var ids, outlet, node, id;
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    ids = [];
-                    node = root;
-                    _a.label = 1;
-                case 1:
-                    if (false) {}
-                    outlet = searchNavNode(node);
-                    if (!outlet) return [3 /*break*/, 3];
-                    return [4 /*yield*/, outlet.getRouteId()];
-                case 2:
-                    id = _a.sent();
-                    if (id) {
-                        node = id.element;
-                        id.element = undefined;
-                        ids.push(id);
-                    }
-                    else {
-                        return [3 /*break*/, 5];
-                    }
-                    return [3 /*break*/, 4];
-                case 3: return [3 /*break*/, 5];
-                case 4: return [3 /*break*/, 1];
-                case 5: return [2 /*return*/, { ids: ids, outlet: outlet }];
-            }
-        });
-    });
-}
-function waitUntilNavNode(win) {
-    if (searchNavNode(win.document.body)) {
-        return Promise.resolve();
-    }
-    return new Promise(function (resolve) {
-        win.addEventListener('ionNavWillLoad', resolve, { once: true });
-    });
-}
-var QUERY = ':not([no-router]) ion-nav, :not([no-router]) ion-tabs, :not([no-router]) ion-router-outlet';
-function searchNavNode(root) {
-    if (!root) {
-        return undefined;
-    }
-    if (root.matches(QUERY)) {
-        return root;
-    }
-    var outlet = root.querySelector(QUERY);
-    return outlet ? outlet : undefined;
-}
-function matchesRedirect(input, route) {
-    var from = route.from, to = route.to;
-    if (to === undefined) {
-        return false;
-    }
-    if (from.length > input.length) {
-        return false;
-    }
-    for (var i = 0; i < from.length; i++) {
-        var expected = from[i];
-        if (expected === '*') {
-            return true;
-        }
-        if (expected !== input[i]) {
-            return false;
-        }
-    }
-    return from.length === input.length;
-}
-function routeRedirect(path, routes) {
-    return routes.find(function (route) { return matchesRedirect(path, route); });
-}
-function matchesIDs(ids, chain) {
-    var len = Math.min(ids.length, chain.length);
-    var i = 0;
-    for (; i < len; i++) {
-        if (ids[i].toLowerCase() !== chain[i].id) {
-            break;
-        }
-    }
-    return i;
-}
-function matchesPath(inputPath, chain) {
-    var segments = new RouterSegments(inputPath);
-    var matchesDefault = false;
-    var allparams;
-    for (var i = 0; i < chain.length; i++) {
-        var path = chain[i].path;
-        if (path[0] === '') {
-            matchesDefault = true;
-        }
-        else {
-            for (var _i = 0, path_1 = path; _i < path_1.length; _i++) {
-                var segment = path_1[_i];
-                var data = segments.next();
-                if (segment[0] === ':') {
-                    if (data === '') {
-                        return null;
-                    }
-                    allparams = allparams || [];
-                    var params = allparams[i] || (allparams[i] = {});
-                    params[segment.slice(1)] = data;
-                }
-                else if (data !== segment) {
-                    return null;
-                }
-            }
-            matchesDefault = false;
-        }
-    }
-    var matches = (matchesDefault)
-        ? matchesDefault === (segments.next() === '')
-        : true;
-    if (!matches) {
-        return null;
-    }
-    if (allparams) {
-        return chain.map(function (route, i) { return ({
-            id: route.id,
-            path: route.path,
-            params: mergeParams(route.params, allparams[i])
-        }); });
-    }
-    return chain;
-}
-function mergeParams(a, b) {
-    if (!a && b) {
-        return b;
-    }
-    else if (a && !b) {
-        return a;
-    }
-    else if (a && b) {
-        return Object.assign({}, a, b);
-    }
-    return undefined;
-}
-function routerIDsToChain(ids, chains) {
-    var match = null;
-    var maxMatches = 0;
-    var plainIDs = ids.map(function (i) { return i.id; });
-    for (var _i = 0, chains_1 = chains; _i < chains_1.length; _i++) {
-        var chain = chains_1[_i];
-        var score = matchesIDs(plainIDs, chain);
-        if (score > maxMatches) {
-            match = chain;
-            maxMatches = score;
-        }
-    }
-    if (match) {
-        return match.map(function (route, i) { return ({
-            id: route.id,
-            path: route.path,
-            params: mergeParams(route.params, ids[i] && ids[i].params)
-        }); });
-    }
-    return null;
-}
-function routerPathToChain(path, chains) {
-    var match = null;
-    var matches = 0;
-    for (var _i = 0, chains_2 = chains; _i < chains_2.length; _i++) {
-        var chain = chains_2[_i];
-        var matchedChain = matchesPath(path, chain);
-        if (matchedChain !== null) {
-            var score = computePriority(matchedChain);
-            if (score > matches) {
-                matches = score;
-                match = matchedChain;
-            }
-        }
-    }
-    return match;
-}
-function computePriority(chain) {
-    var score = 1;
-    var level = 1;
-    for (var _i = 0, chain_2 = chain; _i < chain_2.length; _i++) {
-        var route = chain_2[_i];
-        for (var _a = 0, _b = route.path; _a < _b.length; _a++) {
-            var path = _b[_a];
-            if (path[0] === ':') {
-                score += Math.pow(1, level);
-            }
-            else if (path !== '') {
-                score += Math.pow(2, level);
-            }
-            level++;
-        }
-    }
-    return score;
-}
-var RouterSegments = /** @class */ (function () {
-    function RouterSegments(path) {
-        this.path = path.slice();
-    }
-    RouterSegments.prototype.next = function () {
-        if (this.path.length > 0) {
-            return this.path.shift();
-        }
-        return '';
-    };
-    return RouterSegments;
-}());
-function readRedirects(root) {
-    return Array.from(root.children)
-        .filter(function (el) { return el.tagName === 'ION-ROUTE-REDIRECT'; })
-        .map(function (el) {
-        var to = readProp(el, 'to');
-        return {
-            from: parsePath(readProp(el, 'from')),
-            to: to == null ? undefined : parsePath(to),
-        };
-    });
-}
-function readRoutes(root) {
-    return flattenRouterTree(readRouteNodes(root));
-}
-function readRouteNodes(root, node) {
-    if (node === void 0) { node = root; }
-    return Array.from(node.children)
-        .filter(function (el) { return el.tagName === 'ION-ROUTE' && el.component; })
-        .map(function (el) {
-        var component = readProp(el, 'component');
-        if (component == null) {
-            throw new Error('component missing in ion-route');
-        }
-        return {
-            path: parsePath(readProp(el, 'url')),
-            id: component.toLowerCase(),
-            params: el.componentProps,
-            children: readRouteNodes(root, el)
-        };
-    });
-}
-function readProp(el, prop) {
-    if (prop in el) {
-        return el[prop];
-    }
-    if (el.hasAttribute(prop)) {
-        return el.getAttribute(prop);
-    }
-    return null;
-}
-function flattenRouterTree(nodes) {
-    var routes = [];
-    for (var _i = 0, nodes_1 = nodes; _i < nodes_1.length; _i++) {
-        var node = nodes_1[_i];
-        flattenNode([], routes, node);
-    }
-    return routes;
-}
-function flattenNode(chain, routes, node) {
-    var s = chain.slice();
-    s.push({
-        id: node.id,
-        path: node.path,
-        params: node.params
-    });
-    if (node.children.length === 0) {
-        routes.push(s);
-        return;
-    }
-    for (var _i = 0, _a = node.children; _i < _a.length; _i++) {
-        var sub = _a[_i];
-        flattenNode(s, routes, sub);
-    }
-}
-var Router = /** @class */ (function () {
-    function Router() {
-        this.previousPath = null;
-        this.busy = false;
-        this.state = 0;
-        this.lastState = 0;
-        this.root = '/';
-        this.useHash = true;
-    }
-    Router.prototype.componentWillLoad = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        console.debug('[ion-router] router will load');
-                        return [4 /*yield*/, waitUntilNavNode(this.win)];
-                    case 1:
-                        _a.sent();
-                        console.debug('[ion-router] found nav');
-                        return [4 /*yield*/, this.onRoutesChanged()];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Router.prototype.componentDidLoad = function () {
-        this.win.addEventListener('ionRouteRedirectChanged', Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.onRedirectChanged.bind(this), 10));
-        this.win.addEventListener('ionRouteDataChanged', Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["k"])(this.onRoutesChanged.bind(this), 100));
-    };
-    Router.prototype.onPopState = function () {
-        var direction = this.historyDirection();
-        var path = this.getPath();
-        console.debug('[ion-router] URL changed -> update nav', path, direction);
-        return this.writeNavStateRoot(path, direction);
-    };
-    Router.prototype.onBackButton = function (ev) {
+    Select.prototype.valueChanged = function () {
         var _this = this;
-        ev.detail.register(0, function () { return _this.goBack(); });
-    };
-    Router.prototype.push = function (url, direction) {
-        if (direction === void 0) { direction = 'forward'; }
-        if (url.startsWith('.')) {
-            url = (new URL(url, window.location.href)).pathname;
-        }
-        console.debug('[ion-router] URL pushed -> updating nav', url, direction);
-        var path = parsePath(url);
-        var intent = DIRECTION_TO_INTENT[direction];
-        this.setPath(path, intent);
-        return this.writeNavStateRoot(path, intent);
-    };
-    Router.prototype.goBack = function () {
-        this.win.history.back(1);
-        return Promise.resolve(this.waitPromise);
-    };
-    Router.prototype.printDebug = function () {
-        console.debug('CURRENT PATH', this.getPath());
-        console.debug('PREVIOUS PATH', this.previousPath);
-        printRoutes(readRoutes(this.el));
-        printRedirects(readRedirects(this.el));
-    };
-    Router.prototype.navChanged = function (intent) {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _a, ids, outlet, routes, chain, path;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (this.busy) {
-                            console.warn('[ion-router] router is busy, navChanged was cancelled');
-                            return [2 /*return*/, false];
-                        }
-                        return [4 /*yield*/, readNavState(this.win.document.body)];
-                    case 1:
-                        _a = _b.sent(), ids = _a.ids, outlet = _a.outlet;
-                        routes = readRoutes(this.el);
-                        chain = routerIDsToChain(ids, routes);
-                        if (!chain) {
-                            console.warn('[ion-router] no matching URL for ', ids.map(function (i) { return i.id; }));
-                            return [2 /*return*/, false];
-                        }
-                        path = chainToPath(chain);
-                        if (!path) {
-                            console.warn('[ion-router] router could not match path because some required param is missing');
-                            return [2 /*return*/, false];
-                        }
-                        console.debug('[ion-router] nav changed -> update URL', ids, path);
-                        this.setPath(path, intent);
-                        return [4 /*yield*/, this.safeWriteNavState(outlet, chain, 0, path, null, ids.length)];
-                    case 2:
-                        _b.sent();
-                        return [2 /*return*/, true];
-                }
+        if (this.value === undefined) {
+            this.childOpts.filter(function (o) { return o.selected; }).forEach(function (selectOption) {
+                selectOption.selected = false;
             });
-        });
-    };
-    Router.prototype.onRedirectChanged = function () {
-        var path = this.getPath();
-        if (path && routeRedirect(path, readRedirects(this.el))) {
-            this.writeNavStateRoot(path, 0);
-        }
-    };
-    Router.prototype.onRoutesChanged = function () {
-        return this.writeNavStateRoot(this.getPath(), 0);
-    };
-    Router.prototype.historyDirection = function () {
-        if (this.win.history.state === null) {
-            this.state++;
-            this.win.history.replaceState(this.state, this.win.document.title, this.win.document.location.href);
-        }
-        var state = this.win.history.state;
-        var lastState = this.lastState;
-        this.lastState = state;
-        if (state > lastState) {
-            return 1;
-        }
-        else if (state < lastState) {
-            return -1;
+            this.text = '';
         }
         else {
-            return 0;
+            var hasChecked_1 = false;
+            var texts_1 = [];
+            this.childOpts.forEach(function (selectOption) {
+                if ((Array.isArray(_this.value) && _this.value.includes(selectOption.value)) || (selectOption.value === _this.value)) {
+                    if (!selectOption.selected && (_this.multiple || !hasChecked_1)) {
+                        selectOption.selected = true;
+                    }
+                    else if (!_this.multiple && hasChecked_1 && selectOption.selected) {
+                        selectOption.selected = false;
+                    }
+                    hasChecked_1 = true;
+                }
+                else if (selectOption.selected) {
+                    selectOption.selected = false;
+                }
+                if (selectOption.selected) {
+                    texts_1.push(selectOption.textContent || '');
+                }
+            });
+            this.text = texts_1.join(', ');
+        }
+        this.ionChange.emit({
+            value: this.value,
+            text: this.text
+        });
+        this.emitStyle();
+    };
+    Select.prototype.optLoad = function (ev) {
+        var selectOption = ev.target;
+        this.childOpts = Array.from(this.el.querySelectorAll('ion-select-option'));
+        if (this.value != null && (Array.isArray(this.value) && this.value.includes(selectOption.value)) || (selectOption.value === this.value)) {
+            selectOption.selected = true;
+        }
+        else if (Array.isArray(this.value) && this.multiple && selectOption.selected) {
+            this.value.push(selectOption.value);
+        }
+        else if (this.value === undefined && selectOption.selected) {
+            this.value = selectOption.value;
+        }
+        else if (selectOption.selected) {
+            selectOption.selected = false;
         }
     };
-    Router.prototype.writeNavStateRoot = function (path, intent) {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var redirects, redirect, redirectFrom, routes, chain;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                if (!path) {
-                    console.error('[ion-router] URL is not part of the routing set');
-                    return [2 /*return*/, false];
-                }
-                redirects = readRedirects(this.el);
-                redirect = routeRedirect(path, redirects);
-                redirectFrom = null;
-                if (redirect) {
-                    this.setPath(redirect.to, intent);
-                    redirectFrom = redirect.from;
-                    path = redirect.to;
-                }
-                routes = readRoutes(this.el);
-                chain = routerPathToChain(path, routes);
-                if (!chain) {
-                    console.error('[ion-router] the path does not match any route');
-                    return [2 /*return*/, false];
-                }
-                return [2 /*return*/, this.safeWriteNavState(this.win.document.body, chain, intent, path, redirectFrom)];
-            });
-        });
-    };
-    Router.prototype.safeWriteNavState = function (node, chain, intent, path, redirectFrom, index) {
-        if (index === void 0) { index = 0; }
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var unlock, changed, e_2;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.lock()];
-                    case 1:
-                        unlock = _a.sent();
-                        changed = false;
-                        _a.label = 2;
-                    case 2:
-                        _a.trys.push([2, 4, , 5]);
-                        return [4 /*yield*/, this.writeNavState(node, chain, intent, path, redirectFrom, index)];
-                    case 3:
-                        changed = _a.sent();
-                        return [3 /*break*/, 5];
-                    case 4:
-                        e_2 = _a.sent();
-                        console.error(e_2);
-                        return [3 /*break*/, 5];
-                    case 5:
-                        unlock();
-                        return [2 /*return*/, changed];
-                }
-            });
-        });
-    };
-    Router.prototype.lock = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var p, resolve;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        p = this.waitPromise;
-                        this.waitPromise = new Promise(function (r) { return resolve = r; });
-                        if (!(p !== undefined)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, p];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/, resolve];
-                }
-            });
-        });
-    };
-    Router.prototype.writeNavState = function (node, chain, intent, path, redirectFrom, index) {
-        if (index === void 0) { index = 0; }
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var routeEvent, changed;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (this.busy) {
-                            console.warn('[ion-router] router is busy, transition was cancelled');
-                            return [2 /*return*/, false];
-                        }
-                        this.busy = true;
-                        routeEvent = this.routeChangeEvent(path, redirectFrom);
-                        if (routeEvent) {
-                            this.ionRouteWillChange.emit(routeEvent);
-                        }
-                        return [4 /*yield*/, writeNavState(node, chain, intent, index)];
-                    case 1:
-                        changed = _a.sent();
-                        this.busy = false;
-                        if (changed) {
-                            console.debug('[ion-router] route changed', path);
-                        }
-                        if (routeEvent) {
-                            this.ionRouteDidChange.emit(routeEvent);
-                        }
-                        return [2 /*return*/, changed];
-                }
-            });
-        });
-    };
-    Router.prototype.setPath = function (path, intent) {
-        this.state++;
-        writePath(this.win.history, this.root, this.useHash, path, intent, this.state);
-    };
-    Router.prototype.getPath = function () {
-        return readPath(this.win.location, this.root, this.useHash);
-    };
-    Router.prototype.routeChangeEvent = function (path, redirectFromPath) {
-        var from = this.previousPath;
-        var to = generatePath(path);
-        this.previousPath = to;
-        if (to === from) {
-            return null;
+    Select.prototype.optUnload = function (ev) {
+        var index = this.childOpts.indexOf(ev.target);
+        if (index > -1) {
+            this.childOpts.splice(index, 1);
         }
-        var redirectedFrom = redirectFromPath ? generatePath(redirectFromPath) : null;
-        return {
-            from: from,
-            redirectedFrom: redirectedFrom,
-            to: to,
-        };
     };
-    Object.defineProperty(Router, "is", {
-        get: function () { return "ion-router"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Router, "properties", {
-        get: function () {
-            return {
-                "config": {
-                    "context": "config"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "goBack": {
-                    "method": true
-                },
-                "navChanged": {
-                    "method": true
-                },
-                "printDebug": {
-                    "method": true
-                },
-                "push": {
-                    "method": true
-                },
-                "queue": {
-                    "context": "queue"
-                },
-                "root": {
-                    "type": String,
-                    "attr": "root"
-                },
-                "useHash": {
-                    "type": Boolean,
-                    "attr": "use-hash"
-                },
-                "win": {
-                    "context": "window"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Router, "events", {
-        get: function () {
-            return [{
-                    "name": "ionRouteWillChange",
-                    "method": "ionRouteWillChange",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionRouteDidChange",
-                    "method": "ionRouteDidChange",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Router, "listeners", {
-        get: function () {
-            return [{
-                    "name": "window:popstate",
-                    "method": "onPopState"
-                }, {
-                    "name": "document:ionBackButton",
-                    "method": "onBackButton"
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Router;
-}());
-var DIRECTION_TO_INTENT = {
-    'back': -1,
-    'root': 0,
-    'forward': 1
-};
-var RouterOutlet = /** @class */ (function () {
-    function RouterOutlet() {
-        this.animated = true;
-    }
-    RouterOutlet.prototype.componentWillLoad = function () {
-        this.ionNavWillLoad.emit();
-    };
-    RouterOutlet.prototype.componentDidUnload = function () {
-        this.activeEl = this.activeComponent = undefined;
-    };
-    RouterOutlet.prototype.setRoot = function (component, params, opts) {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var leavingEl, enteringEl;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (this.activeComponent === component) {
-                            return [2 /*return*/, false];
-                        }
-                        leavingEl = this.activeEl;
-                        return [4 /*yield*/, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["a"])(this.delegate, this.el, component, ['ion-page', 'ion-page-invisible'], params)];
-                    case 1:
-                        enteringEl = _a.sent();
-                        this.activeComponent = component;
-                        this.activeEl = enteringEl;
-                        return [4 /*yield*/, this.commit(enteringEl, leavingEl, opts)];
-                    case 2:
-                        _a.sent();
-                        return [4 /*yield*/, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_3__["b"])(this.delegate, leavingEl)];
-                    case 3:
-                        _a.sent();
-                        return [2 /*return*/, true];
-                }
-            });
+    Select.prototype.onSelect = function (ev) {
+        var _this = this;
+        this.childOpts.forEach(function (selectOption) {
+            if (selectOption === ev.target) {
+                _this.value = selectOption.value;
+            }
+            else {
+                selectOption.selected = false;
+            }
         });
     };
-    RouterOutlet.prototype.commit = function (enteringEl, leavingEl, opts) {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var unlock, changed, e_3;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.lock()];
-                    case 1:
-                        unlock = _a.sent();
-                        changed = false;
-                        _a.label = 2;
-                    case 2:
-                        _a.trys.push([2, 4, , 5]);
-                        return [4 /*yield*/, this.transition(enteringEl, leavingEl, opts)];
-                    case 3:
-                        changed = _a.sent();
-                        return [3 /*break*/, 5];
-                    case 4:
-                        e_3 = _a.sent();
-                        console.error(e_3);
-                        return [3 /*break*/, 5];
-                    case 5:
-                        unlock();
-                        return [2 /*return*/, changed];
-                }
-            });
-        });
+    Select.prototype.componentWillLoad = function () {
+        if (!this.value) {
+            this.value = this.multiple ? [] : undefined;
+        }
     };
-    RouterOutlet.prototype.setRouteId = function (id, params, direction) {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var changed;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.setRoot(id, params, {
-                            duration: direction === 0 ? 0 : undefined,
-                            direction: direction === -1 ? 'back' : 'forward',
-                        })];
-                    case 1:
-                        changed = _a.sent();
-                        return [2 /*return*/, {
-                                changed: changed,
-                                element: this.activeEl
-                            }];
-                }
+    Select.prototype.componentDidLoad = function () {
+        var _this = this;
+        this.ionStyle = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.ionStyle);
+        var label = this.getLabel();
+        if (label) {
+            this.labelId = label.id = this.name + '-lbl';
+        }
+        if (this.multiple) {
+            var checked = this.childOpts.filter(function (o) { return o.selected; });
+            this.value.length = 0;
+            checked.forEach(function (o) {
+                _this.value.push(o.value);
             });
-        });
+            this.text = checked.map(function (o) { return o.textContent; }).join(', ');
+        }
+        else {
+            var checked = this.childOpts.find(function (o) { return o.selected; });
+            if (checked) {
+                this.value = checked.value;
+                this.text = checked.textContent || '';
+            }
+        }
+        this.emitStyle();
     };
-    RouterOutlet.prototype.getRouteId = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var active;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                active = this.activeEl;
-                return [2 /*return*/, active ? {
-                        id: active.tagName,
-                        element: active,
-                    } : undefined];
-            });
-        });
+    Select.prototype.open = function (ev) {
+        var selectInterface = this.interface;
+        if ((selectInterface === 'action-sheet' || selectInterface === 'popover') && this.multiple) {
+            console.warn("Select interface cannot be \"" + selectInterface + "\" with a multi-value select. Using the \"alert\" interface instead.");
+            selectInterface = 'alert';
+        }
+        if (selectInterface === 'popover' && !ev) {
+            console.warn('Select interface cannot be a "popover" without passing an event. Using the "alert" interface instead.');
+            selectInterface = 'alert';
+        }
+        if (selectInterface === 'popover') {
+            return this.openPopover(ev);
+        }
+        if (selectInterface === 'action-sheet') {
+            return this.openActionSheet();
+        }
+        return this.openAlert();
     };
-    RouterOutlet.prototype.lock = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var p, resolve;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        p = this.waitPromise;
-                        this.waitPromise = new Promise(function (r) { return resolve = r; });
-                        if (!(p !== undefined)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, p];
-                    case 1:
-                        _a.sent();
-                        _a.label = 2;
-                    case 2: return [2 /*return*/, resolve];
-                }
-            });
-        });
+    Select.prototype.getLabel = function () {
+        var item = this.el.closest('ion-item');
+        if (item) {
+            return item.querySelector('ion-label');
+        }
+        return null;
     };
-    RouterOutlet.prototype.transition = function (enteringEl, leavingEl, opts) {
+    Select.prototype.openPopover = function (ev) {
         return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _a, mode, queue, animationCtrl, win, el, animated;
+            var interfaceOptions, popoverOpts, popover, _a;
+            var _this = this;
             return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        if (leavingEl === enteringEl) {
-                            return [2 /*return*/, false];
-                        }
-                        this.ionNavWillChange.emit();
-                        opts = opts || {};
-                        _a = this, mode = _a.mode, queue = _a.queue, animationCtrl = _a.animationCtrl, win = _a.win, el = _a.el;
-                        animated = this.animated && this.config.getBoolean('animated', true);
-                        return [4 /*yield*/, Object(_chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_5__["d"])(Object.assign({ mode: mode,
-                                queue: queue,
-                                animated: animated,
-                                animationCtrl: animationCtrl, window: win, enteringEl: enteringEl,
-                                leavingEl: leavingEl, baseEl: el }, opts))];
+                        interfaceOptions = this.interfaceOptions;
+                        popoverOpts = Object.assign({}, interfaceOptions, { component: 'ion-select-popover', cssClass: ['select-popover', interfaceOptions.cssClass], event: ev, componentProps: {
+                                header: interfaceOptions.header,
+                                subHeader: interfaceOptions.subHeader,
+                                message: interfaceOptions.message,
+                                value: this.value,
+                                options: this.childOpts.map(function (o) {
+                                    return {
+                                        text: o.textContent,
+                                        value: o.value,
+                                        checked: o.selected,
+                                        disabled: o.disabled,
+                                        handler: function () {
+                                            _this.value = o.value;
+                                            _this.close();
+                                        }
+                                    };
+                                })
+                            } });
+                        _a = this;
+                        return [4 /*yield*/, this.popoverCtrl.create(popoverOpts)];
                     case 1:
+                        popover = _a.overlay = _b.sent();
+                        return [4 /*yield*/, popover.present()];
+                    case 2:
                         _b.sent();
-                        this.ionNavDidChange.emit();
-                        return [2 /*return*/, true];
+                        this.isExpanded = true;
+                        return [2 /*return*/, popover];
                 }
             });
         });
     };
-    RouterOutlet.prototype.render = function () {
+    Select.prototype.openActionSheet = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var actionSheetButtons, interfaceOptions, actionSheetOpts, actionSheet, _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        actionSheetButtons = this.childOpts.map(function (option) {
+                            return {
+                                role: (option.selected ? 'selected' : ''),
+                                text: option.textContent,
+                                handler: function () {
+                                    _this.value = option.value;
+                                }
+                            };
+                        });
+                        actionSheetButtons.push({
+                            text: this.cancelText,
+                            role: 'cancel',
+                            handler: function () {
+                                _this.ionCancel.emit();
+                            }
+                        });
+                        interfaceOptions = this.interfaceOptions;
+                        actionSheetOpts = Object.assign({}, interfaceOptions, { buttons: actionSheetButtons, cssClass: ['select-action-sheet', interfaceOptions.cssClass] });
+                        _a = this;
+                        return [4 /*yield*/, this.actionSheetCtrl.create(actionSheetOpts)];
+                    case 1:
+                        actionSheet = _a.overlay = _b.sent();
+                        return [4 /*yield*/, actionSheet.present()];
+                    case 2:
+                        _b.sent();
+                        this.isExpanded = true;
+                        return [2 /*return*/, actionSheet];
+                }
+            });
+        });
+    };
+    Select.prototype.openAlert = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var label, labelText, interfaceOptions, inputType, alertOpts, alert, _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        label = this.getLabel();
+                        labelText = (label) ? label.textContent : null;
+                        interfaceOptions = this.interfaceOptions;
+                        inputType = (this.multiple ? 'checkbox' : 'radio');
+                        alertOpts = Object.assign({}, interfaceOptions, { header: interfaceOptions.header ? interfaceOptions.header : labelText, inputs: this.childOpts.map(function (o) {
+                                return {
+                                    type: inputType,
+                                    label: o.textContent,
+                                    value: o.value,
+                                    checked: o.selected,
+                                    disabled: o.disabled
+                                };
+                            }), buttons: [
+                                {
+                                    text: this.cancelText,
+                                    role: 'cancel',
+                                    handler: function () {
+                                        _this.ionCancel.emit();
+                                    }
+                                },
+                                {
+                                    text: this.okText,
+                                    handler: function (selectedValues) {
+                                        _this.value = selectedValues;
+                                    }
+                                }
+                            ], cssClass: ['select-alert', interfaceOptions.cssClass,
+                                (this.multiple ? 'multiple-select-alert' : 'single-select-alert')] });
+                        _a = this;
+                        return [4 /*yield*/, this.alertCtrl.create(alertOpts)];
+                    case 1:
+                        alert = _a.overlay = _b.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _b.sent();
+                        this.isExpanded = true;
+                        return [2 /*return*/, alert];
+                }
+            });
+        });
+    };
+    Select.prototype.close = function () {
+        if (!this.overlay) {
+            return Promise.resolve(false);
+        }
+        var overlay = this.overlay;
+        this.overlay = undefined;
+        this.isExpanded = false;
+        return overlay.dismiss();
+    };
+    Select.prototype.onKeyUp = function () {
+        this.keyFocus = true;
+    };
+    Select.prototype.onFocus = function () {
+        this.ionFocus.emit();
+    };
+    Select.prototype.onBlur = function () {
+        this.keyFocus = false;
+        this.ionBlur.emit();
+    };
+    Select.prototype.hasValue = function () {
+        if (Array.isArray(this.value)) {
+            return this.value.length > 0;
+        }
+        return (this.value != null && this.value !== undefined && this.value !== '');
+    };
+    Select.prototype.emitStyle = function () {
+        this.ionStyle.emit({
+            'interactive': true,
+            'select': true,
+            'has-value': this.hasValue(),
+            'interactive-disabled': this.disabled,
+            'select-disabled': this.disabled
+        });
+    };
+    Select.prototype.hostData = function () {
+        return {
+            class: {
+                'in-item': Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["j"])('ion-item', this.el),
+                'select-disabled': this.disabled,
+                'select-key': this.keyFocus
+            }
+        };
+    };
+    Select.prototype.render = function () {
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.el, this.name, parseValue(this.value), this.disabled);
+        var addPlaceholderClass = false;
+        var selectText = this.selectedText || this.text;
+        if (selectText === '' && this.placeholder != null) {
+            selectText = this.placeholder;
+            addPlaceholderClass = true;
+        }
+        var selectTextClasses = {
+            'select-text': true,
+            'select-placeholder': addPlaceholderClass
+        };
         return [
-            this.mode === 'ios' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "nav-decor" }),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { role: "textbox", "aria-multiline": "false", class: selectTextClasses }, selectText),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "select-icon", role: "presentation" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "select-icon-inner" })),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", role: "combobox", "aria-haspopup": "dialog", "aria-labelledby": this.labelId, "aria-expanded": this.isExpanded ? 'true' : null, "aria-disabled": this.disabled ? 'true' : null, onClick: this.open.bind(this), onKeyUp: this.onKeyUp.bind(this), onFocus: this.onFocus.bind(this), onBlur: this.onBlur.bind(this), class: "select-cover" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null))
         ];
     };
-    Object.defineProperty(RouterOutlet, "is", {
-        get: function () { return "ion-router-outlet"; },
+    Object.defineProperty(Select, "is", {
+        get: function () { return "ion-select"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(RouterOutlet, "encapsulation", {
+    Object.defineProperty(Select, "encapsulation", {
         get: function () { return "shadow"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(RouterOutlet, "properties", {
+    Object.defineProperty(Select, "properties", {
         get: function () {
             return {
-                "animated": {
+                "actionSheetCtrl": {
+                    "connect": "ion-action-sheet-controller"
+                },
+                "alertCtrl": {
+                    "connect": "ion-alert-controller"
+                },
+                "cancelText": {
+                    "type": String,
+                    "attr": "cancel-text"
+                },
+                "disabled": {
                     "type": Boolean,
-                    "attr": "animated"
-                },
-                "animationBuilder": {
-                    "type": "Any",
-                    "attr": "animation-builder"
-                },
-                "animationCtrl": {
-                    "connect": "ion-animation-controller"
-                },
-                "commit": {
-                    "method": true
-                },
-                "config": {
-                    "context": "config"
-                },
-                "delegate": {
-                    "type": "Any",
-                    "attr": "delegate"
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
                 },
                 "el": {
                     "elementRef": true
                 },
-                "getRouteId": {
+                "interface": {
+                    "type": String,
+                    "attr": "interface"
+                },
+                "interfaceOptions": {
+                    "type": "Any",
+                    "attr": "interface-options"
+                },
+                "isExpanded": {
+                    "state": true
+                },
+                "keyFocus": {
+                    "state": true
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "multiple": {
+                    "type": Boolean,
+                    "attr": "multiple"
+                },
+                "name": {
+                    "type": String,
+                    "attr": "name"
+                },
+                "okText": {
+                    "type": String,
+                    "attr": "ok-text"
+                },
+                "open": {
                     "method": true
                 },
-                "queue": {
-                    "context": "queue"
+                "placeholder": {
+                    "type": String,
+                    "attr": "placeholder"
                 },
-                "setRoot": {
-                    "method": true
+                "popoverCtrl": {
+                    "connect": "ion-popover-controller"
                 },
-                "setRouteId": {
-                    "method": true
+                "selectedText": {
+                    "type": String,
+                    "attr": "selected-text"
                 },
-                "win": {
-                    "context": "window"
+                "text": {
+                    "state": true
+                },
+                "value": {
+                    "type": "Any",
+                    "attr": "value",
+                    "mutable": true,
+                    "watchCallbacks": ["valueChanged"]
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(RouterOutlet, "events", {
+    Object.defineProperty(Select, "events", {
         get: function () {
             return [{
-                    "name": "ionNavWillLoad",
-                    "method": "ionNavWillLoad",
+                    "name": "ionChange",
+                    "method": "ionChange",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionNavWillChange",
-                    "method": "ionNavWillChange",
+                    "name": "ionCancel",
+                    "method": "ionCancel",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
                 }, {
-                    "name": "ionNavDidChange",
-                    "method": "ionNavDidChange",
+                    "name": "ionFocus",
+                    "method": "ionFocus",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionBlur",
+                    "method": "ionBlur",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionStyle",
+                    "method": "ionStyle",
                     "bubbles": true,
                     "cancelable": true,
                     "composed": true
@@ -1126,12 +477,182 @@ var RouterOutlet = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(RouterOutlet, "style", {
-        get: function () { return ".sc-ion-router-outlet-h{left:0;right:0;top:0;bottom:0;position:absolute;contain:layout size style;overflow:hidden;z-index:0}.nav-decor.sc-ion-router-outlet{display:none}.show-decor.sc-ion-router-outlet-h   .nav-decor.sc-ion-router-outlet{left:0;right:0;top:0;bottom:0;display:block;position:absolute;background:#000;z-index:0;pointer-events:none}"; },
+    Object.defineProperty(Select, "listeners", {
+        get: function () {
+            return [{
+                    "name": "ionSelectOptionDidLoad",
+                    "method": "optLoad"
+                }, {
+                    "name": "ionSelectOptionDidUnload",
+                    "method": "optUnload"
+                }, {
+                    "name": "ionSelect",
+                    "method": "onSelect"
+                }];
+        },
         enumerable: true,
         configurable: true
     });
-    return RouterOutlet;
+    Object.defineProperty(Select, "style", {
+        get: function () { return ".sc-ion-select-ios-h{padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;color:var(--color);font-family:var(--ion-font-family,inherit);overflow:hidden;--color:var(--ion-text-color, #000);--icon-color:var(--ion-text-color-step-650, #a6a6a6);--padding-top:10px;--padding-end:8px;--padding-bottom:10px;--padding-start:16px;--placeholder-color:var(--ion-text-color-step-650, #a6a6a6)}.in-item.sc-ion-select-ios-h{position:static;max-width:45%}.select-disabled.sc-ion-select-ios-h{opacity:.4;pointer-events:none}.select-key.sc-ion-select-ios-h   button.sc-ion-select-ios{border:2px solid #5e9ed6}.select-placeholder.sc-ion-select-ios{color:var(--placeholder-color)}.select-cover.sc-ion-select-ios{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.select-icon.sc-ion-select-ios{position:relative}.select-text.sc-ion-select-ios{-webkit-box-flex:1;-ms-flex:1;flex:1;min-width:16px;font-size:inherit;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.select-icon-inner.sc-ion-select-ios{left:5px;top:50%;margin-top:-3px;position:absolute;width:0;height:0;border-top:5px solid;border-right:5px solid transparent;border-left:5px solid transparent;color:var(--icon-color);pointer-events:none}.sc-ion-select-ios-s > ion-select-option{display:none}button.sc-ion-select-ios:focus{outline:0}.select-icon.sc-ion-select-ios{width:12px;height:18px}"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Select, "styleMode", {
+        get: function () { return "ios"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Select;
+}());
+function parseValue(value) {
+    if (value == null) {
+        return undefined;
+    }
+    if (Array.isArray(value)) {
+        return value.join(',');
+    }
+    return value.toString();
+}
+var selectIds = 0;
+var SelectOption = /** @class */ (function () {
+    function SelectOption() {
+        this.inputId = "ion-selopt-" + selectOptionIds++;
+        this.disabled = false;
+        this.selected = false;
+    }
+    SelectOption.prototype.componentWillLoad = function () {
+        if (this.value == null) {
+            this.value = this.el.textContent || '';
+        }
+    };
+    SelectOption.prototype.componentDidLoad = function () {
+        this.ionSelectOptionDidLoad.emit();
+    };
+    SelectOption.prototype.componentDidUnload = function () {
+        this.ionSelectOptionDidUnload.emit();
+    };
+    SelectOption.prototype.hostData = function () {
+        return {
+            'role': 'option',
+            'id': this.inputId
+        };
+    };
+    Object.defineProperty(SelectOption, "is", {
+        get: function () { return "ion-select-option"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectOption, "properties", {
+        get: function () {
+            return {
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "selected": {
+                    "type": Boolean,
+                    "attr": "selected"
+                },
+                "value": {
+                    "type": "Any",
+                    "attr": "value",
+                    "mutable": true
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectOption, "events", {
+        get: function () {
+            return [{
+                    "name": "ionSelectOptionDidLoad",
+                    "method": "ionSelectOptionDidLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionSelectOptionDidUnload",
+                    "method": "ionSelectOptionDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return SelectOption;
+}());
+var selectOptionIds = 0;
+var SelectPopover = /** @class */ (function () {
+    function SelectPopover() {
+        this.options = [];
+    }
+    SelectPopover.prototype.onSelect = function (ev) {
+        var option = this.options.find(function (o) { return o.value === ev.target.value; });
+        if (option && option.handler) {
+            option.handler();
+        }
+    };
+    SelectPopover.prototype.render = function () {
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-list", null, this.header !== undefined && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-list-header", null, this.header), (this.subHeader !== undefined || this.message !== undefined) &&
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-item", null, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-label", { "text-wrap": true }, this.subHeader !== undefined && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("h3", null, this.subHeader), this.message !== undefined && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("p", null, this.message))), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-radio-group", null, this.options.map(function (option) { return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-item", null, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-label", null, option.text), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-radio", { checked: option.checked, value: option.value, disabled: option.disabled })); }))));
+    };
+    Object.defineProperty(SelectPopover, "is", {
+        get: function () { return "ion-select-popover"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectPopover, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectPopover, "properties", {
+        get: function () {
+            return {
+                "header": {
+                    "type": String,
+                    "attr": "header"
+                },
+                "message": {
+                    "type": String,
+                    "attr": "message"
+                },
+                "options": {
+                    "type": "Any",
+                    "attr": "options"
+                },
+                "subHeader": {
+                    "type": String,
+                    "attr": "sub-header"
+                }
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectPopover, "listeners", {
+        get: function () {
+            return [{
+                    "name": "ionSelect",
+                    "method": "onSelect"
+                }];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SelectPopover, "style", {
+        get: function () { return ".sc-ion-select-popover-h   ion-list.sc-ion-select-popover{margin:-1px 0}.sc-ion-select-popover-h   ion-label.sc-ion-select-popover, .sc-ion-select-popover-h   ion-list-header.sc-ion-select-popover{margin:0}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return SelectPopover;
 }());
 
 

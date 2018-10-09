@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
 
 /***/ "../../libs/core/base/base-component.ts":
-/*!************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/core/base/base-component.ts ***!
-  \************************************************************************/
+/*!***************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/core/base/base-component.ts ***!
+  \***************************************************************************/
 /*! exports provided: BaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -29,9 +29,9 @@ var BaseComponent = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../libs/core/base/index.ts":
-/*!***************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/core/base/index.ts ***!
-  \***************************************************************/
+/*!******************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/core/base/index.ts ***!
+  \******************************************************************/
 /*! exports provided: BaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -46,9 +46,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../libs/core/core.module.ts":
-/*!****************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/core/core.module.ts ***!
-  \****************************************************************/
+/*!*******************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/core/core.module.ts ***!
+  \*******************************************************************/
 /*! exports provided: BASE_PROVIDERS, CoreModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -128,9 +128,9 @@ var CoreModule = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../libs/core/environments/environment.ts":
-/*!*****************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/core/environments/environment.ts ***!
-  \*****************************************************************************/
+/*!********************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/core/environments/environment.ts ***!
+  \********************************************************************************/
 /*! exports provided: environment */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -147,9 +147,9 @@ var environment = {
 /***/ }),
 
 /***/ "../../libs/core/index.ts":
-/*!**********************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/core/index.ts ***!
-  \**********************************************************/
+/*!*************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/core/index.ts ***!
+  \*************************************************************/
 /*! exports provided: CoreModule, environment, CORE_PROVIDERS, LogService, BaseComponent, WindowPlatformService, WindowService, PlatformLanguageToken */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -184,9 +184,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../libs/core/services/index.ts":
-/*!*******************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/core/services/index.ts ***!
-  \*******************************************************************/
+/*!**********************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/core/services/index.ts ***!
+  \**********************************************************************/
 /*! exports provided: CORE_PROVIDERS, LogService, WindowPlatformService, WindowService, PlatformLanguageToken */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -215,9 +215,9 @@ var CORE_PROVIDERS = [_log_service__WEBPACK_IMPORTED_MODULE_0__["LogService"], _
 /***/ }),
 
 /***/ "../../libs/core/services/log.service.ts":
-/*!*************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/core/services/log.service.ts ***!
-  \*************************************************************************/
+/*!****************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/core/services/log.service.ts ***!
+  \****************************************************************************/
 /*! exports provided: LogService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -303,9 +303,9 @@ var LogService = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../libs/core/services/tokens.ts":
-/*!********************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/core/services/tokens.ts ***!
-  \********************************************************************/
+/*!***********************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/core/services/tokens.ts ***!
+  \***********************************************************************/
 /*! exports provided: PlatformLanguageToken */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -324,9 +324,9 @@ var PlatformLanguageToken = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inje
 /***/ }),
 
 /***/ "../../libs/core/services/window.service.ts":
-/*!****************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/core/services/window.service.ts ***!
-  \****************************************************************************/
+/*!*******************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/core/services/window.service.ts ***!
+  \*******************************************************************************/
 /*! exports provided: WindowPlatformService, WindowService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -449,9 +449,9 @@ var WindowService = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../libs/features/index.ts":
-/*!**************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/features/index.ts ***!
-  \**************************************************************/
+/*!*****************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/features/index.ts ***!
+  \*****************************************************************/
 /*! exports provided: UISharedModule, HeaderBaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -468,9 +468,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../libs/features/ui/base/header.base-component.ts":
-/*!**************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/features/ui/base/header.base-component.ts ***!
-  \**************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/features/ui/base/header.base-component.ts ***!
+  \*****************************************************************************************/
 /*! exports provided: HeaderBaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -528,9 +528,9 @@ var HeaderBaseComponent = /** @class */ (function (_super) {
 /***/ }),
 
 /***/ "../../libs/features/ui/base/index.ts":
-/*!**********************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/features/ui/base/index.ts ***!
-  \**********************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/features/ui/base/index.ts ***!
+  \*************************************************************************/
 /*! exports provided: HeaderBaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -545,9 +545,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../libs/features/ui/index.ts":
-/*!*****************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/features/ui/index.ts ***!
-  \*****************************************************************/
+/*!********************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/features/ui/index.ts ***!
+  \********************************************************************/
 /*! exports provided: UISharedModule, HeaderBaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -566,9 +566,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../libs/features/ui/pipes/date-order.pipe.ts":
-/*!*********************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/features/ui/pipes/date-order.pipe.ts ***!
-  \*********************************************************************************/
+/*!************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/features/ui/pipes/date-order.pipe.ts ***!
+  \************************************************************************************/
 /*! exports provided: DateOrderPipe */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -612,9 +612,9 @@ var DateOrderPipe = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../libs/features/ui/pipes/index.ts":
-/*!***********************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/features/ui/pipes/index.ts ***!
-  \***********************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/features/ui/pipes/index.ts ***!
+  \**************************************************************************/
 /*! exports provided: PIPES */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -629,9 +629,9 @@ var PIPES = [_date_order_pipe__WEBPACK_IMPORTED_MODULE_0__["DateOrderPipe"]];
 /***/ }),
 
 /***/ "../../libs/features/ui/ui.module.ts":
-/*!*********************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/features/ui/ui.module.ts ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/features/ui/ui.module.ts ***!
+  \************************************************************************/
 /*! exports provided: UISharedModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -669,9 +669,9 @@ var UISharedModule = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../libs/utils/angular.ts":
-/*!*************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/utils/angular.ts ***!
-  \*************************************************************/
+/*!****************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/utils/angular.ts ***!
+  \****************************************************************/
 /*! exports provided: throwIfAlreadyLoaded */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -688,9 +688,9 @@ function throwIfAlreadyLoaded(parentModule, moduleName) {
 /***/ }),
 
 /***/ "../../libs/utils/index.ts":
-/*!***********************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/utils/index.ts ***!
-  \***********************************************************/
+/*!**************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/utils/index.ts ***!
+  \**************************************************************/
 /*! exports provided: throwIfAlreadyLoaded, isString, isObject, isIOS, isAndroid, isNativeScript */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -719,9 +719,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../libs/utils/objects.ts":
-/*!*************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/utils/objects.ts ***!
-  \*************************************************************/
+/*!****************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/utils/objects.ts ***!
+  \****************************************************************/
 /*! exports provided: isString, isObject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -740,9 +740,9 @@ var isObject = function (arg) {
 /***/ }),
 
 /***/ "../../libs/utils/platform.ts":
-/*!**************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/libs/utils/platform.ts ***!
-  \**************************************************************/
+/*!*****************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/libs/utils/platform.ts ***!
+  \*****************************************************************/
 /*! exports provided: isIOS, isAndroid, isNativeScript */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -777,884 +777,892 @@ function isNativeScript() {
 /***/ }),
 
 /***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$":
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build lazy ^\.\/.*\.entry\.js$ include: \.entry\.js$ namespace object ***!
-  \*******************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build lazy ^\.\/.*\.entry\.js$ include: \.entry\.js$ namespace object ***!
+  \**********************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./1lfoqrsh.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1lfoqrsh.entry.js",
+	"./1pzpmodl.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1pzpmodl.entry.js",
 		0,
 		"common",
 		13
 	],
-	"./1lfoqrsh.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1lfoqrsh.sc.entry.js",
+	"./1pzpmodl.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1pzpmodl.sc.entry.js",
 		0,
 		"common",
 		14
 	],
-	"./1lltkidp.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1lltkidp.entry.js",
+	"./1vzj4iev.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1vzj4iev.entry.js",
 		0,
 		"common",
 		15
 	],
-	"./1lltkidp.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1lltkidp.sc.entry.js",
+	"./1vzj4iev.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1vzj4iev.sc.entry.js",
 		0,
 		"common",
 		16
 	],
-	"./1nfzypqm.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1nfzypqm.entry.js",
-		0,
-		"common",
+	"./2jswtbop.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2jswtbop.entry.js",
 		17
 	],
-	"./1nfzypqm.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1nfzypqm.sc.entry.js",
-		0,
-		"common",
+	"./2jswtbop.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2jswtbop.sc.entry.js",
 		18
 	],
-	"./2pag0jtj.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2pag0jtj.entry.js",
+	"./2xlcplwx.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2xlcplwx.entry.js",
 		0,
 		"common",
 		19
 	],
-	"./2pag0jtj.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2pag0jtj.sc.entry.js",
+	"./2xlcplwx.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2xlcplwx.sc.entry.js",
 		0,
 		"common",
 		20
 	],
-	"./4afjwwlz.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4afjwwlz.entry.js",
+	"./2yck1ams.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2yck1ams.entry.js",
 		0,
 		"common",
 		21
 	],
-	"./4afjwwlz.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4afjwwlz.sc.entry.js",
+	"./2yck1ams.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2yck1ams.sc.entry.js",
 		0,
 		"common",
 		22
 	],
-	"./4fehonnh.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4fehonnh.entry.js",
+	"./4akfx1pp.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4akfx1pp.entry.js",
 		0,
 		"common",
 		23
 	],
-	"./4fehonnh.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4fehonnh.sc.entry.js",
+	"./4akfx1pp.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4akfx1pp.sc.entry.js",
 		0,
 		"common",
 		24
 	],
-	"./6lyikwjo.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/6lyikwjo.entry.js",
+	"./4v89pg1l.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4v89pg1l.entry.js",
+		0,
+		"common",
 		25
 	],
-	"./6lyikwjo.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/6lyikwjo.sc.entry.js",
+	"./4v89pg1l.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/4v89pg1l.sc.entry.js",
+		0,
+		"common",
 		26
 	],
-	"./72uhruqj.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/72uhruqj.entry.js",
+	"./7nk4bg8j.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7nk4bg8j.entry.js",
 		0,
 		"common",
 		27
 	],
-	"./72uhruqj.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/72uhruqj.sc.entry.js",
+	"./7nk4bg8j.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7nk4bg8j.sc.entry.js",
 		0,
 		"common",
 		28
 	],
-	"./7l6puety.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7l6puety.entry.js",
+	"./7oweqjmw.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7oweqjmw.entry.js",
 		0,
 		"common",
 		29
 	],
-	"./7l6puety.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7l6puety.sc.entry.js",
+	"./7oweqjmw.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7oweqjmw.sc.entry.js",
 		0,
 		"common",
 		30
 	],
-	"./7vzgoafc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7vzgoafc.entry.js",
+	"./7zslq9c2.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7zslq9c2.entry.js",
 		0,
 		"common",
 		31
 	],
-	"./7vzgoafc.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7vzgoafc.sc.entry.js",
+	"./7zslq9c2.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7zslq9c2.sc.entry.js",
 		0,
 		"common",
 		32
 	],
-	"./8p7lgzsc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8p7lgzsc.entry.js",
+	"./7zvak3av.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7zvak3av.entry.js",
+		0,
+		"common",
 		33
 	],
-	"./8p7lgzsc.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8p7lgzsc.sc.entry.js",
+	"./7zvak3av.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/7zvak3av.sc.entry.js",
+		0,
+		"common",
 		34
 	],
-	"./8xoefha8.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8xoefha8.entry.js",
+	"./8yhidsqq.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8yhidsqq.entry.js",
+		0,
 		"common",
 		35
 	],
-	"./8xoefha8.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8xoefha8.sc.entry.js",
+	"./8yhidsqq.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/8yhidsqq.sc.entry.js",
+		0,
 		"common",
 		36
 	],
-	"./amegv4d5.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/amegv4d5.entry.js",
+	"./aeaeke7j.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/aeaeke7j.entry.js",
+		0,
 		"common",
 		37
 	],
-	"./amegv4d5.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/amegv4d5.sc.entry.js",
+	"./aeaeke7j.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/aeaeke7j.sc.entry.js",
+		0,
 		"common",
 		38
 	],
-	"./bfzinp9p.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/bfzinp9p.entry.js",
+	"./agpviox7.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/agpviox7.entry.js",
 		0,
 		"common",
 		39
 	],
-	"./bfzinp9p.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/bfzinp9p.sc.entry.js",
+	"./agpviox7.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/agpviox7.sc.entry.js",
 		0,
 		"common",
 		40
 	],
-	"./cccprf06.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/cccprf06.entry.js",
-		0,
+	"./amegv4d5.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/amegv4d5.entry.js",
 		"common",
 		41
 	],
-	"./cccprf06.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/cccprf06.sc.entry.js",
-		0,
+	"./amegv4d5.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/amegv4d5.sc.entry.js",
 		"common",
 		42
 	],
-	"./dcxguzfo.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dcxguzfo.entry.js",
+	"./c6noyomn.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/c6noyomn.entry.js",
 		0,
 		"common",
 		43
 	],
-	"./dcxguzfo.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dcxguzfo.sc.entry.js",
+	"./c6noyomn.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/c6noyomn.sc.entry.js",
 		0,
 		"common",
 		44
 	],
-	"./deo10kje.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/deo10kje.entry.js",
+	"./cfguwiqk.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/cfguwiqk.entry.js",
+		0,
 		"common",
 		45
 	],
-	"./deo10kje.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/deo10kje.sc.entry.js",
+	"./cfguwiqk.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/cfguwiqk.sc.entry.js",
+		0,
 		"common",
 		46
 	],
-	"./dojt5vwf.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dojt5vwf.entry.js",
+	"./ck21boww.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ck21boww.entry.js",
 		0,
 		"common",
 		47
 	],
-	"./dojt5vwf.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dojt5vwf.sc.entry.js",
+	"./ck21boww.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ck21boww.sc.entry.js",
 		0,
 		"common",
 		48
 	],
-	"./dotnjsqs.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dotnjsqs.entry.js",
+	"./d8hu9v7u.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/d8hu9v7u.entry.js",
 		0,
 		"common",
 		49
 	],
-	"./dotnjsqs.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dotnjsqs.sc.entry.js",
+	"./d8hu9v7u.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/d8hu9v7u.sc.entry.js",
 		0,
 		"common",
 		50
 	],
-	"./eilluzs6.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eilluzs6.entry.js",
+	"./dmqtv4c3.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dmqtv4c3.entry.js",
+		0,
+		"common",
 		51
 	],
-	"./eilluzs6.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eilluzs6.sc.entry.js",
+	"./dmqtv4c3.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/dmqtv4c3.sc.entry.js",
+		0,
+		"common",
 		52
 	],
-	"./eqt7cuos.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eqt7cuos.entry.js",
-		0,
+	"./eeuo8kz6.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eeuo8kz6.entry.js",
 		"common",
 		53
 	],
-	"./eqt7cuos.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eqt7cuos.sc.entry.js",
-		0,
+	"./eeuo8kz6.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eeuo8kz6.sc.entry.js",
 		"common",
 		54
 	],
-	"./fhvo81yz.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fhvo81yz.entry.js",
-		0,
-		"common",
+	"./eilluzs6.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eilluzs6.entry.js",
 		55
 	],
-	"./fhvo81yz.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fhvo81yz.sc.entry.js",
-		0,
-		"common",
+	"./eilluzs6.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/eilluzs6.sc.entry.js",
 		56
 	],
-	"./fmw4ybuv.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fmw4ybuv.entry.js",
+	"./ej7i9is4.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ej7i9is4.entry.js",
 		0,
 		"common",
 		57
 	],
-	"./fmw4ybuv.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fmw4ybuv.sc.entry.js",
+	"./ej7i9is4.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ej7i9is4.sc.entry.js",
 		0,
 		"common",
 		58
 	],
-	"./fz9h7zdi.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fz9h7zdi.entry.js",
+	"./ezb8uns1.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ezb8uns1.entry.js",
 		0,
 		"common",
 		59
 	],
-	"./fz9h7zdi.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fz9h7zdi.sc.entry.js",
+	"./ezb8uns1.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ezb8uns1.sc.entry.js",
 		0,
 		"common",
 		60
 	],
-	"./hqo7rktj.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hqo7rktj.entry.js",
+	"./fl5myp0s.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fl5myp0s.entry.js",
 		0,
 		"common",
 		61
 	],
-	"./hqo7rktj.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hqo7rktj.sc.entry.js",
+	"./fl5myp0s.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fl5myp0s.sc.entry.js",
 		0,
 		"common",
 		62
 	],
-	"./j9aljzr0.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j9aljzr0.entry.js",
+	"./fvg6ydme.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fvg6ydme.entry.js",
 		0,
 		"common",
 		63
 	],
-	"./j9aljzr0.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j9aljzr0.sc.entry.js",
+	"./fvg6ydme.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fvg6ydme.sc.entry.js",
 		0,
 		"common",
 		64
 	],
-	"./jc49rjp4.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jc49rjp4.entry.js",
+	"./fzhq1ox9.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fzhq1ox9.entry.js",
+		0,
 		"common",
 		65
 	],
-	"./jc49rjp4.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jc49rjp4.sc.entry.js",
+	"./fzhq1ox9.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/fzhq1ox9.sc.entry.js",
+		0,
 		"common",
 		66
 	],
-	"./jzof0l9g.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jzof0l9g.entry.js",
+	"./hk89kth4.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hk89kth4.entry.js",
 		0,
 		"common",
 		67
 	],
-	"./jzof0l9g.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jzof0l9g.sc.entry.js",
+	"./hk89kth4.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hk89kth4.sc.entry.js",
 		0,
 		"common",
 		68
 	],
-	"./k5xfzocc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/k5xfzocc.entry.js",
+	"./hz9cqqbq.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hz9cqqbq.entry.js",
 		0,
 		"common",
 		69
 	],
-	"./k5xfzocc.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/k5xfzocc.sc.entry.js",
+	"./hz9cqqbq.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hz9cqqbq.sc.entry.js",
 		0,
 		"common",
 		70
 	],
-	"./kuy3ry2b.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kuy3ry2b.entry.js",
+	"./i1z7ysfp.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/i1z7ysfp.entry.js",
 		0,
 		"common",
 		71
 	],
-	"./kuy3ry2b.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kuy3ry2b.sc.entry.js",
+	"./i1z7ysfp.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/i1z7ysfp.sc.entry.js",
 		0,
 		"common",
 		72
 	],
-	"./ldpcwjk1.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ldpcwjk1.entry.js",
+	"./i9fadijr.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/i9fadijr.entry.js",
 		0,
 		"common",
 		73
 	],
-	"./ldpcwjk1.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ldpcwjk1.sc.entry.js",
+	"./i9fadijr.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/i9fadijr.sc.entry.js",
 		0,
 		"common",
 		74
 	],
-	"./lovgbjzt.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lovgbjzt.entry.js",
+	"./ie0nvonp.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ie0nvonp.entry.js",
 		0,
 		"common",
 		75
 	],
-	"./lovgbjzt.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lovgbjzt.sc.entry.js",
+	"./ie0nvonp.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ie0nvonp.sc.entry.js",
 		0,
 		"common",
 		76
 	],
-	"./lp9x6s2o.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lp9x6s2o.entry.js",
+	"./ifpbahte.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ifpbahte.entry.js",
 		0,
 		"common",
 		77
 	],
-	"./lp9x6s2o.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lp9x6s2o.sc.entry.js",
+	"./ifpbahte.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ifpbahte.sc.entry.js",
 		0,
 		"common",
 		78
 	],
-	"./m4wqmiey.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/m4wqmiey.entry.js",
+	"./ijltfkuh.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ijltfkuh.entry.js",
 		0,
 		"common",
 		79
 	],
-	"./m4wqmiey.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/m4wqmiey.sc.entry.js",
+	"./ijltfkuh.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ijltfkuh.sc.entry.js",
 		0,
 		"common",
 		80
 	],
-	"./mjggusps.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mjggusps.entry.js",
+	"./ilzbfjg7.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ilzbfjg7.entry.js",
 		0,
 		"common",
 		81
 	],
-	"./mjggusps.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mjggusps.sc.entry.js",
+	"./ilzbfjg7.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ilzbfjg7.sc.entry.js",
 		0,
 		"common",
 		82
 	],
-	"./mqik6kmg.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mqik6kmg.entry.js",
-		0,
-		"common",
+	"./j66fx9bc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j66fx9bc.entry.js",
 		83
 	],
-	"./mqik6kmg.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mqik6kmg.sc.entry.js",
-		0,
-		"common",
+	"./j66fx9bc.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/j66fx9bc.sc.entry.js",
 		84
 	],
-	"./nhr77xez.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nhr77xez.entry.js",
+	"./jnylf5ki.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jnylf5ki.entry.js",
 		0,
 		"common",
 		85
 	],
-	"./nhr77xez.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nhr77xez.sc.entry.js",
+	"./jnylf5ki.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jnylf5ki.sc.entry.js",
 		0,
 		"common",
 		86
 	],
-	"./ntlsthn3.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ntlsthn3.entry.js",
+	"./jo5uvvdg.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jo5uvvdg.entry.js",
+		0,
+		"common",
 		87
 	],
-	"./ntlsthn3.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ntlsthn3.sc.entry.js",
+	"./jo5uvvdg.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/jo5uvvdg.sc.entry.js",
+		0,
+		"common",
 		88
 	],
-	"./nxuqytzx.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nxuqytzx.entry.js",
+	"./kbdajof4.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kbdajof4.entry.js",
 		0,
 		"common",
 		89
 	],
-	"./nxuqytzx.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nxuqytzx.sc.entry.js",
+	"./kbdajof4.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/kbdajof4.sc.entry.js",
 		0,
 		"common",
 		90
 	],
-	"./olkzc6dr.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/olkzc6dr.entry.js",
+	"./lfpzqjwk.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lfpzqjwk.entry.js",
 		0,
 		"common",
 		91
 	],
-	"./olkzc6dr.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/olkzc6dr.sc.entry.js",
+	"./lfpzqjwk.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lfpzqjwk.sc.entry.js",
 		0,
 		"common",
 		92
 	],
-	"./om5i0dsm.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/om5i0dsm.entry.js",
+	"./lhpbi0xj.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lhpbi0xj.entry.js",
 		0,
 		"common",
 		93
 	],
-	"./om5i0dsm.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/om5i0dsm.sc.entry.js",
+	"./lhpbi0xj.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lhpbi0xj.sc.entry.js",
 		0,
 		"common",
 		94
 	],
-	"./oszblgpf.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/oszblgpf.entry.js",
+	"./ljmlrwjn.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ljmlrwjn.entry.js",
 		0,
 		"common",
 		95
 	],
-	"./oszblgpf.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/oszblgpf.sc.entry.js",
+	"./ljmlrwjn.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ljmlrwjn.sc.entry.js",
 		0,
 		"common",
 		96
 	],
-	"./pze0hfsv.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/pze0hfsv.entry.js",
+	"./lwfmg2hj.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lwfmg2hj.entry.js",
 		0,
 		"common",
 		97
 	],
-	"./pze0hfsv.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/pze0hfsv.sc.entry.js",
+	"./lwfmg2hj.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lwfmg2hj.sc.entry.js",
 		0,
 		"common",
 		98
 	],
-	"./reriaxsx.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/reriaxsx.entry.js",
+	"./lyp3stzb.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lyp3stzb.entry.js",
 		0,
 		"common",
 		99
 	],
-	"./reriaxsx.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/reriaxsx.sc.entry.js",
+	"./lyp3stzb.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/lyp3stzb.sc.entry.js",
 		0,
 		"common",
 		100
 	],
-	"./rltleisd.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rltleisd.entry.js",
+	"./mcbq2r23.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mcbq2r23.entry.js",
 		0,
 		"common",
 		101
 	],
-	"./rltleisd.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rltleisd.sc.entry.js",
+	"./mcbq2r23.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mcbq2r23.sc.entry.js",
 		0,
 		"common",
 		102
 	],
-	"./rywx7u7y.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rywx7u7y.entry.js",
+	"./mm8konib.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mm8konib.entry.js",
 		0,
 		"common",
 		103
 	],
-	"./rywx7u7y.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rywx7u7y.sc.entry.js",
+	"./mm8konib.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/mm8konib.sc.entry.js",
 		0,
 		"common",
 		104
 	],
-	"./s0ihs6g2.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s0ihs6g2.entry.js",
+	"./montlozs.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/montlozs.entry.js",
 		0,
 		"common",
 		105
 	],
-	"./s0ihs6g2.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s0ihs6g2.sc.entry.js",
+	"./montlozs.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/montlozs.sc.entry.js",
 		0,
 		"common",
 		106
 	],
-	"./s1a9daht.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s1a9daht.entry.js",
+	"./nbcumgqm.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nbcumgqm.entry.js",
 		0,
 		"common",
 		107
 	],
-	"./s1a9daht.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/s1a9daht.sc.entry.js",
+	"./nbcumgqm.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nbcumgqm.sc.entry.js",
 		0,
 		"common",
 		108
 	],
-	"./skzvaxms.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/skzvaxms.entry.js",
+	"./nqouehvm.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nqouehvm.entry.js",
 		0,
 		"common",
 		109
 	],
-	"./skzvaxms.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/skzvaxms.sc.entry.js",
+	"./nqouehvm.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/nqouehvm.sc.entry.js",
 		0,
 		"common",
 		110
 	],
-	"./tlkmuszx.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/tlkmuszx.entry.js",
-		0,
-		"common",
+	"./ntlsthn3.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ntlsthn3.entry.js",
 		111
 	],
-	"./tlkmuszx.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/tlkmuszx.sc.entry.js",
-		0,
-		"common",
+	"./ntlsthn3.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ntlsthn3.sc.entry.js",
 		112
 	],
-	"./u21wriwl.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u21wriwl.entry.js",
+	"./ouevpaq6.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ouevpaq6.entry.js",
 		0,
 		"common",
 		113
 	],
-	"./u21wriwl.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u21wriwl.sc.entry.js",
+	"./ouevpaq6.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ouevpaq6.sc.entry.js",
 		0,
 		"common",
 		114
 	],
-	"./u6vnpl3q.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u6vnpl3q.entry.js",
+	"./pjlyljxh.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/pjlyljxh.entry.js",
 		0,
 		"common",
 		115
 	],
-	"./u6vnpl3q.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/u6vnpl3q.sc.entry.js",
+	"./pjlyljxh.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/pjlyljxh.sc.entry.js",
 		0,
 		"common",
 		116
 	],
-	"./ueuxuisb.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ueuxuisb.entry.js",
+	"./puryh41h.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/puryh41h.entry.js",
 		0,
 		"common",
 		117
 	],
-	"./ueuxuisb.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ueuxuisb.sc.entry.js",
+	"./puryh41h.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/puryh41h.sc.entry.js",
 		0,
 		"common",
 		118
 	],
-	"./uknv235c.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uknv235c.entry.js",
+	"./q8tgxoqn.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/q8tgxoqn.entry.js",
 		0,
 		"common",
 		119
 	],
-	"./uknv235c.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uknv235c.sc.entry.js",
+	"./q8tgxoqn.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/q8tgxoqn.sc.entry.js",
 		0,
 		"common",
 		120
 	],
-	"./umpoq86q.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/umpoq86q.entry.js",
+	"./qonoystt.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/qonoystt.entry.js",
 		0,
 		"common",
 		121
 	],
-	"./umpoq86q.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/umpoq86q.sc.entry.js",
+	"./qonoystt.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/qonoystt.sc.entry.js",
 		0,
 		"common",
 		122
 	],
-	"./uogyt54d.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uogyt54d.entry.js",
+	"./qvwgwxx7.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/qvwgwxx7.entry.js",
 		0,
 		"common",
 		123
 	],
-	"./uogyt54d.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uogyt54d.sc.entry.js",
+	"./qvwgwxx7.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/qvwgwxx7.sc.entry.js",
 		0,
 		"common",
 		124
 	],
-	"./usxnqnjo.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/usxnqnjo.entry.js",
+	"./ripi80zb.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ripi80zb.entry.js",
 		0,
 		"common",
 		125
 	],
-	"./usxnqnjo.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/usxnqnjo.sc.entry.js",
+	"./ripi80zb.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ripi80zb.sc.entry.js",
 		0,
 		"common",
 		126
 	],
-	"./uw0jxr9c.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uw0jxr9c.entry.js",
+	"./rqksuytp.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rqksuytp.entry.js",
 		0,
 		"common",
 		127
 	],
-	"./uw0jxr9c.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uw0jxr9c.sc.entry.js",
+	"./rqksuytp.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/rqksuytp.sc.entry.js",
 		0,
 		"common",
 		128
 	],
-	"./v1osu2ys.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/v1osu2ys.entry.js",
+	"./t3ahlg1u.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/t3ahlg1u.entry.js",
 		0,
 		"common",
 		129
 	],
-	"./v1osu2ys.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/v1osu2ys.sc.entry.js",
+	"./t3ahlg1u.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/t3ahlg1u.sc.entry.js",
 		0,
 		"common",
 		130
 	],
-	"./vjbd2d3z.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/vjbd2d3z.entry.js",
+	"./ubpxpkut.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ubpxpkut.entry.js",
 		0,
 		"common",
 		131
 	],
-	"./vjbd2d3z.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/vjbd2d3z.sc.entry.js",
+	"./ubpxpkut.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ubpxpkut.sc.entry.js",
 		0,
 		"common",
 		132
 	],
-	"./w1w8ptyb.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/w1w8ptyb.entry.js",
+	"./ujtvejfw.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ujtvejfw.entry.js",
 		0,
 		"common",
 		133
 	],
-	"./w1w8ptyb.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/w1w8ptyb.sc.entry.js",
+	"./ujtvejfw.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ujtvejfw.sc.entry.js",
 		0,
 		"common",
 		134
 	],
-	"./wab4rq7o.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wab4rq7o.entry.js",
+	"./ujzgtij1.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ujzgtij1.entry.js",
+		0,
+		"common",
 		135
 	],
-	"./wab4rq7o.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wab4rq7o.sc.entry.js",
+	"./ujzgtij1.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ujzgtij1.sc.entry.js",
+		0,
+		"common",
 		136
 	],
-	"./wew8hsrw.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wew8hsrw.entry.js",
+	"./v3mzxt80.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/v3mzxt80.entry.js",
 		"common",
 		137
 	],
-	"./wew8hsrw.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wew8hsrw.sc.entry.js",
+	"./v3mzxt80.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/v3mzxt80.sc.entry.js",
 		"common",
 		138
 	],
-	"./wrcbpqdl.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wrcbpqdl.entry.js",
+	"./v4bp8gqa.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/v4bp8gqa.entry.js",
 		0,
 		"common",
 		139
 	],
-	"./wrcbpqdl.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wrcbpqdl.sc.entry.js",
+	"./v4bp8gqa.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/v4bp8gqa.sc.entry.js",
 		0,
 		"common",
 		140
 	],
-	"./wuyxdemq.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wuyxdemq.entry.js",
+	"./vmkrep9v.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/vmkrep9v.entry.js",
 		0,
 		"common",
 		141
 	],
-	"./wuyxdemq.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wuyxdemq.sc.entry.js",
+	"./vmkrep9v.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/vmkrep9v.sc.entry.js",
 		0,
 		"common",
 		142
 	],
-	"./xcsewabo.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xcsewabo.entry.js",
+	"./vyajviiv.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/vyajviiv.entry.js",
+		0,
+		"common",
 		143
 	],
-	"./xcsewabo.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xcsewabo.sc.entry.js",
+	"./vyajviiv.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/vyajviiv.sc.entry.js",
+		0,
+		"common",
 		144
 	],
-	"./xdo4bwvv.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xdo4bwvv.entry.js",
+	"./wwxoh75w.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wwxoh75w.entry.js",
+		0,
+		"common",
 		145
 	],
-	"./xdo4bwvv.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xdo4bwvv.sc.entry.js",
+	"./wwxoh75w.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wwxoh75w.sc.entry.js",
+		0,
+		"common",
 		146
 	],
-	"./xpzzevkf.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xpzzevkf.entry.js",
+	"./wyjsq9xc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wyjsq9xc.entry.js",
 		0,
 		"common",
 		147
 	],
-	"./xpzzevkf.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xpzzevkf.sc.entry.js",
+	"./wyjsq9xc.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/wyjsq9xc.sc.entry.js",
 		0,
 		"common",
 		148
 	],
-	"./xwqkxa1e.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xwqkxa1e.entry.js",
+	"./xaspetje.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xaspetje.entry.js",
 		0,
 		"common",
 		149
 	],
-	"./xwqkxa1e.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xwqkxa1e.sc.entry.js",
+	"./xaspetje.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xaspetje.sc.entry.js",
 		0,
 		"common",
 		150
 	],
-	"./yfd10cv9.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yfd10cv9.entry.js",
-		0,
-		"common",
+	"./xcsewabo.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xcsewabo.entry.js",
 		151
 	],
-	"./yfd10cv9.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yfd10cv9.sc.entry.js",
-		0,
-		"common",
+	"./xcsewabo.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xcsewabo.sc.entry.js",
 		152
 	],
-	"./ykcub6au.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ykcub6au.entry.js",
+	"./xddssfba.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xddssfba.entry.js",
 		0,
 		"common",
 		153
 	],
-	"./ykcub6au.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ykcub6au.sc.entry.js",
+	"./xddssfba.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xddssfba.sc.entry.js",
 		0,
 		"common",
 		154
 	],
-	"./yph33izb.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yph33izb.entry.js",
+	"./xejzifhx.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xejzifhx.entry.js",
 		0,
 		"common",
 		155
 	],
-	"./yph33izb.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yph33izb.sc.entry.js",
+	"./xejzifhx.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xejzifhx.sc.entry.js",
 		0,
 		"common",
 		156
 	],
-	"./ysezf9rx.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ysezf9rx.entry.js",
+	"./xgggkkjr.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xgggkkjr.entry.js",
 		0,
 		"common",
 		157
 	],
-	"./ysezf9rx.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ysezf9rx.sc.entry.js",
+	"./xgggkkjr.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/xgggkkjr.sc.entry.js",
 		0,
 		"common",
 		158
 	],
-	"./yzayvfxb.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yzayvfxb.entry.js",
-		0,
+	"./yvqnqulj.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yvqnqulj.entry.js",
 		"common",
 		159
 	],
-	"./yzayvfxb.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yzayvfxb.sc.entry.js",
-		0,
+	"./yvqnqulj.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/yvqnqulj.sc.entry.js",
 		"common",
 		160
 	],
-	"./zjet0lju.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zjet0lju.entry.js",
+	"./z8chb03e.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/z8chb03e.entry.js",
 		0,
 		"common",
 		161
 	],
-	"./zjet0lju.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zjet0lju.sc.entry.js",
+	"./z8chb03e.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/z8chb03e.sc.entry.js",
 		0,
 		"common",
 		162
 	],
-	"./zradig84.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zradig84.entry.js",
-		0,
+	"./zzifk9rl.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zzifk9rl.entry.js",
 		"common",
 		163
 	],
-	"./zradig84.sc.entry.js": [
-		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zradig84.sc.entry.js",
-		0,
+	"./zzifk9rl.sc.entry.js": [
+		"../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/zzifk9rl.sc.entry.js",
 		"common",
 		164
 	]
@@ -1681,10 +1689,739 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg sync ./!./!../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!./ .svg$":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg sync nonrecursive !/Users/andredavcev/Projects/theory/node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg .svg$ ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./ios-add-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-add-circle-outline.svg",
+	"./ios-add-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-add-circle.svg",
+	"./ios-add.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-add.svg",
+	"./ios-airplane.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-airplane.svg",
+	"./ios-alarm.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-alarm.svg",
+	"./ios-albums.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-albums.svg",
+	"./ios-alert.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-alert.svg",
+	"./ios-american-football.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-american-football.svg",
+	"./ios-analytics.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-analytics.svg",
+	"./ios-aperture.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-aperture.svg",
+	"./ios-apps.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-apps.svg",
+	"./ios-appstore.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-appstore.svg",
+	"./ios-archive.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-archive.svg",
+	"./ios-arrow-back.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-back.svg",
+	"./ios-arrow-down.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-down.svg",
+	"./ios-arrow-dropdown-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-dropdown-circle.svg",
+	"./ios-arrow-dropdown.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-dropdown.svg",
+	"./ios-arrow-dropleft-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-dropleft-circle.svg",
+	"./ios-arrow-dropleft.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-dropleft.svg",
+	"./ios-arrow-dropright-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-dropright-circle.svg",
+	"./ios-arrow-dropright.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-dropright.svg",
+	"./ios-arrow-dropup-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-dropup-circle.svg",
+	"./ios-arrow-dropup.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-dropup.svg",
+	"./ios-arrow-forward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-forward.svg",
+	"./ios-arrow-round-back.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-round-back.svg",
+	"./ios-arrow-round-down.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-round-down.svg",
+	"./ios-arrow-round-forward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-round-forward.svg",
+	"./ios-arrow-round-up.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-round-up.svg",
+	"./ios-arrow-up.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-arrow-up.svg",
+	"./ios-at.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-at.svg",
+	"./ios-attach.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-attach.svg",
+	"./ios-backspace.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-backspace.svg",
+	"./ios-barcode.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-barcode.svg",
+	"./ios-baseball.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-baseball.svg",
+	"./ios-basket.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-basket.svg",
+	"./ios-basketball.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-basketball.svg",
+	"./ios-battery-charging.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-battery-charging.svg",
+	"./ios-battery-dead.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-battery-dead.svg",
+	"./ios-battery-full.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-battery-full.svg",
+	"./ios-beaker.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-beaker.svg",
+	"./ios-bed.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bed.svg",
+	"./ios-beer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-beer.svg",
+	"./ios-bicycle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bicycle.svg",
+	"./ios-bluetooth.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bluetooth.svg",
+	"./ios-boat.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-boat.svg",
+	"./ios-body.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-body.svg",
+	"./ios-bonfire.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bonfire.svg",
+	"./ios-book.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-book.svg",
+	"./ios-bookmark.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bookmark.svg",
+	"./ios-bookmarks.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bookmarks.svg",
+	"./ios-bowtie.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bowtie.svg",
+	"./ios-briefcase.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-briefcase.svg",
+	"./ios-browsers.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-browsers.svg",
+	"./ios-brush.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-brush.svg",
+	"./ios-bug.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bug.svg",
+	"./ios-build.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-build.svg",
+	"./ios-bulb.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bulb.svg",
+	"./ios-bus.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-bus.svg",
+	"./ios-business.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-business.svg",
+	"./ios-cafe.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cafe.svg",
+	"./ios-calculator.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-calculator.svg",
+	"./ios-calendar.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-calendar.svg",
+	"./ios-call.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-call.svg",
+	"./ios-camera.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-camera.svg",
+	"./ios-car.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-car.svg",
+	"./ios-card.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-card.svg",
+	"./ios-cart.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cart.svg",
+	"./ios-cash.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cash.svg",
+	"./ios-cellular.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cellular.svg",
+	"./ios-chatboxes.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-chatboxes.svg",
+	"./ios-chatbubbles.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-chatbubbles.svg",
+	"./ios-checkbox-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-checkbox-outline.svg",
+	"./ios-checkbox.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-checkbox.svg",
+	"./ios-checkmark-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-checkmark-circle-outline.svg",
+	"./ios-checkmark-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-checkmark-circle.svg",
+	"./ios-checkmark.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-checkmark.svg",
+	"./ios-clipboard.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-clipboard.svg",
+	"./ios-clock.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-clock.svg",
+	"./ios-close-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-close-circle-outline.svg",
+	"./ios-close-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-close-circle.svg",
+	"./ios-close.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-close.svg",
+	"./ios-cloud-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cloud-circle.svg",
+	"./ios-cloud-done.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cloud-done.svg",
+	"./ios-cloud-download.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cloud-download.svg",
+	"./ios-cloud-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cloud-outline.svg",
+	"./ios-cloud-upload.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cloud-upload.svg",
+	"./ios-cloud.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cloud.svg",
+	"./ios-cloudy-night.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cloudy-night.svg",
+	"./ios-cloudy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cloudy.svg",
+	"./ios-code-download.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-code-download.svg",
+	"./ios-code-working.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-code-working.svg",
+	"./ios-code.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-code.svg",
+	"./ios-cog.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cog.svg",
+	"./ios-color-fill.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-color-fill.svg",
+	"./ios-color-filter.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-color-filter.svg",
+	"./ios-color-palette.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-color-palette.svg",
+	"./ios-color-wand.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-color-wand.svg",
+	"./ios-compass.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-compass.svg",
+	"./ios-construct.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-construct.svg",
+	"./ios-contact.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-contact.svg",
+	"./ios-contacts.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-contacts.svg",
+	"./ios-contract.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-contract.svg",
+	"./ios-contrast.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-contrast.svg",
+	"./ios-copy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-copy.svg",
+	"./ios-create.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-create.svg",
+	"./ios-crop.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-crop.svg",
+	"./ios-cube.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cube.svg",
+	"./ios-cut.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-cut.svg",
+	"./ios-desktop.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-desktop.svg",
+	"./ios-disc.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-disc.svg",
+	"./ios-document.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-document.svg",
+	"./ios-done-all.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-done-all.svg",
+	"./ios-download.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-download.svg",
+	"./ios-easel.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-easel.svg",
+	"./ios-egg.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-egg.svg",
+	"./ios-exit.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-exit.svg",
+	"./ios-expand.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-expand.svg",
+	"./ios-eye-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-eye-off.svg",
+	"./ios-eye.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-eye.svg",
+	"./ios-fastforward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-fastforward.svg",
+	"./ios-female.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-female.svg",
+	"./ios-filing.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-filing.svg",
+	"./ios-film.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-film.svg",
+	"./ios-finger-print.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-finger-print.svg",
+	"./ios-fitness.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-fitness.svg",
+	"./ios-flag.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-flag.svg",
+	"./ios-flame.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-flame.svg",
+	"./ios-flash-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-flash-off.svg",
+	"./ios-flash.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-flash.svg",
+	"./ios-flashlight.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-flashlight.svg",
+	"./ios-flask.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-flask.svg",
+	"./ios-flower.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-flower.svg",
+	"./ios-folder-open.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-folder-open.svg",
+	"./ios-folder.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-folder.svg",
+	"./ios-football.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-football.svg",
+	"./ios-funnel.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-funnel.svg",
+	"./ios-gift.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-gift.svg",
+	"./ios-git-branch.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-git-branch.svg",
+	"./ios-git-commit.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-git-commit.svg",
+	"./ios-git-compare.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-git-compare.svg",
+	"./ios-git-merge.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-git-merge.svg",
+	"./ios-git-network.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-git-network.svg",
+	"./ios-git-pull-request.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-git-pull-request.svg",
+	"./ios-glasses.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-glasses.svg",
+	"./ios-globe.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-globe.svg",
+	"./ios-grid.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-grid.svg",
+	"./ios-hammer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-hammer.svg",
+	"./ios-hand.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-hand.svg",
+	"./ios-happy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-happy.svg",
+	"./ios-headset.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-headset.svg",
+	"./ios-heart-dislike.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-heart-dislike.svg",
+	"./ios-heart-empty.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-heart-empty.svg",
+	"./ios-heart-half.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-heart-half.svg",
+	"./ios-heart.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-heart.svg",
+	"./ios-help-buoy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-help-buoy.svg",
+	"./ios-help-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-help-circle-outline.svg",
+	"./ios-help-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-help-circle.svg",
+	"./ios-help.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-help.svg",
+	"./ios-home.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-home.svg",
+	"./ios-hourglass.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-hourglass.svg",
+	"./ios-ice-cream.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-ice-cream.svg",
+	"./ios-image.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-image.svg",
+	"./ios-images.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-images.svg",
+	"./ios-infinite.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-infinite.svg",
+	"./ios-information-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-information-circle-outline.svg",
+	"./ios-information-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-information-circle.svg",
+	"./ios-information.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-information.svg",
+	"./ios-jet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-jet.svg",
+	"./ios-journal.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-journal.svg",
+	"./ios-key.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-key.svg",
+	"./ios-keypad.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-keypad.svg",
+	"./ios-laptop.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-laptop.svg",
+	"./ios-leaf.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-leaf.svg",
+	"./ios-link.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-link.svg",
+	"./ios-list-box.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-list-box.svg",
+	"./ios-list.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-list.svg",
+	"./ios-locate.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-locate.svg",
+	"./ios-lock.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-lock.svg",
+	"./ios-log-in.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-log-in.svg",
+	"./ios-log-out.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-log-out.svg",
+	"./ios-magnet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-magnet.svg",
+	"./ios-mail-open.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-mail-open.svg",
+	"./ios-mail-unread.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-mail-unread.svg",
+	"./ios-mail.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-mail.svg",
+	"./ios-male.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-male.svg",
+	"./ios-man.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-man.svg",
+	"./ios-map.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-map.svg",
+	"./ios-medal.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-medal.svg",
+	"./ios-medical.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-medical.svg",
+	"./ios-medkit.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-medkit.svg",
+	"./ios-megaphone.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-megaphone.svg",
+	"./ios-menu.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-menu.svg",
+	"./ios-mic-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-mic-off.svg",
+	"./ios-mic.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-mic.svg",
+	"./ios-microphone.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-microphone.svg",
+	"./ios-moon.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-moon.svg",
+	"./ios-more.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-more.svg",
+	"./ios-move.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-move.svg",
+	"./ios-musical-note.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-musical-note.svg",
+	"./ios-musical-notes.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-musical-notes.svg",
+	"./ios-navigate.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-navigate.svg",
+	"./ios-notifications-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-notifications-off.svg",
+	"./ios-notifications-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-notifications-outline.svg",
+	"./ios-notifications.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-notifications.svg",
+	"./ios-nuclear.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-nuclear.svg",
+	"./ios-nutrition.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-nutrition.svg",
+	"./ios-open.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-open.svg",
+	"./ios-options.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-options.svg",
+	"./ios-outlet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-outlet.svg",
+	"./ios-paper-plane.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-paper-plane.svg",
+	"./ios-paper.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-paper.svg",
+	"./ios-partly-sunny.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-partly-sunny.svg",
+	"./ios-pause.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-pause.svg",
+	"./ios-paw.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-paw.svg",
+	"./ios-people.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-people.svg",
+	"./ios-person-add.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-person-add.svg",
+	"./ios-person.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-person.svg",
+	"./ios-phone-landscape.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-phone-landscape.svg",
+	"./ios-phone-portrait.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-phone-portrait.svg",
+	"./ios-photos.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-photos.svg",
+	"./ios-pie.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-pie.svg",
+	"./ios-pin.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-pin.svg",
+	"./ios-pint.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-pint.svg",
+	"./ios-pizza.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-pizza.svg",
+	"./ios-planet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-planet.svg",
+	"./ios-play-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-play-circle.svg",
+	"./ios-play.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-play.svg",
+	"./ios-podium.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-podium.svg",
+	"./ios-power.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-power.svg",
+	"./ios-pricetag.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-pricetag.svg",
+	"./ios-pricetags.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-pricetags.svg",
+	"./ios-print.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-print.svg",
+	"./ios-pulse.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-pulse.svg",
+	"./ios-qr-scanner.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-qr-scanner.svg",
+	"./ios-quote.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-quote.svg",
+	"./ios-radio-button-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-radio-button-off.svg",
+	"./ios-radio-button-on.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-radio-button-on.svg",
+	"./ios-radio.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-radio.svg",
+	"./ios-rainy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-rainy.svg",
+	"./ios-recording.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-recording.svg",
+	"./ios-redo.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-redo.svg",
+	"./ios-refresh-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-refresh-circle.svg",
+	"./ios-refresh.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-refresh.svg",
+	"./ios-remove-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-remove-circle-outline.svg",
+	"./ios-remove-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-remove-circle.svg",
+	"./ios-remove.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-remove.svg",
+	"./ios-reorder.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-reorder.svg",
+	"./ios-repeat.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-repeat.svg",
+	"./ios-resize.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-resize.svg",
+	"./ios-restaurant.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-restaurant.svg",
+	"./ios-return-left.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-return-left.svg",
+	"./ios-return-right.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-return-right.svg",
+	"./ios-reverse-camera.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-reverse-camera.svg",
+	"./ios-rewind.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-rewind.svg",
+	"./ios-ribbon.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-ribbon.svg",
+	"./ios-rocket.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-rocket.svg",
+	"./ios-rose.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-rose.svg",
+	"./ios-sad.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-sad.svg",
+	"./ios-save.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-save.svg",
+	"./ios-school.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-school.svg",
+	"./ios-search.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-search.svg",
+	"./ios-send.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-send.svg",
+	"./ios-settings.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-settings.svg",
+	"./ios-share-alt.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-share-alt.svg",
+	"./ios-share.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-share.svg",
+	"./ios-shirt.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-shirt.svg",
+	"./ios-shuffle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-shuffle.svg",
+	"./ios-skip-backward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-skip-backward.svg",
+	"./ios-skip-forward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-skip-forward.svg",
+	"./ios-snow.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-snow.svg",
+	"./ios-speedometer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-speedometer.svg",
+	"./ios-square-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-square-outline.svg",
+	"./ios-square.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-square.svg",
+	"./ios-star-half.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-star-half.svg",
+	"./ios-star-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-star-outline.svg",
+	"./ios-star.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-star.svg",
+	"./ios-stats.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-stats.svg",
+	"./ios-stopwatch.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-stopwatch.svg",
+	"./ios-subway.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-subway.svg",
+	"./ios-sunny.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-sunny.svg",
+	"./ios-swap.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-swap.svg",
+	"./ios-switch.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-switch.svg",
+	"./ios-sync.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-sync.svg",
+	"./ios-tablet-landscape.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-tablet-landscape.svg",
+	"./ios-tablet-portrait.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-tablet-portrait.svg",
+	"./ios-tennisball.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-tennisball.svg",
+	"./ios-text.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-text.svg",
+	"./ios-thermometer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-thermometer.svg",
+	"./ios-thumbs-down.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-thumbs-down.svg",
+	"./ios-thumbs-up.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-thumbs-up.svg",
+	"./ios-thunderstorm.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-thunderstorm.svg",
+	"./ios-time.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-time.svg",
+	"./ios-timer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-timer.svg",
+	"./ios-today.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-today.svg",
+	"./ios-train.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-train.svg",
+	"./ios-transgender.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-transgender.svg",
+	"./ios-trash.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-trash.svg",
+	"./ios-trending-down.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-trending-down.svg",
+	"./ios-trending-up.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-trending-up.svg",
+	"./ios-trophy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-trophy.svg",
+	"./ios-tv.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-tv.svg",
+	"./ios-umbrella.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-umbrella.svg",
+	"./ios-undo.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-undo.svg",
+	"./ios-unlock.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-unlock.svg",
+	"./ios-videocam.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-videocam.svg",
+	"./ios-volume-high.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-volume-high.svg",
+	"./ios-volume-low.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-volume-low.svg",
+	"./ios-volume-mute.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-volume-mute.svg",
+	"./ios-volume-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-volume-off.svg",
+	"./ios-walk.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-walk.svg",
+	"./ios-wallet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-wallet.svg",
+	"./ios-warning.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-warning.svg",
+	"./ios-watch.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-watch.svg",
+	"./ios-water.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-water.svg",
+	"./ios-wifi.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-wifi.svg",
+	"./ios-wine.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-wine.svg",
+	"./ios-woman.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/ios-woman.svg",
+	"./logo-android.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-android.svg",
+	"./logo-angular.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-angular.svg",
+	"./logo-apple.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-apple.svg",
+	"./logo-bitbucket.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-bitbucket.svg",
+	"./logo-bitcoin.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-bitcoin.svg",
+	"./logo-buffer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-buffer.svg",
+	"./logo-chrome.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-chrome.svg",
+	"./logo-closed-captioning.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-closed-captioning.svg",
+	"./logo-codepen.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-codepen.svg",
+	"./logo-css3.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-css3.svg",
+	"./logo-designernews.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-designernews.svg",
+	"./logo-dribbble.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-dribbble.svg",
+	"./logo-dropbox.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-dropbox.svg",
+	"./logo-euro.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-euro.svg",
+	"./logo-facebook.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-facebook.svg",
+	"./logo-flickr.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-flickr.svg",
+	"./logo-foursquare.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-foursquare.svg",
+	"./logo-freebsd-devil.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-freebsd-devil.svg",
+	"./logo-game-controller-a.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-game-controller-a.svg",
+	"./logo-game-controller-b.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-game-controller-b.svg",
+	"./logo-github.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-github.svg",
+	"./logo-google.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-google.svg",
+	"./logo-googleplus.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-googleplus.svg",
+	"./logo-hackernews.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-hackernews.svg",
+	"./logo-html5.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-html5.svg",
+	"./logo-instagram.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-instagram.svg",
+	"./logo-ionic.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-ionic.svg",
+	"./logo-ionitron.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-ionitron.svg",
+	"./logo-javascript.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-javascript.svg",
+	"./logo-linkedin.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-linkedin.svg",
+	"./logo-markdown.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-markdown.svg",
+	"./logo-model-s.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-model-s.svg",
+	"./logo-no-smoking.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-no-smoking.svg",
+	"./logo-nodejs.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-nodejs.svg",
+	"./logo-npm.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-npm.svg",
+	"./logo-octocat.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-octocat.svg",
+	"./logo-pinterest.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-pinterest.svg",
+	"./logo-playstation.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-playstation.svg",
+	"./logo-polymer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-polymer.svg",
+	"./logo-python.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-python.svg",
+	"./logo-reddit.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-reddit.svg",
+	"./logo-rss.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-rss.svg",
+	"./logo-sass.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-sass.svg",
+	"./logo-skype.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-skype.svg",
+	"./logo-slack.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-slack.svg",
+	"./logo-snapchat.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-snapchat.svg",
+	"./logo-steam.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-steam.svg",
+	"./logo-tumblr.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-tumblr.svg",
+	"./logo-tux.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-tux.svg",
+	"./logo-twitch.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-twitch.svg",
+	"./logo-twitter.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-twitter.svg",
+	"./logo-usd.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-usd.svg",
+	"./logo-vimeo.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-vimeo.svg",
+	"./logo-vk.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-vk.svg",
+	"./logo-whatsapp.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-whatsapp.svg",
+	"./logo-windows.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-windows.svg",
+	"./logo-wordpress.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-wordpress.svg",
+	"./logo-xbox.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-xbox.svg",
+	"./logo-xing.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-xing.svg",
+	"./logo-yahoo.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-yahoo.svg",
+	"./logo-yen.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-yen.svg",
+	"./logo-youtube.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/logo-youtube.svg",
+	"./md-add-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-add-circle-outline.svg",
+	"./md-add-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-add-circle.svg",
+	"./md-add.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-add.svg",
+	"./md-airplane.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-airplane.svg",
+	"./md-alarm.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-alarm.svg",
+	"./md-albums.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-albums.svg",
+	"./md-alert.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-alert.svg",
+	"./md-american-football.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-american-football.svg",
+	"./md-analytics.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-analytics.svg",
+	"./md-aperture.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-aperture.svg",
+	"./md-apps.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-apps.svg",
+	"./md-appstore.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-appstore.svg",
+	"./md-archive.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-archive.svg",
+	"./md-arrow-back.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-back.svg",
+	"./md-arrow-down.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-down.svg",
+	"./md-arrow-dropdown-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-dropdown-circle.svg",
+	"./md-arrow-dropdown.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-dropdown.svg",
+	"./md-arrow-dropleft-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-dropleft-circle.svg",
+	"./md-arrow-dropleft.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-dropleft.svg",
+	"./md-arrow-dropright-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-dropright-circle.svg",
+	"./md-arrow-dropright.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-dropright.svg",
+	"./md-arrow-dropup-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-dropup-circle.svg",
+	"./md-arrow-dropup.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-dropup.svg",
+	"./md-arrow-forward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-forward.svg",
+	"./md-arrow-round-back.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-round-back.svg",
+	"./md-arrow-round-down.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-round-down.svg",
+	"./md-arrow-round-forward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-round-forward.svg",
+	"./md-arrow-round-up.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-round-up.svg",
+	"./md-arrow-up.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-arrow-up.svg",
+	"./md-at.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-at.svg",
+	"./md-attach.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-attach.svg",
+	"./md-backspace.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-backspace.svg",
+	"./md-barcode.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-barcode.svg",
+	"./md-baseball.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-baseball.svg",
+	"./md-basket.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-basket.svg",
+	"./md-basketball.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-basketball.svg",
+	"./md-battery-charging.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-battery-charging.svg",
+	"./md-battery-dead.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-battery-dead.svg",
+	"./md-battery-full.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-battery-full.svg",
+	"./md-beaker.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-beaker.svg",
+	"./md-bed.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bed.svg",
+	"./md-beer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-beer.svg",
+	"./md-bicycle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bicycle.svg",
+	"./md-bluetooth.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bluetooth.svg",
+	"./md-boat.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-boat.svg",
+	"./md-body.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-body.svg",
+	"./md-bonfire.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bonfire.svg",
+	"./md-book.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-book.svg",
+	"./md-bookmark.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bookmark.svg",
+	"./md-bookmarks.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bookmarks.svg",
+	"./md-bowtie.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bowtie.svg",
+	"./md-briefcase.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-briefcase.svg",
+	"./md-browsers.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-browsers.svg",
+	"./md-brush.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-brush.svg",
+	"./md-bug.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bug.svg",
+	"./md-build.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-build.svg",
+	"./md-bulb.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bulb.svg",
+	"./md-bus.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-bus.svg",
+	"./md-business.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-business.svg",
+	"./md-cafe.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cafe.svg",
+	"./md-calculator.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-calculator.svg",
+	"./md-calendar.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-calendar.svg",
+	"./md-call.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-call.svg",
+	"./md-camera.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-camera.svg",
+	"./md-car.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-car.svg",
+	"./md-card.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-card.svg",
+	"./md-cart.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cart.svg",
+	"./md-cash.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cash.svg",
+	"./md-cellular.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cellular.svg",
+	"./md-chatboxes.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-chatboxes.svg",
+	"./md-chatbubbles.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-chatbubbles.svg",
+	"./md-checkbox-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-checkbox-outline.svg",
+	"./md-checkbox.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-checkbox.svg",
+	"./md-checkmark-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-checkmark-circle-outline.svg",
+	"./md-checkmark-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-checkmark-circle.svg",
+	"./md-checkmark.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-checkmark.svg",
+	"./md-clipboard.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-clipboard.svg",
+	"./md-clock.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-clock.svg",
+	"./md-close-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-close-circle-outline.svg",
+	"./md-close-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-close-circle.svg",
+	"./md-close.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-close.svg",
+	"./md-cloud-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cloud-circle.svg",
+	"./md-cloud-done.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cloud-done.svg",
+	"./md-cloud-download.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cloud-download.svg",
+	"./md-cloud-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cloud-outline.svg",
+	"./md-cloud-upload.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cloud-upload.svg",
+	"./md-cloud.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cloud.svg",
+	"./md-cloudy-night.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cloudy-night.svg",
+	"./md-cloudy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cloudy.svg",
+	"./md-code-download.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-code-download.svg",
+	"./md-code-working.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-code-working.svg",
+	"./md-code.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-code.svg",
+	"./md-cog.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cog.svg",
+	"./md-color-fill.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-color-fill.svg",
+	"./md-color-filter.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-color-filter.svg",
+	"./md-color-palette.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-color-palette.svg",
+	"./md-color-wand.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-color-wand.svg",
+	"./md-compass.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-compass.svg",
+	"./md-construct.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-construct.svg",
+	"./md-contact.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-contact.svg",
+	"./md-contacts.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-contacts.svg",
+	"./md-contract.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-contract.svg",
+	"./md-contrast.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-contrast.svg",
+	"./md-copy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-copy.svg",
+	"./md-create.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-create.svg",
+	"./md-crop.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-crop.svg",
+	"./md-cube.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cube.svg",
+	"./md-cut.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-cut.svg",
+	"./md-desktop.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-desktop.svg",
+	"./md-disc.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-disc.svg",
+	"./md-document.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-document.svg",
+	"./md-done-all.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-done-all.svg",
+	"./md-download.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-download.svg",
+	"./md-easel.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-easel.svg",
+	"./md-egg.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-egg.svg",
+	"./md-exit.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-exit.svg",
+	"./md-expand.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-expand.svg",
+	"./md-eye-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-eye-off.svg",
+	"./md-eye.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-eye.svg",
+	"./md-fastforward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-fastforward.svg",
+	"./md-female.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-female.svg",
+	"./md-filing.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-filing.svg",
+	"./md-film.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-film.svg",
+	"./md-finger-print.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-finger-print.svg",
+	"./md-fitness.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-fitness.svg",
+	"./md-flag.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-flag.svg",
+	"./md-flame.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-flame.svg",
+	"./md-flash-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-flash-off.svg",
+	"./md-flash.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-flash.svg",
+	"./md-flashlight.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-flashlight.svg",
+	"./md-flask.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-flask.svg",
+	"./md-flower.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-flower.svg",
+	"./md-folder-open.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-folder-open.svg",
+	"./md-folder.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-folder.svg",
+	"./md-football.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-football.svg",
+	"./md-funnel.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-funnel.svg",
+	"./md-gift.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-gift.svg",
+	"./md-git-branch.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-git-branch.svg",
+	"./md-git-commit.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-git-commit.svg",
+	"./md-git-compare.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-git-compare.svg",
+	"./md-git-merge.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-git-merge.svg",
+	"./md-git-network.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-git-network.svg",
+	"./md-git-pull-request.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-git-pull-request.svg",
+	"./md-glasses.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-glasses.svg",
+	"./md-globe.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-globe.svg",
+	"./md-grid.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-grid.svg",
+	"./md-hammer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-hammer.svg",
+	"./md-hand.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-hand.svg",
+	"./md-happy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-happy.svg",
+	"./md-headset.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-headset.svg",
+	"./md-heart-dislike.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-heart-dislike.svg",
+	"./md-heart-empty.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-heart-empty.svg",
+	"./md-heart-half.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-heart-half.svg",
+	"./md-heart.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-heart.svg",
+	"./md-help-buoy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-help-buoy.svg",
+	"./md-help-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-help-circle-outline.svg",
+	"./md-help-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-help-circle.svg",
+	"./md-help.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-help.svg",
+	"./md-home.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-home.svg",
+	"./md-hourglass.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-hourglass.svg",
+	"./md-ice-cream.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-ice-cream.svg",
+	"./md-image.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-image.svg",
+	"./md-images.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-images.svg",
+	"./md-infinite.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-infinite.svg",
+	"./md-information-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-information-circle-outline.svg",
+	"./md-information-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-information-circle.svg",
+	"./md-information.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-information.svg",
+	"./md-jet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-jet.svg",
+	"./md-journal.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-journal.svg",
+	"./md-key.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-key.svg",
+	"./md-keypad.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-keypad.svg",
+	"./md-laptop.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-laptop.svg",
+	"./md-leaf.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-leaf.svg",
+	"./md-link.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-link.svg",
+	"./md-list-box.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-list-box.svg",
+	"./md-list.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-list.svg",
+	"./md-locate.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-locate.svg",
+	"./md-lock.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-lock.svg",
+	"./md-log-in.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-log-in.svg",
+	"./md-log-out.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-log-out.svg",
+	"./md-magnet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-magnet.svg",
+	"./md-mail-open.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-mail-open.svg",
+	"./md-mail-unread.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-mail-unread.svg",
+	"./md-mail.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-mail.svg",
+	"./md-male.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-male.svg",
+	"./md-man.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-man.svg",
+	"./md-map.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-map.svg",
+	"./md-medal.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-medal.svg",
+	"./md-medical.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-medical.svg",
+	"./md-medkit.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-medkit.svg",
+	"./md-megaphone.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-megaphone.svg",
+	"./md-menu.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-menu.svg",
+	"./md-mic-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-mic-off.svg",
+	"./md-mic.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-mic.svg",
+	"./md-microphone.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-microphone.svg",
+	"./md-moon.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-moon.svg",
+	"./md-more.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-more.svg",
+	"./md-move.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-move.svg",
+	"./md-musical-note.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-musical-note.svg",
+	"./md-musical-notes.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-musical-notes.svg",
+	"./md-navigate.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-navigate.svg",
+	"./md-notifications-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-notifications-off.svg",
+	"./md-notifications-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-notifications-outline.svg",
+	"./md-notifications.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-notifications.svg",
+	"./md-nuclear.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-nuclear.svg",
+	"./md-nutrition.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-nutrition.svg",
+	"./md-open.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-open.svg",
+	"./md-options.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-options.svg",
+	"./md-outlet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-outlet.svg",
+	"./md-paper-plane.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-paper-plane.svg",
+	"./md-paper.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-paper.svg",
+	"./md-partly-sunny.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-partly-sunny.svg",
+	"./md-pause.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-pause.svg",
+	"./md-paw.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-paw.svg",
+	"./md-people.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-people.svg",
+	"./md-person-add.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-person-add.svg",
+	"./md-person.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-person.svg",
+	"./md-phone-landscape.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-phone-landscape.svg",
+	"./md-phone-portrait.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-phone-portrait.svg",
+	"./md-photos.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-photos.svg",
+	"./md-pie.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-pie.svg",
+	"./md-pin.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-pin.svg",
+	"./md-pint.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-pint.svg",
+	"./md-pizza.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-pizza.svg",
+	"./md-planet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-planet.svg",
+	"./md-play-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-play-circle.svg",
+	"./md-play.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-play.svg",
+	"./md-podium.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-podium.svg",
+	"./md-power.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-power.svg",
+	"./md-pricetag.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-pricetag.svg",
+	"./md-pricetags.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-pricetags.svg",
+	"./md-print.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-print.svg",
+	"./md-pulse.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-pulse.svg",
+	"./md-qr-scanner.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-qr-scanner.svg",
+	"./md-quote.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-quote.svg",
+	"./md-radio-button-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-radio-button-off.svg",
+	"./md-radio-button-on.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-radio-button-on.svg",
+	"./md-radio.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-radio.svg",
+	"./md-rainy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-rainy.svg",
+	"./md-recording.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-recording.svg",
+	"./md-redo.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-redo.svg",
+	"./md-refresh-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-refresh-circle.svg",
+	"./md-refresh.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-refresh.svg",
+	"./md-remove-circle-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-remove-circle-outline.svg",
+	"./md-remove-circle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-remove-circle.svg",
+	"./md-remove.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-remove.svg",
+	"./md-reorder.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-reorder.svg",
+	"./md-repeat.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-repeat.svg",
+	"./md-resize.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-resize.svg",
+	"./md-restaurant.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-restaurant.svg",
+	"./md-return-left.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-return-left.svg",
+	"./md-return-right.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-return-right.svg",
+	"./md-reverse-camera.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-reverse-camera.svg",
+	"./md-rewind.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-rewind.svg",
+	"./md-ribbon.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-ribbon.svg",
+	"./md-rocket.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-rocket.svg",
+	"./md-rose.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-rose.svg",
+	"./md-sad.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-sad.svg",
+	"./md-save.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-save.svg",
+	"./md-school.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-school.svg",
+	"./md-search.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-search.svg",
+	"./md-send.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-send.svg",
+	"./md-settings.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-settings.svg",
+	"./md-share-alt.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-share-alt.svg",
+	"./md-share.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-share.svg",
+	"./md-shirt.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-shirt.svg",
+	"./md-shuffle.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-shuffle.svg",
+	"./md-skip-backward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-skip-backward.svg",
+	"./md-skip-forward.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-skip-forward.svg",
+	"./md-snow.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-snow.svg",
+	"./md-speedometer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-speedometer.svg",
+	"./md-square-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-square-outline.svg",
+	"./md-square.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-square.svg",
+	"./md-star-half.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-star-half.svg",
+	"./md-star-outline.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-star-outline.svg",
+	"./md-star.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-star.svg",
+	"./md-stats.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-stats.svg",
+	"./md-stopwatch.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-stopwatch.svg",
+	"./md-subway.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-subway.svg",
+	"./md-sunny.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-sunny.svg",
+	"./md-swap.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-swap.svg",
+	"./md-switch.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-switch.svg",
+	"./md-sync.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-sync.svg",
+	"./md-tablet-landscape.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-tablet-landscape.svg",
+	"./md-tablet-portrait.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-tablet-portrait.svg",
+	"./md-tennisball.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-tennisball.svg",
+	"./md-text.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-text.svg",
+	"./md-thermometer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-thermometer.svg",
+	"./md-thumbs-down.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-thumbs-down.svg",
+	"./md-thumbs-up.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-thumbs-up.svg",
+	"./md-thunderstorm.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-thunderstorm.svg",
+	"./md-time.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-time.svg",
+	"./md-timer.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-timer.svg",
+	"./md-today.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-today.svg",
+	"./md-train.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-train.svg",
+	"./md-transgender.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-transgender.svg",
+	"./md-trash.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-trash.svg",
+	"./md-trending-down.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-trending-down.svg",
+	"./md-trending-up.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-trending-up.svg",
+	"./md-trophy.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-trophy.svg",
+	"./md-tv.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-tv.svg",
+	"./md-umbrella.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-umbrella.svg",
+	"./md-undo.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-undo.svg",
+	"./md-unlock.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-unlock.svg",
+	"./md-videocam.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-videocam.svg",
+	"./md-volume-high.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-volume-high.svg",
+	"./md-volume-low.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-volume-low.svg",
+	"./md-volume-mute.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-volume-mute.svg",
+	"./md-volume-off.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-volume-off.svg",
+	"./md-walk.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-walk.svg",
+	"./md-wallet.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-wallet.svg",
+	"./md-warning.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-warning.svg",
+	"./md-watch.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-watch.svg",
+	"./md-water.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-water.svg",
+	"./md-wifi.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-wifi.svg",
+	"./md-wine.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-wine.svg",
+	"./md-woman.svg": "../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg/md-woman.svg"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) { // check for number or string
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return id;
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/ionic/svg sync ./!./!../../node_modules/file-loader/dist/cjs.js?name=[name].[ext]&outputPath=svg!./ .svg$";
+
+/***/ }),
+
 /***/ "../../xplat/ionic/core/core.module.ts":
-/*!***********************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/ionic/core/core.module.ts ***!
-  \***********************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/ionic/core/core.module.ts ***!
+  \**************************************************************************/
 /*! exports provided: AppIonicCoreModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1731,9 +2468,9 @@ var AppIonicCoreModule = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../xplat/ionic/core/index.ts":
-/*!*****************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/ionic/core/index.ts ***!
-  \*****************************************************************/
+/*!********************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/ionic/core/index.ts ***!
+  \********************************************************************/
 /*! exports provided: AppIonicCoreModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1748,9 +2485,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../xplat/ionic/features/index.ts":
-/*!*********************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/ionic/features/index.ts ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/ionic/features/index.ts ***!
+  \************************************************************************/
 /*! exports provided: UIModule, UI_COMPONENTS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1767,9 +2504,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../xplat/ionic/features/ui/components/header/header.component.html":
-/*!*******************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/ionic/features/ui/components/header/header.component.html ***!
-  \*******************************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/ionic/features/ui/components/header/header.component.html ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1778,9 +2515,9 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-title>\n          {{
 /***/ }),
 
 /***/ "../../xplat/ionic/features/ui/components/header/header.component.ts":
-/*!*****************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/ionic/features/ui/components/header/header.component.ts ***!
-  \*****************************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/ionic/features/ui/components/header/header.component.ts ***!
+  \********************************************************************************************************/
 /*! exports provided: HeaderComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1826,9 +2563,9 @@ var HeaderComponent = /** @class */ (function (_super) {
 /***/ }),
 
 /***/ "../../xplat/ionic/features/ui/components/index.ts":
-/*!***********************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/ionic/features/ui/components/index.ts ***!
-  \***********************************************************************************/
+/*!**************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/ionic/features/ui/components/index.ts ***!
+  \**************************************************************************************/
 /*! exports provided: UI_COMPONENTS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1843,9 +2580,9 @@ var UI_COMPONENTS = [_header_header_component__WEBPACK_IMPORTED_MODULE_0__["Head
 /***/ }),
 
 /***/ "../../xplat/ionic/features/ui/index.ts":
-/*!************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/ionic/features/ui/index.ts ***!
-  \************************************************************************/
+/*!***************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/ionic/features/ui/index.ts ***!
+  \***************************************************************************/
 /*! exports provided: UIModule, UI_COMPONENTS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1864,9 +2601,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../xplat/ionic/features/ui/ui.module.ts":
-/*!****************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/ionic/features/ui/ui.module.ts ***!
-  \****************************************************************************/
+/*!*******************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/ionic/features/ui/ui.module.ts ***!
+  \*******************************************************************************/
 /*! exports provided: UIModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1907,9 +2644,9 @@ var UIModule = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../xplat/ionic/index.ts":
-/*!************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/ionic/index.ts ***!
-  \************************************************************/
+/*!***************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/ionic/index.ts ***!
+  \***************************************************************/
 /*! exports provided: AppIonicCoreModule, UIModule, UI_COMPONENTS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1930,9 +2667,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../xplat/web/core/base/app.base-component.ts":
-/*!*********************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/web/core/base/app.base-component.ts ***!
-  \*********************************************************************************/
+/*!************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/web/core/base/app.base-component.ts ***!
+  \************************************************************************************/
 /*! exports provided: AppBaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1965,9 +2702,9 @@ var AppBaseComponent = /** @class */ (function (_super) {
 /***/ }),
 
 /***/ "../../xplat/web/core/base/index.ts":
-/*!********************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/web/core/base/index.ts ***!
-  \********************************************************************/
+/*!***********************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/web/core/base/index.ts ***!
+  \***********************************************************************/
 /*! exports provided: AppBaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1982,9 +2719,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../xplat/web/core/core.module.ts":
-/*!*********************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/web/core/core.module.ts ***!
-  \*********************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/web/core/core.module.ts ***!
+  \************************************************************************/
 /*! exports provided: winFactory, platformLangFactory, createTranslateLoader, AppCoreModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2074,9 +2811,9 @@ var AppCoreModule = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../xplat/web/core/index.ts":
-/*!***************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/web/core/index.ts ***!
-  \***************************************************************/
+/*!******************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/web/core/index.ts ***!
+  \******************************************************************/
 /*! exports provided: AppCoreModule, AppBaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2095,9 +2832,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../xplat/web/features/index.ts":
-/*!*******************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/web/features/index.ts ***!
-  \*******************************************************************/
+/*!**********************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/web/features/index.ts ***!
+  \**********************************************************************/
 /*! exports provided: UIModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2112,9 +2849,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../xplat/web/features/ui/index.ts":
-/*!**********************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/web/features/ui/index.ts ***!
-  \**********************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/web/features/ui/index.ts ***!
+  \*************************************************************************/
 /*! exports provided: UIModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2129,9 +2866,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../xplat/web/features/ui/ui.module.ts":
-/*!**************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/web/features/ui/ui.module.ts ***!
-  \**************************************************************************/
+/*!*****************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/web/features/ui/ui.module.ts ***!
+  \*****************************************************************************/
 /*! exports provided: UIModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2179,9 +2916,9 @@ var UIModule = /** @class */ (function () {
 /***/ }),
 
 /***/ "../../xplat/web/index.ts":
-/*!**********************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/xplat/web/index.ts ***!
-  \**********************************************************/
+/*!*************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/xplat/web/index.ts ***!
+  \*************************************************************/
 /*! exports provided: AppCoreModule, UIModule, AppBaseComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2293,7 +3030,7 @@ var ModuleRoutingApp = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet main></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\n    <ion-router-outlet main></ion-router-outlet>\n</ion-app>\n"
 
 /***/ }),
 
@@ -2310,8 +3047,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../../node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/capacitor.const */ "./src/app/constants/capacitor.const.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants/capacitor.const */ "./src/app/constants/capacitor.const.ts");
+/* harmony import */ var _enums_platform_enum__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./enums/platform.enum */ "./src/app/enums/platform.enum.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2324,7 +3062,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-//import { isCapacitorNative } from '@ionic/core';
+
 
 
 var ComponentApp = /** @class */ (function () {
@@ -2333,9 +3071,11 @@ var ComponentApp = /** @class */ (function () {
         this.initializeApp();
     }
     ComponentApp.prototype.initializeApp = function () {
-        Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.platform.ready()).
-            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function () { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(_constants_capacitor_const__WEBPACK_IMPORTED_MODULE_3__["StatusBar"].show()); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["delay"])(100)).
-            subscribe(function () { return _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"].hide(); });
+        if (this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_5__["PlatformEnum"].Cordova)) {
+            Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.platform.ready()).
+                pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function () { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(_constants_capacitor_const__WEBPACK_IMPORTED_MODULE_4__["StatusBar"].show()); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["delay"])(100)).
+                subscribe(function () { return _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"].hide(); });
+        }
     };
     ComponentApp = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2404,16 +3144,17 @@ var AppModule = /** @class */ (function () {
 /*!**********************************************!*\
   !*** ./src/app/constants/capacitor.const.ts ***!
   \**********************************************/
-/*! exports provided: StatusBar, SplashScreen */
+/*! exports provided: StatusBar, SplashScreen, Geolocation */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatusBar", function() { return StatusBar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SplashScreen", function() { return SplashScreen; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Geolocation", function() { return Geolocation; });
 /* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ "./node_modules/@capacitor/core/dist/esm/index.js");
 
-var StatusBar = _capacitor_core__WEBPACK_IMPORTED_MODULE_0__["Plugins"].StatusBar, SplashScreen = _capacitor_core__WEBPACK_IMPORTED_MODULE_0__["Plugins"].SplashScreen;
+var StatusBar = _capacitor_core__WEBPACK_IMPORTED_MODULE_0__["Plugins"].StatusBar, SplashScreen = _capacitor_core__WEBPACK_IMPORTED_MODULE_0__["Plugins"].SplashScreen, Geolocation = _capacitor_core__WEBPACK_IMPORTED_MODULE_0__["Plugins"].Geolocation;
 
 
 /***/ }),
@@ -2436,32 +3177,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngxs_devtools_plugin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngxs/devtools-plugin */ "../../node_modules/@ngxs/devtools-plugin/fesm5/ngxs-devtools-plugin.js");
 /* harmony import */ var ngx_mapbox_gl__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-mapbox-gl */ "../../node_modules/ngx-mapbox-gl/fesm5/ngx-mapbox-gl.js");
 /* harmony import */ var _ionic_native_globalization_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/globalization/ngx */ "../../node_modules/@ionic-native/globalization/ngx/index.js");
-/* harmony import */ var _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/facebook/ngx */ "../../node_modules/@ionic-native/facebook/ngx/index.js");
-/* harmony import */ var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/google-plus/ngx */ "../../node_modules/@ionic-native/google-plus/ngx/index.js");
-/* harmony import */ var _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/firebase/ngx */ "../../node_modules/@ionic-native/firebase/ngx/index.js");
-/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/auth */ "../../node_modules/@angular/fire/auth/index.js");
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/platform-browser/animations */ "../../node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _theory_ionic__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @theory/ionic */ "../../xplat/ionic/index.ts");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _state_app_app_state__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../state/app/app.state */ "./src/app/state/app/app.state.ts");
-/* harmony import */ var _state_language_language_state__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../state/language/language.state */ "./src/app/state/language/language.state.ts");
-/* harmony import */ var _state_location_location_state__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../state/location/location.state */ "./src/app/state/location/location.state.ts");
-/* harmony import */ var _state_device_device_state__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../state/device/device.state */ "./src/app/state/device/device.state.ts");
-/* harmony import */ var _state_user_user_state__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../state/user/user.state */ "./src/app/state/user/user.state.ts");
-/* harmony import */ var _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../state/notifications/notifications.state */ "./src/app/state/notifications/notifications.state.ts");
-/* harmony import */ var _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../state/cluster/cluster.state */ "./src/app/state/cluster/cluster.state.ts");
-/* harmony import */ var _state_places_places_state__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../state/places/places.state */ "./src/app/state/places/places.state.ts");
-/* harmony import */ var _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../state/icons/icons.state */ "./src/app/state/icons/icons.state.ts");
-/* harmony import */ var _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../state/subscriptions/subscriptions.state */ "./src/app/state/subscriptions/subscriptions.state.ts");
+/* harmony import */ var _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/firebase/ngx */ "../../node_modules/@ionic-native/firebase/ngx/index.js");
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/auth */ "../../node_modules/@angular/fire/auth/index.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/platform-browser/animations */ "../../node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _theory_ionic__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @theory/ionic */ "../../xplat/ionic/index.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _state_app_app_state__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../state/app/app.state */ "./src/app/state/app/app.state.ts");
+/* harmony import */ var _state_language_language_state__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../state/language/language.state */ "./src/app/state/language/language.state.ts");
+/* harmony import */ var _state_location_location_state__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../state/location/location.state */ "./src/app/state/location/location.state.ts");
+/* harmony import */ var _state_device_device_state__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../state/device/device.state */ "./src/app/state/device/device.state.ts");
+/* harmony import */ var _state_user_user_state__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../state/user/user.state */ "./src/app/state/user/user.state.ts");
+/* harmony import */ var _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../state/notifications/notifications.state */ "./src/app/state/notifications/notifications.state.ts");
+/* harmony import */ var _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../state/cluster/cluster.state */ "./src/app/state/cluster/cluster.state.ts");
+/* harmony import */ var _state_places_places_state__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../state/places/places.state */ "./src/app/state/places/places.state.ts");
+/* harmony import */ var _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../state/icons/icons.state */ "./src/app/state/icons/icons.state.ts");
+/* harmony import */ var _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../state/subscriptions/subscriptions.state */ "./src/app/state/subscriptions/subscriptions.state.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
 
 
 
@@ -2500,31 +3237,29 @@ var CoreModule = /** @class */ (function () {
     CoreModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_13__["BrowserAnimationsModule"],
-                _theory_ionic__WEBPACK_IMPORTED_MODULE_14__["AppIonicCoreModule"],
-                _angular_fire__WEBPACK_IMPORTED_MODULE_1__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_15__["environment"].apis.firebase),
-                _angular_fire_auth__WEBPACK_IMPORTED_MODULE_11__["AngularFireAuthModule"],
-                _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_12__["AngularFirestoreModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__["BrowserAnimationsModule"],
+                _theory_ionic__WEBPACK_IMPORTED_MODULE_12__["AppIonicCoreModule"],
+                _angular_fire__WEBPACK_IMPORTED_MODULE_1__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].apis.firebase),
+                _angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__["AngularFireAuthModule"],
+                _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__["AngularFirestoreModule"],
                 _ngxs_store__WEBPACK_IMPORTED_MODULE_4__["NgxsModule"].forRoot([
-                    _state_app_app_state__WEBPACK_IMPORTED_MODULE_16__["StateApp"],
-                    _state_language_language_state__WEBPACK_IMPORTED_MODULE_17__["StateLanguage"],
-                    _state_location_location_state__WEBPACK_IMPORTED_MODULE_18__["StateLocation"],
-                    _state_device_device_state__WEBPACK_IMPORTED_MODULE_19__["StateDevice"],
-                    _state_user_user_state__WEBPACK_IMPORTED_MODULE_20__["StateUser"],
-                    _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_21__["StateNotifications"],
-                    _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_22__["StateCluster"],
-                    _state_places_places_state__WEBPACK_IMPORTED_MODULE_23__["StatePlaces"],
-                    _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_24__["StateIcons"],
-                    _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_25__["StateSubscriptions"]
+                    _state_app_app_state__WEBPACK_IMPORTED_MODULE_14__["StateApp"],
+                    _state_language_language_state__WEBPACK_IMPORTED_MODULE_15__["StateLanguage"],
+                    _state_location_location_state__WEBPACK_IMPORTED_MODULE_16__["StateLocation"],
+                    _state_device_device_state__WEBPACK_IMPORTED_MODULE_17__["StateDevice"],
+                    _state_user_user_state__WEBPACK_IMPORTED_MODULE_18__["StateUser"],
+                    _state_notifications_notifications_state__WEBPACK_IMPORTED_MODULE_19__["StateNotifications"],
+                    _state_cluster_cluster_state__WEBPACK_IMPORTED_MODULE_20__["StateCluster"],
+                    _state_places_places_state__WEBPACK_IMPORTED_MODULE_21__["StatePlaces"],
+                    _state_icons_icons_state__WEBPACK_IMPORTED_MODULE_22__["StateIcons"],
+                    _state_subscriptions_subscriptions_state__WEBPACK_IMPORTED_MODULE_23__["StateSubscriptions"]
                 ]),
-                _ngxs_devtools_plugin__WEBPACK_IMPORTED_MODULE_5__["NgxsReduxDevtoolsPluginModule"].forRoot({ disabled: _environments_environment__WEBPACK_IMPORTED_MODULE_15__["environment"].production }),
-                ngx_mapbox_gl__WEBPACK_IMPORTED_MODULE_6__["NgxMapboxGLModule"].withConfig({ accessToken: _environments_environment__WEBPACK_IMPORTED_MODULE_15__["environment"].apis.maps.accessToken })
+                _ngxs_devtools_plugin__WEBPACK_IMPORTED_MODULE_5__["NgxsReduxDevtoolsPluginModule"].forRoot({ disabled: _environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].production }),
+                ngx_mapbox_gl__WEBPACK_IMPORTED_MODULE_6__["NgxMapboxGLModule"].withConfig({ accessToken: _environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].apis.maps.accessToken })
             ],
             providers: [
                 _ionic_native_globalization_ngx__WEBPACK_IMPORTED_MODULE_7__["Globalization"],
-                _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_8__["Facebook"],
-                _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_9__["GooglePlus"],
-                _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_10__["Firebase"],
+                _ionic_native_firebase_ngx__WEBPACK_IMPORTED_MODULE_8__["Firebase"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicRouteStrategy"] }
                 //        { provide: ErrorHandler,       useClass: ErrorHandlerApp }
             ]
@@ -3075,32 +3810,6 @@ var AlertsGet = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/state/app/app.actions.ts":
-/*!******************************************!*\
-  !*** ./src/app/state/app/app.actions.ts ***!
-  \******************************************/
-/*! exports provided: ActionsApp, AppInitialize */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionsApp", function() { return ActionsApp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppInitialize", function() { return AppInitialize; });
-var ActionsApp;
-(function (ActionsApp) {
-    ActionsApp["AppInitialize"] = "[App] App Initialize";
-})(ActionsApp || (ActionsApp = {}));
-var AppInitialize = /** @class */ (function () {
-    function AppInitialize() {
-    }
-    AppInitialize.type = ActionsApp.AppInitialize;
-    return AppInitialize;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/state/app/app.state.ts":
 /*!****************************************!*\
   !*** ./src/app/state/app/app.state.ts ***!
@@ -3112,10 +3821,6 @@ var AppInitialize = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateApp", function() { return StateApp; });
 /* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
-/* harmony import */ var _location_location_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../location/location.actions */ "./src/app/state/location/location.actions.ts");
-/* harmony import */ var _language_language_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../language/language.actions */ "./src/app/state/language/language.actions.ts");
-/* harmony import */ var _app_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.actions */ "./src/app/state/app/app.actions.ts");
-/* harmony import */ var _device_device_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../device/device.actions */ "./src/app/state/device/device.actions.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3126,28 +3831,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
-
-
-
 var StateApp = /** @class */ (function () {
     function StateApp() {
     }
-    StateApp.prototype.ngxsOnInit = function (context) {
-        context.dispatch(new _app_actions__WEBPACK_IMPORTED_MODULE_3__["AppInitialize"]());
-    };
-    StateApp.prototype.appInitialize = function (_a) {
-        var dispatch = _a.dispatch;
-        dispatch(new _device_device_actions__WEBPACK_IMPORTED_MODULE_4__["DeviceInitialize"]());
-        dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_2__["LanguageInitialize"]());
-        dispatch(new _location_location_actions__WEBPACK_IMPORTED_MODULE_1__["LocationWatch"]());
-    };
-    __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_app_actions__WEBPACK_IMPORTED_MODULE_3__["AppInitialize"]),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], StateApp.prototype, "appInitialize", null);
     StateApp = __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["State"])({
             name: 'app',
@@ -3253,7 +3939,7 @@ var StateCluster = /** @class */ (function () {
     StateCluster.entity = function (state) { return state.entities[state.id]; };
     StateCluster.prototype.getClusters = function (_a) {
         var _this = this;
-        var patchState = _a.patchState, dispatch = _a.dispatch;
+        var patchState = _a.patchState;
         return this.user$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])(function (user) { return user.uidInternal; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["switchMap"])(function (uidInternal) {
             return _this.clusterService
                 .getClusters(uidInternal)
@@ -3420,6 +4106,9 @@ var StateDevice = /** @class */ (function () {
     StateDevice.web = function (state) { return !this.device; };
     StateDevice.android = function (state) { return this.android; };
     StateDevice.ios = function (state) { return this.ios; };
+    StateDevice.prototype.ngxsOnInit = function (context) {
+        context.dispatch(new _device_actions__WEBPACK_IMPORTED_MODULE_2__["DeviceInitialize"]());
+    };
     StateDevice.prototype.deviceInitialize = function (_a) {
         var patchState = _a.patchState;
         patchState({
@@ -3768,6 +4457,9 @@ var StateLanguage = /** @class */ (function () {
     StateLanguage.language = function (state) { return state.language; };
     StateLanguage.error = function (state) { return state.error; };
     StateLanguage.errored = function (state) { return state.error != null; };
+    StateLanguage.prototype.ngxsOnInit = function (context) {
+        context.dispatch(new _language_actions__WEBPACK_IMPORTED_MODULE_7__["LanguageInitialize"]());
+    };
     StateLanguage.prototype.languageInitialize = function () {
         this.translate.setDefaultLang('en');
     };
@@ -3880,6 +4572,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StateLocation", function() { return StateLocation; });
 /* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngxs/store */ "../../node_modules/@ngxs/store/fesm5/ngxs-store.js");
 /* harmony import */ var _location_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./location.actions */ "./src/app/state/location/location.actions.ts");
+/* harmony import */ var _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../constants/capacitor.const */ "./src/app/constants/capacitor.const.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3891,6 +4584,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var StateLocation = /** @class */ (function () {
     function StateLocation() {
     }
@@ -3898,27 +4592,22 @@ var StateLocation = /** @class */ (function () {
     StateLocation.error = function (state) { return state.error; };
     StateLocation.loading = function (state) { return state.location == null; };
     StateLocation.errored = function (state) { return state.error != null; };
+    StateLocation.prototype.ngxsOnInit = function (context) {
+        context.dispatch(new _location_actions__WEBPACK_IMPORTED_MODULE_1__["LocationWatch"]());
+    };
     StateLocation.prototype.locationWatch = function (_a) {
         var patchState = _a.patchState;
-        /*
-                return Plugins.Geolocation.
-        
-                watchPosition({enableHighAccuracy: true},
-        
-                (location, error) =>
-                {
-                    if (error != null)
-                    {
-                        console.log(location);
-                        patchState({error});
-                    }
-                    else
-                    {
-                        console.log(location);
-                        patchState({location});
-                    }
-                });
-        */
+        return _constants_capacitor_const__WEBPACK_IMPORTED_MODULE_2__["Geolocation"].
+            watchPosition({ enableHighAccuracy: true }, function (location, error) {
+            if (error != null) {
+                console.log(location);
+                patchState({ error: error });
+            }
+            else {
+                console.log(location);
+                patchState({ location: location });
+            }
+        });
     };
     __decorate([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_0__["Action"])(_location_actions__WEBPACK_IMPORTED_MODULE_1__["LocationWatch"]),
@@ -4348,7 +5037,7 @@ var StateSubscriptions = /** @class */ (function () {
 /*!********************************************!*\
   !*** ./src/app/state/user/user.actions.ts ***!
   \********************************************/
-/*! exports provided: ActionsUser, UserAuthenticate, UserAuthenticateCheck, UserGet, UserCreate, UserAddToken, LoginEmail, LoginFacebook, LoginFacebookBrowser, LoginFacebookDevice, LoginGoogle, LoginGoogleBrowser, LoginGoogleDevice, UserLogout, UserSet */
+/*! exports provided: ActionsUser, UserAuthenticate, UserAuthenticateCheck, UserGet, UserCreate, UserAddToken, LoginEmail, UserLogout, UserSet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4360,12 +5049,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserCreate", function() { return UserCreate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserAddToken", function() { return UserAddToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginEmail", function() { return LoginEmail; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginFacebook", function() { return LoginFacebook; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginFacebookBrowser", function() { return LoginFacebookBrowser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginFacebookDevice", function() { return LoginFacebookDevice; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginGoogle", function() { return LoginGoogle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginGoogleBrowser", function() { return LoginGoogleBrowser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginGoogleDevice", function() { return LoginGoogleDevice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserLogout", function() { return UserLogout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserSet", function() { return UserSet; });
 var ActionsUser;
@@ -4376,12 +5059,6 @@ var ActionsUser;
     ActionsUser["UserCreate"] = "[User] User Create";
     ActionsUser["UserAddToken"] = "[User] User Add Token";
     ActionsUser["LoginEmail"] = "[User] Login Email";
-    ActionsUser["LoginFacebook"] = "[User] Login Facebook";
-    ActionsUser["LoginFacebookBrowser"] = "[User] Login Facebook Browser";
-    ActionsUser["LoginFacebookDevice"] = "[User] Login Facebook Device";
-    ActionsUser["LoginGoogle"] = "[User] Login Google";
-    ActionsUser["LoginGoogleBrowser"] = "[User] Login Google Browser";
-    ActionsUser["LoginGoogleDevice"] = "[User] Login Google Device";
     ActionsUser["UserLogout"] = "[User] User Logout";
     ActionsUser["UserSet"] = "[User] User Set";
 })(ActionsUser || (ActionsUser = {}));
@@ -4431,48 +5108,6 @@ var LoginEmail = /** @class */ (function () {
     return LoginEmail;
 }());
 
-var LoginFacebook = /** @class */ (function () {
-    function LoginFacebook() {
-    }
-    LoginFacebook.type = ActionsUser.LoginFacebook;
-    return LoginFacebook;
-}());
-
-var LoginFacebookBrowser = /** @class */ (function () {
-    function LoginFacebookBrowser() {
-    }
-    LoginFacebookBrowser.type = ActionsUser.LoginFacebookBrowser;
-    return LoginFacebookBrowser;
-}());
-
-var LoginFacebookDevice = /** @class */ (function () {
-    function LoginFacebookDevice() {
-    }
-    LoginFacebookDevice.type = ActionsUser.LoginFacebookDevice;
-    return LoginFacebookDevice;
-}());
-
-var LoginGoogle = /** @class */ (function () {
-    function LoginGoogle() {
-    }
-    LoginGoogle.type = ActionsUser.LoginGoogle;
-    return LoginGoogle;
-}());
-
-var LoginGoogleBrowser = /** @class */ (function () {
-    function LoginGoogleBrowser() {
-    }
-    LoginGoogleBrowser.type = ActionsUser.LoginGoogleBrowser;
-    return LoginGoogleBrowser;
-}());
-
-var LoginGoogleDevice = /** @class */ (function () {
-    function LoginGoogleDevice() {
-    }
-    LoginGoogleDevice.type = ActionsUser.LoginGoogleDevice;
-    return LoginGoogleDevice;
-}());
-
 var UserLogout = /** @class */ (function () {
     function UserLogout() {
     }
@@ -4509,16 +5144,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "../../node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/fire/auth */ "../../node_modules/@angular/fire/auth/index.js");
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/fire/firestore */ "../../node_modules/@angular/fire/firestore/index.js");
-/* harmony import */ var _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/facebook/ngx */ "../../node_modules/@ionic-native/facebook/ngx/index.js");
-/* harmony import */ var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/google-plus/ngx */ "../../node_modules/@ionic-native/google-plus/ngx/index.js");
-/* harmony import */ var _enums_platform_enum__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../enums/platform.enum */ "./src/app/enums/platform.enum.ts");
-/* harmony import */ var _language_language_state__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../language/language.state */ "./src/app/state/language/language.state.ts");
-/* harmony import */ var _language_language_actions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../language/language.actions */ "./src/app/state/language/language.actions.ts");
-/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./user.actions */ "./src/app/state/user/user.actions.ts");
-/* harmony import */ var _alert_alert_actions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../alert/alert.actions */ "./src/app/state/alert/alert.actions.ts");
-/* harmony import */ var _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../notifications/notifications.actions */ "./src/app/state/notifications/notifications.actions.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic/angular */ "../../node_modules/@ionic/angular/dist/index.js");
-/* harmony import */ var _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../enums/auth-provider.enum */ "./src/app/enums/auth-provider.enum.ts");
+/* harmony import */ var _language_language_state__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../language/language.state */ "./src/app/state/language/language.state.ts");
+/* harmony import */ var _language_language_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../language/language.actions */ "./src/app/state/language/language.actions.ts");
+/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./user.actions */ "./src/app/state/user/user.actions.ts");
+/* harmony import */ var _alert_alert_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../alert/alert.actions */ "./src/app/state/alert/alert.actions.ts");
+/* harmony import */ var _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../notifications/notifications.actions */ "./src/app/state/notifications/notifications.actions.ts");
+/* harmony import */ var _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../enums/auth-provider.enum */ "./src/app/enums/auth-provider.enum.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4540,17 +5171,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
-
-
-
 var StateUser = /** @class */ (function () {
-    function StateUser(auth, firestore, facebook, googlePlus, platform) {
+    function StateUser(auth, firestore) {
         this.auth = auth;
         this.firestore = firestore;
-        this.facebook = facebook;
-        this.googlePlus = googlePlus;
-        this.platform = platform;
     }
     StateUser_1 = StateUser;
     StateUser.authData = function (state) { return state.authData; };
@@ -4568,11 +5192,11 @@ var StateUser = /** @class */ (function () {
         return this.auth.authState.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) {
             if (authData == null) {
                 patchState({ authenticated: false, authData: authData, authenticating: false });
-                return dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_10__["LanguageGet"]());
+                return dispatch(new _language_language_actions__WEBPACK_IMPORTED_MODULE_7__["LanguageGet"]());
             }
             else {
                 patchState({ authData: authData, authenticating: false });
-                return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserGet"](authData));
+                return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_8__["UserGet"](authData));
             }
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () { return patchState({ initializing: false }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false, initializing: false })); }));
     };
@@ -4608,7 +5232,7 @@ var StateUser = /** @class */ (function () {
                 if (photoURL != null) {
                     user.photoURL = photoURL;
                 }
-                user.uidInternal = providerId + ':' + providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_15__["AuthProvider"].Email ? email : user.uid;
+                user.uidInternal = providerId + ':' + providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_11__["AuthProvider"].Email ? email : user.uid;
                 patchState({ authData: authData, authenticated: true, user: user, authenticating: false });
             }
         }));
@@ -4618,7 +5242,7 @@ var StateUser = /** @class */ (function () {
         var payload = _b.payload;
         var providerData = payload.providerData[0];
         var providerId = providerData.providerId;
-        var uidInternal = providerId + ':' + (providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_15__["AuthProvider"].Email ? providerData.email : providerData.uid);
+        var uidInternal = providerId + ':' + (providerId === _enums_auth_provider_enum__WEBPACK_IMPORTED_MODULE_11__["AuthProvider"].Email ? providerData.email : providerData.uid);
         return this.firestore.doc("user/" + uidInternal).valueChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (user) { return user != null; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) {
             var dependencies$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])();
             if (user == null) {
@@ -4626,7 +5250,7 @@ var StateUser = /** @class */ (function () {
             }
             else {
                 patchState({ user: user, authenticated: true, authenticating: false });
-                dependencies$ = dispatch([new _language_language_actions__WEBPACK_IMPORTED_MODULE_10__["LanguageSet"](user.language), new _alert_alert_actions__WEBPACK_IMPORTED_MODULE_12__["AlertsGet"](), new _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_13__["NotificationsGet"]()]);
+                dependencies$ = dispatch([new _language_language_actions__WEBPACK_IMPORTED_MODULE_7__["LanguageSet"](user.language), new _alert_alert_actions__WEBPACK_IMPORTED_MODULE_9__["AlertsGet"](), new _notifications_notifications_actions__WEBPACK_IMPORTED_MODULE_10__["NotificationsGet"]()]);
                 //                    dispatch(new NotificationsWatch());
             }
             return dependencies$;
@@ -4645,44 +5269,7 @@ var StateUser = /** @class */ (function () {
         var patchState = _a.patchState, dispatch = _a.dispatch;
         var payload = _b.payload;
         patchState({ authenticating: true });
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithEmailAndPassword(payload.id, payload.password)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](authData.user)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
-    };
-    StateUser.prototype.loginFacebook = function (_a) {
-        var patchState = _a.patchState, dispatch = _a.dispatch;
-        patchState({ authenticating: true });
-        var login$ = this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_8__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebookDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebookBrowser"]());
-        return login$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
-    };
-    StateUser.prototype.loginFacebookBrowser = function (_a) {
-        var dispatch = _a.dispatch;
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider())).
-            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](response.user)); }));
-    };
-    StateUser.prototype.loginFacebookDevice = function (_a) {
-        var dispatch = _a.dispatch;
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.facebook.login(['email'])).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) {
-            var credential = firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider.credential(response.authResponse.accessToken);
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithCredential(credential));
-        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](user)); }));
-    };
-    StateUser.prototype.loginGoogle = function (_a) {
-        var patchState = _a.patchState, dispatch = _a.dispatch;
-        patchState({ authenticating: true });
-        var login$ = this.platform.is(_enums_platform_enum__WEBPACK_IMPORTED_MODULE_8__["PlatformEnum"].Cordova) ? dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogleDevice"]()) : dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogleBrowser"]());
-        return login$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
-    };
-    StateUser.prototype.loginGoogleBrowser = function (_a) {
-        var dispatch = _a.dispatch;
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.auth.auth.signInWithPopup(new firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].GoogleAuthProvider())).
-            pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](response.user)); }));
-    };
-    StateUser.prototype.loginGoogleDevice = function (_a) {
-        var dispatch = _a.dispatch;
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(this.facebook.login(['email'])).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (response) {
-            var credential = firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"].FacebookAuthProvider.credential(response.authResponse.accessToken);
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithCredential(credential)).
-                pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (user) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"](user)); }));
-        }));
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(firebase_app__WEBPACK_IMPORTED_MODULE_0__["auth"]().signInWithEmailAndPassword(payload.id, payload.password)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (authData) { return dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_8__["UserAuthenticateCheck"](authData.user)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error, authenticating: false })); }));
     };
     StateUser.prototype.userLogout = function (_a) {
         var patchState = _a.patchState, dispatch = _a.dispatch;
@@ -4692,82 +5279,46 @@ var StateUser = /** @class */ (function () {
                 authData: undefined,
                 user: undefined
             });
-            dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserLogout"]());
+            dispatch(new _user_actions__WEBPACK_IMPORTED_MODULE_8__["UserLogout"]());
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(patchState({ error: error })); }));
     };
     var StateUser_1;
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Select"])(_language_language_state__WEBPACK_IMPORTED_MODULE_9__["StateLanguage"].language),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Select"])(_language_language_state__WEBPACK_IMPORTED_MODULE_6__["StateLanguage"].language),
         __metadata("design:type", rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"])
     ], StateUser.prototype, "language$", void 0);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticate"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_8__["UserAuthenticate"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "userAuthenticate", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_8__["UserAuthenticateCheck"]),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAuthenticateCheck"]]),
+        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_8__["UserAuthenticateCheck"]]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "userAuthenticateCheck", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserGet"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_8__["UserGet"]),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserGet"]]),
+        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_8__["UserGet"]]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "userGet", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAddToken"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_8__["UserAddToken"]),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_11__["UserAddToken"]]),
+        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_8__["UserAddToken"]]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "userAddToken", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginEmail"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_8__["LoginEmail"]),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginEmail"]]),
+        __metadata("design:paramtypes", [Object, _user_actions__WEBPACK_IMPORTED_MODULE_8__["LoginEmail"]]),
         __metadata("design:returntype", void 0)
     ], StateUser.prototype, "loginEmail", null);
     __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebook"]),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], StateUser.prototype, "loginFacebook", null);
-    __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebookBrowser"]),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], StateUser.prototype, "loginFacebookBrowser", null);
-    __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginFacebookDevice"]),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], StateUser.prototype, "loginFacebookDevice", null);
-    __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogle"]),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], StateUser.prototype, "loginGoogle", null);
-    __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogleBrowser"]),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], StateUser.prototype, "loginGoogleBrowser", null);
-    __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["LoginGoogleDevice"]),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], StateUser.prototype, "loginGoogleDevice", null);
-    __decorate([
-        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_11__["UserLogout"]),
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_user_actions__WEBPACK_IMPORTED_MODULE_8__["UserLogout"]),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
@@ -4838,7 +5389,7 @@ var StateUser = /** @class */ (function () {
                 initializing: false
             }
         }),
-        __metadata("design:paramtypes", [_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"], _ionic_native_facebook_ngx__WEBPACK_IMPORTED_MODULE_6__["Facebook"], _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_7__["GooglePlus"], _ionic_angular__WEBPACK_IMPORTED_MODULE_14__["Platform"]])
+        __metadata("design:paramtypes", [_angular_fire_auth__WEBPACK_IMPORTED_MODULE_4__["AngularFireAuth"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"]])
     ], StateUser);
     return StateUser;
 }());
@@ -4952,7 +5503,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/andredavcev/Files/Theory/apps/ionic-firefly/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/andredavcev/Projects/theory/apps/ionic-firefly/src/main.ts */"./src/main.ts");
 
 
 /***/ })

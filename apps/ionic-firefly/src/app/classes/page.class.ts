@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 export class Page implements OnDestroy
 {
-    private subscriptions: Array<Subscription>;
+    private subscriptions: Array<Subscription> = [];
 
     protected subscriptionsAdd(...subscriptions: Array<Subscription>): void
     {

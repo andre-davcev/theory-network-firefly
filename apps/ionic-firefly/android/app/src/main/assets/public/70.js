@@ -1,20 +1,19 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[70],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/k5xfzocc.sc.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/k5xfzocc.sc.entry.js ***!
-  \************************************************************************************************************************************/
-/*! exports provided: IonToggle */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hz9cqqbq.sc.entry.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/hz9cqqbq.sc.entry.js ***!
+  \***************************************************************************************************************************************/
+/*! exports provided: IonAnchor, IonBackButton */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonToggle", function() { return Toggle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonAnchor", function() { return Anchor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonBackButton", function() { return BackButton; });
 /* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-12e0f551.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-12e0f551.js");
-/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
@@ -22,232 +21,158 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-
-
-var Toggle = /** @class */ (function () {
-    function Toggle() {
-        this.inputId = "ion-tg-" + toggleIds++;
-        this.pivotX = 0;
-        this.activated = false;
-        this.keyFocus = false;
-        this.name = this.inputId;
-        this.checked = false;
-        this.disabled = false;
-        this.value = 'on';
+var Anchor = /** @class */ (function () {
+    function Anchor() {
     }
-    Toggle.prototype.checkedChanged = function (isChecked) {
-        this.ionChange.emit({
-            checked: isChecked,
-            value: this.value
-        });
-    };
-    Toggle.prototype.disabledChanged = function () {
-        this.ionStyle.emit({
-            'interactive-disabled': this.disabled,
-        });
-        if (this.gesture) {
-            this.gesture.setDisabled(this.disabled);
-        }
-    };
-    Toggle.prototype.componentWillLoad = function () {
-        this.ionStyle = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["e"])(this.ionStyle);
-    };
-    Toggle.prototype.componentDidLoad = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var parentItem, itemLabel, _a;
-            var _this = this;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        parentItem = this.nativeInput.closest('ion-item');
-                        if (parentItem) {
-                            itemLabel = parentItem.querySelector('ion-label');
-                            if (itemLabel) {
-                                itemLabel.id = this.inputId + '-lbl';
-                                this.nativeInput.setAttribute('aria-labelledby', itemLabel.id);
-                            }
-                        }
-                        _a = this;
-                        return [4 /*yield*/, __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/gesture.js"))];
-                    case 1:
-                        _a.gesture = (_b.sent()).createGesture({
-                            el: this.el,
-                            queue: this.queue,
-                            gestureName: 'toggle',
-                            gesturePriority: 100,
-                            threshold: 0,
-                            onStart: function (ev) { return _this.onStart(ev); },
-                            onMove: function (ev) { return _this.onMove(ev); },
-                            onEnd: function (ev) { return _this.onEnd(ev); },
-                        });
-                        this.disabledChanged();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Toggle.prototype.onStart = function (detail) {
-        this.pivotX = detail.currentX;
-        this.activated = true;
-        detail.event.preventDefault();
-        return true;
-    };
-    Toggle.prototype.onMove = function (detail) {
-        var currentX = detail.currentX;
-        if (shouldToggle(this.checked, currentX - this.pivotX, -15)) {
-            this.checked = !this.checked;
-            this.pivotX = currentX;
-            Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["l"])();
-        }
-    };
-    Toggle.prototype.onEnd = function (detail) {
-        var delta = detail.currentX - this.pivotX;
-        if (shouldToggle(this.checked, delta, 4)) {
-            this.checked = !this.checked;
-            Object(_chunk_12e0f551_js__WEBPACK_IMPORTED_MODULE_2__["l"])();
-        }
-        this.activated = false;
-        this.nativeInput.focus();
-    };
-    Toggle.prototype.onChange = function () {
-        this.checked = !this.checked;
-    };
-    Toggle.prototype.onKeyUp = function () {
-        this.keyFocus = true;
-    };
-    Toggle.prototype.onFocus = function () {
-        this.ionFocus.emit();
-    };
-    Toggle.prototype.onBlur = function () {
-        this.keyFocus = false;
-        this.ionBlur.emit();
-    };
-    Toggle.prototype.hostData = function () {
+    Anchor.prototype.hostData = function () {
         return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_4__["d"])(this.color), { 'in-item': Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_4__["f"])('ion-item', this.el), 'toggle-activated': this.activated, 'toggle-checked': this.checked, 'toggle-disabled': this.disabled, 'toggle-key': this.keyFocus, 'interactive': true })
+            class: Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.color),
+            'ion-activatable': true
         };
     };
-    Toggle.prototype.render = function () {
+    Anchor.prototype.render = function () {
         var _this = this;
-        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["f"])(this.el, this.name, (this.checked ? this.value : ''), this.disabled);
-        return [
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toggle-icon" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "toggle-inner" })),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("input", { type: "checkbox", onChange: this.onChange.bind(this), onFocus: this.onFocus.bind(this), onBlur: this.onBlur.bind(this), onKeyUp: this.onKeyUp.bind(this), checked: this.checked, id: this.inputId, name: this.name, value: this.value, disabled: this.disabled, ref: function (r) { return _this.nativeInput = r; } }),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)
-        ];
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("a", { href: this.href, onClick: function (ev) { return Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["i"])(_this.win, _this.href, ev, _this.routerDirection); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)));
     };
-    Object.defineProperty(Toggle, "is", {
-        get: function () { return "ion-toggle"; },
+    Object.defineProperty(Anchor, "is", {
+        get: function () { return "ion-anchor"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Toggle, "encapsulation", {
+    Object.defineProperty(Anchor, "encapsulation", {
         get: function () { return "shadow"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Toggle, "properties", {
+    Object.defineProperty(Anchor, "properties", {
         get: function () {
             return {
-                "activated": {
-                    "state": true
-                },
-                "checked": {
-                    "type": Boolean,
-                    "attr": "checked",
-                    "mutable": true,
-                    "watchCallbacks": ["checkedChanged"]
-                },
                 "color": {
                     "type": String,
                     "attr": "color"
                 },
-                "disabled": {
-                    "type": Boolean,
-                    "attr": "disabled",
-                    "watchCallbacks": ["disabledChanged"]
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "keyFocus": {
-                    "state": true
-                },
-                "mode": {
+                "href": {
                     "type": String,
-                    "attr": "mode"
+                    "attr": "href"
                 },
-                "name": {
+                "routerDirection": {
                     "type": String,
-                    "attr": "name"
+                    "attr": "router-direction"
                 },
-                "queue": {
-                    "context": "queue"
-                },
-                "value": {
-                    "type": String,
-                    "attr": "value"
+                "win": {
+                    "context": "window"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Toggle, "events", {
+    Object.defineProperty(Anchor, "style", {
+        get: function () { return ".sc-ion-anchor-h{--background:transparent;--color:var(--ion-color-primary, #3880ff);background:var(--background);color:var(--color)}.ion-color.sc-ion-anchor-h{color:var(--ion-color-base)}a.sc-ion-anchor{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Anchor;
+}());
+var BackButton = /** @class */ (function () {
+    function BackButton() {
+    }
+    BackButton.prototype.onClick = function (ev) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var nav, _a;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        nav = this.el.closest('ion-nav');
+                        ev.preventDefault();
+                        _a = nav;
+                        if (!_a) return [3 /*break*/, 2];
+                        return [4 /*yield*/, nav.canGoBack()];
+                    case 1:
+                        _a = (_b.sent());
+                        _b.label = 2;
+                    case 2:
+                        if (_a) {
+                            return [2 /*return*/, nav.pop({ skipIfBusy: true })];
+                        }
+                        return [2 /*return*/, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["i"])(this.win, this.defaultHref, ev, 'back')];
+                }
+            });
+        });
+    };
+    BackButton.prototype.hostData = function () {
+        var showBackButton = this.defaultHref !== undefined;
+        return {
+            'ion-activatable': true,
+            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.color), { 'button': true, 'show-back-button': showBackButton })
+        };
+    };
+    BackButton.prototype.render = function () {
+        var _this = this;
+        var defaultBackButtonText = this.mode === 'ios' ? 'Back' : null;
+        var backButtonIcon = this.icon != null ? this.icon : this.config.get('backButtonIcon', 'arrow-back');
+        var backButtonText = this.text != null ? this.text : this.config.get('backButtonText', defaultBackButtonText);
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", class: "button-native", onClick: function (ev) { return _this.onClick(ev); } }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "button-inner" }, backButtonIcon && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: backButtonIcon, lazy: false }), backButtonText && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { class: "button-text" }, backButtonText), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null)), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null)));
+    };
+    Object.defineProperty(BackButton, "is", {
+        get: function () { return "ion-back-button"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BackButton, "encapsulation", {
+        get: function () { return "scoped"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(BackButton, "properties", {
         get: function () {
-            return [{
-                    "name": "ionChange",
-                    "method": "ionChange",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionFocus",
-                    "method": "ionFocus",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionBlur",
-                    "method": "ionBlur",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionStyle",
-                    "method": "ionStyle",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
+            return {
+                "color": {
+                    "type": String,
+                    "attr": "color"
+                },
+                "config": {
+                    "context": "config"
+                },
+                "defaultHref": {
+                    "type": String,
+                    "attr": "default-href"
+                },
+                "el": {
+                    "elementRef": true
+                },
+                "icon": {
+                    "type": String,
+                    "attr": "icon"
+                },
+                "mode": {
+                    "type": String,
+                    "attr": "mode"
+                },
+                "text": {
+                    "type": String,
+                    "attr": "text"
+                },
+                "win": {
+                    "context": "window"
+                }
+            };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Toggle, "style", {
-        get: function () { return ".sc-ion-toggle-ios-h{-webkit-box-sizing:content-box!important;box-sizing:content-box!important;display:inline-block;contain:content;cursor:pointer;-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--background:var(--ion-item-background-color, var(--ion-background-color, #fff));--background-checked:var(--ion-color-primary, #3880ff);--handle-background:var(--ion-item-background-color, var(--ion-background-color, #fff));--handle-background-checked:var(--ion-item-background-color, var(--ion-background-color, #fff));-webkit-box-sizing:content-box;box-sizing:content-box;position:relative;width:51px;height:32px;contain:strict}.toggle-key.sc-ion-toggle-ios-h   input.sc-ion-toggle-ios{border:2px solid #5e9ed6}.sc-ion-toggle-ios-h:focus{outline:0}.toggle-disabled.sc-ion-toggle-ios-h{pointer-events:none;opacity:.3}input.sc-ion-toggle-ios{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0;pointer-events:none}.ion-color.toggle-checked.sc-ion-toggle-ios-h   .toggle-icon.sc-ion-toggle-ios{background:var(--ion-color-base)}.ion-color.toggle-checked.sc-ion-toggle-ios-h   .toggle-inner.sc-ion-toggle-ios{background:var(--ion-color-contrast)}.toggle-icon.sc-ion-toggle-ios{border-radius:16px;display:block;position:relative;width:100%;height:100%;-webkit-transition:background-color .3s;transition:background-color .3s;background-color:var(--ion-background-color-step-50,#f2f2f2);overflow:hidden;pointer-events:none}.toggle-icon.sc-ion-toggle-ios::before{left:2px;right:2px;top:2px;bottom:2px;border-radius:16px;position:absolute;-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1);-webkit-transition:-webkit-transform .3s;transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s,-webkit-transform .3s;background:var(--background);content:\"\"}.toggle-inner.sc-ion-toggle-ios{left:2px;top:2px;border-radius:14px;position:absolute;width:28px;height:28px;-webkit-transition:width 120ms ease-in-out 80ms,left 110ms ease-in-out 80ms,right 110ms ease-in-out 80ms,-webkit-transform .3s;transition:width 120ms ease-in-out 80ms,left 110ms ease-in-out 80ms,right 110ms ease-in-out 80ms,-webkit-transform .3s;transition:transform .3s,width 120ms ease-in-out 80ms,left 110ms ease-in-out 80ms,right 110ms ease-in-out 80ms;transition:transform .3s,width 120ms ease-in-out 80ms,left 110ms ease-in-out 80ms,right 110ms ease-in-out 80ms,-webkit-transform .3s;background:var(--handle-background);-webkit-box-shadow:0 3px 12px rgba(0,0,0,.16),0 3px 1px rgba(0,0,0,.1);box-shadow:0 3px 12px rgba(0,0,0,.16),0 3px 1px rgba(0,0,0,.1);will-change:transform;contain:strict}.toggle-checked.sc-ion-toggle-ios-h   .toggle-icon.sc-ion-toggle-ios{background:var(--background-checked)}.toggle-activated.sc-ion-toggle-ios-h   .toggle-icon.sc-ion-toggle-ios::before, .toggle-checked.sc-ion-toggle-ios-h   .toggle-icon.sc-ion-toggle-ios::before{-webkit-transform:scale3d(0,0,0);transform:scale3d(0,0,0)}.toggle-checked.sc-ion-toggle-ios-h   .toggle-inner.sc-ion-toggle-ios{-webkit-transform:translate3d(19px,0,0);transform:translate3d(19px,0,0);background:var(--handle-background-checked)}.toggle-activated.toggle-checked.sc-ion-toggle-ios-h   .toggle-inner.sc-ion-toggle-ios::before{-webkit-transform:scale3d(0,0,0);transform:scale3d(0,0,0)}.toggle-activated.sc-ion-toggle-ios-h   .toggle-inner.sc-ion-toggle-ios{width:34px}.toggle-activated.toggle-checked.sc-ion-toggle-ios-h   .toggle-inner.sc-ion-toggle-ios{left:-4px}.in-item[slot].sc-ion-toggle-ios-h{margin:0;padding:6px 8px 5px 16px}.in-item[slot=start].sc-ion-toggle-ios-h{padding:6px 16px 5px 0}"; },
+    Object.defineProperty(BackButton, "style", {
+        get: function () { return ".sc-ion-back-button-md-h{--background:transparent;--ripple-color:currentColor;--transition:background-color,opacity 100ms linear;--opacity:1;display:none;color:var(--color);font-family:var(--ion-font-family,inherit);text-align:center;text-decoration:none;text-overflow:ellipsis;text-transform:none;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-font-kerning:none;font-kerning:none}.ion-color.sc-ion-back-button-md-h   .button-native.sc-ion-back-button-md{color:var(--ion-color-base)}.activated.sc-ion-back-button-md-h   .button-native.sc-ion-back-button-md{opacity:.4}.show-back-button.sc-ion-back-button-md-h, .can-go-back.sc-ion-back-button-md-h > ion-header.sc-ion-back-button-md, .can-go-back > ion-header   .sc-ion-back-button-md-h{display:block}.button-native.sc-ion-back-button-md{border-radius:var(--border-radius);-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:block;position:relative;min-width:var(--min-width);min-height:var(--min-height);-webkit-transition:var(--transition);transition:var(--transition);border:0;outline:0;background:var(--background);line-height:1;cursor:pointer;opacity:var(--opacity);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-box-shadow:none;box-shadow:none}.button-inner.sc-ion-back-button-md{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}ion-icon.sc-ion-back-button-md{padding:var(--icon-padding-top) var(--icon-padding-end) var(--icon-padding-bottom) var(--icon-padding-start);margin:var(--icon-margin-top) var(--icon-margin-end) var(--icon-margin-bottom) var(--icon-margin-start);display:inherit;font-size:var(--icon-font-size);font-weight:var(--icon-font-weight);pointer-events:none;line-height:.67;text-align:start}.sc-ion-back-button-md-h{--color:currentColor;--margin-top:1px;--margin-end:6px;--margin-bottom:0;--margin-start:0;--padding-top:0;--padding-end:5px;--padding-bottom:0;--padding-start:5px;--min-height:32px;--min-width:44px;--icon-padding-end:.3em;--icon-padding-start:.3em;--icon-margin-top:0;--icon-margin-end:6px;--icon-margin-bottom:0;--icon-margin-start:6px;--icon-font-size:24px;--icon-font-weight:normal;font-size:14px;font-weight:500;text-transform:uppercase}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Toggle, "styleMode", {
-        get: function () { return "ios"; },
+    Object.defineProperty(BackButton, "styleMode", {
+        get: function () { return "md"; },
         enumerable: true,
         configurable: true
     });
-    return Toggle;
+    return BackButton;
 }());
-function shouldToggle(checked, deltaX, margin) {
-    var isRTL = document.dir === 'rtl';
-    if (checked) {
-        return (!isRTL && (margin > deltaX)) ||
-            (isRTL && (-margin < deltaX));
-    }
-    else {
-        return (!isRTL && (-margin < deltaX)) ||
-            (isRTL && (margin > deltaX));
-    }
-}
-var toggleIds = 0;
 
 
 

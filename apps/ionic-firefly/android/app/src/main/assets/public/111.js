@@ -1,191 +1,244 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[111],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/tlkmuszx.entry.js":
-/*!*********************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/tlkmuszx.entry.js ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: IonChip, IonChipButton, IonChipIcon */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ntlsthn3.entry.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/ntlsthn3.entry.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: IonHideWhen, IonShowWhen */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonChip", function() { return Chip; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonChipButton", function() { return ChipButton; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonChipIcon", function() { return ChipIcon; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
-/*!
- * (C) Ionic http://ionicframework.com - MIT License
- * Built with http://stenciljs.com
- */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonHideWhen", function() { return HideWhen; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonShowWhen", function() { return ShowWhen; });
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
 
-
-var Chip = /** @class */ (function () {
-    function Chip() {
+function isPlatformMatch(win, multiPlatformString) {
+    var platforms = split(multiPlatformString);
+    return platforms.some(function (p) { return Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_0__["m"])(win, p); });
+}
+function isModeMatch(config, multiModeString) {
+    var modes = split(multiModeString);
+    var currentMode = config.get('mode');
+    return modes.includes(currentMode);
+}
+function isSizeMatch(win, multiSizeString) {
+    var sizes = split(multiSizeString);
+    return sizes.some(function (s) { return Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_0__["a"])(win, s); });
+}
+function split(multiOptions) {
+    return multiOptions.replace(/\s/g, '').split(',');
+}
+function getTestResult(displayWhen) {
+    var results = [];
+    if (displayWhen.mediaQuery !== undefined) {
+        results.push(matchMedia(displayWhen.win, displayWhen.mediaQuery));
     }
-    Chip.prototype.hostData = function () {
+    if (displayWhen.size !== undefined) {
+        results.push(isSizeMatch(displayWhen.win, displayWhen.size));
+    }
+    if (displayWhen.modes !== undefined) {
+        results.push(isModeMatch(displayWhen.config, displayWhen.modes));
+    }
+    if (displayWhen.platform !== undefined) {
+        results.push(isPlatformMatch(displayWhen.win, displayWhen.platform));
+    }
+    if (displayWhen.orientation !== undefined) {
+        results.push(isOrientationMatch(displayWhen.win, displayWhen.orientation));
+    }
+    if (displayWhen.or) {
+        return results.some(function (r) { return r; });
+    }
+    else {
+        return results.every(function (r) { return r; });
+    }
+}
+function isOrientationMatch(win, orientation) {
+    if (orientation === 'portrait') {
+        return isPortrait(win);
+    }
+    else if (orientation === 'landscape') {
+        return !isPortrait(win);
+    }
+    return false;
+}
+function isPortrait(win) {
+    return matchMedia(win, '(orientation: portrait)');
+}
+function matchMedia(win, query) {
+    return win.matchMedia(query).matches;
+}
+var HideWhen = /** @class */ (function () {
+    function HideWhen() {
+        this.or = false;
+        this.passesTest = false;
+    }
+    HideWhen.prototype.componentWillLoad = function () {
+        this.onResize();
+    };
+    HideWhen.prototype.onResize = function () {
+        this.passesTest = getTestResult(this);
+    };
+    HideWhen.prototype.hostData = function () {
         return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color),
+            class: {
+                'show-content': !this.passesTest,
+                'hide-content': this.passesTest
+            }
         };
     };
-    Object.defineProperty(Chip, "is", {
-        get: function () { return "ion-chip"; },
+    Object.defineProperty(HideWhen, "is", {
+        get: function () { return "ion-hide-when"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Chip, "encapsulation", {
-        get: function () { return "scoped"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Chip, "properties", {
+    Object.defineProperty(HideWhen, "properties", {
         get: function () {
             return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
+                "config": {
+                    "context": "config"
                 },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Chip, "style", {
-        get: function () { return ".sc-ion-chip-ios-h{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-item-align:center;align-self:center;background:var(--background);color:var(--color);font-family:var(--ion-font-family,inherit);font-weight:400;vertical-align:middle;-webkit-box-sizing:border-box;box-sizing:border-box;--background:rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);--color:var(--ion-text-color-step-150, #262626);--label-margin-top:0;--label-margin-end:10px;--label-margin-bottom:0;--label-margin-start:10px;--avatar-width:24px;--avatar-height:24px;--avatar-margin-top:0;--avatar-margin-end:4px;--avatar-margin-bottom:0;--avatar-margin-start:4px;border-radius:16px;margin:2px 0;height:32px;font-size:13px}.ion-color.sc-ion-chip-ios-h{background:var(--ion-color-base);color:var(--ion-color-contrast)}.sc-ion-chip-ios-h.ion-color.sc-ion-chip-ios-s  ion-chip-button , .sc-ion-chip-ios-h.ion-color.sc-ion-chip-ios-s  ion-chip-icon {--color:currentColor}.sc-ion-chip-ios-s  ion-label {margin:var(--label-margin-top) var(--label-margin-end) var(--label-margin-bottom) var(--label-margin-start)}.sc-ion-chip-ios-s  ion-avatar {margin:var(--avatar-margin-top) var(--avatar-margin-end) var(--avatar-margin-bottom) var(--avatar-margin-start);width:var(--avatar-width);height:var(--avatar-height)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Chip, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Chip;
-}());
-var ChipButton = /** @class */ (function () {
-    function ChipButton() {
-        this.disabled = false;
-        this.fill = 'clear';
-    }
-    ChipButton.prototype.hostData = function () {
-        var _a;
-        return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color), (_a = {}, _a["chip-button-" + this.fill] = true, _a))
-        };
-    };
-    ChipButton.prototype.render = function () {
-        var TagType = this.href === undefined ? 'button' : 'a';
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, { type: "button", class: "chip-button-native", disabled: this.disabled, href: this.href }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "chip-button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null)));
-    };
-    Object.defineProperty(ChipButton, "is", {
-        get: function () { return "ion-chip-button"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ChipButton, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ChipButton, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "disabled": {
-                    "type": Boolean,
-                    "attr": "disabled"
-                },
-                "el": {
+                "element": {
                     "elementRef": true
                 },
-                "fill": {
+                "mediaQuery": {
                     "type": String,
-                    "attr": "fill"
+                    "attr": "media-query"
                 },
-                "href": {
+                "modes": {
                     "type": String,
-                    "attr": "href"
+                    "attr": "modes"
                 },
-                "mode": {
+                "or": {
+                    "type": Boolean,
+                    "attr": "or"
+                },
+                "orientation": {
                     "type": String,
-                    "attr": "mode"
+                    "attr": "orientation"
+                },
+                "passesTest": {
+                    "state": true
+                },
+                "platform": {
+                    "type": String,
+                    "attr": "platform"
+                },
+                "size": {
+                    "type": String,
+                    "attr": "size"
+                },
+                "win": {
+                    "context": "window"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ChipButton, "style", {
-        get: function () { return ":host{--border-radius:50%;--margin-top:0;--margin-end:0;--margin-bottom:0;--margin-start:0;--width:32px;--height:100%;width:var(--width);height:var(--height);font-size:32px}:host(.chip-button-clear){--background:transparent;--color:var(--ion-text-color-step-400, #666666)}:host(.chip-button-solid){--background:var(--ion-color-primary, #3880ff);--color:var(--ion-color-primary-contrast, #fff)}:host(.chip-button-solid.ion-color) .chip-button-native{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.chip-button-clear.ion-color) .chip-button-native{background:0 0;color:var(--ion-color-base)}.chip-button-native{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;border-radius:var(--border-radius);margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);position:relative;width:var(--width);height:var(--height);border:0;outline:0;background:var(--background);color:var(--color);-webkit-appearance:none;-moz-appearance:none;appearance:none}.chip-button-inner{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}"; },
+    Object.defineProperty(HideWhen, "listeners", {
+        get: function () {
+            return [{
+                    "name": "window:resize",
+                    "method": "onResize",
+                    "passive": true
+                }];
+        },
         enumerable: true,
         configurable: true
     });
-    return ChipButton;
+    Object.defineProperty(HideWhen, "style", {
+        get: function () { return "ion-hide-when.show-content{display:block}ion-hide-when.hide-content{display:none!important}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return HideWhen;
 }());
-var ChipIcon = /** @class */ (function () {
-    function ChipIcon() {
-        this.fill = 'clear';
+var ShowWhen = /** @class */ (function () {
+    function ShowWhen() {
+        this.or = false;
+        this.passesTest = false;
     }
-    ChipIcon.prototype.hostData = function () {
-        var _a;
+    ShowWhen.prototype.componentWillLoad = function () {
+        this.onResize();
+    };
+    ShowWhen.prototype.onResize = function () {
+        this.passesTest = getTestResult(this);
+    };
+    ShowWhen.prototype.hostData = function () {
         return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.color), (_a = {}, _a["chip-icon-" + this.fill] = true, _a))
+            class: {
+                'show-content': this.passesTest,
+                'hide-content': !this.passesTest
+            }
         };
     };
-    ChipIcon.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", { name: this.name, src: this.src, mode: this.mode });
-    };
-    Object.defineProperty(ChipIcon, "is", {
-        get: function () { return "ion-chip-icon"; },
+    Object.defineProperty(ShowWhen, "is", {
+        get: function () { return "ion-show-when"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ChipIcon, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ChipIcon, "properties", {
+    Object.defineProperty(ShowWhen, "properties", {
         get: function () {
             return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
+                "config": {
+                    "context": "config"
                 },
-                "fill": {
-                    "type": String,
-                    "attr": "fill"
+                "element": {
+                    "elementRef": true
                 },
-                "mode": {
+                "mediaQuery": {
                     "type": String,
-                    "attr": "mode"
+                    "attr": "media-query"
                 },
-                "name": {
+                "modes": {
                     "type": String,
-                    "attr": "name"
+                    "attr": "modes"
                 },
-                "src": {
+                "or": {
+                    "type": Boolean,
+                    "attr": "or"
+                },
+                "orientation": {
                     "type": String,
-                    "attr": "src"
+                    "attr": "orientation"
+                },
+                "passesTest": {
+                    "state": true
+                },
+                "platform": {
+                    "type": String,
+                    "attr": "platform"
+                },
+                "size": {
+                    "type": String,
+                    "attr": "size"
+                },
+                "win": {
+                    "context": "window"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ChipIcon, "style", {
-        get: function () { return ":host{border-radius:50%;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:var(--width,32px);height:var(--height,32px);background:var(--background);color:var(--color);font-size:18px}:host(.chip-icon-clear){--background:transparent;--color:var(--ion-text-color-step-400, #666666)}:host(.chip-icon-solid){--background:var(--ion-color-primary, #3880ff);--color:var(--ion-color-primary-contrast, #fff)}:host(.chip-icon-solid.ion-color){background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.chip-icon-clear.ion-color){background:0 0;color:var(--ion-color-base)}"; },
+    Object.defineProperty(ShowWhen, "listeners", {
+        get: function () {
+            return [{
+                    "name": "window:resize",
+                    "method": "onResize",
+                    "passive": true
+                }];
+        },
         enumerable: true,
         configurable: true
     });
-    return ChipIcon;
+    Object.defineProperty(ShowWhen, "style", {
+        get: function () { return "ion-show-when.show-content{display:block}ion-show-when.hide-content{display:none!important}"; },
+        enumerable: true,
+        configurable: true
+    });
+    return ShowWhen;
 }());
 
 

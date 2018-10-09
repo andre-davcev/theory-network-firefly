@@ -1,25 +1,21 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[120],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uknv235c.sc.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Files/Theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/uknv235c.sc.entry.js ***!
-  \************************************************************************************************************************************/
-/*! exports provided: IonItem, IonItemDivider, IonItemGroup, IonLabel, IonList, IonListHeader, IonNote, IonSkeletonText */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/q8tgxoqn.sc.entry.js":
+/*!***************************************************************************************************************************************!*\
+  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/q8tgxoqn.sc.entry.js ***!
+  \***************************************************************************************************************************************/
+/*! exports provided: IonSelect, IonSelectOption, IonSelectPopover */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonItem", function() { return Item; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonItemDivider", function() { return ItemDivider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonItemGroup", function() { return ItemGroup; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonLabel", function() { return Label; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonList", function() { return List; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonListHeader", function() { return ListHeader; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonNote", function() { return Note; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSkeletonText", function() { return SkeletonText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSelect", function() { return Select; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSelectOption", function() { return SelectOption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSelectPopover", function() { return SelectPopover; });
 /* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-50fe9317.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-50fe9317.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
+/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
 
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
@@ -27,301 +23,450 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-var Item = /** @class */ (function () {
-    function Item() {
-        this.itemStyles = new Map();
-        this.button = false;
-        this.detailIcon = 'ios-arrow-forward';
+
+var Select = /** @class */ (function () {
+    function Select() {
+        this.childOpts = [];
+        this.inputId = "ion-sel-" + selectIds++;
+        this.isExpanded = false;
+        this.keyFocus = false;
+        this.text = '';
         this.disabled = false;
-        this.type = 'button';
+        this.cancelText = 'Cancel';
+        this.okText = 'OK';
+        this.name = this.inputId;
+        this.multiple = false;
+        this.interface = 'alert';
+        this.interfaceOptions = {};
     }
-    Item.prototype.itemStyle = function (ev) {
-        ev.stopPropagation();
-        var tagName = ev.target.tagName;
-        var updatedStyles = ev.detail;
-        var updatedKeys = Object.keys(ev.detail);
-        var newStyles = {};
-        var childStyles = this.itemStyles.get(tagName) || {};
-        var hasStyleChange = false;
-        for (var _i = 0, updatedKeys_1 = updatedKeys; _i < updatedKeys_1.length; _i++) {
-            var key = updatedKeys_1[_i];
-            var itemKey = "item-" + key;
-            var newValue = updatedStyles[key];
-            if (newValue !== childStyles[itemKey]) {
-                hasStyleChange = true;
-            }
-            newStyles[itemKey] = newValue;
+    Select.prototype.disabledChanged = function () {
+        this.emitStyle();
+    };
+    Select.prototype.valueChanged = function () {
+        var _this = this;
+        if (this.value === undefined) {
+            this.childOpts.filter(function (o) { return o.selected; }).forEach(function (selectOption) {
+                selectOption.selected = false;
+            });
+            this.text = '';
         }
-        if (hasStyleChange) {
-            this.itemStyles.set(tagName, newStyles);
-            this.el.forceUpdate();
+        else {
+            var hasChecked_1 = false;
+            var texts_1 = [];
+            this.childOpts.forEach(function (selectOption) {
+                if ((Array.isArray(_this.value) && _this.value.includes(selectOption.value)) || (selectOption.value === _this.value)) {
+                    if (!selectOption.selected && (_this.multiple || !hasChecked_1)) {
+                        selectOption.selected = true;
+                    }
+                    else if (!_this.multiple && hasChecked_1 && selectOption.selected) {
+                        selectOption.selected = false;
+                    }
+                    hasChecked_1 = true;
+                }
+                else if (selectOption.selected) {
+                    selectOption.selected = false;
+                }
+                if (selectOption.selected) {
+                    texts_1.push(selectOption.textContent || '');
+                }
+            });
+            this.text = texts_1.join(', ');
+        }
+        this.ionChange.emit({
+            value: this.value,
+            text: this.text
+        });
+        this.emitStyle();
+    };
+    Select.prototype.optLoad = function (ev) {
+        var selectOption = ev.target;
+        this.childOpts = Array.from(this.el.querySelectorAll('ion-select-option'));
+        if (this.value != null && (Array.isArray(this.value) && this.value.includes(selectOption.value)) || (selectOption.value === this.value)) {
+            selectOption.selected = true;
+        }
+        else if (Array.isArray(this.value) && this.multiple && selectOption.selected) {
+            this.value.push(selectOption.value);
+        }
+        else if (this.value === undefined && selectOption.selected) {
+            this.value = selectOption.value;
+        }
+        else if (selectOption.selected) {
+            selectOption.selected = false;
         }
     };
-    Item.prototype.componentDidLoad = function () {
-        Array.from(this.el.querySelectorAll('ion-button')).forEach(function (button) {
-            if (!button.size) {
-                button.size = 'small';
+    Select.prototype.optUnload = function (ev) {
+        var index = this.childOpts.indexOf(ev.target);
+        if (index > -1) {
+            this.childOpts.splice(index, 1);
+        }
+    };
+    Select.prototype.onSelect = function (ev) {
+        var _this = this;
+        this.childOpts.forEach(function (selectOption) {
+            if (selectOption === ev.target) {
+                _this.value = selectOption.value;
+            }
+            else {
+                selectOption.selected = false;
             }
         });
     };
-    Item.prototype.isClickable = function () {
-        return (this.href !== undefined || this.button);
+    Select.prototype.componentWillLoad = function () {
+        if (!this.value) {
+            this.value = this.multiple ? [] : undefined;
+        }
     };
-    Item.prototype.hostData = function () {
-        var _a;
-        var childStyles = {};
-        this.itemStyles.forEach(function (value) {
-            Object.assign(childStyles, value);
+    Select.prototype.componentDidLoad = function () {
+        var _this = this;
+        this.ionStyle = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.ionStyle);
+        var label = this.getLabel();
+        if (label) {
+            this.labelId = label.id = this.name + '-lbl';
+        }
+        if (this.multiple) {
+            var checked = this.childOpts.filter(function (o) { return o.selected; });
+            this.value.length = 0;
+            checked.forEach(function (o) {
+                _this.value.push(o.value);
+            });
+            this.text = checked.map(function (o) { return o.textContent; }).join(', ');
+        }
+        else {
+            var checked = this.childOpts.find(function (o) { return o.selected; });
+            if (checked) {
+                this.value = checked.value;
+                this.text = checked.textContent || '';
+            }
+        }
+        this.emitStyle();
+    };
+    Select.prototype.open = function (ev) {
+        var selectInterface = this.interface;
+        if ((selectInterface === 'action-sheet' || selectInterface === 'popover') && this.multiple) {
+            console.warn("Select interface cannot be \"" + selectInterface + "\" with a multi-value select. Using the \"alert\" interface instead.");
+            selectInterface = 'alert';
+        }
+        if (selectInterface === 'popover' && !ev) {
+            console.warn('Select interface cannot be a "popover" without passing an event. Using the "alert" interface instead.');
+            selectInterface = 'alert';
+        }
+        if (selectInterface === 'popover') {
+            return this.openPopover(ev);
+        }
+        if (selectInterface === 'action-sheet') {
+            return this.openActionSheet();
+        }
+        return this.openAlert();
+    };
+    Select.prototype.getLabel = function () {
+        var item = this.el.closest('ion-item');
+        if (item) {
+            return item.querySelector('ion-label');
+        }
+        return null;
+    };
+    Select.prototype.openPopover = function (ev) {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var interfaceOptions, popoverOpts, popover, _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        interfaceOptions = this.interfaceOptions;
+                        popoverOpts = Object.assign({}, interfaceOptions, { component: 'ion-select-popover', cssClass: ['select-popover', interfaceOptions.cssClass], event: ev, componentProps: {
+                                header: interfaceOptions.header,
+                                subHeader: interfaceOptions.subHeader,
+                                message: interfaceOptions.message,
+                                value: this.value,
+                                options: this.childOpts.map(function (o) {
+                                    return {
+                                        text: o.textContent,
+                                        value: o.value,
+                                        checked: o.selected,
+                                        disabled: o.disabled,
+                                        handler: function () {
+                                            _this.value = o.value;
+                                            _this.close();
+                                        }
+                                    };
+                                })
+                            } });
+                        _a = this;
+                        return [4 /*yield*/, this.popoverCtrl.create(popoverOpts)];
+                    case 1:
+                        popover = _a.overlay = _b.sent();
+                        return [4 /*yield*/, popover.present()];
+                    case 2:
+                        _b.sent();
+                        this.isExpanded = true;
+                        return [2 /*return*/, popover];
+                }
+            });
         });
+    };
+    Select.prototype.openActionSheet = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var actionSheetButtons, interfaceOptions, actionSheetOpts, actionSheet, _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        actionSheetButtons = this.childOpts.map(function (option) {
+                            return {
+                                role: (option.selected ? 'selected' : ''),
+                                text: option.textContent,
+                                handler: function () {
+                                    _this.value = option.value;
+                                }
+                            };
+                        });
+                        actionSheetButtons.push({
+                            text: this.cancelText,
+                            role: 'cancel',
+                            handler: function () {
+                                _this.ionCancel.emit();
+                            }
+                        });
+                        interfaceOptions = this.interfaceOptions;
+                        actionSheetOpts = Object.assign({}, interfaceOptions, { buttons: actionSheetButtons, cssClass: ['select-action-sheet', interfaceOptions.cssClass] });
+                        _a = this;
+                        return [4 /*yield*/, this.actionSheetCtrl.create(actionSheetOpts)];
+                    case 1:
+                        actionSheet = _a.overlay = _b.sent();
+                        return [4 /*yield*/, actionSheet.present()];
+                    case 2:
+                        _b.sent();
+                        this.isExpanded = true;
+                        return [2 /*return*/, actionSheet];
+                }
+            });
+        });
+    };
+    Select.prototype.openAlert = function () {
+        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var label, labelText, interfaceOptions, inputType, alertOpts, alert, _a;
+            var _this = this;
+            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        label = this.getLabel();
+                        labelText = (label) ? label.textContent : null;
+                        interfaceOptions = this.interfaceOptions;
+                        inputType = (this.multiple ? 'checkbox' : 'radio');
+                        alertOpts = Object.assign({}, interfaceOptions, { header: interfaceOptions.header ? interfaceOptions.header : labelText, inputs: this.childOpts.map(function (o) {
+                                return {
+                                    type: inputType,
+                                    label: o.textContent,
+                                    value: o.value,
+                                    checked: o.selected,
+                                    disabled: o.disabled
+                                };
+                            }), buttons: [
+                                {
+                                    text: this.cancelText,
+                                    role: 'cancel',
+                                    handler: function () {
+                                        _this.ionCancel.emit();
+                                    }
+                                },
+                                {
+                                    text: this.okText,
+                                    handler: function (selectedValues) {
+                                        _this.value = selectedValues;
+                                    }
+                                }
+                            ], cssClass: ['select-alert', interfaceOptions.cssClass,
+                                (this.multiple ? 'multiple-select-alert' : 'single-select-alert')] });
+                        _a = this;
+                        return [4 /*yield*/, this.alertCtrl.create(alertOpts)];
+                    case 1:
+                        alert = _a.overlay = _b.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _b.sent();
+                        this.isExpanded = true;
+                        return [2 /*return*/, alert];
+                }
+            });
+        });
+    };
+    Select.prototype.close = function () {
+        if (!this.overlay) {
+            return Promise.resolve(false);
+        }
+        var overlay = this.overlay;
+        this.overlay = undefined;
+        this.isExpanded = false;
+        return overlay.dismiss();
+    };
+    Select.prototype.onKeyUp = function () {
+        this.keyFocus = true;
+    };
+    Select.prototype.onFocus = function () {
+        this.ionFocus.emit();
+    };
+    Select.prototype.onBlur = function () {
+        this.keyFocus = false;
+        this.ionBlur.emit();
+    };
+    Select.prototype.hasValue = function () {
+        if (Array.isArray(this.value)) {
+            return this.value.length > 0;
+        }
+        return (this.value != null && this.value !== undefined && this.value !== '');
+    };
+    Select.prototype.emitStyle = function () {
+        this.ionStyle.emit({
+            'interactive': true,
+            'select': true,
+            'has-value': this.hasValue(),
+            'interactive-disabled': this.disabled,
+            'select-disabled': this.disabled
+        });
+    };
+    Select.prototype.hostData = function () {
         return {
-            'ion-activatable': this.isClickable(),
-            class: Object.assign({}, childStyles, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), (_a = {}, _a["item-lines-" + this.lines] = !!this.lines, _a['item-disabled'] = this.disabled, _a['in-list'] = Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["f"])('ion-list', this.el), _a['item'] = true, _a))
+            class: {
+                'in-item': Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["j"])('ion-item', this.el),
+                'select-disabled': this.disabled,
+                'select-key': this.keyFocus
+            }
         };
     };
-    Item.prototype.render = function () {
-        var _a = this, href = _a.href, detail = _a.detail, mode = _a.mode, win = _a.win, state = _a.state, detailIcon = _a.detailIcon, routerDirection = _a.routerDirection, type = _a.type;
-        var clickable = this.isClickable();
-        var TagType = clickable ? (href === undefined ? 'button' : 'a') : 'div';
-        var attrs = TagType === 'button' ? { type: type } : { href: href };
-        var showDetail = detail !== undefined ? detail : mode === 'ios' && clickable;
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])(TagType, Object.assign({}, attrs, { class: "item-native", onClick: function (ev) { return Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["e"])(win, href, ev, routerDirection); } }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "start" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "item-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "input-wrapper" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "end" }), showDetail && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon", { icon: detailIcon, lazy: false, class: "item-detail-icon" })), state && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "item-state" }), clickable && mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null)));
+    Select.prototype.render = function () {
+        Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.el, this.name, parseValue(this.value), this.disabled);
+        var addPlaceholderClass = false;
+        var selectText = this.selectedText || this.text;
+        if (selectText === '' && this.placeholder != null) {
+            selectText = this.placeholder;
+            addPlaceholderClass = true;
+        }
+        var selectTextClasses = {
+            'select-text': true,
+            'select-placeholder': addPlaceholderClass
+        };
+        return [
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { role: "textbox", "aria-multiline": "false", class: selectTextClasses }, selectText),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "select-icon", role: "presentation" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "select-icon-inner" })),
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", role: "combobox", "aria-haspopup": "dialog", "aria-labelledby": this.labelId, "aria-expanded": this.isExpanded ? 'true' : null, "aria-disabled": this.disabled ? 'true' : null, onClick: this.open.bind(this), onKeyUp: this.onKeyUp.bind(this), onFocus: this.onFocus.bind(this), onBlur: this.onBlur.bind(this), class: "select-cover" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null))
+        ];
     };
-    Object.defineProperty(Item, "is", {
-        get: function () { return "ion-item"; },
+    Object.defineProperty(Select, "is", {
+        get: function () { return "ion-select"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Item, "encapsulation", {
+    Object.defineProperty(Select, "encapsulation", {
         get: function () { return "shadow"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Item, "properties", {
+    Object.defineProperty(Select, "properties", {
         get: function () {
             return {
-                "button": {
-                    "type": Boolean,
-                    "attr": "button"
+                "actionSheetCtrl": {
+                    "connect": "ion-action-sheet-controller"
                 },
-                "color": {
+                "alertCtrl": {
+                    "connect": "ion-alert-controller"
+                },
+                "cancelText": {
                     "type": String,
-                    "attr": "color"
-                },
-                "detail": {
-                    "type": Boolean,
-                    "attr": "detail"
-                },
-                "detailIcon": {
-                    "type": String,
-                    "attr": "detail-icon"
+                    "attr": "cancel-text"
                 },
                 "disabled": {
                     "type": Boolean,
-                    "attr": "disabled"
+                    "attr": "disabled",
+                    "watchCallbacks": ["disabledChanged"]
                 },
                 "el": {
                     "elementRef": true
                 },
-                "href": {
+                "interface": {
                     "type": String,
-                    "attr": "href"
+                    "attr": "interface"
                 },
-                "lines": {
-                    "type": String,
-                    "attr": "lines"
+                "interfaceOptions": {
+                    "type": "Any",
+                    "attr": "interface-options"
+                },
+                "isExpanded": {
+                    "state": true
+                },
+                "keyFocus": {
+                    "state": true
                 },
                 "mode": {
                     "type": String,
                     "attr": "mode"
                 },
-                "routerDirection": {
-                    "type": String,
-                    "attr": "router-direction"
+                "multiple": {
+                    "type": Boolean,
+                    "attr": "multiple"
                 },
-                "state": {
+                "name": {
                     "type": String,
-                    "attr": "state"
+                    "attr": "name"
                 },
-                "type": {
+                "okText": {
                     "type": String,
-                    "attr": "type"
+                    "attr": "ok-text"
                 },
-                "win": {
-                    "context": "window"
+                "open": {
+                    "method": true
+                },
+                "placeholder": {
+                    "type": String,
+                    "attr": "placeholder"
+                },
+                "popoverCtrl": {
+                    "connect": "ion-popover-controller"
+                },
+                "selectedText": {
+                    "type": String,
+                    "attr": "selected-text"
+                },
+                "text": {
+                    "state": true
+                },
+                "value": {
+                    "type": "Any",
+                    "attr": "value",
+                    "mutable": true,
+                    "watchCallbacks": ["valueChanged"]
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Item, "listeners", {
+    Object.defineProperty(Select, "events", {
         get: function () {
             return [{
-                    "name": "ionStyle",
-                    "method": "itemStyle"
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Item, "style", {
-        get: function () { return ".sc-ion-item-ios-h{--min-height:44px;--background:var(--ion-color-base);--background-active:var(--ion-color-tint);--color:var(--ion-color-contrast);--detail-push-color:var(--ion-color-shade);--border-radius:0;--border-width:0;--border-style:solid;--border-color:var(--ion-color-shade);--inner-border-width:0;--padding-top:0;--padding-bottom:0;--padding-end:0;--padding-start:0;--inner-padding-top:0px;--inner-padding-bottom:0px;--inner-padding-start:0px;--inner-padding-end:0px;--box-shadow:none;--inner-box-shadow:none;--highlight-color-focus:var(--ion-color-primary, #3880ff);--highlight-color-valid:var(--ion-color-success, #10dc60);--highlight-color-invalid:var(--ion-color-danger, #f04141);--highlight-height:2px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:block;color:var(--ion-color-contrast);font-family:var(--ion-font-family,inherit);text-align:initial;text-decoration:none;-webkit-box-sizing:border-box;box-sizing:border-box}.activated.sc-ion-item-ios-h{--background:var(--background-active);--transition:none}.item-disabled.sc-ion-item-ios-h{cursor:default;opacity:.3;pointer-events:none}.item-native.sc-ion-item-ios{padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);border-radius:var(--border-radius);margin:0;font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;width:100%;min-height:var(--min-height);-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);outline:0;background-color:var(--background);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}a.sc-ion-item-ios, button.sc-ion-item-ios{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-user-drag:none}.item-state.sc-ion-item-ios{left:0;right:0;bottom:0;position:absolute;height:var(--highlight-height)}.item-inner.sc-ion-item-ios{margin:0;padding:var(--inner-padding-top) calc(var(--ion-safe-area-right,0px) + var(--inner-padding-end)) var(--inner-padding-bottom) calc(var(--ion-safe-area-left,0px) + var(--inner-padding-start));display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:inherit;-webkit-box-direction:inherit;-ms-flex-direction:inherit;flex-direction:inherit;-webkit-box-align:inherit;-ms-flex-align:inherit;align-items:inherit;-ms-flex-item-align:stretch;align-self:stretch;min-height:inherit;border-width:var(--inner-border-width);border-style:var(--border-style);border-color:var(--border-color);-webkit-box-shadow:var(--inner-box-shadow);box-shadow:var(--inner-box-shadow);overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}.input-wrapper.sc-ion-item-ios{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:inherit;-webkit-box-direction:inherit;-ms-flex-direction:inherit;flex-direction:inherit;-webkit-box-align:inherit;-ms-flex-align:inherit;align-items:inherit;-ms-flex-item-align:stretch;align-self:stretch;text-overflow:ellipsis;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}.item-input.sc-ion-item-ios-h, [vertical-align-top].sc-ion-item-ios-h{-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.sc-ion-item-ios-s > ion-icon{font-size:1.6em}.sc-ion-item-ios-s > ion-button{--margin-top:0;--margin-bottom:0;--margin-start:0;--margin-end:0;z-index:1}.item-label-floating.sc-ion-item-ios-h   .input-wrapper.sc-ion-item-ios, .item-label-stacked.sc-ion-item-ios-h   .input-wrapper.sc-ion-item-ios{-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.sc-ion-item-ios-h.item-label-floating .sc-ion-item-ios-s > ion-select, .sc-ion-item-ios-h.item-label-stacked .sc-ion-item-ios-s > ion-select{--padding-start:0;-ms-flex-item-align:stretch;align-self:stretch;width:100%;max-width:100%}.sc-ion-item-ios-h.item-multiple-inputs .sc-ion-item-ios-s > ion-select{position:relative}.item-textarea.sc-ion-item-ios-h{-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.sc-ion-item-ios-s > ion-reorder[slot]{margin-top:0;margin-bottom:0}.sc-ion-item-ios-h{--ion-color-base:var(--ion-item-background-color, transparent);--ion-color-contrast:var(--ion-item-text-color, var(--ion-text-color, #000));--ion-color-tint:var(--ion-item-background-color-active, #d9d9d9);--ion-color-shade:var(--ion-item-border-color, #c8c7cc);--transition:background-color 200ms linear;--padding-start:16px;--inner-padding-end:8px;--inner-border-width:0 0 0.55px 0;font-size:17px}.item-lines-full.sc-ion-item-ios-h{--border-width:0 0 0.55px 0}.item-lines-inset.sc-ion-item-ios-h{--inner-border-width:0 0 0.55px 0}.item-lines-inset.sc-ion-item-ios-h, .item-lines-none.sc-ion-item-ios-h{--border-width:0}.item-lines-full.sc-ion-item-ios-h, .item-lines-none.sc-ion-item-ios-h{--inner-border-width:0}.sc-ion-item-ios-s > :not(.interactive)[slot=start]{margin:2px 16px 2px 0}.sc-ion-item-ios-s > :not(.interactive)[slot=end]{margin-left:8px;margin-right:8px}.sc-ion-item-ios-s > ion-icon[slot=end], .sc-ion-item-ios-s > ion-icon[slot=start]{margin-left:0;margin-top:7px;margin-bottom:7px}.sc-ion-item-ios-h.item-label-floating .sc-ion-item-ios-s > [slot=end], .sc-ion-item-ios-h.item-label-stacked .sc-ion-item-ios-s > [slot=end]{margin-top:7px;margin-bottom:7px}.sc-ion-item-ios-s > .button-small{--padding-top:0;--padding-bottom:0;--padding-start:.5em;--padding-end:.5em;--height:24px;font-size:13px}.sc-ion-item-ios-s > ion-avatar{width:36px;height:36px}.sc-ion-item-ios-s > ion-thumbnail{width:56px;height:56px}.sc-ion-item-ios-s > ion-avatar[slot=end], .sc-ion-item-ios-s > ion-thumbnail[slot=end]{margin:8px}.item-detail-icon.sc-ion-item-ios{color:var(--detail-push-color);font-size:20px}.sc-ion-item-ios-h.item-radio .sc-ion-item-ios-s > ion-label, .sc-ion-item-ios-h.item-toggle .sc-ion-item-ios-s > ion-label{margin-left:0}.sc-ion-item-ios-h.item-label-floating .sc-ion-item-ios-s > ion-input, .sc-ion-item-ios-h.item-label-floating .sc-ion-item-ios-s > ion-select, .sc-ion-item-ios-h.item-label-floating .sc-ion-item-ios-s > ion-textarea, .sc-ion-item-ios-h.item-label-stacked .sc-ion-item-ios-s > ion-input, .sc-ion-item-ios-h.item-label-stacked .sc-ion-item-ios-s > ion-select, .sc-ion-item-ios-h.item-label-stacked .sc-ion-item-ios-s > ion-textarea{--padding-top:8px;--padding-bottom:8px;--padding-start:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Item, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Item;
-}());
-var ItemDivider = /** @class */ (function () {
-    function ItemDivider() {
-    }
-    ItemDivider.prototype.componentDidLoad = function () {
-        Array.from(this.el.querySelectorAll('ion-button')).forEach(function (button) {
-            if (!button.size) {
-                button.size = 'small';
-            }
-        });
-    };
-    ItemDivider.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color)
-        };
-    };
-    ItemDivider.prototype.render = function () {
-        return [
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "start" }),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "item-divider-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "item-divider-wrapper" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null)), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", { name: "end" }))
-        ];
-    };
-    Object.defineProperty(ItemDivider, "is", {
-        get: function () { return "ion-item-divider"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemDivider, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemDivider, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemDivider, "style", {
-        get: function () { return ".sc-ion-item-divider-ios-h{--padding-start:0px;--padding-end:0px;--padding-top:0px;--padding-bottom:0px;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:0;padding:var(--padding-top) calc(var(--padding-end) + var(--ion-safe-area-right,0px)) var(--padding-bottom) calc(var(--padding-start) + var(--ion-safe-area-left,0px));display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;width:100%;min-height:30px;background-color:var(--ion-color-base);color:var(--ion-color-contrast);font-family:var(--ion-font-family,inherit);overflow:hidden;z-index:100;-webkit-box-sizing:border-box;box-sizing:border-box}[sticky].sc-ion-item-divider-ios-h{position:-webkit-sticky;position:sticky;top:0}.item-divider-inner.sc-ion-item-divider-ios{margin:0;padding:0 8px 0 0;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:inherit;-webkit-box-direction:inherit;-ms-flex-direction:inherit;flex-direction:inherit;-webkit-box-align:inherit;-ms-flex-align:inherit;align-items:inherit;-ms-flex-item-align:stretch;align-self:stretch;min-height:inherit;border:0;overflow:hidden}.item-divider-wrapper.sc-ion-item-divider-ios{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:inherit;-webkit-box-direction:inherit;-ms-flex-direction:inherit;flex-direction:inherit;-webkit-box-align:inherit;-ms-flex-align:inherit;align-items:inherit;-ms-flex-item-align:stretch;align-self:stretch;text-overflow:ellipsis;overflow:hidden}.sc-ion-item-divider-ios-h{--ion-color-base:var(--ion-background-color-step-50, #f2f2f2);--ion-color-contrast:var(--ion-text-color-step-150, #262626);--padding-start:16px;border-radius:0;position:relative;font-size:17px}\@media screen and (orientation:landscape){.item-divider-inner.sc-ion-item-divider-ios{padding-right:calc(env(safe-area-inset-right) + 8px)}}[slot=start].sc-ion-item-divider-ios-h{margin:2px 16px 2px 0}[slot=end].sc-ion-item-divider-ios-h{margin-left:8px;margin-right:8px}.sc-ion-item-divider-ios-s > ion-icon[slot=end], .sc-ion-item-divider-ios-s > ion-icon[slot=start]{margin-left:0;margin-top:7px;margin-bottom:7px}.sc-ion-item-divider-ios-s > h1{margin:0 0 2px;font-size:24px;font-weight:400}.sc-ion-item-divider-ios-s > h2{margin:0 0 2px;font-size:17px;font-weight:400}.sc-ion-item-divider-ios-s > h3, .sc-ion-item-divider-ios-s > h4, .sc-ion-item-divider-ios-s > h5, .sc-ion-item-divider-ios-s > h6{margin:0 0 3px;font-size:14px;font-weight:400;line-height:normal}.sc-ion-item-divider-ios-s > p{margin:0 0 2px;color:var(--ion-text-color-step-600,#999);font-size:14px;line-height:normal;text-overflow:inherit;overflow:inherit}.sc-ion-item-divider-ios-s > h2:last-child -shadowcssslotted(h3:last-child), .sc-ion-item-divider-ios-s > h4:last-child, .sc-ion-item-divider-ios-s > h5:last-child, .sc-ion-item-divider-ios-s > h6:last-child, .sc-ion-item-divider-ios-s > p:last-child{margin-bottom:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemDivider, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return ItemDivider;
-}());
-var ItemGroup = /** @class */ (function () {
-    function ItemGroup() {
-    }
-    ItemGroup.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'item-group')
-        };
-    };
-    Object.defineProperty(ItemGroup, "is", {
-        get: function () { return "ion-item-group"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemGroup, "style", {
-        get: function () { return "ion-item-group{display:block}.item-group-ios ion-item-sliding:last-child .item,.item-group-ios ion-item:last-child{--border-width:0}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ItemGroup, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return ItemGroup;
-}());
-var Label = /** @class */ (function () {
-    function Label() {
-    }
-    Label.prototype.componentDidLoad = function () {
-        this.positionChanged();
-    };
-    Label.prototype.positionChanged = function () {
-        var _a;
-        var position = this.position;
-        this.ionStyle.emit((_a = {
-                'label': true
-            },
-            _a["label-" + position] = !!position,
-            _a));
-    };
-    Label.prototype.hostData = function () {
-        var _a;
-        var position = this.position;
-        return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color), (_a = {}, _a["label-" + position] = !!position, _a))
-        };
-    };
-    Object.defineProperty(Label, "is", {
-        get: function () { return "ion-label"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Label, "encapsulation", {
-        get: function () { return "scoped"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Label, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                },
-                "position": {
-                    "type": String,
-                    "attr": "position",
-                    "watchCallbacks": ["positionChanged"]
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Label, "events", {
-        get: function () {
-            return [{
+                    "name": "ionChange",
+                    "method": "ionChange",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionCancel",
+                    "method": "ionCancel",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionFocus",
+                    "method": "ionFocus",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionBlur",
+                    "method": "ionBlur",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
                     "name": "ionStyle",
                     "method": "ionStyle",
                     "bubbles": true,
@@ -332,221 +477,182 @@ var Label = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Label, "style", {
-        get: function () { return ".sc-ion-label-ios-h{display:block;-webkit-box-flex:1;-ms-flex:1;flex:1;font-family:var(--ion-font-family,inherit);font-size:inherit;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box}.ion-color.sc-ion-label-ios-h{color:var(--ion-color-base)}[text-wrap].sc-ion-label-ios-h{white-space:normal;font-size:14px;line-height:1.5}.item-interactive-disabled.sc-ion-label-ios-h, .item-interactive-disabled   .sc-ion-label-ios-h{cursor:default;opacity:.3;pointer-events:none}.item-input.sc-ion-label-ios-h, .item-input   .sc-ion-label-ios-h{-webkit-box-flex:initial;-ms-flex:initial;flex:initial;max-width:200px;pointer-events:none}.label-fixed.sc-ion-label-ios-h{-webkit-box-flex:0;-ms-flex:0 0 100px;flex:0 0 100px;width:100px;min-width:100px;max-width:200px}.label-floating.sc-ion-label-ios-h, .label-stacked.sc-ion-label-ios-h{margin-bottom:0;-ms-flex-item-align:stretch;align-self:stretch;width:auto;max-width:100%}.item-has-focus.label-floating.sc-ion-label-ios-h, .item-has-focus   .label-floating.sc-ion-label-ios-h, .item-has-value.label-floating.sc-ion-label-ios-h, .item-has-value   .label-floating.sc-ion-label-ios-h{-webkit-transform:translate3d(0,0,0) scale(.8);transform:translate3d(0,0,0) scale(.8)}.sc-ion-label-ios-h{margin:10px 8px 10px 0}.label-stacked.sc-ion-label-ios-h{margin-bottom:4px;font-size:12px}.label-floating.sc-ion-label-ios-h{margin-bottom:0;-webkit-transform:translate3d(0,27px,0);transform:translate3d(0,27px,0);-webkit-transform-origin:left top;transform-origin:left top;-webkit-transition:-webkit-transform 150ms ease-in-out;transition:-webkit-transform 150ms ease-in-out;transition:transform 150ms ease-in-out;transition:transform 150ms ease-in-out,-webkit-transform 150ms ease-in-out}.sc-ion-label-ios-s  h1 {margin:0 0 2px;font-size:24px;font-weight:400}.sc-ion-label-ios-s  h2 {margin:0 0 2px;font-size:17px;font-weight:400}.sc-ion-label-ios-s  h3 , .sc-ion-label-ios-s  h4 , .sc-ion-label-ios-s  h5 , .sc-ion-label-ios-s  h6 {margin:0 0 3px;font-size:14px;font-weight:400;line-height:normal}.sc-ion-label-ios-s  p {margin:0 0 2px;font-size:14px;line-height:normal;text-overflow:inherit;overflow:inherit}.sc-ion-label-ios-s > p{color:var(--ion-text-color-step-600,#999)}.sc-ion-label-ios-h.ion-color.sc-ion-label-ios-s > p, .ion-color .sc-ion-label-ios-h.sc-ion-label-ios-s > p{color:inherit}.sc-ion-label-ios-s  h2:last-child , .sc-ion-label-ios-s  h3:last-child , .sc-ion-label-ios-s  h4:last-child , .sc-ion-label-ios-s  h5:last-child , .sc-ion-label-ios-s  h6:last-child , .sc-ion-label-ios-s  p:last-child {margin-bottom:0}"; },
+    Object.defineProperty(Select, "listeners", {
+        get: function () {
+            return [{
+                    "name": "ionSelectOptionDidLoad",
+                    "method": "optLoad"
+                }, {
+                    "name": "ionSelectOptionDidUnload",
+                    "method": "optUnload"
+                }, {
+                    "name": "ionSelect",
+                    "method": "onSelect"
+                }];
+        },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Label, "styleMode", {
-        get: function () { return "ios"; },
+    Object.defineProperty(Select, "style", {
+        get: function () { return ".sc-ion-select-md-h{padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;color:var(--color);font-family:var(--ion-font-family,inherit);overflow:hidden;--color:var(--ion-text-color, #000);--icon-color:var(--ion-text-color-step-600, #999999);--padding-top:11px;--padding-end:8px;--padding-bottom:11px;--padding-start:16px;--placeholder-color:var(--ion-text-color-step-600, #999999)}.in-item.sc-ion-select-md-h{position:static;max-width:45%}.select-disabled.sc-ion-select-md-h{opacity:.4;pointer-events:none}.select-key.sc-ion-select-md-h   button.sc-ion-select-md{border:2px solid #5e9ed6}.select-placeholder.sc-ion-select-md{color:var(--placeholder-color)}.select-cover.sc-ion-select-md{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.select-icon.sc-ion-select-md{position:relative}.select-text.sc-ion-select-md{-webkit-box-flex:1;-ms-flex:1;flex:1;min-width:16px;font-size:inherit;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.select-icon-inner.sc-ion-select-md{left:5px;top:50%;margin-top:-3px;position:absolute;width:0;height:0;border-top:5px solid;border-right:5px solid transparent;border-left:5px solid transparent;color:var(--icon-color);pointer-events:none}.sc-ion-select-md-s > ion-select-option{display:none}button.sc-ion-select-md:focus{outline:0}.select-icon.sc-ion-select-md{width:12px;height:19px}"; },
         enumerable: true,
         configurable: true
     });
-    return Label;
+    Object.defineProperty(Select, "styleMode", {
+        get: function () { return "md"; },
+        enumerable: true,
+        configurable: true
+    });
+    return Select;
 }());
-var List = /** @class */ (function () {
-    function List() {
-        this.inset = false;
+function parseValue(value) {
+    if (value == null) {
+        return undefined;
     }
-    List.prototype.closeSlidingItems = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var item;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                item = this.el.querySelector('ion-item-sliding');
-                if (item && item.closeOpened) {
-                    return [2 /*return*/, item.closeOpened()];
-                }
-                return [2 /*return*/, false];
-            });
-        });
+    if (Array.isArray(value)) {
+        return value.join(',');
+    }
+    return value.toString();
+}
+var selectIds = 0;
+var SelectOption = /** @class */ (function () {
+    function SelectOption() {
+        this.inputId = "ion-selopt-" + selectOptionIds++;
+        this.disabled = false;
+        this.selected = false;
+    }
+    SelectOption.prototype.componentWillLoad = function () {
+        if (this.value == null) {
+            this.value = this.el.textContent || '';
+        }
     };
-    List.prototype.hostData = function () {
-        var _a;
+    SelectOption.prototype.componentDidLoad = function () {
+        this.ionSelectOptionDidLoad.emit();
+    };
+    SelectOption.prototype.componentDidUnload = function () {
+        this.ionSelectOptionDidUnload.emit();
+    };
+    SelectOption.prototype.hostData = function () {
         return {
-            class: Object.assign({}, Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.mode, 'list'), (_a = {}, _a["list-lines-" + this.lines] = !!this.lines, _a['list-inset'] = this.inset, _a["list-" + this.mode + "-lines-" + this.lines] = !!this.lines, _a))
+            'role': 'option',
+            'id': this.inputId
         };
     };
-    Object.defineProperty(List, "is", {
-        get: function () { return "ion-list"; },
+    Object.defineProperty(SelectOption, "is", {
+        get: function () { return "ion-select-option"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(List, "properties", {
+    Object.defineProperty(SelectOption, "properties", {
         get: function () {
             return {
-                "closeSlidingItems": {
-                    "method": true
+                "disabled": {
+                    "type": Boolean,
+                    "attr": "disabled"
                 },
                 "el": {
                     "elementRef": true
                 },
-                "inset": {
+                "selected": {
                     "type": Boolean,
-                    "attr": "inset"
+                    "attr": "selected"
                 },
-                "lines": {
-                    "type": String,
-                    "attr": "lines"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
+                "value": {
+                    "type": "Any",
+                    "attr": "value",
+                    "mutable": true
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(List, "style", {
-        get: function () { return "ion-list{margin:0;padding:0;display:block;background:var(--ion-item-background-color,var(--ion-background-color,#fff));contain:content;list-style-type:none}ion-list.list-inset{-webkit-transform:translateZ(0);transform:translateZ(0);overflow:hidden}.list-ios{margin:-1px 0 32px}.list-ios:not(.list-inset):not(.list-ios-lines-none) .item:last-child{--inner-border-width:0;--border-width:0 0 0.55px 0}.list-ios.list-inset{margin:16px;border-radius:4px}.list-ios.list-inset ion-item{--border-width:0 0 1px 0;--inner-border-width:0}.list-ios.list-inset ion-item:last-child{--border-width:0;--inner-border-width:0}.list-ios.list-inset+ion-list.list-inset{margin-top:0}.list-ios-lines-none .item{--border-width:0;--inner-border-width:0}.list-ios .item-lines-full,.list-ios-lines-full .item{--border-width:0 0 0.55px 0}.list-ios-lines-full .item{--inner-border-width:0}.list-ios .item-lines-inset,.list-ios-lines-inset .item{--inner-border-width:0 0 0.55px 0}.list-ios .item-lines-inset{--border-width:0}.list-ios .item-lines-full{--inner-border-width:0}"; },
+    Object.defineProperty(SelectOption, "events", {
+        get: function () {
+            return [{
+                    "name": "ionSelectOptionDidLoad",
+                    "method": "ionSelectOptionDidLoad",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }, {
+                    "name": "ionSelectOptionDidUnload",
+                    "method": "ionSelectOptionDidUnload",
+                    "bubbles": true,
+                    "cancelable": true,
+                    "composed": true
+                }];
+        },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(List, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return List;
+    return SelectOption;
 }());
-var ListHeader = /** @class */ (function () {
-    function ListHeader() {
+var selectOptionIds = 0;
+var SelectPopover = /** @class */ (function () {
+    function SelectPopover() {
+        this.options = [];
     }
-    ListHeader.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color)
-        };
+    SelectPopover.prototype.onSelect = function (ev) {
+        var option = this.options.find(function (o) { return o.value === ev.target.value; });
+        if (option && option.handler) {
+            option.handler();
+        }
     };
-    ListHeader.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null);
+    SelectPopover.prototype.render = function () {
+        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-list", null, this.header !== undefined && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-list-header", null, this.header), (this.subHeader !== undefined || this.message !== undefined) &&
+            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-item", null, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-label", { "text-wrap": true }, this.subHeader !== undefined && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("h3", null, this.subHeader), this.message !== undefined && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("p", null, this.message))), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-radio-group", null, this.options.map(function (option) { return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-item", null, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-label", null, option.text), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-radio", { checked: option.checked, value: option.value, disabled: option.disabled })); }))));
     };
-    Object.defineProperty(ListHeader, "is", {
-        get: function () { return "ion-list-header"; },
+    Object.defineProperty(SelectPopover, "is", {
+        get: function () { return "ion-select-popover"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ListHeader, "encapsulation", {
-        get: function () { return "shadow"; },
+    Object.defineProperty(SelectPopover, "encapsulation", {
+        get: function () { return "scoped"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ListHeader, "properties", {
+    Object.defineProperty(SelectPopover, "properties", {
         get: function () {
             return {
-                "color": {
+                "header": {
                     "type": String,
-                    "attr": "color"
+                    "attr": "header"
                 },
-                "mode": {
+                "message": {
                     "type": String,
-                    "attr": "mode"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ListHeader, "style", {
-        get: function () { return ".sc-ion-list-header-ios-h{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:0;padding:0 0 0 16px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;width:100%;min-height:40px;background:var(--background);color:var(--color);overflow:hidden;--background:transparent;--color:var(--ion-text-color-step-150, #262626);position:relative;font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase}.ion-color.sc-ion-list-header-ios-h{background:var(--ion-color-base);color:var(--ion-color-contrast)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ListHeader, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return ListHeader;
-}());
-var Note = /** @class */ (function () {
-    function Note() {
-    }
-    Note.prototype.hostData = function () {
-        return {
-            class: Object(_chunk_50fe9317_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this.color)
-        };
-    };
-    Note.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot", null);
-    };
-    Object.defineProperty(Note, "is", {
-        get: function () { return "ion-note"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Note, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Note, "properties", {
-        get: function () {
-            return {
-                "color": {
-                    "type": String,
-                    "attr": "color"
+                    "attr": "message"
                 },
-                "mode": {
+                "options": {
+                    "type": "Any",
+                    "attr": "options"
+                },
+                "subHeader": {
                     "type": String,
-                    "attr": "mode"
+                    "attr": "sub-header"
                 }
             };
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Note, "style", {
-        get: function () { return ".sc-ion-note-ios-h{color:var(--color);font-family:var(--ion-font-family,inherit);--color:var(--ion-text-color-step-650, #a6a6a6)}.ion-color.sc-ion-note-ios-h{color:var(--ion-color-base)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Note, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Note;
-}());
-var SkeletonText = /** @class */ (function () {
-    function SkeletonText() {
-        this.width = '100%';
-    }
-    SkeletonText.prototype.render = function () {
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("span", { style: { width: this.width } }, "\u00A0");
-    };
-    Object.defineProperty(SkeletonText, "is", {
-        get: function () { return "ion-skeleton-text"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SkeletonText, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(SkeletonText, "properties", {
+    Object.defineProperty(SelectPopover, "listeners", {
         get: function () {
-            return {
-                "width": {
-                    "type": String,
-                    "attr": "width"
-                }
-            };
+            return [{
+                    "name": "ionSelect",
+                    "method": "onSelect"
+                }];
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(SkeletonText, "style", {
-        get: function () { return ".sc-ion-skeleton-text-ios-h{display:inline-block;width:100%;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;--background:var(--ion-text-color, #000)}span.sc-ion-skeleton-text-ios{display:inline-block;font-size:8px;background:var(--background);opacity:.1}"; },
+    Object.defineProperty(SelectPopover, "style", {
+        get: function () { return ".sc-ion-select-popover-h   ion-list.sc-ion-select-popover{margin:-1px 0}.sc-ion-select-popover-h   ion-label.sc-ion-select-popover, .sc-ion-select-popover-h   ion-list-header.sc-ion-select-popover{margin:0}"; },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(SkeletonText, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return SkeletonText;
+    return SelectPopover;
 }());
 
 

@@ -1,12 +1,12 @@
 import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
 
 import { StateLocation } from '../location/location.state';
 import { environment } from '../../../environments/environment';
 import { FoursquareResponseVenueSearch } from '../../interfaces/foursquare/foursquare-response-venue-search.interface';
 import { PlaceSearch } from './places.actions';
+import { GeolocationPosition } from '@capacitor/core';
 
 export interface StatePlacesModel
 {
@@ -35,8 +35,8 @@ export class StatePlaces
     @Action(PlaceSearch)
     placeSearch({ getState, patchState }: StateContext<StatePlacesModel>, { payload }: PlaceSearch)
     {
-        const searchText : string                        = payload == null ? '' : payload.trim();
-        const location   : BackgroundGeolocationResponse = this.store.selectSnapshot(StateLocation.location);
+        const searchText : string              = payload == null ? '' : payload.trim();
+        const location   : GeolocationPosition = this.store.selectSnapshot(StateLocation.location);
 
         if (searchText.length === 0)
         {
