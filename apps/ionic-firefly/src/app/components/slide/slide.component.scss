@@ -3,7 +3,7 @@
 $app-slide-color-background:                         white;
 
 $app-slide-margin:                                   28px;
-$app-slide-margin-top:                               18px;
+$app-slide-margin-top:                               -32px;
 $app-slide-margin-bottom:                            0;
 $app-slide-padding:                                  30px;
 
@@ -14,63 +14,26 @@ $app-slide-close-size:                               26px;
 $app-slide-close-size-half:                          $app-slide-close-size / 2;
 $app-slide-close-border-color:                       rgba(46, 47, 45, 0.7);
 $app-slide-close-border-width:                       2px;
-$app-slide-close-box-shadow:                         $gm-elevated-1;
 
 :host
 {
     position: relative;
     display: flex;
-    flex-direction: column;
-    background-color: transparent;
-    align-items: start;
 
-    .cpt-card
+    background-color: $app-slide-color-background;
+    height: calc(100% - #{$app-slide-height-margin});
+    margin: $app-slide-margin;
+    margin-top: $app-slide-margin-top;
+    margin-bottom: $app-slide-margin-bottom;
+    box-shadow: 0 15px 25px 0 rgba(0,0,0,0.20);
+    border-radius: 14px;
+    padding: $app-slide-padding;
+
+    > .cpt-card
     {
-        background-color: $app-slide-color-background;
-        height: calc(100% - #{$app-slide-height-margin});
-        width: calc(100% - #{$app-slide-width-margin});
-        margin: $app-slide-margin;
-        margin-top: $app-slide-margin-top;
-        margin-bottom: $app-slide-margin-bottom;
-        box-shadow: 0 15px 25px 0 rgba(0,0,0,0.20);
-        border-radius: 14px;
-        padding: $app-slide-padding;
+        height: 100%;
+        width: 100%;
 
-/*
-      &:before
-      {
-          display: block;
-          position: absolute;
-          content: '';
-          height: $app-slide-close-size;
-          width: $app-slide-close-size;
-          top: -$app-slide-close-size-half + $app-slide-margin-top;
-          left: -$app-slide-close-size-half + $app-slide-margin;
-          border-radius: $app-slide-close-size-half;
-          background-color: $app-slide-color-background;
-          border-color: $app-slide-close-border-color;
-          border-style: solid;
-          border-width: $app-slide-close-border-width;
-          box-shadow: $app-slide-close-box-shadow;
-          cursor: pointer;
-      }
-
-      &:after
-      {
-          display: block;
-          position: absolute;
-          content: '\d7';
-          height: $app-slide-close-size;
-          width: $app-slide-close-size;
-          top: -$app-slide-close-size-half + $app-slide-margin-top - 2px;
-          left: -$app-slide-close-size-half + $app-slide-margin;
-          font-size: $app-slide-close-size + 6px;
-          color: $app-slide-close-border-color;
-          line-height: $app-slide-close-size;
-          text-align: center;
-          cursor: pointer;
-      }
-*/
         > .cpt-title
         {
             margin: 0;
@@ -96,7 +59,7 @@ $app-slide-close-box-shadow:                         $gm-elevated-1;
         {
             width: 100%;
             margin-top: 27px;
-//            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    //            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
         }
 
         > .cpt-button
