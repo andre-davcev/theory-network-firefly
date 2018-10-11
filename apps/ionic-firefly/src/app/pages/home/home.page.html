@@ -22,7 +22,7 @@
 
 <ion-slides pager="true" (ionSlideDidChange)="slideChanged()">
     <ion-slide *ngFor="let notification of notifications$ | async">
-        <app-slide [slide]="notification"></app-slide>
+        <app-slide [slide]="notification" [buttonText]="'general.go' | translate"></app-slide>
     </ion-slide>
 </ion-slides>
 

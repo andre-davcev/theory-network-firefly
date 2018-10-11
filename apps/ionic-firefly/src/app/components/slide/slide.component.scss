@@ -3,12 +3,12 @@
 $app-slide-color-background:                         white;
 
 $app-slide-margin:                                   28px;
-$app-slide-margin-top:                               -32px;
+$app-slide-margin-top:                               -24px;
 $app-slide-margin-bottom:                            0;
 $app-slide-padding:                                  30px;
 
 $app-slide-width-margin:                             $app-slide-margin * 2;
-$app-slide-height-margin:                            128px;
+$app-slide-height-margin:                            88px;
 
 $app-slide-close-size:                               26px;
 $app-slide-close-size-half:                          $app-slide-close-size / 2;
@@ -19,6 +19,7 @@ $app-slide-close-border-width:                       2px;
 {
     position: relative;
     display: flex;
+    width: 100%;
 
     background-color: $app-slide-color-background;
     height: calc(100% - #{$app-slide-height-margin});
@@ -28,62 +29,63 @@ $app-slide-close-border-width:                       2px;
     box-shadow: 0 15px 25px 0 rgba(0,0,0,0.20);
     border-radius: 14px;
     padding: $app-slide-padding;
+    padding-top: $app-slide-padding + 8px;
+    padding-bottom: $app-slide-padding + 10px;
 
-    > .cpt-card
+    .cpt-card
     {
         height: 100%;
         width: 100%;
+    }
 
-        > .cpt-title
-        {
-            margin: 0;
-            margin-top: 15px;
-            line-height: 26px;
-            font-size: 20px;
-            font-weight: 400;
-            text-transform: uppercase;
-            color: rgba(0, 0, 0, 0.7);
-        }
+    .cpt-title
+    {
+        margin: 0;
+        line-height: 26px;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.7);
+    }
 
-        > .cpt-short
-        {
-            margin: 0;
-            margin-top: 8px;
-            font-size: 18px;
-            font-weight: 400;
-            line-height: 21px;
-            color: rgba(0, 0, 0, 0.54);
-        }
+    .cpt-short
+    {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21px;
+        color: rgba(0, 0, 0, 0.54);
+    }
 
-        > .cpt-image
-        {
-            width: 100%;
-            margin-top: 27px;
-    //            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-        }
+    .cpt-image
+    {
+        width: 100%;
+    }
 
-        > .cpt-button
-        {
-            padding: 0;
-            margin: 0;
-            margin-top: 41px;
-            text-transform: uppercase;
-            background-color: $app-color-primary;
-            color: $app-color-white;
-            font-size: 16px;
-            line-height: 16px;
-            font-weight: 900;
-            padding: 16px 24px;
-            border-radius: 24px;
-        }
+    .cpt-button
+    {
+        position: relative;
+        width: auto;
+        padding: 0;
+        margin: 0;
+        text-transform: uppercase;
+        background-color: $app-color-primary;
+        color: $app-color-white;
+        font-size: 1rem;
+        line-height: 1rem;
+        font-weight: 900;
+        padding: 1rem 1.5rem;
+        border-radius: 1.5rem;
+        letter-spacing: 1px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 
-        > .cpt-paragraph
-        {
-            margin: 0;
-            margin-top: 13px;
-            font-size: 14px;
-            line-height: 17px;
-            color: rgba(0, 0, 0, 0.54);
-        }
+    .cpt-paragraph
+    {
+        margin: 0;
+        font-size: 14px;
+        line-height: 17px;
+        color: rgba(0, 0, 0, 0.54);
     }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { PageHome } from './home.page';
 import { ModulePage } from '../page.module';
@@ -16,7 +17,8 @@ export const routes: Routes =
     [
         ModulePage,
         RouterModule.forChild(routes),
-        ModuleComponentSlide
+        ModuleComponentSlide,
+        TranslateModule
     ],
 
     declarations: [PageHome]
