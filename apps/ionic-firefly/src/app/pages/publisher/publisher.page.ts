@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ActionSheetController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActionSheetController, NavController } from '@ionic/angular';
 import { tap } from 'rxjs/operators';
 import { StatusBarStyle } from '@capacitor/core';
 import { from } from 'rxjs';
@@ -20,7 +19,7 @@ export class PagePublisher implements OnInit
     public  segment:string = 'clusters';
     private translations: Array<string> = [];
 
-    constructor(private actionSheetController: ActionSheetController, private translate: TranslateService, private router: Router) { }
+    constructor(private nav: NavController, private actionSheetController: ActionSheetController, private translate: TranslateService) { }
 
     ngOnInit(): void
     {
@@ -40,7 +39,7 @@ export class PagePublisher implements OnInit
 
     ionViewWillEnter()
     {
-                StatusBar.setStyle({style: StatusBarStyle.Light});
+        StatusBar.setStyle({style: StatusBarStyle.Light});
     }
 
     public add()
@@ -49,7 +48,7 @@ export class PagePublisher implements OnInit
 
         if (segment === 'cluster')
         {
-            this.router.navigate(['/publisher/' + segment]);
+            this.nav.navigateForward(['/publisher/' + segment]);
         }
         else
         {
