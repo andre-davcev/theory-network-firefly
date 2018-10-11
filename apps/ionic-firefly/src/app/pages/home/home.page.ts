@@ -78,15 +78,13 @@ export class PageHome
 
         if (modal == null)
         {
-            from(this.modalController.create(this.pages[type])).pipe
-            (
-                tap((element: HTMLIonModalElement) =>
-                {
-                    modal = this.modals[type] = element;
+            from(this.modalController.create({ component: this.pages[type] })).
+            subscribe((element: HTMLIonModalElement) =>
+            {
+                modal = this.modals[type] = element;
 
-                    modal.present();
-                })
-            )
+                modal.present();
+            })
         }
         else
         {

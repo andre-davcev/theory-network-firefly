@@ -18,4 +18,4 @@ import { ModulePage } from '../page.module';
     ]
 })
 
-export class ModulePagePublisherCluster { }
+export class ModulePagePublisherClusterCategories { }
