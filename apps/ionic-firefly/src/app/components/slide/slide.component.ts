@@ -13,6 +13,7 @@ import { Slide } from './slide.interface';
 export class ComponentSlide
 {
     @Input() slide: Slide;
+    @Input() buttonText: string;
 
     constructor() { }
 }

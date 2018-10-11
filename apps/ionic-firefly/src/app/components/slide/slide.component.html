@@ -1,6 +1,13 @@
-<div class="cpt-card" fxLayout="column" fxLayoutGap="1rem">
-    <h1 class="cpt-title">{{ slide.title }}</h1>
-    <h2 class="cpt-short">{{ slide.body }}</h2>
-    <img class="cpt-image" [src]="slide.image">
-    <p class="cpt-paragraph">{{ slide.date }}</p>
+<div class="cpt-card" fxLayout="column" fxLayoutAlign="space-between center">
+    <section fxLayout="column" fxLayoutGap="0.5rem">
+        <h1 class="cpt-title">{{ slide.title }}</h1>
+        <h2 class="cpt-short">{{ slide.body }}</h2>
+    </section>
+
+    <section fxLayout="column" fxLayoutGap="0.75rem">
+        <ion-img [src]="slide.image"></ion-img>
+        <p class="cpt-paragraph">{{ slide.date }}</p>
+    </section>
+
+    <div class="cpt-button">{{ buttonText }}</div>
 </div>

@@ -9,6 +9,7 @@
   "general.done"          : "Done",
   "general.notifications" : "Notifications",
   "general.settings"      : "Settings",
+  "general.go"            : "Go",
 
   "tabs.app.notifications" : "Notifications",
   "tabs.app.publisher"     : "Publish",

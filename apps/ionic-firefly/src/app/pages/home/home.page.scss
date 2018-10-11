@@ -12,20 +12,6 @@ $app-card-height: 48px;
         &.header-md::after {
             background-image: none;
         }
-
-        ion-toolbar {
-            padding-top: 0.75rem;
-        }
-    }
-
-    ion-footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-
-        ion-toolbar {
-            padding-bottom: 0.5rem;
-        }
     }
 
     ion-toolbar {
@@ -38,35 +24,26 @@ $app-card-height: 48px;
     }
 
     ion-slides {
-      --background: #{$app-color-primary};
-      --bullet-background: #{$app-color-black};
-      --bullet-background-active: #{$app-color-dark};
+        --background: #{$app-color-primary};
+        --bullet-background: #{$app-color-black};
+        --bullet-background-active: #{$app-color-dark};
 
-      background-color: $app-color-primary;
-      height: calc(100% - 112px);
-    }
-}
+        background-color: $app-color-primary;
+        width: 100%;
+        height: calc(100% - 112px);
 
-ion-slides
-{
-    .swiper-pagination-bullet-active
-    {
-        background-color: $app-color-white;
+        position: absolute;
+        top: 68px;
+        left: 0;
     }
 
-    .swiper-container
-    {
-        .swiper-pagination
-        {
-            bottom: 28px;
+    ion-slide {
+        width: 100%;
+    }
+
+    ion-footer {
+        ion-toolbar {
+            padding-bottom: 0.5rem;
         }
-    }
-}
-
-.card
-{
-    .button
-    {
-        height: $app-card-height;
     }
 }
