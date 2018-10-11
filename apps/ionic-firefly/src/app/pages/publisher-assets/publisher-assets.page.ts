@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 export enum PagesAssets
 {
@@ -23,10 +23,10 @@ export class PagePublisherAssets
 {
     public PagesAssets: any = PagesAssets;
 
-    constructor(private router: Router) { }
+    constructor(private nav: NavController) { }
 
     public go(page: PagesAssets): void
     {
-        this.router.navigate([page]);
+        this.nav.navigateForward([page]);
     }
 }
