@@ -3,6 +3,11 @@
 $app-card-height: 48px;
 
 :host {
+    ion-toolbar {
+        --padding-start: 1.25rem;
+        --padding-end: 1.25rem;
+    }
+
     ion-header {
         &.header-md::after {
             background-image: none;
