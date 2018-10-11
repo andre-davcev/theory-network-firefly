@@ -19,6 +19,7 @@
       "alefragnani.numbered-bookmarks",
       "mikael.angular-beastcode",
       "johnpapa.angular2",
-      "shan.code-settings-sync"
+      "shan.code-settings-sync",
+      "github.vscode-pull-request-github"
   ]
 }
