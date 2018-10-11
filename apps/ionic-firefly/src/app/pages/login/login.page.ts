@@ -7,7 +7,6 @@ import { NavController } from '@ionic/angular';
 
 import { StateUser } from '../../state/user/user.state';
 import { UserAuthenticate, LoginEmail } from '../../state/user/user.actions';
-import { Page } from '../../classes/page.class';
 
 @Component
 ({
@@ -16,26 +15,20 @@ import { Page } from '../../classes/page.class';
     styleUrls   : ['./login.page.scss']
 })
 
-export class PageLogin extends Page implements OnInit
+export class PageLogin implements OnInit
 {
     @Select(StateUser.authenticated)          userAuthenticated$: Observable<boolean>;
     @Select(StateUser.loading)                userLoading$:       Observable<boolean>;
     @Select(StateUser.userFound)              userFound$:         Observable<boolean>;
     @Select(StateUser.loadedNotAuthenticated) loadedNotAuthenticated$: Observable<boolean>;
 
-    constructor(private store: Store, private router: Router, private nav: NavController)
-    {
-        super();
-    }
+    constructor(private store: Store, private router: Router, private nav: NavController) { }
 
     public ngOnInit(): void
     {
-        this.subscriptionsAdd
-        (
-            this.userFound$.
-            pipe(filter((userFound: boolean) => userFound), take(1)).
-            subscribe(() => this.nav.navigateRoot('/home'))
-        );
+        this.userFound$.
+        pipe(filter((userFound: boolean) => userFound), take(1)).
+        subscribe(() => this.nav.navigateRoot('/home'))
 
         this.store.dispatch(new UserAuthenticate());
     }
