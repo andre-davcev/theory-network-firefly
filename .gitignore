@@ -76,3 +76,4 @@ xplat/**/*.ngsummary.json
 
 # apps
 apps/*/*/app/src/main/assets/public
+to-do.txt
