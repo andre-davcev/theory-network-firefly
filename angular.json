@@ -104,6 +104,41 @@
           }
         }
       }
+    },
+    "firefly-mobile": {
+      "root": "libs/firefly-mobile",
+      "sourceRoot": "libs/firefly-mobile/src",
+      "projectType": "library",
+      "prefix": "fir",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/firefly-mobile/tsconfig.lib.json",
+            "project": "libs/firefly-mobile/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/firefly-mobile/src/test.ts",
+            "tsConfig": "libs/firefly-mobile/tsconfig.spec.json",
+            "karmaConfig": "libs/firefly-mobile/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/firefly-mobile/tsconfig.lib.json",
+              "libs/firefly-mobile/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
