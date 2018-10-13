@@ -42,8 +42,14 @@
       "@firefly/core": [
         "libs/firefly-core/src/index.ts"
       ],
+      "@firefly/core/*": [
+        "libs/firefly-core/src/*"
+      ],
       "@firefly/mobile": [
         "libs/firefly-mobile/src/index.ts"
+      ],
+      "@firefly/mobile/*": [
+        "libs/firefly-mobile/src/*"
       ]
     }
   },

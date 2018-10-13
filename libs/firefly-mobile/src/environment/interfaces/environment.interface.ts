@@ -1,4 +1,4 @@
-import { EnvironmentApis } from '@firefly/mobile';
+import { EnvironmentApis } from '.';
 
 export interface Environment
 {

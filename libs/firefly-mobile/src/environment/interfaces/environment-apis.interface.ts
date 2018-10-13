@@ -1,4 +1,4 @@
-import { EnvironmentFirebase, EnvironmentAccessToken, EnvironmentPlaces } from '@firefly/mobile';
+import { EnvironmentFirebase, EnvironmentAccessToken, EnvironmentPlaces } from '.';
 
 export interface EnvironmentApis
 {

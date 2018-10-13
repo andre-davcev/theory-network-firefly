@@ -37,8 +37,6 @@
     "@capacitor/cli": "^1.0.0-beta.8",
     "@capacitor/core": "^1.0.0-beta.8",
     "@capacitor/ios": "^1.0.0-beta.8",
-    "@firefly/core": "file:../../libs/firefly-core",
-    "@firefly/mobile": "file:../../libs/firefly-mobile",
     "@ionic-native/background-geolocation": "file:../../node_modules/@ionic-native/background-geolocation",
     "@ionic-native/core": "file:../../node_modules/@ionic-native/core",
     "@ionic-native/firebase": "file:../../node_modules/@ionic-native/firebase",
