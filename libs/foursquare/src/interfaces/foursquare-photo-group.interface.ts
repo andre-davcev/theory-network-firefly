@@ -1,4 +1,4 @@
-import { FoursquarePhoto } from './foursquare-photo.interface';
+import { FoursquarePhoto } from '.';
 
 export interface FoursquarePhotoGroup
 {

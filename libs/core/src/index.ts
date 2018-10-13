@@ -1,4 +1,5 @@
 export * from './base';
+export * from './enums';
 export * from './environments/environment';
 export * from './services';
 export * from './utils';

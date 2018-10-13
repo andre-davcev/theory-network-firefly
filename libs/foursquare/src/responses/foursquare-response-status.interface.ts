@@ -1,4 +1,4 @@
-import { HttpStatusCode } from '../../enums/http-status-code.enum';
+import { HttpStatusCode } from '@theory/core';
 
 export interface FoursquareResponseStatus
 {

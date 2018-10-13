@@ -1,13 +1,4 @@
-import { FoursquarePhoto } from './foursquare-photo.interface';
-import { FoursquareVenueContact } from './foursquare-venue-contact.interface';
-import { FoursquareVenueLocation } from './foursquare-venue-location.interface';
-import { FoursquareCategory } from './foursquare-category.interface';
-import { FoursquareVenueStats } from './foursquare-venue-stats.interface';
-import { FoursquarePhotoGroup } from './foursquare-photo-group.interface';
-import { FoursquarePage } from './foursquare-page.interface';
-import { FoursquareGroups } from './foursquare-groups.interface';
-import { FoursquarePhrase } from './foursquare-phrase.interface';
-import { FoursquareHours } from './foursquare-hours.interface';
+import { FoursquarePhoto, FoursquareVenueContact, FoursquareVenueLocation, FoursquareCategory, FoursquareVenueStats, FoursquarePhotoGroup, FoursquarePage, FoursquareGroups, FoursquarePhrase, FoursquareHours } from '.';
 
 export interface FoursquareVenue
 {

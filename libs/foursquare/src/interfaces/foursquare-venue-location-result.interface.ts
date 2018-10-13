@@ -1,4 +1,4 @@
-import { FoursquareVenueLocation } from './foursquare-venue-location.interface';
+import { FoursquareVenueLocation } from '.';
 
 export interface FoursquareVenueLocationResult extends FoursquareVenueLocation
 {
