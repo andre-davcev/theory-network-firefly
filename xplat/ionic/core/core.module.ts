@@ -1,7 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { IonicModule } from '@ionic/angular';
-import { throwIfAlreadyLoaded } from '@theory/utils';
+import { throwIfAlreadyLoaded } from '@theory/core';
 import { AppCoreModule } from '@theory/web';
 
 @NgModule({

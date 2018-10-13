@@ -13,7 +13,7 @@ import {
   PlatformLanguageToken,
   WindowPlatformService
 } from '@theory/core';
-import { throwIfAlreadyLoaded } from '@theory/utils';
+import { throwIfAlreadyLoaded } from '@theory/core';
 
 // app
 import { PROVIDERS } from './services';
