@@ -2,9 +2,10 @@ import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
+import { FoursquareResponseVenueSearch } from '@theory/foursquare';
+
 import { StateLocation } from '../location/location.state';
 import { environment } from '../../../environments/environment';
-import { FoursquareResponseVenueSearch } from '../../interfaces/foursquare/foursquare-response-venue-search.interface';
 import { PlaceSearch } from './places.actions';
 import { GeolocationPosition } from '@capacitor/core';
 

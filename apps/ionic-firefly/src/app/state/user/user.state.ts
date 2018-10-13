@@ -6,15 +6,14 @@ import { catchError, switchMap, take, filter, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { PlatformEnum } from '../../enums/platform.enum';
+import { AuthProvider } from '@theory/firebase';
+
 import { StateLanguage } from '../language/language.state';
 import { LanguageGet, LanguageSet } from '../language/language.actions';
 import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, UserLogout, UserAddToken} from './user.actions';
 import { AlertsGet } from '../alert/alert.actions';
 import { NotificationsGet } from '../notifications/notifications.actions';
 import { User } from '../../models/user.model';
-import { Platform } from '@ionic/angular';
-import { AuthProvider } from '../../enums/auth-provider.enum';
 
 export interface StateUserModel
 {
