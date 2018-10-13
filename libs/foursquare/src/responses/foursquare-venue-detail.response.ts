@@ -1,5 +1,5 @@
-import { FoursquareResponseStatus } from './foursquare-response-status.interface';
-import { FoursquareVenue } from './foursquare-venue.interface';
+import { FoursquareResponseStatus } from '.';
+import { FoursquareVenue } from '../interfaces';
 
 export interface FoursquareResponseVenueDetail
 {

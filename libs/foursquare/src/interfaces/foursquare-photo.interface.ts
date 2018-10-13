@@ -1,4 +1,4 @@
-import { FoursquareUserShort } from './foursquare-user-short.interface';
+import { FoursquareUserShort } from '.';
 
 export interface FoursquarePhoto
 {

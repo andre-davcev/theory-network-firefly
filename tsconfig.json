@@ -39,12 +39,15 @@
       "@theory/features": [
         "libs/features/index.ts"
       ],
+      "@theory/scss": [
+        "libs/scss"
+      ],
 
       "@theory/core": [
         "libs/core/src/index.ts"
       ],
-      "@theory/scss": [
-        "libs/scss"
+      "@theory/foursquare": [
+        "libs/foursquare/src/index.ts"
       ],
       "@firefly/core": [
         "libs/firefly-core/src/index.ts"
