@@ -18,9 +18,6 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@theory/*": [
-        "libs/*"
-      ],
       "@theory/ionic": [
         "xplat/ionic/index.ts"
       ],
@@ -39,17 +36,21 @@
       "@theory/web/*": [
         "xplat/web/*"
       ],
+      "@theory/features": [
+        "libs/features/index.ts"
+      ],
+
+      "@theory/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@theory/scss": [
+        "libs/scss"
+      ],
       "@firefly/core": [
         "libs/firefly-core/src/index.ts"
       ],
-      "@firefly/core/*": [
-        "libs/firefly-core/src/*"
-      ],
       "@firefly/mobile": [
         "libs/firefly-mobile/src/index.ts"
-      ],
-      "@firefly/mobile/*": [
-        "libs/firefly-mobile/src/*"
       ]
     }
   },

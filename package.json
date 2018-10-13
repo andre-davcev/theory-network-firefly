@@ -24,24 +24,6 @@
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "help": "./node_modules/.bin/nx help",
-    "fire-functions-build": "cd apps/firefly/functions && tsc",
-    "fire-functions-deploy-dev": "firebase use dev && firebase deploy --only functions",
-    "fire-functions-deploy-prod": "firebase use prod && firebase deploy --only functions",
-    "fire-design-icon": "grunt sketch_export:icon",
-    "fire-design-splash": "grunt sketch_export:splash",
-    "fire-design-logo": "grunt sketch_export:logo",
-    "fire-design-text": "grunt sketch_export:text",
-    "fire-design-exports": "grunt exports",
-    "fire-ionic-watch": "cd apps/ionic-firefly && ng build --watch",
-    "fire-lib-core-build": "ng build firefly-core",
-    "fire-lib-core-watch": "ng build firefly-core --watch",
-    "fire-lib-mobile-build": "ng build firefly-mobile",
-    "fire-lib-mobile-watch": "ng build firefly-mobile --watch",
-    "capacitor-update": "npx cap update",
-    "capacitor-add-ios": "npx cap add ios",
-    "capacitor-add-android": "npx cap add android",
-    "npm-global-install-linux": "sudo npm install -g @angular/cli @nrwl/schematics ionic",
-    "npm-global-install": "npm install -g @angular/cli @nrwl/schematics ionic",
     "clean.shared": "cd libs/ && git clean -dfX && cd ../xplat/ && git clean -dfX",
     "clean": "npx rimraf -- hooks node_modules package-lock.json && npm i",
     "build.ionic.firefly": "cd apps/ionic-firefly && npm run build:web",
@@ -52,7 +34,38 @@
     "open.ionic.firefly.android": "cd apps/ionic-firefly && npm run cap.android",
     "sync.ionic.firefly": "cd apps/ionic-firefly && npm run cap.copy",
     "start.ionic.firefly": "cd apps/ionic-firefly && npm start",
-    "clean.ionic.firefly": "cd apps/ionic-firefly && npx rimraf -- hooks node_modules platforms www plugins ios android package-lock.json && npm i && rimraf -- package-lock.json"
+    "clean.ionic.firefly": "cd apps/ionic-firefly && npx rimraf -- hooks node_modules platforms www plugins ios android package-lock.json && npm i && rimraf -- package-lock.json",
+
+    "npm-global-install-linux": "sudo npm install -g @angular/cli @nrwl/schematics ionic",
+    "npm-global-install": "npm install -g @angular/cli @nrwl/schematics ionic",
+
+    "capacitor-update": "npx cap update",
+    "capacitor-add-ios": "npx cap add ios",
+    "capacitor-add-android": "npx cap add android",
+
+    "fire-update-packages-ios": "npm i && npm run prepare.ionic.firefly.ios",
+    "fire-update-packages-android": "npm i && npm run prepare.ionic.firefly.android",
+
+    "fire-functions-build": "cd apps/firefly/functions && tsc",
+    "fire-functions-deploy-dev": "firebase use dev && firebase deploy --only functions",
+    "fire-functions-deploy-prod": "firebase use prod && firebase deploy --only functions",
+
+    "fire-design-icon": "grunt sketch_export:icon",
+    "fire-design-splash": "grunt sketch_export:splash",
+    "fire-design-logo": "grunt sketch_export:logo",
+    "fire-design-text": "grunt sketch_export:text",
+    "fire-design-exports": "grunt exports",
+
+    "theory-core-build": "ng build core",
+    "theory-core-watch": "ng build core --watch",
+
+    "fire-lib-core-build": "ng build firefly-core",
+    "fire-lib-core-watch": "ng build firefly-core --watch",
+
+    "fire-lib-mobile-build": "ng build firefly-mobile",
+    "fire-lib-mobile-watch": "ng build firefly-mobile --watch",
+
+    "fire-ionic-watch": "cd apps/ionic-firefly && ng build --watch"
   },
   "private": true,
   "dependencies": {

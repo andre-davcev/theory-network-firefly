@@ -6,7 +6,7 @@ import { device, isIOS } from 'tns-core-modules/platform';
 import * as timer from 'tns-core-modules/timer';
 
 // app
-import { isString } from '@theory/utils';
+import { isString } from '@theory/core';
 
 @Injectable()
 export class TNSWindowPlatformService {

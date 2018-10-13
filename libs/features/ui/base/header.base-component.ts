@@ -1,7 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 
-// libs
-import { BaseComponent } from '@theory/core/base';
+import { BaseComponent } from '@theory/core';
 
 export abstract class HeaderBaseComponent extends BaseComponent {
   @Input() title: string;
