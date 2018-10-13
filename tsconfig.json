@@ -56,9 +56,6 @@
       ],
       "@firefly/mobile": [
         "libs/firefly-mobile/src/index.ts"
-      ],
-      "@theory/firebase": [
-        "libs/firebase/src/index.ts"
       ]
     }
   },
