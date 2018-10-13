@@ -1,4 +1,4 @@
-import { Environment } from '@firefly/mobile';
+import { Environment } from './interfaces';
 
 export const environmentProd: Environment =
 {
