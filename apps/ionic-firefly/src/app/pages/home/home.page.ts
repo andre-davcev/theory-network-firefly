@@ -5,6 +5,8 @@ import { Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
+import { StatusBar } from '@theory/capacitor';
+
 import { PageStream } from '../stream/stream.page';
 import { PageSearch } from '../search/search.page';
 import { PageSubscriptions } from '../subscriptions/subscriptions.page';
@@ -12,7 +14,6 @@ import { PagePublisherCluster } from '../cluster/cluster.page';
 import { Notification } from '../../models/notification.model';
 import { PageUser } from '../user/user.page';
 import { StateNotifications } from '../../state/notifications/notifications.state';
-import { StatusBar } from '../../constants/capacitor.const';
 
 export enum AlertsModalType
 {

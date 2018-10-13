@@ -4,6 +4,18 @@
     {
       "projectName": "core",
       "type": "es6Import"
+    },
+    {
+      "projectName": "capacitor",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "foursquare",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "firebase",
+      "type": "es6Import"
     }
   ],
   "firefly-core": [],
@@ -13,6 +25,7 @@
       "type": "es6Import"
     }
   ],
+  "capacitor": [],
   "firebase": [],
   "core": [],
   "xplat": [
