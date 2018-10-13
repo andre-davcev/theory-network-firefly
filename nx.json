@@ -8,12 +8,6 @@
     "nx.json": "*"
   },
   "projects": {
-    "firefly-mobile": {
-      "tags": []
-    },
-    "firefly-mobile-e2e": {
-      "tags": []
-    },
     "libs": {
       "tags": []
     },
@@ -21,9 +15,6 @@
       "tags": []
     },
     "ionic-firefly": {
-      "tags": []
-    },
-    "firefly-core": {
       "tags": []
     }
   }

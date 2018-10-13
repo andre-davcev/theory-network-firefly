@@ -1,6 +1,0 @@
-{
-  "name": "@firefly/mobile",
-  "version": "1.0.0",
-  "main": "src/index",
-  "typings": "index.d.ts"
-}
