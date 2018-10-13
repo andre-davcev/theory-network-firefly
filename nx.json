@@ -19,6 +19,9 @@
     },
     "firefly-core": {
       "tags": []
+    },
+    "firefly-mobile": {
+      "tags": []
     }
   }
 }
