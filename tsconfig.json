@@ -42,9 +42,11 @@
       "@theory/scss": [
         "libs/scss"
       ],
-
       "@theory/core": [
         "libs/core/src/index.ts"
+      ],
+      "@theory/firebase": [
+        "libs/firebase/src/index.ts"
       ],
       "@theory/foursquare": [
         "libs/foursquare/src/index.ts"
@@ -54,6 +56,9 @@
       ],
       "@firefly/mobile": [
         "libs/firefly-mobile/src/index.ts"
+      ],
+      "@theory/firebase": [
+        "libs/firebase/src/index.ts"
       ]
     }
   },
