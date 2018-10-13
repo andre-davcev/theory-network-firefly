@@ -1,7 +1,23 @@
 {
   "firefly-mobile": [],
-  "ionic-firefly": [],
+  "ionic-firefly": [
+    {
+      "projectName": "core",
+      "type": "es6Import"
+    }
+  ],
   "firefly-core": [],
-  "xplat": [],
-  "libs": []
+  "core": [],
+  "xplat": [
+    {
+      "projectName": "core",
+      "type": "es6Import"
+    }
+  ],
+  "libs": [
+    {
+      "projectName": "core",
+      "type": "es6Import"
+    }
+  ]
 }

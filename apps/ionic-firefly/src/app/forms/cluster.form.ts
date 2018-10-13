@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidatorsExtended } from '@theory/core';
 
 import { Cluster } from '../models/cluster.model';
-import { ValidatorsExtended } from '../validators/extended.validators';
 
 @Injectable({providedIn: 'root'})
 export class FormCluster
