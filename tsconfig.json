@@ -42,6 +42,9 @@
       "@theory/scss": [
         "libs/scss"
       ],
+      "@theory/capacitor": [
+        "libs/capacitor/src/index.ts"
+      ],
       "@theory/core": [
         "libs/core/src/index.ts"
       ],

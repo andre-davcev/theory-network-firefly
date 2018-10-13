@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '../../constants/capacitor.const';
+import { StatusBar } from '@theory/capacitor';
 
 @Component
 ({

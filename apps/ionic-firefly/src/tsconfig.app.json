@@ -18,6 +18,9 @@
           "../../../xplat/web/*"
         ],
 
+        "@theory/capacitor": [
+          "../../../libs/capacitor/src/index.ts"
+        ],
         "@theory/core": [
           "../../../libs/core/src/index.ts"
         ],

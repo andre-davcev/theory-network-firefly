@@ -3,8 +3,9 @@ import { Platform } from '@ionic/angular';
 import { from } from 'rxjs';
 import { switchMap, delay } from 'rxjs/operators';
 
-import { SplashScreen, StatusBar } from './constants/capacitor.const';
-import { PlatformEnum } from './enums/platform.enum';
+import { SplashScreen, StatusBar } from '@theory/capacitor';
+import { PlatformEnum } from '@theory/ionic';
+
 
 @Component
 ({

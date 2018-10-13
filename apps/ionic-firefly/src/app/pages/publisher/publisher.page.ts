@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 import { StatusBarStyle } from '@capacitor/core';
 import { from } from 'rxjs';
 
-import { StatusBar } from '../../constants/capacitor.const';
+import { StatusBar } from '@theory/capacitor';
 
 @Component
 ({

@@ -3,9 +3,10 @@ import { Select, Store } from '@ngxs/store';import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { StatusBarStyle } from '@capacitor/core';
 
+import { StatusBar } from '@theory/capacitor';
+
 import { StateIcons } from '../../state/icons/icons.state';
 import { SetIconId } from '../../state/icons/icons.actions';
-import { StatusBar } from '../../constants/capacitor.const';
 
 @Component
 ({
