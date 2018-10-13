@@ -38,6 +38,9 @@
       ],
       "@theory/web/*": [
         "xplat/web/*"
+      ],
+      "@firefly/core": [
+        "libs/firefly-core/src/index.ts"
       ]
     }
   },
