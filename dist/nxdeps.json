@@ -1,5 +1,7 @@
 {
+  "firefly-mobile": [],
   "ionic-firefly": [],
+  "firefly-core": [],
   "xplat": [],
   "libs": []
 }
