@@ -1,16 +1,11 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc/libs/foursquare",
+    "outDir": "../../dist/out-tsc/libs/firebase",
     "types": [
       "jasmine",
       "node"
-    ],
-    "paths": {
-      "@theory/core": [
-        "../core/src/index.ts"
-      ]
-    }
+    ]
   },
   "files": [
     "src/test.ts"

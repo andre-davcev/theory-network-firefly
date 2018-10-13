@@ -9,9 +9,6 @@
     ],
     "baseUrl": "./",
     "paths": {
-        "@theory/*": [
-          "../../../libs/*"
-        ],
         "@theory/ionic": [
           "../../../xplat/ionic/index.ts"
         ],
@@ -23,6 +20,22 @@
         ],
         "@theory/web/*": [
           "../../../xplat/web/*"
+        ],
+
+        "@theory/core": [
+          "../../../libs/core/src/index.ts"
+        ],
+        "@theory/firebase": [
+          "../../../libs/firebase/src/index.ts"
+        ],
+        "@theory/foursquare": [
+          "../../../libs/foursquare/src/index.ts"
+        ],
+        "@firefly/core": [
+          "../../../libs/firefly-core/src/index.ts"
+        ],
+        "@firefly/mobile": [
+          "../../../libs/firefly-mobile/src/index.ts"
         ]
     }
   },

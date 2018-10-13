@@ -28,6 +28,9 @@
     },
     "foursquare": {
       "tags": []
+    },
+    "firebase": {
+      "tags": []
     }
   }
 }

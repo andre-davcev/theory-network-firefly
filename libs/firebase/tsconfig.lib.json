@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc/libs/foursquare",
+    "outDir": "../../dist/out-tsc/libs/firebase",
     "target": "es2015",
     "module": "es2015",
     "moduleResolution": "node",
@@ -15,12 +15,7 @@
     "lib": [
       "dom",
       "es2015"
-    ],
-    "paths": {
-      "@theory/core": [
-        "../core/src/index.ts"
-      ]
-    }
+    ]
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
