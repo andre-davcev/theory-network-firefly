@@ -1,14 +1,14 @@
 import { async, TestBed } from '@angular/core/testing';
-import { FireflyCoreModule } from './firefly-core.module';
+import { FireflyMobileModule } from './firefly/mobile.module';
 
-describe('FireflyCoreModule', () => {
+describe('FireflyMobileModule', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FireflyCoreModule]
+      imports: [FireflyMobileModule]
     }).compileComponents();
   }));
 
   it('should create', () => {
-    expect(FireflyCoreModule).toBeDefined();
+    expect(FireflyMobileModule).toBeDefined();
   });
 });

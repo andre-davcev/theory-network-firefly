@@ -17,10 +17,10 @@
     "ionic-firefly": {
       "tags": []
     },
-    "firefly-core": {
+    "firefly/core": {
       "tags": []
     },
-    "firefly-mobile": {
+    "firefly/mobile": {
       "tags": []
     },
     "core": {
