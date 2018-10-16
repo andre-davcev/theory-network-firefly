@@ -34,6 +34,15 @@
     },
     "capacitor": {
       "tags": []
+    },
+    "ionic": {
+      "tags": []
+    },
+    "nativescript": {
+      "tags": []
+    },
+    "web": {
+      "tags": []
     }
   }
 }

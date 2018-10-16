@@ -3,62 +3,6 @@
   "version": 1,
   "newProjectRoot": "",
   "projects": {
-    "libs": {
-      "root": "libs",
-      "sourceRoot": "libs",
-      "projectType": "library",
-      "prefix": "app",
-      "architect": {
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "testing/test.libs.ts",
-            "tsConfig": "testing/tsconfig.libs.spec.json",
-            "karmaConfig": "testing/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "testing/tsconfig.libs.json",
-              "testing/tsconfig.libs.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "xplat": {
-      "root": "xplat",
-      "sourceRoot": "xplat",
-      "projectType": "library",
-      "prefix": "app",
-      "architect": {
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "testing/test.xplat.ts",
-            "tsConfig": "testing/tsconfig.xplat.spec.json",
-            "karmaConfig": "testing/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "testing/tsconfig.xplat.json",
-              "testing/tsconfig.xplat.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "ionic-firefly": {
       "root": "apps/ionic-firefly/",
       "sourceRoot": "apps/ionic-firefly/src",
@@ -272,6 +216,111 @@
             "tsConfig": [
               "libs/capacitor/tsconfig.lib.json",
               "libs/capacitor/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ionic": {
+      "root": "libs/ionic",
+      "sourceRoot": "libs/ionic/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/ionic/tsconfig.lib.json",
+            "project": "libs/ionic/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/ionic/src/test.ts",
+            "tsConfig": "libs/ionic/tsconfig.spec.json",
+            "karmaConfig": "libs/ionic/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ionic/tsconfig.lib.json",
+              "libs/ionic/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "nativescript": {
+      "root": "libs/nativescript",
+      "sourceRoot": "libs/nativescript/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/nativescript/tsconfig.lib.json",
+            "project": "libs/nativescript/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/nativescript/src/test.ts",
+            "tsConfig": "libs/nativescript/tsconfig.spec.json",
+            "karmaConfig": "libs/nativescript/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/nativescript/tsconfig.lib.json",
+              "libs/nativescript/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "web": {
+      "root": "libs/web",
+      "sourceRoot": "libs/web/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/web/tsconfig.lib.json",
+            "project": "libs/web/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/web/src/test.ts",
+            "tsConfig": "libs/web/tsconfig.spec.json",
+            "karmaConfig": "libs/web/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/web/tsconfig.lib.json",
+              "libs/web/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

@@ -5,37 +5,33 @@
     "module": "es2015",
     "baseUrl": "./",
     "paths": {
-        "@theory/ionic": [
-          "../../../xplat/ionic/index.ts"
-        ],
-        "@theory/ionic/*": [
-          "../../../xplat/ionic/*"
-        ],
-        "@theory/web": [
-          "../../../xplat/web/index.ts"
-        ],
-        "@theory/web/*": [
-          "../../../xplat/web/*"
-        ],
-
-        "@theory/capacitor": [
-          "../../../libs/capacitor/src/index.ts"
-        ],
-        "@theory/core": [
-          "../../../libs/core/src/index.ts"
-        ],
-        "@theory/firebase": [
-          "../../../libs/firebase/src/index.ts"
-        ],
-        "@theory/foursquare": [
-          "../../../libs/foursquare/src/index.ts"
-        ],
-        "@firefly/core": [
-          "../../../libs/firefly/core/src/index.ts"
-        ],
-        "@firefly/mobile": [
-          "../../../libs/firefly/mobile/src/index.ts"
-        ]
+      "@theory/scss": [
+        "../../../libs/scss"
+      ],
+      "@theory/capacitor": [
+        "../../../libs/capacitor/src/index.ts"
+      ],
+      "@theory/core": [
+        "../../../libs/core/src/index.ts"
+      ],
+      "@theory/firebase": [
+        "../../../libs/firebase/src/index.ts"
+      ],
+      "@theory/foursquare": [
+        "../../../libs/foursquare/src/index.ts"
+      ],
+      "@theory/ionic": [
+        "../../../libs/ionic/src/index.ts"
+      ],
+      "@theory/web": [
+        "../../../libs/web/src/index.ts"
+      ],
+      "@firefly/core": [
+        "../../../libs/firefly/core/src/index.ts"
+      ],
+      "@firefly/mobile": [
+        "libs/firefly/mobile/src/index.ts"
+      ]
     }
   },
   "exclude": [
