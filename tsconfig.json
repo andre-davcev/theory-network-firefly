@@ -27,6 +27,9 @@
       "@theory/core": [
         "libs/core/src/index.ts"
       ],
+      "@theory/device": [
+        "libs/device/src/index.ts"
+      ],
       "@theory/firebase": [
         "libs/firebase/src/index.ts"
       ],
@@ -47,9 +50,6 @@
       ],
       "@firefly/mobile": [
         "libs/firefly/mobile/src/index.ts"
-      ],
-      "@theory/device": [
-        "libs/device/src/index.ts"
       ]
     }
   },

@@ -22,13 +22,13 @@
       "type": "es6Import"
     }
   ],
+  "firefly-core": [],
   "nativescript": [
     {
       "projectName": "core",
       "type": "es6Import"
     }
   ],
-  "firefly-core": [],
   "foursquare": [
     {
       "projectName": "core",
@@ -37,6 +37,7 @@
   ],
   "capacitor": [],
   "firebase": [],
+  "device": [],
   "ionic": [
     {
       "projectName": "core",

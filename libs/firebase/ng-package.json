@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../apps/ionic-firefly/node_modules/@theory/firebase",
+  "dest": "../../dist/@theory/firebase",
   "lib": {
     "entryFile": "src/index.ts"
   }

@@ -2,6 +2,7 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { GeolocationPosition } from '@capacitor/core';
 
+import { Geolocation } from '@theory/capacitor';
 import { LocationWatch } from './location.actions';
 
 export interface StateLocationModel

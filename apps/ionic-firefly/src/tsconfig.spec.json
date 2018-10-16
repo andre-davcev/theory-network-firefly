@@ -18,6 +18,9 @@
       "@theory/core": [
         "../../../libs/core/src/index.ts"
       ],
+      "@theory/device": [
+        "../../../libs/device/src/index.ts"
+      ],
       "@theory/firebase": [
         "../../../libs/firebase/src/index.ts"
       ],
@@ -27,6 +30,9 @@
       "@theory/ionic": [
         "../../../libs/ionic/src/index.ts"
       ],
+      "@theory/ionic/*": [
+        "../../../libs/ionic/src/*"
+      ],
       "@theory/web": [
         "../../../libs/web/src/index.ts"
       ],
@@ -34,7 +40,7 @@
         "../../../libs/firefly/core/src/index.ts"
       ],
       "@firefly/mobile": [
-        "libs/firefly/mobile/src/index.ts"
+        "../../../libs/firefly/mobile/src/index.ts"
       ]
     }
   },
