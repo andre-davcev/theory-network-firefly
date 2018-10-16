@@ -70,7 +70,7 @@
         }
       }
     },
-    "firefly/core": {
+    "firefly-core": {
       "root": "libs/firefly/core",
       "sourceRoot": "libs/firefly/core/src",
       "projectType": "library",
@@ -105,7 +105,7 @@
         }
       }
     },
-    "firefly/mobile": {
+    "firefly-mobile": {
       "root": "libs/firefly/mobile",
       "sourceRoot": "libs/firefly/mobile/src",
       "projectType": "library",
