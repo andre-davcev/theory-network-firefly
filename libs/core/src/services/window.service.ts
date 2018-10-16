@@ -1,8 +1,8 @@
 // angular
-import { Injectable, ViewContainerRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 // app
-import { isObject, isNativeScript } from '@theory/utils';
+import { isObject, isNativeScript } from '../utils';
 
 @Injectable()
 export class WindowPlatformService {

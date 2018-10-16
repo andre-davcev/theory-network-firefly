@@ -4,7 +4,7 @@ export class ValidatorsExtended
 {
     static minLength(minLength: number): ValidatorFn
     {
-        return (control: AbstractControl): { [key: string]: any } =>
+        const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
         {
             let validation: { [key: string]: any } = null;
 
@@ -17,5 +17,7 @@ export class ValidatorsExtended
 
             return validation;
         };
+
+        return validator;
     }
 }
