@@ -8,12 +8,6 @@
     "nx.json": "*"
   },
   "projects": {
-    "libs": {
-      "tags": []
-    },
-    "xplat": {
-      "tags": []
-    },
     "ionic-firefly": {
       "tags": []
     },
