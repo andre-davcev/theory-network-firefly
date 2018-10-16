@@ -10,12 +10,11 @@ import { APP_BASE_HREF, CommonModule } from '@angular/common';
 // libs
 import { NxModule } from '@nrwl/nx';
 import { TranslateService } from '@ngx-translate/core';
-import { throwIfAlreadyLoaded } from '@theory/utils';
+import { throwIfAlreadyLoaded } from './utils';
 
 // app
 import { environment } from './environments/environment';
-import { CORE_PROVIDERS, PlatformLanguageToken } from './services';
-import { LogService } from './services/log.service';
+import { CORE_PROVIDERS, PlatformLanguageToken, LogService} from './services';
 
 /**
  * DEBUGGING

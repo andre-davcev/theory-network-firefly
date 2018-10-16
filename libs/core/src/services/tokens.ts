@@ -1,4 +1,4 @@
-import { InjectionToken, Type } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 /**
  * Various InjectionTokens shared across all platforms
