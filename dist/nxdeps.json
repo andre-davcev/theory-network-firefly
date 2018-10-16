@@ -1,5 +1,5 @@
 {
-  "firefly/mobile": [],
+  "firefly-mobile": [],
   "ionic-firefly": [
     {
       "projectName": "core",
@@ -18,7 +18,7 @@
       "type": "es6Import"
     }
   ],
-  "firefly/core": [],
+  "firefly-core": [],
   "foursquare": [
     {
       "projectName": "core",
@@ -28,16 +28,7 @@
   "capacitor": [],
   "firebase": [],
   "core": [],
-  "xplat": [
-    {
-      "projectName": "core",
-      "type": "es6Import"
-    }
-  ],
-  "libs": [
-    {
-      "projectName": "core",
-      "type": "es6Import"
-    }
-  ]
+  "nativescript": [],
+  "ionic": [],
+  "web": []
 }
