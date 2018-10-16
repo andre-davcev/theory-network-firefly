@@ -335,7 +335,7 @@
       "typescriptMismatch": false,
       "versionMismatch": false
     },
-    "defaultCollection": "@nstudio/schematics"
+    "defaultCollection": "@nrwl/schematics"
   },
   "defaultProject": "ionic-firefly"
 }
