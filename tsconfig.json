@@ -18,27 +18,6 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@theory/ionic": [
-        "xplat/ionic/index.ts"
-      ],
-      "@theory/ionic/*": [
-        "xplat/ionic/*"
-      ],
-      "@theory/nativescript": [
-        "xplat/nativescript/index.ts"
-      ],
-      "@theory/nativescript/*": [
-        "xplat/nativescript/*"
-      ],
-      "@theory/web": [
-        "xplat/web/index.ts"
-      ],
-      "@theory/web/*": [
-        "xplat/web/*"
-      ],
-      "@theory/features": [
-        "libs/features/index.ts"
-      ],
       "@theory/scss": [
         "libs/scss"
       ],
@@ -53,6 +32,15 @@
       ],
       "@theory/foursquare": [
         "libs/foursquare/src/index.ts"
+      ],
+      "@theory/ionic": [
+        "libs/ionic/src/index.ts"
+      ],
+      "@theory/nativescript": [
+        "libs/nativescript/src/index.ts"
+      ],
+      "@theory/web": [
+        "libs/web/src/index.ts"
       ],
       "@firefly/core": [
         "libs/firefly/core/src/index.ts"
