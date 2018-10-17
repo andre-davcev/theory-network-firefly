@@ -5,7 +5,8 @@ import { switchMap, filter, tap } from 'rxjs/operators';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
 
-import { PushNotification } from '../../interfaces/push-notification.interface';
+import { PushNotification } from '@theory/firebase';
+
 import { NotificationsWatch, NotificationsGet } from './notifications.actions';
 import { UserAddToken } from '../user/user.actions';
 import { Notification } from '../../models/notification.model';
