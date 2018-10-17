@@ -1,10 +1,10 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
-import { ServiceVersion } from '../../services/version.service';
+import { ServiceVersion } from './version.service';
 
 @Directive
 ({
-    selector: '[appVersion]'
+    selector: '[libVersion]'
 })
 
 export class DirectiveVersion
