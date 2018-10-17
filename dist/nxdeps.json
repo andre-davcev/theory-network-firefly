@@ -2,15 +2,19 @@
   "firefly-mobile": [],
   "ionic-firefly": [
     {
+      "projectName": "core",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "web",
+      "type": "es6Import"
+    },
+    {
       "projectName": "capacitor",
       "type": "es6Import"
     },
     {
       "projectName": "ionic",
-      "type": "es6Import"
-    },
-    {
-      "projectName": "core",
       "type": "es6Import"
     },
     {
