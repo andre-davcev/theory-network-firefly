@@ -2,6 +2,10 @@
   "firefly-mobile": [],
   "ionic-firefly": [
     {
+      "projectName": "firebase",
+      "type": "es6Import"
+    },
+    {
       "projectName": "core",
       "type": "es6Import"
     },
@@ -20,13 +24,14 @@
     {
       "projectName": "foursquare",
       "type": "es6Import"
-    },
+    }
+  ],
+  "firefly-core": [
     {
       "projectName": "firebase",
       "type": "es6Import"
     }
   ],
-  "firefly-core": [],
   "nativescript": [
     {
       "projectName": "core",

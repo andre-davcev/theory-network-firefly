@@ -1,4 +1,4 @@
-import { Pin } from './pin.model';
+import { Pin } from '@firefly/core';
 
 export interface Place extends Pin
 {
