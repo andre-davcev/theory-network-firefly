@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Select, Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 
-import { StateCluster } from '../../state/cluster/cluster.state';
+import { StateCluster } from '@firefly/core';
 
 @Component
 ({

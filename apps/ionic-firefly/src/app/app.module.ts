@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { CoreModule } from './modules/core.module';
-import { SharedModule } from './modules/shared.module';
-import { ModuleRoutingApp } from './app-routing.module';
-import { ComponentApp } from './app.component';
+import { CoreModule, SharedModule, RoutesAppComponent, ComponentApp } from '@firefly/app';
 
 @NgModule
 ({
@@ -11,7 +9,7 @@ import { ComponentApp } from './app.component';
     [
         CoreModule,
         SharedModule,
-        ModuleRoutingApp
+        RouterModule.forRoot(RoutesAppComponent)
     ],
 
     declarations :

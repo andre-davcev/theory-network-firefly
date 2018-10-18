@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { PageStream } from './stream.page';
-import { ModuleComponentIcon } from '../../components/icon/icon.component.module';
-import { ModulePage } from '../page.module';
+import { ModuleComponentIcon } from '@firefly/core';
+import { ModulePage, PageStream } from '@firefly/app';
 
 @NgModule
 ({

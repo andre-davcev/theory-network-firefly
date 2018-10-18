@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActionSheetController, NavController } from '@ionic/angular';
+import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StatusBarStyle } from '@capacitor/core';
-import { from } from 'rxjs';
 
 import { StatusBar } from '@theory/capacitor';
 

@@ -5,9 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { StatusBar } from '@theory/capacitor';
-
-import { StateCluster } from '../../state/cluster/cluster.state';
-import { ActionSetClusterId } from '../../state/cluster/cluster.actions';
+import { StateCluster, ActionSetClusterId } from '@firefly/core';
 
 @Component
 ({

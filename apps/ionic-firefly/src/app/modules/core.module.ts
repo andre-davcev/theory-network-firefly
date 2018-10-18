@@ -16,8 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppIonicCoreModule } from '@theory/ionic';
 import { StateLanguage, StateLocation, StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions } from '@firefly/core';
 import { StateDevice, StateNotifications } from '@firefly/mobile';
-
-import { environment } from '../../environments/environment';
+import { environment } from '@firefly/env';
 
 /*
 Pro.init('1e5146ca',

@@ -1,14 +1,8 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { PageLogin } from './login.page';
-import { ModulePage } from '../page.module';
-import { ModuleComponentIconFirefly } from '../../components/icon-firefly/icon-firefly.component.module';
-import { Routes, RouterModule } from '@angular/router';
-
-export const routes: Routes =
-[
-    { path: '', component: PageLogin }
-];
+import { ModuleComponentIconFirefly } from '@firefly/core';
+import { ModulePage, PageLogin, RoutesHome } from '@firefly/app';
 
 @NgModule
 ({
@@ -16,7 +10,7 @@ export const routes: Routes =
     [
         ModulePage,
         ModuleComponentIconFirefly,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(RoutesHome)
     ],
 
     declarations : [PageLogin]

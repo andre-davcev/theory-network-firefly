@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { PageAssetsCoupons } from './assets-coupons.page';
-import { ModulePage } from '../page.module';
+import { ModulePage, PageAssetsCoupons } from '@firefly/app';
 
 @NgModule
 ({
