@@ -7,21 +7,21 @@ export enum ActionsCluster
     SetCluster   = '[Cluster] Set Cluster'
 }
 
-export class GetClusters
+export class ActionGetClusters
 {
     static readonly type = ActionsCluster.GetClusters;
 
     constructor() {}
 }
 
-export class SetClusterId
+export class ActionSetClusterId
 {
     static readonly type = ActionsCluster.SetClusterId;
 
     constructor(public payload: string) {}
 }
 
-export class SetCluster
+export class ActionSetCluster
 {
     static readonly type = ActionsCluster.SetCluster;
 

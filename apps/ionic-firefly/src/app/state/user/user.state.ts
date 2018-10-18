@@ -11,10 +11,10 @@ import { AuthProvider } from '@theory/firebase';
 import { User } from '@firefly/core';
 
 import { StateLanguage } from '../language/language.state';
-import { LanguageGet, LanguageSet } from '../language/language.actions';
-import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, UserLogout, UserAddToken} from './user.actions';
+import { ActionLanguageGet, ActionLanguageSet } from '../language/language.actions';
+import { ActionUserAuthenticate, ActionUserAuthenticateCheck, ActionUserGet, ActionLoginEmail, ActionUserLogout, ActionUserAddToken} from './user.actions';
 import { ActionAlertsGet } from '../alert/alert.actions';
-import { NotificationsGet } from '../notifications/notifications.actions';
+import { ActionNotificationsGet } from '../notifications/notifications.actions';
 
 export interface StateUserModel
 {
@@ -60,7 +60,7 @@ export class StateUser
     @Selector() static errored(state: StateUserModel)   {return state.error != null;}
     @Selector() static userFound(state: StateUserModel) {return state.user != null;}
 
-    @Action(UserAuthenticate)
+    @Action(ActionUserAuthenticate)
     userAuthenticate({ patchState, dispatch }: StateContext<StateUserModel>)
     {
         patchState({authenticating: true, initializing: true});
@@ -73,13 +73,13 @@ export class StateUser
                 {
                     patchState({authenticated: false, authData: authData, authenticating: false});
 
-                    return dispatch(new LanguageGet());
+                    return dispatch(new ActionLanguageGet());
                 }
                 else
                 {
                     patchState({authData: authData, authenticating: false});
 
-                    return dispatch(new UserGet(authData));
+                    return dispatch(new ActionUserGet(authData));
                 }
             }),
 
@@ -91,8 +91,8 @@ export class StateUser
         );
     }
 
-    @Action(UserAuthenticateCheck)
-    userAuthenticateCheck({ patchState }: StateContext<StateUserModel>, { payload }: UserAuthenticateCheck)
+    @Action(ActionUserAuthenticateCheck)
+    userAuthenticateCheck({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserAuthenticateCheck)
     {
         return this.language$.pipe
         (
@@ -139,8 +139,8 @@ export class StateUser
         );
     }
 
-    @Action(UserGet)
-    userGet({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: UserGet)
+    @Action(ActionUserGet)
+    userGet({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserGet)
     {
         const providerData: firebase.UserInfo = payload.providerData[0];
         const providerId: string = providerData.providerId;
@@ -164,7 +164,7 @@ export class StateUser
                 {
                     patchState({user: user, authenticated: true, authenticating: false});
 
-                    dependencies$ = dispatch([new LanguageSet(user.language), new ActionAlertsGet(), new NotificationsGet()]);
+                    dependencies$ = dispatch([new ActionLanguageSet(user.language), new ActionAlertsGet(), new ActionNotificationsGet()]);
 //                    dispatch(new NotificationsWatch());
                 }
 
@@ -175,8 +175,8 @@ export class StateUser
         );
     }
 
-    @Action(UserAddToken)
-    userAddToken({ getState }: StateContext<StateUserModel>, { payload }: UserAddToken)
+    @Action(ActionUserAddToken)
+    userAddToken({ getState }: StateContext<StateUserModel>, { payload }: ActionUserAddToken)
     {
         const user   : User                   = getState().user;
         const token  : string                 = payload;
@@ -187,20 +187,20 @@ export class StateUser
         return user.tokens != null && user.tokens[token] != null ? of(null) : this.firestore.collection<User>('user').doc(user.uidInternal).update({tokens});
     }
 
-    @Action(LoginEmail)
-    loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: LoginEmail)
+    @Action(ActionLoginEmail)
+    loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionLoginEmail)
     {
         patchState({authenticating: true});
 
         return from(firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
-            switchMap((authData: firebase.auth.UserCredential) => dispatch(new UserAuthenticateCheck(authData.user))),
+            switchMap((authData: firebase.auth.UserCredential) => dispatch(new ActionUserAuthenticateCheck(authData.user))),
 
             catchError((error: Error) => of(patchState({error: error, authenticating: false})))
         );
     }
 
-    @Action(UserLogout)
+    @Action(ActionUserLogout)
     userLogout({ patchState, dispatch }: StateContext<StateUserModel>)
     {
         return of(this.auth.auth.signOut()).pipe
@@ -214,7 +214,7 @@ export class StateUser
                     user: undefined
                 });
 
-                dispatch(new UserLogout());
+                dispatch(new ActionUserLogout());
             }),
 
             catchError((error: Error) => of(patchState({error: error})))

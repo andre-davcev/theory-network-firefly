@@ -9,7 +9,7 @@ import { Globalization } from '@ionic-native/globalization/ngx';
 
 import { PlatformEnum } from '@theory/ionic';
 
-import { LanguageInitialize, LanguageGet, LanguageSet } from './language.actions';
+import { ActionLanguageInitialize, ActionLanguageGet, ActionLanguageSet } from './language.actions';
 
 
 export interface StateLanguageModel
@@ -42,16 +42,16 @@ export class StateLanguage
 
     ngxsOnInit(context: StateContext<StateLanguageModel>)
     {
-        context.dispatch(new LanguageInitialize());
+        context.dispatch(new ActionLanguageInitialize());
     }
 
-    @Action(LanguageInitialize)
+    @Action(ActionLanguageInitialize)
     languageInitialize()
     {
         this.translate.setDefaultLang('en');
     }
 
-    @Action(LanguageGet)
+    @Action(ActionLanguageGet)
     languageGet({ patchState, dispatch }: StateContext<StateLanguageModel>)
     {
         let observable: Observable<{value:string}>;
@@ -67,14 +67,14 @@ export class StateLanguage
 
         return observable.pipe
         (
-            switchMap((language: {value:string}) => dispatch(new LanguageSet(language.value))),
+            switchMap((language: {value:string}) => dispatch(new ActionLanguageSet(language.value))),
 
             catchError((error: Error) => of(patchState({error: error})))
         )
     }
 
-    @Action(LanguageSet)
-    languageSet({ patchState }: StateContext<StateLanguageModel>, { payload }: LanguageSet)
+    @Action(ActionLanguageSet)
+    languageSet({ patchState }: StateContext<StateLanguageModel>, { payload }: ActionLanguageSet)
     {
         const language: string = payload;
 

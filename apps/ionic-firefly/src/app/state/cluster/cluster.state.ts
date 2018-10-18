@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { Cluster, User } from '@firefly/core';
 
 import { StateUser } from '../user/user.state';
-import { GetClusters, SetClusterId, SetCluster } from './cluster.actions';
+import { ActionGetClusters, ActionSetClusterId, ActionSetCluster } from './cluster.actions';
 import { ServiceCluster } from '../../services/cluster.service';
 import { FormCluster } from '../../forms/cluster.form';
 
@@ -45,7 +45,7 @@ export class StateCluster
 
     @Select(StateUser.user) user$:Observable<User>;
 
-    @Action(GetClusters)
+    @Action(ActionGetClusters)
     getClusters({ patchState } : StateContext<StateClusterModel>)
     {
         return this.user$.pipe(
@@ -69,8 +69,8 @@ export class StateCluster
         )
     }
 
-    @Action(SetClusterId)
-    setClusterId({patchState, getState} : StateContext<StateClusterModel>, { payload }: SetClusterId)
+    @Action(ActionSetClusterId)
+    setClusterId({patchState, getState} : StateContext<StateClusterModel>, { payload }: ActionSetClusterId)
     {
         const id    : string            = payload;
         const state : StateClusterModel = getState();
@@ -82,8 +82,8 @@ export class StateCluster
         });
     }
 
-    @Action(SetCluster)
-    setCluster({patchState, dispatch} : StateContext<StateClusterModel>, { payload }: SetCluster)
+    @Action(ActionSetCluster)
+    setCluster({patchState, dispatch} : StateContext<StateClusterModel>, { payload }: ActionSetCluster)
     {
         return this.clusterService
         .setCluster(payload)

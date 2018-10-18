@@ -3,7 +3,7 @@ export enum ActionsSubscriptions
     SubscriptionsGet = '[Subscriptions] Get'
 }
 
-export class SubscriptionsGet
+export class ActionSubscriptionsGet
 {
     static readonly type = ActionsSubscriptions.SubscriptionsGet;
 

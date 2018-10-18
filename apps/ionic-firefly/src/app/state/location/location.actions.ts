@@ -3,7 +3,7 @@ export enum ActionsLocation
     LocationWatch  = '[Location] Location Watch'
 }
 
-export class LocationWatch
+export class ActionLocationWatch
 {
     static readonly type = ActionsLocation.LocationWatch;
 

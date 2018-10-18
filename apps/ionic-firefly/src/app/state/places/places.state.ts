@@ -8,7 +8,7 @@ import { FoursquareResponseVenueSearch } from '@theory/foursquare';
 
 import { StateLocation } from '../location/location.state';
 import { environment } from '../../../environments/environment';
-import { PlaceSearch } from './places.actions';
+import { ActionPlaceSearch } from './places.actions';
 
 export interface StatePlacesModel
 {
@@ -36,8 +36,8 @@ export class StatePlaces
 
     constructor(private http: HttpClient, private store: Store) {}
 
-    @Action(PlaceSearch)
-    placeSearch({ getState, patchState }: StateContext<StatePlacesModel>, { payload }: PlaceSearch)
+    @Action(ActionPlaceSearch)
+    placeSearch({ getState, patchState }: StateContext<StatePlacesModel>, { payload }: ActionPlaceSearch)
     {
         const searchText : string              = payload == null ? '' : payload.trim();
         const location   : GeolocationPosition = this.store.selectSnapshot(StateLocation.location);

@@ -14,56 +14,56 @@ export enum ActionsUser
     UserSet               = '[User] User Set'
 }
 
-export class UserAuthenticate
+export class ActionUserAuthenticate
 {
     static readonly type = ActionsUser.UserAuthenticate;
 
     constructor() {}
 }
 
-export class UserAuthenticateCheck
+export class ActionUserAuthenticateCheck
 {
     static readonly type = ActionsUser.UserAuthenticateCheck;
 
     constructor(public payload: firebase.User) {}
 }
 
-export class UserGet
+export class ActionUserGet
 {
     static readonly type = ActionsUser.UserGet;
 
     constructor(public payload: firebase.User) {}
 }
 
-export class UserCreate
+export class ActionUserCreate
 {
     static readonly type = ActionsUser.UserCreate;
 
     constructor() {}
 }
 
-export class UserAddToken
+export class ActionUserAddToken
 {
     static readonly type = ActionsUser.UserAddToken;
 
     constructor(public payload: string) {}
 }
 
-export class LoginEmail
+export class ActionLoginEmail
 {
     static readonly type = ActionsUser.LoginEmail;
 
     constructor(public payload: Credentials) {}
 }
 
-export class UserLogout
+export class ActionUserLogout
 {
     static readonly type = ActionsUser.UserLogout;
 
     constructor() {}
 }
 
-export class UserSet
+export class ActionUserSet
 {
     static readonly type = ActionsUser.UserSet;
 

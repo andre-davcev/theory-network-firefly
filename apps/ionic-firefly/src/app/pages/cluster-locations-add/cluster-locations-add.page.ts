@@ -3,7 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ViewController } from '@ionic/core';
 
-import { PlaceSearch, PlaceDetails } from '../../state/places/places.actions';
+import { ActionPlaceSearch, ActionPlaceDetails } from '../../state/places/places.actions';
 import { StatePlaces } from '../../state/places/places.state';
 
 
@@ -39,7 +39,7 @@ export class PagePublisherClusterLocationsAdd implements OnInit
 
     public dismissModal(): void
     {
-        this.store.dispatch(new PlaceSearch(''));
+        this.store.dispatch(new ActionPlaceSearch(''));
 //        this.viewController.dismiss();
     }
 
@@ -51,7 +51,7 @@ export class PagePublisherClusterLocationsAdd implements OnInit
     public search(event: any): void
     {
         console.log(event);
-        this.store.dispatch(new PlaceSearch(event.target.value));
+        this.store.dispatch(new ActionPlaceSearch(event.target.value));
     }
 
     public add(place: any): void
@@ -60,7 +60,7 @@ export class PagePublisherClusterLocationsAdd implements OnInit
 
         this.searching = true;
 
-        this.store.dispatch(new PlaceDetails(''));
+        this.store.dispatch(new ActionPlaceDetails(''));
 
         this.dismissModal();
     }

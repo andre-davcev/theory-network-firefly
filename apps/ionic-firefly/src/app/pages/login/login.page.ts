@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 import { StateUser } from '../../state/user/user.state';
-import { UserAuthenticate, LoginEmail } from '../../state/user/user.actions';
+import { ActionUserAuthenticate, ActionLoginEmail } from '../../state/user/user.actions';
 
 @Component
 ({
@@ -30,12 +30,12 @@ export class PageLogin implements OnInit
         pipe(filter((userFound: boolean) => userFound), take(1)).
         subscribe(() => this.nav.navigateRoot('/home'))
 
-        this.store.dispatch(new UserAuthenticate());
+        this.store.dispatch(new ActionUserAuthenticate());
     }
 
     login()
     {
-        this.store.dispatch(new LoginEmail({id: 'andre.davcev@gmail.com', password: 'weakpassword'}));
+        this.store.dispatch(new ActionLoginEmail({id: 'andre.davcev@gmail.com', password: 'weakpassword'}));
     }
 
     create()

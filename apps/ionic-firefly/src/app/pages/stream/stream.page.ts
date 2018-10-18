@@ -5,7 +5,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { StatusBar } from '@theory/capacitor';
 
-import { SetCluster } from '../../state/cluster/cluster.actions';
+import { ActionSetCluster } from '../../state/cluster/cluster.actions';
 import { Subscription } from '../../models/subscription.model';
 import { Cluster } from '../../models/cluster.model';
 import { StateSubscriptions } from '../../state/subscriptions/subscriptions.state';
@@ -30,7 +30,7 @@ export class PageStream
             description : 'My description'
         };
 
-        this.store.dispatch(new SetCluster(cluster));
+        this.store.dispatch(new ActionSetCluster(cluster));
     }
 
     public ionViewWillEnter(): void

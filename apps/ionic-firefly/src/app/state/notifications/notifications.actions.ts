@@ -4,14 +4,14 @@ export enum ActionsNotifications
     NotificationsGet    = '[Notifications] Get'
 }
 
-export class NotificationsWatch
+export class ActionNotificationsWatch
 {
     static readonly type = ActionsNotifications.NotificationsWatch;
 
     constructor() {}
 }
 
-export class NotificationsGet
+export class ActionNotificationsGet
 {
     static readonly type = ActionsNotifications.NotificationsGet;
 

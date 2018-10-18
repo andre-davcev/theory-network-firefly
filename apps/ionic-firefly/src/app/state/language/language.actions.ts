@@ -5,21 +5,21 @@ export enum ActionsLanguage
     LanguageSet         = '[Language] Language Set'
 }
 
-export class LanguageInitialize
+export class ActionLanguageInitialize
 {
     static readonly type = ActionsLanguage.LanguageInitialize;
 
     constructor() {}
 }
 
-export class LanguageGet
+export class ActionLanguageGet
 {
     static readonly type = ActionsLanguage.LanguageGet;
 
     constructor() {}
 }
 
-export class LanguageSet
+export class ActionLanguageSet
 {
     static readonly type = ActionsLanguage.LanguageSet;
 

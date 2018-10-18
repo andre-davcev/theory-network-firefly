@@ -4,7 +4,7 @@ import { tap } from 'rxjs/operators';
 
 import { Subscription } from '@firefly/core';
 
-import { SubscriptionsGet } from './subscriptions.actions';
+import { ActionSubscriptionsGet } from './subscriptions.actions';
 import { ServiceSubscriptions } from '../../services/subscriptions.service';
 
 export interface StateSubscriptionsModel
@@ -30,7 +30,7 @@ export class StateSubscriptions
 
     constructor(private subscriptions: ServiceSubscriptions) {}
 
-    @Action(SubscriptionsGet)
+    @Action(ActionSubscriptionsGet)
     subscriptionsGet({ patchState }: StateContext<StateSubscriptionsModel>)
     {
         return this.subscriptions.get().pipe
