@@ -1,5 +1,7 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { StoreOptions } from '@ngxs/store/src/symbols';
 import { Platform } from '@ionic/angular';
+
 import { DeviceInitialize } from './device.actions';
 
 export interface StateDeviceModel
@@ -10,8 +12,8 @@ export interface StateDeviceModel
     android : boolean;
 }
 
-@State<StateDeviceModel>
-({
+export const StateDeviceOptions: StoreOptions<StateDeviceModel> =
+{
     name : 'device',
 
     defaults :
@@ -21,17 +23,19 @@ export interface StateDeviceModel
         ios     : false,
         android : false
     }
-})
+};
+
+@State<StateDeviceModel>(StateDeviceOptions)
 
 export class StateDevice
 {
     @Selector() static loading(state: StateDeviceModel) {return state.loading;}
 
-    @Selector() static device(state: StateDeviceModel) {return this.device;}
-    @Selector() static web(state: StateDeviceModel)    {return !this.device;}
+    @Selector() static device(state: StateDeviceModel) {return state.device;}
+    @Selector() static web(state: StateDeviceModel)    {return !state.device;}
 
-    @Selector() static android(state: StateDeviceModel) {return this.android;}
-    @Selector() static ios(state: StateDeviceModel)     {return this.ios;}
+    @Selector() static android(state: StateDeviceModel) {return state.android;}
+    @Selector() static ios(state: StateDeviceModel)     {return state.ios;}
 
     constructor(public platform: Platform) {}
 

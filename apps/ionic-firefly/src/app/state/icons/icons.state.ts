@@ -1,14 +1,15 @@
 import { FormGroup } from '@angular/forms';
 import { State, Selector, Select, Action, StateContext } from '@ngxs/store';
+import { StoreOptions } from '@ngxs/store/src/symbols';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+
+import { User, Icon } from '@firefly/core';
 
 import { ServiceIcon } from '../../services/icon.service';
 import { GetIcons, SetIconId, SetIcon } from './icons.actions';
 import { FormIcon } from '../../forms/icon.form';
 import { StateUser } from '../user/user.state';
-import { User } from '../../models/user.model';
-import { Icon } from '../../models/icon.model';
 
 export interface StateIconsModel
 {
@@ -17,8 +18,8 @@ export interface StateIconsModel
     entities : Record<string, Icon>;
 }
 
-@State<StateIconsModel>
-({
+export const StateIconsOptions: StoreOptions<StateIconsModel> =
+{
     name : 'icons',
 
     defaults :
@@ -27,8 +28,9 @@ export interface StateIconsModel
         form     : undefined,
         entities : {}
     }
-})
+};
 
+@State<StateIconsModel>(StateIconsOptions)
 
 export class StateIcons
 {

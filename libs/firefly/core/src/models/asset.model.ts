@@ -1,4 +1,4 @@
-import { Model } from './model';
+import { Model } from '@theory/firebase';
 
 export interface Asset extends Model
 {
