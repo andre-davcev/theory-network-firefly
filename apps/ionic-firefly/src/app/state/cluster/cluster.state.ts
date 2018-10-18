@@ -1,14 +1,15 @@
 import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action, Selector, Select, State, StateContext } from '@ngxs/store';
+import { StoreOptions } from '@ngxs/store/src/symbols';
 import { FormGroup } from '@angular/forms';
+
+import { Cluster, User } from '@firefly/core';
 
 import { StateUser } from '../user/user.state';
 import { GetClusters, SetClusterId, SetCluster } from './cluster.actions';
-import { Cluster } from '../../models/cluster.model';
 import { ServiceCluster } from '../../services/cluster.service';
 import { FormCluster } from '../../forms/cluster.form';
-import { User } from '../../models/user.model';
 
 export interface StateClusterModel
 {
@@ -17,8 +18,8 @@ export interface StateClusterModel
     entities : Record<string, Cluster>;
 }
 
-@State<StateClusterModel>
-({
+export const StateClusterOptions: StoreOptions<StateClusterModel> =
+{
     name : 'cluster',
 
     defaults :
@@ -27,8 +28,9 @@ export interface StateClusterModel
         form     : undefined,
         entities : {}
     }
-})
+};
 
+@State<StateClusterModel>(StateClusterOptions)
 
 export class StateCluster
 {

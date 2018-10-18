@@ -1,18 +1,20 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { StoreOptions } from '@ngxs/store/src/symbols';
 import { GeolocationPosition } from '@capacitor/core';
 
 import { Geolocation } from '@theory/capacitor';
+
 import { LocationWatch } from './location.actions';
 
 export interface StateLocationModel
 {
-    location  : GeolocationPosition;
-    error     : Error;
+    location : GeolocationPosition;
+    error    : Error;
 }
 
-@State<StateLocationModel>
-({
+export const StateLocationOptions: StoreOptions<StateLocationModel> =
+{
     name : 'location',
 
     defaults :
@@ -20,7 +22,9 @@ export interface StateLocationModel
         location  : undefined,
         error     : undefined
     }
-})
+};
+
+@State<StateLocationModel>(StateLocationOptions)
 
 export class StateLocation
 {
@@ -42,7 +46,7 @@ export class StateLocation
     {
         return Geolocation.
 
-        watchPosition({enableHighAccuracy: true},
+        watchPosition({ enableHighAccuracy: false },
 
         (location, error) =>
         {

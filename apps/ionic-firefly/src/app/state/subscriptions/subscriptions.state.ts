@@ -1,9 +1,10 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { StoreOptions } from '@ngxs/store/src/symbols';
 import { tap } from 'rxjs/operators';
 
-import { Subscription } from '../../models/subscription.model';
-import { SubscriptionsGet } from './subscriptions.actions';
+import { Subscription } from '@firefly/core';
 
+import { SubscriptionsGet } from './subscriptions.actions';
 import { ServiceSubscriptions } from '../../services/subscriptions.service';
 
 export interface StateSubscriptionsModel
@@ -11,15 +12,17 @@ export interface StateSubscriptionsModel
     subscriptions : Array<Subscription>;
 }
 
-@State<StateSubscriptionsModel>
-({
+export const StateSubscriptionsOptions: StoreOptions<StateSubscriptionsModel> =
+{
     name : 'subscriptions',
 
     defaults :
     {
         subscriptions : []
     }
-})
+};
+
+@State<StateSubscriptionsModel>(StateSubscriptionsOptions)
 
 export class StateSubscriptions
 {

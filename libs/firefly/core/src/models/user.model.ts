@@ -1,7 +1,6 @@
+import { DocumentReference } from '@angular/fire/firestore';
 
-import * as firebase from 'firebase/app';
-
-import { Model } from './model';
+import { Model } from '@theory/firebase';
 
 export interface User extends Model
 {
@@ -14,5 +13,5 @@ export interface User extends Model
     displayName?   : string;
     providerId?    : string;
     tokens?        : Record<string, string>;
-    notifications? : Record<string, firebase.firestore.DocumentReference>;
+    notifications? : Record<string, DocumentReference>;
 }

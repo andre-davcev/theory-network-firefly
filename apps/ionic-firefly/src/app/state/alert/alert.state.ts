@@ -1,27 +1,29 @@
-import * as firebase from 'firebase/app';
-
 import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { StoreOptions } from '@ngxs/store/src/symbols';
+import { AngularFirestore, CollectionReference } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
+import { Notification } from '@firefly/core';
+
 import { StateUserModel } from '../user/user.state';
-import { AlertsGet } from './alert.actions';
-import { Notification } from '../../models/notification.model';
+import { ActionAlertsGet } from './alert.actions';
 
 export interface StateAlertModel
 {
     entities: Record<string, Notification>;
 }
 
-@State<StateAlertModel>
-({
+export const StateAlertOptions: StoreOptions<StateAlertModel> =
+{
     name : 'alert',
 
     defaults :
     {
         entities: {}
     }
-})
+};
+
+@State<StateAlertModel>(StateAlertOptions)
 
 export class StateAlerts
 {
@@ -30,12 +32,12 @@ export class StateAlerts
 
     constructor(private store: Store, private firestore: AngularFirestore) {}
 
-    @Action(AlertsGet)
+    @Action(ActionAlertsGet)
     alertsGet({ patchState } : StateContext<StateAlertModel>)
     {
         const uidInternal: string = this.store.selectSnapshot<string>((state: StateUserModel) => state.user.uidInternal);
 
-        return this.firestore.collection('alerts', (ref: firebase.firestore.CollectionReference) =>
+        return this.firestore.collection('alerts', (ref: CollectionReference) =>
 
         ref.
         where('uid', '==', uidInternal).

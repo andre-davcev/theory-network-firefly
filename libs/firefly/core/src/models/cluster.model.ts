@@ -1,6 +1,6 @@
-import * as firebase from 'firebase/app';
+import { DocumentReference } from '@angular/fire/firestore';
 
-import { Model } from './model';
+import { Model } from '@theory/firebase';
 
 export interface Cluster extends Model
 {
@@ -13,7 +13,7 @@ export interface Cluster extends Model
     photo?       : string;
     categories?  : string;
     private?     : boolean;
-    locations?   : Array<firebase.firestore.DocumentReference>;
+    locations?   : Array<DocumentReference>;
 
 /*
     image: DocumentReference

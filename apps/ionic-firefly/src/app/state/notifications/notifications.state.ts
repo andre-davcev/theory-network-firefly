@@ -1,15 +1,16 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { StoreOptions } from '@ngxs/store/src/symbols';
 import { Observable, of, from } from 'rxjs';
 import { switchMap, filter, tap } from 'rxjs/operators';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
 
 import { PushNotification } from '@theory/firebase';
+import { Notification } from '@firefly/core';
 
 import { NotificationsWatch, NotificationsGet } from './notifications.actions';
 import { UserAddToken } from '../user/user.actions';
-import { Notification } from '../../models/notification.model';
 import { ServiceNotifications } from '../../services/notifications.service';
 
 
@@ -20,8 +21,8 @@ export interface StateNotificationsModel
     pushNotification  : PushNotification;
 }
 
-@State<StateNotificationsModel>
-({
+export const StateNotificationsOptions: StoreOptions<StateNotificationsModel> =
+{
     name : 'notifications',
 
     defaults :
@@ -30,7 +31,9 @@ export interface StateNotificationsModel
         pushNotifications : [],
         pushNotification  : undefined
     }
-})
+};
+
+@State<StateNotificationsModel>(StateNotificationsOptions)
 
 export class StateNotifications
 {

@@ -1,13 +1,14 @@
 import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
+import { StoreOptions } from '@ngxs/store/src/symbols';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { GeolocationPosition } from '@capacitor/core';
 
 import { FoursquareResponseVenueSearch } from '@theory/foursquare';
 
 import { StateLocation } from '../location/location.state';
 import { environment } from '../../../environments/environment';
 import { PlaceSearch } from './places.actions';
-import { GeolocationPosition } from '@capacitor/core';
 
 export interface StatePlacesModel
 {
@@ -15,8 +16,8 @@ export interface StatePlacesModel
     results   : Array<any>;
 }
 
-@State<StatePlacesModel>
-({
+export const StatePlacesOptions: StoreOptions<StatePlacesModel> =
+{
     name : 'places',
 
     defaults :
@@ -24,7 +25,9 @@ export interface StatePlacesModel
         searching : false,
         results   : []
     }
-})
+};
+
+@State<StatePlacesModel>(StatePlacesOptions)
 
 export class StatePlaces
 {

@@ -1,4 +1,4 @@
-import { Icon } from '../../models/icon.model';
+import { Icon } from '@firefly/core';
 
 export enum ActionsIcons
 {

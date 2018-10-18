@@ -1,5 +1,6 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { StoreOptions } from '@ngxs/store/src/symbols';
 import { Platform } from '@ionic/angular';
 import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -17,8 +18,8 @@ export interface StateLanguageModel
     error    : Error;
 }
 
-@State<StateLanguageModel>
-({
+export const StateLanguageOptions: StoreOptions<StateLanguageModel> =
+{
     name : 'language',
 
     defaults :
@@ -26,7 +27,9 @@ export interface StateLanguageModel
         language : undefined,
         error    : undefined
     }
-})
+};
+
+@State<StateLanguageModel>(StateLanguageOptions)
 
 export class StateLanguage
 {

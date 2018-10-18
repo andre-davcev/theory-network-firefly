@@ -1,3 +1,3 @@
-import * as firebase from 'firebase/app';
+import { firestore } from 'firebase/app';
 
-export type FirestoreTimestamp = firebase.firestore.FieldValue;
+export type FirestoreTimestamp = firestore.FieldValue;

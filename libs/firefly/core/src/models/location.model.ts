@@ -1,8 +1,8 @@
-import * as firebase from 'firebase/app';
+import { DocumentReference } from '@angular/fire/firestore';
 
 export interface Location
 {
-    geopoint: firebase.firestore.DocumentReference;
+    geopoint: DocumentReference;
 
     name        : string;
     tagline     : string;
@@ -14,5 +14,5 @@ export interface Location
     webUrl      : string;
     hours       : any;
     events      : any;
-    beacons     : Array<firebase.firestore.DocumentReference>;
+    beacons     : Array<DocumentReference>;
 }

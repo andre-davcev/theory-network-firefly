@@ -1,19 +1,20 @@
 import * as firebase from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select} from '@ngxs/store';
+import { StoreOptions } from '@ngxs/store/src/symbols';
 import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap, take, filter, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AuthProvider } from '@theory/firebase';
+import { User } from '@firefly/core';
 
 import { StateLanguage } from '../language/language.state';
 import { LanguageGet, LanguageSet } from '../language/language.actions';
 import { UserAuthenticate, UserAuthenticateCheck, UserGet, LoginEmail, UserLogout, UserAddToken} from './user.actions';
-import { AlertsGet } from '../alert/alert.actions';
+import { ActionAlertsGet } from '../alert/alert.actions';
 import { NotificationsGet } from '../notifications/notifications.actions';
-import { User } from '../../models/user.model';
 
 export interface StateUserModel
 {
@@ -25,8 +26,8 @@ export interface StateUserModel
     initializing   : boolean;
 }
 
-@State<StateUserModel>
-({
+export const StateUserOptions: StoreOptions<StateUserModel> =
+{
     name : 'user',
 
     defaults :
@@ -38,7 +39,9 @@ export interface StateUserModel
         authenticating : false,
         initializing   : false
     }
-})
+};
+
+@State<StateUserModel>(StateUserOptions)
 
 export class StateUser
 {
@@ -161,7 +164,7 @@ export class StateUser
                 {
                     patchState({user: user, authenticated: true, authenticating: false});
 
-                    dependencies$ = dispatch([new LanguageSet(user.language), new AlertsGet(), new NotificationsGet()]);
+                    dependencies$ = dispatch([new LanguageSet(user.language), new ActionAlertsGet(), new NotificationsGet()]);
 //                    dispatch(new NotificationsWatch());
                 }
 

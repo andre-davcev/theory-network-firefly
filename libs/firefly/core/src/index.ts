@@ -1,1 +1,1 @@
-export * from './lib/firefly-core.module';
+export * from './models';
