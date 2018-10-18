@@ -1,2 +1,2 @@
 export * from './model.interface';
-export * from './push-notification.interface';
+export * from './push-notification';

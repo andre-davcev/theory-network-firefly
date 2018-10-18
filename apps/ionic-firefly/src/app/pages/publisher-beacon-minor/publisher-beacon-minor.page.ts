@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Beacon } from '../../models/beacon.model';
+import { Beacon } from '@firefly/core';
 
 @Component
 ({

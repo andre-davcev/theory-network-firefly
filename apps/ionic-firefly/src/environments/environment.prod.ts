@@ -1,1 +1,1 @@
-export { environmentProd as environment } from '@firefly/mobile';
+export { environmentProd as environment } from '@firefly/core';

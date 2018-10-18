@@ -1,4 +1,4 @@
-import { Cluster } from './cluster.model';
+import { Cluster } from '@firefly/core';
 
 export interface Subscription extends Cluster
 {

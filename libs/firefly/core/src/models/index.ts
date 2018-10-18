@@ -1,3 +1,4 @@
+export * from './alert.model';
 export * from './asset.model';
 export * from './beacon.model';
 export * from './cluster.model';
@@ -6,7 +7,6 @@ export * from './event.model';
 export * from './icon.model';
 export * from './image.model';
 export * from './location.model';
-export * from './notification.model';
 export * from './pin.model';
 export * from './place.model';
 export * from './subscription.model';

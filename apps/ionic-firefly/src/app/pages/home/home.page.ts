@@ -7,11 +7,12 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { StatusBar } from '@theory/capacitor';
 
+import { Alert } from '@firefly/core';
+
 import { PageStream } from '../stream/stream.page';
 import { PageSearch } from '../search/search.page';
 import { PageSubscriptions } from '../subscriptions/subscriptions.page';
 import { PagePublisherCluster } from '../cluster/cluster.page';
-import { Notification } from '../../models/notification.model';
 import { PageUser } from '../user/user.page';
 import { StateNotifications } from '../../state/notifications/notifications.state';
 
@@ -37,7 +38,7 @@ export class PageHome
 
     segment:string = 'fired';
 
-    @Select(StateNotifications.notifications) notifications$: Observable<Array<Notification>>;
+    @Select(StateNotifications.notifications) notifications$: Observable<Array<Alert>>;
 
     public AlertsModalType: any = AlertsModalType;
 
