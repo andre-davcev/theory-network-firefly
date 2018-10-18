@@ -7,7 +7,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { User, Icon } from '@firefly/core';
 
 import { ServiceIcon } from '../../services/icon.service';
-import { GetIcons, SetIconId, SetIcon } from './icons.actions';
+import { ActionGetIcons, ActionSetIconId, ActionSetIcon } from './icons.actions';
 import { FormIcon } from '../../forms/icon.form';
 import { StateUser } from '../user/user.state';
 
@@ -45,8 +45,8 @@ export class StateIcons
 
     @Select(StateUser.user) user$:Observable<User>;
 
-    @Action(GetIcons)
-    getClusters({ patchState, dispatch } : StateContext<StateIconsModel>)
+    @Action(ActionGetIcons)
+    getClusters({ patchState } : StateContext<StateIconsModel>)
     {
         return this.user$.pipe
         (
@@ -76,8 +76,8 @@ export class StateIcons
         )
     }
 
-    @Action(SetIconId)
-    setClusterId({patchState, getState} : StateContext<StateIconsModel>, { payload }: SetIconId)
+    @Action(ActionSetIconId)
+    setClusterId({patchState, getState} : StateContext<StateIconsModel>, { payload }: ActionSetIconId)
     {
         const id    : string          = payload;
         const state : StateIconsModel = getState();
@@ -89,8 +89,8 @@ export class StateIcons
         });
     }
 
-    @Action(SetIcon)
-    setCluster({patchState, dispatch} : StateContext<StateIconsModel>, { payload }: SetIcon)
+    @Action(ActionSetIcon)
+    setCluster({patchState, dispatch} : StateContext<StateIconsModel>, { payload }: ActionSetIcon)
     {
         return this.serviceIcons.
 

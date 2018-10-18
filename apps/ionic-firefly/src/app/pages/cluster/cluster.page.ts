@@ -7,7 +7,7 @@ import { StatusBarStyle } from '@capacitor/core';
 import { StatusBar } from '@theory/capacitor';
 
 import { StateCluster } from '../../state/cluster/cluster.state';
-import { SetClusterId } from '../../state/cluster/cluster.actions';
+import { ActionSetClusterId } from '../../state/cluster/cluster.actions';
 
 @Component
 ({
@@ -24,7 +24,7 @@ export class PagePublisherCluster
 
     constructor(private store: Store)
     {
-        this.store.dispatch(new SetClusterId('new'));
+        this.store.dispatch(new ActionSetClusterId('new'));
     }
 
     ionViewWillEnter()

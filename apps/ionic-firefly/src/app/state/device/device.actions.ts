@@ -3,7 +3,7 @@ export enum ActionsDevice
     DeviceInitialize  = '[Device] Device Initialize'
 }
 
-export class DeviceInitialize
+export class ActionDeviceInitialize
 {
     static readonly type = ActionsDevice.DeviceInitialize;
 

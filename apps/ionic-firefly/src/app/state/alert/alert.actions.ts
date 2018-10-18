@@ -1,11 +1,11 @@
 export enum ActionsAlerts
 {
-    ActionAlertsGet = '[Alerts] Alerts Get',
+    AlertsGet = '[Alerts] Alerts Get',
 }
 
 export class ActionAlertsGet
 {
-    static readonly type = ActionsAlerts.ActionAlertsGet;
+    static readonly type = ActionsAlerts.AlertsGet;
 
     constructor() {}
 }

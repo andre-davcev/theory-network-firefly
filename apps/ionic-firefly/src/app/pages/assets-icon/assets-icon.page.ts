@@ -6,7 +6,7 @@ import { StatusBarStyle } from '@capacitor/core';
 import { StatusBar } from '@theory/capacitor';
 
 import { StateIcons } from '../../state/icons/icons.state';
-import { SetIconId } from '../../state/icons/icons.actions';
+import { ActionSetIconId } from '../../state/icons/icons.actions';
 
 @Component
 ({
@@ -21,7 +21,7 @@ export class PageAssetsIcon
 
     constructor(private store: Store)
     {
-        this.store.dispatch(new SetIconId('new'));
+        this.store.dispatch(new ActionSetIconId('new'));
     }
 
     ionViewWillEnter()

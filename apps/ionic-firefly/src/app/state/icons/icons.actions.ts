@@ -7,21 +7,21 @@ export enum ActionsIcons
     SetIcon   = '[Icons] Set Icon'
 }
 
-export class GetIcons
+export class ActionGetIcons
 {
     static readonly type = ActionsIcons.GetIcons;
 
     constructor() {}
 }
 
-export class SetIconId
+export class ActionSetIconId
 {
     static readonly type = ActionsIcons.SetIconId;
 
     constructor(public payload: string) {}
 }
 
-export class SetIcon
+export class ActionSetIcon
 {
     static readonly type = ActionsIcons.SetIcon;
 

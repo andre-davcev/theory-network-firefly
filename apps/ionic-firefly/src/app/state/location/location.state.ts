@@ -5,7 +5,7 @@ import { GeolocationPosition } from '@capacitor/core';
 
 import { Geolocation } from '@theory/capacitor';
 
-import { LocationWatch } from './location.actions';
+import { ActionLocationWatch } from './location.actions';
 
 export interface StateLocationModel
 {
@@ -38,10 +38,10 @@ export class StateLocation
 
     ngxsOnInit(context: StateContext<StateLocationModel>)
     {
-        context.dispatch(new LocationWatch());
+        context.dispatch(new ActionLocationWatch());
     }
 
-    @Action(LocationWatch)
+    @Action(ActionLocationWatch)
     locationWatch({ patchState }: StateContext<StateLocationModel>)
     {
         return Geolocation.

@@ -2,7 +2,7 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { StoreOptions } from '@ngxs/store/src/symbols';
 import { Platform } from '@ionic/angular';
 
-import { DeviceInitialize } from './device.actions';
+import { ActionDeviceInitialize } from './device.actions';
 
 export interface StateDeviceModel
 {
@@ -41,10 +41,10 @@ export class StateDevice
 
     ngxsOnInit(context: StateContext<StateDeviceModel>)
     {
-        context.dispatch(new DeviceInitialize());
+        context.dispatch(new ActionDeviceInitialize());
     }
 
-    @Action(DeviceInitialize)
+    @Action(ActionDeviceInitialize)
     deviceInitialize({ patchState } : StateContext<StateDeviceModel>)
     {
         patchState

@@ -9,8 +9,8 @@ import { Platform } from '@ionic/angular';
 import { PushNotification } from '@theory/firebase';
 import { Notification } from '@firefly/core';
 
-import { NotificationsWatch, NotificationsGet } from './notifications.actions';
-import { UserAddToken } from '../user/user.actions';
+import { ActionNotificationsWatch, ActionNotificationsGet } from './notifications.actions';
+import { ActionUserAddToken } from '../user/user.actions';
 import { ServiceNotifications } from '../../services/notifications.service';
 
 
@@ -45,7 +45,7 @@ export class StateNotifications
 
     @Selector() static hasPushNotifications(state: StateNotificationsModel)  {return state.pushNotifications.length > 0;}
 
-    @Action(NotificationsWatch)
+    @Action(ActionNotificationsWatch)
     notificationsWatch({ patchState, getState, dispatch }: StateContext<StateNotificationsModel>)
     {
         this.firebaseNative.onNotificationOpen().pipe
@@ -71,11 +71,11 @@ export class StateNotifications
         (
             switchMap(() => token$),
             filter((token: string) => token != null),
-            switchMap((token: string) => dispatch(new UserAddToken(token)))
+            switchMap((token: string) => dispatch(new ActionUserAddToken(token)))
         );
     }
 
-    @Action(NotificationsGet)
+    @Action(ActionNotificationsGet)
     notificationsGet({ patchState }: StateContext<StateNotificationsModel>)
     {
         return this.serviceNotifications.get().pipe
