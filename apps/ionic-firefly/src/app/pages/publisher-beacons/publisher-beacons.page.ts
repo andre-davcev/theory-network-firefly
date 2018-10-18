@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { Beacon } from '@firefly/core';
 
-
 @Component
 ({
     selector    : 'app-page-publisher-beacons',

@@ -1,20 +1,17 @@
 {
-  "firefly-mobile": [],
-  "ionic-firefly": [
+  "firefly-mobile": [
     {
       "projectName": "firebase",
       "type": "es6Import"
-    },
+    }
+  ],
+  "ionic-firefly": [
     {
       "projectName": "core",
       "type": "es6Import"
     },
     {
-      "projectName": "web",
-      "type": "es6Import"
-    },
-    {
-      "projectName": "capacitor",
+      "projectName": "firebase",
       "type": "es6Import"
     },
     {
@@ -22,13 +19,37 @@
       "type": "es6Import"
     },
     {
+      "projectName": "capacitor",
+      "type": "es6Import"
+    },
+    {
       "projectName": "foursquare",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "web",
       "type": "es6Import"
     }
   ],
   "firefly-core": [
     {
+      "projectName": "core",
+      "type": "es6Import"
+    },
+    {
       "projectName": "firebase",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "ionic",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "capacitor",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "foursquare",
       "type": "es6Import"
     }
   ],

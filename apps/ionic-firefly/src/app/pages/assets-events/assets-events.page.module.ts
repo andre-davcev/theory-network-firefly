@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { PageAssetsEvents } from './assets-events.page';
-import { ModulePage } from '../page.module';
+import { ModulePage, PageAssetsEvents } from '@firefly/app';
 
 @NgModule
 ({

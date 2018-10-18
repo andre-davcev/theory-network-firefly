@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { PageAssetsBeacons } from './assets-beacons.page';
-import { ModulePage } from '../page.module';
+import { ModulePage, PageAssetsBeacons } from '@firefly/app';
 
 @NgModule
 ({

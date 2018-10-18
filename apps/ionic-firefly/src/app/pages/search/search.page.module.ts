@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { PageSearch } from './search.page';
-import { ModulePage } from '../page.module';
+import { ModulePage, PageSearch } from '@firefly/app';
 
 @NgModule
 ({

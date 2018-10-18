@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { PagePublisherClusterLocations } from './cluster-locations.page';
-import { ModuleComponentMap } from '../../components/map/map.component.module';
-import { ModulePage } from '../page.module';
+import { ModuleComponentMap } from '@firefly/core';
+import { ModulePage, PagePublisherClusterLocations } from '@firefly/app';
 
 @NgModule
 ({

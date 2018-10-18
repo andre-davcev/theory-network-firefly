@@ -4,10 +4,7 @@ import { Observable } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { StatusBar } from '@theory/capacitor';
-import { Subscription, Cluster } from '@firefly/core';
-
-import { ActionSetCluster } from '../../state/cluster/cluster.actions';
-import { StateSubscriptions } from '../../state/subscriptions/subscriptions.state';
+import { ActionSetCluster, StateSubscriptions, Subscription, Cluster } from '@firefly/core';
 
 @Component
 ({

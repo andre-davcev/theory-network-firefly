@@ -50,6 +50,12 @@
       ],
       "@firefly/mobile": [
         "libs/firefly/mobile/src/index.ts"
+      ],
+      "@firefly/env": [
+        "apps/ionic-firefly/src/environments/environment.ts"
+      ],
+      "@firefly/app": [
+        "apps/ionic-firefly/src/app/index.ts"
       ]
     }
   },

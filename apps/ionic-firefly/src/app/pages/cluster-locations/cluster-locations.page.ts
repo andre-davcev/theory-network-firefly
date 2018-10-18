@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Select, Store } from '@ngxs/store';
-
-import { StateCluster } from '../../state/cluster/cluster.state';
+import { Observable, from } from 'rxjs';
 import { filter, take, switchMap } from 'rxjs/operators';
-import { StateLocation } from '../../state/location/location.state';
-import { from } from 'rxjs';
+import { Select } from '@ngxs/store';
+
+import { StateCluster, StateLocation } from '@firefly/core';
 
 @Component
 ({

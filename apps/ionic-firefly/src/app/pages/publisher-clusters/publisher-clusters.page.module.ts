@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ModuleComponentList } from '../../components/list/list.component.module';
-import { PagePublisherClusters } from './publisher-clusters.page';
-import { ModulePage } from '../page.module';
+import { ModuleComponentList } from '@firefly/mobile';
+import { ModulePage, PagePublisherClusters } from '@firefly/app';
 
 @NgModule
 ({

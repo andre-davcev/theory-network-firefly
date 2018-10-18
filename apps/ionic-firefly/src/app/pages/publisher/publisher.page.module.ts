@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { ModuleComponentList } from '../../components/list/list.component.module';
-import { PagePublisher } from './publisher.page';
-import { PagePublisherBeacons } from '../publisher-beacons/publisher-beacons.page';
-import { ModulePage } from '../page.module';
+import { ModuleComponentList } from '@firefly/mobile';
+import { ModulePage, PagePublisher, PagePublisherBeacons } from '@firefly/app';
 
 @NgModule
 ({

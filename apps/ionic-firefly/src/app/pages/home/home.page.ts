@@ -6,15 +6,9 @@ import { Observable, from } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { StatusBar } from '@theory/capacitor';
-
-import { Alert } from '@firefly/core';
-
-import { PageStream } from '../stream/stream.page';
-import { PageSearch } from '../search/search.page';
-import { PageSubscriptions } from '../subscriptions/subscriptions.page';
-import { PagePublisherCluster } from '../cluster/cluster.page';
-import { PageUser } from '../user/user.page';
-import { StateNotifications } from '../../state/notifications/notifications.state';
+import { Alert, StateAlerts } from '@firefly/core';
+import { StateNotifications } from '@firefly/mobile';
+import { PageUser, PagePublisherCluster, PageSubscriptions, PageSearch, PageStream } from '@firefly/app';
 
 export enum AlertsModalType
 {
@@ -38,7 +32,7 @@ export class PageHome
 
     segment:string = 'fired';
 
-    @Select(StateNotifications.notifications) notifications$: Observable<Array<Alert>>;
+    @Select(StateAlerts.alerts) alerts$: Observable<Array<Alert>>;
 
     public AlertsModalType: any = AlertsModalType;
 

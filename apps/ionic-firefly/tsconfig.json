@@ -11,7 +11,16 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@firefly/env": [
+        "./src/environments/environment.ts"
+      ],
+      "@firefly/app": [
+        "./src/app/index.ts"
+      ]
+    }
   }
 }
 

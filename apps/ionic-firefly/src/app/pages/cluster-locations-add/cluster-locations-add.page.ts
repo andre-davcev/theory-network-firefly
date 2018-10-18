@@ -3,9 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ViewController } from '@ionic/core';
 
-import { ActionPlaceSearch, ActionPlaceDetails } from '../../state/places/places.actions';
-import { StatePlaces } from '../../state/places/places.state';
-
+import { StatePlaces, ActionPlaceSearch, ActionPlaceDetails } from '@firefly/core';
 
 @Component
 ({
