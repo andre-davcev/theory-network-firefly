@@ -67,4 +67,4 @@ libs/**/*.ngfactory.ts
 libs/**/*.ngsummary.json
 
 # apps
-apps/*/*/app/src/main/assets/public/*
+apps/*/*/app/src/main/assets/public/
