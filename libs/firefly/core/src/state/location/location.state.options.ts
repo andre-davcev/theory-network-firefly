@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateLocationModel } from '@firefly/core';
+import { StateLocationModel } from './location.state.model';
 
 export const StateLocationOptions: StoreOptions<StateLocationModel> =
 {

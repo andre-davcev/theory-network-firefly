@@ -3,7 +3,7 @@ import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument,
 import { Observable, from } from 'rxjs';
 import { switchMap, filter, take, map } from 'rxjs/operators';
 
-import { Icon } from '@firefly/core';
+import { Icon } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceIcon

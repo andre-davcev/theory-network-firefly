@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ValidatorsExtended } from '@theory/core';
-import { Cluster } from '@firefly/core';
+
+import { Cluster } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
 export class FormCluster

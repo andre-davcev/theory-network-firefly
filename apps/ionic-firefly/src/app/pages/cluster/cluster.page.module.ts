@@ -3,7 +3,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { ModuleComponentItemHeader, ModuleComponentItemDescription, ModuleComponentItemMap } from '@firefly/mobile';
-import { ModulePage, PagePublisherCluster } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PagePublisherCluster } from './cluster.page';
 
 @NgModule
 ({
@@ -17,15 +19,8 @@ import { ModulePage, PagePublisherCluster } from '@firefly/app';
         ModuleComponentItemDescription
     ],
 
-    declarations :
-    [
-        PagePublisherCluster
-    ],
-
-    exports :
-    [
-        PagePublisherCluster
-    ]
+    declarations : [PagePublisherCluster],
+    exports : [PagePublisherCluster]
 })
 
 export class ModulePagePublisherCluster { }

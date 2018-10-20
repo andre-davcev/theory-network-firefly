@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PageSubscriptions } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageSubscriptions } from './subscriptions.page';
 
 @NgModule
 ({
@@ -9,10 +11,8 @@ import { ModulePage, PageSubscriptions } from '@firefly/app';
         ModulePage
     ],
 
-    declarations :
-    [
-        PageSubscriptions
-    ]
+    declarations : [PageSubscriptions],
+    exports: [PageSubscriptions]
 })
 
 export class ModulePageSubscriptions

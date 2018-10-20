@@ -1,7 +1,13 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { Platform } from '@ionic/angular';
+import { from } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { DeviceInfo } from '@capacitor/core';
 
-import { ActionDeviceInitialize, StateDeviceModel, StateDeviceOptions } from '@firefly/mobile';
+import { Platform, Device } from '@theory/capacitor';
+
+import { StateDeviceModel } from './device.state.model';
+import { StateDeviceOptions } from './device.state.options';
+import { ActionDeviceInitialize } from './device.actions';
 
 @State<StateDeviceModel>(StateDeviceOptions)
 
@@ -25,11 +31,18 @@ export class StateDevice
     @Action(ActionDeviceInitialize)
     deviceInitialize({ patchState } : StateContext<StateDeviceModel>)
     {
-        patchState
-        ({
-            device  : this.platform.is('cordova'),
-            ios     : this.platform.is('ios'),
-            android : this.platform.is('android'),
-        });
+        return from(Device.getInfo()).pipe
+        (
+            tap((deviceInfo: DeviceInfo) =>
+            {
+                const platform: string = deviceInfo.platform;
+                patchState
+                ({
+                    device  : platform !== Platform.Web,
+                    ios     : platform !== Platform.iOS,
+                    android : platform !== Platform.Android
+                });
+            })
+        );
     }
 }

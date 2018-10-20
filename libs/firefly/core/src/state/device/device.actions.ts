@@ -1,4 +1,4 @@
-import { ActionsDevice } from '@firefly/mobile';
+import { ActionsDevice } from './device.actions.enum';
 
 export class ActionDeviceInitialize
 {

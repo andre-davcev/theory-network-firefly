@@ -1,7 +1,6 @@
-import * as firebase from 'firebase/app';
+import { User as FirebaseUser, auth, UserInfo } from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select} from '@ngxs/store';
-import { StoreOptions } from '@ngxs/store/src/symbols';
 import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap, take, filter, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -9,27 +8,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AuthProvider } from '@theory/firebase';
 
-import {
-  User,
-  StateLanguage,
-  ActionLanguageGet,
-  ActionLanguageSet,
-  ActionUserAuthenticate,
-  ActionUserAuthenticateCheck,
-  ActionUserGet,
-  ActionLoginEmail,
-  ActionUserLogout,
-  ActionUserAddToken,
-  ActionAlertsGet,
-  StateUserModel,
-  StateUserOptions
-} from '@firefly/core';
+import { StateLanguage, ActionLanguageGet, ActionLanguageSet } from '@firefly/core/state/language';
+import { User } from '@firefly/core/models';
+import { ActionAlertsGet } from '@firefly/core/state/alert';
+import { StateUserModel } from './user.state.model';
+import { StateUserOptions } from './user.state.options';
+import { ActionUserAuthenticate, ActionUserGet, ActionUserAuthenticateCheck, ActionUserAddToken, ActionLoginEmail, ActionUserLogout } from './user.actions';
 
 @State<StateUserModel>(StateUserOptions)
 
 export class StateUser
 {
-    constructor(private auth: AngularFireAuth, private firestore: AngularFirestore) {}
+    constructor(private fireAuth: AngularFireAuth, private firestore: AngularFirestore) {}
 
     @Select(StateLanguage.language) language$: Observable<string>;
 
@@ -49,9 +39,9 @@ export class StateUser
     {
         patchState({authenticating: true, initializing: true});
 
-        return this.auth.authState.pipe
+        return this.fireAuth.authState.pipe
         (
-            switchMap((authData: firebase.User) =>
+            switchMap((authData: FirebaseUser) =>
             {
                 if (authData == null)
                 {
@@ -86,7 +76,7 @@ export class StateUser
 
             tap((language: string) =>
             {
-                const authData: firebase.User = payload;
+                const authData: FirebaseUser = payload;
 
                 if (authData == null)
                 {
@@ -102,7 +92,7 @@ export class StateUser
 
                     console.log(authData);
 
-                    const providerData : firebase.UserInfo = authData.providerData[0];
+                    const providerData : UserInfo = authData.providerData[0];
 
                     const displayName : string = providerData.displayName;
                     const email       : string = providerData.email;
@@ -126,7 +116,7 @@ export class StateUser
     @Action(ActionUserGet)
     userGet({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserGet)
     {
-        const providerData: firebase.UserInfo = payload.providerData[0];
+        const providerData: UserInfo = payload.providerData[0];
         const providerId: string = providerData.providerId;
         const uidInternal: string = providerId + ':' + (providerId === AuthProvider.Email ? providerData.email : providerData.uid);
 
@@ -176,7 +166,7 @@ export class StateUser
     {
         patchState({authenticating: true});
 
-        return from(firebase.auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
+        return from(auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             switchMap((authData: firebase.auth.UserCredential) => dispatch(new ActionUserAuthenticateCheck(authData.user))),
 
@@ -187,7 +177,7 @@ export class StateUser
     @Action(ActionUserLogout)
     userLogout({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        return of(this.auth.auth.signOut()).pipe
+        return of(this.fireAuth.auth.signOut()).pipe
         (
             tap(() =>
             {

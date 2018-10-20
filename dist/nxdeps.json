@@ -15,11 +15,11 @@
       "type": "es6Import"
     },
     {
-      "projectName": "ionic",
+      "projectName": "capacitor",
       "type": "es6Import"
     },
     {
-      "projectName": "capacitor",
+      "projectName": "ionic",
       "type": "es6Import"
     },
     {
@@ -41,11 +41,11 @@
       "type": "es6Import"
     },
     {
-      "projectName": "ionic",
+      "projectName": "capacitor",
       "type": "es6Import"
     },
     {
-      "projectName": "capacitor",
+      "projectName": "ionic",
       "type": "es6Import"
     },
     {

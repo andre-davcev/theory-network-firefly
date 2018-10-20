@@ -1,4 +1,5 @@
-import { FoursquareTimeframe } from '.';
+import { FoursquareTimeframe } from './foursquare-timeframe.interface';
+
 
 export interface FoursquareHours
 {

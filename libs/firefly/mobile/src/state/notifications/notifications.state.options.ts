@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateNotificationsModel } from '@firefly/mobile';
+import { StateNotificationsModel } from './notifications.state.model';
 
 export const StateNotificationsOptions: StoreOptions<StateNotificationsModel> =
 {

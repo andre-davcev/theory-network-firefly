@@ -1,4 +1,4 @@
-import { Alert } from '@firefly/core';
+import { Alert } from "@firefly/core/models";
 
 export interface StateAlertModel
 {

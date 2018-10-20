@@ -1,6 +1,5 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { StoreOptions } from '@ngxs/store/src/symbols';
 import { Platform } from '@ionic/angular';
 import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -8,7 +7,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { Globalization } from '@ionic-native/globalization/ngx';
 
 import { PlatformEnum } from '@theory/ionic';
-import { StateLanguageModel, StateLanguageOptions, ActionLanguageInitialize, ActionLanguageGet, ActionLanguageSet } from '@firefly/core';
+
+import { StateLanguageModel } from './language.state.model';
+import { StateLanguageOptions } from './language.state.options';
+import { ActionLanguageInitialize, ActionLanguageGet, ActionLanguageSet } from './language.actions';
 
 @State<StateLanguageModel>(StateLanguageOptions)
 

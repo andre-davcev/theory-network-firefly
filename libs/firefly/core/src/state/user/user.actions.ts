@@ -1,6 +1,8 @@
+import { User as FirebaseUser } from 'firebase/app'
 import { Credentials } from '@theory/core';
 
-import { User, ActionsUser } from '@firefly/core';
+import { User } from '@firefly/core/models';
+import { ActionsUser } from './user.actions.enum';
 
 export class ActionUserAuthenticate
 {
@@ -13,14 +15,14 @@ export class ActionUserAuthenticateCheck
 {
     static readonly type = ActionsUser.UserAuthenticateCheck;
 
-    constructor(public payload: firebase.User) {}
+    constructor(public payload: FirebaseUser) {}
 }
 
 export class ActionUserGet
 {
     static readonly type = ActionsUser.UserGet;
 
-    constructor(public payload: firebase.User) {}
+    constructor(public payload: FirebaseUser) {}
 }
 
 export class ActionUserCreate

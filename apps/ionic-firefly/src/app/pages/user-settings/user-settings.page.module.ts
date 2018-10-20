@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PageUserSettings } from '@firefly/app';
-import {  } from './user-settings.page';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageUserSettings } from './user-settings.page';
 
 @NgModule
 ({
@@ -10,10 +11,8 @@ import {  } from './user-settings.page';
         ModulePage
     ],
 
-    declarations :
-    [
-        PageUserSettings
-    ]
+    declarations : [PageUserSettings],
+    exports: [PageUserSettings]
 })
 
 export class ModulePageUserSettings

@@ -1,6 +1,5 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { StoreOptions } from '@ngxs/store/src/symbols';
 import { Observable, of, from } from 'rxjs';
 import { switchMap, filter, tap } from 'rxjs/operators';
 import { Firebase } from '@ionic-native/firebase/ngx';
@@ -8,7 +7,10 @@ import { Platform } from '@ionic/angular';
 
 import { PushNotification } from '@theory/firebase';
 import { ActionUserAddToken } from '@firefly/core';
-import { ActionNotificationsWatch, StateNotificationsModel, StateNotificationsOptions } from '@firefly/mobile';
+
+import { StateNotificationsModel } from './notifications.state.model';
+import { StateNotificationsOptions } from './notifications.state.options';
+import { ActionNotificationsWatch } from './notifications.actions';
 
 @State<StateNotificationsModel>(StateNotificationsOptions)
 

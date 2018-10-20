@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateLanguageModel } from '@firefly/core';
+import { StateLanguageModel } from './language.state.model';
 
 export const StateLanguageOptions: StoreOptions<StateLanguageModel> =
 {

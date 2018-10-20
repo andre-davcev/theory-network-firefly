@@ -5,8 +5,7 @@ import { filter, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
-import { StateUser } from '../../state/user/user.state';
-import { ActionUserAuthenticate, ActionLoginEmail } from '../../state/user/user.actions';
+import { StateUser, ActionUserAuthenticate, ActionLoginEmail } from '@firefly/core';
 
 @Component
 ({

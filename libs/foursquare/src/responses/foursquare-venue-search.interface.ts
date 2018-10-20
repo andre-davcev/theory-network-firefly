@@ -1,4 +1,4 @@
-import { FoursquareResponseStatus } from '.';
+import { FoursquareResponseStatus } from './foursquare-response-status.interface';
 import { FoursquareVenueResult, FoursquareCategory } from '../interfaces';
 
 export interface FoursquareResponseVenueSearch

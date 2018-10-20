@@ -1,4 +1,4 @@
-import { ActionsSubscriptions } from '@firefly/core';
+import { ActionsSubscriptions } from './subscriptions.actions.enum';
 
 export class ActionSubscriptionsGet
 {

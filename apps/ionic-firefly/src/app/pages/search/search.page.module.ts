@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PageSearch } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageSearch } from './search.page';
 
 @NgModule
 ({
@@ -9,10 +11,8 @@ import { ModulePage, PageSearch } from '@firefly/app';
         ModulePage
     ],
 
-    declarations :
-    [
-        PageSearch
-    ]
+    declarations : [PageSearch],
+    exports: [PageSearch]
 })
 
 export class ModulePageSearch

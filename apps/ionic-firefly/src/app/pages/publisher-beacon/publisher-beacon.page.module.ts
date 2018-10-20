@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PagePublisherBeacon } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PagePublisherBeacon } from './publisher.beacon.page';
 
 @NgModule
 ({
@@ -9,7 +11,8 @@ import { ModulePage, PagePublisherBeacon } from '@firefly/app';
         ModulePage
     ],
 
-    declarations : [PagePublisherBeacon]
+    declarations : [PagePublisherBeacon],
+    exports: [PagePublisherBeacon]
 })
 
 export class ModulePagePublisherBeacon { }

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ValidatorsExtended } from '@theory/core';
-import { Icon } from '@firefly/core';
+
+import { Icon } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
 export class FormIcon

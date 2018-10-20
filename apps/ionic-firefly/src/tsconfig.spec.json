@@ -13,34 +13,76 @@
         "../../../libs/scss"
       ],
       "@theory/capacitor": [
-        "../../../libs/capacitor/src/index.ts"
+        "../../../libs/capacitor/index.ts"
+      ],
+      "@theory/capacitor/*": [
+        "../../../libs/capacitor/src/*"
       ],
       "@theory/core": [
-        "../../../libs/core/src/index.ts"
+        "../../../libs/core/index.ts"
+      ],
+      "@theory/core/*": [
+        "../../../libs/core/src/*"
+      ],
+      "@theory/core/feature/*": [
+        "../../../libs/core/src/features/*"
       ],
       "@theory/device": [
-        "../../../libs/device/src/index.ts"
+        "../../../libs/device/index.ts"
+      ],
+      "@theory/device/*": [
+        "../../../libs/device/src/*"
       ],
       "@theory/firebase": [
-        "../../../libs/firebase/src/index.ts"
+        "../../../libs/firebase/index.ts"
+      ],
+      "@theory/firebase/*": [
+        "../../../libs/firebase/src/*"
       ],
       "@theory/foursquare": [
-        "../../../libs/foursquare/src/index.ts"
+        "../../../libs/foursquare/index.ts"
+      ],
+      "@theory/foursquare/*": [
+        "../../../libs/foursquare/src/*"
       ],
       "@theory/ionic": [
-        "../../../libs/ionic/src/index.ts"
+        "../../../libs/ionic/index.ts"
       ],
       "@theory/ionic/*": [
         "../../../libs/ionic/src/*"
       ],
+      "@theory/nativescript": [
+        "../../../libs/nativescript/index.ts"
+      ],
+      "@theory/nativescript/*": [
+        "../../../libs/nativescript/src/*"
+      ],
       "@theory/web": [
-        "../../../libs/web/src/index.ts"
+        "../../../libs/web/index.ts"
+      ],
+      "@theory/web/*": [
+        "../../../libs/web/src/*"
       ],
       "@firefly/core": [
-        "../../../libs/firefly/core/src/index.ts"
+        "../../../libs/firefly/core/index.ts"
+      ],
+      "@firefly/core/*": [
+        "../../../libs/firefly/core/src/*"
       ],
       "@firefly/mobile": [
-        "../../../libs/firefly/mobile/src/index.ts"
+        "../../../libs/firefly/mobile/index.ts"
+      ],
+      "@firefly/mobile/*": [
+        "../../../libs/firefly/mobile/src/*"
+      ],
+      "@firefly/app/env": [
+        "./environments/environment.ts"
+      ],
+      "@firefly/app/*": [
+        "./app/*"
+      ],
+      "@firefly/app/page/*": [
+        "./app/pages/*"
       ]
     }
   },

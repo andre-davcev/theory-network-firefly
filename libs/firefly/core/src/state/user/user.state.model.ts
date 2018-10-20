@@ -1,4 +1,4 @@
-import { User } from '@firefly/core';
+import { User } from '@firefly/core/models';
 
 export interface StateUserModel
 {

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PagePublisherClusterLocationsAdd } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PagePublisherClusterLocationsAdd } from './cluster-locations-add.page';
 
 @NgModule
 ({
@@ -9,10 +11,8 @@ import { ModulePage, PagePublisherClusterLocationsAdd } from '@firefly/app';
         ModulePage
     ],
 
-    declarations :
-    [
-        PagePublisherClusterLocationsAdd
-    ]
+    declarations : [PagePublisherClusterLocationsAdd],
+    exports : [PagePublisherClusterLocationsAdd]
 })
 
 export class ModulePagePublisherClusterLocationsAdd { }

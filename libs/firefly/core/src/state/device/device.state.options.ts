@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateDeviceModel } from '@firefly/mobile';
+import { StateDeviceModel } from './device.state.model';
 
 export const StateDeviceOptions: StoreOptions<StateDeviceModel> =
 {

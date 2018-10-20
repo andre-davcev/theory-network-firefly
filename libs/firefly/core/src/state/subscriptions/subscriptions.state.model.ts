@@ -1,4 +1,4 @@
-import { Subscription } from '@firefly/core';
+import { Subscription } from '@firefly/core/models';
 
 export interface StateSubscriptionsModel
 {

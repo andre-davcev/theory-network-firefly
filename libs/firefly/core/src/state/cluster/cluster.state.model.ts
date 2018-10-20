@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 
-import { Cluster } from '@firefly/core';
+import { Cluster } from '@firefly/core/models';
 
 export interface StateClusterModel
 {

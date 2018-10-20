@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ModuleComponentList } from '@firefly/mobile';
-import { ModulePage, PagePublisherClusters } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PagePublisherClusters } from './publisher-clusters.page';
 
 @NgModule
 ({
@@ -13,7 +15,8 @@ import { ModulePage, PagePublisherClusters } from '@firefly/app';
         ModuleComponentList
     ],
 
-    declarations : [PagePublisherClusters]
+    declarations : [PagePublisherClusters],
+    exports: [PagePublisherClusters]
 })
 
 export class ModulePagePublisherClusters

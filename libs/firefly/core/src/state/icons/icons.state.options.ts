@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateIconsModel } from '@firefly/core';
+import { StateIconsModel } from './icons.state.model';
 
 export const StateIconsOptions: StoreOptions<StateIconsModel> =
 {

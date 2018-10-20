@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ViewController } from '@ionic/core';
 
 import { StatePlaces, ActionPlaceSearch, ActionPlaceDetails } from '@firefly/core';
 
@@ -18,7 +17,7 @@ export class PagePublisherClusterLocationsAdd implements OnInit
 
     private searching : boolean = false;
 
-    constructor(private viewController: ViewController, private store: Store) {}
+    constructor(private store: Store) {}
 
     public ngOnInit(): void
     {
@@ -38,7 +37,6 @@ export class PagePublisherClusterLocationsAdd implements OnInit
     public dismissModal(): void
     {
         this.store.dispatch(new ActionPlaceSearch(''));
-//        this.viewController.dismiss();
     }
 
     public clickedSearch(): void

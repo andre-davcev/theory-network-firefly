@@ -2,19 +2,13 @@ import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action, Selector, Select, State, StateContext } from '@ngxs/store';
 
-import {
-  Cluster,
-  User,
-  StateClusterModel,
-  StateClusterOptions,
-  StateUser,
-  ActionGetClusters,
-  ActionSetClusterId,
-  ActionSetCluster,
-  ServiceCluster,
-  FormCluster
-} from '@firefly/core';
-
+import { StateUser } from '@firefly/core/state/user';
+import { User, Cluster } from '@firefly/core/models';
+import { ServiceCluster } from '@firefly/core/services';
+import { FormCluster } from '@firefly/core/forms';
+import { StateClusterModel } from './cluster.state.model';
+import { StateClusterOptions } from './cluster.state.options';
+import { ActionGetClusters, ActionSetClusterId, ActionSetCluster } from './cluster.actions';
 
 @State<StateClusterModel>(StateClusterOptions)
 

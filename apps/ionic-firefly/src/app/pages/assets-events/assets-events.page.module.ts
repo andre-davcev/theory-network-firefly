@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PageAssetsEvents } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageAssetsEvents } from './assets-events.page';
 
 @NgModule
 ({
@@ -9,9 +11,7 @@ import { ModulePage, PageAssetsEvents } from '@firefly/app';
         ModulePage
     ],
 
-    declarations :
-    [
-        PageAssetsEvents
-    ]
+    declarations : [PageAssetsEvents],
+    exports : [PageAssetsEvents]
 })
 export class ModulePageAssetsEvents { }
