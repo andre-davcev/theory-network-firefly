@@ -24,6 +24,7 @@ export class ServiceAlerts
         const alerts: Array<Alert> =
         [
             {
+                id    : '1',
                 image : 'assets/images/temp-notifications-rusted.root.jpg',
                 title : 'Rusted Root',
                 body  : "Sahlen's Music Stage",
@@ -32,6 +33,7 @@ export class ServiceAlerts
             },
 
             {
+                id    : '2',
                 image : 'assets/images/temp-notifications-foster.the.people.jpg',
                 title : 'Foster The People',
                 body  : "Ommegang Brewery Cooperstown",
@@ -40,6 +42,7 @@ export class ServiceAlerts
             },
 
             {
+                id    : '3',
                 image : 'assets/images/temp-notifications-blondie.jpg',
                 title : 'Blondie',
                 body  : "Artpark",
