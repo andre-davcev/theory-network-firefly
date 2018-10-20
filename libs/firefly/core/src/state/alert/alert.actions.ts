@@ -1,5 +1,4 @@
-import { ActionsAlerts } from '@firefly/core';
-
+import { ActionsAlerts } from './alert.actions.enum';
 
 export class ActionAlertsGet
 {

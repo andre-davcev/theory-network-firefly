@@ -6,7 +6,6 @@ import { switchMap, delay } from 'rxjs/operators';
 import { SplashScreen, StatusBar } from '@theory/capacitor';
 import { PlatformEnum } from '@theory/ionic';
 
-
 @Component
 ({
     selector    : 'app-root',

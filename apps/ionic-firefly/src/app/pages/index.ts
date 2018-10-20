@@ -23,4 +23,3 @@ export * from './subscriptions';
 export * from './user';
 export * from './user-profile';
 export * from './user-settings';
-export * from './page.module';

@@ -1,4 +1,4 @@
-import { FoursquareGroups } from '.';
+import { FoursquareGroups } from './foursquare-groups.interface';
 
 export interface FoursquareUser
 {

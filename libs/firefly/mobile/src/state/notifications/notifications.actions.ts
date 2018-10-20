@@ -1,4 +1,4 @@
-import { ActionsNotifications } from '@firefly/mobile';
+import { ActionsNotifications } from './notifications.actions.enum';
 
 export class ActionNotificationsWatch
 {

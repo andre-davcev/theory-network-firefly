@@ -7,8 +7,11 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { StatusBar } from '@theory/capacitor';
 import { Alert, StateAlerts } from '@firefly/core';
-import { StateNotifications } from '@firefly/mobile';
-import { PageUser, PagePublisherCluster, PageSubscriptions, PageSearch, PageStream } from '@firefly/app';
+import { PageUser } from '@firefly/app/page/user';
+import { PagePublisherCluster } from '@firefly/app/page/cluster';
+import { PageSubscriptions } from '@firefly/app/page/subscriptions';
+import { PageSearch } from '@firefly/app/page/search';
+import { PageStream } from '@firefly/app/page/stream';
 
 export enum AlertsModalType
 {

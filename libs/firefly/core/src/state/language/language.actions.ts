@@ -1,4 +1,4 @@
-import { ActionsLanguage } from '@firefly/core';
+import { ActionsLanguage } from './language.actions.enum';
 
 export class ActionLanguageInitialize
 {

@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 
-import { ModulePage, PageUserProfile } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageUserProfile } from './user-profile.page';
 
 @NgModule
 ({
@@ -9,10 +11,8 @@ import { ModulePage, PageUserProfile } from '@firefly/app';
         ModulePage
     ],
 
-    declarations :
-    [
-        PageUserProfile
-    ]
+    declarations : [PageUserProfile],
+    exports: [PageUserProfile]
 })
 
 export class ModulePageUserProfile

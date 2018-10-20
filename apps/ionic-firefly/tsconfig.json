@@ -14,13 +14,15 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@firefly/env": [
+      "@firefly/app/env": [
         "./src/environments/environment.ts"
       ],
-      "@firefly/app": [
-        "./src/app/index.ts"
+      "@firefly/app/*": [
+        "./src/app/*"
+      ],
+      "@firefly/app/page/*": [
+        "./src/app/pages/*"
       ]
     }
   }
 }
-

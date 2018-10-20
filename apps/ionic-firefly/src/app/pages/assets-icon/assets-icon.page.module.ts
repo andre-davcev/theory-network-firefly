@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ModuleComponentItemHeader } from '@firefly/mobile';
-import { ModulePage, PageAssetsIcon } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageAssetsIcon } from './assets-icon.page';
 
 @NgModule
 ({
@@ -13,10 +15,8 @@ import { ModulePage, PageAssetsIcon } from '@firefly/app';
         ModuleComponentItemHeader
     ],
 
-    declarations :
-    [
-        PageAssetsIcon
-    ]
+    declarations : [PageAssetsIcon],
+    exports : [PageAssetsIcon]
 })
 
 export class ModulePageAssetsIcon { }

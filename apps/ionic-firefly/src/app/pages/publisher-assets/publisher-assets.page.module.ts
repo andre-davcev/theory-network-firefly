@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PagePublisherAssets } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PagePublisherAssets } from './publisher-assets.page';
 
 @NgModule
 ({
@@ -9,7 +11,8 @@ import { ModulePage, PagePublisherAssets } from '@firefly/app';
         ModulePage
     ],
 
-    declarations : [PagePublisherAssets]
+    declarations : [PagePublisherAssets],
+    exports: [PagePublisherAssets]
 })
 
 export class ModulePagePublisherAssets { }

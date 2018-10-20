@@ -3,7 +3,7 @@ import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument 
 import { Observable, from } from 'rxjs';
 import { switchMap, take, filter, map } from 'rxjs/operators';
 
-import { Cluster } from '@firefly/core';
+import { Cluster } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceCluster

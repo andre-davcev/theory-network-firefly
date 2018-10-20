@@ -1,5 +1,6 @@
 export * from './alert';
 export * from './cluster';
+export * from './device';
 export * from './icons';
 export * from './language';
 export * from './location';

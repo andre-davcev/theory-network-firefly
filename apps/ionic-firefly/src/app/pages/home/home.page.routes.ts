@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 
-import { PageHome } from '@firefly/app';
+import { PageHome } from './home.page';
 
 export const RoutesPageHome: Routes =
 [
-    {path : '', component : PageHome
-}];
+    { path : '', component : PageHome }
+];

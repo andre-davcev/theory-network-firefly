@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateUserModel } from '@firefly/core';
+import { StateUserModel } from './user.state.model';
 
 export const StateUserOptions: StoreOptions<StateUserModel> =
 {

@@ -5,15 +5,13 @@ import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
-import { UISharedModule } from '@theory/features';
 import { UI_COMPONENTS } from './components';
 
 const MODULES = [
   NativeScriptCommonModule,
   NativeScriptFormsModule,
   NativeScriptRouterModule,
-  TNSFontIconModule,
-  UISharedModule
+  TNSFontIconModule
 ];
 
 @NgModule({

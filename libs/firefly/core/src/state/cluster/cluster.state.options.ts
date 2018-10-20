@@ -1,5 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
-import { StateClusterModel } from '@firefly/core';
+
+import { StateClusterModel } from './cluster.state.model';
 
 export const StateClusterOptions: StoreOptions<StateClusterModel> =
 {

@@ -52,13 +52,15 @@
     "clean": "npx rimraf -- hooks node_modules package-lock.json && npm i",
     "build.ionic.firefly": "cd apps/ionic-firefly && npm run build:web",
     "prepare.ionic.firefly": "npm run clean && npm run clean.ionic.firefly && npm run build.ionic.firefly",
-    "prepare.ionic.firefly.ios": "npm run prepare.ionic.firefly && cd apps/ionic-firefly && npm run cap.add.ios",
-    "prepare.ionic.firefly.android": "npm run prepare.ionic.firefly && cd apps/ionic-firefly && npm run cap.add.android",
+    "prepare.ionic.firefly.ios": "npm run prepare.ionic.firefly && npm run clean.ionic.firefly.ios && cd apps/ionic-firefly && npm run cap.add.ios",
+    "prepare.ionic.firefly.android": "npm run prepare.ionic.firefly && npm run clean.ionic.firefly.android && cd apps/ionic-firefly && npm run cap.add.android",
     "open.ionic.firefly.ios": "cd apps/ionic-firefly && npm run cap.ios",
     "open.ionic.firefly.android": "cd apps/ionic-firefly && npm run cap.android",
     "sync.ionic.firefly": "cd apps/ionic-firefly && npm run cap.copy",
     "start.ionic.firefly": "cd apps/ionic-firefly && npm start",
-    "clean.ionic.firefly": "cd apps/ionic-firefly && npx rimraf -- hooks node_modules platforms www plugins ios android package-lock.json && npm i && rimraf -- package-lock.json"
+    "clean.ionic.firefly": "cd apps/ionic-firefly && npx rimraf -- hooks node_modules platforms www plugins package-lock.json && npm i && rimraf -- package-lock.json",
+    "clean.ionic.firefly.ios": "cd apps/ionic-firefly && npx rimraf -- ios",
+    "clean.ionic.firefly.android": "cd apps/ionic-firefly && npx rimraf -- android"
   },
   "private": true,
   "dependencies": {

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PageAssetsPlaces } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageAssetsPlaces } from './assets-places.page';
 
 @NgModule
 ({
@@ -9,10 +11,8 @@ import { ModulePage, PageAssetsPlaces } from '@firefly/app';
         ModulePage
     ],
 
-    declarations :
-    [
-        PageAssetsPlaces
-    ]
+    declarations : [PageAssetsPlaces],
+    exports : [PageAssetsPlaces]
 })
 
 export class ModulePageAssetsPlaces { }

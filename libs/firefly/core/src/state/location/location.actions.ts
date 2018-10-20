@@ -1,4 +1,4 @@
-import { ActionsLocation } from '@firefly/core';
+import { ActionsLocation } from './location.actions.enum';
 
 export class ActionLocationWatch
 {

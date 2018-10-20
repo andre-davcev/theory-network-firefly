@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, CollectionReference } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 
-import { Alert } from '@firefly/core';
+import { Alert } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceAlerts

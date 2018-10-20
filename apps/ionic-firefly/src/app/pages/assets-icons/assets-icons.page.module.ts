@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PageAssetsIcons } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageAssetsIcons } from './assets-icons.page';
 
 @NgModule
 ({
@@ -9,10 +11,8 @@ import { ModulePage, PageAssetsIcons } from '@firefly/app';
         ModulePage
     ],
 
-    declarations :
-    [
-        PageAssetsIcons
-    ]
+    declarations : [PageAssetsIcons],
+    exports : [PageAssetsIcons]
 })
 
 export class ModulePageAssetsIcons { }

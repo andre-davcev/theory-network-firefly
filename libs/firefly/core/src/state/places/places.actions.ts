@@ -1,4 +1,4 @@
-import { ActionsPlaces } from '@firefly/core';
+import { ActionsPlaces } from './places.actions.enum';
 
 export class ActionPlaceSearch
 {

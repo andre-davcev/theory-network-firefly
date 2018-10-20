@@ -8,7 +8,7 @@
     ],
     "paths": {
       "@theory/core": [
-        "../core/src/index.ts"
+        "../core/index.ts"
       ]
     }
   },

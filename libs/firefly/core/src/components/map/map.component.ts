@@ -1,11 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-
-import { ComponentMapOrb } from '../map-orb/map-orb.component';
-import { StateLocation } from '../../state/location/location.state';
-import { StateDevice } from '../../state/device/device.state';
 import { GeolocationPosition } from '@capacitor/core';
+
+import { StateDevice, StateLocation } from '@firefly/core/state';
+import { ComponentMapOrb } from '../map-orb/map-orb.component';
 
 
 @Component

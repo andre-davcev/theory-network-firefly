@@ -2,18 +2,13 @@ import { State, Selector, Select, Action, StateContext } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import {
-  User,
-  Icon,
-  ServiceIcon,
-  ActionGetIcons,
-  ActionSetIconId,
-  ActionSetIcon,
-  StateUser,
-  StateIconsModel,
-  StateIconsOptions,
-  FormIcon
-} from '@firefly/core';
+import { StateUser } from '@firefly/core/state/user';
+import { User, Icon } from '@firefly/core/models';
+import { ServiceIcon } from '@firefly/core/services';
+import { FormIcon } from '@firefly/core/forms';
+import { StateIconsModel } from './icons.state.model';
+import { StateIconsOptions } from './icons.state.options';
+import { ActionGetIcons, ActionSetIconId, ActionSetIcon } from './icons.actions';
 
 @State<StateIconsModel>(StateIconsOptions)
 

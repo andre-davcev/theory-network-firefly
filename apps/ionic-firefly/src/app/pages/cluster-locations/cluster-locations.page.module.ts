@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ModuleComponentMap } from '@firefly/core';
-import { ModulePage, PagePublisherClusterLocations } from '@firefly/app';
+
+import { ModulePage } from '@firefly/app/modules';
+
+import { PagePublisherClusterLocations } from './cluster-locations.page';
 
 @NgModule
 ({
@@ -13,10 +16,8 @@ import { ModulePage, PagePublisherClusterLocations } from '@firefly/app';
         ModuleComponentMap
     ],
 
-    declarations :
-    [
-        PagePublisherClusterLocations
-    ]
+    declarations : [PagePublisherClusterLocations],
+    exports : [PagePublisherClusterLocations]
 })
 
 export class ModulePagePublisherClusterLocations { }

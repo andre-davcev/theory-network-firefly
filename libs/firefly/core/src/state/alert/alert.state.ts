@@ -2,7 +2,12 @@ import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { tap } from 'rxjs/operators';
 
-import { Alert, StateUserModel, ActionAlertsGet, StateAlertModel, StateAlertOptions, ServiceAlerts } from '@firefly/core';
+import { ServiceAlerts } from '@firefly/core/services';
+import { Alert } from '@firefly/core/models';
+import { StateUserModel } from '@firefly/core/state/user';
+import { StateAlertModel } from './alert.state.model';
+import { StateAlertOptions } from './alert.state.options';
+import { ActionAlertsGet } from './alert.actions';
 
 @State<StateAlertModel>(StateAlertOptions)
 

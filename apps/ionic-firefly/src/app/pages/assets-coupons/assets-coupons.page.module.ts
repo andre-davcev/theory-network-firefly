@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage, PageAssetsCoupons } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageAssetsCoupons } from './assets-coupons.page';
 
 @NgModule
 ({
@@ -9,10 +11,8 @@ import { ModulePage, PageAssetsCoupons } from '@firefly/app';
         ModulePage
     ],
 
-    declarations :
-    [
-        PageAssetsCoupons
-    ]
+    declarations : [PageAssetsCoupons],
+    exports : [PageAssetsCoupons]
 })
 
 export class ModulePageAssetsCoupons { }

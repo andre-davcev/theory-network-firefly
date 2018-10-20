@@ -1,4 +1,4 @@
-import { Asset } from '@firefly/core';
+import { Asset } from './asset.model';
 
 export interface Icon extends Asset
 {

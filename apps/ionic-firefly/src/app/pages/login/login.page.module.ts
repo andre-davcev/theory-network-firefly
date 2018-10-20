@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ModuleComponentIconFirefly } from '@firefly/core';
-import { ModulePage, PageLogin, RoutesHome } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { RoutesPageLogin } from './login.page.routes';
+import { PageLogin } from './login.page';
 
 @NgModule
 ({
@@ -10,10 +13,11 @@ import { ModulePage, PageLogin, RoutesHome } from '@firefly/app';
     [
         ModulePage,
         ModuleComponentIconFirefly,
-        RouterModule.forChild(RoutesHome)
+        RouterModule.forChild(RoutesPageLogin)
     ],
 
-    declarations : [PageLogin]
+    declarations : [PageLogin],
+    exports : [PageLogin]
 })
 
 export class ModulePageLogin { }

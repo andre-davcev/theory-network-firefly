@@ -5,13 +5,11 @@ import { GeolocationPosition } from '@capacitor/core';
 
 import { FoursquareResponseVenueSearch } from '@theory/foursquare';
 
-import {
-  environmentDev as environment,
-  ActionPlaceSearch,
-  StateLocation,
-  StatePlacesModel,
-  StatePlacesOptions
-} from '@firefly/core';
+import { StateLocation } from '@firefly/core/state/location';
+import { environmentDev as environment } from '@firefly/core/environment';
+import { StatePlacesModel } from './places.state.model';
+import { StatePlacesOptions } from './places.state.options';
+import { ActionPlaceSearch } from './places.actions';
 
 @State<StatePlacesModel>(StatePlacesOptions)
 

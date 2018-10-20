@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 
 import { ModuleComponentIcon } from '@firefly/core';
-import { ModulePage, PageStream } from '@firefly/app';
+import { ModulePage } from '@firefly/app/modules';
+
+import { PageStream } from './stream.page';
 
 @NgModule
 ({
@@ -11,10 +13,8 @@ import { ModulePage, PageStream } from '@firefly/app';
         ModuleComponentIcon
     ],
 
-    declarations :
-    [
-        PageStream
-    ]
+    declarations : [PageStream],
+    exports: [PageStream]
 })
 
 export class ModulePageStream
