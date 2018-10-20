@@ -138,7 +138,6 @@ export class StateUser
                 {
                     patchState({ user: user, authenticated: true, authenticating: false });
 
-                    console.log('whats up');
                     dependencies$ = dispatch([new ActionLanguageSet(user.language), new ActionAlertsGet()]);
 //                    dispatch(new NotificationsWatch());
                 }
