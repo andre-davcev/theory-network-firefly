@@ -6,6 +6,6 @@ import { EnvironmentPlaces } from '@theory/google';
 export interface EnvironmentApis
 {
     firebase : EnvironmentFirebase;
-    maps     : EnvironmentMapbox;
     places   : EnvironmentPlaces;
+    mapbox   : EnvironmentMapbox;
 }

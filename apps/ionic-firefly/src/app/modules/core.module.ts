@@ -52,14 +52,17 @@ Pro.init('1e5146ca',
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
         NgxsRouterPluginModule.forRoot(),
-        NgxMapboxGLModule.withConfig({accessToken: environment.apis.maps.accessToken})
+        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken})
     ],
 
     providers :
     [
         Globalization,
         Firebase,
-        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        { provide: 'FirebaseEnvironment', useValue: environment.apis.firebase },
+        { provide: 'PlacesEnvironment', useValue: environment.apis.places },
+        { provide: 'MapboxEnvironment', useValue: environment.apis.mapbox }
 //        { provide: ErrorHandler,       useClass: ErrorHandlerApp }
     ]
 })
