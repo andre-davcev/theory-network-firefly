@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ValidatorsExtended } from '@theory/core';
+import { ValidatorsExtended, FormGenerator } from '@theory/core';
 
 import { Icon } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
-export class FormIcon
+export class FormIcon extends FormGenerator<Icon>
 {
-    constructor(private formBuilder: FormBuilder) { }
-
-    public build(icon?: Icon): FormGroup
+    constructor(private formBuilder: FormBuilder)
     {
-        return this.buildFrom(icon == null ? this.empty() : icon);
+        super();
     }
 
-    private empty(): Icon
+    protected empty(): Icon
     {
         return {
           draft       : true,
@@ -26,7 +24,7 @@ export class FormIcon
         };
     }
 
-    private buildFrom(icon: Icon): FormGroup
+    protected buildFrom(icon: Icon): FormGroup
     {
         const formGroup: FormGroup = this.formBuilder.group
         ({
