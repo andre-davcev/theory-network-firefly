@@ -1,21 +1,18 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ValidatorsExtended } from '@theory/core';
-
+import { ValidatorsExtended, FormGenerator } from '@theory/core';
 import { Cluster } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
-export class FormCluster
+export class FormCluster extends FormGenerator<Cluster>
 {
-    constructor(private formBuilder: FormBuilder) { }
-
-    public build(cluster?: Cluster): FormGroup
+    constructor(private formBuilder: FormBuilder)
     {
-        return this.buildFrom(cluster == null ? this.empty() : cluster);
+        super();
     }
 
-    private empty(): Cluster
+    protected empty(): Cluster
     {
         return {
           draft       : true,
@@ -30,7 +27,7 @@ export class FormCluster
         };
     }
 
-    private buildFrom(cluster: Cluster): FormGroup
+    public buildFrom(cluster: Cluster): FormGroup
     {
         const formGroup: FormGroup = this.formBuilder.group
         ({
