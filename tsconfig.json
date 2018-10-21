@@ -54,11 +54,23 @@
       "@theory/foursquare/*": [
         "libs/foursquare/src/*"
       ],
+      "@theory/google": [
+        "libs/google/src/index.ts"
+      ],
+      "@theory/google/*": [
+        "libs/google/src/*"
+      ],
       "@theory/ionic": [
         "libs/ionic/index.ts"
       ],
       "@theory/ionic/*": [
         "libs/ionic/src/*"
+      ],
+      "@theory/mapbox": [
+        "libs/mapbox/src/index.ts"
+      ],
+      "@theory/mapbox/*": [
+        "libs/mapbox/src/*"
       ],
       "@theory/nativescript": [
         "libs/nativescript/index.ts"
