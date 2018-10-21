@@ -363,6 +363,76 @@
           }
         }
       }
+    },
+    "mapbox": {
+      "root": "libs/mapbox",
+      "sourceRoot": "libs/mapbox/src",
+      "projectType": "library",
+      "prefix": "theory",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/mapbox/tsconfig.lib.json",
+            "project": "libs/mapbox/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/mapbox/src/test.ts",
+            "tsConfig": "libs/mapbox/tsconfig.spec.json",
+            "karmaConfig": "libs/mapbox/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/mapbox/tsconfig.lib.json",
+              "libs/mapbox/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "google": {
+      "root": "libs/google",
+      "sourceRoot": "libs/google/src",
+      "projectType": "library",
+      "prefix": "theory",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/google/tsconfig.lib.json",
+            "project": "libs/google/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/google/src/test.ts",
+            "tsConfig": "libs/google/tsconfig.spec.json",
+            "karmaConfig": "libs/google/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/google/tsconfig.lib.json",
+              "libs/google/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

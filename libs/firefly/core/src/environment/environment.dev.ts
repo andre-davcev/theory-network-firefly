@@ -1,11 +1,10 @@
 import { Environment } from './interfaces';
 
-export const environmentDev: Environment =
+export const EnvironmentDev: Environment =
 {
     production  : false,
     environment : 'dev',
     language    : 'en',
-    version     : '0.0.0',
     pathJson    : 'data',
 
     apis :

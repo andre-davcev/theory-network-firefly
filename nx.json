@@ -40,6 +40,12 @@
     },
     "device": {
       "tags": []
+    },
+    "mapbox": {
+      "tags": []
+    },
+    "google": {
+      "tags": []
     }
   }
 }

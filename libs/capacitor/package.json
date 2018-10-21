@@ -1,6 +1,6 @@
 {
   "name": "@theory/capacitor",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.0",
   "main": "index.ts",
   "peerDependencies": {
     "@capacitor/core": "file:../../node_modules/@capacitor/core"

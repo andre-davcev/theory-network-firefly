@@ -7,11 +7,19 @@
   ],
   "ionic-firefly": [
     {
-      "projectName": "core",
+      "projectName": "firebase",
       "type": "es6Import"
     },
     {
-      "projectName": "firebase",
+      "projectName": "mapbox",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "google",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "core",
       "type": "es6Import"
     },
     {
@@ -33,11 +41,19 @@
   ],
   "firefly-core": [
     {
-      "projectName": "core",
+      "projectName": "firebase",
       "type": "es6Import"
     },
     {
-      "projectName": "firebase",
+      "projectName": "mapbox",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "google",
+      "type": "es6Import"
+    },
+    {
+      "projectName": "core",
       "type": "es6Import"
     },
     {
@@ -67,6 +83,8 @@
   ],
   "capacitor": [],
   "firebase": [],
+  "google": [],
+  "mapbox": [],
   "device": [],
   "ionic": [
     {

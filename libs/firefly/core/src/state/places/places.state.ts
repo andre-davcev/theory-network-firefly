@@ -6,7 +6,7 @@ import { GeolocationPosition } from '@capacitor/core';
 import { FoursquareResponseVenueSearch } from '@theory/foursquare';
 
 import { StateLocation } from '@firefly/core/state/location';
-import { environmentDev as environment } from '@firefly/core/environment';
+import { EnvironmentDev as environment } from '@firefly/core/environment';
 import { StatePlacesModel } from './places.state.model';
 import { StatePlacesOptions } from './places.state.options';
 import { ActionPlaceSearch } from './places.actions';
