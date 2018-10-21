@@ -13,14 +13,14 @@ export class ComponentItemHeader
 {
     @Input() form: FormGroup;
 
-    @Input() icon            : string;
+    @Input() icon            : string = 'icon';
     @Input() iconPlaceholder : string = '';
     @Input() iconUrlEmpty    : string;
 
-    @Input() title            : string;
+    @Input() title            : string = 'title';
     @Input() titlePlaceholder : string = '';
 
-    @Input() subtitle            : string;
+    @Input() subtitle            : string = 'subtitle';
     @Input() subtitlePlaceholder : string = '';
 
     constructor() {}

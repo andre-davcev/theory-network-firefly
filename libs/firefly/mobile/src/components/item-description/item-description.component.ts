@@ -12,12 +12,12 @@ export class ComponentItemDescription
 {
     @Input() form : FormGroup;
 
-    @Input() title : string;
+    @Input() title : string = '';
 
-    @Input() image            : string;
+    @Input() image            : string = 'image';
     @Input() imagePlaceholder : string = '';
 
-    @Input() description            : string;
+    @Input() description            : string = 'description';
     @Input() descriptionPlaceholder : string = '';
 
     constructor() { }
