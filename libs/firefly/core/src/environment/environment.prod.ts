@@ -26,7 +26,7 @@ export const EnvironmentProd: Environment =
             url          : 'https://api.foursquare.com/v2/venues'
         },
 
-        maps :
+        mapbox :
         {
             accessToken: '***REMOVED-MAPBOX-TOKEN***'
         }

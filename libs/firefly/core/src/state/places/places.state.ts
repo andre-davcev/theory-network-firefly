@@ -2,11 +2,12 @@ import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { GeolocationPosition } from '@capacitor/core';
+import { Inject } from '@angular/core';
 
 import { FoursquareResponseVenueSearch } from '@theory/foursquare';
+import { EnvironmentPlaces } from '@theory/google';
 
 import { StateLocation } from '@firefly/core/state/location';
-import { EnvironmentDev as environment } from '@firefly/core/environment';
 import { StatePlacesModel } from './places.state.model';
 import { StatePlacesOptions } from './places.state.options';
 import { ActionPlaceSearch } from './places.actions';
@@ -18,7 +19,7 @@ export class StatePlaces
     @Selector() static searching(state: StatePlacesModel) {return state.searching;}
     @Selector() static results(state: StatePlacesModel)   {return state.results;}
 
-    constructor(private http: HttpClient, private store: Store) {}
+    constructor(private http: HttpClient, private store: Store, @Inject('PlacesEnvironment') private placesEnvironment: EnvironmentPlaces) {}
 
     @Action(ActionPlaceSearch)
     placeSearch({ patchState }: StateContext<StatePlacesModel>, { payload }: ActionPlaceSearch)
@@ -32,12 +33,12 @@ export class StatePlaces
         }
         else
         {
-            return this.http.get(`${environment.apis.places.url}/explore`,
+            return this.http.get(`${this.placesEnvironment.url}/explore`,
             {
                 params :
                 {
-                    client_id     : environment.apis.places.clientId,
-                    client_secret : environment.apis.places.clientSecret,
+                    client_id     : this.placesEnvironment.clientId,
+                    client_secret : this.placesEnvironment.clientSecret,
                     ll            : `${location.coords.latitude},${location.coords.longitude}`,
                     intent        : 'checkin',
                     radius        : '32000',

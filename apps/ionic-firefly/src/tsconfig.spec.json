@@ -46,7 +46,7 @@
         "../../../libs/foursquare/src/*"
       ],
       "@theory/google": [
-        "../../../libs/google/src/index.ts"
+        "../../../libs/google/index.ts"
       ],
       "@theory/google/*": [
         "../../../libs/google/src/*"
@@ -58,7 +58,7 @@
         "../../../libs/ionic/src/*"
       ],
       "@theory/mapbox": [
-        "../../../libs/mapbox/src/index.ts"
+        "../../../libs/mapbox/index.ts"
       ],
       "@theory/mapbox/*": [
         "../../../libs/mapbox/src/*"
