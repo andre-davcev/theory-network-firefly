@@ -1,8 +1,9 @@
 {
   "name": "firefly",
   "license": "SEE LICENSE IN <your-license-filename>",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.0",
   "scripts": {
+    "postinstall": "node scripts/version.js",
     "ng": "ng",
     "start": "ionic serve",
     "build:web": "ng build",
@@ -85,6 +86,8 @@
     "@types/mapbox-gl": "file:../../node_modules/@types/mapbox-gl",
     "@types/node": "file:../../node_modules/@types/node",
     "@types/supercluster": "file:../../node_modules/@types/supercluster",
+    "fs-extra": "file:../../node_modules/fs-extra",
+    "git-describe": "file:../../node_modules/git-describe",
     "codelyzer": "file:../../node_modules/codelyzer",
     "jasmine-core": "file:../../node_modules/jasmine-core",
     "jasmine-spec-reporter": "file:../../node_modules/jasmine-spec-reporter",
@@ -93,6 +96,7 @@
     "karma-coverage-istanbul-reporter": "file:../../node_modules/karma-coverage-istanbul-reporter",
     "karma-jasmine": "file:../../node_modules/karma-jasmine",
     "karma-jasmine-html-reporter": "file:../../node_modules/karma-jasmine-html-reporter",
+    "path": "file:../../node_modules/path",
     "protractor": "file:../../node_modules/protractor",
     "ts-node": "file:../../node_modules/ts-node",
     "tslint": "file:../../node_modules/tslint",
