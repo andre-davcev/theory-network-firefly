@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import { Store, Select } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { GeolocationPosition } from '@capacitor/core';
 
@@ -25,7 +25,7 @@ export class ComponentMap implements OnInit
 
     private componentMapOrb: ComponentMapOrb;
 
-    constructor(private store: Store) { }
+    constructor() { }
 
     ngOnInit()
     {
