@@ -25,6 +25,7 @@ export class PageLogin implements OnInit
 
     public ngOnInit(): void
     {
+        this.login();
         this.userFound$.
         pipe(filter((userFound: boolean) => userFound), take(1)).
         subscribe(() => this.nav.navigateRoot('/home'))
