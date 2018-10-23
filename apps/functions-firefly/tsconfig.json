@@ -1,14 +1,25 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "lib": ["es6"],
     "module": "commonjs",
+    "moduleResolution": "node",
     "noImplicitReturns": true,
     "outDir": "lib",
     "sourceMap": true,
-    "target": "es6"
+    "target": "es6",
+    "declaration": true,
+    "inlineSources": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true
   },
   "compileOnSave": true,
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts"
   ]
 }
