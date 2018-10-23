@@ -1,1501 +1,242 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1vzj4iev.sc.entry.js":
-/*!***************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/1vzj4iev.sc.entry.js ***!
-  \***************************************************************************************************************************************/
-/*! exports provided: IonDatetime, IonPicker, IonPickerColumn, IonPickerController */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2tb9n2ap.entry.js":
+/*!*****************************************************************************************************************************************!*\
+  !*** C:/Users/david/Documents/github/library/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/2tb9n2ap.entry.js ***!
+  \*****************************************************************************************************************************************/
+/*! exports provided: IonSlide, IonSlides */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonDatetime", function() { return Datetime; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPicker", function() { return Picker; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPickerColumn", function() { return PickerColumnCmp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPickerController", function() { return PickerController; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSlide", function() { return Slide; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonSlides", function() { return Slides; });
 /* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
 /* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
 /* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
 /* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
-/* harmony import */ var _chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-05b9bd31.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-05b9bd31.js");
-/* harmony import */ var _chunk_5f438245_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-5f438245.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-5f438245.js");
-
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
+var Slide=function(){function e(){}return e.prototype.componentDidLoad=function(){this.ionSlideChanged.emit()},e.prototype.componentDidUnload=function(){this.ionSlideChanged.emit()},e.prototype.hostData=function(){return{class:{"swiper-slide":!0}}},Object.defineProperty(e,"is",{get:function(){return"ion-slide"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionSlideChanged",method:"ionSlideChanged",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return"ion-slide{display:block;width:100%;height:100%}.slide-zoom{display:block;width:100%;text-align:center}.swiper-slide{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%;font-size:18px;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box}.swiper-slide img{width:auto;max-width:100%;height:auto;max-height:100%}"},enumerable:!0,configurable:!0}),e}(),Slides=function(){function e(){var e=this;this.didInit=!1,this.swiper=new Promise(function(t){e.readySwiper=t}),this.options={},this.pager=!1,this.scrollbar=!1}return e.prototype.optionsChanged=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(t){switch(t.label){case 0:return this.didInit?[4,this.getSwiper()]:[3,3];case 1:return e=t.sent(),Object.assign(e.params,this.options),[4,this.update()];case 2:t.sent(),t.label=3;case 3:return[2]}})})},e.prototype.componentDidLoad=function(){var e=this;Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["b"])(function(){return e.initSwiper()})},e.prototype.componentDidUnload=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){switch(e.label){case 0:return[4,this.getSwiper()];case 1:return e.sent().destroy(!0,!0),[2]}})})},e.prototype.onSlideChanged=function(){this.didInit&&this.update()},e.prototype.update=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){switch(e.label){case 0:return[4,this.getSwiper()];case 1:return e.sent().update(),[2]}})})},e.prototype.slideTo=function(e,t,i){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return[4,this.getSwiper()];case 1:return n.sent().slideTo(e,t,i),[2]}})})},e.prototype.slideNext=function(e,t){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(i){switch(i.label){case 0:return[4,this.getSwiper()];case 1:return i.sent().slideNext(e,t),[2]}})})},e.prototype.slidePrev=function(e,t){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(i){switch(i.label){case 0:return[4,this.getSwiper()];case 1:return i.sent().slidePrev(e,t),[2]}})})},e.prototype.getActiveIndex=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){switch(e.label){case 0:return[4,this.getSwiper()];case 1:return[2,e.sent().activeIndex]}})})},e.prototype.getPreviousIndex=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){switch(e.label){case 0:return[4,this.getSwiper()];case 1:return[2,e.sent().previousIndex]}})})},e.prototype.length=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){switch(e.label){case 0:return[4,this.getSwiper()];case 1:return[2,e.sent().slides.length]}})})},e.prototype.isEnd=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){switch(e.label){case 0:return[4,this.getSwiper()];case 1:return[2,e.sent().isEnd]}})})},e.prototype.isBeginning=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){switch(e.label){case 0:return[4,this.getSwiper()];case 1:return[2,e.sent().isBeginning]}})})},e.prototype.startAutoplay=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(t){switch(t.label){case 0:return[4,this.getSwiper()];case 1:return(e=t.sent()).autoplay&&e.autoplay.start(),[2]}})})},e.prototype.stopAutoplay=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(t){switch(t.label){case 0:return[4,this.getSwiper()];case 1:return(e=t.sent()).autoplay&&e.autoplay.stop(),[2]}})})},e.prototype.lockSwipeToNext=function(e){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(t){switch(t.label){case 0:return[4,this.getSwiper()];case 1:return t.sent().allowSlideNext=!e,[2]}})})},e.prototype.lockSwipeToPrev=function(e){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(t){switch(t.label){case 0:return[4,this.getSwiper()];case 1:return t.sent().allowSlidePrev=!e,[2]}})})},e.prototype.lockSwipes=function(e){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var t;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(i){switch(i.label){case 0:return[4,this.getSwiper()];case 1:return(t=i.sent()).allowSlideNext=!e,t.allowSlidePrev=!e,t.allowTouchMove=!e,[2]}})})},e.prototype.initSwiper=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e,t,i;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return e=this.normalizeOptions(),[4,__webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./swiper.bundle.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/swiper.bundle.js"))];case 1:return t=n.sent().Swiper,i=new t(this.el,e),this.didInit=!0,this.readySwiper(i),[2]}})})},e.prototype.getSwiper=function(){return this.swiper},e.prototype.normalizeOptions=function(){var e=this,t={effect:"slide",direction:"horizontal",initialSlide:0,loop:!1,parallax:!1,slidesPerView:1,spaceBetween:0,speed:300,slidesPerColumn:1,slidesPerColumnFill:"column",slidesPerGroup:1,centeredSlides:!1,slidesOffsetBefore:0,slidesOffsetAfter:0,touchEventsTarget:"container",autoplay:!1,freeMode:!1,freeModeMomentum:!0,freeModeMomentumRatio:1,freeModeMomentumBounce:!0,freeModeMomentumBounceRatio:1,freeModeMomentumVelocityRatio:1,freeModeSticky:!1,freeModeMinimumVelocity:.02,autoHeight:!1,setWrapperSize:!1,zoom:{maxRatio:3,minRatio:1,toggle:!0},touchRatio:1,touchAngle:45,simulateTouch:!0,shortSwipes:!0,longSwipes:!0,longSwipesRatio:.5,longSwipesMs:300,followFinger:!0,threshold:0,touchMoveStopPropagation:!0,touchReleaseOnEdges:!1,iOSEdgeSwipeDetection:!1,iOSEdgeSwipeThreshold:20,resistance:!0,resistanceRatio:.85,watchSlidesProgress:!1,watchSlidesVisibility:!1,preventClicks:!0,preventClicksPropagation:!0,slideToClickedSlide:!1,loopAdditionalSlides:0,noSwiping:!0,runCallbacksOnInit:!0,coverflowEffect:{rotate:50,stretch:0,depth:100,modifier:1,slideShadows:!0},flipEffect:{slideShadows:!0,limitRotation:!0},cubeEffect:{slideShadows:!0,shadow:!0,shadowOffset:20,shadowScale:.94},fadeEffect:{crossfade:!1},a11y:{prevSlideMessage:"Previous slide",nextSlideMessage:"Next slide",firstSlideMessage:"This is the first slide",lastSlideMessage:"This is the last slide"}};return this.pager&&(t.pagination={el:this.paginationEl,type:"bullets",clickable:!1,hideOnClick:!1}),this.scrollbar&&(t.scrollbar={el:this.scrollbarEl,hide:!0}),Object.assign({},t,this.options,{on:{init:function(){setTimeout(function(){e.ionSlidesDidLoad.emit()},20)},slideChangeTransitionStart:this.ionSlideWillChange.emit,slideChangeTransitionEnd:this.ionSlideDidChange.emit,slideNextTransitionStart:this.ionSlideNextStart.emit,slidePrevTransitionStart:this.ionSlidePrevStart.emit,slideNextTransitionEnd:this.ionSlideNextEnd.emit,slidePrevTransitionEnd:this.ionSlidePrevEnd.emit,transitionStart:this.ionSlideTransitionStart.emit,transitionEnd:this.ionSlideTransitionEnd.emit,sliderMove:this.ionSlideDrag.emit,reachBeginning:this.ionSlideReachStart.emit,reachEnd:this.ionSlideReachEnd.emit,touchStart:this.ionSlideTouchStart.emit,touchEnd:this.ionSlideTouchEnd.emit,tap:this.ionSlideTap.emit,doubleTap:this.ionSlideDoubleTap.emit}})},e.prototype.hostData=function(){return{class:Object.assign({},Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["k"])(this.mode,"slides"),{"swiper-container":!0})}},e.prototype.render=function(){var e=this;return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"swiper-wrapper"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot",null)),this.pager&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"swiper-pagination",ref:function(t){return e.paginationEl=t}}),this.scrollbar&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"swiper-scrollbar",ref:function(t){return e.scrollbarEl=t}})]},Object.defineProperty(e,"is",{get:function(){return"ion-slides"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{el:{elementRef:!0},getActiveIndex:{method:!0},getPreviousIndex:{method:!0},isBeginning:{method:!0},isEnd:{method:!0},length:{method:!0},lockSwipes:{method:!0},lockSwipeToNext:{method:!0},lockSwipeToPrev:{method:!0},mode:{type:String,attr:"mode"},options:{type:"Any",attr:"options",watchCallbacks:["optionsChanged"]},pager:{type:Boolean,attr:"pager"},scrollbar:{type:Boolean,attr:"scrollbar"},slideNext:{method:!0},slidePrev:{method:!0},slideTo:{method:!0},startAutoplay:{method:!0},stopAutoplay:{method:!0},update:{method:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionSlidesDidLoad",method:"ionSlidesDidLoad",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideTap",method:"ionSlideTap",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideDoubleTap",method:"ionSlideDoubleTap",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideWillChange",method:"ionSlideWillChange",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideDidChange",method:"ionSlideDidChange",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideNextStart",method:"ionSlideNextStart",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlidePrevStart",method:"ionSlidePrevStart",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideNextEnd",method:"ionSlideNextEnd",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlidePrevEnd",method:"ionSlidePrevEnd",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideTransitionStart",method:"ionSlideTransitionStart",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideTransitionEnd",method:"ionSlideTransitionEnd",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideDrag",method:"ionSlideDrag",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideReachStart",method:"ionSlideReachStart",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideReachEnd",method:"ionSlideReachEnd",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideTouchStart",method:"ionSlideTouchStart",bubbles:!0,cancelable:!0,composed:!0},{name:"ionSlideTouchEnd",method:"ionSlideTouchEnd",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionSlideChanged",method:"onSlideChanged"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".swiper-container{margin:0 auto;position:relative;overflow:hidden;list-style:none;padding:0;z-index:1}.swiper-container-no-flexbox .swiper-slide{float:left}.swiper-container-vertical>.swiper-wrapper{-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}.swiper-wrapper{position:relative;width:100%;height:100%;z-index:1;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-transition-property:-webkit-transform;transition-property:-webkit-transform;-o-transition-property:transform;transition-property:transform;transition-property:transform,-webkit-transform;-webkit-box-sizing:content-box;box-sizing:content-box}.swiper-container-android .swiper-slide,.swiper-wrapper{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}.swiper-container-multirow>.swiper-wrapper{-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap}.swiper-container-free-mode>.swiper-wrapper{-webkit-transition-timing-function:ease-out;-o-transition-timing-function:ease-out;transition-timing-function:ease-out;margin:0 auto}.swiper-slide{-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;width:100%;height:100%;position:relative;-webkit-transition-property:-webkit-transform;transition-property:-webkit-transform;-o-transition-property:transform;transition-property:transform;transition-property:transform,-webkit-transform}.swiper-invisible-blank-slide{visibility:hidden}.swiper-container-autoheight,.swiper-container-autoheight .swiper-slide{height:auto}.swiper-container-autoheight .swiper-wrapper{-webkit-box-align:start;-webkit-align-items:flex-start;-ms-flex-align:start;align-items:flex-start;-webkit-transition-property:height,-webkit-transform;transition-property:height,-webkit-transform;-o-transition-property:transform,height;transition-property:transform,height;transition-property:transform,height,-webkit-transform}.swiper-container-3d{-webkit-perspective:1200px;perspective:1200px}.swiper-container-3d .swiper-cube-shadow,.swiper-container-3d .swiper-slide,.swiper-container-3d .swiper-slide-shadow-bottom,.swiper-container-3d .swiper-slide-shadow-left,.swiper-container-3d .swiper-slide-shadow-right,.swiper-container-3d .swiper-slide-shadow-top,.swiper-container-3d .swiper-wrapper{-webkit-transform-style:preserve-3d;transform-style:preserve-3d}.swiper-container-3d .swiper-slide-shadow-bottom,.swiper-container-3d .swiper-slide-shadow-left,.swiper-container-3d .swiper-slide-shadow-right,.swiper-container-3d .swiper-slide-shadow-top{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:10}.swiper-container-3d .swiper-slide-shadow-left{background-image:-webkit-gradient(linear,right top,left top,from(rgba(0,0,0,.5)),to(rgba(0,0,0,0)));background-image:-webkit-linear-gradient(right,rgba(0,0,0,.5),rgba(0,0,0,0));background-image:-o-linear-gradient(right,rgba(0,0,0,.5),rgba(0,0,0,0));background-image:linear-gradient(to left,rgba(0,0,0,.5),rgba(0,0,0,0))}.swiper-container-3d .swiper-slide-shadow-right{background-image:-webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.5)),to(rgba(0,0,0,0)));background-image:-webkit-linear-gradient(left,rgba(0,0,0,.5),rgba(0,0,0,0));background-image:-o-linear-gradient(left,rgba(0,0,0,.5),rgba(0,0,0,0));background-image:linear-gradient(to right,rgba(0,0,0,.5),rgba(0,0,0,0))}.swiper-container-3d .swiper-slide-shadow-top{background-image:-webkit-gradient(linear,left bottom,left top,from(rgba(0,0,0,.5)),to(rgba(0,0,0,0)));background-image:-webkit-linear-gradient(bottom,rgba(0,0,0,.5),rgba(0,0,0,0));background-image:-o-linear-gradient(bottom,rgba(0,0,0,.5),rgba(0,0,0,0));background-image:linear-gradient(to top,rgba(0,0,0,.5),rgba(0,0,0,0))}.swiper-container-3d .swiper-slide-shadow-bottom{background-image:-webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,.5)),to(rgba(0,0,0,0)));background-image:-webkit-linear-gradient(top,rgba(0,0,0,.5),rgba(0,0,0,0));background-image:-o-linear-gradient(top,rgba(0,0,0,.5),rgba(0,0,0,0));background-image:linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,0))}.swiper-container-wp8-horizontal,.swiper-container-wp8-horizontal>.swiper-wrapper{-ms-touch-action:pan-y;touch-action:pan-y}.swiper-container-wp8-vertical,.swiper-container-wp8-vertical>.swiper-wrapper{-ms-touch-action:pan-x;touch-action:pan-x}.swiper-button-next,.swiper-button-prev{position:absolute;top:50%;width:27px;height:44px;margin-top:-22px;z-index:10;cursor:pointer;background-size:27px 44px;background-position:center;background-repeat:no-repeat}.swiper-button-next.swiper-button-disabled,.swiper-button-prev.swiper-button-disabled{opacity:.35;cursor:auto;pointer-events:none}.swiper-button-prev,.swiper-container-rtl .swiper-button-next{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E\");left:10px;right:auto}.swiper-button-next,.swiper-container-rtl .swiper-button-prev{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E\");right:10px;left:auto}.swiper-button-prev.swiper-button-white,.swiper-container-rtl .swiper-button-next.swiper-button-white{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E\")}.swiper-button-next.swiper-button-white,.swiper-container-rtl .swiper-button-prev.swiper-button-white{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E\")}.swiper-button-prev.swiper-button-black,.swiper-container-rtl .swiper-button-next.swiper-button-black{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23000000'%2F%3E%3C%2Fsvg%3E\")}.swiper-button-next.swiper-button-black,.swiper-container-rtl .swiper-button-prev.swiper-button-black{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23000000'%2F%3E%3C%2Fsvg%3E\")}.swiper-button-lock{display:none}.swiper-pagination{position:absolute;text-align:center;-webkit-transition:.3s opacity;-o-transition:.3s opacity;transition:.3s opacity;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0);z-index:10}.swiper-pagination.swiper-pagination-hidden{opacity:0}.swiper-container-horizontal>.swiper-pagination-bullets,.swiper-pagination-custom,.swiper-pagination-fraction{bottom:10px;left:0;width:100%}.swiper-pagination-bullets-dynamic{overflow:hidden;font-size:0}.swiper-pagination-bullets-dynamic .swiper-pagination-bullet{-webkit-transform:scale(.33);-ms-transform:scale(.33);transform:scale(.33);position:relative}.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active,.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-main{-webkit-transform:scale(1);-ms-transform:scale(1);transform:scale(1)}.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev{-webkit-transform:scale(.66);-ms-transform:scale(.66);transform:scale(.66)}.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev-prev{-webkit-transform:scale(.33);-ms-transform:scale(.33);transform:scale(.33)}.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next{-webkit-transform:scale(.66);-ms-transform:scale(.66);transform:scale(.66)}.swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next-next{-webkit-transform:scale(.33);-ms-transform:scale(.33);transform:scale(.33)}.swiper-pagination-bullet{width:8px;height:8px;display:inline-block;border-radius:100%;background:#000;opacity:.2}button.swiper-pagination-bullet{border:none;margin:0;padding:0;-webkit-box-shadow:none;box-shadow:none;-webkit-appearance:none;-moz-appearance:none;appearance:none}.swiper-pagination-clickable .swiper-pagination-bullet{cursor:pointer}.swiper-pagination-bullet-active{opacity:1;background:#007aff}.swiper-container-vertical>.swiper-pagination-bullets{right:10px;top:50%;-webkit-transform:translate3d(0,-50%,0);transform:translate3d(0,-50%,0)}.swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet{margin:6px 0;display:block}.swiper-container-vertical>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic{top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);width:8px}.swiper-container-vertical>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet{display:inline-block;-webkit-transition:.2s top,.2s -webkit-transform;transition:.2s top,.2s -webkit-transform;-o-transition:.2s transform,.2s top;transition:.2s transform,.2s top;transition:.2s transform,.2s top,.2s -webkit-transform}.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{margin:0 4px}.swiper-container-horizontal>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic{left:50%;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%);white-space:nowrap}.swiper-container-horizontal>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet{-webkit-transition:.2s left,.2s -webkit-transform;transition:.2s left,.2s -webkit-transform;-o-transition:.2s transform,.2s left;transition:.2s transform,.2s left;transition:.2s transform,.2s left,.2s -webkit-transform}.swiper-container-horizontal.swiper-container-rtl>.swiper-pagination-bullets-dynamic .swiper-pagination-bullet{-webkit-transition:.2s right,.2s -webkit-transform;transition:.2s right,.2s -webkit-transform;-o-transition:.2s transform,.2s right;transition:.2s transform,.2s right;transition:.2s transform,.2s right,.2s -webkit-transform}.swiper-pagination-progressbar{background:rgba(0,0,0,.25);position:absolute}.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{background:#007aff;position:absolute;left:0;top:0;width:100%;height:100%;-webkit-transform:scale(0);-ms-transform:scale(0);transform:scale(0);-webkit-transform-origin:left top;-ms-transform-origin:left top;transform-origin:left top}.swiper-container-rtl .swiper-pagination-progressbar .swiper-pagination-progressbar-fill{-webkit-transform-origin:right top;-ms-transform-origin:right top;transform-origin:right top}.swiper-container-horizontal>.swiper-pagination-progressbar,.swiper-container-vertical>.swiper-pagination-progressbar.swiper-pagination-progressbar-opposite{width:100%;height:4px;left:0;top:0}.swiper-container-horizontal>.swiper-pagination-progressbar.swiper-pagination-progressbar-opposite,.swiper-container-vertical>.swiper-pagination-progressbar{width:4px;height:100%;left:0;top:0}.swiper-pagination-white .swiper-pagination-bullet-active{background:#fff}.swiper-pagination-progressbar.swiper-pagination-white{background:rgba(255,255,255,.25)}.swiper-pagination-progressbar.swiper-pagination-white .swiper-pagination-progressbar-fill{background:#fff}.swiper-pagination-black .swiper-pagination-bullet-active{background:#000}.swiper-pagination-progressbar.swiper-pagination-black{background:rgba(0,0,0,.25)}.swiper-pagination-progressbar.swiper-pagination-black .swiper-pagination-progressbar-fill{background:#000}.swiper-pagination-lock{display:none}.swiper-scrollbar{border-radius:10px;position:relative;-ms-touch-action:none;background:rgba(0,0,0,.1)}.swiper-container-horizontal>.swiper-scrollbar{position:absolute;left:1%;bottom:3px;z-index:50;height:5px;width:98%}.swiper-container-vertical>.swiper-scrollbar{position:absolute;right:3px;top:1%;z-index:50;width:5px;height:98%}.swiper-scrollbar-drag{height:100%;width:100%;position:relative;background:rgba(0,0,0,.5);border-radius:10px;left:0;top:0}.swiper-scrollbar-cursor-drag{cursor:move}.swiper-scrollbar-lock{display:none}.swiper-zoom-container{width:100%;height:100%;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;text-align:center}.swiper-zoom-container>canvas,.swiper-zoom-container>img,.swiper-zoom-container>svg{max-width:100%;max-height:100%;-o-object-fit:contain;object-fit:contain}.swiper-slide-zoomed{cursor:move}.swiper-lazy-preloader{width:42px;height:42px;position:absolute;left:50%;top:50%;margin-left:-21px;margin-top:-21px;z-index:10;-webkit-transform-origin:50%;-ms-transform-origin:50%;transform-origin:50%;-webkit-animation:1s steps(12,end) infinite swiper-preloader-spin;animation:1s steps(12,end) infinite swiper-preloader-spin}.swiper-lazy-preloader:after{display:block;content:'';width:100%;height:100%;background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%20120%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20xmlns%3Axlink%3D'http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink'%3E%3Cdefs%3E%3Cline%20id%3D'l'%20x1%3D'60'%20x2%3D'60'%20y1%3D'7'%20y2%3D'27'%20stroke%3D'%236c6c6c'%20stroke-width%3D'11'%20stroke-linecap%3D'round'%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(30%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(60%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(90%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(120%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(150%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.37'%20transform%3D'rotate(180%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.46'%20transform%3D'rotate(210%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.56'%20transform%3D'rotate(240%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.66'%20transform%3D'rotate(270%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.75'%20transform%3D'rotate(300%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.85'%20transform%3D'rotate(330%2060%2C60)'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E\");background-position:50%;background-size:100%;background-repeat:no-repeat}.swiper-lazy-preloader-white:after{background-image:url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%20120%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20xmlns%3Axlink%3D'http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink'%3E%3Cdefs%3E%3Cline%20id%3D'l'%20x1%3D'60'%20x2%3D'60'%20y1%3D'7'%20y2%3D'27'%20stroke%3D'%23fff'%20stroke-width%3D'11'%20stroke-linecap%3D'round'%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(30%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(60%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(90%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(120%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.27'%20transform%3D'rotate(150%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.37'%20transform%3D'rotate(180%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.46'%20transform%3D'rotate(210%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.56'%20transform%3D'rotate(240%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.66'%20transform%3D'rotate(270%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.75'%20transform%3D'rotate(300%2060%2C60)'%2F%3E%3Cuse%20xlink%3Ahref%3D'%23l'%20opacity%3D'.85'%20transform%3D'rotate(330%2060%2C60)'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E\")}\@-webkit-keyframes swiper-preloader-spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}\@keyframes swiper-preloader-spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.swiper-container .swiper-notification{position:absolute;left:0;top:0;pointer-events:none;opacity:0;z-index:-1000}.swiper-container-fade.swiper-container-free-mode .swiper-slide{-webkit-transition-timing-function:ease-out;-o-transition-timing-function:ease-out;transition-timing-function:ease-out}.swiper-container-fade .swiper-slide{pointer-events:none;-webkit-transition-property:opacity;-o-transition-property:opacity;transition-property:opacity}.swiper-container-fade .swiper-slide .swiper-slide{pointer-events:none}.swiper-container-fade .swiper-slide-active,.swiper-container-fade .swiper-slide-active .swiper-slide-active{pointer-events:auto}.swiper-container-cube{overflow:visible}.swiper-container-cube .swiper-slide{pointer-events:none;-webkit-backface-visibility:hidden;backface-visibility:hidden;z-index:1;visibility:hidden;-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0;width:100%;height:100%}.swiper-container-cube .swiper-slide .swiper-slide{pointer-events:none}.swiper-container-cube.swiper-container-rtl .swiper-slide{-webkit-transform-origin:100% 0;-ms-transform-origin:100% 0;transform-origin:100% 0}.swiper-container-cube .swiper-slide-active,.swiper-container-cube .swiper-slide-active .swiper-slide-active{pointer-events:auto}.swiper-container-cube .swiper-slide-active,.swiper-container-cube .swiper-slide-next,.swiper-container-cube .swiper-slide-next+.swiper-slide,.swiper-container-cube .swiper-slide-prev{pointer-events:auto;visibility:visible}.swiper-container-cube .swiper-slide-shadow-bottom,.swiper-container-cube .swiper-slide-shadow-left,.swiper-container-cube .swiper-slide-shadow-right,.swiper-container-cube .swiper-slide-shadow-top{z-index:0;-webkit-backface-visibility:hidden;backface-visibility:hidden}.swiper-container-cube .swiper-cube-shadow{position:absolute;left:0;bottom:0;width:100%;height:100%;background:#000;opacity:.6;-webkit-filter:blur(50px);filter:blur(50px);z-index:0}.swiper-container-flip{overflow:visible}.swiper-container-flip .swiper-slide{pointer-events:none;-webkit-backface-visibility:hidden;backface-visibility:hidden;z-index:1}.swiper-container-flip .swiper-slide .swiper-slide{pointer-events:none}.swiper-container-flip .swiper-slide-active,.swiper-container-flip .swiper-slide-active .swiper-slide-active{pointer-events:auto}.swiper-container-flip .swiper-slide-shadow-bottom,.swiper-container-flip .swiper-slide-shadow-left,.swiper-container-flip .swiper-slide-shadow-right,.swiper-container-flip .swiper-slide-shadow-top{z-index:0;-webkit-backface-visibility:hidden;backface-visibility:hidden}.swiper-container-coverflow .swiper-wrapper{-ms-perspective:1200px}.slides{display:block;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swiper-pagination-bullet{background:var(--bullet-background)}.swiper-pagination-bullet-active{background:var(--bullet-background-active)}.swiper-pagination-progressbar{background:var(--progress-bar-background)}.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{background:var(--progress-bar-background-active)}.swiper-scrollbar{background:var(--scroll-bar-background)}.swiper-scrollbar-drag{background:var(--scroll-bar-background-active)}.slides-ios{--bullet-background:var(--ion-text-color-step-800, #cccccc);--bullet-background-active:var(--ion-color-primary, #3880ff);--progress-bar-background:rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.25);--progress-bar-background-active:var(--ion-color-primary-shade, #3171e0);--scroll-bar-background:rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);--scroll-bar-background-active:rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}();
 
+/***/ }),
 
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js":
+/*!*****************************************************************************************************************************************!*\
+  !*** C:/Users/david/Documents/github/library/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js ***!
+  \*****************************************************************************************************************************************/
+/*! exports provided: a, b, c, d, e, f, g, h, i, j, k */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return attachComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return detachComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hapticSelectionChanged; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return hapticSelectionEnd; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return hapticSelectionStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return hapticSelection; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getClassMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return createColorClasses; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return openURL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return hostContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return createThemedClasses; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/*!
+ * (C) Ionic http://ionicframework.com - MIT License
+ * Built with http://stenciljs.com
+ */
+function attachComponent(e,t,n,r,i){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var o;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(a){switch(a.label){case 0:if(e)return[2,e.attachViewToDom(t,n,i,r)];if("string"!=typeof n&&!(n instanceof HTMLElement))throw new Error("framework delegate is missing");return o="string"==typeof n?t.ownerDocument.createElement(n):n,r&&r.forEach(function(e){return o.classList.add(e)}),i&&Object.assign(o,i),t.appendChild(o),o.componentOnReady?[4,o.componentOnReady()]:[3,2];case 1:a.sent(),a.label=2;case 2:return[2,o]}})})}function detachComponent(e,t){if(t){if(e)return e.removeViewFromDom(t.parentElement,t);t.remove()}return Promise.resolve()}function hapticSelection(){var e=window.TapticEngine;e&&e.selection()}function hapticSelectionStart(){var e=window.TapticEngine;e&&e.gestureSelectionStart()}function hapticSelectionChanged(){var e=window.TapticEngine;e&&e.gestureSelectionChanged()}function hapticSelectionEnd(){var e=window.TapticEngine;e&&e.gestureSelectionEnd()}function hostContext(e,t){return null!==t.closest(e)}function createColorClasses(e){var t;return"string"==typeof e&&e.length>0?((t={"ion-color":!0})["ion-color-"+e]=!0,t):void 0}function createThemedClasses(e,t){var n;return(n={})[t]=!0,n[t+"-"+e]=!!e,n}function getClassList(e){return void 0!==e?(Array.isArray(e)?e:e.split(" ")).filter(function(e){return null!=e}).map(function(e){return e.trim()}).filter(function(e){return""!==e}):[]}function getClassMap(e){var t={};return getClassList(e).forEach(function(e){return t[e]=!0}),t}function openURL(e,t,n,r){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var i;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(o){switch(o.label){case 0:return null==t||"#"===t[0]||-1!==t.indexOf("://")?[3,2]:(i=e.document.querySelector("ion-router"))?(null!=n&&n.preventDefault(),[4,i.componentOnReady()]):[3,2];case 1:return o.sent(),[2,i.push(t,r)];case 2:return[2,!1]}})})}
 
+/***/ }),
 
-function renderDatetime(template, value, locale) {
-    if (value === undefined) {
-        return undefined;
-    }
-    var tokens = [];
-    var hasText = false;
-    FORMAT_KEYS.forEach(function (format, index) {
-        if (template.indexOf(format.f) > -1) {
-            var token = '{' + index + '}';
-            var text = renderTextFormat(format.f, value[format.k], value, locale);
-            if (!hasText && text !== undefined && value[format.k] != null) {
-                hasText = true;
-            }
-            tokens.push(token, text || '');
-            template = template.replace(format.f, token);
-        }
-    });
-    if (!hasText) {
-        return undefined;
-    }
-    for (var i = 0; i < tokens.length; i += 2) {
-        template = template.replace(tokens[i], tokens[i + 1]);
-    }
-    return template;
-}
-function renderTextFormat(format, value, date, locale) {
-    if ((format === FORMAT_DDDD || format === FORMAT_DDD)) {
-        try {
-            value = (new Date(date.year, date.month - 1, date.day)).getDay();
-            if (format === FORMAT_DDDD) {
-                return (locale.dayNames ? locale.dayNames : DAY_NAMES)[value];
-            }
-            return (locale.dayShortNames ? locale.dayShortNames : DAY_SHORT_NAMES)[value];
-        }
-        catch (e) {
-        }
-        return undefined;
-    }
-    if (format === FORMAT_A) {
-        return date !== undefined && date.hour !== undefined
-            ? (date.hour < 12 ? 'AM' : 'PM')
-            : value ? value.toUpperCase() : '';
-    }
-    if (format === FORMAT_a) {
-        return date !== undefined && date.hour !== undefined
-            ? (date.hour < 12 ? 'am' : 'pm')
-            : value || '';
-    }
-    if (value == null) {
-        return '';
-    }
-    if (format === FORMAT_YY || format === FORMAT_MM ||
-        format === FORMAT_DD || format === FORMAT_HH ||
-        format === FORMAT_mm || format === FORMAT_ss) {
-        return twoDigit(value);
-    }
-    if (format === FORMAT_YYYY) {
-        return fourDigit(value);
-    }
-    if (format === FORMAT_MMMM) {
-        return (locale.monthNames ? locale.monthNames : MONTH_NAMES)[value - 1];
-    }
-    if (format === FORMAT_MMM) {
-        return (locale.monthShortNames ? locale.monthShortNames : MONTH_SHORT_NAMES)[value - 1];
-    }
-    if (format === FORMAT_hh || format === FORMAT_h) {
-        if (value === 0) {
-            return '12';
-        }
-        if (value > 12) {
-            value -= 12;
-        }
-        if (format === FORMAT_hh && value < 10) {
-            return ('0' + value);
-        }
-    }
-    return value.toString();
-}
-function dateValueRange(format, min, max) {
-    var opts = [];
-    if (format === FORMAT_YYYY || format === FORMAT_YY) {
-        if (max.year === undefined || min.year === undefined) {
-            throw new Error('min and max year is undefined');
-        }
-        for (var i = max.year; i >= min.year; i--) {
-            opts.push(i);
-        }
-    }
-    else if (format === FORMAT_MMMM || format === FORMAT_MMM ||
-        format === FORMAT_MM || format === FORMAT_M ||
-        format === FORMAT_hh || format === FORMAT_h) {
-        for (var i = 1; i < 13; i++) {
-            opts.push(i);
-        }
-    }
-    else if (format === FORMAT_DDDD || format === FORMAT_DDD ||
-        format === FORMAT_DD || format === FORMAT_D) {
-        for (var i = 1; i < 32; i++) {
-            opts.push(i);
-        }
-    }
-    else if (format === FORMAT_HH || format === FORMAT_H) {
-        for (var i = 0; i < 24; i++) {
-            opts.push(i);
-        }
-    }
-    else if (format === FORMAT_mm || format === FORMAT_m) {
-        for (var i = 0; i < 60; i++) {
-            opts.push(i);
-        }
-    }
-    else if (format === FORMAT_ss || format === FORMAT_s) {
-        for (var i = 0; i < 60; i++) {
-            opts.push(i);
-        }
-    }
-    else if (format === FORMAT_A || format === FORMAT_a) {
-        opts.push('am', 'pm');
-    }
-    return opts;
-}
-function dateSortValue(year, month, day, hour, minute) {
-    if (hour === void 0) { hour = 0; }
-    if (minute === void 0) { minute = 0; }
-    return parseInt("1" + fourDigit(year) + twoDigit(month) + twoDigit(day) + twoDigit(hour) + twoDigit(minute), 10);
-}
-function dateDataSortValue(data) {
-    return dateSortValue(data.year, data.month, data.day, data.hour, data.minute);
-}
-function daysInMonth(month, year) {
-    return (month === 4 || month === 6 || month === 9 || month === 11) ? 30 : (month === 2) ? isLeapYear(year) ? 29 : 28 : 31;
-}
-function isLeapYear(year) {
-    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
-}
-var ISO_8601_REGEXP = /^(\d{4}|[+\-]\d{6})(?:-(\d{2})(?:-(\d{2}))?)?(?:T(\d{2}):(\d{2})(?::(\d{2})(?:\.(\d{3}))?)?(?:(Z)|([+\-])(\d{2})(?::(\d{2}))?)?)?$/;
-var TIME_REGEXP = /^((\d{2}):(\d{2})(?::(\d{2})(?:\.(\d{3}))?)?(?:(Z)|([+\-])(\d{2})(?::(\d{2}))?)?)?$/;
-function parseDate(val) {
-    var parse = null;
-    if (val != null) {
-        parse = TIME_REGEXP.exec(val);
-        if (parse) {
-            parse.unshift(undefined, undefined);
-            parse[2] = parse[3] = undefined;
-        }
-        else {
-            parse = ISO_8601_REGEXP.exec(val);
-        }
-    }
-    if (parse === null) {
-        return undefined;
-    }
-    for (var i = 1; i < 8; i++) {
-        parse[i] = parse[i] !== undefined ? parseInt(parse[i], 10) : undefined;
-    }
-    var tzOffset = 0;
-    if (parse[9] && parse[10]) {
-        tzOffset = parseInt(parse[10], 10) * 60;
-        if (parse[11]) {
-            tzOffset += parseInt(parse[11], 10);
-        }
-        if (parse[9] === '-') {
-            tzOffset *= -1;
-        }
-    }
-    return {
-        year: parse[1],
-        month: parse[2],
-        day: parse[3],
-        hour: parse[4],
-        minute: parse[5],
-        second: parse[6],
-        millisecond: parse[7],
-        tzOffset: tzOffset,
-    };
-}
-function updateDate(existingData, newData) {
-    if (newData && newData !== '') {
-        if (typeof newData === 'string') {
-            newData = parseDate(newData);
-            if (newData) {
-                Object.assign(existingData, newData);
-                return true;
-            }
-        }
-        else if ((newData.year || newData.hour || newData.month || newData.day || newData.minute || newData.second)) {
-            if (newData.ampm && newData.hour) {
-                newData.hour.value = (newData.ampm.value === 'pm')
-                    ? (newData.hour.value === 12 ? 12 : newData.hour.value + 12)
-                    : (newData.hour.value === 12 ? 0 : newData.hour.value);
-            }
-            for (var _i = 0, _a = Object.keys(newData); _i < _a.length; _i++) {
-                var key = _a[_i];
-                existingData[key] = newData[key].value;
-            }
-            return true;
-        }
-        console.warn("Error parsing date: \"" + newData + "\". Please provide a valid ISO 8601 datetime format: https://www.w3.org/TR/NOTE-datetime");
-    }
-    else {
-        for (var k in existingData) {
-            if (existingData.hasOwnProperty(k)) {
-                delete existingData[k];
-            }
-        }
-    }
-    return false;
-}
-function parseTemplate(template) {
-    var formats = [];
-    template = template.replace(/[^\w\s]/gi, ' ');
-    FORMAT_KEYS.forEach(function (format) {
-        if (format.f.length > 1 && template.indexOf(format.f) > -1 && template.indexOf(format.f + format.f.charAt(0)) < 0) {
-            template = template.replace(format.f, ' ' + format.f + ' ');
-        }
-    });
-    var words = template.split(' ').filter(function (w) { return w.length > 0; });
-    words.forEach(function (word, i) {
-        FORMAT_KEYS.forEach(function (format) {
-            if (word === format.f) {
-                if (word === FORMAT_A || word === FORMAT_a) {
-                    if ((formats.indexOf(FORMAT_h) < 0 && formats.indexOf(FORMAT_hh) < 0) ||
-                        VALID_AMPM_PREFIX.indexOf(words[i - 1]) === -1) {
-                        return;
-                    }
-                }
-                formats.push(word);
-            }
-        });
-    });
-    return formats;
-}
-function getValueFromFormat(date, format) {
-    if (format === FORMAT_A || format === FORMAT_a) {
-        return (date.hour < 12 ? 'am' : 'pm');
-    }
-    if (format === FORMAT_hh || format === FORMAT_h) {
-        return (date.hour > 12 ? date.hour - 12 : date.hour);
-    }
-    return date[convertFormatToKey(format)];
-}
-function convertFormatToKey(format) {
-    for (var k in FORMAT_KEYS) {
-        if (FORMAT_KEYS[k].f === format) {
-            return FORMAT_KEYS[k].k;
-        }
-    }
-    return undefined;
-}
-function convertToArrayOfStrings(input, type) {
-    if (input == null) {
-        return undefined;
-    }
-    if (typeof input === 'string') {
-        input = input.replace(/\[|\]/g, '').split(',');
-    }
-    var values;
-    if (Array.isArray(input)) {
-        values = input.map(function (val) { return val.toString().trim(); });
-    }
-    if (values === undefined || values.length === 0) {
-        console.warn("Invalid \"" + type + "Names\". Must be an array of strings, or a comma separated string.");
-    }
-    return values;
-}
-function convertToArrayOfNumbers(input, type) {
-    if (typeof input === 'string') {
-        input = input.replace(/\[|\]|\s/g, '').split(',');
-    }
-    var values;
-    if (Array.isArray(input)) {
-        values = input
-            .map(function (num) { return parseInt(num, 10); })
-            .filter(isFinite);
-    }
-    else {
-        values = [input];
-    }
-    if (values.length === 0) {
-        console.warn("Invalid \"" + type + "Values\". Must be an array of numbers, or a comma separated string of numbers.");
-    }
-    return values;
-}
-function twoDigit(val) {
-    return ('0' + (val !== undefined ? Math.abs(val) : '0')).slice(-2);
-}
-function fourDigit(val) {
-    return ('000' + (val !== undefined ? Math.abs(val) : '0')).slice(-4);
-}
-var FORMAT_YYYY = 'YYYY';
-var FORMAT_YY = 'YY';
-var FORMAT_MMMM = 'MMMM';
-var FORMAT_MMM = 'MMM';
-var FORMAT_MM = 'MM';
-var FORMAT_M = 'M';
-var FORMAT_DDDD = 'DDDD';
-var FORMAT_DDD = 'DDD';
-var FORMAT_DD = 'DD';
-var FORMAT_D = 'D';
-var FORMAT_HH = 'HH';
-var FORMAT_H = 'H';
-var FORMAT_hh = 'hh';
-var FORMAT_h = 'h';
-var FORMAT_mm = 'mm';
-var FORMAT_m = 'm';
-var FORMAT_ss = 'ss';
-var FORMAT_s = 's';
-var FORMAT_A = 'A';
-var FORMAT_a = 'a';
-var FORMAT_KEYS = [
-    { f: FORMAT_YYYY, k: 'year' },
-    { f: FORMAT_MMMM, k: 'month' },
-    { f: FORMAT_DDDD, k: 'day' },
-    { f: FORMAT_MMM, k: 'month' },
-    { f: FORMAT_DDD, k: 'day' },
-    { f: FORMAT_YY, k: 'year' },
-    { f: FORMAT_MM, k: 'month' },
-    { f: FORMAT_DD, k: 'day' },
-    { f: FORMAT_HH, k: 'hour' },
-    { f: FORMAT_hh, k: 'hour' },
-    { f: FORMAT_mm, k: 'minute' },
-    { f: FORMAT_ss, k: 'second' },
-    { f: FORMAT_M, k: 'month' },
-    { f: FORMAT_D, k: 'day' },
-    { f: FORMAT_H, k: 'hour' },
-    { f: FORMAT_h, k: 'hour' },
-    { f: FORMAT_m, k: 'minute' },
-    { f: FORMAT_s, k: 'second' },
-    { f: FORMAT_A, k: 'ampm' },
-    { f: FORMAT_a, k: 'ampm' },
-];
-var DAY_NAMES = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-];
-var DAY_SHORT_NAMES = [
-    'Sun',
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-];
-var MONTH_NAMES = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-];
-var MONTH_SHORT_NAMES = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-];
-var VALID_AMPM_PREFIX = [
-    FORMAT_hh, FORMAT_h, FORMAT_mm, FORMAT_m, FORMAT_ss, FORMAT_s
-];
-var Datetime = /** @class */ (function () {
-    function Datetime() {
-        this.inputId = "ion-dt-" + datetimeIds++;
-        this.labelId = this.inputId + "-lbl";
-        this.locale = {};
-        this.datetimeMin = {};
-        this.datetimeMax = {};
-        this.datetimeValue = {};
-        this.disabled = false;
-        this.displayFormat = 'MMM D, YYYY';
-        this.cancelText = 'Cancel';
-        this.doneText = 'Done';
-    }
-    Datetime.prototype.disabledChanged = function () {
-        this.emitStyle();
-    };
-    Datetime.prototype.valueChanged = function () {
-        this.updateValue();
-        this.emitStyle();
-        this.ionChange.emit({
-            value: this.value
-        });
-    };
-    Datetime.prototype.componentWillLoad = function () {
-        this.ionStyle = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.ionStyle);
-        this.locale = {
-            monthNames: convertToArrayOfStrings(this.monthNames, 'monthNames'),
-            monthShortNames: convertToArrayOfStrings(this.monthShortNames, 'monthShortNames'),
-            dayNames: convertToArrayOfStrings(this.dayNames, 'dayNames'),
-            dayShortNames: convertToArrayOfStrings(this.dayShortNames, 'dayShortNames')
-        };
-        this.updateValue();
-    };
-    Datetime.prototype.componentDidLoad = function () {
-        this.emitStyle();
-    };
-    Datetime.prototype.open = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var pickerOptions, picker, _a;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (this.disabled) {
-                            return [2 /*return*/];
-                        }
-                        pickerOptions = this.generatePickerOptions();
-                        _a = this;
-                        return [4 /*yield*/, this.pickerCtrl.create(pickerOptions)];
-                    case 1:
-                        picker = _a.picker = _b.sent();
-                        return [4 /*yield*/, this.validate()];
-                    case 2:
-                        _b.sent();
-                        return [4 /*yield*/, picker.present()];
-                    case 3:
-                        _b.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Datetime.prototype.emitStyle = function () {
-        this.ionStyle.emit({
-            'interactive': true,
-            'datetime': true,
-            'has-value': this.hasValue(),
-            'interactive-disabled': this.disabled,
-        });
-    };
-    Datetime.prototype.updateValue = function () {
-        updateDate(this.datetimeValue, this.value);
-        this.updateText();
-    };
-    Datetime.prototype.generatePickerOptions = function () {
-        var _this = this;
-        var pickerOptions = Object.assign({}, this.pickerOptions, { columns: this.generateColumns() });
-        var buttons = pickerOptions.buttons;
-        if (!buttons || buttons.length === 0) {
-            pickerOptions.buttons = [
-                {
-                    text: this.cancelText,
-                    role: 'cancel',
-                    handler: function () { return _this.ionCancel.emit(); }
-                },
-                {
-                    text: this.doneText,
-                    handler: function (data) {
-                        _this.value = data;
-                    }
-                }
-            ];
-        }
-        return pickerOptions;
-    };
-    Datetime.prototype.generateColumns = function () {
-        var _this = this;
-        var template = this.pickerFormat || this.displayFormat || DEFAULT_FORMAT;
-        if (template.length === 0) {
-            return [];
-        }
-        this.calcMinMax();
-        template = template.replace('DDDD', '{~}').replace('DDD', '{~}');
-        if (template.indexOf('D') === -1) {
-            template = template.replace('{~}', 'D');
-        }
-        template = template.replace(/{~}/g, '');
-        var columns = parseTemplate(template).map(function (format) {
-            var key = convertFormatToKey(format);
-            var values;
-            var self = _this;
-            values = self[key + 'Values']
-                ? convertToArrayOfNumbers(self[key + 'Values'], key)
-                : dateValueRange(format, _this.datetimeMin, _this.datetimeMax);
-            var colOptions = values.map(function (val) {
-                return {
-                    value: val,
-                    text: renderTextFormat(format, val, undefined, _this.locale),
-                };
-            });
-            var optValue = getValueFromFormat(_this.datetimeValue, format);
-            var selectedIndex = colOptions.findIndex(function (opt) { return opt.value === optValue; });
-            return {
-                name: key,
-                selectedIndex: selectedIndex >= 0 ? selectedIndex : 0,
-                options: colOptions
-            };
-        });
-        var min = this.datetimeMin;
-        var max = this.datetimeMax;
-        ['month', 'day', 'hour', 'minute']
-            .filter(function (name) { return !columns.find(function (column) { return column.name === name; }); })
-            .forEach(function (name) {
-            min[name] = 0;
-            max[name] = 0;
-        });
-        return divyColumns(columns);
-    };
-    Datetime.prototype.validate = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var today, minCompareVal, maxCompareVal, yearCol, selectedYear, selectedIndex, yearOpt, selectedMonth, numDaysInMonth, selectedDay, selectedHour;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        today = new Date();
-                        minCompareVal = dateDataSortValue(this.datetimeMin);
-                        maxCompareVal = dateDataSortValue(this.datetimeMax);
-                        return [4 /*yield*/, this.picker.getColumn('year')];
-                    case 1:
-                        yearCol = _a.sent();
-                        selectedYear = today.getFullYear();
-                        if (yearCol) {
-                            if (!yearCol.options.find(function (col) { return col.value === today.getFullYear(); })) {
-                                selectedYear = yearCol.options[0].value;
-                            }
-                            selectedIndex = yearCol.selectedIndex;
-                            if (selectedIndex !== undefined) {
-                                yearOpt = yearCol.options[selectedIndex];
-                                if (yearOpt) {
-                                    selectedYear = yearOpt.value;
-                                }
-                            }
-                        }
-                        return [4 /*yield*/, this.validateColumn('month', 1, minCompareVal, maxCompareVal, [selectedYear, 0, 0, 0, 0], [selectedYear, 12, 31, 23, 59])];
-                    case 2:
-                        selectedMonth = _a.sent();
-                        numDaysInMonth = daysInMonth(selectedMonth, selectedYear);
-                        return [4 /*yield*/, this.validateColumn('day', 2, minCompareVal, maxCompareVal, [selectedYear, selectedMonth, 0, 0, 0], [selectedYear, selectedMonth, numDaysInMonth, 23, 59])];
-                    case 3:
-                        selectedDay = _a.sent();
-                        return [4 /*yield*/, this.validateColumn('hour', 3, minCompareVal, maxCompareVal, [selectedYear, selectedMonth, selectedDay, 0, 0], [selectedYear, selectedMonth, selectedDay, 23, 59])];
-                    case 4:
-                        selectedHour = _a.sent();
-                        return [4 /*yield*/, this.validateColumn('minute', 4, minCompareVal, maxCompareVal, [selectedYear, selectedMonth, selectedDay, selectedHour, 0], [selectedYear, selectedMonth, selectedDay, selectedHour, 59])];
-                    case 5:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Datetime.prototype.calcMinMax = function (now) {
-        var todaysYear = (now || new Date()).getFullYear();
-        if (this.yearValues !== undefined) {
-            var years = convertToArrayOfNumbers(this.yearValues, 'year');
-            if (this.min === undefined) {
-                this.min = Math.min.apply(Math, years);
-            }
-            if (this.max === undefined) {
-                this.max = Math.max.apply(Math, years);
-            }
-        }
-        else {
-            if (this.min === undefined) {
-                this.min = (todaysYear - 100).toString();
-            }
-            if (this.max === undefined) {
-                this.max = todaysYear.toString();
-            }
-        }
-        var min = this.datetimeMin = parseDate(this.min);
-        var max = this.datetimeMax = parseDate(this.max);
-        min.year = min.year || todaysYear;
-        max.year = max.year || todaysYear;
-        min.month = min.month || 1;
-        max.month = max.month || 12;
-        min.day = min.day || 1;
-        max.day = max.day || 31;
-        min.hour = min.hour || 0;
-        max.hour = max.hour || 23;
-        min.minute = min.minute || 0;
-        max.minute = max.minute || 59;
-        min.second = min.second || 0;
-        max.second = max.second || 59;
-        if (min.year > max.year) {
-            console.error('min.year > max.year');
-            min.year = max.year - 100;
-        }
-        if (min.year === max.year) {
-            if (min.month > max.month) {
-                console.error('min.month > max.month');
-                min.month = 1;
-            }
-            else if (min.month === max.month && min.day > max.day) {
-                console.error('min.day > max.day');
-                min.day = 1;
-            }
-        }
-    };
-    Datetime.prototype.validateColumn = function (name, index, min, max, lowerBounds, upperBounds) {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var column, lb, ub, options, indexMin, indexMax, i, opts, value, disabled, selectedIndex, opt;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.picker.getColumn(name)];
-                    case 1:
-                        column = _a.sent();
-                        if (!column) {
-                            return [2 /*return*/, 0];
-                        }
-                        lb = lowerBounds.slice();
-                        ub = upperBounds.slice();
-                        options = column.options;
-                        indexMin = options.length - 1;
-                        indexMax = 0;
-                        for (i = 0; i < options.length; i++) {
-                            opts = options[i];
-                            value = opts.value;
-                            lb[index] = opts.value;
-                            ub[index] = opts.value;
-                            disabled = opts.disabled = (value < lowerBounds[index] ||
-                                value > upperBounds[index] ||
-                                dateSortValue(ub[0], ub[1], ub[2], ub[3], ub[4]) < min ||
-                                dateSortValue(lb[0], lb[1], lb[2], lb[3], lb[4]) > max);
-                            if (!disabled) {
-                                indexMin = Math.min(indexMin, i);
-                                indexMax = Math.max(indexMax, i);
-                            }
-                        }
-                        selectedIndex = column.selectedIndex = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["j"])(indexMin, column.selectedIndex, indexMax);
-                        opt = column.options[selectedIndex];
-                        if (opt) {
-                            return [2 /*return*/, opt.value];
-                        }
-                        return [2 /*return*/, 0];
-                }
-            });
-        });
-    };
-    Datetime.prototype.updateText = function () {
-        var template = this.displayFormat || this.pickerFormat || DEFAULT_FORMAT;
-        this.text = renderDatetime(template, this.datetimeValue, this.locale);
-    };
-    Datetime.prototype.hasValue = function () {
-        var val = this.datetimeValue;
-        return Object.keys(val).length > 0;
-    };
-    Datetime.prototype.hostData = function () {
-        var addPlaceholderClass = (this.text == null && this.placeholder != null) ? true : false;
-        return {
-            class: {
-                'datetime-disabled': this.disabled,
-                'datetime-placeholder': addPlaceholderClass,
-                'in-item': Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["j"])('ion-item', this.el)
-            }
-        };
-    };
-    Datetime.prototype.render = function () {
-        var datetimeText = this.text;
-        if (datetimeText == null) {
-            datetimeText = this.placeholder != null ? this.placeholder : '';
-        }
-        return [
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "datetime-text" }, datetimeText),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", "aria-haspopup": "true", "aria-labelledby": this.labelId, "aria-disabled": this.disabled ? 'true' : null, onClick: this.open.bind(this), class: "datetime-cover" }, this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect", null))
-        ];
-    };
-    Object.defineProperty(Datetime, "is", {
-        get: function () { return "ion-datetime"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Datetime, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Datetime, "properties", {
-        get: function () {
-            return {
-                "cancelText": {
-                    "type": String,
-                    "attr": "cancel-text"
-                },
-                "dayNames": {
-                    "type": String,
-                    "attr": "day-names"
-                },
-                "dayShortNames": {
-                    "type": String,
-                    "attr": "day-short-names"
-                },
-                "dayValues": {
-                    "type": "Any",
-                    "attr": "day-values"
-                },
-                "disabled": {
-                    "type": Boolean,
-                    "attr": "disabled",
-                    "watchCallbacks": ["disabledChanged"]
-                },
-                "displayFormat": {
-                    "type": String,
-                    "attr": "display-format"
-                },
-                "doneText": {
-                    "type": String,
-                    "attr": "done-text"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "hourValues": {
-                    "type": "Any",
-                    "attr": "hour-values"
-                },
-                "max": {
-                    "type": String,
-                    "attr": "max",
-                    "mutable": true
-                },
-                "min": {
-                    "type": String,
-                    "attr": "min",
-                    "mutable": true
-                },
-                "minuteValues": {
-                    "type": "Any",
-                    "attr": "minute-values"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                },
-                "monthNames": {
-                    "type": String,
-                    "attr": "month-names"
-                },
-                "monthShortNames": {
-                    "type": String,
-                    "attr": "month-short-names"
-                },
-                "monthValues": {
-                    "type": "Any",
-                    "attr": "month-values"
-                },
-                "open": {
-                    "method": true
-                },
-                "pickerCtrl": {
-                    "connect": "ion-picker-controller"
-                },
-                "pickerFormat": {
-                    "type": String,
-                    "attr": "picker-format"
-                },
-                "pickerOptions": {
-                    "type": "Any",
-                    "attr": "picker-options"
-                },
-                "placeholder": {
-                    "type": String,
-                    "attr": "placeholder"
-                },
-                "text": {
-                    "state": true
-                },
-                "value": {
-                    "type": "Any",
-                    "attr": "value",
-                    "mutable": true,
-                    "watchCallbacks": ["valueChanged"]
-                },
-                "yearValues": {
-                    "type": "Any",
-                    "attr": "year-values"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Datetime, "events", {
-        get: function () {
-            return [{
-                    "name": "ionCancel",
-                    "method": "ionCancel",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionChange",
-                    "method": "ionChange",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionStyle",
-                    "method": "ionStyle",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Datetime, "style", {
-        get: function () { return ".sc-ion-datetime-ios-h{padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;min-width:16px;min-height:1.2em;font-family:var(--ion-font-family,inherit);text-overflow:ellipsis;white-space:nowrap;overflow:hidden;--placeholder-color:var(--ion-text-color-step-600, #999999);--padding-top:10px;--padding-end:8px;--padding-bottom:10px;--padding-start:16px}.in-item.sc-ion-datetime-ios-h{position:static}.datetime-placeholder.sc-ion-datetime-ios-h{color:var(--placeholder-color)}.datetime-disabled.sc-ion-datetime-ios-h{opacity:.3}.datetime-cover.sc-ion-datetime-ios{left:0;top:0;margin:0;position:absolute;width:100%;height:100%;border:0;background:0 0;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}.datetime-text.sc-ion-datetime-ios{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;-webkit-box-flex:1;-ms-flex:1;flex:1;min-height:inherit;overflow:inherit}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Datetime, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Datetime;
-}());
-function divyColumns(columns) {
-    var columnsWidth = [];
-    var col;
-    var width;
-    for (var i = 0; i < columns.length; i++) {
-        col = columns[i];
-        columnsWidth.push(0);
-        for (var _i = 0, _a = col.options; _i < _a.length; _i++) {
-            var option = _a[_i];
-            width = option.text.length;
-            if (width > columnsWidth[i]) {
-                columnsWidth[i] = width;
-            }
-        }
-    }
-    if (columnsWidth.length === 2) {
-        width = Math.max(columnsWidth[0], columnsWidth[1]);
-        columns[0].align = 'right';
-        columns[1].align = 'left';
-        columns[0].optionsWidth = columns[1].optionsWidth = width * 17 + "px";
-    }
-    else if (columnsWidth.length === 3) {
-        width = Math.max(columnsWidth[0], columnsWidth[2]);
-        columns[0].align = 'right';
-        columns[1].columnWidth = columnsWidth[1] * 17 + "px";
-        columns[0].optionsWidth = columns[2].optionsWidth = width * 17 + "px";
-        columns[2].align = 'left';
-    }
-    return columns;
-}
-var datetimeIds = 0;
-var DEFAULT_FORMAT = 'MMM D, YYYY';
-function iosEnterAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.picker-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.01, 0.26);
-    wrapperAnimation.fromTo('translateY', '100%', '0%');
-    return Promise.resolve(baseAnimation
-        .addElement(baseEl)
-        .easing('cubic-bezier(.36,.66,.04,1)')
-        .duration(400)
-        .add(backdropAnimation)
-        .add(wrapperAnimation));
-}
-function iosLeaveAnimation(AnimationC, baseEl) {
-    var baseAnimation = new AnimationC();
-    var backdropAnimation = new AnimationC();
-    backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
-    var wrapperAnimation = new AnimationC();
-    wrapperAnimation.addElement(baseEl.querySelector('.picker-wrapper'));
-    backdropAnimation.fromTo('opacity', 0.26, 0.01);
-    wrapperAnimation.fromTo('translateY', '0%', '100%');
-    return Promise.resolve(baseAnimation
-        .addElement(baseEl)
-        .easing('cubic-bezier(.36,.66,.04,1)')
-        .duration(400)
-        .add(backdropAnimation)
-        .add(wrapperAnimation));
-}
-var Picker = /** @class */ (function () {
-    function Picker() {
-        this.presented = false;
-        this.keyboardClose = true;
-        this.buttons = [];
-        this.columns = [];
-        this.duration = 0;
-        this.showBackdrop = true;
-        this.backdropDismiss = true;
-        this.animated = true;
-    }
-    Picker.prototype.componentDidLoad = function () {
-        this.ionPickerDidLoad.emit();
-    };
-    Picker.prototype.componentDidUnload = function () {
-        this.ionPickerDidUnload.emit();
-    };
-    Picker.prototype.onBackdropTap = function () {
-        var cancelBtn = this.buttons.find(function (b) { return b.role === 'cancel'; });
-        if (cancelBtn) {
-            this.buttonClick(cancelBtn);
-        }
-        else {
-            this.dismiss();
-        }
-    };
-    Picker.prototype.present = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _this = this;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_4__["e"])(this, 'pickerEnter', iosEnterAnimation, iosEnterAnimation, undefined)];
-                    case 1:
-                        _a.sent();
-                        if (this.duration > 0) {
-                            this.durationTimeout = setTimeout(function () { return _this.dismiss(); }, this.duration);
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Picker.prototype.dismiss = function (data, role) {
-        if (this.durationTimeout) {
-            clearTimeout(this.durationTimeout);
-        }
-        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_4__["b"])(this, data, role, 'pickerLeave', iosLeaveAnimation, iosLeaveAnimation);
-    };
-    Picker.prototype.onDidDismiss = function () {
-        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_4__["c"])(this.el, 'ionPickerDidDismiss');
-    };
-    Picker.prototype.onWillDismiss = function () {
-        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_4__["c"])(this.el, 'ionPickerWillDismiss');
-    };
-    Picker.prototype.getColumn = function (name) {
-        return Promise.resolve(this.columns.find(function (column) { return column.name === name; }));
-    };
-    Picker.prototype.buttonClick = function (button) {
-        var shouldDismiss = true;
-        if (button.handler) {
-            if (button.handler(this.getSelected()) === false) {
-                shouldDismiss = false;
-            }
-        }
-        if (shouldDismiss) {
-            return this.dismiss();
-        }
-        return Promise.resolve(false);
-    };
-    Picker.prototype.getSelected = function () {
-        var selected = {};
-        this.columns.forEach(function (col, index) {
-            var selectedColumn = col.selectedIndex !== undefined
-                ? col.options[col.selectedIndex]
-                : undefined;
-            selected[col.name] = {
-                text: selectedColumn ? selectedColumn.text : undefined,
-                value: selectedColumn ? selectedColumn.value : undefined,
-                columnIndex: index
-            };
-        });
-        return selected;
-    };
-    Picker.prototype.hostData = function () {
-        return {
-            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["k"])(this.mode, 'picker'), Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["g"])(this.cssClass)),
-            style: {
-                zIndex: 20000 + this.overlayIndex
-            }
-        };
-    };
-    Picker.prototype.render = function () {
-        var _this = this;
-        return [
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop", { visible: this.showBackdrop, tappable: this.backdropDismiss }),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "picker-wrapper", role: "dialog" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "picker-toolbar" }, this.buttons.map(function (b) { return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: buttonWrapperClass(b) }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button", { type: "button", "ion-activatable": true, onClick: function () { return _this.buttonClick(b); }, class: buttonClass(b) }, b.text))); })), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "picker-columns" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "picker-above-highlight" }), this.columns.map(function (c) { return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-picker-column", { col: c }); }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "picker-below-highlight" })))
-        ];
-    };
-    Object.defineProperty(Picker, "is", {
-        get: function () { return "ion-picker"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Picker, "properties", {
-        get: function () {
-            return {
-                "animated": {
-                    "type": Boolean,
-                    "attr": "animated"
-                },
-                "animationCtrl": {
-                    "connect": "ion-animation-controller"
-                },
-                "backdropDismiss": {
-                    "type": Boolean,
-                    "attr": "backdrop-dismiss"
-                },
-                "buttons": {
-                    "type": "Any",
-                    "attr": "buttons"
-                },
-                "columns": {
-                    "type": "Any",
-                    "attr": "columns"
-                },
-                "config": {
-                    "context": "config"
-                },
-                "cssClass": {
-                    "type": String,
-                    "attr": "css-class"
-                },
-                "dismiss": {
-                    "method": true
-                },
-                "duration": {
-                    "type": Number,
-                    "attr": "duration"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "enterAnimation": {
-                    "type": "Any",
-                    "attr": "enter-animation"
-                },
-                "getColumn": {
-                    "method": true
-                },
-                "keyboardClose": {
-                    "type": Boolean,
-                    "attr": "keyboard-close"
-                },
-                "leaveAnimation": {
-                    "type": "Any",
-                    "attr": "leave-animation"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                },
-                "onDidDismiss": {
-                    "method": true
-                },
-                "onWillDismiss": {
-                    "method": true
-                },
-                "overlayIndex": {
-                    "type": Number,
-                    "attr": "overlay-index"
-                },
-                "present": {
-                    "method": true
-                },
-                "showBackdrop": {
-                    "type": Boolean,
-                    "attr": "show-backdrop"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Picker, "events", {
-        get: function () {
-            return [{
-                    "name": "ionPickerDidLoad",
-                    "method": "ionPickerDidLoad",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionPickerDidPresent",
-                    "method": "didPresent",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionPickerWillPresent",
-                    "method": "willPresent",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionPickerWillDismiss",
-                    "method": "willDismiss",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionPickerDidDismiss",
-                    "method": "didDismiss",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionPickerDidUnload",
-                    "method": "ionPickerDidUnload",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Picker, "listeners", {
-        get: function () {
-            return [{
-                    "name": "ionBackdropTap",
-                    "method": "onBackdropTap"
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Picker, "style", {
-        get: function () { return "ion-picker{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;left:0;top:0;display:block;position:absolute;width:100%;height:100%;font-family:var(--ion-font-family,inherit);contain:strict;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1000}.picker-toolbar{width:100%;contain:strict;z-index:1}.picker-wrapper{left:0;right:0;bottom:0;margin:auto;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;width:100%;max-width:500px;contain:strict;overflow:hidden;z-index:10}.picker-columns{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-bottom:var(--ion-safe-area-bottom,0);contain:strict;overflow:hidden}.picker-col{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:100%;-webkit-box-sizing:content-box;box-sizing:content-box;contain:content}.picker-opts{position:relative;-webkit-box-flex:1;-ms-flex:1;flex:1;max-width:100%}.picker-prefix{position:relative;-webkit-box-flex:2;-ms-flex:2;flex:2;min-width:45%;max-width:50%;text-align:end;white-space:nowrap}.picker-suffix{position:relative;-webkit-box-flex:2;-ms-flex:2;flex:2;min-width:45%;max-width:50%;text-align:start;white-space:nowrap}.picker-opt{left:0;top:0;display:block;position:absolute;width:100%;border:0;text-align:center;text-overflow:ellipsis;white-space:nowrap;contain:strict;overflow:hidden;will-change:transform}.picker-opt.picker-opt-disabled{pointer-events:none}.picker-opt-disabled{opacity:0}.picker-opts-left{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.picker-opts-right{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}.picker-above-highlight,.picker-below-highlight{display:none;pointer-events:none}.picker-button{border:0;font-family:inherit}.picker-button:active,.picker-button:focus,.picker-opt:active,.picker-opt:focus{outline:0}.picker-ios .picker-wrapper{height:260px;border-top:1px solid var(--ion-item-border-color,#c8c7cc);background:var(--ion-background-color,#fff)}.picker-ios .picker-toolbar{display:-webkit-box;display:-ms-flexbox;display:flex;height:44px;border-bottom:.55px solid var(--ion-item-border-color,#c8c7cc);background:var(--ion-background-color,#fff)}.picker-ios .picker-toolbar-button{-webkit-box-flex:1;-ms-flex:1;flex:1;text-align:end}.picker-ios .picker-toolbar-button:last-child .picker-button{font-weight:600}.picker-ios .picker-toolbar-button:first-child{font-weight:400;text-align:start}.picker-ios .picker-button,.picker-ios .picker-button.activated{margin:0;padding:0 1em;height:44px;background:0 0;color:var(--ion-color-primary,#3880ff);font-size:16px}.picker-columns{height:215px;-webkit-perspective:1000px;perspective:1000px}.picker-ios .picker-col{padding:0 4px;-webkit-transform-style:preserve-3d;transform-style:preserve-3d}.picker-ios .picker-opts,.picker-ios .picker-prefix,.picker-ios .picker-suffix{top:77px;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;color:var(--ion-item-text-color,var(--ion-text-color,#000));font-size:20px;line-height:42px;pointer-events:none}.picker-ios .picker-opt{padding:0;margin:0;-webkit-transform-origin:center center;transform-origin:center center;height:46px;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transition-timing-function:ease-out;transition-timing-function:ease-out;background:0 0;color:var(--ion-item-text-color,var(--ion-text-color,#000));font-size:20px;line-height:42px;-webkit-backface-visibility:hidden;backface-visibility:hidden;pointer-events:auto}.picker-ios .picker-above-highlight{left:0;top:0;-webkit-transform:translate3d(0,0,90px);transform:translate3d(0,0,90px);display:block;position:absolute;width:100%;height:81px;border-bottom:1px solid var(--ion-item-border-color,#c8c7cc);background:-webkit-gradient(linear,left top,left bottom,color-stop(20%,var(--ion-background-color,#fff)),to(rgba(var(--ion-background-color-rgb,255,255,255),.8)));background:linear-gradient(to bottom,var(--ion-background-color,#fff) 20%,rgba(var(--ion-background-color-rgb,255,255,255),.8) 100%);z-index:10}.picker-ios .picker-below-highlight{left:0;top:115px;-webkit-transform:translate3d(0,0,90px);transform:translate3d(0,0,90px);display:block;position:absolute;width:100%;height:119px;border-top:1px solid var(--ion-item-border-color,#c8c7cc);background:-webkit-gradient(linear,left bottom,left top,color-stop(30%,var(--ion-background-color,#fff)),to(rgba(var(--ion-background-color-rgb,255,255,255),.8)));background:linear-gradient(to top,var(--ion-background-color,#fff) 30%,rgba(var(--ion-background-color-rgb,255,255,255),.8) 100%);z-index:11}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Picker, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Picker;
-}());
-function buttonWrapperClass(button) {
-    var _a;
-    return _a = {},
-        _a["picker-toolbar-" + button.role] = button.role !== undefined,
-        _a['picker-toolbar-button'] = true,
-        _a;
-}
-function buttonClass(button) {
-    return Object.assign({ 'picker-button': true }, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["g"])(button.cssClass));
-}
-var PickerColumnCmp = /** @class */ (function () {
-    function PickerColumnCmp() {
-        this.optHeight = 0;
-        this.rotateFactor = 0;
-        this.scaleFactor = 1;
-        this.velocity = 0;
-        this.y = 0;
-    }
-    PickerColumnCmp.prototype.componentWillLoad = function () {
-        var pickerRotateFactor = 0;
-        var pickerScaleFactor = 0.81;
-        if (this.mode === 'ios') {
-            pickerRotateFactor = -0.46;
-            pickerScaleFactor = 1;
-        }
-        this.rotateFactor = pickerRotateFactor;
-        this.scaleFactor = pickerScaleFactor;
-    };
-    PickerColumnCmp.prototype.componentDidLoad = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var colEl, _a;
-            var _this = this;
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        colEl = this.optsEl;
-                        this.optHeight = (colEl.firstElementChild ? colEl.firstElementChild.clientHeight : 0);
-                        this.refresh();
-                        _a = this;
-                        return [4 /*yield*/, Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e("common")]).then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/gesture.js"))];
-                    case 1:
-                        _a.gesture = (_b.sent()).createGesture({
-                            el: this.el,
-                            queue: this.queue,
-                            gestureName: 'picker-swipe',
-                            gesturePriority: 100,
-                            threshold: 0,
-                            onStart: function (ev) { return _this.onStart(ev); },
-                            onMove: function (ev) { return _this.onMove(ev); },
-                            onEnd: function (ev) { return _this.onEnd(ev); },
-                        });
-                        this.gesture.setDisabled(false);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    PickerColumnCmp.prototype.setSelected = function (selectedIndex, duration) {
-        var y = (selectedIndex > -1) ? -(selectedIndex * this.optHeight) : 0;
-        this.velocity = 0;
-        cancelAnimationFrame(this.rafId);
-        this.update(y, duration, true);
-    };
-    PickerColumnCmp.prototype.update = function (y, duration, saveY) {
-        var translateY = 0;
-        var translateZ = 0;
-        var _a = this, col = _a.col, rotateFactor = _a.rotateFactor;
-        var selectedIndex = col.selectedIndex = this.indexForY(-y);
-        var durationStr = (duration === 0) ? null : duration + 'ms';
-        var scaleStr = "scale(" + this.scaleFactor + ")";
-        var children = this.optsEl.children;
-        for (var i = 0; i < children.length; i++) {
-            var button = children[i];
-            var opt = col.options[i];
-            var optOffset = (i * this.optHeight) + y;
-            var visible = true;
-            var transform = '';
-            if (rotateFactor !== 0) {
-                var rotateX = optOffset * rotateFactor;
-                if (Math.abs(rotateX) > 90) {
-                    visible = false;
-                }
-                else {
-                    translateY = 0;
-                    translateZ = 90;
-                    transform = "rotateX(" + rotateX + "deg) ";
-                }
-            }
-            else {
-                translateZ = 0;
-                translateY = optOffset;
-                if (Math.abs(translateY) > 170) {
-                    visible = false;
-                }
-            }
-            var selected = selectedIndex === i;
-            if (visible) {
-                transform += "translate3d(0px," + translateY + "px," + translateZ + "px) ";
-                if (this.scaleFactor !== 1 && !selected) {
-                    transform += scaleStr;
-                }
-            }
-            else {
-                transform = 'translate3d(-9999px,0px,0px)';
-            }
-            if (duration !== opt.duration) {
-                opt.duration = duration;
-                button.style.transitionDuration = durationStr;
-            }
-            if (transform !== opt.transform) {
-                opt.transform = transform;
-                button.style.transform = transform;
-            }
-            if (selected !== opt.selected) {
-                opt.selected = selected;
-                if (selected) {
-                    button.classList.add(PICKER_OPT_SELECTED);
-                }
-                else {
-                    button.classList.remove(PICKER_OPT_SELECTED);
-                }
-            }
-        }
-        this.col.prevSelected = selectedIndex;
-        if (saveY) {
-            this.y = y;
-        }
-        if (this.lastIndex !== selectedIndex) {
-            Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
-            this.lastIndex = selectedIndex;
-        }
-    };
-    PickerColumnCmp.prototype.decelerate = function () {
-        var _this = this;
-        if (this.velocity !== 0) {
-            this.velocity *= DECELERATION_FRICTION;
-            this.velocity = (this.velocity > 0)
-                ? Math.max(this.velocity, 1)
-                : Math.min(this.velocity, -1);
-            var y = this.y + this.velocity;
-            if (y > this.minY) {
-                y = this.minY;
-                this.velocity = 0;
-            }
-            else if (y < this.maxY) {
-                y = this.maxY;
-                this.velocity = 0;
-            }
-            this.update(y, 0, true);
-            var notLockedIn = (Math.round(y) % this.optHeight !== 0) || (Math.abs(this.velocity) > 1);
-            if (notLockedIn) {
-                this.rafId = requestAnimationFrame(function () { return _this.decelerate(); });
-            }
-        }
-        else if (this.y % this.optHeight !== 0) {
-            var currentPos = Math.abs(this.y % this.optHeight);
-            this.velocity = (currentPos > (this.optHeight / 2) ? 1 : -1);
-            this.decelerate();
-        }
-    };
-    PickerColumnCmp.prototype.indexForY = function (y) {
-        return Math.min(Math.max(Math.abs(Math.round(y / this.optHeight)), 0), this.col.options.length - 1);
-    };
-    PickerColumnCmp.prototype.onStart = function (detail) {
-        detail.event.preventDefault();
-        detail.event.stopPropagation();
-        cancelAnimationFrame(this.rafId);
-        var options = this.col.options;
-        var minY = (options.length - 1);
-        var maxY = 0;
-        for (var i = 0; i < options.length; i++) {
-            if (!options[i].disabled) {
-                minY = Math.min(minY, i);
-                maxY = Math.max(maxY, i);
-            }
-        }
-        this.minY = -(minY * this.optHeight);
-        this.maxY = -(maxY * this.optHeight);
-    };
-    PickerColumnCmp.prototype.onMove = function (detail) {
-        detail.event.preventDefault();
-        detail.event.stopPropagation();
-        var y = this.y + detail.deltaY;
-        if (y > this.minY) {
-            y = Math.pow(y, 0.8);
-            this.bounceFrom = y;
-        }
-        else if (y < this.maxY) {
-            y += Math.pow(this.maxY - y, 0.9);
-            this.bounceFrom = y;
-        }
-        else {
-            this.bounceFrom = 0;
-        }
-        this.update(y, 0, false);
-    };
-    PickerColumnCmp.prototype.onEnd = function (detail) {
-        if (this.bounceFrom > 0) {
-            this.update(this.minY, 100, true);
-            return;
-        }
-        else if (this.bounceFrom < 0) {
-            this.update(this.maxY, 100, true);
-            return;
-        }
-        this.velocity = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["j"])(-MAX_PICKER_SPEED, detail.velocityY * 23, MAX_PICKER_SPEED);
-        if (this.velocity === 0 && detail.deltaY === 0) {
-            var opt = detail.event.target.closest('.picker-opt');
-            if (opt && opt.hasAttribute('opt-index')) {
-                this.setSelected(parseInt(opt.getAttribute('opt-index'), 10), 150);
-            }
-        }
-        else {
-            this.y += detail.deltaY;
-            this.decelerate();
-        }
-    };
-    PickerColumnCmp.prototype.refresh = function () {
-        var min = this.col.options.length - 1;
-        var max = 0;
-        var options = this.col.options;
-        for (var i = 0; i < options.length; i++) {
-            if (!options[i].disabled) {
-                min = Math.min(min, i);
-                max = Math.max(max, i);
-            }
-        }
-        var selectedIndex = Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_2__["j"])(min, this.col.selectedIndex, max);
-        if (this.col.prevSelected !== selectedIndex) {
-            var y = (selectedIndex * this.optHeight) * -1;
-            this.velocity = 0;
-            this.update(y, 150, true);
-        }
-    };
-    PickerColumnCmp.prototype.hostData = function () {
-        return {
-            class: {
-                'picker-col': true,
-                'picker-opts-left': this.col.align === 'left',
-                'picker-opts-right': this.col.align === 'right'
-            },
-            style: {
-                'max-width': this.col.columnWidth
-            }
-        };
-    };
-    PickerColumnCmp.prototype.render = function () {
-        var _this = this;
-        var col = this.col;
-        var Button = 'button';
-        return [
-            col.prefix && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "picker-prefix", style: { width: col.prefixWidth } }, col.prefix)),
-            Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "picker-opts", style: { maxWidth: col.optionsWidth }, ref: function (el) { return _this.optsEl = el; } }, col.options.map(function (o, index) { return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])(Button, { type: "button", class: { 'picker-opt': true, 'picker-opt-disabled': !!o.disabled }, "opt-index": index }, o.text); })),
-            col.suffix && (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div", { class: "picker-suffix", style: { width: col.suffixWidth } }, col.suffix))
-        ];
-    };
-    Object.defineProperty(PickerColumnCmp, "is", {
-        get: function () { return "ion-picker-column"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PickerColumnCmp, "properties", {
-        get: function () {
-            return {
-                "col": {
-                    "type": "Any",
-                    "attr": "col"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "queue": {
-                    "context": "queue"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PickerColumnCmp;
-}());
-var PICKER_OPT_SELECTED = 'picker-opt-selected';
-var DECELERATION_FRICTION = 0.97;
-var MAX_PICKER_SPEED = 90;
-var PickerController = /** @class */ (function () {
-    function PickerController() {
-    }
-    PickerController.prototype.create = function (opts) {
-        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_4__["f"])(this.doc.createElement('ion-picker'), opts);
-    };
-    PickerController.prototype.dismiss = function (data, role, id) {
-        return Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_4__["g"])(this.doc, data, role, 'ion-picker', id);
-    };
-    PickerController.prototype.getTop = function () {
-        return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                return [2 /*return*/, Object(_chunk_05b9bd31_js__WEBPACK_IMPORTED_MODULE_4__["h"])(this.doc, 'ion-picker')];
-            });
-        });
-    };
-    Object.defineProperty(PickerController, "is", {
-        get: function () { return "ion-picker-controller"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(PickerController, "properties", {
-        get: function () {
-            return {
-                "create": {
-                    "method": true
-                },
-                "dismiss": {
-                    "method": true
-                },
-                "doc": {
-                    "context": "document"
-                },
-                "getTop": {
-                    "method": true
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return PickerController;
-}());
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js":
+/*!************************************************************************************************************************************!*\
+  !*** C:/Users/david/Documents/github/library/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __await, __makeTemplateObject, __importStar, __importDefault */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__extends", function() { return __extends; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__assign", function() { return __assign; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__rest", function() { return __rest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__decorate", function() { return __decorate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__param", function() { return __param; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
+// REV: 9dd9aa322c893e5e0b3f1609b1126314ccf37bbb
 
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+  extendStatics = Object.setPrototypeOf ||
+      ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+      function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+  return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+  extendStatics(d, b);
+  function __() { this.constructor = d; }
+  d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function() {
+  __assign = Object.assign || function __assign(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+          s = arguments[i];
+          for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+      return t;
+  }
+  return __assign.apply(this, arguments);
+}
+
+function __rest(s, e) {
+  var t = {};
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+      t[p] = s[p];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+          t[p[i]] = s[p[i]];
+  return t;
+}
+
+function __decorate(decorators, target, key, desc) {
+  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+  else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+  return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+  return new (P || (P = Promise))(function (resolve, reject) {
+      function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+      function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+      function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+}
+
+function __generator(thisArg, body) {
+  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+  function verb(n) { return function (v) { return step([n, v]); }; }
+  function step(op) {
+      if (f) throw new TypeError("Generator is already executing.");
+      while (_) try {
+          if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+          if (y = 0, t) op = [op[0] & 2, t.value];
+          switch (op[0]) {
+              case 0: case 1: t = op; break;
+              case 4: _.label++; return { value: op[1], done: false };
+              case 5: _.label++; y = op[1]; op = [0]; continue;
+              case 7: op = _.ops.pop(); _.trys.pop(); continue;
+              default:
+                  if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                  if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                  if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                  if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                  if (t[2]) _.ops.pop();
+                  _.trys.pop(); continue;
+          }
+          op = body.call(thisArg, _);
+      } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+      if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+  }
+}
+
+function __exportStar(m, exports) {
+  for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+
+function __values(o) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+  if (m) return m.call(o);
+  return {
+      next: function () {
+          if (o && i >= o.length) o = void 0;
+          return { value: o && o[i++], done: !o };
+      }
+  };
+}
+
+function __read(o, n) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m) return o;
+  var i = m.call(o), r, ar = [], e;
+  try {
+      while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+  }
+  catch (error) { e = { error: error }; }
+  finally {
+      try {
+          if (r && !r.done && (m = i["return"])) m.call(i);
+      }
+      finally { if (e) throw e.error; }
+  }
+  return ar;
+}
+
+function __spread() {
+  for (var ar = [], i = 0; i < arguments.length; i++)
+      ar = ar.concat(__read(arguments[i]));
+  return ar;
+}
+
+function __await(v) {
+  return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
+function __makeTemplateObject(cooked, raw) {
+  if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+  return cooked;
+};
+
+function __importStar(mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result.default = mod;
+  return result;
+}
+
+function __importDefault(mod) {
+  return (mod && mod.__esModule) ? mod : { default: mod };
+}
 
 /***/ })
 

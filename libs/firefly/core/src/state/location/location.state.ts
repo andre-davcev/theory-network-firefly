@@ -21,7 +21,7 @@ export class StateLocation
 
     ngxsOnInit(context: StateContext<StateLocationModel>)
     {
-        context.dispatch(new ActionLocationWatch());
+        //context.dispatch(new ActionLocationWatch());
     }
 
     @Action(ActionLocationWatch)
