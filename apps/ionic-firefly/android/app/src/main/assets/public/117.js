@@ -1,493 +1,215 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[117],{
 
-/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/puryh41h.entry.js":
-/*!************************************************************************************************************************************!*\
-  !*** /Users/andredavcev/Projects/theory/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/puryh41h.entry.js ***!
-  \************************************************************************************************************************************/
-/*! exports provided: IonButton, IonIcon */
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/sdggb8fc.sc.entry.js":
+/*!********************************************************************************************************************************************!*\
+  !*** C:/Users/david/Documents/github/library/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/sdggb8fc.sc.entry.js ***!
+  \********************************************************************************************************************************************/
+/*! exports provided: IonMenu, IonMenuButton, IonMenuController, IonMenuToggle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonButton", function() { return Button; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonIcon", function() { return Icon; });
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
-/* harmony import */ var _chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-b9ec67ac.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-b9ec67ac.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonMenu", function() { return Menu; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonMenuButton", function() { return MenuButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonMenuController", function() { return MenuController; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonMenuToggle", function() { return MenuToggle; });
+/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
+/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
+/* harmony import */ var _chunk_892e1642_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-892e1642.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-892e1642.js");
+/* harmony import */ var _chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-e7816c0b.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/chunk-e7816c0b.js");
 /*!
  * (C) Ionic http://ionicframework.com - MIT License
  * Built with http://stenciljs.com
  */
+var Menu=function(){function t(){this.lastOnEnd=0,this.blocker=_chunk_892e1642_js__WEBPACK_IMPORTED_MODULE_2__["a"].createBlocker({disableScroll:!0}),this.isAnimating=!1,this._isOpen=!1,this.isPaneVisible=!1,this.isEndSide=!1,this.disabled=!1,this.side="start",this.swipeGesture=!0,this.maxEdgeStart=50}return t.prototype.typeChanged=function(t,e){var n=this.contentEl;n&&(void 0!==e&&n.classList.remove("menu-content-"+e),n.classList.add("menu-content-"+t),n.removeAttribute("style")),this.menuInnerEl&&this.menuInnerEl.removeAttribute("style"),this.animation=void 0},t.prototype.disabledChanged=function(){this.updateState(),this.ionMenuChange.emit({disabled:this.disabled,open:this._isOpen})},t.prototype.sideChanged=function(){this.isEndSide=Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_3__["h"])(this.win,this.side)},t.prototype.swipeGestureChanged=function(){this.updateState()},t.prototype.componentWillLoad=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var t,e,n,i,o,r=this;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(s){switch(s.label){case 0:return this.type=this.type||this.config.get("menuType","ios"===this.mode?"reveal":"overlay"),this.isServer?(this.disabled=!0,[2]):(e=this,[4,this.lazyMenuCtrl.componentOnReady().then(function(t){return t._getInstance()})]);case 1:return t=e.menuCtrl=s.sent(),n=this.el.parentNode,(i=void 0!==this.contentId?document.getElementById(this.contentId):n&&n.querySelector&&n.querySelector("[main]"))&&i.tagName?(this.contentEl=i,i.classList.add("menu-content"),this.typeChanged(this.type,void 0),this.sideChanged(),t._register(this),o=this,[4,__webpack_require__.e(/*! import() */ "common").then(__webpack_require__.bind(null, /*! ./gesture.js */ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/build/gesture.js"))]):(console.error('Menu: must have a "content" element to listen for drag events on.'),[2]);case 2:return o.gesture=s.sent().createGesture({el:this.doc,queue:this.queue,gestureName:"menu-swipe",gesturePriority:40,threshold:10,canStart:function(t){return r.canStart(t)},onWillStart:function(){return r.onWillStart()},onStart:function(){return r.onStart()},onMove:function(t){return r.onMove(t)},onEnd:function(t){return r.onEnd(t)}}),this.updateState(),[2]}})})},t.prototype.componentDidLoad=function(){this.ionMenuChange.emit({disabled:this.disabled,open:this._isOpen})},t.prototype.componentDidUnload=function(){this.blocker.destroy(),this.menuCtrl._unregister(this),this.animation&&this.animation.destroy(),this.gesture&&this.gesture.destroy(),this.animation=void 0,this.contentEl=this.backdropEl=this.menuInnerEl=void 0},t.prototype.onSplitPaneChanged=function(t){this.isPaneVisible=t.detail.isPane(this.el),this.updateState()},t.prototype.onBackdropClick=function(t){this.lastOnEnd<t.timeStamp-100&&t.composedPath&&!t.composedPath().includes(this.menuInnerEl)&&(t.preventDefault(),t.stopPropagation(),this.close())},t.prototype.isOpen=function(){return Promise.resolve(this._isOpen)},t.prototype.isActive=function(){return Promise.resolve(this._isActive())},t.prototype.open=function(t){return void 0===t&&(t=!0),this.setOpen(!0,t)},t.prototype.close=function(t){return void 0===t&&(t=!0),this.setOpen(!1,t)},t.prototype.toggle=function(t){return void 0===t&&(t=!0),this.setOpen(!this._isOpen,t)},t.prototype.setOpen=function(t,e){return void 0===e&&(e=!0),this.menuCtrl._setOpen(this,t,e)},t.prototype._setOpen=function(t,e){return void 0===e&&(e=!0),_polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return!this._isActive()||this.isAnimating||t===this._isOpen?[2,!1]:(this.beforeAnimation(t),[4,this.loadAnimation()]);case 1:return n.sent(),[4,this.startAnimation(t,e)];case 2:return n.sent(),this.afterAnimation(t),[2,!0]}})})},t.prototype.loadAnimation=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var t,e;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return(t=this.menuInnerEl.offsetWidth)===this.width&&void 0!==this.animation?[2]:(this.width=t,this.animation&&(this.animation.destroy(),this.animation=void 0),e=this,[4,this.menuCtrl._createAnimation(this.type,this)]);case 1:return e.animation=n.sent(),[2]}})})},t.prototype.startAnimation=function(t,e){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var n;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(i){switch(i.label){case 0:return n=this.animation.reverse(!t),e?[4,n.playAsync()]:[3,2];case 1:return i.sent(),[3,3];case 2:n.playSync(),i.label=3;case 3:return[2]}})})},t.prototype._isActive=function(){return!this.disabled&&!this.isPaneVisible},t.prototype.canSwipe=function(){return this.swipeGesture&&!this.isAnimating&&this._isActive()},t.prototype.canStart=function(t){return!!this.canSwipe()&&(!!this._isOpen||!this.menuCtrl.getOpenSync()&&checkEdgeSide(this.win,t.currentX,this.isEndSide,this.maxEdgeStart))},t.prototype.onWillStart=function(){return this.beforeAnimation(!this._isOpen),this.loadAnimation()},t.prototype.onStart=function(){this.isAnimating&&this.animation&&this.animation.reverse(this._isOpen).progressStart()},t.prototype.onMove=function(t){if(this.isAnimating&&this.animation){var e=computeDelta(t.deltaX,this._isOpen,this.isEndSide);this.animation.progressStep(e/this.width)}},t.prototype.onEnd=function(t){var e=this;if(this.isAnimating&&this.animation){var n=this._isOpen,i=this.isEndSide,o=computeDelta(t.deltaX,n,i),r=this.width,s=o/r,a=t.velocityX,u=r/2,c=a>=0&&(a>.2||t.deltaX>u),l=a<=0&&(a<-.2||t.deltaX<-u),d=n?i?c:l:i?l:c,h=!n&&d;n&&!d&&(h=!0);var p=(d?1-s:s)*r,m=0;if(p>5){var f=p/Math.abs(a);m=Math.min(f,300)}this.lastOnEnd=t.timeStamp,this.animation.onFinish(function(){return e.afterAnimation(h)},{clearExistingCallbacks:!0,oneTimeCallback:!0}).progressEnd(d,s,m)}},t.prototype.beforeAnimation=function(t){this.el.classList.add(SHOW_MENU),this.backdropEl&&this.backdropEl.classList.add(SHOW_BACKDROP),this.blocker.block(),this.isAnimating=!0,t?this.ionWillOpen.emit():this.ionWillClose.emit()},t.prototype.afterAnimation=function(t){this._isOpen=t,this.isAnimating=!1,this._isOpen||this.blocker.unblock(),this.enableListener(this,"click",t),t?(this.contentEl&&this.contentEl.classList.add(MENU_CONTENT_OPEN),this.ionDidOpen.emit()):(this.el.classList.remove(SHOW_MENU),this.contentEl&&this.contentEl.classList.remove(MENU_CONTENT_OPEN),this.backdropEl&&this.backdropEl.classList.remove(SHOW_BACKDROP),this.ionDidClose.emit())},t.prototype.updateState=function(){var t=this._isActive();this.gesture&&this.gesture.setDisabled(!t||!this.swipeGesture),!t&&this._isOpen&&this.forceClosing(),!this.disabled&&this.menuCtrl&&this.menuCtrl._setActiveMenu(this)},t.prototype.forceClosing=function(){this.isAnimating=!0,this.animation.reverse(!0).playSync(),this.afterAnimation(!1)},t.prototype.hostData=function(){var t,e=this.isEndSide,n=this.disabled,i=this.isPaneVisible;return{role:"complementary",class:(t={},t["menu-type-"+this.type]=!0,t["menu-enabled"]=!n,t["menu-side-end"]=e,t["menu-side-start"]=!e,t["menu-pane-visible"]=i,t)}},t.prototype.render=function(){var t=this;return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"menu-inner",ref:function(e){return t.menuInnerEl=e}},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot",null)),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop",{ref:function(e){return t.backdropEl=e},class:"menu-backdrop",tappable:!1,stopPropagation:!1})]},Object.defineProperty(t,"is",{get:function(){return"ion-menu"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{close:{method:!0},config:{context:"config"},contentId:{type:String,attr:"content-id"},disabled:{type:Boolean,attr:"disabled",mutable:!0,watchCallbacks:["disabledChanged"]},doc:{context:"document"},el:{elementRef:!0},enableListener:{context:"enableListener"},isActive:{method:!0},isEndSide:{state:!0},isOpen:{method:!0},isPaneVisible:{state:!0},isServer:{context:"isServer"},lazyMenuCtrl:{connect:"ion-menu-controller"},maxEdgeStart:{type:Number,attr:"max-edge-start"},menuId:{type:String,attr:"menu-id"},open:{method:!0},queue:{context:"queue"},setOpen:{method:!0},side:{type:String,attr:"side",reflectToAttr:!0,watchCallbacks:["sideChanged"]},swipeGesture:{type:Boolean,attr:"swipe-gesture",watchCallbacks:["swipeGestureChanged"]},toggle:{method:!0},type:{type:String,attr:"type",mutable:!0,watchCallbacks:["typeChanged"]},win:{context:"window"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"events",{get:function(){return[{name:"ionWillOpen",method:"ionWillOpen",bubbles:!0,cancelable:!0,composed:!0},{name:"ionWillClose",method:"ionWillClose",bubbles:!0,cancelable:!0,composed:!0},{name:"ionDidOpen",method:"ionDidOpen",bubbles:!0,cancelable:!0,composed:!0},{name:"ionDidClose",method:"ionDidClose",bubbles:!0,cancelable:!0,composed:!0},{name:"ionMenuChange",method:"ionMenuChange",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"listeners",{get:function(){return[{name:"body:ionSplitPaneVisible",method:"onSplitPaneChanged"},{name:"click",method:"onBackdropClick",capture:!0,disabled:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-menu-ios-h{--width:304px;--width-small:264px;--background:var(--ion-background-color, #fff);left:0;right:0;top:0;bottom:0;display:none;position:absolute;contain:strict}.show-menu.sc-ion-menu-ios-h{display:block}.menu-inner.sc-ion-menu-ios{left:0;right:auto;top:0;bottom:0;-webkit-transform:translate3d(-9999px,0,0);transform:translate3d(-9999px,0,0);display:-webkit-box;display:-ms-flexbox;display:flex;position:absolute;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;width:var(--width);height:100%;background:var(--background);contain:strict}.menu-side-start.sc-ion-menu-ios-h   .menu-inner.sc-ion-menu-ios{--ion-safe-area-right:0px;right:auto;left:0}.menu-side-end.sc-ion-menu-ios-h   .menu-inner.sc-ion-menu-ios{--ion-safe-area-left:0px;right:0;left:auto}ion-backdrop.sc-ion-menu-ios{display:none;opacity:.01;z-index:-1}\@media (max-width:340px){.menu-inner.sc-ion-menu-ios{width:var(--width-small)}}.menu-type-reveal.sc-ion-menu-ios-h{z-index:0}.menu-type-reveal.show-menu.sc-ion-menu-ios-h   .menu-inner.sc-ion-menu-ios{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}.menu-type-overlay.sc-ion-menu-ios-h{z-index:80}.menu-type-overlay.sc-ion-menu-ios-h   .show-backdrop.sc-ion-menu-ios{display:block;cursor:pointer}.menu-pane-visible.sc-ion-menu-ios-h   .menu-inner.sc-ion-menu-ios{left:0;right:0;width:auto;-webkit-transform:none!important;transform:none!important;-webkit-box-shadow:none!important;box-shadow:none!important}.menu-pane-visible.sc-ion-menu-ios-h   ion-backdrop.sc-ion-menu-ios{display:hidden!important}.menu-type-push.sc-ion-menu-ios-h{z-index:80}.menu-type-push.sc-ion-menu-ios-h   .show-backdrop.sc-ion-menu-ios{display:block}"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),t}();function computeDelta(t,e,n){return Math.max(0,e!==n?-t:t)}function checkEdgeSide(t,e,n,i){return n?e>=t.innerWidth-i:e<=i}var SHOW_MENU="show-menu",SHOW_BACKDROP="show-backdrop",MENU_CONTENT_OPEN="menu-content-open",MenuButton=function(){function t(){this.autoHide=!0}return t.prototype.hostData=function(){return{"ion-activatable":!0,class:{button:!0}}},t.prototype.render=function(){var t=this.config.get("menuIcon","menu");return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-menu-toggle",{menu:this.menu,autoHide:this.autoHide},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("button",{type:"button"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot",null,Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-icon",{icon:t,mode:this.mode,color:this.color,lazy:!1})),"md"===this.mode&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-ripple-effect",null)))},Object.defineProperty(t,"is",{get:function(){return"ion-menu-button"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{autoHide:{type:Boolean,attr:"auto-hide"},color:{type:String,attr:"color"},config:{context:"config"},menu:{type:String,attr:"menu"},mode:{type:String,attr:"mode"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".sc-ion-menu-button-ios-h{color:var(--color);pointer-events:all;text-align:center;text-decoration:none;text-overflow:ellipsis;text-transform:none;white-space:nowrap;-webkit-font-kerning:none;font-kerning:none;--color:var(--ion-color-primary, #3880ff)}button.sc-ion-menu-button-ios{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;margin:0;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;height:32px;border:0;outline:0;background:0 0;line-height:1;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;padding:0 5px}ion-icon.sc-ion-menu-button-ios{margin:0;padding:0;pointer-events:none;font-size:31px}.ion-color.sc-ion-menu-button-ios-h   .button-native.sc-ion-menu-button-ios{color:var(--ion-color-base)}.activated.sc-ion-menu-button-ios-h{opacity:.4}"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),t}();function baseAnimation(t){return Promise.resolve((new t).easing("cubic-bezier(0.0, 0.0, 0.2, 1)").easingReverse("cubic-bezier(0.4, 0.0, 0.6, 1)").duration(300))}var BOX_SHADOW_WIDTH=8;function menuOverlayAnimation(t,e,n){var i,o,r=n.width+BOX_SHADOW_WIDTH;n.isEndSide?(i=r+"px",o="0px"):(i=-r+"px",o="0px");var s=(new t).addElement(n.menuInnerEl).fromTo("translateX",i,o),a=(new t).addElement(n.backdropEl).fromTo("opacity",.01,.3);return baseAnimation(t).then(function(t){return t.add(s).add(a)})}function menuPushAnimation(t,e,n){var i,o,r=n.width;n.isEndSide?(i=-r+"px",o=r+"px"):(i=r+"px",o=-r+"px");var s=(new t).addElement(n.menuInnerEl).fromTo("translateX",o,"0px"),a=(new t).addElement(n.contentEl).fromTo("translateX","0px",i),u=(new t).addElement(n.backdropEl).fromTo("opacity",.01,.2);return baseAnimation(t).then(function(t){return t.add(s).add(u).add(a)})}function menuRevealAnimation(t,e,n){var i=n.width*(n.isEndSide?-1:1)+"px",o=(new t).addElement(n.contentEl).fromTo("translateX","0px",i);return baseAnimation(t).then(function(t){return t.add(o)})}var MenuController=function(){function t(){this.menus=[],this.menuAnimations=new Map,this.registerAnimation("reveal",menuRevealAnimation),this.registerAnimation("push",menuPushAnimation),this.registerAnimation("overlay",menuOverlayAnimation)}return t.prototype.open=function(t){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return[4,this.get(t)];case 1:return(e=n.sent())?[2,e.open()]:[2,!1]}})})},t.prototype.close=function(t){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return[4,void 0!==t?this.get(t):this.getOpen()];case 1:return void 0!==(e=n.sent())?[2,e.close()]:[2,!1]}})})},t.prototype.toggle=function(t){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return[4,this.get(t)];case 1:return(e=n.sent())?[2,e.toggle()]:[2,!1]}})})},t.prototype.enable=function(t,e){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var n;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(i){switch(i.label){case 0:return[4,this.get(e)];case 1:return(n=i.sent())&&(n.disabled=!t),[2,n]}})})},t.prototype.swipeGesture=function(t,e){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var n;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(i){switch(i.label){case 0:return[4,this.get(e)];case 1:return(n=i.sent())&&(n.swipeGesture=t),[2,n]}})})},t.prototype.isOpen=function(t){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return null==t?[3,2]:[4,this.get(t)];case 1:return[2,void 0!==(e=n.sent())&&e.isOpen()];case 2:return[4,this.getOpen()];case 3:return[2,void 0!==(e=n.sent())]}})})},t.prototype.isEnabled=function(t){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return[4,this.get(t)];case 1:return(e=n.sent())?[2,!e.disabled]:[2,!1]}})})},t.prototype.get=function(t){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e,n;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(i){switch(i.label){case 0:return[4,this.waitUntilReady()];case 1:return i.sent(),"start"===t||"end"===t?(e=this.find(function(e){return e.side===t&&!e.disabled}))?[2,e]:[2,this.find(function(e){return e.side===t})]:null!=t?[2,this.find(function(e){return e.menuId===t})]:(n=this.find(function(t){return!t.disabled}))?[2,n]:[2,this.menus.length>0?this.menus[0].el:void 0]}})})},t.prototype.getOpen=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(t){switch(t.label){case 0:return[4,this.waitUntilReady()];case 1:return t.sent(),[2,this.getOpenSync()]}})})},t.prototype.getMenus=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(t){switch(t.label){case 0:return[4,this.waitUntilReady()];case 1:return t.sent(),[2,this.getMenusSync()]}})})},t.prototype.isAnimating=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(t){switch(t.label){case 0:return[4,this.waitUntilReady()];case 1:return t.sent(),[2,this.isAnimatingSync()]}})})},t.prototype.registerAnimation=function(t,e){this.menuAnimations.set(t,e)},t.prototype._getInstance=function(){return Promise.resolve(this)},t.prototype._register=function(t){var e=this.menus;e.indexOf(t)<0&&(t.disabled||this._setActiveMenu(t),e.push(t))},t.prototype._unregister=function(t){var e=this.menus.indexOf(t);e>-1&&this.menus.splice(e,1)},t.prototype._setActiveMenu=function(t){var e=t.side;this.menus.filter(function(n){return n.side===e&&n!==t}).forEach(function(t){return t.disabled=!0})},t.prototype._setOpen=function(t,e,n){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var i;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(o){switch(o.label){case 0:return this.isAnimatingSync()?[2,!1]:e?[4,this.getOpen()]:[3,3];case 1:return(i=o.sent())&&t.el!==i?[4,i.setOpen(!1,!1)]:[3,3];case 2:o.sent(),o.label=3;case 3:return[2,t._setOpen(e,n)]}})})},t.prototype._createAnimation=function(t,e){var n=this.menuAnimations.get(t);return n?this.animationCtrl.create(n,null,e):Promise.reject("animation not registered")},t.prototype.getOpenSync=function(){return this.find(function(t){return t._isOpen})},t.prototype.getMenusSync=function(){return this.menus.map(function(t){return t.el})},t.prototype.isAnimatingSync=function(){return this.menus.some(function(t){return t.isAnimating})},t.prototype.find=function(t){var e=this.menus.find(t);if(void 0!==e)return e.el},t.prototype.waitUntilReady=function(){return Promise.all(Array.from(this.doc.querySelectorAll("ion-menu")).map(function(t){return t.componentOnReady()}))},Object.defineProperty(t,"is",{get:function(){return"ion-menu-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{_getInstance:{method:!0},animationCtrl:{connect:"ion-animation-controller"},close:{method:!0},doc:{context:"document"},enable:{method:!0},get:{method:!0},getMenus:{method:!0},getOpen:{method:!0},isAnimating:{method:!0},isEnabled:{method:!0},isOpen:{method:!0},open:{method:!0},registerAnimation:{method:!0},swipeGesture:{method:!0},toggle:{method:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".menu-content{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}.menu-content-open{cursor:pointer;-ms-touch-action:manipulation;touch-action:manipulation;pointer-events:none}.ios .menu-content-reveal{-webkit-box-shadow:-8px 0 42px rgba(0,0,0,.08);box-shadow:-8px 0 42px rgba(0,0,0,.08)}.md .menu-content-push,.md .menu-content-reveal{-webkit-box-shadow:0 0 10px rgba(0,0,0,.25);box-shadow:0 0 10px rgba(0,0,0,.25)}"},enumerable:!0,configurable:!0}),t}(),MenuToggle=function(){function t(){this.visible=!1,this.autoHide=!0}return t.prototype.componentDidLoad=function(){return this.updateVisibility()},t.prototype.onClick=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var t;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){switch(e.label){case 0:return[4,getMenuController(this.doc)];case 1:return(t=e.sent())?[4,t.get(this.menu)]:[3,3];case 2:e.sent()&&t.toggle(this.menu),e.label=3;case 3:return[2]}})})},t.prototype.updateVisibility=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var t,e,n;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(i){switch(i.label){case 0:return[4,getMenuController(this.doc)];case 1:return(t=i.sent())?[4,t.get(this.menu)]:[3,5];case 2:return e=i.sent(),(n=e)?[4,e.isActive()]:[3,4];case 3:n=i.sent(),i.label=4;case 4:if(n)return this.visible=!0,[2];i.label=5;case 5:return this.visible=!1,[2]}})})},t.prototype.hostData=function(){var t=this.autoHide&&!this.visible;return{"aria-hidden":t?"true":null,class:{"menu-toggle-hidden":t}}},t.prototype.render=function(){return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("slot",null)},Object.defineProperty(t,"is",{get:function(){return"ion-menu-toggle"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{autoHide:{type:Boolean,attr:"auto-hide"},doc:{context:"document"},menu:{type:String,attr:"menu"},visible:{state:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"listeners",{get:function(){return[{name:"click",method:"onClick"},{name:"body:ionMenuChange",method:"updateVisibility"},{name:"body:ionSplitPaneVisible",method:"updateVisibility"}]},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".menu-toggle-hidden.sc-ion-menu-toggle-h{display:none}"},enumerable:!0,configurable:!0}),t}();function getMenuController(t){var e=t.querySelector("ion-menu-controller");return e?e.componentOnReady():Promise.resolve(void 0)}
 
+/***/ }),
 
+/***/ "../../node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js":
+/*!************************************************************************************************************************************!*\
+  !*** C:/Users/david/Documents/github/library/node_modules/@ionic/angular/node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js ***!
+  \************************************************************************************************************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __await, __makeTemplateObject, __importStar, __importDefault */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var Button = /** @class */ (function () {
-    function Button() {
-        this.keyFocus = false;
-        this.buttonType = 'button';
-        this.disabled = false;
-        this.strong = false;
-        this.type = 'button';
-    }
-    Button.prototype.componentWillLoad = function () {
-        if (this.fill === undefined) {
-            this.fill = this.el.closest('ion-buttons') ? 'clear' : 'solid';
-        }
-    };
-    Button.prototype.onFocus = function () {
-        this.ionFocus.emit();
-    };
-    Button.prototype.onKeyUp = function () {
-        this.keyFocus = true;
-    };
-    Button.prototype.onBlur = function () {
-        this.keyFocus = false;
-        this.ionBlur.emit();
-    };
-    Button.prototype.onClick = function (ev) {
-        if (this.type === 'button') {
-            return Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["i"])(this.win, this.href, ev, this.routerDirection);
-        }
-        else if (Object(_chunk_e7816c0b_js__WEBPACK_IMPORTED_MODULE_1__["d"])(this.el)) {
-            var form = this.el.closest('form');
-            if (form) {
-                ev.preventDefault();
-                ev.stopPropagation();
-                var fakeButton = document.createElement('button');
-                fakeButton.type = this.type;
-                fakeButton.style.display = 'none';
-                form.appendChild(fakeButton);
-                fakeButton.click();
-                fakeButton.remove();
-            }
-        }
-        return Promise.resolve(false);
-    };
-    Button.prototype.hostData = function () {
-        var _a = this, buttonType = _a.buttonType, color = _a.color, expand = _a.expand, fill = _a.fill, mode = _a.mode, shape = _a.shape, size = _a.size, strong = _a.strong;
-        return {
-            'ion-activatable': true,
-            class: Object.assign({}, Object(_chunk_b9ec67ac_js__WEBPACK_IMPORTED_MODULE_2__["h"])(color), getButtonClassMap(buttonType, mode), getButtonTypeClassMap(buttonType, expand, mode), getButtonTypeClassMap(buttonType, size, mode), getButtonTypeClassMap(buttonType, shape, mode), getButtonTypeClassMap(buttonType, strong ? 'strong' : undefined, mode), getButtonTypeClassMap(buttonType, fill, mode), { 'focused': this.keyFocus })
-        };
-    };
-    Button.prototype.render = function () {
-        var TagType = this.href === undefined ? 'button' : 'a';
-        var attrs = (TagType === 'button')
-            ? { type: this.type }
-            : { href: this.href };
-        return (Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, Object.assign({}, attrs, { class: "button-native", disabled: this.disabled, onFocus: this.onFocus.bind(this), onKeyUp: this.onKeyUp.bind(this), onBlur: this.onBlur.bind(this), onClick: this.onClick.bind(this) }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", { class: "button-inner" }, Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", { name: "icon-only" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", { name: "start" }), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null), Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", { name: "end" })), this.mode === 'md' && Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", null)));
-    };
-    Object.defineProperty(Button, "is", {
-        get: function () { return "ion-button"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Button, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Button, "properties", {
-        get: function () {
-            return {
-                "buttonType": {
-                    "type": String,
-                    "attr": "button-type",
-                    "mutable": true
-                },
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "disabled": {
-                    "type": Boolean,
-                    "attr": "disabled",
-                    "reflectToAttr": true
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "expand": {
-                    "type": String,
-                    "attr": "expand",
-                    "reflectToAttr": true
-                },
-                "fill": {
-                    "type": String,
-                    "attr": "fill",
-                    "reflectToAttr": true,
-                    "mutable": true
-                },
-                "href": {
-                    "type": String,
-                    "attr": "href"
-                },
-                "keyFocus": {
-                    "state": true
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                },
-                "routerDirection": {
-                    "type": String,
-                    "attr": "router-direction"
-                },
-                "shape": {
-                    "type": String,
-                    "attr": "shape",
-                    "reflectToAttr": true
-                },
-                "size": {
-                    "type": String,
-                    "attr": "size",
-                    "reflectToAttr": true
-                },
-                "strong": {
-                    "type": Boolean,
-                    "attr": "strong"
-                },
-                "type": {
-                    "type": String,
-                    "attr": "type"
-                },
-                "win": {
-                    "context": "window"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Button, "events", {
-        get: function () {
-            return [{
-                    "name": "ionFocus",
-                    "method": "ionFocus",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }, {
-                    "name": "ionBlur",
-                    "method": "ionBlur",
-                    "bubbles": true,
-                    "cancelable": true,
-                    "composed": true
-                }];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Button, "style", {
-        get: function () { return ":host{--width:auto;--overflow:hidden;--ripple-color:currentColor;display:inline-block;color:var(--color);font-family:var(--ion-font-family,inherit);pointer-events:auto;text-align:center;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:top;vertical-align:-webkit-baseline-middle;-webkit-font-kerning:none;font-kerning:none}:host([disabled]){pointer-events:none}:host(.button-solid){--background:var(--ion-color-primary, #3880ff);--background-activated:var(--ion-color-primary-shade, #3171e0);--background-focused:var(--ion-color-primary-shade, #3171e0);--color:var(--ion-color-primary-contrast, #fff);--color-activated:var(--ion-color-primary-contrast, #fff);--color-focused:var(--ion-color-primary-contrast, #fff)}:host(.button-solid.ion-color) .button-native{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.button-solid.ion-color.activated) .button-native,:host(.button-solid.ion-color.focused) .button-native{background:var(--ion-color-shade)}:host(.button-outline){--border-color:var(--ion-color-primary, #3880ff);--background:transparent;--color:var(--ion-color-primary, #3880ff);--color-focused:var(--ion-color-primary, #3880ff);--border-radius:12px;--border-width:1px;--border-style:solid;--background-activated:var(--ion-color-primary, #3880ff);--background-focused:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.1);--color-activated:var(--ion-color-primary-contrast, #fff)}:host(.button-outline.ion-color) .button-native{border-color:var(--ion-color-base);background:0 0;color:var(--ion-color-base)}:host(.button-outline.focused.ion-color) .button-native{background:rgba(var(--ion-color-base-rgb),.1);color:var(--ion-color-base)}:host(.button-clear){--border-width:0;--background:transparent;--color:var(--ion-color-primary, #3880ff);--background-activated:transparent;--background-focused:rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.1);--color-activated:var(--ion-color-primary, #3880ff);--color-focused:var(--ion-color-primary, #3880ff)}:host(.button-clear.ion-color) .button-native{background:0 0;color:var(--ion-color-base)}:host(.button-clear.focused.ion-color) .button-native{background:rgba(var(--ion-color-base-rgb),.1);color:var(--ion-color-base)}:host(.button-clear.activated.ion-color) .button-native{background:0 0}:host(.button-block){display:block}:host(.button-block) .button-native{margin-left:0;margin-right:0;display:block;width:100%;clear:both;contain:strict}:host(.button-block) .button-native::after{clear:both}:host(.button-full){display:block}:host(.button-full) .button-native{margin-left:0;margin-right:0;display:block;width:100%;contain:strict}:host(.button-full:not(.button-round)) .button-native{border-radius:0;border-right-width:0;border-left-width:0}.button-native{border-radius:var(--border-radius);-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin:var(--margin-top) var(--margin-end) var(--margin-bottom) var(--margin-start);padding:var(--padding-top) var(--padding-end) var(--padding-bottom) var(--padding-start);font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;text-decoration:inherit;text-overflow:inherit;text-transform:inherit;text-align:inherit;white-space:inherit;color:inherit;display:block;position:relative;width:var(--width);height:var(--height);-webkit-transition:var(--transition);transition:var(--transition);border-width:var(--border-width);border-style:var(--border-style);border-color:var(--border-color);outline:0;background:var(--background);line-height:1;-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);contain:content;cursor:pointer;opacity:var(--opacity);overflow:var(--overflow);z-index:0;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;-moz-appearance:none;appearance:none}.button-native[disabled]{cursor:default;opacity:.5;pointer-events:none}:host(.focused) .button-native{background:var(--background-focused);color:var(--color-focused)}:host(.activated) .button-native{background:var(--background-activated);color:var(--color-activated)}.button-inner{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-ms-flex-negative:0;flex-shrink:0;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;width:100%;height:100%}::slotted(ion-icon){font-size:1.4em;pointer-events:none}::slotted(ion-icon[slot=start]){margin:0 .3em 0 -.3em}::slotted(ion-icon[slot=end]){margin:0 -.2em 0 .3em}::slotted(ion-icon[slot=icon-only]){font-size:1.8em}ion-ripple-effect{color:var(--ripple-color)}:host{--border-radius:12px;--margin-top:4px;--margin-bottom:4px;--margin-start:2px;--margin-end:2px;--padding-top:0;--padding-bottom:0;--padding-start:1em;--padding-end:1em;--height:2.8em;--transition:background-color,opacity 100ms linear;font-size:16px;font-weight:500;letter-spacing:-.03em}:host(.button-solid.activated){--opacity:1}:host(.button-outline.activated.ion-color) .button-native{background:var(--ion-color-base);color:var(--ion-color-contrast)}\@media (any-hover:hover){:host(.button-solid:hover){--opacity:0.8}:host(.button-clear:hover){--opacity:0.6}}:host(.button-clear.activated){--opacity:0.4}:host(.button-round){--border-radius:64px;--padding-top:0;--padding-start:26px;--padding-end:26px;--padding-bottom:0}:host(.button-large){--border-radius:14px;--padding-top:0;--padding-start:1em;--padding-end:1em;--padding-bottom:0;--height:2.8em;font-size:20px}:host(.button-small){--border-radius:8px;--padding-top:0;--padding-start:0.9em;--padding-end:0.9em;--padding-bottom:0;--height:2.1em;font-size:13px}:host(.button-strong){font-weight:600}"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Button, "styleMode", {
-        get: function () { return "ios"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Button;
-}());
-function getButtonClassMap(buttonType, mode) {
-    var _a;
-    if (buttonType === undefined) {
-        return {};
-    }
-    return _a = {},
-        _a[buttonType] = true,
-        _a[buttonType + "-" + mode] = true,
-        _a;
-}
-function getButtonTypeClassMap(buttonType, type, mode) {
-    var _a;
-    if (type === undefined) {
-        return {};
-    }
-    return _a = {},
-        _a[buttonType + "-" + type] = true,
-        _a[buttonType + "-" + type + "-" + mode] = true,
-        _a;
-}
-function getName(name, mode, ios, md) {
-    mode = (mode || 'md').toLowerCase();
-    if (ios && mode === 'ios') {
-        name = ios.toLowerCase();
-    }
-    else if (md && mode === 'md') {
-        name = md.toLowerCase();
-    }
-    else if (name) {
-        name = name.toLowerCase();
-        if (!/^md-|^ios-|^logo-/.test(name)) {
-            name = mode + "-" + name;
-        }
-    }
-    if (typeof name !== 'string' || name.trim() === '') {
-        return null;
-    }
-    var invalidChars = name.replace(/[a-z]|-|\d/gi, '');
-    if (invalidChars !== '') {
-        return null;
-    }
-    return name;
-}
-function getSrc(src) {
-    if (typeof src === 'string') {
-        src = src.trim();
-        if (src.length > 0 && /(\/|\.)/.test(src)) {
-            return src;
-        }
-    }
-    return null;
-}
-function isValid(elm) {
-    if (elm.nodeType === 1) {
-        if (elm.nodeName.toLowerCase() === 'script') {
-            return false;
-        }
-        for (var i = 0; i < elm.attributes.length; i++) {
-            var val = elm.attributes[i].value;
-            if (typeof val === 'string' && val.toLowerCase().indexOf('on') === 0) {
-                return false;
-            }
-        }
-        for (var i = 0; i < elm.childNodes.length; i++) {
-            if (!isValid(elm.childNodes[i])) {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-var Icon = /** @class */ (function () {
-    function Icon() {
-        this.isVisible = false;
-        this.lazy = false;
-    }
-    Icon.prototype.componentWillLoad = function () {
-        var _this = this;
-        this.waitUntilVisible(this.el, "50px", function () {
-            _this.isVisible = true;
-            _this.loadIcon();
-        });
-    };
-    Icon.prototype.componentDidUnload = function () {
-        if (this.io) {
-            this.io.disconnect();
-            this.io = undefined;
-        }
-    };
-    Icon.prototype.waitUntilVisible = function (el, rootMargin, cb) {
-        var _this = this;
-        if (this.lazy && this.win && this.win.IntersectionObserver) {
-            var io_1 = this.io = new this.win.IntersectionObserver(function (data) {
-                if (data[0].isIntersecting) {
-                    io_1.disconnect();
-                    _this.io = undefined;
-                    cb();
-                }
-            }, { rootMargin: rootMargin });
-            io_1.observe(el);
-        }
-        else {
-            cb();
-        }
-    };
-    Icon.prototype.loadIcon = function () {
-        var _this = this;
-        if (!this.isServer && this.isVisible) {
-            var url = this.getUrl();
-            if (url) {
-                getSvgContent(url).then(function (svgContent) {
-                    _this.svgContent = validateContent(_this.doc, svgContent, _this.el["s-sc"]);
-                });
-            }
-        }
-        if (!this.ariaLabel) {
-            var name = getName(this.name, this.mode, this.ios, this.md);
-            if (name) {
-                this.ariaLabel = name
-                    .replace("ios-", "")
-                    .replace("md-", "")
-                    .replace(/\-/g, " ");
-            }
-        }
-    };
-    Icon.prototype.getUrl = function () {
-        var url = getSrc(this.src);
-        if (url) {
-            return url;
-        }
-        url = getName(this.name, this.mode, this.ios, this.md);
-        if (url) {
-            return this.getNamedUrl(url);
-        }
-        url = getSrc(this.icon);
-        if (url) {
-            return url;
-        }
-        url = getName(this.icon, this.mode, this.ios, this.md);
-        if (url) {
-            return this.getNamedUrl(url);
-        }
-        return null;
-    };
-    Icon.prototype.getNamedUrl = function (name) {
-        return this.resourcesUrl + "svg/" + name + ".svg";
-    };
-    Icon.prototype.hostData = function () {
-        var _a;
-        return {
-            "role": "img",
-            class: Object.assign({}, createColorClasses$1(this.color), (_a = {}, _a["icon-" + this.size] = !!this.size, _a))
-        };
-    };
-    Icon.prototype.render = function () {
-        if (!this.isServer && this.svgContent) {
-            return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "icon-inner", innerHTML: this.svgContent });
-        }
-        return Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", { class: "icon-inner" });
-    };
-    Object.defineProperty(Icon, "is", {
-        get: function () { return "ion-icon"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Icon, "encapsulation", {
-        get: function () { return "shadow"; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Icon, "properties", {
-        get: function () {
-            return {
-                "ariaLabel": {
-                    "type": String,
-                    "attr": "aria-label",
-                    "reflectToAttr": true,
-                    "mutable": true
-                },
-                "color": {
-                    "type": String,
-                    "attr": "color"
-                },
-                "doc": {
-                    "context": "document"
-                },
-                "el": {
-                    "elementRef": true
-                },
-                "icon": {
-                    "type": String,
-                    "attr": "icon",
-                    "watchCallbacks": ["loadIcon"]
-                },
-                "ios": {
-                    "type": String,
-                    "attr": "ios"
-                },
-                "isServer": {
-                    "context": "isServer"
-                },
-                "isVisible": {
-                    "state": true
-                },
-                "lazy": {
-                    "type": Boolean,
-                    "attr": "lazy"
-                },
-                "md": {
-                    "type": String,
-                    "attr": "md"
-                },
-                "mode": {
-                    "type": String,
-                    "attr": "mode"
-                },
-                "name": {
-                    "type": String,
-                    "attr": "name",
-                    "watchCallbacks": ["loadIcon"]
-                },
-                "resourcesUrl": {
-                    "context": "resourcesUrl"
-                },
-                "size": {
-                    "type": String,
-                    "attr": "size"
-                },
-                "src": {
-                    "type": String,
-                    "attr": "src",
-                    "watchCallbacks": ["loadIcon"]
-                },
-                "svgContent": {
-                    "state": true
-                },
-                "win": {
-                    "context": "window"
-                }
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Icon, "style", {
-        get: function () { return ":host{display:inline-block;width:1em;height:1em;contain:strict;-webkit-box-sizing:content-box!important;box-sizing:content-box!important}:host(.ion-color){color:var(--ion-color-base)!important}:host(.icon-small){font-size:var(--ion-icon-size-small,18px)!important}:host(.icon-large){font-size:var(--ion-icon-size-large,32px)!important}.icon-inner,svg{display:block;height:100%;width:100%}svg{fill:currentColor;stroke:currentColor}:host(.ion-color-primary){--ion-color-base:var(--ion-color-primary, #3880ff)}:host(.ion-color-secondary){--ion-color-base:var(--ion-color-secondary, #0cd1e8)}:host(.ion-color-tertiary){--ion-color-base:var(--ion-color-tertiary, #f4a942)}:host(.ion-color-success){--ion-color-base:var(--ion-color-success, #10dc60)}:host(.ion-color-warning){--ion-color-base:var(--ion-color-warning, #ffce00)}:host(.ion-color-danger){--ion-color-base:var(--ion-color-danger, #f14141)}:host(.ion-color-light){--ion-color-base:var(--ion-color-light, #f4f5f8)}:host(.ion-color-medium){--ion-color-base:var(--ion-color-medium, #989aa2)}:host(.ion-color-dark){--ion-color-base:var(--ion-color-dark, #222428)}"; },
-        enumerable: true,
-        configurable: true
-    });
-    return Icon;
-}());
-var requests = new Map();
-function getSvgContent(url) {
-    var req = requests.get(url);
-    if (!req) {
-        req = fetch(url, { cache: "force-cache" }).then(function (rsp) {
-            if (rsp.ok) {
-                return rsp.text();
-            }
-            return Promise.resolve(null);
-        });
-        requests.set(url, req);
-    }
-    return req;
-}
-function validateContent(document, svgContent, scopeId) {
-    if (svgContent) {
-        var frag = document.createDocumentFragment();
-        var div = document.createElement("div");
-        div.innerHTML = svgContent;
-        frag.appendChild(div);
-        for (var i = div.childNodes.length - 1; i >= 0; i--) {
-            if (div.childNodes[i].nodeName.toLowerCase() !== "svg") {
-                div.removeChild(div.childNodes[i]);
-            }
-        }
-        var svgElm = div.firstElementChild;
-        if (svgElm && svgElm.nodeName.toLowerCase() === "svg") {
-            if (scopeId) {
-                svgElm.setAttribute("class", scopeId);
-            }
-            if (isValid(svgElm)) {
-                return div.innerHTML;
-            }
-        }
-    }
-    return "";
-}
-function createColorClasses$1(color) {
-    var _a;
-    return (color) ? (_a = {
-            "ion-color": true
-        },
-        _a["ion-color-" + color] = true,
-        _a) : null;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__extends", function() { return __extends; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__assign", function() { return __assign; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__rest", function() { return __rest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__decorate", function() { return __decorate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__param", function() { return __param; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
+// REV: 9dd9aa322c893e5e0b3f1609b1126314ccf37bbb
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+  extendStatics = Object.setPrototypeOf ||
+      ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+      function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+  return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+  extendStatics(d, b);
+  function __() { this.constructor = d; }
+  d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
+var __assign = function() {
+  __assign = Object.assign || function __assign(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+          s = arguments[i];
+          for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+      return t;
+  }
+  return __assign.apply(this, arguments);
+}
 
+function __rest(s, e) {
+  var t = {};
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+      t[p] = s[p];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+          t[p[i]] = s[p[i]];
+  return t;
+}
+
+function __decorate(decorators, target, key, desc) {
+  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+  else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+  return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+  if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+  return new (P || (P = Promise))(function (resolve, reject) {
+      function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+      function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+      function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+}
+
+function __generator(thisArg, body) {
+  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+  function verb(n) { return function (v) { return step([n, v]); }; }
+  function step(op) {
+      if (f) throw new TypeError("Generator is already executing.");
+      while (_) try {
+          if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+          if (y = 0, t) op = [op[0] & 2, t.value];
+          switch (op[0]) {
+              case 0: case 1: t = op; break;
+              case 4: _.label++; return { value: op[1], done: false };
+              case 5: _.label++; y = op[1]; op = [0]; continue;
+              case 7: op = _.ops.pop(); _.trys.pop(); continue;
+              default:
+                  if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                  if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                  if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                  if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                  if (t[2]) _.ops.pop();
+                  _.trys.pop(); continue;
+          }
+          op = body.call(thisArg, _);
+      } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+      if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+  }
+}
+
+function __exportStar(m, exports) {
+  for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+
+function __values(o) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+  if (m) return m.call(o);
+  return {
+      next: function () {
+          if (o && i >= o.length) o = void 0;
+          return { value: o && o[i++], done: !o };
+      }
+  };
+}
+
+function __read(o, n) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m) return o;
+  var i = m.call(o), r, ar = [], e;
+  try {
+      while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+  }
+  catch (error) { e = { error: error }; }
+  finally {
+      try {
+          if (r && !r.done && (m = i["return"])) m.call(i);
+      }
+      finally { if (e) throw e.error; }
+  }
+  return ar;
+}
+
+function __spread() {
+  for (var ar = [], i = 0; i < arguments.length; i++)
+      ar = ar.concat(__read(arguments[i]));
+  return ar;
+}
+
+function __await(v) {
+  return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
+function __makeTemplateObject(cooked, raw) {
+  if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+  return cooked;
+};
+
+function __importStar(mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result.default = mod;
+  return result;
+}
+
+function __importDefault(mod) {
+  return (mod && mod.__esModule) ? mod : { default: mod };
+}
 
 /***/ })
 
