@@ -10,7 +10,6 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@google-cloud/firestore": "file:../../node_modules/@google-cloud/firestore",
     "firebase-admin": "file:../../node_modules/firebase-admin",
     "firebase-functions": "file:../../node_modules/firebase-functions"
   },

@@ -1,5 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "lib": ["es6"],
     "module": "commonjs",
@@ -18,7 +17,11 @@
   "include": [
     "src"
   ],
+  "files": [
+    "node_modules/typescript/lib/lib.es6.d.ts"
+  ],
   "exclude": [
+    "node_modules",
     "src/test.ts",
     "**/*.spec.ts"
   ]
