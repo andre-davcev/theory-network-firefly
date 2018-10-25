@@ -29,7 +29,7 @@ export class StatePlaces
 
         if (searchText.length === 0)
         {
-            patchState({results: []});
+            return patchState({results: []});
         }
         else
         {

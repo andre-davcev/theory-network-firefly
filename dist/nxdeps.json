@@ -1,5 +1,5 @@
 {
-  "firefly-mobile": [
+  "firefly-functions": [
     {
       "projectName": "firebase",
       "type": "es6Import"
@@ -39,6 +39,18 @@
       "type": "es6Import"
     }
   ],
+  "firefly-mobile": [
+    {
+      "projectName": "firebase",
+      "type": "es6Import"
+    }
+  ],
+  "nativescript": [
+    {
+      "projectName": "core",
+      "type": "es6Import"
+    }
+  ],
   "firefly-core": [
     {
       "projectName": "firebase",
@@ -66,12 +78,6 @@
     },
     {
       "projectName": "foursquare",
-      "type": "es6Import"
-    }
-  ],
-  "nativescript": [
-    {
-      "projectName": "core",
       "type": "es6Import"
     }
   ],

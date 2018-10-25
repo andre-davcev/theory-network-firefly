@@ -1,5 +1,4 @@
 import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { tap } from 'rxjs/operators';
 
 import { ServiceAlerts } from '@firefly/core/services';
@@ -16,7 +15,7 @@ export class StateAlerts
     @Selector() static entities(state: StateAlertModel) {return state.entities;}
     @Selector() static alerts(state: StateAlertModel) {return Object.keys(state.entities).map(id => state.entities[id]);}
 
-    constructor(private store: Store, private firestore: AngularFirestore, private serviceAlerts: ServiceAlerts) {}
+    constructor(private store: Store, private serviceAlerts: ServiceAlerts) {}
 
     @Action(ActionAlertsGet)
     alertsGet({ patchState } : StateContext<StateAlertModel>)

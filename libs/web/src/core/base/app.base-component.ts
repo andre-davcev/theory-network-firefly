@@ -1,5 +1,3 @@
-import { Component, Inject } from '@angular/core';
-
 // libs
 import { BaseComponent } from '@theory/core';
 
