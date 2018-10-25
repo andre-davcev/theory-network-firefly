@@ -116,6 +116,12 @@
       ],
       "@firefly/app/page/*": [
         "apps/ionic-firefly/src/app/pages/*"
+      ],
+      "@firefly/functions": [
+        "libs/firefly/functions/index.ts"
+      ],
+      "@firefly/functions/*": [
+        "libs/firefly/functions/src/*"
       ]
     }
   },

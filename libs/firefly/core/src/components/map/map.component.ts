@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { GeolocationPosition } from '@capacitor/core';
 
 import { StateDevice, StateLocation } from '@firefly/core/state';
-import { ComponentMapOrb } from '../map-orb/map-orb.component';
+//import { ComponentMapOrb } from '../map-orb/map-orb.component';
 
 
 @Component
@@ -23,7 +23,7 @@ export class ComponentMap implements OnInit
     public location: GeolocationPosition;
     public center: Array<number>;
 
-    private componentMapOrb: ComponentMapOrb;
+//    private componentMapOrb: ComponentMapOrb;
 
     constructor() { }
 

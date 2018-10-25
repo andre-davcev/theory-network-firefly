@@ -69,3 +69,6 @@ libs/**/*.ngsummary.json
 
 # apps
 apps/**/app/src/main/assets/public/*
+
+# functions
+apps/functions-*/lib
