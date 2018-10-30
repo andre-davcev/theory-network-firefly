@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { ReflectiveInjector } from 'injection-js';
 
-import { Config } from './theory';
+import { Config } from './@theory-firebase';
 import { EntityUsers, EntityAlerts, EntityClusters } from './firefly';
 
 const injector: ReflectiveInjector = ReflectiveInjector.resolveAndCreate
