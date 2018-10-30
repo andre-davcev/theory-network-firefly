@@ -2,7 +2,7 @@ import { firestore, EventContext, Change } from 'firebase-functions';
 import 'reflect-metadata';
 import { Injectable } from 'injection-js';
 
-import { Util } from '../../theory';
+import { Util } from '../../@theory-firebase';
 import { CollectionKey } from '../enums';
 import { CollectionDefinitions } from '../constants';
 

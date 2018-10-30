@@ -1,5 +1,5 @@
 import { CollectionKey } from '../enums';
-import { CollectionDefinition } from '../../theory';
+import { CollectionDefinition } from '../../@theory-firebase';
 
 export const CollectionDefinitions: Record<CollectionKey, CollectionDefinition> = {
     [CollectionKey.Users]: {

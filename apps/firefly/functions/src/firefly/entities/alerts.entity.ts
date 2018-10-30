@@ -2,10 +2,10 @@ import { firestore, EventContext, Change } from 'firebase-functions';
 import 'reflect-metadata';
 import { Injectable, Injector } from 'injection-js';
 
-import { Util, Config } from '../../theory';
 import { CollectionKey } from '../enums';
 import { CollectionDefinitions } from '../constants';
 import { messaging, firestore as firestoreAdmin } from 'firebase-admin';
+import { Util, Config } from '../../@theory-firebase';
 
 @Injectable()
 export class EntityAlerts
