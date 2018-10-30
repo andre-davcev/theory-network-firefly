@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "outDir": "lib",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "declaration": false,
+    "inlineSources": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "compileOnSave": true,
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/test.ts",
+    "**/*.spec.ts"
+  ]
+}

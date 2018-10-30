@@ -433,41 +433,6 @@
           }
         }
       }
-    },
-    "firefly-functions": {
-      "root": "libs/firefly/functions",
-      "sourceRoot": "libs/firefly/functions/src",
-      "projectType": "library",
-      "prefix": "theory",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "libs/firefly/functions/tsconfig.lib.json",
-            "project": "libs/firefly/functions/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "libs/firefly/functions/src/test.ts",
-            "tsConfig": "libs/firefly/functions/tsconfig.spec.json",
-            "karmaConfig": "libs/firefly/functions/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/firefly/functions/tsconfig.lib.json",
-              "libs/firefly/functions/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
     }
   },
   "cli": {

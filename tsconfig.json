@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "dist/apps/firefly/functions",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -116,12 +115,6 @@
       ],
       "@firefly/app/page/*": [
         "apps/ionic-firefly/src/app/pages/*"
-      ],
-      "@firefly/functions": [
-        "libs/firefly/functions/index.ts"
-      ],
-      "@firefly/functions/*": [
-        "libs/firefly/functions/src/*"
       ]
     }
   },
