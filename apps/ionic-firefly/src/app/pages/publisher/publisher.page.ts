@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { ActionSheetController, NavController, ModalController } from '@ionic/angular';
 import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StatusBarStyle } from '@capacitor/core';
@@ -19,7 +19,14 @@ export class PagePublisher implements OnInit
     public  segment:string = 'clusters';
     private translations: Array<string> = [];
 
-    constructor(private nav: NavController, private actionSheetController: ActionSheetController, private translate: TranslateService) { }
+    constructor
+    (
+        private nav: NavController,
+        private actionSheetController: ActionSheetController,
+        private translate: TranslateService,
+        private modalController: ModalController
+    )
+    { }
 
     ngOnInit(): void
     {
@@ -80,9 +87,10 @@ export class PagePublisher implements OnInit
         pipe(tap((actionSheet: HTMLIonActionSheetElement) => actionSheet.present()));
     }
 
-    public dismissModal(): void
+    public dismiss(): void
     {
-//        this.viewController.dismiss();
+        console.log('hi');
+        this.modalController.dismiss();
         StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 }

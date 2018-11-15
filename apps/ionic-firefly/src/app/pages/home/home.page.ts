@@ -39,15 +39,6 @@ export class PageHome
 
     public AlertsModalType: any = AlertsModalType;
 
-    public modals: Array<HTMLIonModalElement> =
-    [
-        null,
-        null,
-        null,
-        null,
-        null
-    ];
-
     public pages: Array<any> =
     [
         PageStream,
@@ -73,22 +64,8 @@ export class PageHome
 
     navigate(type: AlertsModalType): void
     {
-        let modal: HTMLIonModalElement = this.modals[type];
-
-        if (modal == null)
-        {
-            from(this.modalController.create({ component: this.pages[type] })).
-            subscribe((element: HTMLIonModalElement) =>
-            {
-                modal = this.modals[type] = element;
-
-                modal.present();
-            })
-        }
-        else
-        {
-            modal.present();
-        }
+        from(this.modalController.create({ component: this.pages[type] })).
+        subscribe((element: HTMLIonModalElement) => element.present());
     }
 
     deleteConfirm()
