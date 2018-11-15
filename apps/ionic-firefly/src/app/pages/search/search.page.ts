@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
+import { ModalController } from '@ionic/angular';
 
 import { StatusBar } from '@theory/capacitor';
 
@@ -12,7 +13,7 @@ import { StatusBar } from '@theory/capacitor';
 
 export class PageSearch
 {
-    constructor()
+    constructor(private modalController: ModalController)
     {
 
     }
@@ -22,8 +23,8 @@ export class PageSearch
         StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
-    public dismissModal(): void
+    public dismiss(): void
     {
-//        this.viewController.dismiss();
+        this.modalController.dismiss();
     }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component
 ({
@@ -11,13 +12,18 @@ export class PageUser
 {
     public segment: string = 'assets';
 
-    constructor()
+    constructor(private modalController: ModalController)
     {
 
     }
 
-    public segmentChanged(segment: string)
+    public segmentChanged(segment: string): void
     {
         this.segment = segment;
+    }
+
+    public dismiss(): void
+    {
+        this.modalController.dismiss();
     }
 }
