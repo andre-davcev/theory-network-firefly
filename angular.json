@@ -4,8 +4,8 @@
   "newProjectRoot": "",
   "projects": {
     "ionic-firefly": {
-      "root": "apps/ionic-firefly/",
-      "sourceRoot": "apps/ionic-firefly/src",
+      "root": "apps/firefly/mobile/",
+      "sourceRoot": "apps/firefly/mobile/src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
