@@ -46,7 +46,7 @@ export class PagePublisher implements OnInit
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     public add()
@@ -89,8 +89,7 @@ export class PagePublisher implements OnInit
 
     public dismiss(): void
     {
-        console.log('hi');
+        StatusBar.setStyle({style: StatusBarStyle.Light});
         this.modalController.dismiss();
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 }
