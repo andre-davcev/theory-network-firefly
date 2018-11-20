@@ -20,6 +20,7 @@
       "mikael.angular-beastcode",
       "johnpapa.angular2",
       "shan.code-settings-sync",
-      "github.vscode-pull-request-github"
+      "github.vscode-pull-request-github",
+      "peterjausovec.vscode-docker"
   ]
 }
