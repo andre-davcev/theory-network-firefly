@@ -32,13 +32,13 @@ export class PageStream
 
     public ionViewWillEnter(): void
     {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     public dismiss(): void
     {
+        StatusBar.setStyle({style: StatusBarStyle.Light});
         this.modalController.dismiss();
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     public subscribe(subscription: Subscription)

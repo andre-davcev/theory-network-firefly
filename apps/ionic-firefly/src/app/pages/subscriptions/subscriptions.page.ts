@@ -20,12 +20,12 @@ export class PageSubscriptions
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     public dismiss(): void
     {
+        StatusBar.setStyle({style: StatusBarStyle.Light});
         this.modalController.dismiss();
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 }

@@ -20,11 +20,12 @@ export class PageSearch
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
+        StatusBar.setStyle({style: StatusBarStyle.Light});
     }
 
     public dismiss(): void
     {
+        StatusBar.setStyle({style: StatusBarStyle.Light});
         this.modalController.dismiss();
     }
 }

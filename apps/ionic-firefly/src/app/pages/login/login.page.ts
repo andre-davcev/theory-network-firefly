@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { StatusBarStyle } from '@capacitor/core';
 
 import { StateUser, ActionUserAuthenticate, ActionLoginEmail } from '@firefly/core';
+import { StatusBar } from '@theory/capacitor';
 
 @Component
 ({
@@ -31,6 +33,11 @@ export class PageLogin implements OnInit
         subscribe(() => this.nav.navigateRoot('/home'))
 
         this.store.dispatch(new ActionUserAuthenticate());
+    }
+
+    public ionViewWillEnter(): void
+    {
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     login()
