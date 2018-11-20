@@ -108,13 +108,13 @@
         "libs/firefly/mobile/src/state/*"
       ],
       "@firefly/app/env": [
-        "apps/ionic-firefly/src/environments/environment.ts"
+        "apps/firefly/mobile/src/environments/environment.ts"
       ],
       "@firefly/app/*": [
-        "apps/ionic-firefly/src/app/*"
+        "apps/firefly/mobile/src/app/*"
       ],
       "@firefly/app/page/*": [
-        "apps/ionic-firefly/src/app/pages/*"
+        "apps/firefly/mobile/src/app/pages/*"
       ]
     }
   },
