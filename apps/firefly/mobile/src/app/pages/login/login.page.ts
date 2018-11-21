@@ -27,6 +27,8 @@ export class PageLogin implements OnInit
 
     public ngOnInit(): void
     {
+        StatusBar.show();
+
         this.login();
         this.userFound$.
         pipe(filter((userFound: boolean) => userFound), take(1)).
@@ -37,7 +39,7 @@ export class PageLogin implements OnInit
 
     public ionViewWillEnter(): void
     {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
     login()

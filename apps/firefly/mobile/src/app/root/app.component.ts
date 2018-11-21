@@ -23,11 +23,7 @@ export class ComponentApp
         if (this.platform.is(PlatformEnum.Cordova))
         {
             from(this.platform.ready()).
-            pipe
-            (
-                switchMap(() => from(StatusBar.show())),
-                delay(100)
-            ).
+            pipe(delay(100)).
             subscribe(() => SplashScreen.hide());
         }
     }
