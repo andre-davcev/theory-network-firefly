@@ -21,7 +21,6 @@
     "lib-build-firefly-mobile": "ng build firefly-mobile",
     "lib-build-theory-capacitor": "ng build capacitor",
     "lib-build-theory-core": "ng build core",
-    "lib-build-theory-device": "ng build device",
     "lib-build-theory-firebase": "ng build firebase",
     "lib-build-theory-foursquare": "ng build foursquare",
     "lib-build-theory-google": "ng build google",

@@ -6,8 +6,8 @@ import { Inject } from '@angular/core';
 
 import { FoursquareResponseVenueSearch } from '@theory/foursquare';
 import { EnvironmentPlaces } from '@theory/google';
+import { StateLocation } from '@theory/capacitor';
 
-import { StateLocation } from '@firefly/core/state/location';
 import { StatePlacesModel } from './places.state.model';
 import { StatePlacesOptions } from './places.state.options';
 import { ActionPlaceSearch } from './places.actions';
