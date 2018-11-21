@@ -1,7 +1,7 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 
-import { Geolocation } from '@theory/capacitor';
+import { Geolocation } from '../../constants';
 
 import { StateLocationModel } from './location.state.model';
 import { StateLocationOptions } from './location.state.options';

@@ -7,8 +7,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AuthProvider } from '@theory/firebase';
+import { StateLanguage, ActionLanguageGet, ActionLanguageSet } from '@theory/capacitor';
 
-import { StateLanguage, ActionLanguageGet, ActionLanguageSet } from '@firefly/core/state/language';
 import { User } from '@firefly/core/models';
 import { ActionAlertsGet } from '@firefly/core/state/alert';
 import { StateUserModel } from './user.state.model';

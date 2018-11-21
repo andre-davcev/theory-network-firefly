@@ -3,7 +3,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { GeolocationPosition } from '@capacitor/core';
 
-import { StateDevice, StateLocation } from '@firefly/core/state';
+import { StateDevice, StateLocation } from '@theory/capacitor';
 //import { ComponentMapOrb } from '../map-orb/map-orb.component';
 
 

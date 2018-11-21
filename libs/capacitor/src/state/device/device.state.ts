@@ -3,7 +3,8 @@ import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DeviceInfo } from '@capacitor/core';
 
-import { Platform, Device } from '@theory/capacitor';
+import { Device } from '../../constants';
+import { Platform } from '../../enums';
 
 import { StateDeviceModel } from './device.state.model';
 import { StateDeviceOptions } from './device.state.options';
@@ -21,7 +22,7 @@ export class StateDevice
     @Selector() static android(state: StateDeviceModel) {return state.android;}
     @Selector() static ios(state: StateDeviceModel)     {return state.ios;}
 
-    constructor(public platform: Platform) {}
+    constructor() {}
 
     ngxsOnInit(context: StateContext<StateDeviceModel>)
     {

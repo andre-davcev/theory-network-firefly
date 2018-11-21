@@ -23,12 +23,6 @@
       "@theory/core/feature/*": [
         "../../../../libs/core/src/features/*"
       ],
-      "@theory/device": [
-        "../../../../libs/device/index.ts"
-      ],
-      "@theory/device/*": [
-        "../../../../libs/device/src/*"
-      ],
       "@theory/firebase": [
         "../../../../libs/firebase/index.ts"
       ],

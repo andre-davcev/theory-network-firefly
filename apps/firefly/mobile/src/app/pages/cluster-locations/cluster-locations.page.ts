@@ -5,7 +5,8 @@ import { Observable, from } from 'rxjs';
 import { filter, take, switchMap } from 'rxjs/operators';
 import { Select } from '@ngxs/store';
 
-import { StateCluster, StateLocation } from '@firefly/core';
+import { StateCluster } from '@firefly/core';
+import { StateLocation } from '@theory/capacitor';
 
 @Component
 ({

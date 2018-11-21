@@ -58,7 +58,6 @@
     "@nrwl/nx": "file:../../../node_modules/@nrwl/nx",
     "@theory/capacitor": "file:../../../libs/capacitor",
     "@theory/core": "file:../../../libs/core",
-    "@theory/device": "file:../../../libs/device",
     "@theory/firebase": "file:../../../libs/firebase",
     "@theory/foursquare": "file:../../../libs/foursquare",
     "@theory/google": "file:../../../libs/google",
