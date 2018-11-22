@@ -1,28 +1,28 @@
 <ion-header>
-    <ion-toolbar dark>
+    <ion-toolbar elevation="2">
         <ion-segment (ionChange)="segmentChanged($event)">
-            <ion-segment-button value="assets">{{'tabs.settings.assets' | translate}}</ion-segment-button>
-            <ion-segment-button value="profile">{{'tabs.settings.profile' | translate}}</ion-segment-button>
+            <ion-segment-button value="assets">
+                <ion-label>{{'tabs.settings.assets' | translate}}</ion-label>
+            </ion-segment-button>
+
+            <ion-segment-button value="profile">
+                <ion-label>{{'tabs.settings.profile' | translate}}</ion-label>
+            </ion-segment-button>
         </ion-segment>
 
         <ion-buttons slot="primary">
-            <ion-button (click)="dismiss()">{{'general.done' | translate}}</ion-button>
+            <ion-button color="primary" (click)="dismiss()">{{'general.done' | translate}}</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [ngSwitch]="segment">
     <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="segment === 'assets'">
-        <ion-fab-button color="secondary">
+        <ion-fab-button color="secondary" mode="md">
             <ion-icon name="md-add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 
-    <ion-list *ngSwitchCase="'assets'">
-        <app-page-publisher-assets></app-page-publisher-assets>
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'profile'">
-        <app-page-user-profile></app-page-user-profile>
-    </ion-list>
+    <app-page-publisher-assets *ngSwitchCase="'assets'"></app-page-publisher-assets>
+    <app-page-user-profile *ngSwitchCase="'profile'"></app-page-user-profile>
 </ion-content>
