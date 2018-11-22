@@ -6,6 +6,7 @@ import { ModulePageUserProfile } from '@firefly/app/page/user-profile';
 import { ModulePagePublisherAssets } from '@firefly/app/page/publisher-assets';
 
 import { PageUser } from './user.page';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 @NgModule
 ({
@@ -13,7 +14,8 @@ import { PageUser } from './user.page';
     [
         ModulePage,
         ModulePageUserProfile,
-        ModulePagePublisherAssets
+        ModulePagePublisherAssets,
+        ModuleDirectiveElevation
     ],
 
     declarations : [PageUser],

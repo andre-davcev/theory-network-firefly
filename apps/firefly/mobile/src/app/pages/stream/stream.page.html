@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar dark>
+    <ion-toolbar>
         <ion-title>{{'page.stream.title' | translate}}</ion-title>
 
         <ion-buttons slot="primary">
@@ -10,7 +10,7 @@
 
 <ion-content>
     <ion-list>
-        <ion-item no-lines *ngFor="let subscription of subscriptions$ | async">
+        <ion-item lines="none" *ngFor="let subscription of subscriptions$ | async">
             <ion-card>
                 <img [src]="subscription.photo">
 

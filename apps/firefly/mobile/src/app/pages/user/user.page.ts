@@ -24,6 +24,7 @@ export class PageUser
 
     public segmentChanged(segment: string): void
     {
+        console.log(`Segment: ${JSON.stringify(segment)}`);
         this.segment = segment;
     }
 
