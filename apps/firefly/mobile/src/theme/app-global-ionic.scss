@@ -3,5 +3,12 @@
 ion-header {
     ion-toolbar {
         --padding-top: 20px;
+        position: relative;
+
+        ion-segment {
+          position: absolute;
+          top: 16px;
+          left: 0;
+        }
     }
 }
