@@ -22,10 +22,9 @@ export class PageUser
         StatusBar.setStyle({style: StatusBarStyle.Dark});
     }
 
-    public segmentChanged(segment: string): void
+    public segmentChanged(event: any): void
     {
-        console.log(`Segment: ${JSON.stringify(segment)}`);
-        this.segment = segment;
+        this.segment = event.target.value;
     }
 
     public dismiss(): void

@@ -1,7 +1,7 @@
 <ion-header>
-    <ion-toolbar elevation="2">
-        <ion-segment (ionChange)="segmentChanged($event)">
-            <ion-segment-button value="assets">
+    <ion-toolbar elevation="2" color="dark">
+        <ion-segment (ionChange)="segmentChanged($event)" color="primary" value="assets">
+            <ion-segment-button value="assets" checked>
                 <ion-label>{{'tabs.settings.assets' | translate}}</ion-label>
             </ion-segment-button>
 

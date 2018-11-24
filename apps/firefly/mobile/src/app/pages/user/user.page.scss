@@ -1,14 +1,10 @@
 @import "variables";
 
 ion-toolbar {
-    --background: var(--ion-color-dark);
-
-    ion-segment-button {
-        --color: var(--ion-color-primary);
-        --border-color: var(--ion-color-primary);
-
-        --color-checked: var(--ion-color-dark);
-        --background-checked: var(--ion-color-primary);
+    ion-segment {
+        ion-segment-button {
+            --color-checked: var(--ion-color-dark);
+        }
     }
 }
 
