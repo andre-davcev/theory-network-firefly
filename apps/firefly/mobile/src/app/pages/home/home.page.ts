@@ -11,11 +11,9 @@ import { PageUser } from '@firefly/app/page/user';
 import { PagePublisherCluster } from '@firefly/app/page/cluster';
 import { PageSubscriptions } from '@firefly/app/page/subscriptions';
 import { PageSearch } from '@firefly/app/page/search';
-import { PageStream } from '@firefly/app/page/stream';
 
 export enum AlertsModalType
 {
-    Feed,
     Search,
     Publish,
     Subscriptions,
@@ -41,7 +39,6 @@ export class PageHome
 
     public pages: Array<any> =
     [
-        PageStream,
         PageSearch,
         PagePublisherCluster,
         PageSubscriptions,

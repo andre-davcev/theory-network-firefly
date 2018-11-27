@@ -76,4 +76,12 @@
   --ion-color-dark-contrast-rgb: 255,255,255;
   --ion-color-dark-shade: #1e1e1e;
   --ion-color-dark-tint: #383838;
+
+  /** grey **/
+  --ion-color-grey: #{$app-color-grey-lighter};
+  --ion-color-grey-rgb: 34,34,34;
+  --ion-color-grey-contrast: #000;
+  --ion-color-grey-contrast-rgb: 0,0,0;
+  --ion-color-grey-shade: #{$app-color-grey-lighter};
+  --ion-color-grey-tint: #{$app-color-grey-lighter};
 }

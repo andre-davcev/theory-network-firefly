@@ -16,7 +16,7 @@
             cursor: pointer;
             padding-left: 4px;
 
-            > ion-icon[item-start]
+            > ion-icon[slot="start"]
             {
                 margin-right: 0;
                 color: $app-color-accent;

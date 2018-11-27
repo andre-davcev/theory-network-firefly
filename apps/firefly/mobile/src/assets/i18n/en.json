@@ -1,5 +1,6 @@
 {
   "general.delete"        : "Delete",
+  "general.location"      : "Location",
   "general.locations"     : "Locations",
   "general.description"   : "Description",
   "general.categories"    : "Categories",
@@ -47,16 +48,16 @@
 
   "page.subscriptions.title" : "Manage Subscriptions",
 
-  "page.cluster.title"                  : "Cluster",
-  "page.cluster.titlePlaceholder"       : "Add your title",
-  "page.cluster.subtitlePlaceholder"    : "Add your subtitle",
-  "page.cluster.iconPlaceholder"        : "select icon",
-  "page.cluster.imagePlaceholder"       : "select image",
-  "page.cluster.descriptionPlaceholder" : "Write a description",
+  "page.event.title"                  : "Cluster",
+  "page.event.titlePlaceholder"       : "Add your title",
+  "page.event.subtitlePlaceholder"    : "Add your subtitle",
+  "page.event.iconPlaceholder"        : "select icon",
+  "page.event.imagePlaceholder"       : "select image",
+  "page.event.descriptionPlaceholder" : "Write a description",
 
-  "page.cluster-categories.title"    : "Categories",
-  "page.cluster-locations.title"     : "Locations",
-  "page.cluster-locations-add.title" : "Search Locations",
+  "page.event-categories.title"    : "Categories",
+  "page.event-locations.title"     : "Locations",
+  "page.event-locations-add.title" : "Search Locations",
 
   "page.assets.title"               : "Assets",
   "page.assets.add"                 : "Add Asset",
