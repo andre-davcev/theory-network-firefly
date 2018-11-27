@@ -12,3 +12,15 @@ ion-header {
         }
     }
 }
+
+ion-item {
+  ion-icon {
+      color: #{$app-color-grey-lighter};
+  }
+}
+
+ion-fab-button {
+  &.ion-color-secondary {
+    --background-activated: #{$app-color-accent-darkest};
+  }
+}

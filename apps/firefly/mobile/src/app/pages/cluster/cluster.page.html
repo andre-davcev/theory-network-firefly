@@ -1,9 +1,9 @@
-<ion-header>
-    <ion-toolbar color='white'>
-        <ion-title>{{'page.cluster.title' | translate}}</ion-title>
+<ion-header color="white">
+    <ion-toolbar >
+        <ion-title>{{'page.event.title' | translate}}</ion-title>
 
         <ion-buttons slot="start">
-            <ion-button (click)="dismiss()">{{'general.cancel' | translate}}</ion-button>
+            <ion-button color="dark" (click)="dismiss()">{{'general.cancel' | translate}}</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -13,10 +13,10 @@
     <form novalidate [formGroup]="form$ | async">
         <app-item-header [form]="form$ | async"
                         title="name"
-                        [titlePlaceholder]="'page.cluster.titlePlaceholder' | translate"
+                        [titlePlaceholder]="'page.event.titlePlaceholder' | translate"
                         subtitle="tagline"
-                        [subtitlePlaceholder]="'page.cluster.subtitlePlaceholder' | translate"
-                        [iconPlaceholder]="'page.cluster.iconPlaceholder' | translate"
+                        [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate"
+                        [iconPlaceholder]="'page.event.iconPlaceholder' | translate"
                         iconUrlEmpty="assets/icons/avatar-empty.svg">
         </app-item-header>
 <!--
@@ -26,28 +26,29 @@
         </app-item-header>
 -->
 
-        <app-item-map [title]="'general.locations' | translate" [routerLink]="['/publisher/cluster/locations']"></app-item-map>
+        <app-item-map [title]="'general.location' | translate" [routerLink]="['/publisher/cluster/locations']"></app-item-map>
 
+<!--
         <div class="cpt-detail" fxLayout="column">
             <ion-list>
                 <ion-item [routerLink]="['/publisher/cluster/categories']">
-                    <ion-icon name="logo-buffer" item-start></ion-icon>
+                    <ion-icon name="logo-buffer" slot="start"></ion-icon>
                     <ion-label>{{'general.categories' | translate}}</ion-label>
                 </ion-item>
 
                 <ion-item>
-                    <ion-icon name="lock" item-start></ion-icon>
+                    <ion-icon name="lock" slot="start"></ion-icon>
                     <ion-label>{{'general.isPrivate' | translate}}</ion-label>
                     <ion-toggle formControlName="private" checked="true"></ion-toggle>
                 </ion-item>
             </ion-list>
         </div>
-
+-->
         <app-item-description [form]="form$ | async"
                               [title]="'general.description' | translate"
-                              [descriptionPlaceholder]="'page.cluster.descriptionPlaceholder' | translate"
+                              [descriptionPlaceholder]="'page.event.descriptionPlaceholder' | translate"
                               image="photo"
-                              [imagePlaceholder]="'page.cluster.imagePlaceholder' | translate">
+                              [imagePlaceholder]="'page.event.imagePlaceholder' | translate">
         </app-item-description>
 <!--
         <app-item-description [title]="'general.description' | translate"

@@ -1,6 +1,30 @@
 <ion-list lines="none" elevation="1">
+    <ion-item (click)="go(PagesAssets.Clusters)">
+        <ion-icon name="bug" slot="start"></ion-icon>
+        <ion-label>
+            <h3>{{'page.assets.clusters' | translate}}</h3>
+            <p>{{'page.assets.clustersDescription' | translate}}</p>
+        </ion-label>
+    </ion-item>
+
+    <ion-item (click)="go(PagesAssets.Events)">
+        <ion-icon name="calendar" slot="start"></ion-icon>
+        <ion-label>
+            <h3>{{'page.assets.events' | translate}}</h3>
+            <p>{{'page.assets.eventsDescription' | translate}}</p>
+        </ion-label>
+    </ion-item>
+
+    <ion-item (click)="go(PagesAssets.Places)">
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>
+            <h3>{{'page.assets.places' | translate}}</h3>
+            <p>{{'page.assets.placesDescription' | translate}}</p>
+        </ion-label>
+    </ion-item>
+
     <ion-item (click)="go(PagesAssets.Icons)">
-        <ion-icon name="contact" item-start></ion-icon>
+        <ion-icon name="contact" slot="start"></ion-icon>
         <ion-label>
             <h3>{{'page.assets.icons' | translate}}</h3>
             <p>{{'page.assets.iconsDescription' | translate}}</p>
@@ -8,7 +32,7 @@
     </ion-item>
 
     <ion-item (click)="go(PagesAssets.Images)">
-        <ion-icon name="images" item-start></ion-icon>
+        <ion-icon name="images" slot="start"></ion-icon>
         <ion-label>
             <h3>{{'page.assets.images' | translate}}</h3>
             <p>{{'page.assets.imagesDescription' | translate}}</p>
@@ -16,7 +40,7 @@
     </ion-item>
 <!--
     <ion-item (click)="go(PagesAssets.Coupons)">
-        <ion-icon name="pricetags" item-start></ion-icon>
+        <ion-icon name="pricetags" slot="start"></ion-icon>
         <ion-label>
             <h3>{{'page.assets.coupons' | translate}}</h3>
             <p>{{'page.assets.couponsDescription' | translate}}</p>
@@ -24,34 +48,12 @@
     </ion-item>
 
     <ion-item (click)="go(PagesAssets.Beacons)">
-        <ion-icon name="bluetooth" item-start></ion-icon>
+        <ion-icon name="bluetooth" slot="start"></ion-icon>
         <ion-label>
             <h3>{{'page.assets.beacons' | translate}}</h3>
             <p>{{'page.assets.beaconsDescription' | translate}}</p>
         </ion-label>
     </ion-item>
 -->
-    <ion-item (click)="go(PagesAssets.Places)">
-        <ion-icon name="pin" item-start></ion-icon>
-        <ion-label>
-            <h3>{{'page.assets.places' | translate}}</h3>
-            <p>{{'page.assets.placesDescription' | translate}}</p>
-        </ion-label>
-    </ion-item>
 
-    <ion-item (click)="go(PagesAssets.Events)">
-        <ion-icon name="calendar" item-start></ion-icon>
-        <ion-label>
-            <h3>{{'page.assets.events' | translate}}</h3>
-            <p>{{'page.assets.eventsDescription' | translate}}</p>
-        </ion-label>
-    </ion-item>
-
-    <ion-item (click)="go(PagesAssets.Clusters)">
-        <ion-icon name="bug" item-start></ion-icon>
-        <ion-label>
-            <h3>{{'page.assets.clusters' | translate}}</h3>
-            <p>{{'page.assets.clustersDescription' | translate}}</p>
-        </ion-label>
-    </ion-item>
 </ion-list>

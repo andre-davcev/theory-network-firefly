@@ -28,7 +28,7 @@
                 width: var(--cpt-icon-size);
             }
 
-            &[item-start]
+            &[slot="start"]
             {
                 margin-top: 11px;
                 margin-bottom: 11px;

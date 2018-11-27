@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>{{'page.cluster-locations-add.title' | translate}}</ion-title>
+        <ion-title>{{'page.event-locations-add.title' | translate}}</ion-title>
         <ion-buttons slot="start">
             <ion-button (click)="dismissModal()">{{'general.done' | translate}}</ion-button>
         </ion-buttons>
@@ -12,7 +12,7 @@
 
     <ion-list class="page-list">
         <ion-item *ngFor="let place of results$ | async" (click)="add(place)">
-            <ion-icon name="pin" color="secondary" item-start></ion-icon>
+            <ion-icon name="pin" color="secondary" slot="start"></ion-icon>
             <ion-label>{{ place.description }}</ion-label>
         </ion-item>
     </ion-list>
