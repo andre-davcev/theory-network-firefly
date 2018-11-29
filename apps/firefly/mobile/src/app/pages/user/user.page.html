@@ -18,7 +18,7 @@
 
 <ion-content [ngSwitch]="segment">
     <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="segment === 'assets'">
-        <ion-fab-button color="secondary" mode="md">
+        <ion-fab-button color="secondary" mode="md" (click)="add()">
             <ion-icon name="md-add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
