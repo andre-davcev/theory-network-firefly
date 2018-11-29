@@ -1,4 +1,4 @@
-@import 'app-variables';
+@import 'variables';
 
 ion-header {
     ion-toolbar {
@@ -23,4 +23,8 @@ ion-fab-button {
   &.ion-color-secondary {
     --background-activated: #{$app-color-accent-darkest};
   }
+}
+
+ion-action-sheet {
+  --ion-color-primary: var( --ion-color-dark);
 }
