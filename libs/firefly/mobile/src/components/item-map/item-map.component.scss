@@ -11,13 +11,15 @@
 
     --cpt-background-color:    black;
 
+    width: 100%;
+
     .cpt-title
     {
         color: var(--cpt-font-color);
         font-size: var(--cpt-font-size);
         font-weight: normal;
         line-height: var(--cpt-line-height);
-        margin-bottom: 8px;
+        margin-bottom: 0.5rem;
     }
 
     .cpt-map-window

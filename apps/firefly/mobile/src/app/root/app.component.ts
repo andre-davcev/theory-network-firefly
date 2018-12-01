@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { from } from 'rxjs';
-import { switchMap, delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
+import { Actions, ofActionSuccessful } from '@ngxs/store';
+import { RouterNavigation } from '@ngxs/router-plugin';
 
-import { SplashScreen, StatusBar } from '@theory/capacitor';
+import { SplashScreen } from '@theory/capacitor';
 import { PlatformEnum } from '@theory/ionic';
 
 @Component
@@ -13,7 +15,7 @@ import { PlatformEnum } from '@theory/ionic';
 })
 export class ComponentApp
 {
-    constructor(private platform: Platform)
+    constructor(private platform: Platform, private actions$: Actions)
     {
         this.initializeApp();
     }
@@ -26,5 +28,8 @@ export class ComponentApp
             pipe(delay(100)).
             subscribe(() => SplashScreen.hide());
         }
+
+        this.actions$.pipe(ofActionSuccessful(RouterNavigation)).
+        subscribe((data: any) => console.log(data.event.url));
     }
 }

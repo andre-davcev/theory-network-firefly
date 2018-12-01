@@ -1,4 +1,4 @@
-<div class="cpt-card" fxLayout="column" fxLayoutAlign="space-between center">
+<div class="cpt-card" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1.25rem">
     <section fxLayout="column" fxLayoutGap="0.5rem">
         <h1 class="cpt-title">{{ slide.title }}</h1>
         <h2 class="cpt-short">{{ slide.body }}</h2>
@@ -6,8 +6,10 @@
 
     <section fxLayout="column" fxLayoutGap="0.75rem">
         <ion-img [src]="slide.image"></ion-img>
-        <p class="cpt-paragraph">{{ slide.date }}</p>
+        <span class="cpt-date">{{ slide.date }}</span>
     </section>
+
+    <app-item-map [routerLink]="[routerLink]"></app-item-map>
 
     <div class="cpt-button">{{ buttonText }}</div>
 </div>

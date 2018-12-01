@@ -19,7 +19,7 @@
 
 <ion-slides pager="true" (ionSlideDidChange)="slideChanged()">
     <ion-slide *ngFor="let alert of alerts$ | async">
-        <app-slide [slide]="alert" [buttonText]="'general.go' | translate"></app-slide>
+        <app-slide [slide]="alert" [buttonText]="'general.go' | translate" [routerLink]="'dead/link'"></app-slide>
     </ion-slide>
 </ion-slides>
 

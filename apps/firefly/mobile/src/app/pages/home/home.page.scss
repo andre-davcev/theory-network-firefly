@@ -3,6 +3,8 @@
 $app-card-height: 48px;
 
 :host {
+    --background: #{$app-color-primary};
+
     ion-toolbar {
         --padding-start: 1.25rem;
         --padding-end: 1.25rem;
@@ -29,12 +31,10 @@ $app-card-height: 48px;
         --bullet-background-active: #{$app-color-dark};
 
         background-color: $app-color-primary;
+        position: relative;
         width: 100%;
-        height: calc(100% - 112px);
+        height: 100%;
 
-        position: absolute;
-        top: 68px;
-        left: 0;
     }
 
     ion-slide {

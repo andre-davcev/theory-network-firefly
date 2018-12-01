@@ -1,4 +1,4 @@
-<div padding fxLayout="column">
-    <h4 class="cpt-title" fxFlexAlign="center">{{title}}</h4>
+<div fxLayout="column">
+    <h4 class="cpt-title" fxFlexAlign="center" *ngIf="title">{{title}}</h4>
     <div class="cpt-map-window"></div>
 </div>

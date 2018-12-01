@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ComponentSlide } from './slide.component';
+import { ModuleComponentItemMap } from '../item-map';
 
 @NgModule
 ({
@@ -11,7 +14,10 @@ import { ComponentSlide } from './slide.component';
     [
         CommonModule,
         IonicModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        RouterModule,
+        TranslateModule,
+        ModuleComponentItemMap
     ],
 
     declarations : [ComponentSlide],
