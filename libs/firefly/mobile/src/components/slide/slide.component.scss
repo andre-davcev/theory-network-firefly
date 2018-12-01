@@ -3,8 +3,6 @@
 $app-slide-color-background:                         white;
 
 $app-slide-margin:                                   28px;
-$app-slide-margin-top:                               -24px;
-$app-slide-margin-bottom:                            0;
 $app-slide-padding:                                  30px;
 
 $app-slide-width-margin:                             $app-slide-margin * 2;
@@ -15,17 +13,19 @@ $app-slide-close-size-half:                          $app-slide-close-size / 2;
 $app-slide-close-border-color:                       rgba(46, 47, 45, 0.7);
 $app-slide-close-border-width:                       2px;
 
+
+
 :host
 {
+    --cpt-border-radius: 5px;
+
     position: relative;
     display: flex;
     width: 100%;
 
     background-color: $app-slide-color-background;
-    height: calc(100% - #{$app-slide-height-margin});
     margin: $app-slide-margin;
-    margin-top: $app-slide-margin-top;
-    margin-bottom: $app-slide-margin-bottom;
+    margin-top: -1rem;
     box-shadow: 0 15px 25px 0 rgba(0,0,0,0.20);
     border-radius: 14px;
     padding: $app-slide-padding;
@@ -60,6 +60,11 @@ $app-slide-close-border-width:                       2px;
     .cpt-image
     {
         width: 100%;
+    }
+
+    ion-img {
+        border-radius: var(--cpt-border-radius);
+        overflow: hidden;
     }
 
     .cpt-button

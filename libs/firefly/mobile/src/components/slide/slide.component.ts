@@ -14,6 +14,7 @@ export class ComponentSlide
 {
     @Input() slide: Slide;
     @Input() buttonText: string;
+    @Input() routerLink: string;
 
     constructor() { }
 }

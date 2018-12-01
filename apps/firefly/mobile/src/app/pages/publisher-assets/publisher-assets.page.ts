@@ -3,13 +3,13 @@ import { NavController } from '@ionic/angular';
 
 export enum PagesAssets
 {
-    Icons    = '/publisher/assets/icons',
-    Images   = '/publisher/assets/images',
-    Coupons  = '/publisher/assets/coupons',
-    Beacons  = '/publisher/assets/beacons',
-    Places   = '/publisher/assets/places',
-    Events   = '/publisher/assets/events',
-    Clusters = '/publisher/assets/clusters'
+    Icons    = '/assets/icons',
+    Images   = '/assets/images',
+    Coupons  = '/assets/coupons',
+    Beacons  = '/assets/beacons',
+    Places   = '/assets/places',
+    Events   = '/assets/events',
+    Clusters = '/assets/clusters'
 }
 
 @Component
