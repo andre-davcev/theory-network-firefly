@@ -11,6 +11,9 @@
 
     --cpt-background-color:    black;
 
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
 
     .cpt-title
