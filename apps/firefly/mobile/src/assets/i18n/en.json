@@ -53,7 +53,7 @@
   "page.event.subtitlePlaceholder"    : "Add your subtitle",
   "page.event.iconPlaceholder"        : "select icon",
   "page.event.imagePlaceholder"       : "select image",
-  "page.event.descriptionPlaceholder" : "Write a description",
+  "page.event.descriptionPlaceholder" : "Write a description ...",
 
   "page.event-categories.title"    : "Categories",
   "page.event-locations.title"     : "Locations",
