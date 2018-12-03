@@ -14,7 +14,8 @@ export enum PagesHome
     Search        = 'search',
     Publish       = 'publish',
     Subscriptions = 'subscriptions',
-    Settings      = 'settings'
+    Assets        = 'assets',
+    User          = 'user'
 }
 
 @Component
