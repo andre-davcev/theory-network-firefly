@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ActionSheetController, NavController } from '@ionic/angular';
+import { ActionSheetController, NavController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { StatusBar } from '@theory/capacitor';
@@ -21,7 +21,6 @@ export class PageUser implements OnInit
 
     constructor
     (
-        private modalController: ModalController,
         private actionSheetController: ActionSheetController,
         private nav: NavController,
         private translate: TranslateService,
@@ -57,7 +56,6 @@ export class PageUser implements OnInit
     public dismiss(): void
     {
         StatusBar.setStyle({style: StatusBarStyle.Light});
-        this.modalController.dismiss();
     }
 
     public add(): void

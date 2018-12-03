@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { ModalController } from '@ionic/angular';
 
 import { StatusBar } from '@theory/capacitor';
 
@@ -13,7 +12,7 @@ import { StatusBar } from '@theory/capacitor';
 
 export class PageSubscriptions
 {
-    constructor(private modalController: ModalController)
+    constructor()
     {
 
     }
@@ -26,6 +25,5 @@ export class PageSubscriptions
     public dismiss(): void
     {
         StatusBar.setStyle({style: StatusBarStyle.Light});
-        this.modalController.dismiss();
     }
 }

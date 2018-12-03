@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { ModulePage } from '@firefly/app/modules';
 
 import { PageAssetsImages } from './assets-images.page';
+import { RoutesPageAssetsImages } from './assets-images.page.routes';
 
 @NgModule
 ({
     imports :
     [
-        ModulePage
+        ModulePage,
+        RouterModule.forChild(RoutesPageAssetsImages)
     ],
 
     declarations : [PageAssetsImages],

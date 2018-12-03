@@ -107,7 +107,10 @@
       "@firefly/app/*": [
         "apps/firefly/mobile/src/app/*"
       ],
-      "@firefly/app/page/*": [
+      "@firefly/page": [
+        "./src/app/pages"
+      ],
+      "@firefly/page/*": [
         "apps/firefly/mobile/src/app/pages/*"
       ]
     }

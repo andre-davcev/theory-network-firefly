@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ActionSheetController, NavController, ModalController } from '@ionic/angular';
+import { ActionSheetController, NavController } from '@ionic/angular';
 import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StatusBarStyle } from '@capacitor/core';
@@ -23,8 +23,7 @@ export class PagePublisher implements OnInit
     (
         private nav: NavController,
         private actionSheetController: ActionSheetController,
-        private translate: TranslateService,
-        private modalController: ModalController
+        private translate: TranslateService
     )
     { }
 
@@ -90,6 +89,5 @@ export class PagePublisher implements OnInit
     public dismiss(): void
     {
         StatusBar.setStyle({style: StatusBarStyle.Light});
-        this.modalController.dismiss();
     }
 }

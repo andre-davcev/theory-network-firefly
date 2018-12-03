@@ -1,4 +1,5 @@
 export * from './assets-beacons';
+export * from './assets-clusters';
 export * from './assets-coupons';
 export * from './assets-events';
 export * from './assets-icon';

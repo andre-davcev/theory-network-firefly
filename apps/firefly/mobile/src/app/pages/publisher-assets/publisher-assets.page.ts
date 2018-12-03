@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 export enum PagesAssets
 {
-    Icons    = '/assets/icons',
-    Images   = '/assets/images',
-    Coupons  = '/assets/coupons',
-    Beacons  = '/assets/beacons',
-    Places   = '/assets/places',
-    Events   = '/assets/events',
-    Clusters = '/assets/clusters'
+    Icons    = 'icons',
+    Images   = 'images',
+    Coupons  = 'coupons',
+    Beacons  = 'beacons',
+    Places   = 'places',
+    Events   = 'events',
+    Clusters = 'clusters'
 }
 
 @Component
@@ -23,10 +24,10 @@ export class PagePublisherAssets
 {
     public PagesAssets: any = PagesAssets;
 
-    constructor(private nav: NavController) { }
+    constructor(private router: Router) { }
 
     public go(page: PagesAssets): void
     {
-        this.nav.navigateForward([page]);
+        this.router.navigate([`/home/settings/${page}`]);
     }
 }

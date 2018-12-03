@@ -1,23 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { Slides, AlertController, ModalController } from '@ionic/angular';
+import { Slides, AlertController } from '@ionic/angular';
 import { Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { StatusBar } from '@theory/capacitor';
 import { Alert, StateAlerts } from '@firefly/core';
-import { PageUser } from '@firefly/app/page/user';
-import { PagePublisherCluster } from '@firefly/app/page/cluster';
-import { PageSubscriptions } from '@firefly/app/page/subscriptions';
-import { PageSearch } from '@firefly/app/page/search';
+import { Router } from '@angular/router';
 
-export enum AlertsModalType
+export enum PagesHome
 {
-    Search,
-    Publish,
-    Subscriptions,
-    Settings
+    Search        = 'search',
+    Publish       = 'publish',
+    Subscriptions = 'subscriptions',
+    Settings      = 'settings'
 }
 
 @Component
@@ -35,17 +32,9 @@ export class PageHome
 
     @Select(StateAlerts.alerts) alerts$: Observable<Array<Alert>>;
 
-    public AlertsModalType: any = AlertsModalType;
+    public PagesHome: any = PagesHome;
 
-    public pages: Array<any> =
-    [
-        PageSearch,
-        PagePublisherCluster,
-        PageSubscriptions,
-        PageUser
-    ];
-
-    constructor(public alertController: AlertController, private modalController: ModalController) { }
+    constructor(public alertController: AlertController, private router: Router) { }
 
     ionViewWillEnter()
     {
@@ -59,10 +48,9 @@ export class PageHome
         pipe(tap((index: number) => console.log('Slide Changed: ' + index)));
     }
 
-    navigate(type: AlertsModalType): void
+    navigate(type: PagesHome): void
     {
-        from(this.modalController.create({ component: this.pages[type] })).
-        subscribe((element: HTMLIonModalElement) => element.present());
+        this.router.navigate([`/home/${type}`]);
     }
 
     deleteConfirm()
