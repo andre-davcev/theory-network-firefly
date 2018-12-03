@@ -9,5 +9,6 @@ export const RoutesPageHome: Routes =
     { path: PagesHome.Search,        loadChildren: '@firefly/page/search#ModulePageSearch' },
     { path: PagesHome.Subscriptions, loadChildren: '@firefly/page/subscriptions#ModulePageSubscriptions' },
     { path: PagesHome.Publish,       loadChildren: '@firefly/page/cluster#ModulePagePublisherCluster' },
-    { path: PagesHome.Settings,      loadChildren: '@firefly/page/user#ModulePageUser' }
+    { path: PagesHome.Assets,        loadChildren: '@firefly/page/user#ModulePageUser' },
+    { path: PagesHome.User,          loadChildren: '@firefly/page/user#ModulePageUser' },
 ];
