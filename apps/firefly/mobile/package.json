@@ -6,6 +6,7 @@
     "postinstall": "node scripts/version.js",
     "ng": "ng",
     "start": "ionic serve",
+    "watch": "ionic serve --watch",
     "build:web": "ng build",
     "build:ionic": "ng build && npm run cap.copy",
     "build:mobile": "npm run cap.copy && npm run cap.update",
