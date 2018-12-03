@@ -20,7 +20,10 @@
       "@firefly/app/*": [
         "./src/app/*"
       ],
-      "@firefly/app/page/*": [
+      "@firefly/page": [
+        "./src/app/pages"
+      ],
+      "@firefly/page/*": [
         "./src/app/pages/*"
       ]
     }

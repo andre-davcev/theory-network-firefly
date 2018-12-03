@@ -87,7 +87,10 @@
       "@firefly/app/*": [
         "./app/*"
       ],
-      "@firefly/app/page/*": [
+      "@firefly/page": [
+        "./app/pages"
+      ],
+      "@firefly/page/*": [
         "./app/pages/*"
       ]
     }

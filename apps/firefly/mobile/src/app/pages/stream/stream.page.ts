@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
-import { ModalController } from '@ionic/angular';
 
 import { StatusBar } from '@theory/capacitor';
 import { ActionSetCluster, StateSubscriptions, Subscription, Cluster } from '@firefly/core';
@@ -18,7 +17,7 @@ export class PageStream
 {
     @Select(StateSubscriptions.subscriptions) subscriptions$: Observable<Array<Subscription>>;
 
-    constructor(private store: Store, private modalController: ModalController)
+    constructor(private store: Store)
     {
         const cluster: Cluster =
         {
@@ -38,7 +37,6 @@ export class PageStream
     public dismiss(): void
     {
         StatusBar.setStyle({style: StatusBarStyle.Light});
-        this.modalController.dismiss();
     }
 
     public subscribe(subscription: Subscription)

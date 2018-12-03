@@ -5,8 +5,8 @@ export const routes: Routes =
 [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-    { path: 'login', loadChildren: '@firefly/app/page/login#ModulePageLogin' },
-    { path: 'home',  loadChildren: '@firefly/app/page/home#ModulePageHome' }
+    { path: 'login', loadChildren: '@firefly/page/login#ModulePageLogin' },
+    { path: 'home',  loadChildren: '@firefly/page/home#ModulePageHome' }
 ];
 
 @NgModule

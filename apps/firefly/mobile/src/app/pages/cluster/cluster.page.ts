@@ -6,7 +6,6 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { StatusBar } from '@theory/capacitor';
 import { StateCluster, ActionSetClusterId } from '@firefly/core';
-import { ModalController } from '@ionic/angular';
 
 @Component
 ({
@@ -21,7 +20,7 @@ export class PagePublisherCluster
 
     segment:string = 'clusters';
 
-    constructor(private store: Store, private modalController: ModalController)
+    constructor(private store: Store)
     {
         this.store.dispatch(new ActionSetClusterId('new'));
     }
@@ -34,6 +33,5 @@ export class PagePublisherCluster
     public dismiss(): void
     {
         StatusBar.setStyle({style: StatusBarStyle.Light});
-        this.modalController.dismiss();
     }
 }

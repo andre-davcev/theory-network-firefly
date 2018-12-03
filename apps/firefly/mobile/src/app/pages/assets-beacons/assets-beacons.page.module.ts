@@ -3,12 +3,15 @@ import { NgModule } from '@angular/core';
 import { ModulePage } from '@firefly/app/modules';
 
 import { PageAssetsBeacons } from './assets-beacons.page';
+import { RouterModule } from '@angular/router';
+import { RoutesPageAssetsBeacons } from './assets-beacons.page.routes';
 
 @NgModule
 ({
     imports :
     [
-        ModulePage
+        ModulePage,
+        RouterModule.forChild(RoutesPageAssetsBeacons)
     ],
 
     declarations : [PageAssetsBeacons],
