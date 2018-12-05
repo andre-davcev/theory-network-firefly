@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { ModulePage } from '@firefly/app/modules';
 
 import { PageSubscriptions } from './subscriptions.page';
+import { RoutesPageSubscriptions } from './subscriptions.page.routes';
 
 @NgModule
 ({
     imports :
     [
-        ModulePage
+        ModulePage,
+        RouterModule.forChild(RoutesPageSubscriptions)
     ],
 
     declarations : [PageSubscriptions],

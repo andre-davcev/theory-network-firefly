@@ -6,6 +6,7 @@ import { ModuleComponentItemHeader, ModuleComponentItemDescription, ModuleCompon
 import { ModulePage } from '@firefly/app/modules';
 
 import { PagePublisherCluster } from './cluster.page';
+import { RoutesPagePublishEvent } from './cluster.page.routes';
 
 @NgModule
 ({
@@ -16,7 +17,8 @@ import { PagePublisherCluster } from './cluster.page';
         ModulePage,
         ModuleComponentItemHeader,
         ModuleComponentItemMap,
-        ModuleComponentItemDescription
+        ModuleComponentItemDescription,
+        RouterModule.forChild(RoutesPagePublishEvent)
     ],
 
     declarations : [PagePublisherCluster],
