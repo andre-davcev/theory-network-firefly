@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, NavController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { from, Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { PagesAssets } from '../publisher-assets';
+import { Store } from '@ngxs/store';
 
 @Component
 ({
@@ -24,6 +25,7 @@ export class PageUser implements OnInit
         private actionSheetController: ActionSheetController,
         private nav: NavController,
         private translate: TranslateService,
+        private store: Store
     ) { }
 
     ngOnInit(): void
@@ -45,17 +47,12 @@ export class PageUser implements OnInit
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
     public segmentChanged(event: any): void
     {
         this.segment = event.target.value;
-    }
-
-    public dismiss(): void
-    {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
     }
 
     public add(): void

@@ -11,6 +11,9 @@ export const StateDeviceOptions: StoreOptions<StateDeviceModel> =
         loading : false,
         device  : false,
         ios     : false,
-        android : false
+        android : false,
+
+        statusBar: undefined,
+        statusBarVisible: false
     }
 };

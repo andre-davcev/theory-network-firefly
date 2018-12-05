@@ -7,7 +7,7 @@ import { NavController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { StateUser, ActionUserAuthenticate, ActionLoginEmail } from '@firefly/core';
-import { StatusBar } from '@theory/capacitor';
+import { StatusBar, ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/capacitor';
 
 @Component
 ({
@@ -27,19 +27,17 @@ export class PageLogin implements OnInit
 
     public ngOnInit(): void
     {
-        StatusBar.show();
-
         this.login();
         this.userFound$.
         pipe(filter((userFound: boolean) => userFound), take(1)).
         subscribe(() => this.nav.navigateRoot('/home'))
 
-        this.store.dispatch(new ActionUserAuthenticate());
+        this.store.dispatch([new ActionDeviceStatusBarShow(), new ActionUserAuthenticate()]);
     }
 
     public ionViewWillEnter(): void
     {
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
     login()

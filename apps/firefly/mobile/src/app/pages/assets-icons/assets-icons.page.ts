@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { Store } from '@ngxs/store';
 
 @Component
 ({
@@ -19,8 +20,10 @@ export class PageAssetsIcons
         'assets/icons/temp-coffee-icon-brown.png'
     ];
 
+    constructor(private store: Store) { }
+
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 }

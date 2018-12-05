@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Subscription, Cluster, StateSubscriptions } from '@firefly/core';
 
 @Component
@@ -17,11 +17,11 @@ export class PagePublisherClusters
 {
     @Select(StateSubscriptions.subscriptions) subscriptions$: Observable<Array<Subscription>>;
 
-    constructor() { }
+    constructor(private store: Store) { }
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     public clicked(cluster: Cluster)

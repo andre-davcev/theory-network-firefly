@@ -3,7 +3,7 @@ import { Select, Store } from '@ngxs/store';import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateIcons, ActionSetIconId } from '@firefly/core';
 
 @Component
@@ -24,6 +24,6 @@ export class PageAssetsIcon
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 }
