@@ -1,26 +1,29 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { from } from 'rxjs';
+import { from, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DeviceInfo } from '@capacitor/core';
+import { DeviceInfo, StatusBarStyleOptions } from '@capacitor/core';
 
-import { Device } from '../../constants';
+import { Device, StatusBar } from '../../constants';
 import { Platform } from '../../enums';
 
 import { StateDeviceModel } from './device.state.model';
 import { StateDeviceOptions } from './device.state.options';
-import { ActionDeviceInitialize } from './device.actions';
+import { ActionDeviceInitialize, ActionDeviceStatusBarSet, ActionDeviceStatusBarShow, ActionDeviceStatusBarHide } from './device.actions';
 
 @State<StateDeviceModel>(StateDeviceOptions)
 
 export class StateDevice
 {
-    @Selector() static loading(state: StateDeviceModel) {return state.loading;}
+    @Selector() static loading(state: StateDeviceModel): boolean {return state.loading;}
 
-    @Selector() static device(state: StateDeviceModel) {return state.device;}
-    @Selector() static web(state: StateDeviceModel)    {return !state.device;}
+    @Selector() static device(state: StateDeviceModel): boolean {return state.device;}
+    @Selector() static web(state: StateDeviceModel): boolean    {return !state.device;}
 
-    @Selector() static android(state: StateDeviceModel) {return state.android;}
-    @Selector() static ios(state: StateDeviceModel)     {return state.ios;}
+    @Selector() static android(state: StateDeviceModel): boolean {return state.android;}
+    @Selector() static ios(state: StateDeviceModel): boolean     {return state.ios;}
+
+    @Selector() static statusBar(state: StateDeviceModel): StatusBarStyleOptions {return state.statusBar;}
+    @Selector() static statusBarVisible(state: StateDeviceModel): boolean {return state.statusBarVisible;}
 
     constructor() {}
 
@@ -45,5 +48,41 @@ export class StateDevice
                 });
             })
         );
+    }
+
+    @Action(ActionDeviceStatusBarSet)
+    statusBarSet({ getState, patchState } : StateContext<StateDeviceModel>, { payload }: ActionDeviceStatusBarSet)
+    {
+        const options: StatusBarStyleOptions = payload;
+        const state: StateDeviceModel = getState();
+        const optionsPrevious: StatusBarStyleOptions = StateDevice.statusBar(state);
+        const isDevice: boolean = StateDevice.device(state);
+        const setStatusBarOptions: boolean = isDevice && (optionsPrevious == null || options.style !== optionsPrevious.style);
+
+        patchState({ statusBar: options });
+
+        return setStatusBarOptions ? from(StatusBar.setStyle(options)) : of(null);
+    }
+
+    @Action(ActionDeviceStatusBarShow)
+    statusBarShow({ getState, patchState } : StateContext<StateDeviceModel>)
+    {
+        const state: StateDeviceModel = getState();
+        const showStatusBar: boolean = StateDevice.device(state) && !StateDevice.statusBarVisible(state);
+
+        patchState({ statusBarVisible: true });
+
+        return showStatusBar ? from(StatusBar.show()) : of(null);
+    }
+
+    @Action(ActionDeviceStatusBarHide)
+    statusBarHide({ getState, patchState } : StateContext<StateDeviceModel>)
+    {
+        const state: StateDeviceModel = getState();
+        const hideStatusBar: boolean = StateDevice.device(state) && StateDevice.statusBarVisible(state);
+
+        patchState({ statusBarVisible: false });
+
+        return hideStatusBar ? from(StatusBar.hide()) : of(null);
     }
 }

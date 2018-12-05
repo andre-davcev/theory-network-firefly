@@ -5,7 +5,8 @@ import { from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { Store } from '@ngxs/store';
 
 @Component
 ({
@@ -23,7 +24,8 @@ export class PagePublisher implements OnInit
     (
         private nav: NavController,
         private actionSheetController: ActionSheetController,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private store: Store
     )
     { }
 
@@ -45,7 +47,7 @@ export class PagePublisher implements OnInit
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
     public add()
@@ -84,10 +86,5 @@ export class PagePublisher implements OnInit
             ]
         })).
         pipe(tap((actionSheet: HTMLIonActionSheetElement) => actionSheet.present()));
-    }
-
-    public dismiss(): void
-    {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
     }
 }

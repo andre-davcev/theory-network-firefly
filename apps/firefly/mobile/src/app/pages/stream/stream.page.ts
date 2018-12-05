@@ -3,7 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { ActionSetCluster, StateSubscriptions, Subscription, Cluster } from '@firefly/core';
 
 @Component
@@ -31,12 +31,7 @@ export class PageStream
 
     public ionViewWillEnter(): void
     {
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
-    }
-
-    public dismiss(): void
-    {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
     public subscribe(subscription: Subscription)

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateCluster, ActionSetClusterId } from '@firefly/core';
 
 @Component
@@ -27,11 +27,6 @@ export class PagePublisherCluster
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
-    }
-
-    public dismiss(): void
-    {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 }

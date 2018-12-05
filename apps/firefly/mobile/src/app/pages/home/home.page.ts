@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Slides, AlertController } from '@ionic/angular';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Alert, StateAlerts } from '@firefly/core';
 import { Router } from '@angular/router';
 
@@ -35,11 +35,16 @@ export class PageHome
 
     public PagesHome: any = PagesHome;
 
-    constructor(public alertController: AlertController, private router: Router) { }
+    constructor
+    (
+        public alertController: AlertController,
+        private router: Router,
+        private store: Store
+    ) { }
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     slideChanged()

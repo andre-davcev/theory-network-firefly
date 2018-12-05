@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StatusBar } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { Store } from '@ngxs/store';
 
 @Component
 ({
@@ -12,18 +13,10 @@ import { StatusBar } from '@theory/capacitor';
 
 export class PageSubscriptions
 {
-    constructor()
-    {
-
-    }
+    constructor(private store: Store) { }
 
     ionViewWillEnter()
     {
-        StatusBar.setStyle({style: StatusBarStyle.Dark});
-    }
-
-    public dismiss(): void
-    {
-        StatusBar.setStyle({style: StatusBarStyle.Light});
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 }
