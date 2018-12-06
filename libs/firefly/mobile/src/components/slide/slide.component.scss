@@ -60,11 +60,8 @@ $app-slide-close-border-width:                       2px;
     .cpt-image
     {
         width: 100%;
-    }
-
-    ion-img {
         border-radius: var(--cpt-border-radius);
-        overflow: hidden;
+        touch-action: none;
     }
 
     .cpt-button
