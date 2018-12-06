@@ -35,6 +35,8 @@ export class PageHome
 
     public PagesHome: any = PagesHome;
 
+    public slideOptions: any = { zoom: false };
+
     constructor
     (
         public alertController: AlertController,

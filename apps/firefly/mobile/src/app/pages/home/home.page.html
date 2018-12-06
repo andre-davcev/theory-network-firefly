@@ -20,7 +20,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-slides pager="true" (ionSlideDidChange)="slideChanged()">
+<ion-slides pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
     <ion-slide *ngFor="let alert of alerts$ | async">
         <app-slide [slide]="alert" [buttonText]="'general.go' | translate" [routerLink]="'dead/link'"></app-slide>
     </ion-slide>
