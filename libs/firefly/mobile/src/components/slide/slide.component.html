@@ -4,12 +4,12 @@
         <h2 class="cpt-short">{{ slide.body }}</h2>
     </section>
 
-    <section fxLayout="column" fxLayoutGap="0.75rem">
+    <section fxLayout="column" class="cpt-container-main">
         <img class="cpt-image" [src]="slide.image">
-        <span class="cpt-date">{{ slide.date }}</span>
+        <app-item-map [routerLink]="[routerLink]"></app-item-map>
     </section>
 
-    <app-item-map [routerLink]="[routerLink]"></app-item-map>
-
     <div class="cpt-button">{{ buttonText }}</div>
+
+    <span class="cpt-date">{{ slide.date }}</span>
 </div>
