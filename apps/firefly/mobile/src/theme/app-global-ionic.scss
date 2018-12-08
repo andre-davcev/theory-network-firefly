@@ -1,18 +1,5 @@
 @import 'variables';
 
-ion-header {
-    ion-toolbar {
-        --padding-top: 20px;
-        position: relative;
-
-        ion-segment {
-          position: absolute;
-          top: 16px;
-          left: 0;
-        }
-    }
-}
-
 ion-item {
   ion-icon {
       color: #{$app-color-grey-lighter};
