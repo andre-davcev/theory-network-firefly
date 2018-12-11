@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { ModuleComponentMap } from '@firefly/core';
 import { ComponentItemMap } from './item-map.component';
 
 @NgModule
@@ -9,7 +10,8 @@ import { ComponentItemMap } from './item-map.component';
     imports :
     [
         CommonModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        ModuleComponentMap
     ],
 
     declarations : [ComponentItemMap],
