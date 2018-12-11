@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
+import { RouterModule} from '@angular/router';
 
 import { ModuleComponentIcon } from '@firefly/core';
 import { ModulePage } from '@firefly/app/modules';
 
+import { RoutesPageStream } from './stream.page.routes';
 import { PageStream } from './stream.page';
 
 @NgModule
@@ -10,7 +12,7 @@ import { PageStream } from './stream.page';
     imports :
     [
         ModulePage,
-        ModuleComponentIcon
+        RouterModule.forChild(RoutesPageStream)
     ],
 
     declarations : [PageStream],
