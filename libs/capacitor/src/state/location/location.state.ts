@@ -1,5 +1,8 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { from, of } from 'rxjs';
+import { GeolocationPosition } from '@capacitor/core';
+import { tap, catchError } from 'rxjs/operators';
 
 import { Geolocation } from '../../constants';
 
@@ -21,28 +24,27 @@ export class StateLocation
 
     ngxsOnInit(context: StateContext<StateLocationModel>)
     {
-        //context.dispatch(new ActionLocationWatch());
+        context.dispatch(new ActionLocationWatch());
     }
 
     @Action(ActionLocationWatch)
     locationWatch({ patchState }: StateContext<StateLocationModel>)
     {
-        return Geolocation.
-
-        watchPosition({ enableHighAccuracy: false },
-
-        (location, error) =>
-        {
-            if (error != null)
+        return from(Geolocation.getCurrentPosition()).
+        pipe
+        (
+            tap((location: GeolocationPosition) =>
             {
+                console.log('found location');
                 console.log(location);
-                patchState({error});
-            }
-            else
+                patchState({ location });
+            }),
+            catchError((error: any) =>
             {
-                console.log(location);
-                patchState({location});
-            }
-        });
+                console.log('error finding location');
+                console.log(error);
+                return of(error);
+            })
+        );
     }
 }
