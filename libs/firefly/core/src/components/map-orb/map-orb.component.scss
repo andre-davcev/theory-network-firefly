@@ -2,8 +2,8 @@
 
 :host
 {
-    --cpt-color:                       $app-color-primary;
-    --cpt-color-border:                $ios-map-color-orb-border;
+    --cpt-color:                       #{$app-color-primary};
+    --cpt-color-border:                #{$ios-map-color-orb-border};
     --cpt-color-pulse:               rgba(86, 199, 29, 0.5);
     --cpt-size:                        20px;
     --cpt-duration:                    3s;
@@ -33,8 +33,8 @@
     .app-map-orb-pulse
     {
         position: absolute;
-        top: -var(--cpt-size);
-        left: -var(--cpt-size);
+        top: calc(var(--cpt-size) * -1);
+        left: calc(var(--cpt-size) * -1);
         height: 300%;
         width: 300%;
         background-color: var(--cpt-color-pulse);
