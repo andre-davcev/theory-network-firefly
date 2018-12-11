@@ -2,10 +2,16 @@
 {
     position: relative;
 
-    mgl-map
-    {
+    mgl-map {
         height: 100%;
         width: 100%;
+
+        ::ng-deep .mapboxgl-canvas
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
     }
 
     .mapboxgl-ctrl-group
