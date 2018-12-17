@@ -20,11 +20,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-slides pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
-    <ion-slide *ngFor="let alert of alerts$ | async">
-        <app-slide [slide]="alert" [buttonText]="'general.go' | translate" [routerLink]="'dead/link'"></app-slide>
-    </ion-slide>
-</ion-slides>
+<section fxLayout="column" fxLayoutAlign="center">
+    <ion-slides pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
+      <ion-slide *ngFor="let alert of alerts$ | async">
+          <app-slide [slide]="alert" [buttonText]="'general.go' | translate" [routerLink]="'dead/link'"></app-slide>
+      </ion-slide>
+    </ion-slides>
+</section>
 
 <ion-footer>
   <ion-toolbar>

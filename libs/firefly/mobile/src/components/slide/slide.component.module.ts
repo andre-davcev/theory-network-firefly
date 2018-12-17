@@ -5,6 +5,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { ModuleDirectiveElevation } from '@theory/google';
+
 import { ComponentSlide } from './slide.component';
 import { ModuleComponentItemMap } from '../item-map';
 
@@ -17,7 +19,8 @@ import { ModuleComponentItemMap } from '../item-map';
         FlexLayoutModule,
         RouterModule,
         TranslateModule,
-        ModuleComponentItemMap
+        ModuleComponentItemMap,
+        ModuleDirectiveElevation
     ],
 
     declarations : [ComponentSlide],

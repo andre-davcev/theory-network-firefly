@@ -38,6 +38,11 @@ export class PageHome
 
     public slideOptions: any = { zoom: false };
 
+    /*
+        slide:  652
+        slides: 736
+    */
+
     constructor
     (
         public alertController: AlertController,
