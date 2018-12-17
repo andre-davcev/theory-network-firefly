@@ -8,6 +8,8 @@
 
     --cpt-window-height:        155px;
     --cpt-border-radius:        5px;
+    --cpt-border-radius-top:    var(--cpt-border-radius);
+    --cpt-border-radius-bottom: var(--cpt-border-radius);
 
     --cpt-background-color:    black;
 
@@ -31,5 +33,10 @@
         height: var(--cpt-window-height);
         border-radius: var(--cpt-border-radius);
         background-color: black;
+    }
+
+    app-map {
+        --cpt-map-border-radius-top: var(--cpt-border-radius-top);
+        --cpt-map-border-radius-bottom: var(--cpt-border-radius-bottom);
     }
 }
