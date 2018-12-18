@@ -21,6 +21,7 @@ export class StateLocation
 
     @Selector() static loading(state: StateLocationModel) {return state.location == null;}
     @Selector() static errored(state: StateLocationModel) {return state.error != null;}
+    @Selector() static locationValid(state: StateLocationModel)  {return state.location != null && state.location.coords != null;}
 
     ngxsOnInit(context: StateContext<StateLocationModel>)
     {

@@ -1,7 +1,6 @@
 <div fxLayout="column">
     <h4 class="cpt-title" fxFlexAlign="center" *ngIf="title">{{title}}</h4>
     <div class="cpt-map-window">
-        <div class="cpt-overlay" *ngIf="!interactive"></div>
-        <app-map></app-map>
+        <app-map [interactive]="interactive"></app-map>
     </div>
 </div>

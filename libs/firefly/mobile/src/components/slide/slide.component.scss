@@ -86,6 +86,7 @@ $app-slide-close-border-width:                       2px;
         border-radius: var(--cpt-border-radius);
 
         app-item-map {
+            --cpt-border-radius: 0;
             --cpt-border-radius-top: 0;
             --cpt-border-radius-bottom: 14px;
         }
