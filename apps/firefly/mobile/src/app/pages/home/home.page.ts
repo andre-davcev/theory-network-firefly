@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { Slides, AlertController } from '@ionic/angular';
+import { IonSlides, AlertController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
@@ -28,7 +28,7 @@ export enum PagesHome
 
 export class PageHome
 {
-    @ViewChild(Slides) slides: Slides;
+    @ViewChild(IonSlides) slides: IonSlides;
 
     segment:string = 'fired';
 
