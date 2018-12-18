@@ -26,7 +26,7 @@ export class ComponentSlide implements OnInit
 
     ngOnInit(): void
     {
-        this.breakpointShowMap$ = this.breakpointObserver.observe(['(min-height: 890px)']).
+        this.breakpointShowMap$ = this.breakpointObserver.observe(['(min-height: 882px)']).
         pipe(map((state: BreakpointState) => state.matches));
     }
 }
