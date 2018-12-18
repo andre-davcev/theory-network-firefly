@@ -96,6 +96,8 @@
   "page.assets-events.title"   : "Events",
   "page.assets-clusters.title" : "Clusters",
 
+  "page.alert.title" : "Alert",
+
   "data.day-of-week.sunday"    : "Sunday",
   "data.day-of-week.monday"    : "Monday",
   "data.day-of-week.tuesday"   : "Tuesday",

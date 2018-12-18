@@ -16,7 +16,8 @@ export enum PagesHome
     Subscriptions = 'subscriptions',
     Assets        = 'assets',
     User          = 'user',
-    Stream        = 'stream'
+    Stream        = 'stream',
+    Alert         = 'alert'
 }
 
 @Component

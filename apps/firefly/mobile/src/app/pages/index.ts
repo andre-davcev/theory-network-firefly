@@ -1,3 +1,4 @@
+export * from './alert';
 export * from './assets-beacons';
 export * from './assets-clusters';
 export * from './assets-coupons';

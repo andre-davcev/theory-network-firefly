@@ -12,4 +12,5 @@ export const RoutesPageHome: Routes =
     { path: PagesHome.Assets,        loadChildren: '@firefly/page/user#ModulePageUser' },
     { path: PagesHome.User,          loadChildren: '@firefly/page/user#ModulePageUser' },
     { path: PagesHome.Stream,        loadChildren: '@firefly/page/stream#ModulePageStream' },
+    { path: PagesHome.Alert,         loadChildren: '@firefly/page/alert#ModulePageAlert'}
 ];
