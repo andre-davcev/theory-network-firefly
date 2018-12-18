@@ -6,7 +6,7 @@
 
     <section fxLayout="column" class="cpt-container-main">
         <img class="cpt-image" [src]="slide.image">
-        <app-item-map [routerLink]="[routerLink]" elevation="2"></app-item-map>
+        <app-item-map [routerLink]="[routerLink]" elevation="2" *ngIf="breakpointShowMap$ | async"></app-item-map>
     </section>
 
     <div class="cpt-button">{{ buttonText }}</div>
