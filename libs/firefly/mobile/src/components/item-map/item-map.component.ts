@@ -11,6 +11,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 export class ComponentItemMap
 {
     @Input() title : string;
+    @Input() interactive: boolean = false;
 
     constructor() { }
 }
