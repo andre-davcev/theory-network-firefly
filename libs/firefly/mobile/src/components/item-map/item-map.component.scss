@@ -35,16 +35,6 @@
         background-color: black;
     }
 
-    .cpt-overlay
-    {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 10000;
-    }
-
     app-map {
         --cpt-map-border-radius-top: var(--cpt-border-radius-top);
         --cpt-map-border-radius-bottom: var(--cpt-border-radius-bottom);
