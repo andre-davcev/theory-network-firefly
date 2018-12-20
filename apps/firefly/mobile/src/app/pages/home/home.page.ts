@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { IonSlides, AlertController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
@@ -7,18 +8,8 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Alert, StateAlerts } from '@firefly/core';
-import { Router } from '@angular/router';
 
-export enum PagesHome
-{
-    Search        = 'search',
-    Publish       = 'publish',
-    Subscriptions = 'subscriptions',
-    Assets        = 'assets',
-    User          = 'user',
-    Stream        = 'stream',
-    Alert         = 'alert'
-}
+import { Pages } from '../pages.enum';
 
 @Component
 ({
@@ -35,7 +26,7 @@ export class PageHome
 
     @Select(StateAlerts.alerts) alerts$: Observable<Array<Alert>>;
 
-    public PagesHome: any = PagesHome;
+    public Pages: any = Pages;
 
     public slideOptions: any = { zoom: false };
 
@@ -58,7 +49,7 @@ export class PageHome
         pipe(tap((index: number) => console.log('Slide Changed: ' + index)));
     }
 
-    navigate(type: PagesHome): void
+    navigate(type: Pages): void
     {
         this.router.navigate([`/home/${type}`]);
     }

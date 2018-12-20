@@ -1,0 +1,13 @@
+@import "app-variables";
+
+ion-toolbar {
+    ion-segment {
+        ion-segment-button {
+            --ion-color-contrast: var(--ion-color-dark);
+        }
+    }
+}
+
+ion-content {
+    --background: var(--ion-color-primary);
+}

@@ -12,14 +12,6 @@
   "general.settings"      : "Settings",
   "general.go"            : "Go",
 
-  "tabs.app.notifications" : "Notifications",
-  "tabs.app.publisher"     : "Publish",
-  "tabs.app.settings"      : "Settings",
-  "tabs.publisher.clusters" : "Clusters",
-  "tabs.publisher.assets"   : "Assets",
-  "tabs.settings.profile" : "Profile",
-  "tabs.settings.assets"  : "Assets",
-
   "page.auth.title"               : "firefly",
   "page.auth.tagline"             : "Life comes to you",
   "page.auth.placeholderEmail"    : "email address",
@@ -97,6 +89,9 @@
   "page.assets-clusters.title" : "Clusters",
 
   "page.alert.title" : "Alert",
+
+  "page.user.profile"  : "Profile",
+  "page.user.settings" : "Settings",
 
   "data.day-of-week.sunday"    : "Sunday",
   "data.day-of-week.monday"    : "Monday",

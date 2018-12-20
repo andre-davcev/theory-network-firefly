@@ -1,19 +1,19 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
-          <ion-button icon-only (click)="navigate(PagesHome.Search)">
+          <ion-button icon-only (click)="navigate(Pages.Search)">
               <ion-icon name="search" color="dark" size="large"></ion-icon>
           </ion-button>
-          <ion-button icon-only (click)="navigate(PagesHome.Subscriptions)">
+          <ion-button icon-only (click)="navigate(Pages.Subscriptions)">
               <ion-icon name="options" color="dark" size="large"></ion-icon>
           </ion-button>
-          <ion-button icon-only (click)="navigate(PagesHome.Publish)">
+          <ion-button icon-only (click)="navigate(Pages.Publish)">
               <ion-icon name="md-add" color="dark" size="large"></ion-icon>
           </ion-button>
-          <ion-button icon-only (click)="navigate(PagesHome.Assets)">
+          <ion-button icon-only (click)="navigate(Pages.Assets)">
               <ion-icon name="cloud-outline" color="dark" size="large"></ion-icon>
           </ion-button>
-          <ion-button icon-only (click)="navigate(PagesHome.User)">
+          <ion-button icon-only (click)="navigate(Pages.User)">
             <ion-icon name="person" color="dark" size="large"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -23,7 +23,7 @@
 <section fxLayout="column" fxLayoutAlign="center">
     <ion-slides pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
       <ion-slide *ngFor="let alert of alerts$ | async">
-          <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (click)="navigate(PagesHome.Alert)"></app-slide>
+          <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (click)="navigate(Pages.Alert)"></app-slide>
       </ion-slide>
     </ion-slides>
 </section>
@@ -31,7 +31,7 @@
 <ion-footer>
   <ion-toolbar>
       <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
-          <ion-button icon-only (click)="navigate(PagesHome.Stream)">
+          <ion-button icon-only (click)="navigate(Pages.Stream)">
               <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
           </ion-button>
           <ion-button icon-only>
