@@ -1,4 +1,5 @@
 export * from './alert';
+export * from './assets';
 export * from './assets-beacons';
 export * from './assets-clusters';
 export * from './assets-coupons';
@@ -13,8 +14,6 @@ export * from './cluster-locations';
 export * from './cluster-locations-add';
 export * from './home';
 export * from './login';
-export * from './publisher';
-export * from './publisher-assets';
 export * from './publisher-beacon';
 export * from './publisher-beacon-minor';
 export * from './publisher-beacons';

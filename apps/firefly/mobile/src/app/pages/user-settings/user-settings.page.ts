@@ -4,10 +4,7 @@ import {Component} from '@angular/core';
 ({
     selector    : 'app-page-user-settings',
     templateUrl : 'user-settings.page.html',
-    styleUrls   : ['./user-profile.page.scss']
+    styleUrls   : ['./user-settings.page.scss']
 })
 
-export class PageUserSettings
-{
-
-}
+export class PageUserSettings { }

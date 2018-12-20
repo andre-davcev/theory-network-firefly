@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '@firefly/app/modules';
-
 import { ModulePageUserProfile } from '@firefly/page/user-profile';
-import { ModulePagePublisherAssets } from '@firefly/page/publisher-assets';
-
+import { ModulePageUserSettings } from '@firefly/page/user-settings';
 import { PageUser } from './user.page';
-import { ModuleDirectiveElevation } from '@theory/google';
-import { RouterModule } from '@angular/router';
 import { RoutesPageUser } from './user.page.routes';
 
 @NgModule
@@ -16,7 +15,7 @@ import { RoutesPageUser } from './user.page.routes';
     [
         ModulePage,
         ModulePageUserProfile,
-        ModulePagePublisherAssets,
+        ModulePageUserSettings,
         ModuleDirectiveElevation,
         RouterModule.forChild(RoutesPageUser)
     ],
@@ -25,7 +24,4 @@ import { RoutesPageUser } from './user.page.routes';
     exports: [PageUser]
 })
 
-export class ModulePageUser
-{
-
-}
+export class ModulePageUser { }

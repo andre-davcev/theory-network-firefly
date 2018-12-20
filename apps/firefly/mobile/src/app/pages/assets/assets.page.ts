@@ -10,14 +10,14 @@ import { Pages } from '../pages.enum';
 
 @Component
 ({
-    selector    : 'app-page-user',
-    templateUrl : 'user.page.html',
-    styleUrls   : ['./user.page.scss']
+    selector    : 'app-page-assets',
+    templateUrl : 'assets.page.html',
+    styleUrls   : ['./assets.page.scss']
 })
 
-export class PageUser implements OnInit
+export class PageAssets implements OnInit
 {
-    public segment: string = 'assets';
+    public Pages: any = Pages;
     public translations: Array<string> = [];
 
     constructor
@@ -50,10 +50,11 @@ export class PageUser implements OnInit
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
-    public segmentChanged(event: any): void
+    public go(page: Pages): void
     {
-        this.segment = event.target.value;
+        this.nav.navigateForward([page])
     }
+
 
     public add(): void
     {
@@ -110,3 +111,4 @@ export class PageUser implements OnInit
         actionSheet$.subscribe((actionSheet: HTMLIonActionSheetElement) => actionSheet.present());
     }
 }
+
