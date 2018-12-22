@@ -21,6 +21,7 @@
       "johnpapa.angular2",
       "shan.code-settings-sync",
       "github.vscode-pull-request-github",
-      "peterjausovec.vscode-docker"
+      "peterjausovec.vscode-docker",
+      "vscodevim.vim"
   ]
 }

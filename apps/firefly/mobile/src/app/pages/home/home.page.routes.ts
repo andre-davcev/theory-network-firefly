@@ -9,7 +9,7 @@ export const RoutesPageHome: Routes =
 
     { path: Pages.Search,        loadChildren: '@firefly/page/search#ModulePageSearch' },
     { path: Pages.Subscriptions, loadChildren: '@firefly/page/subscriptions#ModulePageSubscriptions' },
-    { path: Pages.Publish,       loadChildren: '@firefly/page/cluster#ModulePagePublisherCluster' },
+    { path: Pages.PublishEvent,  loadChildren: '@firefly/page/publish-event#ModulePagePublishEvent' },
     { path: Pages.Assets,        loadChildren: '@firefly/page/assets#ModulePageAssets' },
     { path: Pages.User,          loadChildren: '@firefly/page/user#ModulePageUser' },
     { path: Pages.Stream,        loadChildren: '@firefly/page/stream#ModulePageStream' },

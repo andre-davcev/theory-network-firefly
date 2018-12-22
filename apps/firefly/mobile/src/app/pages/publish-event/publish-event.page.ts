@@ -9,12 +9,12 @@ import { StateCluster, ActionSetClusterId } from '@firefly/core';
 
 @Component
 ({
-    selector    : 'app-page-cluster',
-    templateUrl : 'cluster.page.html',
-    styleUrls   : ['./cluster.page.scss']
+    selector    : 'app-page-publish-event',
+    templateUrl : 'publish-event.page.html',
+    styleUrls   : ['./publish-event.page.scss']
 })
 
-export class PagePublisherCluster
+export class PagePublishEvent
 {
     @Select(StateCluster.form) form$: Observable<FormGroup>;
 
