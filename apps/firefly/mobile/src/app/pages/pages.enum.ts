@@ -1,7 +1,7 @@
 export enum Pages
 {
     Search        = 'search',
-    Publish       = 'publish',
+    PublishEvent  = 'publish-event',
     Subscriptions = 'subscriptions',
     Assets        = 'assets',
     User          = 'user',

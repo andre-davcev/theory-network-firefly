@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { ModuleComponentItemHeader, ModuleComponentItemDescription, ModuleComponentItemMap } from '@firefly/mobile';
 import { ModulePage } from '@firefly/app/modules';
 
-import { PagePublisherCluster } from './cluster.page';
-import { RoutesPagePublishEvent } from './cluster.page.routes';
+import { PagePublishEvent } from './publish-event.page';
+import { RoutesPagePublishEvent } from './publish-event.page.routes';
 
 @NgModule
 ({
@@ -21,8 +21,8 @@ import { RoutesPagePublishEvent } from './cluster.page.routes';
         RouterModule.forChild(RoutesPagePublishEvent)
     ],
 
-    declarations : [PagePublisherCluster],
-    exports : [PagePublisherCluster]
+    declarations : [PagePublishEvent],
+    exports : [PagePublishEvent]
 })
 
-export class ModulePagePublisherCluster { }
+export class ModulePagePublishEvent { }
