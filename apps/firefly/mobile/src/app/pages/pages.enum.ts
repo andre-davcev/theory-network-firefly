@@ -1,5 +1,7 @@
 export enum Pages
 {
+    Home          = 'home',
+
     Search        = 'search',
     PublishEvent  = 'publish-event',
     Subscriptions = 'subscriptions',

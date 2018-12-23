@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { StateUser, ActionUserAuthenticate, ActionLoginEmail } from '@firefly/core';
-import { StatusBar, ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/capacitor';
 
 @Component
 ({
@@ -23,7 +22,7 @@ export class PageLogin implements OnInit
     @Select(StateUser.userFound)              userFound$:         Observable<boolean>;
     @Select(StateUser.loadedNotAuthenticated) loadedNotAuthenticated$: Observable<boolean>;
 
-    constructor(private store: Store, private router: Router, private nav: NavController) { }
+    constructor(private store: Store, private nav: NavController) { }
 
     public ngOnInit(): void
     {
