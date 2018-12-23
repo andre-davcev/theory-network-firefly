@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { IonSlides, AlertController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
@@ -10,6 +9,7 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Alert, StateAlerts } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component
 ({
@@ -33,7 +33,6 @@ export class PageHome
     constructor
     (
         public alertController: AlertController,
-        private router: Router,
         private store: Store
     ) { }
 
@@ -51,7 +50,7 @@ export class PageHome
 
     navigate(type: Pages): void
     {
-        this.router.navigate([`/home/${type}`]);
+        this.store.dispatch(new Navigate([Pages.Home, type]));
     }
 
     deleteConfirm()
