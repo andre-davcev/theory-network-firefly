@@ -19,19 +19,13 @@
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <section fxLayout="column" fxLayoutAlign="center">
-    <ion-slides pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
-      <ion-slide *ngFor="let alert of alerts$ | async">
-          <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (click)="navigate(Pages.Alert)"></app-slide>
-      </ion-slide>
-    </ion-slides>
+  <ion-router-outlet></ion-router-outlet>
 </section>
-
 <ion-footer>
   <ion-toolbar>
       <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
-          <ion-button icon-only (click)="navigate(Pages.Stream)">
+          <ion-button icon-only [routerLink]="['stream']">
               <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
           </ion-button>
           <ion-button icon-only>

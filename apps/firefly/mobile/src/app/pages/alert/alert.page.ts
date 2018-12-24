@@ -1,6 +1,15 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
+import { IonSlides, AlertController } from '@ionic/angular';
+import { Select, Store } from '@ngxs/store';
+import { Observable, from } from 'rxjs';
+import { StatusBarStyle } from '@capacitor/core';
 
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { Alert, StateAlerts } from '@firefly/core';
+
+import { Pages } from '../pages.enum';
 @Component
 ({
     selector    : 'app-page-alert',
@@ -10,10 +19,30 @@ import { Store } from '@ngxs/store';
 
 export class PageAlert
 {
-    constructor(private store: Store) { }
+  @ViewChild(IonSlides) slides: IonSlides;
+
+  segment:string = 'fired';
+
+  @Select(StateAlerts.alerts) alerts$: Observable<Array<Alert>>;
+
+  public Pages: any = Pages;
+
+  public slideOptions: any = { zoom: false };
+
+    constructor(
+      public alertController: AlertController,
+      private router: Router,
+      private store: Store ) { }
 
     ionViewWillEnter()
     {
 //        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+    }
+
+    slideChanged()
+    {
+        from(this.slides.getActiveIndex()).
+
+        pipe(tap((index: number) => console.log('Slide Changed: ' + index)));
     }
 }

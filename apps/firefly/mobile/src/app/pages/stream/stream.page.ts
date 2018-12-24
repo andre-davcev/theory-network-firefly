@@ -19,6 +19,7 @@ export class PageStream
 
     constructor(private store: Store)
     {
+      console.log('in constructor');
         const cluster: Cluster =
         {
             userId      : 'testUser',
@@ -26,12 +27,12 @@ export class PageStream
             description : 'My description'
         };
 
-        this.store.dispatch(new ActionSetCluster(cluster));
+        //this.store.dispatch(new ActionSetCluster(cluster));
     }
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+        //this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
     public subscribe(subscription: Subscription)

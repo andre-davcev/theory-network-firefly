@@ -1,13 +1,61 @@
 @import "app-variables";
 
-ion-toolbar {
-    ion-segment {
-        ion-segment-button {
-            --ion-color-contrast: var(--ion-color-dark);
+$app-card-height: 48px;
+
+:host {
+    /*
+    736px height
+    */
+
+    --background: #{$app-color-primary};
+
+    ion-toolbar {
+        --padding-start: 1.25rem;
+        --padding-end: 1.25rem;
+    }
+
+    ion-header {
+        &.header-md::after {
+            background-image: none;
         }
     }
-}
 
-ion-content {
-    --background: var(--ion-color-primary);
+    ion-toolbar {
+        --background: #{$app-color-primary};
+        --border-width: 0;
+
+        ion-buttons {
+          width: 100%;
+        }
+    }
+
+    ion-slides {
+        --background: #{$app-color-primary};
+        --bullet-background: #{$app-color-black};
+        --bullet-background-active: #{$app-color-dark};
+
+        background-color: $app-color-primary;
+        position: relative;
+        width: 100%;
+    }
+
+    ion-slide {
+        width: 100%;
+        margin: 0;
+        margin-top: 28px;
+        margin-bottom: 28px;
+    }
+
+    ion-footer {
+        ion-toolbar {
+            padding-bottom: 1.375rem;
+        }
+    }
+
+    section
+    {
+        position: relative;
+        height: 100%;
+        background-color: $app-color-primary;
+    }
 }
