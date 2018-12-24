@@ -20,6 +20,7 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageHome
 {
+    public Pages:any = Pages;
     alertToggle:boolean = true;
 
     constructor
