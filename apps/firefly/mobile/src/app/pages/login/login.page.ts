@@ -29,7 +29,7 @@ export class PageLogin implements OnInit
         this.login();
         this.userFound$.
         pipe(filter((userFound: boolean) => userFound), take(1)).
-        subscribe(() => this.nav.navigateRoot('/home'))
+        subscribe(() => this.nav.navigateRoot('/home/alert'))
 
         this.store.dispatch([new ActionDeviceStatusBarShow(), new ActionUserAuthenticate()]);
     }

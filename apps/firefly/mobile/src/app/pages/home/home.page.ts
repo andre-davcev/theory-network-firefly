@@ -20,7 +20,7 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageHome
 {
-    @ViewChild(IonSlides) slides: IonSlides;
+   /* @ViewChild(IonSlides) slides: IonSlides;
 
     segment:string = 'fired';
 
@@ -28,7 +28,7 @@ export class PageHome
 
     public Pages: any = Pages;
 
-    public slideOptions: any = { zoom: false };
+    public slideOptions: any = { zoom: false };*/
 
     constructor
     (
@@ -41,12 +41,12 @@ export class PageHome
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
-    slideChanged()
+    /*slideChanged()
     {
         from(this.slides.getActiveIndex()).
 
         pipe(tap((index: number) => console.log('Slide Changed: ' + index)));
-    }
+    }*/
 
     navigate(type: Pages): void
     {
