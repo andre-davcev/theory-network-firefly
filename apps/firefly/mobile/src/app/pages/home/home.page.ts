@@ -20,15 +20,7 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageHome
 {
-   /* @ViewChild(IonSlides) slides: IonSlides;
-
-    segment:string = 'fired';
-
-    @Select(StateAlerts.alerts) alerts$: Observable<Array<Alert>>;
-
-    public Pages: any = Pages;
-
-    public slideOptions: any = { zoom: false };*/
+    alertToggle:boolean = true;
 
     constructor
     (
@@ -41,16 +33,13 @@ export class PageHome
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
-    /*slideChanged()
-    {
-        from(this.slides.getActiveIndex()).
-
-        pipe(tap((index: number) => console.log('Slide Changed: ' + index)));
-    }*/
-
     navigate(type: Pages): void
     {
         this.store.dispatch(new Navigate([Pages.Home, type]));
+    }
+
+    alertStreamToggle(){
+      this.alertToggle = !this.alertToggle;
     }
 
     deleteConfirm()

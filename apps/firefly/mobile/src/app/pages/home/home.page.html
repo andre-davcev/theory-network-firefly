@@ -25,8 +25,11 @@
 <ion-footer>
   <ion-toolbar>
       <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
-          <ion-button icon-only [routerLink]="['stream']">
+          <ion-button *ngIf="alertToggle" icon-only (click)="alertStreamToggle();" [routerLink]="['stream']">
               <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
+          </ion-button>
+          <ion-button *ngIf="!alertToggle" icon-only (click)="alertStreamToggle();" [routerLink]="['alert']">
+            <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
           </ion-button>
           <ion-button icon-only>
               <ion-icon name="md-trash" color="dark" size="large"></ion-icon>
