@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ModuleComponentSlide } from '@firefly/mobile';
@@ -13,6 +14,7 @@ import { PageHome } from './home.page';
     imports :
     [
         ModulePage,
+        CommonModule,
         RouterModule.forChild(RoutesPageHome),
         ModuleComponentSlide,
         TranslateModule
