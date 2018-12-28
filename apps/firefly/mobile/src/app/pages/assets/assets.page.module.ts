@@ -6,6 +6,7 @@ import { ModuleDirectiveElevation } from '@theory/google';
 import { ModulePage } from '@firefly/app/modules';
 import { PageAssets } from './assets.page';
 import { RoutesPageAssets } from './assets.page.routes';
+import { ModuleComponentIcon } from '@firefly/core';
 
 @NgModule
 ({
@@ -13,6 +14,7 @@ import { RoutesPageAssets } from './assets.page.routes';
     [
         ModulePage,
         ModuleDirectiveElevation,
+        ModuleComponentIcon,
         RouterModule.forChild(RoutesPageAssets)
     ],
 
