@@ -31,7 +31,7 @@
           <ion-button *ngIf="!alertToggle" icon-only (click)="alertStreamToggle();">
             <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
           </ion-button>
-          <ion-button icon-only>
+          <ion-button *ngIf="!alertToggle" icon-only>
               <ion-icon name="md-trash" color="dark" size="large"></ion-icon>
           </ion-button>
       </ion-buttons>
