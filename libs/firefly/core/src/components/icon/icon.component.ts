@@ -17,5 +17,31 @@ export class ComponentIcon
     @Input()
     public visible: boolean = true;
 
+    @Input()
+    public name: string;
+
+    @HostBinding('class')
+    public get class(): string
+    {
+        const classes: Array<string> = [];
+
+        if (this.active)
+        {
+            classes.push('cpt-active');
+        }
+
+        if (this.visible)
+        {
+            classes.push('cpt-visible');
+        }
+
+        if (this.name != null)
+        {
+            classes.push(`cpt-${this.name}`);
+        }
+
+        return classes.join(' ');
+    }
+
     constructor() { }
 }

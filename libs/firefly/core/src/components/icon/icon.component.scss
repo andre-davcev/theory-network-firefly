@@ -3,34 +3,42 @@
 :host
 {
     --cpt-icon-size: 32px;
-    --cpt-font-family: $app-font-firefly;
-    --cpt-font-size: $app-font-firefly-size;
+    --cpt-font-family: #{$app-font-firefly};
+    --cpt-font-size: #{$app-font-firefly-size};
     --cpt-line-height: 1;
+    --cpt-color: black;
 
     position: relative;
     width: var(--cpt-icon-size);
     height: var(--cpt-icon-size);
     display: inline-block;
     opacity: 0;
+    color: var(--cpt-color);
 
     &.cpt-visible
     {
         opacity: 1;
     }
 
-    &:before
+    .cpt-icon
     {
-        display: inline-block;
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        text-rendering: auto;
-        line-height: var(--cpt-line-height);
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        position: relative;
 
-        font-family: var(--cpt-font-family);
-        font-size: var(--cpt-font-size);
+        &:before
+        {
+            display: inline-block;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            text-rendering: auto;
+            line-height: var(--cpt-line-height);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: var(--cpt-font-family);
+            font-size: var(--cpt-font-size);
+        }
     }
+
+    &.cpt-firefly > .cpt-icon:before { content: $app-font-firefly-icon-firefly; }
 }
