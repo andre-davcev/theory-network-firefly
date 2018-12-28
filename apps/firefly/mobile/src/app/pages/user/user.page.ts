@@ -3,6 +3,7 @@ import { StatusBarStyle } from '@capacitor/core';
 import { Store } from '@ngxs/store';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { PageUserSegment } from './user.page.segment';
 
 @Component
 ({
@@ -13,7 +14,8 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
 export class PageUser
 {
-    public segment: string = 'assets';
+    public PageUserSegment: any = PageUserSegment;
+    public segment: string = PageUserSegment.Profile;
     public translations: Array<string> = [];
 
     constructor(private store: Store) { }
