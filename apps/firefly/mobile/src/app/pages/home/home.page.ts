@@ -32,6 +32,7 @@ export class PageHome
     ionViewWillEnter()
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.store.dispatch(new Navigate([Pages.Home, 'alert']));
     }
 
     navigate(type: Pages): void
@@ -40,6 +41,14 @@ export class PageHome
     }
 
     alertStreamToggle(){
+
+      if(this.alertToggle){
+        this.store.dispatch(new Navigate([Pages.Home, 'alert']));
+      }
+      else{
+        this.store.dispatch(new Navigate([Pages.Home, 'stream']));
+      }
+
       this.alertToggle = !this.alertToggle;
     }
 
