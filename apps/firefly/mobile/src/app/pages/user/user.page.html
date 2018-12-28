@@ -1,11 +1,11 @@
 <ion-header>
     <ion-toolbar elevation="2" color="dark">
-        <ion-segment (ionChange)="segmentChanged($event)" color="primary" value="assets">
-            <ion-segment-button value="profile">
+        <ion-segment (ionChange)="segmentChanged($event)" color="primary" value="PageUserSegment.Profile">
+            <ion-segment-button value="PageUserSegment.Profile">
                 <ion-label>{{'page.user.profile' | translate}}</ion-label>
             </ion-segment-button>
 
-            <ion-segment-button value="assets" checked>
+            <ion-segment-button value="PageUserSegment.Settings">
                 <ion-label>{{'page.user.settings' | translate}}</ion-label>
             </ion-segment-button>
         </ion-segment>
@@ -17,6 +17,6 @@
 </ion-header>
 
 <ion-content [ngSwitch]="segment">
-    <app-page-user-profile *ngSwitchCase="'profile'"></app-page-user-profile>
-    <app-page-user-settings *ngSwitchCase="'settings'"></app-page-user-settings>
+    <app-page-user-profile *ngSwitchCase="PageUserSegment.Profile"></app-page-user-profile>
+    <app-page-user-settings *ngSwitchCase="PageUserSegment.Settings"></app-page-user-settings>
 </ion-content>
