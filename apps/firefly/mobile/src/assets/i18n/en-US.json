@@ -90,8 +90,12 @@
 
   "page.alert.title" : "Alert",
 
-  "page.user.profile"  : "Profile",
-  "page.user.settings" : "Settings",
+  "page.user-profile.title"  : "Profile",
+  "page.user-settings.title" : "Settings",
+
+  "page.image-catalog.title" : "Catalog",
+  "page.image-assets.title"  : "Assets",
+  "page.image-library.title" : "Photo Library",
 
   "data.day-of-week.sunday"    : "Sunday",
   "data.day-of-week.monday"    : "Monday",

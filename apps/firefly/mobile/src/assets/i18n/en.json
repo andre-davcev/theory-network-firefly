@@ -51,6 +51,10 @@
   "page.event-locations.title"     : "Locations",
   "page.event-locations-add.title" : "Search Locations",
 
+  "page.image-catalog.title" : "Catalog",
+  "page.image-assets.title"  : "Assets",
+  "page.image-library.title" : "Photo Library",
+
   "page.assets.title"               : "Assets",
   "page.assets.add"                 : "Add Asset",
   "page.assets.icon"                : "Icon",
@@ -90,8 +94,8 @@
 
   "page.alert.title" : "Alert",
 
-  "page.user.profile"  : "Profile",
-  "page.user.settings" : "Settings",
+  "page.user-profile.title"  : "Profile",
+  "page.user-settings.title" : "Settings",
 
   "data.day-of-week.sunday"    : "Sunday",
   "data.day-of-week.monday"    : "Monday",

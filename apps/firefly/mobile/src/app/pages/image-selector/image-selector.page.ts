@@ -7,15 +7,15 @@ import { Pages } from '../pages.enum';
 
 @Component
 ({
-    selector    : 'app-page-user',
-    templateUrl : 'user.page.html',
-    styleUrls   : ['./user.page.scss']
+    selector    : 'app-page-image-selector',
+    templateUrl : 'image-selector.page.html',
+    styleUrls   : ['./image-selector.page.scss']
 })
 
-export class PageUser
+export class PageImageSelector
 {
     public Pages: any = Pages;
-    public segment: string = Pages.UserProfile;
+    public segment: string = Pages.ImageCatalog;
     public translations: Array<string> = [];
 
     constructor(private store: Store) { }

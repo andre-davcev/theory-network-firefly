@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ItemHeader } from './item-header.interface';
 
 @Component
 ({
@@ -12,25 +13,21 @@ import { FormGroup } from '@angular/forms';
 export class ComponentItemHeader
 {
     @Input() form: FormGroup;
+    @Input() item: ItemHeader;
 
-    @Input() icon            : string = 'icon';
-    @Input() iconPlaceholder : string = '';
-    @Input() iconUrlEmpty    : string;
-
-    @Input() title            : string = 'title';
-    @Input() titlePlaceholder : string = '';
-
-    @Input() subtitle            : string = 'subtitle';
-    @Input() subtitlePlaceholder : string = '';
+    @Output() iconClicked: EventEmitter<void> = new EventEmitter();
 
     constructor() {}
 
     public clickedIcon(): void
     {
+        this.iconClicked.next();
+/*
         if (this.edit)
         {
             this.iconValue = this.iconValue == null || this.iconValue === 'assets/icons/temp-coffee-icon-blue.png' ? 'assets/icons/temp-coffee-icon-pink.png' : 'assets/icons/temp-coffee-icon-blue.png';
         }
+*/
     }
 
     public get edit(): boolean
@@ -40,19 +37,21 @@ export class ComponentItemHeader
 
     public get iconUrl(): string
     {
-        return this.edit ? (this.iconValue == null ? this.iconUrlEmpty : this.iconValue) : this.iconValue;
+        return this.edit ? (this.iconValue == null ? this.item.iconUrlEmpty : this.iconValue) : this.iconValue;
     }
 
     public get iconValue(): string
     {
-        return this.edit ? this.form.get(this.icon).value : this.icon;
+        this.item.icon = this.item.icon == null ? 'icon' : this.item.icon;
+
+        return this.edit ? this.form.get(this.item.icon).value : this.item.icon;
     }
 
     public set iconValue(icon: string)
     {
         if (this.edit)
         {
-            this.form.get(this.icon).setValue(icon);
+            this.form.get(this.item.icon).setValue(icon);
         }
     }
 }

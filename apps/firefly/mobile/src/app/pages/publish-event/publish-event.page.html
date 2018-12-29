@@ -11,14 +11,7 @@
 
 <ion-content>
     <form novalidate [formGroup]="form$ | async">
-        <app-item-header [form]="form$ | async"
-                        title="name"
-                        [titlePlaceholder]="'page.event.titlePlaceholder' | translate"
-                        subtitle="tagline"
-                        [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate"
-                        [iconPlaceholder]="'page.event.iconPlaceholder' | translate"
-                        iconUrlEmpty="assets/icons/avatar-empty.svg">
-        </app-item-header>
+        <app-item-header [form]="form$ | async" [item]="itemHeader" (iconClicked)="iconClicked()"></app-item-header>
 <!--
         <app-item-header icon="assets/icons/temp-coffee-icon-blue.png"
                          title="My cluster title!"
