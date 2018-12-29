@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar elevation="2" color="dark">
+        <ion-segment (ionChange)="segmentChanged($event)" color="primary" value="Pages.ImageCatalog">
+            <ion-segment-button value="Pages.ImageCatalog">
+                <ion-label>{{'page.image-catalog.title' | translate}}</ion-label>
+            </ion-segment-button>
+
+            <ion-segment-button value="Pages.ImageAssets">
+                <ion-label>{{'page.image-assets.title' | translate}}</ion-label>
+            </ion-segment-button>
+
+            <ion-segment-button value="Pages.ImageLibrary">
+                <ion-label>{{'page.image-library.title' | translate}}</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+
+        <ion-buttons slot="start">
+            <ion-back-button color="primary"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [ngSwitch]="segment">
+    <app-page-image-catalog *ngSwitchCase="Pages.ImageCatalog"></app-page-image-catalog>
+    <app-page-image-assets *ngSwitchCase="Pages.ImageAssets"></app-page-image-assets>
+    <app-page-image-library *ngSwitchCase="Pages.ImageLibrary"></app-page-image-library>
+</ion-content>

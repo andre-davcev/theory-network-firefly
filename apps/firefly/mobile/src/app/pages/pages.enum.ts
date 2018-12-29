@@ -16,6 +16,13 @@ export enum Pages
     Beacons  = 'beacons',
     Places   = 'places',
     Events   = 'events',
-    Clusters = 'clusters'
-}
+    Clusters = 'clusters',
 
+    UserProfile  = 'profile',
+    UserSettings = 'settings',
+
+    ImageSelector = 'image-selector',
+    ImageCatalog  = 'catalog',
+    ImageAssets   = 'assets',
+    ImageLibrary  = 'library'
+}

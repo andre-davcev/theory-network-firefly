@@ -1,12 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { IonSlides, AlertController } from '@ionic/angular';
-import { Select, Store } from '@ngxs/store';
-import { Observable, from } from 'rxjs';
+import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Alert, StateAlerts } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';
