@@ -22,7 +22,7 @@ export class PageImageSelector
 
     ionViewWillEnter()
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     public segmentChanged(event: any): void
