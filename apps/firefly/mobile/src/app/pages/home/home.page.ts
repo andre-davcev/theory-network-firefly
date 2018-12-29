@@ -18,7 +18,7 @@ import { Navigate } from '@ngxs/router-plugin';
 export class PageHome
 {
     public Pages:any = Pages;
-    alertToggle:boolean = true;
+    alertToggle:boolean = false;
 
     constructor
     (
@@ -29,6 +29,13 @@ export class PageHome
     ionViewWillEnter()
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+
+        if(!this.alertToggle){
+          this.store.dispatch(new Navigate([Pages.Home, Pages.Alert]));
+        }
+        else{
+          this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
+        }
     }
 
     navigate(type: Pages): void
@@ -37,6 +44,14 @@ export class PageHome
     }
 
     alertStreamToggle(){
+
+      if(this.alertToggle){
+        this.store.dispatch(new Navigate([Pages.Home, Pages.Alert]));
+      }
+      else{
+        this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
+      }
+
       this.alertToggle = !this.alertToggle;
     }
 
