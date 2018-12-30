@@ -2,23 +2,23 @@
 
 :host
 {
-    --cpt-title-font-color:                 $app-color-light-text;
+    --cpt-title-font-color:                 #{$app-color-light-text};
     --cpt-title-font-size:                  17px;
     --cpt-title-line-height:                20px;
     --cpt-title-letter-spacing:             -0.4px;
 
-    --cpt-description-font-color:           $app-color-grey-lighter-font;
+    --cpt-description-font-color:           #{$app-color-grey-lighter-font};
     --cpt-description-font-size:            15px;
     --cpt-description-line-height:          1.2em;
     --cpt-description-letter-spacing:       -0.2px;
 
     --cpt-image-window-height:              155px;
     --cpt-image-border-radius:              5px;
-    --cpt-image-color-background:           $app-color-grey-middle;
+    --cpt-image-color-background:           #{$app-color-grey-middle};
     --cpt-image-placeholder-font-color:     white;
     --cpt-image-placeholder-font-size:      20px;
 
-    --cpt-gutter:                           $app-gutter;
+    --cpt-gutter:                           #{$app-gutter};
 
     position: relative;
     display: flex;

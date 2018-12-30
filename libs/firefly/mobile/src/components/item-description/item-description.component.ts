@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+
+import { ItemDescription } from './item-description.interface';
 
 @Component
 ({
@@ -10,21 +12,16 @@ import { FormGroup } from '@angular/forms';
 })
 export class ComponentItemDescription
 {
-    @Input() form : FormGroup;
+    @Input() form: FormGroup;
+    @Input() item: ItemDescription;
 
-    @Input() title : string = '';
-
-    @Input() image            : string = 'image';
-    @Input() imagePlaceholder : string = '';
-
-    @Input() description            : string = 'description';
-    @Input() descriptionPlaceholder : string = '';
+    @Output() imageClicked: EventEmitter<void> = new EventEmitter();
 
     constructor() { }
-//    constructor(private sanitizer: DomSanitizer) { }
 
     public clickedImage(): void
     {
+        this.imageClicked.next();
 /*
         const { Camera } = Plugins;
 
@@ -40,7 +37,7 @@ export class ComponentItemDescription
             console.log(cameraPhoto);
         });
 */
-        this.imageValue = this.imageValue == null || this.imageValue === 'assets/images/temp-subscriptions-pokemon-go.jpg' ? 'assets/images/temp-subscriptions-lilac-festival.jpg' : 'assets/images/temp-subscriptions-pokemon-go.jpg';
+//        this.imageValue = this.imageValue == null || this.imageValue === 'assets/images/temp-subscriptions-pokemon-go.jpg' ? 'assets/images/temp-subscriptions-lilac-festival.jpg' : 'assets/images/temp-subscriptions-pokemon-go.jpg';
     }
 
     public get edit(): boolean
@@ -50,14 +47,16 @@ export class ComponentItemDescription
 
     public get imageValue(): string
     {
-        return this.edit ? this.form.get(this.image).value : this.image;
+        this.item.image = this.item.image == null ? 'image' : this.item.image;
+
+        return this.edit ? this.form.get(this.item.image).value : this.item.image;
     }
 
     public set imageValue(image: string)
     {
         if (this.edit)
         {
-            this.form.get(this.image).setValue(image);
+            this.form.get(this.item.image).setValue(image);
         }
     }
 }
