@@ -38,10 +38,8 @@
         </div>
 -->
         <app-item-description [form]="form$ | async"
-                              [title]="'general.description' | translate"
-                              [descriptionPlaceholder]="'page.event.descriptionPlaceholder' | translate"
-                              image="photo"
-                              [imagePlaceholder]="'page.event.imagePlaceholder' | translate">
+                              [item]="itemDescription"
+                              (imageClicked)="imageClicked()">
         </app-item-description>
 <!--
         <app-item-description [title]="'general.description' | translate"

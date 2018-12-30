@@ -9,7 +9,7 @@ import { StateCluster, ActionSetClusterId } from '@firefly/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '@theory/core';
 import { takeUntil } from 'rxjs/operators';
-import { ItemHeader } from '@firefly/mobile';
+import { ItemHeader, ItemDescription } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { Pages } from '../pages.enum';
 
@@ -31,6 +31,12 @@ export class PagePublishEvent extends BaseComponent
         iconUrlEmpty: 'assets/icons/avatar-empty.svg'
     };
 
+    public itemDescription: ItemDescription =
+    {
+        image:       'photo',
+        description: 'description'
+    };
+
     constructor(private store: Store, private translate: TranslateService)
     {
         super();
@@ -41,7 +47,10 @@ export class PagePublishEvent extends BaseComponent
         ([
             'page.event.titlePlaceholder',
             'page.event.subtitlePlaceholder',
-            'page.event.iconPlaceholder'
+            'page.event.iconPlaceholder',
+            'page.event.descriptionPlaceholder',
+            'page.event.imagePlaceholder',
+            'general.description'
         ]).
         pipe(takeUntil(this.destroy$)).
         subscribe((translations: Array<string>) =>
@@ -53,6 +62,14 @@ export class PagePublishEvent extends BaseComponent
                 subtitlePlaceholder: translations['page.event.subtitlePlaceholder'],
                 iconPlaceholder:     translations['page.event.iconPlaceholder']
             };
+
+            this.itemDescription =
+            {
+                ...this.itemDescription,
+                title:                  translations['general.description'],
+                descriptionPlaceholder: translations['page.event.descriptionPlaceholder'],
+                imagePlaceholder:       translations['page.event.imagePlaceholder']
+            };
         });
     }
 
@@ -62,6 +79,11 @@ export class PagePublishEvent extends BaseComponent
     }
 
     public iconClicked(): void
+    {
+        this.store.dispatch(new Navigate([Pages.Home, Pages.PublishEvent, Pages.ImageSelector]));
+    }
+
+    public imageClicked(): void
     {
         this.store.dispatch(new Navigate([Pages.Home, Pages.PublishEvent, Pages.ImageSelector]));
     }
