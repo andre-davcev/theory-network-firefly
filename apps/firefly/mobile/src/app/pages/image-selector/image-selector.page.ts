@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 import { Store } from '@ngxs/store';
 
@@ -15,7 +15,7 @@ import { Pages } from '../pages.enum';
 export class PageImageSelector
 {
     public Pages: any = Pages;
-    public segment: string = Pages.ImageCatalog;
+    public segment: Pages = Pages.ImageCatalog;
     public translations: Array<string> = [];
 
     constructor(private store: Store) { }

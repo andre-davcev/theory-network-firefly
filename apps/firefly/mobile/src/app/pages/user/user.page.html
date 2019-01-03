@@ -1,11 +1,11 @@
 <ion-header>
     <ion-toolbar elevation="2" color="dark">
-        <ion-segment (ionChange)="segmentChanged($event)" color="primary" value="Pages.UserProfile">
-            <ion-segment-button value="Pages.UserProfile">
+        <ion-segment (ionChange)="segmentChanged($event)" color="primary" [value]="Pages.UserProfile">
+            <ion-segment-button [value]="Pages.UserProfile">
                 <ion-label>{{'page.user-profile.title' | translate}}</ion-label>
             </ion-segment-button>
 
-            <ion-segment-button value="Pages.UserSettings">
+            <ion-segment-button [value]="Pages.UserSettings">
                 <ion-label>{{'page.user-settings.title' | translate}}</ion-label>
             </ion-segment-button>
         </ion-segment>

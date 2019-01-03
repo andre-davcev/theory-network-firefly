@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 
+import { ModuleComponentImageGrid } from '@theory/ionic';
 import { ModulePage } from '@firefly/app/modules';
 
 import { PageImageLibrary } from './image-library.page';
@@ -8,7 +9,8 @@ import { PageImageLibrary } from './image-library.page';
 ({
     imports :
     [
-        ModulePage
+        ModulePage,
+        ModuleComponentImageGrid
     ],
 
     declarations : [PageImageLibrary],
