@@ -1,0 +1,49 @@
+:host
+{
+    --cpt-padding: 0;
+    --cpt-gap: 1px;
+    --cpt-min-height-image: 155px;
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    ion-grid
+    {
+        --ion-grid-padding: var(--cpt-padding);
+    }
+
+    ion-col
+    {
+        --ion-grid-column-padding: var(--cpt-gap);
+    }
+
+    .cpt-image
+    {
+        position: relative;
+        background-size: cover;
+        width: 100%;
+    }
+
+    &.cpt-square
+    {
+        ion-col
+        {
+            position: relative;
+
+            .cpt-image
+            {
+                position: relative;
+                padding-top: 100%;
+            }
+        }
+    }
+
+    &:not(.cpt-square)
+    {
+        .cpt-image
+        {
+            min-height: var(--cpt-min-height-image);
+        }
+    }
+}
