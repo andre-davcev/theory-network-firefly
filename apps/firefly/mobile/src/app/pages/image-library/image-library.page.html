@@ -1,1 +1,1 @@
-<app-image-grid [urls]="urls" [square]="true" (clicked)="imageClicked($event)"></app-image-grid>
+<app-image-grid [urls]="libraryThumbnailUrls$ | async" [square]="true" (clicked)="imageClicked($event)"></app-image-grid>

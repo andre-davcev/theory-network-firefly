@@ -16,6 +16,7 @@ export const {
   Modals,
   Motion,
   Network,
+  Photos,
   PushNotifications,
   Share,
   SplashScreen,
