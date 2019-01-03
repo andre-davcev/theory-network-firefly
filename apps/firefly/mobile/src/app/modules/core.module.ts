@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicRouteStrategy } from '@ionic/angular';
 import { NgxsModule } from '@ngxs/store';
@@ -11,13 +12,13 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { Pro } from '@ionic/pro';
 
 import { AppIonicCoreModule } from '@theory/ionic';
 import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
 import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
+import { PhotoLibrary } from '@ionic-native/photo-library';
 
 /*
 Pro.init('1e5146ca',
@@ -36,6 +37,7 @@ Pro.init('1e5146ca',
         AngularFireModule.initializeApp(environment.apis.firebase),
         AngularFireAuthModule,
         AngularFirestoreModule,
+        AngularFireStorageModule,
 
         NgxsModule.forRoot
         ([
@@ -59,6 +61,7 @@ Pro.init('1e5146ca',
     providers :
     [
         Globalization,
+        PhotoLibrary,
         Firebase,
         { provide: RouteReuseStrategy,    useClass: IonicRouteStrategy },
         { provide: 'FirebaseEnvironment', useValue: environment.apis.firebase },

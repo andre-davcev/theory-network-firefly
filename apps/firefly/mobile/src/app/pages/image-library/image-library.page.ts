@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store, Select } from '@ngxs/store';
+import { ActionPhotosGetLibrary, StatePhotos } from '@theory/capacitor/state/photos';
+import { Observable } from 'rxjs';
 
 @Component
 ({
@@ -7,18 +10,16 @@ import { Component } from '@angular/core';
     styleUrls   : ['./image-library.page.scss']
 })
 
-export class PageImageLibrary
+export class PageImageLibrary implements OnInit
 {
-    public urls: Array<string> =
-    [
-        'assets/images/temp-icon-1.png',
-        'assets/images/temp-icon-2.png',
-        'assets/images/temp-icon-3.png',
-        'assets/images/temp-icon-4.png',
-        'assets/images/temp-icon-5.png',
-        'assets/images/temp-icon-6.png',
-        'assets/images/temp-icon-7.png'
-    ];
+    @Select(StatePhotos.libraryThumbnailUrls) libraryThumbnailUrls$: Observable<Array<string>>;
+
+    constructor(private store: Store) { }
+
+    public ngOnInit(): void
+    {
+        this.store.dispatch(new ActionPhotosGetLibrary());
+    }
 
     public imageClicked(index: number): void
     {
