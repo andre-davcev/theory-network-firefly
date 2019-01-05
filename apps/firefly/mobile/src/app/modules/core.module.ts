@@ -18,7 +18,6 @@ import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
 import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
-import { PhotoLibrary } from '@ionic-native/photo-library';
 
 /*
 Pro.init('1e5146ca',
@@ -61,7 +60,6 @@ Pro.init('1e5146ca',
     providers :
     [
         Globalization,
-        PhotoLibrary,
         Firebase,
         { provide: RouteReuseStrategy,    useClass: IonicRouteStrategy },
         { provide: 'FirebaseEnvironment', useValue: environment.apis.firebase },

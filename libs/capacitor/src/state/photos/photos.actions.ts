@@ -1,31 +1,17 @@
-import { GetLibraryOptions, RequestAuthorizationOptions } from '@ionic-native/photo-library';
+import { PhotosFetchOptions, PhotosAlbumsFetchOptions } from '@capacitor/core';
 
 import { ActionPhotos } from './photos.actions.enum';
 
-export class ActionPhotosSetAuthorizationOptions
+export class ActionPhotosGet
 {
-    static readonly type = ActionPhotos.SetAuthorizationOptions;
+    static readonly type = ActionPhotos.Get;
 
-    constructor(public payload: RequestAuthorizationOptions) { }
-}
-
-export class ActionPhotosRequestAuthorization
-{
-    static readonly type = ActionPhotos.RequestAuthorization;
-
-    constructor() { }
-}
-
-export class ActionPhotosGetLibrary
-{
-    static readonly type = ActionPhotos.GetLibrary;
-
-    constructor(public payload: GetLibraryOptions) { }
+    constructor(public payload?: PhotosFetchOptions) { }
 }
 
 export class ActionPhotosGetAlbums
 {
     static readonly type = ActionPhotos.GetAlbums;
 
-    constructor() { }
+    constructor(public payload?: PhotosAlbumsFetchOptions) { }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { ActionPhotosGetLibrary, StatePhotos } from '@theory/capacitor/state/photos';
+import { ActionPhotosGet, StatePhotos } from '@theory/capacitor';
 import { Observable } from 'rxjs';
 
 @Component
@@ -12,13 +12,13 @@ import { Observable } from 'rxjs';
 
 export class PageImageLibrary implements OnInit
 {
-    @Select(StatePhotos.libraryThumbnailUrls) libraryThumbnailUrls$: Observable<Array<string>>;
+    @Select(StatePhotos.photoThumbnailUrls) photoThumbnailUrls$: Observable<Array<string>>;
 
     constructor(private store: Store) { }
 
     public ngOnInit(): void
     {
-        this.store.dispatch(new ActionPhotosGetLibrary());
+        this.store.dispatch(new ActionPhotosGet());
     }
 
     public imageClicked(index: number): void

@@ -8,11 +8,7 @@ export const StatePhotosOptions: StoreOptions<StatePhotosModel> =
 
     defaults:
     {
-        authorizationOptions : undefined,
-        authorized           : false,
-        library              : [],
-        albums               : [],
-        watchingLibrary      : false,
-        watchingAlbums       : false
+        photos: undefined,
+        albums: undefined
     }
 };

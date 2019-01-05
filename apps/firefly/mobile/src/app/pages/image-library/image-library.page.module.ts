@@ -5,7 +5,7 @@ import { ModuleComponentImageGrid } from '@theory/ionic';
 import { ModulePage } from '@firefly/app/modules';
 
 import { PageImageLibrary } from './image-library.page';
-import { StatePhotos } from '@theory/capacitor/state/photos';
+import { StatePhotos } from '@theory/capacitor';
 
 @NgModule
 ({
