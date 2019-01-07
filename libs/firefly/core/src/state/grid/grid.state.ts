@@ -85,7 +85,7 @@ export class StateGrid
         {
             const iconCount: number = difference > pageSize ? pageSize : difference;
             const start: number     = pageNumber * pageSize;
-            const end: number       = start + iconCount - 1;
+            const end: number       = start + iconCount;
 
             patchState
             ({
@@ -144,7 +144,7 @@ export class StateGrid
         {
             const imageCount: number = difference > pageSize ? pageSize : difference;
             const start: number      = pageNumber * pageSize;
-            const end: number        = start + imageCount - 1;
+            const end: number        = start + imageCount;
 
             patchState
             ({
