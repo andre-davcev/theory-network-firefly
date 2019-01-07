@@ -21,6 +21,11 @@ export enum Pages
     UserProfile  = 'profile',
     UserSettings = 'settings',
 
+    IconSelector = 'icon-selector',
+    IconCatalog  = 'catalog',
+    IconAssets   = 'assets',
+    IconLibrary  = 'library',
+
     ImageSelector = 'image-selector',
     ImageCatalog  = 'catalog',
     ImageAssets   = 'assets',
