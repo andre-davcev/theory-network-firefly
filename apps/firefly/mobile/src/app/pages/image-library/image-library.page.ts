@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { ActionPhotosGet, StatePhotos } from '@theory/capacitor';
 import { Observable } from 'rxjs';
+import { ActionGridIconLibraryWatch, StateGrid, ActionGridIconLibraryPage } from '@firefly/core';
 
 @Component
 ({
@@ -12,17 +12,24 @@ import { Observable } from 'rxjs';
 
 export class PageImageLibrary implements OnInit
 {
-    @Select(StatePhotos.photoThumbnailUrls) photoThumbnailUrls$: Observable<Array<string>>;
+    @Select(StateGrid.iconLibrary) iconLibrary$: Observable<Array<string>>;
 
     constructor(private store: Store) { }
 
     public ngOnInit(): void
     {
-        this.store.dispatch(new ActionPhotosGet());
+        this.store.dispatch(new ActionGridIconLibraryWatch());
     }
 
     public imageClicked(index: number): void
     {
         console.log(`icon ${index} clicked`);
+    }
+
+    public doInfinite(infiniteScroll: any): void
+    {
+        this.store.dispatch(new ActionGridIconLibraryPage()).
+
+        subscribe(() => infiniteScroll.target.complete());
     }
 }
