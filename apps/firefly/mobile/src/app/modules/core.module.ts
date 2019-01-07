@@ -14,7 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppIonicCoreModule } from '@theory/ionic';
-import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
+import { StateLanguage, StateLocation, StateDevice, StatePhotos } from '@theory/capacitor';
 import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
@@ -49,7 +49,8 @@ Pro.init('1e5146ca',
             StateCluster,
             StatePlaces,
             StateIcons,
-            StateSubscriptions
+            StateSubscriptions,
+            StatePhotos
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),

@@ -7,7 +7,6 @@ import { StatePhotosModel } from './photos.state.model';
 import { StatePhotosOptions } from './photos.state.options';
 import { ActionPhotosGet, ActionPhotosGetAlbums } from './photos.actions';
 import { Photos } from '@theory/capacitor/constants';
-import { CoreEnum } from '@theory/core';
 
 @State<StatePhotosModel>(StatePhotosOptions)
 export class StatePhotos
@@ -20,16 +19,6 @@ export class StatePhotos
     @Selector() static albums(state: StatePhotosModel): Array<PhotosAlbum>
     {
         return state.albums == null ? [] : state.albums.albums;
-    }
-
-    @Selector() static photoThumbnailUrls(state: StatePhotosModel): Array<string>
-    {
-        const photoThumbnailUrls: Array<string> = state.photos == null ? [] : state.photos.photos.map((photo: PhotoAsset) => `${CoreEnum.DataUri}${photo.data}`);
-
-        console.log(state.photos);
-        console.log(photoThumbnailUrls);
-
-        return photoThumbnailUrls;
     }
 
     constructor() { }
