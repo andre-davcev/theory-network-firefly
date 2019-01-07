@@ -80,7 +80,7 @@ export class PagePublishEvent extends BaseComponent
 
     public iconClicked(): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, Pages.PublishEvent, Pages.ImageSelector]));
+        this.store.dispatch(new Navigate([Pages.Home, Pages.PublishEvent, Pages.IconSelector]));
     }
 
     public imageClicked(): void
