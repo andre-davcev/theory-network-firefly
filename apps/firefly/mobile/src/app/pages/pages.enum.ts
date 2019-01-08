@@ -3,12 +3,17 @@ export enum Pages
     Home          = 'home',
 
     Search        = 'search',
-    PublishEvent  = 'publish-event',
     Subscriptions = 'subscriptions',
     Assets        = 'assets',
     User          = 'user',
     Stream        = 'stream',
     Alert         = 'alert',
+
+    AssetCluster = 'cluster',
+    AssetEvent   = 'event',
+    AssetPlace   = 'image',
+    AssetIcon    = 'icon',
+    AssetImage   = 'image',
 
     Icons    = 'icons',
     Images   = 'images',

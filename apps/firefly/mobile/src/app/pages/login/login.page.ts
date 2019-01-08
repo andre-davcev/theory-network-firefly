@@ -5,6 +5,8 @@ import { filter, take } from 'rxjs/operators';
 import { NavController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
+import { AuthProvider } from '@theory/firebase';
+
 import { StateUser, ActionUserAuthenticate, ActionLoginEmail } from '@firefly/core';
 import { ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/capacitor';
 
@@ -21,6 +23,8 @@ export class PageLogin implements OnInit
     @Select(StateUser.loading)                userLoading$:       Observable<boolean>;
     @Select(StateUser.userFound)              userFound$:         Observable<boolean>;
     @Select(StateUser.loadedNotAuthenticated) loadedNotAuthenticated$: Observable<boolean>;
+
+    public AuthProvider: any = AuthProvider;
 
     constructor(private store: Store, private nav: NavController) { }
 

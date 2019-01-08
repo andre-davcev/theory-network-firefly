@@ -15,12 +15,12 @@ import { Pages } from '../pages.enum';
 
 @Component
 ({
-    selector    : 'app-page-publish-event',
-    templateUrl : 'publish-event.page.html',
-    styleUrls   : ['./publish-event.page.scss']
+    selector    : 'app-page-asset-event',
+    templateUrl : 'asset-event.page.html',
+    styleUrls   : ['./asset-event.page.scss']
 })
 
-export class PagePublishEvent extends BaseComponent
+export class PageAssetEvent extends BaseComponent
 {
     @Select(StateCluster.form) form$: Observable<FormGroup>;
 
@@ -80,11 +80,11 @@ export class PagePublishEvent extends BaseComponent
 
     public iconClicked(): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, Pages.PublishEvent, Pages.IconSelector]));
+        this.store.dispatch(new Navigate([Pages.Home, Pages.AssetEvent, Pages.IconSelector]));
     }
 
     public imageClicked(): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, Pages.PublishEvent, Pages.ImageSelector]));
+        this.store.dispatch(new Navigate([Pages.Home, Pages.AssetEvent, Pages.ImageSelector]));
     }
 }
