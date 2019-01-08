@@ -1,5 +1,5 @@
 <ion-slides pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
   <ion-slide *ngFor="let alert of alerts$ | async">
-      <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (click)="navigate(Pages.Alert)"></app-slide>
+      <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (click)="navigate()"></app-slide>
   </ion-slide>
 </ion-slides>

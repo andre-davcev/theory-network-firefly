@@ -10,6 +10,7 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Alert, StateAlerts } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
+import { Navigate } from '@ngxs/router-plugin';
 @Component
 ({
     selector    : 'app-page-alert',
@@ -31,18 +32,22 @@ export class PageAlert
 
     constructor(
       public alertController: AlertController,
-      private router: Router,
       private store: Store ) { }
 
-    ionViewWillEnter()
+    public ionViewWillEnter(): void
     {
 //        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
-    slideChanged()
+    public slideChanged(): void
     {
         from(this.slides.getActiveIndex()).
 
         pipe(tap((index: number) => console.log('Slide Changed: ' + index)));
+    }
+
+    public navigate(): void
+    {
+        this.store.dispatch(new Navigate([Pages.Home, Pages.AssetEvent]));
     }
 }
