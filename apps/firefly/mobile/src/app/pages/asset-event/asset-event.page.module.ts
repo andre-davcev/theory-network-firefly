@@ -7,6 +7,8 @@ import { ModulePage } from '@firefly/app/modules';
 
 import { PageAssetEvent } from './asset-event.page';
 import { RoutesPageAssetEvent } from './asset-event.page.routes';
+import { NgxsModule } from '@ngxs/store';
+import { StateEvent } from '@firefly/core';
 
 @NgModule
 ({
@@ -18,7 +20,8 @@ import { RoutesPageAssetEvent } from './asset-event.page.routes';
         ModuleComponentItemHeader,
         ModuleComponentItemMap,
         ModuleComponentItemDescription,
-        RouterModule.forChild(RoutesPageAssetEvent)
+        RouterModule.forChild(RoutesPageAssetEvent),
+        NgxsModule.forFeature([StateEvent])
     ],
 
     declarations : [PageAssetEvent],

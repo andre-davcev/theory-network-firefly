@@ -14,12 +14,4 @@ export interface Cluster extends Model
     categories?  : string;
     private?     : boolean;
     locations?   : Array<DocumentReference>;
-
-/*
-    image: DocumentReference
-    categories: string
-    places: Array<DocumentReference>
-    events: Array<DocumentReference>
-    subscribers: Array<DocumentReference>
-*/
 }
