@@ -6,6 +6,7 @@ import { IonicRouteStrategy } from '@ionic/angular';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
@@ -55,6 +56,7 @@ Pro.init('1e5146ca',
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
         NgxsRouterPluginModule.forRoot(),
+        NgxsFormPluginModule.forRoot(),
         NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken})
     ],
 
