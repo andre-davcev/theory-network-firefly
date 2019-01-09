@@ -43,7 +43,7 @@
   "page.event.title"                  : "New Event",
   "page.event.titlePlaceholder"       : "Add your title",
   "page.event.subtitlePlaceholder"    : "Add your subtitle",
-  "page.event.iconPlaceholder"        : "select icon",
+  "page.event.iconPlaceholder"        : "select cluster",
   "page.event.imagePlaceholder"       : "select image",
   "page.event.descriptionPlaceholder" : "Write a description ...",
 
