@@ -6,6 +6,5 @@ export interface Asset extends Model
     description : string;
     private     : boolean;
     userId?     : string;
-    groupId?    : string;
     draft?      : boolean;
 }

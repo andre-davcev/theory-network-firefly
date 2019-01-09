@@ -2,8 +2,8 @@ import { Asset } from './asset.model';
 
 export interface Event extends Asset
 {
-/*
-    hours: ?
-    placeRef: DocumentReference
-*/
+    clusters: Record<string,string>;
+    tagline: string;
+    iconId: string;
+    imageId: string;
 }
