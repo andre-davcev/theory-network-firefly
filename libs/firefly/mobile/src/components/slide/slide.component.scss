@@ -15,7 +15,7 @@ $app-slide-close-border-width:                       2px;
 
 :host
 {
-    --cpt-border-radius: 14px;
+    --cpt-border-radius: 12px;
 
     position: relative;
     display: flex;
@@ -78,18 +78,9 @@ $app-slide-close-border-width:                       2px;
         line-height: 17px;
         color: rgba(0, 0, 0, 0.54);
     }
-
-    .cpt-container-main
+    .cpt-image
     {
-        position: relative;
-        overflow: hidden;
         border-radius: var(--cpt-border-radius);
-
-        app-item-map {
-            --cpt-border-radius: 0;
-            --cpt-border-radius-top: 0;
-            --cpt-border-radius-bottom: 14px;
-        }
     }
 
     .cpt-date
