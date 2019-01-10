@@ -80,6 +80,9 @@ $app-slide-close-border-width:                       2px;
     }
     .cpt-image
     {
+        flex: 1;
+        width: 100%;
+        background-size: cover;
         border-radius: var(--cpt-border-radius);
     }
 
