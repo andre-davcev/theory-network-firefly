@@ -4,8 +4,7 @@
         <h2 class="cpt-short">{{ slide.body }}</h2>
     </section>
 
-    <img class="cpt-image" [src]="slide.image">
-
+    <div class="cpt-image" [style.background-image]="'url(' + slide.image + ')'"></div>
     <div class="cpt-button">{{ buttonText }}</div>
 
     <span class="cpt-date">{{ slide.date }}</span>
