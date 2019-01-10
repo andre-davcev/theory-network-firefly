@@ -1,9 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Slide } from './slide.interface';
-import { filter, map, tap } from 'rxjs/operators';
 
 @Component
 ({
@@ -13,20 +10,22 @@ import { filter, map, tap } from 'rxjs/operators';
     changeDetection : ChangeDetectionStrategy.OnPush
 })
 
-export class ComponentSlide implements OnInit
+export class ComponentSlide
 {
     @Input() slide: Slide;
     @Input() buttonText: string;
     @Input() routerLink: string;
-    @Input() showMap: boolean = false;
 
-    public breakpointShowMap$: Observable<boolean>;
+/*
+    public breakpointShowMap$: Observdable<boolean>;
 
     constructor(private breakpointObserver: BreakpointObserver) { }
+
 
     ngOnInit(): void
     {
         this.breakpointShowMap$ = this.breakpointObserver.observe(['(min-height: 882px)']).
         pipe(map((state: BreakpointState) => state.matches));
     }
+*/
 }

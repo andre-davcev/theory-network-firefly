@@ -4,10 +4,7 @@
         <h2 class="cpt-short">{{ slide.body }}</h2>
     </section>
 
-    <section fxLayout="column" class="cpt-container-main">
-        <img class="cpt-image" [src]="slide.image">
-        <app-item-map [routerLink]="[routerLink]" elevation="2" *ngIf="breakpointShowMap$ | async"></app-item-map>
-    </section>
+    <img class="cpt-image" [src]="slide.image">
 
     <div class="cpt-button">{{ buttonText }}</div>
 

@@ -8,7 +8,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ComponentSlide } from './slide.component';
-import { ModuleComponentItemMap } from '../item-map';
 
 @NgModule
 ({
@@ -19,7 +18,6 @@ import { ModuleComponentItemMap } from '../item-map';
         FlexLayoutModule,
         RouterModule,
         TranslateModule,
-        ModuleComponentItemMap,
         ModuleDirectiveElevation
     ],
 
