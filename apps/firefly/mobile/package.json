@@ -70,6 +70,7 @@
     "cordova-plugin-globalization": "file:../../../node_modules/cordova-plugin-globalization",
     "firebase": "file:../../../node_modules/firebase",
     "font-awesome": "file:../../../node_modules/font-awesome",
+    "ionicons": "file:../../../node_modules/ionicons",
     "mapbox-gl": "file:../../../node_modules/mapbox-gl",
     "ngx-mapbox-gl": "file:../../../node_modules/ngx-mapbox-gl",
     "rxjs": "file:../../../node_modules/rxjs",
