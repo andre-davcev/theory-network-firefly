@@ -8,6 +8,18 @@
 </ion-header>
 
 <ion-content>
+  	<ion-list>
+        <ion-item *ngFor="let cluster of clusters$ | async">
+            <ion-avatar slot="start">
+                <img [src]="cluster.icon"> 
+            </ion-avatar>
+            <ion-label>
+                <h2>{{cluster.name}}</h2>
+                <p>{{cluster.tagline}}</p>
+            </ion-label>
+            <ion-icon name="arrow-dropright" item-right></ion-icon>
+        </ion-item>
+      </ion-list>
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
         <ion-fab-button color="secondary" mode="md" (click)="add()">
             <ion-icon name="md-add"></ion-icon>

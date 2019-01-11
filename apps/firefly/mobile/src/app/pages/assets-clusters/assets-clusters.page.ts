@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Select, Store } from '@ngxs/store'
+import { Cluster, StateCluster, ActionGetClusters } from '@firefly/core';
+import { Observable } from 'rxjs';
 
 @Component
 ({
@@ -9,13 +12,19 @@ import { Component } from '@angular/core';
 
 export class PageAssetsClusters
 {
-    constructor()
-    {
+  @Select(StateCluster.clusters) clusters$: Observable<Array<Cluster>>;
 
+    constructor(private store: Store)
+    {
     }
 
     add(): void
     {
 
+    }
+
+    ionViewWillEnter()
+    {
+      this.store.dispatch(new ActionGetClusters());
     }
 }
