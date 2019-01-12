@@ -17,7 +17,7 @@ export class ServiceCluster
     getClusters(userid:String): Observable<Cluster[]>
     {
       let dumKey = 1;
-      const cluster1: Cluster = {
+     /* const cluster1: Cluster = {
         name        : 'name1',
         tagline     : 'tagline1',
         description : 'description1',
@@ -36,11 +36,13 @@ export class ServiceCluster
         categories  : 'categories',
         private     : false
       }
-      const clusters:Cluster[] = [cluster1,cluster2];
+      const clusters:Cluster[] = [cluster1,cluster2];*/
         /*const dummyData = {
           id: 100,
           categories: "dummy"
         }*/
+
+        const clusters: Cluster[] =[];
         return of(clusters)
         .pipe(
           map(actions => {

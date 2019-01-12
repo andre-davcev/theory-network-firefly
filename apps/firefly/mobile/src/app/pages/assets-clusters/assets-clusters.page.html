@@ -18,8 +18,11 @@
                 <p>{{cluster.tagline}}</p>
             </ion-label>
             <ion-icon name="arrow-dropright" item-right></ion-icon>
-        </ion-item>
+        </ion-item>        
       </ion-list>
+      <div *ngIf="(clusters$ | async)?.length==0" class="container">
+        <p>Create a new Cluster?</p>
+      </div>
     <ion-fab slot="fixed" vertical="bottom" horizontal="end">
         <ion-fab-button color="secondary" mode="md" (click)="add()">
             <ion-icon name="md-add"></ion-icon>
