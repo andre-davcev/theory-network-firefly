@@ -17,8 +17,8 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageHome
 {
-    public Pages:any = Pages;
-    alertToggle:boolean = false;
+    public Pages:      any     = Pages;
+    public showAlerts: boolean = true;
 
     constructor
     (
@@ -36,16 +36,11 @@ export class PageHome
         this.store.dispatch(new Navigate([Pages.Home, type]));
     }
 
-    alertStreamToggle(){
+    alertStreamToggle(type: Pages)
+    {
+      this.navigate(type)
 
-      if(this.alertToggle){
-        this.store.dispatch(new Navigate([Pages.Home, Pages.Alert]));
-      }
-      else{
-        this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
-      }
-
-      this.alertToggle = !this.alertToggle;
+      this.showAlerts = type === Pages.Alert;
     }
 
     deleteConfirm()
