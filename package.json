@@ -17,6 +17,7 @@
     "fire-design-logo": "grunt sketch_export:logo",
     "fire-design-text": "grunt sketch_export:text",
     "fire-design-exports": "grunt exports",
+    "fire-resources": "cd apps/firefly/mobile && ionic cordova resources",
     "lib-build-all": "npm run lib-build-firefly-core && npm run lib-build-firefly-mobile && npm run lib-build-theory-capacitor && npm run lib-build-theory-core && npm run lib-build-theory-device && npm run lib-build-theory-firebase && npm run lib-build-theory-foursquare && npm run lib-build-theory-google && npm run lib-build-theory-ionic && npm run lib-build-theory-mapbox && npm run lib-build-theory-web",
     "lib-build-firefly-core": "ng build firefly-core",
     "lib-build-firefly-mobile": "ng build firefly-mobile",
