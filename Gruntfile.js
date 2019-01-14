@@ -11,7 +11,7 @@ module.exports = function(grunt)
 
         dirs :
         {
-            base      : './apps/assets-firefly/design',
+            base      : './apps/firefly/assets/design',
             icons     : '<%= dirs.base %>/icons',
             images    : '<%= dirs.base %>/images',
             sketch    : '<%= dirs.base %>/sketch',
