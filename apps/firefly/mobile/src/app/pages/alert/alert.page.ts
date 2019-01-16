@@ -48,6 +48,6 @@ export class PageAlert
 
     public navigate(): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, Pages.AssetEvent]));
+        this.store.dispatch(new Navigate([Pages.AssetEvent]));
     }
 }

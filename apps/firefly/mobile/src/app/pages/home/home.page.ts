@@ -20,6 +20,8 @@ export class PageHome
     public Pages:      any     = Pages;
     public showAlerts: boolean = true;
 
+    public child: Pages.Alert | Pages.Stream = Pages.Alert;
+
     constructor
     (
         public alertController: AlertController,
@@ -29,16 +31,22 @@ export class PageHome
     ionViewWillEnter()
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+
+        if (!this.showAlerts)
+        {
+            this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
+        }
     }
 
     navigate(type: Pages): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, type]));
+        this.store.dispatch(new Navigate([type]));
     }
 
-    alertStreamToggle(type: Pages)
+    alertStreamToggle(type: Pages.Alert | Pages.Stream)
     {
-      this.navigate(type)
+        this.child = type;
+      this.store.dispatch(new Navigate([Pages.Home, type]));
 
       this.showAlerts = type === Pages.Alert;
     }

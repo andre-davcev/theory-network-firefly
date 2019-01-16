@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ValidatorsExtended, FormGenerator } from '@theory/core';
 import { Event } from '@firefly/core/models';
+import { AssetKey, EventKey } from '../enums';
 
 @Injectable({ providedIn: 'root' })
 export class FormEvent extends FormGenerator<Event>
@@ -16,14 +17,15 @@ export class FormEvent extends FormGenerator<Event>
     protected empty(): Event
     {
         return {
-          draft       : true,
-          name        : null,
-          tagline     : null,
-          description : null,
-          private     : true,
-          clusters    : [],
-          iconId      : undefined,
-          imageId     : undefined
+          [AssetKey.Draft]       : true,
+          [AssetKey.Name]        : null,
+          [AssetKey.Description] : null,
+          [AssetKey.Private]     : true,
+
+          [EventKey.Tagline]  : null,
+          [EventKey.ImageId]  : undefined,
+          [EventKey.PlaceId]  : undefined,
+          [EventKey.Clusters] : []
         };
     }
 
@@ -31,14 +33,15 @@ export class FormEvent extends FormGenerator<Event>
     {
         const formGroup: FormGroup = this.formBuilder.group
         ({
-            draft       : event.draft,
-            name        : [event.name,        ValidatorsExtended.minLength(1)],
-            tagline     : [event.tagline,     ValidatorsExtended.minLength(1)],
-            description : [event.description, ValidatorsExtended.minLength(1)],
-            iconId      : [event.iconId,      Validators.required],
-            imageId     : [event.imageId,     Validators.required],
-            private     : event.private,
-            clusters    : this.formBuilder.array(event.clusters, Validators.minLength(1))
+            [AssetKey.Draft]       : event.draft,
+            [AssetKey.Name]        : [event.name,        ValidatorsExtended.minLength(1)],
+            [AssetKey.Description] : [event.description, ValidatorsExtended.minLength(1)],
+            [AssetKey.Private]     : event.private,
+
+            [EventKey.Tagline]  : [event.tagline, ValidatorsExtended.minLength(1)],
+            [EventKey.ImageId]  : [event.imageId, Validators.required],
+            [EventKey.PlaceId]  : [event.placeId, Validators.required],
+            [EventKey.Clusters] : this.formBuilder.array(event.clusters, Validators.minLength(1))
         });
 
         return formGroup;

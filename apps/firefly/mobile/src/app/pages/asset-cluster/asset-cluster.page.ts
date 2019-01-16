@@ -80,11 +80,11 @@ export class PageAssetCluster extends BaseComponent
 
     public iconClicked(): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, Pages.AssetEvent, Pages.IconSelector]));
+        this.store.dispatch(new Navigate([Pages.IconSelector]));
     }
 
     public imageClicked(): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, Pages.AssetEvent, Pages.ImageSelector]));
+        this.store.dispatch(new Navigate([Pages.ImageSelector]));
     }
 }

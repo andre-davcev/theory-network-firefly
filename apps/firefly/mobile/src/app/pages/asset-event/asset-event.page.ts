@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateCluster, ActionSetClusterId } from '@firefly/core';
+import { StateEvent, ActionSetEventId } from '@firefly/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '@theory/core';
 import { takeUntil } from 'rxjs/operators';
@@ -22,7 +22,11 @@ import { Pages } from '../pages.enum';
 
 export class PageAssetEvent extends BaseComponent
 {
-    @Select(StateCluster.form) form$: Observable<FormGroup>;
+    @Select(StateEvent.form) form$: Observable<FormGroup>;
+
+    /*
+    @Select(StateEvent.form) form$: Observable<FormGroup>;
+    */
 
     public itemHeader: ItemHeader =
     {
@@ -41,7 +45,7 @@ export class PageAssetEvent extends BaseComponent
     {
         super();
 
-        this.store.dispatch(new ActionSetClusterId('new'));
+        this.store.dispatch(new ActionSetEventId('new'));
 
         this.translate.get
         ([
@@ -80,11 +84,11 @@ export class PageAssetEvent extends BaseComponent
 
     public iconClicked(): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, Pages.AssetEvent, Pages.Clusters]));
+        this.store.dispatch(new Navigate([Pages.AssetsClusters]));
     }
 
     public imageClicked(): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, Pages.AssetEvent, Pages.ImageSelector]));
+        this.store.dispatch(new Navigate([Pages.ImageSelector]));
     }
 }
