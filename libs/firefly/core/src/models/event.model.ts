@@ -1,9 +1,10 @@
 import { Asset } from './asset.model';
+import { EventKey } from '../enums';
 
 export interface Event extends Asset
 {
-    clusters: Array<string>;
-    tagline: string;
-    iconId: string;
-    imageId: string;
+    [EventKey.Tagline]:  string;
+    [EventKey.ImageId]:  string;
+    [EventKey.PlaceId]:  string;
+    [EventKey.Clusters]: Array<string>;
 }

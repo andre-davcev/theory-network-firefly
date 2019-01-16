@@ -1,9 +1,11 @@
 import { firestore } from 'firebase/app';
 
+import { KeyModel } from '../enums';
+
 export interface Model
 {
-    id?: string;
-    v?: string;
-    dateCreated?: firestore.Timestamp;
-    dateUpdated?: firestore.Timestamp;
+    [KeyModel.ID]?:          string;
+    [KeyModel.Version]?:     string;
+    [KeyModel.DateCreated]?: firestore.Timestamp;
+    [KeyModel.DateUpdated]?: firestore.Timestamp;
 }

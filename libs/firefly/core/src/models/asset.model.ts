@@ -1,10 +1,12 @@
 import { Model } from '@theory/firebase';
 
+import { AssetKey } from '../enums';
+
 export interface Asset extends Model
 {
-    name        : string;
-    description : string;
-    private     : boolean;
-    userId?     : string;
-    draft?      : boolean;
+    [AssetKey.Name]          : string;
+    [AssetKey.Description] : string;
+    [AssetKey.Private]     : boolean;
+    [AssetKey.UserId]?     : string;
+    [AssetKey.Draft]?      : boolean;
 }

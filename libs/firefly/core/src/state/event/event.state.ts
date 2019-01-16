@@ -4,12 +4,13 @@ import { Action, Selector, Select, State, StateContext } from '@ngxs/store';
 import { FormGroup } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
-import { User, Event } from '@firefly/core/models';
+import { User, Event, Icon } from '@firefly/core/models';
 import { ServiceEvent } from '@firefly/core/services';
 import { FormCluster } from '@firefly/core/forms';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
 import { ActionGetEvents, ActionSetEventId, ActionSetEvent } from './event.actions';
+import { EventKey, AssetKey } from '@firefly/core/enums';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -24,7 +25,26 @@ export class StateEvent
     @Selector() static form(state: StateEventModel): FormGroup                 { return state.form; }
 
     @Selector() static events(state: StateEventModel): Array<Event> { return Object.keys(state.entities).map(id => state.entities[id]); }
-    @Selector() static entity(state: StateEventModel): Event        { return state.entities[state.id]; }
+
+    @Selector() static event(state: StateEventModel): Event { return state.entities[state.id]; }
+
+    // To Do: Repeat for all form values (model asset, event)
+    @Selector() static eventName(state: StateEventModel): string
+    {
+        const form: FormGroup = StateEvent.form(state);
+
+        return form == null ? '' : form.get(AssetKey.Name).value;
+    }
+
+    /*
+        To Do: Repeat for all form computed values
+            eventIcon         -> clusters     -> Icon
+            eventImageUrl     -> imageId      -> string (url)
+            eventPlace        -> placeId      -> Place
+            eventClusterCount -> clusterCount -> number (clusters.length)
+            eventClusters     -> clusters     -> Array<Cluster>
+    */
+    @Selector() static eventIcon(state: StateEventModel): Array<string> { return state.form.get(EventKey.Clusters).value; }
 
     @Action(ActionGetEvents)
     getClusters({ patchState } : StateContext<StateEventModel>)

@@ -1,38 +1,40 @@
 export enum Pages
 {
-    Home          = 'home',
+    Login = 'login',
+    Home  = 'home',
 
     Search        = 'search',
     Subscriptions = 'subscriptions',
     Assets        = 'assets',
     User          = 'user',
+
     Stream        = 'stream',
     Alert         = 'alert',
 
-    AssetCluster = 'cluster',
-    AssetEvent   = 'event',
-    AssetPlace   = 'image',
-    AssetIcon    = 'icon',
-    AssetImage   = 'image',
+    AssetCluster = 'asset-cluster',
+    AssetEvent   = 'asset-event',
+    AssetPlace   = 'asset-image',
+    AssetIcon    = 'asset-icon',
+    AssetImage   = 'asset-image',
 
-    Icons    = 'icons',
-    Images   = 'images',
-    Coupons  = 'coupons',
-    Beacons  = 'beacons',
-    Places   = 'places',
-    Events   = 'events',
-    Clusters = 'clusters',
+    AssetsIcons    = 'assets-icons',
+    AssetsImages   = 'assets-images',
+    AssetsCoupons  = 'assets-coupons',
+    AssetsBeacons  = 'assets-beacons',
+    AssetsPlaces   = 'assets-places',
+    AssetsEvents   = 'assets-events',
+    AssetsClusters = 'assets-clusters',
 
-    UserProfile  = 'profile',
-    UserSettings = 'settings',
+    UserProfile  = 'user-profile',
+    UserSettings = 'user-settings',
 
     IconSelector = 'icon-selector',
-    IconCatalog  = 'catalog',
-    IconAssets   = 'assets',
-    IconLibrary  = 'library',
+    IconCatalog  = 'icon-catalog',
+    IconAssets   = 'icon-assets',
+    IconLibrary  = 'icon-library',
 
     ImageSelector = 'image-selector',
-    ImageCatalog  = 'catalog',
-    ImageAssets   = 'assets',
-    ImageLibrary  = 'library'
+    ImageCatalog  = 'image-catalog',
+    ImageAssets   = 'image-assets',
+    ImageLibrary  = 'image-library'
 }

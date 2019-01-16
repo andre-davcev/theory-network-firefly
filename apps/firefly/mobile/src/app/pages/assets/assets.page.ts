@@ -27,7 +27,7 @@ export class PageAssets
 
     public go(page: Pages): void
     {
-        this.store.dispatch(new Navigate([Pages.Home, Pages.Assets, page]));
+        this.store.dispatch(new Navigate([page]));
     }
 }
 
