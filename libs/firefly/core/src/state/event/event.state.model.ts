@@ -7,4 +7,5 @@ export interface StateEventModel
     id       : string;
     form     : FormGroup;
     entities : Record<string, Event>;
+    empty    : Event;
 }

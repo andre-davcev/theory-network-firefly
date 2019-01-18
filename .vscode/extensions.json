@@ -22,6 +22,7 @@
       "shan.code-settings-sync",
       "github.vscode-pull-request-github",
       "peterjausovec.vscode-docker",
-      "vscodevim.vim"
+      "vscodevim.vim",
+      "nrwl.angular-console"
   ]
 }

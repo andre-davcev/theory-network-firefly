@@ -1,6 +1,6 @@
-export enum KeyModel
+export enum ModelKey
 {
-    ID          = 'id',
+    Id          = 'id',
     Version     = 'v',
     DateCreated = 'dateCreated',
     DateUpdated = 'dateUpdated'

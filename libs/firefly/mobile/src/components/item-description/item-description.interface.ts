@@ -4,6 +4,7 @@ export interface ItemDescription
 
     image?:            string;
     imagePlaceholder?: string;
+    imageAsUrl?:       boolean;
 
     description?:            string;
     descriptionPlaceholder?: string;

@@ -32,12 +32,13 @@ export class PageAssetEvent extends BaseComponent
     {
         title:        'name',
         subtitle:     'tagline',
-        iconUrlEmpty: 'assets/icons/avatar-empty.svg'
+        iconUrlEmpty: 'assets/icons/avatar-empty.svg',
+        iconAsUrl:    true
     };
 
     public itemDescription: ItemDescription =
     {
-        image:       'photo',
+        imageAsUrl:  true,
         description: 'description'
     };
 

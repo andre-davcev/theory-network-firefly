@@ -3,11 +3,11 @@
 
 <div class="cpt-icon-container" (click)="clickedIcon()">
     <img class="cpt-icon" [src]="iconUrl">
-    <p class="cpt-icon-placeholder" *ngIf="edit && !iconValue">{{item.iconPlaceholder}}</p>
+    <p class="cpt-icon-placeholder" *ngIf="!iconValue">{{item.iconPlaceholder}}</p>
 </div>
 
 <form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
-    <input class="cpt-icon-hidden" type="hidden" [formControlName]="item.icon">
+    <input class="cpt-icon-hidden" type="hidden" [formControlName]="item.icon" *ngIf="!item.iconAsUrl">
     <input class="cpt-title"       type="text"   [formControlName]="item.title"    [placeholder]="item.titlePlaceholder">
     <input class="cpt-subtitle"    type="text"   [formControlName]="item.subtitle" [placeholder]="item.subtitlePlaceholder">
 </form>

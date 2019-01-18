@@ -3,7 +3,7 @@
 
     <ion-textarea class="cpt-description" [placeholder]="item.descriptionPlaceholder" [formControlName]="item.description" [class.cpt-empty]="!imageValue"></ion-textarea>
 
-    <input class="cpt-image-hidden" type="hidden" [formControlName]="item.image">
+    <input class="cpt-image-hidden" type="hidden" [formControlName]="item.image" *ngIf="!item.imageAsUrl">
 
     <section class="cpt-image-container" fxLayout="column" fxLayoutAlign="center" (click)="clickedImage()" [class.cpt-image-valid]="imageValue">
         <h4 class="cpt-image-placeholder" *ngIf="!imageValue">{{item.imagePlaceholder}}</h4>

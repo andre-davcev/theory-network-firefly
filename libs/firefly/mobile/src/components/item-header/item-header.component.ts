@@ -42,9 +42,9 @@ export class ComponentItemHeader
 
     public get iconValue(): string
     {
-        this.item.icon = this.item.icon == null ? 'icon' : this.item.icon;
+        this.item.icon = this.item.icon == null && !this.item.iconAsUrl ? 'icon' : this.item.icon;
 
-        return this.edit ? this.form.get(this.item.icon).value : this.item.icon;
+        return this.edit && !this.item.iconAsUrl ? this.form.get(this.item.icon).value : this.item.icon;
     }
 
     public set iconValue(icon: string)

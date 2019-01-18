@@ -1,5 +1,5 @@
 import { Asset } from './asset.model';
-import { EventKey } from '../enums';
+import { EventKey } from './event.model.enum';
 
 export interface Event extends Asset
 {
