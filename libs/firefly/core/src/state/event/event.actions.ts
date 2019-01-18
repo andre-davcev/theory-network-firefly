@@ -1,5 +1,5 @@
 import { Event } from '@firefly/core/models';
-import { AssetKey, EventKey } from '@firefly/core/enums';
+import { AssetKey, EventKey } from '@firefly/core/models';
 
 import { ActionsEvent } from './event.actions.enum';
 

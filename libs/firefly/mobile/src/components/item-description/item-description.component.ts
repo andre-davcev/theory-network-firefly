@@ -47,9 +47,9 @@ export class ComponentItemDescription
 
     public get imageValue(): string
     {
-        this.item.image = this.item.image == null ? 'image' : this.item.image;
+        this.item.image = this.item.image == null && !this.item.imageAsUrl ? 'image' : this.item.image;
 
-        return this.edit ? this.form.get(this.item.image).value : this.item.image;
+        return this.edit && !this.item.imageAsUrl ? this.form.get(this.item.image).value : this.item.image;
     }
 
     public set imageValue(image: string)
