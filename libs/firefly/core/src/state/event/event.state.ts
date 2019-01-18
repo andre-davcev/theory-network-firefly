@@ -199,8 +199,6 @@ export class StateEvent
             [EventKey.Clusters] : this.formBuilder.array(event.clusters, Validators.minLength(1))
         });
 
-        console.log(form);
-
         patchState({ form });
 /*
         return this.serviceEvent.
