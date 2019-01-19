@@ -1,9 +1,10 @@
 :host
 {
     position: relative;
+    display: block;
 
     --cpt-height: 155px;
-    --cpt-width: 298px;
+    --cpt-width: 100%;
 
     --cpt-map-border-radius: 0;
     --cpt-map-border-radius-top: var(--cpt-map-border-radius);
