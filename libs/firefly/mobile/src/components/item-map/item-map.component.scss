@@ -11,7 +11,7 @@
     --cpt-border-radius-top:    var(--cpt-border-radius);
     --cpt-border-radius-bottom: var(--cpt-border-radius);
 
-    --cpt-background-color:    transparent;
+    --cpt-background-color: rgba(255, 255, 255, 0);
 
     position: relative;
     display: flex;
@@ -32,7 +32,7 @@
         width: 100%;
         height: var(--cpt-window-height);
         border-radius: var(--cpt-border-radius);
-        background-color: black;
+        background-color: rgba(255, 255, 255, 0);
     }
 
     app-map {
