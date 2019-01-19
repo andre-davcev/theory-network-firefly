@@ -16,7 +16,7 @@ export class ServiceCluster
 
     getClusters(userid:String): Observable<Cluster[]>
     {
-      let dumKey = 1;
+     // let dumKey = 1;
      /* const cluster1: Cluster = {
         name        : 'name1',
         tagline     : 'tagline1',
@@ -42,7 +42,7 @@ export class ServiceCluster
           categories: "dummy"
         }*/
 
-        const clusters: Cluster[] =[];
+        /*const clusters: Cluster[] =[];
         return of(clusters)
         .pipe(
           map(actions => {
@@ -55,10 +55,10 @@ export class ServiceCluster
               return { id, ...dumA};
             })
           })
-        );
+        );*/
 
-        /*return this.afs.collection<Cluster>('clusters', ref => {
-            return ref.where('userid', '==', userid)
+        return this.afs.collection<Cluster>('clusters', ref => {
+            return ref.where('userid', '==', 'myuser')
         })
         .snapshotChanges()
         .pipe(
@@ -68,7 +68,7 @@ export class ServiceCluster
                 const id = a.payload.doc.id;
                 return { id, ...data };
             })
-        }));*/
+        }));
     }
 
     updateCluster()
