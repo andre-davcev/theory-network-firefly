@@ -1,8 +1,5 @@
 :host
 {
-    position: relative;
-    display: block;
-
     --cpt-height: 155px;
     --cpt-width: 100%;
 
@@ -10,9 +7,16 @@
     --cpt-map-border-radius-top: var(--cpt-map-border-radius);
     --cpt-map-border-radius-bottom: var(--cpt-map-border-radius);
 
+    position: relative;
+    display: block;
+
+    height: var(--cpt-height);
+    width: var(--cpt-width);
+
     mgl-map {
         height: var(--cpt-height);
         width: var(--cpt-width);
+        display: block;
 
         ::ng-deep .mapboxgl-canvas-container
         {

@@ -1,22 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, Input} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, HostBinding, AfterViewInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest, from } from 'rxjs';
+import { filter, takeUntil,  map, delay } from 'rxjs/operators';
 import { GeolocationPosition } from '@capacitor/core';
 
 import { StateDevice, StateLocation } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
-//import { ComponentMapOrb } from '../map-orb/map-orb.component';
-
 
 @Component
 ({
     selector        : 'app-map',
     templateUrl     : './map.component.html',
-    styleUrls       : ['./map.component.scss'],
-    changeDetection : ChangeDetectionStrategy.OnPush
+    styleUrls       : ['./map.component.scss']
 })
-export class ComponentMap extends BaseComponent implements OnInit
+export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 {
     @Select(StateLocation.loading)       loading$  : Observable<boolean>;
     @Select(StateLocation.location)      location$ : Observable<GeolocationPosition>;
@@ -28,7 +25,16 @@ export class ComponentMap extends BaseComponent implements OnInit
     public location: GeolocationPosition;
     public center: Array<number>;
 
-//    private componentMapOrb: ComponentMapOrb;
+    public mapReady$: Observable<boolean>;
+    private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+    @Input()
+    @HostBinding('style.width')
+    public width: string = '100%';
+
+    @Input()
+    @HostBinding('style.height')
+    public height: string = '100%';
 
     constructor(private changeDetectorRef: ChangeDetectorRef)
     {
@@ -37,9 +43,12 @@ export class ComponentMap extends BaseComponent implements OnInit
 
     ngOnInit()
     {
-        // ToDo: Add takeUntil(this.destroy$)
         this.location$.
-        pipe(filter(position => position != null)).
+        pipe
+        (
+            takeUntil(this.destroy$),
+            filter(position => position != null)
+        ).
         subscribe((position: GeolocationPosition) =>
         {
             this.location = position;
@@ -52,5 +61,17 @@ export class ComponentMap extends BaseComponent implements OnInit
 
             this.changeDetectorRef.markForCheck();
         });
+
+        this.mapReady$ = combineLatest(this.locationValid$, this.contentInitiated$).
+        pipe
+        (
+            filter(([locationValid, contentInitiated]) => locationValid && contentInitiated),
+            map(() => true),
+            delay(100)
+        );
+    }
+    public ngAfterViewInit(): void
+    {
+        this.contentInitiated$.next(true);
     }
 }
