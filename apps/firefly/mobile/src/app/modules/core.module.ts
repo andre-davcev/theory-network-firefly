@@ -7,6 +7,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -55,7 +56,8 @@ Pro.init('1e5146ca',
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
         NgxsRouterPluginModule.forRoot(),
-        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken})
+        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken}),
+        NgxsLoggerPluginModule.forRoot()
     ],
 
     providers :
