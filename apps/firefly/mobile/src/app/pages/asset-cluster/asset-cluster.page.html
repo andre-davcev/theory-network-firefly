@@ -1,6 +1,6 @@
 <ion-header color="white">
     <ion-toolbar >
-        <ion-title>{{'page.event.title' | translate}}</ion-title>
+        <ion-title>{{'page.cluster.title' | translate}}</ion-title>
 
         <ion-buttons slot="start">
             <ion-back-button color="dark"></ion-back-button>
@@ -19,7 +19,6 @@
         </app-item-header>
 -->
 
-        <app-item-map [title]="'general.location' | translate"></app-item-map>
 
 <!--
         <div class="cpt-detail" fxLayout="column">
@@ -39,8 +38,13 @@
 -->
         <app-item-description [form]="form$ | async"
                               [item]="itemDescription"
+                              [hideImage]=true
                               (imageClicked)="imageClicked()">
         </app-item-description>
+
+        <section>
+            Events list will go here
+        </section>
 <!--
         <app-item-description [title]="'general.description' | translate"
                               description="The Ionic Conference is a one-day conference featuring talks from the

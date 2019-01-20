@@ -14,6 +14,7 @@ export class ComponentItemDescription
 {
     @Input() form: FormGroup;
     @Input() item: ItemDescription;
+    @Input() hideImage: boolean;
 
     @Output() imageClicked: EventEmitter<void> = new EventEmitter();
 

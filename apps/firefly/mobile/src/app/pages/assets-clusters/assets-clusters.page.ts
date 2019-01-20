@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store'
 import { Cluster, StateCluster, ActionGetClusters } from '@firefly/core';
 import { Observable } from 'rxjs';
+import { Pages } from '../pages.enum';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component
 ({
@@ -20,7 +22,7 @@ export class PageAssetsClusters
 
     add(): void
     {
-
+      this.store.dispatch(new Navigate([Pages.AssetCluster]));
     }
 
     ionViewWillEnter()
