@@ -32,8 +32,7 @@ export class PageAssetCluster extends BaseComponent
     };
 
     public itemDescription: ItemDescription =
-    {
-        image:       'photo',
+    {        
         description: 'description'
     };
 
@@ -45,11 +44,10 @@ export class PageAssetCluster extends BaseComponent
 
         this.translate.get
         ([
-            'page.event.titlePlaceholder',
-            'page.event.subtitlePlaceholder',
-            'page.event.iconPlaceholder',
-            'page.event.descriptionPlaceholder',
-            'page.event.imagePlaceholder',
+            'page.cluster.titlePlaceholder',
+            'page.cluster.subtitlePlaceholder',
+            'page.cluster.iconPlaceholder',
+            'page.cluster.descriptionPlaceholder',            
             'general.description'
         ]).
         pipe(takeUntil(this.destroy$)).
@@ -58,17 +56,16 @@ export class PageAssetCluster extends BaseComponent
             this.itemHeader =
             {
                 ...this.itemHeader,
-                titlePlaceholder:    translations['page.event.titlePlaceholder'],
-                subtitlePlaceholder: translations['page.event.subtitlePlaceholder'],
-                iconPlaceholder:     translations['page.event.iconPlaceholder']
+                titlePlaceholder:    translations['page.cluster.titlePlaceholder'],
+                subtitlePlaceholder: translations['page.cluster.subtitlePlaceholder'],
+                iconPlaceholder:     translations['page.cluster.iconPlaceholder']
             };
 
             this.itemDescription =
             {
                 ...this.itemDescription,
                 title:                  translations['general.description'],
-                descriptionPlaceholder: translations['page.event.descriptionPlaceholder'],
-                imagePlaceholder:       translations['page.event.imagePlaceholder']
+                descriptionPlaceholder: translations['page.cluster.descriptionPlaceholder']                
             };
         });
     }

@@ -51,6 +51,12 @@
   "page.event-locations.title"     : "Location",
   "page.event-locations-add.title" : "Search Locations",
 
+  "page.cluster.title"                  : "New Cluster",
+  "page.cluster.titlePlaceholder"       : "Add your name",
+  "page.cluster.subtitlePlaceholder"    : "Add your tagline",
+  "page.cluster.iconPlaceholder"        : "select cluster",
+  "page.cluster.descriptionPlaceholder" : "Write a description ...",
+
   "page.assets.title"               : "Assets",
   "page.assets.add"                 : "Add Asset",
   "page.assets.icon"                : "Icon",
