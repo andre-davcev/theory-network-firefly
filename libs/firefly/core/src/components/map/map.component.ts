@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef, Input, HostBinding, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, AfterViewInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { Observable, BehaviorSubject, combineLatest, from } from 'rxjs';
-import { filter, takeUntil,  map, delay } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { filter, takeUntil, delay, tap, switchMap, map } from 'rxjs/operators';
 import { GeolocationPosition } from '@capacitor/core';
 
 import { StateDevice, StateLocation } from '@theory/capacitor';
@@ -25,7 +25,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     public location: GeolocationPosition;
     public center: Array<number>;
 
-    public mapReady$: Observable<boolean>;
+    public  mapReady$: Observable<boolean>;
     private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     @Input()
@@ -36,40 +36,36 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @HostBinding('style.height')
     public height: string = '100%';
 
-    constructor(private changeDetectorRef: ChangeDetectorRef)
+    constructor()
     {
         super();
     }
 
     ngOnInit()
     {
-        this.location$.
+        this.mapReady$ = this.locationValid$.
         pipe
         (
             takeUntil(this.destroy$),
-            filter(position => position != null)
-        ).
-        subscribe((position: GeolocationPosition) =>
-        {
-            this.location = position;
+            filter((valid: boolean) => valid),
+            switchMap(() => this.location$),
+            tap((position: GeolocationPosition) =>
+            {
+                this.location = position;
 
-            this.center =
-            [
-                position.coords.longitude,
-                position.coords.latitude
-            ];
-
-            this.changeDetectorRef.markForCheck();
-        });
-
-        this.mapReady$ = combineLatest(this.locationValid$, this.contentInitiated$).
-        pipe
-        (
-            filter(([locationValid, contentInitiated]) => locationValid && contentInitiated),
-            map(() => true),
-            delay(100)
+                this.center =
+                [
+                    position.coords.longitude,
+                    position.coords.latitude
+                ];
+            }),
+            switchMap(() => this.contentInitiated$),
+            filter((initiated: boolean) => initiated),
+            delay(100),
+            map(() => true)
         );
     }
+
     public ngAfterViewInit(): void
     {
         this.contentInitiated$.next(true);

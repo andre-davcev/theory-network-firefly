@@ -13,6 +13,12 @@
     height: var(--cpt-height);
     width: var(--cpt-width);
 
+    border-top-left-radius: var(--cpt-map-border-radius-top);
+    border-top-right-radius: var(--cpt-map-border-radius-top);
+
+    border-bottom-left-radius: var(--cpt-map-border-radius-bottom);
+    border-bottom-right-radius: var(--cpt-map-border-radius-bottom);
+
     mgl-map {
         height: var(--cpt-height);
         width: var(--cpt-width);
