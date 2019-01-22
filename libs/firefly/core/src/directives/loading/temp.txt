@@ -1,0 +1,33 @@
+loading.directive.ts
+---------------------------------
+    @Input() loadingColor: IconFireflyColor = IconFireflyColor.Primary;
+
+    // On create component, pass color to ComponentLoading
+---------------------------------
+
+
+loading.component.ts
+---------------------------------
+    @Input() color: IconFireflyColor = IconFireflyColor.Primary;
+
+    @HostBinding('class')
+    get class() { return `cpt-color-${color}`; }
+---------------------------------
+
+loading.component.html
+---------------------------------
+    <app-icon-firefly [color]="color"
+---------------------------------
+
+loading.component.scss
+---------------------------------
+    .cpt-color-primary
+    {
+        background-color: #{$app-color-primary};
+    }
+
+    .cpt-color-white
+    {
+        background-color: // grey color
+    }
+---------------------------------

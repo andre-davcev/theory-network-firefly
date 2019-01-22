@@ -1,6 +1,6 @@
 <div fxLayout="column">
     <h4 class="cpt-title" fxFlexAlign="center" *ngIf="title">{{title}}</h4>
     <div class="cpt-map-window">
-        <app-map [interactive]="interactive" height="155px" *loading="!(locationValid$ | async)"></app-map>
+        <app-map [interactive]="interactive" height="155px" *loading="loading"></app-map>
     </div>
 </div>

@@ -1,6 +1,10 @@
 import { Directive, ComponentFactory, ComponentRef, Input, TemplateRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 
+import { TypeOf } from '@theory/core';
+
+import { Color } from '@firefly/core/enums';
 import { ComponentLoading } from './loading.component';
+import { DirectiveLoadingOptions } from './loading.directive.options';
 
 @Directive
 ({
@@ -8,17 +12,34 @@ import { ComponentLoading } from './loading.component';
 })
 export class DirectiveLoading
 {
-    loadingFactory   : ComponentFactory<ComponentLoading>;
-    loadingComponent : ComponentRef<ComponentLoading>;
+    private componentFactory : ComponentFactory<ComponentLoading>;
+    private componentRef : ComponentRef<ComponentLoading>;
 
     @Input()
-    set loading(loading: boolean)
+    set loading(loading: DirectiveLoadingOptions | boolean)
     {
+        let options: DirectiveLoadingOptions;
+
+        if (typeof loading === TypeOf.Boolean)
+        {
+            options =
+            {
+                loading: loading as boolean,
+                color:   Color.Primary
+            };
+        }
+        else
+        {
+            options = loading as DirectiveLoadingOptions;
+            options.color = options.color == null ? Color.Primary : options.color;
+        }
+
         this.viewContainerRef.clear();
 
-        if (loading)
+        if (options.loading)
         {
-            this.loadingComponent = this.viewContainerRef.createComponent(this.loadingFactory);
+            this.componentRef = this.viewContainerRef.createComponent(this.componentFactory);
+            this.componentRef.instance.color = options.color;
         }
         else
         {
@@ -28,6 +49,6 @@ export class DirectiveLoading
 
     constructor(private templateRef: TemplateRef<any>, private viewContainerRef: ViewContainerRef, private componentFactoryResolver: ComponentFactoryResolver)
     {
-        this.loadingFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentLoading);
+        this.componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentLoading);
     }
 }
