@@ -29,10 +29,12 @@
 
     .cpt-map-window
     {
+        position: relative;
         width: 100%;
         height: var(--cpt-window-height);
         border-radius: var(--cpt-border-radius);
-        background-color: rgba(255, 255, 255, 0);
+        background-color: var(--cpt-background-color);
+        overflow: hidden;
     }
 
     app-map {

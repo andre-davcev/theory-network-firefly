@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
+import { Color } from '@firefly/core/enums';
 
 @Component
 ({
@@ -8,5 +9,13 @@ import { Component } from '@angular/core';
 })
 export class ComponentLoading
 {
+    @Input()
+    public color: Color = Color.Primary;
+
+    @HostBinding('class.cpt-color-primary')
+    public get colorPrimary(): boolean { return this.color === Color.Primary; }
+
+    @HostBinding('class.cpt-color-white')
+    public get colorWhite(): boolean { return this.color === Color.White; }
     constructor() { }
 }

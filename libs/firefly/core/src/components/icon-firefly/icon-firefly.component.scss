@@ -5,35 +5,55 @@
 {
     --cpt-height:                 57px;
     --cpt-width:                  var(--cpt-height);
-
-    --cpt-color-primary:          #{$app-color-primary};
-    --cpt-color-primary-lighter:  lighten($app-color-primary, 10%);
-    --cpt-color-light:            #{$gm-color-green-light-a400};
-
-    --cpt-stroke:                 #{$app-border-accent-color-base};
-    --cpt-stroke-opacity:         #{$app-border-accent-opacity};
-    --cpt-stroke-width:           #{$app-border-accent-width};
-
     --cpt-transition-duration:    #{$app-transition-duration-move};
 
+    --cpt-color-fill-primary:           #{$app-color-primary};
+    --cpt-color-fill-lighter-primary:   lighten($app-color-primary, 10%);
+    --cpt-color-stroke-primary:         #{$app-border-accent-color-base};
+    --cpt-color-stroke-width-primary:   #{$app-border-accent-width};
+    --cpt-color-stroke-opacity-primary: #{$app-border-accent-opacity};
+
+    --cpt-color-fill-white:             rgba(255,255, 255, 1.99);
+    --cpt-color-fill-lighter-white:     rgba(255, 255, 255, 0.8);
+    --cpt-color-stroke-white:           rgba(255, 255, 255, 0.5);
+    --cpt-color-stroke-width-white:     var(--cpt-color-stroke-width-primary);
+    --cpt-color-stroke-opacity-white:   0.5;
+
+    &.cpt-color-primary
+    {
+        --cpt-color-fill:           var(--cpt-color-fill-primary);
+        --cpt-color-fill-lighter:   var(--cpt-color-fill-lighter-primary);
+        --cpt-color-stroke:         var(--cpt-color-stroke-primary);
+        --cpt-color-stroke-width:   var(--cpt-color-stroke-width-primary);
+        --cpt-color-stroke-opacity: var(--cpt-color-stroke-opacity-primary);
+    }
+
+    &.cpt-color-white
+    {
+        --cpt-color-fill:           var(--cpt-color-fill-white);
+        --cpt-color-fill-lighter:   var(--cpt-color-fill-lighter-white);
+        --cpt-color-stroke:         var(--cpt-color-stroke-white);
+        --cpt-color-stroke-width:   var(--cpt-color-stroke-width-white);
+        --cpt-color-stroke-opacity: var(--cpt-color-stroke-opacity-white);
+    }
 
     position: relative;
     display: block;
 
     @keyframes firefly
     {
-         0% {fill: var(--cpt-color-primary);}
-        25% {fill: var(--cpt-color-primary-lighter);}
-        50% {fill: var(--cpt-color-primary);}
+         0% {fill: var(--cpt-color-fill);}
+        25% {fill: var(--cpt-color-fill-lighter);}
+        50% {fill: var(--cpt-color-fill);}
         75% {opacity: 0.5;}
        100% {opacity: 1;}
     }
 
     @keyframes firefly-tentacles
     {
-         0% {fill: var(--cpt-color-primary);         stroke: var(--cpt-color-primary);}
-        25% {fill: var(--cpt-color-primary-lighter); stroke: var(--cpt-color-primary-lighter);}
-        50% {fill: var(--cpt-color-primary);         stroke: var(--cpt-color-primary);}
+         0% {fill: var(--cpt-color-fill);         stroke: var(--cpt-color-fill);}
+        25% {fill: var(--cpt-color-fill-lighter); stroke: var(--cpt-color-fill-lighter);}
+        50% {fill: var(--cpt-color-fill);         stroke: var(--cpt-color-fill);}
         75% {opacity: 0.5;}
        100% {opacity: 1;}
     }
@@ -80,10 +100,10 @@
     {
         > .cpt-part
         {
-            fill: var(--cpt-color-primary);
-            stroke: var(--cpt-stroke);
-            stroke-opacity: var(--cpt-stroke-opacity);
-            stroke-width: var(--cpt-stroke-width);
+            fill: var(--cpt-color-fill);
+            stroke: var(--cpt-color-stroke);
+            stroke-opacity: var(--cpt-color-stroke-opacity);
+            stroke-width: var(--cpt-color-stroke-width);
             opacity: 1;
         }
 
@@ -97,16 +117,16 @@
 
             &.cpt-border > .cpt-tentacle
             {
-                stroke: var(--cpt-stroke);
-                stroke-opacity: var(--cpt-stroke-opacity);
+                stroke: var(--cpt-color-stroke);
+                stroke-opacity: var(--cpt-color-stroke-opacity);
                 stroke-width: 2.25;
             }
 
             &.cpt-inside > .cpt-tentacle
             {
-                fill: var(--cpt-color-primary);
-                stroke: var(--cpt-color-primary);
-                stroke-width: var(--cpt-stroke-width);
+                fill: var(--cpt-color-fill);
+                stroke: var(--cpt-color-fill);
+                stroke-width: var(--cpt-color-stroke-width);
                 opacity: 1;
             }
         }

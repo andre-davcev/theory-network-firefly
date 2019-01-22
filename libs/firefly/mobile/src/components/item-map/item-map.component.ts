@@ -1,22 +1,47 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { StateLocation } from '@theory/capacitor';
 import { Observable } from 'rxjs';
+import { Color } from '@firefly/core/enums';
+import { DirectiveLoadingOptions } from '@firefly/core';
+import { BaseComponent } from '@theory/core';
+import { takeUntil, filter } from 'rxjs/operators';
 
 @Component
 ({
     selector        : 'app-item-map',
     templateUrl     : './item-map.component.html',
-    styleUrls       : ['./item-map.component.scss'],
-    changeDetection : ChangeDetectionStrategy.OnPush
+    styleUrls       : ['./item-map.component.scss']
 
 })
-export class ComponentItemMap
+export class ComponentItemMap extends BaseComponent implements OnInit
 {
     @Input() title : string;
     @Input() interactive: boolean = false;
 
     @Select(StateLocation.locationValid) locationValid$: Observable<boolean>;
 
-    constructor() { }
+    public Color: any = Color;
+
+    public loading: DirectiveLoadingOptions =
+    {
+        loading: true,
+        color:   Color.White
+    };
+
+    constructor()
+    {
+        super();
+    }
+
+    public ngOnInit(): void
+    {
+        this.locationValid$.
+        pipe
+        (
+            takeUntil(this.destroy$),
+            filter((valid: boolean) => valid)
+        ).
+        subscribe(() => this.loading = { ...this.loading, loading: false });
+    }
 }

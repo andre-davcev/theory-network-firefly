@@ -1,5 +1,6 @@
 export * from './src/components';
 export * from './src/directives';
+export * from './src/enums';
 export * from './src/environment';
 export * from './src/forms';
 export * from './src/mocks';
