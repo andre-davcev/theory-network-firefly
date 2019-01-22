@@ -1,4 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { StateLocation } from '@theory/capacitor';
+import { Observable } from 'rxjs';
 
 @Component
 ({
@@ -12,6 +15,8 @@ export class ComponentItemMap
 {
     @Input() title : string;
     @Input() interactive: boolean = false;
+
+    @Select(StateLocation.locationValid) locationValid$: Observable<boolean>;
 
     constructor() { }
 }
