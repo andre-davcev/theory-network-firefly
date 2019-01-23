@@ -2,10 +2,7 @@ import { State, Action, Store, StateContext, Selector } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { GeolocationPosition } from '@capacitor/core';
-import { Inject } from '@angular/core';
 
-import { FoursquareResponseVenueSearch } from '@theory/foursquare';
-import { EnvironmentPlaces } from '@theory/google';
 import { StateLocation } from '@theory/capacitor';
 
 import { StatePlacesModel } from './places.state.model';
@@ -19,7 +16,7 @@ export class StatePlaces
     @Selector() static searching(state: StatePlacesModel) {return state.searching;}
     @Selector() static results(state: StatePlacesModel)   {return state.results;}
 
-    constructor(private http: HttpClient, private store: Store, @Inject('PlacesEnvironment') private placesEnvironment: EnvironmentPlaces) {}
+    constructor(private http: HttpClient, private store: Store) {}
 
     @Action(ActionPlaceSearch)
     placeSearch({ patchState }: StateContext<StatePlacesModel>, { payload }: ActionPlaceSearch)
@@ -33,26 +30,7 @@ export class StatePlaces
         }
         else
         {
-            return this.http.get(`${this.placesEnvironment.url}/explore`,
-            {
-                params :
-                {
-                    client_id     : this.placesEnvironment.clientId,
-                    client_secret : this.placesEnvironment.clientSecret,
-                    ll            : `${location.coords.latitude},${location.coords.longitude}`,
-                    intent        : 'checkin',
-                    radius        : '32000',
-                    limit         : '5',
-                    v             : new Date().toISOString().slice(0,10).split('-').join(''),
-                    query         : searchText
-                }
-            }).pipe
-            (
-                tap((results: FoursquareResponseVenueSearch) =>
-                {
-                    console.log(results);
-                })
-            )
+
         }
     }
 }

@@ -29,12 +29,6 @@
       "@theory/firebase/*": [
         "../../../../libs/firebase/src/*"
       ],
-      "@theory/foursquare": [
-        "../../../../libs/foursquare/index.ts"
-      ],
-      "@theory/foursquare/*": [
-        "../../../../libs/foursquare/src/*"
-      ],
       "@theory/google": [
         "../../../../libs/google/index.ts"
       ],
