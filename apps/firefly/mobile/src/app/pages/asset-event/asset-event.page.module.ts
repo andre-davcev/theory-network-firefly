@@ -15,7 +15,6 @@ import { StateEvent } from '@firefly/core';
     imports :
     [
         ReactiveFormsModule,
-        RouterModule,
         ModulePage,
         ModuleComponentItemHeader,
         ModuleComponentItemMap,

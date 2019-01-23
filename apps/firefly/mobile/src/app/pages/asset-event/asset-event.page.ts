@@ -24,9 +24,7 @@ export class PageAssetEvent extends BaseComponent
 {
     @Select(StateEvent.form) form$: Observable<FormGroup>;
 
-    /*
-    @Select(StateEvent.form) form$: Observable<FormGroup>;
-    */
+    public Pages: any = Pages;
 
     public itemHeader: ItemHeader =
     {
@@ -83,13 +81,8 @@ export class PageAssetEvent extends BaseComponent
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
-    public iconClicked(): void
+    public navigate(page: Pages.AssetsClusters | Pages.ImageSelector | Pages.EventLocation)
     {
-        this.store.dispatch(new Navigate([Pages.AssetsClusters]));
-    }
-
-    public imageClicked(): void
-    {
-        this.store.dispatch(new Navigate([Pages.ImageSelector]));
+        this.store.dispatch(new Navigate([page]));
     }
 }

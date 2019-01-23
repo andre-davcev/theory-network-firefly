@@ -10,6 +10,7 @@ export * from './assets-icon';
 export * from './assets-icons';
 export * from './assets-images';
 export * from './assets-places';
+export * from './event-location';
 export * from './home';
 export * from './login';
 export * from './publisher-beacon';

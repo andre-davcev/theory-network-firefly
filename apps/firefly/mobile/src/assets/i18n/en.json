@@ -51,7 +51,7 @@
   "page.event-locations.title"     : "Locations",
   "page.event-locations-add.title" : "Search Locations",
 
-  
+
   "page.cluster.title"                  : "New Cluster",
   "page.cluster.titlePlaceholder"       : "Add your name",
   "page.cluster.subtitlePlaceholder"    : "Add your tagline",
@@ -100,6 +100,8 @@
   "page.assets-clusters.title" : "Clusters",
 
   "page.alert.title" : "Alert",
+
+  "page.event-location.title" : "Event Location",
 
   "page.user-profile.title"  : "Profile",
   "page.user-settings.title" : "Settings",

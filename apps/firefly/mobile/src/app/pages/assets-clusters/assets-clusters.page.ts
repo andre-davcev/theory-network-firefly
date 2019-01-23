@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { StatusBarStyle } from '@capacitor/core';
 import { Select, Store } from '@ngxs/store'
-import { Cluster, StateCluster, ActionGetClusters } from '@firefly/core';
-import { Observable } from 'rxjs';
-import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';
+import { Observable } from 'rxjs';
+
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { Cluster, StateCluster, ActionGetClusters } from '@firefly/core';
+
+import { Pages } from '../pages.enum';
 
 @Component
 ({
@@ -14,19 +18,21 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageAssetsClusters
 {
-  @Select(StateCluster.clusters) clusters$: Observable<Array<Cluster>>;
+    @Select(StateCluster.clusters) clusters$: Observable<Array<Cluster>>;
 
-    constructor(private store: Store)
-    {
-    }
+    constructor(private store: Store) { }
 
     add(): void
     {
-      this.store.dispatch(new Navigate([Pages.AssetCluster]));
+        this.store.dispatch(new Navigate([Pages.AssetCluster]));
     }
 
     ionViewWillEnter()
     {
-      this.store.dispatch(new ActionGetClusters());
+        this.store.dispatch
+        ([
+            new ActionGetClusters(),
+            new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark})
+        ]);
     }
 }

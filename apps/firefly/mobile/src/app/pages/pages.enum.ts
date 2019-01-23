@@ -25,6 +25,8 @@ export enum Pages
     AssetsEvents   = 'assets-events',
     AssetsClusters = 'assets-clusters',
 
+    EventLocation = 'event-location',
+
     UserProfile  = 'user-profile',
     UserSettings = 'user-settings',
 
