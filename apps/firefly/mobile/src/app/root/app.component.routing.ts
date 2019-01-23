@@ -18,6 +18,8 @@ export const routes: Routes =
     { path: Pages.AssetsImages,   loadChildren: '@firefly/page/assets-images#ModulePageAssetsImages' },
     { path: Pages.AssetsPlaces,   loadChildren: '@firefly/page/assets-places#ModulePageAssetsPlaces' },
 
+    { path: Pages.EventLocation, loadChildren: '@firefly/page/event-location#ModulePageEventLocation' },
+
     { path: Pages.IconSelector,   loadChildren: '@firefly/page/icon-selector#ModulePageIconSelector' },
     { path: Pages.ImageSelector,  loadChildren: '@firefly/page/image-selector#ModulePageImageSelector' },
 
