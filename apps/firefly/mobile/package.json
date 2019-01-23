@@ -61,7 +61,6 @@
     "@theory/capacitor": "file:../../../libs/capacitor",
     "@theory/core": "file:../../../libs/core",
     "@theory/firebase": "file:../../../libs/firebase",
-    "@theory/foursquare": "file:../../../libs/foursquare",
     "@theory/google": "file:../../../libs/google",
     "@theory/ionic": "file:../../../libs/ionic",
     "@theory/mapbox": "file:../../../libs/mapbox",

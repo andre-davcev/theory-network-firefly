@@ -66,7 +66,6 @@ Pro.init('1e5146ca',
         Firebase,
         { provide: RouteReuseStrategy,    useClass: IonicRouteStrategy },
         { provide: 'FirebaseEnvironment', useValue: environment.apis.firebase },
-        { provide: 'PlacesEnvironment',   useValue: environment.apis.places },
         { provide: 'MapboxEnvironment',   useValue: environment.apis.mapbox }
 //        { provide: ErrorHandler,       useClass: ErrorHandlerApp }
     ]
