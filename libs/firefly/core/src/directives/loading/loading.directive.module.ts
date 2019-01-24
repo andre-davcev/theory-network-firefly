@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { ComponentLoading } from './loading.component';
 import { DirectiveLoading } from './loading.directive';
-import { ModuleComponentIconFirefly } from '@firefly/core/components';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule
 ({
     imports:
     [
         CommonModule,
-        ModuleComponentIconFirefly
+        IonicModule
     ],
 
     declarations :

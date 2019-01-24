@@ -1,18 +1,13 @@
 <ion-header>
     <ion-toolbar color="dark" elevation="2">
-        <ion-title color="primary">{{'page.event-location.title' | translate}}</ion-title>
         <ion-buttons slot="start">
             <ion-back-button color="primary"></ion-back-button>
         </ion-buttons>
+
+        <ion-searchbar animated mode="ios" [placeholder]="'page.event-location.search' | translate"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollEvents]="false">
-    <ion-toolbar>
-        <div class="cpt-searchbar-container">
-            <ion-searchbar animated elevation="2"></ion-searchbar>
-        </div>
-    </ion-toolbar>
-
     <app-map></app-map>
 </ion-content>

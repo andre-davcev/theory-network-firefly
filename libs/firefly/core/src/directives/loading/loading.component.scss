@@ -13,6 +13,18 @@
     align-items: center;
     justify-content: center;
 
-    &.cpt-color-primary { background-color: #{$app-color-dark}; }
-    &.cpt-color-white   { background-color: rgba(0, 0, 0, 0.4); }
+    &.cpt-color-background-dark
+    {
+        background-color: #{$app-color-dark};
+    }
+
+    &.cpt-color-background-grey
+    {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    &.cpt-color-background-map
+    {
+        background-color: rgb(238, 233, 225);
+    }
 }

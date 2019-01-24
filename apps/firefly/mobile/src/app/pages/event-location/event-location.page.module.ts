@@ -7,6 +7,7 @@ import { ModulePage } from '@firefly/app/modules';
 import { RoutesPageEventLocation } from './event-location.page.routes';
 import { PageEventLocation } from './event-location.page';
 import { ModuleComponentMap } from '@firefly/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule
 ({
@@ -15,7 +16,8 @@ import { ModuleComponentMap } from '@firefly/core';
         ModulePage,
         ModuleDirectiveElevation,
         ModuleComponentMap,
-        RouterModule.forChild(RoutesPageEventLocation),
+        TranslateModule,
+        RouterModule.forChild(RoutesPageEventLocation)
     ],
 
     declarations : [PageEventLocation],

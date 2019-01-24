@@ -24,14 +24,27 @@ export class DirectiveLoading
         {
             options =
             {
-                loading: loading as boolean,
-                color:   Color.Primary
+                loading:         loading as boolean,
+                color:           Color.Primary,
+                colorBackground: Color.Dark
             };
         }
         else
         {
             options = loading as DirectiveLoadingOptions;
             options.color = options.color == null ? Color.Primary : options.color;
+
+            if (options.colorBackground == null)
+            {
+                if (options.color === Color.Primary)
+                {
+                    options.colorBackground = Color.Dark;
+                }
+                else if (options.color === Color.White)
+                {
+                    options.colorBackground = Color.Grey;
+                }
+            }
         }
 
         this.viewContainerRef.clear();
@@ -39,7 +52,9 @@ export class DirectiveLoading
         if (options.loading)
         {
             this.componentRef = this.viewContainerRef.createComponent(this.componentFactory);
-            this.componentRef.instance.color = options.color;
+
+            this.componentRef.instance.color           = options.color;
+            this.componentRef.instance.colorBackground = options.colorBackground;
         }
         else
         {

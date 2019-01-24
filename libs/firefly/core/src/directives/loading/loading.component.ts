@@ -12,10 +12,17 @@ export class ComponentLoading
     @Input()
     public color: Color = Color.Primary;
 
-    @HostBinding('class.cpt-color-primary')
-    public get colorPrimary(): boolean { return this.color === Color.Primary; }
+    @Input()
+    public colorBackground: Color = Color.Dark;
 
-    @HostBinding('class.cpt-color-white')
-    public get colorWhite(): boolean { return this.color === Color.White; }
+    @HostBinding('class.cpt-color-background-dark')
+    public get colorBackgroundPrimary(): boolean { return this.colorBackground === Color.Dark; }
+
+    @HostBinding('class.cpt-color-background-grey')
+    public get colorBackgroundGrey(): boolean { return this.colorBackground === Color.Grey; }
+
+    @HostBinding('class.cpt-color-background-map')
+    public get colorBackgroundMap(): boolean { return this.colorBackground === Color.Map; }
+
     constructor() { }
 }

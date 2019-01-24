@@ -4,4 +4,5 @@ export interface DirectiveLoadingOptions
 {
     loading: boolean;
     color?:  Color;
+    colorBackground?: Color;
 }
