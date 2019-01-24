@@ -11,7 +11,7 @@
     --cpt-border-radius-top:    var(--cpt-border-radius);
     --cpt-border-radius-bottom: var(--cpt-border-radius);
 
-    --cpt-background-color: rgba(255, 255, 255, 0);
+    --cpt-background-color: #{$app-color-transparent};
 
     position: relative;
     display: flex;

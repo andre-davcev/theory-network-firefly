@@ -48,9 +48,6 @@
   "page.event.descriptionPlaceholder" : "Write a description ...",
 
   "page.event-categories.title"    : "Categories",
-  "page.event-locations.title"     : "Locations",
-  "page.event-locations-add.title" : "Search Locations",
-
 
   "page.cluster.title"                  : "New Cluster",
   "page.cluster.titlePlaceholder"       : "Add your name",
@@ -101,7 +98,7 @@
 
   "page.alert.title" : "Alert",
 
-  "page.event-location.title" : "Event Location",
+  "page.event-location.search" : "Search for Locations",
 
   "page.user-profile.title"  : "Profile",
   "page.user-settings.title" : "Settings",

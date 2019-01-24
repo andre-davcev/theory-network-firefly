@@ -25,8 +25,9 @@ export class ComponentItemMap extends BaseComponent implements OnInit
 
     public loading: DirectiveLoadingOptions =
     {
-        loading: true,
-        color:   Color.White
+        loading:         true,
+        color:           Color.Dark,
+        colorBackground: Color.Map
     };
 
     constructor()
