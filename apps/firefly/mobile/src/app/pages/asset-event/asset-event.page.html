@@ -38,9 +38,13 @@
         </div>
 -->
         <app-item-description [form]="form$ | async"
-                              [item]="itemDescription"
-                              (imageClicked)="navigate(Pages.ImageSelector)">
+                              [item]="itemDescription">
         </app-item-description>
+
+        <app-item-image [form]="form$ | async"
+                        [item]="itemImage"
+                        (imageClicked)="navigate(Pages.ImageSelector)">
+        </app-item-image>
 <!--
         <app-item-description [title]="'general.description' | translate"
                               description="The Ionic Conference is a one-day conference featuring talks from the

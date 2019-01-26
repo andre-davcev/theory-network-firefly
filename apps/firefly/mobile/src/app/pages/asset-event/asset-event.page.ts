@@ -9,7 +9,7 @@ import { StateEvent, ActionSetEventId } from '@firefly/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '@theory/core';
 import { takeUntil } from 'rxjs/operators';
-import { ItemHeader, ItemDescription } from '@firefly/mobile';
+import { ItemHeader, ItemDescription, ItemImage } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { Pages } from '../pages.enum';
 
@@ -35,10 +35,14 @@ export class PageAssetEvent extends BaseComponent
     };
 
     public itemDescription: ItemDescription =
-    {
-        imageAsUrl:  true,
+    {        
         description: 'description'
     };
+
+    public itemImage: ItemImage = 
+    {
+        imageAsUrl: true
+    }
 
     constructor(private store: Store, private translate: TranslateService)
     {
@@ -70,9 +74,14 @@ export class PageAssetEvent extends BaseComponent
             {
                 ...this.itemDescription,
                 title:                  translations['general.description'],
-                descriptionPlaceholder: translations['page.event.descriptionPlaceholder'],
-                imagePlaceholder:       translations['page.event.imagePlaceholder']
+                descriptionPlaceholder: translations['page.event.descriptionPlaceholder']                
             };
+
+            this.itemImage = 
+            {
+                ...this.itemImage,
+                imagePlaceholder:       translations['page.event.imagePlaceholder']
+            }
         });
     }
 
