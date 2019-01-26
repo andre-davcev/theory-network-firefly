@@ -1,20 +1,11 @@
 <form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
     <h4 class="cpt-title" fxFlexAlign="center">{{item.title}}</h4>
 
-    <ion-textarea class="cpt-description" [placeholder]="item.descriptionPlaceholder" [formControlName]="item.description" [class.cpt-empty]="!imageValue"></ion-textarea>
-
-    <input class="cpt-image-hidden" type="hidden" [formControlName]="item.image" *ngIf="!item.imageAsUrl">
-
-    <section *ngIf="!hideImage" class="cpt-image-container" fxLayout="column" fxLayoutAlign="center" (click)="clickedImage()" [class.cpt-image-valid]="imageValue">
-        <h4 class="cpt-image-placeholder" *ngIf="!imageValue">{{item.imagePlaceholder}}</h4>
-        <img class="cpt-image" [src]="imageValue" *ngIf="imageValue">
-    </section>
+    <ion-textarea class="cpt-description" [placeholder]="item.descriptionPlaceholder" [formControlName]="item.description"></ion-textarea>    
 </form>
 
 <div class="cpt-container" *ngIf="!edit">
     <h4 class="cpt-title">{{item.title}}</h4>
 
-    <p class="cpt-description">{{item.description}}</p>
-
-    <img class="cpt-image" [src]="imageValue">
+    <p class="cpt-description">{{item.description}}</p>    
 </div>
