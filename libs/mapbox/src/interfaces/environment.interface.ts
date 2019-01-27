@@ -1,3 +1,4 @@
-export interface EnvironmentMapbox {
-  accessToken: string;
+export interface EnvironmentMapbox
+{
+    accessToken: string;
 }

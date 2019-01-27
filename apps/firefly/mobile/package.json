@@ -50,7 +50,6 @@
     "@ionic/core": "file:../../../node_modules/@ionic/core",
     "@ionic/ng-toolkit": "file:../../../node_modules/@ionic/ng-toolkit",
     "@ionic/schematics-angular": "file:../../../node_modules/@ionic/schematics-angular",
-    "@mapbox/mapbox-gl-geocoder": "file:../../../node_modules/@mapbox/mapbox-gl-geocoder",
     "@ngx-translate/core": "file:../../../node_modules/@ngx-translate/core",
     "@ngx-translate/http-loader": "file:../../../node_modules/@ngx-translate/http-loader",
     "@ngxs/devtools-plugin": "file:../../../node_modules/@ngxs/devtools-plugin",
