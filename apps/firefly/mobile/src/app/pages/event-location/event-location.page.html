@@ -1,13 +1,12 @@
 <ion-header>
     <ion-toolbar color="dark" elevation="2">
+        <ion-title>{{'page.event-location.title' | translate}}</ion-title>
         <ion-buttons slot="start">
             <ion-back-button color="primary"></ion-back-button>
         </ion-buttons>
-
-        <ion-searchbar animated mode="ios" [placeholder]="'page.event-location.search' | translate"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollEvents]="false">
-    <app-map></app-map>
+    <app-map [geocode]="true"></app-map>
 </ion-content>

@@ -9,9 +9,9 @@ import { BaseComponent } from '@theory/core';
 
 @Component
 ({
-    selector        : 'app-map',
-    templateUrl     : './map.component.html',
-    styleUrls       : ['./map.component.scss']
+    selector    : 'app-map',
+    templateUrl : './map.component.html',
+    styleUrls   : ['./map.component.scss']
 })
 export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 {
@@ -21,6 +21,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @Select(StateLocation.locationValid) locationValid$: Observable<boolean>;
 
     @Input() interactive: boolean = true;
+    @Input() geocode: boolean = false;
 
     public location: GeolocationPosition;
     public center: Array<number>;

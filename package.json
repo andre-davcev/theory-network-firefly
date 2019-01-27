@@ -95,7 +95,6 @@
     "@ionic/angular": "~4.0.0",
     "@ionic/core": "~4.0.0",
     "@ionic/ng-toolkit": "~1.1.0",
-    "@mapbox/mapbox-gl-geocoder": "^2.3.0",
     "@ngrx/effects": "6.1.2",
     "@ngrx/router-store": "6.1.2",
     "@ngrx/store": "6.1.2",
