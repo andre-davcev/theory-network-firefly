@@ -1,5 +1,23 @@
 @import "app-variables";
 
+$app-map-pin-icon:                           $fa-var-map-marker;
+$app-map-pin-icon-color:                     $gm-color-black;
+$app-map-pin-icon-font-family:               $app-font-font-awesome;
+$app-map-pin-icon-font-size:                 34px;
+$app-map-pin-icon-height:                    $app-map-pin-icon-font-size;
+$app-map-pin-icon-width:                     20px;
+$app-map-pin-icon-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
+
+$app-map-pin-icon-inner-font-family:         $app-font-font-awesome;
+$app-map-pin-icon-inner-font-size:           11px;
+$app-map-pin-icon-inner-color:               $gm-color-white;
+
+$app-map-pin-icon-inner-shadow-top:          0 -1px 0 rgba(0,    0,    0, 0.21);
+$app-map-pin-icon-inner-shadow-bottom:       0  1px 0 rgba(255, 255, 255, 0.21);
+
+$app-map-pin-icon-check:                     $fa-var-check-circle;
+$app-map-pin-icon-plus:                      $fa-var-plus-circle;
+
 .tn-map-pin
 {
     position: relative;
