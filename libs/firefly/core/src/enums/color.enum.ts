@@ -1,7 +1,8 @@
 export enum Color
 {
-    Primary = 'primary',
-    White   = 'white',
+    Primary   = 'primary',
+    Secondary = 'secondary',
+    White     = 'white',
 
     Map     = 'map',
     Dark    = 'dark',
