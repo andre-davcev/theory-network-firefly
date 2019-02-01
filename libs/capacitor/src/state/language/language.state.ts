@@ -18,10 +18,18 @@ export class StateLanguage
 {
     constructor(private globalization: Globalization, public platform: Platform, private translate: TranslateService) {}
 
-    @Selector() static language(state: StateLanguageModel) {return state.language;}
-    @Selector() static error(state: StateLanguageModel)    {return state.error;}
+    @Selector() static language(state: StateLanguageModel): string {return state.language;}
 
-    @Selector() static errored(state: StateLanguageModel) {return state.error != null;}
+    @Selector() static error(state: StateLanguageModel): any    {return state.error;}
+
+    @Selector() static errored(state: StateLanguageModel): boolean {return state.error != null;}
+
+    @Selector() static languageIso639_1(state: StateLanguageModel): string
+    {
+        const language: string =  StateLanguage.language(state);
+
+        return language == null || language.length === 0 ? undefined : language.split('-')[0].toLowerCase();
+    }
 
     ngxsOnInit(context: StateContext<StateLanguageModel>)
     {

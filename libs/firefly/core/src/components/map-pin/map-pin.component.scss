@@ -1,82 +1,135 @@
 @import "app-variables";
 
-$app-map-pin-icon:                           $fa-var-map-marker;
-$app-map-pin-icon-color:                     $gm-color-black;
-$app-map-pin-icon-font-family:               $app-font-font-awesome;
-$app-map-pin-icon-font-size:                 34px;
-$app-map-pin-icon-height:                    $app-map-pin-icon-font-size;
-$app-map-pin-icon-width:                     20px;
-$app-map-pin-icon-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
+$cpt-color: $gm-color-black;
+$cpt-inner-font-size: 11px;
 
-$app-map-pin-icon-inner-font-family:         $app-font-font-awesome;
-$app-map-pin-icon-inner-font-size:           11px;
-$app-map-pin-icon-inner-color:               $gm-color-white;
-
-$app-map-pin-icon-inner-shadow-top:          0 -1px 0 rgba(0,    0,    0, 0.21);
-$app-map-pin-icon-inner-shadow-bottom:       0  1px 0 rgba(255, 255, 255, 0.21);
-
-$app-map-pin-icon-check:                     $fa-var-check-circle;
-$app-map-pin-icon-plus:                      $fa-var-plus-circle;
-
-.tn-map-pin
+:host
 {
+    --cpt-icon:                      #{$fa-var-map-marker};
+    --cpt-font-family:               #{$app-font-font-awesome};
+    --cpt-font-size:                 34px;
+    --cpt-height:                    var(--cpt-font-size);
+    --cpt-width:                     20px;
+    --cpt-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
+
+    --cpt-inner-font-family:         #{$app-font-font-awesome};
+    --cpt-inner-font-size:           #{$cpt-inner-font-size};
+    --cpt-inner-color:               #{$gm-color-white};
+
+    --cpt-inner-shadow-top:          0 -1px 0 rgba(0,    0,    0, 0.21);
+    --cpt-inner-shadow-bottom:       0  1px 0 rgba(255, 255, 255, 0.21);
+
+    --cpt-check:                     #{$fa-var-check-circle};
+    --cpt-plus:                      #{$fa-var-plus-circle};
+    --cpt-color:                     #{$cpt-color};
+
+    --cpt-border-color:           rgba(255, 255, 255, 0.11);
+    --cpt-border-color-active:    rgba(35, 117, 80, 0.10);
+    --cpt-border-width:             1px;
+    --cpt-shadow-color:           rgba(0, 0, 0, 0.10);
+
+    --cpt-color-active:             #{$app-color-primary};
+
+    --cpt-inner-color:              var(--cpt-color-active);
+    --cpt-inner-color-background:   var(--cpt-icon-color);
+    --cpt-inner-shadow-top:         0 -1px 0 rgba(  0,   0,   0, 0.4);
+    --cpt-inner-shadow-bottom:      0  1px 0 rgba(255, 255, 255, 0.3);
+
+    --cpt-inner-color-active:                $app-map-pin-icon-color;
+    --cpt-inner-color-background-active:     $gm-color-white;
+    --cpt-inner-shadow-top-active:           0 -1px 0 rgba(  0,   0,   0, 0.3);
+    --cpt-inner-shadow-bottom-active:        0  1px 0 rgba(255, 255, 255, 0.4);
+
+
     position: relative;
     display: block;
     box-sizing: border-box;
-    background-color: $app-color-transparent;
-    height: $app-map-pin-icon-height; width: $app-map-pin-icon-width;
+    background-color: #{$app-color-transparent};
+    height: var(--cpt-height);
+    width: var(--cpt-width);
 
     &:before
     {
-        content: $app-map-pin-icon;
+        left: 1px;
+        color: var(--cpt-color);
+        text-shadow: -1px    0  0  var(--cpt-border-color),
+                      1px    0  0  var(--cpt-border-color),
+                        0  1px  0  var(--cpt-border-color),
+                        0 -1px  0  var(--cpt-border-color),
+                        0  1px 1px var(--cpt-shadow-color);
+
+        content: var(--cpt-icon);
         position: absolute;
-        top: 0; left: 0;
-        height: 100%; width: 100%;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
         line-height: 1em;
-        font-family: $app-map-pin-icon-font-family;
-        font-size: $app-map-pin-icon-font-size;
-        color: $app-map-pin-icon-color;
-        text-shadow: $app-map-pin-icon-box-shadow;
+        font-family: var(--cpt-font-family);
+        font-size: var(--cpt-font-size);
+        color: var(--cpt-color);
+        text-shadow: var(--cpt-box-shadow);
     }
 
+    &:after
+    {
+        content: var(--cpt-plus);
+    }
 
-    &.tn-map-pin-inner
+    > .cpt-inner
     {
         &:before
         {
-            background-image: linear-gradient($app-map-pin-icon-color, $app-map-pin-icon-color);
+            background-image: linear-gradient($cpt-color, $cpt-color);
             background-repeat: no-repeat;
-            background-size: ($app-map-pin-icon-inner-font-size + 0.1) ($app-map-pin-icon-inner-font-size + 0.1);
+            background-size: ($cpt-inner-font-size + 0.1) ($cpt-inner-font-size + 0.1);
             background-position: 4px 6px;
+            background-image: linear-gradient(var(--cpt-inner-color-background), var(--cpt-inner-color-background));
         }
 
         &:after
         {
             position: absolute;
-            top: 7px; left: 6px;
-            height: $app-map-pin-icon-inner-font-size - 0.2; width: $app-map-pin-icon-inner-font-size - 0.2;
+            top: 7px;
+            left: 6px;
+            height: $cpt-inner-font-size - 0.2;
+            width: $cpt-inner-font-size - 0.2;
             line-height: 1em;
-            font-family: $app-map-pin-icon-inner-font-family;
-            font-size: $app-map-pin-icon-inner-font-size;
-            color: $app-map-pin-icon-inner-color;
+            font-family: var(--cpt-inner-font-family);
+            font-size: var(--cpt-inner-font-size);
+            color: var(--cpt-inner-color);
 
-            text-shadow: $app-map-pin-icon-inner-shadow-top,
-                         $app-map-pin-icon-inner-shadow-bottom;
+            text-shadow: var(--cpt-inner-shadow-top),
+                         var(--cpt-inner-shadow-bottom);
+        }
+    }
+
+    &.cpt-added
+    {
+        &:before
+        {
+            color: var(--cpt-color-active);
+            text-shadow: -1px    0   0 var(--cpt-border-color-active),
+                          1px    0   0 var(--cpt-border-color-active),
+                            0  1px   0 var(--cpt-border-color-active),
+                            0 -1px   0 var(--cpt-border-color-active),
+                            0  1px 1px var(--cpt-shadow-color);
         }
 
-        &.tn-icon-plus
+        > .cpt-inner
         {
-            &:after
+            &:before
             {
-                content: $app-map-pin-icon-plus;
+                background-image: linear-gradient(var(--cpt-inner-color-background-active), var(--cpt-inner-color-background-active));
             }
-        }
 
-        &.tn-icon-check
-        {
             &:after
             {
-                content: $app-map-pin-icon-check;
+                content: var(--cpt-check);
+                color: var(--cpt-inner-color-active);
+
+                text-shadow: var(--cpt-inner-shadow-top-active),
+                             var(--cpt-inner-shadow-bottom-active);
             }
         }
     }
@@ -86,61 +139,14 @@ $app-map-pin-icon-plus:                      $fa-var-plus-circle;
 {
     &.ff-map-pin
     {
-        &:before
-        {
-            left: 1px;
-            color: $app-map-pin-icon-color;
-
-            text-shadow: -1px    0  0 $app-map-pin-icon-border-color,
-                          1px    0  0 $app-map-pin-icon-border-color,
-                            0  1px  0 $app-map-pin-icon-border-color,
-                            0 -1px  0 $app-map-pin-icon-border-color,
-
-                            0 1px 1px $app-map-pin-icon-shadow-color;
-        }
-
-        &.ff-active
-        {
-            &:before
-            {
-                color: $app-map-pin-icon-color-active;
-                text-shadow: -1px    0  0 $app-map-pin-icon-border-color-active,
-                              1px    0  0 $app-map-pin-icon-border-color-active,
-                                0  1px  0 $app-map-pin-icon-border-color-active,
-                                0 -1px  0 $app-map-pin-icon-border-color-active,
-
-                                0 1px 1px $app-map-pin-icon-shadow-color;
-            }
-        }
-
         &.tn-map-pin-inner
         {
-            &:before
-            {
-                background-image: linear-gradient($app-map-pin-icon-inner-color-background, $app-map-pin-icon-inner-color-background);
-            }
-
-            &:after
-            {
-                color: $app-map-pin-icon-inner-color;
-
-                text-shadow: $app-map-pin-icon-inner-shadow-top,
-                             $app-map-pin-icon-inner-shadow-bottom;
-            }
-
             &.ff-active
             {
-                &:before
-                {
-                    background-image: linear-gradient($app-map-pin-icon-inner-color-background-active, $app-map-pin-icon-inner-color-background-active);
-                }
 
                 &:after
                 {
-                    color: $app-map-pin-icon-inner-color-active;
 
-                    text-shadow: $app-map-pin-icon-inner-shadow-top-active,
-                                 $app-map-pin-icon-inner-shadow-bottom-active;
                 }
             }
         }

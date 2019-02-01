@@ -94,7 +94,8 @@
 
   "page.alert.title" : "Alert",
 
-  "page.event-location.title" : "Event Location",
+  "page.event-location.title"             : "Event Location",
+  "page.event-location.searchPlaceholder" : "Search Locations",
 
   "page.user-profile.title"  : "Profile",
   "page.user-settings.title" : "Settings",
