@@ -12,12 +12,11 @@ import { StateMapModel } from './map.state.model';
 import { StateMapOptions } from './map.state.options';
 import { ActionMapLocationWatch } from './map.actions';
 
-
 @State<StateMapModel>(StateMapOptions)
 
 export class StateMap
 {
-    @Select(StateLocation) private location$: Observable<GeolocationPosition>;
+    @Select(StateLocation.location) private location$: Observable<GeolocationPosition>;
 
     constructor() {}
 
