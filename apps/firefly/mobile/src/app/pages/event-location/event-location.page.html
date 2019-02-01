@@ -8,5 +8,8 @@
 </ion-header>
 
 <ion-content [scrollEvents]="false">
-    <app-map [geocode]="true"></app-map>
+    <app-map [geocode]="true"
+             [placeholder]="'page.event-location.searchPlaceholder' | translate"
+             >
+    </app-map>
 </ion-content>

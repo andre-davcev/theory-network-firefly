@@ -18,10 +18,7 @@ export class PageEventLocation
 {
     @Select(StateEvent.form) form$: Observable<FormGroup>;
 
-    constructor(private store: Store)
-    {
-
-    }
+    constructor(private store: Store) { }
 
     ionViewWillEnter()
     {

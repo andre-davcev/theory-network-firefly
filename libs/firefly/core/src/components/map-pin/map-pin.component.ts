@@ -1,5 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Color } from '@firefly/core/enums';
+import { Component, ChangeDetectionStrategy, Input, HostBinding } from '@angular/core';
 
 @Component
 ({
@@ -10,5 +9,6 @@ import { Color } from '@firefly/core/enums';
 })
 export class ComponentMapPin
 {
-    @Input() color: Color = Color.Primary;
+    @HostBinding('class.cpt-added')
+    @Input() added: boolean = false;
 }

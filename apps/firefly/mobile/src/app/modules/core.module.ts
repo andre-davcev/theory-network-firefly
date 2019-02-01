@@ -19,6 +19,7 @@ import { StateLanguage, StateLocation, StateDevice, StatePhotos } from '@theory/
 import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
+import { StateMap } from '@theory/mapbox';
 
 /*
 Pro.init('1e5146ca',
@@ -51,7 +52,8 @@ Pro.init('1e5146ca',
             StatePlaces,
             StateIcons,
             StateSubscriptions,
-            StatePhotos
+            StatePhotos,
+            StateMap
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),

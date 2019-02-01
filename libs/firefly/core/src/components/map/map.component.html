@@ -1,9 +1,27 @@
-<mgl-map *ngIf="mapReady$ | async" [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[10]" [center]="center" [interactive]="interactive">
+<mgl-map *ngIf="mapReady$ | async" [style]="style" [zoom]="[10]" [center]="locationLike$ | async" [interactive]="interactive">
     <mgl-control mglNavigation position="bottom-left" *ngIf="web$ | async"></mgl-control>
 
-    <mgl-marker [lngLat]="center">
+    <mgl-marker [lngLat]="locationLike$ | async">
         <app-map-orb></app-map-orb>
     </mgl-marker>
 
-    <mgl-control mglGeocoder *ngIf="geocode" position="top-left"></mgl-control>
+    <mgl-control *ngIf="geocode"
+                 mglGeocoder
+                 [position]="geocodePosition"
+                 [searchInput]="searchInput"
+                 [placeholder]="placeholder"
+                 [limit]="limit"
+                 [language]="language$ | async"
+                 [flyTo]="flyTo"
+                 [country]="country"
+                 [proximity]="locationLiteral$ | async"
+                 [bbox]="bbox"
+                 [zoom]="zoom"
+                 [minLength]="minLength"
+                 (clear)="eventClear($event)"
+                 (loading)="eventLoading($event)"
+                 (results)="eventResults($event)"
+                 (result)="eventResult($event)"
+                 (error)="eventError($event)"
+                 ></mgl-control>
 </mgl-map>

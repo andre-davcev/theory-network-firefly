@@ -318,29 +318,6 @@ $button-bar-button-font-size:                   $app-tabs-top-text-font-size;
 
 $segment-button-ios-text-color:                     $app-color-dark;
 
-// MAP PINS
-
-$app-map-pin-icon-height:                            $app-map-pin-icon-height;
-$app-map-pin-icon-width:                             $app-map-pin-icon-width + 0.2;
-
-$app-map-pin-icon-color:                             #54504F;
-$app-map-pin-icon-border-color:                      rgba(255, 255, 255, 0.11);
-$app-map-pin-icon-border-color-active:               rgba(35, 117, 80, 0.10);
-$app-map-pin-icon-border-width:                      1px;
-$app-map-pin-icon-shadow-color:                      rgba(0, 0, 0, 0.10);
-
-$app-map-pin-icon-color-active:                      $app-color-primary;
-
-$app-map-pin-icon-inner-color:                       $app-map-pin-icon-color-active;
-$app-map-pin-icon-inner-color-background:            $app-map-pin-icon-color;
-$app-map-pin-icon-inner-shadow-top:                  0 -1px 0 rgba(  0,   0,   0, 0.4);
-$app-map-pin-icon-inner-shadow-bottom:               0  1px 0 rgba(255, 255, 255, 0.3);
-
-$app-map-pin-icon-inner-color-active:                $app-map-pin-icon-color;
-$app-map-pin-icon-inner-color-background-active:     $gm-color-white;
-$app-map-pin-icon-inner-shadow-top-active:           0 -1px 0 rgba(  0,   0,   0, 0.3);
-$app-map-pin-icon-inner-shadow-bottom-active:        0  1px 0 rgba(255, 255, 255, 0.4);
-
 // SEARCH BAR
 
 $searchbar-ios-background-color: $app-color-transparent;
