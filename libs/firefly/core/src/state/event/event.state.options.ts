@@ -22,7 +22,8 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
             [EventKey.Tagline]  : null,
             [EventKey.ImageId]  : undefined,
             [EventKey.PlaceId]  : undefined,
-            [EventKey.Clusters] : []
+            [EventKey.Clusters] : [],
+            [EventKey.Location] : undefined
         }
     }
 };

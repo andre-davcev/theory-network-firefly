@@ -24,4 +24,16 @@
                  (result)="eventResult($event)"
                  (error)="eventError($event)"
                  ></mgl-control>
+    <ng-container *ngFor="let location of locations">
+        <mgl-marker [lngLat]="[location.longitude, location.latitude]"
+                    [draggable]="false"
+                    [anchor]="MapboxMarkerAnchor.Bottom"
+                    #marker>
+            <app-map-pin [added]="true"></app-map-pin>
+        </mgl-marker>
+
+        <mgl-popup [marker]="marker" [closeOnClick="false" [closeButton]="false" [anchor]="MapboxMarkerAnchor.TopRight">
+            <app-map-annotation [location]="location"></app-map-annotation>
+        </mgl-popup>
+    </ng-container>
 </mgl-map>
