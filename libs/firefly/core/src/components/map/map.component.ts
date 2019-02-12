@@ -6,7 +6,8 @@ import { LngLatLike } from 'mapbox-gl';
 
 import { StateDevice, StateLocation, StateLanguage } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
-import { MapboxPlaceType, MapboxMapStyle, StateMap, MapboxControlPosition } from '@theory/mapbox';
+import { Location } from '@firefly/core/models';
+import { MapboxPlaceType, MapboxMapStyle, StateMap, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
 import { LngLatLiteral, Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 @Component
@@ -25,11 +26,13 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @Select(StateLanguage.languageIso639_1) language$        : Observable<string>;
 
     @Input() geocodePosition: MapboxControlPosition = MapboxControlPosition.TopLeft;
+    @Input() locations: Array<Location> = [];
 
     @Input() interactive: boolean        = true;
     @Input() geocode:     boolean        = false;
     @Input() style:       MapboxMapStyle = MapboxMapStyle.Streets;
 
+    public MapboxMarkerAnchor: any = MapboxMarkerAnchor;
     public  mapReady$: Observable<boolean>;
     private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 

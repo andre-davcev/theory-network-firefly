@@ -10,6 +10,7 @@
 <ion-content [scrollEvents]="false">
     <app-map [geocode]="true"
              [placeholder]="'page.event-location.searchPlaceholder' | translate"
-             >
+             [locations]="locations$ | async"
+             (result)="locationFound($event)">
     </app-map>
 </ion-content>

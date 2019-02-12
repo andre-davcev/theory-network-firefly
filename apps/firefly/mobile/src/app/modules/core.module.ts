@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppIonicCoreModule } from '@theory/ionic';
 import { StateLanguage, StateLocation, StateDevice, StatePhotos } from '@theory/capacitor';
-import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts } from '@firefly/core';
+import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts, FirebaseEnvironment, MapboxEnvironment } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
 import { StateMap } from '@theory/mapbox';
@@ -66,9 +66,9 @@ Pro.init('1e5146ca',
     [
         Globalization,
         Firebase,
-        { provide: RouteReuseStrategy,    useClass: IonicRouteStrategy },
-        { provide: 'FirebaseEnvironment', useValue: environment.apis.firebase },
-        { provide: 'MapboxEnvironment',   useValue: environment.apis.mapbox }
+        { provide: RouteReuseStrategy,  useClass: IonicRouteStrategy },
+        { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
+        { provide: MapboxEnvironment,   useValue: environment.apis.mapbox }
 //        { provide: ErrorHandler,       useClass: ErrorHandlerApp }
     ]
 })
