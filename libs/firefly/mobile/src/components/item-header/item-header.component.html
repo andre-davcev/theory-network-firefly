@@ -6,10 +6,16 @@
     <p class="cpt-icon-placeholder" *ngIf="!iconValue">{{item.iconPlaceholder}}</p>
 </div>
 
-<form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
+<form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">    
     <input class="cpt-icon-hidden" type="hidden" [formControlName]="item.icon" *ngIf="!item.iconAsUrl">
-    <input class="cpt-title"       type="text"   [formControlName]="item.title"    [placeholder]="item.titlePlaceholder">
-    <input class="cpt-subtitle"    type="text"   [formControlName]="item.subtitle" [placeholder]="item.subtitlePlaceholder">
+    <input class="cpt-title"  type="text"  [formControlName]="item.title"    [placeholder]="item.titlePlaceholder">
+    <div class="error-messages" *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)">
+        Please add a name
+    </div>
+    <input class="cpt-subtitle" type="text" [formControlName]="item.subtitle" [placeholder]="item.subtitlePlaceholder">
+    <div class="error-messages" *ngIf="form.get('tagline').invalid && (form.get('tagline').dirty || form.get('tagline').touched)">
+        Please add a tagline
+    </div>
 </form>
 
 <div class="cpt-container" *ngIf="!edit">

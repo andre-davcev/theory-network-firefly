@@ -9,7 +9,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { BaseComponent } from '@theory/core';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateCluster, ActionSetClusterId } from '@firefly/core';
+import { StateCluster, ActionSetClusterId, ActionSetCluster } from '@firefly/core';
 import { ItemHeader, ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 
@@ -67,21 +67,35 @@ export class PageAssetCluster extends BaseComponent
                 title:                  translations['general.description'],
                 descriptionPlaceholder: translations['page.cluster.descriptionPlaceholder']                
             };
+
+           // this.form$.subscribe((x:any) => console.log('im here: ' + x));
         });
     }
 
     ionViewWillEnter()
     {
+        /*this.form$.subscribe((x) => {
+            x.valueChanges.subscribe((form) => {                
+                console.log('valid: ' + x.valid);
+                console.log('form:  ' + JSON.stringify(form));                
+            });
+        });*/
+
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     public iconClicked(): void
-    {
+    {        
         this.store.dispatch(new Navigate([Pages.IconSelector]));
     }
 
     public imageClicked(): void
     {
         this.store.dispatch(new Navigate([Pages.ImageSelector]));
+    }
+
+    public setCluster(): void
+    {
+        this.store.dispatch(new ActionSetCluster());
     }
 }

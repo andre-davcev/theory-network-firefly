@@ -19,5 +19,12 @@ export class ActionSetCluster
 {
     static readonly type = ActionsCluster.SetCluster;
 
-    constructor(public payload: Cluster) {}
+    constructor() {}
+}
+
+export class ActionUpdateCluster
+{
+    static readonly type = ActionsCluster.UpdateCluster;
+
+    constructor() {}
 }
