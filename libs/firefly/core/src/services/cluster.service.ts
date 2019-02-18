@@ -58,7 +58,7 @@ export class ServiceCluster
         );*/
 
         return this.afs.collection<Cluster>('clusters', ref => {
-            return ref.where('userid', '==', 'myuser')
+            return ref.where('userId', '==', 'myuser')
         })
         .snapshotChanges()
         .pipe(
@@ -80,6 +80,9 @@ export class ServiceCluster
     {
         const id = this.afs.createId();
         cluster.id = id;
+        console.log(cluster.id);
+        cluster.userId = 'myuser';
+        cluster.icon = 'https://loremflickr.com/640/360';
         const document: AngularFirestoreDocument<Cluster> = this.clustersCollection.doc(id) as AngularFirestoreDocument<Cluster>;
 
         return from(document.set(cluster)).pipe

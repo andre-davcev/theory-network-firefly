@@ -32,14 +32,14 @@ export class FormCluster extends FormGenerator<Cluster>
         const formGroup: FormGroup = this.formBuilder.group
         ({
             draft       : cluster.draft,
-            name        : [cluster.name,        ValidatorsExtended.minLength(1)],
-            tagline     : [cluster.tagline,     ValidatorsExtended.minLength(1)],
-            description : [cluster.description, ValidatorsExtended.minLength(1)],
-            icon        : [cluster.icon,        Validators.required],
-            photo       : [cluster.photo,       Validators.required],
-            categories  : [cluster.categories,  Validators.minLength(1)],
+            name        : [cluster.name,        [Validators.required, ValidatorsExtended.minLength(3)]],
+            tagline     : [cluster.tagline,     [Validators.required, ValidatorsExtended.minLength(3)]],
+            description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(3)]],
+            icon        : [cluster.icon],
+            photo       : [cluster.photo],
+            categories  : [cluster.categories],
             private     : cluster.private,
-            locations   : this.formBuilder.array(cluster.locations, Validators.minLength(1))
+            locations   : this.formBuilder.array(cluster.locations)
         });
 
         return formGroup;

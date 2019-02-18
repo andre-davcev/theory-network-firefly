@@ -63,10 +63,11 @@ export class StateCluster
     }
 
     @Action(ActionSetCluster)
-    setCluster({patchState, dispatch} : StateContext<StateClusterModel>, { payload }: ActionSetCluster)
+    setCluster({patchState, getState} : StateContext<StateClusterModel>)
     {
+        console.log('set cluster' + JSON.stringify(getState().form.value));
         return this.clusterService
-        .setCluster(payload)
+        .setCluster(getState().form.value)
         .pipe(
             map((cluster:Cluster) =>
             {

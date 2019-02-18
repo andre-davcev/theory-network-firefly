@@ -1,7 +1,10 @@
 <form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
     <h4 class="cpt-title" fxFlexAlign="center">{{item.title}}</h4>
 
-    <ion-textarea class="cpt-description" [placeholder]="item.descriptionPlaceholder" [formControlName]="item.description"></ion-textarea>    
+    <ion-textarea class="cpt-description" [placeholder]="item.descriptionPlaceholder" [formControlName]="item.description"></ion-textarea>
+    <div class="error-messages" *ngIf="form.get('description').invalid && (form.get('description').dirty || form.get('description').touched)">
+        Please add a description
+    </div>
 </form>
 
 <div class="cpt-container" *ngIf="!edit">
