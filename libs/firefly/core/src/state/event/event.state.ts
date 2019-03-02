@@ -4,15 +4,16 @@ import { Action, Selector, Select, State, StateContext } from '@ngxs/store';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
-import { User, Event, Cluster } from '@firefly/core/models';
+import { User, Event, Cluster, Location } from '@firefly/core/models';
 import { ServiceEvent } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
-import { ActionGetEvents, ActionSetEventId, ActionSetEvent } from './event.actions';
+import { ActionGetEvents, ActionSetEventId, ActionSetEvent, ActionEventPatch } from './event.actions';
 import { EventKey, AssetKey } from '@firefly/core/models';
 import { ModelKey } from '@theory/firebase';
 import { firestore } from 'firebase';
-import { ValidatorsExtended } from '@theory/core';
+import { ValidatorsExtended, CoreEnum } from '@theory/core';
+import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -146,6 +147,27 @@ export class StateEvent
 
     @Selector() static eventIcon(state: StateEventModel): Array<string> { return state.form.get(EventKey.Clusters).value; }
 
+    @Selector() static eventLocation(state: StateEventModel): Location
+    {
+        const form: FormGroup = StateEvent.form(state);
+
+        return form == null ? undefined : form.get(EventKey.Location).value;
+    }
+
+    @Selector() static eventLocationPlace(state: StateEventModel): Result
+    {
+        const location: Location = StateEvent.eventLocation(state);
+
+        return location == null ? undefined : location.place;
+    }
+
+    @Selector() static eventLocations(state: StateEventModel): Array<Location>
+    {
+        const location: Location = StateEvent.eventLocation(state);
+
+        return location == null ? [] : [location];
+    }
+
     @Action(ActionGetEvents)
     getEvents({ patchState } : StateContext<StateEventModel>)
     {
@@ -174,7 +196,7 @@ export class StateEvent
     {
         const id: string = payload;
         const entities : Record<string, Event> = StateEvent.entities(getState());
-        const event: Event = id === 'new' ? { ...StateEventOptions.defaults.empty } : entities[id];
+        const event: Event = id === CoreEnum.IdNew ? { ...StateEventOptions.defaults.empty } : entities[id];
 
         patchState({ id });
 
@@ -196,7 +218,8 @@ export class StateEvent
             [EventKey.Tagline]  : [event.tagline, ValidatorsExtended.minLength(1)],
             [EventKey.ImageId]  : [event.imageId, Validators.required],
             [EventKey.PlaceId]  : [event.placeId, Validators.required],
-            [EventKey.Clusters] : this.formBuilder.array(event.clusters, Validators.minLength(1))
+            [EventKey.Clusters] : this.formBuilder.array(event.clusters, Validators.minLength(1)),
+            [EventKey.Location] : [event.location, Validators.required]
         });
 
         patchState({ form });
@@ -215,5 +238,15 @@ export class StateEvent
             })
         )
 */
+    }
+
+    @Action(ActionEventPatch)
+    eventPatch({ patchState, getState } : StateContext<StateEventModel>, { key, value }: ActionEventPatch)
+    {
+        const form: FormGroup = StateEvent.form(getState());
+
+        form.controls[key].patchValue(value);
+
+        patchState({ form });
     }
 }

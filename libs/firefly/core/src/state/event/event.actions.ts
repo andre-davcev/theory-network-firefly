@@ -1,5 +1,6 @@
 import { Event } from '@firefly/core/models';
 import { AssetKey, EventKey } from '@firefly/core/models';
+import { CoreEnum } from '@theory/core';
 
 import { ActionsEvent } from './event.actions.enum';
 
@@ -14,7 +15,7 @@ export class ActionSetEventId
 {
     static readonly type = ActionsEvent.SetEventId;
 
-    constructor(public payload: string) { }
+    constructor(public payload: string = CoreEnum.IdNew) { }
 }
 
 export class ActionSetEvent
