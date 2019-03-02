@@ -116,6 +116,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 
     public eventResult(event: { result: Result }): void
     {
+        console.log(event);
         this.result.next(event.result);
     }
 

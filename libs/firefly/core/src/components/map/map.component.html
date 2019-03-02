@@ -1,4 +1,8 @@
-<mgl-map *ngIf="mapReady$ | async" [style]="style" [zoom]="[10]" [center]="locationLike$ | async" [interactive]="interactive">
+<mgl-map *ngIf="mapReady$ | async"
+         [style]="style"
+         [zoom]="[10]"
+         [center]="locationLike$ | async"
+         [interactive]="interactive">
     <mgl-control mglNavigation position="bottom-left" *ngIf="web$ | async"></mgl-control>
 
     <mgl-marker [lngLat]="locationLike$ | async">
@@ -22,18 +26,20 @@
                  (loading)="eventLoading($event)"
                  (results)="eventResults($event)"
                  (result)="eventResult($event)"
-                 (error)="eventError($event)"
-                 ></mgl-control>
+                 (error)="eventError($event)">
+    </mgl-control>
+
     <ng-container *ngFor="let location of locations">
-        <mgl-marker [lngLat]="[location.longitude, location.latitude]"
+        <mgl-marker [lngLat]="[location.latitude, location.longitude]"
                     [draggable]="false"
                     [anchor]="MapboxMarkerAnchor.Bottom"
                     #marker>
             <app-map-pin [added]="true"></app-map-pin>
         </mgl-marker>
-
+<!--
         <mgl-popup [marker]="marker" [closeOnClick="false" [closeButton]="false" [anchor]="MapboxMarkerAnchor.TopRight">
             <app-map-annotation [location]="location"></app-map-annotation>
         </mgl-popup>
+-->
     </ng-container>
 </mgl-map>

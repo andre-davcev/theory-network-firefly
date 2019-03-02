@@ -35,11 +35,11 @@ export class PageAssetEvent extends BaseComponent
     };
 
     public itemDescription: ItemDescription =
-    {        
+    {
         description: 'description'
     };
 
-    public itemImage: ItemImage = 
+    public itemImage: ItemImage =
     {
         imageAsUrl: true
     }
@@ -74,10 +74,10 @@ export class PageAssetEvent extends BaseComponent
             {
                 ...this.itemDescription,
                 title:                  translations['general.description'],
-                descriptionPlaceholder: translations['page.event.descriptionPlaceholder']                
+                descriptionPlaceholder: translations['page.event.descriptionPlaceholder']
             };
 
-            this.itemImage = 
+            this.itemImage =
             {
                 ...this.itemImage,
                 imagePlaceholder:       translations['page.event.imagePlaceholder']
@@ -92,6 +92,10 @@ export class PageAssetEvent extends BaseComponent
 
     public navigate(page: Pages.AssetsClusters | Pages.ImageSelector | Pages.EventLocation)
     {
-        this.store.dispatch(new Navigate([page]));
+        this.store.dispatch
+        ([
+            new ActionSetEventId(),
+            new Navigate([page])
+        ]);
     }
 }
