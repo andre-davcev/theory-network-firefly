@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 import { ComponentMap } from './map.component';
-import { ModuleComponentMapOrb } from '../map-orb/map-orb.component.module';
+import { ModuleComponentMapOrb } from '../map-orb';
+import { ModuleComponentMapPin } from '../map-pin';
+import { ModuleComponentMapAnnotation } from '../map-annotation';
 
 @NgModule
 ({
@@ -11,7 +13,9 @@ import { ModuleComponentMapOrb } from '../map-orb/map-orb.component.module';
     [
         CommonModule,
         ModuleComponentMapOrb,
-        NgxMapboxGLModule
+        NgxMapboxGLModule,
+        ModuleComponentMapPin,
+        ModuleComponentMapAnnotation
     ],
 
     declarations: [ComponentMap],
