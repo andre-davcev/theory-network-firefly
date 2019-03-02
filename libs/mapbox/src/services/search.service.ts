@@ -1,11 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { MapboxEnvironment } from '@firefly/core';
 import { EnvironmentMapbox } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceSearch
 {
-    constructor(@Inject(MapboxEnvironment) private environment: EnvironmentMapbox)
+    constructor(@Inject('MapboxEnvironment') private environment: EnvironmentMapbox)
     {
 
     }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { RouteReuseStrategy } from '@angular/router';
-import { IonicRouteStrategy } from '@ionic/angular';
+import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
@@ -14,7 +14,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppIonicCoreModule } from '@theory/ionic';
+import { AppCoreModule } from '@theory/web';
 import { StateLanguage, StateLocation, StateDevice, StatePhotos } from '@theory/capacitor';
 import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts, FirebaseEnvironment, MapboxEnvironment } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
@@ -33,7 +33,13 @@ Pro.init('1e5146ca',
     imports :
     [
         BrowserAnimationsModule,
-        AppIonicCoreModule,
+        AppCoreModule,
+        IonicModule.forRoot
+        ({
+            swipeBackEnabled: false,
+            scrollAssist: true,
+            scrollPadding: true
+        }),
 
         AngularFireModule.initializeApp(environment.apis.firebase),
         AngularFireAuthModule,
