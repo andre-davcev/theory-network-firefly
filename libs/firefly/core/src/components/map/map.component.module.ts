@@ -6,6 +6,7 @@ import { ComponentMap } from './map.component';
 import { ModuleComponentMapOrb } from '../map-orb';
 import { ModuleComponentMapPin } from '../map-pin';
 import { ModuleComponentMapAnnotation } from '../map-annotation';
+import { ModuleComponentLoading } from '../loading';
 
 @NgModule
 ({
@@ -15,7 +16,8 @@ import { ModuleComponentMapAnnotation } from '../map-annotation';
         ModuleComponentMapOrb,
         NgxMapboxGLModule,
         ModuleComponentMapPin,
-        ModuleComponentMapAnnotation
+        ModuleComponentMapAnnotation,
+        ModuleComponentLoading
     ],
 
     declarations: [ComponentMap],

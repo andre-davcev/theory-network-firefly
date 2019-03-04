@@ -1,3 +1,8 @@
+<app-loading *ngIf="!($mapReady | async)"
+             [color]="Color.Dark"
+             [colorBackground]="Color.Map">
+</app-loading>
+
 <mgl-map *ngIf="mapReady$ | async"
          [style]="style"
          [zoom]="[10]"
