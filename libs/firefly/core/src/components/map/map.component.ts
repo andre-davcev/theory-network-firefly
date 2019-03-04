@@ -9,6 +9,7 @@ import { BaseComponent } from '@theory/core';
 import { Location } from '@firefly/core/models';
 import { MapboxPlaceType, MapboxMapStyle, StateMap, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
 import { LngLatLiteral, Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
+import { Color } from '@firefly/core/enums';
 
 @Component
 ({
@@ -33,8 +34,9 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @Input() style:       MapboxMapStyle = MapboxMapStyle.Streets;
 
     public MapboxMarkerAnchor: any = MapboxMarkerAnchor;
-    public  mapReady$: Observable<boolean>;
+    public mapReady$: Observable<boolean>;
     private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    public Color: any = Color;
 
     @Input()
     @HostBinding('style.width')
@@ -116,7 +118,6 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 
     public eventResult(event: { result: Result }): void
     {
-        console.log(event);
         this.result.next(event.result);
     }
 

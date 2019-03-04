@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { ComponentLoading } from './loading.component';
+import { ModuleComponentLoading, ComponentLoading } from '@firefly/core/components';
+
 import { DirectiveLoading } from './loading.directive';
-import { IonicModule } from '@ionic/angular';
 
 @NgModule
 ({
     imports:
     [
-        CommonModule,
-        IonicModule
+        ModuleComponentLoading
     ],
 
     declarations :
     [
-        ComponentLoading,
         DirectiveLoading
     ],
 
@@ -26,7 +23,6 @@ import { IonicModule } from '@ionic/angular';
 
     exports:
     [
-        ComponentLoading,
         DirectiveLoading
     ]
 })
