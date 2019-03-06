@@ -1,15 +1,15 @@
 @import "app-variables";
 
-$cpt-color: $gm-color-black;
-$cpt-inner-font-size: 11px;
+$cpt-color: $app-color-dark;
+$cpt-inner-font-size: 19px;
 
 :host
 {
-    --cpt-icon:                      #{$fa-var-map-marker};
+    --cpt-icon:                      '\f041';
     --cpt-font-family:               #{$app-font-font-awesome};
-    --cpt-font-size:                 34px;
+    --cpt-font-size:                 56px;
     --cpt-height:                    var(--cpt-font-size);
-    --cpt-width:                     20px;
+    --cpt-width:                     32px;
     --cpt-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
 
     --cpt-inner-font-family:         #{$app-font-font-awesome};
@@ -19,8 +19,8 @@ $cpt-inner-font-size: 11px;
     --cpt-inner-shadow-top:          0 -1px 0 rgba(0,    0,    0, 0.21);
     --cpt-inner-shadow-bottom:       0  1px 0 rgba(255, 255, 255, 0.21);
 
-    --cpt-check:                     #{$fa-var-check-circle};
-    --cpt-plus:                      #{$fa-var-plus-circle};
+    --cpt-check:                     '\f058';
+    --cpt-plus:                      '\f055';
     --cpt-color:                     #{$cpt-color};
 
     --cpt-border-color:           rgba(255, 255, 255, 0.11);
@@ -40,13 +40,14 @@ $cpt-inner-font-size: 11px;
     --cpt-inner-shadow-top-active:           0 -1px 0 rgba(  0,   0,   0, 0.3);
     --cpt-inner-shadow-bottom-active:        0  1px 0 rgba(255, 255, 255, 0.4);
 
-
     position: relative;
     display: block;
     box-sizing: border-box;
     background-color: #{$app-color-transparent};
     height: var(--cpt-height);
     width: var(--cpt-width);
+
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0);
 
     &:before
     {
@@ -71,11 +72,6 @@ $cpt-inner-font-size: 11px;
         text-shadow: var(--cpt-box-shadow);
     }
 
-    &:after
-    {
-        content: var(--cpt-plus);
-    }
-
     > .cpt-inner
     {
         &:before
@@ -90,10 +86,10 @@ $cpt-inner-font-size: 11px;
         &:after
         {
             position: absolute;
-            top: 7px;
-            left: 6px;
-            height: $cpt-inner-font-size - 0.2;
-            width: $cpt-inner-font-size - 0.2;
+            top: 10px;
+            left: 8px;
+            height: 16px;
+            width: 16px;
             line-height: 1em;
             font-family: var(--cpt-inner-font-family);
             font-size: var(--cpt-inner-font-size);
@@ -101,6 +97,9 @@ $cpt-inner-font-size: 11px;
 
             text-shadow: var(--cpt-inner-shadow-top),
                          var(--cpt-inner-shadow-bottom);
+            content: var(--cpt-plus);
+            background-color: white;
+            border-radius: 50%;
         }
     }
 
@@ -113,7 +112,8 @@ $cpt-inner-font-size: 11px;
                           1px    0   0 var(--cpt-border-color-active),
                             0  1px   0 var(--cpt-border-color-active),
                             0 -1px   0 var(--cpt-border-color-active),
-                            0  1px 1px var(--cpt-shadow-color);
+                            0  1px 1px var(--cpt-shadow-color),
+                            2px 3px 4px rgba(0, 0, 0, 0.2);
         }
 
         > .cpt-inner
@@ -130,24 +130,6 @@ $cpt-inner-font-size: 11px;
 
                 text-shadow: var(--cpt-inner-shadow-top-active),
                              var(--cpt-inner-shadow-bottom-active);
-            }
-        }
-    }
-}
-
-.tn-map-pin
-{
-    &.ff-map-pin
-    {
-        &.tn-map-pin-inner
-        {
-            &.ff-active
-            {
-
-                &:after
-                {
-
-                }
             }
         }
     }
