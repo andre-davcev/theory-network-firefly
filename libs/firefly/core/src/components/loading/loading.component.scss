@@ -2,6 +2,8 @@
 
 :host
 {
+    --cpt-size: 28px;
+
     position: absolute;
     top: 0;
     left: 0;
@@ -26,5 +28,10 @@
     &.cpt-color-background-map
     {
         background-color: rgb(238, 233, 225);
+    }
+
+    ion-spinner {
+        height: var(--cpt-size);
+        width: var(--cpt-size);
     }
 }
