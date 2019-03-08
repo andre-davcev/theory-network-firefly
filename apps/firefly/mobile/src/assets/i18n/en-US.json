@@ -104,6 +104,8 @@
   "page.image-assets.title"  : "Assets",
   "page.image-library.title" : "Photo Library",
 
+  "component.map-loading": "Loading Map...",
+
   "data.day-of-week.sunday"    : "Sunday",
   "data.day-of-week.monday"    : "Monday",
   "data.day-of-week.tuesday"   : "Tuesday",
