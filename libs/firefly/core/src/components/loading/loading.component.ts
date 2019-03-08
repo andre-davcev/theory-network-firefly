@@ -15,6 +15,9 @@ export class ComponentLoading
     @Input()
     public colorBackground: Color = Color.Dark;
 
+    @Input()
+    public text: string;
+
     @HostBinding('class.cpt-color-background-dark')
     public get colorBackgroundPrimary(): boolean { return this.colorBackground === Color.Dark; }
 

@@ -104,6 +104,8 @@
   "page.user-profile.title"  : "Profile",
   "page.user-settings.title" : "Settings",
 
+  "component.map-loading": "Loading Map...",
+
   "data.day-of-week.sunday"    : "Sunday",
   "data.day-of-week.monday"    : "Monday",
   "data.day-of-week.tuesday"   : "Tuesday",

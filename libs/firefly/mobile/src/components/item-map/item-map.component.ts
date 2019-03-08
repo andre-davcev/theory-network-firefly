@@ -43,6 +43,6 @@ export class ComponentItemMap extends BaseComponent implements OnInit
             takeUntil(this.destroy$),
             filter((valid: boolean) => valid)
         ).
-        subscribe(() => this.loading = { ...this.loading, loading: true });
+        subscribe(() => this.loading = { ...this.loading, loading: false });
     }
 }

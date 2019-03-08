@@ -1,6 +1,7 @@
 <app-loading *ngIf="!($mapReady | async)"
              [color]="Color.Dark"
-             [colorBackground]="Color.Map">
+             [colorBackground]="Color.Map"
+             [text]="mapLoadingText">
 </app-loading>
 
 <mgl-map *ngIf="mapReady$ | async"

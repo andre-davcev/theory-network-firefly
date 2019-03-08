@@ -33,6 +33,8 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @Input() geocode:     boolean        = false;
     @Input() style:       MapboxMapStyle = MapboxMapStyle.Streets;
 
+    @Input() mapLoadingText: string;
+
     public MapboxMarkerAnchor: any = MapboxMarkerAnchor;
     public mapReady$: Observable<boolean>;
     private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(false);

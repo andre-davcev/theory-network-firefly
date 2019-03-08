@@ -4,6 +4,8 @@
 {
     --cpt-size: 28px;
 
+    --cpt-text-font-size: 1.25rem;
+
     position: absolute;
     top: 0;
     left: 0;
@@ -14,6 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     &.cpt-color-background-dark
     {
@@ -33,5 +36,11 @@
     ion-spinner {
         height: var(--cpt-size);
         width: var(--cpt-size);
+    }
+
+    .cpt-text
+    {
+        margin-top: 1rem;
+        font-size: var(--cpt-text-font-size);
     }
 }

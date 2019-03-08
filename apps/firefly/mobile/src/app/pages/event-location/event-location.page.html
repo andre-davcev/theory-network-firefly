@@ -10,5 +10,6 @@
 <app-map [geocode]="true"
          [placeholder]="'page.event-location.searchPlaceholder' | translate"
          [locations]="locations$ | async"
-         (result)="locationFound($event)">
+         (result)="locationFound($event)"
+         [mapLoadingText]="'component.map-loading' | translate">
 </app-map>
