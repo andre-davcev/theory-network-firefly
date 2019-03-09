@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@firefly/core/models';
 
 @Component
@@ -11,4 +11,17 @@ import { Location } from '@firefly/core/models';
 export class ComponentMapAnnotation
 {
     @Input() location: Location;
+    @Input() disclosure: boolean;
+
+    @Output() clicked: EventEmitter<void> = new EventEmitter();
+
+    constructor()
+    {
+        console.log('WHATS UP');
+    }
+
+    public click(): void
+    {
+        this.clicked.next();
+    }
 }
