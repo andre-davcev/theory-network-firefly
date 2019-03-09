@@ -42,10 +42,9 @@
                     #marker>
             <app-map-pin [added]="true"></app-map-pin>
         </mgl-marker>
-<!--
-        <mgl-popup [marker]="marker" [closeOnClick="false" [closeButton]="false" [anchor]="MapboxMarkerAnchor.TopRight">
+
+        <mgl-popup [marker]="marker" [closeOnClick]="false" [closeButton]="false" [anchor]="MapboxMarkerAnchor.TopRight">
             <app-map-annotation [location]="location"></app-map-annotation>
         </mgl-popup>
--->
     </ng-container>
 </mgl-map>
