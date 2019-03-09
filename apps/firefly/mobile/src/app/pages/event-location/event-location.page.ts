@@ -3,10 +3,11 @@ import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
+import { ModalController } from '@ionic/angular';
+import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateEvent, Location, ActionEventPatch, EventKey } from '@firefly/core';
-import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
 
 @Component
@@ -21,7 +22,7 @@ export class PageEventLocation
     @Select(StateEvent.form) form$: Observable<FormGroup>;
     @Select(StateEvent.eventLocations) locations$: Observable<Array<Location>>;
 
-    constructor(private store: Store) { }
+    constructor(private store: Store, private modalController: ModalController) { }
 
     public ionViewWillEnter(): void
     {
@@ -78,5 +79,15 @@ export class PageEventLocation
         };
 
         this.store.dispatch(new ActionEventPatch(EventKey.Location, location));
+    }
+
+    public cancel(): void
+    {
+        this.modalController.dismiss();
+    }
+
+    public save(): void
+    {
+        this.modalController.dismiss();
     }
 }

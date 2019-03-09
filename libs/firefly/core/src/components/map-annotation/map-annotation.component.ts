@@ -15,11 +15,6 @@ export class ComponentMapAnnotation
 
     @Output() clicked: EventEmitter<void> = new EventEmitter();
 
-    constructor()
-    {
-        console.log('WHATS UP');
-    }
-
     public click(): void
     {
         this.clicked.next();

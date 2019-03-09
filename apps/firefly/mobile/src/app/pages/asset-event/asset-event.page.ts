@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
 import { StatusBarStyle } from '@capacitor/core';
+import { takeUntil } from 'rxjs/operators';
+import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateEvent, ActionSetEventId } from '@firefly/core';
-import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '@theory/core';
-import { takeUntil } from 'rxjs/operators';
 import { ItemHeader, ItemDescription, ItemImage } from '@firefly/mobile';
-import { Navigate } from '@ngxs/router-plugin';
 import { Pages } from '../pages.enum';
+import { PageEventLocation } from '../event-location';
 
 @Component
 ({
@@ -44,7 +46,7 @@ export class PageAssetEvent extends BaseComponent
         imageAsUrl: true
     }
 
-    constructor(private store: Store, private translate: TranslateService)
+    constructor(private store: Store, private translate: TranslateService, public modalController: ModalController)
     {
         super();
 
@@ -92,10 +94,23 @@ export class PageAssetEvent extends BaseComponent
 
     public navigate(page: Pages.AssetsClusters | Pages.ImageSelector | Pages.EventLocation)
     {
-        this.store.dispatch
-        ([
-            new ActionSetEventId(),
-            new Navigate([page])
-        ]);
+        if (page === Pages.EventLocation)
+        {
+            console.log('YO YO YO');
+            from(this.modalController.create
+            ({
+                component: PageEventLocation
+            })).
+
+            subscribe((modal: HTMLIonModalElement) => modal.present());
+        }
+        else
+        {
+            this.store.dispatch
+            ([
+                new ActionSetEventId(),
+                new Navigate([page])
+            ]);
+        }
     }
 }
