@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ComponentMapAnnotation } from './map-annotation.component';
 
@@ -7,7 +8,8 @@ import { ComponentMapAnnotation } from './map-annotation.component';
 ({
     imports :
     [
-        CommonModule
+        CommonModule,
+        FlexLayoutModule
     ],
 
     declarations    : [ComponentMapAnnotation],
