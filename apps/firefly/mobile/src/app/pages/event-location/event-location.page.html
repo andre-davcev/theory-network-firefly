@@ -2,7 +2,18 @@
     <ion-toolbar color="dark" elevation="2">
         <ion-title color="primary">{{'page.event-location.title' | translate}}</ion-title>
         <ion-buttons slot="start">
+            <ion-button color="primary" (click)="cancel()">
+                <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+            </ion-button>
+<!--
             <ion-back-button color="primary"></ion-back-button>
+-->
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+            <ion-button color="primary" (click)="save()">
+                <ion-icon slot="icon-only" name="save"></ion-icon>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
