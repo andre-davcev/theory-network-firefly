@@ -4,6 +4,8 @@
 {
     --cpt-color-background: #{$app-color-dark};
     --cpt-color-accent: #{$app-color-primary};
+    --cpt-color-white: #{$app-color-white};
+    --cpt-box-shadow: rgba(0, 0, 0, 0.1);
 
     position: relative;
     display: flex;
@@ -13,7 +15,7 @@
     .cpt-container
     {
         position: relative;
-        margin: 8px;
+        padding: 9px;
 
         background-color: var(--cpt-color-background);
         border-width: 0;
@@ -22,8 +24,15 @@
 
         border-right-width: 5px;
 
+        text-shadow: -1px    0  0  var(--cpt-border-color),
+                      1px    0  0  var(--cpt-border-color),
+                        0  1px  0  var(--cpt-border-color),
+                        0 -1px  0  var(--cpt-border-color),
+                        0  1px 1px var(--cpt-shadow-color);
+
         &:before
         {
+            content: '';
             position: absolute;
             display: block;
             top: 4px;
@@ -36,5 +45,23 @@
 
             border-right: 6px solid var(--cpt-color-background);
         }
+    }
+
+    .cpt-label
+    {
+        font-weight: 600;
+        line-height: 1em;
+    }
+
+    .cpt-title
+    {
+        color: var(--cpt-color-white);
+        font-size: 0.875rem;
+    }
+
+    .cpt-description
+    {
+        color: var(--cpt-color-accent);
+        font-size: 0.75rem;
     }
 }

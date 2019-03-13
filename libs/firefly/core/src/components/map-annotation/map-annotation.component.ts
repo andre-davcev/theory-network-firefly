@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { Location } from '@firefly/core/models';
 
 @Component
 ({
@@ -10,7 +9,9 @@ import { Location } from '@firefly/core/models';
 })
 export class ComponentMapAnnotation
 {
-    @Input() location: Location;
+    @Input() title: string = 'Location Name';
+    @Input() description: string = '123 Address';
+
     @Input() disclosure: boolean;
 
     @Output() clicked: EventEmitter<void> = new EventEmitter();
