@@ -9,8 +9,8 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
 })
 export class ComponentMapAnnotation
 {
-    @Input() title: string = 'Location Name';
-    @Input() description: string = '123 Address';
+    @Input() title: string = '';
+    @Input() description: string;
 
     @Input() disclosure: boolean;
 

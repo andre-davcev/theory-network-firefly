@@ -43,7 +43,9 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 
     @ViewChildren('marker') markers: QueryList<MarkerComponent>;
 
-    public annotationOffset = new Point(22, 11);
+    public annotationOffset:      Point  = new Point(22, 2);
+    public annotationTitle:       string = '';
+    public annotationDescription: string = '';
 
     @Input()
     @HostBinding('style.width')
@@ -125,7 +127,13 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 
     public eventResult(event: { result: Result }): void
     {
-        this.result.next(event.result);
+        const result: Result = event.result;
+        const address: Array<string> = result.place_name.split(', ');
+
+        this.result.next(result);
+
+        this.annotationTitle       = address[0];
+        this.annotationDescription = address[1];
 
         setTimeout(() =>
         {

@@ -60,6 +60,11 @@
 
         ::ng-deep .mapboxgl-popup
         {
+            .mapboxgl-popup-tip
+            {
+                display: none;
+            }
+
             .mapboxgl-popup-content
             {
                 padding: 0;
