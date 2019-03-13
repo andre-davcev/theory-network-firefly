@@ -24,12 +24,6 @@
 
         border-right-width: 5px;
 
-        text-shadow: -1px    0  0  var(--cpt-border-color),
-                      1px    0  0  var(--cpt-border-color),
-                        0  1px  0  var(--cpt-border-color),
-                        0 -1px  0  var(--cpt-border-color),
-                        0  1px 1px var(--cpt-shadow-color);
-
         &:before
         {
             content: '';

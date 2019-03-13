@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { Location } from '@firefly/core/models';
 import { MapboxPlaceType, MapboxMapStyle, StateMap, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
 import { LngLatLiteral, Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { Color } from '@firefly/core/enums';
+import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
 
 @Component
 ({
@@ -39,6 +40,8 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     public mapReady$: Observable<boolean>;
     private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public Color: any = Color;
+
+    @ViewChildren('marker') markers: QueryList<MarkerComponent>;
 
     public annotationOffset = new Point(22, 11);
 
@@ -123,6 +126,14 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     public eventResult(event: { result: Result }): void
     {
         this.result.next(event.result);
+
+        setTimeout(() =>
+        {
+            this.markers.forEach((marker: MarkerComponent) =>
+            {
+                marker.togglePopup();
+            });
+        });
     }
 
     public eventError(error: any): void
