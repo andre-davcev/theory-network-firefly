@@ -2,7 +2,7 @@ import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmit
 import { Select } from '@ngxs/store';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
-import { LngLatLike } from 'mapbox-gl';
+import { LngLatLike, Point } from 'mapbox-gl';
 
 import { StateDevice, StateLocation, StateLanguage } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
@@ -39,6 +39,8 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     public mapReady$: Observable<boolean>;
     private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public Color: any = Color;
+
+    public annotationOffset = new Point(22, 11);
 
     @Input()
     @HostBinding('style.width')

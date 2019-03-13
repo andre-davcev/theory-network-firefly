@@ -96,7 +96,6 @@ export class PageAssetEvent extends BaseComponent
     {
         if (page === Pages.EventLocation)
         {
-            console.log('YO YO YO');
             from(this.modalController.create
             ({
                 component: PageEventLocation

@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ComponentMapAnnotation } from './map-annotation.component';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 @NgModule
 ({
     imports :
     [
         CommonModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        ModuleDirectiveElevation
     ],
 
     declarations    : [ComponentMapAnnotation],
