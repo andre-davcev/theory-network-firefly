@@ -48,7 +48,9 @@
                    [closeButton]="false"
                    [anchor]="MapboxMarkerAnchor.BottomLeft"
                    [offset]="annotationOffset">
-            <app-map-annotation></app-map-annotation>
+            <app-map-annotation [title]="annotationTitle"
+                                [description]="annotationDescription">
+            </app-map-annotation>
         </mgl-popup>
     </ng-container>
 </mgl-map>

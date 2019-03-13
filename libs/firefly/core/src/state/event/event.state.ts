@@ -93,20 +93,6 @@ export class StateEvent
         return '';
     }
 
-    @Selector() static eventPlaceId(state: StateEventModel): string
-    {
-        return state.form == null ? '' : state.form.get(AssetKey.Name).value;
-    }
-
-    @Selector() static eventPlace(state: StateEventModel): string
-    {
-        const placeId: string = StateEvent.eventPlaceId(state);
-
-        // ToDo: Lookup placeId and return Place
-        // ToDo: Setup place collection watcher
-        return null;
-    }
-
     @Selector() static eventClusterIds(state: StateEventModel): Array<string>
     {
         return state.form == null ? '' : state.form.get(EventKey.Clusters).value;
@@ -159,6 +145,13 @@ export class StateEvent
         const location: Location = StateEvent.eventLocation(state);
 
         return location == null ? undefined : location.place;
+    }
+
+    @Selector() static eventLocationAddress(state: StateEventModel): Array<string>
+    {
+        const result: Result = StateEvent.eventLocationPlace(state);
+
+        return result == null ? [] : result.place_name.split(', ');
     }
 
     @Selector() static eventLocations(state: StateEventModel): Array<Location>
