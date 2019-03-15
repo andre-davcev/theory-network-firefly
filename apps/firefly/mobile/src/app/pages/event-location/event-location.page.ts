@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
@@ -9,6 +9,7 @@ import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateEvent, Location, ActionEventPatch, EventKey } from '@firefly/core';
 import { MapboxPlaceType } from '@theory/mapbox';
+import { BaseComponent } from '@theory/core';
 
 @Component
 ({
@@ -17,12 +18,29 @@ import { MapboxPlaceType } from '@theory/mapbox';
     styleUrls   : ['./event-location.page.scss']
 })
 
-export class PageEventLocation
+export class PageEventLocation extends BaseComponent implements OnInit
 {
     @Select(StateEvent.form) form$: Observable<FormGroup>;
     @Select(StateEvent.eventLocations) locations$: Observable<Array<Location>>;
+    @Select(StateEvent.eventLocationDefined) locationDefined$: Observable<boolean>;
 
-    constructor(private store: Store, private modalController: ModalController) { }
+    private locationSet$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    public disableDone$: Observable<boolean>;
+
+    constructor(private store: Store, private modalController: ModalController)
+    {
+        super();
+    }
+
+    public ngOnInit(): void
+    {
+        this.disableDone$ = combineLatest
+        (
+            this.locationDefined$,
+            this.locationSet$,
+            (locationDefined, locationSet) => !locationDefined && !locationSet
+        );
+    }
 
     public ionViewWillEnter(): void
     {
@@ -69,7 +87,6 @@ export class PageEventLocation
     text_en: "Paris"
     type: "Feature"
 */
-
         const location: Location =
         {
             latitude  : result.center[0],
