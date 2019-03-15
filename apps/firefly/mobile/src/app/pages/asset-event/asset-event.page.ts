@@ -9,7 +9,7 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateEvent, ActionSetEventId } from '@firefly/core';
+import { StateEvent, ActionEventSetId } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { ItemHeader, ItemDescription, ItemImage } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
@@ -50,7 +50,7 @@ export class PageAssetEvent extends BaseComponent
     {
         super();
 
-        this.store.dispatch(new ActionSetEventId('new'));
+        this.store.dispatch(new ActionEventSetId('new'));
 
         this.translate.get
         ([
@@ -107,7 +107,7 @@ export class PageAssetEvent extends BaseComponent
         {
             this.store.dispatch
             ([
-                new ActionSetEventId(),
+                new ActionEventSetId(),
                 new Navigate([page])
             ]);
         }

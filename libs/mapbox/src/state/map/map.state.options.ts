@@ -8,6 +8,8 @@ export const StateMapOptions: StoreOptions<StateMapModel> =
 
     defaults :
     {
-        position : undefined
+        position     : undefined,
+        searchResult : undefined,
+        place        : undefined
     }
 };

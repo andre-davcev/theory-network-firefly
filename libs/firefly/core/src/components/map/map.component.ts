@@ -1,16 +1,17 @@
 import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
 import { LngLatLike, Point } from 'mapbox-gl';
 
-import { StateDevice, StateLocation, StateLanguage } from '@theory/capacitor';
+import { StateDevice, StateLanguage } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
 import { Location } from '@firefly/core/models';
-import { MapboxPlaceType, MapboxMapStyle, StateMap, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
+import { MapboxPlaceType, MapboxMapStyle, StateMap, MapboxControlPosition, MapboxMarkerAnchor, ActionMapSearchResultSet } from '@theory/mapbox';
 import { LngLatLiteral, Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { Color } from '@firefly/core/enums';
 import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
+import { MapMovingMethod } from '@theory/mapbox';
 
 @Component
 ({
@@ -20,10 +21,11 @@ import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
 })
 export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 {
-    @Select(StateLocation.loading)          loading$         : Observable<boolean>;
     @Select(StateMap.locationValid)         locationValid$   : Observable<boolean>;
     @Select(StateMap.locationLike)          locationLike$    : Observable<LngLatLike>;
     @Select(StateMap.locationLiteral)       locationLiteral$ : Observable<LngLatLiteral>;
+    @Select(StateMap.placeOrSearch)         place$           : Observable<Result>;
+    @Select(StateMap.placeOrSearchCenter)   placeCenter$     : Observable<LngLatLike>;
     @Select(StateDevice.web)                web$             : Observable<boolean>;
     @Select(StateLanguage.languageIso639_1) language$        : Observable<string>;
 
@@ -35,6 +37,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @Input() style:       MapboxMapStyle = MapboxMapStyle.Streets;
 
     @Input() mapLoadingText: string;
+    @Input() mapMovingMethod: MapMovingMethod = MapMovingMethod.FlyTo;
 
     public MapboxMarkerAnchor: any = MapboxMarkerAnchor;
     public mapReady$: Observable<boolean>;
@@ -86,7 +89,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @Output() result:  EventEmitter<Result>  = new EventEmitter<Result>();
     @Output() error:   EventEmitter<any>     = new EventEmitter<any>();
 
-    constructor()
+    constructor(private store: Store)
     {
         super();
     }
@@ -131,6 +134,8 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         const address: Array<string> = result.place_name.split(', ');
 
         this.result.next(result);
+
+        this.store.dispatch(new ActionMapSearchResultSet(result));
 
         this.annotationTitle       = address[0];
         this.annotationDescription = address[1];

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, Subject, BehaviorSubject, combineLatest } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateEvent, Location, ActionEventPatch, EventKey } from '@firefly/core';
-import { MapboxPlaceType } from '@theory/mapbox';
+import { StateEvent, Location, ActionEventPatch, EventKey, ActionEventSetLocation } from '@firefly/core';
+import { MapboxPlaceType, StateMap, ActionMapSearchResultClear, ActionMapPlaceSetWithSearchResult } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
 
 @Component
@@ -20,12 +20,14 @@ import { BaseComponent } from '@theory/core';
 
 export class PageEventLocation extends BaseComponent implements OnInit
 {
-    @Select(StateEvent.form) form$: Observable<FormGroup>;
-    @Select(StateEvent.eventLocations) locations$: Observable<Array<Location>>;
+    @Select(StateEvent.form)                 form$:            Observable<FormGroup>;
+    @Select(StateEvent.eventLocations)       locations$:       Observable<Array<Location>>;
     @Select(StateEvent.eventLocationDefined) locationDefined$: Observable<boolean>;
+    @Select(StateMap.placeOrSearch)          place$:           Observable<Result>;
+    @Select(StateMap.placeOrSearchDefined)   placeDefined$:    Observable<boolean>;
 
-    private locationSet$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public disableDone$: Observable<boolean>;
+    public result: Result;
 
     constructor(private store: Store, private modalController: ModalController)
     {
@@ -37,8 +39,8 @@ export class PageEventLocation extends BaseComponent implements OnInit
         this.disableDone$ = combineLatest
         (
             this.locationDefined$,
-            this.locationSet$,
-            (locationDefined, locationSet) => !locationDefined && !locationSet
+            this.placeDefined$,
+            (locationDefined, placeDefined) => !locationDefined && !placeDefined
         );
     }
 
@@ -50,6 +52,8 @@ export class PageEventLocation extends BaseComponent implements OnInit
     public locationFound(result: Result): void
     {
         console.log(result);
+        this.result = result;
+
 /*
     bbox: Array (4)
         0 2.224219
@@ -87,24 +91,30 @@ export class PageEventLocation extends BaseComponent implements OnInit
     text_en: "Paris"
     type: "Feature"
 */
-        const location: Location =
-        {
-            latitude  : result.center[0],
-            longitude : result.center[1],
-            types     : result.place_type as Array<MapboxPlaceType>,
-            place     : result
-        };
-
-        this.store.dispatch(new ActionEventPatch(EventKey.Location, location));
+;
     }
 
     public cancel(): void
     {
+        this.store.dispatch
+        ([
+            new ActionMapSearchResultClear(),
+            new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
+        ]);
+
         this.modalController.dismiss();
     }
 
     public save(): void
     {
+        this.store.dispatch
+        ([
+            new ActionEventSetLocation(this.result),
+            new ActionMapPlaceSetWithSearchResult(),
+            new ActionMapSearchResultClear(),
+            new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
+        ]);
+
         this.modalController.dismiss();
     }
 }

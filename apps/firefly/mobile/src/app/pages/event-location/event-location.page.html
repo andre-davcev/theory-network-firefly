@@ -17,10 +17,9 @@
 
 <ion-content [scrollEvents]="true">
     <app-map [geocode]="true"
-            [placeholder]="'page.event-location.searchPlaceholder' | translate"
-            [locations]="locations$ | async"
-            (result)="locationFound($event)"
-            [mapLoadingText]="'component.map-loading' | translate">
+             [placeholder]="'page.event-location.searchPlaceholder' | translate"
+             [mapLoadingText]="'component.map-loading' | translate"
+             (result)="locationFound($event)">
     </app-map>
 </ion-content>
 

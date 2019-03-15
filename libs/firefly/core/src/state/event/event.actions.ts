@@ -3,6 +3,7 @@ import { AssetKey, EventKey } from '@firefly/core/models';
 import { CoreEnum } from '@theory/core';
 
 import { ActionsEvent } from './event.actions.enum';
+import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 export class ActionGetEvents
 {
@@ -11,14 +12,14 @@ export class ActionGetEvents
     constructor() {}
 }
 
-export class ActionSetEventId
+export class ActionEventSetId
 {
-    static readonly type = ActionsEvent.SetEventId;
+    static readonly type = ActionsEvent.SetId;
 
     constructor(public payload: string = CoreEnum.IdNew) { }
 }
 
-export class ActionSetEvent
+export class ActionEventSet
 {
     static readonly type = ActionsEvent.SetEvent;
 
@@ -27,7 +28,14 @@ export class ActionSetEvent
 
 export class ActionEventPatch
 {
-    static readonly type = ActionsEvent.Patch;
+    static readonly type = ActionsEvent.PatchEvent;
 
     constructor(public key: AssetKey | EventKey, public value: any ) { }
+}
+
+export class ActionEventSetLocation
+{
+    static readonly type = ActionsEvent.SetEventLocation;
+
+    constructor(public payload: Result) { }
 }
