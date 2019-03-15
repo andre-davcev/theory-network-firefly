@@ -8,12 +8,13 @@ import { User, Event, Cluster, Location } from '@firefly/core/models';
 import { ServiceEvent } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
-import { ActionGetEvents, ActionSetEventId, ActionSetEvent, ActionEventPatch } from './event.actions';
+import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation } from './event.actions';
 import { EventKey, AssetKey } from '@firefly/core/models';
 import { ModelKey } from '@theory/firebase';
 import { firestore } from 'firebase';
 import { ValidatorsExtended, CoreEnum } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
+import { MapboxPlaceType } from '@theory/mapbox';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -140,20 +141,6 @@ export class StateEvent
         return form == null ? undefined : form.get(EventKey.Location).value;
     }
 
-    @Selector() static eventLocationPlace(state: StateEventModel): Result
-    {
-        const location: Location = StateEvent.eventLocation(state);
-
-        return location == null ? undefined : location.place;
-    }
-
-    @Selector() static eventLocationAddress(state: StateEventModel): Array<string>
-    {
-        const result: Result = StateEvent.eventLocationPlace(state);
-
-        return result == null ? [] : result.place_name.split(', ');
-    }
-
     @Selector() static eventLocationDefined(state: StateEventModel): boolean
     {
         const location: Location = StateEvent.eventLocation(state);
@@ -191,8 +178,8 @@ export class StateEvent
         )
     }
 
-    @Action(ActionSetEventId)
-    setEventId({ patchState, getState, dispatch } : StateContext<StateEventModel>, { payload }: ActionSetEventId)
+    @Action(ActionEventSetId)
+    setEventId({ patchState, getState, dispatch } : StateContext<StateEventModel>, { payload }: ActionEventSetId)
     {
         const id: string = payload;
         const entities : Record<string, Event> = StateEvent.entities(getState());
@@ -200,11 +187,11 @@ export class StateEvent
 
         patchState({ id });
 
-        return dispatch(new ActionSetEvent(event));
+        return dispatch(new ActionEventSet(event));
     }
 
-    @Action(ActionSetEvent)
-    setEvent({ patchState } : StateContext<StateEventModel>, { payload }: ActionSetEvent)
+    @Action(ActionEventSet)
+    setEvent({ patchState } : StateContext<StateEventModel>, { payload }: ActionEventSet)
     {
         const event: Event = payload;
 
@@ -249,4 +236,20 @@ export class StateEvent
 
         patchState({ form });
     }
+
+    @Action(ActionEventSetLocation)
+    setEventLocation({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventSetLocation)
+    {
+        const result: Result = payload;
+
+        const location: Location =
+        {
+            latitude  : result.center[0],
+            longitude : result.center[1],
+            types     : result.place_type as Array<MapboxPlaceType>
+        };
+
+        dispatch(new ActionEventPatch(EventKey.Location, location));
+    }
+
 }

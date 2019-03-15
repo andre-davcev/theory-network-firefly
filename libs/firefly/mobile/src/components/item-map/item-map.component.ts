@@ -6,6 +6,7 @@ import { Color } from '@firefly/core/enums';
 import { DirectiveLoadingOptions } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, filter } from 'rxjs/operators';
+import { MapMovingMethod } from '@theory/mapbox';
 
 @Component
 ({
@@ -22,6 +23,7 @@ export class ComponentItemMap extends BaseComponent implements OnInit
     @Select(StateLocation.locationValid) locationValid$: Observable<boolean>;
 
     public Color: any = Color;
+    public MapMovingMethod: any = MapMovingMethod;
 
     public loading: DirectiveLoadingOptions =
     {
