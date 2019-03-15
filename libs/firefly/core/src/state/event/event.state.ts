@@ -154,6 +154,13 @@ export class StateEvent
         return result == null ? [] : result.place_name.split(', ');
     }
 
+    @Selector() static eventLocationDefined(state: StateEventModel): boolean
+    {
+        const location: Location = StateEvent.eventLocation(state);
+
+        return location != null;
+    }
+
     @Selector() static eventLocations(state: StateEventModel): Array<Location>
     {
         const location: Location = StateEvent.eventLocation(state);
