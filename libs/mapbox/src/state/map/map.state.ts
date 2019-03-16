@@ -10,7 +10,7 @@ import { GeolocationPosition } from '@capacitor/core';
 
 import { StateMapModel } from './map.state.model';
 import { StateMapOptions } from './map.state.options';
-import { ActionMapLocationWatch, ActionMapSearchResultSet, ActionMapSearchResultClear, ActionMapPlaceSet, ActionMapPlaceSetWithSearchResult } from './map.actions';
+import { ActionMapLocationWatch, ActionMapSearchResultSet, ActionMapSearchResultClear, ActionMapPlaceSet, ActionMapPlaceSetWithSearchResult, ActionMapPlaceClear } from './map.actions';
 
 @State<StateMapModel>(StateMapOptions)
 
@@ -145,7 +145,7 @@ export class StateMap
         patchState({ place: StateMap.searchResult(getState()) });
     }
 
-    @Action(ActionMapSearchResultClear)
+    @Action(ActionMapPlaceClear)
     placeClear({ patchState })
     {
         patchState({ place: StateMapOptions.defaults.place });
