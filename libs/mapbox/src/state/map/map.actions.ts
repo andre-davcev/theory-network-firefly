@@ -15,6 +15,13 @@ export class ActionMapSearchResultSet
     constructor(public payload: Result) { }
 }
 
+export class ActionMapSearchResultSetWithPlace
+{
+    static readonly type = ActionsMap.SearchResultSetWithPlace;
+
+    constructor() { }
+}
+
 export class ActionMapSearchResultClear
 {
     static readonly type = ActionsMap.SearchResultClear;
