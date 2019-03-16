@@ -7,8 +7,8 @@ import { ModalController } from '@ionic/angular';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateEvent, Location, ActionEventPatch, EventKey, ActionEventSetLocation } from '@firefly/core';
-import { MapboxPlaceType, StateMap, ActionMapSearchResultClear, ActionMapPlaceSetWithSearchResult } from '@theory/mapbox';
+import { StateEvent, Location, ActionEventSetLocation } from '@firefly/core';
+import { StateMap, ActionMapPlaceSetWithSearchResult, ActionMapSearchResultSetWithPlace } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
 
 @Component
@@ -20,11 +20,11 @@ import { BaseComponent } from '@theory/core';
 
 export class PageEventLocation extends BaseComponent implements OnInit
 {
-    @Select(StateEvent.form)                 form$:            Observable<FormGroup>;
-    @Select(StateEvent.eventLocations)       locations$:       Observable<Array<Location>>;
-    @Select(StateEvent.eventLocationDefined) locationDefined$: Observable<boolean>;
-    @Select(StateMap.placeOrSearch)          place$:           Observable<Result>;
-    @Select(StateMap.placeOrSearchDefined)   placeDefined$:    Observable<boolean>;
+    @Select(StateEvent.form)                 form$:                Observable<FormGroup>;
+    @Select(StateEvent.eventLocations)       locations$:           Observable<Array<Location>>;
+    @Select(StateEvent.eventLocationDefined) locationDefined$:     Observable<boolean>;
+    @Select(StateMap.searchResult)           searchResult$:        Observable<Result>;
+    @Select(StateMap.searchResultDefined)    searchResultDefined$: Observable<boolean>;
 
     public disableDone$: Observable<boolean>;
     public result: Result;
@@ -39,8 +39,8 @@ export class PageEventLocation extends BaseComponent implements OnInit
         this.disableDone$ = combineLatest
         (
             this.locationDefined$,
-            this.placeDefined$,
-            (locationDefined, placeDefined) => !locationDefined && !placeDefined
+            this.searchResultDefined$,
+            (locationDefined, searchResultDefined) => !locationDefined && !searchResultDefined
         );
     }
 
@@ -98,7 +98,7 @@ export class PageEventLocation extends BaseComponent implements OnInit
     {
         this.store.dispatch
         ([
-            new ActionMapSearchResultClear(),
+            new ActionMapSearchResultSetWithPlace(),
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
         ]);
 
@@ -111,7 +111,6 @@ export class PageEventLocation extends BaseComponent implements OnInit
         ([
             new ActionEventSetLocation(this.result),
             new ActionMapPlaceSetWithSearchResult(),
-            new ActionMapSearchResultClear(),
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
         ]);
 

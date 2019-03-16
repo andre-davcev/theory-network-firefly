@@ -10,7 +10,7 @@ import { GeolocationPosition } from '@capacitor/core';
 
 import { StateMapModel } from './map.state.model';
 import { StateMapOptions } from './map.state.options';
-import { ActionMapLocationWatch, ActionMapSearchResultSet, ActionMapSearchResultClear, ActionMapPlaceSet, ActionMapPlaceSetWithSearchResult, ActionMapPlaceClear } from './map.actions';
+import { ActionMapLocationWatch, ActionMapSearchResultSet, ActionMapSearchResultClear, ActionMapPlaceSet, ActionMapPlaceSetWithSearchResult, ActionMapPlaceClear, ActionMapSearchResultSetWithPlace } from './map.actions';
 
 @State<StateMapModel>(StateMapOptions)
 
@@ -88,25 +88,6 @@ export class StateMap
         return StateMap.place(state) == null ? false : true;
     }
 
-    @Selector() static placeOrSearch(state: StateMapModel): Result
-    {
-        const place: Result = StateMap.place(state);
-
-        return place == null ? StateMap.searchResult(state) : place;
-    }
-
-    @Selector() static placeOrSearchCenter(state: StateMapModel): LngLatLike
-    {
-        const place: Result = StateMap.place(state);
-
-        return place == null ? StateMap.searchResultCenter(state) : StateMap.placeCenter(state);
-    }
-
-    @Selector() static placeOrSearchDefined(state: StateMapModel): boolean
-    {
-        return StateMap.placeDefined(state) || StateMap.searchResultDefined(state);
-    }
-
     public ngxsOnInit(context: StateContext<StateMapModel>): void
     {
         context.dispatch(new ActionMapLocationWatch());
@@ -125,6 +106,12 @@ export class StateMap
     searchResultSet({ patchState }, { payload }: ActionMapSearchResultSet)
     {
         patchState({ searchResult: payload });
+    }
+
+    @Action(ActionMapSearchResultSetWithPlace)
+    searchResultSetWithPlace({ patchState, getState })
+    {
+        patchState({ searchResult: StateMap.place(getState()) });
     }
 
     @Action(ActionMapSearchResultClear)

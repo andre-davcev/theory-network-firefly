@@ -21,13 +21,13 @@ import { MapMovingMethod } from '@theory/mapbox';
 })
 export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 {
-    @Select(StateMap.locationValid)         locationValid$   : Observable<boolean>;
-    @Select(StateMap.locationLike)          locationLike$    : Observable<LngLatLike>;
-    @Select(StateMap.locationLiteral)       locationLiteral$ : Observable<LngLatLiteral>;
-    @Select(StateMap.placeOrSearch)         place$           : Observable<Result>;
-    @Select(StateMap.placeOrSearchCenter)   placeCenter$     : Observable<LngLatLike>;
-    @Select(StateDevice.web)                web$             : Observable<boolean>;
-    @Select(StateLanguage.languageIso639_1) language$        : Observable<string>;
+    @Select(StateMap.locationValid)         locationValid$      : Observable<boolean>;
+    @Select(StateMap.locationLike)          locationLike$       : Observable<LngLatLike>;
+    @Select(StateMap.locationLiteral)       locationLiteral$    : Observable<LngLatLiteral>;
+    @Select(StateMap.searchResult)          searchResult$       : Observable<Result>;
+    @Select(StateMap.searchResultCenter)    searchResultCenter$ : Observable<LngLatLike>;
+    @Select(StateDevice.web)                web$                : Observable<boolean>;
+    @Select(StateLanguage.languageIso639_1) language$           : Observable<string>;
 
     @Input() geocodePosition: MapboxControlPosition = MapboxControlPosition.TopLeft;
     @Input() locations: Array<Location> = [];
