@@ -23,6 +23,9 @@
       "github.vscode-pull-request-github",
       "peterjausovec.vscode-docker",
       "vscodevim.vim",
-      "nrwl.angular-console"
+      "nrwl.angular-console",
+      "wix.vscode-import-cost",
+      "aaron-bond.better-comments",
+      "vincaslt.highlight-matching-tag"
   ]
 }
