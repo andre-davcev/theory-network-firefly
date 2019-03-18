@@ -8,6 +8,10 @@
             <ion-segment-button [value]="Pages.UserSettings">
                 <ion-label>{{'page.user-settings.title' | translate}}</ion-label>
             </ion-segment-button>
+
+            <ion-segment-button [value]="Pages.UserAssets">
+                <ion-label>{{'page.assets.title' | translate}}</ion-label>
+            </ion-segment-button>
         </ion-segment>
 
         <ion-buttons slot="start">
@@ -19,4 +23,5 @@
 <ion-content [ngSwitch]="segment">
     <app-page-user-profile *ngSwitchCase="Pages.UserProfile"></app-page-user-profile>
     <app-page-user-settings *ngSwitchCase="Pages.UserSettings"></app-page-user-settings>
+    <app-page-user-assets *ngSwitchCase="Pages.UserAssets"></app-page-user-assets>
 </ion-content>

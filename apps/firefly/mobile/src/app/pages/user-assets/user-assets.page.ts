@@ -8,12 +8,12 @@ import { Pages } from '../pages.enum';
 
 @Component
 ({
-    selector    : 'app-page-assets',
-    templateUrl : 'assets.page.html',
-    styleUrls   : ['./assets.page.scss']
+    selector    : 'app-page-user-assets',
+    templateUrl : 'user-assets.page.html',
+    styleUrls   : ['./user-assets.page.scss']
 })
 
-export class PageAssets
+export class PageUserAssets
 {
     public Pages: any = Pages;
     public translations: Array<string> = [];
