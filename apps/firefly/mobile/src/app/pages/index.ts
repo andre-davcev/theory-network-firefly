@@ -1,7 +1,6 @@
 export * from './alert';
 export * from './asset-cluster';
 export * from './asset-event';
-export * from './assets';
 export * from './assets-beacons';
 export * from './assets-clusters';
 export * from './assets-coupons';
@@ -21,5 +20,6 @@ export * from './search';
 export * from './stream';
 export * from './subscriptions';
 export * from './user';
+export * from './user-assets';
 export * from './user-profile';
 export * from './user-settings';

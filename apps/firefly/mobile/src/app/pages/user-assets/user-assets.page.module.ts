@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+//import { RouterModule } from '@angular/router';
 
 import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '@firefly/app/modules';
-import { PageAssets } from './assets.page';
-import { RoutesPageAssets } from './assets.page.routes';
+import { PageUserAssets } from './user-assets.page';
+//import { RoutesPageAssets } from './user-assets.page.routes';
 import { ModuleComponentIcon } from '@firefly/core';
 
 @NgModule
@@ -15,11 +15,11 @@ import { ModuleComponentIcon } from '@firefly/core';
         ModulePage,
         ModuleDirectiveElevation,
         ModuleComponentIcon,
-        RouterModule.forChild(RoutesPageAssets)
+//        RouterModule.forChild(RoutesPageAssets)
     ],
 
-    declarations : [PageAssets],
-    exports: [PageAssets]
+    declarations : [PageUserAssets],
+    exports: [PageUserAssets]
 })
 
-export class ModulePageAssets { }
+export class ModulePageUserAssets { }
