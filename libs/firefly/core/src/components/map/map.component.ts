@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
-import { LngLatLike, Point } from 'mapbox-gl';
+import { filter, takeUntil, delay, switchMap, map, tap } from 'rxjs/operators';
+import { LngLatLike, Point, Popup } from 'mapbox-gl';
 
 import { StateDevice, StateLanguage } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
@@ -10,8 +10,9 @@ import { Location } from '@firefly/core/models';
 import { MapboxPlaceType, MapboxMapStyle, StateMap, MapboxControlPosition, MapboxMarkerAnchor, ActionMapSearchResultSet } from '@theory/mapbox';
 import { LngLatLiteral, Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { Color } from '@firefly/core/enums';
-import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
 import { MapMovingMethod } from '@theory/mapbox';
+import { MapComponent } from 'ngx-mapbox-gl';
+import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
 
 @Component
 ({
@@ -44,6 +45,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public Color: any = Color;
 
+    @ViewChildren('map') maps: QueryList<MapComponent>;
     @ViewChildren('marker') markers: QueryList<MarkerComponent>;
 
     public annotationOffset:      Point  = new Point(22, 2);
@@ -104,8 +106,17 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
             switchMap(() => this.contentInitiated$),
             filter((initiated: boolean) => initiated),
             delay(100),
-            map(() => true)
+            map(() => true),
+            tap(() => this.openPopup())
         );
+
+        this.searchResult$.
+        pipe
+        (
+            takeUntil(this.destroy$),
+            filter((searchResult: Result) => searchResult != null)
+        ).
+        subscribe((searchResult: Result) => this.openPopup());
     }
 
     public ngAfterViewInit(): void
@@ -140,17 +151,31 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         this.annotationTitle       = address[0];
         this.annotationDescription = address[1];
 
-        setTimeout(() =>
-        {
-            this.markers.forEach((marker: MarkerComponent) =>
-            {
-                marker.togglePopup();
-            });
-        });
+        setTimeout(() => this.openPopup());
     }
 
     public eventError(error: any): void
     {
         this.error.next(error);
+    }
+
+    public openPopup(): void
+    {
+        setTimeout(() =>
+        {
+            const markers: QueryList<MarkerComponent> = this.markers;
+
+            if (markers.first != null)
+            {
+                const popup: Popup = markers.first.markerInstance.getPopup();
+
+                if (popup != null)
+                {
+                    popup.remove();
+                }
+
+                popup.addTo(this.maps.first.mapInstance);
+            }
+        });
     }
 }
