@@ -9,6 +9,7 @@
          [zoom]="[10]"
          [center]="searchResultCenter$ | async"
          [interactive]="interactive"
+         [movingMethod]="mapMovingMethod"
          #map>
     <mgl-control mglNavigation position="bottom-left" *ngIf="web$ | async"></mgl-control>
 
