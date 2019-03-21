@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppCoreModule } from '@theory/web';
 import { StateLanguage, StateLocation, StateDevice, StatePhotos } from '@theory/capacitor';
-import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts, FirebaseEnvironment, MapboxEnvironment } from '@firefly/core';
+import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts, FirebaseEnvironment, MapboxEnvironment, StateEvent } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
 import { StateMap } from '@theory/mapbox';
@@ -59,6 +59,7 @@ Pro.init('1e5146ca',
             StateIcons,
             StateSubscriptions,
             StatePhotos,
+            StateEvent,
             StateMap
         ]),
 

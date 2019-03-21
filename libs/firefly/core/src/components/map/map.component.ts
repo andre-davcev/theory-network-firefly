@@ -106,15 +106,17 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
             switchMap(() => this.contentInitiated$),
             filter((initiated: boolean) => initiated),
             delay(100),
-            map(() => true),
-            tap(() => this.openPopup())
+            map(() => true)
         );
 
         this.searchResult$.
         pipe
         (
             takeUntil(this.destroy$),
-            filter((searchResult: Result) => searchResult != null)
+            tap(searchResult => console.log('CHECKING FOR NULL SEARCH RESULT')),
+            filter((searchResult: Result) => searchResult != null),
+            tap(searchResult => console.log('SEARCH RESULT FOUND')),
+            tap(searchResult => console.log(searchResult))
         ).
         subscribe((searchResult: Result) => this.openPopup());
     }
