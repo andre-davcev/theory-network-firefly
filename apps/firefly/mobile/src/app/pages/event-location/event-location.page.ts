@@ -51,7 +51,6 @@ export class PageEventLocation extends BaseComponent implements OnInit
 
     public locationFound(result: Result): void
     {
-        console.log(result);
         this.result = result;
 
 /*
@@ -91,7 +90,6 @@ export class PageEventLocation extends BaseComponent implements OnInit
     text_en: "Paris"
     type: "Feature"
 */
-;
     }
 
     public cancel(): void
@@ -107,9 +105,13 @@ export class PageEventLocation extends BaseComponent implements OnInit
 
     public save(): void
     {
+        if (this.result != null)
+        {
+            this.store.dispatch(new ActionEventSetLocation(this.result));
+        }
+
         this.store.dispatch
         ([
-            new ActionEventSetLocation(this.result),
             new ActionMapPlaceSetWithSearchResult(),
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
         ]);
