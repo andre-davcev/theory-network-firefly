@@ -48,6 +48,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @ViewChildren('map') maps: QueryList<MapComponent>;
     @ViewChildren('marker') markers: QueryList<MarkerComponent>;
 
+    public searchResult:          Result;
     public annotationOffset:      Point  = new Point(22, 2);
     public annotationTitle:       string = '';
     public annotationDescription: string = '';
@@ -101,7 +102,6 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         this.mapReady$ = this.locationValid$.
         pipe
         (
-            takeUntil(this.destroy$),
             filter((valid: boolean) => valid),
             switchMap(() => this.contentInitiated$),
             filter((initiated: boolean) => initiated),
@@ -109,16 +109,22 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
             map(() => true)
         );
 
+        this.mapReady$.
+        pipe
+        (
+            takeUntil(this.destroy$),
+            filter(() => this.searchResult != null)
+        ).
+        subscribe(() => this.openPopup(this.searchResult));
+
         this.searchResult$.
         pipe
         (
             takeUntil(this.destroy$),
-            tap(searchResult => console.log('CHECKING FOR NULL SEARCH RESULT')),
-            filter((searchResult: Result) => searchResult != null),
-            tap(searchResult => console.log('SEARCH RESULT FOUND')),
-            tap(searchResult => console.log(searchResult))
+            tap((searchResult: Result) => this.searchResult = searchResult),
+            filter((searchResult: Result) => searchResult != null)
         ).
-        subscribe((searchResult: Result) => this.openPopup());
+        subscribe(() => this.openPopup(this.searchResult));
     }
 
     public ngAfterViewInit(): void
@@ -144,16 +150,10 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     public eventResult(event: { result: Result }): void
     {
         const result: Result = event.result;
-        const address: Array<string> = result.place_name.split(', ');
 
         this.result.next(result);
 
         this.store.dispatch(new ActionMapSearchResultSet(result));
-
-        this.annotationTitle       = address[0];
-        this.annotationDescription = address[1];
-
-        setTimeout(() => this.openPopup());
     }
 
     public eventError(error: any): void
@@ -161,22 +161,26 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         this.error.next(error);
     }
 
-    public openPopup(): void
+    public openPopup(result: Result): void
     {
+        const address: Array<string> = result.place_name.split(', ');
+
+        this.annotationTitle       = address[0];
+        this.annotationDescription = address[1];
+
         setTimeout(() =>
         {
             const markers: QueryList<MarkerComponent> = this.markers;
 
-            if (markers.first != null)
+            if (markers != null && markers.first != null && markers.first.markerInstance != null)
             {
                 const popup: Popup = markers.first.markerInstance.getPopup();
 
                 if (popup != null)
                 {
                     popup.remove();
+                    popup.addTo(this.maps.first.mapInstance);
                 }
-
-                popup.addTo(this.maps.first.mapInstance);
             }
         });
     }
