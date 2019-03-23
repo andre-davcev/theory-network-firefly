@@ -1,14 +1,22 @@
 app-item-map,
 app-item-description {
-  padding-left: 1rem;
-  padding-right: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+app-item-description {
+    padding-top: 1.25rem;
 }
 
 app-item-image {
-  padding-left: 1rem;
-  padding-right: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 app-item-map {
-  margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+ion-list {
+    margin-bottom: 1.25rem;
 }
