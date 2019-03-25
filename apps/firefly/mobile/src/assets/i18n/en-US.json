@@ -14,6 +14,9 @@
   "general.starts"         : "Starts",
   "general.ends"           : "Ends",
 
+  "date-time.displayFormat" : "MMM D, YYYY h:mm A",
+  "date-time.pickerFormat"  : "MMM D h:m A",
+
   "page.auth.title"               : "firefly",
   "page.auth.tagline"             : "Life comes to you",
   "page.auth.placeholderEmail"    : "email address",
