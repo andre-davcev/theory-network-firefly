@@ -2,19 +2,16 @@
 {
     --cpt-padding: 0;
     --cpt-gap: 1px;
-    --cpt-min-height-image: 155px;
 
     position: relative;
     width: 100%;
     height: 100%;
 
-    ion-grid
-    {
+    ion-grid {
         --ion-grid-padding: var(--cpt-padding);
     }
 
-    ion-col
-    {
+    ion-col {
         --ion-grid-column-padding: var(--cpt-gap);
     }
 
@@ -41,6 +38,13 @@
 
     &:not(.cpt-square)
     {
+        --cpt-min-height-image: 155px;
+
+        &.cpt-portrait
+        {
+            --cpt-min-height-image: 333px;
+        }
+
         .cpt-image
         {
             min-height: var(--cpt-min-height-image);
