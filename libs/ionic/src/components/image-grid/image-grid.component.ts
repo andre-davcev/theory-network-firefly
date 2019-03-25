@@ -15,6 +15,10 @@ export class ComponentImageGrid
     @Input()
     square: boolean = false;
 
+    @HostBinding('class.cpt-portrait')
+    @Input()
+    portrait: boolean = true;
+
     @Output() clicked: EventEmitter<number> = new EventEmitter();
 
     constructor() { }
