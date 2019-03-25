@@ -43,12 +43,16 @@
 
                     <ion-item>
                         <ion-label>{{ 'general.starts' | translate }}</ion-label>
-                        <ion-datetime display-format="MMM D, YYYY h:mm A" picker-format="MMM D h:mm A"></ion-datetime>
+                        <ion-datetime [displayFormat]="'date-time.displayFormat' | translate"
+                                      [pickerFormat]="'date-time.pickerFormat' | translate">
+                        </ion-datetime>
                     </ion-item>
 
                     <ion-item>
                         <ion-label>{{ 'general.ends' |  translate }}</ion-label>
-                        <ion-datetime display-format="MMM D, YYYY h:mm A" picker-format="MMM D h:mm A"></ion-datetime>
+                        <ion-datetime [displayFormat]="'date-time.displayFormat' | translate"
+                                      [pickerFormat]="'date-time.pickerFormat' | translate">
+                        </ion-datetime>
                     </ion-item>
 
                     <ion-item-divider></ion-item-divider>

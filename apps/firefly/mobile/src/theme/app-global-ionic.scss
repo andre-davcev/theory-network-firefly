@@ -1,4 +1,10 @@
-@import 'variables';
+@import 'app-variables';
+
+ion-app {
+    ion-picker {
+        --ion-color-primary: #{$app-color-black};
+    }
+}
 
 ion-item {
   ion-icon {
