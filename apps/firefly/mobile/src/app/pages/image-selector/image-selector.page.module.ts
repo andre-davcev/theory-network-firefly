@@ -19,7 +19,7 @@ import { ModulePageImageLibrary } from '../image-library';
         ModulePageImageAssets,
         ModulePageImageLibrary,
         ModuleDirectiveElevation,
-        RouterModule.forChild(RoutesPageImageSelector)
+//        RouterModule.forChild(RoutesPageImageSelector)
     ],
 
     declarations : [PageImageSelector],

@@ -6,6 +6,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { StatusBarStyle } from '@capacitor/core';
 import { takeUntil } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
+import { ModalOptions, ComponentRef } from '@ionic/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
@@ -14,6 +15,7 @@ import { BaseComponent } from '@theory/core';
 import { ItemHeader, ItemDescription, ItemImage } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
+import { PageImageSelector } from '../image-selector';
 
 @Component
 ({
@@ -94,22 +96,23 @@ export class PageAssetEvent extends BaseComponent
 
     public navigate(page: Pages.AssetsClusters | Pages.ImageSelector | Pages.EventLocation)
     {
-        if (page === Pages.EventLocation)
-        {
-            from(this.modalController.create
-            ({
-                component: PageEventLocation
-            })).
-
-            subscribe((modal: HTMLIonModalElement) => modal.present());
-        }
-        else
+        if (page === Pages.AssetsClusters)
         {
             this.store.dispatch
             ([
                 new ActionEventSetId(),
                 new Navigate([page])
             ]);
+        }
+        else
+        {
+            let modalOptions: ModalOptions<ComponentRef>;
+
+            if (page === Pages.ImageSelector) { modalOptions = { component: PageImageSelector}; }
+            if (page === Pages.EventLocation) { modalOptions = { component: PageEventLocation}; }
+
+            from(this.modalController.create(modalOptions)).
+            subscribe((modal: HTMLIonModalElement) => modal.present());
         }
     }
 }
