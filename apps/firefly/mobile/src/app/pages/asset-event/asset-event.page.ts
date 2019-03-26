@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateEvent, ActionEventSetId } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
-import { ItemHeader, ItemDescription, ItemImage } from '@firefly/mobile';
+import { ItemHeader, ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageImageSelector } from '../image-selector';
@@ -27,6 +27,7 @@ import { PageImageSelector } from '../image-selector';
 export class PageAssetEvent extends BaseComponent
 {
     @Select(StateEvent.form) form$: Observable<FormGroup>;
+    @Select(StateEvent.eventImageUrl) imageUrl$: Observable<string>;
 
     public Pages: any = Pages;
 
@@ -42,11 +43,6 @@ export class PageAssetEvent extends BaseComponent
     {
         description: 'description'
     };
-
-    public itemImage: ItemImage =
-    {
-        imageAsUrl: true
-    }
 
     constructor(private store: Store, private translate: TranslateService, public modalController: ModalController)
     {
@@ -80,12 +76,6 @@ export class PageAssetEvent extends BaseComponent
                 title:                  translations['general.description'],
                 descriptionPlaceholder: translations['page.event.descriptionPlaceholder']
             };
-
-            this.itemImage =
-            {
-                ...this.itemImage,
-                imagePlaceholder:       translations['page.event.imagePlaceholder']
-            }
         });
     }
 

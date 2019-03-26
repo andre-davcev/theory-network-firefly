@@ -8,4 +8,5 @@ export interface StateEventModel
     form     : FormGroup;
     entities : Record<string, Event>;
     empty    : Event;
+    imageUrl : string;
 }

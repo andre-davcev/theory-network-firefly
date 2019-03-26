@@ -30,5 +30,5 @@
 <ion-content [ngSwitch]="segment">
     <app-page-image-catalog *ngSwitchCase="Pages.ImageCatalog"></app-page-image-catalog>
     <app-page-image-assets *ngSwitchCase="Pages.ImageAssets"></app-page-image-assets>
-    <app-page-image-library *ngSwitchCase="Pages.ImageLibrary"></app-page-image-library>
+    <app-page-image-library *ngSwitchCase="Pages.ImageLibrary" (select)="selectLibraryImage($event)"></app-page-image-library>
 </ion-content>

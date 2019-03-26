@@ -7,7 +7,6 @@
     --cpt-title-line-height:                20px;
     --cpt-title-letter-spacing:             -0.4px;
 
-
     --cpt-image-window-height-placeholder:  155px;
     --cpt-image-window-height:              333px;
     --cpt-image-border-radius:              5px;
@@ -24,66 +23,19 @@
     padding: var(--cpt-gutter);
     padding-top: 0;
 
-    .input
-    {
-        textarea
-        {
-            margin: 0;
-            width: 100%;
-        }
-    }
-
-    p
-    {
-        margin: 0;
-    }
-
-    h4
-    {
-        margin: 0;
-    }
-
     .cpt-container
     {
         position: relative;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-    }
-
-    .cpt-title
-    {
-        color: var(--cpt-title-font-color);
-        font-size: var(--cpt-title-font-size);
-        font-weight: normal;
-        line-height: var(--cpt-title-line-height);
-        letter-spacing: var(--cpt-title-letter-spacing);
-        margin-bottom: 8px;
-    }
-
-    .cpt-image,
-    .cpt-image-container
-    {
-        width: 100%;
-        border-radius: var(--cpt-image-border-radius);
-        background-color: var(--cpt-image-color-background);
-    }
-
-    .cpt-image-container
-    {
-        position: relative;
         display: block;
-        height: var(--cpt-image-window-height-placeholder);
-        color: var(--cpt-image-placeholder-font-color);
-        font-size: var(--cpt-image-placeholder-font-size);
         font-weight: 600;
         text-align: center;
 
-        &.cpt-image-valid
-        {
-            height: auto;
-        }
+        width: 100%;
+        height: var(--cpt-image-window-height-placeholder);
+        color: var(--cpt-image-placeholder-font-color);
+        font-size: var(--cpt-image-placeholder-font-size);
+        background-color: var(--cpt-image-color-background);
+        border-radius: var(--cpt-image-border-radius);
     }
 
     .cpt-image-placeholder
@@ -96,7 +48,6 @@
         position: relative;
         background-size: cover;
         width: 100%;
-        margin-bottom: --cpt-gutter;
         height: var(--cpt-image-window-height);
     }
 }

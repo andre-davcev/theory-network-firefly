@@ -4,5 +4,6 @@ export enum ActionsEvent
     SetId            = '[Event] Set Id',
     SetEvent         = '[Event] Set Event',
     SetEventLocation = '[Event] Set Event Location',
-    PatchEvent       = '[Event] Patch Event'
+    PatchEvent       = '[Event] Patch Event',
+    SetImageIndex    = '[Event] Set Image Index'
 }
