@@ -1,6 +1,4 @@
 <form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
-    
-
     <input class="cpt-image-hidden" type="hidden" [formControlName]="item.image" *ngIf="!item.imageAsUrl">
 
     <section class="cpt-image-container" fxLayout="column" fxLayoutAlign="center" (click)="clickedImage()" [class.cpt-image-valid]="imageValue">

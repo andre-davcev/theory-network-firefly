@@ -8,7 +8,8 @@
     --cpt-title-letter-spacing:             -0.4px;
 
 
-    --cpt-image-window-height:              155px;
+    --cpt-image-window-height-placeholder:  155px;
+    --cpt-image-window-height:              333px;
     --cpt-image-border-radius:              5px;
     --cpt-image-color-background:           #{$app-color-grey-middle};
     --cpt-image-placeholder-font-color:     white;
@@ -73,7 +74,7 @@
     {
         position: relative;
         display: block;
-        height: var(--cpt-image-window-height);
+        height: var(--cpt-image-window-height-placeholder);
         color: var(--cpt-image-placeholder-font-color);
         font-size: var(--cpt-image-placeholder-font-size);
         font-weight: 600;
@@ -90,8 +91,12 @@
         margin: 0;
     }
 
-    p.cpt-image
+    .cpt-image
     {
+        position: relative;
+        background-size: cover;
+        width: 100%;
         margin-bottom: --cpt-gutter;
+        height: var(--cpt-image-window-height);
     }
 }
