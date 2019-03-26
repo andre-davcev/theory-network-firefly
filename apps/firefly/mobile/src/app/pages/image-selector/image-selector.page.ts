@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 import { Store } from '@ngxs/store';
+import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '../pages.enum';
@@ -18,7 +19,7 @@ export class PageImageSelector
     public segment: Pages = Pages.ImageCatalog;
     public translations: Array<string> = [];
 
-    constructor(private store: Store) { }
+    constructor(private store: Store, private modalController: ModalController) { }
 
     ionViewWillEnter()
     {
@@ -28,5 +29,10 @@ export class PageImageSelector
     public segmentChanged(event: any): void
     {
         this.segment = event.target.value;
+    }
+
+    public cancel(): void
+    {
+        this.modalController.dismiss();
     }
 }
