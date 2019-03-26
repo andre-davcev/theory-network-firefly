@@ -28,7 +28,6 @@ export class StatePhotos
     {
         return from(Photos.getPhotos(payload)).pipe
         (
-            tap(photos => console.log(photos)),
             tap((photos: PhotosResult) => patchState({ photos })),
             catchError(() => of(patchState({ photos: StatePhotosOptions.defaults.photos })))
         );

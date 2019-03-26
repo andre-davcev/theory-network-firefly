@@ -1,6 +1,6 @@
 import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Action, Selector, Select, State, StateContext } from '@ngxs/store';
+import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
@@ -8,13 +8,15 @@ import { User, Event, Cluster, Location } from '@firefly/core/models';
 import { ServiceEvent } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
-import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation } from './event.actions';
+import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation, ActionEventSetImageIndex } from './event.actions';
 import { EventKey, AssetKey } from '@firefly/core/models';
 import { ModelKey } from '@theory/firebase';
 import { firestore } from 'firebase';
 import { ValidatorsExtended, CoreEnum } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
+import { StatePhotos } from '@theory/capacitor';
+import { PhotoAsset } from '@capacitor/core';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -22,7 +24,7 @@ export class StateEvent
 {
     @Select(StateUser.user) user$:Observable<User>;
 
-    constructor(private serviceEvent: ServiceEvent, private formBuilder: FormBuilder) {}
+    constructor(private serviceEvent: ServiceEvent, private formBuilder: FormBuilder, private store: Store) {}
 
     @Selector() static entities(state: StateEventModel): Record<string, Event> { return state.entities; }
     @Selector() static id(state: StateEventModel): string                      { return state.id; }
@@ -32,7 +34,7 @@ export class StateEvent
 
     @Selector() static event(state: StateEventModel): Event
     {
-        return state.form == null ? undefined : state.form.value
+        return state.form == null ? undefined : state.form.value;
     }
 
     @Selector() static eventId(state: StateEventModel): string
@@ -87,11 +89,12 @@ export class StateEvent
 
     @Selector() static eventImageUrl(state: StateEventModel): string
     {
-        const imageId: string = StateEvent.eventImageId(state);
+        return `${CoreEnum.DataUri}${state.imageUrl}`;
+    }
 
-        // ToDo: Lookup imageId and return image url
-        // ToDo: Setup image collection watcher
-        return '';
+    @Selector() static eventImageUrlDefined(state: StateEventModel): boolean
+    {
+        return StateEvent.eventImageUrl(state) != null;
     }
 
     @Selector() static eventClusterIds(state: StateEventModel): Array<string>
@@ -252,4 +255,12 @@ export class StateEvent
         dispatch(new ActionEventPatch(EventKey.Location, location));
     }
 
+    @Action(ActionEventSetImageIndex)
+    setImageIndex({ patchState }: StateContext<StateEventModel>, { payload }: ActionEventSetImageIndex)
+    {
+        const index: number = payload;
+        const photos: Array<PhotoAsset> = this.store.selectSnapshot(StatePhotos.photos);
+
+        patchState({ imageUrl: photos[index].data });
+    }
 }

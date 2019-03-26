@@ -24,6 +24,7 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
             [EventKey.PlaceId]  : undefined,
             [EventKey.Clusters] : [],
             [EventKey.Location] : undefined
-        }
+        },
+        imageUrl: undefined
     }
 };

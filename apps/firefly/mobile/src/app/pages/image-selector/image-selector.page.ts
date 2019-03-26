@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '../pages.enum';
+import { ActionEventSetImageIndex } from '@firefly/core';
 
 @Component
 ({
@@ -33,6 +34,14 @@ export class PageImageSelector
 
     public cancel(): void
     {
+        this.modalController.dismiss();
+    }
+
+    public selectLibraryImage(index: number): void
+    {
+        console.log('IN HERE');
+        this.store.dispatch(new ActionEventSetImageIndex(index));
+
         this.modalController.dismiss();
     }
 }

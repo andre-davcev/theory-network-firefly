@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 
 import { ComponentItemImage } from './item-image.component';
 
@@ -11,9 +9,7 @@ import { ComponentItemImage } from './item-image.component';
     imports :
     [
         CommonModule,
-        FlexLayoutModule,
-        ReactiveFormsModule,
-        IonicModule
+        FlexLayoutModule
     ],
 
     declarations : [ComponentItemImage],

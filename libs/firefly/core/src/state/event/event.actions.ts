@@ -39,3 +39,10 @@ export class ActionEventSetLocation
 
     constructor(public payload: Result) { }
 }
+
+export class ActionEventSetImageIndex
+{
+    static readonly type = ActionsEvent.SetImageIndex;
+
+    constructor(public payload: number) { }
+}

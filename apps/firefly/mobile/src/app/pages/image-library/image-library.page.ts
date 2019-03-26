@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ActionGridIconLibraryWatch, StateGrid, ActionGridIconLibraryPage } from '@firefly/core';
@@ -14,6 +14,8 @@ export class PageImageLibrary implements OnInit
 {
     @Select(StateGrid.iconLibrary) iconLibrary$: Observable<Array<string>>;
 
+    @Output() select: EventEmitter<number> = new EventEmitter();
+
     constructor(private store: Store) { }
 
     public ngOnInit(): void
@@ -23,7 +25,7 @@ export class PageImageLibrary implements OnInit
 
     public imageClicked(index: number): void
     {
-        console.log(`icon ${index} clicked`);
+        this.select.next(index);
     }
 
     public doInfinite(infiniteScroll: any): void

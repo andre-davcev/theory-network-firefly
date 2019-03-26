@@ -70,9 +70,9 @@
             </ion-list>
         </div>
 
-        <app-item-image [form]="form$ | async"
-                        [item]="itemImage"
-                        (imageClicked)="navigate(Pages.ImageSelector)">
+        <app-item-image [url]="imageUrl$ | async"
+                        [placeholder]="'page.event.imagePlaceholder' | translate"
+                        (clicked)="navigate(Pages.ImageSelector)">
         </app-item-image>
 <!--
         <app-item-description [title]="'general.description' | translate"
