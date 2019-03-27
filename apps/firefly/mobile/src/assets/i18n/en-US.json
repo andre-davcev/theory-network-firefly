@@ -13,6 +13,7 @@
   "general.go"            : "Go",
   "general.starts"         : "Starts",
   "general.ends"           : "Ends",
+  "general.heroImage"      : "Hero Image",
 
   "date-time.displayFormat" : "MMM D, YYYY h:mm A",
   "date-time.pickerFormat"  : "MMM D h:m A",

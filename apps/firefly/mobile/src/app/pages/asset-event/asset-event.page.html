@@ -11,7 +11,10 @@
 
 <ion-content>
     <form novalidate [formGroup]="form$ | async">
-        <app-item-header [form]="form$ | async" [item]="itemHeader" (iconClicked)="navigate(Pages.AssetsClusters)"></app-item-header>
+        <app-item-header [form]="form$ | async"
+                         [item]="itemHeader"
+                         (iconClicked)="navigate(Pages.AssetsClusters)">
+        </app-item-header>
 <!--
         <app-item-header icon="assets/icons/temp-coffee-icon-blue.png"
                          title="My cluster title!"
@@ -19,7 +22,9 @@
         </app-item-header>
 -->
 
-        <app-item-map [title]="'general.location' | translate" (click)="navigate(Pages.EventLocation)"></app-item-map>
+        <app-item-map [title]="'general.location' | translate"
+                      (click)="navigate(Pages.EventLocation)">
+        </app-item-map>
 
         <div class="cpt-detail" fxLayout="column">
             <ion-list>
@@ -72,6 +77,7 @@
 
         <app-item-image [url]="imageUrl$ | async"
                         [placeholder]="'page.event.imagePlaceholder' | translate"
+                        [title]="'general.heroImage' | translate"
                         (clicked)="navigate(Pages.ImageSelector)">
         </app-item-image>
 <!--

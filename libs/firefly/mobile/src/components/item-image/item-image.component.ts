@@ -11,6 +11,7 @@ export class ComponentItemImage
 {
     @Input() url: string;
     @Input() placeholder: string;
+    @Input() title: string;
 
     @Output() clicked: EventEmitter<void> = new EventEmitter();
 

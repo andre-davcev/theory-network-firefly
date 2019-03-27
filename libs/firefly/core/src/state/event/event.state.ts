@@ -89,7 +89,9 @@ export class StateEvent
 
     @Selector() static eventImageUrl(state: StateEventModel): string
     {
-        return `${CoreEnum.DataUri}${state.imageUrl}`;
+        const imageUrl: string = state.imageUrl;
+
+        return imageUrl == null ? undefined : `${CoreEnum.DataUri}${imageUrl}`;
     }
 
     @Selector() static eventImageUrlDefined(state: StateEventModel): boolean

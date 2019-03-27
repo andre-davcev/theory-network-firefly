@@ -9,6 +9,7 @@ app-item-description {
 }
 
 app-item-image {
+    --cpt-image-border-radius: 14px;
     padding-left: 1rem;
     padding-right: 1rem;
 }
@@ -18,5 +19,5 @@ app-item-map {
 }
 
 ion-list {
-    margin-bottom: 1.25rem;
+    margin-bottom: 0;
 }
