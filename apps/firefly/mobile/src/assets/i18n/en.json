@@ -43,7 +43,7 @@
 
   "page.subscriptions.title" : "Manage Subscriptions",
 
-  "page.event.title"                  : "Cluster",
+  "page.event.title"                  : "Create New Event",
   "page.event.titlePlaceholder"       : "Add your title",
   "page.event.subtitlePlaceholder"    : "Add your subtitle",
   "page.event.iconPlaceholder"        : "select cluster",
@@ -52,7 +52,7 @@
 
   "page.event-categories.title"    : "Categories",
 
-  "page.cluster.title"                  : "New Cluster",
+  "page.cluster.title"                  : "Create New Cluster",
   "page.cluster.titlePlaceholder"       : "Add your name",
   "page.cluster.subtitlePlaceholder"    : "Add your tagline",
   "page.cluster.iconPlaceholder"        : "select cluster",
@@ -83,7 +83,7 @@
   "page.assets.events"              : "Events",
   "page.assets.eventsDescription"   : "All of your public and private events",
   "page.assets.cluster"             : "Cluster",
-  "page.assets.clusters"            : "Clusters",
+  "page.assets.clusters"            : "Firefly Clusters",
   "page.assets.clustersDescription" : "Locations and events which users subscribe to",
 
   "page.assets-icon.title"                  : "Icon Details",
@@ -97,7 +97,7 @@
   "page.assets-beacons.title"  : "Beacons",
   "page.assets-places.title"   : "Places",
   "page.assets-events.title"   : "Events",
-  "page.assets-clusters.title" : "Clusters",
+  "page.assets-clusters.title" : "Firefly Clusters",
 
   "page.alert.title" : "Alert",
 
