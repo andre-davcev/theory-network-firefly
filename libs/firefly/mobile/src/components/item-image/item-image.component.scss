@@ -8,7 +8,7 @@
     --cpt-title-letter-spacing:             -0.4px;
 
     --cpt-image-window-height-placeholder:  155px;
-    --cpt-image-window-height:              333px;
+    --cpt-image-window-height:              551px;
     --cpt-image-border-radius:              5px;
     --cpt-image-color-background:           #{$app-color-grey-middle};
     --cpt-image-placeholder-font-color:     white;
@@ -21,7 +21,17 @@
     flex-direction: column;
     align-items: center;
     padding: var(--cpt-gutter);
-    padding-top: 0;
+
+    .cpt-title
+    {
+        color: var(--cpt-title-font-color);
+        font-size: var(--cpt-title-font-size);
+        font-weight: normal;
+        line-height: var(--cpt-title-line-height);
+        letter-spacing: var(--cpt-title-letter-spacing);
+        margin: 0;
+        margin-bottom: 0.875rem;
+    }
 
     .cpt-container
     {
@@ -31,7 +41,6 @@
         text-align: center;
 
         width: 100%;
-        height: var(--cpt-image-window-height-placeholder);
         color: var(--cpt-image-placeholder-font-color);
         font-size: var(--cpt-image-placeholder-font-size);
         background-color: var(--cpt-image-color-background);
@@ -41,6 +50,9 @@
     .cpt-image-placeholder
     {
         margin: 0;
+        width: 100%;
+        height: var(--cpt-image-window-height-placeholder);
+        line-height: var(--cpt-image-window-height-placeholder);
     }
 
     .cpt-image
@@ -49,5 +61,6 @@
         background-size: cover;
         width: 100%;
         height: var(--cpt-image-window-height);
+        border-radius: var(--cpt-image-border-radius);
     }
 }

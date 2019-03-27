@@ -13,6 +13,7 @@
   "general.go"            : "Go",
   "general.starts"         : "Starts",
   "general.ends"           : "Ends",
+  "general.heroImage"      : "Hero Image",
 
   "page.auth.title"               : "firefly",
   "page.auth.tagline"             : "Life comes to you",

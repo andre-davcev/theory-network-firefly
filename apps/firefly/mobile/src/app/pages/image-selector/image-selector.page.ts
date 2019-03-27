@@ -39,7 +39,6 @@ export class PageImageSelector
 
     public selectLibraryImage(index: number): void
     {
-        console.log('IN HERE');
         this.store.dispatch(new ActionEventSetImageIndex(index));
 
         this.modalController.dismiss();
