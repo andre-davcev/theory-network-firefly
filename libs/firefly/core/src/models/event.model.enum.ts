@@ -1,9 +1,10 @@
 export enum EventKey
 {
-    Tagline  = 'tagline',
-    ImageId  = 'imageId',
-    PlaceId  = 'placeId',
-    Clusters = 'clusters',
-    Location = 'location'
+    Tagline   = 'tagline',
+    ImageId   = 'imageId',
+    PlaceId   = 'placeId',
+    Clusters  = 'clusters',
+    Location  = 'location',
+    TimeStart = 'timeStart',
+    TimeEnd   = 'timeEnd'
 }
-

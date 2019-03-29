@@ -4,9 +4,11 @@ import { Location } from '@firefly/core/models';
 
 export interface Event extends Asset
 {
-    [EventKey.Tagline]:  string;
-    [EventKey.ImageId]:  string;
-    [EventKey.PlaceId]:  string;
-    [EventKey.Clusters]: Array<string>;
-    [EventKey.Location]: Location;
+    [EventKey.Tagline]:   string;
+    [EventKey.ImageId]:   string;
+    [EventKey.PlaceId]:   string;
+    [EventKey.Clusters]:  Array<string>;
+    [EventKey.Location]:  Location;
+    [EventKey.TimeStart]: string;
+    [EventKey.TimeEnd]:   string;
 }
