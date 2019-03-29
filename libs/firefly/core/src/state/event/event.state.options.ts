@@ -19,11 +19,13 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
             [AssetKey.Description] : null,
             [AssetKey.Private]     : true,
 
-            [EventKey.Tagline]  : null,
-            [EventKey.ImageId]  : undefined,
-            [EventKey.PlaceId]  : undefined,
-            [EventKey.Clusters] : [],
-            [EventKey.Location] : undefined
+            [EventKey.Tagline]   : null,
+            [EventKey.ImageId]   : undefined,
+            [EventKey.PlaceId]   : undefined,
+            [EventKey.Clusters]  : [],
+            [EventKey.Location]  : undefined,
+            [EventKey.TimeStart] : undefined,
+            [EventKey.TimeEnd]   : undefined
         },
         imageUrl: undefined
     }

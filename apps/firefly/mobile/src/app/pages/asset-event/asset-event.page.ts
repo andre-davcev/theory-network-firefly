@@ -10,7 +10,7 @@ import { ModalOptions, ComponentRef } from '@ionic/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateEvent, ActionEventSetId } from '@firefly/core';
+import { StateEvent, ActionEventSetId, EventKey, ActionEventPatch } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { ItemHeader, ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
@@ -30,6 +30,7 @@ export class PageAssetEvent extends BaseComponent
     @Select(StateEvent.eventImageUrl) imageUrl$: Observable<string>;
 
     public Pages: any = Pages;
+    public EventKey: any = EventKey;
 
     public itemHeader: ItemHeader =
     {
@@ -104,5 +105,12 @@ export class PageAssetEvent extends BaseComponent
             from(this.modalController.create(modalOptions)).
             subscribe((modal: HTMLIonModalElement) => modal.present());
         }
+    }
+
+    public timeChanged(event: CustomEvent, key: EventKey.TimeStart | EventKey.TimeEnd): void
+    {
+        const time: string = event.detail.value;
+
+        this.store.dispatch(new ActionEventPatch(key, time));
     }
 }
