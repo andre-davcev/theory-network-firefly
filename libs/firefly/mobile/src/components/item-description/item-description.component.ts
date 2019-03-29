@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { ItemDescription } from './item-description.interface';
@@ -13,7 +13,7 @@ import { ItemDescription } from './item-description.interface';
 export class ComponentItemDescription
 {
     @Input() form: FormGroup;
-    @Input() item: ItemDescription;    
+    @Input() item: ItemDescription;
 
     constructor() { }
 

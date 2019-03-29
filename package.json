@@ -32,6 +32,7 @@
     "npm-clean-cache": "npm cache clean --force && rm -rf ~/.npm && rm -f package-lock.json && rm -rf node_modules",
     "npm-global-install-linux": "sudo npm install -g @angular/cli @nrwl/schematics ionic firebase-tools npm-check-updates grunt-cli",
     "npm-global-install": "npm install -g @angular/cli @nrwl/schematics ionic firebase-tools npm-check-updates grunt-cli",
+    "npm-outdated": "npm outdated",
     "capacitor-update": "npx cap update",
     "capacitor-add-ios": "npx cap add ios",
     "capacitor-add-android": "npx cap add android",
