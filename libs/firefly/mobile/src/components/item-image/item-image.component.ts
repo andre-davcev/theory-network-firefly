@@ -9,6 +9,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
 })
 export class ComponentItemImage
 {
+    @Input() edit: boolean = false;
     @Input() url: string;
     @Input() placeholder: string;
     @Input() title: string;

@@ -14,13 +14,17 @@
     --cpt-image-placeholder-font-color:     white;
     --cpt-image-placeholder-font-size:      20px;
 
-    --cpt-gutter:                           #{$app-gutter};
+//    --cpt-gutter:                           #{$app-gutter};
+    --cpt-gutter:                           30px;
 
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--cpt-gutter);
+    padding-bottom: 30px;
+    padding-top: #{$app-gutter};
+    padding-left: 27px;
+    padding-right: 27px;
 
     .cpt-title
     {
