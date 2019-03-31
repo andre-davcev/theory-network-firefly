@@ -42,6 +42,11 @@ export class StateEvent
         return state.form == null ? undefined : state.form.get(ModelKey.Id).value;
     }
 
+    @Selector() static eventIsNew(state: StateEventModel): boolean
+    {
+        return StateEvent.eventId(state) === CoreEnum.IdNew;
+    }
+
     @Selector() static eventDateCreated(state: StateEventModel): Date
     {
         return state.form == null ? undefined : (state.form.get(ModelKey.DateCreated).value as firestore.Timestamp).toDate();
