@@ -47,6 +47,20 @@ export class StateEvent
         return StateEvent.eventId(state) === CoreEnum.IdNew;
     }
 
+    @Selector() static eventIsValid(state: StateEventModel): boolean
+    {
+        const form: FormGroup = StateEvent.form(state);
+
+        return form == null ? false : form.valid;
+    }
+
+    @Selector() static eventCanUpdate(state: StateEventModel): boolean
+    {
+        const form: FormGroup = StateEvent.form(state);
+
+        return form == null ? false : form.valid && form.dirty;
+    }
+
     @Selector() static eventDateCreated(state: StateEventModel): Date
     {
         return state.form == null ? undefined : (state.form.get(ModelKey.DateCreated).value as firestore.Timestamp).toDate();

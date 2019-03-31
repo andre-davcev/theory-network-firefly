@@ -28,6 +28,8 @@ export class PageAssetEvent extends BaseComponent
 {
     @Select(StateEvent.form) form$: Observable<FormGroup>;
     @Select(StateEvent.eventImageUrl) imageUrl$: Observable<string>;
+    @Select(StateEvent.eventIsNew) isNew$: Observable<boolean>;
+    @Select(StateEvent.eventCanUpdate) canUpdate$: Observable<boolean>;
 
     public Pages: any = Pages;
     public EventKey: any = EventKey;
@@ -112,5 +114,10 @@ export class PageAssetEvent extends BaseComponent
         const time: string = event.detail.value;
 
         this.store.dispatch(new ActionEventPatch(key, time));
+    }
+
+    public save(): void
+    {
+
     }
 }

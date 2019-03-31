@@ -14,6 +14,8 @@
   "general.starts"         : "Starts",
   "general.ends"           : "Ends",
   "general.heroImage"      : "Hero Image",
+  "general.publish"        : "Publish",
+  "general.update"         : "Update",
 
   "date-time.displayFormat" : "MMM D, YYYY h:mm A",
   "date-time.pickerFormat"  : "MMM D h:m A",
