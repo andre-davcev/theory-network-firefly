@@ -7,13 +7,12 @@
         </ion-buttons>
 
         <ion-buttons slot="end">
-            <ion-button color="primary" (click)="save()" [disabled]="!(canUpdate$ | async)">
-                {{ (isNew$ | async) ? 'general.publish' : 'general.update' | translate }}
+            <ion-button color="dark" (click)="save()" [disabled]="!(canUpdate$ | async)">
+                {{ ((isNew$ | async) ? 'general.publish' : 'general.update') | translate }}
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
     <form novalidate [formGroup]="form$ | async">
