@@ -84,30 +84,27 @@ export class StateUser
                 }
                 else
                 {
-                    const user : Partial<User> =
-                    {
-                        uid      : authData.uid,
-                        language : language
-                    };
+                    const providerData : UserInfo = {...authData.providerData[0]};
 
-                    console.log(authData);
-
-                    const providerData : UserInfo = authData.providerData[0];
-
+                    const uid         : string = authData.uid;
                     const displayName : string = providerData.displayName;
                     const email       : string = providerData.email;
                     const phoneNumber : string = providerData.phoneNumber;
                     const photoURL    : string = providerData.photoURL;
                     const providerId  : string = providerData.providerId;
 
-                    if (displayName != null) {user.displayName = displayName;}
-                    if (email       != null) {user.email       = email;}
-                    if (phoneNumber != null) {user.phoneNumber = phoneNumber;}
-                    if (photoURL    != null) {user.photoURL    = photoURL;}
+                    const user: User =
+                    {
+                        uid,
+                        language,
+                        displayName,
+                        email,
+                        phoneNumber,
+                        photoURL,
+                        uidInternal: providerId + ':' + providerId === AuthProvider.Email ? email : uid
+                    };
 
-                    user.uidInternal = providerId + ':' + providerId === AuthProvider.Email ? email : user.uid;
-
-                    patchState({authData: authData, authenticated: true, user: user as User, authenticating: false});
+                    patchState({authData: authData, authenticated: true, user, authenticating: false});
                 }
             })
         );
@@ -166,8 +163,10 @@ export class StateUser
     {
         patchState({authenticating: true});
 
+        console.log('HERE!!');
         return from(auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
+            tap(authData => console.log('I MADE IT HERE NOW')),
             switchMap((authData: firebase.auth.UserCredential) => dispatch(new ActionUserAuthenticateCheck(authData.user))),
 
             catchError((error: Error) => of(patchState({error: error, authenticating: false})))

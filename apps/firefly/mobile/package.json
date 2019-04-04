@@ -89,6 +89,7 @@
     "@types/mapbox-gl": "file:../../../node_modules/@types/mapbox-gl",
     "@types/node": "file:../../../node_modules/@types/node",
     "@types/supercluster": "file:../../../node_modules/@types/supercluster",
+    "@webcomponents/webcomponentsjs": "file:../../../node_modules/@webcomponents/webcomponentsjs",
     "codelyzer": "file:../../../node_modules/codelyzer",
     "fs-extra": "file:../../../node_modules/fs-extra",
     "git-describe": "file:../../../node_modules/git-describe",
