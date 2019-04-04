@@ -1,7 +1,7 @@
 import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
 import { User, Event, Cluster, Location } from '@firefly/core/models';
@@ -39,7 +39,10 @@ export class StateEvent
 
     @Selector() static eventId(state: StateEventModel): string
     {
-        return state.form == null ? undefined : state.form.get(ModelKey.Id).value;
+        const form: FormGroup = StateEvent.form(state);
+        const id: string = form == null || form.get(ModelKey.Id) == null ? undefined : form.get(ModelKey.Id).value;
+
+        return id == null ? StateEvent.id(state) : id;
     }
 
     @Selector() static eventIsNew(state: StateEventModel): boolean
