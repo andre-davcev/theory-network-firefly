@@ -1,4 +1,4 @@
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
@@ -23,6 +23,7 @@ import { PhotoAsset } from '@capacitor/core';
 export class StateEvent
 {
     @Select(StateUser.user) user$:Observable<User>;
+    @Select(StateEvent.eventTimeEndValid) eventTimeEndValid$: Observable<boolean>;
 
     constructor(private serviceEvent: ServiceEvent, private formBuilder: FormBuilder, private store: Store) {}
 
@@ -182,6 +183,28 @@ export class StateEvent
         return location == null ? [] : [location];
     }
 
+    @Selector() static eventTimeStart(state: StateEventModel): string
+    {
+        const form: FormGroup = StateEvent.form(state);
+
+        return form == null ? undefined : form.get(EventKey.TimeStart).value;
+    }
+
+    @Selector() static eventTimeEnd(state: StateEventModel): string
+    {
+        const form: FormGroup = StateEvent.form(state);
+
+        return form == null ? undefined : form.get(EventKey.TimeEnd).value;
+    }
+
+    @Selector() static eventTimeEndValid(state: StateEventModel): boolean
+    {
+        const timeStart: Date = new Date(StateEvent.eventTimeStart(state));
+        const timeEnd:   Date = new Date(StateEvent.eventTimeEnd(state));
+
+        return timeEnd.getTime() > timeStart.getTime();
+    }
+
     @Action(ActionGetEvents)
     getEvents({ patchState } : StateContext<StateEventModel>)
     {
@@ -242,7 +265,7 @@ export class StateEvent
             [EventKey.Clusters]  : this.formBuilder.array(event.clusters, Validators.minLength(1)),
             [EventKey.Location]  : [event.location, Validators.required],
             [EventKey.TimeStart] : event.timeStart,
-            [EventKey.TimeEnd]   : event.timeEnd
+            [EventKey.TimeEnd]   : [event.timeEnd, [], this.validateEventTimeEndValid.bind(this)]
         });
 
         patchState({ form });
@@ -295,5 +318,13 @@ export class StateEvent
         const photos: Array<PhotoAsset> = this.store.selectSnapshot(StatePhotos.photos);
 
         patchState({ imageUrl: photos[index].data });
+    }
+
+    private validateEventTimeEndValid(): Observable<{[key: string]: any} | null>
+    {
+        return this.eventTimeEndValid$.pipe
+        (
+            map((valid: boolean) => valid ? null : { timeEndInvalid: true })
+        );
     }
 }

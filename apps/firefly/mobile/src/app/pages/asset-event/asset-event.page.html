@@ -73,7 +73,8 @@
                                       [pickerFormat]="'date-time.pickerFormat' | translate"
                                       [cancelText]="'general.cancel' |  translate"
                                       [doneText]="'general.done' | translate"
-                                      (ionChange)="timeChanged($event, EventKey.TimeEnd)">
+                                      (ionChange)="timeChanged($event, EventKey.TimeEnd)"
+                                      [class.cpt-invalid]="!(timeEndValid$ | async)">
                         </ion-datetime>
                     </ion-item>
 
