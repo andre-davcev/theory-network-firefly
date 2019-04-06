@@ -1,6 +1,8 @@
 <ion-header color="white">
     <ion-toolbar >
-        <ion-title>{{'page.event.title' | translate}}</ion-title>
+        <ion-title>
+            {{ ((isNew$ | async) ? 'page.event.title.edit.new' : 'page.event.title.edit') | translate }}
+        </ion-title>
 
         <ion-buttons slot="start">
             <ion-back-button color="dark"></ion-back-button>

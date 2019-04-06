@@ -48,7 +48,9 @@
 
   "page.subscriptions.title" : "Manage Subscriptions",
 
-  "page.event.title"                  : "Create New Event",
+  "page.event.title"                  : "Event",
+  "page.event.title.edit"             : "Edit Event",
+  "page.event.title.edit.new"         : "Create New Event",
   "page.event.titlePlaceholder"       : "Add your title",
   "page.event.subtitlePlaceholder"    : "Add your subtitle",
   "page.event.iconPlaceholder"        : "select cluster",
