@@ -19,3 +19,9 @@ app-item-map {
 ion-list {
     margin-bottom: 0;
 }
+
+ion-datetime {
+  &.cpt-invalid {
+    text-decoration: line-through;
+  }
+}

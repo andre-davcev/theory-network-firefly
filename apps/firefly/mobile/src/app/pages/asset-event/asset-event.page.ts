@@ -30,6 +30,7 @@ export class PageAssetEvent extends BaseComponent
     @Select(StateEvent.eventImageUrl) imageUrl$: Observable<string>;
     @Select(StateEvent.eventIsNew) isNew$: Observable<boolean>;
     @Select(StateEvent.eventCanUpdate) canUpdate$: Observable<boolean>;
+    @Select(StateEvent.eventTimeEndValid) timeEndValid$: Observable<boolean>;
 
     public Pages: any = Pages;
     public EventKey: any = EventKey;
