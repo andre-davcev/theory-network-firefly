@@ -17,7 +17,7 @@
 </ion-header>
 
 <ion-content>
-    <form novalidate [formGroup]="form$ | async">
+        <form novalidate [formGroup]="form$ | async">
         <app-item-header [form]="form$ | async"
                          [item]="itemHeader"
                          (iconClicked)="navigate(Pages.AssetsClusters)">
