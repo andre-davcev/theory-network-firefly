@@ -48,7 +48,12 @@ export class PageAssetEvent extends BaseComponent
         description: 'description'
     };
 
-    constructor(private store: Store, private translate: TranslateService, public modalController: ModalController)
+    constructor
+    (
+        private store: Store,
+        private translate: TranslateService,
+        private modalController: ModalController
+    )
     {
         super();
 
@@ -92,11 +97,7 @@ export class PageAssetEvent extends BaseComponent
     {
         if (page === Pages.AssetsClusters)
         {
-            this.store.dispatch
-            ([
-                new ActionEventSetId(),
-                new Navigate([page])
-            ]);
+            this.store.dispatch(new Navigate([page]));
         }
         else
         {

@@ -7,6 +7,7 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
 import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';
+import { ActionEventSetId } from '@firefly/core';
 
 @Component
 ({
@@ -40,6 +41,11 @@ export class PageHome
 
     navigate(type: Pages): void
     {
+        if (type === Pages.AssetEvent)
+        {
+            this.store.dispatch(new ActionEventSetId());
+        }
+
         this.store.dispatch(new Navigate([type]));
     }
 
