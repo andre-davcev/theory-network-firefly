@@ -1,10 +1,10 @@
 import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
-import { User, Event, Cluster, Location } from '@firefly/core/models';
+import { User, Event, Cluster, Location, Time } from '@firefly/core/models';
 import { ServiceEvent } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -17,6 +17,7 @@ import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { StatePhotos } from '@theory/capacitor';
 import { PhotoAsset } from '@capacitor/core';
+import { RepeatType } from '@firefly/core/enums';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -183,18 +184,28 @@ export class StateEvent
         return location == null ? [] : [location];
     }
 
-    @Selector() static eventTimeStart(state: StateEventModel): string
+    @Selector() static eventTimes(state: StateEventModel): Array<Time>
     {
         const form: FormGroup = StateEvent.form(state);
 
-        return form == null ? undefined : form.get(EventKey.TimeStart).value;
+        return form == null ? [] : form.get(EventKey.Times).value
+    }
+
+    @Selector() static eventTime(state: StateEventModel): Time
+    {
+        const times: Array<Time> = StateEvent.eventTimes(state);
+
+        return times[0];
+    }
+
+    @Selector() static eventTimeStart(state: StateEventModel): string
+    {
+        return StateEvent.eventTime(state).start;
     }
 
     @Selector() static eventTimeEnd(state: StateEventModel): string
     {
-        const form: FormGroup = StateEvent.form(state);
-
-        return form == null ? undefined : form.get(EventKey.TimeEnd).value;
+        return StateEvent.eventTime(state).end;
     }
 
     @Selector() static eventTimeEndValid(state: StateEventModel): boolean
@@ -238,8 +249,14 @@ export class StateEvent
         const event: Event = id !== CoreEnum.IdNew ? entities[id] :
         {
             ...StateEventOptions.defaults.empty,
-            timeStart: DateUtil.atHourStart(now).toISOString(),
-            timeEnd:   DateUtil.atHourNext(now).toISOString()
+            times:
+            [
+                {
+                    start:      DateUtil.atHourStart(now).toISOString(),
+                    end:        DateUtil.atHourNext(now).toISOString(),
+                    repeatType: RepeatType.Never
+                }
+            ]
         };
 
         patchState({ id });
@@ -261,11 +278,9 @@ export class StateEvent
 
             [EventKey.Tagline]   : [event.tagline, ValidatorsExtended.minLength(1)],
             [EventKey.ImageId]   : [event.imageId, Validators.required],
-            [EventKey.PlaceId]   : [event.placeId, Validators.required],
             [EventKey.Clusters]  : this.formBuilder.array(event.clusters, Validators.minLength(1)),
             [EventKey.Location]  : [event.location, Validators.required],
-            [EventKey.TimeStart] : event.timeStart,
-            [EventKey.TimeEnd]   : [event.timeEnd, [], this.validateEventTimeEndValid.bind(this)]
+            [EventKey.Times]     : [event.times, [], this.validateEventTimeEndValid.bind(this)]
         });
 
         patchState({ form });
@@ -291,7 +306,20 @@ export class StateEvent
     {
         const form: FormGroup = StateEvent.form(getState());
 
-        form.controls[key].patchValue(value);
+        if (key === EventKey.TimeStart || key === EventKey.TimeEnd)
+        {
+            const control: AbstractControl = form.controls[EventKey.Times];
+            const times: Array<Time>       = control.value;
+            const time: Time               = times[0];
+
+            time[key] = value;
+
+            control.patchValue([time]);
+        }
+        else
+        {
+            form.controls[key].patchValue(value);
+        }
 
         patchState({ form });
     }

@@ -1,10 +1,13 @@
 export enum EventKey
 {
+    Version   = 'version',
     Tagline   = 'tagline',
     ImageId   = 'imageId',
-    PlaceId   = 'placeId',
     Clusters  = 'clusters',
     Location  = 'location',
-    TimeStart = 'timeStart',
-    TimeEnd   = 'timeEnd'
+    Times     = 'times',
+
+    TimeStart      = 'start',
+    TimeEnd        = 'end',
+    TimeRepeatType = 'repeatType'
 }
