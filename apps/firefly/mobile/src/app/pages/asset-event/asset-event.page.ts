@@ -26,10 +26,12 @@ import { PageImageSelector } from '../image-selector';
 
 export class PageAssetEvent extends BaseComponent
 {
-    @Select(StateEvent.form) form$: Observable<FormGroup>;
-    @Select(StateEvent.eventImageUrl) imageUrl$: Observable<string>;
-    @Select(StateEvent.eventIsNew) isNew$: Observable<boolean>;
-    @Select(StateEvent.eventCanUpdate) canUpdate$: Observable<boolean>;
+    @Select(StateEvent.form)              form$:         Observable<FormGroup>;
+    @Select(StateEvent.eventImageUrl)     imageUrl$:     Observable<string>;
+    @Select(StateEvent.eventIsNew)        isNew$:        Observable<boolean>;
+    @Select(StateEvent.eventCanUpdate)    canUpdate$:    Observable<boolean>;
+    @Select(StateEvent.eventTimeStart)    timeStart$:    Observable<string>;
+    @Select(StateEvent.eventTimeEnd)      timeEnd$:      Observable<string>;
     @Select(StateEvent.eventTimeEndValid) timeEndValid$: Observable<boolean>;
 
     public Pages: any = Pages;

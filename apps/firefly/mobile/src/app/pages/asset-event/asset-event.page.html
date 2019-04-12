@@ -56,7 +56,7 @@
                     <ion-item>
                         <ion-label>{{ 'general.starts' | translate }}</ion-label>
                         <ion-datetime [name]="EventKey.TimeStart"
-                                      [value]="(form$ | async)?.get(EventKey.TimeStart)?.value"
+                                      [value]="timeStart$ | async"
                                       [displayFormat]="'date-time.displayFormat' | translate"
                                       [pickerFormat]="'date-time.pickerFormat' | translate"
                                       [cancelText]="'general.cancel' |  translate"
@@ -68,7 +68,7 @@
                     <ion-item>
                         <ion-label>{{ 'general.ends' |  translate }}</ion-label>
                         <ion-datetime [name]="EventKey.TimeEnd"
-                                      [value]="(form$ | async)?.get(EventKey.TimeEnd)?.value"
+                                      [value]="timeEnd$ | async"
                                       [displayFormat]="'date-time.displayFormat' | translate"
                                       [pickerFormat]="'date-time.pickerFormat' | translate"
                                       [cancelText]="'general.cancel' |  translate"
