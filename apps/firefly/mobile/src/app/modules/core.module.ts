@@ -9,6 +9,7 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { Globalization } from '@ionic-native/globalization/ngx';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx'
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppCoreModule } from '@theory/web';
 import { StateLanguage, StateLocation, StateDevice, StatePhotos } from '@theory/capacitor';
+import { StatePhotos as StatePhotosCap} from '@theory/cordova';
 import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts, FirebaseEnvironment, MapboxEnvironment, StateEvent } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
@@ -60,7 +62,8 @@ Pro.init('1e5146ca',
             StateSubscriptions,
             StatePhotos,
             StateEvent,
-            StateMap
+            StateMap,
+            StatePhotosCap
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
@@ -73,6 +76,7 @@ Pro.init('1e5146ca',
     [
         Globalization,
         Firebase,
+        PhotoLibrary,
         { provide: RouteReuseStrategy,  useClass: IonicRouteStrategy },
         { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
         { provide: MapboxEnvironment,   useValue: environment.apis.mapbox }
