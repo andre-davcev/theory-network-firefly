@@ -18,6 +18,12 @@
       "@theory/capacitor/*": [
         "../../../../libs/capacitor/src/*"
       ],
+      "@theory/cordova": [
+        "../../../../libs/cordova/index.ts"
+      ],
+      "@theory/cordova/*": [
+        "../../../../libs/cordova/src/*"
+      ],
       "@theory/core": [
         "../../../../libs/core/index.ts"
       ],
