@@ -1,11 +1,15 @@
 import { State, Action, StateContext, Selector, Select } from '@ngxs/store';
 import { PhotoAsset } from '@capacitor/core';
+import { LibraryItem} from '@ionic-native/photo-library/ngx'
 import { Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
+import { Platform} from '@ionic/angular';
+import { PlatformEnum } from '@theory/ionic';
+import { StatePhotos, ActionPhotosGet } from '@theory/capacitor';
 
 import { StateGridModel } from './grid.state.model';
 import { StateGridOptions } from './grid.state.options';
-import { StatePhotos, ActionPhotosGet } from '@theory/capacitor';
+import { StatePhotos as StatePhotosCap, ActionPhotosGetLibrary } from '@theory/cordova';
 
 import { CoreEnum } from '@theory/core';
 import { ActionGridIconLibraryWatch, ActionGridImageLibraryWatch, ActionGridIconPageSizeSet, ActionGridImagePageSizeSet, ActionGridIconLibraryPage, ActionGridImageLibraryPage } from './grid.actions';
@@ -15,6 +19,7 @@ import { ActionGridIconLibraryWatch, ActionGridImageLibraryWatch, ActionGridIcon
 export class StateGrid
 {
     @Select(StatePhotos.photos) photos$: Observable<Array<PhotoAsset>>;
+    @Select(StatePhotosCap.library) photosCap$: Observable<LibraryItem[]>;
 
     private urls: Array<string> =
     [
@@ -38,7 +43,7 @@ export class StateGrid
     private static imageLibraryAll(state: StateGridModel):  Array<string> { return state.imageLibrary; }
     private static imageLibraryPage(state: StateGridModel): number        { return state.imageLibraryPage; }
 
-    constructor() { }
+    constructor(private platform: Platform) { }
 
     @Action(ActionGridIconPageSizeSet)
     iconPageSizeSet({ patchState }: StateContext<StateGridModel>, { payload }: ActionGridIconPageSizeSet)
@@ -55,18 +60,50 @@ export class StateGrid
     @Action(ActionGridIconLibraryWatch, { cancelUncompleted: true })
     iconLibraryWatch({ patchState, dispatch }: StateContext<StateGridModel>)
     {
-        return dispatch(new ActionPhotosGet()).pipe
-        (
-            switchMap(() => this.photos$),
-            map((photos: Array<PhotoAsset>) => photos.map((photo: PhotoAsset) => `${CoreEnum.DataUri}${photo.data}`)),
-            tap((library: Array<string>) => patchState
-            ({
-                iconLibrary:     library,
-                iconLibraryLazy: StateGridOptions.defaults.iconLibraryLazy,
-                iconLibraryPage: StateGridOptions.defaults.iconLibraryPage
-            })),
-            tap(() => dispatch(new ActionGridIconLibraryPage()))
-        );
+        if (this.platform.is(PlatformEnum.Android))
+        {
+          return dispatch(new ActionPhotosGetLibrary()).pipe
+          (
+              switchMap(() => {
+                return this.photosCap$
+              }),
+              map((photos: LibraryItem[]) => {
+                return photos.map((photo: LibraryItem) => {
+                  //return `${CoreEnum.DataUri}${photo.thumbnailURL}`
+                  let url: string;
+                  if (photo.id.split(';').length > 0) {
+                    url = 'file://' + photo.id.split(';')[1];
+                  }
+                  // Get http://localhost url
+                  url = (window as any).Ionic.WebView.convertFileSrc(url)
+                  return url;
+                })
+              }),
+              tap((library: Array<string>) => {
+                patchState
+                ({
+                    iconLibrary:     library,
+                    iconLibraryLazy: StateGridOptions.defaults.iconLibraryLazy,
+                    iconLibraryPage: StateGridOptions.defaults.iconLibraryPage
+                })}
+              ),
+              tap(() => dispatch(new ActionGridIconLibraryPage()))
+          );
+        }
+        else{
+          return dispatch(new ActionPhotosGet()).pipe
+          (
+              switchMap(() => this.photos$),
+              map((photos: Array<PhotoAsset>) => photos.map((photo: PhotoAsset) => `${photo.data}`)),
+              tap((library: Array<string>) => patchState
+              ({
+                  iconLibrary:     library,
+                  iconLibraryLazy: StateGridOptions.defaults.iconLibraryLazy,
+                  iconLibraryPage: StateGridOptions.defaults.iconLibraryPage
+              })),
+              tap(() => dispatch(new ActionGridIconLibraryPage()))
+          );
+        }
     };
 
     @Action(ActionGridIconLibraryPage)
