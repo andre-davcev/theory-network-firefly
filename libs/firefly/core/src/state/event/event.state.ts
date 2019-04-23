@@ -1,5 +1,5 @@
-import { map, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
@@ -8,15 +8,13 @@ import { User, Event, Cluster, Location, Time } from '@firefly/core/models';
 import { ServiceEvent } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
-import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation, ActionEventSetImageIndex } from './event.actions';
+import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation, ActionEventSave, ActionEventCreate, ActionEventUpdate, ActionEventWatch, ActionEventSetImage } from './event.actions';
 import { EventKey, AssetKey } from '@firefly/core/models';
 import { ModelKey } from '@theory/firebase';
 import { firestore } from 'firebase';
 import { ValidatorsExtended, CoreEnum, DateUtil } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
-import { StatePhotos } from '@theory/capacitor';
-import { PhotoAsset } from '@capacitor/core';
 import { RepeatType } from '@firefly/core/enums';
 
 @State<StateEventModel>(StateEventOptions)
@@ -26,10 +24,9 @@ export class StateEvent
     @Select(StateUser.user) user$:Observable<User>;
     @Select(StateEvent.eventTimeEndValid) eventTimeEndValid$: Observable<boolean>;
 
-    constructor(private serviceEvent: ServiceEvent, private formBuilder: FormBuilder, private store: Store) {}
+    constructor(private service: ServiceEvent, private formBuilder: FormBuilder, private store: Store) {}
 
     @Selector() static entities(state: StateEventModel): Record<string, Event> { return state.entities; }
-    @Selector() static id(state: StateEventModel): string                      { return state.id; }
     @Selector() static form(state: StateEventModel): FormGroup                 { return state.form; }
 
     @Selector() static events(state: StateEventModel): Array<Event> { return Object.keys(state.entities).map(id => state.entities[id]); }
@@ -42,14 +39,15 @@ export class StateEvent
     @Selector() static eventId(state: StateEventModel): string
     {
         const form: FormGroup = StateEvent.form(state);
-        const id: string = form == null || form.get(ModelKey.Id) == null ? undefined : form.get(ModelKey.Id).value;
 
-        return id == null ? StateEvent.id(state) : id;
+        return form == null ? undefined : form.get(ModelKey.Id).value;
     }
 
     @Selector() static eventIsNew(state: StateEventModel): boolean
     {
-        return StateEvent.eventId(state) === CoreEnum.IdNew;
+        const id: string = StateEvent.eventId(state);
+
+        return id == null || id === CoreEnum.IdNew;
     }
 
     @Selector() static eventIsValid(state: StateEventModel): boolean
@@ -113,9 +111,11 @@ export class StateEvent
 
     @Selector() static eventImageUrl(state: StateEventModel): string
     {
+        const id: string = StateEvent.eventId(state);
         const imageUrl: string = state.imageUrl;
 
-        return imageUrl == null ? undefined : `${CoreEnum.DataUri}${imageUrl}`;
+        return imageUrl;
+//        return imageUrl != null && id === CoreEnum.IdNew ? `${CoreEnum.DataUri}${imageUrl}` : imageUrl;
     }
 
     @Selector() static eventImageUrlDefined(state: StateEventModel): boolean
@@ -222,7 +222,7 @@ export class StateEvent
         return this.user$.pipe(
             map((user:User) => user.uidInternal),
             switchMap(uidInternal => {
-                return this.serviceEvent.
+                return this.service.
                 getEvents(uidInternal).
                 pipe
                 (
@@ -240,15 +240,18 @@ export class StateEvent
     }
 
     @Action(ActionEventSetId)
-    setEventId({ patchState, getState, dispatch } : StateContext<StateEventModel>, { payload }: ActionEventSetId)
+    setEventId({ getState, dispatch } : StateContext<StateEventModel>, { payload }: ActionEventSetId)
     {
         const id: string = payload;
-        const entities : Record<string, Event> = StateEvent.entities(getState());
+        const isNew: boolean = id === CoreEnum.IdNew;
         const now: Date = DateUtil.now();
+        const userId: string = this.store.selectSnapshot(StateUser.userId);
 
-        const event: Event = id !== CoreEnum.IdNew ? entities[id] :
+        const event: Event = !isNew ? undefined :
         {
+            id,
             ...StateEventOptions.defaults.empty,
+            userId,
             times:
             [
                 {
@@ -259,31 +262,50 @@ export class StateEvent
             ]
         };
 
-        patchState({ id });
-
-        return dispatch(new ActionEventSet(event));
+        return dispatch(new ActionEventWatch(id, event));
     }
 
     @Action(ActionEventSet)
-    setEvent({ patchState } : StateContext<StateEventModel>, { payload }: ActionEventSet)
+    setEvent({ patchState, getState } : StateContext<StateEventModel>, { payload }: ActionEventSet)
     {
-        const event: Event = payload;
+        const event: Event  = payload;
+        const id:    string = event[ModelKey.Id];
 
         const form: FormGroup = this.formBuilder.group
         ({
-            [AssetKey.Draft]       : event.draft,
-            [AssetKey.Name]        : [event.name,        ValidatorsExtended.minLength(1)],
-            [AssetKey.Description] : [event.description, ValidatorsExtended.minLength(1)],
-            [AssetKey.Private]     : event.private,
+            [ModelKey.Id]          : id,
+            [ModelKey.DateCreated] : event[ModelKey.DateCreated],
+            [ModelKey.DateUpdated] : event[ModelKey.DateUpdated],
 
-            [EventKey.Tagline]   : [event.tagline, ValidatorsExtended.minLength(1)],
-            [EventKey.ImageId]   : [event.imageId, Validators.required],
-            [EventKey.Clusters]  : this.formBuilder.array(event.clusters, Validators.minLength(1)),
-            [EventKey.Location]  : [event.location, Validators.required],
-            [EventKey.Times]     : [event.times, [], this.validateEventTimeEndValid.bind(this)]
+            [AssetKey.UserId]      : event[AssetKey.UserId],
+            [AssetKey.Name]        : [event[AssetKey.Name],        ValidatorsExtended.minLength(1)],
+            [AssetKey.Description] : [event[AssetKey.Description], ValidatorsExtended.minLength(1)],
+            [AssetKey.Private]     : event[AssetKey.Private],
+            [AssetKey.Draft]       : event[AssetKey.Draft],
+
+            [EventKey.Version]   : event[EventKey.Version],
+            [EventKey.Tagline]   : [event[EventKey.Tagline], ValidatorsExtended.minLength(1)],
+            [EventKey.ImageId]   : [event[EventKey.ImageId], Validators.required],
+            [EventKey.Clusters]  : this.formBuilder.array(event[EventKey.Clusters], Validators.minLength(1)),
+            [EventKey.Location]  : [event[EventKey.Location], Validators.required],
+            [EventKey.Times]     : [event[EventKey.Times], [], this.validateEventTimeEndValid.bind(this)]
         });
 
         patchState({ form });
+
+        if (id !== CoreEnum.IdNew)
+        {
+            const entities: Record<string, Event> = StateEvent.entities(getState());
+
+            patchState
+            ({
+                entities:
+                {
+                    ...entities,
+                    [id]: event
+                }
+            });
+        }
 /*
         return this.serviceEvent.
         setEvent(payload).
@@ -299,6 +321,17 @@ export class StateEvent
             })
         )
 */
+    }
+
+    @Action(ActionEventWatch, { cancelUncompleted: true })
+    eventWatch({ dispatch } : StateContext<StateEventModel>, { id, event }: ActionEventWatch)
+    {
+        const event$: Observable<Event> = event != null ? of(event) : this.service.read(id);
+
+        return event$.pipe
+        (
+            tap((e: Event) => dispatch(new ActionEventSet(e)))
+        );
     }
 
     @Action(ActionEventPatch)
@@ -339,13 +372,30 @@ export class StateEvent
         dispatch(new ActionEventPatch(EventKey.Location, location));
     }
 
-    @Action(ActionEventSetImageIndex)
-    setImageIndex({ patchState }: StateContext<StateEventModel>, { payload }: ActionEventSetImageIndex)
+    @Action(ActionEventSetImage)
+    setImageIndex({ patchState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
     {
-        const index: number = payload;
-        const photos: Array<PhotoAsset> = this.store.selectSnapshot(StatePhotos.photos);
+        patchState({ imageUrl: payload });
+    }
 
-        patchState({ imageUrl: photos[index].data });
+    @Action(ActionEventSave)
+    save({ dispatch, getState }: StateContext<StateEventModel>)
+    {
+        const id: string = StateEvent.eventId(getState());
+
+        return id === CoreEnum.IdNew ? dispatch(new ActionEventCreate()) : dispatch(new ActionEventUpdate());
+    }
+
+    @Action(ActionEventCreate)
+    create({ patchState }: StateContext<StateEventModel>)
+    {
+
+    }
+
+    @Action(ActionEventUpdate)
+    update({ patchState }: StateContext<StateEventModel>)
+    {
+
     }
 
     private validateEventTimeEndValid(): Observable<{[key: string]: any} | null>

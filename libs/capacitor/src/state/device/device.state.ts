@@ -14,6 +14,7 @@ import { ActionDeviceInitialize, ActionDeviceStatusBarSet, ActionDeviceStatusBar
 
 export class StateDevice
 {
+    @Selector() static platform(state: StateDeviceModel): Platform {return state.platform;}
     @Selector() static loading(state: StateDeviceModel): boolean {return state.loading;}
 
     @Selector() static device(state: StateDeviceModel): boolean {return state.device;}
@@ -39,9 +40,11 @@ export class StateDevice
         (
             tap((deviceInfo: DeviceInfo) =>
             {
-                const platform: string = deviceInfo.platform;
+                const platform: Platform = deviceInfo.platform as Platform;
+
                 patchState
                 ({
+                    platform,
                     device  : platform !== Platform.Web,
                     ios     : platform !== Platform.iOS,
                     android : platform !== Platform.Android

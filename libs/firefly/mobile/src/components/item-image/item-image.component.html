@@ -1,5 +1,5 @@
 <h4 class="cpt-title" *ngIf="title" fxFlexAlign="center">{{ title }}</h4>
 <section class="cpt-container" fxLayout="column" fxLayoutAlign="center center" (click)="clickedImage()">
     <h4 class="cpt-image-placeholder" *ngIf="edit && !url && placeholder">{{ placeholder }}</h4>
-    <div class="cpt-image" *ngIf="url" [style.background-image]="'url(' + url + ')'"></div>
+    <div class="cpt-image" *ngIf="url" [style.background-image]="urlSafe()"></div>
 </section>

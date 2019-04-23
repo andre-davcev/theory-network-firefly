@@ -26,6 +26,13 @@ export class ActionEventSet
     constructor(public payload: Event) {}
 }
 
+export class ActionEventWatch
+{
+    static readonly type = ActionsEvent.WatchEvent;
+
+    constructor(public id: string, public event: Event) { }
+}
+
 export class ActionEventPatch
 {
     static readonly type = ActionsEvent.PatchEvent;
@@ -40,9 +47,30 @@ export class ActionEventSetLocation
     constructor(public payload: Result) { }
 }
 
-export class ActionEventSetImageIndex
+export class ActionEventSetImage
 {
-    static readonly type = ActionsEvent.SetImageIndex;
+    static readonly type = ActionsEvent.SetImage;
 
-    constructor(public payload: number) { }
+    constructor(public payload: string) { }
+}
+
+export class ActionEventSave
+{
+    static readonly type = ActionsEvent.SaveEvent;
+
+    constructor() { }
+}
+
+export class ActionEventCreate
+{
+    static readonly type = ActionsEvent.CreateEvent;
+
+    constructor() { }
+}
+
+export class ActionEventUpdate
+{
+    static readonly type = ActionsEvent.UpdateEvent;
+
+    constructor() { }
 }

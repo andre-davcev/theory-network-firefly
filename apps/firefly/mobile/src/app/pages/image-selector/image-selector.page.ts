@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 import { Store } from '@ngxs/store';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '../pages.enum';
-import { ActionEventSetImageIndex } from '@firefly/core';
+// import { ActionEventSetImageIndex } from '@firefly/core';
 
 @Component
 ({
@@ -39,7 +39,7 @@ export class PageImageSelector
 
     public selectLibraryImage(index: number): void
     {
-        this.store.dispatch(new ActionEventSetImageIndex(index));
+//        this.store.dispatch(new ActionEventSetImageIndex(index));
 
         this.modalController.dismiss();
     }

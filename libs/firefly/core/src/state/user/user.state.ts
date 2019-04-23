@@ -31,6 +31,13 @@ export class StateUser
     @Selector() static loadedNotAuthenticated(state: StateUserModel) {return !StateUser.loading && !StateUser.authenticated;}
     @Selector() static error(state: StateUserModel)                  {return state.error;}
 
+    @Selector() static userId(state: StateUserModel)
+    {
+        const user: User = StateUser.user(state);
+
+        return user == null ? undefined : user.uidInternal;
+    }
+
     @Selector() static errored(state: StateUserModel)   {return state.error != null;}
     @Selector() static userFound(state: StateUserModel) {return state.user != null;}
 
@@ -163,10 +170,8 @@ export class StateUser
     {
         patchState({authenticating: true});
 
-        console.log('HERE!!');
         return from(auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
-            tap(authData => console.log('I MADE IT HERE NOW')),
             switchMap((authData: firebase.auth.UserCredential) => dispatch(new ActionUserAuthenticateCheck(authData.user))),
 
             catchError((error: Error) => of(patchState({error: error, authenticating: false})))
