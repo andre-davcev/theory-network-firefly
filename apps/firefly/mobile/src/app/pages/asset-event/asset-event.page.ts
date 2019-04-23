@@ -3,19 +3,19 @@ import { FormGroup } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
-import { StatusBarStyle } from '@capacitor/core';
-import { takeUntil } from 'rxjs/operators';
+import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { takeUntil, map } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
-import { ModalOptions, ComponentRef } from '@ionic/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateEvent, ActionEventSetId, EventKey, ActionEventPatch } from '@firefly/core';
+import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
+import { StatusBarStyle, Camera, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
+import { StateEvent, ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { ItemHeader, ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
-import { PageImageSelector } from '../image-selector';
 
 @Component
 ({
@@ -54,7 +54,9 @@ export class PageAssetEvent extends BaseComponent
     (
         private store: Store,
         private translate: TranslateService,
-        private modalController: ModalController
+        private modalController: ModalController,
+        private camera: CameraCordova,
+        private webview: WebView
     )
     {
         super();
@@ -101,14 +103,50 @@ export class PageAssetEvent extends BaseComponent
         {
             this.store.dispatch(new Navigate([page]));
         }
-        else
+        else if (page === Pages.ImageSelector)
         {
-            let modalOptions: ModalOptions<ComponentRef>;
+            const platform: Platform = this.store.selectSnapshot(StateDevice.platform);
 
-            if (page === Pages.ImageSelector) { modalOptions = { component: PageImageSelector}; }
-            if (page === Pages.EventLocation) { modalOptions = { component: PageEventLocation}; }
+            if (platform === Platform.iOS)
+            {
+                const options: CameraOptionsCordova =
+                {
+                    quality: 100,
+                    destinationType: this.camera.DestinationType.FILE_URI,
+                    encodingType: this.camera.EncodingType.JPEG,
+                    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+                };
 
-            from(this.modalController.create(modalOptions)).
+                from(this.camera.getPicture(options)).
+                pipe(map((photo: string) => this.webview.convertFileSrc(photo))).
+                subscribe((imageData: string) =>
+                  this.store.dispatch(new ActionEventSetImage(imageData))
+                );
+            }
+            else if (platform === Platform.Android)
+            {
+                const options: CameraOptions =
+                {
+                    quality:           100,
+                    allowEditing:      true,
+                    resultType:        CameraResultType.Uri,
+                    source:            CameraSource.Photos,
+                    presentationStyle: 'fullscreen'
+                };
+
+                from(Camera.getPhoto(options)).
+                subscribe((photo: CameraPhoto) =>
+                  this.store.dispatch(new ActionEventSetImage(photo.base64Data))
+                );
+            }
+            else
+            {
+                this.store.dispatch(new ActionEventSetImage('assets/icons/temp-coffee-icon-pink.png'));
+            }
+        }
+        else if (page === Pages.EventLocation)
+        {
+            from(this.modalController.create({ component: PageEventLocation })).
             subscribe((modal: HTMLIonModalElement) => modal.present());
         }
     }

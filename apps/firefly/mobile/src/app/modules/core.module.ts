@@ -15,11 +15,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppCoreModule } from '@theory/web';
-import { StateLanguage, StateLocation, StateDevice, StatePhotos } from '@theory/capacitor';
+import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
 import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts, FirebaseEnvironment, MapboxEnvironment, StateEvent } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
 import { StateMap } from '@theory/mapbox';
+import { Camera } from '@ionic-native/camera/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 /*
 Pro.init('1e5146ca',
@@ -58,7 +60,6 @@ Pro.init('1e5146ca',
             StatePlaces,
             StateIcons,
             StateSubscriptions,
-            StatePhotos,
             StateEvent,
             StateMap
         ]),
@@ -66,13 +67,15 @@ Pro.init('1e5146ca',
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
         NgxsRouterPluginModule.forRoot(),
         NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken}),
-        NgxsLoggerPluginModule.forRoot()
+//        NgxsLoggerPluginModule.forRoot()
     ],
 
     providers :
     [
         Globalization,
+        Camera,
         Firebase,
+        WebView,
         { provide: RouteReuseStrategy,  useClass: IonicRouteStrategy },
         { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
         { provide: MapboxEnvironment,   useValue: environment.apis.mapbox }

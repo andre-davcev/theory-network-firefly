@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 
 @Component
 ({
@@ -16,8 +17,17 @@ export class ComponentItemImage
 
     @Output() clicked: EventEmitter<void> = new EventEmitter();
 
+    constructor(private sanitizer: DomSanitizer) { }
+
     public clickedImage(): void
     {
         this.clicked.next();
+    }
+
+    public urlSafe(): SafeStyle
+    {
+        const url: string = this.url == null ? '' : this.url;
+
+        return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
     }
 }

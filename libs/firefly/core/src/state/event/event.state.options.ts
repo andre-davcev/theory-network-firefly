@@ -10,7 +10,6 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
 
     defaults :
     {
-        id       : undefined,
         form     : undefined,
         entities : {},
         empty    :

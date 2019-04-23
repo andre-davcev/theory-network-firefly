@@ -72,4 +72,8 @@ import 'zone.js/dist/zone'; // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+//import '@ionic/pwa-elements';
 import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
+
+// https://github.com/Wykks/ngx-mapbox-gl/issues/136
+(window as any).global = window;

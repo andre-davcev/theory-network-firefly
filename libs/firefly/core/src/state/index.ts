@@ -3,6 +3,7 @@ export * from './cluster';
 export * from './event';
 export * from './grid';
 export * from './icons';
+export * from './image';
 export * from './places';
 export * from './subscriptions';
 export * from './user';

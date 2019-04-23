@@ -3,6 +3,7 @@ export * from './src/directives';
 export * from './src/enums';
 export * from './src/environment';
 export * from './src/forms';
+export * from './src/interfaces';
 export * from './src/mocks';
 export * from './src/models';
 export * from './src/services';
