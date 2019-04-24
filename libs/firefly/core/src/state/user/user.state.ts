@@ -35,6 +35,7 @@ export class StateUser
     {
         const user: User = StateUser.user(state);
 
+        console.log(`UID INTERNAL: ${user.uidInternal}`);
         return user == null ? undefined : user.uidInternal;
     }
 
@@ -108,7 +109,7 @@ export class StateUser
                         email,
                         phoneNumber,
                         photoURL,
-                        uidInternal: providerId + ':' + providerId === AuthProvider.Email ? email : uid
+                        uidInternal: providerId === AuthProvider.Email ? `${providerId}:${email}` : `${providerId}:${uid}`
                     };
 
                     patchState({authData: authData, authenticated: true, user, authenticating: false});

@@ -87,6 +87,7 @@
     "@capacitor/cli": "^1.0.0-beta.19",
     "@capacitor/core": "^1.0.0-beta.19",
     "@capacitor/ios": "^1.0.0-beta.19",
+    "@ionic-native/base64": "^5.5.0",
     "@ionic-native/camera": "^5.4.0",
     "@ionic-native/core": "^5.4.0",
     "@ionic-native/facebook": "^5.4.0",

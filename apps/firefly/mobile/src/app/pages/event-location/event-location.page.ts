@@ -23,6 +23,7 @@ export class PageEventLocation extends BaseComponent implements OnInit
     @Select(StateEvent.form)                 form$:                Observable<FormGroup>;
     @Select(StateEvent.eventLocations)       locations$:           Observable<Array<Location>>;
     @Select(StateEvent.eventLocationDefined) locationDefined$:     Observable<boolean>;
+
     @Select(StateMap.searchResult)           searchResult$:        Observable<Result>;
     @Select(StateMap.searchResultDefined)    searchResultDefined$: Observable<boolean>;
 

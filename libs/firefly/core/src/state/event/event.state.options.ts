@@ -31,6 +31,8 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
             [EventKey.Location] : undefined,
             [EventKey.Times]    : []
         },
-        imageUrl: undefined
+
+        imageUrl           : undefined,
+        imageUrlNormalized : undefined
     }
 };

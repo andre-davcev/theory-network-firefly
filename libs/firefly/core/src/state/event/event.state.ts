@@ -16,6 +16,7 @@ import { ValidatorsExtended, CoreEnum, DateUtil } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { RepeatType } from '@firefly/core/enums';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -23,8 +24,6 @@ export class StateEvent
 {
     @Select(StateUser.user) user$:Observable<User>;
     @Select(StateEvent.eventTimeEndValid) eventTimeEndValid$: Observable<boolean>;
-
-    constructor(private service: ServiceEvent, private formBuilder: FormBuilder, private store: Store) {}
 
     @Selector() static entities(state: StateEventModel): Record<string, Event> { return state.entities; }
     @Selector() static form(state: StateEventModel): FormGroup                 { return state.form; }
@@ -111,11 +110,12 @@ export class StateEvent
 
     @Selector() static eventImageUrl(state: StateEventModel): string
     {
-        const id: string = StateEvent.eventId(state);
-        const imageUrl: string = state.imageUrl;
+        return state.imageUrl;
+    }
 
-        return imageUrl;
-//        return imageUrl != null && id === CoreEnum.IdNew ? `${CoreEnum.DataUri}${imageUrl}` : imageUrl;
+    @Selector() static eventImageUrlNormalized(state: StateEventModel): string
+    {
+        return state.imageUrlNormalized;
     }
 
     @Selector() static eventImageUrlDefined(state: StateEventModel): boolean
@@ -215,6 +215,13 @@ export class StateEvent
 
         return timeEnd.getTime() > timeStart.getTime();
     }
+    constructor
+    (
+        private service: ServiceEvent,
+        private formBuilder: FormBuilder,
+        private store: Store,
+        private webview: WebView
+    ) { }
 
     @Action(ActionGetEvents)
     getEvents({ patchState } : StateContext<StateEventModel>)
@@ -373,9 +380,18 @@ export class StateEvent
     }
 
     @Action(ActionEventSetImage)
-    setImageIndex({ patchState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
+    setImageIndex({ patchState, dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
     {
-        patchState({ imageUrl: payload });
+        const imageUrl: string = payload;
+        const imageUrlNormalized: string = this.webview.convertFileSrc(imageUrl);
+
+        patchState
+        ({
+            imageUrl,
+            imageUrlNormalized
+        });
+
+        dispatch(new ActionEventCreate());
     }
 
     @Action(ActionEventSave)
@@ -387,9 +403,13 @@ export class StateEvent
     }
 
     @Action(ActionEventCreate)
-    create({ patchState }: StateContext<StateEventModel>)
+    create({ patchState, getState }: StateContext<StateEventModel>)
     {
+        const state: StateEventModel = getState();
+        const event: Event           = StateEvent.event(state);
+        const imageUrl: string       = StateEvent.eventImageUrl(state);
 
+        return this.service.create(event, imageUrl);
     }
 
     @Action(ActionEventUpdate)
