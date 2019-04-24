@@ -72,7 +72,6 @@
     "@theory/scss": "file:../../../libs/scss",
     "@theory/web": "file:../../../libs/web",
     "cordova-plugin-camera": "file:../../../node_modules/cordova-plugin-camera",
-    "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-globalization": "file:../../../node_modules/cordova-plugin-globalization",
     "cordova-plugin-photo-library": "file:../../../node_modules/cordova-plugin-photo-library",
     "firebase": "file:../../../node_modules/firebase",

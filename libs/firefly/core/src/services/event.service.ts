@@ -5,13 +5,19 @@ import { Observable, from, of } from 'rxjs';
 import { switchMap, take, filter, map } from 'rxjs/operators';
 
 import { Event } from '@firefly/core/models';
+import { ServiceImage } from './image.service';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceEvent
 {
     private eventsCollection: AngularFirestoreCollection<Event>;
 
-    constructor (private firestore: AngularFirestore){
+    constructor
+    (
+        private firestore: AngularFirestore,
+        private image: ServiceImage
+    )
+    {
         this.eventsCollection = firestore.collection<Event>('events');
     }
 
@@ -56,9 +62,11 @@ export class ServiceEvent
         );
     }
 
-    public create(event: Event): Observable<any>
+    public create(event: Event, imagePath: string): Observable<string>
     {
-        return of();
+        event.imageId = this.bucketPath(event);
+
+        return this.image.upload(imagePath, event.imageId);
     }
 
     public read(id: string): Observable<any>
@@ -74,5 +82,11 @@ export class ServiceEvent
     public delete(id: string): Observable<any>
     {
         return of();
+    }
+
+    private bucketPath(event: Event): string
+    {
+        console.log(`USER ID: ${event.userId}`);
+        return `${event.userId}/image/image_${new Date().getTime()}`;
     }
 }

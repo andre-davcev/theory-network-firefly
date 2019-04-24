@@ -4,14 +4,13 @@ import { Observable, from } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { takeUntil, map } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle, Camera, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage } from '@firefly/core';
+import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { ItemHeader, ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
@@ -26,13 +25,13 @@ import { PageEventLocation } from '../event-location';
 
 export class PageAssetEvent extends BaseComponent
 {
-    @Select(StateEvent.form)              form$:         Observable<FormGroup>;
-    @Select(StateEvent.eventImageUrl)     imageUrl$:     Observable<string>;
-    @Select(StateEvent.eventIsNew)        isNew$:        Observable<boolean>;
-    @Select(StateEvent.eventCanUpdate)    canUpdate$:    Observable<boolean>;
-    @Select(StateEvent.eventTimeStart)    timeStart$:    Observable<string>;
-    @Select(StateEvent.eventTimeEnd)      timeEnd$:      Observable<string>;
-    @Select(StateEvent.eventTimeEndValid) timeEndValid$: Observable<boolean>;
+    @Select(StateEvent.form)                    form$:         Observable<FormGroup>;
+    @Select(StateEvent.eventImageUrlNormalized) imageUrl$:     Observable<string>;
+    @Select(StateEvent.eventIsNew)              isNew$:        Observable<boolean>;
+    @Select(StateEvent.eventCanUpdate)          canUpdate$:    Observable<boolean>;
+    @Select(StateEvent.eventTimeStart)          timeStart$:    Observable<string>;
+    @Select(StateEvent.eventTimeEnd)            timeEnd$:      Observable<string>;
+    @Select(StateEvent.eventTimeEndValid)       timeEndValid$: Observable<boolean>;
 
     public Pages: any = Pages;
     public EventKey: any = EventKey;
@@ -55,8 +54,7 @@ export class PageAssetEvent extends BaseComponent
         private store: Store,
         private translate: TranslateService,
         private modalController: ModalController,
-        private camera: CameraCordova,
-        private webview: WebView
+        private camera: CameraCordova
     )
     {
         super();
@@ -118,7 +116,6 @@ export class PageAssetEvent extends BaseComponent
                 };
 
                 from(this.camera.getPicture(options)).
-                pipe(map((photo: string) => this.webview.convertFileSrc(photo))).
                 subscribe((imageData: string) =>
                   this.store.dispatch(new ActionEventSetImage(imageData))
                 );

@@ -4,8 +4,9 @@ import { Event } from '@firefly/core/models';
 
 export interface StateEventModel
 {
-    form     : FormGroup;
-    entities : Record<string, Event>;
-    empty    : Event;
-    imageUrl : string;
+    form               : FormGroup;
+    entities           : Record<string, Event>;
+    empty              : Event;
+    imageUrl           : string;
+    imageUrlNormalized : string;
 }
