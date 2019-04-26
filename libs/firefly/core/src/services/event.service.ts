@@ -4,13 +4,15 @@ import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument,
 import { Observable, from, of } from 'rxjs';
 import { switchMap, take, filter, map } from 'rxjs/operators';
 
-import { Event } from '@firefly/core/models';
+import { Event, AssetKey, Image, EventKey } from '@firefly/core/models';
 import { ServiceImage } from './image.service';
+import { ModelKey } from '@theory/firebase/enums';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceEvent
 {
-    private eventsCollection: AngularFirestoreCollection<Event>;
+    private _name: string = 'event';
+    private _collection: AngularFirestoreCollection<Event>;
 
     constructor
     (
@@ -18,7 +20,7 @@ export class ServiceEvent
         private image: ServiceImage
     )
     {
-        this.eventsCollection = firestore.collection<Event>('events');
+        this.collection = firestore.collection<Event>(this.name);
     }
 
     getEvents(userid: string): Observable<Array<Event>>
@@ -50,7 +52,7 @@ export class ServiceEvent
 
         event = { ...event, id };
 
-        const document: AngularFirestoreDocument<Event> = this.eventsCollection.doc(id);
+        const document: AngularFirestoreDocument<Event> = this.collection.doc(id);
 
         return from(document.set(event)).pipe
         (
@@ -62,11 +64,16 @@ export class ServiceEvent
         );
     }
 
-    public create(event: Event, imagePath: string): Observable<string>
+    public create(event: Event, imagePath: string): Observable<void>
     {
-        event.imageId = this.bucketPath(event);
+        const image: Image = this.imageFromEvent(event);
 
-        return this.image.upload(imagePath, event.imageId);
+        return this.image.upload(imagePath, image.id).pipe
+        (
+            switchMap(() => this.image.set(image)),
+            map(() => this.firestore.createId()),
+            switchMap((id: string) => from(this.collection.doc(id).set({ ...event, [ModelKey.Id]: id, [EventKey.ImageId]: image.id })))
+        );
     }
 
     public read(id: string): Observable<any>
@@ -87,5 +94,36 @@ export class ServiceEvent
     private bucketPath(event: Event): string
     {
         return `${event.userId}/image/${new Date().getTime()}.jpg`;
+    }
+
+    private imageFromEvent(event: Event): Image
+    {
+        const id: string = this.bucketPath(event);
+        const image: Image =
+        {
+            [ModelKey.Id]          : id,
+            [AssetKey.Name]        : '',
+            [AssetKey.Description] : '',
+            [AssetKey.Private]     : true,
+            [AssetKey.UserId]      : event.userId,
+            [AssetKey.Draft]       : false
+        };
+
+        return image;
+    }
+
+    public get name(): string
+    {
+        return this._name;
+    }
+
+    public get collection(): AngularFirestoreCollection<Event>
+    {
+        return this._collection;
+    }
+
+    public set collection(collection: AngularFirestoreCollection<Event>)
+    {
+        this._collection = collection;
     }
 }
