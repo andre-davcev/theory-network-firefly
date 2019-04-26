@@ -17,6 +17,7 @@ import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { RepeatType } from '@firefly/core/enums';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { UserKey, ClusterKey } from '@firefly/core/models';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -154,7 +155,7 @@ export class StateEvent
     @Selector() static eventIconUrl(state: StateEventModel): string
     {
         const cluster: Cluster = StateEvent.eventClusterFirst(state);
-        const iconId: string   = cluster.icon; // ToDo: Change to StateIcon.iconUrl()
+        const iconId: string   = cluster[ClusterKey.IconId]; // ToDo: Change to StateIcon.iconUrl()
 
         // ToDo: Lookup iconId and return icon url
         // ToDo: Setup icon collection watcher
@@ -227,10 +228,10 @@ export class StateEvent
     getEvents({ patchState } : StateContext<StateEventModel>)
     {
         return this.user$.pipe(
-            map((user:User) => user.uidInternal),
-            switchMap(uidInternal => {
+            map((user:User) => user[UserKey.Id]),
+            switchMap(userId => {
                 return this.service.
-                getEvents(uidInternal).
+                getEvents(userId).
                 pipe
                 (
                     map((events: Array<Event>) =>

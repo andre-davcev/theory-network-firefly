@@ -1,17 +1,11 @@
 import { DocumentReference } from '@angular/fire/firestore';
 
-import { Model } from '@theory/firebase';
+import { Asset } from './asset.model';
+import { ClusterKey } from './cluster.model.key';
 
-export interface Cluster extends Model
+export interface Cluster extends Asset
 {
-    userId?      : string;
-    draft?       : boolean;
-    name         : string;
-    tagline?     : string;
-    description  : string;
-    icon?        : string;
-    photo?       : string;
-    categories?  : string;
-    private?     : boolean;
-    locations?   : Array<DocumentReference>;
+    [ClusterKey.Tagline]: string;
+    [ClusterKey.IconId]:  string;
+    [ClusterKey.Events]:  Array<DocumentReference>;
 }
