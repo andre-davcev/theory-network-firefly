@@ -86,7 +86,6 @@ export class ServiceEvent
 
     private bucketPath(event: Event): string
     {
-        console.log(`USER ID: ${event.userId}`);
-        return `${event.userId}/image/image_${new Date().getTime()}`;
+        return `${event.userId}/image/${new Date().getTime()}.jpg`;
     }
 }
