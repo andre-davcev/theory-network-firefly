@@ -9,6 +9,7 @@ import { FormCluster } from '@firefly/core/forms';
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
 import { ActionGetClusters, ActionSetClusterId, ActionSetCluster } from './cluster.actions';
+import { ModelKey } from '@theory/firebase';
 
 @State<StateClusterModel>(StateClusterOptions)
 
@@ -29,10 +30,10 @@ export class StateCluster
     getClusters({ patchState } : StateContext<StateClusterModel>)
     {
         return this.user$.pipe(
-            map((user:User) => user.uidInternal),
-            switchMap(uidInternal => {
+            map((user:User) => user[ModelKey.Id]),
+            switchMap(userId => {
                 return this.clusterService
-                .getClusters(uidInternal)
+                .getClusters(userId)
                 .pipe(
                     map((clusters:Cluster[]) => {
                         const entities: Record<number, Cluster> = {};

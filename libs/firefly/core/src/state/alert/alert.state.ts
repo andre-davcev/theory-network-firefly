@@ -7,6 +7,7 @@ import { StateUserModel } from '@firefly/core/state/user';
 import { StateAlertModel } from './alert.state.model';
 import { StateAlertOptions } from './alert.state.options';
 import { ActionAlertsGet } from './alert.actions';
+import { ModelKey } from '@theory/firebase';
 
 @State<StateAlertModel>(StateAlertOptions)
 
@@ -20,9 +21,9 @@ export class StateAlerts
     @Action(ActionAlertsGet)
     alertsGet({ patchState } : StateContext<StateAlertModel>)
     {
-        const uidInternal: string = this.store.selectSnapshot<string>((state: StateUserModel) => state.user.uidInternal);
+        const userId: string = this.store.selectSnapshot<string>((state: StateUserModel) => state.user[ModelKey.Id]);
 
-        return this.serviceAlerts.getMock(uidInternal).
+        return this.serviceAlerts.getMock(userId).
 
         pipe
         (

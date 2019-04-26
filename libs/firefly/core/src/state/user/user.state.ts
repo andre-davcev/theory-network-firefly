@@ -6,10 +6,10 @@ import { catchError, switchMap, take, filter, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { AuthProvider } from '@theory/firebase';
+import { AuthProvider, ModelKey } from '@theory/firebase';
 import { StateLanguage, ActionLanguageGet, ActionLanguageSet } from '@theory/capacitor';
 
-import { User } from '@firefly/core/models';
+import { User, UserKey } from '@firefly/core/models';
 import { ActionAlertsGet } from '@firefly/core/state/alert';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
@@ -35,8 +35,7 @@ export class StateUser
     {
         const user: User = StateUser.user(state);
 
-        console.log(`UID INTERNAL: ${user.uidInternal}`);
-        return user == null ? undefined : user.uidInternal;
+        return user == null ? undefined : user[ModelKey.Id];
     }
 
     @Selector() static errored(state: StateUserModel)   {return state.error != null;}
@@ -69,7 +68,7 @@ export class StateUser
 
             tap(() => patchState({initializing: false})),
 
-            catchError((error: Error) => of(patchState({error: error, authenticating: false, initializing: false})))
+            catchError((error: Error) => of(patchState({error, authenticating: false, initializing: false})))
         );
     }
 
@@ -88,31 +87,38 @@ export class StateUser
 
                 if (authData == null)
                 {
-                    patchState({authData: undefined, authenticated: false, error: {name: 'Failed Login', message: 'Unable to login'}});
+                    patchState({authData: undefined, user: undefined, authenticated: false, error: {name: 'Failed Login', message: 'Unable to login'}});
                 }
                 else
                 {
                     const providerData : UserInfo = {...authData.providerData[0]};
 
                     const uid         : string = authData.uid;
-                    const displayName : string = providerData.displayName;
-                    const email       : string = providerData.email;
-                    const phoneNumber : string = providerData.phoneNumber;
-                    const photoURL    : string = providerData.photoURL;
                     const providerId  : string = providerData.providerId;
+                    const email       : string = providerData.email;
+                    const id          : string = providerId === AuthProvider.Email ? `${providerId}:${email}` : `${providerId}:${uid}`;
 
                     const user: User =
                     {
-                        uid,
-                        language,
-                        displayName,
-                        email,
-                        phoneNumber,
-                        photoURL,
-                        uidInternal: providerId === AuthProvider.Email ? `${providerId}:${email}` : `${providerId}:${uid}`
+                        [ModelKey.Id] : id,
+
+                        [UserKey.Uid]         : uid,
+                        [UserKey.Language]    : language,
+                        [UserKey.DisplayName] : providerData.displayName,
+                        [UserKey.Email]       : email,
+                        [UserKey.PhoneNumber] : providerData.phoneNumber,
+                        [UserKey.PhotoUrl]    : providerData.photoURL,
+                        [UserKey.ProviderId]  : providerId,
+                        [UserKey.Tokens]        : {},
+                        [UserKey.Notifications] : {},
+
+                        [UserKey.Clusters] : {},
+                        [UserKey.Events]   : {},
+                        [UserKey.Images]   : {},
+                        [UserKey.Icons]    : {}
                     };
 
-                    patchState({authData: authData, authenticated: true, user, authenticating: false});
+                    patchState({authData, authenticated: true, user, authenticating: false});
                 }
             })
         );
@@ -123,9 +129,9 @@ export class StateUser
     {
         const providerData: UserInfo = payload.providerData[0];
         const providerId: string = providerData.providerId;
-        const uidInternal: string = providerId + ':' + (providerId === AuthProvider.Email ? providerData.email : providerData.uid);
+        const userId: string = providerId + ':' + (providerId === AuthProvider.Email ? providerData.email : providerData.uid);
 
-        return this.firestore.doc<User>(`user/${uidInternal}`).valueChanges().pipe
+        return this.firestore.doc<User>(`user/${userId}`).valueChanges().pipe
         (
             filter((user: User) => user != null),
 
@@ -163,7 +169,7 @@ export class StateUser
 
         tokens[token] = token;
 
-        return user.tokens != null && user.tokens[token] != null ? of(null) : this.firestore.collection<User>('user').doc(user.uidInternal).update({tokens});
+        return user.tokens != null && user.tokens[token] != null ? of(null) : this.firestore.collection<User>('user').doc(user[ModelKey.Id]).update({tokens});
     }
 
     @Action(ActionLoginEmail)

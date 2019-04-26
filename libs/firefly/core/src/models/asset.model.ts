@@ -1,6 +1,6 @@
 import { Model } from '@theory/firebase';
 
-import { AssetKey } from './asset.model.enum';
+import { AssetKey } from './asset.model.key';
 
 export interface Asset extends Model
 {
