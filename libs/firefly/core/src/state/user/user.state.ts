@@ -127,7 +127,7 @@ export class StateUser
         const user  : User   = StateUser.user(getState());
         const token : string = payload;
 
-        user.tokens       = user.tokens == null ? {} : user.tokens;
+        user.tokens        = user.tokens == null ? {} : user.tokens;
         user.tokens[token] = token;
 
         return this.service.patch(user[ModelKey.Id], { tokens: user.tokens });

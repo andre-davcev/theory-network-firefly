@@ -1,5 +1,5 @@
 import { Observable, from } from 'rxjs';
-import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentSnapshot, Action } from '@angular/fire/firestore';
 import { Model, ModelKey } from '@theory/firebase';
 
 export class ServiceBase<T extends Model>
@@ -37,9 +37,19 @@ export class ServiceBase<T extends Model>
         return this.set(object);
     }
 
+    public delete(object: T): Observable<void>
+    {
+        return from(this.document(object[ModelKey.Id]).delete());
+    }
+
     public valuesChanges(id: string): Observable<T>
     {
-        return this.firestore.doc<T>(`${this.name}/${id}`).valueChanges();
+        return this.document(id).valueChanges();
+    }
+
+    public snapshotChanges(id: string): Observable<Action<DocumentSnapshot<T>>>
+    {
+        return this.document(id).snapshotChanges();
     }
 
     protected get name(): string
