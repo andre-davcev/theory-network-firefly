@@ -227,24 +227,7 @@ export class StateEvent
     @Action(ActionGetEvents)
     getEvents({ patchState } : StateContext<StateEventModel>)
     {
-        return this.user$.pipe(
-            map((user:User) => user[UserKey.Id]),
-            switchMap(userId => {
-                return this.service.
-                getEvents(userId).
-                pipe
-                (
-                    map((events: Array<Event>) =>
-                    {
-                        const entities: Record<number, Event> = {};
 
-                        events.forEach((event: Event) => entities[event.id] = event);
-
-                        patchState({ entities });
-                    })
-                )
-            })
-        )
     }
 
     @Action(ActionEventSetId)
@@ -314,27 +297,12 @@ export class StateEvent
                 }
             });
         }
-/*
-        return this.serviceEvent.
-        setEvent(payload).
-        pipe
-        (
-            map((event: Event) =>
-            {
-                const entities: Record<number, Event> = {};
-
-                entities[event.id] = event;
-
-                patchState({ entities });
-            })
-        )
-*/
     }
 
     @Action(ActionEventWatch, { cancelUncompleted: true })
     eventWatch({ dispatch } : StateContext<StateEventModel>, { id, event }: ActionEventWatch)
     {
-        const event$: Observable<Event> = event != null ? of(event) : this.service.read(id);
+        const event$: Observable<Event> = event == null ? of(event) : this.service.valuesChanges(id);
 
         return event$.pipe
         (
@@ -404,13 +372,13 @@ export class StateEvent
     }
 
     @Action(ActionEventCreate)
-    create({ patchState, getState }: StateContext<StateEventModel>)
+    create({ getState }: StateContext<StateEventModel>)
     {
         const state: StateEventModel = getState();
         const event: Event           = StateEvent.event(state);
         const imageUrl: string       = StateEvent.eventImageUrl(state);
 
-        return this.service.create(event, imageUrl);
+        return this.service.createWithImage(event, imageUrl);
     }
 
     @Action(ActionEventUpdate)
