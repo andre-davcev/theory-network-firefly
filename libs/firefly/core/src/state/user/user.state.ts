@@ -128,15 +128,17 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserAddToken)
-    userAddToken({ getState }: StateContext<StateUserModel>, { payload }: ActionUserAddToken)
+    userAddToken({ getState, patchState }: StateContext<StateUserModel>, { payload }: ActionUserAddToken)
     {
-        const user  : User   = StateUser.user(getState());
-        const token : string = payload;
+        const user   : User   = StateUser.user(getState());
+        const token  : string = payload;
+        const tokens : Array<string> = user.tokens == null ? [token] : [...user.tokens, token];
 
-        user.tokens        = user.tokens == null ? {} : user.tokens;
-        user.tokens[token] = token;
+        user.tokens = tokens;
 
-        return this.service.patch(user[ModelKey.Id], { tokens: user.tokens });
+        patchState({ user });
+
+        return this.service.patch(user[ModelKey.Id], { tokens });
     }
 
     @Action(ActionLoginEmail)

@@ -29,7 +29,6 @@ export class ServiceEvent extends ServiceBase<Event>
             *) On user create, also create dummy first cluster
             *) Update asset-event to use modal picker
             *) On cluster select, add to clusters array
-            *) Replace cluster/event/image/icon collections to use Array<string> from Record<string, DocumentReference>
 
             1) Upload image to storage bucket
             2) Create image in 'images' collection
@@ -38,6 +37,7 @@ export class ServiceEvent extends ServiceBase<Event>
             5) Grab event.clusters[0]
             6) Set cluster.events = {...clusters.events, Record<string, DocumentReference>}
             7) Patch cluster
+            8) Patch user events/images
 
             *) Photo resize cloud function
             *) Create eventClusters as Record<string, Cluster>
