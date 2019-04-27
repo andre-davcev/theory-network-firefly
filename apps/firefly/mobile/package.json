@@ -79,6 +79,7 @@
     "ionicons": "file:../../../node_modules/ionicons",
     "mapbox-gl": "file:../../../node_modules/mapbox-gl",
     "ngx-mapbox-gl": "file:../../../node_modules/ngx-mapbox-gl",
+    "rxfire": "file:../../../node_modules/rxfire",
     "rxjs": "file:../../../node_modules/rxjs",
     "zone.js": "file:../../../node_modules/zone.js"
   },

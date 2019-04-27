@@ -3,26 +3,25 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from } from 'rxjs';
 import { switchMap, map, last } from 'rxjs/operators';
-import { StorageFormat } from '@theory/firebase';
+import { StorageFormat, ModelKey } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
-import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-import { Image } from '@firefly/core/models';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Image, Event, AssetKey } from '@firefly/core/models';
+
+import { ServiceBase } from './base.service';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceImage
+export class ServiceImage extends ServiceBase<Image>
 {
-    private _name: string = 'image';
-    private _collection: AngularFirestoreCollection<Image>;
-
     constructor
     (
-        private firestore: AngularFirestore,
+        firestore: AngularFirestore,
         private storage: AngularFireStorage
     )
     {
-        this.collection = this.firestore.collection<Image>(this.name);
+        super('images', firestore);
     }
 
     public base64(path: string): Observable<string>
@@ -48,23 +47,25 @@ export class ServiceImage
         );
     }
 
-    public set(image: Image): Observable<void>
+    private bucketPath(event: Event): string
     {
-        return from(this.collection.doc(image.id).set(image));
+        return `${event.userId}/${this.name}/${new Date().getTime()}.jpg`;
     }
 
-    public get name(): string
+    public fromEvent(event: Event): Image
     {
-        return this._name;
-    }
+        const id: string = this.bucketPath(event);
 
-    public get collection(): AngularFirestoreCollection<Image>
-    {
-        return this._collection;
-    }
+        const image: Image =
+        {
+            [ModelKey.Id]          : id,
+            [AssetKey.Name]        : '',
+            [AssetKey.Description] : '',
+            [AssetKey.Private]     : true,
+            [AssetKey.UserId]      : event.userId,
+            [AssetKey.Draft]       : false
+        };
 
-    public set collection(collection: AngularFirestoreCollection<Image>)
-    {
-        this._collection = collection;
+        return image;
     }
 }
