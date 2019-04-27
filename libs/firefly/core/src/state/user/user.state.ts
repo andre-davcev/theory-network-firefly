@@ -1,27 +1,34 @@
-import { User as FirebaseUser, auth, UserInfo } from 'firebase/app';
+import { User as FirebaseUser, auth } from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select} from '@ngxs/store';
-import { Observable, of, from } from 'rxjs';
-import { catchError, switchMap, take, filter, tap } from 'rxjs/operators';
+import { Observable, of, from, combineLatest } from 'rxjs';
+import { catchError, switchMap, take, filter, tap, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { AuthProvider, ModelKey } from '@theory/firebase';
-import { StateLanguage, ActionLanguageGet, ActionLanguageSet } from '@theory/capacitor';
+import { ModelKey } from '@theory/firebase';
+import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, UserKey } from '@firefly/core/models';
+import { User } from '@firefly/core/models';
 import { ActionAlertsGet } from '@firefly/core/state/alert';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
-import { ActionUserAuthenticate, ActionUserGet, ActionUserAuthenticateCheck, ActionUserAddToken, ActionLoginEmail, ActionUserLogout } from './user.actions';
+import { ActionUserAuthenticate, ActionUserWatch, ActionUserAuthenticateCheck, ActionUserAddToken, ActionLoginEmail, ActionUserLogout, ActionUserWatchLanguage } from './user.actions';
+import { ServiceUser } from '@firefly/core/services';
 
 @State<StateUserModel>(StateUserOptions)
 
 export class StateUser
 {
-    constructor(private fireAuth: AngularFireAuth, private firestore: AngularFirestore) {}
+    constructor
+    (
+        private fireAuth: AngularFireAuth,
+        private firestore: AngularFirestore,
+        private service: ServiceUser
+    ) { }
 
     @Select(StateLanguage.language) language$: Observable<string>;
+    @Select(StateUser.user)         user$:     Observable<User>;
 
     @Selector() static authData(state: StateUserModel)               {return state.authData;}
     @Selector() static user(state: StateUserModel)                   {return state.user;}
@@ -41,168 +48,111 @@ export class StateUser
     @Selector() static errored(state: StateUserModel)   {return state.error != null;}
     @Selector() static userFound(state: StateUserModel) {return state.user != null;}
 
+    ngxsOnInit(context: StateContext<StateUserModel>)
+    {
+        context.dispatch
+        ([
+            new ActionUserWatchLanguage()
+        ]);
+    }
+
     @Action(ActionUserAuthenticate)
     userAuthenticate({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        patchState({authenticating: true, initializing: true});
+        patchState({ authenticating: true, initializing: true });
 
         return this.fireAuth.authState.pipe
         (
-            switchMap((authData: FirebaseUser) =>
-            {
-                if (authData == null)
-                {
-                    patchState({authenticated: false, authData: authData, authenticating: false});
-
-                    return dispatch(new ActionLanguageGet());
-                }
-                else
-                {
-                    patchState({authData: authData, authenticating: false});
-
-                    return dispatch(new ActionUserGet(authData));
-                }
-            }),
-
             take(1),
-
-            tap(() => patchState({initializing: false})),
-
+            tap((authData: FirebaseUser) => patchState({ authData, authenticating: false, authenticated: authData != null })),
+            switchMap((authData: FirebaseUser) => authData == null ? of() : dispatch(new ActionUserWatch(this.service.parseId(authData)))),
+            tap(() => patchState({ initializing: false })),
             catchError((error: Error) => of(patchState({error, authenticating: false, initializing: false})))
         );
     }
 
     @Action(ActionUserAuthenticateCheck)
-    userAuthenticateCheck({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserAuthenticateCheck)
+    userAuthenticateCheck({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserAuthenticateCheck)
     {
-        return this.language$.pipe
+        return of(payload).
+        pipe
         (
-            filter((language: string) => language != null),
-
-            take(1),
-
-            tap((language: string) =>
+            filter((authData: FirebaseUser) =>
             {
-                const authData: FirebaseUser = payload;
+                const authenticated: boolean = authData != null;
 
-                if (authData == null)
-                {
-                    patchState({authData: undefined, user: undefined, authenticated: false, error: {name: 'Failed Login', message: 'Unable to login'}});
-                }
-                else
-                {
-                    const providerData : UserInfo = {...authData.providerData[0]};
+                patchState
+                ({
+                    authData,
+                    user: undefined,
+                    authenticated,
+                    authenticating: authenticated,
+                    error: authenticated ? undefined : { name: 'Failed Login', message: 'Unable to login' }
+                });
 
-                    const uid         : string = authData.uid;
-                    const providerId  : string = providerData.providerId;
-                    const email       : string = providerData.email;
-                    const id          : string = providerId === AuthProvider.Email ? `${providerId}:${email}` : `${providerId}:${uid}`;
+                return authenticated;
+            }),
 
-                    const user: User =
-                    {
-                        [ModelKey.Id] : id,
-
-                        [UserKey.Uid]         : uid,
-                        [UserKey.Language]    : language,
-                        [UserKey.DisplayName] : providerData.displayName,
-                        [UserKey.Email]       : email,
-                        [UserKey.PhoneNumber] : providerData.phoneNumber,
-                        [UserKey.PhotoUrl]    : providerData.photoURL,
-                        [UserKey.ProviderId]  : providerId,
-                        [UserKey.Tokens]        : {},
-                        [UserKey.Notifications] : {},
-
-                        [UserKey.Clusters] : {},
-                        [UserKey.Events]   : {},
-                        [UserKey.Images]   : {},
-                        [UserKey.Icons]    : {}
-                    };
-
-                    patchState({authData, authenticated: true, user, authenticating: false});
-                }
-            })
+            switchMap((authData: FirebaseUser) => dispatch(new ActionUserWatch(this.service.parseId(authData)))),
+            tap(() => patchState({ authenticated: false }))
         );
     }
 
-    @Action(ActionUserGet)
-    userGet({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserGet)
+    @Action(ActionUserWatch)
+    userWatch({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatch)
     {
-        const providerData: UserInfo = payload.providerData[0];
-        const providerId: string = providerData.providerId;
-        const userId: string = providerId + ':' + (providerId === AuthProvider.Email ? providerData.email : providerData.uid);
-
-        return this.firestore.doc<User>(`user/${userId}`).valueChanges().pipe
+        return this.service.valuesChanges(payload).pipe
         (
             filter((user: User) => user != null),
+            tap((user: User) => patchState({ user })),
+            tap((user: User) => dispatch([new ActionLanguageSet(user.language), new ActionAlertsGet()])),
+            catchError((error: Error) => of(patchState({ error})))
+        );
+    }
 
-            take(1),
-
-            switchMap((user: User) =>
-            {
-                let dependencies$: Observable<void> = of();
-
-                if (user == null)
-                {
-                    patchState({error: {name: 'Could not find user', message: 'Could not find user'}});
-                }
-                else
-                {
-                    patchState({ user: user, authenticated: true, authenticating: false });
-
-                    dependencies$ = dispatch([new ActionLanguageSet(user.language), new ActionAlertsGet()]);
-//                    dispatch(new NotificationsWatch());
-                }
-
-                return dependencies$;
-            }),
-
-            catchError((error: Error) => of(patchState({error: error})))
+    @Action(ActionUserWatchLanguage)
+    userWatchLanguage()
+    {
+        return combineLatest([this.user$, this.language$]).pipe
+        (
+            filter(([user, language]) => user != null && user.language != null && language != null),
+            filter(([user, language]) => user.language !== language),
+            switchMap(([user, language]) => this.service.patch(user.id, { language }))
         );
     }
 
     @Action(ActionUserAddToken)
     userAddToken({ getState }: StateContext<StateUserModel>, { payload }: ActionUserAddToken)
     {
-        const user   : User                   = getState().user;
-        const token  : string                 = payload;
-        const tokens : Record<string, string> = user.tokens == null ? {} : user.tokens;
+        const user  : User   = StateUser.user(getState());
+        const token : string = payload;
 
-        tokens[token] = token;
+        user.tokens       = user.tokens == null ? {} : user.tokens;
+        user.tokens[token] = token;
 
-        return user.tokens != null && user.tokens[token] != null ? of(null) : this.firestore.collection<User>('user').doc(user[ModelKey.Id]).update({tokens});
+        return this.service.patch(user[ModelKey.Id], { tokens: user.tokens });
     }
 
     @Action(ActionLoginEmail)
     loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionLoginEmail)
     {
-        patchState({authenticating: true});
+        patchState({ authenticating: true });
 
         return from(auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
-            switchMap((authData: firebase.auth.UserCredential) => dispatch(new ActionUserAuthenticateCheck(authData.user))),
-
-            catchError((error: Error) => of(patchState({error: error, authenticating: false})))
+            map((userCredential: firebase.auth.UserCredential) => userCredential.user),
+            switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
+            catchError((error: Error) => of(patchState({ error, authenticating: false })))
         );
     }
 
     @Action(ActionUserLogout)
-    userLogout({ patchState, dispatch }: StateContext<StateUserModel>)
+    userLogout({ patchState }: StateContext<StateUserModel>)
     {
         return of(this.fireAuth.auth.signOut()).pipe
         (
-            tap(() =>
-            {
-                patchState
-                ({
-                    authenticated: false,
-                    authData: undefined,
-                    user: undefined
-                });
-
-                dispatch(new ActionUserLogout());
-            }),
-
-            catchError((error: Error) => of(patchState({error: error})))
+            tap(() => patchState({ authenticated: false, authData: undefined, user: undefined })),
+            catchError((error: Error) => of(patchState({ error })))
         );
     }
 }

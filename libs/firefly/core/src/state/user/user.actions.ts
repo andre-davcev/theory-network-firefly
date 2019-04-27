@@ -18,11 +18,16 @@ export class ActionUserAuthenticateCheck
     constructor(public payload: FirebaseUser) {}
 }
 
-export class ActionUserGet
+export class ActionUserWatch
 {
-    static readonly type = ActionsUser.UserGet;
+    static readonly type = ActionsUser.UserWatch;
 
-    constructor(public payload: FirebaseUser) {}
+    constructor(public payload: string) {}
+}
+
+export class ActionUserWatchLanguage
+{
+    static readonly type = ActionsUser.UserWatchLanguage;
 }
 
 export class ActionUserCreate

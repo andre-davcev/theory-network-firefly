@@ -1,0 +1,74 @@
+import { Observable, from } from 'rxjs';
+import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Model, ModelKey } from '@theory/firebase';
+
+export class ServiceBase<T extends Model>
+{
+    private _name: string;
+    private _collection: AngularFirestoreCollection<T>;
+    private _firestore: AngularFirestore
+
+    constructor(name: string, firestore: AngularFirestore)
+    {
+        this.name       = name;
+        this.firestore  = firestore;
+        this.collection = firestore.collection<T>(this.name);
+    }
+
+    public document(id: string): AngularFirestoreDocument<T>
+    {
+        return this.collection.doc(id);
+    }
+
+    public set(object: T): Observable<void>
+    {
+        return from(this.document(object.id).set(object));
+    }
+
+    public patch(id: string, partial: Partial<T>): Observable<void>
+    {
+        return from(this.document(id).update(partial));
+    }
+
+    public create(object: T): Observable<void>
+    {
+        object[ModelKey.Id] = this.firestore.createId();
+
+        return this.set(object);
+    }
+
+    public valuesChanges(id: string): Observable<T>
+    {
+        return this.firestore.doc<T>(`${this.name}/${id}`).valueChanges();
+    }
+
+    protected get name(): string
+    {
+        return this._name;
+    }
+
+    protected set name(name: string)
+    {
+        this._name = name;
+    }
+
+    protected get collection(): AngularFirestoreCollection<T>
+    {
+        return this._collection;
+    }
+
+    protected set collection(collection: AngularFirestoreCollection<T>)
+    {
+        this._collection = collection;
+    }
+
+    protected get firestore(): AngularFirestore
+    {
+        return this._firestore;
+    }
+
+    protected set firestore(firestore: AngularFirestore)
+    {
+        this._firestore = firestore;
+    }
+}
