@@ -14,7 +14,7 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
         entities : {},
         empty    :
         {
-            [ModelKey.Version]     : '1.0.0',
+            [ModelKey.Version]     : undefined,
             [ModelKey.Id]          : undefined,
             [ModelKey.DateCreated] : undefined,
             [ModelKey.DateUpdated] : undefined,

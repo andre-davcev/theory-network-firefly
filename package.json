@@ -127,6 +127,7 @@
     "mapbox-gl": "^0.53.1",
     "ngx-mapbox-gl": "^3.1.0",
     "reflect-metadata": "^0.1.12",
+    "rxfire": "^3.4.1",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
   },

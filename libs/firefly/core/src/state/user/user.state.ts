@@ -1,10 +1,9 @@
-import { User as FirebaseUser, auth } from 'firebase/app';
+import { User as FirebaseUser } from 'firebase/app';
 
-import { State, Selector, Action, StateContext, Select} from '@ngxs/store';
+import { State, Selector, Action, StateContext, Select, NgxsOnInit} from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 import { ModelKey } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
@@ -17,13 +16,11 @@ import { ActionUserAuthenticate, ActionUserWatch, ActionUserAuthenticateCheck, A
 import { ServiceUser } from '@firefly/core/services';
 
 @State<StateUserModel>(StateUserOptions)
-
-export class StateUser
+export class StateUser implements NgxsOnInit
 {
     constructor
     (
         private fireAuth: AngularFireAuth,
-        private firestore: AngularFirestore,
         private service: ServiceUser
     ) { }
 
@@ -104,6 +101,15 @@ export class StateUser
         return this.service.valuesChanges(payload).pipe
         (
             filter((user: User) => user != null),
+            map((user: User) =>
+            {
+                const empty: User = JSON.parse(JSON.stringify(StateUserOptions.defaults.empty));
+
+                return {
+                    ...empty,
+                    user
+                };
+            }),
             tap((user: User) => patchState({ user })),
             tap((user: User) => dispatch([new ActionLanguageSet(user.language), new ActionAlertsGet()])),
             catchError((error: Error) => of(patchState({ error})))
@@ -138,7 +144,7 @@ export class StateUser
     {
         patchState({ authenticating: true });
 
-        return from(auth().signInWithEmailAndPassword(payload.id, payload.password)).pipe
+        return from(this.fireAuth.auth.signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             map((userCredential: firebase.auth.UserCredential) => userCredential.user),
             switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
