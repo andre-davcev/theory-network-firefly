@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from } from 'rxjs';
-import { switchMap, map, last } from 'rxjs/operators';
+import { switchMap, map, last, tap } from 'rxjs/operators';
 import { StorageFormat, ModelKey } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Image, Event, AssetKey } from '@firefly/core/models';
+import { Image, Event, AssetKey, EventKey } from '@firefly/core/models';
 
 import { ServiceBase } from './base.service';
 
@@ -47,9 +47,27 @@ export class ServiceImage extends ServiceBase<Image>
         );
     }
 
-    private bucketPath(event: Event): string
+    public createWithUpload(event: Event, imagePath: string): Observable<Event>
     {
-        return `${event.userId}/${this.name}/${new Date().getTime()}.jpg`;
+        const image:      Image  = this.fromEvent(event);
+        const bucketPath: string = this.toBucketPath(image.id);
+
+        event =
+        {
+            ...event,
+            [EventKey.ImageId]: image.id
+        };
+
+        return this.upload(imagePath, bucketPath).pipe
+        (
+            switchMap(() => this.set(image)),
+            map(() => event)
+        );
+    }
+
+    private id(event: Event): string
+    {
+        return `${event.userId}-${this.name}-${new Date().getTime()}.jpg`;
     }
 
     private toId(bucketPath: string): string
@@ -64,11 +82,9 @@ export class ServiceImage extends ServiceBase<Image>
 
     public fromEvent(event: Event): Image
     {
-        const id: string = this.bucketPath(event);
-
         const image: Image =
         {
-            [ModelKey.Id]          : id,
+            [ModelKey.Id]          : this.id(event),
             [AssetKey.Name]        : '',
             [AssetKey.Description] : '',
             [AssetKey.Private]     : true,
