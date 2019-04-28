@@ -1,6 +1,7 @@
 import { Observable, from } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentSnapshot, Action } from '@angular/fire/firestore';
 import { Model, ModelKey } from '@theory/firebase';
+import { map } from 'rxjs/operators';
 
 export class ServiceBase<T extends Model>
 {
@@ -30,11 +31,14 @@ export class ServiceBase<T extends Model>
         return from(this.document(id).update(partial));
     }
 
-    public create(object: T): Observable<void>
+    public create(object: T): Observable<T>
     {
         object[ModelKey.Id] = this.firestore.createId();
 
-        return this.set(object);
+        return this.set(object).pipe
+        (
+             map(() => object)
+        );
     }
 
     public delete(object: T): Observable<void>
@@ -51,6 +55,7 @@ export class ServiceBase<T extends Model>
     {
         return this.document(id).snapshotChanges();
     }
+
     public clone(object: T): T
     {
         return JSON.parse(JSON.stringify(object));

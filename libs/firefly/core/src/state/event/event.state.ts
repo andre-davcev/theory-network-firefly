@@ -1,11 +1,11 @@
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, tap, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
 import { User, Event, Cluster, Location, Time } from '@firefly/core/models';
-import { ServiceEvent } from '@firefly/core/services';
+import { ServiceEvent, ServiceImage } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
 import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation, ActionEventSave, ActionEventCreate, ActionEventUpdate, ActionEventWatch, ActionEventSetImage } from './event.actions';
@@ -17,7 +17,7 @@ import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { RepeatType } from '@firefly/core/enums';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { UserKey, ClusterKey } from '@firefly/core/models';
+import { ClusterKey } from '@firefly/core/models';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -221,7 +221,8 @@ export class StateEvent
         private service: ServiceEvent,
         private formBuilder: FormBuilder,
         private store: Store,
-        private webview: WebView
+        private webview: WebView,
+        private image: ServiceImage
     ) { }
 
     @Action(ActionGetEvents)
@@ -372,13 +373,40 @@ export class StateEvent
     }
 
     @Action(ActionEventCreate)
-    create({ getState }: StateContext<StateEventModel>)
+    create({ getState, patchState }: StateContext<StateEventModel>)
     {
-        const state: StateEventModel = getState();
-        const event: Event           = StateEvent.event(state);
-        const imageUrl: string       = StateEvent.eventImageUrl(state);
+        /*
+            *) Update asset-event to use modal picker
+            *) On cluster select, add to clusters array
+            *) Grab event.clusters[0]
+            *) Set cluster.events = {...clusters.events, Record<string, DocumentReference>}
+            *) Patch cluster
+            *) Patch user events/images
 
-        return this.service.createWithImage(event, imageUrl);
+            *) In event watch, write downloadUrl to event state
+            *) Create downloadUrl @Selector
+            *) Photo resize cloud function
+            *) On user create, also create dummy first cluster
+            *) Create eventClusters as Record<string, Cluster>
+            *) NGXS event create action
+            *) Update and test all cloud functions
+            *) Add loading screen while creating/updating
+            *) Add toast for success/error
+            *) Install copilot
+        */
+
+        const state: StateEventModel = getState();
+        const e: Event               = StateEvent.event(state);
+        const imageUrl: string       = StateEvent.eventImageUrl(state);
+        const form: FormGroup        = StateEvent.form(state);
+
+        return this.image.createWithUpload(e, imageUrl).
+        pipe
+        (
+            switchMap((event: Event) => this.service.create(event)),
+            tap((event: Event) => form.reset(event)),
+            tap(() => patchState({ form }))
+        );
     }
 
     @Action(ActionEventUpdate)
