@@ -5,9 +5,10 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Cluster, StateCluster, ActionGetClusters } from '@firefly/core';
+import { Cluster, StateUser } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
+import { ModalController } from '@ionic/angular';
 
 @Component
 ({
@@ -18,12 +19,12 @@ import { Pages } from '../pages.enum';
 
 export class PageAssetsClusters
 {
-    @Select(StateCluster.clusters)      clusters$:      Observable<Array<Cluster>>;
-    @Select(StateCluster.clustersFound) clustersFound$: Observable<boolean>;
+    @Select(StateUser.clusters)      clusters$:      Observable<Array<Cluster>>;
+    @Select(StateUser.clustersFound) clustersFound$: Observable<boolean>;
 
     @Input() modal: boolean = false;
 
-    constructor(private store: Store, private modalController) { }
+    constructor(private store: Store, private modalController: ModalController) { }
 
     add(): void
     {
@@ -34,7 +35,7 @@ export class PageAssetsClusters
     {
         this.store.dispatch
         ([
-            new ActionGetClusters(),
+//            new ActionGetClusters(),
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark})
         ]);
     }

@@ -38,7 +38,7 @@ export class StateUser implements NgxsOnInit
     @Selector() static loading(state: StateUserModel): boolean                    {return state.authenticating || state.initializing;}
     @Selector() static loadedNotAuthenticated(state: StateUserModel):boolean      {return !StateUser.loading(state) && !StateUser.authenticated(state);}
     @Selector() static error(state: StateUserModel): Error                        {return state.error;}
-    @Selector() static clusterMap(state: StateUserModel): Record<string, Cluster> { return state.clusters;}
+    @Selector() static clusterMap(state: StateUserModel): Record<string, Cluster> {return state.clusters;}
     @Selector() static errored(state: StateUserModel)                             {return state.error != null;}
     @Selector() static userFound(state: StateUserModel)                           {return state.user != null;}
 
@@ -127,8 +127,8 @@ export class StateUser implements NgxsOnInit
                     ...user
                 };
             }),
-            tap((user: User) => console.log(user)),
             tap((user: User) => patchState({ user })),
+            tap(user => console.log(user)),
             tap((user: User) => dispatch
             ([
                 new ActionLanguageSet(user.language),
@@ -187,7 +187,7 @@ export class StateUser implements NgxsOnInit
         );
     }
 
-    @Action(ActionUserWatchClusters, { })
+    @Action(ActionUserWatchClusters, { cancelUncompleted: true })
     watchUserClusters({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserWatchClusters)
     {
         const ids: Array<string> = payload == null ? [] : payload;

@@ -77,7 +77,6 @@ export class ServiceImage extends ServiceBase<Image>
 
     public toBucketPath(id: string): string
     {
-        console.log(id.replace(/-/g, '/'));
         return id.replace(/-/g, '/');
     }
 
