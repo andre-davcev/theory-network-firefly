@@ -52,6 +52,16 @@ export class ServiceImage extends ServiceBase<Image>
         return `${event.userId}/${this.name}/${new Date().getTime()}.jpg`;
     }
 
+    private toId(bucketPath: string): string
+    {
+        return bucketPath.replace('/', '-');
+    }
+
+    private toBucketPath(id: string): string
+    {
+        return id.replace('-', '/');
+    }
+
     public fromEvent(event: Event): Image
     {
         const id: string = this.bucketPath(event);
