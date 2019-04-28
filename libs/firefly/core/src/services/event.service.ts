@@ -25,11 +25,8 @@ export class ServiceEvent extends ServiceBase<Event>
         const image: Image = this.image.fromEvent(event);
 
         /*
-            *) Create first cluster
-            *) On user create, also create dummy first cluster
-            *) Update asset-event to use modal picker
-            *) On cluster select, add to clusters array
-
+            *) Move image code to image service
+            *) Split up code so it can be used by event state
             1) Upload image to storage bucket
             2) Create image in 'images' collection
             3) Patch event with image id
@@ -39,7 +36,12 @@ export class ServiceEvent extends ServiceBase<Event>
             7) Patch cluster
             8) Patch user events/images
 
+            *) In event watch, write downloadUrl to event state
+            *) Create downloadUrl @Selector
+            *) Update asset-event to use modal picker
+            *) On cluster select, add to clusters array
             *) Photo resize cloud function
+            *) On user create, also create dummy first cluster
             *) Create eventClusters as Record<string, Cluster>
             *) NGXS event create action
             *) Update and test all cloud functions

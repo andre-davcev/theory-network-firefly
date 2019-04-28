@@ -51,6 +51,10 @@ export class ServiceBase<T extends Model>
     {
         return this.document(id).snapshotChanges();
     }
+    public clone(object: T): T
+    {
+        return JSON.parse(JSON.stringify(object));
+    }
 
     protected get name(): string
     {
