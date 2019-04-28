@@ -95,13 +95,14 @@
   "page.assets-icon.descriptionPlaceholder" : "Description",
   "page.assets-icon.iconPlaceholder"        : "select icon",
 
-  "page.assets-icons.title"    : "Icons",
-  "page.assets-images.title"   : "Images",
-  "page.assets-coupons.title"  : "Coupons",
-  "page.assets-beacons.title"  : "Beacons",
-  "page.assets-places.title"   : "Places",
-  "page.assets-events.title"   : "Events",
-  "page.assets-clusters.title" : "Firefly Clusters",
+  "page.assets-icons.title"          : "Icons",
+  "page.assets-images.title"         : "Images",
+  "page.assets-coupons.title"        : "Coupons",
+  "page.assets-beacons.title"        : "Beacons",
+  "page.assets-places.title"         : "Places",
+  "page.assets-events.title"         : "Events",
+  "page.assets-clusters.title"       : "Firefly Clusters",
+  "page.assets-clusters.title-modal" : "Select Cluster",
 
   "page.alert.title" : "Alert",
 

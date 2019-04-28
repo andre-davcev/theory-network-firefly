@@ -11,7 +11,6 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
     defaults :
     {
         form     : undefined,
-        entities : {},
         empty    :
         {
             [ModelKey.Version]     : undefined,
@@ -28,7 +27,8 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
             [EventKey.Tagline]  : null,
             [EventKey.ImageId]  : undefined,
             [EventKey.Location] : undefined,
-            [EventKey.Times]    : []
+            [EventKey.Times]    : [],
+            [EventKey.Clusters] : []
         },
 
         imageUrl           : undefined,

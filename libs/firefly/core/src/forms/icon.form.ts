@@ -19,7 +19,6 @@ export class FormIcon extends FormGenerator<Icon>
           draft       : true,
           name        : null,
           description : null,
-          url         : null,
           private     : true
         };
     }
@@ -31,8 +30,7 @@ export class FormIcon extends FormGenerator<Icon>
             draft       : icon.draft,
             name        : [icon.name,        ValidatorsExtended.minLength(1)],
             description : [icon.description, ValidatorsExtended.minLength(1)],
-            private     : icon.private,
-            url         : [icon.url,        Validators.required]
+            private     : icon.private
         });
 
         return formGroup;

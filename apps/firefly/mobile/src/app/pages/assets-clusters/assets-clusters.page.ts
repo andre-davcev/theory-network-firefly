@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 import { Select, Store } from '@ngxs/store'
 import { Navigate } from '@ngxs/router-plugin';
@@ -18,9 +18,12 @@ import { Pages } from '../pages.enum';
 
 export class PageAssetsClusters
 {
-    @Select(StateCluster.clusters) clusters$: Observable<Array<Cluster>>;
+    @Select(StateCluster.clusters)      clusters$:      Observable<Array<Cluster>>;
+    @Select(StateCluster.clustersFound) clustersFound$: Observable<boolean>;
 
-    constructor(private store: Store) { }
+    @Input() modal: boolean = false;
+
+    constructor(private store: Store, private modalController) { }
 
     add(): void
     {
@@ -34,5 +37,17 @@ export class PageAssetsClusters
             new ActionGetClusters(),
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark})
         ]);
+    }
+
+    public cancel(): void
+    {
+        this.modalController.dismiss();
+    }
+
+
+    public select(): void
+    {
+
+        this.modalController.dismiss();
     }
 }

@@ -17,14 +17,19 @@ export class StateCluster
 {
     @Select(StateUser.user) user$:Observable<User>;
 
-    constructor(private clusterService: ServiceCluster, private formCluster: FormCluster) {}
+    constructor
+    (
+        private clusterService: ServiceCluster,
+        private formCluster:    FormCluster
+    ) {}
 
     @Selector() static entities(state: StateClusterModel) {return state.entities;}
     @Selector() static id(state: StateClusterModel)       {return state.id;}
     @Selector() static form(state: StateClusterModel)     {return state.form;}
 
-    @Selector() static clusters(state: StateClusterModel) {return Object.keys(state.entities).map(id => state.entities[id]);}
-    @Selector() static entity(state: StateClusterModel)   {return state.entities[state.id];}
+    @Selector() static clusters(state: StateClusterModel)      {return Object.keys(state.entities).map(id => state.entities[id]);}
+    @Selector() static clustersFound(state: StateClusterModel) {return Object.keys(state.entities).length > 0;}
+    @Selector() static entity(state: StateClusterModel)        {return state.entities[state.id];}
 
     @Action(ActionGetClusters)
     getClusters({ patchState } : StateContext<StateClusterModel>)

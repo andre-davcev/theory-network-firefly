@@ -8,5 +8,6 @@ export enum ActionsUser
     UserAddToken          = '[User] User Add Token',
     LoginEmail            = '[User] Login Email',
     UserLogout            = '[User] User Logout',
-    UserSet               = '[User] User Set'
+    UserSet               = '[User] User Set',
+    UserWatchClusters     = '[User] Watch Clusters'
 }

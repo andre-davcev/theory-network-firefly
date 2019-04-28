@@ -1,4 +1,3 @@
-import { Cluster } from '@firefly/core/models';
 import { ActionsCluster } from './cluster.actions.enum';
 
 export class ActionGetClusters

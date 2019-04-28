@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable, from, of } from 'rxjs';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable, from } from 'rxjs';
 import { switchMap, take, filter, map } from 'rxjs/operators';
 
 import { Cluster } from '@firefly/core/models';
+import { ServiceBase } from './base.service';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceCluster
+export class ServiceCluster extends ServiceBase<Cluster>
 {
-    private clustersCollection: AngularFirestoreCollection<Cluster>;
-
-    constructor (private afs: AngularFirestore){
-        this.clustersCollection = afs.collection<Cluster>('clusters');
+    constructor (firestore: AngularFirestore)
+    {
+        super('clusters', firestore);
     }
 
     getClusters(userid:String): Observable<Cluster[]>
@@ -57,7 +57,7 @@ export class ServiceCluster
           })
         );*/
 
-        return this.afs.collection<Cluster>('clusters', ref => {
+        return this.firestore.collection<Cluster>('clusters', ref => {
             return ref.where('userId', '==', 'myuser')
         })
         .snapshotChanges()
@@ -71,25 +71,20 @@ export class ServiceCluster
         }));
     }
 
-    updateCluster()
-    {
-
-    }
-
     setCluster(cluster:Cluster): Observable<Cluster>
     {
-        const id = this.afs.createId();
+        const id = this.firestore.createId();
         cluster.id = id;
         console.log(cluster.id);
         cluster.userId = 'myuser';
-        cluster.icon = 'https://loremflickr.com/640/360';
-        const document: AngularFirestoreDocument<Cluster> = this.clustersCollection.doc(id) as AngularFirestoreDocument<Cluster>;
+        cluster.iconId = 'https://loremflickr.com/640/360';
+        const document: AngularFirestoreDocument<Cluster> = this.collection.doc(id) as AngularFirestoreDocument<Cluster>;
 
         return from(document.set(cluster)).pipe
         (
             switchMap(() => document.valueChanges()),
 
-            filter((cluster: Cluster) => cluster.dateCreated != null),
+            filter((c: Cluster) => cluster.dateCreated != null),
 
             take(1)
         );

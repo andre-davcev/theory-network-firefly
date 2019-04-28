@@ -12,6 +12,7 @@ export class ServiceSubscriptions
     {
         const subscriptions: Array<Subscription> =
         [
+/*
             {
                 name        : 'Pokemon Go Rochester Nests',
                 tagline     : 'Get alerts for all your favorite Pokemon nests',
@@ -53,6 +54,7 @@ export class ServiceSubscriptions
                 draft       : false,
                 userId      : ''
             }
+*/
         ];
 
         return of(subscriptions);

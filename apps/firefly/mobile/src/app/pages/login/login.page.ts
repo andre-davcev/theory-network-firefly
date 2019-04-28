@@ -30,12 +30,12 @@ export class PageLogin implements OnInit
 
     public ngOnInit(): void
     {
-        this.login();
+//        this.login();
         this.userFound$.
         pipe(filter((userFound: boolean) => userFound), take(1)).
         subscribe(() => this.nav.navigateRoot('/home'))
 
-        this.store.dispatch([new ActionDeviceStatusBarShow(), new ActionUserAuthenticate()]);
+        this.store.dispatch([new ActionDeviceStatusBarShow()]);
     }
 
     public ionViewWillEnter(): void

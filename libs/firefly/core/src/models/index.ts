@@ -11,7 +11,6 @@ export * from './icon.model';
 export * from './image.model';
 export * from './location.model';
 export * from './pin.model';
-export * from './place.model';
 export * from './subscription.model';
 export * from './time.model';
 export * from './user.model.key';
