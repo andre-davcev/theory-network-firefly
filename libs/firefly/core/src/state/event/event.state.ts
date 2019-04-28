@@ -24,7 +24,7 @@ export class StateEvent
     @Select(StateUser.user)               user$:              Observable<User>;
     @Select(StateEvent.eventTimeEndValid) eventTimeEndValid$: Observable<boolean>;
 
-    @Selector() static form(state: StateEventModel): FormGroup                 { return state.form; }
+    @Selector() static form(state: StateEventModel): FormGroup { return state.form; }
 
     @Selector() static event(state: StateEventModel): Event
     {
@@ -139,8 +139,8 @@ export class StateEvent
 
         const event: Event = !isNew ? undefined :
         {
+            ...this.service.clone(StateEventOptions.defaults.empty),
             id,
-            ...StateEventOptions.defaults.empty,
             userId,
             times:
             [
@@ -156,7 +156,7 @@ export class StateEvent
     }
 
     @Action(ActionEventSet)
-    setEvent({ patchState, getState } : StateContext<StateEventModel>, { payload }: ActionEventSet)
+    setEvent({ patchState } : StateContext<StateEventModel>, { payload }: ActionEventSet)
     {
         const event: Event  = payload;
         const id:    string = event[ModelKey.Id];
@@ -187,7 +187,7 @@ export class StateEvent
     @Action(ActionEventWatch, { cancelUncompleted: true })
     eventWatch({ dispatch } : StateContext<StateEventModel>, { id, event }: ActionEventWatch)
     {
-        const event$: Observable<Event> = event == null ? of(event) : this.service.valuesChanges(id);
+        const event$: Observable<Event> = id === CoreEnum.IdNew ? of(event) : this.service.valuesChanges(id);
 
         return event$.pipe
         (
@@ -234,7 +234,7 @@ export class StateEvent
     }
 
     @Action(ActionEventSetImage)
-    setImageIndex({ patchState, dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
+    setImageIndex({ patchState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
     {
         const imageUrl: string = payload;
         const imageUrlNormalized: string = this.webview.convertFileSrc(imageUrl);
@@ -244,8 +244,6 @@ export class StateEvent
             imageUrl,
             imageUrlNormalized
         });
-
-        dispatch(new ActionEventCreate());
     }
 
     @Action(ActionEventSave)
