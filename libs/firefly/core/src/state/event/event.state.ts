@@ -258,6 +258,8 @@ export class StateEvent
     create({ getState, patchState }: StateContext<StateEventModel>)
     {
         /*
+            ToDo:
+
             *) Update asset-event to use modal picker
             *) On cluster select, add to clusters array
             *) Set cluster.events = { ...clusters.events, event.clusters[0]}

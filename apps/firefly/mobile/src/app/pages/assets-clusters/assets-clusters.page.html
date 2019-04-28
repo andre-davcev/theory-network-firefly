@@ -1,8 +1,11 @@
 <ion-header>
-    <ion-toolbar elevation="2" color="dark">
-        <ion-title color="primary">{{modal ? 'page.assets-clusters.title-modal' : 'page.assets-clusters.title' | translate}}</ion-title>
+    <ion-toolbar color="white">
+        <ion-title color="dark">
+            {{ (modal ? 'page.assets-clusters.title-modal' : 'page.assets-clusters.title') | translate}}
+        </ion-title>
+
         <ion-buttons slot="start">
-            <ion-back-button *ngIf="!modal" color="primary"></ion-back-button>
+            <ion-back-button *ngIf="!modal" color="dark"></ion-back-button>
 
             <ion-button *ngIf="modal" color="dark" (click)="cancel()">
                 {{ 'general.cancel' | translate }}
