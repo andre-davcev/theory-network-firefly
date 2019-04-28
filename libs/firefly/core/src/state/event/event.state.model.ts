@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 
-import { Event } from '@firefly/core/models';
+import { Event, Cluster } from '@firefly/core/models';
 
 export interface StateEventModel
 {
@@ -8,4 +8,5 @@ export interface StateEventModel
     empty              : Event;
     imageUrl           : string;
     imageUrlNormalized : string;
+    clusterPrimary     : Cluster;
 }
