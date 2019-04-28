@@ -70,14 +70,15 @@ export class ServiceImage extends ServiceBase<Image>
         return `${event.userId}-${this.name}-${new Date().getTime()}.jpg`;
     }
 
-    private toId(bucketPath: string): string
+    public toId(bucketPath: string): string
     {
-        return bucketPath.replace('/', '-');
+        return bucketPath.replace(/\//g, '-');
     }
 
-    private toBucketPath(id: string): string
+    public toBucketPath(id: string): string
     {
-        return id.replace('-', '/');
+        console.log(id.replace(/-/g, '/'));
+        return id.replace(/-/g, '/');
     }
 
     public fromEvent(event: Event): Image

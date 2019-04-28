@@ -4,32 +4,27 @@ import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/stor
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
-import { User, Event, Cluster, Location, Time } from '@firefly/core/models';
+import { User, Event, Location, Time } from '@firefly/core/models';
 import { ServiceEvent, ServiceImage } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
 import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation, ActionEventSave, ActionEventCreate, ActionEventUpdate, ActionEventWatch, ActionEventSetImage } from './event.actions';
 import { EventKey, AssetKey } from '@firefly/core/models';
 import { ModelKey } from '@theory/firebase';
-import { firestore } from 'firebase';
 import { ValidatorsExtended, CoreEnum, DateUtil } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { RepeatType } from '@firefly/core/enums';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { ClusterKey } from '@firefly/core/models';
 
 @State<StateEventModel>(StateEventOptions)
 
 export class StateEvent
 {
-    @Select(StateUser.user) user$:Observable<User>;
+    @Select(StateUser.user)               user$:              Observable<User>;
     @Select(StateEvent.eventTimeEndValid) eventTimeEndValid$: Observable<boolean>;
 
-    @Selector() static entities(state: StateEventModel): Record<string, Event> { return state.entities; }
     @Selector() static form(state: StateEventModel): FormGroup                 { return state.form; }
-
-    @Selector() static events(state: StateEventModel): Array<Event> { return Object.keys(state.entities).map(id => state.entities[id]); }
 
     @Selector() static event(state: StateEventModel): Event
     {
@@ -50,63 +45,11 @@ export class StateEvent
         return id == null || id === CoreEnum.IdNew;
     }
 
-    @Selector() static eventIsValid(state: StateEventModel): boolean
-    {
-        const form: FormGroup = StateEvent.form(state);
-
-        return form == null ? false : form.valid;
-    }
-
     @Selector() static eventCanUpdate(state: StateEventModel): boolean
     {
         const form: FormGroup = StateEvent.form(state);
 
         return form == null ? false : form.valid && form.dirty;
-    }
-
-    @Selector() static eventDateCreated(state: StateEventModel): Date
-    {
-        return state.form == null ? undefined : (state.form.get(ModelKey.DateCreated).value as firestore.Timestamp).toDate();
-    }
-
-    @Selector() static eventDateUpdated(state: StateEventModel): Date
-    {
-        return state.form == null ? undefined : (state.form.get(ModelKey.DateUpdated).value as firestore.Timestamp).toDate();
-    }
-
-    @Selector() static eventName(state: StateEventModel): string
-    {
-        return state.form == null ? '' : state.form.get(AssetKey.Name).value;
-    }
-
-    @Selector() static eventDescription(state: StateEventModel): string
-    {
-        return state.form == null ? '' : state.form.get(AssetKey.Description).value;
-    }
-
-    @Selector() static eventIsPrivate(state: StateEventModel): boolean
-    {
-        return state.form == null ? true : state.form.get(AssetKey.Name).value;
-    }
-
-    @Selector() static eventUserId(state: StateEventModel): string
-    {
-        return state.form == null ? '' : state.form.get(AssetKey.UserId).value;
-    }
-
-    @Selector() static eventIsDraft(state: StateEventModel): string
-    {
-        return state.form == null ? '' : state.form.get(AssetKey.Draft).value;
-    }
-
-    @Selector() static eventTagline(state: StateEventModel): string
-    {
-        return state.form == null ? '' : state.form.get(EventKey.Tagline).value;
-    }
-
-    @Selector() static eventImageId(state: StateEventModel): string
-    {
-        return state.form == null ? '' : state.form.get(EventKey.ImageId).value;
     }
 
     @Selector() static eventImageUrl(state: StateEventModel): string
@@ -118,51 +61,6 @@ export class StateEvent
     {
         return state.imageUrlNormalized;
     }
-
-    @Selector() static eventImageUrlDefined(state: StateEventModel): boolean
-    {
-        return StateEvent.eventImageUrl(state) != null;
-    }
-
-    @Selector() static eventClusterIds(state: StateEventModel): Array<string>
-    {
-        return state.form == null ? '' : state.form.get(EventKey.Clusters).value;
-    }
-
-    @Selector() static eventClusters(state: StateEventModel): Array<Cluster>
-    {
-        const clusterIds: Array<string> = StateEvent.eventClusterIds(state);
-
-        // ToDo: Lookup cluster ids and return Cluster array
-        // ToDo: Setup cluster collection watcher
-        return [];
-    }
-
-    @Selector() static eventClusterCount(state: StateEventModel): number
-    {
-        const clusterIds: Array<string> = StateEvent.eventClusterIds(state);
-
-        return clusterIds == null ? 0 : clusterIds.length;
-    }
-
-    @Selector() static eventClusterFirst(state: StateEventModel): Cluster
-    {
-        const clusters: Array<Cluster> = StateEvent.eventClusters(state);
-
-        return clusters == null ? undefined : clusters[0];
-    }
-
-    @Selector() static eventIconUrl(state: StateEventModel): string
-    {
-        const cluster: Cluster = StateEvent.eventClusterFirst(state);
-        const iconId: string   = cluster[ClusterKey.IconId]; // ToDo: Change to StateIcon.iconUrl()
-
-        // ToDo: Lookup iconId and return icon url
-        // ToDo: Setup icon collection watcher
-        return '';
-    }
-
-    @Selector() static eventIcon(state: StateEventModel): Array<string> { return state.form.get(EventKey.Clusters).value; }
 
     @Selector() static eventLocation(state: StateEventModel): Location
     {
@@ -284,20 +182,6 @@ export class StateEvent
         });
 
         patchState({ form });
-
-        if (id !== CoreEnum.IdNew)
-        {
-            const entities: Record<string, Event> = StateEvent.entities(getState());
-
-            patchState
-            ({
-                entities:
-                {
-                    ...entities,
-                    [id]: event
-                }
-            });
-        }
     }
 
     @Action(ActionEventWatch, { cancelUncompleted: true })
@@ -378,8 +262,7 @@ export class StateEvent
         /*
             *) Update asset-event to use modal picker
             *) On cluster select, add to clusters array
-            *) Grab event.clusters[0]
-            *) Set cluster.events = {...clusters.events, Record<string, DocumentReference>}
+            *) Set cluster.events = { ...clusters.events, event.clusters[0]}
             *) Patch cluster
             *) Patch user events/images
 
@@ -395,10 +278,10 @@ export class StateEvent
             *) Install copilot
         */
 
-        const state: StateEventModel = getState();
-        const e: Event               = StateEvent.event(state);
-        const imageUrl: string       = StateEvent.eventImageUrl(state);
-        const form: FormGroup        = StateEvent.form(state);
+        const state:    StateEventModel = getState();
+        const e:        Event           = StateEvent.event(state);
+        const imageUrl: string          = StateEvent.eventImageUrl(state);
+        const form:     FormGroup       = StateEvent.form(state);
 
         return this.image.createWithUpload(e, imageUrl).
         pipe
@@ -415,7 +298,7 @@ export class StateEvent
 
     }
 
-    private validateEventTimeEndValid(): Observable<{[key: string]: any} | null>
+    private validateEventTimeEndValid(): Observable<Record<string, any> | null>
     {
         return this.eventTimeEndValid$.pipe
         (

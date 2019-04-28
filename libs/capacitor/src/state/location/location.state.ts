@@ -34,18 +34,8 @@ export class StateLocation
         return from(Geolocation.getCurrentPosition()).
         pipe
         (
-            tap((location: GeolocationPosition) =>
-            {
-                console.log('found location');
-                console.log(location);
-                patchState({ location });
-            }),
-            catchError((error: any) =>
-            {
-                console.log('error finding location');
-                console.log(error);
-                return of(error);
-            })
+            tap((location: GeolocationPosition) => patchState({ location })),
+            catchError((error: any) => of(error))
         );
     }
 }

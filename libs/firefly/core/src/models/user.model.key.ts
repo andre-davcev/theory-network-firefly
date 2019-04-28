@@ -14,5 +14,5 @@ export enum UserKey
     Clusters = 'clusters',
     Events   = 'events',
     Images   = 'images',
-    Icons    = 'Icons'
+    Icons    = 'icons'
 }

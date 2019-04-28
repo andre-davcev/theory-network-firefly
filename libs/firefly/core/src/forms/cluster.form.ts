@@ -19,11 +19,9 @@ export class FormCluster extends FormGenerator<Cluster>
           name        : null,
           tagline     : null,
           description : null,
-          icon        : null,
-          photo       : null,
-          categories  : '',
+          iconId      : null,
           private     : true,
-          locations   : []
+          events      : []
         };
     }
 
@@ -35,11 +33,9 @@ export class FormCluster extends FormGenerator<Cluster>
             name        : [cluster.name,        [Validators.required, ValidatorsExtended.minLength(3)]],
             tagline     : [cluster.tagline,     [Validators.required, ValidatorsExtended.minLength(3)]],
             description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(3)]],
-            icon        : [cluster.icon],
-            photo       : [cluster.photo],
-            categories  : [cluster.categories],
+            iconId      : [cluster.iconId],
             private     : cluster.private,
-            locations   : this.formBuilder.array(cluster.locations)
+            events      : this.formBuilder.array(cluster.events)
         });
 
         return formGroup;

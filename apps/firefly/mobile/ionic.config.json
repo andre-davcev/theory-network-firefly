@@ -1,6 +1,6 @@
 {
   "name": "Firefly",
+  "integrations": {},
   "type": "angular",
-  "pro_id": "com.theorynetwork.Firefly",
-  "integrations": {}
+  "id": "com.theorynetwork.Firefly"
 }

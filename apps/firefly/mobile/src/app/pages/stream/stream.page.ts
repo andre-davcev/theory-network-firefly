@@ -20,13 +20,14 @@ export class PageStream
     constructor(private store: Store)
     {
       console.log('in constructor');
+      /*
         const cluster: Cluster =
         {
             userId      : 'testUser',
             name        : 'My First Cluster',
             description : 'My description'
         };
-
+*/
         //this.store.dispatch(new ActionSetCluster(cluster));
     }
 

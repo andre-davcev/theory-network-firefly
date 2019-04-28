@@ -1,19 +1,20 @@
 import { User as FirebaseUser } from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select, NgxsOnInit} from '@ngxs/store';
-import { Observable, of, from, combineLatest } from 'rxjs';
+import { Observable, of, from, combineLatest, forkJoin } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { ModelKey } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User } from '@firefly/core/models';
+import { User, UserKey, Cluster } from '@firefly/core/models';
 import { ActionAlertsGet } from '@firefly/core/state/alert';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
-import { ActionUserAuthenticate, ActionUserWatch, ActionUserAuthenticateCheck, ActionUserAddToken, ActionLoginEmail, ActionUserLogout, ActionUserWatchLanguage } from './user.actions';
-import { ServiceUser } from '@firefly/core/services';
+import { ActionUserAuthenticate, ActionUserWatch, ActionUserAuthenticateCheck, ActionUserAddToken, ActionLoginEmail, ActionUserLogout, ActionUserWatchLanguage, ActionUserWatchClusters } from './user.actions';
+import { ServiceUser, ServiceCluster, ServiceImage } from '@firefly/core/services';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser implements NgxsOnInit
@@ -21,35 +22,51 @@ export class StateUser implements NgxsOnInit
     constructor
     (
         private fireAuth: AngularFireAuth,
-        private service: ServiceUser
+        private service: ServiceUser,
+        private cluster: ServiceCluster,
+        private image:   ServiceImage,
+        private storage: AngularFireStorage
     ) { }
 
     @Select(StateLanguage.language) language$: Observable<string>;
     @Select(StateUser.user)         user$:     Observable<User>;
 
-    @Selector() static authData(state: StateUserModel)               {return state.authData;}
-    @Selector() static user(state: StateUserModel)                   {return state.user;}
-    @Selector() static authenticated(state: StateUserModel)          {return state.authenticated;}
-    @Selector() static authenticating(state: StateUserModel)         {return state.authenticating;}
-    @Selector() static loading(state: StateUserModel)                {return state.authenticating || state.initializing;}
-    @Selector() static loadedNotAuthenticated(state: StateUserModel) {return !StateUser.loading && !StateUser.authenticated;}
-    @Selector() static error(state: StateUserModel)                  {return state.error;}
+    @Selector() static authData(state: StateUserModel): FirebaseUser              {return state.authData;}
+    @Selector() static user(state: StateUserModel): User                          {return state.user;}
+    @Selector() static authenticated(state: StateUserModel): boolean              {return state.authenticated;}
+    @Selector() static authenticating(state: StateUserModel): boolean             {return state.authenticating;}
+    @Selector() static loading(state: StateUserModel): boolean                    {return state.authenticating || state.initializing;}
+    @Selector() static loadedNotAuthenticated(state: StateUserModel):boolean      {return !StateUser.loading(state) && !StateUser.authenticated(state);}
+    @Selector() static error(state: StateUserModel): Error                        {return state.error;}
+    @Selector() static clusterMap(state: StateUserModel): Record<string, Cluster> { return state.clusters;}
+    @Selector() static errored(state: StateUserModel)                             {return state.error != null;}
+    @Selector() static userFound(state: StateUserModel)                           {return state.user != null;}
 
-    @Selector() static userId(state: StateUserModel)
+    @Selector() static userId(state: StateUserModel): string
     {
         const user: User = StateUser.user(state);
 
         return user == null ? undefined : user[ModelKey.Id];
     }
 
-    @Selector() static errored(state: StateUserModel)   {return state.error != null;}
-    @Selector() static userFound(state: StateUserModel) {return state.user != null;}
+    @Selector() static clusters(state: StateUserModel): Array<Cluster>
+    {
+        const clusters: Record<string, Cluster> = StateUser.clusterMap(state);
+
+        return Object.keys(clusters).map(((id: string) => clusters[id]));
+    }
+
+    @Selector() static clustersFound(state: StateUserModel): boolean
+    {
+        return Object.keys(StateUser.clusterMap(state)).length > 0;
+    }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
         context.dispatch
         ([
-            new ActionUserWatchLanguage()
+            new ActionUserWatchLanguage(),
+            new ActionUserAuthenticate()
         ]);
     }
 
@@ -95,7 +112,7 @@ export class StateUser implements NgxsOnInit
         );
     }
 
-    @Action(ActionUserWatch)
+    @Action(ActionUserWatch, { cancelUncompleted: true })
     userWatch({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatch)
     {
         return this.service.valuesChanges(payload).pipe
@@ -107,11 +124,17 @@ export class StateUser implements NgxsOnInit
 
                 return {
                     ...empty,
-                    user
+                    ...user
                 };
             }),
+            tap((user: User) => console.log(user)),
             tap((user: User) => patchState({ user })),
-            tap((user: User) => dispatch([new ActionLanguageSet(user.language), new ActionAlertsGet()])),
+            tap((user: User) => dispatch
+            ([
+                new ActionLanguageSet(user.language),
+                new ActionUserWatchClusters(user[UserKey.Clusters]),
+                new ActionAlertsGet()
+            ])),
             catchError((error: Error) => of(patchState({ error})))
         );
     }
@@ -162,5 +185,36 @@ export class StateUser implements NgxsOnInit
             tap(() => patchState({ authenticated: false, authData: undefined, user: undefined })),
             catchError((error: Error) => of(patchState({ error })))
         );
+    }
+
+    @Action(ActionUserWatchClusters, { })
+    watchUserClusters({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserWatchClusters)
+    {
+        const ids: Array<string> = payload == null ? [] : payload;
+        const streams$: Array<Observable<Cluster>> = ids.map((id: string) => this.cluster.valuesChanges(id));
+
+        return combineLatest(streams$).
+        pipe
+        (
+            switchMap((clusters: Array<Cluster>) =>
+                forkJoin(clusters.map((cluster: Cluster) =>
+                    this.storage.
+                    ref(this.image.toBucketPath(cluster.iconId)).
+                    getDownloadURL().
+                    pipe
+                    (
+                        tap((url: string) => cluster.iconId = url),
+                        map(() => cluster)
+                    )
+                ))
+            ),
+            map((clusters: Array<Cluster>) =>
+                clusters.reduce((record, cluster: Cluster): Record<string, Cluster> => {
+                    record[cluster[ModelKey.Id]] = cluster;
+                    return record;
+                }, {})
+            ),
+            tap((clusters: Record<string, Cluster>) => patchState({ clusters }))
+        )
     }
 }

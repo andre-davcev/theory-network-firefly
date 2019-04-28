@@ -17,6 +17,7 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         authenticating : false,
         initializing   : false,
         form           : undefined,
+        clusters       : {},
 
         empty :
         {

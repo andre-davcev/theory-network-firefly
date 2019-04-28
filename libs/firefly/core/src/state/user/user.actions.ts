@@ -64,3 +64,10 @@ export class ActionUserSet
 
     constructor(public payload: User) {}
 }
+
+export class ActionUserWatchClusters
+{
+    static readonly type = ActionsUser.UserWatchClusters;
+
+    constructor(public payload: Array<string>) { }
+}
