@@ -15,6 +15,7 @@ import { BaseComponent } from '@theory/core';
 import { ItemHeader, ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
+import { PageAssetsClusters } from '../assets-clusters';
 
 @Component
 ({
@@ -99,7 +100,14 @@ export class PageAssetEvent extends BaseComponent
     {
         if (page === Pages.AssetsClusters)
         {
-            this.store.dispatch(new Navigate([page]));
+//            this.store.dispatch(new Navigate([page]));
+
+            from(this.modalController.create
+            ({
+                component: PageAssetsClusters,
+                componentProps: { modal: true }
+            })).
+            subscribe((modal: HTMLIonModalElement) => modal.present());
         }
         else if (page === Pages.ImageSelector)
         {
