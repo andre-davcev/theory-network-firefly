@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
 import { takeUntil } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';

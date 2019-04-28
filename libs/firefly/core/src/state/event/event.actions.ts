@@ -1,4 +1,4 @@
-import { Event } from '@firefly/core/models';
+import { Event, Cluster } from '@firefly/core/models';
 import { AssetKey, EventKey } from '@firefly/core/models';
 import { CoreEnum } from '@theory/core';
 
@@ -73,4 +73,11 @@ export class ActionEventUpdate
     static readonly type = ActionsEvent.UpdateEvent;
 
     constructor() { }
+}
+
+export class ActionEventSetClusterPrimary
+{
+    static readonly type = ActionsEvent.SetClusterPrimary;
+
+    constructor(public payload: Cluster) { }
 }

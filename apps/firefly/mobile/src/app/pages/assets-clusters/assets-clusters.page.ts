@@ -5,7 +5,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Cluster, StateUser } from '@firefly/core';
+import { Cluster, StateUser, ActionEventSetClusterPrimary } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
 import { ModalController } from '@ionic/angular';
@@ -46,8 +46,9 @@ export class PageAssetsClusters
     }
 
 
-    public select(): void
+    public select(cluster: Cluster): void
     {
+        this.store.dispatch(new ActionEventSetClusterPrimary(cluster));
 
         this.modalController.dismiss();
     }

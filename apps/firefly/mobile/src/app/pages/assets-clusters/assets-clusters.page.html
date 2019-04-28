@@ -16,7 +16,8 @@
 
 <ion-content>
   	<ion-list lines="none" elevation="1">
-        <ion-item *ngFor="let cluster of clusters$ | async">
+        <ion-item *ngFor="let cluster of clusters$ | async"
+                  (click)="select(cluster)">
             <ion-avatar slot="start">
                 <img [src]="cluster.iconId">
             </ion-avatar>

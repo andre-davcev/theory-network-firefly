@@ -4,11 +4,11 @@ import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/stor
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
-import { User, Event, Location, Time } from '@firefly/core/models';
+import { User, Event, Location, Time, Cluster } from '@firefly/core/models';
 import { ServiceEvent, ServiceImage } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
-import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation, ActionEventSave, ActionEventCreate, ActionEventUpdate, ActionEventWatch, ActionEventSetImage } from './event.actions';
+import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation, ActionEventSave, ActionEventCreate, ActionEventUpdate, ActionEventWatch, ActionEventSetImage, ActionEventSetClusterPrimary } from './event.actions';
 import { EventKey, AssetKey } from '@firefly/core/models';
 import { ModelKey } from '@theory/firebase';
 import { ValidatorsExtended, CoreEnum, DateUtil } from '@theory/core';
@@ -114,6 +114,26 @@ export class StateEvent
 
         return timeEnd.getTime() > timeStart.getTime();
     }
+
+    @Selector() static eventClusters(state: StateEventModel): Array<string>
+    {
+        const form: FormGroup = StateEvent.form(state);
+
+        return form == null ? [] : form.get(EventKey.Clusters).value
+    }
+
+    @Selector() static eventClusterPrimary(state: StateEventModel): Cluster
+    {
+        return state.clusterPrimary;
+    }
+
+    @Selector() static eventClusterIcon(state: StateEventModel): string
+    {
+        const cluster: Cluster = StateEvent.eventClusterPrimary(state);
+
+        return cluster == null ? undefined : cluster.iconId;
+    }
+
     constructor
     (
         private service: ServiceEvent,
@@ -260,8 +280,8 @@ export class StateEvent
         /*
             ToDo:
 
-            *) Update asset-event to use modal picker
-            *) On cluster select, add to clusters array
+            *) Change app-item-header to dummy component similar to app-item-image
+
             *) Set cluster.events = { ...clusters.events, event.clusters[0]}
             *) Patch cluster
             *) Patch user events/images
@@ -293,9 +313,20 @@ export class StateEvent
     }
 
     @Action(ActionEventUpdate)
-    update({ patchState }: StateContext<StateEventModel>)
+    update({ }: StateContext<StateEventModel>)
     {
 
+    }
+
+    @Action(ActionEventSetClusterPrimary)
+    setClusterPrimary({ patchState, dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSetClusterPrimary)
+    {
+        const clusterPrimary: Cluster = payload;
+        const clusters: Array<string> = [ clusterPrimary[ModelKey.Id]];
+
+        patchState({ clusterPrimary });
+
+        dispatch(new ActionEventPatch(EventKey.Clusters, clusters));
     }
 
     private validateEventTimeEndValid(): Observable<Record<string, any> | null>

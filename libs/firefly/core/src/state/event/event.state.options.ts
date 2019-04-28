@@ -32,6 +32,7 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
         },
 
         imageUrl           : undefined,
-        imageUrlNormalized : undefined
+        imageUrlNormalized : undefined,
+        clusterPrimary     : undefined
     }
 };
