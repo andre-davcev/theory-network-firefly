@@ -1,24 +1,23 @@
-<img class="cpt-background-image" [src]="iconUrl">
+<img class="cpt-background-image" [src]="url">
 <div class="cpt-background"></div>
 
 <div class="cpt-icon-container" (click)="clickedIcon()">
-    <img class="cpt-icon" [src]="iconUrl">
-    <p class="cpt-icon-placeholder" *ngIf="!iconValue">{{item.iconPlaceholder}}</p>
+    <img class="cpt-icon" [src]="url">
+    <p class="cpt-icon-placeholder" *ngIf="!iconUrl">{{ iconPlaceholder }}</p>
 </div>
 
-<form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">    
-    <input class="cpt-icon-hidden" type="hidden" [formControlName]="item.icon" *ngIf="!item.iconAsUrl">
-    <input class="cpt-title"  type="text"  [formControlName]="item.title"    [placeholder]="item.titlePlaceholder">
-    <div class="error-messages" *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)">
+<form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
+    <input class="cpt-title"  type="text" [formControlName]="title" [placeholder]="titlePlaceholder">
+    <div class="error-messages" *ngIf="edit && hasError(title)">
         Please add a name
     </div>
-    <input class="cpt-subtitle" type="text" [formControlName]="item.subtitle" [placeholder]="item.subtitlePlaceholder">
-    <div class="error-messages" *ngIf="form.get('tagline').invalid && (form.get('tagline').dirty || form.get('tagline').touched)">
+    <input class="cpt-subtitle" type="text" [formControlName]="subtitle" [placeholder]="subtitlePlaceholder">
+    <div class="error-messages" *ngIf="edit && hasError(subtitle)">
         Please add a tagline
     </div>
 </form>
 
 <div class="cpt-container" *ngIf="!edit">
-    <h3 class="cpt-title">{{item.title}}</h3>
-    <h4 class="cpt-subtitle">{{item.subtitle}}</h4>
+    <h3 class="cpt-title">{{ title }}</h3>
+    <h4 class="cpt-subtitle">{{ subtitle }}</h4>
 </div>

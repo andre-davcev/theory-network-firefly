@@ -11,7 +11,15 @@
 
 <ion-content>
     <form novalidate [formGroup]="form$  | async">
-        <app-item-header [form]="form$ | async" [item]="itemHeader" (iconClicked)="iconClicked()"></app-item-header>
+        <app-item-header [form]="form$ | async"
+                         [title]="AssetKey.Name"
+                         [subtitle]="ClusterKey.Tagline"
+                         iconUrlEmpty="assets/icons/avatar-empty.svg"
+                         [titlePlaceholder]="'page.event.titlePlaceholder' | translate",
+                         [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate",
+                         [iconPlaceholder]="'page.event.iconPlaceholder' | translate"
+                         (iconClicked)="iconClicked()">
+        </app-item-header>
 <!--
         <app-item-header icon="assets/icons/temp-coffee-icon-blue.png"
                          title="My cluster title!"
@@ -56,5 +64,5 @@
         </app-item-description>
 -->
         <ion-button  [disabled]="(form$ | async)?.invalid" size="default" expand="block" color="primary" (click)="setCluster()">Submit</ion-button>
-    </form>    
+    </form>
 </ion-content>

@@ -9,9 +9,9 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle, Camera, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent } from '@firefly/core';
+import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent, AssetKey } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
-import { ItemHeader, ItemDescription } from '@firefly/mobile';
+import { ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters } from '../assets-clusters';
@@ -32,17 +32,11 @@ export class PageAssetEvent extends BaseComponent
     @Select(StateEvent.eventTimeStart)          timeStart$:    Observable<string>;
     @Select(StateEvent.eventTimeEnd)            timeEnd$:      Observable<string>;
     @Select(StateEvent.eventTimeEndValid)       timeEndValid$: Observable<boolean>;
+    @Select(StateEvent.eventClusterIcon)        clusterIcon$:  Observable<string>;
 
-    public Pages: any = Pages;
+    public Pages:    any = Pages;
+    public AssetKey: any = AssetKey;
     public EventKey: any = EventKey;
-
-    public itemHeader: ItemHeader =
-    {
-        title:        'name',
-        subtitle:     'tagline',
-        iconUrlEmpty: 'assets/icons/avatar-empty.svg',
-        iconAsUrl:    true
-    };
 
     public itemDescription: ItemDescription =
     {
@@ -63,24 +57,12 @@ export class PageAssetEvent extends BaseComponent
 
         this.translate.get
         ([
-            'page.event.titlePlaceholder',
-            'page.event.subtitlePlaceholder',
-            'page.event.iconPlaceholder',
             'page.event.descriptionPlaceholder',
-            'page.event.imagePlaceholder',
             'general.description'
         ]).
         pipe(takeUntil(this.destroy$)).
         subscribe((translations: Array<string>) =>
         {
-            this.itemHeader =
-            {
-                ...this.itemHeader,
-                titlePlaceholder:    translations['page.event.titlePlaceholder'],
-                subtitlePlaceholder: translations['page.event.subtitlePlaceholder'],
-                iconPlaceholder:     translations['page.event.iconPlaceholder']
-            };
-
             this.itemDescription =
             {
                 ...this.itemDescription,
