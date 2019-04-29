@@ -64,7 +64,7 @@ export class PageAssetCluster extends BaseComponent
             });
         });*/
 
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
     public iconClicked(): void
