@@ -129,6 +129,7 @@ export class StateEvent
 
     @Selector() static eventClusterIcon(state: StateEventModel): string
     {
+        console.log(StateEvent.form(state));
         const cluster: Cluster = StateEvent.eventClusterPrimary(state);
 
         return cluster == null ? undefined : cluster.iconId;
@@ -280,8 +281,7 @@ export class StateEvent
         /*
             ToDo:
 
-            *) Change app-item-header to dummy component similar to app-item-image
-
+            *) Fix event form validators
             *) Set cluster.events = { ...clusters.events, event.clusters[0]}
             *) Patch cluster
             *) Patch user events/images
