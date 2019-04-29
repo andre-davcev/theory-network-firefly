@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ItemHeader } from './item-header.interface';
+import { FormGroup, AbstractControl } from '@angular/forms';
 
 @Component
 ({
@@ -13,7 +12,16 @@ import { ItemHeader } from './item-header.interface';
 export class ComponentItemHeader
 {
     @Input() form: FormGroup;
-    @Input() item: ItemHeader;
+
+    @Input() iconUrl:         string;
+    @Input() iconUrlEmpty:    string;
+    @Input() iconPlaceholder: string;
+
+    @Input() title:            string;
+    @Input() titlePlaceholder: string;
+
+    @Input() subtitle:            string;
+    @Input() subtitlePlaceholder: string;
 
     @Output() iconClicked: EventEmitter<void> = new EventEmitter();
 
@@ -22,12 +30,6 @@ export class ComponentItemHeader
     public clickedIcon(): void
     {
         this.iconClicked.next();
-/*
-        if (this.edit)
-        {
-            this.iconValue = this.iconValue == null || this.iconValue === 'assets/icons/temp-coffee-icon-blue.png' ? 'assets/icons/temp-coffee-icon-pink.png' : 'assets/icons/temp-coffee-icon-blue.png';
-        }
-*/
     }
 
     public get edit(): boolean
@@ -35,23 +37,15 @@ export class ComponentItemHeader
         return this.form != null;
     }
 
-    public get iconUrl(): string
+    public get url(): string
     {
-        return this.edit ? (this.iconValue == null ? this.item.iconUrlEmpty : this.iconValue) : this.iconValue;
+        return this.edit ? (this.iconUrl == null ? this.iconUrlEmpty : this.iconUrl) : this.iconUrl;
     }
 
-    public get iconValue(): string
+    public hasError(name: string): boolean
     {
-        this.item.icon = this.item.icon == null && !this.item.iconAsUrl ? 'icon' : this.item.icon;
+        const control: AbstractControl = this.form.get(name);
 
-        return this.edit && !this.item.iconAsUrl ? this.form.get(this.item.icon).value : this.item.icon;
-    }
-
-    public set iconValue(icon: string)
-    {
-        if (this.edit)
-        {
-            this.form.get(this.item.icon).setValue(icon);
-        }
+        return control.invalid && (control.dirty || control.touched);
     }
 }

@@ -19,7 +19,13 @@
 <ion-content>
         <form novalidate [formGroup]="form$ | async">
         <app-item-header [form]="form$ | async"
-                         [item]="itemHeader"
+                         [iconUrl]="clusterIcon$ | async"
+                         [title]="AssetKey.Name"
+                         [subtitle]="EventKey.Tagline"
+                         iconUrlEmpty="assets/icons/avatar-empty.svg"
+                         [titlePlaceholder]="'page.cluster.titlePlaceholder' | translate"
+                         [subtitlePlaceholder]="'page.cluster.subtitlePlaceholder' | translate"
+                         [iconPlaceholder]="'page.cluster.iconPlaceholder' | translate"
                          (iconClicked)="navigate(Pages.AssetsClusters)">
         </app-item-header>
 <!--

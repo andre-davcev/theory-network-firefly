@@ -9,8 +9,8 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { BaseComponent } from '@theory/core';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateCluster, ActionSetClusterId, ActionSetCluster } from '@firefly/core';
-import { ItemHeader, ItemDescription } from '@firefly/mobile';
+import { StateCluster, ActionSetClusterId, ActionSetCluster, AssetKey, ClusterKey } from '@firefly/core';
+import { ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 
 @Component
@@ -24,15 +24,11 @@ export class PageAssetCluster extends BaseComponent
 {
     @Select(StateCluster.form) form$: Observable<FormGroup>;
 
-    public itemHeader: ItemHeader =
-    {
-        title:        'name',
-        subtitle:     'tagline',
-        iconUrlEmpty: 'assets/icons/avatar-empty.svg'
-    };
+    public AssetKey:   any = AssetKey;
+    public ClusterKey: any = ClusterKey;
 
     public itemDescription: ItemDescription =
-    {        
+    {
         description: 'description'
     };
 
@@ -44,40 +40,27 @@ export class PageAssetCluster extends BaseComponent
 
         this.translate.get
         ([
-            'page.cluster.titlePlaceholder',
-            'page.cluster.subtitlePlaceholder',
-            'page.cluster.iconPlaceholder',
-            'page.cluster.descriptionPlaceholder',            
+            'page.cluster.descriptionPlaceholder',
             'general.description'
         ]).
         pipe(takeUntil(this.destroy$)).
         subscribe((translations: Array<string>) =>
         {
-            this.itemHeader =
-            {
-                ...this.itemHeader,
-                titlePlaceholder:    translations['page.cluster.titlePlaceholder'],
-                subtitlePlaceholder: translations['page.cluster.subtitlePlaceholder'],
-                iconPlaceholder:     translations['page.cluster.iconPlaceholder']
-            };
-
             this.itemDescription =
             {
                 ...this.itemDescription,
                 title:                  translations['general.description'],
-                descriptionPlaceholder: translations['page.cluster.descriptionPlaceholder']                
+                descriptionPlaceholder: translations['page.cluster.descriptionPlaceholder']
             };
-
-           // this.form$.subscribe((x:any) => console.log('im here: ' + x));
         });
     }
 
     ionViewWillEnter()
     {
         /*this.form$.subscribe((x) => {
-            x.valueChanges.subscribe((form) => {                
+            x.valueChanges.subscribe((form) => {
                 console.log('valid: ' + x.valid);
-                console.log('form:  ' + JSON.stringify(form));                
+                console.log('form:  ' + JSON.stringify(form));
             });
         });*/
 
@@ -85,7 +68,7 @@ export class PageAssetCluster extends BaseComponent
     }
 
     public iconClicked(): void
-    {        
+    {
         this.store.dispatch(new Navigate([Pages.IconSelector]));
     }
 
