@@ -73,7 +73,6 @@
     "@theory/web": "file:../../../libs/web",
     "cordova-plugin-camera": "file:../../../node_modules/cordova-plugin-camera",
     "cordova-plugin-globalization": "file:../../../node_modules/cordova-plugin-globalization",
-    "cordova-plugin-photo-library": "file:../../../node_modules/cordova-plugin-photo-library",
     "firebase": "file:../../../node_modules/firebase",
     "font-awesome": "file:../../../node_modules/font-awesome",
     "ionicons": "file:../../../node_modules/ionicons",

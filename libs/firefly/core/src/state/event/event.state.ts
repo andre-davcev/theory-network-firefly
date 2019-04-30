@@ -282,6 +282,7 @@ export class StateEvent
         /*
             ToDo:
 
+            *) Move plus home icon to the right
             *) Change foreign key collections from Array<string> to Record<string, string>
             *) Fix event form validators
             *) Set cluster.events = { ...clusters.events, event.clusters[0]}
