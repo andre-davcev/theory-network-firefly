@@ -5,7 +5,7 @@ import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/fo
 
 import { StateUser } from '@firefly/core/state/user';
 import { User, Event, Location, Time, Cluster } from '@firefly/core/models';
-import { ServiceEvent, ServiceImage } from '@firefly/core/services';
+import { ServiceEvent, ServiceImage, ServiceCluster } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
 import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation, ActionEventSave, ActionEventCreate, ActionEventUpdate, ActionEventWatch, ActionEventSetImage, ActionEventSetClusterPrimary } from './event.actions';
@@ -141,7 +141,8 @@ export class StateEvent
         private formBuilder: FormBuilder,
         private store: Store,
         private webview: WebView,
-        private image: ServiceImage
+        private image: ServiceImage,
+        private cluster: ServiceCluster
     ) { }
 
     @Action(ActionGetEvents)
@@ -189,8 +190,8 @@ export class StateEvent
             [ModelKey.DateUpdated] : event[ModelKey.DateUpdated],
 
             [AssetKey.UserId]      : event[AssetKey.UserId],
-            [AssetKey.Name]        : [event[AssetKey.Name],        ValidatorsExtended.minLength(1)],
-            [AssetKey.Description] : [event[AssetKey.Description], ValidatorsExtended.minLength(1)],
+            [AssetKey.Name]        : [event[AssetKey.Name],        [Validators.required, ValidatorsExtended.minLength(1)]],
+            [AssetKey.Description] : [event[AssetKey.Description], [Validators.required, ValidatorsExtended.minLength(1)]],
             [AssetKey.Private]     : event[AssetKey.Private],
             [AssetKey.Draft]       : event[AssetKey.Draft],
 
@@ -281,6 +282,7 @@ export class StateEvent
         /*
             ToDo:
 
+            *) Change foreign key collections from Array<string> to Record<string, string>
             *) Fix event form validators
             *) Set cluster.events = { ...clusters.events, event.clusters[0]}
             *) Patch cluster

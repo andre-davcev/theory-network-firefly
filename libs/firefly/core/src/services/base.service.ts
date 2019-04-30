@@ -1,7 +1,7 @@
 import { Observable, from } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentSnapshot, Action } from '@angular/fire/firestore';
 import { Model, ModelKey } from '@theory/firebase';
-import { map } from 'rxjs/operators';
+import { map, take, switchMap } from 'rxjs/operators';
 
 export class ServiceBase<T extends Model>
 {
@@ -31,13 +31,28 @@ export class ServiceBase<T extends Model>
         return from(this.document(id).update(partial));
     }
 
+    public patchAddToArray(id: string, key: string, value: string | number): Observable<void>
+    {
+        const partial: Partial<T> = {};
+
+        return this.valuesChanges(id).
+        pipe
+        (
+            take(1),
+            map((object: T) => [...object[key], value]),
+            map((keys: Array<string | number>) => new Set<string | number>(keys)),
+            map((set: Set<string | number>) => Array.from(set.values())),
+            switchMap((array: Array<string | number>) => this.patch(id, { ...partial, [key]: array }))
+        );
+    }
+
     public create(object: T): Observable<T>
     {
         object[ModelKey.Id] = this.firestore.createId();
 
         return this.set(object).pipe
         (
-             map(() => object)
+            map(() => object)
         );
     }
 
