@@ -1,4 +1,5 @@
 import { ValidatorFn, AbstractControl, Validators } from '@angular/forms';
+import { TypeOf } from '../enums';
 
 export class ValidatorsExtended
 {
@@ -6,13 +7,14 @@ export class ValidatorsExtended
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
         {
-            let validation: { [key: string]: any } = null;
+            let validation: Record<string, any> = null;
 
             if (Validators.required(control) == null)
             {
-                const value: string = control.value ? control.value : '';
+                const value: string | Object = typeof control.value === TypeOf.String ? control.value.trim() : control.value;
+                const length: number = typeof value === TypeOf.String ? (value as string).length : Object.keys(value).length;
 
-                validation = value.trim().length < minLength ? { 'minlength': { 'requiredLength': minLength, 'actualLength': value.trim().length } } : null;
+                validation = length < minLength ? { 'minlength': { 'requiredLength': minLength, 'actualLength': length } } : null;
             }
 
             return validation;

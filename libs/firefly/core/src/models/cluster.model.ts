@@ -5,5 +5,5 @@ export interface Cluster extends Asset
 {
     [ClusterKey.Tagline]: string;
     [ClusterKey.IconId]:  string;
-    [ClusterKey.Events]:  Array<string>;
+    [ClusterKey.Events]:  Record<string, string>;
 }

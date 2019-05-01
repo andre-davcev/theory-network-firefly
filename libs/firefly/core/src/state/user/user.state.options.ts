@@ -33,12 +33,12 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             [UserKey.PhoneNumber]   : undefined,
             [UserKey.PhotoUrl]      : undefined,
             [UserKey.ProviderId]    : undefined,
-            [UserKey.Tokens]        : [],
-            [UserKey.Notifications] : [],
-            [UserKey.Clusters]      : [],
-            [UserKey.Events]        : [],
-            [UserKey.Images]        : [],
-            [UserKey.Icons]         : []
+            [UserKey.Tokens]        : {},
+            [UserKey.Notifications] : {},
+            [UserKey.Clusters]      : {},
+            [UserKey.Events]        : {},
+            [UserKey.Images]        : {},
+            [UserKey.Icons]         : {}
         }
     }
 };

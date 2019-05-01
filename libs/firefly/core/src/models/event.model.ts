@@ -9,5 +9,5 @@ export interface Event extends Asset
     [EventKey.ImageId]:   string;
     [EventKey.Location]:  Location;
     [EventKey.Times]:     Array<Time>;
-    [EventKey.Clusters]:  Array<string>;
+    [EventKey.Clusters]:  Record<string, string>;
 }

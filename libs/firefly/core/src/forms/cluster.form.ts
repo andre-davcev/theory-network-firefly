@@ -21,7 +21,7 @@ export class FormCluster extends FormGenerator<Cluster>
           description : null,
           iconId      : null,
           private     : true,
-          events      : []
+          events      : {}
         };
     }
 
@@ -35,7 +35,7 @@ export class FormCluster extends FormGenerator<Cluster>
             description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(3)]],
             iconId      : [cluster.iconId],
             private     : cluster.private,
-            events      : this.formBuilder.array(cluster.events)
+            events      : [cluster.events,      [Validators.required, ValidatorsExtended.minLength(1)]]
         });
 
         return formGroup;
