@@ -69,5 +69,5 @@ export class ActionUserWatchClusters
 {
     static readonly type = ActionsUser.UserWatchClusters;
 
-    constructor(public payload: Array<string>) { }
+    constructor(public payload: Record<string, string>) { }
 }

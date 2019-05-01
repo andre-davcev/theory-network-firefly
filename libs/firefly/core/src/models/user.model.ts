@@ -12,10 +12,10 @@ export interface User extends Model
     [UserKey.DisplayName]   : string;
     [UserKey.ProviderId]    : string;
 
-    [UserKey.Tokens]        : Array<string>;
-    [UserKey.Notifications] : Array<string>;
-    [UserKey.Clusters]      : Array<string>;
-    [UserKey.Events]        : Array<string>;
-    [UserKey.Images]        : Array<string>;
-    [UserKey.Icons]         : Array<string>;
+    [UserKey.Tokens]        : Record<string, string>;
+    [UserKey.Notifications] : Record<string, string>;
+    [UserKey.Clusters]      : Record<string, string>;
+    [UserKey.Events]        : Record<string, string>;
+    [UserKey.Images]        : Record<string, string>;
+    [UserKey.Icons]         : Record<string, string>;
 }

@@ -117,9 +117,10 @@ export class StateEvent
 
     @Selector() static eventClusters(state: StateEventModel): Array<string>
     {
-        const form: FormGroup = StateEvent.form(state);
+        const form:     FormGroup              = StateEvent.form(state);
+        const clusters: Record<string, string> = form == null ? {} : form.get(EventKey.Clusters).value;
 
-        return form == null ? [] : form.get(EventKey.Clusters).value
+        return Object.keys(clusters);
     }
 
     @Selector() static eventClusterPrimary(state: StateEventModel): Cluster
@@ -198,7 +199,7 @@ export class StateEvent
             [EventKey.Version]   : event[EventKey.Version],
             [EventKey.Tagline]   : [event[EventKey.Tagline], ValidatorsExtended.minLength(1)],
             [EventKey.ImageId]   : [event[EventKey.ImageId], Validators.required],
-            [EventKey.Clusters]  : this.formBuilder.array(event[EventKey.Clusters], Validators.minLength(1)),
+            [EventKey.Clusters]  : [event[EventKey.Clusters], ValidatorsExtended.minLength(1)],
             [EventKey.Location]  : [event[EventKey.Location], Validators.required],
             [EventKey.Times]     : [event[EventKey.Times], [], this.validateEventTimeEndValid.bind(this)]
         });
@@ -282,8 +283,6 @@ export class StateEvent
         /*
             ToDo:
 
-            *) Move plus home icon to the right
-            *) Change foreign key collections from Array<string> to Record<string, string>
             *) Fix event form validators
             *) Set cluster.events = { ...clusters.events, event.clusters[0]}
             *) Patch cluster

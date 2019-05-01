@@ -155,7 +155,7 @@ export class StateUser implements NgxsOnInit
     {
         const user   : User   = StateUser.user(getState());
         const token  : string = payload;
-        const tokens : Array<string> = user.tokens == null ? [token] : [...user.tokens, token];
+        const tokens : Record<string, string> = user.tokens == null ? {[token]: token} : {...user.tokens, [token]: token};
 
         user.tokens = tokens;
 
@@ -190,8 +190,9 @@ export class StateUser implements NgxsOnInit
     @Action(ActionUserWatchClusters, { cancelUncompleted: true })
     watchUserClusters({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserWatchClusters)
     {
-        const ids: Array<string> = payload == null ? [] : payload;
-        const streams$: Array<Observable<Cluster>> = ids.map((id: string) => this.cluster.valuesChanges(id));
+        const ids: Record<string, string> = payload == null ? {} : payload;
+        // ToDo: HERE
+        const streams$: Array<Observable<Cluster>> = Object.keys(ids).map((id: string) => this.cluster.valuesChanges(id));
 
         return combineLatest(streams$).
         pipe
