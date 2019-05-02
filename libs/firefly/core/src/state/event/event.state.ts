@@ -1,11 +1,11 @@
-import { map, tap, switchMap } from 'rxjs/operators';
+import { map, tap, switchMap, mergeMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
 import { User, Event, Location, Time, Cluster } from '@firefly/core/models';
-import { ServiceEvent, ServiceImage, ServiceCluster } from '@firefly/core/services';
+import { ServiceEvent, ServiceImage, ServiceCluster, ServiceUser } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
 import { ActionGetEvents, ActionEventSetId, ActionEventSet, ActionEventPatch, ActionEventSetLocation, ActionEventSave, ActionEventCreate, ActionEventUpdate, ActionEventWatch, ActionEventSetImage, ActionEventSetClusterPrimary } from './event.actions';
@@ -143,7 +143,8 @@ export class StateEvent
         private store: Store,
         private webview: WebView,
         private image: ServiceImage,
-        private cluster: ServiceCluster
+        private cluster: ServiceCluster,
+        private user: ServiceUser
     ) { }
 
     @Action(ActionGetEvents)
@@ -284,10 +285,6 @@ export class StateEvent
             ToDo:
 
             *) Fix event form validators
-            *) Set cluster.events = { ...clusters.events, event.clusters[0]}
-            *) Patch cluster
-            *) Patch user events/images
-
             *) In event watch, write downloadUrl to event state
             *) Create downloadUrl @Selector
             *) Photo resize cloud function
@@ -297,7 +294,6 @@ export class StateEvent
             *) Update and test all cloud functions
             *) Add loading screen while creating/updating
             *) Add toast for success/error
-            *) Install copilot
         */
 
         const state:    StateEventModel = getState();
@@ -308,9 +304,16 @@ export class StateEvent
         return this.image.createWithUpload(e, imageUrl).
         pipe
         (
-            switchMap((event: Event) => this.service.create(event)),
-            tap((event: Event) => form.reset(event)),
-            tap(() => patchState({ form }))
+            switchMap((event: Event) => this.service.create(event).pipe(
+              tap((ev: Event) => form.reset(ev)),
+              tap(() => patchState({ form })),
+              mergeMap(() =>
+                this.cluster.foreignKeyAdd(Object.keys(event[EventKey.Clusters])[0], this.service.name, event[ModelKey.Id])
+              ),
+              mergeMap(() =>
+                this.user.foreignKeyAdd(event[AssetKey.UserId], this.service.name, event[ModelKey.Id])
+              )
+            ))
         );
     }
 

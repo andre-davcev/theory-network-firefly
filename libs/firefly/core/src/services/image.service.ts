@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from } from 'rxjs';
-import { switchMap, map, last, tap } from 'rxjs/operators';
+import { switchMap, map, last, tap, mergeMap } from 'rxjs/operators';
 import { StorageFormat, ModelKey } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
@@ -61,6 +61,9 @@ export class ServiceImage extends ServiceBase<Image>
         return this.upload(imagePath, bucketPath).pipe
         (
             switchMap(() => this.set(image)),
+            mergeMap(() =>
+              this.foreignKeyAdd(image[AssetKey.UserId], this.name, image[ModelKey.Id])
+            ),
             map(() => event)
         );
     }
