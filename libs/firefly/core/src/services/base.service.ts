@@ -31,19 +31,30 @@ export class ServiceBase<T extends Model>
         return from(this.document(id).update(partial));
     }
 
-    public patchAddToArray(id: string, key: string, value: string | number): Observable<void>
+    public foreignKeyAdd(id: string, collection: string, key: string): Observable<void>
     {
-        const partial: Partial<T> = {};
+        return this.foreignKeysAdd(id, collection, {[key]: key});
+    }
 
-        return this.valuesChanges(id).
-        pipe
-        (
-            take(1),
-            map((object: T) => [...object[key], value]),
-            map((keys: Array<string | number>) => new Set<string | number>(keys)),
-            map((set: Set<string | number>) => Array.from(set.values())),
-            switchMap((array: Array<string | number>) => this.patch(id, { ...partial, [key]: array }))
-        );
+    public foreignKeysAdd(id: string, collection: string, keys: Record<string, string>): Observable<void>
+    {
+        return this.valuesChanges(id).pipe
+        (
+            take(1),
+            map((object: T) =>
+            {
+                return {
+                    ...object,
+                    [collection]: {
+                        ...object[collection],
+                        ...keys
+                    }
+                };
+            }),
+            switchMap((object: T) =>
+              this.patch(id, { [collection]: object[collection] } as Partial<T>)
+            )
+        );
     }
 
     public create(object: T): Observable<T>
@@ -76,12 +87,12 @@ export class ServiceBase<T extends Model>
         return JSON.parse(JSON.stringify(object));
     }
 
-    protected get name(): string
+    public get name(): string
     {
         return this._name;
     }
 
-    protected set name(name: string)
+    public set name(name: string)
     {
         this._name = name;
     }
