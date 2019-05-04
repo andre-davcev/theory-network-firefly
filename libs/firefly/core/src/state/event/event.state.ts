@@ -1,7 +1,7 @@
-import { map, tap, switchMap, mergeMap } from 'rxjs/operators';
+import { map, tap, switchMap, mergeMap, take } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
-import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
 import { User, Event, Location, Time, Cluster } from '@firefly/core/models';
@@ -21,8 +21,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 export class StateEvent
 {
-    @Select(StateUser.user)               user$:              Observable<User>;
-    @Select(StateEvent.eventTimeEndValid) eventTimeEndValid$: Observable<boolean>;
+    @Select(StateUser.user) user$: Observable<User>;
 
     @Selector() static form(state: StateEventModel): FormGroup { return state.form; }
 
@@ -130,10 +129,33 @@ export class StateEvent
 
     @Selector() static eventClusterIcon(state: StateEventModel): string
     {
-        console.log(StateEvent.form(state));
         const cluster: Cluster = StateEvent.eventClusterPrimary(state);
 
         return cluster == null ? undefined : cluster.iconId;
+    }
+
+    public static validateTime(store: Store): ValidatorFn
+    {
+        const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
+        {
+            const valid: boolean = store.selectSnapshot(StateEvent.eventTimeEndValid);
+
+            return valid ? null : { timeEndInvalid: true };
+        };
+
+        return validator;
+    }
+
+    public static validateImage(store: Store): ValidatorFn
+    {
+        const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
+        {
+            const url: string = store.selectSnapshot(StateEvent.eventImageUrl);
+
+            return url != null ? null : { imageUrlInvalid: true };
+        };
+
+        return validator;
     }
 
     constructor
@@ -164,8 +186,8 @@ export class StateEvent
         const event: Event = !isNew ? undefined :
         {
             ...this.service.clone(StateEventOptions.defaults.empty),
-            id,
-            userId,
+            [ModelKey.Id]: id,
+            [AssetKey.UserId]: userId,
             times:
             [
                 {
@@ -199,10 +221,10 @@ export class StateEvent
 
             [EventKey.Version]   : event[EventKey.Version],
             [EventKey.Tagline]   : [event[EventKey.Tagline], ValidatorsExtended.minLength(1)],
-            [EventKey.ImageId]   : [event[EventKey.ImageId], Validators.required],
+            [EventKey.ImageId]   : [event[EventKey.ImageId], [StateEvent.validateImage(this.store)]],
             [EventKey.Clusters]  : [event[EventKey.Clusters], ValidatorsExtended.minLength(1)],
             [EventKey.Location]  : [event[EventKey.Location], Validators.required],
-            [EventKey.Times]     : [event[EventKey.Times], [], this.validateEventTimeEndValid.bind(this)]
+            [EventKey.Times]     : [event[EventKey.Times], [StateEvent.validateTime(this.store)]]
         });
 
         patchState({ form });
@@ -233,6 +255,8 @@ export class StateEvent
             time[key] = value;
 
             control.patchValue([time]);
+
+            control.updateValueAndValidity();
         }
         else
         {
@@ -258,16 +282,18 @@ export class StateEvent
     }
 
     @Action(ActionEventSetImage)
-    setImageIndex({ patchState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
+    setImage({ patchState, getState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
     {
         const imageUrl: string = payload;
-        const imageUrlNormalized: string = this.webview.convertFileSrc(imageUrl);
+        const imageUrlNormalized: string = imageUrl.match(/^data:/).length > 0 ? imageUrl : this.webview.convertFileSrc(imageUrl);
 
         patchState
         ({
             imageUrl,
             imageUrlNormalized
         });
+
+        StateEvent.form(getState()).controls[EventKey.ImageId].updateValueAndValidity();
     }
 
     @Action(ActionEventSave)
@@ -281,21 +307,6 @@ export class StateEvent
     @Action(ActionEventCreate)
     create({ getState, patchState }: StateContext<StateEventModel>)
     {
-        /*
-            ToDo:
-
-            *) Fix event form validators
-            *) In event watch, write downloadUrl to event state
-            *) Create downloadUrl @Selector
-            *) Photo resize cloud function
-            *) On user create, also create dummy first cluster
-            *) Create eventClusters as Record<string, Cluster>
-            *) NGXS event create action
-            *) Update and test all cloud functions
-            *) Add loading screen while creating/updating
-            *) Add toast for success/error
-        */
-
         const state:    StateEventModel = getState();
         const e:        Event           = StateEvent.event(state);
         const imageUrl: string          = StateEvent.eventImageUrl(state);
@@ -304,15 +315,16 @@ export class StateEvent
         return this.image.createWithUpload(e, imageUrl).
         pipe
         (
-            switchMap((event: Event) => this.service.create(event).pipe(
-              tap((ev: Event) => form.reset(ev)),
-              tap(() => patchState({ form })),
-              mergeMap(() =>
-                this.cluster.foreignKeyAdd(Object.keys(event[EventKey.Clusters])[0], this.service.name, event[ModelKey.Id])
-              ),
-              mergeMap(() =>
-                this.user.foreignKeyAdd(event[AssetKey.UserId], this.service.name, event[ModelKey.Id])
-              )
+            switchMap((event: Event) => this.service.create(event).pipe
+            (
+                tap((ev: Event) => form.reset(ev)),
+                tap(() => patchState({ form })),
+                mergeMap(() =>
+                    this.cluster.foreignKeyAdd(Object.keys(event[EventKey.Clusters])[0], this.service.name, event[ModelKey.Id])
+                ),
+                mergeMap(() =>
+                    this.user.foreignKeyAdd(event[AssetKey.UserId], this.service.name, event[ModelKey.Id])
+                )
             ))
         );
     }
@@ -332,13 +344,5 @@ export class StateEvent
         patchState({ clusterPrimary });
 
         dispatch(new ActionEventPatch(EventKey.Clusters, clusters));
-    }
-
-    private validateEventTimeEndValid(): Observable<Record<string, any> | null>
-    {
-        return this.eventTimeEndValid$.pipe
-        (
-            map((valid: boolean) => valid ? null : { timeEndInvalid: true })
-        );
     }
 }
