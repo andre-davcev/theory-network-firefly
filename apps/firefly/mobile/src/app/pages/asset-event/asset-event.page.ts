@@ -3,18 +3,19 @@ import { FormGroup } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
-import { StatusBarStyle, Camera, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent, AssetKey } from '@firefly/core';
+import { StatusBarStyle, Camera, CameraOptions, CameraResultType, CameraSource, CameraPhoto, FilesystemDirectory, FilesystemEncoding, FileReadResult } from '@capacitor/core';
+import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent, AssetKey, ActionEventCreate } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters } from '../assets-clusters';
+import { TempImageUri } from '@firefly/app/temp';
 
 @Component
 ({
@@ -127,7 +128,7 @@ export class PageAssetEvent extends BaseComponent
             }
             else
             {
-                this.store.dispatch(new ActionEventSetImage('assets/icons/temp-coffee-icon-pink.png'));
+                this.store.dispatch(new ActionEventSetImage(TempImageUri));
             }
         }
         else if (page === Pages.EventLocation)
@@ -142,10 +143,12 @@ export class PageAssetEvent extends BaseComponent
         const time: string = event.detail.value;
 
         this.store.dispatch(new ActionEventPatch(key, time));
+
+        this.form$.pipe(take(1)).subscribe((form: FormGroup) => console.log(form));
     }
 
     public save(): void
     {
-
+        this.store.dispatch(new ActionEventCreate());
     }
 }

@@ -11,6 +11,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Image, Event, AssetKey, EventKey } from '@firefly/core/models';
 
 import { ServiceBase } from './base.service';
+import { ServiceUser } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceImage extends ServiceBase<Image>
@@ -18,7 +19,8 @@ export class ServiceImage extends ServiceBase<Image>
     constructor
     (
         firestore: AngularFirestore,
-        private storage: AngularFireStorage
+        private storage: AngularFireStorage,
+        private user: ServiceUser
     )
     {
         super('images', firestore);
@@ -62,7 +64,7 @@ export class ServiceImage extends ServiceBase<Image>
         (
             switchMap(() => this.set(image)),
             mergeMap(() =>
-              this.foreignKeyAdd(image[AssetKey.UserId], this.name, image[ModelKey.Id])
+              this.user.foreignKeyAdd(image[AssetKey.UserId], this.name, image[ModelKey.Id])
             ),
             map(() => event)
         );
