@@ -12,13 +12,14 @@
 <ion-content>
     <form novalidate [formGroup]="form$  | async">
         <app-item-header [form]="form$ | async"
+                         [iconUrl]="clusterIcon$ | async"
                          [title]="AssetKey.Name"
                          [subtitle]="ClusterKey.Tagline"
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
-                         [titlePlaceholder]="'page.event.titlePlaceholder' | translate",
-                         [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate",
+                         [titlePlaceholder]="'page.event.titlePlaceholder' | translate"
+                         [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate"
                          [iconPlaceholder]="'page.event.iconPlaceholder' | translate"
-                         (iconClicked)="iconClicked()">
+                         (iconClicked)="navigate(Pages.IconSelector)">
         </app-item-header>
 <!--
         <app-item-header icon="assets/icons/temp-coffee-icon-blue.png"

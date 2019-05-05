@@ -7,4 +7,6 @@ export interface StateClusterModel
     id       : string;
     form     : FormGroup;
     entities : Record<string, Cluster>;
+    iconUrl  : string;
+    iconUrlNormalized: string;
 }
