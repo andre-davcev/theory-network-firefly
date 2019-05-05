@@ -8,8 +8,11 @@ import { ServiceCluster } from '@firefly/core/services';
 import { FormCluster } from '@firefly/core/forms';
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
-import { ActionGetClusters, ActionSetClusterId, ActionSetCluster } from './cluster.actions';
+import { ActionGetClusters, ActionSetClusterId, ActionSetCluster, ActionClusterSetIcon} from './cluster.actions';
 import { ModelKey } from '@theory/firebase';
+
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { SelectFactory } from '@ngxs/store/src/decorators/select';
 
 @State<StateClusterModel>(StateClusterOptions)
 
@@ -20,7 +23,8 @@ export class StateCluster
     constructor
     (
         private clusterService: ServiceCluster,
-        private formCluster:    FormCluster
+        private formCluster:    FormCluster,
+        private webview: WebView
     ) {}
 
     @Selector() static entities(state: StateClusterModel) {return state.entities;}
@@ -30,6 +34,17 @@ export class StateCluster
     @Selector() static clusters(state: StateClusterModel)      {return Object.keys(state.entities).map(id => state.entities[id]);}
     @Selector() static clustersFound(state: StateClusterModel) {return Object.keys(state.entities).length > 0;}
     @Selector() static entity(state: StateClusterModel)        {return state.entities[state.id];}
+
+    @Selector() static clusterIcon(state: StateClusterModel): string
+    {
+      return state.iconUrl;
+    }
+
+
+    @Selector() static clusterIconNormalized(state: StateClusterModel): string
+    {
+      return state.iconUrlNormalized;
+    }
 
     @Action(ActionGetClusters)
     getClusters({ patchState } : StateContext<StateClusterModel>)
@@ -84,4 +99,18 @@ export class StateCluster
             })
         )
     }
+
+    @Action(ActionClusterSetIcon)
+    setIconIndex({ patchState }: StateContext<StateClusterModel>, { payload }: ActionClusterSetIcon)
+    {
+        const iconUrl: string = payload;
+        const iconUrlNormalized: string = this.webview.convertFileSrc(iconUrl);
+
+        patchState
+        ({
+            iconUrl,
+            iconUrlNormalized
+        });
+    }
+
 }

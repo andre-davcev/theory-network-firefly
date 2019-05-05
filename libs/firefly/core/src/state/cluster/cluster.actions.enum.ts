@@ -4,5 +4,6 @@ export enum ActionsCluster
     SetClusterId       = '[Cluster] Set Cluster Id',
     SetCluster         = '[Cluster] Set Cluster',
     UpdateCluster      = '[Cluster] Update Cluster',
-    WatchUserClusters  = '[Cluster] Watch User Clusters'
+    WatchUserClusters  = '[Cluster] Watch User Clusters',
+    SetIcon            = '[Cluster] Set Icon index'
 }

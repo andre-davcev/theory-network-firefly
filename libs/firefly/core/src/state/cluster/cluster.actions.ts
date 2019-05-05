@@ -7,6 +7,13 @@ export class ActionGetClusters
     constructor() {}
 }
 
+export class ActionClusterSetIcon
+{
+    static readonly type = ActionsCluster.SetIcon;
+
+    constructor(public payload: string) { }
+}
+
 export class ActionSetClusterId
 {
     static readonly type = ActionsCluster.SetClusterId;
