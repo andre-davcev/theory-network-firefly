@@ -8,14 +8,14 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
-import { StatusBarStyle, Camera, CameraOptions, CameraResultType, CameraSource, CameraPhoto, FilesystemDirectory, FilesystemEncoding, FileReadResult } from '@capacitor/core';
+import { StatusBarStyle, Camera, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
 import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent, AssetKey, ActionEventCreate } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters } from '../assets-clusters';
-import { TempImageUri } from '@firefly/app/temp';
+import { TempImageUri } from '@firefly/app/mock';
 
 @Component
 ({

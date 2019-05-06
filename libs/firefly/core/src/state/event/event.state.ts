@@ -58,6 +58,7 @@ export class StateEvent
 
     @Selector() static eventImageUrlNormalized(state: StateEventModel): string
     {
+        console.log(`imageUrlNormalized: ${state.imageUrlNormalized}`);
         return state.imageUrlNormalized;
     }
 
@@ -285,7 +286,7 @@ export class StateEvent
     setImage({ patchState, getState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
     {
         const imageUrl: string = payload;
-        const imageUrlNormalized: string = imageUrl.match(/^data:/).length > 0 ? imageUrl : this.webview.convertFileSrc(imageUrl);
+        const imageUrlNormalized: string = imageUrl.match(/^data:image/).length > 0 ? imageUrl : this.webview.convertFileSrc(imageUrl);
 
         patchState
         ({
