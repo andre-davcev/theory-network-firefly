@@ -95,7 +95,7 @@ export class PageAssetEvent extends BaseComponent
         {
             const platform: Platform = this.store.selectSnapshot(StateDevice.platform);
 
-            if (platform === Platform.iOS)
+            if (platform === Platform.iOS || platform === Platform.Android)
             {
                 const options: CameraOptionsCordova =
                 {
@@ -108,22 +108,6 @@ export class PageAssetEvent extends BaseComponent
                 from(this.camera.getPicture(options)).
                 subscribe((imageData: string) =>
                   this.store.dispatch(new ActionEventSetImage(imageData))
-                );
-            }
-            else if (platform === Platform.Android)
-            {
-                const options: CameraOptions =
-                {
-                    quality:           100,
-                    allowEditing:      true,
-                    resultType:        CameraResultType.Uri,
-                    source:            CameraSource.Photos,
-                    presentationStyle: 'fullscreen'
-                };
-
-                from(Camera.getPhoto(options)).
-                subscribe((photo: CameraPhoto) =>
-                  this.store.dispatch(new ActionEventSetImage(photo.base64Data))
                 );
             }
             else
