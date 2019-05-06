@@ -76,7 +76,7 @@ export class StateIcons
     {
         return this.serviceIcons.
 
-        set(payload).
+        setIcon(payload).
 
         pipe
         (
