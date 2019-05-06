@@ -8,8 +8,10 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
 
     defaults :
     {
-        id       : undefined,
-        form     : undefined,
-        entities : {}
+        id                  : undefined,
+        form                : undefined,
+        entities            : {},
+        iconUrl             : undefined,
+        iconUrlNormalized   : undefined
     }
 };

@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusBarStyle } from '@capacitor/core';
+import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
 
 import { BaseComponent } from '@theory/core';
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateCluster, ActionSetClusterId, ActionSetCluster, AssetKey, ClusterKey } from '@firefly/core';
+import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
+import { StateCluster, ActionSetClusterId, ActionClusterSetIcon, ActionSetCluster, AssetKey, ClusterKey } from '@firefly/core';
 import { ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 
@@ -22,8 +23,10 @@ import { Pages } from '../pages.enum';
 
 export class PageAssetCluster extends BaseComponent
 {
-    @Select(StateCluster.form) form$: Observable<FormGroup>;
+    @Select(StateCluster.form)          form$:        Observable<FormGroup>;
+    @Select(StateCluster.clusterIconNormalized)   clusterIcon$: Observable<string>;
 
+    public Pages:      any = Pages;
     public AssetKey:   any = AssetKey;
     public ClusterKey: any = ClusterKey;
 
@@ -32,7 +35,9 @@ export class PageAssetCluster extends BaseComponent
         description: 'description'
     };
 
-    constructor(private store: Store, private translate: TranslateService)
+    constructor(private store: Store,
+      private translate: TranslateService,
+      private camera: CameraCordova)
     {
         super();
 
@@ -67,9 +72,32 @@ export class PageAssetCluster extends BaseComponent
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
-    public iconClicked(): void
+    public navigate(page: Pages.IconSelector)
     {
-        this.store.dispatch(new Navigate([Pages.IconSelector]));
+        if (page === Pages.IconSelector)
+        {
+            const platform: Platform = this.store.selectSnapshot(StateDevice.platform);
+
+            if (platform === Platform.iOS || platform === Platform.Android)
+            {
+                const options: CameraOptionsCordova =
+                {
+                    quality: 100,
+                    destinationType: this.camera.DestinationType.FILE_URI,
+                    encodingType: this.camera.EncodingType.JPEG,
+                    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+                };
+
+                from(this.camera.getPicture(options)).
+                subscribe((imageData: string) =>
+                  this.store.dispatch(new ActionClusterSetIcon(imageData))
+                );
+            }
+            else
+            {
+                this.store.dispatch(new ActionClusterSetIcon('assets/icons/temp-coffee-icon-pink.png'));
+            }
+        }
     }
 
     public imageClicked(): void
