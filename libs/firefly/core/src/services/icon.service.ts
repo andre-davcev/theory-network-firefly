@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { switchMap, filter, take, map } from 'rxjs/operators';
 
 import { Icon } from '@firefly/core/models';
+import { ServiceMedia } from './media.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { ServiceUser } from './user.service';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceIcon
+export class ServiceIcon extends ServiceMedia<Icon>
 {
-    private icons: AngularFirestoreCollection<Icon>;
-
-    constructor (private firestore: AngularFirestore)
+    constructor
+    (
+        firestore: AngularFirestore,
+        storage:   AngularFireStorage,
+        user:      ServiceUser
+    )
     {
-        this.icons = firestore.collection<Icon>('icons');
+        super('icons', firestore, storage, user);
     }
 
     get(userId: String): Observable<Array<Icon>>
@@ -41,12 +47,12 @@ export class ServiceIcon
 
     }
 
-    set(icon: Icon): Observable<Icon>
+    setIcon(icon: Icon): Observable<Icon>
     {
         const id = this.firestore.createId();
 
         icon.id = id;
-        const document: AngularFirestoreDocument<Icon> = this.icons.doc(id) as AngularFirestoreDocument<Icon>;
+        const document: AngularFirestoreDocument<Icon> = this.document(id) as AngularFirestoreDocument<Icon>;
 
         return from(document.set(icon)).pipe
         (

@@ -4,6 +4,7 @@ export * from './cluster.service';
 export * from './event.service';
 export * from './icon.service';
 export * from './image.service';
+export * from './media.service';
 export * from './subscriptions.service';
 export * from './user.service';
 export * from './util.service';
