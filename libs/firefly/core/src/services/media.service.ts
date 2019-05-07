@@ -31,7 +31,7 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
 
     public base64(url: string): Observable<string>
     {
-        const isDataUri: boolean = url.match(/^data:image/).length > 0;
+        const isDataUri: boolean = !!url.match(/^data:image/);
 
         return isDataUri ? of(url) : from(Filesystem.readFile({ path: url })).pipe
         (

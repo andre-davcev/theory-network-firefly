@@ -58,7 +58,6 @@ export class StateEvent
 
     @Selector() static eventImageUrlNormalized(state: StateEventModel): string
     {
-        console.log(`imageUrlNormalized: ${state.imageUrlNormalized}`);
         return state.imageUrlNormalized;
     }
 
@@ -286,7 +285,7 @@ export class StateEvent
     setImage({ patchState, getState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
     {
         const imageUrl: string = payload;
-        const imageUrlNormalized: string = imageUrl.match(/^data:image/).length > 0 ? imageUrl : this.webview.convertFileSrc(imageUrl);
+        const imageUrlNormalized: string = !!imageUrl.match(/^data:image/) ? imageUrl : this.webview.convertFileSrc(imageUrl);
 
         patchState
         ({
@@ -340,7 +339,9 @@ export class StateEvent
     setClusterPrimary({ patchState, dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSetClusterPrimary)
     {
         const clusterPrimary: Cluster = payload;
-        const clusters: Array<string> = [ clusterPrimary[ModelKey.Id]];
+        const key:            string  = clusterPrimary[ModelKey.Id];
+
+        const clusters: Record<string, string> =  {[key]: key};
 
         patchState({ clusterPrimary });
 
