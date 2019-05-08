@@ -10,4 +10,5 @@ export interface Event extends Asset
     [EventKey.Location]:  Location;
     [EventKey.Times]:     Array<Time>;
     [EventKey.Clusters]:  Record<string, string>;
+    [EventKey.Url]:       string;
 }
