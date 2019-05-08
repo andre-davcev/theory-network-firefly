@@ -30,7 +30,7 @@ export class ActionEventWatch
 {
     static readonly type = ActionsEvent.WatchEvent;
 
-    constructor(public id: string, public event: Event) { }
+    constructor(public payload: Event) { }
 }
 
 export class ActionEventPatch

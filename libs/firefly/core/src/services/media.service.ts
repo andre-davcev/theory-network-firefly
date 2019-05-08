@@ -90,6 +90,17 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         return id.replace(/-/g, '/');
     }
 
+    public getDownloadUrl(id: string): Observable<string | null>
+    {
+        return of(id).
+        pipe
+        (
+            map((key: string) => this.toBucketPath(key)),
+            map((bucketPath: string) => this.storage.ref(bucketPath)),
+            switchMap((ref: AngularFireStorageReference) => ref.getDownloadURL())
+        );
+    }
+
     public fromEvent(event: Event): Image | Icon
     {
         const image: Image | Icon =

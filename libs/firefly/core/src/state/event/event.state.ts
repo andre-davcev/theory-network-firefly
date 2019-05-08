@@ -176,7 +176,7 @@ export class StateEvent
     }
 
     @Action(ActionEventSetId)
-    setEventId({ getState, dispatch } : StateContext<StateEventModel>, { payload }: ActionEventSetId)
+    setEventId({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventSetId)
     {
         const id: string = payload;
         const isNew: boolean = id === CoreEnum.IdNew;
@@ -198,7 +198,7 @@ export class StateEvent
             ]
         };
 
-        return dispatch(new ActionEventWatch(id, event));
+        return dispatch(new ActionEventWatch(event));
     }
 
     @Action(ActionEventSet)
@@ -232,14 +232,23 @@ export class StateEvent
     }
 
     @Action(ActionEventWatch, { cancelUncompleted: true })
-    eventWatch({ dispatch } : StateContext<StateEventModel>, { id, event }: ActionEventWatch)
+    eventWatch({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventWatch)
     {
-        const event$: Observable<Event> = id === CoreEnum.IdNew ? of(event) : this.service.valuesChanges(id);
+        const event: Event  = payload;
+        const id:    string = event[ModelKey.Id];
 
-        return event$.pipe
-        (
-            tap((e: Event) => dispatch(new ActionEventSet(e)))
-        );
+        const event$: Observable<Event> = id === CoreEnum.IdNew ? of(event) : this.service.valuesChanges(id).
+
+        pipe(switchMap((e: Event) =>
+            this.image.getDownloadUrl(e[EventKey.ImageId]).
+            pipe
+            (
+                switchMap((url: string) => dispatch(new ActionEventSetImage(url))),
+                map(() => e)
+            )
+        ));
+
+        return event$.pipe(tap((e: Event) => dispatch(new ActionEventSet(e))));
     }
 
     @Action(ActionEventPatch)
@@ -306,26 +315,24 @@ export class StateEvent
     }
 
     @Action(ActionEventCreate)
-    create({ getState, patchState }: StateContext<StateEventModel>)
+    create({ getState, dispatch }: StateContext<StateEventModel>)
     {
         const state:    StateEventModel = getState();
         const e:        Event           = StateEvent.event(state);
         const imageUrl: string          = StateEvent.eventImageUrl(state);
-        const form:     FormGroup       = StateEvent.form(state);
 
         return this.image.createWithUpload(e, imageUrl).
         pipe
         (
             switchMap((event: Event) => this.service.create(event).pipe
             (
-                tap((ev: Event) => form.reset(ev)),
-                tap(() => patchState({ form })),
                 mergeMap(() =>
                     this.cluster.foreignKeyUpdate(Object.keys(event[EventKey.Clusters])[0], this.service.name, event[ModelKey.Id])
                 ),
                 mergeMap(() =>
                     this.user.foreignKeyUpdate(event[AssetKey.UserId], this.service.name, event[ModelKey.Id])
-                )
+                ),
+                tap(() => dispatch(new ActionEventWatch(event)))
             ))
         );
     }
