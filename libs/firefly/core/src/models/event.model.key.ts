@@ -6,6 +6,7 @@ export enum EventKey
     Clusters  = 'clusters',
     Location  = 'location',
     Times     = 'times',
+    Url       = 'url',
 
     TimeStart      = 'start',
     TimeEnd        = 'end',

@@ -224,7 +224,8 @@ export class StateEvent
             [EventKey.ImageId]   : [event[EventKey.ImageId], [StateEvent.validateImage(this.store)]],
             [EventKey.Clusters]  : [event[EventKey.Clusters], ValidatorsExtended.minLength(1)],
             [EventKey.Location]  : [event[EventKey.Location], Validators.required],
-            [EventKey.Times]     : [event[EventKey.Times], [StateEvent.validateTime(this.store)]]
+            [EventKey.Times]     : [event[EventKey.Times], [StateEvent.validateTime(this.store)]],
+            [EventKey.Url]       : event[EventKey.Url]
         });
 
         patchState({ form });
