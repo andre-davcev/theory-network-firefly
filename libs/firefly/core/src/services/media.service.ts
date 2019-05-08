@@ -69,7 +69,7 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         (
             switchMap(() => this.set(image)),
             mergeMap(() =>
-              this.user.foreignKeyAdd(image[AssetKey.UserId], this.name, image[ModelKey.Id])
+              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image[ModelKey.Id])
             ),
             map(() => event)
         );

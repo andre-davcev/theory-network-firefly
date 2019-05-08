@@ -2,6 +2,7 @@ import { Observable, from } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentSnapshot, Action } from '@angular/fire/firestore';
 import { Model, ModelKey } from '@theory/firebase';
 import { map, take, switchMap } from 'rxjs/operators';
+import { MergeType } from '../enums';
 
 export class ServiceBase<T extends Model>
 {
@@ -31,28 +32,44 @@ export class ServiceBase<T extends Model>
         return from(this.document(id).update(partial));
     }
 
-    public foreignKeyAdd(id: string, collection: string, key: string): Observable<void>
+    public foreignKeyUpdate(id: string, name: string, key: string, mergeType: MergeType = MergeType.Add): Observable<void>
     {
-        return this.foreignKeysAdd(id, collection, {[key]: key});
+        return this.foreignKeysUpdate(id, name, {[key]: key}, mergeType);
     }
 
-    public foreignKeysAdd(id: string, collection: string, keys: Record<string, string>): Observable<void>
+    public foreignKeysUpdate(id: string, name: string, keys: Record<string, string>, mergeType: MergeType = MergeType.Add): Observable<void>
     {
         return this.valuesChanges(id).pipe
         (
             take(1),
             map((object: T) =>
             {
+                let collection: Record<string, string> = object[name];
+
+                if (mergeType === MergeType.Remove)
+                {
+                    Object.keys(keys).forEach((key: string) => delete collection[key]);
+                }
+                else if (mergeType === MergeType.Add)
+                {
+                    collection =
+                    {
+                        ...collection,
+                        ...keys
+                    };
+                }
+                else if (mergeType === MergeType.Replace)
+                {
+                    collection = keys;
+                }
+
                 return {
                     ...object,
-                    [collection]: {
-                        ...object[collection],
-                        ...keys
-                    }
+                    [name]: collection
                 };
             }),
             switchMap((object: T) =>
-              this.patch(id, { [collection]: object[collection] } as Partial<T>)
+              this.patch(id, { [name]: object[name] } as Partial<T>)
             )
         );
     }

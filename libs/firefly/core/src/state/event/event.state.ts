@@ -320,10 +320,10 @@ export class StateEvent
                 tap((ev: Event) => form.reset(ev)),
                 tap(() => patchState({ form })),
                 mergeMap(() =>
-                    this.cluster.foreignKeyAdd(Object.keys(event[EventKey.Clusters])[0], this.service.name, event[ModelKey.Id])
+                    this.cluster.foreignKeyUpdate(Object.keys(event[EventKey.Clusters])[0], this.service.name, event[ModelKey.Id])
                 ),
                 mergeMap(() =>
-                    this.user.foreignKeyAdd(event[AssetKey.UserId], this.service.name, event[ModelKey.Id])
+                    this.user.foreignKeyUpdate(event[AssetKey.UserId], this.service.name, event[ModelKey.Id])
                 )
             ))
         );
