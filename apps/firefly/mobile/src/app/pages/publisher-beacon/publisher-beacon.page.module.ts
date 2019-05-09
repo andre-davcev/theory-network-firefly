@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { ModulePage } from '@firefly/app/modules';
 
-import { PagePublisherBeacon } from './publisher.beacon.page';
+import { PagePublisherBeacon } from './publisher-beacon.page';
 
 @NgModule
 ({
