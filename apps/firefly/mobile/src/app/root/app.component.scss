@@ -24,6 +24,7 @@
 
     ion-menu {
         --background: #{$app-color-dark};
+        --max-width: 210px;
     }
 
     ion-item {

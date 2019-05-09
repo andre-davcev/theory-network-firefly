@@ -3,12 +3,13 @@ import { FormGroup } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
-import { takeUntil, take } from 'rxjs/operators';
-import { ModalController } from '@ionic/angular';
+import { takeUntil, take, tap, mergeMap, switchMap, catchError } from 'rxjs/operators';
+import { LoadingOptions } from '@ionic/core';
+import { ModalController, LoadingController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
-import { StatusBarStyle, Camera, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
+import { StatusBarStyle } from '@capacitor/core';
 import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent, AssetKey, ActionEventCreate } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { ItemDescription } from '@firefly/mobile';
@@ -48,8 +49,10 @@ export class PageAssetEvent extends BaseComponent
     (
         private store: Store,
         private translate: TranslateService,
-        private modalController: ModalController,
-        private camera: CameraCordova
+        private modal: ModalController,
+        private camera: CameraCordova,
+        private loading: LoadingController,
+        private toast: ToastController
     )
     {
         super();
@@ -82,9 +85,7 @@ export class PageAssetEvent extends BaseComponent
     {
         if (page === Pages.AssetsClusters)
         {
-//            this.store.dispatch(new Navigate([page]));
-
-            from(this.modalController.create
+            from(this.modal.create
             ({
                 component: PageAssetsClusters,
                 componentProps: { modal: true }
@@ -117,7 +118,7 @@ export class PageAssetEvent extends BaseComponent
         }
         else if (page === Pages.EventLocation)
         {
-            from(this.modalController.create({ component: PageEventLocation })).
+            from(this.modal.create({ component: PageEventLocation })).
             subscribe((modal: HTMLIonModalElement) => modal.present());
         }
     }
@@ -133,6 +134,29 @@ export class PageAssetEvent extends BaseComponent
 
     public save(): void
     {
-        this.store.dispatch(new ActionEventCreate());
+        const options: LoadingOptions =
+        {
+            spinner:     'crescent',
+            translucent: false,
+            cssClass:    'cpt-loading'
+        };
+
+        from(this.loading.create(options)).
+        pipe
+        (
+            tap((loading: HTMLIonLoadingElement) => loading.present()),
+            switchMap((loading: HTMLIonLoadingElement) =>
+                this.store.dispatch(new ActionEventCreate()).pipe(tap(() => loading.dismiss()))
+            ),
+            switchMap(() =>
+                from(this.toast.create({ message: 'Event was successfully created!', duration: 2000 }))
+            ),
+            catchError((error: any) =>
+                from(this.toast.create({ message: 'An error occurred creating the event!', duration: 2000 }))
+            )
+        ).
+        subscribe((toast: HTMLIonToastElement) =>
+            toast.present()
+        );
     }
 }

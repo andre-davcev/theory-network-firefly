@@ -5,6 +5,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceMedia } from './media.service';
 import { Image } from '../models';
 import { ServiceUser } from './user.service';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceImage extends ServiceMedia<Image>
@@ -13,9 +14,10 @@ export class ServiceImage extends ServiceMedia<Image>
     (
         firestore: AngularFirestore,
         storage:   AngularFireStorage,
-        user:      ServiceUser
+        user:      ServiceUser,
+        webview:   WebView
     )
     {
-        super('images', firestore, storage, user);
+        super('images', firestore, storage, user, webview);
     }
 }

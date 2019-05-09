@@ -7,6 +7,7 @@ import { Icon } from '@firefly/core/models';
 import { ServiceMedia } from './media.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceUser } from './user.service';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceIcon extends ServiceMedia<Icon>
@@ -15,10 +16,11 @@ export class ServiceIcon extends ServiceMedia<Icon>
     (
         firestore: AngularFirestore,
         storage:   AngularFireStorage,
-        user:      ServiceUser
+        user:      ServiceUser,
+        webview:   WebView
     )
     {
-        super('icons', firestore, storage, user);
+        super('icons', firestore, storage, user, webview);
     }
 
     get(userId: String): Observable<Array<Icon>>
