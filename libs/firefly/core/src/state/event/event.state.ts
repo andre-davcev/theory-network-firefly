@@ -15,7 +15,6 @@ import { ValidatorsExtended, CoreEnum, DateUtil } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { RepeatType } from '@firefly/core/enums';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -163,7 +162,6 @@ export class StateEvent
         private service: ServiceEvent,
         private formBuilder: FormBuilder,
         private store: Store,
-        private webview: WebView,
         private image: ServiceImage,
         private cluster: ServiceCluster,
         private user: ServiceUser
@@ -295,7 +293,7 @@ export class StateEvent
     setImage({ patchState, getState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
     {
         const imageUrl: string = payload;
-        const imageUrlNormalized: string = !!imageUrl.match(/^data:image/) ? imageUrl : this.webview.convertFileSrc(imageUrl);
+        const imageUrlNormalized: string = this.image.normalizeUrl(imageUrl);
 
         patchState
         ({

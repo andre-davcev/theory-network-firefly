@@ -7,6 +7,7 @@ import { FileReadResult } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Image, Event, AssetKey, EventKey, Icon } from '@firefly/core/models';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { ServiceBase } from './base.service';
 import { ServiceUser } from './user.service';
@@ -15,18 +16,22 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
 {
     private _storage: AngularFireStorage;
     private _user:    ServiceUser;
+    private _webview: WebView;
 
     constructor
     (
         name:      string,
         firestore: AngularFirestore,
         storage:   AngularFireStorage,
-        user:      ServiceUser)
+        user:      ServiceUser,
+        webview:   WebView
+    )
     {
         super(name, firestore);
 
         this.storage = storage;
         this.user    = user;
+        this.webview = webview;
     }
 
     public base64(url: string): Observable<string>
@@ -116,6 +121,16 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         return image;
     }
 
+    public isNormalized(url: string): boolean
+    {
+        return !!url.match(/^data:image/) || !!url.match(/^http:/) || !!url.match(/^https:/);
+    }
+
+    public normalizeUrl(url: string): string
+    {
+        return this.isNormalized(url) ? url : this.webview.convertFileSrc(url);
+    }
+
     public get storage(): AngularFireStorage
     {
         return this._storage;
@@ -134,5 +149,15 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
     protected set user(user: ServiceUser)
     {
         this._user = user;
+    }
+
+    protected get webview(): WebView
+    {
+        return this._webview;
+    }
+
+    protected set webview(webview: WebView)
+    {
+        this._webview = webview;
     }
 }
