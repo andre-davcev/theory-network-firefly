@@ -10,7 +10,7 @@ export const routes: Routes =
     { path: Pages.Home,  loadChildren: '@firefly/page/home#ModulePageHome' },
 
     { path: Pages.AssetsBeacons,  loadChildren: '@firefly/page/assets-beacons#ModulePageAssetsBeacons' },
-    { path: Pages.AssetsClusters, loadChildren: '@firefly/page/assets-clusters#ModulePageAssetsClusters' },
+    { path: Pages.AssetsClusters, loadChildren: '@firefly/page/assets-clusters#ModulePageAssetsClustersRoute' },
     { path: Pages.AssetCluster,   loadChildren: '@firefly/page/asset-cluster#ModulePageAssetCluster'},
     { path: Pages.AssetsCoupons,  loadChildren: '@firefly/page/assets-coupons#ModulePageAssetsCoupons' },
     { path: Pages.AssetsEvents,   loadChildren: '@firefly/page/assets-events#ModulePageAssetsEvents' },

@@ -7,7 +7,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { AuthProvider } from '@theory/firebase';
 
-import { StateUser, ActionUserAuthenticate, ActionLoginEmail } from '@firefly/core';
+import { StateUser, ActionLoginEmail } from '@firefly/core';
 import { ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/capacitor';
 
 @Component

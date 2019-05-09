@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
@@ -25,7 +25,8 @@ export class PageHome
 
     constructor
     (
-        public alertController: AlertController,
+        private alert: AlertController,
+        private menu: MenuController,
         private store: Store
     ) { }
 
@@ -52,9 +53,9 @@ export class PageHome
     alertStreamToggle(type: Pages.Alert | Pages.Stream)
     {
         this.child = type;
-      this.store.dispatch(new Navigate([Pages.Home, type]));
+        this.store.dispatch(new Navigate([Pages.Home, type]));
 
-      this.showAlerts = type === Pages.Alert;
+        this.showAlerts = type === Pages.Alert;
     }
 
     deleteConfirm()
@@ -93,5 +94,10 @@ export class PageHome
 
         confirm.present();
 */
+    }
+
+    public menuOpen()
+    {
+      this.menu.open();
     }
 }

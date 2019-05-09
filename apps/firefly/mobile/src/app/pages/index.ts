@@ -23,3 +23,5 @@ export * from './user';
 export * from './user-assets';
 export * from './user-profile';
 export * from './user-settings';
+
+export * from './pages.enum';

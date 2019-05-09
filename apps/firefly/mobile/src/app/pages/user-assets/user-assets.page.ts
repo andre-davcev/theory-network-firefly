@@ -16,7 +16,6 @@ import { Pages } from '../pages.enum';
 export class PageUserAssets
 {
     public Pages: any = Pages;
-    public translations: Array<string> = [];
 
     constructor(private store: Store) { }
 

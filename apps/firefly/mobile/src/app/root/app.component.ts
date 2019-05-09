@@ -1,21 +1,32 @@
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { from } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
-import { Actions, ofActionSuccessful } from '@ngxs/store';
-import { RouterNavigation } from '@ngxs/router-plugin';
+import { delay } from 'rxjs/operators';
+import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
+import { RouterNavigation, Navigate } from '@ngxs/router-plugin';
 
 import { SplashScreen } from '@theory/capacitor';
 import { PlatformEnum } from '@theory/ionic';
 
+import { Pages } from '@firefly/app/pages';
+
 @Component
 ({
     selector    : 'app-root',
-    templateUrl : 'app.component.html'
+    templateUrl : 'app.component.html',
+    styleUrls   : ['./app.component.scss']
 })
 export class ComponentApp
 {
-    constructor(private platform: Platform, private actions$: Actions)
+    public Pages: any = Pages;
+
+    constructor
+    (
+        private platform: Platform,
+        private actions$: Actions,
+        private store:    Store,
+        private menu:     MenuController
+    )
     {
         this.initializeApp();
     }
@@ -31,5 +42,11 @@ export class ComponentApp
 
         this.actions$.pipe(ofActionSuccessful(RouterNavigation)).
         subscribe((data: any) => console.log(data.event.url));
+    }
+
+    public go(page: Pages): void
+    {
+        this.menu.close();
+        this.store.dispatch(new Navigate([page]));
     }
 }

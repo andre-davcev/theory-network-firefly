@@ -4,6 +4,7 @@ import { CoreModule, SharedModule } from '@firefly/app/modules';
 
 import { ModuleRoutingApp } from './app.component.routing';
 import { ComponentApp } from './app.component';
+import { ModuleComponentIcon } from '@firefly/core';
 
 @NgModule
 ({
@@ -11,7 +12,8 @@ import { ComponentApp } from './app.component';
     [
         CoreModule,
         SharedModule,
-        ModuleRoutingApp
+        ModuleRoutingApp,
+        ModuleComponentIcon
     ],
 
     declarations : [ComponentApp],

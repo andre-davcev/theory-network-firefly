@@ -3,11 +3,7 @@
 $app-card-height: 48px;
 
 :host {
-    /*
-    736px height
-    */
-
-    --background: #{$app-color-primary};
+    --background: #{$app-color-grey-lightest};
 
     ion-toolbar {
         --padding-start: 1.25rem;
@@ -21,7 +17,7 @@ $app-card-height: 48px;
     }
 
     ion-toolbar {
-        --background: #{$app-color-primary};
+        --background: #{$app-color-grey-lightest};
         --border-width: 0;
 
         ion-buttons {
@@ -30,11 +26,11 @@ $app-card-height: 48px;
     }
 
     ion-slides {
-        --background: #{$app-color-primary};
+        --background: #{$app-color-grey-lightest};
         --bullet-background: #{$app-color-black};
         --bullet-background-active: #{$app-color-dark};
 
-        background-color: $app-color-primary;
+        background-color: $app-color-grey-lightest;
         position: relative;
         width: 100%;
     }
@@ -56,6 +52,6 @@ $app-card-height: 48px;
     {
         position: relative;
         height: 100%;
-        background-color: $app-color-primary;
+        background-color: $app-color-grey-lightest;
     }
 }

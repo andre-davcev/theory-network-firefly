@@ -17,6 +17,15 @@
   "general.publish"        : "Publish",
   "general.update"         : "Update",
 
+  "menu.assets"          : "My Assets",
+  "menu.assets.clusters" : "Clusters",
+  "menu.assets.events"   : "Events",
+  "menu.assets.icons"    : "Icons",
+  "menu.assets.images"   : "Images",
+  "menu.account"         : "Account",
+  "menu.account.profile" : "Profile",
+  "menu.account.log-out" : "Log Out",
+
   "page.auth.title"               : "firefly",
   "page.auth.tagline"             : "Life comes to you",
   "page.auth.placeholderEmail"    : "email address",

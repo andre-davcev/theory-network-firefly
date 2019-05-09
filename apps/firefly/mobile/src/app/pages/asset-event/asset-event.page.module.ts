@@ -11,7 +11,7 @@ import { NgxsModule } from '@ngxs/store';
 import { StateEvent } from '@firefly/core';
 import { PageEventLocation, ModulePageEventLocation } from '../event-location';
 import { PageImageSelector, ModulePageImageSelector } from '../image-selector';
-import { ModulePageAssetsClustersModal } from '../assets-clusters';
+import { ModulePageAssetsClusters } from '../assets-clusters';
 
 @NgModule
 ({
@@ -26,7 +26,7 @@ import { ModulePageAssetsClustersModal } from '../assets-clusters';
         RouterModule.forChild(RoutesPageAssetEvent),
         NgxsModule.forFeature([StateEvent]),
         ModulePageEventLocation,
-        ModulePageAssetsClustersModal,
+        ModulePageAssetsClusters,
         ModulePageImageSelector
     ],
 
