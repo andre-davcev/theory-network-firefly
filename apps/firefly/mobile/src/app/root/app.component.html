@@ -4,6 +4,17 @@
             <ion-list lines="none">
                 <ion-item-group>
                     <ion-item-divider color="dark">
+                        <ion-label color="light">{{ 'menu.manage' | translate }}</ion-label>
+                    </ion-item-divider>
+
+                    <ion-item (click)="go(Pages.Subscriptions)">
+                        <ion-icon name="options" slot="start" color="primary"></ion-icon>
+                        <ion-label color="light">{{ 'menu.manage.subscriptions' | translate }}</ion-label>
+                    </ion-item>
+                </ion-item-group>
+
+                <ion-item-group>
+                    <ion-item-divider color="dark">
                         <ion-label color="light">{{ 'menu.assets' |  translate }}</ion-label>
                     </ion-item-divider>
 
