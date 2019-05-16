@@ -7,7 +7,7 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
 import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';
-import { ActionEventSetId } from '@firefly/core';
+import { CoreEnum } from '@theory/core';
 
 @Component
 ({
@@ -40,14 +40,11 @@ export class PageHome
         }
     }
 
-    navigate(type: Pages): void
+    public navigate(type: Pages): void
     {
-        if (type === Pages.AssetEvent)
-        {
-            this.store.dispatch(new ActionEventSetId());
-        }
+        const url: Array<any> = type === Pages.AssetEvent ? [ type, CoreEnum.IdNew ] : [ type ];
 
-        this.store.dispatch(new Navigate([type]));
+        this.store.dispatch(new Navigate(url));
     }
 
     alertStreamToggle(type: Pages.Alert | Pages.Stream)
