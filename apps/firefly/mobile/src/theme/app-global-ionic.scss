@@ -41,3 +41,8 @@ ion-fab-button {
 ion-action-sheet {
   --ion-color-primary: var( --ion-color-dark);
 }
+
+ion-toast {
+    --background: #{$app-color-primary};
+    --color: #{$app-color-white};
+}
