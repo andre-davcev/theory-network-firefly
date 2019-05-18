@@ -7,7 +7,6 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx'
 import { Firebase } from '@ionic-native/firebase/ngx';
@@ -19,6 +18,7 @@ import { AppCoreModule } from '@theory/web';
 import { StateLanguage, StateLocation, StateDevice} from '@theory/capacitor';
 import { StatePhotos as StatePhotosCap} from '@theory/cordova';
 import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts, FirebaseEnvironment, MapboxEnvironment, StateEvent } from '@firefly/core';
+import { StateIonic } from '@theory/ionic';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
 import { StateMap } from '@theory/mapbox';
@@ -64,7 +64,8 @@ Pro.init('1e5146ca',
             StateSubscriptions,
             StateEvent,
             StateMap,
-            StatePhotosCap
+            StatePhotosCap,
+            StateIonic
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
