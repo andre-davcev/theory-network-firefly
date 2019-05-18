@@ -4,6 +4,12 @@ ion-app {
     ion-picker {
         --ion-color-primary: #{$app-color-black};
     }
+
+    ion-loading {
+        ion-spinner {
+            --spinner-color: #{$app-color-primary};
+        }
+    }
 }
 
 ion-item {
@@ -45,4 +51,5 @@ ion-action-sheet {
 ion-toast {
     --background: #{$app-color-primary};
     --color: #{$app-color-white};
+    --box-shadow: rgba(0, 0, 0, 0.37) 0px 1px 4px 0px;
 }
