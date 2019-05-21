@@ -3,7 +3,7 @@ import { Alert } from '@firefly/core/models';
 export const MockAlerts: Array<Alert> =
 [
     {
-        id    : '1',
+        id    : '3',
         image : 'assets/images/temp-notifications-rusted.root.jpg',
         title : 'Rusted Root',
         body  : "Sahlen's Music Stage",
@@ -21,7 +21,7 @@ export const MockAlerts: Array<Alert> =
     },
 
     {
-        id    : '3',
+        id    : '1',
         image : 'assets/images/temp-notifications-blondie.jpg',
         title : 'Blondie',
         body  : "Artpark",
