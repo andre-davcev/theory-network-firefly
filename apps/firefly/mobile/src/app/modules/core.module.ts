@@ -24,6 +24,7 @@ import { environment } from '@firefly/app/env';
 import { StateMap } from '@theory/mapbox';
 import { Camera } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { StateMobile } from '@firefly/mobile';
 
 /*
 Pro.init('1e5146ca',
@@ -65,7 +66,8 @@ Pro.init('1e5146ca',
             StateEvent,
             StateMap,
             StatePhotosCap,
-            StateIonic
+            StateIonic,
+            StateMobile
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
