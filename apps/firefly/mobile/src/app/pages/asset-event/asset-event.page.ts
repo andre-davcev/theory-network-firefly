@@ -11,12 +11,11 @@ import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacit
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent, AssetKey, ActionEventCreate } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
-import { ItemDescription } from '@firefly/mobile';
+import { ItemDescription, ActionMobileLoadingOptions, ActionMobileLoading } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters } from '../assets-clusters';
 import { TempImageUri } from '@firefly/app/mock';
-import { ActionIonicLoading, ActionIonicLoadingOptions } from '@theory/ionic';
 
 @Component
 ({
@@ -132,26 +131,13 @@ export class PageAssetEvent extends BaseComponent
 
     public save(): void
     {
-        const options: ActionIonicLoadingOptions =
+        const options: ActionMobileLoadingOptions =
         {
             observable$: this.store.dispatch(new ActionEventCreate()),
-            options:
-            {
-                spinner:     'crescent',
-                translucent: false,
-                cssClass:    'cpt-loading'
-            },
-            toast:
-            {
-                message: 'Event was successfully created!',
-                error:   'An error occurred creating the event!',
-                options:
-                {
-                    duration: 3000
-                }
-            }
+            message:     'Event was successfully created!',
+            error:       'An error occurred creating the event!'
         };
 
-        this.store.dispatch(new ActionIonicLoading(options));
+        this.store.dispatch(new ActionMobileLoading(options));
     }
 }
