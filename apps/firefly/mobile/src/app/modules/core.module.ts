@@ -17,8 +17,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppCoreModule } from '@theory/web';
 import { StateLanguage, StateLocation, StateDevice} from '@theory/capacitor';
 import { StatePhotos as StatePhotosCap} from '@theory/cordova';
-import { StateUser, StateCluster, StatePlaces, StateIcons, StateSubscriptions, StateAlerts, FirebaseEnvironment, MapboxEnvironment, StateEvent } from '@firefly/core';
-import { StateIonic } from '@theory/ionic';
+import {
+  StateUser,
+  StateCluster,
+  StatePlaces,
+  StateIcons,
+  StateSubscriptions,
+  StateAlerts,
+  FirebaseEnvironment,
+  MapboxEnvironment,
+  StateEvent
+} from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
 import { StateMap } from '@theory/mapbox';
@@ -66,7 +75,6 @@ Pro.init('1e5146ca',
             StateEvent,
             StateMap,
             StatePhotosCap,
-            StateIonic,
             StateMobile
         ]),
 
