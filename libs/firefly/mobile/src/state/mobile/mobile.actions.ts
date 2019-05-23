@@ -9,3 +9,8 @@ export class ActionMobileLoading
 
     constructor(public payload: ActionMobileLoadingOptions) { }
 }
+
+export class ActionMobileWatchNavigation
+{
+    static readonly type = ActionsMobile.WatchNavigsation;
+}
