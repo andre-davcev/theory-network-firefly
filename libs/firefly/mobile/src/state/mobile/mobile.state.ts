@@ -1,58 +1,94 @@
 
-import { Action, StateContext, State, NgxsOnInit, Actions } from '@ngxs/store';
+import { Action, StateContext, State, NgxsOnInit, Actions, Selector, ofActionDispatched, ofActionCompleted } from '@ngxs/store';
 
 import { StateMobileModel } from './mobile.state.model';
-import { ActionMobileLoading, ActionMobileWatchNavigation } from './mobile.actions';
-import { ActionIonicLoadingOptions, ActionIonicLoading } from '@theory/ionic';
+import { ActionMobileLoadingShow, ActionMobileWatchNavigation, ActionMobileToast, ActionMobileLoadingHide } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { switchMap, tap } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { LoadingOptions, ToastOptions } from '@ionic/core';
+import { RouterNavigation, } from '@ngxs/router-plugin';
 
 @State<StateMobileModel>(StateMobileOptions)
 
 export class StateMobile implements NgxsOnInit
 {
-    constructor(private actions$: Actions) { }
+    @Selector() static isLoading(state: StateMobileModel): boolean {return state.loadingElement != null;}
+    @Selector() static loadingElement(state: StateMobileModel): any { return state.loadingElement; }
+
+    constructor
+    (
+        private loading: LoadingController,
+        private toast:   ToastController,
+        private actions$: Actions
+    ) { }
 
     public ngxsOnInit(context: StateContext<StateMobileModel>)
     {
-        context.dispatch
-        ([
-            new ActionMobileWatchNavigation()
-        ]);
+
+    }
+
+    @Action(ActionMobileLoadingShow)
+    loadingShow({ dispatch, patchState }: StateContext<StateMobileModel>)
+    {
+        const options: LoadingOptions =
+        {
+            spinner:     'crescent',
+            translucent: false,
+            cssClass:    'cpt-loading'
+        };
+
+        return dispatch(new ActionMobileLoadingHide()).
+        pipe
+        (
+            switchMap(() =>  from(this.loading.create(options))),
+            tap(loading => console.log(loading)),
+            tap((loadingElement: HTMLIonLoadingElement) => patchState({ loadingElement })),
+            switchMap((loadingElement: HTMLIonLoadingElement) => from(loadingElement.present()))
+        );
+    }
+
+    @Action(ActionMobileLoadingHide)
+    loadingHide({ getState, patchState }: StateContext<StateMobileModel>)
+    {
+        const loading: HTMLIonLoadingElement = StateMobile.loadingElement(getState());
+
+        console.log(loading);
+
+        if (loading != null)
+        {
+            loading.dismiss();
+        }
+
+        patchState({ loadingElement: undefined });
+    }
+
+    @Action(ActionMobileToast)
+    toastShow({ }: StateContext<StateMobileModel>, { payload }: ActionMobileToast)
+    {
+        const message: string = payload;
+
+        const options: ToastOptions = { duration: 3000 };
+
+        return from(this.toast.create({ ...options, message })).
+        pipe
+        (
+            switchMap((toast: HTMLIonToastElement) => from(toast.present()))
+        );
     }
 
     @Action(ActionMobileWatchNavigation)
-    watchNavigation({ }: StateContext<StateMobileModel>)
+    watchNavigation({ dispatch }: StateContext<StateMobileModel>)
     {
-        // https://ngxs.gitbook.io/ngxs/advanced/action-handlers
-    }
+/*
+        this.actions$.
+            pipe(ofActionDispatched(RouterNavigation), tap(() => console.log('YO'))).
+            subscribe(() => dispatch(new ActionMobileLoadingShow()));
 
-    @Action(ActionMobileLoading)
-    loading({ dispatch }: StateContext<StateMobileModel>, { payload }: ActionMobileLoading)
-    {
-        const options: ActionIonicLoadingOptions =
-        {
-            observable$: payload.observable$,
-            options:
-            {
-                spinner:     'crescent',
-                translucent: false,
-                cssClass:    'cpt-loading'
-            }
-        };
-
-        if (payload.message != null || payload.error != null)
-        {
-            options.toast =
-            {
-                message: payload.message,
-                error:   payload.error,
-                options:
-                {
-                    duration: 3000
-                }
-            }
-        }
-
-        return dispatch(new ActionIonicLoading(options));
+        this.actions$.
+            pipe(ofActionCompleted(RouterNavigation), tap(() => console.log('HI'))).
+            subscribe(() => dispatch(new ActionMobileLoadingHide()));
+*/
     }
 }

@@ -8,6 +8,6 @@ export const StateMobileOptions: StoreOptions<StateMobileModel> =
 
     defaults :
     {
-
+        loadingElement: undefined
     }
 };

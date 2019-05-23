@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
-import { takeUntil, take } from 'rxjs/operators';
+import { takeUntil, take, map, catchError } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -11,7 +11,7 @@ import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacit
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent, AssetKey, ActionEventCreate } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
-import { ItemDescription, ActionMobileLoadingOptions, ActionMobileLoading } from '@firefly/mobile';
+import { ItemDescription, ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters } from '../assets-clusters';
@@ -131,13 +131,22 @@ export class PageAssetEvent extends BaseComponent
 
     public save(): void
     {
-        const options: ActionMobileLoadingOptions =
-        {
-            observable$: this.store.dispatch(new ActionEventCreate()),
-            message:     'Event was successfully created!',
-            error:       'An error occurred creating the event!'
-        };
-
-        this.store.dispatch(new ActionMobileLoading(options));
+        this.store.dispatch
+        ([
+            new ActionMobileLoadingShow(),
+            new ActionEventCreate()
+        ]).
+        pipe
+        (
+            map(() => 'Event was successfully created!'),
+            catchError(() => of('An error occurred creating the event!'))
+        ).
+        subscribe((message: string) =>
+            this.store.dispatch
+            ([
+                new ActionMobileLoadingHide(),
+                new ActionMobileToast(message)
+            ])
+        );
     }
 }

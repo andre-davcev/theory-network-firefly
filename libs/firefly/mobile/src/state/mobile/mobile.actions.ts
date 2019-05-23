@@ -1,13 +1,24 @@
 
 
 import { ActionsMobile } from './mobile.actions.enum';
-import { ActionMobileLoadingOptions } from './mobile.actions.options';
 
-export class ActionMobileLoading
+export class ActionMobileLoadingShow
 {
-    static readonly type = ActionsMobile.Loading;
+    static readonly type = ActionsMobile.LoadingShow;
 
-    constructor(public payload: ActionMobileLoadingOptions) { }
+    constructor() { }
+}
+
+export class ActionMobileLoadingHide
+{
+    static readonly type = ActionsMobile.LoadingHide;
+}
+
+export class ActionMobileToast
+{
+    static readonly type = ActionsMobile.Toast;
+
+    constructor(public payload: string) { }
 }
 
 export class ActionMobileWatchNavigation
