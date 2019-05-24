@@ -1,2 +1,2 @@
 export * from './credentials.interface';
-export * from './ngxs-form.interface';
+export * from './form-ngxs.interface'
