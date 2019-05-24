@@ -1,14 +1,13 @@
 
-import { Action, StateContext, State, NgxsOnInit, Actions, Selector, ofActionDispatched, ofActionCompleted } from '@ngxs/store';
+import { Action, StateContext, State, NgxsOnInit, Actions, Selector } from '@ngxs/store';
 
 import { StateMobileModel } from './mobile.state.model';
-import { ActionMobileLoadingShow, ActionMobileWatchNavigation, ActionMobileToast, ActionMobileLoadingHide } from './mobile.actions';
+import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { switchMap, tap } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { LoadingOptions, ToastOptions } from '@ionic/core';
-import { RouterNavigation, } from '@ngxs/router-plugin';
 
 @State<StateMobileModel>(StateMobileOptions)
 
@@ -76,19 +75,5 @@ export class StateMobile implements NgxsOnInit
         (
             switchMap((toast: HTMLIonToastElement) => from(toast.present()))
         );
-    }
-
-    @Action(ActionMobileWatchNavigation)
-    watchNavigation({ dispatch }: StateContext<StateMobileModel>)
-    {
-/*
-        this.actions$.
-            pipe(ofActionDispatched(RouterNavigation), tap(() => console.log('YO'))).
-            subscribe(() => dispatch(new ActionMobileLoadingShow()));
-
-        this.actions$.
-            pipe(ofActionCompleted(RouterNavigation), tap(() => console.log('HI'))).
-            subscribe(() => dispatch(new ActionMobileLoadingHide()));
-*/
     }
 }

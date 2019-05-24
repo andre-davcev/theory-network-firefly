@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController, MenuController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
@@ -8,7 +8,6 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum } from '@theory/core';
-import { ActionMobileWatchNavigation } from '@firefly/mobile';
 
 @Component
 ({
@@ -17,7 +16,7 @@ import { ActionMobileWatchNavigation } from '@firefly/mobile';
     styleUrls   : ['./home.page.scss']
 })
 
-export class PageHome implements OnInit
+export class PageHome
 {
 
     public Pages:      any     = Pages;
@@ -31,11 +30,6 @@ export class PageHome implements OnInit
         private menu: MenuController,
         private store: Store
     ) { }
-
-    public ngOnInit(): void
-    {
-        this.store.dispatch(new ActionMobileWatchNavigation());
-    }
 
     ionViewWillEnter()
     {
