@@ -1,6 +1,7 @@
 
 
 import { ActionsMobile } from './mobile.actions.enum';
+import { Observable } from 'rxjs';
 
 export class ActionMobileLoadingShow
 {
@@ -19,9 +20,4 @@ export class ActionMobileToast
     static readonly type = ActionsMobile.Toast;
 
     constructor(public payload: string) { }
-}
-
-export class ActionMobileWatchNavigation
-{
-    static readonly type = ActionsMobile.WatchNavigsation;
 }
