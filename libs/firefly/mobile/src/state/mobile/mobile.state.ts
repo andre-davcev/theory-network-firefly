@@ -1,17 +1,17 @@
 
-import { Action, StateContext, State, NgxsOnInit, Actions, Selector } from '@ngxs/store';
+import { Action, StateContext, State, Selector } from '@ngxs/store';
 
 import { StateMobileModel } from './mobile.state.model';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { switchMap, tap } from 'rxjs/operators';
-import { from, Observable } from 'rxjs';
+import { from } from 'rxjs';
 import { LoadingOptions, ToastOptions } from '@ionic/core';
 
 @State<StateMobileModel>(StateMobileOptions)
 
-export class StateMobile implements NgxsOnInit
+export class StateMobile
 {
     @Selector() static isLoading(state: StateMobileModel): boolean {return state.loadingElement != null;}
     @Selector() static loadingElement(state: StateMobileModel): any { return state.loadingElement; }
@@ -19,14 +19,8 @@ export class StateMobile implements NgxsOnInit
     constructor
     (
         private loading: LoadingController,
-        private toast:   ToastController,
-        private actions$: Actions
+        private toast:   ToastController
     ) { }
-
-    public ngxsOnInit(context: StateContext<StateMobileModel>)
-    {
-
-    }
 
     @Action(ActionMobileLoadingShow)
     loadingShow({ dispatch, patchState }: StateContext<StateMobileModel>)
