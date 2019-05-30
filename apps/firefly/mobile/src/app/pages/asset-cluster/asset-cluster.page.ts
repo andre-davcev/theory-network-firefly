@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap, switchMap, catchError } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { TranslateService } from '@ngx-translate/core';
 import { StatusBarStyle } from '@capacitor/core';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
-
+import { LoadingOptions } from '@ionic/core';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { BaseComponent } from '@theory/core';
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
-import { StateCluster, ActionSetClusterId, ActionClusterSetIcon, ActionSetCluster, AssetKey, ClusterKey } from '@firefly/core';
+import { StateCluster, ActionClusterSetId, ActionClusterSetIcon, ActionClusterCreate, AssetKey, ClusterKey } from '@firefly/core';
 import { ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 
@@ -37,11 +38,14 @@ export class PageAssetCluster extends BaseComponent
 
     constructor(private store: Store,
       private translate: TranslateService,
-      private camera: CameraCordova)
+      private camera: CameraCordova,
+      private loading: LoadingController,
+      private toast: ToastController
+    )
     {
         super();
 
-        this.store.dispatch(new ActionSetClusterId('new'));
+        this.store.dispatch(new ActionClusterSetId('new'));
 
         this.translate.get
         ([
@@ -105,8 +109,37 @@ export class PageAssetCluster extends BaseComponent
         this.store.dispatch(new Navigate([Pages.ImageSelector]));
     }
 
-    public setCluster(): void
+    /*public setCluster(): void
     {
-        this.store.dispatch(new ActionSetCluster());
+        this.store.dispatch(new ActionClusterSet());
+    }*/
+
+    public save(): void
+    {
+        const options: LoadingOptions =
+        {
+            spinner:     'crescent',
+            translucent: false,
+            cssClass:    'cpt-loading'
+        };
+
+        from(this.loading.create(options)).
+        pipe
+        (
+            tap((loading: HTMLIonLoadingElement) => loading.present()),
+            switchMap((loading: HTMLIonLoadingElement) =>
+                this.store.dispatch(new ActionClusterCreate()).pipe(tap(() => loading.dismiss()))
+            ),
+            switchMap(() =>
+                from(this.toast.create({ message: 'Event was successfully created!', duration: 2000 }))
+            ),
+            catchError((error: any) =>
+                from(this.toast.create({ message: 'An error occurred creating the event!', duration: 2000 }))
+            )
+        ).
+        subscribe((toast: HTMLIonToastElement) =>
+            toast.present()
+        );
     }
+
 }
