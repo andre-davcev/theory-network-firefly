@@ -6,7 +6,7 @@ import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Image, Event, AssetKey, EventKey, Icon } from '@firefly/core/models';
+import { Image, Event, Cluster, AssetKey, EventKey, Icon } from '@firefly/core/models';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { ServiceBase } from './base.service';
