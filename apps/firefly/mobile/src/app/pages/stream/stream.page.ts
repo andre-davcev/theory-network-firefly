@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { ActionSetCluster, StateSubscriptions, Subscription, Cluster } from '@firefly/core';
+import { StateSubscriptions, Subscription, Cluster } from '@firefly/core';
 
 @Component
 ({
