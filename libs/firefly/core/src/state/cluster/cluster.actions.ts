@@ -1,4 +1,12 @@
 import { ActionsCluster } from './cluster.actions.enum';
+import { Cluster } from '@firefly/core/models';
+
+export class ActionClusterWatch
+{
+    static readonly type = ActionsCluster.WatchCluster;
+
+    constructor(public payload: Cluster) { }
+}
 
 export class ActionGetClusters
 {
@@ -14,18 +22,18 @@ export class ActionClusterSetIcon
     constructor(public payload: string) { }
 }
 
-export class ActionSetClusterId
+export class ActionClusterSetId
 {
     static readonly type = ActionsCluster.SetClusterId;
 
     constructor(public payload: string) {}
 }
 
-export class ActionSetCluster
+export class ActionClusterSet
 {
     static readonly type = ActionsCluster.SetCluster;
 
-    constructor() {}
+    constructor(public payload: Cluster) {}
 }
 
 export class ActionUpdateCluster
@@ -33,4 +41,11 @@ export class ActionUpdateCluster
     static readonly type = ActionsCluster.UpdateCluster;
 
     constructor() {}
+}
+
+export class ActionClusterCreate
+{
+    static readonly type = ActionsCluster.CreateCluster;
+
+    constructor() { }
 }
