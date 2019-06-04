@@ -1,12 +1,12 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, map, last, tap, mergeMap } from 'rxjs/operators';
+import { switchMap, map, last, mergeMap } from 'rxjs/operators';
 import { StorageFormat, ModelKey } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Image, Event, Cluster, AssetKey, EventKey, Icon } from '@firefly/core/models';
+import { Image, Event, AssetKey, EventKey, Icon, Asset } from '@firefly/core/models';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { ServiceBase } from './base.service';
@@ -59,30 +59,9 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         );
     }
 
-    public createWithUpload(event: Event, imagePath: string): Observable<Event>
+    public id(asset: Asset): string
     {
-        const image:      Image | Icon = this.fromEvent(event);
-        const bucketPath: string       = this.toBucketPath(image[ModelKey.Id]);
-
-        event =
-        {
-            ...event,
-            [EventKey.ImageId]: image[ModelKey.Id]
-        };
-
-        return this.upload(imagePath, bucketPath).pipe
-        (
-            switchMap(() => this.set(image)),
-            mergeMap(() =>
-              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image[ModelKey.Id])
-            ),
-            map(() => event)
-        );
-    }
-
-    private id(event: Event): string
-    {
-        return `${event.userId}-${this.name}-${new Date().getTime()}.png`;
+        return `${asset.userId}-${this.name}-${new Date().getTime()}.png`;
     }
 
     public toId(bucketPath: string): string
@@ -104,21 +83,6 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
             map((bucketPath: string) => this.storage.ref(bucketPath)),
             switchMap((ref: AngularFireStorageReference) => ref.getDownloadURL())
         );
-    }
-
-    public fromEvent(event: Event): Image | Icon
-    {
-        const image: Image | Icon =
-        {
-            [ModelKey.Id]          : this.id(event),
-            [AssetKey.Name]        : '',
-            [AssetKey.Description] : '',
-            [AssetKey.Private]     : true,
-            [AssetKey.UserId]      : event.userId,
-            [AssetKey.Draft]       : false
-        };
-
-        return image;
     }
 
     public isNormalized(url: string): boolean
