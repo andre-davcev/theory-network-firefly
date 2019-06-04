@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from
 import { Observable, from } from 'rxjs';
 import { switchMap, filter, take, map, mergeMap } from 'rxjs/operators';
 
-import { Icon } from '@firefly/core/models';
+import { Icon, EventKey, Event, Asset } from '@firefly/core/models';
 import { ServiceMedia } from './media.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceUser } from './user.service';
@@ -107,6 +107,42 @@ export class ServiceIcon extends ServiceMedia<Icon>
             filter((ico: Icon) => ico.dateCreated != null),
 
             take(1)
+        );
+    }
+
+    public fromEvent(event: Event): Icon
+    {
+        const image: Icon =
+        {
+            [ModelKey.Id]          : this.id(event),
+            [AssetKey.Name]        : '',
+            [AssetKey.Description] : '',
+            [AssetKey.Private]     : true,
+            [AssetKey.UserId]      : event[AssetKey.UserId],
+            [AssetKey.Draft]       : false
+        };
+
+        return image;
+    }
+
+    public createWithUpload(event: Event, imagePath: string): Observable<Event>
+    {
+        const image:      Icon = this.fromEvent(event);
+        const bucketPath: string       = this.toBucketPath(image[ModelKey.Id]);
+
+        event =
+        {
+            ...event,
+            [EventKey.ImageId]: image[ModelKey.Id]
+        };
+
+        return this.upload(imagePath, bucketPath).pipe
+        (
+            switchMap(() => this.set(image)),
+            mergeMap(() =>
+              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image[ModelKey.Id])
+            ),
+            map(() => event)
         );
     }
 }
