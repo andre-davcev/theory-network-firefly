@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
@@ -20,7 +19,6 @@ import { BaseComponent } from '@theory/core';
 
 export class PageEventLocation extends BaseComponent implements OnInit
 {
-    @Select(StateEvent.form)                 form$:                Observable<FormGroup>;
     @Select(StateEvent.eventLocations)       locations$:           Observable<Array<Location>>;
     @Select(StateEvent.eventLocationDefined) locationDefined$:     Observable<boolean>;
 
@@ -30,7 +28,11 @@ export class PageEventLocation extends BaseComponent implements OnInit
     public disableDone$: Observable<boolean>;
     public result: Result;
 
-    constructor(private store: Store, private modalController: ModalController)
+    constructor
+    (
+        private store: Store,
+        private modalController: ModalController
+    )
     {
         super();
     }
@@ -53,44 +55,6 @@ export class PageEventLocation extends BaseComponent implements OnInit
     public locationFound(result: Result): void
     {
         this.result = result;
-
-/*
-    bbox: Array (4)
-        0 2.224219
-        1 48.815754
-        2 2.469753
-        3 48.901973
-    center: Array (2)
-        0 2.35183
-        1 48.85658
-    context: Array (1)
-        0 Object
-            id: "country.9759535382641660"
-            language: "en"
-            language_en: "en"
-            short_code: "fr"
-            text: "France"
-            text_en: "France"
-            wikidata: "Q142"
-    geometry: Object
-        coordinates: [2.35183, 48.85658] (2)
-        type: "Point"
-    id: "place.9397217726497330"
-    language: "en"
-    language_en: "en"
-    place_name: "Paris, France"
-    place_name_en: "Paris, France"
-    place_type: Array (2)
-        0 "region"
-        1 "place"
-    properties: Object
-        short_code: "FR-75"
-        wikidata: "Q90"
-    relevance: 1
-    text: "Paris"
-    text_en: "Paris"
-    type: "Feature"
-*/
     }
 
     public cancel(): void
@@ -106,13 +70,9 @@ export class PageEventLocation extends BaseComponent implements OnInit
 
     public save(): void
     {
-        if (this.result != null)
-        {
-            this.store.dispatch(new ActionEventSetLocation(this.result));
-        }
-
         this.store.dispatch
         ([
+            new ActionEventSetLocation(this.result),
             new ActionMapPlaceSetWithSearchResult(),
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
         ]);

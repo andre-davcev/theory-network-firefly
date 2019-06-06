@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
-import { takeUntil, take, map, catchError } from 'rxjs/operators';
+import { takeUntil, map, catchError } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { ActionEventSetId, EventKey, ActionEventPatch, ActionEventSetImage, StateEvent, AssetKey, ActionEventCreate } from '@firefly/core';
+import { EventKey, ActionEventSetImage, StateEvent, AssetKey, ActionEventCreate, ActionEventSetTime } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { ItemDescription, ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
@@ -24,9 +24,9 @@ import { TempImageUri } from '@firefly/app/mock';
     styleUrls   : ['./asset-event.page.scss']
 })
 
-export class PageAssetEvent extends BaseComponent
+export class PageAssetEvent extends BaseComponent implements OnInit
 {
-    @Select(StateEvent.form)                    form$:         Observable<FormGroup>;
+    @Select(StateEvent.formGroup)               form$:         Observable<FormGroup>;
     @Select(StateEvent.eventImageUrlNormalized) imageUrl$:     Observable<string>;
     @Select(StateEvent.eventIsNew)              isNew$:        Observable<boolean>;
     @Select(StateEvent.eventCanUpdate)          canUpdate$:    Observable<boolean>;
@@ -53,9 +53,10 @@ export class PageAssetEvent extends BaseComponent
     )
     {
         super();
+    }
 
-        this.store.dispatch(new ActionEventSetId('new'));
-
+    public ngOnInit(): void
+    {
         this.translate.get
         ([
             'page.event.descriptionPlaceholder',
@@ -124,9 +125,7 @@ export class PageAssetEvent extends BaseComponent
     {
         const time: string = event.detail.value;
 
-        this.store.dispatch(new ActionEventPatch(key, time));
-
-        this.form$.pipe(take(1)).subscribe((form: FormGroup) => console.log(form));
+        this.store.dispatch(new ActionEventSetTime(key, time));
     }
 
     public save(): void

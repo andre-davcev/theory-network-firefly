@@ -2,12 +2,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Event, AssetKey, EventKey } from '@firefly/core/models';
+import { Event, AssetKey, EventKey, Time, Location } from '@firefly/core/models';
 import { ServiceBase } from './base.service';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, CoreEnum, ValidatorsExtended } from '@theory/core';
 import { ModelKey } from '@theory/firebase';
 import { RepeatType } from '@firefly/core/enums';
+import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
+import { MapboxPlaceType } from '@theory/mapbox';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceEvent extends ServiceBase<Event>
@@ -21,11 +23,23 @@ export class ServiceEvent extends ServiceBase<Event>
         super('events', firestore);
     }
 
+    private _form: FormGroup;
+
     private static validateTime(): ValidatorFn
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
         {
-            const valid: boolean = control.value;
+            const times: Array<Time> = control.value;
+
+            let valid: boolean = false;
+
+            if (times != null && times.length > 0)
+            {
+                const timeStart: Date = new Date(times[0].start);
+                const timeEnd:   Date = new Date(times[0].end);
+
+                valid = timeEnd.getTime() > timeStart.getTime();
+            }
 
             return valid ? null : { timeEndInvalid: true };
         };
@@ -67,7 +81,7 @@ export class ServiceEvent extends ServiceBase<Event>
         return event;
     }
 
-    public form(event: Event): FormGroup
+    public formCreate(event: Event): FormGroup
     {
         const form: FormGroup = this.formBuilder.group
         ({
@@ -90,6 +104,37 @@ export class ServiceEvent extends ServiceBase<Event>
             [EventKey.Url]       : event[EventKey.Url]
         });
 
+        this._form = form;
+
         return form;
+    }
+
+    public timeSet(form: FormGroup, key: EventKey.TimeStart | EventKey.TimeEnd, value: string): void
+    {
+        const control: AbstractControl = form.controls[EventKey.Times];
+        const times: Array<Time>       = control.value;
+        const time: Time               = times[0];
+
+        time[key] = value;
+
+        control.patchValue([time]);
+//        control.updateValueAndValidity();
+    }
+
+    public locationSet(form: FormGroup, result: Result): void
+    {
+        const location: Location = result == null ? undefined :
+        {
+            latitude  : result.center[0],
+            longitude : result.center[1],
+            types     : result.place_type as Array<MapboxPlaceType>
+        };
+
+        this.patchValue(form, EventKey.Location, location);
+    }
+
+    public get form(): FormGroup
+    {
+        return this._form;
     }
 }

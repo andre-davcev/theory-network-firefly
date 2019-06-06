@@ -3,6 +3,7 @@ import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument,
 import { Model, ModelKey } from '@theory/firebase';
 import { map, take, switchMap } from 'rxjs/operators';
 import { MergeType } from '../enums';
+import { FormGroup } from '@angular/forms';
 
 export class ServiceBase<T extends Model>
 {
@@ -102,6 +103,11 @@ export class ServiceBase<T extends Model>
     public clone(object: T): T
     {
         return JSON.parse(JSON.stringify(object));
+    }
+
+    public patchValue(form: FormGroup, key: string, value: any): void
+    {
+        form.controls[key].patchValue(value);
     }
 
     public get name(): string
