@@ -17,7 +17,9 @@
 </ion-header>
 
 <ion-content>
-        <form novalidate [formGroup]="form$ | async">
+    <form novalidate
+          [formGroup]="form$ | async"
+          ngxsForm="event.form">
         <app-item-header [form]="form$ | async"
                          [iconUrl]="clusterIcon$ | async"
                          [title]="AssetKey.Name"

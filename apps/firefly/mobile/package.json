@@ -58,6 +58,7 @@
     "@ngx-translate/core": "file:../../../node_modules/@ngx-translate/core",
     "@ngx-translate/http-loader": "file:../../../node_modules/@ngx-translate/http-loader",
     "@ngxs/devtools-plugin": "file:../../../node_modules/@ngxs/devtools-plugin",
+    "@ngxs/form-plugin": "file:../../../node_modules/@ngxs/form-plugin",
     "@ngxs/logger-plugin": "file:../../../node_modules/@ngxs/logger-plugin",
     "@ngxs/router-plugin": "file:../../../node_modules/@ngxs/router-plugin",
     "@ngxs/store": "file:../../../node_modules/@ngxs/store",

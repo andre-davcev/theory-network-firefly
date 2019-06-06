@@ -10,14 +10,14 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
 
     defaults :
     {
-        form     : undefined,
-        formNgxs :
+        form :
         {
-            model  : undefined,
+            model  : {},
             dirty  : false,
             status : '',
             errors : {}
         },
+        formGroup: undefined,
         empty    :
         {
             [ModelKey.Version]     : undefined,

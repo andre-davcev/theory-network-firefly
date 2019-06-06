@@ -109,40 +109,4 @@ export class ServiceIcon extends ServiceMedia<Icon>
             take(1)
         );
     }
-
-    public fromEvent(event: Event): Icon
-    {
-        const image: Icon =
-        {
-            [ModelKey.Id]          : this.id(event),
-            [AssetKey.Name]        : '',
-            [AssetKey.Description] : '',
-            [AssetKey.Private]     : true,
-            [AssetKey.UserId]      : event[AssetKey.UserId],
-            [AssetKey.Draft]       : false
-        };
-
-        return image;
-    }
-
-    public createWithUpload(event: Event, imagePath: string): Observable<Event>
-    {
-        const image:      Icon = this.fromEvent(event);
-        const bucketPath: string       = this.toBucketPath(image[ModelKey.Id]);
-
-        event =
-        {
-            ...event,
-            [EventKey.ImageId]: image[ModelKey.Id]
-        };
-
-        return this.upload(imagePath, bucketPath).pipe
-        (
-            switchMap(() => this.set(image)),
-            mergeMap(() =>
-              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image[ModelKey.Id])
-            ),
-            map(() => event)
-        );
-    }
 }

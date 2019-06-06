@@ -1,12 +1,11 @@
-import { FormGroup } from '@angular/forms';
-
 import { Event, Cluster } from '@firefly/core/models';
 import { FormNgxs } from '@theory/core';
+import { FormGroup } from '@angular/forms';
 
 export interface StateEventModel
 {
-    form               : FormGroup;
-    formNgxs           : FormNgxs;
+    form               : FormNgxs;
+    formGroup          : FormGroup;
     empty              : Event;
     imageUrl           : string;
     imageUrlNormalized : string;

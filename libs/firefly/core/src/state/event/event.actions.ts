@@ -1,5 +1,5 @@
 import { Event, Cluster } from '@firefly/core/models';
-import { AssetKey, EventKey } from '@firefly/core/models';
+import { EventKey } from '@firefly/core/models';
 import { CoreEnum } from '@theory/core';
 
 import { ActionsEvent } from './event.actions.enum';
@@ -33,16 +33,9 @@ export class ActionEventWatch
     constructor(public payload: Event) { }
 }
 
-export class ActionEventPatch
-{
-    static readonly type = ActionsEvent.PatchEvent;
-
-    constructor(public key: AssetKey | EventKey, public value: any ) { }
-}
-
 export class ActionEventSetLocation
 {
-    static readonly type = ActionsEvent.SetEventLocation;
+    static readonly type = ActionsEvent.SetLocation;
 
     constructor(public payload: Result) { }
 }
@@ -80,4 +73,11 @@ export class ActionEventSetClusterPrimary
     static readonly type = ActionsEvent.SetClusterPrimary;
 
     constructor(public payload: Cluster) { }
+}
+
+export class ActionEventSetTime
+{
+    static readonly type = ActionsEvent.SetTime;
+
+    constructor(public key: EventKey.TimeStart | EventKey.TimeEnd, public value: string) { }
 }

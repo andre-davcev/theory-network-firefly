@@ -7,8 +7,8 @@ export enum ActionsEvent
     SaveEvent         = '[Event] Save Event',
     CreateEvent       = '[Event] Create Event',
     UpdateEvent       = '[Event] Update Event',
-    SetEventLocation  = '[Event] Set Event Location',
-    PatchEvent        = '[Event] Patch Event',
+    SetLocation       = '[Event] Set Location',
     SetImage          = '[Event] Set Image Index',
-    SetClusterPrimary = '[Event] Set Cluster Primary'
+    SetClusterPrimary = '[Event] Set Cluster Primary',
+    SetTime           = '[Event] Set Time'
 }

@@ -34,6 +34,7 @@ import { StateMap } from '@theory/mapbox';
 import { Camera } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { StateMobile } from '@firefly/mobile';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 /*
 Pro.init('1e5146ca',
@@ -80,7 +81,8 @@ Pro.init('1e5146ca',
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
         NgxsRouterPluginModule.forRoot(),
-        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken}),
+        NgxsFormPluginModule.forRoot(),
+        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken})
 //        NgxsLoggerPluginModule.forRoot()
     ],
 
