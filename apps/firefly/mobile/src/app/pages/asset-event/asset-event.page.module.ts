@@ -12,6 +12,7 @@ import { StateEvent } from '@firefly/core';
 import { PageEventLocation, ModulePageEventLocation } from '../event-location';
 import { PageImageSelector, ModulePageImageSelector } from '../image-selector';
 import { ModulePageAssetsClusters } from '../assets-clusters';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 @NgModule
 ({
@@ -27,7 +28,8 @@ import { ModulePageAssetsClusters } from '../assets-clusters';
         NgxsModule.forFeature([StateEvent]),
         ModulePageEventLocation,
         ModulePageAssetsClusters,
-        ModulePageImageSelector
+        ModulePageImageSelector,
+        NgxsFormPluginModule
     ],
 
     declarations : [PageAssetEvent],

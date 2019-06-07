@@ -36,7 +36,6 @@ export class StateMobile
         pipe
         (
             switchMap(() =>  from(this.loading.create(options))),
-            tap(loading => console.log(loading)),
             tap((loadingElement: HTMLIonLoadingElement) => patchState({ loadingElement })),
             switchMap((loadingElement: HTMLIonLoadingElement) => from(loadingElement.present()))
         );
@@ -47,7 +46,6 @@ export class StateMobile
     {
         const loading: HTMLIonLoadingElement = StateMobile.loadingElement(getState());
 
-        console.log(loading);
 
         if (loading != null)
         {

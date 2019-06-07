@@ -36,7 +36,7 @@ export class StateEvent
     @Selector() static form(state: StateEventModel): FormNgxs { return state.form; }
     @Selector() static formGroup(state: StateEventModel): FormGroup { return state.formGroup; }
     @Selector() static event(state: StateEventModel): Event { return StateEvent.form(state).model; }
-    @Selector() static eventId(state: StateEventModel): string { return StateEvent.form(state)[ModelKey.Id]; }
+    @Selector() static eventId(state: StateEventModel): string { return StateEvent.event(state)[ModelKey.Id]; }
     @Selector() static eventImageUrl(state: StateEventModel): string { return state.imageUrl; }
     @Selector() static eventImageUrlNormalized(state: StateEventModel): string { return state.imageUrlNormalized; }
     @Selector() static eventIsNew(state: StateEventModel): boolean { return  StateEvent.eventId(state) === CoreEnum.IdNew; }
@@ -44,7 +44,7 @@ export class StateEvent
     @Selector() static eventLocation(state: StateEventModel): Location { return StateEvent.form(state)[EventKey.Location]; }
     @Selector() static eventLocationDefined(state: StateEventModel): boolean { return StateEvent.eventLocation(state) != null; }
     @Selector() static eventLocations(state: StateEventModel): Array<Location> { return [ StateEvent.eventLocation(state) ]; }
-    @Selector() static eventTimes(state: StateEventModel): Array<Time> { return StateEvent.form(state)[EventKey.Times]; }
+    @Selector() static eventTimes(state: StateEventModel): Array<Time> { return StateEvent.event(state)[EventKey.Times]; }
     @Selector() static eventTime(state: StateEventModel): Time { return StateEvent.eventTimes(state)[0]; }
     @Selector() static eventTimeStart(state: StateEventModel): string { return StateEvent.eventTime(state).start; }
     @Selector() static eventTimeEnd(state: StateEventModel): string { return StateEvent.eventTime(state).end; }
@@ -146,10 +146,13 @@ export class StateEvent
     }
 
     @Action(ActionEventSetImage)
-    setImage({ patchState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
+    setImage({ patchState, getState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
     {
-        const imageUrl: string = payload;
+        const imageUrl: string           = payload;
         const imageUrlNormalized: string = this.image.normalizeUrl(imageUrl);
+        const formGroup: FormGroup       = StateEvent.formGroup(getState());
+
+        this.service.imageIdSet(formGroup, imageUrl);
 
         patchState
         ({
