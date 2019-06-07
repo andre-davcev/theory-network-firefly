@@ -133,6 +133,11 @@ export class ServiceEvent extends ServiceBase<Event>
         this.patchValue(form, EventKey.Location, location);
     }
 
+    public imageIdSet(form: FormGroup, imageId: string): void
+    {
+        this.patchValue(form, EventKey.ImageId, imageId);
+    }
+
     public get form(): FormGroup
     {
         return this._form;
