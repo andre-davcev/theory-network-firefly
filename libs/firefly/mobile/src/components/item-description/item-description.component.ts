@@ -1,8 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { ItemDescription } from './item-description.interface';
-
 @Component
 ({
     selector        : 'app-item-description',
@@ -13,7 +11,11 @@ import { ItemDescription } from './item-description.interface';
 export class ComponentItemDescription
 {
     @Input() form: FormGroup;
-    @Input() item: ItemDescription;
+
+    @Input() title: string;
+
+    @Input() description:            string;
+    @Input() descriptionPlaceholder: string;
 
     constructor() { }
 

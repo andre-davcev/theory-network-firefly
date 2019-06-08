@@ -25,7 +25,8 @@ import { EventKey, AssetKey } from '@firefly/core/models';
 import { ModelKey } from '@theory/firebase';
 import { CoreEnum, FormNgxs, FormNgxsStatus } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
-import { UpdateFormValue } from '@ngxs/form-plugin';
+import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
+import { ActionMapSearchResultClear } from '@theory/mapbox';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -94,9 +95,23 @@ export class StateEvent
 
         const formGroup: FormGroup = this.service.formCreate(event);
 
-        patchState({ formGroup });
+        console.log(event);
 
-        return dispatch(new ActionEventWatch(event));
+        patchState
+        ({
+            formGroup,
+            imageUrl:           undefined,
+            imageUrlNormalized: undefined,
+            clusterPrimary:     undefined
+        });
+
+        return dispatch
+        ([
+            new ActionMapSearchResultClear(),
+            new SetFormPristine('event.form'),
+            new UpdateFormValue({ value: event, path: 'event.form'}),
+            new ActionEventWatch(event)
+        ]);
     }
 
     @Action(ActionEventWatch, { cancelUncompleted: true })
