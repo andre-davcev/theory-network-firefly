@@ -46,7 +46,9 @@
         </div>
 -->
         <app-item-description [form]="form$ | async"
-                              [item]="itemDescription">
+                              [title]="'general.description' | translate"
+                              description="description"
+                              [descriptionPlaceholder]="'page.cluster.descriptionPlaceholder' | translate">
         </app-item-description>
 
         <section>

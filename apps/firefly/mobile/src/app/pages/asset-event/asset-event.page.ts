@@ -1,17 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
-import { takeUntil, map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
 import { EventKey, ActionEventSetImage, StateEvent, AssetKey, ActionEventCreate, ActionEventSetTime } from '@firefly/core';
-import { BaseComponent } from '@theory/core';
-import { ItemDescription, ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
+import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters } from '../assets-clusters';
@@ -24,7 +22,7 @@ import { TempImageUri } from '@firefly/app/mock';
     styleUrls   : ['./asset-event.page.scss']
 })
 
-export class PageAssetEvent extends BaseComponent implements OnInit
+export class PageAssetEvent
 {
     @Select(StateEvent.formGroup)               form$:         Observable<FormGroup>;
     @Select(StateEvent.eventImageUrlNormalized) imageUrl$:     Observable<string>;
@@ -39,40 +37,12 @@ export class PageAssetEvent extends BaseComponent implements OnInit
     public AssetKey: any = AssetKey;
     public EventKey: any = EventKey;
 
-    public itemDescription: ItemDescription =
-    {
-        description: 'description'
-    };
-
     constructor
     (
         private store: Store,
-        private translate: TranslateService,
         private modal: ModalController,
         private camera: CameraCordova
-    )
-    {
-        super();
-    }
-
-    public ngOnInit(): void
-    {
-        this.translate.get
-        ([
-            'page.event.descriptionPlaceholder',
-            'general.description'
-        ]).
-        pipe(takeUntil(this.destroy$)).
-        subscribe((translations: Array<string>) =>
-        {
-            this.itemDescription =
-            {
-                ...this.itemDescription,
-                title:                  translations['general.description'],
-                descriptionPlaceholder: translations['page.event.descriptionPlaceholder']
-            };
-        });
-    }
+    ) { }
 
     ionViewWillEnter()
     {

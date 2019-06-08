@@ -4,7 +4,6 @@ import { Observable, from } from 'rxjs';
 import { takeUntil, tap, switchMap, catchError } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
-import { TranslateService } from '@ngx-translate/core';
 import { StatusBarStyle } from '@capacitor/core';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
 import { LoadingOptions } from '@ionic/core';
@@ -12,7 +11,6 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { BaseComponent } from '@theory/core';
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StateCluster, ActionClusterSetId, ActionClusterSetIcon, ActionClusterCreate, AssetKey, ClusterKey } from '@firefly/core';
-import { ItemDescription } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 
 @Component
@@ -22,7 +20,7 @@ import { Pages } from '../pages.enum';
     styleUrls   : ['./asset-cluster.page.scss']
 })
 
-export class PageAssetCluster extends BaseComponent
+export class PageAssetCluster
 {
     @Select(StateCluster.form)          form$:        Observable<FormGroup>;
     @Select(StateCluster.clusterIconNormalized)   clusterIcon$: Observable<string>;
@@ -31,37 +29,14 @@ export class PageAssetCluster extends BaseComponent
     public AssetKey:   any = AssetKey;
     public ClusterKey: any = ClusterKey;
 
-    public itemDescription: ItemDescription =
-    {
-        description: 'description'
-    };
-
-    constructor(private store: Store,
-      private translate: TranslateService,
+    constructor(
+      private store: Store,
       private camera: CameraCordova,
       private loading: LoadingController,
       private toast: ToastController
     )
     {
-        super();
-
         this.store.dispatch(new ActionClusterSetId('new'));
-
-        this.translate.get
-        ([
-            'page.cluster.descriptionPlaceholder',
-            'general.description'
-        ]).
-        pipe(takeUntil(this.destroy$)).
-        subscribe((translations: Array<string>) =>
-        {
-            this.itemDescription =
-            {
-                ...this.itemDescription,
-                title:                  translations['general.description'],
-                descriptionPlaceholder: translations['page.cluster.descriptionPlaceholder']
-            };
-        });
     }
 
     ionViewWillEnter()
