@@ -1,26 +1,24 @@
-import 'reflect-metadata';
-import { ReflectiveInjector } from 'injection-js';
+import { initializeApp } from 'firebase-admin';
 
-import { Config } from './@theory-firebase';
-import { EntityUsers, EntityAlerts, EntityClusters } from './firefly';
+import { UsersCreate, UsersUpdate } from './users';
+import { EventsCreate, EventsUpdate } from './events';
+import { ClustersCreate, ClustersUpdate } from './clusters';
+import { IconsCreate, IconsUpdate } from './icons';
+import { ImagesCreate, ImagesUpdate } from './images';
 
-const injector: ReflectiveInjector = ReflectiveInjector.resolveAndCreate
-([
-    Config,
-    EntityClusters,
-    EntityAlerts,
-    EntityUsers
-]);
+initializeApp();
 
-const entityClusters: EntityClusters = injector.get(EntityClusters);
-const entityAlerts: EntityAlerts = injector.get(EntityAlerts);
-const entityUsers: EntityUsers = injector.get(EntityUsers);
+exports.ClustersCreate = ClustersCreate;
+exports.ClustersUpdate = ClustersUpdate;
 
-exports.UserCreate = entityUsers.create();
-exports.UserUpdate = entityUsers.update();
+exports.EventsCreate = EventsCreate;
+exports.EventsUpdate = EventsUpdate;
 
-exports.AlertCreate = entityAlerts.create();
-exports.AlertUpdate = entityAlerts.update();
+exports.IconsCreate = IconsCreate;
+exports.IconsUpdate = IconsUpdate;
 
-exports.ClusterCreate = entityClusters.create();
-exports.ClusterUpdate = entityClusters.update();
+exports.ImagesCreate = ImagesCreate;
+exports.ImagesUpdate = ImagesUpdate;
+
+exports.UserCreate = UsersCreate;
+exports.UserUpdate = UsersUpdate;

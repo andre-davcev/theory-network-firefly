@@ -95,8 +95,6 @@ export class StateEvent
 
         const formGroup: FormGroup = this.service.formCreate(event);
 
-        console.log(event);
-
         patchState
         ({
             formGroup,
