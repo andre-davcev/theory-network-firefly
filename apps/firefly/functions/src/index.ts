@@ -5,6 +5,7 @@ import { EventsCreate, EventsUpdate } from './events';
 import { ClustersCreate, ClustersUpdate } from './clusters';
 import { IconsCreate, IconsUpdate } from './icons';
 import { ImagesCreate, ImagesUpdate } from './images';
+import { StorageResize } from './storage';
 
 initializeApp();
 
@@ -19,6 +20,8 @@ exports.IconsUpdate = IconsUpdate;
 
 exports.ImagesCreate = ImagesCreate;
 exports.ImagesUpdate = ImagesUpdate;
+
+// exports.StorageResize = StorageResize;
 
 exports.UserCreate = UsersCreate;
 exports.UserUpdate = UsersUpdate;
