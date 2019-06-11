@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { StatusBarStyle } from '@capacitor/core';
 
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateSubscriptions, Subscription, Cluster } from '@firefly/core';
+import { StateSubscriptions, Subscription } from '@firefly/core';
 
 @Component
 ({
