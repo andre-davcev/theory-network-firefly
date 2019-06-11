@@ -12,6 +12,7 @@ import { PageStream } from './stream.page';
     imports :
     [
         ModulePage,
+        ModuleComponentIcon,
         RouterModule.forChild(RoutesPageStream)
     ],
 
