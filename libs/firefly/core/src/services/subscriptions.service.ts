@@ -8,11 +8,10 @@ export class ServiceSubscriptions
 {
     constructor() { }
 
-    public get(): Observable<Array<Subscription>>
+    public get(): Observable<Array<any>>
     {
-        const subscriptions: Array<Subscription> =
+        const subscriptions: Array<any> =
         [
-/*
             {
                 name        : 'Pokemon Go Rochester Nests',
                 tagline     : 'Get alerts for all your favorite Pokemon nests',
@@ -54,7 +53,6 @@ export class ServiceSubscriptions
                 draft       : false,
                 userId      : ''
             }
-*/
         ];
 
         return of(subscriptions);

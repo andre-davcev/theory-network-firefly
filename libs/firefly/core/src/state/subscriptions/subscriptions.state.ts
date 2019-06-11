@@ -1,4 +1,4 @@
-import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { State, Selector, Action, StateContext, NgxsOnInit } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
 import { ServiceSubscriptions } from '@firefly/core/services';
@@ -9,11 +9,16 @@ import { ActionSubscriptionsGet } from './subscriptions.actions';
 
 @State<StateSubscriptionsModel>(StateSubscriptionsOptions)
 
-export class StateSubscriptions
+export class StateSubscriptions implements NgxsOnInit
 {
     @Selector() static subscriptions(state: StateSubscriptionsModel) {return state.subscriptions;}
 
     constructor(private subscriptions: ServiceSubscriptions) {}
+
+    public ngxsOnInit(context: StateContext<StateSubscriptionsModel>): void
+    {
+        context.dispatch(new ActionSubscriptionsGet());
+    }
 
     @Action(ActionSubscriptionsGet)
     subscriptionsGet({ patchState }: StateContext<StateSubscriptionsModel>)
