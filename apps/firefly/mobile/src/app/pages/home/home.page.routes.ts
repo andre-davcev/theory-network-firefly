@@ -7,7 +7,7 @@ export const RoutesPageHome: Routes =
 [
     { path : '', component : PageHome,
       children: [
-        { path: '',           redirectTo: Pages.Alert, pathMatch: 'full' },
+        { path: '',           redirectTo: Pages.Stream, pathMatch: 'full' },
         { path: Pages.Stream, loadChildren: '@firefly/page/stream#ModulePageStream' },
         { path: Pages.Alert,  loadChildren: '@firefly/page/alert#ModulePageAlert' }
     ]}
