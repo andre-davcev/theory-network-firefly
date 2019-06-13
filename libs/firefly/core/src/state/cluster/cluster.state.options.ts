@@ -9,8 +9,14 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
 
     defaults :
     {
-        //id                  : undefined,
-        form                : undefined,
+        form                :
+        {
+          model : {},
+          dirty : false,
+          status : '',
+          errors : {}
+        },
+        formGroup: undefined,
         empty               :
         {
           [ModelKey.Version]     : undefined,
