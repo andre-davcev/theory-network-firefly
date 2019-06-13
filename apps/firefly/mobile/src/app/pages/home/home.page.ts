@@ -20,7 +20,7 @@ export class PageHome
 {
 
     public Pages:      any     = Pages;
-    public showAlerts: boolean = true;
+    public showAlerts: boolean = false;
 
     public child: Pages.Alert | Pages.Stream = Pages.Alert;
 
