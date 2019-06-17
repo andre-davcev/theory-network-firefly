@@ -15,7 +15,9 @@ export interface User extends Model
     [UserKey.Tokens]        : Record<string, string>;
     [UserKey.Notifications] : Record<string, string>;
     [UserKey.Clusters]      : Record<string, string>;
+    [UserKey.Subscriptions] : Record<string, string>;
     [UserKey.Events]        : Record<string, string>;
     [UserKey.Images]        : Record<string, string>;
     [UserKey.Icons]         : Record<string, string>;
+    [UserKey.Stream]        : Array<string>;
 }

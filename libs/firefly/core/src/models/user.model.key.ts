@@ -11,8 +11,10 @@ export enum UserKey
     Tokens        = 'tokens',
     Notifications = 'notifications',
 
-    Clusters = 'clusters',
-    Events   = 'events',
-    Images   = 'images',
-    Icons    = 'icons'
+    Clusters      = 'clusters',
+    Subscriptions = 'subscriptions',
+    Events        = 'events',
+    Images        = 'images',
+    Icons         = 'icons',
+    Stream        = 'stream'
 }

@@ -1,4 +1,4 @@
-import { Observable, from } from 'rxjs';
+import { Observable, from, combineLatest } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentSnapshot, Action } from '@angular/fire/firestore';
 import { Model, ModelKey } from '@theory/firebase';
 import { map, take, switchMap } from 'rxjs/operators';
@@ -93,6 +93,38 @@ export class ServiceBase<T extends Model>
     public valuesChanges(id: string): Observable<T>
     {
         return this.document(id).valueChanges();
+    }
+
+    public valuesChangesFK(keys: Record<string, string> | Array<string>): Observable<Array<T>>
+    {
+        keys = keys instanceof Array ? keys : Object.keys(keys);
+
+        const streams$: Array<Observable<T>> = keys.map((id: string) => this.valuesChanges(id));
+
+        return combineLatest(streams$);
+    }
+
+    public keysAreEqual(a: Record<string, string> | Array<string>, b: Record<string, string> | Array<string>): boolean
+    {
+        const isArray: boolean = a instanceof Array;
+
+        a = a == null ? (isArray ? [] : {}) : a;
+        b = b == null ? (isArray ? [] : {}) : b;
+
+        const arrayA: Array<string> = isArray ? a as Array<string> : Object.keys(a);
+
+        const mapB: Record<string, string> = !isArray ?
+            b as Record<string, string> :
+            (b as Array<string>).reduce((record, key) => record[key] = key, {});
+
+        let equal: boolean = arrayA.length !== Object.keys(mapB).length;
+
+        if (equal)
+        {
+            arrayA.forEach((key: string) => equal = equal && mapB[key] != null);
+        }
+
+        return equal;
     }
 
     public snapshotChanges(id: string): Observable<Action<DocumentSnapshot<T>>>

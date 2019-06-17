@@ -1,7 +1,7 @@
 import { User as FirebaseUser } from 'firebase/app'
 import { Credentials } from '@theory/core';
 
-import { User } from '@firefly/core/models';
+import { User, Cluster, Stream } from '@firefly/core/models';
 import { ActionsUser } from './user.actions.enum';
 
 export class ActionUserAuthenticate
@@ -65,9 +65,51 @@ export class ActionUserSet
     constructor(public payload: User) {}
 }
 
+export class ActionUserSetClusters
+{
+    static readonly type = ActionsUser.UserSetClusters;
+
+    constructor(public payload: Record<string, Cluster>) {}
+}
+
+export class ActionUserSetSubscriptions
+{
+    static readonly type = ActionsUser.UserSetSubscriptions;
+
+    constructor(public payload: Record<string, Cluster>) {}
+}
+
+export class ActionUserSetStream
+{
+    static readonly type = ActionsUser.UserSetStream;
+
+    constructor(public payload: Array<Stream>) {}
+}
+
 export class ActionUserWatchClusters
 {
     static readonly type = ActionsUser.UserWatchClusters;
 
-    constructor(public payload: Record<string, string>) { }
+    constructor(public payload: User) { }
+}
+
+export class ActionUserWatchLocation
+{
+    static readonly type = ActionsUser.UserWatchLocation;
+
+    constructor(public payload: User) { }
+}
+
+export class ActionUserWatchStream
+{
+    static readonly type = ActionsUser.UserWatchStream;
+
+    constructor(public payload: User) { }
+}
+
+export class ActionUserWatchSubscriptions
+{
+    static readonly type = ActionsUser.UserWatchSubscriptions;
+
+    constructor(public payload: User) { }
 }

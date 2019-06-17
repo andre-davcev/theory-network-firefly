@@ -16,7 +16,6 @@ export class PageUser
 {
     public Pages: any = Pages;
     public segment: string = Pages.UserProfile;
-    public translations: Array<string> = [];
 
     constructor(private store: Store) { }
 
