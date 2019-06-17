@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs';
-import { switchMap, take, filter, map } from 'rxjs/operators';
+import { Observable, from, forkJoin } from 'rxjs';
+import { switchMap, take, filter, map, tap } from 'rxjs/operators';
 
 import { Cluster } from '@firefly/core/models';
 import { ServiceBase } from './base.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { ServiceImage } from './image.service';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceCluster extends ServiceBase<Cluster>
 {
-    constructor (firestore: AngularFirestore)
+    constructor
+    (
+        firestore: AngularFirestore,
+        private storage: AngularFireStorage,
+        private image: ServiceImage
+    )
     {
         super('clusters', firestore);
     }
@@ -87,6 +94,26 @@ export class ServiceCluster extends ServiceBase<Cluster>
             filter((c: Cluster) => cluster.dateCreated != null),
 
             take(1)
+        );
+    }
+
+    public valuesChangesClusters(keys: Record<string, string> | Array<string>): Observable<Array<Cluster>>
+    {
+        return this.valuesChangesFK(keys).
+        pipe
+        (
+            switchMap((clusters: Array<Cluster>) =>
+                forkJoin(clusters.map((cluster: Cluster) =>
+                    this.storage.
+                    ref(this.image.toBucketPath(cluster.iconId)).
+                    getDownloadURL().
+                    pipe
+                    (
+                        tap((url: string) => cluster.iconId = url),
+                        map(() => cluster)
+                    )
+                ))
+            )
         );
     }
 }
