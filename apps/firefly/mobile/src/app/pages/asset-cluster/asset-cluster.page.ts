@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from } from 'rxjs';
-import { takeUntil, tap, switchMap, catchError } from 'rxjs/operators';
+import { tap, switchMap, catchError } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { StatusBarStyle } from '@capacitor/core';
@@ -22,7 +22,7 @@ import { Pages } from '../pages.enum';
 
 export class PageAssetCluster
 {
-    @Select(StateCluster.form)          form$:        Observable<FormGroup>;
+    @Select(StateCluster.formGroup)               form$:        Observable<FormGroup>;
     @Select(StateCluster.clusterIconNormalized)   clusterIcon$: Observable<string>;
 
     public Pages:      any = Pages;
