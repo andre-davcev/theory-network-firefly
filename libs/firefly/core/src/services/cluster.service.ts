@@ -3,10 +3,14 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable, from, forkJoin } from 'rxjs';
 import { switchMap, take, filter, map, tap } from 'rxjs/operators';
 
-import { Cluster } from '@firefly/core/models';
+import { Cluster, AssetKey, ClusterKey } from '@firefly/core/models';
 import { ServiceBase } from './base.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceImage } from './image.service';
+import { FormGroup, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
+import { ModelKey } from '@theory/firebase';
+import { ValidatorsExtended, CoreEnum } from '@theory/core';
+
 
 @Injectable({ providedIn: 'root' })
 export class ServiceCluster extends ServiceBase<Cluster>
@@ -15,10 +19,60 @@ export class ServiceCluster extends ServiceBase<Cluster>
     (
         firestore: AngularFirestore,
         private storage: AngularFireStorage,
-        private image: ServiceImage
+        private image: ServiceImage,
+        private formBuilder: FormBuilder
     )
     {
         super('clusters', firestore);
+    }
+
+    private _form: FormGroup;
+
+    private static validateIcon(): ValidatorFn
+    {
+        const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
+        {
+            const url: string = control.value;
+
+            return url != null ? null : { iconUrlInvalid: true };
+        };
+
+        return validator;
+    }
+
+    public build(userId: string, defaults: Cluster): Cluster
+    {
+      const cluster: Cluster =
+      {
+        ...this.clone(defaults),
+        [ModelKey.Id]: CoreEnum.IdNew,
+        [AssetKey.UserId]: userId
+      };
+
+      return cluster;
+    }
+
+    public formCreate(cluster: Cluster): FormGroup
+    {
+      const form: FormGroup = this.formBuilder.group
+        ({
+            [ModelKey.Id]          : cluster[ModelKey.Id],
+            [ModelKey.DateCreated] : cluster[ModelKey.DateCreated],
+            [ModelKey.DateUpdated] : cluster[ModelKey.DateUpdated],
+
+            [AssetKey.UserId]      : cluster[AssetKey.UserId],
+            [AssetKey.Name]        : [cluster[AssetKey.Name],        [Validators.required, ValidatorsExtended.minLength(1)]],
+            [AssetKey.Description] : [cluster[AssetKey.Description], [Validators.required, ValidatorsExtended.minLength(1)]],
+            [AssetKey.Private]     : cluster[AssetKey.Private],
+            [AssetKey.Draft]       : cluster[AssetKey.Draft],
+
+            [ClusterKey.Tagline]   : [cluster[ClusterKey.Tagline], ValidatorsExtended.minLength(1)],
+            [ClusterKey.IconId]   : [cluster[ClusterKey.IconId], [ServiceCluster.validateIcon()]]
+        });
+
+        this._form = form;
+
+        return form;
     }
 
     getClusters(userid:String): Observable<Cluster[]>
@@ -97,6 +151,11 @@ export class ServiceCluster extends ServiceBase<Cluster>
         );
     }
 
+    public iconIdSet(form: FormGroup, iconId: string): void
+    {
+      this.patchValue(form, ClusterKey.IconId, iconId);
+    }
+
     public valuesChangesClusters(keys: Record<string, string> | Array<string>): Observable<Array<Cluster>>
     {
         return this.valuesChangesFK(keys).
@@ -115,5 +174,10 @@ export class ServiceCluster extends ServiceBase<Cluster>
                 ))
             )
         );
+    }
+
+    public get form(): FormGroup
+    {
+      return this._form;
     }
 }

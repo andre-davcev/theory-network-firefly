@@ -10,9 +10,10 @@ import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
 import { ActionGetClusters, ActionClusterSet, ActionClusterSetId, ActionClusterCreate, ActionClusterSetIcon, ActionClusterWatch } from './cluster.actions';
 import { ModelKey } from '@theory/firebase';
-import { ValidatorsExtended, CoreEnum, DateUtil } from '@theory/core';
+import { ValidatorsExtended, CoreEnum, DateUtil, FormNgxs } from '@theory/core';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { SelectFactory } from '@ngxs/store/src/decorators/select';
+import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
+import { ActionMapSearchResultClear } from '../../../../../mapbox';
 
 @State<StateClusterModel>(StateClusterOptions)
 
@@ -26,17 +27,12 @@ export class StateCluster
     }
 
     @Selector() static entities(state: StateClusterModel) {return state.entities;}
-    //@Selector() static id(state: StateClusterModel)       {return state.id;}
-    @Selector() static form(state: StateClusterModel)     {return state.form;}
-
-    @Selector() static cluster(state: StateClusterModel): Cluster
-    {
-      return state.form == null ? undefined : state.form.value;
-    }
-
+    @Selector() static form(state: StateClusterModel): FormNgxs {return state.form;}
+    @Selector() static formGroup(state: StateClusterModel): FormGroup { return state.formGroup; }
+    @Selector() static cluster(state: StateClusterModel): Cluster{return StateCluster.form(state).model;}
     @Selector() static clusters(state: StateClusterModel)      {return Object.keys(state.entities).map(id => state.entities[id]);}
     @Selector() static clustersFound(state: StateClusterModel) {return Object.keys(state.entities).length > 0;}
-    //@Selector() static entity(state: StateClusterModel)        {return state.entities[state.id];}
+
 
     @Selector() static clusterIcon(state: StateClusterModel): string
     {
@@ -64,8 +60,6 @@ export class StateCluster
     constructor
     (
         private clusterService: ServiceCluster,
-        private formCluster:    FormCluster,
-        private formBuilder:    FormBuilder,
         private store: Store,
         private image: ServiceIcon,
         private webview: WebView,
@@ -74,28 +68,13 @@ export class StateCluster
     ) {}
 
     @Action(ActionClusterSet)
-    setCluster({ patchState } : StateContext<StateClusterModel>, { payload }: ActionClusterSet)
+    setCluster({ dispatch } : StateContext<StateClusterModel>, { payload }: ActionClusterSet)
     {
-        const cluster: Cluster  = payload;
-        const id:    string = event[ModelKey.Id];
+        const value: Cluster  = payload;
+        const path: string ='cluster.form';
 
-        const form: FormGroup = this.formBuilder.group
-        ({
-            [ModelKey.Id]          : id,
-            [ModelKey.DateCreated] : cluster[ModelKey.DateCreated],
-            [ModelKey.DateUpdated] : cluster[ModelKey.DateUpdated],
+        return dispatch(new UpdateFormValue({ value, path }))
 
-            [AssetKey.UserId]      : cluster[AssetKey.UserId],
-            [AssetKey.Name]        : [cluster[AssetKey.Name],        [Validators.required, ValidatorsExtended.minLength(1)]],
-            [AssetKey.Description] : [cluster[AssetKey.Description], [Validators.required, ValidatorsExtended.minLength(1)]],
-            [AssetKey.Private]     : cluster[AssetKey.Private],
-            [AssetKey.Draft]       : cluster[AssetKey.Draft],
-
-            [ClusterKey.Tagline]   : [cluster[ClusterKey.Tagline], ValidatorsExtended.minLength(1)],
-            [ClusterKey.IconId]   : [cluster[ClusterKey.IconId], [StateCluster.validateImage(this.store)]]
-        });
-
-        patchState({ form });
     }
 
     @Action(ActionClusterWatch, { cancelUncompleted: true })
@@ -143,46 +122,38 @@ export class StateCluster
     }
 
     @Action(ActionClusterSetId)
-    setClusterId({ dispatch } : StateContext<StateClusterModel>, { payload }: ActionClusterSetId)
+    setClusterId({ patchState, dispatch } : StateContext<StateClusterModel>, { payload }: ActionClusterSetId)
     {
         const id    : string            = payload;
-        const isNew: boolean = id === CoreEnum.IdNew;
         const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const defaults: Cluster = StateClusterOptions.defaults.empty;
+        const cluster: Cluster = id !== CoreEnum.IdNew ? undefined : this.clusterService.build(userId, defaults)
 
-        const cluster: Cluster = !isNew ? undefined :
-        {
-            ...this.clusterService.clone(StateClusterOptions.defaults.empty),
-            [ModelKey.Id]: id,
-            [AssetKey.UserId]: userId
-        };
+        const formGroup: FormGroup = this.clusterService.formCreate(cluster);
 
-        return dispatch(new ActionClusterWatch(cluster));
-
-        /*patchState
+        patchState
         ({
-            id,
-            form: id === 'new' ? this.formCluster.build() : this.formCluster.build(state.entities[id])
-        });*/
+            formGroup,
+            iconUrl: undefined,
+            iconUrlNormalized: undefined
+        })
+
+        return dispatch
+        ([
+          new ActionMapSearchResultClear(),
+          new SetFormPristine('cluster.form'),
+          new UpdateFormValue({ value: cluster, path: 'cluster.form'}),
+          new ActionClusterWatch(cluster)
+        ]);
     }
 
     @Action(ActionClusterCreate)
     create({ getState, dispatch } : StateContext<StateClusterModel>)
     {
-        console.log('set cluster' + JSON.stringify(getState().form.value));
+        //console.log('set cluster' + JSON.stringify(getState().form.value));
         const state:   StateClusterModel = getState();
         const c:       Cluster           = StateCluster.cluster(state);
         const iconUrl: string            = StateCluster.clusterIcon(state);
-       /* return this.clusterService
-        .setCluster(getState().form.value)
-        .pipe(
-            map((cluster:Cluster) =>
-            {
-                const entities: Record<number, Cluster> = {};
-                entities[cluster.id] = cluster;
-
-                patchState({entities});
-            })
-        )*/
 
         return this.icon.createWithUploadForCluster(c, iconUrl).
         pipe
@@ -198,18 +169,18 @@ export class StateCluster
     }
 
     @Action(ActionClusterSetIcon)
-    setIconIndex({ patchState, getState }: StateContext<StateClusterModel>, { payload }: ActionClusterSetIcon)
+    setIcon({ patchState, getState }: StateContext<StateClusterModel>, { payload }: ActionClusterSetIcon)
     {
         const iconUrl: string = payload;
         const iconUrlNormalized: string = this.webview.convertFileSrc(iconUrl);
+        const formGroup: FormGroup      = StateCluster.formGroup(getState());
+
+        this.clusterService.iconIdSet(formGroup, iconUrl);
 
         patchState
         ({
             iconUrl,
             iconUrlNormalized
         });
-
-        StateCluster.form(getState()).controls[ClusterKey.IconId].updateValueAndValidity();
     }
-
 }
