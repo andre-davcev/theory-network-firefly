@@ -29,6 +29,7 @@ import {
 } from './user.actions';
 import { ServiceUser, ServiceCluster } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
+import { ActionAlertsGet } from '../alert';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser implements NgxsOnInit
@@ -176,7 +177,8 @@ export class StateUser implements NgxsOnInit
                 dispatch
                 ([
                     new ActionLanguageSet(user.language),
-                    new ActionUserSet(user)
+                    new ActionUserSet(user),
+                    new ActionAlertsGet()
                 ])
             ),
 

@@ -1,9 +1,13 @@
 <ion-content>
   <ion-list>
-    <ion-item lines="none" *ngFor="let subscription of subscriptions$ | async">
+    <ion-item lines="none" *ngFor="let cluster of stream$ | async">
         <ion-card>
-            <img [src]="subscription.photo">
+            <app-item-header [iconUrl]="cluster.iconId"
+                             [title]="cluster.name"
+                             [subtitle]="cluster.tagline">
+            </app-item-header>
 
+            <!--
             <ion-item>
                 <ion-label>
                     <h2>{{subscription.name}}</h2>
@@ -25,6 +29,7 @@
                     </ion-button>
                 </ion-col>
             </ion-row>
+             -->
         </ion-card>
     </ion-item>
   </ion-list>
