@@ -8,24 +8,18 @@
             </app-item-header>
 
             <ion-card-content>
-                {{ cluster.description }}
+                <ion-row>
+                    <ion-col size="1">
+                        <ion-button slot="start" fill="clear" (click)="subscribe(cluster)">
+                            <app-icon name="check" [active]="cluster.subscribed"></app-icon>
+                        </ion-button>
+                    </ion-col>
+
+                    <ion-col size="11">
+                        {{ cluster.description }}
+                    </ion-col>
+                </ion-row>
             </ion-card-content>
-<!--
-            <ion-row>
-                <ion-col>
-                    <ion-button slot="start" fill="clear" (click)="subscribe(subscription)">
-                        <app-icon name="check" [active]="subscription.subscribed"></app-icon>
-                        {{(subscription.subscribed ? 'page.stream.subscribed' : 'page.stream.subscribe') | translate}}
-                    </ion-button>
-                </ion-col>
-
-                <ion-col text-right>
-                    <ion-button slot="start" fill="clear">
-
-                    </ion-button>
-                </ion-col>
-            </ion-row>
-             -->
         </ion-card>
     </ion-item>
   </ion-list>
