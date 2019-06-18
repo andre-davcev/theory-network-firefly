@@ -1,7 +1,7 @@
 import { User as FirebaseUser } from 'firebase/app'
 import { Credentials } from '@theory/core';
 
-import { User, Cluster, Stream } from '@firefly/core/models';
+import { User, Cluster, Stream, Alert } from '@firefly/core/models';
 import { ActionsUser } from './user.actions.enum';
 
 export class ActionUserAuthenticate
@@ -86,6 +86,13 @@ export class ActionUserSetStream
     constructor(public payload: Array<Stream>) {}
 }
 
+export class ActionUserSetAlerts
+{
+    static readonly type = ActionsUser.UserSetAlerts;
+
+    constructor(public payload: Array<Alert>) { }
+}
+
 export class ActionUserWatchClusters
 {
     static readonly type = ActionsUser.UserWatchClusters;
@@ -110,6 +117,13 @@ export class ActionUserWatchStream
 export class ActionUserWatchSubscriptions
 {
     static readonly type = ActionsUser.UserWatchSubscriptions;
+
+    constructor(public payload: User) { }
+}
+
+export class ActionUserWatchAlerts
+{
+    static readonly type = ActionsUser.UserWatchAlerts;
 
     constructor(public payload: User) { }
 }

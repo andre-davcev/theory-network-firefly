@@ -16,5 +16,6 @@ export enum UserKey
     Events        = 'events',
     Images        = 'images',
     Icons         = 'icons',
-    Stream        = 'stream'
+    Stream        = 'stream',
+    Alerts        = 'alerts'
 }

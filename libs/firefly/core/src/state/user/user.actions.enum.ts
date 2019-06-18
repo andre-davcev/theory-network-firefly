@@ -12,8 +12,10 @@ export enum ActionsUser
     UserSetClusters        = '[User] User Set Clusters',
     UserSetSubscriptions   = '[User] User Set Subscriptions',
     UserSetStream          = '[User] User Set Stream',
+    UserSetAlerts          = '[User] User Set Alerts',
     UserWatchClusters      = '[User] Watch Clusters',
     UserWatchSubscriptions = '[User] Watch Subscriptions',
     UserWatchLocation      = '[User] Watch Location',
-    UserWatchStream        = '[User] Watch Stream'
+    UserWatchStream        = '[User] Watch Stream',
+    UserWatchAlerts        = '[User] Alerts Watch'
 }

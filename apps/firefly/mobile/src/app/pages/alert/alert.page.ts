@@ -1,13 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { IonSlides, AlertController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
-import { StatusBarStyle } from '@capacitor/core';
 
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Alert, StateAlerts } from '@firefly/core';
+import { Alert, StateUser } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';
@@ -20,24 +17,15 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageAlert
 {
-  @ViewChild(IonSlides) slides: IonSlides;
+    @Select(StateUser.alerts) alerts$: Observable<Array<Alert>>;
 
-  segment:string = 'fired';
+    @ViewChild(IonSlides) slides: IonSlides;
 
-  @Select(StateAlerts.alerts) alerts$: Observable<Array<Alert>>;
+    public segment: string = 'fired';
+    public Pages: any = Pages;
+    public slideOptions: any = { zoom: false };
 
-  public Pages: any = Pages;
-
-  public slideOptions: any = { zoom: false };
-
-    constructor(
-      public alertController: AlertController,
-      private store: Store ) { }
-
-    public ionViewWillEnter(): void
-    {
-//        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
-    }
+    constructor(private store: Store) { }
 
     public slideChanged(): void
     {

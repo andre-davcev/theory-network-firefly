@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, MenuController } from '@ionic/angular';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
 import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';
-import { CoreEnum } from '@theory/core';
+import { CoreEnum, BaseComponent } from '@theory/core';
+import { StateUser } from '@firefly/core';
+import { Observable } from 'rxjs';
+import { filter, switchMap, takeUntil, take } from 'rxjs/operators';
+import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Component
 ({
@@ -16,8 +20,9 @@ import { CoreEnum } from '@theory/core';
     styleUrls   : ['./home.page.scss']
 })
 
-export class PageHome
+export class PageHome extends BaseComponent implements OnInit
 {
+    @Select(StateUser.homeLoaded) ready$: Observable<boolean>;
 
     public Pages:      any     = Pages;
     public showAlerts: boolean = false;
@@ -29,9 +34,29 @@ export class PageHome
         private alert: AlertController,
         private menu: MenuController,
         private store: Store
-    ) { }
+    )
+    {
+        super();
+    }
 
-    ionViewWillEnter()
+    ngOnInit(): void
+    {
+        this.ready$.
+        pipe
+        (
+            takeUntil(this.destroy$),
+            filter((ready: boolean) => !ready),
+            switchMap(() => this.store.dispatch(new ActionMobileLoadingShow())),
+            switchMap(() => this.ready$),
+            filter((ready: boolean) => ready),
+            take(1),
+        ).
+        subscribe(() =>
+            this.store.dispatch(new ActionMobileLoadingHide())
+        );
+    }
+
+    public ionViewWillEnter(): void
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
 
