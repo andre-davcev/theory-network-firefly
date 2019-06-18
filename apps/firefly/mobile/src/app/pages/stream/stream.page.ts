@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateSubscriptions, Subscription } from '@firefly/core';
+import { StateSubscriptions, Subscription, Stream, StateUser } from '@firefly/core';
 
 @Component
 ({
@@ -14,6 +14,7 @@ import { StateSubscriptions, Subscription } from '@firefly/core';
 export class PageStream
 {
     @Select(StateSubscriptions.subscriptions) subscriptions$: Observable<Array<Subscription>>;
+    @Select(StateUser.stream) stream$: Observable<Array<Stream>>;
 
     constructor(private store: Store)
     {

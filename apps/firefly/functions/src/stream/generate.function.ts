@@ -13,22 +13,16 @@ onRun(async (context: EventContext) =>
     const users:    QuerySnapshot = await database.collection('users').get();
     const clusters: QuerySnapshot = await database.collection('clusters').get();
 
-    const stream: Record<string, string> = {};
+    const stream: Array<string> = [];
     const promises: Array<Promise<any>> = [];
 
-    let id: string;
-
     clusters.forEach((snapshot: QueryDocumentSnapshot) =>
-    {
-        id = snapshot.id;
-
-        stream[id] = id;
-    });
+        stream.push(snapshot.id)
+    );
 
     users.forEach((snapshot: QueryDocumentSnapshot) =>
-    {
-        promises.push(snapshot.ref.update({ stream }));
-    });
+        promises.push(snapshot.ref.update({ stream }))
+    );
 
     return await Promise.all(promises);
 });
