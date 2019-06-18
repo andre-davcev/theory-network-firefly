@@ -10,4 +10,8 @@
         --ion-item-background: #{$app-color-grey-light};
         margin-bottom: 0;
     }
+
+    ion-card {
+        width: 100%;
+    }
 }

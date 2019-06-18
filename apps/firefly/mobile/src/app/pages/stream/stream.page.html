@@ -7,14 +7,10 @@
                              [subtitle]="cluster.tagline">
             </app-item-header>
 
-            <!--
-            <ion-item>
-                <ion-label>
-                    <h2>{{subscription.name}}</h2>
-                    <p>{{subscription.tagline}}</p>
-                </ion-label>
-            </ion-item>
-
+            <ion-card-content>
+                {{ cluster.description }}
+            </ion-card-content>
+<!--
             <ion-row>
                 <ion-col>
                     <ion-button slot="start" fill="clear" (click)="subscribe(subscription)">
