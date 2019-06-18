@@ -3,12 +3,12 @@ import { Alert } from '@firefly/core/models';
 export const MockAlerts: Array<Alert> =
 [
     {
-        id    : '3',
-        image : 'assets/images/temp-notifications-rusted.root.jpg',
-        title : 'Rusted Root',
-        body  : "Sahlen's Music Stage",
+        id    : '1',
+        image : 'assets/images/temp-notifications-blondie.jpg',
+        title : 'Blondie',
+        body  : "Artpark",
         read  : false,
-        date  : 'May 12, 2017 at 7:00pm'
+        date  : 'July 25, 2016 at 6:30pm'
     },
 
     {
@@ -21,11 +21,11 @@ export const MockAlerts: Array<Alert> =
     },
 
     {
-        id    : '1',
-        image : 'assets/images/temp-notifications-blondie.jpg',
-        title : 'Blondie',
-        body  : "Artpark",
+        id    : '3',
+        image : 'assets/images/temp-notifications-rusted.root.jpg',
+        title : 'Rusted Root',
+        body  : "Sahlen's Music Stage",
         read  : false,
-        date  : 'July 25, 2016 at 6:30pm'
+        date  : 'May 12, 2017 at 7:00pm'
     }
 ];
