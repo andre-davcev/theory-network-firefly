@@ -6,6 +6,7 @@ import { ClustersCreate, ClustersUpdate } from './clusters';
 import { IconsCreate, IconsUpdate } from './icons';
 import { ImagesCreate, ImagesUpdate } from './images';
 import { StorageResize } from './storage';
+import { StreamGenerate } from './stream';
 
 initializeApp();
 
@@ -22,6 +23,8 @@ exports.ImagesCreate = ImagesCreate;
 exports.ImagesUpdate = ImagesUpdate;
 
 // exports.StorageResize = StorageResize;
+
+exports.StreamGenerate = StreamGenerate;
 
 exports.UserCreate = UsersCreate;
 exports.UserUpdate = UsersUpdate;
