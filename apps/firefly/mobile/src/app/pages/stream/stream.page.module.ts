@@ -7,6 +7,7 @@ import { ModulePage } from '@firefly/app/modules';
 import { RoutesPageStream } from './stream.page.routes';
 import { PageStream } from './stream.page';
 import { ModuleDirectiveElevation } from '@theory/google';
+import { ModuleComponentItemHeader } from '@firefly/mobile';
 
 @NgModule
 ({
@@ -15,6 +16,7 @@ import { ModuleDirectiveElevation } from '@theory/google';
         ModulePage,
         ModuleComponentIcon,
         ModuleDirectiveElevation,
+        ModuleComponentItemHeader,
         RouterModule.forChild(RoutesPageStream)
     ],
 
