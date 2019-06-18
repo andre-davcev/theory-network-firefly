@@ -20,6 +20,9 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         clusters       : {},
         subscriptions  : {},
         stream         : [],
+        streamLoaded   : false,
+        alerts         : [],
+        alertsLoaded   : false,
 
         empty :
         {
@@ -42,7 +45,8 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             [UserKey.Events]        : {},
             [UserKey.Images]        : {},
             [UserKey.Icons]         : {},
-            [UserKey.Stream]        : []
+            [UserKey.Stream]        : [],
+            [UserKey.Alerts]        : []
         }
     }
 };

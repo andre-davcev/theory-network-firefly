@@ -20,4 +20,5 @@ export interface User extends Model
     [UserKey.Images]        : Record<string, string>;
     [UserKey.Icons]         : Record<string, string>;
     [UserKey.Stream]        : Array<string>;
+    [UserKey.Alerts]        : Array<string>;
 }

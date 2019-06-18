@@ -8,7 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ModelKey } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, UserKey, Cluster, Stream } from '@firefly/core/models';
+import { User, UserKey, Cluster, Stream, Alert } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -25,11 +25,12 @@ import {
   ActionUserSetStream,
   ActionUserSetClusters,
   ActionUserSetSubscriptions,
-  ActionUserSet
+  ActionUserSet,
+  ActionUserSetAlerts,
+  ActionUserWatchAlerts
 } from './user.actions';
-import { ServiceUser, ServiceCluster } from '@firefly/core/services';
+import { ServiceUser, ServiceCluster, ServiceAlerts } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
-import { ActionAlertsGet } from '../alert';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser implements NgxsOnInit
@@ -38,7 +39,8 @@ export class StateUser implements NgxsOnInit
     (
         private fireAuth: AngularFireAuth,
         private service: ServiceUser,
-        private cluster: ServiceCluster
+        private cluster: ServiceCluster,
+        private alerts: ServiceAlerts
     ) { }
 
     @Select(StateLanguage.language) language$: Observable<string>;
@@ -87,6 +89,11 @@ export class StateUser implements NgxsOnInit
 
     @Selector() static stream(state: StateUserModel): Array<Stream> { return state.stream == null ? [] : state.stream; }
     @Selector() static streamFound(state: StateUserModel): boolean { return StateUser.stream(state).length > 0; }
+
+    @Selector() static alerts(state: StateUserModel): Array<Alert> { return state.alerts == null ? [] : state.alerts; }
+    @Selector() static alertsFound(state: StateUserModel): boolean { return StateUser.alerts(state).length > 0; }
+
+    @Selector() static homeLoaded(state: StateUserModel): boolean { return state.streamLoaded && state.alertsLoaded; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
@@ -161,24 +168,26 @@ export class StateUser implements NgxsOnInit
                 let clustersAreEqual:      boolean;
                 let streamIsEqual:         boolean;
                 let subscriptionsAreEqual: boolean;
+                let alertsAreEqual:        boolean;
 
                 if (previous != null)
                 {
                     clustersAreEqual      = this.service.keysAreEqual(user[UserKey.Clusters],      previous[UserKey.Clusters]);
                     streamIsEqual         = this.service.keysAreEqual(user[UserKey.Stream],        previous[UserKey.Stream]);
                     subscriptionsAreEqual = this.service.keysAreEqual(user[UserKey.Subscriptions], previous[UserKey.Subscriptions]);
+                    alertsAreEqual        = this.service.keysAreEqual(user[UserKey.Alerts],        previous[UserKey.Alerts]);
                 }
 
                 if (previous == null || !clustersAreEqual)      { dispatch(new ActionUserWatchClusters(user)); }
                 if (previous == null || !streamIsEqual)         { dispatch(new ActionUserWatchStream(user)); }
                 if (previous == null || !subscriptionsAreEqual) { dispatch(new ActionUserWatchSubscriptions(user)); }
+                if (true || previous == null || !subscriptionsAreEqual) { dispatch(new ActionUserWatchAlerts(user)); }
             }),
             tap((user: User) =>
                 dispatch
                 ([
                     new ActionLanguageSet(user.language),
-                    new ActionUserSet(user),
-                    new ActionAlertsGet()
+                    new ActionUserSet(user)
                 ])
             ),
 
@@ -278,7 +287,7 @@ export class StateUser implements NgxsOnInit
     watchStream({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatchStream)
     {
         const user: User = payload;
-        const subscriptions: Record<string, string> = user.subscriptions;
+        const subscriptions: Record<string, string> = user[UserKey.Subscriptions];
 
         return this.cluster.valuesChangesClusters(user[UserKey.Stream]).
         pipe
@@ -290,6 +299,21 @@ export class StateUser implements NgxsOnInit
             ),
             switchMap((stream: Array<Stream>) =>
                 dispatch(new ActionUserSetStream(stream))
+            )
+        );
+    }
+
+    @Action(ActionUserWatchAlerts, { cancelUncompleted: true })
+    watchAlerts({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatchAlerts)
+    {
+        const user: User = payload;
+        const userId: string = user[ModelKey.Id];
+
+        return this.alerts.getMock(userId).
+        pipe
+        (
+            switchMap((alerts: Array<Alert>) =>
+                dispatch(new ActionUserSetAlerts(alerts))
             )
         );
     }
@@ -315,6 +339,12 @@ export class StateUser implements NgxsOnInit
     @Action(ActionUserSetStream)
     userSetStream({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserSetStream)
     {
-        patchState({ stream: payload });
+        patchState({ stream: payload, streamLoaded: true });
+    }
+
+    @Action(ActionUserSetAlerts)
+    userSetAlerts({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserSetAlerts)
+    {
+        patchState({ alerts: payload, alertsLoaded: true });
     }
 }

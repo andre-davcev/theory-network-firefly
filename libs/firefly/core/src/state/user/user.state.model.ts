@@ -1,4 +1,4 @@
-import { User, Cluster, Stream } from '@firefly/core/models';
+import { User, Cluster, Stream, Alert } from '@firefly/core/models';
 import { FormGroup } from '@angular/forms';
 
 export interface StateUserModel
@@ -14,4 +14,7 @@ export interface StateUserModel
     clusters       : Record<string, Cluster>;
     subscriptions  : Record<string, Cluster>;
     stream         : Array<Stream>;
+    streamLoaded   : boolean;
+    alerts         : Array<Alert>;
+    alertsLoaded   : boolean;
 }
