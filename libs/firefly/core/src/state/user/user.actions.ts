@@ -127,3 +127,17 @@ export class ActionUserWatchAlerts
 
     constructor(public payload: User) { }
 }
+
+export class ActionUserSubscribe
+{
+    static readonly type = ActionsUser.UserSubscribe;
+
+    constructor(public payload: string) { }
+}
+
+export class ActionUserUnsubscribe
+{
+    static readonly type = ActionsUser.UserUnsubscribe;
+
+    constructor(public payload: string) { }
+}
