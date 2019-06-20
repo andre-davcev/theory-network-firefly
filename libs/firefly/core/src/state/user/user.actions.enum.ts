@@ -17,5 +17,7 @@ export enum ActionsUser
     UserWatchSubscriptions = '[User] Watch Subscriptions',
     UserWatchLocation      = '[User] Watch Location',
     UserWatchStream        = '[User] Watch Stream',
-    UserWatchAlerts        = '[User] Alerts Watch'
+    UserWatchAlerts        = '[User] Alerts Watch',
+    UserSubscribe          = '[User] Subscribe',
+    UserUnsubscribe        = '[User] Unsubscribe'
 }

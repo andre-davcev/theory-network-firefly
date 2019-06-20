@@ -27,7 +27,9 @@ import {
   ActionUserSetSubscriptions,
   ActionUserSet,
   ActionUserSetAlerts,
-  ActionUserWatchAlerts
+  ActionUserWatchAlerts,
+  ActionUserSubscribe,
+  ActionUserUnsubscribe
 } from './user.actions';
 import { ServiceUser, ServiceCluster, ServiceAlerts } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -75,6 +77,7 @@ export class StateUser implements NgxsOnInit
         return Object.keys(StateUser.clusterMap(state)).length > 0;
     }
 
+    @Selector() static subscriptionKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state).subscriptions; }
     @Selector() static subscriptionsMap(state: StateUserModel): Record<string, Cluster> {return state.clusters;}
     @Selector() static subscriptions(state: StateUserModel): Array<Cluster>
     {
@@ -346,5 +349,33 @@ export class StateUser implements NgxsOnInit
     userSetAlerts({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserSetAlerts)
     {
         patchState({ alerts: payload, alertsLoaded: true });
+    }
+
+    @Action(ActionUserSubscribe)
+    userSubscribe({ getState }: StateContext<StateUserModel>, { payload }: ActionUserSubscribe)
+    {
+        const key: string           = payload;
+        const state: StateUserModel = getState();
+        const user: User            = StateUser.user(state);
+
+        const subscriptions: Record<string, string> = StateUser.subscriptionKeys(state);
+
+        subscriptions[key] = key;
+
+        this.service.patch(user[ModelKey.Id], { subscriptions });
+    }
+
+    @Action(ActionUserUnsubscribe)
+    userUsubscribe({ getState }: StateContext<StateUserModel>, { payload }: ActionUserUnsubscribe)
+    {
+        const key: string           = payload;
+        const state: StateUserModel = getState();
+        const user: User            = StateUser.user(state);
+
+        const subscriptions: Record<string, string> = StateUser.subscriptionKeys(state);
+
+        delete subscriptions[key];
+
+        this.service.patch(user[ModelKey.Id], { subscriptions });
     }
 }
