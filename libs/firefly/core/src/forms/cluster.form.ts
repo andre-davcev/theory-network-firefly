@@ -21,7 +21,8 @@ export class FormCluster extends FormGenerator<Cluster>
           description : null,
           iconId      : null,
           private     : true,
-          events      : {}
+          events      : {},
+          subscribers : {}
         };
     }
 

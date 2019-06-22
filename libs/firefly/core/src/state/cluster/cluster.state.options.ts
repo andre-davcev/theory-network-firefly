@@ -31,9 +31,10 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
           [AssetKey.Draft]       : false,
 
 
-          [ClusterKey.Tagline]  : null,
-          [ClusterKey.IconId]   : undefined,
-          [ClusterKey.Events]   : {}
+          [ClusterKey.Tagline]     : null,
+          [ClusterKey.IconId]      : undefined,
+          [ClusterKey.Events]      : {},
+          [ClusterKey.Subscribers] : {}
         },
 
         entities            : {},

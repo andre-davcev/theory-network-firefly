@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule
 ({
@@ -12,7 +13,8 @@ import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
     [
         CommonModule,
         IonicModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        FlexLayoutModule
     ],
 
     declarations :
