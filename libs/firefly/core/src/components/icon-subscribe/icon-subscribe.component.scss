@@ -4,7 +4,7 @@
 :host
 {
     --cpt-size: 32px;
-    --cpt-gap: 3px;
+    --cpt-gap: 4px;
     position: relative;
     display: block;
     height: var(--cpt-size);
@@ -16,8 +16,8 @@
         content: '';
         position: absolute;
         display: block;
-        height: 26px;
-        width: 26px;
+        height: 32px;
+        width: 32px;
         top: var(--cpt-gap);
         left: var(--cpt-gap);
         border-radius: 50%;
@@ -37,8 +37,12 @@
         border-color: #{$app-color-dark};
     }
 
+    ion-icon {
+      font-size: 40px;
+    }
+
     fa-icon {
-        top: 5px;
+        top: 9px;
         left: 8px;
         position: absolute;
         stroke: #{$app-color-dark};
