@@ -1,6 +1,8 @@
 import { Cluster } from './cluster.model';
+import { StreamKey } from './stream.model.key';
 
 export interface Stream extends Cluster
 {
-    subscribed: boolean;
+    [StreamKey.Subscribed]:      boolean;
+    [StreamKey.SubscribedCount]: number;
 }
