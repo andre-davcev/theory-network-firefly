@@ -11,24 +11,36 @@
     width: var(--cpt-size);
     cursor: pointer;
 
-    &.cpt-subscribed
+    &:before
     {
-        &:before
-        {
-            content: '';
-            position: absolute;
-            display: block;
-            height: 26px;
-            width: 26px;
-            top: var(--cpt-gap);
-            left: var(--cpt-gap);
-            border-radius: 50%;
-            background-color: #{$app-color-primary};
-            z-index: -1;
-        }
+        content: '';
+        position: absolute;
+        display: block;
+        height: 26px;
+        width: 26px;
+        top: var(--cpt-gap);
+        left: var(--cpt-gap);
+        border-radius: 50%;
+        z-index: -1;
+        box-sizing: border-box;
+    }
+
+    &.cpt-subscribed:before
+    {
+        background-color: #{$app-color-primary};
+    }
+
+    &:not(.cpt-subscribed):before
+    {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #{$app-color-dark};
     }
 
     fa-icon {
+        top: 5px;
+        left: 8px;
+        position: absolute;
         stroke: #{$app-color-dark};
         color: #{$app-color-dark};
         margin-left: var(--cpt-gap);
