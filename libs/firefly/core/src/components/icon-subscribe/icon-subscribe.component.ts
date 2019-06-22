@@ -1,0 +1,25 @@
+import { Component, Input, HostBinding, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+
+@Component
+({
+    selector        : 'app-icon-subscribe',
+    templateUrl     : './icon-subscribe.component.html',
+    styleUrls       : ['./icon-subscribe.component.scss'],
+    changeDetection : ChangeDetectionStrategy.OnPush
+})
+export class ComponentIconSubscribe
+{
+    @HostBinding('class.cpt-subscribed')
+    @Input()
+    public subscribed: boolean = false;
+
+    @Output()
+    public clicked: EventEmitter<boolean> = new EventEmitter();
+
+    constructor() { }
+
+    public toggle(subscribed: boolean): void
+    {
+        this.clicked.next(subscribed);
+    }
+}
