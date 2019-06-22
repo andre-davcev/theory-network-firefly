@@ -2,9 +2,9 @@
      fxLayout="row"
      fxLayoutGap="10px"
      fxLayoutAlign="start center">
-    <div class="cpt-container-icon">
-        <ion-icon *ngIf="subscribed" name="ios-checkmark-circle-outline" color="dark" (click)="toggle(false)"></ion-icon>
-        <fa-icon *ngIf="!subscribed" icon="thumbtack" size="lg" (click)="toggle(true)"></fa-icon>
+    <div class="cpt-container-icon" (click)="toggle()">
+        <ion-icon *ngIf="subscribed" name="ios-checkmark-circle-outline" color="dark"></ion-icon>
+        <fa-icon *ngIf="!subscribed" icon="thumbtack" size="lg"></fa-icon>
     </div>
 
     <span class="cpt-count">{{ count | number: '.0' }}</span>
