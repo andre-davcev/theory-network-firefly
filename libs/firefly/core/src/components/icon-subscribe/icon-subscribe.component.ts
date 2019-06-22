@@ -21,8 +21,10 @@ export class ComponentIconSubscribe
 
     constructor() { }
 
-    public toggle(subscribed: boolean): void
+    public toggle(): void
     {
-        this.clicked.next(subscribed);
+        this.subscribed = !this.subscribed;
+
+        this.clicked.next(this.subscribed);
     }
 }
