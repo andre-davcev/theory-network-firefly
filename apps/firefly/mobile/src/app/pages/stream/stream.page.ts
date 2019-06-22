@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
-import { Stream, StateUser, ActionUserSubscribe, ActionUserUnsubscribe } from '@firefly/core';
+import { Stream, StateUser, ActionUserSubscribe, ActionUserUnsubscribe, ClusterKey, Cluster } from '@firefly/core';
 import { ModelKey } from '@theory/firebase';
 
 @Component
@@ -16,10 +16,7 @@ export class PageStream
 {
     @Select(StateUser.stream) stream$: Observable<Array<Stream>>;
 
-    constructor(private store: Store)
-    {
-;
-    }
+    constructor(private store: Store) { }
 
     public ionViewWillEnter(): void
     {
@@ -38,5 +35,10 @@ export class PageStream
         {
             this.store.dispatch(new ActionUserUnsubscribe(stream[ModelKey.Id]));
         }
+    }
+
+    public subscribers(cluster: Cluster): Observable<number>
+    {
+        return of(Object.keys(cluster[ClusterKey.Subscribers]).length);
     }
 }

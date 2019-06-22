@@ -13,6 +13,9 @@ export class ComponentIconSubscribe
     @Input()
     public subscribed: boolean = false;
 
+    @Input()
+    public count: number;
+
     @Output()
     public clicked: EventEmitter<boolean> = new EventEmitter();
 

@@ -1,14 +1,14 @@
 import { User as FirebaseUser } from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select, NgxsOnInit} from '@ngxs/store';
-import { Observable, of, from, combineLatest } from 'rxjs';
+import { Observable, of, from, combineLatest, forkJoin } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { ModelKey } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, UserKey, Cluster, Stream, Alert } from '@firefly/core/models';
+import { User, UserKey, Cluster, Stream, Alert, ClusterKey } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -33,6 +33,7 @@ import {
 } from './user.actions';
 import { ServiceUser, ServiceCluster, ServiceAlerts } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
+import { StateClusterOptions } from '../cluster/cluster.state.options';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser implements NgxsOnInit
@@ -65,7 +66,7 @@ export class StateUser implements NgxsOnInit
         return user == null ? undefined : user[ModelKey.Id];
     }
 
-    @Selector() static clusterMap(state: StateUserModel): Record<string, Cluster> {return state.clusters;}
+    @Selector() static clusterMap(state: StateUserModel): Record<string, Cluster> { return state.clusters; }
     @Selector() static clusters(state: StateUserModel): Array<Cluster>
     {
         const clusters: Record<string, Cluster> = StateUser.clusterMap(state);
@@ -249,11 +250,20 @@ export class StateUser implements NgxsOnInit
     @Action(ActionUserWatchClusters, { cancelUncompleted: true })
     watchClusters({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatchClusters)
     {
-        const user: User = payload;
+        const user: User     = payload;
+        const empty: Cluster = StateClusterOptions.defaults.empty;
 
         return this.cluster.valuesChangesClusters(user[UserKey.Clusters]).
         pipe
         (
+            map((clusters: Array<Cluster>) =>
+            (
+                clusters.map((cluster: Cluster) =>
+                ({
+                    ...CoreUtil.clone<Cluster>(empty),
+                    ...cluster
+                }))
+            )),
             map((clusters: Array<Cluster>) =>
                 clusters.reduce((record, cluster: Cluster): Record<string, Cluster> => {
                     record[cluster[ModelKey.Id]] = cluster;
@@ -269,11 +279,20 @@ export class StateUser implements NgxsOnInit
     @Action(ActionUserWatchSubscriptions, { cancelUncompleted: true })
     watchSubscriptions({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatchSubscriptions)
     {
-        const user: User = payload;
+        const user: User     = payload;
+        const empty: Cluster = StateClusterOptions.defaults.empty;
 
         return this.cluster.valuesChangesClusters(user[UserKey.Subscriptions]).
         pipe
         (
+            map((subscriptions: Array<Cluster>) =>
+            (
+                subscriptions.map((cluster: Cluster) =>
+                ({
+                    ...CoreUtil.clone<Cluster>(empty),
+                    ...cluster
+                }))
+            )),
             map((subscriptions: Array<Cluster>) =>
                 subscriptions.reduce((record, cluster: Cluster): Record<string, Cluster> => {
                     record[cluster[ModelKey.Id]] = cluster;
@@ -291,6 +310,7 @@ export class StateUser implements NgxsOnInit
     {
         const user: User = payload;
         const subscriptions: Record<string, string> = user[UserKey.Subscriptions];
+        const empty: Cluster = StateClusterOptions.defaults.empty;
 
         return this.cluster.valuesChangesClusters(user[UserKey.Stream]).
         pipe
@@ -298,7 +318,12 @@ export class StateUser implements NgxsOnInit
             map((clusters: Array<Cluster>) =>
                 clusters.
                 filter((cluster: Cluster) => subscriptions[cluster[ModelKey.Id]] == null).
-                map((cluster: Cluster) => ({ ...cluster, subscribed: false }))
+                map((cluster: Cluster) =>
+                ({
+                    ...CoreUtil.clone<Cluster>(empty),
+                    ...cluster,
+                    subscribed: false
+                }))
             ),
             switchMap((stream: Array<Stream>) =>
                 dispatch(new ActionUserSetStream(stream))
@@ -357,25 +382,45 @@ export class StateUser implements NgxsOnInit
         const key: string           = payload;
         const state: StateUserModel = getState();
         const user: User            = StateUser.user(state);
+        const userId: string        = user[ModelKey.Id];
 
+        const clusters: Record<string, Cluster> = StateUser.clusterMap(state);
+        const cluster: Cluster                  = clusters[key];
+
+        const subscribers:  Record<string, string>  = cluster[ClusterKey.Subscribers];
         const subscriptions: Record<string, string> = StateUser.subscriptionKeys(state);
 
-        subscriptions[key] = key;
+        subscribers[userId] = userId;
+        subscriptions[key]  = key;
 
-        this.service.patch(user[ModelKey.Id], { subscriptions });
+        return forkJoin
+        (
+            this.cluster.patch(key,    { subscribers   }),
+            this.service.patch(userId, { subscriptions })
+        );
     }
 
     @Action(ActionUserUnsubscribe)
-    userUsubscribe({ getState }: StateContext<StateUserModel>, { payload }: ActionUserUnsubscribe)
+    userUnsubscribe({ getState }: StateContext<StateUserModel>, { payload }: ActionUserUnsubscribe)
     {
         const key: string           = payload;
         const state: StateUserModel = getState();
         const user: User            = StateUser.user(state);
+        const userId: string        = user[ModelKey.Id];
 
+        const clusters: Record<string, Cluster> = StateUser.clusterMap(state);
+        const cluster: Cluster                  = clusters[key];
+
+        const subscribers:  Record<string, string>  = cluster[ClusterKey.Subscribers];
         const subscriptions: Record<string, string> = StateUser.subscriptionKeys(state);
 
+        delete subscribers[userId];
         delete subscriptions[key];
 
-        this.service.patch(user[ModelKey.Id], { subscriptions });
+        return forkJoin
+        (
+            this.cluster.patch(key,    { subscribers   }),
+            this.service.patch(userId, { subscriptions })
+        );
     }
 }

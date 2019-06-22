@@ -7,46 +7,67 @@
     --cpt-gap: 4px;
     position: relative;
     display: block;
-    height: var(--cpt-size);
-    width: var(--cpt-size);
     cursor: pointer;
 
-    &:before
+    > .cpt-container
     {
-        content: '';
-        position: absolute;
-        display: block;
-        height: 32px;
-        width: 32px;
-        top: var(--cpt-gap);
-        left: var(--cpt-gap);
-        border-radius: 50%;
-        z-index: -1;
-        box-sizing: border-box;
+        position: relative;
+        margin-top: -4px;
+        margin-left: -4px;
+
+        &:before
+        {
+            content: '';
+            position: absolute;
+            display: block;
+            height: 32px;
+            width: 32px;
+            top: var(--cpt-gap);
+            left: var(--cpt-gap);
+            border-radius: 50%;
+            z-index: -1;
+            box-sizing: border-box;
+            background-color: #{$app-color-primary-light};
+        }
     }
 
-    &.cpt-subscribed:before
+    .cpt-container-icon
     {
-        background-color: #{$app-color-primary};
+        height: var(--cpt-size);
+        width: var(--cpt-size);
     }
 
-    &:not(.cpt-subscribed):before
+    &:not(.cpt-subscribed)
     {
-        border-style: solid;
-        border-width: 2px;
-        border-color: #{$app-color-dark};
+        > .cpt-container:before
+        {
+            border-style: solid;
+            border-width: 2px;
+            border-color: #{$app-color-dark};
+        }
     }
 
     ion-icon {
-      font-size: 40px;
+        position: relative;
+        font-size: 40px;
     }
 
     fa-icon {
+        position: relative;
         top: 9px;
         left: 8px;
         position: absolute;
         stroke: #{$app-color-dark};
         color: #{$app-color-dark};
         margin-left: var(--cpt-gap);
+    }
+
+    .cpt-count
+    {
+        position: relative;
+        color: #{$app-color-dark};
+        font-size: 16px;
+        line-height: 1em;
+        margin-top: 6px;
     }
 }

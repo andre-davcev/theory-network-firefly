@@ -7,19 +7,16 @@
                              [subtitle]="cluster.tagline">
             </app-item-header>
 
-            <ion-card-content>
-                <ion-row fxLayout="row"
-                         fxLayoutAlign="start center">
-                    <ion-col size="2">
-                        <app-icon-subscribe [subscribed]="cluster.subscribed"
-                                            (clicked)="toggle($event, cluster)">
-                        </app-icon-subscribe>
-                    </ion-col>
+            <ion-card-content fxLayout="column"
+                              fxLayoutGap="10px">
+                <span>
+                    {{ cluster.description }}
+                </span>
 
-                    <ion-col size="10">
-                        {{ cluster.description }}
-                    </ion-col>
-                </ion-row>
+                <app-icon-subscribe [subscribed]="cluster.subscribed"
+                                    [count]="subscribers(cluster) | async"
+                                    (clicked)="toggle($event, cluster)">
+                </app-icon-subscribe>
             </ion-card-content>
         </ion-card>
     </ion-item>
