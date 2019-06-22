@@ -25,8 +25,6 @@ export class PageStream
 
     public toggle(subscribed: boolean, stream: Stream): void
     {
-        stream.subscribed = subscribed;
-
         if (subscribed)
         {
             this.store.dispatch(new ActionUserSubscribe(stream[ModelKey.Id]));
@@ -35,10 +33,5 @@ export class PageStream
         {
             this.store.dispatch(new ActionUserUnsubscribe(stream[ModelKey.Id]));
         }
-    }
-
-    public subscribers(cluster: Cluster): Observable<number>
-    {
-        return of(Object.keys(cluster[ClusterKey.Subscribers]).length);
     }
 }

@@ -1,4 +1,5 @@
 export enum StreamKey
 {
-    Subscribed = 'subscribed'
+    Subscribed      = 'subscribed',
+    SubscribedCount = 'subscribedCount'
 }

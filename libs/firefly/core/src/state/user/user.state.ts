@@ -8,7 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ModelKey } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, UserKey, Cluster, Stream, Alert, ClusterKey } from '@firefly/core/models';
+import { User, UserKey, Cluster, Stream, Alert, ClusterKey, StreamKey } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -321,8 +321,13 @@ export class StateUser implements NgxsOnInit
                 map((cluster: Cluster) =>
                 ({
                     ...CoreUtil.clone<Cluster>(empty),
+                    ...cluster
+                })).
+                map((cluster: Cluster) =>
+                ({
                     ...cluster,
-                    subscribed: false
+                    [StreamKey.Subscribed]: false,
+                    [StreamKey.SubscribedCount]: Object.keys(cluster[ClusterKey.Subscribers]).length
                 }))
             ),
             switchMap((stream: Array<Stream>) =>
@@ -377,21 +382,31 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserSubscribe)
-    userSubscribe({ getState }: StateContext<StateUserModel>, { payload }: ActionUserSubscribe)
+    userSubscribe({ getState, patchState }: StateContext<StateUserModel>, { payload }: ActionUserSubscribe)
     {
         const key: string           = payload;
         const state: StateUserModel = getState();
         const user: User            = StateUser.user(state);
         const userId: string        = user[ModelKey.Id];
 
-        const clusters: Record<string, Cluster> = StateUser.clusterMap(state);
-        const cluster: Cluster                  = clusters[key];
+        const clusters:    Record<string, Cluster> = StateUser.clusterMap(state);
+        const cluster:     Cluster                 = clusters[key];
+        const stream:      Array<Stream>           = StateUser.stream(state);
+        const streamIndex: number                  = stream.findIndex((s: Stream ) => key === s[ModelKey.Id]);
+        const streamItem:  Stream                  = stream[streamIndex];
 
         const subscribers:  Record<string, string>  = cluster[ClusterKey.Subscribers];
         const subscriptions: Record<string, string> = StateUser.subscriptionKeys(state);
 
         subscribers[userId] = userId;
         subscriptions[key]  = key;
+
+        streamItem[StreamKey.Subscribed]      = true;
+        streamItem[StreamKey.SubscribedCount] = Object.keys(streamItem[ClusterKey.Subscribers]).length + 1;
+
+        stream[streamIndex] = streamItem;
+
+        patchState({ stream });
 
         return forkJoin
         (
@@ -401,21 +416,31 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserUnsubscribe)
-    userUnsubscribe({ getState }: StateContext<StateUserModel>, { payload }: ActionUserUnsubscribe)
+    userUnsubscribe({ getState, patchState }: StateContext<StateUserModel>, { payload }: ActionUserUnsubscribe)
     {
         const key: string           = payload;
         const state: StateUserModel = getState();
         const user: User            = StateUser.user(state);
         const userId: string        = user[ModelKey.Id];
 
-        const clusters: Record<string, Cluster> = StateUser.clusterMap(state);
-        const cluster: Cluster                  = clusters[key];
+        const clusters:    Record<string, Cluster> = StateUser.clusterMap(state);
+        const cluster:     Cluster                 = clusters[key];
+        const stream:      Array<Stream>           = StateUser.stream(state);
+        const streamIndex: number                  = stream.findIndex((s: Stream ) => key === s[ModelKey.Id]);
+        const streamItem:  Stream                  = stream[streamIndex];
 
         const subscribers:  Record<string, string>  = cluster[ClusterKey.Subscribers];
         const subscriptions: Record<string, string> = StateUser.subscriptionKeys(state);
 
         delete subscribers[userId];
         delete subscriptions[key];
+
+        streamItem[StreamKey.Subscribed]      = false;
+        streamItem[StreamKey.SubscribedCount] = Object.keys(streamItem[ClusterKey.Subscribers]).length;
+
+        stream[streamIndex] = streamItem;
+
+        patchState({ stream });
 
         return forkJoin
         (
