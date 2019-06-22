@@ -1,5 +1,6 @@
 export * from './icon';
 export * from './icon-firefly';
+export * from './icon-subscribe';
 export * from './loading';
 export * from './map';
 export * from './map-annotation';

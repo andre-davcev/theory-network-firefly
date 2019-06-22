@@ -80,7 +80,7 @@ Pro.init('1e5146ca',
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
         NgxsRouterPluginModule.forRoot(),
         NgxsFormPluginModule.forRoot(),
-        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken})
+        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken}),
 //        NgxsLoggerPluginModule.forRoot()
     ],
 
@@ -97,4 +97,4 @@ Pro.init('1e5146ca',
 //        { provide: ErrorHandler,       useClass: ErrorHandlerApp }
     ]
 })
-export class CoreModule {}
+export class CoreModule { }

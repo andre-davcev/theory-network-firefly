@@ -20,4 +20,4 @@ import { ModuleComponentIcon } from '@firefly/core';
 
     bootstrap: [ComponentApp]
 })
-export class AppModule {}
+export class AppModule { }
