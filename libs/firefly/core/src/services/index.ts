@@ -6,5 +6,7 @@ export * from './icon.service';
 export * from './image.service';
 export * from './media.service';
 export * from './subscriptions.service';
+export * from './user-stream.service';
+export * from './user-subscriptions.service';
 export * from './user.service';
 export * from './util.service';

@@ -15,6 +15,8 @@ export * from './stream.model.key';
 export * from './stream.model';
 export * from './subscription.model.key';
 export * from './subscription.model';
+export * from './user-subscriptions.model.key';
+export * from './user-subscriptions.model';
 export * from './time.model';
 export * from './user.model.key';
 export * from './user.model';

@@ -1,4 +1,4 @@
-import { Observable, from, combineLatest } from 'rxjs';
+import { Observable, from, combineLatest, forkJoin } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentSnapshot, Action } from '@angular/fire/firestore';
 import { Model, ModelKey } from '@theory/firebase';
 import { map, take, switchMap } from 'rxjs/operators';
@@ -93,6 +93,15 @@ export class ServiceBase<T extends Model>
     public valuesChanges(id: string): Observable<T>
     {
         return this.document(id).valueChanges();
+    }
+
+    public snapshotFK(keys: Record<string, string> | Array<string>): Observable<Array<T>>
+    {
+        keys = keys instanceof Array ? keys : Object.keys(keys);
+
+        const streams$: Array<Observable<T>> = keys.map((id: string) => this.valuesChanges(id).pipe(take(1)));
+
+        return forkJoin(streams$);
     }
 
     public valuesChangesFK(keys: Record<string, string> | Array<string>): Observable<Array<T>>
