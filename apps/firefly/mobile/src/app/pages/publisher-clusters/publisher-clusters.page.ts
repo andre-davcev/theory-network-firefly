@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Subscription, Cluster, StateSubscriptions } from '@firefly/core';
+import { Subscription, Cluster } from '@firefly/core';
 
 @Component
 ({
@@ -15,8 +15,6 @@ import { Subscription, Cluster, StateSubscriptions } from '@firefly/core';
 
 export class PagePublisherClusters
 {
-    @Select(StateSubscriptions.subscriptions) subscriptions$: Observable<Array<Subscription>>;
-
     constructor(private store: Store) { }
 
     ionViewWillEnter()
