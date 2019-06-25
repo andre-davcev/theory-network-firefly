@@ -9,7 +9,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceImage } from './image.service';
 import { FormGroup, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { ModelKey } from '@theory/firebase';
-import { ValidatorsExtended, CoreEnum } from '@theory/core';
+import { ValidatorsExtended, CoreEnum, CoreUtil } from '@theory/core';
 
 
 @Injectable({ providedIn: 'root' })
@@ -156,7 +156,7 @@ export class ServiceCluster extends ServiceBase<Cluster>
       this.patchValue(form, ClusterKey.IconId, iconId);
     }
 
-    public valuesChangesClusters(keys: Record<string, string> | Array<string>): Observable<Array<Cluster>>
+    public valuesChangesClusters(keys: Record<string, string> | Array<string>, empty: Cluster): Observable<Record<string, Cluster>>
     {
         return this.valuesChangesFK(keys).
         pipe
@@ -172,7 +172,21 @@ export class ServiceCluster extends ServiceBase<Cluster>
                         map(() => cluster)
                     )
                 ))
-            )
+            ),
+            map((subscriptions: Array<Cluster>) =>
+            (
+                subscriptions.map((cluster: Cluster) =>
+                ({
+                    ...CoreUtil.clone<Cluster>(empty),
+                    ...cluster
+                }))
+            )),
+            map((subscriptions: Array<Cluster>) =>
+                subscriptions.reduce((record, cluster: Cluster): Record<string, Cluster> => {
+                    record[cluster[ModelKey.Id]] = cluster;
+                    return record;
+                }, {})
+            ),
         );
     }
 
