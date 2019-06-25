@@ -10,19 +10,19 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
 
     defaults :
     {
-        authData       : undefined,
-        user           : undefined,
-        error          : undefined,
-        authenticated  : false,
-        authenticating : false,
-        initializing   : false,
-        form           : undefined,
-        clusters       : {},
-        subscriptions  : {},
-        stream         : [],
-        streamLoaded   : false,
-        alerts         : [],
-        alertsLoaded   : false,
+        authData        : undefined,
+        user            : undefined,
+        error           : undefined,
+        authenticated   : false,
+        authenticating  : false,
+        initializing    : false,
+        form            : undefined,
+        clusterMap      : {},
+        subscriptionMap : {},
+        stream          : [],
+        streamLoaded    : false,
+        alerts          : [],
+        alertsLoaded    : false,
 
         empty :
         {
@@ -31,22 +31,23 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             [ModelKey.DateCreated] : undefined,
             [ModelKey.DateUpdated] : undefined,
 
-            [UserKey.Uid]           : undefined,
-            [UserKey.Language]      : 'en',
-            [UserKey.DisplayName]   : undefined,
-            [UserKey.Email]         : undefined,
-            [UserKey.PhoneNumber]   : undefined,
-            [UserKey.PhotoUrl]      : undefined,
-            [UserKey.ProviderId]    : undefined,
-            [UserKey.Tokens]        : {},
-            [UserKey.Notifications] : {},
-            [UserKey.Clusters]      : {},
-            [UserKey.Subscriptions] : {},
-            [UserKey.Events]        : {},
-            [UserKey.Images]        : {},
-            [UserKey.Icons]         : {},
-            [UserKey.Stream]        : [],
-            [UserKey.Alerts]        : []
+            [UserKey.Uid]              : undefined,
+            [UserKey.Language]         : 'en',
+            [UserKey.DisplayName]      : undefined,
+            [UserKey.Email]            : undefined,
+            [UserKey.PhoneNumber]      : undefined,
+            [UserKey.PhotoUrl]         : undefined,
+            [UserKey.ProviderId]       : undefined,
+            [UserKey.Tokens]           : {},
+            [UserKey.Notifications]    : {},
+            [UserKey.Clusters]         : {},
+            [UserKey.Subscriptions]    : {},
+            [UserKey.SubscriptionsOff] : {},
+            [UserKey.Events]           : {},
+            [UserKey.Images]           : {},
+            [UserKey.Icons]            : {},
+            [UserKey.Stream]           : [],
+            [UserKey.Alerts]           : []
         }
     }
 };

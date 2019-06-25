@@ -1,8 +1,7 @@
 import { Cluster } from './cluster.model';
+import { SubscriptionKey } from './subscription.model.key';
 
-export interface Subscription
+export interface Subscription extends Cluster
 {
-    subscribed : boolean;
-    icon: string;
-    photo: string;
+    [SubscriptionKey.On]: boolean;
 }

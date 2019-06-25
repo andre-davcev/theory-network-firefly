@@ -8,7 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ModelKey } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, UserKey, Cluster, Stream, Alert, ClusterKey, StreamKey } from '@firefly/core/models';
+import { User, UserKey, Cluster, Stream, Alert, ClusterKey, StreamKey, AssetKey, Subscription, SubscriptionKey } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -66,29 +66,71 @@ export class StateUser implements NgxsOnInit
         return user == null ? undefined : user[ModelKey.Id];
     }
 
-    @Selector() static clusterMap(state: StateUserModel): Record<string, Cluster> { return state.clusters; }
+    @Selector() static clusterMap(state: StateUserModel): Record<string, Cluster> { return state.clusterMap; }
     @Selector() static clusters(state: StateUserModel): Array<Cluster>
     {
-        const clusters: Record<string, Cluster> = StateUser.clusterMap(state);
+        const clusterMap: Record<string, Cluster> = StateUser.clusterMap(state);
 
-        return Object.keys(clusters).map(((id: string) => clusters[id]));
+        return Object.keys(clusterMap).map(((id: string) => clusterMap[id]));
     }
     @Selector() static clustersFound(state: StateUserModel): boolean
     {
         return Object.keys(StateUser.clusterMap(state)).length > 0;
     }
 
-    @Selector() static subscriptionKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state).subscriptions; }
-    @Selector() static subscriptionsMap(state: StateUserModel): Record<string, Cluster> {return state.clusters;}
-    @Selector() static subscriptions(state: StateUserModel): Array<Cluster>
+    @Selector() static subscriptionMap(state: StateUserModel): Record<string, Cluster> { return state.subscriptionMap; }
+    @Selector() static subscriptionsKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state)[UserKey.Subscriptions]; }
+    @Selector() static subscriptions(state: StateUserModel): Array<Subscription>
     {
-        const subscriptions: Record<string, Cluster> = StateUser.subscriptionsMap(state);
+        const subscriptionsKeys: Record<string, string>  = StateUser.subscriptionsKeys(state);
+        const subscriptionMap:   Record<string, Cluster> = StateUser.subscriptionMap(state);
 
-        return Object.keys(subscriptions).map(((id: string) => subscriptions[id]));
+        return Object.
+            keys(subscriptionsKeys).
+            map(((id: string) => subscriptionMap[id])).
+            map((cluster: Cluster) => ({ ...cluster, [SubscriptionKey.On]: true }));
     }
     @Selector() static subscriptionsFound(state: StateUserModel): boolean
     {
-        return Object.keys(StateUser.subscriptionsMap(state)).length > 0;
+        return Object.keys(StateUser.subscriptionsKeys(state)).length > 0;
+    }
+
+    @Selector() static subscriptionsOffKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state)[UserKey.SubscriptionsOff]; }
+    @Selector() static subscriptionsOff(state: StateUserModel): Array<Subscription>
+    {
+        const subscriptionsOffKeys: Record<string, string>  = StateUser.subscriptionsOffKeys(state);
+        const subscriptionMap:      Record<string, Cluster> = StateUser.subscriptionMap(state);
+
+        return Object.
+            keys(subscriptionsOffKeys).
+            map(((id: string) => subscriptionMap[id])).
+            map((cluster: Cluster) => ({ ...cluster, [SubscriptionKey.On]: false }));
+    }
+    @Selector() static subscriptionsOffFound(state: StateUserModel): boolean
+    {
+        return Object.keys(StateUser.subscriptionsOffKeys(state)).length > 0;
+    }
+
+    @Selector() static subscriptionsAllKeys(state: StateUserModel): Record<string, string>
+    {
+        return {
+            ...StateUser.subscriptionsKeys(state),
+            ...StateUser.subscriptionsOffKeys(state)
+        };
+    }
+    @Select() static subscriptionsAll(state: StateUserModel): Array<Subscription>
+    {
+        return [
+          ...StateUser.subscriptions(state),
+          ...StateUser.subscriptionsOff(state)
+        ].
+        sort((a: Cluster, b: Cluster) =>
+            a[AssetKey.Name].localeCompare(b[AssetKey.Name])
+        );
+    }
+    @Selector() static subscriptionsAllFound(state: StateUserModel): boolean
+    {
+        return Object.keys(StateUser.subscriptionsAllKeys(state)).length > 0;
     }
 
     @Selector() static stream(state: StateUserModel): Array<Stream> { return state.stream == null ? [] : state.stream; }
@@ -169,23 +211,28 @@ export class StateUser implements NgxsOnInit
             {
                 const previous: User = StateUser.user(getState());
 
-                let clustersAreEqual:      boolean;
-                let streamIsEqual:         boolean;
-                let subscriptionsAreEqual: boolean;
-                let alertsAreEqual:        boolean;
+                let clustersAreEqual:         boolean;
+                let streamIsEqual:            boolean;
+                let subscriptionsAreEqual:    boolean;
+                let subscriptionsOffAreEqual: boolean;
+                let subscriptionsChanged:     boolean;
+                let alertsAreEqual:           boolean;
 
                 if (previous != null)
                 {
-                    clustersAreEqual      = this.service.keysAreEqual(user[UserKey.Clusters],      previous[UserKey.Clusters]);
-                    streamIsEqual         = this.service.keysAreEqual(user[UserKey.Stream],        previous[UserKey.Stream]);
-                    subscriptionsAreEqual = this.service.keysAreEqual(user[UserKey.Subscriptions], previous[UserKey.Subscriptions]);
-                    alertsAreEqual        = this.service.keysAreEqual(user[UserKey.Alerts],        previous[UserKey.Alerts]);
+                    clustersAreEqual         = this.service.keysAreEqual(user[UserKey.Clusters],         previous[UserKey.Clusters]);
+                    streamIsEqual            = this.service.keysAreEqual(user[UserKey.Stream],           previous[UserKey.Stream]);
+                    subscriptionsAreEqual    = this.service.keysAreEqual(user[UserKey.Subscriptions],    previous[UserKey.Subscriptions]);
+                    subscriptionsOffAreEqual = this.service.keysAreEqual(user[UserKey.SubscriptionsOff], previous[UserKey.SubscriptionsOff]);
+                    alertsAreEqual           = this.service.keysAreEqual(user[UserKey.Alerts],           previous[UserKey.Alerts]);
+
+                    subscriptionsChanged = !subscriptionsAreEqual || !subscriptionsOffAreEqual;
                 }
 
-                if (previous == null || !clustersAreEqual)      { dispatch(new ActionUserWatchClusters(user)); }
-                if (previous == null || !streamIsEqual)         { dispatch(new ActionUserWatchStream(user)); }
-                if (previous == null || !subscriptionsAreEqual) { dispatch(new ActionUserWatchSubscriptions(user)); }
-                if (true || previous == null || !subscriptionsAreEqual) { dispatch(new ActionUserWatchAlerts(user)); }
+                if (previous == null || !clustersAreEqual)             { dispatch(new ActionUserWatchClusters(user)); }
+                if (previous == null || !streamIsEqual)                { dispatch(new ActionUserWatchStream(user)); }
+                if (previous == null || subscriptionsChanged)          { dispatch(new ActionUserWatchSubscriptions(user)); }
+                if (true || previous == null || !subscriptionsChanged) { dispatch(new ActionUserWatchAlerts(user)); }
             }),
             tap((user: User) =>
                 dispatch
@@ -282,7 +329,13 @@ export class StateUser implements NgxsOnInit
         const user: User     = payload;
         const empty: Cluster = StateClusterOptions.defaults.empty;
 
-        return this.cluster.valuesChangesClusters(user[UserKey.Subscriptions]).
+        const subscriptionsKeys =
+        {
+            ...user[UserKey.Subscriptions],
+            ...user[UserKey.SubscriptionsOff]
+        };
+
+        return this.cluster.valuesChangesClusters(subscriptionsKeys).
         pipe
         (
             map((subscriptions: Array<Cluster>) =>
@@ -309,7 +362,11 @@ export class StateUser implements NgxsOnInit
     watchStream({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatchStream)
     {
         const user: User = payload;
-        const subscriptions: Record<string, string> = user[UserKey.Subscriptions];
+        const subscriptions: Record<string, string> =
+        {
+            ...user[UserKey.Subscriptions],
+            ...user[UserKey.SubscriptionsOff]
+        };
         const empty: Cluster = StateClusterOptions.defaults.empty;
 
         return this.cluster.valuesChangesClusters(user[UserKey.Stream]).
@@ -360,13 +417,13 @@ export class StateUser implements NgxsOnInit
     @Action(ActionUserSetClusters)
     userSetClusters({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserSetClusters)
     {
-        patchState({ clusters: payload });
+        patchState({ clusterMap: payload });
     }
 
     @Action(ActionUserSetSubscriptions)
     userSetSubscriptions({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserSetSubscriptions)
     {
-        patchState({ subscriptions: payload });
+        patchState({ subscriptionMap: payload });
     }
 
     @Action(ActionUserSetStream)
@@ -396,7 +453,7 @@ export class StateUser implements NgxsOnInit
         const streamItem:  Stream                  = stream[streamIndex];
 
         const subscribers:  Record<string, string>  = cluster[ClusterKey.Subscribers];
-        const subscriptions: Record<string, string> = StateUser.subscriptionKeys(state);
+        const subscriptions: Record<string, string> = StateUser.subscriptionsKeys(state);
 
         subscribers[userId] = userId;
         subscriptions[key]  = key;
@@ -430,7 +487,7 @@ export class StateUser implements NgxsOnInit
         const streamItem:  Stream                  = stream[streamIndex];
 
         const subscribers:  Record<string, string>  = cluster[ClusterKey.Subscribers];
-        const subscriptions: Record<string, string> = StateUser.subscriptionKeys(state);
+        const subscriptions: Record<string, string> = StateUser.subscriptionsKeys(state);
 
         delete subscribers[userId];
         delete subscriptions[key];
