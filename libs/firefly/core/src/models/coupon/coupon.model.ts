@@ -1,4 +1,4 @@
-import { Asset } from './asset.model';
+import { Asset } from '../asset';
 
 export interface Coupon extends Asset
 {

@@ -1,4 +1,4 @@
-import { Asset } from './asset.model';
+import { Asset } from '../asset';
 import { ClusterKey } from './cluster.model.key';
 
 export interface Cluster extends Asset
