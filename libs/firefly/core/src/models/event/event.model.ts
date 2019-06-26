@@ -1,7 +1,7 @@
-import { Asset } from './asset.model';
+import { Asset } from '../asset';
 import { EventKey } from './event.model.key';
-import { Location } from './location.model';
-import { Time } from './time.model';
+import { Location } from '../location';
+import { Time } from '../time';
 
 export interface Event extends Asset
 {
