@@ -29,10 +29,10 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
           draft       : false,
 
 
-          [ClusterKey.Tagline]     : null,
-          [ClusterKey.IconId]      : undefined,
-          [ClusterKey.Events]      : {},
-          [ClusterKey.Subscribers] : {}
+          tagline     : null,
+          iconId      : undefined,
+          events      : {},
+          subscribers : {}
         },
 
         entities            : {},

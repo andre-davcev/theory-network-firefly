@@ -1,4 +1,4 @@
-import { UserSubscriptionsKey } from './user-subscriptions.model.key';
+import { UserSubscriptionsKey } from './user-subscriptions/user-subscriptions.model.key';
 import { Model } from '@theory/firebase';
 
 export interface UserSubscriptions extends Model

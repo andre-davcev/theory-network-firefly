@@ -8,9 +8,8 @@ import { StatusBarStyle } from '@capacitor/core';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { BaseComponent } from '@theory/core';
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
-import { StateCluster, ActionClusterSetId, ActionClusterSetIcon, ActionClusterCreate, ClusterKey } from '@firefly/core';
+import { StateCluster, ActionClusterSetId, ActionClusterSetIcon, ActionClusterCreate } from '@firefly/core';
 import { Pages } from '../pages.enum';
 
 @Component
@@ -25,8 +24,7 @@ export class PageAssetCluster
     @Select(StateCluster.formGroup)               form$:        Observable<FormGroup>;
     @Select(StateCluster.clusterIconNormalized)   clusterIcon$: Observable<string>;
 
-    public Pages:      any = Pages;
-    public ClusterKey: any = ClusterKey;
+    public Pages: any = Pages;
 
     constructor(
       private store: Store,

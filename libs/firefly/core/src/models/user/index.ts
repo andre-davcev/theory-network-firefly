@@ -1,2 +1,2 @@
 export * from './user.model.key';
-export * from './user.model';
+export * from '../user.model';

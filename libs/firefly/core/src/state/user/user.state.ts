@@ -383,7 +383,7 @@ export class StateUser implements NgxsOnInit
                 ({
                     ...cluster,
                     [StreamKey.Subscribed]: false,
-                    [StreamKey.SubscribedCount]: Object.keys(cluster[ClusterKey.Subscribers]).length
+                    [StreamKey.SubscribedCount]: Object.keys(cluster.subscribers).length
                 }))
             ),
             switchMap((stream: Array<Stream>) =>
@@ -451,14 +451,14 @@ export class StateUser implements NgxsOnInit
         const streamIndex: number                  = stream.findIndex((s: Stream ) => key === s.id);
         const streamItem:  Stream                  = stream[streamIndex];
 
-        const subscribers:  Record<string, string>  = cluster[ClusterKey.Subscribers];
+        const subscribers:  Record<string, string>  = cluster.subscribers;
         const subscriptions: Record<string, string> = StateUser.subscriptionsKeys(state);
 
         subscribers[userId] = userId;
         subscriptions[key]  = key;
 
         streamItem[StreamKey.Subscribed]      = true;
-        streamItem[StreamKey.SubscribedCount] = Object.keys(streamItem[ClusterKey.Subscribers]).length + 1;
+        streamItem[StreamKey.SubscribedCount] = Object.keys(streamItem.subscribers).length + 1;
 
         stream[streamIndex] = streamItem;
 
@@ -485,14 +485,14 @@ export class StateUser implements NgxsOnInit
         const streamIndex: number                  = stream.findIndex((s: Stream ) => key === s.id);
         const streamItem:  Stream                  = stream[streamIndex];
 
-        const subscribers:  Record<string, string>  = cluster[ClusterKey.Subscribers];
+        const subscribers:  Record<string, string>  = cluster.subscribers;
         const subscriptions: Record<string, string> = StateUser.subscriptionsKeys(state);
 
         delete subscribers[userId];
         delete subscriptions[key];
 
         streamItem[StreamKey.Subscribed]      = false;
-        streamItem[StreamKey.SubscribedCount] = Object.keys(streamItem[ClusterKey.Subscribers]).length;
+        streamItem[StreamKey.SubscribedCount] = Object.keys(streamItem.subscribers).length;
 
         stream[streamIndex] = streamItem;
 

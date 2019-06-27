@@ -1,5 +1,4 @@
-import { Asset } from '../asset';
-
+import { Asset } from './asset.model';
 
 export interface Beacon extends Asset
 {

@@ -15,8 +15,8 @@
           ngxsForm="cluster.form">
         <app-item-header [form]="form$ | async"
                          [iconUrl]="clusterIcon$ | async"
-                         [title]="name"
-                         [subtitle]="ClusterKey.Tagline"
+                         title="name"
+                         subtitle="tagline"
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
                          [titlePlaceholder]="'page.event.titlePlaceholder' | translate"
                          [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate"

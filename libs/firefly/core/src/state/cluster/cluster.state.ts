@@ -84,7 +84,7 @@ export class StateCluster
         const cluster$: Observable<Cluster> = id === CoreEnum.IdNew ? of(cluster) : this.clusterService.valuesChanges(id).
 
         pipe(switchMap((c: Cluster) =>
-            this.image.getDownloadUrl(c[ClusterKey.IconId]).
+            this.image.getDownloadUrl(c.iconId).
             pipe
             (
                 switchMap((url: string) => dispatch(new ActionClusterSetIcon(url))),

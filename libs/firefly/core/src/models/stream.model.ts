@@ -1,5 +1,4 @@
-import { Cluster } from '../cluster';
-import { StreamKey } from './stream.model.key';
+import { Cluster } from './cluster.model';
 
 export interface Stream extends Cluster
 {
