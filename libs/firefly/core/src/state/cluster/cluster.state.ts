@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
 import { FormGroup, AbstractControl, ValidatorFn } from '@angular/forms';
 import { StateUser } from '@firefly/core/state/user';
-import { User, Cluster, AssetKey, ClusterKey } from '@firefly/core/models';
+import { User, Cluster } from '@firefly/core/models';
 import { ServiceCluster, ServiceIcon, ServiceUser } from '@firefly/core/services';
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
@@ -159,7 +159,7 @@ export class StateCluster
             switchMap((cluster: Cluster) => this.clusterService.create(cluster).pipe
             (
                 mergeMap(() =>
-                    this.user.foreignKeyUpdate(cluster[AssetKey.UserId], this.clusterService.name, cluster.id)
+                    this.user.foreignKeyUpdate(cluster.userId, this.clusterService.name, cluster.id)
                 ),
                 tap(() => dispatch(new ActionClusterWatch(cluster)))
             ))

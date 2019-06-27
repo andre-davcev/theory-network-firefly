@@ -1,5 +1,4 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
-import { AssetKey, ClusterKey } from '@firefly/core/models';
 import { StateClusterModel } from './cluster.state.model';
 
 export const StateClusterOptions: StoreOptions<StateClusterModel> =
@@ -23,11 +22,11 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
           dateCreated : undefined,
           dateUpdated : undefined,
 
-          [AssetKey.UserId]      : undefined,
-          [AssetKey.Name]        : null,
-          [AssetKey.Description] : null,
-          [AssetKey.Private]     : false,
-          [AssetKey.Draft]       : false,
+          userId      : undefined,
+          name        : null,
+          description : null,
+          private     : false,
+          draft       : false,
 
 
           [ClusterKey.Tagline]     : null,

@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable, from, forkJoin } from 'rxjs';
 import { switchMap, take, filter, map, tap } from 'rxjs/operators';
 
-import { Cluster, AssetKey, ClusterKey } from '@firefly/core/models';
+import { Cluster } from '@firefly/core/models';
 import { ServiceBase } from './base.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceImage } from './image.service';
@@ -45,7 +45,7 @@ export class ServiceCluster extends ServiceBase<Cluster>
       {
         ...this.clone(defaults),
         id: CoreEnum.IdNew,
-        [AssetKey.UserId]: userId
+        userId: userId
       };
 
       return cluster;
@@ -59,11 +59,11 @@ export class ServiceCluster extends ServiceBase<Cluster>
             dateCreated : cluster.dateCreated,
             dateUpdated : cluster.dateUpdated,
 
-            [AssetKey.UserId]      : cluster[AssetKey.UserId],
-            [AssetKey.Name]        : [cluster[AssetKey.Name],        [Validators.required, ValidatorsExtended.minLength(1)]],
-            [AssetKey.Description] : [cluster[AssetKey.Description], [Validators.required, ValidatorsExtended.minLength(1)]],
-            [AssetKey.Private]     : cluster[AssetKey.Private],
-            [AssetKey.Draft]       : cluster[AssetKey.Draft],
+            userId      : cluster.userId,
+            name        : [cluster.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
+            description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(1)]],
+            private     : cluster.private,
+            draft       : cluster.draft,
 
             [ClusterKey.Tagline]   : [cluster[ClusterKey.Tagline], ValidatorsExtended.minLength(1)],
             [ClusterKey.IconId]   : [cluster[ClusterKey.IconId], [ServiceCluster.validateIcon()]]

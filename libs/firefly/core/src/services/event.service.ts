@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Event, AssetKey, EventKey, Time, Location } from '@firefly/core/models';
+import { Event, Time, Location } from '@firefly/core/models';
 import { ServiceBase } from './base.service';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, CoreEnum, ValidatorsExtended } from '@theory/core';
@@ -66,7 +66,7 @@ export class ServiceEvent extends ServiceBase<Event>
         {
             ...this.clone(defaults),
             id: CoreEnum.IdNew,
-            [AssetKey.UserId]: userId,
+            userId: userId,
             times:
             [
                 {
@@ -88,11 +88,11 @@ export class ServiceEvent extends ServiceBase<Event>
             dateCreated : event.dateCreated,
             dateUpdated : event.dateUpdated,
 
-            [AssetKey.UserId]      : event[AssetKey.UserId],
-            [AssetKey.Name]        : [event[AssetKey.Name],        [Validators.required, ValidatorsExtended.minLength(1)]],
-            [AssetKey.Description] : [event[AssetKey.Description], [Validators.required, ValidatorsExtended.minLength(1)]],
-            [AssetKey.Private]     : event[AssetKey.Private],
-            [AssetKey.Draft]       : event[AssetKey.Draft],
+            userId      : event.userId,
+            name        : [event.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
+            description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
+            private     : event.private,
+            draft       : event.draft,
 
             [EventKey.Version]   : event[EventKey.Version],
             [EventKey.Tagline]   : [event[EventKey.Tagline], ValidatorsExtended.minLength(1)],

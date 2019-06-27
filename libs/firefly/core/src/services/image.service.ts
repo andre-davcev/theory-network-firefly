@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 import { ServiceMedia } from './media.service';
-import { Image, Event, AssetKey, EventKey } from '../models';
+import { Image, Event } from '../models';
 import { ServiceUser } from './user.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Observable } from 'rxjs';
@@ -28,11 +28,11 @@ export class ServiceImage extends ServiceMedia<Image>
         const image: Image =
         {
             id          : this.id(event),
-            [AssetKey.Name]        : '',
-            [AssetKey.Description] : '',
-            [AssetKey.Private]     : true,
-            [AssetKey.UserId]      : event[AssetKey.UserId],
-            [AssetKey.Draft]       : false
+            name        : '',
+            description : '',
+            private     : true,
+            userId      : event.userId,
+            draft       : false
         };
 
         return image;
@@ -53,7 +53,7 @@ export class ServiceImage extends ServiceMedia<Image>
         (
             switchMap(() => this.set(image)),
             mergeMap(() =>
-              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image.id)
+              this.user.foreignKeyUpdate(image.userId, this.name, image.id)
             ),
             map(() => event)
         );

@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, UserKey, Cluster, Stream, Alert, ClusterKey, StreamKey, AssetKey, Subscription, SubscriptionKey } from '@firefly/core/models';
+import { User, Cluster, Stream, Alert, Subscription } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -124,7 +124,7 @@ export class StateUser implements NgxsOnInit
           ...StateUser.subscriptionsOff(state)
         ].
         sort((a: Cluster, b: Cluster) =>
-            a[AssetKey.Name].localeCompare(b[AssetKey.Name])
+            a.name.localeCompare(b.name)
         );
     }
     @Selector() static subscriptionsAllFound(state: StateUserModel): boolean
