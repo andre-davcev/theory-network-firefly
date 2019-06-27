@@ -1,25 +1,23 @@
 import { Model } from '@theory/firebase';
 
-import { UserKey } from './user/user.model.key';
-
 export interface User extends Model
 {
-    [UserKey.Uid]           : string;
-    [UserKey.Language]      : string;
-    [UserKey.Email]         : string;
-    [UserKey.PhotoUrl]      : string;
-    [UserKey.PhoneNumber]   : string;
-    [UserKey.DisplayName]   : string;
-    [UserKey.ProviderId]    : string;
+    uid           : string;
+    language      : string;
+    email         : string;
+    photoUrl      : string;
+    phoneNumber   : string;
+    displayName   : string;
+    providerId    : string;
 
-    [UserKey.Tokens]           : Record<string, string>;
-    [UserKey.Notifications]    : Record<string, string>;
-    [UserKey.Clusters]         : Record<string, string>;
-    [UserKey.Subscriptions]    : Record<string, string>;
-    [UserKey.SubscriptionsOff] : Record<string, string>;
-    [UserKey.Events]           : Record<string, string>;
-    [UserKey.Images]           : Record<string, string>;
-    [UserKey.Icons]            : Record<string, string>;
-    [UserKey.Stream]           : Array<string>;
-    [UserKey.Alerts]           : Array<string>;
+    tokens           : Record<string, string>;
+    notifications    : Record<string, string>;
+    clusters         : Record<string, string>;
+    subscriptions    : Record<string, string>;
+    subscriptionsOff : Record<string, string>;
+    events           : Record<string, string>;
+    images           : Record<string, string>;
+    icons            : Record<string, string>;
+    stream           : Array<string>;
+    alerts           : Array<string>;
 }
