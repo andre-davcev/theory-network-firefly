@@ -6,10 +6,10 @@ import { StateUserStreamModel } from './user-stream.state.model';
 import { StateUser } from '../user';
 import { Observable, of } from 'rxjs';
 import { Cluster, ClusterKey, Stream } from '@firefly/core/models';
-import { ModelKey } from '@theory/firebase/enums';
 import { ActionUserStreamGet, ActionUserStreamWatch, ActionUserStreamPage } from './user-stream.actions';
 import { ServiceUserStream, ServiceCluster } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core/utils';
+
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
 
@@ -37,7 +37,7 @@ export class StateUserStream
         return StateUserStream.
             clusters(state).
             filter((cluster: Cluster) =>
-                cluster[ClusterKey.Subscribers]‌[cluster[ModelKey.Id]] == null
+                cluster[ClusterKey.Subscribers]‌[cluster.id] == null
             ),
             map((item: Cluster, index: number) =>
                 ({

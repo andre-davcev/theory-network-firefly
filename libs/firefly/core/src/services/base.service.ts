@@ -1,6 +1,6 @@
 import { Observable, from, combineLatest, forkJoin } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentSnapshot, Action } from '@angular/fire/firestore';
-import { Model, ModelKey } from '@theory/firebase';
+import { Model } from '@theory/firebase';
 import { map, take, switchMap } from 'rxjs/operators';
 import { MergeType } from '../enums';
 import { FormGroup } from '@angular/forms';
@@ -77,7 +77,7 @@ export class ServiceBase<T extends Model>
 
     public create(object: T): Observable<T>
     {
-        object[ModelKey.Id] = this.firestore.createId();
+        object.id = this.firestore.createId();
 
         return this.set(object).pipe
         (
@@ -87,7 +87,7 @@ export class ServiceBase<T extends Model>
 
     public delete(object: T): Observable<void>
     {
-        return from(this.document(object[ModelKey.Id]).delete());
+        return from(this.document(object.id).delete());
     }
 
     public valuesChanges(id: string): Observable<T>

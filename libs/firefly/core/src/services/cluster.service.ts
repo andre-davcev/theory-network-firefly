@@ -8,7 +8,6 @@ import { ServiceBase } from './base.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceImage } from './image.service';
 import { FormGroup, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
-import { ModelKey } from '@theory/firebase';
 import { ValidatorsExtended, CoreEnum, CoreUtil } from '@theory/core';
 
 
@@ -45,7 +44,7 @@ export class ServiceCluster extends ServiceBase<Cluster>
       const cluster: Cluster =
       {
         ...this.clone(defaults),
-        [ModelKey.Id]: CoreEnum.IdNew,
+        id: CoreEnum.IdNew,
         [AssetKey.UserId]: userId
       };
 
@@ -56,9 +55,9 @@ export class ServiceCluster extends ServiceBase<Cluster>
     {
       const form: FormGroup = this.formBuilder.group
         ({
-            [ModelKey.Id]          : cluster[ModelKey.Id],
-            [ModelKey.DateCreated] : cluster[ModelKey.DateCreated],
-            [ModelKey.DateUpdated] : cluster[ModelKey.DateUpdated],
+            id          : cluster.id,
+            dateCreated : cluster.dateCreated,
+            dateUpdated : cluster.dateUpdated,
 
             [AssetKey.UserId]      : cluster[AssetKey.UserId],
             [AssetKey.Name]        : [cluster[AssetKey.Name],        [Validators.required, ValidatorsExtended.minLength(1)]],
@@ -183,7 +182,7 @@ export class ServiceCluster extends ServiceBase<Cluster>
             )),
             map((subscriptions: Array<Cluster>) =>
                 subscriptions.reduce((record, cluster: Cluster): Record<string, Cluster> => {
-                    record[cluster[ModelKey.Id]] = cluster;
+                    record[cluster.id] = cluster;
                     return record;
                 }, {})
             ),

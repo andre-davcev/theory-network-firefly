@@ -1,7 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserModel } from './user.state.model';
-import { ModelKey } from '@theory/firebase';
 import { UserKey } from '@firefly/core/models';
 
 export const StateUserOptions: StoreOptions<StateUserModel> =
@@ -26,10 +25,10 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
 
         empty :
         {
-            [ModelKey.Version]     : undefined,
-            [ModelKey.Id]          : undefined,
-            [ModelKey.DateCreated] : undefined,
-            [ModelKey.DateUpdated] : undefined,
+            version     : undefined,
+            id          : undefined,
+            dateCreated : undefined,
+            dateUpdated : undefined,
 
             [UserKey.Uid]              : undefined,
             [UserKey.Language]         : 'en',

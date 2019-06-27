@@ -2,7 +2,6 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateEventModel } from './event.state.model';
 import { AssetKey, EventKey } from '@firefly/core/models';
-import { ModelKey } from '@theory/firebase';
 
 export const StateEventOptions: StoreOptions<StateEventModel> =
 {
@@ -20,10 +19,10 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
         formGroup: undefined,
         empty    :
         {
-            [ModelKey.Version]     : undefined,
-            [ModelKey.Id]          : undefined,
-            [ModelKey.DateCreated] : undefined,
-            [ModelKey.DateUpdated] : undefined,
+            version     : undefined,
+            id          : undefined,
+            dateCreated : undefined,
+            dateUpdated : undefined,
 
             [AssetKey.UserId]      : undefined,
             [AssetKey.Name]        : null,

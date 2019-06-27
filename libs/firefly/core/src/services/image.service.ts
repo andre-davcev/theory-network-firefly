@@ -6,7 +6,6 @@ import { ServiceMedia } from './media.service';
 import { Image, Event, AssetKey, EventKey } from '../models';
 import { ServiceUser } from './user.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { ModelKey } from '@theory/firebase/enums';
 import { Observable } from 'rxjs';
 import { switchMap, mergeMap, map } from 'rxjs/operators';
 
@@ -28,7 +27,7 @@ export class ServiceImage extends ServiceMedia<Image>
     {
         const image: Image =
         {
-            [ModelKey.Id]          : this.id(event),
+            id          : this.id(event),
             [AssetKey.Name]        : '',
             [AssetKey.Description] : '',
             [AssetKey.Private]     : true,
@@ -42,19 +41,19 @@ export class ServiceImage extends ServiceMedia<Image>
     public createWithUpload(event: Event, imagePath: string): Observable<Event>
     {
         const image:      Image = this.fromEvent(event);
-        const bucketPath: string       = this.toBucketPath(image[ModelKey.Id]);
+        const bucketPath: string       = this.toBucketPath(image.id);
 
         event =
         {
             ...event,
-            [EventKey.ImageId]: image[ModelKey.Id]
+            [EventKey.ImageId]: image.id
         };
 
         return this.upload(imagePath, bucketPath).pipe
         (
             switchMap(() => this.set(image)),
             mergeMap(() =>
-              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image[ModelKey.Id])
+              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image.id)
             ),
             map(() => event)
         );

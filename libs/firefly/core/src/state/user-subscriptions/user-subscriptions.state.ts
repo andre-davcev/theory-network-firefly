@@ -10,7 +10,6 @@ import { StateUser, StateClusterOptions } from '@firefly/core/state';
 import { Observable, of } from 'rxjs';
 import { filter, switchMap, tap, withLatestFrom, map } from 'rxjs/operators';
 import { ServiceUserSubscriptions, ServiceCluster } from '@firefly/core/services';
-import { ModelKey } from '@theory/firebase/enums';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 

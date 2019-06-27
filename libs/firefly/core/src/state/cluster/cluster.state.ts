@@ -8,7 +8,6 @@ import { ServiceCluster, ServiceIcon, ServiceUser } from '@firefly/core/services
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
 import { ActionGetClusters, ActionClusterSet, ActionClusterSetId, ActionClusterCreate, ActionClusterSetIcon, ActionClusterWatch } from './cluster.actions';
-import { ModelKey } from '@theory/firebase';
 import { CoreEnum, FormNgxs } from '@theory/core';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
@@ -80,7 +79,7 @@ export class StateCluster
     clusterWatch({ dispatch } : StateContext<StateClusterModel>, { payload }: ActionClusterWatch)
     {
         const cluster: Cluster  = payload;
-        const id:    string = cluster[ModelKey.Id];
+        const id:    string = cluster.id;
 
         const cluster$: Observable<Cluster> = id === CoreEnum.IdNew ? of(cluster) : this.clusterService.valuesChanges(id).
 
@@ -100,7 +99,7 @@ export class StateCluster
     getClusters({ patchState } : StateContext<StateClusterModel>)
     {
         return this.user$.pipe(
-            map((user:User) => user[ModelKey.Id]),
+            map((user:User) => user.id),
             switchMap(userId => {
                 return this.clusterService
                 .getClusters(userId)
@@ -160,7 +159,7 @@ export class StateCluster
             switchMap((cluster: Cluster) => this.clusterService.create(cluster).pipe
             (
                 mergeMap(() =>
-                    this.user.foreignKeyUpdate(cluster[AssetKey.UserId], this.clusterService.name, cluster[ModelKey.Id])
+                    this.user.foreignKeyUpdate(cluster[AssetKey.UserId], this.clusterService.name, cluster.id)
                 ),
                 tap(() => dispatch(new ActionClusterWatch(cluster)))
             ))

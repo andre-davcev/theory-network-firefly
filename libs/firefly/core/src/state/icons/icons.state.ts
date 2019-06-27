@@ -9,8 +9,6 @@ import { FormIcon } from '@firefly/core/forms';
 import { StateIconsModel } from './icons.state.model';
 import { StateIconsOptions } from './icons.state.options';
 import { ActionGetIcons, ActionSetIconId, ActionSetIcon } from './icons.actions';
-import { UserKey } from '@firefly/core';
-import { ModelKey } from '@theory/firebase';
 
 @State<StateIconsModel>(StateIconsOptions)
 
@@ -32,7 +30,7 @@ export class StateIcons
     {
         return this.user$.pipe
         (
-            map((user:User) => user[ModelKey.Id]),
+            map((user:User) => user.id),
 
             switchMap((userId: string) =>
             {

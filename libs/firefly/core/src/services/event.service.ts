@@ -6,7 +6,6 @@ import { Event, AssetKey, EventKey, Time, Location } from '@firefly/core/models'
 import { ServiceBase } from './base.service';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, CoreEnum, ValidatorsExtended } from '@theory/core';
-import { ModelKey } from '@theory/firebase';
 import { RepeatType } from '@firefly/core/enums';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
@@ -66,7 +65,7 @@ export class ServiceEvent extends ServiceBase<Event>
         const event: Event =
         {
             ...this.clone(defaults),
-            [ModelKey.Id]: CoreEnum.IdNew,
+            id: CoreEnum.IdNew,
             [AssetKey.UserId]: userId,
             times:
             [
@@ -85,9 +84,9 @@ export class ServiceEvent extends ServiceBase<Event>
     {
         const form: FormGroup = this.formBuilder.group
         ({
-            [ModelKey.Id]          : event[ModelKey.Id],
-            [ModelKey.DateCreated] : event[ModelKey.DateCreated],
-            [ModelKey.DateUpdated] : event[ModelKey.DateUpdated],
+            id          : event.id,
+            dateCreated : event.dateCreated,
+            dateUpdated : event.dateUpdated,
 
             [AssetKey.UserId]      : event[AssetKey.UserId],
             [AssetKey.Name]        : [event[AssetKey.Name],        [Validators.required, ValidatorsExtended.minLength(1)]],
