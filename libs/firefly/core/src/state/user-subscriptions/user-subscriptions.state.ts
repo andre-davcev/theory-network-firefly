@@ -1,7 +1,7 @@
 import { State, Action, StateContext, Selector, Select } from '@ngxs/store';
 
 import { CoreUtil } from '@theory/core';
-import { UserSubscriptions, UserSubscriptionsKey, Subscription, Cluster, SubscriptionKey } from '@firefly/core/models';
+import { UserSubscriptions, Subscription, Cluster } from '@firefly/core/models';
 
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { StateUserSubscriptionsOptions } from './user-subscriptions.state.options';
@@ -23,7 +23,7 @@ export class StateUserSubscriptions
     @Selector() static onMap(state: StateUserSubscriptionsModel) { return state.onMap == null ? {} : state.onMap; }
     @Selector() static onKeys(state: StateUserSubscriptionsModel): Record<string, string>
     {
-        return StateUserSubscriptions.data(state)[UserSubscriptionsKey.On];
+        return StateUserSubscriptions.data(state).on;
     }
     @Selector() static on(state: StateUserSubscriptionsModel): Array<Subscription>
     {
@@ -35,7 +35,7 @@ export class StateUserSubscriptions
             map((cluster: Cluster) =>
             ({
                 ...cluster,
-                [SubscriptionKey.On]: true
+                on: true
             }));
     }
     @Selector() static onFound(state: StateUserSubscriptionsModel): boolean
@@ -46,7 +46,7 @@ export class StateUserSubscriptions
     @Selector() static offMap(state: StateUserSubscriptionsModel) { return state.offMap == null ? {} : state.offMap; }
     @Selector() static offKeys(state: StateUserSubscriptionsModel): Record<string, string>
     {
-        return StateUserSubscriptions.data(state)[UserSubscriptionsKey.Off];
+        return StateUserSubscriptions.data(state).off;
     }
     @Selector() static off(state: StateUserSubscriptionsModel): Array<Subscription>
     {
@@ -58,7 +58,7 @@ export class StateUserSubscriptions
             map((cluster: Cluster) =>
             ({
                 ...cluster,
-                [SubscriptionKey.On]: false
+                on: false
             }));
     }
     @Selector() static offFound(state: StateUserSubscriptionsModel): boolean
