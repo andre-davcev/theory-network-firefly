@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { Stream, StateUser, ActionUserSubscribe, ActionUserUnsubscribe, ClusterKey, Cluster } from '@firefly/core';
+import { Stream, StateUser, ActionUserSubscribe, ActionUserUnsubscribe, Cluster } from '@firefly/core';
 
 @Component
 ({

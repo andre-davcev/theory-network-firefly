@@ -5,7 +5,7 @@ import { StateUserStreamOptions } from './user-stream.state.options';
 import { StateUserStreamModel } from './user-stream.state.model';
 import { StateUser } from '../user';
 import { Observable, of } from 'rxjs';
-import { Cluster, ClusterKey, Stream } from '@firefly/core/models';
+import { Cluster, Stream } from '@firefly/core/models';
 import { ActionUserStreamGet, ActionUserStreamWatch, ActionUserStreamPage } from './user-stream.actions';
 import { ServiceUserStream, ServiceCluster } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core/utils';
@@ -37,13 +37,13 @@ export class StateUserStream
         return StateUserStream.
             clusters(state).
             filter((cluster: Cluster) =>
-                cluster[ClusterKey.Subscribers]‌[cluster.id] == null
+                cluster.subscribers‌[cluster.id] == null
             ),
             map((item: Cluster, index: number) =>
                 ({
                     [StreamKey.Index]:           index,
                     [StreamKey.Subscribed]:      false,
-                    [StreamKey.SubscribedCount]: Object.keys(cluster[ClusterKey.Subscribers])
+                    [StreamKey.SubscribedCount]: Object.keys(cluster.subscribers)
                 })
             );
     }

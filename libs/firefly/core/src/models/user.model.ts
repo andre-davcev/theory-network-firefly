@@ -1,6 +1,6 @@
 import { Model } from '@theory/firebase';
 
-import { UserKey } from './user.model.key';
+import { UserKey } from './user/user.model.key';
 
 export interface User extends Model
 {

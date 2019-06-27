@@ -1,2 +1,2 @@
 export * from './subscription.model.key';
-export * from './subscription.model';
+export * from '../subscription.model';

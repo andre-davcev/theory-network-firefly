@@ -1,2 +1,2 @@
 export * from './stream.model.key';
-export * from './stream.model';
+export * from '../stream.model';

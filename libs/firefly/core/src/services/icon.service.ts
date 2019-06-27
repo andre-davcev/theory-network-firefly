@@ -74,7 +74,7 @@ export class ServiceIcon extends ServiceMedia<Icon>
         cluster =
         {
             ...cluster,
-            [ClusterKey.IconId]: image.id
+            iconId: image.id
         };
 
         return this.upload(imagePath, bucketPath).pipe

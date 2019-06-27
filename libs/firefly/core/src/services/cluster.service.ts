@@ -65,8 +65,8 @@ export class ServiceCluster extends ServiceBase<Cluster>
             private     : cluster.private,
             draft       : cluster.draft,
 
-            [ClusterKey.Tagline]   : [cluster[ClusterKey.Tagline], ValidatorsExtended.minLength(1)],
-            [ClusterKey.IconId]   : [cluster[ClusterKey.IconId], [ServiceCluster.validateIcon()]]
+            tagline   : [cluster.tagline, ValidatorsExtended.minLength(1)],
+            iconId   : [cluster.iconId, [ServiceCluster.validateIcon()]]
         });
 
         this._form = form;
@@ -152,7 +152,7 @@ export class ServiceCluster extends ServiceBase<Cluster>
 
     public iconIdSet(form: FormGroup, iconId: string): void
     {
-      this.patchValue(form, ClusterKey.IconId, iconId);
+      this.patchValue(form, 'iconId', iconId);
     }
 
     public valuesChangesClusters(keys: Record<string, string> | Array<string>, empty: Cluster): Observable<Record<string, Cluster>>
