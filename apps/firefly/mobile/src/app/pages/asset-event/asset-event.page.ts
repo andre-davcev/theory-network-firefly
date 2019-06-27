@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { EventKey, ActionEventSetImage, StateEvent, ActionEventCreate, ActionEventSetTime } from '@firefly/core';
+import { ActionEventSetImage, StateEvent, ActionEventCreate, ActionEventSetTime } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
@@ -89,7 +89,7 @@ export class PageAssetEvent
         }
     }
 
-    public timeChanged(event: CustomEvent, key: EventKey.TimeStart | EventKey.TimeEnd): void
+    public timeChanged(event: CustomEvent, key: 'start' | 'end'): void
     {
         const time: string = event.detail.value;
 

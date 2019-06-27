@@ -40,10 +40,10 @@ export class StateEvent
     @Selector() static eventImageUrlNormalized(state: StateEventModel): string { return state.imageUrlNormalized; }
     @Selector() static eventIsNew(state: StateEventModel): boolean { return  StateEvent.eventId(state) === CoreEnum.IdNew; }
     @Selector() static eventCanUpdate(state: StateEventModel): boolean { return StateEvent.form(state).status === FormNgxsStatus.Valid && StateEvent.form(state).dirty; }
-    @Selector() static eventLocation(state: StateEventModel): Location { return StateEvent.form(state)[EventKey.Location]; }
+    @Selector() static eventLocation(state: StateEventModel): Location { return StateEvent.form(state).location; }
     @Selector() static eventLocationDefined(state: StateEventModel): boolean { return StateEvent.eventLocation(state) != null; }
     @Selector() static eventLocations(state: StateEventModel): Array<Location> { return [ StateEvent.eventLocation(state) ]; }
-    @Selector() static eventTimes(state: StateEventModel): Array<Time> { return StateEvent.event(state)[EventKey.Times]; }
+    @Selector() static eventTimes(state: StateEventModel): Array<Time> { return StateEvent.event(state).times; }
     @Selector() static eventTime(state: StateEventModel): Time { return StateEvent.eventTimes(state)[0]; }
     @Selector() static eventTimeStart(state: StateEventModel): string { return StateEvent.eventTime(state).start; }
     @Selector() static eventTimeEnd(state: StateEventModel): string { return StateEvent.eventTime(state).end; }
@@ -56,7 +56,7 @@ export class StateEvent
     }
     @Selector() static eventClusters(state: StateEventModel): Array<string>
     {
-        const clusters: Record<string, string> = StateEvent.form(state)[EventKey.Clusters];
+        const clusters: Record<string, string> = StateEvent.form(state).clusters;
 
         return Object.keys( clusters == null ? {} : clusters );
     }
@@ -119,7 +119,7 @@ export class StateEvent
         const event$: Observable<Event> = id === CoreEnum.IdNew ? of(event) : this.service.valuesChanges(id).
 
         pipe(switchMap((e: Event) =>
-            this.image.getDownloadUrl(e[EventKey.ImageId]).
+            this.image.getDownloadUrl(e.imageId).
             pipe
             (
                 switchMap((url: string) => dispatch(new ActionEventSetImage(url))),
@@ -201,7 +201,7 @@ export class StateEvent
             switchMap((event: Event) => this.service.create(event).pipe
             (
                 mergeMap(() =>
-                    this.cluster.foreignKeyUpdate(Object.keys(event[EventKey.Clusters])[0], this.service.name, event.id)
+                    this.cluster.foreignKeyUpdate(Object.keys(event.clusters)[0], this.service.name, event.id)
                 ),
                 mergeMap(() =>
                     this.user.foreignKeyUpdate(event.userId, this.service.name, event.id)
@@ -222,6 +222,6 @@ export class StateEvent
 
         patchState({ clusterPrimary });
 
-        this.service.patchValue(form, EventKey.Clusters, clusters);
+        this.service.patchValue(form, 'clusters', clusters);
     }
 }

@@ -23,7 +23,7 @@
         <app-item-header [form]="form$ | async"
                          [iconUrl]="clusterIcon$ | async"
                          [title]="name"
-                         [subtitle]="EventKey.Tagline"
+                         [subtitle]="tagline"
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
                          [titlePlaceholder]="'page.cluster.titlePlaceholder' | translate"
                          [subtitlePlaceholder]="'page.cluster.subtitlePlaceholder' | translate"
@@ -63,25 +63,25 @@
 
                     <ion-item>
                         <ion-label>{{ 'general.starts' | translate }}</ion-label>
-                        <ion-datetime [name]="EventKey.TimeStart"
+                        <ion-datetime name="start"
                                       [value]="timeStart$ | async"
                                       [displayFormat]="'date-time.displayFormat' | translate"
                                       [pickerFormat]="'date-time.pickerFormat' | translate"
                                       [cancelText]="'general.cancel' |  translate"
                                       [doneText]="'general.done' | translate"
-                                      (ionChange)="timeChanged($event, EventKey.TimeStart)">
+                                      (ionChange)="timeChanged($event, 'start')">
                         </ion-datetime>
                     </ion-item>
 
                     <ion-item>
                         <ion-label>{{ 'general.ends' |  translate }}</ion-label>
-                        <ion-datetime [name]="EventKey.TimeEnd"
+                        <ion-datetime name="end"
                                       [value]="timeEnd$ | async"
                                       [displayFormat]="'date-time.displayFormat' | translate"
                                       [pickerFormat]="'date-time.pickerFormat' | translate"
                                       [cancelText]="'general.cancel' |  translate"
                                       [doneText]="'general.done' | translate"
-                                      (ionChange)="timeChanged($event, EventKey.TimeEnd)"
+                                      (ionChange)="timeChanged($event, 'end')"
                                       [class.cpt-invalid]="!(timeEndValid$ | async)">
                         </ion-datetime>
                     </ion-item>
