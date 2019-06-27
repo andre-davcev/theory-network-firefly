@@ -87,7 +87,7 @@ export class StateUser implements NgxsOnInit
         return Object.
             keys(subscriptionsKeys).
             map(((id: string) => subscriptionMap[id])).
-            map((cluster: Cluster) => ({ ...cluster, [SubscriptionKey.On]: true }));
+            map((cluster: Cluster) => ({ ...cluster, on: true }));
     }
     @Selector() static subscriptionsFound(state: StateUserModel): boolean
     {
@@ -103,7 +103,7 @@ export class StateUser implements NgxsOnInit
         return Object.
             keys(subscriptionsOffKeys).
             map(((id: string) => subscriptionMap[id])).
-            map((cluster: Cluster) => ({ ...cluster, [SubscriptionKey.On]: false }));
+            map((cluster: Cluster) => ({ ...cluster, on: false }));
     }
     @Selector() static subscriptionsOffFound(state: StateUserModel): boolean
     {
