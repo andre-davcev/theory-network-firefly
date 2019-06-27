@@ -9,7 +9,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceUser } from './user.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
-import { AssetKey, ClusterKey, Cluster } from '@firefly/core/models';
+import { Cluster } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceIcon extends ServiceMedia<Icon>
@@ -56,11 +56,11 @@ export class ServiceIcon extends ServiceMedia<Icon>
         const image: Icon =
         {
             id          : this.idCluster(cluster),
-            [AssetKey.Name]        : '',
-            [AssetKey.Description] : '',
-            [AssetKey.Private]     : true,
-            [AssetKey.UserId]      : cluster.userId,
-            [AssetKey.Draft]       : false
+            name        : '',
+            description : '',
+            private     : true,
+            userId      : cluster.userId,
+            draft       : false
         };
 
         return image;
@@ -81,7 +81,7 @@ export class ServiceIcon extends ServiceMedia<Icon>
         (
             switchMap(() => this.set(image)),
             mergeMap(() =>
-              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image.id)
+              this.user.foreignKeyUpdate(image.userId, this.name, image.id)
             ),
             map(() => cluster)
         );

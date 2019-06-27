@@ -1,7 +1,7 @@
 import { State, Action, StateContext, Selector, Select } from '@ngxs/store';
 
 import { CoreUtil } from '@theory/core';
-import { UserSubscriptions, UserSubscriptionsKey, Subscription, Cluster, SubscriptionKey, AssetKey } from '@firefly/core/models';
+import { UserSubscriptions, UserSubscriptionsKey, Subscription, Cluster, SubscriptionKey } from '@firefly/core/models';
 
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { StateUserSubscriptionsOptions } from './user-subscriptions.state.options';
@@ -87,7 +87,7 @@ export class StateUserSubscriptions
           ...StateUserSubscriptions.off(state)
         ].
         sort((a: Cluster, b: Cluster) =>
-            a[AssetKey.Name].localeCompare(b[AssetKey.Name])
+            a.name.localeCompare(b.name)
         );
     }
     @Selector() static allFound(state: StateUserSubscriptionsModel): boolean

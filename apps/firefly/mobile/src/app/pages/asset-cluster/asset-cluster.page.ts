@@ -10,7 +10,7 @@ import { LoadingOptions } from '@ionic/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { BaseComponent } from '@theory/core';
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
-import { StateCluster, ActionClusterSetId, ActionClusterSetIcon, ActionClusterCreate, AssetKey, ClusterKey } from '@firefly/core';
+import { StateCluster, ActionClusterSetId, ActionClusterSetIcon, ActionClusterCreate, ClusterKey } from '@firefly/core';
 import { Pages } from '../pages.enum';
 
 @Component
@@ -26,7 +26,6 @@ export class PageAssetCluster
     @Select(StateCluster.clusterIconNormalized)   clusterIcon$: Observable<string>;
 
     public Pages:      any = Pages;
-    public AssetKey:   any = AssetKey;
     public ClusterKey: any = ClusterKey;
 
     constructor(

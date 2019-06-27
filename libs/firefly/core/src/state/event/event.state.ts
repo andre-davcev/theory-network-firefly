@@ -21,7 +21,6 @@ import {
   ActionEventSetTime,
   ActionEventUpdate
 } from './event.actions';
-import { EventKey, AssetKey } from '@firefly/core/models';
 import { CoreEnum, FormNgxs, FormNgxsStatus } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
@@ -205,7 +204,7 @@ export class StateEvent
                     this.cluster.foreignKeyUpdate(Object.keys(event[EventKey.Clusters])[0], this.service.name, event.id)
                 ),
                 mergeMap(() =>
-                    this.user.foreignKeyUpdate(event[AssetKey.UserId], this.service.name, event.id)
+                    this.user.foreignKeyUpdate(event.userId, this.service.name, event.id)
                 ),
                 tap(() => dispatch(new ActionEventWatch(event)))
             ))

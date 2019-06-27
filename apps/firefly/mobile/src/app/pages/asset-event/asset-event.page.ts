@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { EventKey, ActionEventSetImage, StateEvent, AssetKey, ActionEventCreate, ActionEventSetTime } from '@firefly/core';
+import { EventKey, ActionEventSetImage, StateEvent, ActionEventCreate, ActionEventSetTime } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
@@ -33,9 +33,7 @@ export class PageAssetEvent
     @Select(StateEvent.eventTimeEndValid)       timeEndValid$: Observable<boolean>;
     @Select(StateEvent.eventClusterIcon)        clusterIcon$:  Observable<string>;
 
-    public Pages:    any = Pages;
-    public AssetKey: any = AssetKey;
-    public EventKey: any = EventKey;
+    public Pages: any = Pages;
 
     constructor
     (

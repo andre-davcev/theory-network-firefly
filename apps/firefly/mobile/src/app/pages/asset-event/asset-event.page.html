@@ -22,7 +22,7 @@
           ngxsForm="event.form">
         <app-item-header [form]="form$ | async"
                          [iconUrl]="clusterIcon$ | async"
-                         [title]="AssetKey.Name"
+                         [title]="name"
                          [subtitle]="EventKey.Tagline"
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
                          [titlePlaceholder]="'page.cluster.titlePlaceholder' | translate"

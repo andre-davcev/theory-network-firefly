@@ -1,7 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateEventModel } from './event.state.model';
-import { AssetKey, EventKey } from '@firefly/core/models';
 
 export const StateEventOptions: StoreOptions<StateEventModel> =
 {
@@ -24,11 +23,11 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
             dateCreated : undefined,
             dateUpdated : undefined,
 
-            [AssetKey.UserId]      : undefined,
-            [AssetKey.Name]        : null,
-            [AssetKey.Description] : null,
-            [AssetKey.Private]     : false,
-            [AssetKey.Draft]       : false,
+            userId      : undefined,
+            name        : null,
+            description : null,
+            private     : false,
+            draft       : false,
 
             [EventKey.Tagline]  : null,
             [EventKey.ImageId]  : undefined,
