@@ -114,9 +114,9 @@ export class StateUserSubscriptions
 
             tap(([subscriptions, previous]) =>
             {
-                const keys: Record<string, string> = subscriptions[UserSubscriptionsKey.On];
+                const keys: Record<string, string> = subscriptions.on;
 
-                const keysAreEqual: boolean = this.service.keysAreEqual(keys, previous[UserSubscriptionsKey.Off]);
+                const keysAreEqual: boolean = this.service.keysAreEqual(keys, previous.off);
                 const keysFound:    boolean = Object.keys(keys).length > 0;
 
                 if (!keysFound || !keysAreEqual)
@@ -127,9 +127,9 @@ export class StateUserSubscriptions
 
             tap(([subscriptions, previous]) =>
             {
-                const keys: Record<string, string> = subscriptions[UserSubscriptionsKey.Off];
+                const keys: Record<string, string> = subscriptions.off;
 
-                const keysAreEqual: boolean = this.service.keysAreEqual(keys, previous[UserSubscriptionsKey.Off]);
+                const keysAreEqual: boolean = this.service.keysAreEqual(keys, previous.off);
                 const keysFound:    boolean = Object.keys(keys).length > 0;
 
                 if (!keysFound || !keysAreEqual)
