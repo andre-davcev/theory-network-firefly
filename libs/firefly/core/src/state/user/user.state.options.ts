@@ -1,7 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserModel } from './user.state.model';
-import { UserKey } from '@firefly/core/models';
 
 export const StateUserOptions: StoreOptions<StateUserModel> =
 {
@@ -30,23 +29,23 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             dateCreated : undefined,
             dateUpdated : undefined,
 
-            [UserKey.Uid]              : undefined,
-            [UserKey.Language]         : 'en',
-            [UserKey.DisplayName]      : undefined,
-            [UserKey.Email]            : undefined,
-            [UserKey.PhoneNumber]      : undefined,
-            [UserKey.PhotoUrl]         : undefined,
-            [UserKey.ProviderId]       : undefined,
-            [UserKey.Tokens]           : {},
-            [UserKey.Notifications]    : {},
-            [UserKey.Clusters]         : {},
-            [UserKey.Subscriptions]    : {},
-            [UserKey.SubscriptionsOff] : {},
-            [UserKey.Events]           : {},
-            [UserKey.Images]           : {},
-            [UserKey.Icons]            : {},
-            [UserKey.Stream]           : [],
-            [UserKey.Alerts]           : []
+            uid              : undefined,
+            language         : 'en',
+            displayName      : undefined,
+            email            : undefined,
+            phoneNumber      : undefined,
+            photoUrl         : undefined,
+            providerId       : undefined,
+            tokens           : {},
+            notifications    : {},
+            clusters         : {},
+            subscriptions    : {},
+            subscriptionsOff : {},
+            events           : {},
+            images           : {},
+            icons            : {},
+            stream           : [],
+            alerts           : []
         }
     }
 };

@@ -78,7 +78,7 @@ export class StateUser implements NgxsOnInit
     }
 
     @Selector() static subscriptionMap(state: StateUserModel): Record<string, Cluster> { return state.subscriptionMap; }
-    @Selector() static subscriptionsKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state)[UserKey.Subscriptions]; }
+    @Selector() static subscriptionsKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state).subscriptions; }
     @Selector() static subscriptions(state: StateUserModel): Array<Subscription>
     {
         const subscriptionsKeys: Record<string, string>  = StateUser.subscriptionsKeys(state);
@@ -94,7 +94,7 @@ export class StateUser implements NgxsOnInit
         return Object.keys(StateUser.subscriptionsKeys(state)).length > 0;
     }
 
-    @Selector() static subscriptionsOffKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state)[UserKey.SubscriptionsOff]; }
+    @Selector() static subscriptionsOffKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state).subscriptionsOff; }
     @Selector() static subscriptionsOff(state: StateUserModel): Array<Subscription>
     {
         const subscriptionsOffKeys: Record<string, string>  = StateUser.subscriptionsOffKeys(state);
@@ -219,11 +219,11 @@ export class StateUser implements NgxsOnInit
 
                 if (previous != null)
                 {
-                    clustersAreEqual         = this.service.keysAreEqual(user[UserKey.Clusters],         previous[UserKey.Clusters]);
-                    streamIsEqual            = this.service.keysAreEqual(user[UserKey.Stream],           previous[UserKey.Stream]);
-                    subscriptionsAreEqual    = this.service.keysAreEqual(user[UserKey.Subscriptions],    previous[UserKey.Subscriptions]);
-                    subscriptionsOffAreEqual = this.service.keysAreEqual(user[UserKey.SubscriptionsOff], previous[UserKey.SubscriptionsOff]);
-                    alertsAreEqual           = this.service.keysAreEqual(user[UserKey.Alerts],           previous[UserKey.Alerts]);
+                    clustersAreEqual         = this.service.keysAreEqual(user.clusters,         previous.clusters);
+                    streamIsEqual            = this.service.keysAreEqual(user.stream,           previous.stream);
+                    subscriptionsAreEqual    = this.service.keysAreEqual(user.subscriptions,    previous.subscriptions);
+                    subscriptionsOffAreEqual = this.service.keysAreEqual(user.subscriptionsOff, previous.subscriptionsOff);
+                    alertsAreEqual           = this.service.keysAreEqual(user.alerts,           previous.alerts);
 
                     subscriptionsChanged = !subscriptionsAreEqual || !subscriptionsOffAreEqual;
                 }
@@ -299,7 +299,7 @@ export class StateUser implements NgxsOnInit
         const user: User     = payload;
         const empty: Cluster = StateClusterOptions.defaults.empty;
 
-        return this.cluster.valuesChangesClusters(user[UserKey.Clusters]).
+        return this.cluster.valuesChangesClusters(user.clusters).
         pipe
         (
             map((clusters: Array<Cluster>) =>
@@ -330,8 +330,8 @@ export class StateUser implements NgxsOnInit
 
         const subscriptionsKeys =
         {
-            ...user[UserKey.Subscriptions],
-            ...user[UserKey.SubscriptionsOff]
+            ...user.subscriptions,
+            ...user.subscriptionsOff
         };
 
         return this.cluster.valuesChangesClusters(subscriptionsKeys).
@@ -363,12 +363,12 @@ export class StateUser implements NgxsOnInit
         const user: User = payload;
         const subscriptions: Record<string, string> =
         {
-            ...user[UserKey.Subscriptions],
-            ...user[UserKey.SubscriptionsOff]
+            ...user.subscriptions,
+            ...user.subscriptionsOff
         };
         const empty: Cluster = StateClusterOptions.defaults.empty;
 
-        return this.cluster.valuesChangesClusters(user[UserKey.Stream]).
+        return this.cluster.valuesChangesClusters(user.stream).
         pipe
         (
             map((clusters: Array<Cluster>) =>
