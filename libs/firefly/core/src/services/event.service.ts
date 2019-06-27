@@ -94,13 +94,13 @@ export class ServiceEvent extends ServiceBase<Event>
             private     : event.private,
             draft       : event.draft,
 
-            [EventKey.Version]   : event[EventKey.Version],
-            [EventKey.Tagline]   : [event[EventKey.Tagline], ValidatorsExtended.minLength(1)],
-            [EventKey.ImageId]   : [event[EventKey.ImageId], [ServiceEvent.validateImage()]],
-            [EventKey.Clusters]  : [event[EventKey.Clusters], ValidatorsExtended.minLength(1)],
-            [EventKey.Location]  : [event[EventKey.Location], Validators.required],
-            [EventKey.Times]     : [event[EventKey.Times], [ServiceEvent.validateTime()]],
-            [EventKey.Url]       : event[EventKey.Url]
+            version   : event.version,
+            tagline   : [event.tagline, ValidatorsExtended.minLength(1)],
+            imageId   : [event.imageId, [ServiceEvent.validateImage()]],
+            clusters  : [event.clusters, ValidatorsExtended.minLength(1)],
+            location  : [event.location, Validators.required],
+            times     : [event.times, [ServiceEvent.validateTime()]],
+            url       : event.url
         });
 
         this._form = form;
@@ -108,9 +108,9 @@ export class ServiceEvent extends ServiceBase<Event>
         return form;
     }
 
-    public timeSet(form: FormGroup, key: EventKey.TimeStart | EventKey.TimeEnd, value: string): void
+    public timeSet(form: FormGroup, key: 'start' | 'end', value: string): void
     {
-        const control: AbstractControl = form.controls[EventKey.Times];
+        const control: AbstractControl = form.controls.times;
         const times: Array<Time>       = control.value;
         const time: Time               = times[0];
 
@@ -129,12 +129,12 @@ export class ServiceEvent extends ServiceBase<Event>
             types     : result.place_type as Array<MapboxPlaceType>
         };
 
-        this.patchValue(form, EventKey.Location, location);
+        this.patchValue(form, 'location', location);
     }
 
     public imageIdSet(form: FormGroup, imageId: string): void
     {
-        this.patchValue(form, EventKey.ImageId, imageId);
+        this.patchValue(form, 'imageId', imageId);
     }
 
     public get form(): FormGroup

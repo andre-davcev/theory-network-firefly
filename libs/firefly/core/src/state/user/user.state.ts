@@ -382,8 +382,8 @@ export class StateUser implements NgxsOnInit
                 map((cluster: Cluster) =>
                 ({
                     ...cluster,
-                    [StreamKey.Subscribed]: false,
-                    [StreamKey.SubscribedCount]: Object.keys(cluster.subscribers).length
+                    subscribed:      false,
+                    subscribedCount: Object.keys(cluster.subscribers).length
                 }))
             ),
             switchMap((stream: Array<Stream>) =>
@@ -457,8 +457,8 @@ export class StateUser implements NgxsOnInit
         subscribers[userId] = userId;
         subscriptions[key]  = key;
 
-        streamItem[StreamKey.Subscribed]      = true;
-        streamItem[StreamKey.SubscribedCount] = Object.keys(streamItem.subscribers).length + 1;
+        streamItem.subscribed      = true;
+        streamItem.subscribedCount = Object.keys(streamItem.subscribers).length + 1;
 
         stream[streamIndex] = streamItem;
 
@@ -491,8 +491,8 @@ export class StateUser implements NgxsOnInit
         delete subscribers[userId];
         delete subscriptions[key];
 
-        streamItem[StreamKey.Subscribed]      = false;
-        streamItem[StreamKey.SubscribedCount] = Object.keys(streamItem.subscribers).length;
+        streamItem.subscribed      = false;
+        streamItem.subscribedCount = Object.keys(streamItem.subscribers).length;
 
         stream[streamIndex] = streamItem;
 

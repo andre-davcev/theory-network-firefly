@@ -1,5 +1,4 @@
 import { Event, Cluster } from '@firefly/core/models';
-import { EventKey } from '@firefly/core/models';
 import { CoreEnum } from '@theory/core';
 
 import { ActionsEvent } from './event.actions.enum';
@@ -79,5 +78,5 @@ export class ActionEventSetTime
 {
     static readonly type = ActionsEvent.SetTime;
 
-    constructor(public key: EventKey.TimeStart | EventKey.TimeEnd, public value: string) { }
+    constructor(public key: 'start' | 'end', public value: string) { }
 }

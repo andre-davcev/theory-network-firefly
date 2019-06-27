@@ -46,7 +46,7 @@ export class ServiceImage extends ServiceMedia<Image>
         event =
         {
             ...event,
-            [EventKey.ImageId]: image.id
+            imageId: image.id
         };
 
         return this.upload(imagePath, bucketPath).pipe

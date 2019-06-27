@@ -41,9 +41,9 @@ export class StateUserStream
             ),
             map((item: Cluster, index: number) =>
                 ({
-                    [StreamKey.Index]:           index,
-                    [StreamKey.Subscribed]:      false,
-                    [StreamKey.SubscribedCount]: Object.keys(cluster.subscribers)
+                    index:           index,
+                    subscribed:      false,
+                    subscribedCount: Object.keys(cluster.subscribers)
                 })
             );
     }
