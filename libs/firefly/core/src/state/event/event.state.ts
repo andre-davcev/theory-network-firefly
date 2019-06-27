@@ -22,7 +22,6 @@ import {
   ActionEventUpdate
 } from './event.actions';
 import { EventKey, AssetKey } from '@firefly/core/models';
-import { ModelKey } from '@theory/firebase';
 import { CoreEnum, FormNgxs, FormNgxsStatus } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
@@ -37,7 +36,7 @@ export class StateEvent
     @Selector() static form(state: StateEventModel): FormNgxs { return state.form; }
     @Selector() static formGroup(state: StateEventModel): FormGroup { return state.formGroup; }
     @Selector() static event(state: StateEventModel): Event { return StateEvent.form(state).model; }
-    @Selector() static eventId(state: StateEventModel): string { return StateEvent.event(state)[ModelKey.Id]; }
+    @Selector() static eventId(state: StateEventModel): string { return StateEvent.event(state).id; }
     @Selector() static eventImageUrl(state: StateEventModel): string { return state.imageUrl; }
     @Selector() static eventImageUrlNormalized(state: StateEventModel): string { return state.imageUrlNormalized; }
     @Selector() static eventIsNew(state: StateEventModel): boolean { return  StateEvent.eventId(state) === CoreEnum.IdNew; }
@@ -116,7 +115,7 @@ export class StateEvent
     eventWatch({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventWatch)
     {
         const event: Event  = payload;
-        const id:    string = event[ModelKey.Id];
+        const id:    string = event.id;
 
         const event$: Observable<Event> = id === CoreEnum.IdNew ? of(event) : this.service.valuesChanges(id).
 
@@ -203,10 +202,10 @@ export class StateEvent
             switchMap((event: Event) => this.service.create(event).pipe
             (
                 mergeMap(() =>
-                    this.cluster.foreignKeyUpdate(Object.keys(event[EventKey.Clusters])[0], this.service.name, event[ModelKey.Id])
+                    this.cluster.foreignKeyUpdate(Object.keys(event[EventKey.Clusters])[0], this.service.name, event.id)
                 ),
                 mergeMap(() =>
-                    this.user.foreignKeyUpdate(event[AssetKey.UserId], this.service.name, event[ModelKey.Id])
+                    this.user.foreignKeyUpdate(event[AssetKey.UserId], this.service.name, event.id)
                 ),
                 tap(() => dispatch(new ActionEventWatch(event)))
             ))
@@ -218,7 +217,7 @@ export class StateEvent
     {
         const form:           FormGroup = StateEvent.formGroup(getState());
         const clusterPrimary: Cluster   = payload;
-        const key:            string    = clusterPrimary[ModelKey.Id];
+        const key:            string    = clusterPrimary.id;
 
         const clusters: Record<string, string> = {[key]: key};
 

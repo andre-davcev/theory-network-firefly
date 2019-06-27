@@ -3,7 +3,6 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 
 import { Stream, StateUser, ActionUserSubscribe, ActionUserUnsubscribe, ClusterKey, Cluster } from '@firefly/core';
-import { ModelKey } from '@theory/firebase';
 
 @Component
 ({
@@ -27,11 +26,11 @@ export class PageStream
     {
         if (subscribed)
         {
-            this.store.dispatch(new ActionUserSubscribe(stream[ModelKey.Id]));
+            this.store.dispatch(new ActionUserSubscribe(stream.id));
         }
         else
         {
-            this.store.dispatch(new ActionUserUnsubscribe(stream[ModelKey.Id]));
+            this.store.dispatch(new ActionUserUnsubscribe(stream.id));
         }
     }
 }

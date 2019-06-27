@@ -3,13 +3,12 @@ import { AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from
 import { Observable, from } from 'rxjs';
 import { switchMap, filter, take, map, mergeMap } from 'rxjs/operators';
 
-import { Icon, EventKey, Event, Asset } from '@firefly/core/models';
+import { Icon } from '@firefly/core/models';
 import { ServiceMedia } from './media.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceUser } from './user.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
-import { ModelKey } from '@theory/firebase';
 import { AssetKey, ClusterKey, Cluster } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
@@ -56,7 +55,7 @@ export class ServiceIcon extends ServiceMedia<Icon>
     {
         const image: Icon =
         {
-            [ModelKey.Id]          : this.idCluster(cluster),
+            id          : this.idCluster(cluster),
             [AssetKey.Name]        : '',
             [AssetKey.Description] : '',
             [AssetKey.Private]     : true,
@@ -70,19 +69,19 @@ export class ServiceIcon extends ServiceMedia<Icon>
     public createWithUploadForCluster(cluster: Cluster, imagePath: string): Observable<Cluster>
     {
         const image:      Icon = this.fromCluster(cluster);
-        const bucketPath: string       = this.toBucketPath(image[ModelKey.Id]);
+        const bucketPath: string       = this.toBucketPath(image.id);
 
         cluster =
         {
             ...cluster,
-            [ClusterKey.IconId]: image[ModelKey.Id]
+            [ClusterKey.IconId]: image.id
         };
 
         return this.upload(imagePath, bucketPath).pipe
         (
             switchMap(() => this.set(image)),
             mergeMap(() =>
-              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image[ModelKey.Id])
+              this.user.foreignKeyUpdate(image[AssetKey.UserId], this.name, image.id)
             ),
             map(() => cluster)
         );

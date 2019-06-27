@@ -1,12 +1,12 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, map, last, mergeMap } from 'rxjs/operators';
-import { StorageFormat, ModelKey } from '@theory/firebase';
+import { switchMap, map, last } from 'rxjs/operators';
+import { StorageFormat } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Image, Event, AssetKey, EventKey, Icon, Asset } from '@firefly/core/models';
+import { Image, Icon, Asset } from '@firefly/core/models';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { ServiceBase } from './base.service';
