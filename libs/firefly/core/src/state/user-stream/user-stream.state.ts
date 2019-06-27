@@ -5,10 +5,11 @@ import { StateUserStreamOptions } from './user-stream.state.options';
 import { StateUserStreamModel } from './user-stream.state.model';
 import { StateUser } from '../user';
 import { Observable, of } from 'rxjs';
-import { Cluster, Stream } from '@firefly/core/models';
+import { Cluster, Stream, UserStream } from '@firefly/core/models';
 import { ActionUserStreamGet, ActionUserStreamWatch, ActionUserStreamPage } from './user-stream.actions';
 import { ServiceUserStream, ServiceCluster } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core/utils';
+import { StateClusterOptions } from '../cluster';
 
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
@@ -19,34 +20,40 @@ export class StateUserStream
 
     @Selector() static watching(state: StateUserStreamModel): boolean        { return state.watching; }
     @Selector() static loading(state: StateUserStreamModel):  boolean        { return state.loading; }
-    @Selector() static data(state: StateUserStreamModel):     Array<string>  { return state.data == null ? [] : state.data; }
+    @Selector() static data(state: StateUserStreamModel):     UserStream     { return state.data; }
     @Selector() static clusters(state: StateUserStreamModel): Array<Cluster> { return state.clusters; }
     @Selector() static pageSize(state: StateUserStreamModel): number         { return state.pageSize; }
     @Selector() static page(state: StateUserStreamModel):     number         { return state.page; }
 
-    @Selector() static count(state: StateUserStreamModel): number { return StateUserStream.data(state).length; }
+    @Selector() static map(state: StateUserStreamModel): Array<string>
+    {
+        const data: UserStream = StateUserStream.data(state);
+
+        return data == null ? [] : data.data;
+    }
+    @Selector() static count(state: StateUserStreamModel): number { return StateUserStream.map(state).length; }
+    @Selector() static stream(state: StateUserStreamModel): Array<Stream>
+    {
+        return StateUserStream.
+            clusters(state).
+            filter((cluster: Cluster) =>
+                cluster.subscribers[cluster.id] == null
+            ).
+            map((item: Cluster, index: number) =>
+                ({
+                    ...item,
+                    index:           index,
+                    subscribed:      false,
+                    subscribedCount: Object.keys(item.subscribers).length
+                })
+            );
+    }
 
     constructor
     (
         private service: ServiceUserStream,
         private cluster: ServiceCluster
     ) { }
-
-    @Selector() static stream(state: StateUserStreamModel): Array<Stream>
-    {
-        return StateUserStream.
-            clusters(state).
-            filter((cluster: Cluster) =>
-                cluster.subscribers‌[cluster.id] == null
-            ),
-            map((item: Cluster, index: number) =>
-                ({
-                    index:           index,
-                    subscribed:      false,
-                    subscribedCount: Object.keys(cluster.subscribers)
-                })
-            );
-    }
 
     @Action(ActionUserStreamGet)
     get({ patchState, getState, dispatch }: StateContext<StateUserStreamModel>)
@@ -65,9 +72,9 @@ export class StateUserStream
         pipe
         (
             filter((userId: string) => userId != null),
-            tap(() => patchState({ loading: true }),
+            tap(() => patchState({ loading: true })),
             switchMap((userId: string) => this.service.valuesChanges(userId)),
-            tap((data: Array<string>) =>
+            tap((data: UserStream) =>
                 patchState
                 ({
                     data,
@@ -78,16 +85,16 @@ export class StateUserStream
             switchMap(() =>
                 dispatch(new ActionUserStreamPage())
             ),
-            tap(() => patchState({ loading: false })
+            tap(() => patchState({ loading: false }))
         );
     }
 
     @Action(ActionUserStreamPage)
     page({ patchState, getState }: StateContext<StateUserStreamModel>)
     {
-        const empty:      Cluster                = StateClustersOptions.default.empty;
+        const empty:      Cluster                = StateClusterOptions.defaults.empty;
         const state:      StateUserStreamModel   = getState();
-        const data:       Array<string>          = StateUserStream.data(state);
+        const data:       Array<string>          = StateUserStream.map(state);
         const clusters:   Array<Cluster>         = StateUserStream.clusters(state);
         const pageSize:   number                 = StateUserStream.pageSize(state);
         const pageNumber: number                 = StateUserStream.page(state);
@@ -98,7 +105,7 @@ export class StateUserStream
             of(slice).
             pipe
             (
-                tap(() => patchState({ paging: true }),
+                tap(() => patchState({ paging: true })),
                 switchMap((page: Array<string>) => this.cluster.snapshotFK(slice)),
                 map((page: Array<Cluster>) =>
                     page.
@@ -116,8 +123,8 @@ export class StateUserStream
                         paging: false,
                         clusters:
                         [
-                           ...clusters,
-                           ...page
+                            ...clusters,
+                            ...page
                         ]
                     })
                 )

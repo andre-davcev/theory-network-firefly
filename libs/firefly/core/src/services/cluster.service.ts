@@ -155,9 +155,9 @@ export class ServiceCluster extends ServiceBase<Cluster>
       this.patchValue(form, 'iconId', iconId);
     }
 
-    public valuesChangesClusters(keys: Record<string, string> | Array<string>, empty: Cluster): Observable<Record<string, Cluster>>
+    public valuesChangesClusters(keys: Record<string, string> | Array<string>, empty: Cluster): Observable<Record<string, Cluster> | Array<Cluster>>
     {
-        return this.valuesChangesFK(keys).
+        const array$: Observable<Array<Cluster>> = this.valuesChangesFK(keys).
         pipe
         (
             switchMap((clusters: Array<Cluster>) =>
@@ -179,14 +179,21 @@ export class ServiceCluster extends ServiceBase<Cluster>
                     ...CoreUtil.clone<Cluster>(empty),
                     ...cluster
                 }))
-            )),
-            map((subscriptions: Array<Cluster>) =>
-                subscriptions.reduce((record, cluster: Cluster): Record<string, Cluster> => {
-                    record[cluster.id] = cluster;
-                    return record;
-                }, {})
-            ),
+            ))
         );
+
+        return keys instanceof Array ?
+            array$ :
+            array$.
+            pipe
+            (
+                map((subscriptions: Array<Cluster>) =>
+                    subscriptions.reduce((record, cluster: Cluster): Record<string, Cluster> => {
+                        record[cluster.id] = cluster;
+                        return record;
+                    }, {})
+                )
+            );
     }
 
     public get form(): FormGroup

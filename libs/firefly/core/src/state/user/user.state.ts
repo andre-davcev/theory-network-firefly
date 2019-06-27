@@ -299,27 +299,13 @@ export class StateUser implements NgxsOnInit
         const user: User     = payload;
         const empty: Cluster = StateClusterOptions.defaults.empty;
 
-        return this.cluster.valuesChangesClusters(user.clusters).
+        return this.cluster.valuesChangesClusters(user.clusters, empty).
         pipe
         (
-            map((clusters: Array<Cluster>) =>
-            (
-                clusters.map((cluster: Cluster) =>
-                ({
-                    ...CoreUtil.clone<Cluster>(empty),
-                    ...cluster
-                }))
-            )),
-            map((clusters: Array<Cluster>) =>
-                clusters.reduce((record, cluster: Cluster): Record<string, Cluster> => {
-                    record[cluster.id] = cluster;
-                    return record;
-                }, {})
-            ),
             tap((clusters: Record<string, Cluster>) =>
                 dispatch(new ActionUserSetClusters(clusters))
             )
-        )
+        );
     }
 
     @Action(ActionUserWatchSubscriptions, { cancelUncompleted: true })
@@ -334,23 +320,9 @@ export class StateUser implements NgxsOnInit
             ...user.subscriptionsOff
         };
 
-        return this.cluster.valuesChangesClusters(subscriptionsKeys).
+        return this.cluster.valuesChangesClusters(subscriptionsKeys, empty).
         pipe
         (
-            map((subscriptions: Array<Cluster>) =>
-            (
-                subscriptions.map((cluster: Cluster) =>
-                ({
-                    ...CoreUtil.clone<Cluster>(empty),
-                    ...cluster
-                }))
-            )),
-            map((subscriptions: Array<Cluster>) =>
-                subscriptions.reduce((record, cluster: Cluster): Record<string, Cluster> => {
-                    record[cluster.id] = cluster;
-                    return record;
-                }, {})
-            ),
             tap((subscriptions: Record<string, Cluster>) =>
                 dispatch(new ActionUserSetSubscriptions(subscriptions))
             )
@@ -368,24 +340,9 @@ export class StateUser implements NgxsOnInit
         };
         const empty: Cluster = StateClusterOptions.defaults.empty;
 
-        return this.cluster.valuesChangesClusters(user.stream).
+        return this.cluster.valuesChangesClusters(user.stream, empty).
         pipe
         (
-            map((clusters: Array<Cluster>) =>
-                clusters.
-                filter((cluster: Cluster) => subscriptions[cluster.id] == null).
-                map((cluster: Cluster) =>
-                ({
-                    ...CoreUtil.clone<Cluster>(empty),
-                    ...cluster
-                })).
-                map((cluster: Cluster) =>
-                ({
-                    ...cluster,
-                    subscribed:      false,
-                    subscribedCount: Object.keys(cluster.subscribers).length
-                }))
-            ),
             switchMap((stream: Array<Stream>) =>
                 dispatch(new ActionUserSetStream(stream))
             )

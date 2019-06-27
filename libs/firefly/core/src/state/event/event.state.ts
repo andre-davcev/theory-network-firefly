@@ -40,7 +40,7 @@ export class StateEvent
     @Selector() static eventImageUrlNormalized(state: StateEventModel): string { return state.imageUrlNormalized; }
     @Selector() static eventIsNew(state: StateEventModel): boolean { return  StateEvent.eventId(state) === CoreEnum.IdNew; }
     @Selector() static eventCanUpdate(state: StateEventModel): boolean { return StateEvent.form(state).status === FormNgxsStatus.Valid && StateEvent.form(state).dirty; }
-    @Selector() static eventLocation(state: StateEventModel): Location { return StateEvent.form(state).location; }
+    @Selector() static eventLocation(state: StateEventModel): Location { return StateEvent.form(state).model.location; }
     @Selector() static eventLocationDefined(state: StateEventModel): boolean { return StateEvent.eventLocation(state) != null; }
     @Selector() static eventLocations(state: StateEventModel): Array<Location> { return [ StateEvent.eventLocation(state) ]; }
     @Selector() static eventTimes(state: StateEventModel): Array<Time> { return StateEvent.event(state).times; }
@@ -56,7 +56,7 @@ export class StateEvent
     }
     @Selector() static eventClusters(state: StateEventModel): Array<string>
     {
-        const clusters: Record<string, string> = StateEvent.form(state).clusters;
+        const clusters: Record<string, string> = StateEvent.form(state).model.clusters;
 
         return Object.keys( clusters == null ? {} : clusters );
     }
