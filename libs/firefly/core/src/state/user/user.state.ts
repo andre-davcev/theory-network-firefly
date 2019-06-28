@@ -343,6 +343,19 @@ export class StateUser implements NgxsOnInit
         return this.cluster.valuesChangesClusters(user.stream, empty).
         pipe
         (
+            map((clusters: Array<Cluster>) =>
+                clusters.
+                filter((cluster: Cluster) =>
+                    cluster.subscribers[cluster.id] == null
+                ).
+                map((item: Cluster, index: number) =>
+                ({
+                    ...item,
+                    index:           index,
+                    subscribed:      false,
+                    subscribedCount: Object.keys(item.subscribers).length
+                }))
+            ),
             switchMap((stream: Array<Stream>) =>
                 dispatch(new ActionUserSetStream(stream))
             )

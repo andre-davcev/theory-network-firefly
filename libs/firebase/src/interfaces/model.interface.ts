@@ -1,10 +1,10 @@
-import { firestore } from 'firebase/app';
+import { firestore } from 'firebase';
 
 
 export interface Model
 {
     version?:     string;
     id?:          string;
-    dateCreated?: firestore.Timestamp;
-    dateUpdated?: firestore.Timestamp;
+    dateCreated?: firestore.FieldValue;
+    dateUpdated?: firestore.FieldValue;
 }
