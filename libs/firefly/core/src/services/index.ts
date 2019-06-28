@@ -6,6 +6,8 @@ export * from './icon.service';
 export * from './image.service';
 export * from './media.service';
 export * from './subscriptions.service';
+export * from './user-alerts.service';
+export * from './user-clusters.service';
 export * from './user-stream.service';
 export * from './user-subscriptions.service';
 export * from './user.service';

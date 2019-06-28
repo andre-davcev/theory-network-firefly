@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ServiceBase } from './base.service';
-import { UserStream } from '@firefly/core/models';
+import { UserAlerts } from '../models/user-alerts.model';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUserStream extends ServiceBase<UserStream>
+export class ServiceUserAlerts extends ServiceBase<UserAlerts>
 {
     constructor(firestore: AngularFirestore)
     {
-        super('user-stream', firestore);
+        super('user-alerts', firestore);
     }
 }

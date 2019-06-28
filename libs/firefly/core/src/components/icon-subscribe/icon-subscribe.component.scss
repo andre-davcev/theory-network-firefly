@@ -1,5 +1,18 @@
 @import "app-variables";
 
+.md
+{
+    :host
+    {
+        > .cpt-container
+        {
+            &:before
+            {
+                z-index: 0;
+            }
+        }
+    }
+}
 
 :host
 {

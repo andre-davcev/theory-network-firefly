@@ -40,13 +40,12 @@ export class StateUserStream
                 cluster.subscribers[cluster.id] == null
             ).
             map((item: Cluster, index: number) =>
-                ({
-                    ...item,
-                    index:           index,
-                    subscribed:      false,
-                    subscribedCount: Object.keys(item.subscribers).length
-                })
-            );
+            ({
+                ...item,
+                index:           index,
+                subscribed:      false,
+                subscribedCount: Object.keys(item.subscribers).length
+            }));
     }
 
     constructor
