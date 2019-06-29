@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase-admin';
 
-// import { UsersCreate, UsersUpdate } from './users';
+import { UsersCreate } from './users';
 // import { EventsCreate, EventsUpdate } from './events';
 // import { ClustersCreate, ClustersUpdate } from './clusters';
 // import { IconsCreate, IconsUpdate } from './icons';
@@ -26,5 +26,5 @@ initializeApp();
 
 exports.StreamGenerate = StreamGenerate;
 
-// exports.UserCreate = UsersCreate;
+exports.UserCreate = UsersCreate;
 // exports.UserUpdate = UsersUpdate;
