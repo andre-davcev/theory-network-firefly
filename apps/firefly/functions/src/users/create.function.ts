@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore } from '../util';
+import { ServiceFirestore, Version } from '../library';
 
 const UsersCreate: CloudFunction<DocumentSnapshot> =
 
@@ -16,16 +16,18 @@ onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 
     const model: any = ServiceFirestore.create(id);
 
-    const userAlerts:        any = { ...model, version: '1.0.0', unread: [], read: [], deleted: [] };
-    const userClusters:      any = { ...model, version: '1.0.0', data: {} };
-    const userStream:        any = { ...model, version: '1.0.0', data: [] };
-    const userSubscriptions: any = { ...model, version: '1.0.0', on: {}, off: {} };
+    const user:              any = { ...model, version: Version.Users };
+    const userAlerts:        any = { ...model, version: Version.UserAlerts, unread: [], read: [], deleted: [] };
+    const userClusters:      any = { ...model, version: Version.UserClusters, data: {} };
+    const userStreams:       any = { ...model, version: Version.UserStreams, data: [] };
+    const userSubscriptions: any = { ...model, version: Version.UserSubscriptions, on: {}, off: {} };
 
     return Promise.all
     ([
+        snapshot.ref.update(user),
         database.collection('user-alerts').doc(id).create(userAlerts),
         database.collection('user-clusters').doc(id).create(userClusters),
-        database.collection('user-stream').doc(id).create(userStream),
+        database.collection('user-stream').doc(id).create(userStreams),
         database.collection('user-subscriptions').doc(id).create(userSubscriptions)
     ]);
 });
