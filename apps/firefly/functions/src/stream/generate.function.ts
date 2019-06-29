@@ -9,9 +9,9 @@ pubsub.
 schedule('0 0 * * *').
 onRun(async (context: EventContext) =>
 {
-    const database: Firestore = firestore();
-    const users:    QuerySnapshot = await database.collection('users').get();
-    const clusters: QuerySnapshot = await database.collection('clusters').get();
+    const database:    Firestore = firestore();
+    const userStreams: QuerySnapshot = await database.collection('user-streams').get();
+    const clusters:    QuerySnapshot = await database.collection('clusters').get();
 
     const stream: Array<string> = [];
     const promises: Array<Promise<any>> = [];
@@ -20,7 +20,7 @@ onRun(async (context: EventContext) =>
         stream.push(snapshot.id)
     );
 
-    users.forEach((snapshot: QueryDocumentSnapshot) =>
+    userStreams.forEach((snapshot: QueryDocumentSnapshot) =>
         promises.push(snapshot.ref.update({ stream }))
     );
 

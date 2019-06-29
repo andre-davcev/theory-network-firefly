@@ -1,25 +1,25 @@
 import { initializeApp } from 'firebase-admin';
 
 import { UsersCreate } from './users';
-// import { EventsCreate, EventsUpdate } from './events';
-// import { ClustersCreate, ClustersUpdate } from './clusters';
-// import { IconsCreate, IconsUpdate } from './icons';
-// import { ImagesCreate, ImagesUpdate } from './images';
+import { EventsCreate } from './events';
+import { ClustersCreate } from './clusters';
+import { IconsCreate } from './icons';
+import { ImagesCreate } from './images';
 // import { StorageResize } from './storage';
 import { StreamGenerate } from './stream';
 
 initializeApp();
 
-// exports.ClustersCreate = ClustersCreate;
+exports.ClustersCreate = ClustersCreate;
 // exports.ClustersUpdate = ClustersUpdate;
 
-// exports.EventsCreate = EventsCreate;
+exports.EventsCreate = EventsCreate;
 // exports.EventsUpdate = EventsUpdate;
 
-// exports.IconsCreate = IconsCreate;
+exports.IconsCreate = IconsCreate;
 // exports.IconsUpdate = IconsUpdate;
 
-// exports.ImagesCreate = ImagesCreate;
+exports.ImagesCreate = ImagesCreate;
 // exports.ImagesUpdate = ImagesUpdate;
 
 // exports.StorageResize = StorageResize;

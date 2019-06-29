@@ -80,17 +80,12 @@ export class ServiceBase<T extends Model>
 
     public create(object: T): Observable<T>
     {
-        const timestamp: firebase.firestore.FieldValue = firebase.firestore.FieldValue.serverTimestamp();
-        const id: string                               = this.firestore.createId();
+        const id: string = this.firestore.createId();
 
         object =
         {
             ...object,
-
-            id,
-            dateCreated: timestamp,
-            dateUpdated: timestamp,
-            version:     '1.0.0'
+            id
         };
 
         return this.set(object).pipe
