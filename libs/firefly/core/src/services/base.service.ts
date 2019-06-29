@@ -4,7 +4,7 @@ import { Model } from '@theory/firebase';
 import { map, take, switchMap } from 'rxjs/operators';
 import { MergeType } from '../enums';
 import { FormGroup } from '@angular/forms';
-import { firestore } from 'firebase';
+import * as firebase from 'firebase/app';
 
 export class ServiceBase<T extends Model>
 {
@@ -31,7 +31,7 @@ export class ServiceBase<T extends Model>
 
     public patch(id: string, partial: Partial<T>): Observable<void>
     {
-        partial.dateUpdated = firestore.FieldValue.serverTimestamp();
+        partial.dateUpdated = firebase.firestore.FieldValue.serverTimestamp();
 
         return from(this.document(id).update(partial));
     }
@@ -80,8 +80,8 @@ export class ServiceBase<T extends Model>
 
     public create(object: T): Observable<T>
     {
-        const timestamp: firestore.FieldValue = firestore.FieldValue.serverTimestamp();
-        const id: string                      = this.firestore.createId();
+        const timestamp: firebase.firestore.FieldValue = firebase.firestore.FieldValue.serverTimestamp();
+        const id: string                               = this.firestore.createId();
 
         object =
         {
