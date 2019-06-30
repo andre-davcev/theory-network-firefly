@@ -10,7 +10,7 @@
     "fire-ionic-sync": "npm run sync.ionic.firefly",
     "fire-ionic-update-ios": "npm run prepare.ionic.firefly.ios",
     "fire-ionic-update-android": "npm run prepare.ionic.firefly.android",
-    "fire-functions-build": "cd apps/firefly/functions && tsc",
+    "fire-functions-build": "cd apps/firefly/cloud && tsc",
     "fire-functions-deploy-dev": "cd apps/firefly && firebase use dev && firebase deploy --only functions",
     "fire-functions-deploy-prod": "cd apps/firefly && firebase use prod && firebase deploy --only functions",
     "fire-design-icon": "grunt sketch_export:icon",
