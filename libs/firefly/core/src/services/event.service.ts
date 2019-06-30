@@ -9,6 +9,7 @@ import { DateUtil, CoreEnum, ValidatorsExtended } from '@theory/core';
 import { RepeatType } from '@firefly/core/enums';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
+import { firestore as fire } from 'firebase/app';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceEvent extends ServiceBase<Event>
@@ -94,13 +95,14 @@ export class ServiceEvent extends ServiceBase<Event>
             private     : event.private,
             draft       : event.draft,
 
-            version   : event.version,
-            tagline   : [event.tagline, ValidatorsExtended.minLength(1)],
-            imageId   : [event.imageId, [ServiceEvent.validateImage()]],
-            clusters  : [event.clusters, ValidatorsExtended.minLength(1)],
-            location  : [event.location, Validators.required],
-            times     : [event.times, [ServiceEvent.validateTime()]],
-            url       : event.url
+            version     : event.version,
+            tagline     : [event.tagline, ValidatorsExtended.minLength(1)],
+            imageId     : [event.imageId, [ServiceEvent.validateImage()]],
+            clusters    : [event.clusters, ValidatorsExtended.minLength(1)],
+            coordinates : [event.coordinates, Validators.required],
+            location    : [event.location, Validators.required],
+            times       : [event.times, [ServiceEvent.validateTime()]],
+            url         : event.url
         });
 
         this._form = form;
@@ -122,14 +124,19 @@ export class ServiceEvent extends ServiceBase<Event>
 
     public locationSet(form: FormGroup, result: Result): void
     {
-        const location: Location = result == null ? undefined :
-        {
-            latitude  : result.center[0],
-            longitude : result.center[1],
-            types     : result.place_type as Array<MapboxPlaceType>
-        };
+        const types: Array<MapboxPlaceType> = result.place_type as Array<MapboxPlaceType>;
 
-        this.patchValue(form, 'location', location);
+        let coordinates: fire.GeoPoint;
+        let location:    Location;
+
+        if (result != null)
+        {
+            coordinates = new fire.GeoPoint(result.center[0], result.center[1]);
+            location    = { types };
+        }
+
+        this.patchValue(form, 'coordinates', coordinates);
+        this.patchValue(form, 'location',    location);
     }
 
     public imageIdSet(form: FormGroup, imageId: string): void
