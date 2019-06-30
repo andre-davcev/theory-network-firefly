@@ -6,6 +6,9 @@ export enum Version
     Images            = '1.0.0',
     UserAlerts        = '1.0.0',
     UserClusters      = '1.0.0',
+    UserEvents        = '1.0.0',
+    UserIcons         = '1.0.0',
+    UserImages        = '1.0.0',
     UserStreams       = '1.0.0',
     UserSubscriptions = '1.0.0',
     Users             = '1.0.0'

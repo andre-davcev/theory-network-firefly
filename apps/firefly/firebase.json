@@ -3,7 +3,7 @@
     "predeploy": [
       "npm --prefix \"$RESOURCE_DIR\" run build"
     ],
-    "source": "functions"
+    "source": "cloud"
   },
   "firestore": {
     "rules": "firestore.rules",
