@@ -1,5 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { FieldValue, DocumentSnapshot } from '@google-cloud/firestore';
+import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+import { firestore as db } from 'firebase-admin';
+import { Version, ServiceFirestore } from '../library';
 
 const ClustersCreate: CloudFunction<DocumentSnapshot> =
 
@@ -7,15 +9,20 @@ firestore.
 document('clusters/{id}').
 onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const timestamp: FieldValue = FieldValue.serverTimestamp();
-    const data: Record<string, any> =
+    const database: Firestore = db();
+    const object: Record<string, any> =
     {
-        dateCreated: timestamp,
-        dateUpdated: timestamp,
-        v:           '1.0.0'
+        ...ServiceFirestore.create(snapshot),
+
+        version: Version.Clusters,
+        id:      snapshot.id
     };
 
-    return snapshot.ref.update(data);
+    return Promise.all
+    ([
+        snapshot.ref.update(object),
+        ServiceFirestore.foreignKeyAlter(snapshot, database, 'user-clusters', 'data')
+    ]);
 });
 
 export { ClustersCreate };
