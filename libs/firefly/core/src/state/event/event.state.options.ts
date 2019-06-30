@@ -29,12 +29,13 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
             private     : false,
             draft       : false,
 
-            tagline  : null,
-            imageId  : undefined,
-            location : undefined,
-            times    : [],
-            clusters : {},
-            url      : ''
+            tagline     : null,
+            imageId     : undefined,
+            coordinates : undefined,
+            location    : undefined,
+            times       : [],
+            clusters    : {},
+            url         : ''
         },
 
         imageUrl           : undefined,
