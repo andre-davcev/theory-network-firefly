@@ -7,21 +7,22 @@ const ClustersCreate: CloudFunction<DocumentSnapshot> =
 
 firestore.
 document('clusters/{id}').
-onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
+onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
     const database: Firestore = db();
-    const object: Record<string, any> =
-    {
-        ...ServiceFirestore.create(snapshot),
+    const id:       string    = snapshot.id;
+    const userId:   string    = snapshot.data().userId;
 
-        version: Version.Clusters,
-        id:      snapshot.id
-    };
+    const object: Record<string, any> = ServiceFirestore.create(snapshot,
+    {
+        version: Version.Clusters
+    });
 
     return Promise.all
     ([
         snapshot.ref.update(object),
-        ServiceFirestore.foreignKeyAlter(snapshot, database, 'user-clusters', 'data')
+        database.collection('cluster-subscribers').doc(id).create({}),
+        database.collection('user-clusters').doc(userId).update({ [id]: id })
     ]);
 });
 
