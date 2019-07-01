@@ -12,8 +12,10 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
     const database: Firestore = db();
     const id:       string    = snapshot.id;
 
-    const model: any = ServiceFirestore.create(snapshot);
-    const user:  any = { ...model, version: Version.Users };
+    const user: any = ServiceFirestore.create(snapshot,
+    {
+        version: Version.Users
+    });
 
     await Promise.all
     ([
