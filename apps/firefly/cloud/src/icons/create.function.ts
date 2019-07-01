@@ -1,5 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { FieldValue, DocumentSnapshot } from '@google-cloud/firestore';
+import { FieldValue, DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+import { firestore as db } from 'firebase-admin';
+import { ServiceFirestore, Version } from '../library';
 
 const IconsCreate: CloudFunction<DocumentSnapshot> =
 
@@ -7,15 +9,20 @@ firestore.
 document('icons/{id}').
 onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const timestamp: FieldValue = FieldValue.serverTimestamp();
-    const data: Record<string, any> =
-    {
-        dateCreated: timestamp,
-        dateUpdated: timestamp,
-        v:           '1.0.0'
-    };
+    const database: Firestore = db();
+    const id:       string    = snapshot.id;
+    const userId:   string    = snapshot.data().userId;
 
-    return snapshot.ref.update(data);
+    const object: Record<string, any> = ServiceFirestore.create(snapshot,
+    {
+        version: Version.Icons
+    });
+
+    return Promise.all
+    ([
+        snapshot.ref.update(object),
+        database.collection('user-icons').doc(userId).update({ [id]: id })
+    ]);
 });
 
 export { IconsCreate };
