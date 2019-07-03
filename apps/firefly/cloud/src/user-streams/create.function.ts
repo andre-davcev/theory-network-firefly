@@ -16,12 +16,11 @@ onRun(async (context: EventContext) =>
     const stream:   Record<string, number>      = {};
     const promises: Array<Promise<WriteResult>> = [];
 
-    const pageSize: number = 30;
-    let index: number;
+    let index: number = 0;
 
     clusters.forEach((snapshot: QueryDocumentSnapshot) =>
     {
-        stream[snapshot.id] = Math.floor(pageSize / index);
+        stream[snapshot.id] = index;
 
         index++;
     });
