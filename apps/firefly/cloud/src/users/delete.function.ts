@@ -1,7 +1,6 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore, FieldValue, WriteResult, CollectionReference } from '@google-cloud/firestore';
-import { firestore as db, storage } from 'firebase-admin';
-import { Bucket } from '@google-cloud/storage';
+import { DocumentSnapshot, Firestore, WriteResult, CollectionReference } from '@google-cloud/firestore';
+import { firestore as db } from 'firebase-admin';
 
 const UserDelete: CloudFunction<DocumentSnapshot> =
 
@@ -28,8 +27,6 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     Object.keys(events.data()).forEach((key: string)   => promises.push(eventsRef.doc(key).delete()));
     Object.keys(images.data()).forEach((key: string)   => promises.push(imagesRef.doc(key).delete()));
     Object.keys(icons.data()).forEach((key: string)    => promises.push(iconsRef.doc(key).delete()));
-
-    const bucket: Bucket = storage().bucket();
 
     return Promise.all
     ([
