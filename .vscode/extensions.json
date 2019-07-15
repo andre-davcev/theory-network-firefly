@@ -13,19 +13,17 @@
       "CoenraadS.bracket-pair-colorizer",
       "oderwat.indent-rainbow",
       "esbenp.prettier-vscode",
-      "WallabyJs.wallaby-vscode",
-      "AngularDoc.angulardoc-vscode",
       "quicktype.quicktype",
       "alefragnani.numbered-bookmarks",
-      "mikael.angular-beastcode",
-      "johnpapa.angular2",
       "shan.code-settings-sync",
       "github.vscode-pull-request-github",
-      "peterjausovec.vscode-docker",
       "vscodevim.vim",
       "nrwl.angular-console",
       "wix.vscode-import-cost",
       "aaron-bond.better-comments",
-      "vincaslt.highlight-matching-tag"
+      "vincaslt.highlight-matching-tag",
+      "cssho.vscode-svgviewer",
+      "donjayamanne.githistory",
+      "Orta.vscode-jest"
   ]
 }
