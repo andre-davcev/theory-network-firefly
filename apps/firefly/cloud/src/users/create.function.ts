@@ -40,8 +40,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         draft       : false,
         tagline     : 'Come enjoy my first event cluster',
         iconId      : 'admin-icons-default.png',
-        events      : {},
-        subscribers : {}
+        events      : {}
     });
 });
 

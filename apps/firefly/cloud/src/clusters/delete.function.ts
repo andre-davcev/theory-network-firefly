@@ -17,10 +17,17 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     const subscribers: DocumentSnapshot = await database.collection('cluster-subscribers').doc(id).get();
 
     const userSubscribers: Record<string, string>      = subscribers.data();
-    const promises:        Array<Promise<WriteResult>> = [];
     const collection:      CollectionReference         = database.collection('user-subscriptions');
 
-    Object.keys(userSubscribers).forEach((userId: string) =>
+    const promises: Array<Promise<WriteResult>> =
+    [
+        database.collection('cluster-subscribers').doc(id).delete(),
+        database.collection('cluster-events').doc(id).delete()
+    ];
+
+    const keys: Array<string> = userSubscribers == null ? [] : Object.keys(userSubscribers);
+
+    keys.forEach((userId: string) =>
         promises.push(collection.doc(userId).update({ [id]: FieldValue.delete() }))
     );
 

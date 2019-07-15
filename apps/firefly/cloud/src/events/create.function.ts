@@ -18,6 +18,9 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
         version: Version.Events
     });
 
+    // cluster-events
+    // event-clusters
+
     return Promise.all
     ([
         snapshot.ref.update(object),
