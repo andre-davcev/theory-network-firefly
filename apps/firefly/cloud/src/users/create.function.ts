@@ -22,13 +22,12 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         snapshot.ref.update(user),
 
         database.collection('user-alerts').doc(id).create({}),
-        database.collection('user-streams').doc(id).create({}),
-        database.collection('user-subscriptions').doc(id).create({}),
-
         database.collection('user-clusters').doc(id).create({}),
         database.collection('user-events').doc(id).create({}),
+        database.collection('user-icons').doc(id).create({}),
         database.collection('user-images').doc(id).create({}),
-        database.collection('user-icons').doc(id).create({})
+        database.collection('user-streams').doc(id).create({}),
+        database.collection('user-subscriptions').doc(id).create({})
     ]);
 
     return database.collection('clusters').add
