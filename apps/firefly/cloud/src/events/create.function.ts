@@ -18,12 +18,10 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
         version: Version.Events
     });
 
-    // cluster-events
-    // event-clusters
-
     return Promise.all
     ([
         snapshot.ref.update(object),
+        database.collection('event-clusters').doc(id).create({}),
         database.collection('user-events').doc(userId).update({ [id]: id })
     ]);
 });

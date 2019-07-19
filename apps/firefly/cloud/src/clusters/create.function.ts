@@ -22,8 +22,8 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
     return Promise.all
     ([
         snapshot.ref.update(object),
-        database.collection('cluster-subscribers').doc(id).create({}),
         database.collection('cluster-events').doc(id).create({}),
+        database.collection('cluster-subscribers').doc(id).create({}),
         database.collection('user-clusters').doc(userId).update({ [id]: id })
     ]);
 });
