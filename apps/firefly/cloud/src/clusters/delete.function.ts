@@ -8,30 +8,19 @@ firestore.
 document('clusters/{id}').
 onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const database: Firestore = db();
-    const id:       string    = snapshot.id;
-    const userId:   string    = snapshot.data().userId;
+    const database: Firestore           = db();
+    const id:       string              = snapshot.id;
+    const data:     Record<string, any> = snapshot.data();
+    const userId:   string              = data.userId;
+    const iconId:   string              = data.iconId;
 
-    await database.collection('user-clusters').doc(userId).update({ [id]: FieldValue.delete() });
-
-    const subscribers: DocumentSnapshot = await database.collection('cluster-subscribers').doc(id).get();
-
-    const userSubscribers: Record<string, string>      = subscribers.data();
-    const collection:      CollectionReference         = database.collection('user-subscriptions');
-
-    const promises: Array<Promise<WriteResult>> =
-    [
+    return Promise.all
+    ([
         database.collection('cluster-subscribers').doc(id).delete(),
-        database.collection('cluster-events').doc(id).delete()
-    ];
-
-    const keys: Array<string> = userSubscribers == null ? [] : Object.keys(userSubscribers);
-
-    keys.forEach((userId: string) =>
-        promises.push(collection.doc(userId).update({ [id]: FieldValue.delete() }))
-    );
-
-    return Promise.all(promises);
+        database.collection('cluster-events').doc(id).delete(),
+        database.collection('icon-clusters').doc(iconId).update({ [id]: FieldValue.delete() }),
+        database.collection('user-clusters').doc(userId).update({ [id]: FieldValue.delete() })
+    ]);
 });
 
 export { ClustersDelete };
