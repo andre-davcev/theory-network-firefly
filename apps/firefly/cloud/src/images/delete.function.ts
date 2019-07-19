@@ -13,10 +13,11 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     const userId:   string    = snapshot.data().userId;
     const path:     string    = id.replace(/-/g, '/');
 
-    Promise.all
+    return Promise.all
     ([
-        storage().bucket().file(path).delete(),
-        database.collection('user-images').doc(userId).update({ [id]: FieldValue.delete() })
+        database.collection('image-events').doc(id).delete(),
+        database.collection('user-images').doc(userId).update({ [id]: FieldValue.delete() }),
+        storage().bucket().file(path).delete()
     ]);
 });
 

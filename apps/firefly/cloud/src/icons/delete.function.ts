@@ -15,8 +15,9 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 
     return Promise.all
     ([
-        storage().bucket().file(path).delete(),
-        database.collection('user-icons').doc(userId).update({ [id]: FieldValue.delete() })
+        database.collection('icon-clusters').doc(id).delete(),
+        database.collection('user-icons').doc(userId).update({ [id]: FieldValue.delete() }),
+        storage().bucket().file(path).delete()
     ]);
 });
 
