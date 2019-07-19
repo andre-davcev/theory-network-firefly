@@ -6,8 +6,8 @@ import { IconsCreate, IconsDelete } from './icons';
 import { ImagesCreate, ImagesDelete } from './images';
 // import { StorageResize } from './storage';
 import { UserStreamsCreate } from './user-streams';
-import { UserSubscriptionsCreate, UserSubscriptionsDelete, UserSubscriptionsUpdate } from './user-subscriptions';
-import { UsersCreate } from './users';
+import { UserSubscriptionsDelete, UserSubscriptionsUpdate } from './user-subscriptions';
+import { UsersCreate, UsersDelete } from './users';
 
 initializeApp();
 
@@ -29,11 +29,10 @@ export
 
     UserStreamsCreate,
 
-    UserSubscriptionsCreate,
     UserSubscriptionsDelete,
     UserSubscriptionsUpdate,
 
-    UsersCreate
-    // UsersUpdate
+    UsersCreate,
+    UsersDelete
 };
 

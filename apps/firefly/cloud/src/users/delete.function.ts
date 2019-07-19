@@ -2,7 +2,7 @@ import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, WriteResult, CollectionReference } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
 
-const UserDelete: CloudFunction<DocumentSnapshot> =
+const UsersDelete: CloudFunction<DocumentSnapshot> =
 
 firestore.
 document('users/{id}').
@@ -38,5 +38,5 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     ]);
 });
 
-export { UserDelete };
+export { UsersDelete };
 
