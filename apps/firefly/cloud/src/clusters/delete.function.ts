@@ -1,6 +1,8 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore, FieldValue, WriteResult, CollectionReference } from '@google-cloud/firestore';
+import { DocumentSnapshot, Firestore, FieldValue } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
+
+const database: Firestore = db();
 
 const ClustersDelete: CloudFunction<DocumentSnapshot> =
 
@@ -8,7 +10,6 @@ firestore.
 document('clusters/{id}').
 onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const database: Firestore           = db();
     const id:       string              = snapshot.id;
     const data:     Record<string, any> = snapshot.data();
     const userId:   string              = data.userId;

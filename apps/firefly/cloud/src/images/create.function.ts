@@ -3,15 +3,16 @@ import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
 import { ServiceFirestore, Version } from '../library';
 
+const database: Firestore = db();
+
 const ImagesCreate: CloudFunction<DocumentSnapshot> =
 
 firestore.
 document('images/{id}').
 onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const database: Firestore = db();
-    const id:       string    = snapshot.id;
-    const userId:   string    = snapshot.data().userId;
+    const id:     string = snapshot.id;
+    const userId: string = snapshot.data().userId;
 
     const object: Record<string, any> = ServiceFirestore.create(snapshot,
     {
