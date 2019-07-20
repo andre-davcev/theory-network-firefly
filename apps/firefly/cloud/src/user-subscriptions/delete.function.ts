@@ -2,21 +2,24 @@ import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, FieldValue, WriteResult, CollectionReference } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
 
+const database: Firestore = db();
+
 const UserSubscriptionsDelete: CloudFunction<DocumentSnapshot> =
 
 firestore.
 document('user-subscriptions/{id}').
 onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const database: Firestore = db();
-    const id:       string    = snapshot.id;
+    const id:         string                      = snapshot.id;
+    const data:       Record<string, string>      = snapshot.data();
+    const collection: CollectionReference         = database.collection('cluster-subscribers');
+    const promises:   Array<Promise<WriteResult>> = [];
 
-    const subscriber: Record<string, FieldValue> = { [id]: FieldValue.delete() };
+    Object.keys(data).forEach((key: string) =>
+        promises.push(collection.doc(key).update({ [id]: FieldValue.delete() }))
+    );
 
-    return Promise.all
-    ([
-        database.collection('cluster-subscribers').doc(id).update(subscriber)
-    ]);
+    return Promise.all(promises);
 });
 
 export { UserSubscriptionsDelete };
