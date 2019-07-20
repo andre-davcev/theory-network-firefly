@@ -1,5 +1,9 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { FieldValue, DocumentSnapshot } from '@google-cloud/firestore';
+import { FieldValue, DocumentSnapshot, CollectionReference, Firestore, WriteResult } from '@google-cloud/firestore';
+import { Status, ServiceFirestore, ForeignKeyChange } from '../library';
+import { firestore as db } from 'firebase-admin';
+
+const database: Firestore = db();
 
 const UserSubscriptionsUpdate : CloudFunction<Change<DocumentSnapshot>> =
 
@@ -11,14 +15,25 @@ onUpdate((change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
     const before: Record<string, boolean> = change.before.data();
     const after:  Record<string, boolean> = change.after.data();
 
-    const key: string = Object.keys(before).find((k: string) => before[k] !== after[k]);
+    const collection: CollectionReference = database.collection('cluster-subscribers');
 
-    const subscriber: Record<string, string | FieldValue> =
-        before[key] ?
-        { [id]: id } :
-        { [id]: FieldValue.delete() };
+    const status:   Status           = ServiceFirestore.mapStatus(before, after);
+    const fkChange: ForeignKeyChange = ServiceFirestore.mapChange(before, after);
 
-    return change.after.ref.update(subscriber);
+    let promise: Promise<WriteResult>;
+
+    if ((status === Status.Added   && fkChange.after) ||
+        (status === Status.Changed && fkChange.after))
+    {
+        promise = collection.doc(fkChange.key).update({ [id]: id });
+    }
+    else if ((status === Status.Removed && fkChange.before) ||
+             (status === Status.Changed && !fkChange.after))
+    {
+        promise = collection.doc(fkChange.key).update({ [id]: FieldValue.delete() })
+    }
+
+    return promise;
 });
 
 export { UserSubscriptionsUpdate };
