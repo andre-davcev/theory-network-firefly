@@ -1,1 +1,1 @@
-import * from './delete.function';
+export * from './delete.function';
