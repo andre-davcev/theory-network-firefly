@@ -4,7 +4,7 @@ import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/stor
 import { FormGroup, AbstractControl, ValidatorFn } from '@angular/forms';
 import { StateUser } from '@firefly/core/state/user';
 import { User, Cluster } from '@firefly/core/models';
-import { ServiceCluster, ServiceIcon, ServiceUser } from '@firefly/core/services';
+import { ServiceClusters, ServiceIcons, ServiceUser } from '@firefly/core/services';
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
 import { ActionGetClusters, ActionClusterSet, ActionClusterSetId, ActionClusterCreate, ActionClusterSetIcon, ActionClusterWatch } from './cluster.actions';
@@ -57,11 +57,11 @@ export class StateCluster
 
     constructor
     (
-        private clusterService: ServiceCluster,
+        private clusterService: ServiceClusters,
         private store: Store,
-        private image: ServiceIcon,
+        private image: ServiceIcons,
         private webview: WebView,
-        private icon: ServiceIcon,
+        private icon: ServiceIcons,
         private user: ServiceUser
     ) {}
 

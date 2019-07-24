@@ -10,7 +10,7 @@ import { StateUser } from '../user';
 import { StateClusterOptions } from '../cluster';
 import { Observable, of } from 'rxjs';
 import { filter, switchMap, tap, withLatestFrom, map } from 'rxjs/operators';
-import { ServiceUserSubscriptions, ServiceCluster } from '@firefly/core/services';
+import { ServiceUserSubscriptions, ServiceClusters } from '@firefly/core/services';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 
@@ -99,7 +99,7 @@ export class StateUserSubscriptions
     constructor
     (
         private service: ServiceUserSubscriptions,
-        private cluster: ServiceCluster
+        private cluster: ServiceClusters
     ) { }
 
     @Action(ActionUserSubscriptionsWatch)

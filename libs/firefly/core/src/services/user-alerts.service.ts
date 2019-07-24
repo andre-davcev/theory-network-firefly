@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable, of } from 'rxjs';
+
+import { Alert, UserAlerts } from '@firefly/core/models';
+import { MockAlerts } from '@firefly/core/mocks';
 import { ServiceBase } from './base.service';
-import { UserAlerts } from '../models/user-alerts.model';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceUserAlerts extends ServiceBase<UserAlerts>
@@ -10,5 +12,10 @@ export class ServiceUserAlerts extends ServiceBase<UserAlerts>
     constructor(firestore: AngularFirestore)
     {
         super('user-alerts', firestore);
+    }
+
+    public getMock(uid: string): Observable<Array<Alert>>
+    {
+        return of(MockAlerts);
     }
 }

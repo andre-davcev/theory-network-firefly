@@ -4,7 +4,7 @@ import { map, switchMap } from 'rxjs/operators';
 
 import { StateUser } from '@firefly/core/state/user';
 import { User, Icon } from '@firefly/core/models';
-import { ServiceIcon } from '@firefly/core/services';
+import { ServiceIcons } from '@firefly/core/services';
 import { FormIcon } from '@firefly/core/forms';
 import { StateIconsModel } from './icons.state.model';
 import { StateIconsOptions } from './icons.state.options';
@@ -16,7 +16,7 @@ export class StateIcons
 {
     @Select(StateUser.user) user$:Observable<User>;
 
-    constructor(private serviceIcons: ServiceIcon, private formIcon: FormIcon) {}
+    constructor(private serviceIcons: ServiceIcons, private formIcon: FormIcon) {}
 
     @Selector() static entities(state: StateIconsModel) {return state.entities;}
     @Selector() static id(state: StateIconsModel)       {return state.id;}
