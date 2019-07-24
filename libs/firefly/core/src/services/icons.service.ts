@@ -12,7 +12,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Cluster } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceIcon extends ServiceMedia<Icon>
+export class ServiceIcons extends ServiceMedia<Icon>
 {
     constructor
     (

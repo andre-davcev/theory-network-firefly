@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { switchMap, mergeMap, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceImage extends ServiceMedia<Image>
+export class ServiceImages extends ServiceMedia<Image>
 {
     constructor
     (

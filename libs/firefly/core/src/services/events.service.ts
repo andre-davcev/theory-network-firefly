@@ -12,7 +12,7 @@ import { MapboxPlaceType } from '@theory/mapbox';
 import { firestore as fire } from 'firebase/app';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceEvent extends ServiceBase<Event>
+export class ServiceEvents extends ServiceBase<Event>
 {
     constructor
     (
@@ -97,11 +97,11 @@ export class ServiceEvent extends ServiceBase<Event>
 
             version     : event.version,
             tagline     : [event.tagline, ValidatorsExtended.minLength(1)],
-            imageId     : [event.imageId, [ServiceEvent.validateImage()]],
+            imageId     : [event.imageId, [ServiceEvents.validateImage()]],
             clusters    : [event.clusters, ValidatorsExtended.minLength(1)],
             coordinates : [event.coordinates, Validators.required],
             location    : [event.location, Validators.required],
-            times       : [event.times, [ServiceEvent.validateTime()]],
+            times       : [event.times, [ServiceEvents.validateTime()]],
             url         : event.url
         });
 

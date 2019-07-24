@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
 import { User, Event, Location, Time, Cluster } from '@firefly/core/models';
-import { ServiceEvent, ServiceImage, ServiceCluster, ServiceUser } from '@firefly/core/services';
+import { ServiceEvents, ServiceImages, ServiceClusters, ServiceUser } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
 import {
@@ -70,10 +70,10 @@ export class StateEvent
 
     constructor
     (
-        private service: ServiceEvent,
+        private service: ServiceEvents,
         private store: Store,
-        private image: ServiceImage,
-        private cluster: ServiceCluster,
+        private image: ServiceImages,
+        private cluster: ServiceClusters,
         private user: ServiceUser
     ) { }
 

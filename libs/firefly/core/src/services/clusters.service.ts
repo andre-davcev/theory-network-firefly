@@ -6,19 +6,19 @@ import { switchMap, take, filter, map, tap } from 'rxjs/operators';
 import { Cluster } from '@firefly/core/models';
 import { ServiceBase } from './base.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { ServiceImage } from './image.service';
+import { ServiceImages } from './images.service';
 import { FormGroup, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { ValidatorsExtended, CoreEnum, CoreUtil } from '@theory/core';
 
 
 @Injectable({ providedIn: 'root' })
-export class ServiceCluster extends ServiceBase<Cluster>
+export class ServiceClusters extends ServiceBase<Cluster>
 {
     constructor
     (
         firestore: AngularFirestore,
         private storage: AngularFireStorage,
-        private image: ServiceImage,
+        private image: ServiceImages,
         private formBuilder: FormBuilder
     )
     {
@@ -66,7 +66,7 @@ export class ServiceCluster extends ServiceBase<Cluster>
             draft       : cluster.draft,
 
             tagline   : [cluster.tagline, ValidatorsExtended.minLength(1)],
-            iconId   : [cluster.iconId, [ServiceCluster.validateIcon()]]
+            iconId   : [cluster.iconId, [ServiceClusters.validateIcon()]]
         });
 
         this._form = form;

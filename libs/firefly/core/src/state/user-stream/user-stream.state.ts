@@ -7,7 +7,7 @@ import { StateUser } from '../user';
 import { Observable, of } from 'rxjs';
 import { Cluster, Stream, UserStream } from '@firefly/core/models';
 import { ActionUserStreamGet, ActionUserStreamWatch, ActionUserStreamPage } from './user-stream.actions';
-import { ServiceUserStream, ServiceCluster } from '@firefly/core/services';
+import { ServiceUserStream, ServiceClusters } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core/utils';
 import { StateClusterOptions } from '../cluster';
 
@@ -51,7 +51,7 @@ export class StateUserStream
     constructor
     (
         private service: ServiceUserStream,
-        private cluster: ServiceCluster
+        private cluster: ServiceClusters
     ) { }
 
     @Action(ActionUserStreamGet)
