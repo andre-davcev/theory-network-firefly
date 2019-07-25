@@ -15,14 +15,17 @@ import { ClusterSubscribersDelete } from './cluster-subscribers';
 import { EventClustersDelete } from './event-clusters';
 import { IconClustersDelete } from './icon-clusters';
 import { ImageEventsDelete } from './image-events';
-import { UserAlertsCreate } from './user-alerts';
+import { UserAlertsCreate, UserAlertsDelete, UserAlertsUpdate } from './user-alerts';
 import { UserClustersDelete } from './user-clusters';
 import { UserEventsDelete } from './user-events';
 import { UserIconsDelete } from './user-icons';
 import { UserImagesDelete } from './user-images';
+import { AlertsCreate } from './alerts';
 
 export
 {
+    AlertsCreate,
+
     ClusterEventsDelete,
     ClusterEventsUpdate,
 
@@ -51,6 +54,8 @@ export
     // StorageResize,
 
     // UserAlertsCreate,
+    UserAlertsDelete,
+    UserAlertsUpdate,
 
     UserClustersDelete,
 
