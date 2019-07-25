@@ -4,13 +4,6 @@ import { CoreEnum } from '@theory/core';
 import { ActionsEvent } from './event.actions.enum';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
-export class ActionGetEvents
-{
-    static readonly type = ActionsEvent.GetEvents;
-
-    constructor() {}
-}
-
 export class ActionEventSetId
 {
     static readonly type = ActionsEvent.SetId;

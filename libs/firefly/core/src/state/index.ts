@@ -1,5 +1,5 @@
 export * from './cluster';
-export * from './event';
+export * from './user-events';
 export * from './grid';
 export * from './icons';
 export * from './image';
