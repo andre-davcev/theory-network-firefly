@@ -9,7 +9,6 @@ export class ServiceUserClusters extends ServiceBase<UserClusters>
 {
     constructor(firestore: AngularFirestore)
     {
-        super('user-clusters', firestore);
+        super('user-clusters', firestore, true);
     }
 }
-

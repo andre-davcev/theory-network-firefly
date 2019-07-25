@@ -12,7 +12,7 @@ export class ServiceBase<T extends Model>
     private _collection: AngularFirestoreCollection<T>;
     private _firestore: AngularFirestore
 
-    constructor(name: string, firestore: AngularFirestore)
+    constructor(name: string, firestore: AngularFirestore, private reference: boolean = false)
     {
         this.name       = name;
         this.firestore  = firestore;
@@ -31,7 +31,10 @@ export class ServiceBase<T extends Model>
 
     public patch(id: string, partial: Partial<T>): Observable<void>
     {
-        partial.dateUpdated = firebase.firestore.FieldValue.serverTimestamp();
+        if (!this.reference)
+        {
+            partial.dateUpdated = firebase.firestore.FieldValue.serverTimestamp();
+        }
 
         return from(this.document(id).update(partial));
     }
@@ -80,13 +83,20 @@ export class ServiceBase<T extends Model>
 
     public create(object: T): Observable<T>
     {
-        const id: string = this.firestore.createId();
-
-        object =
+        if (!this.reference)
         {
-            ...object,
-            id
-        };
+            const id:        string                        = this.firestore.createId();
+            const timestamp: firebase.firestore.FieldValue = firebase.firestore.FieldValue.serverTimestamp();
+
+            object =
+            {
+                ...object,
+
+                dateCreated: timestamp,
+                dateUpdated: timestamp,
+                id
+            };
+        }
 
         return this.set(object).pipe
         (
