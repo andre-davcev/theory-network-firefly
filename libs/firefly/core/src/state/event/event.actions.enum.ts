@@ -1,5 +1,11 @@
 export enum ActionsEvent
 {
+    Get = '[Event] Get',
+
+    Create = '[Event] Create',
+    Delete = '[Event] Delete',
+    Patch  = '[Event] Patch',
+
     GetEvents         = '[Event] Get Event',
     SetId             = '[Event] Set Id',
     SetEvent          = '[Event] Set Event',

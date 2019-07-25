@@ -1,4 +1,8 @@
 export enum ActionsAlert
 {
-    Get = '[Alert] Get'
+    Get = '[Alert] Get',
+
+    Create = '[Alert] Create',
+    Delete = '[Alert] Delete',
+    Patch  = '[Alert] Patch'
 }
