@@ -11,7 +11,7 @@ export class ServiceUserAlerts extends ServiceBase<UserAlerts>
 {
     constructor(firestore: AngularFirestore)
     {
-        super('user-alerts', firestore);
+        super('user-alerts', firestore, true);
     }
 
     public getMock(uid: string): Observable<Array<Alert>>

@@ -9,6 +9,6 @@ export class ServiceUserSubscriptions extends ServiceBase<UserSubscriptions>
 {
     constructor(firestore: AngularFirestore)
     {
-        super('user-subscriptions', firestore);
+        super('user-subscriptions', firestore, true);
     }
 }

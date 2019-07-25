@@ -9,6 +9,6 @@ export class ServiceUserStream extends ServiceBase<UserStream>
 {
     constructor(firestore: AngularFirestore)
     {
-        super('user-stream', firestore);
+        super('user-stream', firestore, true);
     }
 }
