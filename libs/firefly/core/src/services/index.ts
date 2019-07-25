@@ -1,3 +1,4 @@
+export * from './alert.service';
 export * from './base.service';
 export * from './cluster-events.service';
 export * from './cluster-subscribers.service';
