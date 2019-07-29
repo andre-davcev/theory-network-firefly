@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { ActionEventSetImage, StateEvent, ActionEventCreate, ActionEventSetTime } from '@firefly/core';
+import { ActionEventImageSet, StateEvent, ActionEventCreate, ActionEventTimeSet } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
@@ -24,14 +24,14 @@ import { TempImageUri } from '@firefly/app/mock';
 
 export class PageAssetEvent
 {
-    @Select(StateEvent.formGroup)               form$:         Observable<FormGroup>;
-    @Select(StateEvent.eventImageUrlNormalized) imageUrl$:     Observable<string>;
-    @Select(StateEvent.eventIsNew)              isNew$:        Observable<boolean>;
-    @Select(StateEvent.eventCanUpdate)          canUpdate$:    Observable<boolean>;
-    @Select(StateEvent.eventTimeStart)          timeStart$:    Observable<string>;
-    @Select(StateEvent.eventTimeEnd)            timeEnd$:      Observable<string>;
-    @Select(StateEvent.eventTimeEndValid)       timeEndValid$: Observable<boolean>;
-    @Select(StateEvent.eventClusterIcon)        clusterIcon$:  Observable<string>;
+    @Select(StateEvent.formGroup)    form$:         Observable<FormGroup>;
+    @Select(StateEvent.imageUrl)     imageUrl$:     Observable<string>;
+    @Select(StateEvent.isNew)        isNew$:        Observable<boolean>;
+    @Select(StateEvent.canUpdate)    canUpdate$:    Observable<boolean>;
+    @Select(StateEvent.timeStart)    timeStart$:    Observable<string>;
+    @Select(StateEvent.timeEnd)      timeEnd$:      Observable<string>;
+    @Select(StateEvent.timeEndValid) timeEndValid$: Observable<boolean>;
+    @Select(StateEvent.clusterIcon)  clusterIcon$:  Observable<string>;
 
     public Pages: any = Pages;
 
@@ -74,12 +74,12 @@ export class PageAssetEvent
 
                 from(this.camera.getPicture(options)).
                 subscribe((imageData: string) =>
-                  this.store.dispatch(new ActionEventSetImage(imageData))
+                  this.store.dispatch(new ActionEventImageSet(imageData))
                 );
             }
             else
             {
-                this.store.dispatch(new ActionEventSetImage(TempImageUri));
+                this.store.dispatch(new ActionEventImageSet(TempImageUri));
             }
         }
         else if (page === Pages.EventLocation)
@@ -93,7 +93,7 @@ export class PageAssetEvent
     {
         const time: string = event.detail.value;
 
-        this.store.dispatch(new ActionEventSetTime(key, time));
+        this.store.dispatch(new ActionEventTimeSet(key, time));
     }
 
     public save(): void

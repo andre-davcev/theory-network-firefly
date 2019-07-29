@@ -8,15 +8,7 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
 
     defaults :
     {
-        form :
-        {
-            model  : {},
-            dirty  : false,
-            status : '',
-            errors : {}
-        },
-        formGroup: undefined,
-        empty    :
+        empty :
         {
             version     : undefined,
             id          : undefined,
@@ -34,12 +26,19 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
             coordinates : undefined,
             location    : undefined,
             times       : [],
-            clusters    : {},
             url         : ''
         },
 
-        imageUrl           : undefined,
-        imageUrlNormalized : undefined,
-        clusterPrimary     : undefined
+        form :
+        {
+            model  : {},
+            dirty  : false,
+            status : '',
+            errors : {}
+        },
+
+        formGroup : undefined,
+        clusters  : {},
+        imageUrl  : undefined
     }
 };

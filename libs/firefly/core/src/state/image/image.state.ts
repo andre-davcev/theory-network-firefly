@@ -1,21 +1,29 @@
-import { State, Selector, Action, StateContext, Store, Select } from '@ngxs/store';
+import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 
 import { StateImageModel } from './image.state.model';
 import { StateImageOptions } from './image.state.options';
-import { ActionImageUploadClear, ActionImageUpload, ActionImageSave } from './image.actions';
+import { ActionImageUploadClear, ActionImageUpload, ActionImageSave, ActionImageEventsReset, ActionImageEventsAdd, ActionImageEventsGet, ActionImageEventsRemove } from './image.actions';
 import { CoreEnum } from '@theory/core';
 import { StorageFormat } from '@theory/firebase/enums';
-import { tap, catchError, map, filter, switchMap } from 'rxjs/operators';
+import { tap, catchError, filter, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { StateUser } from '../user';
 import { Upload } from '@firefly/core/interfaces';
+import { Event } from '@firefly/core/models';
+import { ServiceImages, ServiceImageEvents } from '@firefly/core/services';
 
 @State<StateImageModel>(StateImageOptions)
 
 export class StateImage
 {
-    constructor(private store: Store, private storage: AngularFireStorage) {}
+    constructor
+    (
+        private store: Store,
+        private service: ServiceImages,
+        private imageEvents: ServiceImageEvents,
+        private storage: AngularFireStorage
+    ) { }
 
     @Selector() static upload(state: StateImageModel): Upload         { return state.upload; }
     @Selector() static uploadPath(state: StateImageModel): string     { return StateImage.upload(state).path; }
@@ -31,6 +39,8 @@ export class StateImage
     {
         return StateImage.uploadProgress(state) === 100 && !StateImage.uploadErrored(state);
     }
+
+    @Selector() static events(state: StateImageModel): Record<string, Event> { return state.events; }
 
     @Action(ActionImageUploadClear)
     clear({ patchState } : StateContext<StateImageModel>)
@@ -73,5 +83,50 @@ export class StateImage
             filter(() => StateImage.uploadCompleted(getState())),
             tap(() => console.log('ToDo: WRITE TO COLLECTION WITH switchMap'))
         );
+    }
+
+    @Action(ActionImageEventsReset)
+    reset({ patchState }: StateContext<StateImageModel>)
+    {
+        patchState({ events: {} });
+    }
+
+    @Action(ActionImageEventsGet)
+    get({ patchState, dispatch }: StateContext<StateImageModel>)
+    {
+        const userId: string = this.store.selectSnapshot(StateUser.userId);
+
+        return dispatch(new ActionImageEventsReset()).pipe
+        (
+            switchMap(() =>
+                this.imageEvents.get(userId)
+            ),
+            switchMap((data: Record<string, string>) =>
+                this.service.snapshotFK<Event>(data)
+            ),
+            tap((events: Record<string, Event>) =>
+                patchState({ events })
+            )
+        );
+    }
+
+    @Action(ActionImageEventsAdd)
+    add({ patchState, getState }: StateContext<StateImageModel>, { payload }: ActionImageEventsAdd)
+    {
+        const events: Record<string, Event> = StateImage.events(getState());
+
+        events[payload.id] = payload;
+
+        patchState({ events });
+    }
+
+    @Action(ActionImageEventsRemove)
+    remove({ patchState, getState }: StateContext<StateImageModel>, { payload }: ActionImageEventsRemove)
+    {
+        const events: Record<string, Event> = StateImage.events(getState());
+
+        delete events[payload];
+
+        patchState({ events });
     }
 }

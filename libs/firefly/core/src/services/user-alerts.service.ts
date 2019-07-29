@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 
-import { Alert, UserAlerts } from '@firefly/core/models';
+import { Alert } from '@firefly/core/models';
 import { MockAlerts } from '@firefly/core/mocks';
 import { ServiceBase } from './base.service';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUserAlerts extends ServiceBase<UserAlerts>
+export class ServiceUserAlerts extends ServiceBase<Record<string, boolean>>
 {
     constructor(firestore: AngularFirestore)
     {

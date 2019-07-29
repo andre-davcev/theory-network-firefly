@@ -24,6 +24,11 @@ export class ServiceBase<T extends Model>
         return this.collection.doc(id);
     }
 
+    public get(id: string): Observable<T>
+    {
+        return this.valuesChanges(id).pipe(take(1));
+    }
+
     public set(object: T): Observable<void>
     {
         return from(this.document(object.id).set(object));
@@ -114,13 +119,19 @@ export class ServiceBase<T extends Model>
         return this.document(id).valueChanges();
     }
 
-    public snapshotFK(keys: Record<string, string> | Array<string>): Observable<Array<T>>
+    public snapshotFK<R>(keys: Record<string, string>): Observable<Record<string, R>>
     {
-        keys = keys instanceof Array ? keys : Object.keys(keys);
+        const keyList: Array<string> = Object.keys(keys);
 
-        const streams$: Array<Observable<T>> = keys.map((id: string) => this.valuesChanges(id).pipe(take(1)));
+        const streams$: Array<Observable<T>> = keyList.map((id: string) => this.valuesChanges(id).pipe(take(1)));
 
-        return forkJoin(streams$);
+        return forkJoin(streams$).
+        pipe
+        (
+            map((data: Array<T>) =>
+                keyList.reduce((record, key) => record[key] = data[key], {})
+            )
+        );
     }
 
     public valuesChangesFK(keys: Record<string, string> | Array<string>): Observable<Array<T>>

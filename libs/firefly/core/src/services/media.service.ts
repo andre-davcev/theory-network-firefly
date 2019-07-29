@@ -87,7 +87,7 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
 
     public isNormalized(url: string): boolean
     {
-        return !!url.match(/^data:image/) || !!url.match(/^http:/) || !!url.match(/^https:/);
+        return url == null || !!url.match(/^data:image/) || !!url.match(/^http:/) || !!url.match(/^https:/);
     }
 
     public normalizeUrl(url: string): string

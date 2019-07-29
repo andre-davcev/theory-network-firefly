@@ -4,72 +4,17 @@ import { CoreEnum } from '@theory/core';
 import { ActionsEvent } from './event.actions.enum';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
-export class ActionEventSetId
-{
-    static readonly type = ActionsEvent.SetId;
+export class ActionEventReset     { static readonly type = ActionsEvent.Reset;     constructor() { }}
+export class ActionEventGet       { static readonly type = ActionsEvent.Get;       constructor(public payload: string = CoreEnum.IdNew) { } }
+export class ActionEventCreate    { static readonly type = ActionsEvent.Create;    constructor() { } }
+export class ActionEventDelete    { static readonly type = ActionsEvent.Delete;    constructor() { } }
+export class ActionEventPatch     { static readonly type = ActionsEvent.Patch;     constructor() { } }
+export class ActionEventPatchForm { static readonly type = ActionsEvent.PatchForm; constructor(public payload: Event) {} }
 
-    constructor(public payload: string = CoreEnum.IdNew) { }
-}
-
-export class ActionEventSet
-{
-    static readonly type = ActionsEvent.SetEvent;
-
-    constructor(public payload: Event) {}
-}
-
-export class ActionEventWatch
-{
-    static readonly type = ActionsEvent.WatchEvent;
-
-    constructor(public payload: Event) { }
-}
-
-export class ActionEventSetLocation
-{
-    static readonly type = ActionsEvent.SetLocation;
-
-    constructor(public payload: Result) { }
-}
-
-export class ActionEventSetImage
-{
-    static readonly type = ActionsEvent.SetImage;
-
-    constructor(public payload: string) { }
-}
-
-export class ActionEventSave
-{
-    static readonly type = ActionsEvent.SaveEvent;
-
-    constructor() { }
-}
-
-export class ActionEventCreate
-{
-    static readonly type = ActionsEvent.CreateEvent;
-
-    constructor() { }
-}
-
-export class ActionEventUpdate
-{
-    static readonly type = ActionsEvent.UpdateEvent;
-
-    constructor() { }
-}
-
-export class ActionEventSetClusterPrimary
-{
-    static readonly type = ActionsEvent.SetClusterPrimary;
-
-    constructor(public payload: Cluster) { }
-}
-
-export class ActionEventSetTime
-{
-    static readonly type = ActionsEvent.SetTime;
-
-    constructor(public key: 'start' | 'end', public value: string) { }
-}
+export class ActionEventClustersKeysGet { static readonly type = ActionsEvent.ClustersGet;   constructor() { } }
+export class ActionEventClustersGet     { static readonly type = ActionsEvent.ClustersGet;   constructor() { } }
+export class ActionEventClusterAdd      { static readonly type = ActionsEvent.ClusterAdd;    constructor(public payload: Cluster) { } }
+export class ActionEventClusterRemove   { static readonly type = ActionsEvent.ClusterRemove; constructor(public payload: string) { } }
+export class ActionEventLocationSet     { static readonly type = ActionsEvent.LocationSet;   constructor(public payload: Result) { } }
+export class ActionEventImageSet        { static readonly type = ActionsEvent.ImageSet;      constructor(public payload?: string) { } }
+export class ActionEventTimeSet         { static readonly type = ActionsEvent.TimeSet;       constructor(public key: 'start' | 'end', public value: string) { } }

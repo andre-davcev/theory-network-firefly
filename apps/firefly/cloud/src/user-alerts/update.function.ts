@@ -1,5 +1,5 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { FieldValue, DocumentSnapshot, CollectionReference, Firestore, WriteResult } from '@google-cloud/firestore';
+import { DocumentSnapshot, CollectionReference, Firestore, WriteResult } from '@google-cloud/firestore';
 import { Status, ServiceFirestore, ForeignKeyChange } from '../library';
 import { firestore as db } from 'firebase-admin';
 
@@ -11,7 +11,6 @@ firestore.
 document('user-alerts/{id}').
 onUpdate((change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
 {
-    const id:     string                  = change.after.id;
     const before: Record<string, boolean> = change.before.data();
     const after:  Record<string, boolean> = change.after.data();
 
@@ -31,4 +30,3 @@ onUpdate((change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
 });
 
 export { UserAlertsUpdate };
-

@@ -6,7 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateEvent, Location, ActionEventSetLocation } from '@firefly/core';
+import { StateEvent, Location, ActionEventLocationSet } from '@firefly/core';
 import { StateMap, ActionMapPlaceSetWithSearchResult, ActionMapSearchResultSetWithPlace } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
 
@@ -19,8 +19,8 @@ import { BaseComponent } from '@theory/core';
 
 export class PageEventLocation extends BaseComponent implements OnInit
 {
-    @Select(StateEvent.eventLocations)       locations$:           Observable<Array<Location>>;
-    @Select(StateEvent.eventLocationDefined) locationDefined$:     Observable<boolean>;
+    @Select(StateEvent.locations)       locations$:           Observable<Array<Location>>;
+    @Select(StateEvent.locationDefined) locationDefined$:     Observable<boolean>;
 
     @Select(StateMap.searchResult)           searchResult$:        Observable<Result>;
     @Select(StateMap.searchResultDefined)    searchResultDefined$: Observable<boolean>;
@@ -72,7 +72,7 @@ export class PageEventLocation extends BaseComponent implements OnInit
     {
         this.store.dispatch
         ([
-            new ActionEventSetLocation(this.result),
+            new ActionEventLocationSet(this.result),
             new ActionMapPlaceSetWithSearchResult(),
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
         ]);

@@ -1,30 +1,30 @@
-import { map, tap, switchMap, mergeMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
+import { Observable, of, forkJoin } from 'rxjs';
 import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
 import { FormGroup } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
 import { User, Event, Location, Time, Cluster } from '@firefly/core/models';
-import { ServiceEvents, ServiceImages, ServiceClusters, ServiceUser } from '@firefly/core/services';
+import { ServiceEvents, ServiceImages, } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
 import {
-  ActionGetEvents,
-  ActionEventSetId,
-  ActionEventSet,
-  ActionEventSetLocation,
-  ActionEventSave,
+  ActionEventGet,
+  ActionEventPatchForm,
+  ActionEventLocationSet,
   ActionEventCreate,
-  ActionEventWatch,
-  ActionEventSetImage,
-  ActionEventSetClusterPrimary,
-  ActionEventSetTime,
-  ActionEventUpdate
+  ActionEventImageSet,
+  ActionEventClusterAdd,
+  ActionEventTimeSet,
+  ActionEventPatch,
+  ActionEventDelete,
+  ActionEventReset
 } from './event.actions';
 import { CoreEnum, FormNgxs, FormNgxsStatus } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 import { ActionMapSearchResultClear } from '@theory/mapbox';
+import { ActionUserEventsAdd, ActionUserEventsRemove } from '../user-events';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -34,36 +34,38 @@ export class StateEvent
 
     @Selector() static form(state: StateEventModel): FormNgxs { return state.form; }
     @Selector() static formGroup(state: StateEventModel): FormGroup { return state.formGroup; }
-    @Selector() static event(state: StateEventModel): Event { return StateEvent.form(state).model; }
-    @Selector() static eventId(state: StateEventModel): string { return StateEvent.event(state).id; }
-    @Selector() static eventImageUrl(state: StateEventModel): string { return state.imageUrl; }
-    @Selector() static eventImageUrlNormalized(state: StateEventModel): string { return state.imageUrlNormalized; }
-    @Selector() static eventIsNew(state: StateEventModel): boolean { return  StateEvent.eventId(state) === CoreEnum.IdNew; }
-    @Selector() static eventCanUpdate(state: StateEventModel): boolean { return StateEvent.form(state).status === FormNgxsStatus.Valid && StateEvent.form(state).dirty; }
-    @Selector() static eventLocation(state: StateEventModel): Location { return StateEvent.form(state).model.location; }
-    @Selector() static eventLocationDefined(state: StateEventModel): boolean { return StateEvent.eventLocation(state) != null; }
-    @Selector() static eventLocations(state: StateEventModel): Array<Location> { return [ StateEvent.eventLocation(state) ]; }
-    @Selector() static eventTimes(state: StateEventModel): Array<Time> { return StateEvent.event(state).times; }
-    @Selector() static eventTime(state: StateEventModel): Time { return StateEvent.eventTimes(state)[0]; }
-    @Selector() static eventTimeStart(state: StateEventModel): string { return StateEvent.eventTime(state).start; }
-    @Selector() static eventTimeEnd(state: StateEventModel): string { return StateEvent.eventTime(state).end; }
-    @Selector() static eventTimeEndValid(state: StateEventModel): boolean
+    @Selector() static data(state: StateEventModel): Event { return StateEvent.form(state).model; }
+    @Selector() static id(state: StateEventModel): string { return StateEvent.data(state).id; }
+    @Selector() static imageId(state: StateEventModel): string { return StateEvent.data(state).imageId; }
+    @Selector() static imageUrl(state: StateEventModel): string { return state.imageUrl; }
+    @Selector() static isNew(state: StateEventModel): boolean { return  StateEvent.id(state) === CoreEnum.IdNew; }
+    @Selector() static canUpdate(state: StateEventModel): boolean { return StateEvent.form(state).status === FormNgxsStatus.Valid && StateEvent.form(state).dirty; }
+    @Selector() static clusters(state: StateEventModel): Record<string, string | Cluster> { return state.clusters == null ? {} : state.clusters; }
+    @Selector() static location(state: StateEventModel): Location { return StateEvent.form(state).model.location; }
+    @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.location(state) != null; }
+    @Selector() static locations(state: StateEventModel): Array<Location> { return [ StateEvent.location(state) ]; }
+    @Selector() static times(state: StateEventModel): Array<Time> { return StateEvent.data(state).times; }
+    @Selector() static time(state: StateEventModel): Time { return StateEvent.times(state)[0]; }
+    @Selector() static timeStart(state: StateEventModel): string { return StateEvent.time(state).start; }
+    @Selector() static timeEnd(state: StateEventModel): string { return StateEvent.time(state).end; }
+    @Selector() static timeEndValid(state: StateEventModel): boolean
     {
-        const timeStart: Date = new Date(StateEvent.eventTimeStart(state));
-        const timeEnd:   Date = new Date(StateEvent.eventTimeEnd(state));
+        const timeStart: Date = new Date(StateEvent.timeStart(state));
+        const timeEnd:   Date = new Date(StateEvent.timeEnd(state));
 
         return timeEnd.getTime() > timeStart.getTime();
     }
-    @Selector() static eventClusters(state: StateEventModel): Array<string>
+    @Selector() static clusterPrimary(state: StateEventModel): Cluster
     {
-        const clusters: Record<string, string> = StateEvent.form(state).model.clusters;
+        const clusters: Record<string, string | Cluster> = StateEvent.clusters(state);
+        const keys:     Array<string>                    = Object.keys(clusters);
 
-        return Object.keys( clusters == null ? {} : clusters );
+        return clusters[keys[0]] as Cluster;
     }
-    @Selector() static eventClusterPrimary(state: StateEventModel): Cluster { return state.clusterPrimary; }
-    @Selector() static eventClusterIcon(state: StateEventModel): string
+
+    @Selector() static clusterIcon(state: StateEventModel): string
     {
-        const cluster: Cluster = StateEvent.eventClusterPrimary(state);
+        const cluster: Cluster = StateEvent.clusterPrimary(state);
 
         return cluster == null ? undefined : cluster.iconId;
     }
@@ -72,66 +74,105 @@ export class StateEvent
     (
         private service: ServiceEvents,
         private store: Store,
-        private image: ServiceImages,
-        private cluster: ServiceClusters,
-        private user: ServiceUser
+        private image: ServiceImages
     ) { }
 
-    @Action(ActionGetEvents)
-    getEvents({ patchState } : StateContext<StateEventModel>)
+    @Action(ActionEventReset)
+    reset({ patchState, dispatch }: StateContext<StateEventModel>)
     {
-
-    }
-
-    @Action(ActionEventSetId)
-    setEventId({ patchState, dispatch } : StateContext<StateEventModel>, { payload }: ActionEventSetId)
-    {
-        const id: string = payload;
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
-        const defaults: Event = StateEventOptions.defaults.empty;
-        const event: Event = id !== CoreEnum.IdNew ? undefined : this.service.build(userId, defaults);
-
-        const formGroup: FormGroup = this.service.formCreate(event);
+        const defaults: StateEventModel = StateEventOptions.defaults;
 
         patchState
         ({
-            formGroup,
-            imageUrl:           undefined,
-            imageUrlNormalized: undefined,
-            clusterPrimary:     undefined
+            form :
+            {
+                model  : {},
+                dirty  : defaults.form.dirty,
+                status : defaults.form.status,
+                errors : {}
+            },
+
+            formGroup : defaults.formGroup,
+            clusters  : {},
+            imageUrl  : defaults.imageUrl
         });
 
         return dispatch
         ([
+            new ActionEventImageSet(),
             new ActionMapSearchResultClear(),
-            new SetFormPristine('event.form'),
-            new UpdateFormValue({ value: event, path: 'event.form'}),
-            new ActionEventWatch(event)
+            new SetFormPristine('event.form')
         ]);
     }
 
-    @Action(ActionEventWatch, { cancelUncompleted: true })
-    eventWatch({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventWatch)
+    @Action(ActionEventGet)
+    get({ patchState, dispatch } : StateContext<StateEventModel>, { payload }: ActionEventGet)
     {
-        const event: Event  = payload;
-        const id:    string = event.id;
+        const id: string = payload;
+        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const defaults: Event = StateEventOptions.defaults.empty;
+        const event$: Observable<Event> = id === CoreEnum.IdNew ?
+            of(this.service.build(userId, defaults)) :
+            this.service.valuesChanges(id);
 
-        const event$: Observable<Event> = id === CoreEnum.IdNew ? of(event) : this.service.valuesChanges(id).
-
-        pipe(switchMap((e: Event) =>
-            this.image.getDownloadUrl(e.imageId).
-            pipe
-            (
-                switchMap((url: string) => dispatch(new ActionEventSetImage(url))),
-                map(() => e)
+        return dispatch(new ActionEventReset()).
+        pipe
+        (
+            switchMap(() => event$),
+            take(1),
+            switchMap((event: Event) =>
+                this.image.getDownloadUrl(event.imageId).pipe
+                (
+                    map((imageUrl: string) =>
+                        patchState
+                        ({
+                            imageUrl,
+                            clusters: {},
+                            formGroup: this.service.formCreate(event)
+                        })
+                    ),
+                    switchMap(() =>
+                        dispatch(new UpdateFormValue({ value: event, path: 'event.form'}))
+                    )
+                )
             )
-        ));
-
-        return event$.pipe(tap((e: Event) => dispatch(new ActionEventSet(e))));
+        );
     };
 
-    @Action(ActionEventSet)
-    setEvent({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventSet)
+    @Action(ActionEventCreate)
+    create({ getState, dispatch }: StateContext<StateEventModel>)
+    {
+        const state:    StateEventModel = getState();
+        const data:     Event           = StateEvent.data(state);
+        const imageUrl: string          = StateEvent.imageId(state);
+
+        return forkJoin
+        (
+            this.image.createWithUpload(data, imageUrl),
+            this.service.create(data).pipe,
+            dispatch(new ActionUserEventsAdd(data))
+        );
+    }
+
+    @Action(ActionEventDelete)
+    delete({ getState, dispatch }: StateContext<StateEventModel>)
+    {
+        const id: string = StateEvent.id(getState());
+
+        return dispatch
+        ([
+            new ActionEventReset(),
+    /*
+        database.collection('image-events').doc(imageId).update({ [id]: FieldValue.delete() }),
+    */
+            new ActionUserEventsRemove(id)
+        ]);
+    }
+
+
+
+    @Action(ActionEventPatchForm)
+    setEvent({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventPatchForm)
     {
         const value: Event = payload;
         const path: string = 'event.form';
@@ -139,8 +180,8 @@ export class StateEvent
         return dispatch(new UpdateFormValue({ value, path }));
     }
 
-    @Action(ActionEventSetLocation)
-    setLocation({ getState } : StateContext<StateEventModel>, { payload }: ActionEventSetLocation)
+    @Action(ActionEventLocationSet)
+    setLocation({ getState } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
     {
         const form: FormGroup = StateEvent.formGroup(getState());
         const result: Result = payload;
@@ -148,79 +189,59 @@ export class StateEvent
         this.service.locationSet(form, result);
     }
 
-    @Action(ActionEventSetTime)
-    setTime({ getState }: StateContext<StateEventModel>, { key, value }: ActionEventSetTime)
+    @Action(ActionEventTimeSet)
+    setTime({ getState }: StateContext<StateEventModel>, { key, value }: ActionEventTimeSet)
     {
         const form: FormGroup = StateEvent.formGroup(getState());
 
         this.service.timeSet(form, key, value);
     }
 
-    @Action(ActionEventSetImage)
-    setImage({ patchState, getState }: StateContext<StateEventModel>, { payload }: ActionEventSetImage)
+    @Action(ActionEventImageSet)
+    setImage({ patchState, getState }: StateContext<StateEventModel>, { payload }: ActionEventImageSet)
     {
-        const imageUrl: string           = payload;
-        const imageUrlNormalized: string = this.image.normalizeUrl(imageUrl);
-        const formGroup: FormGroup       = StateEvent.formGroup(getState());
+        const imageId:   string    = payload;
+        const imageUrl:  string    = this.image.normalizeUrl(imageId);
+        const formGroup: FormGroup = StateEvent.formGroup(getState());
 
-        this.service.imageIdSet(formGroup, imageUrl);
+        this.service.imageIdSet(formGroup, imageId);
 
-        patchState
-        ({
-            imageUrl,
-            imageUrlNormalized
-        });
+        patchState({ imageUrl });
     }
 
-    @Action(ActionEventUpdate)
+    @Action(ActionEventPatch)
     update({ }: StateContext<StateEventModel>)
     {
+/*
+    const id:     string              = change.after.id;
+    const key:    string              = 'imageId';
+    const before: Record<string, any> = change.before.data();
+    const after:  Record<string, any> = change.after.data();
 
+    const collection: CollectionReference = database.collection('image-events');
+
+    let promise: Promise<any> = Promise.resolve();
+
+    if (before[key] == null && after[key] != null)
+    {
+        promise = collection.doc(after[key]).update({ [id]: id });
+    }
+    else if (before[key] != null && after[key] == null)
+    {
+        promise = collection.doc(before[key]).update({ [id]: FieldValue.delete() })
+    }
+*/
     }
 
-    @Action(ActionEventSave)
-    save({ dispatch, getState }: StateContext<StateEventModel>)
+    @Action(ActionEventClusterAdd)
+    setClusterPrimary({ patchState, getState }: StateContext<StateEventModel>, { payload }: ActionEventClusterAdd)
     {
-        const id: string = StateEvent.eventId(getState());
+        const form:    FormGroup = StateEvent.formGroup(getState());
+        const cluster: Cluster   = payload;
 
-        return id === CoreEnum.IdNew ?
+        const clusters: Record<string, string | Cluster> = {[cluster.id]: cluster};
 
-        dispatch(new ActionEventCreate()) : dispatch(new ActionEventUpdate());
-    }
-
-    @Action(ActionEventCreate)
-    create({ getState, dispatch }: StateContext<StateEventModel>)
-    {
-        const state:    StateEventModel = getState();
-        const e:        Event           = StateEvent.event(state);
-        const imageUrl: string          = StateEvent.eventImageUrl(state);
-
-        return this.image.createWithUpload(e, imageUrl).
-        pipe
-        (
-            switchMap((event: Event) => this.service.create(event).pipe
-            (
-                mergeMap(() =>
-                    this.cluster.foreignKeyUpdate(Object.keys(event.clusters)[0], this.service.name, event.id)
-                ),
-                mergeMap(() =>
-                    this.user.foreignKeyUpdate(event.userId, this.service.name, event.id)
-                ),
-                tap(() => dispatch(new ActionEventWatch(event)))
-            ))
-        );
-    }
-
-    @Action(ActionEventSetClusterPrimary)
-    setClusterPrimary({ patchState, getState }: StateContext<StateEventModel>, { payload }: ActionEventSetClusterPrimary)
-    {
-        const form:           FormGroup = StateEvent.formGroup(getState());
-        const clusterPrimary: Cluster   = payload;
-        const key:            string    = clusterPrimary.id;
-
-        const clusters: Record<string, string> = {[key]: key};
-
-        patchState({ clusterPrimary });
+        patchState({ clusters });
 
         this.service.patchValue(form, 'clusters', clusters);
     }
