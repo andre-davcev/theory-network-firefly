@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ServiceBase } from './base.service';
-import { UserClusters } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUserClusters extends ServiceBase<UserClusters>
+export class ServiceUserClusters extends ServiceBase<Record<string, string>>
 {
     constructor(firestore: AngularFirestore)
     {

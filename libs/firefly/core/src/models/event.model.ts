@@ -11,6 +11,5 @@ export interface Event extends Asset
     coordinates : firestore.GeoPoint;
     location    : Location;
     times       : Array<Time>;
-    clusters    : Record<string, string>;
     url         : string;
 }

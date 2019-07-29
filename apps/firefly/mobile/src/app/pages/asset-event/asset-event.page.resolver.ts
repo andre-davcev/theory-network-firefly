@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
-import { ActionEventSetId } from '@firefly/core';
+import { ActionEventGet } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 import { switchMap } from 'rxjs/operators';
 
@@ -16,7 +16,7 @@ export class ResolverPageAssetEvent implements Resolve<any>
         return this.store.dispatch
         ([
             new ActionMobileLoadingShow(),
-            new ActionEventSetId(route.params.id)
+            new ActionEventGet(route.params.id)
         ]).
         pipe
         (

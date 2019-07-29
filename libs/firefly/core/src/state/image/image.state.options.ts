@@ -13,6 +13,7 @@ export const StateImageOptions: StoreOptions<StateImageModel> =
             path     : undefined,
             progress : 0,
             error    : undefined
-        }
+        },
+        events: {}
     }
 };
