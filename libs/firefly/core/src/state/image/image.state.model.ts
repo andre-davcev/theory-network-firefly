@@ -1,8 +1,14 @@
 import { Upload } from '@firefly/core/interfaces';
-import { Event } from '@firefly/core/models';
+import { Image } from '@firefly/core/models';
+import { FormNgxs } from '@theory/core/interfaces';
+import { FormGroup } from '@angular/forms';
 
 export interface StateImageModel
 {
+    empty     : Image;
+    form      : FormNgxs;
+    formGroup : FormGroup;
+    url       : string;
+
     upload : Upload;
-    events : Record<string, Event>;
 }

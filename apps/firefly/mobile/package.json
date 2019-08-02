@@ -74,6 +74,7 @@
     "@theory/ionic": "file:../../../libs/ionic",
     "@theory/mapbox": "file:../../../libs/mapbox",
     "@theory/scss": "file:../../../libs/scss",
+    "@theory/state": "file:../../../libs/state",
     "@theory/web": "file:../../../libs/web",
     "cordova-plugin-camera": "file:../../../node_modules/cordova-plugin-camera",
     "cordova-plugin-globalization": "file:../../../node_modules/cordova-plugin-globalization",
