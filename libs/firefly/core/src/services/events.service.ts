@@ -67,7 +67,7 @@ export class ServiceEvents extends ServiceBase<Event>
         {
             ...this.clone(defaults),
             id: CoreEnum.IdNew,
-            userId: userId,
+            userId,
             times:
             [
                 {
@@ -98,7 +98,6 @@ export class ServiceEvents extends ServiceBase<Event>
             version     : event.version,
             tagline     : [event.tagline, ValidatorsExtended.minLength(1)],
             imageId     : [event.imageId, [ServiceEvents.validateImage()]],
-            clusters    : [event.clusters, ValidatorsExtended.minLength(1)],
             coordinates : [event.coordinates, Validators.required],
             location    : [event.location, Validators.required],
             times       : [event.times, [ServiceEvents.validateTime()]],

@@ -8,6 +8,7 @@ import { ServiceUser } from './user.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Observable } from 'rxjs';
 import { switchMap, mergeMap, map } from 'rxjs/operators';
+import { CoreEnum } from '@theory/core/enums';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceImages extends ServiceMedia<Image>
@@ -21,6 +22,18 @@ export class ServiceImages extends ServiceMedia<Image>
     )
     {
         super('images', firestore, storage, user, webview);
+    }
+
+    public build(userId: string, defaults: Image): Image
+    {
+        const image: Image =
+        {
+            ...this.clone(defaults),
+            id: CoreEnum.IdNew,
+            userId
+        };
+
+        return image;
     }
 
     public fromEvent(event: Event): Image

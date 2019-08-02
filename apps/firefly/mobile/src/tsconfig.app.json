@@ -59,6 +59,12 @@
       "@theory/nativescript/*": [
         "../../../../libs/nativescript/src/*"
       ],
+      "@theory/state": [
+        "../../../../libs/state/index.ts"
+      ],
+      "@theory/state/*": [
+        "../../../../libs/state/src/*"
+      ],
       "@theory/web": [
         "../../../../libs/web/index.ts"
       ],

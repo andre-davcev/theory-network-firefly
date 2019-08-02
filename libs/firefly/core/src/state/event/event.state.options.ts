@@ -18,7 +18,7 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
             userId      : undefined,
             name        : null,
             description : null,
-            private     : false,
+            private     : true,
             draft       : false,
 
             tagline     : null,

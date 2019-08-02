@@ -1,5 +1,5 @@
 export enum CoreEnum
 {
-    DataUri = 'data:image/png;base64,',
-    IdNew   = 'new'
+    DataUri  = 'data:image/png;base64,',
+    IdNew    = 'new'
 }

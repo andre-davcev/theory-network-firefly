@@ -1,10 +1,10 @@
 import { map, switchMap, take } from 'rxjs/operators';
 import { Observable, of, forkJoin } from 'rxjs';
-import { Action, Selector, Select, State, StateContext, Store } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { FormGroup } from '@angular/forms';
 
 import { StateUser } from '@firefly/core/state/user';
-import { User, Event, Location, Time, Cluster } from '@firefly/core/models';
+import { Event, Location, Time, Cluster } from '@firefly/core/models';
 import { ServiceEvents, ServiceImages, } from '@firefly/core/services';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -20,7 +20,7 @@ import {
   ActionEventDelete,
   ActionEventReset
 } from './event.actions';
-import { CoreEnum, FormNgxs, FormNgxsStatus } from '@theory/core';
+import { CoreEnum, FormNgxs, FormNgxsStatus, CoreUtil } from '@theory/core';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 import { ActionMapSearchResultClear } from '@theory/mapbox';
@@ -30,7 +30,14 @@ import { ActionUserEventsAdd, ActionUserEventsRemove } from '../user-events';
 
 export class StateEvent
 {
-    @Select(StateUser.user) user$: Observable<User>;
+    private formPath: string = `${StateEventOptions.name}.form`;
+
+    constructor
+    (
+        private service: ServiceEvents,
+        private store: Store,
+        private image: ServiceImages
+    ) { }
 
     @Selector() static form(state: StateEventModel): FormNgxs { return state.form; }
     @Selector() static formGroup(state: StateEventModel): FormGroup { return state.formGroup; }
@@ -40,7 +47,7 @@ export class StateEvent
     @Selector() static imageUrl(state: StateEventModel): string { return state.imageUrl; }
     @Selector() static isNew(state: StateEventModel): boolean { return  StateEvent.id(state) === CoreEnum.IdNew; }
     @Selector() static canUpdate(state: StateEventModel): boolean { return StateEvent.form(state).status === FormNgxsStatus.Valid && StateEvent.form(state).dirty; }
-    @Selector() static clusters(state: StateEventModel): Record<string, string | Cluster> { return state.clusters == null ? {} : state.clusters; }
+    @Selector() static clusters(state: StateEventModel): Record<string, Cluster> { return state.clusters == null ? {} : state.clusters; }
     @Selector() static location(state: StateEventModel): Location { return StateEvent.form(state).model.location; }
     @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.location(state) != null; }
     @Selector() static locations(state: StateEventModel): Array<Location> { return [ StateEvent.location(state) ]; }
@@ -70,38 +77,18 @@ export class StateEvent
         return cluster == null ? undefined : cluster.iconId;
     }
 
-    constructor
-    (
-        private service: ServiceEvents,
-        private store: Store,
-        private image: ServiceImages
-    ) { }
-
     @Action(ActionEventReset)
     reset({ patchState, dispatch }: StateContext<StateEventModel>)
     {
-        const defaults: StateEventModel = StateEventOptions.defaults;
+        const defaults: StateEventModel = CoreUtil.clone<StateEventModel>(StateEventOptions.defaults);
 
-        patchState
-        ({
-            form :
-            {
-                model  : {},
-                dirty  : defaults.form.dirty,
-                status : defaults.form.status,
-                errors : {}
-            },
-
-            formGroup : defaults.formGroup,
-            clusters  : {},
-            imageUrl  : defaults.imageUrl
-        });
+        patchState(defaults);
 
         return dispatch
         ([
             new ActionEventImageSet(),
             new ActionMapSearchResultClear(),
-            new SetFormPristine('event.form')
+            new SetFormPristine(this.formPath)
         ]);
     }
 
@@ -111,28 +98,28 @@ export class StateEvent
         const id: string = payload;
         const userId: string = this.store.selectSnapshot(StateUser.userId);
         const defaults: Event = StateEventOptions.defaults.empty;
-        const event$: Observable<Event> = id === CoreEnum.IdNew ?
+        const item$: Observable<Event> = id === CoreEnum.IdNew ?
             of(this.service.build(userId, defaults)) :
             this.service.valuesChanges(id);
 
         return dispatch(new ActionEventReset()).
         pipe
         (
-            switchMap(() => event$),
+            switchMap(() => item$),
             take(1),
-            switchMap((event: Event) =>
-                this.image.getDownloadUrl(event.imageId).pipe
+            switchMap((item: Event) =>
+                this.image.getDownloadUrl(item.imageId).pipe
                 (
                     map((imageUrl: string) =>
                         patchState
                         ({
                             imageUrl,
                             clusters: {},
-                            formGroup: this.service.formCreate(event)
+                            formGroup: this.service.formCreate(item)
                         })
                     ),
                     switchMap(() =>
-                        dispatch(new UpdateFormValue({ value: event, path: 'event.form'}))
+                        dispatch(new UpdateFormValue({ value: item, path: this.formPath}))
                     )
                 )
             )
@@ -175,7 +162,7 @@ export class StateEvent
     setEvent({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventPatchForm)
     {
         const value: Event = payload;
-        const path: string = 'event.form';
+        const path: string = this.formPath;
 
         return dispatch(new UpdateFormValue({ value, path }));
     }
