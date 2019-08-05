@@ -1,6 +1,6 @@
 import { ActionsUserEvents } from './user-events.actions.enum';
 import { Event } from '@firefly/core/models';
-import { SortField } from '@theory/core';
+import { SortField } from '@theory/state';
 
 export class ActionUserEventsReset   { static readonly type = ActionsUserEvents.Reset;   constructor() { } }
 export class ActionUserEventsGetKeys { static readonly type = ActionsUserEvents.GetKeys; constructor() { } }

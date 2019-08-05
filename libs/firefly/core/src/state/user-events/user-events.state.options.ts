@@ -1,7 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserEventsModel } from './user-events.state.model';
-import { DataType } from '@theory/core';
+import { TypeOf } from '@theory/core';
 
 export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 {
@@ -9,14 +9,17 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 
     defaults :
     {
-        data: {},
-        list: [],
+        data:     {},
+        lookup:   {},
+        list:     [],
+        offset:   0,
+        pageSize: 30,
 
-        sort:
+        sortFields:
         [
             {
                 name:      'name',
-                type:      DataType.String,
+                type:      TypeOf.String,
                 ascending: true
             }
         ]
