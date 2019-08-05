@@ -1,34 +1,43 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { StateUserEventsOptions } from './user-events.state.options';
 
-import { Event } from '@firefly/core/models';
+import { Event, UserEvent } from '@firefly/core/models';
 import { StateUserEventsModel } from './user-events.state.model';
 import { ActionUserEventsAdd, ActionUserEventsReset, ActionUserEventsRemove, ActionUserEventsGetKeys, ActionUserEventsGetData, ActionUserEventsSort, ActionUserEventsGet, ActionUserEventsSet } from './user-events.actions';
 import { ServiceUserEvents } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state';
-import { switchMap, tap, map } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { CoreUtil } from '@theory/core/utils';
 import { of } from 'rxjs';
-import { SortField } from '@theory/core/interfaces/sort-field.interface';
-import { StatePageable } from '@theory/core';
+import { SortField } from '@theory/state';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 
-export class StateUserEvents extends StatePageable<Event>
+export class StateUserEvents
 {
-    @Selector() static keys(state: StateUserEventsModel): Record<string, string>  { return state.data as Record<string, string>; }
-    @Selector() static data(state: StateUserEventsModel): Record<string, Event>   { return state.data as Record<string, Event>; }
-    @Selector() static sortFields(state: StateUserEventsModel): Array<SortField>  { return state.sort; }
+    @Selector() static data(state: StateUserEventsModel):       Record<string, UserEvent> { return state.data; }
+    @Selector() static lookup(state: StateUserEventsModel):     Record<string, Event>     { return state.lookup; }
+    @Selector() static list(state: StateUserEventsModel):       Array<Event>              { return state.list; }
+    @Selector() static offset(state: StateUserEventsModel):     number                    { return state.offset; }
+    @Selector() static pageSize(state: StateUserEventsModel):   number                    { return state.pageSize; }
+    @Selector() static sortFields(state: StateUserEventsModel): Array<SortField>          { return state.sortFields; }
 
     constructor
     (
         private store: Store,
         private service: ServiceUserEvents
-    )
-    {
-        super();
-    }
+    ) { }
 
+/*
+export class ActionUserEventsReset   { static readonly type = ActionsUserEvents.Reset;   constructor() { } }
+export class ActionUserEventsGetKeys { static readonly type = ActionsUserEvents.GetKeys; constructor() { } }
+export class ActionUserEventsGetData { static readonly type = ActionsUserEvents.GetData; constructor() { } }
+export class ActionUserEventsGet     { static readonly type = ActionsUserEvents.Get;     constructor() { } }
+export class ActionUserEventsSet     { static readonly type = ActionsUserEvents.Set;     constructor(public payload: Record<string, string | Event>) { } }
+export class ActionUserEventsSort    { static readonly type = ActionsUserEvents.Sort;    constructor(public payload?: Array<SortField>) { } }
+export class ActionUserEventsAdd     { static readonly type = ActionsUserEvents.Add;     constructor(public payload: Event) { } }
+export class ActionUserEventsRemove  { static readonly type = ActionsUserEvents.Remove;  constructor(public payload: string) { } }
+*/
     @Action(ActionUserEventsReset)
     reset({ patchState }: StateContext<StateUserEventsModel>)
     {

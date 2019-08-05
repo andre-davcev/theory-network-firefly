@@ -1,9 +1,7 @@
-import { Event } from '@firefly/core/models';
-import { SortField } from '@theory/core/interfaces/sort-field.interface';
+import { Event, UserEvent } from '@firefly/core/models';
+import { StateReferenceTableModel } from '@theory/state';
 
-export interface StateUserEventsModel
+export interface StateUserEventsModel extends StateReferenceTableModel<Event, UserEvent>
 {
-    data: Record<string, string | Event>;
-    list: Array<Event>;
-    sort: Array<SortField>;
+
 }
