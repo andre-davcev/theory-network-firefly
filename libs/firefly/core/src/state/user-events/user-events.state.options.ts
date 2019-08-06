@@ -2,6 +2,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserEventsModel } from './user-events.state.model';
 import { TypeOf } from '@theory/core';
+import { Default } from '@firefly/core/enums';
 
 export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 {
@@ -13,7 +14,7 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
         lookup:   {},
         list:     [],
         offset:   0,
-        pageSize: 30,
+        pageSize: Default.PageSize,
 
         sortFields:
         [

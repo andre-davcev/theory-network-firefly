@@ -6,7 +6,7 @@ import { MergeType } from '../enums';
 import { FormGroup } from '@angular/forms';
 import * as firebase from 'firebase/app';
 
-export class ServiceBase<T extends Model>
+export class ServiceBase<T extends Model | Record<string, any>>
 {
     private _name: string;
     private _collection: AngularFirestoreCollection<T>;
@@ -119,7 +119,7 @@ export class ServiceBase<T extends Model>
         return this.document(id).valueChanges();
     }
 
-    public snapshotFK<R>(keys: Record<string, string>): Observable<Record<string, R>>
+    public snapshotFK<R>(keys: Record<string, any>): Observable<Record<string, R>>
     {
         const keyList: Array<string> = Object.keys(keys);
 
