@@ -3,12 +3,11 @@ import { StateUserEventsOptions } from './user-events.state.options';
 
 import { Event, UserEvent } from '@firefly/core/models';
 import { StateUserEventsModel } from './user-events.state.model';
-import { ActionUserEventsAdd, ActionUserEventsReset, ActionUserEventsRemove, ActionUserEventsGetKeys, ActionUserEventsGetData, ActionUserEventsSort, ActionUserEventsGet, ActionUserEventsSet } from './user-events.actions';
+import { ActionUserEventsAdd, ActionUserEventsReset, ActionUserEventsRemove, ActionUserEventsGetData, ActionUserEventsSort, ActionUserEventsGet, ActionUserEventsSet } from './user-events.actions';
 import { ServiceUserEvents } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { CoreUtil } from '@theory/core/utils';
-import { of } from 'rxjs';
 import { SortField } from '@theory/state';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
@@ -29,14 +28,12 @@ export class StateUserEvents
     ) { }
 
 /*
-export class ActionUserEventsReset   { static readonly type = ActionsUserEvents.Reset;   constructor() { } }
-export class ActionUserEventsGetKeys { static readonly type = ActionsUserEvents.GetKeys; constructor() { } }
-export class ActionUserEventsGetData { static readonly type = ActionsUserEvents.GetData; constructor() { } }
-export class ActionUserEventsGet     { static readonly type = ActionsUserEvents.Get;     constructor() { } }
-export class ActionUserEventsSet     { static readonly type = ActionsUserEvents.Set;     constructor(public payload: Record<string, string | Event>) { } }
-export class ActionUserEventsSort    { static readonly type = ActionsUserEvents.Sort;    constructor(public payload?: Array<SortField>) { } }
-export class ActionUserEventsAdd     { static readonly type = ActionsUserEvents.Add;     constructor(public payload: Event) { } }
-export class ActionUserEventsRemove  { static readonly type = ActionsUserEvents.Remove;  constructor(public payload: string) { } }
+export class ActionUserEventsGetData   { static readonly type = ActionsUserEvents.GetKeys; constructor() { } }
+export class ActionUserEventsSet       { static readonly type = ActionsUserEvents.Set;     constructor(public payload: Record<string, string | Event>) { } }
+export class ActionUserEventsSort      { static readonly type = ActionsUserEvents.Sort;    constructor(public payload?: Array<SortField>) { } }
+export class ActionUserEventsGet       { static readonly type = ActionsUserEvents.Get;     constructor() { } }
+export class ActionUserEventsAdd       { static readonly type = ActionsUserEvents.Add;     constructor(public payload: Event) { } }
+export class ActionUserEventsRemove    { static readonly type = ActionsUserEvents.Remove;  constructor(public payload: string) { } }
 */
     @Action(ActionUserEventsReset)
     reset({ patchState }: StateContext<StateUserEventsModel>)
@@ -46,8 +43,8 @@ export class ActionUserEventsRemove  { static readonly type = ActionsUserEvents.
         patchState(defaults);
     }
 
-    @Action(ActionUserEventsGetKeys)
-    getKeys({ dispatch }: StateContext<StateUserEventsModel>)
+    @Action(ActionUserEventsGetData)
+    getData({ dispatch }: StateContext<StateUserEventsModel>)
     {
         const userId: string = this.store.selectSnapshot(StateUser.userId);
 
@@ -57,35 +54,12 @@ export class ActionUserEventsRemove  { static readonly type = ActionsUserEvents.
             switchMap(() =>
                 this.service.get(userId)
             ),
-            tap((data: Record<string, string>) =>
-                dispatch(new ActionUserEventsSet(data))
-            )
-        );
-    }
-
-    @Action(ActionUserEventsGetData)
-    getData({ getState, dispatch }: StateContext<StateUserEventsModel>)
-    {
-        return of(StateUserEvents.keys(getState())).pipe
-        (
-            switchMap((data: Record<string, string>) =>
-                this.service.snapshotFK<Event>(data)
-            ),
-            switchMap((data: Record<string, Event>) =>
+            switchMap((data: Record<string, UserEvent>) =>
                 dispatch(new ActionUserEventsSet(data))
             ),
             switchMap(() =>
                 dispatch(new ActionUserEventsSort())
             )
-        );
-    }
-
-    @Action(ActionUserEventsGet)
-    get({ dispatch }: StateContext<StateUserEventsModel>)
-    {
-        return dispatch(new ActionUserEventsGetKeys()).pipe
-        (
-            switchMap(() => dispatch(new ActionUserEventsGetData()))
         );
     }
 
@@ -98,16 +72,25 @@ export class ActionUserEventsRemove  { static readonly type = ActionsUserEvents.
     @Action(ActionUserEventsSort)
     sortData({ getState, patchState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSort)
     {
-        const state: StateUserEventsModel  = getState();
-        const data:  Record<string, Event> = StateUserEvents.data(state);
-        const sort:  Array<SortField>      = payload == null ? StateUserEvents.sortFields(state) : payload;
-        const list:  Array<Event>          = this.sort(data, sort);
+        const state:      StateUserEventsModel      = getState();
+        const data:       Record<string, UserEvent> = StateUserEvents.data(state);
+        const sortFields: Array<SortField>          = payload == null ? StateUserEvents.sortFields(state) : payload;
+        const list:       Array<Event>              = this.sort(data, sort);
 
         patchState
         ({
             list,
-            sort
+            sortFields
         });
+    }
+
+    @Action(ActionUserEventsGet)
+    get({ dispatch }: StateContext<StateUserEventsModel>)
+    {
+        return dispatch(new ActionUserEventsGetData()).pipe
+        (
+            switchMap(() => dispatch(new ActionUserEventsGetLookup()))
+        );
     }
 
     @Action(ActionUserEventsAdd)
