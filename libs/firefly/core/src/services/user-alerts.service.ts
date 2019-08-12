@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { Alert, UserAlert } from '@firefly/core/models';
 import { MockAlerts } from '@firefly/core/mocks';
-import { ServiceBase } from './base.service';
+import { ServiceBase } from '@theory/firebase';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceUserAlerts extends ServiceBase<Record<string, UserAlert>>

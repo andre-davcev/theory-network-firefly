@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User as FirebaseUser, UserInfo } from 'firebase/app';
-import { ServiceBase } from './base.service';
+import { ServiceBase } from '@theory/firebase';
 import { User } from '../models';
 import { AuthProvider } from '@theory/firebase';
 

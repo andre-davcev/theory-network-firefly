@@ -1,11 +1,12 @@
 import { SortField } from './sort-field.interface';
 
-export interface StateReferenceTableModel<T, M>
+export interface StateReferenceTableModel<R, T>
 {
-    data:       Record<string, M>;
-    lookup:     Record<string, T>;
-    list:       Array<T>;
-    offset:     number;
-    pageSize:   number;
-    sortFields: Array<SortField>;
+    data:      Record<string, R>;
+    lookup:    Record<string, T>;
+    keys:      Array<string>;
+    list:      Array<T>;
+    offset:    number;
+    pageSize:  number;
+    sortField: SortField;
 }

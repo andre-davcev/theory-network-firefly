@@ -4,33 +4,35 @@ import { StateUserEventsOptions } from './user-events.state.options';
 import { Event, UserEvent } from '@firefly/core/models';
 import { StateUserEventsModel } from './user-events.state.model';
 import { ActionUserEventsAdd, ActionUserEventsReset, ActionUserEventsRemove, ActionUserEventsGetData, ActionUserEventsSort, ActionUserEventsGet, ActionUserEventsSet } from './user-events.actions';
-import { ServiceUserEvents } from '@firefly/core/services';
+import { ServiceUserEvents, ServiceEvents } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { CoreUtil } from '@theory/core/utils';
-import { SortField } from '@theory/state';
+import { SortField, StateReferenceTable } from '@theory/state';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 
-export class StateUserEvents
+export class StateUserEvents extends StateReferenceTable<UserEvent, Event, StateUserEventsModel>
 {
-    @Selector() static data(state: StateUserEventsModel):       Record<string, UserEvent> { return state.data; }
-    @Selector() static lookup(state: StateUserEventsModel):     Record<string, Event>     { return state.lookup; }
-    @Selector() static list(state: StateUserEventsModel):       Array<Event>              { return state.list; }
-    @Selector() static offset(state: StateUserEventsModel):     number                    { return state.offset; }
-    @Selector() static pageSize(state: StateUserEventsModel):   number                    { return state.pageSize; }
-    @Selector() static sortFields(state: StateUserEventsModel): Array<SortField>          { return state.sortFields; }
+    @Selector() static data(state: StateUserEventsModel):      Record<string, UserEvent> { return state.data; }
+    @Selector() static keys(state: StateUserEventsModel):      Array<string>             { return state.keys; }
+    @Selector() static lookup(state: StateUserEventsModel):    Record<string, Event>     { return state.lookup; }
+    @Selector() static list(state: StateUserEventsModel):      Array<Event>              { return state.list; }
+    @Selector() static offset(state: StateUserEventsModel):    number                    { return state.offset; }
+    @Selector() static pageSize(state: StateUserEventsModel):  number                    { return state.pageSize; }
+    @Selector() static sortField(state: StateUserEventsModel): SortField                 { return state.sortField; }
 
     constructor
     (
         private store: Store,
-        private service: ServiceUserEvents
-    ) { }
+        private service: ServiceUserEvents,
+        private events: ServiceEvents
+    )
+    {
+        super();
+    }
 
 /*
-export class ActionUserEventsGetData   { static readonly type = ActionsUserEvents.GetKeys; constructor() { } }
-export class ActionUserEventsSet       { static readonly type = ActionsUserEvents.Set;     constructor(public payload: Record<string, string | Event>) { } }
-export class ActionUserEventsSort      { static readonly type = ActionsUserEvents.Sort;    constructor(public payload?: Array<SortField>) { } }
 export class ActionUserEventsGet       { static readonly type = ActionsUserEvents.Get;     constructor() { } }
 export class ActionUserEventsAdd       { static readonly type = ActionsUserEvents.Add;     constructor(public payload: Event) { } }
 export class ActionUserEventsRemove    { static readonly type = ActionsUserEvents.Remove;  constructor(public payload: string) { } }
@@ -55,10 +57,10 @@ export class ActionUserEventsRemove    { static readonly type = ActionsUserEvent
                 this.service.get(userId)
             ),
             switchMap((data: Record<string, UserEvent>) =>
-                dispatch(new ActionUserEventsSet(data))
-            ),
-            switchMap(() =>
-                dispatch(new ActionUserEventsSort())
+                dispatch([
+                    new ActionUserEventsSet(data),
+                    new ActionUserEventsSort()
+                ])
             )
         );
     }
@@ -72,44 +74,88 @@ export class ActionUserEventsRemove    { static readonly type = ActionsUserEvent
     @Action(ActionUserEventsSort)
     sortData({ getState, patchState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSort)
     {
-        const state:      StateUserEventsModel      = getState();
-        const data:       Record<string, UserEvent> = StateUserEvents.data(state);
-        const sortFields: Array<SortField>          = payload == null ? StateUserEvents.sortFields(state) : payload;
-        const list:       Array<Event>              = this.sort(data, sort);
+        const state:     StateUserEventsModel      = getState();
+        const data:      Record<string, UserEvent> = StateUserEvents.data(state);
+        const sortField: SortField                 = payload == null ? StateUserEvents.sortField(state) : payload;
+        const keys:      Array<string>             = this.sort(data, sortField);
 
         patchState
         ({
-            list,
-            sortFields
+            keys,
+            sortField
         });
     }
 
     @Action(ActionUserEventsGet)
-    get({ dispatch }: StateContext<StateUserEventsModel>)
+    get({ getState, patchState }: StateContext<StateUserEventsModel>)
     {
-        return dispatch(new ActionUserEventsGetData()).pipe
+        const state: StateUserEventsModel = getState();
+
+        return super.page
         (
-            switchMap(() => dispatch(new ActionUserEventsGetLookup()))
+            this.events,
+            StateUserEvents.keys(state),
+            StateUserEvents.lookup(state),
+            StateUserEvents.list(state),
+            StateUserEvents.pageSize(state),
+            StateUserEvents.offset(state)
+        ).
+        pipe
+        (
+            tap((partial: Partial<StateUserEventsModel>) =>
+                patchState
+                ({
+                    ...state,
+                    ...partial
+                })
+            )
         );
     }
 
     @Action(ActionUserEventsAdd)
     add({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsAdd)
     {
-        const data: Record<string, Event> = StateUserEvents.data(getState());
+        const state: StateUserEventsModel = getState();
+        const event: Event                = payload;
 
-        data[payload.id] = payload;
+        const userEvent: UserEvent =
+        {
+            sort: { name: event.name }
+        };
 
-        patchState({ data });
+        const partial: Partial<StateUserEventsModel> =
+        this.addData
+        (
+            event.id,
+            event,
+            userEvent,
+            StateUserEvents.data(state),
+            StateUserEvents.keys(state),
+            StateUserEvents.lookup(state),
+            StateUserEvents.list(state),
+            StateUserEvents.offset(state),
+            StateUserEvents.sortField
+        );
+
+        patchState(partial);
     }
 
     @Action(ActionUserEventsRemove)
     remove({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsRemove)
     {
-        const data: Record<string, Event> = StateUserEvents.data(getState());
+        const state: StateUserEventsModel = getState();
 
-        delete data[payload];
+        const partial: Partial<StateUserEventsModel> =
+        this.removeData
+        (
+            payload,
+            StateUserEvents.data(state),
+            StateUserEvents.keys(state),
+            StateUserEvents.lookup(state),
+            StateUserEvents.list(state),
+            StateUserEvents.offset(state)
+        );
 
-        patchState({ data });
+        patchState(partial);
     }
 }

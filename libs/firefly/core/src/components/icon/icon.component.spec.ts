@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentIcon } from './icon.component';
+
+import { ComponentIcon } from '@firefly/core';
 
 describe('ComponentIcon', () => {
   let component: ComponentIcon;

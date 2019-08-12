@@ -4,7 +4,7 @@ import { Observable, from, forkJoin } from 'rxjs';
 import { switchMap, take, filter, map, tap } from 'rxjs/operators';
 
 import { Cluster } from '@firefly/core/models';
-import { ServiceBase } from './base.service';
+import { ServiceBase } from '@theory/firebase';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceImages } from './images.service';
 import { FormGroup, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';

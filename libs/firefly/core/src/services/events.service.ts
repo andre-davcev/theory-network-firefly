@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Event, Time, Location } from '@firefly/core/models';
-import { ServiceBase } from './base.service';
+import { ServiceBase } from '@theory/firebase';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, CoreEnum, ValidatorsExtended } from '@theory/core';
 import { RepeatType } from '@firefly/core/enums';
