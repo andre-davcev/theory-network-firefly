@@ -2,7 +2,7 @@ import { Observable, from, combineLatest, forkJoin } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentSnapshot, Action } from '@angular/fire/firestore';
 import { Model } from '@theory/firebase';
 import { map, take, switchMap } from 'rxjs/operators';
-import { MergeType } from '../enums';
+import { MergeType } from '../../../firefly/core/src/enums';
 import { FormGroup } from '@angular/forms';
 import * as firebase from 'firebase/app';
 

@@ -12,17 +12,16 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
     {
         data:     {},
         lookup:   {},
+        keys:     [],
         list:     [],
         offset:   0,
         pageSize: Default.PageSize,
 
-        sortFields:
-        [
-            {
-                name:      'name',
-                type:      TypeOf.String,
-                ascending: true
-            }
-        ]
+        sortField:
+        {
+            name:      'name',
+            type:      TypeOf.String,
+            ascending: true
+        }
     }
 };

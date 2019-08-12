@@ -9,7 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Image, Icon, Asset } from '@firefly/core/models';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
-import { ServiceBase } from './base.service';
+import { ServiceBase } from '@theory/firebase';
 import { ServiceUser } from './user.service';
 
 export class ServiceMedia<T> extends ServiceBase<Image | Icon>

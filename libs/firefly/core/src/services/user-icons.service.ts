@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ServiceBase } from './base.service';
+import { ServiceBase } from '@theory/firebase';
 import { UserIcon } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
