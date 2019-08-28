@@ -2,7 +2,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserEventsModel } from './user-events.state.model';
 import { TypeOf } from '@theory/core';
-import { Default } from '@firefly/core/enums';
+import { Default } from '@theory/state';
 
 export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 {

@@ -1,14 +1,15 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { StateUserEventsOptions } from './user-events.state.options';
+import { switchMap, tap } from 'rxjs/operators';
 
 import { Event, UserEvent } from '@firefly/core/models';
 import { StateUserEventsModel } from './user-events.state.model';
 import { ActionUserEventsAdd, ActionUserEventsReset, ActionUserEventsRemove, ActionUserEventsGetData, ActionUserEventsSort, ActionUserEventsGet, ActionUserEventsSet } from './user-events.actions';
 import { ServiceUserEvents, ServiceEvents } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state';
-import { switchMap, tap } from 'rxjs/operators';
 import { CoreUtil } from '@theory/core/utils';
 import { SortField, StateReferenceTable } from '@theory/state';
+
+import { StateUserEventsOptions } from './user-events.state.options';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 
@@ -32,11 +33,6 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
         super();
     }
 
-/*
-export class ActionUserEventsGet       { static readonly type = ActionsUserEvents.Get;     constructor() { } }
-export class ActionUserEventsAdd       { static readonly type = ActionsUserEvents.Add;     constructor(public payload: Event) { } }
-export class ActionUserEventsRemove    { static readonly type = ActionsUserEvents.Remove;  constructor(public payload: string) { } }
-*/
     @Action(ActionUserEventsReset)
     reset({ patchState }: StateContext<StateUserEventsModel>)
     {
@@ -65,6 +61,27 @@ export class ActionUserEventsRemove    { static readonly type = ActionsUserEvent
         );
     }
 
+    @Action(ActionUserEventsGet)
+    get({ getState, patchState }: StateContext<StateUserEventsModel>)
+    {
+        const state: StateUserEventsModel = getState();
+
+        return super.page
+        (
+            this.events,
+            StateUserEvents.keys(state),
+            StateUserEvents.lookup(state),
+            StateUserEvents.list(state),
+            StateUserEvents.pageSize(state),
+            StateUserEvents.offset(state)
+        ).
+        pipe
+        (
+            tap((partial: Partial<StateUserEventsModel>) =>
+                patchState(partial)
+            )
+        );
+    }
     @Action(ActionUserEventsSet)
     set({ patchState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSet)
     {
@@ -84,32 +101,6 @@ export class ActionUserEventsRemove    { static readonly type = ActionsUserEvent
             keys,
             sortField
         });
-    }
-
-    @Action(ActionUserEventsGet)
-    get({ getState, patchState }: StateContext<StateUserEventsModel>)
-    {
-        const state: StateUserEventsModel = getState();
-
-        return super.page
-        (
-            this.events,
-            StateUserEvents.keys(state),
-            StateUserEvents.lookup(state),
-            StateUserEvents.list(state),
-            StateUserEvents.pageSize(state),
-            StateUserEvents.offset(state)
-        ).
-        pipe
-        (
-            tap((partial: Partial<StateUserEventsModel>) =>
-                patchState
-                ({
-                    ...state,
-                    ...partial
-                })
-            )
-        );
     }
 
     @Action(ActionUserEventsAdd)
@@ -134,7 +125,7 @@ export class ActionUserEventsRemove    { static readonly type = ActionsUserEvent
             StateUserEvents.lookup(state),
             StateUserEvents.list(state),
             StateUserEvents.offset(state),
-            StateUserEvents.sortField
+            StateUserEvents.sortField(state)
         );
 
         patchState(partial);
