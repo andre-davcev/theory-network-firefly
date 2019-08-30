@@ -1,8 +1,10 @@
 export enum ActionsUserStream
 {
-    Get          = '[UserStream] Get',
-    Watch        = '[UserStream] Watch',
-    Page         = '[UserStream] Page',
-    Subscribed   = '[UserStream] Subscribed',
-    Unsubscribed = '[UserStream] Unsubscribed'
+    Reset     = '[UserStream] Reset',
+    GetData   = '[UserStream] Get Data',
+    Get       = '[UserStream] Get',
+    Set       = '[UserStream] Set',
+    Sort      = '[UserStream] Sort',
+    Add       = '[UserStream] Add',
+    Remove    = '[UserStream] Remove'
 }

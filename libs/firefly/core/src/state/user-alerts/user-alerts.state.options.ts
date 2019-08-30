@@ -3,11 +3,11 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { TypeOf } from '@theory/core';
 import { Default } from '@theory/state';
 
-import { StateUserEventsModel } from './user-events.state.model';
+import { StateUserAlertsModel } from './user-alerts.state.model';
 
-export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
+export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
 {
-    name : 'userEvents',
+    name : 'userAlerts',
 
     defaults :
     {
@@ -20,7 +20,7 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 
         sortField:
         {
-            name:      'name',
+            name:      'order',
             type:      TypeOf.String,
             ascending: true
         }

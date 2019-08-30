@@ -1,12 +1,7 @@
-import { Cluster, UserStream } from '@firefly/core/models';
+import { StateReferenceTableModel } from '@theory/state';
+import { StreamItem, UserStreamItem } from '@firefly/core/models';
 
-export interface StateUserStreamModel
+export interface StateUserStreamModel extends StateReferenceTableModel<UserStreamItem, StreamItem>
 {
-    watching: boolean;
-    loading:  boolean;
-    data:     UserStream;
-    clusters: Array<Cluster>;
-    pageSize: number;
-    page:     number;
-    paging:   boolean;
+
 }

@@ -9,6 +9,7 @@ export * from './icons.service';
 export * from './image-events.service';
 export * from './images.service';
 export * from './media.service';
+export * from './stream-items.service';
 export * from './user-alerts.service';
 export * from './user-clusters.service';
 export * from './user-events.service';

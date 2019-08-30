@@ -1,15 +1,23 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { Event, UserEvent } from '@firefly/core/models';
-import { StateUserEventsModel } from './user-events.state.model';
-import { ActionUserEventsAdd, ActionUserEventsReset, ActionUserEventsRemove, ActionUserEventsGetData, ActionUserEventsSort, ActionUserEventsGet, ActionUserEventsSet } from './user-events.actions';
-import { ServiceUserEvents, ServiceEvents } from '@firefly/core/services';
+import { CoreUtil } from '@theory/core';
 import { StateUser } from '@firefly/core/state';
-import { CoreUtil } from '@theory/core/utils';
+import { Event, UserEvent } from '@firefly/core/models';
+import { ServiceUserEvents, ServiceEvents } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
 
+import { StateUserEventsModel } from './user-events.state.model';
 import { StateUserEventsOptions } from './user-events.state.options';
+import {
+    ActionUserEventsAdd,
+    ActionUserEventsReset,
+    ActionUserEventsRemove,
+    ActionUserEventsGetData,
+    ActionUserEventsSort,
+    ActionUserEventsGet,
+    ActionUserEventsSet
+} from './user-events.actions';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 

@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, Cluster, Stream, Alert, Subscription } from '@firefly/core/models';
+import { User, Cluster, StreamItem, Alert, Subscription } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -132,7 +132,7 @@ export class StateUser implements NgxsOnInit
         return Object.keys(StateUser.subscriptionsAllKeys(state)).length > 0;
     }
 
-    @Selector() static stream(state: StateUserModel): Array<Stream> { return state.stream == null ? [] : state.stream; }
+    @Selector() static stream(state: StateUserModel): Array<StreamItem> { return state.stream == null ? [] : state.stream; }
     @Selector() static streamFound(state: StateUserModel): boolean { return StateUser.stream(state).length > 0; }
 
     @Selector() static alerts(state: StateUserModel): Array<Alert> { return state.alerts == null ? [] : state.alerts; }
@@ -356,7 +356,7 @@ export class StateUser implements NgxsOnInit
                     subscribedCount: Object.keys(item.subscribers).length
                 }))
             ),
-            switchMap((stream: Array<Stream>) =>
+            switchMap((stream: Array<StreamItem>) =>
                 dispatch(new ActionUserSetStream(stream))
             )
         );
@@ -417,9 +417,9 @@ export class StateUser implements NgxsOnInit
 
         const clusters:    Record<string, Cluster> = StateUser.clusterMap(state);
         const cluster:     Cluster                 = clusters[key];
-        const stream:      Array<Stream>           = StateUser.stream(state);
-        const streamIndex: number                  = stream.findIndex((s: Stream ) => key === s.id);
-        const streamItem:  Stream                  = stream[streamIndex];
+        const stream:      Array<StreamItem>           = StateUser.stream(state);
+        const streamIndex: number                  = stream.findIndex((s: StreamItem ) => key === s.id);
+        const streamItem:  StreamItem                  = stream[streamIndex];
 
         const subscribers:  Record<string, string>  = cluster.subscribers;
         const subscriptions: Record<string, string> = StateUser.subscriptionsKeys(state);
@@ -451,9 +451,9 @@ export class StateUser implements NgxsOnInit
 
         const clusters:    Record<string, Cluster> = StateUser.clusterMap(state);
         const cluster:     Cluster                 = clusters[key];
-        const stream:      Array<Stream>           = StateUser.stream(state);
-        const streamIndex: number                  = stream.findIndex((s: Stream ) => key === s.id);
-        const streamItem:  Stream                  = stream[streamIndex];
+        const stream:      Array<StreamItem>           = StateUser.stream(state);
+        const streamIndex: number                  = stream.findIndex((s: StreamItem ) => key === s.id);
+        const streamItem:  StreamItem                  = stream[streamIndex];
 
         const subscribers:  Record<string, string>  = cluster.subscribers;
         const subscriptions: Record<string, string> = StateUser.subscriptionsKeys(state);

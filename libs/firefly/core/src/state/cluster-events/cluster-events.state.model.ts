@@ -1,6 +1,8 @@
-import { Event } from '@firefly/core/models';
+import { StateReferenceTableModel } from '@theory/state';
+import { Event, ClusterEvent } from '@firefly/core/models';
 
-export interface StateImageEventsModel
+export interface StateClusterEventsModel extends StateReferenceTableModel<ClusterEvent, Event>
 {
-    data : Record<string, Event>;
+
 }
+

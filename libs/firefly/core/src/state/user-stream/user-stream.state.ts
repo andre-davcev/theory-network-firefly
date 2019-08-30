@@ -1,132 +1,167 @@
-import { State, Selector, Select, Action, StateContext } from '@ngxs/store';
-import { tap, map, filter, switchMap } from 'rxjs/operators';
+import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { switchMap, tap } from 'rxjs/operators';
 
-import { StateUserStreamOptions } from './user-stream.state.options';
+import { CoreUtil } from '@theory/core';
+import { StateUser } from '@firefly/core/state';
+import { StreamItem, UserStreamItem } from '@firefly/core/models';
+import { ServiceUserStream, ServiceStreamItems } from '@firefly/core/services';
+import { SortField, StateReferenceTable } from '@theory/state';
+
 import { StateUserStreamModel } from './user-stream.state.model';
-import { StateUser } from '../user';
-import { Observable, of } from 'rxjs';
-import { Cluster, Stream, UserStream } from '@firefly/core/models';
-import { ActionUserStreamGet, ActionUserStreamWatch, ActionUserStreamPage } from './user-stream.actions';
-import { ServiceUserStream, ServiceClusters } from '@firefly/core/services';
-import { CoreUtil } from '@theory/core/utils';
-import { StateClusterOptions } from '../cluster';
-
+import { StateUserStreamOptions } from './user-stream.state.options';
+import {
+    ActionUserStreamAdd,
+    ActionUserStreamReset,
+    ActionUserStreamRemove,
+    ActionUserStreamGetData,
+    ActionUserStreamSort,
+    ActionUserStreamGet,
+    ActionUserStreamSet
+} from './user-stream.actions';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
 
-export class StateUserStream
+export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamItem, StateUserStreamModel>
 {
-    @Select(StateUser.userId) userId$: Observable<string>;
-
-    @Selector() static watching(state: StateUserStreamModel): boolean        { return state.watching; }
-    @Selector() static loading(state: StateUserStreamModel):  boolean        { return state.loading; }
-    @Selector() static data(state: StateUserStreamModel):     UserStream     { return state.data; }
-    @Selector() static clusters(state: StateUserStreamModel): Array<Cluster> { return state.clusters; }
-    @Selector() static pageSize(state: StateUserStreamModel): number         { return state.pageSize; }
-    @Selector() static page(state: StateUserStreamModel):     number         { return state.page; }
-
-    @Selector() static map(state: StateUserStreamModel): Array<string>
-    {
-        const data: UserStream = StateUserStream.data(state);
-
-        return data == null ? [] : data.data;
-    }
-    @Selector() static count(state: StateUserStreamModel): number { return StateUserStream.map(state).length; }
-    @Selector() static stream(state: StateUserStreamModel): Array<Stream>
-    {
-        return StateUserStream.
-            clusters(state).
-            filter((cluster: Cluster) =>
-                cluster.subscribers[cluster.id] == null
-            ).
-            map((item: Cluster, index: number) =>
-            ({
-                ...item,
-                index:           index,
-                subscribed:      false,
-                subscribedCount: Object.keys(item.subscribers).length
-            }));
-    }
+    @Selector() static data(state: StateUserStreamModel):      Record<string, UserStreamItem> { return state.data; }
+    @Selector() static keys(state: StateUserStreamModel):      Array<string>                  { return state.keys; }
+    @Selector() static lookup(state: StateUserStreamModel):    Record<string, StreamItem>     { return state.lookup; }
+    @Selector() static list(state: StateUserStreamModel):      Array<StreamItem>              { return state.list; }
+    @Selector() static offset(state: StateUserStreamModel):    number                         { return state.offset; }
+    @Selector() static pageSize(state: StateUserStreamModel):  number                         { return state.pageSize; }
+    @Selector() static sortField(state: StateUserStreamModel): SortField                      { return state.sortField; }
 
     constructor
     (
+        private store: Store,
         private service: ServiceUserStream,
-        private cluster: ServiceClusters
-    ) { }
-
-    @Action(ActionUserStreamGet)
-    get({ patchState, getState, dispatch }: StateContext<StateUserStreamModel>)
+        private streamItems: ServiceStreamItems
+    )
     {
-        const watching: boolean = StateUserStream.watching(getState());
-
-        patchState({ watching: true });
-
-        return watching ? of() : dispatch(new ActionUserStreamWatch());
+        super();
     }
 
-    @Action(ActionUserStreamWatch, { cancelUncompleted: true })
-    watch({ patchState, dispatch }: StateContext<StateUserStreamModel>)
+    @Action(ActionUserStreamReset)
+    reset({ patchState }: StateContext<StateUserStreamModel>)
     {
-        return this.userId$.
+        const defaults: StateUserStreamModel = CoreUtil.clone<StateUserStreamModel>(StateUserStreamOptions.defaults);
+
+        patchState(defaults);
+    }
+
+    @Action(ActionUserStreamGetData)
+    getData({ dispatch }: StateContext<StateUserStreamModel>)
+    {
+        const userId: string = this.store.selectSnapshot(StateUser.userId);
+
+        return dispatch(new ActionUserStreamReset()).
         pipe
         (
-            filter((userId: string) => userId != null),
-            tap(() => patchState({ loading: true })),
-            switchMap((userId: string) => this.service.valuesChanges(userId)),
-            tap((data: UserStream) =>
-                patchState
-                ({
-                    data,
-                    page:     StateUserStreamOptions.defaults.page,
-                    clusters: []
-                })
-            ),
             switchMap(() =>
-                dispatch(new ActionUserStreamPage())
+                this.service.get(userId)
             ),
-            tap(() => patchState({ loading: false }))
+            switchMap((data: Record<string, UserStreamItem>) =>
+                dispatch([
+                    new ActionUserStreamSet(data),
+                    new ActionUserStreamSort()
+                ])
+            )
         );
     }
 
-    @Action(ActionUserStreamPage)
-    page({ patchState, getState }: StateContext<StateUserStreamModel>)
+    @Action(ActionUserStreamGet)
+    get({ getState, patchState }: StateContext<StateUserStreamModel>)
     {
-        const empty:      Cluster                = StateClusterOptions.defaults.empty;
-        const state:      StateUserStreamModel   = getState();
-        const data:       Array<string>          = StateUserStream.map(state);
-        const clusters:   Array<Cluster>         = StateUserStream.clusters(state);
-        const pageSize:   number                 = StateUserStream.pageSize(state);
-        const pageNumber: number                 = StateUserStream.page(state);
+        const state: StateUserStreamModel = getState();
 
-        const slice: Array<string> = CoreUtil.page<string>(data, clusters, pageSize, pageNumber);
+        return super.page
+        (
+            this.streamItems,
+            StateUserStream.keys(state),
+            StateUserStream.lookup(state),
+            StateUserStream.list(state),
+            StateUserStream.pageSize(state),
+            StateUserStream.offset(state)
+        ).
+        pipe
+        (
+            tap((partial: Partial<StateUserStreamModel>) =>
+                patchState(partial)
+            )
+        );
+    }
+    @Action(ActionUserStreamSet)
+    set({ patchState }: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamSet)
+    {
+        patchState({ data: payload == null ? {} : payload });
+    }
 
-        return slice.length === 0 ? of() :
-            of(slice).
-            pipe
-            (
-                tap(() => patchState({ paging: true })),
-                switchMap((page: Array<string>) => this.cluster.snapshotFK(slice)),
-                map((page: Array<Cluster>) =>
-                    page.
-                    map((item: Cluster) =>
-                        ({
-                            ...CoreUtil.clone<Cluster>(empty),
-                            ...item
-                        })
-                    )
-                ),
-                tap((page: Array<Cluster>) =>
-                    patchState
-                    ({
-                        page: pageNumber + 1,
-                        paging: false,
-                        clusters:
-                        [
-                            ...clusters,
-                            ...page
-                        ]
-                    })
-                )
+    @Action(ActionUserStreamSort)
+    sortData({ getState, patchState }: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamSort)
+    {
+        const state:     StateUserStreamModel      = getState();
+        const data:      Record<string, UserStreamItem> = StateUserStream.data(state);
+        const sortField: SortField                 = payload == null ? StateUserStream.sortField(state) : payload;
+        const keys:      Array<string>             = this.sort(data, sortField);
+
+        patchState
+        ({
+            keys,
+            sortField
+        });
+    }
+
+    @Action(ActionUserStreamAdd)
+    add({ patchState, getState }: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamAdd)
+    {
+        const state: StateUserStreamModel           = getState();
+        const streamItem: StreamItem                = payload;
+        const data:  Record<string, UserStreamItem> = StateUserStream.data(state);
+
+        Object.
+            keys(data).
+            forEach((key: string) =>
+                data[key].sort.order += 1
             );
+
+        const userStreamItem: UserStreamItem =
+        {
+            sort: { order: 0 }
+        };
+
+        const partial: Partial<StateUserStreamModel> =
+        this.addData
+        (
+            streamItem.id,
+            streamItem,
+            userStreamItem,
+            StateUserStream.data(state),
+            StateUserStream.keys(state),
+            StateUserStream.lookup(state),
+            StateUserStream.list(state),
+            StateUserStream.offset(state),
+            StateUserStream.sortField(state)
+        );
+
+        patchState(partial);
+    }
+
+    @Action(ActionUserStreamRemove)
+    remove({ patchState, getState }: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamRemove)
+    {
+        const state: StateUserStreamModel = getState();
+
+        const partial: Partial<StateUserStreamModel> =
+        this.removeData
+        (
+            payload,
+            StateUserStream.data(state),
+            StateUserStream.keys(state),
+            StateUserStream.lookup(state),
+            StateUserStream.list(state),
+            StateUserStream.offset(state)
+        );
+
+        patchState(partial);
     }
 }
