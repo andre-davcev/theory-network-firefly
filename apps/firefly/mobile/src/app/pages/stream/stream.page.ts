@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { Stream, StateUser, ActionUserSubscribe, ActionUserUnsubscribe, Cluster } from '@firefly/core';
+import { StreamItem, StateUser, ActionUserSubscribe, ActionUserUnsubscribe, Cluster } from '@firefly/core';
 
 @Component
 ({
@@ -13,7 +13,7 @@ import { Stream, StateUser, ActionUserSubscribe, ActionUserUnsubscribe, Cluster 
 
 export class PageStream
 {
-    @Select(StateUser.stream) stream$: Observable<Array<Stream>>;
+    @Select(StateUser.stream) stream$: Observable<Array<StreamItem>>;
 
     constructor(private store: Store) { }
 
@@ -22,7 +22,7 @@ export class PageStream
         //this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
-    public toggle(subscribed: boolean, stream: Stream): void
+    public toggle(subscribed: boolean, stream: StreamItem): void
     {
         if (subscribed)
         {

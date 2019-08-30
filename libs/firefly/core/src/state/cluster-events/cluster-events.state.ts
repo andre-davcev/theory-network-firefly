@@ -1,70 +1,161 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { switchMap, tap } from 'rxjs/operators';
 
-import { StateImageEventsModel } from './cluster-events.state.model';
 import { CoreUtil } from '@theory/core';
-import { tap, switchMap } from 'rxjs/operators';
-import { Event } from '@firefly/core/models';
-import { ServiceImageEvents } from '@firefly/core/services';
-import { StateImageEventsOptions } from './cluster-events.state.options';
-import { ActionImageEventsReset, ActionImageEventsGet, ActionImageEventsAdd, ActionImageEventsRemove } from './cluster-events.actions';
-import { StateImage } from '../image';
+import { SortField, StateReferenceTable } from '@theory/state';
+import { Event, ClusterEvent } from '@firefly/core/models';
+import { ServiceClusterEvents, ServiceEvents } from '@firefly/core/services';
+import { StateCluster } from '@firefly/core/state';
 
-@State<StateImageEventsModel>(StateImageEventsOptions)
+import { StateClusterEventsModel } from './cluster-events.state.model';
+import { StateClusterEventsOptions } from './cluster-events.state.options';
+import {
+    ActionClusterEventsAdd,
+    ActionClusterEventsReset,
+    ActionClusterEventsRemove,
+    ActionClusterEventsGetData,
+    ActionClusterEventsSort,
+    ActionClusterEventsGet,
+    ActionClusterEventsSet
+} from './cluster-events.actions';
 
-export class StateImageEvents
+@State<StateClusterEventsModel>(StateClusterEventsOptions)
+
+export class StateUserEvents extends StateReferenceTable<ClusterEvent, Event, StateClusterEventsModel>
 {
-    @Selector() static data(state: StateImageEventsModel): Record<string, Event> { return state.data; }
+    @Selector() static data(state: StateClusterEventsModel):      Record<string, ClusterEvent> { return state.data; }
+    @Selector() static keys(state: StateClusterEventsModel):      Array<string>             { return state.keys; }
+    @Selector() static lookup(state: StateClusterEventsModel):    Record<string, Event>     { return state.lookup; }
+    @Selector() static list(state: StateClusterEventsModel):      Array<Event>              { return state.list; }
+    @Selector() static offset(state: StateClusterEventsModel):    number                    { return state.offset; }
+    @Selector() static pageSize(state: StateClusterEventsModel):  number                    { return state.pageSize; }
+    @Selector() static sortField(state: StateClusterEventsModel): SortField                 { return state.sortField; }
 
     constructor
     (
         private store: Store,
-        private service: ServiceImageEvents
-    ) { }
-
-    @Action(ActionImageEventsReset)
-    reset({ patchState }: StateContext<StateImageEventsModel>)
+        private service: ServiceClusterEvents,
+        private events: ServiceEvents
+    )
     {
-        const defaults: StateImageEventsModel = CoreUtil.clone<StateImageEventsModel>(StateImageEventsOptions.defaults);
+        super();
+    }
+
+    @Action(ActionClusterEventsReset)
+    reset({ patchState }: StateContext<StateClusterEventsModel>)
+    {
+        const defaults: StateClusterEventsModel = CoreUtil.clone<StateClusterEventsModel>(StateClusterEventsOptions.defaults);
 
         patchState(defaults);
     }
 
-    @Action(ActionImageEventsGet)
-    get({ patchState, dispatch }: StateContext<StateImageEventsModel>)
+    @Action(ActionClusterEventsGetData)
+    getData({ dispatch }: StateContext<StateClusterEventsModel>)
     {
-        const id: string = this.store.selectSnapshot(StateImage.id);
+        const userId: string = this.store.selectSnapshot(StateUser.userId);
 
-        return dispatch(new ActionImageEventsReset()).pipe
+        return dispatch(new ActionUserEventsReset()).
+        pipe
         (
             switchMap(() =>
-                this.service.get(id)
+                this.service.get(userId)
             ),
-            switchMap((data: Record<string, string>) =>
-                this.service.snapshotFK<Event>(data)
-            ),
-            tap((data: Record<string, Event>) =>
-                patchState({ data })
+            switchMap((data: Record<string, UserEvent>) =>
+                dispatch([
+                    new ActionUserEventsSet(data),
+                    new ActionUserEventsSort()
+                ])
             )
         );
     }
 
-    @Action(ActionImageEventsAdd)
-    add({ patchState, getState }: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsAdd)
+    @Action(ActionUserEventsGet)
+    get({ getState, patchState }: StateContext<StateUserEventsModel>)
     {
-        const data: Record<string, Event> = StateImageEvents.data(getState());
+        const state: StateUserEventsModel = getState();
 
-        data[payload.id] = payload;
-
-        patchState({ data });
+        return super.page
+        (
+            this.events,
+            StateUserEvents.keys(state),
+            StateUserEvents.lookup(state),
+            StateUserEvents.list(state),
+            StateUserEvents.pageSize(state),
+            StateUserEvents.offset(state)
+        ).
+        pipe
+        (
+            tap((partial: Partial<StateUserEventsModel>) =>
+                patchState(partial)
+            )
+        );
+    }
+    @Action(ActionUserEventsSet)
+    set({ patchState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSet)
+    {
+        patchState({ data: payload == null ? {} : payload });
     }
 
-    @Action(ActionImageEventsRemove)
-    remove({ patchState, getState }: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsRemove)
+    @Action(ActionUserEventsSort)
+    sortData({ getState, patchState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSort)
     {
-        const data: Record<string, Event> = StateImageEvents.data(getState());
+        const state:     StateUserEventsModel      = getState();
+        const data:      Record<string, UserEvent> = StateUserEvents.data(state);
+        const sortField: SortField                 = payload == null ? StateUserEvents.sortField(state) : payload;
+        const keys:      Array<string>             = this.sort(data, sortField);
 
-        delete data[payload];
+        patchState
+        ({
+            keys,
+            sortField
+        });
+    }
 
-        patchState({ data });
+    @Action(ActionUserEventsAdd)
+    add({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsAdd)
+    {
+        const state: StateUserEventsModel = getState();
+        const event: Event                = payload;
+
+        const userEvent: UserEvent =
+        {
+            sort: { name: event.name }
+        };
+
+        const partial: Partial<StateUserEventsModel> =
+        this.addData
+        (
+            event.id,
+            event,
+            userEvent,
+            StateUserEvents.data(state),
+            StateUserEvents.keys(state),
+            StateUserEvents.lookup(state),
+            StateUserEvents.list(state),
+            StateUserEvents.offset(state),
+            StateUserEvents.sortField(state)
+        );
+
+        patchState(partial);
+    }
+
+    @Action(ActionUserEventsRemove)
+    remove({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsRemove)
+    {
+        const state: StateUserEventsModel = getState();
+
+        const partial: Partial<StateUserEventsModel> =
+        this.removeData
+        (
+            payload,
+            StateUserEvents.data(state),
+            StateUserEvents.keys(state),
+            StateUserEvents.lookup(state),
+            StateUserEvents.list(state),
+            StateUserEvents.offset(state)
+        );
+
+        patchState(partial);
     }
 }
+

@@ -13,7 +13,7 @@ export * from './image-event.model';
 export * from './image.model';
 export * from './location.model';
 export * from './pin.model';
-export * from './stream.model';
+export * from './stream-item.model';
 export * from './subscription.model';
 export * from './time.model';
 export * from './user-alert.model';
