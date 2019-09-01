@@ -18,5 +18,5 @@ export * from './user-icons.service';
 export * from './user-images.service';
 export * from './user-stream.service';
 export * from './user-subscriptions.service';
-export * from './user.service';
+export * from './users.service';
 export * from './util.service';

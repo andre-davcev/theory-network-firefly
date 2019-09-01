@@ -3,11 +3,11 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { TypeOf } from '@theory/core';
 import { Default } from '@theory/state';
 
-import { StateClusterEventsModel } from './cluster-events.state.model';
+import { StateClusterSubscribersModel } from './cluster-subscribers.state.model';
 
-export const StateClusterEventsOptions: StoreOptions<StateClusterEventsModel> =
+export const StateClusterSubscribersOptions: StoreOptions<StateClusterSubscribersModel> =
 {
-    name : 'clusterEvents',
+    name : 'clusterSubscribers',
 
     defaults :
     {

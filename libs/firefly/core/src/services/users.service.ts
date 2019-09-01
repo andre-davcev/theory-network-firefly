@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User as FirebaseUser, UserInfo } from 'firebase/app';
-import { ServiceBase } from '@theory/firebase';
-import { User } from '../models';
-import { AuthProvider } from '@theory/firebase';
+import { ServiceBase, AuthProvider } from '@theory/firebase';
+import { User } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUser extends ServiceBase<User>
+export class ServiceUsers extends ServiceBase<User>
 {
     constructor(firestore: AngularFirestore)
     {

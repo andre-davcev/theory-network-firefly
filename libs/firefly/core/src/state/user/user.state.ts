@@ -30,7 +30,7 @@ import {
   ActionUserSubscribe,
   ActionUserUnsubscribe
 } from './user.actions';
-import { ServiceUser, ServiceClusters, ServiceUserAlerts } from '@firefly/core/services';
+import { ServiceUsers, ServiceClusters, ServiceUserAlerts } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
 import { StateClusterOptions } from '../cluster/cluster.state.options';
 
@@ -40,7 +40,7 @@ export class StateUser implements NgxsOnInit
     constructor
     (
         private fireAuth: AngularFireAuth,
-        private service: ServiceUser,
+        private service: ServiceUsers,
         private cluster: ServiceClusters,
         private alerts: ServiceUserAlerts
     ) { }

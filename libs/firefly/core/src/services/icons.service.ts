@@ -6,7 +6,7 @@ import { switchMap, filter, take, map, mergeMap } from 'rxjs/operators';
 import { Icon } from '@firefly/core/models';
 import { ServiceMedia } from './media.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { ServiceUser } from './user.service';
+import { ServiceUsers } from './users.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { Cluster } from '@firefly/core/models';
@@ -18,7 +18,7 @@ export class ServiceIcons extends ServiceMedia<Icon>
     (
         firestore: AngularFirestore,
         storage:   AngularFireStorage,
-        user:      ServiceUser,
+        user:      ServiceUsers,
         webview:   WebView
     )
     {

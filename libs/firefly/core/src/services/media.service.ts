@@ -10,12 +10,12 @@ import { Image, Icon, Asset } from '@firefly/core/models';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { ServiceBase } from '@theory/firebase';
-import { ServiceUser } from './user.service';
+import { ServiceUsers } from './users.service';
 
 export class ServiceMedia<T> extends ServiceBase<Image | Icon>
 {
     private _storage: AngularFireStorage;
-    private _user:    ServiceUser;
+    private _user:    ServiceUsers;
     private _webview: WebView;
 
     constructor
@@ -23,7 +23,7 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         name:      string,
         firestore: AngularFirestore,
         storage:   AngularFireStorage,
-        user:      ServiceUser,
+        user:      ServiceUsers,
         webview:   WebView
     )
     {
@@ -105,12 +105,12 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         this._storage = storage;
     }
 
-    protected get user(): ServiceUser
+    protected get user(): ServiceUsers
     {
         return this._user;
     }
 
-    protected set user(user: ServiceUser)
+    protected set user(user: ServiceUsers)
     {
         this._user = user;
     }
