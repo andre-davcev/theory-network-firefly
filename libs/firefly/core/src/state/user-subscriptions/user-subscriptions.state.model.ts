@@ -1,10 +1,7 @@
-import { Cluster, UserSubscriptions } from '@firefly/core/models';
+import { StateReferenceTableModel } from '@theory/state';
+import { Subscription, UserSubscription } from '@firefly/core/models';
 
-export interface StateUserSubscriptionsModel
+export interface StateUserSubscriptionsModel extends StateReferenceTableModel<UserSubscription, Subscription>
 {
-    loaded : boolean;
-    empty  : UserSubscriptions;
-    data   : UserSubscriptions;
-    onMap  : Record<string, Cluster>;
-    offMap : Record<string, Cluster>;
+
 }
