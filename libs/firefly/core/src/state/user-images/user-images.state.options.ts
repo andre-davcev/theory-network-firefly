@@ -3,11 +3,11 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { TypeOf } from '@theory/core';
 import { Default } from '@theory/state';
 
-import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
+import { StateUserImagesModel } from './user-images.state.model';
 
-export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsModel> =
+export const StateUserImagesOptions: StoreOptions<StateUserImagesModel> =
 {
-    name : 'userSubscriptions',
+    name : 'userImages',
 
     defaults :
     {

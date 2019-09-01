@@ -1,9 +1,10 @@
 export enum ActionsUserSubscriptions
 {
-    Watch    = '[UserSubscriptions] Watch',
-    WatchOn  = '[UserSubscriptions] Watch On',
-    WatchOff = '[UserSubscriptions] Watch Off',
-    On       = '[UserSubscriptions] On',
-    Off      = '[UserSubscriptions] Off',
-    Delete   = '[UserSubscriptions] Delete'
+    Reset     = '[UserSubscriptions] Reset',
+    GetData   = '[UserSubscriptions] Get Data',
+    Get       = '[UserSubscriptions] Get',
+    Set       = '[UserSubscriptions] Set',
+    Sort      = '[UserSubscriptions] Sort',
+    Add       = '[UserSubscriptions] Add',
+    Remove    = '[UserSubscriptions] Remove'
 }

@@ -81,7 +81,7 @@ export class StateReferenceTable<R extends ReferenceTable, T, S extends StateRef
                     slice.map((id: string) =>
                         lookup[id] != null ?
                         of(lookup[id]) :
-                        service.valuesChanges(id).
+                        (service.valuesChanges(id) as Observable<T>).
                         pipe
                         (
                             take(1),

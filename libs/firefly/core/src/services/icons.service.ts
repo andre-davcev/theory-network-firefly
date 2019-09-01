@@ -25,7 +25,7 @@ export class ServiceIcons extends ServiceMedia<Icon>
         super('icons', firestore, storage, user, webview);
     }
 
-    get(userId: String): Observable<Array<Icon>>
+    getIcons(userId: String): Observable<Array<Icon>>
     {
         return this.firestore.collection<Icon>('icons', ref =>
         {

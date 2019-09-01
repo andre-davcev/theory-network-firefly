@@ -8,10 +8,11 @@ import { ServiceClusters, ServiceIcons, ServiceUser } from '@firefly/core/servic
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
 import { ActionGetClusters, ActionClusterSet, ActionClusterSetId, ActionClusterCreate, ActionClusterSetIcon, ActionClusterWatch } from './cluster.actions';
-import { CoreEnum, FormNgxs } from '@theory/core';
+import { CoreEnum } from '@theory/core';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 import { ActionMapSearchResultClear } from '../../../../../mapbox';
+import { FormNgxs } from '@theory/state';
 
 @State<StateClusterModel>(StateClusterOptions)
 
