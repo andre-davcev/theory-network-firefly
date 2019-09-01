@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 
 import { ServiceMedia } from './media.service';
 import { Image, Event } from '../models';
-import { ServiceUser } from './user.service';
+import { ServiceUsers } from './users.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Observable } from 'rxjs';
 import { switchMap, mergeMap, map } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class ServiceImages extends ServiceMedia<Image>
     (
         firestore: AngularFirestore,
         storage:   AngularFireStorage,
-        user:      ServiceUser,
+        user:      ServiceUsers,
         webview:   WebView
     )
     {

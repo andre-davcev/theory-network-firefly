@@ -5,4 +5,3 @@ export interface StateClusterEventsModel extends StateReferenceTableModel<Cluste
 {
 
 }
-

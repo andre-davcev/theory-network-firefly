@@ -1,5 +1,5 @@
 import { SortField } from '@theory/state';
-import { Event, ClusterEvent } from '@firefly/core/models';
+import { Event, ClusterEvent} from '@firefly/core/models';
 
 import { ActionsClusterEvents } from './cluster-events.actions.enum';
 
@@ -10,4 +10,3 @@ export class ActionClusterEventsSet       { static readonly type = ActionsCluste
 export class ActionClusterEventsSort      { static readonly type = ActionsClusterEvents.Sort;      constructor(public payload?: SortField) { } }
 export class ActionClusterEventsAdd       { static readonly type = ActionsClusterEvents.Add;       constructor(public payload: Event) { } }
 export class ActionClusterEventsRemove    { static readonly type = ActionsClusterEvents.Remove;    constructor(public payload: string) { } }
-

@@ -8,4 +8,3 @@ export enum ActionsClusterEvents
     Add       = '[ClusterEvents] Add',
     Remove    = '[ClusterEvents] Remove'
 }
-

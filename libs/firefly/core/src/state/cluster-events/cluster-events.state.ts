@@ -2,10 +2,10 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateUser } from '@firefly/core/state';
 import { Event, ClusterEvent } from '@firefly/core/models';
 import { ServiceClusterEvents, ServiceEvents } from '@firefly/core/services';
-import { StateCluster } from '@firefly/core/state';
+import { SortField, StateReferenceTable } from '@theory/state';
 
 import { StateClusterEventsModel } from './cluster-events.state.model';
 import { StateClusterEventsOptions } from './cluster-events.state.options';
@@ -21,15 +21,15 @@ import {
 
 @State<StateClusterEventsModel>(StateClusterEventsOptions)
 
-export class StateUserEvents extends StateReferenceTable<ClusterEvent, Event, StateClusterEventsModel>
+export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event, StateClusterEventsModel>
 {
     @Selector() static data(state: StateClusterEventsModel):      Record<string, ClusterEvent> { return state.data; }
-    @Selector() static keys(state: StateClusterEventsModel):      Array<string>             { return state.keys; }
-    @Selector() static lookup(state: StateClusterEventsModel):    Record<string, Event>     { return state.lookup; }
-    @Selector() static list(state: StateClusterEventsModel):      Array<Event>              { return state.list; }
-    @Selector() static offset(state: StateClusterEventsModel):    number                    { return state.offset; }
-    @Selector() static pageSize(state: StateClusterEventsModel):  number                    { return state.pageSize; }
-    @Selector() static sortField(state: StateClusterEventsModel): SortField                 { return state.sortField; }
+    @Selector() static keys(state: StateClusterEventsModel):      Array<string>                { return state.keys; }
+    @Selector() static lookup(state: StateClusterEventsModel):    Record<string, Event>        { return state.lookup; }
+    @Selector() static list(state: StateClusterEventsModel):      Array<Event>                 { return state.list; }
+    @Selector() static offset(state: StateClusterEventsModel):    number                       { return state.offset; }
+    @Selector() static pageSize(state: StateClusterEventsModel):  number                       { return state.pageSize; }
+    @Selector() static sortField(state: StateClusterEventsModel): SortField                    { return state.sortField; }
 
     constructor
     (
@@ -54,54 +54,54 @@ export class StateUserEvents extends StateReferenceTable<ClusterEvent, Event, St
     {
         const userId: string = this.store.selectSnapshot(StateUser.userId);
 
-        return dispatch(new ActionUserEventsReset()).
+        return dispatch(new ActionClusterEventsReset()).
         pipe
         (
             switchMap(() =>
                 this.service.get(userId)
             ),
-            switchMap((data: Record<string, UserEvent>) =>
+            switchMap((data: Record<string, ClusterEvent>) =>
                 dispatch([
-                    new ActionUserEventsSet(data),
-                    new ActionUserEventsSort()
+                    new ActionClusterEventsSet(data),
+                    new ActionClusterEventsSort()
                 ])
             )
         );
     }
 
-    @Action(ActionUserEventsGet)
-    get({ getState, patchState }: StateContext<StateUserEventsModel>)
+    @Action(ActionClusterEventsGet)
+    get({ getState, patchState }: StateContext<StateClusterEventsModel>)
     {
-        const state: StateUserEventsModel = getState();
+        const state: StateClusterEventsModel = getState();
 
         return super.page
         (
             this.events,
-            StateUserEvents.keys(state),
-            StateUserEvents.lookup(state),
-            StateUserEvents.list(state),
-            StateUserEvents.pageSize(state),
-            StateUserEvents.offset(state)
+            StateClusterEvents.keys(state),
+            StateClusterEvents.lookup(state),
+            StateClusterEvents.list(state),
+            StateClusterEvents.pageSize(state),
+            StateClusterEvents.offset(state)
         ).
         pipe
         (
-            tap((partial: Partial<StateUserEventsModel>) =>
+            tap((partial: Partial<StateClusterEventsModel>) =>
                 patchState(partial)
             )
         );
     }
-    @Action(ActionUserEventsSet)
-    set({ patchState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSet)
+    @Action(ActionClusterEventsSet)
+    set({ patchState }: StateContext<StateClusterEventsModel>, { payload }: ActionClusterEventsSet)
     {
         patchState({ data: payload == null ? {} : payload });
     }
 
-    @Action(ActionUserEventsSort)
-    sortData({ getState, patchState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSort)
+    @Action(ActionClusterEventsSort)
+    sortData({ getState, patchState }: StateContext<StateClusterEventsModel>, { payload }: ActionClusterEventsSort)
     {
-        const state:     StateUserEventsModel      = getState();
-        const data:      Record<string, UserEvent> = StateUserEvents.data(state);
-        const sortField: SortField                 = payload == null ? StateUserEvents.sortField(state) : payload;
+        const state:     StateClusterEventsModel      = getState();
+        const data:      Record<string, ClusterEvent> = StateClusterEvents.data(state);
+        const sortField: SortField                 = payload == null ? StateClusterEvents.sortField(state) : payload;
         const keys:      Array<string>             = this.sort(data, sortField);
 
         patchState
@@ -111,51 +111,50 @@ export class StateUserEvents extends StateReferenceTable<ClusterEvent, Event, St
         });
     }
 
-    @Action(ActionUserEventsAdd)
-    add({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsAdd)
+    @Action(ActionClusterEventsAdd)
+    add({ patchState, getState }: StateContext<StateClusterEventsModel>, { payload }: ActionClusterEventsAdd)
     {
-        const state: StateUserEventsModel = getState();
-        const event: Event                = payload;
+        const state: StateClusterEventsModel = getState();
+        const event: Event                   = payload;
 
-        const userEvent: UserEvent =
+        const clusterEvent: ClusterEvent =
         {
             sort: { name: event.name }
         };
 
-        const partial: Partial<StateUserEventsModel> =
+        const partial: Partial<StateClusterEventsModel> =
         this.addData
         (
             event.id,
             event,
-            userEvent,
-            StateUserEvents.data(state),
-            StateUserEvents.keys(state),
-            StateUserEvents.lookup(state),
-            StateUserEvents.list(state),
-            StateUserEvents.offset(state),
-            StateUserEvents.sortField(state)
+            clusterEvent,
+            StateClusterEvents.data(state),
+            StateClusterEvents.keys(state),
+            StateClusterEvents.lookup(state),
+            StateClusterEvents.list(state),
+            StateClusterEvents.offset(state),
+            StateClusterEvents.sortField(state)
         );
 
         patchState(partial);
     }
 
-    @Action(ActionUserEventsRemove)
-    remove({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsRemove)
+    @Action(ActionClusterEventsRemove)
+    remove({ patchState, getState }: StateContext<StateClusterEventsModel>, { payload }: ActionClusterEventsRemove)
     {
-        const state: StateUserEventsModel = getState();
+        const state: StateClusterEventsModel = getState();
 
-        const partial: Partial<StateUserEventsModel> =
+        const partial: Partial<StateClusterEventsModel> =
         this.removeData
         (
             payload,
-            StateUserEvents.data(state),
-            StateUserEvents.keys(state),
-            StateUserEvents.lookup(state),
-            StateUserEvents.list(state),
-            StateUserEvents.offset(state)
+            StateClusterEvents.data(state),
+            StateClusterEvents.keys(state),
+            StateClusterEvents.lookup(state),
+            StateClusterEvents.list(state),
+            StateClusterEvents.offset(state)
         );
 
         patchState(partial);
     }
 }
-
