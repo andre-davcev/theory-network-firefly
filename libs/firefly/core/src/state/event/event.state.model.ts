@@ -1,5 +1,5 @@
 import { Event } from '@firefly/core/models';
-import { FormNgxs } from '@theory/core';
+import { FormNgxs } from '@theory/state';
 import { FormGroup } from '@angular/forms';
 
 export interface StateEventModel

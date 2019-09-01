@@ -20,7 +20,8 @@ import {
   ActionEventDelete,
   ActionEventReset
 } from './event.actions';
-import { CoreEnum, FormNgxs, FormNgxsStatus, CoreUtil } from '@theory/core';
+import { CoreEnum, CoreUtil } from '@theory/core';
+import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 import { ActionMapSearchResultClear } from '@theory/mapbox';
