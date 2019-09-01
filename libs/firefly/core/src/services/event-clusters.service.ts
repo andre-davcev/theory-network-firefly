@@ -5,7 +5,7 @@ import { ServiceBase } from '@theory/firebase';
 import { EventCluster } from '@firefly/core/models';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceEventsClusters extends ServiceBase<Record<string, EventCluster>>
+export class ServiceEventClusters extends ServiceBase<Record<string, EventCluster>>
 {
     constructor(firestore: AngularFirestore)
     {

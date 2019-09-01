@@ -3,11 +3,11 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { TypeOf } from '@theory/core';
 import { Default } from '@theory/state';
 
-import { StateImageEventsModel } from './image-events.state.model';
+import { StateIconClustersModel } from './icon-clusters.state.model';
 
-export const StateImageEventsOptions: StoreOptions<StateImageEventsModel> =
+export const StateIconClustersOptions: StoreOptions<StateIconClustersModel> =
 {
-    name : 'imageEvents',
+    name : 'iconClusters',
 
     defaults :
     {
