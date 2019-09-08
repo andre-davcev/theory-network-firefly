@@ -7,6 +7,6 @@ export interface StateEventModel
     empty     : Event;
     form      : FormNgxs;
     formGroup : FormGroup;
-    clusters  : Record<string, Event>;
+
     imageUrl  : string;
 }
