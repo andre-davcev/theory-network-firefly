@@ -9,7 +9,8 @@ export class ActionEventGet         { static readonly type = ActionsEvent.Get;  
 export class ActionEventCreate      { static readonly type = ActionsEvent.Create;    constructor() { } }
 export class ActionEventDelete      { static readonly type = ActionsEvent.Delete;    constructor() { } }
 export class ActionEventPatch       { static readonly type = ActionsEvent.Patch;     constructor() { } }
-export class ActionEventPatchForm   { static readonly type = ActionsEvent.PatchForm; constructor(public payload: Event) {} }
+export class ActionEventPatchForm   { static readonly type = ActionsEvent.PatchForm; constructor(public payload: Partial<Event>) {} }
+
 export class ActionEventLocationSet { static readonly type = ActionsEvent.LocationSet;   constructor(public payload: Result) { } }
 export class ActionEventImageSet    { static readonly type = ActionsEvent.ImageSet;      constructor(public payload?: string) { } }
 export class ActionEventTimeSet     { static readonly type = ActionsEvent.TimeSet;       constructor(public key: 'start' | 'end', public value: string) { } }

@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { FormNgxs } from '@theory/core';
+import { FormNgxs } from '@theory/state';
 import { Cluster } from '@firefly/core/models';
 
 export interface StateClusterModel
