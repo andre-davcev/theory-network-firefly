@@ -4,6 +4,7 @@ export * from './cluster-subscribers';
 export * from './event';
 export * from './event-clusters';
 export * from './grid';
+export * from './icons';
 export * from './icon';
 export * from './icon-clusters';
 export * from './image';
