@@ -1,20 +1,31 @@
+import { FormGroup } from '@angular/forms';
+import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
+import { of } from 'rxjs';
+import { map, switchMap, filter, tap, catchError } from 'rxjs/operators';
 
+import { CoreEnum, CoreUtil } from '@theory/core';
+import { StorageFormat } from '@theory/firebase';
+import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { Icon } from '@firefly/core/models';
 import { ServiceIcons } from '@firefly/core/services';
+import { Upload } from '@firefly/core/interfaces';
+import { StateUser } from '@firefly/core/state/user';
+
 import { StateIconModel } from './icon.state.model';
 import { StateIconOptions } from './icon.state.options';
-import { FormNgxs, FormNgxsStatus } from '@theory/state';
-import { FormGroup } from '@angular/forms';
-import { CoreEnum, CoreUtil } from '@theory/core';
-import { ActionIconReset, ActionIconSet, ActionIconGet, ActionIconPatch, ActionIconCreate, ActionIconSave, ActionIconDelete, ActionIconUpload, ActionIconUploadClear } from './icon.actions';
-import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { StateUser } from '@firefly/core/state/user';
-import { map, switchMap, filter, tap, catchError } from 'rxjs/operators';
-import { Upload } from '@firefly/core/interfaces';
-import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
-import { StorageFormat } from '@theory/firebase';
-import { of } from 'rxjs';
+import {
+  ActionIconReset,
+  ActionIconSet,
+  ActionIconGet,
+  ActionIconPatch,
+  ActionIconCreate,
+  ActionIconSave,
+  ActionIconDelete,
+  ActionIconUpload,
+  ActionIconUploadClear
+} from './icon.actions';
 
 @State<StateIconModel>(StateIconOptions)
 

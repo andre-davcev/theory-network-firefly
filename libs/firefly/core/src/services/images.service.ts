@@ -51,7 +51,7 @@ export class ServiceImages extends ServiceMedia<Image>
         return image;
     }
 
-    public createWithUpload(event: Event, imagePath: string): Observable<Event>
+    public createWithUploadFromEvent(event: Event, imagePath: string): Observable<Event>
     {
         const image:      Image = this.fromEvent(event);
         const bucketPath: string       = this.toBucketPath(image.id);

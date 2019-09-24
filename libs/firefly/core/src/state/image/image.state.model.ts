@@ -1,14 +1,7 @@
-import { Upload } from '@firefly/core/interfaces';
+import { Upload, StateAssetModel } from '@firefly/core/interfaces';
 import { Image } from '@firefly/core/models';
-import { FormNgxs } from '@theory/core/interfaces';
-import { FormGroup } from '@angular/forms';
 
-export interface StateImageModel
+export interface StateImageModel extends StateAssetModel<Image>
 {
-    empty     : Image;
-    form      : FormNgxs;
-    formGroup : FormGroup;
-    url       : string;
-
-    upload : Upload;
+    upload: Upload;
 }
