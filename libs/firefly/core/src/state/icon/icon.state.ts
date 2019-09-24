@@ -1,4 +1,4 @@
-import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 
 import { Icon } from '@firefly/core/models';
 import { ServiceIcons } from '@firefly/core/services';
@@ -7,8 +7,10 @@ import { StateIconOptions } from './icon.state.options';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { FormGroup } from '@angular/forms';
 import { CoreEnum, CoreUtil } from '@theory/core';
-import { ActionIconReset, ActionIconSet, ActionIconGet } from './icon.actions';
-import { SetFormPristine } from '@ngxs/form-plugin';
+import { ActionIconReset, ActionIconSet, ActionIconGet, ActionIconPatch, ActionIconCreate, ActionIconSave, ActionIconDelete } from './icon.actions';
+import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
+import { StateUser } from '@firefly/core/state/user';
+import { map, switchMap } from 'rxjs/operators';
 
 @State<StateIconModel>(StateIconOptions)
 
@@ -25,7 +27,11 @@ export class StateIcon
 
     @Selector() static url(state: StateIconModel): string { return StateIcon.data(state).url; }
 
-    constructor(private service: ServiceIcons) {}
+    constructor
+    (
+        private service: ServiceIcons,
+        private store: Store
+    ) { }
 
     @Action(ActionIconReset)
     reset({ patchState, getState, dispatch }: StateContext<StateIconModel>)
@@ -41,17 +47,81 @@ export class StateIcon
     }
 
     @Action(ActionIconGet)
-    get({ patchState }: StateContext<StateIconModel>)
+    get({ dispatch }: StateContext<StateIconModel>)
     {
-        // ToDo
+        const userId:   string = this.store.selectSnapshot(StateUser.userId);
+        const defaults: Icon   = StateIconOptions.defaults.empty;
+        const object:   Icon   = this.service.build(userId, defaults);
+
+        return dispatch(new ActionIconSet(object));
     }
 
     @Action(ActionIconSet)
-    set({ patchState, getState }: StateContext<StateIconModel>, { payload, form }: ActionIconSet)
+    set({ patchState, getState, dispatch }: StateContext<StateIconModel>, { payload }: ActionIconSet)
     {
-        const state:  StateIconModel = getState();
-        const object: Icon           = payload;
+        const object: Icon = payload;
 
-        // ToDo
+        return dispatch(new ActionIconReset()).
+        pipe
+        (
+            map(() =>
+                patchState
+                ({
+                    formGroup: this.service.formCreate(object)
+                })
+            ),
+
+            switchMap(() =>
+                dispatch(new UpdateFormValue({ value: object, path: StateIcon.formPath(getState())}))
+            )
+        );
+    }
+
+    @Action(ActionIconPatch)
+    patch({ dispatch, getState } : StateContext<StateIconModel>, { payload }: ActionIconPatch)
+    {
+        const value: Partial<Icon> = payload;
+        const path: string         = StateIcon.formPath(getState());
+
+        return dispatch(new UpdateFormValue({ value, path }));
+    }
+
+    @Action(ActionIconCreate)
+    create({ getState, dispatch }: StateContext<StateIconModel>)
+    {
+        const state: StateIconModel = getState();
+        const data:  Icon           = StateIcon.data(state);
+
+        return this.service.createWithUpload(data, data.url).pipe
+        (
+            switchMap((object: Icon) =>
+                this.service.getDownloadUrl(object.id)
+            ),
+            switchMap((url: string) =>
+                dispatch(new ActionIconPatch({ url }))
+            )
+        );
+    }
+
+    @Action(ActionIconSave)
+    save({ getState }: StateContext<StateIconModel>)
+    {
+        const data: Icon = StateIcon.data(getState());
+
+        return this.service.patch(data.id, data);
+    }
+
+    @Action(ActionIconDelete)
+    delete({ getState, dispatch }: StateContext<StateIconModel>)
+    {
+        const data: Icon = StateIcon.data(getState());
+
+        return this.service.delete(data).
+        pipe
+        (
+            map(() =>
+              dispatch(new ActionIconReset())
+            )
+        );
     }
 }

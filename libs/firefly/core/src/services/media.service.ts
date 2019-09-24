@@ -1,6 +1,6 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, map, last } from 'rxjs/operators';
+import { switchMap, map, last, mergeMap } from 'rxjs/operators';
 import { StorageFormat } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
@@ -93,6 +93,19 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
     public normalizeUrl(url: string): string
     {
         return this.isNormalized(url) ? url : this.webview.convertFileSrc(url);
+    }
+
+    public createWithUpload<M extends Icon | Image>(data: M, imagePath: string): Observable<M>
+    {
+        data.id = this.id(data);
+
+        const bucketPath: string = this.toBucketPath(data.id);
+
+        return this.upload(imagePath, bucketPath).pipe
+        (
+            switchMap(() => this.set(data)),
+            map(() => data)
+        );
     }
 
     public get storage(): AngularFireStorage

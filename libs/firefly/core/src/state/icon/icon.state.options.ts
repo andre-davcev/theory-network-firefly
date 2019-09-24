@@ -31,8 +31,6 @@ export const StateIconOptions: StoreOptions<StateIconModel> =
         },
 
         formGroup : undefined,
-        formPath  : 'icon.form',
-
-        url: undefined
+        formPath  : 'icon.form'
     }
 };
