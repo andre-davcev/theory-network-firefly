@@ -18,7 +18,7 @@ export const StateImageOptions: StoreOptions<StateImageModel> =
             userId      : undefined,
             name        : null,
             description : null,
-            private     : false,
+            private     : true,
             draft       : false
         },
 
@@ -31,7 +31,7 @@ export const StateImageOptions: StoreOptions<StateImageModel> =
         },
 
         formGroup : undefined,
-        url       : undefined,
+        formPath  : 'image.form',
 
         upload :
         {
@@ -41,3 +41,4 @@ export const StateImageOptions: StoreOptions<StateImageModel> =
         }
     }
 };
+

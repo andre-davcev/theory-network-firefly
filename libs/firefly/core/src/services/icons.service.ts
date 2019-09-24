@@ -10,24 +10,21 @@ import { ServiceUsers } from './users.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { Cluster } from '@firefly/core/models';
-import { CoreEnum } from '@theory/core/enums';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValidatorsExtended } from '@theory/core';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceIcons extends ServiceMedia<Icon>
 {
     constructor
     (
-        firestore: AngularFirestore,
-        storage:   AngularFireStorage,
-        user:      ServiceUsers,
-        webview:   WebView,
-
-        private formBuilder: FormBuilder,
+        firestore:   AngularFirestore,
+        storage:     AngularFireStorage,
+        user:        ServiceUsers,
+        webview:     WebView,
+        formBuilder: FormBuilder,
     )
     {
-        super('icons', firestore, storage, user, webview);
+        super('icons', firestore, storage, user, webview, formBuilder);
     }
 
     getIcons(userId: String): Observable<Array<Icon>>
@@ -107,36 +104,5 @@ export class ServiceIcons extends ServiceMedia<Icon>
 
             take(1)
         );
-    }
-
-    public build(userId: string, defaults: Icon): Icon
-    {
-        const object: Icon =
-        {
-            ...this.clone(defaults),
-            id: CoreEnum.IdNew,
-            userId
-        };
-
-        return object;
-    }
-
-    public formCreate(object: Icon): FormGroup
-    {
-        const form: FormGroup = this.formBuilder.group
-        ({
-            version     : object.version,
-            id          : object.id,
-            dateCreated : object.dateCreated,
-            dateUpdated : object.dateUpdated,
-
-            name        : [object.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
-            description : [object.description, [Validators.required, ValidatorsExtended.minLength(1)]],
-            private     : object.private,
-            userId      : object.userId,
-            draft       : object.draft
-        });
-
-        return form;
     }
 }

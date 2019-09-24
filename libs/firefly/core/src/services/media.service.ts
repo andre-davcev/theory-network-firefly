@@ -4,34 +4,38 @@ import { switchMap, map, last, mergeMap } from 'rxjs/operators';
 import { StorageFormat } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
-import { CoreEnum } from '@theory/core';
+import { CoreEnum, ValidatorsExtended } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Image, Icon, Asset } from '@firefly/core/models';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { ServiceBase } from '@theory/firebase';
 import { ServiceUsers } from './users.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class ServiceMedia<T> extends ServiceBase<Image | Icon>
 {
-    private _storage: AngularFireStorage;
-    private _user:    ServiceUsers;
-    private _webview: WebView;
+    public storage:     AngularFireStorage;
+    public user:        ServiceUsers;
+    public webview:     WebView;
+    public formBuilder: FormBuilder
 
     constructor
     (
-        name:      string,
-        firestore: AngularFirestore,
-        storage:   AngularFireStorage,
-        user:      ServiceUsers,
-        webview:   WebView
+        name:        string,
+        firestore:   AngularFirestore,
+        storage:     AngularFireStorage,
+        user:        ServiceUsers,
+        webview:     WebView,
+        formBuilder: FormBuilder
     )
     {
         super(name, firestore);
 
-        this.storage = storage;
-        this.user    = user;
-        this.webview = webview;
+        this.storage     = storage;
+        this.user        = user;
+        this.webview     = webview;
+        this.formBuilder = formBuilder;
     }
 
     public base64(url: string): Observable<string>
@@ -108,33 +112,34 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         );
     }
 
-    public get storage(): AngularFireStorage
+    public build(userId: string, defaults: Icon | Image): Icon | Image
     {
-        return this._storage;
+        const object: Icon =
+        {
+            ...this.clone(defaults),
+            id: CoreEnum.IdNew,
+            userId
+        };
+
+        return object;
     }
 
-    public set storage(storage: AngularFireStorage)
+    public formCreate(object: Icon): FormGroup
     {
-        this._storage = storage;
-    }
+        const form: FormGroup = this.formBuilder.group
+        ({
+            version     : object.version,
+            id          : object.id,
+            dateCreated : object.dateCreated,
+            dateUpdated : object.dateUpdated,
 
-    protected get user(): ServiceUsers
-    {
-        return this._user;
-    }
+            name        : [object.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
+            description : [object.description, [Validators.required, ValidatorsExtended.minLength(1)]],
+            private     : object.private,
+            userId      : object.userId,
+            draft       : object.draft
+        });
 
-    protected set user(user: ServiceUsers)
-    {
-        this._user = user;
-    }
-
-    protected get webview(): WebView
-    {
-        return this._webview;
-    }
-
-    protected set webview(webview: WebView)
-    {
-        this._webview = webview;
+        return form;
     }
 }
