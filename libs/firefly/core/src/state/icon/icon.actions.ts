@@ -9,3 +9,6 @@ export class ActionIconPatch  { static readonly type = ActionsIcon.Patch;   cons
 export class ActionIconCreate { static readonly type = ActionsIcon.Create;  constructor() { } }
 export class ActionIconSave   { static readonly type = ActionsIcon.Save;    constructor() { } }
 export class ActionIconDelete { static readonly type = ActionsIcon.Delete;  constructor() { } }
+
+export class ActionIconUploadClear { static readonly type = ActionsIcon.UploadClear; constructor() { } }
+export class ActionIconUpload      { static readonly type = ActionsIcon.Upload;      constructor(public file: string, public fileName?: string) { } }

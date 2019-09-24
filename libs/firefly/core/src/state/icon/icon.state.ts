@@ -7,10 +7,14 @@ import { StateIconOptions } from './icon.state.options';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { FormGroup } from '@angular/forms';
 import { CoreEnum, CoreUtil } from '@theory/core';
-import { ActionIconReset, ActionIconSet, ActionIconGet, ActionIconPatch, ActionIconCreate, ActionIconSave, ActionIconDelete } from './icon.actions';
+import { ActionIconReset, ActionIconSet, ActionIconGet, ActionIconPatch, ActionIconCreate, ActionIconSave, ActionIconDelete, ActionIconUpload, ActionIconUploadClear } from './icon.actions';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 import { StateUser } from '@firefly/core/state/user';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, filter, tap, catchError } from 'rxjs/operators';
+import { Upload } from '@firefly/core/interfaces';
+import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
+import { StorageFormat } from '@theory/firebase';
+import { of } from 'rxjs';
 
 @State<StateIconModel>(StateIconOptions)
 
@@ -27,10 +31,18 @@ export class StateIcon
 
     @Selector() static url(state: StateIconModel): string { return StateIcon.data(state).url; }
 
+    @Selector() static upload(state: StateIconModel): Upload           { return state.upload; }
+    @Selector() static uploadPath(state: StateIconModel): string       { return StateIcon.upload(state).path; }
+    @Selector() static uploadProgress(state: StateIconModel): number   { return StateIcon.upload(state).progress; }
+    @Selector() static uploadError(state: StateIconModel): any         { return StateIcon.upload(state).error; }
+    @Selector() static uploadErrored(state: StateIconModel): boolean   { return StateIcon.uploadError(state) != null; }
+    @Selector() static uploadCompleted(state: StateIconModel): boolean { return StateIcon.uploadProgress(state) === 100 && !StateIcon.uploadErrored(state); }
+
     constructor
     (
         private service: ServiceIcons,
-        private store: Store
+        private store:   Store,
+        private storage: AngularFireStorage
     ) { }
 
     @Action(ActionIconReset)
@@ -122,6 +134,38 @@ export class StateIcon
             map(() =>
               dispatch(new ActionIconReset())
             )
+        );
+    }
+
+    @Action(ActionIconUploadClear)
+    clear({ patchState } : StateContext<StateIconModel>)
+    {
+        patchState({ upload: CoreUtil.clone<Upload>(StateIconOptions.defaults.upload) });
+    }
+
+    @Action(ActionIconUpload)
+    upload({ patchState, getState, dispatch }: StateContext<StateIconModel>, { file, fileName }: ActionIconUpload)
+    {
+        dispatch( new ActionIconUploadClear());
+
+        const timestamp: string = new Date().toISOString();
+        const name:      string = fileName == null ? `${StateIconOptions.children}_${timestamp}.jpg` : fileName;
+        const userId:    string = this.store.selectSnapshot(StateUser.userId);
+        const path:      string = `${userId}/${this.service.name}/${name}`;
+        const upload:    Upload = StateIcon.upload(getState());
+        const data:      string = `${CoreEnum.DataUri}${file}`;
+
+        const task: AngularFireUploadTask = this.storage.ref(path).putString(data, StorageFormat.DataUrl);
+
+        patchState({ upload: { ...upload, path }});
+
+        return task.percentageChanges().
+
+        pipe
+        (
+            tap((progress: number) => patchState({ upload: { ...upload, progress } })),
+            filter(() => StateIcon.uploadCompleted(getState())),
+            catchError((error: Error) => of(patchState({ upload: { ...upload, error } })))
         );
     }
 }
