@@ -6,5 +6,8 @@ export enum ActionsIcon
     Patch  = '[Icon] Patch',
     Save   = '[Icon] Save',
     Create = '[Icon] Create',
-    Delete = '[Icon] Delete'
+    Delete = '[Icon] Delete',
+
+    Upload      = '[Icon] Upload',
+    UploadClear = '[Icon] Upload Clear'
 }
