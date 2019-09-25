@@ -1,11 +1,12 @@
 export enum ActionsEvent
 {
-    Reset     = '[Event] Reset',
-    Get       = '[Event] Get',
-    Create    = '[Event] Create',
-    Delete    = '[Event] Delete',
-    Patch     = '[Event] Patch',
-    PatchForm = '[Event] Patch Form',
+    Reset  = '[Event] Reset',
+    Get    = '[Event] Get',
+    Set    = '[Event] Set',
+    Patch  = '[Event] Patch',
+    Save   = '[Event] Save',
+    Create = '[Event] Create',
+    Delete = '[Event] Delete',
 
     LocationSet    = '[Event] Location Set',
     ImageSet       = '[Event] Image Set',

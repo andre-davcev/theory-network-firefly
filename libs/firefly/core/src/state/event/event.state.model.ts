@@ -1,12 +1,7 @@
 import { Event } from '@firefly/core/models';
-import { FormNgxs } from '@theory/state';
-import { FormGroup } from '@angular/forms';
+import { StateAssetModel } from '@firefly/core/interfaces';
 
-export interface StateEventModel
+export interface StateEventModel extends StateAssetModel<Event>
 {
-    empty     : Event;
-    form      : FormNgxs;
-    formGroup : FormGroup;
 
-    imageUrl  : string;
 }

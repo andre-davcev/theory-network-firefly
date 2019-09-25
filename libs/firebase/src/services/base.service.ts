@@ -119,6 +119,11 @@ export class ServiceBase<T extends Model | Record<string, any>>
         return this.document(id).valueChanges();
     }
 
+    public snapshot(id: string): Observable<T>
+    {
+        return this.valuesChanges(id).pipe(take(1));
+    }
+
     public snapshotFK<R>(keys: Record<string, any>): Observable<Record<string, R>>
     {
         const keyList: Array<string> = Object.keys(keys);
