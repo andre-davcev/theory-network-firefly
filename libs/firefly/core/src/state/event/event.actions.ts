@@ -1,9 +1,9 @@
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
+import { CoreEnum } from '@theory/core';
 import { Event } from '@firefly/core/models';
 
 import { ActionsEvent } from './event.actions.enum';
-import { CoreEnum } from '@theory/core';
 
 export class ActionEventReset  { static readonly type = ActionsEvent.Reset;   constructor() { } }
 export class ActionEventGet    { static readonly type = ActionsEvent.Get;     constructor(public payload: string = CoreEnum.IdNew) { } }

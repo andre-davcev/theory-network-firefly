@@ -9,6 +9,5 @@ export enum ActionsEvent
     Delete = '[Event] Delete',
 
     LocationSet    = '[Event] Location Set',
-    ImageSet       = '[Event] Image Set',
     TimeSet        = '[Event] Time Set'
 }

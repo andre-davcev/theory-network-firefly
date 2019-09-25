@@ -1,51 +1,12 @@
-import { ActionsCluster } from './cluster.actions.enum';
 import { Cluster } from '@firefly/core/models';
+import { CoreEnum } from '@theory/core';
 
-export class ActionClusterWatch
-{
-    static readonly type = ActionsCluster.WatchCluster;
+import { ActionsCluster } from './cluster.actions.enum';
 
-    constructor(public payload: Cluster) { }
-}
-
-export class ActionGetClusters
-{
-    static readonly type = ActionsCluster.GetClusters;
-
-    constructor() {}
-}
-
-export class ActionClusterSetIcon
-{
-    static readonly type = ActionsCluster.SetIcon;
-
-    constructor(public payload: string) { }
-}
-
-export class ActionClusterSetId
-{
-    static readonly type = ActionsCluster.SetClusterId;
-
-    constructor(public payload: string) {}
-}
-
-export class ActionClusterSet
-{
-    static readonly type = ActionsCluster.SetCluster;
-
-    constructor(public payload: Cluster) {}
-}
-
-export class ActionUpdateCluster
-{
-    static readonly type = ActionsCluster.UpdateCluster;
-
-    constructor() {}
-}
-
-export class ActionClusterCreate
-{
-    static readonly type = ActionsCluster.CreateCluster;
-
-    constructor() { }
-}
+export class ActionClusterReset  { static readonly type = ActionsCluster.Reset;   constructor() { } }
+export class ActionClusterGet    { static readonly type = ActionsCluster.Get;     constructor(public payload: string = CoreEnum.IdNew) { } }
+export class ActionClusterSet    { static readonly type = ActionsCluster.Set;     constructor(public payload: Cluster) { } }
+export class ActionClusterPatch  { static readonly type = ActionsCluster.Patch;   constructor(public payload: Partial<Cluster>) { } }
+export class ActionClusterCreate { static readonly type = ActionsCluster.Create;  constructor() { } }
+export class ActionClusterSave   { static readonly type = ActionsCluster.Save;    constructor() { } }
+export class ActionClusterDelete { static readonly type = ActionsCluster.Delete;  constructor() { } }
