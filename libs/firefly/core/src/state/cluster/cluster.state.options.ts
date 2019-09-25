@@ -1,5 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 import { StateClusterModel } from './cluster.state.model';
+import undefined = require('firebase/empty-import');
 
 export const StateClusterOptions: StoreOptions<StateClusterModel> =
 {
@@ -7,15 +8,7 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
 
     defaults :
     {
-        form                :
-        {
-          model : {},
-          dirty : false,
-          status : '',
-          errors : {}
-        },
-        formGroup: undefined,
-        empty               :
+        empty :
         {
           version     : undefined,
           id          : undefined,
@@ -28,15 +21,21 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
           private     : false,
           draft       : false,
 
-
-          tagline     : null,
-          iconId      : undefined,
-          events      : {},
-          subscribers : {}
+          tagline         : null,
+          iconId          : undefined,
+          eventCount      : 0,
+          subscriberCount : 0
         },
 
-        entities            : {},
-        iconUrl             : undefined,
-        iconUrlNormalized   : undefined
+        form :
+        {
+            model  : {},
+            dirty  : false,
+            status : '',
+            errors : {}
+        },
+
+        formGroup : undefined,
+        formPath  : 'cluster.form'
     }
 };

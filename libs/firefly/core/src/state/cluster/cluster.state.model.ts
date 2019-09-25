@@ -1,13 +1,7 @@
-import { FormGroup } from '@angular/forms';
-import { FormNgxs } from '@theory/state';
 import { Cluster } from '@firefly/core/models';
+import { StateAssetModel } from '@firefly/core/interfaces';
 
-export interface StateClusterModel
+export interface StateClusterModel extends StateAssetModel<Cluster>
 {
-    form      : FormNgxs;
-    formGroup : FormGroup
-    empty     : Cluster;
-    entities  : Record<string, Cluster>;
-    iconUrl   : string;
-    iconUrlNormalized: string;
+
 }
