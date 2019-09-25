@@ -3,13 +3,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { ServiceBase } from '@theory/firebase';
 import { Subscription } from '@firefly/core/models';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceSubscriptions extends ServiceBase<Subscription>
 {
-    constructor(firestore: AngularFirestore)
+    constructor(firestore: AngularFirestore, formBuilder: FormBuilder)
     {
-        super('subscriptions', firestore, true);
+        super('subscriptions', firestore, formBuilder, true);
     }
 }
 

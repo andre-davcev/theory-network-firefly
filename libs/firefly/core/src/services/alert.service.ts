@@ -3,14 +3,15 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Alert } from '@firefly/core/models';
 import { ServiceBase } from '@theory/firebase';
+import { FormBuilder } from '@angular/forms';
 
 
 @Injectable({ providedIn: 'root' })
 export class ServiceAlerts extends ServiceBase<Alert>
 {
-    constructor(firestore: AngularFirestore)
+    constructor(firestore: AngularFirestore, formBuilder: FormBuilder)
     {
-        super('alerts', firestore);
+        super('alerts', firestore, formBuilder);
     }
 }
 

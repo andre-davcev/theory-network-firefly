@@ -1,6 +1,6 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, map, last, mergeMap } from 'rxjs/operators';
+import { switchMap, map, last } from 'rxjs/operators';
 import { StorageFormat } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
@@ -18,7 +18,6 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
     public storage:     AngularFireStorage;
     public user:        ServiceUsers;
     public webview:     WebView;
-    public formBuilder: FormBuilder
 
     constructor
     (
@@ -30,12 +29,11 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         formBuilder: FormBuilder
     )
     {
-        super(name, firestore);
+        super(name, firestore, formBuilder);
 
         this.storage     = storage;
         this.user        = user;
         this.webview     = webview;
-        this.formBuilder = formBuilder;
     }
 
     public base64(url: string): Observable<string>
@@ -112,34 +110,14 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         );
     }
 
-    public build(userId: string, defaults: Icon | Image): Icon | Image
-    {
-        const object: Icon =
-        {
-            ...this.clone(defaults),
-            id: CoreEnum.IdNew,
-            userId
-        };
-
-        return object;
-    }
-
     public formCreate(object: Icon): FormGroup
     {
-        const form: FormGroup = this.formBuilder.group
+        return super.formCreate
         ({
-            version     : object.version,
-            id          : object.id,
-            dateCreated : object.dateCreated,
-            dateUpdated : object.dateUpdated,
+            ...object,
 
             name        : [object.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
-            description : [object.description, [Validators.required, ValidatorsExtended.minLength(1)]],
-            private     : object.private,
-            userId      : object.userId,
-            draft       : object.draft
+            description : [object.description, [Validators.required, ValidatorsExtended.minLength(1)]]
         });
-
-        return form;
     }
 }

@@ -4,13 +4,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { User as FirebaseUser, UserInfo } from 'firebase/app';
 import { ServiceBase, AuthProvider } from '@theory/firebase';
 import { User } from '@firefly/core/models';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceUsers extends ServiceBase<User>
 {
-    constructor(firestore: AngularFirestore)
+    constructor(firestore: AngularFirestore, formBuilder: FormBuilder)
     {
-        super('users', firestore);
+        super('users', firestore, formBuilder);
     }
 
     public parseId(authData: FirebaseUser): string

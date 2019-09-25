@@ -9,31 +9,21 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Observable } from 'rxjs';
 import { switchMap, mergeMap, map } from 'rxjs/operators';
 import { CoreEnum } from '@theory/core/enums';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceImages extends ServiceMedia<Image>
 {
     constructor
     (
-        firestore: AngularFirestore,
-        storage:   AngularFireStorage,
-        user:      ServiceUsers,
-        webview:   WebView
+        firestore:   AngularFirestore,
+        storage:     AngularFireStorage,
+        formBuilder: FormBuilder,
+        user:        ServiceUsers,
+        webview:     WebView,
     )
     {
-        super('images', firestore, storage, user, webview);
-    }
-
-    public build(userId: string, defaults: Image): Image
-    {
-        const image: Image =
-        {
-            ...this.clone(defaults),
-            id: CoreEnum.IdNew,
-            userId
-        };
-
-        return image;
+        super('images', firestore, storage, user, webview, formBuilder);
     }
 
     public fromEvent(event: Event): Image
@@ -54,7 +44,7 @@ export class ServiceImages extends ServiceMedia<Image>
     public createWithUploadFromEvent(event: Event, imagePath: string): Observable<Event>
     {
         const image:      Image = this.fromEvent(event);
-        const bucketPath: string       = this.toBucketPath(image.id);
+        const bucketPath: string = this.toBucketPath(image.id);
 
         event =
         {

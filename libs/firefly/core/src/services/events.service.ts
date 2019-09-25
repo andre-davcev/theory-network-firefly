@@ -17,13 +17,11 @@ export class ServiceEvents extends ServiceBase<Event>
     constructor
     (
         firestore: AngularFirestore,
-        private formBuilder: FormBuilder
+        formBuilder: FormBuilder
     )
     {
-        super('events', firestore);
+        super('events', firestore, formBuilder);
     }
-
-    private _form: FormGroup;
 
     private static validateTime(): ValidatorFn
     {
@@ -65,9 +63,8 @@ export class ServiceEvents extends ServiceBase<Event>
 
         const event: Event =
         {
-            ...this.clone(defaults),
-            id: CoreEnum.IdNew,
-            userId,
+            ...super.build(userId, defaults),
+
             times:
             [
                 {
@@ -83,30 +80,19 @@ export class ServiceEvents extends ServiceBase<Event>
 
     public formCreate(event: Event): FormGroup
     {
-        const form: FormGroup = this.formBuilder.group
+        return super.formCreate
         ({
-            id          : event.id,
-            dateCreated : event.dateCreated,
-            dateUpdated : event.dateUpdated,
+            ...event,
 
-            userId      : event.userId,
             name        : [event.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
             description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
-            private     : event.private,
-            draft       : event.draft,
 
-            version     : event.version,
             tagline     : [event.tagline, ValidatorsExtended.minLength(1)],
             imageId     : [event.imageId, [ServiceEvents.validateImage()]],
             coordinates : [event.coordinates, Validators.required],
             location    : [event.location, Validators.required],
             times       : [event.times, [ServiceEvents.validateTime()]],
-            url         : event.url
         });
-
-        this._form = form;
-
-        return form;
     }
 
     public timeSet(form: FormGroup, key: 'start' | 'end', value: string): void
@@ -141,10 +127,5 @@ export class ServiceEvents extends ServiceBase<Event>
     public imageIdSet(form: FormGroup, imageId: string): void
     {
         this.patchValue(form, 'imageId', imageId);
-    }
-
-    public get form(): FormGroup
-    {
-        return this._form;
     }
 }
