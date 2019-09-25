@@ -8,6 +8,8 @@ export enum ActionsIcon
     Create = '[Icon] Create',
     Delete = '[Icon] Delete',
 
+    UriSet      = '[Icon] URI Set',
+    UriClear    = '[Icon] URL Clear',
     Upload      = '[Icon] Upload',
     UploadClear = '[Icon] Upload Clear'
 }

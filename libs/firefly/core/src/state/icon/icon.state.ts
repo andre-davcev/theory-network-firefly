@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { map, switchMap, filter, tap, catchError } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
@@ -24,8 +24,11 @@ import {
   ActionIconSave,
   ActionIconDelete,
   ActionIconUpload,
-  ActionIconUploadClear
+  ActionIconUploadClear,
+  ActionIconUriSet,
+  ActionIconUriClear
 } from './icon.actions';
+import undefined = require('firebase/empty-import');
 
 @State<StateIconModel>(StateIconOptions)
 
@@ -70,13 +73,20 @@ export class StateIcon
     }
 
     @Action(ActionIconGet)
-    get({ dispatch }: StateContext<StateIconModel>)
+    get({ dispatch }: StateContext<StateIconModel>, { payload }: ActionIconGet)
     {
-        const userId:   string = this.store.selectSnapshot(StateUser.userId);
-        const defaults: Icon   = StateIconOptions.defaults.empty;
-        const object:   Icon   = this.service.build(userId, defaults);
+        const id: string = payload;
 
-        return dispatch(new ActionIconSet(object));
+        const object$: Observable<Icon> = id === CoreEnum.IdNew ?
+            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateIconOptions.defaults.empty)) :
+            this.service.snapshot(id);
+
+        return object$.pipe
+        (
+            switchMap((object: Icon) =>
+                dispatch(new ActionIconSet(object))
+            )
+        );
     }
 
     @Action(ActionIconSet)
@@ -148,8 +158,22 @@ export class StateIcon
         );
     }
 
+    @Action(ActionIconUriSet)
+    uriSet({ dispatch }: StateContext<StateIconModel>, { payload }: ActionIconUriSet)
+    {
+        const url: string = this.service.normalizeUrl(payload);
+
+        return dispatch(new ActionIconPatch({ url }));
+    }
+
+    @Action(ActionIconUriClear)
+    uriClear({ dispatch }: StateContext<StateIconModel>)
+    {
+        return dispatch(new ActionIconPatch({ url: undefined }));
+    }
+
     @Action(ActionIconUploadClear)
-    clear({ patchState } : StateContext<StateIconModel>)
+    uploadClear({ patchState } : StateContext<StateIconModel>)
     {
         patchState({ upload: CoreUtil.clone<Upload>(StateIconOptions.defaults.upload) });
     }

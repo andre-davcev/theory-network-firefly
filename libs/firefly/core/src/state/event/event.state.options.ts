@@ -38,7 +38,6 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
         },
 
         formGroup : undefined,
-        clusters  : {},
-        imageUrl  : undefined
+        formPath  : 'event.form'
     }
 };

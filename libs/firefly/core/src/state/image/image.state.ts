@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { map, switchMap, filter, tap, catchError } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
@@ -24,10 +24,10 @@ import {
   ActionImageSave,
   ActionImageDelete,
   ActionImageUpload,
-  ActionImageUploadClear
+  ActionImageUploadClear,
+  ActionImageUriSet,
+  ActionImageUriClear
 } from './image.actions';
-
-
 
 @State<StateImageModel>(StateImageOptions)
 
@@ -71,13 +71,20 @@ export class StateImage
     }
 
     @Action(ActionImageGet)
-    get({ dispatch }: StateContext<StateImageModel>)
+    get({ dispatch }: StateContext<StateImageModel>, { payload }: ActionImageGet)
     {
-        const userId:   string = this.store.selectSnapshot(StateUser.userId);
-        const defaults: Image  = StateImageOptions.defaults.empty;
-        const object:   Image  = this.service.build(userId, defaults);
+        const id: string = payload;
 
-        return dispatch(new ActionImageSet(object));
+        const object$: Observable<Image> = id === CoreEnum.IdNew ?
+            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateImageOptions.defaults.empty)) :
+            this.service.snapshot(id);
+
+        return object$.pipe
+        (
+            switchMap((object: Image) =>
+                dispatch(new ActionImageSet(object))
+            )
+        );
     }
 
     @Action(ActionImageSet)
@@ -149,8 +156,22 @@ export class StateImage
         );
     }
 
+    @Action(ActionImageUriSet)
+    uriSet({ dispatch }: StateContext<StateImageModel>, { payload }: ActionImageUriSet)
+    {
+        const url: string = this.service.normalizeUrl(payload);
+
+        return dispatch(new ActionImagePatch({ url }));
+    }
+
+    @Action(ActionImageUriClear)
+    uriClear({ dispatch }: StateContext<StateImageModel>)
+    {
+        return dispatch(new ActionImagePatch({ url: undefined }));
+    }
+
     @Action(ActionImageUploadClear)
-    clear({ patchState } : StateContext<StateImageModel>)
+    uploadClear({ patchState } : StateContext<StateImageModel>)
     {
         patchState({ upload: CoreUtil.clone<Upload>(StateImageOptions.defaults.upload) });
     }
