@@ -1,12 +1,12 @@
 import { FormGroup } from '@angular/forms';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of, Observable, forkJoin } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
-import { Icon, StreamItem } from '@firefly/core/models';
+import { StreamItem } from '@firefly/core/models';
 import { ServiceStreamItems } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/user';
 
@@ -21,7 +21,7 @@ import {
   ActionStreamItemSave,
   ActionStreamItemDelete
 } from './stream-item.actions';
-import { ActionIconCreate, ActionIconGet } from '@firefly/core/state/icon';
+import { ActionIconGet } from '@firefly/core/state/icon';
 
 @State<StateStreamItemModel>(StateStreamItemOptions)
 
@@ -60,7 +60,7 @@ export class StateStreamItem
     {
         const id: string = payload;
 
-        const object$: Observable<Icon> = id === CoreEnum.IdNew ?
+        const object$: Observable<StreamItem> = id === CoreEnum.IdNew ?
             of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateStreamItemOptions.defaults.empty)) :
             this.service.snapshot(id);
 
@@ -107,16 +107,12 @@ export class StateStreamItem
     }
 
     @Action(ActionStreamItemCreate)
-    create({ getState, dispatch }: StateContext<StateStreamItemModel>)
+    create({ getState }: StateContext<StateStreamItemModel>)
     {
         const state: StateStreamItemModel = getState();
         const data:  StreamItem           = StateStreamItem.data(state);
 
-        return forkJoin
-        (
-            dispatch(new ActionIconCreate()),
-            this.service.create(data)
-        );
+        return this.service.create(data);
     }
 
     @Action(ActionStreamItemSave)

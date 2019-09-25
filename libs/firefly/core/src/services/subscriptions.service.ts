@@ -10,7 +10,7 @@ export class ServiceSubscriptions extends ServiceBase<Subscription>
 {
     constructor(firestore: AngularFirestore, formBuilder: FormBuilder)
     {
-        super('subscriptions', firestore, formBuilder, true);
+        super('clusters', firestore, formBuilder, true);
     }
 }
 
