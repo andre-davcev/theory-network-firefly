@@ -6,5 +6,5 @@ export enum ActionsStreamItem
     Patch  = '[StreamItem] Patch',
     Save   = '[StreamItem] Save',
     Create = '[StreamItem] Create',
-    Delete = '[StreamItem] Delete',
+    Delete = '[StreamItem] Delete'
 }
