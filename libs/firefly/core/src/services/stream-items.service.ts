@@ -2,22 +2,23 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { ServiceBase } from '@theory/firebase';
-import { StreamItem } from '@firefly/core/models';
+import { StreamItem, Cluster } from '@firefly/core/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceStreamItems extends ServiceBase<StreamItem>
 {
-    constructor(firestore: AngularFirestore)
+    constructor(firestore: AngularFirestore, formBuilder: FormBuilder)
     {
-        super('clusters', firestore, true);
+        super('clusters', firestore, formBuilder, true);
     }
 
-    public valuesChanges(id: string): Observable<StreamItem>
+    public snapshot(id: string): Observable<StreamItem>
     {
-        return super.valuesChanges(id).
-            pipe(map((data: StreamItem) => ({...data, subscribed: false})));
+        return super.snapshot(id).
+            pipe(map((data: Cluster) => ({...data, subscribed: false})));
     }
 }
 

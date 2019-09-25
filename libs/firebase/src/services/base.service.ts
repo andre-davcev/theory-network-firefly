@@ -3,20 +3,23 @@ import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument,
 import { Model } from '@theory/firebase';
 import { map, take, switchMap } from 'rxjs/operators';
 import { MergeType } from '../../../firefly/core/src/enums';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import * as firebase from 'firebase/app';
+import { CoreEnum } from '@theory/core';
 
 export class ServiceBase<T extends Model | Record<string, any>>
 {
-    private _name: string;
-    private _collection: AngularFirestoreCollection<T>;
-    private _firestore: AngularFirestore
+    private _name:        string;
+    private _collection:  AngularFirestoreCollection<T>;
+    private _firestore:   AngularFirestore;
+    private _formBuilder: FormBuilder;
 
-    constructor(name: string, firestore: AngularFirestore, private reference: boolean = false)
+    constructor(name: string, firestore: AngularFirestore, formBuilder: FormBuilder, private reference: boolean = false)
     {
         this.name       = name;
         this.firestore  = firestore;
         this.collection = firestore.collection<T>(this.name);
+        this.formBuilder = formBuilder;
     }
 
     public document(id: string): AngularFirestoreDocument<T>
@@ -186,6 +189,23 @@ export class ServiceBase<T extends Model | Record<string, any>>
         form.controls[key].patchValue(value);
     }
 
+    public build(userId: string, defaults: T): T
+    {
+      const object: T =
+      {
+          ...this.clone(defaults),
+          id: CoreEnum.IdNew,
+          userId
+      };
+
+      return object;
+    }
+
+    public formCreate(controlsConfig: Record<string, any>): FormGroup
+    {
+        return this.formBuilder.group(controlsConfig);
+    }
+
     public get name(): string
     {
         return this._name;
@@ -214,5 +234,15 @@ export class ServiceBase<T extends Model | Record<string, any>>
     protected set firestore(firestore: AngularFirestore)
     {
         this._firestore = firestore;
+    }
+
+    protected get formBuilder(): FormBuilder
+    {
+        return this._formBuilder;
+    }
+
+    protected set formBuilder(formBuilder: FormBuilder)
+    {
+        this._formBuilder = formBuilder;
     }
 }

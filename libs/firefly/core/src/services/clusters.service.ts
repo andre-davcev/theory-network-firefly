@@ -19,13 +19,11 @@ export class ServiceClusters extends ServiceBase<Cluster>
         firestore: AngularFirestore,
         private storage: AngularFireStorage,
         private image: ServiceImages,
-        private formBuilder: FormBuilder
+        formBuilder: FormBuilder
     )
     {
-        super('clusters', firestore);
+        super('clusters', firestore, formBuilder);
     }
-
-    private _form: FormGroup;
 
     private static validateIcon(): ValidatorFn
     {
@@ -39,39 +37,18 @@ export class ServiceClusters extends ServiceBase<Cluster>
         return validator;
     }
 
-    public build(userId: string, defaults: Cluster): Cluster
-    {
-      const cluster: Cluster =
-      {
-        ...this.clone(defaults),
-        id: CoreEnum.IdNew,
-        userId: userId
-      };
-
-      return cluster;
-    }
-
     public formCreate(cluster: Cluster): FormGroup
     {
-      const form: FormGroup = this.formBuilder.group
-        ({
-            id          : cluster.id,
-            dateCreated : cluster.dateCreated,
-            dateUpdated : cluster.dateUpdated,
+        return super.formCreate(
+        {
+            ...cluster,
 
-            userId      : cluster.userId,
             name        : [cluster.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
             description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(1)]],
-            private     : cluster.private,
-            draft       : cluster.draft,
 
             tagline   : [cluster.tagline, ValidatorsExtended.minLength(1)],
             iconId   : [cluster.iconId, [ServiceClusters.validateIcon()]]
-        });
-
-        this._form = form;
-
-        return form;
+        })
     }
 
     getClusters(userid:String): Observable<Cluster[]>
@@ -194,10 +171,5 @@ export class ServiceClusters extends ServiceBase<Cluster>
                     }, {})
                 )
             );
-    }
-
-    public get form(): FormGroup
-    {
-      return this._form;
     }
 }
