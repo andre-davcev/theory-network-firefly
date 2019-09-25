@@ -1,6 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateAlertModel } from './alert.state.model';
+import undefined = require('firebase/empty-import');
 
 export const StateAlertOptions: StoreOptions<StateAlertModel> =
 {
@@ -15,8 +16,9 @@ export const StateAlertOptions: StoreOptions<StateAlertModel> =
             dateCreated : undefined,
             dateUpdated : undefined,
 
-            title   : undefined,
-            body    : undefined,
+            userId  : undefined,
+            title   : null,
+            body    : null,
             imageId : undefined,
             read    : false
         },
@@ -29,6 +31,7 @@ export const StateAlertOptions: StoreOptions<StateAlertModel> =
             errors : {}
         },
 
-        formGroup : undefined
+        formGroup : undefined,
+        formPath  : 'alert.form'
     }
 };
