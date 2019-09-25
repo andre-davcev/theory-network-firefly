@@ -1,11 +1,7 @@
-import { FormGroup } from '@angular/forms';
-
-import { FormNgxs } from '@theory/state';
 import { Alert } from '@firefly/core/models';
+import { StateAssetModel } from '@firefly/core/interfaces';
 
-export interface StateAlertModel
+export interface StateAlertModel extends StateAssetModel<Alert>
 {
-    empty     : Alert;
-    form      : FormNgxs;
-    formGroup : FormGroup;
+
 }
