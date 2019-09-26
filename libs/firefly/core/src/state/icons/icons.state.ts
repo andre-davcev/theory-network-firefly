@@ -14,7 +14,7 @@ import { ActionGetIcons, ActionSetIconId, ActionSetIcon } from './icons.actions'
 
 export class StateIcons
 {
-    @Select(StateUser.user) user$:Observable<User>;
+    @Select(StateUser.data) user$:Observable<User>;
 
     constructor(private serviceIcons: ServiceIcons, private formIcon: FormIcon) {}
 
