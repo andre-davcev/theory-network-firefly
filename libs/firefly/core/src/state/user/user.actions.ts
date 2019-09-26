@@ -20,4 +20,3 @@ export class ActionUserCreateOld          { static readonly type = ActionsUser.U
 export class ActionUserAddToken           { static readonly type = ActionsUser.UserAddToken;           constructor(public payload: string) { } }
 export class ActionUserLoginEmail         { static readonly type = ActionsUser.LoginEmail;             constructor(public payload: Credentials) { } }
 export class ActionUserLogout             { static readonly type = ActionsUser.UserLogout;             constructor() { } }
-export class ActionUserSetOld             { static readonly type = ActionsUser.UserSet;                constructor(public payload: User) { } }
