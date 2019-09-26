@@ -76,7 +76,7 @@ export class StateImage
         const id: string = payload;
 
         const object$: Observable<Image> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateImageOptions.defaults.empty)) :
+            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateImageOptions.defaults.empty)) :
             this.service.snapshot(id);
 
         return object$.pipe
@@ -183,7 +183,7 @@ export class StateImage
 
         const timestamp: string = new Date().toISOString();
         const name:      string = fileName == null ? `${StateImageOptions.children}_${timestamp}.jpg` : fileName;
-        const userId:    string = this.store.selectSnapshot(StateUser.userId);
+        const userId:    string = this.store.selectSnapshot(StateUser.id);
         const path:      string = `${userId}/${this.service.name}/${name}`;
         const upload:    Upload = StateImage.upload(getState());
         const data:      string = `${CoreEnum.DataUri}${file}`;

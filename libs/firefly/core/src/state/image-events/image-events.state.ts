@@ -52,7 +52,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Action(ActionImageEventsGetData)
     getData({ dispatch }: StateContext<StateImageEventsModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
 
         return dispatch(new ActionImageEventsReset()).
         pipe

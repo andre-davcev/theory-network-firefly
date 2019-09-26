@@ -52,7 +52,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Action(ActionUserStreamGetData)
     getData({ dispatch }: StateContext<StateUserStreamModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
 
         return dispatch(new ActionUserStreamReset()).
         pipe

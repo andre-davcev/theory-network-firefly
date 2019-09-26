@@ -61,7 +61,7 @@ export class StateSubscription
         const id: string = payload;
 
         const object$: Observable<Subscription> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateSubscriptionOptions.defaults.empty)) :
+            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateSubscriptionOptions.defaults.empty)) :
             this.service.snapshot(id);
 
         return object$.pipe

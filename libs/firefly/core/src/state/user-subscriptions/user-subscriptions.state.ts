@@ -52,7 +52,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Action(ActionUserSubscriptionsGetData)
     getData({ dispatch }: StateContext<StateUserSubscriptionsModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
 
         return dispatch(new ActionUserSubscriptionsReset()).
         pipe

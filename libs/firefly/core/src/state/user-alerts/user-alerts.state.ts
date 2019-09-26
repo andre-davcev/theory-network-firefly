@@ -52,7 +52,7 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Action(ActionUserAlertsGetData)
     getData({ dispatch }: StateContext<StateUserAlertsModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
 
         return dispatch(new ActionUserAlertsReset()).
         pipe

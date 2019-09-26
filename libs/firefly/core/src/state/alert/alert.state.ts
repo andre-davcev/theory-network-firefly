@@ -60,7 +60,7 @@ export class StateAlert
         const id: string = payload;
 
         const object$: Observable<Alert> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateAlertOptions.defaults.empty)) :
+            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateAlertOptions.defaults.empty)) :
             this.service.snapshot(id);
 
         return object$.pipe
