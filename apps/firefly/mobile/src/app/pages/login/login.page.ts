@@ -7,7 +7,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { AuthProvider } from '@theory/firebase';
 
-import { StateUser, ActionLoginEmail } from '@firefly/core';
+import { StateUser, ActionUserLoginEmail } from '@firefly/core';
 import { ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/capacitor';
 
 @Component
@@ -45,7 +45,7 @@ export class PageLogin implements OnInit
 
     login()
     {
-        this.store.dispatch(new ActionLoginEmail({id: 'andre.davcev@gmail.com', password: 'weakpassword'}));
+        this.store.dispatch(new ActionUserLoginEmail({id: 'andre.davcev@gmail.com', password: 'weakpassword'}));
     }
 
     create()
