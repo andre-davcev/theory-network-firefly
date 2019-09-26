@@ -8,13 +8,11 @@ export enum ActionsUser
     Create = '[User] Create',
     Delete = '[User] Delete',
 
-    UserAuthenticate       = '[User] User Authenticate',
-    UserAuthenticateCheck  = '[User] User Authenticate Check',
-    UserWatch              = '[User] User Watch',
-    UserWatchLanguage      = '[User] User Watch Language',
-    UserCreate             = '[User] User Create',
-    UserAddToken           = '[User] User Add Token',
-    LoginEmail             = '[User] Login Email',
-    UserLogout             = '[User] User Logout',
-    UserSet                = '[User] User Set'
+    Authenticate      = '[User] Authenticate',
+    AuthenticateCheck = '[User] Authenticate Check',
+    Watch             = '[User] Watch',
+    WatchLanguage     = '[User] Watch Language',
+    AddToken          = '[User] Add Token',
+    LoginEmail        = '[User] Login Email',
+    Logout            = '[User] Logout'
 }

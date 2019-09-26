@@ -1,6 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserModel } from './user.state.model';
+import undefined = require('firebase/empty-import');
 
 export const StateUserOptions: StoreOptions<StateUserModel> =
 {
@@ -27,7 +28,7 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
 
         form :
         {
-            model  : {},
+            model  : undefined,
             dirty  : false,
             status : '',
             errors : {}
@@ -37,7 +38,6 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         formPath  : 'user.form',
 
         authData        : undefined,
-        user            : undefined,
         error           : undefined,
         authenticated   : false,
         authenticating  : false,
