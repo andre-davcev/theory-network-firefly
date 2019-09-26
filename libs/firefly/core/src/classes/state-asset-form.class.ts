@@ -75,7 +75,7 @@ export class StateEvent
     get({ patchState, dispatch } : StateContext<StateEventModel>, { payload }: ActionEventGet)
     {
         const id: string = payload;
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
         const defaults: Event = StateEventOptions.defaults.empty;
         const item$: Observable<Event> = id === CoreEnum.IdNew ?
             of(this.service.build(userId, defaults)) :

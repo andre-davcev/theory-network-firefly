@@ -52,7 +52,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Action(ActionUserIconsGetData)
     getData({ dispatch }: StateContext<StateUserIconsModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
 
         return dispatch(new ActionUserIconsReset()).
         pipe

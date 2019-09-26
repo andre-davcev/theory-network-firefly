@@ -62,7 +62,7 @@ export class StateCluster
         const id: string = payload;
 
         const object$: Observable<Cluster> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateClusterOptions.defaults.empty)) :
+            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateClusterOptions.defaults.empty)) :
             this.service.snapshot(id);
 
         return object$.pipe

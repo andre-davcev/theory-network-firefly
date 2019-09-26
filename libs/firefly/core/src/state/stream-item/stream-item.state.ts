@@ -61,7 +61,7 @@ export class StateStreamItem
         const id: string = payload;
 
         const object$: Observable<StreamItem> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateStreamItemOptions.defaults.empty)) :
+            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateStreamItemOptions.defaults.empty)) :
             this.service.snapshot(id);
 
         return object$.pipe

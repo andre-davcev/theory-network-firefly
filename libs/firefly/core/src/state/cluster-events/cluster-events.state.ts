@@ -52,7 +52,7 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     @Action(ActionClusterEventsGetData)
     getData({ dispatch }: StateContext<StateClusterEventsModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
 
         return dispatch(new ActionClusterEventsReset()).
         pipe

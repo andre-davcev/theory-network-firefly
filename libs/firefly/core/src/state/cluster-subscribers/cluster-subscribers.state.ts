@@ -52,7 +52,7 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     @Action(ActionClusterSubscribersGetData)
     getData({ dispatch }: StateContext<StateClusterSubscribersModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
 
         return dispatch(new ActionClusterSubscribersReset()).
         pipe

@@ -78,7 +78,7 @@ export class StateIcon
         const id: string = payload;
 
         const object$: Observable<Icon> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateIconOptions.defaults.empty)) :
+            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateIconOptions.defaults.empty)) :
             this.service.snapshot(id);
 
         return object$.pipe
@@ -185,7 +185,7 @@ export class StateIcon
 
         const timestamp: string = new Date().toISOString();
         const name:      string = fileName == null ? `${StateIconOptions.children}_${timestamp}.jpg` : fileName;
-        const userId:    string = this.store.selectSnapshot(StateUser.userId);
+        const userId:    string = this.store.selectSnapshot(StateUser.id);
         const path:      string = `${userId}/${this.service.name}/${name}`;
         const upload:    Upload = StateIcon.upload(getState());
         const data:      string = `${CoreEnum.DataUri}${file}`;

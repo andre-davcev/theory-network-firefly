@@ -87,73 +87,6 @@ export class StateUser implements NgxsOnInit
         return user == null ? undefined : user.id;
     }
 
-    @Selector() static clusterMap(state: StateUserModel): Record<string, Cluster> { return state.clusterMap; }
-    @Selector() static clusters(state: StateUserModel): Array<Cluster>
-    {
-        const clusterMap: Record<string, Cluster> = StateUser.clusterMap(state);
-
-        return Object.keys(clusterMap).map(((id: string) => clusterMap[id]));
-    }
-    @Selector() static clustersFound(state: StateUserModel): boolean
-    {
-        return Object.keys(StateUser.clusterMap(state)).length > 0;
-    }
-
-    @Selector() static subscriptionMap(state: StateUserModel): Record<string, Cluster> { return state.subscriptionMap; }
-    @Selector() static subscriptionsKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state).subscriptions; }
-    @Selector() static subscriptions(state: StateUserModel): Array<Subscription>
-    {
-        const subscriptionsKeys: Record<string, string>  = StateUser.subscriptionsKeys(state);
-        const subscriptionMap:   Record<string, Cluster> = StateUser.subscriptionMap(state);
-
-        return Object.
-            keys(subscriptionsKeys).
-            map(((id: string) => subscriptionMap[id])).
-            map((cluster: Cluster) => ({ ...cluster, on: true }));
-    }
-    @Selector() static subscriptionsFound(state: StateUserModel): boolean
-    {
-        return Object.keys(StateUser.subscriptionsKeys(state)).length > 0;
-    }
-
-    @Selector() static subscriptionsOffKeys(state: StateUserModel): Record<string, string> { return StateUser.user(state).subscriptionsOff; }
-    @Selector() static subscriptionsOff(state: StateUserModel): Array<Subscription>
-    {
-        const subscriptionsOffKeys: Record<string, string>  = StateUser.subscriptionsOffKeys(state);
-        const subscriptionMap:      Record<string, Cluster> = StateUser.subscriptionMap(state);
-
-        return Object.
-            keys(subscriptionsOffKeys).
-            map(((id: string) => subscriptionMap[id])).
-            map((cluster: Cluster) => ({ ...cluster, on: false }));
-    }
-    @Selector() static subscriptionsOffFound(state: StateUserModel): boolean
-    {
-        return Object.keys(StateUser.subscriptionsOffKeys(state)).length > 0;
-    }
-
-    @Selector() static subscriptionsAllKeys(state: StateUserModel): Record<string, string>
-    {
-        return {
-            ...StateUser.subscriptionsKeys(state),
-            ...StateUser.subscriptionsOffKeys(state)
-        };
-    }
-    @Select() static subscriptionsAll(state: StateUserModel): Array<Subscription>
-    {
-        return [
-          ...StateUser.subscriptions(state),
-          ...StateUser.subscriptionsOff(state)
-        ].
-        sort((a: Cluster, b: Cluster) =>
-            a.name.localeCompare(b.name)
-        );
-    }
-    @Selector() static subscriptionsAllFound(state: StateUserModel): boolean
-    {
-        return Object.keys(StateUser.subscriptionsAllKeys(state)).length > 0;
-    }
-
     @Selector() static homeLoaded(state: StateUserModel): boolean { return state.streamLoaded && state.alertsLoaded; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
@@ -184,7 +117,7 @@ export class StateUser implements NgxsOnInit
         const id: string = payload;
 
         const object$: Observable<User> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateUserOptions.defaults.empty)) :
+            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateUserOptions.defaults.empty)) :
             this.service.snapshot(id);
 
         return object$.pipe

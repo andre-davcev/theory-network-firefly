@@ -81,7 +81,7 @@ export class StateEvent
         const id: string = payload;
 
         const object$: Observable<Event> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateEventOptions.defaults.empty)) :
+            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateEventOptions.defaults.empty)) :
             this.service.snapshot(id);
 
         return object$.pipe

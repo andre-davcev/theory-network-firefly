@@ -52,7 +52,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersGetData)
     getData({ dispatch }: StateContext<StateIconClustersModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.userId);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
 
         return dispatch(new ActionIconClustersReset()).
         pipe
