@@ -18,17 +18,6 @@ import {
   ActionUserLoginEmail,
   ActionUserLogout,
   ActionUserWatchLanguage,
-  ActionUserWatchClusters,
-  ActionUserWatchStream,
-  ActionUserWatchSubscriptions,
-  ActionUserSetStream,
-  ActionUserSetClusters,
-  ActionUserSetSubscriptions,
-  ActionUserSetOld,
-  ActionUserSetAlerts,
-  ActionUserWatchAlerts,
-  ActionUserSubscribe,
-  ActionUserUnsubscribe,
   ActionUserReset,
   ActionUserGet,
   ActionUserSet,
@@ -243,7 +232,7 @@ export class StateUser implements NgxsOnInit
                 dispatch
                 ([
                     new ActionLanguageSet(user.language),
-                    new ActionUserSetOld(user)
+                    new ActionUserSet(user)
                 ])
             ),
 
@@ -297,80 +286,5 @@ export class StateUser implements NgxsOnInit
             tap(() => patchState({ authenticated: false, authData: undefined, user: undefined })),
             catchError((error: Error) => of(patchState({ error })))
         );
-    }
-
-    @Action(ActionUserWatchClusters, { cancelUncompleted: true })
-    watchClusters({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatchClusters)
-    {
-        const user: User     = payload;
-        const empty: Cluster = StateClusterOptions.defaults.empty;
-
-        return this.cluster.valuesChangesClusters(user.clusters, empty).
-        pipe
-        (
-            tap((clusters: Record<string, Cluster>) =>
-                dispatch(new ActionUserSetClusters(clusters))
-            )
-        );
-    }
-
-    @Action(ActionUserWatchSubscriptions, { cancelUncompleted: true })
-    watchSubscriptions({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatchSubscriptions)
-    {
-        const user: User     = payload;
-        const empty: Cluster = StateClusterOptions.defaults.empty;
-
-        const subscriptionsKeys =
-        {
-            ...user.subscriptions,
-            ...user.subscriptionsOff
-        };
-
-        return this.cluster.valuesChangesClusters(subscriptionsKeys, empty).
-        pipe
-        (
-            tap((subscriptions: Record<string, Cluster>) =>
-                dispatch(new ActionUserSetSubscriptions(subscriptions))
-            )
-        )
-    }
-
-    @Action(ActionUserWatchStream, { cancelUncompleted: true })
-    watchStream({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatchStream)
-    {
-        const user: User = payload;
-        const subscriptions: Record<string, string> =
-        {
-            ...user.subscriptions,
-            ...user.subscriptionsOff
-        };
-        const empty: Cluster = StateClusterOptions.defaults.empty;
-
-        return this.cluster.valuesChangesClusters(user.stream, empty).
-        pipe
-        (
-            map((clusters: Array<Cluster>) =>
-                clusters.
-                filter((cluster: Cluster) =>
-                    cluster.subscribers[cluster.id] == null
-                ).
-                map((item: Cluster, index: number) =>
-                ({
-                    ...item,
-                    index:           index,
-                    subscribed:      false,
-                    subscribedCount: Object.keys(item.subscribers).length
-                }))
-            ),
-            switchMap((stream: Array<StreamItem>) =>
-                dispatch(new ActionUserSetStream(stream))
-            )
-        );
-    }
-
-    @Action(ActionUserSetOld)
-    userSet({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserSetOld)
-    {
-        patchState({ user: payload });
     }
 }
