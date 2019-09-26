@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, Cluster, StreamItem, Alert } from '@firefly/core/models';
+import { User, Alert } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -26,9 +26,8 @@ import {
   ActionUserSave,
   ActionUserDelete
 } from './user.actions';
-import { ServiceUsers, ServiceClusters, ServiceUserAlerts } from '@firefly/core/services';
+import { ServiceUsers } from '@firefly/core/services';
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { StateClusterOptions } from '../cluster/cluster.state.options';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { FormGroup } from '@angular/forms';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
@@ -38,11 +37,9 @@ export class StateUser implements NgxsOnInit
 {
     constructor
     (
-        private store:    Store,
-        private service:  ServiceUsers,
-        private fireAuth: AngularFireAuth,
-        private cluster:  ServiceClusters,
-        private alerts:   ServiceUserAlerts
+        private store:   Store,
+        private service: ServiceUsers,
+        private auth:    AngularFireAuth
     ) { }
 
 
@@ -58,14 +55,14 @@ export class StateUser implements NgxsOnInit
     @Selector() static isNew(state: StateUserModel): boolean       { return StateUser.id(state) === CoreEnum.IdNew; }
     @Selector() static canUpdate(state: StateUserModel): boolean   { return StateUser.form(state).status === FormNgxsStatus.Valid && StateUser.form(state).dirty; }
 
-    @Selector() static authData(state: StateUserModel): FirebaseUser              {return state.authData;}
-    @Selector() static authenticated(state: StateUserModel): boolean              {return state.authenticated;}
-    @Selector() static authenticating(state: StateUserModel): boolean             {return state.authenticating;}
-    @Selector() static loading(state: StateUserModel): boolean                    {return state.authenticating || state.initializing;}
-    @Selector() static loadedNotAuthenticated(state: StateUserModel):boolean      {return !StateUser.loading(state) && !StateUser.authenticated(state);}
-    @Selector() static error(state: StateUserModel): Error                        {return state.error;}
-    @Selector() static errored(state: StateUserModel)                             {return state.error != null;}
-    @Selector() static userFound(state: StateUserModel)                           {return state.user != null;}
+    @Selector() static authData(state: StateUserModel): FirebaseUser              { return state.authData; }
+    @Selector() static authenticated(state: StateUserModel): boolean              { return state.authenticated; }
+    @Selector() static authenticating(state: StateUserModel): boolean             { return state.authenticating; }
+    @Selector() static loading(state: StateUserModel): boolean                    { return state.authenticating || state.initializing; }
+    @Selector() static loadedNotAuthenticated(state: StateUserModel):boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
+    @Selector() static error(state: StateUserModel): Error                        { return state.error; }
+    @Selector() static errored(state: StateUserModel)                             { return state.error != null; }
+    @Selector() static found(state: StateUserModel)                               { return StateUser.data(state) != null; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
@@ -172,26 +169,27 @@ export class StateUser implements NgxsOnInit
 
 
     @Action(ActionUserAuthenticate)
-    userAuthenticate({ patchState, dispatch }: StateContext<StateUserModel>)
+    authenticate({ patchState, dispatch }: StateContext<StateUserModel>)
     {
         patchState({ authenticating: true, initializing: true });
 
-        return this.fireAuth.authState.pipe
+        return this.auth.authState.pipe
         (
             take(1),
             tap((authData: FirebaseUser) => patchState({ authData, authenticating: false, authenticated: authData != null })),
             switchMap((authData: FirebaseUser) => authData == null ? of() : dispatch(new ActionUserWatch(this.service.parseId(authData)))),
             tap(() => patchState({ initializing: false })),
-            catchError((error: Error) => of(patchState({error, authenticating: false, initializing: false})))
+            catchError((error: Error) => of(patchState({ error, authenticating: false, initializing: false })))
         );
     }
 
     @Action(ActionUserAuthenticateCheck)
-    userAuthenticateCheck({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserAuthenticateCheck)
+    authenticateCheck({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserAuthenticateCheck)
     {
         return of(payload).
         pipe
         (
+            tap(() => dispatch(new ActionUserReset())),
             filter((authData: FirebaseUser) =>
             {
                 const authenticated: boolean = authData != null;
@@ -199,7 +197,6 @@ export class StateUser implements NgxsOnInit
                 patchState
                 ({
                     authData,
-                    user: undefined,
                     authenticated,
                     authenticating: authenticated,
                     error: authenticated ? undefined : { name: 'Failed Login', message: 'Unable to login' }
@@ -214,20 +211,11 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserWatch, { cancelUncompleted: true })
-    userWatch({ patchState, dispatch, getState }: StateContext<StateUserModel>, { payload }: ActionUserWatch)
+    watch({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatch)
     {
         return this.service.valuesChanges(payload).pipe
         (
             filter((user: User) => user != null),
-            map((user: User) =>
-            {
-                const empty: User = CoreUtil.clone<User>(StateUserOptions.defaults.empty);
-
-                return {
-                    ...empty,
-                    ...user
-                };
-            }),
             tap((user: User) =>
                 dispatch
                 ([
@@ -241,7 +229,7 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserWatchLanguage)
-    userWatchLanguage()
+    watchLanguage()
     {
         return combineLatest([this.data$, this.language$]).pipe
         (
@@ -252,17 +240,17 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserAddToken)
-    userAddToken({ getState, patchState }: StateContext<StateUserModel>, { payload }: ActionUserAddToken)
+    addToken({ getState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserAddToken)
     {
         const user   : User   = StateUser.data(getState());
         const token  : string = payload;
         const tokens : Record<string, string> = user.tokens == null ? {[token]: token} : {...user.tokens, [token]: token};
 
-        user.tokens = tokens;
-
-        patchState({ user });
-
-        return this.service.patch(user.id, { tokens });
+        return forkJoin
+        (
+            this.service.patch(user.id, { tokens }),
+            dispatch(new ActionUserPatch({ tokens }))
+        );
     }
 
     @Action(ActionUserLoginEmail)
@@ -270,7 +258,7 @@ export class StateUser implements NgxsOnInit
     {
         patchState({ authenticating: true });
 
-        return from(this.fireAuth.auth.signInWithEmailAndPassword(payload.id, payload.password)).pipe
+        return from(this.auth.auth.signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             map((userCredential: firebase.auth.UserCredential) => userCredential.user),
             switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
@@ -279,11 +267,11 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserLogout)
-    userLogout({ patchState }: StateContext<StateUserModel>)
+    logout({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        return of(this.fireAuth.auth.signOut()).pipe
+        return of(this.auth.auth.signOut()).pipe
         (
-            tap(() => patchState({ authenticated: false, authData: undefined, user: undefined })),
+            switchMap(() => dispatch(new ActionUserReset())),
             catchError((error: Error) => of(patchState({ error })))
         );
     }
