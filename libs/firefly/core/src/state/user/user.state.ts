@@ -1,6 +1,6 @@
 import { User as FirebaseUser } from 'firebase/app';
 
-import { State, Selector, Action, StateContext, Select, NgxsOnInit} from '@ngxs/store';
+import { State, Selector, Action, StateContext, Select, NgxsOnInit, Store} from '@ngxs/store';
 import { Observable, of, from, combineLatest, forkJoin } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -24,29 +24,51 @@ import {
   ActionUserSetStream,
   ActionUserSetClusters,
   ActionUserSetSubscriptions,
-  ActionUserSet,
+  ActionUserSetOld,
   ActionUserSetAlerts,
   ActionUserWatchAlerts,
   ActionUserSubscribe,
-  ActionUserUnsubscribe
+  ActionUserUnsubscribe,
+  ActionUserReset,
+  ActionUserGet,
+  ActionUserSet,
+  ActionUserPatch,
+  ActionUserCreate,
+  ActionUserSave,
+  ActionUserDelete
 } from './user.actions';
 import { ServiceUsers, ServiceClusters, ServiceUserAlerts } from '@firefly/core/services';
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, CoreEnum } from '@theory/core';
 import { StateClusterOptions } from '../cluster/cluster.state.options';
+import { FormNgxs, FormNgxsStatus } from '@theory/state';
+import { FormGroup } from '@angular/forms';
+import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser implements NgxsOnInit
 {
     constructor
     (
+        private store:    Store,
+        private service:  ServiceUsers,
         private fireAuth: AngularFireAuth,
-        private service: ServiceUsers,
-        private cluster: ServiceClusters,
-        private alerts: ServiceUserAlerts
+        private cluster:  ServiceClusters,
+        private alerts:   ServiceUserAlerts
     ) { }
+
 
     @Select(StateLanguage.language) language$: Observable<string>;
     @Select(StateUser.user)         user$:     Observable<User>;
+
+    @Selector() static form(state: StateUserModel): FormNgxs       { return state.form; }
+    @Selector() static formGroup(state: StateUserModel): FormGroup { return state.formGroup; }
+    @Selector() static formPath(state: StateUserModel): string     { return state.formPath; }
+    @Selector() static isForm(state: StateUserModel): boolean      { return StateUser.formGroup(state) != null; }
+    @Selector() static data(state: StateUserModel): User           { return StateUser.form(state).model; }
+    @Selector() static id(state: StateUserModel): string           { return StateUser.data(state).id; }
+    @Selector() static isNew(state: StateUserModel): boolean       { return StateUser.id(state) === CoreEnum.IdNew; }
+    @Selector() static canUpdate(state: StateUserModel): boolean   { return StateUser.form(state).status === FormNgxsStatus.Valid && StateUser.form(state).dirty; }
+
 
     @Selector() static authData(state: StateUserModel): FirebaseUser              {return state.authData;}
     @Selector() static user(state: StateUserModel): User                          {return state.user;}
@@ -132,12 +154,6 @@ export class StateUser implements NgxsOnInit
         return Object.keys(StateUser.subscriptionsAllKeys(state)).length > 0;
     }
 
-    @Selector() static stream(state: StateUserModel): Array<StreamItem> { return state.stream == null ? [] : state.stream; }
-    @Selector() static streamFound(state: StateUserModel): boolean { return StateUser.stream(state).length > 0; }
-
-    @Selector() static alerts(state: StateUserModel): Array<Alert> { return state.alerts == null ? [] : state.alerts; }
-    @Selector() static alertsFound(state: StateUserModel): boolean { return StateUser.alerts(state).length > 0; }
-
     @Selector() static homeLoaded(state: StateUserModel): boolean { return state.streamLoaded && state.alertsLoaded; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
@@ -148,6 +164,101 @@ export class StateUser implements NgxsOnInit
             new ActionUserAuthenticate()
         ]);
     }
+
+    @Action(ActionUserReset)
+    reset({ patchState, getState, dispatch }: StateContext<StateUserModel>)
+    {
+        const defaults: StateUserModel = CoreUtil.clone<StateUserModel>(StateUserOptions.defaults);
+
+        patchState(defaults);
+
+        return dispatch
+        ([
+            new SetFormPristine(StateUser.formPath(getState()))
+        ]);
+    }
+
+    @Action(ActionUserGet)
+    get({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserGet)
+    {
+        const id: string = payload;
+
+        const object$: Observable<User> = id === CoreEnum.IdNew ?
+            of(this.service.build(this.store.selectSnapshot(StateUser.userId), StateUserOptions.defaults.empty)) :
+            this.service.snapshot(id);
+
+        return object$.pipe
+        (
+            switchMap((object: User) =>
+                dispatch
+                ([
+                    new ActionUserSet(object)
+                ])
+            )
+        );
+    }
+
+    @Action(ActionUserSet)
+    set({ patchState, getState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserSet)
+    {
+        const object: User = payload;
+
+        return dispatch(new ActionUserReset()).
+        pipe
+        (
+            map(() =>
+                patchState
+                ({
+                    formGroup: this.service.formCreate(object)
+                })
+            ),
+
+            switchMap(() =>
+                dispatch(new UpdateFormValue({ value: object, path: StateUser.formPath(getState())}))
+            )
+        );
+    }
+
+    @Action(ActionUserPatch)
+    patch({ dispatch, getState } : StateContext<StateUserModel>, { payload }: ActionUserPatch)
+    {
+        const value: Partial<Alert> = payload;
+        const path: string          = StateUser.formPath(getState());
+
+        return dispatch(new UpdateFormValue({ value, path }));
+    }
+
+    @Action(ActionUserCreate)
+    create({ getState }: StateContext<StateUserModel>)
+    {
+        const state: StateUserModel = getState();
+        const data:  User           = StateUser.data(state);
+
+        return this.service.create(data);
+    }
+
+    @Action(ActionUserSave)
+    save({ getState }: StateContext<StateUserModel>)
+    {
+        const data: User = StateUser.data(getState());
+
+        return this.service.patch(data.id, data);
+    }
+
+    @Action(ActionUserDelete)
+    delete({ getState, dispatch }: StateContext<StateUserModel>)
+    {
+        const data: User = StateUser.data(getState());
+
+        return this.service.delete(data).
+        pipe
+        (
+            map(() =>
+              dispatch(new ActionUserReset())
+            )
+        );
+    }
+
 
     @Action(ActionUserAuthenticate)
     userAuthenticate({ patchState, dispatch }: StateContext<StateUserModel>)
@@ -237,7 +348,7 @@ export class StateUser implements NgxsOnInit
                 dispatch
                 ([
                     new ActionLanguageSet(user.language),
-                    new ActionUserSet(user)
+                    new ActionUserSetOld(user)
                 ])
             ),
 
@@ -377,8 +488,8 @@ export class StateUser implements NgxsOnInit
         );
     }
 
-    @Action(ActionUserSet)
-    userSet({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserSet)
+    @Action(ActionUserSetOld)
+    userSet({ patchState }: StateContext<StateUserModel>, { payload }: ActionUserSetOld)
     {
         patchState({ user: payload });
     }

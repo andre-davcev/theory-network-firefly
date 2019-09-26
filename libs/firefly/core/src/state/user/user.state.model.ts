@@ -1,7 +1,7 @@
-import { User, Cluster, StreamItem, Alert } from '@firefly/core/models';
-import { FormGroup } from '@angular/forms';
+import { User } from '@firefly/core/models';
+import { StateAssetModel } from '@firefly/core/interfaces';
 
-export interface StateUserModel
+export interface StateUserModel extends StateAssetModel<User>
 {
     authData         : firebase.User;
     user             : User;
@@ -9,12 +9,4 @@ export interface StateUserModel
     authenticated    : boolean;
     authenticating   : boolean;
     initializing     : boolean;
-    form             : FormGroup;
-    empty            : User;
-    clusterMap       : Record<string, Cluster>;
-    subscriptionMap  : Record<string, Cluster>;
-    stream           : Array<StreamItem>;
-    streamLoaded     : boolean;
-    alerts           : Array<Alert>;
-    alertsLoaded     : boolean;
 }

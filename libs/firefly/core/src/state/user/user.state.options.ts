@@ -8,20 +8,6 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
 
     defaults :
     {
-        authData        : undefined,
-        user            : undefined,
-        error           : undefined,
-        authenticated   : false,
-        authenticating  : false,
-        initializing    : false,
-        form            : undefined,
-        clusterMap      : {},
-        subscriptionMap : {},
-        stream          : [],
-        streamLoaded    : false,
-        alerts          : [],
-        alertsLoaded    : false,
-
         empty :
         {
             version     : undefined,
@@ -36,16 +22,25 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             phoneNumber      : undefined,
             photoUrl         : undefined,
             providerId       : undefined,
-            tokens           : {},
-            notifications    : {},
-            clusters         : {},
-            subscriptions    : {},
-            subscriptionsOff : {},
-            events           : {},
-            images           : {},
-            icons            : {},
-            stream           : [],
-            alerts           : []
-        }
+            tokens           : {}
+        },
+
+        form :
+        {
+            model  : {},
+            dirty  : false,
+            status : '',
+            errors : {}
+        },
+
+        formGroup : undefined,
+        formPath  : 'user.form',
+
+        authData        : undefined,
+        user            : undefined,
+        error           : undefined,
+        authenticated   : false,
+        authenticating  : false,
+        initializing    : false
     }
 };
