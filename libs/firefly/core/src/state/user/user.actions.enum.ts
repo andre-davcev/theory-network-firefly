@@ -1,5 +1,13 @@
 export enum ActionsUser
 {
+    Reset  = '[User] Reset',
+    Get    = '[User] Get',
+    Set    = '[User] Set',
+    Patch  = '[User] Patch',
+    Save   = '[User] Save',
+    Create = '[User] Create',
+    Delete = '[User] Delete',
+
     UserAuthenticate       = '[User] User Authenticate',
     UserAuthenticateCheck  = '[User] User Authenticate Check',
     UserWatch              = '[User] User Watch',
