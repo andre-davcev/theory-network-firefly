@@ -21,6 +21,7 @@ import {
   ActionAlertSave,
   ActionAlertDelete
 } from './alert.actions';
+import { ActionUserAlertsAdd } from '../user-alerts';
 
 @State<StateAlertModel>(StateAlertOptions)
 
@@ -110,12 +111,15 @@ export class StateAlert
     }
 
     @Action(ActionAlertCreate)
-    create({ getState }: StateContext<StateAlertModel>)
+    create({ getState, dispatch }: StateContext<StateAlertModel>)
     {
         const state: StateAlertModel = getState();
         const data:  Alert           = StateAlert.data(state);
 
-        return this.service.create(data);
+        return this.service.create(data).pipe
+        (
+            switchMap(() => dispatch(new ActionUserAlertsAdd(data)))
+        );
     }
 
     @Action(ActionAlertSave)
