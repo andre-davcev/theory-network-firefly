@@ -110,6 +110,7 @@ export class StateStreamItem
             switchMap(() => dispatch(new UpdateFormValue({ value, path })))
         );
     }
+
     @Action(ActionStreamItemCreate)
     create({ getState }: StateContext<StateStreamItemModel>)
     {
