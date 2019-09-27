@@ -42,7 +42,6 @@ export class StateUser implements NgxsOnInit
         private auth:    AngularFireAuth
     ) { }
 
-
     @Select(StateLanguage.language) language$: Observable<string>;
     @Select(StateUser.data)         data$:     Observable<User>;
 
@@ -114,13 +113,7 @@ export class StateUser implements NgxsOnInit
         return dispatch(new ActionUserReset()).
         pipe
         (
-            map(() =>
-                patchState
-                ({
-                    formGroup: this.service.formCreate(object)
-                })
-            ),
-
+            map(() => patchState({ formGroup: this.service.formCreate(object) }) ),
             switchMap(() =>
                 dispatch(new UpdateFormValue({ value: object, path: StateUser.formPath(getState())}))
             )
@@ -128,12 +121,17 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserPatch)
-    patch({ dispatch, getState } : StateContext<StateUserModel>, { payload }: ActionUserPatch)
+    patch({ dispatch, getState } : StateContext<StateUserModel>, { payload, save }: ActionUserPatch)
     {
-        const value: Partial<Alert> = payload;
-        const path: string          = StateUser.formPath(getState());
+        const value: Partial<User>    = payload;
+        const state: StateUserModel   = getState();
+        const path:  string           = StateUser.formPath(state);
+        const save$: Observable<void> = save ? this.service.patch(StateUser.id(state), value) : of();
 
-        return dispatch(new UpdateFormValue({ value, path }));
+        return save$.pipe
+        (
+            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+        );
     }
 
     @Action(ActionUserCreate)
@@ -161,12 +159,9 @@ export class StateUser implements NgxsOnInit
         return this.service.delete(data).
         pipe
         (
-            map(() =>
-              dispatch(new ActionUserReset())
-            )
+            map(() => dispatch(new ActionUserReset()))
         );
     }
-
 
     @Action(ActionUserAuthenticate)
     authenticate({ patchState, dispatch }: StateContext<StateUserModel>)
@@ -224,18 +219,18 @@ export class StateUser implements NgxsOnInit
                 ])
             ),
 
-            catchError((error: Error) => of(patchState({ error})))
+            catchError((error: Error) => of(patchState({ error })))
         );
     }
 
     @Action(ActionUserWatchLanguage)
-    watchLanguage()
+    watchLanguage({ dispatch }: StateContext<StateUserModel>)
     {
         return combineLatest([this.data$, this.language$]).pipe
         (
             filter(([user, language]) => user != null && user.language != null && language != null),
             filter(([user, language]) => user.language !== language),
-            switchMap(([user, language]) => this.service.patch(user.id, { language }))
+            switchMap(([user, language]) => dispatch(new ActionUserPatch({ language }, true)))
         );
     }
 
@@ -244,13 +239,10 @@ export class StateUser implements NgxsOnInit
     {
         const user   : User   = StateUser.data(getState());
         const token  : string = payload;
+
         const tokens : Record<string, string> = user.tokens == null ? {[token]: token} : {...user.tokens, [token]: token};
 
-        return forkJoin
-        (
-            this.service.patch(user.id, { tokens }),
-            dispatch(new ActionUserPatch({ tokens }))
-        );
+        return dispatch(new ActionUserPatch({ tokens }, true));
     }
 
     @Action(ActionUserLoginEmail)

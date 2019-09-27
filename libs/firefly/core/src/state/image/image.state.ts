@@ -109,12 +109,17 @@ export class StateImage
     }
 
     @Action(ActionImagePatch)
-    patch({ dispatch, getState } : StateContext<StateImageModel>, { payload }: ActionImagePatch)
+    patch({ dispatch, getState } : StateContext<StateImageModel>, { payload, save }: ActionImagePatch)
     {
-        const value: Partial<Image> = payload;
-        const path: string         = StateImage.formPath(getState());
+        const value: Partial<Image>   = payload;
+        const state: StateImageModel  = getState();
+        const path:  string           = StateImage.formPath(state);
+        const save$: Observable<void> = save ? this.service.patch(StateImage.id(state), value) : of();
 
-        return dispatch(new UpdateFormValue({ value, path }));
+        return save$.pipe
+        (
+            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+        );
     }
 
     @Action(ActionImageCreate)

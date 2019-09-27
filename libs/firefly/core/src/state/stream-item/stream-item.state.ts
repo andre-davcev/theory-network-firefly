@@ -98,14 +98,18 @@ export class StateStreamItem
     }
 
     @Action(ActionStreamItemPatch)
-    patch({ dispatch, getState } : StateContext<StateStreamItemModel>, { payload }: ActionStreamItemPatch)
+    patch({ dispatch, getState } : StateContext<StateStreamItemModel>, { payload, save }: ActionStreamItemPatch)
     {
-        const value: Partial<StreamItem> = payload;
-        const path: string               = StateStreamItem.formPath(getState());
+        const value: Partial<StreamItem>  = payload;
+        const state: StateStreamItemModel = getState();
+        const path:  string               = StateStreamItem.formPath(state);
+        const save$: Observable<void>     = save ? this.service.patch(StateStreamItem.id(state), value) : of();
 
-        return dispatch(new UpdateFormValue({ value, path }));
+        return save$.pipe
+        (
+            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+        );
     }
-
     @Action(ActionStreamItemCreate)
     create({ getState }: StateContext<StateStreamItemModel>)
     {

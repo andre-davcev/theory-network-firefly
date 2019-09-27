@@ -111,12 +111,17 @@ export class StateIcon
     }
 
     @Action(ActionIconPatch)
-    patch({ dispatch, getState } : StateContext<StateIconModel>, { payload }: ActionIconPatch)
+    patch({ dispatch, getState } : StateContext<StateIconModel>, { payload, save }: ActionIconPatch)
     {
-        const value: Partial<Icon> = payload;
-        const path: string         = StateIcon.formPath(getState());
+        const value: Partial<Icon>    = payload;
+        const state: StateIconModel   = getState();
+        const path:  string           = StateIcon.formPath(state);
+        const save$: Observable<void> = save ? this.service.patch(StateIcon.id(state), value) : of();
 
-        return dispatch(new UpdateFormValue({ value, path }));
+        return save$.pipe
+        (
+            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+        );
     }
 
     @Action(ActionIconCreate)
