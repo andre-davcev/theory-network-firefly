@@ -98,12 +98,17 @@ export class StateSubscription
     }
 
     @Action(ActionSubscriptionPatch)
-    patch({ dispatch, getState } : StateContext<StateSubscriptionModel>, { payload }: ActionSubscriptionPatch)
+    patch({ dispatch, getState } : StateContext<StateSubscriptionModel>, { payload, save }: ActionSubscriptionPatch)
     {
-        const value: Partial<Subscription> = payload;
-        const path: string               = StateSubscription.formPath(getState());
+        const value: Partial<Subscription>  = payload;
+        const state: StateSubscriptionModel = getState();
+        const path:  string                 = StateSubscription.formPath(state);
+        const save$: Observable<void>       = save ? this.service.patch(StateSubscription.id(state), value) : of();
 
-        return dispatch(new UpdateFormValue({ value, path }));
+        return save$.pipe
+        (
+            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+        );
     }
 
     @Action(ActionSubscriptionCreate)

@@ -99,12 +99,17 @@ export class StateCluster
     }
 
     @Action(ActionClusterPatch)
-    patch({ dispatch, getState } : StateContext<StateClusterModel>, { payload }: ActionClusterPatch)
+    patch({ dispatch, getState } : StateContext<StateClusterModel>, { payload, save }: ActionClusterPatch)
     {
-        const value: Partial<Cluster> = payload;
-        const path:  string           = StateCluster.formPath(getState());
+        const value: Partial<Cluster>  = payload;
+        const state: StateClusterModel = getState();
+        const path:  string            = StateCluster.formPath(state);
+        const save$: Observable<void>  = save ? this.service.patch(StateCluster.id(state), value) : of();
 
-        return dispatch(new UpdateFormValue({ value, path }));
+        return save$.pipe
+        (
+            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+        );
     }
 
     @Action(ActionClusterCreate)

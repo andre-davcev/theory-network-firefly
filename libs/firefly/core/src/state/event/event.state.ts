@@ -118,12 +118,17 @@ export class StateEvent
     }
 
     @Action(ActionEventPatch)
-    patch({ dispatch, getState } : StateContext<StateEventModel>, { payload }: ActionEventPatch)
+    patch({ dispatch, getState } : StateContext<StateEventModel>, { payload, save }: ActionEventPatch)
     {
-        const value: Partial<Event> = payload;
-        const path:  string         = StateEvent.formPath(getState());
+        const value: Partial<Event>   = payload;
+        const state: StateEventModel  = getState();
+        const path:  string           = StateEvent.formPath(state);
+        const save$: Observable<void> = save ? this.service.patch(StateEvent.id(state), value) : of();
 
-        return dispatch(new UpdateFormValue({ value, path }));
+        return save$.pipe
+        (
+            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+        );
     }
 
     @Action(ActionEventCreate)

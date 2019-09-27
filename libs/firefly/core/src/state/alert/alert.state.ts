@@ -96,12 +96,17 @@ export class StateAlert
     }
 
     @Action(ActionAlertPatch)
-    patch({ dispatch, getState } : StateContext<StateAlertModel>, { payload }: ActionAlertPatch)
+    patch({ dispatch, getState } : StateContext<StateAlertModel>, { payload, save }: ActionAlertPatch)
     {
-        const value: Partial<Alert> = payload;
-        const path: string               = StateAlert.formPath(getState());
+        const value: Partial<Alert>   = payload;
+        const state: StateAlertModel  = getState();
+        const path:  string           = StateAlert.formPath(state);
+        const save$: Observable<void> = save ? this.service.patch(StateAlert.id(state), value) : of();
 
-        return dispatch(new UpdateFormValue({ value, path }));
+        return save$.pipe
+        (
+            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+        );
     }
 
     @Action(ActionAlertCreate)
