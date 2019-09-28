@@ -31,6 +31,13 @@ import { CoreUtil, CoreEnum } from '@theory/core';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { FormGroup } from '@angular/forms';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
+import { ActionUserAlertsDelete, ActionUserAlertsReset } from '../user-alerts';
+import { ActionUserClustersDelete, ActionUserClustersReset } from '../user-clusters';
+import { ActionUserEventsDelete, ActionUserEventsReset } from '../user-events';
+import { ActionUserIconsDelete, ActionUserIconsReset } from '../user-icons';
+import { ActionUserImagesDelete, ActionUserImagesReset } from '../user-images';
+import { ActionUserStreamDelete, ActionUserStreamReset } from '../user-stream';
+import { ActionUserSubscriptionsDelete, ActionUserSubscriptionsReset } from '../user-subscriptions';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser implements NgxsOnInit
@@ -81,6 +88,13 @@ export class StateUser implements NgxsOnInit
 
         return dispatch
         ([
+            new ActionUserAlertsReset(),
+            new ActionUserClustersReset(),
+            new ActionUserEventsReset(),
+            new ActionUserIconsReset(),
+            new ActionUserImagesReset(),
+            new ActionUserStreamReset(),
+            new ActionUserSubscriptionsReset(),
             new SetFormPristine(StateUser.formPath(getState()))
         ]);
     }
@@ -159,7 +173,18 @@ export class StateUser implements NgxsOnInit
         return this.service.delete(data).
         pipe
         (
-            switchMap(() => dispatch(new ActionUserReset()))
+            switchMap(() =>
+                dispatch
+                ([
+                    new ActionUserAlertsDelete(),
+                    new ActionUserClustersDelete(),
+                    new ActionUserEventsDelete(),
+                    new ActionUserIconsDelete(),
+                    new ActionUserImagesDelete(),
+                    new ActionUserStreamDelete(),
+                    new ActionUserSubscriptionsDelete(),
+                    new ActionUserReset()
+                ]))
         );
     }
 

@@ -19,6 +19,7 @@ import {
     ActionClusterSubscribersSet,
     ActionClusterSubscribersDelete
 } from './cluster-subscribers.actions';
+import { ActionUserSubscriptionsRemove } from '../user-subscriptions';
 
 @State<StateClusterSubscribersModel>(StateClusterSubscribersOptions)
 
@@ -164,6 +165,7 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     {
         return dispatch
         ([
+            new ActionUserSubscriptionsRemove(this.store.selectSnapshot(StateCluster.id)),
             new ActionClusterSubscribersReset()
         ]);
     }

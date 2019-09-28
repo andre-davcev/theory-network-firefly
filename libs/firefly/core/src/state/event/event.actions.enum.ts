@@ -8,6 +8,8 @@ export enum ActionsEvent
     Create = '[Event] Create',
     Delete = '[Event] Delete',
 
-    LocationSet    = '[Event] Location Set',
-    TimeSet        = '[Event] Time Set'
+    ImageAdd    = '[Event] Image Set',
+    ImageRemove = '[Event] Image Remove',
+    LocationSet = '[Event] Location Set',
+    TimeSet     = '[Event] Time Set'
 }

@@ -29,6 +29,8 @@ import {
   ActionIconUriClear
 } from './icon.actions';
 import undefined = require('firebase/empty-import');
+import { ActionIconClustersReset, ActionIconClustersDelete } from '../icon-clusters';
+import { ActionUserIconsAdd, ActionUserIconsRemove } from '../user-icons';
 
 @State<StateIconModel>(StateIconOptions)
 
@@ -94,7 +96,12 @@ export class StateIcon
     {
         const object: Icon = payload;
 
-        return dispatch(new ActionIconReset()).
+        return dispatch
+        ([
+            new ActionIconReset(),
+            new ActionIconClustersReset(),
+            new ActionUserIconsAdd(StateIcon.data(getState()))
+        ]).
         pipe
         (
             map(() =>
@@ -158,7 +165,12 @@ export class StateIcon
         pipe
         (
             switchMap(() =>
-              dispatch(new ActionIconReset())
+                dispatch
+                ([
+                    new ActionIconClustersDelete(),
+                    new ActionUserIconsRemove(data.id),
+                    new ActionIconReset()
+                ])
             )
         );
     }

@@ -11,7 +11,7 @@ import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { StateUser } from '@firefly/core/state/user';
 import { Event, Location, Time } from '@firefly/core/models';
 import { ServiceEvents } from '@firefly/core/services';
-import { ActionImageGet, ActionImageCreate } from '@firefly/core/state/image';
+import { ActionImageGet, ActionImageCreate, StateImage } from '@firefly/core/state/image';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -24,8 +24,13 @@ import {
   ActionEventDelete,
   ActionEventReset,
   ActionEventSet,
-  ActionEventSave
+  ActionEventSave,
+  ActionEventImageAdd,
+  ActionEventImageRemove
 } from './event.actions';
+import { ActionEventClustersReset, ActionEventClustersDelete } from '../event-clusters';
+import { ActionUserEventsAdd, ActionUserEventsRemove } from '../user-events';
+import { ActionImageEventsRemove, ActionImageEventsAdd } from '../image-events';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -101,7 +106,12 @@ export class StateEvent
     {
         const object: Event = payload;
 
-        return dispatch(new ActionEventReset()).
+        return dispatch
+        ([
+            new ActionEventReset(),
+            new ActionEventClustersReset(),
+            new ActionUserEventsAdd(StateEvent.data(getState()))
+        ]).
         pipe
         (
             map(() =>
@@ -161,11 +171,36 @@ export class StateEvent
         pipe
         (
             switchMap(() =>
-              dispatch(new ActionEventReset())
+                dispatch
+                ([
+                    new ActionEventClustersDelete(),
+                    new ActionImageEventsRemove(data.id),
+                    new ActionUserEventsRemove(data.id),
+                    new ActionEventReset()
+                ])
             )
         );
     }
 
+    @Action(ActionEventImageAdd)
+    imageAdd({ dispatch, getState }: StateContext<StateEventModel>)
+    {
+        return dispatch
+        ([
+            new ActionImageEventsAdd(StateEvent.data(getState())),
+            new ActionEventPatch({ imageId: this.store.selectSnapshot(StateImage.id)})
+        ]);
+    }
+
+    @Action(ActionEventImageRemove)
+    imageRemove({ dispatch, getState }: StateContext<StateEventModel>)
+    {
+        return dispatch
+        ([
+            new ActionImageEventsRemove(StateEvent.id(getState())),
+            new ActionEventPatch({ imageId: undefined })
+        ]);
+    }
     @Action(ActionEventLocationSet)
     setLocation({ getState } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
     {

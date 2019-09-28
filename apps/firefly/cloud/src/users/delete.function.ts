@@ -10,7 +10,7 @@ firestore.
 document('users/{id}').
 onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const id:       string    = snapshot.id;
+    const id: string = snapshot.id;
 
     await database.collection('user-clusters').doc(id).delete(),
     await database.collection('user-events').doc(id).delete();
