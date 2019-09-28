@@ -162,6 +162,9 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersDelete)
     delete({ dispatch }: StateContext<StateIconClustersModel>)
     {
-
+        return dispatch
+        ([
+            new ActionIconClustersReset()
+        ]);
     }
 }

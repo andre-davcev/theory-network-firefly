@@ -170,6 +170,9 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Action(ActionUserAlertsDelete)
     delete({ dispatch }: StateContext<StateUserAlertsModel>)
     {
-
+        return dispatch
+        ([
+            new ActionUserAlertsReset()
+        ]);
     }
 }
