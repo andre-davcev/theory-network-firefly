@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
+import { StateIcon } from '@firefly/core/state';
 import { Cluster, IconCluster } from '@firefly/core/models';
 import { ServiceIconClusters, ServiceClusters } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -52,7 +52,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersGetData)
     getData({ dispatch }: StateContext<StateIconClustersModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const userId: string = this.store.selectSnapshot(StateIcon.id);
 
         return dispatch(new ActionIconClustersReset()).
         pipe

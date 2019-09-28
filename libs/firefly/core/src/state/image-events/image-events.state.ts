@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
+import { StateImage } from '@firefly/core/state';
 import { Event, ImageEvent } from '@firefly/core/models';
 import { ServiceImageEvents, ServiceEvents } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -52,7 +52,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Action(ActionImageEventsGetData)
     getData({ dispatch }: StateContext<StateImageEventsModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const userId: string = this.store.selectSnapshot(StateImage.id);
 
         return dispatch(new ActionImageEventsReset()).
         pipe
