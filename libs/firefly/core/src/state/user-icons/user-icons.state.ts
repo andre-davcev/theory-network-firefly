@@ -16,7 +16,8 @@ import {
     ActionUserIconsGetData,
     ActionUserIconsSort,
     ActionUserIconsGet,
-    ActionUserIconsSet
+    ActionUserIconsSet,
+    ActionUserIconsDelete
 } from './user-icons.actions';
 
 @State<StateUserIconsModel>(StateUserIconsOptions)
@@ -156,5 +157,11 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserIconsDelete)
+    delete({ dispatch }: StateContext<StateUserIconsModel>)
+    {
+
     }
 }

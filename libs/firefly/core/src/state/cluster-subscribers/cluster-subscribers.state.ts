@@ -16,7 +16,8 @@ import {
     ActionClusterSubscribersGetData,
     ActionClusterSubscribersSort,
     ActionClusterSubscribersGet,
-    ActionClusterSubscribersSet
+    ActionClusterSubscribersSet,
+    ActionClusterSubscribersDelete
 } from './cluster-subscribers.actions';
 
 @State<StateClusterSubscribersModel>(StateClusterSubscribersOptions)
@@ -156,5 +157,11 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionClusterSubscribersDelete)
+    delete({ dispatch }: StateContext<StateClusterSubscribersModel>)
+    {
+
     }
 }

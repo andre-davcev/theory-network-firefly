@@ -16,7 +16,8 @@ import {
     ActionImageEventsGetData,
     ActionImageEventsSort,
     ActionImageEventsGet,
-    ActionImageEventsSet
+    ActionImageEventsSet,
+    ActionImageEventsDelete
 } from './image-events.actions';
 
 @State<StateImageEventsModel>(StateImageEventsOptions)
@@ -156,5 +157,11 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionImageEventsDelete)
+    delete({ dispatch }: StateContext<StateImageEventsModel>)
+    {
+
     }
 }

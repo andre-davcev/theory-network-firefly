@@ -159,7 +159,7 @@ export class StateUser implements NgxsOnInit
         return this.service.delete(data).
         pipe
         (
-            map(() => dispatch(new ActionUserReset()))
+            switchMap(() => dispatch(new ActionUserReset()))
         );
     }
 

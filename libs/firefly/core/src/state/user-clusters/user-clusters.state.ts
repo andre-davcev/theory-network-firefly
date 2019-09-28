@@ -16,7 +16,8 @@ import {
     ActionUserClustersGetData,
     ActionUserClustersSort,
     ActionUserClustersGet,
-    ActionUserClustersSet
+    ActionUserClustersSet,
+    ActionUserClustersDelete
 } from './user-clusters.actions';
 
 @State<StateUserClustersModel>(StateUserClustersOptions)
@@ -156,5 +157,11 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserClustersDelete)
+    delete({ dispatch }: StateContext<StateUserClustersModel>)
+    {
+
     }
 }

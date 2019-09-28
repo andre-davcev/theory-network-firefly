@@ -16,7 +16,8 @@ import {
     ActionUserImagesGetData,
     ActionUserImagesSort,
     ActionUserImagesGet,
-    ActionUserImagesSet
+    ActionUserImagesSet,
+    ActionUserImagesDelete
 } from './user-images.actions';
 
 @State<StateUserImagesModel>(StateUserImagesOptions)
@@ -156,5 +157,11 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserImagesDelete)
+    delete({ dispatch }: StateContext<StateUserImagesModel>)
+    {
+
     }
 }

@@ -16,7 +16,8 @@ import {
     ActionUserEventsGetData,
     ActionUserEventsSort,
     ActionUserEventsGet,
-    ActionUserEventsSet
+    ActionUserEventsSet,
+    ActionUserEventsDelete
 } from './user-events.actions';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
@@ -156,5 +157,11 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserEventsDelete)
+    delete({ dispatch }: StateContext<StateUserEventsModel>)
+    {
+
     }
 }

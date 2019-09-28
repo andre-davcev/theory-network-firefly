@@ -155,7 +155,7 @@ export class StateImage
         return this.service.delete(data).
         pipe
         (
-            map(() =>
+            switchMap(() =>
               dispatch(new ActionImageReset())
             )
         );

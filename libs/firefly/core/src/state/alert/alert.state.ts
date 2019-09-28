@@ -138,7 +138,7 @@ export class StateAlert
         return this.service.delete(data).
         pipe
         (
-            map(() =>
+            switchMap(() =>
               dispatch(new ActionAlertReset())
             )
         );

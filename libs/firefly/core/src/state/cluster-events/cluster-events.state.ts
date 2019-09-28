@@ -16,8 +16,10 @@ import {
     ActionClusterEventsGetData,
     ActionClusterEventsSort,
     ActionClusterEventsGet,
-    ActionClusterEventsSet
+    ActionClusterEventsSet,
+    ActionClusterEventsDelete
 } from './cluster-events.actions';
+import { ActionEventClustersRemove } from '../event-clusters';
 
 @State<StateClusterEventsModel>(StateClusterEventsOptions)
 
@@ -90,6 +92,7 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
             )
         );
     }
+
     @Action(ActionClusterEventsSet)
     set({ patchState }: StateContext<StateClusterEventsModel>, { payload }: ActionClusterEventsSet)
     {
@@ -140,7 +143,7 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     }
 
     @Action(ActionClusterEventsRemove)
-    remove({ patchState, getState }: StateContext<StateClusterEventsModel>, { payload }: ActionClusterEventsRemove)
+    remove({ patchState, getState, dispatch }: StateContext<StateClusterEventsModel>, { payload }: ActionClusterEventsRemove)
     {
         const state: StateClusterEventsModel = getState();
 
@@ -156,5 +159,15 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionClusterEventsDelete)
+    delete({ dispatch }: StateContext<StateClusterEventsModel>)
+    {
+        return dispatch
+        ([
+            new ActionEventClustersRemove(this.store.selectSnapshot(StateCluster.id)),
+            new ActionClusterEventsReset()
+        ]);
     }
 }
