@@ -7,4 +7,7 @@ export enum ActionsCluster
     Save   = '[Cluster] Save',
     Create = '[Cluster] Create',
     Delete = '[Cluster] Delete',
+
+    IconAdd    = '[Cluster] Icon Set',
+    IconRemove = '[Cluster] Icon Remove'
 }

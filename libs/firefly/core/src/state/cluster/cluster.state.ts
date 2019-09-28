@@ -10,7 +10,7 @@ import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { Cluster } from '@firefly/core/models';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/user';
-import { ActionIconGet, ActionIconCreate } from '@firefly/core/state/icon';
+import { ActionIconGet, ActionIconCreate, StateIcon } from '@firefly/core/state/icon';
 
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
@@ -21,8 +21,15 @@ import {
     ActionClusterPatch,
     ActionClusterCreate,
     ActionClusterSave,
-    ActionClusterDelete
+    ActionClusterDelete,
+    ActionClusterIconAdd,
+    ActionClusterIconRemove
 } from './cluster.actions';
+import { ActionClusterEventsReset, ActionClusterEventsDelete } from '../cluster-events';
+import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers';
+import { ActionUserClustersAdd, ActionUserClustersRemove } from '../user-clusters';
+import { ActionIconClustersRemove, ActionIconClustersAdd } from '../icon-clusters';
+import undefined = require('firebase/empty-import');
 
 @State<StateClusterModel>(StateClusterOptions)
 
@@ -82,7 +89,13 @@ export class StateCluster
     {
         const object: Cluster = payload;
 
-        return dispatch(new ActionClusterReset()).
+        return dispatch
+        ([
+            new ActionClusterReset(),
+            new ActionClusterEventsReset(),
+            new ActionClusterSubscribersReset(),
+            new ActionUserClustersAdd(StateCluster.data(getState()))
+        ]).
         pipe
         (
             map(() =>
@@ -142,8 +155,35 @@ export class StateCluster
         pipe
         (
             switchMap(() =>
-              dispatch(new ActionClusterReset())
+                dispatch
+                ([
+                    new ActionClusterEventsDelete(),
+                    new ActionClusterSubscribersDelete(),
+                    new ActionIconClustersRemove(data.id),
+                    new ActionUserClustersRemove(data.id),
+                    new ActionClusterReset()
+                ])
             )
         );
+    }
+
+    @Action(ActionClusterIconAdd)
+    iconAdd({ dispatch, getState }: StateContext<StateClusterModel>)
+    {
+        return dispatch
+        ([
+            new ActionIconClustersAdd(StateCluster.data(getState())),
+            new ActionClusterPatch({ iconId: this.store.selectSnapshot(StateIcon.id)})
+        ]);
+    }
+
+    @Action(ActionClusterIconRemove)
+    iconRemove({ dispatch, getState }: StateContext<StateClusterModel>)
+    {
+        return dispatch
+        ([
+            new ActionIconClustersRemove(StateCluster.id(getState())),
+            new ActionClusterPatch({ iconId: undefined })
+        ]);
     }
 }

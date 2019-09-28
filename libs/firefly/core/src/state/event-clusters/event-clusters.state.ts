@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateEvent } from '@firefly/core/state';
+import { StateEvent, ActionClusterEventsRemove } from '@firefly/core/state';
 import { Cluster, EventCluster } from '@firefly/core/models';
 import { ServiceEventClusters, ServiceClusters } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -164,6 +164,7 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     {
         return dispatch
         ([
+            new ActionClusterEventsRemove(this.store.selectSnapshot(StateEvent.id)),
             new ActionEventClustersReset()
         ]);
     }

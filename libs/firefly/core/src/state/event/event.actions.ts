@@ -13,5 +13,7 @@ export class ActionEventCreate { static readonly type = ActionsEvent.Create;  co
 export class ActionEventSave   { static readonly type = ActionsEvent.Save;    constructor() { } }
 export class ActionEventDelete { static readonly type = ActionsEvent.Delete;  constructor() { } }
 
+export class ActionEventImageAdd    { static readonly type = ActionsEvent.ImageAdd;    constructor() { } }
+export class ActionEventImageRemove { static readonly type = ActionsEvent.ImageRemove; constructor() { } }
 export class ActionEventLocationSet { static readonly type = ActionsEvent.LocationSet; constructor(public payload: Result) { } }
 export class ActionEventTimeSet     { static readonly type = ActionsEvent.TimeSet;     constructor(public key: 'start' | 'end', public value: string) { } }

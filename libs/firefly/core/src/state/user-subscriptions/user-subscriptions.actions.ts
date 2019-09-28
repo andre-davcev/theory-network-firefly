@@ -11,3 +11,6 @@ export class ActionUserSubscriptionsSort    { static readonly type = ActionsUser
 export class ActionUserSubscriptionsAdd     { static readonly type = ActionsUserSubscriptions.Add;     constructor(public payload: Subscription) { } }
 export class ActionUserSubscriptionsRemove  { static readonly type = ActionsUserSubscriptions.Remove;  constructor(public payload: string) { } }
 export class ActionUserSubscriptionsDelete  { static readonly type = ActionsUserSubscriptions.Delete;  constructor() { } }
+
+export class ActionUserSubscriptionsOn  { static readonly type = ActionsUserSubscriptions.On;  constructor(public payload: string) { } }
+export class ActionUserSubscriptionsOff { static readonly type = ActionsUserSubscriptions.Off; constructor(public payload: string) { } }

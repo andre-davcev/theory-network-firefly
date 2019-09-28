@@ -17,8 +17,11 @@ import {
     ActionUserSubscriptionsSort,
     ActionUserSubscriptionsGet,
     ActionUserSubscriptionsSet,
-    ActionUserSubscriptionsDelete
+    ActionUserSubscriptionsDelete,
+    ActionUserSubscriptionsOn,
+    ActionUserSubscriptionsOff
 } from './user-subscriptions.actions';
+import { ActionClusterSubscribersRemove, ActionClusterSubscribersAdd } from '../cluster-subscribers';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 
@@ -113,7 +116,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     }
 
     @Action(ActionUserSubscriptionsAdd)
-    add({ patchState, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsAdd)
+    add({ dispatch, patchState, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsAdd)
     {
         const state: StateUserSubscriptionsModel = getState();
         const subscription: Subscription         = payload;
@@ -139,10 +142,12 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
         );
 
         patchState(partial);
+
+        return dispatch(new ActionClusterSubscribersAdd(this.store.selectSnapshot(StateUser.data)))
     }
 
     @Action(ActionUserSubscriptionsRemove)
-    remove({ patchState, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsRemove)
+    remove({ dispatch, patchState, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsRemove)
     {
         const state: StateUserSubscriptionsModel = getState();
 
@@ -158,6 +163,8 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
         );
 
         patchState(partial);
+
+        return dispatch(new ActionClusterSubscribersRemove(this.store.selectSnapshot(StateUser.id)));
     }
 
     @Action(ActionUserSubscriptionsDelete)
@@ -165,7 +172,38 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     {
         return dispatch
         ([
+            new ActionClusterSubscribersRemove(this.store.selectSnapshot(StateUser.id)),
             new ActionUserSubscriptionsReset()
+        ]);
+    }
+
+    @Action(ActionUserSubscriptionsOn)
+    on({ dispatch, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsOn)
+    {
+        const id: string = payload;
+        const data: Record<string, UserSubscription> = StateUserSubscriptions.data(getState());
+
+        data[id].on = true;
+
+        return dispatch
+        ([
+            new ActionUserSubscriptionsSet(data),
+            new ActionClusterSubscribersAdd(this.store.selectSnapshot(StateUser.data))
+        ]);
+    }
+
+    @Action(ActionUserSubscriptionsOff)
+    off({ dispatch, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsOff)
+    {
+        const id: string = payload;
+        const data: Record<string, UserSubscription> = StateUserSubscriptions.data(getState());
+
+        data[id].on = true;
+
+        return dispatch
+        ([
+            new ActionUserSubscriptionsSet(data),
+            new ActionClusterSubscribersRemove(this.store.selectSnapshot(StateUser.id))
         ]);
     }
 }
