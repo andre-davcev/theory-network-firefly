@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
+import { StateEvent } from '@firefly/core/state';
 import { Cluster, EventCluster } from '@firefly/core/models';
 import { ServiceEventClusters, ServiceClusters } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -52,7 +52,7 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     @Action(ActionEventClustersGetData)
     getData({ dispatch }: StateContext<StateEventClustersModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const userId: string = this.store.selectSnapshot(StateEvent.id);
 
         return dispatch(new ActionEventClustersReset()).
         pipe
@@ -101,8 +101,8 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     {
         const state:     StateEventClustersModel      = getState();
         const data:      Record<string, EventCluster> = StateEventClusters.data(state);
-        const sortField: SortField                 = payload == null ? StateEventClusters.sortField(state) : payload;
-        const keys:      Array<string>             = this.sort(data, sortField);
+        const sortField: SortField                    = payload == null ? StateEventClusters.sortField(state) : payload;
+        const keys:      Array<string>                = this.sort(data, sortField);
 
         patchState
         ({
@@ -115,7 +115,7 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     add({ patchState, getState }: StateContext<StateEventClustersModel>, { payload }: ActionEventClustersAdd)
     {
         const state: StateEventClustersModel = getState();
-        const cluster: Cluster              = payload;
+        const cluster: Cluster               = payload;
 
         const eventCluster: EventCluster =
         {
