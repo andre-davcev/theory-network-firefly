@@ -162,6 +162,9 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Action(ActionUserClustersDelete)
     delete({ dispatch }: StateContext<StateUserClustersModel>)
     {
-
+        return dispatch
+        ([
+            new ActionUserClustersReset()
+        ]);
     }
 }

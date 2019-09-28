@@ -162,6 +162,9 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     @Action(ActionClusterSubscribersDelete)
     delete({ dispatch }: StateContext<StateClusterSubscribersModel>)
     {
-
+        return dispatch
+        ([
+            new ActionClusterSubscribersReset()
+        ]);
     }
 }

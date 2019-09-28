@@ -162,6 +162,9 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     @Action(ActionEventClustersDelete)
     delete({ dispatch }: StateContext<StateEventClustersModel>)
     {
-
+        return dispatch
+        ([
+            new ActionEventClustersReset()
+        ]);
     }
 }

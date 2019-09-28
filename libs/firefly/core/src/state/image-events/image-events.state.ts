@@ -162,6 +162,9 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Action(ActionImageEventsDelete)
     delete({ dispatch }: StateContext<StateImageEventsModel>)
     {
-
+        return dispatch
+        ([
+            new ActionImageEventsReset()
+        ]);
     }
 }

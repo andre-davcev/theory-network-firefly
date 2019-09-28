@@ -169,6 +169,9 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Action(ActionUserStreamDelete)
     delete({ dispatch }: StateContext<StateUserStreamModel>)
     {
-
+        return dispatch
+        ([
+            new ActionUserStreamReset()
+        ]);
     }
 }

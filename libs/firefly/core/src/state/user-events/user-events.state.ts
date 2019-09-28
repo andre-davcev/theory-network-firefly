@@ -162,6 +162,9 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Action(ActionUserEventsDelete)
     delete({ dispatch }: StateContext<StateUserEventsModel>)
     {
-
+        return dispatch
+        ([
+            new ActionUserEventsReset()
+        ]);
     }
 }

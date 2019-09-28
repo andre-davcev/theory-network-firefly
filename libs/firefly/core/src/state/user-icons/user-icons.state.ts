@@ -162,6 +162,9 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Action(ActionUserIconsDelete)
     delete({ dispatch }: StateContext<StateUserIconsModel>)
     {
-
+        return dispatch
+        ([
+            new ActionUserIconsReset()
+        ]);
     }
 }

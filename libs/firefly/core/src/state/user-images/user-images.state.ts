@@ -162,6 +162,9 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Action(ActionUserImagesDelete)
     delete({ dispatch }: StateContext<StateUserImagesModel>)
     {
-
+        return dispatch
+        ([
+            new ActionUserImagesReset()
+        ]);
     }
 }

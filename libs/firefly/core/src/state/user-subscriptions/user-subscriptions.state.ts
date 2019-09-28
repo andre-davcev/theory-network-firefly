@@ -163,6 +163,9 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Action(ActionUserSubscriptionsDelete)
     delete({ dispatch }: StateContext<StateUserSubscriptionsModel>)
     {
-
+        return dispatch
+        ([
+            new ActionUserSubscriptionsReset()
+        ]);
     }
 }
