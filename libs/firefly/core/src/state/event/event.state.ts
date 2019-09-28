@@ -10,7 +10,7 @@ import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { StateUser } from '@firefly/core/state/user';
 import { Event, Location, Time } from '@firefly/core/models';
-import { ServiceEvents, ServiceImages, } from '@firefly/core/services';
+import { ServiceEvents } from '@firefly/core/services';
 import { ActionImageGet, ActionImageCreate } from '@firefly/core/state/image';
 
 import { StateEventModel } from './event.state.model';
@@ -71,7 +71,7 @@ export class StateEvent
         return dispatch
         ([
             new SetFormPristine(StateEvent.formPath(getState())),
-            new ActionMapSearchResultClear(),
+            new ActionMapSearchResultClear()
         ]);
     }
 
@@ -160,7 +160,7 @@ export class StateEvent
         return this.service.delete(data).
         pipe
         (
-            map(() =>
+            switchMap(() =>
               dispatch(new ActionEventReset())
             )
         );

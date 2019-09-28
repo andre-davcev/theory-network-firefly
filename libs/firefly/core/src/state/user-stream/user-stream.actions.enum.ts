@@ -6,5 +6,6 @@ export enum ActionsUserStream
     Set       = '[UserStream] Set',
     Sort      = '[UserStream] Sort',
     Add       = '[UserStream] Add',
-    Remove    = '[UserStream] Remove'
+    Remove    = '[UserStream] Remove',
+    Delete    = '[UserStream] Delete'
 }

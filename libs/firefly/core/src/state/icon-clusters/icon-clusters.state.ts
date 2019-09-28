@@ -16,7 +16,8 @@ import {
     ActionIconClustersGetData,
     ActionIconClustersSort,
     ActionIconClustersGet,
-    ActionIconClustersSet
+    ActionIconClustersSet,
+    ActionIconClustersDelete
 } from './icon-clusters.actions';
 
 @State<StateIconClustersModel>(StateIconClustersOptions)
@@ -156,5 +157,11 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionIconClustersDelete)
+    delete({ dispatch }: StateContext<StateIconClustersModel>)
+    {
+
     }
 }

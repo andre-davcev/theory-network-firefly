@@ -16,7 +16,8 @@ import {
     ActionUserStreamGetData,
     ActionUserStreamSort,
     ActionUserStreamGet,
-    ActionUserStreamSet
+    ActionUserStreamSet,
+    ActionUserStreamDelete
 } from './user-stream.actions';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
@@ -163,5 +164,11 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserStreamDelete)
+    delete({ dispatch }: StateContext<StateUserStreamModel>)
+    {
+
     }
 }

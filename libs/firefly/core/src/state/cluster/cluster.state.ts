@@ -52,7 +52,7 @@ export class StateCluster
 
         return dispatch
         ([
-            new SetFormPristine(StateCluster.formPath(getState())),
+            new SetFormPristine(StateCluster.formPath(getState()))
         ]);
     }
 
@@ -141,7 +141,7 @@ export class StateCluster
         return this.service.delete(data).
         pipe
         (
-            map(() =>
+            switchMap(() =>
               dispatch(new ActionClusterReset())
             )
         );

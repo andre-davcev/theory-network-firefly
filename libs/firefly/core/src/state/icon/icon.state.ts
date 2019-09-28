@@ -157,7 +157,7 @@ export class StateIcon
         return this.service.delete(data).
         pipe
         (
-            map(() =>
+            switchMap(() =>
               dispatch(new ActionIconReset())
             )
         );

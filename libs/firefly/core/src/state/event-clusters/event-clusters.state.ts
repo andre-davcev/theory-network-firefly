@@ -16,7 +16,8 @@ import {
     ActionEventClustersGetData,
     ActionEventClustersSort,
     ActionEventClustersGet,
-    ActionEventClustersSet
+    ActionEventClustersSet,
+    ActionEventClustersDelete
 } from './event-clusters.actions';
 
 @State<StateEventClustersModel>(StateEventClustersOptions)
@@ -156,5 +157,11 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionEventClustersDelete)
+    delete({ dispatch }: StateContext<StateEventClustersModel>)
+    {
+
     }
 }

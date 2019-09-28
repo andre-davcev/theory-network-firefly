@@ -136,7 +136,7 @@ export class StateStreamItem
         return this.service.delete(data).
         pipe
         (
-            map(() =>
+            switchMap(() =>
               dispatch(new ActionStreamItemReset())
             )
         );

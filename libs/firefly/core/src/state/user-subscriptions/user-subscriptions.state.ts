@@ -16,7 +16,8 @@ import {
     ActionUserSubscriptionsGetData,
     ActionUserSubscriptionsSort,
     ActionUserSubscriptionsGet,
-    ActionUserSubscriptionsSet
+    ActionUserSubscriptionsSet,
+    ActionUserSubscriptionsDelete
 } from './user-subscriptions.actions';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
@@ -157,5 +158,11 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserSubscriptionsDelete)
+    delete({ dispatch }: StateContext<StateUserSubscriptionsModel>)
+    {
+
     }
 }

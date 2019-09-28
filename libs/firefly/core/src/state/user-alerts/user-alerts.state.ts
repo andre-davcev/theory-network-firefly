@@ -16,7 +16,8 @@ import {
     ActionUserAlertsGetData,
     ActionUserAlertsSort,
     ActionUserAlertsGet,
-    ActionUserAlertsSet
+    ActionUserAlertsSet,
+    ActionUserAlertsDelete
 } from './user-alerts.actions';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
@@ -164,5 +165,11 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserAlertsDelete)
+    delete({ dispatch }: StateContext<StateUserAlertsModel>)
+    {
+
     }
 }
