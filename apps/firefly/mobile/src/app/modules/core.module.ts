@@ -16,30 +16,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppCoreModule } from '@theory/web';
 import { StateLanguage, StateLocation, StateDevice} from '@theory/capacitor';
-import { StatePhotos as StatePhotosCap} from '@theory/cordova';
 import {
   StateUser,
-  StateCluster,
-  StatePlaces,
-  StateIcons,
   FirebaseEnvironment,
-  MapboxEnvironment,
-  StateEvent
+  MapboxEnvironment
 } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
-import { StateMap } from '@theory/mapbox';
 import { Camera } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-
-/*
-Pro.init('1e5146ca',
-{
-    appVersion: '1.0.0'
-});
-*/
 
 @NgModule
 ({
@@ -61,18 +48,12 @@ Pro.init('1e5146ca',
 
         NgxsModule.forRoot
         ([
-            StateLanguage,
-            StateLocation,
             StateDevice,
-            StateUser,
+            StateLocation,
+            StateLanguage,
+            StateMobile,
             StateNotifications,
-            StateCluster,
-            StatePlaces,
-            StateIcons,
-            StateEvent,
-            StateMap,
-            StatePhotosCap,
-            StateMobile
+            StateUser
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
