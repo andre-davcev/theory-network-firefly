@@ -19,9 +19,9 @@ import { ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/cap
 
 export class PageLogin implements OnInit
 {
-    @Select(StateUser.authenticated)          userAuthenticated$: Observable<boolean>;
-    @Select(StateUser.loading)                userLoading$:       Observable<boolean>;
-    @Select(StateUser.found)                  userFound$:         Observable<boolean>;
+    @Select(StateUser.authenticated)          userAuthenticated$:      Observable<boolean>;
+    @Select(StateUser.loading)                userLoading$:            Observable<boolean>;
+    @Select(StateUser.found)                  userFound$:              Observable<boolean>;
     @Select(StateUser.loadedNotAuthenticated) loadedNotAuthenticated$: Observable<boolean>;
 
     public AuthProvider: any = AuthProvider;
