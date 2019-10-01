@@ -1,30 +1,30 @@
 import { User as FirebaseUser } from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select, NgxsOnInit, Store} from '@ngxs/store';
-import { Observable, of, from, combineLatest, forkJoin } from 'rxjs';
+import { Observable, of, from, combineLatest } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, Alert } from '@firefly/core/models';
+import { User } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
-  ActionUserAuthenticate,
-  ActionUserWatch,
-  ActionUserAuthenticateCheck,
-  ActionUserAddToken,
-  ActionUserLoginEmail,
-  ActionUserLogout,
-  ActionUserWatchLanguage,
-  ActionUserReset,
-  ActionUserGet,
-  ActionUserSet,
-  ActionUserPatch,
-  ActionUserCreate,
-  ActionUserSave,
-  ActionUserDelete
+    ActionUserAuthenticate,
+    ActionUserWatch,
+    ActionUserAuthenticateCheck,
+    ActionUserAddToken,
+    ActionUserLoginEmail,
+    ActionUserLogout,
+    ActionUserWatchLanguage,
+    ActionUserReset,
+    ActionUserGet,
+    ActionUserSet,
+    ActionUserPatch,
+    ActionUserCreate,
+    ActionUserSave,
+    ActionUserDelete
 } from './user.actions';
 import { ServiceUsers } from '@firefly/core/services';
 import { CoreUtil, CoreEnum } from '@theory/core';
