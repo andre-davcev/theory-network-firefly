@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateIcons, ActionSetIconId } from '@firefly/core';
+import { ActionSetIconId } from '@firefly/core';
 
 @Component
 ({

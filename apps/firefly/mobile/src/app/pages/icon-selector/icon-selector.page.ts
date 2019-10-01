@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 import { Store } from '@ngxs/store';
 
