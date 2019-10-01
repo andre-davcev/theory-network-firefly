@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StreamItem, StateUser, ActionUserSubscribe, ActionUserUnsubscribe, Cluster } from '@firefly/core';
+import { StreamItem, StateUser } from '@firefly/core';
 
 @Component
 ({

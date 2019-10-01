@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { ActionEventImageSet, StateEvent, ActionEventCreate, ActionEventTimeSet } from '@firefly/core';
+import { StateEvent, ActionEventCreate, ActionEventTimeSet } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';

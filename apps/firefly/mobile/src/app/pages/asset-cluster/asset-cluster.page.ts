@@ -9,7 +9,7 @@ import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
-import { StateCluster, ActionClusterSetId, ActionClusterSetIcon, ActionClusterCreate } from '@firefly/core';
+import { StateCluster, ActionClusterCreate } from '@firefly/core';
 import { Pages } from '../pages.enum';
 
 @Component
