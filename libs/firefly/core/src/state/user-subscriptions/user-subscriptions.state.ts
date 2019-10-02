@@ -56,11 +56,12 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     }
 
     @Action(ActionUserSubscriptionsGetData)
-    getData({ dispatch, patchState }: StateContext<StateUserSubscriptionsModel>, { fetch }: ActionUserSubscriptionsGetData)
+    getData({ dispatch, patchState, getState }: StateContext<StateUserSubscriptionsModel>, { fetch }: ActionUserSubscriptionsGetData)
     {
-        const id: string = this.store.selectSnapshot(StateUser.id);
+        const id:          string  = this.store.selectSnapshot(StateUser.id);
+        const initialized: boolean = StateUserSubscriptions.initialized(getState());
 
-        return dispatch
+        return initialized ? of() : dispatch
         ([
             new ActionUserSubscriptionsReset()
         ]).

@@ -1,4 +1,4 @@
-import { State, Selector, Action, StateContext, Store, NgxsOnInit } from '@ngxs/store';
+import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
@@ -23,7 +23,7 @@ import { of } from 'rxjs';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 
-export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, StateUserAlertsModel> implements NgxsOnInit
+export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, StateUserAlertsModel>
 {
     @Selector() static data(state: StateUserAlertsModel):        Record<string, UserAlert> { return state.data; }
     @Selector() static keys(state: StateUserAlertsModel):        Array<string>             { return state.keys; }
@@ -44,14 +44,6 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
         super();
     }
 
-    ngxsOnInit(context: StateContext<StateUserAlertsModel>)
-    {
-        context.dispatch
-        ([
-            new ActionUserAlertsGetData()
-        ]);
-    }
-
     @Action(ActionUserAlertsReset)
     reset({ patchState }: StateContext<StateUserAlertsModel>)
     {
@@ -61,11 +53,12 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     }
 
     @Action(ActionUserAlertsGetData)
-    getData({ dispatch, patchState }: StateContext<StateUserAlertsModel>, { fetch }: ActionUserAlertsGetData)
+    getData({ dispatch, patchState, getState }: StateContext<StateUserAlertsModel>, { fetch }: ActionUserAlertsGetData)
     {
-        const id: string = this.store.selectSnapshot(StateUser.id);
+        const id:          string  = this.store.selectSnapshot(StateUser.id);
+        const initialized: boolean = StateUserAlerts.initialized(getState());
 
-        return dispatch
+        return initialized ? of() : dispatch
         ([
             new ActionUserAlertsReset()
         ]).

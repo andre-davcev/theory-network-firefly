@@ -53,11 +53,12 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     }
 
     @Action(ActionUserEventsGetData)
-    getData({ dispatch, patchState }: StateContext<StateUserEventsModel>, { fetch }: ActionUserEventsGetData)
+    getData({ dispatch, patchState, getState }: StateContext<StateUserEventsModel>, { fetch }: ActionUserEventsGetData)
     {
-        const id: string = this.store.selectSnapshot(StateUser.id);
+        const id:          string  = this.store.selectSnapshot(StateUser.id);
+        const initialized: boolean = StateUserEvents.initialized(getState());
 
-        return dispatch
+        return initialized ? of() : dispatch
         ([
             new ActionUserEventsReset()
         ]).

@@ -54,11 +54,12 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     }
 
     @Action(ActionClusterSubscribersGetData)
-    getData({ dispatch, patchState }: StateContext<StateClusterSubscribersModel>, { fetch }: ActionClusterSubscribersGetData)
+    getData({ dispatch, patchState, getState }: StateContext<StateClusterSubscribersModel>, { fetch }: ActionClusterSubscribersGetData)
     {
-        const id: string = this.store.selectSnapshot(StateCluster.id);
+        const id:          string  = this.store.selectSnapshot(StateCluster.id);
+        const initialized: boolean = StateClusterSubscribers.initialized(getState());
 
-        return dispatch
+        return initialized ? of() : dispatch
         ([
             new ActionClusterSubscribersReset()
         ]).
