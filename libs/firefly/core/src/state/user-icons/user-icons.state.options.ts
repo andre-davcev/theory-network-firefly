@@ -11,12 +11,13 @@ export const StateUserIconsOptions: StoreOptions<StateUserIconsModel> =
 
     defaults :
     {
-        data:     {},
-        lookup:   {},
-        keys:     [],
-        list:     [],
-        offset:   0,
-        pageSize: Default.PageSize,
+        data:        {},
+        lookup:      {},
+        keys:        [],
+        list:        [],
+        offset:      0,
+        pageSize:    Default.PageSize,
+        initialized: false,
 
         sortField:
         {

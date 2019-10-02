@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateUser } from '@firefly/core/state';
@@ -19,18 +19,20 @@ import {
     ActionUserImagesSet,
     ActionUserImagesDelete
 } from './user-images.actions';
+import { of } from 'rxjs';
 
 @State<StateUserImagesModel>(StateUserImagesOptions)
 
 export class StateUserImages extends StateReferenceTable<UserImage, Image, StateUserImagesModel>
 {
-    @Selector() static data(state: StateUserImagesModel):      Record<string, UserImage> { return state.data; }
-    @Selector() static keys(state: StateUserImagesModel):      Array<string>               { return state.keys; }
-    @Selector() static lookup(state: StateUserImagesModel):    Record<string, Image>     { return state.lookup; }
-    @Selector() static list(state: StateUserImagesModel):      Array<Image>              { return state.list; }
-    @Selector() static offset(state: StateUserImagesModel):    number                      { return state.offset; }
-    @Selector() static pageSize(state: StateUserImagesModel):  number                      { return state.pageSize; }
-    @Selector() static sortField(state: StateUserImagesModel): SortField                   { return state.sortField; }
+    @Selector() static data(state: StateUserImagesModel):        Record<string, UserImage> { return state.data; }
+    @Selector() static keys(state: StateUserImagesModel):        Array<string>             { return state.keys; }
+    @Selector() static lookup(state: StateUserImagesModel):      Record<string, Image>     { return state.lookup; }
+    @Selector() static list(state: StateUserImagesModel):        Array<Image>              { return state.list; }
+    @Selector() static offset(state: StateUserImagesModel):      number                    { return state.offset; }
+    @Selector() static pageSize(state: StateUserImagesModel):    number                    { return state.pageSize; }
+    @Selector() static sortField(state: StateUserImagesModel):   SortField                 { return state.sortField; }
+    @Selector() static initialized(state: StateUserImagesModel): boolean                   { return state.initialized; }
 
     constructor
     (
@@ -51,21 +53,30 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     }
 
     @Action(ActionUserImagesGetData)
-    getData({ dispatch }: StateContext<StateUserImagesModel>)
+    getData({ dispatch, patchState }: StateContext<StateUserImagesModel>, { fetch }: ActionUserImagesGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const id: string = this.store.selectSnapshot(StateUser.id);
 
-        return dispatch(new ActionUserImagesReset()).
+        return dispatch
+        ([
+            new ActionUserImagesReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, UserImage>) =>
                 dispatch([
                     new ActionUserImagesSet(data),
                     new ActionUserImagesSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionUserImagesGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }

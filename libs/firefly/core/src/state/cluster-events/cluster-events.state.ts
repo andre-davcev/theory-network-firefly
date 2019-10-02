@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateCluster } from '@firefly/core/state';
@@ -20,18 +20,20 @@ import {
     ActionClusterEventsDelete
 } from './cluster-events.actions';
 import { ActionEventClustersRemove, ActionEventClustersAdd } from '../event-clusters';
+import { of } from 'rxjs';
 
 @State<StateClusterEventsModel>(StateClusterEventsOptions)
 
 export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event, StateClusterEventsModel>
 {
-    @Selector() static data(state: StateClusterEventsModel):      Record<string, ClusterEvent> { return state.data; }
-    @Selector() static keys(state: StateClusterEventsModel):      Array<string>                { return state.keys; }
-    @Selector() static lookup(state: StateClusterEventsModel):    Record<string, Event>        { return state.lookup; }
-    @Selector() static list(state: StateClusterEventsModel):      Array<Event>                 { return state.list; }
-    @Selector() static offset(state: StateClusterEventsModel):    number                       { return state.offset; }
-    @Selector() static pageSize(state: StateClusterEventsModel):  number                       { return state.pageSize; }
-    @Selector() static sortField(state: StateClusterEventsModel): SortField                    { return state.sortField; }
+    @Selector() static data(state: StateClusterEventsModel):        Record<string, ClusterEvent> { return state.data; }
+    @Selector() static keys(state: StateClusterEventsModel):        Array<string>                { return state.keys; }
+    @Selector() static lookup(state: StateClusterEventsModel):      Record<string, Event>        { return state.lookup; }
+    @Selector() static list(state: StateClusterEventsModel):        Array<Event>                 { return state.list; }
+    @Selector() static offset(state: StateClusterEventsModel):      number                       { return state.offset; }
+    @Selector() static pageSize(state: StateClusterEventsModel):    number                       { return state.pageSize; }
+    @Selector() static sortField(state: StateClusterEventsModel):   SortField                    { return state.sortField; }
+    @Selector() static initialized(state: StateClusterEventsModel): boolean                      { return state.initialized; }
 
     constructor
     (
@@ -52,21 +54,30 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     }
 
     @Action(ActionClusterEventsGetData)
-    getData({ dispatch }: StateContext<StateClusterEventsModel>)
+    getData({ dispatch, patchState }: StateContext<StateClusterEventsModel>, { fetch }: ActionClusterEventsGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateCluster.id);
+        const id: string = this.store.selectSnapshot(StateCluster.id);
 
-        return dispatch(new ActionClusterEventsReset()).
+        return dispatch
+        ([
+            new ActionClusterEventsReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, ClusterEvent>) =>
                 dispatch([
                     new ActionClusterEventsSet(data),
                     new ActionClusterEventsSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionClusterEventsGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }

@@ -8,6 +8,8 @@ import { ModulePage } from '@firefly/app/modules';
 
 import { RoutesPageHome } from './home.page.routes';
 import { PageHome } from './home.page';
+import { NgxsModule } from '@ngxs/store';
+import { StateUserAlerts, StateUserStream } from '@firefly/core';
 
 @NgModule
 ({
@@ -17,7 +19,12 @@ import { PageHome } from './home.page';
         CommonModule,
         RouterModule.forChild(RoutesPageHome),
         ModuleComponentSlide,
-        TranslateModule
+        TranslateModule,
+        NgxsModule.forFeature
+        ([
+            StateUserAlerts,
+            StateUserStream
+        ])
     ],
 
     declarations : [PageHome],

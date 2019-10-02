@@ -11,12 +11,13 @@ export const StateIconClustersOptions: StoreOptions<StateIconClustersModel> =
 
     defaults :
     {
-        data:     {},
-        lookup:   {},
-        keys:     [],
-        list:     [],
-        offset:   0,
-        pageSize: Default.PageSize,
+        data:        {},
+        lookup:      {},
+        keys:        [],
+        list:        [],
+        offset:      0,
+        pageSize:    Default.PageSize,
+        initialized: false,
 
         sortField:
         {

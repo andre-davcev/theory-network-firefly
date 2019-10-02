@@ -4,7 +4,7 @@ import { Icon, UserIcon } from '@firefly/core/models';
 import { ActionsUserIcons } from './user-icons.actions.enum';
 
 export class ActionUserIconsReset   { static readonly type = ActionsUserIcons.Reset;   constructor() { } }
-export class ActionUserIconsGetData { static readonly type = ActionsUserIcons.GetData; constructor() { } }
+export class ActionUserIconsGetData { static readonly type = ActionsUserIcons.GetData; constructor(public fetch: boolean = true) { } }
 export class ActionUserIconsGet     { static readonly type = ActionsUserIcons.Get;     constructor() { } }
 export class ActionUserIconsSet     { static readonly type = ActionsUserIcons.Set;     constructor(public payload: Record<string, UserIcon>) { } }
 export class ActionUserIconsSort    { static readonly type = ActionsUserIcons.Sort;    constructor(public payload?: SortField) { } }

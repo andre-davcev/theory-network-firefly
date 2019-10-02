@@ -4,7 +4,7 @@ import { Event, UserEvent } from '@firefly/core/models';
 import { ActionsUserEvents } from './user-events.actions.enum';
 
 export class ActionUserEventsReset   { static readonly type = ActionsUserEvents.Reset;   constructor() { } }
-export class ActionUserEventsGetData { static readonly type = ActionsUserEvents.GetData; constructor() { } }
+export class ActionUserEventsGetData { static readonly type = ActionsUserEvents.GetData; constructor(public fetch: boolean = true) { } }
 export class ActionUserEventsGet     { static readonly type = ActionsUserEvents.Get;     constructor() { } }
 export class ActionUserEventsSet     { static readonly type = ActionsUserEvents.Set;     constructor(public payload: Record<string, UserEvent>) { } }
 export class ActionUserEventsSort    { static readonly type = ActionsUserEvents.Sort;    constructor(public payload?: SortField) { } }

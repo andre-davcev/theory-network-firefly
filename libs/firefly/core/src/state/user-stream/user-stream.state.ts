@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateUser } from '@firefly/core/state';
@@ -19,18 +19,20 @@ import {
     ActionUserStreamSet,
     ActionUserStreamDelete
 } from './user-stream.actions';
+import { of } from 'rxjs';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
 
 export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamItem, StateUserStreamModel>
 {
-    @Selector() static data(state: StateUserStreamModel):      Record<string, UserStreamItem> { return state.data; }
-    @Selector() static keys(state: StateUserStreamModel):      Array<string>                  { return state.keys; }
-    @Selector() static lookup(state: StateUserStreamModel):    Record<string, StreamItem>     { return state.lookup; }
-    @Selector() static list(state: StateUserStreamModel):      Array<StreamItem>              { return state.list; }
-    @Selector() static offset(state: StateUserStreamModel):    number                         { return state.offset; }
-    @Selector() static pageSize(state: StateUserStreamModel):  number                         { return state.pageSize; }
-    @Selector() static sortField(state: StateUserStreamModel): SortField                      { return state.sortField; }
+    @Selector() static data(state: StateUserStreamModel):        Record<string, UserStreamItem> { return state.data; }
+    @Selector() static keys(state: StateUserStreamModel):        Array<string>                  { return state.keys; }
+    @Selector() static lookup(state: StateUserStreamModel):      Record<string, StreamItem>     { return state.lookup; }
+    @Selector() static list(state: StateUserStreamModel):        Array<StreamItem>              { return state.list; }
+    @Selector() static offset(state: StateUserStreamModel):      number                         { return state.offset; }
+    @Selector() static pageSize(state: StateUserStreamModel):    number                         { return state.pageSize; }
+    @Selector() static sortField(state: StateUserStreamModel):   SortField                      { return state.sortField; }
+    @Selector() static initialized(state: StateUserStreamModel): boolean                        { return state.initialized; }
 
     constructor
     (
@@ -51,21 +53,30 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     }
 
     @Action(ActionUserStreamGetData)
-    getData({ dispatch }: StateContext<StateUserStreamModel>)
+    getData({ dispatch, patchState }: StateContext<StateUserStreamModel>, { fetch }: ActionUserStreamGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const id: string = this.store.selectSnapshot(StateUser.id);
 
-        return dispatch(new ActionUserStreamReset()).
+        return dispatch
+        ([
+            new ActionUserStreamReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, UserStreamItem>) =>
                 dispatch([
                     new ActionUserStreamSet(data),
                     new ActionUserStreamSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionUserStreamGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }

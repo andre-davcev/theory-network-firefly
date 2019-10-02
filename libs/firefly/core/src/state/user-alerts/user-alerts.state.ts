@@ -1,5 +1,5 @@
-import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { State, Selector, Action, StateContext, Store, NgxsOnInit } from '@ngxs/store';
+import { switchMap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateUser } from '@firefly/core/state';
@@ -19,27 +19,37 @@ import {
     ActionUserAlertsSet,
     ActionUserAlertsDelete
 } from './user-alerts.actions';
+import { of } from 'rxjs';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 
-export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, StateUserAlertsModel>
+export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, StateUserAlertsModel> implements NgxsOnInit
 {
-    @Selector() static data(state: StateUserAlertsModel):      Record<string, UserAlert> { return state.data; }
-    @Selector() static keys(state: StateUserAlertsModel):      Array<string>             { return state.keys; }
-    @Selector() static lookup(state: StateUserAlertsModel):    Record<string, Alert>     { return state.lookup; }
-    @Selector() static list(state: StateUserAlertsModel):      Array<Alert>              { return state.list; }
-    @Selector() static offset(state: StateUserAlertsModel):    number                    { return state.offset; }
-    @Selector() static pageSize(state: StateUserAlertsModel):  number                    { return state.pageSize; }
-    @Selector() static sortField(state: StateUserAlertsModel): SortField                 { return state.sortField; }
+    @Selector() static data(state: StateUserAlertsModel):        Record<string, UserAlert> { return state.data; }
+    @Selector() static keys(state: StateUserAlertsModel):        Array<string>             { return state.keys; }
+    @Selector() static lookup(state: StateUserAlertsModel):      Record<string, Alert>     { return state.lookup; }
+    @Selector() static list(state: StateUserAlertsModel):        Array<Alert>              { return state.list; }
+    @Selector() static offset(state: StateUserAlertsModel):      number                    { return state.offset; }
+    @Selector() static pageSize(state: StateUserAlertsModel):    number                    { return state.pageSize; }
+    @Selector() static sortField(state: StateUserAlertsModel):   SortField                 { return state.sortField; }
+    @Selector() static initialized(state: StateUserAlertsModel): boolean                   { return state.initialized; }
 
     constructor
     (
-        private store: Store,
+        private store:   Store,
         private service: ServiceUserAlerts,
-        private alerts: ServiceAlerts
+        private alerts:  ServiceAlerts
     )
     {
         super();
+    }
+
+    ngxsOnInit(context: StateContext<StateUserAlertsModel>)
+    {
+        context.dispatch
+        ([
+            new ActionUserAlertsGetData()
+        ]);
     }
 
     @Action(ActionUserAlertsReset)
@@ -47,25 +57,34 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     {
         const defaults: StateUserAlertsModel = CoreUtil.clone<StateUserAlertsModel>(StateUserAlertsOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionUserAlertsGetData)
-    getData({ dispatch }: StateContext<StateUserAlertsModel>)
+    getData({ dispatch, patchState }: StateContext<StateUserAlertsModel>, { fetch }: ActionUserAlertsGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const id: string = this.store.selectSnapshot(StateUser.id);
 
-        return dispatch(new ActionUserAlertsReset()).
+        return dispatch
+        ([
+            new ActionUserAlertsReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, UserAlert>) =>
                 dispatch([
                     new ActionUserAlertsSet(data),
                     new ActionUserAlertsSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionUserAlertsGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }
@@ -86,11 +105,12 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
         ).
         pipe
         (
-            tap((partial: Partial<StateUserAlertsModel>) =>
+            map((partial: Partial<StateUserAlertsModel>) =>
                 patchState(partial)
             )
         );
     }
+
     @Action(ActionUserAlertsSet)
     set({ patchState }: StateContext<StateUserAlertsModel>, { payload }: ActionUserAlertsSet)
     {

@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateIcon } from '@firefly/core/state';
@@ -19,18 +19,20 @@ import {
     ActionIconClustersSet,
     ActionIconClustersDelete
 } from './icon-clusters.actions';
+import { of } from 'rxjs';
 
 @State<StateIconClustersModel>(StateIconClustersOptions)
 
 export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster, StateIconClustersModel>
 {
-    @Selector() static data(state: StateIconClustersModel):      Record<string, IconCluster> { return state.data; }
-    @Selector() static keys(state: StateIconClustersModel):      Array<string>               { return state.keys; }
-    @Selector() static lookup(state: StateIconClustersModel):    Record<string, Cluster>     { return state.lookup; }
-    @Selector() static list(state: StateIconClustersModel):      Array<Cluster>              { return state.list; }
-    @Selector() static offset(state: StateIconClustersModel):    number                      { return state.offset; }
-    @Selector() static pageSize(state: StateIconClustersModel):  number                      { return state.pageSize; }
-    @Selector() static sortField(state: StateIconClustersModel): SortField                   { return state.sortField; }
+    @Selector() static data(state: StateIconClustersModel):        Record<string, IconCluster> { return state.data; }
+    @Selector() static keys(state: StateIconClustersModel):        Array<string>               { return state.keys; }
+    @Selector() static lookup(state: StateIconClustersModel):      Record<string, Cluster>     { return state.lookup; }
+    @Selector() static list(state: StateIconClustersModel):        Array<Cluster>              { return state.list; }
+    @Selector() static offset(state: StateIconClustersModel):      number                      { return state.offset; }
+    @Selector() static pageSize(state: StateIconClustersModel):    number                      { return state.pageSize; }
+    @Selector() static sortField(state: StateIconClustersModel):   SortField                   { return state.sortField; }
+    @Selector() static initialized(state: StateIconClustersModel): boolean                     { return state.initialized; }
 
     constructor
     (
@@ -51,21 +53,30 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     }
 
     @Action(ActionIconClustersGetData)
-    getData({ dispatch }: StateContext<StateIconClustersModel>)
+    getData({ dispatch, patchState }: StateContext<StateIconClustersModel>, { fetch }: ActionIconClustersGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateIcon.id);
+        const id: string = this.store.selectSnapshot(StateIcon.id);
 
-        return dispatch(new ActionIconClustersReset()).
+        return dispatch
+        ([
+            new ActionIconClustersReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, IconCluster>) =>
                 dispatch([
                     new ActionIconClustersSet(data),
                     new ActionIconClustersSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionIconClustersGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }
