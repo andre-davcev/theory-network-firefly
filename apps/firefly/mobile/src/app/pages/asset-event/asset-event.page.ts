@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateImage, StateIcon, ActionImageUriSet } from '@firefly/core';
+import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateImage, StateIcon, ActionImageUriSet, ActionImageGet } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
@@ -74,12 +74,20 @@ export class PageAssetEvent
 
                 from(this.camera.getPicture(options)).
                 subscribe((imageData: string) =>
-                  this.store.dispatch(new ActionImageUriSet(imageData))
+                    this.store.dispatch
+                    ([
+                        new ActionImageGet(),
+                        new ActionImageUriSet(imageData)
+                    ])
                 );
             }
             else
             {
-                this.store.dispatch(new ActionImageUriSet(TempImageUri));
+                this.store.dispatch
+                ([
+                    new ActionImageGet(),
+                    new ActionImageUriSet(TempImageUri)
+                ]);
             }
         }
         else if (page === Pages.EventLocation)
