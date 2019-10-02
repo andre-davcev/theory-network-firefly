@@ -5,7 +5,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Cluster, StateUser } from '@firefly/core';
+import { Cluster, StateUserClusters, ActionClusterSet } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
 import { ModalController } from '@ionic/angular';
@@ -19,8 +19,7 @@ import { ModalController } from '@ionic/angular';
 
 export class PageAssetsClusters
 {
-    @Select(StateUser.clusters)      clusters$:      Observable<Array<Cluster>>;
-    @Select(StateUser.clustersFound) clustersFound$: Observable<boolean>;
+    @Select(StateUserClusters.list) clusters$: Observable<Array<Cluster>>;
 
     @Input() modal: boolean = false;
 
@@ -35,7 +34,6 @@ export class PageAssetsClusters
     {
         this.store.dispatch
         ([
-//            new ActionGetClusters(),
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark})
         ]);
     }
@@ -48,7 +46,7 @@ export class PageAssetsClusters
 
     public select(cluster: Cluster): void
     {
-        this.store.dispatch(new ActionEventClusterAdd(cluster));
+        this.store.dispatch(new ActionClusterSet(cluster));
 
         this.modalController.dismiss();
     }
