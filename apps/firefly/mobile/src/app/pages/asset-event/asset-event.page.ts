@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, ActionEventTimeSet } from '@firefly/core';
+import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateImage, StateIcon, ActionImageUriSet } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
@@ -25,13 +25,13 @@ import { TempImageUri } from '@firefly/app/mock';
 export class PageAssetEvent
 {
     @Select(StateEvent.formGroup)    form$:         Observable<FormGroup>;
-    @Select(StateEvent.imageUrl)     imageUrl$:     Observable<string>;
+    @Select(StateImage.url)          image$:        Observable<string>;
     @Select(StateEvent.isNew)        isNew$:        Observable<boolean>;
     @Select(StateEvent.canUpdate)    canUpdate$:    Observable<boolean>;
     @Select(StateEvent.timeStart)    timeStart$:    Observable<string>;
     @Select(StateEvent.timeEnd)      timeEnd$:      Observable<string>;
     @Select(StateEvent.timeEndValid) timeEndValid$: Observable<boolean>;
-    @Select(StateEvent.clusterIcon)  clusterIcon$:  Observable<string>;
+    @Select(StateIcon.url)           icon$:         Observable<string>;
 
     public Pages: any = Pages;
 
@@ -74,12 +74,12 @@ export class PageAssetEvent
 
                 from(this.camera.getPicture(options)).
                 subscribe((imageData: string) =>
-                  this.store.dispatch(new ActionEventImageSet(imageData))
+                  this.store.dispatch(new ActionImageUriSet(imageData))
                 );
             }
             else
             {
-                this.store.dispatch(new ActionEventImageSet(TempImageUri));
+                this.store.dispatch(new ActionImageUriSet(TempImageUri));
             }
         }
         else if (page === Pages.EventLocation)

@@ -21,7 +21,7 @@
           [formGroup]="form$ | async"
           ngxsForm="event.form">
         <app-item-header [form]="form$ | async"
-                         [iconUrl]="clusterIcon$ | async"
+                         [iconUrl]="icon$ | async"
                          title="name"
                          subtitle="tagline"
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
@@ -99,7 +99,7 @@
             </ion-list>
         </div>
 
-        <app-item-image [url]="imageUrl$ | async"
+        <app-item-image [url]="image$ | async"
                         [placeholder]="'page.event.imagePlaceholder' | translate"
                         [title]="'general.heroImage' | translate"
                         [edit]="true"
