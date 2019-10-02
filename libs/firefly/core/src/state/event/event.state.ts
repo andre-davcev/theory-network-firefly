@@ -149,7 +149,7 @@ export class StateEvent
 
         return forkJoin
         (
-            dispatch(new ActionImageCreate()),
+            data.id === CoreEnum.IdNew ? dispatch(new ActionImageCreate()) : of(),
             this.service.create(data)
         );
     }
