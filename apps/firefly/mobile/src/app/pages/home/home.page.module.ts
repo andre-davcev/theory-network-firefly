@@ -9,7 +9,28 @@ import { ModulePage } from '@firefly/app/modules';
 import { RoutesPageHome } from './home.page.routes';
 import { PageHome } from './home.page';
 import { NgxsModule } from '@ngxs/store';
-import { StateUserAlerts, StateUserStream } from '@firefly/core';
+import {
+    StateUserAlerts,
+    StateUserStream,
+    StateAlert,
+    StateCluster,
+    StateClusterEvents,
+    StateClusterSubscribers,
+    StateEvent,
+    StateEventClusters,
+    StateIcon,
+    StateIconClusters,
+    StateImage,
+    StateImageEvents,
+    StateStreamItem,
+    StateSubscription,
+    StateUser,
+    StateUserClusters,
+    StateUserEvents,
+    StateUserIcons,
+    StateUserImages,
+    StateUserSubscriptions
+} from '@firefly/core';
 
 @NgModule
 ({
@@ -22,8 +43,26 @@ import { StateUserAlerts, StateUserStream } from '@firefly/core';
         TranslateModule,
         NgxsModule.forFeature
         ([
+            StateAlert,
+            StateCluster,
+            StateClusterEvents,
+            StateClusterSubscribers,
+            StateEvent,
+            StateEventClusters,
+            StateIcon,
+            StateIconClusters,
+            StateImage,
+            StateImageEvents,
+            StateStreamItem,
+            StateSubscription,
+            StateUser,
             StateUserAlerts,
-            StateUserStream
+            StateUserClusters,
+            StateUserEvents,
+            StateUserIcons,
+            StateUserImages,
+            StateUserStream,
+            StateUserSubscriptions,
         ])
     ],
 

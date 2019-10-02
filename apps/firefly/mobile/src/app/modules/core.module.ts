@@ -27,6 +27,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { StateMap } from '@theory/mapbox';
 
 @NgModule
 ({
@@ -53,6 +54,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
             StateLanguage,
             StateMobile,
             StateNotifications,
+            StateMap,
             StateUser
         ]),
 
