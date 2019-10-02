@@ -133,7 +133,7 @@ export class StateCluster
 
         return forkJoin
         (
-            dispatch(new ActionIconCreate()),
+            data.id === CoreEnum.IdNew ? dispatch(new ActionIconCreate()) : of(),
             this.service.create(data)
         );
     }
