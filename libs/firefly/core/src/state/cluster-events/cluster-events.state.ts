@@ -54,11 +54,12 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     }
 
     @Action(ActionClusterEventsGetData)
-    getData({ dispatch, patchState }: StateContext<StateClusterEventsModel>, { fetch }: ActionClusterEventsGetData)
+    getData({ dispatch, patchState, getState }: StateContext<StateClusterEventsModel>, { fetch }: ActionClusterEventsGetData)
     {
-        const id: string = this.store.selectSnapshot(StateCluster.id);
+        const id:          string  = this.store.selectSnapshot(StateCluster.id);
+        const initialized: boolean = StateClusterEvents.initialized(getState());
 
-        return dispatch
+        return initialized ? of() : dispatch
         ([
             new ActionClusterEventsReset()
         ]).

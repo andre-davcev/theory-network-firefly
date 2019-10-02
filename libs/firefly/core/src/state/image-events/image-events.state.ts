@@ -53,11 +53,12 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     }
 
     @Action(ActionImageEventsGetData)
-    getData({ dispatch, patchState }: StateContext<StateImageEventsModel>, { fetch }: ActionImageEventsGetData)
+    getData({ dispatch, patchState, getState }: StateContext<StateImageEventsModel>, { fetch }: ActionImageEventsGetData)
     {
-        const id: string = this.store.selectSnapshot(StateImage.id);
+        const id:          string  = this.store.selectSnapshot(StateImage.id);
+        const initialized: boolean = StateImageEvents.initialized(getState());
 
-        return dispatch
+        return initialized ? of() : dispatch
         ([
             new ActionImageEventsReset()
         ]).

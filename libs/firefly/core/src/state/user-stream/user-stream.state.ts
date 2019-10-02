@@ -53,11 +53,12 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     }
 
     @Action(ActionUserStreamGetData)
-    getData({ dispatch, patchState }: StateContext<StateUserStreamModel>, { fetch }: ActionUserStreamGetData)
+    getData({ dispatch, patchState, getState }: StateContext<StateUserStreamModel>, { fetch }: ActionUserStreamGetData)
     {
-        const id: string = this.store.selectSnapshot(StateUser.id);
+        const id:          string  = this.store.selectSnapshot(StateUser.id);
+        const initialized: boolean = StateUserStream.initialized(getState());
 
-        return dispatch
+        return initialized ? of() : dispatch
         ([
             new ActionUserStreamReset()
         ]).

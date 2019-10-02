@@ -53,11 +53,12 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     }
 
     @Action(ActionUserIconsGetData)
-    getData({ dispatch, patchState }: StateContext<StateUserIconsModel>, { fetch }: ActionUserIconsGetData)
+    getData({ dispatch, patchState, getState }: StateContext<StateUserIconsModel>, { fetch }: ActionUserIconsGetData)
     {
-        const id: string = this.store.selectSnapshot(StateUser.id);
+        const id:          string  = this.store.selectSnapshot(StateUser.id);
+        const initialized: boolean = StateUserIcons.initialized(getState());
 
-        return dispatch
+        return initialized ? of() : dispatch
         ([
             new ActionUserIconsReset()
         ]).

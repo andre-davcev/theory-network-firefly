@@ -53,11 +53,12 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     }
 
     @Action(ActionIconClustersGetData)
-    getData({ dispatch, patchState }: StateContext<StateIconClustersModel>, { fetch }: ActionIconClustersGetData)
+    getData({ dispatch, patchState, getState }: StateContext<StateIconClustersModel>, { fetch }: ActionIconClustersGetData)
     {
-        const id: string = this.store.selectSnapshot(StateIcon.id);
+        const id:          string  = this.store.selectSnapshot(StateIcon.id);
+        const initialized: boolean = StateIconClusters.initialized(getState());
 
-        return dispatch
+        return initialized ? of() : dispatch
         ([
             new ActionIconClustersReset()
         ]).
