@@ -26,7 +26,7 @@ import {
     ActionClusterIconRemove
 } from './cluster.actions';
 import { ActionClusterEventsReset, ActionClusterEventsDelete } from '../cluster-events';
-import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers';
+import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete, StateClusterSubscribersModel } from '../cluster-subscribers';
 import { ActionUserClustersAdd, ActionUserClustersRemove } from '../user-clusters';
 import { ActionIconClustersRemove, ActionIconClustersAdd } from '../icon-clusters';
 import undefined = require('firebase/empty-import');

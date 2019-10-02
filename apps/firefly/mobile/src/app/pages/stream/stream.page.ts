@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StreamItem, StateUser } from '@firefly/core';
+import { StreamItem, StateUser, ActionUserSubscriptionsOn, ActionUserSubscriptionsOff, StateUserStream } from '@firefly/core';
 
 @Component
 ({
@@ -13,7 +13,7 @@ import { StreamItem, StateUser } from '@firefly/core';
 
 export class PageStream
 {
-    @Select(StateUser.stream) stream$: Observable<Array<StreamItem>>;
+    @Select(StateUserStream.list) stream$: Observable<Array<StreamItem>>;
 
     constructor(private store: Store) { }
 
@@ -26,11 +26,11 @@ export class PageStream
     {
         if (subscribed)
         {
-            this.store.dispatch(new ActionUserSubscribe(stream.id));
+            this.store.dispatch(new ActionUserSubscriptionsOn(stream.id));
         }
         else
         {
-            this.store.dispatch(new ActionUserUnsubscribe(stream.id));
+            this.store.dispatch(new ActionUserSubscriptionsOff(stream.id));
         }
     }
 }
