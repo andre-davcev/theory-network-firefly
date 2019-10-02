@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateUser } from '@firefly/core/state';
@@ -19,18 +19,20 @@ import {
     ActionUserEventsSet,
     ActionUserEventsDelete
 } from './user-events.actions';
+import { of } from 'rxjs';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 
 export class StateUserEvents extends StateReferenceTable<UserEvent, Event, StateUserEventsModel>
 {
-    @Selector() static data(state: StateUserEventsModel):      Record<string, UserEvent> { return state.data; }
-    @Selector() static keys(state: StateUserEventsModel):      Array<string>             { return state.keys; }
-    @Selector() static lookup(state: StateUserEventsModel):    Record<string, Event>     { return state.lookup; }
-    @Selector() static list(state: StateUserEventsModel):      Array<Event>              { return state.list; }
-    @Selector() static offset(state: StateUserEventsModel):    number                    { return state.offset; }
-    @Selector() static pageSize(state: StateUserEventsModel):  number                    { return state.pageSize; }
-    @Selector() static sortField(state: StateUserEventsModel): SortField                 { return state.sortField; }
+    @Selector() static data(state: StateUserEventsModel):        Record<string, UserEvent> { return state.data; }
+    @Selector() static keys(state: StateUserEventsModel):        Array<string>             { return state.keys; }
+    @Selector() static lookup(state: StateUserEventsModel):      Record<string, Event>     { return state.lookup; }
+    @Selector() static list(state: StateUserEventsModel):        Array<Event>              { return state.list; }
+    @Selector() static offset(state: StateUserEventsModel):      number                    { return state.offset; }
+    @Selector() static pageSize(state: StateUserEventsModel):    number                    { return state.pageSize; }
+    @Selector() static sortField(state: StateUserEventsModel):   SortField                 { return state.sortField; }
+    @Selector() static initialized(state: StateUserEventsModel): boolean                   { return state.initialized; }
 
     constructor
     (
@@ -51,21 +53,30 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     }
 
     @Action(ActionUserEventsGetData)
-    getData({ dispatch }: StateContext<StateUserEventsModel>)
+    getData({ dispatch, patchState }: StateContext<StateUserEventsModel>, { fetch }: ActionUserEventsGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const id: string = this.store.selectSnapshot(StateUser.id);
 
-        return dispatch(new ActionUserEventsReset()).
+        return dispatch
+        ([
+            new ActionUserEventsReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, UserEvent>) =>
                 dispatch([
                     new ActionUserEventsSet(data),
                     new ActionUserEventsSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionUserEventsGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }

@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateUser } from '@firefly/core/state';
@@ -22,18 +22,20 @@ import {
     ActionUserSubscriptionsOff
 } from './user-subscriptions.actions';
 import { ActionClusterSubscribersRemove, ActionClusterSubscribersAdd } from '../cluster-subscribers';
+import { of } from 'rxjs';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 
 export class StateUserSubscriptions extends StateReferenceTable<UserSubscription, Subscription, StateUserSubscriptionsModel>
 {
-    @Selector() static data(state: StateUserSubscriptionsModel):      Record<string, UserSubscription> { return state.data; }
-    @Selector() static keys(state: StateUserSubscriptionsModel):      Array<string>                    { return state.keys; }
-    @Selector() static lookup(state: StateUserSubscriptionsModel):    Record<string, Subscription>     { return state.lookup; }
-    @Selector() static list(state: StateUserSubscriptionsModel):      Array<Subscription>              { return state.list; }
-    @Selector() static offset(state: StateUserSubscriptionsModel):    number                           { return state.offset; }
-    @Selector() static pageSize(state: StateUserSubscriptionsModel):  number                           { return state.pageSize; }
-    @Selector() static sortField(state: StateUserSubscriptionsModel): SortField                        { return state.sortField; }
+    @Selector() static data(state: StateUserSubscriptionsModel):        Record<string, UserSubscription> { return state.data; }
+    @Selector() static keys(state: StateUserSubscriptionsModel):        Array<string>                    { return state.keys; }
+    @Selector() static lookup(state: StateUserSubscriptionsModel):      Record<string, Subscription>     { return state.lookup; }
+    @Selector() static list(state: StateUserSubscriptionsModel):        Array<Subscription>              { return state.list; }
+    @Selector() static offset(state: StateUserSubscriptionsModel):      number                           { return state.offset; }
+    @Selector() static pageSize(state: StateUserSubscriptionsModel):    number                           { return state.pageSize; }
+    @Selector() static sortField(state: StateUserSubscriptionsModel):   SortField                        { return state.sortField; }
+    @Selector() static initialized(state: StateUserSubscriptionsModel): boolean                          { return state.initialized; }
 
     constructor
     (
@@ -54,21 +56,30 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     }
 
     @Action(ActionUserSubscriptionsGetData)
-    getData({ dispatch }: StateContext<StateUserSubscriptionsModel>)
+    getData({ dispatch, patchState }: StateContext<StateUserSubscriptionsModel>, { fetch }: ActionUserSubscriptionsGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const id: string = this.store.selectSnapshot(StateUser.id);
 
-        return dispatch(new ActionUserSubscriptionsReset()).
+        return dispatch
+        ([
+            new ActionUserSubscriptionsReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, UserSubscription>) =>
                 dispatch([
                     new ActionUserSubscriptionsSet(data),
                     new ActionUserSubscriptionsSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionUserSubscriptionsGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }

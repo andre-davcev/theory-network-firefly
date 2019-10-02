@@ -4,7 +4,7 @@ import { Alert, UserAlert } from '@firefly/core/models';
 import { ActionsUserAlerts } from './user-alerts.actions.enum';
 
 export class ActionUserAlertsReset   { static readonly type = ActionsUserAlerts.Reset;   constructor() { } }
-export class ActionUserAlertsGetData { static readonly type = ActionsUserAlerts.GetData; constructor() { } }
+export class ActionUserAlertsGetData { static readonly type = ActionsUserAlerts.GetData; constructor(public fetch: boolean = true) { } }
 export class ActionUserAlertsGet     { static readonly type = ActionsUserAlerts.Get;     constructor() { } }
 export class ActionUserAlertsSet     { static readonly type = ActionsUserAlerts.Set;     constructor(public payload: Record<string, UserAlert>) { } }
 export class ActionUserAlertsSort    { static readonly type = ActionsUserAlerts.Sort;    constructor(public payload?: SortField) { } }

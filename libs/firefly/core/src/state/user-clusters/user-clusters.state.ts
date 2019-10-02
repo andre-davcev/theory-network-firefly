@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateUser } from '@firefly/core/state';
@@ -19,18 +19,20 @@ import {
     ActionUserClustersSet,
     ActionUserClustersDelete
 } from './user-clusters.actions';
+import { of } from 'rxjs';
 
 @State<StateUserClustersModel>(StateUserClustersOptions)
 
 export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster, StateUserClustersModel>
 {
-    @Selector() static data(state: StateUserClustersModel):      Record<string, UserCluster> { return state.data; }
-    @Selector() static keys(state: StateUserClustersModel):      Array<string>               { return state.keys; }
-    @Selector() static lookup(state: StateUserClustersModel):    Record<string, Cluster>     { return state.lookup; }
-    @Selector() static list(state: StateUserClustersModel):      Array<Cluster>              { return state.list; }
-    @Selector() static offset(state: StateUserClustersModel):    number                      { return state.offset; }
-    @Selector() static pageSize(state: StateUserClustersModel):  number                      { return state.pageSize; }
-    @Selector() static sortField(state: StateUserClustersModel): SortField                   { return state.sortField; }
+    @Selector() static data(state: StateUserClustersModel):        Record<string, UserCluster> { return state.data; }
+    @Selector() static keys(state: StateUserClustersModel):        Array<string>               { return state.keys; }
+    @Selector() static lookup(state: StateUserClustersModel):      Record<string, Cluster>     { return state.lookup; }
+    @Selector() static list(state: StateUserClustersModel):        Array<Cluster>              { return state.list; }
+    @Selector() static offset(state: StateUserClustersModel):      number                      { return state.offset; }
+    @Selector() static pageSize(state: StateUserClustersModel):    number                      { return state.pageSize; }
+    @Selector() static sortField(state: StateUserClustersModel):   SortField                   { return state.sortField; }
+    @Selector() static initialized(state: StateUserClustersModel): boolean                     { return state.initialized; }
 
     constructor
     (
@@ -51,21 +53,30 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     }
 
     @Action(ActionUserClustersGetData)
-    getData({ dispatch }: StateContext<StateUserClustersModel>)
+    getData({ dispatch, patchState }: StateContext<StateUserClustersModel>, { fetch }: ActionUserClustersGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const id: string = this.store.selectSnapshot(StateUser.id);
 
-        return dispatch(new ActionUserClustersReset()).
+        return dispatch
+        ([
+            new ActionUserClustersReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, UserCluster>) =>
                 dispatch([
                     new ActionUserClustersSet(data),
                     new ActionUserClustersSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionUserClustersGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }

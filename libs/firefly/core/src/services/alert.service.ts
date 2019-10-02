@@ -3,9 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Alert } from '@firefly/core/models';
 import { ServiceBase } from '@theory/firebase';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidatorsExtended } from '@theory/core';
-import { ServiceEvents } from './events.service';
+import { FormBuilder } from '@angular/forms';
 
 
 @Injectable({ providedIn: 'root' })

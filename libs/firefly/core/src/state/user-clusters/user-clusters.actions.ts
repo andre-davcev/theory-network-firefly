@@ -4,7 +4,7 @@ import { Cluster, UserCluster } from '@firefly/core/models';
 import { ActionsUserClusters } from './user-clusters.actions.enum';
 
 export class ActionUserClustersReset   { static readonly type = ActionsUserClusters.Reset;   constructor() { } }
-export class ActionUserClustersGetData { static readonly type = ActionsUserClusters.GetData; constructor() { } }
+export class ActionUserClustersGetData { static readonly type = ActionsUserClusters.GetData; constructor(public fetch: boolean = true) { } }
 export class ActionUserClustersGet     { static readonly type = ActionsUserClusters.Get;     constructor() { } }
 export class ActionUserClustersSet     { static readonly type = ActionsUserClusters.Set;     constructor(public payload: Record<string, UserCluster>) { } }
 export class ActionUserClustersSort    { static readonly type = ActionsUserClusters.Sort;    constructor(public payload?: SortField) { } }

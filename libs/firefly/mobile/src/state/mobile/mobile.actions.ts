@@ -1,7 +1,6 @@
 
 
 import { ActionsMobile } from './mobile.actions.enum';
-import { Observable } from 'rxjs';
 
 export class ActionMobileLoadingShow
 {

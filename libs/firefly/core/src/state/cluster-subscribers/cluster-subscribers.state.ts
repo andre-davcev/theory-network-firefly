@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateCluster } from '@firefly/core/state';
@@ -20,24 +20,26 @@ import {
     ActionClusterSubscribersDelete
 } from './cluster-subscribers.actions';
 import { ActionUserSubscriptionsRemove } from '../user-subscriptions';
+import { of } from 'rxjs';
 
 @State<StateClusterSubscribersModel>(StateClusterSubscribersOptions)
 
 export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscriber, User, StateClusterSubscribersModel>
 {
-    @Selector() static data(state: StateClusterSubscribersModel):      Record<string, ClusterSubscriber> { return state.data; }
-    @Selector() static keys(state: StateClusterSubscribersModel):      Array<string>                     { return state.keys; }
-    @Selector() static lookup(state: StateClusterSubscribersModel):    Record<string, User>              { return state.lookup; }
-    @Selector() static list(state: StateClusterSubscribersModel):      Array<User>                       { return state.list; }
-    @Selector() static offset(state: StateClusterSubscribersModel):    number                            { return state.offset; }
-    @Selector() static pageSize(state: StateClusterSubscribersModel):  number                            { return state.pageSize; }
-    @Selector() static sortField(state: StateClusterSubscribersModel): SortField                         { return state.sortField; }
+    @Selector() static data(state: StateClusterSubscribersModel):        Record<string, ClusterSubscriber> { return state.data; }
+    @Selector() static keys(state: StateClusterSubscribersModel):        Array<string>                     { return state.keys; }
+    @Selector() static lookup(state: StateClusterSubscribersModel):      Record<string, User>              { return state.lookup; }
+    @Selector() static list(state: StateClusterSubscribersModel):        Array<User>                       { return state.list; }
+    @Selector() static offset(state: StateClusterSubscribersModel):      number                            { return state.offset; }
+    @Selector() static pageSize(state: StateClusterSubscribersModel):    number                            { return state.pageSize; }
+    @Selector() static sortField(state: StateClusterSubscribersModel):   SortField                         { return state.sortField; }
+    @Selector() static initialized(state: StateClusterSubscribersModel): boolean                           { return state.initialized; }
 
     constructor
     (
-        private store: Store,
+        private store:   Store,
         private service: ServiceClusterSubscribers,
-        private users: ServiceUsers
+        private users:   ServiceUsers
     )
     {
         super();
@@ -52,21 +54,30 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     }
 
     @Action(ActionClusterSubscribersGetData)
-    getData({ dispatch }: StateContext<StateClusterSubscribersModel>)
+    getData({ dispatch, patchState }: StateContext<StateClusterSubscribersModel>, { fetch }: ActionClusterSubscribersGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateCluster.id);
+        const id: string = this.store.selectSnapshot(StateCluster.id);
 
-        return dispatch(new ActionClusterSubscribersReset()).
+        return dispatch
+        ([
+            new ActionClusterSubscribersReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, ClusterSubscriber>) =>
                 dispatch([
                     new ActionClusterSubscribersSet(data),
                     new ActionClusterSubscribersSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionClusterSubscribersGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }

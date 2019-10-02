@@ -4,7 +4,7 @@ import { Subscription, UserSubscription } from '@firefly/core/models';
 import { ActionsUserSubscriptions } from './user-subscriptions.actions.enum';
 
 export class ActionUserSubscriptionsReset   { static readonly type = ActionsUserSubscriptions.Reset;   constructor() { } }
-export class ActionUserSubscriptionsGetData { static readonly type = ActionsUserSubscriptions.GetData; constructor() { } }
+export class ActionUserSubscriptionsGetData { static readonly type = ActionsUserSubscriptions.GetData; constructor(public fetch: boolean = true) { } }
 export class ActionUserSubscriptionsGet     { static readonly type = ActionsUserSubscriptions.Get;     constructor() { } }
 export class ActionUserSubscriptionsSet     { static readonly type = ActionsUserSubscriptions.Set;     constructor(public payload: Record<string, UserSubscription>) { } }
 export class ActionUserSubscriptionsSort    { static readonly type = ActionsUserSubscriptions.Sort;    constructor(public payload?: SortField) { } }

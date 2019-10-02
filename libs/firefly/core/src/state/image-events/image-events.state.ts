@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateImage } from '@firefly/core/state';
@@ -19,18 +19,20 @@ import {
     ActionImageEventsSet,
     ActionImageEventsDelete
 } from './image-events.actions';
+import { of } from 'rxjs';
 
 @State<StateImageEventsModel>(StateImageEventsOptions)
 
 export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, StateImageEventsModel>
 {
-    @Selector() static data(state: StateImageEventsModel):      Record<string, ImageEvent> { return state.data; }
-    @Selector() static keys(state: StateImageEventsModel):      Array<string>              { return state.keys; }
-    @Selector() static lookup(state: StateImageEventsModel):    Record<string, Event>      { return state.lookup; }
-    @Selector() static list(state: StateImageEventsModel):      Array<Event>               { return state.list; }
-    @Selector() static offset(state: StateImageEventsModel):    number                     { return state.offset; }
-    @Selector() static pageSize(state: StateImageEventsModel):  number                     { return state.pageSize; }
-    @Selector() static sortField(state: StateImageEventsModel): SortField                  { return state.sortField; }
+    @Selector() static data(state: StateImageEventsModel):        Record<string, ImageEvent> { return state.data; }
+    @Selector() static keys(state: StateImageEventsModel):        Array<string>              { return state.keys; }
+    @Selector() static lookup(state: StateImageEventsModel):      Record<string, Event>      { return state.lookup; }
+    @Selector() static list(state: StateImageEventsModel):        Array<Event>               { return state.list; }
+    @Selector() static offset(state: StateImageEventsModel):      number                     { return state.offset; }
+    @Selector() static pageSize(state: StateImageEventsModel):    number                     { return state.pageSize; }
+    @Selector() static sortField(state: StateImageEventsModel):   SortField                  { return state.sortField; }
+    @Selector() static initialized(state: StateImageEventsModel): boolean                    { return state.initialized; }
 
     constructor
     (
@@ -51,21 +53,30 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     }
 
     @Action(ActionImageEventsGetData)
-    getData({ dispatch }: StateContext<StateImageEventsModel>)
+    getData({ dispatch, patchState }: StateContext<StateImageEventsModel>, { fetch }: ActionImageEventsGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateImage.id);
+        const id: string = this.store.selectSnapshot(StateImage.id);
 
-        return dispatch(new ActionImageEventsReset()).
+        return dispatch
+        ([
+            new ActionImageEventsReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, ImageEvent>) =>
                 dispatch([
                     new ActionImageEventsSet(data),
                     new ActionImageEventsSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionImageEventsGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }

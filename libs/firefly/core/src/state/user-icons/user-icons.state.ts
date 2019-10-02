@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
 import { StateUser } from '@firefly/core/state';
@@ -19,18 +19,20 @@ import {
     ActionUserIconsSet,
     ActionUserIconsDelete
 } from './user-icons.actions';
+import { of } from 'rxjs';
 
 @State<StateUserIconsModel>(StateUserIconsOptions)
 
 export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUserIconsModel>
 {
-    @Selector() static data(state: StateUserIconsModel):      Record<string, UserIcon> { return state.data; }
-    @Selector() static keys(state: StateUserIconsModel):      Array<string>            { return state.keys; }
-    @Selector() static lookup(state: StateUserIconsModel):    Record<string, Icon>     { return state.lookup; }
-    @Selector() static list(state: StateUserIconsModel):      Array<Icon>              { return state.list; }
-    @Selector() static offset(state: StateUserIconsModel):    number                   { return state.offset; }
-    @Selector() static pageSize(state: StateUserIconsModel):  number                   { return state.pageSize; }
-    @Selector() static sortField(state: StateUserIconsModel): SortField                { return state.sortField; }
+    @Selector() static data(state: StateUserIconsModel):        Record<string, UserIcon> { return state.data; }
+    @Selector() static keys(state: StateUserIconsModel):        Array<string>            { return state.keys; }
+    @Selector() static lookup(state: StateUserIconsModel):      Record<string, Icon>     { return state.lookup; }
+    @Selector() static list(state: StateUserIconsModel):        Array<Icon>              { return state.list; }
+    @Selector() static offset(state: StateUserIconsModel):      number                   { return state.offset; }
+    @Selector() static pageSize(state: StateUserIconsModel):    number                   { return state.pageSize; }
+    @Selector() static sortField(state: StateUserIconsModel):   SortField                { return state.sortField; }
+    @Selector() static initialized(state: StateUserIconsModel): boolean                  { return state.initialized; }
 
     constructor
     (
@@ -51,21 +53,30 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     }
 
     @Action(ActionUserIconsGetData)
-    getData({ dispatch }: StateContext<StateUserIconsModel>)
+    getData({ dispatch, patchState }: StateContext<StateUserIconsModel>, { fetch }: ActionUserIconsGetData)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const id: string = this.store.selectSnapshot(StateUser.id);
 
-        return dispatch(new ActionUserIconsReset()).
+        return dispatch
+        ([
+            new ActionUserIconsReset()
+        ]).
         pipe
         (
             switchMap(() =>
-                this.service.get(userId)
+                this.service.get(id)
             ),
             switchMap((data: Record<string, UserIcon>) =>
                 dispatch([
                     new ActionUserIconsSet(data),
                     new ActionUserIconsSort()
                 ])
+            ),
+            switchMap(() =>
+                dispatch(fetch ? new ActionUserIconsGet() : of())
+            ),
+            map(() =>
+                patchState({ initialized: true })
             )
         );
     }
