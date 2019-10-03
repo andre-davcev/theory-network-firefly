@@ -7,4 +7,6 @@ export interface Alert extends Model
     body    : string;
     imageId : string;
     read    : boolean;
+    date    : string;
+    url?    : string;
 }
