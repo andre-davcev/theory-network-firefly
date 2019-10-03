@@ -19,9 +19,11 @@ import {
   ActionStreamItemPatch,
   ActionStreamItemCreate,
   ActionStreamItemSave,
-  ActionStreamItemDelete
+  ActionStreamItemDelete,
+  ActionStreamItemSetId
 } from './stream-item.actions';
-import { ActionIconGet } from '@firefly/core/state/icon';
+import { ActionIconGet, ActionIconSetId } from '@firefly/core/state/icon';
+import { StateUserStream } from '../user-stream';
 
 @State<StateStreamItemModel>(StateStreamItemOptions)
 
@@ -58,13 +60,8 @@ export class StateStreamItem
     @Action(ActionStreamItemGet)
     get({ dispatch }: StateContext<StateStreamItemModel>, { payload }: ActionStreamItemGet)
     {
-        const id: string = payload;
-
-        const object$: Observable<StreamItem> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateStreamItemOptions.defaults.empty)) :
-            this.service.snapshot(id);
-
-        return object$.pipe
+        return this.service.snapshot(payload).
+        pipe
         (
             switchMap((object: StreamItem) =>
                 dispatch
@@ -74,6 +71,22 @@ export class StateStreamItem
                 ])
             )
         );
+    }
+
+    @Action(ActionStreamItemSetId)
+    setId({ dispatch }: StateContext<StateStreamItemModel>, { payload }: ActionStreamItemSetId)
+    {
+        const id: string = payload;
+
+        const object: StreamItem = id === CoreEnum.IdNew ?
+            this.service.build(this.store.selectSnapshot(StateUser.id), StateStreamItemOptions.defaults.empty) :
+            this.store.selectSnapshot(StateUserStream.lookup)[id]
+
+        return dispatch
+        ([
+            new ActionStreamItemSet(object),
+            new ActionIconSetId(object.iconId)
+        ]);
     }
 
     @Action(ActionStreamItemSet)

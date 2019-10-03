@@ -10,7 +10,7 @@ import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { Cluster } from '@firefly/core/models';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/user';
-import { ActionIconGet, ActionIconCreate, StateIcon } from '@firefly/core/state/icon';
+import { ActionIconGet, ActionIconCreate, StateIcon, ActionIconSetId } from '@firefly/core/state/icon';
 
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
@@ -23,11 +23,12 @@ import {
     ActionClusterSave,
     ActionClusterDelete,
     ActionClusterIconAdd,
-    ActionClusterIconRemove
+    ActionClusterIconRemove,
+    ActionClusterSetId
 } from './cluster.actions';
 import { ActionClusterEventsReset, ActionClusterEventsDelete } from '../cluster-events';
-import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete, StateClusterSubscribersModel } from '../cluster-subscribers';
-import { ActionUserClustersAdd, ActionUserClustersRemove } from '../user-clusters';
+import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers';
+import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters } from '../user-clusters';
 import { ActionIconClustersRemove, ActionIconClustersAdd } from '../icon-clusters';
 import undefined = require('firebase/empty-import');
 
@@ -64,15 +65,10 @@ export class StateCluster
     }
 
     @Action(ActionClusterGet)
-    get({ dispatch } : StateContext<StateClusterModel>, { payload }: ActionClusterGet)
+    get({ dispatch }: StateContext<StateClusterModel>, { payload }: ActionClusterGet)
     {
-        const id: string = payload;
-
-        const object$: Observable<Cluster> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateClusterOptions.defaults.empty)) :
-            this.service.snapshot(id);
-
-        return object$.pipe
+        return this.service.snapshot(payload).
+        pipe
         (
             switchMap((object: Cluster) =>
                 dispatch
@@ -82,7 +78,23 @@ export class StateCluster
                 ])
             )
         );
-    };
+    }
+
+    @Action(ActionClusterSetId)
+    setId({ dispatch }: StateContext<StateClusterModel>, { payload }: ActionClusterSetId)
+    {
+        const id: string = payload;
+
+        const object: Cluster = id === CoreEnum.IdNew ?
+            this.service.build(this.store.selectSnapshot(StateUser.id), StateClusterOptions.defaults.empty) :
+            this.store.selectSnapshot(StateUserClusters.lookup)[id]
+
+        return dispatch
+        ([
+            new ActionClusterSet(object),
+            new ActionIconSetId(object.iconId)
+        ]);
+    }
 
     @Action(ActionClusterSet)
     set({ patchState, getState, dispatch }: StateContext<StateClusterModel>, { payload }: ActionClusterSet)

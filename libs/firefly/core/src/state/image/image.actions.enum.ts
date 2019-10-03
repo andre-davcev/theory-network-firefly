@@ -2,6 +2,7 @@ export enum ActionsImage
 {
     Reset  = '[Image] Reset',
     Get    = '[Image] Get',
+    SetId  = '[Image] SetId',
     Set    = '[Image] Set',
     Patch  = '[Image] Patch',
     Save   = '[Image] Save',

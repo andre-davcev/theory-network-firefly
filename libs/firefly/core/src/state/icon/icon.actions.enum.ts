@@ -2,6 +2,7 @@ export enum ActionsIcon
 {
     Reset  = '[Icon] Reset',
     Get    = '[Icon] Get',
+    SetId  = '[Icon] SetId',
     Set    = '[Icon] Set',
     Patch  = '[Icon] Patch',
     Save   = '[Icon] Save',

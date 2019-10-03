@@ -19,9 +19,10 @@ import {
   ActionAlertPatch,
   ActionAlertCreate,
   ActionAlertSave,
-  ActionAlertDelete
+  ActionAlertDelete,
+  ActionAlertSetId
 } from './alert.actions';
-import { ActionUserAlertsAdd } from '../user-alerts';
+import { ActionUserAlertsAdd, StateUserAlerts } from '../user-alerts';
 
 @State<StateAlertModel>(StateAlertOptions)
 
@@ -58,21 +59,25 @@ export class StateAlert
     @Action(ActionAlertGet)
     get({ dispatch }: StateContext<StateAlertModel>, { payload }: ActionAlertGet)
     {
-        const id: string = payload;
-
-        const object$: Observable<Alert> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateAlertOptions.defaults.empty)) :
-            this.service.snapshot(id);
-
-        return object$.pipe
+        return this.service.snapshot(payload).
+        pipe
         (
             switchMap((object: Alert) =>
-                dispatch
-                ([
-                    new ActionAlertSet(object)
-                ])
+                dispatch([new ActionAlertSet(object)])
             )
         );
+    }
+
+    @Action(ActionAlertSetId)
+    setId({ dispatch }: StateContext<StateAlertModel>, { payload }: ActionAlertSetId)
+    {
+        const id: string = payload;
+
+        const object: Alert = id === CoreEnum.IdNew ?
+            this.service.build(this.store.selectSnapshot(StateUser.id), StateAlertOptions.defaults.empty) :
+            this.store.selectSnapshot(StateUserAlerts.lookup)[id]
+
+        return dispatch([new ActionAlertSet(object)]);
     }
 
     @Action(ActionAlertSet)

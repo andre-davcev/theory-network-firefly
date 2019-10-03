@@ -2,6 +2,7 @@ export enum ActionsEvent
 {
     Reset  = '[Event] Reset',
     Get    = '[Event] Get',
+    SetId  = '[Event] SetId',
     Set    = '[Event] Set',
     Patch  = '[Event] Patch',
     Save   = '[Event] Save',

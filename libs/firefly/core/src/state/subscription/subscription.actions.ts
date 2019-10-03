@@ -4,7 +4,8 @@ import { ActionsSubscription } from './subscription.actions.enum';
 import { CoreEnum } from '@theory/core';
 
 export class ActionSubscriptionReset  { static readonly type = ActionsSubscription.Reset;   constructor() { } }
-export class ActionSubscriptionGet    { static readonly type = ActionsSubscription.Get;     constructor(public payload: string = CoreEnum.IdNew) { } }
+export class ActionSubscriptionGet    { static readonly type = ActionsSubscription.Get;     constructor(public payload: string) { } }
+export class ActionSubscriptionSetId  { static readonly type = ActionsSubscription.Get;     constructor(public payload: string = CoreEnum.IdNew) { } }
 export class ActionSubscriptionSet    { static readonly type = ActionsSubscription.Set;     constructor(public payload: Subscription) { } }
 export class ActionSubscriptionPatch  { static readonly type = ActionsSubscription.Patch;   constructor(public payload: Partial<Subscription>, public save: boolean = false) { } }
 export class ActionSubscriptionCreate { static readonly type = ActionsSubscription.Create;  constructor() { } }

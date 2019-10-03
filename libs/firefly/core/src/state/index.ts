@@ -7,7 +7,6 @@ export * from './event-clusters';
 export * from './grid';
 export * from './icon';
 export * from './icon-clusters';
-export * from './icons';
 export * from './image';
 export * from './image-events';
 export * from './places';

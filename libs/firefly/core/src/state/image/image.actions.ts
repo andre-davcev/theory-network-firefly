@@ -4,7 +4,8 @@ import { Image } from '@firefly/core/models';
 import { CoreEnum } from '@theory/core';
 
 export class ActionImageReset  { static readonly type = ActionsImage.Reset;   constructor() { } }
-export class ActionImageGet    { static readonly type = ActionsImage.Get;     constructor(public payload: string = CoreEnum.IdNew) { } }
+export class ActionImageGet    { static readonly type = ActionsImage.Get;     constructor(public payload: string) { } }
+export class ActionImageSetId  { static readonly type = ActionsImage.SetId;   constructor(public payload: string = CoreEnum.IdNew) { } }
 export class ActionImageSet    { static readonly type = ActionsImage.Set;     constructor(public payload: Image) { } }
 export class ActionImagePatch  { static readonly type = ActionsImage.Patch;   constructor(public payload: Partial<Image>, public save: boolean = false) { } }
 export class ActionImageCreate { static readonly type = ActionsImage.Create;  constructor() { } }

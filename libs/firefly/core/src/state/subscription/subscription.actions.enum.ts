@@ -2,6 +2,7 @@ export enum ActionsSubscription
 {
     Reset  = '[Subscription] Reset',
     Get    = '[Subscription] Get',
+    SetId  = '[Subscription] SetId',
     Set    = '[Subscription] Set',
     Patch  = '[Subscription] Patch',
     Save   = '[Subscription] Save',

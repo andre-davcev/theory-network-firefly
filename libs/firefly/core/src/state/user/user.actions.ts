@@ -1,5 +1,5 @@
 import { User as FirebaseUser } from 'firebase/app'
-import { Credentials, CoreEnum } from '@theory/core';
+import { Credentials,CoreEnum } from '@theory/core';
 
 import { User } from '@firefly/core/models';
 import { ActionsUser } from './user.actions.enum';
