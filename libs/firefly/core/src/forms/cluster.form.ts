@@ -15,14 +15,14 @@ export class FormCluster extends FormGenerator<Cluster>
     protected empty(): Cluster
     {
         return {
-          draft       : true,
-          name        : null,
-          tagline     : null,
-          description : null,
-          iconId      : null,
-          private     : true,
-          events      : {},
-          subscribers : {}
+          draft           : true,
+          name            : null,
+          tagline         : null,
+          description     : null,
+          iconId          : null,
+          private         : true,
+          eventCount      : undefined,
+          subscriberCount : undefined
         };
     }
 
@@ -35,8 +35,7 @@ export class FormCluster extends FormGenerator<Cluster>
             tagline     : [cluster.tagline,     [Validators.required, ValidatorsExtended.minLength(3)]],
             description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(3)]],
             iconId      : [cluster.iconId],
-            private     : cluster.private,
-            events      : [cluster.events,      [Validators.required, ValidatorsExtended.minLength(1)]]
+            private     : cluster.private
         });
 
         return formGroup;

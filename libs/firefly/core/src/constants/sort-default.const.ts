@@ -1,10 +1,10 @@
-import { DataType } from '@theory/core';
+import { TypeOf } from '@theory/core';
 
 export const SortDefault =
 [
     {
         name:      'name',
-        type:      DataType.String,
+        type:      TypeOf.String,
         ascending: true
     }
 ]

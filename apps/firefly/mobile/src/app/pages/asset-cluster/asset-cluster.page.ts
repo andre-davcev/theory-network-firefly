@@ -9,7 +9,7 @@ import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
-import { StateCluster, ActionClusterCreate } from '@firefly/core';
+import { StateCluster, ActionClusterCreate, StateIcon, ActionIconUriSet } from '@firefly/core';
 import { Pages } from '../pages.enum';
 
 @Component
@@ -21,8 +21,8 @@ import { Pages } from '../pages.enum';
 
 export class PageAssetCluster
 {
-    @Select(StateCluster.formGroup)               form$:        Observable<FormGroup>;
-    @Select(StateCluster.clusterIconNormalized)   clusterIcon$: Observable<string>;
+    @Select(StateCluster.formGroup) form$:        Observable<FormGroup>;
+    @Select(StateIcon.url)          clusterIcon$: Observable<string>;
 
     public Pages: any = Pages;
 
@@ -32,9 +32,7 @@ export class PageAssetCluster
       private loading: LoadingController,
       private toast: ToastController
     )
-    {
-        this.store.dispatch(new ActionClusterSetId('new'));
-    }
+    { }
 
     ionViewWillEnter()
     {
@@ -66,12 +64,12 @@ export class PageAssetCluster
 
                 from(this.camera.getPicture(options)).
                 subscribe((imageData: string) =>
-                  this.store.dispatch(new ActionClusterSetIcon(imageData))
+                  this.store.dispatch(new ActionIconUriSet(imageData))
                 );
             }
             else
             {
-                this.store.dispatch(new ActionClusterSetIcon('assets/icons/temp-coffee-icon-pink.png'));
+                this.store.dispatch(new ActionIconUriSet('assets/icons/temp-coffee-icon-pink.png'));
             }
         }
     }

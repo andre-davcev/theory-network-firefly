@@ -29,7 +29,6 @@ import {
   ActionIconUriClear,
   ActionIconSetId
 } from './icon.actions';
-import undefined = require('firebase/empty-import');
 import { ActionIconClustersReset, ActionIconClustersDelete } from '../icon-clusters';
 import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons } from '../user-icons';
 

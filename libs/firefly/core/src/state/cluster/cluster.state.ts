@@ -30,7 +30,6 @@ import { ActionClusterEventsReset, ActionClusterEventsDelete } from '../cluster-
 import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters } from '../user-clusters';
 import { ActionIconClustersRemove, ActionIconClustersAdd } from '../icon-clusters';
-import undefined = require('firebase/empty-import');
 
 @State<StateClusterModel>(StateClusterOptions)
 

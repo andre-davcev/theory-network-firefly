@@ -1,6 +1,6 @@
 import { Observable, from, combineLatest, forkJoin } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, DocumentSnapshot, Action } from '@angular/fire/firestore';
-import { Model } from '@theory/firebase';
+import { Model } from '@theory/firebase/interfaces';
 import { map, take, switchMap } from 'rxjs/operators';
 import { MergeType } from '../../../firefly/core/src/enums';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -41,7 +41,7 @@ export class ServiceBase<T extends Model | Record<string, any>>
     {
         if (!this.reference)
         {
-            partial.dateUpdated = firebase.firestore.FieldValue.serverTimestamp();
+            partial['dateUpdated'] = firebase.firestore.FieldValue.serverTimestamp();
         }
 
         return from(this.document(id).update(partial));

@@ -149,8 +149,6 @@
     "@ionic/schematics-angular": "~1.0.7",
     "@ngrx/store-devtools": "7.2.0",
     "@nrwl/schematics": "7.5.2",
-    "@types/jasmine": "~3.3.12",
-    "@types/jasminewd2": "~2.0.6",
     "@types/mapbox-gl": "^0.51.4",
     "@types/node": "~10.14.2",
     "@types/supercluster": "^5.0.1",

@@ -1,6 +1,5 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 import { StateClusterModel } from './cluster.state.model';
-import undefined = require('firebase/empty-import');
 
 export const StateClusterOptions: StoreOptions<StateClusterModel> =
 {
