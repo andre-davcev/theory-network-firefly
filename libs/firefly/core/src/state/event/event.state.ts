@@ -11,7 +11,7 @@ import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { StateUser } from '@firefly/core/state/user';
 import { Event, Location, Time } from '@firefly/core/models';
 import { ServiceEvents } from '@firefly/core/services';
-import { ActionImageGet, ActionImageCreate, StateImage } from '@firefly/core/state/image';
+import { ActionImageGet, ActionImageCreate, StateImage, ActionImageSetId } from '@firefly/core/state/image';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -26,10 +26,11 @@ import {
   ActionEventSet,
   ActionEventSave,
   ActionEventImageAdd,
-  ActionEventImageRemove
+  ActionEventImageRemove,
+  ActionEventSetId
 } from './event.actions';
 import { ActionEventClustersReset, ActionEventClustersDelete } from '../event-clusters';
-import { ActionUserEventsAdd, ActionUserEventsRemove } from '../user-events';
+import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents } from '../user-events';
 import { ActionImageEventsRemove, ActionImageEventsAdd } from '../image-events';
 
 @State<StateEventModel>(StateEventOptions)
@@ -81,15 +82,10 @@ export class StateEvent
     }
 
     @Action(ActionEventGet)
-    get({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventGet)
+    get({ dispatch }: StateContext<StateEventModel>, { payload }: ActionEventGet)
     {
-        const id: string = payload;
-
-        const object$: Observable<Event> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateEventOptions.defaults.empty)) :
-            this.service.snapshot(id);
-
-        return object$.pipe
+        return this.service.snapshot(payload).
+        pipe
         (
             switchMap((object: Event) =>
                 dispatch
@@ -99,7 +95,23 @@ export class StateEvent
                 ])
             )
         );
-    };
+    }
+
+    @Action(ActionEventSetId)
+    setId({ dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSetId)
+    {
+        const id: string = payload;
+
+        const object: Event = id === CoreEnum.IdNew ?
+            this.service.build(this.store.selectSnapshot(StateUser.id), StateEventOptions.defaults.empty) :
+            this.store.selectSnapshot(StateUserEvents.lookup)[id]
+
+        return dispatch
+        ([
+            new ActionEventSet(object),
+            new ActionImageSetId(object.imageId)
+        ]);
+    }
 
     @Action(ActionEventSet)
     set({ patchState, getState, dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSet)
@@ -110,7 +122,7 @@ export class StateEvent
         ([
             new ActionEventReset(),
             new ActionEventClustersReset(),
-            new ActionUserEventsAdd(StateEvent.data(getState()))
+            new ActionUserEventsAdd(object)
         ]).
         pipe
         (

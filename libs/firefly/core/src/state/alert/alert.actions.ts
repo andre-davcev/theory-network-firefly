@@ -4,7 +4,8 @@ import { ActionsAlert } from './alert.actions.enum';
 import { CoreEnum } from '@theory/core';
 
 export class ActionAlertReset  { static readonly type = ActionsAlert.Reset;   constructor() { } }
-export class ActionAlertGet    { static readonly type = ActionsAlert.Get;     constructor(public payload: string = CoreEnum.IdNew) { } }
+export class ActionAlertGet    { static readonly type = ActionsAlert.Get;     constructor(public payload: string) { } }
+export class ActionAlertSetId  { static readonly type = ActionsAlert.SetId;   constructor(public payload: string = CoreEnum.IdNew) { } }
 export class ActionAlertSet    { static readonly type = ActionsAlert.Set;     constructor(public payload: Alert) { } }
 export class ActionAlertPatch  { static readonly type = ActionsAlert.Patch;   constructor(public payload: Partial<Alert>, public save: boolean = false) { } }
 export class ActionAlertCreate { static readonly type = ActionsAlert.Create;  constructor() { } }

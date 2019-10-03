@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { ActionSetIconId } from '@firefly/core';
+import { StateIcon } from '@firefly/core';
 
 @Component
 ({
@@ -15,7 +15,7 @@ import { ActionSetIconId } from '@firefly/core';
 
 export class PageAssetsIcon
 {
-    @Select(StateIcons.form) form$: Observable<FormGroup>;
+    @Select(StateIcon.formGroup) form$: Observable<FormGroup>;
 
     constructor(private store: Store)
     {

@@ -4,7 +4,8 @@ import { ActionsIcon } from './icon.actions.enum';
 import { CoreEnum } from '@theory/core';
 
 export class ActionIconReset  { static readonly type = ActionsIcon.Reset;   constructor() { } }
-export class ActionIconGet    { static readonly type = ActionsIcon.Get;     constructor(public payload: string = CoreEnum.IdNew) { } }
+export class ActionIconGet    { static readonly type = ActionsIcon.Get;     constructor(public payload: string) { } }
+export class ActionIconSetId  { static readonly type = ActionsIcon.SetId;   constructor(public payload: string = CoreEnum.IdNew) { } }
 export class ActionIconSet    { static readonly type = ActionsIcon.Set;     constructor(public payload: Icon) { } }
 export class ActionIconPatch  { static readonly type = ActionsIcon.Patch;   constructor(public payload: Partial<Icon>, public save: boolean = false) { } }
 export class ActionIconCreate { static readonly type = ActionsIcon.Create;  constructor() { } }

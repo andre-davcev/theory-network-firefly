@@ -26,10 +26,11 @@ import {
   ActionImageUpload,
   ActionImageUploadClear,
   ActionImageUriSet,
-  ActionImageUriClear
+  ActionImageUriClear,
+  ActionImageSetId
 } from './image.actions';
 import { ActionImageEventsReset, ActionImageEventsDelete } from '../image-events';
-import { ActionUserImagesAdd, ActionUserImagesRemove } from '../user-images';
+import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages } from '../user-images';
 
 @State<StateImageModel>(StateImageOptions)
 
@@ -75,18 +76,25 @@ export class StateImage
     @Action(ActionImageGet)
     get({ dispatch }: StateContext<StateImageModel>, { payload }: ActionImageGet)
     {
-        const id: string = payload;
-
-        const object$: Observable<Image> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateImageOptions.defaults.empty)) :
-            this.service.snapshot(id);
-
-        return object$.pipe
+        return this.service.snapshot(payload).
+        pipe
         (
             switchMap((object: Image) =>
-                dispatch(new ActionImageSet(object))
+                dispatch([new ActionImageSet(object)])
             )
         );
+    }
+
+    @Action(ActionImageSetId)
+    setId({ dispatch }: StateContext<StateImageModel>, { payload }: ActionImageSetId)
+    {
+        const id: string = payload;
+
+        const object: Image = id === CoreEnum.IdNew ?
+            this.service.build(this.store.selectSnapshot(StateUser.id), StateImageOptions.defaults.empty) :
+            this.store.selectSnapshot(StateUserImages.lookup)[id]
+
+        return dispatch([new ActionImageSet(object)]);
     }
 
     @Action(ActionImageSet)

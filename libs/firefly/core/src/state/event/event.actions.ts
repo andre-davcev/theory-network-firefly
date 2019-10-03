@@ -6,7 +6,8 @@ import { Event } from '@firefly/core/models';
 import { ActionsEvent } from './event.actions.enum';
 
 export class ActionEventReset  { static readonly type = ActionsEvent.Reset;   constructor() { } }
-export class ActionEventGet    { static readonly type = ActionsEvent.Get;     constructor(public payload: string = CoreEnum.IdNew) { } }
+export class ActionEventGet    { static readonly type = ActionsEvent.Get;     constructor(public payload: string) { } }
+export class ActionEventSetId  { static readonly type = ActionsEvent.SetId;   constructor(public payload: string = CoreEnum.IdNew) { } }
 export class ActionEventSet    { static readonly type = ActionsEvent.Set;     constructor(public payload: Event) { } }
 export class ActionEventPatch  { static readonly type = ActionsEvent.Patch;   constructor(public payload: Partial<Event>, public save: boolean = false) { } }
 export class ActionEventCreate { static readonly type = ActionsEvent.Create;  constructor() { } }

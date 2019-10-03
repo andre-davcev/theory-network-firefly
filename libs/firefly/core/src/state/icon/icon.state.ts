@@ -26,11 +26,12 @@ import {
   ActionIconUpload,
   ActionIconUploadClear,
   ActionIconUriSet,
-  ActionIconUriClear
+  ActionIconUriClear,
+  ActionIconSetId
 } from './icon.actions';
 import undefined = require('firebase/empty-import');
 import { ActionIconClustersReset, ActionIconClustersDelete } from '../icon-clusters';
-import { ActionUserIconsAdd, ActionUserIconsRemove } from '../user-icons';
+import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons } from '../user-icons';
 
 @State<StateIconModel>(StateIconOptions)
 
@@ -77,18 +78,25 @@ export class StateIcon
     @Action(ActionIconGet)
     get({ dispatch }: StateContext<StateIconModel>, { payload }: ActionIconGet)
     {
-        const id: string = payload;
-
-        const object$: Observable<Icon> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateIconOptions.defaults.empty)) :
-            this.service.snapshot(id);
-
-        return object$.pipe
+        return this.service.snapshot(payload).
+        pipe
         (
             switchMap((object: Icon) =>
-                dispatch(new ActionIconSet(object))
+                dispatch([new ActionIconSet(object)])
             )
         );
+    }
+
+    @Action(ActionIconSetId)
+    setId({ dispatch }: StateContext<StateIconModel>, { payload }: ActionIconSetId)
+    {
+        const id: string = payload;
+
+        const object: Icon = id === CoreEnum.IdNew ?
+            this.service.build(this.store.selectSnapshot(StateUser.id), StateIconOptions.defaults.empty) :
+            this.store.selectSnapshot(StateUserIcons.lookup)[id]
+
+        return dispatch([new ActionIconSet(object)]);
     }
 
     @Action(ActionIconSet)

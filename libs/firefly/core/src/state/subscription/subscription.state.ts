@@ -7,7 +7,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { Subscription } from '@firefly/core/models';
-import { ActionIconGet } from '@firefly/core/state/icon';
+import { ActionIconGet, ActionIconSetId } from '@firefly/core/state/icon';
 import { ServiceSubscriptions } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/user';
 
@@ -20,8 +20,10 @@ import {
   ActionSubscriptionPatch,
   ActionSubscriptionCreate,
   ActionSubscriptionSave,
-  ActionSubscriptionDelete
+  ActionSubscriptionDelete,
+  ActionSubscriptionSetId
 } from './subscription.actions';
+import { StateUserSubscriptions } from '../user-subscriptions';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)
 
@@ -58,13 +60,8 @@ export class StateSubscription
     @Action(ActionSubscriptionGet)
     get({ dispatch }: StateContext<StateSubscriptionModel>, { payload }: ActionSubscriptionGet)
     {
-        const id: string = payload;
-
-        const object$: Observable<Subscription> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateSubscriptionOptions.defaults.empty)) :
-            this.service.snapshot(id);
-
-        return object$.pipe
+        return this.service.snapshot(payload).
+        pipe
         (
             switchMap((object: Subscription) =>
                 dispatch
@@ -74,6 +71,22 @@ export class StateSubscription
                 ])
             )
         );
+    }
+
+    @Action(ActionSubscriptionSetId)
+    setId({ dispatch }: StateContext<StateSubscriptionModel>, { payload }: ActionSubscriptionSetId)
+    {
+        const id: string = payload;
+
+        const object: Subscription = id === CoreEnum.IdNew ?
+            this.service.build(this.store.selectSnapshot(StateUser.id), StateSubscriptionOptions.defaults.empty) :
+            this.store.selectSnapshot(StateUserSubscriptions.lookup)[id]
+
+        return dispatch
+        ([
+            new ActionSubscriptionSet(object),
+            new ActionIconSetId(object.iconId)
+        ]);
     }
 
     @Action(ActionSubscriptionSet)
