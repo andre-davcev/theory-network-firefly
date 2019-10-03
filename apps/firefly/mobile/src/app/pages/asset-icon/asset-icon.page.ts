@@ -13,13 +13,13 @@ import { StateIcon } from '@firefly/core';
     styleUrls   : ['./assets-icon.page.scss']
 })
 
-export class PageAssetsIcon
+export class PageAssetIcon
 {
     @Select(StateIcon.formGroup) form$: Observable<FormGroup>;
 
     constructor(private store: Store)
     {
-        this.store.dispatch(new ActionSetIconId('new'));
+
     }
 
     ionViewWillEnter()
