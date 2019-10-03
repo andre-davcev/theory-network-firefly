@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { ModuleComponentItemHeader } from '@firefly/mobile';
 import { ModulePage } from '@firefly/app/modules';
 
-import { PageAssetsIcon } from './assets-icon.page';
-import { RoutesPageAssetsIcon } from './assets-icon.page.routes';
+import { PageAssetIcon } from './asset-icon.page';
+import { RoutesPageAssetIcon } from './asset-icon.page.routes';
 
 @NgModule
 ({
@@ -15,11 +15,11 @@ import { RoutesPageAssetsIcon } from './assets-icon.page.routes';
         ReactiveFormsModule,
         ModulePage,
         ModuleComponentItemHeader,
-        RouterModule.forChild(RoutesPageAssetsIcon)
+        RouterModule.forChild(RoutesPageAssetIcon)
     ],
 
-    declarations : [PageAssetsIcon],
-    exports : [PageAssetsIcon]
+    declarations : [PageAssetIcon],
+    exports : [PageAssetIcon]
 })
 
-export class ModulePageAssetsIcon { }
+export class ModulePageAssetIcon { }

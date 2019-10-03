@@ -4,11 +4,11 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { ActionEventSetId } from '@firefly/core';
+import { ActionIconSetId } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })
-export class ResolverPageAssetEvent implements Resolve<void>
+export class ResolverPageAssetIcon implements Resolve<void>
 {
     constructor(private store: Store) {}
 
@@ -17,7 +17,7 @@ export class ResolverPageAssetEvent implements Resolve<void>
         return this.store.dispatch
         ([
             new ActionMobileLoadingShow(),
-            new ActionEventSetId(route.params.id)
+            new ActionIconSetId(route.params.id)
         ]).
         pipe
         (
