@@ -2,7 +2,6 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
 import { Alert, UserAlert } from '@firefly/core/models';
 import { ServiceUserAlerts, ServiceAlerts } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -20,6 +19,7 @@ import {
     ActionUserAlertsDelete
 } from './user-alerts.actions';
 import { of } from 'rxjs';
+import { StateUser } from '../user';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 

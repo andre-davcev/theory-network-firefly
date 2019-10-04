@@ -1,8 +1,8 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
 import { StreamItem, UserStreamItem } from '@firefly/core/models';
 import { ServiceUserStream, ServiceStreamItems } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -19,7 +19,7 @@ import {
     ActionUserStreamSet,
     ActionUserStreamDelete
 } from './user-stream.actions';
-import { of } from 'rxjs';
+import { StateUser } from '../user';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
 
@@ -36,8 +36,8 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
 
     constructor
     (
-        private store: Store,
-        private service: ServiceUserStream,
+        private store:       Store,
+        private service:     ServiceUserStream,
         private streamItems: ServiceStreamItems
     )
     {
@@ -49,7 +49,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     {
         const defaults: StateUserStreamModel = CoreUtil.clone<StateUserStreamModel>(StateUserStreamOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionUserStreamGetData)

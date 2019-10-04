@@ -2,7 +2,6 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
 import { Icon, UserIcon } from '@firefly/core/models';
 import { ServiceUserIcons, ServiceIcons } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -20,6 +19,7 @@ import {
     ActionUserIconsDelete
 } from './user-icons.actions';
 import { of } from 'rxjs';
+import { StateUser } from '../user';
 
 @State<StateUserIconsModel>(StateUserIconsOptions)
 
@@ -36,9 +36,9 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
 
     constructor
     (
-        private store: Store,
+        private store:   Store,
         private service: ServiceUserIcons,
-        private icons: ServiceIcons
+        private icons:   ServiceIcons
     )
     {
         super();
@@ -49,7 +49,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     {
         const defaults: StateUserIconsModel = CoreUtil.clone<StateUserIconsModel>(StateUserIconsOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionUserIconsGetData)

@@ -29,7 +29,7 @@ import {
   ActionIconUriClear,
   ActionIconSetId
 } from './icon.actions';
-import { ActionIconClustersReset, ActionIconClustersDelete } from '../icon-clusters';
+import { ActionIconClustersReset, ActionIconClustersDelete } from '../icon-clusters/icon-clusters.actions';
 import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons } from '../user-icons';
 
 @State<StateIconModel>(StateIconOptions)

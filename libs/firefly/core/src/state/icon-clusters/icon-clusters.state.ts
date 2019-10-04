@@ -1,8 +1,8 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateIcon } from '@firefly/core/state';
 import { Cluster, IconCluster } from '@firefly/core/models';
 import { ServiceIconClusters, ServiceClusters } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -19,7 +19,7 @@ import {
     ActionIconClustersSet,
     ActionIconClustersDelete
 } from './icon-clusters.actions';
-import { of } from 'rxjs';
+import { StateIcon } from '../icon';
 
 @State<StateIconClustersModel>(StateIconClustersOptions)
 
@@ -36,8 +36,8 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
 
     constructor
     (
-        private store: Store,
-        private service: ServiceIconClusters,
+        private store:    Store,
+        private service:  ServiceIconClusters,
         private clusters: ServiceClusters
     )
     {
@@ -49,7 +49,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     {
         const defaults: StateIconClustersModel = CoreUtil.clone<StateIconClustersModel>(StateIconClustersOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionIconClustersGetData)

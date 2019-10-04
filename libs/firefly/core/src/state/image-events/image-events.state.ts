@@ -1,8 +1,8 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateImage } from '@firefly/core/state';
 import { Event, ImageEvent } from '@firefly/core/models';
 import { ServiceImageEvents, ServiceEvents } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -19,7 +19,7 @@ import {
     ActionImageEventsSet,
     ActionImageEventsDelete
 } from './image-events.actions';
-import { of } from 'rxjs';
+import { StateImage } from '../image';
 
 @State<StateImageEventsModel>(StateImageEventsOptions)
 
@@ -36,20 +36,20 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
 
     constructor
     (
-        private store: Store,
+        private store:   Store,
         private service: ServiceImageEvents,
-        private events: ServiceEvents
+        private events:  ServiceEvents
     )
     {
         super();
     }
 
     @Action(ActionImageEventsReset)
-    reset({ patchState }: StateContext<StateImageEventsModel>)
+    reset({ patchState, getState }: StateContext<StateImageEventsModel>)
     {
         const defaults: StateImageEventsModel = CoreUtil.clone<StateImageEventsModel>(StateImageEventsOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionImageEventsGetData)

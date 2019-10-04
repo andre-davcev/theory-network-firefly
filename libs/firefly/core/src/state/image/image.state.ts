@@ -29,7 +29,7 @@ import {
   ActionImageUriClear,
   ActionImageSetId
 } from './image.actions';
-import { ActionImageEventsReset, ActionImageEventsDelete } from '../image-events';
+import { ActionImageEventsReset, ActionImageEventsDelete } from '../image-events/image-events.actions';
 import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages } from '../user-images';
 
 @State<StateImageModel>(StateImageOptions)

@@ -1,8 +1,9 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateEvent, ActionClusterEventsRemove } from '@firefly/core/state';
+import { ActionClusterEventsRemove } from '../cluster-events';
 import { Cluster, EventCluster } from '@firefly/core/models';
 import { ServiceEventClusters, ServiceClusters } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -19,7 +20,7 @@ import {
     ActionEventClustersSet,
     ActionEventClustersDelete
 } from './event-clusters.actions';
-import { of } from 'rxjs';
+import { StateCluster } from '../cluster';
 
 @State<StateEventClustersModel>(StateEventClustersOptions)
 
@@ -45,17 +46,17 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     }
 
     @Action(ActionEventClustersReset)
-    reset({ patchState }: StateContext<StateEventClustersModel>)
+    reset({ patchState, getState }: StateContext<StateEventClustersModel>)
     {
         const defaults: StateEventClustersModel = CoreUtil.clone<StateEventClustersModel>(StateEventClustersOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionEventClustersGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateEventClustersModel>, { fetch }: ActionEventClustersGetData)
     {
-        const id:          string  = this.store.selectSnapshot(StateEvent.id);
+        const id:          string  = this.store.selectSnapshot(StateCluster.id);
         const initialized: boolean = StateEventClusters.initialized(getState());
 
         return initialized ? of() : dispatch
@@ -176,7 +177,7 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     {
         return dispatch
         ([
-            new ActionClusterEventsRemove(this.store.selectSnapshot(StateEvent.id)),
+            new ActionClusterEventsRemove(this.store.selectSnapshot(StateCluster.id)),
             new ActionEventClustersReset()
         ]);
     }

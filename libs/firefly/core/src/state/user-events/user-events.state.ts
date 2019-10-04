@@ -1,8 +1,8 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
 import { Event, UserEvent } from '@firefly/core/models';
 import { ServiceUserEvents, ServiceEvents } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -19,7 +19,7 @@ import {
     ActionUserEventsSet,
     ActionUserEventsDelete
 } from './user-events.actions';
-import { of } from 'rxjs';
+import { StateUser } from '../user';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 
@@ -36,20 +36,20 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
 
     constructor
     (
-        private store: Store,
+        private store:   Store,
         private service: ServiceUserEvents,
-        private events: ServiceEvents
+        private events:  ServiceEvents
     )
     {
         super();
     }
 
     @Action(ActionUserEventsReset)
-    reset({ patchState }: StateContext<StateUserEventsModel>)
+    reset({ patchState, getState }: StateContext<StateUserEventsModel>)
     {
         const defaults: StateUserEventsModel = CoreUtil.clone<StateUserEventsModel>(StateUserEventsOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionUserEventsGetData)

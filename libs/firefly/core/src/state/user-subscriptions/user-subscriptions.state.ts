@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
+import { StateUser } from '@firefly/core/state/user';
 import { Subscription, UserSubscription } from '@firefly/core/models';
 import { ServiceUserSubscriptions, ServiceSubscriptions } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -48,11 +48,11 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     }
 
     @Action(ActionUserSubscriptionsReset)
-    reset({ patchState }: StateContext<StateUserSubscriptionsModel>)
+    reset({ patchState, getState }: StateContext<StateUserSubscriptionsModel>)
     {
         const defaults: StateUserSubscriptionsModel = CoreUtil.clone<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionUserSubscriptionsGetData)
@@ -106,6 +106,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
             )
         );
     }
+
     @Action(ActionUserSubscriptionsSet)
     set({ patchState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsSet)
     {
@@ -180,7 +181,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     }
 
     @Action(ActionUserSubscriptionsDelete)
-    delete({ dispatch }: StateContext<StateUserSubscriptionsModel>)
+    delete({ dispatch, getState }: StateContext<StateUserSubscriptionsModel>)
     {
         return dispatch
         ([
@@ -207,7 +208,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Action(ActionUserSubscriptionsOff)
     off({ dispatch, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsOff)
     {
-        const id: string = payload;
+        const id:    string                          = payload;
         const data: Record<string, UserSubscription> = StateUserSubscriptions.data(getState());
 
         data[id].on = true;

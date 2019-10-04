@@ -1,8 +1,8 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateCluster } from '@firefly/core/state';
 import { User, ClusterSubscriber } from '@firefly/core/models';
 import { ServiceClusterSubscribers, ServiceUsers } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -19,8 +19,8 @@ import {
     ActionClusterSubscribersSet,
     ActionClusterSubscribersDelete
 } from './cluster-subscribers.actions';
-import { ActionUserSubscriptionsRemove } from '../user-subscriptions';
-import { of } from 'rxjs';
+import { ActionUserSubscriptionsRemove } from '../user-subscriptions/user-subscriptions.actions';
+import { StateCluster } from '../cluster';
 
 @State<StateClusterSubscribersModel>(StateClusterSubscribersOptions)
 
@@ -50,7 +50,7 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     {
         const defaults: StateClusterSubscribersModel = CoreUtil.clone<StateClusterSubscribersModel>(StateClusterSubscribersOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionClusterSubscribersGetData)

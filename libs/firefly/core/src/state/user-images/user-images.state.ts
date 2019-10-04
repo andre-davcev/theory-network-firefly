@@ -1,8 +1,8 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
 import { Image, UserImage } from '@firefly/core/models';
 import { ServiceUserImages, ServiceImages } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -19,7 +19,7 @@ import {
     ActionUserImagesSet,
     ActionUserImagesDelete
 } from './user-images.actions';
-import { of } from 'rxjs';
+import { StateUser } from '../user';
 
 @State<StateUserImagesModel>(StateUserImagesOptions)
 
@@ -36,9 +36,9 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
 
     constructor
     (
-        private store: Store,
+        private store:   Store,
         private service: ServiceUserImages,
-        private images: ServiceImages
+        private images:  ServiceImages
     )
     {
         super();
@@ -49,7 +49,7 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     {
         const defaults: StateUserImagesModel = CoreUtil.clone<StateUserImagesModel>(StateUserImagesOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionUserImagesGetData)

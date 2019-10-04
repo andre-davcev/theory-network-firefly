@@ -1,8 +1,8 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateUser } from '@firefly/core/state';
 import { Cluster, UserCluster } from '@firefly/core/models';
 import { ServiceUserClusters, ServiceClusters } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -19,7 +19,7 @@ import {
     ActionUserClustersSet,
     ActionUserClustersDelete
 } from './user-clusters.actions';
-import { of } from 'rxjs';
+import { StateUser } from '../user/user.state';
 
 @State<StateUserClustersModel>(StateUserClustersOptions)
 
@@ -36,8 +36,8 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
 
     constructor
     (
-        private store: Store,
-        private service: ServiceUserClusters,
+        private store:    Store,
+        private service:  ServiceUserClusters,
         private clusters: ServiceClusters
     )
     {
@@ -45,11 +45,11 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     }
 
     @Action(ActionUserClustersReset)
-    reset({ patchState }: StateContext<StateUserClustersModel>)
+    reset({ patchState, getState }: StateContext<StateUserClustersModel>)
     {
         const defaults: StateUserClustersModel = CoreUtil.clone<StateUserClustersModel>(StateUserClustersOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionUserClustersGetData)

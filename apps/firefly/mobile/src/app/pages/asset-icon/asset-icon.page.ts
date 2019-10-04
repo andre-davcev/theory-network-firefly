@@ -9,8 +9,8 @@ import { StateIcon } from '@firefly/core';
 @Component
 ({
     selector    : 'app-page-assets-icon',
-    templateUrl : 'assets-icon.page.html',
-    styleUrls   : ['./assets-icon.page.scss']
+    templateUrl : 'asset-icon.page.html',
+    styleUrls   : ['./asset-icon.page.scss']
 })
 
 export class PageAssetIcon
