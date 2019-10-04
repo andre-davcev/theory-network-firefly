@@ -17,7 +17,8 @@ import {
     ActionUserStreamSort,
     ActionUserStreamGet,
     ActionUserStreamSet,
-    ActionUserStreamDelete
+    ActionUserStreamDelete,
+    ActionUserStreamSync
 } from './user-stream.actions';
 import { StateUser } from '../user';
 
@@ -176,6 +177,27 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserStreamSync)
+    sync({ patchState, getState}: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamSync)
+    {
+        const state:  StateUserStreamModel       = getState();
+        const object: StreamItem                 = payload;
+        const id:     string                     = object.id;
+        const list:   Array<StreamItem>          = StateUserStream.list(state);
+        const lookup: Record<string, StreamItem> = StateUserStream.lookup(state);
+
+        const index: number = list.findIndex((item: StreamItem) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionUserStreamDelete)

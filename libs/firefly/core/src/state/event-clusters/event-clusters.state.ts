@@ -18,7 +18,8 @@ import {
     ActionEventClustersSort,
     ActionEventClustersGet,
     ActionEventClustersSet,
-    ActionEventClustersDelete
+    ActionEventClustersDelete,
+    ActionEventClustersSync
 } from './event-clusters.actions';
 import { StateCluster } from '../cluster';
 
@@ -170,6 +171,27 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionEventClustersSync)
+    sync({ patchState, getState}: StateContext<StateEventClustersModel>, { payload }: ActionEventClustersSync)
+    {
+        const state:  StateEventClustersModel = getState();
+        const object: Cluster                 = payload;
+        const id:     string                  = object.id;
+        const list:   Array<Cluster>          = StateEventClusters.list(state);
+        const lookup: Record<string, Cluster> = StateEventClusters.lookup(state);
+
+        const index: number = list.findIndex((item: Cluster) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionEventClustersDelete)

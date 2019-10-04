@@ -17,7 +17,8 @@ import {
     ActionUserImagesSort,
     ActionUserImagesGet,
     ActionUserImagesSet,
-    ActionUserImagesDelete
+    ActionUserImagesDelete,
+    ActionUserImagesSync
 } from './user-images.actions';
 import { StateUser } from '../user';
 
@@ -169,6 +170,27 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserImagesSync)
+    sync({ patchState, getState}: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesSync)
+    {
+        const state:  StateUserImagesModel  = getState();
+        const object: Image                 = payload;
+        const id:     string                = object.id;
+        const list:   Array<Image>          = StateUserImages.list(state);
+        const lookup: Record<string, Image> = StateUserImages.lookup(state);
+
+        const index: number = list.findIndex((item: Image) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionUserImagesDelete)

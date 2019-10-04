@@ -7,5 +7,6 @@ export enum ActionsUserImages
     Sort    = '[UserImages] Sort',
     Add     = '[UserImages] Add',
     Remove  = '[UserImages] Remove',
+    Sync    = '[UserImages] Sync',
     Delete  = '[UserImages] Delete'
 }

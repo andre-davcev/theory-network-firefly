@@ -7,5 +7,6 @@ export enum ActionsClusterSubscribers
     Sort    = '[ClusterSubscribers] Sort',
     Add     = '[ClusterSubscribers] Add',
     Remove  = '[ClusterSubscribers] Remove',
+    Sync    = '[ClusterSubscribers] Sync',
     Delete  = '[ClusterSubscribers] Delete'
 }

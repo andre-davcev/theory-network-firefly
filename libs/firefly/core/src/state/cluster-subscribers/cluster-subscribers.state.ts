@@ -17,7 +17,8 @@ import {
     ActionClusterSubscribersSort,
     ActionClusterSubscribersGet,
     ActionClusterSubscribersSet,
-    ActionClusterSubscribersDelete
+    ActionClusterSubscribersDelete,
+    ActionClusterSubscribersSync
 } from './cluster-subscribers.actions';
 import { ActionUserSubscriptionsRemove } from '../user-subscriptions/user-subscriptions.actions';
 import { StateCluster } from '../cluster';
@@ -170,6 +171,27 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionClusterSubscribersSync)
+    sync({ patchState, getState}: StateContext<StateClusterSubscribersModel>, { payload }: ActionClusterSubscribersSync)
+    {
+        const state:  StateClusterSubscribersModel = getState();
+        const object: User                         = payload;
+        const id:     string                       = object.id;
+        const list:   Array<User>                  = StateClusterSubscribers.list(state);
+        const lookup: Record<string, User>         = StateClusterSubscribers.lookup(state);
+
+        const index: number = list.findIndex((item: User) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionClusterSubscribersDelete)

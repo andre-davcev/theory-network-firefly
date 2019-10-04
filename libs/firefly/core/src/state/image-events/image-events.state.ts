@@ -17,7 +17,8 @@ import {
     ActionImageEventsSort,
     ActionImageEventsGet,
     ActionImageEventsSet,
-    ActionImageEventsDelete
+    ActionImageEventsDelete,
+    ActionImageEventsSync
 } from './image-events.actions';
 import { StateImage } from '../image';
 
@@ -169,6 +170,27 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionImageEventsSync)
+    sync({ patchState, getState}: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsSync)
+    {
+        const state:  StateImageEventsModel = getState();
+        const object: Event                 = payload;
+        const id:     string                = object.id;
+        const list:   Array<Event>          = StateImageEvents.list(state);
+        const lookup: Record<string, Event> = StateImageEvents.lookup(state);
+
+        const index: number = list.findIndex((item: Event) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionImageEventsDelete)

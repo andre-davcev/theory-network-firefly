@@ -7,5 +7,6 @@ export enum ActionsUserEvents
     Sort    = '[UserEvents] Sort',
     Add     = '[UserEvents] Add',
     Remove  = '[UserEvents] Remove',
+    Sync    = '[UserEvents] Sync',
     Delete  = '[UserEvents] Delete'
 }

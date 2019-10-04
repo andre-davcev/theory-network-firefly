@@ -7,5 +7,6 @@ export enum ActionsUserIcons
     Sort    = '[UserIcons] Sort',
     Add     = '[UserIcons] Add',
     Remove  = '[UserIcons] Remove',
+    Sync    = '[UserIcons] Sync',
     Delete  = '[UserIcons] Delete'
 }

@@ -7,5 +7,6 @@ export enum ActionsUserAlerts
     Sort    = '[UserAlerts] Sort',
     Add     = '[UserAlerts] Add',
     Remove  = '[UserAlerts] Remove',
-    Delete  = '[UserAlerts] Delete',
+    Sync    = '[UserAlerts] Sync',
+    Delete  = '[UserAlerts] Delete'
 }

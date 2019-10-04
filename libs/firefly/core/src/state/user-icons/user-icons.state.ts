@@ -16,7 +16,8 @@ import {
     ActionUserIconsSort,
     ActionUserIconsGet,
     ActionUserIconsSet,
-    ActionUserIconsDelete
+    ActionUserIconsDelete,
+    ActionUserIconsSync
 } from './user-icons.actions';
 import { of } from 'rxjs';
 import { StateUser } from '../user';
@@ -169,6 +170,27 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserIconsSync)
+    sync({ patchState, getState}: StateContext<StateUserIconsModel>, { payload }: ActionUserIconsSync)
+    {
+        const state:  StateUserIconsModel  = getState();
+        const object: Icon                 = payload;
+        const id:     string               = object.id;
+        const list:   Array<Icon>          = StateUserIcons.list(state);
+        const lookup: Record<string, Icon> = StateUserIcons.lookup(state);
+
+        const index: number = list.findIndex((item: Icon) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionUserIconsDelete)

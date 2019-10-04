@@ -19,7 +19,26 @@ import { StateLanguage, StateLocation, StateDevice} from '@theory/capacitor';
 import {
   StateUser,
   FirebaseEnvironment,
-  MapboxEnvironment
+  MapboxEnvironment,
+  StateAlert,
+  StateCluster,
+  StateClusterEvents,
+  StateClusterSubscribers,
+  StateEvent,
+  StateEventClusters,
+  StateIcon,
+  StateIconClusters,
+  StateImage,
+  StateImageEvents,
+  StateStreamItem,
+  StateSubscription,
+  StateUserAlerts,
+  StateUserClusters,
+  StateUserEvents,
+  StateUserIcons,
+  StateUserImages,
+  StateUserStream,
+  StateUserSubscriptions
 } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
@@ -55,7 +74,27 @@ import { StateMap } from '@theory/mapbox';
             StateMobile,
             StateNotifications,
             StateMap,
-            StateUser
+
+            StateAlert,
+            StateCluster,
+            StateClusterEvents,
+            StateClusterSubscribers,
+            StateEvent,
+            StateEventClusters,
+            StateIcon,
+            StateIconClusters,
+            StateImage,
+            StateImageEvents,
+            StateStreamItem,
+            StateSubscription,
+            StateUser,
+            StateUserAlerts,
+            StateUserClusters,
+            StateUserEvents,
+            StateUserIcons,
+            StateUserImages,
+            StateUserStream,
+            StateUserSubscriptions
         ]),
 
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),

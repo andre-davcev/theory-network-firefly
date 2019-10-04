@@ -10,4 +10,5 @@ export class ActionUserStreamSet     { static readonly type = ActionsUserStream.
 export class ActionUserStreamSort    { static readonly type = ActionsUserStream.Sort;    constructor(public payload?: SortField) { } }
 export class ActionUserStreamAdd     { static readonly type = ActionsUserStream.Add;     constructor(public payload: StreamItem) { } }
 export class ActionUserStreamRemove  { static readonly type = ActionsUserStream.Remove;  constructor(public payload: string) { } }
+export class ActionUserStreamSync    { static readonly type = ActionsUserStream.Sync;    constructor(public payload: StreamItem) { } }
 export class ActionUserStreamDelete  { static readonly type = ActionsUserStream.Delete;  constructor() { } }

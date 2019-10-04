@@ -10,4 +10,5 @@ export class ActionClusterSubscribersSet     { static readonly type = ActionsClu
 export class ActionClusterSubscribersSort    { static readonly type = ActionsClusterSubscribers.Sort;    constructor(public payload?: SortField) { } }
 export class ActionClusterSubscribersAdd     { static readonly type = ActionsClusterSubscribers.Add;     constructor(public payload: User) { } }
 export class ActionClusterSubscribersRemove  { static readonly type = ActionsClusterSubscribers.Remove;  constructor(public payload: string) { } }
+export class ActionClusterSubscribersSync    { static readonly type = ActionsClusterSubscribers.Sync;    constructor(public payload: User) { } }
 export class ActionClusterSubscribersDelete  { static readonly type = ActionsClusterSubscribers.Delete;  constructor() { } }

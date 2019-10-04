@@ -7,5 +7,6 @@ export enum ActionsUserClusters
     Sort    = '[UserClusters] Sort',
     Add     = '[UserClusters] Add',
     Remove  = '[UserClusters] Remove',
+    Sync    = '[UserClusters] Sync',
     Delete  = '[UserClusters] Delete'
 }

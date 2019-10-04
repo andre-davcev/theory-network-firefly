@@ -7,5 +7,6 @@ export enum ActionsIconClusters
     Sort    = '[IconClusters] Sort',
     Add     = '[IconClusters] Add',
     Remove  = '[IconClusters] Remove',
+    Sync    = '[IconClusters] Sync',
     Delete  = '[IconClusters] Delete'
 }
