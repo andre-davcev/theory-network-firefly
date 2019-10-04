@@ -19,7 +19,8 @@ import {
     ActionUserSubscriptionsSet,
     ActionUserSubscriptionsDelete,
     ActionUserSubscriptionsOn,
-    ActionUserSubscriptionsOff
+    ActionUserSubscriptionsOff,
+    ActionUserSubscriptionsSync
 } from './user-subscriptions.actions';
 import { ActionClusterSubscribersRemove, ActionClusterSubscribersAdd } from '../cluster-subscribers';
 import { of } from 'rxjs';
@@ -178,6 +179,27 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
         patchState(partial);
 
         return dispatch(new ActionClusterSubscribersRemove(this.store.selectSnapshot(StateUser.id)));
+    }
+
+    @Action(ActionUserSubscriptionsSync)
+    sync({ patchState, getState}: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsSync)
+    {
+        const state:  StateUserSubscriptionsModel  = getState();
+        const object: Subscription                 = payload;
+        const id:     string                       = object.id;
+        const list:   Array<Subscription>          = StateUserSubscriptions.list(state);
+        const lookup: Record<string, Subscription> = StateUserSubscriptions.lookup(state);
+
+        const index: number = list.findIndex((item: Subscription) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionUserSubscriptionsDelete)

@@ -10,6 +10,7 @@ export class ActionUserSubscriptionsSet     { static readonly type = ActionsUser
 export class ActionUserSubscriptionsSort    { static readonly type = ActionsUserSubscriptions.Sort;    constructor(public payload?: SortField) { } }
 export class ActionUserSubscriptionsAdd     { static readonly type = ActionsUserSubscriptions.Add;     constructor(public payload: Subscription) { } }
 export class ActionUserSubscriptionsRemove  { static readonly type = ActionsUserSubscriptions.Remove;  constructor(public payload: string) { } }
+export class ActionUserSubscriptionsSync    { static readonly type = ActionsUserSubscriptions.Sync;    constructor(public payload: Subscription) { } }
 export class ActionUserSubscriptionsDelete  { static readonly type = ActionsUserSubscriptions.Delete;  constructor() { } }
 
 export class ActionUserSubscriptionsOn  { static readonly type = ActionsUserSubscriptions.On;  constructor(public payload: string) { } }

@@ -17,7 +17,8 @@ import {
     ActionUserEventsSort,
     ActionUserEventsGet,
     ActionUserEventsSet,
-    ActionUserEventsDelete
+    ActionUserEventsDelete,
+    ActionUserEventsSync
 } from './user-events.actions';
 import { StateUser } from '../user';
 
@@ -169,6 +170,27 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserEventsSync)
+    sync({ patchState, getState}: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSync)
+    {
+        const state:  StateUserEventsModel  = getState();
+        const object: Event                 = payload;
+        const id:     string                = object.id;
+        const list:   Array<Event>          = StateUserEvents.list(state);
+        const lookup: Record<string, Event> = StateUserEvents.lookup(state);
+
+        const index: number = list.findIndex((item: Event) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionUserEventsDelete)

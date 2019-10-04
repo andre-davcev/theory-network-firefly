@@ -10,4 +10,5 @@ export class ActionClusterEventsSet     { static readonly type = ActionsClusterE
 export class ActionClusterEventsSort    { static readonly type = ActionsClusterEvents.Sort;    constructor(public payload?: SortField) { } }
 export class ActionClusterEventsAdd     { static readonly type = ActionsClusterEvents.Add;     constructor(public payload: Event) { } }
 export class ActionClusterEventsRemove  { static readonly type = ActionsClusterEvents.Remove;  constructor(public payload: string) { } }
+export class ActionClusterEventsSync    { static readonly type = ActionsClusterEvents.Sync;    constructor(public payload: Event) { } }
 export class ActionClusterEventsDelete  { static readonly type = ActionsClusterEvents.Delete;  constructor() { } }

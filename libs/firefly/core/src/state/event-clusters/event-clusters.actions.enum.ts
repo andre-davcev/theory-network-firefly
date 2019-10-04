@@ -7,5 +7,6 @@ export enum ActionsEventClusters
     Sort    = '[EventClusters] Sort',
     Add     = '[EventClusters] Add',
     Remove  = '[EventClusters] Remove',
+    Sync    = '[EventClusters] Sync',
     Delete  = '[EventClusters] Delete'
 }

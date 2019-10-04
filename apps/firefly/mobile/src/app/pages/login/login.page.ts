@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 import { NavController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
@@ -32,7 +32,12 @@ export class PageLogin implements OnInit
     {
 //        this.login();
         this.userFound$.
-        pipe(filter((userFound: boolean) => userFound), take(1)).
+        pipe
+        (
+            tap(found => console.log(found)),
+            filter((userFound: boolean) => userFound),
+            take(1)
+        ).
         subscribe(() => this.nav.navigateRoot('/home'))
 
         this.store.dispatch([new ActionDeviceStatusBarShow()]);

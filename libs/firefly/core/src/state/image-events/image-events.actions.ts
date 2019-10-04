@@ -10,4 +10,5 @@ export class ActionImageEventsSet     { static readonly type = ActionsImageEvent
 export class ActionImageEventsSort    { static readonly type = ActionsImageEvents.Sort;    constructor(public payload?: SortField) { } }
 export class ActionImageEventsAdd     { static readonly type = ActionsImageEvents.Add;     constructor(public payload: Event) { } }
 export class ActionImageEventsRemove  { static readonly type = ActionsImageEvents.Remove;  constructor(public payload: string) { } }
+export class ActionImageEventsSync    { static readonly type = ActionsImageEvents.Sync;    constructor(public payload: Event) { } }
 export class ActionImageEventsDelete  { static readonly type = ActionsImageEvents.Delete;  constructor() { } }

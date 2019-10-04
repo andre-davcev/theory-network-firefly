@@ -7,6 +7,7 @@ export enum ActionsUserSubscriptions
     Sort    = '[UserSubscriptions] Sort',
     Add     = '[UserSubscriptions] Add',
     Remove  = '[UserSubscriptions] Remove',
+    Sync    = '[UserSubscriptions] Sync',
     Delete  = '[UserSubscriptions] Delete',
 
     On  = '[UserSubscriptions] On',

@@ -17,7 +17,8 @@ import {
     ActionIconClustersSort,
     ActionIconClustersGet,
     ActionIconClustersSet,
-    ActionIconClustersDelete
+    ActionIconClustersDelete,
+    ActionIconClustersSync
 } from './icon-clusters.actions';
 import { StateIcon } from '../icon';
 
@@ -169,6 +170,27 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionIconClustersSync)
+    sync({ patchState, getState}: StateContext<StateIconClustersModel>, { payload }: ActionIconClustersSync)
+    {
+        const state:  StateIconClustersModel = getState();
+        const object: Cluster                 = payload;
+        const id:     string                  = object.id;
+        const list:   Array<Cluster>          = StateIconClusters.list(state);
+        const lookup: Record<string, Cluster> = StateIconClusters.lookup(state);
+
+        const index: number = list.findIndex((item: Cluster) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionIconClustersDelete)

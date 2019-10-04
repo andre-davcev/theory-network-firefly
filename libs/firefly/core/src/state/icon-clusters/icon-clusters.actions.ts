@@ -10,4 +10,5 @@ export class ActionIconClustersSet     { static readonly type = ActionsIconClust
 export class ActionIconClustersSort    { static readonly type = ActionsIconClusters.Sort;    constructor(public payload?: SortField) { } }
 export class ActionIconClustersAdd     { static readonly type = ActionsIconClusters.Add;     constructor(public payload: Cluster) { } }
 export class ActionIconClustersRemove  { static readonly type = ActionsIconClusters.Remove;  constructor(public payload: string) { } }
+export class ActionIconClustersSync    { static readonly type = ActionsIconClusters.Sync;    constructor(public payload: Cluster) { } }
 export class ActionIconClustersDelete  { static readonly type = ActionsIconClusters.Delete;  constructor() { } }

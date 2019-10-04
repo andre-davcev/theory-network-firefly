@@ -10,4 +10,5 @@ export class ActionUserAlertsSet     { static readonly type = ActionsUserAlerts.
 export class ActionUserAlertsSort    { static readonly type = ActionsUserAlerts.Sort;    constructor(public payload?: SortField) { } }
 export class ActionUserAlertsAdd     { static readonly type = ActionsUserAlerts.Add;     constructor(public payload: Alert) { } }
 export class ActionUserAlertsRemove  { static readonly type = ActionsUserAlerts.Remove;  constructor(public payload: string) { } }
+export class ActionUserAlertsSync    { static readonly type = ActionsUserAlerts.Sync;    constructor(public payload: Alert) { } }
 export class ActionUserAlertsDelete  { static readonly type = ActionsUserAlerts.Delete;  constructor() { } }

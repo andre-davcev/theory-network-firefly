@@ -16,7 +16,8 @@ import {
     ActionUserAlertsSort,
     ActionUserAlertsGet,
     ActionUserAlertsSet,
-    ActionUserAlertsDelete
+    ActionUserAlertsDelete,
+    ActionUserAlertsSync
 } from './user-alerts.actions';
 import { of } from 'rxjs';
 import { StateUser } from '../user';
@@ -178,6 +179,27 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
         );
 
         patchState(partial);
+    }
+
+    @Action(ActionUserAlertsSync)
+    sync({ patchState, getState}: StateContext<StateUserAlertsModel>, { payload }: ActionUserAlertsSync)
+    {
+        const state:  StateUserAlertsModel  = getState();
+        const object: Alert                 = payload;
+        const id:     string                = object.id;
+        const list:   Array<Alert>          = StateUserAlerts.list(state);
+        const lookup: Record<string, Alert> = StateUserAlerts.lookup(state);
+
+        const index: number = list.findIndex((item: Alert) => item.id === id);
+
+        if (index >= 0)
+        {
+            list[index] = object;
+        }
+
+        lookup[object.id] = object;
+
+        patchState({ list, lookup });
     }
 
     @Action(ActionUserAlertsDelete)

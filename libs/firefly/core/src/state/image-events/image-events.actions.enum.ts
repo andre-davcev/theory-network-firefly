@@ -7,5 +7,6 @@ export enum ActionsImageEvents
     Sort    = '[ImageEvents] Sort',
     Add     = '[ImageEvents] Add',
     Remove  = '[ImageEvents] Remove',
+    Sync    = '[ImageEvents] Sync',
     Delete  = '[ImageEvents] Delete'
 }
