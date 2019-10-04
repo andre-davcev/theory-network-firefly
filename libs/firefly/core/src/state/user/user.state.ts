@@ -31,20 +31,20 @@ import { CoreUtil, CoreEnum } from '@theory/core';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { FormGroup } from '@angular/forms';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { ActionUserAlertsDelete, ActionUserAlertsReset } from '../user-alerts';
-import { ActionUserClustersDelete, ActionUserClustersReset } from '../user-clusters';
-import { ActionUserEventsDelete, ActionUserEventsReset } from '../user-events';
-import { ActionUserIconsDelete, ActionUserIconsReset } from '../user-icons';
-import { ActionUserImagesDelete, ActionUserImagesReset } from '../user-images';
-import { ActionUserStreamDelete, ActionUserStreamReset } from '../user-stream';
-import { ActionUserSubscriptionsDelete, ActionUserSubscriptionsReset } from '../user-subscriptions';
+
+import { ActionUserAlertsDelete, ActionUserAlertsReset } from '../user-alerts/user-alerts.actions';
+import { ActionUserClustersDelete, ActionUserClustersReset } from '../user-clusters/user-clusters.actions';
+import { ActionUserEventsDelete, ActionUserEventsReset } from '../user-events/user-events.actions';
+import { ActionUserIconsDelete, ActionUserIconsReset } from '../user-icons/user-icons.actions';
+import { ActionUserImagesDelete, ActionUserImagesReset } from '../user-images/user-images.actions';
+import { ActionUserStreamDelete, ActionUserStreamReset } from '../user-stream/user-stream.actions';
+import { ActionUserSubscriptionsDelete, ActionUserSubscriptionsReset } from '../user-subscriptions/user-subscriptions.actions';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser implements NgxsOnInit
 {
     constructor
     (
-        private store:   Store,
         private service: ServiceUsers,
         private auth:    AngularFireAuth
     ) { }
@@ -100,12 +100,12 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserGet)
-    get({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserGet)
+    get({ dispatch, getState }: StateContext<StateUserModel>, { payload }: ActionUserGet)
     {
         const id: string = payload;
 
         const object$: Observable<User> = id === CoreEnum.IdNew ?
-            of(this.service.build(this.store.selectSnapshot(StateUser.id), StateUserOptions.defaults.empty)) :
+            of(this.service.build(id, StateUserOptions.defaults.empty)) :
             this.service.snapshot(id);
 
         return object$.pipe

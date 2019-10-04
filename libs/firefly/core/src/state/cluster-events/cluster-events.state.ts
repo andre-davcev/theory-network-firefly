@@ -1,8 +1,9 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil } from '@theory/core';
-import { StateCluster } from '@firefly/core/state';
+import { StateCluster } from '@firefly/core/state/cluster';
 import { Event, ClusterEvent } from '@firefly/core/models';
 import { ServiceClusterEvents, ServiceEvents } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -19,8 +20,7 @@ import {
     ActionClusterEventsSet,
     ActionClusterEventsDelete
 } from './cluster-events.actions';
-import { ActionEventClustersRemove, ActionEventClustersAdd } from '../event-clusters';
-import { of } from 'rxjs';
+import { ActionEventClustersRemove, ActionEventClustersAdd } from '../event-clusters/event-clusters.actions';
 
 @State<StateClusterEventsModel>(StateClusterEventsOptions)
 
@@ -50,7 +50,7 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     {
         const defaults: StateClusterEventsModel = CoreUtil.clone<StateClusterEventsModel>(StateClusterEventsOptions.defaults);
 
-        patchState(defaults);
+        return patchState(defaults);
     }
 
     @Action(ActionClusterEventsGetData)
@@ -178,7 +178,7 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     }
 
     @Action(ActionClusterEventsDelete)
-    delete({ dispatch }: StateContext<StateClusterEventsModel>)
+    delete({ dispatch, getState }: StateContext<StateClusterEventsModel>)
     {
         return dispatch
         ([

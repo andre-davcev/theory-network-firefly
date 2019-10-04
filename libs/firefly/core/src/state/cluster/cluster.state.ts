@@ -26,10 +26,10 @@ import {
     ActionClusterIconRemove,
     ActionClusterSetId
 } from './cluster.actions';
-import { ActionClusterEventsReset, ActionClusterEventsDelete } from '../cluster-events';
-import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers';
+import { ActionClusterEventsReset, ActionClusterEventsDelete } from '../cluster-events/cluster-events.actions';
+import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers/cluster-subscribers.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters } from '../user-clusters';
-import { ActionIconClustersRemove, ActionIconClustersAdd } from '../icon-clusters';
+import { ActionIconClustersRemove, ActionIconClustersAdd } from '../icon-clusters/icon-clusters.actions';
 
 @State<StateClusterModel>(StateClusterOptions)
 
