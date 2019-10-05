@@ -10,7 +10,7 @@ import { ServiceUsers } from './users.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { Cluster } from '@firefly/core/models';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceIcons extends ServiceMedia<Icon>
@@ -25,6 +25,14 @@ export class ServiceIcons extends ServiceMedia<Icon>
     )
     {
         super('icons', firestore, storage, user, webview, formBuilder);
+    }
+
+    public formCreate(object: Icon): FormGroup
+    {
+        return super.formCreate(
+        {
+            ...object
+        });
     }
 
     getIcons(userId: String): Observable<Array<Icon>>

@@ -30,7 +30,7 @@ import {
   ActionEventSetId
 } from './event.actions';
 import { ActionEventClustersReset, ActionEventClustersDelete } from '../event-clusters';
-import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents } from '../user-events';
+import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
 import { ActionImageEventsRemove, ActionImageEventsAdd } from '../image-events';
 
 @State<StateEventModel>(StateEventOptions)
@@ -121,8 +121,7 @@ export class StateEvent
         return dispatch
         ([
             new ActionEventReset(),
-            new ActionEventClustersReset(),
-            new ActionUserEventsAdd(object)
+            new ActionEventClustersReset()
         ]).
         pipe
         (
@@ -149,7 +148,13 @@ export class StateEvent
 
         return save$.pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
+            map(() => StateEvent.data(getState())),
+            switchMap((data: Event) =>
+                data.id === CoreEnum.IdNew ?
+                    of() :
+                    dispatch(new ActionUserEventsSync(data))
+            )
         );
     }
 
@@ -163,6 +168,10 @@ export class StateEvent
         (
             data.id === CoreEnum.IdNew ? dispatch(new ActionImageCreate()) : of(),
             this.service.create(data)
+        ).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionUserEventsAdd(data)))
         );
     }
 
@@ -213,6 +222,7 @@ export class StateEvent
             new ActionEventPatch({ imageId: undefined })
         ]);
     }
+
     @Action(ActionEventLocationSet)
     setLocation({ getState } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
     {
