@@ -5,6 +5,7 @@ export const MockAlerts: Array<Alert> =
     {
         id      : '1',
         url     : 'assets/images/temp-notifications-blondie.jpg',
+        eventId : 'a',
         imageId : 'assets/images/temp-notifications-blondie.jpg',
         title   : 'Blondie',
         body    : "Artpark",
@@ -16,6 +17,7 @@ export const MockAlerts: Array<Alert> =
     {
         id      : '2',
         url     : 'assets/images/temp-notifications-foster.the.people.jpg',
+        eventId : 'b',
         imageId : 'assets/images/temp-notifications-blondie.jpg',
         title   : 'Foster The People',
         body    : "Ommegang Brewery Cooperstown",
@@ -27,6 +29,7 @@ export const MockAlerts: Array<Alert> =
     {
         id      : '3',
         url     : 'assets/images/temp-notifications-rusted.root.jpg',
+        eventId : 'c',
         imageId : 'assets/images/temp-notifications-blondie.jpg',
         title   : 'Rusted Root',
         body    : "Sahlen's Music Stage",

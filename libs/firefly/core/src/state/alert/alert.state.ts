@@ -22,7 +22,7 @@ import {
   ActionAlertDelete,
   ActionAlertSetId
 } from './alert.actions';
-import { ActionUserAlertsAdd, StateUserAlerts } from '../user-alerts';
+import { ActionUserAlertsAdd, StateUserAlerts, ActionUserAlertsRemove, ActionUserAlertsSync } from '../user-alerts';
 
 @State<StateAlertModel>(StateAlertOptions)
 
@@ -63,7 +63,10 @@ export class StateAlert
         pipe
         (
             switchMap((object: Alert) =>
-                dispatch([new ActionAlertSet(object)])
+                dispatch
+                ([
+                    new ActionAlertSet(object)
+                ])
             )
         );
     }
@@ -111,7 +114,13 @@ export class StateAlert
 
         return save$.pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
+            map(() => StateAlert.data(getState())),
+            switchMap((data: Alert) =>
+                data.id === CoreEnum.IdNew ?
+                    of() :
+                    dispatch(new ActionUserAlertsSync(data))
+            )
         );
     }
 
@@ -144,7 +153,11 @@ export class StateAlert
         pipe
         (
             switchMap(() =>
-              dispatch(new ActionAlertReset())
+                dispatch
+                ([
+                    new ActionAlertReset(),
+                    new ActionUserAlertsRemove(data.id)
+                ])
             )
         );
     }

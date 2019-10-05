@@ -23,7 +23,7 @@ import {
   ActionStreamItemSetId
 } from './stream-item.actions';
 import { ActionIconGet, ActionIconSetId } from '@firefly/core/state/icon';
-import { StateUserStream } from '../user-stream';
+import { StateUserStream, ActionUserStreamAdd, ActionUserStreamRemove, ActionUserStreamSync } from '../user-stream';
 
 @State<StateStreamItemModel>(StateStreamItemOptions)
 
@@ -120,17 +120,27 @@ export class StateStreamItem
 
         return save$.pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
+            map(() => StateStreamItem.data(getState())),
+            switchMap((data: StreamItem) =>
+                data.id === CoreEnum.IdNew ?
+                    of() :
+                    dispatch(new ActionUserStreamSync(data))
+            )
         );
     }
 
     @Action(ActionStreamItemCreate)
-    create({ getState }: StateContext<StateStreamItemModel>)
+    create({ getState, dispatch }: StateContext<StateStreamItemModel>)
     {
         const state: StateStreamItemModel = getState();
         const data:  StreamItem           = StateStreamItem.data(state);
 
-        return this.service.create(data);
+        return this.service.create(data).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionUserStreamAdd(data)))
+        );
     }
 
     @Action(ActionStreamItemSave)
@@ -150,7 +160,11 @@ export class StateStreamItem
         pipe
         (
             switchMap(() =>
-              dispatch(new ActionStreamItemReset())
+                dispatch
+                ([
+                    new ActionStreamItemReset(),
+                    new ActionUserStreamRemove(data.id)
+                ])
             )
         );
     }

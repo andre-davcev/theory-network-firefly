@@ -15,6 +15,14 @@ export class ServiceStreamItems extends ServiceBase<StreamItem>
         super('clusters', firestore, formBuilder, true);
     }
 
+    public formCreate(object: StreamItem): FormGroup
+    {
+        return super.formCreate(
+        {
+            ...object
+        });
+    }
+
     public snapshot(id: string): Observable<StreamItem>
     {
         return super.snapshot(id).

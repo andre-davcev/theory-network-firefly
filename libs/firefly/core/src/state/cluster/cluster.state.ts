@@ -28,8 +28,11 @@ import {
 } from './cluster.actions';
 import { ActionClusterEventsReset, ActionClusterEventsDelete } from '../cluster-events/cluster-events.actions';
 import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers/cluster-subscribers.actions';
-import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters } from '../user-clusters';
+import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../user-clusters';
 import { ActionIconClustersRemove, ActionIconClustersAdd } from '../icon-clusters/icon-clusters.actions';
+import { ActionEventClustersRemove } from '../event-clusters/event-clusters.actions';
+import { ActionUserStreamRemove } from '../user-stream/user-stream.actions';
+import { ActionUserSubscriptionsRemove } from '../user-subscriptions/user-subscriptions.actions';
 
 @State<StateClusterModel>(StateClusterOptions)
 
@@ -104,8 +107,7 @@ export class StateCluster
         ([
             new ActionClusterReset(),
             new ActionClusterEventsReset(),
-            new ActionClusterSubscribersReset(),
-            new ActionUserClustersAdd(StateCluster.data(getState()))
+            new ActionClusterSubscribersReset()
         ]).
         pipe
         (
@@ -132,7 +134,13 @@ export class StateCluster
 
         return save$.pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
+            map(() => StateCluster.data(getState())),
+            switchMap((data: Cluster) =>
+                data.id === CoreEnum.IdNew ?
+                    of() :
+                    dispatch(new ActionUserClustersSync(data))
+            )
         );
     }
 
@@ -146,6 +154,10 @@ export class StateCluster
         (
             data.id === CoreEnum.IdNew ? dispatch(new ActionIconCreate()) : of(),
             this.service.create(data)
+        ).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionUserClustersAdd(data)))
         );
     }
 
@@ -170,8 +182,11 @@ export class StateCluster
                 ([
                     new ActionClusterEventsDelete(),
                     new ActionClusterSubscribersDelete(),
+                    new ActionEventClustersRemove(data.id),
                     new ActionIconClustersRemove(data.id),
                     new ActionUserClustersRemove(data.id),
+                    new ActionUserStreamRemove(data.id),
+                    new ActionUserSubscriptionsRemove(data.id),
                     new ActionClusterReset()
                 ])
             )

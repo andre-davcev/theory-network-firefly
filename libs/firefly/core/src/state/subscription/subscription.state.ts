@@ -23,7 +23,7 @@ import {
   ActionSubscriptionDelete,
   ActionSubscriptionSetId
 } from './subscription.actions';
-import { StateUserSubscriptions } from '../user-subscriptions';
+import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../user-subscriptions';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)
 
@@ -120,17 +120,27 @@ export class StateSubscription
 
         return save$.pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
+            map(() => StateSubscription.data(getState())),
+            switchMap((data: Subscription) =>
+                data.id === CoreEnum.IdNew ?
+                    of() :
+                    dispatch(new ActionUserSubscriptionsSync(data))
+            )
         );
     }
 
     @Action(ActionSubscriptionCreate)
-    create({ getState }: StateContext<StateSubscriptionModel>)
+    create({ getState, dispatch }: StateContext<StateSubscriptionModel>)
     {
         const state: StateSubscriptionModel = getState();
         const data:  Subscription           = StateSubscription.data(state);
 
-        return this.service.create(data);
+        return this.service.create(data).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionUserSubscriptionsAdd(data)))
+        );
     }
 
     @Action(ActionSubscriptionSave)
@@ -150,7 +160,11 @@ export class StateSubscription
         pipe
         (
             switchMap(() =>
-              dispatch(new ActionSubscriptionReset())
+                dispatch
+                ([
+                    new ActionSubscriptionReset(),
+                    new ActionUserSubscriptionsRemove(data.id)
+                ])
             )
         );
     }

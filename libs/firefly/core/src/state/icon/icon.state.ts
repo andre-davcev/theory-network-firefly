@@ -30,7 +30,7 @@ import {
   ActionIconSetId
 } from './icon.actions';
 import { ActionIconClustersReset, ActionIconClustersDelete } from '../icon-clusters/icon-clusters.actions';
-import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons } from '../user-icons';
+import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons, ActionUserIconsSync } from '../user-icons';
 
 @State<StateIconModel>(StateIconOptions)
 
@@ -81,7 +81,10 @@ export class StateIcon
         pipe
         (
             switchMap((object: Icon) =>
-                dispatch([new ActionIconSet(object)])
+                dispatch
+                ([
+                    new ActionIconSet(object)
+                ])
             )
         );
     }
@@ -106,8 +109,7 @@ export class StateIcon
         return dispatch
         ([
             new ActionIconReset(),
-            new ActionIconClustersReset(),
-            new ActionUserIconsAdd(StateIcon.data(getState()))
+            new ActionIconClustersReset()
         ]).
         pipe
         (
@@ -134,7 +136,13 @@ export class StateIcon
 
         return save$.pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
+            map(() => StateIcon.data(getState())),
+            switchMap((data: Icon) =>
+                data.id === CoreEnum.IdNew ?
+                    of() :
+                    dispatch(new ActionUserIconsSync(data))
+            )
         );
     }
 
@@ -152,6 +160,10 @@ export class StateIcon
             switchMap((url: string) =>
                 dispatch(new ActionIconPatch({ url }))
             )
+        ).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionUserIconsAdd(data)))
         );
     }
 

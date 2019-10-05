@@ -16,9 +16,10 @@ export const StateAlertOptions: StoreOptions<StateAlertModel> =
             dateUpdated : undefined,
 
             userId  : undefined,
+            eventId : undefined,
+            imageId : undefined,
             title   : null,
             body    : null,
-            imageId : undefined,
             read    : false,
             date    : undefined
         },

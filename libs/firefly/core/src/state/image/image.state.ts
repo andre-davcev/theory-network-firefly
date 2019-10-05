@@ -30,7 +30,7 @@ import {
   ActionImageSetId
 } from './image.actions';
 import { ActionImageEventsReset, ActionImageEventsDelete } from '../image-events/image-events.actions';
-import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages } from '../user-images';
+import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages, ActionUserImagesSync } from '../user-images';
 
 @State<StateImageModel>(StateImageOptions)
 
@@ -80,7 +80,10 @@ export class StateImage
         pipe
         (
             switchMap((object: Image) =>
-                dispatch([new ActionImageSet(object)])
+                dispatch
+                ([
+                    new ActionImageSet(object)
+                ])
             )
         );
     }
@@ -105,8 +108,7 @@ export class StateImage
         return dispatch
         ([
             new ActionImageReset(),
-            new ActionImageEventsReset(),
-            new ActionUserImagesAdd(StateImage.data(getState()))
+            new ActionImageEventsReset()
         ]).
         pipe
         (
@@ -133,7 +135,13 @@ export class StateImage
 
         return save$.pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
+            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
+            map(() => StateImage.data(getState())),
+            switchMap((data: Image) =>
+                data.id === CoreEnum.IdNew ?
+                    of() :
+                    dispatch(new ActionUserImagesSync(data))
+            )
         );
     }
 
@@ -151,6 +159,10 @@ export class StateImage
             switchMap((url: string) =>
                 dispatch(new ActionImagePatch({ url }))
             )
+        ).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionUserImagesAdd(data)))
         );
     }
 
