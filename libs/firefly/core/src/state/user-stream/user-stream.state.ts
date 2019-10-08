@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { StreamItem, UserStreamItem } from '@firefly/core/models';
 import { ServiceUserStream, ServiceStreamItems } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -26,14 +26,16 @@ import { StateUser } from '../user';
 
 export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamItem, StateUserStreamModel>
 {
-    @Selector() static data(state: StateUserStreamModel):        Record<string, UserStreamItem> { return state.data; }
-    @Selector() static keys(state: StateUserStreamModel):        Array<string>                  { return state.keys; }
-    @Selector() static lookup(state: StateUserStreamModel):      Record<string, StreamItem>     { return state.lookup; }
-    @Selector() static list(state: StateUserStreamModel):        Array<StreamItem>              { return state.list; }
-    @Selector() static offset(state: StateUserStreamModel):      number                         { return state.offset; }
-    @Selector() static pageSize(state: StateUserStreamModel):    number                         { return state.pageSize; }
-    @Selector() static sortField(state: StateUserStreamModel):   SortField                      { return state.sortField; }
-    @Selector() static initialized(state: StateUserStreamModel): boolean                        { return state.initialized; }
+    @Selector() static data(state: StateUserStreamModel):          Record<string, UserStreamItem> { return state.data; }
+    @Selector() static keys(state: StateUserStreamModel):          Array<string>                  { return state.keys; }
+    @Selector() static lookup(state: StateUserStreamModel):        Record<string, StreamItem>     { return state.lookup; }
+    @Selector() static list(state: StateUserStreamModel):          Array<StreamItem>              { return state.list; }
+    @Selector() static offset(state: StateUserStreamModel):        number                         { return state.offset; }
+    @Selector() static pageSize(state: StateUserStreamModel):      number                         { return state.pageSize; }
+    @Selector() static initialized(state: StateUserStreamModel):   boolean                        { return state.initialized; }
+    @Selector() static sort(state: StateUserStreamModel):          string                         { return state.sort; }
+    @Selector() static sortAscending(state: StateUserStreamModel): boolean                        { return state.sortAscending; }
+    @Selector() static sortFields(state: StateUserStreamModel):    Record<string, TypeOf>         { return state.sortFields; }
 
     constructor
     (
@@ -104,6 +106,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
             )
         );
     }
+
     @Action(ActionUserStreamSet)
     set({ patchState }: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamSet)
     {
@@ -111,54 +114,55 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     }
 
     @Action(ActionUserStreamSort)
-    sortData({ getState, patchState }: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamSort)
+    sortData({ getState, patchState }: StateContext<StateUserStreamModel>)
     {
-        const state:     StateUserStreamModel      = getState();
-        const data:      Record<string, UserStreamItem> = StateUserStream.data(state);
-        const sortField: SortField                 = payload == null ? StateUserStream.sortField(state) : payload;
-        const keys:      Array<string>             = this.sort(data, sortField);
+        const state: StateUserStreamModel           = getState();
+        const data:  Record<string, UserStreamItem> = StateUserStream.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateUserStream.sort(state);
+        const sortAscending: boolean = StateUserStream.sortAscending(state);
+        const sortType:      TypeOf  = StateUserStream.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionUserStreamAdd)
     add({ patchState, getState }: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamAdd)
     {
-        const state: StateUserStreamModel           = getState();
-        const streamItem: StreamItem                = payload;
-        const data:  Record<string, UserStreamItem> = StateUserStream.data(state);
+        const state:  StateUserStreamModel = getState();
+        const entity: StreamItem           = payload;
 
-        Object.
-            keys(data).
-            forEach((key: string) =>
-                data[key].sort.order += 1
-            );
+        const sortFields:    Record<string, TypeOf> = StateUserStream.sortFields(state);
+        const sortField:     string                 = StateUserStream.sort(state);
+        const sortAscending: boolean                = StateUserStream.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
 
-        const userStreamItem: UserStreamItem =
+        const object: UserStreamItem =
         {
-            sort: { order: 0 }
+            sort: this.sortFields(sortFields, entity)
         };
 
         const partial: Partial<StateUserStreamModel> =
         this.addData
         (
-            streamItem.id,
-            streamItem,
-            userStreamItem,
+            entity.id,
+            entity,
+            object,
             StateUserStream.data(state),
             StateUserStream.keys(state),
             StateUserStream.lookup(state),
             StateUserStream.list(state),
             StateUserStream.offset(state),
-            StateUserStream.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);
     }
+
 
     @Action(ActionUserStreamRemove)
     remove({ patchState, getState }: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamRemove)

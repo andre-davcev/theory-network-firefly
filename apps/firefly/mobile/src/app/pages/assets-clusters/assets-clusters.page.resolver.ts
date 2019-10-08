@@ -14,13 +14,10 @@ export class ResolverPageAssetsClusters implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-        return this.store.dispatch
-        ([
-            new ActionMobileLoadingShow(),
-            new ActionUserClustersGetData()
-        ]).
+        return this.store.dispatch(new ActionMobileLoadingShow()).
         pipe
         (
+            switchMap(() => this.store.dispatch(new ActionUserClustersGetData())),
             switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
         );
     }

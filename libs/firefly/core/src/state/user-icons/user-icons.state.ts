@@ -1,7 +1,7 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { Icon, UserIcon } from '@firefly/core/models';
 import { ServiceUserIcons, ServiceIcons } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -26,14 +26,16 @@ import { StateUser } from '../user';
 
 export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUserIconsModel>
 {
-    @Selector() static data(state: StateUserIconsModel):        Record<string, UserIcon> { return state.data; }
-    @Selector() static keys(state: StateUserIconsModel):        Array<string>            { return state.keys; }
-    @Selector() static lookup(state: StateUserIconsModel):      Record<string, Icon>     { return state.lookup; }
-    @Selector() static list(state: StateUserIconsModel):        Array<Icon>              { return state.list; }
-    @Selector() static offset(state: StateUserIconsModel):      number                   { return state.offset; }
-    @Selector() static pageSize(state: StateUserIconsModel):    number                   { return state.pageSize; }
-    @Selector() static sortField(state: StateUserIconsModel):   SortField                { return state.sortField; }
-    @Selector() static initialized(state: StateUserIconsModel): boolean                  { return state.initialized; }
+    @Selector() static data(state: StateUserIconsModel):        Record<string, UserIcon>  { return state.data; }
+    @Selector() static keys(state: StateUserIconsModel):        Array<string>             { return state.keys; }
+    @Selector() static lookup(state: StateUserIconsModel):      Record<string, Icon>      { return state.lookup; }
+    @Selector() static list(state: StateUserIconsModel):        Array<Icon>               { return state.list; }
+    @Selector() static offset(state: StateUserIconsModel):      number                    { return state.offset; }
+    @Selector() static pageSize(state: StateUserIconsModel):    number                    { return state.pageSize; }
+    @Selector() static initialized(state: StateUserIconsModel): boolean                   { return state.initialized; }
+    @Selector() static sort(state: StateUserIconsModel):          string                  { return state.sort; }
+    @Selector() static sortAscending(state: StateUserIconsModel): boolean                 { return state.sortAscending; }
+    @Selector() static sortFields(state: StateUserIconsModel):    Record<string, TypeOf>  { return state.sortFields; }
 
     constructor
     (
@@ -111,43 +113,50 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     }
 
     @Action(ActionUserIconsSort)
-    sortData({ getState, patchState }: StateContext<StateUserIconsModel>, { payload }: ActionUserIconsSort)
+    sortData({ getState, patchState }: StateContext<StateUserIconsModel>)
     {
-        const state:     StateUserIconsModel      = getState();
-        const data:      Record<string, UserIcon> = StateUserIcons.data(state);
-        const sortField: SortField                 = payload == null ? StateUserIcons.sortField(state) : payload;
-        const keys:      Array<string>             = this.sort(data, sortField);
+        const state: StateUserIconsModel      = getState();
+        const data:  Record<string, UserIcon> = StateUserIcons.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateUserIcons.sort(state);
+        const sortAscending: boolean = StateUserIcons.sortAscending(state);
+        const sortType:      TypeOf  = StateUserIcons.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionUserIconsAdd)
     add({ patchState, getState }: StateContext<StateUserIconsModel>, { payload }: ActionUserIconsAdd)
     {
-        const state: StateUserIconsModel = getState();
-        const icon: Icon              = payload;
+        const state:  StateUserIconsModel = getState();
+        const entity: Icon                = payload;
 
-        const userIcon: UserIcon =
+        const sortFields:    Record<string, TypeOf> = StateUserIcons.sortFields(state);
+        const sortField:     string                 = StateUserIcons.sort(state);
+        const sortAscending: boolean                = StateUserIcons.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
+
+        const object: UserIcon =
         {
-            sort: { name: icon.name }
+            sort: this.sortFields(sortFields, entity)
         };
 
         const partial: Partial<StateUserIconsModel> =
         this.addData
         (
-            icon.id,
-            icon,
-            userIcon,
+            entity.id,
+            entity,
+            object,
             StateUserIcons.data(state),
             StateUserIcons.keys(state),
             StateUserIcons.lookup(state),
             StateUserIcons.list(state),
             StateUserIcons.offset(state),
-            StateUserIcons.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);

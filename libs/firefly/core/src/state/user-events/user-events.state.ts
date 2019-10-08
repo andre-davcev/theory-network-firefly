@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { Event, UserEvent } from '@firefly/core/models';
 import { ServiceUserEvents, ServiceEvents } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -32,8 +32,10 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Selector() static list(state: StateUserEventsModel):        Array<Event>              { return state.list; }
     @Selector() static offset(state: StateUserEventsModel):      number                    { return state.offset; }
     @Selector() static pageSize(state: StateUserEventsModel):    number                    { return state.pageSize; }
-    @Selector() static sortField(state: StateUserEventsModel):   SortField                 { return state.sortField; }
     @Selector() static initialized(state: StateUserEventsModel): boolean                   { return state.initialized; }
+    @Selector() static sort(state: StateUserEventsModel):          string                  { return state.sort; }
+    @Selector() static sortAscending(state: StateUserEventsModel): boolean                 { return state.sortAscending; }
+    @Selector() static sortFields(state: StateUserEventsModel):    Record<string, TypeOf>  { return state.sortFields; }
 
     constructor
     (
@@ -111,43 +113,50 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     }
 
     @Action(ActionUserEventsSort)
-    sortData({ getState, patchState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSort)
+    sortData({ getState, patchState }: StateContext<StateUserEventsModel>)
     {
-        const state:     StateUserEventsModel      = getState();
-        const data:      Record<string, UserEvent> = StateUserEvents.data(state);
-        const sortField: SortField                 = payload == null ? StateUserEvents.sortField(state) : payload;
-        const keys:      Array<string>             = this.sort(data, sortField);
+        const state: StateUserEventsModel      = getState();
+        const data:  Record<string, UserEvent> = StateUserEvents.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateUserEvents.sort(state);
+        const sortAscending: boolean = StateUserEvents.sortAscending(state);
+        const sortType:      TypeOf  = StateUserEvents.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionUserEventsAdd)
     add({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsAdd)
     {
-        const state: StateUserEventsModel = getState();
-        const event: Event                = payload;
+        const state:  StateUserEventsModel = getState();
+        const entity: Event                = payload;
 
-        const userEvent: UserEvent =
+        const sortFields:    Record<string, TypeOf> = StateUserEvents.sortFields(state);
+        const sortField:     string                 = StateUserEvents.sort(state);
+        const sortAscending: boolean                = StateUserEvents.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
+
+        const object: UserEvent =
         {
-            sort: { name: event.name }
+            sort: this.sortFields(sortFields, entity)
         };
 
         const partial: Partial<StateUserEventsModel> =
         this.addData
         (
-            event.id,
-            event,
-            userEvent,
+            entity.id,
+            entity,
+            object,
             StateUserEvents.data(state),
             StateUserEvents.keys(state),
             StateUserEvents.lookup(state),
             StateUserEvents.list(state),
             StateUserEvents.offset(state),
-            StateUserEvents.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);

@@ -11,19 +11,19 @@ export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
 
     defaults :
     {
-        data:        {},
-        lookup:      {},
-        keys:        [],
-        list:        [],
-        offset:      0,
-        pageSize:    Default.PageSize,
-        initialized: false,
+        data:          {},
+        lookup:        {},
+        keys:          [],
+        list:          [],
+        offset:        0,
+        pageSize:      Default.PageSize,
+        initialized:   false,
+        sort:          'order',
+        sortAscending: true,
 
-        sortField:
+        sortFields:
         {
-            name:      'order',
-            type:      TypeOf.String,
-            ascending: true
+            order : TypeOf.Number
         }
     }
 };
