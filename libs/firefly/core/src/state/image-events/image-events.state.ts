@@ -33,9 +33,10 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Selector() static offset(state: StateImageEventsModel):        number                     { return state.offset; }
     @Selector() static pageSize(state: StateImageEventsModel):      number                     { return state.pageSize; }
     @Selector() static initialized(state: StateImageEventsModel):   boolean                    { return state.initialized; }
-    @Selector() static sort(state: StateImageEventsModel):          string                     { return state.sort; }
+    @Selector() static sortField(state: StateImageEventsModel):     string                     { return state.sort; }
     @Selector() static sortAscending(state: StateImageEventsModel): boolean                    { return state.sortAscending; }
     @Selector() static sortFields(state: StateImageEventsModel):    Record<string, TypeOf>     { return state.sortFields; }
+    @Selector() static sortType(state: StateImageEventsModel):      TypeOf                     { return state.sortFields[state.sort]; }
 
     constructor
     (
@@ -118,7 +119,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
         const state: StateImageEventsModel      = getState();
         const data:  Record<string, ImageEvent> = StateImageEvents.data(state);
 
-        const sortField:     string  = StateImageEvents.sort(state);
+        const sortField:     string  = StateImageEvents.sortField(state);
         const sortAscending: boolean = StateImageEvents.sortAscending(state);
         const sortType:      TypeOf  = StateImageEvents.sortFields(state)[sortField];
 
@@ -134,7 +135,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
         const entity: Event                 = payload;
 
         const sortFields:    Record<string, TypeOf> = StateImageEvents.sortFields(state);
-        const sortField:     string                 = StateImageEvents.sort(state);
+        const sortField:     string                 = StateImageEvents.sortField(state);
         const sortAscending: boolean                = StateImageEvents.sortAscending(state);
         const sortType:      TypeOf                 = sortFields[sortField];
 
@@ -185,21 +186,23 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     sync({ patchState, getState}: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsSync)
     {
         const state:  StateImageEventsModel = getState();
-        const object: Event                 = payload;
-        const id:     string                = object.id;
-        const list:   Array<Event>          = StateImageEvents.list(state);
         const lookup: Record<string, Event> = StateImageEvents.lookup(state);
+        const after:  Event                 = payload;
+        const before: Event                 = lookup[after.id];
 
-        const index: number = list.findIndex((item: Event) => item.id === id);
+        const partial: Partial<StateImageEventsModel> = this.syncData
+        (
+            before,
+            after,
+            StateImageEvents.list(state),
+            lookup,
+            StateImageEvents.data(state),
+            StateImageEvents.sortField(state),
+            StateImageEvents.sortAscending(state),
+            StateImageEvents.sortType(state)
+        );
 
-        if (index >= 0)
-        {
-            list[index] = object;
-        }
-
-        lookup[object.id] = object;
-
-        patchState({ list, lookup });
+        patchState(partial);
     }
 
     @Action(ActionImageEventsDelete)

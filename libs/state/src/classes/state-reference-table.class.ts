@@ -2,10 +2,10 @@ import { ReferenceTable, StateReferenceTableModel } from '../interfaces';
 import { TypeOf } from '@theory/core';
 import { Observable, of, forkJoin } from 'rxjs';
 import { Default } from '../enums';
-import { ServiceBase } from '@theory/firebase';
+import { ServiceBase, Model } from '@theory/firebase';
 import { take, tap, switchMap, map } from 'rxjs/operators';
 
-export class StateReferenceTable<R extends ReferenceTable, T, S extends StateReferenceTableModel<R, T>>
+export class StateReferenceTable<R extends ReferenceTable, T extends Model, S extends StateReferenceTableModel<R, T>>
 {
     public sortFields(sortFields: Record<string, TypeOf>, data: T): Record<string, any>
     {
@@ -36,8 +36,8 @@ export class StateReferenceTable<R extends ReferenceTable, T, S extends StateRef
 
                 if (type === TypeOf.String)
                 {
-                    a = (a as string).toLowerCase();
-                    b = (b as string).toLowerCase();
+                    a = a == null ? '' : (a as string).toLowerCase();
+                    b = b == null ? '' : (b as string).toLowerCase();
                 }
 
                 if (type === TypeOf.Boolean)
@@ -178,6 +178,50 @@ export class StateReferenceTable<R extends ReferenceTable, T, S extends StateRef
             lookup,
             list,
             offset
+        };
+    }
+
+    public syncData
+    (
+        before:        T,
+        after:         T,
+        list:          Array<T>,
+        lookup:        Record<string, T>,
+        data:          Record<string, R>,
+        sortField:     string,
+        sortAscending: boolean,
+        sortType:      TypeOf
+    ): Partial<StateReferenceTableModel<R, T>>
+    {
+        const id: string = after.id;
+
+        lookup[id] = after;
+
+        data[id] =
+        {
+            ...data[id],
+            [sortField]: after[sortField]
+        };
+
+        if (before[sortField] !== after[sortField])
+        {
+            list = this.sort(data, sortField, sortAscending, sortType).
+                map((key: string) => lookup[key]);
+        }
+        else
+        {
+            const index: number = list.findIndex((item: T) => item.id === id);
+
+            if (index >= 0)
+            {
+                list[index] = after;
+            }
+        }
+
+        return {
+            list,
+            data,
+            lookup
         };
     }
 }

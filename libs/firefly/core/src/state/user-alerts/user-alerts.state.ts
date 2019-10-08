@@ -4,7 +4,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Alert, UserAlert } from '@firefly/core/models';
 import { ServiceUserAlerts, ServiceAlerts } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateUserAlertsModel } from './user-alerts.state.model';
 import { StateUserAlertsOptions } from './user-alerts.state.options';
@@ -33,9 +33,10 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Selector() static offset(state: StateUserAlertsModel):        number                    { return state.offset; }
     @Selector() static pageSize(state: StateUserAlertsModel):      number                    { return state.pageSize; }
     @Selector() static initialized(state: StateUserAlertsModel):   boolean                   { return state.initialized; }
-    @Selector() static sort(state: StateUserAlertsModel):          string                    { return state.sort; }
+    @Selector() static sortField(state: StateUserAlertsModel):     string                    { return state.sort; }
     @Selector() static sortAscending(state: StateUserAlertsModel): boolean                   { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserAlertsModel):    Record<string, TypeOf>    { return state.sortFields; }
+    @Selector() static sortType(state: StateUserAlertsModel):      TypeOf                    { return state.sortFields[state.sort]; }
 
     constructor
     (
@@ -119,7 +120,7 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
         const state: StateUserAlertsModel      = getState();
         const data:  Record<string, UserAlert> = StateUserAlerts.data(state);
 
-        const sortField:     string  = StateUserAlerts.sort(state);
+        const sortField:     string  = StateUserAlerts.sortField(state);
         const sortAscending: boolean = StateUserAlerts.sortAscending(state);
         const sortType:      TypeOf  = StateUserAlerts.sortFields(state)[sortField];
 
@@ -135,7 +136,7 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
         const entity: Alert                = payload;
 
         const sortFields:    Record<string, TypeOf> = StateUserAlerts.sortFields(state);
-        const sortField:     string                 = StateUserAlerts.sort(state);
+        const sortField:     string                 = StateUserAlerts.sortField(state);
         const sortAscending: boolean                = StateUserAlerts.sortAscending(state);
         const sortType:      TypeOf                 = sortFields[sortField];
 
@@ -187,21 +188,23 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     sync({ patchState, getState}: StateContext<StateUserAlertsModel>, { payload }: ActionUserAlertsSync)
     {
         const state:  StateUserAlertsModel  = getState();
-        const object: Alert                 = payload;
-        const id:     string                = object.id;
-        const list:   Array<Alert>          = StateUserAlerts.list(state);
         const lookup: Record<string, Alert> = StateUserAlerts.lookup(state);
+        const after:  Alert                 = payload;
+        const before: Alert                 = lookup[after.id];
 
-        const index: number = list.findIndex((item: Alert) => item.id === id);
+        const partial: Partial<StateUserAlertsModel> = this.syncData
+        (
+            before,
+            after,
+            StateUserAlerts.list(state),
+            lookup,
+            StateUserAlerts.data(state),
+            StateUserAlerts.sortField(state),
+            StateUserAlerts.sortAscending(state),
+            StateUserAlerts.sortType(state)
+        );
 
-        if (index >= 0)
-        {
-            list[index] = object;
-        }
-
-        lookup[object.id] = object;
-
-        patchState({ list, lookup });
+        patchState(partial);
     }
 
     @Action(ActionUserAlertsDelete)

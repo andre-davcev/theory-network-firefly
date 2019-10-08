@@ -5,7 +5,7 @@ import { CoreUtil, TypeOf } from '@theory/core';
 import { StateUser } from '@firefly/core/state/user';
 import { Subscription, UserSubscription } from '@firefly/core/models';
 import { ServiceUserSubscriptions, ServiceSubscriptions } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { StateUserSubscriptionsOptions } from './user-subscriptions.state.options';
@@ -36,9 +36,10 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Selector() static offset(state: StateUserSubscriptionsModel):        number                           { return state.offset; }
     @Selector() static pageSize(state: StateUserSubscriptionsModel):      number                           { return state.pageSize; }
     @Selector() static initialized(state: StateUserSubscriptionsModel):   boolean                          { return state.initialized; }
-    @Selector() static sort(state: StateUserSubscriptionsModel):          string                           { return state.sort; }
+    @Selector() static sortField(state: StateUserSubscriptionsModel):     string                           { return state.sort; }
     @Selector() static sortAscending(state: StateUserSubscriptionsModel): boolean                          { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserSubscriptionsModel):    Record<string, TypeOf>           { return state.sortFields; }
+    @Selector() static sortType(state: StateUserSubscriptionsModel):      TypeOf                           { return state.sortFields[state.sort]; }
 
     constructor
     (
@@ -122,7 +123,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
         const state: StateUserSubscriptionsModel      = getState();
         const data:  Record<string, UserSubscription> = StateUserSubscriptions.data(state);
 
-        const sortField:     string  = StateUserSubscriptions.sort(state);
+        const sortField:     string  = StateUserSubscriptions.sortField(state);
         const sortAscending: boolean = StateUserSubscriptions.sortAscending(state);
         const sortType:      TypeOf  = StateUserSubscriptions.sortFields(state)[sortField];
 
@@ -138,7 +139,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
         const entity: Subscription                = payload;
 
         const sortFields:    Record<string, TypeOf> = StateUserSubscriptions.sortFields(state);
-        const sortField:     string                 = StateUserSubscriptions.sort(state);
+        const sortField:     string                 = StateUserSubscriptions.sortField(state);
         const sortAscending: boolean                = StateUserSubscriptions.sortAscending(state);
         const sortType:      TypeOf                 = sortFields[sortField];
 
@@ -192,25 +193,27 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     sync({ patchState, getState}: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsSync)
     {
         const state:  StateUserSubscriptionsModel  = getState();
-        const object: Subscription                 = payload;
-        const id:     string                       = object.id;
-        const list:   Array<Subscription>          = StateUserSubscriptions.list(state);
         const lookup: Record<string, Subscription> = StateUserSubscriptions.lookup(state);
+        const after:  Subscription                 = payload;
+        const before: Subscription                 = lookup[after.id];
 
-        const index: number = list.findIndex((item: Subscription) => item.id === id);
+        const partial: Partial<StateUserSubscriptionsModel> = this.syncData
+        (
+            before,
+            after,
+            StateUserSubscriptions.list(state),
+            lookup,
+            StateUserSubscriptions.data(state),
+            StateUserSubscriptions.sortField(state),
+            StateUserSubscriptions.sortAscending(state),
+            StateUserSubscriptions.sortType(state)
+        );
 
-        if (index >= 0)
-        {
-            list[index] = object;
-        }
-
-        lookup[object.id] = object;
-
-        patchState({ list, lookup });
+        patchState(partial);
     }
 
     @Action(ActionUserSubscriptionsDelete)
-    delete({ dispatch, getState }: StateContext<StateUserSubscriptionsModel>)
+    delete({ dispatch }: StateContext<StateUserSubscriptionsModel>)
     {
         return dispatch
         ([

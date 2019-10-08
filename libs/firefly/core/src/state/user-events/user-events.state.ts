@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Event, UserEvent } from '@firefly/core/models';
 import { ServiceUserEvents, ServiceEvents } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateUserEventsModel } from './user-events.state.model';
 import { StateUserEventsOptions } from './user-events.state.options';
@@ -26,16 +26,17 @@ import { StateUser } from '../user';
 
 export class StateUserEvents extends StateReferenceTable<UserEvent, Event, StateUserEventsModel>
 {
-    @Selector() static data(state: StateUserEventsModel):        Record<string, UserEvent> { return state.data; }
-    @Selector() static keys(state: StateUserEventsModel):        Array<string>             { return state.keys; }
-    @Selector() static lookup(state: StateUserEventsModel):      Record<string, Event>     { return state.lookup; }
-    @Selector() static list(state: StateUserEventsModel):        Array<Event>              { return state.list; }
-    @Selector() static offset(state: StateUserEventsModel):      number                    { return state.offset; }
-    @Selector() static pageSize(state: StateUserEventsModel):    number                    { return state.pageSize; }
-    @Selector() static initialized(state: StateUserEventsModel): boolean                   { return state.initialized; }
-    @Selector() static sort(state: StateUserEventsModel):          string                  { return state.sort; }
-    @Selector() static sortAscending(state: StateUserEventsModel): boolean                 { return state.sortAscending; }
-    @Selector() static sortFields(state: StateUserEventsModel):    Record<string, TypeOf>  { return state.sortFields; }
+    @Selector() static data(state: StateUserEventsModel):          Record<string, UserEvent> { return state.data; }
+    @Selector() static keys(state: StateUserEventsModel):          Array<string>             { return state.keys; }
+    @Selector() static lookup(state: StateUserEventsModel):        Record<string, Event>     { return state.lookup; }
+    @Selector() static list(state: StateUserEventsModel):          Array<Event>              { return state.list; }
+    @Selector() static offset(state: StateUserEventsModel):        number                    { return state.offset; }
+    @Selector() static pageSize(state: StateUserEventsModel):      number                    { return state.pageSize; }
+    @Selector() static initialized(state: StateUserEventsModel):   boolean                   { return state.initialized; }
+    @Selector() static sortField(state: StateUserEventsModel):     string                    { return state.sort; }
+    @Selector() static sortAscending(state: StateUserEventsModel): boolean                   { return state.sortAscending; }
+    @Selector() static sortFields(state: StateUserEventsModel):    Record<string, TypeOf>    { return state.sortFields; }
+    @Selector() static sortType(state: StateUserEventsModel):      TypeOf                    { return state.sortFields[state.sort]; }
 
     constructor
     (
@@ -118,7 +119,7 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
         const state: StateUserEventsModel      = getState();
         const data:  Record<string, UserEvent> = StateUserEvents.data(state);
 
-        const sortField:     string  = StateUserEvents.sort(state);
+        const sortField:     string  = StateUserEvents.sortField(state);
         const sortAscending: boolean = StateUserEvents.sortAscending(state);
         const sortType:      TypeOf  = StateUserEvents.sortFields(state)[sortField];
 
@@ -134,7 +135,7 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
         const entity: Event                = payload;
 
         const sortFields:    Record<string, TypeOf> = StateUserEvents.sortFields(state);
-        const sortField:     string                 = StateUserEvents.sort(state);
+        const sortField:     string                 = StateUserEvents.sortField(state);
         const sortAscending: boolean                = StateUserEvents.sortAscending(state);
         const sortType:      TypeOf                 = sortFields[sortField];
 
@@ -185,21 +186,23 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     sync({ patchState, getState}: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSync)
     {
         const state:  StateUserEventsModel  = getState();
-        const object: Event                 = payload;
-        const id:     string                = object.id;
-        const list:   Array<Event>          = StateUserEvents.list(state);
         const lookup: Record<string, Event> = StateUserEvents.lookup(state);
+        const after:  Event                 = payload;
+        const before: Event                 = lookup[after.id];
 
-        const index: number = list.findIndex((item: Event) => item.id === id);
+        const partial: Partial<StateUserEventsModel> = this.syncData
+        (
+            before,
+            after,
+            StateUserEvents.list(state),
+            lookup,
+            StateUserEvents.data(state),
+            StateUserEvents.sortField(state),
+            StateUserEvents.sortAscending(state),
+            StateUserEvents.sortType(state)
+        );
 
-        if (index >= 0)
-        {
-            list[index] = object;
-        }
-
-        lookup[object.id] = object;
-
-        patchState({ list, lookup });
+        patchState(partial);
     }
 
     @Action(ActionUserEventsDelete)

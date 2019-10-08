@@ -33,9 +33,10 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Selector() static offset(state: StateUserStreamModel):        number                         { return state.offset; }
     @Selector() static pageSize(state: StateUserStreamModel):      number                         { return state.pageSize; }
     @Selector() static initialized(state: StateUserStreamModel):   boolean                        { return state.initialized; }
-    @Selector() static sort(state: StateUserStreamModel):          string                         { return state.sort; }
+    @Selector() static sortField(state: StateUserStreamModel):     string                         { return state.sort; }
     @Selector() static sortAscending(state: StateUserStreamModel): boolean                        { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserStreamModel):    Record<string, TypeOf>         { return state.sortFields; }
+    @Selector() static sortType(state: StateUserStreamModel):      TypeOf                         { return state.sortFields[state.sort]; }
 
     constructor
     (
@@ -119,7 +120,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
         const state: StateUserStreamModel           = getState();
         const data:  Record<string, UserStreamItem> = StateUserStream.data(state);
 
-        const sortField:     string  = StateUserStream.sort(state);
+        const sortField:     string  = StateUserStream.sortField(state);
         const sortAscending: boolean = StateUserStream.sortAscending(state);
         const sortType:      TypeOf  = StateUserStream.sortFields(state)[sortField];
 
@@ -135,7 +136,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
         const entity: StreamItem           = payload;
 
         const sortFields:    Record<string, TypeOf> = StateUserStream.sortFields(state);
-        const sortField:     string                 = StateUserStream.sort(state);
+        const sortField:     string                 = StateUserStream.sortField(state);
         const sortAscending: boolean                = StateUserStream.sortAscending(state);
         const sortType:      TypeOf                 = sortFields[sortField];
 
@@ -187,21 +188,23 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     sync({ patchState, getState}: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamSync)
     {
         const state:  StateUserStreamModel       = getState();
-        const object: StreamItem                 = payload;
-        const id:     string                     = object.id;
-        const list:   Array<StreamItem>          = StateUserStream.list(state);
         const lookup: Record<string, StreamItem> = StateUserStream.lookup(state);
+        const after:  StreamItem                 = payload;
+        const before: StreamItem                 = lookup[after.id];
 
-        const index: number = list.findIndex((item: StreamItem) => item.id === id);
+        const partial: Partial<StateUserStreamModel> = this.syncData
+        (
+            before,
+            after,
+            StateUserStream.list(state),
+            lookup,
+            StateUserStream.data(state),
+            StateUserStream.sortField(state),
+            StateUserStream.sortAscending(state),
+            StateUserStream.sortType(state)
+        );
 
-        if (index >= 0)
-        {
-            list[index] = object;
-        }
-
-        lookup[object.id] = object;
-
-        patchState({ list, lookup });
+        patchState(partial);
     }
 
     @Action(ActionUserStreamDelete)

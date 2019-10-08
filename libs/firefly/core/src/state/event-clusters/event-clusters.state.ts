@@ -6,7 +6,7 @@ import { CoreUtil, TypeOf } from '@theory/core';
 import { ActionClusterEventsRemove } from '../cluster-events';
 import { Cluster, EventCluster } from '@firefly/core/models';
 import { ServiceEventClusters, ServiceClusters } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateEventClustersModel } from './event-clusters.state.model';
 import { StateEventClustersOptions } from './event-clusters.state.options';
@@ -34,9 +34,10 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     @Selector() static offset(state: StateEventClustersModel):        number                       { return state.offset; }
     @Selector() static pageSize(state: StateEventClustersModel):      number                       { return state.pageSize; }
     @Selector() static initialized(state: StateEventClustersModel):   boolean                      { return state.initialized; }
-    @Selector() static sort(state: StateEventClustersModel):          string                       { return state.sort; }
+    @Selector() static sortField(state: StateEventClustersModel):     string                       { return state.sort; }
     @Selector() static sortAscending(state: StateEventClustersModel): boolean                      { return state.sortAscending; }
     @Selector() static sortFields(state: StateEventClustersModel):    Record<string, TypeOf>       { return state.sortFields; }
+    @Selector() static sortType(state: StateEventClustersModel):      TypeOf                       { return state.sortFields[state.sort]; }
 
     constructor
     (
@@ -119,7 +120,7 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
         const state: StateEventClustersModel      = getState();
         const data:  Record<string, EventCluster> = StateEventClusters.data(state);
 
-        const sortField:     string  = StateEventClusters.sort(state);
+        const sortField:     string  = StateEventClusters.sortField(state);
         const sortAscending: boolean = StateEventClusters.sortAscending(state);
         const sortType:      TypeOf  = StateEventClusters.sortFields(state)[sortField];
 
@@ -135,7 +136,7 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
         const entity: Cluster                 = payload;
 
         const sortFields:    Record<string, TypeOf> = StateEventClusters.sortFields(state);
-        const sortField:     string                 = StateEventClusters.sort(state);
+        const sortField:     string                 = StateEventClusters.sortField(state);
         const sortAscending: boolean                = StateEventClusters.sortAscending(state);
         const sortType:      TypeOf                 = sortFields[sortField];
 
@@ -186,21 +187,23 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     sync({ patchState, getState}: StateContext<StateEventClustersModel>, { payload }: ActionEventClustersSync)
     {
         const state:  StateEventClustersModel = getState();
-        const object: Cluster                 = payload;
-        const id:     string                  = object.id;
-        const list:   Array<Cluster>          = StateEventClusters.list(state);
         const lookup: Record<string, Cluster> = StateEventClusters.lookup(state);
+        const after:  Cluster                 = payload;
+        const before: Cluster                 = lookup[after.id];
 
-        const index: number = list.findIndex((item: Cluster) => item.id === id);
+        const partial: Partial<StateEventClustersModel> = this.syncData
+        (
+            before,
+            after,
+            StateEventClusters.list(state),
+            lookup,
+            StateEventClusters.data(state),
+            StateEventClusters.sortField(state),
+            StateEventClusters.sortAscending(state),
+            StateEventClusters.sortType(state)
+        );
 
-        if (index >= 0)
-        {
-            list[index] = object;
-        }
-
-        lookup[object.id] = object;
-
-        patchState({ list, lookup });
+        patchState(partial);
     }
 
     @Action(ActionEventClustersDelete)
