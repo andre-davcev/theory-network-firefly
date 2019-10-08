@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { Cluster, UserCluster } from '@firefly/core/models';
 import { ServiceUserClusters, ServiceClusters } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -26,14 +26,16 @@ import { StateUser } from '../user/user.state';
 
 export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster, StateUserClustersModel>
 {
-    @Selector() static data(state: StateUserClustersModel):        Record<string, UserCluster> { return state.data; }
-    @Selector() static keys(state: StateUserClustersModel):        Array<string>               { return state.keys; }
-    @Selector() static lookup(state: StateUserClustersModel):      Record<string, Cluster>     { return state.lookup; }
-    @Selector() static list(state: StateUserClustersModel):        Array<Cluster>              { return state.list; }
-    @Selector() static offset(state: StateUserClustersModel):      number                      { return state.offset; }
-    @Selector() static pageSize(state: StateUserClustersModel):    number                      { return state.pageSize; }
-    @Selector() static sortField(state: StateUserClustersModel):   SortField                   { return state.sortField; }
-    @Selector() static initialized(state: StateUserClustersModel): boolean                     { return state.initialized; }
+    @Selector() static data(state: StateUserClustersModel):          Record<string, UserCluster> { return state.data; }
+    @Selector() static keys(state: StateUserClustersModel):          Array<string>               { return state.keys; }
+    @Selector() static lookup(state: StateUserClustersModel):        Record<string, Cluster>     { return state.lookup; }
+    @Selector() static list(state: StateUserClustersModel):          Array<Cluster>              { return state.list; }
+    @Selector() static offset(state: StateUserClustersModel):        number                      { return state.offset; }
+    @Selector() static pageSize(state: StateUserClustersModel):      number                      { return state.pageSize; }
+    @Selector() static initialized(state: StateUserClustersModel):   boolean                     { return state.initialized; }
+    @Selector() static sort(state: StateUserClustersModel):          string                      { return state.sort; }
+    @Selector() static sortAscending(state: StateUserClustersModel): boolean                     { return state.sortAscending; }
+    @Selector() static sortFields(state: StateUserClustersModel):    Record<string, TypeOf>      { return state.sortFields; }
 
     constructor
     (
@@ -69,10 +71,10 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
                 this.service.get(id)
             ),
             switchMap((data: Record<string, UserCluster>) =>
-                dispatch([
-                    new ActionUserClustersSet(data),
-                    new ActionUserClustersSort()
-                ])
+                dispatch(new ActionUserClustersSet(data))
+            ),
+            switchMap(() =>
+                dispatch(new ActionUserClustersSort())
             ),
             switchMap(() =>
                 dispatch(fetch ? new ActionUserClustersGet() : of())
@@ -99,55 +101,63 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
         ).
         pipe
         (
-            tap((partial: Partial<StateUserClustersModel>) =>
+            map((partial: Partial<StateUserClustersModel>) =>
                 patchState(partial)
             )
         );
     }
+
     @Action(ActionUserClustersSet)
     set({ patchState }: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersSet)
     {
-        patchState({ data: payload == null ? {} : payload });
+        return patchState({ data: payload == null ? {} : payload });
     }
 
     @Action(ActionUserClustersSort)
-    sortData({ getState, patchState }: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersSort)
+    sortData({ getState, patchState }: StateContext<StateUserClustersModel>)
     {
-        const state:     StateUserClustersModel      = getState();
-        const data:      Record<string, UserCluster> = StateUserClusters.data(state);
-        const sortField: SortField                 = payload == null ? StateUserClusters.sortField(state) : payload;
-        const keys:      Array<string>             = this.sort(data, sortField);
+        const state: StateUserClustersModel      = getState();
+        const data:  Record<string, UserCluster> = StateUserClusters.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateUserClusters.sort(state);
+        const sortAscending: boolean = StateUserClusters.sortAscending(state);
+        const sortType:      TypeOf  = StateUserClusters.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionUserClustersAdd)
     add({ patchState, getState }: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersAdd)
     {
-        const state: StateUserClustersModel = getState();
-        const cluster: Cluster              = payload;
+        const state:  StateUserClustersModel = getState();
+        const entity: Cluster                = payload;
 
-        const userCluster: UserCluster =
+        const sortFields:    Record<string, TypeOf> = StateUserClusters.sortFields(state);
+        const sortField:     string                 = StateUserClusters.sort(state);
+        const sortAscending: boolean                = StateUserClusters.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
+
+        const object: UserCluster =
         {
-            sort: { name: cluster.name }
+            sort: this.sortFields(sortFields, entity)
         };
 
         const partial: Partial<StateUserClustersModel> =
         this.addData
         (
-            cluster.id,
-            cluster,
-            userCluster,
+            entity.id,
+            entity,
+            object,
             StateUserClusters.data(state),
             StateUserClusters.keys(state),
             StateUserClusters.lookup(state),
             StateUserClusters.list(state),
             StateUserClusters.offset(state),
-            StateUserClusters.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);

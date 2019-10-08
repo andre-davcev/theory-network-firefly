@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { User, ClusterSubscriber } from '@firefly/core/models';
 import { ServiceClusterSubscribers, ServiceUsers } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -27,14 +27,16 @@ import { StateCluster } from '../cluster';
 
 export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscriber, User, StateClusterSubscribersModel>
 {
-    @Selector() static data(state: StateClusterSubscribersModel):        Record<string, ClusterSubscriber> { return state.data; }
-    @Selector() static keys(state: StateClusterSubscribersModel):        Array<string>                     { return state.keys; }
-    @Selector() static lookup(state: StateClusterSubscribersModel):      Record<string, User>              { return state.lookup; }
-    @Selector() static list(state: StateClusterSubscribersModel):        Array<User>                       { return state.list; }
-    @Selector() static offset(state: StateClusterSubscribersModel):      number                            { return state.offset; }
-    @Selector() static pageSize(state: StateClusterSubscribersModel):    number                            { return state.pageSize; }
-    @Selector() static sortField(state: StateClusterSubscribersModel):   SortField                         { return state.sortField; }
-    @Selector() static initialized(state: StateClusterSubscribersModel): boolean                           { return state.initialized; }
+    @Selector() static data(state: StateClusterSubscribersModel):          Record<string, ClusterSubscriber> { return state.data; }
+    @Selector() static keys(state: StateClusterSubscribersModel):          Array<string>                     { return state.keys; }
+    @Selector() static lookup(state: StateClusterSubscribersModel):        Record<string, User>              { return state.lookup; }
+    @Selector() static list(state: StateClusterSubscribersModel):          Array<User>                       { return state.list; }
+    @Selector() static offset(state: StateClusterSubscribersModel):        number                            { return state.offset; }
+    @Selector() static pageSize(state: StateClusterSubscribersModel):      number                            { return state.pageSize; }
+    @Selector() static initialized(state: StateClusterSubscribersModel):   boolean                           { return state.initialized; }
+    @Selector() static sort(state: StateClusterSubscribersModel):          string                            { return state.sort; }
+    @Selector() static sortAscending(state: StateClusterSubscribersModel): boolean                           { return state.sortAscending; }
+    @Selector() static sortFields(state: StateClusterSubscribersModel):    Record<string, TypeOf>            { return state.sortFields; }
 
     constructor
     (
@@ -105,6 +107,7 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
             )
         );
     }
+
     @Action(ActionClusterSubscribersSet)
     set({ patchState }: StateContext<StateClusterSubscribersModel>, { payload }: ActionClusterSubscribersSet)
     {
@@ -112,43 +115,50 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     }
 
     @Action(ActionClusterSubscribersSort)
-    sortData({ getState, patchState }: StateContext<StateClusterSubscribersModel>, { payload }: ActionClusterSubscribersSort)
+    sortData({ getState, patchState }: StateContext<StateClusterSubscribersModel>)
     {
-        const state:     StateClusterSubscribersModel      = getState();
-        const data:      Record<string, ClusterSubscriber> = StateClusterSubscribers.data(state);
-        const sortField: SortField                         = payload == null ? StateClusterSubscribers.sortField(state) : payload;
-        const keys:      Array<string>                     = this.sort(data, sortField);
+        const state: StateClusterSubscribersModel      = getState();
+        const data:  Record<string, ClusterSubscriber> = StateClusterSubscribers.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateClusterSubscribers.sort(state);
+        const sortAscending: boolean = StateClusterSubscribers.sortAscending(state);
+        const sortType:      TypeOf  = StateClusterSubscribers.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionClusterSubscribersAdd)
     add({ patchState, getState }: StateContext<StateClusterSubscribersModel>, { payload }: ActionClusterSubscribersAdd)
     {
-        const state: StateClusterSubscribersModel = getState();
-        const user: User              = payload;
+        const state:  StateClusterSubscribersModel = getState();
+        const entity: User                         = payload;
 
-        const clusterSubscriber: ClusterSubscriber =
+        const sortFields:    Record<string, TypeOf> = StateClusterSubscribers.sortFields(state);
+        const sortField:     string                 = StateClusterSubscribers.sort(state);
+        const sortAscending: boolean                = StateClusterSubscribers.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
+
+        const object: ClusterSubscriber =
         {
-            sort: { name: user.email }
+            sort: this.sortFields(sortFields, entity)
         };
 
         const partial: Partial<StateClusterSubscribersModel> =
         this.addData
         (
-            user.id,
-            user,
-            clusterSubscriber,
+            entity.id,
+            entity,
+            object,
             StateClusterSubscribers.data(state),
             StateClusterSubscribers.keys(state),
             StateClusterSubscribers.lookup(state),
             StateClusterSubscribers.list(state),
             StateClusterSubscribers.offset(state),
-            StateClusterSubscribers.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);

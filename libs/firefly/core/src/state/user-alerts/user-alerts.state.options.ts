@@ -11,19 +11,19 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
 
     defaults :
     {
-        data:        {},
-        lookup:      {},
-        keys:        [],
-        list:        [],
-        offset:      0,
-        pageSize:    Default.PageSize,
-        initialized: false,
+        data:          {},
+        lookup:        {},
+        keys:          [],
+        list:          [],
+        offset:        0,
+        pageSize:      Default.PageSize,
+        initialized:   false,
+        sort:          'dateCreated',
+        sortAscending: true,
 
-        sortField:
+        sortFields:
         {
-            name:      'order',
-            type:      TypeOf.String,
-            ascending: true
+            dateCreated : TypeOf.String
         }
     }
 };

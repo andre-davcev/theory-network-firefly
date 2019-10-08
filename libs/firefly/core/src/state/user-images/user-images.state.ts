@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { Image, UserImage } from '@firefly/core/models';
 import { ServiceUserImages, ServiceImages } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -26,14 +26,16 @@ import { StateUser } from '../user';
 
 export class StateUserImages extends StateReferenceTable<UserImage, Image, StateUserImagesModel>
 {
-    @Selector() static data(state: StateUserImagesModel):        Record<string, UserImage> { return state.data; }
-    @Selector() static keys(state: StateUserImagesModel):        Array<string>             { return state.keys; }
-    @Selector() static lookup(state: StateUserImagesModel):      Record<string, Image>     { return state.lookup; }
-    @Selector() static list(state: StateUserImagesModel):        Array<Image>              { return state.list; }
-    @Selector() static offset(state: StateUserImagesModel):      number                    { return state.offset; }
-    @Selector() static pageSize(state: StateUserImagesModel):    number                    { return state.pageSize; }
-    @Selector() static sortField(state: StateUserImagesModel):   SortField                 { return state.sortField; }
-    @Selector() static initialized(state: StateUserImagesModel): boolean                   { return state.initialized; }
+    @Selector() static data(state: StateUserImagesModel):          Record<string, UserImage> { return state.data; }
+    @Selector() static keys(state: StateUserImagesModel):          Array<string>             { return state.keys; }
+    @Selector() static lookup(state: StateUserImagesModel):        Record<string, Image>     { return state.lookup; }
+    @Selector() static list(state: StateUserImagesModel):          Array<Image>              { return state.list; }
+    @Selector() static offset(state: StateUserImagesModel):        number                    { return state.offset; }
+    @Selector() static pageSize(state: StateUserImagesModel):      number                    { return state.pageSize; }
+    @Selector() static initialized(state: StateUserImagesModel):   boolean                   { return state.initialized; }
+    @Selector() static sort(state: StateUserImagesModel):          string                    { return state.sort; }
+    @Selector() static sortAscending(state: StateUserImagesModel): boolean                   { return state.sortAscending; }
+    @Selector() static sortFields(state: StateUserImagesModel):    Record<string, TypeOf>    { return state.sortFields; }
 
     constructor
     (
@@ -111,43 +113,50 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     }
 
     @Action(ActionUserImagesSort)
-    sortData({ getState, patchState }: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesSort)
+    sortData({ getState, patchState }: StateContext<StateUserImagesModel>)
     {
-        const state:     StateUserImagesModel      = getState();
-        const data:      Record<string, UserImage> = StateUserImages.data(state);
-        const sortField: SortField                 = payload == null ? StateUserImages.sortField(state) : payload;
-        const keys:      Array<string>             = this.sort(data, sortField);
+        const state: StateUserImagesModel      = getState();
+        const data:  Record<string, UserImage> = StateUserImages.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateUserImages.sort(state);
+        const sortAscending: boolean = StateUserImages.sortAscending(state);
+        const sortType:      TypeOf  = StateUserImages.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionUserImagesAdd)
     add({ patchState, getState }: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesAdd)
     {
-        const state: StateUserImagesModel = getState();
-        const image: Image              = payload;
+        const state:  StateUserImagesModel = getState();
+        const entity: Image                = payload;
 
-        const userImage: UserImage =
+        const sortFields:    Record<string, TypeOf> = StateUserImages.sortFields(state);
+        const sortField:     string                 = StateUserImages.sort(state);
+        const sortAscending: boolean                = StateUserImages.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
+
+        const object: UserImage =
         {
-            sort: { name: Image.name }
+            sort: this.sortFields(sortFields, entity)
         };
 
         const partial: Partial<StateUserImagesModel> =
         this.addData
         (
-            image.id,
-            image,
-            userImage,
+            entity.id,
+            entity,
+            object,
             StateUserImages.data(state),
             StateUserImages.keys(state),
             StateUserImages.lookup(state),
             StateUserImages.list(state),
             StateUserImages.offset(state),
-            StateUserImages.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);

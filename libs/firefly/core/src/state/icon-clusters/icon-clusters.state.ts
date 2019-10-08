@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { Cluster, IconCluster } from '@firefly/core/models';
 import { ServiceIconClusters, ServiceClusters } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -26,14 +26,16 @@ import { StateIcon } from '../icon';
 
 export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster, StateIconClustersModel>
 {
-    @Selector() static data(state: StateIconClustersModel):        Record<string, IconCluster> { return state.data; }
-    @Selector() static keys(state: StateIconClustersModel):        Array<string>               { return state.keys; }
-    @Selector() static lookup(state: StateIconClustersModel):      Record<string, Cluster>     { return state.lookup; }
-    @Selector() static list(state: StateIconClustersModel):        Array<Cluster>              { return state.list; }
-    @Selector() static offset(state: StateIconClustersModel):      number                      { return state.offset; }
-    @Selector() static pageSize(state: StateIconClustersModel):    number                      { return state.pageSize; }
-    @Selector() static sortField(state: StateIconClustersModel):   SortField                   { return state.sortField; }
-    @Selector() static initialized(state: StateIconClustersModel): boolean                     { return state.initialized; }
+    @Selector() static data(state: StateIconClustersModel):          Record<string, IconCluster> { return state.data; }
+    @Selector() static keys(state: StateIconClustersModel):          Array<string>               { return state.keys; }
+    @Selector() static lookup(state: StateIconClustersModel):        Record<string, Cluster>     { return state.lookup; }
+    @Selector() static list(state: StateIconClustersModel):          Array<Cluster>              { return state.list; }
+    @Selector() static offset(state: StateIconClustersModel):        number                      { return state.offset; }
+    @Selector() static pageSize(state: StateIconClustersModel):      number                      { return state.pageSize; }
+    @Selector() static initialized(state: StateIconClustersModel):   boolean                     { return state.initialized; }
+    @Selector() static sort(state: StateIconClustersModel):          string                      { return state.sort; }
+    @Selector() static sortAscending(state: StateIconClustersModel): boolean                     { return state.sortAscending; }
+    @Selector() static sortFields(state: StateIconClustersModel):    Record<string, TypeOf>      { return state.sortFields; }
 
     constructor
     (
@@ -111,43 +113,50 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     }
 
     @Action(ActionIconClustersSort)
-    sortData({ getState, patchState }: StateContext<StateIconClustersModel>, { payload }: ActionIconClustersSort)
+    sortData({ getState, patchState }: StateContext<StateIconClustersModel>)
     {
-        const state:     StateIconClustersModel      = getState();
-        const data:      Record<string, IconCluster> = StateIconClusters.data(state);
-        const sortField: SortField                 = payload == null ? StateIconClusters.sortField(state) : payload;
-        const keys:      Array<string>             = this.sort(data, sortField);
+        const state: StateIconClustersModel      = getState();
+        const data:  Record<string, IconCluster> = StateIconClusters.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateIconClusters.sort(state);
+        const sortAscending: boolean = StateIconClusters.sortAscending(state);
+        const sortType:      TypeOf  = StateIconClusters.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionIconClustersAdd)
     add({ patchState, getState }: StateContext<StateIconClustersModel>, { payload }: ActionIconClustersAdd)
     {
-        const state: StateIconClustersModel = getState();
-        const cluster: Cluster              = payload;
+        const state:  StateIconClustersModel = getState();
+        const entity: Cluster                = payload;
 
-        const iconCluster: IconCluster =
+        const sortFields:    Record<string, TypeOf> = StateIconClusters.sortFields(state);
+        const sortField:     string                 = StateIconClusters.sort(state);
+        const sortAscending: boolean                = StateIconClusters.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
+
+        const object: IconCluster =
         {
-            sort: { name: cluster.name }
+            sort: this.sortFields(sortFields, entity)
         };
 
         const partial: Partial<StateIconClustersModel> =
         this.addData
         (
-            cluster.id,
-            cluster,
-            iconCluster,
+            entity.id,
+            entity,
+            object,
             StateIconClusters.data(state),
             StateIconClusters.keys(state),
             StateIconClusters.lookup(state),
             StateIconClusters.list(state),
             StateIconClusters.offset(state),
-            StateIconClusters.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);

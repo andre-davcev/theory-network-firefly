@@ -11,19 +11,20 @@ export const StateIconClustersOptions: StoreOptions<StateIconClustersModel> =
 
     defaults :
     {
-        data:        {},
-        lookup:      {},
-        keys:        [],
-        list:        [],
-        offset:      0,
-        pageSize:    Default.PageSize,
-        initialized: false,
+        data:          {},
+        lookup:        {},
+        keys:          [],
+        list:          [],
+        offset:        0,
+        pageSize:      Default.PageSize,
+        initialized:   false,
+        sort:          'name',
+        sortAscending: true,
 
-        sortField:
+        sortFields:
         {
-            name:      'name',
-            type:      TypeOf.String,
-            ascending: true
+            name        : TypeOf.String,
+            dateCreated : TypeOf.String
         }
     }
 };

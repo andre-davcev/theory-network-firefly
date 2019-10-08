@@ -11,19 +11,20 @@ export const StateClusterSubscribersOptions: StoreOptions<StateClusterSubscriber
 
     defaults :
     {
-        data:        {},
-        lookup:      {},
-        keys:        [],
-        list:        [],
-        offset:      0,
-        pageSize:    Default.PageSize,
-        initialized: false,
+        data:          {},
+        lookup:        {},
+        keys:          [],
+        list:          [],
+        offset:        0,
+        pageSize:      Default.PageSize,
+        initialized:   false,
+        sort:          'email',
+        sortAscending: true,
 
-        sortField:
+        sortFields:
         {
-            name:      'name',
-            type:      TypeOf.String,
-            ascending: true
+            email       : TypeOf.String,
+            dateCreated : TypeOf.String
         }
     }
 };

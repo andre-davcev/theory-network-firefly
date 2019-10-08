@@ -1,7 +1,7 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { StateUser } from '@firefly/core/state/user';
 import { Subscription, UserSubscription } from '@firefly/core/models';
 import { ServiceUserSubscriptions, ServiceSubscriptions } from '@firefly/core/services';
@@ -29,14 +29,16 @@ import { of } from 'rxjs';
 
 export class StateUserSubscriptions extends StateReferenceTable<UserSubscription, Subscription, StateUserSubscriptionsModel>
 {
-    @Selector() static data(state: StateUserSubscriptionsModel):        Record<string, UserSubscription> { return state.data; }
-    @Selector() static keys(state: StateUserSubscriptionsModel):        Array<string>                    { return state.keys; }
-    @Selector() static lookup(state: StateUserSubscriptionsModel):      Record<string, Subscription>     { return state.lookup; }
-    @Selector() static list(state: StateUserSubscriptionsModel):        Array<Subscription>              { return state.list; }
-    @Selector() static offset(state: StateUserSubscriptionsModel):      number                           { return state.offset; }
-    @Selector() static pageSize(state: StateUserSubscriptionsModel):    number                           { return state.pageSize; }
-    @Selector() static sortField(state: StateUserSubscriptionsModel):   SortField                        { return state.sortField; }
-    @Selector() static initialized(state: StateUserSubscriptionsModel): boolean                          { return state.initialized; }
+    @Selector() static data(state: StateUserSubscriptionsModel):          Record<string, UserSubscription> { return state.data; }
+    @Selector() static keys(state: StateUserSubscriptionsModel):          Array<string>                    { return state.keys; }
+    @Selector() static lookup(state: StateUserSubscriptionsModel):        Record<string, Subscription>     { return state.lookup; }
+    @Selector() static list(state: StateUserSubscriptionsModel):          Array<Subscription>              { return state.list; }
+    @Selector() static offset(state: StateUserSubscriptionsModel):        number                           { return state.offset; }
+    @Selector() static pageSize(state: StateUserSubscriptionsModel):      number                           { return state.pageSize; }
+    @Selector() static initialized(state: StateUserSubscriptionsModel):   boolean                          { return state.initialized; }
+    @Selector() static sort(state: StateUserSubscriptionsModel):          string                           { return state.sort; }
+    @Selector() static sortAscending(state: StateUserSubscriptionsModel): boolean                          { return state.sortAscending; }
+    @Selector() static sortFields(state: StateUserSubscriptionsModel):    Record<string, TypeOf>           { return state.sortFields; }
 
     constructor
     (
@@ -115,49 +117,54 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     }
 
     @Action(ActionUserSubscriptionsSort)
-    sortData({ getState, patchState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsSort)
+    sortData({ getState, patchState }: StateContext<StateUserSubscriptionsModel>)
     {
-        const state:     StateUserSubscriptionsModel      = getState();
-        const data:      Record<string, UserSubscription> = StateUserSubscriptions.data(state);
-        const sortField: SortField                 = payload == null ? StateUserSubscriptions.sortField(state) : payload;
-        const keys:      Array<string>             = this.sort(data, sortField);
+        const state: StateUserSubscriptionsModel      = getState();
+        const data:  Record<string, UserSubscription> = StateUserSubscriptions.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateUserSubscriptions.sort(state);
+        const sortAscending: boolean = StateUserSubscriptions.sortAscending(state);
+        const sortType:      TypeOf  = StateUserSubscriptions.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionUserSubscriptionsAdd)
-    add({ dispatch, patchState, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsAdd)
+    add({ patchState, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsAdd)
     {
-        const state: StateUserSubscriptionsModel = getState();
-        const subscription: Subscription         = payload;
+        const state:  StateUserSubscriptionsModel = getState();
+        const entity: Subscription                = payload;
 
-        const userSubscription: UserSubscription =
+        const sortFields:    Record<string, TypeOf> = StateUserSubscriptions.sortFields(state);
+        const sortField:     string                 = StateUserSubscriptions.sort(state);
+        const sortAscending: boolean                = StateUserSubscriptions.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
+
+        const object: UserSubscription =
         {
-            sort: { name: subscription.name },
+            sort: this.sortFields(sortFields, entity),
             on:   true
         };
 
         const partial: Partial<StateUserSubscriptionsModel> =
         this.addData
         (
-            subscription.id,
-            subscription,
-            userSubscription,
+            entity.id,
+            entity,
+            object,
             StateUserSubscriptions.data(state),
             StateUserSubscriptions.keys(state),
             StateUserSubscriptions.lookup(state),
             StateUserSubscriptions.list(state),
             StateUserSubscriptions.offset(state),
-            StateUserSubscriptions.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);
-
-        return dispatch(new ActionClusterSubscribersAdd(this.store.selectSnapshot(StateUser.data)))
     }
 
     @Action(ActionUserSubscriptionsRemove)

@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { Event, ImageEvent } from '@firefly/core/models';
 import { ServiceImageEvents, ServiceEvents } from '@firefly/core/services';
 import { SortField, StateReferenceTable } from '@theory/state';
@@ -26,14 +26,16 @@ import { StateImage } from '../image';
 
 export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, StateImageEventsModel>
 {
-    @Selector() static data(state: StateImageEventsModel):        Record<string, ImageEvent> { return state.data; }
-    @Selector() static keys(state: StateImageEventsModel):        Array<string>              { return state.keys; }
-    @Selector() static lookup(state: StateImageEventsModel):      Record<string, Event>      { return state.lookup; }
-    @Selector() static list(state: StateImageEventsModel):        Array<Event>               { return state.list; }
-    @Selector() static offset(state: StateImageEventsModel):      number                     { return state.offset; }
-    @Selector() static pageSize(state: StateImageEventsModel):    number                     { return state.pageSize; }
-    @Selector() static sortField(state: StateImageEventsModel):   SortField                  { return state.sortField; }
-    @Selector() static initialized(state: StateImageEventsModel): boolean                    { return state.initialized; }
+    @Selector() static data(state: StateImageEventsModel):          Record<string, ImageEvent> { return state.data; }
+    @Selector() static keys(state: StateImageEventsModel):          Array<string>              { return state.keys; }
+    @Selector() static lookup(state: StateImageEventsModel):        Record<string, Event>      { return state.lookup; }
+    @Selector() static list(state: StateImageEventsModel):          Array<Event>               { return state.list; }
+    @Selector() static offset(state: StateImageEventsModel):        number                     { return state.offset; }
+    @Selector() static pageSize(state: StateImageEventsModel):      number                     { return state.pageSize; }
+    @Selector() static initialized(state: StateImageEventsModel):   boolean                    { return state.initialized; }
+    @Selector() static sort(state: StateImageEventsModel):          string                     { return state.sort; }
+    @Selector() static sortAscending(state: StateImageEventsModel): boolean                    { return state.sortAscending; }
+    @Selector() static sortFields(state: StateImageEventsModel):    Record<string, TypeOf>     { return state.sortFields; }
 
     constructor
     (
@@ -111,43 +113,50 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     }
 
     @Action(ActionImageEventsSort)
-    sortData({ getState, patchState }: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsSort)
+    sortData({ getState, patchState }: StateContext<StateImageEventsModel>)
     {
-        const state:     StateImageEventsModel      = getState();
-        const data:      Record<string, ImageEvent> = StateImageEvents.data(state);
-        const sortField: SortField                 = payload == null ? StateImageEvents.sortField(state) : payload;
-        const keys:      Array<string>             = this.sort(data, sortField);
+        const state: StateImageEventsModel      = getState();
+        const data:  Record<string, ImageEvent> = StateImageEvents.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateImageEvents.sort(state);
+        const sortAscending: boolean = StateImageEvents.sortAscending(state);
+        const sortType:      TypeOf  = StateImageEvents.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionImageEventsAdd)
     add({ patchState, getState }: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsAdd)
     {
-        const state: StateImageEventsModel = getState();
-        const event: Event              = payload;
+        const state:  StateImageEventsModel = getState();
+        const entity: Event                 = payload;
 
-        const imageEvent: ImageEvent =
+        const sortFields:    Record<string, TypeOf> = StateImageEvents.sortFields(state);
+        const sortField:     string                 = StateImageEvents.sort(state);
+        const sortAscending: boolean                = StateImageEvents.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
+
+        const object: ImageEvent =
         {
-            sort: { name: event.name }
+            sort: this.sortFields(sortFields, entity)
         };
 
         const partial: Partial<StateImageEventsModel> =
         this.addData
         (
-            event.id,
-            event,
-            imageEvent,
+            entity.id,
+            entity,
+            object,
             StateImageEvents.data(state),
             StateImageEvents.keys(state),
             StateImageEvents.lookup(state),
             StateImageEvents.list(state),
             StateImageEvents.offset(state),
-            StateImageEvents.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);

@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
-import { CoreUtil } from '@theory/core';
+import { CoreUtil, TypeOf } from '@theory/core';
 import { ActionClusterEventsRemove } from '../cluster-events';
 import { Cluster, EventCluster } from '@firefly/core/models';
 import { ServiceEventClusters, ServiceClusters } from '@firefly/core/services';
@@ -27,14 +27,16 @@ import { StateCluster } from '../cluster';
 
 export class StateEventClusters extends StateReferenceTable<EventCluster, Cluster, StateEventClustersModel>
 {
-    @Selector() static data(state: StateEventClustersModel):        Record<string, EventCluster> { return state.data; }
-    @Selector() static keys(state: StateEventClustersModel):        Array<string>                { return state.keys; }
-    @Selector() static lookup(state: StateEventClustersModel):      Record<string, Cluster>      { return state.lookup; }
-    @Selector() static list(state: StateEventClustersModel):        Array<Cluster>               { return state.list; }
-    @Selector() static offset(state: StateEventClustersModel):      number                       { return state.offset; }
-    @Selector() static pageSize(state: StateEventClustersModel):    number                       { return state.pageSize; }
-    @Selector() static sortField(state: StateEventClustersModel):   SortField                    { return state.sortField; }
-    @Selector() static initialized(state: StateEventClustersModel): boolean                      { return state.initialized; }
+    @Selector() static data(state: StateEventClustersModel):          Record<string, EventCluster> { return state.data; }
+    @Selector() static keys(state: StateEventClustersModel):          Array<string>                { return state.keys; }
+    @Selector() static lookup(state: StateEventClustersModel):        Record<string, Cluster>      { return state.lookup; }
+    @Selector() static list(state: StateEventClustersModel):          Array<Cluster>               { return state.list; }
+    @Selector() static offset(state: StateEventClustersModel):        number                       { return state.offset; }
+    @Selector() static pageSize(state: StateEventClustersModel):      number                       { return state.pageSize; }
+    @Selector() static initialized(state: StateEventClustersModel):   boolean                      { return state.initialized; }
+    @Selector() static sort(state: StateEventClustersModel):          string                       { return state.sort; }
+    @Selector() static sortAscending(state: StateEventClustersModel): boolean                      { return state.sortAscending; }
+    @Selector() static sortFields(state: StateEventClustersModel):    Record<string, TypeOf>       { return state.sortFields; }
 
     constructor
     (
@@ -112,43 +114,50 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     }
 
     @Action(ActionEventClustersSort)
-    sortData({ getState, patchState }: StateContext<StateEventClustersModel>, { payload }: ActionEventClustersSort)
+    sortData({ getState, patchState }: StateContext<StateEventClustersModel>)
     {
-        const state:     StateEventClustersModel      = getState();
-        const data:      Record<string, EventCluster> = StateEventClusters.data(state);
-        const sortField: SortField                    = payload == null ? StateEventClusters.sortField(state) : payload;
-        const keys:      Array<string>                = this.sort(data, sortField);
+        const state: StateEventClustersModel      = getState();
+        const data:  Record<string, EventCluster> = StateEventClusters.data(state);
 
-        patchState
-        ({
-            keys,
-            sortField
-        });
+        const sortField:     string  = StateEventClusters.sort(state);
+        const sortAscending: boolean = StateEventClusters.sortAscending(state);
+        const sortType:      TypeOf  = StateEventClusters.sortFields(state)[sortField];
+
+        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+
+        patchState({ keys });
     }
 
     @Action(ActionEventClustersAdd)
     add({ patchState, getState }: StateContext<StateEventClustersModel>, { payload }: ActionEventClustersAdd)
     {
-        const state: StateEventClustersModel = getState();
-        const cluster: Cluster               = payload;
+        const state:  StateEventClustersModel = getState();
+        const entity: Cluster                 = payload;
 
-        const eventCluster: EventCluster =
+        const sortFields:    Record<string, TypeOf> = StateEventClusters.sortFields(state);
+        const sortField:     string                 = StateEventClusters.sort(state);
+        const sortAscending: boolean                = StateEventClusters.sortAscending(state);
+        const sortType:      TypeOf                 = sortFields[sortField];
+
+        const object: EventCluster =
         {
-            sort: { name: cluster.name }
+            sort: this.sortFields(sortFields, entity)
         };
 
         const partial: Partial<StateEventClustersModel> =
         this.addData
         (
-            cluster.id,
-            cluster,
-            eventCluster,
+            entity.id,
+            entity,
+            object,
             StateEventClusters.data(state),
             StateEventClusters.keys(state),
             StateEventClusters.lookup(state),
             StateEventClusters.list(state),
             StateEventClusters.offset(state),
-            StateEventClusters.sortField(state)
+            sortField,
+            sortAscending,
+            sortType
         );
 
         patchState(partial);
