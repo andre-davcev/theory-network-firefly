@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Image, UserImage } from '@firefly/core/models';
 import { ServiceUserImages, ServiceImages } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateUserImagesModel } from './user-images.state.model';
 import { StateUserImagesOptions } from './user-images.state.options';
@@ -33,9 +33,10 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Selector() static offset(state: StateUserImagesModel):        number                    { return state.offset; }
     @Selector() static pageSize(state: StateUserImagesModel):      number                    { return state.pageSize; }
     @Selector() static initialized(state: StateUserImagesModel):   boolean                   { return state.initialized; }
-    @Selector() static sort(state: StateUserImagesModel):          string                    { return state.sort; }
+    @Selector() static sortField(state: StateUserImagesModel):     string                    { return state.sort; }
     @Selector() static sortAscending(state: StateUserImagesModel): boolean                   { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserImagesModel):    Record<string, TypeOf>    { return state.sortFields; }
+    @Selector() static sortType(state: StateUserImagesModel):      TypeOf                    { return state.sortFields[state.sort]; }
 
     constructor
     (
@@ -106,6 +107,7 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
             )
         );
     }
+
     @Action(ActionUserImagesSet)
     set({ patchState }: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesSet)
     {
@@ -118,7 +120,7 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
         const state: StateUserImagesModel      = getState();
         const data:  Record<string, UserImage> = StateUserImages.data(state);
 
-        const sortField:     string  = StateUserImages.sort(state);
+        const sortField:     string  = StateUserImages.sortField(state);
         const sortAscending: boolean = StateUserImages.sortAscending(state);
         const sortType:      TypeOf  = StateUserImages.sortFields(state)[sortField];
 
@@ -134,7 +136,7 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
         const entity: Image                = payload;
 
         const sortFields:    Record<string, TypeOf> = StateUserImages.sortFields(state);
-        const sortField:     string                 = StateUserImages.sort(state);
+        const sortField:     string                 = StateUserImages.sortField(state);
         const sortAscending: boolean                = StateUserImages.sortAscending(state);
         const sortType:      TypeOf                 = sortFields[sortField];
 
@@ -185,21 +187,23 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     sync({ patchState, getState}: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesSync)
     {
         const state:  StateUserImagesModel  = getState();
-        const object: Image                 = payload;
-        const id:     string                = object.id;
-        const list:   Array<Image>          = StateUserImages.list(state);
         const lookup: Record<string, Image> = StateUserImages.lookup(state);
+        const after:  Image                 = payload;
+        const before: Image                 = lookup[after.id];
 
-        const index: number = list.findIndex((item: Image) => item.id === id);
+        const partial: Partial<StateUserImagesModel> = this.syncData
+        (
+            before,
+            after,
+            StateUserImages.list(state),
+            lookup,
+            StateUserImages.data(state),
+            StateUserImages.sortField(state),
+            StateUserImages.sortAscending(state),
+            StateUserImages.sortType(state)
+        );
 
-        if (index >= 0)
-        {
-            list[index] = object;
-        }
-
-        lookup[object.id] = object;
-
-        patchState({ list, lookup });
+        patchState(partial);
     }
 
     @Action(ActionUserImagesDelete)

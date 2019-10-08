@@ -4,7 +4,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Icon, UserIcon } from '@firefly/core/models';
 import { ServiceUserIcons, ServiceIcons } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateUserIconsModel } from './user-icons.state.model';
 import { StateUserIconsOptions } from './user-icons.state.options';
@@ -26,16 +26,17 @@ import { StateUser } from '../user';
 
 export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUserIconsModel>
 {
-    @Selector() static data(state: StateUserIconsModel):        Record<string, UserIcon>  { return state.data; }
-    @Selector() static keys(state: StateUserIconsModel):        Array<string>             { return state.keys; }
-    @Selector() static lookup(state: StateUserIconsModel):      Record<string, Icon>      { return state.lookup; }
-    @Selector() static list(state: StateUserIconsModel):        Array<Icon>               { return state.list; }
-    @Selector() static offset(state: StateUserIconsModel):      number                    { return state.offset; }
-    @Selector() static pageSize(state: StateUserIconsModel):    number                    { return state.pageSize; }
-    @Selector() static initialized(state: StateUserIconsModel): boolean                   { return state.initialized; }
-    @Selector() static sort(state: StateUserIconsModel):          string                  { return state.sort; }
-    @Selector() static sortAscending(state: StateUserIconsModel): boolean                 { return state.sortAscending; }
-    @Selector() static sortFields(state: StateUserIconsModel):    Record<string, TypeOf>  { return state.sortFields; }
+    @Selector() static data(state: StateUserIconsModel):          Record<string, UserIcon>  { return state.data; }
+    @Selector() static keys(state: StateUserIconsModel):          Array<string>             { return state.keys; }
+    @Selector() static lookup(state: StateUserIconsModel):        Record<string, Icon>      { return state.lookup; }
+    @Selector() static list(state: StateUserIconsModel):          Array<Icon>               { return state.list; }
+    @Selector() static offset(state: StateUserIconsModel):        number                    { return state.offset; }
+    @Selector() static pageSize(state: StateUserIconsModel):      number                    { return state.pageSize; }
+    @Selector() static initialized(state: StateUserIconsModel):   boolean                   { return state.initialized; }
+    @Selector() static sortField(state: StateUserIconsModel):     string                    { return state.sort; }
+    @Selector() static sortAscending(state: StateUserIconsModel): boolean                   { return state.sortAscending; }
+    @Selector() static sortFields(state: StateUserIconsModel):    Record<string, TypeOf>    { return state.sortFields; }
+    @Selector() static sortType(state: StateUserIconsModel):      TypeOf                    { return state.sortFields[state.sort]; }
 
     constructor
     (
@@ -118,7 +119,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
         const state: StateUserIconsModel      = getState();
         const data:  Record<string, UserIcon> = StateUserIcons.data(state);
 
-        const sortField:     string  = StateUserIcons.sort(state);
+        const sortField:     string  = StateUserIcons.sortField(state);
         const sortAscending: boolean = StateUserIcons.sortAscending(state);
         const sortType:      TypeOf  = StateUserIcons.sortFields(state)[sortField];
 
@@ -134,7 +135,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
         const entity: Icon                = payload;
 
         const sortFields:    Record<string, TypeOf> = StateUserIcons.sortFields(state);
-        const sortField:     string                 = StateUserIcons.sort(state);
+        const sortField:     string                 = StateUserIcons.sortField(state);
         const sortAscending: boolean                = StateUserIcons.sortAscending(state);
         const sortType:      TypeOf                 = sortFields[sortField];
 
@@ -185,21 +186,23 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     sync({ patchState, getState}: StateContext<StateUserIconsModel>, { payload }: ActionUserIconsSync)
     {
         const state:  StateUserIconsModel  = getState();
-        const object: Icon                 = payload;
-        const id:     string               = object.id;
-        const list:   Array<Icon>          = StateUserIcons.list(state);
         const lookup: Record<string, Icon> = StateUserIcons.lookup(state);
+        const after:  Icon                 = payload;
+        const before: Icon                 = lookup[after.id];
 
-        const index: number = list.findIndex((item: Icon) => item.id === id);
+        const partial: Partial<StateUserIconsModel> = this.syncData
+        (
+            before,
+            after,
+            StateUserIcons.list(state),
+            lookup,
+            StateUserIcons.data(state),
+            StateUserIcons.sortField(state),
+            StateUserIcons.sortAscending(state),
+            StateUserIcons.sortType(state)
+        );
 
-        if (index >= 0)
-        {
-            list[index] = object;
-        }
-
-        lookup[object.id] = object;
-
-        patchState({ list, lookup });
+        patchState(partial);
     }
 
     @Action(ActionUserIconsDelete)

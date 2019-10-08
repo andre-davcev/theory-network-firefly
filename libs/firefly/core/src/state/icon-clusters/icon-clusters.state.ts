@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Cluster, IconCluster } from '@firefly/core/models';
 import { ServiceIconClusters, ServiceClusters } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateIconClustersModel } from './icon-clusters.state.model';
 import { StateIconClustersOptions } from './icon-clusters.state.options';
@@ -33,9 +33,10 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Selector() static offset(state: StateIconClustersModel):        number                      { return state.offset; }
     @Selector() static pageSize(state: StateIconClustersModel):      number                      { return state.pageSize; }
     @Selector() static initialized(state: StateIconClustersModel):   boolean                     { return state.initialized; }
-    @Selector() static sort(state: StateIconClustersModel):          string                      { return state.sort; }
+    @Selector() static sortField(state: StateIconClustersModel):     string                      { return state.sort; }
     @Selector() static sortAscending(state: StateIconClustersModel): boolean                     { return state.sortAscending; }
     @Selector() static sortFields(state: StateIconClustersModel):    Record<string, TypeOf>      { return state.sortFields; }
+    @Selector() static sortType(state: StateIconClustersModel):      TypeOf                      { return state.sortFields[state.sort]; }
 
     constructor
     (
@@ -118,7 +119,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
         const state: StateIconClustersModel      = getState();
         const data:  Record<string, IconCluster> = StateIconClusters.data(state);
 
-        const sortField:     string  = StateIconClusters.sort(state);
+        const sortField:     string  = StateIconClusters.sortField(state);
         const sortAscending: boolean = StateIconClusters.sortAscending(state);
         const sortType:      TypeOf  = StateIconClusters.sortFields(state)[sortField];
 
@@ -134,7 +135,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
         const entity: Cluster                = payload;
 
         const sortFields:    Record<string, TypeOf> = StateIconClusters.sortFields(state);
-        const sortField:     string                 = StateIconClusters.sort(state);
+        const sortField:     string                 = StateIconClusters.sortField(state);
         const sortAscending: boolean                = StateIconClusters.sortAscending(state);
         const sortType:      TypeOf                 = sortFields[sortField];
 
@@ -184,22 +185,24 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersSync)
     sync({ patchState, getState}: StateContext<StateIconClustersModel>, { payload }: ActionIconClustersSync)
     {
-        const state:  StateIconClustersModel = getState();
-        const object: Cluster                 = payload;
-        const id:     string                  = object.id;
-        const list:   Array<Cluster>          = StateIconClusters.list(state);
+        const state:  StateIconClustersModel  = getState();
         const lookup: Record<string, Cluster> = StateIconClusters.lookup(state);
+        const after:  Cluster                 = payload;
+        const before: Cluster                 = lookup[after.id];
 
-        const index: number = list.findIndex((item: Cluster) => item.id === id);
+        const partial: Partial<StateIconClustersModel> = this.syncData
+        (
+            before,
+            after,
+            StateIconClusters.list(state),
+            lookup,
+            StateIconClusters.data(state),
+            StateIconClusters.sortField(state),
+            StateIconClusters.sortAscending(state),
+            StateIconClusters.sortType(state)
+        );
 
-        if (index >= 0)
-        {
-            list[index] = object;
-        }
-
-        lookup[object.id] = object;
-
-        patchState({ list, lookup });
+        patchState(partial);
     }
 
     @Action(ActionIconClustersDelete)
