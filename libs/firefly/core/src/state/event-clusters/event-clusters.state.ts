@@ -34,10 +34,12 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     @Selector() static offset(state: StateEventClustersModel):        number                       { return state.offset; }
     @Selector() static pageSize(state: StateEventClustersModel):      number                       { return state.pageSize; }
     @Selector() static initialized(state: StateEventClustersModel):   boolean                      { return state.initialized; }
-    @Selector() static sortField(state: StateEventClustersModel):     string                       { return state.sort; }
+    @Selector() static sortField(state: StateEventClustersModel):     string                       { return state.sortField; }
     @Selector() static sortAscending(state: StateEventClustersModel): boolean                      { return state.sortAscending; }
     @Selector() static sortFields(state: StateEventClustersModel):    Record<string, TypeOf>       { return state.sortFields; }
-    @Selector() static sortType(state: StateEventClustersModel):      TypeOf                       { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateEventClustersModel):      TypeOf                       { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateEventClustersModel):  boolean                      { return state.sortByEntity; }
+    @Selector() static count(state: StateEventClustersModel):         number                       { return Object.keys(StateEventClusters.data(state)).length; }
 
     constructor
     (

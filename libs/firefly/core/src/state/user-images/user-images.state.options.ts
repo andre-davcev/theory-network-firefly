@@ -18,8 +18,9 @@ export const StateUserImagesOptions: StoreOptions<StateUserImagesModel> =
         offset:        0,
         pageSize:      Default.PageSize,
         initialized:   false,
-        sort:          'name',
+        sortField:     'name',
         sortAscending: true,
+        sortByEntity:  false,
 
         sortFields:
         {

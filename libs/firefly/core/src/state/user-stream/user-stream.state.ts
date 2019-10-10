@@ -33,10 +33,12 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Selector() static offset(state: StateUserStreamModel):        number                         { return state.offset; }
     @Selector() static pageSize(state: StateUserStreamModel):      number                         { return state.pageSize; }
     @Selector() static initialized(state: StateUserStreamModel):   boolean                        { return state.initialized; }
-    @Selector() static sortField(state: StateUserStreamModel):     string                         { return state.sort; }
+    @Selector() static sortField(state: StateUserStreamModel):     string                         { return state.sortField; }
     @Selector() static sortAscending(state: StateUserStreamModel): boolean                        { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserStreamModel):    Record<string, TypeOf>         { return state.sortFields; }
-    @Selector() static sortType(state: StateUserStreamModel):      TypeOf                         { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateUserStreamModel):      TypeOf                         { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateUserStreamModel):  boolean                        { return state.sortByEntity; }
+    @Selector() static count(state: StateUserStreamModel):         number                         { return Object.keys(StateUserStream.data(state)).length; }
 
     constructor
     (

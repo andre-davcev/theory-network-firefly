@@ -19,7 +19,9 @@ export const StateIconOptions: StoreOptions<StateIconModel> =
             name        : null,
             description : null,
             private     : true,
-            draft       : false
+            draft       : false,
+
+            url: null
         },
 
         form :

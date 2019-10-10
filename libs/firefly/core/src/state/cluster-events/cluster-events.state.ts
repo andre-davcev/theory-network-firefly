@@ -6,7 +6,7 @@ import { CoreUtil, TypeOf } from '@theory/core';
 import { StateCluster } from '@firefly/core/state/cluster';
 import { Event, ClusterEvent } from '@firefly/core/models';
 import { ServiceClusterEvents, ServiceEvents } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateClusterEventsModel } from './cluster-events.state.model';
 import { StateClusterEventsOptions } from './cluster-events.state.options';
@@ -34,10 +34,12 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     @Selector() static offset(state: StateClusterEventsModel):        number                       { return state.offset; }
     @Selector() static pageSize(state: StateClusterEventsModel):      number                       { return state.pageSize; }
     @Selector() static initialized(state: StateClusterEventsModel):   boolean                      { return state.initialized; }
-    @Selector() static sortField(state: StateClusterEventsModel):     string                       { return state.sort; }
+    @Selector() static sortField(state: StateClusterEventsModel):     string                       { return state.sortField; }
     @Selector() static sortAscending(state: StateClusterEventsModel): boolean                      { return state.sortAscending; }
     @Selector() static sortFields(state: StateClusterEventsModel):    Record<string, TypeOf>       { return state.sortFields; }
-    @Selector() static sortType(state: StateClusterEventsModel):      TypeOf                       { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateClusterEventsModel):      TypeOf                       { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateClusterEventsModel):  boolean                      { return state.sortByEntity; }
+    @Selector() static count(state: StateClusterEventsModel):         number                       { return Object.keys(StateClusterEvents.data(state)).length; }
 
     constructor
     (

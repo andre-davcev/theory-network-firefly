@@ -19,7 +19,7 @@ export class FormCluster extends FormGenerator<Cluster>
           name            : null,
           tagline         : null,
           description     : null,
-          iconId          : null,
+          imageId          : null,
           private         : true,
           eventCount      : undefined,
           subscriberCount : undefined
@@ -34,7 +34,7 @@ export class FormCluster extends FormGenerator<Cluster>
             name        : [cluster.name,        [Validators.required, ValidatorsExtended.minLength(3)]],
             tagline     : [cluster.tagline,     [Validators.required, ValidatorsExtended.minLength(3)]],
             description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(3)]],
-            iconId      : [cluster.iconId],
+            iconId      : [cluster.imageId],
             private     : cluster.private
         });
 

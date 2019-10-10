@@ -10,6 +10,7 @@ export interface StateReferenceTableModel<R, T>
     pageSize:      number;
     initialized:   boolean;
     sortFields:    Record<string, TypeOf>;
-    sort:          string;
+    sortField:     string;
     sortAscending: boolean;
+    sortByEntity:  boolean;
 }

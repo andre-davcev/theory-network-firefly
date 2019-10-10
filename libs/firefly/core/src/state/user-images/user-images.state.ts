@@ -33,10 +33,12 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Selector() static offset(state: StateUserImagesModel):        number                    { return state.offset; }
     @Selector() static pageSize(state: StateUserImagesModel):      number                    { return state.pageSize; }
     @Selector() static initialized(state: StateUserImagesModel):   boolean                   { return state.initialized; }
-    @Selector() static sortField(state: StateUserImagesModel):     string                    { return state.sort; }
+    @Selector() static sortField(state: StateUserImagesModel):     string                    { return state.sortField; }
     @Selector() static sortAscending(state: StateUserImagesModel): boolean                   { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserImagesModel):    Record<string, TypeOf>    { return state.sortFields; }
-    @Selector() static sortType(state: StateUserImagesModel):      TypeOf                    { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateUserImagesModel):      TypeOf                    { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateUserImagesModel):  boolean                   { return state.sortByEntity; }
+    @Selector() static count(state: StateUserImagesModel):         number                    { return Object.keys(StateUserImages.data(state)).length; }
 
     constructor
     (

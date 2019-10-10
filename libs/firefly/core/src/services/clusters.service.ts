@@ -8,7 +8,7 @@ import { ServiceBase } from '@theory/firebase';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ServiceImages } from './images.service';
 import { FormGroup, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
-import { ValidatorsExtended, CoreEnum, CoreUtil } from '@theory/core';
+import { ValidatorsExtended, CoreUtil } from '@theory/core';
 
 
 @Injectable({ providedIn: 'root' })
@@ -47,7 +47,7 @@ export class ServiceClusters extends ServiceBase<Cluster>
             description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(1)]],
 
             tagline   : [cluster.tagline, ValidatorsExtended.minLength(1)],
-            iconId   : [cluster.iconId, [ServiceClusters.validateIcon()]]
+            imageId   : [cluster.imageId, [ServiceClusters.validateIcon()]]
         })
     }
 
@@ -114,7 +114,7 @@ export class ServiceClusters extends ServiceBase<Cluster>
         cluster.id = id;
         console.log(cluster.id);
         cluster.userId = 'myuser';
-        cluster.iconId = 'https://loremflickr.com/640/360';
+        cluster.imageId = 'https://loremflickr.com/640/360';
         const document: AngularFirestoreDocument<Cluster> = this.collection.doc(id) as AngularFirestoreDocument<Cluster>;
 
         return from(document.set(cluster)).pipe
@@ -140,11 +140,11 @@ export class ServiceClusters extends ServiceBase<Cluster>
             switchMap((clusters: Array<Cluster>) =>
                 forkJoin(clusters.map((cluster: Cluster) =>
                     this.storage.
-                    ref(this.image.toBucketPath(cluster.iconId)).
+                    ref(this.image.toBucketPath(cluster.imageId)).
                     getDownloadURL().
                     pipe
                     (
-                        tap((url: string) => cluster.iconId = url),
+                        tap((url: string) => cluster.imageId = url),
                         map(() => cluster)
                     )
                 ))

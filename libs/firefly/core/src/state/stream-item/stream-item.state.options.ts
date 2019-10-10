@@ -1,6 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateStreamItemModel } from './stream-item.state.model';
+import undefined = require('firebase/empty-import');
 
 export const StateStreamItemOptions: StoreOptions<StateStreamItemModel> =
 {
@@ -22,7 +23,8 @@ export const StateStreamItemOptions: StoreOptions<StateStreamItemModel> =
             draft       : false,
 
             tagline         : null,
-            iconId          : undefined,
+            imageId         : undefined,
+            imageUrl        : undefined,
             eventCount      : 0,
             subscriberCount : 0,
             subscribed      : false

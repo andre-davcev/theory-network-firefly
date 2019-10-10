@@ -18,8 +18,9 @@ export const StateClusterEventsOptions: StoreOptions<StateClusterEventsModel> =
         offset:        0,
         pageSize:      Default.PageSize,
         initialized:   false,
-        sort:          'name',
+        sortField:     'name',
         sortAscending: true,
+        sortByEntity:  true,
 
         sortFields:
         {

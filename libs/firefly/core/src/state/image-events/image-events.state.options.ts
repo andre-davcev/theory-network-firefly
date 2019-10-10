@@ -1,6 +1,5 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { TypeOf } from '@theory/core';
 import { Default } from '@theory/state';
 
 import { StateImageEventsModel } from './image-events.state.model';
@@ -18,13 +17,10 @@ export const StateImageEventsOptions: StoreOptions<StateImageEventsModel> =
         offset:        0,
         pageSize:      Default.PageSize,
         initialized:   false,
-        sort:          'name',
+        sortField:     'name',
         sortAscending: true,
+        sortByEntity:  false,
 
-        sortFields:
-        {
-            name        : TypeOf.String,
-            dateCreated : TypeOf.String
-        }
+        sortFields: {}
     }
 };
