@@ -33,10 +33,12 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Selector() static offset(state: StateIconClustersModel):        number                      { return state.offset; }
     @Selector() static pageSize(state: StateIconClustersModel):      number                      { return state.pageSize; }
     @Selector() static initialized(state: StateIconClustersModel):   boolean                     { return state.initialized; }
-    @Selector() static sortField(state: StateIconClustersModel):     string                      { return state.sort; }
+    @Selector() static sortField(state: StateIconClustersModel):     string                      { return state.sortField; }
     @Selector() static sortAscending(state: StateIconClustersModel): boolean                     { return state.sortAscending; }
     @Selector() static sortFields(state: StateIconClustersModel):    Record<string, TypeOf>      { return state.sortFields; }
-    @Selector() static sortType(state: StateIconClustersModel):      TypeOf                      { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateIconClustersModel):      TypeOf                      { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateIconClustersModel):  boolean                      { return state.sortByEntity; }
+    @Selector() static count(state: StateIconClustersModel):         number                       { return Object.keys(StateIconClusters.data(state)).length; }
 
     constructor
     (

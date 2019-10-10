@@ -33,10 +33,12 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Selector() static offset(state: StateImageEventsModel):        number                     { return state.offset; }
     @Selector() static pageSize(state: StateImageEventsModel):      number                     { return state.pageSize; }
     @Selector() static initialized(state: StateImageEventsModel):   boolean                    { return state.initialized; }
-    @Selector() static sortField(state: StateImageEventsModel):     string                     { return state.sort; }
+    @Selector() static sortField(state: StateImageEventsModel):     string                     { return state.sortField; }
     @Selector() static sortAscending(state: StateImageEventsModel): boolean                    { return state.sortAscending; }
     @Selector() static sortFields(state: StateImageEventsModel):    Record<string, TypeOf>     { return state.sortFields; }
-    @Selector() static sortType(state: StateImageEventsModel):      TypeOf                     { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateImageEventsModel):      TypeOf                     { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateImageEventsModel):  boolean                    { return state.sortByEntity; }
+    @Selector() static count(state: StateImageEventsModel):         number                     { return Object.keys(StateImageEvents.data(state)).length; }
 
     constructor
     (

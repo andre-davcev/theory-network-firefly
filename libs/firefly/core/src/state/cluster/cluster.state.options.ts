@@ -21,7 +21,8 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
           draft       : false,
 
           tagline         : null,
-          iconId          : undefined,
+          imageId         : undefined,
+          imageUrl        : null,
           eventCount      : 0,
           subscriberCount : 0
         },

@@ -18,8 +18,9 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         offset:        0,
         pageSize:      Default.PageSize,
         initialized:   false,
-        sort:          'dateCreated',
+        sortField:     'dateCreated',
         sortAscending: true,
+        sortByEntity:  false,
 
         sortFields:
         {

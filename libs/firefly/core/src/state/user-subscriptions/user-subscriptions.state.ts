@@ -36,10 +36,12 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Selector() static offset(state: StateUserSubscriptionsModel):        number                           { return state.offset; }
     @Selector() static pageSize(state: StateUserSubscriptionsModel):      number                           { return state.pageSize; }
     @Selector() static initialized(state: StateUserSubscriptionsModel):   boolean                          { return state.initialized; }
-    @Selector() static sortField(state: StateUserSubscriptionsModel):     string                           { return state.sort; }
+    @Selector() static sortField(state: StateUserSubscriptionsModel):     string                           { return state.sortField; }
     @Selector() static sortAscending(state: StateUserSubscriptionsModel): boolean                          { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserSubscriptionsModel):    Record<string, TypeOf>           { return state.sortFields; }
-    @Selector() static sortType(state: StateUserSubscriptionsModel):      TypeOf                           { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateUserSubscriptionsModel):      TypeOf                           { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateUserSubscriptionsModel):  boolean                          { return state.sortByEntity; }
+    @Selector() static count(state: StateUserSubscriptionsModel):         number                           { return Object.keys(StateUserSubscriptions.data(state)).length; }
 
     constructor
     (

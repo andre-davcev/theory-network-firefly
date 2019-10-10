@@ -33,10 +33,12 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Selector() static offset(state: StateUserEventsModel):        number                    { return state.offset; }
     @Selector() static pageSize(state: StateUserEventsModel):      number                    { return state.pageSize; }
     @Selector() static initialized(state: StateUserEventsModel):   boolean                   { return state.initialized; }
-    @Selector() static sortField(state: StateUserEventsModel):     string                    { return state.sort; }
+    @Selector() static sortField(state: StateUserEventsModel):     string                    { return state.sortField; }
     @Selector() static sortAscending(state: StateUserEventsModel): boolean                   { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserEventsModel):    Record<string, TypeOf>    { return state.sortFields; }
-    @Selector() static sortType(state: StateUserEventsModel):      TypeOf                    { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateUserEventsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateUserEventsModel):  boolean                   { return state.sortByEntity; }
+    @Selector() static count(state: StateUserEventsModel):         number                    { return Object.keys(StateUserEvents.data(state)).length; }
 
     constructor
     (

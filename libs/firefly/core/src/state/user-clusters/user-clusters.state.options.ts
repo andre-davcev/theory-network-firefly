@@ -18,8 +18,9 @@ export const StateUserClustersOptions: StoreOptions<StateUserClustersModel> =
         offset:        0,
         pageSize:      Default.PageSize,
         initialized:   false,
-        sort:          'name',
+        sortField:     'name',
         sortAscending: true,
+        sortByEntity:  false,
 
         sortFields:
         {

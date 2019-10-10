@@ -33,10 +33,12 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Selector() static offset(state: StateUserIconsModel):        number                    { return state.offset; }
     @Selector() static pageSize(state: StateUserIconsModel):      number                    { return state.pageSize; }
     @Selector() static initialized(state: StateUserIconsModel):   boolean                   { return state.initialized; }
-    @Selector() static sortField(state: StateUserIconsModel):     string                    { return state.sort; }
+    @Selector() static sortField(state: StateUserIconsModel):     string                    { return state.sortField; }
     @Selector() static sortAscending(state: StateUserIconsModel): boolean                   { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserIconsModel):    Record<string, TypeOf>    { return state.sortFields; }
-    @Selector() static sortType(state: StateUserIconsModel):      TypeOf                    { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateUserIconsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateUserIconsModel):  boolean                   { return state.sortByEntity; }
+    @Selector() static count(state: StateUserIconsModel):         number                    { return Object.keys(StateUserIcons.data(state)).length; }
 
     constructor
     (

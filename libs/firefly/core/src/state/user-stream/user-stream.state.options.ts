@@ -18,8 +18,9 @@ export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
         offset:        0,
         pageSize:      Default.PageSize,
         initialized:   false,
-        sort:          'order',
+        sortField:     'order',
         sortAscending: true,
+        sortByEntity:  false,
 
         sortFields:
         {

@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { User, ClusterSubscriber } from '@firefly/core/models';
 import { ServiceClusterSubscribers, ServiceUsers } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateClusterSubscribersModel } from './cluster-subscribers.state.model';
 import { StateClusterSubscribersOptions } from './cluster-subscribers.state.options';
@@ -34,10 +34,12 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     @Selector() static offset(state: StateClusterSubscribersModel):        number                            { return state.offset; }
     @Selector() static pageSize(state: StateClusterSubscribersModel):      number                            { return state.pageSize; }
     @Selector() static initialized(state: StateClusterSubscribersModel):   boolean                           { return state.initialized; }
-    @Selector() static sortField(state: StateClusterSubscribersModel):     string                            { return state.sort; }
+    @Selector() static sortField(state: StateClusterSubscribersModel):     string                            { return state.sortField; }
     @Selector() static sortAscending(state: StateClusterSubscribersModel): boolean                           { return state.sortAscending; }
     @Selector() static sortFields(state: StateClusterSubscribersModel):    Record<string, TypeOf>            { return state.sortFields; }
-    @Selector() static sortType(state: StateClusterSubscribersModel):      TypeOf                            { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateClusterSubscribersModel):      TypeOf                            { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateClusterSubscribersModel):  boolean                           { return state.sortByEntity; }
+    @Selector() static count(state: StateClusterSubscribersModel):         number                            { return Object.keys(StateClusterSubscribers.data(state)).length; }
 
     constructor
     (

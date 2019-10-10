@@ -33,10 +33,12 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Selector() static offset(state: StateUserClustersModel):        number                      { return state.offset; }
     @Selector() static pageSize(state: StateUserClustersModel):      number                      { return state.pageSize; }
     @Selector() static initialized(state: StateUserClustersModel):   boolean                     { return state.initialized; }
-    @Selector() static sortField(state: StateUserClustersModel):     string                      { return state.sort; }
+    @Selector() static sortField(state: StateUserClustersModel):     string                      { return state.sortField; }
     @Selector() static sortAscending(state: StateUserClustersModel): boolean                     { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserClustersModel):    Record<string, TypeOf>      { return state.sortFields; }
-    @Selector() static sortType(state: StateUserClustersModel):      TypeOf                      { return state.sortFields[state.sort]; }
+    @Selector() static sortType(state: StateUserClustersModel):      TypeOf                      { return state.sortFields[state.sortField]; }
+    @Selector() static sortByEntity(state: StateUserClustersModel):  boolean                     { return state.sortByEntity; }
+    @Selector() static count(state: StateUserClustersModel):         number                      { return Object.keys(StateUserClusters.data(state)).length; }
 
     constructor
     (
