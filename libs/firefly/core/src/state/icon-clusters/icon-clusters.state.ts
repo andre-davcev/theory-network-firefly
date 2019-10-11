@@ -37,8 +37,9 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Selector() static sortAscending(state: StateIconClustersModel): boolean                     { return state.sortAscending; }
     @Selector() static sortFields(state: StateIconClustersModel):    Record<string, TypeOf>      { return state.sortFields; }
     @Selector() static sortType(state: StateIconClustersModel):      TypeOf                      { return state.sortFields[state.sortField]; }
-    @Selector() static sortByEntity(state: StateIconClustersModel):  boolean                      { return state.sortByEntity; }
-    @Selector() static count(state: StateIconClustersModel):         number                       { return Object.keys(StateIconClusters.data(state)).length; }
+    @Selector() static sortByEntity(state: StateIconClustersModel):  boolean                     { return state.sortByEntity; }
+    @Selector() static sort(state: StateIconClustersModel):          boolean                     { return Object.keys(StateIconClusters.sortFields(state)).length > 0; }
+    @Selector() static count(state: StateIconClustersModel):         number                      { return Object.keys(StateIconClusters.data(state)).length; }
 
     constructor
     (
@@ -91,16 +92,10 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersGet)
     get({ getState, patchState }: StateContext<StateIconClustersModel>)
     {
-        const state: StateIconClustersModel = getState();
-
         return super.page
         (
-            this.clusters,
-            StateIconClusters.keys(state),
-            StateIconClusters.lookup(state),
-            StateIconClusters.list(state),
-            StateIconClusters.pageSize(state),
-            StateIconClusters.offset(state)
+            getState(),
+            this.clusters
         ).
         pipe
         (
@@ -109,6 +104,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
             )
         );
     }
+
     @Action(ActionIconClustersSet)
     set({ patchState }: StateContext<StateIconClustersModel>, { payload }: ActionIconClustersSet)
     {
@@ -118,14 +114,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersSort)
     sortData({ getState, patchState }: StateContext<StateIconClustersModel>)
     {
-        const state: StateIconClustersModel      = getState();
-        const data:  Record<string, IconCluster> = StateIconClusters.data(state);
-
-        const sortField:     string  = StateIconClusters.sortField(state);
-        const sortAscending: boolean = StateIconClusters.sortAscending(state);
-        const sortType:      TypeOf  = StateIconClusters.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -133,33 +122,13 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersAdd)
     add({ patchState, getState }: StateContext<StateIconClustersModel>, { payload }: ActionIconClustersAdd)
     {
-        const state:  StateIconClustersModel = getState();
-        const entity: Cluster                = payload;
-
-        const sortFields:    Record<string, TypeOf> = StateIconClusters.sortFields(state);
-        const sortField:     string                 = StateIconClusters.sortField(state);
-        const sortAscending: boolean                = StateIconClusters.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: IconCluster =
-        {
-            sort: this.sortFields(sortFields, entity)
-        };
+        const entity: Cluster = payload;
 
         const partial: Partial<StateIconClustersModel> =
         this.addData
         (
-            entity.id,
-            entity,
-            object,
-            StateIconClusters.data(state),
-            StateIconClusters.keys(state),
-            StateIconClusters.lookup(state),
-            StateIconClusters.list(state),
-            StateIconClusters.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            getState(),
+            entity
         );
 
         patchState(partial);
@@ -168,17 +137,11 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersRemove)
     remove({ patchState, getState }: StateContext<StateIconClustersModel>, { payload }: ActionIconClustersRemove)
     {
-        const state: StateIconClustersModel = getState();
-
         const partial: Partial<StateIconClustersModel> =
         this.removeData
         (
-            payload,
-            StateIconClusters.data(state),
-            StateIconClusters.keys(state),
-            StateIconClusters.lookup(state),
-            StateIconClusters.list(state),
-            StateIconClusters.offset(state)
+            getState(),
+            payload
         );
 
         patchState(partial);
@@ -187,21 +150,12 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersSync)
     sync({ patchState, getState}: StateContext<StateIconClustersModel>, { payload }: ActionIconClustersSync)
     {
-        const state:  StateIconClustersModel  = getState();
-        const lookup: Record<string, Cluster> = StateIconClusters.lookup(state);
-        const after:  Cluster                 = payload;
-        const before: Cluster                 = lookup[after.id];
+        const after: Cluster = payload;
 
         const partial: Partial<StateIconClustersModel> = this.syncData
         (
-            before,
-            after,
-            StateIconClusters.list(state),
-            lookup,
-            StateIconClusters.data(state),
-            StateIconClusters.sortField(state),
-            StateIconClusters.sortAscending(state),
-            StateIconClusters.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);

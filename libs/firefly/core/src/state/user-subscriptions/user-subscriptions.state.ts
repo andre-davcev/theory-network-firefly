@@ -41,6 +41,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Selector() static sortFields(state: StateUserSubscriptionsModel):    Record<string, TypeOf>           { return state.sortFields; }
     @Selector() static sortType(state: StateUserSubscriptionsModel):      TypeOf                           { return state.sortFields[state.sortField]; }
     @Selector() static sortByEntity(state: StateUserSubscriptionsModel):  boolean                          { return state.sortByEntity; }
+    @Selector() static sort(state: StateUserSubscriptionsModel):          boolean                          { return Object.keys(StateUserSubscriptions.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserSubscriptionsModel):         number                           { return Object.keys(StateUserSubscriptions.data(state)).length; }
 
     constructor
@@ -94,16 +95,10 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Action(ActionUserSubscriptionsGet)
     get({ getState, patchState }: StateContext<StateUserSubscriptionsModel>)
     {
-        const state: StateUserSubscriptionsModel = getState();
-
         return super.page
         (
-            this.subscriptions,
-            StateUserSubscriptions.keys(state),
-            StateUserSubscriptions.lookup(state),
-            StateUserSubscriptions.list(state),
-            StateUserSubscriptions.pageSize(state),
-            StateUserSubscriptions.offset(state)
+            getState(),
+            this.subscriptions
         ).
         pipe
         (
@@ -122,14 +117,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Action(ActionUserSubscriptionsSort)
     sortData({ getState, patchState }: StateContext<StateUserSubscriptionsModel>)
     {
-        const state: StateUserSubscriptionsModel      = getState();
-        const data:  Record<string, UserSubscription> = StateUserSubscriptions.data(state);
-
-        const sortField:     string  = StateUserSubscriptions.sortField(state);
-        const sortAscending: boolean = StateUserSubscriptions.sortAscending(state);
-        const sortType:      TypeOf  = StateUserSubscriptions.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -137,34 +125,14 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Action(ActionUserSubscriptionsAdd)
     add({ patchState, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsAdd)
     {
-        const state:  StateUserSubscriptionsModel = getState();
-        const entity: Subscription                = payload;
-
-        const sortFields:    Record<string, TypeOf> = StateUserSubscriptions.sortFields(state);
-        const sortField:     string                 = StateUserSubscriptions.sortField(state);
-        const sortAscending: boolean                = StateUserSubscriptions.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: UserSubscription =
-        {
-            sort: this.sortFields(sortFields, entity),
-            on:   true
-        };
+        const entity: Subscription = payload;
 
         const partial: Partial<StateUserSubscriptionsModel> =
         this.addData
         (
-            entity.id,
+            getState(),
             entity,
-            object,
-            StateUserSubscriptions.data(state),
-            StateUserSubscriptions.keys(state),
-            StateUserSubscriptions.lookup(state),
-            StateUserSubscriptions.list(state),
-            StateUserSubscriptions.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            { on: true}
         );
 
         patchState(partial);
@@ -173,17 +141,11 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Action(ActionUserSubscriptionsRemove)
     remove({ dispatch, patchState, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsRemove)
     {
-        const state: StateUserSubscriptionsModel = getState();
-
         const partial: Partial<StateUserSubscriptionsModel> =
         this.removeData
         (
-            payload,
-            StateUserSubscriptions.data(state),
-            StateUserSubscriptions.keys(state),
-            StateUserSubscriptions.lookup(state),
-            StateUserSubscriptions.list(state),
-            StateUserSubscriptions.offset(state)
+            getState(),
+            payload
         );
 
         patchState(partial);
@@ -194,21 +156,12 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Action(ActionUserSubscriptionsSync)
     sync({ patchState, getState}: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsSync)
     {
-        const state:  StateUserSubscriptionsModel  = getState();
-        const lookup: Record<string, Subscription> = StateUserSubscriptions.lookup(state);
-        const after:  Subscription                 = payload;
-        const before: Subscription                 = lookup[after.id];
+        const after: Subscription = payload;
 
         const partial: Partial<StateUserSubscriptionsModel> = this.syncData
         (
-            before,
-            after,
-            StateUserSubscriptions.list(state),
-            lookup,
-            StateUserSubscriptions.data(state),
-            StateUserSubscriptions.sortField(state),
-            StateUserSubscriptions.sortAscending(state),
-            StateUserSubscriptions.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);

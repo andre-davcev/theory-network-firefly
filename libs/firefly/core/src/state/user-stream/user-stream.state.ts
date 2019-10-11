@@ -38,6 +38,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Selector() static sortFields(state: StateUserStreamModel):    Record<string, TypeOf>         { return state.sortFields; }
     @Selector() static sortType(state: StateUserStreamModel):      TypeOf                         { return state.sortFields[state.sortField]; }
     @Selector() static sortByEntity(state: StateUserStreamModel):  boolean                        { return state.sortByEntity; }
+    @Selector() static sort(state: StateUserStreamModel):          boolean                        { return Object.keys(StateUserStream.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserStreamModel):         number                         { return Object.keys(StateUserStream.data(state)).length; }
 
     constructor
@@ -91,16 +92,10 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Action(ActionUserStreamGet)
     get({ getState, patchState }: StateContext<StateUserStreamModel>)
     {
-        const state: StateUserStreamModel = getState();
-
         return super.page
         (
-            this.streamItems,
-            StateUserStream.keys(state),
-            StateUserStream.lookup(state),
-            StateUserStream.list(state),
-            StateUserStream.pageSize(state),
-            StateUserStream.offset(state)
+            getState(),
+            this.streamItems
         ).
         pipe
         (
@@ -119,14 +114,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Action(ActionUserStreamSort)
     sortData({ getState, patchState }: StateContext<StateUserStreamModel>)
     {
-        const state: StateUserStreamModel           = getState();
-        const data:  Record<string, UserStreamItem> = StateUserStream.data(state);
-
-        const sortField:     string  = StateUserStream.sortField(state);
-        const sortAscending: boolean = StateUserStream.sortAscending(state);
-        const sortType:      TypeOf  = StateUserStream.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -134,33 +122,13 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Action(ActionUserStreamAdd)
     add({ patchState, getState }: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamAdd)
     {
-        const state:  StateUserStreamModel = getState();
-        const entity: StreamItem           = payload;
-
-        const sortFields:    Record<string, TypeOf> = StateUserStream.sortFields(state);
-        const sortField:     string                 = StateUserStream.sortField(state);
-        const sortAscending: boolean                = StateUserStream.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: UserStreamItem =
-        {
-            sort: this.sortFields(sortFields, entity)
-        };
+        const entity: StreamItem = payload;
 
         const partial: Partial<StateUserStreamModel> =
         this.addData
         (
-            entity.id,
-            entity,
-            object,
-            StateUserStream.data(state),
-            StateUserStream.keys(state),
-            StateUserStream.lookup(state),
-            StateUserStream.list(state),
-            StateUserStream.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            getState(),
+            entity
         );
 
         patchState(partial);
@@ -175,12 +143,8 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
         const partial: Partial<StateUserStreamModel> =
         this.removeData
         (
-            payload,
-            StateUserStream.data(state),
-            StateUserStream.keys(state),
-            StateUserStream.lookup(state),
-            StateUserStream.list(state),
-            StateUserStream.offset(state)
+            getState(),
+            payload
         );
 
         patchState(partial);
@@ -189,21 +153,12 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Action(ActionUserStreamSync)
     sync({ patchState, getState}: StateContext<StateUserStreamModel>, { payload }: ActionUserStreamSync)
     {
-        const state:  StateUserStreamModel       = getState();
-        const lookup: Record<string, StreamItem> = StateUserStream.lookup(state);
-        const after:  StreamItem                 = payload;
-        const before: StreamItem                 = lookup[after.id];
+        const after: StreamItem = payload;
 
         const partial: Partial<StateUserStreamModel> = this.syncData
         (
-            before,
-            after,
-            StateUserStream.list(state),
-            lookup,
-            StateUserStream.data(state),
-            StateUserStream.sortField(state),
-            StateUserStream.sortAscending(state),
-            StateUserStream.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);

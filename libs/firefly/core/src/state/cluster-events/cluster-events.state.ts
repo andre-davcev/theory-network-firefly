@@ -39,6 +39,7 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     @Selector() static sortFields(state: StateClusterEventsModel):    Record<string, TypeOf>       { return state.sortFields; }
     @Selector() static sortType(state: StateClusterEventsModel):      TypeOf                       { return state.sortFields[state.sortField]; }
     @Selector() static sortByEntity(state: StateClusterEventsModel):  boolean                      { return state.sortByEntity; }
+    @Selector() static sort(state: StateClusterEventsModel):          boolean                      { return Object.keys(StateClusterEvents.sortFields(state)).length > 0; }
     @Selector() static count(state: StateClusterEventsModel):         number                       { return Object.keys(StateClusterEvents.data(state)).length; }
 
     constructor
@@ -94,15 +95,7 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     {
         const state: StateClusterEventsModel = getState();
 
-        return super.page
-        (
-            this.events,
-            StateClusterEvents.keys(state),
-            StateClusterEvents.lookup(state),
-            StateClusterEvents.list(state),
-            StateClusterEvents.pageSize(state),
-            StateClusterEvents.offset(state)
-        ).
+        return this.page(state, this.events).
         pipe
         (
             tap((partial: Partial<StateClusterEventsModel>) =>
@@ -120,14 +113,7 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     @Action(ActionClusterEventsSort)
     sortData({ getState, patchState }: StateContext<StateClusterEventsModel>)
     {
-        const state: StateClusterEventsModel      = getState();
-        const data:  Record<string, ClusterEvent> = StateClusterEvents.data(state);
-
-        const sortField:     string  = StateClusterEvents.sortField(state);
-        const sortAscending: boolean = StateClusterEvents.sortAscending(state);
-        const sortType:      TypeOf  = StateClusterEvents.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -138,30 +124,11 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
         const state:  StateClusterEventsModel = getState();
         const entity: Event                   = payload;
 
-        const sortFields:    Record<string, TypeOf> = StateClusterEvents.sortFields(state);
-        const sortField:     string                 = StateClusterEvents.sortField(state);
-        const sortAscending: boolean                = StateClusterEvents.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: ClusterEvent =
-        {
-            sort: this.sortFields(sortFields,  entity)
-        };
-
         const partial: Partial<StateClusterEventsModel> =
         this.addData
         (
-            entity.id,
-            entity,
-            object,
-            StateClusterEvents.data(state),
-            StateClusterEvents.keys(state),
-            StateClusterEvents.lookup(state),
-            StateClusterEvents.list(state),
-            StateClusterEvents.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            state,
+            entity
         );
 
         patchState(partial);
@@ -177,12 +144,8 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
         const partial: Partial<StateClusterEventsModel> =
         this.removeData
         (
-            payload,
-            StateClusterEvents.data(state),
-            StateClusterEvents.keys(state),
-            StateClusterEvents.lookup(state),
-            StateClusterEvents.list(state),
-            StateClusterEvents.offset(state)
+            state,
+            payload
         );
 
         patchState(partial);
@@ -193,21 +156,12 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     @Action(ActionClusterEventsSync)
     sync({ patchState, getState}: StateContext<StateClusterEventsModel>, { payload }: ActionClusterEventsSync)
     {
-        const state:  StateClusterEventsModel = getState();
-        const lookup: Record<string, Event>   = StateClusterEvents.lookup(state);
-        const after:  Event                   = payload;
-        const before: Event                   = lookup[after.id];
+        const after: Event = payload;
 
         const partial: Partial<StateClusterEventsModel> = this.syncData
         (
-            before,
-            after,
-            StateClusterEvents.list(state),
-            lookup,
-            StateClusterEvents.data(state),
-            StateClusterEvents.sortField(state),
-            StateClusterEvents.sortAscending(state),
-            StateClusterEvents.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);
