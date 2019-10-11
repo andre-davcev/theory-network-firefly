@@ -38,6 +38,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Selector() static sortFields(state: StateUserIconsModel):    Record<string, TypeOf>    { return state.sortFields; }
     @Selector() static sortType(state: StateUserIconsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sortByEntity(state: StateUserIconsModel):  boolean                   { return state.sortByEntity; }
+    @Selector() static sort(state: StateUserIconsModel):          boolean                   { return Object.keys(StateUserIcons.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserIconsModel):         number                    { return Object.keys(StateUserIcons.data(state)).length; }
 
     constructor
@@ -91,16 +92,10 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Action(ActionUserIconsGet)
     get({ getState, patchState }: StateContext<StateUserIconsModel>)
     {
-        const state: StateUserIconsModel = getState();
-
         return super.page
         (
-            this.icons,
-            StateUserIcons.keys(state),
-            StateUserIcons.lookup(state),
-            StateUserIcons.list(state),
-            StateUserIcons.pageSize(state),
-            StateUserIcons.offset(state)
+            getState(),
+            this.icons
         ).
         pipe
         (
@@ -109,6 +104,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
             )
         );
     }
+
     @Action(ActionUserIconsSet)
     set({ patchState }: StateContext<StateUserIconsModel>, { payload }: ActionUserIconsSet)
     {
@@ -118,14 +114,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Action(ActionUserIconsSort)
     sortData({ getState, patchState }: StateContext<StateUserIconsModel>)
     {
-        const state: StateUserIconsModel      = getState();
-        const data:  Record<string, UserIcon> = StateUserIcons.data(state);
-
-        const sortField:     string  = StateUserIcons.sortField(state);
-        const sortAscending: boolean = StateUserIcons.sortAscending(state);
-        const sortType:      TypeOf  = StateUserIcons.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -133,33 +122,13 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Action(ActionUserIconsAdd)
     add({ patchState, getState }: StateContext<StateUserIconsModel>, { payload }: ActionUserIconsAdd)
     {
-        const state:  StateUserIconsModel = getState();
-        const entity: Icon                = payload;
-
-        const sortFields:    Record<string, TypeOf> = StateUserIcons.sortFields(state);
-        const sortField:     string                 = StateUserIcons.sortField(state);
-        const sortAscending: boolean                = StateUserIcons.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: UserIcon =
-        {
-            sort: this.sortFields(sortFields, entity)
-        };
+        const entity: Icon = payload;
 
         const partial: Partial<StateUserIconsModel> =
         this.addData
         (
-            entity.id,
-            entity,
-            object,
-            StateUserIcons.data(state),
-            StateUserIcons.keys(state),
-            StateUserIcons.lookup(state),
-            StateUserIcons.list(state),
-            StateUserIcons.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            getState(),
+            entity
         );
 
         patchState(partial);
@@ -173,12 +142,8 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
         const partial: Partial<StateUserIconsModel> =
         this.removeData
         (
-            payload,
-            StateUserIcons.data(state),
-            StateUserIcons.keys(state),
-            StateUserIcons.lookup(state),
-            StateUserIcons.list(state),
-            StateUserIcons.offset(state)
+            getState(),
+            payload
         );
 
         patchState(partial);
@@ -187,21 +152,12 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Action(ActionUserIconsSync)
     sync({ patchState, getState}: StateContext<StateUserIconsModel>, { payload }: ActionUserIconsSync)
     {
-        const state:  StateUserIconsModel  = getState();
-        const lookup: Record<string, Icon> = StateUserIcons.lookup(state);
-        const after:  Icon                 = payload;
-        const before: Icon                 = lookup[after.id];
+        const after: Icon = payload;
 
         const partial: Partial<StateUserIconsModel> = this.syncData
         (
-            before,
-            after,
-            StateUserIcons.list(state),
-            lookup,
-            StateUserIcons.data(state),
-            StateUserIcons.sortField(state),
-            StateUserIcons.sortAscending(state),
-            StateUserIcons.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);

@@ -38,6 +38,7 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Selector() static sortFields(state: StateUserEventsModel):    Record<string, TypeOf>    { return state.sortFields; }
     @Selector() static sortType(state: StateUserEventsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sortByEntity(state: StateUserEventsModel):  boolean                   { return state.sortByEntity; }
+    @Selector() static sort(state: StateUserEventsModel):          boolean                   { return Object.keys(StateUserEvents.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserEventsModel):         number                    { return Object.keys(StateUserEvents.data(state)).length; }
 
     constructor
@@ -91,16 +92,10 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Action(ActionUserEventsGet)
     get({ getState, patchState }: StateContext<StateUserEventsModel>)
     {
-        const state: StateUserEventsModel = getState();
-
         return super.page
         (
-            this.events,
-            StateUserEvents.keys(state),
-            StateUserEvents.lookup(state),
-            StateUserEvents.list(state),
-            StateUserEvents.pageSize(state),
-            StateUserEvents.offset(state)
+            getState(),
+            this.events
         ).
         pipe
         (
@@ -118,14 +113,7 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Action(ActionUserEventsSort)
     sortData({ getState, patchState }: StateContext<StateUserEventsModel>)
     {
-        const state: StateUserEventsModel      = getState();
-        const data:  Record<string, UserEvent> = StateUserEvents.data(state);
-
-        const sortField:     string  = StateUserEvents.sortField(state);
-        const sortAscending: boolean = StateUserEvents.sortAscending(state);
-        const sortType:      TypeOf  = StateUserEvents.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -133,33 +121,13 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Action(ActionUserEventsAdd)
     add({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsAdd)
     {
-        const state:  StateUserEventsModel = getState();
-        const entity: Event                = payload;
-
-        const sortFields:    Record<string, TypeOf> = StateUserEvents.sortFields(state);
-        const sortField:     string                 = StateUserEvents.sortField(state);
-        const sortAscending: boolean                = StateUserEvents.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: UserEvent =
-        {
-            sort: this.sortFields(sortFields, entity)
-        };
+        const entity: Event = payload;
 
         const partial: Partial<StateUserEventsModel> =
         this.addData
         (
-            entity.id,
-            entity,
-            object,
-            StateUserEvents.data(state),
-            StateUserEvents.keys(state),
-            StateUserEvents.lookup(state),
-            StateUserEvents.list(state),
-            StateUserEvents.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            getState(),
+            entity
         );
 
         patchState(partial);
@@ -168,17 +136,11 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Action(ActionUserEventsRemove)
     remove({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsRemove)
     {
-        const state: StateUserEventsModel = getState();
-
         const partial: Partial<StateUserEventsModel> =
         this.removeData
         (
-            payload,
-            StateUserEvents.data(state),
-            StateUserEvents.keys(state),
-            StateUserEvents.lookup(state),
-            StateUserEvents.list(state),
-            StateUserEvents.offset(state)
+            getState(),
+            payload
         );
 
         patchState(partial);
@@ -187,21 +149,12 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Action(ActionUserEventsSync)
     sync({ patchState, getState}: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSync)
     {
-        const state:  StateUserEventsModel  = getState();
-        const lookup: Record<string, Event> = StateUserEvents.lookup(state);
-        const after:  Event                 = payload;
-        const before: Event                 = lookup[after.id];
+        const after: Event = payload;
 
         const partial: Partial<StateUserEventsModel> = this.syncData
         (
-            before,
-            after,
-            StateUserEvents.list(state),
-            lookup,
-            StateUserEvents.data(state),
-            StateUserEvents.sortField(state),
-            StateUserEvents.sortAscending(state),
-            StateUserEvents.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);

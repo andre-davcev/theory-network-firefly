@@ -7,7 +7,7 @@ import { take, tap, switchMap, map } from 'rxjs/operators';
 
 export class StateReferenceTable<R extends ReferenceTable, T extends Model, S extends StateReferenceTableModel<R, T>>
 {
-    public sortFields(sortFields: Record<string, TypeOf>, data: T): Record<string, any>
+    public getSortFields(sortFields: Record<string, TypeOf>, data: T): Record<string, any>
     {
         return Object.
             keys(sortFields).
@@ -16,8 +16,13 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
             , {});
     }
 
-    public sort(data: Record<string, R>, name: string, ascending: boolean, type: TypeOf): Array<string>
+    public sort(state: StateReferenceTableModel<R, T>): Array<string>
     {
+        const data:      Record<string, R> = state.data;
+        const field:     string            = state.sortField;
+        const ascending: boolean           = state.sortAscending;
+        const type:      TypeOf            = state.sortFields[field];
+
         const GREATER: number = ascending ?  1 : -1;
         const LESSER:  number = ascending ? -1 : 1;
         const EQUAL:   number = 0;
@@ -56,16 +61,14 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
             });
     }
 
-    public page
-    (
-        service:  ServiceBase<T>,
-        keys:     Array<string>,
-        lookup:   Record<string, T>,
-        list:     Array<T>,
-        pageSize: number,
-        offset:   number
-    ): Observable<Partial<S>>
+    public page(state: StateReferenceTableModel<R, T>, service: ServiceBase<T>): Observable<Partial<S>>
     {
+        const keys:     Array<string>     = state.keys;
+        const lookup:   Record<string, T> = state.lookup;
+        const list:     Array<T>          = state.list;
+        const pageSize: number            = state.pageSize;
+        const offset:   number            = state.offset;
+
         const length: number = keys.length;
 
         let end: number = length;
@@ -115,29 +118,36 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
 
     public addData
     (
-        id:            string,
-        event:         T,
-        refTable:      R,
-        data:          Record<string, R>,
-        keys:          Array<string>,
-        lookup:        Record<string, T>,
-        list:          Array<T>,
-        offset:        number,
-        sortField:     string,
-        sortAscending: boolean,
-        sortType:      TypeOf
+        state:      StateReferenceTableModel<R, T>,
+        entity:     T,
+        refPartial: Partial<R> = {}
     ): Partial<StateReferenceTableModel<R, T>>
     {
-        data[id]   = refTable;
-        lookup[id] = event;
+        const id:     string                     = entity.id;
+        const data:   Record<string, R>          = state.data;
+        const lookup: Record<string, T>          = state.lookup;
+        const list:   Array<T>                   = state.list;
+        const sortFields: Record<string, TypeOf> = state.sortFields;
 
-        keys = this.sort(data, sortField, sortAscending, sortType);
+        const refTable: R =
+        {
+            ...refPartial,
+            sort: this.getSortFields(sortFields, entity)
+        } as R;
+
+        let offset: number = state.offset;
+
+        data[id]   = refTable;
+        lookup[id] = entity;
+        state.data = data;
+
+        const keys:  Array<string> = this.sort(state);
         const index: number = keys.findIndex((key: string) => key === id)
 
         if (offset >= index)
         {
             offset += 1;
-            list.splice(index, 0, event);
+            list.splice(index, 0, entity);
         }
 
         return {
@@ -151,15 +161,18 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
 
     public removeData
     (
-        id:       string,
-        data:     Record<string, R>,
-        keys:     Array<string>,
-        lookup:   Record<string, T>,
-        list:     Array<T>,
-        offset:   number
+        state: StateReferenceTableModel<R, T>,
+        id:    string
+
     ): Partial<StateReferenceTableModel<R, T>>
     {
-        const index: number = keys.findIndex((key: string) => key === id);
+        const data:   Record<string, R> = state.data;
+        const keys:   Array<string>     = state.keys;
+        const lookup: Record<string, T> = state.lookup;
+        const list:   Array<T>          = state.list;
+        const index:  number            = keys.findIndex((key: string) => key === id);
+
+        let offset: number = state.offset;
 
         delete data[id];
         delete lookup[id];
@@ -183,18 +196,18 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
 
     public syncData
     (
-        before:        T,
-        after:         T,
-        list:          Array<T>,
-        lookup:        Record<string, T>,
-        data:          Record<string, R>,
-        sortField:     string,
-        sortAscending: boolean,
-        sortType:      TypeOf
+        state: StateReferenceTableModel<R, T>,
+        after: T
     ): Partial<StateReferenceTableModel<R, T>>
     {
+        const lookup:    Record<string, T> = state.lookup;
+        const data:      Record<string, R> = state.data;
+        const sortField: string            = state.sortField;
+        const before:    T                 = lookup[after.id];
+
         const id: string = after.id;
 
+        let list: Array<T> = state.list;
         lookup[id] = after;
 
         data[id] =
@@ -203,10 +216,11 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
             [sortField]: after[sortField]
         };
 
+        state.data = data;
+
         if (before[sortField] !== after[sortField])
         {
-            list = this.sort(data, sortField, sortAscending, sortType).
-                map((key: string) => lookup[key]);
+            list = this.sort(state).map((key: string) => lookup[key]);
         }
         else
         {

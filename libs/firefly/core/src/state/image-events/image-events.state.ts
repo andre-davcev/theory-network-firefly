@@ -38,6 +38,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Selector() static sortFields(state: StateImageEventsModel):    Record<string, TypeOf>     { return state.sortFields; }
     @Selector() static sortType(state: StateImageEventsModel):      TypeOf                     { return state.sortFields[state.sortField]; }
     @Selector() static sortByEntity(state: StateImageEventsModel):  boolean                    { return state.sortByEntity; }
+    @Selector() static sort(state: StateImageEventsModel):          boolean                    { return Object.keys(StateImageEvents.sortFields(state)).length > 0; }
     @Selector() static count(state: StateImageEventsModel):         number                     { return Object.keys(StateImageEvents.data(state)).length; }
 
     constructor
@@ -91,16 +92,10 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Action(ActionImageEventsGet)
     get({ getState, patchState }: StateContext<StateImageEventsModel>)
     {
-        const state: StateImageEventsModel = getState();
-
         return super.page
         (
-            this.events,
-            StateImageEvents.keys(state),
-            StateImageEvents.lookup(state),
-            StateImageEvents.list(state),
-            StateImageEvents.pageSize(state),
-            StateImageEvents.offset(state)
+            getState(),
+            this.events
         ).
         pipe
         (
@@ -109,6 +104,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
             )
         );
     }
+
     @Action(ActionImageEventsSet)
     set({ patchState }: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsSet)
     {
@@ -118,14 +114,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Action(ActionImageEventsSort)
     sortData({ getState, patchState }: StateContext<StateImageEventsModel>)
     {
-        const state: StateImageEventsModel      = getState();
-        const data:  Record<string, ImageEvent> = StateImageEvents.data(state);
-
-        const sortField:     string  = StateImageEvents.sortField(state);
-        const sortAscending: boolean = StateImageEvents.sortAscending(state);
-        const sortType:      TypeOf  = StateImageEvents.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -133,33 +122,13 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Action(ActionImageEventsAdd)
     add({ patchState, getState }: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsAdd)
     {
-        const state:  StateImageEventsModel = getState();
-        const entity: Event                 = payload;
-
-        const sortFields:    Record<string, TypeOf> = StateImageEvents.sortFields(state);
-        const sortField:     string                 = StateImageEvents.sortField(state);
-        const sortAscending: boolean                = StateImageEvents.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: ImageEvent =
-        {
-            sort: this.sortFields(sortFields, entity)
-        };
+        const entity: Event = payload;
 
         const partial: Partial<StateImageEventsModel> =
         this.addData
         (
-            entity.id,
-            entity,
-            object,
-            StateImageEvents.data(state),
-            StateImageEvents.keys(state),
-            StateImageEvents.lookup(state),
-            StateImageEvents.list(state),
-            StateImageEvents.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            getState(),
+            entity
         );
 
         patchState(partial);
@@ -168,17 +137,11 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Action(ActionImageEventsRemove)
     remove({ patchState, getState }: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsRemove)
     {
-        const state: StateImageEventsModel = getState();
-
         const partial: Partial<StateImageEventsModel> =
         this.removeData
         (
-            payload,
-            StateImageEvents.data(state),
-            StateImageEvents.keys(state),
-            StateImageEvents.lookup(state),
-            StateImageEvents.list(state),
-            StateImageEvents.offset(state)
+            getState(),
+            payload
         );
 
         patchState(partial);
@@ -187,21 +150,12 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Action(ActionImageEventsSync)
     sync({ patchState, getState}: StateContext<StateImageEventsModel>, { payload }: ActionImageEventsSync)
     {
-        const state:  StateImageEventsModel = getState();
-        const lookup: Record<string, Event> = StateImageEvents.lookup(state);
-        const after:  Event                 = payload;
-        const before: Event                 = lookup[after.id];
+        const after:  Event = payload;
 
         const partial: Partial<StateImageEventsModel> = this.syncData
         (
-            before,
-            after,
-            StateImageEvents.list(state),
-            lookup,
-            StateImageEvents.data(state),
-            StateImageEvents.sortField(state),
-            StateImageEvents.sortAscending(state),
-            StateImageEvents.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);

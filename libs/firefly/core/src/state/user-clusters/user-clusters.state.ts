@@ -38,6 +38,7 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Selector() static sortFields(state: StateUserClustersModel):    Record<string, TypeOf>      { return state.sortFields; }
     @Selector() static sortType(state: StateUserClustersModel):      TypeOf                      { return state.sortFields[state.sortField]; }
     @Selector() static sortByEntity(state: StateUserClustersModel):  boolean                     { return state.sortByEntity; }
+    @Selector() static sort(state: StateUserClustersModel):          boolean                     { return Object.keys(StateUserClusters.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserClustersModel):         number                      { return Object.keys(StateUserClusters.data(state)).length; }
 
     constructor
@@ -91,16 +92,10 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Action(ActionUserClustersGet)
     get({ getState, patchState }: StateContext<StateUserClustersModel>)
     {
-        const state: StateUserClustersModel = getState();
-
         return super.page
         (
-            this.clusters,
-            StateUserClusters.keys(state),
-            StateUserClusters.lookup(state),
-            StateUserClusters.list(state),
-            StateUserClusters.pageSize(state),
-            StateUserClusters.offset(state)
+            getState(),
+            this.clusters
         ).
         pipe
         (
@@ -119,14 +114,7 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Action(ActionUserClustersSort)
     sortData({ getState, patchState }: StateContext<StateUserClustersModel>)
     {
-        const state: StateUserClustersModel      = getState();
-        const data:  Record<string, UserCluster> = StateUserClusters.data(state);
-
-        const sortField:     string  = StateUserClusters.sortField(state);
-        const sortAscending: boolean = StateUserClusters.sortAscending(state);
-        const sortType:      TypeOf  = StateUserClusters.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -134,33 +122,13 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Action(ActionUserClustersAdd)
     add({ patchState, getState }: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersAdd)
     {
-        const state:  StateUserClustersModel = getState();
-        const entity: Cluster                = payload;
-
-        const sortFields:    Record<string, TypeOf> = StateUserClusters.sortFields(state);
-        const sortField:     string                 = StateUserClusters.sortField(state);
-        const sortAscending: boolean                = StateUserClusters.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: UserCluster =
-        {
-            sort: this.sortFields(sortFields, entity)
-        };
+        const entity: Cluster = payload;
 
         const partial: Partial<StateUserClustersModel> =
         this.addData
         (
-            entity.id,
-            entity,
-            object,
-            StateUserClusters.data(state),
-            StateUserClusters.keys(state),
-            StateUserClusters.lookup(state),
-            StateUserClusters.list(state),
-            StateUserClusters.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            getState(),
+            entity
         );
 
         patchState(partial);
@@ -169,17 +137,11 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Action(ActionUserClustersRemove)
     remove({ patchState, getState }: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersRemove)
     {
-        const state: StateUserClustersModel = getState();
-
         const partial: Partial<StateUserClustersModel> =
         this.removeData
         (
-            payload,
-            StateUserClusters.data(state),
-            StateUserClusters.keys(state),
-            StateUserClusters.lookup(state),
-            StateUserClusters.list(state),
-            StateUserClusters.offset(state)
+            getState(),
+            payload
         );
 
         patchState(partial);
@@ -188,21 +150,12 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Action(ActionUserClustersSync)
     sync({ patchState, getState}: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersSync)
     {
-        const state:  StateUserClustersModel  = getState();
-        const lookup: Record<string, Cluster> = StateUserClusters.lookup(state);
-        const after:  Cluster                 = payload;
-        const before: Cluster                 = lookup[after.id];
+        const after: Cluster = payload;
 
         const partial: Partial<StateUserClustersModel> = this.syncData
         (
-            before,
-            after,
-            StateUserClusters.list(state),
-            lookup,
-            StateUserClusters.data(state),
-            StateUserClusters.sortField(state),
-            StateUserClusters.sortAscending(state),
-            StateUserClusters.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);

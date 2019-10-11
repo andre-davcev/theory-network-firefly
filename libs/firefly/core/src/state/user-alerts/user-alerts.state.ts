@@ -38,6 +38,7 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Selector() static sortFields(state: StateUserAlertsModel):    Record<string, TypeOf>    { return state.sortFields; }
     @Selector() static sortType(state: StateUserAlertsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sortByEntity(state: StateUserAlertsModel):  boolean                   { return state.sortByEntity; }
+    @Selector() static sort(state: StateUserAlertsModel):          boolean                   { return Object.keys(StateUserAlerts.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserAlertsModel):         number                    { return Object.keys(StateUserAlerts.data(state)).length; }
 
     constructor
@@ -91,16 +92,10 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Action(ActionUserAlertsGet)
     get({ getState, patchState }: StateContext<StateUserAlertsModel>)
     {
-        const state: StateUserAlertsModel = getState();
-
         return super.page
         (
-            this.alerts,
-            StateUserAlerts.keys(state),
-            StateUserAlerts.lookup(state),
-            StateUserAlerts.list(state),
-            StateUserAlerts.pageSize(state),
-            StateUserAlerts.offset(state)
+            getState(),
+            this.alerts
         ).
         pipe
         (
@@ -119,14 +114,7 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Action(ActionUserAlertsSort)
     sortData({ getState, patchState }: StateContext<StateUserAlertsModel>)
     {
-        const state: StateUserAlertsModel      = getState();
-        const data:  Record<string, UserAlert> = StateUserAlerts.data(state);
-
-        const sortField:     string  = StateUserAlerts.sortField(state);
-        const sortAscending: boolean = StateUserAlerts.sortAscending(state);
-        const sortType:      TypeOf  = StateUserAlerts.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -134,34 +122,14 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Action(ActionUserAlertsAdd)
     add({ patchState, getState }: StateContext<StateUserAlertsModel>, { payload }: ActionUserAlertsAdd)
     {
-        const state:  StateUserAlertsModel = getState();
-        const entity: Alert                = payload;
-
-        const sortFields:    Record<string, TypeOf> = StateUserAlerts.sortFields(state);
-        const sortField:     string                 = StateUserAlerts.sortField(state);
-        const sortAscending: boolean                = StateUserAlerts.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: UserAlert =
-        {
-            sort: this.sortFields(sortFields, entity),
-            read: false
-        };
+        const entity: Alert = payload;
 
         const partial: Partial<StateUserAlertsModel> =
         this.addData
         (
-            entity.id,
+            getState(),
             entity,
-            object,
-            StateUserAlerts.data(state),
-            StateUserAlerts.keys(state),
-            StateUserAlerts.lookup(state),
-            StateUserAlerts.list(state),
-            StateUserAlerts.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            { read: false }
         );
 
         patchState(partial);
@@ -170,17 +138,11 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Action(ActionUserAlertsRemove)
     remove({ patchState, getState }: StateContext<StateUserAlertsModel>, { payload }: ActionUserAlertsRemove)
     {
-        const state: StateUserAlertsModel = getState();
-
         const partial: Partial<StateUserAlertsModel> =
         this.removeData
         (
-            payload,
-            StateUserAlerts.data(state),
-            StateUserAlerts.keys(state),
-            StateUserAlerts.lookup(state),
-            StateUserAlerts.list(state),
-            StateUserAlerts.offset(state)
+            getState(),
+            payload
         );
 
         patchState(partial);
@@ -189,21 +151,12 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Action(ActionUserAlertsSync)
     sync({ patchState, getState}: StateContext<StateUserAlertsModel>, { payload }: ActionUserAlertsSync)
     {
-        const state:  StateUserAlertsModel  = getState();
-        const lookup: Record<string, Alert> = StateUserAlerts.lookup(state);
-        const after:  Alert                 = payload;
-        const before: Alert                 = lookup[after.id];
+        const after: Alert = payload;
 
         const partial: Partial<StateUserAlertsModel> = this.syncData
         (
-            before,
-            after,
-            StateUserAlerts.list(state),
-            lookup,
-            StateUserAlerts.data(state),
-            StateUserAlerts.sortField(state),
-            StateUserAlerts.sortAscending(state),
-            StateUserAlerts.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);

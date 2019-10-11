@@ -38,6 +38,7 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Selector() static sortFields(state: StateUserImagesModel):    Record<string, TypeOf>    { return state.sortFields; }
     @Selector() static sortType(state: StateUserImagesModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sortByEntity(state: StateUserImagesModel):  boolean                   { return state.sortByEntity; }
+    @Selector() static sort(state: StateUserImagesModel):          boolean                   { return Object.keys(StateUserImages.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserImagesModel):         number                    { return Object.keys(StateUserImages.data(state)).length; }
 
     constructor
@@ -91,16 +92,10 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Action(ActionUserImagesGet)
     get({ getState, patchState }: StateContext<StateUserImagesModel>)
     {
-        const state: StateUserImagesModel = getState();
-
         return super.page
         (
-            this.images,
-            StateUserImages.keys(state),
-            StateUserImages.lookup(state),
-            StateUserImages.list(state),
-            StateUserImages.pageSize(state),
-            StateUserImages.offset(state)
+            getState(),
+            this.images
         ).
         pipe
         (
@@ -119,14 +114,7 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Action(ActionUserImagesSort)
     sortData({ getState, patchState }: StateContext<StateUserImagesModel>)
     {
-        const state: StateUserImagesModel      = getState();
-        const data:  Record<string, UserImage> = StateUserImages.data(state);
-
-        const sortField:     string  = StateUserImages.sortField(state);
-        const sortAscending: boolean = StateUserImages.sortAscending(state);
-        const sortType:      TypeOf  = StateUserImages.sortFields(state)[sortField];
-
-        const keys: Array<string> = this.sort(data, sortField, sortAscending, sortType);
+        const keys: Array<string> = this.sort(getState());
 
         patchState({ keys });
     }
@@ -134,33 +122,13 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Action(ActionUserImagesAdd)
     add({ patchState, getState }: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesAdd)
     {
-        const state:  StateUserImagesModel = getState();
-        const entity: Image                = payload;
-
-        const sortFields:    Record<string, TypeOf> = StateUserImages.sortFields(state);
-        const sortField:     string                 = StateUserImages.sortField(state);
-        const sortAscending: boolean                = StateUserImages.sortAscending(state);
-        const sortType:      TypeOf                 = sortFields[sortField];
-
-        const object: UserImage =
-        {
-            sort: this.sortFields(sortFields, entity)
-        };
+        const entity: Image = payload;
 
         const partial: Partial<StateUserImagesModel> =
         this.addData
         (
-            entity.id,
-            entity,
-            object,
-            StateUserImages.data(state),
-            StateUserImages.keys(state),
-            StateUserImages.lookup(state),
-            StateUserImages.list(state),
-            StateUserImages.offset(state),
-            sortField,
-            sortAscending,
-            sortType
+            getState(),
+            entity
         );
 
         patchState(partial);
@@ -169,17 +137,11 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Action(ActionUserImagesRemove)
     remove({ patchState, getState }: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesRemove)
     {
-        const state: StateUserImagesModel = getState();
-
         const partial: Partial<StateUserImagesModel> =
         this.removeData
         (
-            payload,
-            StateUserImages.data(state),
-            StateUserImages.keys(state),
-            StateUserImages.lookup(state),
-            StateUserImages.list(state),
-            StateUserImages.offset(state)
+            getState(),
+            payload
         );
 
         patchState(partial);
@@ -188,21 +150,12 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Action(ActionUserImagesSync)
     sync({ patchState, getState}: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesSync)
     {
-        const state:  StateUserImagesModel  = getState();
-        const lookup: Record<string, Image> = StateUserImages.lookup(state);
-        const after:  Image                 = payload;
-        const before: Image                 = lookup[after.id];
+        const after: Image = payload;
 
         const partial: Partial<StateUserImagesModel> = this.syncData
         (
-            before,
-            after,
-            StateUserImages.list(state),
-            lookup,
-            StateUserImages.data(state),
-            StateUserImages.sortField(state),
-            StateUserImages.sortAscending(state),
-            StateUserImages.sortType(state)
+            getState(),
+            after
         );
 
         patchState(partial);
