@@ -38,7 +38,6 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     @Selector() static sortAscending(state: StateClusterEventsModel): boolean                      { return state.sortAscending; }
     @Selector() static sortFields(state: StateClusterEventsModel):    Record<string, TypeOf>       { return state.sortFields; }
     @Selector() static sortType(state: StateClusterEventsModel):      TypeOf                       { return state.sortFields[state.sortField]; }
-    @Selector() static sortByEntity(state: StateClusterEventsModel):  boolean                      { return state.sortByEntity; }
     @Selector() static sort(state: StateClusterEventsModel):          boolean                      { return Object.keys(StateClusterEvents.sortFields(state)).length > 0; }
     @Selector() static count(state: StateClusterEventsModel):         number                       { return Object.keys(StateClusterEvents.data(state)).length; }
 

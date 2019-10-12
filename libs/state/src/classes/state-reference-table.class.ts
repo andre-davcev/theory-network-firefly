@@ -63,13 +63,14 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
 
     public page(state: StateReferenceTableModel<R, T>, service: ServiceBase<T>): Observable<Partial<S>>
     {
+        const sort: boolean = Object.keys(state.sortFields).length > 0;
+
         const keys:     Array<string>     = state.keys;
         const lookup:   Record<string, T> = state.lookup;
         const list:     Array<T>          = state.list;
         const pageSize: number            = state.pageSize;
         const offset:   number            = state.offset;
-
-        const length: number = keys.length;
+        const length:   number            = keys.length;
 
         let end: number = length;
 

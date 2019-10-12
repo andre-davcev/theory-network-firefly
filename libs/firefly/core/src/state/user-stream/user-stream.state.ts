@@ -37,7 +37,6 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Selector() static sortAscending(state: StateUserStreamModel): boolean                        { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserStreamModel):    Record<string, TypeOf>         { return state.sortFields; }
     @Selector() static sortType(state: StateUserStreamModel):      TypeOf                         { return state.sortFields[state.sortField]; }
-    @Selector() static sortByEntity(state: StateUserStreamModel):  boolean                        { return state.sortByEntity; }
     @Selector() static sort(state: StateUserStreamModel):          boolean                        { return Object.keys(StateUserStream.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserStreamModel):         number                         { return Object.keys(StateUserStream.data(state)).length; }
 

@@ -20,7 +20,6 @@ export const StateUserImagesOptions: StoreOptions<StateUserImagesModel> =
         initialized:   false,
         sortField:     'name',
         sortAscending: true,
-        sortByEntity:  false,
 
         sortFields:
         {

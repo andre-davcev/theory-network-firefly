@@ -16,11 +16,10 @@ export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsM
         keys:          [],
         list:          [],
         offset:        0,
-        pageSize:      Default.PageSize,
+        pageSize:      Default.None,
         initialized:   false,
         sortField:     'name',
         sortAscending: true,
-        sortByEntity:  true,
 
         sortFields:
         {
