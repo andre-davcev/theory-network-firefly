@@ -20,7 +20,6 @@ export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
         initialized:   false,
         sortField:     'order',
         sortAscending: true,
-        sortByEntity:  false,
 
         sortFields:
         {

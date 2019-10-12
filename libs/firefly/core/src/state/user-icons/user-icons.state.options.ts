@@ -20,7 +20,6 @@ export const StateUserIconsOptions: StoreOptions<StateUserIconsModel> =
         initialized:   false,
         sortField:     'name',
         sortAscending: true,
-        sortByEntity:  false,
 
         sortFields:
         {

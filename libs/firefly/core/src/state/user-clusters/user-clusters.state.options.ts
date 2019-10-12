@@ -20,7 +20,6 @@ export const StateUserClustersOptions: StoreOptions<StateUserClustersModel> =
         initialized:   false,
         sortField:     'name',
         sortAscending: true,
-        sortByEntity:  false,
 
         sortFields:
         {

@@ -20,7 +20,6 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
         initialized:   false,
         sortField:     'name',
         sortAscending: true,
-        sortByEntity:  false,
 
         sortFields:
         {
