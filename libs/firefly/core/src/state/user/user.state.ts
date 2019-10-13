@@ -28,7 +28,8 @@ import {
   ActionUserSetAlerts,
   ActionUserWatchAlerts,
   ActionUserSubscribe,
-  ActionUserUnsubscribe
+  ActionUserUnsubscribe,
+  ActionUserCreate
 } from './user.actions';
 import { ServiceUser, ServiceCluster, ServiceAlerts } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -269,6 +270,30 @@ export class StateUser implements NgxsOnInit
 
         return this.service.patch(user.id, { tokens });
     }
+
+    @Action(ActionUserCreate)
+    createUser({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserCreate)
+    {
+        patchState({ authenticating: true });
+
+        /*this.fireAuth.auth.signInWithEmailAndPassword(payload.id, payload.password).catch(function(error) {
+
+          let errorCode = error.code;
+          let errorMessage = error.message;
+          console.log('errorCode' + errorCode);
+          console.log('errorMessage: ' + errorMessage);
+
+
+        });
+        return null;*/
+        return from(this.fireAuth.auth.createUserWithEmailAndPassword(payload.id, payload.password)).pipe
+        (
+            map((userCredential: firebase.auth.UserCredential) => userCredential.user),
+            switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
+            catchError((error: Error) => of(patchState({ error, authenticating: false })))
+        );
+    }
+
 
     @Action(ActionLoginEmail)
     loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionLoginEmail)

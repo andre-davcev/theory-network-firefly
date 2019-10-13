@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ModuleComponentIconFirefly } from '@firefly/core';
 import { ModulePage } from '@firefly/app/modules';
@@ -12,6 +13,7 @@ import { PageLogin } from './login.page';
     imports :
     [
         ModulePage,
+        ReactiveFormsModule,
         ModuleComponentIconFirefly,
         RouterModule.forChild(RoutesPageLogin)
     ],
