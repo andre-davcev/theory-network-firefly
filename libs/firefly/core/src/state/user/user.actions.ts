@@ -34,7 +34,7 @@ export class ActionUserCreate
 {
     static readonly type = ActionsUser.UserCreate;
 
-    constructor() {}
+    constructor(public payload: Credentials) {}
 }
 
 export class ActionUserAddToken
