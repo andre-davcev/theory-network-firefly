@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Cluster, IconCluster } from '@firefly/core/models';
 import { ServiceIconClusters, ServiceClusters } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/state';
 
 import { StateIconClustersModel } from './icon-clusters.state.model';
 import { StateIconClustersOptions } from './icon-clusters.state.options';
@@ -39,6 +39,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Selector() static sortType(state: StateIconClustersModel):      TypeOf                      { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateIconClustersModel):          boolean                     { return Object.keys(StateIconClusters.sortFields(state)).length > 0; }
     @Selector() static count(state: StateIconClustersModel):         number                      { return Object.keys(StateIconClusters.data(state)).length; }
+    @Selector() static getAll(state: StateIconClustersModel):        boolean                     { return StateIconClusters.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -61,8 +62,10 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Action(ActionIconClustersGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateIconClustersModel>, { fetch }: ActionIconClustersGetData)
     {
+        const state: StateIconClustersModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateIcon.id);
-        const initialized: boolean = StateIconClusters.initialized(getState());
+        const initialized: boolean = StateIconClusters.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -74,13 +77,13 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
                 this.service.get(id)
             ),
             switchMap((data: Record<string, IconCluster>) =>
-                dispatch([
-                    new ActionIconClustersSet(data),
-                    new ActionIconClustersSort()
-                ])
+                dispatch(new ActionIconClustersSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionIconClustersGet() : of())
+                StateIconClusters.getAll(state) ? of() : dispatch(new ActionIconClustersSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionIconClustersGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { User, ClusterSubscriber } from '@firefly/core/models';
 import { ServiceClusterSubscribers, ServiceUsers } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/state';
 
 import { StateClusterSubscribersModel } from './cluster-subscribers.state.model';
 import { StateClusterSubscribersOptions } from './cluster-subscribers.state.options';
@@ -40,6 +40,7 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     @Selector() static sortType(state: StateClusterSubscribersModel):      TypeOf                            { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateClusterSubscribersModel):          boolean                           { return Object.keys(StateClusterSubscribers.sortFields(state)).length > 0; }
     @Selector() static count(state: StateClusterSubscribersModel):         number                            { return Object.keys(StateClusterSubscribers.data(state)).length; }
+    @Selector() static getAll(state: StateClusterSubscribersModel):        boolean                           { return StateClusterSubscribers.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -62,8 +63,10 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     @Action(ActionClusterSubscribersGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateClusterSubscribersModel>, { fetch }: ActionClusterSubscribersGetData)
     {
+        const state: StateClusterSubscribersModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateCluster.id);
-        const initialized: boolean = StateClusterSubscribers.initialized(getState());
+        const initialized: boolean = StateClusterSubscribers.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -75,13 +78,13 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
                 this.service.get(id)
             ),
             switchMap((data: Record<string, ClusterSubscriber>) =>
-                dispatch([
-                    new ActionClusterSubscribersSet(data),
-                    new ActionClusterSubscribersSort()
-                ])
+                dispatch(new ActionClusterSubscribersSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionClusterSubscribersGet() : of())
+                StateClusterSubscribers.getAll(state) ? of() : dispatch(new ActionClusterSubscribersSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionClusterSubscribersGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

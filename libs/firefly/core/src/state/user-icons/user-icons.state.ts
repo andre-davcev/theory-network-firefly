@@ -4,7 +4,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Icon, UserIcon } from '@firefly/core/models';
 import { ServiceUserIcons, ServiceIcons } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/state';
 
 import { StateUserIconsModel } from './user-icons.state.model';
 import { StateUserIconsOptions } from './user-icons.state.options';
@@ -39,6 +39,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Selector() static sortType(state: StateUserIconsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserIconsModel):          boolean                   { return Object.keys(StateUserIcons.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserIconsModel):         number                    { return Object.keys(StateUserIcons.data(state)).length; }
+    @Selector() static getAll(state: StateUserIconsModel):        boolean                   { return StateUserIcons.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -61,8 +62,10 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Action(ActionUserIconsGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateUserIconsModel>, { fetch }: ActionUserIconsGetData)
     {
+        const state: StateUserIconsModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserIcons.initialized(getState());
+        const initialized: boolean = StateUserIcons.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -74,13 +77,13 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
                 this.service.get(id)
             ),
             switchMap((data: Record<string, UserIcon>) =>
-                dispatch([
-                    new ActionUserIconsSet(data),
-                    new ActionUserIconsSort()
-                ])
+                dispatch(new ActionUserIconsSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionUserIconsGet() : of())
+                StateUserIcons.getAll(state) ? of() : dispatch(new ActionUserIconsSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionUserIconsGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

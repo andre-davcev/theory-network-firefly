@@ -5,7 +5,7 @@ import { CoreUtil, TypeOf } from '@theory/core';
 import { StateUser } from '@firefly/core/state/user';
 import { Subscription, UserSubscription } from '@firefly/core/models';
 import { ServiceUserSubscriptions, ServiceSubscriptions } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/state';
 
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { StateUserSubscriptionsOptions } from './user-subscriptions.state.options';
@@ -40,9 +40,9 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Selector() static sortAscending(state: StateUserSubscriptionsModel): boolean                          { return state.sortAscending; }
     @Selector() static sortFields(state: StateUserSubscriptionsModel):    Record<string, TypeOf>           { return state.sortFields; }
     @Selector() static sortType(state: StateUserSubscriptionsModel):      TypeOf                           { return state.sortFields[state.sortField]; }
-    @Selector() static sortByEntity(state: StateUserSubscriptionsModel):  boolean                          { return state.sortByEntity; }
     @Selector() static sort(state: StateUserSubscriptionsModel):          boolean                          { return Object.keys(StateUserSubscriptions.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserSubscriptionsModel):         number                           { return Object.keys(StateUserSubscriptions.data(state)).length; }
+    @Selector() static getAll(state: StateUserSubscriptionsModel):        boolean                          { return StateUserSubscriptions.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -65,8 +65,10 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Action(ActionUserSubscriptionsGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateUserSubscriptionsModel>, { fetch }: ActionUserSubscriptionsGetData)
     {
+        const state: StateUserSubscriptionsModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserSubscriptions.initialized(getState());
+        const initialized: boolean = StateUserSubscriptions.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -78,13 +80,13 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
                 this.service.get(id)
             ),
             switchMap((data: Record<string, UserSubscription>) =>
-                dispatch([
-                    new ActionUserSubscriptionsSet(data),
-                    new ActionUserSubscriptionsSort()
-                ])
+                dispatch(new ActionUserSubscriptionsSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionUserSubscriptionsGet() : of())
+                StateUserSubscriptions.getAll(state) ? of() : dispatch(new ActionUserSubscriptionsSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionUserSubscriptionsGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

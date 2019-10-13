@@ -6,7 +6,7 @@ import { CoreUtil, TypeOf } from '@theory/core';
 import { ActionClusterEventsRemove } from '../cluster-events';
 import { Cluster, EventCluster } from '@firefly/core/models';
 import { ServiceEventClusters, ServiceClusters } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/state';
 
 import { StateEventClustersModel } from './event-clusters.state.model';
 import { StateEventClustersOptions } from './event-clusters.state.options';
@@ -22,6 +22,7 @@ import {
     ActionEventClustersSync
 } from './event-clusters.actions';
 import { StateCluster } from '../cluster';
+import { StateEvent } from '../event';
 
 @State<StateEventClustersModel>(StateEventClustersOptions)
 
@@ -40,6 +41,7 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     @Selector() static sortType(state: StateEventClustersModel):      TypeOf                       { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateEventClustersModel):          boolean                      { return Object.keys(StateEventClusters.sortFields(state)).length > 0; }
     @Selector() static count(state: StateEventClustersModel):         number                       { return Object.keys(StateEventClusters.data(state)).length; }
+    @Selector() static getAll(state: StateEventClustersModel):        boolean                      { return StateEventClusters.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -62,8 +64,10 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
     @Action(ActionEventClustersGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateEventClustersModel>, { fetch }: ActionEventClustersGetData)
     {
-        const id:          string  = this.store.selectSnapshot(StateCluster.id);
-        const initialized: boolean = StateEventClusters.initialized(getState());
+        const state: StateEventClustersModel = getState();
+
+        const id:          string  = this.store.selectSnapshot(StateEvent.id);
+        const initialized: boolean = StateEventClusters.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -75,13 +79,13 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
                 this.service.get(id)
             ),
             switchMap((data: Record<string, EventCluster>) =>
-                dispatch([
-                    new ActionEventClustersSet(data),
-                    new ActionEventClustersSort()
-                ])
+                dispatch(new ActionEventClustersSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionEventClustersGet() : of())
+                StateEventClusters.getAll(state) ? of() : dispatch(new ActionEventClustersSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionEventClustersGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

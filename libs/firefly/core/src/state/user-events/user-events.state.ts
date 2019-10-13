@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Event, UserEvent } from '@firefly/core/models';
 import { ServiceUserEvents, ServiceEvents } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/state';
 
 import { StateUserEventsModel } from './user-events.state.model';
 import { StateUserEventsOptions } from './user-events.state.options';
@@ -39,6 +39,7 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Selector() static sortType(state: StateUserEventsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserEventsModel):          boolean                   { return Object.keys(StateUserEvents.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserEventsModel):         number                    { return Object.keys(StateUserEvents.data(state)).length; }
+    @Selector() static getAll(state: StateUserEventsModel):        boolean                   { return StateUserEvents.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -61,8 +62,10 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Action(ActionUserEventsGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateUserEventsModel>, { fetch }: ActionUserEventsGetData)
     {
+        const state: StateUserEventsModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserEvents.initialized(getState());
+        const initialized: boolean = StateUserEvents.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -74,13 +77,13 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
                 this.service.get(id)
             ),
             switchMap((data: Record<string, UserEvent>) =>
-                dispatch([
-                    new ActionUserEventsSet(data),
-                    new ActionUserEventsSort()
-                ])
+                dispatch(new ActionUserEventsSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionUserEventsGet() : of())
+                StateUserEvents.getAll(state) ? of() : dispatch(new ActionUserEventsSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionUserEventsGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

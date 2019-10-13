@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Image, UserImage } from '@firefly/core/models';
 import { ServiceUserImages, ServiceImages } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/state';
 
 import { StateUserImagesModel } from './user-images.state.model';
 import { StateUserImagesOptions } from './user-images.state.options';
@@ -39,6 +39,7 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Selector() static sortType(state: StateUserImagesModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserImagesModel):          boolean                   { return Object.keys(StateUserImages.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserImagesModel):         number                    { return Object.keys(StateUserImages.data(state)).length; }
+    @Selector() static getAll(state: StateUserImagesModel):        boolean                   { return StateUserImages.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -61,8 +62,10 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Action(ActionUserImagesGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateUserImagesModel>, { fetch }: ActionUserImagesGetData)
     {
+        const state: StateUserImagesModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserImages.initialized(getState());
+        const initialized: boolean = StateUserImages.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -74,13 +77,13 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
                 this.service.get(id)
             ),
             switchMap((data: Record<string, UserImage>) =>
-                dispatch([
-                    new ActionUserImagesSet(data),
-                    new ActionUserImagesSort()
-                ])
+                dispatch(new ActionUserImagesSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionUserImagesGet() : of())
+                StateUserImages.getAll(state) ? of() : dispatch(new ActionUserImagesSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionUserImagesGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

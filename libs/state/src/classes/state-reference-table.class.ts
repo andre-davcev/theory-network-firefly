@@ -18,6 +18,8 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
 
     public sort(state: StateReferenceTableModel<R, T>): Array<string>
     {
+        const getAll:    boolean           = state.pageSize === Default.None;
+        const lookup:    Record<string, T> = state.lookup;
         const data:      Record<string, R> = state.data;
         const field:     string            = state.sortField;
         const ascending: boolean           = state.sortAscending;
@@ -35,8 +37,8 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
             keys(data).
             sort((keyA: string, keyB: string) =>
             {
-                a = data[keyA].sort[name];
-                b = data[keyB].sort[name];
+                a = getAll ? lookup[keyA][field] : data[keyA].sort[field];
+                b = getAll ? lookup[keyB][field] : data[keyB].sort[field];
                 sort = 0;
 
                 if (type === TypeOf.String)
@@ -63,29 +65,27 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
 
     public page(state: StateReferenceTableModel<R, T>, service: ServiceBase<T>): Observable<Partial<S>>
     {
-        const sort: boolean = Object.keys(state.sortFields).length > 0;
+        const sort:       boolean           = Object.keys(state.sortFields).length > 0;
+        const pageSize:   number            = state.pageSize;
+        const getAll:     boolean           = pageSize === Default.None;
+        const list:       Array<T>          = state.list;
+        const keys:       Array<string>     = state.keys;
+        const keysLength: number            = keys.length;
+        const finished:   boolean           = list.length === keysLength;
+        const lookup:     Record<string, T> = state.lookup;
+        const start:      number            = getAll ? 0 : state.offset;
 
-        const keys:     Array<string>     = state.keys;
-        const lookup:   Record<string, T> = state.lookup;
-        const list:     Array<T>          = state.list;
-        const pageSize: number            = state.pageSize;
-        const offset:   number            = state.offset;
-        const length:   number            = keys.length;
-
-        let end: number = length;
-
-        if (pageSize !== Default.None)
-        {
-            end = (offset + pageSize) > length ? length : (offset + pageSize);
-        }
-
-        end -= 1;
-
-        return offset >= length ?
+        return finished ?
             of({}) :
-            of(keys.slice(offset, end)).
+            of().
             pipe
             (
+                map(() =>
+                    (!getAll ? keysLength : (start + pageSize) > keysLength ? keysLength : (start + pageSize)) - 1
+                ),
+                map((end: number) =>
+                    keys.slice(start, end)
+                ),
                 map((slice: Array<string>) =>
                     slice.map((id: string) =>
                         lookup[id] != null ?
@@ -101,6 +101,9 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
                 switchMap((slice$: Array<Observable<T>>) =>
                     forkJoin(slice$)
                 ),
+                map((slice: Array<T>) =>
+                    sort && getAll ? this.sort(state) : slice
+                ),
                 tap((slice: Array<T>) =>
                     ({
                         list:
@@ -111,7 +114,7 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
 
                         lookup,
 
-                        offset: end + 1
+                        offset: list.length + 1
                     })
                 )
             );
