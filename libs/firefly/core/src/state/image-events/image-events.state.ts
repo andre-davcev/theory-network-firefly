@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Event, ImageEvent } from '@firefly/core/models';
 import { ServiceImageEvents, ServiceEvents } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { SortField, StateReferenceTable, Default } from '@theory/state';
 
 import { StateImageEventsModel } from './image-events.state.model';
 import { StateImageEventsOptions } from './image-events.state.options';
@@ -39,6 +39,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Selector() static sortType(state: StateImageEventsModel):      TypeOf                     { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateImageEventsModel):          boolean                    { return Object.keys(StateImageEvents.sortFields(state)).length > 0; }
     @Selector() static count(state: StateImageEventsModel):         number                     { return Object.keys(StateImageEvents.data(state)).length; }
+    @Selector() static getAll(state: StateImageEventsModel):        boolean                    { return StateImageEvents.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -61,8 +62,10 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Action(ActionImageEventsGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateImageEventsModel>, { fetch }: ActionImageEventsGetData)
     {
+        const state: StateImageEventsModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateImage.id);
-        const initialized: boolean = StateImageEvents.initialized(getState());
+        const initialized: boolean = StateImageEvents.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -74,13 +77,13 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
                 this.service.get(id)
             ),
             switchMap((data: Record<string, ImageEvent>) =>
-                dispatch([
-                    new ActionImageEventsSet(data),
-                    new ActionImageEventsSort()
-                ])
+                dispatch(new ActionImageEventsSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionImageEventsGet() : of())
+                StateImageEvents.getAll(state) ? of() : dispatch(new ActionImageEventsSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionImageEventsGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

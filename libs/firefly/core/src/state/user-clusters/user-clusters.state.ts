@@ -5,7 +5,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Cluster, UserCluster } from '@firefly/core/models';
 import { ServiceUserClusters, ServiceClusters } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/state';
 
 import { StateUserClustersModel } from './user-clusters.state.model';
 import { StateUserClustersOptions } from './user-clusters.state.options';
@@ -39,6 +39,7 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Selector() static sortType(state: StateUserClustersModel):      TypeOf                      { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserClustersModel):          boolean                     { return Object.keys(StateUserClusters.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserClustersModel):         number                      { return Object.keys(StateUserClusters.data(state)).length; }
+    @Selector() static getAll(state: StateUserClustersModel):        boolean                     { return StateUserClusters.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -61,8 +62,10 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Action(ActionUserClustersGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateUserClustersModel>, { fetch }: ActionUserClustersGetData)
     {
+        const state: StateUserClustersModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserClusters.initialized(getState());
+        const initialized: boolean = StateUserClusters.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -77,10 +80,10 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
                 dispatch(new ActionUserClustersSet(data))
             ),
             switchMap(() =>
-                dispatch(new ActionUserClustersSort())
+                StateUserClusters.getAll(state) ? of() : dispatch(new ActionUserClustersSort())
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionUserClustersGet() : of())
+                fetch ? dispatch(new ActionUserClustersGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

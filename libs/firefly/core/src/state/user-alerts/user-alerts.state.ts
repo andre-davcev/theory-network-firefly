@@ -4,7 +4,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Alert, UserAlert } from '@firefly/core/models';
 import { ServiceUserAlerts, ServiceAlerts } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/state';
 
 import { StateUserAlertsModel } from './user-alerts.state.model';
 import { StateUserAlertsOptions } from './user-alerts.state.options';
@@ -39,6 +39,7 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Selector() static sortType(state: StateUserAlertsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserAlertsModel):          boolean                   { return Object.keys(StateUserAlerts.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserAlertsModel):         number                    { return Object.keys(StateUserAlerts.data(state)).length; }
+    @Selector() static getAll(state: StateUserAlertsModel):        boolean                   { return StateUserAlerts.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -61,8 +62,10 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Action(ActionUserAlertsGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateUserAlertsModel>, { fetch }: ActionUserAlertsGetData)
     {
+        const state: StateUserAlertsModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserAlerts.initialized(getState());
+        const initialized: boolean = StateUserAlerts.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -74,13 +77,13 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
                 this.service.get(id)
             ),
             switchMap((data: Record<string, UserAlert>) =>
-                dispatch([
-                    new ActionUserAlertsSet(data),
-                    new ActionUserAlertsSort()
-                ])
+                dispatch(new ActionUserAlertsSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionUserAlertsGet() : of())
+                StateUserAlerts.getAll(state) ? of() : dispatch(new ActionUserAlertsSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionUserAlertsGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })

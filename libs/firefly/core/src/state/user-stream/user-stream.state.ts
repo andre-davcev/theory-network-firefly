@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { StreamItem, UserStreamItem } from '@firefly/core/models';
 import { ServiceUserStream, ServiceStreamItems } from '@firefly/core/services';
-import { SortField, StateReferenceTable } from '@theory/state';
+import { SortField, StateReferenceTable, Default } from '@theory/state';
 
 import { StateUserStreamModel } from './user-stream.state.model';
 import { StateUserStreamOptions } from './user-stream.state.options';
@@ -39,6 +39,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Selector() static sortType(state: StateUserStreamModel):      TypeOf                         { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserStreamModel):          boolean                        { return Object.keys(StateUserStream.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserStreamModel):         number                         { return Object.keys(StateUserStream.data(state)).length; }
+    @Selector() static getAll(state: StateUserStreamModel):        boolean                        { return StateUserStream.sort(state) && state.pageSize === Default.None; }
 
     constructor
     (
@@ -61,8 +62,10 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Action(ActionUserStreamGetData)
     getData({ dispatch, patchState, getState }: StateContext<StateUserStreamModel>, { fetch }: ActionUserStreamGetData)
     {
+        const state: StateUserStreamModel = getState();
+
         const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserStream.initialized(getState());
+        const initialized: boolean = StateUserStream.initialized(state);
 
         return initialized ? of() : dispatch
         ([
@@ -74,13 +77,13 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
                 this.service.get(id)
             ),
             switchMap((data: Record<string, UserStreamItem>) =>
-                dispatch([
-                    new ActionUserStreamSet(data),
-                    new ActionUserStreamSort()
-                ])
+                dispatch(new ActionUserStreamSet(data))
             ),
             switchMap(() =>
-                dispatch(fetch ? new ActionUserStreamGet() : of())
+                StateUserStream.getAll(state) ? of() : dispatch(new ActionUserStreamSort())
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionUserStreamGet()) : of()
             ),
             map(() =>
                 patchState({ initialized: true })
