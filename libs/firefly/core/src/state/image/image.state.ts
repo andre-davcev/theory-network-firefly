@@ -80,6 +80,14 @@ export class StateImage
         pipe
         (
             switchMap((object: Image) =>
+                this.service.getDownloadUrl(object.id).
+                pipe
+                (
+                    tap((url: string) => object.url = url),
+                    map(() => object)
+                )
+            ),
+            switchMap((object: Image) =>
                 dispatch
                 ([
                     new ActionImageSet(object)

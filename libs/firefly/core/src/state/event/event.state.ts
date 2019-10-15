@@ -1,4 +1,4 @@
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Observable, of, forkJoin } from 'rxjs';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
@@ -87,6 +87,14 @@ export class StateEvent
         return this.service.snapshot(payload).
         pipe
         (
+            switchMap((object: Event) =>
+                this.service.getDownloadUrl(object.imageId).
+                pipe
+                (
+                    tap((url: string) => object.imageUrl = url),
+                    map(() => object)
+                )
+            ),
             switchMap((object: Event) =>
                 dispatch
                 ([

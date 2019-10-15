@@ -81,6 +81,14 @@ export class StateIcon
         pipe
         (
             switchMap((object: Icon) =>
+                this.service.getDownloadUrl(object.id).
+                pipe
+                (
+                    tap((url: string) => object.url = url),
+                    map(() => object)
+                )
+            ),
+            switchMap((object: Icon) =>
                 dispatch
                 ([
                     new ActionIconSet(object)

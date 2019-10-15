@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 import { of, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
@@ -63,6 +63,14 @@ export class StateSubscription
         return this.service.snapshot(payload).
         pipe
         (
+            switchMap((object: Subscription) =>
+                this.service.getDownloadUrl(object.iconId).
+                pipe
+                (
+                    tap((url: string) => object.iconUrl = url),
+                    map(() => object)
+                )
+            ),
             switchMap((object: Subscription) =>
                 dispatch
                 ([
