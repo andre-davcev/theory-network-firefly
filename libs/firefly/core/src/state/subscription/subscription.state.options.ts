@@ -23,8 +23,8 @@ export const StateSubscriptionOptions: StoreOptions<StateSubscriptionModel> =
             draft       : false,
 
             tagline         : null,
-            imageId         : undefined,
-            imageUrl        : undefined,
+            iconId          : undefined,
+            iconUrl         : undefined,
             eventCount      : 0,
             subscriberCount : 0,
             on              : false

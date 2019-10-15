@@ -67,7 +67,7 @@ export class StateSubscription
                 dispatch
                 ([
                     new ActionSubscriptionSet(object),
-                    new ActionIconGet(object.imageId)
+                    new ActionIconGet(object.iconId)
                 ])
             )
         );
@@ -85,7 +85,7 @@ export class StateSubscription
         return dispatch
         ([
             new ActionSubscriptionSet(object),
-            new ActionIconSetId(object.imageId)
+            new ActionIconSetId(object.iconId)
         ]);
     }
 

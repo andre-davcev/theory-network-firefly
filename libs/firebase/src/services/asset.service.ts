@@ -4,35 +4,31 @@ import { switchMap, map, last } from 'rxjs/operators';
 import { StorageFormat } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
-import { CoreEnum, ValidatorsExtended } from '@theory/core';
+import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Image, Icon, Asset } from '@firefly/core/models';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { ServiceBase } from '@theory/firebase';
-import { ServiceUsers } from './users.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
-export class ServiceMedia<T> extends ServiceBase<Image | Icon>
+export class ServiceAsset<T> extends ServiceBase<T>
 {
-    public storage:     AngularFireStorage;
-    public user:        ServiceUsers;
-    public webview:     WebView;
+    public storage: AngularFireStorage;
+    public webview: WebView;
 
     constructor
     (
         name:        string,
         firestore:   AngularFirestore,
+        formBuilder: FormBuilder,
         storage:     AngularFireStorage,
-        user:        ServiceUsers,
         webview:     WebView,
-        formBuilder: FormBuilder
+        reference?:  boolean
     )
     {
-        super(name, firestore, formBuilder);
+        super(name, firestore, formBuilder, reference);
 
         this.storage     = storage;
-        this.user        = user;
         this.webview     = webview;
     }
 
@@ -61,9 +57,9 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
         );
     }
 
-    public id(asset: Asset): string
+    public id(asset: T): string
     {
-        return `${asset.userId}-${this.name}-${new Date().getTime()}.png`;
+        return `${asset['userId']}-${this.name}-${new Date().getTime()}.png`;
     }
 
     public toId(bucketPath: string): string
@@ -96,28 +92,4 @@ export class ServiceMedia<T> extends ServiceBase<Image | Icon>
     {
         return this.isNormalized(url) ? url : this.webview.convertFileSrc(url);
     }
-
-    public createWithUpload<M extends Icon | Image>(data: M, imagePath: string): Observable<M>
-    {
-        data.id = this.id(data);
-
-        const bucketPath: string = this.toBucketPath(data.id);
-
-        return this.upload(imagePath, bucketPath).pipe
-        (
-            switchMap(() => this.set(data)),
-            map(() => data)
-        );
-    }
-
-    public formCreate(object: Icon): FormGroup
-    {
-        return super.formCreate
-        ({
-            ...object,
-
-            name        : [object.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
-            description : [object.description, [Validators.required, ValidatorsExtended.minLength(1)]]
-        });
-    }
-}
+  }

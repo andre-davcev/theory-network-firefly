@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ServiceBase } from '@theory/firebase';
+import { ServiceAsset } from '@theory/firebase';
 import { UserCluster } from '@firefly/core/models';
 import { FormBuilder } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUserClusters extends ServiceBase<Record<string, UserCluster>>
+export class ServiceUserClusters extends ServiceAsset<Record<string, UserCluster>>
 {
-    constructor(firestore: AngularFirestore, formBuilder: FormBuilder)
+    constructor
+    (
+        firestore:   AngularFirestore,
+        formBuilder: FormBuilder,
+        storage:     AngularFireStorage,
+        webview:     WebView
+    )
     {
-        super('user-clusters', firestore, formBuilder, true);
+        super('user-clusters', firestore, formBuilder, storage, webview, true);
     }
 }

@@ -6,7 +6,7 @@ import { CoreUtil, TypeOf } from '@theory/core';
 import { StateCluster } from '@firefly/core/state/cluster';
 import { Event, ClusterEvent } from '@firefly/core/models';
 import { ServiceClusterEvents, ServiceEvents } from '@firefly/core/services';
-import { StateReferenceTable, Default } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateClusterEventsModel } from './cluster-events.state.model';
 import { StateClusterEventsOptions } from './cluster-events.state.options';
@@ -40,7 +40,7 @@ export class StateClusterEvents extends StateReferenceTable<ClusterEvent, Event,
     @Selector() static sortType(state: StateClusterEventsModel):      TypeOf                       { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateClusterEventsModel):          boolean                      { return Object.keys(StateClusterEvents.sortFields(state)).length > 0; }
     @Selector() static count(state: StateClusterEventsModel):         number                       { return Object.keys(StateClusterEvents.data(state)).length; }
-    @Selector() static getAll(state: StateClusterEventsModel):        boolean                      { return StateClusterEvents.sort(state) && state.pageSize === Default.None; }
+    @Selector() static getAll(state: StateClusterEventsModel):        boolean                      { return StateClusterEvents.sort(state) && state.sortByEntity; }
 
     constructor
     (

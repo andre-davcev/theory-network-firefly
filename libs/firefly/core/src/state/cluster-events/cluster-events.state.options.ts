@@ -16,10 +16,12 @@ export const StateClusterEventsOptions: StoreOptions<StateClusterEventsModel> =
         keys:          [],
         list:          [],
         offset:        0,
-        pageSize:      Default.None,
+        pageSize:      Default.PageSize,
         initialized:   false,
         sortField:     'name',
         sortAscending: true,
+        sortByEntity:  true,
+        imageIdKey:    undefined,
 
         sortFields:
         {

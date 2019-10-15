@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ServiceBase } from '@theory/firebase';
+import { ServiceAsset } from '@theory/firebase';
 import { UserEvent } from '@firefly/core/models';
 import { FormBuilder } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUserEvents extends ServiceBase<Record<string, UserEvent>>
+export class ServiceUserEvents extends ServiceAsset<Record<string, UserEvent>>
 {
-    constructor(firestore: AngularFirestore, formBuilder: FormBuilder)
+    constructor
+    (
+        firestore:   AngularFirestore,
+        formBuilder: FormBuilder,
+        storage:     AngularFireStorage,
+        webview:     WebView
+    )
     {
-        super('user-events', firestore, formBuilder, true);
+        super('user-events', firestore, formBuilder, storage, webview, true);
     }
 }

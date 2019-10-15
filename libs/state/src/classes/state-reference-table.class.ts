@@ -2,8 +2,8 @@ import { ReferenceTable, StateReferenceTableModel } from '../interfaces';
 import { TypeOf } from '@theory/core';
 import { Observable, of, forkJoin } from 'rxjs';
 import { Default } from '../enums';
-import { ServiceBase, Model } from '@theory/firebase';
-import { take, tap, switchMap, map } from 'rxjs/operators';
+import { Model, ServiceAsset } from '@theory/firebase';
+import { tap, switchMap, map } from 'rxjs/operators';
 
 export class StateReferenceTable<R extends ReferenceTable, T extends Model, S extends StateReferenceTableModel<R, T>>
 {
@@ -63,61 +63,67 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
             });
     }
 
-    public page(state: StateReferenceTableModel<R, T>, service: ServiceBase<T>): Observable<Partial<S>>
+    public page(state: StateReferenceTableModel<R, T>, service: ServiceAsset<T>): Observable<Partial<S>>
     {
-        const sort:       boolean           = Object.keys(state.sortFields).length > 0;
-        const pageSize:   number            = state.pageSize;
-        const getAll:     boolean           = pageSize === Default.None;
-        const list:       Array<T>          = state.list;
-        const keys:       Array<string>     = state.keys;
-        const keysLength: number            = keys.length;
-        const finished:   boolean           = list.length === keysLength;
-        const lookup:     Record<string, T> = state.lookup;
-        const start:      number            = getAll ? 0 : state.offset;
+        let keys: Array<string> = state.keys;
 
-        return finished ?
-            of({}) :
-            of().
-            pipe
-            (
-                map(() =>
-                    (!getAll ? keysLength : (start + pageSize) > keysLength ? keysLength : (start + pageSize)) - 1
-                ),
-                map((end: number) =>
-                    keys.slice(start, end)
-                ),
-                map((slice: Array<string>) =>
-                    slice.map((id: string) =>
-                        lookup[id] != null ?
+        const getAll:       boolean           = Object.keys(state.sortFields).length > 0 && state.sortByEntity;
+        const pageSize:     number            = state.pageSize;
+        const list:         Array<T>          = state.list;
+        const keysLength:   number            = keys.length;
+        const finished:     boolean           = list.length === keysLength;
+        const lookup:       Record<string, T> = state.lookup;
+
+        const start: number = state.offset;
+        const end:   number = ((start + pageSize) > keysLength ? keysLength : (start + pageSize)) - 1;
+
+        const imageIdKey:  string = state.imageIdKey;
+        const imageUrlKey: string = imageIdKey == null ? null : imageIdKey === 'id' ? 'url' : imageIdKey.replace('Id', 'Url');
+
+        return finished ? of({}) : of().
+        pipe
+        (
+            map(() =>
+                getAll ? keys : keys.slice(start, end)
+            ),
+            map((slice: Array<string>) =>
+                slice.map((id: string) =>
+                    lookup[id] != null ?
                         of(lookup[id]) :
-                        (service.valuesChanges(id) as Observable<T>).
-                        pipe
-                        (
-                            take(1),
-                            tap((object: T) => lookup[id] = object)
-                        )
+                        service.snapshot(id).pipe(tap((object: T) => lookup[id] = object))
+                )
+            ),
+            switchMap((slice$: Array<Observable<T>>) =>
+                forkJoin(slice$)
+            ),
+            tap(() =>
+                (keys = getAll ? this.sort(state) : keys)
+            ),
+            map((entities: Array<T>) =>
+                !getAll ? entities : keys.slice(start, end).map((key: string) => lookup[key])
+            ),
+            switchMap((entities: Array<T>) =>
+                forkJoin
+                (
+                    entities.map((entity: T) => imageIdKey == null ?
+                        of(entity) :
+                        service.getDownloadUrl(entity[imageIdKey]).pipe(map((url: string) => ({ ...entity, [imageUrlKey]: url })))
                     )
-                ),
-                switchMap((slice$: Array<Observable<T>>) =>
-                    forkJoin(slice$)
-                ),
-                map((slice: Array<T>) =>
-                    sort && getAll ? this.sort(state) : slice
-                ),
-                tap((slice: Array<T>) =>
-                    ({
-                        list:
-                        [
-                            ...list,
-                            ...slice
-                        ],
-
-                        lookup,
-
-                        offset: list.length + 1
-                    })
                 )
-            );
+            ),
+            tap((slice: Array<T>) =>
+            ({
+                keys,
+                lookup,
+                offset: list.length + 1,
+
+                list:
+                [
+                    ...list,
+                    ...slice
+                ]
+            }))
+        );
     }
 
     public addData
@@ -127,11 +133,12 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
         refPartial: Partial<R> = {}
     ): Partial<StateReferenceTableModel<R, T>>
     {
-        const id:     string                     = entity.id;
-        const data:   Record<string, R>          = state.data;
-        const lookup: Record<string, T>          = state.lookup;
-        const list:   Array<T>                   = state.list;
+        const id:         string                 = entity.id;
+        const data:       Record<string, R>      = state.data;
+        const lookup:     Record<string, T>      = state.lookup;
+        const list:       Array<T>               = state.list;
         const sortFields: Record<string, TypeOf> = state.sortFields;
+        const sortLater:  boolean                = Object.keys(state.sortFields).length === 0 || state.sortByEntity;
 
         const refTable: R =
         {
@@ -145,7 +152,7 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
         lookup[id] = entity;
         state.data = data;
 
-        const keys:  Array<string> = this.sort(state);
+        const keys:  Array<string> = sortLater ? Object.keys(data) : this.sort(state);
         const index: number = keys.findIndex((key: string) => key === id)
 
         if (offset >= index)
