@@ -1,7 +1,7 @@
 
 import { FormGroup, } from '@angular/forms';
 import { Observable, of, forkJoin } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 
@@ -72,6 +72,14 @@ export class StateCluster
         return this.service.snapshot(payload).
         pipe
         (
+            switchMap((object: Cluster) =>
+                this.service.getDownloadUrl(object.iconId).
+                pipe
+                (
+                    tap((url: string) => object.iconUrl = url),
+                    map(() => object)
+                )
+            ),
             switchMap((object: Cluster) =>
                 dispatch
                 ([
