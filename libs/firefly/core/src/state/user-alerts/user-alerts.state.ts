@@ -39,7 +39,7 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
     @Selector() static sortType(state: StateUserAlertsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserAlertsModel):          boolean                   { return Object.keys(StateUserAlerts.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserAlertsModel):         number                    { return Object.keys(StateUserAlerts.data(state)).length; }
-    @Selector() static getAll(state: StateUserAlertsModel):        boolean                   { return StateUserAlerts.sort(state) && state.pageSize === Default.None; }
+    @Selector() static getAll(state: StateUserAlertsModel):        boolean                   { return StateUserAlerts.sort(state) && state.sortByEntity; }
 
     constructor
     (

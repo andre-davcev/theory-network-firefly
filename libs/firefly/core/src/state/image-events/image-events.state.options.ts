@@ -19,6 +19,8 @@ export const StateImageEventsOptions: StoreOptions<StateImageEventsModel> =
         initialized:   false,
         sortField:     'name',
         sortAscending: true,
+        sortByEntity:  false,
+        imageIdKey:    undefined,
 
         sortFields: {}
     }

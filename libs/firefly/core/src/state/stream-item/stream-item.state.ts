@@ -67,7 +67,7 @@ export class StateStreamItem
                 dispatch
                 ([
                     new ActionStreamItemSet(object),
-                    new ActionIconGet(object.imageId)
+                    new ActionIconGet(object.iconId)
                 ])
             )
         );
@@ -85,7 +85,7 @@ export class StateStreamItem
         return dispatch
         ([
             new ActionStreamItemSet(object),
-            new ActionIconSetId(object.imageId)
+            new ActionIconSetId(object.iconId)
         ]);
     }
 

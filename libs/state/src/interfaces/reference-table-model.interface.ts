@@ -12,4 +12,6 @@ export interface StateReferenceTableModel<R, T>
     sortFields:    Record<string, TypeOf>;
     sortField:     string;
     sortAscending: boolean;
+    sortByEntity:  boolean;
+    imageIdKey:    string;
 }

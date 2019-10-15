@@ -9,22 +9,22 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
     {
         empty :
         {
-          version     : undefined,
-          id          : undefined,
-          dateCreated : undefined,
-          dateUpdated : undefined,
+            version     : undefined,
+            id          : undefined,
+            dateCreated : undefined,
+            dateUpdated : undefined,
 
-          userId      : undefined,
-          name        : null,
-          description : null,
-          private     : false,
-          draft       : false,
+            userId      : undefined,
+            name        : null,
+            description : null,
+            private     : false,
+            draft       : false,
 
-          tagline         : null,
-          imageId         : undefined,
-          imageUrl        : null,
-          eventCount      : 0,
-          subscriberCount : 0
+            tagline         : null,
+            iconId          : undefined,
+            iconUrl         : null,
+            eventCount      : 0,
+            subscriberCount : 0
         },
 
         form :

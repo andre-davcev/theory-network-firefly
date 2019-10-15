@@ -1,30 +1,27 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs';
-import { switchMap, filter, take, map, mergeMap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { Icon } from '@firefly/core/models';
-import { ServiceMedia } from './media.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { ServiceUsers } from './users.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
-import { Cluster } from '@firefly/core/models';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ServiceAsset } from '@theory/firebase';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceIcons extends ServiceMedia<Icon>
+export class ServiceIcons extends ServiceAsset<Icon>
 {
     constructor
     (
         firestore:   AngularFirestore,
-        storage:     AngularFireStorage,
-        user:        ServiceUsers,
-        webview:     WebView,
         formBuilder: FormBuilder,
+        storage:     AngularFireStorage,
+        webview:     WebView
     )
     {
-        super('icons', firestore, storage, user, webview, formBuilder);
+        super('icons', firestore, formBuilder, storage, webview);
     }
 
     public formCreate(object: Icon): FormGroup
@@ -35,6 +32,20 @@ export class ServiceIcons extends ServiceMedia<Icon>
         });
     }
 
+    public createWithUpload(data: Icon, imagePath: string): Observable<Icon>
+    {
+        data.id = this.id(data);
+
+        const bucketPath: string = this.toBucketPath(data.id);
+
+        return this.upload(imagePath, bucketPath).pipe
+        (
+            switchMap(() => this.set(data)),
+            map(() => data)
+        );
+    }
+
+/*
     getIcons(userId: String): Observable<Array<Icon>>
     {
         return this.firestore.collection<Icon>('icons', ref =>
@@ -60,6 +71,7 @@ export class ServiceIcons extends ServiceMedia<Icon>
     {
         return `${cluster.userId}-${this.name}-${new Date().getTime()}.png`;
     }
+
 
     public fromCluster(cluster: Cluster): Icon
     {
@@ -113,4 +125,5 @@ export class ServiceIcons extends ServiceMedia<Icon>
             take(1)
         );
     }
+*/
 }

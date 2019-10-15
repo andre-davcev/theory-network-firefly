@@ -42,7 +42,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Selector() static sortType(state: StateUserSubscriptionsModel):      TypeOf                           { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserSubscriptionsModel):          boolean                          { return Object.keys(StateUserSubscriptions.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserSubscriptionsModel):         number                           { return Object.keys(StateUserSubscriptions.data(state)).length; }
-    @Selector() static getAll(state: StateUserSubscriptionsModel):        boolean                          { return StateUserSubscriptions.sort(state) && state.pageSize === Default.None; }
+    @Selector() static getAll(state: StateUserSubscriptionsModel):        boolean                          { return StateUserSubscriptions.sort(state) && state.sortByEntity; }
 
     constructor
     (
@@ -55,7 +55,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     }
 
     @Action(ActionUserSubscriptionsReset)
-    reset({ patchState, getState }: StateContext<StateUserSubscriptionsModel>)
+    reset({ patchState }: StateContext<StateUserSubscriptionsModel>)
     {
         const defaults: StateUserSubscriptionsModel = CoreUtil.clone<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions.defaults);
 

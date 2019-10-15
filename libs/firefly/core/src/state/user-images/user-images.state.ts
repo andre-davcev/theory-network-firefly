@@ -39,7 +39,7 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
     @Selector() static sortType(state: StateUserImagesModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserImagesModel):          boolean                   { return Object.keys(StateUserImages.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserImagesModel):         number                    { return Object.keys(StateUserImages.data(state)).length; }
-    @Selector() static getAll(state: StateUserImagesModel):        boolean                   { return StateUserImages.sort(state) && state.pageSize === Default.None; }
+    @Selector() static getAll(state: StateUserImagesModel):        boolean                   { return StateUserImages.sort(state) && state.sortByEntity; }
 
     constructor
     (

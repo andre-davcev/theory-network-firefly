@@ -20,6 +20,8 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         initialized:   false,
         sortField:     'dateCreated',
         sortAscending: true,
+        sortByEntity:  false,
+        imageIdKey:    'imageId',
 
         sortFields:
         {

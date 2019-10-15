@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable, from, forkJoin } from 'rxjs';
-import { switchMap, take, filter, map, tap } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { switchMap, take, filter, map } from 'rxjs/operators';
 
 import { Cluster } from '@firefly/core/models';
-import { ServiceBase } from '@theory/firebase';
+import { ServiceAsset } from '@theory/firebase';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { ServiceImages } from './images.service';
 import { FormGroup, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
-import { ValidatorsExtended, CoreUtil } from '@theory/core';
+import { ValidatorsExtended } from '@theory/core';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 
 @Injectable({ providedIn: 'root' })
-export class ServiceClusters extends ServiceBase<Cluster>
+export class ServiceClusters extends ServiceAsset<Cluster>
 {
     constructor
     (
         firestore: AngularFirestore,
-        private storage: AngularFireStorage,
-        private image: ServiceImages,
-        formBuilder: FormBuilder
+        formBuilder: FormBuilder,
+        storage: AngularFireStorage,
+        webview: WebView
     )
     {
-        super('clusters', firestore, formBuilder);
+        super('clusters', firestore, formBuilder, storage, webview);
     }
 
     private static validateIcon(): ValidatorFn
@@ -47,7 +47,7 @@ export class ServiceClusters extends ServiceBase<Cluster>
             description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(1)]],
 
             tagline   : [cluster.tagline, ValidatorsExtended.minLength(1)],
-            imageId   : [cluster.imageId, [ServiceClusters.validateIcon()]]
+            imageId   : [cluster.iconId, [ServiceClusters.validateIcon()]]
         })
     }
 
@@ -114,7 +114,7 @@ export class ServiceClusters extends ServiceBase<Cluster>
         cluster.id = id;
         console.log(cluster.id);
         cluster.userId = 'myuser';
-        cluster.imageId = 'https://loremflickr.com/640/360';
+        cluster.iconId = 'https://loremflickr.com/640/360';
         const document: AngularFirestoreDocument<Cluster> = this.collection.doc(id) as AngularFirestoreDocument<Cluster>;
 
         return from(document.set(cluster)).pipe
@@ -132,6 +132,7 @@ export class ServiceClusters extends ServiceBase<Cluster>
       this.patchValue(form, 'iconId', iconId);
     }
 
+/*
     public valuesChangesClusters(keys: Record<string, string> | Array<string>, empty: Cluster): Observable<Record<string, Cluster> | Array<Cluster>>
     {
         const array$: Observable<Array<Cluster>> = this.valuesChangesFK(keys).
@@ -140,11 +141,11 @@ export class ServiceClusters extends ServiceBase<Cluster>
             switchMap((clusters: Array<Cluster>) =>
                 forkJoin(clusters.map((cluster: Cluster) =>
                     this.storage.
-                    ref(this.image.toBucketPath(cluster.imageId)).
+                    ref(this.image.toBucketPath(cluster.iconId)).
                     getDownloadURL().
                     pipe
                     (
-                        tap((url: string) => cluster.imageId = url),
+                        tap((url: string) => cluster.iconId = url),
                         map(() => cluster)
                     )
                 ))
@@ -172,4 +173,5 @@ export class ServiceClusters extends ServiceBase<Cluster>
                 )
             );
     }
+*/
 }

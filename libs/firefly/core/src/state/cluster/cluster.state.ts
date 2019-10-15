@@ -76,7 +76,7 @@ export class StateCluster
                 dispatch
                 ([
                     new ActionClusterSet(object),
-                    new ActionIconGet(object.imageId)
+                    new ActionIconGet(object.iconId)
                 ])
             )
         );
@@ -94,7 +94,7 @@ export class StateCluster
         return dispatch
         ([
             new ActionClusterSet(object),
-            new ActionIconSetId(object.imageId)
+            new ActionIconSetId(object.iconId)
         ]);
     }
 
@@ -199,7 +199,7 @@ export class StateCluster
         return dispatch
         ([
             new ActionIconClustersAdd(StateCluster.data(getState())),
-            new ActionClusterPatch({ imageId: this.store.selectSnapshot(StateIcon.id)})
+            new ActionClusterPatch({ iconId: this.store.selectSnapshot(StateIcon.id)})
         ]);
     }
 
@@ -209,7 +209,7 @@ export class StateCluster
         return dispatch
         ([
             new ActionIconClustersRemove(StateCluster.id(getState())),
-            new ActionClusterPatch({ imageId: undefined })
+            new ActionClusterPatch({ iconId: undefined })
         ]);
     }
 }

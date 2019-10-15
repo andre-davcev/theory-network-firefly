@@ -2,16 +2,24 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User as FirebaseUser, UserInfo } from 'firebase/app';
-import { ServiceBase, AuthProvider } from '@theory/firebase';
+import { AuthProvider, ServiceAsset } from '@theory/firebase';
 import { User } from '@firefly/core/models';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUsers extends ServiceBase<User>
+export class ServiceUsers extends ServiceAsset<User>
 {
-    constructor(firestore: AngularFirestore, formBuilder: FormBuilder)
+    constructor
+    (
+        firestore:   AngularFirestore,
+        formBuilder: FormBuilder,
+        storage:     AngularFireStorage,
+        webview:     WebView
+    )
     {
-        super('users', firestore, formBuilder);
+        super('users', firestore, formBuilder, storage, webview);
     }
 
     public parseId(authData: FirebaseUser): string

@@ -2,28 +2,25 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 
-import { ServiceMedia } from './media.service';
 import { Image, Event } from '../models';
-import { ServiceUsers } from './users.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { Observable } from 'rxjs';
-import { switchMap, mergeMap, map } from 'rxjs/operators';
-import { CoreEnum } from '@theory/core/enums';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+import { ServiceAsset } from '@theory/firebase';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceImages extends ServiceMedia<Image>
+export class ServiceImages extends ServiceAsset<Image>
 {
     constructor
     (
         firestore:   AngularFirestore,
-        storage:     AngularFireStorage,
         formBuilder: FormBuilder,
-        user:        ServiceUsers,
-        webview:     WebView,
+        storage:     AngularFireStorage,
+        webview:     WebView
     )
     {
-        super('images', firestore, storage, user, webview, formBuilder);
+        super('images', firestore, formBuilder, storage, webview);
     }
 
     public formCreate(object: Image): FormGroup
@@ -32,6 +29,19 @@ export class ServiceImages extends ServiceMedia<Image>
         {
             ...object
         });
+    }
+
+    public createWithUpload(data: Image, imagePath: string): Observable<Image>
+    {
+        data.id = this.id(data);
+
+        const bucketPath: string = this.toBucketPath(data.id);
+
+        return this.upload(imagePath, bucketPath).pipe
+        (
+            switchMap(() => this.set(data)),
+            map(() => data)
+        );
     }
 
     public fromEvent(event: Event): Image
@@ -48,7 +58,7 @@ export class ServiceImages extends ServiceMedia<Image>
 
         return image;
     }
-
+/*
     public createWithUploadFromEvent(event: Event, imagePath: string): Observable<Event>
     {
         const image:      Image = this.fromEvent(event);
@@ -69,4 +79,5 @@ export class ServiceImages extends ServiceMedia<Image>
             map(() => event)
         );
     }
+*/
 }

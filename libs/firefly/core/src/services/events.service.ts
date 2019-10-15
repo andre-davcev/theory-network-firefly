@@ -3,24 +3,28 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Event, Time, Location } from '@firefly/core/models';
-import { ServiceBase } from '@theory/firebase';
+import { ServiceAsset } from '@theory/firebase';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, ValidatorsExtended } from '@theory/core';
 import { RepeatType } from '@firefly/core/enums';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { firestore as fire } from 'firebase/app';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceEvents extends ServiceBase<Event>
+export class ServiceEvents extends ServiceAsset<Event>
 {
     constructor
     (
-        firestore: AngularFirestore,
-        formBuilder: FormBuilder
+        firestore:   AngularFirestore,
+        formBuilder: FormBuilder,
+        storage:     AngularFireStorage,
+        webview:     WebView
     )
     {
-        super('events', firestore, formBuilder);
+        super('events', firestore, formBuilder, storage, webview);
     }
 
     private static validateTime(): ValidatorFn
