@@ -20,7 +20,7 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     return Promise.all
     ([
         database.collection('user-alerts').doc(id).delete(),
-        database.collection('user-streams').doc(id).delete(),
+        database.collection('user-stream').doc(id).delete(),
         database.collection('user-subscriptions').doc(id).delete()
     ]);
 });
