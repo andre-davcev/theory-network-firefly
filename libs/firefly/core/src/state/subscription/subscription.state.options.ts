@@ -1,7 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateSubscriptionModel } from './subscription.state.model';
-import undefined = require('firebase/empty-import');
 
 export const StateSubscriptionOptions: StoreOptions<StateSubscriptionModel> =
 {

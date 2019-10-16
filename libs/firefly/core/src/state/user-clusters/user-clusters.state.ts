@@ -5,7 +5,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Cluster, UserCluster } from '@firefly/core/models';
 import { ServiceUserClusters, ServiceClusters } from '@firefly/core/services';
-import { StateReferenceTable, Default } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateUserClustersModel } from './user-clusters.state.model';
 import { StateUserClustersOptions } from './user-clusters.state.options';
