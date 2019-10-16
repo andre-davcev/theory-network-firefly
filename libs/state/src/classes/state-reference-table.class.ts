@@ -78,12 +78,12 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
         const lookup:       Record<string, T> = state.lookup;
 
         const start: number = state.offset;
-        const end:   number = ((start + pageSize) > keysLength ? keysLength : (start + pageSize)) - 1;
+        const end:   number = (start + pageSize) > keysLength ? keysLength : (start + pageSize);
 
         const imageIdKey:  string = state.imageIdKey;
         const imageUrlKey: string = imageIdKey == null ? null : imageIdKey === 'id' ? 'url' : imageIdKey.replace('Id', 'Url');
 
-        return finished ? of({}) : of().
+        return finished ? of({}) : of({}).
         pipe
         (
             map(() =>
@@ -114,7 +114,7 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
                     )
                 )
             ),
-            tap((slice: Array<T>) =>
+            map((slice: Array<T>) =>
             ({
                 keys,
                 lookup,
