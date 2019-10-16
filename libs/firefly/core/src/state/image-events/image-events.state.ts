@@ -67,7 +67,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
         const id:          string  = this.store.selectSnapshot(StateImage.id);
         const initialized: boolean = StateImageEvents.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionImageEventsReset()
         ]).

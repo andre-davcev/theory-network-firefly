@@ -67,7 +67,7 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
         const id:          string  = this.store.selectSnapshot(StateUser.id);
         const initialized: boolean = StateUserEvents.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionUserEventsReset()
         ]).

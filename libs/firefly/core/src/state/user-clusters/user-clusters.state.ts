@@ -67,7 +67,7 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
         const id:          string  = this.store.selectSnapshot(StateUser.id);
         const initialized: boolean = StateUserClusters.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionUserClustersReset()
         ]).

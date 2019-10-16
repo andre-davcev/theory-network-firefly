@@ -67,7 +67,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
         const id:          string  = this.store.selectSnapshot(StateUser.id);
         const initialized: boolean = StateUserIcons.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionUserIconsReset()
         ]).
