@@ -19,7 +19,7 @@ export const StateIconClustersOptions: StoreOptions<StateIconClustersModel> =
         initialized:   false,
         sortField:     'name',
         sortAscending: true,
-        sortByEntity:  false,
+        sortByEntity:  true,
         imageIdKey:    undefined,
 
         sortFields: {}

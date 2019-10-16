@@ -23,7 +23,17 @@ onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
     ([
         snapshot.ref.update(object),
         database.collection('image-events').doc(id).create({}),
-        database.collection('user-images').doc(userId).update({ [id]: id })
+        database.collection('user-images').doc(userId).update
+        ({
+            [id]:
+            {
+                sort:
+                {
+                    name:         object.name,
+                    dateCreated : object.dateCreated
+                }
+            }
+        })
     ]);
 });
 

@@ -4,6 +4,7 @@ import { Observable, of, forkJoin } from 'rxjs';
 import { Default } from '../enums';
 import { Model, ServiceAsset } from '@theory/firebase';
 import { tap, switchMap, map } from 'rxjs/operators';
+import undefined = require('firebase/empty-import');
 
 export class StateReferenceTable<R extends ReferenceTable, T extends Model, S extends StateReferenceTableModel<R, T>>
 {
@@ -11,6 +12,9 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
     {
         return Object.
             keys(sortFields).
+            filter((key: string) =>
+                data[key] !== undefined
+            ).
             reduce((sort: Record<string, any>, key: string) =>
                 sort[key] = data[key]
             , {});
@@ -114,8 +118,8 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
             tap((slice: Array<T>) =>
             ({
                 keys,
-                lookup,
-                offset: list.length + 1,
+                lookup,
+                offset: list.length + 1,
 
                 list:
                 [
@@ -213,21 +217,20 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
     {
         const lookup:    Record<string, T> = state.lookup;
         const data:      Record<string, R> = state.data;
+        const id:        string            = after.id;
+        const before:    T                 = lookup[id];
+        const refTable:  R                 = data[id];
         const sortField: string            = state.sortField;
-        const before:    T                 = lookup[after.id];
-
-        const id: string = after.id;
 
         let list: Array<T> = state.list;
+
         lookup[id] = after;
 
-        data[id] =
+        refTable.sort =
         {
-            ...data[id],
-            [sortField]: after[sortField]
+            ...refTable.sort,
+            ...this.getSortFields(state.sortFields, after)
         };
-
-        state.data = data;
 
         if (before[sortField] !== after[sortField])
         {

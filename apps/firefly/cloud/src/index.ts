@@ -4,8 +4,8 @@ initializeApp();
 
 import { ClustersCreate, ClustersDelete, ClustersUpdate } from './clusters';
 import { EventsCreate, EventsDelete, EventsUpdate } from './events';
-import { IconsCreate, IconsDelete } from './icons';
-import { ImagesCreate, ImagesDelete } from './images';
+import { IconsCreate, IconsDelete, IconsUpdate } from './icons';
+import { ImagesCreate, ImagesDelete, ImagesUpdate } from './images';
 import { StorageResize } from './storage';
 import { UserStreamsCreate } from './user-streams';
 import { UserSubscriptionsDelete, UserSubscriptionsUpdate } from './user-subscriptions';
@@ -45,11 +45,13 @@ export
 
     IconsCreate,
     IconsDelete,
+    IconsUpdate,
 
     ImageEventsDelete,
 
     ImagesCreate,
     ImagesDelete,
+    ImagesUpdate,
 
     // StorageResize,
 
