@@ -67,7 +67,7 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
         const id:          string  = this.store.selectSnapshot(StateUser.id);
         const initialized: boolean = StateUserImages.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionUserImagesReset()
         ]).

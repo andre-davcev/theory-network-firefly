@@ -69,7 +69,7 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
         const id:          string  = this.store.selectSnapshot(StateEvent.id);
         const initialized: boolean = StateEventClusters.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionEventClustersReset()
         ]).

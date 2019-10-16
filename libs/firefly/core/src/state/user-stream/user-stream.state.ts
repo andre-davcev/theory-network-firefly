@@ -67,7 +67,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
         const id:          string  = this.store.selectSnapshot(StateUser.id);
         const initialized: boolean = StateUserStream.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionUserStreamReset()
         ]).

@@ -70,7 +70,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
         const id:          string  = this.store.selectSnapshot(StateUser.id);
         const initialized: boolean = StateUserSubscriptions.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionUserSubscriptionsReset()
         ]).

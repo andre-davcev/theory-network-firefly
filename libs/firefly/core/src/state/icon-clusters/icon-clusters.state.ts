@@ -67,7 +67,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
         const id:          string  = this.store.selectSnapshot(StateIcon.id);
         const initialized: boolean = StateIconClusters.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionIconClustersReset()
         ]).

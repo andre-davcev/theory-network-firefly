@@ -68,7 +68,7 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
         const id:          string  = this.store.selectSnapshot(StateCluster.id);
         const initialized: boolean = StateClusterSubscribers.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionClusterSubscribersReset()
         ]).

@@ -67,7 +67,7 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
         const id:          string  = this.store.selectSnapshot(StateUser.id);
         const initialized: boolean = StateUserAlerts.initialized(state);
 
-        return initialized ? of() : dispatch
+        return initialized ? of({}) : dispatch
         ([
             new ActionUserAlertsReset()
         ]).
