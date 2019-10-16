@@ -130,8 +130,7 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
         this.addData
         (
             getState(),
-            entity,
-            { read: false }
+            entity
         );
 
         patchState(partial);

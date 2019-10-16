@@ -19,7 +19,7 @@ export const StateEventClustersOptions: StoreOptions<StateEventClustersModel> =
         initialized:   false,
         sortField:     'name',
         sortAscending: true,
-        sortByEntity:  false,
+        sortByEntity:  true,
         imageIdKey:    undefined,
 
         sortFields: {}

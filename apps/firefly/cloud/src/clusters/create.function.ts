@@ -9,7 +9,7 @@ const ClustersCreate: CloudFunction<DocumentSnapshot> =
 
 firestore.
 document('clusters/{id}').
-onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
+onCreate(async(snapshot: DocumentSnapshot, ontext: EventContext) =>
 {
     const id:     string = snapshot.id;
     const userId: string = snapshot.data().userId;
@@ -24,7 +24,18 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
         snapshot.ref.update(object),
         database.collection('cluster-events').doc(id).create({}),
         database.collection('cluster-subscribers').doc(id).create({}),
-        database.collection('user-clusters').doc(userId).update({ [id]: id })
+
+        database.collection('user-clusters').doc(userId).update
+        ({
+            [id]:
+            {
+                sort:
+                {
+                    name:         object.name,
+                    dateCreated : object.dateCreated
+                }
+            }
+        })
     ]);
 });
 

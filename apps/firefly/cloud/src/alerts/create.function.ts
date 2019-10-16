@@ -22,7 +22,16 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
     return Promise.all
     ([
         snapshot.ref.update(object),
-        database.collection('user-alerts').doc(userId).update({ [id]: id })
+        database.collection('user-alerts').doc(userId).update
+        ({
+            [id]:
+            {
+                sort:
+                {
+                    dateCreated : object.dateCreated
+                }
+            }
+        })
     ]);
 });
 

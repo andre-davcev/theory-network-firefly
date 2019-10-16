@@ -19,7 +19,7 @@ export const StateClusterSubscribersOptions: StoreOptions<StateClusterSubscriber
         initialized:   false,
         sortField:     'email',
         sortAscending: true,
-        sortByEntity:  false,
+        sortByEntity:  true,
         imageIdKey:    undefined,
 
         sortFields: {}

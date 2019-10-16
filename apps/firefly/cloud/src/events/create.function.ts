@@ -23,7 +23,17 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
     ([
         snapshot.ref.update(object),
         database.collection('event-clusters').doc(id).create({}),
-        database.collection('user-events').doc(userId).update({ [id]: id })
+        database.collection('user-events').doc(userId).update
+        ({
+            [id]:
+            {
+                sort:
+                {
+                    name:         object.name,
+                    dateCreated : object.dateCreated
+                }
+            }
+        })
     ]);
 });
 
