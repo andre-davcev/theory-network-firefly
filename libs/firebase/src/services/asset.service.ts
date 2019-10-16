@@ -1,15 +1,15 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, map, last } from 'rxjs/operators';
-import { StorageFormat } from '@theory/firebase';
 import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-
-import { ServiceBase } from '@theory/firebase';
 import { FormBuilder } from '@angular/forms';
+
+import { ServiceBase } from './base.service';
+import { StorageFormat } from '../enums';
 
 export class ServiceAsset<T> extends ServiceBase<T>
 {

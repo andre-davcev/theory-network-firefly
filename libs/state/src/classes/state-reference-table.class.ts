@@ -4,7 +4,6 @@ import { Observable, of, forkJoin } from 'rxjs';
 import { Default } from '../enums';
 import { Model, ServiceAsset } from '@theory/firebase';
 import { tap, switchMap, map } from 'rxjs/operators';
-import undefined = require('firebase/empty-import');
 
 export class StateReferenceTable<R extends ReferenceTable, T extends Model, S extends StateReferenceTableModel<R, T>>
 {

@@ -29,9 +29,9 @@ import {
   ActionEventImageRemove,
   ActionEventSetId
 } from './event.actions';
-import { ActionEventClustersReset, ActionEventClustersDelete } from '../event-clusters';
+import { ActionEventClustersReset, ActionEventClustersDelete } from '../event-clusters/event-clusters.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
-import { ActionImageEventsRemove, ActionImageEventsAdd } from '../image-events';
+import { ActionImageEventsRemove, ActionImageEventsAdd } from '../image-events/image-events.actions';
 
 @State<StateEventModel>(StateEventOptions)
 

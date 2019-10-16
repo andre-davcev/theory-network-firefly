@@ -1,5 +1,5 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+import { DocumentSnapshot, Firestore, DocumentReference } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
 import { ServiceFirestore, Version } from '../library';
 
@@ -31,8 +31,13 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         database.collection('user-subscriptions').doc(id).create({})
     ]);
 
+    const timestamp: db.FieldValue     = db.FieldValue.serverTimestamp();
+    const document:  DocumentReference = database.collection('clusters').doc();
+
     return database.collection('clusters').add
     ({
+        id          : document.id,
+        version     : '1.0.0',
         name        : 'Your first cluster!',
         description : `This is your first cluster. When you're ready to publish to the global catalog, flip off the private switch and join the Firefly community of publishers!`,
         private     : true,
@@ -40,7 +45,8 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         draft       : false,
         tagline     : 'Come enjoy my first event cluster',
         iconId      : 'admin-icons-default.png',
-        events      : {}
+        dateCreated : timestamp,
+        dateUpdated : timestamp
     });
 });
 
