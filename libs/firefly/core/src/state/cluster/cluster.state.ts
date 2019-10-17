@@ -1,6 +1,6 @@
 
 import { FormGroup, } from '@angular/forms';
-import { Observable, of, forkJoin } from 'rxjs';
+import { Observable, of, forkJoin, empty } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
@@ -138,7 +138,7 @@ export class StateCluster
         const value: Partial<Cluster>  = payload;
         const state: StateClusterModel = getState();
         const path:  string            = StateCluster.formPath(state);
-        const save$: Observable<void>  = save ? this.service.patch(StateCluster.id(state), value) : of();
+        const save$: Observable<void>  = save ? this.service.patch(StateCluster.id(state), value) : empty();
 
         return save$.pipe
         (
@@ -146,7 +146,7 @@ export class StateCluster
             map(() => StateCluster.data(getState())),
             switchMap((data: Cluster) =>
                 data.id === CoreEnum.IdNew ?
-                    of() :
+                    empty() :
                     dispatch(new ActionUserClustersSync(data))
             )
         );
@@ -160,7 +160,7 @@ export class StateCluster
 
         return forkJoin
         (
-            data.id === CoreEnum.IdNew ? dispatch(new ActionIconCreate()) : of(),
+            data.id === CoreEnum.IdNew ? dispatch(new ActionIconCreate()) : empty(),
             this.service.create(data)
         ).
         pipe

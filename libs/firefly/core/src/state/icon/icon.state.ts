@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of, Observable } from 'rxjs';
+import { of, Observable, empty } from 'rxjs';
 import { map, switchMap, filter, tap, catchError } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
@@ -140,7 +140,7 @@ export class StateIcon
         const value: Partial<Icon>    = payload;
         const state: StateIconModel   = getState();
         const path:  string           = StateIcon.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateIcon.id(state), value) : of();
+        const save$: Observable<void> = save ? this.service.patch(StateIcon.id(state), value) : empty();
 
         return save$.pipe
         (
@@ -148,7 +148,7 @@ export class StateIcon
             map(() => StateIcon.data(getState())),
             switchMap((data: Icon) =>
                 data.id === CoreEnum.IdNew ?
-                    of() :
+                    empty() :
                     dispatch(new ActionUserIconsSync(data))
             )
         );

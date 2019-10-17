@@ -1,11 +1,11 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Event, ImageEvent } from '@firefly/core/models';
 import { ServiceImageEvents, ServiceEvents } from '@firefly/core/services';
-import { SortField, StateReferenceTable, Default } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateImageEventsModel } from './image-events.state.model';
 import { StateImageEventsOptions } from './image-events.state.options';
@@ -80,10 +80,10 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
                 dispatch(new ActionImageEventsSet(data))
             ),
             switchMap(() =>
-                StateImageEvents.getAll(state) ? of() : dispatch(new ActionImageEventsSort())
+                StateImageEvents.getAll(state) ? empty() : dispatch(new ActionImageEventsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionImageEventsGet()) : of()
+                fetch ? dispatch(new ActionImageEventsGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })

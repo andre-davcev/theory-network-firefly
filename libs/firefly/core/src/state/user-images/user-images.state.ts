@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil, TypeOf } from '@theory/core';
@@ -80,10 +80,10 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
                 dispatch(new ActionUserImagesSet(data))
             ),
             switchMap(() =>
-                StateUserImages.getAll(state) ? of() : dispatch(new ActionUserImagesSort())
+                StateUserImages.getAll(state) ? empty() : dispatch(new ActionUserImagesSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserImagesGet()) : of()
+                fetch ? dispatch(new ActionUserImagesGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })

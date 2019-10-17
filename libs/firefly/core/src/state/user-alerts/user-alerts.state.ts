@@ -19,7 +19,7 @@ import {
     ActionUserAlertsDelete,
     ActionUserAlertsSync
 } from './user-alerts.actions';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { StateUser } from '../user';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
@@ -80,10 +80,10 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
                 dispatch(new ActionUserAlertsSet(data))
             ),
             switchMap(() =>
-                StateUserAlerts.getAll(state) ? of() : dispatch(new ActionUserAlertsSort())
+                StateUserAlerts.getAll(state) ? empty() : dispatch(new ActionUserAlertsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserAlertsGet()) : of()
+                fetch ? dispatch(new ActionUserAlertsGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })

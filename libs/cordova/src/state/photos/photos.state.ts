@@ -1,6 +1,6 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { LibraryItem, AlbumItem, PhotoLibrary, RequestAuthorizationOptions, GetLibraryOptions } from '@ionic-native/photo-library/ngx';
-import { from, of, Observable } from 'rxjs';
+import { from, of, Observable, empty } from 'rxjs';
 import { tap, catchError, filter, switchMap, map } from 'rxjs/operators';
 
 import { StatePhotosModel } from './photos.state.model';
@@ -46,7 +46,7 @@ export class StatePhotos
 
         if (!state.watchingLibrary)
         {
-            const authorization$: Observable<void> = state.authorized ? of() : dispatch(new ActionPhotosRequestAuthorization());
+            const authorization$: Observable<void> = state.authorized ? empty() : dispatch(new ActionPhotosRequestAuthorization());
 
             return authorization$.pipe
             (
@@ -90,7 +90,7 @@ export class StatePhotos
 
         if (!state.watchingAlbums)
         {
-            const authorization$: Observable<void> = state.authorized ? of() : dispatch(new ActionPhotosRequestAuthorization());
+            const authorization$: Observable<void> = state.authorized ? empty() : dispatch(new ActionPhotosRequestAuthorization());
 
             return authorization$.pipe
             (

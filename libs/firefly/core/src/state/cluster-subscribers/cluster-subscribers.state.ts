@@ -1,11 +1,11 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil, TypeOf } from '@theory/core';
 import { User, ClusterSubscriber } from '@firefly/core/models';
 import { ServiceClusterSubscribers, ServiceUsers } from '@firefly/core/services';
-import { StateReferenceTable, Default } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateClusterSubscribersModel } from './cluster-subscribers.state.model';
 import { StateClusterSubscribersOptions } from './cluster-subscribers.state.options';
@@ -81,10 +81,10 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
                 dispatch(new ActionClusterSubscribersSet(data))
             ),
             switchMap(() =>
-                StateClusterSubscribers.getAll(state) ? of() : dispatch(new ActionClusterSubscribersSort())
+                StateClusterSubscribers.getAll(state) ? empty() : dispatch(new ActionClusterSubscribersSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionClusterSubscribersGet()) : of()
+                fetch ? dispatch(new ActionClusterSubscribersGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })
