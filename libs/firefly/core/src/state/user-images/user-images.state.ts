@@ -80,10 +80,10 @@ export class StateUserImages extends StateReferenceTable<UserImage, Image, State
                 dispatch(new ActionUserImagesSet(data))
             ),
             switchMap(() =>
-                StateUserImages.getAll(state) ? empty() : dispatch(new ActionUserImagesSort())
+                StateUserImages.getAll(state) ? of(null) : dispatch(new ActionUserImagesSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserImagesGet()) : empty()
+                fetch ? dispatch(new ActionUserImagesGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

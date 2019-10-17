@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { Observable, empty } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
@@ -118,7 +118,7 @@ export class StateAlert
         const value: Partial<Alert>   = payload;
         const state: StateAlertModel  = getState();
         const path:  string           = StateAlert.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateAlert.id(state), value) : empty();
+        const save$: Observable<void> = save ? this.service.patch(StateAlert.id(state), value) : of(null);
 
         return save$.pipe
         (
@@ -126,7 +126,7 @@ export class StateAlert
             map(() => StateAlert.data(getState())),
             switchMap((data: Alert) =>
                 data.id === CoreEnum.IdNew ?
-                    empty() :
+                    of(null) :
                     dispatch(new ActionUserAlertsSync(data))
             )
         );

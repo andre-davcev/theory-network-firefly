@@ -80,10 +80,10 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
                 dispatch(new ActionIconClustersSet(data))
             ),
             switchMap(() =>
-                StateIconClusters.getAll(state) ? empty() : dispatch(new ActionIconClustersSort())
+                StateIconClusters.getAll(state) ? of(null) : dispatch(new ActionIconClustersSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionIconClustersGet()) : empty()
+                fetch ? dispatch(new ActionIconClustersGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

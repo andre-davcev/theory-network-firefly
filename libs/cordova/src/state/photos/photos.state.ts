@@ -46,7 +46,7 @@ export class StatePhotos
 
         if (!state.watchingLibrary)
         {
-            const authorization$: Observable<void> = state.authorized ? empty() : dispatch(new ActionPhotosRequestAuthorization());
+            const authorization$: Observable<void> = state.authorized ? of(null) : dispatch(new ActionPhotosRequestAuthorization());
 
             return authorization$.pipe
             (
@@ -90,7 +90,7 @@ export class StatePhotos
 
         if (!state.watchingAlbums)
         {
-            const authorization$: Observable<void> = state.authorized ? empty() : dispatch(new ActionPhotosRequestAuthorization());
+            const authorization$: Observable<void> = state.authorized ? of(null) : dispatch(new ActionPhotosRequestAuthorization());
 
             return authorization$.pipe
             (

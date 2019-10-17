@@ -80,10 +80,10 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
                 dispatch(new ActionUserEventsSet(data))
             ),
             switchMap(() =>
-                StateUserEvents.getAll(state) ? empty() : dispatch(new ActionUserEventsSort())
+                StateUserEvents.getAll(state) ? of(null) : dispatch(new ActionUserEventsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserEventsGet()) : empty()
+                fetch ? dispatch(new ActionUserEventsGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

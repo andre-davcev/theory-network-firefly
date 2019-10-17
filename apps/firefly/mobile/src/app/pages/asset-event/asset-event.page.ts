@@ -12,7 +12,7 @@ import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateImage, StateIco
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
-import { PageAssetsClusters } from '../assets-clusters';
+import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
 import { TempImageUri } from '@firefly/app/mock';
 
 @Component
@@ -37,9 +37,10 @@ export class PageAssetEvent
 
     constructor
     (
-        private store: Store,
-        private modal: ModalController,
-        private camera: CameraCordova
+        private store:    Store,
+        private modal:    ModalController,
+        private camera:   CameraCordova,
+        private resolver: ResolverPageAssetsClusters
     ) { }
 
     ionViewWillEnter()
@@ -51,12 +52,21 @@ export class PageAssetEvent
     {
         if (page === Pages.AssetsClusters)
         {
-            from(this.modal.create
-            ({
-                component: PageAssetsClusters,
-                componentProps: { modal: true }
-            })).
-            subscribe((modal: HTMLIonModalElement) => modal.present());
+            this.resolver.
+            resolve(null, null).
+            pipe
+            (
+                switchMap(() =>
+                    from(this.modal.create
+                    ({
+                        component: PageAssetsClusters,
+                        componentProps: { modal: true }
+                    }))
+                )
+            ).
+            subscribe((modal: HTMLIonModalElement) =>
+                modal.present()
+            );
         }
         else if (page === Pages.ImageSelector)
         {

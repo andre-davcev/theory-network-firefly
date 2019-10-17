@@ -80,10 +80,10 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
                 dispatch(new ActionUserIconsSet(data))
             ),
             switchMap(() =>
-                StateUserIcons.getAll(state) ? empty() : dispatch(new ActionUserIconsSort())
+                StateUserIcons.getAll(state) ? of(null) : dispatch(new ActionUserIconsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserIconsGet()) : empty()
+                fetch ? dispatch(new ActionUserIconsGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

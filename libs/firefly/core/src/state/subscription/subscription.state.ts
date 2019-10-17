@@ -124,7 +124,7 @@ export class StateSubscription
         const value: Partial<Subscription>  = payload;
         const state: StateSubscriptionModel = getState();
         const path:  string                 = StateSubscription.formPath(state);
-        const save$: Observable<void>       = save ? this.service.patch(StateSubscription.id(state), value) : empty();
+        const save$: Observable<void>       = save ? this.service.patch(StateSubscription.id(state), value) : of(null);
 
         return save$.pipe
         (
@@ -132,7 +132,7 @@ export class StateSubscription
             map(() => StateSubscription.data(getState())),
             switchMap((data: Subscription) =>
                 data.id === CoreEnum.IdNew ?
-                    empty() :
+                    of(null) :
                     dispatch(new ActionUserSubscriptionsSync(data))
             )
         );
