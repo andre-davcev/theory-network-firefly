@@ -2,7 +2,7 @@
   <ion-list>
     <ion-item lines="none" *ngFor="let cluster of stream$ | async">
         <ion-card>
-            <app-item-header [iconUrl]="cluster.iconId"
+            <app-item-header [iconUrl]="cluster.iconUrl"
                              [title]="cluster.name"
                              [subtitle]="cluster.tagline">
             </app-item-header>
