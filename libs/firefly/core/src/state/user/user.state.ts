@@ -140,7 +140,7 @@ export class StateUser implements NgxsOnInit
         const value: Partial<User>    = payload;
         const state: StateUserModel   = getState();
         const path:  string           = StateUser.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateUser.id(state), value) : empty();
+        const save$: Observable<void> = save ? this.service.patch(StateUser.id(state), value) : of(null);
 
         return save$.pipe
         (
@@ -197,7 +197,7 @@ export class StateUser implements NgxsOnInit
         (
             take(1),
             tap((authData: FirebaseUser) => patchState({ authData, authenticating: false, authenticated: authData != null })),
-            switchMap((authData: FirebaseUser) => authData == null ? empty() : dispatch(new ActionUserWatch(this.service.parseId(authData)))),
+            switchMap((authData: FirebaseUser) => authData == null ? of(null) : dispatch(new ActionUserWatch(this.service.parseId(authData)))),
             tap(() => patchState({ initializing: false })),
             catchError((error: Error) => of(patchState({ error, authenticating: false, initializing: false })))
         );

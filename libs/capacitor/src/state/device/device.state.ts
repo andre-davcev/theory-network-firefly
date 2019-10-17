@@ -1,5 +1,5 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { from, empty } from 'rxjs';
+import { from, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DeviceInfo, StatusBarStyleOptions } from '@capacitor/core';
 
@@ -64,7 +64,7 @@ export class StateDevice
 
         patchState({ statusBar: options });
 
-        return setStatusBarOptions ? from(StatusBar.setStyle(options)) : empty();
+        return setStatusBarOptions ? from(StatusBar.setStyle(options)) : of(null);
     }
 
     @Action(ActionDeviceStatusBarShow)
@@ -75,7 +75,7 @@ export class StateDevice
 
         patchState({ statusBarVisible: true });
 
-        return showStatusBar ? from(StatusBar.show()) : empty();
+        return showStatusBar ? from(StatusBar.show()) : of(null);
     }
 
     @Action(ActionDeviceStatusBarHide)
@@ -86,6 +86,6 @@ export class StateDevice
 
         patchState({ statusBarVisible: false });
 
-        return hideStatusBar ? from(StatusBar.hide()) : empty();
+        return hideStatusBar ? from(StatusBar.hide()) : of(null);
     }
 }

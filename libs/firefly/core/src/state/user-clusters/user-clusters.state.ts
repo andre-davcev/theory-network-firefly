@@ -80,10 +80,10 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
                 dispatch(new ActionUserClustersSet(data))
             ),
             switchMap(() =>
-                StateUserClusters.getAll(state) ? empty() : dispatch(new ActionUserClustersSort())
+                StateUserClusters.getAll(state) ? of(null) : dispatch(new ActionUserClustersSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserClustersGet()) : empty()
+                fetch ? dispatch(new ActionUserClustersGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

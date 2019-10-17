@@ -42,8 +42,8 @@ export class StateNotifications
             )
         );
 
-        const permission$: Observable<any> = this.platform.is('ios')     ? from(this.firebaseNative.grantPermission()) : empty();
-        const token$:      Observable<any> = this.platform.is('cordova') ? from(this.firebaseNative.getToken())        : empty();
+        const permission$: Observable<any> = this.platform.is('ios')     ? from(this.firebaseNative.grantPermission()) : of(null);
+        const token$:      Observable<any> = this.platform.is('cordova') ? from(this.firebaseNative.getToken())        : of(null);
 
         return permission$.pipe
         (

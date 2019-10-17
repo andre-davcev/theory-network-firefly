@@ -139,7 +139,7 @@ export class StateImage
         const value: Partial<Image>   = payload;
         const state: StateImageModel  = getState();
         const path:  string           = StateImage.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateImage.id(state), value) : empty();
+        const save$: Observable<void> = save ? this.service.patch(StateImage.id(state), value) : of(null);
 
         return save$.pipe
         (
@@ -147,7 +147,7 @@ export class StateImage
             map(() => StateImage.data(getState())),
             switchMap((data: Image) =>
                 data.id === CoreEnum.IdNew ?
-                    empty() :
+                    of(null) :
                     dispatch(new ActionUserImagesSync(data))
             )
         );

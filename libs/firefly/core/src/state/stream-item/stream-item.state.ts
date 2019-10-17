@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { Observable, empty } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
@@ -124,7 +124,7 @@ export class StateStreamItem
         const value: Partial<StreamItem>  = payload;
         const state: StateStreamItemModel = getState();
         const path:  string               = StateStreamItem.formPath(state);
-        const save$: Observable<void>     = save ? this.service.patch(StateStreamItem.id(state), value) : empty();
+        const save$: Observable<void>     = save ? this.service.patch(StateStreamItem.id(state), value) : of(null);
 
         return save$.pipe
         (
@@ -132,7 +132,7 @@ export class StateStreamItem
             map(() => StateStreamItem.data(getState())),
             switchMap((data: StreamItem) =>
                 data.id === CoreEnum.IdNew ?
-                    empty() :
+                    of(null) :
                     dispatch(new ActionUserStreamSync(data))
             )
         );

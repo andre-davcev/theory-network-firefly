@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { StreamItem, UserStreamItem } from '@firefly/core/models';
 import { ServiceUserStream, ServiceStreamItems } from '@firefly/core/services';
-import { SortField, StateReferenceTable, Default } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateUserStreamModel } from './user-stream.state.model';
 import { StateUserStreamOptions } from './user-stream.state.options';
@@ -80,10 +80,10 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
                 dispatch(new ActionUserStreamSet(data))
             ),
             switchMap(() =>
-                StateUserStream.getAll(state) ? empty() : dispatch(new ActionUserStreamSort())
+                StateUserStream.getAll(state) ? of(null) : dispatch(new ActionUserStreamSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserStreamGet()) : empty()
+                fetch ? dispatch(new ActionUserStreamGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

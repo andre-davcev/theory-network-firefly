@@ -81,10 +81,10 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
                 dispatch(new ActionClusterSubscribersSet(data))
             ),
             switchMap(() =>
-                StateClusterSubscribers.getAll(state) ? empty() : dispatch(new ActionClusterSubscribersSort())
+                StateClusterSubscribers.getAll(state) ? of(null) : dispatch(new ActionClusterSubscribersSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionClusterSubscribersGet()) : empty()
+                fetch ? dispatch(new ActionClusterSubscribersGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

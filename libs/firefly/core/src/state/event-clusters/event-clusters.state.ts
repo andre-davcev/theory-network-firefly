@@ -82,10 +82,10 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
                 dispatch(new ActionEventClustersSet(data))
             ),
             switchMap(() =>
-                StateEventClusters.getAll(state) ? empty() : dispatch(new ActionEventClustersSort())
+                StateEventClusters.getAll(state) ? of(null) : dispatch(new ActionEventClustersSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionEventClustersGet()) : empty()
+                fetch ? dispatch(new ActionEventClustersGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

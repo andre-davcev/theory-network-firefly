@@ -80,10 +80,10 @@ export class StateUserAlerts extends StateReferenceTable<UserAlert, Alert, State
                 dispatch(new ActionUserAlertsSet(data))
             ),
             switchMap(() =>
-                StateUserAlerts.getAll(state) ? empty() : dispatch(new ActionUserAlertsSort())
+                StateUserAlerts.getAll(state) ? of(null) : dispatch(new ActionUserAlertsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserAlertsGet()) : empty()
+                fetch ? dispatch(new ActionUserAlertsGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

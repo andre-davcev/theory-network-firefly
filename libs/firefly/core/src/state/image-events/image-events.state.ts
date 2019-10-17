@@ -80,10 +80,10 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
                 dispatch(new ActionImageEventsSet(data))
             ),
             switchMap(() =>
-                StateImageEvents.getAll(state) ? empty() : dispatch(new ActionImageEventsSort())
+                StateImageEvents.getAll(state) ? of(null) : dispatch(new ActionImageEventsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionImageEventsGet()) : empty()
+                fetch ? dispatch(new ActionImageEventsGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

@@ -138,7 +138,7 @@ export class StateCluster
         const value: Partial<Cluster>  = payload;
         const state: StateClusterModel = getState();
         const path:  string            = StateCluster.formPath(state);
-        const save$: Observable<void>  = save ? this.service.patch(StateCluster.id(state), value) : empty();
+        const save$: Observable<void>  = save ? this.service.patch(StateCluster.id(state), value) : of(null);
 
         return save$.pipe
         (
@@ -146,7 +146,7 @@ export class StateCluster
             map(() => StateCluster.data(getState())),
             switchMap((data: Cluster) =>
                 data.id === CoreEnum.IdNew ?
-                    empty() :
+                    of(null) :
                     dispatch(new ActionUserClustersSync(data))
             )
         );
@@ -160,7 +160,7 @@ export class StateCluster
 
         return forkJoin
         (
-            data.id === CoreEnum.IdNew ? dispatch(new ActionIconCreate()) : empty(),
+            data.id === CoreEnum.IdNew ? dispatch(new ActionIconCreate()) : of(null),
             this.service.create(data)
         ).
         pipe

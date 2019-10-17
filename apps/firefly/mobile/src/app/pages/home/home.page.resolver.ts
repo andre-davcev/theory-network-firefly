@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Store, Select } from '@ngxs/store';
-import { Observable, empty, combineLatest } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import { switchMap, take, map } from 'rxjs/operators';
 
 import { ActionUserAlertsGetData, ActionUserStreamGetData, StateUserAlerts, StateUserStream } from '@firefly/core';
@@ -25,7 +25,7 @@ export class ResolverPageHome implements Resolve<void>
             map(([alerts, stream]) => alerts && stream),
             switchMap((initialized: boolean) =>
                 initialized ?
-                    empty() :
+                    of(null) :
                     this.store.dispatch(new ActionMobileLoadingShow()).
                     pipe
                     (

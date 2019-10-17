@@ -83,10 +83,10 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
                 dispatch(new ActionUserSubscriptionsSet(data))
             ),
             switchMap(() =>
-                StateUserSubscriptions.getAll(state) ? empty() : dispatch(new ActionUserSubscriptionsSort())
+                StateUserSubscriptions.getAll(state) ? of(null) : dispatch(new ActionUserSubscriptionsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserSubscriptionsGet()) : empty()
+                fetch ? dispatch(new ActionUserSubscriptionsGet()) : of(null)
             ),
             map(() =>
                 patchState({ initialized: true })

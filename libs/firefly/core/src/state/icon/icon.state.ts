@@ -140,7 +140,7 @@ export class StateIcon
         const value: Partial<Icon>    = payload;
         const state: StateIconModel   = getState();
         const path:  string           = StateIcon.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateIcon.id(state), value) : empty();
+        const save$: Observable<void> = save ? this.service.patch(StateIcon.id(state), value) : of(null);
 
         return save$.pipe
         (
@@ -148,7 +148,7 @@ export class StateIcon
             map(() => StateIcon.data(getState())),
             switchMap((data: Icon) =>
                 data.id === CoreEnum.IdNew ?
-                    empty() :
+                    of(null) :
                     dispatch(new ActionUserIconsSync(data))
             )
         );
