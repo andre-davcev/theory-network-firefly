@@ -1,11 +1,11 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Cluster, IconCluster } from '@firefly/core/models';
 import { ServiceIconClusters, ServiceClusters } from '@firefly/core/services';
-import { StateReferenceTable, Default } from '@theory/state';
+import { StateReferenceTable } from '@theory/state';
 
 import { StateIconClustersModel } from './icon-clusters.state.model';
 import { StateIconClustersOptions } from './icon-clusters.state.options';
@@ -80,10 +80,10 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
                 dispatch(new ActionIconClustersSet(data))
             ),
             switchMap(() =>
-                StateIconClusters.getAll(state) ? of() : dispatch(new ActionIconClustersSort())
+                StateIconClusters.getAll(state) ? empty() : dispatch(new ActionIconClustersSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionIconClustersGet()) : of()
+                fetch ? dispatch(new ActionIconClustersGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })

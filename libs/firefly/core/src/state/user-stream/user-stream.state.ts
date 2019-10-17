@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil, TypeOf } from '@theory/core';
@@ -80,10 +80,10 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
                 dispatch(new ActionUserStreamSet(data))
             ),
             switchMap(() =>
-                StateUserStream.getAll(state) ? of() : dispatch(new ActionUserStreamSort())
+                StateUserStream.getAll(state) ? empty() : dispatch(new ActionUserStreamSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserStreamGet()) : of()
+                fetch ? dispatch(new ActionUserStreamGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })

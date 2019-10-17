@@ -1,5 +1,5 @@
 import { map, switchMap, tap } from 'rxjs/operators';
-import { Observable, of, forkJoin } from 'rxjs';
+import { Observable, forkJoin, empty } from 'rxjs';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 import { FormGroup } from '@angular/forms';
@@ -152,7 +152,7 @@ export class StateEvent
         const value: Partial<Event>   = payload;
         const state: StateEventModel  = getState();
         const path:  string           = StateEvent.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateEvent.id(state), value) : of();
+        const save$: Observable<void> = save ? this.service.patch(StateEvent.id(state), value) : empty();
 
         return save$.pipe
         (
@@ -160,7 +160,7 @@ export class StateEvent
             map(() => StateEvent.data(getState())),
             switchMap((data: Event) =>
                 data.id === CoreEnum.IdNew ?
-                    of() :
+                    empty() :
                     dispatch(new ActionUserEventsSync(data))
             )
         );
@@ -174,7 +174,7 @@ export class StateEvent
 
         return forkJoin
         (
-            data.id === CoreEnum.IdNew ? dispatch(new ActionImageCreate()) : of(),
+            data.id === CoreEnum.IdNew ? dispatch(new ActionImageCreate()) : empty(),
             this.service.create(data)
         ).
         pipe

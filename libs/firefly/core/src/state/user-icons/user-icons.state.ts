@@ -19,7 +19,7 @@ import {
     ActionUserIconsDelete,
     ActionUserIconsSync
 } from './user-icons.actions';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { StateUser } from '../user';
 
 @State<StateUserIconsModel>(StateUserIconsOptions)
@@ -80,10 +80,10 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
                 dispatch(new ActionUserIconsSet(data))
             ),
             switchMap(() =>
-                StateUserIcons.getAll(state) ? of() : dispatch(new ActionUserIconsSort())
+                StateUserIcons.getAll(state) ? empty() : dispatch(new ActionUserIconsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserIconsGet()) : of()
+                fetch ? dispatch(new ActionUserIconsGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })

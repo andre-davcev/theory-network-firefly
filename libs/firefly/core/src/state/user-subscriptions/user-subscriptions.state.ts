@@ -23,7 +23,7 @@ import {
     ActionUserSubscriptionsSync
 } from './user-subscriptions.actions';
 import { ActionClusterSubscribersRemove, ActionClusterSubscribersAdd } from '../cluster-subscribers';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 
@@ -83,10 +83,10 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
                 dispatch(new ActionUserSubscriptionsSet(data))
             ),
             switchMap(() =>
-                StateUserSubscriptions.getAll(state) ? of() : dispatch(new ActionUserSubscriptionsSort())
+                StateUserSubscriptions.getAll(state) ? empty() : dispatch(new ActionUserSubscriptionsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserSubscriptionsGet()) : of()
+                fetch ? dispatch(new ActionUserSubscriptionsGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })

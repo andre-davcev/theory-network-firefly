@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil, TypeOf } from '@theory/core';
@@ -80,10 +80,10 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
                 dispatch(new ActionUserEventsSet(data))
             ),
             switchMap(() =>
-                StateUserEvents.getAll(state) ? of() : dispatch(new ActionUserEventsSort())
+                StateUserEvents.getAll(state) ? empty() : dispatch(new ActionUserEventsSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionUserEventsGet()) : of()
+                fetch ? dispatch(new ActionUserEventsGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })

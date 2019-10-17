@@ -1,6 +1,6 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { Observable, of, from } from 'rxjs';
+import { Observable, of, from, empty } from 'rxjs';
 import { switchMap, filter, tap } from 'rxjs/operators';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
@@ -42,8 +42,8 @@ export class StateNotifications
             )
         );
 
-        const permission$: Observable<any> = this.platform.is('ios')     ? from(this.firebaseNative.grantPermission()) : of(undefined);
-        const token$:      Observable<any> = this.platform.is('cordova') ? from(this.firebaseNative.getToken())        : of(undefined);
+        const permission$: Observable<any> = this.platform.is('ios')     ? from(this.firebaseNative.grantPermission()) : empty();
+        const token$:      Observable<any> = this.platform.is('cordova') ? from(this.firebaseNative.getToken())        : empty();
 
         return permission$.pipe
         (

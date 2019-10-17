@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of, Observable } from 'rxjs';
+import { of, Observable, empty } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
@@ -124,7 +124,7 @@ export class StateSubscription
         const value: Partial<Subscription>  = payload;
         const state: StateSubscriptionModel = getState();
         const path:  string                 = StateSubscription.formPath(state);
-        const save$: Observable<void>       = save ? this.service.patch(StateSubscription.id(state), value) : of();
+        const save$: Observable<void>       = save ? this.service.patch(StateSubscription.id(state), value) : empty();
 
         return save$.pipe
         (
@@ -132,7 +132,7 @@ export class StateSubscription
             map(() => StateSubscription.data(getState())),
             switchMap((data: Subscription) =>
                 data.id === CoreEnum.IdNew ?
-                    of() :
+                    empty() :
                     dispatch(new ActionUserSubscriptionsSync(data))
             )
         );

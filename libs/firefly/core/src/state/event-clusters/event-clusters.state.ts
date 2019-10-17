@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
 import { CoreUtil, TypeOf } from '@theory/core';
@@ -82,10 +82,10 @@ export class StateEventClusters extends StateReferenceTable<EventCluster, Cluste
                 dispatch(new ActionEventClustersSet(data))
             ),
             switchMap(() =>
-                StateEventClusters.getAll(state) ? of() : dispatch(new ActionEventClustersSort())
+                StateEventClusters.getAll(state) ? empty() : dispatch(new ActionEventClustersSort())
             ),
             switchMap(() =>
-                fetch ? dispatch(new ActionEventClustersGet()) : of()
+                fetch ? dispatch(new ActionEventClustersGet()) : empty()
             ),
             map(() =>
                 patchState({ initialized: true })
