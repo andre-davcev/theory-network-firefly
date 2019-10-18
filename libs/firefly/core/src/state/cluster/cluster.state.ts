@@ -53,6 +53,8 @@ export class StateCluster
     @Selector() static isNew(state: StateClusterModel): boolean { return  StateCluster.id(state) === CoreEnum.IdNew; }
     @Selector() static canUpdate(state: StateClusterModel): boolean { return StateCluster.form(state).status === FormNgxsStatus.Valid && StateCluster.form(state).dirty; }
 
+    @Selector() static icon(state: StateClusterModel): string { return StateCluster.data(state).iconUrl; }
+
     @Action(ActionClusterReset)
     reset({ patchState, getState, dispatch }: StateContext<StateClusterModel>)
     {
