@@ -52,6 +52,7 @@ export class StateEvent
     @Selector() static isNew(state: StateEventModel): boolean { return  StateEvent.id(state) === CoreEnum.IdNew; }
     @Selector() static canUpdate(state: StateEventModel): boolean { return StateEvent.form(state).status === FormNgxsStatus.Valid && StateEvent.form(state).dirty; }
 
+    @Selector() static image(state: StateEventModel): string { return StateEvent.data(state).imageUrl; }
     @Selector() static location(state: StateEventModel): Location { return StateEvent.form(state).model.location; }
     @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.location(state) != null; }
     @Selector() static locations(state: StateEventModel): Array<Location> { return [ StateEvent.location(state) ]; }
