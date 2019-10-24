@@ -80,7 +80,6 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         MapboxPlaceType.PointOfInterestLandmark
     ];
 
-    @Input() country?:   string;
     @Input() proximity?: LngLatLiteral;
     @Input() bbox?:      [number, number, number, number];
     @Input() zoom?:      number;
