@@ -72,6 +72,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "^0.803.14",
     "@angular/animations": "^8.2.12",
     "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.12",
@@ -131,12 +132,11 @@
     "ngx-mapbox-gl": "^4.1.0",
     "reflect-metadata": "^0.1.12",
     "rxfire": "^3.4.1",
-    "zone.js": "~0.9.1",
-    "rxjs": "~6.5.3"
+    "rxjs": "~6.5.3",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.803.14",
-    "@angular-devkit/build-angular": "^0.803.14",
     "@angular-devkit/build-ng-packagr": "~0.803.14",
     "@angular-devkit/core": "^8.3.14",
     "@angular-devkit/schematics": "^8.3.14",
