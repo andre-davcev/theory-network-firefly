@@ -1,4 +1,6 @@
 import { Component, Input, HostBinding, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
 
 @Component
 ({
@@ -18,6 +20,8 @@ export class ComponentIconSubscribe
 
     @Output()
     public clicked: EventEmitter<boolean> = new EventEmitter();
+
+    public faThumbtack: IconDefinition = faThumbtack;
 
     constructor() { }
 

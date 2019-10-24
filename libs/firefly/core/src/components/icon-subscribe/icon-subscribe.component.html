@@ -4,7 +4,7 @@
      fxLayoutAlign="start center">
     <div class="cpt-container-icon" (click)="toggle()">
         <ion-icon *ngIf="subscribed" name="ios-checkmark-circle-outline" color="dark"></ion-icon>
-        <fa-icon *ngIf="!subscribed" icon="thumbtack" size="lg"></fa-icon>
+        <fa-icon *ngIf="!subscribed" [icon]="faThumbtack" size="lg"></fa-icon>
     </div>
 
     <span class="cpt-count">{{ count | number: '.0' }}</span>
