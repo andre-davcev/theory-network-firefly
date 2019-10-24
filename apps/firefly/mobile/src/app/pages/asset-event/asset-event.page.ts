@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, from, of } from 'rxjs';
+import { Observable, from, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, filter, take } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 
-import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateImage, StateIcon, ActionImageUriSet, ActionImageSetId, StateCluster } from '@firefly/core';
+import { StateEvent, ActionEventCreate, ActionEventTimeSet, ActionImageUriSet, ActionImageSetId, StateCluster, ServiceImages, ActionEventPatch } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
-import { TempImageUri } from '@firefly/app/mock';
+import { MockImageId } from '@firefly/app/mock';
+import { BaseComponent } from '@theory/core';
 
 @Component
 ({
@@ -22,16 +23,35 @@ import { TempImageUri } from '@firefly/app/mock';
     styleUrls   : ['./asset-event.page.scss']
 })
 
-export class PageAssetEvent
+export class PageAssetEvent extends BaseComponent
 {
     @Select(StateEvent.formGroup)    form$:         Observable<FormGroup>;
-    @Select(StateEvent.image)        image$:        Observable<string>;
     @Select(StateEvent.isNew)        isNew$:        Observable<boolean>;
     @Select(StateEvent.canUpdate)    canUpdate$:    Observable<boolean>;
     @Select(StateEvent.timeStart)    timeStart$:    Observable<string>;
     @Select(StateEvent.timeEnd)      timeEnd$:      Observable<string>;
     @Select(StateEvent.timeEndValid) timeEndValid$: Observable<boolean>;
-    @Select(StateCluster.icon)        icon$:        Observable<string>;
+    @Select(StateCluster.icon)       icon$:         Observable<string>;
+    @Select(StateEvent.image)        imageUrl$:     Observable<string>;
+    @Select(StateDevice.device)      device$:       Observable<boolean>;
+
+    private imageClicked$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+    public image$: Observable<string> = combineLatest
+    ([
+        this.device$,
+        this.imageClicked$
+    ]).
+    pipe
+    (
+        switchMap(([device, imageClicked]) =>
+            device ?
+                this.image$ :
+                !imageClicked ?
+                    of(null) :
+                    this.images.getDownloadUrl(MockImageId)
+        )
+    );
 
     public Pages: any = Pages;
 
@@ -40,8 +60,12 @@ export class PageAssetEvent
         private store:    Store,
         private modal:    ModalController,
         private camera:   CameraCordova,
-        private resolver: ResolverPageAssetsClusters
-    ) { }
+        private resolver: ResolverPageAssetsClusters,
+        private images:   ServiceImages
+    )
+    {
+        super();
+    }
 
     ionViewWillEnter()
     {
@@ -70,9 +94,7 @@ export class PageAssetEvent
         }
         else if (page === Pages.ImageSelector)
         {
-            const platform: Platform = this.store.selectSnapshot(StateDevice.platform);
-
-            if (platform === Platform.iOS || platform === Platform.Android)
+            if (this.store.selectSnapshot(StateDevice.device))
             {
                 const options: CameraOptionsCordova =
                 {
@@ -94,12 +116,9 @@ export class PageAssetEvent
             }
             else
             {
-                this.store.dispatch(new ActionImageSetId()).pipe
-                (
-                    switchMap(() =>
-                        this.store.dispatch(new ActionImageUriSet(TempImageUri))
-                    )
-                );
+                this.imageClicked$.next(true);
+
+                this.store.dispatch(new ActionEventPatch({ imageId: MockImageId }));
             }
         }
         else if (page === Pages.EventLocation)
