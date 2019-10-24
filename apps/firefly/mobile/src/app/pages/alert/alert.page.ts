@@ -19,7 +19,7 @@ export class PageAlert
 {
     @Select(StateUserAlerts.list) alerts$: Observable<Array<Alert>>;
 
-    @ViewChild(IonSlides) slides: IonSlides;
+    @ViewChild(IonSlides, { static: true }) slides: IonSlides;
 
     public segment: string = 'fired';
     public Pages: any = Pages;
