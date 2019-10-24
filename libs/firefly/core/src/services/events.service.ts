@@ -120,7 +120,7 @@ export class ServiceEvents extends ServiceAsset<Event>
 
         if (result != null)
         {
-            coordinates = new fire.GeoPoint(result.center[0], result.center[1]);
+            coordinates = new fire.GeoPoint(result.center[1], result.center[0]);
             location    = { types };
         }
 

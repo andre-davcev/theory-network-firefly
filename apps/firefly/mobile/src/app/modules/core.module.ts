@@ -6,6 +6,7 @@ import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx'
@@ -97,11 +98,12 @@ import { StateMap } from '@theory/mapbox';
             StateUserSubscriptions
         ]),
 
-        NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
         NgxsRouterPluginModule.forRoot(),
         NgxsFormPluginModule.forRoot(),
-        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken}),
-//        NgxsLoggerPluginModule.forRoot()
+        NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
+        // NgxsLoggerPluginModule.forRoot()
+
+        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken})
     ],
 
     providers :
@@ -114,7 +116,7 @@ import { StateMap } from '@theory/mapbox';
         { provide: RouteReuseStrategy,  useClass: IonicRouteStrategy },
         { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
         { provide: MapboxEnvironment,   useValue: environment.apis.mapbox }
-//        { provide: ErrorHandler,       useClass: ErrorHandlerApp }
+        // { provide: ErrorHandler,       useClass: ErrorHandlerApp }
     ]
 })
 export class CoreModule { }

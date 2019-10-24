@@ -32,6 +32,7 @@ import {
 import { ActionEventClustersReset, ActionEventClustersDelete } from '../event-clusters/event-clusters.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
 import { ActionImageEventsRemove, ActionImageEventsAdd } from '../image-events/image-events.actions';
+import { StateDevice } from '@theory/capacitor';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -150,7 +151,8 @@ export class StateEvent
     @Action(ActionEventPatch)
     patch({ dispatch, getState } : StateContext<StateEventModel>, { payload, save }: ActionEventPatch)
     {
-        const value: Partial<Event>   = payload;
+        const data:  Event            = StateEvent.data(getState())
+        const value: Partial<Event>   = { ...data, ...payload };
         const state: StateEventModel  = getState();
         const path:  string           = StateEvent.formPath(state);
         const save$: Observable<void> = save ? this.service.patch(StateEvent.id(state), value) : of(null);
@@ -158,8 +160,7 @@ export class StateEvent
         return save$.pipe
         (
             switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
-            map(() => StateEvent.data(getState())),
-            switchMap((data: Event) =>
+            switchMap(() =>
                 data.id === CoreEnum.IdNew ?
                     of(null) :
                     dispatch(new ActionUserEventsSync(data))
@@ -171,11 +172,14 @@ export class StateEvent
     create({ getState, dispatch }: StateContext<StateEventModel>)
     {
         const state: StateEventModel = getState();
+        const device: boolean        = this.store.selectSnapshot(StateDevice.device);
         const data:  Event           = StateEvent.data(state);
+
+        data.imageId = device ? data.imageId : this.service.toId(data.imageId);
 
         return forkJoin
         (
-            data.id === CoreEnum.IdNew ? dispatch(new ActionImageCreate()) : of(null),
+            data.id === CoreEnum.IdNew && device ? dispatch(new ActionImageCreate()) : of(null),
             this.service.create(data)
         ).
         pipe
