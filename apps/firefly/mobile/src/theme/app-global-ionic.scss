@@ -6,10 +6,16 @@ ion-app {
     }
 
     ion-loading {
-        ion-spinner {
-            --spinner-color: #{$app-color-primary};
+        &.cpt-loading {
+            --background: #{$app-color-transparent};
+
+            ion-spinner {
+                --spinner-color: #{$app-color-primary};
+                transform: scale(2);
+            }
         }
     }
+
 }
 
 ion-item {
