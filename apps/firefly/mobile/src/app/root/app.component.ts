@@ -9,6 +9,7 @@ import { SplashScreen } from '@theory/capacitor';
 import { PlatformEnum } from '@theory/ionic';
 
 import { Pages } from '@firefly/app/pages';
+import { ActionUserLogout } from '@firefly/core';
 
 @Component
 ({
@@ -48,5 +49,11 @@ export class ComponentApp
     {
         this.menu.close();
         this.store.dispatch(new Navigate([page]));
+    }
+
+    public logout(): void{
+      this.menu.close();
+      this.store.dispatch(new ActionUserLogout());
+      this.store.dispatch(new Navigate([Pages.Login]));
     }
 }

@@ -43,7 +43,7 @@ export class PageLogin implements OnInit
         { type: 'required', message: 'Password is required'},
         { type: 'minlength', message: 'Password length must be longer or equal than 6 characters'},
         { type: 'maxlength', message: 'Password length must be lower or equal to 50 characters'},
-        { type: 'pattern', message: 'Password must contain numbers, uppercase and lowercase characters'}
+       // { type: 'pattern', message: 'Password must contain numbers, uppercase and lowercase characters'}
       ]
     }
 
@@ -54,7 +54,7 @@ export class PageLogin implements OnInit
             Validators.required,
             Validators.minLength(6),
             Validators.maxLength(30),
-            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]+$')
+            //Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]+$')
           ])),
           email: new FormControl('', Validators.compose([
             Validators.required,
@@ -90,7 +90,7 @@ export class PageLogin implements OnInit
     {
         console.log('user: ' + this.loginForm.value.email);
         console.log('password: ' + this.loginForm.value.password);
-        this.store.dispatch(new ActionLoginEmail({id: this.loginForm.value.email, password: this.loginForm.value.password}));
+        this.store.dispatch(new ActionUserLoginEmail({id: this.loginForm.value.email, password: this.loginForm.value.password}));
     }
 
     logout()

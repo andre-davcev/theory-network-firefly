@@ -22,13 +22,8 @@ import {
     ActionUserGet,
   ActionUserSet,
     ActionUserPatch,
-    ActionUserCreate,
     ActionUserSave,
-    ActionUserDelete
-  ActionUserSetAlerts,
-  ActionUserWatchAlerts,
-  ActionUserSubscribe,
-  ActionUserUnsubscribe,
+    ActionUserDelete,
   ActionUserCreate
 } from './user.actions';
 import { ServiceUsers } from '@firefly/core/services';
@@ -275,8 +270,6 @@ export class StateUser implements NgxsOnInit
         return dispatch(new ActionUserPatch({ tokens }, true));
     }
 
-    @Action(ActionUserLoginEmail)
-    loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserLoginEmail)
     @Action(ActionUserCreate)
     createUser({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserCreate)
     {
@@ -292,7 +285,7 @@ export class StateUser implements NgxsOnInit
 
         });
         return null;*/
-        return from(this.fireAuth.auth.createUserWithEmailAndPassword(payload.id, payload.password)).pipe
+        return from(this.auth.auth.createUserWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             map((userCredential: firebase.auth.UserCredential) => userCredential.user),
             switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
@@ -301,8 +294,8 @@ export class StateUser implements NgxsOnInit
     }
 
 
-    @Action(ActionLoginEmail)
-    loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionLoginEmail)
+    @Action(ActionUserLoginEmail)
+    loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserLoginEmail)
     {
         patchState({ authenticating: true });
 
