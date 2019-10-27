@@ -34,7 +34,6 @@ export class PageLogin implements OnInit
         this.userFound$.
         pipe
         (
-            tap(found => console.log(found)),
             filter((userFound: boolean) => userFound),
             take(1)
         ).
