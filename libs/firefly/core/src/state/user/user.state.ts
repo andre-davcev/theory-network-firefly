@@ -1,6 +1,6 @@
 import { User as FirebaseUser } from 'firebase/app';
 
-import { State, Selector, Action, StateContext, Select, NgxsOnInit } from '@ngxs/store';
+import { State, Selector, Action, StateContext, Select, NgxsOnInit} from '@ngxs/store';
 import { Observable, of, from, combineLatest, empty } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -11,20 +11,20 @@ import { User } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
-    ActionUserAuthenticate,
-    ActionUserWatch,
-    ActionUserAuthenticateCheck,
-    ActionUserAddToken,
+  ActionUserAuthenticate,
+  ActionUserWatch,
+  ActionUserAuthenticateCheck,
+  ActionUserAddToken,
     ActionUserLoginEmail,
-    ActionUserLogout,
-    ActionUserWatchLanguage,
+  ActionUserLogout,
+  ActionUserWatchLanguage,
     ActionUserReset,
     ActionUserGet,
-    ActionUserSet,
+  ActionUserSet,
     ActionUserPatch,
-    ActionUserCreate,
     ActionUserSave,
-    ActionUserDelete
+    ActionUserDelete,
+  ActionUserCreate
 } from './user.actions';
 import { ServiceUsers } from '@firefly/core/services';
 import { CoreUtil, CoreEnum } from '@theory/core';
@@ -61,13 +61,13 @@ export class StateUser implements NgxsOnInit
     @Selector() static isNew(state: StateUserModel): boolean       { return StateUser.id(state) === CoreEnum.IdNew; }
     @Selector() static canUpdate(state: StateUserModel): boolean   { return StateUser.form(state).status === FormNgxsStatus.Valid && StateUser.form(state).dirty; }
 
-    @Selector() static authData(state: StateUserModel): FirebaseUser              { return state.authData; }
-    @Selector() static authenticated(state: StateUserModel): boolean              { return state.authenticated; }
-    @Selector() static authenticating(state: StateUserModel): boolean             { return state.authenticating; }
-    @Selector() static loading(state: StateUserModel): boolean                    { return state.authenticating || state.initializing; }
-    @Selector() static loadedNotAuthenticated(state: StateUserModel):boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
-    @Selector() static error(state: StateUserModel): Error                        { return state.error; }
-    @Selector() static errored(state: StateUserModel)                             { return state.error != null; }
+    @Selector() static authData(state: StateUserModel): FirebaseUser              {return state.authData;}
+    @Selector() static authenticated(state: StateUserModel): boolean              {return state.authenticated;}
+    @Selector() static authenticating(state: StateUserModel): boolean             {return state.authenticating;}
+    @Selector() static loading(state: StateUserModel): boolean                    {return state.authenticating || state.initializing;}
+    @Selector() static loadedNotAuthenticated(state: StateUserModel):boolean      {return !StateUser.loading(state) && !StateUser.authenticated(state);}
+    @Selector() static error(state: StateUserModel): Error                        {return state.error;}
+    @Selector() static errored(state: StateUserModel)                             {return state.error != null;}
     @Selector() static found(state: StateUserModel)                               { return StateUser.data(state) != null; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
@@ -182,7 +182,7 @@ export class StateUser implements NgxsOnInit
         (
             switchMap(() =>
                 dispatch
-                ([
+        ([
                     new ActionUserAlertsDelete(),
                     new ActionUserClustersDelete(),
                     new ActionUserEventsDelete(),
@@ -206,7 +206,7 @@ export class StateUser implements NgxsOnInit
             tap((authData: FirebaseUser) => patchState({ authData, authenticating: false, authenticated: authData != null })),
             switchMap((authData: FirebaseUser) => authData == null ? of(null) : dispatch(new ActionUserWatch(this.service.parseId(authData)))),
             tap(() => patchState({ initializing: false })),
-            catchError((error: Error) => of(patchState({ error, authenticating: false, initializing: false })))
+            catchError((error: Error) => of(patchState({error, authenticating: false, initializing: false})))
         );
     }
 
@@ -251,7 +251,7 @@ export class StateUser implements NgxsOnInit
                 ])
             ),
 
-            catchError((error: Error) => of(patchState({ error })))
+            catchError((error: Error) => of(patchState({ error})))
         );
     }
 
@@ -276,6 +276,30 @@ export class StateUser implements NgxsOnInit
 
         return dispatch(new ActionUserPatch({ tokens }, true));
     }
+
+    @Action(ActionUserCreate)
+    createUser({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserCreate)
+    {
+        patchState({ authenticating: true });
+
+        /*this.fireAuth.auth.signInWithEmailAndPassword(payload.id, payload.password).catch(function(error) {
+
+          let errorCode = error.code;
+          let errorMessage = error.message;
+          console.log('errorCode' + errorCode);
+          console.log('errorMessage: ' + errorMessage);
+
+
+        });
+        return null;*/
+        return from(this.auth.auth.createUserWithEmailAndPassword(payload.id, payload.password)).pipe
+        (
+            map((userCredential: firebase.auth.UserCredential) => userCredential.user),
+            switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
+            catchError((error: Error) => of(patchState({ error, authenticating: false })))
+        );
+    }
+
 
     @Action(ActionUserLoginEmail)
     loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserLoginEmail)
