@@ -8,7 +8,6 @@ import { ModulePage } from '@firefly/app/modules';
 
 import { RoutesPageHome } from './home.page.routes';
 import { PageHome } from './home.page';
-import { NgxsModule } from '@ngxs/store';
 
 @NgModule
 ({
@@ -18,11 +17,7 @@ import { NgxsModule } from '@ngxs/store';
         CommonModule,
         RouterModule.forChild(RoutesPageHome),
         ModuleComponentSlide,
-        TranslateModule,
-        NgxsModule.forFeature
-        ([
-
-        ])
+        TranslateModule
     ],
 
     declarations : [PageHome],

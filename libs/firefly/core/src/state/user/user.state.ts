@@ -32,12 +32,12 @@ import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { FormGroup } from '@angular/forms';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 
-import { ActionUserAlertsDelete, ActionUserAlertsReset } from '../user-alerts/user-alerts.actions';
+import { ActionUserAlertsDelete, ActionUserAlertsReset, ActionUserAlertsGetData } from '../user-alerts/user-alerts.actions';
 import { ActionUserClustersDelete, ActionUserClustersReset } from '../user-clusters/user-clusters.actions';
 import { ActionUserEventsDelete, ActionUserEventsReset } from '../user-events/user-events.actions';
 import { ActionUserIconsDelete, ActionUserIconsReset } from '../user-icons/user-icons.actions';
 import { ActionUserImagesDelete, ActionUserImagesReset } from '../user-images/user-images.actions';
-import { ActionUserStreamDelete, ActionUserStreamReset } from '../user-stream/user-stream.actions';
+import { ActionUserStreamDelete, ActionUserStreamReset, ActionUserStreamGetData } from '../user-stream/user-stream.actions';
 import { ActionUserSubscriptionsDelete, ActionUserSubscriptionsReset } from '../user-subscriptions/user-subscriptions.actions';
 
 @State<StateUserModel>(StateUserOptions)
@@ -130,6 +130,13 @@ export class StateUser implements NgxsOnInit
             map(() => patchState({ formGroup: this.service.formCreate(object) }) ),
             switchMap(() =>
                 dispatch(new UpdateFormValue({ value: object, path: StateUser.formPath(getState())}))
+            ),
+            switchMap(() =>
+                dispatch
+                ([
+                    new ActionUserAlertsGetData(),
+                    new ActionUserStreamGetData()
+                ])
             )
         );
     }
