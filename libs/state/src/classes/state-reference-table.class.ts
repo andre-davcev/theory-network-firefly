@@ -1,6 +1,6 @@
 import { ReferenceTable, StateReferenceTableModel } from '../interfaces';
-import { TypeOf } from '@theory/core';
-import { Observable, of, forkJoin, empty } from 'rxjs';
+import { TypeOf, CoreUtil } from '@theory/core';
+import { Observable, of, forkJoin } from 'rxjs';
 import { Default } from '../enums';
 import { Model, ServiceAsset } from '@theory/firebase';
 import { tap, switchMap, map } from 'rxjs/operators';
@@ -12,10 +12,10 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
         return Object.
             keys(sortFields).
             filter((key: string) =>
-                data[key] !== undefined
+                CoreUtil.deepValue(key, data) !== undefined
             ).
             reduce((sort: Record<string, any>, key: string) =>
-                sort[key] = data[key]
+                sort[key] = CoreUtil.deepValue(key, data)
             , {});
     }
 
@@ -40,8 +40,8 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
             keys(data).
             sort((keyA: string, keyB: string) =>
             {
-                a = getAll ? lookup[keyA][field] : data[keyA].sort[field];
-                b = getAll ? lookup[keyB][field] : data[keyB].sort[field];
+                a = getAll ? CoreUtil.deepValue(field, lookup[keyA]) : data[keyA].sort[field];
+                b = getAll ? CoreUtil.deepValue(field, lookup[keyB]) : data[keyB].sort[field];
                 sort = 0;
 
                 if (type === TypeOf.String)
@@ -231,7 +231,7 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
             ...this.getSortFields(state.sortFields, after)
         };
 
-        if (before[sortField] !== after[sortField])
+        if (CoreUtil.deepValue(sortField, before) !== CoreUtil.deepValue(sortField, after))
         {
             list = this.sort(state).map((key: string) => lookup[key]);
         }

@@ -18,15 +18,16 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
         offset:        0,
         pageSize:      Default.PageSize,
         initialized:   false,
-        sortField:     'name',
-        sortAscending: true,
+        sortField:     'times.0.start',
+        sortAscending: false,
         sortByEntity:  false,
         imageIdKey:    'imageId',
 
         sortFields:
         {
-            name        : TypeOf.String,
-            dateCreated : TypeOf.String
+            name            : TypeOf.String,
+            dateCreated     : TypeOf.String,
+            'times.0.start' : TypeOf.Number
         }
     }
 };
