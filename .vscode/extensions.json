@@ -25,6 +25,7 @@
     "cssho.vscode-svgviewer",
     "donjayamanne.githistory",
     "Orta.vscode-jest",
-    "angular.ng-template"
+    "angular.ng-template",
+    "johnpapa.vscode-peacock"
   ]
 }
