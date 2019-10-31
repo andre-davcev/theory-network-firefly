@@ -39,6 +39,7 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     @Selector() static sortType(state: StateUserEventsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserEventsModel):          boolean                   { return Object.keys(StateUserEvents.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserEventsModel):         number                    { return Object.keys(StateUserEvents.data(state)).length; }
+    @Selector() static found(state: StateUserEventsModel):         boolean                   { return StateUserEvents.count(state) > 0; }
     @Selector() static getAll(state: StateUserEventsModel):        boolean                   { return StateUserEvents.sort(state) && state.sortByEntity; }
 
     constructor

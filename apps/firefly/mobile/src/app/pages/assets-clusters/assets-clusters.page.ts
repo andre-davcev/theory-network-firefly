@@ -19,7 +19,8 @@ import { ModalController } from '@ionic/angular';
 
 export class PageAssetsClusters
 {
-    @Select(StateUserClusters.list) clusters$: Observable<Array<Cluster>>;
+    @Select(StateUserClusters.list)  list$:  Observable<Array<Cluster>>;
+    @Select(StateUserClusters.found) found$: Observable<boolean>;
 
     @Input() modal: boolean = false;
 

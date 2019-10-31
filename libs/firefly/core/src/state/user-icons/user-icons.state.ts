@@ -39,6 +39,7 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Selector() static sortType(state: StateUserIconsModel):      TypeOf                    { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserIconsModel):          boolean                   { return Object.keys(StateUserIcons.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserIconsModel):         number                    { return Object.keys(StateUserIcons.data(state)).length; }
+    @Selector() static found(state: StateUserIconsModel):         boolean                   { return StateUserIcons.count(state) > 0; }
     @Selector() static getAll(state: StateUserIconsModel):        boolean                   { return StateUserIcons.sort(state) && state.sortByEntity; }
 
     constructor

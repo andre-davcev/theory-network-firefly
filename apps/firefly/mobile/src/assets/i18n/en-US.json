@@ -45,10 +45,11 @@
   "page.auth.newUser"             : "New User?",
   "page.auth.signUp"              : "Sign up here",
 
-  "page.stream.title"      : "Feed",
+  "page.stream.title"      : "Firefly Clusters",
   "page.stream.subscribe"  : "Subscribe",
   "page.stream.subscribed" : "Subscribed",
 
+  "page.notifications.title"                 : "Notifications",
   "page.notifications.tabFired"              : "Fired",
   "page.notifications.tabSubscriptions"      : "Subscriptions",
   "page.notifications.addCoupon"             : "Add Coupon",

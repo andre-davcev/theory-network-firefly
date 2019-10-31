@@ -16,7 +16,7 @@
 
 <ion-content>
   	<ion-list lines="none" elevation="1">
-        <ion-item *ngFor="let cluster of clusters$ | async"
+        <ion-item *ngFor="let cluster of list$ | async"
                   (click)="select(cluster)">
             <ion-avatar slot="start">
                 <img [src]="cluster.iconUrl">
@@ -30,7 +30,7 @@
             <ion-icon *ngIf="!modal" name="arrow-dropright" item-right></ion-icon>
         </ion-item>
     </ion-list>
-      <div *ngIf="!(clustersFound$ | async)" class="container">
+      <div *ngIf="!(found$ | async)" class="container">
         <p>Create a new Cluster?</p>
       </div>
 

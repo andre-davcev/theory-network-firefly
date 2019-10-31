@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { StateUserEvents, Event, ActionEventSet } from '@firefly/core';
+import { Observable } from 'rxjs';
+import { Navigate } from '@ngxs/router-plugin';
+import { Pages } from '../pages.enum';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { StatusBarStyle } from '@capacitor/core';
 
 @Component
 ({
@@ -9,13 +16,26 @@ import { Component } from '@angular/core';
 
 export class PageAssetsEvents
 {
-    constructor()
-    {
+    @Select(StateUserEvents.list)  list$: Observable<Array<Event>>;
+    @Select(StateUserEvents.found) found: Observable<boolean>;
 
-    }
+    constructor( private store: Store) { }
 
     add(): void
     {
+        this.store.dispatch(new Navigate([Pages.AssetEvent]));
+    }
 
+    ionViewWillEnter()
+    {
+        this.store.dispatch
+        ([
+            new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark})
+        ]);
+    }
+
+    public select(object: Event): void
+    {
+        this.store.dispatch(new ActionEventSet(object));
     }
 }

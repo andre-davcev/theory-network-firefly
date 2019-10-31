@@ -40,6 +40,7 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     @Selector() static sortType(state: StateClusterSubscribersModel):      TypeOf                            { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateClusterSubscribersModel):          boolean                           { return Object.keys(StateClusterSubscribers.sortFields(state)).length > 0; }
     @Selector() static count(state: StateClusterSubscribersModel):         number                            { return Object.keys(StateClusterSubscribers.data(state)).length; }
+    @Selector() static found(state: StateClusterSubscribersModel):         boolean                           { return StateClusterSubscribers.count(state) > 0; }
     @Selector() static getAll(state: StateClusterSubscribersModel):        boolean                           { return StateClusterSubscribers.sort(state) && state.sortByEntity; }
 
     constructor
