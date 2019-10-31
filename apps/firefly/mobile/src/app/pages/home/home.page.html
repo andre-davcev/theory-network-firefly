@@ -16,6 +16,10 @@
           <ion-button icon-only (click)="navigate(Pages.AssetEvent)">
               <ion-icon name="md-add" color="dark" size="large"></ion-icon>
           </ion-button>
+
+          <ion-title color="dark">
+              {{ (showAlerts ? 'page.notifications.title' : 'page.stream.title') | translate}}
+          </ion-title>
 <!--
           <ion-button icon-only (click)="navigate(Pages.Assets)">
               <ion-icon name="cloud-outline" color="dark" size="large"></ion-icon>

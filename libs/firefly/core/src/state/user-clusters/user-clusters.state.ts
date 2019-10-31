@@ -39,6 +39,7 @@ export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster,
     @Selector() static sortType(state: StateUserClustersModel):      TypeOf                      { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserClustersModel):          boolean                     { return Object.keys(StateUserClusters.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserClustersModel):         number                      { return Object.keys(StateUserClusters.data(state)).length; }
+    @Selector() static found(state: StateUserClustersModel):         boolean                     { return StateUserClusters.count(state) > 0; }
     @Selector() static getAll(state: StateUserClustersModel):        boolean                     { return StateUserClusters.sort(state) && state.sortByEntity; }
 
     constructor

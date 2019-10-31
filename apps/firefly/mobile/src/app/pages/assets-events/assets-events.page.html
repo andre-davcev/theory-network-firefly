@@ -1,17 +1,43 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>{{'page.assets-events.title' | translate}}</ion-title>
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-        </ion-buttons>
-    </ion-toolbar>
+  <ion-toolbar color="white">
+      <ion-title color="dark">
+          {{ page.assets-events.title' | translate}}
+      </ion-title>
+
+      <ion-buttons slot="start">
+          <ion-back-button *ngIf="!modal" color="dark"></ion-back-button>
+
+          <ion-button *ngIf="modal" color="dark" (click)="cancel()">
+              {{ 'general.cancel' | translate }}
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-    <ion-fab slot="fixed" vertical="bottom" right (click)="add()">
-        <ion-fab-button color="secondary">
-            <ion-icon name="md-add"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
+  <ion-list lines="none" elevation="1">
+      <ion-item *ngFor="let item of list$ | async"
+                (click)="select(item)">
+          <ion-avatar slot="start">
+              <img [src]="item.imageUrl">
+          </ion-avatar>
+
+          <ion-label>
+              <h2>{{item.name}}</h2>
+              <p>{{item.tagline}}</p>
+          </ion-label>
+
+          <ion-icon name="arrow-dropright" item-right></ion-icon>
+      </ion-item>
+  </ion-list>
+
+    <div *ngIf="!(found$ | async)" class="container">
+      <p>Create a new Event?</p>
+    </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button color="secondary" mode="md" (click)="add()">
+          <ion-icon name="md-add"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
 </ion-content>

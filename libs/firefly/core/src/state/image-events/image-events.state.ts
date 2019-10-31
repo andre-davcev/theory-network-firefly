@@ -39,6 +39,7 @@ export class StateImageEvents extends StateReferenceTable<ImageEvent, Event, Sta
     @Selector() static sortType(state: StateImageEventsModel):      TypeOf                     { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateImageEventsModel):          boolean                    { return Object.keys(StateImageEvents.sortFields(state)).length > 0; }
     @Selector() static count(state: StateImageEventsModel):         number                     { return Object.keys(StateImageEvents.data(state)).length; }
+    @Selector() static found(state: StateImageEventsModel):         boolean                    { return StateImageEvents.count(state) > 0; }
     @Selector() static getAll(state: StateImageEventsModel):        boolean                    { return StateImageEvents.sort(state) && state.sortByEntity; }
 
     constructor

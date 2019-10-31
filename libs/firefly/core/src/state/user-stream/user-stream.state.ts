@@ -39,6 +39,7 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
     @Selector() static sortType(state: StateUserStreamModel):      TypeOf                         { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserStreamModel):          boolean                        { return Object.keys(StateUserStream.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserStreamModel):         number                         { return Object.keys(StateUserStream.data(state)).length; }
+    @Selector() static found(state: StateUserStreamModel):         boolean                        { return StateUserStream.count(state) > 0; }
     @Selector() static getAll(state: StateUserStreamModel):        boolean                        { return StateUserStream.sort(state) && state.sortByEntity; }
 
     constructor

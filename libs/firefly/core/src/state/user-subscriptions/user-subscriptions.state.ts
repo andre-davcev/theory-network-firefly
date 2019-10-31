@@ -42,6 +42,7 @@ export class StateUserSubscriptions extends StateReferenceTable<UserSubscription
     @Selector() static sortType(state: StateUserSubscriptionsModel):      TypeOf                           { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateUserSubscriptionsModel):          boolean                          { return Object.keys(StateUserSubscriptions.sortFields(state)).length > 0; }
     @Selector() static count(state: StateUserSubscriptionsModel):         number                           { return Object.keys(StateUserSubscriptions.data(state)).length; }
+    @Selector() static found(state: StateUserSubscriptionsModel):         boolean                          { return StateUserSubscriptions.count(state) > 0; }
     @Selector() static getAll(state: StateUserSubscriptionsModel):        boolean                          { return StateUserSubscriptions.sort(state) && state.sortByEntity; }
 
     constructor

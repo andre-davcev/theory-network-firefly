@@ -39,6 +39,7 @@ export class StateIconClusters extends StateReferenceTable<IconCluster, Cluster,
     @Selector() static sortType(state: StateIconClustersModel):      TypeOf                      { return state.sortFields[state.sortField]; }
     @Selector() static sort(state: StateIconClustersModel):          boolean                     { return Object.keys(StateIconClusters.sortFields(state)).length > 0; }
     @Selector() static count(state: StateIconClustersModel):         number                      { return Object.keys(StateIconClusters.data(state)).length; }
+    @Selector() static found(state: StateIconClustersModel):         boolean                     { return StateIconClusters.count(state) > 0; }
     @Selector() static getAll(state: StateIconClustersModel):        boolean                     { return StateIconClusters.sort(state) && state.sortByEntity; }
 
     constructor
