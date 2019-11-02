@@ -26,6 +26,7 @@
     "donjayamanne.githistory",
     "Orta.vscode-jest",
     "angular.ng-template",
-    "johnpapa.vscode-peacock"
+    "johnpapa.vscode-peacock",
+    "ms-vscode-remote.remote-containers"
   ]
 }
