@@ -84,8 +84,6 @@ export class StateUser implements NgxsOnInit
     {
         const defaults: StateUserModel = CoreUtil.clone<StateUserModel>(StateUserOptions.defaults);
 
-        patchState(defaults);
-
         return dispatch
         ([
             new ActionUserAlertsReset(),
@@ -317,6 +315,8 @@ export class StateUser implements NgxsOnInit
     @Action(ActionUserLogout)
     logout({ patchState, dispatch }: StateContext<StateUserModel>)
     {
+        const defaults: StateUserModel = CoreUtil.clone<StateUserModel>(StateUserOptions.defaults);
+        patchState(defaults);
         return of(this.auth.auth.signOut()).pipe
         (
             switchMap(() => dispatch(new ActionUserReset())),
