@@ -9,7 +9,9 @@ import { PlatformEnum } from '@theory/ionic';
 
 import { Pages } from '@firefly/app/pages';
 import { ActionUserLogout } from '@firefly/core';
-import { SplashScreen } from '@capacitor/core';
+import { Plugins } from '@capacitor/core';
+
+const { SplashScreen } = Plugins;
 
 @Component
 ({

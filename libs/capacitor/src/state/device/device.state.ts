@@ -1,9 +1,9 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DeviceInfo, StatusBarStyleOptions, Device, Plugins } from '@capacitor/core';
+import { DeviceInfo, StatusBarStyleOptions, Plugins } from '@capacitor/core';
 
-const { StatusBar } = Plugins;
+const { Device, StatusBar } = Plugins;
 
 import { Platform } from '../../enums';
 

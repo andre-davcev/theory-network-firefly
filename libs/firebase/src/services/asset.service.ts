@@ -1,13 +1,15 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, map, last } from 'rxjs/operators';
-import { FileReadResult, Filesystem } from '@capacitor/core';
+import { FileReadResult, Plugins } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder } from '@angular/forms';
 
 import { ServiceBase } from './base.service';
 import { StorageFormat } from '../enums';
+
+const { Filesystem } = Plugins;
 
 export class ServiceAsset<T> extends ServiceBase<T>
 {

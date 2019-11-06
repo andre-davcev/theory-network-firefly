@@ -6,7 +6,7 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StatusBarStyle, Camera } from '@capacitor/core';
+import { StatusBarStyle, Plugins } from '@capacitor/core';
 import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateCluster, ServiceImages, ActionEventPatch } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
@@ -14,6 +14,8 @@ import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
 import { MockImageId } from '@firefly/app/mock';
 import { BaseComponent } from '@theory/core';
+
+const { Camera } = Plugins;
 
 @Component
 ({
