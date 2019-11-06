@@ -1,67 +1,53 @@
 
 <ion-header>
-    <ion-toolbar color="dark"></ion-toolbar>
-  </ion-header>
-
-  <section class="cpt-container" fxLayout="column" fxLayoutAlign="center">
-      <section fxLayout="column" fxLayoutAlign="center center">
-          <app-icon-firefly [animate]="userLoading$ | async"></app-icon-firefly>
-          <img class="cpt-title" src="assets/images/app.title@2x.png">
-          <span class="cpt-tagline">{{ 'page.auth.tagline' | translate }}</span>
-      </section>
-
-      <form class="form-login" [formGroup]="loginForm">
-      <section class="cpt-container-auth" fxLayout="column" fxLayoutAlign="center">
-          <div class="cpt-auth-email">
-              <div class="cpt-container-inputs">
-                  <!--ion-list>
-                      <ion-item-->
-                        <ion-input formControlName="email" id="signup" class="tn-ico fa-icon fa-envelope-o" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="myemail@email.com" required="true"></ion-input>
-                        <div class="error-messages">
-                          <ng-container *ngFor="let error of error_messages.email">
-                            <div class="error-message" *ngIf="loginForm.get('email').hasError(error.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
-                              {{ error.message }}
-                            </div>
-                          </ng-container>
-                        </div>
-
-
-                        <!--ion-icon name="mail" color="primary" slot="end"></ion-icon-->
-                      <!--/ion-item>
-                    </ion-list-->
-                  <!--input type="email" id="signup"/-->
-                  <div class="cpt-divider"></div>
-                  <ion-input formControlName="password" type="password" id="password" class="tn-ico fa-icon fa-lock" autocorrect="on" autofocus="on" color="primary" inputmode="text" placeholder="************" required="true"></ion-input>
-                  <div class="error-messages">
-                    <ng-container *ngFor="let error of error_messages.password">
-                      <div class="error-message" *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
-                        {{ error.message }}
-                      </div>
-                    </ng-container>
-                  </div>
-                  <div class="error-messages">
-
-                      <div class="error-message">
-                        {{ error$ | async }}
-                      </div>
-
-                  </div>
-                  <!--tn-input-password [tn-host-classes]="'tn-ico fa-icon fa-lock'" [(tn-value)]="user.password.value" [tn-placeholder]="'page.auth.placeholderPassword' | translate" [tn-required]="true" [tn-clear]="user.password.clear" [tn-validate]="user.password.validate" [tn-valid-input]="user.password.validInput"></tn-input-password-->
-              </div>
-              <button *ngIf="showCreate" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="createUser()" [disabled]="(showCreate)">
-                <span class="cpt-text">{{'page.auth.create' | translate}}</span>
-              </button>
-
-              <ion-button *ngIf="!showCreate" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="login(AuthProvider.Email)">
-                  <span class="cpt-text">{{'page.auth.signIn' | translate}}</span>
-              </ion-button>
-
-          </div>
-        </section>
-      </form>
-        <section class="cpt-container-user-menu">
-          <div *ngIf="!showCreate" class="cpt-sign-up-link" (click)="showCreateButton()">Sign up here</div>
-          <div *ngIf="showCreate" class="cpt-sign-up-link" (click)="showCreateButton()">Login</div>
-        </section>
-
+  <ion-toolbar color="dark"></ion-toolbar>
+</ion-header>
+<section class="cpt-container" fxLayout="column" fxLayoutAlign="center">
+  <section fxLayout="column" fxLayoutAlign="center center">
+    <app-icon-firefly [animate]="userLoading$ | async"></app-icon-firefly>
+    <img class="cpt-title" src="assets/images/app.title@2x.png">
+    <span class="cpt-tagline">{{ 'page.auth.tagline' | translate }}</span>
   </section>
+  <form class="form-login" [formGroup]="loginForm">
+  <section  class="cpt-container-auth" fxLayout="column" fxLayoutAlign="center">
+    <div *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))" class="cpt-auth-email">
+        <div class="cpt-container-inputs">
+          <ion-input formControlName="email" id="signup" class="tn-ico fa-icon fa-envelope-o" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="myemail@email.com" required="true"></ion-input>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.email">
+              <div class="error-message" *ngIf="loginForm.get('email').hasError(error.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="cpt-divider"></div>
+          <ion-input formControlName="password" type="password" id="password" class="tn-ico fa-icon fa-lock" autocorrect="on" autofocus="on" color="primary" inputmode="text" placeholder="************" required="true"></ion-input>
+          <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.password">
+              <div class="error-message" *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+          <div class="error-messages">
+            <div class="error-message">
+              {{ error$ | async }}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))">
+          <ion-button *ngIf="showCreate" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="createUser()" [disabled]="(showCreate)">
+            <span class="cpt-text">{{'page.auth.create' | translate}}</span>
+          </ion-button>
+          <ion-button *ngIf="!showCreate" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="login(AuthProvider.Email)">
+            <span class="cpt-text">{{'page.auth.signIn' | translate}}</span>
+          </ion-button>
+        </div>
+    </div>
+  </section>
+  </form>
+  <section *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))" class="cpt-container-user-menu">
+    <div *ngIf="!showCreate && showLoginForm" class="cpt-sign-up-link" (click)="showCreateButton()">Sign up here</div>
+    <div *ngIf="showCreate && showLoginForm" class="cpt-sign-up-link" (click)="showCreateButton()">Login</div>
+  </section>
+</section>
