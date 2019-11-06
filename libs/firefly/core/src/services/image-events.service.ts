@@ -5,7 +5,6 @@ import { ServiceAsset } from '@theory/firebase';
 import { ImageEvent } from '@firefly/core/models';
 import { FormBuilder } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceImageEvents extends ServiceAsset<Record<string, ImageEvent>>
@@ -14,10 +13,9 @@ export class ServiceImageEvents extends ServiceAsset<Record<string, ImageEvent>>
     (
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
-        webview:     WebView
+        storage:     AngularFireStorage
     )
     {
-        super('image-events', firestore, formBuilder, storage, webview, true);
+        super('image-events', firestore, formBuilder, storage, true);
     }
 }

@@ -77,10 +77,6 @@
   "page.cluster.iconPlaceholder"        : "select cluster",
   "page.cluster.descriptionPlaceholder" : "Write a description ...",
 
-  "page.image-catalog.title" : "Catalog",
-  "page.image-assets.title"  : "Assets",
-  "page.image-library.title" : "Photo Library",
-
   "page.assets.title"               : "Assets",
   "page.assets.add"                 : "Add Asset",
   "page.assets.icon"                : "Icon",

@@ -5,7 +5,6 @@ import { map, switchMap } from 'rxjs/operators';
 
 import { Icon } from '@firefly/core/models';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ServiceAsset } from '@theory/firebase';
@@ -17,11 +16,10 @@ export class ServiceIcons extends ServiceAsset<Icon>
     (
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
-        webview:     WebView
+        storage:     AngularFireStorage
     )
     {
-        super('icons', firestore, formBuilder, storage, webview);
+        super('icons', firestore, formBuilder, storage);
     }
 
     public formCreate(object: Icon): FormGroup

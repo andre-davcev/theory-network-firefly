@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceStreamItems extends ServiceAsset<StreamItem>
@@ -16,11 +15,10 @@ export class ServiceStreamItems extends ServiceAsset<StreamItem>
     (
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
-        webview:     WebView
+        storage:     AngularFireStorage
     )
     {
-        super('clusters', firestore, formBuilder, storage, webview, true);
+        super('clusters', firestore, formBuilder, storage, true);
     }
 
     public formCreate(object: StreamItem): FormGroup

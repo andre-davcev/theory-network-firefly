@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Alert } from '@firefly/core/models';
-import { ServiceBase, ServiceAsset } from '@theory/firebase';
+import { ServiceAsset } from '@theory/firebase';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 
@@ -15,11 +14,10 @@ export class ServiceAlerts extends ServiceAsset<Alert>
     (
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
-        webview:     WebView
+        storage:     AngularFireStorage
     )
     {
-        super('alerts', firestore, formBuilder, storage, webview);
+        super('alerts', firestore, formBuilder, storage);
     }
 
     public formCreate(object: Alert): FormGroup

@@ -48,8 +48,6 @@
     "@ionic-native/core": "file:../../../node_modules/@ionic-native/core",
     "@ionic-native/firebase": "file:../../../node_modules/@ionic-native/firebase",
     "@ionic-native/globalization": "file:../../../node_modules/@ionic-native/globalization",
-    "@ionic-native/ionic-webview": "file:../../../node_modules/@ionic-native/ionic-webview",
-    "@ionic-native/photo-library": "file:../../../node_modules/@ionic-native/photo-library",
     "@ionic-native/splash-screen": "file:../../../node_modules/@ionic-native/splash-screen",
     "@ionic-native/status-bar": "file:../../../node_modules/@ionic-native/status-bar",
     "@ionic/angular": "file:../../../node_modules/@ionic/angular",
