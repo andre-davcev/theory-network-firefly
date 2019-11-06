@@ -43,7 +43,6 @@ import {
 } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
-import { Camera } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
@@ -109,7 +108,6 @@ import { StateMap } from '@theory/mapbox';
     providers :
     [
         Globalization,
-        Camera,
         Firebase,
         WebView,
         PhotoLibrary,
