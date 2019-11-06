@@ -85,7 +85,7 @@ export class StateAlert
         const id: string = payload;
 
         const object: Alert = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), StateAlertOptions.defaults.empty) :
+            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Alert>(StateAlertOptions.defaults.empty)) :
             this.store.selectSnapshot(StateUserAlerts.lookup)[id]
 
         return dispatch([new ActionAlertSet(object)]);
