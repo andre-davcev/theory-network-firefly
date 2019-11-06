@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 8be26c1099c8fb157a4eee9feaa6aa05e466d272
   CapacitorCordova: 8aeaad82ad344af66b02f4660dcf544eec79face
-  CordovaPlugins: e7d95d32e7e6f0445bb119ca765432e784e04eb6
+  CordovaPlugins: 9ecd16dcbdb2403fe89edf71740e2e8d1a2a86a8
 
 PODFILE CHECKSUM: e57e508ec5349ca6023fde9134b1008ce56a92fa
 
