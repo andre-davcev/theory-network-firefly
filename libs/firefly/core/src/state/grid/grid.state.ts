@@ -1,6 +1,5 @@
 import { State, Action, StateContext, Selector, Select } from '@ngxs/store';
 import { PhotoAsset } from '@capacitor/core';
-import { LibraryItem} from '@ionic-native/photo-library/ngx'
 import { Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { Platform} from '@ionic/angular';
@@ -18,7 +17,7 @@ import { ActionGridIconLibraryWatch, ActionGridImageLibraryWatch, ActionGridIcon
 export class StateGrid
 {
     @Select(StatePhotos.photos) photos$: Observable<Array<PhotoAsset>>;
-    @Select(StatePhotosCap.library) photosCap$: Observable<LibraryItem[]>;
+//    @Select(StatePhotosCap.library) photosCap$: Observable<LibraryItem[]>;
 
     private urls: Array<string> =
     [

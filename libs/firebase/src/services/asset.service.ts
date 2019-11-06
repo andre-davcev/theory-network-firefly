@@ -87,6 +87,8 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public normalizeUrl(url: string): string
     {
-        return this.isNormalized(url) ? url : this.webview.convertFileSrc(url);
+        // ToDo: File URL Normalization ?
+        return url;
+//        return this.isNormalized(url) ? url : this.webview.convertFileSrc(url);
     }
   }
