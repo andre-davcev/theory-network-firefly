@@ -1,12 +1,14 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { from, of } from 'rxjs';
-import { GeolocationPosition, Geolocation } from '@capacitor/core';
+import { GeolocationPosition, Plugins } from '@capacitor/core';
 import { tap, catchError } from 'rxjs/operators';
 
 import { StateLocationModel } from './location.state.model';
 import { StateLocationOptions } from './location.state.options';
 import { ActionLocationWatch } from './location.actions';
+
+const { Geolocation } = Plugins;
 
 @State<StateLocationModel>(StateLocationOptions)
 
