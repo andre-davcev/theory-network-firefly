@@ -123,10 +123,6 @@
   "page.user-profile.title"  : "Profile",
   "page.user-settings.title" : "Settings",
 
-  "page.image-catalog.title" : "Catalog",
-  "page.image-assets.title"  : "Assets",
-  "page.image-library.title" : "Photo Library",
-
   "component.map-loading": "Loading Map...",
 
   "data.day-of-week.sunday"    : "Sunday",

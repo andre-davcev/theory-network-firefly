@@ -11,7 +11,6 @@ import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { firestore as fire } from 'firebase/app';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceEvents extends ServiceAsset<Event>
@@ -20,11 +19,10 @@ export class ServiceEvents extends ServiceAsset<Event>
     (
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
-        webview:     WebView
+        storage:     AngularFireStorage
     )
     {
-        super('events', firestore, formBuilder, storage, webview);
+        super('events', firestore, formBuilder, storage);
     }
 
     private static validateTime(): ValidatorFn

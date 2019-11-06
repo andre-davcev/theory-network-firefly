@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 import { Image, Event } from '../models';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
@@ -16,11 +15,10 @@ export class ServiceImages extends ServiceAsset<Image>
     (
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
-        webview:     WebView
+        storage:     AngularFireStorage
     )
     {
-        super('images', firestore, formBuilder, storage, webview);
+        super('images', firestore, formBuilder, storage);
     }
 
     public formCreate(object: Image): FormGroup

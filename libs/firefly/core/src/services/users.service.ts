@@ -6,7 +6,6 @@ import { AuthProvider, ServiceAsset } from '@theory/firebase';
 import { User } from '@firefly/core/models';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceUsers extends ServiceAsset<User>
@@ -15,11 +14,10 @@ export class ServiceUsers extends ServiceAsset<User>
     (
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
-        webview:     WebView
+        storage:     AngularFireStorage
     )
     {
-        super('users', firestore, formBuilder, storage, webview);
+        super('users', firestore, formBuilder, storage);
     }
 
     public parseId(authData: FirebaseUser): string

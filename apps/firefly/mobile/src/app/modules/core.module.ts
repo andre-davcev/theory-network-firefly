@@ -9,7 +9,6 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { Globalization } from '@ionic-native/globalization/ngx';
-import { PhotoLibrary } from '@ionic-native/photo-library/ngx'
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -43,7 +42,6 @@ import {
 } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { StateMap } from '@theory/mapbox';
@@ -109,8 +107,6 @@ import { StateMap } from '@theory/mapbox';
     [
         Globalization,
         Firebase,
-        WebView,
-        PhotoLibrary,
         { provide: RouteReuseStrategy,  useClass: IonicRouteStrategy },
         { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
         { provide: MapboxEnvironment,   useValue: environment.apis.mapbox }

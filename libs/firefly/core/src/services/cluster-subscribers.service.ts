@@ -5,7 +5,6 @@ import { ServiceAsset } from '@theory/firebase';
 import { ClusterSubscriber } from '@firefly/core/models';
 import { FormBuilder } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 
 @Injectable({ providedIn: 'root' })
@@ -15,10 +14,9 @@ export class ServiceClusterSubscribers extends ServiceAsset<Record<string, Clust
     (
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
-        webview:     WebView
+        storage:     AngularFireStorage
     )
     {
-        super('cluster-subscribers', firestore, formBuilder, storage, webview, true);
+        super('cluster-subscribers', firestore, formBuilder, storage, true);
     }
 }

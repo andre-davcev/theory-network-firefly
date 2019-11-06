@@ -5,7 +5,6 @@ import { Filesystem } from '@theory/capacitor';
 import { FileReadResult } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FormBuilder } from '@angular/forms';
 
 import { ServiceBase } from './base.service';
@@ -14,7 +13,6 @@ import { StorageFormat } from '../enums';
 export class ServiceAsset<T> extends ServiceBase<T>
 {
     public storage: AngularFireStorage;
-    public webview: WebView;
 
     public readonly separator: string = '###';
 
@@ -24,14 +22,12 @@ export class ServiceAsset<T> extends ServiceBase<T>
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
         storage:     AngularFireStorage,
-        webview:     WebView,
         reference?:  boolean
     )
     {
         super(name, firestore, formBuilder, reference);
 
-        this.storage     = storage;
-        this.webview     = webview;
+        this.storage = storage;
     }
 
     public base64(url: string): Observable<string>

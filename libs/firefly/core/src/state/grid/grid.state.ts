@@ -9,7 +9,7 @@ import { StatePhotos, ActionPhotosGet } from '@theory/capacitor';
 
 import { StateGridModel } from './grid.state.model';
 import { StateGridOptions } from './grid.state.options';
-import { StatePhotos as StatePhotosCap, ActionPhotosGetLibrary } from '@theory/cordova';
+import { StatePhotos as StatePhotosCap } from '@theory/cordova';
 
 import { CoreEnum } from '@theory/core';
 import { ActionGridIconLibraryWatch, ActionGridImageLibraryWatch, ActionGridIconPageSizeSet, ActionGridImagePageSizeSet, ActionGridIconLibraryPage, ActionGridImageLibraryPage } from './grid.actions';
@@ -60,6 +60,7 @@ export class StateGrid
     @Action(ActionGridIconLibraryWatch, { cancelUncompleted: true })
     iconLibraryWatch({ patchState, dispatch }: StateContext<StateGridModel>)
     {
+/*
         if (this.platform.is(PlatformEnum.Android))
         {
           return dispatch(new ActionPhotosGetLibrary()).pipe
@@ -104,6 +105,7 @@ export class StateGrid
               tap(() => dispatch(new ActionGridIconLibraryPage()))
           );
         }
+*/
     };
 
     @Action(ActionGridIconLibraryPage)

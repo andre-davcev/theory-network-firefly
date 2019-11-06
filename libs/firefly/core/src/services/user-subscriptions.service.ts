@@ -5,7 +5,6 @@ import { ServiceAsset } from '@theory/firebase';
 import { UserSubscription } from '@firefly/core/models';
 import { FormBuilder } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceUserSubscriptions extends ServiceAsset<Record<string, UserSubscription>>
@@ -14,10 +13,9 @@ export class ServiceUserSubscriptions extends ServiceAsset<Record<string, UserSu
     (
         firestore:   AngularFirestore,
         formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
-        webview:     WebView
+        storage:     AngularFireStorage
     )
     {
-        super('user-subscriptions', firestore, formBuilder, storage, webview, true);
+        super('user-subscriptions', firestore, formBuilder, storage, true);
     }
 }

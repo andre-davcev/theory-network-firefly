@@ -8,7 +8,6 @@ import { ServiceAsset } from '@theory/firebase';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormGroup, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { ValidatorsExtended } from '@theory/core';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 
 @Injectable({ providedIn: 'root' })
@@ -18,11 +17,10 @@ export class ServiceClusters extends ServiceAsset<Cluster>
     (
         firestore: AngularFirestore,
         formBuilder: FormBuilder,
-        storage: AngularFireStorage,
-        webview: WebView
+        storage: AngularFireStorage
     )
     {
-        super('clusters', firestore, formBuilder, storage, webview);
+        super('clusters', firestore, formBuilder, storage);
     }
 
     private static validateIcon(): ValidatorFn
