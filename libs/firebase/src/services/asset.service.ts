@@ -16,6 +16,8 @@ export class ServiceAsset<T> extends ServiceBase<T>
     public storage: AngularFireStorage;
     public webview: WebView;
 
+    public readonly separator: string = '###';
+
     constructor
     (
         name:        string,
@@ -59,17 +61,17 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public id(asset: T): string
     {
-        return `${asset['userId']}-${this.name}-${new Date().getTime()}.png`;
+        return `${asset['userId']}${this.separator}${this.name}${this.separator}${new Date().getTime()}.png`;
     }
 
     public toId(bucketPath: string): string
     {
-        return bucketPath.replace(/\//g, '-');
+        return bucketPath.replace(/\//g, this.separator);
     }
 
     public toBucketPath(id: string): string
     {
-        return id.replace(/-/g, '/');
+        return id.replace(/###/g, '/');
     }
 
     public getDownloadUrl(id: string): Observable<string | null>
