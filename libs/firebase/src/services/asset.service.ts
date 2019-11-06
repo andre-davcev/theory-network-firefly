@@ -1,8 +1,7 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, map, last } from 'rxjs/operators';
-import { Filesystem } from '@theory/capacitor';
-import { FileReadResult } from '@capacitor/core';
+import { FileReadResult, Filesystem } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder } from '@angular/forms';

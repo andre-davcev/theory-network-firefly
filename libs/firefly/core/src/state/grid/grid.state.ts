@@ -4,7 +4,6 @@ import { LibraryItem} from '@ionic-native/photo-library/ngx'
 import { Observable } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { Platform} from '@ionic/angular';
-import { PlatformEnum } from '@theory/ionic';
 import { StatePhotos, ActionPhotosGet } from '@theory/capacitor';
 
 import { StateGridModel } from './grid.state.model';

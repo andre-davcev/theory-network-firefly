@@ -6,7 +6,6 @@ import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
@@ -15,7 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppCoreModule } from '@theory/web';
-import { StateLanguage, StateLocation, StateDevice} from '@theory/capacitor';
+import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
 import {
   StateUser,
   FirebaseEnvironment,
