@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
-import { map, catchError, switchMap, filter, take } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
@@ -59,7 +58,6 @@ export class PageAssetEvent extends BaseComponent
     (
         private store:    Store,
         private modal:    ModalController,
-        private camera:   CameraCordova,
         private resolver: ResolverPageAssetsClusters,
         private images:   ServiceImages
     )
@@ -96,6 +94,7 @@ export class PageAssetEvent extends BaseComponent
         {
             if (this.store.selectSnapshot(StateDevice.device))
             {
+/*
                 const options: CameraOptionsCordova =
                 {
                     quality: 100,
@@ -113,6 +112,7 @@ export class PageAssetEvent extends BaseComponent
                         )
                     )
                 );
+*/
             }
             else
             {

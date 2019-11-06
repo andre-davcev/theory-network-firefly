@@ -5,7 +5,6 @@ import { tap, switchMap, catchError } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { StatusBarStyle } from '@capacitor/core';
-import { Camera as CameraCordova, CameraOptions as CameraOptionsCordova } from '@ionic-native/camera/ngx';
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
@@ -28,7 +27,6 @@ export class PageAssetCluster
 
     constructor(
       private store: Store,
-      private camera: CameraCordova,
       private loading: LoadingController,
       private toast: ToastController
     )
@@ -54,6 +52,8 @@ export class PageAssetCluster
 
             if (platform === Platform.iOS || platform === Platform.Android)
             {
+                // ToDo: Replace
+/*
                 const options: CameraOptionsCordova =
                 {
                     quality: 100,
@@ -66,6 +66,7 @@ export class PageAssetCluster
                 subscribe((imageData: string) =>
                   this.store.dispatch(new ActionIconUriSet(imageData))
                 );
+*/
             }
             else
             {
