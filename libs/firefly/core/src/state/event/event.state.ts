@@ -33,6 +33,7 @@ import { ActionEventClustersReset, ActionEventClustersDelete } from '../event-cl
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
 import { ActionImageEventsRemove, ActionImageEventsAdd } from '../image-events/image-events.actions';
 import { StateDevice } from '@theory/capacitor';
+import { ActionClusterReset } from '../cluster';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -79,6 +80,7 @@ export class StateEvent
         return dispatch
         ([
             new SetFormPristine(StateEvent.formPath(getState())),
+            new ActionClusterReset(),
             new ActionMapSearchResultClear()
         ]);
     }
@@ -111,9 +113,10 @@ export class StateEvent
     setId({ dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSetId)
     {
         const id: string = payload;
+        console.log(id);
 
         const object: Event = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), StateEventOptions.defaults.empty) :
+            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Event>(StateEventOptions.defaults.empty)) :
             this.store.selectSnapshot(StateUserEvents.lookup)[id]
 
         return dispatch

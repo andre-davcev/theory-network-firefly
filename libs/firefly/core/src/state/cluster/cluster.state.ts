@@ -98,7 +98,7 @@ export class StateCluster
         const id: string = payload;
 
         const object: Cluster = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), StateClusterOptions.defaults.empty) :
+            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Cluster>(StateClusterOptions.defaults.empty)) :
             this.store.selectSnapshot(StateUserClusters.lookup)[id]
 
         return dispatch

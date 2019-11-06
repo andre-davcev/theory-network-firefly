@@ -103,7 +103,7 @@ export class StateIcon
         const id: string = payload;
 
         const object: Icon = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), StateIconOptions.defaults.empty) :
+            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Icon>(StateIconOptions.defaults.empty)) :
             this.store.selectSnapshot(StateUserIcons.lookup)[id]
 
         return dispatch([new ActionIconSet(object)]);

@@ -87,7 +87,7 @@ export class StateStreamItem
         const id: string = payload;
 
         const object: StreamItem = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), StateStreamItemOptions.defaults.empty) :
+            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<StreamItem>(StateStreamItemOptions.defaults.empty)) :
             this.store.selectSnapshot(StateUserStream.lookup)[id]
 
         return dispatch

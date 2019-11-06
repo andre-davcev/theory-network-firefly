@@ -2,6 +2,14 @@
 
 $app-card-height: 48px;
 
+:host-context(.ios) {
+    ion-toolbar {
+        ion-title {
+            padding-top: 3px;
+        }
+    }
+}
+
 :host {
     --background: #{$app-color-grey-light};
 
