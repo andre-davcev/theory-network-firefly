@@ -5,11 +5,11 @@ import { delay } from 'rxjs/operators';
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import { RouterNavigation, Navigate } from '@ngxs/router-plugin';
 
-import { SplashScreen } from '@theory/capacitor';
 import { PlatformEnum } from '@theory/ionic';
 
 import { Pages } from '@firefly/app/pages';
 import { ActionUserLogout } from '@firefly/core';
+import { SplashScreen } from '@capacitor/core';
 
 @Component
 ({

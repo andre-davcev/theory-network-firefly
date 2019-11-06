@@ -6,7 +6,6 @@ import { tap, catchError } from 'rxjs/operators';
 import { StatePhotosModel } from './photos.state.model';
 import { StatePhotosOptions } from './photos.state.options';
 import { ActionPhotosGet, ActionPhotosGetAlbums } from './photos.actions';
-import { Photos } from '@theory/capacitor/constants';
 
 @State<StatePhotosModel>(StatePhotosOptions)
 export class StatePhotos
@@ -26,20 +25,24 @@ export class StatePhotos
     @Action(ActionPhotosGet)
     getLibrary({ patchState }: StateContext<StatePhotosModel>, { payload }: ActionPhotosGet)
     {
+      /*
         return from(Photos.getPhotos(payload)).pipe
         (
             tap((photos: PhotosResult) => patchState({ photos })),
             catchError(() => of(patchState({ photos: StatePhotosOptions.defaults.photos })))
         );
+        */
     }
 
     @Action(ActionPhotosGetAlbums)
     getAlbums({ patchState }: StateContext<StatePhotosModel>, { payload }: ActionPhotosGetAlbums)
     {
+      /*
         return from(Photos.getAlbums(payload)).pipe
         (
             tap((albums: PhotosAlbumsResult) => patchState({ albums })),
             catchError(() => of(patchState({ albums: StatePhotosOptions.defaults.albums })))
         );
+        */
     }
 }
