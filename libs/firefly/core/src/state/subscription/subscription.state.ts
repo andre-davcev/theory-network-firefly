@@ -87,7 +87,7 @@ export class StateSubscription
         const id: string = payload;
 
         const object: Subscription = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), StateSubscriptionOptions.defaults.empty) :
+            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Subscription>(StateSubscriptionOptions.defaults.empty)) :
             this.store.selectSnapshot(StateUserSubscriptions.lookup)[id]
 
         return dispatch

@@ -102,7 +102,7 @@ export class StateImage
         const id: string = payload;
 
         const object: Image = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), StateImageOptions.defaults.empty) :
+            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Image>(StateImageOptions.defaults.empty)) :
             this.store.selectSnapshot(StateUserImages.lookup)[id]
 
         return dispatch([new ActionImageSet(object)]);
