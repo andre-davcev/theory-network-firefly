@@ -1,15 +1,15 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { LibraryItem, AlbumItem, PhotoLibrary, RequestAuthorizationOptions, GetLibraryOptions } from '@ionic-native/photo-library/ngx';
-import { from, of, Observable, empty } from 'rxjs';
+import { from, of, Observable } from 'rxjs';
 import { tap, catchError, filter, switchMap, map } from 'rxjs/operators';
 
 import { StatePhotosModel } from './photos.state.model';
 import { StatePhotosOptions } from './photos.state.options';
-import { ActionPhotosRequestAuthorization, ActionPhotosGetLibrary, ActionPhotosGetAlbums, ActionPhotosSetAuthorizationOptions } from './photos.actions';
+import { ActionPhotosRequestAuthorization, ActionPhotosGetLibrary, ActionPhotosGetAlbums } from './photos.actions';
 
 @State<StatePhotosModel>(StatePhotosOptions)
 export class StatePhotos
 {
+/*
     @Selector() static authorizationOptions(state: StatePhotosModel): RequestAuthorizationOptions { return state.authorizationOptions; }
     @Selector() static authorized(state: StatePhotosModel): boolean { return state.authorized; }
     @Selector() static library(state: StatePhotosModel): Array<LibraryItem> { return state.library; }
@@ -74,10 +74,10 @@ export class StatePhotos
                     }
                   );
                 }),
-                /*tap((library:any) => {
-                  console.log('library: ' + library);
-                  return patchState({ library, watchingLibrary: true })
-                }),*/
+        // tap((library:any) => {
+                //   console.log('library: ' + library);
+                //   return patchState({ library, watchingLibrary: true })
+                // }),
                 catchError(() => of(patchState({ library: StatePhotosOptions.defaults.library, watchingLibrary: false })))
             );
         }
@@ -101,4 +101,5 @@ export class StatePhotos
             );
         }
     }
+*/
 }

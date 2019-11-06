@@ -1,10 +1,8 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { from, of } from 'rxjs';
-import { GeolocationPosition } from '@capacitor/core';
+import { GeolocationPosition, Geolocation } from '@capacitor/core';
 import { tap, catchError } from 'rxjs/operators';
-
-import { Geolocation } from '../../constants';
 
 import { StateLocationModel } from './location.state.model';
 import { StateLocationOptions } from './location.state.options';
