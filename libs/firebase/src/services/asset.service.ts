@@ -89,6 +89,7 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public normalizeUrl(url: string): string
     {
-        return this.isNormalized(url) ? url : Capacitor.convertFileSrc(url);
+        return this.isNormalized(url) ? url : `${CoreEnum.DataUri}/${url}`;
+        // return this.isNormalized(url) ? url : Capacitor.convertFileSrc(url);
     }
   }

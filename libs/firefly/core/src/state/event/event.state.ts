@@ -113,7 +113,6 @@ export class StateEvent
     setId({ dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSetId)
     {
         const id: string = payload;
-        console.log(id);
 
         const object: Event = id === CoreEnum.IdNew ?
             this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Event>(StateEventOptions.defaults.empty)) :
@@ -154,9 +153,9 @@ export class StateEvent
     @Action(ActionEventPatch)
     patch({ dispatch, getState } : StateContext<StateEventModel>, { payload, save }: ActionEventPatch)
     {
-        const data:  Event            = StateEvent.data(getState())
-        const value: Partial<Event>   = { ...data, ...payload };
         const state: StateEventModel  = getState();
+        const data:  Event            = StateEvent.data(state);
+        const value: Partial<Event>   = { ...data, ...payload };
         const path:  string           = StateEvent.formPath(state);
         const save$: Observable<void> = save ? this.service.patch(StateEvent.id(state), value) : of(null);
 
