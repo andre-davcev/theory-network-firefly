@@ -1,10 +1,9 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { Platform } from '@ionic/angular';
-import { Observable, of, from } from 'rxjs';
+import { of, from } from 'rxjs';
 import { catchError, switchMap, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { Globalization } from '@ionic-native/globalization/ngx';
+import { Plugins } from '@capacitor/core';
 
 import { PlatformEnum } from '@theory/ionic';
 
@@ -12,11 +11,13 @@ import { StateLanguageModel } from './language.state.model';
 import { StateLanguageOptions } from './language.state.options';
 import { ActionLanguageInitialize, ActionLanguageGet, ActionLanguageSet } from './language.actions';
 
+const { Device } = Plugins;
+
 @State<StateLanguageModel>(StateLanguageOptions)
 
 export class StateLanguage
 {
-    constructor(private globalization: Globalization, public platform: Platform, private translate: TranslateService) {}
+    constructor(private translate: TranslateService) {}
 
     @Selector() static language(state: StateLanguageModel): string {return state.language;}
 
@@ -49,13 +50,10 @@ export class StateLanguage
     @Action(ActionLanguageGet)
     languageGet({ patchState, dispatch }: StateContext<StateLanguageModel>)
     {
-        return of(this.platform.is(PlatformEnum.Cordova)).
+        from(Device.getLanguageCode()).
         pipe
         (
-            switchMap((cordova: boolean) =>
-                cordova ? from(this.globalization.getLocaleName()) : of({ value: navigator.language })
-            ),
-            map((lang: { value: string }) => lang.value),
+            map((language: { value: string }) => language.value),
             switchMap((language: string) => dispatch(new ActionLanguageSet(language))),
             catchError((error: Error) => of(patchState({ error })))
         );

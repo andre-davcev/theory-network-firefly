@@ -67,7 +67,7 @@ export class PageAssetEvent extends BaseComponent
         super();
     }
 
-    ionViewWillEnter()
+    public ionViewWillEnter(): void
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }

@@ -1,7 +1,7 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, map, last } from 'rxjs/operators';
-import { FileReadResult, Plugins } from '@capacitor/core';
+import { FileReadResult, Plugins, Capacitor } from '@capacitor/core';
 import { CoreEnum } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder } from '@angular/forms';
@@ -89,8 +89,6 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public normalizeUrl(url: string): string
     {
-        // ToDo: File URL Normalization ?
-        return url;
-//        return this.isNormalized(url) ? url : this.webview.convertFileSrc(url);
+        return this.isNormalized(url) ? url : Capacitor.convertFileSrc(url);
     }
   }

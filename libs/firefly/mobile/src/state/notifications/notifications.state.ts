@@ -2,7 +2,6 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { Observable, of, from, empty } from 'rxjs';
 import { switchMap, filter, tap } from 'rxjs/operators';
-import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
 
 import { PushNotification } from '@theory/firebase';
@@ -16,7 +15,7 @@ import { ActionNotificationsWatch } from './notifications.actions';
 
 export class StateNotifications
 {
-    constructor(private firebaseNative: Firebase, private platform: Platform) {}
+    constructor(private platform: Platform) {}
 
     @Selector() static pushNotifications(state: StateNotificationsModel): Array<PushNotification> {return state.notifications;}
     @Selector() static pushNotification(state: StateNotificationsModel): PushNotification {return state.notification;}
@@ -26,6 +25,7 @@ export class StateNotifications
     @Action(ActionNotificationsWatch)
     notificationsWatch({ patchState, getState, dispatch }: StateContext<StateNotificationsModel>)
     {
+        /*
         this.firebaseNative.onNotificationOpen().pipe
         (
             tap((notification: PushNotification) =>
@@ -51,5 +51,6 @@ export class StateNotifications
             filter((token: string) => token != null),
             switchMap((token: string) => dispatch(new ActionUserAddToken(token)))
         );
+        */
     }
 }
