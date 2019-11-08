@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of, BehaviorSubject, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StatusBarStyle, Plugins } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateCluster, ServiceImages, ActionEventPatch } from '@firefly/core';
+import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
+import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateCluster, ServiceImages, ActionEventPatch, ActionImageSetId, ActionImageUriSet, StateImage } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
@@ -96,26 +96,37 @@ export class PageAssetEvent extends BaseComponent
         {
             if (this.store.selectSnapshot(StateDevice.device))
             {
-                Camera.getPhoto
-/*
-                const options: CameraOptionsCordova =
+                const options: CameraOptions =
                 {
                     quality: 100,
-                    destinationType: this.camera.DestinationType.FILE_URI,
-                    encodingType: this.camera.EncodingType.JPEG,
-                    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+                    resultType: CameraResultType.Base64,
+                    source: CameraSource.Photos
                 };
 
-                from(this.camera.getPicture(options)).
-                subscribe((imageData: string) =>
-                    this.store.dispatch(new ActionImageSetId()).pipe
-                    (
-                        switchMap(() =>
-                            this.store.dispatch(new ActionImageUriSet(imageData))
-                        )
+                this.store.dispatch
+                ([
+                    new ActionMobileLoadingShow(),
+                    new ActionImageSetId()
+                ]).
+                pipe
+                (
+                    switchMap(() => from(Camera.getPhoto(options))),
+                    map((photo: CameraPhoto) => photo.base64String),
+                    switchMap((imageData: string) =>
+                        this.store.dispatch
+                        ([
+                            new ActionImageUriSet(imageData),
+                            new ActionMobileLoadingHide()
+                        ])
+                    ),
+                    map(() =>
+                        this.store.selectSnapshot(StateImage.url)
+                    ),
+                    switchMap((imageUrl: string) =>
+                        this.store.dispatch(new ActionEventPatch({ imageUrl }))
                     )
-                );
-*/
+                ).
+                subscribe();
             }
             else
             {
