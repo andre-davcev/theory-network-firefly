@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { StatusBarStyle } from '@capacitor/core';
+import { StatusBarStyle, Plugins, KeyboardResize } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
@@ -9,6 +9,8 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateEvent, Location, ActionEventLocationSet } from '@firefly/core';
 import { StateMap, ActionMapPlaceSetWithSearchResult, ActionMapSearchResultSetWithPlace } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
+
+const { Keyboard } = Plugins;
 
 @Component
 ({
@@ -50,6 +52,15 @@ export class PageEventLocation extends BaseComponent implements OnInit
     public ionViewWillEnter(): void
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+
+        // Keyboard.setScroll({ isDisabled: true });
+        // Keyboard.setResizeMode({ mode: KeyboardResize.None });
+    }
+
+    public ionViewWillLeave(): void
+    {
+        // Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
+        // Keyboard.setScroll({ isDisabled: false });
     }
 
     public locationFound(result: Result): void

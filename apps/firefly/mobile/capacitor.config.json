@@ -2,5 +2,10 @@
   "appId": "com.theorynetwork.Firefly",
   "appName": "Firefly",
   "bundledWebRuntime": false,
-  "webDir": "www"
+  "webDir": "www",
+  "plugins": {
+    "Keyboard": {
+      "resize": "none"
+    }
+  }
 }
