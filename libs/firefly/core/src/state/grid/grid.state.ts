@@ -154,7 +154,7 @@ export class StateGrid
         return dispatch(new ActionPhotosGet()).pipe
         (
             switchMap(() => this.photos$),
-            map((photos: Array<PhotoAsset>) => photos.map((photo: PhotoAsset) => `${CoreEnum.DataUri}${photo.data}`)),
+            map((photos: Array<PhotoAsset>) => photos.map((photo: PhotoAsset) => `${CoreEnum.DataUriPng}${photo.data}`)),
             tap((library: Array<string>) => patchState
             ({
                 imageLibrary:     library,

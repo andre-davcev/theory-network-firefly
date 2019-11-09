@@ -38,7 +38,7 @@ export class ServiceAsset<T> extends ServiceBase<T>
         return isDataUri ? of(url) : from(Filesystem.readFile({ path: url })).pipe
         (
             map((result: FileReadResult) => result.data),
-            map((data: string) => `${CoreEnum.DataUri}${data}`)
+            map((data: string) => `${CoreEnum.DataUriPng}${data}`)
         );
     }
 
@@ -89,7 +89,6 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public normalizeUrl(url: string): string
     {
-        return this.isNormalized(url) ? url : `${CoreEnum.DataUri}/${url}`;
-        // return this.isNormalized(url) ? url : Capacitor.convertFileSrc(url);
+        return this.isNormalized(url) ? url : `${CoreEnum.DataUriPng}${url}`;
     }
   }
