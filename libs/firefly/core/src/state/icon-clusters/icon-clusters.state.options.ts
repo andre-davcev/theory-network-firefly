@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { Default } from '@theory/state';
+import { Default } from '@theory/ngxs';
 
 import { StateIconClustersModel } from './icon-clusters.state.model';
 

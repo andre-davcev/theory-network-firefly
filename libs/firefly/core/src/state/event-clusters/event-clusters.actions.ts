@@ -1,4 +1,4 @@
-import { SortField } from '@theory/state';
+import { SortField } from '@theory/ngxs';
 import { Cluster, EventCluster } from '@firefly/core/models';
 
 import { ActionsEventClusters } from './event-clusters.actions.enum';

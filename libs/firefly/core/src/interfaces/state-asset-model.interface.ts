@@ -1,4 +1,4 @@
-import { FormNgxs } from '@theory/state';
+import { FormNgxs } from '@theory/ngxs';
 import { FormGroup } from '@angular/forms';
 
 export interface StateAssetModel<T>

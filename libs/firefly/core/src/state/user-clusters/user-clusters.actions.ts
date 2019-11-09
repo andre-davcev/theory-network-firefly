@@ -1,4 +1,4 @@
-import { SortField } from '@theory/state';
+import { SortField } from '@theory/ngxs';
 import { Cluster, UserCluster } from '@firefly/core/models';
 
 import { ActionsUserClusters } from './user-clusters.actions.enum';

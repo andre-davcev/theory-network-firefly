@@ -1,4 +1,4 @@
-import { ReferenceTable } from '@theory/state';
+import { ReferenceTable } from '@theory/ngxs';
 
 export interface UserEvent extends ReferenceTable
 {

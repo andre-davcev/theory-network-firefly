@@ -1,4 +1,4 @@
-import { SortField } from '@theory/state';
+import { SortField } from '@theory/ngxs';
 import { User, ClusterSubscriber } from '@firefly/core/models';
 
 import { ActionsClusterSubscribers } from './cluster-subscribers.actions.enum';

@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { User, ClusterSubscriber } from '@firefly/core/models';
 import { ServiceClusterSubscribers, ServiceUsers } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/ngxs';
 
 import { StateClusterSubscribersModel } from './cluster-subscribers.state.model';
 import { StateClusterSubscribersOptions } from './cluster-subscribers.state.options';

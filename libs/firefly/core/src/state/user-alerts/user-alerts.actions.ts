@@ -1,4 +1,4 @@
-import { SortField } from '@theory/state';
+import { SortField } from '@theory/ngxs';
 import { Alert, UserAlert } from '@firefly/core/models';
 
 import { ActionsUserAlerts } from './user-alerts.actions.enum';
