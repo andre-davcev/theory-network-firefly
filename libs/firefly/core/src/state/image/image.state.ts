@@ -5,7 +5,7 @@ import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 import { of, Observable } from 'rxjs';
 import { map, switchMap, filter, tap, catchError } from 'rxjs/operators';
 
-import { CoreEnum, CoreUtil } from '@theory/core';
+import { CoreEnum, CoreUtil, DataUri } from '@theory/core';
 import { StorageFormat } from '@theory/firebase';
 import { FormNgxs, FormNgxsStatus } from '@theory/state';
 import { Image } from '@firefly/core/models';
@@ -229,7 +229,7 @@ export class StateImage
         const userId:    string = this.store.selectSnapshot(StateUser.id);
         const path:      string = `${userId}/${this.service.name}/${name}`;
         const upload:    Upload = StateImage.upload(getState());
-        const data:      string = `${CoreEnum.DataUriPng}${file}`;
+        const data:      string = `${DataUri.Png}${file}`;
 
         const task: AngularFireUploadTask = this.storage.ref(path).putString(data, StorageFormat.DataUrl);
 

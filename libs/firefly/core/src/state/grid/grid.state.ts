@@ -7,9 +7,8 @@ import { StatePhotos, ActionPhotosGet } from '@theory/capacitor';
 
 import { StateGridModel } from './grid.state.model';
 import { StateGridOptions } from './grid.state.options';
-import { StatePhotos as StatePhotosCap } from '@theory/cordova';
 
-import { CoreEnum } from '@theory/core';
+import { DataUri } from '@theory/core';
 import { ActionGridIconLibraryWatch, ActionGridImageLibraryWatch, ActionGridIconPageSizeSet, ActionGridImagePageSizeSet, ActionGridIconLibraryPage, ActionGridImageLibraryPage } from './grid.actions';
 
 @State<StateGridModel>(StateGridOptions)
@@ -154,7 +153,7 @@ export class StateGrid
         return dispatch(new ActionPhotosGet()).pipe
         (
             switchMap(() => this.photos$),
-            map((photos: Array<PhotoAsset>) => photos.map((photo: PhotoAsset) => `${CoreEnum.DataUriPng}${photo.data}`)),
+            map((photos: Array<PhotoAsset>) => photos.map((photo: PhotoAsset) => `${DataUri.Png}${photo.data}`)),
             tap((library: Array<string>) => patchState
             ({
                 imageLibrary:     library,
