@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, from } from 'rxjs';
-import { tap, switchMap, catchError } from 'rxjs/operators';
+import { Observable, from, BehaviorSubject, combineLatest, of } from 'rxjs';
+import { tap, switchMap, catchError, map } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
-import { StatusBarStyle } from '@capacitor/core';
+import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { ActionDeviceStatusBarSet, StateDevice, Platform } from '@theory/capacitor';
-import { StateCluster, ActionClusterCreate, StateIcon, ActionIconUriSet } from '@firefly/core';
+import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
+import { StateCluster, ActionClusterCreate, StateIcon, ActionIconUriSet, ActionIconSetId, ActionClusterPatch, ServiceIcons } from '@firefly/core';
 import { Pages } from '../pages.enum';
+import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
+import { MockIconId } from '@firefly/app/mock';
+
+const { Camera } = Plugins;
 
 @Component
 ({
@@ -21,14 +25,34 @@ import { Pages } from '../pages.enum';
 export class PageAssetCluster
 {
     @Select(StateCluster.formGroup) form$:        Observable<FormGroup>;
-    @Select(StateIcon.url)          clusterIcon$: Observable<string>;
+    @Select(StateCluster.icon)      iconUrl$:    Observable<string>;
+    @Select(StateDevice.device)     device$:       Observable<boolean>;
+
+    private iconClicked$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+    public icon$: Observable<string> = combineLatest
+    ([
+        this.device$,
+        this.iconClicked$
+    ]).
+    pipe
+    (
+        switchMap(([device, iconClicked]) =>
+            device ?
+                this.iconUrl$ :
+                !iconClicked ?
+                    of(null) :
+                    this.icons.getDownloadUrl(MockIconId)
+        )
+    );
 
     public Pages: any = Pages;
 
     constructor(
       private store: Store,
       private loading: LoadingController,
-      private toast: ToastController
+      private toast: ToastController,
+      private icons: ServiceIcons
     )
     { }
 
@@ -48,29 +72,44 @@ export class PageAssetCluster
     {
         if (page === Pages.IconSelector)
         {
-            const platform: Platform = this.store.selectSnapshot(StateDevice.platform);
-
-            if (platform === Platform.iOS || platform === Platform.Android)
+            if (this.store.selectSnapshot(StateDevice.device))
             {
-                // ToDo: Replace
-/*
-                const options: CameraOptionsCordova =
+                const options: CameraOptions =
                 {
                     quality: 100,
-                    destinationType: this.camera.DestinationType.FILE_URI,
-                    encodingType: this.camera.EncodingType.JPEG,
-                    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+                    resultType: CameraResultType.DataUrl,
+                    source: CameraSource.Photos
                 };
 
-                from(this.camera.getPicture(options)).
-                subscribe((imageData: string) =>
-                  this.store.dispatch(new ActionIconUriSet(imageData))
-                );
-*/
+                this.store.dispatch(new ActionMobileLoadingShow()).
+                pipe
+                (
+                    switchMap(() => from(Camera.getPhoto(options))),
+                    map((photo: CameraPhoto) => photo.dataUrl),
+                    switchMap((imageData: string) =>
+                        this.store.dispatch(new ActionIconSetId()).pipe
+                        (
+                            switchMap(() => this.store.dispatch
+                            ([
+                                new ActionIconUriSet(imageData),
+                                new ActionMobileLoadingHide()
+                            ]))
+                        )
+                    ),
+                    map(() =>
+                        this.store.selectSnapshot(StateIcon.url)
+                    ),
+                    switchMap((iconUrl: string) =>
+                        this.store.dispatch(new ActionClusterPatch({ iconUrl }))
+                    )
+                ).
+                subscribe();
             }
             else
             {
-                this.store.dispatch(new ActionIconUriSet('assets/icons/temp-coffee-icon-pink.png'));
+                this.iconClicked$.next(true);
+
+                this.store.dispatch(new ActionClusterPatch({ iconId: MockIconId }));
             }
         }
     }

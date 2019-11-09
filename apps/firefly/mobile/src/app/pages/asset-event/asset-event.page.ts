@@ -47,7 +47,7 @@ export class PageAssetEvent extends BaseComponent
     (
         switchMap(([device, imageClicked]) =>
             device ?
-                this.image$ :
+                this.imageUrl$ :
                 !imageClicked ?
                     of(null) :
                     this.images.getDownloadUrl(MockImageId)
@@ -99,25 +99,24 @@ export class PageAssetEvent extends BaseComponent
                 const options: CameraOptions =
                 {
                     quality: 100,
-                    resultType: CameraResultType.Base64,
+                    resultType: CameraResultType.DataUrl,
                     source: CameraSource.Photos
                 };
 
-                this.store.dispatch
-                ([
-                    new ActionMobileLoadingShow(),
-                    new ActionImageSetId()
-                ]).
+                this.store.dispatch(new ActionMobileLoadingShow()).
                 pipe
                 (
                     switchMap(() => from(Camera.getPhoto(options))),
-                    map((photo: CameraPhoto) => photo.base64String),
+                    map((photo: CameraPhoto) => photo.dataUrl),
                     switchMap((imageData: string) =>
-                        this.store.dispatch
-                        ([
-                            new ActionImageUriSet(imageData),
-                            new ActionMobileLoadingHide()
-                        ])
+                        this.store.dispatch(new ActionImageSetId()).pipe
+                        (
+                            switchMap(() => this.store.dispatch
+                            ([
+                                new ActionImageUriSet(imageData),
+                                new ActionMobileLoadingHide()
+                            ]))
+                        )
                     ),
                     map(() =>
                         this.store.selectSnapshot(StateImage.url)

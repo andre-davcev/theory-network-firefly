@@ -233,7 +233,7 @@ export class StateIcon
         const userId:    string = this.store.selectSnapshot(StateUser.id);
         const path:      string = `${userId}/${this.service.name}/${name}`;
         const upload:    Upload = StateIcon.upload(getState());
-        const data:      string = `${CoreEnum.DataUri}${file}`;
+        const data:      string = `${CoreEnum.DataUriPng}${file}`;
 
         const task: AngularFireUploadTask = this.storage.ref(path).putString(data, StorageFormat.DataUrl);
 
