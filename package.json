@@ -105,7 +105,6 @@
     "@ngxs/router-plugin": "^3.4.3",
     "@ngxs/store": "^3.4.3",
     "@nrwl/nx": "7.8.7",
-    "@theory/scss": "file:libs/scss",
     "core-js": "^2.5.7",
     "firebase": "^7.2.1",
     "firebase-admin": "^8.6.1",
