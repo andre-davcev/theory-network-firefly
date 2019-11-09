@@ -27,6 +27,7 @@
     "Orta.vscode-jest",
     "angular.ng-template",
     "johnpapa.vscode-peacock",
-    "ms-vscode-remote.remote-containers"
+    "ms-vscode-remote.remote-containers",
+    "GitHub.vscode-pull-request-github"
   ]
 }
