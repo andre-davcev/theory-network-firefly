@@ -1,4 +1,4 @@
-import { SortField } from '@theory/state';
+import { SortField } from '@theory/ngxs';
 import { Event, UserEvent } from '@firefly/core/models';
 
 import { ActionsUserEvents } from './user-events.actions.enum';

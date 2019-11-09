@@ -5,7 +5,7 @@ import { of, Observable, empty } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/state';
+import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { Subscription } from '@firefly/core/models';
 import { ActionIconGet, ActionIconSetId } from '@firefly/core/state/icon';
 import { ServiceSubscriptions } from '@firefly/core/services';

@@ -6,7 +6,7 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/state';
+import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { Cluster } from '@firefly/core/models';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/user';

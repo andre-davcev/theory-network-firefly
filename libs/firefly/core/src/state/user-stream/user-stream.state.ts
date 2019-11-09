@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { StreamItem, UserStreamItem } from '@firefly/core/models';
 import { ServiceUserStream, ServiceStreamItems } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/ngxs';
 
 import { StateUserStreamModel } from './user-stream.state.model';
 import { StateUserStreamOptions } from './user-stream.state.options';

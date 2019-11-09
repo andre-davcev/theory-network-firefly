@@ -1,4 +1,4 @@
-import { SortField } from '@theory/state';
+import { SortField } from '@theory/ngxs';
 import { Cluster, IconCluster } from '@firefly/core/models';
 
 import { ActionsIconClusters } from './icon-clusters.actions.enum';

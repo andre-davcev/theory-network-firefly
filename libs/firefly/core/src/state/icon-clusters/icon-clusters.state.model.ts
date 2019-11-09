@@ -1,4 +1,4 @@
-import { StateReferenceTableModel } from '@theory/state';
+import { StateReferenceTableModel } from '@theory/ngxs';
 import { Cluster, IconCluster } from '@firefly/core/models';
 
 export interface StateIconClustersModel extends StateReferenceTableModel<IconCluster, Cluster>

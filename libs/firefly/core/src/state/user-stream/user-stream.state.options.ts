@@ -1,7 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { TypeOf } from '@theory/core';
-import { Default } from '@theory/state';
+import { Default } from '@theory/ngxs';
 
 import { StateUserStreamModel } from './user-stream.state.model';
 

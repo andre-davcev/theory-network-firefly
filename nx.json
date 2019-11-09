@@ -38,7 +38,7 @@
     "google": {
       "tags": []
     },
-    "state": {
+    "ngxs": {
       "tags": []
     }
   }

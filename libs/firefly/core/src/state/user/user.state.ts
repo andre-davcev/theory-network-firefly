@@ -28,7 +28,7 @@ import {
 } from './user.actions';
 import { ServiceUsers } from '@firefly/core/services';
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/state';
+import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { FormGroup } from '@angular/forms';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 

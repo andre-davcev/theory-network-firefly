@@ -14,7 +14,7 @@ Run `ng build state` to build the project. The build artifacts will be stored in
 
 ## Publishing
 
-After building your library with `ng build state`, go to the dist folder `cd dist/state` and run `npm publish`.
+After building your library with `ng build state`, go to the dist folder `cd dist/ngxs` and run `npm publish`.
 
 ## Running unit tests
 

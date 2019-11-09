@@ -7,7 +7,7 @@ import { map, switchMap, filter, tap, catchError } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil, DataUri } from '@theory/core';
 import { StorageFormat } from '@theory/firebase';
-import { FormNgxs, FormNgxsStatus } from '@theory/state';
+import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { Icon } from '@firefly/core/models';
 import { ServiceIcons } from '@firefly/core/services';
 import { Upload } from '@firefly/core/interfaces';

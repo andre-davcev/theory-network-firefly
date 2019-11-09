@@ -7,7 +7,7 @@ import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { ActionMapSearchResultClear } from '@theory/mapbox';
 import { CoreEnum, CoreUtil } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/state';
+import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/user';
 import { Event, Location, Time } from '@firefly/core/models';
 import { ServiceEvents } from '@firefly/core/services';

@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Event, ImageEvent } from '@firefly/core/models';
 import { ServiceImageEvents, ServiceEvents } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/ngxs';
 
 import { StateImageEventsModel } from './image-events.state.model';
 import { StateImageEventsOptions } from './image-events.state.options';
