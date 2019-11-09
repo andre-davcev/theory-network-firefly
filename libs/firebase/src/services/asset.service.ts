@@ -1,8 +1,8 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, map, last } from 'rxjs/operators';
-import { FileReadResult, Plugins, Capacitor } from '@capacitor/core';
-import { CoreEnum } from '@theory/core';
+import { FileReadResult, Plugins } from '@capacitor/core';
+import { DataUri } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder } from '@angular/forms';
 
@@ -38,7 +38,7 @@ export class ServiceAsset<T> extends ServiceBase<T>
         return isDataUri ? of(url) : from(Filesystem.readFile({ path: url })).pipe
         (
             map((result: FileReadResult) => result.data),
-            map((data: string) => `${CoreEnum.DataUriPng}${data}`)
+            map((data: string) => `${DataUri.Png}${data}`)
         );
     }
 
@@ -89,6 +89,6 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public normalizeUrl(url: string): string
     {
-        return this.isNormalized(url) ? url : `${CoreEnum.DataUriPng}${url}`;
+        return this.isNormalized(url) ? url : `${DataUri.Png}${url}`;
     }
   }
