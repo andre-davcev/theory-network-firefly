@@ -26,7 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 // All Variables
-@import 'theme/variables';
+@import 'variables';
 
 // Mapbox
 @import "~mapbox-gl/dist/mapbox-gl.css";
@@ -35,6 +35,6 @@
 // Font Awesome
 @import "~font-awesome/css/font-awesome.min.css";
 
-// App Styles
-@import 'theme/app-global-font-faces';
-@import 'theme/app-global-ionic';
+// Global App Styles
+@import 'global/fonts';
+@import 'global/ionic';

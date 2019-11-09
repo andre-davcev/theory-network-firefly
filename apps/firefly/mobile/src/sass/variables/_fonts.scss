@@ -1,0 +1,74 @@
+@import '~@theory/google/src/sass/variables';
+
+// Base
+$app-font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+// Helvetican Neue
+$app-font-helvetica-neue:                     "Helvetica Neue",                                                                        Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-bold:                "HelveticaNeue-Bold",              "Helvetica Neue Bold",              "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-bold-italic:         "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-condensed-black:     "HelveticaNeue-Condensed-Black",   "Helvetica Neue Condensed Black",   "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-condensed-bold:      "HelveticaNeue-Condensed-Bold",    "Helvetica Neue Condensed Bold",    "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-light:               "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-light-italic:        "HelveticaNeue-Light-Italic",      "Helvetica Neue Light Italic",      "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-medium:              "HelveticaNeue-Medium",            "Helvetica Neue Medium",            "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-medium-italic:       "HelveticaNeue-Medium-Italic",     "Helvetica Neue Medium Italic",     "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-thin:                "HelveticaNeue-Thin",              "Helvetica Neue Thin",              "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-thin-italic:         "HelveticaNeue-Thin-Italic",       "Helvetica Neue Thin Italic",       "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-ultra-light:         "HelveticaNeue-UltraLight",        "Helvetica Neue UltraLight",        "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-ultra-light-italic:  "HelveticaNeue-UltraLight-Italic", "Helvetica Neue UltraLight Italic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$app-font-text:               -apple-system-font, "Helvetica Neue", HelveticaNeue, "Roboto", "Segoe UI", sans-serif;
+$app-font-header-4:           $gm-font-family-header-4;
+$app-font-header-3:           $gm-font-family-header-3;
+$app-font-header-2:           $gm-font-family-header-2;
+$app-font-header-1:           $gm-font-family-header-1;
+$app-font-headline:           $gm-font-family-headline;
+$app-font-title:              $gm-font-family-title;
+$app-font-subhead:            $gm-font-family-subhead;
+$app-font-subhead-desktop:    $gm-font-family-subhead-desktop;
+$app-font-body:               $gm-font-family-body;
+$app-font-body-desktop:       $gm-font-family-body-desktop;
+$app-font-body-2:             $gm-font-family-body-2;
+$app-font-caption:            $gm-font-family-caption;
+$app-font-button:             $gm-font-family-button;
+
+$app-font-size-header-4:             $gm-font-size-header-4;
+$app-font-size-header-3:             $gm-font-size-header-3;
+$app-font-size-header-2:             $gm-font-size-header-2;
+$app-font-size-header-1:             $gm-font-size-header-1;
+$app-font-size-headline:             $gm-font-size-headline;
+$app-font-size-title:                $gm-font-size-title;
+$app-font-size-subhead:              $gm-font-size-subhead;
+$app-font-size-subhead-desktop:      $gm-font-size-subhead-desktop;
+$app-font-size-body:                 $gm-font-size-body;
+$app-font-size-body-desktop:         $gm-font-size-body-desktop;
+$app-font-size-caption:              $gm-font-size-caption;
+$app-font-size-button:               $gm-font-size-button;
+
+$app-line-height-header-4:           $gm-line-height-header-4;
+$app-line-height-header-3:           $gm-line-height-header-3;
+$app-line-height-header-2:           $gm-line-height-header-2;
+$app-line-height-header-1:           $gm-line-height-header-1;
+$app-line-height-headline:           $gm-line-height-headline;
+$app-line-height-title:              $gm-line-height-title;
+$app-line-height-subhead:            $gm-line-height-subhead;
+$app-line-height-subhead-desktop:    $gm-line-height-subhead-desktop;
+$app-line-height-body:               $gm-line-height-body;
+$app-line-height-desktop:            $gm-line-height-desktop;
+$app-line-height-caption:            $gm-line-height-caption;
+$app-line-height-button:             $gm-line-height-button;
+
+$app-font-color-header-4:            $gm-font-color-header-4;
+$app-font-color-header-3:            $gm-font-color-header-3;
+$app-font-color-header-2:            $gm-font-color-header-2;
+$app-font-color-header-1:            $gm-font-color-header-1;
+$app-font-color-headline:            $gm-font-color-headline;
+$app-font-color-title:               $gm-font-color-title;
+$app-font-color-subhead:             $gm-font-color-subhead;
+$app-font-color-body:                $gm-font-color-body;
+$app-font-color-caption:             $gm-font-color-caption;
+$app-font-color-button:              $gm-font-color-button;
+
+$app-font-size-small:   12px;
+$app-font-size-tiny:    8px;

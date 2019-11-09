@@ -1,9 +1,11 @@
+@import '../variables/icons';
+
 // Font Awesome
 
 @font-face
 {
-    font-family: $app-font-font-awesome;
-    src: $app-font-font-awesome-url;
+    font-family:  $app-font-font-awesome;
+    src:          $app-font-font-awesome-url;
 }
 
 // Ionic Icons 2
@@ -21,6 +23,6 @@
 
 @font-face
 {
-    font-family: $app-font-firefly;
-    src: $app-font-firefly-url;
+    font-family:  $app-font-firefly;
+    src:          $app-font-firefly-url;
 }

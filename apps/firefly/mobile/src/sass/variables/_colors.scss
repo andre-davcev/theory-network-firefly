@@ -1,0 +1,64 @@
+@import '~@theory/google/src/sass/variables';
+
+// Color Scheme - http://paletton.com/#uid=72x0u0kqMtIgFDulIvCtZowxzjr
+
+$app-color-black:                    $gm-color-black;
+$app-color-white:                    $gm-color-white;
+
+$app-color-dark:                     $gm-color-dark;
+$app-color-dark-text:                $gm-color-dark-text;
+$app-color-dark-text-secondary:      $gm-color-dark-text-secondary;
+$app-color-dark-icons:               $gm-color-dark-icons;
+$app-color-dark-dividers:            $gm-color-dark-dividers;
+$app-color-dark-disabled:            $gm-color-dark-disabled;
+$app-color-dark-hint:                $gm-color-dark-hint;
+
+$app-color-light:                    $gm-color-light;
+$app-color-light-text:               $gm-color-light-text;
+$app-color-light-text-secondary:     $gm-color-light-text-secondary;
+$app-color-light-icons:              $gm-color-light-icons;
+$app-color-light-dividers:           $gm-color-light-dividers;
+$app-color-light-disabled:           $gm-color-light-disabled;
+$app-color-light-hint:               $gm-color-light-hint;
+
+$app-color-primary-lightest:         #B2ED72;    // rgb(178, 237, 114)
+$app-color-primary-light:            #9AE449;    // rgb(154, 228, 73)    $gm-color-green-light-a400
+$app-color-primary:                  #80D623;    // rgb(128, 214, 35)
+$app-color-primary-dark:             #61B10B;    // rgb(97, 177, 11)     $gm-color-green-light-a700
+$app-color-primary-darkest:          #498C00;    // rgb(73, 140, 0)
+
+$app-color-accent-lightest:          #E76F9B;    // rgb(231, 111, 155)
+$app-color-accent-light:             #DB477E;    // rgb(219, 71, 126)    $gm-color-teal-a100
+$app-color-accent:                   #CE2262;    // rgb(206, 34, 98)
+$app-color-accent-dark:              #AA0B46;    // rgb(170, 11, 70)     $gm-color-teal-a400
+$app-color-accent-darkest:           #870032;    // rgb(135, 0, 50)
+
+$app-color-toolbar:                  $gm-color-toolbar;
+$app-color-status-bar:               $gm-color-status-bar;
+$app-color-button-action-primary:    $gm-color-button-action-primary;
+$app-color-switch:                   $gm-color-switch;
+$app-color-slider:                   $gm-color-slider;
+$app-color-link:                     $gm-color-link;
+$app-color-primary-text-white:       $gm-color-primary-text-white;
+$app-color-primary-text-black:       $gm-color-primary-text-black;
+$app-color-inactive:                 $gm-color-grey-500;
+
+
+$app-color-dark:                         #212221;
+$app-color-grey-light:                   rgb(230, 233, 230);
+$app-color-grey-lighter-font:            #8F8E94;
+$app-color-grey-lighter:                 rgba(190, 199, 195, 0.7);
+$app-color-grey-lightest:                rgba(255, 255, 255, 0.2);
+$app-color-grey-middle:                  rgba(146, 151, 149, 0.6);
+$app-color-grey-dark:                    rgba(5, 24, 28, 0.8);
+
+$app-color-transparent:                  rgba(0, 0, 0, 0);
+
+$app-color-dark-text:                    $app-color-white;
+$app-color-dark-text-active:             #7FD523;
+$app-color-dark-text-inactive:           #929292;
+$app-color-dark-text-border:             rgba(0, 0, 0, 0.5);
+
+$app-color-light-text:                   #030303;
+
+$app-color-text-white-background:      rgba(74, 79, 76, 0.8);
