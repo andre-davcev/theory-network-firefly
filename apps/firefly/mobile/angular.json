@@ -32,15 +32,15 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules",
-                "src/theme"
+                "src/sass"
               ]
             },
             "styles": [
               {
-                "input": "src/theme/variables.scss"
+                "input": "src/sass/_properties.scss"
               },
               {
-                  "input": "src/global.scss"
+                "input": "src/sass/_global.scss"
               }
             ],
             "scripts": []

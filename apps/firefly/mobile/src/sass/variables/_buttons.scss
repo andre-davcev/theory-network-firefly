@@ -1,0 +1,11 @@
+@import '~@theory/apple/src/sass/variables';
+
+@import 'colors';
+
+// General
+$app-button-border-radius:                   3px;
+
+// Delete Button
+$app-button-delete-height:                   $ios-list-item-button-delete-height;
+$app-button-delete-width:                    $ios-list-item-button-delete-width;
+$app-button-delete-color-background:         $app-color-accent-light;
