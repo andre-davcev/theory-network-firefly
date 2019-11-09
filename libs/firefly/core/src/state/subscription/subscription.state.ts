@@ -121,10 +121,11 @@ export class StateSubscription
     @Action(ActionSubscriptionPatch)
     patch({ dispatch, getState } : StateContext<StateSubscriptionModel>, { payload, save }: ActionSubscriptionPatch)
     {
-        const value: Partial<Subscription>  = payload;
         const state: StateSubscriptionModel = getState();
+        const data:  Subscription           = StateSubscription.data(state);
+        const value: Subscription           = { ...data, ...payload };
         const path:  string                 = StateSubscription.formPath(state);
-        const save$: Observable<void>       = save ? this.service.patch(StateSubscription.id(state), value) : of(null);
+        const save$: Observable<void>       = save ? this.service.patch(StateSubscription.id(state), payload) : of(null);
 
         return save$.pipe
         (

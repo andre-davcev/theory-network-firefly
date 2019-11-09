@@ -137,10 +137,11 @@ export class StateCluster
     @Action(ActionClusterPatch)
     patch({ dispatch, getState } : StateContext<StateClusterModel>, { payload, save }: ActionClusterPatch)
     {
-        const value: Partial<Cluster>  = payload;
         const state: StateClusterModel = getState();
+        const data:  Cluster           = StateCluster.data(state);
+        const value: Cluster           = { ...data, ...payload };
         const path:  string            = StateCluster.formPath(state);
-        const save$: Observable<void>  = save ? this.service.patch(StateCluster.id(state), value) : of(null);
+        const save$: Observable<void>  = save ? this.service.patch(StateCluster.id(state), payload) : of(null);
 
         return save$.pipe
         (
