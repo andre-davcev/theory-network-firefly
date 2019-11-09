@@ -155,9 +155,9 @@ export class StateEvent
     {
         const state: StateEventModel  = getState();
         const data:  Event            = StateEvent.data(state);
-        const value: Partial<Event>   = { ...data, ...payload };
+        const value: Event            = { ...data, ...payload };
         const path:  string           = StateEvent.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateEvent.id(state), value) : of(null);
+        const save$: Observable<void> = save ? this.service.patch(StateEvent.id(state), payload) : of(null);
 
         return save$.pipe
         (

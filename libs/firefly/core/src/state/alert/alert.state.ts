@@ -115,10 +115,11 @@ export class StateAlert
     @Action(ActionAlertPatch)
     patch({ dispatch, getState } : StateContext<StateAlertModel>, { payload, save }: ActionAlertPatch)
     {
-        const value: Partial<Alert>   = payload;
         const state: StateAlertModel  = getState();
+        const data:  Alert            = StateAlert.data(state);
+        const value: Alert            = { ...data, ...payload };
         const path:  string           = StateAlert.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateAlert.id(state), value) : of(null);
+        const save$: Observable<void> = save ? this.service.patch(StateAlert.id(state), payload) : of(null);
 
         return save$.pipe
         (

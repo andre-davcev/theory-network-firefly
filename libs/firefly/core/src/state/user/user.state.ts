@@ -142,10 +142,11 @@ export class StateUser implements NgxsOnInit
     @Action(ActionUserPatch)
     patch({ dispatch, getState } : StateContext<StateUserModel>, { payload, save }: ActionUserPatch)
     {
-        const value: Partial<User>    = payload;
         const state: StateUserModel   = getState();
+        const data:  User             = StateUser.data(state);
+        const value: User             = { ...data, ...payload };
         const path:  string           = StateUser.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateUser.id(state), value) : of(null);
+        const save$: Observable<void> = save ? this.service.patch(StateUser.id(state), payload) : of(null);
 
         return save$.pipe
         (
