@@ -14,7 +14,6 @@
     "lib": ["es2017", "dom"],
     "baseUrl": ".",
     "paths": {
-      "@theory/scss": ["libs/scss"],
       "@theory/apple": ["libs/apple/index.ts"],
       "@theory/apple/*": ["libs/apple/src/*"],
       "@theory/capacitor": ["libs/capacitor/index.ts"],

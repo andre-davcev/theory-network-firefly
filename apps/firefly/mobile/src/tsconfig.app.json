@@ -5,9 +5,6 @@
     "module": "es2015",
     "baseUrl": "./",
     "paths": {
-      "@theory/scss": [
-        "../../../../libs/scss"
-      ],
       "@theory/apple": [
         "../../../../libs/apple/index.ts"
       ],

@@ -1,3 +1,5 @@
+@import '../variables/elevation';
+
 @mixin gm-elevate($level: 1, $up: false)
 {
     @if $up
