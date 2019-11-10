@@ -1,5 +1,84 @@
 @import 'variables';
 
+$app-font-size-tiny:    8px;
+$app-font-size-small:   12px;
+
+// General
+$app-icon-font-size:  12px;
+$app-font-awesome-size:          $app-icon-font-size;
+
+$app-font-helvetica-neue:                     "Helvetica Neue",                                                                        Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-bold:                "HelveticaNeue-Bold",              "Helvetica Neue Bold",              "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-bold-italic:         "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-condensed-black:     "HelveticaNeue-Condensed-Black",   "Helvetica Neue Condensed Black",   "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-condensed-bold:      "HelveticaNeue-Condensed-Bold",    "Helvetica Neue Condensed Bold",    "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-light:               "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-light-italic:        "HelveticaNeue-Light-Italic",      "Helvetica Neue Light Italic",      "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-medium:              "HelveticaNeue-Medium",            "Helvetica Neue Medium",            "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-medium-italic:       "HelveticaNeue-Medium-Italic",     "Helvetica Neue Medium Italic",     "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-thin:                "HelveticaNeue-Thin",              "Helvetica Neue Thin",              "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-thin-italic:         "HelveticaNeue-Thin-Italic",       "Helvetica Neue Thin Italic",       "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-ultra-light:         "HelveticaNeue-UltraLight",        "Helvetica Neue UltraLight",        "Helvetica Neue", Helvetica, Arial, sans-serif;
+$app-font-helvetica-neue-ultra-light-italic:  "HelveticaNeue-UltraLight-Italic", "Helvetica Neue UltraLight Italic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$app-font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+$app-text-shadow-dark-background:            0px 2px 3px rgba(0, 0, 0, 0.28);
+$app-text-shadow-light-background:           0px 2px 3px rgba(0, 0, 0, 0.18);
+
+$app-box-shadow-dark-background:             0px 1px 1px rgba(0, 0, 0, 0.36);
+$app-box-shadow-light-background:            0px 1px 1px rgba(0, 0, 0, 0.10);
+
+$app-provider-button-color-text:             $gm-color-white;
+$app-provider-button-font-size:              10px;
+$app-provider-button-font-family:            $app-font-helvetica-neue;
+$app-provider-button-text-shadow:            $app-box-shadow-light-background;
+
+$app-provider-button-icon-font-size:          16px;
+$app-provider-button-icon-font-family:        $app-font-awesome;
+$app-provider-button-icon-height:             17px;
+$app-provider-button-icon-width:              16px;
+$app-provider-button-icon-width-with-margin:  26px;
+$app-provider-button-icon-color-background:   $gm-color-white;
+$app-provider-button-icon-border-radius:      2px;
+
+$app-input-height:                           34px;
+$app-input-line-height:                      $tn-line-height;
+
+$app-input-directive-height:                 $app-input-height;
+$app-input-directive-space-right:            $app-input-height + 0.9;
+
+$app-input-icon-font-family:                 $app-font-ionic-icons;
+$app-input-icon-line-height:                 $app-input-directive-height;
+$app-input-icon-verified-color:              $app-color-primary;
+$app-input-icon-error-color:                 $gm-color-red-800;
+$app-input-icon-clear-color:                 $gm-color-grey-400;
+
+$app-input-icon-verified:                    '\f2bc';    // $ionicon-var-checkmark
+$app-input-icon-error:                       '\f2c0';    // $ionicon-var-close
+$app-input-icon-verified-round:              '\f2bb';    // $ionicon-var-checkmark-round
+$app-input-icon-error-round:                 '\f14e';    // $ionicon-var-close-round
+$app-input-icon-clear:                       '\f2bf';    // $ionicon-var-close-circled
+
+$app-input-spinner-height:           if(ceil($app-input-directive-height / $tn-golden-ratio) % 2 == 0, ceil($app-input-directive-height / $tn-golden-ratio), floor($app-input-directive-height / $tn-golden-ratio));
+$app-input-spinner-width:            $app-input-spinner-height;
+$app-input-spinner-margin:           ($app-input-directive-height - $app-input-spinner-height) / 2;
+$app-input-spinner-margin-right:     $app-input-spinner-width + (($app-input-directive-space-right - $app-input-spinner-width) / 2);
+
+$app-input-icon-font-size:           $app-input-spinner-height;
+
+$app-input-icon-verified-width:      $app-input-icon-font-size * 0.8125;
+$app-input-icon-verified-margin:     $app-input-icon-verified-width + (($app-input-directive-space-right - $app-input-icon-verified-width) / 2);
+$app-input-icon-error-width:         $app-input-icon-font-size * 0.75;
+$app-input-icon-error-margin:        $app-input-icon-error-width + (($app-input-directive-space-right - $app-input-icon-error-width) / 2);
+$app-input-icon-clear-width:         $app-input-icon-font-size;
+
+$cpt-button-border-radius:                   3px;
+
+$cpt-button-delete-height:                   $ios-list-item-button-delete-height;
+$cpt-button-delete-width:                    $ios-list-item-button-delete-width;
+$cpt-button-delete-color-background:         $app-color-accent-light;
+
 $app-auth-margin-elements-subgroup:          8px;
 
 $app-auth-button-login-height:               $app-input-directive-height;
@@ -11,7 +90,7 @@ $app-auth-button-login-font-size:            $app-font-size-small;
 $app-auth-button-login-text-shadow:          $app-box-shadow-light-background;
 
 $app-auth-input-color-background:            $app-color-white;
-$app-auth-input-color-text:                  $app-color-text-white-background;
+$app-auth-input-color-text:                  rgba(74, 79, 76, 0.8);
 $app-auth-input-color-icon:                  $app-color-grey-lighter;
 $app-auth-input-login-height:                $app-auth-button-login-height;
 $app-auth-input-login-width:                 $app-auth-button-login-width;
@@ -370,8 +449,8 @@ input[type="color"]
     {
         position: absolute;
         top: 0; right: 0;
-        height: $app-button-delete-height; width: $app-button-delete-width;
-        background-color: $app-button-delete-color-background;
+        height: $cpt-button-delete-height; width: $cpt-button-delete-width;
+        background-color: $cpt-button-delete-color-background;
     }
 }
 
@@ -432,7 +511,7 @@ input[type="color"]
             {
                 margin-bottom: $app-auth-margin-elements-subgroup;
                 background-color: $app-auth-input-color-background;
-                border-radius: $app-button-border-radius;
+                border-radius: $cpt-button-border-radius;
                 box-shadow: $app-box-shadow-dark-background;
 
                 .fa-envelope-o
@@ -580,7 +659,7 @@ input[type="color"]
         {
             height: $app-auth-button-login-height; width: $app-auth-button-login-width;
             box-shadow: $app-box-shadow-dark-background;
-            border-radius: $app-button-border-radius;
+            border-radius: $cpt-button-border-radius;
         }
     }
   }
@@ -681,8 +760,8 @@ input[type="color"]
 
 .tn-ico.fa-icon:before
 {
-    font-family: $app-font-font-awesome;
-    font-size: $app-font-font-awesome-size;
+    font-family: $app-font-awesome;
+    font-size: $app-font-awesome-size;
 }
 
 .error-messages {

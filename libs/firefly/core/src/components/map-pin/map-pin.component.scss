@@ -6,13 +6,13 @@ $cpt-inner-font-size: 19px;
 :host
 {
     --cpt-icon:                      '\f041';
-    --cpt-font-family:               #{$app-font-font-awesome};
+    --cpt-font-family:               #{$app-font-awesome};
     --cpt-font-size:                 56px;
     --cpt-height:                    var(--cpt-font-size);
     --cpt-width:                     32px;
     --cpt-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
 
-    --cpt-inner-font-family:         #{$app-font-font-awesome};
+    --cpt-inner-font-family:         #{$app-font-awesome};
     --cpt-inner-font-size:           #{$cpt-inner-font-size};
     --cpt-inner-color:               #{$gm-color-white};
 
