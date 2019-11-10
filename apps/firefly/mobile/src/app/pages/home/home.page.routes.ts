@@ -2,10 +2,11 @@ import { Routes } from '@angular/router';
 
 import { PageHome } from './home.page';
 import { Pages } from '../pages.enum';
+import { ResolverPageHome } from './home.page.resolver';
 
 export const RoutesPageHome: Routes =
 [
-    { path : '', component : PageHome,
+    { path : '', component : PageHome, resolve: { loader: ResolverPageHome },
       children: [
         { path: '',           redirectTo: Pages.Stream, pathMatch: 'full' },
         { path: Pages.Stream, loadChildren: '@firefly/page/stream#ModulePageStream' },
