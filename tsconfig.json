@@ -14,7 +14,8 @@
     "lib": ["es2017", "dom"],
     "baseUrl": ".",
     "paths": {
-      "@theory/scss": ["libs/scss"],
+      "@theory/apple": ["libs/apple/index.ts"],
+      "@theory/apple/*": ["libs/apple/src/*"],
       "@theory/capacitor": ["libs/capacitor/index.ts"],
       "@theory/capacitor/*": ["libs/capacitor/src/*"],
       "@theory/cordova": ["libs/cordova/index.ts"],
@@ -32,8 +33,8 @@
       "@theory/mapbox/*": ["libs/mapbox/src/*"],
       "@theory/nativescript": ["libs/nativescript/index.ts"],
       "@theory/nativescript/*": ["libs/nativescript/src/*"],
-      "@theory/state": ["libs/state/index.ts"],
-      "@theory/state/*": ["libs/state/*"],
+      "@theory/ngxs": ["libs/ngxs/index.ts"],
+      "@theory/ngxs/*": ["libs/ngxs/*"],
       "@theory/web": ["libs/web/index.ts"],
       "@theory/web/*": ["libs/web/src/*"],
       "@firefly/core": ["libs/firefly/core/index.ts"],
@@ -49,7 +50,7 @@
       ],
       "@firefly/app/*": ["apps/firefly/mobile/src/app/*"],
       "@firefly/page": ["./src/app/pages"],
-      "@firefly/page/*": ["apps/firefly/mobile/src/app/pages/*"],
+      "@firefly/page/*": ["apps/firefly/mobile/src/app/pages/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

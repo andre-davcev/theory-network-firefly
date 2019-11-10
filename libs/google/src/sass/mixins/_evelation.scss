@@ -1,0 +1,13 @@
+@import '../variables/elevation';
+
+@mixin gm-elevate($level: 1, $up: false)
+{
+    @if $up
+    {
+        box-shadow: $gm-elevated-#{$border-position}-up;
+    }
+    @else
+    {
+        box-shadow: $gm-elevated-#{$border-position};
+    }
+}

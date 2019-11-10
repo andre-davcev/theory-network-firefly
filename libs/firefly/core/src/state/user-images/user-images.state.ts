@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Image, UserImage } from '@firefly/core/models';
 import { ServiceUserImages, ServiceImages } from '@firefly/core/services';
-import { StateReferenceTable, Default } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/ngxs';
 
 import { StateUserImagesModel } from './user-images.state.model';
 import { StateUserImagesOptions } from './user-images.state.options';

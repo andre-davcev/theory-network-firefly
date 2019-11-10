@@ -1,4 +1,4 @@
-@import "app-variables";
+@import 'variables';
 
 ion-toolbar {
     ion-segment {
@@ -13,7 +13,7 @@ ion-content {
 }
 
 app-icon {
-  --cpt-color: #{$app-color-grey-lighter};
+  --cpt-color: #{$fire-color-grey-lighter};
   --cpt-font-size: 30px;
     margin-right: 9px;
     margin-left: 2px;

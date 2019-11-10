@@ -1,17 +1,6 @@
-@import "app-variables";
+@import 'variables';
 
-$app-slide-color-background:                         white;
-
-$app-slide-margin:                                   28px;
-$app-slide-padding:                                  30px;
-
-$app-slide-width-margin:                             $app-slide-margin * 2;
-$app-slide-height-margin:                            88px;
-
-$app-slide-close-size:                               26px;
-$app-slide-close-size-half:                          $app-slide-close-size / 2;
-$app-slide-close-border-color:                       rgba(46, 47, 45, 0.7);
-$app-slide-close-border-width:                       2px;
+$cpt-slide-padding: 30px;
 
 :host
 {
@@ -20,14 +9,14 @@ $app-slide-close-border-width:                       2px;
     position: relative;
     display: flex;
     width: 100%;
-    margin: $app-slide-margin;
+    margin: 28px;
     margin-top: 0;
-    background-color: $app-slide-color-background;
+    background-color: white;
     box-shadow: 0 15px 25px 0 rgba(0,0,0,0.20);
     border-radius: 14px;
-    padding: $app-slide-padding;
-    padding-top: $app-slide-padding + 8px;
-    padding-bottom: $app-slide-padding + 10px;
+    padding: $cpt-slide-padding;
+    padding-top: $cpt-slide-padding + 8px;
+    padding-bottom: $cpt-slide-padding + 10px;
 
     .cpt-card
     {
@@ -61,8 +50,8 @@ $app-slide-close-border-width:                       2px;
         padding: 0;
         margin: 0;
         text-transform: uppercase;
-        background-color: $app-color-primary;
-        color: $app-color-white;
+        background-color: $fire-color-primary;
+        color: $fire-color-white;
         font-size: 1rem;
         line-height: 1rem;
         font-weight: 900;

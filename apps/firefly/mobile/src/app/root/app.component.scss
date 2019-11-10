@@ -1,9 +1,9 @@
-@import "app-variables";
+@import 'variables';
 
 :host
 {
     app-icon {
-        --cpt-color: #{$app-color-primary};
+        --cpt-color: #{$fire-color-primary};
         --cpt-font-size: 30px;
         margin-right: 9px;
         margin-left: 2px;
@@ -23,16 +23,16 @@
     }
 
     ion-menu {
-        --background: #{$app-color-dark};
+        --background: #{$fire-color-dark};
         --max-width: 210px;
     }
 
     ion-item {
-        --color: #{$app-color-primary};
+        --color: #{$fire-color-primary};
         cursor: pointer;
     }
 
     ion-list {
-        --ion-item-background: #{$app-color-dark}
+        --ion-item-background: #{$fire-color-dark}
     }
 }

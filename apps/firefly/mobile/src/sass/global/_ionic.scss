@@ -1,0 +1,61 @@
+@import 'variables';
+
+ion-app {
+    ion-picker {
+        --ion-color-primary: #{$fire-color-black};
+    }
+
+    ion-loading {
+        &.cpt-loading {
+            --background: #{$fire-color-transparent};
+
+            ion-spinner {
+                --spinner-color: #{$fire-color-primary};
+                transform: scale(2);
+            }
+        }
+    }
+
+}
+
+ion-item {
+  ion-icon {
+      color: #{$fire-color-grey-lighter};
+  }
+}
+
+ion-content {
+    ion-fab {
+        &.fab-vertical-top {
+            top: 1rem;
+        }
+
+        &.fab-vertical-bottom {
+            bottom: 1rem;
+        }
+
+        &.fab-horizontal-start {
+            left: 1rem;
+        }
+
+        &.fab-horizontal-end {
+            right: 1rem;
+        }
+    }
+}
+
+ion-fab-button {
+  &.ion-color-secondary {
+    --background-activated: #{$fire-color-accent-darkest};
+  }
+}
+
+ion-action-sheet {
+  --ion-color-primary: var( --ion-color-dark);
+}
+
+ion-toast {
+    --background: #{$fire-color-primary};
+    --color: #{$fire-color-white};
+    --box-shadow: rgba(0, 0, 0, 0.37) 0px 1px 4px 0px;
+}

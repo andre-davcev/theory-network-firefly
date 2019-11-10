@@ -1,18 +1,18 @@
-@import "app-variables";
+@import 'variables';
 
-$cpt-color: $app-color-dark;
-$cpt-inner-font-size: 19px;
+$cpt-color:             $fire-color-dark;
+$cpt-inner-font-size:   19px;
 
 :host
 {
     --cpt-icon:                      '\f041';
-    --cpt-font-family:               #{$app-font-font-awesome};
+    --cpt-font-family:               #{$fire-font-awesome};
     --cpt-font-size:                 56px;
     --cpt-height:                    var(--cpt-font-size);
     --cpt-width:                     32px;
     --cpt-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
 
-    --cpt-inner-font-family:         #{$app-font-font-awesome};
+    --cpt-inner-font-family:         #{$fire-font-awesome};
     --cpt-inner-font-size:           #{$cpt-inner-font-size};
     --cpt-inner-color:               #{$gm-color-white};
 
@@ -21,14 +21,14 @@ $cpt-inner-font-size: 19px;
 
     --cpt-check:                     '\f058';
     --cpt-plus:                      '\f055';
-    --cpt-color:                     #{$cpt-color};
+    --cpt-color:                     #{$fire-color-dark};
 
     --cpt-border-color:           rgba(255, 255, 255, 0.11);
     --cpt-border-color-active:    rgba(35, 117, 80, 0.10);
     --cpt-border-width:             1px;
     --cpt-shadow-color:           rgba(0, 0, 0, 0.10);
 
-    --cpt-color-active:             #{$app-color-primary};
+    --cpt-color-active:             #{$fire-color-primary};
 
     --cpt-inner-color:              var(--cpt-color-active);
     --cpt-inner-color-background:   var(--cpt-icon-color);
@@ -43,7 +43,7 @@ $cpt-inner-font-size: 19px;
     position: relative;
     display: block;
     box-sizing: border-box;
-    background-color: #{$app-color-transparent};
+    background-color: #{$fire-color-transparent};
     height: var(--cpt-height);
     width: var(--cpt-width);
 

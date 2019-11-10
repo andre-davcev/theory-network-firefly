@@ -5,8 +5,11 @@
     "module": "es2015",
     "baseUrl": "./",
     "paths": {
-      "@theory/scss": [
-        "../../../../libs/scss"
+      "@theory/apple": [
+        "../../../../libs/apple/index.ts"
+      ],
+      "@theory/apple/*": [
+        "../../../../libs/apple/src/*"
       ],
       "@theory/capacitor": [
         "../../../../libs/capacitor/index.ts"
@@ -59,11 +62,11 @@
       "@theory/nativescript/*": [
         "../../../../libs/nativescript/src/*"
       ],
-      "@theory/state": [
-        "../../../../libs/state/index.ts"
+      "@theory/ngxs": [
+        "../../../../libs/ngxs/index.ts"
       ],
-      "@theory/state/*": [
-        "../../../../libs/state/src/*"
+      "@theory/ngxs/*": [
+        "../../../../libs/ngxs/src/*"
       ],
       "@theory/web": [
         "../../../../libs/web/index.ts"

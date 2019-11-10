@@ -6,7 +6,7 @@ import { CoreUtil, TypeOf } from '@theory/core';
 import { ActionClusterEventsRemove } from '../cluster-events';
 import { Cluster, EventCluster } from '@firefly/core/models';
 import { ServiceEventClusters, ServiceClusters } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/ngxs';
 
 import { StateEventClustersModel } from './event-clusters.state.model';
 import { StateEventClustersOptions } from './event-clusters.state.options';

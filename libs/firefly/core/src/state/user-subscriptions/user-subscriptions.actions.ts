@@ -1,4 +1,4 @@
-import { SortField } from '@theory/state';
+import { SortField } from '@theory/ngxs';
 import { Subscription, UserSubscription } from '@firefly/core/models';
 
 import { ActionsUserSubscriptions } from './user-subscriptions.actions.enum';

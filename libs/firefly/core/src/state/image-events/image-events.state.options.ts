@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { Default } from '@theory/state';
+import { Default } from '@theory/ngxs';
 
 import { StateImageEventsModel } from './image-events.state.model';
 
