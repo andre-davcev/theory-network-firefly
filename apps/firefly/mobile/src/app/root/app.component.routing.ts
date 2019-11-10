@@ -6,24 +6,25 @@ export const routes: Routes =
 [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-    { path: Pages.Login, loadChildren: () => import(`@firefly/page/login`).then(m => m.ModulePageLogin) },
-    { path: Pages.Home,  loadChildren: () => import(`@firefly/page/home`).then(m  => m.ModulePageHome) },
+    { path: Pages.Login, loadChildren: '@firefly/page/login#ModulePageLogin' },
+    { path: Pages.Home,  loadChildren: '@firefly/page/home#ModulePageHome' },
 
-    { path: Pages.AssetsBeacons,  loadChildren: () => import(`@firefly/page/assets-beacons`).then(m  => m.ModulePageAssetsBeacons)},
-    { path: Pages.AssetsClusters, loadChildren: () => import(`@firefly/page/assets-clusters`).then(m => m.ModulePageAssetsClusters) },
-    { path: Pages.AssetCluster,   loadChildren: () => import(`@firefly/page/asset-cluster`).then(m   => m.ModulePageAssetCluster) },
-    { path: Pages.AssetsCoupons,  loadChildren: () => import(`@firefly/page/assets-coupons`).then(m  => m.ModulePageAssetsCoupons) },
-    { path: Pages.AssetsEvents,   loadChildren: () => import(`@firefly/page/assets-events`).then(m   => m.ModulePageAssetsEventsRoute) },
-    { path: Pages.AssetsIcons,    loadChildren: () => import(`@firefly/page/assets-icons`).then(m    => m.ModulePageAssetsIcons)},
-    { path: Pages.AssetsImages,   loadChildren: () => import(`@firefly/page/assets-images`).then(m   => m.ModulePageAssetsImages)},
-    { path: Pages.AssetsPlaces,   loadChildren: () => import(`@firefly/page/assets-places`).then(m   => m.ModulePageAssetsPlaces) },
+    { path: Pages.AssetsBeacons,  loadChildren: '@firefly/page/assets-beacons#ModulePageAssetsBeacons' },
+    { path: Pages.AssetsClusters, loadChildren: '@firefly/page/assets-clusters#ModulePageAssetsClustersRoute' },
+    { path: Pages.AssetCluster,   loadChildren: '@firefly/page/asset-cluster#ModulePageAssetCluster'},
+    { path: Pages.AssetsCoupons,  loadChildren: '@firefly/page/assets-coupons#ModulePageAssetsCoupons' },
+    { path: Pages.AssetsEvents,   loadChildren: '@firefly/page/assets-events#ModulePageAssetsEventsRoute' },
+    { path: Pages.AssetsIcons,    loadChildren: '@firefly/page/assets-icons#ModulePageAssetsIcons' },
+    { path: Pages.AssetsImages,   loadChildren: '@firefly/page/assets-images#ModulePageAssetsImages' },
+    { path: Pages.AssetsPlaces,   loadChildren: '@firefly/page/assets-places#ModulePageAssetsPlaces' },
 
-    { path: Pages.IconSelector,   loadChildren: () => import(`@firefly/page/icon-selector`).then(m => m.ModulePageIconSelector) },
+    { path: Pages.IconSelector,   loadChildren: '@firefly/page/icon-selector#ModulePageIconSelector' },
 
-    { path: Pages.Search,        loadChildren: () => import(`@firefly/page/search`).then(m        => m.ModulePageSearch) },
-    { path: Pages.Subscriptions, loadChildren: () => import(`@firefly/page/subscriptions`).then(m => m.ModulePageSubscriptions)},
-    { path: Pages.AssetEvent,    loadChildren: () => import(`@firefly/page/asset-event`).then(m   => m.ModulePageAssetEvent)},
-    { path: Pages.User,          loadChildren: () => import(`@firefly/page/user`).then(m          => m.ModulePageUser) }
+    { path: Pages.Search,        loadChildren: '@firefly/page/search#ModulePageSearch' },
+    { path: Pages.Subscriptions, loadChildren: '@firefly/page/subscriptions#ModulePageSubscriptions' },
+    { path: Pages.AssetEvent,    loadChildren: '@firefly/page/asset-event#ModulePageAssetEvent' },
+    { path: Pages.User,          loadChildren: '@firefly/page/user#ModulePageUser' }
+
 ];
 
 @NgModule
