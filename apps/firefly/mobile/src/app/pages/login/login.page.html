@@ -47,7 +47,7 @@
   </section>
   </form>
   <section *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))" class="cpt-container-user-menu">
-    <div *ngIf="!showCreate && showLoginForm" class="cpt-sign-up-link" (click)="showCreateButton()">Sign up here</div>
-    <div *ngIf="showCreate && showLoginForm" class="cpt-sign-up-link" (click)="showCreateButton()">Login</div>
+    <div *ngIf="!showCreate" class="cpt-sign-up-link" (click)="showCreateButton()">Sign up here</div>
+    <div *ngIf="showCreate" class="cpt-sign-up-link" (click)="showCreateButton()">Login</div>
   </section>
 </section>

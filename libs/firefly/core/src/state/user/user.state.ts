@@ -154,15 +154,6 @@ export class StateUser implements NgxsOnInit
         );
     }
 
-    @Action(ActionUserCreate)
-    create({ getState }: StateContext<StateUserModel>)
-    {
-        const state: StateUserModel = getState();
-        const data:  User           = StateUser.data(state);
-
-        return this.service.create(data);
-    }
-
     @Action(ActionUserSave)
     save({ getState }: StateContext<StateUserModel>)
     {
@@ -198,7 +189,6 @@ export class StateUser implements NgxsOnInit
     authenticate({ patchState, dispatch }: StateContext<StateUserModel>)
     {
         patchState({ authenticating: true, initializing: true });
-
         return this.auth.authState.pipe
         (
             take(1),
@@ -277,7 +267,7 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserCreate)
-    createUser({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserCreate)
+    userCreate({ patchState, dispatch, getState }: StateContext<StateUserModel>, { payload }: ActionUserCreate)
     {
         patchState({ authenticating: true });
 
@@ -294,7 +284,21 @@ export class StateUser implements NgxsOnInit
         return from(this.auth.auth.createUserWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             map((userCredential: firebase.auth.UserCredential) => userCredential.user),
-            switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
+            switchMap((authData: FirebaseUser) => {
+              var user = <User>{};
+              user.id = this.service.parseId(authData);
+              user.email = authData.email;
+
+              patchState({ formGroup: this.service.formCreate(user) });
+              dispatch(new UpdateFormValue({ value: user, path: StateUser.formPath(getState())}))
+
+              const state: StateUserModel = getState();
+              const data:  User           = StateUser.data(state);
+
+              this.service.create(data);
+
+              return dispatch(new ActionUserAuthenticateCheck(authData));
+            }),
             catchError((error: Error) => of(patchState({ error, authenticating: false })))
         );
     }
