@@ -1,4 +1,4 @@
-@import 'variables/colors';
+@import 'variables';
 
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
@@ -7,7 +7,7 @@
 :root
 {
     /** primary **/
-    --ion-color-primary: #{$app-color-primary};
+    --ion-color-primary: #{$fire-color-primary};
     --ion-color-primary-rgb: 72,138,255;
     --ion-color-primary-contrast: #fff;
     --ion-color-primary-contrast-rgb: 255,255,255;
@@ -15,7 +15,7 @@
     --ion-color-primary-tint: #5a96ff;
 
     /** secondary **/
-    --ion-color-secondary: #{$app-color-accent};
+    --ion-color-secondary: #{$fire-color-accent};
     --ion-color-secondary-rgb: 50,219,100;
     --ion-color-secondary-contrast: #fff;
     --ion-color-secondary-contrast-rgb: 255,255,255;
@@ -71,7 +71,7 @@
     --ion-color-medium-tint: #a2a4ab;
 
     /** dark **/
-    --ion-color-dark: #{$app-color-dark};
+    --ion-color-dark: #{$fire-color-dark};
     --ion-color-dark-rgb: 34,34,34;
     --ion-color-dark-contrast: #fff;
     --ion-color-dark-contrast-rgb: 255,255,255;
@@ -79,10 +79,10 @@
     --ion-color-dark-tint: #383838;
 
     /** grey **/
-    --ion-color-grey: #{$app-color-grey-lighter};
+    --ion-color-grey: #{$fire-color-grey-lighter};
     --ion-color-grey-rgb: 34,34,34;
     --ion-color-grey-contrast: #000;
     --ion-color-grey-contrast-rgb: 0,0,0;
-    --ion-color-grey-shade: #{$app-color-grey-lighter};
-    --ion-color-grey-tint: #{$app-color-grey-lighter};
+    --ion-color-grey-shade: #{$fire-color-grey-lighter};
+    --ion-color-grey-tint: #{$fire-color-grey-lighter};
 }

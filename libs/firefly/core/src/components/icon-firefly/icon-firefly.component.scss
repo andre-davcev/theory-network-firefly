@@ -1,21 +1,17 @@
 
 @import 'variables';
 
-$cpt-border-accent-color-base:           #000000;
-$cpt-border-accent-opacity:              0.5;
-$cpt-border-accent-width:                1px;
-
 :host
 {
     --cpt-height:                 57px;
     --cpt-width:                  var(--cpt-height);
-    --cpt-transition-duration:    #{$app-transition-duration-move};
+    --cpt-transition-duration:    #{$fire-transition-duration-move};
 
-    --cpt-color-fill-primary:           #{$app-color-primary};
-    --cpt-color-fill-lighter-primary:   lighten($app-color-primary, 10%);
-    --cpt-color-stroke-primary:         #{$cpt-border-accent-color-base};
-    --cpt-color-stroke-width-primary:   #{$cpt-border-accent-width};
-    --cpt-color-stroke-opacity-primary: #{$cpt-border-accent-opacity};
+    --cpt-color-fill-primary:           #{$fire-color-primary};
+    --cpt-color-fill-lighter-primary:   lighten($fire-color-primary, 10%);
+    --cpt-color-stroke-primary:         #000000;
+    --cpt-color-stroke-width-primary:   1px;
+    --cpt-color-stroke-opacity-primary: 0.5;
 
     --cpt-color-fill-white:             rgba(255,255, 255, 1.99);
     --cpt-color-fill-lighter-white:     rgba(255, 255, 255, 0.8);

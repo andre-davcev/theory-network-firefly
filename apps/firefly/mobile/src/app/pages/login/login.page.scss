@@ -1,155 +1,67 @@
 @import 'variables';
 
-$app-font-size-tiny:    8px;
-$app-font-size-small:   12px;
+$cpt-font-size-small:                          12px;
+$cpt-font-size-icon:                           $cpt-font-size-small;
 
-// General
-$app-icon-font-size:  12px;
-$app-font-awesome-size:          $app-icon-font-size;
+$cpt-font-helvetica-neue:                      "Helvetica Neue",                                                                        Helvetica, Arial, sans-serif;
+$cpt-font-helvetica-neue-light:                "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-$app-font-helvetica-neue:                     "Helvetica Neue",                                                                        Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-bold:                "HelveticaNeue-Bold",              "Helvetica Neue Bold",              "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-bold-italic:         "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-condensed-black:     "HelveticaNeue-Condensed-Black",   "Helvetica Neue Condensed Black",   "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-condensed-bold:      "HelveticaNeue-Condensed-Bold",    "Helvetica Neue Condensed Bold",    "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-light:               "HelveticaNeue-Light",             "Helvetica Neue Light",             "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-light-italic:        "HelveticaNeue-Light-Italic",      "Helvetica Neue Light Italic",      "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-medium:              "HelveticaNeue-Medium",            "Helvetica Neue Medium",            "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-medium-italic:       "HelveticaNeue-Medium-Italic",     "Helvetica Neue Medium Italic",     "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-thin:                "HelveticaNeue-Thin",              "Helvetica Neue Thin",              "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-thin-italic:         "HelveticaNeue-Thin-Italic",       "Helvetica Neue Thin Italic",       "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-ultra-light:         "HelveticaNeue-UltraLight",        "Helvetica Neue UltraLight",        "Helvetica Neue", Helvetica, Arial, sans-serif;
-$app-font-helvetica-neue-ultra-light-italic:  "HelveticaNeue-UltraLight-Italic", "Helvetica Neue UltraLight Italic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$cpt-font-base:                               -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-$app-font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$cpt-box-shadow-dark-background:              0px 1px 1px rgba(0, 0, 0, 0.36);
+$cpt-box-shadow-light-background:             0px 1px 1px rgba(0, 0, 0, 0.10);
 
-$app-text-shadow-dark-background:            0px 2px 3px rgba(0, 0, 0, 0.28);
-$app-text-shadow-light-background:           0px 2px 3px rgba(0, 0, 0, 0.18);
+$cpt-input-height:                           34px;
+$cpt-input-directive-height:                 $cpt-input-height;
+$cpt-input-directive-space-right:            $cpt-input-height + 0.9;
+$cpt-input-icon-font-family:                 $fire-font-ionic-icons;
+$cpt-input-icon-line-height:                 $cpt-input-directive-height;
 
-$app-box-shadow-dark-background:             0px 1px 1px rgba(0, 0, 0, 0.36);
-$app-box-shadow-light-background:            0px 1px 1px rgba(0, 0, 0, 0.10);
+$cpt-input-icon-verified:                    '\f2bc';    // $ionicon-var-checkmark
+$cpt-input-icon-error:                       '\f2c0';    // $ionicon-var-close
+$cpt-input-icon-verified-round:              '\f2bb';    // $ionicon-var-checkmark-round
+$cpt-input-icon-error-round:                 '\f14e';    // $ionicon-var-close-round
+$cpt-input-icon-clear:                       '\f2bf';    // $ionicon-var-close-circled
 
-$app-provider-button-color-text:             $gm-color-white;
-$app-provider-button-font-size:              10px;
-$app-provider-button-font-family:            $app-font-helvetica-neue;
-$app-provider-button-text-shadow:            $app-box-shadow-light-background;
+$cpt-input-spinner-height:                   if(ceil($cpt-input-directive-height / $tn-golden-ratio) % 2 == 0, ceil($cpt-input-directive-height / $tn-golden-ratio), floor($cpt-input-directive-height / $tn-golden-ratio));
+$cpt-input-spinner-width:                    $cpt-input-spinner-height;
+$cpt-input-spinner-margin:                   ($cpt-input-directive-height - $cpt-input-spinner-height) / 2;
+$cpt-input-spinner-margin-right:             $cpt-input-spinner-width + (($cpt-input-directive-space-right - $cpt-input-spinner-width) / 2);
 
-$app-provider-button-icon-font-size:          16px;
-$app-provider-button-icon-font-family:        $app-font-awesome;
-$app-provider-button-icon-height:             17px;
-$app-provider-button-icon-width:              16px;
-$app-provider-button-icon-width-with-margin:  26px;
-$app-provider-button-icon-color-background:   $gm-color-white;
-$app-provider-button-icon-border-radius:      2px;
+$cpt-input-icon-font-size:                   $cpt-input-spinner-height;
 
-$app-input-height:                           34px;
-$app-input-line-height:                      $tn-line-height;
-
-$app-input-directive-height:                 $app-input-height;
-$app-input-directive-space-right:            $app-input-height + 0.9;
-
-$app-input-icon-font-family:                 $app-font-ionic-icons;
-$app-input-icon-line-height:                 $app-input-directive-height;
-$app-input-icon-verified-color:              $app-color-primary;
-$app-input-icon-error-color:                 $gm-color-red-800;
-$app-input-icon-clear-color:                 $gm-color-grey-400;
-
-$app-input-icon-verified:                    '\f2bc';    // $ionicon-var-checkmark
-$app-input-icon-error:                       '\f2c0';    // $ionicon-var-close
-$app-input-icon-verified-round:              '\f2bb';    // $ionicon-var-checkmark-round
-$app-input-icon-error-round:                 '\f14e';    // $ionicon-var-close-round
-$app-input-icon-clear:                       '\f2bf';    // $ionicon-var-close-circled
-
-$app-input-spinner-height:           if(ceil($app-input-directive-height / $tn-golden-ratio) % 2 == 0, ceil($app-input-directive-height / $tn-golden-ratio), floor($app-input-directive-height / $tn-golden-ratio));
-$app-input-spinner-width:            $app-input-spinner-height;
-$app-input-spinner-margin:           ($app-input-directive-height - $app-input-spinner-height) / 2;
-$app-input-spinner-margin-right:     $app-input-spinner-width + (($app-input-directive-space-right - $app-input-spinner-width) / 2);
-
-$app-input-icon-font-size:           $app-input-spinner-height;
-
-$app-input-icon-verified-width:      $app-input-icon-font-size * 0.8125;
-$app-input-icon-verified-margin:     $app-input-icon-verified-width + (($app-input-directive-space-right - $app-input-icon-verified-width) / 2);
-$app-input-icon-error-width:         $app-input-icon-font-size * 0.75;
-$app-input-icon-error-margin:        $app-input-icon-error-width + (($app-input-directive-space-right - $app-input-icon-error-width) / 2);
-$app-input-icon-clear-width:         $app-input-icon-font-size;
+$cpt-input-icon-verified-width:              $cpt-input-icon-font-size * 0.8125;
+$cpt-input-icon-verified-margin:             $cpt-input-icon-verified-width + (($cpt-input-directive-space-right - $cpt-input-icon-verified-width) / 2);
+$cpt-input-icon-error-width:                 $cpt-input-icon-font-size * 0.75;
+$cpt-input-icon-error-margin:                $cpt-input-icon-error-width + (($cpt-input-directive-space-right - $cpt-input-icon-error-width) / 2);
 
 $cpt-button-border-radius:                   3px;
 
-$cpt-button-delete-height:                   $ios-list-item-button-delete-height;
-$cpt-button-delete-width:                    $ios-list-item-button-delete-width;
-$cpt-button-delete-color-background:         $app-color-accent-light;
+$cpt-auth-button-login-height:               $cpt-input-directive-height;
+$cpt-auth-button-login-width:                100%;
 
-$app-auth-margin-elements-subgroup:          8px;
+$cpt-auth-input-login-height:                $cpt-auth-button-login-height;
+$cpt-auth-input-login-width:                 $cpt-auth-button-login-width;
 
-$app-auth-button-login-height:               $app-input-directive-height;
-$app-auth-button-login-width:                100%;
-$app-auth-button-login-color-background:     $app-color-primary;
-$app-auth-button-login-color-text:           $app-color-grey-dark;
-$app-auth-button-login-font-family:          $app-font-helvetica-neue;
-$app-auth-button-login-font-size:            $app-font-size-small;
-$app-auth-button-login-text-shadow:          $app-box-shadow-light-background;
+$cpt-auth-divider-margin:                    21px;
 
-$app-auth-input-color-background:            $app-color-white;
-$app-auth-input-color-text:                  rgba(74, 79, 76, 0.8);
-$app-auth-input-color-icon:                  $app-color-grey-lighter;
-$app-auth-input-login-height:                $app-auth-button-login-height;
-$app-auth-input-login-width:                 $app-auth-button-login-width;
-$app-auth-input-font-family:                 $app-font-helvetica-neue;
-$app-auth-input-font-size:                   $app-font-size-small;
-$app-auth-input-line-height:                 $tn-line-height;
+$cpt-auth-app-title-height:                  76%;
+$cpt-auth-app-title-width:                   76%;
+$cpt-auth-app-title-scale-login:             0.71255060728745;
+$cpt-auth-app-title-translate-login:         -($cpt-auth-input-login-height + 0.2);
 
-$app-auth-input-divider-color:               $app-color-grey-light;
-$app-auth-input-divider-height:              1px;
-$app-auth-input-divider-width:               $app-auth-input-login-width;
+$cpt-auth-logo-height-login:                 31px;
+$cpt-auth-logo-width-login:                  $cpt-auth-logo-height-login;
+$cpt-auth-logo-scale:                        0.54385964912281;
 
-$app-auth-divider-color:                     $app-color-grey-lightest;
-$app-auth-divider-height:                    1px;
-$app-auth-divider-width:                     47px;
-$app-auth-divider-margin:                    21px;
-$app-auth-divider-line-height:               $tn-line-height-none;
-$app-auth-divider-font-family:               $app-font-base;
-$app-auth-divider-font-size:                 9px;
+$cpt-auth-tagline-text-shadow:               0px 2px 3px rgba(0, 0, 0, 0.28);
 
-$app-auth-color-background:                  $app-color-dark;
+$cpt-auth-container-title-height:            68px;
+$cpt-auth-container-auth-height:             408px;
+$cpt-auth-container-translate:               ($cpt-auth-container-auth-height - $cpt-auth-container-title-height) / 2;
 
-$app-auth-app-title-font-family:             $app-font-base;
-$app-auth-app-title-font-size:               52px;
-$app-auth-app-title-letter-spacing:          15px;
-$app-auth-app-title-line-height:             $tn-line-height-none;
-$app-auth-app-title-height:                  76%;
-$app-auth-app-title-width:                   76%;
-$app-auth-app-title-height-login:            23px;
-$app-auth-app-title-width-login:             176px;
-$app-auth-app-title-scale-login:             0.71255060728745;
-$app-auth-app-title-translate-login:         -($app-auth-input-login-height + 0.2);
-
-$app-auth-logo-height-login:                 31px;
-$app-auth-logo-width-login:                  $app-auth-logo-height-login;
-$app-auth-logo-scale:                        0.54385964912281;
-
-$app-auth-tagline-color:                     $app-color-white;
-$app-auth-tagline-width:                     $app-auth-app-title-width;
-$app-auth-tagline-width-login:               $app-auth-app-title-width-login;
-$app-auth-tagline-text-shadow:               $app-text-shadow-dark-background;
-$app-auth-tagline-font-family:               $app-font-helvetica-neue-light;
-$app-auth-tagline-font-size:                 $app-font-size-small;
-$app-auth-tagline-line-height:               $tn-line-height-none;
-$app-auth-tagline-letter-spacing:            1px;
-
-$app-auth-container-title-height:            68px;
-$app-auth-container-auth-height:             408px;
-$app-auth-container-translate:               ($app-auth-container-auth-height - $app-auth-container-title-height) / 2;
-
-$app-auth-item-color-light:                  $app-color-white;
-$app-auth-item-color-dark:                   $app-color-black;
-
-$app-auth-footer-width:                      100%;
-$app-auth-footer-color-text:                 $app-color-white;
-$app-auth-footer-font-family:                $app-font-base;
-$app-auth-footer-font-size:                  $app-font-size-tiny;
-
-$app-auth-footer-item-line-height:           $tn-line-height-none;
-$app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
+$cpt-auth-footer-item-line-height:           $tn-line-height-none;
+$cpt-auth-footer-item-text-shadow:           $cpt-box-shadow-dark-background;
 
 :host
 {
@@ -167,7 +79,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
     top: 0; left: 0;
     padding-left: 20px;
     padding-right: 10px;
-    font-size: $app-icon-font-size;
+    font-size: $cpt-font-size-icon;
 }
 
 .tn-input-container
@@ -180,9 +92,9 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
         display: none;
         position: absolute;
         top: 0; right: 0;
-        font-family: $app-input-icon-font-family;
-        font-size: $app-input-icon-font-size;
-        line-height: $app-input-icon-line-height;
+        font-family: $cpt-input-icon-font-family;
+        font-size: $cpt-input-icon-font-size;
+        line-height: $cpt-input-icon-line-height;
     }
 
     &.tn-input-status-verified
@@ -190,14 +102,14 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
         &:after
         {
             display: block;
-            content: $app-input-icon-verified;
-            color: $app-input-icon-verified-color;
-            right: -($app-input-icon-verified-margin);
+            content: $cpt-input-icon-verified;
+            color: $fire-color-primary;
+            right: -($cpt-input-icon-verified-margin);
         }
 
         &.tn-input-icon-rounded:after
         {
-            content: $app-input-icon-verified-round;
+            content: $cpt-input-icon-verified-round;
         }
     }
 
@@ -206,14 +118,14 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
         &:after
         {
             display: block;
-            content: $app-input-icon-error;
-            color: $app-input-icon-error-color;
-            right: -($app-input-icon-error-margin);
+            content: $cpt-input-icon-error;
+            color: $gm-color-red-800;
+            right: -($cpt-input-icon-error-margin);
         }
 
         &.tn-input-icon-rounded:after
         {
-            content: $app-input-icon-error-round;
+            content: $cpt-input-icon-error-round;
         }
     }
 
@@ -221,7 +133,7 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
     {
         display: block;
         position: absolute;
-        top: $app-input-spinner-margin; right: -($app-input-spinner-margin-right);
+        top: $cpt-input-spinner-margin; right: -($cpt-input-spinner-margin-right);
     }
 
     > .tn-input-clear
@@ -230,12 +142,12 @@ $app-auth-footer-item-text-shadow:           $app-box-shadow-dark-background;
         {
             display: block;
             position: absolute;
-            top: 0; right: $app-input-spinner-margin;
-            font-family: $app-input-icon-font-family;
-            font-size: $app-input-icon-font-size;
-            line-height: $app-input-icon-line-height;
-            content: $app-input-icon-clear;
-            color: $app-input-icon-clear-color;
+            top: 0; right: $cpt-input-spinner-margin;
+            font-family: $cpt-input-icon-font-family;
+            font-size: $cpt-input-icon-font-size;
+            line-height: $cpt-input-icon-line-height;
+            content: $cpt-input-icon-clear;
+            color: $gm-color-grey-400;
         }
     }
 }
@@ -261,8 +173,8 @@ input[type="color"]
         position: relative;
         display: block;
         border: none;
-        background-color: $app-color-transparent;
-        line-height: $app-input-line-height;
+        background-color: $fire-color-transparent;
+        line-height: $tn-line-height;
     }
 }
 
@@ -276,49 +188,49 @@ input[type="color"]
 
     &.tn-align-items
     {
-        transition-duration: $app-transition-duration-move;
+        transition-duration: $fire-transition-duration-move;
         transition-property: align-items;
     }
 
     &.tn-justify-content
     {
-        transition-duration: $app-transition-duration-move;
+        transition-duration: $fire-transition-duration-move;
         transition-property: justify-content;
 
         &.tn-align-items
         {
-            transition-duration: $app-transition-duration-move;
+            transition-duration: $fire-transition-duration-move;
             transition-property: justify-content, align-items;
         }
     }
 
     &.tn-margin
     {
-        transition-duration: $app-transition-duration-move;
+        transition-duration: $fire-transition-duration-move;
         transition-property: margin;
     }
 
     &.tn-transform
     {
-        transition-duration: $app-transition-duration-move;
+        transition-duration: $fire-transition-duration-move;
         transition-property: transform;
     }
 
     &.tn-opacity
     {
-        transition-duration: $app-transition-duration-move;
+        transition-duration: $fire-transition-duration-move;
         transition-property: opacity;
 
         &.tn-transform
         {
-            transition-duration: $app-transition-duration-move;
+            transition-duration: $fire-transition-duration-move;
             transition-property: opacity, transform;
         }
     }
 
     &.tn-dimensions
     {
-        transition-duration: $app-transition-duration-move;
+        transition-duration: $fire-transition-duration-move;
         transition-property: height, width;
 
         &.tn-margin
@@ -339,7 +251,7 @@ input[type="color"]
 
     &.tn-height
     {
-        transition-duration: $app-transition-duration-move;
+        transition-duration: $fire-transition-duration-move;
         transition-property: height;
 
         &.tn-margin
@@ -360,7 +272,7 @@ input[type="color"]
 
     &.tn-width
     {
-        transition-duration: $app-transition-duration-move;
+        transition-duration: $fire-transition-duration-move;
         transition-property: width;
 
         &.tn-margin
@@ -406,17 +318,17 @@ input[type="color"]
 {
     &.tn-button
     {
-        color: $app-provider-button-color-text;
-        font-size: $app-provider-button-font-size;
-        font-family: $app-provider-button-font-family;
-        text-shadow: $app-provider-button-text-shadow;
+        color: $fire-color-white;
+        font-size: 10px;
+        font-family: $cpt-font-helvetica-neue;
+        text-shadow: $cpt-box-shadow-light-background;
 
         .tn-item
         {
             position: relative;
             display: inline-block;
             line-height: $tn-line-height-none;
-            padding-left: $app-provider-button-icon-width-with-margin;
+            padding-left: 26px;
 
             &:before
             {
@@ -424,11 +336,12 @@ input[type="color"]
                 display: block;
                 position: absolute;
                 top: -3px; left: 4px;
-                height: $app-provider-button-icon-height; width: $app-provider-button-icon-width;
-                font-family: $app-provider-button-icon-font-family;
-                font-size: $app-provider-button-icon-font-size;
-                border-radius: $app-provider-button-icon-border-radius;
-                background-color: $app-provider-button-icon-color-background;
+                height: 17px;
+                width: 16px;
+                font-family: $fire-font-awesome;
+                font-size: 16px;
+                border-radius: 2px;
+                background-color: $fire-color-white;
                 text-shadow: none;
                 text-align: center;
             }
@@ -441,7 +354,7 @@ input[type="color"]
     position: relative;
     display: block;
     border: none;
-    background-color: $app-color-transparent;
+    background-color: $fire-color-transparent;
     line-height: $tn-line-height-none;
     text-align: center;
 
@@ -449,8 +362,8 @@ input[type="color"]
     {
         position: absolute;
         top: 0; right: 0;
-        height: $cpt-button-delete-height; width: $cpt-button-delete-width;
-        background-color: $cpt-button-delete-color-background;
+        height: $ios-list-item-button-delete-height; width: $ios-list-item-button-delete-width;
+        background-color: $fire-color-accent-light;
     }
 }
 
@@ -467,7 +380,7 @@ input[type="color"]
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: $app-auth-color-background;
+    background-color: $fire-color-dark;
 
     > .tn-container
     {
@@ -481,7 +394,7 @@ input[type="color"]
         > .tn-align-item
         {
             position: relative;
-            height: $app-auth-container-title-height;
+            height: $cpt-auth-container-title-height;
             margin-left: 3px; margin-top: -10px;
 
             > .cpt-container-logo
@@ -509,10 +422,10 @@ input[type="color"]
 
             > .cpt-container-inputs
             {
-                margin-bottom: $app-auth-margin-elements-subgroup;
-                background-color: $app-auth-input-color-background;
+                margin-bottom: 8px;
+                background-color: $fire-color-white;
                 border-radius: $cpt-button-border-radius;
-                box-shadow: $app-box-shadow-dark-background;
+                box-shadow: $cpt-box-shadow-dark-background;
 
                 .fa-envelope-o
                 {
@@ -528,30 +441,30 @@ input[type="color"]
 
                 > .cpt-divider
                 {
-                    height: $app-auth-input-divider-height; width: $app-auth-input-divider-width;
-                    background-color: $app-auth-input-divider-color;
+                    height: 1px; width: $cpt-auth-input-login-width;
+                    background-color: $fire-color-grey-light;
                 }
             }
 
             > .tn-button
             {
-                background-color: $app-auth-button-login-color-background;
-                color: $app-auth-button-login-color-text;
-                font-family: $app-auth-button-login-font-family;
-                font-size: $app-auth-button-login-font-size;
-                text-shadow: $app-auth-button-login-text-shadow;
+                background-color: $fire-color-primary;
+                color: $fire-color-grey-dark;
+                font-family: $cpt-font-helvetica-neue;
+                font-size: $cpt-font-size-small;
+                text-shadow: $cpt-box-shadow-light-background;
             }
         }
 
         > .cpt-divider
         {
             position: relative;
-            color: $app-auth-item-color-light;
+            color: $fire-color-white;
             margin: 32px 0;
             text-align: center;
-            line-height: $app-auth-divider-line-height;
-            font-family: $app-auth-divider-font-family;
-            font-size: $app-auth-divider-font-size;
+            line-height: $tn-line-height-none;
+            font-family: $cpt-font-base;
+            font-size: 9px;
             text-transform: uppercase;
 
             > .tn-align-item
@@ -566,18 +479,18 @@ input[type="color"]
                     display: inline-block;
                     top: 4px;
                     content: '';
-                    height: $app-auth-divider-height; width: $app-auth-divider-width;
-                    background-color: $app-auth-divider-color;
+                    height: 1px; width: 47px;
+                    background-color: $fire-color-grey-lightest;
                 }
 
                 &:before
                 {
-                    left: $app-auth-divider-margin;
+                    left: $cpt-auth-divider-margin;
                 }
 
                 &:after
                 {
-                    right: $app-auth-divider-margin;
+                    right: $cpt-auth-divider-margin;
                 }
             }
         }
@@ -605,11 +518,11 @@ input[type="color"]
         > .cpt-footer
         {
             position: relative;
-            width: $app-auth-footer-width;
+            width: 100%;
             margin-top: 30px; margin-bottom: 38px;
-            color: $app-auth-footer-color-text;
-            font-family: $app-auth-footer-font-family;
-            font-size: $app-auth-footer-font-size;
+            color: $fire-color-white;
+            font-family: $cpt-font-base;
+            font-size: 8px;
 
             .cpt-underline
             {
@@ -618,14 +531,14 @@ input[type="color"]
 
             > .cpt-item
             {
-                height: $app-auth-footer-item-line-height;
+                height: $cpt-auth-footer-item-line-height;
             }
 
             .cpt-item
             {
                 position: relative;
-                line-height: $app-auth-footer-item-line-height;
-                text-shadow: $app-auth-footer-item-text-shadow;
+                line-height: $cpt-auth-footer-item-line-height;
+                text-shadow: $cpt-box-shadow-dark-background;
             }
         }
 
@@ -634,18 +547,18 @@ input[type="color"]
             &:before
             {
                 left: 22px; top: 1px;
-                line-height: $app-auth-input-login-height;
-                color: $app-auth-input-color-icon;
+                line-height: $cpt-auth-input-login-height;
+                color: $fire-color-grey-lighter;
                 font-size: 12px;
             }
 
             > .tn-input
             {
-                height: $app-auth-input-login-height; width: $app-auth-input-login-width;
+                height: $cpt-auth-input-login-height; width: $cpt-auth-input-login-width;
                 padding-left: 54px;
-                color: $app-auth-input-color-text;
-                font-family: $app-auth-input-font-family;
-                font-size: $app-auth-input-font-size;
+                color: rgba(74, 79, 76, 0.8);
+                font-family: $cpt-font-helvetica-neue;
+                font-size: $cpt-font-size-small;
             }
 
             &:last-child:before
@@ -657,8 +570,8 @@ input[type="color"]
 
         .tn-button
         {
-            height: $app-auth-button-login-height; width: $app-auth-button-login-width;
-            box-shadow: $app-box-shadow-dark-background;
+            height: $cpt-auth-button-login-height; width: $cpt-auth-button-login-width;
+            box-shadow: $cpt-box-shadow-dark-background;
             border-radius: $cpt-button-border-radius;
         }
     }
@@ -676,20 +589,20 @@ input[type="color"]
             {
                 > .cpt-app-title
                 {
-                    transform: translate3d(0, $app-auth-app-title-translate-login, 0) scale($app-auth-app-title-scale-login);
+                    transform: translate3d(0, $cpt-auth-app-title-translate-login, 0) scale($cpt-auth-app-title-scale-login);
                 }
 
                 > .cpt-container-logo
                 {
                     > firefly
                     {
-                        transform: translate3d(-51px, -3px, 0) scale($app-auth-logo-scale);
+                        transform: translate3d(-51px, -3px, 0) scale($cpt-auth-logo-scale);
                     }
                 }
 
                 > .cpt-tagline
                 {
-                    transform: translate3d(0, $app-auth-app-title-translate-login - 6px, 0);
+                    transform: translate3d(0, $cpt-auth-app-title-translate-login - 6px, 0);
                     opacity: 1;
                 }
             }
@@ -735,7 +648,7 @@ input[type="color"]
 .cpt-title
 {
     position: relative;
-    height: $app-auth-app-title-height; width: $app-auth-app-title-width;
+    height: $cpt-auth-app-title-height; width: $cpt-auth-app-title-width;
     position: relative;
     display: block;
     margin-top: 18px; margin-left: 3px;
@@ -746,22 +659,22 @@ input[type="color"]
     position: relative;
     display: block;
     margin-top: 8px;
-    line-height: $app-auth-tagline-line-height;
-    color: $app-auth-tagline-color;
+    line-height: $tn-line-height-none;
+    color: $fire-color-white;
     text-align: center;
-    font-family: $app-auth-tagline-font-family;
-    font-size: $app-auth-tagline-font-size;
-    letter-spacing: $app-auth-tagline-letter-spacing;
-    text-shadow: $app-auth-tagline-text-shadow;
-    transition-delay: $app-transition-duration-move;
+    font-family: $cpt-font-helvetica-neue-light;
+    font-size: $cpt-font-size-small;
+    letter-spacing: 1px;
+    text-shadow: $cpt-auth-tagline-text-shadow;
+    transition-delay: $fire-transition-duration-move;
     transition-timing-function: ease-out;
     opacity: 0;
 }
 
 .tn-ico.fa-icon:before
 {
-    font-family: $app-font-awesome;
-    font-size: $app-font-awesome-size;
+    font-family: $fire-font-awesome;
+    font-size: $cpt-font-size-icon;
 }
 
 .error-messages {

@@ -3,16 +3,16 @@
 :host
 {
     ion-content {
-        --background: #{$app-color-grey-light};
+        --background: #{$fire-color-grey-light};
     }
 
     ion-list {
-        --ion-item-background: #{$app-color-grey-light};
+        --ion-item-background: #{$fire-color-grey-light};
         margin-bottom: 0;
     }
 
     ion-card {
-        --background: #{$app-color-white};
+        --background: #{$fire-color-white};
         width: 100%;
     }
 

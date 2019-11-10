@@ -1,7 +1,5 @@
 @import 'variables';
 
-$app-card-height: 48px;
-
 :host-context(.ios) {
     ion-toolbar {
         ion-title {
@@ -11,7 +9,7 @@ $app-card-height: 48px;
 }
 
 :host {
-    --background: #{$app-color-grey-light};
+    --background: #{$fire-color-grey-light};
 
     ion-toolbar {
         --padding-start: 1.25rem;
@@ -25,7 +23,7 @@ $app-card-height: 48px;
     }
 
     ion-toolbar {
-        --background: #{$app-color-grey-light};
+        --background: #{$fire-color-grey-light};
         --border-width: 0;
 
         ion-buttons {
@@ -34,11 +32,11 @@ $app-card-height: 48px;
     }
 
     ion-slides {
-        --background: #{$app-color-grey-light};
-        --bullet-background: #{$app-color-black};
-        --bullet-background-active: #{$app-color-dark};
+        --background: #{$fire-color-grey-light};
+        --bullet-background: #{$fire-color-black};
+        --bullet-background-active: #{$fire-color-dark};
 
-        background-color: $app-color-grey-light;
+        background-color: $fire-color-grey-light;
         position: relative;
         width: 100%;
     }
@@ -60,6 +58,6 @@ $app-card-height: 48px;
     {
         position: relative;
         height: 100%;
-        background-color: $app-color-grey-light;
+        background-color: $fire-color-grey-light;
     }
 }

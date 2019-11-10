@@ -1,42 +1,42 @@
-@import '~@theory/google/src/sass/variables';
+@import '../../../../../google/src/sass/variables';
 
 // Color Scheme - http://paletton.com/#uid=72x0u0kqMtIgFDulIvCtZowxzjr
 
-$app-color-black:                    $gm-color-black;
-$app-color-white:                    $gm-color-white;
-$app-color-transparent:            rgba(0, 0, 0, 0);
+$fire-color-black:                    $gm-color-black;
+$fire-color-white:                    $gm-color-white;
+$fire-color-transparent:            rgba(0, 0, 0, 0);
 
-$app-color-dark:                     #212221;
-$app-color-dark-text:                $gm-color-dark-text;
-$app-color-dark-text-secondary:      $gm-color-dark-text-secondary;
-$app-color-dark-icons:               $gm-color-dark-icons;
-$app-color-dark-dividers:            $gm-color-dark-dividers;
-$app-color-dark-disabled:            $gm-color-dark-disabled;
-$app-color-dark-hint:                $gm-color-dark-hint;
+$fire-color-dark:                     #212221;
+$fire-color-dark-text:                $gm-color-dark-text;
+$fire-color-dark-text-secondary:      $gm-color-dark-text-secondary;
+$fire-color-dark-icons:               $gm-color-dark-icons;
+$fire-color-dark-dividers:            $gm-color-dark-dividers;
+$fire-color-dark-disabled:            $gm-color-dark-disabled;
+$fire-color-dark-hint:                $gm-color-dark-hint;
 
-$app-color-light:                    $gm-color-light;
-$app-color-light-text:               #030303;
-$app-color-light-text-secondary:     $gm-color-light-text-secondary;
-$app-color-light-icons:              $gm-color-light-icons;
-$app-color-light-dividers:           $gm-color-light-dividers;
-$app-color-light-disabled:           $gm-color-light-disabled;
-$app-color-light-hint:               $gm-color-light-hint;
+$fire-color-light:                    $gm-color-light;
+$fire-color-light-text:               #030303;
+$fire-color-light-text-secondary:     $gm-color-light-text-secondary;
+$fire-color-light-icons:              $gm-color-light-icons;
+$fire-color-light-dividers:           $gm-color-light-dividers;
+$fire-color-light-disabled:           $gm-color-light-disabled;
+$fire-color-light-hint:               $gm-color-light-hint;
 
-$app-color-grey-light:                   rgb(230, 233, 230);
-$app-color-grey-lighter-font:            #8F8E94;
-$app-color-grey-lighter:                 rgba(190, 199, 195, 0.7);
-$app-color-grey-lightest:                rgba(255, 255, 255, 0.2);
-$app-color-grey-middle:                  rgba(146, 151, 149, 0.6);
-$app-color-grey-dark:                    rgba(5, 24, 28, 0.8);
+$fire-color-grey-light:             rgb(230, 233, 230);
+$fire-color-grey-lighter-font:      #8F8E94;
+$fire-color-grey-lighter:           rgba(190, 199, 195, 0.7);
+$fire-color-grey-lightest:          rgba(255, 255, 255, 0.2);
+$fire-color-grey-middle:            rgba(146, 151, 149, 0.6);
+$fire-color-grey-dark:              rgba(5, 24, 28, 0.8);
 
-$app-color-primary-lightest:         #B2ED72;    // rgb(178, 237, 114)
-$app-color-primary-light:            #9AE449;    // rgb(154, 228, 73)    $gm-color-green-light-a400
-$app-color-primary:                  #80D623;    // rgb(128, 214, 35)
-$app-color-primary-dark:             #61B10B;    // rgb(97, 177, 11)     $gm-color-green-light-a700
-$app-color-primary-darkest:          #498C00;    // rgb(73, 140, 0)
+$fire-color-primary-lightest:         #B2ED72;    // rgb(178, 237, 114)
+$fire-color-primary-light:            #9AE449;    // rgb(154, 228, 73)    $gm-color-green-light-a400
+$fire-color-primary:                  #80D623;    // rgb(128, 214, 35)
+$fire-color-primary-dark:             #61B10B;    // rgb(97, 177, 11)     $gm-color-green-light-a700
+$fire-color-primary-darkest:          #498C00;    // rgb(73, 140, 0)
 
-$app-color-accent-lightest:          #E76F9B;    // rgb(231, 111, 155)
-$app-color-accent-light:             #DB477E;    // rgb(219, 71, 126)    $gm-color-teal-a100
-$app-color-accent:                   #CE2262;    // rgb(206, 34, 98)
-$app-color-accent-dark:              #AA0B46;    // rgb(170, 11, 70)     $gm-color-teal-a400
-$app-color-accent-darkest:           #870032;    // rgb(135, 0, 50)
+$fire-color-accent-lightest:          #E76F9B;    // rgb(231, 111, 155)
+$fire-color-accent-light:             #DB477E;    // rgb(219, 71, 126)    $gm-color-teal-a100
+$fire-color-accent:                   #CE2262;    // rgb(206, 34, 98)
+$fire-color-accent-dark:              #AA0B46;    // rgb(170, 11, 70)     $gm-color-teal-a400
+$fire-color-accent-darkest:           #870032;    // rgb(135, 0, 50)
