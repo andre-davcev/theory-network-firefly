@@ -1,8 +1,8 @@
-@import 'variables';
+@import '../../../../../apple/src/sass/variables';
 
 :host
 {
-    --cpt-color:                       #{$app-color-primary};
+    --cpt-color:                       #80D623;
     --cpt-color-border:                #{$ios-map-color-orb-border};
     --cpt-color-pulse:               rgba(86, 199, 29, 0.5);
     --cpt-size:                        20px;
