@@ -1,11 +1,9 @@
 @import 'variables';
 
-$cpt-font-firefly-icon-firefly: "b";
-
 :host
 {
     --cpt-icon-size: 32px;
-    --cpt-font-family: #{$app-font-firefly};
+    --cpt-font-family: #{$fire-font-firefly};
     --cpt-font-size: 12px;
     --cpt-line-height: 1;
     --cpt-color: black;
@@ -42,5 +40,5 @@ $cpt-font-firefly-icon-firefly: "b";
         }
     }
 
-    &.cpt-firefly > .cpt-icon:before { content: $cpt-font-firefly-icon-firefly; }
+    &.cpt-firefly > .cpt-icon:before { content: 'b'; }
 }

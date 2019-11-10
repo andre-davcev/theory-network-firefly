@@ -1,16 +1,16 @@
-@import '../variables/colors';
+@import 'variables';
 
 ion-app {
     ion-picker {
-        --ion-color-primary: #{$app-color-black};
+        --ion-color-primary: #{$fire-color-black};
     }
 
     ion-loading {
         &.cpt-loading {
-            --background: #{$app-color-transparent};
+            --background: #{$fire-color-transparent};
 
             ion-spinner {
-                --spinner-color: #{$app-color-primary};
+                --spinner-color: #{$fire-color-primary};
                 transform: scale(2);
             }
         }
@@ -20,7 +20,7 @@ ion-app {
 
 ion-item {
   ion-icon {
-      color: #{$app-color-grey-lighter};
+      color: #{$fire-color-grey-lighter};
   }
 }
 
@@ -46,7 +46,7 @@ ion-content {
 
 ion-fab-button {
   &.ion-color-secondary {
-    --background-activated: #{$app-color-accent-darkest};
+    --background-activated: #{$fire-color-accent-darkest};
   }
 }
 
@@ -55,7 +55,7 @@ ion-action-sheet {
 }
 
 ion-toast {
-    --background: #{$app-color-primary};
-    --color: #{$app-color-white};
+    --background: #{$fire-color-primary};
+    --color: #{$fire-color-white};
     --box-shadow: rgba(0, 0, 0, 0.37) 0px 1px 4px 0px;
 }

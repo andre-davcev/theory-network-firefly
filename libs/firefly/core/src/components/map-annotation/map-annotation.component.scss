@@ -2,9 +2,9 @@
 
 :host
 {
-    --cpt-color-background: #{$app-color-dark};
-    --cpt-color-accent: #{$app-color-primary};
-    --cpt-color-white: #{$app-color-white};
+    --cpt-color-background: #{$fire-color-dark};
+    --cpt-color-accent: #{$fire-color-primary};
+    --cpt-color-white: #{$fire-color-white};
     --cpt-box-shadow: rgba(0, 0, 0, 0.1);
 
     position: relative;
