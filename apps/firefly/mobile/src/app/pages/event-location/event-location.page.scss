@@ -1,11 +1,11 @@
-@import "app-variables";
+@import 'variables';
 
 :host
 {
     ion-searchbar {
-        --background: #{$app-color-transparent};
+        --background: #{$fire-color-transparent};
 /*
-        --color: #{$app-color-primary};
+        --color: #{$fire-color-primary};
         --icon-color: var(--color);
         --placeholder-color: var(--color);
         --placeholder-opacity: 0.9;

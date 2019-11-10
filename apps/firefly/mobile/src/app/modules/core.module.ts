@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -11,7 +11,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppCoreModule } from '@theory/web';
 import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
 import {
   StateUser,
@@ -42,18 +41,44 @@ import { environment } from '@firefly/app/env';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { StateMap } from '@theory/mapbox';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BrowserModule } from '@angular/platform-browser';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+export function createTranslateLoader(http: HttpClient)
+{
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule
 ({
     imports :
     [
+        RouterModule,
+        ReactiveFormsModule,
+
+        BrowserModule,
+        HttpClientModule,
         BrowserAnimationsModule,
-        AppCoreModule,
+
+        TranslateModule.forRoot
+        ({
+            loader:
+            {
+                provide:    TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps:       [HttpClient]
+            }
+        }),
+
         IonicModule.forRoot
         ({
             swipeBackEnabled: false,
-            scrollAssist: true,
-            scrollPadding: true
+            scrollAssist:     true,
+            scrollPadding:    true
         }),
 
         AngularFireModule.initializeApp(environment.apis.firebase),

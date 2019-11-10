@@ -5,7 +5,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Cluster, IconCluster } from '@firefly/core/models';
 import { ServiceIconClusters, ServiceClusters } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/state';
+import { StateReferenceTable } from '@theory/ngxs';
 
 import { StateIconClustersModel } from './icon-clusters.state.model';
 import { StateIconClustersOptions } from './icon-clusters.state.options';

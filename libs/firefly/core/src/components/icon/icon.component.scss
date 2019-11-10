@@ -1,10 +1,10 @@
-@import "app-variables";
+@import 'variables';
 
 :host
 {
     --cpt-icon-size: 32px;
-    --cpt-font-family: #{$app-font-firefly};
-    --cpt-font-size: #{$app-font-firefly-size};
+    --cpt-font-family: #{$fire-font-firefly};
+    --cpt-font-size: 12px;
     --cpt-line-height: 1;
     --cpt-color: black;
 
@@ -40,5 +40,5 @@
         }
     }
 
-    &.cpt-firefly > .cpt-icon:before { content: $app-font-firefly-icon-firefly; }
+    &.cpt-firefly > .cpt-icon:before { content: 'b'; }
 }

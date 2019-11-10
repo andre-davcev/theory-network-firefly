@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/state';
+import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { Alert } from '@firefly/core/models';
 import { ServiceAlerts } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/user';

@@ -1,4 +1,4 @@
-import { SortField } from '@theory/state';
+import { SortField } from '@theory/ngxs';
 import { StreamItem, UserStreamItem } from '@firefly/core/models';
 
 import { ActionsUserStream } from './user-stream.actions.enum';

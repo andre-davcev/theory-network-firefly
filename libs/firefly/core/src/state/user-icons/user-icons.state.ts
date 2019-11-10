@@ -4,7 +4,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Icon, UserIcon } from '@firefly/core/models';
 import { ServiceUserIcons, ServiceIcons } from '@firefly/core/services';
-import { StateReferenceTable, Default } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/ngxs';
 
 import { StateUserIconsModel } from './user-icons.state.model';
 import { StateUserIconsOptions } from './user-icons.state.options';

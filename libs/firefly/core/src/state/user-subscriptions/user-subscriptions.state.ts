@@ -5,7 +5,7 @@ import { CoreUtil, TypeOf } from '@theory/core';
 import { StateUser } from '@firefly/core/state/user';
 import { Subscription, UserSubscription } from '@firefly/core/models';
 import { ServiceUserSubscriptions, ServiceSubscriptions } from '@firefly/core/services';
-import { StateReferenceTable, Default } from '@theory/state';
+import { StateReferenceTable, Default } from '@theory/ngxs';
 
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { StateUserSubscriptionsOptions } from './user-subscriptions.state.options';

@@ -1,4 +1,4 @@
-import { SortField } from '@theory/state';
+import { SortField } from '@theory/ngxs';
 import { Icon, UserIcon } from '@firefly/core/models';
 
 import { ActionsUserIcons } from './user-icons.actions.enum';

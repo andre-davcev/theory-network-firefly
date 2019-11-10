@@ -311,25 +311,25 @@
         }
       }
     },
-    "state": {
-      "root": "libs/state",
-      "sourceRoot": "libs/state/src",
+    "ngxs": {
+      "root": "libs/ngxs",
+      "sourceRoot": "libs/ngxs/src",
       "projectType": "library",
       "prefix": "theory",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "libs/state/tsconfig.lib.json",
-            "project": "libs/state/ng-package.json"
+            "tsConfig": "libs/ngxs/tsconfig.lib.json",
+            "project": "libs/ngxs/ng-package.json"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/state/tsconfig.lib.json",
-              "libs/state/tsconfig.spec.json"
+              "libs/ngxs/tsconfig.lib.json",
+              "libs/ngxs/tsconfig.spec.json"
             ],
             "exclude": ["**/node_modules/**"]
           }
@@ -337,15 +337,40 @@
         "test": {
           "builder": "@nrwl/builders:jest",
           "options": {
-            "jestConfig": "libs/state/jest.config.js",
-            "tsConfig": "libs/state/tsconfig.spec.json",
-            "setupFile": "libs/state/src/test-setup.ts"
+            "jestConfig": "libs/ngxs/jest.config.js",
+            "tsConfig": "libs/ngxs/tsconfig.spec.json",
+            "setupFile": "libs/ngxs/src/test-setup.ts"
           }
         }
       },
       "schematics": {
         "@nrwl/schematics:component": {
           "styleext": "scss"
+        }
+      }
+    },
+    "apple": {
+      "root": "libs/apple",
+      "sourceRoot": "libs/apple/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/apple/tsconfig.lib.json",
+              "libs/apple/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/apple/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/apple/jest.config.js",
+            "tsConfig": "libs/apple/tsconfig.spec.json"
+          }
         }
       }
     }

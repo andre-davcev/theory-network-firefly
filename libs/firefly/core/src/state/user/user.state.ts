@@ -11,24 +11,24 @@ import { User } from '@firefly/core/models';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
-  ActionUserAuthenticate,
-  ActionUserWatch,
-  ActionUserAuthenticateCheck,
-  ActionUserAddToken,
+    ActionUserAuthenticate,
+    ActionUserWatch,
+    ActionUserAuthenticateCheck,
+    ActionUserAddToken,
     ActionUserLoginEmail,
-  ActionUserLogout,
-  ActionUserWatchLanguage,
+    ActionUserLogout,
+    ActionUserWatchLanguage,
     ActionUserReset,
     ActionUserGet,
-  ActionUserSet,
+    ActionUserSet,
     ActionUserPatch,
     ActionUserSave,
     ActionUserDelete,
-  ActionUserCreate
+    ActionUserCreate
 } from './user.actions';
 import { ServiceUsers } from '@firefly/core/services';
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/state';
+import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { FormGroup } from '@angular/forms';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 
@@ -135,7 +135,8 @@ export class StateUser implements NgxsOnInit
                     new ActionUserAlertsGetData(),
                     new ActionUserStreamGetData()
                 ])
-            )
+            ),
+            tap(() => patchState({ initializing: false })),
         );
     }
 
@@ -194,7 +195,6 @@ export class StateUser implements NgxsOnInit
             take(1),
             tap((authData: FirebaseUser) => patchState({ authData, authenticating: false, authenticated: authData != null })),
             switchMap((authData: FirebaseUser) => authData == null ? of(null) : dispatch(new ActionUserWatch(this.service.parseId(authData)))),
-            tap(() => patchState({ initializing: false })),
             catchError((error: Error) => of(patchState({error, authenticating: false, initializing: false})))
         );
     }

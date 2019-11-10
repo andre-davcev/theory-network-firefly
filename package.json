@@ -105,7 +105,6 @@
     "@ngxs/router-plugin": "^3.4.3",
     "@ngxs/store": "^3.4.3",
     "@nrwl/nx": "7.8.7",
-    "@theory/scss": "file:libs/scss",
     "core-js": "^2.5.7",
     "firebase": "^7.2.1",
     "firebase-admin": "^8.6.1",
@@ -166,6 +165,8 @@
     "tsickle": "^0.37.0",
     "tslib": "^1.9.0",
     "tslint": "~5.12.1",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "@nrwl/jest": "8.7.0",
+    "ts-jest": "24.0.0"
   }
 }
