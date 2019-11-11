@@ -8,9 +8,11 @@ export interface Event extends Asset
 {
     tagline     : string;
     imageId     : string;
-    imageUrl?   : string;
     coordinates : firestore.GeoPoint;
     location    : Location;
     times       : Array<Time>;
     url         : string;
+
+    imageUrl?      : string;
+    imageUrlSmall? : string;
 }
