@@ -53,7 +53,7 @@ export
     ImagesDelete,
     ImagesUpdate,
 
-    // StorageResize,
+    StorageResize,
 
     // UserAlertsCreate,
     UserAlertsDelete,
