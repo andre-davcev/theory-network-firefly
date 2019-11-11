@@ -151,17 +151,16 @@ export class StateEvent
     }
 
     @Action(ActionEventPatch)
-    patch({ dispatch, getState } : StateContext<StateEventModel>, { payload, save }: ActionEventPatch)
+    patch({ dispatch, getState } : StateContext<StateEventModel>, { payload }: ActionEventPatch)
     {
-        const state: StateEventModel  = getState();
-        const data:  Event            = StateEvent.data(state);
-        const value: Event            = { ...data, ...payload };
-        const path:  string           = StateEvent.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateEvent.id(state), payload) : of(null);
+        const state: StateEventModel = getState();
+        const data:  Event           = StateEvent.data(state);
+        const value: Event           = { ...data, ...payload };
+        const path:  string          = StateEvent.formPath(state);
 
-        return save$.pipe
+        return dispatch(new UpdateFormValue({ value, path })).
+        pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
             switchMap(() =>
                 data.id === CoreEnum.IdNew ?
                     of(null) :
@@ -173,15 +172,16 @@ export class StateEvent
     @Action(ActionEventCreate)
     create({ getState, dispatch }: StateContext<StateEventModel>)
     {
-        const state: StateEventModel = getState();
-        const device: boolean        = this.store.selectSnapshot(StateDevice.device);
-        const data:  Event           = StateEvent.data(state);
+        const state:      StateEventModel = getState();
+        const device:     boolean         = this.store.selectSnapshot(StateDevice.device);
+        const data:       Event           = StateEvent.data(state);
+        const imageIsNew: boolean         = this.store.selectSnapshot(StateImage.isNew)
 
         data.imageId = device ? data.imageId : this.service.toId(data.imageId);
 
         return forkJoin
         (
-            data.id === CoreEnum.IdNew && device ? dispatch(new ActionImageCreate()) : of(null),
+            imageIsNew ? dispatch(new ActionImageCreate()) : of(null),
             this.service.create(data)
         ).
         pipe
@@ -191,11 +191,21 @@ export class StateEvent
     }
 
     @Action(ActionEventSave)
-    save({ getState }: StateContext<StateEventModel>)
+    save({ getState, dispatch }: StateContext<StateEventModel>)
     {
-        const data: Event = StateEvent.data(getState());
+        const state:     StateEventModel = getState();
+        const formPath:  string          = StateEvent.formPath(state);
+        const formGroup: FormGroup       = StateEvent.formGroup(state);
+        const isNew:     boolean         = StateEvent.isNew(state);
+        const id:        string          = StateEvent.id(state);
 
-        return this.service.patch(data.id, data);
+        return isNew ?
+            dispatch(new ActionEventCreate()) :
+            this.service.patch(id, this.service.changedFields(formGroup)).
+            pipe
+            (
+                switchMap(() => dispatch(new SetFormPristine(formPath)))
+            );
     }
 
     @Action(ActionEventDelete)

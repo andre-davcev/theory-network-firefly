@@ -33,6 +33,7 @@ import { ActionIconClustersRemove, ActionIconClustersAdd } from '../icon-cluster
 import { ActionEventClustersRemove } from '../event-clusters/event-clusters.actions';
 import { ActionUserStreamRemove } from '../user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../user-subscriptions/user-subscriptions.actions';
+import { StateDevice } from '@theory/capacitor';
 
 @State<StateClusterModel>(StateClusterOptions)
 
@@ -135,19 +136,17 @@ export class StateCluster
     }
 
     @Action(ActionClusterPatch)
-    patch({ dispatch, getState } : StateContext<StateClusterModel>, { payload, save }: ActionClusterPatch)
+    patch({ dispatch, getState } : StateContext<StateClusterModel>, { payload }: ActionClusterPatch)
     {
         const state: StateClusterModel = getState();
         const data:  Cluster           = StateCluster.data(state);
         const value: Cluster           = { ...data, ...payload };
         const path:  string            = StateCluster.formPath(state);
-        const save$: Observable<void>  = save ? this.service.patch(StateCluster.id(state), payload) : of(null);
 
-        return save$.pipe
+        return dispatch(new UpdateFormValue({ value, path })).
+        pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
-            map(() => StateCluster.data(getState())),
-            switchMap((data: Cluster) =>
+            switchMap(() =>
                 data.id === CoreEnum.IdNew ?
                     of(null) :
                     dispatch(new ActionUserClustersSync(data))
@@ -158,12 +157,16 @@ export class StateCluster
     @Action(ActionClusterCreate)
     create({ getState, dispatch }: StateContext<StateClusterModel>)
     {
-        const state: StateClusterModel = getState();
-        const data:  Cluster           = StateCluster.data(state);
+        const state:     StateClusterModel = getState();
+        const data:      Cluster           = StateCluster.data(state);
+        const device:    boolean           = this.store.selectSnapshot(StateDevice.device);
+        const iconIsNew: boolean           = this.store.selectSnapshot(StateIcon.isNew);
+
+        data.iconId = device ? data.iconId : this.service.toId(data.iconId);
 
         return forkJoin
         (
-            data.id === CoreEnum.IdNew ? dispatch(new ActionIconCreate()) : of(null),
+            iconIsNew ? dispatch(new ActionIconCreate()) : of(null),
             this.service.create(data)
         ).
         pipe
@@ -173,11 +176,21 @@ export class StateCluster
     }
 
     @Action(ActionClusterSave)
-    save({ getState }: StateContext<StateClusterModel>)
+    save({ getState, dispatch }: StateContext<StateClusterModel>)
     {
-        const data: Cluster = StateCluster.data(getState());
+        const state:     StateClusterModel = getState();
+        const formPath:  string            = StateCluster.formPath(state);
+        const formGroup: FormGroup         = StateCluster.formGroup(state);
+        const isNew:     boolean           = StateCluster.isNew(state);
+        const id:        string            = StateCluster.id(state);
 
-        return this.service.patch(data.id, data);
+        return isNew ?
+            dispatch(new ActionClusterCreate()) :
+            this.service.patch(id, this.service.changedFields(formGroup)).
+            pipe
+            (
+                switchMap(() => dispatch(new SetFormPristine(formPath)))
+            );
     }
 
     @Action(ActionClusterDelete)

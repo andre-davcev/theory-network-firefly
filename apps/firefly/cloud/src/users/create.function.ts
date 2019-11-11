@@ -44,7 +44,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         userId      : id,
         draft       : false,
         tagline     : 'Come enjoy my first event cluster',
-        iconId      : 'admin###icons###default.png',
+        iconId      : 'admin###icons###default',
         dateCreated : timestamp,
         dateUpdated : timestamp
     });

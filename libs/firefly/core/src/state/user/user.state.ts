@@ -141,18 +141,14 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserPatch)
-    patch({ dispatch, getState } : StateContext<StateUserModel>, { payload, save }: ActionUserPatch)
+    patch({ dispatch, getState } : StateContext<StateUserModel>, { payload }: ActionUserPatch)
     {
-        const state: StateUserModel   = getState();
-        const data:  User             = StateUser.data(state);
-        const value: User             = { ...data, ...payload };
-        const path:  string           = StateUser.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateUser.id(state), payload) : of(null);
+        const state: StateUserModel = getState();
+        const data:  User           = StateUser.data(state);
+        const value: User           = { ...data, ...payload };
+        const path:  string         = StateUser.formPath(state);
 
-        return save$.pipe
-        (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path })))
-        );
+        return dispatch(new UpdateFormValue({ value, path }));
     }
 
     @Action(ActionUserCreate)
@@ -165,11 +161,18 @@ export class StateUser implements NgxsOnInit
     }
 
     @Action(ActionUserSave)
-    save({ getState }: StateContext<StateUserModel>)
+    save({ getState, dispatch }: StateContext<StateUserModel>)
     {
-        const data: User = StateUser.data(getState());
+        const state:     StateUserModel = getState();
+        const formPath:  string         = StateUser.formPath(state);
+        const formGroup: FormGroup      = StateUser.formGroup(state);
+        const id:        string         = StateUser.id(state);
 
-        return this.service.patch(data.id, data);
+        return this.service.patch(id, this.service.changedFields(formGroup)).
+        pipe
+        (
+            switchMap(() => dispatch(new SetFormPristine(formPath)))
+        );
     }
 
     @Action(ActionUserDelete)
@@ -261,7 +264,8 @@ export class StateUser implements NgxsOnInit
         (
             filter(([user, language]) => user != null && user.language != null && language != null),
             filter(([user, language]) => user.language !== language),
-            switchMap(([user, language]) => dispatch(new ActionUserPatch({ language }, true)))
+            switchMap(([user, language]) => dispatch(new ActionUserPatch({ language }))),
+            switchMap(() => dispatch(new ActionUserSave()))
         );
     }
 
@@ -273,7 +277,10 @@ export class StateUser implements NgxsOnInit
 
         const tokens : Record<string, string> = user.tokens == null ? {[token]: token} : {...user.tokens, [token]: token};
 
-        return dispatch(new ActionUserPatch({ tokens }, true));
+        return dispatch(new ActionUserPatch({ tokens })).pipe
+        (
+            switchMap(() => dispatch(new ActionUserSave()))
+        );
     }
 
     @Action(ActionUserCreate)

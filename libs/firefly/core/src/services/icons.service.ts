@@ -67,7 +67,7 @@ export class ServiceIcons extends ServiceAsset<Icon>
 
     private idCluster(cluster: Cluster): string
     {
-        return `${cluster.userId}-${this.name}-${new Date().getTime()}.png`;
+        return `${cluster.userId}-${this.name}-${new Date().getTime()}`;
     }
 
 
