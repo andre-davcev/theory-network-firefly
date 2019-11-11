@@ -35,11 +35,7 @@ export const StateIconOptions: StoreOptions<StateIconModel> =
         formGroup : undefined,
         formPath  : 'icon.form',
 
-        upload :
-        {
-            path     : undefined,
-            progress : 0,
-            error    : undefined
-        }
+        uploadProgress: 0,
+        uploadError:    undefined
     }
 };

@@ -35,12 +35,8 @@ export const StateImageOptions: StoreOptions<StateImageModel> =
         formGroup : undefined,
         formPath  : 'image.form',
 
-        upload :
-        {
-            path     : undefined,
-            progress : 0,
-            error    : undefined
-        }
+        uploadProgress: 0,
+        uploadError:    undefined
     }
 };
 

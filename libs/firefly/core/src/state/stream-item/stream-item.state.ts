@@ -119,19 +119,17 @@ export class StateStreamItem
     }
 
     @Action(ActionStreamItemPatch)
-    patch({ dispatch, getState } : StateContext<StateStreamItemModel>, { payload, save }: ActionStreamItemPatch)
+    patch({ dispatch, getState } : StateContext<StateStreamItemModel>, { payload }: ActionStreamItemPatch)
     {
         const state: StateStreamItemModel = getState();
         const data:  StreamItem           = StateStreamItem.data(state);
         const value: StreamItem           = { ...data, ...payload };
         const path:  string               = StateStreamItem.formPath(state);
-        const save$: Observable<void>     = save ? this.service.patch(StateStreamItem.id(state), payload) : of(null);
 
-        return save$.pipe
+        return dispatch(new UpdateFormValue({ value, path })).
+        pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
-            map(() => StateStreamItem.data(getState())),
-            switchMap((data: StreamItem) =>
+            switchMap(() =>
                 data.id === CoreEnum.IdNew ?
                     of(null) :
                     dispatch(new ActionUserStreamSync(data))
@@ -153,11 +151,21 @@ export class StateStreamItem
     }
 
     @Action(ActionStreamItemSave)
-    save({ getState }: StateContext<StateStreamItemModel>)
+    save({ getState, dispatch}: StateContext<StateStreamItemModel>)
     {
-        const data: StreamItem = StateStreamItem.data(getState());
+        const state:     StateStreamItemModel = getState();
+        const formPath:  string               = StateStreamItem.formPath(state);
+        const formGroup: FormGroup            = StateStreamItem.formGroup(state);
+        const isNew:     boolean              = StateStreamItem.isNew(state);
+        const id:        string               = StateStreamItem.id(state);
 
-        return this.service.patch(data.id, data);
+        return isNew ?
+            dispatch(new ActionStreamItemCreate()) :
+            this.service.patch(id, this.service.changedFields(formGroup)).
+            pipe
+            (
+                switchMap(() => dispatch(new SetFormPristine(formPath)))
+            );
     }
 
     @Action(ActionStreamItemDelete)

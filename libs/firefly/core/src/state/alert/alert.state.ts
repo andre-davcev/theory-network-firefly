@@ -113,19 +113,17 @@ export class StateAlert
     }
 
     @Action(ActionAlertPatch)
-    patch({ dispatch, getState } : StateContext<StateAlertModel>, { payload, save }: ActionAlertPatch)
+    patch({ dispatch, getState } : StateContext<StateAlertModel>, { payload }: ActionAlertPatch)
     {
-        const state: StateAlertModel  = getState();
-        const data:  Alert            = StateAlert.data(state);
-        const value: Alert            = { ...data, ...payload };
-        const path:  string           = StateAlert.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateAlert.id(state), payload) : of(null);
+        const state: StateAlertModel = getState();
+        const data:  Alert           = StateAlert.data(state);
+        const value: Alert           = { ...data, ...payload };
+        const path:  string          = StateAlert.formPath(state);
 
-        return save$.pipe
+        return dispatch(new UpdateFormValue({ value, path })).
+        pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
-            map(() => StateAlert.data(getState())),
-            switchMap((data: Alert) =>
+            switchMap(() =>
                 data.id === CoreEnum.IdNew ?
                     of(null) :
                     dispatch(new ActionUserAlertsSync(data))
@@ -146,11 +144,21 @@ export class StateAlert
     }
 
     @Action(ActionAlertSave)
-    save({ getState }: StateContext<StateAlertModel>)
+    save({ getState, dispatch }: StateContext<StateAlertModel>)
     {
-        const data: Alert = StateAlert.data(getState());
+        const state:     StateAlertModel = getState();
+        const formPath:  string          = StateAlert.formPath(state);
+        const formGroup: FormGroup       = StateAlert.formGroup(state);
+        const isNew:     boolean         = StateAlert.isNew(state);
+        const id:        string          = StateAlert.id(state);
 
-        return this.service.patch(data.id, data);
+        return isNew ?
+            dispatch(new ActionAlertCreate()) :
+            this.service.patch(id, this.service.changedFields(formGroup)).
+            pipe
+            (
+                switchMap(() => dispatch(new SetFormPristine(formPath)))
+            );
     }
 
     @Action(ActionAlertDelete)

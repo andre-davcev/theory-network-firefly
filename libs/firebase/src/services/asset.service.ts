@@ -1,15 +1,11 @@
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
-import { Observable, from, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { switchMap, map, last } from 'rxjs/operators';
-import { FileReadResult, Plugins } from '@capacitor/core';
-import { DataUri } from '@theory/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder } from '@angular/forms';
 
 import { ServiceBase } from './base.service';
 import { StorageFormat } from '../enums';
-
-const { Filesystem } = Plugins;
 
 export class ServiceAsset<T> extends ServiceBase<T>
 {
@@ -31,22 +27,11 @@ export class ServiceAsset<T> extends ServiceBase<T>
         this.storage = storage;
     }
 
-    public base64(url: string): Observable<string>
-    {
-        const isDataUri: boolean = !!url.match(/^data:image/);
-
-        return isDataUri ? of(url) : from(Filesystem.readFile({ path: url })).pipe
-        (
-            map((result: FileReadResult) => result.data),
-            map((data: string) => `${DataUri.Png}${data}`)
-        );
-    }
-
     public upload(filePath: string, path: string): Observable<string>
     {
         const ref: AngularFireStorageReference = this.storage.ref(path);
 
-        return this.base64(filePath).
+        return of(filePath).
         pipe
         (
             map((image: string) => ref.putString(image, StorageFormat.DataUrl)),
@@ -58,7 +43,7 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public id(asset: T): string
     {
-        return `${asset['userId']}${this.separator}${this.name}${this.separator}${new Date().getTime()}.png`;
+        return `${asset['userId']}${this.separator}${this.name}${this.separator}${new Date().getTime()}`;
     }
 
     public toId(bucketPath: string): string
@@ -82,13 +67,13 @@ export class ServiceAsset<T> extends ServiceBase<T>
         );
     }
 
-    public isNormalized(url: string): boolean
+    public static isDataUrl(url: string): boolean
     {
-        return url == null || !!url.match(/^data:image/) || !!url.match(/^http:/) || !!url.match(/^https:/);
+        return !!url.match(/^data:image/);
     }
 
-    public normalizeUrl(url: string): string
+    public static isWebUrl(url: string): boolean
     {
-        return this.isNormalized(url) ? url : `${DataUri.Png}${url}`;
+        return !!url.match(/^http:/) || !!url.match(/^https:/);
     }
   }

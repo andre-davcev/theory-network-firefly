@@ -119,19 +119,17 @@ export class StateSubscription
     }
 
     @Action(ActionSubscriptionPatch)
-    patch({ dispatch, getState } : StateContext<StateSubscriptionModel>, { payload, save }: ActionSubscriptionPatch)
+    patch({ dispatch, getState } : StateContext<StateSubscriptionModel>, { payload }: ActionSubscriptionPatch)
     {
         const state: StateSubscriptionModel = getState();
         const data:  Subscription           = StateSubscription.data(state);
         const value: Subscription           = { ...data, ...payload };
         const path:  string                 = StateSubscription.formPath(state);
-        const save$: Observable<void>       = save ? this.service.patch(StateSubscription.id(state), payload) : of(null);
 
-        return save$.pipe
+        return dispatch(new UpdateFormValue({ value, path })).
+        pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
-            map(() => StateSubscription.data(getState())),
-            switchMap((data: Subscription) =>
+            switchMap(() =>
                 data.id === CoreEnum.IdNew ?
                     of(null) :
                     dispatch(new ActionUserSubscriptionsSync(data))
@@ -153,11 +151,21 @@ export class StateSubscription
     }
 
     @Action(ActionSubscriptionSave)
-    save({ getState }: StateContext<StateSubscriptionModel>)
+    save({ getState, dispatch }: StateContext<StateSubscriptionModel>)
     {
-        const data: Subscription = StateSubscription.data(getState());
+        const state:     StateSubscriptionModel = getState();
+        const formPath:  string                 = StateSubscription.formPath(state);
+        const formGroup: FormGroup              = StateSubscription.formGroup(state);
+        const isNew:     boolean                = StateSubscription.isNew(state);
+        const id:        string                 = StateSubscription.id(state);
 
-        return this.service.patch(data.id, data);
+        return isNew ?
+            dispatch(new ActionSubscriptionCreate()) :
+            this.service.patch(id, this.service.changedFields(formGroup)).
+            pipe
+            (
+                switchMap(() => dispatch(new SetFormPristine(formPath)))
+            );
     }
 
     @Action(ActionSubscriptionDelete)

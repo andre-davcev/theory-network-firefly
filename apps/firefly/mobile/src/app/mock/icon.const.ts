@@ -1,1 +1,1 @@
-export const MockIconId:string  = 'admin/icons/mock.png';
+export const MockIconId:string  = 'admin/icons/mock';

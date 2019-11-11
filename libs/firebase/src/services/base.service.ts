@@ -3,7 +3,7 @@ import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument,
 import { Model } from '@theory/firebase/interfaces';
 import { map, take, switchMap } from 'rxjs/operators';
 import { MergeType } from '../../../firefly/core/src/enums';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import { CoreEnum } from '@theory/core';
 
@@ -93,7 +93,7 @@ export class ServiceBase<T extends Model | Record<string, any>>
     {
         if (!this.reference)
         {
-            const id:        string                        = this.firestore.createId();
+            const id:        string                        = object.id == null ? this.firestore.createId() : object.id;
             const timestamp: firebase.firestore.FieldValue = firebase.firestore.FieldValue.serverTimestamp();
 
             object =
@@ -191,14 +191,32 @@ export class ServiceBase<T extends Model | Record<string, any>>
 
     public build(userId: string, defaults: T): T
     {
-      const object: T =
-      {
-          ...this.clone(defaults),
-          id: CoreEnum.IdNew,
-          userId
-      };
+        const object: T =
+        {
+            ...this.clone(defaults),
+            id: CoreEnum.IdNew,
+            userId
+        };
 
-      return object;
+        return object;
+    }
+
+    public changedFields(form: FormGroup): Partial<T>
+    {
+        const data: Partial<T> = {};
+
+        const controls: Record<string, AbstractControl> = form.controls;
+
+        Object.
+            keys(controls).
+            filter((key: string) =>
+                controls[key].dirty && controls[key].valid
+            ).
+            forEach((key: string) =>
+                data[key] = controls[key].value
+            );
+
+        return data;
     }
 
     public formCreate(controlsConfig: Record<string, any>): FormGroup

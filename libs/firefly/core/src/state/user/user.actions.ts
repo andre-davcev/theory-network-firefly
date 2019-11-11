@@ -7,7 +7,7 @@ import { ActionsUser } from './user.actions.enum';
 export class ActionUserReset  { static readonly type = ActionsUser.Reset;   constructor() { } }
 export class ActionUserGet    { static readonly type = ActionsUser.Get;     constructor(public payload: string = CoreEnum.IdNew) { } }
 export class ActionUserSet    { static readonly type = ActionsUser.Set;     constructor(public payload: User) { } }
-export class ActionUserPatch  { static readonly type = ActionsUser.Patch;   constructor(public payload: Partial<User>, public save: boolean = false) { } }
+export class ActionUserPatch  { static readonly type = ActionsUser.Patch;   constructor(public payload: Partial<User>) { } }
 export class ActionUserSave   { static readonly type = ActionsUser.Save;    constructor() { } }
 export class ActionUserDelete { static readonly type = ActionsUser.Delete;  constructor() { } }
 

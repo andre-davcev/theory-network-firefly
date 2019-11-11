@@ -1,16 +1,15 @@
-import { FormGroup } from '@angular/forms';
-import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
+import { FormGroup, AbstractControl } from '@angular/forms';
+import { AngularFireUploadTask, AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of, Observable } from 'rxjs';
-import { map, switchMap, filter, tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map, switchMap, filter, tap, catchError, last } from 'rxjs/operators';
 
-import { CoreEnum, CoreUtil, DataUri } from '@theory/core';
+import { CoreEnum, CoreUtil } from '@theory/core';
 import { StorageFormat } from '@theory/firebase';
 import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { Icon } from '@firefly/core/models';
 import { ServiceIcons } from '@firefly/core/services';
-import { Upload } from '@firefly/core/interfaces';
 import { StateUser } from '@firefly/core/state/user';
 
 import { StateIconModel } from './icon.state.model';
@@ -47,12 +46,10 @@ export class StateIcon
 
     @Selector() static url(state: StateIconModel): string { return StateIcon.data(state).url; }
 
-    @Selector() static upload(state: StateIconModel): Upload           { return state.upload; }
-    @Selector() static uploadPath(state: StateIconModel): string       { return StateIcon.upload(state).path; }
-    @Selector() static uploadProgress(state: StateIconModel): number   { return StateIcon.upload(state).progress; }
-    @Selector() static uploadError(state: StateIconModel): any         { return StateIcon.upload(state).error; }
-    @Selector() static uploadErrored(state: StateIconModel): boolean   { return StateIcon.uploadError(state) != null; }
-    @Selector() static uploadCompleted(state: StateIconModel): boolean { return StateIcon.uploadProgress(state) === 100 && !StateIcon.uploadErrored(state); }
+    @Selector() static uploadProgress(state: StateIconModel):  number  { return state.uploadProgress; }
+    @Selector() static uploadError(state: StateIconModel):     string  { return state.uploadError; }
+    @Selector() static uploadErrored(state: StateIconModel):   boolean { return state.uploadError != null; }
+    @Selector() static uploadCompleted(state: StateIconModel): boolean { return StateIcon.uploadProgress(state) === 100; }
 
     constructor
     (
@@ -135,19 +132,17 @@ export class StateIcon
     }
 
     @Action(ActionIconPatch)
-    patch({ dispatch, getState } : StateContext<StateIconModel>, { payload, save }: ActionIconPatch)
+    patch({ dispatch, getState } : StateContext<StateIconModel>, { payload }: ActionIconPatch)
     {
         const state: StateIconModel   = getState();
         const data:  Icon             = StateIcon.data(state);
         const value: Icon             = { ...data, ...payload };
         const path:  string           = StateIcon.formPath(state);
-        const save$: Observable<void> = save ? this.service.patch(StateIcon.id(state), payload) : of(null);
 
-        return save$.pipe
+        return dispatch(new UpdateFormValue({ value, path })).
+        pipe
         (
-            switchMap(() => dispatch(new UpdateFormValue({ value, path }))),
-            map(() => StateIcon.data(getState())),
-            switchMap((data: Icon) =>
+            switchMap(() =>
                 data.id === CoreEnum.IdNew ?
                     of(null) :
                     dispatch(new ActionUserIconsSync(data))
@@ -160,28 +155,38 @@ export class StateIcon
     {
         const state: StateIconModel = getState();
         const data:  Icon           = StateIcon.data(state);
+        const id:    string         = this.service.id(data);
 
-        return this.service.createWithUpload(data, data.url).pipe
-        (
-            switchMap((object: Icon) =>
-                this.service.getDownloadUrl(object.id)
-            ),
-            switchMap((url: string) =>
-                dispatch(new ActionIconPatch({ url }))
-            )
-        ).
+        data.id = id;
+
+        return dispatch(new ActionIconPatch({ id })).
         pipe
         (
+            switchMap(() => dispatch(new ActionIconUpload())),
+            switchMap(() => this.service.create(data)),
             switchMap(() => dispatch(new ActionUserIconsAdd(data)))
         );
     }
 
     @Action(ActionIconSave)
-    save({ getState }: StateContext<StateIconModel>)
+    save({ getState, dispatch }: StateContext<StateIconModel>)
     {
-        const data: Icon = StateIcon.data(getState());
+        const state:     StateIconModel = getState();
+        const formPath:  string         = StateIcon.formPath(state);
+        const formGroup: FormGroup      = StateIcon.formGroup(state);
+        const isNew:     boolean        = StateIcon.isNew(state);
+        const id:        string         = StateIcon.id(state);
+        const changed:   Partial<Icon>  = this.service.changedFields(formGroup);
 
-        return this.service.patch(data.id, data);
+        return isNew ?
+            dispatch(new ActionIconCreate()) :
+            changed.url ?
+                dispatch(new ActionIconUpload()) :
+                this.service.patch(id, changed).
+                pipe
+                (
+                    switchMap(() => dispatch(new SetFormPristine(formPath)))
+                );
     }
 
     @Action(ActionIconDelete)
@@ -206,9 +211,7 @@ export class StateIcon
     @Action(ActionIconUriSet)
     uriSet({ dispatch }: StateContext<StateIconModel>, { payload }: ActionIconUriSet)
     {
-        const url: string = this.service.normalizeUrl(payload);
-
-        return dispatch(new ActionIconPatch({ url }));
+        return dispatch(new ActionIconPatch({ url: payload }));
     }
 
     @Action(ActionIconUriClear)
@@ -220,32 +223,31 @@ export class StateIcon
     @Action(ActionIconUploadClear)
     uploadClear({ patchState } : StateContext<StateIconModel>)
     {
-        patchState({ upload: CoreUtil.clone<Upload>(StateIconOptions.defaults.upload) });
+        patchState({ uploadProgress: 0, uploadError: undefined });
     }
 
     @Action(ActionIconUpload)
-    upload({ patchState, getState, dispatch }: StateContext<StateIconModel>, { file, fileName }: ActionIconUpload)
+    upload({ patchState, getState, dispatch }: StateContext<StateIconModel>)
     {
-        dispatch( new ActionIconUploadClear());
+        const state: StateIconModel = getState();
+        const id:    string         = StateIcon.id(state);
+        const path:  string         = this.service.toBucketPath(id);
+        const url:   string         = StateIcon.url(state);
 
-        const timestamp: string = new Date().toISOString();
-        const name:      string = fileName == null ? `${StateIconOptions.children}_${timestamp}.jpg` : fileName;
-        const userId:    string = this.store.selectSnapshot(StateUser.id);
-        const path:      string = `${userId}/${this.service.name}/${name}`;
-        const upload:    Upload = StateIcon.upload(getState());
-        const data:      string = `${DataUri.Png}${file}`;
+        const ref:  AngularFireStorageReference = this.storage.ref(path);
+        const task: AngularFireUploadTask       = ref.putString(url, StorageFormat.DataUrl);
 
-        const task: AngularFireUploadTask = this.storage.ref(path).putString(data, StorageFormat.DataUrl);
-
-        patchState({ upload: { ...upload, path }});
-
-        return task.percentageChanges().
-
+        dispatch(new ActionIconUploadClear()).
         pipe
         (
-            tap((progress: number) => patchState({ upload: { ...upload, progress } })),
+            switchMap(() => task.percentageChanges()),
+            tap((uploadProgress: number) => patchState({ uploadProgress })),
             filter(() => StateIcon.uploadCompleted(getState())),
-            catchError((error: Error) => of(patchState({ upload: { ...upload, error } })))
+            switchMap(() => task.snapshotChanges()),
+            last(),
+            switchMap(() => ref.getDownloadURL()),
+            switchMap((url: string) => dispatch(new ActionIconUriSet(url))),
+            catchError((uploadError: any) => of(patchState({ uploadError })))
         );
     }
 }
