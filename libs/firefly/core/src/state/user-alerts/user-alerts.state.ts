@@ -19,8 +19,9 @@ import {
     ActionUserAlertsDelete,
     ActionUserAlertsSync
 } from './user-alerts.actions';
-import { of, empty } from 'rxjs';
+import { of } from 'rxjs';
 import { StateUser } from '../user';
+import { ImageSize } from '@theory/firebase';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 

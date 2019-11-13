@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { map, switchMap, filter, tap, catchError, last } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
-import { StorageFormat } from '@theory/firebase';
+import { StorageFormat, ImageSize } from '@theory/firebase';
 import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { Icon } from '@firefly/core/models';
 import { ServiceIcons } from '@firefly/core/services';
@@ -78,14 +78,6 @@ export class StateIcon
         pipe
         (
             switchMap((object: Icon) =>
-                this.service.getDownloadUrl(object.id).
-                pipe
-                (
-                    tap((url: string) => object.url = url),
-                    map(() => object)
-                )
-            ),
-            switchMap((object: Icon) =>
                 dispatch
                 ([
                     new ActionIconSet(object)
@@ -118,11 +110,12 @@ export class StateIcon
         ]).
         pipe
         (
+            switchMap(() =>
+                this.service.getDownloadUrl(object.id, ImageSize.Medium).
+                pipe(tap((url: string) => object.url = url))
+            ),
             map(() =>
-                patchState
-                ({
-                    formGroup: this.service.formCreate(object)
-                })
+                patchState({ formGroup: this.service.formCreate(object) })
             ),
 
             switchMap(() =>
@@ -180,13 +173,19 @@ export class StateIcon
 
         return isNew ?
             dispatch(new ActionIconCreate()) :
-            changed.url ?
-                dispatch(new ActionIconUpload()) :
-                this.service.patch(id, changed).
-                pipe
-                (
-                    switchMap(() => dispatch(new SetFormPristine(formPath)))
-                );
+            of(changed.url).
+            pipe
+            (
+                switchMap((url: string) =>
+                    url == null ? of(null) : dispatch(new ActionIconUpload())
+                ),
+                switchMap(() =>
+                    this.service.patch(id, changed)
+                ),
+                switchMap(() =>
+                    dispatch(new SetFormPristine(formPath))
+                )
+            );
     }
 
     @Action(ActionIconDelete)

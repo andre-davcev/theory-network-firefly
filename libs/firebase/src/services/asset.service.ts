@@ -5,7 +5,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder } from '@angular/forms';
 
 import { ServiceBase } from './base.service';
-import { StorageFormat } from '../enums';
+import { StorageFormat, ImageSize } from '../enums';
+import { CoreEnum } from '@theory/core';
 
 export class ServiceAsset<T> extends ServiceBase<T>
 {
@@ -43,7 +44,12 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public id(asset: T): string
     {
-        return `${asset['userId']}${this.separator}${this.name}${this.separator}${new Date().getTime()}`;
+        const url:       string = asset['url'];
+        const start:     number = url.indexOf(':');
+        const end:       number = url.indexOf(';') - 1;
+        const mediaType: string = url.substring(start, end);
+
+        return `${asset['userId']}${this.separator}${this.name}${this.separator}${new Date().getTime()}.${mediaType}`;
     }
 
     public toId(bucketPath: string): string
@@ -56,12 +62,24 @@ export class ServiceAsset<T> extends ServiceBase<T>
         return id.replace(/###/g, '/');
     }
 
-    public getDownloadUrl(id: string): Observable<string | null>
+    public toBucketPathSize(id: string, size: ImageSize = ImageSize.Medium): string
     {
-        return of(id).
+        const segments: Array<string> = this.toBucketPath(id).split('/');
+        const fileName: string        = segments[2];
+        const parts:    Array<string> = fileName.split('.');
+        const bucketPath: string      = `${segments[0]}/${segments[1]}/${parts[0]}@${size}.${parts[1]}`;
+
+        return bucketPath;
+    }
+
+    public getDownloadUrl(id: string, size?: ImageSize): Observable<string | null>
+    {
+        return id == null || id === CoreEnum.IdNew ? of(null) : of(id).
         pipe
         (
-            map((key: string) => this.toBucketPath(key)),
+            map((key: string) =>
+                size == null ? this.toBucketPath(key) : this.toBucketPathSize(key, size)
+            ),
             map((bucketPath: string) => this.storage.ref(bucketPath)),
             switchMap((ref: AngularFireStorageReference) => ref.getDownloadURL())
         );

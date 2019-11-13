@@ -34,6 +34,7 @@ import { ActionEventClustersRemove } from '../event-clusters/event-clusters.acti
 import { ActionUserStreamRemove } from '../user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../user-subscriptions/user-subscriptions.actions';
 import { StateDevice } from '@theory/capacitor';
+import { ImageSize } from '@theory/firebase';
 
 @State<StateClusterModel>(StateClusterOptions)
 
@@ -76,14 +77,6 @@ export class StateCluster
         pipe
         (
             switchMap((object: Cluster) =>
-                this.service.getDownloadUrl(object.iconId).
-                pipe
-                (
-                    tap((url: string) => object.iconUrl = url),
-                    map(() => object)
-                )
-            ),
-            switchMap((object: Cluster) =>
                 dispatch
                 ([
                     new ActionClusterSet(object),
@@ -122,11 +115,12 @@ export class StateCluster
         ]).
         pipe
         (
+            switchMap(() =>
+                this.service.getDownloadUrl(object.iconId, ImageSize.Medium).
+                pipe(tap((url: string) => object.iconUrl = url))
+            ),
             map(() =>
-                patchState
-                ({
-                    formGroup: this.service.formCreate(object)
-                })
+                patchState({ formGroup: this.service.formCreate(object) })
             ),
 
             switchMap(() =>

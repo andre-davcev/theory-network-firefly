@@ -24,6 +24,7 @@ import {
   ActionSubscriptionSetId
 } from './subscription.actions';
 import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../user-subscriptions';
+import { ImageSize } from '@theory/firebase';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)
 
@@ -64,14 +65,6 @@ export class StateSubscription
         pipe
         (
             switchMap((object: Subscription) =>
-                this.service.getDownloadUrl(object.iconId).
-                pipe
-                (
-                    tap((url: string) => object.iconUrl = url),
-                    map(() => object)
-                )
-            ),
-            switchMap((object: Subscription) =>
                 dispatch
                 ([
                     new ActionSubscriptionSet(object),
@@ -105,11 +98,12 @@ export class StateSubscription
         return dispatch(new ActionSubscriptionReset()).
         pipe
         (
+            switchMap(() =>
+                this.service.getDownloadUrl(object.iconId, ImageSize.Medium).
+                pipe(tap((url: string) => object.iconUrl = url))
+            ),
             map(() =>
-                patchState
-                ({
-                    formGroup: this.service.formCreate(object)
-                })
+                patchState({ formGroup: this.service.formCreate(object) })
             ),
 
             switchMap(() =>

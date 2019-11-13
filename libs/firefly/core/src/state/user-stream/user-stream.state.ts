@@ -21,6 +21,7 @@ import {
     ActionUserStreamSync
 } from './user-stream.actions';
 import { StateUser } from '../user';
+import { ImageSize } from '@theory/firebase';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
 
@@ -98,7 +99,8 @@ export class StateUserStream extends StateReferenceTable<UserStreamItem, StreamI
         return super.page
         (
             getState(),
-            this.streamItems
+            this.streamItems,
+            ImageSize.Medium
         ).
         pipe
         (
