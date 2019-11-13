@@ -34,6 +34,7 @@ import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUse
 import { ActionImageEventsRemove, ActionImageEventsAdd } from '../image-events/image-events.actions';
 import { StateDevice } from '@theory/capacitor';
 import { ActionClusterReset } from '../cluster';
+import { ImageSize } from '@theory/firebase';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -92,14 +93,6 @@ export class StateEvent
         pipe
         (
             switchMap((object: Event) =>
-                this.service.getDownloadUrl(object.imageId).
-                pipe
-                (
-                    tap((url: string) => object.imageUrl = url),
-                    map(() => object)
-                )
-            ),
-            switchMap((object: Event) =>
                 dispatch
                 ([
                     new ActionEventSet(object),
@@ -137,11 +130,12 @@ export class StateEvent
         ]).
         pipe
         (
+            switchMap(() =>
+                this.service.getDownloadUrl(object.imageId, ImageSize.Medium).
+                pipe(tap((url: string) => object.imageUrl = url))
+            ),
             map(() =>
-                patchState
-                ({
-                    formGroup: this.service.formCreate(object)
-                })
+                patchState({ formGroup: this.service.formCreate(object) })
             ),
 
             switchMap(() =>

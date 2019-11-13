@@ -23,6 +23,7 @@ import {
   ActionAlertSetId
 } from './alert.actions';
 import { ActionUserAlertsAdd, StateUserAlerts, ActionUserAlertsRemove, ActionUserAlertsSync } from '../user-alerts';
+import { ImageSize } from '@theory/firebase';
 
 @State<StateAlertModel>(StateAlertOptions)
 
@@ -63,14 +64,6 @@ export class StateAlert
         pipe
         (
             switchMap((object: Alert) =>
-                this.service.getDownloadUrl(object.imageId).
-                pipe
-                (
-                    tap((url: string) => object.imageUrl = url),
-                    map(() => object)
-                )
-            ),
-            switchMap((object: Alert) =>
                 dispatch
                 ([
                     new ActionAlertSet(object)
@@ -99,11 +92,12 @@ export class StateAlert
         return dispatch(new ActionAlertReset()).
         pipe
         (
+            switchMap(() =>
+                this.service.getDownloadUrl(object.imageId, ImageSize.Medium).
+                pipe(tap((url: string) => object.imageUrl = url))
+            ),
             map(() =>
-                patchState
-                ({
-                    formGroup: this.service.formCreate(object)
-                })
+                patchState({ formGroup: this.service.formCreate(object) })
             ),
 
             switchMap(() =>

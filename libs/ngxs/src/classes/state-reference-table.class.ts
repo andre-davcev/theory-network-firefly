@@ -2,7 +2,7 @@ import { ReferenceTable, StateReferenceTableModel } from '../interfaces';
 import { TypeOf, CoreUtil } from '@theory/core';
 import { Observable, of, forkJoin } from 'rxjs';
 import { Default } from '../enums';
-import { Model, ServiceAsset } from '@theory/firebase';
+import { Model, ServiceAsset, ImageSize } from '@theory/firebase';
 import { tap, switchMap, map } from 'rxjs/operators';
 
 export class StateReferenceTable<R extends ReferenceTable, T extends Model, S extends StateReferenceTableModel<R, T>>
@@ -66,7 +66,7 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
             });
     }
 
-    public page(state: StateReferenceTableModel<R, T>, service: ServiceAsset<T>): Observable<Partial<S>>
+    public page(state: StateReferenceTableModel<R, T>, service: ServiceAsset<T>, imageSize: ImageSize = ImageSize.Small): Observable<Partial<S>>
     {
         let keys: Array<string> = state.keys;
 
@@ -81,7 +81,10 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
         const end:   number = (start + pageSize) > keysLength ? keysLength : (start + pageSize);
 
         const imageIdKey:  string = state.imageIdKey;
-        const imageUrlKey: string = imageIdKey == null ? null : imageIdKey === 'id' ? 'url' : imageIdKey.replace('Id', 'Url');
+       
+        let imageUrlKey: string = imageIdKey == null ? null : imageIdKey === 'id' ? 'url' : imageIdKey.replace('Id', 'Url');
+
+        imageUrlKey = `${imageUrlKey}${imageSize === ImageSize.Small ? 'Small' : ''}`;
 
         return finished ? of({}) : of({}).
         pipe
@@ -110,7 +113,9 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
                 (
                     entities.map((entity: T) => imageIdKey == null ?
                         of(entity) :
-                        service.getDownloadUrl(entity[imageIdKey]).pipe(map((url: string) => ({ ...entity, [imageUrlKey]: url })))
+                        service.
+                            getDownloadUrl(entity[imageIdKey], imageSize).
+                            pipe(map((url: string) => ({ ...entity, [imageUrlKey]: url })))
                     )
                 )
             ),
