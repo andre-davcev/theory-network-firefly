@@ -44,10 +44,17 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public id(asset: T): string
     {
-        const url:       string = asset['url'];
-        const start:     number = url.indexOf(':');
-        const end:       number = url.indexOf(';') - 1;
-        const mediaType: string = url.substring(start, end);
+        const url: string = asset['url'];
+
+        let mediaType: string = this.name === 'images' ? 'jpg' : 'png';
+
+        if (url != null)
+        {
+            const start: number = url.indexOf(':');
+            const end:   number = url.indexOf(';') - 1;
+
+            mediaType = url.substring(start, end);
+        }
 
         return `${asset['userId']}${this.separator}${this.name}${this.separator}${new Date().getTime()}.${mediaType}`;
     }

@@ -223,7 +223,7 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
         const data:      Record<string, R> = state.data;
         const id:        string            = after.id;
         const before:    T                 = lookup[id];
-        const refTable:  R                 = data[id];
+        const refTable:  R                 = data[id] == null ? {} as R : data[id];
         const sortField: string            = state.sortField;
 
         let list: Array<T> = state.list;
@@ -232,7 +232,7 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
 
         refTable.sort =
         {
-            ...refTable.sort,
+            ...(refTable.sort == null ? {} : refTable.sort),
             ...this.getSortFields(state.sortFields, after)
         };
 

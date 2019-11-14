@@ -89,7 +89,7 @@ export class ServiceEvents extends ServiceAsset<Event>
             name        : [event.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
             description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
 
-            tagline     : [event.tagline, ValidatorsExtended.minLength(1)],
+            tagline     : [event.tagline, [Validators.required, ValidatorsExtended.minLength(1)]],
             imageId     : [event.imageId, [ServiceEvents.validateImage()]],
             coordinates : [event.coordinates, Validators.required],
             location    : [event.location, Validators.required],
