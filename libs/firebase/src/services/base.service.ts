@@ -93,7 +93,7 @@ export class ServiceBase<T extends Model | Record<string, any>>
     {
         if (!this.reference)
         {
-            const id:        string                        = object.id == null ? this.firestore.createId() : object.id;
+            const id:        string                        = object.id == null || object.id === CoreEnum.IdNew ? this.firestore.createId() : object.id;
             const timestamp: firebase.firestore.FieldValue = firebase.firestore.FieldValue.serverTimestamp();
 
             object =
