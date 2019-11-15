@@ -1,6 +1,6 @@
 
 import { FormGroup, } from '@angular/forms';
-import { Observable, of, forkJoin, empty } from 'rxjs';
+import { of, forkJoin } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
@@ -29,8 +29,6 @@ import {
 import { ActionClusterEventsReset, ActionClusterEventsDelete } from '../cluster-events/cluster-events.actions';
 import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers/cluster-subscribers.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../user-clusters';
-import { ActionIconClustersRemove, ActionIconClustersAdd } from '../icon-clusters/icon-clusters.actions';
-import { ActionEventClustersRemove } from '../event-clusters/event-clusters.actions';
 import { ActionUserStreamRemove } from '../user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../user-subscriptions/user-subscriptions.actions';
 import { StateDevice } from '@theory/capacitor';
@@ -200,8 +198,6 @@ export class StateCluster
                 ([
                     new ActionClusterEventsDelete(),
                     new ActionClusterSubscribersDelete(),
-                    new ActionEventClustersRemove(data.id),
-                    new ActionIconClustersRemove(data.id),
                     new ActionUserClustersRemove(data.id),
                     new ActionUserStreamRemove(data.id),
                     new ActionUserSubscriptionsRemove(data.id),
@@ -212,21 +208,19 @@ export class StateCluster
     }
 
     @Action(ActionClusterIconAdd)
-    iconAdd({ dispatch, getState }: StateContext<StateClusterModel>)
+    iconAdd({ dispatch }: StateContext<StateClusterModel>)
     {
         return dispatch
         ([
-            new ActionIconClustersAdd(StateCluster.data(getState())),
             new ActionClusterPatch({ iconId: this.store.selectSnapshot(StateIcon.id)})
         ]);
     }
 
     @Action(ActionClusterIconRemove)
-    iconRemove({ dispatch, getState }: StateContext<StateClusterModel>)
+    iconRemove({ dispatch }: StateContext<StateClusterModel>)
     {
         return dispatch
         ([
-            new ActionIconClustersRemove(StateCluster.id(getState())),
             new ActionClusterPatch({ iconId: undefined })
         ]);
     }

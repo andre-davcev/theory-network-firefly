@@ -28,7 +28,6 @@ import {
   ActionImageUriClear,
   ActionImageSetId
 } from './image.actions';
-import { ActionImageEventsReset, ActionImageEventsDelete } from '../image-events/image-events.actions';
 import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages, ActionUserImagesSync } from '../user-images';
 
 @State<StateImageModel>(StateImageOptions)
@@ -104,8 +103,7 @@ export class StateImage
 
         return dispatch
         ([
-            new ActionImageReset(),
-            new ActionImageEventsReset()
+            new ActionImageReset()
         ]).
         pipe
         (
@@ -198,8 +196,6 @@ export class StateImage
             switchMap(() =>
                 dispatch
                 ([
-
-                    new ActionImageEventsDelete(),
                     new ActionUserImagesRemove(data.id),
                     new ActionImageReset()
                 ])
