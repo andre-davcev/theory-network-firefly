@@ -10,7 +10,7 @@ import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/user';
 import { Event, Location, Time } from '@firefly/core/models';
-import { ServiceEvents } from '@firefly/core/services';
+import { ServiceEvents, ServiceClusterEvents } from '@firefly/core/services';
 import { ActionImageGet, ActionImageCreate, StateImage, ActionImageSetId } from '@firefly/core/state/image';
 
 import { StateEventModel } from './event.state.model';
@@ -31,7 +31,7 @@ import {
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
 import { StateDevice } from '@theory/capacitor';
-import { ActionClusterReset } from '../cluster';
+import { ActionClusterReset, StateCluster } from '../cluster';
 import { ImageSize } from '@theory/firebase';
 
 @State<StateEventModel>(StateEventOptions)
@@ -40,8 +40,9 @@ export class StateEvent
 {
     constructor
     (
-        private service: ServiceEvents,
-        private store: Store
+        private service:       ServiceEvents,
+        private clusterEvents: ServiceClusterEvents,
+        private store:         Store
     ) { }
 
     @Selector() static form(state: StateEventModel): FormNgxs { return state.form; }
@@ -166,14 +167,16 @@ export class StateEvent
         const state:      StateEventModel = getState();
         const device:     boolean         = this.store.selectSnapshot(StateDevice.device);
         const data:       Event           = StateEvent.data(state);
-        const imageIsNew: boolean         = this.store.selectSnapshot(StateImage.isNew)
+        const imageIsNew: boolean         = this.store.selectSnapshot(StateImage.isNew);
+        const clusterId:  string          = this.store.selectSnapshot(StateCluster.id);
 
         data.imageId = device ? data.imageId : this.service.toId(data.imageId);
 
         return forkJoin
         (
             imageIsNew ? dispatch(new ActionImageCreate()) : of(null),
-            this.service.create(data)
+            this.service.create(data),
+            this.clusterEvents.add(clusterId, data)
         ).
         pipe
         (
