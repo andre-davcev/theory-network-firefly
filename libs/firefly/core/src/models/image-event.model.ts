@@ -1,6 +1,1 @@
-import { ReferenceTable } from '@theory/ngxs';
-
-export interface ImageEvent extends ReferenceTable
-{
-
-}
+export type ImageEvent = Record<string, string>;

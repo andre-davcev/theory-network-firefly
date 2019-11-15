@@ -11,8 +11,9 @@ firestore.
 document('events/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const id:     string = snapshot.id;
-    const userId: string = snapshot.data().userId;
+    const id:     string                 = snapshot.id;
+    const data:   Record<string, string> = snapshot.data();
+    const userId: string                 = data.userId;
 
     const object: Record<string, any> = ServiceFirestore.create(snapshot,
     {
