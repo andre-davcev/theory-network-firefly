@@ -1,5 +1,5 @@
 import { map, switchMap, tap } from 'rxjs/operators';
-import { Observable, forkJoin, of } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 import { FormGroup } from '@angular/forms';
@@ -29,9 +29,7 @@ import {
   ActionEventImageRemove,
   ActionEventSetId
 } from './event.actions';
-import { ActionEventClustersReset, ActionEventClustersDelete } from '../event-clusters/event-clusters.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
-import { ActionImageEventsRemove, ActionImageEventsAdd } from '../image-events/image-events.actions';
 import { StateDevice } from '@theory/capacitor';
 import { ActionClusterReset } from '../cluster';
 import { ImageSize } from '@theory/firebase';
@@ -125,8 +123,7 @@ export class StateEvent
 
         return dispatch
         ([
-            new ActionEventReset(),
-            new ActionEventClustersReset()
+            new ActionEventReset()
         ]).
         pipe
         (
@@ -213,8 +210,6 @@ export class StateEvent
             switchMap(() =>
                 dispatch
                 ([
-                    new ActionEventClustersDelete(),
-                    new ActionImageEventsRemove(data.id),
                     new ActionUserEventsRemove(data.id),
                     new ActionEventReset()
                 ])
@@ -223,21 +218,19 @@ export class StateEvent
     }
 
     @Action(ActionEventImageAdd)
-    imageAdd({ dispatch, getState }: StateContext<StateEventModel>)
+    imageAdd({ dispatch }: StateContext<StateEventModel>)
     {
         return dispatch
         ([
-            new ActionImageEventsAdd(StateEvent.data(getState())),
             new ActionEventPatch({ imageId: this.store.selectSnapshot(StateImage.id)})
         ]);
     }
 
     @Action(ActionEventImageRemove)
-    imageRemove({ dispatch, getState }: StateContext<StateEventModel>)
+    imageRemove({ dispatch  }: StateContext<StateEventModel>)
     {
         return dispatch
         ([
-            new ActionImageEventsRemove(StateEvent.id(getState())),
             new ActionEventPatch({ imageId: undefined })
         ]);
     }

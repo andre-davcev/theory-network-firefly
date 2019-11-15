@@ -21,11 +21,8 @@ import {
   StateClusterEvents,
   StateClusterSubscribers,
   StateEvent,
-  StateEventClusters,
   StateIcon,
-  StateIconClusters,
   StateImage,
-  StateImageEvents,
   StateStreamItem,
   StateSubscription,
   StateUserAlerts,
@@ -45,7 +42,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 export function createTranslateLoader(http: HttpClient)
@@ -100,11 +96,8 @@ export function createTranslateLoader(http: HttpClient)
             StateClusterEvents,
             StateClusterSubscribers,
             StateEvent,
-            StateEventClusters,
             StateIcon,
-            StateIconClusters,
             StateImage,
-            StateImageEvents,
             StateStreamItem,
             StateSubscription,
             StateUser,

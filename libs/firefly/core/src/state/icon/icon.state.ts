@@ -1,4 +1,4 @@
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { AngularFireUploadTask, AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
@@ -28,7 +28,6 @@ import {
   ActionIconUriClear,
   ActionIconSetId
 } from './icon.actions';
-import { ActionIconClustersReset, ActionIconClustersDelete } from '../icon-clusters/icon-clusters.actions';
 import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons, ActionUserIconsSync } from '../user-icons';
 
 @State<StateIconModel>(StateIconOptions)
@@ -105,8 +104,7 @@ export class StateIcon
 
         return dispatch
         ([
-            new ActionIconReset(),
-            new ActionIconClustersReset()
+            new ActionIconReset()
         ]).
         pipe
         (
@@ -199,7 +197,6 @@ export class StateIcon
             switchMap(() =>
                 dispatch
                 ([
-                    new ActionIconClustersDelete(),
                     new ActionUserIconsRemove(data.id),
                     new ActionIconReset()
                 ])
