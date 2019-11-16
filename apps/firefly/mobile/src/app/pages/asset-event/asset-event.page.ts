@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, from, of, BehaviorSubject, combineLatest } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateCluster, ServiceImages, ActionEventPatch, ActionImageSetId, ActionImageUriSet, StateImage } from '@firefly/core';
+import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateCluster, ActionEventPatch, ActionImageSetId, ActionImageUriSet, StateImage } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
-import { MockImageId } from '@firefly/app/mock';
+import { MockImageId } from '@firefly/core/mocks';
 import { BaseComponent } from '@theory/core';
 
 const { Camera } = Plugins;
@@ -33,26 +33,8 @@ export class PageAssetEvent extends BaseComponent
     @Select(StateEvent.timeEnd)      timeEnd$:      Observable<string>;
     @Select(StateEvent.timeEndValid) timeEndValid$: Observable<boolean>;
     @Select(StateCluster.icon)       icon$:         Observable<string>;
-    @Select(StateEvent.image)        imageUrl$:     Observable<string>;
+    @Select(StateEvent.image)        image$:        Observable<string>;
     @Select(StateDevice.device)      device$:       Observable<boolean>;
-
-    private imageClicked$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-    public image$: Observable<string> = combineLatest
-    ([
-        this.device$,
-        this.imageClicked$
-    ]).
-    pipe
-    (
-        switchMap(([device, imageClicked]) =>
-            device ?
-                this.imageUrl$ :
-                !imageClicked ?
-                    of(null) :
-                    this.images.getDownloadUrl(MockImageId)
-        )
-    );
 
     public Pages: any = Pages;
 
@@ -60,8 +42,7 @@ export class PageAssetEvent extends BaseComponent
     (
         private store:    Store,
         private modal:    ModalController,
-        private resolver: ResolverPageAssetsClusters,
-        private images:   ServiceImages
+        private resolver: ResolverPageAssetsClusters
     )
     {
         super();
@@ -69,7 +50,7 @@ export class PageAssetEvent extends BaseComponent
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light }));
     }
 
     public navigate(page: Pages.AssetsClusters | Pages.ImageSelector | Pages.EventLocation)
@@ -129,9 +110,15 @@ export class PageAssetEvent extends BaseComponent
             }
             else
             {
-                this.imageClicked$.next(true);
-
-                this.store.dispatch(new ActionEventPatch({ imageId: MockImageId }));
+                this.store.dispatch(new ActionImageSetId(MockImageId)).pipe
+                (
+                    map(() =>
+                        this.store.selectSnapshot(StateImage.url)
+                    ),
+                    switchMap((imageUrl: string) =>
+                        this.store.dispatch(new ActionEventPatch({ imageUrl }))
+                    )
+                ).subscribe();
             }
         }
         else if (page === Pages.EventLocation)
