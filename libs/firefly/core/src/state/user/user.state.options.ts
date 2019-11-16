@@ -15,12 +15,9 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             dateCreated : undefined,
             dateUpdated : undefined,
 
-            uid              : undefined,
             language         : 'en',
-            displayName      : undefined,
             email            : undefined,
             phoneNumber      : undefined,
-            photoUrl         : undefined,
             providerId       : undefined,
             tokens           : {}
         },

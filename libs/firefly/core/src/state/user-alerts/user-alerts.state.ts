@@ -4,7 +4,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Alert, UserAlert } from '@firefly/core/models';
 import { ServiceUserAlerts, ServiceAlerts } from '@firefly/core/services';
-import { StateReferenceTable, Default } from '@theory/ngxs';
+import { StateReferenceTable } from '@theory/ngxs';
 
 import { StateUserAlertsModel } from './user-alerts.state.model';
 import { StateUserAlertsOptions } from './user-alerts.state.options';
@@ -21,7 +21,6 @@ import {
 } from './user-alerts.actions';
 import { of } from 'rxjs';
 import { StateUser } from '../user';
-import { ImageSize } from '@theory/firebase';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 

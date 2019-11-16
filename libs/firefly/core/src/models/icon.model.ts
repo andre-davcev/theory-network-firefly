@@ -2,6 +2,8 @@ import { Asset } from './asset.model';
 
 export interface Icon extends Asset
 {
-    url?      : string;
-    urlSmall? : string;
+    bucketPath : string;
+    mediaType  : string;
+    url?       : string;
+    urlSmall?  : string;
 }

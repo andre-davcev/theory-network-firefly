@@ -22,14 +22,7 @@ export class ServiceUsers extends ServiceAsset<User>
 
     public parseId(authData: FirebaseUser): string
     {
-        const providerData : UserInfo = { ...authData.providerData[0] };
-
-        const uid         : string = authData.uid;
-        const providerId  : string = providerData.providerId;
-        const email       : string = providerData.email;
-        const id          : string = providerId === AuthProvider.Email ? `${providerId}:${email}` : `${providerId}:${uid}`;
-
-        return id;
+        return authData.uid;
     }
 
     public formCreate(object: User): FormGroup

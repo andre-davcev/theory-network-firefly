@@ -27,8 +27,10 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         database.collection('user-events').doc(id).create({}),
         database.collection('user-icons').doc(id).create({}),
         database.collection('user-images').doc(id).create({}),
+        database.collection('user-profiles').doc(id).create({}),
+        database.collection('user-roles').doc(id).create({ admins: {}, editors: {} }),
         database.collection('user-stream').doc(id).create({}),
-        database.collection('user-subscriptions').doc(id).create({})
+        database.collection('user-subscriptions').doc(id).create({}),
     ]);
 
     const timestamp: db.FieldValue     = db.FieldValue.serverTimestamp();
@@ -37,14 +39,14 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
     return database.collection('clusters').add
     ({
         id          : document.id,
-        version     : '1.0.0',
+        version     : Version.Clusters,
         name        : 'Your first cluster!',
         description : `This is your first cluster. When you're ready to publish to the global catalog, flip off the private switch and join the Firefly community of publishers!`,
         private     : true,
         userId      : id,
         draft       : false,
         tagline     : 'Come enjoy my first event cluster',
-        iconId      : 'admin###icons###default',
+        iconId      : 'baLysAd71cRyZjh0hr6poxR8an13_icons_CASwQmcg46JQYZqGmC3e.png',
         dateCreated : timestamp,
         dateUpdated : timestamp
     });

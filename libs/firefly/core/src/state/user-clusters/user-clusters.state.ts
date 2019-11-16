@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of, empty } from 'rxjs';
+import { of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
 import { CoreUtil, TypeOf } from '@theory/core';

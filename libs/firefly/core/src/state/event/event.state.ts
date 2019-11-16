@@ -30,7 +30,6 @@ import {
   ActionEventSetId
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
-import { StateDevice } from '@theory/capacitor';
 import { ActionClusterReset, StateCluster } from '../cluster';
 import { ImageSize } from '@theory/firebase';
 
@@ -165,12 +164,9 @@ export class StateEvent
     create({ getState, dispatch }: StateContext<StateEventModel>)
     {
         const state:      StateEventModel = getState();
-        const device:     boolean         = this.store.selectSnapshot(StateDevice.device);
         const data:       Event           = StateEvent.data(state);
         const imageIsNew: boolean         = this.store.selectSnapshot(StateImage.isNew);
         const clusterId:  string          = this.store.selectSnapshot(StateCluster.id);
-
-        data.imageId = device ? data.imageId : this.service.toId(data.imageId);
 
         return forkJoin
         (

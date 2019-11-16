@@ -21,7 +21,9 @@ export const StateIconOptions: StoreOptions<StateIconModel> =
             private     : true,
             draft       : false,
 
-            url: null
+            bucketPath : null,
+            mediaType  : null,
+            url        : null
         },
 
         form :
