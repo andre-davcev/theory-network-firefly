@@ -31,7 +31,6 @@ import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '.
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../user-clusters';
 import { ActionUserStreamRemove } from '../user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../user-subscriptions/user-subscriptions.actions';
-import { StateDevice } from '@theory/capacitor';
 import { ImageSize } from '@theory/firebase';
 
 @State<StateClusterModel>(StateClusterOptions)
@@ -151,10 +150,7 @@ export class StateCluster
     {
         const state:     StateClusterModel = getState();
         const data:      Cluster           = StateCluster.data(state);
-        const device:    boolean           = this.store.selectSnapshot(StateDevice.device);
         const iconIsNew: boolean           = this.store.selectSnapshot(StateIcon.isNew);
-
-        data.iconId = device ? data.iconId : this.service.toId(data.iconId);
 
         return forkJoin
         (

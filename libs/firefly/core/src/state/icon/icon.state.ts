@@ -40,6 +40,7 @@ export class StateIcon
     @Selector() static isForm(state: StateIconModel): boolean { return StateIcon.formGroup(state) != null; }
     @Selector() static data(state: StateIconModel): Icon { return StateIcon.form(state).model; }
     @Selector() static id(state: StateIconModel): string { return StateIcon.data(state).id; }
+    @Selector() static bucketPath(state: StateIconModel): string { return StateIcon.data(state).bucketPath; }
     @Selector() static isNew(state: StateIconModel): boolean { return  StateIcon.id(state) === CoreEnum.IdNew; }
     @Selector() static canUpdate(state: StateIconModel): boolean { return StateIcon.form(state).status === FormNgxsStatus.Valid && StateIcon.form(state).dirty; }
 
@@ -109,7 +110,7 @@ export class StateIcon
         pipe
         (
             switchMap(() =>
-                this.service.getDownloadUrl(object.id, ImageSize.Medium).
+                this.service.getDownloadUrl(object.bucketPath, ImageSize.Medium).
                 pipe(tap((url: string) => object.url = url))
             ),
             map(() =>
@@ -146,11 +147,8 @@ export class StateIcon
     {
         const state: StateIconModel = getState();
         const data:  Icon           = StateIcon.data(state);
-        const id:    string         = this.service.id(data);
 
-        data.id = id;
-
-        return dispatch(new ActionIconPatch({ id })).
+        return dispatch(new ActionIconPatch(data)).
         pipe
         (
             switchMap(() => dispatch(new ActionIconUpload())),
@@ -226,8 +224,7 @@ export class StateIcon
     upload({ patchState, getState, dispatch }: StateContext<StateIconModel>)
     {
         const state: StateIconModel = getState();
-        const id:    string         = StateIcon.id(state);
-        const path:  string         = this.service.toBucketPath(id);
+        const path:  string         = StateIcon.bucketPath(state);
         const url:   string         = StateIcon.url(state);
 
         const ref:  AngularFireStorageReference = this.storage.ref(path);

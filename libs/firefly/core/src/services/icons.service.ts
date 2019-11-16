@@ -32,11 +32,9 @@ export class ServiceIcons extends ServiceAsset<Icon>
 
     public createWithUpload(data: Icon, imagePath: string): Observable<Icon>
     {
-        data.id = this.id(data);
+        data = this.addMetadata(data);
 
-        const bucketPath: string = this.toBucketPath(data.id);
-
-        return this.upload(imagePath, bucketPath).pipe
+        return this.upload(imagePath, data.bucketPath).pipe
         (
             switchMap(() => this.set(data)),
             map(() => data)

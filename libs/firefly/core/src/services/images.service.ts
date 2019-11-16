@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 
-import { Image, Event } from '../models';
+import { Image } from '../models';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
@@ -31,31 +31,15 @@ export class ServiceImages extends ServiceAsset<Image>
 
     public createWithUpload(data: Image, imagePath: string): Observable<Image>
     {
-        data.id = this.id(data);
+        this.addMetadata(data);
 
-        const bucketPath: string = this.toBucketPath(data.id);
-
-        return this.upload(imagePath, bucketPath).pipe
+        return this.upload(imagePath, data.bucketPath).pipe
         (
             switchMap(() => this.set(data)),
             map(() => data)
         );
     }
 
-    public fromEvent(event: Event): Image
-    {
-        const image: Image =
-        {
-            id          : this.id(event),
-            name        : '',
-            description : '',
-            private     : true,
-            userId      : event.userId,
-            draft       : false
-        };
-
-        return image;
-    }
 /*
     public createWithUploadFromEvent(event: Event, imagePath: string): Observable<Event>
     {

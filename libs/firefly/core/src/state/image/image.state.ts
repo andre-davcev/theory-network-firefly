@@ -46,6 +46,7 @@ export class StateImage
     @Selector() static isForm(state: StateImageModel): boolean { return StateImage.formGroup(state) != null; }
     @Selector() static data(state: StateImageModel): Image { return StateImage.form(state).model; }
     @Selector() static id(state: StateImageModel): string { return StateImage.data(state).id; }
+    @Selector() static bucketPath(state: StateImageModel): string { return StateImage.data(state).bucketPath; }
     @Selector() static isNew(state: StateImageModel): boolean { return  StateImage.id(state) === CoreEnum.IdNew; }
     @Selector() static canUpdate(state: StateImageModel): boolean { return StateImage.form(state).status === FormNgxsStatus.Valid && StateImage.form(state).dirty; }
 
@@ -108,7 +109,7 @@ export class StateImage
         pipe
         (
             switchMap(() =>
-                this.service.getDownloadUrl(object.id, ImageSize.Medium).
+                this.service.getDownloadUrl(object.bucketPath, ImageSize.Medium).
                 pipe(tap((url: string) => object.url = url))
             ),
             map(() =>
@@ -145,11 +146,10 @@ export class StateImage
     {
         const state: StateImageModel = getState();
         const data:  Image           = StateImage.data(state);
-        const id:    string          = this.service.id(data);
 
-        data.id = id;
+        this.service.addMetadata(data);
 
-        return dispatch(new ActionImagePatch({ id })).
+        return dispatch(new ActionImagePatch(data)).
         pipe
         (
             switchMap(() => dispatch(new ActionImageUpload())),
@@ -225,9 +225,8 @@ export class StateImage
     upload({ patchState, getState, dispatch }: StateContext<StateImageModel>)
     {
         const state: StateImageModel = getState();
-        const id:    string         = StateImage.id(state);
-        const path:  string         = this.service.toBucketPath(id);
-        const url:   string         = StateImage.url(state);
+        const path:  string          = StateImage.bucketPath(state);
+        const url:   string          = StateImage.url(state);
 
         const ref:  AngularFireStorageReference = this.storage.ref(path);
         const task: AngularFireUploadTask       = ref.putString(url, StorageFormat.DataUrl);

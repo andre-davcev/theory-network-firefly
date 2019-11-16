@@ -1,7 +1,343 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth.uid != null;
+    match /alerts/{alertId} {
+      allow get: canReadItem(uid(), data());
+      allow list: canReadItem(uid(), data());
+      allow create: canCreateItem(uid());
+      allow update: canUpdateItem(uid(), data());
+      allow delete: canDeleteItem(uid(), data());
+    }
+
+    match /clusters/{clusterId} {
+      allow get: canReadAsset(uid(), data());
+      allow list: canReadAsset(uid(), data());
+      allow create: canCreateAsset(uid(), data());
+      allow update: canUpdateAsset(uid(), data(), dataNew());
+      allow delete: canDeleteAsset(uid(), data());
+    }
+
+    match /cluster-events/{clusterId} {
+      allow get: canReadAsset(uid(), document('clusters', clusterId));
+      allow get: canReadAsset(uid(), document('clusters', clusterId));
+      allow create: canCreateAssetRef(uid(), document('clusters', clusterId));
+      allow update: canUpdateAssetRef(uid());
+      allow delete: canDeleteAssetRef(uid(), document('clusters', clusterId));
+    }
+
+    match /cluster-subscribers/{clusterId} {
+      allow get: canReadAsset(uid(), document('clusters', clusterId));
+      allow get: canReadAsset(uid(), document('clusters', clusterId));
+      allow create: canCreateAssetRef(uid(), document('clusters', clusterId));
+      allow update: canUpdateSubscribers(uid(), data(), dataNew());
+      allow delete: canDeleteAssetRef(uid(), document('clusters', clusterId));
+    }
+
+    match /events/{eventId} {
+      allow get: canReadAsset(uid(), data());
+      allow list: canReadAsset(uid(), data());
+      allow create: canCreateAsset(uid(), data());
+      allow update: canUpdateAsset(uid(), data(), dataNew());
+      allow delete: canDeleteAsset(uid(), data());
+    }
+
+    match /event-clusters/{eventId} {
+      allow get: canReadAsset(uid(), document('events', eventId));
+      allow get: canReadAsset(uid(), document('events', eventId));
+      allow create: canCreateAssetRef(uid(), document('events', eventId));
+      allow update: canUpdateAssetRef(uid());
+      allow delete: canDeleteAssetRef(uid(), document('events', eventId));
+    }
+
+    match /icons/{iconId} {
+      allow get: canReadAsset(uid(), data());
+      allow list: canReadAsset(uid(), data());
+      allow create: canCreateAsset(uid(), data());
+      allow update: canUpdateAsset(uid(), data(), dataNew());
+      allow delete: canDeleteAsset(uid(), data());
+    }
+
+    match /icon-clusters/{iconId} {
+      allow get: canReadAsset(uid(), document('icons', iconId));
+      allow get: canReadAsset(uid(), document('icons', iconId));
+      allow create: canCreateAssetRef(uid(), document('icons', iconId));
+      allow update: canUpdateAssetRef(uid());
+      allow delete: canDeleteAssetRef(uid(), document('icons', iconId));
+    }
+
+    match /images/{imageId} {
+      allow get: canReadAsset(uid(), data());
+      allow list: canReadAsset(uid(), data());
+      allow create: canCreateAsset(uid(), data());
+      allow update: canUpdateAsset(uid(), data(), dataNew());
+      allow delete: canDeleteAsset(uid(), data());
+    }
+
+    match /image-events/{imageId} {
+      allow get: canReadAsset(uid(), document('images', imageId));
+      allow get: canReadAsset(uid(), document('images', imageId));
+      allow create: canCreateAssetRef(uid(), document('images', imageId));
+      allow update: canUpdateAssetRef(uid());
+      allow delete: canDeleteAssetRef(uid(), document('images', imageId));
+    }
+
+    match /users/{userId} {
+      allow get: canReadUser(uid(), userId);
+      allow list: canReadUser(uid(), userId);
+      allow create: canWriteUser(uid(), userId);
+      allow update: canUpdateUser(uid(), userId);
+      allow delete: canDeleteUser(uid(), userId);
+    }
+
+    match /user-alerts/{userId} {
+      allow get: canReadUser(uid(), userId);
+      allow list: canReadUser(uid(), userId);
+      allow create: canCreateUser(uid(), userId);
+      allow update: canUpdateUser(uid(), userId);
+      allow delete: canDeleteUser(uid(), userId);
+    }
+
+    match /user-clusters/{userId} {
+      allow get: canReadUserAsset(uid(), userId);
+      allow list: canReadUserAsset(uid(), userId);
+      allow create: canWriteUserAsset(uid(), userId);
+      allow update: canUpdateUserAsset(uid(), userId);
+      allow delete: canDeleteUserAsset(uid(), userId);
+    }
+
+    match /user-events/{userId} {
+      allow get: canReadUserAsset(uid(), userId);
+      allow list: canReadUserAsset(uid(), userId);
+      allow create: canWriteUserAsset(uid(), userId);
+      allow update: canUpdateUserAsset(uid(), userId);
+      allow delete: canDeleteUserAsset(uid(), userId);
+    }
+
+    match /user-icons/{userId} {
+      allow get: canReadUserAsset(uid(), userId);
+      allow list: canReadUserAsset(uid(), userId);
+      allow create: canWriteUserAsset(uid(), userId);
+      allow update: canUpdateUserAsset(uid(), userId);
+      allow delete: canDeleteUserAsset(uid(), userId);
+    }
+
+    match /user-images/{userId} {
+      allow get: canReadUserAsset(uid(), userId);
+      allow list: canReadUserAsset(uid(), userId);
+      allow create: canWriteUserAsset(uid(), userId);
+      allow update: canUpdateUserAsset(uid(), userId);
+      allow delete: canDeleteUserAsset(uid(), userId);
+    }
+
+    match /user-profiles/{userId} {
+      allow get: canReadUserProfile();
+      allow list: canReadUserProfile(uid(), userId);
+      allow create: canWriteUserProfile(uid(), userId);
+      allow update: canUpdateUserProfile(uid(), userId);
+      allow delete: canDeleteUserProfile(uid(), userId);
+    }
+
+    match /user-roles/{userId} {
+      allow get: canReadUserRoles(uid(), userId);
+      allow list: canReadUserRoles(uid(), userId);
+      allow create: canWriteUserRoles(uid(), userId);
+      allow update: canUpdateUserRoles(uid(), userId);
+      allow delete: canDeleteUserRoles(uid(), userId);
+    }
+
+    match /user-stream/{userId} {
+      allow get: canReadUser(uid(), userId);
+      allow list: canReadUser(uid(), userId);
+      allow create: canWriteUser(uid(), userId);
+      allow update: canUpdateUser(uid(), userId);
+      allow delete: canDeleteUser(uid(), userId);
+    }
+
+    match /user-subscriptions/{userId} {
+      allow get: canReadUser(uid(), userId);
+      allow list: canReadUser(uid(), userId);
+      allow create: canWriteUser(uid(), userId);
+      allow update: canUpdateUser(uid(), userId);
+      allow delete: canDeleteUser(uid(), userId);
+    }
+
+    function auth() {
+      return request.auth;
+    }
+
+    function uid() {
+      return auth().uid;
+    }
+
+    function data() {
+      return resource.data;
+    }
+
+    function dataNew() {
+      return request.resource.data;
+    }
+
+    function document(collection, id) {
+      return get(/databases/${database}/documents/$(collection)/$(id));
+    }
+
+    function dataOwner(data) {
+      return data.userId;
+    }
+
+    function isAuthenticated(uid) {
+      return uid != null;
+    }
+
+    function isEmailVerified() {
+      return request.auth.token.email_verified;
+    }
+
+    function isOwner(userId, ownerId) {
+      return userId == ownerId;
+    }
+
+    function isNotChangingOwner(userId, data) {
+      return userId == data.userId;
+    }
+
+    function isNotChangingUserId(userId, data) {
+      return userId == data.id;
+    }
+
+    function isPublic(data) {
+      return !data.private;
+    }
+
+    function isPublished(data) {
+      return !data.draft;
+    }
+
+    function isSuperAdmin(userId) {
+      return userId == 'baLysAd71cRyZjh0hr6poxR8an13';
+    }
+
+    function ownerRoles(ownerId) {
+      return document('user-roles', ownerId);
+    }
+
+    function hasRole(userId, ownerRoles) {
+      return ownerRoles.admins[userId] || ownerRoles.editors[userId];
+    }
+
+    function hasRoleAdmin(userId, ownerRoles) {
+      return ownerRoles.admins[userId];
+    }
+
+    function canReadUserAsset(userId, ownerId) {
+      return isOwner(userId, ownerId) || hasRole(userId, ownerRoles(ownerId)) || isSuperAdmin(userId);
+    }
+
+    function canCreateUserAsset(userId, ownerId) {
+      return isOwner(userId, ownerId) || hasRoleAdmin(userId, ownerRoles(ownerId)) || isSuperAdmin(userId);
+    }
+
+    function canUpdateUserAsset(userId, ownerId) {
+      return canReadUserAsset(userId, ownerId);
+    }
+
+    function canDeleteUserAsset(userId, ownerId) {
+      return canCreateUserAsset(userId, ownerId);
+    }
+
+    function canReadUser(userId, ownerId) {
+      return canReadUserAsset(userId, ownerId);
+    }
+
+    function canCreateUser(userId, ownerId) {
+      return (isOwner(userId, ownerId) || isSuperAdmin(userId)) && isNotChangingUserId(userId, data());
+    }
+
+    function canUpdateUser(userId, ownerId) {
+      return (isOwner(userId, ownerId) || isSuperAdmin(userId)) && isNotChangingUserId(userId, dataNew());
+    }
+
+    function canDeleteUser(userId, ownerId) {
+      return isOwner(userId, ownerId) || isSuperAdmin(userId);
+    }
+
+    function canReadUserProfile() {
+      return isAuthenticated(uid());
+    }
+
+    function canCreateUserProfile(userId, ownerId) {
+      return canCreateUser(userId, ownerId);
+    }
+
+    function canUpdateUserProfile(userId, ownerId) {
+      return (isOwner(userId, ownerId) || hasRoleAdmin(userId, ownerRoles(ownerId)) || isSuperAdmin(userId)) && isNotChangingUserId(userId, dataNew());
+    }
+
+    function canDeleteUserProfile(userId, ownerId) {
+      return canCreateUserProfile(userId, ownerId);
+    }
+
+    function canReadUserRoles(userId, ownerId) {
+      return canReadUser(userId, ownerId);
+    }
+
+    function canCreateUserRoles(userId, ownerId) {
+      return canCreateUserAsset(userId, ownerId);
+    }
+
+    function canUpdateUserRoles(userId, ownerId) {
+      return canCreateUserAsset(userId, ownerId);
+    }
+
+    function canDeleteUserRoles(userId, ownerId) {
+      return canCreateUserAsset(userId, ownerId);
+    }
+
+    function canReadItem(userId, data) {
+      return isOwner(userId, dataOwner(data)) || isSuperAdmin(userId);
+    }
+
+    function canCreateItem(userId) {
+      return isSuperAdmin(userId);
+    }
+
+    function canUpdateItem(userId, data) {
+      return isOwner(userId, dataOwner(data)) || isSuperAdmin(userId);
+    }
+
+    function canDeleteItem(userId, data) {
+      return canUpdateItem(userId, data);
+    }
+
+    function canCreateAssetRef(userId, data) {
+      return isOwner(userId, dataOwner(data)) || hasRoleAdmin(userId, ownerRoles(dataOwner(data))) || isSuperAdmin(userId);
+    }
+
+    function canUpdateAssetRef(userId) {
+      return isAuthenticated(userId);
+    }
+
+    function canDeleteAssetRef(userId, data) {
+      return canCreateAssetRef(userId, data);
+    }
+
+    function canReadAsset(userId, data) {
+      return (isPublic(data) && isPublished(data)) || isOwner(userId, dataOwner(data)) || hasRole(userId, ownerRoles(dataOwner(data))) || isSuperAdmin(userId);
+    }
+
+    function canCreateAsset(userId, data) {
+      return canCreateAssetRef(userId, data) && isNotChangingOwner(userId, data);
+    }
+
+    function canUpdateAsset(userId, data, dataNew) {
+      return (isOwner(userId, dataOwner(data)) || hasRole(userId, ownerRoles(dataOwner(data))) || isSuperAdmin(userId)) && isNotChangingOwner(userId, dataNew);
+    }
+
+    function canDeleteAsset(userId, data) {
+      return canCreateAssetRef(userId, data);
+    }
+
+    function canUpdateSubscribers(userId, data, dataNew) {
+
     }
   }
 }

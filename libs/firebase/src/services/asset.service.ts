@@ -12,8 +12,6 @@ export class ServiceAsset<T> extends ServiceBase<T>
 {
     public storage: AngularFireStorage;
 
-    public readonly separator: string = '###';
-
     constructor
     (
         name:        string,
@@ -42,36 +40,29 @@ export class ServiceAsset<T> extends ServiceBase<T>
         );
     }
 
-    public id(asset: T): string
+    public addMetadata(asset: T): T
     {
         const url: string = asset['url'];
 
-        let mediaType: string = this.name === 'images' ? 'jpg' : 'png';
+        asset['id']        = this.firestore.createId();
+        asset['mediaType'] = this.name === 'images' ? 'jpg' : 'png';
 
         if (url != null)
         {
             const start: number = url.indexOf(':');
             const end:   number = url.indexOf(';') - 1;
 
-            mediaType = url.substring(start, end);
+            asset['mediaType'] = url.substring(start, end);
         }
 
-        return `${asset['userId']}${this.separator}${this.name}${this.separator}${new Date().getTime()}.${mediaType}`;
+        asset['bucketPath'] = `${asset['userId']}/${this.name}/${asset['id']}.${asset['mediaType']}`;
+
+        return asset;
     }
 
-    public toId(bucketPath: string): string
+    public toBucketPathSize(path: string, size: ImageSize = ImageSize.Medium): string
     {
-        return bucketPath.replace(/\//g, this.separator);
-    }
-
-    public toBucketPath(id: string): string
-    {
-        return id.replace(/###/g, '/');
-    }
-
-    public toBucketPathSize(id: string, size: ImageSize = ImageSize.Medium): string
-    {
-        const segments: Array<string> = this.toBucketPath(id).split('/');
+        const segments: Array<string> = path.split('/');
         const fileName: string        = segments[2];
         const parts:    Array<string> = fileName.split('.');
         const bucketPath: string      = `${segments[0]}/${segments[1]}/${parts[0]}@${size}.${parts[1]}`;
@@ -79,13 +70,13 @@ export class ServiceAsset<T> extends ServiceBase<T>
         return bucketPath;
     }
 
-    public getDownloadUrl(id: string, size?: ImageSize): Observable<string | null>
+    public getDownloadUrl(path: string, size?: ImageSize): Observable<string | null>
     {
-        return id == null || id === CoreEnum.IdNew ? of(null) : of(id).
+        return path == null ? of(null) : of(path).
         pipe
         (
-            map((key: string) =>
-                size == null ? this.toBucketPath(key) : this.toBucketPathSize(key, size)
+            map((path: string) =>
+                size == null ? path : this.toBucketPathSize(path, size)
             ),
             map((bucketPath: string) => this.storage.ref(bucketPath)),
             switchMap((ref: AngularFireStorageReference) => ref.getDownloadURL())
