@@ -29,6 +29,7 @@ import {
   ActionIconSetId
 } from './icon.actions';
 import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons, ActionUserIconsSync } from '../user-icons';
+import { MockIconId, MockIconPath } from '@firefly/core/mocks';
 
 @State<StateIconModel>(StateIconOptions)
 
@@ -91,9 +92,15 @@ export class StateIcon
     {
         const id: string = payload;
 
-        const object: Icon = id === CoreEnum.IdNew ?
+        const object: Icon = id === CoreEnum.IdNew || id === MockIconId ?
             this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Icon>(StateIconOptions.defaults.empty)) :
-            this.store.selectSnapshot(StateUserIcons.lookup)[id]
+            this.store.selectSnapshot(StateUserIcons.lookup)[id];
+
+        if (id === MockIconId)
+        {
+            object.id         = MockIconId;
+            object.bucketPath = MockIconPath;
+        }
 
         return dispatch([new ActionIconSet(object)]);
     }

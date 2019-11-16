@@ -29,6 +29,7 @@ import {
   ActionImageSetId
 } from './image.actions';
 import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages, ActionUserImagesSync } from '../user-images';
+import { MockImageId, MockImagePath } from '@firefly/core/mocks';
 
 @State<StateImageModel>(StateImageOptions)
 
@@ -90,9 +91,15 @@ export class StateImage
     {
         const id: string = payload;
 
-        const object: Image = id === CoreEnum.IdNew ?
+        const object: Image = id === CoreEnum.IdNew || id === MockImageId ?
             this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Image>(StateImageOptions.defaults.empty)) :
-            this.store.selectSnapshot(StateUserImages.lookup)[id]
+            this.store.selectSnapshot(StateUserImages.lookup)[id];
+
+        if (id === MockImageId)
+        {
+            object.id         = MockImageId;
+            object.bucketPath = MockImagePath;
+        }
 
         return dispatch([new ActionImageSet(object)]);
     }

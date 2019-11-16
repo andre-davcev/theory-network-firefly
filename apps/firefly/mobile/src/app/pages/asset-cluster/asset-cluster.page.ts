@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, from, BehaviorSubject, combineLatest, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { tap, switchMap, catchError, map } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
@@ -8,10 +8,9 @@ import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins,
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateCluster, ActionClusterCreate, StateIcon, ActionIconUriSet, ActionIconSetId, ActionClusterPatch, ServiceIcons } from '@firefly/core';
+import { StateCluster, ActionClusterCreate, StateIcon, ActionIconUriSet, ActionIconSetId, ActionClusterPatch, MockIconId } from '@firefly/core';
 import { Pages } from '../pages.enum';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
-import { MockIconId } from '@firefly/app/mock';
 
 const { Camera } = Plugins;
 
@@ -24,35 +23,16 @@ const { Camera } = Plugins;
 
 export class PageAssetCluster
 {
-    @Select(StateCluster.formGroup) form$:        Observable<FormGroup>;
-    @Select(StateCluster.icon)      iconUrl$:    Observable<string>;
-    @Select(StateDevice.device)     device$:       Observable<boolean>;
-
-    private iconClicked$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-    public icon$: Observable<string> = combineLatest
-    ([
-        this.device$,
-        this.iconClicked$
-    ]).
-    pipe
-    (
-        switchMap(([device, iconClicked]) =>
-            device ?
-                this.iconUrl$ :
-                !iconClicked ?
-                    of(null) :
-                    this.icons.getDownloadUrl(MockIconId)
-        )
-    );
+    @Select(StateCluster.formGroup) form$:   Observable<FormGroup>;
+    @Select(StateCluster.icon)      icon$:   Observable<string>;
+    @Select(StateDevice.device)     device$: Observable<boolean>;
 
     public Pages: any = Pages;
 
     constructor(
       private store: Store,
       private loading: LoadingController,
-      private toast: ToastController,
-      private icons: ServiceIcons
+      private toast: ToastController
     )
     { }
 
@@ -107,9 +87,7 @@ export class PageAssetCluster
             }
             else
             {
-                this.iconClicked$.next(true);
-
-                this.store.dispatch(new ActionClusterPatch({ iconId: MockIconId }));
+                this.store.dispatch(new ActionIconSetId(MockIconId));
             }
         }
     }
