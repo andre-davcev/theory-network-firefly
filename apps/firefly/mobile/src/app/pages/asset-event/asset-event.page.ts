@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { map, catchError, switchMap, tap } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateCluster, ActionEventPatch, ActionImageSetId, ActionImageUriSet, StateImage } from '@firefly/core';
+import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateCluster, ActionImageSetId, ActionImageUriSet, ActionEventImageAdd } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
@@ -99,11 +99,8 @@ export class PageAssetEvent extends BaseComponent
                             ]))
                         )
                     ),
-                    map(() =>
-                        this.store.selectSnapshot(StateImage.url)
-                    ),
-                    switchMap((imageUrl: string) =>
-                        this.store.dispatch(new ActionEventPatch({ imageUrl }))
+                    switchMap(() =>
+                        this.store.dispatch(new ActionEventImageAdd())
                     )
                 ).
                 subscribe();
@@ -112,11 +109,8 @@ export class PageAssetEvent extends BaseComponent
             {
                 this.store.dispatch(new ActionImageSetId(MockImageId)).pipe
                 (
-                    map(() =>
-                        this.store.selectSnapshot(StateImage.url)
-                    ),
-                    switchMap((imageUrl: string) =>
-                        this.store.dispatch(new ActionEventPatch({ imageUrl }))
+                    switchMap(() =>
+                        this.store.dispatch(new ActionEventImageAdd())
                     )
                 ).subscribe();
             }

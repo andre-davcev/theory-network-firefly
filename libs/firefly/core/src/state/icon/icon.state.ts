@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { AngularFireUploadTask, AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { map, switchMap, filter, tap, catchError, last } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
@@ -20,13 +20,14 @@ import {
   ActionIconGet,
   ActionIconPatch,
   ActionIconCreate,
-  ActionIconSave,
   ActionIconDelete,
   ActionIconUpload,
   ActionIconUploadClear,
   ActionIconUriSet,
   ActionIconUriClear,
-  ActionIconSetId
+  ActionIconSetId,
+  ActionIconUpdate,
+  ActionIconSave
 } from './icon.actions';
 import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons, ActionUserIconsSync } from '../user-icons';
 import { MockIconId, MockIconPath } from '@firefly/core/mocks';
@@ -148,47 +149,56 @@ export class StateIcon
             )
         );
     }
-
     @Action(ActionIconCreate)
     create({ getState, dispatch }: StateContext<StateIconModel>)
     {
         const state: StateIconModel = getState();
         const data:  Icon           = StateIcon.data(state);
+        const { url, ...partial }    = this.service.addMetadata(data);
 
         return dispatch(new ActionIconPatch(data)).
         pipe
         (
             switchMap(() => dispatch(new ActionIconUpload())),
-            switchMap(() => this.service.create(data)),
+            switchMap(() => this.service.create(partial)),
             switchMap(() => dispatch(new ActionUserIconsAdd(data)))
+        );
+    }
+
+    @Action(ActionIconUpdate)
+    update({ getState, dispatch }: StateContext<StateIconModel>)
+    {
+        const state:      StateIconModel = getState();
+        const formGroup:  FormGroup       = StateIcon.formGroup(state);
+        const id:         string          = StateIcon.id(state);
+        const { url, ...changed }         = this.service.changedFields(formGroup);
+        const upload$:   Observable<void> = url == null ? of(null) : dispatch(new ActionIconUpload());
+
+        upload$.pipe
+        (
+            switchMap(() =>
+                Object.keys(changed).length === 0 ?
+                    of(null) :
+                    this.service.patch(id, changed)
+            )
         );
     }
 
     @Action(ActionIconSave)
     save({ getState, dispatch }: StateContext<StateIconModel>)
     {
-        const state:     StateIconModel = getState();
-        const formPath:  string         = StateIcon.formPath(state);
-        const formGroup: FormGroup      = StateIcon.formGroup(state);
-        const isNew:     boolean        = StateIcon.isNew(state);
-        const id:        string         = StateIcon.id(state);
-        const changed:   Partial<Icon>  = this.service.changedFields(formGroup);
+        const state:      StateIconModel = getState();
+        const formPath:   string          = StateIcon.formPath(state);
+        const isNew:      boolean         = StateIcon.isNew(state);
+        const save$:      Observable<void> = dispatch(isNew ? new ActionIconCreate() : new ActionIconUpdate());
 
-        return isNew ?
-            dispatch(new ActionIconCreate()) :
-            of(changed.url).
-            pipe
-            (
-                switchMap((url: string) =>
-                    url == null ? of(null) : dispatch(new ActionIconUpload())
-                ),
-                switchMap(() =>
-                    this.service.patch(id, changed)
-                ),
-                switchMap(() =>
-                    dispatch(new SetFormPristine(formPath))
-                )
-            );
+        return save$.
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new SetFormPristine(formPath))
+            )
+        );
     }
 
     @Action(ActionIconDelete)

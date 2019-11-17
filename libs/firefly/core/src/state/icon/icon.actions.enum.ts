@@ -5,8 +5,9 @@ export enum ActionsIcon
     SetId  = '[Icon] SetId',
     Set    = '[Icon] Set',
     Patch  = '[Icon] Patch',
-    Save   = '[Icon] Save',
     Create = '[Icon] Create',
+    Update = '[Icon] Update',
+    Save   = '[Icon] Save',
     Delete = '[Icon] Delete',
 
     UriSet      = '[Icon] URI Set',

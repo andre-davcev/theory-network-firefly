@@ -5,8 +5,9 @@ export enum ActionsImage
     SetId  = '[Image] SetId',
     Set    = '[Image] Set',
     Patch  = '[Image] Patch',
-    Save   = '[Image] Save',
     Create = '[Image] Create',
+    Update = '[Image] Update',
+    Save   = '[Image] Save',
     Delete = '[Image] Delete',
 
     UriSet      = '[Image] URI Set',

@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { AngularFireUploadTask, AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { map, switchMap, filter, tap, catchError, last } from 'rxjs/operators';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
@@ -26,7 +26,8 @@ import {
   ActionImageUploadClear,
   ActionImageUriSet,
   ActionImageUriClear,
-  ActionImageSetId
+  ActionImageSetId,
+  ActionImageUpdate
 } from './image.actions';
 import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages, ActionUserImagesSync } from '../user-images';
 import { MockImageId, MockImagePath } from '@firefly/core/mocks';
@@ -153,43 +154,51 @@ export class StateImage
     {
         const state: StateImageModel = getState();
         const data:  Image           = StateImage.data(state);
-
-        this.service.addMetadata(data);
+        const { url, ...partial }    = this.service.addMetadata(data);
 
         return dispatch(new ActionImagePatch(data)).
         pipe
         (
             switchMap(() => dispatch(new ActionImageUpload())),
-            switchMap(() => this.service.create(data)),
+            switchMap(() => this.service.create(partial)),
             switchMap(() => dispatch(new ActionUserImagesAdd(data)))
+        );
+    }
+
+    @Action(ActionImageUpdate)
+    update({ getState, dispatch }: StateContext<StateImageModel>)
+    {
+        const state:      StateImageModel = getState();
+        const formGroup:  FormGroup       = StateImage.formGroup(state);
+        const id:         string          = StateImage.id(state);
+        const { url, ...changed }         = this.service.changedFields(formGroup);
+        const upload$:   Observable<void> = url == null ? of(null) : dispatch(new ActionImageUpload());
+
+        upload$.pipe
+        (
+            switchMap(() =>
+                Object.keys(changed).length === 0 ?
+                    of(null) :
+                    this.service.patch(id, changed)
+            )
         );
     }
 
     @Action(ActionImageSave)
     save({ getState, dispatch }: StateContext<StateImageModel>)
     {
-        const state:     StateImageModel = getState();
-        const formPath:  string          = StateImage.formPath(state);
-        const formGroup: FormGroup       = StateImage.formGroup(state);
-        const isNew:     boolean         = StateImage.isNew(state);
-        const id:        string          = StateImage.id(state);
-        const changed:   Partial<Image>  = this.service.changedFields(formGroup);
+        const state:      StateImageModel = getState();
+        const formPath:   string          = StateImage.formPath(state);
+        const isNew:      boolean         = StateImage.isNew(state);
+        const save$:      Observable<void> = dispatch(isNew ? new ActionImageCreate() : new ActionImageUpdate());
 
-        return isNew ?
-            dispatch(new ActionImageCreate()) :
-            of(changed.url).
-            pipe
-            (
-                switchMap((url: string) =>
-                    url == null ? of(null) : dispatch(new ActionImageUpload())
-                ),
-                switchMap(() =>
-                    this.service.patch(id, changed)
-                ),
-                switchMap(() =>
-                    dispatch(new SetFormPristine(formPath))
-                )
-            );
+        return save$.
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new SetFormPristine(formPath))
+            )
+        );
     }
 
     @Action(ActionImageDelete)

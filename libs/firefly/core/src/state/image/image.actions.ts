@@ -9,6 +9,7 @@ export class ActionImageSetId  { static readonly type = ActionsImage.SetId;   co
 export class ActionImageSet    { static readonly type = ActionsImage.Set;     constructor(public payload: Image) { } }
 export class ActionImagePatch  { static readonly type = ActionsImage.Patch;   constructor(public payload: Partial<Image>) { } }
 export class ActionImageCreate { static readonly type = ActionsImage.Create;  constructor() { } }
+export class ActionImageUpdate { static readonly type = ActionsImage.Update;  constructor() { } }
 export class ActionImageSave   { static readonly type = ActionsImage.Save;    constructor() { } }
 export class ActionImageDelete { static readonly type = ActionsImage.Delete;  constructor() { } }
 
