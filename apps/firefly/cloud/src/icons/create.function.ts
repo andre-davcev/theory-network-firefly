@@ -22,7 +22,6 @@ onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
     return Promise.all
     ([
         snapshot.ref.update(object),
-        database.collection('icon-clusters').doc(id).create({}),
         database.collection('user-icons').doc(userId).update
         ({
             [id]:

@@ -22,7 +22,6 @@ onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
     return Promise.all
     ([
         snapshot.ref.update(object),
-        database.collection('image-events').doc(id).create({}),
         database.collection('user-images').doc(userId).update
         ({
             [id]:

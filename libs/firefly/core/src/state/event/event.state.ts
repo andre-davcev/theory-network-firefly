@@ -1,5 +1,5 @@
 import { map, switchMap, tap } from 'rxjs/operators';
-import { forkJoin, of, Observable } from 'rxjs';
+import {  of, Observable } from 'rxjs';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 import { FormGroup } from '@angular/forms';
@@ -10,7 +10,7 @@ import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/user';
 import { Event, Location, Time } from '@firefly/core/models';
-import { ServiceEvents, ServiceClusterEvents } from '@firefly/core/services';
+import { ServiceEvents } from '@firefly/core/services';
 import { ActionImageGet, ActionImageCreate, StateImage, ActionImageSetId } from '@firefly/core/state/image';
 
 import { StateEventModel } from './event.state.model';
@@ -30,7 +30,7 @@ import {
   ActionEventSetId
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
-import { ActionClusterReset, StateCluster } from '../cluster';
+import { ActionClusterReset } from '../cluster';
 import { ImageSize } from '@theory/firebase';
 
 @State<StateEventModel>(StateEventOptions)
@@ -39,9 +39,8 @@ export class StateEvent
 {
     constructor
     (
-        private service:       ServiceEvents,
-        private clusterEvents: ServiceClusterEvents,
-        private store:         Store
+        private service: ServiceEvents,
+        private store:   Store
     ) { }
 
     @Selector() static form(state: StateEventModel): FormNgxs { return state.form; }

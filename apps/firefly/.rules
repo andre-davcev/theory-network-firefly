@@ -16,14 +16,6 @@ service cloud.firestore {
       allow delete: canDeleteAsset(uid(), data());
     }
 
-    match /cluster-events/{clusterId} {
-      allow get: canReadAsset(uid(), document('clusters', clusterId));
-      allow get: canReadAsset(uid(), document('clusters', clusterId));
-      allow create: canCreateAssetRef(uid(), document('clusters', clusterId));
-      allow update: canUpdateAssetRef(uid());
-      allow delete: canDeleteAssetRef(uid(), document('clusters', clusterId));
-    }
-
     match /cluster-subscribers/{clusterId} {
       allow get: canReadAsset(uid(), document('clusters', clusterId));
       allow get: canReadAsset(uid(), document('clusters', clusterId));
@@ -40,14 +32,6 @@ service cloud.firestore {
       allow delete: canDeleteAsset(uid(), data());
     }
 
-    match /event-clusters/{eventId} {
-      allow get: canReadAsset(uid(), document('events', eventId));
-      allow get: canReadAsset(uid(), document('events', eventId));
-      allow create: canCreateAssetRef(uid(), document('events', eventId));
-      allow update: canUpdateAssetRef(uid());
-      allow delete: canDeleteAssetRef(uid(), document('events', eventId));
-    }
-
     match /icons/{iconId} {
       allow get: canReadAsset(uid(), data());
       allow list: canReadAsset(uid(), data());
@@ -56,28 +40,12 @@ service cloud.firestore {
       allow delete: canDeleteAsset(uid(), data());
     }
 
-    match /icon-clusters/{iconId} {
-      allow get: canReadAsset(uid(), document('icons', iconId));
-      allow get: canReadAsset(uid(), document('icons', iconId));
-      allow create: canCreateAssetRef(uid(), document('icons', iconId));
-      allow update: canUpdateAssetRef(uid());
-      allow delete: canDeleteAssetRef(uid(), document('icons', iconId));
-    }
-
     match /images/{imageId} {
       allow get: canReadAsset(uid(), data());
       allow list: canReadAsset(uid(), data());
       allow create: canCreateAsset(uid(), data());
       allow update: canUpdateAsset(uid(), data(), dataNew());
       allow delete: canDeleteAsset(uid(), data());
-    }
-
-    match /image-events/{imageId} {
-      allow get: canReadAsset(uid(), document('images', imageId));
-      allow get: canReadAsset(uid(), document('images', imageId));
-      allow create: canCreateAssetRef(uid(), document('images', imageId));
-      allow update: canUpdateAssetRef(uid());
-      allow delete: canDeleteAssetRef(uid(), document('images', imageId));
     }
 
     match /users/{userId} {
