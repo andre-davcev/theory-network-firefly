@@ -1,5 +1,5 @@
 <ion-app>
-    <ion-menu side="end" type="reveal" contentId="main">
+    <ion-menu side="end" type="reveal" contentId="main" (ionDidClose)="menuClosed()" (ionDidOpen)="menuOpened()">
         <ion-content color="dark">
             <ion-list lines="none">
                 <ion-item-group>

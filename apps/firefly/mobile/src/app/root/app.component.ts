@@ -10,6 +10,7 @@ import { PlatformEnum } from '@theory/ionic';
 import { Pages } from '@firefly/app/pages';
 import { ActionUserLogout } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
+import { ActionMobileMenuOpened, ActionMobileMenuClosed } from '@firefly/mobile';
 
 const { SplashScreen } = Plugins;
 
@@ -50,12 +51,25 @@ export class ComponentApp
     public go(page: Pages): void
     {
         this.menu.close();
+        this.menuClosed();
         this.store.dispatch(new Navigate([page]));
     }
 
-    public logout(): void{
-      this.menu.close();
-      this.store.dispatch(new ActionUserLogout());
-      this.store.dispatch(new Navigate([Pages.Login]));
+    public logout(): void
+    {
+        this.menu.close();
+        this.menuClosed();
+        this.store.dispatch(new ActionUserLogout());
+        this.store.dispatch(new Navigate([Pages.Login]));
+    }
+
+    public menuOpened(): void
+    {
+        this.store.dispatch(new ActionMobileMenuOpened());
+    }
+
+    public menuClosed(): void
+    {
+        this.store.dispatch(new ActionMobileMenuClosed());
     }
 }
