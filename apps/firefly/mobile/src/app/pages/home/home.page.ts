@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, MenuController } from '@ionic/angular';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
@@ -8,6 +8,8 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
+import { StateMobile } from '@firefly/mobile';
+import { Observable } from 'rxjs';
 
 @Component
 ({
@@ -18,6 +20,8 @@ import { CoreEnum, BaseComponent } from '@theory/core';
 
 export class PageHome extends BaseComponent
 {
+    @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+
     public Pages:      any     = Pages;
     public showAlerts: boolean = false;
 

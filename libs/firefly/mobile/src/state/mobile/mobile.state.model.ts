@@ -1,4 +1,5 @@
 export interface StateMobileModel
 {
-    loadingElement: HTMLIonLoadingElement;
+    loadingElement : HTMLIonLoadingElement;
+    menuOpen       : boolean;
 }

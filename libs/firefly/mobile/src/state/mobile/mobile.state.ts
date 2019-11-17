@@ -2,7 +2,13 @@
 import { Action, StateContext, State, Selector } from '@ngxs/store';
 
 import { StateMobileModel } from './mobile.state.model';
-import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from './mobile.actions';
+import {
+    ActionMobileLoadingShow,
+    ActionMobileToast,
+    ActionMobileLoadingHide,
+    ActionMobileMenuOpened,
+    ActionMobileMenuClosed
+} from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { switchMap, tap } from 'rxjs/operators';
@@ -15,6 +21,8 @@ export class StateMobile
 {
     @Selector() static isLoading(state: StateMobileModel): boolean {return state.loadingElement != null;}
     @Selector() static loadingElement(state: StateMobileModel): any { return state.loadingElement; }
+    @Selector() static menuOpen(state: StateMobileModel): any { return state.menuOpen; }
+    @Selector() static menuClosed(state: StateMobileModel): any { return !state.menuOpen; }
 
     constructor
     (
@@ -67,5 +75,17 @@ export class StateMobile
         (
             switchMap((toast: HTMLIonToastElement) => from(toast.present()))
         );
+    }
+
+    @Action(ActionMobileMenuOpened)
+    menuOpened({ patchState }: StateContext<StateMobileModel>)
+    {
+        patchState({ menuOpen: true });
+    }
+
+    @Action(ActionMobileMenuClosed)
+    menuClosed({ patchState }: StateContext<StateMobileModel>)
+    {
+        patchState({ menuOpen: false });
     }
 }
