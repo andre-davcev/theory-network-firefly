@@ -9,6 +9,7 @@ export class ActionIconSetId  { static readonly type = ActionsIcon.SetId;   cons
 export class ActionIconSet    { static readonly type = ActionsIcon.Set;     constructor(public payload: Icon) { } }
 export class ActionIconPatch  { static readonly type = ActionsIcon.Patch;   constructor(public payload: Partial<Icon>) { } }
 export class ActionIconCreate { static readonly type = ActionsIcon.Create;  constructor() { } }
+export class ActionIconUpdate { static readonly type = ActionsIcon.Create;  constructor() { } }
 export class ActionIconSave   { static readonly type = ActionsIcon.Save;    constructor() { } }
 export class ActionIconDelete { static readonly type = ActionsIcon.Delete;  constructor() { } }
 

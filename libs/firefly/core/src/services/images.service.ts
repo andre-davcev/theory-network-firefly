@@ -29,17 +29,6 @@ export class ServiceImages extends ServiceAsset<Image>
         });
     }
 
-    public createWithUpload(data: Image, imagePath: string): Observable<Image>
-    {
-        this.addMetadata(data);
-
-        return this.upload(imagePath, data.bucketPath).pipe
-        (
-            switchMap(() => this.set(data)),
-            map(() => data)
-        );
-    }
-
 /*
     public createWithUploadFromEvent(event: Event, imagePath: string): Observable<Event>
     {

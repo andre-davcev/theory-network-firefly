@@ -45,12 +45,12 @@ export class ServiceAsset<T> extends ServiceBase<T>
         const url: string = asset['url'];
 
         asset['id']        = this.firestore.createId();
-        asset['mediaType'] = this.name === 'images' ? 'jpg' : 'png';
+        asset['mediaType'] = this.name === 'images' ? 'jpeg' : 'png';
 
         if (url != null)
         {
-            const start: number = url.indexOf(':');
-            const end:   number = url.indexOf(';') - 1;
+            const start: number = url.indexOf('/') + 1;
+            const end:   number = url.indexOf(';');
 
             asset['mediaType'] = url.substring(start, end);
         }

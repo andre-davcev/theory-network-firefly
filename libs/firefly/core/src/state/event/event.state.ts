@@ -1,5 +1,5 @@
 import { map, switchMap, tap } from 'rxjs/operators';
-import { forkJoin, of } from 'rxjs';
+import { forkJoin, of, Observable } from 'rxjs';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
 import { FormGroup } from '@angular/forms';
@@ -164,18 +164,19 @@ export class StateEvent
     create({ getState, dispatch }: StateContext<StateEventModel>)
     {
         const state:      StateEventModel = getState();
-        const data:       Event           = StateEvent.data(state);
         const imageIsNew: boolean         = this.store.selectSnapshot(StateImage.isNew);
-        const clusterId:  string          = this.store.selectSnapshot(StateCluster.id);
+        const data:       Event           = StateEvent.data(state);
 
-        return forkJoin
-        (
-            imageIsNew ? dispatch(new ActionImageCreate()) : of(null),
-            this.service.create(data),
-            this.clusterEvents.add(clusterId, data)
-        ).
+        const { imageUrl, ...partial} = data;
+
+        const saveImage$: Observable<void> = !imageIsNew ?
+            of(null) :
+            dispatch(new ActionImageCreate());
+
+        return saveImage$.
         pipe
         (
+            switchMap(() => this.service.create(partial)),
             switchMap(() => dispatch(new ActionUserEventsAdd(data)))
         );
     }
@@ -189,9 +190,11 @@ export class StateEvent
         const isNew:     boolean         = StateEvent.isNew(state);
         const id:        string          = StateEvent.id(state);
 
+        const { imageUrl, ...partial } = this.service.changedFields(formGroup)
+
         return isNew ?
             dispatch(new ActionEventCreate()) :
-            this.service.patch(id, this.service.changedFields(formGroup)).
+            this.service.patch(id, partial).
             pipe
             (
                 switchMap(() => dispatch(new SetFormPristine(formPath)))
@@ -221,7 +224,11 @@ export class StateEvent
     {
         return dispatch
         ([
-            new ActionEventPatch({ imageId: this.store.selectSnapshot(StateImage.id)})
+            new ActionEventPatch
+            ({
+                imageId  :  this.store.selectSnapshot(StateImage.id),
+                imageUrl : this.store.selectSnapshot(StateImage.url)
+            })
         ]);
     }
 
@@ -230,7 +237,11 @@ export class StateEvent
     {
         return dispatch
         ([
-            new ActionEventPatch({ imageId: undefined })
+            new ActionEventPatch
+            ({
+                imageId  : undefined,
+                imageUrl : undefined
+            })
         ]);
     }
 
