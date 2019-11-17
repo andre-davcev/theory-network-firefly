@@ -17,8 +17,6 @@ onDelete((snapshot: DocumentSnapshot, context: EventContext) =>
 
     return Promise.all
     ([
-        database.collection('event-clusters').doc(id).delete(),
-        database.collection('image-events').doc(imageId).update({ [id]: FieldValue.delete() }),
         database.collection('user-events').doc(userId).update({ [id]: FieldValue.delete() })
     ]);
 });

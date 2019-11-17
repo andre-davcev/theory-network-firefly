@@ -26,7 +26,6 @@ import {
     ActionClusterIconRemove,
     ActionClusterSetId
 } from './cluster.actions';
-import { ActionClusterEventsReset, ActionClusterEventsDelete } from '../cluster-events/cluster-events.actions';
 import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers/cluster-subscribers.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../user-clusters';
 import { ActionUserStreamRemove } from '../user-stream/user-stream.actions';
@@ -107,7 +106,6 @@ export class StateCluster
         return dispatch
         ([
             new ActionClusterReset(),
-            new ActionClusterEventsReset(),
             new ActionClusterSubscribersReset()
         ]).
         pipe
@@ -192,7 +190,6 @@ export class StateCluster
             switchMap(() =>
                 dispatch
                 ([
-                    new ActionClusterEventsDelete(),
                     new ActionClusterSubscribersDelete(),
                     new ActionUserClustersRemove(data.id),
                     new ActionUserStreamRemove(data.id),

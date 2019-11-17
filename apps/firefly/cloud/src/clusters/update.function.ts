@@ -12,22 +12,9 @@ document('clusters/{id}').
 onUpdate((change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
 {
     const id:     string              = change.after.id;
-    const key:    string              = 'iconId';
     const before: Record<string, any> = change.before.data();
     const after:  Record<string, any> = change.after.data();
-
-    const collection: CollectionReference       = database.collection('icon-clusters');
     const promises: Array<Promise<WriteResult>> = [];
-
-    if (before[key] == null && after[key] != null)
-    {
-        promises.push(collection.doc(after[key]).update({ [id]: id }));
-    }
-    else if (before[key] != null && after[key] == null)
-    {
-        promises.push(collection.doc(before[key]).update({ [id]: FieldValue.delete() }));
-    }
-
     const refTable: Record<string, any> = { sort: {} };
 
     ['name', 'dateCreated'].

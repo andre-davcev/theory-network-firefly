@@ -10,13 +10,13 @@ firestore.
 document('images/{id}').
 onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const id:     string = snapshot.id;
-    const userId: string = snapshot.data().userId;
-    const path:   string = id.replace(/-/g, '/');
+    const id:     string              = snapshot.id;
+    const data:   Record<string, any> = snapshot.data();
+    const userId: string              = data.userId;
+    const path:   string              = `${userId}/images/${data.id}.${data.mediaType}`;
 
     return Promise.all
     ([
-        database.collection('image-events').doc(id).delete(),
         database.collection('user-images').doc(userId).update({ [id]: FieldValue.delete() }),
         storage().bucket().file(path).delete()
     ]);

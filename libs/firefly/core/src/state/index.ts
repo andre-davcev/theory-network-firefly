@@ -1,6 +1,5 @@
 export * from './alert';
 export * from './cluster';
-export * from './cluster-events';
 export * from './cluster-subscribers';
 export * from './event';
 export * from './grid';

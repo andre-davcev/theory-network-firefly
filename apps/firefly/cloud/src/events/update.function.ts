@@ -15,17 +15,7 @@ onUpdate((change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
     const before: Record<string, any> = change.before.data();
     const after:  Record<string, any> = change.after.data();
 
-    const collection: CollectionReference         = database.collection('image-events');
-    const promises:   Array<Promise<WriteResult>> = [];
-
-    if (before[key] == null && after[key] != null)
-    {
-        promises.push(collection.doc(after[key]).update({ [id]: id }));
-    }
-    else if (before[key] != null && after[key] == null)
-    {
-        promises.push(collection.doc(before[key]).update({ [id]: FieldValue.delete() }));
-    }
+    const promises: Array<Promise<WriteResult>> = [];
 
     const refTable: Record<string, any> = { sort: {} };
 

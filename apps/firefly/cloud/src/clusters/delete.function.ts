@@ -18,8 +18,6 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     return Promise.all
     ([
         database.collection('cluster-subscribers').doc(id).delete(),
-        database.collection('cluster-events').doc(id).delete(),
-        database.collection('icon-clusters').doc(iconId).update({ [id]: FieldValue.delete() }),
         database.collection('user-clusters').doc(userId).update({ [id]: FieldValue.delete() })
     ]);
 });
