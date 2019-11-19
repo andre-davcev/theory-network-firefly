@@ -1,4 +1,4 @@
-import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { State, Selector, Action, StateContext, Store, NgxsOnInit } from '@ngxs/store';
 import { of } from 'rxjs';
 import { switchMap, tap, map } from 'rxjs/operators';
 
@@ -21,10 +21,11 @@ import {
 } from './user-events.actions';
 import { StateUser } from '../user';
 import { StateQuery } from '@theory/ngxs';
+import { Query } from '@angular/fire/firestore';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 
-export class StateUserEvents extends StateQuery<Event, ServiceEvents, StateUserEventsModel>
+export class StateUserEvents extends StateQuery<Event, ServiceEvents, StateUserEventsModel> implements NgxsOnInit
 {
     @Selector() static data(state: StateUserEventsModel):          Record<string, UserEvent> { return state.data; }
     @Selector() static keys(state: StateUserEventsModel):          Array<string>             { return state.keys; }
@@ -44,25 +45,29 @@ export class StateUserEvents extends StateQuery<Event, ServiceEvents, StateUserE
     constructor
     (
         private store:   Store,
-        private service: ServiceUserEvents,
-        private events:  ServiceEvents
+        private service: ServiceEvents
     )
     {
         super();
     }
 
-    @Action(ActionUserEventsReset)
-    reset(context: StateContext<StateUserEventsModel>)
+    public ngxsOnInit(context: StateContext<StateUserEventsModel>)
     {
-        super.reset(context, StateUserEventsOptions.defaults, this.events);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const query:  Query  = this.service.collection.ref.where('userId', '==', userId);
 
-        context.patchState({})
+        super.init
+        (
+            context,
+            query,
+            this.service
+        );
     }
 
     @Action(ActionUserEventsGetData)
-    getData(context: StateContext<StateUserEventsModel>, { fetch }: ActionUserEventsGetData)
+    getData(context: StateContext<StateUserEventsModel>)
     {
-        return super.query(context, StateUserEventsOptions.defaults, this.events);
+        return super.query(context, StateUserEventsOptions.defaults);
     }
 
     @Action(ActionUserEventsGet)
