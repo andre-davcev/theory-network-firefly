@@ -1,7 +1,8 @@
-import { StateReferenceTableModel } from '@theory/ngxs';
-import { Event, UserEvent } from '@firefly/core/models';
+import { StateQueryModel } from '@theory/ngxs';
+import { Event } from '@firefly/core/models';
+import { ServiceEvents } from '@firefly/core/services';
 
-export interface StateUserEventsModel extends StateReferenceTableModel<UserEvent, Event>
+export interface StateUserEventsModel extends StateQueryModel<Event, ServiceEvents>
 {
 
 }

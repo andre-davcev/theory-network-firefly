@@ -2,7 +2,7 @@ import { ImageSize } from '../enums';
 
 export interface StorageImage
 {
-    [ImageSize.Small]?:  string;
-    [ImageSize.Medium]?: string;
-    [ImageSize.Large]?:  string;
+    [ImageSize.Small]?  : string;
+    [ImageSize.Medium]? : string;
+    [ImageSize.Large]?  : string;
 }

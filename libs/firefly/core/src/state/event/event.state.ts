@@ -52,7 +52,7 @@ export class StateEvent
     @Selector() static isNew(state: StateEventModel): boolean { return  StateEvent.id(state) === CoreEnum.IdNew; }
     @Selector() static canUpdate(state: StateEventModel): boolean { return StateEvent.form(state).status === FormNgxsStatus.Valid && StateEvent.form(state).dirty; }
 
-    @Selector() static image(state: StateEventModel): string { return StateEvent.data(state).imageUrl; }
+    @Selector() static image(state: StateEventModel): string { return StateEvent.data(state).bucketPath; }
     @Selector() static location(state: StateEventModel): Location { return StateEvent.form(state).model.location; }
     @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.location(state) != null; }
     @Selector() static locations(state: StateEventModel): Array<Location> { return [ StateEvent.location(state) ]; }
@@ -128,7 +128,7 @@ export class StateEvent
         (
             switchMap(() =>
                 this.service.getDownloadUrl(object.imageId, ImageSize.Medium).
-                pipe(tap((url: string) => object.imageUrl = url))
+                pipe(tap((url: string) => object.bucketPath = url))
             ),
             map(() =>
                 patchState({ formGroup: this.service.formCreate(object) })
@@ -166,8 +166,6 @@ export class StateEvent
         const imageIsNew: boolean         = this.store.selectSnapshot(StateImage.isNew);
         const data:       Event           = StateEvent.data(state);
 
-        const { imageUrl, ...partial} = data;
-
         const saveImage$: Observable<void> = !imageIsNew ?
             of(null) :
             dispatch(new ActionImageCreate());
@@ -175,7 +173,7 @@ export class StateEvent
         return saveImage$.
         pipe
         (
-            switchMap(() => this.service.create(partial)),
+            switchMap(() => this.service.create(data)),
             switchMap(() => dispatch(new ActionUserEventsAdd(data)))
         );
     }
@@ -189,7 +187,7 @@ export class StateEvent
         const isNew:     boolean         = StateEvent.isNew(state);
         const id:        string          = StateEvent.id(state);
 
-        const { imageUrl, ...partial } = this.service.changedFields(formGroup)
+        const { bucketPath: imageUrl, ...partial } = this.service.changedFields(formGroup)
 
         return isNew ?
             dispatch(new ActionEventCreate()) :
@@ -226,7 +224,7 @@ export class StateEvent
             new ActionEventPatch
             ({
                 imageId  :  this.store.selectSnapshot(StateImage.id),
-                imageUrl : this.store.selectSnapshot(StateImage.url)
+                bucketPath : this.store.selectSnapshot(StateImage.url)
             })
         ]);
     }
@@ -239,7 +237,7 @@ export class StateEvent
             new ActionEventPatch
             ({
                 imageId  : undefined,
-                imageUrl : undefined
+                bucketPath : undefined
             })
         ]);
     }

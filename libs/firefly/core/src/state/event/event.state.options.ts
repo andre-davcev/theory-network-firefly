@@ -23,7 +23,7 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
 
             tagline     : null,
             imageId     : undefined,
-            imageUrl    : null,
+            bucketPath  : null,
             coordinates : undefined,
             location    : undefined,
             times       : [],
