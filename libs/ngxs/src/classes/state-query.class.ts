@@ -1,16 +1,16 @@
 import { StateContext } from '@ngxs/store';
-import { Observable, from, of, forkJoin } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 
 import { StateQueryModel } from '../interfaces';
-import { ImageSize, ServiceAsset, Model, ActionStorageGetUrls } from '@theory/firebase';
+import { ImageSize, ServiceAsset, Model, ActionStorageGetUrls, OrderBy } from '@theory/firebase';
 import { Query } from '@angular/fire/firestore';
-import { firestore } from 'firebase';
+import { firestore } from 'firebase/app';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { CoreUtil } from '@theory/core';
 
 export class StateQuery<E extends Model, S extends ServiceAsset<E>, M extends StateQueryModel<E, S>>
 {
-    public reset(context: StateContext<M>, defaults: M): void
+    public reset(context: StateContext<M>, defaults: M, service: S): void
     {
         const { patchState } = context;
 
@@ -19,25 +19,25 @@ export class StateQuery<E extends Model, S extends ServiceAsset<E>, M extends St
         patchState(clone);
     }
 
-    public query(context: StateContext<M>, defaults: M): Observable<any>
+    public query(context: StateContext<M>, defaults: M, service: S): Observable<void>
     {
         const { getState, patchState } = context;
 
-        const state     : M                          = getState();
-        const limit     : number                     = state.limit;
-        const orderBy   : string                     = state.orderBy;
-        const direction : firestore.OrderByDirection = state.orderByDirection;
+        const state     : M       = getState();
+        const pageSize  : number  = state.pageSize;
+        const orderBy   : string  = state.orderBy;
+        const direction : OrderBy = state.orderByDirection;
 
-        this.reset(context, defaults);
+        this.reset(context, defaults, service);
 
-        const query : Query = state.query.orderBy(orderBy, direction).limit(limit);
+        const query : Query = state.query.orderBy(orderBy, direction).limit(pageSize);
 
-        patchState({ query } as M);
+        patchState({ query, initialized: true } as M);
 
-        return this.page(context);
+        return this.get(context);
     }
 
-    public page(context: StateContext<M>): Observable<any>
+    public get(context: StateContext<M>): Observable<any>
     {
         const { getState, patchState, dispatch } = context;
 
@@ -55,7 +55,7 @@ export class StateQuery<E extends Model, S extends ServiceAsset<E>, M extends St
         }
         else if (!finished)
         {
-            query.startAfter(snapshots[snapshots.length - 1]);
+            query = query.startAfter(snapshots[snapshots.length - 1]);
         }
 
         return finished ?

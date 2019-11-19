@@ -2,15 +2,13 @@ import { Model } from '@theory/firebase';
 
 export interface Alert extends Model
 {
-    userId    : string;
-    eventId   : string;
-    imageId   : string;
-    title     : string;
-    body      : string;
-    read      : boolean;
-    date      : string;
-    url?      : string;
+    userId      : string;
+    name        : string;
+    description : string;
+    bucketPath  : string;
 
-    imageUrl?      : string;
-    imageUrlSmall? : string;
+    eventId : string;
+    read    : boolean;
+    date    : string;
+    url?    : string;
 }

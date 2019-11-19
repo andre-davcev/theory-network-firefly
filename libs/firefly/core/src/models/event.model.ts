@@ -2,7 +2,6 @@ import { firestore } from 'firebase/app';
 
 import { Asset } from './asset.model';
 import { Location } from './location.model';
-import { Time } from './time.model';
 
 export interface Event extends Asset
 {
@@ -10,9 +9,7 @@ export interface Event extends Asset
     imageId     : string;
     coordinates : firestore.GeoPoint;
     location    : Location;
-    times       : Array<Time>;
-    url         : string;
-
-    imageUrl?      : string;
-    imageUrlSmall? : string;
+    timeStart   : string;
+    timeEnd     : string;
+    bucketPath  : string;
 }

@@ -1,12 +1,13 @@
 import { Alert } from '@firefly/core/models';
 
-export const MockAlerts: Array<Alert> =
+export const MockAlerts: Array<Alert> = [];
+/*
 [
     {
         id      : '1',
         url     : 'assets/images/temp-notifications-blondie.jpg',
         eventId : 'a',
-        imageId : 'assets/images/temp-notifications-blondie.jpg',
+        path : 'assets/images/temp-notifications-blondie.jpg',
         title   : 'Blondie',
         body    : "Artpark",
         read    : false,
@@ -18,7 +19,7 @@ export const MockAlerts: Array<Alert> =
         id      : '2',
         url     : 'assets/images/temp-notifications-foster.the.people.jpg',
         eventId : 'b',
-        imageId : 'assets/images/temp-notifications-blondie.jpg',
+        path : 'assets/images/temp-notifications-blondie.jpg',
         title   : 'Foster The People',
         body    : "Ommegang Brewery Cooperstown",
         read    : false,
@@ -30,7 +31,7 @@ export const MockAlerts: Array<Alert> =
         id      : '3',
         url     : 'assets/images/temp-notifications-rusted.root.jpg',
         eventId : 'c',
-        imageId : 'assets/images/temp-notifications-blondie.jpg',
+        path : 'assets/images/temp-notifications-blondie.jpg',
         title   : 'Rusted Root',
         body    : "Sahlen's Music Stage",
         read    : false,
@@ -38,3 +39,4 @@ export const MockAlerts: Array<Alert> =
         userId  : 'username'
     }
 ];
+*/

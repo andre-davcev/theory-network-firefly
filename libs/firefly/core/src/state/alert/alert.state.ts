@@ -93,8 +93,8 @@ export class StateAlert
         pipe
         (
             switchMap(() =>
-                this.service.getDownloadUrl(object.imageId, ImageSize.Medium).
-                pipe(tap((url: string) => object.imageUrl = url))
+                this.service.getDownloadUrl(object.bucketPath, ImageSize.Medium).
+                pipe(tap((url: string) => object.bucketPath = url))
             ),
             map(() =>
                 patchState({ formGroup: this.service.formCreate(object) })

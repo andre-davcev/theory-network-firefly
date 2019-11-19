@@ -5,7 +5,6 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 import { Event, UserEvent } from '@firefly/core/models';
 import { ServiceUserEvents, ServiceEvents } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/ngxs';
 
 import { StateUserEventsModel } from './user-events.state.model';
 import { StateUserEventsOptions } from './user-events.state.options';
@@ -21,16 +20,16 @@ import {
     ActionUserEventsSync
 } from './user-events.actions';
 import { StateUser } from '../user';
+import { StateQuery } from '@theory/ngxs';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 
-export class StateUserEvents extends StateReferenceTable<UserEvent, Event, StateUserEventsModel>
+export class StateUserEvents extends StateQuery<Event, ServiceEvents, StateUserEventsModel>
 {
     @Selector() static data(state: StateUserEventsModel):          Record<string, UserEvent> { return state.data; }
     @Selector() static keys(state: StateUserEventsModel):          Array<string>             { return state.keys; }
     @Selector() static lookup(state: StateUserEventsModel):        Record<string, Event>     { return state.lookup; }
     @Selector() static list(state: StateUserEventsModel):          Array<Event>              { return state.list; }
-    @Selector() static offset(state: StateUserEventsModel):        number                    { return state.offset; }
     @Selector() static pageSize(state: StateUserEventsModel):      number                    { return state.pageSize; }
     @Selector() static initialized(state: StateUserEventsModel):   boolean                   { return state.initialized; }
     @Selector() static sortField(state: StateUserEventsModel):     string                    { return state.sortField; }
@@ -53,72 +52,23 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
     }
 
     @Action(ActionUserEventsReset)
-    reset({ patchState, getState }: StateContext<StateUserEventsModel>)
+    reset(context: StateContext<StateUserEventsModel>)
     {
-        const defaults: StateUserEventsModel = CoreUtil.clone<StateUserEventsModel>(StateUserEventsOptions.defaults);
+        super.reset(context, StateUserEventsOptions.defaults, this.events);
 
-        return patchState(defaults);
+        context.patchState({})
     }
 
     @Action(ActionUserEventsGetData)
-    getData({ dispatch, patchState, getState }: StateContext<StateUserEventsModel>, { fetch }: ActionUserEventsGetData)
+    getData(context: StateContext<StateUserEventsModel>, { fetch }: ActionUserEventsGetData)
     {
-        const state: StateUserEventsModel = getState();
-
-        const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserEvents.initialized(state);
-
-        return initialized ? of({}) : dispatch
-        ([
-            new ActionUserEventsReset()
-        ]).
-        pipe
-        (
-            switchMap(() =>
-                this.service.get(id)
-            ),
-            switchMap((data: Record<string, UserEvent>) =>
-                dispatch(new ActionUserEventsSet(data))
-            ),
-            switchMap(() =>
-                StateUserEvents.getAll(state) ? of(null) : dispatch(new ActionUserEventsSort())
-            ),
-            switchMap(() =>
-                fetch ? dispatch(new ActionUserEventsGet()) : of(null)
-            ),
-            map(() =>
-                patchState({ initialized: true })
-            )
-        );
+        return super.query(context, StateUserEventsOptions.defaults, this.events);
     }
 
     @Action(ActionUserEventsGet)
-    get({ getState, patchState }: StateContext<StateUserEventsModel>)
+    get(context: StateContext<StateUserEventsModel>)
     {
-        return super.page
-        (
-            getState(),
-            this.events
-        ).
-        pipe
-        (
-            tap((partial: Partial<StateUserEventsModel>) =>
-                patchState(partial)
-            )
-        );
-    }
-    @Action(ActionUserEventsSet)
-    set({ patchState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSet)
-    {
-        patchState({ data: payload == null ? {} : payload });
-    }
-
-    @Action(ActionUserEventsSort)
-    sortData({ getState, patchState }: StateContext<StateUserEventsModel>)
-    {
-        const keys: Array<string> = this.sort(getState());
-
-        patchState({ keys });
+        return super.get(context);
     }
 
     @Action(ActionUserEventsAdd)
@@ -161,14 +111,5 @@ export class StateUserEvents extends StateReferenceTable<UserEvent, Event, State
         );
 
         patchState(partial);
-    }
-
-    @Action(ActionUserEventsDelete)
-    delete({ dispatch }: StateContext<StateUserEventsModel>)
-    {
-        return dispatch
-        ([
-            new ActionUserEventsReset()
-        ]);
     }
 }
