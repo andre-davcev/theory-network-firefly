@@ -10,29 +10,44 @@ import { CoreUtil } from '@theory/core';
 
 export class StateQuery<E extends Model, S extends ServiceAsset<E>, M extends StateQueryModel<E, S>>
 {
-    public reset(context: StateContext<M>, defaults: M, service: S): void
+    public init({ patchState }: StateContext<M>, query: Query, service: S): void
     {
-        const { patchState } = context;
+        patchState
+        ({
+            query,
+            service
+        } as M);
+    }
+
+    public reset(context: StateContext<M>, defaults: M): void
+    {
+        const { patchState, getState } = context;
+        const { service, query } = getState();
 
         const clone: M = CoreUtil.clone<M>(defaults);
 
-        patchState(clone);
+        patchState
+        ({
+            ...clone,
+            service,
+            query
+        });
     }
 
-    public query(context: StateContext<M>, defaults: M, service: S): Observable<void>
+    public query(context: StateContext<M>, defaults: M): Observable<void>
     {
         const { getState, patchState } = context;
 
-        const state     : M       = getState();
-        const pageSize  : number  = state.pageSize;
-        const orderBy   : string  = state.orderBy;
-        const direction : OrderBy = state.orderByDirection;
+        const state: M = getState();
+        const { pageSize, orderBy, orderByDirection, query } = state;
 
-        this.reset(context, defaults, service);
+        this.reset(context, defaults);
 
-        const query : Query = state.query.orderBy(orderBy, direction).limit(pageSize);
-
-        patchState({ query, initialized: true } as M);
+        patchState
+        ({
+            query       : query.orderBy(orderBy, orderByDirection).limit(pageSize),
+            initialized : true
+        } as M);
 
         return this.get(context);
     }
@@ -41,24 +56,22 @@ export class StateQuery<E extends Model, S extends ServiceAsset<E>, M extends St
     {
         const { getState, patchState, dispatch } = context;
 
-        const state          : M                                               = getState();
-        const snapshots      : Array<firestore.QueryDocumentSnapshot>          = state.snapshots;
-        const snapshotLookup : Record<string, firestore.QueryDocumentSnapshot> = state.snapshotLookup;
-        const finished       : boolean                                         = state.finishedPaging;
-        const imageSize      : ImageSize                                       = state.imageSize;
+        const state : M = getState();
+
+        const { snapshots, snapshotLookup, finishedPaging, imageSize, initialized } = state;
 
         let query : Query = state.query;
 
-        if (!state.initialized)
+        if (!initialized)
         {
             patchState({ initialized: true} as M);
         }
-        else if (!finished)
+        else if (!finishedPaging)
         {
             query = query.startAfter(snapshots[snapshots.length - 1]);
         }
 
-        return finished ?
+        return finishedPaging ?
             of(null) :
             from(query.get()).pipe
             (
