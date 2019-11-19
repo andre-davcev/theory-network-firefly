@@ -234,12 +234,12 @@ export class ServiceBase<T extends Model | Record<string, any>>
         this._name = name;
     }
 
-    protected get collection(): AngularFirestoreCollection<T>
+    public get collection(): AngularFirestoreCollection<T>
     {
         return this._collection;
     }
 
-    protected set collection(collection: AngularFirestoreCollection<T>)
+    public set collection(collection: AngularFirestoreCollection<T>)
     {
         this._collection = collection;
     }

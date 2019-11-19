@@ -6,7 +6,6 @@ import { FormBuilder } from '@angular/forms';
 
 import { ServiceBase } from './base.service';
 import { StorageFormat, ImageSize } from '../enums';
-import { CoreEnum } from '@theory/core';
 
 export class ServiceAsset<T> extends ServiceBase<T>
 {
