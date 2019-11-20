@@ -51,9 +51,10 @@ export class PageAssetsClusters
     {
         this.store.dispatch(new ActionClusterSet(cluster));
 
-        this.modalController.dismiss();
-
-        this.store.dispatch(new Navigate([Pages.AssetCluster], undefined, {state: {isClusterDetail:true}} ));
+        if(this.modal)
+          this.modalController.dismiss();
+        else
+          this.store.dispatch(new Navigate([Pages.AssetCluster], undefined, {state: {isClusterDetail:true}} ));
 
     }
 }
