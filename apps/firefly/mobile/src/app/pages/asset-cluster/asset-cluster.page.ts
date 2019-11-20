@@ -28,6 +28,7 @@ export class PageAssetCluster
     @Select(StateDevice.device)     device$: Observable<boolean>;
 
     public Pages: any = Pages;
+    private isDetail: boolean = false;
 
     constructor(
       private store: Store,
@@ -45,6 +46,7 @@ export class PageAssetCluster
             });
         });*/
 
+        this.isDetail = window.history.state.isClusterDetail;
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 

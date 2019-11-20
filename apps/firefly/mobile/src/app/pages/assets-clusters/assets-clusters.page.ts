@@ -3,6 +3,7 @@ import { StatusBarStyle } from '@capacitor/core';
 import { Select, Store } from '@ngxs/store'
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
+import { NavigationExtras } from '@angular/router';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Cluster, StateUserClusters, ActionClusterSet } from '@firefly/core';
@@ -28,7 +29,8 @@ export class PageAssetsClusters
 
     add(): void
     {
-        this.store.dispatch(new Navigate([Pages.AssetCluster]));
+
+        this.store.dispatch(new Navigate([Pages.AssetCluster], undefined, {state: {isClusterDetail:false}} ));
     }
 
     ionViewWillEnter()
@@ -50,5 +52,8 @@ export class PageAssetsClusters
         this.store.dispatch(new ActionClusterSet(cluster));
 
         this.modalController.dismiss();
+
+        this.store.dispatch(new Navigate([Pages.AssetCluster], undefined, {state: {isClusterDetail:true}} ));
+
     }
 }
