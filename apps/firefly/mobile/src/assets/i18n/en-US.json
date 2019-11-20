@@ -72,6 +72,7 @@
   "page.event-categories.title" : "Categories",
 
   "page.cluster.title"                  : "Create New Cluster",
+  "page.cluster.title.detail"           : "Cluster Detail",
   "page.cluster.titlePlaceholder"       : "Add your name",
   "page.cluster.subtitlePlaceholder"    : "Add your tagline",
   "page.cluster.iconPlaceholder"        : "select cluster",

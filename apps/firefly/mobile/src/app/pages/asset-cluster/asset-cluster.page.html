@@ -1,6 +1,6 @@
 <ion-header color="white">
     <ion-toolbar >
-        <ion-title>{{'page.cluster.title' | translate}}</ion-title>
+      <ion-title>{{ (isDetail ? 'page.cluster.title.detail' : 'page.cluster.title') | translate}}</ion-title>
 
         <ion-buttons slot="start">
             <ion-back-button color="dark"></ion-back-button>
@@ -68,6 +68,6 @@
                               image="assets/images/temp-subscriptions-pokemon-go.jpg">
         </app-item-description>
 -->
-        <ion-button   size="default" expand="block" color="primary" (click)="save()">Submit</ion-button>
+<ion-button *ngIf="!isDetail"   size="default" expand="block" color="primary" (click)="save()">Submit</ion-button>
     </form>
 </ion-content>
