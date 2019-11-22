@@ -8,65 +8,74 @@ import {
 } from './storage.actions';
 import { StateStorageOptions } from './storage.state.options';
 import { StorageImage } from '@theory/firebase/interfaces';
-import { ServiceStorage } from '@theory/firebase/services';
 import { tap } from 'rxjs/operators';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
+import { ServiceStorage } from '@theory/firebase/services';
 
 @State<StateStorageModel>(StateStorageOptions)
 
 export class StateStorage
 {
+    @Selector() static image(state: StateStorageModel):  StorageImage                 {return state.image;}
     @Selector() static images(state: StateStorageModel): Record<string, StorageImage> {return state.images;}
 
     constructor(private service: ServiceStorage) { }
 
     @Action(ActionStorageGetUrl)
-    getUrl({ getState, patchState }: StateContext<StateStorageModel>, { bucketPath, size }: ActionStorageGetUrl)
+    getUrl({ getState, patchState }: StateContext<StateStorageModel>, { bucketPath, size, cached }: ActionStorageGetUrl)
     {
         const images: Record<string, StorageImage> = StateStorage.images(getState());
-        const image:  StorageImage                 = images[bucketPath] == null ? {} : images[bucketPath];
+        const exists: boolean                      = images[bucketPath] != null && images[bucketPath][size] != null;
+        const image:  StorageImage                 = exists ? images[bucketPath] : {};
 
-        return this.service.
-            getDownloadUrl(bucketPath, size).
-            pipe
-            (
-                tap((url: string) =>
-                    image[size] = url
-                ),
-                tap(() =>
-                    images[bucketPath] = image
-                ),
-                tap(() =>
-                    patchState({ images })
-                )
-            );
+        return exists && !cached ?
+            of(null) :
+            this.service.
+                downloadUrl(bucketPath, size).
+                pipe
+                (
+                    tap((url: string) =>
+                        image[size] = url
+                    ),
+                    tap(() =>
+                        images[bucketPath] = image
+                    ),
+                    tap(() =>
+                        patchState({ images, image })
+                    )
+                );
     }
 
     @Action(ActionStorageGetUrls)
-    getUrls({ getState, patchState }: StateContext<StateStorageModel>, { bucketPaths, size })
+    getUrls({ getState, patchState }: StateContext<StateStorageModel>, { bucketPaths, size, cached })
     {
         const images: Record<string, StorageImage> = StateStorage.images(getState());
 
+        const urls$: Array<Observable<string>> =
+
         bucketPaths.
         filter((bucketPath: string) =>
-            images[bucketPath] == null
+            !cached || images[bucketPath] == null || images[bucketPath][size] == null
         ).
-        forEach((bucketPath: string) =>
-            images[bucketPath] = {}
+        map((bucketPath: string) =>
+            this.service.downloadUrl(bucketPath, size).
+            pipe
+            (
+                tap((url: string) =>
+                    images[bucketPath] =
+                    {
+                        ...images[bucketPath],
+                        [size]: url
+                    }
+                )
+            )
         );
 
-        const urls$: Observable<string> =
-
-        bucketPaths.
-            map((bucketPath: string) =>
-                this.service.
-                getDownloadUrl(bucketPath, size).
-                pipe(tap((url: string) => images[bucketPath][size] = url))
+        return urls$.length === 0 ?
+            of(null) :
+            forkJoin(urls$).pipe
+            (
+                tap(() => patchState({ images }))
             );
-
-        return forkJoin(urls$).pipe
-        (
-            tap(() => patchState({ images }))
-        );
     }
 }

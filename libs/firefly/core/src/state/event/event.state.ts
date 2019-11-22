@@ -1,17 +1,13 @@
-import { map, switchMap, tap } from 'rxjs/operators';
-import {  of, Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
-import { FormGroup } from '@angular/forms';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
-import { ActionMapSearchResultClear } from '@theory/mapbox';
-import { CoreEnum, CoreUtil } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
+import { ActionMapSearchResultClear, MapboxPlaceType } from '@theory/mapbox';
+import { CoreEnum } from '@theory/core';
+import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/user';
-import { Event, Location, Time } from '@firefly/core/models';
-import { ServiceEvents } from '@firefly/core/services';
-import { ActionImageGet, ActionImageCreate, StateImage, ActionImageSetId } from '@firefly/core/state/image';
+import { Event, Location } from '@firefly/core/models';
+import { ActionImageCreate, StateImage } from '@firefly/core/state/image';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -19,7 +15,6 @@ import {
   ActionEventGet,
   ActionEventLocationSet,
   ActionEventCreate,
-  ActionEventTimeSet,
   ActionEventPatch,
   ActionEventDelete,
   ActionEventReset,
@@ -31,35 +26,67 @@ import {
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
 import { ActionClusterReset } from '../cluster';
-import { ImageSize } from '@theory/firebase';
+import { firestore } from 'firebase/app';
+import { ServiceEvents } from '@firefly/core/services';
 
 @State<StateEventModel>(StateEventOptions)
 
-export class StateEvent
+export class StateEvent extends StateDocument<Event, StateEventModel>
 {
     constructor
     (
-        private service: ServiceEvents,
-        private store:   Store
-    ) { }
+        private store: Store,
+        service: ServiceEvents
+    )
+    {
+        super
+        (
+            'events',
+            StateEventOptions.defaults,
+            service,
+            {
+                version     : undefined,
+                id          : undefined,
+                dateCreated : undefined,
+                dateUpdated : undefined,
 
-    @Selector() static form(state: StateEventModel): FormNgxs { return state.form; }
-    @Selector() static formGroup(state: StateEventModel): FormGroup { return state.formGroup; }
-    @Selector() static formPath(state: StateEventModel): string { return state.formPath; }
-    @Selector() static isForm(state: StateEventModel): boolean { return StateEvent.formGroup(state) != null; }
-    @Selector() static data(state: StateEventModel): Event { return StateEvent.form(state).model; }
-    @Selector() static id(state: StateEventModel): string { return StateEvent.data(state).id; }
-    @Selector() static isNew(state: StateEventModel): boolean { return  StateEvent.id(state) === CoreEnum.IdNew; }
-    @Selector() static canUpdate(state: StateEventModel): boolean { return StateEvent.form(state).status === FormNgxsStatus.Valid && StateEvent.form(state).dirty; }
+                userId      : undefined,
+                name        : null,
+                description : null,
+                private     : true,
+                draft       : false,
 
-    @Selector() static image(state: StateEventModel): string { return StateEvent.data(state).bucketPath; }
-    @Selector() static location(state: StateEventModel): Location { return StateEvent.form(state).model.location; }
+                tagline     : null,
+                bucketPath  : null,
+                coordinates : undefined,
+                location    : undefined,
+                timeStart   : null,
+                timeEnd     : null
+            },
+            {
+                ActionReset:  ActionEventReset,
+                ActionGet:    ActionEventGet,
+                ActionSet:    ActionEventSet,
+                ActionPatch:  ActionEventPatch,
+                ActionCreate: ActionEventCreate,
+                ActionSave:   ActionEventSave,
+                ActionDelete: ActionEventDelete,
+
+                ActionsReset:  [ActionClusterReset, ActionMapSearchResultClear],
+                ActionsCreate: [ActionImageCreate],
+
+                ActionsQueryAdd:    [ActionUserEventsAdd],
+                ActionsQueryRemove: [ActionUserEventsRemove],
+                ActionsQuerySync:   [ActionUserEventsSync]
+            }
+        );
+    }
+
+    @Selector() static location(state: StateEventModel): Location { return StateEvent.data(state).location; }
     @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.location(state) != null; }
     @Selector() static locations(state: StateEventModel): Array<Location> { return [ StateEvent.location(state) ]; }
-    @Selector() static times(state: StateEventModel): Array<Time> { return StateEvent.data(state).times; }
-    @Selector() static time(state: StateEventModel): Time { return StateEvent.times(state)[0]; }
-    @Selector() static timeStart(state: StateEventModel): string { return StateEvent.time(state).start; }
-    @Selector() static timeEnd(state: StateEventModel): string { return StateEvent.time(state).end; }
+    @Selector() static timeStart(state: StateEventModel): string { return StateEvent.data(state).timeStart; }
+    @Selector() static timeEnd(state: StateEventModel): string { return StateEvent.data(state).timeEnd; }
     @Selector() static timeEndValid(state: StateEventModel): boolean
     {
         const timeStart: Date = new Date(StateEvent.timeStart(state));
@@ -69,193 +96,93 @@ export class StateEvent
     }
 
     @Action(ActionEventReset)
-    reset({ patchState, getState, dispatch }: StateContext<StateEventModel>)
+    reset(context: StateContext<StateEventModel>)
     {
-        const defaults: StateEventModel = CoreUtil.clone<StateEventModel>(StateEventOptions.defaults);
-
-        patchState(defaults);
-
-        return dispatch
-        ([
-            new SetFormPristine(StateEvent.formPath(getState())),
-            new ActionClusterReset(),
-            new ActionMapSearchResultClear()
-        ]);
+        return super.reset(context)
     }
 
     @Action(ActionEventGet)
-    get({ dispatch }: StateContext<StateEventModel>, { payload }: ActionEventGet)
+    get(context: StateContext<StateEventModel>, action: ActionEventGet)
     {
-        return this.service.snapshot(payload).
-        pipe
-        (
-            switchMap((object: Event) =>
-                dispatch
-                ([
-                    new ActionEventSet(object),
-                    new ActionImageGet(object.imageId)
-                ])
-            )
-        );
-    }
-
-    @Action(ActionEventSetId)
-    setId({ dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSetId)
-    {
-        const id: string = payload;
-
-        const object: Event = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Event>(StateEventOptions.defaults.empty)) :
-            this.store.selectSnapshot(StateUserEvents.lookup)[id]
-
-        return dispatch
-        ([
-            new ActionEventSet(object),
-            new ActionImageSetId(object.imageId)
-        ]);
+        return super.get(context, action);
     }
 
     @Action(ActionEventSet)
-    set({ patchState, getState, dispatch }: StateContext<StateEventModel>, { payload }: ActionEventSet)
+    set(context: StateContext<StateEventModel>, action: ActionEventSet)
     {
-        const object: Event = payload;
-
-        return dispatch
-        ([
-            new ActionEventReset()
-        ]).
-        pipe
-        (
-            switchMap(() =>
-                this.service.getDownloadUrl(object.imageId, ImageSize.Medium).
-                pipe(tap((url: string) => object.bucketPath = url))
-            ),
-            map(() =>
-                patchState({ formGroup: this.service.formCreate(object) })
-            ),
-
-            switchMap(() =>
-                dispatch(new UpdateFormValue({ value: object, path: StateEvent.formPath(getState())}))
-            )
-        );
+        return super.set(context, action);
     }
 
     @Action(ActionEventPatch)
-    patch({ dispatch, getState } : StateContext<StateEventModel>, { payload }: ActionEventPatch)
+    patch(context : StateContext<StateEventModel>, action: ActionEventPatch)
     {
-        const state: StateEventModel = getState();
-        const data:  Event           = StateEvent.data(state);
-        const value: Event           = { ...data, ...payload };
-        const path:  string          = StateEvent.formPath(state);
-
-        return dispatch(new UpdateFormValue({ value, path })).
-        pipe
-        (
-            switchMap(() =>
-                data.id === CoreEnum.IdNew ?
-                    of(null) :
-                    dispatch(new ActionUserEventsSync(data))
-            )
-        );
+        return super.patch(context, action);
     }
 
     @Action(ActionEventCreate)
-    create({ getState, dispatch }: StateContext<StateEventModel>)
+    create(context: StateContext<StateEventModel>)
     {
-        const state:      StateEventModel = getState();
-        const imageIsNew: boolean         = this.store.selectSnapshot(StateImage.isNew);
-        const data:       Event           = StateEvent.data(state);
-
-        const saveImage$: Observable<void> = !imageIsNew ?
-            of(null) :
-            dispatch(new ActionImageCreate());
-
-        return saveImage$.
-        pipe
-        (
-            switchMap(() => this.service.create(data)),
-            switchMap(() => dispatch(new ActionUserEventsAdd(data)))
-        );
+        return super.create(context);
     }
 
     @Action(ActionEventSave)
-    save({ getState, dispatch }: StateContext<StateEventModel>)
+    save(context: StateContext<StateEventModel>)
     {
-        const state:     StateEventModel = getState();
-        const formPath:  string          = StateEvent.formPath(state);
-        const formGroup: FormGroup       = StateEvent.formGroup(state);
-        const isNew:     boolean         = StateEvent.isNew(state);
-        const id:        string          = StateEvent.id(state);
-
-        const { bucketPath: imageUrl, ...partial } = this.service.changedFields(formGroup)
-
-        return isNew ?
-            dispatch(new ActionEventCreate()) :
-            this.service.patch(id, partial).
-            pipe
-            (
-                switchMap(() => dispatch(new SetFormPristine(formPath)))
-            );
+        return super.save(context);
     }
 
     @Action(ActionEventDelete)
-    delete({ getState, dispatch }: StateContext<StateEventModel>)
+    delete(context: StateContext<StateEventModel>)
     {
-        const data: Event = StateEvent.data(getState());
+        return super.delete(context);
+    }
 
-        return this.service.delete(data).
-        pipe
-        (
-            switchMap(() =>
-                dispatch
-                ([
-                    new ActionUserEventsRemove(data.id),
-                    new ActionEventReset()
-                ])
-            )
-        );
+    @Action(ActionEventSetId)
+    setId({ dispatch }: StateContext<StateEventModel>, { id }: ActionEventSetId)
+    {
+        const isNew: boolean = id === CoreEnum.IdNew;
+
+        const userId:   string                     = this.store.selectSnapshot(StateUser.id);
+        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserEvents.snapshotLookup)[id];
+
+        const data: Event = isNew ?
+            this.service.formDataNew(userId, this.empty) :
+            this.store.selectSnapshot(StateUserEvents.dataLookup)[id];
+
+        return of(isNew) ?
+            dispatch(new ActionEventPatch(data)) :
+            dispatch(new ActionEventSet(snapshot, data))
     }
 
     @Action(ActionEventImageAdd)
     imageAdd({ dispatch }: StateContext<StateEventModel>)
     {
-        return dispatch
-        ([
-            new ActionEventPatch
-            ({
-                imageId  :  this.store.selectSnapshot(StateImage.id),
-                bucketPath : this.store.selectSnapshot(StateImage.url)
-            })
-        ]);
+        const bucketPath: string = this.store.selectSnapshot(StateImage.bucketPath);
+
+        return dispatch(new ActionEventPatch({ bucketPath }));
     }
 
     @Action(ActionEventImageRemove)
     imageRemove({ dispatch  }: StateContext<StateEventModel>)
     {
-        return dispatch
-        ([
-            new ActionEventPatch
-            ({
-                imageId  : undefined,
-                bucketPath : undefined
-            })
-        ]);
+        return dispatch(new ActionEventPatch({ bucketPath : undefined }));
     }
 
     @Action(ActionEventLocationSet)
-    setLocation({ getState } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
+    setLocation({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
     {
-        const form: FormGroup = StateEvent.formGroup(getState());
-        const result: Result = payload;
+        const result: Result                = payload;
+        const types: Array<MapboxPlaceType> = result.place_type as Array<MapboxPlaceType>;
 
-        this.service.locationSet(form, result);
-    }
+        let coordinates: firestore.GeoPoint;
+        let location:    Location;
 
-    @Action(ActionEventTimeSet)
-    setTime({ getState }: StateContext<StateEventModel>, { key, value }: ActionEventTimeSet)
-    {
-        const form: FormGroup = StateEvent.formGroup(getState());
+        if (result != null)
+        {
+            coordinates = new firestore.GeoPoint(result.center[1], result.center[0]);
+            location    = { types };
+        }
 
-        this.service.timeSet(form, key, value);
+        return dispatch(new ActionEventPatch({ coordinates, location }));
     }
 }

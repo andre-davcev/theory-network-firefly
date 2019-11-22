@@ -30,17 +30,6 @@ export class ServiceIcons extends ServiceAsset<Icon>
         });
     }
 
-    public createWithUpload(data: Icon, imagePath: string): Observable<Icon>
-    {
-        data = this.addMetadata(data);
-
-        return this.upload(imagePath, data.bucketPath).pipe
-        (
-            switchMap(() => this.set(data)),
-            map(() => data)
-        );
-    }
-
 /*
     getIcons(userId: String): Observable<Array<Icon>>
     {

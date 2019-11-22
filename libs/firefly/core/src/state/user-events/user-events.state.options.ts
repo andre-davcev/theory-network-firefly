@@ -10,18 +10,18 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 
     defaults :
     {
-        service:          undefined,
-        query:            undefined,
         pageSize:         Default.PageSize,
         orderBy:          'timeStart',
         orderByDirection: OrderBy.Ascending,
 
         initialized:    false,
+        loading:        false,
         finishedPaging: false,
         imageSize:      ImageSize.Small,
 
         snapshots:      [],
         snapshotLookup: {},
-        list:           []
+        data:           [],
+        dataLookup:     {}
     }
 };

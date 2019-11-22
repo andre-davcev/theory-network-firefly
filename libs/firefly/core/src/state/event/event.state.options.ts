@@ -1,6 +1,8 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateEventModel } from './event.state.model';
+import { CoreUtil } from '@theory/core';
+import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateEventOptions: StoreOptions<StateEventModel> =
 {
@@ -8,37 +10,8 @@ export const StateEventOptions: StoreOptions<StateEventModel> =
 
     defaults :
     {
-        empty :
-        {
-            version     : undefined,
-            id          : undefined,
-            dateCreated : undefined,
-            dateUpdated : undefined,
-
-            userId      : undefined,
-            name        : null,
-            description : null,
-            private     : true,
-            draft       : false,
-
-            tagline     : null,
-            imageId     : undefined,
-            bucketPath  : null,
-            coordinates : undefined,
-            location    : undefined,
-            times       : [],
-            url         : ''
-        },
-
-        form :
-        {
-            model  : {},
-            dirty  : false,
-            status : '',
-            errors : {}
-        },
-
-        formGroup : undefined,
-        formPath  : 'event.form'
+        snapshot  : undefined,
+        form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
+        formGroup : undefined
     }
 };

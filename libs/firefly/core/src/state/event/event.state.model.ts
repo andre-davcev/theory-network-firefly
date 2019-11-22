@@ -1,7 +1,8 @@
-import { Event } from '@firefly/core/models';
-import { StateAssetModel } from '@firefly/core/interfaces';
+import { StateDocumentModel } from '@theory/ngxs';
 
-export interface StateEventModel extends StateAssetModel<Event>
+import { Event } from '@firefly/core/models';
+
+export interface StateEventModel extends StateDocumentModel<Event>
 {
 
 }

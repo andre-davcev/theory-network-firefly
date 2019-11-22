@@ -1,4 +1,5 @@
 export enum CoreEnum
 {
-    IdNew = 'new'
+    IdNew       = 'new',
+    Placeholder = '<placeholder>'
 }
