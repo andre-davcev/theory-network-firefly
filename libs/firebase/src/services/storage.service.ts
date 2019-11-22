@@ -1,32 +1,15 @@
-import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
-import { Observable, of } from 'rxjs';
-import { switchMap, map, last } from 'rxjs/operators';
-
-import { StorageFormat, ImageSize } from '../enums';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { ImageSize } from '../enums';
+import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
+import { map, switchMap } from 'rxjs/operators';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ServiceStorage
 {
-    constructor
-    (
-        private storage: AngularFireStorage,
-    ) { }
+    constructor(private storage: AngularFireStorage) { }
 
-    public upload(data: string, bucketPath: string): Observable<string>
-    {
-        const ref: AngularFireStorageReference = this.storage.ref(bucketPath);
-
-        return of(ref.putString(data, StorageFormat.DataUrl)).
-        pipe
-        (
-            switchMap((task: AngularFireUploadTask) => task.snapshotChanges()),
-            last(),
-            switchMap(() => ref.getDownloadURL())
-        );
-    }
-
-    public static mediaType(data: string): string
+    public mediaType(data: string): string
     {
         const start: number = data.indexOf('/') + 1;
         const end:   number = data.indexOf(';');
@@ -34,8 +17,13 @@ export class ServiceStorage
         return data.substring(start, end);
     }
 
-    public toBucketPathSize(path: string, size: ImageSize = ImageSize.Medium): string
+    public bucketPath(path: string, size: ImageSize = ImageSize.Medium): string
     {
+        if (size == null || size === ImageSize.None || size === ImageSize.Original)
+        {
+            return path;
+        }
+
         const segments:   Array<string> = path.split('/');
         const fileName:   string        = segments.pop();
         const fileParts:  Array<string> = fileName.split('.');
@@ -45,26 +33,16 @@ export class ServiceStorage
         return segments.join('/');
     }
 
-    public getDownloadUrl(path: string, size?: ImageSize): Observable<string | null>
+    public downloadUrl(path: string, size?: ImageSize): Observable<string | null>
     {
         return path == null ? of(null) : of(path).
         pipe
         (
             map((path: string) =>
-                size == null ? path : this.toBucketPathSize(path, size)
+                this.bucketPath(path, size)
             ),
             map((bucketPath: string) => this.storage.ref(bucketPath)),
             switchMap((ref: AngularFireStorageReference) => ref.getDownloadURL())
         );
-    }
-
-    public static isDataUrl(url: string): boolean
-    {
-        return !!url.match(/^data:image/);
-    }
-
-    public static isWebUrl(url: string): boolean
-    {
-        return !!url.match(/^http:/) || !!url.match(/^https:/);
     }
 }

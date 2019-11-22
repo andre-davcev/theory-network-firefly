@@ -6,10 +6,8 @@ import { Location } from './location.model';
 export interface Event extends Asset
 {
     tagline     : string;
-    imageId     : string;
     coordinates : firestore.GeoPoint;
     location    : Location;
     timeStart   : string;
     timeEnd     : string;
-    bucketPath  : string;
 }

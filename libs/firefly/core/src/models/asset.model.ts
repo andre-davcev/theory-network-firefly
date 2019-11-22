@@ -2,10 +2,9 @@ import { Model } from '@theory/firebase';
 
 export interface Asset extends Model
 {
-    userId?     : string;
+    name        : string;
     private     : boolean;
     draft       : boolean;
-    name        : string;
     description : string;
     bucketPath? : string;
 }

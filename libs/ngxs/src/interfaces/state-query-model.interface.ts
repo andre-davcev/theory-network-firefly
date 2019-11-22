@@ -1,21 +1,19 @@
-import { ServiceBase, ImageSize, OrderBy } from '@theory/firebase';
-import { Query } from '@angular/fire/firestore';
+import { ImageSize, OrderBy } from '@theory/firebase';
 import { firestore } from 'firebase/app';
 
-export interface StateQueryModel<E, S extends ServiceBase<E>>
+export interface StateQueryModel<E>
 {
-    service:          S;
-    query:            Query;
     pageSize:         number;
     orderBy:          string;
     orderByDirection: OrderBy;
 
     initialized:    boolean;
+    loading:        boolean;
     finishedPaging: boolean;
     imageSize:      ImageSize;
 
-    snapshots:      Array<firestore.QueryDocumentSnapshot>;
-    snapshotLookup: Record<string, firestore.QueryDocumentSnapshot>;
-    list:           Array<E>;
-
+    snapshots:      Array<firestore.DocumentSnapshot>;
+    snapshotLookup: Record<string, firestore.DocumentSnapshot>;
+    data:           Array<E>;
+    dataLookup:     Record<string, E>;
 }
