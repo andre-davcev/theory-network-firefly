@@ -1,6 +1,5 @@
 import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { CoreEnum } from '@theory/core';
 import { Event } from '@firefly/core/models';
 
 import { StateUserEventsModel } from './user-events.state.model';
@@ -10,11 +9,13 @@ import {
     ActionUserEventsRemove,
     ActionUserEventsGet,
     ActionUserEventsSync,
-    ActionUserEventsGetData
+    ActionUserEventsGetData,
+    ActionUserEventsReset
 } from './user-events.actions';
 import { StateUser } from '../user';
 import { StateQuery } from '@theory/ngxs';
 import { ServiceEvents } from '@firefly/core/services';
+import { Query } from '@angular/fire/firestore';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 
@@ -22,15 +23,15 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
 {
     constructor
     (
-        store:   Store,
-        service: ServiceEvents
+        private store:   Store,
+        private service: ServiceEvents
     )
     {
         super
         (
-            service.collection('events').ref.where('userId', '==', store.selectSnapshot(StateUser.id)),
             StateUserEventsOptions.defaults,
             {
+                ActionReset   : ActionUserEventsReset,
                 ActionGetData : ActionUserEventsGetData,
                 ActionGet     : ActionUserEventsGet,
                 ActionAdd     : ActionUserEventsAdd,
@@ -38,6 +39,21 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
                 ActionSync    : ActionUserEventsSync
             }
         );
+    }
+
+    @Action(ActionUserEventsReset)
+    reset(context: StateContext<StateUserEventsModel>)
+    {
+        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const query: Query   = userId == null ? undefined : this.service.collection('events').ref.where('userId', '==', userId);
+
+        return super.reset(context, query);
+    }
+
+    @Action(ActionUserEventsGetData)
+    getData(context: StateContext<StateUserEventsModel>)
+    {
+        return super.getData(context);
     }
 
     @Action(ActionUserEventsGet)

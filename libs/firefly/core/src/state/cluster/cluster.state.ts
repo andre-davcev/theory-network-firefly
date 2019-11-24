@@ -1,16 +1,13 @@
 
-import { FormGroup, } from '@angular/forms';
-import { of, forkJoin } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { UpdateFormValue, SetFormPristine } from '@ngxs/form-plugin';
+import { of } from 'rxjs';
+import { Action, State, StateContext, Store } from '@ngxs/store';
 
-import { CoreEnum, CoreUtil } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
+import { CoreEnum } from '@theory/core';
+import { StateDocument } from '@theory/ngxs';
 import { Cluster } from '@firefly/core/models';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/user';
-import { ActionIconGet, ActionIconCreate, StateIcon, ActionIconSetId } from '@firefly/core/state/icon';
+import { ActionIconCreate, StateIcon } from '@firefly/core/state/icon';
 
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
@@ -22,199 +19,138 @@ import {
     ActionClusterCreate,
     ActionClusterSave,
     ActionClusterDelete,
+    ActionClusterSetId,
     ActionClusterIconAdd,
-    ActionClusterIconRemove,
-    ActionClusterSetId
+    ActionClusterIconRemove
 } from './cluster.actions';
-import { ActionClusterSubscribersReset, ActionClusterSubscribersDelete } from '../cluster-subscribers/cluster-subscribers.actions';
+import { ActionClusterSubscribersReset } from '../cluster-subscribers/cluster-subscribers.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../user-clusters';
 import { ActionUserStreamRemove } from '../user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../user-subscriptions/user-subscriptions.actions';
-import { ImageSize } from '@theory/firebase';
+import { firestore } from 'firebase/app';
 
 @State<StateClusterModel>(StateClusterOptions)
 
-export class StateCluster
+export class StateCluster extends StateDocument<Cluster, StateClusterModel>
 {
     constructor
     (
-        private store:   Store,
-        private service: ServiceClusters
-    ) {}
+        private store: Store,
+        service: ServiceClusters
+    )
+    {
+        super
+        (
+            'clusters',
+            StateClusterOptions.defaults,
+            service,
+            {
+                version     : undefined,
+                id          : undefined,
+                dateCreated : undefined,
+                dateUpdated : undefined,
 
-    @Selector() static form(state: StateClusterModel): FormNgxs { return state.form; }
-    @Selector() static formGroup(state: StateClusterModel): FormGroup { return state.formGroup; }
-    @Selector() static formPath(state: StateClusterModel): string { return state.formPath; }
-    @Selector() static isForm(state: StateClusterModel): boolean { return StateCluster.formGroup(state) != null; }
-    @Selector() static data(state: StateClusterModel): Cluster { return StateCluster.form(state).model; }
-    @Selector() static id(state: StateClusterModel): string { return StateCluster.data(state).id; }
-    @Selector() static isNew(state: StateClusterModel): boolean { return  StateCluster.id(state) === CoreEnum.IdNew; }
-    @Selector() static canUpdate(state: StateClusterModel): boolean { return StateCluster.form(state).status === FormNgxsStatus.Valid && StateCluster.form(state).dirty; }
+                userId      : undefined,
+                name        : null,
+                description : null,
+                private     : false,
+                draft       : false,
 
-    @Selector() static icon(state: StateClusterModel): string { return StateCluster.data(state).iconUrl; }
+                tagline         : null,
+                iconId          : undefined,
+                iconUrl         : null,
+                eventCount      : 0,
+                subscriberCount : 0
+            },
+            {
+                ActionReset:  ActionClusterReset,
+                ActionGet:    ActionClusterGet,
+                ActionSet:    ActionClusterSet,
+                ActionPatch:  ActionClusterPatch,
+                ActionCreate: ActionClusterCreate,
+                ActionSave:   ActionClusterSave,
+                ActionDelete: ActionClusterDelete,
+
+                ActionsReset:  [ActionClusterSubscribersReset],
+                ActionsCreate: [ActionIconCreate],
+
+                ActionsQueryAdd:    [ActionUserClustersAdd],
+                ActionsQueryRemove: [ActionUserClustersRemove, ActionUserStreamRemove, ActionUserSubscriptionsRemove],
+                ActionsQuerySync:   [ActionUserClustersSync]
+            }
+        );
+    }
 
     @Action(ActionClusterReset)
-    reset({ patchState, getState, dispatch }: StateContext<StateClusterModel>)
+    reset(context: StateContext<StateClusterModel>)
     {
-        const defaults: StateClusterModel = CoreUtil.clone<StateClusterModel>(StateClusterOptions.defaults);
-
-        patchState(defaults);
-
-        return dispatch
-        ([
-            new SetFormPristine(StateCluster.formPath(getState()))
-        ]);
+        return super.reset(context)
     }
 
     @Action(ActionClusterGet)
-    get({ dispatch }: StateContext<StateClusterModel>, { payload }: ActionClusterGet)
+    get(context: StateContext<StateClusterModel>, action: ActionClusterGet)
     {
-        return this.service.snapshot(payload).
-        pipe
-        (
-            switchMap((object: Cluster) =>
-                dispatch
-                ([
-                    new ActionClusterSet(object),
-                    new ActionIconGet(object.iconId)
-                ])
-            )
-        );
-    }
-
-    @Action(ActionClusterSetId)
-    setId({ dispatch }: StateContext<StateClusterModel>, { payload }: ActionClusterSetId)
-    {
-        const id: string = payload;
-
-        const object: Cluster = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Cluster>(StateClusterOptions.defaults.empty)) :
-            this.store.selectSnapshot(StateUserClusters.lookup)[id]
-
-        return dispatch
-        ([
-            new ActionClusterSet(object),
-            new ActionIconSetId(object.iconId)
-        ]);
+        return super.get(context, action);
     }
 
     @Action(ActionClusterSet)
-    set({ patchState, getState, dispatch }: StateContext<StateClusterModel>, { payload }: ActionClusterSet)
+    set(context: StateContext<StateClusterModel>, action: ActionClusterSet)
     {
-        const object: Cluster = payload;
-
-        return dispatch
-        ([
-            new ActionClusterReset(),
-            new ActionClusterSubscribersReset()
-        ]).
-        pipe
-        (
-            switchMap(() =>
-                this.service.getDownloadUrl(object.iconId, ImageSize.Medium).
-                pipe(tap((url: string) => object.iconUrl = url))
-            ),
-            map(() =>
-                patchState({ formGroup: this.service.formCreate(object) })
-            ),
-
-            switchMap(() =>
-                dispatch(new UpdateFormValue({ value: object, path: StateCluster.formPath(getState())}))
-            )
-        );
+        return super.set(context, action);
     }
 
     @Action(ActionClusterPatch)
-    patch({ dispatch, getState } : StateContext<StateClusterModel>, { payload }: ActionClusterPatch)
+    patch(context : StateContext<StateClusterModel>, action: ActionClusterPatch)
     {
-        const state: StateClusterModel = getState();
-        const data:  Cluster           = StateCluster.data(state);
-        const value: Cluster           = { ...data, ...payload };
-        const path:  string            = StateCluster.formPath(state);
-
-        return dispatch(new UpdateFormValue({ value, path })).
-        pipe
-        (
-            switchMap(() =>
-                data.id === CoreEnum.IdNew ?
-                    of(null) :
-                    dispatch(new ActionUserClustersSync(data))
-            )
-        );
+        return super.patch(context, action);
     }
 
     @Action(ActionClusterCreate)
-    create({ getState, dispatch }: StateContext<StateClusterModel>)
+    create(context: StateContext<StateClusterModel>)
     {
-        const state:     StateClusterModel = getState();
-        const data:      Cluster           = StateCluster.data(state);
-        const iconIsNew: boolean           = this.store.selectSnapshot(StateIcon.isNew);
-
-        return forkJoin
-        (
-            iconIsNew ? dispatch(new ActionIconCreate()) : of(null),
-            this.service.create(data)
-        ).
-        pipe
-        (
-            switchMap(() => dispatch(new ActionUserClustersAdd(data)))
-        );
+        return super.create(context);
     }
 
     @Action(ActionClusterSave)
-    save({ getState, dispatch }: StateContext<StateClusterModel>)
+    save(context: StateContext<StateClusterModel>)
     {
-        const state:     StateClusterModel = getState();
-        const formPath:  string            = StateCluster.formPath(state);
-        const formGroup: FormGroup         = StateCluster.formGroup(state);
-        const isNew:     boolean           = StateCluster.isNew(state);
-        const id:        string            = StateCluster.id(state);
-
-        return isNew ?
-            dispatch(new ActionClusterCreate()) :
-            this.service.patch(id, this.service.changedFields(formGroup)).
-            pipe
-            (
-                switchMap(() => dispatch(new SetFormPristine(formPath)))
-            );
+        return super.save(context);
     }
 
     @Action(ActionClusterDelete)
-    delete({ getState, dispatch }: StateContext<StateClusterModel>)
+    delete(context: StateContext<StateClusterModel>)
     {
-        const data: Cluster = StateCluster.data(getState());
+        return super.delete(context);
+    }
 
-        return this.service.delete(data).
-        pipe
-        (
-            switchMap(() =>
-                dispatch
-                ([
-                    new ActionClusterSubscribersDelete(),
-                    new ActionUserClustersRemove(data.id),
-                    new ActionUserStreamRemove(data.id),
-                    new ActionUserSubscriptionsRemove(data.id),
-                    new ActionClusterReset()
-                ])
-            )
-        );
+    @Action(ActionClusterSetId)
+    setId({ dispatch }: StateContext<StateClusterModel>, { id }: ActionClusterSetId)
+    {
+        const isNew: boolean = id === CoreEnum.IdNew;
+
+        const userId:   string                     = this.store.selectSnapshot(StateUser.id);
+        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserClusters.snapshotLookup)[id];
+
+        const data: Cluster = isNew ?
+            this.service.formDataNew(userId, this.empty) :
+            this.store.selectSnapshot(StateUserClusters.dataLookup)[id];
+
+        return of(isNew) ?
+            dispatch(new ActionClusterPatch(data)) :
+            dispatch(new ActionClusterSet(snapshot, data))
     }
 
     @Action(ActionClusterIconAdd)
     iconAdd({ dispatch }: StateContext<StateClusterModel>)
     {
-        return dispatch
-        ([
-            new ActionClusterPatch({ iconId: this.store.selectSnapshot(StateIcon.id)})
-        ]);
+        const bucketPath: string = this.store.selectSnapshot(StateIcon.bucketPath);
+
+        return dispatch(new ActionClusterPatch({ bucketPath }));
     }
 
     @Action(ActionClusterIconRemove)
-    iconRemove({ dispatch }: StateContext<StateClusterModel>)
+    iconRemove({ dispatch  }: StateContext<StateClusterModel>)
     {
-        return dispatch
-        ([
-            new ActionClusterPatch({ iconId: undefined })
-        ]);
+        return dispatch(new ActionClusterPatch({ bucketPath : undefined }));
     }
 }

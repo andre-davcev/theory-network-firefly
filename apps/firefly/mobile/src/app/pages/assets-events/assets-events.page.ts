@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { StateUserEvents, Event, ActionEventSet } from '@firefly/core';
+import { StateUserEvents, Event, ActionEventSetId } from '@firefly/core';
 import { Observable } from 'rxjs';
 import { Navigate } from '@ngxs/router-plugin';
 import { Pages } from '../pages.enum';
@@ -16,7 +16,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 export class PageAssetsEvents
 {
-    @Select(StateUserEvents.list)  list$: Observable<Array<Event>>;
+    @Select(StateUserEvents.data)  list$: Observable<Array<Event>>;
     @Select(StateUserEvents.found) found: Observable<boolean>;
 
     constructor( private store: Store) { }
@@ -36,6 +36,6 @@ export class PageAssetsEvents
 
     public select(object: Event): void
     {
-        this.store.dispatch(new ActionEventSet(object));
+        this.store.dispatch(new ActionEventSetId(object.id));
     }
 }

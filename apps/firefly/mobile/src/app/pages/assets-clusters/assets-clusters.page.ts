@@ -1,14 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 import { Select, Store } from '@ngxs/store'
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Cluster, StateUserClusters, ActionClusterSet } from '@firefly/core';
+import { Cluster, StateUserClusters, ActionClusterSet, ActionClusterSetId } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
 import { ModalController } from '@ionic/angular';
+import { StateStorage, StorageImage } from '@theory/firebase';
+import { BaseComponent } from '@theory/core';
+import { takeUntil } from 'rxjs/operators';
 
 @Component
 ({
@@ -17,26 +20,45 @@ import { ModalController } from '@ionic/angular';
     styleUrls   : ['./assets-clusters.page.scss']
 })
 
-export class PageAssetsClusters
+export class PageAssetsClusters extends BaseComponent implements OnInit
 {
-    @Select(StateUserClusters.list)  list$:  Observable<Array<Cluster>>;
+    @Select(StateUserClusters.data)  list$:  Observable<Array<Cluster>>;
     @Select(StateUserClusters.found) found$: Observable<boolean>;
+    @Select(StateStorage.images)     images$: Observable<Record<string, StorageImage>>;
 
     @Input() modal: boolean = false;
 
-    constructor(private store: Store, private modalController: ModalController) { }
+    public images: Record<string, StorageImage> = {};
 
-    add(): void
+    constructor
+    (
+        private store:           Store,
+        private modalController: ModalController
+    )
     {
-        this.store.dispatch(new Navigate([Pages.AssetCluster]));
+        super();
     }
 
-    ionViewWillEnter()
+    public ngOnInit(): void
+    {
+        this.images$.
+        pipe(takeUntil(this.destroy$)).
+        subscribe((images: Record<string, StorageImage>) =>
+            this.images = images
+        )
+    }
+
+    public ionViewWillEnter()
     {
         this.store.dispatch
         ([
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark})
         ]);
+    }
+
+    public add(): void
+    {
+        this.store.dispatch(new Navigate([Pages.AssetCluster]));
     }
 
     public cancel(): void
@@ -47,7 +69,7 @@ export class PageAssetsClusters
 
     public select(cluster: Cluster): void
     {
-        this.store.dispatch(new ActionClusterSet(cluster));
+        this.store.dispatch(new ActionClusterSetId(cluster.id));
 
         this.modalController.dismiss();
     }

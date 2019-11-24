@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, from } from 'rxjs';
-import { tap, switchMap, catchError, map } from 'rxjs/operators';
+import { Observable, from, combineLatest } from 'rxjs';
+import { tap, switchMap, catchError, map, filter } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
@@ -11,6 +11,7 @@ import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateCluster, ActionClusterCreate, StateIcon, ActionIconUriSet, ActionIconSetId, ActionClusterPatch, MockIconId } from '@firefly/core';
 import { Pages } from '../pages.enum';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
+import { StateStorage, StorageImage } from '@theory/firebase';
 
 const { Camera } = Plugins;
 
@@ -23,9 +24,12 @@ const { Camera } = Plugins;
 
 export class PageAssetCluster
 {
-    @Select(StateCluster.formGroup) form$:   Observable<FormGroup>;
-    @Select(StateCluster.icon)      icon$:   Observable<string>;
-    @Select(StateDevice.device)     device$: Observable<boolean>;
+    @Select(StateCluster.formGroup)  form$:       Observable<FormGroup>;
+    @Select(StateDevice.device)      device$:     Observable<boolean>;
+    @Select(StateStorage.images)     images$:     Observable<Record<string, StorageImage>>;
+    @Select(StateCluster.bucketPath) bucketPath$: Observable<string>;
+
+    public icon$: Observable<string> = StateStorage.image$(this.images$, this.bucketPath$);
 
     public Pages: any = Pages;
 

@@ -13,8 +13,8 @@ export class ActionEventPatch  { static readonly type = ActionsEvent.Patch;   co
 export class ActionEventCreate { static readonly type = ActionsEvent.Create;  constructor() { } }
 export class ActionEventSave   { static readonly type = ActionsEvent.Save;    constructor() { } }
 export class ActionEventDelete { static readonly type = ActionsEvent.Delete;  constructor() { } }
+export class ActionEventSetId  { static readonly type = ActionsEvent.SetId;   constructor(public id: string = CoreEnum.IdNew) { } }
 
-export class ActionEventSetId       { static readonly type = ActionsEvent.SetId;       constructor(public id: string = CoreEnum.IdNew) { } }
 export class ActionEventImageAdd    { static readonly type = ActionsEvent.ImageAdd;    constructor() { } }
 export class ActionEventImageRemove { static readonly type = ActionsEvent.ImageRemove; constructor() { } }
 export class ActionEventLocationSet { static readonly type = ActionsEvent.LocationSet; constructor(public payload: Result) { } }

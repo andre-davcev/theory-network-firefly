@@ -45,4 +45,9 @@ export class ServiceStorage
             switchMap((ref: AngularFireStorageReference) => ref.getDownloadURL())
         );
     }
+
+    public static idFromPath(bucketPath): string
+    {
+        return bucketPath.split('/').pop().split('.')[0];
+    }
 }

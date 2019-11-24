@@ -1,14 +1,13 @@
-import { SortField } from '@theory/ngxs';
-import { Cluster, UserCluster } from '@firefly/core/models';
+
+import { firestore } from 'firebase/app';
+
+import { Cluster } from '@firefly/core/models';
 
 import { ActionsUserClusters } from './user-clusters.actions.enum';
 
 export class ActionUserClustersReset   { static readonly type = ActionsUserClusters.Reset;   constructor() { } }
-export class ActionUserClustersGetData { static readonly type = ActionsUserClusters.GetData; constructor(public fetch: boolean = true) { } }
+export class ActionUserClustersGetData { static readonly type = ActionsUserClusters.GetData; constructor() { } }
 export class ActionUserClustersGet     { static readonly type = ActionsUserClusters.Get;     constructor() { } }
-export class ActionUserClustersSet     { static readonly type = ActionsUserClusters.Set;     constructor(public payload: Record<string, UserCluster>) { } }
-export class ActionUserClustersSort    { static readonly type = ActionsUserClusters.Sort;    constructor(public payload?: SortField) { } }
-export class ActionUserClustersAdd     { static readonly type = ActionsUserClusters.Add;     constructor(public payload: Cluster) { } }
-export class ActionUserClustersRemove  { static readonly type = ActionsUserClusters.Remove;  constructor(public payload: string) { } }
-export class ActionUserClustersSync    { static readonly type = ActionsUserClusters.Sync;    constructor(public payload: Cluster) { } }
-export class ActionUserClustersDelete  { static readonly type = ActionsUserClusters.Delete;  constructor() { } }
+export class ActionUserClustersAdd     { static readonly type = ActionsUserClusters.Add;     constructor(public snapshot: firestore.DocumentSnapshot, public entity?: Cluster) { } }
+export class ActionUserClustersRemove  { static readonly type = ActionsUserClusters.Remove;  constructor(public id: string) { } }
+export class ActionUserClustersSync    { static readonly type = ActionsUserClusters.Sync;    constructor(public object: Cluster) { } }

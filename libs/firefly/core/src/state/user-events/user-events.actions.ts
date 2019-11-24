@@ -3,6 +3,7 @@ import { Event } from '@firefly/core/models';
 import { ActionsUserEvents } from './user-events.actions.enum';
 import { firestore } from 'firebase/app';
 
+export class ActionUserEventsReset   { static readonly type = ActionsUserEvents.Reset;   constructor() { } }
 export class ActionUserEventsGetData { static readonly type = ActionsUserEvents.GetData; constructor() { } }
 export class ActionUserEventsGet     { static readonly type = ActionsUserEvents.Get;     constructor() { } }
 export class ActionUserEventsAdd     { static readonly type = ActionsUserEvents.Add;     constructor(public snapshot: firestore.DocumentSnapshot, public entity?: Event) { } }

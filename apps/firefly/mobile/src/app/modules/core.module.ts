@@ -42,6 +42,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StateStorage } from '@theory/firebase';
 
 export function createTranslateLoader(http: HttpClient)
 {
@@ -89,6 +90,7 @@ export function createTranslateLoader(http: HttpClient)
             StateMobile,
             StateNotifications,
             StateMap,
+            StateStorage,
 
             StateAlert,
             StateCluster,
