@@ -10,7 +10,7 @@ import { CoreUtil, CoreEnum } from '@theory/core';
 
 export class StateQuery<T extends Model, M extends StateQueryModel<T>>
 {
-    private query:    Query;
+    public  query:    Query;
     private defaults: M;
     private actions:  ActionsQuery;
 
@@ -30,21 +30,21 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
 
     constructor
     (
-        query:    Query,
         defaults: M,
         actions:  ActionsQuery
     )
     {
-        this.query    = query;
         this.defaults = CoreUtil.clone<M>(defaults);
         this.actions  = actions;
     }
 
-    public reset(context: StateContext<M>): Observable<any>
+    public reset(context: StateContext<M>, query?: Query): Observable<any>
     {
         const { patchState } = context;
 
         const defaults: M = CoreUtil.clone<M>(this.defaults);
+
+        this.query = query == null ? this.query : query;
 
         return of(patchState(defaults));
     }
@@ -52,13 +52,17 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
     public getData(context: StateContext<M>): Observable<any>
     {
         const { getState, dispatch } = context;
-        const { ActionGet } = this.actions;
+        const { ActionReset, ActionGet } = this.actions;
 
         const initialized: boolean = StateQuery.initialized(getState());
 
         return initialized ?
             of(null) :
-            dispatch(new ActionGet());
+            dispatch(new ActionReset()).
+            pipe
+            (
+                switchMap(() => dispatch(new ActionGet()))
+            );
     }
 
     public get(context: StateContext<M>): Observable<any>

@@ -1,5 +1,6 @@
 export interface ActionsQuery
 {
+    ActionReset:   any;
     ActionGetData: any;
     ActionGet:     any;
     ActionAdd:     any;

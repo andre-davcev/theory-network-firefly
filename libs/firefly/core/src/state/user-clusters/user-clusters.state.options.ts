@@ -1,9 +1,9 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { TypeOf } from '@theory/core';
 import { Default } from '@theory/ngxs';
 
 import { StateUserClustersModel } from './user-clusters.state.model';
+import { OrderBy, ImageSize } from '@theory/firebase';
 
 export const StateUserClustersOptions: StoreOptions<StateUserClustersModel> =
 {
@@ -11,22 +11,18 @@ export const StateUserClustersOptions: StoreOptions<StateUserClustersModel> =
 
     defaults :
     {
-        data:          {},
-        lookup:        {},
-        keys:          [],
-        list:          [],
-        offset:        0,
-        pageSize:      Default.PageSize,
-        initialized:   false,
-        sortField:     'name',
-        sortAscending: true,
-        sortByEntity:  false,
-        imageIdKey:    'iconId',
+        pageSize:         Default.PageSize,
+        orderBy:          'name',
+        orderByDirection: OrderBy.Ascending,
 
-        sortFields:
-        {
-            name        : TypeOf.String,
-            dateCreated : TypeOf.String
-        }
+        initialized:    false,
+        loading:        false,
+        finishedPaging: false,
+        imageSize:      ImageSize.Small,
+
+        snapshots:      [],
+        snapshotLookup: {},
+        data:           [],
+        dataLookup:     {}
     }
 };

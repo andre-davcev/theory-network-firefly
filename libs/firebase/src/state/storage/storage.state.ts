@@ -8,9 +8,10 @@ import {
 } from './storage.actions';
 import { StateStorageOptions } from './storage.state.options';
 import { StorageImage } from '@theory/firebase/interfaces';
-import { tap } from 'rxjs/operators';
-import { Observable, forkJoin, of } from 'rxjs';
+import { tap, filter, map } from 'rxjs/operators';
+import { Observable, forkJoin, of, combineLatest } from 'rxjs';
 import { ServiceStorage } from '@theory/firebase/services';
+import { ImageSize } from '@theory/firebase/enums';
 
 @State<StateStorageModel>(StateStorageOptions)
 
@@ -18,6 +19,16 @@ export class StateStorage
 {
     @Selector() static image(state: StateStorageModel):  StorageImage                 {return state.image;}
     @Selector() static images(state: StateStorageModel): Record<string, StorageImage> {return state.images;}
+
+    public static image$(images$: Observable<Record<string, StorageImage>>, bucketPath$: Observable<string>, size: ImageSize = ImageSize.Medium): Observable<string>
+    {
+        return combineLatest([images$, bucketPath$]).
+        pipe
+        (
+            filter(([images, bucketPath]) => images[bucketPath] != null),
+            map(([images, bucketPath]) => images[bucketPath][size])
+        );
+    }
 
     constructor(private service: ServiceStorage) { }
 

@@ -7,13 +7,14 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, ActionEventTimeSet, StateCluster, ActionImageSetId, ActionImageUriSet, ActionEventImageAdd } from '@firefly/core';
+import { StateEvent, ActionEventCreate, StateCluster, ActionImageSetId, ActionImageUriSet, ActionEventImageAdd, ActionEventPatch } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
 import { MockImageId } from '@firefly/core/mocks';
 import { BaseComponent } from '@theory/core';
+import { StateStorage, StorageImage } from '@theory/firebase';
 
 const { Camera } = Plugins;
 
@@ -32,9 +33,13 @@ export class PageAssetEvent extends BaseComponent
     @Select(StateEvent.timeStart)    timeStart$:    Observable<string>;
     @Select(StateEvent.timeEnd)      timeEnd$:      Observable<string>;
     @Select(StateEvent.timeEndValid) timeEndValid$: Observable<boolean>;
-    @Select(StateCluster.icon)       icon$:         Observable<string>;
-    @Select(StateEvent.image)        image$:        Observable<string>;
     @Select(StateDevice.device)      device$:       Observable<boolean>;
+    @Select(StateStorage.images)     images$:       Observable<Record<string, StorageImage>>;
+    @Select(StateCluster.bucketPath) iconPath$:     Observable<string>;
+    @Select(StateEvent.bucketPath)   imagePath$:    Observable<string>;
+
+    public icon$:  Observable<string> = StateStorage.image$(this.images$, this.iconPath$);
+    public image$: Observable<string> = StateStorage.image$(this.images$, this.imagePath$);
 
     public Pages: any = Pages;
 
@@ -122,11 +127,11 @@ export class PageAssetEvent extends BaseComponent
         }
     }
 
-    public timeChanged(event: CustomEvent, key: 'start' | 'end'): void
+    public timeChanged(event: CustomEvent, key: string): void
     {
         const time: string = event.detail.value;
 
-        this.store.dispatch(new ActionEventTimeSet(key, time));
+        this.store.dispatch(new ActionEventPatch({ [key]: time }));
     }
 
     public save(): void

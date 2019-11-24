@@ -19,7 +19,7 @@
         <ion-item *ngFor="let cluster of list$ | async"
                   (click)="select(cluster)">
             <ion-avatar slot="start">
-                <img [src]="cluster.iconUrlSmall">
+                <img [src]="images[cluster.bucketPath].small">
             </ion-avatar>
 
             <ion-label>

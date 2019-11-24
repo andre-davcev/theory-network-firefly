@@ -1,5 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 import { StateClusterModel } from './cluster.state.model';
+import { CoreUtil } from '@theory/core';
+import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateClusterOptions: StoreOptions<StateClusterModel> =
 {
@@ -7,35 +9,8 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
 
     defaults :
     {
-        empty :
-        {
-            version     : undefined,
-            id          : undefined,
-            dateCreated : undefined,
-            dateUpdated : undefined,
-
-            userId      : undefined,
-            name        : null,
-            description : null,
-            private     : false,
-            draft       : false,
-
-            tagline         : null,
-            iconId          : undefined,
-            iconUrl         : null,
-            eventCount      : 0,
-            subscriberCount : 0
-        },
-
-        form :
-        {
-            model  : {},
-            dirty  : false,
-            status : '',
-            errors : {}
-        },
-
-        formGroup : undefined,
-        formPath  : 'cluster.form'
+        snapshot  : undefined,
+        form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
+        formGroup : undefined
     }
 };

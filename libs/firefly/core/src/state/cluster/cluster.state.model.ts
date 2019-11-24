@@ -1,7 +1,7 @@
 import { Cluster } from '@firefly/core/models';
-import { StateAssetModel } from '@firefly/core/interfaces';
+import { StateDocumentModel } from '@theory/ngxs';
 
-export interface StateClusterModel extends StateAssetModel<Cluster>
+export interface StateClusterModel extends StateDocumentModel<Cluster>
 {
 
 }

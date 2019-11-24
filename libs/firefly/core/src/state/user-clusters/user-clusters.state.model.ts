@@ -1,7 +1,7 @@
-import { StateReferenceTableModel } from '@theory/ngxs';
-import { Cluster, UserCluster } from '@firefly/core/models';
+import { Cluster } from '@firefly/core/models';
+import { StateQueryModel } from '@theory/ngxs';
 
-export interface StateUserClustersModel extends StateReferenceTableModel<UserCluster, Cluster>
+export interface StateUserClustersModel extends StateQueryModel<Cluster>
 {
 
 }

@@ -1,175 +1,82 @@
-import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { CoreUtil, TypeOf } from '@theory/core';
-import { Cluster, UserCluster } from '@firefly/core/models';
-import { ServiceUserClusters, ServiceClusters } from '@firefly/core/services';
-import { StateReferenceTable } from '@theory/ngxs';
+import { Cluster } from '@firefly/core/models';
+import { ServiceClusters } from '@firefly/core/services';
+import { StateQuery } from '@theory/ngxs';
 
 import { StateUserClustersModel } from './user-clusters.state.model';
 import { StateUserClustersOptions } from './user-clusters.state.options';
 import {
     ActionUserClustersAdd,
-    ActionUserClustersReset,
     ActionUserClustersRemove,
     ActionUserClustersGetData,
-    ActionUserClustersSort,
     ActionUserClustersGet,
-    ActionUserClustersSet,
-    ActionUserClustersDelete,
-    ActionUserClustersSync
+    ActionUserClustersSync,
+    ActionUserClustersReset
 } from './user-clusters.actions';
 import { StateUser } from '../user/user.state';
+import { Query } from '@angular/fire/firestore';
 
 @State<StateUserClustersModel>(StateUserClustersOptions)
 
-export class StateUserClusters extends StateReferenceTable<UserCluster, Cluster, StateUserClustersModel>
+export class StateUserClusters extends StateQuery<Cluster, StateUserClustersModel>
 {
-    @Selector() static data(state: StateUserClustersModel):          Record<string, UserCluster> { return state.data; }
-    @Selector() static keys(state: StateUserClustersModel):          Array<string>               { return state.keys; }
-    @Selector() static lookup(state: StateUserClustersModel):        Record<string, Cluster>     { return state.lookup; }
-    @Selector() static list(state: StateUserClustersModel):          Array<Cluster>              { return state.list; }
-    @Selector() static offset(state: StateUserClustersModel):        number                      { return state.offset; }
-    @Selector() static pageSize(state: StateUserClustersModel):      number                      { return state.pageSize; }
-    @Selector() static initialized(state: StateUserClustersModel):   boolean                     { return state.initialized; }
-    @Selector() static sortField(state: StateUserClustersModel):     string                      { return state.sortField; }
-    @Selector() static sortAscending(state: StateUserClustersModel): boolean                     { return state.sortAscending; }
-    @Selector() static sortFields(state: StateUserClustersModel):    Record<string, TypeOf>      { return state.sortFields; }
-    @Selector() static sortType(state: StateUserClustersModel):      TypeOf                      { return state.sortFields[state.sortField]; }
-    @Selector() static sort(state: StateUserClustersModel):          boolean                     { return Object.keys(StateUserClusters.sortFields(state)).length > 0; }
-    @Selector() static count(state: StateUserClustersModel):         number                      { return Object.keys(StateUserClusters.data(state)).length; }
-    @Selector() static found(state: StateUserClustersModel):         boolean                     { return StateUserClusters.count(state) > 0; }
-    @Selector() static getAll(state: StateUserClustersModel):        boolean                     { return StateUserClusters.sort(state) && state.sortByEntity; }
-
     constructor
     (
-        private store:    Store,
-        private service:  ServiceUserClusters,
-        private clusters: ServiceClusters
+        private store:   Store,
+        private service: ServiceClusters
     )
     {
-        super();
+        super
+        (
+            StateUserClustersOptions.defaults,
+            {
+                ActionReset   : ActionUserClustersReset,
+                ActionGetData : ActionUserClustersGetData,
+                ActionGet     : ActionUserClustersGet,
+                ActionAdd     : ActionUserClustersAdd,
+                ActionRemove  : ActionUserClustersRemove,
+                ActionSync    : ActionUserClustersSync
+            }
+        );
     }
 
     @Action(ActionUserClustersReset)
-    reset({ patchState, getState }: StateContext<StateUserClustersModel>)
+    reset(context: StateContext<StateUserClustersModel>)
     {
-        const defaults: StateUserClustersModel = CoreUtil.clone<StateUserClustersModel>(StateUserClustersOptions.defaults);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const query: Query   = userId == null ? undefined : this.service.collection('clusters').ref.where('userId', '==', userId);
 
-        return patchState(defaults);
+        return super.reset(context, query);
     }
 
     @Action(ActionUserClustersGetData)
-    getData({ dispatch, patchState, getState }: StateContext<StateUserClustersModel>, { fetch }: ActionUserClustersGetData)
+    getData(context: StateContext<StateUserClustersModel>)
     {
-        const state: StateUserClustersModel = getState();
-
-        const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserClusters.initialized(state);
-
-        return initialized ? of({}) : dispatch
-        ([
-            new ActionUserClustersReset()
-        ]).
-        pipe
-        (
-            switchMap(() =>
-                this.service.get(id)
-            ),
-            switchMap((data: Record<string, UserCluster>) =>
-                dispatch(new ActionUserClustersSet(data))
-            ),
-            switchMap(() =>
-                StateUserClusters.getAll(state) ? of(null) : dispatch(new ActionUserClustersSort())
-            ),
-            switchMap(() =>
-                fetch ? dispatch(new ActionUserClustersGet()) : of(null)
-            ),
-            map(() =>
-                patchState({ initialized: true })
-            )
-        );
+        return super.getData(context);
     }
 
     @Action(ActionUserClustersGet)
-    get({ getState, patchState }: StateContext<StateUserClustersModel>)
+    get(context: StateContext<StateUserClustersModel>)
     {
-        return super.page
-        (
-            getState(),
-            this.clusters
-        ).
-        pipe
-        (
-            map((partial: Partial<StateUserClustersModel>) =>
-                patchState(partial)
-            )
-        );
-    }
-
-    @Action(ActionUserClustersSet)
-    set({ patchState }: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersSet)
-    {
-        return patchState({ data: payload == null ? {} : payload });
-    }
-
-    @Action(ActionUserClustersSort)
-    sortData({ getState, patchState }: StateContext<StateUserClustersModel>)
-    {
-        const keys: Array<string> = this.sort(getState());
-
-        patchState({ keys });
+        return super.get(context);
     }
 
     @Action(ActionUserClustersAdd)
-    add({ patchState, getState }: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersAdd)
+    add(context: StateContext<StateUserClustersModel>, action: ActionUserClustersAdd)
     {
-        const entity: Cluster = payload;
-
-        const partial: Partial<StateUserClustersModel> =
-        this.addData
-        (
-            getState(),
-            entity
-        );
-
-        patchState(partial);
+        return super.add(context, action);
     }
 
     @Action(ActionUserClustersRemove)
-    remove({ patchState, getState }: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersRemove)
+    remove(context: StateContext<StateUserClustersModel>, action: ActionUserClustersRemove)
     {
-        const partial: Partial<StateUserClustersModel> =
-        this.removeData
-        (
-            getState(),
-            payload
-        );
-
-        patchState(partial);
+        return super.remove(context, action);
     }
 
     @Action(ActionUserClustersSync)
-    sync({ patchState, getState}: StateContext<StateUserClustersModel>, { payload }: ActionUserClustersSync)
+    sync(context: StateContext<StateUserClustersModel>, action: ActionUserClustersSync)
     {
-        const after: Cluster = payload;
-
-        const partial: Partial<StateUserClustersModel> = this.syncData
-        (
-            getState(),
-            after
-        );
-
-        patchState(partial);
-    }
-
-    @Action(ActionUserClustersDelete)
-    delete({ dispatch }: StateContext<StateUserClustersModel>)
-    {
-        return dispatch
-        ([
-            new ActionUserClustersReset()
-        ]);
+        return super.sync(context, action);
     }
 }
