@@ -9,7 +9,8 @@ import {
     ActionUserEventsAdd,
     ActionUserEventsRemove,
     ActionUserEventsGet,
-    ActionUserEventsSync
+    ActionUserEventsSync,
+    ActionUserEventsGetData
 } from './user-events.actions';
 import { StateUser } from '../user';
 import { StateQuery } from '@theory/ngxs';
@@ -28,7 +29,14 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
         super
         (
             service.collection('events').ref.where('userId', '==', store.selectSnapshot(StateUser.id)),
-            StateUserEventsOptions.defaults
+            StateUserEventsOptions.defaults,
+            {
+                ActionGetData : ActionUserEventsGetData,
+                ActionGet     : ActionUserEventsGet,
+                ActionAdd     : ActionUserEventsAdd,
+                ActionRemove  : ActionUserEventsRemove,
+                ActionSync    : ActionUserEventsSync
+            }
         );
     }
 
@@ -39,38 +47,20 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     }
 
     @Action(ActionUserEventsAdd)
-    add(context: StateContext<StateUserEventsModel>, payload: ActionUserEventsAdd)
+    add(context: StateContext<StateUserEventsModel>, action: ActionUserEventsAdd)
     {
-        return super.add(context, payload);
+        return super.add(context, action);
     }
 
     @Action(ActionUserEventsRemove)
-    remove({ patchState, getState }: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsRemove)
+    remove(context: StateContext<StateUserEventsModel>, action: ActionUserEventsRemove)
     {
-        const partial: Partial<StateUserEventsModel> =
-        this.removeData
-        (
-            getState(),
-            payload
-        );
-
-        patchState(partial);
+        return super.remove(context, action);
     }
 
     @Action(ActionUserEventsSync)
-    sync({ patchState, getState}: StateContext<StateUserEventsModel>, { payload }: ActionUserEventsSync)
+    sync(context: StateContext<StateUserEventsModel>, action: ActionUserEventsSync)
     {
-        const after: Event = payload;
-
-        if (after.id !== CoreEnum.IdNew)
-        {
-            const partial: Partial<StateUserEventsModel> = this.syncData
-            (
-                getState(),
-                after
-            );
-
-            patchState(partial);
-        }
+        return super.sync(context, action);
     }
 }
