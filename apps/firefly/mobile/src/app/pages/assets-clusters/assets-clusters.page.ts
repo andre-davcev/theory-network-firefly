@@ -22,8 +22,8 @@ import { takeUntil } from 'rxjs/operators';
 
 export class PageAssetsClusters extends BaseComponent implements OnInit
 {
-    @Select(StateUserClusters.data)  list$:  Observable<Array<Cluster>>;
-    @Select(StateUserClusters.found) found$: Observable<boolean>;
+    @Select(StateUserClusters.data())  list$:  Observable<Array<Cluster>>;
+    @Select(StateUserClusters.found()) found$: Observable<boolean>;
     @Select(StateStorage.images)     images$: Observable<Record<string, StorageImage>>;
 
     @Input() modal: boolean = false;
@@ -45,7 +45,11 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
         pipe(takeUntil(this.destroy$)).
         subscribe((images: Record<string, StorageImage>) =>
             this.images = images
-        )
+        );
+
+        this.found$.subscribe(list => console.log(list));
+        this.list$.subscribe(list => console.log(list));
+        this.images$.subscribe(list => console.log(list));
     }
 
     public ionViewWillEnter()

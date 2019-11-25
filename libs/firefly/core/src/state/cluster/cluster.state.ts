@@ -129,11 +129,11 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
         const isNew: boolean = id === CoreEnum.IdNew;
 
         const userId:   string                     = this.store.selectSnapshot(StateUser.id);
-        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserClusters.snapshotLookup)[id];
+        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserClusters.snapshotLookup())[id];
 
         const data: Cluster = isNew ?
             this.service.formDataNew(userId, this.empty) :
-            this.store.selectSnapshot(StateUserClusters.dataLookup)[id];
+            this.store.selectSnapshot(StateUserClusters.dataLookup())[id];
 
         return of(isNew) ?
             dispatch(new ActionClusterPatch(data)) :

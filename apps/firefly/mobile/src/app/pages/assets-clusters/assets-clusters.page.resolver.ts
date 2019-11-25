@@ -10,7 +10,7 @@ import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobil
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetsClusters implements Resolve<void>
 {
-    @Select(StateUserClusters.initialized) initialized$: Observable<boolean>;
+    @Select(StateUserClusters.initialized()) initialized$: Observable<boolean>;
 
     constructor(private store: Store) {}
 
