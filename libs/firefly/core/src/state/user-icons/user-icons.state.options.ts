@@ -21,7 +21,7 @@ export const StateUserIconsOptions: StoreOptions<StateUserIconsModel> =
         sortField:     'name',
         sortAscending: true,
         sortByEntity:  false,
-        imageIdKey:    'id',
+        imageIdKey:    'bucketPath',
 
         sortFields:
         {

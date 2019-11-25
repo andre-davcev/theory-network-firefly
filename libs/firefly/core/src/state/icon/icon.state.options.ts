@@ -22,6 +22,7 @@ export const StateIconOptions: StoreOptions<StateIconModel> =
             draft       : false,
 
             bucketPath : null,
+            iconId          : undefined,
             mediaType  : null,
             url        : null
         },

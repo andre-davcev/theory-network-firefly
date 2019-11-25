@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import { Navigate } from '@ngxs/router-plugin';
+import { Observable } from 'rxjs';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
+
+import { Pages } from '../pages.enum';
+import { StateUserIcons, Icon } from '@firefly/core';
 
 @Component
 ({
@@ -13,17 +18,22 @@ import { Store } from '@ngxs/store';
 
 export class PageAssetsIcons
 {
-    public icons: Array<string> =
+    @Select(StateUserIcons.list) icons$: Observable<Array<Icon>>;
+    /*public icons: Array<string> =
     [
         'assets/icons/temp-coffee-icon-blue.png',
         'assets/icons/temp-coffee-icon-pink.png',
         'assets/icons/temp-coffee-icon-brown.png'
-    ];
+    ];*/
 
     constructor(private store: Store) { }
 
     ionViewWillEnter()
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+    }
+
+    navigate(): void{
+      this.store.dispatch(new Navigate([Pages.AssetIcon]));
     }
 }
