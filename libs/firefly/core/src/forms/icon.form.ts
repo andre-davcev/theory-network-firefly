@@ -21,6 +21,7 @@ export class FormIcon extends FormGenerator<Icon>
           description : null,
           private     : true,
           mediaType   : null,
+          iconId          : null,
           bucketPath  : null
         };
     }
