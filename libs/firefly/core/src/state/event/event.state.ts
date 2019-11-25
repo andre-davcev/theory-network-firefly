@@ -82,11 +82,11 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         );
     }
 
-    @Selector() static location(state: StateEventModel): Location { return StateEvent.data(state).location; }
+    @Selector() static location(state: StateEventModel): Location { return StateEvent.data()(state).location; }
     @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.location(state) != null; }
     @Selector() static locations(state: StateEventModel): Array<Location> { return [ StateEvent.location(state) ]; }
-    @Selector() static timeStart(state: StateEventModel): string { return StateEvent.data(state).timeStart; }
-    @Selector() static timeEnd(state: StateEventModel): string { return StateEvent.data(state).timeEnd; }
+    @Selector() static timeStart(state: StateEventModel): string { return StateEvent.data()(state).timeStart; }
+    @Selector() static timeEnd(state: StateEventModel): string { return StateEvent.data()(state).timeEnd; }
     @Selector() static timeEndValid(state: StateEventModel): boolean
     {
         const timeStart: Date = new Date(StateEvent.timeStart(state));

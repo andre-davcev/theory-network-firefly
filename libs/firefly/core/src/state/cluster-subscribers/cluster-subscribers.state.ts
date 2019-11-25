@@ -66,7 +66,7 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     {
         const state: StateClusterSubscribersModel = getState();
 
-        const id:          string  = this.store.selectSnapshot(StateCluster.id);
+        const id:          string  = this.store.selectSnapshot(StateCluster.id());
         const initialized: boolean = StateClusterSubscribers.initialized(state);
 
         return initialized ? of({}) : dispatch
@@ -171,7 +171,7 @@ export class StateClusterSubscribers extends StateReferenceTable<ClusterSubscrib
     {
         return dispatch
         ([
-            new ActionUserSubscriptionsRemove(this.store.selectSnapshot(StateCluster.id)),
+            new ActionUserSubscriptionsRemove(this.store.selectSnapshot(StateCluster.id())),
             new ActionClusterSubscribersReset()
         ]);
     }

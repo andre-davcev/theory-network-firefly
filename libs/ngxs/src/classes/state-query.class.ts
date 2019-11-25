@@ -1,4 +1,4 @@
-import { StateContext, Selector } from '@ngxs/store';
+import { StateContext, createSelector } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
 
 import { StateQueryModel, ActionsQuery } from '../interfaces';
@@ -14,19 +14,19 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
     private defaults: M;
     private actions:  ActionsQuery;
 
-    @Selector() static initialized(state: any):      boolean                                    { return state.initialized; }
-    @Selector() static loading(state: any):          boolean                                    { return state.loading; }
-    @Selector() static pageSize(state: any):         number                                     { return state.pageSize; }
-    @Selector() static finishedPaging(state: any):   boolean                                    { return state.finishedPaging; }
-    @Selector() static orderBy(state: any):          string                                     { return state.orderBy; }
-    @Selector() static orderByDirection(state: any): OrderBy                                    { return state.orderByDirection; }
-    @Selector() static imageSize(state: any):        ImageSize                                  { return state.imageSize; }
-    @Selector() static snapshots(state: any):        Array<firestore.DocumentSnapshot>          { return state.snapshots; }
-    @Selector() static snapshotLookup(state: any):   Record<string, firestore.DocumentSnapshot> { return state.snapshotLookup; }
-    @Selector() static data(state: any):             Array<any>                                 { return state.data; }
-    @Selector() static dataLookup(state: any):       Record<string, any>                        { return state.dataLookup; }
-    @Selector() static count(state: any):            number                                     { return StateQuery.snapshots(state).length; }
-    @Selector() static found(state: any):            boolean                                    { return StateQuery.count(state) > 0; }
+    public static initialized()      { return createSelector([this], (state: any) => { return state.initialized as boolean; }); }
+    public static loading()          { return createSelector([this], (state: any) => { return state.loading as boolean; }); }
+    public static pageSize()         { return createSelector([this], (state: any) => { return state.pageSize as number; }); }
+    public static finishedPaging()   { return createSelector([this], (state: any) => { return state.finishedPaging as boolean; }); }
+    public static orderBy()          { return createSelector([this], (state: any) => { return state.orderBy as string; }); }
+    public static orderByDirection() { return createSelector([this], (state: any) => { return state.orderByDirection as OrderBy; }); }
+    public static imageSize()        { return createSelector([this], (state: any) => { return state.imageSize as ImageSize; }); }
+    public static snapshots()        { return createSelector([this], (state: any) => { return state.snapshots as Array<firestore.DocumentSnapshot>; }); }
+    public static snapshotLookup()   { return createSelector([this], (state: any) => { return state.snapshotLookup as Record<string, firestore.DocumentSnapshot>; }); }
+    public static data()             { return createSelector([this], (state: any) => { return state.data as Array<any>; }); }
+    public static dataLookup()       { return createSelector([this], (state: any) => { return state.dataLookup as Record<string, any>; }); }
+    public static count()            { return createSelector([this], (state: any) => { return state.snapshots.length as number; }); }
+    public static found()            { return createSelector([this], (state: any) => { return state.snapshots.length > 0 as boolean; }); }
 
     constructor
     (
@@ -54,7 +54,8 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
         const { getState, dispatch } = context;
         const { ActionReset, ActionGet } = this.actions;
 
-        const initialized: boolean = StateQuery.initialized(getState());
+        const initialized: boolean = StateQuery.initialized()(getState());
+        console.log(initialized);
 
         return initialized ?
             of(null) :
@@ -171,7 +172,7 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
 
             snapshots,
             data
-        } as M))
+        } as M));
     }
 
     public remove(context: StateContext<M>, action: any): Observable<any>
