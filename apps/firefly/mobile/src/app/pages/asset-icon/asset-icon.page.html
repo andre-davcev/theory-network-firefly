@@ -9,15 +9,18 @@
 
 
 <ion-content>
-    <form novalidate [formGroup]="form$ | async">
+    <form novalidate
+          [formGroup]="form$ | async"
+          ngxsForm="icon.form">
         <app-item-header [form]="form$ | async"
+                         [iconUrl]="url$ | async"
                          title="name"
                          [titlePlaceholder]="'page.assets-icon.namePlaceholder' | translate"
                          subtitle="description"
                          [subtitlePlaceholder]="'page.assets-icon.descriptionPlaceholder' | translate"
-                         icon="url"
                          [iconPlaceholder]="'page.assets-icon.iconPlaceholder' | translate"
-                         iconUrlEmpty="assets/icons/avatar-empty.svg">
+                         iconUrlEmpty="assets/icons/avatar-empty.svg"
+                         (iconClicked)="navigate(Pages.IconSelector)">
         </app-item-header>
 <!--
         <app-item-header icon="assets/icons/temp-coffee-icon-blue.png"
