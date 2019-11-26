@@ -28,6 +28,7 @@ import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUse
 import { ActionClusterReset } from '../cluster';
 import { firestore } from 'firebase/app';
 import { ServiceEvents } from '@firefly/core/services';
+import { ActionStorageRemoveNew } from '@theory/firebase';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -72,7 +73,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
-                ActionsReset:  [ActionClusterReset, ActionMapSearchResultClear],
+                ActionsReset:  [ActionClusterReset, ActionStorageRemoveNew, ActionMapSearchResultClear],
                 ActionsCreate: [ActionImageCreate],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
