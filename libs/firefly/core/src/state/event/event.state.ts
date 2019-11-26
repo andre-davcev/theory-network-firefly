@@ -144,15 +144,13 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         const isNew: boolean = id === CoreEnum.IdNew;
 
         const userId:   string                     = this.store.selectSnapshot(StateUser.id);
-        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserEvents.snapshotLookup)[id];
+        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserEvents.snapshotLookup())[id];
 
         const data: Event = isNew ?
             this.service.formDataNew(userId, this.empty) :
-            this.store.selectSnapshot(StateUserEvents.dataLookup)[id];
+            this.store.selectSnapshot(StateUserEvents.dataLookup())[id];
 
-        return of(isNew) ?
-            dispatch(new ActionEventPatch(data)) :
-            dispatch(new ActionEventSet(snapshot, data))
+        return dispatch(new ActionEventSet(snapshot, data));
     }
 
     @Action(ActionEventImageAdd)

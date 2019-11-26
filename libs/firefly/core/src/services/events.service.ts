@@ -23,18 +23,22 @@ export class ServiceEvents extends ServiceFirestore<Event>
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
         {
-            const form:  FormGroup = control.parent as FormGroup;
-            const start: string    = form.get('timeStart').value;
-            const end:   string    = form.get('timeEnd').value;
+            const form: FormGroup = control.parent as FormGroup;
 
             let valid: boolean = false;
 
-            if (start != null && end != null)
+            if (form != null)
             {
-                const timeStart: Date = new Date(start);
-                const timeEnd:   Date = new Date(end);
+                const start: string    = form.get('timeStart').value;
+                const end:   string    = form.get('timeEnd').value;
 
-                valid = timeEnd.getTime() > timeStart.getTime();
+                if (start != null && end != null)
+                {
+                    const timeStart: Date = new Date(start);
+                    const timeEnd:   Date = new Date(end);
+
+                    valid = timeEnd.getTime() > timeStart.getTime();
+                }
             }
 
             return valid ? null : { timeEndInvalid: true };

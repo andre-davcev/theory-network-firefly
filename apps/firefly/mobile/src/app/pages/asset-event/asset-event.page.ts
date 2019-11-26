@@ -27,16 +27,16 @@ const { Camera } = Plugins;
 
 export class PageAssetEvent extends BaseComponent
 {
-    @Select(StateEvent.formGroup)    form$:         Observable<FormGroup>;
-    @Select(StateEvent.isNew)        isNew$:        Observable<boolean>;
-    @Select(StateEvent.canUpdate)    canUpdate$:    Observable<boolean>;
-    @Select(StateEvent.timeStart)    timeStart$:    Observable<string>;
-    @Select(StateEvent.timeEnd)      timeEnd$:      Observable<string>;
-    @Select(StateEvent.timeEndValid) timeEndValid$: Observable<boolean>;
-    @Select(StateDevice.device)      device$:       Observable<boolean>;
-    @Select(StateStorage.images)     images$:       Observable<Record<string, StorageImage>>;
-    @Select(StateCluster.bucketPath) iconPath$:     Observable<string>;
-    @Select(StateEvent.bucketPath)   imagePath$:    Observable<string>;
+    @Select(StateEvent.formGroup())    form$:         Observable<FormGroup>;
+    @Select(StateEvent.isNew())        isNew$:        Observable<boolean>;
+    @Select(StateEvent.canUpdate())    canUpdate$:    Observable<boolean>;
+    @Select(StateEvent.timeStart)      timeStart$:    Observable<string>;
+    @Select(StateEvent.timeEnd)        timeEnd$:      Observable<string>;
+    @Select(StateEvent.timeEndValid)   timeEndValid$: Observable<boolean>;
+    @Select(StateDevice.device)        device$:       Observable<boolean>;
+    @Select(StateStorage.images)       images$:       Observable<Record<string, StorageImage>>;
+    @Select(StateCluster.bucketPath()) iconPath$:     Observable<string>;
+    @Select(StateEvent.bucketPath())   imagePath$:    Observable<string>;
 
     public icon$:  Observable<string> = StateStorage.image$(this.images$, this.iconPath$);
     public image$: Observable<string> = StateStorage.image$(this.images$, this.imagePath$);
