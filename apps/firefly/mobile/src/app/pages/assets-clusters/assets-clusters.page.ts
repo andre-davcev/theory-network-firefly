@@ -24,7 +24,7 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
 {
     @Select(StateUserClusters.data())  list$:  Observable<Array<Cluster>>;
     @Select(StateUserClusters.found()) found$: Observable<boolean>;
-    @Select(StateStorage.images)     images$: Observable<Record<string, StorageImage>>;
+    @Select(StateStorage.images)       images$: Observable<Record<string, StorageImage>>;
 
     @Input() modal: boolean = false;
 
@@ -46,10 +46,6 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
         subscribe((images: Record<string, StorageImage>) =>
             this.images = images
         );
-
-        this.found$.subscribe(list => console.log(list));
-        this.list$.subscribe(list => console.log(list));
-        this.images$.subscribe(list => console.log(list));
     }
 
     public ionViewWillEnter()
@@ -69,7 +65,6 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
     {
         this.modalController.dismiss();
     }
-
 
     public select(cluster: Cluster): void
     {

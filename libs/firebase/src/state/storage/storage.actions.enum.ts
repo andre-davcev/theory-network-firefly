@@ -1,5 +1,7 @@
 export enum ActionsStorage
 {
-    GetUrl  = '[Storage] Get Url',
-    GetUrls = '[Storage] Get Urls'
+    UrlGet    = '[Storage] Url Get',
+    UrlsGet   = '[Storage] Urls Get',
+    UrlSet    = '[Storage] Url Set',
+    RemoveNew = '[Storage] Remove New'
 }

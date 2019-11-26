@@ -2,7 +2,7 @@ import { StateContext, createSelector } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
 
 import { StateQueryModel, ActionsQuery } from '../interfaces';
-import { ImageSize, Model, ActionStorageGetUrls, OrderBy } from '@theory/firebase';
+import { ImageSize, Model, ActionStorageUrlsGet, OrderBy } from '@theory/firebase';
 import { Query } from '@angular/fire/firestore';
 import { firestore } from 'firebase/app';
 import { map, tap, switchMap } from 'rxjs/operators';
@@ -14,19 +14,33 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
     private defaults: M;
     private actions:  ActionsQuery;
 
-    public static initialized()      { return createSelector([this], (state: any) => { return state.initialized as boolean; }); }
-    public static loading()          { return createSelector([this], (state: any) => { return state.loading as boolean; }); }
-    public static pageSize()         { return createSelector([this], (state: any) => { return state.pageSize as number; }); }
-    public static finishedPaging()   { return createSelector([this], (state: any) => { return state.finishedPaging as boolean; }); }
-    public static orderBy()          { return createSelector([this], (state: any) => { return state.orderBy as string; }); }
-    public static orderByDirection() { return createSelector([this], (state: any) => { return state.orderByDirection as OrderBy; }); }
-    public static imageSize()        { return createSelector([this], (state: any) => { return state.imageSize as ImageSize; }); }
-    public static snapshots()        { return createSelector([this], (state: any) => { return state.snapshots as Array<firestore.DocumentSnapshot>; }); }
-    public static snapshotLookup()   { return createSelector([this], (state: any) => { return state.snapshotLookup as Record<string, firestore.DocumentSnapshot>; }); }
-    public static data()             { return createSelector([this], (state: any) => { return state.data as Array<any>; }); }
-    public static dataLookup()       { return createSelector([this], (state: any) => { return state.dataLookup as Record<string, any>; }); }
-    public static count()            { return createSelector([this], (state: any) => { return state.snapshots.length as number; }); }
-    public static found()            { return createSelector([this], (state: any) => { return state.snapshots.length > 0 as boolean; }); }
+    protected static initializedState(state: any):      boolean                                    { return state.initialized; }
+    protected static loadingState(state: any):          boolean                                    { return state.loading; }
+    protected static pageSizeState(state: any):         number                                     { return state.pageSize; }
+    protected static finishedPagingState(state: any):   boolean                                    { return state.finishedPaging; }
+    protected static orderByState(state: any):          string                                     { return state.orderBy; }
+    protected static orderByDirectionState(state: any): OrderBy                                    { return state.orderByDirection; }
+    protected static imageSizeState(state: any):        ImageSize                                  { return state.imageSize; }
+    protected static snapshotsState(state: any):        Array<firestore.DocumentSnapshot>          { return state.snapshots; }
+    protected static snapshotLookupState(state: any):   Record<string, firestore.DocumentSnapshot> { return state.snapshotLookup; }
+    protected static dataState(state: any):             Array<any>                                 { return state.data; }
+    protected static dataLookupState(state: any):       Record<string, any>                        { return state.dataLookup; }
+    protected static countState(state: any):            number                                     { return StateQuery.snapshotsState(state).length; }
+    protected static foundState(state: any):            boolean                                    { return StateQuery.countState(state) > 0; }
+
+    public static initialized()      { return createSelector([this], StateQuery.initializedState); }
+    public static loading()          { return createSelector([this], StateQuery.loadingState); }
+    public static pageSize()         { return createSelector([this], StateQuery.pageSizeState); }
+    public static finishedPaging()   { return createSelector([this], StateQuery.finishedPagingState); }
+    public static orderBy()          { return createSelector([this], StateQuery.orderByState); }
+    public static orderByDirection() { return createSelector([this], StateQuery.orderByDirectionState); }
+    public static imageSize()        { return createSelector([this], StateQuery.imageSizeState); }
+    public static snapshots()        { return createSelector([this], StateQuery.snapshotsState); }
+    public static snapshotLookup()   { return createSelector([this], StateQuery.snapshotLookupState); }
+    public static data()             { return createSelector([this], StateQuery.dataState); }
+    public static dataLookup()       { return createSelector([this], StateQuery.dataLookupState); }
+    public static count()            { return createSelector([this], StateQuery.countState); }
+    public static found()            { return createSelector([this], StateQuery.foundState); }
 
     constructor
     (
@@ -54,9 +68,7 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
         const { getState, dispatch } = context;
         const { ActionReset, ActionGet } = this.actions;
 
-        const initialized: boolean = StateQuery.initialized()(getState());
-        console.log(initialized);
-
+        const initialized: boolean = StateQuery.initializedState(getState());
         return initialized ?
             of(null) :
             dispatch(new ActionReset()).
@@ -133,7 +145,7 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
                         data.map((item: T) => item['bucketPath'])
                 ),
                 switchMap((bucketPaths: Array<string>) =>
-                    dispatch(new ActionStorageGetUrls(bucketPaths, imageSize))
+                    dispatch(new ActionStorageUrlsGet(bucketPaths, imageSize))
                 ),
                 tap(() =>
                     patchState({ loading: false } as M)

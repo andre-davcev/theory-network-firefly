@@ -1,8 +1,8 @@
-import { ServiceFirestore, Model, ActionStorageGetUrl } from '@theory/firebase';
+import { ServiceFirestore, Model, ActionStorageUrlGet } from '@theory/firebase';
 
 import { StateDocumentModel, ActionsDocument, FormNgxs } from '../interfaces';
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { StateContext, Selector, createSelector } from '@ngxs/store';
+import { StateContext, createSelector } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
@@ -19,15 +19,25 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
     protected actions:    ActionsDocument;
     protected formPath:   string;
 
-    public static snapshot()   { return createSelector([this], (state: any) => { return state.snapshot as firestore.DocumentSnapshot; }); }
-    public static form()       { return createSelector([this], (state: any) => { return state.form as FormNgxs }); }
-    public static formGroup()  { return createSelector([this], (state: any) => { return state.formGroup as FormGroup; }); }
-    public static isForm()     { return createSelector([this], (state: any) => { return state.formGroup != null; }); }
-    public static data()       { return createSelector([this], (state: any) => { return state.form.model as any; }); }
-    public static id()         { return createSelector([this], (state: any) => { return state.form.model.id as string; }); }
-    public static isNew()      { return createSelector([this], (state: any) => { return state.form.mode.id === CoreEnum.IdNew; }); }
-    public static canUpdate()  { return createSelector([this], (state: any) => { return state.form.status === FormNgxsStatus.Valid && state.form.dirty as boolean; }); }
-    public static bucketPath() { return createSelector([this], (state: any) => { return state.form.model.bucketPath as string; }); }
+    protected static snapshotState(state: any):   firestore.DocumentSnapshot { return state.snapshot; }
+    protected static formState(state: any):       FormNgxs                   { return state.form; }
+    protected static formGroupState(state: any):  FormGroup                  { return state.formGroup; }
+    protected static isFormState(state: any):     boolean                    { return StateDocument.formGroupState(state) != null; }
+    protected static dataState(state: any):       any                        { return StateDocument.formState(state).model; }
+    protected static idState(state: any):         string                     { return StateDocument.dataState(state).id; }
+    protected static isNewState(state: any):      boolean                    { return StateDocument.idState(state) === CoreEnum.IdNew; }
+    protected static canUpdateState(state: any):  boolean                    { return StateDocument.formState(state).status === FormNgxsStatus.Valid && StateDocument.formState(state).dirty; }
+    protected static bucketPathState(state: any): string                     { return StateDocument.dataState(state).bucketPath; }
+
+    public static snapshot()   { return createSelector([this], StateDocument.snapshotState); }
+    public static form()       { return createSelector([this], StateDocument.formState); }
+    public static formGroup()  { return createSelector([this], StateDocument.formGroupState); }
+    public static isForm()     { return createSelector([this], StateDocument.isFormState); }
+    public static data()       { return createSelector([this], StateDocument.dataState); }
+    public static id()         { return createSelector([this], StateDocument.idState); }
+    public static isNew()      { return createSelector([this], StateDocument.isNewState); }
+    public static canUpdate()  { return createSelector([this], StateDocument.canUpdateState); }
+    public static bucketPath() { return createSelector([this], StateDocument.bucketPathState); }
 
     constructor
     (
@@ -86,7 +96,7 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
 
         const snapshot:   firestore.DocumentSnapshot = action.snapshot;
         const data:       T                          = action.data == null ? snapshot.data() : action.data;
-        const bucketPath: string                     = StateDocument.bucketPath()(getState());
+        const bucketPath: string                     = StateDocument.bucketPathState(getState());
         const formGroup:  FormGroup                  = this.service.formCreate(data);
 
         return dispatch(new ActionReset()).
@@ -100,7 +110,7 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
                 } as M)
             ),
             switchMap(() =>
-                bucketPath == null ? of(null) : dispatch(new ActionStorageGetUrl(bucketPath))
+                bucketPath == null ? of(null) : dispatch(new ActionStorageUrlGet(bucketPath))
             ),
             switchMap(() =>
                 dispatch(new UpdateFormValue({ value: data, path: this.formPath}))
@@ -114,7 +124,7 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
 
         const partial: Partial<T> = action.partial;
         const state:   M          = getState();
-        const data:    T          = StateDocument.data()(state);
+        const data:    T          = StateDocument.dataState(state);
         const value:   T          = { ...data, ...partial };
         const path:    string     = this.formPath;
 
@@ -130,8 +140,8 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
         const { getState, patchState, dispatch } = context;
 
         const state: M       = getState();
-        const isNew: boolean = StateDocument.isNew()(state);
-        const value: T       = StateDocument.data()(state);
+        const isNew: boolean = StateDocument.isNewState(state);
+        const value: T       = StateDocument.dataState(state);
         const path:  string  = this.formPath;
 
         return !isNew ?
@@ -162,11 +172,11 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
         const { ActionCreate }       = this.actions;
 
         const state:     M          = getState();
-        const formGroup: FormGroup  = StateDocument.formGroup()(state);
-        const isNew:     boolean    = StateDocument.isNew()(state);
+        const formGroup: FormGroup  = StateDocument.formGroupState(state);
+        const isNew:     boolean    = StateDocument.isNewState(state);
         const partial:   Partial<T> = this.service.formFieldsChanged(formGroup);
 
-        const snapshot: firestore.DocumentSnapshot = StateDocument.snapshot()(state);
+        const snapshot: firestore.DocumentSnapshot = StateDocument.snapshotState(state);
 
         return isNew ?
           dispatch(new ActionCreate()) :
@@ -183,9 +193,9 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
         const { ActionReset } = this.actions;
 
         const state:    M                          = getState();
-        const snapshot: firestore.DocumentSnapshot = StateDocument.snapshot()(state);
-        const isNew:    boolean                    = StateDocument.isNew()(state);
-        const id:       string                     = StateDocument.id()(state);
+        const snapshot: firestore.DocumentSnapshot = StateDocument.snapshotState(state);
+        const isNew:    boolean                    = StateDocument.isNewState(state);
+        const id:       string                     = StateDocument.idState(state);
 
         const delete$: Observable<any> = isNew ?
             of(null) :
