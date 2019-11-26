@@ -3,13 +3,14 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { tap, switchMap, catchError, map} from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
-import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, CameraPhoto, Camera } from '@capacitor/core';
+import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, CameraPhoto, Plugins } from '@capacitor/core';
 import { Pages } from '../pages.enum';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateIcon, ActionIconUriSet, ActionIconSetId, MockIconId } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 
+const { Camera } = Plugins;
 @Component
 ({
     selector    : 'app-page-assets-icon',
@@ -20,6 +21,9 @@ import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobil
 export class PageAssetIcon
 {
     @Select(StateIcon.formGroup) form$: Observable<FormGroup>;
+    @Select(StateIcon.url) url$: Observable<string>;
+
+    public Pages: any = Pages;
 
     constructor(private store: Store)
     {
@@ -33,10 +37,8 @@ export class PageAssetIcon
 
     public navigate(page: Pages.IconSelector)
     {
-        alert('asset-icon navigate');
         if (page === Pages.IconSelector)
         {
-          alert('asset-icon navigate2');
             if (this.store.selectSnapshot(StateDevice.device))
             {
                 const options: CameraOptions =
