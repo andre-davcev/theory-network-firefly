@@ -10,7 +10,7 @@ import {
 } from './storage.actions';
 import { StateStorageOptions } from './storage.state.options';
 import { StorageImage } from '@theory/firebase/interfaces';
-import { tap, filter, map } from 'rxjs/operators';
+import { tap, filter, map, withLatestFrom } from 'rxjs/operators';
 import { Observable, forkJoin, of, combineLatest } from 'rxjs';
 import { ServiceStorage } from '@theory/firebase/services';
 import { ImageSize } from '@theory/firebase/enums';
@@ -38,8 +38,12 @@ export class StateStorage
     getUrl({ getState, patchState }: StateContext<StateStorageModel>, { bucketPath, size, cached }: ActionStorageUrlGet)
     {
         const images: Record<string, StorageImage> = StateStorage.images(getState());
-        const exists: boolean                      = images[bucketPath] != null && images[bucketPath][size] != null;
-        const image:  StorageImage                 = exists ? images[bucketPath] : {};
+        const image:  StorageImage                 = images[bucketPath] == null ? {} : images[bucketPath];
+        const exists: boolean                      = image[size] != null;
+
+        images[bucketPath] = image;
+
+        patchState({ images });
 
         return exists && !cached ?
             of(null) :
@@ -47,13 +51,16 @@ export class StateStorage
                 downloadUrl(bucketPath, size).
                 pipe
                 (
-                    tap((url: string) =>
-                        image[size] = url
+                    withLatestFrom(
+                        of(StateStorage.images(getState()))
                     ),
-                    tap(() =>
-                        images[bucketPath] = image
-                    ),
-                    tap(() =>
+                    map(([url, images]) =>
+                    {
+                        images[bucketPath][size] = url;
+
+                        return images;
+                    }),
+                    tap((images: Record<string, StorageImage>) =>
                         patchState({ images })
                     )
                 );
@@ -93,7 +100,7 @@ export class StateStorage
     }
 
     @Action(ActionStorageUrlSet)
-    setUrl({ getState, patchState }: StateContext<StateStorageModel>, { bucketPath, url, size }: ActionStorageUrlSet)
+    setUrl({ getState, patchState }: StateContext<StateStorageModel>, { url, bucketPath, size }: ActionStorageUrlSet)
     {
         const images: Record<string, StorageImage> = StateStorage.images(getState());
         const image:  StorageImage                 = images[bucketPath] == null ? {} : images[bucketPath];

@@ -7,12 +7,11 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, StateCluster, ActionImageSetId, ActionImageUriSet, ActionEventImageAdd, ActionEventPatch } from '@firefly/core';
+import { StateEvent, ActionEventCreate, StateCluster, ActionEventImageSetUrl, ActionEventPatch, ActionEventImageSetPath } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
-import { MockImageId } from '@firefly/core/mocks';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage } from '@theory/firebase';
 
@@ -95,29 +94,15 @@ export class PageAssetEvent extends BaseComponent
                     switchMap(() => from(Camera.getPhoto(options))),
                     map((photo: CameraPhoto) => photo.dataUrl),
                     switchMap((imageData: string) =>
-                        this.store.dispatch(new ActionImageSetId()).pipe
-                        (
-                            switchMap(() => this.store.dispatch
-                            ([
-                                new ActionImageUriSet(imageData),
-                                new ActionMobileLoadingHide()
-                            ]))
-                        )
-                    ),
-                    switchMap(() =>
-                        this.store.dispatch(new ActionEventImageAdd())
+                        this.store.dispatch(new ActionEventImageSetUrl(imageData))
                     )
                 ).
                 subscribe();
             }
             else
             {
-                this.store.dispatch(new ActionImageSetId(MockImageId)).pipe
-                (
-                    switchMap(() =>
-                        this.store.dispatch(new ActionEventImageAdd())
-                    )
-                ).subscribe();
+                this.store.dispatch(new ActionEventImageSetPath()).
+                subscribe();
             }
         }
         else if (page === Pages.EventLocation)
