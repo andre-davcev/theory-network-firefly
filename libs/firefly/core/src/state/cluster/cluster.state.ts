@@ -41,7 +41,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
     {
         super
         (
-            'clusters',
+            StateClusterOptions.name,
             StateClusterOptions.defaults,
             service,
             {
@@ -135,9 +135,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
             this.service.formDataNew(userId, this.empty) :
             this.store.selectSnapshot(StateUserClusters.dataLookup())[id];
 
-        return of(isNew) ?
-            dispatch(new ActionClusterPatch(data)) :
-            dispatch(new ActionClusterSet(snapshot, data))
+        return dispatch(new ActionClusterSet(snapshot, data));
     }
 
     @Action(ActionClusterIconAdd)

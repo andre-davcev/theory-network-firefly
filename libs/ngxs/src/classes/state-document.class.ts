@@ -53,7 +53,7 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
         this.service    = service;
         this.empty      = empty;
         this.actions    = actions;
-        this.formPath   = `${name}.form`;
+        this.formPath   = `${collection}.form`;
     }
 
     public reset({ patchState, dispatch }: StateContext<M>): Observable<any>
@@ -91,12 +91,12 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
 
     public set(context: StateContext<M>, action: any ): Observable<any>
     {
-        const { getState, patchState, dispatch } = context;
+        const { patchState, dispatch } = context;
         const { ActionReset } = this.actions;
 
         const snapshot:   firestore.DocumentSnapshot = action.snapshot;
         const data:       T                          = action.data == null ? snapshot.data() : action.data;
-        const bucketPath: string                     = StateDocument.bucketPathState(getState());
+        const bucketPath: string                     = data['bucketPath'];
         const formGroup:  FormGroup                  = this.service.formCreate(data);
 
         return dispatch(new ActionReset()).

@@ -6,7 +6,7 @@ import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateEventOptions: StoreOptions<StateEventModel> =
 {
-    name : 'event',
+    name : 'events',
 
     defaults :
     {

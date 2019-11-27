@@ -7,7 +7,7 @@ import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/user';
 import { Event, Location } from '@firefly/core/models';
-import { ActionImageCreate, StateImage } from '@firefly/core/state/image';
+import { ActionImageCreate } from '@firefly/core/state/image';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -20,15 +20,17 @@ import {
   ActionEventReset,
   ActionEventSet,
   ActionEventSave,
-  ActionEventImageAdd,
-  ActionEventImageRemove,
-  ActionEventSetId
+  ActionEventImageSetUrl,
+  ActionEventImageClear,
+  ActionEventSetId,
+  ActionEventImageSetPath
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
 import { ActionClusterReset } from '../cluster';
 import { firestore } from 'firebase/app';
 import { ServiceEvents } from '@firefly/core/services';
-import { ActionStorageRemoveNew } from '@theory/firebase';
+import { ActionStorageRemoveNew, ActionStorageUrlSet, ActionStorageUrlGet } from '@theory/firebase';
+import { switchMap } from 'rxjs/operators';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -42,7 +44,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     {
         super
         (
-            'events',
+            StateEventOptions.name,
             StateEventOptions.defaults,
             service,
             {
@@ -153,18 +155,34 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         return dispatch(new ActionEventSet(snapshot, data));
     }
 
-    @Action(ActionEventImageAdd)
-    imageAdd({ dispatch }: StateContext<StateEventModel>)
+    @Action(ActionEventImageSetUrl)
+    imageSetUrl({ dispatch }: StateContext<StateEventModel>, { url, bucketPath }: ActionEventImageSetUrl)
     {
-        const bucketPath: string = this.store.selectSnapshot(StateImage.bucketPath);
-
-        return dispatch(new ActionEventPatch({ bucketPath }));
+        return dispatch(new ActionStorageUrlSet(url, bucketPath)).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionEventPatch({ bucketPath })))
+        );
     }
 
-    @Action(ActionEventImageRemove)
-    imageRemove({ dispatch  }: StateContext<StateEventModel>)
+    @Action(ActionEventImageSetPath)
+    imageSetPath({ dispatch }: StateContext<StateEventModel>, { bucketPath }: ActionEventImageSetPath)
     {
-        return dispatch(new ActionEventPatch({ bucketPath : undefined }));
+        return dispatch(new ActionStorageUrlGet(bucketPath)).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionEventPatch({ bucketPath })))
+        );
+    }
+
+    @Action(ActionEventImageClear)
+    imageClear({ dispatch  }: StateContext<StateEventModel>)
+    {
+        return dispatch
+        ([
+            new ActionEventPatch({ bucketPath: null }),
+            new ActionStorageRemoveNew()
+        ]);
     }
 
     @Action(ActionEventLocationSet)

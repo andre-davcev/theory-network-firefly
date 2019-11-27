@@ -5,7 +5,7 @@ import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateClusterOptions: StoreOptions<StateClusterModel> =
 {
-    name : 'cluster',
+    name : 'clusters',
 
     defaults :
     {

@@ -5,6 +5,7 @@ import { Event } from '@firefly/core/models';
 
 import { ActionsEvent } from './event.actions.enum';
 import { firestore } from 'firebase';
+import { MockImagePath } from '@firefly/core/mocks';
 
 export class ActionEventReset  { static readonly type = ActionsEvent.Reset;   constructor() { } }
 export class ActionEventGet    { static readonly type = ActionsEvent.Get;     constructor(public id: string) { } }
@@ -15,6 +16,8 @@ export class ActionEventSave   { static readonly type = ActionsEvent.Save;    co
 export class ActionEventDelete { static readonly type = ActionsEvent.Delete;  constructor() { } }
 export class ActionEventSetId  { static readonly type = ActionsEvent.SetId;   constructor(public id: string = CoreEnum.IdNew) { } }
 
-export class ActionEventImageAdd    { static readonly type = ActionsEvent.ImageAdd;    constructor() { } }
-export class ActionEventImageRemove { static readonly type = ActionsEvent.ImageRemove; constructor() { } }
+export class ActionEventImageSetUrl  { static readonly type = ActionsEvent.ImageSetUrl;  constructor(public url: string, public bucketPath: string = CoreEnum.IdNew) { } }
+export class ActionEventImageSetPath { static readonly type = ActionsEvent.ImageSetPath; constructor(public bucketPath: string = MockImagePath) { } }
+export class ActionEventImageClear   { static readonly type = ActionsEvent.ImageClear;   constructor() { } }
+
 export class ActionEventLocationSet { static readonly type = ActionsEvent.LocationSet; constructor(public payload: Result) { } }

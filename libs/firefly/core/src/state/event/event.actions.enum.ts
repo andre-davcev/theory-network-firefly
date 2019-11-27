@@ -9,8 +9,9 @@ export enum ActionsEvent
     Create = '[Event] Create',
     Delete = '[Event] Delete',
 
-    ImageAdd    = '[Event] Image Set',
-    ImageRemove = '[Event] Image Remove',
-    LocationSet = '[Event] Location Set',
-    TimeSet     = '[Event] Time Set'
+    ImageSetUrl  = '[Event] Image Set Url',
+    ImageSetPath = '[Event] Image Set Path',
+    ImageClear   = '[Event] Image Clear',
+    LocationSet  = '[Event] Location Set',
+    TimeSet      = '[Event] Time Set'
 }
