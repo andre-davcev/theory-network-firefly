@@ -1,4 +1,19 @@
-.cpt-icon
+:host
 {
-    width: 100%;
+    --cpt-height:                      167px;
+    --cpt-color-background:          white;
+    --cpt-color-font:                white;
+    --cpt-padding:                     16px;     // $content-padding
+    --cpt-blur:                        10px;
+    --cpt-background-image:            rgba(0, 0, 0, 0.3);
+    --cpt-icon-size:                   92px;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: var(--cpt-height);
+    background-color: var(--cpt-color-background);
+    padding: var(--cpt-padding) - 4px;
+    align-items: center;
+    overflow: hidden;
 }

@@ -6,8 +6,6 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-
-
 <ion-content>
     <form novalidate
           [formGroup]="form$ | async"
@@ -15,6 +13,7 @@
         <app-item-header [form]="form$ | async"
                          [iconUrl]="url$ | async"
                          title="name"
+                         [iconOnly]="true"
                          [titlePlaceholder]="'page.assets-icon.namePlaceholder' | translate"
                          subtitle="description"
                          [subtitlePlaceholder]="'page.assets-icon.descriptionPlaceholder' | translate"
@@ -22,11 +21,5 @@
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
                          (iconClicked)="navigate(Pages.IconSelector)">
         </app-item-header>
-<!--
-        <app-item-header icon="assets/icons/temp-coffee-icon-blue.png"
-                         title="My cluster title!"
-                         subtitle="My subtitle">
-        </app-item-header>
--->
     </form>
 </ion-content>
