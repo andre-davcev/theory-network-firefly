@@ -4,10 +4,12 @@ import { Observable, from } from 'rxjs';
 import { tap, switchMap, catchError, map} from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, CameraPhoto, Plugins } from '@capacitor/core';
+import { LoadingOptions } from '@ionic/core'
+import { LoadingController, ToastController } from '@ionic/angular'
 import { Pages } from '../pages.enum';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateIcon, ActionIconUriSet, ActionIconSetId, MockIconId } from '@firefly/core';
+import { StateIcon, ActionIconUriSet, ActionIconSetId, MockIconId, ActionIconCreate } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 
 const { Camera } = Plugins;
@@ -25,10 +27,12 @@ export class PageAssetIcon
 
     public Pages: any = Pages;
 
-    constructor(private store: Store)
-    {
-
-    }
+    constructor(
+      private store: Store,
+      private loading: LoadingController,
+      private toast: ToastController
+      )
+    { }
 
     ionViewWillEnter()
     {
@@ -78,4 +82,33 @@ export class PageAssetIcon
             }
         }
     }
+
+    public save(): void
+    {
+        const options: LoadingOptions =
+        {
+            spinner:     'crescent',
+            translucent: false,
+            cssClass:    'cpt-loading'
+        };
+
+        from(this.loading.create(options)).
+        pipe
+        (
+            tap((loading: HTMLIonLoadingElement) => loading.present()),
+            switchMap((loading: HTMLIonLoadingElement) =>
+                this.store.dispatch(new ActionIconCreate()).pipe(tap(() => loading.dismiss()))
+            ),
+            switchMap(() =>
+                from(this.toast.create({ message: 'Event was successfully created!', duration: 2000 }))
+            ),
+            catchError((error: any) =>
+                from(this.toast.create({ message: 'An error occurred creating the event!', duration: 2000 }))
+            )
+        ).
+        subscribe((toast: HTMLIonToastElement) =>
+            toast.present()
+        );
+    }
+
 }
