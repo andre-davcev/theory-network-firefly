@@ -1,13 +1,12 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 import { AngularFireUploadTask, AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of, Observable } from 'rxjs';
-import { map, switchMap, filter, tap, catchError, last } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { switchMap, filter, tap, catchError, last } from 'rxjs/operators';
 
-import { CoreEnum, CoreUtil } from '@theory/core';
-import { StorageFormat, ImageSize } from '@theory/firebase';
-import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
+import { CoreEnum } from '@theory/core';
+import { StorageFormat, ActionStorageRemoveNew, StateStorage, ImageSize, ActionStorageUrlSet, ActionStorageUrlGet } from '@theory/firebase';
+import { StateDocument } from '@theory/ngxs';
 import { Image } from '@firefly/core/models';
 import { ServiceImages } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/user';
@@ -24,35 +23,66 @@ import {
   ActionImageDelete,
   ActionImageUpload,
   ActionImageUploadClear,
-  ActionImageUriSet,
-  ActionImageUriClear,
+  ActionImageSetUrl,
+  ActionImageSetPath,
+  ActionImageClear,
   ActionImageSetId,
   ActionImageUpdate
 } from './image.actions';
 import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages, ActionUserImagesSync } from '../user-images';
-import { MockImageId, MockImagePath } from '@firefly/core/mocks';
+import { firestore } from 'firebase/app';
 
 @State<StateImageModel>(StateImageOptions)
 
-export class StateImage
+export class StateImage extends StateDocument<Image, StateImageModel>
 {
     constructor
     (
-        private store: Store,
-        private service: ServiceImages,
+        private store:   Store,
+                service: ServiceImages,
         private storage: AngularFireStorage
-    ) { }
-    @Selector() static form(state: StateImageModel): FormNgxs { return state.form; }
-    @Selector() static formGroup(state: StateImageModel): FormGroup { return state.formGroup; }
-    @Selector() static formPath(state: StateImageModel): string { return state.formPath; }
-    @Selector() static isForm(state: StateImageModel): boolean { return StateImage.formGroup(state) != null; }
-    @Selector() static data(state: StateImageModel): Image { return StateImage.form(state).model; }
-    @Selector() static id(state: StateImageModel): string { return StateImage.data(state).id; }
-    @Selector() static bucketPath(state: StateImageModel): string { return StateImage.data(state).bucketPath; }
-    @Selector() static isNew(state: StateImageModel): boolean { return  StateImage.id(state) === CoreEnum.IdNew; }
-    @Selector() static canUpdate(state: StateImageModel): boolean { return StateImage.form(state).status === FormNgxsStatus.Valid && StateImage.form(state).dirty; }
+    )
+    {
+      super
+      (
+          StateImageOptions.name,
+          StateImageOptions.defaults,
+          service,
+          {
+              version     : undefined,
+              id          : undefined,
+              dateCreated : undefined,
+              dateUpdated : undefined,
 
-    @Selector() static url(state: StateImageModel): string { return StateImage.data(state).url; }
+              userId      : undefined,
+              name        : null,
+              description : null,
+              private     : true,
+              draft       : false,
+
+              bucketPath: null,
+              mediaType:  null,
+              url:        null
+          },
+          {
+              ActionReset:  ActionImageReset,
+              ActionGet:    ActionImageGet,
+              ActionSet:    ActionImageSet,
+              ActionPatch:  ActionImagePatch,
+              ActionCreate: ActionImageCreate,
+              ActionUpdate: ActionImageUpdate,
+              ActionSave:   ActionImageSave,
+              ActionDelete: ActionImageDelete,
+
+              ActionsReset:  [ActionStorageRemoveNew],
+              ActionsCreate: [],
+
+              ActionsQueryAdd:    [ActionUserImagesAdd],
+              ActionsQueryRemove: [ActionUserImagesRemove],
+              ActionsQuerySync:   [ActionUserImagesSync]
+          }
+      );
+    }
 
     @Selector() static uploadProgress(state: StateImageModel):  number  { return state.uploadProgress; }
     @Selector() static uploadError(state: StateImageModel):     string  { return state.uploadError; }
@@ -60,175 +90,114 @@ export class StateImage
     @Selector() static uploadCompleted(state: StateImageModel): boolean { return StateImage.uploadProgress(state) === 100; }
 
     @Action(ActionImageReset)
-    reset({ patchState, getState, dispatch }: StateContext<StateImageModel>)
+    reset(context: StateContext<StateImageModel>)
     {
-        const defaults: StateImageModel = CoreUtil.clone<StateImageModel>(StateImageOptions.defaults);
-
-        patchState(defaults);
-
-        return dispatch
-        ([
-            new SetFormPristine(StateImage.formPath(getState()))
-        ]);
+        return super.reset(context)
     }
 
     @Action(ActionImageGet)
-    get({ dispatch }: StateContext<StateImageModel>, { payload }: ActionImageGet)
+    get(context: StateContext<StateImageModel>, action: ActionImageGet)
     {
-        return this.service.snapshot(payload).
-        pipe
-        (
-            switchMap((object: Image) =>
-                dispatch
-                ([
-                    new ActionImageSet(object)
-                ])
-            )
-        );
-    }
-
-    @Action(ActionImageSetId)
-    setId({ dispatch }: StateContext<StateImageModel>, { payload }: ActionImageSetId)
-    {
-        const id: string = payload;
-
-        const object: Image = id === CoreEnum.IdNew || id === MockImageId ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Image>(StateImageOptions.defaults.empty)) :
-            this.store.selectSnapshot(StateUserImages.lookup)[id];
-
-        if (id === MockImageId)
-        {
-            object.id         = MockImageId;
-            object.bucketPath = MockImagePath;
-        }
-
-        return dispatch([new ActionImageSet(object)]);
+        return super.get(context, action);
     }
 
     @Action(ActionImageSet)
-    set({ patchState, getState, dispatch }: StateContext<StateImageModel>, { payload }: ActionImageSet)
+    set(context: StateContext<StateImageModel>, action: ActionImageSet)
     {
-        const object: Image = payload;
-
-        return dispatch
-        ([
-            new ActionImageReset()
-        ]).
-        pipe
-        (
-            switchMap(() =>
-                this.service.getDownloadUrl(object.bucketPath, ImageSize.Medium).
-                pipe(tap((url: string) => object.url = url))
-            ),
-            map(() =>
-                patchState({ formGroup: this.service.formCreate(object) })
-            ),
-
-            switchMap(() =>
-                dispatch(new UpdateFormValue({ value: object, path: StateImage.formPath(getState())}))
-            )
-        );
+        return super.set(context, action);
     }
 
     @Action(ActionImagePatch)
-    patch({ dispatch, getState } : StateContext<StateImageModel>, { payload }: ActionImagePatch)
+    patch(context: StateContext<StateImageModel>, action: ActionImagePatch)
     {
-        const state: StateImageModel = getState();
-        const data:  Image           = StateImage.data(state);
-        const value: Image           = { ...data, ...payload };
-        const path:  string          = StateImage.formPath(state);
-
-        return dispatch(new UpdateFormValue({ value, path })).
-        pipe
-        (
-            switchMap(() =>
-                data.id === CoreEnum.IdNew ?
-                    of(null) :
-                    dispatch(new ActionUserImagesSync(data))
-            )
-        );
+        return super.patch(context, action);
     }
 
     @Action(ActionImageCreate)
-    create({ getState, dispatch }: StateContext<StateImageModel>)
+    create(context: StateContext<StateImageModel>)
     {
-        const state: StateImageModel = getState();
-        const data:  Image           = StateImage.data(state);
-        const { url, ...partial }    = this.service.addMetadata(data);
+        const { dispatch, getState } = context;
+
+        const data:    Image  = StateImage.dataState(getState());
+        const dataUri: string = this.store.selectSnapshot(StateStorage.images)[data.id].medium;
+
+        (this.service as ServiceImages).addMetadata(data, this.collection, dataUri);
 
         return dispatch(new ActionImagePatch(data)).
         pipe
         (
             switchMap(() => dispatch(new ActionImageUpload())),
-            switchMap(() => this.service.create(partial)),
-            switchMap(() => dispatch(new ActionUserImagesAdd(data)))
+            switchMap(() => super.create(context))
         );
     }
 
     @Action(ActionImageUpdate)
-    update({ getState, dispatch }: StateContext<StateImageModel>)
+    update(context: StateContext<StateImageModel>)
     {
-        const state:      StateImageModel = getState();
-        const formGroup:  FormGroup       = StateImage.formGroup(state);
-        const id:         string          = StateImage.id(state);
-        const { url, ...changed }         = this.service.changedFields(formGroup);
-        const upload$:   Observable<void> = url == null ? of(null) : dispatch(new ActionImageUpload());
-
-        upload$.pipe
+        return context.dispatch(new ActionImageUpload()).
+        pipe
         (
             switchMap(() =>
-                Object.keys(changed).length === 0 ?
-                    of(null) :
-                    this.service.patch(id, changed)
+                super.update(context)
             )
         );
     }
 
     @Action(ActionImageSave)
-    save({ getState, dispatch }: StateContext<StateImageModel>)
+    save(context: StateContext<StateImageModel>)
     {
-        const state:      StateImageModel = getState();
-        const formPath:   string          = StateImage.formPath(state);
-        const isNew:      boolean         = StateImage.isNew(state);
-        const save$:      Observable<void> = dispatch(isNew ? new ActionImageCreate() : new ActionImageUpdate());
-
-        return save$.
-        pipe
-        (
-            switchMap(() =>
-                dispatch(new SetFormPristine(formPath))
-            )
-        );
+        return super.save(context);
     }
 
     @Action(ActionImageDelete)
-    delete({ getState, dispatch }: StateContext<StateImageModel>)
+    delete(context: StateContext<StateImageModel>)
     {
-        const data: Image = StateImage.data(getState());
+        return super.delete(context);
+    }
 
-        return this.service.delete(data).
+    @Action(ActionImageSetId)
+    setId({ dispatch }: StateContext<StateImageModel>, { id }: ActionImageSetId)
+    {
+        const isNew: boolean = id === CoreEnum.IdNew;
+
+        const userId:   string                     = this.store.selectSnapshot(StateUser.id);
+        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserImages.snapshotLookup())[id];
+
+        const data: Image = isNew ?
+            this.service.formDataNew(userId, this.empty) :
+            this.store.selectSnapshot(StateUserImages.dataLookup())[id];
+
+        return dispatch(new ActionImageSet(snapshot, data));
+    }
+
+    @Action(ActionImageSetUrl)
+    imageSetUrl({ dispatch }: StateContext<StateImageModel>, { url, bucketPath }: ActionImageSetUrl)
+    {
+        return dispatch(new ActionStorageUrlSet(url, bucketPath)).
         pipe
         (
-            switchMap(() =>
-                dispatch
-                ([
-                    new ActionUserImagesRemove(data.id),
-                    new ActionImageReset()
-                ])
-            )
+            switchMap(() => dispatch(new ActionImagePatch({ bucketPath })))
         );
     }
 
-    @Action(ActionImageUriSet)
-    uriSet({ dispatch }: StateContext<StateImageModel>, { payload }: ActionImageUriSet)
+    @Action(ActionImageSetPath)
+    imageSetPath({ dispatch }: StateContext<StateImageModel>, { bucketPath }: ActionImageSetPath)
     {
-        return dispatch(new ActionImagePatch({ url: payload }));
+        return dispatch(new ActionStorageUrlGet(bucketPath)).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionImagePatch({ bucketPath })))
+        );
     }
 
-    @Action(ActionImageUriClear)
-    uriClear({ dispatch }: StateContext<StateImageModel>)
+    @Action(ActionImageClear)
+    imageClear({ dispatch  }: StateContext<StateImageModel>)
     {
-        return dispatch(new ActionImagePatch({ url: null }));
+        return dispatch
+        ([
+            new ActionImagePatch({ bucketPath: null }),
+            new ActionStorageRemoveNew()
+        ]);
     }
 
     @Action(ActionImageUploadClear)
@@ -238,26 +207,38 @@ export class StateImage
     }
 
     @Action(ActionImageUpload)
-    upload({ patchState, getState, dispatch }: StateContext<StateImageModel>)
+    upload(context: StateContext<StateImageModel>)
     {
-        const state: StateImageModel = getState();
-        const path:  string          = StateImage.bucketPath(state);
-        const url:   string          = StateImage.url(state);
+        const { getState, dispatch, patchState } = context;
 
-        const ref:  AngularFireStorageReference = this.storage.ref(path);
-        const task: AngularFireUploadTask       = ref.putString(url, StorageFormat.DataUrl);
+        const state:             StateImageModel = getState();
+        const bucketPath:        string          = StateImage.bucketPathState(state);
+        const formGroup:         FormGroup       = StateImage.formGroupState(state);
+        const controlBucketPath: AbstractControl = formGroup.get('bucketPath');
+        const bucketPathChanged: boolean         = controlBucketPath.dirty && controlBucketPath.valid;
 
-        dispatch(new ActionImageUploadClear()).
-        pipe
-        (
-            switchMap(() => task.percentageChanges()),
-            tap((uploadProgress: number) => patchState({ uploadProgress })),
-            filter(() => StateImage.uploadCompleted(getState())),
-            switchMap(() => task.snapshotChanges()),
-            last(),
-            switchMap(() => ref.getDownloadURL()),
-            switchMap((url: string) => dispatch(new ActionImageUriSet(url))),
-            catchError((uploadError: any) => of(patchState({ uploadError })))
-        );
+        const ref:  AngularFireStorageReference = this.storage.ref(bucketPath);
+        const task: AngularFireUploadTask       = ref.putString(bucketPath, StorageFormat.DataUrl);
+
+        return !bucketPathChanged ?
+            of(null) :
+            dispatch(new ActionImageUploadClear()).
+            pipe
+            (
+                switchMap(() => task.percentageChanges()),
+                tap((uploadProgress: number) => patchState({ uploadProgress })),
+                filter(() => StateImage.uploadCompleted(getState())),
+                switchMap(() => task.snapshotChanges()),
+                last(),
+                switchMap(() => ref.getDownloadURL()),
+                switchMap((url: string) =>
+                    dispatch
+                    ([
+                        new ActionStorageUrlSet(url, bucketPath, ImageSize.Medium),
+                        new ActionStorageRemoveNew()
+                    ])
+                ),
+                catchError((uploadError: any) => of(patchState({ uploadError })))
+            );
     }
 }

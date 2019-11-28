@@ -7,11 +7,13 @@ export enum ActionsEvent
     Patch  = '[Event] Patch',
     Save   = '[Event] Save',
     Create = '[Event] Create',
+    Update = '[Event] Update',
     Delete = '[Event] Delete',
 
     ImageSetUrl  = '[Event] Image Set Url',
     ImageSetPath = '[Event] Image Set Path',
     ImageClear   = '[Event] Image Clear',
-    LocationSet  = '[Event] Location Set',
-    TimeSet      = '[Event] Time Set'
+
+    LocationSet = '[Event] Location Set',
+    TimeSet     = '[Event] Time Set'
 }

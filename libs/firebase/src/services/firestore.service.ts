@@ -12,8 +12,8 @@ export class ServiceFirestore<T extends Model>
 {
     constructor
     (
-        private firestore:   AngularFirestore,
-        private formBuilder: FormBuilder
+        public firestore:   AngularFirestore,
+        public formBuilder: FormBuilder
     ) { }
 
     public collection(collection: string): AngularFirestoreCollection<T>

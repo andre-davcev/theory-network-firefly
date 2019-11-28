@@ -21,7 +21,8 @@ import {
     ActionClusterDelete,
     ActionClusterSetId,
     ActionClusterIconAdd,
-    ActionClusterIconRemove
+    ActionClusterIconRemove,
+    ActionClusterUpdate
 } from './cluster.actions';
 import { ActionClusterSubscribersReset } from '../cluster-subscribers/cluster-subscribers.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../user-clusters';
@@ -68,6 +69,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
                 ActionSet:    ActionClusterSet,
                 ActionPatch:  ActionClusterPatch,
                 ActionCreate: ActionClusterCreate,
+                ActionUpdate: ActionClusterUpdate,
                 ActionSave:   ActionClusterSave,
                 ActionDelete: ActionClusterDelete,
 
@@ -109,6 +111,12 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
     create(context: StateContext<StateClusterModel>)
     {
         return super.create(context);
+    }
+
+    @Action(ActionClusterUpdate)
+    update(context: StateContext<StateClusterModel>)
+    {
+        return super.update(context);
     }
 
     @Action(ActionClusterSave)

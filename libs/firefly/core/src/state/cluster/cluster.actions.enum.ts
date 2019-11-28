@@ -5,8 +5,9 @@ export enum ActionsCluster
     SetId  = '[Cluster] SetId',
     Set    = '[Cluster] Set',
     Patch  = '[Cluster] Patch',
-    Save   = '[Cluster] Save',
     Create = '[Cluster] Create',
+    Update = '[Cluster] Update',
+    Save   = '[Cluster] Save',
     Delete = '[Cluster] Delete',
 
     IconAdd    = '[Cluster] Icon Set',

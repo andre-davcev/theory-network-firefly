@@ -5,6 +5,7 @@ export interface ActionsDocument
     ActionSet:    any;
     ActionPatch:  any;
     ActionCreate: any;
+    ActionUpdate: any;
     ActionSave:   any;
     ActionDelete: any;
 

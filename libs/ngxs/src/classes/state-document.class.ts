@@ -140,12 +140,12 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
         const { getState, patchState, dispatch } = context;
 
         const state: M       = getState();
-        const isNew: boolean = StateDocument.isNewState(state);
         const value: T       = StateDocument.dataState(state);
+        const isNew: boolean = StateDocument.isNewState(state);
         const path:  string  = this.formPath;
 
         return !isNew ?
-            of(false) :
+            of(null) :
             this.service.documentCreate(this.collection, value).
             pipe
             (
@@ -166,25 +166,39 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
             );
     }
 
+    public update(context: StateContext<M>): Observable<any>
+    {
+        const { getState } = context;
+
+        const state:      M          = getState();
+        const formGroup:  FormGroup  = StateDocument.formGroupState(state);
+        const changed:    Partial<T> = this.service.formFieldsChanged(formGroup);
+        const hasChanged: boolean    = Object.keys(changed).length > 0;
+
+        const update$: Observable<any> = !hasChanged ?
+            of(null) :
+            this.service.documentUpdate(StateDocument.snapshotState(state), changed);
+
+        return update$.pipe
+        (
+            map(() => changed)
+        );
+    }
+
     public save(context: StateContext<M>): Observable<any>
     {
-        const { getState, dispatch } = context;
-        const { ActionCreate }       = this.actions;
+        const { getState, dispatch }         = context;
+        const { ActionCreate, ActionUpdate } = this.actions;
 
-        const state:     M          = getState();
-        const formGroup: FormGroup  = StateDocument.formGroupState(state);
-        const isNew:     boolean    = StateDocument.isNewState(state);
-        const partial:   Partial<T> = this.service.formFieldsChanged(formGroup);
+        const isNew: boolean = StateDocument.isNewState(getState());
 
-        const snapshot: firestore.DocumentSnapshot = StateDocument.snapshotState(state);
-
-        return isNew ?
-          dispatch(new ActionCreate()) :
-          this.service.documentUpdate(snapshot, partial).
-          pipe
-          (
-              switchMap(() => dispatch(new SetFormPristine(this.formPath)))
-          );
+        return dispatch(isNew ? new ActionCreate() : new ActionUpdate()).
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new SetFormPristine(this.formPath))
+            )
+        );
     }
 
     public delete(context: StateContext<M>): Observable<any>
