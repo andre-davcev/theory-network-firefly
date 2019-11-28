@@ -1,7 +1,7 @@
-import { StateReferenceTableModel } from '@theory/ngxs';
-import { Image, UserImage } from '@firefly/core/models';
+import { StateQueryModel } from '@theory/ngxs';
+import { Image } from '@firefly/core/models';
 
-export interface StateUserImagesModel extends StateReferenceTableModel<UserImage, Image>
+export interface StateUserImagesModel extends StateQueryModel<Image>
 {
 
 }

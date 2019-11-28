@@ -1,14 +1,11 @@
-import { SortField } from '@theory/ngxs';
-import { Image, UserImage } from '@firefly/core/models';
+import { Image } from '@firefly/core/models';
 
 import { ActionsUserImages } from './user-images.actions.enum';
+import { firestore } from 'firebase/app';
 
 export class ActionUserImagesReset   { static readonly type = ActionsUserImages.Reset;   constructor() { } }
-export class ActionUserImagesGetData { static readonly type = ActionsUserImages.GetData; constructor(public fetch: boolean = true) { } }
+export class ActionUserImagesGetData { static readonly type = ActionsUserImages.GetData; constructor() { } }
 export class ActionUserImagesGet     { static readonly type = ActionsUserImages.Get;     constructor() { } }
-export class ActionUserImagesSet     { static readonly type = ActionsUserImages.Set;     constructor(public payload: Record<string, UserImage>) { } }
-export class ActionUserImagesSort    { static readonly type = ActionsUserImages.Sort;    constructor(public payload?: SortField) { } }
-export class ActionUserImagesAdd     { static readonly type = ActionsUserImages.Add;     constructor(public payload: Image) { } }
-export class ActionUserImagesRemove  { static readonly type = ActionsUserImages.Remove;  constructor(public payload: string) { } }
-export class ActionUserImagesSync    { static readonly type = ActionsUserImages.Sync;    constructor(public payload: Image) { } }
-export class ActionUserImagesDelete  { static readonly type = ActionsUserImages.Delete;  constructor() { } }
+export class ActionUserImagesAdd     { static readonly type = ActionsUserImages.Add;     constructor(public snapshot: firestore.DocumentSnapshot, public entity?: Image) { } }
+export class ActionUserImagesRemove  { static readonly type = ActionsUserImages.Remove;  constructor(public id: string) { } }
+export class ActionUserImagesSync    { static readonly type = ActionsUserImages.Sync;    constructor(public object: Image) { } }
