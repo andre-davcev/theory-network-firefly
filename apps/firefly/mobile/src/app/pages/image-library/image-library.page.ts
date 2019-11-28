@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { ActionGridIconLibraryWatch, StateGrid, ActionGridIconLibraryPage } from '@firefly/core';
+import { Store } from '@ngxs/store';
+import { Observable, of } from 'rxjs';
 
 @Component
 ({
@@ -12,7 +11,7 @@ import { ActionGridIconLibraryWatch, StateGrid, ActionGridIconLibraryPage } from
 
 export class PageImageLibrary implements OnInit
 {
-    @Select(StateGrid.iconLibrary) iconLibrary$: Observable<Array<string>>;
+    public iconLibrary$: Observable<Array<string>> = of([]);
 
     @Output() select: EventEmitter<number> = new EventEmitter();
 
@@ -20,7 +19,7 @@ export class PageImageLibrary implements OnInit
 
     public ngOnInit(): void
     {
-        this.store.dispatch(new ActionGridIconLibraryWatch());
+        // this.store.dispatch(new ActionGridIconLibraryWatch());
     }
 
     public imageClicked(index: number): void
@@ -30,8 +29,10 @@ export class PageImageLibrary implements OnInit
 
     public doInfinite(infiniteScroll: any): void
     {
+/*
         this.store.dispatch(new ActionGridIconLibraryPage()).
 
         subscribe(() => infiniteScroll.target.complete());
+*/
     }
 }
