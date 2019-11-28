@@ -1,4 +1,3 @@
-import { of } from 'rxjs';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
@@ -21,9 +20,10 @@ import {
   ActionEventSet,
   ActionEventSave,
   ActionEventImageSetUrl,
+  ActionEventImageSetPath,
   ActionEventImageClear,
   ActionEventSetId,
-  ActionEventImageSetPath
+  ActionEventUpdate
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../user-events';
 import { ActionClusterReset } from '../cluster';
@@ -31,6 +31,7 @@ import { firestore } from 'firebase/app';
 import { ServiceEvents } from '@firefly/core/services';
 import { ActionStorageRemoveNew, ActionStorageUrlSet, ActionStorageUrlGet } from '@theory/firebase';
 import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -72,6 +73,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSet:    ActionEventSet,
                 ActionPatch:  ActionEventPatch,
                 ActionCreate: ActionEventCreate,
+                ActionUpdate: ActionEventUpdate,
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
@@ -125,7 +127,17 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventCreate)
     create(context: StateContext<StateEventModel>)
     {
-        return super.create(context);
+        return context.dispatch(new ActionImageCreate()).
+        pipe
+        (
+            switchMap(() => super.create(context))
+        );
+    }
+
+    @Action(ActionEventUpdate)
+    update(context: StateContext<StateEventModel>)
+    {
+        return super.update(context);
     }
 
     @Action(ActionEventSave)

@@ -1,41 +1,18 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateImageModel } from './image.state.model';
+import { CoreUtil } from '@theory/core';
+import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateImageOptions: StoreOptions<StateImageModel> =
 {
-    name : 'image',
+    name : 'images',
 
     defaults :
     {
-        empty :
-        {
-            version     : undefined,
-            id          : undefined,
-            dateCreated : undefined,
-            dateUpdated : undefined,
-
-            userId      : undefined,
-            name        : null,
-            description : null,
-            private     : true,
-            draft       : false,
-
-            bucketPath: null,
-            mediaType:  null,
-            url:        null
-        },
-
-        form :
-        {
-            model  : {},
-            dirty  : false,
-            status : '',
-            errors : {}
-        },
-
+        snapshot  : undefined,
+        form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
         formGroup : undefined,
-        formPath  : 'image.form',
 
         uploadProgress: 0,
         uploadError:    undefined
