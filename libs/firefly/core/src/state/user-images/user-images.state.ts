@@ -1,11 +1,7 @@
-import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of, empty } from 'rxjs';
-import { switchMap, tap, map } from 'rxjs/operators';
-
-import { CoreUtil, TypeOf } from '@theory/core';
-import { Image, UserImage } from '@firefly/core/models';
-import { ServiceUserImages, ServiceImages } from '@firefly/core/services';
-import { StateReferenceTable, Default } from '@theory/ngxs';
+import { State, Action, StateContext, Store } from '@ngxs/store';
+import { Image } from '@firefly/core/models';
+import { ServiceImages } from '@firefly/core/services';
+import { StateQuery } from '@theory/ngxs';
 
 import { StateUserImagesModel } from './user-images.state.model';
 import { StateUserImagesOptions } from './user-images.state.options';
@@ -14,162 +10,72 @@ import {
     ActionUserImagesReset,
     ActionUserImagesRemove,
     ActionUserImagesGetData,
-    ActionUserImagesSort,
     ActionUserImagesGet,
-    ActionUserImagesSet,
-    ActionUserImagesDelete,
     ActionUserImagesSync
 } from './user-images.actions';
 import { StateUser } from '../user';
+import { Query } from '@angular/fire/firestore';
 
 @State<StateUserImagesModel>(StateUserImagesOptions)
 
-export class StateUserImages extends StateReferenceTable<UserImage, Image, StateUserImagesModel>
+export class StateUserImages extends StateQuery<Image, StateUserImagesModel>
 {
-    @Selector() static data(state: StateUserImagesModel):          Record<string, UserImage> { return state.data; }
-    @Selector() static keys(state: StateUserImagesModel):          Array<string>             { return state.keys; }
-    @Selector() static lookup(state: StateUserImagesModel):        Record<string, Image>     { return state.lookup; }
-    @Selector() static list(state: StateUserImagesModel):          Array<Image>              { return state.list; }
-    @Selector() static offset(state: StateUserImagesModel):        number                    { return state.offset; }
-    @Selector() static pageSize(state: StateUserImagesModel):      number                    { return state.pageSize; }
-    @Selector() static initialized(state: StateUserImagesModel):   boolean                   { return state.initialized; }
-    @Selector() static sortField(state: StateUserImagesModel):     string                    { return state.sortField; }
-    @Selector() static sortAscending(state: StateUserImagesModel): boolean                   { return state.sortAscending; }
-    @Selector() static sortFields(state: StateUserImagesModel):    Record<string, TypeOf>    { return state.sortFields; }
-    @Selector() static sortType(state: StateUserImagesModel):      TypeOf                    { return state.sortFields[state.sortField]; }
-    @Selector() static sort(state: StateUserImagesModel):          boolean                   { return Object.keys(StateUserImages.sortFields(state)).length > 0; }
-    @Selector() static count(state: StateUserImagesModel):         number                    { return Object.keys(StateUserImages.data(state)).length; }
-    @Selector() static found(state: StateUserImagesModel):         boolean                   { return StateUserImages.count(state) > 0; }
-    @Selector() static getAll(state: StateUserImagesModel):        boolean                   { return StateUserImages.sort(state) && state.sortByEntity; }
-
     constructor
     (
         private store:   Store,
-        private service: ServiceUserImages,
-        private images:  ServiceImages
+        private service: ServiceImages
     )
     {
-        super();
+        super
+        (
+            StateUserImagesOptions.defaults,
+            {
+                ActionReset   : ActionUserImagesReset,
+                ActionGetData : ActionUserImagesGetData,
+                ActionGet     : ActionUserImagesGet,
+                ActionAdd     : ActionUserImagesAdd,
+                ActionRemove  : ActionUserImagesRemove,
+                ActionSync    : ActionUserImagesSync
+            }
+        );
     }
 
     @Action(ActionUserImagesReset)
-    reset({ patchState }: StateContext<StateUserImagesModel>)
+    reset(context: StateContext<StateUserImagesModel>)
     {
-        const defaults: StateUserImagesModel = CoreUtil.clone<StateUserImagesModel>(StateUserImagesOptions.defaults);
+        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const query: Query   = userId == null ? undefined : this.service.collection('events').ref.where('userId', '==', userId);
 
-        return patchState(defaults);
+        return super.reset(context, query);
     }
 
     @Action(ActionUserImagesGetData)
-    getData({ dispatch, patchState, getState }: StateContext<StateUserImagesModel>, { fetch }: ActionUserImagesGetData)
+    getData(context: StateContext<StateUserImagesModel>)
     {
-        const state: StateUserImagesModel = getState();
-
-        const id:          string  = this.store.selectSnapshot(StateUser.id);
-        const initialized: boolean = StateUserImages.initialized(state);
-
-        return initialized ? of({}) : dispatch
-        ([
-            new ActionUserImagesReset()
-        ]).
-        pipe
-        (
-            switchMap(() =>
-                this.service.get(id)
-            ),
-            switchMap((data: Record<string, UserImage>) =>
-                dispatch(new ActionUserImagesSet(data))
-            ),
-            switchMap(() =>
-                StateUserImages.getAll(state) ? of(null) : dispatch(new ActionUserImagesSort())
-            ),
-            switchMap(() =>
-                fetch ? dispatch(new ActionUserImagesGet()) : of(null)
-            ),
-            map(() =>
-                patchState({ initialized: true })
-            )
-        );
+        return super.getData(context);
     }
 
     @Action(ActionUserImagesGet)
-    get({ getState, patchState }: StateContext<StateUserImagesModel>)
+    get(context: StateContext<StateUserImagesModel>)
     {
-        return super.page
-        (
-            getState(),
-            this.images
-        ).
-        pipe
-        (
-            tap((partial: Partial<StateUserImagesModel>) =>
-                patchState(partial)
-            )
-        );
-    }
-
-    @Action(ActionUserImagesSet)
-    set({ patchState }: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesSet)
-    {
-        patchState({ data: payload == null ? {} : payload });
-    }
-
-    @Action(ActionUserImagesSort)
-    sortData({ getState, patchState }: StateContext<StateUserImagesModel>)
-    {
-        const keys: Array<string> = this.sort(getState());
-
-        patchState({ keys });
+        return super.get(context);
     }
 
     @Action(ActionUserImagesAdd)
-    add({ patchState, getState }: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesAdd)
+    add(context: StateContext<StateUserImagesModel>, action: ActionUserImagesAdd)
     {
-        const entity: Image = payload;
-
-        const partial: Partial<StateUserImagesModel> =
-        this.addData
-        (
-            getState(),
-            entity
-        );
-
-        patchState(partial);
+        return super.add(context, action);
     }
 
     @Action(ActionUserImagesRemove)
-    remove({ patchState, getState }: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesRemove)
+    remove(context: StateContext<StateUserImagesModel>, action: ActionUserImagesRemove)
     {
-        const partial: Partial<StateUserImagesModel> =
-        this.removeData
-        (
-            getState(),
-            payload
-        );
-
-        patchState(partial);
+        return super.remove(context, action);
     }
 
     @Action(ActionUserImagesSync)
-    sync({ patchState, getState}: StateContext<StateUserImagesModel>, { payload }: ActionUserImagesSync)
+    sync(context: StateContext<StateUserImagesModel>, action: ActionUserImagesSync)
     {
-        const after: Image = payload;
-
-        const partial: Partial<StateUserImagesModel> = this.syncData
-        (
-            getState(),
-            after
-        );
-
-        patchState(partial);
-    }
-
-    @Action(ActionUserImagesDelete)
-    delete({ dispatch }: StateContext<StateUserImagesModel>)
-    {
-        return dispatch
-        ([
-            new ActionUserImagesReset()
-        ]);
+        return super.sync(context, action);
     }
 }

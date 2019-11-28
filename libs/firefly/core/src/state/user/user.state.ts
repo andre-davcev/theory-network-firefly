@@ -36,7 +36,7 @@ import { ActionUserAlertsDelete, ActionUserAlertsReset, ActionUserAlertsGetData 
 import { ActionUserClustersReset } from '../user-clusters/user-clusters.actions';
 import { ActionUserEventsReset } from '../user-events/user-events.actions';
 import { ActionUserIconsDelete, ActionUserIconsReset } from '../user-icons/user-icons.actions';
-import { ActionUserImagesDelete, ActionUserImagesReset } from '../user-images/user-images.actions';
+import { ActionUserImagesReset } from '../user-images/user-images.actions';
 import { ActionUserStreamDelete, ActionUserStreamReset, ActionUserStreamGetData } from '../user-stream/user-stream.actions';
 import { ActionUserSubscriptionsDelete, ActionUserSubscriptionsReset } from '../user-subscriptions/user-subscriptions.actions';
 
@@ -179,7 +179,6 @@ export class StateUser implements NgxsOnInit
                 ([
                     new ActionUserAlertsDelete(),
                     new ActionUserIconsDelete(),
-                    new ActionUserImagesDelete(),
                     new ActionUserStreamDelete(),
                     new ActionUserSubscriptionsDelete(),
                     new ActionUserReset()
