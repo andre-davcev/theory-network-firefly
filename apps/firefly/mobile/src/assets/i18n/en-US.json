@@ -124,6 +124,9 @@
   "page.user-profile.title"  : "Profile",
   "page.user-settings.title" : "Settings",
 
+  "page.icon-library.title" : "Camera",
+  "page.icon-assets.title" : "Assets",
+
   "component.map-loading": "Loading Map...",
 
   "data.day-of-week.sunday"    : "Sunday",

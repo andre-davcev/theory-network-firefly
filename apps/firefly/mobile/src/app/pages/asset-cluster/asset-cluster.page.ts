@@ -6,10 +6,11 @@ import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { LoadingOptions } from '@ionic/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, ModalController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateCluster, ActionClusterCreate, StateIcon, ActionIconUriSet, ActionIconSetId, ActionClusterPatch, MockIconId } from '@firefly/core';
 import { Pages } from '../pages.enum';
+import { PageIconSelector } from '../icon-selector';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 
 const { Camera } = Plugins;
@@ -33,7 +34,8 @@ export class PageAssetCluster
     constructor(
       private store: Store,
       private loading: LoadingController,
-      private toast: ToastController
+      private toast: ToastController,
+      private modal: ModalController
     )
     { }
 
@@ -52,7 +54,11 @@ export class PageAssetCluster
 
     public navigate(page: Pages.IconSelector)
     {
-        if (page === Pages.IconSelector)
+        from(this.modal.create({
+          component: PageIconSelector
+        })).
+        subscribe((modal: HTMLIonModalElement) => modal.present());
+       /* if (page === Pages.IconSelector)
         {
             if (this.store.selectSnapshot(StateDevice.device))
             {
@@ -91,7 +97,7 @@ export class PageAssetCluster
             {
                 this.store.dispatch(new ActionIconSetId(MockIconId));
             }
-        }
+        }*/
     }
 
     public imageClicked(): void

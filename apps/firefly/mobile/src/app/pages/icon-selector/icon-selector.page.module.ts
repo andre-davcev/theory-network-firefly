@@ -18,12 +18,13 @@ import { ModulePageIconLibrary } from '../icon-library';
         ModulePageIconCatalog,
         ModulePageIconAssets,
         ModulePageIconLibrary,
-        ModuleDirectiveElevation,
-        RouterModule.forChild(RoutesPageIconSelector)
+        ModuleDirectiveElevation/*,
+        RouterModule.forChild(RoutesPageIconSelector)*/
     ],
 
     declarations : [PageIconSelector],
-    exports: [PageIconSelector]
+    exports: [PageIconSelector],
+    entryComponents: [PageIconSelector]
 })
 
 export class ModulePageIconSelector { }
