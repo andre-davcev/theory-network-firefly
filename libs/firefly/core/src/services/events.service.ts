@@ -83,12 +83,12 @@ export class ServiceEvents extends ServiceFirestore<Event>
             name        : [event.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
             description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
 
-            tagline     : [event.tagline,     [Validators.required, ValidatorsExtended.minLength(1)]],
-            bucketPath  : [event.bucketPath,  [ServiceEvents.validateImage()]],
-            coordinates : [event.coordinates, Validators.required],
-            location    : [event.location,    Validators.required],
-            timeStart   : [event.timeStart,   [ServiceEvents.validateTime()]],
-            timeEnd     : [event.timeEnd,     [ServiceEvents.validateTime()]]
+            tagline       : [event.tagline,       [Validators.required, ValidatorsExtended.minLength(1)]],
+            bucketPath    : [event.bucketPath,    [ServiceEvents.validateImage()]],
+            coordinates   : [event.coordinates,   Validators.required],
+            locationTypes : [event.locationTypes, Validators.required],
+            timeStart     : [event.timeStart,     [ServiceEvents.validateTime()]],
+            timeEnd       : [event.timeEnd,       [ServiceEvents.validateTime()]]
         });
     }
 }

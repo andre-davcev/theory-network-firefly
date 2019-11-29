@@ -77,7 +77,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
                 ActionDelete: ActionClusterDelete,
 
                 ActionsReset:  [],
-                ActionsCreate: [ActionIconCreate],
+                ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserClustersAdd],
                 ActionsQueryRemove: [ActionUserClustersRemove, ActionUserStreamRemove, ActionUserSubscriptionsRemove],

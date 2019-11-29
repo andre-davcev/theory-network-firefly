@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { StatusBarStyle, Plugins, KeyboardResize } from '@capacitor/core';
+import { StatusBarStyle, Plugins } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateEvent, Location, ActionEventLocationSet } from '@firefly/core';
-import { StateMap, ActionMapPlaceSetWithSearchResult, ActionMapSearchResultSetWithPlace } from '@theory/mapbox';
+import { StateEvent, ActionEventLocationSet } from '@firefly/core';
+import { StateMap, ActionMapPlaceSetWithSearchResult, ActionMapSearchResultSetWithPlace, MapboxPlaceType } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
 
 const { Keyboard } = Plugins;
@@ -21,9 +21,7 @@ const { Keyboard } = Plugins;
 
 export class PageEventLocation extends BaseComponent implements OnInit
 {
-    @Select(StateEvent.locations)       locations$:           Observable<Array<Location>>;
-    @Select(StateEvent.locationDefined) locationDefined$:     Observable<boolean>;
-
+    @Select(StateEvent.locationDefined)      locationDefined$:     Observable<boolean>;
     @Select(StateMap.searchResult)           searchResult$:        Observable<Result>;
     @Select(StateMap.searchResultDefined)    searchResultDefined$: Observable<boolean>;
 

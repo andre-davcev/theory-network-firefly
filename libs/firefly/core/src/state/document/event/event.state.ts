@@ -5,7 +5,7 @@ import { ActionMapSearchResultClear, MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
-import { Event, Location, Image } from '@firefly/core/models';
+import { Event, Image } from '@firefly/core/models';
 import { ActionImageCreate, ActionImageReset, ActionImagePatch } from '@firefly/core/state/document/image';
 
 import { StateEventModel } from './event.state.model';
@@ -31,7 +31,7 @@ import { ActionClusterReset } from '../cluster';
 import { firestore } from 'firebase/app';
 import { ServiceEvents } from '@firefly/core/services';
 import { ActionStorageRemoveNew, ActionStorageUrlSet, ActionStorageUrlGet } from '@theory/firebase';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @State<StateEventModel>(StateEventOptions)
@@ -61,12 +61,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 private     : true,
                 draft       : false,
 
-                tagline     : null,
-                bucketPath  : null,
-                coordinates : undefined,
-                location    : undefined,
-                timeStart   : null,
-                timeEnd     : null
+                tagline       : null,
+                bucketPath    : null,
+                coordinates   : undefined,
+                locationTypes : undefined,
+                timeStart     : null,
+                timeEnd       : null
             },
             {
                 ActionReset:  ActionEventReset,
@@ -79,7 +79,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionDelete: ActionEventDelete,
 
                 ActionsReset:  [ActionClusterReset, ActionStorageRemoveNew, ActionMapSearchResultClear],
-                ActionsCreate: [ActionImageCreate],
+                ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
                 ActionsQueryRemove: [ActionUserEventsRemove],
@@ -88,11 +88,10 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         );
     }
 
-    @Selector() static location(state: StateEventModel): Location { return StateEvent.data()(state).location; }
-    @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.location(state) != null; }
-    @Selector() static locations(state: StateEventModel): Array<Location> { return [ StateEvent.location(state) ]; }
-    @Selector() static timeStart(state: StateEventModel): string { return StateEvent.data()(state).timeStart; }
-    @Selector() static timeEnd(state: StateEventModel): string { return StateEvent.data()(state).timeEnd; }
+    @Selector() static locationTypes(state: StateEventModel): Array<MapboxPlaceType> { return StateEvent.dataState(state).locationTypes; }
+    @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.locationTypes(state) != null; }
+    @Selector() static timeStart(state: StateEventModel): string { return StateEvent.dataState(state).timeStart; }
+    @Selector() static timeEnd(state: StateEventModel): string { return StateEvent.dataState(state).timeEnd; }
     @Selector() static timeEndValid(state: StateEventModel): boolean
     {
         const timeStart: Date = new Date(StateEvent.timeStart(state));
@@ -229,18 +228,10 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventLocationSet)
     setLocation({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
     {
-        const result: Result                = payload;
-        const types: Array<MapboxPlaceType> = result.place_type as Array<MapboxPlaceType>;
+        const result:        Result                 = payload;
+        const locationTypes: Array<MapboxPlaceType> = result.place_type as Array<MapboxPlaceType>;
+        const coordinates:   firestore.GeoPoint     = result == null ? null : new firestore.GeoPoint(result.center[1], result.center[0]);
 
-        let coordinates: firestore.GeoPoint;
-        let location:    Location;
-
-        if (result != null)
-        {
-            coordinates = new firestore.GeoPoint(result.center[1], result.center[0]);
-            location    = { types };
-        }
-
-        return dispatch(new ActionEventPatch({ coordinates, location }));
+        return dispatch(new ActionEventPatch({ coordinates, locationTypes }));
     }
 }
