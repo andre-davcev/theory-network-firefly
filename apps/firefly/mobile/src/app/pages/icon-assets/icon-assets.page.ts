@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { StateUserIcons, Icon } from '@firefly/core';
 
 @Component
 ({
@@ -9,7 +12,8 @@ import { Component } from '@angular/core';
 
 export class PageIconAssets
 {
-    public urls: Array<string> =
+  @Select(StateUserIcons.getUrls) iconAssets$: Observable<Array<Icon>>;
+    /*public urls: Array<string> =
     [
         'assets/images/temp-icon-1.png',
         'assets/images/temp-icon-2.png',
@@ -18,7 +22,7 @@ export class PageIconAssets
         'assets/images/temp-icon-5.png',
         'assets/images/temp-icon-6.png',
         'assets/images/temp-icon-7.png'
-    ];
+    ];*/
 
     public imageClicked(index: number): void
     {

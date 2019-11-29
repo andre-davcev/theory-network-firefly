@@ -41,6 +41,12 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Selector() static count(state: StateUserIconsModel):         number                    { return Object.keys(StateUserIcons.data(state)).length; }
     @Selector() static found(state: StateUserIconsModel):         boolean                   { return StateUserIcons.count(state) > 0; }
     @Selector() static getAll(state: StateUserIconsModel):        boolean                   { return StateUserIcons.sort(state) && state.sortByEntity; }
+    @Selector() static getUrls(state: StateUserIconsModel):       Array<string>
+    {
+      return state.list.map(function (currentUserIcon){
+        return currentUserIcon.bucketPathSmall;
+      })
+    }
 
     constructor
     (
@@ -117,9 +123,10 @@ export class StateUserIcons extends StateReferenceTable<UserIcon, Icon, StateUse
     @Action(ActionUserIconsSort)
     sortData({ getState, patchState }: StateContext<StateUserIconsModel>)
     {
+      if(StateUserIcons.count(getState()) > 0){
         const keys: Array<string> = this.sort(getState());
-
         patchState({ keys });
+      }
     }
 
     @Action(ActionUserIconsAdd)

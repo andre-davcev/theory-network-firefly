@@ -7,4 +7,5 @@ export interface Icon extends Asset
     url?       : string;
     iconId:          string;
     iconUrlSmall?  : string;
+    bucketPathSmall? : string;
 }
