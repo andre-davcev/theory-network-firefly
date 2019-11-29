@@ -7,7 +7,7 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, StateCluster, ActionEventImageSetUrl, ActionEventPatch, ActionEventImageSetPath } from '@firefly/core';
+import { StateEvent, ActionEventCreate, StateCluster, ActionEventImageSetUrl, ActionEventPatch, ActionEventImageSetPath, ActionEventSave } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
@@ -124,7 +124,7 @@ export class PageAssetEvent extends BaseComponent
         this.store.dispatch
         ([
             new ActionMobileLoadingShow(),
-            new ActionEventCreate()
+            new ActionEventSave()
         ]).
         pipe
         (

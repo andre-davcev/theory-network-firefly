@@ -105,7 +105,6 @@ export class StateMap
     @Action(ActionMapSearchResultSet)
     searchResultSet({ patchState }, { payload }: ActionMapSearchResultSet)
     {
-        console.log(payload);
         patchState({ searchResult: payload });
     }
 
