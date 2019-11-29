@@ -3,10 +3,10 @@ import { Action, State, StateContext, Store } from '@ngxs/store';
 
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { Cluster } from '@firefly/core/models';
+import { Cluster, Icon } from '@firefly/core/models';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
-import { ActionIconCreate, StateIcon } from '@firefly/core/state/document/icon';
+import { ActionIconCreate, ActionIconReset, ActionIconPatch } from '@firefly/core/state/document/icon';
 
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
@@ -19,14 +19,19 @@ import {
     ActionClusterSave,
     ActionClusterDelete,
     ActionClusterSetId,
-    ActionClusterIconAdd,
-    ActionClusterIconRemove,
-    ActionClusterUpdate
+    ActionClusterUpdate,
+    ActionClusterIconSetUrl,
+    ActionClusterIconSetPath,
+    ActionClusterIconClear,
+    ActionClusterIconCreate
 } from './cluster.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../..//query/user-clusters';
 import { ActionUserStreamRemove } from '../../list/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../query/user-subscriptions/user-subscriptions.actions';
 import { firestore } from 'firebase/app';
+import { ActionStorageUrlSet, ActionStorageUrlGet, ActionStorageRemoveNew } from '@theory/firebase';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @State<StateClusterModel>(StateClusterOptions)
 
@@ -108,7 +113,11 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
     @Action(ActionClusterCreate)
     create(context: StateContext<StateClusterModel>)
     {
-        return super.create(context);
+        return context.dispatch(new ActionClusterIconCreate()).
+        pipe
+        (
+            switchMap(() => super.create(context))
+        );
     }
 
     @Action(ActionClusterUpdate)
@@ -144,17 +153,61 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
         return dispatch(new ActionClusterSet(snapshot, data));
     }
 
-    @Action(ActionClusterIconAdd)
-    iconAdd({ dispatch }: StateContext<StateClusterModel>)
+    @Action(ActionClusterIconSetUrl)
+    imageSetUrl({ dispatch }: StateContext<StateClusterModel>, { url, bucketPath }: ActionClusterIconSetUrl)
     {
-        const bucketPath: string = this.store.selectSnapshot(StateIcon.bucketPath);
-
-        return dispatch(new ActionClusterPatch({ bucketPath }));
+        return dispatch(new ActionStorageUrlSet(url, bucketPath)).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionClusterPatch({ bucketPath })))
+        );
     }
 
-    @Action(ActionClusterIconRemove)
-    iconRemove({ dispatch  }: StateContext<StateClusterModel>)
+    @Action(ActionClusterIconSetPath)
+    imageSetPath({ dispatch }: StateContext<StateClusterModel>, { bucketPath }: ActionClusterIconSetPath)
     {
-        return dispatch(new ActionClusterPatch({ bucketPath : undefined }));
+        return dispatch(new ActionStorageUrlGet(bucketPath)).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionClusterPatch({ bucketPath })))
+        );
+    }
+
+    @Action(ActionClusterIconClear)
+    imageClear({ dispatch  }: StateContext<StateClusterModel>)
+    {
+        return dispatch
+        ([
+            new ActionClusterPatch({ bucketPath: null }),
+            new ActionStorageRemoveNew()
+        ]);
+    }
+
+    @Action(ActionClusterIconCreate)
+    imageCreate({ dispatch, getState }: StateContext<StateClusterModel>)
+    {
+        const state: StateClusterModel = getState();
+
+        if (StateCluster.bucketPathState(state) !== CoreEnum.IdNew) { return of(null); }
+
+        const cluster: Cluster = StateCluster.dataState(state);
+
+        const partial: Partial<Icon> =
+        {
+            name        : cluster.name,
+            description : `Icon uploaded for cluster "${cluster.name}"`,
+            private     : cluster.private
+        };
+
+        return dispatch(new ActionIconReset()).
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new ActionIconPatch(partial))
+            ),
+            switchMap(() =>
+                dispatch(new ActionIconCreate())
+            )
+        );
     }
 }

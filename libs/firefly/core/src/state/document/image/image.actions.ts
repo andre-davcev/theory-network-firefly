@@ -15,9 +15,8 @@ export class ActionImageSave   { static readonly type = ActionsImage.Save;    co
 export class ActionImageDelete { static readonly type = ActionsImage.Delete;  constructor() { } }
 export class ActionImageSetId  { static readonly type = ActionsImage.SetId;   constructor(public id: string = CoreEnum.IdNew) { } }
 
-export class ActionImageSetUrl  { static readonly type = ActionsImage.SetUrl;  constructor(public url: string, public bucketPath: string = CoreEnum.IdNew) { } }
-export class ActionImageSetPath { static readonly type = ActionsImage.SetPath; constructor(public bucketPath: string = MockImagePath) { } }
-export class ActionImageClear   { static readonly type = ActionsImage.Clear;   constructor() { } }
-
+export class ActionImageSetUrl      { static readonly type = ActionsImage.SetUrl;      constructor(public url: string, public bucketPath: string = CoreEnum.IdNew) { } }
+export class ActionImageSetPath     { static readonly type = ActionsImage.SetPath;     constructor(public bucketPath: string = MockImagePath) { } }
+export class ActionImageClear       { static readonly type = ActionsImage.Clear;       constructor() { } }
 export class ActionImageUploadClear { static readonly type = ActionsImage.UploadClear; constructor() { } }
 export class ActionImageUpload      { static readonly type = ActionsImage.Upload;      constructor() { } }

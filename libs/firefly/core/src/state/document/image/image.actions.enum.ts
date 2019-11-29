@@ -10,10 +10,9 @@ export enum ActionsImage
     Save   = '[Image] Save',
     Delete = '[Image] Delete',
 
-    SetUrl  = '[Image] Set Url',
-    SetPath = '[Image] Set Path',
-    Clear   = '[Image] Clear',
-
+    SetUrl      = '[Image] Set Url',
+    SetPath     = '[Image] Set Path',
+    Clear       = '[Image] Clear',
     Upload      = '[Image] Upload',
     UploadClear = '[Image] Upload Clear'
 }

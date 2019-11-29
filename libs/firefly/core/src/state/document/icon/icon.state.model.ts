@@ -1,7 +1,7 @@
 import { Icon } from '@firefly/core/models';
-import { StateAssetModel } from '@firefly/core/interfaces';
+import { StateDocumentModel } from '@theory/ngxs';
 
-export interface StateIconModel extends StateAssetModel<Icon>
+export interface StateIconModel extends StateDocumentModel<Icon>
 {
     uploadProgress: number;
     uploadError:    string;

@@ -20,5 +20,6 @@ export class ActionEventSetId  { static readonly type = ActionsEvent.SetId;   co
 export class ActionEventImageSetUrl  { static readonly type = ActionsEvent.ImageSetUrl;  constructor(public url: string, public bucketPath: string = CoreEnum.IdNew) { } }
 export class ActionEventImageSetPath { static readonly type = ActionsEvent.ImageSetPath; constructor(public bucketPath: string = MockImagePath) { } }
 export class ActionEventImageClear   { static readonly type = ActionsEvent.ImageClear;   constructor() { } }
+export class ActionEventImageCreate  { static readonly type = ActionsEvent.ImageCreate;  constructor() { } }
 
 export class ActionEventLocationSet { static readonly type = ActionsEvent.LocationSet; constructor(public payload: Result) { } }

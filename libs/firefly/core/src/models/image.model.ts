@@ -4,6 +4,4 @@ export interface Image extends Asset
 {
     bucketPath : string;
     mediaType  : string;
-    url?       : string;
-    urlSmall?  : string;
 }

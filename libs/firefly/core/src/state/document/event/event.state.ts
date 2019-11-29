@@ -5,8 +5,8 @@ import { ActionMapSearchResultClear, MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
-import { Event, Location } from '@firefly/core/models';
-import { ActionImageCreate } from '@firefly/core/state/document/image';
+import { Event, Location, Image } from '@firefly/core/models';
+import { ActionImageCreate, ActionImageReset, ActionImagePatch } from '@firefly/core/state/document/image';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -23,7 +23,8 @@ import {
   ActionEventImageSetPath,
   ActionEventImageClear,
   ActionEventSetId,
-  ActionEventUpdate
+  ActionEventUpdate,
+  ActionEventImageCreate
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { ActionClusterReset } from '../cluster';
@@ -31,6 +32,7 @@ import { firestore } from 'firebase/app';
 import { ServiceEvents } from '@firefly/core/services';
 import { ActionStorageRemoveNew, ActionStorageUrlSet, ActionStorageUrlGet } from '@theory/firebase';
 import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -126,7 +128,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventCreate)
     create(context: StateContext<StateEventModel>)
     {
-        return context.dispatch(new ActionImageCreate()).
+        return context.dispatch(new ActionEventImageCreate()).
         pipe
         (
             switchMap(() => super.create(context))
@@ -194,6 +196,34 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
             new ActionEventPatch({ bucketPath: null }),
             new ActionStorageRemoveNew()
         ]);
+    }
+
+    @Action(ActionEventImageCreate)
+    imageCreate({ dispatch, getState }: StateContext<StateEventModel>)
+    {
+        const state: StateEventModel = getState();
+
+        if (StateEvent.bucketPathState(state) !== CoreEnum.IdNew) { return of(null); }
+
+        const event: Event = StateEvent.dataState(state);
+
+        const partial: Partial<Image> =
+        {
+            name        : event.name,
+            description : `Image uploaded for event "${event.name}"`,
+            private     : event.private
+        };
+
+        return dispatch(new ActionImageReset()).
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new ActionImagePatch(partial))
+            ),
+            switchMap(() =>
+                dispatch(new ActionImageCreate())
+            )
+        );
     }
 
     @Action(ActionEventLocationSet)
