@@ -1,7 +1,7 @@
-import { StateReferenceTableModel } from '@theory/ngxs';
-import { Icon, UserIcon } from '@firefly/core/models';
+import { StateQueryModel } from '@theory/ngxs';
+import { Icon } from '@firefly/core/models';
 
-export interface StateUserIconsModel extends StateReferenceTableModel<UserIcon, Icon>
+export interface StateUserIconsModel extends StateQueryModel<Icon>
 {
 
 }

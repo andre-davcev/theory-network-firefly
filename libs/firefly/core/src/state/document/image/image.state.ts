@@ -61,8 +61,7 @@ export class StateImage extends StateDocument<Image, StateImageModel>
               draft       : false,
 
               bucketPath: null,
-              mediaType:  null,
-              url:        null
+              mediaType:  null
           },
           {
               ActionReset:  ActionImageReset,

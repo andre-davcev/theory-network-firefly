@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, from, combineLatest } from 'rxjs';
-import { tap, switchMap, catchError, map, filter } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { tap, switchMap, catchError, map } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateCluster, ActionClusterCreate, StateIcon, ActionIconUriSet, ActionIconSetId, ActionClusterPatch, MockIconId } from '@firefly/core';
+import { StateCluster, ActionClusterCreate, ActionClusterIconSetUrl, ActionClusterIconSetPath } from '@firefly/core';
 import { Pages } from '../pages.enum';
-import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
+import { ActionMobileLoadingShow } from '@firefly/mobile';
 import { StateStorage, StorageImage } from '@theory/firebase';
 
 const { Camera } = Plugins;
@@ -71,27 +71,15 @@ export class PageAssetCluster
                     switchMap(() => from(Camera.getPhoto(options))),
                     map((photo: CameraPhoto) => photo.dataUrl),
                     switchMap((imageData: string) =>
-                        this.store.dispatch(new ActionIconSetId()).pipe
-                        (
-                            switchMap(() => this.store.dispatch
-                            ([
-                                new ActionIconUriSet(imageData),
-                                new ActionMobileLoadingHide()
-                            ]))
-                        )
-                    ),
-                    map(() =>
-                        this.store.selectSnapshot(StateIcon.url)
-                    ),
-                    switchMap((iconUrl: string) =>
-                        this.store.dispatch(new ActionClusterPatch({ iconUrl }))
+                        this.store.dispatch(new ActionClusterIconSetUrl(imageData))
                     )
                 ).
                 subscribe();
             }
             else
             {
-                this.store.dispatch(new ActionIconSetId(MockIconId));
+                this.store.dispatch(new ActionClusterIconSetPath()).
+                subscribe();
             }
         }
     }

@@ -1,13 +1,12 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 import { AngularFireUploadTask, AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of, Observable } from 'rxjs';
-import { map, switchMap, filter, tap, catchError, last } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { switchMap, filter, tap, catchError, last } from 'rxjs/operators';
 
-import { CoreEnum, CoreUtil } from '@theory/core';
-import { StorageFormat, ImageSize } from '@theory/firebase';
-import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
+import { CoreEnum } from '@theory/core';
+import { StorageFormat, ActionStorageRemoveNew, StateStorage, ImageSize, ActionStorageUrlSet, ActionStorageUrlGet } from '@theory/firebase';
+import { StateDocument } from '@theory/ngxs';
 import { Icon } from '@firefly/core/models';
 import { ServiceIcons } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
@@ -20,244 +19,225 @@ import {
   ActionIconGet,
   ActionIconPatch,
   ActionIconCreate,
+  ActionIconSave,
   ActionIconDelete,
   ActionIconUpload,
   ActionIconUploadClear,
-  ActionIconUriSet,
-  ActionIconUriClear,
+  ActionIconSetUrl,
+  ActionIconSetPath,
+  ActionIconClear,
   ActionIconSetId,
-  ActionIconUpdate,
-  ActionIconSave
+  ActionIconUpdate
 } from './icon.actions';
 import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons, ActionUserIconsSync } from '../../query/user-icons';
-import { MockIconId, MockIconPath } from '@firefly/core/mocks';
+import { firestore } from 'firebase/app';
 
 @State<StateIconModel>(StateIconOptions)
 
-export class StateIcon
+export class StateIcon extends StateDocument<Icon, StateIconModel>
 {
-    @Selector() static form(state: StateIconModel): FormNgxs { return state.form; }
-    @Selector() static formGroup(state: StateIconModel): FormGroup { return state.formGroup; }
-    @Selector() static formPath(state: StateIconModel): string { return state.formPath; }
-    @Selector() static isForm(state: StateIconModel): boolean { return StateIcon.formGroup(state) != null; }
-    @Selector() static data(state: StateIconModel): Icon { return StateIcon.form(state).model; }
-    @Selector() static id(state: StateIconModel): string { return StateIcon.data(state).id; }
-    @Selector() static bucketPath(state: StateIconModel): string { return StateIcon.data(state).bucketPath; }
-    @Selector() static isNew(state: StateIconModel): boolean { return  StateIcon.id(state) === CoreEnum.IdNew; }
-    @Selector() static canUpdate(state: StateIconModel): boolean { return StateIcon.form(state).status === FormNgxsStatus.Valid && StateIcon.form(state).dirty; }
+    constructor
+    (
+        private store:   Store,
+                service: ServiceIcons,
+        private storage: AngularFireStorage
+    )
+    {
+      super
+      (
+          StateIconOptions.name,
+          StateIconOptions.defaults,
+          service,
+          {
+              version     : undefined,
+              id          : undefined,
+              dateCreated : undefined,
+              dateUpdated : undefined,
 
-    @Selector() static url(state: StateIconModel): string { return StateIcon.data(state).url; }
+              userId      : undefined,
+              name        : null,
+              description : null,
+              private     : true,
+              draft       : false,
+
+              bucketPath: null,
+              mediaType:  null
+          },
+          {
+              ActionReset:  ActionIconReset,
+              ActionGet:    ActionIconGet,
+              ActionSet:    ActionIconSet,
+              ActionPatch:  ActionIconPatch,
+              ActionCreate: ActionIconCreate,
+              ActionUpdate: ActionIconUpdate,
+              ActionSave:   ActionIconSave,
+              ActionDelete: ActionIconDelete,
+
+              ActionsReset:  [ActionStorageRemoveNew],
+              ActionsCreate: [],
+
+              ActionsQueryAdd:    [ActionUserIconsAdd],
+              ActionsQueryRemove: [ActionUserIconsRemove],
+              ActionsQuerySync:   [ActionUserIconsSync]
+          }
+      );
+    }
 
     @Selector() static uploadProgress(state: StateIconModel):  number  { return state.uploadProgress; }
     @Selector() static uploadError(state: StateIconModel):     string  { return state.uploadError; }
     @Selector() static uploadErrored(state: StateIconModel):   boolean { return state.uploadError != null; }
     @Selector() static uploadCompleted(state: StateIconModel): boolean { return StateIcon.uploadProgress(state) === 100; }
 
-    constructor
-    (
-        private service: ServiceIcons,
-        private store:   Store,
-        private storage: AngularFireStorage
-    ) { }
-
     @Action(ActionIconReset)
-    reset({ patchState, getState, dispatch }: StateContext<StateIconModel>)
+    reset(context: StateContext<StateIconModel>)
     {
-        const defaults: StateIconModel = CoreUtil.clone<StateIconModel>(StateIconOptions.defaults);
-
-        patchState(defaults);
-
-        return dispatch
-        ([
-            new SetFormPristine(StateIcon.formPath(getState()))
-        ]);
+        return super.reset(context)
     }
 
     @Action(ActionIconGet)
-    get({ dispatch }: StateContext<StateIconModel>, { payload }: ActionIconGet)
+    get(context: StateContext<StateIconModel>, action: ActionIconGet)
     {
-        return this.service.snapshot(payload).
-        pipe
-        (
-            switchMap((object: Icon) =>
-                dispatch
-                ([
-                    new ActionIconSet(object)
-                ])
-            )
-        );
-    }
-
-    @Action(ActionIconSetId)
-    setId({ dispatch }: StateContext<StateIconModel>, { payload }: ActionIconSetId)
-    {
-        const id: string = payload;
-
-        const object: Icon = id === CoreEnum.IdNew || id === MockIconId ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Icon>(StateIconOptions.defaults.empty)) :
-            this.store.selectSnapshot(StateUserIcons.lookup)[id];
-
-        if (id === MockIconId)
-        {
-            object.id         = MockIconId;
-            object.bucketPath = MockIconPath;
-        }
-
-        return dispatch([new ActionIconSet(object)]);
+        return super.get(context, action);
     }
 
     @Action(ActionIconSet)
-    set({ patchState, getState, dispatch }: StateContext<StateIconModel>, { payload }: ActionIconSet)
+    set(context: StateContext<StateIconModel>, action: ActionIconSet)
     {
-        const object: Icon = payload;
-
-        return dispatch
-        ([
-            new ActionIconReset()
-        ]).
-        pipe
-        (
-            switchMap(() =>
-                this.service.getDownloadUrl(object.bucketPath, ImageSize.Medium).
-                pipe(tap((url: string) => object.url = url))
-            ),
-            map(() =>
-                patchState({ formGroup: this.service.formCreate(object) })
-            ),
-
-            switchMap(() =>
-                dispatch(new UpdateFormValue({ value: object, path: StateIcon.formPath(getState())}))
-            )
-        );
+        return super.set(context, action);
     }
 
     @Action(ActionIconPatch)
-    patch({ dispatch, getState } : StateContext<StateIconModel>, { payload }: ActionIconPatch)
+    patch(context: StateContext<StateIconModel>, action: ActionIconPatch)
     {
-        const state: StateIconModel   = getState();
-        const data:  Icon             = StateIcon.data(state);
-        const value: Icon             = { ...data, ...payload };
-        const path:  string           = StateIcon.formPath(state);
-
-        return dispatch(new UpdateFormValue({ value, path })).
-        pipe
-        (
-            switchMap(() =>
-                data.id === CoreEnum.IdNew ?
-                    of(null) :
-                    dispatch(new ActionUserIconsSync(data))
-            )
-        );
+        return super.patch(context, action);
     }
+
     @Action(ActionIconCreate)
-    create({ getState, dispatch }: StateContext<StateIconModel>)
+    create(context: StateContext<StateIconModel>)
     {
-        const state: StateIconModel = getState();
-        const data:  Icon           = StateIcon.data(state);
-        const { url, ...partial }    = this.service.addMetadata(data);
+        const { dispatch, getState } = context;
+
+        const data:    Icon  = StateIcon.dataState(getState());
+        const dataUri: string = this.store.selectSnapshot(StateStorage.images)[data.id].medium;
+
+        (this.service as ServiceIcons).addMetadata(data, this.collection, dataUri);
 
         return dispatch(new ActionIconPatch(data)).
         pipe
         (
             switchMap(() => dispatch(new ActionIconUpload())),
-            switchMap(() => this.service.create(partial)),
-            switchMap(() => dispatch(new ActionUserIconsAdd(data)))
+            switchMap(() => super.create(context))
         );
     }
 
     @Action(ActionIconUpdate)
-    update({ getState, dispatch }: StateContext<StateIconModel>)
+    update(context: StateContext<StateIconModel>)
     {
-        const state:      StateIconModel = getState();
-        const formGroup:  FormGroup       = StateIcon.formGroup(state);
-        const id:         string          = StateIcon.id(state);
-        const { url, ...changed }         = this.service.changedFields(formGroup);
-        const upload$:   Observable<void> = url == null ? of(null) : dispatch(new ActionIconUpload());
-
-        upload$.pipe
+        return context.dispatch(new ActionIconUpload()).
+        pipe
         (
             switchMap(() =>
-                Object.keys(changed).length === 0 ?
-                    of(null) :
-                    this.service.patch(id, changed)
+                super.update(context)
             )
         );
     }
 
     @Action(ActionIconSave)
-    save({ getState, dispatch }: StateContext<StateIconModel>)
+    save(context: StateContext<StateIconModel>)
     {
-        const state:      StateIconModel = getState();
-        const formPath:   string          = StateIcon.formPath(state);
-        const isNew:      boolean         = StateIcon.isNew(state);
-        const save$:      Observable<void> = dispatch(isNew ? new ActionIconCreate() : new ActionIconUpdate());
-
-        return save$.
-        pipe
-        (
-            switchMap(() =>
-                dispatch(new SetFormPristine(formPath))
-            )
-        );
+        return super.save(context);
     }
 
     @Action(ActionIconDelete)
-    delete({ getState, dispatch }: StateContext<StateIconModel>)
+    delete(context: StateContext<StateIconModel>)
     {
-        const data: Icon = StateIcon.data(getState());
+        return super.delete(context);
+    }
 
-        return this.service.delete(data).
+    @Action(ActionIconSetId)
+    setId({ dispatch }: StateContext<StateIconModel>, { id }: ActionIconSetId)
+    {
+        const isNew: boolean = id === CoreEnum.IdNew;
+
+        const userId:   string                     = this.store.selectSnapshot(StateUser.id);
+        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserIcons.snapshotLookup())[id];
+
+        const data: Icon = isNew ?
+            this.service.formDataNew(userId, this.empty) :
+            this.store.selectSnapshot(StateUserIcons.dataLookup())[id];
+
+        return dispatch(new ActionIconSet(snapshot, data));
+    }
+
+    @Action(ActionIconSetUrl)
+    imageSetUrl({ dispatch }: StateContext<StateIconModel>, { url, bucketPath }: ActionIconSetUrl)
+    {
+        return dispatch(new ActionStorageUrlSet(url, bucketPath)).
         pipe
         (
-            switchMap(() =>
-                dispatch
-                ([
-                    new ActionUserIconsRemove(data.id),
-                    new ActionIconReset()
-                ])
-            )
+            switchMap(() => dispatch(new ActionIconPatch({ bucketPath })))
         );
     }
 
-    @Action(ActionIconUriSet)
-    uriSet({ dispatch }: StateContext<StateIconModel>, { payload }: ActionIconUriSet)
+    @Action(ActionIconSetPath)
+    imageSetPath({ dispatch }: StateContext<StateIconModel>, { bucketPath }: ActionIconSetPath)
     {
-        return dispatch(new ActionIconPatch({ url: payload }));
+        return dispatch(new ActionStorageUrlGet(bucketPath)).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionIconPatch({ bucketPath })))
+        );
     }
 
-    @Action(ActionIconUriClear)
-    uriClear({ dispatch }: StateContext<StateIconModel>)
+    @Action(ActionIconClear)
+    imageClear({ dispatch  }: StateContext<StateIconModel>)
     {
-        return dispatch(new ActionIconPatch({ url: undefined }));
+        return dispatch
+        ([
+            new ActionIconPatch({ bucketPath: null }),
+            new ActionStorageRemoveNew()
+        ]);
     }
 
     @Action(ActionIconUploadClear)
     uploadClear({ patchState } : StateContext<StateIconModel>)
     {
-        patchState({ uploadProgress: 0, uploadError: undefined });
+        patchState({ uploadProgress: 0, uploadError: null });
     }
 
     @Action(ActionIconUpload)
-    upload({ patchState, getState, dispatch }: StateContext<StateIconModel>)
+    upload(context: StateContext<StateIconModel>)
     {
-        const state: StateIconModel = getState();
-        const path:  string         = StateIcon.bucketPath(state);
-        const url:   string         = StateIcon.url(state);
+        const { getState, dispatch, patchState } = context;
 
-        const ref:  AngularFireStorageReference = this.storage.ref(path);
-        const task: AngularFireUploadTask       = ref.putString(url, StorageFormat.DataUrl);
+        const state:             StateIconModel = getState();
+        const bucketPath:        string          = StateIcon.bucketPathState(state);
+        const formGroup:         FormGroup       = StateIcon.formGroupState(state);
+        const controlBucketPath: AbstractControl = formGroup.get('bucketPath');
+        const bucketPathChanged: boolean         = controlBucketPath.dirty && controlBucketPath.valid;
 
-        dispatch(new ActionIconUploadClear()).
-        pipe
-        (
-            switchMap(() => task.percentageChanges()),
-            tap((uploadProgress: number) => patchState({ uploadProgress })),
-            filter(() => StateIcon.uploadCompleted(getState())),
-            switchMap(() => task.snapshotChanges()),
-            last(),
-            switchMap(() => ref.getDownloadURL()),
-            switchMap((url: string) => dispatch(new ActionIconUriSet(url))),
-            catchError((uploadError: any) => of(patchState({ uploadError })))
-        );
+        const ref:  AngularFireStorageReference = this.storage.ref(bucketPath);
+        const task: AngularFireUploadTask       = ref.putString(bucketPath, StorageFormat.DataUrl);
+
+        return !bucketPathChanged ?
+            of(null) :
+            dispatch(new ActionIconUploadClear()).
+            pipe
+            (
+                switchMap(() => task.percentageChanges()),
+                tap((uploadProgress: number) => patchState({ uploadProgress })),
+                filter(() => StateIcon.uploadCompleted(getState())),
+                switchMap(() => task.snapshotChanges()),
+                last(),
+                switchMap(() => ref.getDownloadURL()),
+                switchMap((url: string) =>
+                    dispatch
+                    ([
+                        new ActionStorageUrlSet(url, bucketPath, ImageSize.Medium),
+                        new ActionStorageRemoveNew()
+                    ])
+                ),
+                catchError((uploadError: any) => of(patchState({ uploadError })))
+            );
     }
 }

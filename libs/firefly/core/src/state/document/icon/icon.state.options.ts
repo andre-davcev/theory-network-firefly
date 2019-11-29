@@ -1,6 +1,8 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateIconModel } from './icon.state.model';
+import { CoreUtil } from '@theory/core';
+import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateIconOptions: StoreOptions<StateIconModel> =
 {
@@ -8,34 +10,9 @@ export const StateIconOptions: StoreOptions<StateIconModel> =
 
     defaults :
     {
-        empty :
-        {
-            version     : undefined,
-            id          : undefined,
-            dateCreated : undefined,
-            dateUpdated : undefined,
-
-            userId      : undefined,
-            name        : null,
-            description : null,
-            private     : true,
-            draft       : false,
-
-            bucketPath : null,
-            mediaType  : null,
-            url        : null
-        },
-
-        form :
-        {
-            model  : {},
-            dirty  : false,
-            status : '',
-            errors : {}
-        },
-
+        snapshot  : undefined,
+        form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
         formGroup : undefined,
-        formPath  : 'icon.form',
 
         uploadProgress: 0,
         uploadError:    undefined

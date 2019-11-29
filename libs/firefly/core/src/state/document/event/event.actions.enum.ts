@@ -13,6 +13,7 @@ export enum ActionsEvent
     ImageSetUrl  = '[Event] Image Set Url',
     ImageSetPath = '[Event] Image Set Path',
     ImageClear   = '[Event] Image Clear',
+    ImageCreate  = '[Event] Image Create',
 
     LocationSet = '[Event] Location Set',
     TimeSet     = '[Event] Time Set'
