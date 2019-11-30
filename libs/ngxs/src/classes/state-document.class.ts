@@ -139,31 +139,28 @@ export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
     {
         const { getState, patchState, dispatch } = context;
 
-        const state: M       = getState();
-        const value: T       = StateDocument.dataState(state);
-        const isNew: boolean = StateDocument.isNewState(state);
-        const path:  string  = this.formPath;
+        const state: M      = getState();
+        const value: T      = StateDocument.dataState(state);
+        const path:  string = this.formPath;
 
-        return !isNew ?
-            of(null) :
-            this.service.documentCreate(this.collection, value).
-            pipe
-            (
-                tap((snapshot: firestore.DocumentSnapshot) =>
-                    patchState({ snapshot } as M)
-                ),
-                switchMap((snapshot: firestore.DocumentSnapshot) =>
-                    dispatch
-                    ([
-                        new UpdateFormValue({ value, path }),
-                        ...this.ActionsCreate(),
-                        ...this.ActionsQueryAdd(snapshot)
-                    ])
-                ),
-                map(() =>
-                    true
-                )
-            );
+        return this.service.documentCreate(this.collection, value).
+        pipe
+        (
+            tap((snapshot: firestore.DocumentSnapshot) =>
+                patchState({ snapshot } as M)
+            ),
+            switchMap((snapshot: firestore.DocumentSnapshot) =>
+                dispatch
+                ([
+                    new UpdateFormValue({ value, path }),
+                    ...this.ActionsCreate(),
+                    ...this.ActionsQueryAdd(snapshot)
+                ])
+            ),
+            map(() =>
+                true
+            )
+        );
     }
 
     public update(context: StateContext<M>): Observable<any>
