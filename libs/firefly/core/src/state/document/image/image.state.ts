@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { CoreEnum } from '@theory/core';
-import { StateStorage, ActionStorageUrlGet, ActionStorageUpload, ImageSize, StateStorageModel, StorageImage } from '@theory/firebase';
+import { StateStorage, ActionStorageUrlGet, ActionStorageUpload, ImageSize, StorageImage } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
 import { Image } from '@firefly/core/models';
 import { ServiceImages } from '@firefly/core/services';
@@ -79,7 +79,7 @@ export class StateImage extends StateDocument<Image, StateImageModel>
               ActionSave:   ActionImageSave,
               ActionDelete: ActionImageDelete,
 
-              ActionsReset:  [ActionImageClear],
+              ActionsReset:  [],
               ActionsCreate: [],
 
               ActionsQueryAdd:    [ActionUserImagesAdd],

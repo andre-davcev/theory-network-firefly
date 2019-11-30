@@ -6,7 +6,7 @@ import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateIconOptions: StoreOptions<StateIconModel> =
 {
-    name : 'icon',
+    name : 'icons',
 
     defaults :
     {
