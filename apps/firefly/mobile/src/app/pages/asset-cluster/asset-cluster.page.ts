@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, from } from 'rxjs';
-import { tap, switchMap, catchError, map } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { switchMap, catchError, map } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
-import { LoadingOptions } from '@ionic/core';
-import { LoadingController, ToastController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateCluster, ActionClusterCreate, ActionClusterIconUriSet, ActionClusterIconPathSet } from '@firefly/core';
+import { StateCluster, ActionClusterIconUriSet, ActionClusterIconPathSet, ActionClusterSave } from '@firefly/core';
 import { Pages } from '../pages.enum';
-import { ActionMobileLoadingShow } from '@firefly/mobile';
+import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 
 const { Camera } = Plugins;
 
@@ -23,29 +20,23 @@ const { Camera } = Plugins;
 
 export class PageAssetCluster
 {
-    @Select(StateCluster.formGroup) form$:    Observable<FormGroup>;
-    @Select(StateDevice.device)     device$:  Observable<boolean>;
-    @Select(StateCluster.iconUrl)   iconUrl$: Observable<string>;
+    @Select(StateCluster.formGroup()) form$:         Observable<FormGroup>;
+    @Select(StateCluster.isNew())     isNew$:        Observable<boolean>;
+    @Select(StateCluster.canUpdate()) canUpdate$:    Observable<boolean>;
+    @Select(StateCluster.iconUrl)     iconUrl$:      Observable<string>;
+    @Select(StateDevice.device)       device$:       Observable<boolean>;
 
     public Pages: any = Pages;
 
-    constructor(
-      private store:   Store,
-      private loading: LoadingController,
-      private toast:   ToastController
+    constructor
+    (
+      private store: Store
     )
     { }
 
-    ionViewWillEnter()
+    public ionViewWillEnter(): void
     {
-        /*this.form$.subscribe((x) => {
-            x.valueChanges.subscribe((form) => {
-                console.log('valid: ' + x.valid);
-                console.log('form:  ' + JSON.stringify(form));
-            });
-        });*/
-
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Light }));
     }
 
     public navigate(page: Pages.IconSelector)
@@ -56,9 +47,9 @@ export class PageAssetCluster
             {
                 const options: CameraOptions =
                 {
-                    quality: 100,
+                    quality:    100,
                     resultType: CameraResultType.DataUrl,
-                    source: CameraSource.Photos
+                    source:     CameraSource.Photos
                 };
 
                 this.store.dispatch(new ActionMobileLoadingShow()).
@@ -80,42 +71,25 @@ export class PageAssetCluster
         }
     }
 
-    public imageClicked(): void
-    {
-        this.store.dispatch(new Navigate([Pages.ImageSelector]));
-    }
-
-    /*public setCluster(): void
-    {
-        this.store.dispatch(new ActionClusterSet());
-    }*/
-
     public save(): void
     {
-        const options: LoadingOptions =
-        {
-            spinner:     'crescent',
-            translucent: false,
-            cssClass:    'cpt-loading'
-        };
-
-        from(this.loading.create(options)).
-        pipe
-        (
-            tap((loading: HTMLIonLoadingElement) => loading.present()),
-            switchMap((loading: HTMLIonLoadingElement) =>
-                this.store.dispatch(new ActionClusterCreate()).pipe(tap(() => loading.dismiss()))
-            ),
-            switchMap(() =>
-                from(this.toast.create({ message: 'Event was successfully created!', duration: 2000 }))
-            ),
-            catchError((error: any) =>
-                from(this.toast.create({ message: 'An error occurred creating the event!', duration: 2000 }))
-            )
-        ).
-        subscribe((toast: HTMLIonToastElement) =>
-            toast.present()
-        );
+      this.store.dispatch
+      ([
+          new ActionMobileLoadingShow(),
+          new ActionClusterSave()
+      ]).
+      pipe
+      (
+          map(() => 'Event was successfully created!'),
+          catchError(() => of('An error occurred creating the event!'))
+      ).
+      subscribe((message: string) =>
+          this.store.dispatch
+          ([
+              new ActionMobileLoadingHide(),
+              new ActionMobileToast(message)
+          ])
+      );
     }
 
 }

@@ -23,7 +23,7 @@ const { Camera } = Plugins;
     styleUrls   : ['./asset-event.page.scss']
 })
 
-export class PageAssetEvent extends BaseComponent
+export class PageAssetEvent
 {
     @Select(StateEvent.formGroup())  form$:         Observable<FormGroup>;
     @Select(StateEvent.isNew())      isNew$:        Observable<boolean>;
@@ -42,10 +42,7 @@ export class PageAssetEvent extends BaseComponent
         private store:    Store,
         private modal:    ModalController,
         private resolver: ResolverPageAssetsClusters
-    )
-    {
-        super();
-    }
+    ) { }
 
     public ionViewWillEnter(): void
     {
@@ -78,9 +75,9 @@ export class PageAssetEvent extends BaseComponent
             {
                 const options: CameraOptions =
                 {
-                    quality: 100,
+                    quality:    100,
                     resultType: CameraResultType.DataUrl,
-                    source: CameraSource.Photos
+                    source:     CameraSource.Photos
                 };
 
                 this.store.dispatch(new ActionMobileLoadingShow()).

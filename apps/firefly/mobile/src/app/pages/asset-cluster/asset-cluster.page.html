@@ -1,10 +1,18 @@
 <ion-header color="white">
     <ion-toolbar >
-        <ion-title>{{'page.cluster.title' | translate}}</ion-title>
+        <ion-title>
+            {{ ((isNew$ | async) ? 'page.cluster.title.edit.new' : 'page.cluster.title.edit') | translate }}
+        </ion-title>
 
         <ion-buttons slot="start">
             <ion-back-button color="dark"></ion-back-button>
         </ion-buttons>
+
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="save()" [disabled]="!(canUpdate$ | async)">
+                {{ ((isNew$ | async) ? 'general.publish' : 'general.update') | translate }}
+            </ion-button>
+         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -23,51 +31,27 @@
                          [iconPlaceholder]="'page.event.iconPlaceholder' | translate"
                          (iconClicked)="navigate(Pages.IconSelector)">
         </app-item-header>
-<!--
-        <app-item-header icon="assets/icons/temp-coffee-icon-blue.png"
-                         title="My cluster title!"
-                         subtitle="My subtitle">
-        </app-item-header>
--->
 
-
-<!--
         <div class="cpt-detail" fxLayout="column">
-            <ion-list>
-                <ion-item [routerLink]="['/publisher/cluster/categories']">
-                    <ion-icon name="logo-buffer" slot="start"></ion-icon>
-                    <ion-label>{{'general.categories' | translate}}</ion-label>
-                </ion-item>
+          <ion-list>
+              <ion-item-group>
+                  <ion-item-divider></ion-item-divider>
 
-                <ion-item>
-                    <ion-icon name="lock" slot="start"></ion-icon>
-                    <ion-label>{{'general.isPrivate' | translate}}</ion-label>
-                    <ion-toggle formControlName="private" checked="true"></ion-toggle>
-                </ion-item>
-            </ion-list>
-        </div>
--->
-        <app-item-description [form]="form$ | async"
-                              [title]="'general.description' | translate"
-                              description="description"
-                              [descriptionPlaceholder]="'page.cluster.descriptionPlaceholder' | translate">
-        </app-item-description>
+                  <app-item-description [form]="form$ | async"
+                                        [title]="'general.description' | translate"
+                                        description="description"
+                                        [descriptionPlaceholder]="'page.cluster.descriptionPlaceholder' | translate">
+                  </app-item-description>
 
-        <section>
-            Events list will go here
-        </section>
-<!--
-        <app-item-description [title]="'general.description' | translate"
-                              description="The Ionic Conference is a one-day conference featuring talks from the
-                              Ionic team. It is focused on Ionic applications being built with
-                              Ionic 2. This includes migrating apps from Ionic 1 to Ionic 2,
-                              Angular concepts, Webpack, Sass, and many other technologies used
-                              in Ionic 2. Tickets are completely sold out, and we’re expecting
-                              more than 1000 developers – making this the largest Ionic
-                              conference ever!"
-                              image="assets/images/temp-subscriptions-pokemon-go.jpg">
-        </app-item-description>
--->
-        <ion-button   size="default" expand="block" color="primary" (click)="save()">Submit</ion-button>
+                  <ion-item-divider></ion-item-divider>
+
+                  <ion-item>
+                      Events list will go here
+                  </ion-item>
+
+                  <ion-item-divider></ion-item-divider>
+              </ion-item-group>
+          </ion-list>
+      </div>
     </form>
 </ion-content>
