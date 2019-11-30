@@ -71,7 +71,9 @@
 
   "page.event-categories.title"    : "Categories",
 
-  "page.cluster.title"                  : "Create New Cluster",
+  "page.cluster.title"                  : "Cluster",
+  "page.cluster.title.edit"             : "Edit Cluster",
+  "page.cluster.title.edit.new"         : "Create New Cluster",
   "page.cluster.titlePlaceholder"       : "Add your name",
   "page.cluster.subtitlePlaceholder"    : "Add your tagline",
   "page.cluster.iconPlaceholder"        : "select cluster",
