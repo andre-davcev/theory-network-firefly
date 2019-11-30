@@ -3,6 +3,5 @@ import { StateDocumentModel } from '@theory/ngxs';
 
 export interface StateIconModel extends StateDocumentModel<Icon>
 {
-    uploadProgress: number;
-    uploadError:    string;
+    dataUri: string;
 }

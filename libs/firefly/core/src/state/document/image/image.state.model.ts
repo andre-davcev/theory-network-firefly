@@ -3,6 +3,5 @@ import { StateDocumentModel } from '@theory/ngxs';
 
 export interface StateImageModel extends StateDocumentModel<Image>
 {
-    uploadProgress: number;
-    uploadError:    string;
+    dataUri: string;
 }

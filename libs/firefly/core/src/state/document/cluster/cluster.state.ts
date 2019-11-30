@@ -1,12 +1,12 @@
 
-import { Action, State, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext, Store, Selector } from '@ngxs/store';
 
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { Cluster, Icon } from '@firefly/core/models';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
-import { ActionIconCreate, ActionIconReset, ActionIconPatch } from '@firefly/core/state/document/icon';
+import { ActionIconCreate, ActionIconPatch, ActionIconClear, ActionIconUriSet, StateIcon, ActionIconSetId, StateIconModel } from '@firefly/core/state/document/icon';
 
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
@@ -20,17 +20,17 @@ import {
     ActionClusterDelete,
     ActionClusterSetId,
     ActionClusterUpdate,
-    ActionClusterIconSetUrl,
-    ActionClusterIconSetPath,
     ActionClusterIconClear,
-    ActionClusterIconCreate
+    ActionClusterIconCreate,
+    ActionClusterIconUriSet,
+    ActionClusterIconPathSet
 } from './cluster.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../..//query/user-clusters';
 import { ActionUserStreamRemove } from '../../list/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../query/user-subscriptions/user-subscriptions.actions';
 import { firestore } from 'firebase/app';
-import { ActionStorageUrlSet, ActionStorageUrlGet, ActionStorageRemoveNew } from '@theory/firebase';
-import { switchMap } from 'rxjs/operators';
+import { ActionStorageUrlGet, StateStorage, StorageImage, ImageSize } from '@theory/firebase';
+import { switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @State<StateClusterModel>(StateClusterOptions)
@@ -84,6 +84,16 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
                 ActionsQuerySync:   [ActionUserClustersSync]
             }
         );
+    }
+
+    @Selector([StateIcon.dataUri, StateStorage.images])
+    public static iconUrl(state: StateClusterModel, dataUri: string, images: Record<string, StorageImage>)
+    {
+        const bucketPath: string = StateCluster.bucketPathState(state);
+
+        return bucketPath == null || bucketPath === CoreEnum.IdNew || images[bucketPath] == null ?
+            dataUri :
+            images[bucketPath][ImageSize.Medium];
     }
 
     @Action(ActionClusterReset)
@@ -153,44 +163,45 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
         return dispatch(new ActionClusterSet(snapshot, data));
     }
 
-    @Action(ActionClusterIconSetUrl)
-    imageSetUrl({ dispatch }: StateContext<StateClusterModel>, { url, bucketPath }: ActionClusterIconSetUrl)
+    @Action(ActionClusterIconClear)
+    imageClear({ dispatch }: StateContext<StateClusterModel>)
     {
-        return dispatch(new ActionStorageUrlSet(url, bucketPath)).
-        pipe
-        (
-            switchMap(() => dispatch(new ActionClusterPatch({ bucketPath })))
-        );
+        return dispatch
+        ([
+            new ActionIconClear(),
+            new ActionClusterPatch({ bucketPath: null }),
+        ]);
     }
 
-    @Action(ActionClusterIconSetPath)
-    imageSetPath({ dispatch }: StateContext<StateClusterModel>, { bucketPath }: ActionClusterIconSetPath)
+    @Action(ActionClusterIconUriSet)
+    imageUriSet({ dispatch }: StateContext<StateClusterModel>, { dataUri }: ActionClusterIconUriSet)
+    {
+        return dispatch
+        ([
+            new ActionClusterPatch({ bucketPath: CoreEnum.IdNew }),
+            new ActionIconUriSet(dataUri)
+        ]);
+    }
+
+    @Action(ActionClusterIconPathSet)
+    imageSetPath({ dispatch }: StateContext<StateClusterModel>, { bucketPath }: ActionClusterIconPathSet)
     {
         return dispatch(new ActionStorageUrlGet(bucketPath)).
         pipe
         (
+            switchMap(() => dispatch(new ActionClusterIconClear())),
             switchMap(() => dispatch(new ActionClusterPatch({ bucketPath })))
         );
-    }
-
-    @Action(ActionClusterIconClear)
-    imageClear({ dispatch  }: StateContext<StateClusterModel>)
-    {
-        return dispatch
-        ([
-            new ActionClusterPatch({ bucketPath: null }),
-            new ActionStorageRemoveNew()
-        ]);
     }
 
     @Action(ActionClusterIconCreate)
     imageCreate({ dispatch, getState }: StateContext<StateClusterModel>)
     {
-        const state: StateClusterModel = getState();
+        const dataUri: string = this.store.selectSnapshot(StateIcon.dataUri);
 
-        if (StateCluster.bucketPathState(state) !== CoreEnum.IdNew) { return of(null); }
+        if (dataUri == null) { return of(null); }
 
-        const cluster: Cluster = StateCluster.dataState(state);
+        const cluster: Cluster  = StateCluster.dataState(getState());
 
         const partial: Partial<Icon> =
         {
@@ -199,7 +210,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
             private     : cluster.private
         };
 
-        return dispatch(new ActionIconReset()).
+        return dispatch(new ActionIconSetId()).
         pipe
         (
             switchMap(() =>
@@ -207,6 +218,9 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
             ),
             switchMap(() =>
                 dispatch(new ActionIconCreate())
+            ),
+            tap(() =>
+                dispatch(new ActionClusterPatch({ bucketPath: this.store.selectSnapshot(StateIcon.bucketPath()) }))
             )
         );
     }

@@ -1,11 +1,8 @@
-import { FormGroup, AbstractControl } from '@angular/forms';
-import { AngularFireUploadTask, AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { of } from 'rxjs';
-import { switchMap, filter, tap, catchError, last } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 import { CoreEnum } from '@theory/core';
-import { StorageFormat, ActionStorageRemoveNew, StateStorage, ImageSize, ActionStorageUrlSet, ActionStorageUrlGet } from '@theory/firebase';
+import { StateStorage, ActionStorageUrlGet, ActionStorageUpload, ImageSize, StateStorageModel, StorageImage } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
 import { Image } from '@firefly/core/models';
 import { ServiceImages } from '@firefly/core/services';
@@ -21,13 +18,11 @@ import {
   ActionImageCreate,
   ActionImageSave,
   ActionImageDelete,
-  ActionImageUpload,
-  ActionImageUploadClear,
-  ActionImageSetUrl,
-  ActionImageSetPath,
   ActionImageClear,
   ActionImageSetId,
-  ActionImageUpdate
+  ActionImageUpdate,
+  ActionImageUriSet,
+  ActionImagePathSet
 } from './image.actions';
 import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages, ActionUserImagesSync } from '../../query/user-images';
 import { firestore } from 'firebase/app';
@@ -36,11 +31,22 @@ import { firestore } from 'firebase/app';
 
 export class StateImage extends StateDocument<Image, StateImageModel>
 {
+    @Selector() static dataUri(state: StateImageModel): string { return state.dataUri; }
+    @Selector([StateStorage.images])
+    public static iconUrl(state: StateImageModel, images: Record<string, StorageImage>)
+    {
+        const dataUri:    string = StateImage.dataUri(state);
+        const bucketPath: string = StateImage.bucketPathState(state);
+
+        return bucketPath == null || bucketPath === CoreEnum.IdNew || images[bucketPath] == null ?
+            dataUri :
+            images[bucketPath][ImageSize.Medium];
+    }
+
     constructor
     (
         private store:   Store,
-                service: ServiceImages,
-        private storage: AngularFireStorage
+                service: ServiceImages
     )
     {
       super
@@ -73,7 +79,7 @@ export class StateImage extends StateDocument<Image, StateImageModel>
               ActionSave:   ActionImageSave,
               ActionDelete: ActionImageDelete,
 
-              ActionsReset:  [ActionStorageRemoveNew],
+              ActionsReset:  [ActionImageClear],
               ActionsCreate: [],
 
               ActionsQueryAdd:    [ActionUserImagesAdd],
@@ -82,11 +88,6 @@ export class StateImage extends StateDocument<Image, StateImageModel>
           }
       );
     }
-
-    @Selector() static uploadProgress(state: StateImageModel):  number  { return state.uploadProgress; }
-    @Selector() static uploadError(state: StateImageModel):     string  { return state.uploadError; }
-    @Selector() static uploadErrored(state: StateImageModel):   boolean { return state.uploadError != null; }
-    @Selector() static uploadCompleted(state: StateImageModel): boolean { return StateImage.uploadProgress(state) === 100; }
 
     @Action(ActionImageReset)
     reset(context: StateContext<StateImageModel>)
@@ -117,15 +118,16 @@ export class StateImage extends StateDocument<Image, StateImageModel>
     {
         const { dispatch, getState } = context;
 
-        const data:    Image  = StateImage.dataState(getState());
-        const dataUri: string = this.store.selectSnapshot(StateStorage.images)[data.id].medium;
+        const state:   StateImageModel = getState();
+        const data:    Image           = StateImage.dataState(state);
+        const dataUri: string          = StateImage.dataUri(state);
 
         (this.service as ServiceImages).addMetadata(data, this.collection, dataUri);
 
         return dispatch(new ActionImagePatch(data)).
         pipe
         (
-            switchMap(() => dispatch(new ActionImageUpload())),
+            switchMap(() => dispatch(new ActionStorageUpload(dataUri, data.bucketPath))),
             switchMap(() => super.create(context))
         );
     }
@@ -133,7 +135,13 @@ export class StateImage extends StateDocument<Image, StateImageModel>
     @Action(ActionImageUpdate)
     update(context: StateContext<StateImageModel>)
     {
-        return context.dispatch(new ActionImageUpload()).
+        const { getState } = context;
+
+        const state:      StateImageModel = getState();
+        const bucketPath: string          = StateImage.bucketPathState(state);
+        const dataUri:    string          = StateImage.dataUri(state);
+
+        return context.dispatch(new ActionStorageUpload(dataUri, bucketPath)).
         pipe
         (
             switchMap(() =>
@@ -169,75 +177,35 @@ export class StateImage extends StateDocument<Image, StateImageModel>
         return dispatch(new ActionImageSet(snapshot, data));
     }
 
-    @Action(ActionImageSetUrl)
-    imageSetUrl({ dispatch }: StateContext<StateImageModel>, { url, bucketPath }: ActionImageSetUrl)
+    @Action(ActionImageClear)
+    imageClear({ dispatch, patchState }: StateContext<StateImageModel>)
     {
-        return dispatch(new ActionStorageUrlSet(url, bucketPath)).
+        patchState({ dataUri: null });
+
+        return dispatch
+        ([
+            new ActionImagePatch({ bucketPath: null }),
+        ]);
+    }
+
+    @Action(ActionImageUriSet)
+    imageUriSet({ dispatch, patchState }: StateContext<StateImageModel>, { dataUri }: ActionImageUriSet)
+    {
+        return dispatch(new ActionImageClear()).
         pipe
         (
-            switchMap(() => dispatch(new ActionImagePatch({ bucketPath })))
+            tap(() => patchState({ dataUri }))
         );
     }
 
-    @Action(ActionImageSetPath)
-    imageSetPath({ dispatch }: StateContext<StateImageModel>, { bucketPath }: ActionImageSetPath)
+    @Action(ActionImagePathSet)
+    imageSetPath({ dispatch }: StateContext<StateImageModel>, { bucketPath }: ActionImagePathSet)
     {
         return dispatch(new ActionStorageUrlGet(bucketPath)).
         pipe
         (
+            switchMap(() => dispatch(new ActionImageClear())),
             switchMap(() => dispatch(new ActionImagePatch({ bucketPath })))
         );
-    }
-
-    @Action(ActionImageClear)
-    imageClear({ dispatch  }: StateContext<StateImageModel>)
-    {
-        return dispatch
-        ([
-            new ActionImagePatch({ bucketPath: null }),
-            new ActionStorageRemoveNew()
-        ]);
-    }
-
-    @Action(ActionImageUploadClear)
-    uploadClear({ patchState } : StateContext<StateImageModel>)
-    {
-        patchState({ uploadProgress: 0, uploadError: null });
-    }
-
-    @Action(ActionImageUpload)
-    upload(context: StateContext<StateImageModel>)
-    {
-        const { getState, dispatch, patchState } = context;
-
-        const state:             StateImageModel = getState();
-        const bucketPath:        string          = StateImage.bucketPathState(state);
-        const formGroup:         FormGroup       = StateImage.formGroupState(state);
-        const controlBucketPath: AbstractControl = formGroup.get('bucketPath');
-        const bucketPathChanged: boolean         = controlBucketPath.dirty && controlBucketPath.valid;
-
-        const ref:  AngularFireStorageReference = this.storage.ref(bucketPath);
-        const task: AngularFireUploadTask       = ref.putString(bucketPath, StorageFormat.DataUrl);
-
-        return !bucketPathChanged ?
-            of(null) :
-            dispatch(new ActionImageUploadClear()).
-            pipe
-            (
-                switchMap(() => task.percentageChanges()),
-                tap((uploadProgress: number) => patchState({ uploadProgress })),
-                filter(() => StateImage.uploadCompleted(getState())),
-                switchMap(() => task.snapshotChanges()),
-                last(),
-                switchMap(() => ref.getDownloadURL()),
-                switchMap((url: string) =>
-                    dispatch
-                    ([
-                        new ActionStorageUrlSet(url, bucketPath, ImageSize.Medium),
-                        new ActionStorageRemoveNew()
-                    ])
-                ),
-                catchError((uploadError: any) => of(patchState({ uploadError })))
-            );
     }
 }

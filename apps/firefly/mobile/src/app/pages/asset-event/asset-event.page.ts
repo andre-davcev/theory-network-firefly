@@ -2,18 +2,17 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventCreate, StateCluster, ActionEventImageSetUrl, ActionEventPatch, ActionEventImageSetPath, ActionEventSave } from '@firefly/core';
+import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateImage, StateIcon, StateCluster } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
 import { BaseComponent } from '@theory/core';
-import { StateStorage, StorageImage } from '@theory/firebase';
 
 const { Camera } = Plugins;
 
@@ -26,19 +25,15 @@ const { Camera } = Plugins;
 
 export class PageAssetEvent extends BaseComponent
 {
-    @Select(StateEvent.formGroup())    form$:         Observable<FormGroup>;
-    @Select(StateEvent.isNew())        isNew$:        Observable<boolean>;
-    @Select(StateEvent.canUpdate())    canUpdate$:    Observable<boolean>;
-    @Select(StateEvent.timeStart)      timeStart$:    Observable<string>;
-    @Select(StateEvent.timeEnd)        timeEnd$:      Observable<string>;
-    @Select(StateEvent.timeEndValid)   timeEndValid$: Observable<boolean>;
-    @Select(StateDevice.device)        device$:       Observable<boolean>;
-    @Select(StateStorage.images)       images$:       Observable<Record<string, StorageImage>>;
-    @Select(StateCluster.bucketPath()) iconPath$:     Observable<string>;
-    @Select(StateEvent.bucketPath())   imagePath$:    Observable<string>;
-
-    public icon$:  Observable<string> = StateStorage.image$(this.images$, this.iconPath$);
-    public image$: Observable<string> = StateStorage.image$(this.images$, this.imagePath$);
+    @Select(StateEvent.formGroup())  form$:         Observable<FormGroup>;
+    @Select(StateEvent.isNew())      isNew$:        Observable<boolean>;
+    @Select(StateEvent.canUpdate())  canUpdate$:    Observable<boolean>;
+    @Select(StateEvent.timeStart)    timeStart$:    Observable<string>;
+    @Select(StateEvent.timeEnd)      timeEnd$:      Observable<string>;
+    @Select(StateEvent.timeEndValid) timeEndValid$: Observable<boolean>;
+    @Select(StateDevice.device)      device$:       Observable<boolean>;
+    @Select(StateEvent.imageUrl)     imageUrl$:     Observable<string>;
+    @Select(StateCluster.iconUrl)    iconUrl$:      Observable<string>;
 
     public Pages: any = Pages;
 
@@ -94,14 +89,17 @@ export class PageAssetEvent extends BaseComponent
                     switchMap(() => from(Camera.getPhoto(options))),
                     map((photo: CameraPhoto) => photo.dataUrl),
                     switchMap((imageData: string) =>
-                        this.store.dispatch(new ActionEventImageSetUrl(imageData))
+                        this.store.dispatch(new ActionEventImageUriSet(imageData))
+                    ),
+                    finalize(() =>
+                        this.store.dispatch(new ActionMobileLoadingHide())
                     )
                 ).
                 subscribe();
             }
             else
             {
-                this.store.dispatch(new ActionEventImageSetPath()).
+                this.store.dispatch(new ActionEventImagePathSet()).
                 subscribe();
             }
         }

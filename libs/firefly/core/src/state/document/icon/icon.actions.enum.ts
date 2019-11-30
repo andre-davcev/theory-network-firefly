@@ -10,9 +10,7 @@ export enum ActionsIcon
     Delete = '[Icon] Delete',
     SetId  = '[Icon] SetId',
 
-    SetUrl      = '[Icon] Set Url',
-    SetPath     = '[Icon] Set Path',
-    Clear       = '[Icon] Clear',
-    Upload      = '[Icon] Upload',
-    UploadClear = '[Icon] Upload Clear'
+    Clear   = '[Icon] Clear',
+    UriSet  = '[Icon] Uri Set',
+    PathSet = '[Icon] Path Set'
 }

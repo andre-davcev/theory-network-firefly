@@ -233,7 +233,7 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
             const { data, dataLookup, orderBy } = getState();
 
             const before:          T       = dataLookup[id];
-            const changedOrderBy : boolean = before[orderBy] !== after[orderBy];
+            const changedOrderBy : boolean = before == null ||  before[orderBy] !== after[orderBy];
             const index          : number  = data.findIndex((entity: T) => entity.id === id);
 
             dataLookup[id] = after;
