@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Observable, from } from 'rxjs';
 import { tap, switchMap, catchError, map } from 'rxjs/operators';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
@@ -23,7 +24,7 @@ export class PageIconSelector
     public segment: Pages = Pages.IconAssets;
     public translations: Array<string> = [];
 
-    constructor(private store: Store) { }
+    constructor(private store: Store, private modalController: ModalController) { }
 
     ionViewWillEnter()
     {
@@ -64,9 +65,10 @@ export class PageIconSelector
               map(() =>
                   this.store.selectSnapshot(StateIcon.url)
               ),
-              switchMap((iconUrl: string) =>
-                  this.store.dispatch(new ActionClusterPatch({ iconUrl }))
-              )
+              switchMap((iconUrl: string) => {
+                  this.modalController.dismiss();
+                  return this.store.dispatch(new ActionClusterPatch({ iconUrl }))
+              })
           ).
           subscribe();
         }
