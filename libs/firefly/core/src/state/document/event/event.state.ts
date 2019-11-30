@@ -231,7 +231,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 
         if (dataUri == null) { return of(null); }
 
-        const event: Event  = StateEvent.dataState(getState());
+        const event: Event = StateEvent.dataState(getState());
 
         const partial: Partial<Image> =
         {
@@ -244,13 +244,21 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         pipe
         (
             switchMap(() =>
-                dispatch(new ActionImagePatch(partial))
+                dispatch
+                ([
+                    new ActionImageUriSet(dataUri),
+                    new ActionImagePatch(partial)
+                ])
             ),
             switchMap(() =>
                 dispatch(new ActionImageCreate())
             ),
             tap(() =>
-                dispatch(new ActionEventPatch({ bucketPath: this.store.selectSnapshot(StateImage.bucketPath()) }))
+                dispatch
+                ([
+                    new ActionImageClear(),
+                    new ActionEventPatch({ bucketPath: this.store.selectSnapshot(StateImage.bucketPath()) })
+                ])
             )
         );
     }

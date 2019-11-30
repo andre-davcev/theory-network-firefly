@@ -79,7 +79,7 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
               ActionSave:   ActionIconSave,
               ActionDelete: ActionIconDelete,
 
-              ActionsReset:  [ActionIconClear],
+              ActionsReset:  [],
               ActionsCreate: [],
 
               ActionsQueryAdd:    [ActionUserIconsAdd],

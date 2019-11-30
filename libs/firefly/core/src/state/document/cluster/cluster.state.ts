@@ -214,7 +214,11 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
         pipe
         (
             switchMap(() =>
-                dispatch(new ActionIconPatch(partial))
+                dispatch
+                ([
+                    new ActionIconUriSet(dataUri),
+                    new ActionIconPatch(partial)
+                ])
             ),
             switchMap(() =>
                 dispatch(new ActionIconCreate())
