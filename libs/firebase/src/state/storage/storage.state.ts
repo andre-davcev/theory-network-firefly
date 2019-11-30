@@ -5,34 +5,35 @@ import { StateStorageModel } from './storage.state.model';
 import {
     ActionStorageUrlGet,
     ActionStorageUrlsGet,
-    ActionStorageUrlSet,
-    ActionStorageRemoveNew
+    ActionStorageUploadClear,
+    ActionStorageUpload,
+    ActionStorageUrlSet
 } from './storage.actions';
 import { StateStorageOptions } from './storage.state.options';
 import { StorageImage } from '@theory/firebase/interfaces';
-import { tap, filter, map, withLatestFrom } from 'rxjs/operators';
-import { Observable, forkJoin, of, combineLatest } from 'rxjs';
+import { tap, filter, map, withLatestFrom, switchMap, last, catchError } from 'rxjs/operators';
+import { Observable, forkJoin, of } from 'rxjs';
 import { ServiceStorage } from '@theory/firebase/services';
-import { ImageSize } from '@theory/firebase/enums';
-import { CoreEnum } from '@theory/core';
+import { ImageSize, StorageFormat } from '@theory/firebase/enums';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 
 @State<StateStorageModel>(StateStorageOptions)
 
 export class StateStorage
 {
-    @Selector() static images(state: StateStorageModel): Record<string, StorageImage> {return state.images;}
+    @Selector() static images(state: StateStorageModel):  Record<string, StorageImage> { return state.images; }
 
-    public static image$(images$: Observable<Record<string, StorageImage>>, bucketPath$: Observable<string>, size: ImageSize = ImageSize.Medium): Observable<string>
-    {
-        return combineLatest([images$, bucketPath$]).
-        pipe
-        (
-            filter(([images, bucketPath]) => images[bucketPath] != null),
-            map(([images, bucketPath]) => images[bucketPath][size])
-        );
-    }
+    @Selector() static uploadProgress(state: StateStorageModel):  number  { return state.uploadProgress; }
+    @Selector() static uploadError(state: StateStorageModel):     string  { return state.uploadError; }
+    @Selector() static uploadErrored(state: StateStorageModel):   boolean { return state.uploadError != null; }
+    @Selector() static uploadCompleted(state: StateStorageModel): boolean { return StateStorage.uploadProgress(state) === 100; }
 
-    constructor(private service: ServiceStorage) { }
+    constructor
+    (
+        private service: ServiceStorage,
+        private storage: AngularFireStorage
+    )
+    { }
 
     @Action(ActionStorageUrlGet)
     getUrl({ getState, patchState }: StateContext<StateStorageModel>, { bucketPath, size, cached }: ActionStorageUrlGet)
@@ -105,18 +106,39 @@ export class StateStorage
         const images: Record<string, StorageImage> = StateStorage.images(getState());
         const image:  StorageImage                 = images[bucketPath] == null ? {} : images[bucketPath];
 
-        image[size] = url;
+        image[size]        = url;
+        images[bucketPath] = image;
 
-        patchState({ images });
+        patchState({ images })
     }
 
-    @Action(ActionStorageRemoveNew)
-    removeNew({ getState, patchState }: StateContext<StateStorageModel>)
+    @Action(ActionStorageUploadClear)
+    uploadClear({ patchState } : StateContext<StateStorageModel>)
     {
-        const images: Record<string, StorageImage> = StateStorage.images(getState());
+        patchState({ uploadProgress: 0, uploadError: null });
+    }
 
-        delete images[CoreEnum.IdNew];
+    @Action(ActionStorageUpload)
+    upload({ dispatch, patchState, getState }: StateContext<StateStorageModel>, { dataUri, bucketPath }: ActionStorageUpload)
+    {
+        if (dataUri == null) { return of(null); }
 
-        patchState({ images });
+        const ref:  AngularFireStorageReference = this.storage.ref(bucketPath);
+        const task: AngularFireUploadTask       = ref.putString(dataUri, StorageFormat.DataUrl);
+
+        return dispatch(new ActionStorageUploadClear()).
+            pipe
+            (
+                switchMap(() => task.percentageChanges()),
+                tap((uploadProgress: number) => patchState({ uploadProgress })),
+                filter(() => StateStorage.uploadCompleted(getState())),
+                switchMap(() => task.snapshotChanges()),
+                last(),
+                switchMap(() => ref.getDownloadURL()),
+                switchMap((url: string) =>
+                    dispatch(new ActionStorageUrlSet(url, bucketPath, ImageSize.Medium))
+                ),
+                catchError((uploadError: any) => of(patchState({ uploadError })))
+            );
     }
 }

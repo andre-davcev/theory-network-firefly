@@ -15,8 +15,6 @@ export class ActionIconUpdate { static readonly type = ActionsIcon.Create;  cons
 export class ActionIconSave   { static readonly type = ActionsIcon.Save;    constructor() { } }
 export class ActionIconDelete { static readonly type = ActionsIcon.Delete;  constructor() { } }
 
-export class ActionIconSetUrl      { static readonly type = ActionsIcon.SetUrl;      constructor(public url: string, public bucketPath: string = CoreEnum.IdNew) { } }
-export class ActionIconSetPath     { static readonly type = ActionsIcon.SetPath;     constructor(public bucketPath: string = MockIconPath) { } }
-export class ActionIconClear       { static readonly type = ActionsIcon.Clear;       constructor() { } }
-export class ActionIconUploadClear { static readonly type = ActionsIcon.UploadClear; constructor() { } }
-export class ActionIconUpload      { static readonly type = ActionsIcon.Upload;      constructor() { } }
+export class ActionIconClear   { static readonly type = ActionsIcon.Clear;   constructor() { } }
+export class ActionIconUriSet  { static readonly type = ActionsIcon.UriSet;  constructor(public dataUri: string) { } }
+export class ActionIconPathSet { static readonly type = ActionsIcon.PathSet; constructor(public bucketPath: string = MockIconPath) { } }

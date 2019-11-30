@@ -10,8 +10,8 @@ export enum ActionsCluster
     Save   = '[Cluster] Save',
     Delete = '[Cluster] Delete',
 
-    IconSetUrl  = '[Cluster] Icon Set Url',
-    IconSetPath = '[Cluster] Icon Set Path',
     IconClear   = '[Cluster] Icon Clear',
+    IconUriSet  = '[Cluster] Icon Uri Set',
+    IconPathSet = '[Cluster] Icon Path Set',
     IconCreate  = '[Cluster] Icon Create',
 }

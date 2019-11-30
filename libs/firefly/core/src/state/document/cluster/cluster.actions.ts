@@ -15,7 +15,7 @@ export class ActionClusterSave   { static readonly type = ActionsCluster.Save;  
 export class ActionClusterDelete { static readonly type = ActionsCluster.Delete;  constructor() { } }
 export class ActionClusterSetId  { static readonly type = ActionsCluster.SetId;   constructor(public id: string = CoreEnum.IdNew) { } }
 
-export class ActionClusterIconSetUrl  { static readonly type = ActionsCluster.IconSetUrl;  constructor(public url: string, public bucketPath: string = CoreEnum.IdNew) { } }
-export class ActionClusterIconSetPath { static readonly type = ActionsCluster.IconSetPath; constructor(public bucketPath: string = MockIconPath) { } }
 export class ActionClusterIconClear   { static readonly type = ActionsCluster.IconClear;   constructor() { } }
+export class ActionClusterIconUriSet  { static readonly type = ActionsCluster.IconUriSet;  constructor(public dataUri: string) { } }
+export class ActionClusterIconPathSet { static readonly type = ActionsCluster.IconPathSet; constructor(public bucketPath: string = MockIconPath) { } }
 export class ActionClusterIconCreate  { static readonly type = ActionsCluster.IconCreate;  constructor() { } }

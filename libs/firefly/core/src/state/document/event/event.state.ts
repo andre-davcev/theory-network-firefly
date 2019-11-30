@@ -6,7 +6,7 @@ import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
 import { Event, Image } from '@firefly/core/models';
-import { ActionImageCreate, ActionImageReset, ActionImagePatch } from '@firefly/core/state/document/image';
+import { ActionImageCreate, ActionImagePatch, ActionImageSetId, StateImage, ActionImageClear, ActionImageUriSet } from '@firefly/core/state/document/image';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -19,8 +19,8 @@ import {
   ActionEventReset,
   ActionEventSet,
   ActionEventSave,
-  ActionEventImageSetUrl,
-  ActionEventImageSetPath,
+  ActionEventImageUriSet,
+  ActionEventImagePathSet,
   ActionEventImageClear,
   ActionEventSetId,
   ActionEventUpdate,
@@ -30,7 +30,7 @@ import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUse
 import { ActionClusterReset } from '../cluster';
 import { firestore } from 'firebase/app';
 import { ServiceEvents } from '@firefly/core/services';
-import { ActionStorageRemoveNew, ActionStorageUrlSet, ActionStorageUrlGet } from '@theory/firebase';
+import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -78,7 +78,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
-                ActionsReset:  [ActionClusterReset, ActionStorageRemoveNew, ActionMapSearchResultClear],
+                ActionsReset:  [ActionClusterReset, ActionImageClear, ActionMapSearchResultClear],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
@@ -88,16 +88,26 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         );
     }
 
-    @Selector() static locationTypes(state: StateEventModel): Array<MapboxPlaceType> { return StateEvent.dataState(state).locationTypes; }
+    @Selector() static locationTypes(state: StateEventModel):   Array<MapboxPlaceType> { return StateEvent.dataState(state).locationTypes; }
     @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.locationTypes(state) != null; }
-    @Selector() static timeStart(state: StateEventModel): string { return StateEvent.dataState(state).timeStart; }
-    @Selector() static timeEnd(state: StateEventModel): string { return StateEvent.dataState(state).timeEnd; }
+    @Selector() static timeStart(state: StateEventModel):       string { return StateEvent.dataState(state).timeStart; }
+    @Selector() static timeEnd(state: StateEventModel):         string { return StateEvent.dataState(state).timeEnd; }
     @Selector() static timeEndValid(state: StateEventModel): boolean
     {
         const timeStart: Date = new Date(StateEvent.timeStart(state));
         const timeEnd:   Date = new Date(StateEvent.timeEnd(state));
 
         return timeEnd.getTime() > timeStart.getTime();
+    }
+
+    @Selector([StateImage.dataUri, StateStorage.images])
+    public static imageUrl(state: StateEventModel, dataUri: string, images: Record<string, StorageImage>)
+    {
+        const bucketPath: string = StateEvent.bucketPathState(state);
+
+        return bucketPath == null || bucketPath === CoreEnum.IdNew || images[bucketPath] == null ?
+            dataUri :
+            images[bucketPath][ImageSize.Medium];
     }
 
     @Action(ActionEventReset)
@@ -167,64 +177,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         return dispatch(new ActionEventSet(snapshot, data));
     }
 
-    @Action(ActionEventImageSetUrl)
-    imageSetUrl({ dispatch }: StateContext<StateEventModel>, { url, bucketPath }: ActionEventImageSetUrl)
-    {
-        return dispatch(new ActionStorageUrlSet(url, bucketPath)).
-        pipe
-        (
-            switchMap(() => dispatch(new ActionEventPatch({ bucketPath })))
-        );
-    }
-
-    @Action(ActionEventImageSetPath)
-    imageSetPath({ dispatch }: StateContext<StateEventModel>, { bucketPath }: ActionEventImageSetPath)
-    {
-        return dispatch(new ActionStorageUrlGet(bucketPath)).
-        pipe
-        (
-            switchMap(() => dispatch(new ActionEventPatch({ bucketPath })))
-        );
-    }
-
-    @Action(ActionEventImageClear)
-    imageClear({ dispatch  }: StateContext<StateEventModel>)
-    {
-        return dispatch
-        ([
-            new ActionEventPatch({ bucketPath: null }),
-            new ActionStorageRemoveNew()
-        ]);
-    }
-
-    @Action(ActionEventImageCreate)
-    imageCreate({ dispatch, getState }: StateContext<StateEventModel>)
-    {
-        const state: StateEventModel = getState();
-
-        if (StateEvent.bucketPathState(state) !== CoreEnum.IdNew) { return of(null); }
-
-        const event: Event = StateEvent.dataState(state);
-
-        const partial: Partial<Image> =
-        {
-            name        : event.name,
-            description : `Image uploaded for event "${event.name}"`,
-            private     : event.private
-        };
-
-        return dispatch(new ActionImageReset()).
-        pipe
-        (
-            switchMap(() =>
-                dispatch(new ActionImagePatch(partial))
-            ),
-            switchMap(() =>
-                dispatch(new ActionImageCreate())
-            )
-        );
-    }
-
     @Action(ActionEventLocationSet)
     setLocation({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
     {
@@ -233,5 +185,73 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         const coordinates:   firestore.GeoPoint     = result == null ? null : new firestore.GeoPoint(result.center[1], result.center[0]);
 
         return dispatch(new ActionEventPatch({ coordinates, locationTypes }));
+    }
+
+    @Action(ActionEventImageClear)
+    imageClear({ dispatch }: StateContext<StateEventModel>)
+    {
+        return dispatch
+        ([
+            new ActionImageClear(),
+            new ActionEventPatch({ bucketPath: null }),
+        ]);
+    }
+
+    @Action(ActionEventImageUriSet)
+    imageUriSet({ dispatch }: StateContext<StateEventModel>, { dataUri }: ActionEventImageUriSet)
+    {
+        return dispatch
+        ([
+            new ActionEventPatch({ bucketPath: CoreEnum.IdNew }),
+            new ActionImageUriSet(dataUri)
+        ]);
+    }
+
+    @Action(ActionEventImagePathSet)
+    imageSetPath({ dispatch }: StateContext<StateEventModel>, { bucketPath }: ActionEventImagePathSet)
+    {
+        return dispatch(new ActionStorageUrlGet(bucketPath)).
+        pipe
+        (
+            switchMap(() => dispatch(new ActionEventImageClear())),
+            switchMap(() =>
+                dispatch
+                ([
+                    new ActionEventPatch({ bucketPath }),
+                    new ActionImagePatch({ bucketPath })
+                ])
+            )
+        );
+    }
+
+    @Action(ActionEventImageCreate)
+    imageCreate({ dispatch, getState }: StateContext<StateEventModel>)
+    {
+        const dataUri: string = this.store.selectSnapshot(StateImage.dataUri);
+
+        if (dataUri == null) { return of(null); }
+
+        const event: Event  = StateEvent.dataState(getState());
+
+        const partial: Partial<Image> =
+        {
+            name        : event.name,
+            description : `Image uploaded for event "${event.name}"`,
+            private     : event.private
+        };
+
+        return dispatch(new ActionImageSetId()).
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new ActionImagePatch(partial))
+            ),
+            switchMap(() =>
+                dispatch(new ActionImageCreate())
+            ),
+            tap(() =>
+                dispatch(new ActionEventPatch({ bucketPath: this.store.selectSnapshot(StateImage.bucketPath()) }))
+            )
+        );
     }
 }

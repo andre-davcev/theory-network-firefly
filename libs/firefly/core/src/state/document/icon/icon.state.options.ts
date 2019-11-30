@@ -14,7 +14,6 @@ export const StateIconOptions: StoreOptions<StateIconModel> =
         form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
         formGroup : undefined,
 
-        uploadProgress: 0,
-        uploadError:    undefined
+        dataUri : null
     }
 };

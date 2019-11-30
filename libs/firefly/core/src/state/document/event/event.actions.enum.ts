@@ -10,9 +10,9 @@ export enum ActionsEvent
     Update = '[Event] Update',
     Delete = '[Event] Delete',
 
-    ImageSetUrl  = '[Event] Image Set Url',
-    ImageSetPath = '[Event] Image Set Path',
     ImageClear   = '[Event] Image Clear',
+    ImageUriSet  = '[Event] Image Uri Set',
+    ImagePathSet = '[Event] Image Path Set',
     ImageCreate  = '[Event] Image Create',
 
     LocationSet = '[Event] Location Set',

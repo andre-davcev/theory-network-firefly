@@ -8,10 +8,9 @@ import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins,
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateCluster, ActionClusterCreate, ActionClusterIconSetUrl, ActionClusterIconSetPath } from '@firefly/core';
+import { StateCluster, ActionClusterCreate, ActionClusterIconUriSet, ActionClusterIconPathSet } from '@firefly/core';
 import { Pages } from '../pages.enum';
 import { ActionMobileLoadingShow } from '@firefly/mobile';
-import { StateStorage, StorageImage } from '@theory/firebase';
 
 const { Camera } = Plugins;
 
@@ -24,19 +23,16 @@ const { Camera } = Plugins;
 
 export class PageAssetCluster
 {
-    @Select(StateCluster.formGroup)  form$:       Observable<FormGroup>;
-    @Select(StateDevice.device)      device$:     Observable<boolean>;
-    @Select(StateStorage.images)     images$:     Observable<Record<string, StorageImage>>;
-    @Select(StateCluster.bucketPath) bucketPath$: Observable<string>;
-
-    public icon$: Observable<string> = StateStorage.image$(this.images$, this.bucketPath$);
+    @Select(StateCluster.formGroup) form$:    Observable<FormGroup>;
+    @Select(StateDevice.device)     device$:  Observable<boolean>;
+    @Select(StateCluster.iconUrl)   iconUrl$: Observable<string>;
 
     public Pages: any = Pages;
 
     constructor(
-      private store: Store,
+      private store:   Store,
       private loading: LoadingController,
-      private toast: ToastController
+      private toast:   ToastController
     )
     { }
 
@@ -71,14 +67,14 @@ export class PageAssetCluster
                     switchMap(() => from(Camera.getPhoto(options))),
                     map((photo: CameraPhoto) => photo.dataUrl),
                     switchMap((imageData: string) =>
-                        this.store.dispatch(new ActionClusterIconSetUrl(imageData))
+                        this.store.dispatch(new ActionClusterIconUriSet(imageData))
                     )
                 ).
                 subscribe();
             }
             else
             {
-                this.store.dispatch(new ActionClusterIconSetPath()).
+                this.store.dispatch(new ActionClusterIconPathSet()).
                 subscribe();
             }
         }

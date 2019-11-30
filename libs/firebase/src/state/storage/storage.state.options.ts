@@ -8,6 +8,9 @@ export const StateStorageOptions: StoreOptions<StateStorageModel> =
 
     defaults :
     {
-        images: {}
+        images  : {},
+
+        uploadProgress: 0,
+        uploadError:    undefined
     }
 };
