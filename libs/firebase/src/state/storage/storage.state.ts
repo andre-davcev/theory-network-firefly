@@ -57,7 +57,8 @@ export class StateStorage
                     ),
                     map(([url, images]) =>
                     {
-                        images[bucketPath][size] = url;
+                        images[bucketPath][size]            = url;
+                        images[bucketPath][ImageSize.Small] = url;
 
                         return images;
                     }),
@@ -136,7 +137,11 @@ export class StateStorage
                 last(),
                 switchMap(() => ref.getDownloadURL()),
                 switchMap((url: string) =>
-                    dispatch(new ActionStorageUrlSet(url, bucketPath, ImageSize.Medium))
+                    dispatch
+                    ([
+                        new ActionStorageUrlSet(url, bucketPath, ImageSize.Small),
+                        new ActionStorageUrlSet(url, bucketPath, ImageSize.Medium)
+                    ])
                 ),
                 catchError((uploadError: any) => of(patchState({ uploadError })))
             );

@@ -5,7 +5,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Cluster, StateUserClusters, ActionClusterSet, ActionClusterSetId } from '@firefly/core';
+import { Cluster, StateUserClusters, ActionClusterSetId } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
 import { ModalController } from '@ionic/angular';

@@ -32,12 +32,12 @@ import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { FormGroup } from '@angular/forms';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 
-import { ActionUserAlertsDelete, ActionUserAlertsReset, ActionUserAlertsGetData } from '../../list/user-alerts/user-alerts.actions';
+import { ActionUserAlertsDelete, ActionUserAlertsReset, ActionUserAlertsGetData } from '../../query/user-alerts/user-alerts.actions';
 import { ActionUserClustersReset } from '../../query/user-clusters/user-clusters.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
-import { ActionUserStreamDelete, ActionUserStreamReset, ActionUserStreamGetData } from '../../list/user-stream/user-stream.actions';
+import { ActionUserStreamDelete, ActionUserStreamReset, ActionUserStreamGetData } from '../../query/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsDelete, ActionUserSubscriptionsReset } from '../../query/user-subscriptions/user-subscriptions.actions';
 
 @State<StateUserModel>(StateUserOptions)
