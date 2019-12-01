@@ -21,12 +21,8 @@ export const StateSubscriptionOptions: StoreOptions<StateSubscriptionModel> =
             private     : false,
             draft       : false,
 
-            tagline         : null,
-            iconId          : undefined,
-            iconUrl         : undefined,
-            eventCount      : 0,
-            subscriberCount : 0,
-            on              : false
+            tagline : null,
+            on      : false
         },
 
         form :

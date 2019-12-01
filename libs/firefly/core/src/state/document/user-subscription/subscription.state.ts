@@ -67,8 +67,7 @@ export class StateSubscription
             switchMap((object: Subscription) =>
                 dispatch
                 ([
-                    new ActionSubscriptionSet(object),
-                    new ActionIconGet(object.iconId)
+                    new ActionSubscriptionSet(object)
                 ])
             )
         );
@@ -85,8 +84,7 @@ export class StateSubscription
 
         return dispatch
         ([
-            new ActionSubscriptionSet(object),
-            new ActionIconSetId(object.iconId)
+            new ActionSubscriptionSet(object)
         ]);
     }
 
@@ -98,10 +96,6 @@ export class StateSubscription
         return dispatch(new ActionSubscriptionReset()).
         pipe
         (
-            switchMap(() =>
-                this.service.getDownloadUrl(object.iconId, ImageSize.Medium).
-                pipe(tap((url: string) => object.iconUrl = url))
-            ),
             map(() =>
                 patchState({ formGroup: this.service.formCreate(object) })
             ),

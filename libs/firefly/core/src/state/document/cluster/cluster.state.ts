@@ -6,7 +6,7 @@ import { StateDocument } from '@theory/ngxs';
 import { Cluster, Icon } from '@firefly/core/models';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
-import { ActionIconCreate, ActionIconPatch, ActionIconClear, ActionIconUriSet, StateIcon, ActionIconSetId, StateIconModel } from '@firefly/core/state/document/icon';
+import { ActionIconCreate, ActionIconPatch, ActionIconClear, ActionIconUriSet, StateIcon, ActionIconSetId } from '@firefly/core/state/document/icon';
 
 import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
@@ -60,11 +60,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
                 private     : false,
                 draft       : false,
 
-                tagline         : null,
-                iconId          : undefined,
-                iconUrl         : null,
-                eventCount      : 0,
-                subscriberCount : 0
+                tagline : null
             },
             {
                 ActionReset:  ActionClusterReset,
