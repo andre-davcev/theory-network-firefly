@@ -165,17 +165,36 @@ export class StateQuery<T extends Model, M extends StateQueryModel<T>>
         const count: number = data.length;
         const value: any    = entity[orderBy];
 
-        const sortIndex: number = data.findIndex((object: T, index: number) =>
-            (orderByDirection === OrderBy.Ascending  && value > object[orderBy]) ||
-            (orderByDirection === OrderBy.Descending && value < object[orderBy]) ||
-            index === count
-        );
+        if ((count === 0) ||
+            (orderByDirection === OrderBy.Ascending  && value > data[count-1][orderBy]) ||
+            (orderByDirection === OrderBy.Descending && value < data[count-1][orderBy]))
+        {
+            snapshots.push(snapshot);
+            data.push(entity);
+        }
+        else
+        {
+            let sortIndex;
+
+            if ((orderByDirection === OrderBy.Ascending  && value < data[0][orderBy]) ||
+                (orderByDirection === OrderBy.Descending && value > data[0][orderBy]))
+            {
+                sortIndex = 0;
+            }
+            else
+            {
+                sortIndex = data.findIndex((object: T) =>
+                    (orderByDirection === OrderBy.Ascending  && value > object[orderBy]) ||
+                    (orderByDirection === OrderBy.Descending && value < object[orderBy])
+                ) + 1;
+            }
+
+            snapshots.splice(sortIndex, 0, snapshot);
+            data.splice(sortIndex, 0, entity);
+        }
 
         snapshotLookup[id] = snapshot;
         dataLookup[id]     = entity;
-
-        snapshots.splice(sortIndex, 0, snapshot);
-        data.splice(sortIndex, 0, entity);
 
         return of(patchState
         ({

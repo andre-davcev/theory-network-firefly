@@ -10,15 +10,11 @@ firestore.
 document('icons/{id}').
 onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const id:     string              = snapshot.id;
-    const data:   Record<string, any> = snapshot.data();
-    const userId: string              = data.userId;
-    const path:   string              = `${userId}/icons/${data.id}.${data.mediaType}`;
+    const bucketPath: string = snapshot.data().bucketPath;
 
     return Promise.all
     ([
-        database.collection('user-icons').doc(userId).update({ [id]: FieldValue.delete() }),
-        storage().bucket().file(path).delete()
+        storage().bucket().file(bucketPath).delete()
     ]);
 });
 

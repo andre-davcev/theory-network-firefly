@@ -2,7 +2,7 @@ import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { CoreEnum } from '@theory/core';
-import { ActionStorageUrlGet, ActionStorageUpload, StateStorage, ImageSize, StateStorageModel, StorageImage } from '@theory/firebase';
+import { ActionStorageUrlGet, ActionStorageUpload, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
 import { Icon } from '@firefly/core/models';
 import { ServiceIcons } from '@firefly/core/services';
