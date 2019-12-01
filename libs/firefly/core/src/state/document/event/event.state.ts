@@ -33,6 +33,7 @@ import { ServiceEvents } from '@firefly/core/services';
 import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ActionIconClear } from '../icon/icon.actions';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -78,7 +79,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
-                ActionsReset:  [ActionClusterReset, ActionImageClear, ActionMapSearchResultClear],
+                ActionsReset:  [ActionClusterReset, ActionImageClear, ActionIconClear, ActionMapSearchResultClear],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
