@@ -72,7 +72,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
                 ActionSave:   ActionClusterSave,
                 ActionDelete: ActionClusterDelete,
 
-                ActionsReset:  [],
+                ActionsReset:  [ActionIconClear],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserClustersAdd],
