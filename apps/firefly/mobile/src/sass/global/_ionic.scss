@@ -47,6 +47,7 @@ ion-content {
 ion-fab-button {
   &.ion-color-secondary {
     --background-activated: #{$fire-color-accent-darkest};
+    --ion-color-shade: #{$fire-color-primary} !important;
   }
 }
 
