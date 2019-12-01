@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
-import { User as FirebaseUser, UserInfo } from 'firebase/app';
-import { AuthProvider, ServiceAsset } from '@theory/firebase';
+import { User as FirebaseUser } from 'firebase/app';
+import { ServiceAsset } from '@theory/firebase';
 import { User } from '@firefly/core/models';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
