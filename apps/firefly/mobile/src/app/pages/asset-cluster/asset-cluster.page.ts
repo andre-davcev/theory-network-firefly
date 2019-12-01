@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, catchError, map } from 'rxjs/operators';
+import { switchMap, catchError, map, finalize } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateCluster, ActionClusterIconUriSet, ActionClusterIconPathSet, ActionClusterSave } from '@firefly/core';
 import { Pages } from '../pages.enum';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
+import { NavController } from '@ionic/angular';
 
 const { Camera } = Plugins;
 
@@ -30,7 +31,8 @@ export class PageAssetCluster
 
     constructor
     (
-      private store: Store
+      private store:         Store,
+      private navController: NavController
     )
     { }
 
@@ -59,6 +61,9 @@ export class PageAssetCluster
                     map((photo: CameraPhoto) => photo.dataUrl),
                     switchMap((imageData: string) =>
                         this.store.dispatch(new ActionClusterIconUriSet(imageData))
+                    ),
+                    finalize(() =>
+                        this.store.dispatch(new ActionMobileLoadingHide())
                     )
                 ).
                 subscribe();
@@ -73,23 +78,24 @@ export class PageAssetCluster
 
     public save(): void
     {
-      this.store.dispatch
-      ([
-          new ActionMobileLoadingShow(),
-          new ActionClusterSave()
-      ]).
-      pipe
-      (
-          map(() => 'Event was successfully created!'),
-          catchError(() => of('An error occurred creating the event!'))
-      ).
-      subscribe((message: string) =>
-          this.store.dispatch
-          ([
-              new ActionMobileLoadingHide(),
-              new ActionMobileToast(message)
-          ])
-      );
+        this.store.dispatch
+        ([
+            new ActionMobileLoadingShow(),
+            new ActionClusterSave()
+        ]).
+        pipe
+        (
+            map(() => 'Cluster was successfully created!'),
+            catchError(() => of('An error occurred creating the cluster!')),
+            finalize(() =>
+                this.store.dispatch(new ActionMobileLoadingHide())
+            )
+        ).
+        subscribe((message: string) =>
+        {
+            this.store.dispatch(new ActionMobileToast(message));
+            this.navController.back();
+        });
     }
 
 }

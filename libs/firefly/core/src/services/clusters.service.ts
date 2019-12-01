@@ -33,15 +33,15 @@ export class ServiceClusters extends ServiceFirestore<Cluster>
 
     public formCreate(cluster: Cluster): FormGroup
     {
-        return super.formCreate(
-        {
+        return super.formCreate
+        ({
             ...cluster,
 
             name        : [cluster.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
             description : [cluster.description, [Validators.required, ValidatorsExtended.minLength(1)]],
 
-            tagline   : [cluster.tagline, ValidatorsExtended.minLength(1)],
-            imageId   : [cluster.iconId, [ServiceClusters.validateIcon()]]
-        })
+            tagline    : [cluster.tagline,    [Validators.required, ValidatorsExtended.minLength(1)]],
+            bucketPath : [cluster.bucketPath, [ServiceClusters.validateIcon()]]
+        });
     }
 }

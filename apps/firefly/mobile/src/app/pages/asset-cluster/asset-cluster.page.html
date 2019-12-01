@@ -33,25 +33,25 @@
         </app-item-header>
 
         <div class="cpt-detail" fxLayout="column">
-          <ion-list>
-              <ion-item-group>
-                  <ion-item-divider></ion-item-divider>
+            <ion-list>
+                <ion-item-group>
+                    <ion-item-divider></ion-item-divider>
 
-                  <app-item-description [form]="form$ | async"
-                                        [title]="'general.description' | translate"
-                                        description="description"
-                                        [descriptionPlaceholder]="'page.cluster.descriptionPlaceholder' | translate">
-                  </app-item-description>
+                    <app-item-description [form]="form$ | async"
+                                          [title]="'general.description' | translate"
+                                          description="description"
+                                          [descriptionPlaceholder]="'page.cluster.descriptionPlaceholder' | translate">
+                    </app-item-description>
 
-                  <ion-item-divider></ion-item-divider>
+                    <ion-item-divider></ion-item-divider>
 
-                  <ion-item>
-                      Events list will go here
-                  </ion-item>
+                    <ion-item>
+                        Events list will go here
+                    </ion-item>
 
-                  <ion-item-divider></ion-item-divider>
-              </ion-item-group>
-          </ion-list>
-      </div>
+                    <ion-item-divider></ion-item-divider>
+                </ion-item-group>
+            </ion-list>
+        </div>
     </form>
 </ion-content>

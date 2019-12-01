@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
@@ -39,9 +39,10 @@ export class PageAssetEvent
 
     constructor
     (
-        private store:    Store,
-        private modal:    ModalController,
-        private resolver: ResolverPageAssetsClusters
+        private store:         Store,
+        private modal:         ModalController,
+        private resolver:      ResolverPageAssetsClusters,
+        public  navController: NavController
     ) { }
 
     public ionViewWillEnter(): void
@@ -124,14 +125,15 @@ export class PageAssetEvent
         pipe
         (
             map(() => 'Event was successfully created!'),
-            catchError(() => of('An error occurred creating the event!'))
+            catchError(() => of('An error occurred creating the event!')),
+            finalize(() =>
+                this.store.dispatch(new ActionMobileLoadingHide())
+            )
         ).
         subscribe((message: string) =>
-            this.store.dispatch
-            ([
-                new ActionMobileLoadingHide(),
-                new ActionMobileToast(message)
-            ])
-        );
+        {
+            this.store.dispatch(new ActionMobileToast(message));
+            this.navController.back();
+        });
     }
 }
