@@ -1,12 +1,9 @@
 export enum ActionsUserAlerts
 {
-    Reset   = '[UserAlerts] Reset',
-    GetData = '[UserAlerts] Get Data',
-    Get     = '[UserAlerts] Get',
-    Set     = '[UserAlerts] Set',
-    Sort    = '[UserAlerts] Sort',
-    Add     = '[UserAlerts] Add',
-    Remove  = '[UserAlerts] Remove',
-    Sync    = '[UserAlerts] Sync',
-    Delete  = '[UserAlerts] Delete'
+    Reset   = '[User Alerts] Reset',
+    GetData = '[User Alerts] Get Data',
+    Get     = '[User Alerts] Get',
+    Add     = '[User Alerts] Add',
+    Remove  = '[User Alerts] Remove',
+    Sync    = '[User Alerts] Sync'
 }

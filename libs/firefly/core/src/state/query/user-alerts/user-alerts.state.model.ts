@@ -1,7 +1,7 @@
-import { StateReferenceTableModel } from '@theory/ngxs';
-import { Alert, UserAlert } from '@firefly/core/models';
+import { StateQueryModel } from '@theory/ngxs';
+import { Alert } from '@firefly/core/models';
 
-export interface StateUserAlertsModel extends StateReferenceTableModel<UserAlert, Alert>
+export interface StateUserAlertsModel extends StateQueryModel<Alert>
 {
 
 }
