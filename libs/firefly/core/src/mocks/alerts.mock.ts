@@ -1,42 +1,55 @@
 import { Alert } from '@firefly/core/models';
 
 export const MockAlerts: Array<Alert> = [];
-/*
 [
     {
-        id      : '1',
-        url     : 'assets/images/temp-notifications-blondie.jpg',
-        eventId : 'a',
-        path : 'assets/images/temp-notifications-blondie.jpg',
-        title   : 'Blondie',
-        body    : "Artpark",
-        read    : false,
-        date    : 'July 25, 2016 at 6:30pm',
-        userId  : 'username'
+        id          : '1',
+        dateCreated : '',
+        dateUpdated : '',
+        version     : '',
+        userId      : '',
+
+        name        : 'Blondie',
+        description : 'Artpark',
+        dateTime    : 'July 25, 2016 at 6:30pm',
+        bucketPath  : 'baLysAd71cRyZjh0hr6poxR8an13/image/0mmzNcb1yAJJT0Y4Ewzu.jpeg',
+        eventId     : 'oZsx53Fam5yr88PAnHAT',
+        clusterId   : 'jNUnMIY7QkAWFvr5fr0d',
+        url         : 'https://www.blondie.net',
+        read        : false
     },
 
     {
-        id      : '2',
-        url     : 'assets/images/temp-notifications-foster.the.people.jpg',
-        eventId : 'b',
-        path : 'assets/images/temp-notifications-blondie.jpg',
-        title   : 'Foster The People',
-        body    : "Ommegang Brewery Cooperstown",
-        read    : false,
-        date    : 'June 10, 2017 at 7:00pm',
-        userId  : 'username'
+        id          : '1',
+        dateCreated : '',
+        dateUpdated : '',
+        version     : '',
+        userId      : '',
+
+        name        : 'Foster The People',
+        description : 'Ommegang Brewery Cooperstown',
+        dateTime    : 'June 10, 2017 at 7:00pm',
+        bucketPath  : 'baLysAd71cRyZjh0hr6poxR8an13/image/culdH46ZBh0lAPEkOs9o.jpeg',
+        eventId     : 'oZsx53Fam5yr88PAnHAT',
+        clusterId   : 'jNUnMIY7QkAWFvr5fr0d',
+        url         : 'https://www.fosterthepeople.com',
+        read        : false
     },
 
     {
-        id      : '3',
-        url     : 'assets/images/temp-notifications-rusted.root.jpg',
-        eventId : 'c',
-        path : 'assets/images/temp-notifications-blondie.jpg',
-        title   : 'Rusted Root',
-        body    : "Sahlen's Music Stage",
-        read    : false,
-        date    : 'May 12, 2017 at 7:00pm',
-        userId  : 'username'
+        id          : '1',
+        dateCreated : '',
+        dateUpdated : '',
+        version     : '',
+        userId      : '',
+
+        name        : 'Rusted Root',
+        description : "Sahlen's Music Stage",
+        dateTime    : 'May 12, 2017 at 7:00pm',
+        bucketPath  : 'baLysAd71cRyZjh0hr6poxR8an13/image/l84fX5B1GwvRXV8znQ4S.jpeg',
+        eventId     : 'oZsx53Fam5yr88PAnHAT',
+        clusterId   : 'jNUnMIY7QkAWFvr5fr0d',
+        url         : 'https://www.rustedroot.com/home',
+        read        : false
     }
 ];
-*/
