@@ -11,7 +11,6 @@ import { UserStreamsCreate } from './user-streams';
 import { UserSubscriptionsDelete, UserSubscriptionsUpdate } from './user-subscriptions';
 import { UsersCreate, UsersDelete } from './users';
 import { ClusterSubscribersDelete } from './cluster-subscribers';
-import { UserAlertsDelete, UserAlertsUpdate } from './user-alerts';
 import { AlertsCreate } from './alerts';
 
 export
@@ -37,10 +36,6 @@ export
     ImagesUpdate,
 
     StorageResize,
-
-    // UserAlertsCreate,
-    UserAlertsDelete,
-    UserAlertsUpdate,
 
     UserStreamsCreate,
 
