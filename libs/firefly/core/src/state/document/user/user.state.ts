@@ -32,7 +32,7 @@ import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
 import { FormGroup } from '@angular/forms';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 
-import { ActionUserAlertsDelete, ActionUserAlertsReset, ActionUserAlertsGetData } from '../../query/user-alerts/user-alerts.actions';
+import { ActionUserAlertsReset, ActionUserAlertsGetData } from '../../query/user-alerts/user-alerts.actions';
 import { ActionUserClustersReset } from '../../query/user-clusters/user-clusters.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
@@ -177,7 +177,6 @@ export class StateUser implements NgxsOnInit
             switchMap(() =>
                 dispatch
                 ([
-                    new ActionUserAlertsDelete(),
                     new ActionUserStreamDelete(),
                     new ActionUserSubscriptionsDelete(),
                     new ActionUserReset()

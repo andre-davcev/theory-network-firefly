@@ -2,22 +2,20 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Alert } from '@firefly/core/models';
-import { ServiceAsset } from '@theory/firebase';
+import { ServiceFirestore } from '@theory/firebase';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AngularFireStorage } from '@angular/fire/storage';
 
 
 @Injectable({ providedIn: 'root' })
-export class ServiceAlerts extends ServiceAsset<Alert>
+export class ServiceAlerts extends ServiceFirestore<Alert>
 {
     constructor
     (
         firestore:   AngularFirestore,
-        formBuilder: FormBuilder,
-        storage:     AngularFireStorage
+        formBuilder: FormBuilder
     )
     {
-        super('alerts', firestore, formBuilder, storage);
+        super(firestore, formBuilder);
     }
 
     public formCreate(object: Alert): FormGroup

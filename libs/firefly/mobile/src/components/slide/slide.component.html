@@ -1,11 +1,11 @@
 <div class="cpt-card" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1.25rem">
     <section fxLayout="column" fxLayoutGap="0.5rem">
-        <h1 class="cpt-title">{{ slide.title }}</h1>
-        <h2 class="cpt-short">{{ slide.body }}</h2>
+        <h1 class="cpt-title">{{ slide.name }}</h1>
+        <h2 class="cpt-short">{{ slide.description }}</h2>
     </section>
 
-    <div class="cpt-image" [style.background-image]="'url(' + slide.image + ')'"></div>
+    <div class="cpt-image" [style.background-image]="'url(' + slide.imageUrl + ')'"></div>
     <div class="cpt-button">{{ buttonText }}</div>
 
-    <span class="cpt-date">{{ slide.date }}</span>
+    <span class="cpt-date">{{ slide.dateTimeDate | date:'short' }}</span>
 </div>

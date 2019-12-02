@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { IonSlides, AlertController } from '@ionic/angular';
+import { IonSlides } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { Alert, StateUser, StateUserAlerts } from '@firefly/core';
+import { Alert, StateUserAlerts } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';
@@ -17,7 +17,7 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageAlert
 {
-    @Select(StateUserAlerts.list) alerts$: Observable<Array<Alert>>;
+    @Select(StateUserAlerts.data()) alerts$: Observable<Array<Alert>>;
 
     @ViewChild(IonSlides, { static: true }) slides: IonSlides;
 
