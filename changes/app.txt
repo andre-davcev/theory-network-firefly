@@ -1,0 +1,21 @@
+mapbox-bigdatacloud-firefly
+  place     locality                city
+  region    principalSubdivision    region
+  country   countryCode             country
+map
+  limit mapbox search types to [address, poi]
+event create
+  if location changed
+    save info to event.location
+    search mapbox for place.<number>
+      save latitude/longitude
+      search bigdatacloud using language [en]
+        generate cityId
+        save cityId to event.cityId
+        save city to event.city
+user
+  setup user object watch
+  on location found
+    search mapbox reverse geocode for city latitude/longitude
+    search bigdatacloud for latitude/longitude city data
+    save to user.location & user.city

@@ -1,0 +1,52 @@
+  streams radius cutoff (200 or 300 km)
+  cluster-tokens limit (10000)
+
+  city create
+    get cities collection
+    calculate distances to all other cities
+    filter out cities above km threshold (200km)
+    add map to city.nearby
+  event create/update
+    if cityId is not found in cities collection
+      create city in cities collection
+    loop through clusters
+      get cluster-city
+        for deleted city decrement events count & calc ratio
+        for added city increment events count & calc ratio
+    if notifyImmediate changed && notifyImmediate == true
+      add to schedules collection under immediate id
+      set notifyCompleted = true
+    if notifyDateTime changed && notifyDateTime > DateTime.now()
+      add to schedules collection under immediate id
+  schedules (cron hourly 55 mins past hour)
+    find hour past current time
+    pull dateTime id {YYYY-MM-DD#HH:00:00} from schedules collection
+    save user-subscriptions into clusterUserLookup where flag is 'on' Record<{clusterId, userId}>
+    loop through event ids
+      for each event grab clusters
+        for each cluster
+          userId = clusterUserLookup[clusterId];
+          if (userId != null)
+          {
+              send event push notification to userId;
+          }
+  cluster create/update
+    if events added/removed
+      get cluster-city
+      create/update ClusterCity stats
+  streams cron job
+    get users collection
+    for each user logged in the past 30 days
+      get user.city
+      get cities/{cityId}
+      push city to array
+      loop through city.nearby sorted by shortest distance
+        push to city array
+      loop through city.clusters
+        generate score using:
+          event count
+          event ratio
+          distance ranking
+        sort list based on score descending
+  user create/update
+    if dateLoggedIn & city changed then generate new stream
