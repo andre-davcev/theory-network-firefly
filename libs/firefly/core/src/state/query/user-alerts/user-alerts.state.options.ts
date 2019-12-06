@@ -1,7 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { TypeOf } from '@theory/core';
-import { Default } from '@theory/ngxs';
+import { PageSize } from '@theory/ngxs';
 
 import { StateUserAlertsModel } from './user-alerts.state.model';
 import { OrderBy, ImageSize } from '@theory/firebase';
@@ -12,7 +11,7 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
 
     defaults :
     {
-        pageSize:         Default.PageSize,
+        pageSize:         PageSize.Default,
         orderBy:          'dateCreated',
         orderByDirection: OrderBy.Descending,
 

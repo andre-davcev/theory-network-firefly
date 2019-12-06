@@ -1,30 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { ServiceAsset } from '@theory/firebase';
+import { ServiceFirestore } from '@theory/firebase';
 import { Subscription } from '@firefly/core/models';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceSubscriptions extends ServiceAsset<Subscription>
+export class ServiceSubscriptions extends ServiceFirestore<Subscription>
 {
     constructor
     (
         firestore:   AngularFirestore,
-        formBuilder: FormBuilder,
-        storage:     AngularFireStorage,
+        formBuilder: FormBuilder
     )
     {
-        super('clusters', firestore, formBuilder, storage, true);
-    }
-
-    public formCreate(object: Subscription): FormGroup
-    {
-        return super.formCreate(
-        {
-            ...object
-        });
+        super(firestore, formBuilder);
     }
 }
 

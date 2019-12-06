@@ -1,39 +1,17 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateSubscriptionModel } from './subscription.state.model';
+import { CoreUtil } from '@theory/core';
+import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateSubscriptionOptions: StoreOptions<StateSubscriptionModel> =
 {
-    name : 'subscription',
+    name : 'subscriptions',
 
     defaults :
     {
-        empty :
-        {
-            version     : undefined,
-            id          : undefined,
-            dateCreated : undefined,
-            dateUpdated : undefined,
-
-            userId      : undefined,
-            name        : null,
-            description : null,
-            private     : false,
-            draft       : false,
-
-            tagline : null,
-            on      : false
-        },
-
-        form :
-        {
-            model  : {},
-            dirty  : false,
-            status : '',
-            errors : {}
-        },
-
+        snapshot  : undefined,
+        form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
         formGroup : undefined,
-        formPath  : 'subscription.form'
     }
 };

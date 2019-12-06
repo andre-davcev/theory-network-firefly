@@ -1,0 +1,123 @@
+import { StateContext } from '@ngxs/store';
+import { Query } from '@angular/fire/firestore';
+import { firestore } from 'firebase/app';
+import { Observable, from, of } from 'rxjs';
+import { map, tap, switchMap } from 'rxjs/operators';
+
+import { ImageSize, Model, ActionStorageUrlsGet } from '@theory/firebase';
+
+import { StateCollection, ActionsCollection, StateCollectionModel } from '../collection';
+
+export class StateQuery<T extends Model, M extends StateCollectionModel<T>> extends StateCollection<T, M>
+{
+    public query: Query;
+
+    constructor
+    (
+        defaults: M,
+        actions:  ActionsCollection
+    )
+    {
+        super(defaults, actions);
+    }
+
+    public reset(context: StateContext<M>, action: any): Observable<any>
+    {
+        this.query = action.query == null ? this.query : action.query;
+
+        return super.reset(context, action);
+    }
+
+    public getData(context: StateContext<M>): Observable<any>
+    {
+        const { getState, dispatch } = context;
+        const { ActionReset, ActionGet } = this.actions;
+
+        const initialized: boolean = StateQuery.initializedState(getState());
+        return initialized ?
+            of(null) :
+            dispatch(new ActionReset()).
+            pipe
+            (
+                switchMap(() => dispatch(new ActionGet()))
+            );
+    }
+
+    public get(context: StateContext<M>): Observable<any>
+    {
+        const { getState, patchState, dispatch } = context;
+
+        const state : M = getState();
+
+        const
+        {
+            snapshots,
+            snapshotLookup,
+            data,
+            dataLookup,
+            finishedPaging,
+            imageSize,
+            initialized,
+            pageSize
+        } = state;
+
+        if (!initialized)
+        {
+            const { pageSize, orderBy, orderByDirection } = state;
+
+            this.query = this.query.orderBy(orderBy, orderByDirection).limit(pageSize);
+
+            patchState({ initialized: true} as M);
+        }
+        else if (!finishedPaging)
+        {
+            this.query = this.query.startAfter(snapshots[snapshots.length - 1]);
+        }
+
+        patchState({ loading: true } as M);
+
+        return finishedPaging ?
+            of(null) :
+            from(this.query.get()).pipe
+            (
+                map((snapshot: firestore.QuerySnapshot) =>
+                    snapshot.docs
+                ),
+                tap((page: Array<firestore.QueryDocumentSnapshot>) =>
+                    patchState({ finishedPaging: page.length < pageSize } as M)
+                ),
+                tap((page: Array<firestore.QueryDocumentSnapshot>) =>
+                    page.forEach((document: firestore.QueryDocumentSnapshot) =>
+                    {
+                        const object: T = document.data() as T;
+
+                        snapshots.push(document);
+                        snapshotLookup[document.id] = document;
+
+                        data.push(object);
+                        dataLookup[document.id] = object;
+                    })
+                ),
+                tap(() =>
+                    patchState
+                    ({
+                        snapshots,
+                        snapshotLookup,
+                        data,
+                        dataLookup
+                    } as M)
+                ),
+                map(() =>
+                    imageSize === ImageSize.None ?
+                        [] :
+                        data.map((item: T) => item['bucketPath'])
+                ),
+                switchMap((bucketPaths: Array<string>) =>
+                    dispatch(new ActionStorageUrlsGet(bucketPaths, imageSize))
+                ),
+                tap(() =>
+                    patchState({ loading: false } as M)
+                )
+            );
+    }
+}

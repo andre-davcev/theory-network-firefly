@@ -1,9 +1,9 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { TypeOf } from '@theory/core';
-import { Default } from '@theory/ngxs';
+import { PageSize } from '@theory/ngxs';
 
 import { StateUserStreamModel } from './user-stream.state.model';
+import { OrderBy, ImageSize } from '@theory/firebase';
 
 export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
 {
@@ -11,21 +11,18 @@ export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
 
     defaults :
     {
-        data:          {},
-        lookup:        {},
-        keys:          [],
-        list:          [],
-        offset:        0,
-        pageSize:      Default.PageSize,
-        initialized:   false,
-        sortField:     'order',
-        sortAscending: true,
-        sortByEntity:  false,
-        imageIdKey:    'iconId',
+      pageSize:         PageSize.Default,
+      orderBy:          'order',
+      orderByDirection: OrderBy.Ascending,
 
-        sortFields:
-        {
-            order : TypeOf.Number
-        }
+      initialized:    false,
+      loading:        false,
+      finishedPaging: false,
+      imageSize:      ImageSize.Small,
+
+      snapshots:      [],
+      snapshotLookup: {},
+      data:           [],
+      dataLookup:     {}
     }
 };

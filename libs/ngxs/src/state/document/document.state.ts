@@ -1,16 +1,19 @@
-import { ServiceFirestore, Model, ActionStorageUrlGet } from '@theory/firebase';
-
-import { StateDocumentModel, ActionsDocument, FormNgxs } from '../interfaces';
-import { CoreUtil, CoreEnum } from '@theory/core';
 import { StateContext, createSelector } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { firestore } from 'firebase/app';
 import { FormGroup } from '@angular/forms';
-import { FormNgxsStatus } from '../enums';
 
-export class StateDocument<T extends Model, M extends StateDocumentModel<T>>
+import { CoreUtil, CoreEnum } from '@theory/core';
+import { ServiceFirestore, Model, ActionStorageUrlGet } from '@theory/firebase';
+
+import { FormNgxsStatus } from '../../enums';
+import { FormNgxs } from '../../interfaces';
+import { StateDocumentModel } from './document.model';
+import { ActionsDocument } from './document.actions';
+
+export class StateDocument<T extends Model, M extends StateDocumentModel>
 {
     protected collection: string;
     protected defaults:   M;
