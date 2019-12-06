@@ -1,14 +1,11 @@
-import { SortField } from '@theory/ngxs';
-import { StreamItem, UserStreamItem } from '@firefly/core/models';
+import { StreamItem } from '@firefly/core/models';
 
 import { ActionsUserStream } from './user-stream.actions.enum';
+import { firestore } from 'firebase/app';
 
 export class ActionUserStreamReset   { static readonly type = ActionsUserStream.Reset;   constructor() { } }
-export class ActionUserStreamGetData { static readonly type = ActionsUserStream.GetData; constructor(public fetch: boolean = true) { } }
+export class ActionUserStreamGetData { static readonly type = ActionsUserStream.GetData; constructor() { } }
 export class ActionUserStreamGet     { static readonly type = ActionsUserStream.Get;     constructor() { } }
-export class ActionUserStreamSet     { static readonly type = ActionsUserStream.Set;     constructor(public payload: Record<string, UserStreamItem>) { } }
-export class ActionUserStreamSort    { static readonly type = ActionsUserStream.Sort;    constructor(public payload?: SortField) { } }
-export class ActionUserStreamAdd     { static readonly type = ActionsUserStream.Add;     constructor(public payload: StreamItem) { } }
-export class ActionUserStreamRemove  { static readonly type = ActionsUserStream.Remove;  constructor(public payload: string) { } }
-export class ActionUserStreamSync    { static readonly type = ActionsUserStream.Sync;    constructor(public payload: StreamItem) { } }
-export class ActionUserStreamDelete  { static readonly type = ActionsUserStream.Delete;  constructor() { } }
+export class ActionUserStreamAdd     { static readonly type = ActionsUserStream.Add;     constructor(public snapshot: firestore.DocumentSnapshot, public entity?: StreamItem) { } }
+export class ActionUserStreamRemove  { static readonly type = ActionsUserStream.Remove;  constructor(public id: string) { } }
+export class ActionUserStreamSync    { static readonly type = ActionsUserStream.Sync;    constructor(public object: StreamItem) { } }

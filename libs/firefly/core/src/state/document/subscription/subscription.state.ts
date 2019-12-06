@@ -1,13 +1,8 @@
-import { FormGroup } from '@angular/forms';
-import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
-import { of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { CoreEnum, CoreUtil } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
+import { CoreEnum } from '@theory/core';
+import { StateDocument } from '@theory/ngxs';
 import { Subscription } from '@firefly/core/models';
-import { ActionIconGet, ActionIconSetId } from '@firefly/core/state/document/icon';
 import { ServiceSubscriptions } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 
@@ -21,156 +16,122 @@ import {
   ActionSubscriptionCreate,
   ActionSubscriptionSave,
   ActionSubscriptionDelete,
-  ActionSubscriptionSetId
+  ActionSubscriptionSetId,
+  ActionSubscriptionUpdate
 } from './subscription.actions';
-import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../query/user-subscriptions';
-import { ImageSize } from '@theory/firebase';
+import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions';
+import { firestore } from 'firebase/app';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)
 
-export class StateSubscription
+export class StateSubscription extends StateDocument<Subscription, StateSubscriptionModel>
 {
-    @Selector() static form(state: StateSubscriptionModel): FormNgxs { return state.form; }
-    @Selector() static formGroup(state: StateSubscriptionModel): FormGroup { return state.formGroup; }
-    @Selector() static formPath(state: StateSubscriptionModel): string { return state.formPath; }
-    @Selector() static isForm(state: StateSubscriptionModel): boolean { return StateSubscription.formGroup(state) != null; }
-    @Selector() static data(state: StateSubscriptionModel): Subscription { return StateSubscription.form(state).model; }
-    @Selector() static id(state: StateSubscriptionModel): string { return StateSubscription.data(state).id; }
-    @Selector() static isNew(state: StateSubscriptionModel): boolean { return  StateSubscription.id(state) === CoreEnum.IdNew; }
-    @Selector() static canUpdate(state: StateSubscriptionModel): boolean { return StateSubscription.form(state).status === FormNgxsStatus.Valid && StateSubscription.form(state).dirty; }
-
     constructor
     (
-        private store:   Store,
-        private service: ServiceSubscriptions,
-    ) { }
+        private store: Store,
+        service: ServiceSubscriptions
+    )
+    {
+        super
+        (
+            StateSubscriptionOptions.name,
+            StateSubscriptionOptions.defaults,
+            service,
+            {
+                version     : undefined,
+                id          : undefined,
+                dateCreated : undefined,
+                dateUpdated : undefined,
+
+                userId      : undefined,
+                name        : null,
+                description : null,
+                private     : false,
+                draft       : false,
+
+                tagline : null,
+                on      : false
+            },
+            {
+                ActionReset:  ActionSubscriptionReset,
+                ActionGet:    ActionSubscriptionGet,
+                ActionSet:    ActionSubscriptionSet,
+                ActionPatch:  ActionSubscriptionPatch,
+                ActionCreate: ActionSubscriptionCreate,
+                ActionUpdate: ActionSubscriptionUpdate,
+                ActionSave:   ActionSubscriptionSave,
+                ActionDelete: ActionSubscriptionDelete,
+
+                ActionsReset:  [],
+                ActionsCreate: [],
+
+                ActionsQueryAdd:    [ActionUserSubscriptionsAdd],
+                ActionsQueryRemove: [ActionUserSubscriptionsRemove],
+                ActionsQuerySync:   [ActionUserSubscriptionsSync]
+            }
+        );
+    }
 
     @Action(ActionSubscriptionReset)
-    reset({ patchState, getState, dispatch }: StateContext<StateSubscriptionModel>)
+    reset(context: StateContext<StateSubscriptionModel>)
     {
-        const defaults: StateSubscriptionModel = CoreUtil.clone<StateSubscriptionModel>(StateSubscriptionOptions.defaults);
-
-        patchState(defaults);
-
-        return dispatch
-        ([
-            new SetFormPristine(StateSubscription.formPath(getState()))
-        ]);
+        return super.reset(context)
     }
 
     @Action(ActionSubscriptionGet)
-    get({ dispatch }: StateContext<StateSubscriptionModel>, { payload }: ActionSubscriptionGet)
+    get(context: StateContext<StateSubscriptionModel>, action: ActionSubscriptionGet)
     {
-        return this.service.snapshot(payload).
-        pipe
-        (
-            switchMap((object: Subscription) =>
-                dispatch
-                ([
-                    new ActionSubscriptionSet(object)
-                ])
-            )
-        );
-    }
-
-    @Action(ActionSubscriptionSetId)
-    setId({ dispatch }: StateContext<StateSubscriptionModel>, { payload }: ActionSubscriptionSetId)
-    {
-        const id: string = payload;
-
-        const object: Subscription = id === CoreEnum.IdNew ?
-            this.service.build(this.store.selectSnapshot(StateUser.id), CoreUtil.clone<Subscription>(StateSubscriptionOptions.defaults.empty)) :
-            this.store.selectSnapshot(StateUserSubscriptions.lookup)[id]
-
-        return dispatch
-        ([
-            new ActionSubscriptionSet(object)
-        ]);
+        return super.get(context, action);
     }
 
     @Action(ActionSubscriptionSet)
-    set({ patchState, getState, dispatch }: StateContext<StateSubscriptionModel>, { payload }: ActionSubscriptionSet)
+    set(context: StateContext<StateSubscriptionModel>, action: ActionSubscriptionSet)
     {
-        const object: Subscription = payload;
-
-        return dispatch(new ActionSubscriptionReset()).
-        pipe
-        (
-            map(() =>
-                patchState({ formGroup: this.service.formCreate(object) })
-            ),
-
-            switchMap(() =>
-                dispatch(new UpdateFormValue({ value: object, path: StateSubscription.formPath(getState())}))
-            )
-        );
+        return super.set(context, action);
     }
 
     @Action(ActionSubscriptionPatch)
-    patch({ dispatch, getState } : StateContext<StateSubscriptionModel>, { payload }: ActionSubscriptionPatch)
+    patch(context : StateContext<StateSubscriptionModel>, action: ActionSubscriptionPatch)
     {
-        const state: StateSubscriptionModel = getState();
-        const data:  Subscription           = StateSubscription.data(state);
-        const value: Subscription           = { ...data, ...payload };
-        const path:  string                 = StateSubscription.formPath(state);
-
-        return dispatch(new UpdateFormValue({ value, path })).
-        pipe
-        (
-            switchMap(() =>
-                data.id === CoreEnum.IdNew ?
-                    of(null) :
-                    dispatch(new ActionUserSubscriptionsSync(data))
-            )
-        );
+        return super.patch(context, action);
     }
 
     @Action(ActionSubscriptionCreate)
-    create({ getState, dispatch }: StateContext<StateSubscriptionModel>)
+    create(context: StateContext<StateSubscriptionModel>)
     {
-        const state: StateSubscriptionModel = getState();
-        const data:  Subscription           = StateSubscription.data(state);
+        return super.create(context);
+    }
 
-        return this.service.create(data).
-        pipe
-        (
-            switchMap(() => dispatch(new ActionUserSubscriptionsAdd(data)))
-        );
+    @Action(ActionSubscriptionUpdate)
+    update(context: StateContext<StateSubscriptionModel>)
+    {
+        return super.update(context);
     }
 
     @Action(ActionSubscriptionSave)
-    save({ getState, dispatch }: StateContext<StateSubscriptionModel>)
+    save(context: StateContext<StateSubscriptionModel>)
     {
-        const state:     StateSubscriptionModel = getState();
-        const formPath:  string                 = StateSubscription.formPath(state);
-        const formGroup: FormGroup              = StateSubscription.formGroup(state);
-        const isNew:     boolean                = StateSubscription.isNew(state);
-        const id:        string                 = StateSubscription.id(state);
-
-        return isNew ?
-            dispatch(new ActionSubscriptionCreate()) :
-            this.service.patch(id, this.service.changedFields(formGroup)).
-            pipe
-            (
-                switchMap(() => dispatch(new SetFormPristine(formPath)))
-            );
+        return super.save(context);
     }
 
     @Action(ActionSubscriptionDelete)
-    delete({ getState, dispatch }: StateContext<StateSubscriptionModel>)
+    delete(context: StateContext<StateSubscriptionModel>)
     {
-        const data: Subscription = StateSubscription.data(getState());
+        return super.delete(context);
+    }
 
-        return this.service.delete(data).
-        pipe
-        (
-            switchMap(() =>
-                dispatch
-                ([
-                    new ActionSubscriptionReset(),
-                    new ActionUserSubscriptionsRemove(data.id)
-                ])
-            )
-        );
+    @Action(ActionSubscriptionSetId)
+    setId({ dispatch }: StateContext<StateSubscriptionModel>, { id }: ActionSubscriptionSetId)
+    {
+        const isNew: boolean = id === CoreEnum.IdNew;
+
+        const userId:   string                     = this.store.selectSnapshot(StateUser.id);
+        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserSubscriptions.snapshotLookup()[id]);
+
+        const data: Subscription = isNew ?
+            this.service.formDataNew(userId, this.empty) :
+            this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
+
+        return dispatch(new ActionSubscriptionSet(snapshot, data));
     }
 }

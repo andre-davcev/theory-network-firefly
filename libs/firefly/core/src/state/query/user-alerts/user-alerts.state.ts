@@ -50,7 +50,7 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
         const userId: string = this.store.selectSnapshot(StateUser.id);
         const query: Query   = userId == null ? undefined : this.service.collection('alerts').ref.where('userId', '==', userId);
 
-        return super.reset(context, query);
+        return super.reset(context, { query });
     }
 
     @Action(ActionUserAlertsGetData)

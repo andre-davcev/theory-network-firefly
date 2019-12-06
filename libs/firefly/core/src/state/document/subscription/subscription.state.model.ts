@@ -1,7 +1,6 @@
-import { Subscription } from '@firefly/core/models';
-import { StateAssetModel } from '@firefly/core/interfaces';
+import { StateDocumentModel } from '@theory/ngxs';
 
-export interface StateSubscriptionModel extends StateAssetModel<Subscription>
+export interface StateSubscriptionModel extends StateDocumentModel
 {
 
 }

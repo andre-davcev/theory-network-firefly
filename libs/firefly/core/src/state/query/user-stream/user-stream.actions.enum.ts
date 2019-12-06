@@ -3,10 +3,7 @@ export enum ActionsUserStream
     Reset   = '[UserStream] Reset',
     GetData = '[UserStream] Get Data',
     Get     = '[UserStream] Get',
-    Set     = '[UserStream] Set',
-    Sort    = '[UserStream] Sort',
     Add     = '[UserStream] Add',
     Remove  = '[UserStream] Remove',
-    Sync    = '[UserStream] Sync',
-    Delete  = '[UserStream] Delete'
+    Sync    = '[UserStream] Sync'
 }

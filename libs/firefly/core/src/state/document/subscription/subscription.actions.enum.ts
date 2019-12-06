@@ -5,7 +5,8 @@ export enum ActionsSubscription
     SetId  = '[Subscription] SetId',
     Set    = '[Subscription] Set',
     Patch  = '[Subscription] Patch',
-    Save   = '[Subscription] Save',
     Create = '[Subscription] Create',
+    Update = '[Subscription] Update',
+    Save   = '[Subscription] Save',
     Delete = '[Subscription] Delete'
 }

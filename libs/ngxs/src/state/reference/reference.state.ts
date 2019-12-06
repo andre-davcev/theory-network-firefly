@@ -1,9 +1,12 @@
-import { ReferenceTable, StateReferenceTableModel } from '../interfaces';
-import { TypeOf, CoreUtil } from '@theory/core';
 import { Observable, of, forkJoin } from 'rxjs';
-import { Default } from '../enums';
-import { Model, ServiceAsset, ImageSize } from '@theory/firebase';
 import { tap, switchMap, map } from 'rxjs/operators';
+
+import { TypeOf, CoreUtil } from '@theory/core';
+import { Model, ServiceAsset, ImageSize } from '@theory/firebase';
+
+import { PageSize } from '../../enums';
+import { ReferenceTable } from './reference.interface';
+import { StateReferenceTableModel } from './reference.model';
 
 export class StateReferenceTable<R extends ReferenceTable, T extends Model, S extends StateReferenceTableModel<R, T>>
 {
@@ -21,7 +24,7 @@ export class StateReferenceTable<R extends ReferenceTable, T extends Model, S ex
 
     public sort(state: StateReferenceTableModel<R, T>): Array<string>
     {
-        const getAll:    boolean           = state.pageSize === Default.None;
+        const getAll:    boolean           = state.pageSize === PageSize.None;
         const lookup:    Record<string, T> = state.lookup;
         const data:      Record<string, R> = state.data;
         const field:     string            = state.sortField;

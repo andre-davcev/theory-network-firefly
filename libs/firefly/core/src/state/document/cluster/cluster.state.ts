@@ -27,7 +27,7 @@ import {
 } from './cluster.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../..//query/user-clusters';
 import { ActionUserStreamRemove } from '../../query/user-stream/user-stream.actions';
-import { ActionUserSubscriptionsRemove } from '../../query/user-subscriptions/user-subscriptions.actions';
+import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { firestore } from 'firebase/app';
 import { ActionStorageUrlGet, StateStorage, StorageImage, ImageSize } from '@theory/firebase';
 import { switchMap, tap } from 'rxjs/operators';

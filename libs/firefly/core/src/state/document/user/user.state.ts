@@ -37,8 +37,8 @@ import { ActionUserClustersReset } from '../../query/user-clusters/user-clusters
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
-import { ActionUserStreamDelete, ActionUserStreamReset, ActionUserStreamGetData } from '../../query/user-stream/user-stream.actions';
-import { ActionUserSubscriptionsDelete, ActionUserSubscriptionsReset } from '../../query/user-subscriptions/user-subscriptions.actions';
+import { ActionUserStreamReset, ActionUserStreamGetData } from '../../query/user-stream/user-stream.actions';
+import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/user-subscriptions.actions';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser implements NgxsOnInit
@@ -177,8 +177,6 @@ export class StateUser implements NgxsOnInit
             switchMap(() =>
                 dispatch
                 ([
-                    new ActionUserStreamDelete(),
-                    new ActionUserSubscriptionsDelete(),
                     new ActionUserReset()
                 ]))
         );

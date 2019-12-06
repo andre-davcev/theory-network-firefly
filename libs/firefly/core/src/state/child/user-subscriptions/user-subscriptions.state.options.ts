@@ -2,12 +2,13 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { PageSize } from '@theory/ngxs';
 
-import { StateUserClustersModel } from './user-clusters.state.model';
+import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { OrderBy, ImageSize } from '@theory/firebase';
+import { TypeOf } from '@theory/core';
 
-export const StateUserClustersOptions: StoreOptions<StateUserClustersModel> =
+export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsModel> =
 {
-    name : 'userClusters',
+    name : 'userSubscriptions',
 
     defaults :
     {
@@ -23,6 +24,17 @@ export const StateUserClustersOptions: StoreOptions<StateUserClustersModel> =
         snapshots:      [],
         snapshotLookup: {},
         data:           [],
-        dataLookup:     {}
+        dataLookup:     {},
+
+        childLookup : {},
+        keysSorted  : [],
+        offset      : 0,
+        id          : undefined,
+
+        sortFields:
+        {
+            name        : TypeOf.String,
+            dateCreated : TypeOf.String
+        }
     }
 };

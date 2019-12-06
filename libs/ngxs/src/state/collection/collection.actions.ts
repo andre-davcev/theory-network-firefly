@@ -1,4 +1,4 @@
-export interface ActionsQuery
+export interface ActionsCollection
 {
     ActionReset:   any;
     ActionGetData: any;

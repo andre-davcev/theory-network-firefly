@@ -1,10 +1,9 @@
 import { FormGroup } from '@angular/forms';
-
-import { Model } from '@theory/firebase';
-import { FormNgxs } from './form-ngxs.interface';
 import { firestore } from 'firebase/app';
 
-export interface StateDocumentModel<T extends Model>
+import { FormNgxs } from '../../interfaces';
+
+export interface StateDocumentModel
 {
     form      : FormNgxs;
     formGroup : FormGroup;

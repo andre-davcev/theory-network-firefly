@@ -1,7 +1,7 @@
 import { ImageSize, OrderBy } from '@theory/firebase';
 import { firestore } from 'firebase/app';
 
-export interface StateQueryModel<E>
+export interface StateCollectionModel<T>
 {
     pageSize:         number;
     orderBy:          string;
@@ -14,6 +14,6 @@ export interface StateQueryModel<E>
 
     snapshots:      Array<firestore.DocumentSnapshot>;
     snapshotLookup: Record<string, firestore.DocumentSnapshot>;
-    data:           Array<E>;
-    dataLookup:     Record<string, E>;
+    data:           Array<T>;
+    dataLookup:     Record<string, T>;
 }

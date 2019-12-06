@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { Default } from '@theory/ngxs';
+import { PageSize } from '@theory/ngxs';
 
 import { StateUserImagesModel } from './user-images.state.model';
 import { OrderBy, ImageSize } from '@theory/firebase';
@@ -11,7 +11,7 @@ export const StateUserImagesOptions: StoreOptions<StateUserImagesModel> =
 
     defaults :
     {
-        pageSize:         Default.PageSize,
+        pageSize:         PageSize.Default,
         orderBy:          'dateCreated',
         orderByDirection: OrderBy.Ascending,
 

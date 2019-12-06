@@ -47,7 +47,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
         const userId: string = this.store.selectSnapshot(StateUser.id);
         const query: Query   = userId == null ? undefined : this.service.collection('events').ref.where('userId', '==', userId);
 
-        return super.reset(context, query);
+        return super.reset(context, { query });
     }
 
     @Action(ActionUserEventsGetData)
