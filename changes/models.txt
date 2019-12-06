@@ -1,0 +1,76 @@
+  Document (Migrated from Model)
+    version     : string;
+    id          : string;
+    dateCreated : firestore.FieldValue;
+    dateUpdated : firestore.FieldValue;
+  Asset extends Document
+    userId       : string;                      // create (not null)   update (no changes || userId == uid)
+    name         : string;                      // create (not null)    update (not null && userId == uid)
+    draft        : [delete]
+    private      : [delete]
+    description  : [delete]
+    bucketPath   : [delete]
+  MetadataUrl
+    urlSmall  : string;
+    urlMedium : string;
+  Icon extends Asset
+    bucketPath   : string;
+    metadata     : MetadataUrl;
+    draft        : [delete]
+    private      : [delete]
+    description  : [delete]
+  Image extends Asset
+    bucketPath   : string;
+    metadata     : MetadataUrl;
+    draft        : [delete]
+    private      : [delete]
+    description  : [delete]
+  Event extends Asset
+    bucketPath   : string;
+    metadata     : MetadataUrl;
+    tagline    : string;
+    location   : Location;
+    city       : Location;
+    cityId     : string;
+    timeStart  : string;
+    timeEnd    : string;
+    clusters   : Array<string>;
+    notifyCompleted: boolean;
+    notifyImmediate: boolean;                                           // can't edit if notifyCompleted == true
+    notifyDateTime:  firestore.Timestamp; (Limit to hour increments)    // can't edit if notifyCompleted == true
+  Cluster extends Asset
+    bucketPath          : string;
+    subscriberCount     : number;
+    subscriberPage      : number;
+    subscriberPageCount : number;
+    metadata            : MetadataUrl;
+  UserProfile
+    firstName : string;
+    lastName  : string;
+    picture   : string;
+  User
+    ...User
+    location     : Location;
+    city         : Location;
+    dateLoggedIn : firestore.Timestamp;
+    profile      : UserProfile;
+    roleEditors  : Record<string, string>;
+    roleAdmins   : Record<string, string>;
+  Location
+    geopoint:  firestore.GeoPoint
+    latitude:  number;
+    longitude: number;
+    city:      string;
+    region:    string;
+    country:   string;
+  Subscriber:
+    on:   boolean;
+    page: number;
+  City extends Location
+    id:       string; ({country}_{region}_{city});
+    nearby:   Record<string, number>;
+    clusters: Record<{clusterId, ClusterCity}>;
+  ClusterCity
+    events: number;
+    total:  number;
+    ratio:  number;

@@ -1,0 +1,5 @@
+  cities
+    {country}_{region}_{city}: City (cities/us_new-york_west-henrietta)
+  cluster-tokens
+    [${clusterId}_{pageNumber}]
+      [tokenId] : userId
