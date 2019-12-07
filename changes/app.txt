@@ -1,9 +1,25 @@
+child
+  ActionSetData (user/{userId}/subscriptions)
 mapbox-bigdatacloud-firefly
   place     locality                city
   region    principalSubdivision    region
   country   countryCode             country
+storage
+  move get urls back to child/query?
 map
   limit mapbox search types to [address, poi]
+clusters
+  event add/remove workflow
+subscriptions
+  list with on/off switch
+notifications
+  add unread badge count
+icons
+  create grid
+images
+  create grid
+events
+  list image/name/timeStart/timeEnd
 event create
   if location changed
     save info to event.location
@@ -19,3 +35,20 @@ user
     search mapbox reverse geocode for city latitude/longitude
     search bigdatacloud for latitude/longitude city data
     save to user.location & user.city
+dev
+  chrome debugging
+menu
+  move menu selection nav to root
+  add home section to menu
+  when menu open
+    disable go button
+    disable alert detail navigation
+app
+  required fields styling
+  empty icon/message for no data screens
+state
+  migrate user to StateDocument
+library
+  StateFirestore
+    ActionPersistenceOn
+    ActionPersistenceOff

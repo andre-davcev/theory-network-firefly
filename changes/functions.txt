@@ -1,5 +1,19 @@
-  streams radius cutoff (200 or 300 km)
-  cluster-tokens limit (10000)
+streams radius cutoff (200 or 300 km)
+cluster-subscribers limit (15000)
+
+icon
+  delete icon from storage
+image
+  delete image from storage
+user create
+  generate and add first alert
+user update
+  if token count passes 10
+    delete oldest
+  if subscription turned on
+alerts create
+  send push notification if alert.tokens.length > 0
+
 
   city create
     get cities collection
@@ -14,23 +28,20 @@
         for deleted city decrement events count & calc ratio
         for added city increment events count & calc ratio
     if notifyImmediate changed && notifyImmediate == true
-      add to schedules collection under immediate id
+      add to schedules collection under next date timestamp id
       set notifyCompleted = true
-    if notifyDateTime changed && notifyDateTime > DateTime.now()
-      add to schedules collection under immediate id
-  schedules (cron hourly 55 mins past hour)
+  event scheduled task (cron hourly 55 mins past hour)
     find hour past current time
-    pull dateTime id {YYYY-MM-DD#HH:00:00} from schedules collection
-    save user-subscriptions into clusterUserLookup where flag is 'on' Record<{clusterId, userId}>
-    loop through event ids
-      for each event grab clusters
-        for each cluster
-          userId = clusterUserLookup[clusterId];
-          if (userId != null)
-          {
-              send event push notification to userId;
-          }
+    query events whose notifiedDateTime === generatedHourlyTimestamp
+    for each cluster id
+      get cluster?
+      get cluster.subscriberPageCount?
+      forkJoin(cluster-subscribers/{clusterId}_{pageNumber})
+        get users/{subscriberId}
+          save event info to alerts where tokens is empty if !user.pushNotifications
+
   cluster create/update
+  alert create
     if events added/removed
       get cluster-city
       create/update ClusterCity stats
@@ -50,3 +61,8 @@
         sort list based on score descending
   user create/update
     if dateLoggedIn & city changed then generate new stream
+settings
+  enable retry on failure
+best practices
+  minimize cold start time
+  refactor to use try/catch async/await
