@@ -1,3 +1,9 @@
+general
+  storage security rules
+  prevent hackers from querying past limit size
+  prevent hackers from writing to database too quickly
+
+
 service cloud.firestore {
   match /databases/{database}/documents {
     match /alerts/{alertId} {

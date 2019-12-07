@@ -3,9 +3,11 @@
     id          : string;
     dateCreated : firestore.FieldValue;
     dateUpdated : firestore.FieldValue;
+    metadata?   : Record<string, any>;
   Asset extends Document
     userId       : string;                      // create (not null)   update (no changes || userId == uid)
     name         : string;                      // create (not null)    update (not null && userId == uid)
+    tokens       : Array<string>;
     draft        : [delete]
     private      : [delete]
     description  : [delete]
@@ -26,24 +28,24 @@
     private      : [delete]
     description  : [delete]
   Event extends Asset
-    bucketPath   : string;
-    metadata     : MetadataUrl;
-    tagline    : string;
-    location   : Location;
-    city       : Location;
-    cityId     : string;
-    timeStart  : string;
-    timeEnd    : string;
-    clusters   : Array<string>;
-    notifyCompleted: boolean;
-    notifyImmediate: boolean;                                           // can't edit if notifyCompleted == true
-    notifyDateTime:  firestore.Timestamp; (Limit to hour increments)    // can't edit if notifyCompleted == true
+    bucketPath      : string;
+    metadata        : MetadataUrl;
+    tagline         : string;
+    location        : Location;
+    city            : Location;
+    cityId          : string;
+    timeStart       : string;
+    timeEnd         : string;
+    clusters        : Array<string>;
+    notifyCompleted : boolean;
+    notifyImmediate : boolean;                                           // can't edit if notifyCompleted == true
+    notifyDateTime  :  firestore.Timestamp; (Limit to hour increments)   // can't edit if notifyCompleted == true
   Cluster extends Asset
-    bucketPath          : string;
-    subscriberCount     : number;
-    subscriberPage      : number;
-    subscriberPageCount : number;
-    metadata            : MetadataUrl;
+    bucketPath      : string;
+    subscriberCount : number;
+    tokenPage       : number;
+    tokenPageCount  : number;
+    metadata        : MetadataUrl;
   UserProfile
     firstName : string;
     lastName  : string;
@@ -56,6 +58,8 @@
     profile      : UserProfile;
     roleEditors  : Record<string, string>;
     roleAdmins   : Record<string, string>;
+    subscriptions: Record<{clusterId}, Subscription>;
+    pushNotifications: boolean;
   Location
     geopoint:  firestore.GeoPoint
     latitude:  number;
@@ -63,9 +67,8 @@
     city:      string;
     region:    string;
     country:   string;
-  Subscriber:
-    on:   boolean;
-    page: number;
+  Subscription:
+    on:     boolean;
   City extends Location
     id:       string; ({country}_{region}_{city});
     nearby:   Record<string, number>;
