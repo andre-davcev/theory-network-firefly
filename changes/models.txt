@@ -1,38 +1,36 @@
-  General
-    cleanup unused models
-
-  Document (Migrated from Model)
+Document (Migrated from Model)
     version     : string;
     id          : string;
     dateCreated : firestore.FieldValue;
     dateUpdated : firestore.FieldValue;
     metadata?   : Record<string, any>;
-  Asset extends Document
+
+Asset extends Document
     userId       : string;                      // create (not null)   update (no changes || userId == uid)
     name         : string;                      // create (not null)    update (not null && userId == uid)
-    tokens       : Array<string>;
     draft        : [delete]
     private      : [delete]
     description  : [delete]
     bucketPath   : [delete]
-  MetadataUrl
+
+MetadataUrl
     urlSmall  : string;
     urlMedium : string;
-  Icon extends Asset
+
+Icon extends Asset
     bucketPath   : string;
-    metadata     : MetadataUrl;
     draft        : [delete]
     private      : [delete]
     description  : [delete]
-  Image extends Asset
+
+Image extends Asset
     bucketPath   : string;
-    metadata     : MetadataUrl;
     draft        : [delete]
     private      : [delete]
     description  : [delete]
-  Event extends Asset
+
+Event extends Asset
     bucketPath      : string;
-    metadata        : MetadataUrl;
     tagline         : string;
     location        : Location;
     city            : Location;
@@ -43,17 +41,19 @@
     notifyCompleted : boolean;
     notifyImmediate : boolean;                                           // can't edit if notifyCompleted == true
     notifyDateTime  :  firestore.Timestamp; (Limit to hour increments)   // can't edit if notifyCompleted == true
-  Cluster extends Asset
+
+Cluster extends Asset
     bucketPath      : string;
     subscriberCount : number;
     tokenPage       : number;
     tokenPageCount  : number;
-    metadata        : MetadataUrl;
-  UserProfile
+
+UserProfile
     firstName : string;
     lastName  : string;
     picture   : string;
-  User
+
+User
     ...User
     location     : Location;
     city         : Location;
@@ -63,20 +63,28 @@
     roleAdmins   : Record<string, string>;
     subscriptions: Record<{clusterId}, Subscription>;
     pushNotifications: boolean;
-  Location
+        tokens       : Array<string>;
+
+Location
     geopoint:  firestore.GeoPoint
     latitude:  number;
     longitude: number;
     city:      string;
     region:    string;
     country:   string;
-  Subscription:
+
+Subscription:
     on:     boolean;
-  City extends Location
+
+City extends Location
     id:       string; ({country}_{region}_{city});
     nearby:   Record<string, number>;
     clusters: Record<{clusterId, ClusterCity}>;
-  ClusterCity
+
+ClusterCity
     events: number;
     total:  number;
     ratio:  number;
+
+General
+  cleanup unused models
