@@ -285,9 +285,11 @@ export class StateUser implements NgxsOnInit
         (
             map((userCredential: firebase.auth.UserCredential) => userCredential.user),
             switchMap((authData: FirebaseUser) => {
-              var user = <User>{};
-              user.id = this.service.parseId(authData);
-              user.email = authData.email;
+              const user: User = {} as User;
+
+              user.id     = this.service.parseId(authData);
+              user.userId = user.id;
+              user.email  = authData.email;
 
               patchState({ formGroup: this.service.formCreate(user) });
               dispatch(new UpdateFormValue({ value: user, path: StateUser.formPath(getState())}))
