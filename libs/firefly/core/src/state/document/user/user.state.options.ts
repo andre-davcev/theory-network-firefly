@@ -12,6 +12,7 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         {
             version     : undefined,
             id          : undefined,
+            userId      : undefined,
             dateCreated : undefined,
             dateUpdated : undefined,
 

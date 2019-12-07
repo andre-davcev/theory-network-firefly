@@ -1,21 +1,22 @@
 Document (Migrated from Model)
     version     : string;
     id          : string;
+    userId      : string;
     dateCreated : firestore.FieldValue;
     dateUpdated : firestore.FieldValue;
     metadata?   : Record<string, any>;
 
 Asset extends Document
-    userId       : string;                      // create (not null)   update (no changes || userId == uid)
-    name         : string;                      // create (not null)    update (not null && userId == uid)
+    name         : string;
     draft        : [delete]
     private      : [delete]
     description  : [delete]
     bucketPath   : [delete]
 
 MetadataUrl
-    urlSmall  : string;
-    urlMedium : string;
+    urlSmall?  : string;
+    urlMedium? : string;
+    urlLarge?  : string;
 
 Icon extends Asset
     bucketPath   : string;

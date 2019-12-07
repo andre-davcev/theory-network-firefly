@@ -133,9 +133,9 @@ service cloud.firestore {
     function canUpdateUserRoles(uid, ownerId)   { return canCreateUserAsset(uid, ownerId); }
     function canDeleteUserRoles(uid, ownerId)   { return canCreateUserAsset(uid, ownerId); }
 
-    function isValidDocumentCreate(id, data)           { return data.version == null && data.id == null && data.dateCreated == null && data.dateUpdated == null; }
-    function isValidDocumentUpdate(dataOld, dataNew)   { return dataNew.version == dataOld.version && dataNew.id == dataOld.id && dataNew.dateCreated == dataOld.dateCreated && dataNew.dateUpdated != null; }
-    function isValidAssetCreate(id, data, uid)         { return isValidDocumentCreate(id, data) && data.userId == uid && data.name != null; }
-    function isValidAssetUpdate(dateOld, dataNew, uid) { return isValidAssetUpdate(dataOld, dataNew) && data.userId is string && (data.userId == uid || hasRoleAdmin(uid, user(dataOld.userId))) && dataNew.name is string}
+    function isValidDocumentCreate(uid, id, data)         { return data.version == null && data.id == null && data.userId == uid && data.dateCreated == null && data.dateUpdated == null; }
+    function isValidDocumentUpdate(uid, dataOld, dataNew) { return dataNew.version == dataOld.version && dataNew.id == dataOld.id && data.userId is string && (data.userId == uid || hasRoleAdmin(uid, user(dataOld.userId))) && dataNew.dateCreated == dataOld.dateCreated && dataNew.dateUpdated != null; }
+    function isValidAssetCreate(uid, id, data)            { return isValidDocumentCreate(uid, id, data) && data.name != null; }
+    function isValidAssetUpdate(uid, dateOld, dataNew)    { return isValidDocumentUpdate(uid, dataOld, dataNew) && dataNew.name is string; }
   }
 }
