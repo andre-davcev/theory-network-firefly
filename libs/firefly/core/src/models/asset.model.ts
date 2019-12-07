@@ -1,6 +1,6 @@
-import { Model } from '@theory/firebase';
+import { Document } from '@theory/firebase';
 
-export interface Asset extends Model
+export interface Asset extends Document
 {
     name        : string;
     private     : boolean;

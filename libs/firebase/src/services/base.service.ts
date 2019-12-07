@@ -1,12 +1,12 @@
 import { Observable, from } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Model } from '@theory/firebase/interfaces';
+import { Document } from '@theory/firebase/interfaces';
 import { map, take } from 'rxjs/operators';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { firestore } from 'firebase/app';
 import { CoreEnum, CoreUtil } from '@theory/core';
 
-export class ServiceBase<T extends Model | Record<string, any>>
+export class ServiceBase<T extends Document | Record<string, any>>
 {
     public name:        string;
     public collection:  AngularFirestoreCollection<T>;

@@ -1,6 +1,6 @@
-import { Model } from '@theory/firebase';
+import { Document } from '@theory/firebase';
 
-export interface User extends Model
+export interface User extends Document
 {
     providerId  : string;
     language    : string;
