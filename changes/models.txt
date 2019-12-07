@@ -1,3 +1,6 @@
+  General
+    cleanup unused models
+
   Document (Migrated from Model)
     version     : string;
     id          : string;

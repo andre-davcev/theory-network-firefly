@@ -4,11 +4,11 @@ import { firestore } from 'firebase/app';
 import { Observable, from, of } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 
-import { ImageSize, Model, ActionStorageUrlsGet } from '@theory/firebase';
+import { ImageSize, Document, ActionStorageUrlsGet } from '@theory/firebase';
 
 import { StateCollection, ActionsCollection, StateCollectionModel } from '../collection';
 
-export class StateQuery<T extends Model, M extends StateCollectionModel<T>> extends StateCollection<T, M>
+export class StateQuery<T extends Document, M extends StateCollectionModel<T>> extends StateCollection<T, M>
 {
     public query: Query;
 

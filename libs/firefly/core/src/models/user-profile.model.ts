@@ -1,6 +1,6 @@
-import { Model } from '@theory/firebase';
+import { Document } from '@theory/firebase';
 
-export interface UserProfile extends Model
+export interface UserProfile extends Document
 {
     nameFirst   : string;
     nameLast    : string;

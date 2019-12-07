@@ -1,7 +1,7 @@
-import { Model } from '@theory/firebase';
+import { Document } from '@theory/firebase';
 import { firestore } from 'firebase/app';
 
-export interface Alert extends Model
+export interface Alert extends Document
 {
     name        : string;
     description : string;
