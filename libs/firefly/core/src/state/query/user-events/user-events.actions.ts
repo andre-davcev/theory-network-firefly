@@ -1,4 +1,4 @@
-import { Event } from '@firefly/core/models';
+import { Event } from '@firefly/core/documents';
 
 import { ActionsUserEvents } from './user-events.actions.enum';
 import { firestore } from 'firebase/app';

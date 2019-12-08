@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Event } from '@firefly/core/models';
+import { Event } from '@firefly/core/documents';
 import { ServiceFirestore } from '@theory/firebase';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, ValidatorsExtended } from '@theory/core';
@@ -82,13 +82,11 @@ export class ServiceEvents extends ServiceFirestore<Event>
 
             name        : [event.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
             description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
-
-            tagline       : [event.tagline,       [Validators.required, ValidatorsExtended.minLength(1)]],
-            bucketPath    : [event.bucketPath,    [ServiceEvents.validateImage()]],
-            coordinates   : [event.coordinates,   Validators.required],
-            locationTypes : [event.locationTypes, Validators.required],
-            timeStart     : [event.timeStart,     [ServiceEvents.validateTime()]],
-            timeEnd       : [event.timeEnd,       [ServiceEvents.validateTime()]]
+            tagline     : [event.tagline,     [Validators.required, ValidatorsExtended.minLength(1)]],
+            bucketPath  : [event.bucketPath,  [ServiceEvents.validateImage()]],
+            geopoint    : [event.geopoint,    [Validators.required]],
+            timeStart   : [event.timeStart,   [ServiceEvents.validateTime()]],
+            timeEnd     : [event.timeEnd,     [ServiceEvents.validateTime()]]
         });
     }
 }

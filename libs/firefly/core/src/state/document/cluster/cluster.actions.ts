@@ -1,4 +1,4 @@
-import { Cluster } from '@firefly/core/models';
+import { Cluster } from '@firefly/core/documents';
 import { CoreEnum } from '@theory/core';
 
 import { ActionsCluster } from './cluster.actions.enum';

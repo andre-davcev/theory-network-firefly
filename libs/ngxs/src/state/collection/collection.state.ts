@@ -1,4 +1,4 @@
-import { OrderBy, ImageSize, Document } from '@theory/firebase';
+import { OrderBy, ImageSize, FirebaseDocument } from '@theory/firebase';
 import { firestore } from 'firebase/app';
 import { createSelector, StateContext } from '@ngxs/store';
 import { ActionsCollection } from './collection.actions';
@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 import { PageSize } from '../../enums';
 import { StateCollectionModel } from './collection.model';
 
-export class StateCollection<T extends Document, M extends StateCollectionModel<T>>
+export class StateCollection<T extends FirebaseDocument, M extends StateCollectionModel<T>>
 {
     protected defaults: M;
     protected actions:  ActionsCollection;

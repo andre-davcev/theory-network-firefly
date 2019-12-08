@@ -1,4 +1,4 @@
-import { StreamItem } from '@firefly/core/models';
+import { StreamItem } from '@firefly/core/documents';
 
 import { ActionsUserStream } from './user-stream.actions.enum';
 import { firestore } from 'firebase/app';

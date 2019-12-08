@@ -5,6 +5,7 @@
       [userId] :
       {
           tokens: Array<{tokenId}>
+      }
   user-roles
     [delete]
   user-profiles
