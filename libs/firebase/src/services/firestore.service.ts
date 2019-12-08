@@ -1,4 +1,4 @@
-import { Document } from '../interfaces';
+import { FirebaseDocument } from '../interfaces';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { firestore } from 'firebase/app';
@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root'})
-export class ServiceFirestore<T extends Document>
+export class ServiceFirestore<T extends FirebaseDocument>
 {
     constructor
     (

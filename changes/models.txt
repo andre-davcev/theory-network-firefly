@@ -1,4 +1,4 @@
-Document (Migrated from Model)
+FirebaseDocument
     version     : string;
     id          : string;
     userId      : string;
@@ -6,33 +6,48 @@ Document (Migrated from Model)
     dateUpdated : firestore.FieldValue;
     metadata?   : Record<string, any>;
 
-Asset extends Document
-    name         : string;
-    draft        : [delete]
-    private      : [delete]
-    description  : [delete]
-    bucketPath   : [delete]
+(move from models to documents)
 
-MetadataUrl
-    urlSmall?  : string;
-    urlMedium? : string;
-    urlLarge?  : string;
+Alert extends FirebaseDocument
+    name        : string;
+    description : string;
+    bucketPath  : string;
+    eventId     : string;
+    clusterId   : string;
+    dateTime    : firestore.FieldValue;
+    url?        : string;
+    read        : boolean;
 
-Icon extends Asset
-    bucketPath   : string;
-    draft        : [delete]
-    private      : [delete]
-    description  : [delete]
+    imageUrl?     : string;
+    dateTimeDate? : Date;
 
-Image extends Asset
-    bucketPath   : string;
-    draft        : [delete]
-    private      : [delete]
-    description  : [delete]
+Beacon extends FirebaseDocument
+    name        : string;
+    tagline     : string;
+    description : string;
 
-Event extends Asset
-    bucketPath      : string;
+    major       : number;
+    majorLabel  : string;
+    minor       : number;
+    minorLabel  : string;
+    uuid        : string;
+    uuidLabel   : string;
+
+Cluster extends FirebaseDocument
+    name            : string;
     tagline         : string;
+    description     : string;
+    bucketPath      : string;
+    subscriberCount : number;
+    tokenPage       : number;
+    tokenPageCount  : number;
+
+Event extends FirebaseDocument
+    name            : string;
+    tagline         : string;
+    description     : string;
+    bucketPath      : string;
+    geopoint        : firestore.GeoPoint;
     location        : Location;
     city            : Location;
     cityId          : string;
@@ -43,19 +58,29 @@ Event extends Asset
     notifyImmediate : boolean;                                           // can't edit if notifyCompleted == true
     notifyDateTime  :  firestore.Timestamp; (Limit to hour increments)   // can't edit if notifyCompleted == true
 
-Cluster extends Asset
-    bucketPath      : string;
-    subscriberCount : number;
-    tokenPage       : number;
-    tokenPageCount  : number;
+Icon extends FirebaseDocument
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
 
-UserProfile
-    firstName : string;
-    lastName  : string;
-    picture   : string;
+Image extends FirebaseDocument
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+
+StreamItem extends FirebaseDocument
+    subscribed: boolean;
+
+Subscription:
+    on:     boolean;
 
 User
     ...User
+    providerId  : string;
+    language    : string;
+    email       : string;
+    phoneNumber : string;
+
     location     : Location;
     city         : Location;
     dateLoggedIn : firestore.Timestamp;
@@ -63,29 +88,5 @@ User
     roleEditors  : Record<string, string>;
     roleAdmins   : Record<string, string>;
     subscriptions: Record<{clusterId}, Subscription>;
-    pushNotifications: boolean;
-        tokens       : Array<string>;
-
-Location
-    geopoint:  firestore.GeoPoint
-    latitude:  number;
-    longitude: number;
-    city:      string;
-    region:    string;
-    country:   string;
-
-Subscription:
-    on:     boolean;
-
-City extends Location
-    id:       string; ({country}_{region}_{city});
-    nearby:   Record<string, number>;
-    clusters: Record<{clusterId, ClusterCity}>;
-
-ClusterCity
-    events: number;
-    total:  number;
-    ratio:  number;
-
-General
-  cleanup unused models
+    notifications : boolean;
+    tokens       : Array<string>;

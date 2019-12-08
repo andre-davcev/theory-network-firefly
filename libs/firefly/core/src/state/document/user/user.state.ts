@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User } from '@firefly/core/models';
+import { User } from '@firefly/core/documents';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -258,7 +258,7 @@ export class StateUser implements NgxsOnInit
         const user   : User   = StateUser.data(getState());
         const token  : string = payload;
 
-        const tokens : Record<string, string> = user.tokens == null ? {[token]: token} : {...user.tokens, [token]: token};
+        const tokens : Array<string> = user.tokens == null ? [token] : [...user.tokens, token];
 
         return dispatch(new ActionUserPatch({ tokens })).pipe
         (

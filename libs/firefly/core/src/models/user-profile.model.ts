@@ -1,10 +1,8 @@
-import { Document } from '@theory/firebase';
-
-export interface UserProfile extends Document
+export interface UserProfile
 {
-    nameFirst   : string;
-    nameLast    : string;
-    photoUrl    : string;
-    companyName : string;
-    isCompany   : boolean;
+    nameFirst?   : string;
+    nameLast?    : string;
+    photoUrl?    : string;
+    companyName? : string;
+    isCompany?   : boolean;
 }

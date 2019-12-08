@@ -3,7 +3,7 @@ import { Action, State, StateContext, Store, Selector } from '@ngxs/store';
 
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { Cluster, Icon } from '@firefly/core/models';
+import { Cluster, Icon } from '@firefly/core/documents';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 import { ActionIconCreate, ActionIconPatch, ActionIconClear, ActionIconUriSet, StateIcon, ActionIconSetId } from '@firefly/core/state/document/icon';
@@ -50,17 +50,20 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
             service,
             {
                 version     : undefined,
+                userId      : undefined,
                 id          : undefined,
                 dateCreated : undefined,
                 dateUpdated : undefined,
 
-                userId      : undefined,
-                name        : null,
-                description : null,
-                private     : false,
-                draft       : false,
+                name            : null,
+                tagline         : null,
+                description     : null,
+                bucketPath      : null,
+                private         : true,
 
-                tagline : null
+                subscriberCount : 0,
+                tokenPage       : 0,
+                tokenPageCount  : 0
             },
             {
                 ActionReset:  ActionClusterReset,
@@ -201,9 +204,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
 
         const partial: Partial<Icon> =
         {
-            name        : cluster.name,
-            description : `Icon uploaded for cluster "${cluster.name}"`,
-            private     : cluster.private
+            name : cluster.name
         };
 
         return dispatch(new ActionIconSetId()).

@@ -1,7 +1,8 @@
-import { Document } from '@theory/firebase';
+import { FirebaseDocument } from '@theory/firebase';
 import { firestore } from 'firebase/app';
+import { AlertMetadata } from './alert.metadata.model';
 
-export interface Alert extends Document
+export interface Alert extends FirebaseDocument
 {
     name        : string;
     description : string;
@@ -9,9 +10,7 @@ export interface Alert extends Document
     eventId     : string;
     clusterId   : string;
     dateTime    : firestore.FieldValue;
-    url?        : string;
     read        : boolean;
 
-    imageUrl?     : string;
-    dateTimeDate? : Date;
+    metadata : AlertMetadata;
 }

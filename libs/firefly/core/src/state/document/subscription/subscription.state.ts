@@ -2,7 +2,7 @@ import { State, Action, StateContext, Store } from '@ngxs/store';
 
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { Subscription } from '@firefly/core/models';
+import { Subscription } from '@firefly/core/documents';
 import { ServiceSubscriptions } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 
@@ -39,18 +39,22 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
             service,
             {
                 version     : undefined,
+                userId      : undefined,
                 id          : undefined,
                 dateCreated : undefined,
                 dateUpdated : undefined,
 
-                userId      : undefined,
-                name        : null,
-                description : null,
-                private     : false,
-                draft       : false,
+                name            : null,
+                tagline         : null,
+                description     : null,
+                bucketPath      : null,
+                private         : true,
 
-                tagline : null,
-                on      : false
+                subscriberCount : 0,
+                tokenPage       : 0,
+                tokenPageCount  : 0,
+
+                on : false
             },
             {
                 ActionReset:  ActionSubscriptionReset,

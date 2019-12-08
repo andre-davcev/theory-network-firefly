@@ -1,7 +1,7 @@
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { CoreEnum } from '@theory/core';
-import { Event } from '@firefly/core/models';
+import { Event } from '@firefly/core/documents';
 
 import { ActionsEvent } from './event.actions.enum';
 import { firestore } from 'firebase';

@@ -1,6 +1,6 @@
 child
   ActionSetData (user/{userId}/subscriptions)
-mapbox-bigdatacloud-firefly
+mapbox-bigdatacloud-firefly mappings
   place     locality                city
   region    principalSubdivision    region
   country   countryCode             country
@@ -29,6 +29,14 @@ event create
         generate cityId
         save cityId to event.cityId
         save city to event.city
+  ActionEventLocationSet
+    set geopoint, location, city
+  ActionEventClusterAdd
+    params (cluster, reset)
+  ActionEventNotifyCompletedOn
+  ActionEventNotifyCompletedOff
+  ActionEventNotifyDateTimeSet
+  ActionEventNotifyDateTimeClear
 user
   setup user object watch
   on location found
@@ -46,8 +54,7 @@ menu
 app
   required fields styling
   empty icon/message for no data screens
-state
-  migrate user to StateDocument
+
 library
   StateFirestore
     ActionPersistenceOn

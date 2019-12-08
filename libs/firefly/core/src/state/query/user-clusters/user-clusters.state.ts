@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { Cluster } from '@firefly/core/models';
+import { Cluster } from '@firefly/core/documents';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateQuery } from '@theory/ngxs';
 

@@ -1,4 +1,4 @@
-import { Image } from '@firefly/core/models';
+import { Image } from '@firefly/core/documents';
 
 import { ActionsUserImages } from './user-images.actions.enum';
 import { firestore } from 'firebase/app';

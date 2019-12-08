@@ -1,6 +1,7 @@
 export * from './src/components';
 export * from './src/constants';
 export * from './src/directives';
+export * from './src/documents';
 export * from './src/enums';
 export * from './src/environment';
 export * from './src/interfaces';
