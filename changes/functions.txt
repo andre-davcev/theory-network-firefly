@@ -1,6 +1,5 @@
 streams radius cutoff (200 or 300 km)
 cluster-subscribers limit (15000)
-
 icon
   delete icon from storage
 image
@@ -13,54 +12,52 @@ user update
   if subscription turned on
 alerts create
   send push notification if alert.tokens.length > 0
+city create
+  get cities collection
+  calculate distances to all other cities
+  filter out cities above km threshold (200km)
+  add map to city.nearby
+event create/update
+  if cityId is not found in cities collection
+    create city in cities collection
+  loop through clusters
+    get cluster-city
+    for deleted city decrement events count & calc ratio
+    for added city increment events count & calc ratio
+  if notifyImmediate changed && notifyImmediate == true
+    add to schedules collection under next date timestamp id
+    set notifyCompleted = true
+event scheduled task (cron hourly 55 mins past hour)
+  find hour past current time
+  query events whose notifiedDateTime === generatedHourlyTimestamp
+  for each cluster id
+    get cluster?
+    get cluster.subscriberPageCount?
+    forkJoin(cluster-subscribers/{clusterId}_{pageNumber})
+      get users/{subscriberId}
+        save event info to alerts where tokens is empty if !user.pushNotifications
 
-
-  city create
-    get cities collection
-    calculate distances to all other cities
-    filter out cities above km threshold (200km)
-    add map to city.nearby
-  event create/update
-    if cityId is not found in cities collection
-      create city in cities collection
-    loop through clusters
-      get cluster-city
-        for deleted city decrement events count & calc ratio
-        for added city increment events count & calc ratio
-    if notifyImmediate changed && notifyImmediate == true
-      add to schedules collection under next date timestamp id
-      set notifyCompleted = true
-  event scheduled task (cron hourly 55 mins past hour)
-    find hour past current time
-    query events whose notifiedDateTime === generatedHourlyTimestamp
-    for each cluster id
-      get cluster?
-      get cluster.subscriberPageCount?
-      forkJoin(cluster-subscribers/{clusterId}_{pageNumber})
-        get users/{subscriberId}
-          save event info to alerts where tokens is empty if !user.pushNotifications
-
-  cluster create/update
-  alert create
-    if events added/removed
-      get cluster-city
-      create/update ClusterCity stats
-  streams cron job
-    get users collection
-    for each user logged in the past 30 days
-      get user.city
-      get cities/{cityId}
-      push city to array
-      loop through city.nearby sorted by shortest distance
-        push to city array
-      loop through city.clusters
-        generate score using:
-          event count
-          event ratio
-          distance ranking
-        sort list based on score descending
-  user create/update
-    if dateLoggedIn & city changed then generate new stream
+cluster create/update
+alert create
+  if events added/removed
+    get cluster-city
+    create/update ClusterCity stats
+streams cron job
+  get users collection
+  for each user logged in the past 30 days
+    get user.city
+    get cities/{cityId}
+    push city to array
+    loop through city.nearby sorted by shortest distance
+      push to city array
+    loop through city.clusters
+      generate score using:
+        event count
+        event ratio
+        distance ranking
+      sort list based on score descending
+user create/update
+  if dateLoggedIn & city changed then generate new stream
 settings
   enable retry on failure
 best practices

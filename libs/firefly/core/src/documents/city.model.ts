@@ -7,8 +7,6 @@ export interface City extends FirebaseDocument
     // id: {country}_{region}_{city}
 
     geopoint:  firestore.GeoPoint
-    latitude:  number;
-    longitude: number;
     city:      string;
     region:    string;
     country:   string;

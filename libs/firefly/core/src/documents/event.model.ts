@@ -1,6 +1,7 @@
 import { firestore } from 'firebase/app';
 
 import { FirebaseDocument } from '@theory/firebase';
+import { Location } from '../models';
 
 export interface Event extends FirebaseDocument
 {

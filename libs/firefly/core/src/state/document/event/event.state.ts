@@ -29,11 +29,12 @@ import {
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { ActionClusterReset } from '../cluster';
 import { firestore } from 'firebase/app';
-import { ServiceEvents } from '@firefly/core/services';
+import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ActionIconClear } from '../icon/icon.actions';
+import { LocationCity } from '@firefly/core/interfaces';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -42,6 +43,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     constructor
     (
         private store: Store,
+        private location: ServiceLocation,
         service: ServiceEvents
     )
     {
@@ -188,10 +190,17 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventLocationSet)
     setLocation({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
     {
-        const result:   Result             = payload;
-        const geopoint: firestore.GeoPoint = result == null ? null : new firestore.GeoPoint(result.center[1], result.center[0]);
+        const result: Result = payload;
 
-        return dispatch(new ActionEventPatch({ geopoint }));
+        if (result == null) { return of(null); }
+
+        return this.location.getLocationCity(result).pipe
+        (
+            tap(result => console.log(result)),
+            switchMap((locationCity: LocationCity) =>
+                dispatch(new ActionEventPatch(locationCity))
+            )
+        );
     }
 
     @Action(ActionEventImageClear)

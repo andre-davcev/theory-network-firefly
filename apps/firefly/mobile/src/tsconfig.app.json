@@ -11,6 +11,12 @@
       "@theory/apple/*": [
         "../../../../libs/apple/src/*"
       ],
+      "@theory/bigdatacloud": [
+        "../../../../libs/bigdatacloud/index.ts"
+      ],
+      "@theory/bigdatacloud/*": [
+        "../../../../libs/bigdatacloud/src/*"
+      ],
       "@theory/capacitor": [
         "../../../../libs/capacitor/index.ts"
       ],

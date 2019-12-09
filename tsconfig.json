@@ -16,6 +16,8 @@
     "paths": {
       "@theory/apple": ["libs/apple/index.ts"],
       "@theory/apple/*": ["libs/apple/src/*"],
+      "@theory/bigdatacloud": ["libs/bigdatacloud/index.ts"],
+      "@theory/bigdatacloud/*": ["libs/bigdatacloud/src/*"],
       "@theory/capacitor": ["libs/capacitor/index.ts"],
       "@theory/capacitor/*": ["libs/capacitor/src/*"],
       "@theory/cordova": ["libs/cordova/index.ts"],
