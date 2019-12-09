@@ -1,23 +1,44 @@
-streams radius cutoff (200 or 300 km)
-cluster-subscribers limit (15000)
-icon
-  delete icon from storage
-image
-  delete image from storage
-user create
-  generate and add first alert
-user update
-  if token count passes 10
-    delete oldest
-  if subscription turned on
-alerts create
-  send push notification if alert.tokens.length > 0
-city create
+alerts (create)
+  if events added/removed
+    get cluster-city
+    create/update ClusterCity stats
+cities (create)
+  id: {country}_{region}_{city}: City (cities/us_new-york_west-henrietta)
   get cities collection
   calculate distances to all other cities
   filter out cities above km threshold (200km)
   add map to city.nearby
-event create/update
+  distance between two locations (Haversine formula)
+    function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+      var R = 6371; // Radius of the earth in km
+      var dLat = deg2rad(lat2-lat1);  // deg2rad below
+      var dLon = deg2rad(lon2-lon1);
+      var a =
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      var d = R * c; // Distance in km
+      return d;
+    }
+
+    function deg2rad(deg) {
+      return deg * (Math.PI/180)
+    }
+clusters (create/update)
+cluster-subscribers (update)
+  paging of collections (limit 15000)
+  [${clusterId}_{pageNumber}]
+    [userId] :
+    {
+      tokens: Array<{tokenId}>
+    }
+coding
+  minimize cold start time
+  refactor to use try/catch async/await
+console (settings)
+  enable retry on failure
+events (create/update)
   if cityId is not found in cities collection
     create city in cities collection
   loop through clusters
@@ -27,7 +48,8 @@ event create/update
   if notifyImmediate changed && notifyImmediate == true
     add to schedules collection under next date timestamp id
     set notifyCompleted = true
-event scheduled task (cron hourly 55 mins past hour)
+events (cron)
+  cron hourly 55 mins past hour
   find hour past current time
   query events whose notifiedDateTime === generatedHourlyTimestamp
   for each cluster id
@@ -36,13 +58,12 @@ event scheduled task (cron hourly 55 mins past hour)
     forkJoin(cluster-subscribers/{clusterId}_{pageNumber})
       get users/{subscriberId}
         save event info to alerts where tokens is empty if !user.pushNotifications
-
-cluster create/update
-alert create
-  if events added/removed
-    get cluster-city
-    create/update ClusterCity stats
-streams cron job
+        send push notification if alert.tokens.length > 0
+icons (delete)
+  delete icon from storage
+images (delete)
+  delete image from storage
+streams (cron)
   get users collection
   for each user logged in the past 30 days
     get user.city
@@ -56,10 +77,15 @@ streams cron job
         event ratio
         distance ranking
       sort list based on score descending
-user create/update
+users (create)
+  generate and add first alert
+users (update)
+  if token count passes 10
+    delete oldest
+  if subscription turned on
+users (create/update)
   if dateLoggedIn & city changed then generate new stream
-settings
-  enable retry on failure
-best practices
-  minimize cold start time
-  refactor to use try/catch async/await
+user-roles
+  [delete]
+user-profiles
+  [delete]

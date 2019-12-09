@@ -5,7 +5,6 @@ import { ClusterCity } from '../models';
 export interface City extends FirebaseDocument
 {
     // id: {country}_{region}_{city}
-
     geopoint:  firestore.GeoPoint
     city:      string;
     region:    string;
