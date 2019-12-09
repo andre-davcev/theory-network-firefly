@@ -6,9 +6,10 @@ import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateCluster, ActionClusterIconUriSet, ActionClusterIconPathSet, ActionClusterSave } from '@firefly/core';
+import { PageIconSelector } from '../icon-selector';
 import { Pages } from '../pages.enum';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 
 const { Camera } = Plugins;
 
@@ -32,7 +33,8 @@ export class PageAssetCluster
     constructor
     (
       private store:         Store,
-      private navController: NavController
+      private navController: NavController,
+      private modal:         ModalController,
     )
     { }
 
@@ -43,7 +45,11 @@ export class PageAssetCluster
 
     public navigate(page: Pages.IconSelector)
     {
-        if (page === Pages.IconSelector)
+        from(this.modal.create({
+          component: PageIconSelector
+        })).
+        subscribe((modal: HTMLIonModalElement) => modal.present());
+        /*if (page === Pages.IconSelector)
         {
             if (this.store.selectSnapshot(StateDevice.device))
             {
@@ -73,7 +79,7 @@ export class PageAssetCluster
                 this.store.dispatch(new ActionClusterIconPathSet()).
                 subscribe();
             }
-        }
+        }*/
     }
 
     public save(): void

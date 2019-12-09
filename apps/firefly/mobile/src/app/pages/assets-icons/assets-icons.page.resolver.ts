@@ -16,7 +16,8 @@ export class ResolverPageAssetsIcons implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
     {
-        return this.icons$.
+        return this.store.dispatch(new ActionUserIconsGetData())
+        /*return this.icons$.
         pipe
         (
             take(1),
@@ -30,6 +31,6 @@ export class ResolverPageAssetsIcons implements Resolve<void>
                         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
                     )
             )
-        )
+        )*/
     }
 }

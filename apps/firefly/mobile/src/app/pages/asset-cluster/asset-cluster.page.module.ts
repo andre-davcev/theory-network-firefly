@@ -7,6 +7,7 @@ import { ModulePage } from '@firefly/app/modules';
 
 import { PageAssetCluster } from './asset-cluster.page';
 import { RoutesPageAssetCluster } from './asset-cluster.page.routes';
+import { ModulePageIconSelector } from '../icon-selector';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 @NgModule
 ({
@@ -19,11 +20,16 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
         ModuleComponentItemMap,
         ModuleComponentItemDescription,
         RouterModule.forChild(RoutesPageAssetCluster),
+        ModulePageIconSelector,
         NgxsFormPluginModule
     ],
 
     declarations : [PageAssetCluster],
-    exports : [PageAssetCluster]
+    exports : [PageAssetCluster],
+    entryComponents:
+    [
+      PageAssetCluster
+    ]
 })
 
 export class ModulePageAssetCluster { }

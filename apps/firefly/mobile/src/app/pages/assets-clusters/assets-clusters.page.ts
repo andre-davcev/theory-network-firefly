@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Params } from '@angular/router';
 import { StatusBarStyle } from '@capacitor/core';
 import { Select, Store } from '@ngxs/store'
 import { Navigate } from '@ngxs/router-plugin';
@@ -11,7 +12,7 @@ import { Pages } from '../pages.enum';
 import { ModalController } from '@ionic/angular';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, switchMap } from 'rxjs/operators';
 
 @Component
 ({
@@ -68,8 +69,15 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
 
     public select(cluster: Cluster): void
     {
-        this.store.dispatch(new ActionClusterSetId(cluster.id));
+      this.store.dispatch(new ActionClusterSetId(cluster.id));
 
-        this.modalController.dismiss();
+        /*this.store.dispatch(new ActionClusterSetId(cluster.id)).pipe(
+          switchMap(() => this.store.dispatch(new Navigate([Pages.AssetCluster], {queryParams: {id: cluster.id}}, {state: {isClusterDetail:true}})))
+        );*/
+
+        if(this.modal)
+          this.modalController.dismiss();
+        else
+          this.store.dispatch(new Navigate([Pages.AssetCluster], {queryParams: {id: cluster.id}}, {state: {isClusterDetail:true}}));
     }
 }
