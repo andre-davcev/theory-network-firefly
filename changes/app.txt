@@ -1,18 +1,11 @@
 event create
-  if location changed
-    search mapbox for place.<number>
-      save latitude/longitude
-      search bigdatacloud using language [en]
-        save info to event.location
-        generate cityId
-        save city to event.city
-
+  check other
+events
+  list image/name/timeStart/timeEnd
+  edit existing
+    reverse geocode
 child
   ActionSetData (user/{userId}/subscriptions)
-mapbox-bigdatacloud-firefly mappings
-  place     locality                city
-  region    principalSubdivision    region
-  country   countryCode             country
 storage
   move get urls back to child/query?
 map
@@ -27,11 +20,7 @@ icons
   create grid
 images
   create grid
-events
-  list image/name/timeStart/timeEnd
-location service
 mapbox search service
-  bigdatacloud search service
   add back tokenized mapbox access token
 event state
   ActionEventLocationSet
