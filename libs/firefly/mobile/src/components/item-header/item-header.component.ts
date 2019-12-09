@@ -23,6 +23,8 @@ export class ComponentItemHeader
     @Input() subtitle:            string;
     @Input() subtitlePlaceholder: string;
 
+    @Input() iconOnly:           boolean;
+
     @Output() iconClicked: EventEmitter<void> = new EventEmitter();
 
     constructor() {}
