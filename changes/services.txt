@@ -1,4 +1,0 @@
-cleanup
-document
-  create/update
-    const { metadata, partial } = object;

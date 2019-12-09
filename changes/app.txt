@@ -1,3 +1,12 @@
+event create
+  if location changed
+    search mapbox for place.<number>
+      save latitude/longitude
+      search bigdatacloud using language [en]
+        save info to event.location
+        generate cityId
+        save city to event.city
+
 child
   ActionSetData (user/{userId}/subscriptions)
 mapbox-bigdatacloud-firefly mappings
@@ -20,15 +29,11 @@ images
   create grid
 events
   list image/name/timeStart/timeEnd
-event create
-  if location changed
-    save info to event.location
-    search mapbox for place.<number>
-      save latitude/longitude
-      search bigdatacloud using language [en]
-        generate cityId
-        save cityId to event.cityId
-        save city to event.city
+location service
+mapbox search service
+  bigdatacloud search service
+  add back tokenized mapbox access token
+event state
   ActionEventLocationSet
     set geopoint, location, city
   ActionEventClusterAdd
@@ -54,8 +59,11 @@ menu
 app
   required fields styling
   empty icon/message for no data screens
-
 library
+  <app-map>
+    create search bar which limits by mapbox types ['poi', 'address']
   StateFirestore
     ActionPersistenceOn
     ActionPersistenceOff
+services
+  cleanup

@@ -12,7 +12,6 @@ export interface User extends FirebaseDocument
     phoneNumber : string;
 
     location      : Location;
-    city          : Location;
     dateLoggedIn  : firestore.Timestamp;
     profile       : UserProfile;
     roleEditors   : Record<string, string>;

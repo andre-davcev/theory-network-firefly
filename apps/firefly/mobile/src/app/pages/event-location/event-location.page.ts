@@ -9,6 +9,8 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateEvent, ActionEventLocationSet } from '@firefly/core';
 import { StateMap, ActionMapPlaceSetWithSearchResult, ActionMapSearchResultSetWithPlace, MapboxPlaceType } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
+import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
+import { switchMap, tap } from 'rxjs/operators';
 
 const { Keyboard } = Plugins;
 
@@ -27,6 +29,12 @@ export class PageEventLocation extends BaseComponent implements OnInit
 
     public disableDone$: Observable<boolean>;
     public result: Result;
+
+    public placeTypes: Array<MapboxPlaceType> =
+    [
+        MapboxPlaceType.PointOfInterest,
+        MapboxPlaceType.Address
+    ];
 
     constructor
     (
@@ -79,13 +87,25 @@ export class PageEventLocation extends BaseComponent implements OnInit
 
     public save(): void
     {
-        this.store.dispatch
-        ([
-            new ActionEventLocationSet(this.result),
-            new ActionMapPlaceSetWithSearchResult(),
-            new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
-        ]);
-
-        this.modalController.dismiss();
+        this.store.dispatch(new ActionMobileLoadingShow()).pipe
+        (
+            switchMap(() =>
+                this.store.dispatch
+                ([
+                    new ActionEventLocationSet(this.result),
+                    new ActionMapPlaceSetWithSearchResult()
+                ])
+            ),
+            switchMap(() =>
+                this.store.dispatch
+                ([
+                    new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}),
+                    new ActionMobileLoadingHide()
+                ])
+            ),
+            tap(() =>
+                this.modalController.dismiss()
+            )
+        ).subscribe();
     }
 }

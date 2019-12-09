@@ -22,7 +22,6 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             providerId       : undefined,
 
             location      : null,
-            city          : null,
             dateLoggedIn  : null,
             profile       : {},
             roleEditors   : {},
