@@ -4,7 +4,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { ActionUserClustersGetData, StateUserClusters } from '@firefly/core';
+import { ActionUserClustersGetData, ActionUserIconsGetData, StateUserClusters } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })
@@ -27,6 +27,7 @@ export class ResolverPageAssetsClusters implements Resolve<void>
                     pipe
                     (
                         switchMap(() => this.store.dispatch(new ActionUserClustersGetData())),
+                        //switchMap(() => this.store.dispatch(new ActionUserIconsGetData())),
                         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
                     )
             )
