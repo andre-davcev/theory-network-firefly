@@ -1,4 +1,4 @@
-import { Icon } from '@firefly/core/models';
+import { Icon } from '@firefly/core/documents';
 import { StateDocumentModel } from '@theory/ngxs';
 
 export interface StateIconModel extends StateDocumentModel

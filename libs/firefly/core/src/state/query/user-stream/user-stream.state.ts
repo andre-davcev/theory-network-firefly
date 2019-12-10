@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { StreamItem } from '@firefly/core/models';
+import { StreamItem } from '@firefly/core/documents';
 import { ServiceStreams } from '@firefly/core/services';
 import { StateQuery } from '@theory/ngxs';
 

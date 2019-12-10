@@ -4,7 +4,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { CoreEnum } from '@theory/core';
 import { ActionStorageUrlGet, ActionStorageUpload, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
-import { Icon } from '@firefly/core/models';
+import { Icon } from '@firefly/core/documents';
 import { ServiceIcons } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 
@@ -57,17 +57,13 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
           {
               version     : undefined,
               id          : undefined,
+              userId      : undefined,
               dateCreated : undefined,
               dateUpdated : undefined,
 
-              userId      : undefined,
-              name        : null,
-              description : null,
-              private     : true,
-              draft       : false,
-
-              bucketPath: null,
-              mediaType:  null
+              name       : null,
+              bucketPath : null,
+              mediaType  : null
           },
           {
               ActionReset:  ActionIconReset,

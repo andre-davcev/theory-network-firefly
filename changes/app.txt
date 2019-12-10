@@ -1,54 +1,66 @@
-child
-  ActionSetData (user/{userId}/subscriptions)
-mapbox-bigdatacloud-firefly
-  place     locality                city
-  region    principalSubdivision    region
-  country   countryCode             country
-storage
-  move get urls back to child/query?
-map
-  limit mapbox search types to [address, poi]
-clusters
-  event add/remove workflow
-subscriptions
-  list with on/off switch
-notifications
-  add unread badge count
-icons
-  create grid
-images
-  create grid
-events
-  list image/name/timeStart/timeEnd
-event create
-  if location changed
-    save info to event.location
-    search mapbox for place.<number>
-      save latitude/longitude
-      search bigdatacloud using language [en]
-        generate cityId
-        save cityId to event.cityId
-        save city to event.city
-user
-  setup user object watch
-  on location found
-    search mapbox reverse geocode for city latitude/longitude
-    search bigdatacloud for latitude/longitude city data
-    save to user.location & user.city
-dev
-  chrome debugging
-menu
+events (create)
+  check other new model
+events (state)
+  ActionEventLocationSet
+    set geopoint, location, city
+  ActionEventClusterAdd
+    params (cluster, reset)
+  ActionEventNotifyCompletedOn
+  ActionEventNotifyCompletedOff
+  ActionEventNotifyDateTimeSet
+  ActionEventNotifyDateTimeClear
+
+app (forms)
+  required fields styling
+app (lists)
+  empty icon/message for no data screens
+app (menu)
   move menu selection nav to root
   add home section to menu
   when menu open
     disable go button
     disable alert detail navigation
-app
-  required fields styling
-  empty icon/message for no data screens
-state
-  migrate user to StateDocument
-library
+capacitor (push notifications)
+  implement capacitor-fcm plugin
+clusters (create/edit)
+  event add/remove workflow
+events (list)
+  list image/name/timeStart/timeEnd
+events (edit)
+  reverse geocode
+icons (grid)
+  create grid view
+icons (create/edit)
+  add description back
+images (grid)
+  create grid view
+images (create/edit)
+  add description back
+ios (dev)
+  chrome debugging
+library (firebase)
   StateFirestore
     ActionPersistenceOn
     ActionPersistenceOff
+library (ngxs)
+  child ActionSetData (user/{userId}/subscriptions)
+library (mapbox)
+  add back tokenized mapbox access token in search service
+  create search bar which limits by mapbox types ['poi', 'address']
+library (services)
+  cleanup
+location (state)
+  on location found
+    search mapbox reverse geocode for city latitude/longitude
+    search bigdatacloud for latitude/longitude city data
+    save to user.location
+map (component)
+  limit mapbox search types to [address, poi]
+notifications
+  capacitor-fcm plugin
+  add unread badge count
+subscriptions (list)
+  migrate to use user.subscriptions instead of user-subscriptions
+  create with on/off switch
+users (state)
+  setup user object watch

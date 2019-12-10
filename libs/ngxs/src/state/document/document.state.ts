@@ -6,14 +6,14 @@ import { firestore } from 'firebase/app';
 import { FormGroup } from '@angular/forms';
 
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { ServiceFirestore, Document, ActionStorageUrlGet } from '@theory/firebase';
+import { ServiceFirestore, FirebaseDocument, ActionStorageUrlGet } from '@theory/firebase';
 
 import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';
 import { StateDocumentModel } from './document.model';
 import { ActionsDocument } from './document.actions';
 
-export class StateDocument<T extends Document, M extends StateDocumentModel>
+export class StateDocument<T extends FirebaseDocument, M extends StateDocumentModel>
 {
     protected collection: string;
     protected defaults:   M;

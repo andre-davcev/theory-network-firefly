@@ -4,7 +4,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { CoreEnum } from '@theory/core';
 import { StateStorage, ActionStorageUrlGet, ActionStorageUpload, ImageSize, StorageImage } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
-import { Image } from '@firefly/core/models';
+import { Image } from '@firefly/core/documents';
 import { ServiceImages } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 
@@ -57,17 +57,13 @@ export class StateImage extends StateDocument<Image, StateImageModel>
           {
               version     : undefined,
               id          : undefined,
+              userId      : undefined,
               dateCreated : undefined,
               dateUpdated : undefined,
 
-              userId      : undefined,
-              name        : null,
-              description : null,
-              private     : true,
-              draft       : false,
-
-              bucketPath: null,
-              mediaType:  null
+              name       : null,
+              bucketPath : null,
+              mediaType  : null
           },
           {
               ActionReset:  ActionImageReset,

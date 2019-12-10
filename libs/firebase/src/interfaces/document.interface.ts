@@ -1,7 +1,7 @@
 import { firestore } from 'firebase';
 
 
-export interface Document
+export interface FirebaseDocument
 {
     version     : string;
     id          : string;

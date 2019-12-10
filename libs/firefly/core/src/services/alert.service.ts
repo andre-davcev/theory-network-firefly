@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Alert } from '@firefly/core/models';
+import { Alert } from '@firefly/core/documents';
 import { ServiceFirestore } from '@theory/firebase';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
