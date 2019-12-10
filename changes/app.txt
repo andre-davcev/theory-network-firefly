@@ -1,3 +1,15 @@
+events (create)
+  check other new model
+events (state)
+  ActionEventLocationSet
+    set geopoint, location, city
+  ActionEventClusterAdd
+    params (cluster, reset)
+  ActionEventNotifyCompletedOn
+  ActionEventNotifyCompletedOff
+  ActionEventNotifyDateTimeSet
+  ActionEventNotifyDateTimeClear
+
 app (forms)
   required fields styling
 app (lists)
@@ -12,21 +24,10 @@ capacitor (push notifications)
   implement capacitor-fcm plugin
 clusters (create/edit)
   event add/remove workflow
-events (create)
-  check other new model
 events (list)
   list image/name/timeStart/timeEnd
 events (edit)
   reverse geocode
-events (state)
-  ActionEventLocationSet
-    set geopoint, location, city
-  ActionEventClusterAdd
-    params (cluster, reset)
-  ActionEventNotifyCompletedOn
-  ActionEventNotifyCompletedOff
-  ActionEventNotifyDateTimeSet
-  ActionEventNotifyDateTimeClear
 icons (grid)
   create grid view
 icons (create/edit)
