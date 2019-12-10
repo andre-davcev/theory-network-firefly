@@ -19,6 +19,15 @@ export class ServiceLocation
       private bigdatacloud: ServiceBigDataCloud
     ) { }
 
+    public static cityId(countryCode: string, region: string, city: string): string
+    {
+        countryCode = countryCode.trim().toLowerCase();
+        region      = region.trim().toLowerCase().replace(' ', '-');
+        city        = region.trim().toLowerCase().replace(' ', '-');
+
+        return `${countryCode}_${region}_${city}`;
+    }
+
     public getLocationCity(result: Result): Observable<LocationCity>
     {
         const contextItem: ContextItem = result.
@@ -51,6 +60,7 @@ export class ServiceLocation
             map((response: ResponseReverseGeocode) =>
                 ({
                     geopoint : new firestore.GeoPoint(response.latitude, response.longitude),
+                    cityId   : ServiceLocation.cityId(response.countryCode, response.principalSubdivision, response.locality),
                     city     : response.locality,
                     region   : response.principalSubdivision,
                     country  : response.countryCode
@@ -59,14 +69,7 @@ export class ServiceLocation
             map((city: Location) =>
                 ({
                     geopoint,
-                    city,
-                    location:
-                    {
-                        geopoint,
-                        city    : city.city,
-                        region  : city.region,
-                        country : city.country
-                    }
+                    city
                 })
             )
         );

@@ -66,7 +66,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 private     : true,
 
                 geopoint : null,
-                location : null,
                 city     : null,
 
                 timeStart : null,
