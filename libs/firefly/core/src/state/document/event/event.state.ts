@@ -5,7 +5,7 @@ import { ActionMapSearchResultClear, MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
-import { Event, Image } from '@firefly/core/models';
+import { Event, Image } from '@firefly/core/documents';
 import { ActionImageCreate, ActionImagePatch, ActionImageSetId, StateImage, ActionImageClear, ActionImageUriSet } from '@firefly/core/state/document/image';
 
 import { StateEventModel } from './event.state.model';
@@ -29,11 +29,12 @@ import {
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { ActionClusterReset } from '../cluster';
 import { firestore } from 'firebase/app';
-import { ServiceEvents } from '@firefly/core/services';
+import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ActionIconClear } from '../icon/icon.actions';
+import { LocationCity } from '@firefly/core/interfaces';
 
 @State<StateEventModel>(StateEventOptions)
 
@@ -42,6 +43,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     constructor
     (
         private store: Store,
+        private location: ServiceLocation,
         service: ServiceEvents
     )
     {
@@ -53,21 +55,27 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
             {
                 version     : undefined,
                 id          : undefined,
+                userId      : undefined,
                 dateCreated : undefined,
                 dateUpdated : undefined,
 
-                userId      : undefined,
                 name        : null,
+                tagline     : null,
                 description : null,
+                bucketPath  : null,
                 private     : true,
-                draft       : false,
 
-                tagline       : null,
-                bucketPath    : null,
-                coordinates   : undefined,
-                locationTypes : undefined,
-                timeStart     : null,
-                timeEnd       : null
+                geopoint : null,
+                city     : null,
+
+                timeStart : null,
+                timeEnd   : null,
+
+                clusters : [],
+
+                notifyCompleted : false,
+                notifyImmediate : true,
+                notifyDateTime  : null
             },
             {
                 ActionReset:  ActionEventReset,
@@ -181,11 +189,17 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventLocationSet)
     setLocation({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
     {
-        const result:        Result                 = payload;
-        const locationTypes: Array<MapboxPlaceType> = result.place_type as Array<MapboxPlaceType>;
-        const coordinates:   firestore.GeoPoint     = result == null ? null : new firestore.GeoPoint(result.center[1], result.center[0]);
+        const result: Result = payload;
 
-        return dispatch(new ActionEventPatch({ coordinates, locationTypes }));
+        if (result == null) { return of(null); }
+
+        return this.location.getLocationCity(result).pipe
+        (
+            tap(result => console.log(result)),
+            switchMap((locationCity: LocationCity) =>
+                dispatch(new ActionEventPatch(locationCity))
+            )
+        );
     }
 
     @Action(ActionEventImageClear)
@@ -236,9 +250,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 
         const partial: Partial<Image> =
         {
-            name        : event.name,
-            description : `Image uploaded for event "${event.name}"`,
-            private     : event.private
+            name : event.name
         };
 
         return dispatch(new ActionImageSetId()).

@@ -1,4 +1,4 @@
-import { Document } from '../interfaces';
+import { FirebaseDocument } from '../interfaces';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { firestore } from 'firebase/app';
@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root'})
-export class ServiceFirestore<T extends Document>
+export class ServiceFirestore<T extends FirebaseDocument>
 {
     constructor
     (
@@ -28,31 +28,30 @@ export class ServiceFirestore<T extends Document>
         return from(document.get());
     }
 
-    public documentCreate(collection: string, object: T): Observable<firestore.DocumentSnapshot>
+    public documentCreate(collection: string, entity: T): Observable<firestore.DocumentSnapshot>
     {
+        let { metadata, ...object } = entity;
+
         const id: string = object.id == null || object.id === CoreEnum.IdNew ? this.firestore.createId() : object.id;
 
         const timestamp: firebase.firestore.FieldValue = firestore.FieldValue.serverTimestamp();
 
-        object =
-        {
-            ...object,
-
-            dateCreated: timestamp,
-            dateUpdated: timestamp,
-            id
-        };
+        object.dateCreated = timestamp;
+        object.dateUpdated = timestamp;
+        object.id          = id;
 
         const document: AngularFirestoreDocument<T> = this.firestore.collection<T>(collection).doc(object.id);
 
-        return from(document.set(object)).pipe
+        return from(document.set(object as T)).pipe
         (
             switchMap(() => from(document.get()))
         );
     }
 
-    public documentUpdate(snapshot: firestore.DocumentSnapshot, partial: Partial<T>)
+    public documentUpdate(snapshot: firestore.DocumentSnapshot, object: Partial<T>)
     {
+        const { metadata, ...partial } = object;
+
         partial.dateUpdated = firestore.FieldValue.serverTimestamp();
 
         return from(snapshot.ref.update(partial));

@@ -373,6 +373,44 @@
           }
         }
       }
+    },
+    "bigdatacloud": {
+      "projectType": "library",
+      "root": "libs/bigdatacloud",
+      "sourceRoot": "libs/bigdatacloud/src",
+      "prefix": "theory",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/bigdatacloud/tsconfig.lib.json",
+            "project": "libs/bigdatacloud/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/bigdatacloud/tsconfig.lib.json",
+              "libs/bigdatacloud/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/bigdatacloud/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/bigdatacloud/jest.config.js",
+            "tsConfig": "libs/bigdatacloud/tsconfig.spec.json",
+            "setupFile": "libs/bigdatacloud/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

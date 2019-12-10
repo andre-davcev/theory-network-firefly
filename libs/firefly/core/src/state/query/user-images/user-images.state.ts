@@ -1,5 +1,5 @@
 import { State, Action, StateContext, Store } from '@ngxs/store';
-import { Image } from '@firefly/core/models';
+import { Image } from '@firefly/core/documents';
 import { ServiceImages } from '@firefly/core/services';
 import { StateQuery } from '@theory/ngxs';
 

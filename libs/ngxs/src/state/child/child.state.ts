@@ -1,7 +1,7 @@
 import { StateContext, createSelector } from '@ngxs/store';
 import { Observable, of, forkJoin } from 'rxjs';
 
-import { ImageSize, Document, OrderBy, ServiceFirestore, ActionStorageUrlsGet } from '@theory/firebase';
+import { ImageSize, FirebaseDocument, OrderBy, ServiceFirestore, ActionStorageUrlsGet } from '@theory/firebase';
 import { firestore } from 'firebase/app';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
@@ -10,7 +10,7 @@ import { StateChildModel } from './child.model';
 import { ActionsCollection, StateCollection } from '../collection';
 import { SortField, SyncResult } from '../../interfaces';
 
-export class StateChild<T extends Document, M extends StateChildModel<T>> extends StateCollection<T, M>
+export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>> extends StateCollection<T, M>
 {
     protected collection:      string;
     protected collectionChild: string;

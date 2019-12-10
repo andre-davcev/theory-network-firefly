@@ -1,4 +1,4 @@
-<app-loading *ngIf="!($mapReady | async)"
+<app-loading *ngIf="!(mapReady$ | async)"
              [color]="Color.Dark"
              [colorBackground]="Color.Map"
              [text]="mapLoadingText">

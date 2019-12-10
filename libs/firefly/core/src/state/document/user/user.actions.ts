@@ -1,7 +1,7 @@
 import { User as FirebaseUser } from 'firebase/app'
 import { Credentials,CoreEnum } from '@theory/core';
 
-import { User } from '@firefly/core/models';
+import { User } from '@firefly/core/documents';
 import { ActionsUser } from './user.actions.enum';
 
 export class ActionUserReset  { static readonly type = ActionsUser.Reset;   constructor() { } }

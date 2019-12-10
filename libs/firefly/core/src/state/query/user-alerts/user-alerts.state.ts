@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { Alert } from '@firefly/core/models';
+import { Alert } from '@firefly/core/documents';
 import { ServiceAlerts } from '@firefly/core/services';
 import { StateQuery } from '@theory/ngxs';
 
@@ -72,8 +72,11 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
 
                 data.forEach((alert: Alert) =>
                 {
-                    alert.imageUrl     = images[alert.bucketPath].medium;
-                    alert.dateTimeDate = (alert.dateTime as firestore.Timestamp).toDate();
+                    alert.metadata =
+                    {
+                        urlMedium:    images[alert.bucketPath].medium,
+                        dateTimeDate: (alert.dateTime as firestore.Timestamp).toDate()
+                    };
                 });
             })
         );

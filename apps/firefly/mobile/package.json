@@ -59,6 +59,7 @@
     "@ngxs/store": "file:../../../node_modules/@ngxs/store",
     "@nrwl/nx": "file:../../../node_modules/@nrwl/nx",
     "@theory/apple": "file:../../../libs/apple",
+    "@theory/bigdatacloud": "file:../../../libs/bigdatacloud",
     "@theory/capacitor": "file:../../../libs/capacitor",
     "@theory/cordova": "file:../../../libs/cordova",
     "@theory/core": "file:../../../libs/core",

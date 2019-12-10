@@ -94,15 +94,14 @@ service cloud.firestore {
     function dataOwner(data)                    { return data.userId; }
     function isAuthenticated(uid)               { return uid != null; }
     function isEmailVerified()                  { return request.auth.token.email_verified; }
-    function isOwner(uid, ownerId)              { return userId == ownerId; }
+    function isOwner(uid, ownerId)              { return uid == ownerId; }
     function isNotChangingOwner(uid, data)      { return uid == data.userId; }
     function isNotChangingUserId(uid, data)     { return uid == data.id; }
     function isPublic(data)                     { return data.private != null || !data.private; }
-    function isPublished(data)                  { return !data.draft; }
-    function isSuperAdmin(userId)               { return userId == 'baLysAd71cRyZjh0hr6poxR8an13'; }
+    function isSuperAdmin(uid)                  { return uid == 'baLysAd71cRyZjh0hr6poxR8an13'; }
     function user(ownerId)                      { return document('users', ownerId); }
-    function hasRoleAdmin(uid, user)            { return user.admins[uid] || isSuperAdmin(uid); }
-    function hasRoleEditor(uid, user)           { return user.editors[uid] || isSuperAdmin(uid); }
+    function hasRoleAdmin(uid, user)            { return user.roleAdmins[uid] || isSuperAdmin(uid); }
+    function hasRoleEditor(uid, user)           { return user.roleEditors[uid] || isSuperAdmin(uid); }
     function hasRole(uid, user)                 { return hasRoleAdmin(uid, user) || hasRoleEditor(uid, user); }
     function canReadUserAsset(uid, ownerId)     { return isOwner(uid, ownerId) || hasRole(uid, user(ownerId)) || isSuperAdmin(uid); }
     function canCreateUserAsset(uid, ownerId)   { return isOwner(uid, ownerId) || hasRoleAdmin(uid, ownerRoles(ownerId)) || isSuperAdmin(uid); }
@@ -115,7 +114,7 @@ service cloud.firestore {
     function canCreateAssetRef(uid, data)       { return isOwner(uid, dataOwner(data)) || hasRoleAdmin(uid, ownerRoles(dataOwner(data))) || isSuperAdmin(uid); }
     function canUpdateAssetRef(uid)             { return isAuthenticated(uid); }
     function canDeleteAssetRef(uid, data)       { return canCreateAssetRef(uid, data); }
-    function canReadAsset(uid, data)            { return (isPublic(data) && isPublished(data)) || isOwner(uid, dataOwner(data)) || hasRole(uid, ownerRoles(dataOwner(data))) || isSuperAdmin(uid); }
+    function canReadAsset(uid, data)            { return (isPublic(data) || isOwner(uid, dataOwner(data)) || hasRole(uid, ownerRoles(dataOwner(data))) || isSuperAdmin(uid); }
     function canCreateAsset(uid, data)          { return canCreateAssetRef(uid, data) && isNotChangingOwner(uid, data); }
     function canUpdateAsset(uid, data, dataNew) { return (isOwner(uid, dataOwner(data)) || hasRole(uid, ownerRoles(dataOwner(data))) || isSuperAdmin(uid)) && isNotChangingOwner(uid, dataNew); }
     function canDeleteAsset(uid, data)          { return canCreateAssetRef(uid, data); }

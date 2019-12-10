@@ -1,4 +1,4 @@
-import { Alert } from '@firefly/core/models';
+import { Alert } from '@firefly/core/documents';
 
 import { ActionsUserAlerts } from './user-alerts.actions.enum';
 import { firestore } from 'firebase/app';
