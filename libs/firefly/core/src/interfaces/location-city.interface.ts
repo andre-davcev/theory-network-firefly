@@ -5,5 +5,4 @@ export interface LocationCity
 {
     geopoint : firestore.GeoPoint;
     city     : Location;
-    location : Location;
 }

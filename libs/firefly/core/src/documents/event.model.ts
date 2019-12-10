@@ -12,7 +12,6 @@ export interface Event extends FirebaseDocument
     private     : boolean;
 
     geopoint : firestore.GeoPoint;
-    location : Location;
     city     : Location;
 
     timeStart : string;
