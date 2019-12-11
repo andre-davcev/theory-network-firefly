@@ -1,6 +1,7 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { FieldValue, DocumentSnapshot, CollectionReference, Firestore, WriteResult } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
+import { ServiceCities } from '../library';
 
 const database: Firestore = db();
 
@@ -10,24 +11,14 @@ firestore.
 document('events/{id}').
 onUpdate((change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
 {
-    const id:     string              = change.after.id;
-    const key:    string              = 'imageId';
     const before: Record<string, any> = change.before.data();
     const after:  Record<string, any> = change.after.data();
 
     const promises: Array<Promise<WriteResult>> = [];
 
-    const refTable: Record<string, any> = { sort: {} };
-
-    ['name', 'dateCreated'].
-    filter((key: string) => before[key] !== after[key]).
-    forEach((key: string) =>
-        refTable.sort[key] = after[key]
-    );
-
-    if (Object.keys(refTable.sort).length > 0)
+    if (before.city.cityId !== after.city.cityId)
     {
-        promises.push(database.collection('user-events').doc(after.userId).update({ [id]: refTable }));
+        promises.push(ServiceCities.createIfNew(database, after.city))
     }
 
     return promises;

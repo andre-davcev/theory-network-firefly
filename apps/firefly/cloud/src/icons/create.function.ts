@@ -11,9 +11,6 @@ firestore.
 document('icons/{id}').
 onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const id:     string = snapshot.id;
-    const userId: string = snapshot.data().userId;
-
     const object: Record<string, any> = ServiceFirestore.create(snapshot,
     {
         version: Version.Icons
@@ -21,18 +18,7 @@ onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 
     return Promise.all
     ([
-        snapshot.ref.update(object),
-        database.collection('user-icons').doc(userId).update
-        ({
-            [id]:
-            {
-                sort:
-                {
-                    name:         object.name,
-                    dateCreated : object.dateCreated
-                }
-            }
-        })
+        snapshot.ref.update(object)
     ]);
 });
 

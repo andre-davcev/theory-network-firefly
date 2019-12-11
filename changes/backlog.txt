@@ -1,7 +1,5 @@
 alerts (functions create)
-  if events added/removed
-    get cluster-city
-    create/update ClusterCity stats
+  send push notification if alert.tokens.length > 0
 app (forms)
   required fields styling
 app (lists)
@@ -17,13 +15,9 @@ capacitor (push notifications)
 clusters (create/edit)
   event add/remove workflow
 clusters (functions create/update)
-cluster-subscribers (functions update)
-  paging of collections (limit 15000)
-  [${clusterId}_{pageNumber}]
-    [userId] :
-    {
-      tokens: Array<{tokenId}>
-    }
+  if events added/removed
+    get cluster-city
+    create/update ClusterCity stats
 coding (functions)
   minimize cold start time
   refactor to use try/catch async/await
@@ -33,18 +27,17 @@ events (list)
   list image/name/timeStart/timeEnd
 events (edit)
   reverse geocode
-
 events (functions cron)
   cron hourly 55 mins past hour
   find hour past current time
   query events whose notifiedDateTime === generatedHourlyTimestamp
   for each cluster id
-    get cluster?
-    get cluster.subscriberPageCount?
+  query users where cluster id in user.subscriptionList
+    get cluster
+    if (cluster.subscriberPageCount > 0)
     forkJoin(cluster-subscribers/{clusterId}_{pageNumber})
       get users/{subscriberId}
-        save event info to alerts where tokens is empty if !user.pushNotifications
-        send push notification if alert.tokens.length > 0
+        save event info to new alert
 icons (grid)
   create grid view
 icons (create/edit)

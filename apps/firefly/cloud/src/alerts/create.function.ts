@@ -11,29 +11,12 @@ firestore.
 document('alerts/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const id:     string = snapshot.id;
-    const userId: string = snapshot.data().userId;
-
     const object: Record<string, any> = ServiceFirestore.create(snapshot,
     {
         version: Version.Clusters
     });
 
-    return Promise.all
-    ([
-        snapshot.ref.update(object),
-        database.collection('user-alerts').doc(userId).update
-        ({
-            [id]:
-            {
-                sort:
-                {
-                    dateCreated : object.dateCreated
-                }
-            }
-        })
-    ]);
+    return snapshot.ref.update(object);
 });
 
 export { AlertsCreate };
-

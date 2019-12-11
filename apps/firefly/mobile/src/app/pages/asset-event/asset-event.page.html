@@ -65,6 +65,21 @@
                         </ion-datetime>
                     </ion-item>
 
+                    <ion-item>
+                        <ion-label>{{ 'page.event.timeNotify' | translate }}</ion-label>
+                        <ion-datetime name="notify"
+                                      [disabled]="notifyComplete$ | async"
+                                      [value]="timeNotify$ | async"
+                                      [displayFormat]="'date-time.displayFormat' | translate"
+                                      [pickerFormat]="'date-time.pickerFormatHourly' | translate"
+                                      [cancelText]="'general.cancel' |  translate"
+                                      [doneText]="'general.done' | translate"
+                                      (ionChange)="timeChanged($event, 'timeNotify')"
+                                      [class.cpt-invalid]="!(timeNotifyValid$ | async)">
+                        </ion-datetime>
+                    </ion-item>
+
+
                     <ion-item-divider></ion-item-divider>
 
                     <app-item-description [form]="form$ | async"

@@ -2,45 +2,37 @@ import { initializeApp } from 'firebase-admin';
 
 initializeApp();
 
-import { ClustersCreate, ClustersDelete, ClustersUpdate } from './clusters';
-import { EventsCreate, EventsDelete, EventsUpdate } from './events';
-import { IconsCreate, IconsDelete, IconsUpdate } from './icons';
-import { ImagesCreate, ImagesDelete, ImagesUpdate } from './images';
+import { ClustersCreate, ClustersDelete } from './clusters';
+import { EventsCreate, EventsUpdate } from './events';
+import { IconsCreate, IconsDelete } from './icons';
+import { ImagesCreate, ImagesDelete } from './images';
 import { StorageResize } from './storage';
-import { UserStreamsCreate } from './user-streams';
-import { UserSubscriptionsDelete, UserSubscriptionsUpdate } from './user-subscriptions';
+import { StreamsCreate } from './streams';
 import { UsersCreate, UsersDelete } from './users';
-import { ClusterSubscribersDelete } from './cluster-subscribers';
 import { AlertsCreate } from './alerts';
+import { CitiesCreate } from './cities';
 
 export
 {
     AlertsCreate,
 
-    ClusterSubscribersDelete,
+    CitiesCreate,
 
     ClustersCreate,
     ClustersDelete,
-    ClustersUpdate,
 
     EventsCreate,
-    EventsDelete,
     EventsUpdate,
 
     IconsCreate,
     IconsDelete,
-    IconsUpdate,
 
     ImagesCreate,
     ImagesDelete,
-    ImagesUpdate,
 
     StorageResize,
 
-    UserStreamsCreate,
-
-    UserSubscriptionsDelete,
-    UserSubscriptionsUpdate,
+    StreamsCreate,
 
     UsersCreate,
     UsersDelete

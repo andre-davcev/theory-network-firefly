@@ -1,25 +1,23 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version } from '../library';
+import { Version, ServiceFirestore } from '../library';
 
 const database: Firestore = db();
 
-const ImagesCreate: CloudFunction<DocumentSnapshot> =
+const CitiesCreate: CloudFunction<DocumentSnapshot> =
 
 firestore.
-document('images/{id}').
-onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
+document('cities/{id}').
+onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
     const object: Record<string, any> = ServiceFirestore.create(snapshot,
     {
-        version: Version.Images
+        version: Version.Cities
     });
 
-    return Promise.all
-    ([
-        snapshot.ref.update(object)
-    ]);
+    return snapshot.ref.update(object);
 });
 
-export { ImagesCreate };
+export { CitiesCreate };
+

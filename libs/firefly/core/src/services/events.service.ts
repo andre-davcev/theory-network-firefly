@@ -47,6 +47,28 @@ export class ServiceEvents extends ServiceFirestore<Event>
         return validator;
     }
 
+    private static validateTimeNotify(): ValidatorFn
+    {
+        const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
+        {
+            const value: string = control.value;
+
+            let valid: boolean = false;
+
+            if (value != null)
+            {
+                const timeNotify: Date = new Date(value);
+                const threshold:  Date = DateUtil.atHourNext(new Date(), 2);
+
+                valid = timeNotify.getTime() >= threshold.getTime();
+            }
+
+            return valid ? null : { timeNotifyInvalid: true };
+        };
+
+        return validator;
+    }
+
     public static validateImage(): ValidatorFn
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
@@ -61,14 +83,13 @@ export class ServiceEvents extends ServiceFirestore<Event>
 
     public formDataNew(userId: string, defaults: Event): Event
     {
-        const now: Date = DateUtil.now();
-
         const event: Event =
         {
             ...super.formDataNew(userId, defaults),
 
-            timeStart: DateUtil.atHourStart(now).toISOString(),
-            timeEnd:   DateUtil.atHourNext(now).toISOString()
+            timeStart:  DateUtil.atHourNext().toISOString(),
+            timeEnd:    DateUtil.atHourNext(new Date(), 2).toISOString(),
+            timeNotify: DateUtil.atHourNext(new Date(), 2).toISOString()
         };
 
         return event;
@@ -81,12 +102,14 @@ export class ServiceEvents extends ServiceFirestore<Event>
             ...event,
 
             name        : [event.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
-            description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
             tagline     : [event.tagline,     [Validators.required, ValidatorsExtended.minLength(1)]],
+            description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
             bucketPath  : [event.bucketPath,  [ServiceEvents.validateImage()]],
             geopoint    : [event.geopoint,    [Validators.required]],
             timeStart   : [event.timeStart,   [ServiceEvents.validateTime()]],
-            timeEnd     : [event.timeEnd,     [ServiceEvents.validateTime()]]
+            timeEnd     : [event.timeEnd,     [ServiceEvents.validateTime()]],
+            timeNotify  : [event.timeNotify,  [ServiceEvents.validateTimeNotify()]],
+            clusters    : [event.clusters,    []]
         });
     }
 }

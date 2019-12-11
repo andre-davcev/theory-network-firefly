@@ -11,12 +11,12 @@ export interface User extends FirebaseDocument
     email       : string;
     phoneNumber : string;
 
-    location      : Location;
-    dateLoggedIn  : firestore.Timestamp;
-    profile       : UserProfile;
-    roleEditors   : Record<string, string>;
-    roleAdmins    : Record<string, string>;
-    subscriptions : Record<string, Subscription>;
-    notifications : boolean;
-    tokens        : Array<string>;
+    location         : Location;
+    dateLoggedIn     : firestore.Timestamp;
+    profile          : UserProfile;
+    roleEditors      : Record<string, string>;
+    roleAdmins       : Record<string, string>;
+    subscriptions    : Record<string, Subscription>;
+    subscriptionList : Array<string>;
+    tokens           : Array<string>;
 }

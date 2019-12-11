@@ -6,7 +6,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Cluster, StateUserClusters, ActionClusterSetId } from '@firefly/core';
+import { Cluster, StateUserClusters, ActionClusterSetId, ActionEventClusterAdd } from '@firefly/core';
 
 import { Pages } from '../pages.enum';
 import { ModalController } from '@ionic/angular';
@@ -69,14 +69,20 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
 
     public select(cluster: Cluster): void
     {
-      this.store.dispatch(new ActionClusterSetId(cluster.id));
-
         /*this.store.dispatch(new ActionClusterSetId(cluster.id)).pipe(
           switchMap(() => this.store.dispatch(new Navigate([Pages.AssetCluster], {queryParams: {id: cluster.id}}, {state: {isClusterDetail:true}})))
         );*/
 
         if(this.modal)
-          this.modalController.dismiss();
+        {
+            this.store.dispatch
+            ([
+                new ActionClusterSetId(cluster.id),
+                new ActionEventClusterAdd(cluster)
+            ]);
+
+            this.modalController.dismiss();
+        }
         else
           this.store.dispatch(new Navigate([Pages.AssetCluster], {queryParams: {id: cluster.id}}, {state: {isClusterDetail:true}}));
     }

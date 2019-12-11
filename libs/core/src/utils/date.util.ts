@@ -12,9 +12,9 @@ export class DateUtil
         return date;
     }
 
-    public static atHourNext(date = DateUtil.now()): Date
+    public static atHourNext(date: Date = DateUtil.now(), hours: number = 1): Date
     {
-        date.setHours(date.getHours() + 1, 0, 0, 0);
+        date.setHours(date.getHours() + hours, 0, 0, 0);
 
         return date;
     }

@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+import { DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version } from '../library';
+import { ServiceFirestore, Version, ServiceCities } from '../library';
 
 const database: Firestore = db();
 
@@ -11,10 +11,6 @@ firestore.
 document('events/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const id:     string                 = snapshot.id;
-    const data:   Record<string, string> = snapshot.data();
-    const userId: string                 = data.userId;
-
     const object: Record<string, any> = ServiceFirestore.create(snapshot,
     {
         version: Version.Events
@@ -23,17 +19,7 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
     return Promise.all
     ([
         snapshot.ref.update(object),
-        database.collection('user-events').doc(userId).update
-        ({
-            [id]:
-            {
-                sort:
-                {
-                    name:         object.name,
-                    dateCreated : object.dateCreated
-                }
-            }
-        })
+        ServiceCities.createIfNew(database, object.city)
     ]);
 });
 

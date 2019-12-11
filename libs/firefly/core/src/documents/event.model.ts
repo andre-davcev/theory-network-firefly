@@ -14,12 +14,10 @@ export interface Event extends FirebaseDocument
     geopoint : firestore.GeoPoint;
     city     : Location;
 
-    timeStart : string;
-    timeEnd   : string;
+    timeStart          : string;
+    timeEnd            : string;
+    timeNotify         : string;
+    timeNotifyComplete : boolean;
 
     clusters : Array<string>;
-
-    notifyCompleted : boolean;
-    notifyImmediate : boolean;
-    notifyDateTime  : firestore.Timestamp;
 }

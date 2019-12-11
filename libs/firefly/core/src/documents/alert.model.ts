@@ -11,6 +11,7 @@ export interface Alert extends FirebaseDocument
     clusterId   : string;
     dateTime    : firestore.FieldValue;
     read        : boolean;
+    tokens      : Array<string>;
 
     metadata : AlertMetadata;
 }
