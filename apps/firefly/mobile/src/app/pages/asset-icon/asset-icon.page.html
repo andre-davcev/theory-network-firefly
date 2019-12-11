@@ -9,9 +9,9 @@
 <ion-content>
     <form novalidate
           [formGroup]="form$ | async"
-          ngxsForm="icon.form">
+          ngxsForm="icons.form">
         <app-item-header [form]="form$ | async"
-                         [iconUrl]="url$ | async"
+                         [iconUrl]="iconUrl$ | async"
                          title="name"
                          [iconOnly]="true"
                          [titlePlaceholder]="'page.assets-icon.namePlaceholder' | translate"
