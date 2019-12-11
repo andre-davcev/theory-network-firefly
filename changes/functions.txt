@@ -1,0 +1,313 @@
+alerts (model)
+    name        : string;
+    description : string;
+    bucketPath  : string;
+    eventId     : string;
+    clusterId   : string;
+    dateTime    : firestore.FieldValue;
+    read        : boolean;
+    tokens      : Array<string>;
+alerts (create)
+    for each token
+        send push notification using name/description
+alerts (update)
+    N/A
+alerts (delete)
+    N/A
+cities (model)
+    geopoint:  firestore.GeoPoint
+    city:      string;
+    region:    string;
+    country:   string;
+    nearby:    Record<string, number>;       // cityId:    distance (km)
+    clusters:  Record<string, ClusterCity>;  // clusterId: ClusterCity
+cities (service)
+    public const earthRadius: number = 6371;
+
+    public static degrees2Radians(degrees: number): number
+    {
+        return degrees * (Math.PI / 180);
+    }
+
+    public static distanceBetweenPoints(geopoint1: firestore.GeoPoint, geopoint2: firestore.GeoPoint)
+    {
+        return ServiceCity.distanceBetween(geopoint1.latitude, geopoint1.longitude, geopoint2.latitude, geopoint2.longitude);
+    }
+
+    // Haversine Formula (km)
+    public static distanceBetween(latitude1, longitude1, latitude2, longitude2)
+    {
+        const distanceLatitude:  number = degrees2Radians(latitude2  - latitude1);
+        const distanceLongitude: number = degrees2Radians(longitude2 - longitude1);
+        const a: number = Math.sin(distanceLatitude/2) * Math.sin(distanceLatitude/2) +
+                          Math.cos(degrees2Radians(latitude1)) * Math.cos(degrees2Radians(latitude2)) *
+                          Math.sin(distanceLongitude/2) * Math.sin(distanceLongitude/2);
+        const c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+        return ServiceCity.earthRadius * c; // Distance in km
+    }
+
+
+cities (create)
+    geopoint:  firestore.GeoPoint;
+    city:      string;
+    region:    string;
+    country:   string;
+    nearby:    Record<string, number>;       // cityId:    distance (km)
+    clusters:  Record<string, ClusterCity>;  // clusterId: ClusterCity
+
+    get cities collection
+    for each city
+        get distance to city in km ServiceCity.distanceBetweenPoints
+        filter out cities above km threshold (200km)
+        city.nearby[city.id] = distanceKm
+
+cities (update)
+    geopoint:  firestore.GeoPoint;
+    city:      string;
+    region:    string;
+    country:   string;
+    nearby:    Record<string, number>;       // cityId:    distance (km)
+    clusters:  Record<string, ClusterCity>;  // clusterId: ClusterCity
+
+    if cityId is not found in cities collection
+        create city in cities collection
+cities (delete)
+    geopoint:  firestore.GeoPoint;
+    city:      string;
+    region:    string;
+    country:   string;
+    nearby:    Record<string, number>;       // cityId:    distance (km)
+    clusters:  Record<string, ClusterCity>;  // clusterId: ClusterCity
+clusters (model)
+    name            : string;
+    tagline         : string;
+    description     : string;
+    bucketPath      : string;
+    private         : boolean;
+    subscriberCount : number;
+    tokenPage       : number;
+    tokenPageCount  : number;
+clusters (create)
+    name            : string;
+    tagline         : string;
+    description     : string;
+    bucketPath      : string;
+    private         : boolean;
+    subscriberCount : number;
+    tokenPage       : number;
+    tokenPageCount  : number;
+clusters (update)
+    name            : string;
+    tagline         : string;
+    description     : string;
+    bucketPath      : string;
+    private         : boolean;
+    subscriberCount : number;
+    tokenPage       : number;
+    tokenPageCount  : number;
+clusters (delete)
+    name            : string;
+    tagline         : string;
+    description     : string;
+    bucketPath      : string;
+    private         : boolean;
+    subscriberCount : number;
+    tokenPage       : number;
+    tokenPageCount  : number;
+events (model)
+    name               : string;
+    tagline            : string;
+    description        : string;
+    bucketPath         : string;
+    private            : boolean;
+    geopoint           : firestore.GeoPoint;
+    city               : Location;
+    timeStart          : string;
+    timeEnd            : string;
+    timeNotify         : string;
+    timeNotifyComplete : boolean;
+    clusters           : Array<string>;
+events (create)
+    name               : string;
+    tagline            : string;
+    description        : string;
+    bucketPath         : string;
+    private            : boolean;
+    geopoint           : firestore.GeoPoint;
+    city               : Location;
+    timeStart          : string;
+    timeEnd            : string;
+    timeNotify         : string;
+    timeNotifyComplete : boolean;
+    clusters           : Array<string>;
+events (update)
+    name               : string;
+    tagline            : string;
+    description        : string;
+    bucketPath         : string;
+    private            : boolean;
+    geopoint           : firestore.GeoPoint;
+    city               : Location;
+    timeStart          : string;
+    timeEnd            : string;
+    timeNotify         : string;
+    timeNotifyComplete : boolean;
+    clusters           : Array<string>;
+
+    get removed/added clusters
+        loop through clusters
+            get cluster-city
+            for deleted city decrement events count & calc ratio
+            for added city increment events count & calc ratio
+events (delete)
+    name               : string;
+    tagline            : string;
+    description        : string;
+    bucketPath         : string;
+    private            : boolean;
+    geopoint           : firestore.GeoPoint;
+    city               : Location;
+    timeStart          : string;
+    timeEnd            : string;
+    timeNotify         : string;
+    timeNotifyComplete : boolean;
+    clusters           : Array<string>;
+events (cron)
+    cron hourly 55 mins past hour
+    find hour past current time
+    query events whose notifiedDateTime === generatedHourlyTimestamp
+    for each cluster id
+        get cluster?
+        get cluster.subscriberPageCount?
+        forkJoin(cluster-subscribers/{clusterId}_{pageNumber})
+        get users/{subscriberId}
+            save event info to alerts where tokens is empty if !user.pushNotifications
+            send push notification if alert.tokens.length > 0
+icons (model)
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+icons (create)
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+icons (update)
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+icons (delete)
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+
+    delete icon from storage
+images (model)
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+images (create)
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+images (update)
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+images (delete)
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+
+    delete image from storage
+streams (model)
+    subscribed: boolean;
+streams (create)
+    subscribed: boolean;
+streams (update)
+    subscribed: boolean;
+streams (delete)
+    subscribed: boolean;
+streams (cron)
+  get users collection
+  for each user logged in the past 30 days
+    get user.city
+    get cities/{cityId}
+    push city to array
+    loop through city.nearby sorted by shortest distance
+      push to city array
+    loop through city.clusters
+      generate score using:
+        event count
+        event ratio
+        distance ranking
+      sort list based on score descending
+users (model)
+    providerId       : string;
+    language         : string;
+    email            : string;
+    phoneNumber      : string;
+    location         : Location;
+    dateLoggedIn     : firestore.Timestamp;
+    profile          : UserProfile;
+    roleEditors      : Record<string, string>;
+    roleAdmins       : Record<string, string>;
+    subscriptions    : Record<string, Subscription>;
+        on: boolean;
+    subscriptionList : Array<string>;
+    tokens           : Array<string>;
+users (create)
+    providerId       : string;
+    language         : string;
+    email            : string;
+    phoneNumber      : string;
+    location         : Location;
+    dateLoggedIn     : firestore.Timestamp;
+    profile          : UserProfile;
+    roleEditors      : Record<string, string>;
+    roleAdmins       : Record<string, string>;
+    subscriptions    : Record<string, Subscription>;
+        on: boolean;
+    subscriptionList : Array<string>;
+    tokens           : Array<string>;
+
+    generate and add first alert
+    generate new stream
+users (update)
+    providerId       : string;
+    language         : string;
+    email            : string;
+    phoneNumber      : string;
+    location         : Location;
+    dateLoggedIn     : firestore.Timestamp;
+    profile          : UserProfile;
+    roleEditors      : Record<string, string>;
+    roleAdmins       : Record<string, string>;
+    subscriptions    : Record<string, Subscription>;
+        on: boolean;
+    subscriptionList : Array<string>;
+    tokens           : Array<string>;
+
+    if token count passes 10
+        delete oldest
+    if subscription turned on
+    if dateLoggedIn & city changed then generate new stream
+users (delete)
+    providerId       : string;
+    language         : string;
+    email            : string;
+    phoneNumber      : string;
+    location         : Location;
+    dateLoggedIn     : firestore.Timestamp;
+    profile          : UserProfile;
+    roleEditors      : Record<string, string>;
+    roleAdmins       : Record<string, string>;
+    subscriptions    : Record<string, Subscription>;
+        on: boolean;
+    subscriptionList : Array<string>;
+    tokens           : Array<string>;
+general (all)
+    minimize cold start time
+    refactor to use try/catch async/await
+    enable retry on failure
+
