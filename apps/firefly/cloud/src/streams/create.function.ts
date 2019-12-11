@@ -2,16 +2,16 @@ import { runWith, EventContext } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
 
-const UserStreamsCreate =
+const StreamsCreate =
 
 runWith( { memory: '2GB' }).
 pubsub.
 schedule('0 0 * * *').
 onRun(async (context: EventContext) =>
 {
-    const database:   Firestore = firestore();
-    const userStream: QuerySnapshot = await database.collection('user-stream').get();
-    const clusters:   QuerySnapshot = await database.collection('clusters').get();
+    const database: Firestore = firestore();
+    const streams:  QuerySnapshot = await database.collection('streams').get();
+    const clusters: QuerySnapshot = await database.collection('clusters').get();
 
     const stream:   Record<string, number>      = {};
     const promises: Array<Promise<WriteResult>> = [];
@@ -25,11 +25,11 @@ onRun(async (context: EventContext) =>
         index++;
     });
 
-    userStream.forEach((snapshot: QueryDocumentSnapshot) =>
+    streams.forEach((snapshot: QueryDocumentSnapshot) =>
         promises.push(snapshot.ref.set(stream))
     );
 
     return await Promise.all(promises);
 });
 
-export { UserStreamsCreate };
+export { StreamsCreate };

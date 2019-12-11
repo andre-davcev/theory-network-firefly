@@ -28,8 +28,9 @@
   "menu.account.profile"      : "Profile",
   "menu.account.log-out"      : "Log Out",
 
-  "date-time.displayFormat" : "MMM D, YYYY h:mm A",
-  "date-time.pickerFormat"  : "MMM D h:m A",
+  "date-time.displayFormat"      : "MMM D, YYYY h:mm A",
+  "date-time.pickerFormat"       : "MMM D h:m A",
+  "date-time.pickerFormatHourly" : "MMM D h A",
 
   "page.auth.title"               : "firefly",
   "page.auth.tagline"             : "Life comes to you",
@@ -68,6 +69,7 @@
   "page.event.iconPlaceholder"        : "select cluster",
   "page.event.imagePlaceholder"       : "select image",
   "page.event.descriptionPlaceholder" : "Write a description ...",
+  "page.event.timeNotify"             : "Notifaction Time",
 
   "page.event-categories.title"    : "Categories",
 

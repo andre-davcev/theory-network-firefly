@@ -1,5 +1,4 @@
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { ActionMapSearchResultClear, MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
@@ -24,7 +23,8 @@ import {
   ActionEventImageClear,
   ActionEventSetId,
   ActionEventUpdate,
-  ActionEventImageCreate
+  ActionEventImageCreate,
+  ActionEventClusterAdd
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { ActionClusterReset } from '../cluster';
@@ -68,14 +68,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 geopoint : null,
                 city     : null,
 
-                timeStart : null,
-                timeEnd   : null,
+                timeStart          : null,
+                timeEnd            : null,
+                timeNotify         : null,
+                timeNotifyComplete : true,
 
-                clusters : [],
-
-                notifyCompleted : false,
-                notifyImmediate : true,
-                notifyDateTime  : null
+                clusters : []
             },
             {
                 ActionReset:  ActionEventReset,
@@ -98,16 +96,14 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Selector() static locationTypes(state: StateEventModel):   Array<MapboxPlaceType> { return StateEvent.dataState(state).locationTypes; }
-    @Selector() static locationDefined(state: StateEventModel): boolean { return StateEvent.locationTypes(state) != null; }
-    @Selector() static timeStart(state: StateEventModel):       string { return StateEvent.dataState(state).timeStart; }
-    @Selector() static timeEnd(state: StateEventModel):         string { return StateEvent.dataState(state).timeEnd; }
-    @Selector() static timeEndValid(state: StateEventModel): boolean
-    {
-        const timeStart: Date = new Date(StateEvent.timeStart(state));
-        const timeEnd:   Date = new Date(StateEvent.timeEnd(state));
+    @Selector() static locationDefined(state: StateEventModel): boolean                { return StateEvent.locationTypes(state) != null; }
+    @Selector() static timeStart(state: StateEventModel):       string                 { return StateEvent.dataState(state).timeStart; }
+    @Selector() static timeEnd(state: StateEventModel):         string                 { return StateEvent.dataState(state).timeEnd; }
+    @Selector() static timeEndValid(state: StateEventModel):    boolean                { return StateEvent.formGroupState(state).get('timeEnd').errors == null; }
 
-        return timeEnd.getTime() > timeStart.getTime();
-    }
+    @Selector() static notifyComplete(state: StateEventModel):  boolean { return StateEvent.dataState(state).notifyComplete; }
+    @Selector() static timeNotify(state: StateEventModel):      string  { return StateEvent.dataState(state).timeNotify; }
+    @Selector() static timeNotifyValid(state: StateEventModel): boolean { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
 
     @Selector([StateImage.dataUri, StateStorage.images])
     public static imageUrl(state: StateEventModel, dataUri: string, images: Record<string, StorageImage>)
@@ -186,22 +182,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         return dispatch(new ActionEventSet(snapshot, data));
     }
 
-    @Action(ActionEventLocationSet)
-    setLocation({ dispatch } : StateContext<StateEventModel>, { payload }: ActionEventLocationSet)
-    {
-        const result: Result = payload;
-
-        if (result == null) { return of(null); }
-
-        return this.location.getLocationCity(result).pipe
-        (
-            tap(result => console.log(result)),
-            switchMap((locationCity: LocationCity) =>
-                dispatch(new ActionEventPatch(locationCity))
-            )
-        );
-    }
-
     @Action(ActionEventImageClear)
     imageClear({ dispatch }: StateContext<StateEventModel>)
     {
@@ -274,5 +254,25 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ])
             )
         );
+    }
+
+    @Action(ActionEventLocationSet)
+    setLocation({ dispatch } : StateContext<StateEventModel>, { result }: ActionEventLocationSet)
+    {
+        return result == null ?
+            dispatch(new ActionEventPatch({ geopoint: null, city: null })) :
+            this.location.getLocationCity(result).pipe
+            (
+                tap(result => console.log(result)),
+                switchMap((locationCity: LocationCity) =>
+                    dispatch(new ActionEventPatch(locationCity))
+                )
+            );
+    }
+
+    @Action(ActionEventClusterAdd)
+    clusterAdd({ dispatch }: StateContext<StateEventModel>, { cluster }: ActionEventClusterAdd)
+    {
+        return dispatch(new ActionEventPatch({ clusters: [cluster.id]}));
     }
 }

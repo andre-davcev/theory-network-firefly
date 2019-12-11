@@ -11,8 +11,7 @@ firestore.
 document('clusters/{id}').
 onCreate(async(snapshot: DocumentSnapshot, ontext: EventContext) =>
 {
-    const id:     string = snapshot.id;
-    const userId: string = snapshot.data().userId;
+    const id: string = snapshot.id;
 
     const object: Record<string, any> = ServiceFirestore.create(snapshot,
     {
@@ -22,19 +21,7 @@ onCreate(async(snapshot: DocumentSnapshot, ontext: EventContext) =>
     return Promise.all
     ([
         snapshot.ref.update(object),
-        database.collection('cluster-subscribers').doc(id).create({}),
-
-        database.collection('user-clusters').doc(userId).update
-        ({
-            [id]:
-            {
-                sort:
-                {
-                    name:         object.name,
-                    dateCreated : object.dateCreated
-                }
-            }
-        })
+        database.collection('cluster-subscribers').doc(id).create({})
     ]);
 });
 

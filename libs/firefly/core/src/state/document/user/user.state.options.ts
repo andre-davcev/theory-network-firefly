@@ -21,14 +21,14 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             phoneNumber      : undefined,
             providerId       : undefined,
 
-            location      : null,
-            dateLoggedIn  : null,
-            profile       : {},
-            roleEditors   : {},
-            roleAdmins    : {},
-            subscriptions : {},
-            notifications : false,
-            tokens        : []
+            location         : null,
+            dateLoggedIn     : null,
+            profile          : {},
+            roleEditors      : {},
+            roleAdmins       : {},
+            subscriptions    : {},
+            subscriptionList : [],
+            tokens           : []
         },
 
         form :
