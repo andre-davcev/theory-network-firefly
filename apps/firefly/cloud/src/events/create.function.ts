@@ -19,7 +19,7 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
     return Promise.all
     ([
         snapshot.ref.update(object),
-        ServiceCities.createIfNew(database, object.city)
+        ServiceCities.createIfNew(database, object)
     ]);
 });
 

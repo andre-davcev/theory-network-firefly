@@ -10,17 +10,19 @@ alerts (model)
 alerts (create)
     for each token
         send push notification using name/description
+    update events/{eventId}/timeNotifyComplete = true
 alerts (update)
     N/A
 alerts (delete)
     N/A
 cities (model)
-    geopoint:  firestore.GeoPoint
-    city:      string;
-    region:    string;
-    country:   string;
-    nearby:    Record<string, number>;       // cityId:    distance (km)
-    clusters:  Record<string, ClusterCity>;  // clusterId: ClusterCity
+    geopoint:    firestore.GeoPoint
+    city:        string;
+    region:      string;
+    country:     string;
+    nearby:      Record<string, number>;       // cityId:    distance (km)
+    clusters:    Record<string, ClusterCity>;  // clusterId: ClusterCity
+    clusterList: Array<string>;
 cities (service)
     public const earthRadius: number = 6371;
 
@@ -47,38 +49,18 @@ cities (service)
         return ServiceCity.earthRadius * c; // Distance in km
     }
 
-
 cities (create)
-    geopoint:  firestore.GeoPoint;
-    city:      string;
-    region:    string;
-    country:   string;
-    nearby:    Record<string, number>;       // cityId:    distance (km)
-    clusters:  Record<string, ClusterCity>;  // clusterId: ClusterCity
-
     get cities collection
     for each city
         get distance to city in km ServiceCity.distanceBetweenPoints
         filter out cities above km threshold (200km)
         city.nearby[city.id] = distanceKm
-
+    update city object
+    update fkCity.nearby[city.id] = distanceKm
 cities (update)
-    geopoint:  firestore.GeoPoint;
-    city:      string;
-    region:    string;
-    country:   string;
-    nearby:    Record<string, number>;       // cityId:    distance (km)
-    clusters:  Record<string, ClusterCity>;  // clusterId: ClusterCity
-
-    if cityId is not found in cities collection
-        create city in cities collection
+    N/A
 cities (delete)
-    geopoint:  firestore.GeoPoint;
-    city:      string;
-    region:    string;
-    country:   string;
-    nearby:    Record<string, number>;       // cityId:    distance (km)
-    clusters:  Record<string, ClusterCity>;  // clusterId: ClusterCity
+    N/A
 clusters (model)
     name            : string;
     tagline         : string;
@@ -86,35 +68,21 @@ clusters (model)
     bucketPath      : string;
     private         : boolean;
     subscriberCount : number;
-    tokenPage       : number;
-    tokenPageCount  : number;
 clusters (create)
-    name            : string;
-    tagline         : string;
-    description     : string;
-    bucketPath      : string;
-    private         : boolean;
-    subscriberCount : number;
-    tokenPage       : number;
-    tokenPageCount  : number;
+    set cluster.subscriberCount = 0
 clusters (update)
-    name            : string;
-    tagline         : string;
-    description     : string;
-    bucketPath      : string;
-    private         : boolean;
-    subscriberCount : number;
-    tokenPage       : number;
-    tokenPageCount  : number;
+    N/A
 clusters (delete)
-    name            : string;
-    tagline         : string;
-    description     : string;
-    bucketPath      : string;
-    private         : boolean;
-    subscriberCount : number;
-    tokenPage       : number;
-    tokenPageCount  : number;
+    query for events where clusterId in event.clusters
+    for each event
+        remove event.clusters[clusterId]
+    query for users.subscriptionList
+        remove user.subscriptions[clusterId]
+        remove user.subscriptionList[clusterId]
+    query for cities where clusterId in city.clusters
+        remove city.clusters[clusterId]
+        remove city.clusterList[clusterId]
+    delete streams/{clusterId}
 events (model)
     name               : string;
     tagline            : string;
@@ -129,18 +97,14 @@ events (model)
     timeNotifyComplete : boolean;
     clusters           : Array<string>;
 events (create)
-    name               : string;
-    tagline            : string;
-    description        : string;
-    bucketPath         : string;
-    private            : boolean;
-    geopoint           : firestore.GeoPoint;
-    city               : Location;
-    timeStart          : string;
-    timeEnd            : string;
-    timeNotify         : string;
-    timeNotifyComplete : boolean;
-    clusters           : Array<string>;
+    geopoint  : firestore.GeoPoint;
+    city      : Location;
+    clusters  : Array<string>;
+
+    create city if new
+    // ToDo: HERE
+
+
 events (update)
     name               : string;
     tagline            : string;
@@ -156,7 +120,10 @@ events (update)
     clusters           : Array<string>;
 
     get removed/added clusters
-        loop through clusters
+    loop through removed clusters
+
+    loop through added clusters
+
             get cluster-city
             for deleted city decrement events count & calc ratio
             for added city increment events count & calc ratio
@@ -178,12 +145,9 @@ events (cron)
     find hour past current time
     query events whose notifiedDateTime === generatedHourlyTimestamp
     for each cluster id
-        get cluster?
-        get cluster.subscriberPageCount?
-        forkJoin(cluster-subscribers/{clusterId}_{pageNumber})
-        get users/{subscriberId}
-            save event info to alerts where tokens is empty if !user.pushNotifications
-            send push notification if alert.tokens.length > 0
+        query users where clusterId in user.subscriptions
+        for each user
+            create alert with alert.userId and with alert.tokens
 icons (model)
     name       : string;
     bucketPath : string;

@@ -60,10 +60,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
                 description     : null,
                 bucketPath      : null,
                 private         : true,
-
-                subscriberCount : 0,
-                tokenPage       : 0,
-                tokenPageCount  : 0
+                subscriberCount : 0
             },
             {
                 ActionReset:  ActionClusterReset,

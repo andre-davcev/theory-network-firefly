@@ -49,12 +49,8 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
                 description     : null,
                 bucketPath      : null,
                 private         : true,
-
                 subscriberCount : 0,
-                tokenPage       : 0,
-                tokenPageCount  : 0,
-
-                on : false
+                on              : false
             },
             {
                 ActionReset:  ActionSubscriptionReset,

@@ -10,6 +10,7 @@ export interface City extends FirebaseDocument
     region:    string;
     country:   string;
 
-    nearby:   Record<string, number>;       // cityId:    distance (km)
-    clusters: Record<string, ClusterCity>;  // clusterId: ClusterCity
+    nearby:      Record<string, number>;       // cityId:    distance (km)
+    clusters:    Record<string, ClusterCity>;  // clusterId: ClusterCity
+    clusterList: Array<string>;
 }

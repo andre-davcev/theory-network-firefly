@@ -7,8 +7,5 @@ export interface Cluster extends FirebaseDocument
     description     : string;
     bucketPath      : string;
     private         : boolean;
-
     subscriberCount : number;
-    tokenPage       : number;
-    tokenPageCount  : number;
 }
