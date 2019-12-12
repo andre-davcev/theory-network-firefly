@@ -97,22 +97,8 @@ events (model)
     timeNotifyComplete : boolean;
     clusters           : Array<string>;
 events (create)
-    geopoint  : firestore.GeoPoint;
-    city      : Location;
-    clusters  : Array<string>;
-
     create city if new
-    // ToDo: HERE
-
-
 events (update)
-    name               : string;
-    tagline            : string;
-    description        : string;
-    bucketPath         : string;
-    private            : boolean;
-    geopoint           : firestore.GeoPoint;
-    city               : Location;
     timeStart          : string;
     timeEnd            : string;
     timeNotify         : string;
