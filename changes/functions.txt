@@ -68,6 +68,8 @@ clusters (model)
     bucketPath      : string;
     private         : boolean;
     subscriberCount : number;
+    eventList       : Array<string>;
+    events          : Record<string, number>
 clusters (create)
     set cluster.subscriberCount = 0
 clusters (update)
@@ -99,16 +101,19 @@ events (model)
 events (create)
     create city if new
 events (update)
-    timeStart          : string;
-    timeEnd            : string;
-    timeNotify         : string;
-    timeNotifyComplete : boolean;
-    clusters           : Array<string>;
+    geopoint : firestore.GeoPoint;
+    city              : Location;
+    clusters          : Array<string>;
+    clusterEventCount : Record<string,
 
     get removed/added clusters
-    loop through removed clusters
+    for removed clusters
+        decrement cities/{event.cityId}/clusters/{clusterId}/events = events - 1
+        remo
 
-    loop through added clusters
+        clusters:    Record<string, ClusterCity>;  // clusterId: ClusterCity
+    clusterList: Array<string>;
+    for added clusters
 
             get cluster-city
             for deleted city decrement events count & calc ratio
@@ -179,19 +184,19 @@ streams (update)
 streams (delete)
     subscribed: boolean;
 streams (cron)
-  get users collection
-  for each user logged in the past 30 days
-    get user.city
-    get cities/{cityId}
-    push city to array
-    loop through city.nearby sorted by shortest distance
-      push to city array
-    loop through city.clusters
-      generate score using:
-        event count
-        event ratio
-        distance ranking
-      sort list based on score descending
+    get users collection
+    for each user logged in the past 30 days
+        get user.city
+        get cities/{cityId}
+        push city to array
+        loop through city.nearby sorted by shortest distance
+            push to city array
+        loop through city.clusters
+            generate score using:
+                event count
+                event ratio
+                distance ranking
+        sort list based on score descending
 users (model)
     providerId       : string;
     language         : string;
