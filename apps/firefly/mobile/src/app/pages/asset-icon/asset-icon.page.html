@@ -4,6 +4,13 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
+
+
+        <ion-buttons slot="end">
+          <ion-button color="dark" (click)="save()" [disabled]="!(canUpdate$ | async)">
+              {{ ((isNew$ | async) ? 'general.publish' : 'general.update') | translate }}
+          </ion-button>
+       </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -21,7 +28,5 @@
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
                          (iconClicked)="navigate(Pages.IconSelector)">
         </app-item-header>
-
-        <ion-button   size="default" expand="block" color="primary" (click)="save()">Submit</ion-button>
     </form>
 </ion-content>

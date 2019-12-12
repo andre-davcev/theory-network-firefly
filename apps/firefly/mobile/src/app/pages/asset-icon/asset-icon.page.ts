@@ -21,8 +21,10 @@ const { Camera } = Plugins;
 
 export class PageAssetIcon
 {
-    @Select(StateIcon.formGroup()) form$: Observable<FormGroup>;
-    @Select(StateIcon.iconUrl) iconUrl$: Observable<string>;
+    @Select(StateIcon.formGroup()) form$:         Observable<FormGroup>;
+    @Select(StateIcon.isNew())     isNew$:        Observable<boolean>;
+    @Select(StateIcon.canUpdate()) canUpdate$:    Observable<boolean>;
+    @Select(StateIcon.iconUrl)     iconUrl$:      Observable<string>;
 
     public Pages: any = Pages;
 
