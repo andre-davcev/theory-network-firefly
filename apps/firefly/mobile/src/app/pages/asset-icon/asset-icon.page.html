@@ -4,24 +4,29 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
+
+
+        <ion-buttons slot="end">
+          <ion-button color="dark" (click)="save()" [disabled]="!(canUpdate$ | async)">
+              {{ ((isNew$ | async) ? 'general.publish' : 'general.update') | translate }}
+          </ion-button>
+       </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content>
     <form novalidate
           [formGroup]="form$ | async"
-          ngxsForm="icon.form">
+          ngxsForm="icons.form">
         <app-item-header [form]="form$ | async"
-                         [iconUrl]="url$ | async"
+                         [iconUrl]="iconUrl$ | async"
                          title="name"
+                         subtitle="name"
                          [iconOnly]="true"
                          [titlePlaceholder]="'page.assets-icon.namePlaceholder' | translate"
-                         subtitle="description"
                          [subtitlePlaceholder]="'page.assets-icon.descriptionPlaceholder' | translate"
                          [iconPlaceholder]="'page.assets-icon.iconPlaceholder' | translate"
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
                          (iconClicked)="navigate(Pages.IconSelector)">
         </app-item-header>
-
-        <ion-button   size="default" expand="block" color="primary" (click)="save()">Submit</ion-button>
     </form>
 </ion-content>
