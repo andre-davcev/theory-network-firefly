@@ -16,6 +16,8 @@ events (list)
   list image/name/timeStart/timeEnd
 events (edit)
   reverse geocode
+functions
+  migrate to use firebase transactions
 icons (grid)
   create grid view
 icons (create/edit)

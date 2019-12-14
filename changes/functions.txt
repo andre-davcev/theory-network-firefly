@@ -16,13 +16,13 @@ alerts (update)
 alerts (delete)
     N/A
 cities (model)
-    geopoint:    firestore.GeoPoint
-    city:        string;
-    region:      string;
-    country:     string;
-    nearby:      Record<string, number>;       // cityId:    distance (km)
-    clusters:    Record<string, ClusterCity>;  // clusterId: ClusterCity
-    clusterList: Array<string>;
+    geopoint:       firestore.GeoPoint
+    city:           string;
+    region:         string;
+    country:        string;
+    nearby:         Record<string, number>; // cityId:    distance (km)
+    clustersEvents: Record<string, number>; // clusterId: ClusterCityStats
+    clusterList:    Array<string>;
 cities (service)
     public const earthRadius: number = 6371;
 
@@ -68,8 +68,7 @@ clusters (model)
     bucketPath      : string;
     private         : boolean;
     subscriberCount : number;
-    eventList       : Array<string>;
-    events          : Record<string, number>
+    events          : Array<string>;
 clusters (create)
     set cluster.subscriberCount = 0
 clusters (update)
@@ -101,44 +100,51 @@ events (model)
 events (create)
     create city if new
 events (update)
-    geopoint : firestore.GeoPoint;
-    city              : Location;
-    clusters          : Array<string>;
-    clusterEventCount : Record<string,
-
-    get removed/added clusters
-    for removed clusters
-        decrement cities/{event.cityId}/clusters/{clusterId}/events = events - 1
-        remo
-
-        clusters:    Record<string, ClusterCity>;  // clusterId: ClusterCity
-    clusterList: Array<string>;
-    for added clusters
-
-            get cluster-city
-            for deleted city decrement events count & calc ratio
-            for added city increment events count & calc ratio
+    if (before.city.cityId !== after.city.cityId)
+        cityBefore = cities/{before.city.cityId}
+        cityAfter  = cities/{after.city.cityId}
+        cityClustersBefore = cityBefore.clusters
+        cityClustersAfter  = cityAfter.clusters
+        for before.clusters
+            eventsInCity = cityClustersBefore[clusterId]
+            if (eventsInCity === 1)
+                delete cityClustersBefore[clusterId]
+            else
+                cityClustersBefore[clusterId] = eventsInCity - 1
+        for after.clusters
+            eventsInCity = cityClustersAfter[clusterId]
+            cityClustersAfter[clusterId] = eventsInCity == null ? 1 : eventsInCity + 1
+        save cityBefore
+        save cityAfter
+    if removed cluster || (!before.timeNotifyComplete && after.timeNotifyComplete)
+        cityClusters = cities/{after.city.cityId}/clusters
+        eventsInCity = city[clusterId]
+        if (eventsInCity === 1)
+            delete cityClusters[clusterId]
+        else
+            cityClusters[clusterId] = eventsInCity - 1
+    if added cluster
+        cityClusters = cities/{after.city.cityId}/clusters
+        eventsInCity = cityClusters[clusterId]
+        cityClusters[clusterId] = eventsInCity == null ? 1 : eventsInCity + 1
 events (delete)
-    name               : string;
-    tagline            : string;
-    description        : string;
-    bucketPath         : string;
-    private            : boolean;
-    geopoint           : firestore.GeoPoint;
-    city               : Location;
-    timeStart          : string;
-    timeEnd            : string;
-    timeNotify         : string;
-    timeNotifyComplete : boolean;
-    clusters           : Array<string>;
+    if (!event.timeNotifyComplete)
+        cityClusters = cities/{after.city.cityId}/clusters
+        for event.clusters
+            eventsInCity = cityClusters[clusterId]
+            if (eventsInCity === 1)
+                delete cityClusters[clusterId]
+            else
+                cityClusters[clusterId] = eventsInCity - 1
 events (cron)
     cron hourly 55 mins past hour
     find hour past current time
     query events whose notifiedDateTime === generatedHourlyTimestamp
     for each cluster id
-        query users where clusterId in user.subscriptions
+        query users where clusterId in user.subscriptionList
         for each user
             create alert with alert.userId and with alert.tokens
+            set event.timeNotifyComplete = true
 icons (model)
     name       : string;
     bucketPath : string;
@@ -175,28 +181,6 @@ images (delete)
     mediaType  : string;
 
     delete image from storage
-streams (model)
-    subscribed: boolean;
-streams (create)
-    subscribed: boolean;
-streams (update)
-    subscribed: boolean;
-streams (delete)
-    subscribed: boolean;
-streams (cron)
-    get users collection
-    for each user logged in the past 30 days
-        get user.city
-        get cities/{cityId}
-        push city to array
-        loop through city.nearby sorted by shortest distance
-            push to city array
-        loop through city.clusters
-            generate score using:
-                event count
-                event ratio
-                distance ranking
-        sort list based on score descending
 users (model)
     providerId       : string;
     language         : string;
@@ -207,6 +191,8 @@ users (model)
     profile          : UserProfile;
     roleEditors      : Record<string, string>;
     roleAdmins       : Record<string, string>;
+    stream           : Record<string, Stream>;
+    streamList       : Array<string>;
     subscriptions    : Record<string, Subscription>;
         on: boolean;
     subscriptionList : Array<string>;
@@ -221,6 +207,8 @@ users (create)
     profile          : UserProfile;
     roleEditors      : Record<string, string>;
     roleAdmins       : Record<string, string>;
+    stream           : Record<string, Stream>;
+    streamList       : Array<string>;
     subscriptions    : Record<string, Subscription>;
         on: boolean;
     subscriptionList : Array<string>;
@@ -228,6 +216,8 @@ users (create)
 
     generate and add first alert
     generate new stream
+
+    // To Do: Here
 users (update)
     providerId       : string;
     language         : string;
@@ -238,6 +228,8 @@ users (update)
     profile          : UserProfile;
     roleEditors      : Record<string, string>;
     roleAdmins       : Record<string, string>;
+    stream           : Record<string, Stream>;
+    streamList       : Array<string>;
     subscriptions    : Record<string, Subscription>;
         on: boolean;
     subscriptionList : Array<string>;
@@ -257,12 +249,26 @@ users (delete)
     profile          : UserProfile;
     roleEditors      : Record<string, string>;
     roleAdmins       : Record<string, string>;
+    stream           : Record<string, Stream>;
+    streamList       : Array<string>;
     subscriptions    : Record<string, Subscription>;
         on: boolean;
     subscriptionList : Array<string>;
     tokens           : Array<string>;
+user (cron)
+    get users collection
+    for each user logged in the past 30 days
+        get cities/{user.city.cityId}
+        push city to array
+        loop through city.nearby sorted by shortest distance
+            push to city array
+        loop through city.clusters
+            generate score using:
+                event count
+                event ratio
+                distance ranking
+        sort list based on score descending
 general (all)
     minimize cold start time
     refactor to use try/catch async/await
     enable retry on failure
-

@@ -3,5 +3,9 @@ functions
     cleanup (all)
     manual update of existing objects
     deploy new functions to dev db
+    delete stream collection/functions
+    delete ClusterCity
 events (create)
     test workflow
+npm
+    capacitor 1.4.0
