@@ -190,7 +190,7 @@ export class StateUser implements NgxsOnInit
         (
             take(1),
             tap((authData: FirebaseUser) => patchState({ authData, authenticating: false, authenticated: authData != null })),
-            switchMap((authData: FirebaseUser) => authData == null ? of(null) : dispatch(new ActionUserWatch(this.service.parseId(authData)))),
+            switchMap((authData: FirebaseUser) => authData == null ? of(patchState({initializing: false})) : dispatch(new ActionUserWatch(this.service.parseId(authData)))),
             catchError((error: Error) => of(patchState({error, authenticating: false, initializing: false})))
         );
     }
