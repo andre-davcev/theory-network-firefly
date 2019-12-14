@@ -198,63 +198,26 @@ users (model)
     subscriptionList : Array<string>;
     tokens           : Array<string>;
 users (create)
-    providerId       : string;
-    language         : string;
-    email            : string;
-    phoneNumber      : string;
-    location         : Location;
-    dateLoggedIn     : firestore.Timestamp;
-    profile          : UserProfile;
-    roleEditors      : Record<string, string>;
-    roleAdmins       : Record<string, string>;
-    stream           : Record<string, Stream>;
-    streamList       : Array<string>;
-    subscriptions    : Record<string, Subscription>;
-        on: boolean;
-    subscriptionList : Array<string>;
-    tokens           : Array<string>;
-
     generate and add first alert
-    generate new stream
-
-    // To Do: Here
+    generate new stream using location
 users (update)
-    providerId       : string;
-    language         : string;
-    email            : string;
-    phoneNumber      : string;
-    location         : Location;
-    dateLoggedIn     : firestore.Timestamp;
-    profile          : UserProfile;
-    roleEditors      : Record<string, string>;
-    roleAdmins       : Record<string, string>;
-    stream           : Record<string, Stream>;
-    streamList       : Array<string>;
-    subscriptions    : Record<string, Subscription>;
-        on: boolean;
-    subscriptionList : Array<string>;
-    tokens           : Array<string>;
-
+    if user.location.cityId changed
+        regenerate stream
     if token count passes 10
         delete oldest
-    if subscription turned on
-    if dateLoggedIn & city changed then generate new stream
+    if after.subscriptionList added
+        increment cluster.subscriberCount
+    if after.subscriptionList removed
+        decrement cluster.subscriberCount
 users (delete)
-    providerId       : string;
-    language         : string;
-    email            : string;
-    phoneNumber      : string;
-    location         : Location;
-    dateLoggedIn     : firestore.Timestamp;
-    profile          : UserProfile;
-    roleEditors      : Record<string, string>;
-    roleAdmins       : Record<string, string>;
-    stream           : Record<string, Stream>;
-    streamList       : Array<string>;
-    subscriptions    : Record<string, Subscription>;
-        on: boolean;
-    subscriptionList : Array<string>;
-    tokens           : Array<string>;
+    delete alerts/{userId}
+    delete clusters/{userId}
+    delete events/{userId}
+    delete icons/{userId}
+    delete images/{userId}
+
+    for user.subscriptionList
+        decrement clusters/{clusterId}/subscriberCount
 user (cron)
     get users collection
     for each user logged in the past 30 days
@@ -265,7 +228,6 @@ user (cron)
         loop through city.clusters
             generate score using:
                 event count
-                event ratio
                 distance ranking
         sort list based on score descending
 general (all)
