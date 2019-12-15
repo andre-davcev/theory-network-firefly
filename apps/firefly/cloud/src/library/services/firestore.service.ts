@@ -24,6 +24,19 @@ export class ServiceFirestore
         };
     }
 
+    public static arrayDiff(a: Array<any>, b: Array<any>): Array<any>
+    {
+        const lengthA: number = a.length;
+        const lengthB: number = b.length;
+
+        if (lengthA === lengthB) { return []; }
+
+        const larger:    Array<any> = lengthA > lengthB ? a : b;
+        const smaller:   Array<any> = lengthA < lengthB ? a : b;
+
+        return larger.filter((item: any) => !smaller.includes(item));
+    }
+
     public static mapStatus(before: Record<string, any> = {}, after: Record<string, any> = {}): Status
     {
         const totalBefore: number = Object.keys(before).length;
