@@ -1,31 +1,3 @@
-events (update)
-    if (before.city.cityId !== after.city.cityId)
-        cityBefore = cities/{before.city.cityId}
-        cityAfter  = cities/{after.city.cityId}
-        cityClustersBefore = cityBefore.clusters
-        cityClustersAfter  = cityAfter.clusters
-        for before.clusters
-            eventsInCity = cityClustersBefore[clusterId]
-            if (eventsInCity === 1)
-                delete cityClustersBefore[clusterId]
-            else
-                cityClustersBefore[clusterId] = eventsInCity - 1
-        for after.clusters
-            eventsInCity = cityClustersAfter[clusterId]
-            cityClustersAfter[clusterId] = eventsInCity == null ? 1 : eventsInCity + 1
-        save cityBefore
-        save cityAfter
-    if removed cluster || (!before.timeNotifyComplete && after.timeNotifyComplete)
-        cityClusters = cities/{after.city.cityId}/clusters
-        eventsInCity = city[clusterId]
-        if (eventsInCity === 1)
-            delete cityClusters[clusterId]
-        else
-            cityClusters[clusterId] = eventsInCity - 1
-    if added cluster
-        cityClusters = cities/{after.city.cityId}/clusters
-        eventsInCity = cityClusters[clusterId]
-        cityClusters[clusterId] = eventsInCity == null ? 1 : eventsInCity + 1
 events (delete)
     if (!event.timeNotifyComplete)
         cityClusters = cities/{after.city.cityId}/clusters
