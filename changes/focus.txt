@@ -1,10 +1,6 @@
 functions
-    plan/organize
-    cleanup (all)
-    manual update of existing objects
     deploy new functions to dev db
-    delete stream collection/functions
-    delete ClusterCity
+    test cloud functions
 events (create)
     test workflow
 npm
