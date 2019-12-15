@@ -11,15 +11,9 @@ firestore.
 document('images/{id}').
 onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: Record<string, any> = ServiceFirestore.create(snapshot,
-    {
-        version: Version.Images
-    });
+    const object: Record<string, any> = ServiceFirestore.create(snapshot, { version: Version.Images });
 
-    return Promise.all
-    ([
-        snapshot.ref.update(object)
-    ]);
+    return snapshot.ref.update(object);
 });
 
 export { ImagesCreate };

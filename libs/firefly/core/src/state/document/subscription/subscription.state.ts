@@ -50,6 +50,7 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
                 bucketPath      : null,
                 private         : true,
                 subscriberCount : 0,
+                events          : [],
                 on              : false
             },
             {

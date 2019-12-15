@@ -11,10 +11,7 @@ firestore.
 document('alerts/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: Record<string, any> = ServiceFirestore.create(snapshot,
-    {
-        version: Version.Clusters
-    });
+    const object: Record<string, any> = ServiceFirestore.create(snapshot, { version: Version.Clusters });
 
     return snapshot.ref.update(object);
 });
