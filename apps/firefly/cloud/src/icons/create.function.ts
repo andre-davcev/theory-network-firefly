@@ -11,15 +11,9 @@ firestore.
 document('icons/{id}').
 onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: Record<string, any> = ServiceFirestore.create(snapshot,
-    {
-        version: Version.Icons
-    });
+    const object: Record<string, any> = ServiceFirestore.create(snapshot, { version: Version.Icons});
 
-    return Promise.all
-    ([
-        snapshot.ref.update(object)
-    ]);
+    return snapshot.ref.update(object);
 });
 
 export { IconsCreate };

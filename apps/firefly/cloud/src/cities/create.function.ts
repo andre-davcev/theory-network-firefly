@@ -35,17 +35,6 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 
     object.nearby = nearby;
 
-    promises.push(snapshot.ref.update(object));
-)
-/*
-    for each city
-        get distance to city in km ServiceCity.distanceBetweenPoints
-        filter out cities above km threshold (200km)
-        city.nearby[city.id] = distanceKm
-    update city object
-    update fkCity.nearby[city.id] = distanceKm
-*/
-
     return snapshot.ref.update(object);
 });
 

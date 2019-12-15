@@ -8,4 +8,5 @@ export interface Cluster extends FirebaseDocument
     bucketPath      : string;
     private         : boolean;
     subscriberCount : number;
+    events          : Array<string>;
 }

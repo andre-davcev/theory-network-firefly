@@ -1,26 +1,3 @@
-clusters (model)
-    name            : string;
-    tagline         : string;
-    description     : string;
-    bucketPath      : string;
-    private         : boolean;
-    subscriberCount : number;
-    events          : Array<string>;
-clusters (create)
-    set cluster.subscriberCount = 0
-clusters (update)
-    N/A
-clusters (delete)
-    query for events where clusterId in event.clusters
-    for each event
-        remove event.clusters[clusterId]
-    query for users.subscriptionList
-        remove user.subscriptions[clusterId]
-        remove user.subscriptionList[clusterId]
-    query for cities where clusterId in city.clusters
-        remove city.clusters[clusterId]
-        remove city.clusterList[clusterId]
-    delete streams/{clusterId}
 events (model)
     name               : string;
     tagline            : string;
@@ -34,8 +11,6 @@ events (model)
     timeNotify         : string;
     timeNotifyComplete : boolean;
     clusters           : Array<string>;
-events (create)
-    create city if new
 events (update)
     if (before.city.cityId !== after.city.cityId)
         cityBefore = cities/{before.city.cityId}
@@ -82,42 +57,18 @@ events (cron)
         for each user
             create alert with alert.userId and with alert.tokens
             set event.timeNotifyComplete = true
-icons (model)
-    name       : string;
-    bucketPath : string;
-    mediaType  : string;
-icons (create)
-    name       : string;
-    bucketPath : string;
-    mediaType  : string;
-icons (update)
-    name       : string;
-    bucketPath : string;
-    mediaType  : string;
 icons (delete)
     name       : string;
     bucketPath : string;
     mediaType  : string;
 
-    delete icon from storage
-images (model)
-    name       : string;
-    bucketPath : string;
-    mediaType  : string;
-images (create)
-    name       : string;
-    bucketPath : string;
-    mediaType  : string;
-images (update)
-    name       : string;
-    bucketPath : string;
-    mediaType  : string;
+    delete icon from storage (except @medium)
 images (delete)
     name       : string;
     bucketPath : string;
     mediaType  : string;
 
-    delete image from storage
+    delete image from storage (except @medium)
 users (model)
     providerId       : string;
     language         : string;
