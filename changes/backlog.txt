@@ -1,3 +1,7 @@
+alerts (funtions create)
+    for each token
+        send push notification using name/description
+    update events/{eventId}/timeNotifyComplete = true
 app (forms)
   required fields styling
 app (lists)
