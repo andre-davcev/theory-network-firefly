@@ -12,6 +12,7 @@ export interface Alert extends FirebaseDocument
     dateTime    : firestore.FieldValue;
     read        : boolean;
     tokens      : Array<string>;
+    url?        : string;
 
     metadata : AlertMetadata;
 }
