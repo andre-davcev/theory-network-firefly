@@ -12,13 +12,13 @@ export class ServiceCities
         return ServiceCities.distanceBetween(geopoint1.latitude, geopoint1.longitude, geopoint2.latitude, geopoint2.longitude);
     }
 
-    public static async createIfNew(database: Firestore, event: Record<string, any>): Promise<boolean>
+    public static async createIfNew(database: Firestore, event: Record<string, any>): Promise<WriteResult>
     {
         const city:         Record<string, any> = event.city;
         const clustersList: Array<string>       = event.clusters;
         const cityDoc:      DocumentSnapshot    = await database.collection('cities').doc(city.cityId).get();
 
-        if (cityDoc.exists) { return false; }
+        if (cityDoc.exists) { return null; }
 
         const clusterEvents: Record<string, number> = {};
 
@@ -26,7 +26,7 @@ export class ServiceCities
             clusterEvents[clusterId] = 1
         );
 
-        await cityDoc.ref.create
+        return cityDoc.ref.create
         ({
             geopoint:  city.geopoint,
             city:      city.city,
@@ -37,8 +37,6 @@ export class ServiceCities
             clusterEvents,
             clustersList
         });
-
-        return true;
     }
 
     private static degrees2Radians(degrees: number): number
