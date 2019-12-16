@@ -8,7 +8,5 @@ export interface City extends FirebaseDocument
     region:    string;
     country:   string;
 
-    nearby:         Record<string, number>;
-    clustersEvents: Record<string, number>;
-    clusterList:    Array<string>;
+    nearby: Record<string, number>;
 }

@@ -15,8 +15,7 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     const queries: Array<Promise<QuerySnapshot>> =
     [
         database.collection('events').where('clusters',        'array-contains', id).get(),
-        database.collection('users').where('subscriptionList', 'array-contains', id).get(),
-        database.collection('cities').where('clusterList',     'array-contains', id).get()
+        database.collection('users').where('subscriptionList', 'array-contains', id).get()
     ];
     const updates: Array<Promise<WriteResult>> = [];
 
@@ -24,7 +23,6 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 
     const events: Array<QueryDocumentSnapshot> = query[0].docs;
     const users:  Array<QueryDocumentSnapshot> = query[1].docs;
-    const cities: Array<QueryDocumentSnapshot> = query[2].docs;
 
     events.forEach((snapshot: QueryDocumentSnapshot) =>
         updates.push(snapshot.ref.update({ clusters: FieldValue.arrayRemove(id)}))
@@ -44,20 +42,6 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
             subscriptions
         }))
     });
-
-    cities.forEach((snapshot: QueryDocumentSnapshot) =>
-    {
-        const clusters: Record<string, any> = snapshot.data().clusters;
-
-        delete clusters[id];
-
-        updates.push(snapshot.ref.update
-        ({
-            clusterList : FieldValue.arrayRemove(id),
-            clusters
-        }))
-    });
-
 
     return Promise.all(updates);
 });

@@ -68,10 +68,10 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 geopoint : null,
                 city     : null,
 
-                timeStart          : null,
-                timeEnd            : null,
-                timeNotify         : null,
-                timeNotifyComplete : true,
+                timeStart      : null,
+                timeEnd        : null,
+                timeNotify     : null,
+                notifyComplete : true,
 
                 clusters : []
             },
