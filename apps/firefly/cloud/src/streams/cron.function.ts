@@ -7,7 +7,7 @@ const StreamsCreate =
 
 runWith( { memory: '2GB' }).
 pubsub.
-schedule('0 0 * * *').
+schedule('0 2 * * 1'). // Monday's @ 2AM
 onRun(async (context: EventContext) =>
 {
     const database: Firestore = firestore();
