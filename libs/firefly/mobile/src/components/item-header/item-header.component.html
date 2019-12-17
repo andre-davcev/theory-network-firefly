@@ -6,12 +6,12 @@
     <p class="cpt-icon-placeholder" *ngIf="!iconUrl">{{ iconPlaceholder }}</p>
 </div>
 <form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
-    <input class="cpt-title"  type="text" [formControlName]="title" [placeholder]="titlePlaceholder" *ngIf="!iconOnly">
-    <div class="error-messages" *ngIf="edit && hasError(title)">
+    <input class="cpt-title"  type="text" [formControlName]="title" [placeholder]="titlePlaceholder">
+    <div  class="error-messages" *ngIf="!iconUrl && edit && hasError(title)">
         Please add a name
     </div>
-    <input class="cpt-subtitle" type="text" [formControlName]="subtitle" [placeholder]="subtitlePlaceholder" *ngIf="!iconOnly">
-    <div class="error-messages" *ngIf="edit && hasError(subtitle)">
+    <input class="cpt-subtitle" type="text" [formControlName]="subtitle" [placeholder]="subtitlePlaceholder">
+    <div  class="error-messages" *ngIf="!iconUrl && edit && hasError(subtitle)">
         Please add a tagline
     </div>
 </form>

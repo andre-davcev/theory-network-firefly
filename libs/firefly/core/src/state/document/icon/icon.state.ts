@@ -1,6 +1,6 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { switchMap, tap } from 'rxjs/operators';
-
+import { switchMap, tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { CoreEnum } from '@theory/core';
 import { ActionStorageUrlGet, ActionStorageUpload, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
@@ -120,13 +120,15 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
         const data:    Icon           = StateIcon.dataState(state);
         const dataUri: string         = StateIcon.dataUri(state);
 
+        alert('data uri: ' + dataUri);
         (this.service as ServiceIcons).addMetadata(data, this.collection, dataUri);
 
         return dispatch(new ActionIconPatch(data)).
         pipe
         (
             switchMap(() => dispatch(new ActionStorageUpload(dataUri, data.bucketPath))),
-            switchMap(() => super.create(context))
+            switchMap(() => {alert('finished calling upload storage'); return super.create(context)}),
+            catchError((uploadError: any) =>  {alert('error finished: ' + uploadError); return of(true)})
         );
     }
 

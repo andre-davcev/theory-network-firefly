@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable, from } from 'rxjs';
-import { switchMap, map, finalize } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { switchMap, map, finalize, catchError } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
-import { ModalController } from '@ionic/angular'
+import { ModalController, NavController } from '@ionic/angular'
 import { StatusBarStyle, CameraPhoto, CameraSource, CameraResultType, CameraOptions, Plugins } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateIcon, ActionUserIconsReset, ActionIconUriSet, ActionClusterIconPathSet, ActionIconSetId, MockIconId } from '@firefly/core';
-import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
+import { StateIcon, ActionIconPatch, Icon, ActionUserIconsReset, ActionIconUriSet, ActionClusterIconPathSet, ActionIconSetId, MockIconId, ActionIconSave } from '@firefly/core';
+import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { Pages } from '../pages.enum';
 
 const { Camera } = Plugins;
@@ -28,10 +28,13 @@ export class PageAssetIcon
 
     public Pages: any = Pages;
 
-    constructor(private store: Store, private modal: ModalController)
-    {
-
-    }
+    constructor
+    (
+      private store: Store,
+      private modal: ModalController,
+      private navController: NavController
+    )
+    {}
 
     ionViewWillEnter()
     {
@@ -78,5 +81,37 @@ export class PageAssetIcon
       {
           this.store.dispatch(new ActionIconSetId(MockIconId));
       }
+    }
+
+    public save(): void
+    {
+        const icon: Icon = this.store.selectSnapshot(StateIcon.data());
+
+        const partial: Partial<Icon> =
+        {
+            name : icon.name
+        };
+
+        this.store.dispatch
+        ([
+            new ActionMobileLoadingShow(),
+            new ActionIconPatch(partial)
+        ]).
+        pipe
+        (
+            /*switchMap(() =>
+              this.store.dispatch( new ActionIconPatch(partial))),*/
+            switchMap(() => this.store.dispatch(new ActionIconSave())),
+            map(() => 'Cluster was successfully created!'),
+            catchError((uploadError: any) =>{alert('error: ' + uploadError); return of('An error occurred creating the icon!')}),
+            finalize(() =>
+                this.store.dispatch(new ActionMobileLoadingHide())
+            )
+        ).
+        subscribe((message: string) =>
+        {
+            this.store.dispatch(new ActionMobileToast(message));
+            this.navController.back();
+        });
     }
 }
