@@ -3,8 +3,6 @@ import { firestore } from 'firebase-admin';
 
 export class ServiceCities
 {
-    public static threshold: number = 200;
-
     private static earthRadius: number = 6371;
 
     public static distanceBetweenPoints(geopoint1: firestore.GeoPoint, geopoint2: firestore.GeoPoint)

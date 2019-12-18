@@ -1,7 +1,7 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { FieldValue, DocumentSnapshot, CollectionReference, Firestore, WriteResult } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceCities, ServiceFirestore } from '../library';
+import { ServiceCities, ServiceFirestore, Event } from '../library';
 
 const database: Firestore = db();
 
@@ -11,8 +11,8 @@ firestore.
 document('events/{id}').
 onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
 {
-    const before: any = change.before.data();
-    const after:  any = change.after.data();
+    const before: Event = change.before.data() as Event;
+    const after:  Event = change.after.data()  as Event;
 
     const promises: Array<Promise<WriteResult>> = [];
 

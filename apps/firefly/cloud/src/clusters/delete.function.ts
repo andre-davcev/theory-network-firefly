@@ -1,6 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, FieldValue, WriteResult, QuerySnapshot, QueryDocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
+import { User, Subscription } from '../library';
 
 const database: Firestore = db();
 
@@ -24,13 +25,17 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     const events: Array<QueryDocumentSnapshot> = query[0].docs;
     const users:  Array<QueryDocumentSnapshot> = query[1].docs;
 
+    let user: User;
+
     events.forEach((snapshot: QueryDocumentSnapshot) =>
         updates.push(snapshot.ref.update({ clusters: FieldValue.arrayRemove(id)}))
     );
 
     users.forEach((snapshot: QueryDocumentSnapshot) =>
     {
-        const subscriptions: Record<string, any> = snapshot.data().subscriptions;
+        user = snapshot.data() as User;
+
+        const subscriptions: Record<string, Subscription> = user.subscriptions;
 
         delete subscriptions[id];
 

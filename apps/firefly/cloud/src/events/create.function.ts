@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
+import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version, ServiceCities } from '../library';
+import { ServiceFirestore, Version, ServiceCities, Event } from '../library';
 
 const database: Firestore = db();
 
@@ -11,10 +11,7 @@ firestore.
 document('events/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: Record<string, any> = ServiceFirestore.create(snapshot,
-    {
-        version: Version.Events
-    });
+    const object: Event = ServiceFirestore.create<Event>(snapshot, { version: Version.Events });
 
     return Promise.all
     ([

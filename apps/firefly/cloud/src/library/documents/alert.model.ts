@@ -1,6 +1,6 @@
 import { FirebaseDocument } from '../interfaces';
 import { firestore } from 'firebase/app';
-import { AlertMetadata } from '../models/alert.metadata.model';
+import { MetadataAlert } from '../models/alert.metadata';
 
 export interface Alert extends FirebaseDocument
 {
@@ -14,5 +14,5 @@ export interface Alert extends FirebaseDocument
     tokens      : Array<string>;
     url?        : string;
 
-    metadata : AlertMetadata;
+    metadata? : MetadataAlert;
 }
