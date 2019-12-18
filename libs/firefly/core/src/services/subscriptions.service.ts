@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { ServiceFirestore } from '@theory/firebase';
-import { Subscription } from '@firefly/core/documents';
+import { Subscription } from '@firefly/cloud';
 import { FormBuilder } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })

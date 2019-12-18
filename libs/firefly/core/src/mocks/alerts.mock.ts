@@ -1,4 +1,4 @@
-import { Alert } from '@firefly/core/documents';
+import { Alert } from '@firefly/cloud';
 
 export const MockAlerts: Array<Alert> = [];
 [

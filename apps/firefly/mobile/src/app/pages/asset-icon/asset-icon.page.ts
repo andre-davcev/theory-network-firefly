@@ -6,8 +6,9 @@ import { FormGroup } from '@angular/forms';
 import { ModalController, NavController } from '@ionic/angular'
 import { StatusBarStyle, CameraPhoto, CameraSource, CameraResultType, CameraOptions, Plugins } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateIcon, ActionIconPatch, Icon, ActionUserIconsReset, ActionIconUriSet, ActionClusterIconPathSet, ActionIconSetId, MockIconId, ActionIconSave } from '@firefly/core';
+import { StateIcon, ActionIconPatch, ActionUserIconsReset, ActionIconUriSet, ActionClusterIconPathSet, ActionIconSetId, MockIconId, ActionIconSave } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
+import { Icon } from '@firefly/cloud';
 import { Pages } from '../pages.enum';
 
 const { Camera } = Plugins;

@@ -1,4 +1,4 @@
-import { MetadataUrl } from '@theory/firebase';
+import { MetadataUrl } from '../interfaces';
 
 export interface AlertMetadata extends MetadataUrl
 {

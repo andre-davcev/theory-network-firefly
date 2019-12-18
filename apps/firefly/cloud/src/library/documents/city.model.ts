@@ -1,5 +1,5 @@
 import { firestore } from 'firebase/app';
-import { FirebaseDocument } from '@theory/firebase';
+import { FirebaseDocument } from '../interfaces';
 
 export interface City extends FirebaseDocument
 {

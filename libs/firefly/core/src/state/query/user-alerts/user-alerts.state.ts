@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { Alert } from '@firefly/core/documents';
+import { Alert } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
 import { StateQuery } from '@theory/ngxs';
 

@@ -1,4 +1,4 @@
-import { FirebaseDocument } from '@theory/firebase';
+import { FirebaseDocument } from '../interfaces';
 import { firestore } from 'firebase';
 
 import { UserProfile } from '../models';

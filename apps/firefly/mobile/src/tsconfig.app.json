@@ -35,6 +35,7 @@
       "@theory/core/*": [
         "../../../../libs/core/src/*"
       ],
+
       "@theory/core/feature/*": [
         "../../../../libs/core/src/features/*"
       ],
@@ -91,6 +92,9 @@
       ],
       "@firefly/core/state/*": [
         "../../../../libs/firefly/core/src/state/*"
+      ],
+      "@firefly/cloud": [
+        "../../../../apps/firefly/cloud/src/library/index.ts"
       ],
       "@firefly/mobile": [
         "../../../../libs/firefly/mobile/index.ts"

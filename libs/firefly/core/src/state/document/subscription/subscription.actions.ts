@@ -1,4 +1,4 @@
-import { Subscription } from '@firefly/core/documents';
+import { Subscription } from '@firefly/cloud';
 
 import { ActionsSubscription } from './subscription.actions.enum';
 import { CoreEnum } from '@theory/core';

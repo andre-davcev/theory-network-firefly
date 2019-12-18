@@ -1,4 +1,3 @@
-export * from './alert.metadata.model';
 export * from './alert.model';
 export * from './beacon.model';
 export * from './cluster.model';

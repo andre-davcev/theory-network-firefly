@@ -1,4 +1,4 @@
-import { Icon } from '@firefly/core/documents';
+import { Icon } from '@firefly/cloud';
 
 import { ActionsUserIcons } from './user-icons.actions.enum';
 import { firestore } from 'firebase/app';

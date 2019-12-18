@@ -1,5 +1,5 @@
 import { StateQueryModel } from '@theory/ngxs';
-import { Alert } from '@firefly/core/documents';
+import { Alert } from '@firefly/cloud';
 
 export interface StateUserAlertsModel extends StateQueryModel<Alert>
 {

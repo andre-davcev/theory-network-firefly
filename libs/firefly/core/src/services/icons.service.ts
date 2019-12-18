@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Icon } from '../documents';
+import { Icon } from '@firefly/cloud';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ServiceFirestore } from '@theory/firebase';
 import { CoreEnum, ValidatorsExtended } from '@theory/core';

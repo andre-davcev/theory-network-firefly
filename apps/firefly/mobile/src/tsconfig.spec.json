@@ -90,6 +90,9 @@
       "@firefly/core/*": [
         "../../../../libs/firefly/core/src/*"
       ],
+      "@firefly/cloud": [
+        "../../../../apps/firefly/cloud/src/library/index.ts"
+      ],
       "@firefly/mobile": [
         "../../../../libs/firefly/mobile/index.ts"
       ],

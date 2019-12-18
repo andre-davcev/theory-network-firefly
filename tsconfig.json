@@ -43,6 +43,7 @@
       "@firefly/core/*": ["libs/firefly/core/src/*"],
       "@firefly/core/component/*": ["libs/firefly/core/src/components/*"],
       "@firefly/core/state/*": ["libs/firefly/core/src/state/*"],
+      "@firefly/cloud": ["apps/firefly/cloud/src/library/index.ts"],
       "@firefly/mobile": ["libs/firefly/mobile/index.ts"],
       "@firefly/mobile/*": ["libs/firefly/mobile/src/*"],
       "@firefly/mobile/component/*": ["libs/firefly/mobile/src/components/*"],

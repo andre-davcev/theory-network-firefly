@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { CoreEnum } from '@theory/core';
 import { ActionStorageUrlGet, ActionStorageUpload, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
-import { Icon } from '@firefly/core/documents';
+import { Icon } from '@firefly/cloud';
 import { ServiceIcons } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 

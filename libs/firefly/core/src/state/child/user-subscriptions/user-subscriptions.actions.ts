@@ -1,4 +1,4 @@
-import { Subscription } from '@firefly/core/documents';
+import { Subscription } from '@firefly/cloud';
 
 import { ActionsUserSubscriptions } from './user-subscriptions.actions.enum';
 import { firestore } from 'firebase/app';

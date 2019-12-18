@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Image } from '../documents';
+import { Image } from '@firefly/cloud';
 import { FormBuilder } from '@angular/forms';
 import { ServiceFirestore } from '@theory/firebase';
 import { CoreEnum } from '@theory/core';

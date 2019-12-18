@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Cluster } from '@firefly/core/documents';
+import { Cluster } from '@firefly/cloud';
 import { ServiceFirestore } from '@theory/firebase';
 import { FormGroup, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { ValidatorsExtended } from '@theory/core';

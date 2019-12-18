@@ -1,6 +1,6 @@
 
 import { ActionsImage } from './image.actions.enum';
-import { Image } from '@firefly/core/documents';
+import { Image } from '@firefly/cloud';
 import { CoreEnum } from '@theory/core';
 import { firestore } from 'firebase/app';
 import { MockImagePath } from '@firefly/core/mocks';

@@ -7,7 +7,8 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateStorage, StorageImage } from '@theory/firebase'
 import { BaseComponent } from '@theory/core';
 import { Store, Select } from '@ngxs/store';
-import { StateUserIcons, Icon} from '@firefly/core';
+import { StateUserIcons } from '@firefly/core';
+import { Icon } from '@firefly/cloud';
 import { Pages } from '../pages.enum';
 
 @Component
