@@ -1,7 +1,7 @@
 import { firestore } from 'firebase-admin';
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
 import { Status } from '../enums';
-import { ForeignKeyChange } from '../interfaces';
+import { ForeignKeyChange, FirebaseDocument } from '../interfaces';
 
 export class ServiceFirestore
 {
@@ -10,13 +10,13 @@ export class ServiceFirestore
         return JSON.parse(JSON.stringify(object));
     }
 
-    public static create(snapshot: DocumentSnapshot, object: Record<string, any> = {}): Record<string, any>
+    public static create<T>(snapshot: DocumentSnapshot, object: Partial<T>): T
     {
         const id:        string               = snapshot.id;
         const timestamp: firestore.FieldValue = firestore.FieldValue.serverTimestamp();
 
         return {
-            ...object,
+            ...object as T,
 
             id,
             dateCreated: timestamp,

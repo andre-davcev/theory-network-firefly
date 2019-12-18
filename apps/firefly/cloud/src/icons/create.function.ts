@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version } from '../library';
+import { ServiceFirestore, Version, Icon } from '../library';
 
 const database: Firestore = db();
 
@@ -11,7 +11,7 @@ firestore.
 document('icons/{id}').
 onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: Record<string, any> = ServiceFirestore.create(snapshot, { version: Version.Icons});
+    const object: Icon = ServiceFirestore.create<Icon>(snapshot, { version: Version.Icons});
 
     return snapshot.ref.update(object);
 });

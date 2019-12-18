@@ -1,5 +1,6 @@
 export * from './alert.model';
 export * from './beacon.model';
+export * from './city.model';
 export * from './cluster.model';
 export * from './event.model';
 export * from './icon.model';

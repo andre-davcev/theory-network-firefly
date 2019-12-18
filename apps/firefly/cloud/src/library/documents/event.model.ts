@@ -2,6 +2,7 @@ import { firestore } from 'firebase/app';
 
 import { FirebaseDocument } from '../interfaces';
 import { Location } from '../models';
+import { MetadataEvent } from '../models/event.metadata';
 
 export interface Event extends FirebaseDocument
 {
@@ -20,4 +21,6 @@ export interface Event extends FirebaseDocument
 
     notifyComplete : boolean;
     clusters       : Array<string>;
+
+    metadata?: MetadataEvent;
 }
