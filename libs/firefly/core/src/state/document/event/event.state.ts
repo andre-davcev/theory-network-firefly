@@ -4,7 +4,7 @@ import { ActionMapSearchResultClear, MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
-import { Event, Image } from '@firefly/core/documents';
+import { Event, Image } from '@firefly/cloud';
 import { ActionImageCreate, ActionImagePatch, ActionImageSetId, StateImage, ActionImageClear, ActionImageUriSet } from '@firefly/core/state/document/image';
 
 import { StateEventModel } from './event.state.model';

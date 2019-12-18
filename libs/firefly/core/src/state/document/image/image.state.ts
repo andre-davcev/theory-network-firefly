@@ -4,7 +4,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { CoreEnum } from '@theory/core';
 import { StateStorage, ActionStorageUrlGet, ActionStorageUpload, ImageSize, StorageImage } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
-import { Image } from '@firefly/core/documents';
+import { Image } from '@firefly/cloud';
 import { ServiceImages } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 

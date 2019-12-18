@@ -3,7 +3,7 @@ import { Action, State, StateContext, Store, Selector } from '@ngxs/store';
 
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { Cluster, Icon } from '@firefly/core/documents';
+import { Cluster, Icon } from '@firefly/cloud';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 import { ActionIconCreate, ActionIconPatch, ActionIconClear, ActionIconUriSet, StateIcon, ActionIconSetId } from '@firefly/core/state/document/icon';

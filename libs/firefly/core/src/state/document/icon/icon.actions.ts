@@ -1,4 +1,4 @@
-import { Icon } from '@firefly/core/documents';
+import { Icon } from '@firefly/cloud';
 
 import { ActionsIcon } from './icon.actions.enum';
 import { CoreEnum } from '@theory/core';

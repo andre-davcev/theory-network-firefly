@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User as FirebaseUser } from 'firebase/app';
 import { ServiceAsset } from '@theory/firebase';
-import { User } from '@firefly/core/documents';
+import { User } from '@firefly/cloud';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 

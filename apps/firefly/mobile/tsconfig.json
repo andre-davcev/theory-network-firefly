@@ -26,6 +26,9 @@
       ],
       "@firefly/page/*": [
         "./src/app/pages/*"
+      ],
+      "@firefly/cloud": [
+        "../cloud/src/library/index.ts"
       ]
     }
   }

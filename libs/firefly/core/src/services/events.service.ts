@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Event } from '@firefly/core/documents';
+import { Event } from '@firefly/cloud';
 import { ServiceFirestore } from '@theory/firebase';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, ValidatorsExtended } from '@theory/core';

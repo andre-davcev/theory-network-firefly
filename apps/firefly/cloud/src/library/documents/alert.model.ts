@@ -1,6 +1,6 @@
-import { FirebaseDocument } from '@theory/firebase';
+import { FirebaseDocument } from '../interfaces';
 import { firestore } from 'firebase/app';
-import { AlertMetadata } from './alert.metadata.model';
+import { AlertMetadata } from '../models/alert.metadata.model';
 
 export interface Alert extends FirebaseDocument
 {

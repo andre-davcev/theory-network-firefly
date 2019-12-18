@@ -2,7 +2,7 @@ import { State, Action, StateContext, Store } from '@ngxs/store';
 
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { Subscription } from '@firefly/core/documents';
+import { Subscription } from '@firefly/cloud';
 import { ServiceSubscriptions } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 

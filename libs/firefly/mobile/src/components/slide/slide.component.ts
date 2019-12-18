@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Alert } from '@firefly/core';
+import { Alert } from '@firefly/cloud';
 
 @Component
 ({

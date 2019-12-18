@@ -4,7 +4,8 @@ import { IonSlides } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { Alert, StateUserAlerts } from '@firefly/core';
+import { StateUserAlerts } from '@firefly/core';
+import { Alert } from '@firefly/cloud';
 
 import { Pages } from '../pages.enum';
 import { Navigate } from '@ngxs/router-plugin';

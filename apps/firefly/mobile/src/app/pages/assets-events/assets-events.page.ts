@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { StateUserEvents, Event, ActionEventSetId } from '@firefly/core';
+import { StateUserEvents, ActionEventSetId } from '@firefly/core';
+import { Event } from '@firefly/cloud';
 import { Observable } from 'rxjs';
 import { Navigate } from '@ngxs/router-plugin';
 import { Pages } from '../pages.enum';

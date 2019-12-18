@@ -1,4 +1,4 @@
-import { FirebaseDocument } from '@theory/firebase';
+import { FirebaseDocument } from '../interfaces';
 
 export interface Cluster extends FirebaseDocument
 {

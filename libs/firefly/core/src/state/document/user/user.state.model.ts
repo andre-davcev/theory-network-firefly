@@ -1,4 +1,4 @@
-import { User } from '@firefly/core/documents';
+import { User } from '@firefly/cloud';
 import { StateAssetModel } from '@firefly/core/interfaces';
 
 export interface StateUserModel extends StateAssetModel<User>

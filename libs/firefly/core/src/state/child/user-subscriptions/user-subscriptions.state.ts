@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { Subscription } from '@firefly/core/documents';
+import { Subscription } from '@firefly/cloud';
 import { ServiceSubscriptions } from '@firefly/core/services';
 
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';

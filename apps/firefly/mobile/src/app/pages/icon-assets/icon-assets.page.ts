@@ -1,13 +1,11 @@
-import { Observable, forkJoin, of } from 'rxjs'
-import { takeUntil, switchMap } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import { switchMap } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
-import { StateUserIcons, Icon, ActionIconSetId, ActionUserIconsGetData, ActionClusterIconUriSet, ActionClusterIconPathSet, ActionClusterPatch} from '@firefly/core';
+import { StateUserIcons, ActionIconSetId, ActionUserIconsGetData, ActionClusterPatch } from '@firefly/core';
+import { Icon } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
-import { BaseComponent } from '@theory/core';
-import { url } from 'inspector';
-import { IncomingMessage } from 'http';
 
 @Component
 ({

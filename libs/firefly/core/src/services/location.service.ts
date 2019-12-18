@@ -7,7 +7,7 @@ import { firestore } from 'firebase/app';
 import { map, switchMap } from 'rxjs/operators';
 
 import { LocationCity } from '../interfaces';
-import { Location } from '../models';
+import { Location } from '@firefly/cloud';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })

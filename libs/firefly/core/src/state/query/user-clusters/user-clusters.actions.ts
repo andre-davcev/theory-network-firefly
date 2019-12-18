@@ -1,7 +1,7 @@
 
 import { firestore } from 'firebase/app';
 
-import { Cluster } from '@firefly/core/documents';
+import { Cluster } from '@firefly/cloud';
 
 import { ActionsUserClusters } from './user-clusters.actions.enum';
 

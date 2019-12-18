@@ -1,18 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Params } from '@angular/router';
 import { StatusBarStyle } from '@capacitor/core';
 import { Select, Store } from '@ngxs/store'
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Cluster, StateUserClusters, ActionClusterSetId, ActionEventClusterAdd } from '@firefly/core';
+import { StateUserClusters, ActionClusterSetId, ActionEventClusterAdd } from '@firefly/core';
+import { Cluster } from '@firefly/cloud';
 
 import { Pages } from '../pages.enum';
 import { ModalController } from '@ionic/angular';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
-import { takeUntil, switchMap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component
 ({
