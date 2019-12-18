@@ -14,14 +14,14 @@ export class ResolverPageAssetCluster implements Resolve<void>
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
 
-        if(route.params.id == null)
+        if(route.queryParams.id == null)
         {
           return this.store.dispatch(new ActionUserIconsReset).pipe(
-            switchMap(() => this.store.dispatch(new ActionClusterSetId(route.params.id)))
+            switchMap(() => this.store.dispatch(new ActionClusterSetId(route.queryParams.id)))
           )
         }
         else
-          return this.store.dispatch(new ActionClusterSetId(route.params.id))/*.
+          return this.store.dispatch(new ActionClusterSetId(route.queryParams.id))/*.
         pipe(
           switchMap(() => this.store.dispatch(new ActionUserIconsGetData()))
         );*/
