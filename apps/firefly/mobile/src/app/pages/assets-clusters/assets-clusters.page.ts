@@ -84,6 +84,6 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
             this.modalController.dismiss();
         }
         else
-          this.store.dispatch(new Navigate([Pages.AssetCluster], {queryParams: {id: cluster.id}}, {state: {isClusterDetail:true}}));
+          this.store.dispatch(new Navigate([Pages.AssetCluster], {id: cluster.id}, {state: {isClusterDetail:true}}));
     }
 }

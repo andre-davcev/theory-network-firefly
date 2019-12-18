@@ -86,24 +86,18 @@ export class PageAssetIcon
 
     public save(): void
     {
-        const icon: Icon = this.store.selectSnapshot(StateIcon.data());
-
-        const partial: Partial<Icon> =
-        {
-            name : icon.name
-        };
+        const dataUri: string = this.store.selectSnapshot(StateIcon.dataUri);
 
         this.store.dispatch
         ([
             new ActionMobileLoadingShow(),
-            new ActionIconPatch(partial)
+            new ActionIconSetId()
         ]).
         pipe
         (
-            /*switchMap(() =>
-              this.store.dispatch( new ActionIconPatch(partial))),*/
+            switchMap(() => this.store.dispatch(new ActionIconUriSet(dataUri))),
             switchMap(() => this.store.dispatch(new ActionIconSave())),
-            map(() => 'Cluster was successfully created!'),
+            map(() => 'Icon was successfully created!'),
             catchError((uploadError: any) =>{alert('error: ' + uploadError); return of('An error occurred creating the icon!')}),
             finalize(() =>
                 this.store.dispatch(new ActionMobileLoadingHide())
