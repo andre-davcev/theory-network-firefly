@@ -168,12 +168,14 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
 
     public update(context: StateContext<M>): Observable<any>
     {
-        const { getState } = context;
+        const { getState, dispatch } = context;
 
         const state:      M          = getState();
+        const data: T      = StateDocument.dataState(state);
         const formGroup:  FormGroup  = StateDocument.formGroupState(state);
         const changed:    Partial<T> = this.service.formFieldsChanged(formGroup);
         const hasChanged: boolean    = Object.keys(changed).length > 0;
+        const value:   T          = { ...data};
 
         const update$: Observable<any> = !hasChanged ?
             of(null) :
@@ -181,7 +183,8 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
 
         return update$.pipe
         (
-            map(() => changed)
+            map(() => changed),
+            switchMap(() => dispatch(this.ActionsQuerySync(value)))
         );
     }
 
