@@ -3,7 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 import { ActionUserSubscriptionsOn, ActionUserSubscriptionsOff, StateUserStream } from '@firefly/core';
-import { StreamItem } from '@firefly/cloud';
+import { StreamCluster } from '@firefly/cloud';
 
 @Component
 ({
@@ -14,7 +14,7 @@ import { StreamItem } from '@firefly/cloud';
 
 export class PageStream
 {
-    @Select(StateUserStream.data()) stream$: Observable<Array<StreamItem>>;
+    @Select(StateUserStream.data()) stream$: Observable<Array<StreamCluster>>;
 
     constructor(private store: Store) { }
 
@@ -23,7 +23,7 @@ export class PageStream
         //this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
-    public toggle(subscribed: boolean, stream: StreamItem): void
+    public toggle(subscribed: boolean, stream: StreamCluster): void
     {
         if (subscribed)
         {

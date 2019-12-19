@@ -5,3 +5,4 @@ events (create)
     test workflow
 npm
     capacitor 1.4.0
+    ngxs

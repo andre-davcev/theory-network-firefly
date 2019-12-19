@@ -1,7 +1,7 @@
 import { StateCollectionModel } from '@theory/ngxs';
-import { StreamItem } from '@firefly/cloud';
+import { StreamCluster } from '@firefly/cloud';
 
-export interface StateUserStreamModel extends StateCollectionModel<StreamItem>
+export interface StateUserStreamModel extends StateCollectionModel<StreamCluster>
 {
 
 }
