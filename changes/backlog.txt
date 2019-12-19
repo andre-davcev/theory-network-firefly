@@ -1,35 +1,38 @@
 alerts (funtions create)
     for each token
         send push notification using name/description
-    update events/{eventId}/timeNotifyComplete = true
 app (forms)
   required fields styling
 app (lists)
   empty icon/message for no data screens
-app (menu)
-  move menu selection nav to root
-  add home section to menu
-  when menu open
-    disable go button
-    disable alert detail navigation
-capacitor (push notifications)
-  implement capacitor-fcm plugin
 clusters (create/edit)
-  event add/remove workflow
+  add cluster-events query state
+  add ability to add/remove events via query state
+  clean flow styling
+events (cron)
+    cron hourly 55 mins past hour
+    find hour past current time
+    query events whose notifiedDateTime === generatedHourlyTimestamp
+    for each cluster id
+        query users where clusterId in user.subscriptionList
+        for each user
+            create alert with alert.userId and with alert.tokens
+    set event.timeNotifyComplete = true
+events (edit)
+  add create/edit
+  reverse geocode
 events (list)
   list image/name/timeStart/timeEnd
-events (edit)
-  reverse geocode
-functions
+functions (all)
   migrate to use firebase transactions
-icons (grid)
+  minimize cold start time
+  refactor to use try/catch async/await
+  enable retry on failure
+icons (grid/create/edit)
+  cleanup flow styling
+images (grid/create/edit)
   create grid view
-icons (create/edit)
-  add description back
-images (grid)
-  create grid view
-images (create/edit)
-  add description back
+  create create/edit page
 ios (dev)
   chrome debugging
 library (firebase)
@@ -40,21 +43,32 @@ library (ngxs)
   child ActionSetData (user/{userId}/subscriptions)
 library (mapbox)
   add back tokenized mapbox access token in search service
-  create search bar which limits by mapbox types ['poi', 'address']
-library (services)
-  cleanup
 location (state)
   on location found
-    search mapbox reverse geocode for city latitude/longitude
     search bigdatacloud for latitude/longitude city data
-    save to user.location
+    save to user.cityId & user.location
 map (component)
   limit mapbox search types to [address, poi]
 notifications
-  capacitor-fcm plugin
+  implement capacitor-fcm plugin
   add unread badge count
+npm
+  capacitor 1.4.0
+  ngxs 3.6.0
+security
+  create model validation security rules
+  update collection/subcollection security rules
+  create storage security rules
 subscriptions (list)
   migrate to use user.subscriptions instead of user-subscriptions
   create with on/off switch
+users (app)
+  on login & location found
+      update user:
+      {
+          dateLoggedIn,
+          location,
+          cityId
+      }
 users (state)
   setup user object watch

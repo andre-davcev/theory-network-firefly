@@ -132,9 +132,140 @@ service cloud.firestore {
     function canUpdateUserRoles(uid, ownerId)   { return canCreateUserAsset(uid, ownerId); }
     function canDeleteUserRoles(uid, ownerId)   { return canCreateUserAsset(uid, ownerId); }
 
-    function isValidDocumentCreate(uid, id, data)         { return data.version == null && data.id == null && data.userId == uid && data.dateCreated == null && data.dateUpdated == null; }
-    function isValidDocumentUpdate(uid, dataOld, dataNew) { return dataNew.version == dataOld.version && dataNew.id == dataOld.id && data.userId is string && (data.userId == uid || hasRoleAdmin(uid, user(dataOld.userId))) && dataNew.dateCreated == dataOld.dateCreated && dataNew.dateUpdated != null; }
-    function isValidAssetCreate(uid, id, data)            { return isValidDocumentCreate(uid, id, data) && data.name != null; }
-    function isValidAssetUpdate(uid, dateOld, dataNew)    { return isValidDocumentUpdate(uid, dataOld, dataNew) && dataNew.name is string; }
-  }
+    function isValidDocumentCreate(uid, id, data)
+    {
+        return data.version     == null &&
+               data.id          == null &&
+               data.userId      == uid  &&
+               data.dateCreated == null &&
+               data.dateUpdated == null &&
+               data.metadata    == null;
+    }
+
+    function isValidDocumentUpdate(uid, dataOld, dataNew)
+    {
+        return dataNew.version     == dataOld.version     &&
+               dataNew.id          == dataOld.id          &&
+               dataNew.dateCreated == dataOld.dateCreated &&
+               dataNew.dateUpdated != null                &&
+               dataNew.metadata    == null                &&
+               data.userId         is string              &&
+               (
+                    data.userId == uid ||
+                    hasRoleAdmin(uid, user(dataOld.userId))
+               );
+    }
+}
+
+
+export interface Alert extends FirebaseDocument
+{
+    name        : string;
+    description : string;
+    bucketPath  : string;
+    eventId     : string;
+    clusterId   : string;
+    dateTime    : firestore.FieldValue;
+    read        : boolean;
+    tokens      : Array<string>;
+    url?        : string;
+
+    metadata? : MetadataAlert;
+}
+
+export interface City extends FirebaseDocument
+{
+    geopoint: firestore.GeoPoint
+    city:     string;
+    region:   string;
+    country:  string;
+    nearby:   Record<string, number>;
+}
+
+export interface Cluster extends FirebaseDocument
+{
+    name            : string;
+    tagline         : string;
+    description     : string;
+    bucketPath      : string;
+    private         : boolean;
+    subscriberCount : number;
+}
+
+export interface Event extends FirebaseDocument
+{
+    name        : string;
+    tagline     : string;
+    description : string;
+    bucketPath  : string;
+    private     : boolean;
+
+    geopoint : firestore.GeoPoint;
+    city     : Location;
+
+    timeStart  : string;
+    timeEnd    : string;
+    timeNotify : string;
+
+    notifyComplete : boolean;
+    clusters       : Array<string>;
+
+    metadata?: MetadataEvent;
+}
+
+export interface Icon extends FirebaseDocument
+{
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+}
+
+export interface Image extends FirebaseDocument
+{
+    name       : string;
+    bucketPath : string;
+    mediaType  : string;
+}
+
+export interface StreamCluster extends Cluster
+{
+    score: number;
+
+    metadata?: MetadataStreamCluster;
+}
+
+export interface Subscription extends Cluster
+{
+    on: boolean;
+}
+
+export interface User extends FirebaseDocument
+{
+    providerId  : string;
+    language    : string;
+    email       : string;
+    phoneNumber : string;
+
+    location         : Location;
+    dateLoggedIn     : firestore.Timestamp;
+    profile          : UserProfile;
+    roleEditors      : Record<string, string>;
+    roleAdmins       : Record<string, string>;
+    subscriptions    : Record<string, Subscription>;
+    subscriptionList : Array<string>;
+    tokens           : Array<string>;
+
+    providerId       : string;
+    language         : string;
+    email            : string;
+    phoneNumber      : string;
+    location         : firestore.Geopoint;
+    cityId           : string;
+    dateLoggedIn     : firestore.Timestamp;
+    profile          : UserProfile;
+    roleEditors      : Record<string, string>;
+    roleAdmins       : Record<string, string>;
+    subscriptions    : Record<string, Subscription>;
+    subscriptionList : Array<string>;
+    tokens           : Array<string>;
 }
