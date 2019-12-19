@@ -1,7 +1,7 @@
 import { runWith, EventContext } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { ServiceStreams, Cluster, Event } from '../library';
+import { ServiceStreams, Cluster, Event, StreamVariable, StreamCluster } from '../library';
 import { City } from '../library';
 
 const StreamsCreate =
@@ -12,6 +12,9 @@ schedule('0 2 * * 1'). // Monday's @ 2AM
 onRun(async (context: EventContext) =>
 {
     const database: Firestore = firestore();
+
+    const collection : firestore.CollectionReference = database.collection('streams');
+    let   document   : firestore.DocumentReference;
 
     const citiesQuery:   QuerySnapshot = await database.collection('cities').get();
     const clustersQuery: QuerySnapshot = await database.collection('clusters').where('private', '==', false).get();
@@ -25,6 +28,7 @@ onRun(async (context: EventContext) =>
     const citySubscriberMax: Record<string, number>                                = {};
     const cityDistanceScore: Record<string, Record<string, number>>                = {};
     const clusterCityEvents: Record<string, Record<string, Record<string, Event>>> = {};
+    const stream:            Record<string, Record<string, StreamCluster>>         = {};
 
     const nowInMillis: number = (new Date()).getMilliseconds();
 
@@ -39,6 +43,7 @@ onRun(async (context: EventContext) =>
     let citiesNearby   : Record<string, number>;
     let cityEvents     : Record<string, Record<string, Event>>;
     let distanceScores : Record<string, number>;
+    let distanceScore  : number;
     let clusterScore   : number;
 
     clustersQuery.forEach((snapshot: QueryDocumentSnapshot) =>
@@ -58,6 +63,7 @@ onRun(async (context: EventContext) =>
         cityClusters[id]      = {};
         cityDistanceScore[id] = { [id]: 1 };
         citiesNearby          = city.nearby;
+        stream[id]            = {};
 
         Object.keys(citiesNearby).forEach((cityId: string) =>
             cityDistanceScore[id][cityId] = ServiceStreams.scoreCityDistance(citiesNearby[cityId])
@@ -91,12 +97,17 @@ onRun(async (context: EventContext) =>
         });
     });
 
-    let eventsForCity: Record<string, Event>;
-    let eventScoreTotal;
-    let subscriberMax: number;
+    let eventsForCity   : Record<string, Event>;
+    let subscriberMax   : number;
+    let subscriberRatio : number;
+    let score           : number;
+    let cityStream      : Record<string, StreamCluster>;
 
     Object.keys(cities).forEach((cityId: string) =>
     {
+        distanceScores = cityDistanceScore[cityId];
+        cityStream     = stream[cityId];
+
         Object.keys(cityClusters[cityId]).forEach((clusterId: string) =>
         {
             cluster      = clusters[clusterId];
@@ -105,21 +116,28 @@ onRun(async (context: EventContext) =>
 
             Object.keys(cityEvents).forEach((cityIdEvent: string) =>
             {
-                distanceScores = cityDistanceScore[cityIdEvent];
-                subscriberMax  = citySubscriberMax[cityIdEvent];
-                eventsForCity  = cityEvents[cityIdEvent];
+                distanceScore = distanceScores[cityIdEvent];
+                subscriberMax = citySubscriberMax[cityIdEvent];
+                eventsForCity = cityEvents[cityIdEvent];
 
                 Object.keys(eventsForCity).forEach((eventId: string) =>
                     clusterScore += eventsForCity[eventId].metadata.score
                 );
 
-/*
-                // ToDo:
-                clusterDistanceScore = clusterScore * distanceScore;
-                subscriberRatio      = cluster.subscriberCount / subscriberMax;
-                cityClusterScore     = (clusterDistanceScore * 0.2) + (clusterDistanceScore * 0.8 * subscriberRatio)
+                clusterScore += (clusterScore * distanceScore);
             });
+
+            subscriberRatio = cluster.subscriberCount / subscriberMax;
+
+            score = (clusterScore * StreamVariable.ClusterScoreWeightRaw) +
+                (clusterScore * StreamVariable.ClusterScoreWeightSubscribers * subscriberRatio);
+
+            cityStream[clusterId] = { score } as StreamCluster;
         });
+
+        document = collection.doc(cityId);
+
+        updates.push(document.set(cityStream));
     });
 
     return Promise.all(updates);

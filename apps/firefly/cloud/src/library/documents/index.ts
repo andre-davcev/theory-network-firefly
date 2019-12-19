@@ -5,6 +5,6 @@ export * from './cluster.model';
 export * from './event.model';
 export * from './icon.model';
 export * from './image.model';
-export * from './stream-item.model';
+export * from './stream-cluster.model';
 export * from './subscription.model';
 export * from './user.model';

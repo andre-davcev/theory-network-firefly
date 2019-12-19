@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { StreamItem } from '@firefly/cloud';
+import { StreamCluster } from '@firefly/cloud';
 import { ServiceStreams } from '@firefly/core/services';
 import { StateQuery } from '@theory/ngxs';
 
@@ -19,7 +19,7 @@ import { Query } from '@angular/fire/firestore';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
 
-export class StateUserStream extends StateQuery<StreamItem, StateUserStreamModel>
+export class StateUserStream extends StateQuery<StreamCluster, StateUserStreamModel>
 {
   constructor
   (

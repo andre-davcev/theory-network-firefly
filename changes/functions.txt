@@ -1,47 +1,3 @@
-user (cron)
-    clusterEventsTotal
-    eventProximity =
-    clusterEventsPercent = (event / clusterEventsTotal *
-    clusterSubscriberMax = max(clusterInCity.subscriberCount)
-    clusterSubscriberCountPercent = cluster.subscriberCount / clusterSubscriberMax
-    clusterEventsProximity
-
-
-    get clusters collection
-    save clusters to map
-    get cities collection
-        cityEvents:        Array<DocumentSnapshot> = get events where event.cityId = cityId
-        cityClusterEvents: Record<string, number>  = {}
-        cityClusterScore:  Record<string, number>  = {}
-        for cityEvents.clusters
-            cityClusterEvents[clusterId] += 1;
-        for Object.keys(cityClusterEvents)
-            cityClusterScore[clusterId] =
-                clusters[clusterId].subscriberCount
-    get users collection
-
-
-
-    get users collection
-    for each user logged in the past 30 days
-        get cities/{user.city.cityId}
-        push city to array
-        loop through city.nearby sorted by shortest distance
-            push to city array
-        loop through city.clusters
-            generate score using:
-                event count
-                distance ranking
-        sort list based on score descending
-events (delete)
-    if (!event.timeNotifyComplete)
-        cityClusters = cities/{after.city.cityId}/clusters
-        for event.clusters
-            eventsInCity = cityClusters[clusterId]
-            if (eventsInCity === 1)
-                delete cityClusters[clusterId]
-            else
-                cityClusters[clusterId] = eventsInCity - 1
 events (cron)
     cron hourly 55 mins past hour
     find hour past current time
@@ -71,8 +27,6 @@ users (create)
     generate and add first alert
     generate new stream using location
 users (update)
-    if user.location.cityId changed
-        regenerate stream
     if token count passes 10
         delete oldest
     if after.subscriptionList added

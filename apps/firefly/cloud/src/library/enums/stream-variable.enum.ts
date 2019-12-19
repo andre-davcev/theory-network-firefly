@@ -13,5 +13,8 @@ export enum StreamVariable
 
     EventRecentlyAddedSegmentMillis = 604800000, // 1 Week
     EventPopularityMultiplier       = 3,
-    EventUpcomingSegmentMillis      = 604800000 // 1 Week
+    EventUpcomingSegmentMillis      = 604800000, // 1 Week
+
+    ClusterScoreWeightRaw         = 0.2,
+    ClusterScoreWeightSubscribers = 0.8
 }
