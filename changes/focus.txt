@@ -1,12 +1,11 @@
-functions (all) - deploy new functions to dev db
-functions (all) - test cloud functions
-events (create) - test workflow
 security (all) - data validation
-streams (cron) - test cron job results
-streams (state) - test child state
+functions (all) - deploy/tests cloud functions
 app (menu)
   move menu selection nav to root
   add home section to menu
   when menu open
     disable go button
     disable alert detail navigation
+events (create) - update/test workflow
+streams (cron) - test cron job results
+streams (state) - implement/test child state
