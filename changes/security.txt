@@ -132,7 +132,20 @@ service cloud.firestore {
     function canUpdateUserRoles(uid, ownerId)   { return canCreateUserAsset(uid, ownerId); }
     function canDeleteUserRoles(uid, ownerId)   { return canCreateUserAsset(uid, ownerId); }
 
-    function isValidDocumentCreate(uid, id, data)
+
+}
+
+export interface FirebaseDocument
+{
+    version     : string;
+    id          : string;
+    userId      : string;
+    dateCreated : firestore.FieldValue;
+    dateUpdated : firestore.FieldValue;
+    metadata?   : Record<string, any>;
+}
+
+    function documentValidCreate(uid, id, data)
     {
         return data.version     == null &&
                data.id          == null &&
@@ -142,21 +155,15 @@ service cloud.firestore {
                data.metadata    == null;
     }
 
-    function isValidDocumentUpdate(uid, dataOld, dataNew)
+    function documentValidUpdate(uid, dataOld, dataNew)
     {
         return dataNew.version     == dataOld.version     &&
                dataNew.id          == dataOld.id          &&
+               dataNew.userId      == dateOld.userId      &&
                dataNew.dateCreated == dataOld.dateCreated &&
-               dataNew.dateUpdated != null                &&
-               dataNew.metadata    == null                &&
-               data.userId         is string              &&
-               (
-                    data.userId == uid ||
-                    hasRoleAdmin(uid, user(dataOld.userId))
-               );
+               dataNew.dateUpdated is timestamp           &&
+               dataNew.metadata    == null;
     }
-}
-
 
 export interface Alert extends FirebaseDocument
 {
@@ -173,6 +180,26 @@ export interface Alert extends FirebaseDocument
     metadata? : MetadataAlert;
 }
 
+    function alertValidCreate(uid, id, data)
+    {
+        return false;
+    }
+
+    function alertValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.name        == dataOld.name        &&
+               dataNew.description == dataOld.description &&
+               dataNew.bucketPath  == dataOld.bucketPath  &&
+               dataNew.eventId     == dataOld.eventId     &&
+               dataNew.clusterId   == dataOld.clusterId   &&
+               dataNew.dateTime    == dataOld.dateTime    &&
+               dataNew.tokens      == dataOld.tokens      &&
+               dataNew.url         == dataOld.url         &&
+               !dataOld.read                              &&
+               dataNew.read;
+    }
+
 export interface City extends FirebaseDocument
 {
     geopoint: firestore.GeoPoint
@@ -181,6 +208,16 @@ export interface City extends FirebaseDocument
     country:  string;
     nearby:   Record<string, number>;
 }
+
+    function cityValidCreate(uid, id, data)
+    {
+        return false;
+    }
+
+    function cityValidUpdate(uid, id, data)
+    {
+        return false;
+    }
 
 export interface Cluster extends FirebaseDocument
 {
@@ -191,6 +228,28 @@ export interface Cluster extends FirebaseDocument
     private         : boolean;
     subscriberCount : number;
 }
+
+    function clusterValidCreate(uid, id, data)
+    {
+        return documentValidCreate(uid, id, data) &&
+               data.name            is string &&
+               data.tagline         is string &&
+               data.description     is string &&
+               data.bucketPath      is string &&
+               data.private         is boolean &&
+               data.subscriberCount == 0;
+    }
+
+    function clusterValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.name            is string &&
+               dataNew.tagline         is string &&
+               dataNew.description     is string &&
+               dataNew.bucketPath      is string &&
+               dataNew.private         is boolean &&
+               dataNew.subscriberCount == dataOld.subscriberCount;
+    }
 
 export interface Event extends FirebaseDocument
 {
@@ -209,35 +268,120 @@ export interface Event extends FirebaseDocument
 
     notifyComplete : boolean;
     clusters       : Array<string>;
-
-    metadata?: MetadataEvent;
 }
+
+    function eventValidCreate(uid, id, data)
+    {
+        return documentValidCreate(uid, id, data) &&
+               data.name            is string     &&
+               data.tagline         is string     &&
+               data.description     is string     &&
+               data.bucketPath      is string     &&
+               data.private         is boolean    &&
+               data.geopoint        is geopoint   &&
+               data.city            != null       &&
+               data.city.geopoint   is geopoint   &&
+               data.city.cityId     is string     &&
+               data.city.city       is string     &&
+               data.city.region     is string     &&
+               data.city.country    is string     &&
+               data.timeStart       is string     &&
+               data.timeEnd         is string     &&
+               data.timeNotify      is string     &&
+               data.clusters        is array      &&
+               data.clusters.size() == 1          &&
+               !data.notifyComplete;
+    }
+
+    function eventValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew)         &&
+               dataNew.name            is string                  &&
+               dataNew.tagline         is string                  &&
+               dataNew.description     is string                  &&
+               dataNew.bucketPath      is string                  &&
+               dataNew.private         is boolean                 &&
+               dataNew.geopoint        is geopoint                &&
+               dataNew.city            != null                    &&
+               dataNew.city.geopoint   is geopoint                &&
+               dataNew.city.cityId     is string                  &&
+               dataNew.city.city       is string                  &&
+               dataNew.city.region     is string                  &&
+               dataNew.city.country    is string                  &&
+               dataNew.timeStart       is string                  &&
+               dataNew.timeEnd         is string                  &&
+               dataNew.timeNotify      is string                  &&
+               dataNew.clusters        is array                   &&
+               dataNew.clusters.size() == dataOld.clusters.size() &&
+               !data.notifyComplete;
+    }
 
 export interface Icon extends FirebaseDocument
 {
-    name       : string;
-    bucketPath : string;
-    mediaType  : string;
+    name        : string;
+    description : string;
+    bucketPath  : string;
+    mediaType   : string;
 }
+
+    function iconValidCreate(uid, id, data)
+    {
+        return documentValidCreate(uid, id, data) &&
+               data.name        is string         &&
+               data.description is string         &&
+               data.bucketPath  is string         &&
+               data.mediaType   is string;
+    }
+
+    function iconValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.name        is string              &&
+               dataNew.description is string              &&
+               dataNew.bucketPath  is string              &&
+               dataNew.mediaType   is string;
+    }
 
 export interface Image extends FirebaseDocument
 {
-    name       : string;
-    bucketPath : string;
-    mediaType  : string;
+    name        : string;
+    description : string;
+    bucketPath  : string;
+    mediaType   : string;
 }
+
+    function imageValidCreate(uid, id, data)
+    {
+        return documentValidCreate(uid, id, data) &&
+               data.name        is string         &&
+               data.description is string         &&
+               data.bucketPath  is string         &&
+               data.mediaType   is string;
+    }
+
+    function imageValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.name        is string              &&
+               dataNew.description is string              &&
+               dataNew.bucketPath  is string              &&
+               dataNew.mediaType   is string;
+    }
 
 export interface StreamCluster extends Cluster
 {
     score: number;
-
-    metadata?: MetadataStreamCluster;
 }
 
-export interface Subscription extends Cluster
-{
-    on: boolean;
-}
+    function streamValidCreate(uid, id, data)
+    {
+        return false;
+    }
+
+    function imageValidUpdate(uid, dataOld, dataNew)
+    {
+        return false;
+    }
 
 export interface User extends FirebaseDocument
 {
@@ -254,3 +398,55 @@ export interface User extends FirebaseDocument
     subscriptionsStatus : Record<string, Subscription>;
     tokens              : Array<string>;
 }
+
+    function userValidCreate(uid, id, data)
+    {
+        return documentValidCreate(uid, id, data) &&
+               data.providerId == 'email'         &&
+               data.language   is string          &&
+
+    email               : string;
+    phoneNumber         : string;
+    location            : firestore.GeoPoint;
+    cityId              : string;
+    dateLoggedIn        : firestore.Timestamp;
+    roleEditors         : Array<string>;
+    roleAdmins          : Array<string>;
+    subscriptions       : Array<string>;
+    subscriptionsStatus : Record<string, Subscription>;
+    tokens              : Array<string>;
+    }
+
+    function userValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+
+    }
+
+export interface UserProfile extends FirebaseDocument
+{
+    nameFirst   : string;
+    nameLast    : string;
+    bucketPath  : string;
+    companyName : string;
+    isCompany   : boolean;
+}
+    function userProfileValidCreate(uid, id, data)
+    {
+        return documentValidCreate(uid, id, data) &&
+               data.nameFirst   is string         &&
+               data.nameLast    is string         &&
+               data.bucketPath  is string         &&
+               data.companyName is string         &&
+               data.isCompany   is boolean;
+    }
+
+    function userProfileValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.nameFirst   is string              &&
+               dataNew.nameLast    is string              &&
+               dataNew.bucketPath  is string              &&
+               dataNew.companyName is string              &&
+               dataNew.isCompany   is boolean;
+    }
