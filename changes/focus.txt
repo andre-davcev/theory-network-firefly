@@ -1,5 +1,3 @@
-streams (cron) - split method into pieces
-security (all) - data validation
 users (functions create)
     generate and add first alert
 users (update)
@@ -7,15 +5,7 @@ users (update)
         increment cluster.subscriberCount
     if after.subscriptions removed
         decrement cluster.subscriberCount
-users (delete)
-    delete alerts/{userId}
-    delete clusters/{userId}
-    delete events/{userId}
-    delete icons/{userId}
-    delete images/{userId}
-
-    for user.subscriptions
-        decrement clusters/{clusterId}/subscriberCount
+security (all) - data validation
 functions (all) - deploy new functions to dev db
 functions (all) - test cloud functions
 events (create) - test workflow
