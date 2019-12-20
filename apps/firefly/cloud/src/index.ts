@@ -8,9 +8,10 @@ import { IconsCreate, IconsDelete } from './icons';
 import { ImagesCreate, ImagesDelete } from './images';
 import { StorageResize } from './storage';
 import { StreamsCron } from './streams';
-import { UsersCreate, UsersDelete } from './users';
 import { AlertsCreate } from './alerts';
 import { CitiesCreate } from './cities';
+import { UsersCreate, UsersDelete } from './users';
+import { UserProfilesCreate } from './user-profiles';
 
 export
 {
@@ -35,6 +36,8 @@ export
     StreamsCron,
 
     UsersCreate,
-    UsersDelete
+    UsersDelete,
+
+    UserProfilesCreate
 };
 
