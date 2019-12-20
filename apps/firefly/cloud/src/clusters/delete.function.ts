@@ -15,8 +15,8 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 
     const queries: Array<Promise<QuerySnapshot>> =
     [
-        database.collection('events').where('clusters',        'array-contains', id).get(),
-        database.collection('users').where('subscriptionList', 'array-contains', id).get()
+        database.collection('events').where('clusters',     'array-contains', id).get(),
+        database.collection('users').where('subscriptions', 'array-contains', id).get()
     ];
     const updates: Array<Promise<WriteResult>> = [];
 
@@ -35,16 +35,16 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     {
         user = snapshot.data() as User;
 
-        const subscriptions: Record<string, Subscription> = user.subscriptions;
+        const subscriptionsStatus: Record<string, Subscription> = user.subscriptionsStatus;
 
-        delete subscriptions[id];
+        delete subscriptionsStatus[id];
 
         updates.push(snapshot.ref.update
         ({
-            subscriptionList : FieldValue.arrayRemove(id),
-            streams          : FieldValue.arrayRemove(id),
+            subscriptions : FieldValue.arrayRemove(id),
+            streams       : FieldValue.arrayRemove(id),
 
-            subscriptions
+            subscriptionsStatus
         }))
     });
 

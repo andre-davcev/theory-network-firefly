@@ -7,4 +7,5 @@ export * from './icon.model';
 export * from './image.model';
 export * from './stream-cluster.model';
 export * from './subscription.model';
+export * from './user-profile.model';
 export * from './user.model';

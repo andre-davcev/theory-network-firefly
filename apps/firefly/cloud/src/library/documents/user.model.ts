@@ -1,22 +1,20 @@
 import { FirebaseDocument } from '../interfaces';
 import { firestore } from 'firebase';
 
-import { UserProfile } from '../models';
 import { Subscription } from './subscription.model';
 
 export interface User extends FirebaseDocument
 {
-    providerId  : string;
-    language    : string;
-    email       : string;
-    phoneNumber : string;
-
-    location         : Location;
-    dateLoggedIn     : firestore.Timestamp;
-    profile          : UserProfile;
-    roleEditors      : Record<string, string>;
-    roleAdmins       : Record<string, string>;
-    subscriptions    : Record<string, Subscription>;
-    subscriptionList : Array<string>;
-    tokens           : Array<string>;
+    providerId          : string;
+    language            : string;
+    email               : string;
+    phoneNumber         : string;
+    location            : firestore.GeoPoint;
+    cityId              : string;
+    dateLoggedIn        : firestore.Timestamp;
+    roleEditors         : Array<string>;
+    roleAdmins          : Array<string>;
+    subscriptions       : Array<string>;
+    subscriptionsStatus : Record<string, Subscription>;
+    tokens              : Array<string>;
 }
