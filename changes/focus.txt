@@ -1,5 +1,3 @@
-users (functions create)
-    generate and add first alert
 users (update)
     if after.subscriptions added
         increment cluster.subscriberCount
