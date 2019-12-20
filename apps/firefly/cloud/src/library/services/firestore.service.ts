@@ -1,7 +1,5 @@
 import { firestore } from 'firebase-admin';
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
-import { Status } from '../enums';
-import { ForeignKeyChange, FirebaseDocument } from '../interfaces';
 
 export class ServiceFirestore
 {
@@ -22,57 +20,5 @@ export class ServiceFirestore
             dateCreated: timestamp,
             dateUpdated: timestamp
         };
-    }
-
-    public static arrayDiff(a: Array<any>, b: Array<any>): Array<any>
-    {
-        const lengthA: number = a.length;
-        const lengthB: number = b.length;
-
-        if (lengthA === lengthB) { return []; }
-
-        const larger:    Array<any> = lengthA > lengthB ? a : b;
-        const smaller:   Array<any> = lengthA < lengthB ? a : b;
-
-        return larger.filter((item: any) => !smaller.includes(item));
-    }
-
-    public static mapStatus(before: Record<string, any> = {}, after: Record<string, any> = {}): Status
-    {
-        const totalBefore: number = Object.keys(before).length;
-        const totalAfter:  number = Object.keys(after).length;
-
-        let status: Status;
-
-        if (totalAfter > totalBefore)
-        {
-            status = Status.Added;
-        }
-        else if (totalAfter < totalBefore)
-        {
-            status = Status.Removed;
-        }
-        else
-        {
-            status = Status.Changed;
-        }
-
-        return status;
-    }
-
-    public static mapChange(before: Record<string, any>, after: Record<string, any>): ForeignKeyChange
-    {
-        const changed: string = Object.keys(after).find((key: string) =>
-            after[key] !== before[key]
-        );
-
-        const change: ForeignKeyChange =
-        {
-            key:    changed,
-            before: before[changed],
-            after:  after[changed]
-        };
-
-        return change;
     }
 }

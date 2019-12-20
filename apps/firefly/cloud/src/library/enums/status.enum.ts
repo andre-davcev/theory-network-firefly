@@ -2,5 +2,6 @@ export enum Status
 {
     Added,
     Removed,
-    Changed
+    Changed,
+    Unchanged
 }
