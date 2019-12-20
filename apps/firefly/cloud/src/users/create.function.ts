@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, DocumentReference, WriteResult, FieldValue } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version, Cluster, Alert } from '../library';
+import { ServiceFirestore, Version, Cluster, Alert, UserProfile } from '../library';
 import { User } from 'firebase';
 
 const database: Firestore = db();
@@ -35,7 +35,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         userId : id,
 
         name        : 'Your first alert!',
-        description : `This is your first alert. Once you subscribe to Firefly Clusters found on the screen in Discover, you will receive push notifications`,
+        description : `This is your first alert. Once you subscribe to Firefly Clusters found on the home Discover screen, you will receive alerts when new events are posted in each cluster!`,
         bucketPath  : 'baLysAd71cRyZjh0hr6poxR8an13/images/nA8wxI4UIhEU0YjfwWPe.jpeg',
         eventId     : null, // ToDo: Add default eventId here
         clusterId   : documentCluster.id,
@@ -45,10 +45,21 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         url         : 'https://firefly.im'
     };
 
+    const userProfile: Partial<UserProfile> =
+    {
+        userId: id,
+
+        nameFirst   : '',
+        nameLast    : '',
+        bucketPath  : '',
+        companyName : '',
+        isCompany   : false
+    };
+
     return Promise.all
     ([
         snapshot.ref.update(user),
-        database.collection('user-profiles').doc(id).create({}),
+        database.collection('user-profiles').doc(id).create(userProfile),
         documentCluster.set(cluster),
         documentAlert.set(alert)
     ]);
