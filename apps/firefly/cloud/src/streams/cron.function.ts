@@ -4,7 +4,7 @@ import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@g
 import { ServiceStreams, Cluster, Event, StreamVariable, StreamCluster } from '../library';
 import { City } from '../library';
 
-const StreamsCreate =
+const StreamsCron =
 
 runWith( { memory: '2GB' }).
 pubsub.
@@ -128,4 +128,4 @@ onRun(async (context: EventContext) =>
     return Promise.all(updates);
 });
 
-export { StreamsCreate };
+export { StreamsCron };
