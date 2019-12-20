@@ -14,7 +14,7 @@ events (cron)
     find hour past current time
     query events whose notifiedDateTime === generatedHourlyTimestamp
     for each cluster id
-        query users where clusterId in user.subscriptionList
+        query users where clusterId in user.subscriptions
         for each user
             create alert with alert.userId and with alert.tokens
     set event.timeNotifyComplete = true
@@ -72,3 +72,5 @@ users (app)
       }
 users (state)
   setup user object watch
+user-profile (state/firestore/app/functions/security)
+  implement user profile screen

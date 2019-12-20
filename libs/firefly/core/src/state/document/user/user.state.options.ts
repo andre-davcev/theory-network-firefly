@@ -16,19 +16,18 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             dateCreated : undefined,
             dateUpdated : undefined,
 
-            language         : 'en',
-            email            : undefined,
-            phoneNumber      : undefined,
-            providerId       : undefined,
-
-            location         : null,
-            dateLoggedIn     : null,
-            profile          : {},
-            roleEditors      : {},
-            roleAdmins       : {},
-            subscriptions    : {},
-            subscriptionList : [],
-            tokens           : []
+            language            : 'en',
+            email               : undefined,
+            phoneNumber         : undefined,
+            providerId          : undefined,
+            location            : null,
+            cityId              : null,
+            dateLoggedIn        : null,
+            roleEditors         : [],
+            roleAdmins          : [],
+            subscriptions       : [],
+            subscriptionsStatus : {},
+            tokens              : []
         },
 
         form :

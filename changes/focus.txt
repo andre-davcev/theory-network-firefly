@@ -1,25 +1,11 @@
 streams (cron) - split method into pieces
-users (model)
-    providerId       : string;
-    language         : string;
-    email            : string;
-    phoneNumber      : string;
-    location         : firestore.Geopoint;
-    cityId           : string;
-    dateLoggedIn     : firestore.Timestamp;
-    profile          : UserProfile;
-    roleEditors      : Record<string, string>;
-    roleAdmins       : Record<string, string>;
-    subscriptions    : Record<string, Subscription>;
-    subscriptionList : Array<string>;
-    tokens           : Array<string>;
 security (all) - data validation
 users (functions create)
     generate and add first alert
 users (update)
-    if after.subscriptionList added
+    if after.subscriptions added
         increment cluster.subscriberCount
-    if after.subscriptionList removed
+    if after.subscriptions removed
         decrement cluster.subscriberCount
 users (delete)
     delete alerts/{userId}
@@ -28,7 +14,7 @@ users (delete)
     delete icons/{userId}
     delete images/{userId}
 
-    for user.subscriptionList
+    for user.subscriptions
         decrement clusters/{clusterId}/subscriberCount
 functions (all) - deploy new functions to dev db
 functions (all) - test cloud functions
