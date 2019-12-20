@@ -1,12 +1,7 @@
-users (update)
-    if after.subscriptions added
-        increment cluster.subscriberCount
-    if after.subscriptions removed
-        decrement cluster.subscriberCount
-security (all) - data validation
 functions (all) - deploy new functions to dev db
 functions (all) - test cloud functions
 events (create) - test workflow
+security (all) - data validation
 streams (cron) - test cron job results
 streams (state) - test child state
 app (menu)
