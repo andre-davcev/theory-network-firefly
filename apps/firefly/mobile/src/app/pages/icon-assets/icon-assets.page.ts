@@ -3,7 +3,7 @@ import { switchMap } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
-import { StateUserIcons, ActionIconSetId, ActionUserIconsGetData, ActionClusterPatch } from '@firefly/core';
+import { StateUserIcons, ActionIconSetId, ActionUserIconsGetData, ActionClusterPatch, ActionClusterDirty } from '@firefly/core';
 import { Icon } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 
@@ -70,7 +70,8 @@ export class PageIconAssets
         (
             switchMap(() => this.store.dispatch
             ([
-                new ActionClusterPatch({ bucketPath })
+                new ActionClusterPatch({ bucketPath }),
+                new ActionClusterDirty()
             ])),
             switchMap(() => {
               return this.modalController.dismiss()})
