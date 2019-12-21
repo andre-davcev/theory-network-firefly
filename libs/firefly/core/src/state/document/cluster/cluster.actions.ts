@@ -6,6 +6,7 @@ import { firestore } from 'firebase/app';
 import { MockIconPath } from '@firefly/core/mocks';
 
 export class ActionClusterReset  { static readonly type = ActionsCluster.Reset;   constructor() { } }
+export class ActionClusterDirty  { static readonly type = ActionsCluster.Dirty;   constructor() { } }
 export class ActionClusterGet    { static readonly type = ActionsCluster.Get;     constructor(public id: string) { } }
 export class ActionClusterSet    { static readonly type = ActionsCluster.Set;     constructor(public snapshot: firestore.DocumentSnapshot, public data?: Cluster) { } }
 export class ActionClusterPatch  { static readonly type = ActionsCluster.Patch;   constructor(public partial: Partial<Cluster>) { } }

@@ -5,9 +5,9 @@ import { Observable, from, of } from 'rxjs';
 import { switchMap, catchError, map, finalize } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { ActionClusterIconUriSet, ActionClusterIconPathSet, ActionUserIconsGetData , ActionUserIconsReset } from '@firefly/core';
+import { ActionClusterIconUriSet, ActionClusterDirty, ActionClusterIconPathSet, ActionUserIconsReset } from '@firefly/core';
 import { Pages } from '../pages.enum';
-import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
+import { ActionMobileLoadingShow, ActionMobileLoadingHide} from '@firefly/mobile';
 
 const { Camera } = Plugins;
 
@@ -54,7 +54,10 @@ export class PageIconSelector
                 switchMap(() => from(Camera.getPhoto(options))),
                 map((photo: CameraPhoto) => photo.dataUrl),
                 switchMap((imageData: string) =>
-                    this.store.dispatch(new ActionClusterIconUriSet(imageData))
+                    this.store.dispatch([
+                      new ActionClusterIconUriSet(imageData),
+                      new ActionClusterDirty()
+                    ])
                 ),
                 finalize(() => {
                   this.modal.dismiss();

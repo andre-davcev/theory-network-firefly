@@ -1,5 +1,5 @@
 import { StateContext, createSelector } from '@ngxs/store';
-import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
+import { SetFormPristine, UpdateFormValue, SetFormDirty } from '@ngxs/form-plugin';
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { firestore } from 'firebase/app';
@@ -70,6 +70,11 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
             new SetFormPristine(this.formPath),
             ...this.ActionsReset()
         ]);
+    }
+
+    public dirty({dispatch}: StateContext<M>): Observable<any>
+    {
+      return dispatch(new SetFormDirty(this.formPath));
     }
 
     public get(context: StateContext<M>, action: any): Observable<any>
