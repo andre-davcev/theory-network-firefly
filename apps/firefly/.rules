@@ -258,17 +258,17 @@ service cloud.firestore {
     function userValidUpdate(uid, dataOld, dataNew)
     {
         return documentValidUpdate(uid, dataOld, dataNew) &&
-               dataNew.providerId          == 'email'   &&
-               dataNew.language            is string    &&
-               dataNew.email               is string    &&
-               dataNew.phoneNumber         is string    &&
-               dataNew.location            is geopoint  &&
-               dataNew.cityId              is string    &&
-               dataNew.dateLoggedIn        is timestamp &&
-               dataNew.tokens              is array     &&
-               dataNew.subscriptions       is array     &&
-               dataNew.subscriptionsStatus != null      &&
-               data.roleEditors            is array     &&
+               dataNew.providerId          == 'password'  &&
+               dataNew.language            is string      &&
+               dataNew.email               is string      &&
+               dataNew.phoneNumber         is string      &&
+               dataNew.location            is geopoint    &&
+               dataNew.cityId              is string      &&
+               dataNew.dateLoggedIn        is timestamp   &&
+               dataNew.tokens              is array       &&
+               dataNew.subscriptions       is array       &&
+               dataNew.subscriptionsStatus != null        &&
+               data.roleEditors            is array       &&
                data.roleAdmins             is array;
     }
 

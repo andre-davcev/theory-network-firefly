@@ -19,6 +19,7 @@ export class ServiceFirestore
         object.id          = id;
         object.dateCreated = timestamp;
         object.dateUpdated = timestamp;
+        object.version     = version;
 
         return object;
     }
