@@ -3,9 +3,9 @@ import { FirebaseDocument } from '../interfaces';
 
 export interface City extends FirebaseDocument
 {
-    geopoint: firestore.GeoPoint
     city:     string;
-    region:   string;
     country:  string;
+    geopoint: firestore.GeoPoint;
     nearby:   Record<string, number>;
+    region:   string;
 }
