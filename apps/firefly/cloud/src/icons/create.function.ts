@@ -11,7 +11,7 @@ firestore.
 document('icons/{id}').
 onCreate((snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: Icon = ServiceFirestore.create<Icon>(snapshot, { version: Version.Icons});
+    const object: Icon = ServiceFirestore.create<Icon>(snapshot, Version.Icons);
 
     return snapshot.ref.update(object);
 });

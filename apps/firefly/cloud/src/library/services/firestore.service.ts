@@ -1,5 +1,7 @@
 import { firestore } from 'firebase-admin';
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
+import { FirebaseDocument } from '../interfaces';
+import { Version } from '../enums';
 
 export class ServiceFirestore
 {
@@ -8,17 +10,16 @@ export class ServiceFirestore
         return JSON.parse(JSON.stringify(object));
     }
 
-    public static create<T>(snapshot: DocumentSnapshot, object: Partial<T>): T
+    public static create<T extends FirebaseDocument>(snapshot: DocumentSnapshot, version: Version): T
     {
-        const id:        string               = snapshot.id;
-        const timestamp: firestore.FieldValue = firestore.FieldValue.serverTimestamp();
+        const id        : string               = snapshot.id;
+        const object    : T                    = snapshot.data() as T;
+        const timestamp : firestore.FieldValue = firestore.FieldValue.serverTimestamp();
 
-        return {
-            ...object as T,
+        object.id          = id;
+        object.dateCreated = timestamp;
+        object.dateUpdated = timestamp;
 
-            id,
-            dateCreated: timestamp,
-            dateUpdated: timestamp
-        };
+        return object;
     }
 }

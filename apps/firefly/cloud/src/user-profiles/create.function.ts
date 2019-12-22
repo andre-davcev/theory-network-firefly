@@ -11,7 +11,7 @@ firestore.
 document('user-profiles/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: UserProfile = ServiceFirestore.create<UserProfile>(snapshot, { version: Version.UserProfiles });
+    const object: UserProfile = ServiceFirestore.create<UserProfile>(snapshot, Version.UserProfiles);
 
     return snapshot.ref.update(object);
 });

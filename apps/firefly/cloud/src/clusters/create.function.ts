@@ -11,7 +11,7 @@ firestore.
 document('clusters/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: Cluster = ServiceFirestore.create<Cluster>(snapshot, { version: Version.Clusters });
+    const object: Cluster = ServiceFirestore.create<Cluster>(snapshot, Version.Clusters);
 
     return snapshot.ref.update(object);
 });

@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, WriteResult, QueryDocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { Version, ServiceFirestore, ServiceCities } from '../library';
+import { Version, ServiceFirestore, ServiceCities, StreamVariable, City } from '../library';
 
 const database: Firestore = db();
 
@@ -11,7 +11,7 @@ firestore.
 document('cities/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: Record<string, any> = ServiceFirestore.create(snapshot, { version: Version.Cities });
+    const object: City = ServiceFirestore.create(snapshot, Version.Cities);
 
     const id:       string                      = object.id;
     const geopoint: db.GeoPoint                 = object.geopoint;
@@ -24,7 +24,7 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
         const city:     Record<string, any> = snapshot.data();
         const distance: number              = ServiceCities.distanceBetweenPoints(geopoint, city.geopoint);
 
-        if (distance <= ServiceCities.threshold)
+        if (distance <= StreamVariable.DistanceThreshold)
         {
             nearby[city.id] = distance;
             city.nearby[id] = distance;
