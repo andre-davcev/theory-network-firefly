@@ -7,12 +7,11 @@ import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateImage, StateIcon, StateCluster } from '@firefly/core';
+import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateCluster } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
-import { BaseComponent } from '@theory/core';
 
 const { Camera } = Plugins;
 
@@ -31,7 +30,7 @@ export class PageAssetEvent
     @Select(StateEvent.timeStart)       timeStart$:       Observable<string>;
     @Select(StateEvent.timeEnd)         timeEnd$:         Observable<string>;
     @Select(StateEvent.timeEndValid)    timeEndValid$:    Observable<boolean>;
-    @Select(StateEvent.timeNotify)      timeNotify$:      Observable<boolean>;
+    @Select(StateEvent.timeNotify)      timeNotify$:      Observable<string>;
     @Select(StateEvent.timeNotifyValid) timeNotifyValid$: Observable<boolean>;
     @Select(StateEvent.notifyComplete)  notifyComplete$:  Observable<boolean>;
     @Select(StateDevice.device)         device$:          Observable<boolean>;

@@ -51,7 +51,7 @@ export class StateImage extends StateDocument<Image, StateImageModel>
     {
       super
       (
-          StateImageOptions.name,
+          StateImageOptions.name as string,
           StateImageOptions.defaults,
           service,
           {

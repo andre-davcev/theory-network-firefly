@@ -49,7 +49,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     {
         super
         (
-            StateEventOptions.name,
+            StateEventOptions.name as string,
             StateEventOptions.defaults,
             service,
             {

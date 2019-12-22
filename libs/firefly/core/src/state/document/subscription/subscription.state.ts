@@ -34,7 +34,7 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
     {
         super
         (
-            StateSubscriptionOptions.name,
+            StateSubscriptionOptions.name as string,
             StateSubscriptionOptions.defaults,
             service,
             {

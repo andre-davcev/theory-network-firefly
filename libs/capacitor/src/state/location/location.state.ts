@@ -16,12 +16,12 @@ export class StateLocation
 {
     constructor() {}
 
-    @Selector() static location(state: StateLocationModel)  {return state.location;}
-    @Selector() static error(state: StateLocationModel)     {return state.error;}
+    @Selector() static location(state: StateLocationModel) : GeolocationPosition {return state.location;}
+    @Selector() static error(state: StateLocationModel)    : Error               {return state.error;}
 
-    @Selector() static loading(state: StateLocationModel) {return state.location == null;}
-    @Selector() static errored(state: StateLocationModel) {return state.error != null;}
-    @Selector() static locationValid(state: StateLocationModel)  {return state.location != null && state.location.coords != null;}
+    @Selector() static loading(state: StateLocationModel)       : boolean { return state.location == null; }
+    @Selector() static errored(state: StateLocationModel)       : boolean { return state.error != null; }
+    @Selector() static locationValid(state: StateLocationModel) : boolean { return state.location != null && state.location.coords != null;}
 
     ngxsOnInit(context: StateContext<StateLocationModel>)
     {

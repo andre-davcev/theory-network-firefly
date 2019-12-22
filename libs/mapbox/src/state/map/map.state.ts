@@ -16,7 +16,7 @@ import { ActionMapLocationWatch, ActionMapSearchResultSet, ActionMapSearchResult
 
 export class StateMap
 {
-    @Select(StateLocation.location) private location$: Observable<GeolocationPosition>;
+    @Select(StateLocation.location) location$: Observable<GeolocationPosition>;
 
     constructor() {}
 

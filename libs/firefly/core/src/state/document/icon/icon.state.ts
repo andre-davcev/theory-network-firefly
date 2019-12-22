@@ -51,7 +51,7 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
     {
       super
       (
-          StateIconOptions.name,
+          StateIconOptions.name as string,
           StateIconOptions.defaults,
           service,
           {

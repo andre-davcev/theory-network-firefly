@@ -31,8 +31,7 @@ functions (all)
 icons (grid/create/edit)
   cleanup flow styling
 images (grid/create/edit)
-  create grid view
-  create create/edit page
+  cleanup flow styling
 ios (dev)
   chrome debugging
 library (firebase)
@@ -43,18 +42,11 @@ library (ngxs)
   child ActionSetData (user/{userId}/subscriptions)
 library (mapbox)
   add back tokenized mapbox access token in search service
-location (state)
-  on location found
-    search bigdatacloud for latitude/longitude city data
-    save to user.cityId & user.location
 map (component)
   limit mapbox search types to [address, poi]
 notifications
   implement capacitor-fcm plugin
   add unread badge count
-npm
-  capacitor 1.4.0
-  ngxs 3.6.0
 security
   upload and test security rules
   create model validation security rules
@@ -65,15 +57,7 @@ security
 subscriptions (list)
   migrate to use user.subscriptions instead of user-subscriptions
   create with on/off switch
-users (app)
-  on login & location found
-      update user:
-      {
-          dateLoggedIn,
-          location,
-          cityId
-      }
 users (state)
-  setup user object watch
+  migrate to use StateDocument
 user-profile (state/firestore/app/functions/security)
   implement user profile screen
