@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+import { filter, take, switchMap } from 'rxjs/operators';
 import { NavController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 
 import { StateUser, ActionUserLoginEmail, ActionUserLogout, ActionUserCreate } from '@firefly/core';
 import { ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/capacitor';
+import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
 
 @Component
 ({
@@ -73,9 +74,12 @@ export class PageLogin implements OnInit
         pipe
         (
             filter((userFound: boolean) => userFound),
-            take(1)
+            take(1),
+            switchMap(() =>
+                this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home))
+            )
         ).
-        subscribe(() => this.nav.navigateRoot('/home'))
+        subscribe();
 
         this.store.dispatch([new ActionDeviceStatusBarShow()]);
     }

@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { AlertController, MenuController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
-import { Pages } from '../pages.enum';
+import { Pages, ActionMobileNavigateRoot } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component
 ({
@@ -22,16 +23,14 @@ export class PageHome extends BaseComponent
 {
     @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
 
-    public Pages:      any     = Pages;
-    public showAlerts: boolean = false;
-
-    public child: Pages.Alert | Pages.Stream = Pages.Alert;
+    public Pages      : any     = Pages;
+    public showAlerts : boolean = false;
 
     constructor
     (
-        private alert: AlertController,
-        private menu: MenuController,
-        private store: Store
+        private menu   : MenuController,
+        private store  : Store,
+        private router : Router
     )
     {
         super();
@@ -39,12 +38,9 @@ export class PageHome extends BaseComponent
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.showAlerts = this.router.url === `/${Pages.Home}/${Pages.Alert}`
 
-        if (!this.showAlerts)
-        {
-            this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
-        }
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     public navigate(type: Pages): void
@@ -54,10 +50,9 @@ export class PageHome extends BaseComponent
         this.store.dispatch(new Navigate(url));
     }
 
-    alertStreamToggle(type: Pages.Alert | Pages.Stream)
+    public go(type: Pages.Alert | Pages.Stream): void
     {
-        this.child = type;
-        this.store.dispatch(new Navigate([Pages.Home, type]));
+        this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, type))
 
         this.showAlerts = type === Pages.Alert;
     }
@@ -102,6 +97,6 @@ export class PageHome extends BaseComponent
 
     public menuOpen()
     {
-      this.menu.open();
+        this.menu.open();
     }
 }

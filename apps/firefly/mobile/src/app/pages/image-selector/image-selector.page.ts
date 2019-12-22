@@ -4,7 +4,7 @@ import { Store } from '@ngxs/store';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Pages } from '../pages.enum';
+import { Pages } from '@firefly/mobile';
 // import { ActionEventSetImageIndex } from '@firefly/core';
 
 @Component

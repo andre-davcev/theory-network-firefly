@@ -2,13 +2,12 @@ export enum Pages
 {
     Login = 'login',
     Home  = 'home',
+    Stream = 'stream',
+    Alert  = 'alerts',
 
     Search        = 'search',
     Subscriptions = 'subscriptions',
     User          = 'user',
-
-    Stream        = 'stream',
-    Alert         = 'alert',
 
     AssetCluster = 'asset-cluster',
     AssetEvent   = 'asset-event',

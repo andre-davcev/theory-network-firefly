@@ -8,11 +8,12 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateUserClusters, ActionClusterSetId, ActionEventClusterAdd } from '@firefly/core';
 import { Cluster } from '@firefly/cloud';
 
-import { Pages } from '../pages.enum';
-import { ModalController } from '@ionic/angular';
+import { Pages } from '@firefly/mobile';
+import { ModalController, MenuController } from '@ionic/angular';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { takeUntil } from 'rxjs/operators';
+import { StateMobile } from '@firefly/mobile';
 
 @Component
 ({
@@ -23,9 +24,10 @@ import { takeUntil } from 'rxjs/operators';
 
 export class PageAssetsClusters extends BaseComponent implements OnInit
 {
-    @Select(StateUserClusters.data())  list$:  Observable<Array<Cluster>>;
-    @Select(StateUserClusters.found()) found$: Observable<boolean>;
-    @Select(StateStorage.images)       images$: Observable<Record<string, StorageImage>>;
+    @Select(StateUserClusters.data())  list$:     Observable<Array<Cluster>>;
+    @Select(StateUserClusters.found()) found$:    Observable<boolean>;
+    @Select(StateStorage.images)       images$:   Observable<Record<string, StorageImage>>;
+    @Select(StateMobile.menuOpen)      menuOpen$: Observable<boolean>
 
     @Input() modal: boolean = false;
 
@@ -33,8 +35,9 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
 
     constructor
     (
-        private store:           Store,
-        private modalController: ModalController
+        private store           : Store,
+        private modalController : ModalController,
+        private menu            : MenuController
     )
     {
         super();
@@ -51,10 +54,7 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
 
     public ionViewWillEnter()
     {
-        this.store.dispatch
-        ([
-            new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark})
-        ]);
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
     public add(): void
@@ -85,5 +85,10 @@ export class PageAssetsClusters extends BaseComponent implements OnInit
         }
         else
           this.store.dispatch(new Navigate([Pages.AssetCluster], {id: cluster.id}, {state: {isClusterDetail:true}}));
+    }
+
+    public menuOpen(): void
+    {
+        this.menu.open();
     }
 }

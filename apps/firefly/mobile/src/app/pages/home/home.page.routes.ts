@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { PageHome } from './home.page';
-import { Pages } from '../pages.enum';
+import { Pages } from '@firefly/mobile';
 import { ResolverPageHome } from './home.page.resolver';
 
 export const RoutesPageHome: Routes =

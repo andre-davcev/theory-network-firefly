@@ -56,9 +56,12 @@ npm
   capacitor 1.4.0
   ngxs 3.6.0
 security
+  upload and test security rules
   create model validation security rules
   update collection/subcollection security rules
   create storage security rules
+  prevent hackers from querying past limit size
+  prevent hackers from writing to database too quickly
 subscriptions (list)
   migrate to use user.subscriptions instead of user-subscriptions
   create with on/off switch

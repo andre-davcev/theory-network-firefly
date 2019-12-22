@@ -17,6 +17,7 @@
   "general.publish"        : "Publish",
   "general.update"         : "Update",
 
+  "menu.home"                 : "Home",
   "menu.manage"               : "Manage",
   "menu.manage.subscriptions" : "Subscriptions",
   "menu.assets"               : "My Assets",

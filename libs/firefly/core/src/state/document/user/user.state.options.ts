@@ -17,8 +17,8 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
             dateUpdated : undefined,
 
             language            : 'en',
-            email               : undefined,
-            phoneNumber         : undefined,
+            email               : '',
+            phoneNumber         : '',
             providerId          : undefined,
             location            : null,
             cityId              : null,

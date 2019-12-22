@@ -1,11 +1,10 @@
-security (all) - data validation
-functions (all) - deploy/tests cloud functions
 app (menu)
   move menu selection nav to root
   add home section to menu
   when menu open
     disable go button
     disable alert detail navigation
+functions (all) - deploy/tests cloud functions
 events (create) - update/test workflow
 streams (cron) - test cron job results
 streams (state) - implement/test child state

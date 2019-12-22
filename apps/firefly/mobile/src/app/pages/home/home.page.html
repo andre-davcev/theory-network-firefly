@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
+      <ion-buttons slot="end" fxLayout="row" fxLayoutAlign="space-between center">
 <!--
           <ion-button icon-only (click)="navigate(Pages.Search)">
               <ion-icon name="search" color="dark" size="large"></ion-icon>
@@ -38,10 +38,10 @@
 <ion-footer>
   <ion-toolbar>
       <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
-          <ion-button *ngIf="!showAlerts" icon-only (click)="alertStreamToggle(Pages.Alert)">
+          <ion-button *ngIf="!showAlerts" icon-only (click)="go(Pages.Alert)">
               <ion-icon name="notifications" color="dark" size="large"></ion-icon>
           </ion-button>
-          <ion-button *ngIf="showAlerts" icon-only (click)="alertStreamToggle(Pages.Stream)">
+          <ion-button *ngIf="showAlerts" icon-only (click)="go(Pages.Stream)">
             <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
           </ion-button>
           <ion-button *ngIf="showAlerts" icon-only [disabled]="menuOpen$ | async">

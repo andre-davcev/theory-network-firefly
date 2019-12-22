@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Pages } from '../pages/pages.enum';
+import { Pages } from '@firefly/mobile';
 
 export const routes: Routes =
 [

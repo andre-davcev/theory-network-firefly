@@ -1,4 +1,8 @@
 import {Component} from '@angular/core';
+import { Select } from '@ngxs/store';
+import { StateMobile } from '@firefly/mobile';
+import { Observable } from 'rxjs';
+import { MenuController } from '@ionic/angular';
 
 @Component
 ({
@@ -9,13 +13,21 @@ import {Component} from '@angular/core';
 
 export class PageAssetsImages
 {
-    constructor()
-    {
+    @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
 
-    }
+    constructor
+    (
+        private menu : MenuController
+    )
+    { }
 
     add(): void
     {
 
+    }
+
+    public menuOpen(): void
+    {
+        this.menu.open();
     }
 }

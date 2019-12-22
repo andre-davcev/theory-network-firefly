@@ -9,7 +9,9 @@ import { BaseComponent } from '@theory/core';
 import { Store, Select } from '@ngxs/store';
 import { StateUserIcons } from '@firefly/core';
 import { Icon } from '@firefly/cloud';
-import { Pages } from '../pages.enum';
+import { Pages } from '@firefly/mobile';
+import { StateMobile } from '@firefly/mobile';
+import { MenuController } from '@ionic/angular';
 
 @Component
 ({
@@ -27,15 +29,20 @@ export class PageAssetsIcons extends BaseComponent implements OnInit
         'assets/icons/temp-coffee-icon-brown.png'
     ];*/
 
-    @Select(StateUserIcons.data())    userIcons$:  Observable<Array<Icon>>;
-    @Select(StateStorage.images)    images$: Observable<Record<string, StorageImage>>;
+    @Select(StateUserIcons.data()) userIcons$: Observable<Array<Icon>>;
+    @Select(StateStorage.images)   images$:    Observable<Record<string, StorageImage>>;
+    @Select(StateMobile.menuOpen)  menuOpen$:  Observable<boolean>;
 
     public images: Record<string, StorageImage> = {};
     public userIcons: Array<Icon>;
     public urls$: Observable<Array<string>>;
     public urls: Array<string>  = [];
 
-    constructor(private store: Store)
+    constructor
+    (
+        private store : Store,
+        private menu  : MenuController
+    )
     {
       super();
     }
@@ -56,5 +63,10 @@ export class PageAssetsIcons extends BaseComponent implements OnInit
 
     navigate(): void{
       this.store.dispatch(new Navigate([Pages.AssetIcon]));
+    }
+
+    public menuOpen(): void
+    {
+        this.menu.open();
     }
 }

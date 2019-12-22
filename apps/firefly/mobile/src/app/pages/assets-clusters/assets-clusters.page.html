@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color="white">
+    <ion-toolbar>
         <ion-title color="dark">
             {{ (modal ? 'page.assets-clusters.title-modal' : 'page.assets-clusters.title') | translate}}
         </ion-title>
@@ -9,6 +9,12 @@
 
             <ion-button *ngIf="modal" color="dark" (click)="cancel()">
                 {{ 'general.cancel' | translate }}
+            </ion-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+            <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+                <ion-icon name="person" color="dark" size="large"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>

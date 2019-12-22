@@ -7,27 +7,34 @@ import {
     ActionMobileToast,
     ActionMobileLoadingHide,
     ActionMobileMenuOpened,
-    ActionMobileMenuClosed
+    ActionMobileMenuClosed,
+    ActionMobileNavigateRoot
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, NavController } from '@ionic/angular';
 import { switchMap, tap } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { from, of } from 'rxjs';
 import { LoadingOptions, ToastOptions } from '@ionic/core';
+import { Pages } from '@firefly/mobile/enums';
+import { Navigate } from '@ngxs/router-plugin';
+import { NgZone } from '@angular/core';
 
 @State<StateMobileModel>(StateMobileOptions)
 
 export class StateMobile
 {
-    @Selector() static isLoading(state: StateMobileModel): boolean {return state.loadingElement != null;}
-    @Selector() static loadingElement(state: StateMobileModel): any { return state.loadingElement; }
-    @Selector() static menuOpen(state: StateMobileModel): any { return state.menuOpen; }
-    @Selector() static menuClosed(state: StateMobileModel): any { return !state.menuOpen; }
+    @Selector() static isLoading(state: StateMobileModel)      : boolean                { return state.loadingElement != null;}
+    @Selector() static loadingElement(state: StateMobileModel) : any                    { return state.loadingElement; }
+    @Selector() static menuOpen(state: StateMobileModel)       : boolean                { return state.menuOpen; }
+    @Selector() static menuClosed(state: StateMobileModel)     : boolean                { return !state.menuOpen; }
+    @Selector() static rootPages(state: StateMobileModel)      : Record<string, Pages> { return state.rootPages; }
 
     constructor
     (
-        private loading: LoadingController,
-        private toast:   ToastController
+        private loading : LoadingController,
+        private toast   : ToastController,
+        private nav     : NavController,
+        private ngZone  : NgZone
     ) { }
 
     @Action(ActionMobileLoadingShow)
@@ -87,5 +94,36 @@ export class StateMobile
     menuClosed({ patchState }: StateContext<StateMobileModel>)
     {
         patchState({ menuOpen: false });
+    }
+
+    @Action(ActionMobileNavigateRoot)
+    navigateRoot({ patchState, getState, dispatch }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
+    {
+        const rootPages : Record<string, Pages> = StateMobile.rootPages(getState());
+
+        rootPages[page] = child = child == null ? rootPages[page] : child;
+
+        return from(this.ngZone.run(() => this.nav.navigateRoot(`/${page}`))).
+            pipe
+            (
+                switchMap(() =>
+                    page === child ?
+                        of(null) :
+                        of(patchState({ rootPages })).
+                        pipe
+                        (
+                            switchMap(() =>
+                                dispatch
+                                (
+                                    new Navigate
+                                    ([
+                                        ...page.split('/'),
+                                        ...child.split('/')
+                                    ])
+                                )
+                            )
+                        )
+                )
+            );
     }
 }
