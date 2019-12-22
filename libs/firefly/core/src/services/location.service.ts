@@ -23,7 +23,7 @@ export class ServiceLocation
     {
         countryCode = countryCode.trim().toLowerCase();
         region      = region.trim().toLowerCase().replace(' ', '-');
-        city        = region.trim().toLowerCase().replace(' ', '-');
+        city        = city.trim().toLowerCase().replace(' ', '-');
 
         return `${countryCode}_${region}_${city}`;
     }

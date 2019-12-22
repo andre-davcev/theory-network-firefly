@@ -1,4 +1,4 @@
-import { StreamVariable } from '../enums';
+import { GlobalVariable } from '../enums';
 import { Event } from '../documents';
 import { firestore } from 'firebase-admin';
 
@@ -11,9 +11,9 @@ export class ServiceStreams
      */
     public static scoreCityDistance(distance: number): number
     {
-        return distance >= StreamVariable.DistanceThreshold ?
+        return distance >= GlobalVariable.DistanceThreshold ?
             0 :
-            Math.pow((StreamVariable.DistanceThreshold - distance) / StreamVariable.DistanceThreshold, StreamVariable.DistanceScorePower);
+            Math.pow((GlobalVariable.DistanceThreshold - distance) / GlobalVariable.DistanceThreshold, GlobalVariable.DistanceScorePower);
     }
 
     public static scoreEvent(event: Event, nowInMillis: number): number
@@ -21,9 +21,9 @@ export class ServiceStreams
         const timeNotify: number = new Date(event.timeNotify).getMilliseconds();
         const timeStart:  number = new Date(event.timeStart).getMilliseconds();
 
-        if (event.notifyComplete || timeNotify <= nowInMillis || timeStart <= nowInMillis) { return StreamVariable.EventUpcomingMin; }
+        if (event.notifyComplete || timeNotify <= nowInMillis || timeStart <= nowInMillis) { return GlobalVariable.EventUpcomingMin; }
 
-        return (ServiceStreams.scoreEventRecentlyAdded(event, nowInMillis) * StreamVariable.EventRecentlyAddedWeight) +
+        return (ServiceStreams.scoreEventRecentlyAdded(event, nowInMillis) * GlobalVariable.EventRecentlyAddedWeight) +
             (ServiceStreams.scoreEventPopularity(event)) +
             (ServiceStreams.scoreEventUpcoming(event, nowInMillis));
     }
@@ -42,20 +42,20 @@ export class ServiceStreams
         const dateCreated: number = (event.dateCreated as firestore.Timestamp).toDate().getMilliseconds();
         const millisDiff:  number = nowInMillis - dateCreated;
 
-        const segments: number = Math.floor(millisDiff / StreamVariable.EventRecentlyAddedSegmentMillis);
+        const segments: number = Math.floor(millisDiff / GlobalVariable.EventRecentlyAddedSegmentMillis);
 
         return segments > 8 ?
-            StreamVariable.EventRecentlyAddedMin :
+            GlobalVariable.EventRecentlyAddedMin :
             (10 - segments) * 0.1;
     }
 
     public static scoreEventPopularity(event: Event): number
     {
         const clusterCount: number = event.clusters.length;
-        const segments:     number = Math.floor(clusterCount / StreamVariable.EventPopularityMultiplier) + 1;
+        const segments:     number = Math.floor(clusterCount / GlobalVariable.EventPopularityMultiplier) + 1;
 
         return event.private || segments === 1 ?
-            StreamVariable.EventPopularityMin :
+            GlobalVariable.EventPopularityMin :
             segments * 0.1;
     }
 
@@ -65,13 +65,13 @@ export class ServiceStreams
     */
     public static scoreEventUpcoming(event: Event, nowInMillis: number): number
     {
-      const timeStart: number = new Date(event.timeStart).getMilliseconds();
+        const timeStart: number = new Date(event.timeStart).getMilliseconds();
 
-      const millisDiff:  number = timeStart - nowInMillis;
-      const segments: number = Math.floor(millisDiff / StreamVariable.EventRecentlyAddedSegmentMillis);
+        const millisDiff:  number = timeStart - nowInMillis;
+        const segments: number = Math.floor(millisDiff / GlobalVariable.EventRecentlyAddedSegmentMillis);
 
-      return event.notifyComplete ?
-          StreamVariable.EventUpcomingMin :
-          (10 - segments) * 0.1;
+        return event.notifyComplete ?
+            GlobalVariable.EventUpcomingMin :
+            (10 - segments) * 0.1;
     }
 }

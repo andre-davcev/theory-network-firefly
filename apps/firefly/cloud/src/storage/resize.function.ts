@@ -13,7 +13,7 @@ storage.
 object().
 onFinalize(async (object: storage.ObjectMetadata, context: EventContext) =>
 {
-    const bucket: any             = gcs.bucket(object.bucket);
+    const bucket:   any           = gcs.bucket(object.bucket);
     const filePath: string        = object.name;
     const segments: Array<string> = filePath.split('/');
     const fileType: string        = segments[1];

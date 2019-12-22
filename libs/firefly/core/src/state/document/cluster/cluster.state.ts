@@ -55,13 +55,14 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
                 id          : undefined,
                 dateCreated : undefined,
                 dateUpdated : undefined,
+                metadata    : {},
 
-                name            : null,
-                tagline         : null,
-                description     : null,
                 bucketPath      : null,
+                description     : null,
+                name            : null,
                 private         : true,
-                subscriberCount : 0
+                subscriberCount : 0,
+                tagline         : null
             },
             {
                 ActionReset:  ActionClusterReset,

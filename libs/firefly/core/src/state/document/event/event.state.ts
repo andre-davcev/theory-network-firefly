@@ -58,22 +58,20 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 userId      : undefined,
                 dateCreated : undefined,
                 dateUpdated : undefined,
+                metadata    : {},
 
-                name        : null,
-                tagline     : null,
-                description : null,
-                bucketPath  : null,
-                private     : true,
-
-                geopoint : null,
-                city     : null,
-
-                timeStart      : null,
-                timeEnd        : null,
+                bucketPath     : null,
+                city           : null,
+                clusters       : [],
+                description    : null,
+                geopoint       : null,
+                name           : null,
+                notifyComplete : false,
+                private        : true,
+                tagline        : null,
                 timeNotify     : null,
-                notifyComplete : true,
-
-                clusters : []
+                timeStart      : null,
+                timeEnd        : null
             },
             {
                 ActionReset:  ActionEventReset,
@@ -263,7 +261,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
             dispatch(new ActionEventPatch({ geopoint: null, city: null })) :
             this.location.getLocationCity(result).pipe
             (
-                tap(result => console.log(result)),
                 switchMap((locationCity: LocationCity) =>
                     dispatch(new ActionEventPatch(locationCity))
                 )

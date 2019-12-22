@@ -1,5 +1,7 @@
 import { WriteResult, Firestore, DocumentSnapshot } from '@google-cloud/firestore';
 import { firestore } from 'firebase-admin';
+import { City, Event } from '../documents';
+import { Location } from '../models';
 
 export class ServiceCities
 {
@@ -10,30 +12,21 @@ export class ServiceCities
         return ServiceCities.distanceBetween(geopoint1.latitude, geopoint1.longitude, geopoint2.latitude, geopoint2.longitude);
     }
 
-    public static async createIfNew(database: Firestore, event: Record<string, any>): Promise<WriteResult>
+    public static async createIfNew(database: Firestore, event: Event): Promise<WriteResult>
     {
-        const city:         Record<string, any> = event.city;
-        const clustersList: Array<string>       = event.clusters;
-        const cityDoc:      DocumentSnapshot    = await database.collection('cities').doc(city.cityId).get();
+        const location:     Location         = event.city;
+        const cityDoc:      DocumentSnapshot = await database.collection('cities').doc(location.cityId).get();
 
         if (cityDoc.exists) { return null; }
 
-        const clusterEvents: Record<string, number> = {};
-
-        clustersList.forEach((clusterId: string) =>
-            clusterEvents[clusterId] = 1
-        );
-
         return cityDoc.ref.create
         ({
-            geopoint:  city.geopoint,
-            city:      city.city,
-            region:    city.region,
-            country:   city.country,
+            geopoint:  location.geopoint,
+            city:      location.city,
+            region:    location.region,
+            country:   location.country,
 
-            nearby: [],
-            clusterEvents,
-            clustersList
+            nearby: {}
         });
     }
 
@@ -42,7 +35,7 @@ export class ServiceCities
         return degrees * (Math.PI / 180);
     }
 
-    private static distanceBetween(latitude1, longitude1, latitude2, longitude2)
+    private static distanceBetween(latitude1: number, longitude1: number, latitude2: number, longitude2: number)
     {
         // Haversine Formula (KM)
         const distanceLatitude:  number = ServiceCities.degrees2Radians(latitude2  - latitude1);
