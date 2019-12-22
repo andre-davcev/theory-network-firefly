@@ -46,7 +46,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
     {
         super
         (
-            StateClusterOptions.name,
+            StateClusterOptions.name as string,
             StateClusterOptions.defaults,
             service,
             {

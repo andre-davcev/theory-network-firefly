@@ -10,7 +10,7 @@ import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobil
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetsIcons implements Resolve<void>
 {
-    @Select(StateUserIcons.initialized) icons$: Observable<boolean>;
+    @Select(StateUserIcons.initialized()) icons$: Observable<boolean>;
 
     constructor(private store: Store) {}
 

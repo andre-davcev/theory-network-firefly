@@ -1,3 +1,22 @@
+location (state)
+  on location found
+    search bigdatacloud for latitude/longitude city data
+    save to user.cityId & user.location
+users (app)
+  on location change
+    update user
+    {
+      location,
+      cityId
+    }
+    query streams/{user.cityId}
+  on login & location found
+      update user:
+      {
+          dateLoggedIn,
+          location,
+          cityId
+      }
 streams (all)
   streams (cron)
   streams (state)

@@ -19,9 +19,9 @@ import { MenuController } from '@ionic/angular';
 
 export class PageAssetsEvents
 {
-    @Select(StateUserEvents.data)  list$:     Observable<Array<Event>>;
-    @Select(StateUserEvents.found) found:     Observable<boolean>;
-    @Select(StateMobile.menuOpen)  menuOpen$: Observable<boolean>
+    @Select(StateUserEvents.data())  list$:     Observable<Array<Event>>;
+    @Select(StateUserEvents.found()) found:     Observable<boolean>;
+    @Select(StateMobile.menuOpen)    menuOpen$: Observable<boolean>
 
     constructor
     (
