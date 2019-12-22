@@ -31,6 +31,7 @@ export class ComponentItemHeader
 
     public clickedIcon(): void
     {
+        this.form.controls.bucketPath.markAsDirty();
         this.iconClicked.next();
     }
 
