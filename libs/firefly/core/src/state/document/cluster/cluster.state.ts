@@ -12,6 +12,7 @@ import { StateClusterModel } from './cluster.state.model';
 import { StateClusterOptions } from './cluster.state.options';
 import {
     ActionClusterReset,
+    ActionClusterDirty,
     ActionClusterGet,
     ActionClusterSet,
     ActionClusterPatch,
@@ -96,6 +97,12 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
     reset(context: StateContext<StateClusterModel>)
     {
         return super.reset(context)
+    }
+
+    @Action(ActionClusterDirty)
+    dirty(context: StateContext<StateClusterModel>)
+    {
+      return super.dirty(context)
     }
 
     @Action(ActionClusterGet)
