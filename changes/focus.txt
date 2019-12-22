@@ -1,4 +1,8 @@
-functions (all) - deploy/tests cloud functions
-events (create) - update/test workflow
-streams (cron) - test cron job results
-streams (state) - implement/test child state
+functions (all)
+  update current data to match latest models
+  test cloud functions
+events (create)
+  update/test workflow
+streams (cron)
+  test cron job results
+  implement/test child state

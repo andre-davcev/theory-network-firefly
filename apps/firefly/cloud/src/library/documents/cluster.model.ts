@@ -2,10 +2,10 @@ import { FirebaseDocument } from '../interfaces';
 
 export interface Cluster extends FirebaseDocument
 {
-    name            : string;
-    tagline         : string;
-    description     : string;
     bucketPath      : string;
+    description     : string;
+    name            : string;
     private         : boolean;
     subscriberCount : number;
+    tagline         : string;
 }

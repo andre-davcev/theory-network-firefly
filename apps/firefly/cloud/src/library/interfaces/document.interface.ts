@@ -2,10 +2,11 @@ import { firestore } from 'firebase/app';
 
 export interface FirebaseDocument
 {
-    version     : string;
-    id          : string;
-    userId      : string;
     dateCreated : firestore.FieldValue;
     dateUpdated : firestore.FieldValue;
+    id          : string;
+    userId      : string;
+    version     : string;
+
     metadata?   : Record<string, any>;
 }
