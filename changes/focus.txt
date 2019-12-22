@@ -1,14 +1,12 @@
-events (create)
-  test device create
+streams (all)
+  streams (cron)
+  streams (state)
+  streams (app)
 functions (test)
   clusters (delete)
   events (update)
   icons (delete)
   images (delete)
-  streams (cron)
   users (create)
   users (delete)
   users (update)
-streams (cron)
-  test cron job results
-  implement/test child state
