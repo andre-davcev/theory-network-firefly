@@ -6,7 +6,7 @@ import { switchMap, catchError, map, finalize } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { ActionClusterIconUriSet, ActionClusterIconPathSet, ActionUserIconsGetData , ActionUserIconsReset } from '@firefly/core';
-import { Pages } from '../pages.enum';
+import { Pages } from '@firefly/mobile';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 
 const { Camera } = Plugins;

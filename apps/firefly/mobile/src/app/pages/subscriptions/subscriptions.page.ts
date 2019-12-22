@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { StateMobile } from '@firefly/mobile';
+import { MenuController } from '@ionic/angular';
 
 @Component
 ({
@@ -13,10 +16,21 @@ import { Store } from '@ngxs/store';
 
 export class PageSubscriptions
 {
-    constructor(private store: Store) { }
+    @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+
+    constructor
+    (
+        private store : Store,
+        private menu  : MenuController
+    ) { }
 
     ionViewWillEnter()
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+    }
+
+    public menuOpen(): void
+    {
+        this.menu.open();
     }
 }

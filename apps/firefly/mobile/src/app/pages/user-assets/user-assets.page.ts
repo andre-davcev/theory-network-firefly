@@ -4,7 +4,7 @@ import { Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Pages } from '../pages.enum';
+import { Pages } from '@firefly/mobile';
 
 @Component
 ({

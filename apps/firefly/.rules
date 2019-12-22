@@ -1,311 +1,379 @@
 service cloud.firestore {
   match /databases/{database}/documents {
     match /alerts/{alertId} {
-      allow get: canReadItem(uid(), data());
-      allow list: canReadItem(uid(), data());
-      allow create: canCreateItem(uid());
-      allow update: canUpdateItem(uid(), data());
-      allow delete: canDeleteItem(uid(), data());
+      allow get:    alertCanGet(uid, dataNew());
+      allow list:   alertCanList(uid(), dataNew());
+      allow create: alertCanCreate(uid(), dataOld(), dataNew());
+      allow update: alertCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: alertCanDelete(uid(), dataNew());
     }
 
     match /clusters/{clusterId} {
-      allow get: canReadAsset(uid(), data());
-      allow list: canReadAsset(uid(), data());
-      allow create: canCreateAsset(uid(), data());
-      allow update: canUpdateAsset(uid(), data(), dataNew());
-      allow delete: canDeleteAsset(uid(), data());
+      allow get:    canReadAsset(uid(), dataOld());
+      allow list:   canReadAsset(uid(), dataOld());
+      allow create: canCreateAsset(uid(), dataOld());
+      allow update: canUpdateAsset(uid(), dataOld(), dataNew());
+      allow delete: canDeleteAsset(uid(), dataOld());
     }
 
     match /cluster-subscribers/{clusterId} {
-      allow get: canReadAsset(uid(), document('clusters', clusterId));
-      allow get: canReadAsset(uid(), document('clusters', clusterId));
+      allow get:    canReadAsset(uid(), document('clusters', clusterId));
+      allow list:   canReadAsset(uid(), document('clusters', clusterId));
       allow create: canCreateAssetRef(uid(), document('clusters', clusterId));
-      allow update: canUpdateSubscribers(uid(), data(), dataNew());
+      allow update: canUpdateSubscribers(uid(), dataOld(), dataNew());
       allow delete: canDeleteAssetRef(uid(), document('clusters', clusterId));
     }
 
     match /events/{eventId} {
-      allow get: canReadAsset(uid(), data());
-      allow list: canReadAsset(uid(), data());
-      allow create: canCreateAsset(uid(), data());
-      allow update: canUpdateAsset(uid(), data(), dataNew());
-      allow delete: canDeleteAsset(uid(), data());
+      allow get:    canReadAsset(uid(), dataOld());
+      allow list:   canReadAsset(uid(), dataOld());
+      allow create: canCreateAsset(uid(), dataOld());
+      allow update: canUpdateAsset(uid(), dataOld(), dataNew());
+      allow delete: canDeleteAsset(uid(), dataOld());
     }
 
     match /icons/{iconId} {
-      allow get: canReadAsset(uid(), data());
-      allow list: canReadAsset(uid(), data());
-      allow create: canCreateAsset(uid(), data());
-      allow update: canUpdateAsset(uid(), data(), dataNew());
-      allow delete: canDeleteAsset(uid(), data());
+      allow get:    canReadAsset(uid(), dataOld());
+      allow list:   canReadAsset(uid(), dataOld());
+      allow create: canCreateAsset(uid(), dataOld());
+      allow update: canUpdateAsset(uid(), dataOld(), dataNew());
+      allow delete: canDeleteAsset(uid(), dataOld());
     }
 
     match /images/{imageId} {
-      allow get: canReadAsset(uid(), data());
-      allow list: canReadAsset(uid(), data());
-      allow create: canCreateAsset(uid(), data());
-      allow update: canUpdateAsset(uid(), data(), dataNew());
-      allow delete: canDeleteAsset(uid(), data());
+      allow get:    canReadAsset(uid(), dataOld());
+      allow list:   canReadAsset(uid(), dataOld());
+      allow create: canCreateAsset(uid(), dataOld());
+      allow update: canUpdateAsset(uid(), dataOld(), dataNew());
+      allow delete: canDeleteAsset(uid(), dataOld());
     }
 
     match /users/{userId} {
-      allow get: canReadUser(uid(), userId);
-      allow list: canReadUser(uid(), userId);
+      allow get:    canReadUser(uid(), userId);
+      allow list:   canReadUser(uid(), userId);
       allow create: canWriteUser(uid(), userId);
       allow update: canUpdateUser(uid(), userId);
       allow delete: canDeleteUser(uid(), userId);
     }
 
-    match /user-alerts/{userId} {
-      allow get: canReadUser(uid(), userId);
-      allow list: canReadUser(uid(), userId);
-      allow create: canCreateUser(uid(), userId);
-      allow update: canUpdateUser(uid(), userId);
-      allow delete: canDeleteUser(uid(), userId);
-    }
-
-    match /user-clusters/{userId} {
-      allow get: canReadUserAsset(uid(), userId);
-      allow list: canReadUserAsset(uid(), userId);
-      allow create: canWriteUserAsset(uid(), userId);
-      allow update: canUpdateUserAsset(uid(), userId);
-      allow delete: canDeleteUserAsset(uid(), userId);
-    }
-
-    match /user-events/{userId} {
-      allow get: canReadUserAsset(uid(), userId);
-      allow list: canReadUserAsset(uid(), userId);
-      allow create: canWriteUserAsset(uid(), userId);
-      allow update: canUpdateUserAsset(uid(), userId);
-      allow delete: canDeleteUserAsset(uid(), userId);
-    }
-
-    match /user-icons/{userId} {
-      allow get: canReadUserAsset(uid(), userId);
-      allow list: canReadUserAsset(uid(), userId);
-      allow create: canWriteUserAsset(uid(), userId);
-      allow update: canUpdateUserAsset(uid(), userId);
-      allow delete: canDeleteUserAsset(uid(), userId);
-    }
-
-    match /user-images/{userId} {
-      allow get: canReadUserAsset(uid(), userId);
-      allow list: canReadUserAsset(uid(), userId);
-      allow create: canWriteUserAsset(uid(), userId);
-      allow update: canUpdateUserAsset(uid(), userId);
-      allow delete: canDeleteUserAsset(uid(), userId);
-    }
-
     match /user-profiles/{userId} {
-      allow get: canReadUserProfile();
-      allow list: canReadUserProfile(uid(), userId);
+      allow get:    canReadUserProfile();
+      allow list:   canReadUserProfile(uid(), userId);
       allow create: canWriteUserProfile(uid(), userId);
       allow update: canUpdateUserProfile(uid(), userId);
       allow delete: canDeleteUserProfile(uid(), userId);
     }
 
-    match /user-roles/{userId} {
-      allow get: canReadUserRoles(uid(), userId);
-      allow list: canReadUserRoles(uid(), userId);
-      allow create: canWriteUserRoles(uid(), userId);
-      allow update: canUpdateUserRoles(uid(), userId);
-      allow delete: canDeleteUserRoles(uid(), userId);
-    }
-
-    match /user-stream/{userId} {
-      allow get: canReadUser(uid(), userId);
-      allow list: canReadUser(uid(), userId);
-      allow create: canWriteUser(uid(), userId);
-      allow update: canUpdateUser(uid(), userId);
-      allow delete: canDeleteUser(uid(), userId);
-    }
-
     match /user-subscriptions/{userId} {
-      allow get: canReadUser(uid(), userId);
-      allow list: canReadUser(uid(), userId);
-      allow create: canWriteUser(uid(), userId);
+      allow get:    canReadUser(uid(),   userId);
+      allow list:   canReadUser(uid(),   userId);
+      allow create: canWriteUser(uid(),  userId);
       allow update: canUpdateUser(uid(), userId);
       allow delete: canDeleteUser(uid(), userId);
     }
 
-    function auth() {
-      return request.auth;
+    function documentValidCreate(uid, data)
+    {
+        return data.version     == null &&
+               data.id          == null &&
+               data.userId      == uid  &&
+               data.dateCreated == null &&
+               data.dateUpdated == null &&
+               data.metadata    == null;
     }
 
-    function uid() {
-      return auth().uid;
+    function documentValidUpdate(uid, dataOld, dataNew)
+    {
+        return dataNew.version     == dataOld.version     &&
+               dataNew.id          == dataOld.id          &&
+               dataNew.userId      == dateOld.userId      &&
+               dataNew.dateCreated == dataOld.dateCreated &&
+               dataNew.dateUpdated is timestamp           &&
+               dataNew.metadata    == null;
     }
 
-    function data() {
-      return resource.data;
+    function alertValidCreate(uid, data)
+    {
+        return false;
     }
 
-    function dataNew() {
-      return request.resource.data;
+    function alertValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.name        == dataOld.name        &&
+               dataNew.description == dataOld.description &&
+               dataNew.bucketPath  == dataOld.bucketPath  &&
+               dataNew.eventId     == dataOld.eventId     &&
+               dataNew.clusterId   == dataOld.clusterId   &&
+               dataNew.dateTime    == dataOld.dateTime    &&
+               dataNew.tokens      == dataOld.tokens      &&
+               dataNew.url         == dataOld.url         &&
+               !dataOld.read                              &&
+               dataNew.read;
     }
 
-    function document(collection, id) {
-      return get(/databases/${database}/documents/$(collection)/$(id));
+    function cityValidCreate(uid, data)
+    {
+        return false;
     }
 
-    function dataOwner(data) {
-      return data.userId;
+    function cityValidUpdate(uid, dataOld, dataNew)
+    {
+        return false;
     }
 
-    function isAuthenticated(uid) {
-      return uid != null;
+    function clusterValidCreate(uid, data)
+    {
+        return documentValidCreate(uid, data) &&
+               data.name            is string &&
+               data.tagline         is string &&
+               data.description     is string &&
+               data.bucketPath      is string &&
+               data.private         is boolean &&
+               data.subscriberCount == 0;
     }
 
-    function isEmailVerified() {
-      return request.auth.token.email_verified;
+    function clusterValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.name            is string &&
+               dataNew.tagline         is string &&
+               dataNew.description     is string &&
+               dataNew.bucketPath      is string &&
+               dataNew.private         is boolean &&
+               dataNew.subscriberCount == dataOld.subscriberCount;
     }
 
-    function isOwner(userId, ownerId) {
-      return userId == ownerId;
+    function eventValidCreate(uid, data)
+    {
+        return documentValidCreate(uid, data) &&
+               data.name            is string     &&
+               data.tagline         is string     &&
+               data.description     is string     &&
+               data.bucketPath      is string     &&
+               data.private         is boolean    &&
+               data.geopoint        is geopoint   &&
+               data.city            != null       &&
+               data.city.geopoint   is geopoint   &&
+               data.city.cityId     is string     &&
+               data.city.city       is string     &&
+               data.city.region     is string     &&
+               data.city.country    is string     &&
+               data.timeStart       is string     &&
+               data.timeEnd         is string     &&
+               data.timeNotify      is string     &&
+               data.clusters        is array      &&
+               data.clusters.size() == 1          &&
+               !data.notifyComplete;
     }
 
-    function isNotChangingOwner(userId, data) {
-      return userId == data.userId;
+    function eventValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew)         &&
+               dataNew.name            is string                  &&
+               dataNew.tagline         is string                  &&
+               dataNew.description     is string                  &&
+               dataNew.bucketPath      is string                  &&
+               dataNew.private         is boolean                 &&
+               dataNew.geopoint        is geopoint                &&
+               dataNew.city            != null                    &&
+               dataNew.city.geopoint   is geopoint                &&
+               dataNew.city.cityId     is string                  &&
+               dataNew.city.city       is string                  &&
+               dataNew.city.region     is string                  &&
+               dataNew.city.country    is string                  &&
+               dataNew.timeStart       is string                  &&
+               dataNew.timeEnd         is string                  &&
+               dataNew.timeNotify      is string                  &&
+               dataNew.clusters        is array                   &&
+               dataNew.clusters.size() == dataOld.clusters.size() &&
+               !data.notifyComplete;
     }
 
-    function isNotChangingUserId(userId, data) {
-      return userId == data.id;
+    function iconValidCreate(uid, data)
+    {
+        return documentValidCreate(uid, data) &&
+               data.name        is string         &&
+               data.description is string         &&
+               data.bucketPath  is string         &&
+               data.mediaType   is string;
     }
 
-    function isPublic(data) {
-      return !data.private;
+    function iconValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.name        is string              &&
+               dataNew.description is string              &&
+               dataNew.bucketPath  is string              &&
+               dataNew.mediaType   is string;
     }
 
-    function isPublished(data) {
-      return !data.draft;
+    function imageValidCreate(uid, data)
+    {
+        return documentValidCreate(uid, data) &&
+               data.name        is string         &&
+               data.description is string         &&
+               data.bucketPath  is string         &&
+               data.mediaType   is string;
     }
 
-    function isSuperAdmin(userId) {
-      return userId == 'baLysAd71cRyZjh0hr6poxR8an13';
+    function imageValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.name        is string              &&
+               dataNew.description is string              &&
+               dataNew.bucketPath  is string              &&
+               dataNew.mediaType   is string;
     }
 
-    function ownerRoles(ownerId) {
-      return document('user-roles', ownerId);
+    function streamValidCreate(uid, data)
+    {
+        return false;
     }
 
-    function hasRole(userId, ownerRoles) {
-      return ownerRoles.admins[userId] || ownerRoles.editors[userId];
+    function imageValidUpdate(uid, dataOld, dataNew)
+    {
+        return false;
     }
 
-    function hasRoleAdmin(userId, ownerRoles) {
-      return ownerRoles.admins[userId];
+    function userValidCreate(uid, data)
+    {
+        return documentValidCreate(uid, data)    &&
+               data.providerId          == 'email'   &&
+               data.language            is string    &&
+               data.email               is string    &&
+               data.phoneNumber         is string    &&
+               data.location            is geopoint  &&
+               data.cityId              is string    &&
+               data.dateLoggedIn        is timestamp &&
+               data.tokens              is array     &&
+               data.subscriptions       is array     &&
+               data.subscriptionsStatus != null      &&
+               data.roleEditors         is array     &&
+               data.roleEditors.size()  == 0         &&
+               data.roleAdmins          is array     &&
+               data.roleAdmins.size()   == 0;
     }
 
-    function canReadUserAsset(userId, ownerId) {
-      return isOwner(userId, ownerId) || hasRole(userId, ownerRoles(ownerId)) || isSuperAdmin(userId);
+    function userValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.providerId          == 'email'   &&
+               dataNew.language            is string    &&
+               dataNew.email               is string    &&
+               dataNew.phoneNumber         is string    &&
+               dataNew.location            is geopoint  &&
+               dataNew.cityId              is string    &&
+               dataNew.dateLoggedIn        is timestamp &&
+               dataNew.tokens              is array     &&
+               dataNew.subscriptions       is array     &&
+               dataNew.subscriptionsStatus != null      &&
+               data.roleEditors            is array     &&
+               data.roleAdmins             is array;
     }
 
-    function canCreateUserAsset(userId, ownerId) {
-      return isOwner(userId, ownerId) || hasRoleAdmin(userId, ownerRoles(ownerId)) || isSuperAdmin(userId);
+    function userProfileValidCreate(uid, data)
+    {
+        return documentValidCreate(uid, data) &&
+               data.nameFirst   is string         &&
+               data.nameLast    is string         &&
+               data.bucketPath  is string         &&
+               data.companyName is string         &&
+               data.isCompany   is boolean;
     }
 
-    function canUpdateUserAsset(userId, ownerId) {
-      return canReadUserAsset(userId, ownerId);
+    function userProfileValidUpdate(uid, dataOld, dataNew)
+    {
+        return documentValidUpdate(uid, dataOld, dataNew) &&
+               dataNew.nameFirst   is string              &&
+               dataNew.nameLast    is string              &&
+               dataNew.bucketPath  is string              &&
+               dataNew.companyName is string              &&
+               dataNew.isCompany   is boolean;
     }
 
-    function canDeleteUserAsset(userId, ownerId) {
-      return canCreateUserAsset(userId, ownerId);
-    }
+    function auth()                             { return request.auth; }
+    function uid()                              { return auth().uid; }
+    function isAuthenticated(uid)               { return uid != null; }
+    function dataOld()                          { return resource.data; }
+    function dataNew()                          { return request.resource.data; }
+    function document(collection, id)           { return get(/databases/${database}/documents/$(collection)/$(id)); }
+    function user(data)                         { return document('users', data.userId); }
+    function isDataOwner(uid, data)             { return uid == data.userId; }
+    function isSuperAdmin(uid)                  { return uid == 'baLysAd71cRyZjh0hr6poxR8an13'; }
+    function hasRoleEditor(uid, data, user)     { return isDataOwner(uid, data) || isSuperAdmin(uid) || user.roleAdmins[uid] != null || user.roleEditors[uid] != null; }
+    function hasRoleAdmin(uid, data)            { return isDataOwner(uid, data) || isSuperAdmin(uid) || user(data).roleAdmins[uid] != null; }
+    function isPublic(data)                     { return data.private != null || !data.private; }
 
-    function canReadUser(userId, ownerId) {
-      return canReadUserAsset(userId, ownerId);
-    }
+    function itemCanGet(uid, data)    { return isDataOwner(uid, data) || isSuperAdmin(uid); }
+    function itemCanList(uid, data)   { return isDataOwner(uid, data) || isSuperAdmin(uid); }
+    function itemCanCreate(uid, data) { return isDataOwner(uid, data) || isSuperAdmin(uid); }
+    function itemCanUpdate(uid, data) { return isDataOwner(uid, data) || isSuperAdmin(uid); }
+    function itemCanDelete(uid, data) { return isDataOwner(uid, data) || isSuperAdmin(uid); }
 
-    function canCreateUser(userId, ownerId) {
-      return (isOwner(userId, ownerId) || isSuperAdmin(userId)) && isNotChangingUserId(userId, data());
-    }
+    function assetCanGet(uid, data)    { return isPublic(data) || hasRoleEditor(uid, data, user(data)); }
+    function assetCanList(uid, data)   { return isPublic(data) || hasRoleEditor(uid, data, user(data)); }
+    function assetCanCreate(uid, data) { return hasRoleAdmin(uid, data); }
+    function assetCanUpdate(uid, data) { return hasRoleEditor(uid, data, user(data)); }
+    function assetCanDelete(uid, data) { return hasRoleAdmin(uid, data); }
 
-    function canUpdateUser(userId, ownerId) {
-      return (isOwner(userId, ownerId) || isSuperAdmin(userId)) && isNotChangingUserId(userId, dataNew());
-    }
+    function alertCanGet(uid, data)                { return itemCanGet(uid, data); }
+    function alertCanList(uid, data)               { return itemCanList(uid, data); }
+    function alertCanCreate(uid, data)             { return false; }
+    function alertCanUpdate(uid, dataOld, dataNew) { return alertValidUpdate(uid, dataOld, dataNew) && itemCanUpdate(uid, dataOld); }
+    function alertCanDelete(uid, data)             { return itemCanDelete(uid, data); }
 
-    function canDeleteUser(userId, ownerId) {
-      return isOwner(userId, ownerId) || isSuperAdmin(userId);
-    }
+    function cityCanGet(uid, data)                { return false; }
+    function cityCanList(uid, data)               { return false; }
+    function cityCanCreate(uid, data)             { return false; }
+    function cityCanUpdate(uid, dataOld, dataNew) { return false; }
+    function cityCanDelete(uid, data)             { return false; }
 
-    function canReadUserProfile() {
-      return isAuthenticated(uid());
-    }
+    function clusterCanGet(uid, data)                { return assetCanGet(uid, data); }
+    function clusterCanList(uid, data)               { return assetCanList(uid, data); }
+    function clusterCanCreate(uid, data)             { return clusterValidCreate(uid, data) && assetCanCreate(uid, data); }
+    function clusterCanUpdate(uid, dataOld, dataNew) { return clusterValidUpdate(uid, dataOld, dataNew) && assetCanUpdate(uid, dataOld); }
+    function clusterCanDelete(uid, data)             { return assetCanDelete(uid, data); }
 
-    function canCreateUserProfile(userId, ownerId) {
-      return canCreateUser(userId, ownerId);
-    }
+    function eventCanGet(uid, data)                { return assetCanGet(uid, data); }
+    function eventCanList(uid, data)               { return assetCanList(uid, data); }
+    function eventCanCreate(uid, data)             { return eventValidCreate(uid, data) && assetCanCreate(uid, data); }
+    function eventCanUpdate(uid, dataOld, dataNew) { return eventValidUpdate(uid, dataOld, dataNew) && assetCanUpdate(uid, dataOld); }
+    function eventCanDelete(uid, data)             { return assetCanDelete(uid, data); }
 
-    function canUpdateUserProfile(userId, ownerId) {
-      return (isOwner(userId, ownerId) || hasRoleAdmin(userId, ownerRoles(ownerId)) || isSuperAdmin(userId)) && isNotChangingUserId(userId, dataNew());
-    }
+    function iconCanGet(uid, data)                { return assetCanGet(uid, data); }
+    function iconCanList(uid, data)               { return assetCanList(uid, data); }
+    function iconCanCreate(uid, data)             { return iconValidCreate(uid, data) && assetCanCreate(uid, data); }
+    function iconCanUpdate(uid, dataOld, dataNew) { return iconValidUpdate(uid, dataOld, dataNew) && assetCanUpdate(uid, dataOld); }
+    function iconCanDelete(uid, data)             { return assetCanDelete(uid, data); }
 
-    function canDeleteUserProfile(userId, ownerId) {
-      return canCreateUserProfile(userId, ownerId);
-    }
+    function imageCanGet(uid, data)                { return assetCanGet(uid, data); }
+    function imageCanList(uid, data)               { return assetCanList(uid, data); }
+    function imageCanCreate(uid, data)             { return imageValidCreate(uid, data) && assetCanCreate(uid, data); }
+    function imageCanUpdate(uid, dataOld, dataNew) { return imageValidUpdate(uid, dataOld, dataNew) && assetCanUpdate(uid, dataOld); }
+    function imageCanDelete(uid, data)             { return assetCanDelete(uid, data); }
 
-    function canReadUserRoles(userId, ownerId) {
-      return canReadUser(userId, ownerId);
-    }
+    function streamCanGet(uid, data)                { return user(data).cityId == data.id; }
+    function streamCanList(uid, data)               { return false; }
+    function streamCanCreate(uid, data)             { return false; }
+    function streamCanUpdate(uid, dataOld, dataNew) { return false; }
+    function streamCanDelete(uid, data)             { return false; }
 
-    function canCreateUserRoles(userId, ownerId) {
-      return canCreateUserAsset(userId, ownerId);
-    }
+    function userCanGet(uid, data)                { return assetCanGet(uid, data); }
+    function userCanList(uid, data)               { return false; }
+    function userCanCreate(uid, data)             { return userValidCreate(uid, data) && (isDataOwner(uid, data) || isSuperAdmin(uid)); }
+    function userCanUpdate(uid, dataOld, dataNew) { return userValidUpdate(uid, dataOld, dataNew) && (isDataOwner(uid, data) || isSuperAdmin(uid)); }
+    function userCanDelete(uid, data)             { return false; }
 
-    function canUpdateUserRoles(userId, ownerId) {
-      return canCreateUserAsset(userId, ownerId);
-    }
+    function userRolesCanGet(uid, data)                { return hasRoleAdmin(uid, data); }
+    function userRolesCanList(uid, data)               { return false; }
+    function userRolesCanCreate(uid, data)             { return hasRoleAdmin(uid, data); }
+    function userRolesCanUpdate(uid, dataOld, dataNew) { return hasRoleAdmin(uid, data); }
+    function userRolesCanDelete(uid, data)             { return false; }
 
-    function canDeleteUserRoles(userId, ownerId) {
-      return canCreateUserAsset(userId, ownerId);
-    }
-
-    function canReadItem(userId, data) {
-      return isOwner(userId, dataOwner(data)) || isSuperAdmin(userId);
-    }
-
-    function canCreateItem(userId) {
-      return isSuperAdmin(userId);
-    }
-
-    function canUpdateItem(userId, data) {
-      return isOwner(userId, dataOwner(data)) || isSuperAdmin(userId);
-    }
-
-    function canDeleteItem(userId, data) {
-      return canUpdateItem(userId, data);
-    }
-
-    function canCreateAssetRef(userId, data) {
-      return isOwner(userId, dataOwner(data)) || hasRoleAdmin(userId, ownerRoles(dataOwner(data))) || isSuperAdmin(userId);
-    }
-
-    function canUpdateAssetRef(userId) {
-      return isAuthenticated(userId);
-    }
-
-    function canDeleteAssetRef(userId, data) {
-      return canCreateAssetRef(userId, data);
-    }
-
-    function canReadAsset(userId, data) {
-      return (isPublic(data) && isPublished(data)) || isOwner(userId, dataOwner(data)) || hasRole(userId, ownerRoles(dataOwner(data))) || isSuperAdmin(userId);
-    }
-
-    function canCreateAsset(userId, data) {
-      return canCreateAssetRef(userId, data) && isNotChangingOwner(userId, data);
-    }
-
-    function canUpdateAsset(userId, data, dataNew) {
-      return (isOwner(userId, dataOwner(data)) || hasRole(userId, ownerRoles(dataOwner(data))) || isSuperAdmin(userId)) && isNotChangingOwner(userId, dataNew);
-    }
-
-    function canDeleteAsset(userId, data) {
-      return canCreateAssetRef(userId, data);
-    }
-
-    function canUpdateSubscribers(userId, data, dataNew) {
-
-    }
-  }
+    function userProfileCanGet(uid, data)                { return isAuthenticated(uid); }
+    function userProfileCanList(uid, data)               { return false; }
+    function userProfileCanCreate(uid, data)             { return userProfileValidCreate(uid, data) && assetCanCreate(uid, data); }
+    function userProfileCanUpdate(uid, dataOld, dataNew) { return userProfileValidUpdate(uid, dataOld, dataNew) && assetCanUpdate(uid, dataOld); }
+    function userProfileCanDelete(uid, data)             { return false; }
 }

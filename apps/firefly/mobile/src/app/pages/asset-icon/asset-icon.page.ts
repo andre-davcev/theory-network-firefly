@@ -9,7 +9,7 @@ import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateIcon, ActionIconPatch, ActionUserIconsReset, ActionIconUriSet, ActionClusterIconPathSet, ActionIconSetId, MockIconId, ActionIconSave } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { Icon } from '@firefly/cloud';
-import { Pages } from '../pages.enum';
+import { Pages } from '@firefly/mobile';
 
 const { Camera } = Plugins;
 

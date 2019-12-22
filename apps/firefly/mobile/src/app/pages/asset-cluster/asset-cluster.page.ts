@@ -7,7 +7,7 @@ import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins,
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateCluster, ActionClusterIconUriSet, ActionClusterIconPathSet, ActionClusterSave } from '@firefly/core';
 import { PageIconSelector } from '../icon-selector';
-import { Pages } from '../pages.enum';
+import { Pages } from '@firefly/mobile';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
 

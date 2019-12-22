@@ -7,7 +7,7 @@ import { Observable, from } from 'rxjs';
 import { StateUserAlerts } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
-import { Pages } from '../pages.enum';
+import { Pages } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 @Component
 ({

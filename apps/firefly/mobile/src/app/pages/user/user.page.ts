@@ -3,7 +3,7 @@ import { StatusBarStyle } from '@capacitor/core';
 import { Store } from '@ngxs/store';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Pages } from '../pages.enum';
+import { Pages } from '@firefly/mobile';
 
 @Component
 ({

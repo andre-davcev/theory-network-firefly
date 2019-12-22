@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform, MenuController, NavController } from '@ionic/angular';
 import { from } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
@@ -7,10 +7,10 @@ import { RouterNavigation, Navigate } from '@ngxs/router-plugin';
 
 import { PlatformEnum } from '@theory/ionic';
 
-import { Pages } from '@firefly/app/pages';
+import { Pages } from '@firefly/mobile';
 import { ActionUserLogout } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
-import { ActionMobileMenuOpened, ActionMobileMenuClosed } from '@firefly/mobile';
+import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
 
 const { SplashScreen } = Plugins;
 
@@ -52,7 +52,8 @@ export class ComponentApp
     {
         this.menu.close();
         this.menuClosed();
-        this.store.dispatch(new Navigate([page]));
+
+        this.store.dispatch(new ActionMobileNavigateRoot(page));
     }
 
     public logout(): void
