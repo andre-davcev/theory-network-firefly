@@ -1,6 +1,7 @@
 export enum ActionsCluster
 {
     Reset  = '[Cluster] Reset',
+    Dirty  = '[Cluster] Dirty',
     Get    = '[Cluster] Get',
     SetId  = '[Cluster] SetId',
     Set    = '[Cluster] Set',
