@@ -1,12 +1,10 @@
 events (create)
-  update/test workflow
+  test device create
 functions (test)
-  cities (create)
   clusters (delete)
-  events (create)
   events (update)
-  icons (update)
-  images (update)
+  icons (delete)
+  images (delete)
   streams (cron)
   users (create)
   users (delete)

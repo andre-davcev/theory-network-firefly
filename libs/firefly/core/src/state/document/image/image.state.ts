@@ -60,10 +60,11 @@ export class StateImage extends StateDocument<Image, StateImageModel>
               userId      : undefined,
               dateCreated : undefined,
               dateUpdated : undefined,
+              metadata    : {},
 
-              name       : null,
               bucketPath : null,
-              mediaType  : null
+              mediaType  : null,
+              name       : null
           },
           {
               ActionReset:  ActionImageReset,

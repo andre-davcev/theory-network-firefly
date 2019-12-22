@@ -60,10 +60,11 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
               userId      : undefined,
               dateCreated : undefined,
               dateUpdated : undefined,
+              metadata    : {},
 
-              name       : null,
               bucketPath : null,
-              mediaType  : null
+              mediaType  : null,
+              name       : null
           },
           {
               ActionReset:  ActionIconReset,

@@ -1,7 +1,7 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { FieldValue, DocumentSnapshot, CollectionReference, Firestore, WriteResult } from '@google-cloud/firestore';
+import { DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceCities, ServiceFirestore, Event } from '../library';
+import { ServiceCities, Event } from '../library';
 
 const database: Firestore = db();
 
@@ -18,7 +18,7 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
 
     if (before.city.cityId !== after.city.cityId)
     {
-        promises.push(ServiceCities.createIfNew(database, after.city));
+        promises.push(ServiceCities.createIfNew(database, after));
     }
 
     return promises;

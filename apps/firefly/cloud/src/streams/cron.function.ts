@@ -1,7 +1,7 @@
 import { runWith, EventContext } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { ServiceStreams, Cluster, Event, StreamVariable, StreamCluster } from '../library';
+import { ServiceStreams, Cluster, Event, GlobalVariable, StreamCluster } from '../library';
 import { City } from '../library';
 
 const StreamsCron =
@@ -116,8 +116,8 @@ onRun(async (context: EventContext) =>
                 clusterScore += (clusterScore * distanceScores[cityIdEvent]);
             });
 
-            score = (clusterScore * StreamVariable.ClusterScoreWeightRaw) +
-                    (clusterScore * StreamVariable.ClusterScoreWeightSubscribers * (subscriberCount / subscriberMax));
+            score = (clusterScore * GlobalVariable.ClusterScoreWeightRaw) +
+                    (clusterScore * GlobalVariable.ClusterScoreWeightSubscribers * (subscriberCount / subscriberMax));
 
             cityStream[clusterId] = { score } as StreamCluster;
         });

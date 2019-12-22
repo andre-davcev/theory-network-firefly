@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, WriteResult, QueryDocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { Version, ServiceFirestore, ServiceCities, StreamVariable, City } from '../library';
+import { Version, ServiceFirestore, ServiceCities, GlobalVariable, City } from '../library';
 
 const database: Firestore = db();
 
@@ -11,7 +11,7 @@ firestore.
 document('cities/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: City = ServiceFirestore.create(snapshot, Version.Cities);
+    const object: City = ServiceFirestore.create<City>(snapshot, Version.Cities);
 
     const id:       string                      = object.id;
     const geopoint: db.GeoPoint                 = object.geopoint;
@@ -21,19 +21,24 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 
     cities.forEach((snapshot: QueryDocumentSnapshot) =>
     {
-        const city:     Record<string, any> = snapshot.data();
-        const distance: number              = ServiceCities.distanceBetweenPoints(geopoint, city.geopoint);
+        const city: City = snapshot.data() as City;
 
-        if (distance <= StreamVariable.DistanceThreshold)
+        if (id !== snapshot.id)
         {
-            nearby[city.id] = distance;
-            city.nearby[id] = distance;
+            const distance: number = ServiceCities.distanceBetweenPoints(geopoint, city.geopoint);
 
-            promises.push(snapshot.ref.update({ nearby: city.nearby }));
+            if (distance <= GlobalVariable.DistanceThreshold)
+            {
+                nearby[city.id] = distance;
+                city.nearby[id] = distance;
+
+                promises.push(snapshot.ref.update({ nearby: city.nearby }));
+            }
         }
     });
 
     object.nearby = nearby;
+    object.userId = GlobalVariable.UserAdmin;
 
     return snapshot.ref.update(object);
 });
