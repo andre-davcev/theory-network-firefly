@@ -1,8 +1,16 @@
-functions (all)
-  update current data to match latest models
-  test cloud functions
 events (create)
   update/test workflow
+functions (test)
+  cities (create)
+  clusters (delete)
+  events (create)
+  events (update)
+  icons (update)
+  images (update)
+  streams (cron)
+  users (create)
+  users (delete)
+  users (update)
 streams (cron)
   test cron job results
   implement/test child state
