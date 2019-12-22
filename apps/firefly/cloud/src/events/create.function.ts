@@ -11,7 +11,7 @@ firestore.
 document('events/{id}').
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const object: Event = ServiceFirestore.create<Event>(snapshot, { version: Version.Events });
+    const object: Event = ServiceFirestore.create<Event>(snapshot, Version.Events);
 
     return Promise.all
     ([

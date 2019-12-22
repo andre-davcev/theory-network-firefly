@@ -1,8 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore, DocumentReference, WriteResult, FieldValue } from '@google-cloud/firestore';
+import { DocumentSnapshot, Firestore, DocumentReference, FieldValue } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version, Cluster, Alert, UserProfile } from '../library';
-import { User } from 'firebase';
+import { ServiceFirestore, Version, Cluster, Alert, User, UserProfile } from '../library';
 
 const database: Firestore = db();
 
@@ -13,7 +12,7 @@ document('users/{id}').
 onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
 {
     const id   : string = snapshot.id;
-    const user : User   = ServiceFirestore.create<User>(snapshot, { version: Version.Users } as Partial<User>);
+    const user : User   = ServiceFirestore.create<User>(snapshot, Version.Users);
 
     const documentCluster : DocumentReference = database.collection('clusters').doc();
     const documentAlert   : DocumentReference = database.collection('alerts').doc();
