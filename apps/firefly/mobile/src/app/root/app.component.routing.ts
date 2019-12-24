@@ -17,9 +17,11 @@ export const routes: Routes =
     { path: Pages.AssetsIcons,    loadChildren: '@firefly/page/assets-icons#ModulePageAssetsIcons' },
     { path: Pages.AssetIcon,      loadChildren: '@firefly/page/asset-icon#ModulePageAssetIcon' },
     { path: Pages.AssetsImages,   loadChildren: '@firefly/page/assets-images#ModulePageAssetsImages' },
+    { path: Pages.AssetImage,     loadChildren: '@firefly/page/asset-image#ModulePageAssetImage' },
     { path: Pages.AssetsPlaces,   loadChildren: '@firefly/page/assets-places#ModulePageAssetsPlaces' },
 
     { path: Pages.IconSelector,   loadChildren: '@firefly/page/icon-selector#ModulePageIconSelector' },
+    //{ path: Pages.ImageSelector,   loadChildren: '@firefly/page/image-selector#ModulePageImageSelector' },
 
     { path: Pages.Search,        loadChildren: '@firefly/page/search#ModulePageSearch' },
     { path: Pages.Subscriptions, loadChildren: '@firefly/page/subscriptions#ModulePageSubscriptions' },
