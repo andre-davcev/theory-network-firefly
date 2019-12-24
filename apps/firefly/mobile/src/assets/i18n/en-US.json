@@ -131,7 +131,10 @@
   "page.user-settings.title" : "Settings",
 
   "page.icon-library.title" : "Camera",
-  "page.icon-assets.title" : "Assets",
+  "page.icon-assets.title"  : "Assets",
+
+  "page.image-library.title" : "Camera",
+  "page.image-assets.title"  : "Assets",
 
   "component.map-loading": "Loading Map...",
 
