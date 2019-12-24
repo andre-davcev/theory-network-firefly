@@ -111,6 +111,8 @@
   "page.assets-icon.descriptionPlaceholder" : "Description",
   "page.assets-icon.iconPlaceholder"        : "select icon",
 
+  "page.assets-image.title"         : "Image Details",
+
   "page.assets-icons.title"          : "Icons",
   "page.assets-images.title"         : "Images",
   "page.assets-coupons.title"        : "Coupons",
