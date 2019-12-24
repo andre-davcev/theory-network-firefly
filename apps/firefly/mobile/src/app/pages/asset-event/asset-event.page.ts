@@ -12,6 +12,7 @@ import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } f
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
+import { PageImageSelector } from '../image-selector';
 
 const { Camera } = Plugins;
 
@@ -74,7 +75,11 @@ export class PageAssetEvent
         }
         else if (page === Pages.ImageSelector)
         {
-            if (this.store.selectSnapshot(StateDevice.device))
+          from(this.modal.create({
+            component: PageImageSelector
+          })).
+          subscribe((modal: HTMLIonModalElement) => modal.present());
+           /* if (this.store.selectSnapshot(StateDevice.device))
             {
                 const options: CameraOptions =
                 {
@@ -101,7 +106,7 @@ export class PageAssetEvent
             {
                 this.store.dispatch(new ActionEventImagePathSet()).
                 subscribe();
-            }
+            }*/
         }
         else if (page === Pages.EventLocation)
         {
