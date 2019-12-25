@@ -17,6 +17,8 @@ users (app)
           location,
           cityId
       }
+library (ngxs)
+  child ActionSetData (user/{userId}/subscriptions)
 streams (all)
   streams (cron)
   streams (state)
@@ -29,3 +31,5 @@ functions (test)
   users (create)
   users (delete)
   users (update)
+ios (dev)
+  chrome debugging

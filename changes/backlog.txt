@@ -6,6 +6,7 @@ app (forms)
 app (lists)
   empty icon/message for no data screens
 clusters (create/edit)
+  add private field
   add cluster-events query state
   add ability to add/remove events via query state
   clean flow styling
@@ -19,6 +20,8 @@ events (cron)
             create alert with alert.userId and with alert.tokens
     set event.timeNotifyComplete = true
 events (edit)
+  add private field
+  add url field
   add create/edit
   reverse geocode
 events (list)
@@ -32,14 +35,10 @@ icons (grid/create/edit)
   cleanup flow styling
 images (grid/create/edit)
   cleanup flow styling
-ios (dev)
-  chrome debugging
 library (firebase)
   StateFirestore
     ActionPersistenceOn
     ActionPersistenceOff
-library (ngxs)
-  child ActionSetData (user/{userId}/subscriptions)
 library (mapbox)
   add back tokenized mapbox access token in search service
 map (component)
