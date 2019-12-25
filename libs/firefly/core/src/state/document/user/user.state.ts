@@ -5,7 +5,7 @@ import { Observable, of, from, combineLatest } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
+import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
 import { User } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
@@ -39,6 +39,7 @@ import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions'
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
 import { ActionUserStreamReset, ActionUserStreamGetData } from '../../query/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/user-subscriptions.actions';
+import { GeolocationPosition } from '@capacitor/core';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser implements NgxsOnInit
@@ -51,6 +52,7 @@ export class StateUser implements NgxsOnInit
 
     @Select(StateLanguage.language) language$: Observable<string>;
     @Select(StateUser.data)         data$:     Observable<User>;
+    @Select(StateLocation.location) location$: Observable<GeolocationPosition>;
 
     @Selector() static form(state: StateUserModel): FormNgxs       { return state.form; }
     @Selector() static formGroup(state: StateUserModel): FormGroup { return state.formGroup; }

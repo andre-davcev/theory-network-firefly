@@ -1,75 +1,75 @@
 service cloud.firestore {
   match /databases/{database}/documents {
     match /alerts/{alertId} {
-      allow get:    alertCanGet(uid, dataNew());
-      allow list:   alertCanList(uid(), dataNew());
-      allow create: alertCanCreate(uid(), dataOld(), dataNew());
+      allow get:    alertCanGet(uid(),    dataNew());
+      allow list:   alertCanList(uid(),   dataNew());
+      allow create: alertCanCreate(uid(), dataNew());
       allow update: alertCanUpdate(uid(), dataOld(), dataNew());
       allow delete: alertCanDelete(uid(), dataNew());
     }
 
     match /clusters/{clusterId} {
-      allow get:    canReadAsset(uid(), dataOld());
-      allow list:   canReadAsset(uid(), dataOld());
-      allow create: canCreateAsset(uid(), dataOld());
-      allow update: canUpdateAsset(uid(), dataOld(), dataNew());
-      allow delete: canDeleteAsset(uid(), dataOld());
+      allow get:    clusterCanGet(uid(),    dataNew());
+      allow list:   clusterCanList(uid(),   dataNew());
+      allow create: clusterCanCreate(uid(), dataNew());
+      allow update: clusterCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: clusterCanDelete(uid(), dataNew());
     }
 
-    match /cluster-subscribers/{clusterId} {
-      allow get:    canReadAsset(uid(), document('clusters', clusterId));
-      allow list:   canReadAsset(uid(), document('clusters', clusterId));
-      allow create: canCreateAssetRef(uid(), document('clusters', clusterId));
-      allow update: canUpdateSubscribers(uid(), dataOld(), dataNew());
-      allow delete: canDeleteAssetRef(uid(), document('clusters', clusterId));
+    match /cities/{cityId} {
+      allow get:    cityCanGet(uid(),    dataNew());
+      allow list:   cityCanList(uid(),   dataNew());
+      allow create: cityCanCreate(uid(), dataNew());
+      allow update: cityCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: cityCanDelete(uid(), dataNew());
     }
 
     match /events/{eventId} {
-      allow get:    canReadAsset(uid(), dataOld());
-      allow list:   canReadAsset(uid(), dataOld());
-      allow create: canCreateAsset(uid(), dataOld());
-      allow update: canUpdateAsset(uid(), dataOld(), dataNew());
-      allow delete: canDeleteAsset(uid(), dataOld());
+      allow get:    eventCanGet(uid(),    dataNew());
+      allow list:   eventCanList(uid(),   dataNew());
+      allow create: eventCanCreate(uid(), dataNew());
+      allow update: eventCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: eventCanDelete(uid(), dataNew());
     }
 
     match /icons/{iconId} {
-      allow get:    canReadAsset(uid(), dataOld());
-      allow list:   canReadAsset(uid(), dataOld());
-      allow create: canCreateAsset(uid(), dataOld());
-      allow update: canUpdateAsset(uid(), dataOld(), dataNew());
-      allow delete: canDeleteAsset(uid(), dataOld());
+      allow get:    iconCanGet(uid(),    dataNew());
+      allow list:   iconCanList(uid(),   dataNew());
+      allow create: iconCanCreate(uid(), dataNew());
+      allow update: iconCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: iconCanDelete(uid(), dataNew());
     }
 
     match /images/{imageId} {
-      allow get:    canReadAsset(uid(), dataOld());
-      allow list:   canReadAsset(uid(), dataOld());
-      allow create: canCreateAsset(uid(), dataOld());
-      allow update: canUpdateAsset(uid(), dataOld(), dataNew());
-      allow delete: canDeleteAsset(uid(), dataOld());
+      allow get:    imageCanGet(uid(),    dataNew());
+      allow list:   imageCanList(uid(),   dataNew());
+      allow create: imageCanCreate(uid(), dataNew());
+      allow update: imageCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: imageCanDelete(uid(), dataNew());
+    }
+
+    match /streams/{cityId} {
+      allow get:    streamCanGet(uid(),    dataNew());
+      allow list:   streamCanList(uid(),   dataNew());
+      allow create: streamCanCreate(uid(), dataNew());
+      allow update: streamCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: streamCanDelete(uid(), dataNew());
     }
 
     match /users/{userId} {
-      allow get:    canReadUser(uid(), userId);
-      allow list:   canReadUser(uid(), userId);
-      allow create: canWriteUser(uid(), userId);
-      allow update: canUpdateUser(uid(), userId);
-      allow delete: canDeleteUser(uid(), userId);
+      allow get:    userCanGet(uid(),    dataNew());
+      allow list:   userCanList(uid(),   dataNew());
+      allow create: userCanCreate(uid(), dataNew());
+      allow update: userCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: userCanDelete(uid(), dataNew());
     }
 
     match /user-profiles/{userId} {
-      allow get:    canReadUserProfile();
-      allow list:   canReadUserProfile(uid(), userId);
-      allow create: canWriteUserProfile(uid(), userId);
-      allow update: canUpdateUserProfile(uid(), userId);
-      allow delete: canDeleteUserProfile(uid(), userId);
-    }
-
-    match /user-subscriptions/{userId} {
-      allow get:    canReadUser(uid(),   userId);
-      allow list:   canReadUser(uid(),   userId);
-      allow create: canWriteUser(uid(),  userId);
-      allow update: canUpdateUser(uid(), userId);
-      allow delete: canDeleteUser(uid(), userId);
+      allow get:    userProfileCanGet(uid(),    dataNew());
+      allow list:   userProfileCanList(uid(),   dataNew());
+      allow create: userProfileCanCreate(uid(), dataNew());
+      allow update: userProfileCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: userCanDelete(uid(), dataNew());
     }
 
     function documentValidCreate(uid, data)
@@ -129,41 +129,41 @@ service cloud.firestore {
                data.tagline         is string &&
                data.description     is string &&
                data.bucketPath      is string &&
-               data.private         is boolean &&
+               data.private         is bool   &&
                data.subscriberCount == 0;
     }
 
     function clusterValidUpdate(uid, dataOld, dataNew)
     {
         return documentValidUpdate(uid, dataOld, dataNew) &&
-               dataNew.name            is string &&
-               dataNew.tagline         is string &&
-               dataNew.description     is string &&
-               dataNew.bucketPath      is string &&
-               dataNew.private         is boolean &&
+               dataNew.name            is string          &&
+               dataNew.tagline         is string          &&
+               dataNew.description     is string          &&
+               dataNew.bucketPath      is string          &&
+               dataNew.private         is bool            &&
                dataNew.subscriberCount == dataOld.subscriberCount;
     }
 
     function eventValidCreate(uid, data)
     {
         return documentValidCreate(uid, data) &&
-               data.name            is string     &&
-               data.tagline         is string     &&
-               data.description     is string     &&
-               data.bucketPath      is string     &&
-               data.private         is boolean    &&
-               data.geopoint        is geopoint   &&
-               data.city            != null       &&
-               data.city.geopoint   is geopoint   &&
-               data.city.cityId     is string     &&
-               data.city.city       is string     &&
-               data.city.region     is string     &&
-               data.city.country    is string     &&
-               data.timeStart       is string     &&
-               data.timeEnd         is string     &&
-               data.timeNotify      is string     &&
-               data.clusters        is array      &&
-               data.clusters.size() == 1          &&
+               data.name            is string &&
+               data.tagline         is string &&
+               data.description     is string &&
+               data.bucketPath      is string &&
+               data.private         is bool   &&
+               data.latlng          is latlng &&
+               data.city            != null   &&
+               data.city.latlng     is latlng &&
+               data.city.cityId     is string &&
+               data.city.city       is string &&
+               data.city.region     is string &&
+               data.city.country    is string &&
+               data.timeStart       is string &&
+               data.timeEnd         is string &&
+               data.timeNotify      is string &&
+               data.clusters        is array  &&
+               data.clusters.size() == 1      &&
                !data.notifyComplete;
     }
 
@@ -174,10 +174,10 @@ service cloud.firestore {
                dataNew.tagline         is string                  &&
                dataNew.description     is string                  &&
                dataNew.bucketPath      is string                  &&
-               dataNew.private         is boolean                 &&
-               dataNew.geopoint        is geopoint                &&
+               dataNew.private         is bool                    &&
+               dataNew.latlng          is latlng                  &&
                dataNew.city            != null                    &&
-               dataNew.city.geopoint   is geopoint                &&
+               dataNew.city.latlng     is latlng                  &&
                dataNew.city.cityId     is string                  &&
                dataNew.city.city       is string                  &&
                dataNew.city.region     is string                  &&
@@ -193,9 +193,9 @@ service cloud.firestore {
     function iconValidCreate(uid, data)
     {
         return documentValidCreate(uid, data) &&
-               data.name        is string         &&
-               data.description is string         &&
-               data.bucketPath  is string         &&
+               data.name        is string     &&
+               data.description is string     &&
+               data.bucketPath  is string     &&
                data.mediaType   is string;
     }
 
@@ -211,9 +211,9 @@ service cloud.firestore {
     function imageValidCreate(uid, data)
     {
         return documentValidCreate(uid, data) &&
-               data.name        is string         &&
-               data.description is string         &&
-               data.bucketPath  is string         &&
+               data.name        is string     &&
+               data.description is string     &&
+               data.bucketPath  is string     &&
                data.mediaType   is string;
     }
 
@@ -238,12 +238,12 @@ service cloud.firestore {
 
     function userValidCreate(uid, data)
     {
-        return documentValidCreate(uid, data)    &&
+        return documentValidCreate(uid, data)        &&
                data.providerId          == 'email'   &&
                data.language            is string    &&
                data.email               is string    &&
                data.phoneNumber         is string    &&
-               data.location            is geopoint  &&
+               data.location            is latlng    &&
                data.cityId              is string    &&
                data.dateLoggedIn        is timestamp &&
                data.tokens              is array     &&
@@ -262,14 +262,14 @@ service cloud.firestore {
                dataNew.language            is string      &&
                dataNew.email               is string      &&
                dataNew.phoneNumber         is string      &&
-               dataNew.location            is geopoint    &&
+               dataNew.location            is latlng      &&
                dataNew.cityId              is string      &&
                dataNew.dateLoggedIn        is timestamp   &&
                dataNew.tokens              is array       &&
                dataNew.subscriptions       is array       &&
-               dataNew.subscriptionsStatus != null        &&
-               data.roleEditors            is array       &&
-               data.roleAdmins             is array;
+               dataNew.subscriptionsStatus is map         &&
+               dataNew.roleEditors         is array       &&
+               dataNew.roleAdmins          is array;
     }
 
     function userProfileValidCreate(uid, data)
@@ -279,7 +279,7 @@ service cloud.firestore {
                data.nameLast    is string         &&
                data.bucketPath  is string         &&
                data.companyName is string         &&
-               data.isCompany   is boolean;
+               data.isCompany   is bool;
     }
 
     function userProfileValidUpdate(uid, dataOld, dataNew)
@@ -289,7 +289,7 @@ service cloud.firestore {
                dataNew.nameLast    is string              &&
                dataNew.bucketPath  is string              &&
                dataNew.companyName is string              &&
-               dataNew.isCompany   is boolean;
+               dataNew.isCompany   is bool;
     }
 
     function auth()                             { return request.auth; }
