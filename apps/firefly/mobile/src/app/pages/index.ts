@@ -8,6 +8,7 @@ export * from './assets-events';
 export * from './asset-icon';
 export * from './assets-icons';
 export * from './assets-images';
+export * from './asset-image';
 export * from './assets-places';
 export * from './event-location';
 export * from './home';

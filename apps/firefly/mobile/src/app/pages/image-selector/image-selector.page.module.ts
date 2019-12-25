@@ -23,7 +23,8 @@ import { ModulePageImageLibrary } from '../image-library';
     ],
 
     declarations : [PageImageSelector],
-    exports: [PageImageSelector]
+    exports: [PageImageSelector],
+    entryComponents: [PageImageSelector]
 })
 
 export class ModulePageImageSelector { }

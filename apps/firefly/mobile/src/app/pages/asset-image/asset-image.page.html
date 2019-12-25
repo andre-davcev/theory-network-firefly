@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar color='white'>
+        <ion-title>{{'page.assets-image.title' | translate}}</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+
+
+        <ion-buttons slot="end">
+          <ion-button color="dark" (click)="save()" [disabled]="!(canUpdate$ | async)">
+              {{ ((isNew$ | async) ? 'general.publish' : 'general.update') | translate }}
+          </ion-button>
+       </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form novalidate
+          [formGroup]="form$ | async"
+          ngxsForm="images.form">
+          <app-item-image [url]="imageUrl$ | async"
+          [placeholder]="'page.event.imagePlaceholder' | translate"
+          [title]="'general.heroImage' | translate"
+          [edit]="true"
+          (clicked)="navigate(Pages.ImageSelector)">
+</app-item-image>
+    </form>
+</ion-content>

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ModuleComponentItemHeader } from '@firefly/mobile';
+import { ModuleComponentItemImage } from '@firefly/mobile';
 import { ModulePage } from '@firefly/app/modules';
 
-import { PageAssetIcon } from './asset-icon.page';
-import { RoutesPageAssetIcon } from './asset-icon.page.routes';
+import { PageAssetImage } from './asset-image.page';
+import { RoutesPageAssetImage } from './asset-image.page.routes';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 @NgModule
 ({
@@ -14,13 +14,13 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
     [
         ReactiveFormsModule,
         ModulePage,
-        ModuleComponentItemHeader,
-        RouterModule.forChild(RoutesPageAssetIcon),
+        ModuleComponentItemImage,
+        RouterModule.forChild(RoutesPageAssetImage),
         NgxsFormPluginModule
     ],
 
-    declarations : [PageAssetIcon],
-    exports : [PageAssetIcon]
+    declarations : [PageAssetImage],
+    exports : [PageAssetImage]
 })
 
-export class ModulePageAssetIcon { }
+export class ModulePageAssetImage { }

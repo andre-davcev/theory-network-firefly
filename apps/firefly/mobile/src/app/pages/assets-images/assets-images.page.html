@@ -16,8 +16,16 @@
 
 
 <ion-content>
+    <ion-grid>
+      <ion-row>
+          <ion-col size="3" *ngFor="let image of userImages$ | async">
+              <img class="cpt-icon" [src]="images[image.bucketPath].small">
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
     <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="add()">
-        <ion-fab-button color="secondary">
+        <ion-fab-button color="secondary" mode="md" (click)="navigate()">
             <ion-icon name="md-add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
