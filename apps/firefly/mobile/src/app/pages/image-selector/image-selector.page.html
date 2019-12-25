@@ -1,15 +1,11 @@
 <ion-header color="light">
     <ion-toolbar>
-        <ion-segment (ionChange)="segmentChanged($event)" [value]="Pages.ImageCatalog" color="dark">
-            <ion-segment-button [value]="Pages.ImageCatalog">
-                <ion-label>{{'page.image-catalog.title' | translate}}</ion-label>
-            </ion-segment-button>
-
+        <ion-segment (ionChange)="segmentChanged($event)" [value]="Pages.ImageAssets" color="dark">
             <ion-segment-button [value]="Pages.ImageAssets">
                 <ion-label>{{'page.image-assets.title' | translate}}</ion-label>
             </ion-segment-button>
 
-            <ion-segment-button [value]="Pages.ImageLibrary">
+            <ion-segment-button [value]="Pages.ImageLibrary" (ionSelect)="selectFromCamera()">
                 <ion-label>{{'page.image-library.title' | translate}}</ion-label>
             </ion-segment-button>
         </ion-segment>
@@ -19,16 +15,16 @@
             <ion-back-button color="dark"></ion-back-button>
         </ion-buttons>
 -->
-        <ion-buttons slot="start">
+        <!--ion-buttons slot="start">
             <ion-button color="dark" (click)="cancel()">
                 {{ 'general.cancel' | translate }}
             </ion-button>
-        </ion-buttons>
+        </!--ion-buttons-->
     </ion-toolbar>
 </ion-header>
 
 <ion-content [ngSwitch]="segment">
     <app-page-image-catalog *ngSwitchCase="Pages.ImageCatalog"></app-page-image-catalog>
     <app-page-image-assets *ngSwitchCase="Pages.ImageAssets"></app-page-image-assets>
-    <app-page-image-library *ngSwitchCase="Pages.ImageLibrary" (select)="selectLibraryImage($event)"></app-page-image-library>
+    <app-page-image-library *ngSwitchCase="Pages.ImageLibrary"></app-page-image-library>
 </ion-content>
