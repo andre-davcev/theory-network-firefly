@@ -22,20 +22,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-list lines="none" elevation="1">
-      <ion-item *ngFor="let item of list$ | async"
-                (click)="select(item)">
-          <ion-avatar slot="start">
-              <img [src]="item.imageUrl">
-          </ion-avatar>
+  <ion-list *ngFor="let event of events$ | async">
+    <ion-item-divider *ngIf="event.metadata.timeStartFormatted">
+        <ion-label>
+            {{ event.metadata.timeStartFormatted }}
+        </ion-label>
+    </ion-item-divider>
 
-          <ion-label>
-              <h2>{{item.name}}</h2>
-              <p>{{item.tagline}}</p>
-          </ion-label>
-
-          <ion-icon name="arrow-forward" item-right></ion-icon>
-      </ion-item>
+    <ion-item>
+        <ion-label>
+            {{ event.metadata.timeStartDate | date:'shortTime' }}
+        </ion-label>
+        <ion-label>
+            <h2>{{ event.name }}</h2>
+            <p>{{ event.tagline }}</p>
+        </ion-label>
+    </ion-item>
   </ion-list>
 
     <div *ngIf="!(found$ | async)" class="container">
