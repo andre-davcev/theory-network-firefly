@@ -16,6 +16,8 @@ import { StateUser } from '../../document/user';
 import { StateQuery } from '@theory/ngxs';
 import { ServiceEvents } from '@firefly/core/services';
 import { Query } from '@angular/fire/firestore';
+import { tap } from 'rxjs/operators';
+import { StateLanguage } from '@theory/capacitor';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 
@@ -45,7 +47,8 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     reset(context: StateContext<StateUserEventsModel>)
     {
         const userId: string = this.store.selectSnapshot(StateUser.id());
-        const query: Query   = userId == null ? undefined : this.service.collection('events').ref.where('userId', '==', userId);
+        const query: Query   = userId == null ? undefined : this.service.collection('events').ref.where('userId', '==', userId)
+          .where('notifyComplete', '==', false);
 
         return super.reset(context, { query });
     }
@@ -59,7 +62,35 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     @Action(ActionUserEventsGet)
     get(context: StateContext<StateUserEventsModel>)
     {
-        return super.get(context);
+        return super.get(context).pipe(
+          tap(() =>
+          {
+            const language: string = this.store.selectSnapshot(StateLanguage.language);
+            const events: Array<Event>  = StateUserEvents.dataState(context.getState());
+            const options: any = { weekday: 'long',
+              year: 'numeric', month: 'long', day: 'numeric'};
+
+              let timeStart: Date;
+              let timeStartPrevious: Date;
+              let timeStartFormatted: string;
+
+              events.forEach((event: Event) =>
+              {
+                timeStart = new Date(event.timeStart);
+                timeStartFormatted = timeStart.toLocaleDateString(language, options);
+
+                if(event.metadata === undefined)
+                  event.metadata = {};
+
+                if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
+                  event.metadata.timeStartFormatted = timeStartFormatted;
+
+                event.metadata.timeStartDate = timeStart;
+                timeStartPrevious = timeStart;
+
+              });
+          })
+        );
     }
 
     @Action(ActionUserEventsAdd)
