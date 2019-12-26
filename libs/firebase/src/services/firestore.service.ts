@@ -2,9 +2,10 @@ import { FirebaseDocument } from '../interfaces';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, Action, DocumentSnapshot } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { firestore } from 'firebase/app';
-import { CoreEnum } from '@theory/core';
+import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root'})
 export class ServiceFirestore<T extends FirebaseDocument>

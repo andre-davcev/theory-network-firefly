@@ -8,7 +8,7 @@ import { MockImagePath } from '@firefly/core/mocks';
 export class ActionImageReset  { static readonly type = ActionsImage.Reset;   constructor() { } }
 export class ActionImageGet    { static readonly type = ActionsImage.Get;     constructor(public id: string) { } }
 export class ActionImageSet    { static readonly type = ActionsImage.Set;     constructor(public snapshot: firestore.DocumentSnapshot, public data?: Image) { } }
-export class ActionImagePatch  { static readonly type = ActionsImage.Patch;   constructor(public partial: Partial<Image>) { } }
+export class ActionImagePatch  { static readonly type = ActionsImage.Patch;   constructor(public partial: Partial<Image>, public save: boolean = false) { } }
 export class ActionImageCreate { static readonly type = ActionsImage.Create;  constructor() { } }
 export class ActionImageUpdate { static readonly type = ActionsImage.Update;  constructor() { } }
 export class ActionImageSave   { static readonly type = ActionsImage.Save;    constructor() { } }

@@ -1,28 +1,20 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
-import { User as FirebaseUser } from 'firebase/app';
-import { ServiceAsset } from '@theory/firebase';
+import { ServiceFirestore } from '@theory/firebase';
 import { User } from '@firefly/cloud';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUsers extends ServiceAsset<User>
+export class ServiceUsers extends ServiceFirestore<User>
 {
     constructor
     (
         firestore:   AngularFirestore,
-        formBuilder: FormBuilder,
-        storage:     AngularFireStorage
+        formBuilder: FormBuilder
     )
     {
-        super('users', firestore, formBuilder, storage);
-    }
-
-    public parseId(authData: FirebaseUser): string
-    {
-        return authData.uid;
+        super(firestore, formBuilder);
     }
 
     public formCreate(object: User): FormGroup

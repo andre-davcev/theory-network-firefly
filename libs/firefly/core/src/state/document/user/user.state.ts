@@ -1,4 +1,4 @@
-import { User as FirebaseUser } from 'firebase/app';
+import { User as FirebaseUser, auth, firestore } from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select, NgxsOnInit} from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';
@@ -17,20 +17,19 @@ import {
     ActionUserAddToken,
     ActionUserLoginEmail,
     ActionUserLogout,
-    ActionUserWatchLanguage,
+    ActionUserWatchProperties,
     ActionUserReset,
     ActionUserGet,
     ActionUserSet,
     ActionUserPatch,
     ActionUserSave,
     ActionUserDelete,
-    ActionUserCreate
+    ActionUserCreate,
+    ActionUserUpdate
 } from './user.actions';
 import { ServiceUsers } from '@firefly/core/services';
-import { CoreUtil, CoreEnum } from '@theory/core';
-import { FormNgxs, FormNgxsStatus } from '@theory/ngxs';
-import { FormGroup } from '@angular/forms';
-import { SetFormPristine, UpdateFormValue } from '@ngxs/form-plugin';
+import { CoreUtil } from '@theory/core';
+import { StateDocument } from '@theory/ngxs';
 
 import { ActionUserAlertsReset, ActionUserAlertsGetData } from '../../query/user-alerts/user-alerts.actions';
 import { ActionUserClustersReset } from '../../query/user-clusters/user-clusters.actions';
@@ -42,95 +41,108 @@ import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/use
 import { GeolocationPosition } from '@capacitor/core';
 
 @State<StateUserModel>(StateUserOptions)
-export class StateUser implements NgxsOnInit
+export class StateUser extends StateDocument<User, StateUserModel> implements NgxsOnInit
 {
     constructor
     (
-        private service: ServiceUsers,
-        private auth:    AngularFireAuth
-    ) { }
+        private auth: AngularFireAuth,
+        service: ServiceUsers
+    )
+    {
+        super
+        (
+            StateUserOptions.name as string,
+            StateUserOptions.defaults,
+            service,
+            {
+                version     : undefined,
+                id          : undefined,
+                userId      : undefined,
+                dateCreated : undefined,
+                dateUpdated : undefined,
+                metadata    : {},
 
-    @Select(StateLanguage.language) language$: Observable<string>;
-    @Select(StateUser.data)         data$:     Observable<User>;
-    @Select(StateLocation.location) location$: Observable<GeolocationPosition>;
+                cityId              : null,
+                dateLoggedIn        : null,
+                email               : '',
+                language            : 'en',
+                location            : null,
+                phoneNumber         : '',
+                providerId          : undefined,
+                roleAdmins          : [],
+                roleEditors         : [],
+                subscriptions       : [],
+                subscriptionsStatus : {},
+                tokens              : []
+            },
+            {
+                ActionReset  : ActionUserReset,
+                ActionGet    : ActionUserGet,
+                ActionSet    : ActionUserSet,
+                ActionPatch  : ActionUserPatch,
+                ActionCreate : ActionUserCreate,
+                ActionUpdate : ActionUserUpdate,
+                ActionSave   : ActionUserSave,
+                ActionDelete : ActionUserDelete,
+                ActionWatch  : ActionUserWatch,
 
-    @Selector() static form(state: StateUserModel): FormNgxs       { return state.form; }
-    @Selector() static formGroup(state: StateUserModel): FormGroup { return state.formGroup; }
-    @Selector() static formPath(state: StateUserModel): string     { return state.formPath; }
-    @Selector() static isForm(state: StateUserModel): boolean      { return StateUser.formGroup(state) != null; }
-    @Selector() static data(state: StateUserModel): User           { return StateUser.form(state).model; }
-    @Selector() static id(state: StateUserModel): string           { return StateUser.data(state).id; }
-    @Selector() static isNew(state: StateUserModel): boolean       { return StateUser.id(state) === CoreEnum.IdNew; }
-    @Selector() static canUpdate(state: StateUserModel): boolean   { return StateUser.form(state).status === FormNgxsStatus.Valid && StateUser.form(state).dirty; }
+                ActionsReset:
+                [
+                    ActionUserAlertsReset,
+                    ActionUserClustersReset,
+                    ActionUserEventsReset,
+                    ActionUserIconsReset,
+                    ActionUserImagesReset,
+                    ActionUserStreamReset,
+                    ActionUserSubscriptionsReset
+                ],
 
-    @Selector() static authData(state: StateUserModel): FirebaseUser              {return state.authData;}
-    @Selector() static authenticated(state: StateUserModel): boolean              {return state.authenticated;}
-    @Selector() static authenticating(state: StateUserModel): boolean             {return state.authenticating;}
-    @Selector() static loading(state: StateUserModel): boolean                    {return state.authenticating || state.initializing;}
-    @Selector() static loadedNotAuthenticated(state: StateUserModel):boolean      {return !StateUser.loading(state) && !StateUser.authenticated(state);}
-    @Selector() static error(state: StateUserModel): Error                        {return state.error;}
-    @Selector() static errored(state: StateUserModel)                             {return state.error != null;}
-    @Selector() static found(state: StateUserModel)                               { return StateUser.data(state) != null; }
+                ActionsCreate: []
+            }
+        );
+    }
+
+    @Selector() static authData(state: StateUserModel):               FirebaseUser { return state.authData; }
+    @Selector() static authenticated(state: StateUserModel):          boolean      { return state.authenticated; }
+    @Selector() static authenticating(state: StateUserModel):         boolean      { return state.authenticating; }
+    @Selector() static loading(state: StateUserModel):                boolean      { return state.authenticating || state.initializing; }
+    @Selector() static loadedNotAuthenticated(state: StateUserModel): boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
+    @Selector() static error(state: StateUserModel):                  Error        { return state.error; }
+    @Selector() static errored(state: StateUserModel):                boolean      { return state.error != null; }
+
+    @Select(StateUser.found())      found$    : Observable<boolean>;
+    @Select(StateLanguage.language) language$ : Observable<string>;
+    @Select(StateLocation.location) location$ : Observable<GeolocationPosition>;
+    @Select(StateLocation.cityId)   cityId$   : Observable<string>;
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
         context.dispatch
         ([
-            new ActionUserWatchLanguage(),
+            new ActionUserWatchProperties(),
             new ActionUserAuthenticate()
         ]);
     }
 
     @Action(ActionUserReset)
-    reset({ patchState, getState, dispatch }: StateContext<StateUserModel>)
+    reset(context: StateContext<StateUserModel>)
     {
-        const defaults: StateUserModel = CoreUtil.clone<StateUserModel>(StateUserOptions.defaults);
-
-        return dispatch
-        ([
-            new ActionUserAlertsReset(),
-            new ActionUserClustersReset(),
-            new ActionUserEventsReset(),
-            new ActionUserIconsReset(),
-            new ActionUserImagesReset(),
-            new ActionUserStreamReset(),
-            new ActionUserSubscriptionsReset(),
-            new SetFormPristine(StateUser.formPath(getState()))
-        ]);
+        return super.reset(context)
     }
 
     @Action(ActionUserGet)
-    get({ dispatch, getState }: StateContext<StateUserModel>, { payload }: ActionUserGet)
+    get(context: StateContext<StateUserModel>, action: ActionUserGet)
     {
-        const id: string = payload;
-
-        const object$: Observable<User> = id === CoreEnum.IdNew ?
-            of(this.service.build(id, StateUserOptions.defaults.empty)) :
-            this.service.snapshot(id);
-
-        return object$.pipe
-        (
-            switchMap((object: User) =>
-                dispatch
-                ([
-                    new ActionUserSet(object)
-                ])
-            )
-        );
+        return super.get(context, action);
     }
 
     @Action(ActionUserSet)
-    set({ patchState, getState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserSet)
+    set(context: StateContext<StateUserModel>, action: ActionUserSet)
     {
-        const object: User = payload;
+        const { dispatch, patchState } = context;
 
-        return dispatch(new ActionUserReset()).
-        pipe
+        return super.set(context, action).pipe
         (
-            map(() => patchState({ formGroup: this.service.formCreate(object) }) ),
-            switchMap(() =>
-                dispatch(new UpdateFormValue({ value: object, path: StateUser.formPath(getState())}))
-            ),
             switchMap(() =>
                 dispatch
                 ([
@@ -138,49 +150,88 @@ export class StateUser implements NgxsOnInit
                     new ActionUserStreamGetData()
                 ])
             ),
-            tap(() => patchState({ initializing: false })),
+            tap(() =>
+                patchState({ initializing: false })
+            )
         );
     }
 
     @Action(ActionUserPatch)
-    patch({ dispatch, getState } : StateContext<StateUserModel>, { payload }: ActionUserPatch)
+    patch(context: StateContext<StateUserModel>, action: ActionUserPatch)
     {
-        const state: StateUserModel = getState();
-        const data:  User           = StateUser.data(state);
-        const value: User           = { ...data, ...payload };
-        const path:  string         = StateUser.formPath(state);
-
-        return dispatch(new UpdateFormValue({ value, path }));
+        return super.patch(context, action);
     }
 
-    @Action(ActionUserSave)
-    save({ getState, dispatch }: StateContext<StateUserModel>)
+    @Action(ActionUserCreate)
+    create(context: StateContext<StateUserModel>, { credentials }: ActionUserCreate): Observable<any>
     {
-        const state:     StateUserModel = getState();
-        const formPath:  string         = StateUser.formPath(state);
-        const formGroup: FormGroup      = StateUser.formGroup(state);
-        const id:        string         = StateUser.id(state);
+        const { patchState, dispatch } = context;
 
-        return this.service.patch(id, this.service.changedFields(formGroup)).
+        patchState({ authenticating: true });
+
+        return from(this.auth.auth.createUserWithEmailAndPassword(credentials.id, credentials.password)).
         pipe
         (
-            switchMap(() => dispatch(new SetFormPristine(formPath)))
+            map((userCredential: auth.UserCredential) =>
+                userCredential.user
+            ),
+            switchMap((authData: FirebaseUser) =>
+                dispatch
+                ([
+                    new ActionUserPatch
+                    ({
+                        id:     authData.uid,
+                        userId: authData.uid,
+                        email:  authData.email
+                    })
+                ]).
+                pipe
+                (
+                    switchMap(() =>
+                        super.create(context)
+                    ),
+                    switchMap(() =>
+                        dispatch(new ActionUserAuthenticateCheck(authData))
+                    )
+                )
+            ),
+            catchError((error: Error) =>
+                of(patchState({ error, authenticating: false }))
+            )
         );
     }
 
-    @Action(ActionUserDelete)
-    delete({ getState, dispatch }: StateContext<StateUserModel>)
+    @Action(ActionUserUpdate)
+    update(context: StateContext<StateUserModel>)
     {
-        const data: User = StateUser.data(getState());
+        return super.update(context);
+    }
 
-        return this.service.delete(data).
-        pipe
+    @Action(ActionUserSave)
+    save(context: StateContext<StateUserModel>)
+    {
+        return super.save(context);
+    }
+
+    @Action(ActionUserDelete)
+    delete(context: StateContext<StateUserModel>)
+    {
+        return super.delete(context);
+    }
+
+    @Action(ActionUserWatch, { cancelUncompleted: true })
+    watch(context: StateContext<StateUserModel>, action: ActionUserWatch)
+    {
+        const { dispatch } = context;
+
+        return super.watch(context, action).pipe
         (
-            switchMap(() =>
-                dispatch
-                ([
-                    new ActionUserReset()
-                ]))
+            filter((user: User) =>
+                user != null
+            ),
+            tap((user: User) =>
+                dispatch(new ActionLanguageSet(user.language))
+            )
         );
     }
 
@@ -191,9 +242,17 @@ export class StateUser implements NgxsOnInit
         return this.auth.authState.pipe
         (
             take(1),
-            tap((authData: FirebaseUser) => patchState({ authData, authenticating: false, authenticated: authData != null })),
-            switchMap((authData: FirebaseUser) => authData == null ? of(patchState({initializing: false})) : dispatch(new ActionUserWatch(this.service.parseId(authData)))),
-            catchError((error: Error) => of(patchState({error, authenticating: false, initializing: false})))
+            tap((authData: FirebaseUser) =>
+                patchState({ authData, authenticating: false, authenticated: authData != null })
+            ),
+            switchMap((authData: FirebaseUser) =>
+                authData == null ?
+                    of(patchState({initializing: false})) :
+                    dispatch(new ActionUserWatch(authData.uid))
+            ),
+            catchError((error: Error) =>
+                of(patchState({ error, authenticating: false, initializing: false}))
+            )
         );
     }
 
@@ -219,45 +278,43 @@ export class StateUser implements NgxsOnInit
                 return authenticated;
             }),
 
-            switchMap((authData: FirebaseUser) => dispatch(new ActionUserWatch(this.service.parseId(authData)))),
-            tap(() => patchState({ authenticated: false }))
-        );
-    }
-
-    @Action(ActionUserWatch, { cancelUncompleted: true })
-    watch({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserWatch)
-    {
-        return this.service.valuesChanges(payload).pipe
-        (
-            filter((user: User) => user != null),
-            tap((user: User) =>
-                dispatch
-                ([
-                    new ActionLanguageSet(user.language),
-                    new ActionUserSet(user)
-                ])
+            switchMap((authData: FirebaseUser) =>
+                dispatch(new ActionUserWatch(authData.uid))
             ),
-
-            catchError((error: Error) => of(patchState({ error})))
+            tap(() =>
+                patchState({ authenticated: false })
+            )
         );
     }
 
-    @Action(ActionUserWatchLanguage)
-    watchLanguage({ dispatch }: StateContext<StateUserModel>)
+    @Action(ActionUserWatchProperties)
+    watchProperties({ dispatch }: StateContext<StateUserModel>)
     {
-        return combineLatest([this.data$, this.language$]).pipe
+        return combineLatest([this.language$, this.location$, this.cityId$, this.found$]).pipe
         (
-            filter(([user, language]) => user != null && user.language != null && language != null),
-            filter(([user, language]) => user.language !== language),
-            switchMap(([user, language]) => dispatch(new ActionUserPatch({ language }))),
-            switchMap(() => dispatch(new ActionUserSave()))
+            filter(([language, location, cityId, found]) =>
+                found && language != null && location != null && cityId != null
+            ),
+            switchMap(([language, location, cityId]) =>
+                dispatch
+                (
+                    new ActionUserPatch
+                    ({
+                        language,
+                        cityId,
+
+                        location     : new firestore.GeoPoint(location.coords.latitude, location.coords.longitude),
+                        dateLoggedIn : firestore.Timestamp.now()
+                    }, true)
+                )
+            )
         );
     }
 
     @Action(ActionUserAddToken)
     addToken({ getState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserAddToken)
     {
-        const user   : User   = StateUser.data(getState());
+        const user   : User   = StateUser.dataState(getState());
         const token  : string = payload;
 
         const tokens : Array<string> = user.tokens == null ? [token] : [...user.tokens, token];
@@ -267,46 +324,6 @@ export class StateUser implements NgxsOnInit
             switchMap(() => dispatch(new ActionUserSave()))
         );
     }
-
-    @Action(ActionUserCreate)
-    userCreate({ patchState, dispatch, getState }: StateContext<StateUserModel>, { payload }: ActionUserCreate)
-    {
-        patchState({ authenticating: true });
-
-        /*this.fireAuth.auth.signInWithEmailAndPassword(payload.id, payload.password).catch(function(error) {
-
-          let errorCode = error.code;
-          let errorMessage = error.message;
-          console.log('errorCode' + errorCode);
-          console.log('errorMessage: ' + errorMessage);
-
-
-        });
-        return null;*/
-        return from(this.auth.auth.createUserWithEmailAndPassword(payload.id, payload.password)).pipe
-        (
-            map((userCredential: firebase.auth.UserCredential) => userCredential.user),
-            switchMap((authData: FirebaseUser) => {
-              const user: User = {} as User;
-
-              user.id     = this.service.parseId(authData);
-              user.userId = user.id;
-              user.email  = authData.email;
-
-              patchState({ formGroup: this.service.formCreate(user) });
-              dispatch(new UpdateFormValue({ value: user, path: StateUser.formPath(getState())}))
-
-              const state: StateUserModel = getState();
-              const data:  User           = StateUser.data(state);
-
-              this.service.create(data);
-
-              return dispatch(new ActionUserAuthenticateCheck(authData));
-            }),
-            catchError((error: Error) => of(patchState({ error, authenticating: false })))
-        );
-    }
-
 
     @Action(ActionUserLoginEmail)
     loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserLoginEmail)

@@ -1,46 +1,18 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserModel } from './user.state.model';
+import { CoreUtil } from '@theory/core';
+import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateUserOptions: StoreOptions<StateUserModel> =
 {
-    name : 'user',
+    name : 'users',
 
     defaults :
     {
-        empty :
-        {
-            version     : undefined,
-            id          : undefined,
-            userId      : undefined,
-            dateCreated : undefined,
-            dateUpdated : undefined,
-            metadata    : {},
-
-            cityId              : null,
-            dateLoggedIn        : null,
-            email               : '',
-            language            : 'en',
-            location            : null,
-            phoneNumber         : '',
-            providerId          : undefined,
-            roleAdmins          : [],
-            roleEditors         : [],
-            subscriptions       : [],
-            subscriptionsStatus : {},
-            tokens              : []
-        },
-
-        form :
-        {
-            model  : undefined,
-            dirty  : false,
-            status : '',
-            errors : {}
-        },
-
+        snapshot  : undefined,
+        form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
         formGroup : undefined,
-        formPath  : 'user.form',
 
         authData        : undefined,
         error           : undefined,

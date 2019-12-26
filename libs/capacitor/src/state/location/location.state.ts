@@ -8,7 +8,6 @@ import { StateLocationModel } from './location.state.model';
 import { StateLocationOptions } from './location.state.options';
 import { ActionLocationWatch } from './location.actions';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
-import { ServiceLocation } from '@firefly/core';
 
 const { Geolocation } = Plugins;
 
@@ -47,7 +46,14 @@ export class StateLocation
                 this.bigdatacloud.reverseGeocode(location.coords.latitude, location.coords.longitude)
             ),
             map((response: ResponseReverseGeocode) =>
-                ServiceLocation.cityId(response.countryCode, response.principalSubdivision, response.locality)
+                ({
+                    countryCode          : response.countryCode.trim().toLowerCase(),
+                    principalSubdivision : response.principalSubdivision.trim().toLowerCase().replace(' ', '-'),
+                    locality             : response.locality.trim().toLowerCase().replace(' ', '-')
+                })
+            ),
+            map((response: ResponseReverseGeocode) =>
+                `${response.countryCode}_${response.principalSubdivision}_${response.locality}`
             ),
             tap((cityId: string) =>
                 patchState({ cityId })

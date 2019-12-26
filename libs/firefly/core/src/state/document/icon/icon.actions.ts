@@ -9,7 +9,7 @@ export class ActionIconReset  { static readonly type = ActionsIcon.Reset;   cons
 export class ActionIconGet    { static readonly type = ActionsIcon.Get;     constructor(public id: string) { } }
 export class ActionIconSetId  { static readonly type = ActionsIcon.SetId;   constructor(public id: string = CoreEnum.IdNew) { } }
 export class ActionIconSet    { static readonly type = ActionsIcon.Set;     constructor(public snapshot: firestore.DocumentSnapshot, public data?: Icon) { } }
-export class ActionIconPatch  { static readonly type = ActionsIcon.Patch;   constructor(public partial: Partial<Icon>) { } }
+export class ActionIconPatch  { static readonly type = ActionsIcon.Patch;   constructor(public partial: Partial<Icon>, public save: boolean = false) { } }
 export class ActionIconCreate { static readonly type = ActionsIcon.Create;  constructor() { } }
 export class ActionIconUpdate { static readonly type = ActionsIcon.Create;  constructor() { } }
 export class ActionIconSave   { static readonly type = ActionsIcon.Save;    constructor() { } }

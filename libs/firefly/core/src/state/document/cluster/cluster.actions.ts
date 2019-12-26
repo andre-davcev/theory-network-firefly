@@ -9,7 +9,7 @@ export class ActionClusterReset  { static readonly type = ActionsCluster.Reset; 
 export class ActionClusterDirty  { static readonly type = ActionsCluster.Dirty;   constructor() { } }
 export class ActionClusterGet    { static readonly type = ActionsCluster.Get;     constructor(public id: string) { } }
 export class ActionClusterSet    { static readonly type = ActionsCluster.Set;     constructor(public snapshot: firestore.DocumentSnapshot, public data?: Cluster) { } }
-export class ActionClusterPatch  { static readonly type = ActionsCluster.Patch;   constructor(public partial: Partial<Cluster>) { } }
+export class ActionClusterPatch  { static readonly type = ActionsCluster.Patch;   constructor(public partial: Partial<Cluster>, public save: boolean = false) { } }
 export class ActionClusterCreate { static readonly type = ActionsCluster.Create;  constructor() { } }
 export class ActionClusterUpdate { static readonly type = ActionsCluster.Update;  constructor() { } }
 export class ActionClusterSave   { static readonly type = ActionsCluster.Save;    constructor() { } }

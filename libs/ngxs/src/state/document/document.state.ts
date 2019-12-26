@@ -32,6 +32,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
     protected static isNewState(state: any):      boolean                    { return StateDocument.idState(state) === CoreEnum.IdNew; }
     protected static canUpdateState(state: any):  boolean                    { return StateDocument.formState(state).status === FormNgxsStatus.Valid && StateDocument.formState(state).dirty; }
     protected static bucketPathState(state: any): string                     { return StateDocument.dataState(state).bucketPath; }
+    protected static foundState(state: any):      boolean                    { return StateDocument.dataState(state) != null; }
 
     public static snapshot()   { return createSelector([this], StateDocument.snapshotState); }
     public static form()       { return createSelector([this], StateDocument.formState); }
@@ -42,6 +43,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
     public static isNew()      { return createSelector([this], StateDocument.isNewState); }
     public static canUpdate()  { return createSelector([this], StateDocument.canUpdateState); }
     public static bucketPath() { return createSelector([this], StateDocument.bucketPathState); }
+    public static found()      { return createSelector([this], StateDocument.foundState); }
 
     constructor
     (
@@ -111,8 +113,11 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
             map((actions: Action<DocumentSnapshot<T>>) =>
                 actions.payload
             ),
-            switchMap((snapshot: firestore.DocumentSnapshot) =>
+            tap((snapshot: DocumentSnapshot<T>) =>
                 dispatch(new ActionSet(snapshot))
+            ),
+            map((snapshot: DocumentSnapshot<T>) =>
+                snapshot.data()
             )
         );
     }
@@ -149,21 +154,28 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
     public patch(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, dispatch } = context;
+        const { partial, save } = action;
 
-        const partial: Partial<T> = action.partial;
-        const state:   M          = getState();
-        const data:    T          = StateDocument.dataState(state);
-        const value:   T          = { ...data, ...partial };
-        const path:    string     = this.formPath;
+        const state:   M      = getState();
+        const data:    T      = StateDocument.dataState(state);
+        const value:   T      = { ...data, ...partial };
+        const path:    string = this.formPath;
 
         return dispatch
         ([
             new UpdateFormValue({ value, path }),
             ...this.ActionsQuerySync(value)
-        ]);
+        ]).pipe
+        (
+            switchMap(() =>
+                save ?
+                    this.service.documentUpdate(StateDocument.snapshotState(state), partial) :
+                    of(null)
+            )
+        );
     }
 
-    public create(context: StateContext<M>)
+    public create(context: StateContext<M>, action?: any)
     {
         const { getState, patchState, dispatch } = context;
 

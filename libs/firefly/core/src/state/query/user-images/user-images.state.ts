@@ -43,7 +43,7 @@ export class StateUserImages extends StateQuery<Image, StateUserImagesModel>
     @Action(ActionUserImagesReset)
     reset(context: StateContext<StateUserImagesModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const userId: string = this.store.selectSnapshot(StateUser.id());
         const query: Query   = userId == null ? undefined : this.service.collection('images').ref.where('userId', '==', userId);
 
         return super.reset(context, { query });
