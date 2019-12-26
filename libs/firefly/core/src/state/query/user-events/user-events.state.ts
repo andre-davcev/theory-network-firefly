@@ -79,14 +79,14 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
                 timeStart = new Date(event.timeStart);
                 timeStartFormatted = timeStart.toLocaleDateString(language, options);
 
-                if(timeStartPrevious != undefined && timeStart.getTime() != timeStartPrevious.getTime())
-                  event.metadata.timeStartFormatted = timeStartFormatted;
-
                 if(event.metadata === undefined)
                   event.metadata = {};
 
+                if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
+                  event.metadata.timeStartFormatted = timeStartFormatted;
+
                 event.metadata.timeStartDate = timeStart;
-                timeStartPrevious = timeStartPrevious;
+                timeStartPrevious = timeStart;
 
               });
           })
