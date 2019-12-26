@@ -44,7 +44,7 @@ export class StateUserClusters extends StateQuery<Cluster, StateUserClustersMode
     @Action(ActionUserClustersReset)
     reset(context: StateContext<StateUserClustersModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const userId: string = this.store.selectSnapshot(StateUser.id());
         const query: Query   = userId == null ? undefined : this.service.collection('clusters').ref.where('userId', '==', userId);
 
         return super.reset(context, { query });

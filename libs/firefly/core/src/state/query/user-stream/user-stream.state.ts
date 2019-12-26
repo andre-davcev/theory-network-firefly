@@ -44,7 +44,7 @@ export class StateUserStream extends StateQuery<StreamCluster, StateUserStreamMo
     @Action(ActionUserStreamReset)
     reset(context: StateContext<StateUserStreamModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const userId: string = this.store.selectSnapshot(StateUser.id());
         const query:  Query  = userId == null ? undefined : this.service.collection('streams').ref.where('userId', '==', userId);
 
         return super.reset(context, { query });

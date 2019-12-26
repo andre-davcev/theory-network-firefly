@@ -170,7 +170,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     {
         const isNew: boolean = id === CoreEnum.IdNew;
 
-        const userId:   string                     = this.store.selectSnapshot(StateUser.id);
+        const userId:   string                     = this.store.selectSnapshot(StateUser.id());
         const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserEvents.snapshotLookup())[id];
 
         const data: Event = isNew ?

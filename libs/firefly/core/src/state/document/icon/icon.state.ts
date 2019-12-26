@@ -168,7 +168,7 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
     {
         const isNew: boolean = id === CoreEnum.IdNew;
 
-        const userId:   string                     = this.store.selectSnapshot(StateUser.id);
+        const userId:   string                     = this.store.selectSnapshot(StateUser.id());
         const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserIcons.snapshotLookup())[id];
 
         const data: Icon = isNew ?

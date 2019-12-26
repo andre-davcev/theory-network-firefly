@@ -43,7 +43,7 @@ export class StateUserIcons extends StateQuery<Icon, StateUserIconsModel>
     @Action(ActionUserIconsReset)
     reset(context: StateContext<StateUserIconsModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id);
+        const userId: string = this.store.selectSnapshot(StateUser.id());
         const query: Query   = userId == null ? undefined : this.service.collection('icons').ref.where('userId', '==', userId);
 
         return super.reset(context, { query });

@@ -1,7 +1,6 @@
-import { User } from '@firefly/cloud';
-import { StateAssetModel } from '@firefly/core/interfaces';
+import { StateDocumentModel } from '@theory/ngxs';
 
-export interface StateUserModel extends StateAssetModel<User>
+export interface StateUserModel extends StateDocumentModel
 {
     authData         : firebase.User;
     error            : Error;

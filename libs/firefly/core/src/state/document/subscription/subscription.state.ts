@@ -126,7 +126,7 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
     {
         const isNew: boolean = id === CoreEnum.IdNew;
 
-        const userId:   string                     = this.store.selectSnapshot(StateUser.id);
+        const userId:   string                     = this.store.selectSnapshot(StateUser.id());
         const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserSubscriptions.snapshotLookup()[id]);
 
         const data: Subscription = isNew ?

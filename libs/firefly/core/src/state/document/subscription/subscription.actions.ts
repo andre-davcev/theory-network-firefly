@@ -7,7 +7,7 @@ import { firestore } from 'firebase/app';
 export class ActionSubscriptionReset  { static readonly type = ActionsSubscription.Reset;   constructor() { } }
 export class ActionSubscriptionGet    { static readonly type = ActionsSubscription.Get;     constructor(public id: string) { } }
 export class ActionSubscriptionSet    { static readonly type = ActionsSubscription.Set;     constructor(public snapshot: firestore.DocumentSnapshot, public data?: Subscription) { } }
-export class ActionSubscriptionPatch  { static readonly type = ActionsSubscription.Patch;   constructor(public partial: Partial<Subscription>) { } }
+export class ActionSubscriptionPatch  { static readonly type = ActionsSubscription.Patch;   constructor(public partial: Partial<Subscription>, public save: boolean = false) { } }
 export class ActionSubscriptionCreate { static readonly type = ActionsSubscription.Create;  constructor() { } }
 export class ActionSubscriptionUpdate { static readonly type = ActionsSubscription.Update;  constructor() { } }
 export class ActionSubscriptionSave   { static readonly type = ActionsSubscription.Save;    constructor() { } }

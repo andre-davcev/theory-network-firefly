@@ -164,7 +164,7 @@ export class StateImage extends StateDocument<Image, StateImageModel>
     {
         const isNew: boolean = id === CoreEnum.IdNew;
 
-        const userId:   string                     = this.store.selectSnapshot(StateUser.id);
+        const userId:   string                     = this.store.selectSnapshot(StateUser.id());
         const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserImages.snapshotLookup())[id];
 
         const data: Image = isNew ?

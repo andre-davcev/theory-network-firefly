@@ -4,14 +4,16 @@ export enum ActionsUser
     Get    = '[User] Get',
     Set    = '[User] Set',
     Patch  = '[User] Patch',
-    Save   = '[User] Save',
     Create = '[User] Create',
+    Update = '[User] Update',
+    Save   = '[User] Save',
     Delete = '[User] Delete',
+    SetId  = '[User] SetId',
 
     Authenticate      = '[User] Authenticate',
     AuthenticateCheck = '[User] Authenticate Check',
     Watch             = '[User] Watch',
-    WatchLanguage     = '[User] Watch Language',
+    WatchProperties   = '[User] Watch Properties',
     AddToken          = '[User] Add Token',
     LoginEmail        = '[User] Login Email',
     Logout            = '[User] Logout'
