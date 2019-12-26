@@ -56,7 +56,5 @@ security
 subscriptions (list)
   migrate to use user.subscriptions instead of user-subscriptions
   create with on/off switch
-users (state)
-  migrate to use StateDocument
 user-profile (state/firestore/app/functions/security)
   implement user profile screen

@@ -1,9 +1,8 @@
 import { FirebaseDocument } from '../interfaces';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, Action, DocumentSnapshot } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { firestore } from 'firebase/app';
-import { CoreEnum, CoreUtil } from '@theory/core';
-import { switchMap } from 'rxjs/operators';
+import { CoreEnum } from '@theory/core';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 
@@ -26,6 +25,11 @@ export class ServiceFirestore<T extends FirebaseDocument>
         const document: AngularFirestoreDocument<T> = this.firestore.collection<T>(collection).doc(id);
 
         return from(document.get());
+    }
+
+    public documentWatch(collection: string, id: string): Observable<Action<DocumentSnapshot<T>>>
+    {
+        return this.firestore.collection<T>(collection).doc<T>(id).snapshotChanges();
     }
 
     public documentCreate(collection: string, entity: T): Observable<firestore.DocumentSnapshot>
