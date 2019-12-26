@@ -8,7 +8,8 @@ export const StateLocationOptions: StoreOptions<StateLocationModel> =
 
     defaults :
     {
-        location : undefined,
-        error : undefined
+        location : null,
+        cityId   : null,
+        error    : null
     }
 };

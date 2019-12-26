@@ -1,7 +1,3 @@
-location (state)
-  on location found
-    search bigdatacloud for latitude/longitude city data
-    save to user.cityId & user.location
 users (app)
   on location change
     update user
