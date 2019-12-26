@@ -1,4 +1,6 @@
 export interface MetadataEvent
 {
-    score? : number;
+    score?              : number;
+    timeStartFormatted? : string;
+    timeStartDate?      : Date;
 }
