@@ -12,6 +12,7 @@ import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';
 import { StateDocumentModel } from './document.model';
 import { ActionsDocument } from './document.actions';
+import { DocumentSnapshot, Action } from '@angular/fire/firestore';
 
 export class StateDocument<T extends FirebaseDocument, M extends StateDocumentModel>
 {
@@ -93,6 +94,25 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
                     new ActionSet(snapshot),
                     ...this.ActionsQueryAdd(snapshot)
                 ])
+            )
+        );
+    }
+
+    public watch(context: StateContext<M>, action: any): Observable<any>
+    {
+        const { dispatch }  = context;
+        const { ActionSet } = this.actions;
+
+        const id: string  = action.id;
+
+        return this.service.documentWatch(this.collection, id).
+        pipe
+        (
+            map((actions: Action<DocumentSnapshot<T>>) =>
+                actions.payload
+            ),
+            switchMap((snapshot: firestore.DocumentSnapshot) =>
+                dispatch(new ActionSet(snapshot))
             )
         );
     }
