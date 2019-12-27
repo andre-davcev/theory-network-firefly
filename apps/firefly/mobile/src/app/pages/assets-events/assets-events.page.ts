@@ -10,7 +10,7 @@ import { StatusBarStyle } from '@capacitor/core';
 import { StateMobile } from '@firefly/mobile';
 import { MenuController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
-import { BaseComponent } from '@theory/core';
+import { BaseComponent, CoreEnum } from '@theory/core';
 import { takeUntil } from 'rxjs/operators';
 
 @Component
@@ -49,7 +49,7 @@ export class PageAssetsEvents extends BaseComponent implements OnInit
 
     add(): void
     {
-        this.store.dispatch(new Navigate([Pages.AssetEvent]));
+        this.store.dispatch(new Navigate([ Pages.AssetEvent, CoreEnum.IdNew ]));
     }
 
     public ionViewWillEnter(): void
