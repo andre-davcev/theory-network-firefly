@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
+import { FormGroup } from '@angular/forms';
 
 @Component
 ({
@@ -10,6 +11,7 @@ import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 })
 export class ComponentItemImage
 {
+    @Input() form: FormGroup;
     @Input() edit: boolean = false;
     @Input() url: string;
     @Input() placeholder: string;
@@ -21,6 +23,7 @@ export class ComponentItemImage
 
     public clickedImage(): void
     {
+        this.form.markAsDirty();
         this.clicked.next();
     }
 
