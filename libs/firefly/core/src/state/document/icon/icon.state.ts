@@ -24,7 +24,7 @@ import {
   ActionIconUriSet,
   ActionIconPathSet
 } from './icon.actions';
-import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons, ActionUserIconsSync } from '../../query/user-icons';
+import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons, ActionUserIconsSync, ActionUserIconsReset } from '../../query/user-icons';
 import { firestore } from 'firebase/app';
 
 @State<StateIconModel>(StateIconOptions)
@@ -76,7 +76,7 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
               ActionSave:   ActionIconSave,
               ActionDelete: ActionIconDelete,
 
-              ActionsReset:  [],
+              ActionsReset:  [ActionUserIconsReset],
               ActionsCreate: [],
 
               ActionsQueryAdd:    [ActionUserIconsAdd],
