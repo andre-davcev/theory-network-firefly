@@ -24,7 +24,7 @@ import {
   ActionImageUriSet,
   ActionImagePathSet
 } from './image.actions';
-import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages, ActionUserImagesSync } from '../../query/user-images';
+import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages, ActionUserImagesSync, ActionUserImagesReset } from '../../query/user-images';
 import { firestore } from 'firebase/app';
 
 @State<StateImageModel>(StateImageOptions)
@@ -76,7 +76,7 @@ export class StateImage extends StateDocument<Image, StateImageModel>
               ActionSave:   ActionImageSave,
               ActionDelete: ActionImageDelete,
 
-              ActionsReset:  [],
+              ActionsReset:  [ActionUserImagesReset],
               ActionsCreate: [],
 
               ActionsQueryAdd:    [ActionUserImagesAdd],
