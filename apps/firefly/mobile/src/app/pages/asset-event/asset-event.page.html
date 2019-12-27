@@ -94,6 +94,7 @@
         </div>
 
         <app-item-image [url]="imageUrl$ | async"
+                        [form]="form$ | async"
                         [placeholder]="'page.event.imagePlaceholder' | translate"
                         [title]="'general.heroImage' | translate"
                         [edit]="true"
