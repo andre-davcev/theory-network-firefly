@@ -8,6 +8,7 @@ import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateCluster, ActionClusterIconUriSet, ActionClusterIconPathSet, ActionClusterSave } from '@firefly/core';
 import { PageIconSelector } from '../icon-selector';
 import { Pages } from '@firefly/mobile';
+import { Event } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
 
@@ -26,6 +27,8 @@ export class PageAssetCluster
     @Select(StateCluster.isNew())     isNew$:        Observable<boolean>;
     @Select(StateCluster.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateCluster.iconUrl)     iconUrl$:      Observable<string>;
+    @Select(StateCluster.events)      events$:       Observable<Event[]>;
+
     @Select(StateDevice.device)       device$:       Observable<boolean>;
 
     public Pages: any = Pages;
