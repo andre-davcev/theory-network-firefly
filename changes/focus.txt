@@ -1,26 +1,9 @@
-users (state)
-  migrate to use StateDocument
-users (app)
-  on location change
-    update user
-    {
-      location,
-      cityId
-    }
-    query streams/{user.cityId}
-  on login & location found
-      update user:
-      {
-          dateLoggedIn,
-          location,
-          cityId
-      }
-library (ngxs)
-  child ActionSetData (user/{userId}/subscriptions)
 streams (all)
-  streams (cron)
+  city lookup on login
   streams (state)
   streams (app)
+subscriptions (library)
+  child ActionSetData (user/{userId}/subscriptions)
 functions (test)
   clusters (delete)
   events (update)
