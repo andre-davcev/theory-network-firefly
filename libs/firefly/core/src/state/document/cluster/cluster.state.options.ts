@@ -12,5 +12,6 @@ export const StateClusterOptions: StoreOptions<StateClusterModel> =
         snapshot  : undefined,
         form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
         formGroup : undefined,
+        events    : undefined,
     }
 };

@@ -15,4 +15,6 @@ export enum ActionsCluster
     IconUriSet  = '[Cluster] Icon Uri Set',
     IconPathSet = '[Cluster] Icon Path Set',
     IconCreate  = '[Cluster] Icon Create',
+
+    EventsGet = '[Cluster] Events Get',
 }

@@ -3,7 +3,7 @@ import { Action, State, StateContext, Store, Selector } from '@ngxs/store';
 
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { Cluster, Icon } from '@firefly/cloud';
+import { Cluster, Icon, Event } from '@firefly/cloud';
 import { ServiceClusters } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
 import { ActionIconCreate, ActionIconPatch, ActionIconClear, ActionIconUriSet, StateIcon, ActionIconSetId } from '@firefly/core/state/document/icon';
@@ -24,15 +24,18 @@ import {
     ActionClusterIconClear,
     ActionClusterIconCreate,
     ActionClusterIconUriSet,
-    ActionClusterIconPathSet
+    ActionClusterIconPathSet,
+    ActionClusterEventsGet
 } from './cluster.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../..//query/user-clusters';
 import { ActionUserStreamRemove } from '../../query/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { firestore } from 'firebase/app';
 import { ActionStorageUrlGet, StateStorage, StorageImage, ImageSize } from '@theory/firebase';
-import { switchMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { switchMap, tap, map } from 'rxjs/operators';
+import { of, from } from 'rxjs';
+import { Query } from '@angular/fire/firestore';
+import { StateLanguage } from '@theory/capacitor';
 
 @State<StateClusterModel>(StateClusterOptions)
 
@@ -84,6 +87,7 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
         );
     }
 
+    @Selector() static events(state: StateClusterModel): Event[] { return state.events; }
     @Selector([StateIcon.dataUri, StateStorage.images])
     public static iconUrl(state: StateClusterModel, dataUri: string, images: Record<string, StorageImage>)
     {
@@ -229,5 +233,56 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
                 dispatch(new ActionClusterPatch({ bucketPath: this.store.selectSnapshot(StateIcon.bucketPath()) }))
             )
         );
+    }
+
+    @Action(ActionClusterEventsGet)
+    eventsGet({ patchState, getState}: StateContext<StateClusterModel>)
+    {
+        const userId: string = this.store.selectSnapshot(StateUser.id());
+        const query: Query   = userId == null ? undefined : this.service.collection('events').ref
+          .where('userId', '==', userId).where('clusters', 'array-contains', StateCluster.idState(getState()));
+        var events: Event[] = new Array();
+
+        return from(query.get()).pipe
+        (
+          map((snapshot: firestore.QuerySnapshot) =>
+            snapshot.docs
+          ),
+          tap((page: Array<firestore.QueryDocumentSnapshot>) =>
+          {
+            const language: string = this.store.selectSnapshot(StateLanguage.language);
+            const options: any = { weekday: 'long',
+              year: 'numeric', month: 'long', day: 'numeric'};
+
+            let timeStart: Date;
+            let timeStartPrevious: Date;
+            let timeStartFormatted: string;
+
+            page.forEach((document: firestore.QueryDocumentSnapshot) =>
+            {
+              const event: Event = document.data() as Event;
+
+              timeStart = new Date(event.timeStart);
+                timeStartFormatted = timeStart.toLocaleDateString(language, options);
+
+                if(event.metadata === undefined)
+                  event.metadata = {};
+
+                if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
+                  event.metadata.timeStartFormatted = timeStartFormatted;
+
+                event.metadata.timeStartDate = timeStart;
+                timeStartPrevious = timeStart;
+
+              events.push(event);
+            })
+          }),
+          tap(() =>
+            patchState
+            ({
+              events
+            })
+          )
+        )
     }
 }

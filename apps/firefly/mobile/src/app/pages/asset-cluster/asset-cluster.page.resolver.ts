@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 
-import { ActionClusterSetId, ActionUserIconsGetData, ActionUserIconsReset } from '@firefly/core';
+import { ActionClusterSetId, ActionUserIconsGetData, ActionUserIconsReset, ActionUserEventsGetData, ActionClusterEventsGet } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
@@ -17,14 +17,18 @@ export class ResolverPageAssetCluster implements Resolve<void>
         if(route.queryParams.id == null)
         {
           return this.store.dispatch(new ActionUserIconsReset).pipe(
-            switchMap(() => this.store.dispatch(new ActionClusterSetId(route.queryParams.id)))
+            switchMap(() => this.store.dispatch([
+                new ActionClusterSetId(route.queryParams.id)/*,
+                new ActionUserEventsGetData()*/
+              ]))
           )
         }
         else
-          return this.store.dispatch(new ActionClusterSetId(route.queryParams.id))/*.
-        pipe(
-          switchMap(() => this.store.dispatch(new ActionUserIconsGetData()))
-        );*/
+          return this.store.dispatch(new ActionClusterSetId(route.queryParams.id)).
+          pipe(
+          //switchMap(() => this.store.dispatch(new ActionUserIconsGetData()))
+            switchMap(() => this.store.dispatch(new ActionClusterEventsGet()))
+        );
 
     }
 }
