@@ -10,14 +10,13 @@ import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobil
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetsIcons implements Resolve<void>
 {
-    @Select(StateUserIcons.initialized()) icons$: Observable<boolean>;
+    @Select(StateUserIcons.initialized()) initialized$: Observable<boolean>;
 
     constructor(private store: Store) {}
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
     {
-        return this.store.dispatch(new ActionUserIconsGetData())
-        /*return this.icons$.
+        return this.initialized$.
         pipe
         (
             take(1),
@@ -31,6 +30,6 @@ export class ResolverPageAssetsIcons implements Resolve<void>
                         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
                     )
             )
-        )*/
+        )
     }
 }

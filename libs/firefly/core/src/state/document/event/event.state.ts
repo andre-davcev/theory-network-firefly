@@ -5,7 +5,7 @@ import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
 import { Event, Image } from '@firefly/cloud';
-import { ActionImageCreate, ActionImagePatch, ActionImageSetId, StateImage, ActionImageClear, ActionImageUriSet } from '@firefly/core/state/document/image';
+import { ActionImageCreate, ActionImagePatch, ActionImageSetId, StateImage, ActionImageClear, ActionImageUriSet, ActionImageReset } from '@firefly/core/state/document/image';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -33,7 +33,7 @@ import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ActionIconClear } from '../icon/icon.actions';
+import { ActionIconClear, ActionIconReset } from '../icon/icon.actions';
 import { LocationCity } from '@firefly/core/interfaces';
 
 @State<StateEventModel>(StateEventOptions)
@@ -83,7 +83,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
-                ActionsReset:  [ActionClusterReset, ActionImageClear, ActionIconClear, ActionMapSearchResultClear],
+                ActionsReset:  [ActionClusterReset, ActionImageReset, ActionIconReset, ActionMapSearchResultClear],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
