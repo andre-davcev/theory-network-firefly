@@ -20,3 +20,5 @@ export class ActionClusterIconClear   { static readonly type = ActionsCluster.Ic
 export class ActionClusterIconUriSet  { static readonly type = ActionsCluster.IconUriSet;  constructor(public dataUri: string) { } }
 export class ActionClusterIconPathSet { static readonly type = ActionsCluster.IconPathSet; constructor(public bucketPath: string = MockIconPath) { } }
 export class ActionClusterIconCreate  { static readonly type = ActionsCluster.IconCreate;  constructor() { } }
+
+export class ActionClusterEventsGet { static readonly type = ActionsCluster.EventsGet; constructor() { } }
