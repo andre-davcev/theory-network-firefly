@@ -152,7 +152,7 @@ service cloud.firestore {
                data.description     is string &&
                data.bucketPath      is string &&
                data.private         is bool   &&
-               data.latlng          is latlng &&
+               data.geopoint        is latlng &&
                data.city            != null   &&
                data.city.latlng     is latlng &&
                data.city.cityId     is string &&
@@ -238,20 +238,24 @@ service cloud.firestore {
 
     function userValidCreate(uid, data)
     {
-        return documentValidCreate(uid, data)        &&
-               data.providerId          == 'email'   &&
-               data.language            is string    &&
-               data.email               is string    &&
-               data.phoneNumber         is string    &&
-               data.location            is latlng    &&
-               data.cityId              is string    &&
-               data.dateLoggedIn        is timestamp &&
-               data.tokens              is array     &&
-               data.subscriptions       is array     &&
-               data.subscriptionsStatus != null      &&
-               data.roleEditors         is array     &&
-               data.roleEditors.size()  == 0         &&
-               data.roleAdmins          is array     &&
+        return documentValidCreate(uid, data)      &&
+               data.providerId          == 'email' &&
+               data.language            is string  &&
+               data.email               is string  &&
+               data.phoneNumber         is string  &&
+               data.geopoint            is latlng  &&
+               data.city                != null    &&
+               data.city.latlng         is latlng  &&
+               data.city.cityId         is string  &&
+               data.city.city           is string  &&
+               data.city.region         is string  &&
+               data.city.country        is string  &&
+               data.tokens              is array   &&
+               data.subscriptions       is array   &&
+               data.subscriptionsStatus != null    &&
+               data.roleEditors         is array   &&
+               data.roleEditors.size()  == 0       &&
+               data.roleAdmins          is array   &&
                data.roleAdmins.size()   == 0;
     }
 
@@ -262,9 +266,13 @@ service cloud.firestore {
                dataNew.language            is string      &&
                dataNew.email               is string      &&
                dataNew.phoneNumber         is string      &&
-               dataNew.location            is latlng      &&
-               dataNew.cityId              is string      &&
-               dataNew.dateLoggedIn        is timestamp   &&
+               dataNew.geopoint            is latlng      &&
+               dataNew.city                != null        &&
+               dataNew.city.latlng         is latlng      &&
+               dataNew.city.cityId         is string      &&
+               dataNew.city.city           is string      &&
+               dataNew.city.region         is string      &&
+               dataNew.city.country        is string      &&
                dataNew.tokens              is array       &&
                dataNew.subscriptions       is array       &&
                dataNew.subscriptionsStatus is map         &&
@@ -353,7 +361,7 @@ service cloud.firestore {
     function imageCanUpdate(uid, dataOld, dataNew) { return imageValidUpdate(uid, dataOld, dataNew) && assetCanUpdate(uid, dataOld); }
     function imageCanDelete(uid, data)             { return assetCanDelete(uid, data); }
 
-    function streamCanGet(uid, data)                { return user(data).cityId == data.id; }
+    function streamCanGet(uid, data)                { return user(data).city.cityId == data.id; }
     function streamCanList(uid, data)               { return false; }
     function streamCanCreate(uid, data)             { return false; }
     function streamCanUpdate(uid, dataOld, dataNew) { return false; }

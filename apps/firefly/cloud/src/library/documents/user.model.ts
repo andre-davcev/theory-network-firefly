@@ -1,15 +1,15 @@
 import { FirebaseDocument } from '../interfaces';
 import { firestore } from 'firebase';
 
+import { Location } from '../models';
 import { Subscription } from './subscription.model';
 
 export interface User extends FirebaseDocument
 {
-    cityId              : string;
-    dateLoggedIn        : firestore.Timestamp;
+    city                : Location;
     email               : string;
     language            : string;
-    location            : firestore.GeoPoint;
+    geopoint            : firestore.GeoPoint;
     phoneNumber         : string;
     providerId          : string;
     roleAdmins          : Array<string>;

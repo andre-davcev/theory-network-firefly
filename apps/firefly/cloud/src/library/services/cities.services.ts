@@ -1,6 +1,6 @@
 import { WriteResult, Firestore, DocumentSnapshot } from '@google-cloud/firestore';
 import { firestore } from 'firebase-admin';
-import { City, Event } from '../documents';
+import { Event, User } from '../documents';
 import { Location } from '../models';
 
 export class ServiceCities
@@ -12,10 +12,10 @@ export class ServiceCities
         return ServiceCities.distanceBetween(geopoint1.latitude, geopoint1.longitude, geopoint2.latitude, geopoint2.longitude);
     }
 
-    public static async createIfNew(database: Firestore, event: Event): Promise<WriteResult>
+    public static async createIfNew(database: Firestore, document: Event | User): Promise<WriteResult>
     {
-        const location:     Location         = event.city;
-        const cityDoc:      DocumentSnapshot = await database.collection('cities').doc(location.cityId).get();
+        const location: Location         = document.city;
+        const cityDoc:  DocumentSnapshot = await database.collection('cities').doc(location.cityId).get();
 
         if (cityDoc.exists) { return null; }
 

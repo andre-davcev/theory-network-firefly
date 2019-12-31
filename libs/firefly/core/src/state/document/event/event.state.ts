@@ -259,7 +259,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     {
         return result == null ?
             dispatch(new ActionEventPatch({ geopoint: null, city: null })) :
-            this.location.getLocationCity(result).pipe
+            this.location.locationCityFromResult(result).pipe
             (
                 switchMap((locationCity: LocationCity) =>
                     dispatch(new ActionEventPatch(locationCity))

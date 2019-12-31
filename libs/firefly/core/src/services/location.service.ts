@@ -28,7 +28,62 @@ export class ServiceLocation
         return `${countryCode}_${region}_${city}`;
     }
 
-    public getLocationCity(result: Result): Observable<LocationCity>
+    public static cityIdFromResponse(response: ResponseReverseGeocode): string
+    {
+        return ServiceLocation.cityId(response.countryCode, response.principalSubdivision, response.locality);
+    }
+
+    public static locationFromResponse(response: ResponseReverseGeocode): Location
+    {
+        return {
+            geopoint : new firestore.GeoPoint(response.latitude, response.longitude),
+            cityId   : ServiceLocation.cityId(response.countryCode, response.principalSubdivision, response.locality),
+            city     : response.locality,
+            region   : response.principalSubdivision,
+            country  : response.countryCode
+        };
+    }
+
+    public locationCityFromResponse(response: ResponseReverseGeocode): Observable<LocationCity>
+    {
+        const geopoint: firestore.GeoPoint = new firestore.GeoPoint(response.latitude, response.longitude);
+        const search:   string             = `${response.locality} ${response.principalSubdivision}`;
+
+        const options: ParamsForwardGeocode =
+        {
+            autocomplete: false,
+            fuzzyMatch:   false,
+            limit:        1,
+            proximity:    [response.longitude, response.latitude],
+            routing:      false,
+            types:        [MapboxPlaceType.Place]
+        };
+
+        return this.mapbox.forwardGeocode(search, options).pipe
+        (
+            map((response: ResponseGeocode) =>
+                response.features[0].center
+            ),
+            map((center: [number, number]) =>
+                ({
+                    ...response,
+                    latitude:  center[1],
+                    longitude: center[0]
+                })
+            ),
+            map((response: ResponseReverseGeocode) =>
+                ServiceLocation.locationFromResponse(response)
+            ),
+            map((city: Location) =>
+                ({
+                    geopoint,
+                    city
+                })
+            )
+        );
+    }
+
+    public locationCityFromResult(result: Result): Observable<LocationCity>
     {
         const contextItem: ContextItem = result.
             context.
@@ -58,13 +113,7 @@ export class ServiceLocation
                 this.bigdatacloud.reverseGeocode(center[1], center[0])
             ),
             map((response: ResponseReverseGeocode) =>
-                ({
-                    geopoint : new firestore.GeoPoint(response.latitude, response.longitude),
-                    cityId   : ServiceLocation.cityId(response.countryCode, response.principalSubdivision, response.locality),
-                    city     : response.locality,
-                    region   : response.principalSubdivision,
-                    country  : response.countryCode
-                })
+                ServiceLocation.locationFromResponse(response)
             ),
             map((city: Location) =>
                 ({

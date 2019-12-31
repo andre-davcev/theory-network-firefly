@@ -10,6 +10,8 @@ clusters (create/edit)
   add cluster-events query state
   add ability to add/remove events via query state
   clean flow styling
+dev (ios)
+  chrome debugging
 events (cron)
     cron hourly 55 mins past hour
     find hour past current time
@@ -31,6 +33,14 @@ functions (all)
   minimize cold start time
   refactor to use try/catch async/await
   enable retry on failure
+functions (test)
+  clusters (delete)
+  events (update)
+  icons (delete)
+  images (delete)
+  users (create)
+  users (delete)
+  users (update)
 icons (grid/create/edit)
   cleanup flow styling
 images (grid/create/edit)
