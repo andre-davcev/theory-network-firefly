@@ -165,7 +165,8 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         ([
             new UpdateFormValue({ value, path }),
             ...this.ActionsQuerySync(value)
-        ]).pipe
+        ]).
+        pipe
         (
             switchMap(() =>
                 save ?

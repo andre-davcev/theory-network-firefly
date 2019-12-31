@@ -13,6 +13,7 @@ export enum ActionsUser
     Authenticate      = '[User] Authenticate',
     AuthenticateCheck = '[User] Authenticate Check',
     Watch             = '[User] Watch',
+    WatchLocation     = '[User] Watch Location',
     WatchProperties   = '[User] Watch Properties',
     AddToken          = '[User] Add Token',
     LoginEmail        = '[User] Login Email',

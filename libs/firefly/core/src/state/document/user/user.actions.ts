@@ -16,6 +16,7 @@ export class ActionUserWatch  { static readonly type = ActionsUser.Watch;   cons
 
 export class ActionUserAuthenticate       { static readonly type = ActionsUser.Authenticate;       constructor() { } }
 export class ActionUserAuthenticateCheck  { static readonly type = ActionsUser.AuthenticateCheck;  constructor(public payload: FirebaseUser) {} }
+export class ActionUserWatchLocation      { static readonly type = ActionsUser.WatchLocation;      constructor() { } }
 export class ActionUserWatchProperties    { static readonly type = ActionsUser.WatchProperties;    constructor() { } }
 export class ActionUserAddToken           { static readonly type = ActionsUser.AddToken;           constructor(public payload: string) { } }
 export class ActionUserLoginEmail         { static readonly type = ActionsUser.LoginEmail;         constructor(public payload: Credentials) { } }

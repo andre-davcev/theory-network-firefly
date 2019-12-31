@@ -1,16 +1,1 @@
-streams (all)
-  city lookup on login
-  streams (state)
-  streams (app)
-subscriptions (library)
-  child ActionSetData (user/{userId}/subscriptions)
-functions (test)
-  clusters (delete)
-  events (update)
-  icons (delete)
-  images (delete)
-  users (create)
-  users (delete)
-  users (update)
-ios (dev)
-  chrome debugging
+streams document state via city id

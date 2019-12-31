@@ -1,14 +1,14 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { FieldValue, DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { Status, User, Subscription } from '../library';
+import { Status, User, Subscription, ServiceCities } from '../library';
 import { firestore as db } from 'firebase-admin';
 
 const database: Firestore = db();
 
-const UserSubscriptionsUpdate : CloudFunction<Change<DocumentSnapshot>> =
+const UsersUpdate : CloudFunction<Change<DocumentSnapshot>> =
 
 firestore.
-document('user/{id}').
+document('users/{id}').
 onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
 {
     const updates: Array<Promise<WriteResult>> = [];
@@ -28,6 +28,14 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
     let status: Status = Status.Unchanged;
     let clusterId: string;
 
+    const cityIdBefore: string = before.city == null ? '' : before.city.cityId;
+    const cityIdAfter:  string = after.city  == null ? '' : after.city.cityId;
+
+    if (cityIdBefore !== cityIdAfter)
+    {
+        updates.push(ServiceCities.createIfNew(database, after));
+    }
+
     if (subscriptionCountBefore === subscriptionCountAfter)
     {
         clusterId = subscriptionKeysAfter.find((clusterId: string) => subscriptionsStatusAfter[clusterId].on !== subscriptionsStatusBefore[clusterId].on);
@@ -46,25 +54,16 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
 
     if (status === Status.Added)
     {
-        const subscriptions : Array<string> = after.subscriptions;
-
-        subscriptions.push(clusterId);
-
         updates.push(database.collection('clusters').doc(clusterId).update({ subscriberCount: FieldValue.increment(1) }));
-        updates.push(change.after.ref.update({ subscriptions }));
+        updates.push(change.after.ref.update({ subscriptions: FieldValue.arrayUnion(clusterId) }));
     }
     else if (status === Status.Removed)
     {
-        const subscriptions : Array<string> = after.subscriptions;
-        const index         : number        = subscriptions.findIndex((id: string) => clusterId === id);
-
-        subscriptions.splice(index, 1);
-
         updates.push(database.collection('clusters').doc(clusterId).update({ subscriberCount: FieldValue.increment(-1) }));
-        updates.push(change.after.ref.update({ subscriptions }));
+        updates.push(change.after.ref.update({ subscriptions: FieldValue.arrayRemove(clusterId) }));
     }
 
     return Promise.all(updates);
 });
 
-export { UserSubscriptionsUpdate };
+export { UsersUpdate };
