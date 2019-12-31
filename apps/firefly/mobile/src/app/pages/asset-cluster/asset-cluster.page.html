@@ -45,9 +45,23 @@
 
                     <ion-item-divider></ion-item-divider>
 
-                    <ion-item>
-                        Events list will go here
-                    </ion-item>
+                    <ion-list *ngFor="let event of events$ | async">
+                      <ion-item-divider *ngIf="event.metadata.timeStartFormatted">
+                          <ion-label>
+                              {{ event.metadata.timeStartFormatted }}
+                          </ion-label>
+                      </ion-item-divider>
+
+                      <ion-item>
+                          <ion-label>
+                              {{ event.metadata.timeStartDate | date:'shortTime' }}
+                          </ion-label>
+                          <ion-label>
+                              <h2>{{ event.name }}</h2>
+                              <p>{{ event.tagline }}</p>
+                          </ion-label>
+                      </ion-item>
+                    </ion-list>
 
                     <ion-item-divider></ion-item-divider>
                 </ion-item-group>
