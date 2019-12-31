@@ -37,6 +37,14 @@
                 <ion-item-group>
                     <ion-item-divider></ion-item-divider>
 
+                    <ion-item>
+                      <ion-icon name="lock" slot="start" color="primary"></ion-icon>
+                      <ion-label>Is Private</ion-label>
+                      <ion-toggle formControlName="private" color="success"></ion-toggle>
+                    </ion-item>
+
+                    <ion-item-divider></ion-item-divider>
+
                     <app-item-description [form]="form$ | async"
                                           [title]="'general.description' | translate"
                                           description="description"
