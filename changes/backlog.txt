@@ -6,7 +6,6 @@ app (forms)
 app (lists)
   empty icon/message for no data screens
 clusters (create/edit)
-  add private field
   add cluster-events query state
   add ability to add/remove events via query state
   clean flow styling
