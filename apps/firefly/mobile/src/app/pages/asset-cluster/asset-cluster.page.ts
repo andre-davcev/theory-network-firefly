@@ -12,7 +12,8 @@ import { Event } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
-import { BaseComponent } from '@theory/core';
+import { BaseComponent, CoreEnum } from '@theory/core';
+import { Navigate } from '@ngxs/router-plugin';
 
 const { Camera } = Plugins;
 
@@ -66,37 +67,6 @@ export class PageAssetCluster extends BaseComponent implements OnInit
           component: PageIconSelector
         })).
         subscribe((modal: HTMLIonModalElement) => modal.present());
-        /*if (page === Pages.IconSelector)
-        {
-            if (this.store.selectSnapshot(StateDevice.device))
-            {
-                const options: CameraOptions =
-                {
-                    quality:    100,
-                    resultType: CameraResultType.DataUrl,
-                    source:     CameraSource.Photos
-                };
-
-                this.store.dispatch(new ActionMobileLoadingShow()).
-                pipe
-                (
-                    switchMap(() => from(Camera.getPhoto(options))),
-                    map((photo: CameraPhoto) => photo.dataUrl),
-                    switchMap((imageData: string) =>
-                        this.store.dispatch(new ActionClusterIconUriSet(imageData))
-                    ),
-                    finalize(() =>
-                        this.store.dispatch(new ActionMobileLoadingHide())
-                    )
-                ).
-                subscribe();
-            }
-            else
-            {
-                this.store.dispatch(new ActionClusterIconPathSet()).
-                subscribe();
-            }
-        }*/
     }
 
     public save(): void
@@ -119,6 +89,10 @@ export class PageAssetCluster extends BaseComponent implements OnInit
             this.store.dispatch(new ActionMobileToast(message));
             this.navController.back();
         });
+    }
+
+    public addEvent(): void{
+      this.store.dispatch(new Navigate([Pages.AssetEvent, CoreEnum.IdNew]));
     }
 
 }
