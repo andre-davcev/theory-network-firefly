@@ -3,4 +3,3 @@ export * from './user-clusters';
 export * from './user-events';
 export * from './user-icons';
 export * from './user-images';
-export * from './user-stream';

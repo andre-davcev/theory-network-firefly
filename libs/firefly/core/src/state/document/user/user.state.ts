@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
-import { User, Location } from '@firefly/cloud';
+import { User, Location, StreamCluster } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -26,7 +26,8 @@ import {
     ActionUserDelete,
     ActionUserCreate,
     ActionUserUpdate,
-    ActionUserWatchLocation
+    ActionUserWatchLocation,
+    ActionUserWatchCity
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -37,15 +38,21 @@ import { ActionUserClustersReset } from '../../query/user-clusters/user-clusters
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
-import { ActionUserStreamReset, ActionUserStreamGetData } from '../../query/user-stream/user-stream.actions';
+import { ActionUserStreamReset, ActionUserStreamSetData } from '../../child/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { GeolocationPosition } from '@capacitor/core';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
 import { LocationCity } from '@firefly/core/interfaces';
+import { StateUserStreamOptions } from '../../child/user-stream/user-stream.state.options';
+import { StateUserStream } from '../../child/user-stream/user-stream.state';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser extends StateDocument<User, StateUserModel> implements NgxsOnInit
 {
+    @Select(StateLanguage.language)        language$    : Observable<string>;
+    @Select(StateLocation.location)        location$    : Observable<GeolocationPosition>;
+    @Select(StateUserStream.initialized()) streamReady$ : Observable<boolean>;
+
     constructor
     (
         private auth         : AngularFireAuth,
@@ -112,14 +119,12 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static authenticating(state: StateUserModel)         : boolean      { return state.authenticating; }
     @Selector() static city(state: StateUserModel)                   : Location     { const user: User = StateUser.dataState(state); return user == null ? null : user.city; }
     @Selector() static cityId(state: StateUserModel)                 : string       { const city: Location = StateUser.city(state); return city == null ? null : city.cityId; }
+    @Selector() static cityIdNow(state: StateUserModel)              : string       { return state.cityId; }
     @Selector() static language(state: StateUserModel)               : string       { const user: User = StateUser.dataState(state); return user == null ? null : user.language; }
     @Selector() static loading(state: StateUserModel)                : boolean      { return state.authenticating || state.initializing; }
     @Selector() static loadedNotAuthenticated(state: StateUserModel) : boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
     @Selector() static error(state: StateUserModel)                  : Error        { return state.error; }
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
-
-    @Select(StateLanguage.language) language$ : Observable<string>;
-    @Select(StateLocation.location) location$ : Observable<GeolocationPosition>;
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
@@ -152,18 +157,24 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 dispatch
                 ([
                     new ActionUserWatchLocation(),
-                    new ActionUserWatchProperties()
+                    new ActionUserWatchProperties(),
+                    new ActionUserWatchCity()
                 ])
             ),
             switchMap(() =>
                 dispatch
                 ([
                     new ActionUserAlertsGetData(),
-                    new ActionUserStreamGetData(),
                     new ActionLanguageSet(StateUser.language(getState()))
                 ])
             ),
-
+            switchMap(() =>
+                this.streamReady$.pipe
+                (
+                    filter((ready: boolean) => ready),
+                    take(1)
+                )
+            ),
             tap(() =>
                 patchState({ initializing: false })
             )
@@ -312,6 +323,27 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             ),
             switchMap((locationCity: LocationCity) =>
                 dispatch(new ActionUserPatch(locationCity))
+            )
+        );
+    }
+
+    @Action(ActionUserWatchCity, { cancelUncompleted: true })
+    watchCity({ dispatch }: StateContext<StateUserModel>)
+    {
+        return this.store.select(StateUser.cityId).
+        pipe
+        (
+            filter((cityId: string) =>
+                cityId != null && cityId !== this.store.selectSnapshot(StateUser.cityIdNow)
+            ),
+            switchMap((cityId: string) =>
+                this.service.documentGet(StateUserStreamOptions.name as string, cityId)
+            ),
+            map((snapshot: firestore.DocumentSnapshot) =>
+                snapshot.data() as Record<string, StreamCluster>
+            ),
+            switchMap((stream: Record<string, StreamCluster>) =>
+                dispatch(new ActionUserStreamSetData(stream, true))
             )
         );
     }

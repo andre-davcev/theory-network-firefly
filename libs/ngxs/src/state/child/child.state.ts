@@ -21,23 +21,22 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         defaults:        M,
         actions:         ActionsCollection,
         service:         ServiceFirestore<T>,
-        collection:      string,
-        collectionChild: string
+        collection:      string
     )
     {
         super(defaults, actions);
 
-        this.service         = service;
-        this.collection      = collection;
-        this.collectionChild = collectionChild;
+        this.service    = service;
+        this.collection = collection;
     }
 
-    protected static keysState(state: any): Array<string> { return state.keysSorted ;}
+    protected static keysState(state: any): Array<string> { return state.keysSorted ; }
 
     protected static idState(state: any):          string                        { return state.id; }
     protected static childLookupState(state: any): Record<string, Partial<any>>  { return state.childLookup; }
     protected static sortFieldsState(state: any):  Record<string, SortField>     { return state.sortFields; }
     protected static offsetState(state: any):      number                        { return state.offset; }
+    protected static countState(state: any):       number                        { return StateChild.keysState(state).length; }
 
     public static id()          { return createSelector([this], StateChild.idState); }
     public static childLookup() { return createSelector([this], StateChild.childLookupState); }
@@ -50,10 +49,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const fetch: boolean = action.fetch;
 
         const { getState, dispatch, patchState } = context;
-        const { ActionReset, ActionGet } = this.actions;
-
-        const state:   M       = getState();
-        const canPage: boolean = StateChild.canPageState(state);
+        const { ActionReset, ActionSetData } = this.actions;
 
         patchState({ id, loading: true } as M);
 
@@ -69,19 +65,36 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 map((snapshot: firestore.DocumentSnapshot) =>
                     snapshot.data()
                 ),
-                tap((childLookup: Record<string, Partial<T>>) =>
-                    patchState({ childLookup } as M)
-                ),
-                tap(() =>
-                    canPage ? patchState({ keysSorted: this.sort(context) } as M) : null
-                ),
-                switchMap(() =>
-                    fetch ? dispatch(new ActionGet()) : of(patchState({ loading: false } as M))
-                ),
-                map(() =>
-                    patchState({ initialized: true } as M)
+                switchMap((childLookup: Record<string, Partial<T>>) =>
+                    dispatch(new ActionSetData(childLookup, fetch))
                 )
             );
+    }
+
+    public setData(context: StateContext<M>, action: any): Observable<any>
+    {
+        const childLookup : Record<string, Partial<T>> = action.data;
+        const fetch       : boolean                    = action.fetch;
+
+        const { getState, dispatch, patchState } = context;
+        const { ActionGet } = this.actions;
+
+        return of(patchState({ childLookup } as M)).
+        pipe
+        (
+            tap(() =>
+                patchState({ keysSorted: this.sort(context) } as M)
+            ),
+            switchMap(() =>
+                fetch ? dispatch(new ActionGet()) : of(patchState({ loading: false } as M))
+            ),
+            map(() =>
+                patchState({ initialized: true } as M)
+            ),
+            tap(() =>
+                console.log(getState())
+            )
+        );
     }
 
     public get(context: StateContext<M>): Observable<any>
@@ -90,16 +103,16 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         const state: M = getState();
 
-        const canPage: boolean       = StateChild.canPageState(state);
-        const keys:    Array<string> = StateChild.keysState(state);
-        const count:   number        = StateChild.countState(state);
+        const canPage: boolean = StateChild.canPageState(state);
+        const count:   number  = StateChild.countState(state);
 
-        const { pageSize, data, snapshots, snapshotLookup, dataLookup, offset, childLookup, imageSize } = state;
-
-        const start: number = offset;
-        const end:   number = (start + pageSize) > count ? count : (start + pageSize);
+        const { data, snapshots, snapshotLookup, dataLookup, childLookup, imageSize } = state;
 
         const finishedPaging = StateChild.finishedPagingState(state) || count === data.length;
+
+        console.log(count);
+        console.log(data.length);
+        console.log(finishedPaging);
 
         patchState({ finishedPaging } as M);
 
@@ -107,8 +120,9 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         pipe
         (
             map(() =>
-                canPage ? keys.slice(start, end) : keys
+                this.getKeys(context)
             ),
+            tap(slice => console.log(slice)),
             map((slice: Array<string>) =>
                 slice.map((id: string) => this.service.documentGet(this.collection, id))
             ),
@@ -259,7 +273,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         const { dataLookup, childLookup, orderBy, orderByDirection, sortFields } = state;
 
-        const lookup: Record<string, Partial<T>> = StateChild.canPageState(state) ? childLookup : dataLookup;
+        const lookup: Record<string, Partial<T>> = childLookup;
 
         const type:      TypeOf  = sortFields[orderBy];
         const ascending: boolean = orderByDirection === OrderBy.Ascending;
@@ -268,6 +282,8 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         let a: any;
         let b: any;
+
+        console.log(Object.keys(lookup));
 
         return Object.
             keys(lookup).
@@ -278,6 +294,27 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
                 return sort(a, b, ascending);
             });
+    }
+
+    private getKeys(context: StateContext<M>): Array<string>
+    {
+        const { getState } = context;
+
+        const state : M             = getState();
+        const keys  : Array<string> = StateChild.keysState(state);
+
+        if (StateChild.canPageState(state))
+        {
+            const { pageSize, offset } = state;
+
+            const count: number = keys.length;
+            const start: number = offset;
+            const end:   number = (start + pageSize) > count ? count : (start + pageSize);
+
+            return keys.slice(start, end);
+        }
+
+        return keys;
     }
 
     private sortString(a: string, b: string, ascending: boolean): number

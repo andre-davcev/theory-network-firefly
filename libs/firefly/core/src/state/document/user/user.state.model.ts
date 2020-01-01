@@ -7,4 +7,5 @@ export interface StateUserModel extends StateDocumentModel
     authenticated    : boolean;
     authenticating   : boolean;
     initializing     : boolean;
+    cityId           : string;
 }
