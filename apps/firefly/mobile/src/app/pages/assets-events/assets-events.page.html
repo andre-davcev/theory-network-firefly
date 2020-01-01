@@ -29,7 +29,10 @@
         </ion-label>
     </ion-item-divider>
 
-    <ion-item>
+    <ion-item (click)="select(event)">
+        <ion-avatar slot="start">
+          <img *ngIf="images[event.bucketPath]" [src]="images[event.bucketPath].small">
+        </ion-avatar>
         <ion-label>
             {{ event.metadata.timeStartDate | date:'shortTime' }}
         </ion-label>
@@ -40,9 +43,9 @@
     </ion-item>
   </ion-list>
 
-    <div *ngIf="!(found$ | async)" class="container">
+    <!--div *ngIf="!(found$ | async)" class="container">
       <p>Create a new Event?</p>
-    </div>
+    </!--div-->
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
       <ion-fab-button color="secondary" mode="md" (click)="add()">
