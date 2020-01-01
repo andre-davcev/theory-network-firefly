@@ -13,9 +13,11 @@ import {
     ActionUserSubscriptionsGet,
     ActionUserSubscriptionsOn,
     ActionUserSubscriptionsOff,
-    ActionUserSubscriptionsSync
+    ActionUserSubscriptionsSync,
+    ActionUserSubscriptionsSetData
 } from './user-subscriptions.actions';
 import { StateChild } from '@theory/ngxs';
+import { StateClusterOptions } from '../../document/cluster/cluster.state.options';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 
@@ -23,7 +25,6 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
 {
     constructor
     (
-        private store: Store,
         service: ServiceSubscriptions
     )
     {
@@ -34,14 +35,14 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
             {
                 ActionReset   : ActionUserSubscriptionsReset,
                 ActionGetData : ActionUserSubscriptionsGetData,
+                ActionSetData : ActionUserSubscriptionsSetData,
                 ActionGet     : ActionUserSubscriptionsGet,
                 ActionAdd     : ActionUserSubscriptionsAdd,
                 ActionRemove  : ActionUserSubscriptionsRemove,
                 ActionSync    : ActionUserSubscriptionsSync
             },
             service,
-            'clusters',
-            'user-subscriptions'
+            StateClusterOptions.name as string
         );
     }
 
@@ -55,6 +56,12 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
     getData(context: StateContext<StateUserSubscriptionsModel>, action: ActionUserSubscriptionsGetData)
     {
         return super.getData(context, action);
+    }
+
+    @Action(ActionUserSubscriptionsSetData)
+    setData(context: StateContext<StateUserSubscriptionsModel>, action: ActionUserSubscriptionsSetData)
+    {
+        return super.setData(context, action);
     }
 
     @Action(ActionUserSubscriptionsGet)

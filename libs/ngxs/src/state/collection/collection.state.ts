@@ -35,7 +35,7 @@ export class StateCollection<T extends FirebaseDocument, M extends StateCollecti
     protected static dataLookupState(state: any):       Record<string, any>                        { return state.dataLookup; }
     protected static countState(state: any):            number                                     { return StateCollection.snapshotsState(state).length; }
     protected static foundState(state: any):            boolean                                    { return StateCollection.countState(state) > 0; }
-    protected static canPageState(state: any):          boolean                                    { return StateCollection.pageSizeState(state) === PageSize.None; }
+    protected static canPageState(state: any):          boolean                                    { return StateCollection.pageSizeState(state) !== PageSize.None; }
     protected static keysState(state: any):             Array<string>                              { return Object.keys(StateCollection.snapshotLookupState(state));}
     protected static noDataState(state: any):           boolean                                    { return StateCollection.initializedState(state) && !StateCollection.loadingState(state) && !StateCollection.foundState(state); }
 
