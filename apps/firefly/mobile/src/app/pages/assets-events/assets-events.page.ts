@@ -59,7 +59,10 @@ export class PageAssetsEvents extends BaseComponent implements OnInit
 
     public select(object: Event): void
     {
-        this.store.dispatch(new ActionEventSetId(object.id));
+        this.store.dispatch([
+          new Navigate([Pages.AssetEvent, object.id])
+        ]);
+        //this.store.dispatch(new ActionEventSetId(object.id));
     }
 
     public menuOpen(): void

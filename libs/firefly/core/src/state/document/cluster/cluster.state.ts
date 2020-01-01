@@ -25,7 +25,8 @@ import {
     ActionClusterIconCreate,
     ActionClusterIconUriSet,
     ActionClusterIconPathSet,
-    ActionClusterEventsGet
+    ActionClusterEventsGet,
+    ActionClusterEventsReset
 } from './cluster.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../..//query/user-clusters';
 import { ActionUserStreamRemove } from '../../query/user-stream/user-stream.actions';
@@ -233,6 +234,16 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
                 dispatch(new ActionClusterPatch({ bucketPath: this.store.selectSnapshot(StateIcon.bucketPath()) }))
             )
         );
+    }
+
+    @Action(ActionClusterEventsReset)
+    eventsReset({ patchState }: StateContext<StateClusterModel>)
+    {
+      patchState(
+        {
+          events: []
+        }
+      )
     }
 
     @Action(ActionClusterEventsGet)
