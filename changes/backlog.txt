@@ -21,7 +21,6 @@ events (cron)
             create alert with alert.userId and with alert.tokens
     set event.timeNotifyComplete = true
 events (edit)
-  add private field
   add url field
   add create/edit
   reverse geocode

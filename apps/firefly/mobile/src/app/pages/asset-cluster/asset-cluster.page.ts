@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, catchError, map, finalize } from 'rxjs/operators';
+import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
@@ -11,6 +11,8 @@ import { Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
+import { StorageImage, StateStorage } from '@theory/firebase';
+import { BaseComponent } from '@theory/core';
 
 const { Camera } = Plugins;
 
@@ -21,17 +23,18 @@ const { Camera } = Plugins;
     styleUrls   : ['./asset-cluster.page.scss']
 })
 
-export class PageAssetCluster
+export class PageAssetCluster extends BaseComponent implements OnInit
 {
     @Select(StateCluster.formGroup()) form$:         Observable<FormGroup>;
     @Select(StateCluster.isNew())     isNew$:        Observable<boolean>;
     @Select(StateCluster.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateCluster.iconUrl)     iconUrl$:      Observable<string>;
     @Select(StateCluster.events)      events$:       Observable<Event[]>;
-
+    @Select(StateStorage.images)     images$:   Observable<Record<string, StorageImage>>;
     @Select(StateDevice.device)       device$:       Observable<boolean>;
 
     public Pages: any = Pages;
+    public images: Record<string, StorageImage> = {};
 
     constructor
     (
@@ -39,7 +42,18 @@ export class PageAssetCluster
       private navController: NavController,
       private modal:         ModalController,
     )
-    { }
+    {
+      super();
+    }
+
+    public ngOnInit(): void
+    {
+        this.images$.
+        pipe(takeUntil(this.destroy$)).
+        subscribe((images: Record<string, StorageImage>) =>
+            this.images = images
+        );
+    }
 
     public ionViewWillEnter(): void
     {
