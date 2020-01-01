@@ -17,4 +17,5 @@ export enum ActionsCluster
     IconCreate  = '[Cluster] Icon Create',
 
     EventsGet = '[Cluster] Events Get',
+    EventsReset = '[Cluster] Events Reset',
 }

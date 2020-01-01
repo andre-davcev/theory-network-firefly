@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, catchError, map, finalize } from 'rxjs/operators';
+import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
@@ -11,6 +11,9 @@ import { Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
+import { StorageImage, StateStorage } from '@theory/firebase';
+import { BaseComponent, CoreEnum } from '@theory/core';
+import { Navigate } from '@ngxs/router-plugin';
 
 const { Camera } = Plugins;
 
@@ -21,17 +24,18 @@ const { Camera } = Plugins;
     styleUrls   : ['./asset-cluster.page.scss']
 })
 
-export class PageAssetCluster
+export class PageAssetCluster extends BaseComponent implements OnInit
 {
     @Select(StateCluster.formGroup()) form$:         Observable<FormGroup>;
     @Select(StateCluster.isNew())     isNew$:        Observable<boolean>;
     @Select(StateCluster.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateCluster.iconUrl)     iconUrl$:      Observable<string>;
     @Select(StateCluster.events)      events$:       Observable<Event[]>;
-
+    @Select(StateStorage.images)     images$:   Observable<Record<string, StorageImage>>;
     @Select(StateDevice.device)       device$:       Observable<boolean>;
 
     public Pages: any = Pages;
+    public images: Record<string, StorageImage> = {};
 
     constructor
     (
@@ -39,7 +43,18 @@ export class PageAssetCluster
       private navController: NavController,
       private modal:         ModalController,
     )
-    { }
+    {
+      super();
+    }
+
+    public ngOnInit(): void
+    {
+        this.images$.
+        pipe(takeUntil(this.destroy$)).
+        subscribe((images: Record<string, StorageImage>) =>
+            this.images = images
+        );
+    }
 
     public ionViewWillEnter(): void
     {
@@ -52,37 +67,6 @@ export class PageAssetCluster
           component: PageIconSelector
         })).
         subscribe((modal: HTMLIonModalElement) => modal.present());
-        /*if (page === Pages.IconSelector)
-        {
-            if (this.store.selectSnapshot(StateDevice.device))
-            {
-                const options: CameraOptions =
-                {
-                    quality:    100,
-                    resultType: CameraResultType.DataUrl,
-                    source:     CameraSource.Photos
-                };
-
-                this.store.dispatch(new ActionMobileLoadingShow()).
-                pipe
-                (
-                    switchMap(() => from(Camera.getPhoto(options))),
-                    map((photo: CameraPhoto) => photo.dataUrl),
-                    switchMap((imageData: string) =>
-                        this.store.dispatch(new ActionClusterIconUriSet(imageData))
-                    ),
-                    finalize(() =>
-                        this.store.dispatch(new ActionMobileLoadingHide())
-                    )
-                ).
-                subscribe();
-            }
-            else
-            {
-                this.store.dispatch(new ActionClusterIconPathSet()).
-                subscribe();
-            }
-        }*/
     }
 
     public save(): void
@@ -105,6 +89,10 @@ export class PageAssetCluster
             this.store.dispatch(new ActionMobileToast(message));
             this.navController.back();
         });
+    }
+
+    public addEvent(): void{
+      this.store.dispatch(new Navigate([Pages.AssetEvent, CoreEnum.IdNew]));
     }
 
 }
