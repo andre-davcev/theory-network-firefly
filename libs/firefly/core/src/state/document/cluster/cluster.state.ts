@@ -25,13 +25,14 @@ import {
     ActionClusterIconCreate,
     ActionClusterIconUriSet,
     ActionClusterIconPathSet,
-    ActionClusterEventsGet
+    ActionClusterEventsGet,
+    ActionClusterEventsReset
 } from './cluster.actions';
 import { ActionUserClustersAdd, ActionUserClustersRemove, StateUserClusters, ActionUserClustersSync } from '../..//query/user-clusters';
 import { ActionUserStreamRemove } from '../../child/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { firestore } from 'firebase/app';
-import { ActionStorageUrlGet, StateStorage, StorageImage, ImageSize } from '@theory/firebase';
+import { ActionStorageUrlGet, StateStorage, StorageImage, ImageSize, ActionStorageUrlsGet } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
@@ -235,9 +236,20 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
         );
     }
 
-    @Action(ActionClusterEventsGet)
-    eventsGet({ patchState, getState}: StateContext<StateClusterModel>)
+    @Action(ActionClusterEventsReset)
+    eventsReset({ patchState }: StateContext<StateClusterModel>)
     {
+      patchState(
+        {
+          events: []
+        }
+      )
+    }
+
+    @Action(ActionClusterEventsGet)
+    eventsGet({ patchState, getState, dispatch}: StateContext<StateClusterModel>)
+    {
+        //const cluster: Cluster  = StateCluster.dataState(getState());
         const userId: string = this.store.selectSnapshot(StateUser.id());
         const query: Query   = userId == null ? undefined : this.service.collection('events').ref
           .where('userId', '==', userId).where('clusters', 'array-contains', StateCluster.idState(getState()));
@@ -282,7 +294,13 @@ export class StateCluster extends StateDocument<Cluster, StateClusterModel>
             ({
               events
             })
+          ),
+          map(() =>
+            events.map((item: Event) => item.bucketPath)
+          ),
+          switchMap((bucketPaths: Array<string>) =>
+              dispatch(new ActionStorageUrlsGet(bucketPaths, ImageSize.Small))
           )
-        )
+      )
     }
 }
