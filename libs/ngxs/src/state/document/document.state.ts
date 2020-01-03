@@ -110,9 +110,6 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         return this.service.documentWatch(this.collection, id).
         pipe
         (
-            map((actions: Action<DocumentSnapshot<T>>) =>
-                actions.payload
-            ),
             tap((snapshot: DocumentSnapshot<T>) =>
                 dispatch(new ActionSet(snapshot))
             ),

@@ -77,6 +77,7 @@ export class ServiceLocation
             map((city: Location) =>
                 ({
                     geopoint,
+                    cityId: city.cityId,
                     city
                 })
             )
@@ -118,6 +119,7 @@ export class ServiceLocation
             map((city: Location) =>
                 ({
                     geopoint,
+                    cityId: city.cityId,
                     city
                 })
             )

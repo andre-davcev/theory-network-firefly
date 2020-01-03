@@ -1,1 +1,0 @@
-streams document state via city id

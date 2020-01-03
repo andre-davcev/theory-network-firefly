@@ -28,8 +28,8 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
     let status: Status = Status.Unchanged;
     let clusterId: string;
 
-    const cityIdBefore: string = before.city == null ? '' : before.city.cityId;
-    const cityIdAfter:  string = after.city  == null ? '' : after.city.cityId;
+    const cityIdBefore: string = before.cityId == null ? '' : before.cityId;
+    const cityIdAfter:  string = after.cityId  == null ? '' : after.cityId;
 
     if (cityIdBefore !== cityIdAfter)
     {
