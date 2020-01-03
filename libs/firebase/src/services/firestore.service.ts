@@ -5,7 +5,7 @@ import { firestore } from 'firebase/app';
 import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root'})
 export class ServiceFirestore<T extends FirebaseDocument>
@@ -28,9 +28,18 @@ export class ServiceFirestore<T extends FirebaseDocument>
         return from(document.get());
     }
 
-    public documentWatch(collection: string, id: string): Observable<Action<DocumentSnapshot<T>>>
+    public documentWatch<T>(collection: string, id: string): Observable<DocumentSnapshot<T>>
     {
-        return this.firestore.collection<T>(collection).doc<T>(id).snapshotChanges();
+        return this.firestore.
+            collection<T>(collection).
+            doc<T>(id).
+            snapshotChanges().
+            pipe
+            (
+                map((actions: Action<DocumentSnapshot<T>>) =>
+                    actions.payload
+                )
+            );
     }
 
     public documentCreate(collection: string, entity: T): Observable<firestore.DocumentSnapshot>

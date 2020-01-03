@@ -6,6 +6,7 @@ import { Subscription } from './subscription.model';
 
 export interface User extends FirebaseDocument
 {
+    cityId              : string;
     city                : Location;
     email               : string;
     language            : string;

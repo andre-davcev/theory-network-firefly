@@ -18,7 +18,6 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         error           : undefined,
         authenticated   : false,
         authenticating  : false,
-        initializing    : false,
-        cityId          : null
+        initializing    : false
     }
 };
