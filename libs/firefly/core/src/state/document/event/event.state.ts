@@ -33,7 +33,7 @@ import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
 import { switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ActionIconClear, ActionIconReset } from '../icon/icon.actions';
+import { ActionIconReset } from '../icon/icon.actions';
 import { LocationCity } from '@firefly/core/interfaces';
 
 @State<StateEventModel>(StateEventOptions)
@@ -61,6 +61,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 metadata    : {},
 
                 bucketPath     : null,
+                cityId         : null,
                 city           : null,
                 clusters       : [],
                 description    : null,
@@ -258,7 +259,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     setLocation({ dispatch } : StateContext<StateEventModel>, { result }: ActionEventLocationSet)
     {
         return result == null ?
-            dispatch(new ActionEventPatch({ geopoint: null, city: null })) :
+            dispatch(new ActionEventPatch({ geopoint: null, city: null, cityId: null })) :
             this.location.locationCityFromResult(result).pipe
             (
                 switchMap((locationCity: LocationCity) =>

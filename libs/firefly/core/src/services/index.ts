@@ -4,7 +4,7 @@ export * from './events.service';
 export * from './icons.service';
 export * from './images.service';
 export * from './location.service';
-export * from './stream-items.service';
+export * from './streams.service';
 export * from './subscriptions.service';
 export * from './users.service';
 export * from './util.service';

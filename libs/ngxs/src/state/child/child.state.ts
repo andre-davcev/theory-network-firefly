@@ -90,9 +90,6 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             ),
             map(() =>
                 patchState({ initialized: true } as M)
-            ),
-            tap(() =>
-                console.log(getState())
             )
         );
     }
@@ -110,10 +107,6 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         const finishedPaging = StateChild.finishedPagingState(state) || count === data.length;
 
-        console.log(count);
-        console.log(data.length);
-        console.log(finishedPaging);
-
         patchState({ finishedPaging } as M);
 
         return finishedPaging ? of(null) : of(null).
@@ -122,7 +115,6 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             map(() =>
                 this.getKeys(context)
             ),
-            tap(slice => console.log(slice)),
             map((slice: Array<string>) =>
                 slice.map((id: string) => this.service.documentGet(this.collection, id))
             ),
@@ -282,8 +274,6 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         let a: any;
         let b: any;
-
-        console.log(Object.keys(lookup));
 
         return Object.
             keys(lookup).
