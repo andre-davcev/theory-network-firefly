@@ -17,7 +17,7 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
     const geopoint: db.GeoPoint                 = object.geopoint;
     const promises: Array<Promise<WriteResult>> = [];
     const cities:   db.QuerySnapshot            = await database.collection('cities').get();
-    const nearby:   Record<string, number>      = {};
+    const nearby:   Record<string, number>      = { [id]: 0 };
 
     cities.forEach((snapshot: QueryDocumentSnapshot) =>
     {
@@ -40,7 +40,11 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
     object.nearby = nearby;
     object.userId = GlobalVariable.UserAdmin;
 
-    return snapshot.ref.update(object);
+    return Promise.all
+    ([
+        snapshot.ref.update(object),
+        ServiceCities.generateStream(database, object)
+    ]);
 });
 
 export { CitiesCreate };

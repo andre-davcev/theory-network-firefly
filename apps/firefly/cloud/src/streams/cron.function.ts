@@ -3,7 +3,6 @@ import { firestore } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
 import { ServiceStreams, Cluster, Event, GlobalVariable, StreamCluster } from '../library';
 import { City } from '../library';
-import { object } from 'firebase-functions/lib/providers/storage';
 
 const StreamsCron =
 
@@ -42,10 +41,9 @@ onRun(async (context: EventContext) =>
         id                    = snapshot.id;
         citySubscriberMax[id] = 0;
         cityClusters[id]      = [];
-        cityDistanceScore[id] = { [id]: 1 };
+        cityDistanceScore[id] = {};
         nearby                = (snapshot.data() as City).nearby;
 
-        nearby[id]       = 0;
         citiesNearby[id] = nearby;
 
         Object.keys(nearby).forEach((cityId: string) =>
