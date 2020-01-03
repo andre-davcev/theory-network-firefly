@@ -22,3 +22,5 @@ export class ActionUserWatchProperties    { static readonly type = ActionsUser.W
 export class ActionUserAddToken           { static readonly type = ActionsUser.AddToken;           constructor(public payload: string) { } }
 export class ActionUserLoginEmail         { static readonly type = ActionsUser.LoginEmail;         constructor(public payload: Credentials) { } }
 export class ActionUserLogout             { static readonly type = ActionsUser.Logout;             constructor() { } }
+
+export class ActionUserWatchSubscriptionsStatus { static readonly type = ActionsUser.WatchSubscriptionsStatus;  constructor() { } }

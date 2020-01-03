@@ -6,6 +6,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StateMobile } from '@firefly/mobile';
 import { MenuController } from '@ionic/angular';
+import { ActionUserWatchSubscriptionsStatus } from '@firefly/core';
 
 @Component
 ({
@@ -26,6 +27,7 @@ export class PageSubscriptions
 
     ionViewWillEnter()
     {
+        this.store.dispatch(new ActionUserWatchSubscriptionsStatus());
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 

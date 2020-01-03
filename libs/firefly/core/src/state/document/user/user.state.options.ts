@@ -19,6 +19,7 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         authenticated   : false,
         authenticating  : false,
         initializing    : false,
-        cityId          : null
+        cityId          : null,
+        subscriptionsStatus : null
     }
 };

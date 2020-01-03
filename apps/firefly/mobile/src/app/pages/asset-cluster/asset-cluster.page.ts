@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
+import { switchMap, catchError, map, finalize, takeUntil, take } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateCluster, ActionClusterIconUriSet, ActionClusterIconPathSet, ActionClusterSave } from '@firefly/core';
+import { StateCluster, ActionClusterIconUriSet, ActionClusterIconPathSet, ActionClusterSave, StateUserEvents, ActionUserEventsGetData } from '@firefly/core';
 import { PageIconSelector } from '../icon-selector';
 import { Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
@@ -31,8 +31,9 @@ export class PageAssetCluster extends BaseComponent implements OnInit
     @Select(StateCluster.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateCluster.iconUrl)     iconUrl$:      Observable<string>;
     @Select(StateCluster.events)      events$:       Observable<Event[]>;
-    @Select(StateStorage.images)     images$:   Observable<Record<string, StorageImage>>;
+    @Select(StateStorage.images)      images$:       Observable<Record<string, StorageImage>>;
     @Select(StateDevice.device)       device$:       Observable<boolean>;
+    @Select(StateUserEvents.initialized()) stateUserInitialized$: Observable<boolean>;
 
     public Pages: any = Pages;
     public images: Record<string, StorageImage> = {};
@@ -91,8 +92,20 @@ export class PageAssetCluster extends BaseComponent implements OnInit
         });
     }
 
-    public addEvent(): void{
-      this.store.dispatch(new Navigate([Pages.AssetEvent, CoreEnum.IdNew]));
+    public select(object: Event): void
+    {
+        this.store.dispatch(new ActionMobileLoadingShow()).
+        pipe
+        (
+            switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
+            switchMap(() => this.store.dispatch([
+              new ActionMobileLoadingHide(),
+              new Navigate([Pages.AssetEvent, object.id])
+            ]))
+        ).subscribe();
     }
 
+    public addEvent(): void{
+        this.store.dispatch(new Navigate([Pages.AssetEvent, CoreEnum.IdNew]));
+    }
 }
