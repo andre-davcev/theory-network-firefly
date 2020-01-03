@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
-import { User, Location, StreamCluster } from '@firefly/cloud';
+import { User, Location, StreamCluster, Subscription } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -27,7 +27,8 @@ import {
     ActionUserCreate,
     ActionUserUpdate,
     ActionUserWatchLocation,
-    ActionUserWatchCity
+    ActionUserWatchCity,
+    ActionUserWatchSubscriptionsStatus
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -39,7 +40,7 @@ import { ActionUserEventsReset } from '../../query/user-events/user-events.actio
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
 import { ActionUserStreamReset, ActionUserStreamSetData } from '../../child/user-stream/user-stream.actions';
-import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/user-subscriptions.actions';
+import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { GeolocationPosition } from '@capacitor/core';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
 import { LocationCity } from '@firefly/core/interfaces';
@@ -125,6 +126,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static loadedNotAuthenticated(state: StateUserModel) : boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
     @Selector() static error(state: StateUserModel)                  : Error        { return state.error; }
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
+    @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, Subscription> { const user: User = StateUser.dataState(state); return user == null ? null : user.subscriptionsStatus; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
@@ -345,6 +347,27 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             switchMap((stream: Record<string, StreamCluster>) =>
                 dispatch(new ActionUserStreamSetData(stream, true))
             )
+        );
+    }
+
+    @Action(ActionUserWatchSubscriptionsStatus, { cancelUncompleted: true })
+    watchSubscriptions({ dispatch }: StateContext<StateUserModel>)
+    {
+        alert('watch subscriptions');
+        return this.store.select(StateUser.subscriptionsStatus).
+        pipe
+        (
+            switchMap((subscriptions: Record<string, Subscription>) =>
+                dispatch(new ActionUserSubscriptionsSetData(subscriptions, true))
+                /*this.service.documentGet(StateUserStreamOptions.name as string, cityId)
+                this.service*/
+            )/*,
+            map((snapshot: firestore.DocumentSnapshot) =>
+                snapshot.data() as Record<string, StreamCluster>
+            ),
+            switchMap((stream: Record<string, StreamCluster>) =>
+                dispatch(new ActionUserStreamSetData(stream, true))
+            )*/
         );
     }
 

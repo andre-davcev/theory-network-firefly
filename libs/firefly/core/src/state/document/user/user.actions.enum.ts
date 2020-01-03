@@ -18,5 +18,7 @@ export enum ActionsUser
     WatchProperties   = '[User] Watch Properties',
     AddToken          = '[User] Add Token',
     LoginEmail        = '[User] Login Email',
-    Logout            = '[User] Logout'
+    Logout            = '[User] Logout',
+
+    WatchSubscriptionsStatus = '[User] Watch SubscriptionsStatus'
 }

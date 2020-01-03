@@ -21,7 +21,8 @@ export class ServiceUsers extends ServiceFirestore<User>
     {
         return super.formCreate(
         {
-            ...object
+            ...object,
+            subscriptions : [object.subscriptions]
         });
     }
 }
