@@ -30,7 +30,7 @@ import {
     ActionUserWatchCity,
     ActionUserWatchSubscriptionsStatus
 } from './user.actions';
-import { ServiceUsers, ServiceLocation, ServiceStreams } from '@firefly/core/services';
+import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 
@@ -128,6 +128,17 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static error(state: StateUserModel)                  : Error        { return state.error; }
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, Subscription> { const user: User = StateUser.dataState(state); return user == null ? null : user.subscriptionsStatus; }
+
+    @Selector([StateUserStream.data(), StateUserStream.subscribed])
+    public static stream(state: StateUserModel, stream: Array<StreamCluster>, subscribed: Record<string, string>): Array<StreamCluster>
+    {
+        const subscriptions: Record<string, Subscription> = StateUser.subscriptionsStatus(state);
+
+        return stream.
+            filter((cluster: StreamCluster) =>
+                subscriptions[cluster.id] == null || !subscriptions[cluster.id].on || subscribed[cluster.id] != null
+            );
+    }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
