@@ -452,6 +452,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             subscription.on = !subscription.on;
         }
 
-        return dispatch(new ActionUserPatch({ subscriptionsStatus }));
+        return dispatch(new ActionUserPatch({ subscriptionsStatus }, true));
     }
 }

@@ -11,13 +11,14 @@ import {
     ActionUserSubscriptionsRemove,
     ActionUserSubscriptionsGetData,
     ActionUserSubscriptionsGet,
-    ActionUserSubscriptionsOn,
-    ActionUserSubscriptionsOff,
     ActionUserSubscriptionsSync,
     ActionUserSubscriptionsSetData
 } from './user-subscriptions.actions';
 import { StateChild } from '@theory/ngxs';
 import { StateClusterOptions } from '../../document/cluster/cluster.state.options';
+import { switchMap } from 'rxjs/operators';
+import { StateUser } from '@firefly/core';
+import { of } from 'rxjs';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 
@@ -25,7 +26,8 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
 {
     constructor
     (
-        service: ServiceSubscriptions
+        private store: Store,
+                service: ServiceSubscriptions
     )
     {
         super
@@ -86,17 +88,5 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
     sync(context: StateContext<StateUserSubscriptionsModel>, action: ActionUserSubscriptionsSync)
     {
         return super.sync(context, action);
-    }
-
-    @Action(ActionUserSubscriptionsOn)
-    on({ dispatch, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsOn)
-    {
-
-    }
-
-    @Action(ActionUserSubscriptionsOff)
-    off({ dispatch, getState }: StateContext<StateUserSubscriptionsModel>, { payload }: ActionUserSubscriptionsOff)
-    {
-
     }
 }
