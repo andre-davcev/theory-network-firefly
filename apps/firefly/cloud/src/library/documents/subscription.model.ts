@@ -1,6 +1,4 @@
 import { Cluster } from './cluster.model';
+import { SubscriptionPartial } from '../models';
 
-export interface Subscription extends Cluster
-{
-    on: boolean;
-}
+export type Subscription = Cluster & SubscriptionPartial;

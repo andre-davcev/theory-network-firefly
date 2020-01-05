@@ -43,8 +43,6 @@ export class StateUserStream extends StateChild<StreamCluster, StateUserStreamMo
         );
     }
 
-    @Selector() static subscribed(state: StateUserStreamModel) : Record<string, string> { return state.subscribed; }
-
     @Action(ActionUserStreamReset)
     reset(context: StateContext<StateUserStreamModel>, action: ActionUserStreamReset)
     {
