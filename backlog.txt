@@ -7,7 +7,6 @@ alerts (list) - add unread count badge to bell
 alerts (list) - on click go show menu (add to calendar/go to map/do all)
 alerts (list) - on click navigate to detail
 alerts (list) - on delete click (delete alert, update list, update unread count)
-clusters (detail) - change private icon to grey
 clusters (detail) - required fields styling
 clusters (detail) - refine create/edit flows
 clusters (detail) - add cluster-events query state
@@ -15,7 +14,6 @@ clusters (detail) - add ability to add/remove events via query state
 clusters (detail) - clean flow styling
 clusters (list) - empty list icon/message
 dev (ios) - chrome debugging
-events (detail) - change private icon to grey
 events (detail) - required fields styling
 events (detail) - refine create/edit flows
 events (detail) - add url field

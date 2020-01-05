@@ -20,5 +20,6 @@ export enum ActionsUser
     LoginEmail        = '[User] Login Email',
     Logout            = '[User] Logout',
 
-    WatchSubscriptionsStatus = '[User] Watch SubscriptionsStatus'
+    WatchSubscriptionsStatus = '[User] Watch SubscriptionsStatus',
+    SubscriptionToggle       = '[User] Subscription Toggle'
 }

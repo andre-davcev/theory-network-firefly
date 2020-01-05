@@ -23,4 +23,5 @@ export class ActionUserAddToken           { static readonly type = ActionsUser.A
 export class ActionUserLoginEmail         { static readonly type = ActionsUser.LoginEmail;         constructor(public payload: Credentials) { } }
 export class ActionUserLogout             { static readonly type = ActionsUser.Logout;             constructor() { } }
 
-export class ActionUserWatchSubscriptionsStatus { static readonly type = ActionsUser.WatchSubscriptionsStatus;  constructor() { } }
+export class ActionUserWatchSubscriptionsStatus { static readonly type = ActionsUser.WatchSubscriptionsStatus; constructor() { } }
+export class ActionUserSubscriptionToggle       { static readonly type = ActionsUser.SubscriptionToggle;       constructor(public id: string, public filter: boolean = true) { } }

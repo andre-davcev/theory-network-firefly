@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { ActionUserSubscriptionsOn, ActionUserSubscriptionsOff, StateUserStream, StateUser } from '@firefly/core';
+import { ActionUserSubscriptionsOn, ActionUserSubscriptionsOff, StateUserStream, StateUser, ActionUserSubscriptionToggle } from '@firefly/core';
 import { StreamCluster } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
@@ -43,5 +43,7 @@ export class PageStream extends BaseComponent implements OnInit
         {
             this.store.dispatch(new ActionUserSubscriptionsOff(stream.id));
         }
+
+        this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, false));
     }
 }
