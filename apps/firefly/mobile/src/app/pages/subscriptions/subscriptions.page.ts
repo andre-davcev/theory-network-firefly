@@ -6,11 +6,11 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { StateMobile } from '@firefly/mobile';
 import { MenuController } from '@ionic/angular';
-import { StateUserSubscriptions, ActionUserSubscriptionToggle } from '@firefly/core';
+import { StateUserSubscriptions, ActionUserSubscriptionToggle, ActionUserSubscriptionsReset, ActionUserWatchSubscriptionsStatus } from '@firefly/core';
 import { Subscription } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage } from '@theory/firebase';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, switchMap } from 'rxjs/operators';
 
 @Component
 ({
@@ -57,6 +57,13 @@ export class PageSubscriptions extends BaseComponent implements OnInit
 
     public toggle(event, subscription: Subscription)
     {
-      this.store.dispatch(new ActionUserSubscriptionToggle(subscription.id));
+      this.store.dispatch(new ActionUserSubscriptionToggle(subscription.id)).pipe(
+        switchMap(() =>
+          this.store.dispatch(new ActionUserSubscriptionsReset())
+        ),
+        switchMap(()=>
+          this.store.dispatch(new ActionUserWatchSubscriptionsStatus())
+        )
+      ).subscribe();
     }
 }
