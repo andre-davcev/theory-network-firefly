@@ -352,25 +352,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         );
     }
 
-    @Action(ActionUserWatchSubscriptionsStatus, { cancelUncompleted: true })
+    @Action(ActionUserWatchSubscriptionsStatus)
     watchSubscriptions({ dispatch }: StateContext<StateUserModel>)
     {
-        alert('watch subscriptions');
-        return this.store.select(StateUser.subscriptionsStatus).
-        pipe
-        (
-            switchMap((subscriptions: Record<string, Subscription>) =>
-                dispatch(new ActionUserSubscriptionsSetData(subscriptions, true))
-                /*this.service.documentGet(StateUserStreamOptions.name as string, cityId)
-                this.service*/
-            )/*,
-            map((snapshot: firestore.DocumentSnapshot) =>
-                snapshot.data() as Record<string, StreamCluster>
-            ),
-            switchMap((stream: Record<string, StreamCluster>) =>
-                dispatch(new ActionUserStreamSetData(stream, true))
-            )*/
-        );
+        const subscriptions: Record<string, Subscription> = this.store.selectSnapshot(StateUser.subscriptionsStatus);
+        dispatch(new ActionUserSubscriptionsSetData(subscriptions, true));
     }
 
     @Action(ActionUserWatchLanguage, { cancelUncompleted: true })
