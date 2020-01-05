@@ -18,7 +18,7 @@
 <ion-content>
 	<ion-list lines="none" elevation="1">
     <ion-item *ngFor="let subscription of subscriptions$ | async">
-        <ion-avatar slot="start">
+        <ion-avatar (click)="select(subscription)" slot="start">
             <img *ngIf="images[subscription.bucketPath]" [src]="images[subscription.bucketPath].small">
         </ion-avatar>
 
