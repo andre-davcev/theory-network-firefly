@@ -34,6 +34,8 @@ export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
         sortFields:
         {
             score : TypeOf.Number
-        }
+        },
+
+        subscribed: {}
     }
 };
