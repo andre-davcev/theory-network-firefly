@@ -1,4 +1,4 @@
-import { State, Action, StateContext } from '@ngxs/store';
+import { State, Action, StateContext, Selector } from '@ngxs/store';
 
 import { StreamCluster } from '@firefly/cloud';
 import { ServiceStreams } from '@firefly/core/services';
@@ -42,6 +42,8 @@ export class StateUserStream extends StateChild<StreamCluster, StateUserStreamMo
             StateClusterOptions.name as string
         );
     }
+
+    @Selector() static subscribed(state: StateUserStreamModel) : Record<string, string> { return state.subscribed; }
 
     @Action(ActionUserStreamReset)
     reset(context: StateContext<StateUserStreamModel>, action: ActionUserStreamReset)

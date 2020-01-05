@@ -14,7 +14,7 @@
                 </span>
 
                 <app-icon-subscribe [subscribed]="cluster.subscribed"
-                                    [count]="cluster.subscriberCount"
+                                    [count]="cluster.subscriberCount + (cluster.on ? 1 : 0)"
                                     (clicked)="toggle($event, cluster)">
                 </app-icon-subscribe>
             </ion-card-content>

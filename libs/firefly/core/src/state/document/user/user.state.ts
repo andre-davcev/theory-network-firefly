@@ -28,9 +28,10 @@ import {
     ActionUserUpdate,
     ActionUserWatchLocation,
     ActionUserWatchCity,
-    ActionUserWatchSubscriptionsStatus
+    ActionUserWatchSubscriptionsStatus,
+    ActionUserSubscriptionToggle
 } from './user.actions';
-import { ServiceUsers, ServiceLocation, ServiceStreams } from '@firefly/core/services';
+import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 
@@ -128,6 +129,18 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static error(state: StateUserModel)                  : Error        { return state.error; }
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, Subscription> { const user: User = StateUser.dataState(state); return user == null ? null : user.subscriptionsStatus; }
+    @Selector() static subscriptionsUnfiltered(state: StateUserModel) : Record<string, string> { return state.subscriptionsUnfiltered; }
+    @Selector([StateUserStream.data()])
+    public static stream(state: StateUserModel, stream: Array<StreamCluster>): Array<StreamCluster>
+    {
+        const unfiltered    : Record<string, string>       = StateUser.subscriptionsUnfiltered(state);
+        const subscriptions : Record<string, Subscription> = StateUser.subscriptionsStatus(state);
+
+        return stream.
+            filter((cluster: StreamCluster) =>
+                subscriptions[cluster.id] == null || !subscriptions[cluster.id].on || unfiltered[cluster.id] != null
+            );
+    }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
@@ -411,5 +424,34 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             switchMap(() => dispatch(new ActionUserReset())),
             catchError((error: Error) => of(patchState({ error })))
         );
+    }
+
+    @Action(ActionUserSubscriptionToggle)
+    subscriptionToggle({ dispatch, getState, patchState }: StateContext<StateUserModel>, { id, filter }: ActionUserSubscriptionToggle)
+    {
+        const state               : StateUserModel               = getState();
+        const subscriptionsStatus : Record<string, Subscription> = StateUser.subscriptionsStatus(state);
+
+        if (!filter)
+        {
+            const subscriptionsUnfiltered: Record<string, string> = StateUser.subscriptionsUnfiltered(getState());
+
+            subscriptionsUnfiltered[id] = id;
+
+            patchState({ subscriptionsUnfiltered });
+        }
+
+        let subscription: Subscription = subscriptionsStatus[id];
+
+        if (subscription == null)
+        {
+            subscription = subscriptionsStatus[id] = { on: true } as Subscription;
+        }
+        else
+        {
+            subscription.on = !subscription.on;
+        }
+
+        return dispatch(new ActionUserPatch({ subscriptionsStatus }));
     }
 }
