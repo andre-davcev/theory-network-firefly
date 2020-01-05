@@ -57,13 +57,6 @@ export class PageSubscriptions extends BaseComponent implements OnInit
 
     public toggle(event, subscription: Subscription)
     {
-      this.store.dispatch(new ActionUserSubscriptionToggle(subscription.id)).pipe(
-        switchMap(() =>
-          this.store.dispatch(new ActionUserSubscriptionsReset())
-        ),
-        switchMap(()=>
-          this.store.dispatch(new ActionUserWatchSubscriptionsStatus())
-        )
-      ).subscribe();
+      this.store.dispatch(new ActionUserSubscriptionToggle(subscription.id));
     }
 }
