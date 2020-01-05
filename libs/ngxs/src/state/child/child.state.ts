@@ -76,7 +76,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const childLookup : Record<string, Partial<T>> = action.data;
         const fetch       : boolean                    = action.fetch;
 
-        const { getState, dispatch, patchState } = context;
+        const { dispatch, patchState } = context;
         const { ActionGet } = this.actions;
 
         return of(patchState({ childLookup } as M)).
@@ -187,7 +187,9 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public add(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState } = context;
-        const { keysSorted, offset } = getState();
+        const { keysSorted, offset, initialized } = getState();
+
+        if (!initialized) { return of(null); }
 
         const snapshot: firestore.DocumentSnapshot = action.snapshot;
         const id:       string                     = snapshot.id;
@@ -212,7 +214,9 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     {
         const { getState, patchState } = context;
 
-        const { childLookup, keysSorted, offset }: M = getState();
+        const { childLookup, keysSorted, offset, initialized }: M = getState();
+
+        if (!initialized) { return of(null); }
 
         const id: string = action.id;
 
@@ -237,7 +241,9 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public sync(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState }  = context;
-        const { keysSorted } = getState();
+        const { keysSorted, initialized } = getState();
+
+        if (!initialized) { return of(null); }
 
         const id: string = action.object.id;
 

@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
-import { User, Location, StreamCluster, Subscription } from '@firefly/cloud';
+import { User, Location, StreamCluster, Subscription, SubscriptionPartial } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -40,8 +40,8 @@ import { ActionUserClustersReset } from '../../query/user-clusters/user-clusters
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
-import { ActionUserStreamReset, ActionUserStreamSetData } from '../../child/user-stream/user-stream.actions';
-import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData } from '../../child/user-subscriptions/user-subscriptions.actions';
+import { ActionUserStreamReset, ActionUserStreamSetData, ActionUserStreamSync } from '../../child/user-stream/user-stream.actions';
+import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { GeolocationPosition } from '@capacitor/core';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
 import { LocationCity } from '@firefly/core/interfaces';
@@ -128,13 +128,13 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static loadedNotAuthenticated(state: StateUserModel) : boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
     @Selector() static error(state: StateUserModel)                  : Error        { return state.error; }
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
-    @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, Subscription> { const user: User = StateUser.dataState(state); return user == null ? null : user.subscriptionsStatus; }
+    @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : user.subscriptionsStatus; }
     @Selector() static subscriptionsUnfiltered(state: StateUserModel) : Record<string, string> { return state.subscriptionsUnfiltered; }
     @Selector([StateUserStream.data()])
     public static stream(state: StateUserModel, stream: Array<StreamCluster>): Array<StreamCluster>
     {
-        const unfiltered    : Record<string, string>       = StateUser.subscriptionsUnfiltered(state);
-        const subscriptions : Record<string, Subscription> = StateUser.subscriptionsStatus(state);
+        const unfiltered    : Record<string, string>              = StateUser.subscriptionsUnfiltered(state);
+        const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
 
         return stream.
             filter((cluster: StreamCluster) =>
@@ -368,7 +368,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserWatchSubscriptionsStatus)
     watchSubscriptions({ dispatch }: StateContext<StateUserModel>)
     {
-        const subscriptions: Record<string, Subscription> = this.store.selectSnapshot(StateUser.subscriptionsStatus);
+        const subscriptions: Record<string, SubscriptionPartial> = this.store.selectSnapshot(StateUser.subscriptionsStatus);
         dispatch(new ActionUserSubscriptionsSetData(subscriptions, true));
     }
 
@@ -429,8 +429,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserSubscriptionToggle)
     subscriptionToggle({ dispatch, getState, patchState }: StateContext<StateUserModel>, { id, filter }: ActionUserSubscriptionToggle)
     {
-        const state               : StateUserModel               = getState();
-        const subscriptionsStatus : Record<string, Subscription> = StateUser.subscriptionsStatus(state);
+        const state               : StateUserModel                      = getState();
+        const subscriptionsStatus : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
 
         if (!filter)
         {
@@ -441,17 +441,23 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             patchState({ subscriptionsUnfiltered });
         }
 
-        let subscription: Subscription = subscriptionsStatus[id];
+        const subscription  : SubscriptionPartial = subscriptionsStatus[id];
+        const streamCluster : StreamCluster       = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
 
-        if (subscription == null)
+        subscriptionsStatus[id] =
         {
-            subscription = subscriptionsStatus[id] = { on: true } as Subscription;
-        }
-        else
+            on: subscription == null ? true : !subscription.on
+        };
+
+        if (streamCluster != null)
         {
-            subscription.on = !subscription.on;
+            streamCluster.on = subscriptionsStatus[id].on;
         }
 
-        return dispatch(new ActionUserPatch({ subscriptionsStatus }, true));
+        return dispatch
+        ([
+            new ActionUserPatch({ subscriptionsStatus }, true),
+            new ActionUserStreamSync(streamCluster)
+        ]);
     }
 }

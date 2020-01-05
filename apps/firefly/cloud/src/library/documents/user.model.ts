@@ -1,8 +1,7 @@
 import { FirebaseDocument } from '../interfaces';
 import { firestore } from 'firebase';
 
-import { Location } from '../models';
-import { Subscription } from './subscription.model';
+import { Location, SubscriptionPartial } from '../models';
 
 export interface User extends FirebaseDocument
 {
@@ -16,6 +15,6 @@ export interface User extends FirebaseDocument
     roleAdmins          : Array<string>;
     roleEditors         : Array<string>;
     subscriptions       : Array<string>;
-    subscriptionsStatus : Record<string, Subscription>;
+    subscriptionsStatus : Record<string, SubscriptionPartial>;
     tokens              : Array<string>;
 }

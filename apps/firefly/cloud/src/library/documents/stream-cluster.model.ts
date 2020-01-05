@@ -1,9 +1,4 @@
 import { Cluster } from './cluster.model';
-import { MetadataStreamCluster } from '../models';
+import { StreamClusterPartial, SubscriptionPartial } from '../models';
 
-export interface StreamCluster extends Cluster
-{
-    score: number;
-
-    metadata?: MetadataStreamCluster;
-}
+export type StreamCluster = Cluster & StreamClusterPartial & SubscriptionPartial;

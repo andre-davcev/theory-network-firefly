@@ -68,7 +68,9 @@ export class StateCollection<T extends FirebaseDocument, M extends StateCollecti
     public add(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState } = context;
-        const { snapshots, snapshotLookup, data, dataLookup, orderBy, orderByDirection } = getState();
+        const { snapshots, snapshotLookup, data, dataLookup, orderBy, orderByDirection, initialized } = getState();
+
+        if (!initialized) { return of(null); }
 
         const snapshot: firestore.DocumentSnapshot = action.snapshot;
 
@@ -123,7 +125,9 @@ export class StateCollection<T extends FirebaseDocument, M extends StateCollecti
     {
         const { getState, patchState } = context;
 
-        const { snapshots, snapshotLookup, data, dataLookup } = getState();
+        const { snapshots, snapshotLookup, data, dataLookup, initialized } = getState();
+
+        if (!initialized) { return of(null); }
 
         const id:    string = action.id;
         const index: number = data.findIndex((entity: T) => entity.id === id);
@@ -148,6 +152,8 @@ export class StateCollection<T extends FirebaseDocument, M extends StateCollecti
     public sync(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState }  = context;
+
+        if (!StateCollection.initializedState(getState())) { return of(null); }
 
         const after: T       = action.object;
         const id:    string  = after.id;
