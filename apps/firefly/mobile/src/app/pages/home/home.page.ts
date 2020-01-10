@@ -11,6 +11,7 @@ import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { StateUserAlerts } from '@firefly/core';
 
 @Component
 ({
@@ -21,7 +22,9 @@ import { Router } from '@angular/router';
 
 export class PageHome extends BaseComponent
 {
-    @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+    @Select(StateMobile.menuOpen)      menuOpen$  : Observable<boolean>;
+    @Select(StateUserAlerts.unread)    unread$    : Observable<number>;
+    @Select(StateUserAlerts.hasUnread) hasUnread$ : Observable<boolean>;
 
     public Pages      : any     = Pages;
     public showAlerts : boolean = false;
