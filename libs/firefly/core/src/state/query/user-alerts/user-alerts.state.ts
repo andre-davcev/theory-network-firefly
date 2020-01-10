@@ -1,4 +1,4 @@
-import { State, Action, StateContext, Store } from '@ngxs/store';
+import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 
 import { Alert } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
@@ -44,6 +44,9 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
         );
     }
 
+    @Selector() static unread(state: StateUserAlertsModel)    : number  { return state.unread; }
+    @Selector() static hasUnread(state: StateUserAlertsModel) : boolean { return StateUserAlerts.unread(state) > 0; }
+
     @Action(ActionUserAlertsReset)
     reset(context: StateContext<StateUserAlertsModel>)
     {
@@ -67,17 +70,26 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
         (
             tap(() =>
             {
-                const images: Record<string, StorageImage> = this.store.selectSnapshot(StateStorage.images);
-                const data:   Array<Alert>                 = StateUserAlerts.dataState(context.getState());
+                const { getState, patchState } = context;
+
+                const state  : StateUserAlertsModel         = getState();
+                const images : Record<string, StorageImage> = this.store.selectSnapshot(StateStorage.images);
+                const data   : Array<Alert>                 = StateUserAlerts.dataState(state);
+
+                let unread : number = StateUserAlerts.unread(state);
 
                 data.forEach((alert: Alert) =>
                 {
+                    unread += alert.read ? 0 : 1;
+
                     alert.metadata =
                     {
                         urlMedium:    images[alert.bucketPath].medium,
                         dateTimeDate: (alert.dateTime as firestore.Timestamp).toDate()
                     };
                 });
+
+                patchState({ unread })
             })
         );
     }

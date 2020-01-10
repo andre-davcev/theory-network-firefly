@@ -60,4 +60,17 @@
         height: 100%;
         background-color: $fire-color-grey-light;
     }
+
+    .cpt-notifications
+    {
+        width: 48px;
+        height: 50px;
+
+        padding-top: 12px;
+
+        ion-badge {
+          margin-left: -12px;
+          margin-top: -20px;
+      }
+    }
 }
