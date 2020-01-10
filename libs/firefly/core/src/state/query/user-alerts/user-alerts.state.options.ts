@@ -23,6 +23,8 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         snapshots:      [],
         snapshotLookup: {},
         data:           [],
-        dataLookup:     {}
+        dataLookup:     {},
+
+        unread: 0
     }
 };

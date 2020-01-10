@@ -41,7 +41,7 @@ import { ActionUserEventsReset } from '../../query/user-events/user-events.actio
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
 import { ActionUserStreamReset, ActionUserStreamSetData, ActionUserStreamSync } from '../../child/user-stream/user-stream.actions';
-import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsSync, ActionUserSubscriptionsGetData } from '../../child/user-subscriptions/user-subscriptions.actions';
+import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsSync, ActionUserSubscriptionsAdd } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { GeolocationPosition } from '@capacitor/core';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
 import { LocationCity } from '@firefly/core/interfaces';
@@ -49,7 +49,6 @@ import { StateUserStreamOptions } from '../../child/user-stream/user-stream.stat
 import { StateUserStream } from '../../child/user-stream/user-stream.state';
 import { DocumentSnapshot } from '@angular/fire/firestore';
 import { StateUserSubscriptions } from '../../child/user-subscriptions';
-import { user } from 'firebase-functions/lib/providers/auth';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser extends StateDocument<User, StateUserModel> implements NgxsOnInit
@@ -140,7 +139,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
 
         return stream.
             filter((cluster: StreamCluster) =>
-                subscriptions[cluster.id] == null || !subscriptions[cluster.id].on || unfiltered[cluster.id] != null
+                subscriptions[cluster.id] == null || unfiltered[cluster.id] != null
             );
     }
 
@@ -443,14 +442,21 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             patchState({ subscriptionsUnfiltered });
         }
 
-        const subscription     : SubscriptionPartial = subscriptionsStatus[id];
-        const streamCluster    : StreamCluster       = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
-        const userSubscription : Subscription        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
+        let subscriptionPartial : SubscriptionPartial = subscriptionsStatus[id];
+        let subscription        : Subscription        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
 
-        subscriptionsStatus[id] =
+        const subscriptionIsNew : boolean       = subscription == null;
+        const streamCluster     : StreamCluster = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
+
+        subscriptionPartial = subscriptionsStatus[id] =
         {
-            on: subscription == null ? true : !subscription.on
+            on: subscriptionIsNew ? true : !subscriptionPartial.on
         };
+
+        if (subscription != null)
+        {
+            subscription.on = subscriptionPartial.on;
+        }
 
         if (streamCluster != null)
         {
@@ -461,16 +467,14 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         ([
             new ActionUserPatch({ subscriptionsStatus }, true),
             new ActionUserStreamSync(streamCluster)
-        ]).pipe(
-          switchMap(() =>
-           {
-             if(userSubscription != null){
-               userSubscription.on = subscriptionsStatus[id].on;
-              return dispatch(new ActionUserSubscriptionsSync(userSubscription))
-             }
-             else
-              return of(null);
-           })
+        ]).
+        pipe
+        (
+            switchMap(() =>
+                subscriptionIsNew ?
+                    dispatch(new ActionUserSubscriptionsAdd(null, subscription)) :
+                    dispatch(new ActionUserSubscriptionsSync(subscription))
+            )
         );
     }
 }
