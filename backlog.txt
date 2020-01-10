@@ -1,5 +1,6 @@
 app (loading) - match styling for devices
 app (toast) - update styling
+app (updates) - on quick toggles/updates stack updates and put spinner
 alerts (detail) - implement detail screen
 alerts (list) - list image rendering delay
 alerts (list) - empty list icon/message
