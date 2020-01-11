@@ -25,7 +25,6 @@
         <ion-label (click)="select(subscription)">
             <h2>{{subscription.name}}</h2>
             <p>{{subscription.tagline}}</p>
-            <p>{{subscription.on}}</p>
         </ion-label>
 
         <ion-toggle (ionChange)="toggle($event,subscription)" checked={{subscription.on}}  color="success"></ion-toggle>
