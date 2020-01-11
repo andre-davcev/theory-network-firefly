@@ -4,7 +4,7 @@ import { StateMobile, Pages } from '@firefly/mobile';
 import { StateUserImages } from '@firefly/core';
 import { Image } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MenuController } from '@ionic/angular';
 import { BaseComponent } from '@theory/core';
 import { takeUntil } from 'rxjs/operators';
@@ -39,11 +39,14 @@ export class PageAssetsImages extends BaseComponent implements OnInit
 
     public ngOnInit(): void
     {
-        this.images$.
-        pipe(takeUntil(this.destroy$)).
-        subscribe((images: Record<string, StorageImage>) =>
-            this.images = images
-        );
+        this.userImages = this.store.selectSnapshot(StateUserImages.data());
+        this.images = this.store.selectSnapshot(StateStorage.images);
+
+        this.userImages.forEach(userImages => {
+          this.urls.push(this.images[userImages.bucketPath].medium);
+        })
+
+        this.urls$ = of(this.urls);
     }
 
     navigate(): void{

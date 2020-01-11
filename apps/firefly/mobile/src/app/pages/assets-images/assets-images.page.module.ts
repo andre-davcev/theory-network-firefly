@@ -5,12 +5,14 @@ import { ModulePage } from '@firefly/app/modules';
 
 import { PageAssetsImages } from './assets-images.page';
 import { RoutesPageAssetsImages } from './assets-images.page.routes';
+import { ModuleComponentImageGrid } from '@theory/ionic';
 
 @NgModule
 ({
     imports :
     [
         ModulePage,
+        ModuleComponentImageGrid,
         RouterModule.forChild(RoutesPageAssetsImages)
     ],
 
