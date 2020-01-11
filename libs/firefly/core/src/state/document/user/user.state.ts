@@ -131,6 +131,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : user.subscriptionsStatus; }
     @Selector() static subscriptionsUnfiltered(state: StateUserModel) : Record<string, string> { return state.subscriptionsUnfiltered; }
+
     @Selector([StateUserStream.data()])
     public static stream(state: StateUserModel, stream: Array<StreamCluster>): Array<StreamCluster>
     {

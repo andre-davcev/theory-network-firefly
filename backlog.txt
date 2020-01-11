@@ -1,11 +1,9 @@
 app (loading) - match styling for devices
 app (toast) - update styling
 app (updates) - on quick toggles/updates stack updates and put spinner
+home (page) - transparent background with image
 alerts (detail) - implement detail screen
-alerts (list) - list image rendering delay
 alerts (list) - empty list icon/message
-alerts (list) - add unread count badge to bell
-alerts (list) - on click go show menu (add to calendar/go to map/do all)
 alerts (list) - on click navigate to detail
 alerts (list) - on delete click (delete alert, update list, update unread count)
 clusters (detail) - required fields styling
@@ -14,7 +12,6 @@ clusters (detail) - add cluster-events query state
 clusters (detail) - add ability to add/remove events via query state
 clusters (detail) - clean flow styling
 clusters (list) - empty list icon/message
-dev (ios) - chrome debugging
 events (detail) - required fields styling
 events (detail) - refine create/edit flows
 events (detail) - add url field
@@ -33,7 +30,6 @@ functions (test) - images (delete)
 functions (test) - users (create)
 functions (test) - users (delete)
 functions (test) - users (update)
-home (page) - transparent background with image
 icons (detail) - cleanup styling
 icons (detail) - required fields styling
 icons (list) - empty list icon/message
@@ -46,9 +42,7 @@ login (page) - cleanup styling
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
-menu - on menu open/close, fix button/header rendering twitches
 notifications - implement capacitor-fcm plugin
-notifications - add unread badge count
 security - upload and test security rules
 security - create model validation security rules
 security - update collection/subcollection security rules
@@ -58,13 +52,8 @@ security - prevent hackers from writing to database too quickly
 streams (detail) - implement stream detail screen
 streams (list) - on stream click
 streams (list) - empty list icon/message
-streams (list) - subscribe/unsubscribe with count increment
-streams (list) - add space between icon/count
 streams (list) - add event preview accordian
-streams (list) - list image rendering delay
 subscriptions (list) - empty list icon/message
-subscriptions (list) - migrate to use user.subscriptions instead of user-subscriptions
-subscriptions (list) - create with on/off switch
 user-profile (firestore) - implement
 user-profile (functions) - implement
 user-profile (page) - implement
