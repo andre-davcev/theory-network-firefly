@@ -37,7 +37,7 @@ export class PageImageAssets
             this.images = this.store.selectSnapshot(StateStorage.images);
 
             this.userImages.forEach(userImages => {
-              this.urls.push(this.images[userImages.bucketPath].small);
+              this.urls.push(this.images[userImages.bucketPath].medium);
             })
 
             return this.urls$ = of(this.urls);
