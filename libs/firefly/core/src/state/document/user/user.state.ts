@@ -1,4 +1,4 @@
-import { User as FirebaseUser, auth } from 'firebase/app';
+import { User as FirebaseUser, auth, firestore } from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select, NgxsOnInit, Store} from '@ngxs/store';
 import { Observable, of, from } from 'rxjs';
@@ -49,6 +49,8 @@ import { StateUserStreamOptions } from '../../child/user-stream/user-stream.stat
 import { StateUserStream } from '../../child/user-stream/user-stream.state';
 import { DocumentSnapshot } from '@angular/fire/firestore';
 import { StateUserSubscriptions } from '../../child/user-subscriptions';
+import { StateClusterOptions } from '../cluster/cluster.state.options';
+import { ActionStorageUrlGet } from '@theory/firebase';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser extends StateDocument<User, StateUserModel> implements NgxsOnInit
@@ -455,7 +457,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             on: subscriptionIsNew ? true : !subscriptionPartial.on
         };
 
-        if (subscription != null)
+        if (!subscriptionIsNew)
         {
             subscription.on = subscriptionPartial.on;
         }
@@ -473,9 +475,21 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         pipe
         (
             switchMap(() =>
-                subscriptionIsNew ?
-                    dispatch(new ActionUserSubscriptionsAdd(null, subscription)) :
-                    dispatch(new ActionUserSubscriptionsSync(subscription))
+                !subscriptionIsNew ?
+                    dispatch(new ActionUserSubscriptionsSync(subscription)) :
+                    this.service.documentGet(StateClusterOptions.name as string, id).
+                    pipe
+                    (
+                        switchMap((snapshot: firestore.DocumentSnapshot) =>
+                            dispatch(new ActionUserSubscriptionsAdd(snapshot, { ...snapshot.data() as Subscription, on: subscriptionPartial.on })).
+                            pipe
+                            (
+                                switchMap(() =>
+                                    dispatch(new ActionStorageUrlGet((snapshot.data() as Subscription).bucketPath))
+                                )
+                            )
+                        )
+                    )
             )
         );
     }

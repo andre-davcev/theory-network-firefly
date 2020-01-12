@@ -61,7 +61,6 @@ user-profile (page) - implement
 user-profile (security) - implement
 user-profile (state) - implement state/firestore/page/functions/security
 
-
 alerts (funtions create)
     for each token
         send push notification using name/description
