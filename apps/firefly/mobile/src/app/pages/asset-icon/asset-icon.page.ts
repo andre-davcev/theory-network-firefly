@@ -65,7 +65,6 @@ export class PageAssetIcon
                       this.store.dispatch(new ActionIconUriSet(imageData))
                   ),
                   finalize(() => {
-                    this.modal.dismiss();
                     this.store.dispatch(new ActionMobileLoadingHide())
                   })
               ).
@@ -73,7 +72,6 @@ export class PageAssetIcon
           }
           else
           {
-              this.modal.dismiss();
               this.store.dispatch(new ActionClusterIconPathSet()).
               subscribe();
           }

@@ -65,7 +65,6 @@ export class PageAssetImage
                       this.store.dispatch(new ActionImageUriSet(imageData))
                   ),
                   finalize(() => {
-                    this.modal.dismiss();
                     this.store.dispatch(new ActionMobileLoadingHide())
                   })
               ).
@@ -73,7 +72,6 @@ export class PageAssetImage
           }
           else
           {
-              this.modal.dismiss();
               this.store.dispatch(new ActionEventImagePathSet()).
               subscribe();
           }
