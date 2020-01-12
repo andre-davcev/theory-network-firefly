@@ -137,10 +137,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     {
         const unfiltered    : Record<string, string>              = StateUser.subscriptionsUnfiltered(state);
         const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
+        const userId        : string                              = StateUser.idState(state);
 
         return stream.
             filter((cluster: StreamCluster) =>
-                subscriptions[cluster.id] == null || unfiltered[cluster.id] != null
+                (subscriptions[cluster.id] == null || unfiltered[cluster.id] != null) // && cluster.userId !== userId
             );
     }
 

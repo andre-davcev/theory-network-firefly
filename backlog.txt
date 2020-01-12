@@ -49,6 +49,7 @@ security - update collection/subcollection security rules
 security - create storage security rules
 security - prevent hackers from querying past limit size
 security - prevent hackers from writing to database too quickly
+streams (state) - user.state.ts uncomment cluster.userId !== userId
 streams (detail) - implement stream detail screen
 streams (list) - on stream click
 streams (list) - empty list icon/message
@@ -59,6 +60,7 @@ user-profile (functions) - implement
 user-profile (page) - implement
 user-profile (security) - implement
 user-profile (state) - implement state/firestore/page/functions/security
+
 
 alerts (funtions create)
     for each token
