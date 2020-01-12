@@ -1,6 +1,3 @@
-library - child add get document if snapshot null
-library - child sync don't update list (ref)
-library - child sync don't sort if order prop no change
 app - create demo cluster list
 app - create demo events list
 app - change loading spinner to white
