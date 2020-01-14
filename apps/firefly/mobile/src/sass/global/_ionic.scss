@@ -10,7 +10,7 @@ ion-app {
             --background: #{$fire-color-transparent};
 
             ion-spinner {
-                --spinner-color: #{$fire-color-primary};
+                --spinner-color: #{$fire-color-white};
                 transform: scale(2);
             }
         }

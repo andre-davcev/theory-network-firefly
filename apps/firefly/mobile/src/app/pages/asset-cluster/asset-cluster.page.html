@@ -16,7 +16,6 @@
     </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
     <form novalidate
           [formGroup]="form$  | async"
@@ -79,9 +78,10 @@
             </ion-list>
         </div>
     </form>
-    <ion-fab  slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button color="secondary" mode="md" (click)="addEvent()">
-          <ion-icon name="md-add"></ion-icon>
-      </ion-fab-button>
-  </ion-fab>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button color="secondary" mode="md" (click)="addEvent()">
+            <ion-icon name="md-add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>
