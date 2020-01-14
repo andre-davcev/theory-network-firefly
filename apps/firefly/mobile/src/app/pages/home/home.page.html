@@ -36,18 +36,18 @@
   <ion-router-outlet [animated]="false"></ion-router-outlet>
 </section>
 <ion-footer>
-  <ion-toolbar>
-      <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
-          <ion-button *ngIf="!showAlerts" icon-only (click)="go(Pages.Alert)" class="cpt-notifications">
-              <ion-icon name="notifications" color="dark" size="large"></ion-icon>
-              <ion-badge *ngIf="hasUnread$ | async" color="secondary">{{ unread$ | async }}</ion-badge>
-          </ion-button>
-          <ion-button *ngIf="showAlerts" icon-only (click)="go(Pages.Stream)">
-            <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
-          </ion-button>
-          <ion-button *ngIf="showAlerts" icon-only [disabled]="menuOpen$ | async">
-              <ion-icon name="md-trash" color="dark" size="large"></ion-icon>
-          </ion-button>
-      </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="secondary" fxLayout="row" fxLayoutAlign="space-between center">
+            <ion-button *ngIf="!showAlerts" icon-only (click)="go(Pages.Alert)" class="cpt-notifications">
+                <ion-icon name="notifications" color="dark" size="large"></ion-icon>
+                <ion-badge *ngIf="hasUnread$ | async" color="secondary">{{ unread$ | async }}</ion-badge>
+            </ion-button>
+            <ion-button *ngIf="showAlerts" icon-only (click)="go(Pages.Stream)">
+              <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
+            </ion-button>
+            <ion-button *ngIf="showAlerts" icon-only [disabled]="menuOpen$ | async">
+                <ion-icon name="md-trash" color="dark" size="large"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-footer>
