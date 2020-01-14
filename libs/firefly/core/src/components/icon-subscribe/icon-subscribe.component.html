@@ -1,11 +1,11 @@
 <div class="cpt-container"
      fxLayout="row"
-     fxLayoutGap="10px"
+     fxLayoutGap="12px"
      fxLayoutAlign="start center">
     <div class="cpt-container-icon" (click)="toggle()">
         <ion-icon *ngIf="subscribed" name="ios-checkmark-circle-outline" color="dark"></ion-icon>
         <fa-icon *ngIf="!subscribed" [icon]="faThumbtack" size="lg"></fa-icon>
     </div>
 
-    <span class="cpt-count">{{ count | number: '.0' }}</span>
+    <span class="cpt-count">{{ count | number: '.0' }} {{ 'general.subscribers' | translate }}</span>
 </div>

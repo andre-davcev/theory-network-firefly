@@ -4,6 +4,7 @@ import { ComponentIconSubscribe } from './icon-subscribe.component';
 import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule
 ({
@@ -12,7 +13,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         CommonModule,
         IonicModule,
         FontAwesomeModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        TranslateModule
     ],
 
     declarations :
