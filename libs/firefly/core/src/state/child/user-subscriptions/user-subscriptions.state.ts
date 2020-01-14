@@ -16,9 +16,6 @@ import {
 } from './user-subscriptions.actions';
 import { StateChild } from '@theory/ngxs';
 import { StateClusterOptions } from '../../document/cluster/cluster.state.options';
-import { switchMap } from 'rxjs/operators';
-import { StateUser } from '@firefly/core';
-import { of } from 'rxjs';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 

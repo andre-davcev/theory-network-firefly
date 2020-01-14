@@ -18,7 +18,7 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         error                   : undefined,
         authenticated           : false,
         authenticating          : false,
-        initializing            : false,
+        initializing            : true,
         subscriptionsUnfiltered : {}
     }
 };
