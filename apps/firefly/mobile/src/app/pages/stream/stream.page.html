@@ -1,7 +1,7 @@
 <ion-content>
   <ion-list *ngIf="images">
     <ion-item lines="none" *ngFor="let cluster of stream$ | async">
-        <ion-card *ngIf="images[cluster.bucketPath]">
+        <ion-card *ngIf="images[cluster.bucketPath]" elevation="1">
             <app-item-header [iconUrl]="images[cluster.bucketPath].medium"
                              [title]="cluster.name"
                              [subtitle]="cluster.tagline">
