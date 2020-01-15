@@ -37,7 +37,7 @@
 
     mask-image: linear-gradient(black 0%, black 100%);
 
-    > .cpt-background-image,
+    .cpt-background-image,
     > .cpt-background
     {
         position: absolute;
@@ -48,15 +48,25 @@
         z-index: -1;
     }
 
-    > .cpt-background-image
+    .cpt-background-image
+    {
+
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        background-position: 50% 50%;
+    }
+
+    .cpt-background-image-placeholder
     {
         width: 100%;
         height: auto;
         top: -63%;
-        background-repeat: no-repeat;
-        background-size: auto 100%;
-        background-position: 50% 50%;
         filter: blur(var(--cpt-blur));
+    }
+
+    .cpt-background-image-fit
+    {
+      object-fit: cover;
     }
 
     > .cpt-background
@@ -105,6 +115,8 @@
 
     div.cpt-container
     {
+        padding-top: 120px;
+
         > .cpt-title
         {
             margin-bottom: 8px;
