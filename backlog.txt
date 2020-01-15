@@ -1,8 +1,8 @@
 app (loading) - match styling for devices
 app (toast) - update styling
 app (updates) - on quick toggles/updates stack updates and put spinner
-home (page) - transparent background with image
 alerts (detail) - implement detail screen
+alerts (list) - on click go show menu (add to calendar/go to map/do all)
 alerts (list) - empty list icon/message
 alerts (list) - on click navigate to detail
 alerts (list) - on delete click (delete alert, update list, update unread count)
@@ -15,6 +15,7 @@ clusters (list) - empty list icon/message
 events (detail) - required fields styling
 events (detail) - refine create/edit flows
 events (detail) - add url field
+events (detail) - add phone field
 events (detail) - add create/edit
 events (detail) - reverse geocode
 events (list) - empty list icon/message
@@ -30,6 +31,10 @@ functions (test) - images (delete)
 functions (test) - users (create)
 functions (test) - users (delete)
 functions (test) - users (update)
+home (page) - stream/alerts render delay issue
+home (page) - transparent background with image
+home (page) - add shrinking header/footer
+home (page) - add image background
 icons (detail) - cleanup styling
 icons (detail) - required fields styling
 icons (list) - empty list icon/message
@@ -49,8 +54,11 @@ security - update collection/subcollection security rules
 security - create storage security rules
 security - prevent hackers from querying past limit size
 security - prevent hackers from writing to database too quickly
+streams (list) - notifications not rendering on load
+streams (list) - notifications icon spacing
 streams (state) - user.state.ts uncomment cluster.userId !== userId
 streams (detail) - implement stream detail screen
+streams (list) - subscribe/unsubscribe with count increment
 streams (list) - on stream click
 streams (list) - empty list icon/message
 streams (list) - add event preview accordian

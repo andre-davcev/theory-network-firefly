@@ -3,17 +3,30 @@
 :host
 {
     ion-content {
-        --background: #{$fire-color-grey-light};
+        --background: #{$fire-color-transparent};
     }
 
     ion-list {
-        --ion-item-background: #{$fire-color-grey-light};
+        --background: #{$fire-color-transparent};
+        background: #{$fire-color-transparent};
         margin-bottom: 0;
+    }
+
+    ion-item {
+        --padding-start: 8px;
+        --background: #{$fire-color-transparent};
+
+        &:last-child {
+            ion-card {
+                margin-bottom: 24px;
+            }
+        }
     }
 
     ion-card {
         --background: #{$fire-color-white};
         width: 100%;
+        margin-bottom: 0;
     }
 
     app-icon-subscribe {
