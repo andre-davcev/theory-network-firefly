@@ -11,8 +11,9 @@ export const StateMobileOptions: StoreOptions<StateMobileModel> =
     {
         loadingElement : undefined,
         menuOpen       : false,
+        pageRoot       : `/${Pages.Home}/${Pages.Stream}`,
 
-        rootPages :
+        pagesRoot :
         {
             [Pages.Home]           : Pages.Stream,
             [Pages.Subscriptions]  : Pages.Subscriptions,

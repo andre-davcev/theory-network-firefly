@@ -13,10 +13,9 @@ import {
 import { StateMobileOptions } from './mobile.state.options';
 import { LoadingController, ToastController, NavController } from '@ionic/angular';
 import { switchMap, tap } from 'rxjs/operators';
-import { from, of } from 'rxjs';
+import { from } from 'rxjs';
 import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
-import { Navigate } from '@ngxs/router-plugin';
 import { NgZone } from '@angular/core';
 
 @State<StateMobileModel>(StateMobileOptions)
@@ -27,7 +26,10 @@ export class StateMobile
     @Selector() static loadingElement(state: StateMobileModel) : any                    { return state.loadingElement; }
     @Selector() static menuOpen(state: StateMobileModel)       : boolean                { return state.menuOpen; }
     @Selector() static menuClosed(state: StateMobileModel)     : boolean                { return !state.menuOpen; }
-    @Selector() static rootPages(state: StateMobileModel)      : Record<string, Pages> { return state.rootPages; }
+    @Selector() static pagesRoot(state: StateMobileModel)      : Record<string, Pages>  { return state.pagesRoot; }
+    @Selector() static pageRoot(state: StateMobileModel)       : string                 { return state.pageRoot; }
+    @Selector() static pageAlerts(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Alert}`;  }
+    @Selector() static pageStream(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
 
     constructor
     (
@@ -99,31 +101,28 @@ export class StateMobile
     @Action(ActionMobileNavigateRoot)
     navigateRoot({ patchState, getState, dispatch }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
     {
-        const rootPages : Record<string, Pages> = StateMobile.rootPages(getState());
+        const pagesRoot : Record<string, Pages> = StateMobile.pagesRoot(getState());
 
-        rootPages[page] = child = child == null ? rootPages[page] : child;
+        pagesRoot[page] = child = child == null ? pagesRoot[page] : child;
 
-        return from(this.ngZone.run(() => this.nav.navigateRoot(`/${page}`))).
-            pipe
-            (
-                switchMap(() =>
-                    page === child ?
-                        of(null) :
-                        of(patchState({ rootPages })).
-                        pipe
-                        (
-                            switchMap(() =>
-                                dispatch
-                                (
-                                    new Navigate
-                                    ([
-                                        ...page.split('/'),
-                                        ...child.split('/')
-                                    ])
-                                )
-                            )
-                        )
-                )
-            );
+        const parts: Array<string> = page === child ?
+            [ page ] :
+            [
+                ...page.split('/'),
+                ...child.split('/')
+            ];
+        const pageRoot: string = `/${parts.join('/')}`;
+
+        return from(this.ngZone.run(() => this.nav.navigateRoot(pageRoot))).
+        pipe
+        (
+            tap(() =>
+                patchState
+                ({
+                    pagesRoot,
+                    pageRoot
+                })
+            )
+        );
     }
 }

@@ -4,5 +4,6 @@ export interface StateMobileModel
 {
     loadingElement : HTMLIonLoadingElement;
     menuOpen       : boolean;
-    rootPages      : Record<string, Pages>;
+    pagesRoot      : Record<string, Pages>;
+    pageRoot       : string;
 }
