@@ -39,7 +39,7 @@ onFinalize(async (object: storage.ObjectMetadata, context: EventContext) =>
 
     const fileMediumName:        string = `${fileNameParts[0]}@medium.${fileNameParts[1]}`;
     const fileMediumPath:        string = join(tmpdir(), fileMediumName);
-    const fileMediumWidth:       number = fileType === 'images' ? 500 : 200;
+    const fileMediumWidth:       number = fileType === 'images' ? 500 : 400;
     const fileMediumDestination: string = join(dirname(filePath), fileMediumName);
 
     await sharp(filePathTemp).resize({ width: fileMediumWidth, withoutEnlargement: true }).toFile(fileMediumPath);

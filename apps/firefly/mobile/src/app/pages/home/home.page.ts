@@ -10,7 +10,6 @@ import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import { StateUserAlerts } from '@firefly/core';
 
 @Component
@@ -22,18 +21,18 @@ import { StateUserAlerts } from '@firefly/core';
 
 export class PageHome extends BaseComponent
 {
-    @Select(StateMobile.menuOpen)      menuOpen$  : Observable<boolean>;
-    @Select(StateUserAlerts.unread)    unread$    : Observable<number>;
-    @Select(StateUserAlerts.hasUnread) hasUnread$ : Observable<boolean>;
+    @Select(StateMobile.menuOpen)      menuOpen$   : Observable<boolean>;
+    @Select(StateMobile.pageAlerts)    pageAlerts$ : Observable<boolean>;
+    @Select(StateMobile.pageStream)    pageStream$ : Observable<boolean>;
+    @Select(StateUserAlerts.unread)    unread$     : Observable<number>;
+    @Select(StateUserAlerts.hasUnread) hasUnread$  : Observable<boolean>;
 
-    public Pages      : any     = Pages;
-    public showAlerts : boolean = false;
+    public Pages : any = Pages;
 
     constructor
     (
         private menu   : MenuController,
-        private store  : Store,
-        private router : Router
+        private store  : Store
     )
     {
         super();
@@ -41,8 +40,6 @@ export class PageHome extends BaseComponent
 
     public ionViewWillEnter(): void
     {
-        this.showAlerts = this.router.url === `/${Pages.Home}/${Pages.Alert}`
-
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
@@ -56,8 +53,6 @@ export class PageHome extends BaseComponent
     public go(type: Pages.Alert | Pages.Stream): void
     {
         this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, type))
-
-        this.showAlerts = type === Pages.Alert;
     }
 
     deleteConfirm()
