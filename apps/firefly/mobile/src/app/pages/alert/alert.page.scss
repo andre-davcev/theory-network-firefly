@@ -10,24 +10,16 @@
     position: relative;
     height: 100%;
 
-    ::ng-deep ion-slides {
+    ion-slides {
         --background: #{$fire-color-transparent};
-        --bullet-background: #{$fire-color-white};
-        --bullet-background-active: #{$fire-color-white};
+        --bullet-background: #{$fire-color-black};
+        --bullet-background-active: #{$fire-color-dark};
 
         background-color: $fire-color-transparent;
         position: relative;
         width: 100%;
         height: 100%;
         margin-bottom: 8px;
-
-        .swiper-pagination-bullet {
-            opacity: 0.7;
-        }
-
-        .swiper-pagination-bullet-active {
-            opacity: 1;
-        }
     }
 
     ion-slide {

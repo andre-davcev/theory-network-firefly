@@ -9,9 +9,7 @@
 }
 
 :host {
-    --background: #{$fire-color-transparent};
-    background-image: url(assets/images/temp-san-francisco.jpg);
-    background-size: cover;
+    --background: #{$fire-color-white};
 
     ion-toolbar {
         --background: transparent;
@@ -22,7 +20,6 @@
         &.header-md::after {
             background-image: none;
         }
-
     }
 
     ion-toolbar {
@@ -57,7 +54,7 @@
     {
         position: relative;
         height: 100%;
-        background-color: $fire-color-transparent;
+        background-color: $fire-color-grey-lightest;
     }
 
     .cpt-notifications

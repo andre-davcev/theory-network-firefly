@@ -31,6 +31,7 @@ functions (test) - images (delete)
 functions (test) - users (create)
 functions (test) - users (delete)
 functions (test) - users (update)
+home (page) - fix header disappear when ion-badge shown
 home (page) - stream/alerts render delay issue
 home (page) - transparent background with image
 home (page) - add shrinking header/footer
@@ -47,6 +48,7 @@ login (page) - cleanup styling
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
+menu - move assets to publisher
 notifications - implement capacitor-fcm plugin
 security - upload and test security rules
 security - create model validation security rules
