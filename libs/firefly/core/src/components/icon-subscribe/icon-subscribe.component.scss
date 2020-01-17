@@ -16,9 +16,6 @@
 
 :host
 {
-    --cpt-size: 32px;
-    --cpt-gap: 4px;
-
     position: relative;
     display: block;
     cursor: pointer;
@@ -26,59 +23,10 @@
     > .cpt-container
     {
         position: relative;
-        margin-top: -4px;
-        margin-left: -4px;
-
-        &:before
-        {
-            content: '';
-            position: absolute;
-            display: block;
-            height: 32px;
-            width: 32px;
-            top: var(--cpt-gap);
-            left: var(--cpt-gap);
-            border-radius: 50%;
-            z-index: -1;
-            box-sizing: border-box;
-            background-color: #{$fire-color-primary-light};
-            transition-duration: 0.1s;
-            transition-property: background-color;
-            transition-timing-function: linear;
-        }
-    }
-
-    .cpt-container-icon
-    {
-        position: relative;
-        height: var(--cpt-size);
-        width: var(--cpt-size);
-    }
-
-    &:not(.cpt-subscribed)
-    {
-        > .cpt-container:before
-        {
-            border-style: solid;
-            border-width: 2px;
-            border-color: #{$fire-color-dark};
-            background-color: #{$fire-color-grey-light};
-        }
     }
 
     ion-icon {
         position: relative;
-        font-size: 40px;
-    }
-
-    fa-icon {
-        position: relative;
-        top: 9px;
-        left: 8px;
-        position: absolute;
-        stroke: #{$fire-color-dark};
-        color: #{$fire-color-dark};
-        margin-left: var(--cpt-gap);
     }
 
     .cpt-count
@@ -87,6 +35,5 @@
         color: #{$fire-color-dark};
         font-size: 16px;
         line-height: 1em;
-        margin-top: 6px;
     }
 }

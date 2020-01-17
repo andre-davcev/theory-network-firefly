@@ -1,26 +1,21 @@
-<ion-header>
-    <ion-toolbar elevation="1">
+<ion-header elevation="1">
+    <ion-toolbar>
         <ion-buttons slot="start">
 <!--
           <ion-button icon-only (click)="navigate(Pages.Search)">
               <ion-icon name="search" color="dark" size="large"></ion-icon>
           </ion-button>
-
-          <ion-button icon-only (click)="navigate(Pages.Subscriptions)">
-              <ion-icon name="options" color="dark" size="large"></ion-icon>
-          </ion-button>
-
-          <ion-button icon-only (click)="navigate(Pages.Assets)">
-              <ion-icon name="cloud-outline" color="dark" size="large"></ion-icon>
-          </ion-button>
 -->
-            <ion-button *ngIf="pageStream$ | async" icon-only (click)="go(Pages.Alert)" class="cpt-notifications" [disabled]="menuOpen$ | async">
-              <ion-icon name="notifications" color="dark" size="large"></ion-icon>
-              <ion-badge *ngIf="hasUnread$ | async" color="secondary">{{ unread$ | async }}</ion-badge>
+
+            <ion-button *ngIf="pageStream$ | async" (click)="go(Pages.Alert)" class="cpt-notifications" [disabled]="menuOpen$ | async">
+                <ion-icon name="notifications" color="dark" size="large"></ion-icon>
+<!--
+                <ion-badge *ngIf="hasUnread$ | async" color="secondary">{{ unread$ | async }}</ion-badge>
+-->
             </ion-button>
 
             <ion-button *ngIf="pageAlerts$ | async" icon-only (click)="go(Pages.Stream)" [disabled]="menuOpen$ | async">
-              <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
+                <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
             </ion-button>
 
             <ion-button *ngIf="pageAlerts$ | async" icon-only [disabled]="menuOpen$ | async">
@@ -33,10 +28,6 @@
         </ion-title>
 
         <ion-buttons slot="end">
-            <ion-button icon-only (click)="navigate(Pages.AssetEvent)" [disabled]="menuOpen$ | async">
-                <ion-icon name="md-add" color="dark" size="large"></ion-icon>
-            </ion-button>
-
             <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
                 <ion-icon name="person" color="dark" size="large"></ion-icon>
             </ion-button>
