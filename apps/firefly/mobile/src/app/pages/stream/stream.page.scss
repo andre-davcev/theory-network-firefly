@@ -30,6 +30,11 @@
         margin-bottom: 2px;
     }
 
+    ion-card-content {
+      padding-top: 0px;
+      padding-bottom: 5px;
+    }
+
     app-icon-subscribe {
         margin-bottom: 5px;
     }
@@ -37,5 +42,21 @@
     .app-description {
       font-family: $fire-font-arialnarrow;
       font-size: 14px;
+    }
+
+    .tagline,
+    .name,
+    .app-description {
+      text-align: center;
+    }
+
+    .tagline {
+      font-size: 20px;
+      font-family: $fire-font-markerfelt;
+    }
+
+    .name {
+      font-size: 25px;
+      font-family: $fire-font-americantypewriter;
     }
 }
