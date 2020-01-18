@@ -20,6 +20,7 @@ $cpt-slide-padding: 30px;
 
     .cpt-card
     {
+        position: relative;
         height: 100%;
         width: 100%;
     }
@@ -82,5 +83,15 @@ $cpt-slide-padding: 30px;
         color: rgba(0, 0, 0, 0.54);
         font-size: 15px;
         line-height: 1em;
+    }
+
+    ion-button {
+        --background-active: #{$fire-color-transparent};
+        --padding-start: 0;
+        --padding-end: 0;
+
+        position: absolute;
+        right: $cpt-slide-padding - 7px;
+        bottom: $cpt-slide-padding - 4px;
     }
 }
