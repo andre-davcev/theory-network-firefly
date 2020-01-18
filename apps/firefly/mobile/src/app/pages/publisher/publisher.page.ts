@@ -31,7 +31,7 @@ export class PagePublisher
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
     public navigate(page: Pages): void

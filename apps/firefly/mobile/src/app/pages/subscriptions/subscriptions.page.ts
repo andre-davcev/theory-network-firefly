@@ -38,7 +38,7 @@ export class PageSubscriptions extends BaseComponent implements OnInit
       super();
     }
 
-     public ngOnInit(): void
+    public ngOnInit(): void
     {
         this.images$.
         pipe(takeUntil(this.destroy$)).
@@ -49,7 +49,7 @@ export class PageSubscriptions extends BaseComponent implements OnInit
 
     ionViewWillEnter()
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     public menuOpen(): void
