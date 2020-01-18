@@ -11,11 +11,6 @@
 :host {
     --background: #{$fire-color-white};
 
-    ion-toolbar {
-        --background: transparent;
-        --ion-color-base: transparent !important;
-    }
-
     ion-header {
         &.header-md::after {
             background-image: none;
