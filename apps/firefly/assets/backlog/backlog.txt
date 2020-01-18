@@ -1,85 +1,85 @@
-app (loading) - match styling for devices
+*andre
++dave
+
+app (animations) - implement ionic animations
+app (loading) - match styling for ios/android
 app (toast) - update styling
 app (updates) - on quick toggles/updates stack updates and put spinner
+app (keyboard) - fix ios ionic/capacitor keyboard bug
 alerts (detail) - implement detail screen
-alerts (list) - on click go show menu (add to calendar/go to map/do all)
+alerts (list) - on click go show menu (add to calendar/go to map)
 alerts (list) - empty list icon/message
 alerts (list) - on click navigate to detail
 alerts (list) - on delete click (delete alert, update list, update unread count)
-clusters (detail) - required fields styling
-clusters (detail) - refine create/edit flows
-clusters (detail) - add cluster-events query state
-clusters (detail) - add ability to add/remove events via query state
-clusters (detail) - clean flow styling
-clusters (list) - empty list icon/message
-events (detail) - required fields styling
+alerts (funtions create) - send push notifications for each alert token
++auth - allow unauthenticated logins
++auth - hide home header icons when not authed (except menu)
++auth - when subscribing or click menu when not auth, show login/signup
+*auth - make minimum firefly icon loading time (branding)
+*auth - create tutorial slides
+*auth - add categories slide
+*interests (all) - migrate cluster wording to interests
+*interests (all) - migrate clusters code/collections to interests
+interests (detail) - required fields styling (icon/popover)
+interests (detail) - refine create/edit flows
+interests (detail) - add cluster-events query state
+interests (detail) - add ability to add/remove events via query state
+interests (detail) - clean flow styling
+interests (list) - empty list icon/message
+events (function cron) - implement hourly cron which creates alerts
+events (detail) - required fields styling (icon/popover)
 events (detail) - refine create/edit flows
 events (detail) - add url field
 events (detail) - add phone field
 events (detail) - add create/edit
 events (detail) - reverse geocode
+events (detail) - fix redux payload too big warning
 events (list) - empty list icon/message
-events (list) - list image/name/timeStart/timeEnd
+events (list) - refine styling
 functions (all) - migrate to use firebase transactions
 functions (all) - minimize cold start time
 functions (all) - refactor to use try/catch async/await
 functions (all) - enable retry on failure
-functions (test) - clusters (delete)
+functions (test) - interests (delete)
 functions (test) - events (update)
 functions (test) - icons (delete)
 functions (test) - images (delete)
 functions (test) - users (create)
 functions (test) - users (delete)
 functions (test) - users (update)
-home (page) - fix header disappear when ion-badge shown
-home (page) - stream/alerts render delay issue
-home (page) - transparent background with image
-home (page) - add shrinking header/footer
-home (page) - add image background
+*home - fix header disappear when ion-badge shown
+home - add shrinking header/footer
 icons (detail) - cleanup styling
-icons (detail) - required fields styling
+icons (detail) - required fields styling (icon/popover)
 icons (list) - empty list icon/message
 icons (list) - cleanup styling
 images (detail) - cleanup styling
-images (detail) - required fields styling
+images (detail) - required fields styling (icon/popover)
 images (list) - cleanup styling
 images (list) - empty list icon/message
 login (page) - cleanup styling
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
-menu - move assets to publisher
+*menu - move assets to publisher
 notifications - implement capacitor-fcm plugin
 security - upload and test security rules
-security - create model validation security rules
-security - update collection/subcollection security rules
 security - create storage security rules
 security - prevent hackers from querying past limit size
 security - prevent hackers from writing to database too quickly
-streams (list) - notifications not rendering on load
-streams (list) - notifications icon spacing
++streams (list) - remove item-header and migrate to ionic cards styling
++streams (list) - add ellipses to description if more than 2 lines
++streams (list) - add expansion panel and show full description
+streams (list) - on card expand fetch 5 upcoming events with spinner
+*streams (list) - add heart subscribe animation
++streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (state) - user.state.ts uncomment cluster.userId !== userId
 streams (detail) - implement stream detail screen
-streams (list) - subscribe/unsubscribe with count increment
-streams (list) - on stream click
 streams (list) - empty list icon/message
-streams (list) - add event preview accordian
 subscriptions (list) - empty list icon/message
+*users (all) - remove user.admins & user.editors from code & security
 user-profile (firestore) - implement
 user-profile (functions) - implement
 user-profile (page) - implement
 user-profile (security) - implement
 user-profile (state) - implement state/firestore/page/functions/security
-
-alerts (funtions create)
-    for each token
-        send push notification using name/description
-events (cron)
-    cron hourly 55 mins past hour
-    find hour past current time
-    query events whose notifiedDateTime === generatedHourlyTimestamp
-    for each cluster id
-        query users where clusterId in user.subscriptions
-        for each user
-            create alert with alert.userId and with alert.tokens
-    set event.timeNotifyComplete = true

@@ -23,7 +23,7 @@
     --ion-color-secondary-tint: #47df74;
 
     /** tertiary **/
-    --ion-color-tertiary: #f4a942;
+    --ion-color-tertiary: #{$fire-color-grey-lighter};
     --ion-color-tertiary-rgb: 244,169,66;
     --ion-color-tertiary-contrast: #fff;
     --ion-color-tertiary-contrast-rgb: 255,255,255;
@@ -55,7 +55,7 @@
     --ion-color-danger-tint: #f65050;
 
     /** light **/
-    --ion-color-light: #f4f4f4;
+    --ion-color-light: #{$fire-color-white};
     --ion-color-light-rgb: 244,244,244;
     --ion-color-light-contrast: #000;
     --ion-color-light-contrast-rgb: 0,0,0;
