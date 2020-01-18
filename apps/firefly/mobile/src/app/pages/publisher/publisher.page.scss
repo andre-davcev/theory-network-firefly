@@ -1,0 +1,26 @@
+@import 'variables';
+
+:host
+{
+    ion-content {
+        --background: #{$fire-color-dark-lighter};
+        height: 100%;
+    }
+
+    section {
+        height: 100%;
+    }
+
+    app-icon {
+        --cpt-color: #{$fire-color-primary};
+        --cpt-font-size: 64px;
+    }
+
+    ion-icon {
+        font-size: 64px;
+    }
+
+    ion-col {
+        width: 90px;
+    }
+}

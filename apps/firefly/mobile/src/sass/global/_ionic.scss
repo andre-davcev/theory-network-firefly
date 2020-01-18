@@ -1,5 +1,10 @@
 @import 'variables';
 
+ion-toolbar {
+    --border-width: 0;
+    --min-height: 56px;
+}
+
 ion-app {
     ion-picker {
         --ion-color-primary: #{$fire-color-black};

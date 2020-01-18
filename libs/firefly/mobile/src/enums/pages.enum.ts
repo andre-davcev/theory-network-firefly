@@ -7,6 +7,7 @@ export enum Pages
 
     Search        = 'search',
     Subscriptions = 'subscriptions',
+    Publisher     = 'publisher',
     User          = 'user',
 
     AssetCluster = 'asset-cluster',

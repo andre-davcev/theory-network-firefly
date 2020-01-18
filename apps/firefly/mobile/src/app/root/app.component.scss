@@ -2,23 +2,15 @@
 
 :host
 {
-    app-icon {
-        --cpt-color: #{$fire-color-primary};
-        --cpt-font-size: 30px;
-        margin-right: 9px;
-        margin-left: 2px;
-        margin-top: 1px;
-    }
-
     .ios {
         ion-list {
-            margin-top: 46px;
+            margin-top: 11px;
         }
     }
 
     .md {
       app-icon {
-        margin-right: 22px;
+        margin-right: 11px;
       }
     }
 
