@@ -47,7 +47,6 @@ functions (test) - images (delete)
 functions (test) - users (create)
 functions (test) - users (delete)
 functions (test) - users (update)
-*home - update background to #EFF2F1
 *home - fix header disappear when ion-badge shown
 home - add shrinking header/footer
 icons (detail) - cleanup styling
@@ -62,7 +61,6 @@ login (page) - cleanup styling
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
-*menu - fix header/content animation glitchiness
 *menu - move assets to publisher
 notifications - implement capacitor-fcm plugin
 security - upload and test security rules
