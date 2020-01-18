@@ -1,13 +1,15 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>{{'page.assets-images.title' | translate}}</ion-title>
+
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button color="dark"></ion-back-button>
         </ion-buttons>
+
         <ion-buttons slot="end">
-          <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
-              <ion-icon name="person" color="dark" size="large"></ion-icon>
-          </ion-button>
+            <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+                <ion-icon name="person" color="dark" size="large"></ion-icon>
+            </ion-button>
       </ion-buttons>
     </ion-toolbar>
 </ion-header>
