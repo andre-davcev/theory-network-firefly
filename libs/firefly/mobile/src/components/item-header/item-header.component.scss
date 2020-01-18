@@ -1,5 +1,5 @@
 
-
+@import 'variables';
 :host
 {
     --cpt-height:                      167px;
@@ -137,7 +137,7 @@
             position: relative;
             display: block;
             background-color: rgba(255, 255, 255, 0);
-            font-weight: 600;
+            //font-weight: 600;
             margin: 0;
             padding: 0;
             color: var(--cpt-color-font);
@@ -166,6 +166,7 @@
 
         > .cpt-title
         {
+            font-family: $fire-font-americantypewriter;
             font-size: var(--cpt-title-font-size);
             line-height: var(--cpt-title-font-size);
             letter-spacing: var(--cpt-title-letter-spacing);
@@ -174,9 +175,12 @@
 
         > .cpt-subtitle
         {
-            font-size: var(--cpt-subtitle-font-size);
+            font-family: $fire-font-markerfelt;
+            color: #e7e2e2;
+            //font-size: var(--cpt-subtitle-font-size);
+            font-size: 15px;
             line-height: var(--cpt-subtitle-font-size);
-            letter-spacing: var(--cpt-subtitle-letter-spacing);
+            //letter-spacing: var(--cpt-subtitle-letter-spacing);
         }
     }
 }

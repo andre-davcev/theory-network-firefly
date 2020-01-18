@@ -25,11 +25,17 @@
 
     ion-card {
         --background: #{$fire-color-white};
+        font-family: $fire-font-markerfelt;
         width: 100%;
         margin-bottom: 2px;
     }
 
     app-icon-subscribe {
         margin-bottom: 5px;
+    }
+
+    .app-description {
+      font-family: $fire-font-arialnarrow;
+      font-size: 14px;
     }
 }
