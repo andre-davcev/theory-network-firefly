@@ -2,15 +2,14 @@
 
 :host
 {
-    --cpt-icon-size: 32px;
     --cpt-font-family: #{$fire-font-firefly};
     --cpt-font-size: 12px;
     --cpt-line-height: 1;
     --cpt-color: black;
 
     position: relative;
-    width: var(--cpt-icon-size);
-    height: var(--cpt-icon-size);
+    width: var(--cpt-font-size);
+    height: var(--cpt-font-size);
     display: inline-block;
     opacity: 0;
     color: var(--cpt-color);
@@ -23,6 +22,8 @@
     .cpt-icon
     {
         position: relative;
+        height: var(--cpt-font-size);
+        width: var(--cpt-font-size);
 
         &:before
         {

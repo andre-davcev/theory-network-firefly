@@ -17,11 +17,6 @@
         }
     }
 
-    ion-toolbar {
-        --border-width: 0;
-        --min-height: 56px;
-    }
-
     ion-slides {
         --background: #{$fire-color-grey-light};
         --bullet-background: #{$fire-color-black};

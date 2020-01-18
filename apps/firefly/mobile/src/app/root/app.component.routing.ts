@@ -9,6 +9,7 @@ export const routes: Routes =
     { path: Pages.Login, loadChildren: '@firefly/page/login#ModulePageLogin' },
     { path: Pages.Home,  loadChildren: '@firefly/page/home#ModulePageHome' },
 
+    { path: Pages.Publisher,      loadChildren: '@firefly/page/publisher#ModulePagePublisher' },
     { path: Pages.AssetsBeacons,  loadChildren: '@firefly/page/assets-beacons#ModulePageAssetsBeacons' },
     { path: Pages.AssetsClusters, loadChildren: '@firefly/page/assets-clusters#ModulePageAssetsClustersRoute' },
     { path: Pages.AssetCluster,   loadChildren: '@firefly/page/asset-cluster#ModulePageAssetCluster'},

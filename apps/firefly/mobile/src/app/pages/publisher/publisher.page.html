@@ -1,0 +1,55 @@
+<ion-header elevation="1">
+    <ion-toolbar color="dark">
+        <ion-title color="primary">{{ 'page.publisher.title' | translate}}</ion-title>
+
+        <ion-buttons slot="end">
+            <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+                <ion-icon name="person" color="primary" size="large"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <section fxLayout="row"
+             fxLayoutAlign="center center">
+        <ion-card elevation="1"
+                  color="dark">
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col (click)="navigate(Pages.AssetsClusters)">
+                            <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
+                                <app-icon name="firefly"></app-icon>
+                                <ion-label>{{ 'general.interests' | translate }}</ion-label>
+                            </section>
+                        </ion-col>
+
+                        <ion-col (click)="navigate(Pages.AssetsEvents)">
+                            <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
+                                <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+                                <ion-label>{{ 'general.events' | translate }}</ion-label>
+                            </section>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col (click)="navigate(Pages.AssetsIcons)">
+                            <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
+                                <ion-icon name="aperture" slot="start" color="primary"></ion-icon>
+                                <ion-label>{{ 'general.icons' | translate }}</ion-label>
+                            </section>
+                        </ion-col>
+
+                        <ion-col (click)="navigate(Pages.AssetsImages)">
+                            <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
+                                <ion-icon name="images" slot="start" color="primary"></ion-icon>
+                                <ion-label>{{ 'general.images' | translate }}</ion-label>
+                            </section>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+    </section>
+</ion-content>
