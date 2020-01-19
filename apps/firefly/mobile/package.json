@@ -36,6 +36,7 @@
     "@angular/platform-browser": "file:../../../node_modules/@angular/platform-browser",
     "@angular/platform-browser-dynamic": "file:../../../node_modules/@angular/platform-browser-dynamic",
     "@angular/router": "file:../../../node_modules/@angular/router",
+    "@angular/material": "file:../../../node_modules/@angular/material",
     "@capacitor/android": "^1.4.0",
     "@capacitor/cli": "^1.4.0",
     "@capacitor/core": "^1.4.0",
