@@ -1,11 +1,9 @@
-<div>
-  <img class="cpt-background-image" [ngClass]="!iconUrl?'cpt-background-image-placeholder':'cpt-background-image-fit'" [src]="url" (click)="clickedIcon()">
-</div>
-<div *ngIf="!iconUrl" class="cpt-background"></div>
+<img class="cpt-background-image" [src]="url">
+<div class="cpt-background"></div>
 
-<div *ngIf="!iconUrl" class="cpt-icon-container" (click)="clickedIcon()">
+<div class="cpt-icon-container" (click)="clickedIcon()">
     <img class="cpt-icon" [src]="url">
-    <p class="cpt-icon-placeholder">{{ iconPlaceholder }}</p>
+    <p class="cpt-icon-placeholder" *ngIf="!iconUrl">{{ iconPlaceholder }}</p>
 </div>
 <form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
     <input class="cpt-title"  type="text" [formControlName]="title" [placeholder]="titlePlaceholder">
@@ -18,7 +16,7 @@
     </div>
 </form>
 
-<!--div class="cpt-container" *ngIf="!edit">
-    <h3 class="cpt-title">| {{ title }} |</h3>
-    <div class="cpt-subtitle">{{ subtitle }}</div>
-</!--div-->
+<div class="cpt-container" *ngIf="!edit">
+    <h3 class="cpt-title">{{ title }}</h3>
+    <h4 class="cpt-subtitle">{{ subtitle }}</h4>
+</div>
