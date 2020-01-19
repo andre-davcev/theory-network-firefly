@@ -9,6 +9,8 @@ import { PageStream } from './stream.page';
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentItemHeader } from '@firefly/mobile';
 
+import { MatExpansionModule } from '@angular/material';
+
 @NgModule
 ({
     imports :
@@ -18,6 +20,7 @@ import { ModuleComponentItemHeader } from '@firefly/mobile';
         ModuleDirectiveElevation,
         ModuleComponentItemHeader,
         ModuleComponentIconSubscribe,
+        MatExpansionModule,
         RouterModule.forChild(RoutesPageStream)
     ],
 

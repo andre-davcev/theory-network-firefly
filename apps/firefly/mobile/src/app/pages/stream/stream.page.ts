@@ -21,6 +21,8 @@ export class PageStream extends BaseComponent implements OnInit
     @Select(StateStorage.images) images$: Observable<Record<string, StorageImage>>;
 
     public images: Record<string, StorageImage>;
+    public currentlyOpenedItemIndex = -1;
+    public currentlyOpenedItems = [];
 
     constructor(private store: Store) { super(); }
 
@@ -36,5 +38,16 @@ export class PageStream extends BaseComponent implements OnInit
     public toggle(subscribed: boolean, stream: StreamCluster): void
     {
         this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, false));
+    }
+
+    setOpened(itemIndex) {
+      this.currentlyOpenedItemIndex = itemIndex;
+      this.currentlyOpenedItems[itemIndex] = true;
+    }
+
+    setClosed(itemIndex) {
+      if(this.currentlyOpenedItemIndex === itemIndex) {
+        this.currentlyOpenedItemIndex = -1;
+      }
     }
 }
