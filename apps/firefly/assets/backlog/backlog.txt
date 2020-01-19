@@ -1,7 +1,6 @@
 *andre
 +dave
 
-app (animations) - implement ionic animations
 app (loading) - match styling for ios/android
 app (toast) - update styling
 app (updates) - on quick toggles/updates stack updates and put spinner
@@ -13,9 +12,10 @@ alerts (list) - on click navigate to detail
 alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (funtions create) - send push notifications for each alert token
 +auth - allow unauthenticated logins
++auth - on unauthenticated login save city so you can grab city stream
 +auth - hide home header icons when not authed (except menu)
 +auth - when subscribing or click menu when not auth, show login/signup
-*auth - make minimum firefly icon loading time (branding)
++auth - logout should follow unauthenticated workflow
 *auth - create tutorial slides
 *auth - add categories slide
 *interests (all) - migrate cluster wording to interests
@@ -48,7 +48,6 @@ functions (test) - users (create)
 functions (test) - users (delete)
 functions (test) - users (update)
 *home - fix header disappear when ion-badge shown
-home - add shrinking header/footer
 icons (detail) - cleanup styling
 icons (detail) - required fields styling (icon/popover)
 icons (list) - empty list icon/message
@@ -61,13 +60,14 @@ login (page) - cleanup styling
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
-*menu - move assets to publisher
+menu - publisher glitchiness on first render
+menu - highlight selected row
 notifications - implement capacitor-fcm plugin
 security - upload and test security rules
 security - create storage security rules
 security - prevent hackers from querying past limit size
 security - prevent hackers from writing to database too quickly
-+streams (list) - remove item-header and migrate to ionic cards styling
++streams (list) - replace app-item-header with img
 +streams (list) - add ellipses to description if more than 2 lines
 +streams (list) - add expansion panel and show full description
 streams (list) - on card expand fetch 5 upcoming events with spinner
