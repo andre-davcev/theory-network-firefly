@@ -12,6 +12,7 @@ export enum ActionsUser
 
     Authenticate      = '[User] Authenticate',
     AuthenticateCheck = '[User] Authenticate Check',
+    NotLoggedIn       = '[User] Not Logged In',
     Watch             = '[User] Watch',
     WatchLocation     = '[User] Watch Location',
     WatchCity         = '[User] Watch City',

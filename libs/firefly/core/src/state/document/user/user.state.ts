@@ -29,7 +29,8 @@ import {
     ActionUserWatchLocation,
     ActionUserWatchCity,
     ActionUserWatchSubscriptionsStatus,
-    ActionUserSubscriptionToggle
+    ActionUserSubscriptionToggle,
+    ActionUserNotLoggedIn
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -141,6 +142,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
         const userId        : string                              = StateUser.idState(state);
 
+        alert(JSON.stringify(stream));
         return stream.
             filter((cluster: StreamCluster) =>
                 (subscriptions[cluster.id] == null || unfiltered[cluster.id] != null) // && cluster.userId !== userId
@@ -271,6 +273,33 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         return super.watch(context, action);
     }
 
+    @Action(ActionUserNotLoggedIn)
+    userNotLoggedIn({ patchState, dispatch}: StateContext<StateUserModel>)
+    {
+        alert('not logged in');
+
+        return of(null).pipe(
+          tap(() =>
+            dispatch
+            ([
+              new ActionUserWatchLocation(false),
+              new ActionUserWatchLanguage(),
+              new ActionUserWatchCity()
+            ])
+          ),
+          switchMap(() =>
+            this.streamReady$.pipe
+            (
+                filter((ready: boolean) => ready),
+                take(1)
+            )
+          ),
+          tap(() =>
+              patchState({ initializing: false })
+          )
+        )
+    }
+
     @Action(ActionUserAuthenticate)
     authenticate({ patchState, dispatch }: StateContext<StateUserModel>)
     {
@@ -283,7 +312,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             ),
             switchMap((authData: FirebaseUser) =>
                 authData == null ?
-                    of(patchState({ initializing: false})) :
+                    dispatch(new ActionUserNotLoggedIn()) :
                     dispatch(new ActionUserGet(authData.uid))
             ),
             catchError((error: Error) =>
@@ -324,7 +353,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserWatchLocation, { cancelUncompleted: true })
-    watchLocation({ dispatch, getState }: StateContext<StateUserModel>)
+    watchLocation({ dispatch, getState }: StateContext<StateUserModel>, { save }: ActionUserWatchLocation)
     {
         return this.location$.pipe
         (
@@ -341,7 +370,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 this.location.locationCityFromResponse(response)
             ),
             switchMap((locationCity: LocationCity) =>
-                dispatch(new ActionUserPatch(locationCity, true))
+                dispatch(new ActionUserPatch(locationCity, save))
             )
         );
     }
