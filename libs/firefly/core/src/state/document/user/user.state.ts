@@ -142,7 +142,9 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
         const userId        : string                              = StateUser.idState(state);
 
-        alert(JSON.stringify(stream));
+        if (!subscriptions)
+          return stream;
+        else
         return stream.
             filter((cluster: StreamCluster) =>
                 (subscriptions[cluster.id] == null || unfiltered[cluster.id] != null) // && cluster.userId !== userId
@@ -276,14 +278,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserNotLoggedIn)
     userNotLoggedIn({ patchState, dispatch}: StateContext<StateUserModel>)
     {
-        alert('not logged in');
-
         return of(null).pipe(
           tap(() =>
             dispatch
             ([
               new ActionUserWatchLocation(false),
-              new ActionUserWatchLanguage(),
               new ActionUserWatchCity()
             ])
           ),
