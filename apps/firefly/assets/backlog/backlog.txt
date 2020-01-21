@@ -78,8 +78,3 @@ streams (detail) - implement stream detail screen
 streams (list) - empty list icon/message
 subscriptions (list) - empty list icon/message
 *users (all) - remove user.admins & user.editors from code & security
-user-profile (firestore) - implement
-user-profile (functions) - implement
-user-profile (page) - implement
-user-profile (security) - implement
-user-profile (state) - implement state/firestore/page/functions/security
