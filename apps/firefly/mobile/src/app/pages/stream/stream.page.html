@@ -1,11 +1,11 @@
 <ion-content>
   <ion-list *ngIf="images">
-    <ion-item lines="none" *ngFor="let cluster of stream$ | async">
+    <ion-item lines="none" *ngFor="let cluster of stream$ | async; let i = index">
         <ion-card *ngIf="images[cluster.bucketPath]" elevation="1">
-            <app-item-header [iconUrl]="images[cluster.bucketPath].medium"
-                             [title]="cluster.name"
-                             [subtitle]="cluster.tagline">
-            </app-item-header>
+
+            <div >
+              <img class="image-cnt" [src]="images[cluster.bucketPath].medium">
+            </div>
 
             <ion-card-header>
               <ion-card-title class="name">|{{ cluster.name }}|</ion-card-title>
@@ -14,9 +14,26 @@
 
             <ion-card-content fxLayout="column"
                               fxLayoutGap="10px">
-                <span class="app-description">
-                    {{ cluster.description }}
-                </span>
+
+                <mat-accordion>
+
+                  <mat-expansion-panel  (opened)="setOpened(i)"
+                  (closed)="setClosed(i)"  class="mat-elevation-z0" class="mat-elevation-z0"  hideToggle>
+                    <mat-expansion-panel-header [expandedHeight]="'0px'" [collapsedHeight]="'20px'">
+                      <mat-panel-description  class="mat-expansion-panel-header-description">
+                      <!--span class="app-description"-->
+                        <div *ngIf="!currentlyOpenedItems[i]" class="app-description">{{ cluster.description }} | {{ currentlyOpenedItemIndex === i ? 'Close' : 'Open' }}</div>
+                      <!--/!--span-->
+                    </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <span class="app-description">
+                      {{ cluster.description }}
+                    </span>
+
+                  </mat-expansion-panel>
+
+                </mat-accordion>
 
                 <app-icon-subscribe [subscribed]="cluster.subscribed"
                                     [count]="cluster.subscriberCount + (cluster.on ? 1 : 0)"

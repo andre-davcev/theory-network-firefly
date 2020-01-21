@@ -6,6 +6,8 @@ import { ModuleRoutingApp } from './app.component.routing';
 import { ComponentApp } from './app.component';
 import { ModuleComponentIcon } from '@firefly/core';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule
 ({
     imports :
@@ -14,7 +16,8 @@ import { ModuleComponentIcon } from '@firefly/core';
 
         ModulePage,
         ModuleRoutingApp,
-        ModuleComponentIcon
+        ModuleComponentIcon,
+        BrowserAnimationsModule
     ],
 
     declarations : [ComponentApp],
