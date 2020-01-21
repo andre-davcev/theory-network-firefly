@@ -31,32 +31,59 @@
     }
 
     ion-card-content {
-      padding-top: 0px;
-      padding-bottom: 5px;
+        padding-top: 0px;
+        padding-bottom: 5px;
     }
 
     app-icon-subscribe {
         margin-bottom: 5px;
     }
 
+    .image-cnt {
+      height: 167px;
+      object-fit: cover;
+    }
+
     .app-description {
-      font-family: $fire-font-arialnarrow;
-      font-size: 14px;
+        font-family: $fire-font-arialnarrow;
+        font-size: 14px;
     }
 
     .tagline,
     .name,
     .app-description {
-      text-align: center;
+        text-align: center;
     }
 
     .tagline {
-      font-size: 20px;
-      font-family: $fire-font-markerfelt;
+        font-size: 20px;
+        font-family: $fire-font-markerfelt;
     }
 
     .name {
-      font-size: 25px;
-      font-family: $fire-font-americantypewriter;
+        font-size: 25px;
+        font-family: $fire-font-americantypewriter;
+    }
+
+
+    ::ng-deep .mat-expansion-panel-body{
+        padding: 0px 0px 5px 0px !important;
+    }
+
+    .mat-expansion-panel-header-title {
+        flex: 0 0 auto; /* make this not grow or shrink */
+        margin-right: 16px;
+    }
+
+    .mat-expansion-panel-header-description {
+        flex: 1 1 auto; /* make this grow and shrink */
+        min-width: 0; /* see link to see why this is needed */
+        margin-right: 16px;
+    }
+
+    .mat-expansion-panel-header-description > div {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }

@@ -67,9 +67,7 @@ security - upload and test security rules
 security - create storage security rules
 security - prevent hackers from querying past limit size
 security - prevent hackers from writing to database too quickly
-+streams (list) - replace app-item-header with img
-+streams (list) - add ellipses to description if more than 2 lines
-+streams (list) - add expansion panel and show full description
++streams (list) - add ellipses to description if more than 2 lines (implemented with 1 line, still working on 2 line solution)
 streams (list) - on card expand fetch 5 upcoming events with spinner
 *streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
