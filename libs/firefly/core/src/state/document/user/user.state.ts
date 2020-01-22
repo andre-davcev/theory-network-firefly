@@ -89,8 +89,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 geopoint            : null,
                 phoneNumber         : '',
                 providerId          : undefined,
-                roleAdmins          : [],
-                roleEditors         : [],
                 subscriptions       : [],
                 subscriptionsStatus : {},
                 tokens              : []

@@ -80,4 +80,3 @@ streams (state) - user.state.ts uncomment cluster.userId !== userId
 streams (detail) - implement stream detail screen
 streams (list) - empty list icon/message
 subscriptions (list) - empty list icon/message
-*users (all) - remove user.admins & user.editors from code & security

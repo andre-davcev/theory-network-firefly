@@ -252,11 +252,7 @@ service cloud.firestore {
                data.city.country        is string  &&
                data.tokens              is array   &&
                data.subscriptions       is array   &&
-               data.subscriptionsStatus != null    &&
-               data.roleEditors         is array   &&
-               data.roleEditors.size()  == 0       &&
-               data.roleAdmins          is array   &&
-               data.roleAdmins.size()   == 0;
+               data.subscriptionsStatus != null;
     }
 
     function userValidUpdate(uid, dataOld, dataNew)
@@ -275,9 +271,7 @@ service cloud.firestore {
                dataNew.city.country        is string      &&
                dataNew.tokens              is array       &&
                dataNew.subscriptions       is array       &&
-               dataNew.subscriptionsStatus is map         &&
-               dataNew.roleEditors         is array       &&
-               dataNew.roleAdmins          is array;
+               dataNew.subscriptionsStatus is map;
     }
 
     function userProfileValidCreate(uid, data)
@@ -309,8 +303,8 @@ service cloud.firestore {
     function user(data)                         { return document('users', data.userId); }
     function isDataOwner(uid, data)             { return uid == data.userId; }
     function isSuperAdmin(uid)                  { return uid == 'baLysAd71cRyZjh0hr6poxR8an13'; }
-    function hasRoleEditor(uid, data, user)     { return isDataOwner(uid, data) || isSuperAdmin(uid) || user.roleAdmins[uid] != null || user.roleEditors[uid] != null; }
-    function hasRoleAdmin(uid, data)            { return isDataOwner(uid, data) || isSuperAdmin(uid) || user(data).roleAdmins[uid] != null; }
+    function hasRoleEditor(uid, data, user)     { return isDataOwner(uid, data) || isSuperAdmin(uid); }
+    function hasRoleAdmin(uid, data)            { return isDataOwner(uid, data) || isSuperAdmin(uid); }
     function isPublic(data)                     { return data.private != null || !data.private; }
 
     function itemCanGet(uid, data)    { return isDataOwner(uid, data) || isSuperAdmin(uid); }
