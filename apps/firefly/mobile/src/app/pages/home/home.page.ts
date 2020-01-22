@@ -1,3 +1,4 @@
+import { User as FirebaseUser } from 'firebase/app';
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
@@ -10,7 +11,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
 import { Observable } from 'rxjs';
-import { StateUserAlerts } from '@firefly/core';
+import { StateUserAlerts, StateUser } from '@firefly/core';
 
 @Component
 ({
@@ -26,7 +27,8 @@ export class PageHome extends BaseComponent
     @Select(StateMobile.pageStream)    pageStream$ : Observable<boolean>;
     @Select(StateUserAlerts.unread)    unread$     : Observable<number>;
     @Select(StateUserAlerts.hasUnread) hasUnread$  : Observable<boolean>;
-
+    @Select(StateUser.authenticated) authenticated$ : Observable<boolean>;
+    @Select(StateUser.authData)        authData$   : Observable<FirebaseUser>;
     public Pages : any = Pages;
 
     constructor
