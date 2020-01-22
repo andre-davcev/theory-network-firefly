@@ -7,14 +7,14 @@
           </ion-button>
 -->
 
-            <ion-button *ngIf="((pageStream$ | async) && (authenticated$ | async))" (click)="go(Pages.Alert)" class="cpt-notifications" [disabled]="menuOpen$ | async">
+            <ion-button *ngIf="((pageStream$ | async) && (authData$ | async))" (click)="go(Pages.Alert)" class="cpt-notifications" [disabled]="menuOpen$ | async">
                 <ion-icon name="notifications" color="dark" size="large"></ion-icon>
 <!--
                 <ion-badge *ngIf="hasUnread$ | async" color="secondary">{{ unread$ | async }}</ion-badge>
 -->
             </ion-button>
 
-            <ion-button *ngIf="((pageAlerts$ | async) && (authenticated$ | async))" icon-only (click)="go(Pages.Stream)" [disabled]="menuOpen$ | async">
+            <ion-button *ngIf="((pageAlerts$ | async) && (authData$ | async))" icon-only (click)="go(Pages.Stream)" [disabled]="menuOpen$ | async">
                 <ion-icon name="md-paper" color="dark" size="large"></ion-icon>
             </ion-button>
         </ion-buttons>
