@@ -11,7 +11,7 @@ alerts (list) - empty list icon/message
 alerts (list) - on click navigate to detail
 alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (funtions create) - send push notifications for each alert token
-+auth - allow unauthenticated logins
++auth - create firestore database rules to allow unauth'd users to query stream
 +auth - on unauthenticated login save city so you can grab city stream
 +auth - hide home header icons when not authed (except menu)
 +auth - when subscribing or click menu when not auth, show login/signup
