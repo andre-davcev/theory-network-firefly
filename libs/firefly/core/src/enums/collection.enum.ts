@@ -1,6 +1,6 @@
 export enum Collection
 {
-    Clusters = 'clusters',
+    Interests = 'interests',
     Events   = 'events',
     Icons    = 'icons',
     Images   = 'images',

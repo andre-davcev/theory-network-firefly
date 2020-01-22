@@ -14,7 +14,7 @@ export const MockAlerts: Array<Alert> = [];
         dateTime    : 'July 25, 2016 at 6:30pm',
         bucketPath  : 'baLysAd71cRyZjh0hr6poxR8an13/image/0mmzNcb1yAJJT0Y4Ewzu.jpeg',
         eventId     : 'oZsx53Fam5yr88PAnHAT',
-        clusterId   : 'jNUnMIY7QkAWFvr5fr0d',
+        interestId   : 'jNUnMIY7QkAWFvr5fr0d',
         url         : 'https://www.blondie.net',
         read        : false
     },
@@ -31,7 +31,7 @@ export const MockAlerts: Array<Alert> = [];
         dateTime    : 'June 10, 2017 at 7:00pm',
         bucketPath  : 'baLysAd71cRyZjh0hr6poxR8an13/image/culdH46ZBh0lAPEkOs9o.jpeg',
         eventId     : 'oZsx53Fam5yr88PAnHAT',
-        clusterId   : 'jNUnMIY7QkAWFvr5fr0d',
+        interestId   : 'jNUnMIY7QkAWFvr5fr0d',
         url         : 'https://www.fosterthepeople.com',
         read        : false
     },
@@ -48,7 +48,7 @@ export const MockAlerts: Array<Alert> = [];
         dateTime    : 'May 12, 2017 at 7:00pm',
         bucketPath  : 'baLysAd71cRyZjh0hr6poxR8an13/image/l84fX5B1GwvRXV8znQ4S.jpeg',
         eventId     : 'oZsx53Fam5yr88PAnHAT',
-        clusterId   : 'jNUnMIY7QkAWFvr5fr0d',
+        interestId   : 'jNUnMIY7QkAWFvr5fr0d',
         url         : 'https://www.rustedroot.com/home',
         read        : false
     }

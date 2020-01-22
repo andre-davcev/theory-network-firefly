@@ -51,8 +51,8 @@ export class ServiceStreams
 
     public static scoreEventPopularity(event: Event): number
     {
-        const clusterCount: number = event.clusters.length;
-        const segments:     number = Math.floor(clusterCount / GlobalVariable.EventPopularityMultiplier) + 1;
+        const interestCount : number = event.interests.length;
+        const segments      : number = Math.floor(interestCount / GlobalVariable.EventPopularityMultiplier) + 1;
 
         return event.private || segments === 1 ?
             GlobalVariable.EventPopularityMin :

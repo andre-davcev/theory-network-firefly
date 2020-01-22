@@ -7,11 +7,11 @@ import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateCluster } from '@firefly/core';
+import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateInterest } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
-import { PageAssetsClusters, ResolverPageAssetsClusters } from '../assets-clusters';
+import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
 import { PageImageSelector } from '../image-selector';
 
 const { Camera } = Plugins;
@@ -36,7 +36,7 @@ export class PageAssetEvent
     @Select(StateEvent.notifyComplete)  notifyComplete$:  Observable<boolean>;
     @Select(StateDevice.device)         device$:          Observable<boolean>;
     @Select(StateEvent.imageUrl)        imageUrl$:        Observable<string>;
-    @Select(StateCluster.iconUrl)       iconUrl$:         Observable<string>;
+    @Select(StateInterest.iconUrl)       iconUrl$:         Observable<string>;
 
     public Pages: any = Pages;
 
@@ -44,7 +44,7 @@ export class PageAssetEvent
     (
         private store:         Store,
         private modal:         ModalController,
-        private resolver:      ResolverPageAssetsClusters,
+        private resolver:      ResolverPageAssetsInterests,
         public  navController: NavController
     ) { }
 
@@ -53,9 +53,9 @@ export class PageAssetEvent
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light }));
     }
 
-    public navigate(page: Pages.AssetsClusters | Pages.ImageSelector | Pages.EventLocation)
+    public navigate(page: Pages.AssetsInterests | Pages.ImageSelector | Pages.EventLocation)
     {
-        if (page === Pages.AssetsClusters)
+        if (page === Pages.AssetsInterests)
         {
             this.resolver.
             resolve(null, null).
@@ -64,7 +64,7 @@ export class PageAssetEvent
                 switchMap(() =>
                     from(this.modal.create
                     ({
-                        component: PageAssetsClusters,
+                        component: PageAssetsInterests,
                         componentProps: { modal: true }
                     }))
                 )

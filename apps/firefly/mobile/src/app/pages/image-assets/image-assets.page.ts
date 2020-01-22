@@ -57,7 +57,7 @@ export class PageImageAssets
             switchMap(() => this.store.dispatch
             ([
                 new ActionEventPatch({ bucketPath })/*,
-                new ActionClusterDirty()*/
+                new ActionInterestDirty()*/
             ])),
             switchMap(() => {
               return this.modalController.dismiss()})

@@ -15,5 +15,5 @@ export enum ActionsEvent
     ImagePathSet = '[Event] Image Path Set',
     ImageCreate  = '[Event] Image Create',
     LocationSet  = '[Event] Location Set',
-    ClusterAdd   = '[Event] Cluster Add'
+    InterestAdd   = '[Event] Interest Add'
 }

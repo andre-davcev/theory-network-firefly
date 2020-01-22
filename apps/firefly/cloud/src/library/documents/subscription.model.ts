@@ -1,4 +1,4 @@
-import { Cluster } from './cluster.model';
+import { Interest } from './interest.model';
 import { SubscriptionPartial } from '../models';
 
-export type Subscription = Cluster & SubscriptionPartial;
+export type Subscription = Interest & SubscriptionPartial;

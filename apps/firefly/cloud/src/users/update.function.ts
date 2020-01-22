@@ -1,6 +1,6 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { FieldValue, DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { Status, User, Subscription, ServiceCities } from '../library';
+import { Status, User, Subscription, ServiceCities, SubscriptionPartial } from '../library';
 import { firestore as db } from 'firebase-admin';
 
 const database: Firestore = db();
@@ -16,8 +16,8 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
     const before : User = change.before.data() as User;
     const after  : User = change.after.data() as User;
 
-    const subscriptionsStatusBefore : Record<string, Subscription> = before.subscriptionsStatus;
-    const subscriptionsStatusAfter  : Record<string, Subscription> = after.subscriptionsStatus;
+    const subscriptionsStatusBefore : Record<string, SubscriptionPartial> = before.subscriptionsStatus;
+    const subscriptionsStatusAfter  : Record<string, SubscriptionPartial> = after.subscriptionsStatus;
 
     const subscriptionKeysBefore : Array<string> = Object.keys(subscriptionsStatusBefore);
     const subscriptionKeysAfter  : Array<string> = Object.keys(subscriptionsStatusAfter);
@@ -26,7 +26,7 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
     const subscriptionCountAfter  : number = subscriptionKeysAfter.length;
 
     let status: Status = Status.Unchanged;
-    let clusterId: string;
+    let interestId: string;
 
     const cityIdBefore: string = before.cityId == null ? '' : before.cityId;
     const cityIdAfter:  string = after.cityId  == null ? '' : after.cityId;
@@ -38,29 +38,29 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
 
     if (subscriptionCountBefore === subscriptionCountAfter)
     {
-        clusterId = subscriptionKeysAfter.find((clusterId: string) => subscriptionsStatusAfter[clusterId].on !== subscriptionsStatusBefore[clusterId].on);
-        status    = clusterId == null ? Status.Unchanged : subscriptionsStatusAfter[clusterId].on ? Status.Added : Status.Removed;
+        interestId = subscriptionKeysAfter.find((interestId: string) => subscriptionsStatusAfter[interestId].on !== subscriptionsStatusBefore[interestId].on);
+        status    = interestId == null ? Status.Unchanged : subscriptionsStatusAfter[interestId].on ? Status.Added : Status.Removed;
     }
     else if (subscriptionCountBefore < subscriptionCountAfter)
     {
-        clusterId = subscriptionKeysAfter.find((clusterId: string) => subscriptionsStatusBefore[clusterId] == null);
+        interestId = subscriptionKeysAfter.find((interestId: string) => subscriptionsStatusBefore[interestId] == null);
         status    = Status.Added;
     }
     else if (subscriptionCountBefore > subscriptionCountAfter)
     {
-        clusterId = subscriptionKeysBefore.find((clusterId: string) => subscriptionsStatusAfter[clusterId] == null);
+        interestId = subscriptionKeysBefore.find((interestId: string) => subscriptionsStatusAfter[interestId] == null);
         status    = Status.Removed;
     }
 
     if (status === Status.Added)
     {
-        updates.push(database.collection('clusters').doc(clusterId).update({ subscriberCount: FieldValue.increment(1) }));
-        updates.push(change.after.ref.update({ subscriptions: FieldValue.arrayUnion(clusterId) }));
+        updates.push(database.collection('clusters').doc(interestId).update({ subscriberCount: FieldValue.increment(1) }));
+        updates.push(change.after.ref.update({ subscriptions: FieldValue.arrayUnion(interestId) }));
     }
     else if (status === Status.Removed)
     {
-        updates.push(database.collection('clusters').doc(clusterId).update({ subscriberCount: FieldValue.increment(-1) }));
-        updates.push(change.after.ref.update({ subscriptions: FieldValue.arrayRemove(clusterId) }));
+        updates.push(database.collection('clusters').doc(interestId).update({ subscriberCount: FieldValue.increment(-1) }));
+        updates.push(change.after.ref.update({ subscriptions: FieldValue.arrayRemove(interestId) }));
     }
 
     return Promise.all(updates);

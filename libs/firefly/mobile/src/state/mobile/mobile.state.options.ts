@@ -18,7 +18,7 @@ export const StateMobileOptions: StoreOptions<StateMobileModel> =
             [Pages.Home]           : Pages.Stream,
             [Pages.Subscriptions]  : Pages.Subscriptions,
             [Pages.Publisher]      : Pages.Publisher,
-            [Pages.AssetsClusters] : Pages.AssetsClusters,
+            [Pages.AssetsInterests] : Pages.AssetsInterests,
             [Pages.AssetsEvents]   : Pages.AssetsEvents,
             [Pages.AssetsIcons]    : Pages.AssetsIcons,
             [Pages.AssetsImages]   : Pages.AssetsImages

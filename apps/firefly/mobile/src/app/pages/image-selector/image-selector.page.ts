@@ -68,7 +68,7 @@ export class PageImageSelector
                 switchMap((imageData: string) =>
                     this.store.dispatch([
                       new ActionEventImageUriSet(imageData)/*,
-                      new ActionClusterDirty()*/
+                      new ActionInterestDirty()*/
                     ])
                 ),
                 finalize(() => {

@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase-admin';
 
 initializeApp();
 
-import { ClustersCreate, ClustersDelete } from './clusters';
+import { InterestsCreate, InterestsDelete } from './interests';
 import { EventsCreate, EventsUpdate } from './events';
 import { IconsCreate, IconsDelete } from './icons';
 import { ImagesCreate, ImagesDelete } from './images';
@@ -19,8 +19,8 @@ export
 
     CitiesCreate,
 
-    ClustersCreate,
-    ClustersDelete,
+    InterestsCreate,
+    InterestsDelete,
 
     EventsCreate,
     EventsUpdate,

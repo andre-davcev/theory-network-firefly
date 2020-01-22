@@ -24,10 +24,10 @@ import {
   ActionEventSetId,
   ActionEventUpdate,
   ActionEventImageCreate,
-  ActionEventClusterAdd
+  ActionEventInterestAdd
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
-import { ActionClusterReset } from '../cluster';
+import { ActionInterestReset } from '../interest';
 import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
@@ -63,7 +63,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 bucketPath     : null,
                 cityId         : null,
                 city           : null,
-                clusters       : [],
+                interests       : [],
                 description    : null,
                 geopoint       : null,
                 name           : null,
@@ -84,7 +84,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
-                ActionsReset:  [ActionClusterReset, ActionImageReset, ActionIconReset, ActionMapSearchResultClear],
+                ActionsReset:  [ActionInterestReset, ActionImageReset, ActionIconReset, ActionMapSearchResultClear],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
@@ -268,9 +268,9 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
             );
     }
 
-    @Action(ActionEventClusterAdd)
-    clusterAdd({ dispatch }: StateContext<StateEventModel>, { cluster }: ActionEventClusterAdd)
+    @Action(ActionEventInterestAdd)
+    interestAdd({ dispatch }: StateContext<StateEventModel>, { interest }: ActionEventInterestAdd)
     {
-        return dispatch(new ActionEventPatch({ clusters: [cluster.id]}));
+        return dispatch(new ActionEventPatch({ interests: [interest.id]}));
     }
 }

@@ -17,6 +17,6 @@ export enum GlobalVariable
     EventPopularityMultiplier       = 3,
     EventUpcomingSegmentMillis      = 604800000, // 1 Week
 
-    ClusterScoreWeightRaw         = 0.2,
-    ClusterScoreWeightSubscribers = 0.8
+    InterestScoreWeightRaw         = 0.2,
+    InterestScoreWeightSubscribers = 0.8
 }

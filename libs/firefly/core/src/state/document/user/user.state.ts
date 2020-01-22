@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
-import { User, Location, StreamCluster, Subscription, SubscriptionPartial } from '@firefly/cloud';
+import { User, Location, StreamInterest, Subscription, SubscriptionPartial } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -37,7 +37,7 @@ import { CoreUtil } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 
 import { ActionUserAlertsReset, ActionUserAlertsGetData } from '../../query/user-alerts/user-alerts.actions';
-import { ActionUserClustersReset } from '../../query/user-clusters/user-clusters.actions';
+import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
@@ -50,7 +50,7 @@ import { StateUserStreamOptions } from '../../child/user-stream/user-stream.stat
 import { StateUserStream } from '../../child/user-stream/user-stream.state';
 import { DocumentSnapshot } from '@angular/fire/firestore';
 import { StateUserSubscriptions } from '../../child/user-subscriptions';
-import { StateClusterOptions } from '../cluster/cluster.state.options';
+import { StateInterestOptions } from '../interest/interest.state.options';
 import { ActionStorageUrlGet } from '@theory/firebase';
 
 @State<StateUserModel>(StateUserOptions)
@@ -107,7 +107,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ActionsReset:
                 [
                     ActionUserAlertsReset,
-                    ActionUserClustersReset,
+                    ActionUserInterestsReset,
                     ActionUserEventsReset,
                     ActionUserIconsReset,
                     ActionUserImagesReset,
@@ -134,7 +134,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static subscriptionsUnfiltered(state: StateUserModel) : Record<string, string> { return state.subscriptionsUnfiltered; }
 
     @Selector([StateUserStream.data()])
-    public static stream(state: StateUserModel, stream: Array<StreamCluster>): Array<StreamCluster>
+    public static stream(state: StateUserModel, stream: Array<StreamInterest>): Array<StreamInterest>
     {
         const unfiltered    : Record<string, string>              = StateUser.subscriptionsUnfiltered(state);
         const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
@@ -144,8 +144,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
           return stream;
         else
         return stream.
-            filter((cluster: StreamCluster) =>
-                (subscriptions[cluster.id] == null || unfiltered[cluster.id] != null) // && cluster.userId !== userId
+            filter((interest: StreamInterest) =>
+                (subscriptions[interest.id] == null || unfiltered[interest.id] != null) // && interest.userId !== userId
             );
     }
 
@@ -382,15 +382,15 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 cityId != null
             ),
             switchMap((cityId: string) =>
-                this.service.documentWatch<Record<string, StreamCluster>>(StateUserStreamOptions.name as string, cityId)
+                this.service.documentWatch<Record<string, StreamInterest>>(StateUserStreamOptions.name as string, cityId)
             ),
-            filter((snapshot: DocumentSnapshot<Record<string, StreamCluster>>) =>
+            filter((snapshot: DocumentSnapshot<Record<string, StreamInterest>>) =>
                 snapshot.exists
             ),
-            map((snapshot: DocumentSnapshot<Record<string, StreamCluster>>) =>
+            map((snapshot: DocumentSnapshot<Record<string, StreamInterest>>) =>
                 snapshot.data()
             ),
-            switchMap((stream: Record<string, StreamCluster>) =>
+            switchMap((stream: Record<string, StreamInterest>) =>
                 dispatch(new ActionUserStreamSetData(stream, true))
             )
         );
@@ -476,7 +476,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         let subscription        : Subscription        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
 
         const subscriptionIsNew : boolean       = subscription == null;
-        const streamCluster     : StreamCluster = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
+        const streamInterest     : StreamInterest = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
 
         subscriptionPartial = subscriptionsStatus[id] =
         {
@@ -488,22 +488,22 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             subscription.on = subscriptionPartial.on;
         }
 
-        if (streamCluster != null)
+        if (streamInterest != null)
         {
-            streamCluster.on = subscriptionsStatus[id].on;
+            streamInterest.on = subscriptionsStatus[id].on;
         }
 
         return dispatch
         ([
             new ActionUserPatch({ subscriptionsStatus }, true),
-            new ActionUserStreamSync(streamCluster)
+            new ActionUserStreamSync(streamInterest)
         ]).
         pipe
         (
             switchMap(() =>
                 !subscriptionIsNew ?
                     dispatch(new ActionUserSubscriptionsSync(subscription)) :
-                    this.service.documentGet(StateClusterOptions.name as string, id).
+                    this.service.documentGet(StateInterestOptions.name as string, id).
                     pipe
                     (
                         switchMap((snapshot: firestore.DocumentSnapshot) =>

@@ -11,9 +11,9 @@ firestore.
 document('users/{id}').
 onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const clusters : CollectionReference = database.collection('clusters');
-    const id       : string              = snapshot.id;
-    const user     : User                = snapshot.data() as User;
+    const interests : CollectionReference = database.collection('clusters');
+    const id        : string              = snapshot.id;
+    const user      : User                = snapshot.data() as User;
 
     const deletes : Array<Promise<WriteResult>> =
     [
@@ -37,8 +37,8 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     query = await database.collection('images').where('userId', '==', id).get();
     query.forEach((snapshot: QueryDocumentSnapshot) => deletes.push(snapshot.ref.delete()));
 
-    user.subscriptions.forEach((clusterId: string) =>
-        deletes.push(clusters.doc(clusterId).update({ subscriberCount: FieldValue.increment(-1)}))
+    user.subscriptions.forEach((interestId: string) =>
+        deletes.push(interests.doc(interestId).update({ subscriberCount: FieldValue.increment(-1)}))
     );
 
     return Promise.all(deletes);

@@ -1,7 +1,7 @@
 import { WriteResult, Firestore, DocumentSnapshot, QuerySnapshot, QueryDocumentSnapshot, CollectionReference } from '@google-cloud/firestore';
 import { firestore } from 'firebase-admin';
 import { Location } from '../models';
-import { Event, User, StreamCluster, Cluster, City } from '../documents';
+import { Event, User, StreamInterest, Interest, City } from '../documents';
 import { ServiceStreams } from './stream.service';
 import { GlobalVariable } from '../enums';
 
@@ -52,22 +52,22 @@ export class ServiceCities
 
     public static async generateStream(database: Firestore, city: City): Promise<any>
     {
-        const debugDoc           : firestore.DocumentReference                   = database.collection('debug').doc('stream-city');
-        const debug              : boolean                                       = true
-        const citiesNearby       : Record<string, number>                        = city.nearby;
-        const cityIdsNearby      : Array<string>                                 = Object.keys(citiesNearby);
-        const eventScores        : Record<string, number>                        = {};
-        const clusterSubscribers : Record<string, number>                        = {};
-        const cityClusters       : Record<string, Array<string>>                 = {};
-        const distanceScores     : Record<string, number>                        = {};
-        const clusterCityEvents  : Record<string, Record<string, Array<string>>> = {};
-        const clusterCollection  : CollectionReference                           = database.collection('clusters');
-        const eventCollection    : CollectionReference                           = database.collection('events');
-        const eventQuery         : Array<Promise<QuerySnapshot>>                 = [];
-        const clusterQuery       : Array<Promise<QuerySnapshot>>                 = [];
-        const clusterIds         : Record<string, string>                        = {};
-        const events             : Array<Event>                                  = [];
-        const stream             : Record<string, StreamCluster>                 = {};
+        const debugDoc            : firestore.DocumentReference                   = database.collection('debug').doc('stream-city');
+        const debug               : boolean                                       = true
+        const citiesNearby        : Record<string, number>                        = city.nearby;
+        const cityIdsNearby       : Array<string>                                 = Object.keys(citiesNearby);
+        const eventScores         : Record<string, number>                        = {};
+        const interestSubscribers : Record<string, number>                        = {};
+        const cityInterests       : Record<string, Array<string>>                 = {};
+        const distanceScores      : Record<string, number>                        = {};
+        const interestCityEvents  : Record<string, Record<string, Array<string>>> = {};
+        const interestCollection  : CollectionReference                           = database.collection('clusters');
+        const eventCollection     : CollectionReference                           = database.collection('events');
+        const eventQuery          : Array<Promise<QuerySnapshot>>                 = [];
+        const interestQuery       : Array<Promise<QuerySnapshot>>                 = [];
+        const interestIds         : Record<string, string>                        = {};
+        const events              : Array<Event>                                  = [];
+        const stream              : Record<string, StreamInterest>                 = {};
 
         let id              : string;
         let cityId          : string;
@@ -88,32 +88,32 @@ export class ServiceCities
                 id    = snapshot.id;
                 event = snapshot.data() as Event;
 
-                event.clusters.forEach((clusterId: string) =>
-                    clusterIds[clusterId] = clusterId
+                event.interests.forEach((interestId: string) =>
+                    interestIds[interestId] = interestId
                 );
 
                 events.push(event);
             })
         );
 
-        Object.keys(clusterIds).forEach((clusterId: string) =>
-            clusterQuery.push(clusterCollection.where('id', '==', clusterId).get())
+        Object.keys(interestIds).forEach((interestId: string) =>
+            interestQuery.push(interestCollection.where('id', '==', interestId).get())
         );
 
-        const clusterSnapshots : Array<QuerySnapshot> = await Promise.all(clusterQuery);
+        const interestSnapshots : Array<QuerySnapshot> = await Promise.all(interestQuery);
 
-        clusterSnapshots.forEach((query: QuerySnapshot) =>
+        interestSnapshots.forEach((query: QuerySnapshot) =>
             query.forEach((snapshot: QueryDocumentSnapshot) =>
             {
                 id                     = snapshot.id;
-                clusterSubscribers[id] = (snapshot.data() as Cluster).subscriberCount;
-                clusterCityEvents[id]  = {};
+                interestSubscribers[id] = (snapshot.data() as Interest).subscriberCount;
+                interestCityEvents[id]  = {};
             })
         );
 
         cityIdsNearby.forEach((cityId: string) =>
         {
-            cityClusters[cityId]   = [];
+            cityInterests[cityId]   = [];
             distanceScores[cityId] = ServiceStreams.scoreCityDistance(citiesNearby[cityId])
         });
 
@@ -123,13 +123,13 @@ export class ServiceCities
             eventScores[id] = ServiceStreams.scoreEvent(event, nowInMillis);
             cityId          = event.cityId;
 
-            event.clusters.forEach((clusterId: string) =>
+            event.interests.forEach((interestId: string) =>
             {
-                subscriberCount = clusterSubscribers[clusterId];
+                subscriberCount = interestSubscribers[interestId];
 
-                if (clusterCityEvents[clusterId][cityId] == null)
+                if (interestCityEvents[interestId][cityId] == null)
                 {
-                    clusterCityEvents[clusterId][cityId] = [];
+                    interestCityEvents[interestId][cityId] = [];
                 }
 
                 if (subscriberCount > subscriberMax)
@@ -137,39 +137,39 @@ export class ServiceCities
                     subscriberMax = subscriberCount;
                 }
 
-                clusterCityEvents[clusterId][cityId].push(id);
-                cityClusters[cityId].push(clusterId);
+                interestCityEvents[interestId][cityId].push(id);
+                cityInterests[cityId].push(interestId);
             });
         });
 
-        let score        : number;
-        let clusterScore : number;
-        let cityEvents   : Record<string, Array<string>>;
+        let score         : number;
+        let interestScore : number;
+        let cityEvents    : Record<string, Array<string>>;
 
         cityId         = city.id;
         subscriberMax  = subscriberMax === 0 ? 1 : subscriberMax;
 
         cityIdsNearby.forEach((nearbyId: string) =>
         {
-            cityClusters[nearbyId].forEach((clusterId: string) =>
+            cityInterests[nearbyId].forEach((interestId: string) =>
             {
-                subscriberCount = clusterSubscribers[clusterId];
-                cityEvents      = clusterCityEvents[clusterId];
-                clusterScore    = 0;
+                subscriberCount = interestSubscribers[interestId];
+                cityEvents      = interestCityEvents[interestId];
+                interestScore    = 0;
 
                 Object.keys(cityEvents).forEach((cityIdEvent: string) =>
                 {
                     cityEvents[cityIdEvent].forEach((eventId: string) =>
-                        clusterScore += eventScores[eventId]
+                        interestScore += eventScores[eventId]
                     );
 
-                    clusterScore += (clusterScore * distanceScores[cityIdEvent]);
+                    interestScore += (interestScore * distanceScores[cityIdEvent]);
                 });
 
-                score = (clusterScore * GlobalVariable.ClusterScoreWeightRaw) +
-                        (clusterScore * GlobalVariable.ClusterScoreWeightSubscribers * (subscriberCount / subscriberMax));
+                score = (interestScore * GlobalVariable.InterestScoreWeightRaw) +
+                        (interestScore * GlobalVariable.InterestScoreWeightSubscribers * (subscriberCount / subscriberMax));
 
-                stream[clusterId] = { score } as StreamCluster;
+                stream[interestId] = { score } as StreamInterest;
             });
         });
 
@@ -178,11 +178,11 @@ export class ServiceCities
             await debugDoc.set
             ({
                 citiesNearby,
-                cityClusters,
+                cityInterests,
                 distanceScores,
                 subscriberMax,
-                clusterCityEvents,
-                clusterSubscribers,
+                interestCityEvents,
+                interestSubscribers,
                 eventScores
             });
         }

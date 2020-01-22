@@ -1,7 +1,7 @@
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { CoreEnum } from '@theory/core';
-import { Event, Cluster } from '@firefly/cloud';
+import { Event, Interest } from '@firefly/cloud';
 
 import { ActionsEvent } from './event.actions.enum';
 import { firestore } from 'firebase';
@@ -22,4 +22,4 @@ export class ActionEventImageUriSet  { static readonly type = ActionsEvent.Image
 export class ActionEventImagePathSet { static readonly type = ActionsEvent.ImagePathSet; constructor(public bucketPath: string = MockImagePath) { } }
 export class ActionEventImageCreate  { static readonly type = ActionsEvent.ImageCreate;  constructor() { } }
 export class ActionEventLocationSet  { static readonly type = ActionsEvent.LocationSet;  constructor(public result: Result) { } }
-export class ActionEventClusterAdd   { static readonly type = ActionsEvent.ClusterAdd;   constructor(public cluster: Cluster) { }}
+export class ActionEventInterestAdd   { static readonly type = ActionsEvent.InterestAdd;   constructor(public interest: Interest) { }}

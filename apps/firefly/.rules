@@ -8,12 +8,12 @@ service cloud.firestore {
       allow delete: alertCanDelete(uid(), dataNew());
     }
 
-    match /clusters/{clusterId} {
-      allow get:    clusterCanGet(uid(),    dataNew());
-      allow list:   clusterCanList(uid(),   dataNew());
-      allow create: clusterCanCreate(uid(), dataNew());
-      allow update: clusterCanUpdate(uid(), dataOld(), dataNew());
-      allow delete: clusterCanDelete(uid(), dataNew());
+    match /clusters/{interestId} {
+      allow get:    interestCanGet(uid(),    dataNew());
+      allow list:   interestCanList(uid(),   dataNew());
+      allow create: interestCanCreate(uid(), dataNew());
+      allow update: interestCanUpdate(uid(), dataOld(), dataNew());
+      allow delete: interestCanDelete(uid(), dataNew());
     }
 
     match /cities/{cityId} {
@@ -104,7 +104,7 @@ service cloud.firestore {
                dataNew.description == dataOld.description &&
                dataNew.bucketPath  == dataOld.bucketPath  &&
                dataNew.eventId     == dataOld.eventId     &&
-               dataNew.clusterId   == dataOld.clusterId   &&
+               dataNew.interestId   == dataOld.interestId   &&
                dataNew.dateTime    == dataOld.dateTime    &&
                dataNew.tokens      == dataOld.tokens      &&
                dataNew.url         == dataOld.url         &&
@@ -122,7 +122,7 @@ service cloud.firestore {
         return false;
     }
 
-    function clusterValidCreate(uid, data)
+    function interestValidCreate(uid, data)
     {
         return documentValidCreate(uid, data) &&
                data.name            is string &&
@@ -133,7 +133,7 @@ service cloud.firestore {
                data.subscriberCount == 0;
     }
 
-    function clusterValidUpdate(uid, dataOld, dataNew)
+    function interestValidUpdate(uid, dataOld, dataNew)
     {
         return documentValidUpdate(uid, dataOld, dataNew) &&
                dataNew.name            is string          &&
@@ -162,8 +162,8 @@ service cloud.firestore {
                data.timeStart       is string &&
                data.timeEnd         is string &&
                data.timeNotify      is string &&
-               data.clusters        is array  &&
-               data.clusters.size() == 1      &&
+               data.interests        is array  &&
+               data.interests.size() == 1      &&
                !data.notifyComplete;
     }
 
@@ -185,8 +185,8 @@ service cloud.firestore {
                dataNew.timeStart       is string                  &&
                dataNew.timeEnd         is string                  &&
                dataNew.timeNotify      is string                  &&
-               dataNew.clusters        is array                   &&
-               dataNew.clusters.size() == dataOld.clusters.size() &&
+               dataNew.interests        is array                   &&
+               dataNew.interests.size() == dataOld.interests.size() &&
                !data.notifyComplete;
     }
 
@@ -331,11 +331,11 @@ service cloud.firestore {
     function cityCanUpdate(uid, dataOld, dataNew) { return false; }
     function cityCanDelete(uid, data)             { return false; }
 
-    function clusterCanGet(uid, data)                { return assetCanGet(uid, data); }
-    function clusterCanList(uid, data)               { return assetCanList(uid, data); }
-    function clusterCanCreate(uid, data)             { return clusterValidCreate(uid, data) && assetCanCreate(uid, data); }
-    function clusterCanUpdate(uid, dataOld, dataNew) { return clusterValidUpdate(uid, dataOld, dataNew) && assetCanUpdate(uid, dataOld); }
-    function clusterCanDelete(uid, data)             { return assetCanDelete(uid, data); }
+    function interestCanGet(uid, data)                { return assetCanGet(uid, data); }
+    function interestCanList(uid, data)               { return assetCanList(uid, data); }
+    function interestCanCreate(uid, data)             { return interestValidCreate(uid, data) && assetCanCreate(uid, data); }
+    function interestCanUpdate(uid, dataOld, dataNew) { return interestValidUpdate(uid, dataOld, dataNew) && assetCanUpdate(uid, dataOld); }
+    function interestCanDelete(uid, data)             { return assetCanDelete(uid, data); }
 
     function eventCanGet(uid, data)                { return assetCanGet(uid, data); }
     function eventCanList(uid, data)               { return assetCanList(uid, data); }

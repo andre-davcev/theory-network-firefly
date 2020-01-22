@@ -2,7 +2,7 @@ export enum Version
 {
     Alerts       = '1.0.0',
     Cities       = '1.0.0',
-    Clusters     = '1.0.0',
+    Interests    = '1.0.0',
     Events       = '1.0.0',
     Icons        = '1.0.0',
     Images       = '1.0.0',

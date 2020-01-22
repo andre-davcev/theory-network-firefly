@@ -1,7 +1,7 @@
 import { StateChildModel } from '@theory/ngxs';
-import { StreamCluster } from '@firefly/cloud';
+import { StreamInterest } from '@firefly/cloud';
 
-export interface StateUserStreamModel extends StateChildModel<StreamCluster>
+export interface StateUserStreamModel extends StateChildModel<StreamInterest>
 {
 
 }

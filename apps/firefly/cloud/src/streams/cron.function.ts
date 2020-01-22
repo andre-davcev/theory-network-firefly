@@ -1,7 +1,7 @@
 import { runWith, EventContext } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { ServiceStreams, Cluster, Event, GlobalVariable, StreamCluster } from '../library';
+import { ServiceStreams, Interest, Event, GlobalVariable, StreamInterest } from '../library';
 import { City } from '../library';
 
 const StreamsCron =
@@ -11,17 +11,17 @@ pubsub.
 schedule('0 2 * * 1'). // Monday's @ 2AM
 onRun(async (context: EventContext) =>
 {
-    const database           : Firestore                                     = firestore();
-    const debugDoc           : firestore.DocumentReference                   = database.collection('debug').doc('streams');
-    const debug              : boolean                                       = true;
-    const citiesNearby       : Record<string, Record<string, number>>        = {};
-    const clusterSubscribers : Record<string, number>                        = {};
-    const eventScores        : Record<string, number>                        = {};
-    const cityClusters       : Record<string, Array<string>>                 = {};
-    const citySubscriberMax  : Record<string, number>                        = {};
-    const cityDistanceScore  : Record<string, Record<string, number>>        = {};
-    const clusterCityEvents  : Record<string, Record<string, Array<string>>> = {};
-    const citiesCollection   : Record<string, Record<string, StreamCluster>> = {};
+    const database            : Firestore                                     = firestore();
+    const debugDoc            : firestore.DocumentReference                   = database.collection('debug').doc('streams');
+    const debug               : boolean                                       = true;
+    const citiesNearby        : Record<string, Record<string, number>>        = {};
+    const interestSubscribers : Record<string, number>                        = {};
+    const eventScores         : Record<string, number>                        = {};
+    const cityInterests       : Record<string, Array<string>>                 = {};
+    const citySubscriberMax   : Record<string, number>                        = {};
+    const cityDistanceScore   : Record<string, Record<string, number>>        = {};
+    const interestCityEvents  : Record<string, Record<string, Array<string>>> = {};
+    const citiesCollection    : Record<string, Record<string, StreamInterest>> = {};
 
     let id     : string;
     let query  : QuerySnapshot = await database.collection('clusters').where('private', '==', false).get();
@@ -30,8 +30,8 @@ onRun(async (context: EventContext) =>
     query.forEach((snapshot: QueryDocumentSnapshot) =>
     {
         id                     = snapshot.id;
-        clusterSubscribers[id] = (snapshot.data() as Cluster).subscriberCount;
-        clusterCityEvents[id]  = {};
+        interestSubscribers[id] = (snapshot.data() as Interest).subscriberCount;
+        interestCityEvents[id]  = {};
     });
 
     query = await database.collection('cities').get();
@@ -40,7 +40,7 @@ onRun(async (context: EventContext) =>
     {
         id                    = snapshot.id;
         citySubscriberMax[id] = 0;
-        cityClusters[id]      = [];
+        cityInterests[id]      = [];
         cityDistanceScore[id] = {};
         nearby                = (snapshot.data() as City).nearby;
 
@@ -66,13 +66,13 @@ onRun(async (context: EventContext) =>
         eventScores[id] = ServiceStreams.scoreEvent(event, nowInMillis);
         city            = event.city.cityId;
 
-        event.clusters.forEach((clusterId: string) =>
+        event.interests.forEach((interestId: string) =>
         {
-            subscriberCount = clusterSubscribers[clusterId];
+            subscriberCount = interestSubscribers[interestId];
 
-            if (clusterCityEvents[clusterId][city] == null)
+            if (interestCityEvents[interestId][city] == null)
             {
-                clusterCityEvents[clusterId][city] = [];
+                interestCityEvents[interestId][city] = [];
             }
 
             if (subscriberCount > citySubscriberMax[city])
@@ -80,8 +80,8 @@ onRun(async (context: EventContext) =>
                 citySubscriberMax[city] = subscriberCount;
             }
 
-            clusterCityEvents[clusterId][city].push(id);
-            cityClusters[city].push(clusterId);
+            interestCityEvents[interestId][city].push(id);
+            cityInterests[city].push(interestId);
         });
     });
 
@@ -91,11 +91,11 @@ onRun(async (context: EventContext) =>
     const updates    : Array<Promise<WriteResult>>   = [];
 
     let score            : number;
-    let clusterScore     : number;
+    let interestScore    : number;
     let subscriberMax    : number;
     let distanceScores   : Record<string, number>;
     let cityEvents       : Record<string, Array<string>>;
-    let cityStream       : Record<string, StreamCluster>;
+    let cityStream       : Record<string, StreamInterest>;
 
     Object.keys(citiesNearby).forEach((cityId: string) =>
     {
@@ -106,25 +106,25 @@ onRun(async (context: EventContext) =>
 
         Object.keys(nearby).forEach((nearbyId: string) =>
         {
-            cityClusters[nearbyId].forEach((clusterId: string) =>
+            cityInterests[nearbyId].forEach((interestId: string) =>
             {
-                subscriberCount = clusterSubscribers[clusterId];
-                cityEvents      = clusterCityEvents[clusterId];
-                clusterScore    = 0;
+                subscriberCount = interestSubscribers[interestId];
+                cityEvents      = interestCityEvents[interestId];
+                interestScore    = 0;
 
                 Object.keys(cityEvents).forEach((cityIdEvent: string) =>
                 {
                     cityEvents[cityIdEvent].forEach((eventId: string) =>
-                        clusterScore += eventScores[eventId]
+                        interestScore += eventScores[eventId]
                     );
 
-                    clusterScore += (clusterScore * distanceScores[cityIdEvent]);
+                    interestScore += (interestScore * distanceScores[cityIdEvent]);
                 });
 
-                score = (clusterScore * GlobalVariable.ClusterScoreWeightRaw) +
-                        (clusterScore * GlobalVariable.ClusterScoreWeightSubscribers * (subscriberCount / subscriberMax));
+                score = (interestScore * GlobalVariable.InterestScoreWeightRaw) +
+                        (interestScore * GlobalVariable.InterestScoreWeightSubscribers * (subscriberCount / subscriberMax));
 
-                cityStream[clusterId] = { score } as StreamCluster;
+                cityStream[interestId] = { score } as StreamInterest;
             });
         });
 
@@ -139,11 +139,11 @@ onRun(async (context: EventContext) =>
         ({
             citiesNearby,
             citiesCollection,
-            cityClusters,
+            cityInterests,
             cityDistanceScore,
             citySubscriberMax,
-            clusterCityEvents,
-            clusterSubscribers,
+            interestCityEvents,
+            interestSubscribers,
             eventScores
         });
     }

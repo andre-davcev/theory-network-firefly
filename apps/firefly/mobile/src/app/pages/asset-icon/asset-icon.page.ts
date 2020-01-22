@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
 import { ModalController, NavController } from '@ionic/angular'
 import { StatusBarStyle, CameraPhoto, CameraSource, CameraResultType, CameraOptions, Plugins } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateIcon, ActionIconPatch, ActionUserIconsReset, ActionIconUriSet, ActionClusterIconPathSet, ActionIconSetId, MockIconId, ActionIconSave } from '@firefly/core';
+import { StateIcon, ActionIconPatch, ActionUserIconsReset, ActionIconUriSet, ActionInterestIconPathSet, ActionIconSetId, MockIconId, ActionIconSave } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { Icon } from '@firefly/cloud';
 import { Pages } from '@firefly/mobile';
@@ -72,7 +72,7 @@ export class PageAssetIcon
           }
           else
           {
-              this.store.dispatch(new ActionClusterIconPathSet()).
+              this.store.dispatch(new ActionInterestIconPathSet()).
               subscribe();
           }
       }
