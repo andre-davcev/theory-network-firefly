@@ -1,34 +1,41 @@
 *andre
 +dave
 
-app (loading) - match styling for ios/android
+app (all) - ios/android style sync
 app (toast) - update styling
 app (updates) - on quick toggles/updates stack updates and put spinner
 app (keyboard) - fix ios ionic/capacitor keyboard bug
+*app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
+*app (empty) - empty list component
+*app (all) - empty list pages (alerts, stream, subscriptions interests, events, icons, images)
 alerts (detail) - implement detail screen
 alerts (list) - on click go show menu (add to calendar/go to map)
-alerts (list) - empty list icon/message
 alerts (list) - on click navigate to detail
 alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (funtions create) - send push notifications for each alert token
 +auth - create firestore database rules to allow unauth'd users to query stream
 +auth - on unauthenticated login save city so you can grab city stream
 +auth - hide home header icons when not authed (except menu)
-+auth - when subscribing or click menu when not auth, show login/signup
 +auth - logout should follow unauthenticated workflow
-*auth - create tutorial slides
+*auth - when unauthenticated and click subscribe/menu show action sheet (Sign Up, Login)
+*sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
+*sign-up (slide 2) - email/password
+*sign-up (slide 3) - Welcome to the Firefly community!
+*sign-up (slide 4) - Subscribe to different interests in your area
+*sign-up (slide 5) - Receive notifications when new events are added to your interests
+*sign-up (slide 6) - Easily get directions or add events to your calendar
+*sign-up (slide 7) - Manage your subscriptions with ease
+*sign-up (slide 8) - Contribute to the community by publishing your own interests and events
 *slides (intro 1) - Where life comes to you
 *slides (intro 2) - Subscribe to community interests
-*slides (intro 3) - Be notified when new events are post to your interests
-*slides (intro 4) - Add events to you calendar and get directions
-*slides (sign up categories) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
+*slides (intro 3) - Be notified when new events are posted to your interests
+*slides (intro 4) - Add these events to you calendar and get directions
 interests (all) - migrate clusters collection to interests
 interests (detail) - required fields styling (icon/popover)
 interests (detail) - refine create/edit flows
 interests (detail) - add interst-events query state
 interests (detail) - add ability to add/remove events via query state
 interests (detail) - clean flow styling
-interests (list) - empty list icon/message
 events (function cron) - implement hourly cron which creates alerts
 events (detail) - required fields styling (icon/popover)
 events (detail) - refine create/edit flows
@@ -37,7 +44,6 @@ events (detail) - add phone field
 events (detail) - add create/edit
 events (detail) - reverse geocode
 events (detail) - fix redux payload too big warning
-events (list) - empty list icon/message
 events (list) - refine styling
 functions (all) - migrate to use firebase transactions
 functions (all) - minimize cold start time
@@ -53,12 +59,10 @@ functions (test) - users (update)
 *home - fix header disappear when ion-badge shown
 icons (detail) - cleanup styling
 icons (detail) - required fields styling (icon/popover)
-icons (list) - empty list icon/message
 icons (list) - cleanup styling
 images (detail) - cleanup styling
 images (detail) - required fields styling (icon/popover)
 images (list) - cleanup styling
-images (list) - empty list icon/message
 login (page) - cleanup styling
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 library (mapbox) - add back tokenized mapbox access token in search service
@@ -71,11 +75,9 @@ security - create storage security rules
 security - prevent hackers from querying past limit size
 security - prevent hackers from writing to database too quickly
 *streams (list) - minor styling tweaks
+*streams (list) - add heart subscribe animation
 +streams (list) - add ellipses to description if more than 2 lines (implemented with 1 line, still working on 2 line solution)
 streams (list) - on card expand fetch 5 upcoming events with spinner
-*streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (state) - user.state.ts uncomment interest.userId !== userId
 streams (detail) - implement stream detail screen
-streams (list) - empty list icon/message
-subscriptions (list) - empty list icon/message
