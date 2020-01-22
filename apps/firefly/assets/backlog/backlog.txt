@@ -22,11 +22,10 @@ alerts (funtions create) - send push notifications for each alert token
 *slides (intro 3) - Be notified when new events are post to your interests
 *slides (intro 4) - Add events to you calendar and get directions
 *slides (sign up categories) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
-*interests (all) - migrate cluster wording to interests
-*interests (all) - migrate clusters code/collections to interests
+interests (all) - migrate clusters collection to interests
 interests (detail) - required fields styling (icon/popover)
 interests (detail) - refine create/edit flows
-interests (detail) - add cluster-events query state
+interests (detail) - add interst-events query state
 interests (detail) - add ability to add/remove events via query state
 interests (detail) - clean flow styling
 interests (list) - empty list icon/message
@@ -76,7 +75,7 @@ security - prevent hackers from writing to database too quickly
 streams (list) - on card expand fetch 5 upcoming events with spinner
 *streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
-streams (state) - user.state.ts uncomment cluster.userId !== userId
+streams (state) - user.state.ts uncomment interest.userId !== userId
 streams (detail) - implement stream detail screen
 streams (list) - empty list icon/message
 subscriptions (list) - empty list icon/message

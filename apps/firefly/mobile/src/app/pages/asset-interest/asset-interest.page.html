@@ -1,0 +1,87 @@
+<ion-header color="white">
+    <ion-toolbar >
+        <ion-title>
+            {{ ((isNew$ | async) ? 'page.interest.title.edit.new' : 'page.interest.title.edit') | translate }}
+        </ion-title>
+
+        <ion-buttons slot="start">
+            <ion-back-button color="dark"></ion-back-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+            <ion-button color="dark" (click)="save()" [disabled]="!(canUpdate$ | async)">
+                {{ ((isNew$ | async) ? 'general.publish' : 'general.update') | translate }}
+            </ion-button>
+         </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form novalidate
+          [formGroup]="form$  | async"
+          ngxsForm="interests.form">
+        <app-item-header [form]="form$ | async"
+                         [iconUrl]="iconUrl$ | async"
+                         title="name"
+                         subtitle="tagline"
+                         iconUrlEmpty="assets/icons/avatar-empty.svg"
+                         [titlePlaceholder]="'page.event.titlePlaceholder' | translate"
+                         [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate"
+                         [iconPlaceholder]="'page.event.iconPlaceholder' | translate"
+                         (iconClicked)="navigate(Pages.IconSelector)">
+        </app-item-header>
+
+        <div class="cpt-detail" fxLayout="column">
+            <ion-list>
+                <ion-item-group>
+                    <ion-item-divider></ion-item-divider>
+
+                    <ion-item>
+                        <ion-icon name="lock" slot="start" color="medium"></ion-icon>
+                        <ion-label>Is Private</ion-label>
+                        <ion-toggle formControlName="private" color="primary"></ion-toggle>
+                    </ion-item>
+
+                    <ion-item-divider></ion-item-divider>
+
+                    <app-item-description [form]="form$ | async"
+                                          [title]="'general.description' | translate"
+                                          description="description"
+                                          [descriptionPlaceholder]="'page.interest.descriptionPlaceholder' | translate">
+                    </app-item-description>
+
+                    <ion-item-divider></ion-item-divider>
+
+                    <ion-list *ngFor="let event of events$ | async">
+                      <ion-item-divider *ngIf="event.metadata.timeStartFormatted">
+                          <ion-label>
+                              {{ event.metadata.timeStartFormatted }}
+                          </ion-label>
+                      </ion-item-divider>
+
+                      <ion-item (click)="select(event)">
+                          <ion-avatar slot="start">
+                              <img *ngIf="images[event.bucketPath]" [src]="images[event.bucketPath].small">
+                          </ion-avatar>
+                          <ion-label>
+                              {{ event.metadata.timeStartDate | date:'shortTime' }}
+                          </ion-label>
+                          <ion-label>
+                              <h2>{{ event.name }}</h2>
+                              <p>{{ event.tagline }}</p>
+                          </ion-label>
+                      </ion-item>
+                    </ion-list>
+
+                    <ion-item-divider></ion-item-divider>
+                </ion-item-group>
+            </ion-list>
+        </div>
+    </form>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button color="secondary" mode="md" (click)="addEvent()">
+            <ion-icon name="md-add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

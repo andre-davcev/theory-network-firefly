@@ -3,7 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 import { StateUserStream, StateUser, ActionUserSubscriptionToggle } from '@firefly/core';
-import { StreamCluster } from '@firefly/cloud';
+import { StreamInterest } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { takeUntil } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { takeUntil } from 'rxjs/operators';
 
 export class PageStream extends BaseComponent implements OnInit
 {
-    @Select(StateUser.stream)    stream$: Observable<Array<StreamCluster>>;
+    @Select(StateUser.stream)    stream$: Observable<Array<StreamInterest>>;
     @Select(StateStorage.images) images$: Observable<Record<string, StorageImage>>;
 
     public images: Record<string, StorageImage>;
@@ -35,7 +35,7 @@ export class PageStream extends BaseComponent implements OnInit
         );
     }
 
-    public toggle(subscribed: boolean, stream: StreamCluster): void
+    public toggle(subscribed: boolean, stream: StreamInterest): void
     {
         this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, false));
     }

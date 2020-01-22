@@ -1,5 +1,5 @@
 export * from './alert.service';
-export * from './clusters.service';
+export * from './interests.service';
 export * from './events.service';
 export * from './icons.service';
 export * from './images.service';

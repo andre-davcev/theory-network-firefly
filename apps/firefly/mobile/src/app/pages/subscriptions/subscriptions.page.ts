@@ -6,7 +6,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { StateMobile, Pages, ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 import { MenuController } from '@ionic/angular';
-import { StateUserSubscriptions, ActionUserSubscriptionToggle, ActionUserSubscriptionsReset, ActionUserWatchSubscriptionsStatus, ActionClusterSetId, StateUserClusters, ActionUserClustersGetData } from '@firefly/core';
+import { StateUserSubscriptions, ActionUserSubscriptionToggle, ActionUserSubscriptionsReset, ActionUserWatchSubscriptionsStatus, ActionInterestSetId, StateUserInterests, ActionUserInterestsGetData } from '@firefly/core';
 import { Subscription } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage } from '@theory/firebase';
@@ -25,7 +25,7 @@ export class PageSubscriptions extends BaseComponent implements OnInit
     @Select(StateUserSubscriptions.data()) subscriptions$: Observable<Array<Subscription>>;
     @Select(StateStorage.images)           images$:   Observable<Record<string, StorageImage>>;
     @Select(StateMobile.menuOpen)          menuOpen$: Observable<boolean>;
-    @Select(StateUserClusters.initialized()) clustersInitialized$: Observable<boolean>;
+    @Select(StateUserInterests.initialized()) interestsInitialized$: Observable<boolean>;
 
     public images: Record<string, StorageImage> = {};
 
@@ -64,7 +64,7 @@ export class PageSubscriptions extends BaseComponent implements OnInit
 
     public select(subscription: Subscription): void
     {
-      this.clustersInitialized$.
+      this.interestsInitialized$.
         pipe
         (
             take(1),
@@ -74,12 +74,12 @@ export class PageSubscriptions extends BaseComponent implements OnInit
                     this.store.dispatch(new ActionMobileLoadingShow()).
                     pipe
                     (
-                        switchMap(() => this.store.dispatch(new ActionUserClustersGetData())),
+                        switchMap(() => this.store.dispatch(new ActionUserInterestsGetData())),
                         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
                     )
             ),
             switchMap(() =>
-            this.store.dispatch(new Navigate([Pages.AssetCluster], {id: subscription.id}, {state: {isClusterDetail:true}}))
+            this.store.dispatch(new Navigate([Pages.AssetInterest], {id: subscription.id}, {state: {isInterestDetail:true}}))
             )
         ).subscribe();
     }

@@ -1,0 +1,25 @@
+import { Interest } from '@firefly/cloud';
+import { CoreEnum } from '@theory/core';
+
+import { ActionsInterest } from './interest.actions.enum';
+import { firestore } from 'firebase/app';
+import { MockIconPath } from '@firefly/core/mocks';
+
+export class ActionInterestReset  { static readonly type = ActionsInterest.Reset;   constructor() { } }
+export class ActionInterestDirty  { static readonly type = ActionsInterest.Dirty;   constructor() { } }
+export class ActionInterestGet    { static readonly type = ActionsInterest.Get;     constructor(public id: string) { } }
+export class ActionInterestSet    { static readonly type = ActionsInterest.Set;     constructor(public snapshot: firestore.DocumentSnapshot, public data?: Interest) { } }
+export class ActionInterestPatch  { static readonly type = ActionsInterest.Patch;   constructor(public partial: Partial<Interest>, public save: boolean = false) { } }
+export class ActionInterestCreate { static readonly type = ActionsInterest.Create;  constructor() { } }
+export class ActionInterestUpdate { static readonly type = ActionsInterest.Update;  constructor() { } }
+export class ActionInterestSave   { static readonly type = ActionsInterest.Save;    constructor() { } }
+export class ActionInterestDelete { static readonly type = ActionsInterest.Delete;  constructor() { } }
+export class ActionInterestSetId  { static readonly type = ActionsInterest.SetId;   constructor(public id: string = CoreEnum.IdNew) { } }
+
+export class ActionInterestIconClear   { static readonly type = ActionsInterest.IconClear;   constructor() { } }
+export class ActionInterestIconUriSet  { static readonly type = ActionsInterest.IconUriSet;  constructor(public dataUri: string) { } }
+export class ActionInterestIconPathSet { static readonly type = ActionsInterest.IconPathSet; constructor(public bucketPath: string = MockIconPath) { } }
+export class ActionInterestIconCreate  { static readonly type = ActionsInterest.IconCreate;  constructor() { } }
+
+export class ActionInterestEventsGet   { static readonly type = ActionsInterest.EventsGet; constructor() { } }
+export class ActionInterestEventsReset { static readonly type = ActionsInterest.EventsReset; constructor() { }}

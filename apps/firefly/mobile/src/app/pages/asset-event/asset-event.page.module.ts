@@ -9,7 +9,7 @@ import { PageAssetEvent } from './asset-event.page';
 import { RoutesPageAssetEvent } from './asset-event.page.routes';
 import { PageEventLocation, ModulePageEventLocation } from '../event-location';
 import { PageImageSelector, ModulePageImageSelector } from '../image-selector';
-import { ModulePageAssetsClusters } from '../assets-clusters';
+import { ModulePageAssetsInterests } from '../assets-interests';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 @NgModule
@@ -24,7 +24,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
         ModuleComponentItemImage,
         RouterModule.forChild(RoutesPageAssetEvent),
         ModulePageEventLocation,
-        ModulePageAssetsClusters,
+        ModulePageAssetsInterests,
         ModulePageImageSelector,
         NgxsFormPluginModule
     ],

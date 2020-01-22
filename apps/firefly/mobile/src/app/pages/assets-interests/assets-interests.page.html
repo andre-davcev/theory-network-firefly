@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title color="dark">
+            {{ (modal ? 'page.assets-interests.title-modal' : 'page.assets-interests.title') | translate}}
+        </ion-title>
+
+        <ion-buttons slot="start">
+            <ion-back-button *ngIf="!modal" color="dark"></ion-back-button>
+
+            <ion-button *ngIf="modal" color="dark" (click)="cancel()">
+                {{ 'general.cancel' | translate }}
+            </ion-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+            <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+                <ion-icon name="person" color="dark" size="large"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  	<ion-list lines="none" elevation="1">
+        <ion-item *ngFor="let interest of list$ | async"
+                  (click)="select(interest)">
+            <ion-avatar slot="start">
+                <img *ngIf="images[interest.bucketPath]" [src]="images[interest.bucketPath].small">
+            </ion-avatar>
+
+            <ion-label>
+                <h2>{{interest.name}}</h2>
+                <p>{{interest.tagline}}</p>
+            </ion-label>
+
+            <ion-icon *ngIf="!modal" name="arrow-forward" item-right></ion-icon>
+        </ion-item>
+    </ion-list>
+      <div *ngIf="!(found$ | async)" class="container">
+        <p>Create a new Interest?</p>
+      </div>
+
+    <ion-fab *ngIf="!modal" slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button color="secondary" mode="md" (click)="add()">
+            <ion-icon name="md-add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

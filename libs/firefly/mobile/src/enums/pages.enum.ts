@@ -10,7 +10,7 @@ export enum Pages
     Publisher     = 'publisher',
     User          = 'user',
 
-    AssetCluster = 'asset-cluster',
+    AssetInterest = 'asset-interest',
     AssetEvent   = 'asset-event',
     AssetPlace   = 'asset-image',
     AssetIcon    = 'asset-icon',
@@ -22,7 +22,7 @@ export enum Pages
     AssetsBeacons  = 'assets-beacons',
     AssetsPlaces   = 'assets-places',
     AssetsEvents   = 'assets-events',
-    AssetsClusters = 'assets-clusters',
+    AssetsInterests = 'assets-interests',
 
     EventLocation = 'event-location',
 

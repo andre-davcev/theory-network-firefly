@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 
-import { StreamCluster } from '@firefly/cloud';
+import { StreamInterest } from '@firefly/cloud';
 import { ServiceStreams } from '@firefly/core/services';
 import { StateChild } from '@theory/ngxs';
 
@@ -15,11 +15,11 @@ import {
     ActionUserStreamSync,
     ActionUserStreamSetData
 } from './user-stream.actions';
-import { StateClusterOptions } from '../../document/cluster/cluster.state.options';
+import { StateInterestOptions } from '../../document/interest/interest.state.options';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
 
-export class StateUserStream extends StateChild<StreamCluster, StateUserStreamModel>
+export class StateUserStream extends StateChild<StreamInterest, StateUserStreamModel>
 {
     constructor
     (
@@ -39,7 +39,7 @@ export class StateUserStream extends StateChild<StreamCluster, StateUserStreamMo
                 ActionSync    : ActionUserStreamSync
             },
             service,
-            StateClusterOptions.name as string
+            StateInterestOptions.name as string
         );
     }
 

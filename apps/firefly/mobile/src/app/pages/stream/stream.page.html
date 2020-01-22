@@ -1,15 +1,15 @@
 <ion-content>
   <ion-list *ngIf="images">
-    <ion-item lines="none" *ngFor="let cluster of stream$ | async; let i = index">
-        <ion-card *ngIf="images[cluster.bucketPath]" elevation="1">
+    <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">
+        <ion-card *ngIf="images[interest.bucketPath]" elevation="1">
 
             <div >
-              <img class="image-cnt" [src]="images[cluster.bucketPath].medium">
+              <img class="image-cnt" [src]="images[interest.bucketPath].medium">
             </div>
 
             <ion-card-header>
-              <ion-card-title class="name">|{{ cluster.name }}|</ion-card-title>
-              <ion-card-subtitle class="tagline">{{ cluster.tagline }}</ion-card-subtitle>
+              <ion-card-title class="name">|{{ interest.name }}|</ion-card-title>
+              <ion-card-subtitle class="tagline">{{ interest.tagline }}</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content fxLayout="column"
@@ -22,22 +22,22 @@
                     <mat-expansion-panel-header [expandedHeight]="'0px'" [collapsedHeight]="'20px'">
                       <mat-panel-description  class="mat-expansion-panel-header-description">
                       <!--span class="app-description"-->
-                        <div *ngIf="!currentlyOpenedItems[i]" class="app-description">{{ cluster.description }} | {{ currentlyOpenedItemIndex === i ? 'Close' : 'Open' }}</div>
+                        <div *ngIf="!currentlyOpenedItems[i]" class="app-description">{{ interest.description }} | {{ currentlyOpenedItemIndex === i ? 'Close' : 'Open' }}</div>
                       <!--/!--span-->
                     </mat-panel-description>
                     </mat-expansion-panel-header>
 
                     <span class="app-description">
-                      {{ cluster.description }}
+                      {{ interest.description }}
                     </span>
 
                   </mat-expansion-panel>
 
                 </mat-accordion>
 
-                <app-icon-subscribe [subscribed]="cluster.subscribed"
-                                    [count]="cluster.subscriberCount + (cluster.on ? 1 : 0)"
-                                    (clicked)="toggle($event, cluster)">
+                <app-icon-subscribe [subscribed]="interest.subscribed"
+                                    [count]="interest.subscriberCount + (interest.on ? 1 : 0)"
+                                    (clicked)="toggle($event, interest)">
                 </app-icon-subscribe>
             </ion-card-content>
           </ion-card>

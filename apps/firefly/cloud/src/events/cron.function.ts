@@ -13,8 +13,8 @@ onRun(async (context: EventContext) =>
     cron hourly 55 mins past hour
     find hour past current time
     query events whose notifiedDateTime === generatedHourlyTimestamp
-    for each cluster id
-        query users where clusterId in user.subscriptions
+    for each interest id
+        query users where interestId in user.subscriptions
         for each user
             create alert with alert.userId and with alert.tokens
     set event.timeNotifyComplete = true

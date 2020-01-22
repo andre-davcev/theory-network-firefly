@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { ServiceFirestore } from '@theory/firebase';
-import { StreamCluster } from '@firefly/cloud';
+import { StreamInterest } from '@firefly/cloud';
 import { FormBuilder } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceStreams extends ServiceFirestore<StreamCluster>
+export class ServiceStreams extends ServiceFirestore<StreamInterest>
 {
     constructor
     (

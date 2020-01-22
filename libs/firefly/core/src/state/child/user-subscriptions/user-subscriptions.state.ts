@@ -15,7 +15,7 @@ import {
     ActionUserSubscriptionsSetData
 } from './user-subscriptions.actions';
 import { StateChild } from '@theory/ngxs';
-import { StateClusterOptions } from '../../document/cluster/cluster.state.options';
+import { StateInterestOptions } from '../../document/interest/interest.state.options';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 
@@ -41,7 +41,7 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
                 ActionSync    : ActionUserSubscriptionsSync
             },
             service,
-            StateClusterOptions.name as string
+            StateInterestOptions.name as string
         );
     }
 

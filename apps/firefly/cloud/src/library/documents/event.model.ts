@@ -9,7 +9,7 @@ export interface Event extends FirebaseDocument
     bucketPath     : string;
     cityId         : string;
     city           : Location;
-    clusters       : Array<string>;
+    interests      : Array<string>;
     description    : string;
     geopoint       : firestore.GeoPoint;
     name           : string;
