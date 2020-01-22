@@ -12,8 +12,6 @@ export interface User extends FirebaseDocument
     geopoint            : firestore.GeoPoint;
     phoneNumber         : string;
     providerId          : string;
-    roleAdmins          : Array<string>;
-    roleEditors         : Array<string>;
     subscriptions       : Array<string>;
     subscriptionsStatus : Record<string, SubscriptionPartial>;
     tokens              : Array<string>;
