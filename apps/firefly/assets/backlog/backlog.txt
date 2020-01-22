@@ -77,7 +77,7 @@ security - prevent hackers from writing to database too quickly
 *streams (list) - minor styling tweaks
 *streams (list) - add heart subscribe animation
 +streams (list) - add ellipses to description if more than 2 lines (implemented with 1 line, still working on 2 line solution)
-streams (list) - on card expand fetch 5 upcoming events with spinner
++streams (list) - on card expand fetch 5 upcoming events with spinner
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (state) - user.state.ts uncomment interest.userId !== userId
 streams (detail) - implement stream detail screen
