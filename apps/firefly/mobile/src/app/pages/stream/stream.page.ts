@@ -6,7 +6,8 @@ import { StateUserStream, StateUser, ActionUserSubscriptionToggle } from '@firef
 import { StreamInterest } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take, switchMap } from 'rxjs/operators';
+import { ActionMobileAuthSelect } from '@firefly/mobile';
 
 @Component
 ({
@@ -17,8 +18,9 @@ import { takeUntil } from 'rxjs/operators';
 
 export class PageStream extends BaseComponent implements OnInit
 {
-    @Select(StateUser.stream)    stream$: Observable<Array<StreamInterest>>;
-    @Select(StateStorage.images) images$: Observable<Record<string, StorageImage>>;
+    @Select(StateUser.stream)        stream$:        Observable<Array<StreamInterest>>;
+    @Select(StateStorage.images)     images$:        Observable<Record<string, StorageImage>>;
+    @Select(StateUser.authenticated) authenticated$: Observable<boolean>;
 
     public images: Record<string, StorageImage>;
     public currentlyOpenedItemIndex = -1;
@@ -37,17 +39,30 @@ export class PageStream extends BaseComponent implements OnInit
 
     public toggle(subscribed: boolean, stream: StreamInterest): void
     {
-        this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, false));
+        this.authenticated$.
+        pipe
+        (
+            take(1),
+            switchMap((authenticated: boolean) =>
+                authenticated ?
+                    this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, false)) :
+                    this.store.dispatch(new ActionMobileAuthSelect())
+            )
+        ).
+        subscribe();
     }
 
-    setOpened(itemIndex) {
-      this.currentlyOpenedItemIndex = itemIndex;
-      this.currentlyOpenedItems[itemIndex] = true;
+    public setOpened(itemIndex): void
+    {
+        this.currentlyOpenedItemIndex = itemIndex;
+        this.currentlyOpenedItems[itemIndex] = true;
     }
 
-    setClosed(itemIndex) {
-      if(this.currentlyOpenedItemIndex === itemIndex) {
-        this.currentlyOpenedItemIndex = -1;
-      }
+    public setClosed(itemIndex): void
+    {
+        if(this.currentlyOpenedItemIndex === itemIndex)
+        {
+            this.currentlyOpenedItemIndex = -1;
+        }
     }
 }

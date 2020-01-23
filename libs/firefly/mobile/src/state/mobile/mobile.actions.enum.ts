@@ -5,5 +5,6 @@ export enum ActionsMobile
     Toast        = '[Mobile] Toast',
     MenuOpened   = '[Mobile] Menu Opened',
     MenuClosed   = '[Mobile] Menu Closed',
-    NavigateRoot = '[Mobile] Navigate Root'
+    NavigateRoot = '[Mobile] Navigate Root',
+    AuthSelect   = '[Mobile] Auth Select'
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Platform, MenuController, NavController } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { from } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, switchMap } from 'rxjs/operators';
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import { RouterNavigation, Navigate } from '@ngxs/router-plugin';
 
@@ -51,7 +51,6 @@ export class ComponentApp
     public go(page: Pages): void
     {
         this.menu.close();
-        this.menuClosed();
 
         this.store.dispatch(new ActionMobileNavigateRoot(page));
     }
@@ -59,9 +58,13 @@ export class ComponentApp
     public logout(): void
     {
         this.menu.close();
-        this.menuClosed();
-        this.store.dispatch(new ActionUserLogout());
-        this.store.dispatch(new Navigate([Pages.Login]));
+
+        this.store.dispatch(new ActionUserLogout()).pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new Navigate([Pages.Login]))
+            )
+        );
     }
 
     public menuOpened(): void

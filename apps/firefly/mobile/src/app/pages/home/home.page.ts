@@ -6,7 +6,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
-import { Pages, ActionMobileNavigateRoot } from '@firefly/mobile';
+import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
@@ -108,48 +108,8 @@ export class PageHome extends BaseComponent
             switchMap((authenticated: boolean) =>
                 authenticated ?
                     from(this.menu.open()) :
-                    this.authSelect()
+                    this.store.dispatch(new ActionMobileAuthSelect())
             )
         ).subscribe();
-    }
-
-    private authOpen(page: Pages.Login | Pages.SignUp): void
-    {
-
-    }
-
-    private authSelect(): Observable<any>
-    {
-        return this.translate.
-        get
-        ([
-            'general.authenticate',
-            'general.login',
-            'general.signup'
-        ]).
-        pipe
-        (
-            switchMap((translations: Record<string, string>) =>
-                from(this.actionSheet.create
-                  ({
-                      header: translations['general.authenticate'],
-
-                      buttons:
-                      [
-                          {
-                              text    : translations['general.login'],
-                              handler : () => this.authOpen(Pages.Login)
-                          },
-                          {
-                              text    : translations['general.signup'],
-                              handler : () => this.authOpen(Pages.SignUp)
-                          }
-                      ]
-                  }))
-            ),
-            switchMap((actionSheet: HTMLIonActionSheetElement) =>
-                actionSheet.present()
-            )
-        );
     }
 }
