@@ -27,7 +27,7 @@ export class ComponentIconSubscribe
 
     public toggle(): void
     {
-        this.subscribed = !this.subscribed;
+        // this.subscribed = !this.subscribed;
 
         this.clicked.next(this.subscribed);
     }

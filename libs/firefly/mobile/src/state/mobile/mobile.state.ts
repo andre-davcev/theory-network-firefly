@@ -8,15 +8,17 @@ import {
     ActionMobileLoadingHide,
     ActionMobileMenuOpened,
     ActionMobileMenuClosed,
-    ActionMobileNavigateRoot
+    ActionMobileNavigateRoot,
+    ActionMobileAuthSelect
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
-import { LoadingController, ToastController, NavController } from '@ionic/angular';
+import { LoadingController, ToastController, NavController, ActionSheetController, MenuController } from '@ionic/angular';
 import { switchMap, tap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
 import { NgZone } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @State<StateMobileModel>(StateMobileOptions)
 
@@ -33,10 +35,12 @@ export class StateMobile
 
     constructor
     (
-        private loading : LoadingController,
-        private toast   : ToastController,
-        private nav     : NavController,
-        private ngZone  : NgZone
+        private loading     : LoadingController,
+        private toast       : ToastController,
+        private nav         : NavController,
+        private actionSheet : ActionSheetController,
+        private translate   : TranslateService,
+        private ngZone      : NgZone
     ) { }
 
     @Action(ActionMobileLoadingShow)
@@ -122,6 +126,42 @@ export class StateMobile
                     pagesRoot,
                     pageRoot
                 })
+            )
+        );
+    }
+
+    @Action(ActionMobileAuthSelect)
+    authSelect({ dispatch }: StateContext<StateMobileModel>)
+    {
+        return this.translate.
+        get
+        ([
+            'general.authenticate',
+            'general.login',
+            'general.signup'
+        ]).
+        pipe
+        (
+            switchMap((translations: Record<string, string>) =>
+                from(this.actionSheet.create
+                  ({
+                      header: translations['general.authenticate'],
+
+                      buttons:
+                      [
+                          {
+                              text    : translations['general.login'],
+                              // handler : () => this.authOpen(Pages.Login)
+                          },
+                          {
+                              text    : translations['general.signup'],
+                              // handler : () => this.authOpen(Pages.SignUp)
+                          }
+                      ]
+                  }))
+            ),
+            switchMap((actionSheet: HTMLIonActionSheetElement) =>
+                actionSheet.present()
             )
         );
     }
