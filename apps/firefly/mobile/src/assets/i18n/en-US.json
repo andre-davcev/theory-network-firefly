@@ -17,6 +17,9 @@
   "general.publish"        : "Publish",
   "general.update"         : "Update",
   "general.subscribers"    : "Subscribers",
+  "general.login"          : "Login",
+  "general.signup"         : "Sign Up",
+  "general.authenticate"   : "Authenticate",
 
   "menu.title"                : "Menu",
   "menu.home"                 : "Home",

@@ -17,20 +17,19 @@ alerts (funtions create) - send push notifications for each alert token
 +auth - on unauthenticated login save city so you can grab city stream
 +auth - hide home header icons when not authed (except menu)
 +auth - logout should follow unauthenticated workflow
-*auth - create new empty user
 *auth - when unauthenticated and click subscribe/menu show action sheet (Sign Up, Login)
 *sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
-*sign-up (slide 2) - email/password
-*sign-up (slide 3) - Welcome to the Firefly community!
-*sign-up (slide 4) - Subscribe to different interests in your area
-*sign-up (slide 5) - Receive notifications when new events are added to your interests
-*sign-up (slide 6) - Easily get directions or add events to your calendar
-*sign-up (slide 7) - Manage your subscriptions with ease
-*sign-up (slide 8) - Contribute to the community by publishing your own interests and events
+sign-up (slide 2) - email/password
+sign-up (slide 3) - Welcome to the Firefly community!
+sign-up (slide 4) - Subscribe to different interests in your area
+sign-up (slide 5) - Receive notifications when new events are added to your interests
+sign-up (slide 6) - Easily get directions or add events to your calendar
+sign-up (slide 7) - Manage your subscriptions with ease
+sign-up (slide 8) - Contribute to the community by publishing your own interests and events
 *slides (intro 1) - Where life comes to you
-*slides (intro 2) - Subscribe to community interests
-*slides (intro 3) - Be notified when new events are posted to your interests
-*slides (intro 4) - Add these events to you calendar and get directions
+slides (intro 2) - Subscribe to community interests
+slides (intro 3) - Be notified when new events are posted to your interests
+slides (intro 4) - Add these events to you calendar and get directions
 interests (all) - migrate clusters collection to interests
 interests (detail) - required fields styling (icon/popover)
 interests (detail) - refine create/edit flows
@@ -75,8 +74,8 @@ security - upload and test security rules
 security - create storage security rules
 security - prevent hackers from querying past limit size
 security - prevent hackers from writing to database too quickly
-*streams (list) - minor styling tweaks
-*streams (list) - add heart subscribe animation
+streams (list) - minor styling tweaks
+streams (list) - add heart subscribe animation
 +streams (list) - add ellipses to description if more than 2 lines (implemented with 1 line, still working on 2 line solution)
 +streams (list) - on card expand fetch 5 upcoming events with spinner
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions

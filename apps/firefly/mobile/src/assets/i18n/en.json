@@ -21,6 +21,9 @@
   "general.events"         : "Events",
   "general.icons"          : "Icons",
   "general.images"         : "Images",
+  "general.login"          : "Login",
+  "general.signup"         : "Sign Up",
+  "general.authenticate"   : "Authenticate",
 
   "menu.title"           : "Menu",
   "menu.home"            : "Home",
