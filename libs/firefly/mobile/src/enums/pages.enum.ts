@@ -1,7 +1,8 @@
 export enum Pages
 {
-    Login = 'login',
-    Home  = 'home',
+    Login  = 'login',
+    SignUp = 'sign-up',
+    Home   = 'home',
     Stream = 'stream',
     Alert  = 'alerts',
 

@@ -1,6 +1,6 @@
 import { User as FirebaseUser } from 'firebase/app';
 import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ActionSheetController } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
@@ -10,8 +10,10 @@ import { Pages, ActionMobileNavigateRoot } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { StateUserAlerts, StateUser } from '@firefly/core';
+import { take, filter, switchMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component
 ({
@@ -22,19 +24,22 @@ import { StateUserAlerts, StateUser } from '@firefly/core';
 
 export class PageHome extends BaseComponent
 {
-    @Select(StateMobile.menuOpen)      menuOpen$   : Observable<boolean>;
-    @Select(StateMobile.pageAlerts)    pageAlerts$ : Observable<boolean>;
-    @Select(StateMobile.pageStream)    pageStream$ : Observable<boolean>;
-    @Select(StateUserAlerts.unread)    unread$     : Observable<number>;
-    @Select(StateUserAlerts.hasUnread) hasUnread$  : Observable<boolean>;
-    @Select(StateUser.authenticated) authenticated$ : Observable<boolean>;
-    @Select(StateUser.authData)        authData$   : Observable<FirebaseUser>;
+    @Select(StateMobile.menuOpen)      menuOpen$      : Observable<boolean>;
+    @Select(StateMobile.pageAlerts)    pageAlerts$    : Observable<boolean>;
+    @Select(StateMobile.pageStream)    pageStream$    : Observable<boolean>;
+    @Select(StateUserAlerts.unread)    unread$        : Observable<number>;
+    @Select(StateUserAlerts.hasUnread) hasUnread$     : Observable<boolean>;
+    @Select(StateUser.authenticated)   authenticated$ : Observable<boolean>;
+    @Select(StateUser.authData)        authData$      : Observable<FirebaseUser>;
+
     public Pages : any = Pages;
 
     constructor
     (
-        private menu   : MenuController,
-        private store  : Store
+        private menu        : MenuController,
+        private actionSheet : ActionSheetController,
+        private store       : Store,
+        private translate   : TranslateService
     )
     {
         super();
@@ -95,8 +100,56 @@ export class PageHome extends BaseComponent
 */
     }
 
-    public menuOpen()
+    public menuOpen(): void
     {
-        this.menu.open();
+        this.authenticated$.pipe
+        (
+            take(1),
+            switchMap((authenticated: boolean) =>
+                authenticated ?
+                    from(this.menu.open()) :
+                    this.authSelect()
+            )
+        ).subscribe();
+    }
+
+    private authOpen(page: Pages.Login | Pages.SignUp): void
+    {
+
+    }
+
+    private authSelect(): Observable<any>
+    {
+        return this.translate.
+        get
+        ([
+            'general.authenticate',
+            'general.login',
+            'general.signup'
+        ]).
+        pipe
+        (
+            switchMap((translations: Record<string, string>) =>
+                from(this.actionSheet.create
+                  ({
+                      header: translations['general.authenticate'],
+
+                      buttons:
+                      [
+                          {
+                              text    : translations['general.login'],
+                              handler : () => this.authOpen(Pages.Login)
+                          },
+                          {
+                              text    : translations['general.signup'],
+                              handler : () => this.authOpen(Pages.SignUp)
+                          }
+                      ]
+                  }))
+            ),
+            switchMap((actionSheet: HTMLIonActionSheetElement) =>
+                actionSheet.present()
+            )
+        );
     }
 }

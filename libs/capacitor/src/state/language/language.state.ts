@@ -5,8 +5,6 @@ import { catchError, switchMap, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { Plugins } from '@capacitor/core';
 
-import { PlatformEnum } from '@theory/ionic';
-
 import { StateLanguageModel } from './language.state.model';
 import { StateLanguageOptions } from './language.state.options';
 import { ActionLanguageInitialize, ActionLanguageGet, ActionLanguageSet } from './language.actions';
