@@ -6,8 +6,14 @@ app (toast) - update styling
 app (updates) - on quick toggles/updates stack updates and put spinner
 app (keyboard) - fix ios ionic/capacitor keyboard bug
 *app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
-*app (empty) - empty list component
-*app (all) - empty list pages (alerts, stream, subscriptions interests, events, icons, images)
+empty (component) - empty list component
+empty (alerts) - Looks like you have no notifications right now. Subscribe to new Interests to find new events in your area.
+empty (stream) - Our swarm of fireflies are busy building your Interest recommendations. Check back later!
+empty (subscriptions) - You have no Subscriptions right now. Go to the home Discover Interests screen to find new interests in your area!
+empty (interests) - Help support the Firefly community by publishing your own public Interests here.
+empty (events) - Looks like you haven't created any Events yet. Feel free to create public or private Events to be added to Interest streams.
+empty (icons) - You haven't published any icons yet. Icons are used as branding for your Interests.
+empty (images) - You haven't published any images yet. Images can be used for event notifcations as well as the main image on the Discover Interests screen.
 alerts (detail) - implement detail screen
 alerts (list) - on click go show menu (add to calendar/go to map)
 alerts (list) - on click navigate to detail
@@ -17,7 +23,8 @@ alerts (funtions create) - send push notifications for each alert token
 +auth - on unauthenticated login save city so you can grab city stream
 +auth - hide home header icons when not authed (except menu)
 +auth - logout should follow unauthenticated workflow
-*auth - when unauthenticated and click subscribe/menu show action sheet (Sign Up, Login)
+*auth - login screen
+*auth - sign up screen
 *sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
 sign-up (slide 2) - email/password
 sign-up (slide 3) - Welcome to the Firefly community!
