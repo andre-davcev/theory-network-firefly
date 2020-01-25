@@ -26,7 +26,9 @@ import {
     ActionInterestIconUriSet,
     ActionInterestIconPathSet,
     ActionInterestEventsGet,
-    ActionInterestEventsReset
+    ActionInterestEventsReset,
+    ActionInterestSetIdAnonymous,
+    ActionInterestEventsGetAnonymous
 } from './interest.actions';
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, StateUserInterests, ActionUserInterestsSync } from '../..//query/user-interests';
 import { ActionUserStreamRemove } from '../../child/user-stream/user-stream.actions';
@@ -37,6 +39,7 @@ import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
 import { StateLanguage } from '@theory/capacitor';
+import { StateUserStream } from '@firefly/core/state/child/user-stream';
 
 @State<StateInterestModel>(StateInterestOptions)
 
@@ -172,6 +175,15 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         return dispatch(new ActionInterestSet(snapshot, data));
     }
 
+    @Action(ActionInterestSetIdAnonymous)
+    setIdAnonymous({ dispatch }: StateContext<StateInterestModel>, { id }: ActionInterestSetIdAnonymous)
+    {
+        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserStream.snapshotLookup())[id];
+        const data: Interest = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
+
+        return dispatch(new ActionInterestSet(snapshot, data));
+    }
+
     @Action(ActionInterestIconClear)
     imageClear({ dispatch }: StateContext<StateInterestModel>)
     {
@@ -249,7 +261,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestEventsGet)
     eventsGet({ patchState, getState, dispatch}: StateContext<StateInterestModel>)
     {
-        //const interest: Interest  = StateInterest.dataState(getState());
         const userId: string = this.store.selectSnapshot(StateUser.id());
         const query: Query   = userId == null ? undefined : this.service.collection('events').ref
           .where('userId', '==', userId).where('interests', 'array-contains', StateInterest.idState(getState()));
@@ -275,16 +286,76 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
               const event: Event = document.data() as Event;
 
               timeStart = new Date(event.timeStart);
-                timeStartFormatted = timeStart.toLocaleDateString(language, options);
+              timeStartFormatted = timeStart.toLocaleDateString(language, options);
 
-                if(event.metadata === undefined)
-                  event.metadata = {};
+              if(event.metadata === undefined)
+                event.metadata = {};
 
-                if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
-                  event.metadata.timeStartFormatted = timeStartFormatted;
+              if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
+                event.metadata.timeStartFormatted = timeStartFormatted;
 
-                event.metadata.timeStartDate = timeStart;
-                timeStartPrevious = timeStart;
+              event.metadata.timeStartDate = timeStart;
+              timeStartPrevious = timeStart;
+
+              events.push(event);
+            })
+          }),
+          tap(() =>
+            patchState
+            ({
+              events
+            })
+          ),
+          map(() =>
+            events.map((item: Event) => item.bucketPath)
+          ),
+          switchMap((bucketPaths: Array<string>) =>
+              dispatch(new ActionStorageUrlsGet(bucketPaths, ImageSize.Small))
+          )
+      )
+    }
+
+    @Action(ActionInterestEventsGetAnonymous)
+    eventsGetAnonymous({ patchState, getState, dispatch}: StateContext<StateInterestModel>)
+    {
+        const currentDate = Date();
+        const query: Query   = this.service.collection('events').ref
+          .where('interests', 'array-contains', StateInterest.idState(getState()))
+          .where('timeStart', "<", currentDate.toString())
+          .orderBy('timeStart', 'asc')
+          .limit(5);
+        var events: Event[] = new Array();
+
+        return from(query.get()).pipe
+        (
+          map((snapshot: firestore.QuerySnapshot) =>
+            snapshot.docs
+          ),
+          tap((page: Array<firestore.QueryDocumentSnapshot>) =>
+          {
+            const language: string = this.store.selectSnapshot(StateLanguage.language);
+            const options: any = { weekday: 'long',
+              year: 'numeric', month: 'long', day: 'numeric'};
+
+            let timeStart: Date;
+            let timeStartPrevious: Date;
+            let timeStartFormatted: string;
+
+            page.forEach((document: firestore.QueryDocumentSnapshot) =>
+            {
+              const event: Event = document.data() as Event;
+
+              timeStart = new Date(event.timeStart);
+              timeStartFormatted = timeStart.toLocaleDateString(language, options);
+
+              if(event.metadata === undefined)
+                event.metadata = {};
+
+              if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
+                event.metadata.timeStartFormatted = timeStartFormatted;
+
+              event.metadata.timeStartDate = timeStart;
+              timeStartPrevious = timeStart;
 
               events.push(event);
             })
