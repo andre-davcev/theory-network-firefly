@@ -16,8 +16,8 @@
                               fxLayoutGap="10px">
                 <mat-accordion>
 
-                  <mat-expansion-panel  (opened)="setOpened(i)"
-                  (closed)="setClosed(i)"  class="mat-elevation-z0" class="mat-elevation-z0"  hideToggle>
+                  <mat-expansion-panel  (opened)="setOpened(i, interest)"
+                  (closed)="setClosed(i)"  class="mat-elevation-z0" class="mat-elevation-z0">
                     <mat-expansion-panel-header [expandedHeight]="'0px'" [collapsedHeight]="'20px'">
                       <mat-panel-description  class="mat-expansion-panel-header-description">
                       <!--span class="app-description"-->
@@ -28,6 +28,27 @@
 
                     <span class="app-description">
                       {{ interest.description }}
+                      <ion-spinner class="spinner" *ngIf="spinner[i]" name="crescent"></ion-spinner>
+                      <ion-list *ngFor="let event of interestEvents[i]">
+                        <ion-item-divider *ngIf="event.metadata.timeStartFormatted">
+                            <ion-label>
+                                {{ event.metadata.timeStartFormatted }}
+                            </ion-label>
+                        </ion-item-divider>
+
+                        <ion-item (click)="select(event)">
+                            <ion-avatar slot="start">
+                                <img *ngIf="images[event.bucketPath]" [src]="images[event.bucketPath].small">
+                            </ion-avatar>
+                            <ion-label>
+                                {{ event.metadata.timeStartDate | date:'shortTime' }}
+                            </ion-label>
+                            <ion-label>
+                                <h2>{{ event.name }}</h2>
+                                <p>{{ event.tagline }}</p>
+                            </ion-label>
+                        </ion-item>
+                      </ion-list>
                     </span>
 
                   </mat-expansion-panel>

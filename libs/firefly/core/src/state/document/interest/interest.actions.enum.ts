@@ -11,6 +11,8 @@ export enum ActionsInterest
     Save   = '[Interest] Save',
     Delete = '[Interest] Delete',
 
+    SetIdAnonymous = '[Interest] SetIdAnonymous',
+
     IconClear   = '[Interest] Icon Clear',
     IconUriSet  = '[Interest] Icon Uri Set',
     IconPathSet = '[Interest] Icon Path Set',
@@ -18,4 +20,6 @@ export enum ActionsInterest
 
     EventsGet = '[Interest] Events Get',
     EventsReset = '[Interest] Events Reset',
+
+    EventsGetAnonymous = '[Interest] Events Get Anonymous',
 }

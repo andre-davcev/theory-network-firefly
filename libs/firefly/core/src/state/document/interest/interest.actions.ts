@@ -16,6 +16,8 @@ export class ActionInterestSave   { static readonly type = ActionsInterest.Save;
 export class ActionInterestDelete { static readonly type = ActionsInterest.Delete;  constructor() { } }
 export class ActionInterestSetId  { static readonly type = ActionsInterest.SetId;   constructor(public id: string = CoreEnum.IdNew) { } }
 
+export class ActionInterestSetIdAnonymous { static readonly type = ActionsInterest.SetIdAnonymous;   constructor(public id: string = CoreEnum.IdNew) { } }
+
 export class ActionInterestIconClear   { static readonly type = ActionsInterest.IconClear;   constructor() { } }
 export class ActionInterestIconUriSet  { static readonly type = ActionsInterest.IconUriSet;  constructor(public dataUri: string) { } }
 export class ActionInterestIconPathSet { static readonly type = ActionsInterest.IconPathSet; constructor(public bucketPath: string = MockIconPath) { } }
@@ -23,3 +25,5 @@ export class ActionInterestIconCreate  { static readonly type = ActionsInterest.
 
 export class ActionInterestEventsGet   { static readonly type = ActionsInterest.EventsGet; constructor() { } }
 export class ActionInterestEventsReset { static readonly type = ActionsInterest.EventsReset; constructor() { }}
+
+export class ActionInterestEventsGetAnonymous   { static readonly type = ActionsInterest.EventsGetAnonymous; constructor() { } }
