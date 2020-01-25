@@ -261,7 +261,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestEventsGet)
     eventsGet({ patchState, getState, dispatch}: StateContext<StateInterestModel>)
     {
-        //const interest: Interest  = StateInterest.dataState(getState());
         const userId: string = this.store.selectSnapshot(StateUser.id());
         const query: Query   = userId == null ? undefined : this.service.collection('events').ref
           .where('userId', '==', userId).where('interests', 'array-contains', StateInterest.idState(getState()));
@@ -287,16 +286,16 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
               const event: Event = document.data() as Event;
 
               timeStart = new Date(event.timeStart);
-                timeStartFormatted = timeStart.toLocaleDateString(language, options);
+              timeStartFormatted = timeStart.toLocaleDateString(language, options);
 
-                if(event.metadata === undefined)
-                  event.metadata = {};
+              if(event.metadata === undefined)
+                event.metadata = {};
 
-                if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
-                  event.metadata.timeStartFormatted = timeStartFormatted;
+              if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
+                event.metadata.timeStartFormatted = timeStartFormatted;
 
-                event.metadata.timeStartDate = timeStart;
-                timeStartPrevious = timeStart;
+              event.metadata.timeStartDate = timeStart;
+              timeStartPrevious = timeStart;
 
               events.push(event);
             })
@@ -319,8 +318,12 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestEventsGetAnonymous)
     eventsGetAnonymous({ patchState, getState, dispatch}: StateContext<StateInterestModel>)
     {
+        const currentDate = Date();
         const query: Query   = this.service.collection('events').ref
-          .where('interests', 'array-contains', StateInterest.idState(getState()));
+          .where('interests', 'array-contains', StateInterest.idState(getState()))
+          .where('timeStart', "<", currentDate.toString())
+          .orderBy('timeStart', 'asc')
+          .limit(5);
         var events: Event[] = new Array();
 
         return from(query.get()).pipe
@@ -343,16 +346,16 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
               const event: Event = document.data() as Event;
 
               timeStart = new Date(event.timeStart);
-                timeStartFormatted = timeStart.toLocaleDateString(language, options);
+              timeStartFormatted = timeStart.toLocaleDateString(language, options);
 
-                if(event.metadata === undefined)
-                  event.metadata = {};
+              if(event.metadata === undefined)
+                event.metadata = {};
 
-                if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
-                  event.metadata.timeStartFormatted = timeStartFormatted;
+              if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
+                event.metadata.timeStartFormatted = timeStartFormatted;
 
-                event.metadata.timeStartDate = timeStart;
-                timeStartPrevious = timeStart;
+              event.metadata.timeStartDate = timeStart;
+              timeStartPrevious = timeStart;
 
               events.push(event);
             })
