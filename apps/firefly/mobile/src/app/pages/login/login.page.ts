@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { filter, take, switchMap } from 'rxjs/operators';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { AuthProvider } from '@theory/firebase';
 
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-import { StateUser, ActionUserLoginEmail, ActionUserLogout, ActionUserCreate } from '@firefly/core';
+import { StateUser, ActionUserLoginEmail, ActionUserCreate } from '@firefly/core';
 import { ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/capacitor';
 import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
 
@@ -28,19 +28,20 @@ export class PageLogin implements OnInit
     @Select(StateUser.loadedNotAuthenticated) loadedNotAuthenticated$: Observable<boolean>;
     @Select(StateUser.error)                  error$:                  Observable<Error>;
 
+    @Input() signup: boolean = false;
+
     public AuthProvider: any = AuthProvider;
-    public showCreate: boolean = false;
     public task: String;
     public loginForm: FormGroup;
 
     error_messages = {
-      'email': [
+      email: [
         { type: 'required', message: 'Email is required'},
         { type: 'minlength', message: 'Email length must be longer or equal than 6 characters'},
         { type: 'maxlength', message: 'Email length must be lower or equal to 50 characters'},
         { type: 'pattern', message: 'Please enter a valid email address'}
       ],
-      'password': [
+      password: [
         { type: 'required', message: 'Password is required'},
         { type: 'minlength', message: 'Password length must be longer or equal than 6 characters'},
         { type: 'maxlength', message: 'Password length must be lower or equal to 50 characters'},
@@ -48,23 +49,32 @@ export class PageLogin implements OnInit
       ]
     }
 
-    constructor(private store: Store, private nav: NavController,
-      public formBuilder: FormBuilder) {
-        this.loginForm = this.formBuilder.group({
-          password: new FormControl('', Validators.compose([
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(30),
-            //Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]+$')
-          ])),
-          email: new FormControl('', Validators.compose([
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(50),
-            Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-          ]))
+    constructor
+    (
+        private store       : Store,
+        private nav         : NavController,
+        private formBuilder : FormBuilder,
+        private modal       : ModalController
+    )
+    {
+        this.loginForm = this.formBuilder.group
+        ({
+            password: new FormControl('', Validators.compose
+            ([
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(30),
+                //Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]+$')
+            ])),
+            email: new FormControl('', Validators.compose
+            ([
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(50),
+                Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+            ]))
         });
-       }
+    }
 
     public ngOnInit(): void
     {
@@ -93,21 +103,31 @@ export class PageLogin implements OnInit
     {
         console.log('user: ' + this.loginForm.value.email);
         console.log('password: ' + this.loginForm.value.password);
-        this.store.dispatch(new ActionUserLoginEmail({id: this.loginForm.value.email, password: this.loginForm.value.password}));
-    }
 
-    logout()
-    {
-      this.store.dispatch(new ActionUserLogout());
+        this.store.dispatch(new ActionUserLoginEmail({id: this.loginForm.value.email, password: this.loginForm.value.password})).
+        pipe
+        (
+            switchMap(() =>
+                from(this.modal.dismiss())
+            )
+        ).
+        subscribe();
     }
 
     createUser()
     {
-        this.store.dispatch(new ActionUserCreate({id: this.loginForm.value.email, password: this.loginForm.value.password}));
+        this.store.dispatch(new ActionUserCreate({id: this.loginForm.value.email, password: this.loginForm.value.password})).
+        pipe
+        (
+            switchMap(() =>
+                from(this.modal.dismiss())
+            )
+        ).
+        subscribe();
     }
 
     showCreateButton()
     {
-      this.showCreate = !this.showCreate;
+      this.signup = !this.signup;
     }
 }

@@ -7,6 +7,7 @@ import { ComponentApp } from './app.component';
 import { ModuleComponentIcon } from '@firefly/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModulePageLogin } from '../pages';
 
 @NgModule
 ({
@@ -17,7 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         ModulePage,
         ModuleRoutingApp,
         ModuleComponentIcon,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ModulePageLogin
     ],
 
     declarations : [ComponentApp],

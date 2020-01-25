@@ -2,7 +2,7 @@ import { User as FirebaseUser, auth, firestore } from 'firebase/app';
 
 import { State, Selector, Action, StateContext, Select, NgxsOnInit, Store} from '@ngxs/store';
 import { Observable, of, from } from 'rxjs';
-import { catchError, switchMap, take, filter, tap, map } from 'rxjs/operators';
+import { catchError, switchMap, take, filter, tap, map, finalize } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
@@ -126,7 +126,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static city(state: StateUserModel)                   : Location     { const user: User = StateUser.dataState(state); return user == null ? null : user.city; }
     @Selector() static cityId(state: StateUserModel)                 : string       { const city: Location = StateUser.city(state); return city == null ? null : city.cityId; }
     @Selector() static language(state: StateUserModel)               : string       { const user: User = StateUser.dataState(state); return user == null ? null : user.language; }
-    @Selector() static loading(state: StateUserModel)                : boolean      { return state.authenticating || state.initializing; }
+    @Selector() static loading(state: StateUserModel)                : boolean      { return state.authenticating || !state.initialized; }
     @Selector() static loadedNotAuthenticated(state: StateUserModel) : boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
     @Selector() static error(state: StateUserModel)                  : Error        { return state.error; }
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
@@ -138,12 +138,10 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     {
         const unfiltered    : Record<string, string>              = StateUser.subscriptionsUnfiltered(state);
         const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-        const userId        : string                              = StateUser.idState(state);
 
-        if (!subscriptions)
-          return stream;
-        else
-        return stream.
+        return !subscriptions ?
+            stream :
+            stream.
             filter((interest: StreamInterest) =>
                 (subscriptions[interest.id] == null || unfiltered[interest.id] != null) // && interest.userId !== userId
             );
@@ -160,7 +158,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserReset)
     reset(context: StateContext<StateUserModel>)
     {
-        return super.reset(context)
+        return of(null);
     }
 
     @Action(ActionUserGet)
@@ -172,7 +170,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserSet)
     set(context: StateContext<StateUserModel>, action: ActionUserSet)
     {
-        const { dispatch, patchState, getState } = context;
+        const { dispatch, getState } = context;
 
         return super.set(context, action).pipe
         (
@@ -197,9 +195,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                     filter((ready: boolean) => ready),
                     take(1)
                 )
-            ),
-            tap(() =>
-                patchState({ initializing: false })
             )
         );
     }
@@ -276,44 +271,51 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserNotLoggedIn)
     userNotLoggedIn({ patchState, dispatch}: StateContext<StateUserModel>)
     {
-        return of(null).pipe(
-          tap(() =>
-            dispatch
-            ([
-              new ActionUserWatchLocation(false),
-              new ActionUserWatchCity()
-            ])
-          ),
-          switchMap(() =>
-            this.streamReady$.pipe
-            (
-                filter((ready: boolean) => ready),
-                take(1)
+        return of(null).
+        pipe
+        (
+            tap(() =>
+                dispatch
+                ([
+                  new ActionUserWatchLocation(false),
+                  new ActionUserWatchCity()
+                ])
+            ),
+            switchMap(() =>
+                this.streamReady$.pipe
+                (
+                    filter((ready: boolean) => ready),
+                    take(1)
+                )
             )
-          ),
-          tap(() =>
-              patchState({ initializing: false })
-          )
         )
     }
 
     @Action(ActionUserAuthenticate)
     authenticate({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-        patchState({ authenticating: true, initializing: true });
+        patchState({ authenticating: true });
+
         return this.auth.authState.pipe
         (
             take(1),
+
             tap((authData: FirebaseUser) =>
-                patchState({ authData, authenticating: false, authenticated: authData != null })
+                patchState({ authData, authenticated: authData != null})
             ),
             switchMap((authData: FirebaseUser) =>
                 authData == null ?
                     dispatch(new ActionUserNotLoggedIn()) :
                     dispatch(new ActionUserGet(authData.uid))
             ),
+            tap(() =>
+                patchState({ authenticating: false })
+            ),
             catchError((error: Error) =>
-                of(patchState({ error, authenticating: false, initializing: false}))
+                of(patchState({ error, authenticating: false }))
+            ),
+            finalize(() =>
+                patchState({ initialized: true })
             )
         );
     }
@@ -321,30 +323,25 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserAuthenticateCheck)
     authenticateCheck({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserAuthenticateCheck)
     {
-        return of(payload).
+        const authData:      FirebaseUser = payload;
+        const authenticated: boolean      = authData != null;
+
+        return of(null).
         pipe
         (
-            tap(() => dispatch(new ActionUserReset())),
-            filter((authData: FirebaseUser) =>
-            {
-                const authenticated: boolean = authData != null;
-
+            tap(() =>
                 patchState
                 ({
                     authData,
                     authenticated,
-                    authenticating: authenticated,
-                    error: authenticated ? undefined : { name: 'Failed Login', message: 'Unable to login' }
-                });
-
-                return authenticated;
-            }),
-
-            switchMap((authData: FirebaseUser) =>
-                dispatch(new ActionUserGet(authData.uid))
+                    authenticating: false,
+                    error: authenticated ? null : { name: 'Failed Login', message: 'Unable to login' }
+                })
             ),
-            tap(() =>
-                patchState({ authenticated: false })
+            switchMap(() =>
+                authenticated ?
+                    dispatch(new ActionUserGet(authData.uid)) :
+                    of(null)
             )
         );
     }
@@ -446,14 +443,22 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserLogout)
-    logout({ patchState, dispatch }: StateContext<StateUserModel>)
+    logout({ patchState }: StateContext<StateUserModel>)
     {
         const defaults: StateUserModel = CoreUtil.clone<StateUserModel>(StateUserOptions.defaults);
         patchState(defaults);
         return of(this.auth.auth.signOut()).pipe
         (
-            switchMap(() => dispatch(new ActionUserReset())),
-            catchError((error: Error) => of(patchState({ error })))
+            tap(() =>
+                patchState
+                ({
+                    ...CoreUtil.clone<StateUserModel>(StateUserOptions.defaults),
+                    initialized: true
+                })
+            ),
+            catchError((error: Error) =>
+                of(patchState({ error }))
+            )
         );
     }
 

@@ -3,11 +3,7 @@
   <ion-toolbar color="dark"></ion-toolbar>
 </ion-header>
 <section class="cpt-container" fxLayout="column" fxLayoutAlign="center">
-  <section fxLayout="column" fxLayoutAlign="center center">
-    <app-icon-firefly [animate]="userLoading$ | async"></app-icon-firefly>
-    <img class="cpt-title" src="assets/images/app.title@2x.png">
-    <span class="cpt-tagline">{{ 'page.auth.tagline' | translate }}</span>
-  </section>
+  <app-logo [loading]="userLoading$ | async"></app-logo>
   <form class="form-login" [formGroup]="loginForm">
   <section  class="cpt-container-auth" fxLayout="column" fxLayoutAlign="center">
     <div *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))" class="cpt-auth-email">
@@ -36,10 +32,10 @@
           </div>
         </div>
         <div *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))">
-          <ion-button *ngIf="showCreate" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="createUser()" [disabled]="(showCreate)">
+          <ion-button *ngIf="signup" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="createUser()" [disabled]="(signup)">
             <span class="cpt-text">{{'page.auth.create' | translate}}</span>
           </ion-button>
-          <ion-button *ngIf="!showCreate" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="login(AuthProvider.Email)">
+          <ion-button *ngIf="!signup" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="login(AuthProvider.Email)">
             <span class="cpt-text">{{'page.auth.signIn' | translate}}</span>
           </ion-button>
         </div>
@@ -47,7 +43,7 @@
   </section>
   </form>
   <section *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))" class="cpt-container-user-menu">
-    <div *ngIf="!showCreate" class="cpt-sign-up-link" (click)="showCreateButton()">Sign up here</div>
-    <div *ngIf="showCreate" class="cpt-sign-up-link" (click)="showCreateButton()">Login</div>
+    <div *ngIf="!signup" class="cpt-sign-up-link" (click)="signupButton()">Sign up here</div>
+    <div *ngIf="signup" class="cpt-sign-up-link" (click)="signupButton()">Login</div>
   </section>
 </section>

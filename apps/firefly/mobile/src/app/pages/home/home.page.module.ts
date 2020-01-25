@@ -23,6 +23,6 @@ import { ModuleDirectiveElevation } from '@theory/google';
     ],
 
     declarations : [PageHome],
-    exports : [PageHome]
+    exports      : [PageHome]
 })
 export class ModulePageHome {}
