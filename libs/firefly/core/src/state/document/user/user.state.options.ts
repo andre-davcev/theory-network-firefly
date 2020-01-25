@@ -10,15 +10,15 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
 
     defaults :
     {
-        snapshot  : undefined,
+        snapshot  : null,
         form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
-        formGroup : undefined,
+        formGroup : null,
 
-        authData                : undefined,
-        error                   : undefined,
+        authData                : null,
+        error                   : null,
         authenticated           : false,
         authenticating          : false,
-        initializing            : true,
+        initialized             : false,
         subscriptionsUnfiltered : {}
     }
 };

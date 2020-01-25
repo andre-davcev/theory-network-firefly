@@ -9,7 +9,8 @@ import {
     ActionMobileMenuOpened,
     ActionMobileMenuClosed,
     ActionMobileNavigateRoot,
-    ActionMobileAuthSelect
+    ActionMobileAuthSelect,
+    ActionMobileAuthSelected
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
 import { LoadingController, ToastController, NavController, ActionSheetController, MenuController } from '@ionic/angular';
@@ -103,7 +104,7 @@ export class StateMobile
     }
 
     @Action(ActionMobileNavigateRoot)
-    navigateRoot({ patchState, getState, dispatch }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
+    navigateRoot({ patchState, getState }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
     {
         const pagesRoot : Record<string, Pages> = StateMobile.pagesRoot(getState());
 
@@ -150,12 +151,12 @@ export class StateMobile
                       buttons:
                       [
                           {
-                              text    : translations['general.login'],
-                              // handler : () => this.authOpen(Pages.Login)
+                              text : translations['general.login'],
+                              handler : () => { dispatch(new ActionMobileAuthSelected(Pages.Login)); }
                           },
                           {
                               text    : translations['general.signup'],
-                              // handler : () => this.authOpen(Pages.SignUp)
+                              handler : () => { dispatch(new ActionMobileAuthSelected(Pages.SignUp)); }
                           }
                       ]
                   }))
@@ -164,5 +165,11 @@ export class StateMobile
                 actionSheet.present()
             )
         );
+    }
+
+    @Action(ActionMobileAuthSelected)
+    authSelected(context: StateContext<StateMobileModel>, { page }: ActionMobileAuthSelected)
+    {
+
     }
 }

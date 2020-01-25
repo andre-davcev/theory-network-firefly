@@ -10,3 +10,4 @@ export class ActionMobileMenuOpened   { static readonly type = ActionsMobile.Men
 export class ActionMobileMenuClosed   { static readonly type = ActionsMobile.MenuClosed;   constructor() {} }
 export class ActionMobileNavigateRoot { static readonly type = ActionsMobile.NavigateRoot; constructor(public page: Pages, public child?: Pages ) {} }
 export class ActionMobileAuthSelect   { static readonly type = ActionsMobile.AuthSelect;   constructor() {} }
+export class ActionMobileAuthSelected { static readonly type = ActionsMobile.AuthSelected; constructor(public page: Pages.Login | Pages.SignUp) {} }

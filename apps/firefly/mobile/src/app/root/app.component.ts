@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { Platform, MenuController } from '@ionic/angular';
-import { from } from 'rxjs';
-import { delay, switchMap } from 'rxjs/operators';
-import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
+import { Platform, MenuController, ModalController } from '@ionic/angular';
+import { from, Observable } from 'rxjs';
+import { delay, switchMap, filter } from 'rxjs/operators';
+import { Actions, ofActionSuccessful, Store, Select } from '@ngxs/store';
 import { RouterNavigation, Navigate } from '@ngxs/router-plugin';
 
 import { PlatformEnum } from '@theory/ionic';
 
-import { Pages } from '@firefly/mobile';
-import { ActionUserLogout } from '@firefly/core';
+import { Pages, ActionMobileAuthSelected, ActionMobileAuthSelect } from '@firefly/mobile';
+import { ActionUserLogout, StateUser } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
 import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
+import { PageLogin } from '../pages';
 
 const { SplashScreen } = Plugins;
 
@@ -22,6 +23,8 @@ const { SplashScreen } = Plugins;
 })
 export class ComponentApp
 {
+    @Select(StateUser.found()) userFound$: Observable<boolean>;
+
     public Pages: any = Pages;
 
     constructor
@@ -29,7 +32,8 @@ export class ComponentApp
         private platform: Platform,
         private actions$: Actions,
         private store:    Store,
-        private menu:     MenuController
+        private menu:     MenuController,
+        private modal:    ModalController
     )
     {
         this.initializeApp();
@@ -44,8 +48,29 @@ export class ComponentApp
             subscribe(() => SplashScreen.hide());
         }
 
-        this.actions$.pipe(ofActionSuccessful(RouterNavigation)).
+        this.actions$.
+        pipe(ofActionSuccessful(RouterNavigation)).
         subscribe((data: any) => console.log(data.event.url));
+
+        this.actions$.
+        pipe
+        (
+            ofActionSuccessful(ActionMobileAuthSelected),
+            switchMap(({ page }: ActionMobileAuthSelected) =>
+                from(this.modal.create
+                ({
+                    component: PageLogin,
+                    componentProps:
+                    {
+                        signUp: page === Pages.SignUp
+                    }
+                }))
+            ),
+            switchMap((modal: HTMLIonModalElement) =>
+                modal.present()
+            )
+        ).
+        subscribe();
     }
 
     public go(page: Pages): void
@@ -62,7 +87,7 @@ export class ComponentApp
         this.store.dispatch(new ActionUserLogout()).pipe
         (
             switchMap(() =>
-                this.store.dispatch(new Navigate([Pages.Login]))
+                this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream))
             )
         );
     }

@@ -1,0 +1,39 @@
+$cpt-title-height:                  76%;
+$cpt-title-width:                   76%;
+$cpt-title-scale:                   0.71255060728745;
+
+$cpt-tagline-color:               white;
+$cpt-tagline-font-family:           "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$cpt-tagline-font-size:             12px;
+$cpt-tagline-text-shadow:           0px 2px 3px rgba(0, 0, 0, 0.28);
+
+:host
+{
+    transform: translate3d(0, 0, 0);
+
+    .cpt-title
+    {
+        position: relative;
+        position: relative;
+        display: block;
+        margin-top: 18px;
+
+        height: $cpt-title-height;
+        width: $cpt-title-width;
+    }
+
+    .cpt-tagline
+    {
+        position: relative;
+        display: block;
+        margin-top: 8px;
+        line-height: 1em;
+        text-align: center;
+        letter-spacing: 1px;
+
+        color: $cpt-tagline-color;
+        font-family: $cpt-tagline-font-family;
+        font-size: $cpt-tagline-font-size;
+        text-shadow: $cpt-tagline-text-shadow;
+    }
+}

@@ -6,6 +6,6 @@ export interface StateUserModel extends StateDocumentModel
     error                   : Error;
     authenticated           : boolean;
     authenticating          : boolean;
-    initializing            : boolean;
+    initialized             : boolean;
     subscriptionsUnfiltered : Record<string, string>;
 }
