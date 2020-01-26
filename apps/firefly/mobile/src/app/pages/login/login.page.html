@@ -1,7 +1,14 @@
 
 <ion-header>
-  <ion-toolbar color="dark"></ion-toolbar>
+    <ion-toolbar color="dark">
+        <ion-buttons slot="start">
+            <ion-button icon-only (click)="close()" *ngIf="!(userLoading$ | async)" >
+                <ion-icon name="close" color="primary"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
+
 <section class="cpt-container" fxLayout="column" fxLayoutAlign="center">
   <app-logo [loading]="userLoading$ | async"></app-logo>
   <form class="form-login" [formGroup]="loginForm">
