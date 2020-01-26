@@ -276,10 +276,13 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
             const language: string = this.store.selectSnapshot(StateLanguage.language);
             const options: any = { weekday: 'long',
               year: 'numeric', month: 'long', day: 'numeric'};
+            const optionsShort: any = { weekday: 'short',
+              year: 'numeric', month: 'short', day: 'numeric'};
 
             let timeStart: Date;
             let timeStartPrevious: Date;
             let timeStartFormatted: string;
+            let timeStartFormattedShort: string;
 
             page.forEach((document: firestore.QueryDocumentSnapshot) =>
             {
@@ -287,6 +290,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
 
               timeStart = new Date(event.timeStart);
               timeStartFormatted = timeStart.toLocaleDateString(language, options);
+              timeStartFormattedShort = timeStart.toLocaleDateString(language, optionsShort);
 
               if(event.metadata === undefined)
                 event.metadata = {};
@@ -294,6 +298,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
               if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
                 event.metadata.timeStartFormatted = timeStartFormatted;
 
+              event.metadata.timeStartFormattedShort = timeStartFormattedShort;
               event.metadata.timeStartDate = timeStart;
               timeStartPrevious = timeStart;
 
@@ -336,10 +341,13 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
             const language: string = this.store.selectSnapshot(StateLanguage.language);
             const options: any = { weekday: 'long',
               year: 'numeric', month: 'long', day: 'numeric'};
+            const optionsShort: any = { weekday: 'short',
+              year: 'numeric', month: 'short', day: 'numeric'};
 
             let timeStart: Date;
             let timeStartPrevious: Date;
             let timeStartFormatted: string;
+            let timeStartFormattedShort: string;
 
             page.forEach((document: firestore.QueryDocumentSnapshot) =>
             {
@@ -347,6 +355,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
 
               timeStart = new Date(event.timeStart);
               timeStartFormatted = timeStart.toLocaleDateString(language, options);
+              timeStartFormattedShort = timeStart.toLocaleDateString(language, optionsShort);
 
               if(event.metadata === undefined)
                 event.metadata = {};
@@ -354,6 +363,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
               if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
                 event.metadata.timeStartFormatted = timeStartFormatted;
 
+              event.metadata.timeStartFormattedShort = timeStartFormattedShort;
               event.metadata.timeStartDate = timeStart;
               timeStartPrevious = timeStart;
 
