@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
 import { StateUser } from '@firefly/core';
-import { ActionDeviceStatusBarShow } from '@theory/capacitor';
+import { ActionDeviceStatusBarShow, ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
+import { StatusBarStyle } from '@capacitor/core';
 
 @Component
 ({
@@ -25,7 +26,7 @@ export class PageAuth implements OnInit
 
     public ngOnInit(): void
     {
-        this.store.dispatch([new ActionDeviceStatusBarShow()]).
+        this.store.dispatch(new ActionDeviceStatusBarShow()).
         pipe
         (
             switchMap(() =>
@@ -37,5 +38,10 @@ export class PageAuth implements OnInit
             )
         ).
         subscribe();
+    }
+
+    public ionViewWillEnter(): void
+    {
+        this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Dark }));
     }
 }

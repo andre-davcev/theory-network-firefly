@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
-import { filter, take, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { NavController, ModalController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 
 import { StateUser, ActionUserLoginEmail, ActionUserCreate } from '@firefly/core';
 import { ActionDeviceStatusBarSet, ActionDeviceStatusBarShow } from '@theory/capacitor';
-import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
+import { Credentials } from '@theory/core';
 
 @Component
 ({
@@ -106,7 +106,7 @@ export class PageLogin implements OnInit
         console.log('user: ' + this.loginForm.value.email);
         console.log('password: ' + this.loginForm.value.password);
 
-        this.store.dispatch(new ActionUserLoginEmail({id: this.loginForm.value.email, password: this.loginForm.value.password})).
+        this.store.dispatch(new ActionUserLoginEmail(this.credentials())).
         pipe
         (
             switchMap(() =>
@@ -118,7 +118,7 @@ export class PageLogin implements OnInit
 
     public createUser(): void
     {
-        this.store.dispatch(new ActionUserCreate({id: this.loginForm.value.email, password: this.loginForm.value.password})).
+        this.store.dispatch(new ActionUserCreate(this.credentials())).
         pipe
         (
             switchMap(() =>
@@ -131,5 +131,16 @@ export class PageLogin implements OnInit
     public close(): void
     {
         this.modal.dismiss();
+    }
+
+    private credentials(): Credentials
+    {
+        const credentials: Credentials =
+        {
+            id:       this.loginForm.value.email,
+            password: this.loginForm.value.password
+        };
+
+        return credentials;
     }
 }
