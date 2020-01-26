@@ -15,6 +15,7 @@
     ion-item {
         --padding-start: 8px;
         --background: #{$fire-color-transparent};
+        --border-color: #333;
 
         &:last-child {
             ion-card {
@@ -34,6 +35,11 @@
         padding-top: 0px;
         padding-bottom: 5px;
     }
+
+    ion-icon {
+      font-size: 30px;
+      padding-right: 5px;
+  }
 
     app-icon-subscribe {
         margin-bottom: 5px;
@@ -90,5 +96,51 @@
     .spinner {
       display: block;
       margin: auto;
+    }
+
+    .outer-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin: 10px 0 10px 0px;
+    }
+    .wrapper {
+      display: flex;
+      width: 100%;
+      height: 140px;
+    }
+
+    .wrapper div{
+      flex-basis: 100%;
+      font-family: $fire-font-markerfelt;
+    }
+
+    .eventWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-family: $fire-font-americantypewriter;
+    }
+
+    .eventInfo {
+      font-family: $fire-font-arialnarrow;
+      padding-left: 5px;
+    }
+
+    .dateTimeWrapper {
+      width: 200px;
+    }
+
+    .date {
+      font-family: $fire-font-americantypewriter;
+    }
+
+    .time {
+      font-family: $fire-font-markerfelt;
+      font-size: 20px;
+    }
+
+    hr {
+      margin-bottom: -5px;
+      background-color: #b3b2b2;
     }
 }
