@@ -9,17 +9,17 @@ import { ModulePage } from '@firefly/app/modules';
 import { RoutesPageHome } from './home.page.routes';
 import { PageHome } from './home.page';
 import { ModuleDirectiveElevation } from '@theory/google';
+import { ModulePageLogin } from '../login';
 
 @NgModule
 ({
     imports :
     [
         ModulePage,
-        CommonModule,
         RouterModule.forChild(RoutesPageHome),
         ModuleComponentSlide,
-        TranslateModule,
-        ModuleDirectiveElevation
+        ModuleDirectiveElevation,
+        ModulePageLogin
     ],
 
     declarations : [PageHome],

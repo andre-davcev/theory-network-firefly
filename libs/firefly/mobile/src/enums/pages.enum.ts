@@ -1,5 +1,6 @@
 export enum Pages
 {
+    Auth   = 'auth',
     Login  = 'login',
     SignUp = 'sign-up',
     Home   = 'home',

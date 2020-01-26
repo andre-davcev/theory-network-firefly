@@ -121,6 +121,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Selector() static authData(state: StateUserModel)               : FirebaseUser { return state.authData; }
+    @Selector() static initialized(state: StateUserModel)            : boolean      { return state.initialized; }
     @Selector() static authenticated(state: StateUserModel)          : boolean      { return state.authenticated; }
     @Selector() static authenticating(state: StateUserModel)         : boolean      { return state.authenticating; }
     @Selector() static city(state: StateUserModel)                   : Location     { const user: User = StateUser.dataState(state); return user == null ? null : user.city; }

@@ -4,10 +4,10 @@ import { Pages } from '@firefly/mobile';
 
 export const routes: Routes =
 [
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/auth', pathMatch: 'full' },
 
-    { path: Pages.Login, loadChildren: '@firefly/page/login#ModulePageLogin' },
-    { path: Pages.Home,  loadChildren: '@firefly/page/home#ModulePageHome' },
+    { path: Pages.Auth, loadChildren: '@firefly/page/auth#ModulePageAuth' },
+    { path: Pages.Home, loadChildren: '@firefly/page/home#ModulePageHome' },
 
     { path: Pages.Publisher,      loadChildren: '@firefly/page/publisher#ModulePagePublisher' },
     { path: Pages.AssetsBeacons,  loadChildren: '@firefly/page/assets-beacons#ModulePageAssetsBeacons' },
