@@ -1,16 +1,20 @@
 
-<ion-header>
+<ion-header mode="ios">
     <ion-toolbar color="dark">
         <ion-buttons slot="start">
             <ion-button icon-only (click)="close()" *ngIf="!(userLoading$ | async)" >
-                <ion-icon name="close" color="primary"></ion-icon>
+                <ion-icon mode="ios" name="close" color="primary"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<section class="cpt-container" fxLayout="column" fxLayoutAlign="center">
-  <app-logo [loading]="userLoading$ | async"></app-logo>
+<section class="cpt-container"
+         fxLayout="column"
+         fxLayoutAlign="center"
+         fxLayoutGap="2rem">
+    <app-logo [loading]="userLoading$ | async"></app-logo>
+<!--
   <form class="form-login" [formGroup]="loginForm">
   <section  class="cpt-container-auth" fxLayout="column" fxLayoutAlign="center">
     <div *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))" class="cpt-auth-email">
@@ -53,4 +57,6 @@
     <div *ngIf="!signup" class="cpt-sign-up-link" (click)="signupButton()">Sign up here</div>
     <div *ngIf="signup" class="cpt-sign-up-link" (click)="signupButton()">Login</div>
   </section>
+-->
+    <app-auth [login]="!signup"></app-auth>
 </section>
