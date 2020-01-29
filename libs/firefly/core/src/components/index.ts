@@ -1,3 +1,4 @@
+export * from './auth';
 export * from './icon';
 export * from './icon-firefly';
 export * from './icon-subscribe';

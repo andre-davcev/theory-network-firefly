@@ -1,0 +1,38 @@
+@import 'variables';
+
+:host
+{
+    --border-radius: 4px;
+
+    .cpt-inputs
+    {
+        padding: calc(var(--border-radius) / 2);
+        border-radius: var(--border-radius);
+        background-color: $fire-color-white;
+        padding-left: 16px;
+    }
+
+    ion-input {
+        --padding-start: 14px;
+        --padding-top: 13px;
+        --padding-bottom: 13px;
+        --padding-end: 10px;
+    }
+
+    ion-button {
+        --background-color: #{$fire-color-primary};
+        --border-radius: 4px;
+        --color: #{$fire-color-dark};
+        margin: 0;
+    }
+
+    fa-icon {
+        stroke: $fire-color-grey-middle;
+        color: $fire-color-grey-middle;
+    }
+
+    [ng-reflect-classes=cpt-icon-email]
+    {
+        padding-top: 2px;
+    }
+}

@@ -10,6 +10,7 @@ admin (content) - mock.function.ts cloud function
 *admin (design) - find category icons
 *admin (design) - download sketch resources
 admin (financing) - create pitch deck
+*admin (marketing) - develop elevator pitch
 admin (marketing) - create medium publication
 admin (marketing) - submit firefly to ionic showcase
 app (all) - ios/android style sync
