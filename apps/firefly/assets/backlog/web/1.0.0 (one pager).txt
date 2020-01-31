@@ -1,0 +1,6 @@
+animate on scroll
+deployment
+error handling
+implement design
+pwa
+server side rendering

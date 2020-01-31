@@ -1,0 +1,33 @@
+animate list items
+alert parallax effect
+button to page transition
+card flip
+custom notification background colors
+don't leave directive
+drag & drop lists
+edit in place
+email campaigns
+feature toggling
+find event now firefly button
+firestore account management
+firestore tuning
+input border directive
+ionic animations
+loading html template
+map pin pulse
+migrate to appsync
+migrate to bit
+modal transition animations
+page decorators
+parallax header
+pwa
+schematics
+scroll to updated
+scroll vanish directive
+skeleton text
+sortable lists
+swipe to archive
+toast html template
+translate push notifications
+translate typings
+video background login page

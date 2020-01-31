@@ -1,0 +1,16 @@
+3d maps
+augmented reality
+beacons
+calendar
+categories
+google assistant
+external api
+external widgets
+locations
+machine learning
+rich text editor
+roles
+rule engine
+social
+stream search
+video support

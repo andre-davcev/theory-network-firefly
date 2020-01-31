@@ -1,0 +1,30 @@
+admin (blog) - "Creating a tech company organically"
+admin (marketing) - submit firefly to ionic showcase
+app (all) - refine styling
+app (all) - merge ios/android styles
+app (all) - required fields styling (icon/popover)
+library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
+firestore (security) - prevent hackers from querying past limit size
+firestore (security) - prevent hackers from writing to database too quickly
+streams (detail) - implement stream detail screen
+
+analytics
+code coverage
+continuous integration
+cypress
+dockerize dev environment
+error handling
+firebase best practices
+firestore security testing
+firebase test library
+global injection tokens
+google tag manager
+ionic appflow
+jest
+logging
+performance
+prettier
+release
+router guards
+schematics
+user testing

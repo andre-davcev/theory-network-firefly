@@ -62,7 +62,7 @@ export class ComponentApp
                     component: PageLogin,
                     componentProps:
                     {
-                        signUp: page === Pages.SignUp
+                        signup: page === Pages.SignUp
                     }
                 }))
             ),

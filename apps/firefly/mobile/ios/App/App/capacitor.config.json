@@ -4,8 +4,6 @@
   "bundledWebRuntime": false,
   "webDir": "www",
   "plugins": {
-    "Keyboard": {
-      "resize": "none"
-    }
+
   }
 }
