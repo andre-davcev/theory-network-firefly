@@ -5,6 +5,11 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 import { Credentials } from '@theory/core';
+import { Store } from '@ngxs/store';
+import { ActionUserLoginEmail, ActionUserCreate } from '@firefly/core/state';
+import { switchMap, tap } from 'rxjs/operators';
+import { ModalController } from '@ionic/angular';
+import { from } from 'rxjs';
 
 @Component
 ({
@@ -21,9 +26,6 @@ export class ComponentAuth
     @Input()
     public login: boolean = true;
 
-    @Output()
-    public submit: EventEmitter<Credentials> = new EventEmitter();
-
     public faEnvelope: IconDefinition = faEnvelope;
     public faLock:     IconDefinition = faLock;
 
@@ -31,7 +33,9 @@ export class ComponentAuth
 
     constructor
     (
-        private formBuilder : FormBuilder
+        private formBuilder : FormBuilder,
+        private store       : Store,
+        private modal       : ModalController
     )
     {
         this.form = this.formBuilder.group
@@ -44,7 +48,7 @@ export class ComponentAuth
                 //Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]+$')
             ])),
 
-            email: new FormControl('', Validators.compose
+            id: new FormControl('', Validators.compose
             ([
                 Validators.required,
                 Validators.minLength(6),
@@ -56,6 +60,26 @@ export class ComponentAuth
 
     public clicked(): void
     {
-        this.submit.emit(this.form.value);
+        const credentials: Credentials = this.form.value;
+
+        console.log(credentials);
+
+        const action: ActionUserLoginEmail | ActionUserCreate = this.login ?
+            new ActionUserLoginEmail(credentials) :
+            new ActionUserCreate(credentials);
+
+        this.authenticating = true;
+
+        this.store.dispatch(action).
+        pipe
+        (
+            switchMap(() =>
+                from(this.modal.dismiss())
+            ),
+            tap(() =>
+                this.authenticating = false
+            )
+        ).
+        subscribe();
     }
 }

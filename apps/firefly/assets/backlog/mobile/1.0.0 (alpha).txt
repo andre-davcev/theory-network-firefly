@@ -1,0 +1,93 @@
+*andre
++dave
+^cathy
+#amy
+
+*+admin (accounting) - setup joint esl theory network checking
+*admin (accounting) - setup auto payments with esl account
+admin (accounting) - apply for corporate credit card
+admin (blog) - add cathy/amy as publishers to medium
+admin (content) - event/interest spreadsheet
+admin (content) - mock.function.ts cloud function (mock data)
+*admin (design) - download sketch resources
+*admin (design) - find category icons
+admin (financing) - create pitch deck
+admin (marketing) - research pipedrive & trello
+admin (marketing) - create lead generation strategy
+admin (marketing) - research julian.com marketing strategies
+admin (store) - install android version on amy's phone
+admin (store) - install ios version on cathy's phone
+admin (store) - ios app store prep
+admin (store) - android app store prep
+app (keyboard) - fix ios ionic/capacitor keyboard bug
+app (splash) - android splash screen
+*app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
+app (notifications) - implement capacitor-fcm plugin
++alerts (detail) - add go action sheet workflow (add to calendar, get directions)
++alerts (detail) - implement detail screen
++alerts (list) - add go action sheet workflow (add to calendar, get directions)
++alerts (list) - on click navigate to detail
++alerts (list) - on delete click (delete alert, update list, update unread count)
+alerts (funtions create) - send push notifications for each alert token
+*auth - ios white screen flash bug
+*auth - remove auth autofocus
+*auth - fix button disabled/focus/pressed stylings
+*auth - add thin grey line between inputs
+auth - fix anonymous initial load time
+auth - on unauthenticated login save city so you can grab city stream
+*sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
+sign-up (slide 2) - email/password
+sign-up (slide 3) - Welcome to the Firefly community!
+sign-up (slide 4) - Subscribe to different interests in your area
+sign-up (slide 5) - Receive notifications when new events are added to your interests
+sign-up (slide 6) - Easily get directions or add events to your calendar
+sign-up (slide 7) - Manage your subscriptions with ease
+sign-up (slide 8) - Contribute to the community by publishing your own interests and events
+*slides (intro 1) - Where life comes to you
+slides (intro 2) - Subscribe to community interests
+slides (intro 3) - Be notified when new events are posted to your interests
+slides (intro 4) - Add these events to you calendar and get directions
+interests (all) - migrate clusters collection to interests
+interests (detail) - add interest-events query state
+interests (detail) - add ability to add/remove events via query state
+empty (component) - empty list component
+empty (alerts) - Looks like you have no notifications right now. Subscribe to new Interests to find new events in your area.
+empty (stream) - Our swarm of fireflies are busy building your Interest recommendations. Check back later!
+empty (subscriptions) - You have no Subscriptions right now. Go to the home Discover Interests screen to find new interests in your area!
+empty (interests) - Help support the Firefly community by publishing your own public Interests here.
+empty (events) - Looks like you haven't created any Events yet. Feel free to create public or private Events to be added to Interest streams.
+empty (icons) - You haven't published any icons yet. Icons are used as branding for your Interests.
+empty (images) - You haven't published any images yet. Images can be used for event notifcations as well as the main image on the Discover Interests screen.
++events (all) - migrate timeNotify to day from hourly
+events (function cron) - implement daily cron which groups alerts for user and sends push notifcation (grouped)
+events (function subscribe) - with delay add user alerts which have passed timeNotify but are greater than today
++events (detail) - move select cluster to select icon
++events (detail) - move 'Hero Image' title to 'Notification Image'
+events (detail) - add url/phone field
+events (detail) - add create/edit
+events (detail) - reverse geocode
+events (detail) - fix redux payload too big warning
++firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
+firebase (functions) - migrate to use firebase transactions
+firebase (functions) - minimize cold start time
+firebase (functions) - refactor to use try/catch async/await
+firebase (functions) - enable retry on failure
+firebase (functions) - test interests (delete)
+firebase (functions) - test events (update)
+firebase (functions) - test icons (delete)
+firebase (functions) - test images (delete)
+firebase (functions) - test users (create)
+firebase (functions) - test users (delete)
+firebase (functions) - test users (update)
+firestore (security) - create firestore database rules to allow unauth'd users to query stream
+firestore (security) - upload and test security rules
+firestore (security) - create storage security rules
+home - fix header disappear when ion-badge shown
+library (mapbox) - add back tokenized mapbox access token in search service
+map (component) - limit mapbox search types to [address, poi]
+menu - highlight selected row
+streams (list) - add heart subscribe animation
+streams (list) - fix subscriptions add/remove from streams/manage subscriptions
+streams (list) - on quick toggles/updates stack updates and put spinner
+streams (state) - user.state.ts uncomment interest.userId !== userId
+subscriptions (list) - on quick toggles/updates stack updates and put spinner
