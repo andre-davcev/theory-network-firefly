@@ -1,2 +1,2 @@
-bulk importer
-publisher
+importer - implement bulk importer
+publisher - implement firefly publisher
