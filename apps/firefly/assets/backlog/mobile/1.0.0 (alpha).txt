@@ -29,7 +29,6 @@ app (notifications) - implement capacitor-fcm plugin
 +alerts (list) - on click navigate to detail
 +alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (funtions create) - send push notifications for each alert token
-*auth - add thin grey line between inputs
 *auth - fix button disabled/focus/pressed stylings
 *auth - ios white screen flash bug
 auth - fix anonymous initial load time

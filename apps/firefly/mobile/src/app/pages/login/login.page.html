@@ -14,49 +14,5 @@
          fxLayoutAlign="center"
          fxLayoutGap="2rem">
     <app-logo [loading]="userLoading$ | async"></app-logo>
-<!--
-  <form class="form-login" [formGroup]="loginForm">
-  <section  class="cpt-container-auth" fxLayout="column" fxLayoutAlign="center">
-    <div *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))" class="cpt-auth-email">
-        <div class="cpt-container-inputs">
-          <ion-input formControlName="email" id="signup" class="tn-ico fa-icon fa-envelope-o" autocorrect="on" autofocus="on" clearInput="true" clearOnEdit="true" color="primary" inputmode="text" placeholder="myemail@email.com" required="true"></ion-input>
-          <div class="error-messages">
-            <ng-container *ngFor="let error of error_messages.email">
-              <div class="error-message" *ngIf="loginForm.get('email').hasError(error.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)">
-                {{ error.message }}
-              </div>
-            </ng-container>
-          </div>
-          <div class="cpt-divider"></div>
-          <ion-input formControlName="password" type="password" id="password" class="tn-ico fa-icon fa-lock" autocorrect="on" autofocus="on" color="primary" inputmode="text" placeholder="************" required="true"></ion-input>
-          <div class="error-messages">
-            <ng-container *ngFor="let error of error_messages.password">
-              <div class="error-message" *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
-                {{ error.message }}
-              </div>
-            </ng-container>
-          </div>
-          <div class="error-messages">
-            <div class="error-message">
-              {{ error$ | async }}
-            </div>
-          </div>
-        </div>
-        <div *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))">
-          <ion-button *ngIf="signup" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="createUser()" [disabled]="(signup)">
-            <span class="cpt-text">{{'page.auth.create' | translate}}</span>
-          </ion-button>
-          <ion-button *ngIf="!signup" [disabled]="!loginForm.valid" class="tn-button cpt-button" (click)="login(AuthProvider.Email)">
-            <span class="cpt-text">{{'page.auth.signIn' | translate}}</span>
-          </ion-button>
-        </div>
-    </div>
-  </section>
-  </form>
-  <section *ngIf="(!(userLoading$ | async) && (loadedNotAuthenticated$ | async))" class="cpt-container-user-menu">
-    <div *ngIf="!signup" class="cpt-sign-up-link" (click)="signupButton()">Sign up here</div>
-    <div *ngIf="signup" class="cpt-sign-up-link" (click)="signupButton()">Login</div>
-  </section>
--->
     <app-auth [login]="!signup"></app-auth>
 </section>
