@@ -21,7 +21,7 @@ admin (store) - ios app store prep
 admin (store) - android app store prep
 app (keyboard) - fix ios ionic/capacitor keyboard bug
 app (splash) - android splash screen
-*app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
+app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
 app (notifications) - implement capacitor-fcm plugin
 +alerts (detail) - add go action sheet workflow (add to calendar, get directions)
 +alerts (detail) - implement detail screen
@@ -29,10 +29,9 @@ app (notifications) - implement capacitor-fcm plugin
 +alerts (list) - on click navigate to detail
 +alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (funtions create) - send push notifications for each alert token
-*auth - ios white screen flash bug
-*auth - remove auth autofocus
-*auth - fix button disabled/focus/pressed stylings
 *auth - add thin grey line between inputs
+*auth - fix button disabled/focus/pressed stylings
+*auth - ios white screen flash bug
 auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
 *sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
@@ -43,7 +42,7 @@ sign-up (slide 5) - Receive notifications when new events are added to your inte
 sign-up (slide 6) - Easily get directions or add events to your calendar
 sign-up (slide 7) - Manage your subscriptions with ease
 sign-up (slide 8) - Contribute to the community by publishing your own interests and events
-*slides (intro 1) - Where life comes to you
+slides (intro 1) - Where life comes to you
 slides (intro 2) - Subscribe to community interests
 slides (intro 3) - Be notified when new events are posted to your interests
 slides (intro 4) - Add these events to you calendar and get directions
