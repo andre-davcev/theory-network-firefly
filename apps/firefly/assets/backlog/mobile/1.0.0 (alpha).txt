@@ -1,8 +1,3 @@
-*andre
-+dave
-^cathy
-#amy
-
 *+admin (accounting) - setup joint esl theory network checking
 *admin (accounting) - setup auto payments with esl account
 admin (content) - event/interest spreadsheet
@@ -16,6 +11,7 @@ admin (store) - install ios version on cathy's phone
 app (keyboard) - fix ios ionic/capacitor keyboard bug
 app (splash) - android splash screen
 app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
+app (infra) - upgrade ionic to v5
 app (notifications) - implement capacitor-fcm plugin
 +alerts (detail) - add go action sheet workflow (add to calendar, get directions)
 +alerts (detail) - implement detail screen
@@ -23,7 +19,6 @@ app (notifications) - implement capacitor-fcm plugin
 +alerts (list) - on click navigate to detail
 +alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (funtions create) - send push notifications for each alert token
-*auth - ios white screen flash bug
 auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
 *sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
@@ -82,3 +77,8 @@ streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner
 streams (state) - user.state.ts uncomment interest.userId !== userId
 subscriptions (list) - on quick toggles/updates stack updates and put spinner
+
+*andre
++dave
+^cathy
+#amy
