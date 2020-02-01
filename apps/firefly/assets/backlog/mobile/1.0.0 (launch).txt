@@ -1,30 +1,37 @@
+admin (accounting) - apply for corporate credit card
+admin (blog) - add cathy/amy as publishers to medium
 admin (blog) - "Creating a tech company organically"
+admin (financing) - create pitch deck
+admin (marketing) - research pipedrive & trello
+admin (marketing) - create lead generation strategy
+admin (marketing) - research julian.com marketing strategies
 admin (marketing) - submit firefly to ionic showcase
+admin (store) - release v1 on android
+admin (store) - release v1 on ios
 app (all) - refine styling
 app (all) - merge ios/android styles
 app (all) - required fields styling (icon/popover)
+app (all) - setup error handling
+app (all) - setup global injection tokens
+app (all) - implement google tag manager
+automation (ci) - setup continuous integration
+automation (ci) - setup ionic appflow
+automation (dev) - dockerize dev environment
+automation (dev) - setup automated code formatting via prettier
+automation (dev) - setup schematics
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
-firestore (security) - prevent hackers from querying past limit size
-firestore (security) - prevent hackers from writing to database too quickly
+firebase (admin) - setup billing/usage alert triggers
+firebase (all) - follow best practices
+firebase (analytics) - implement firebase analytics (google)
+firebase (security) - prevent hackers from querying past limit size
+firebase (security) - prevent hackers from writing to database too quickly
+security (routing) - setup router guards
 streams (detail) - implement stream detail screen
-
-analytics
-code coverage
-continuous integration
-cypress
-dockerize dev environment
-error handling
-firebase best practices
-firestore security testing
-firebase test library
-global injection tokens
-google tag manager
-ionic appflow
-jest
-logging
-performance
-prettier
-release
-router guards
-schematics
-user testing
+testing (coverage) - setup code coverage
+testing (e2e) - setup cypress tests
+testing (logging) - setup logging
+testing (performance) - performance testing
+testing (security) - setup firestore security testing
+testing (security) - setup firestore storage testing
+testing (unit) - setup jest unit tests
+testing (user) - setup app user testing
