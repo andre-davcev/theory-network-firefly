@@ -1,4 +1,5 @@
 animate list items
+animate on scroll
 alert parallax effect
 button to page transition
 card flip

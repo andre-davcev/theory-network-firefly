@@ -3,7 +3,6 @@
 ^cathy
 #amy
 
-*admin (backlog) - organize future backlog tasks
 *+admin (accounting) - setup joint esl theory network checking
 *admin (accounting) - setup auto payments with esl account
 admin (content) - event/interest spreadsheet

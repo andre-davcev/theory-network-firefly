@@ -14,6 +14,7 @@ app (all) - required fields styling (icon/popover)
 app (all) - setup error handling
 app (all) - setup global injection tokens
 app (all) - implement google tag manager
+app (all) - http error handling
 automation (ci) - setup continuous integration
 automation (ci) - setup ionic appflow
 automation (dev) - dockerize dev environment

@@ -1,6 +1,4 @@
-animate on scroll
-deployment
-error handling
-implement design
-pwa
-server side rendering
+web (all) - implement design
+infra (ci) - setup circle ci
+infra (pwa) - implement progressive web app
+infra (ssr) - setup server side rendering
