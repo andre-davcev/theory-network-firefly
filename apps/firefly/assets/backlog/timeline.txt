@@ -1,5 +1,16 @@
+79 (15 avg per week)
+jan-30 -
+feb-06 -
+feb-13 -
+feb-20 -
+feb-27 -
+mar-05 -
+mar-12 -
+mar-19 -
+mar-26 -
+
 2020-mar - cathy & amy join theory network
-2020-apr - firefly 1.0.0 alpha
+2020-apr - april 2nd release of firefly 1.0.0 alpha
 2020-may - test users (nextcorps, cathy, andre, sofia, karin, dave, amy)
 2020-jun - firefly 1.0.0 web
 2020-jul - firefly 1.0.0 launch
