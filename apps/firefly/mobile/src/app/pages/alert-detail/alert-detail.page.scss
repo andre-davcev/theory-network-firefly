@@ -1,0 +1,140 @@
+@import 'variables';
+
+:host
+{
+    ion-content {
+        --background: #{$fire-color-transparent};
+    }
+
+    app-item-map,
+    app-item-description {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    app-item-description {
+        padding-top: 1.25rem;
+    }
+
+    app-item-image {
+        --cpt-image-border-radius: 14px;
+    }
+
+    app-item-map {
+        margin-bottom: 1.5rem;
+    }
+
+    ion-list {
+        margin-bottom: 0;
+    }
+
+    ion-datetime {
+      &.cpt-invalid {
+        text-decoration: line-through;
+      }
+    }
+
+    img {
+      box-shadow: 3px 3px 10px 0px grey
+    }
+
+    .cpt-map-window
+    {
+      border: solid 1px #cecece;
+    }
+
+    .cpt-background
+    {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100px;
+      width: 100%;
+      background-color: #80d623;
+    }
+
+    .cpt-image
+    {
+        height: 167px;
+        width: 182px;
+        object-fit: cover;
+        margin: auto;
+    }
+
+    .cnt-map
+    {
+      position: relative;
+      margin-top: 16px;
+    }
+
+    .cnt-image,
+    .cnt-name,
+    .cnt-tagline,
+    .cnt-button,
+    .cnt-description
+    {
+      position: relative;
+      display: flex;
+      font-family: $fire-font-americantypewriter;
+    }
+
+    .cnt-name
+    {
+      height: 26px;
+      opacity: 0.7;
+      font-size: 20px;
+      color: #000000;
+      margin-top: 20px;
+    }
+
+    .cnt-tagline
+    {
+      margin-top: 8px;
+      padding-left: 28px;
+      padding-right: 28px;
+      height: 21px;
+      opacity: 0.54;
+      font-size: 18px;
+      color: #000000;
+    }
+
+    .cnt-description
+    {
+      font-family: serif;
+      margin-top: 16px;
+      padding-left: 28px;
+      padding-right: 28px;
+      font-size: 17px;
+      color: #41464b;
+    }
+
+    .cnt-image{
+      margin-top: 64px;
+    }
+
+    .name,
+    .tagline,
+    .description
+    {
+      margin: auto;
+    }
+
+    .cpt-button
+    {
+        position: absolute;
+        top: 65%;
+        left: 33%;
+        width: auto;
+        padding: 0;
+        margin: auto;
+        text-transform: uppercase;
+        background-color: $fire-color-primary;
+        color: rgb(252, 253, 252);
+        font-size: 1rem;
+        line-height: 1rem;
+        font-weight: 900;
+        padding: 1rem 2rem;
+        border-radius: 1.5rem;
+        letter-spacing: 1px;
+    }
+}
