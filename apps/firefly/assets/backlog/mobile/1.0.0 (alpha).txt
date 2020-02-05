@@ -14,9 +14,8 @@ app (icons) - icon components (alerts, stream, subscriptions interests, events, 
 app (infra) - upgrade ionic to v5
 app (notifications) - implement capacitor-fcm plugin
 +alerts (detail) - add go action sheet workflow (add to calendar, get directions)
-+alerts (detail) - implement detail screen
++alerts (detail) - cleanup styling on detail screen
 +alerts (list) - add go action sheet workflow (add to calendar, get directions)
-+alerts (list) - on click navigate to detail
 +alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (funtions create) - send push notifications for each alert token
 auth - fix anonymous initial load time

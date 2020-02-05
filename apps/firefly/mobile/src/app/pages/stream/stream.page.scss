@@ -51,7 +51,7 @@
     }
 
     .app-description {
-        font-family: $fire-font-arialnarrow;
+        font-family: serif;
         font-size: 14px;
     }
 
@@ -63,7 +63,7 @@
 
     .tagline {
         font-size: 20px;
-        font-family: $fire-font-markerfelt;
+        font-family: $fire-font-americantypewriter;
     }
 
     .name {
@@ -118,11 +118,11 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      font-family: $fire-font-americantypewriter;
+      font-family: serif;
     }
 
     .eventInfo {
-      font-family: $fire-font-arialnarrow;
+      font-family: serif;
     }
 
     .dateTimeWrapper {
@@ -130,11 +130,11 @@
     }
 
     .date {
-      font-family: $fire-font-americantypewriter;
+      font-family: serif;
     }
 
     .time {
-      font-family: $fire-font-markerfelt;
+      font-family: serif;
       font-size: 20px;
     }
 
