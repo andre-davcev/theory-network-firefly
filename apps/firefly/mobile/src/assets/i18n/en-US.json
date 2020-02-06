@@ -20,6 +20,8 @@
   "general.login"          : "Login",
   "general.signup"         : "Sign Up",
   "general.authenticate"   : "Authenticate",
+  "general.calendar"       : "Add To Calendar",
+  "general.map"            : "Get Directions",
 
   "menu.title"                : "Menu",
   "menu.home"                 : "Home",
@@ -53,6 +55,8 @@
   "page.stream.title"      : "Discover",
   "page.stream.subscribe"  : "Subscribe",
   "page.stream.subscribed" : "Subscribed",
+
+  "page.alert.detail.title": "Alert Detail",
 
   "page.notifications.title"                 : "Notifications",
   "page.notifications.tabFired"              : "Fired",

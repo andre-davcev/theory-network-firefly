@@ -4,7 +4,7 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet } from '@firefly/core';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages } from '@firefly/mobile';
@@ -46,6 +46,11 @@ export class PageAlert
           }))
         )
       ).subscribe((modal: HTMLIonModalElement) => modal.present());
+    }
+
+    public alertGo()
+    {
+      this.store.dispatch(new ActionUserAlertsGo()).subscribe();
     }
 
     public navigate(): void

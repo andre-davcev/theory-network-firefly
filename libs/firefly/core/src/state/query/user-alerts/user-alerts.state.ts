@@ -12,13 +12,17 @@ import {
     ActionUserAlertsRemove,
     ActionUserAlertsGetData,
     ActionUserAlertsGet,
-    ActionUserAlertsSync
+    ActionUserAlertsSync,
+    ActionUserAlertsGo
 } from './user-alerts.actions';
 import { StateUser } from '../../document/user';
 import { Query } from '@angular/fire/firestore';
-import { tap } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 import { StorageImage, StateStorage } from '@theory/firebase';
 import { firestore } from 'firebase/app';
+import { TranslateService } from '@ngx-translate/core';
+import { from, of } from 'rxjs';
+import { ActionSheetController } from '@ionic/angular';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 
@@ -27,7 +31,9 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
     constructor
     (
         private store:   Store,
-        private service: ServiceAlerts
+        private service: ServiceAlerts,
+        private translate   : TranslateService,
+        private actionSheet : ActionSheetController
     )
     {
         super
@@ -110,5 +116,40 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
     sync(context: StateContext<StateUserAlertsModel>, action: ActionUserAlertsSync)
     {
         return super.sync(context, action);
+    }
+
+    @Action(ActionUserAlertsGo)
+    authSelect({ dispatch }: StateContext<StateUserAlertsModel>)
+    {
+        return this.translate.
+        get
+        ([
+            'general.calendar',
+            'general.map'
+        ]).
+        pipe
+        (
+            switchMap((translations: Record<string, string>) =>
+                from(this.actionSheet.create
+                  ({
+                      header: translations['general.authenticate'],
+
+                      buttons:
+                      [
+                          {
+                              text : translations['general.calendar'],
+                              handler : () => { dispatch(of(null)); }
+                          },
+                          {
+                              text    : translations['general.map'],
+                              handler : () => { dispatch(of(null)); }
+                          }
+                      ]
+                  }))
+            ),
+            switchMap((actionSheet: HTMLIonActionSheetElement) =>
+                actionSheet.present()
+            )
+        );
     }
 }
