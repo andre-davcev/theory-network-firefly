@@ -5,9 +5,9 @@
 {
     --cpt-margin:                  0;
     --cpt-text-align:              center;
-    --cpt-line-height:             $tn-golden-ratio-em;
+    --cpt-line-height:             #{$tn-golden-ratio-em};
 
-    --cpt-font-family:             $apple-font-family;
+    --cpt-font-family:             #{$apple-font-family};
     --cpt-font-color:            #000000;
     --cpt-font-size:               1rem;
     --cpt-font-weight:             normal;
@@ -31,6 +31,8 @@
     &.cpt-first-letter .cpt-first-word:first-letter,
     &:not(.cpt-first-letter) .cpt-first-word
     {
+        margin-right: 1px;
+
         font-family: var(--cpt-font-family-special);
         color: var(--cpt-font-color-special);
         font-size: var(--cpt-font-size-special);

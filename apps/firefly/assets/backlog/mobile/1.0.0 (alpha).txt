@@ -12,25 +12,16 @@ app (infra) - upgrade ionic to v5
 +app (notifications) - implement capacitor-fcm plugin
 +alerts (detail) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (detail) - cleanup styling on detail screen
-alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime > events > timeNotify
+alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime < events < timeNotify
 +alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
 alerts (funtions create) - send push notifications for each alert token
-*auth - on logout navigate to /home/stream
 auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
-*sign-up (component) - create <app-button-action>
-*sign-up (slide 1) - select font awesome icons for categories
-*sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
 sign-up (slides) - replace slide images
-intro (slide 1) - Where life comes to you
-intro (slide 2) - Subscribe to community interests
-intro (slide 3) - Be notified when new events are posted to your interests
-intro (slide 4) - Add these events to you calendar and get directions
-intro (slides) - replace slide images
 interests (all) - migrate clusters collection to interests
 interests (detail) - add interest-events query state
 interests (detail) - add ability to add/remove events via query state
@@ -46,7 +37,6 @@ empty (images) - You haven't published any images yet. Images can be used for ev
 events (function cron) - implement daily cron which groups alerts for user and sends push notifcation (grouped)
 events (function subscribe) - with delay add user alerts which have passed timeNotify but are greater than today
 +events (detail) - move select cluster to select icon
-+events (detail) - move 'Hero Image' title to 'Notification Image'
 events (detail) - add url/phone field
 events (detail) - add create/edit
 events (detail) - reverse geocode
@@ -69,7 +59,6 @@ firebase (security) - create storage security rules
 home - fix header disappear when ion-badge shown
 library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
-menu - highlight selected row
 streams (list) - add heart subscribe animation
 streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner

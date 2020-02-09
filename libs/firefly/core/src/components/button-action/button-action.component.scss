@@ -1,0 +1,46 @@
+@import 'variables';
+@import '../../../../../apple/src/sass/variables';
+
+:host
+{
+    --cpt-color-background:   #{$fire-color-primary};
+    --cpt-color-text:         rgb(252, 253, 252);
+    --cpt-font-size:          1rem;
+    --cpt-font-family:        #{$apple-font-family};
+    --cpt-font-transform:     uppercase;
+    --cpt-font-weight:        900;
+    --cpt-font-spacing:       1px;
+    --cpt-border-radius:      1.5rem;
+    --cpt-padding-vertical:   1rem;
+    --cpt-padding-horizontal: 2rem;
+
+    position: relative;
+
+    ion-button {
+        position: relative;
+        margin: 0;
+
+        font-size: var(--cpt-font-size);
+        font-weight: var(--cpt-font-weight);
+        text-transform: var(--cpt-font-transform);
+        letter-spacing: var(--cpt-font-spacing);
+
+        --background: var(--cpt-color-background);
+        --background-active: var(--cpt-color-background);
+        --background-focused: var(--cpt-color-background);
+        --background-hover: var(--cpt-color-background);
+
+        --border-radius: var(--cpt-border-radius);
+        --border-width: 0;
+        --box-shadow: none;
+        --color: var(--cpt-color-text);
+        --color-activated: var(--cpt-color-text);
+        --color-focused: var(--cpt-color-text);
+        --color-hover: var(--cpt-color-text);
+
+        --padding-top: var(--cpt-padding-vertical);
+        --padding-bottom: var(--cpt-padding-vertical);
+        --padding-start: var(--cpt-padding-horizontal);
+        --padding-end: var(--cpt-padding-horizontal);
+    }
+}
