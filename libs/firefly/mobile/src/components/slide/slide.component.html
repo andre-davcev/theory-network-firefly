@@ -4,6 +4,9 @@
         <h2 class="cpt-short">{{ slide.description }}</h2>
     </section>
 
+    <!--div class="cnt-image" (click)="clickedAlertDetail()">
+      <img class="cpt-image" [src]="slide.metadata.urlMedium">
+    </!--div-->
     <div class="cpt-image" (click)="clickedAlertDetail()" [style.background-image]="'url(' + slide.metadata.urlMedium + ')'"></div>
     <div class="cpt-button" (click)="clickedAlertGo()">{{ buttonText }}</div>
 
