@@ -59,6 +59,7 @@
     "@ngxs/router-plugin": "file:../../../node_modules/@ngxs/router-plugin",
     "@ngxs/store": "file:../../../node_modules/@ngxs/store",
     "@nrwl/nx": "file:../../../node_modules/@nrwl/nx",
+    "capacitor-fcm": "file:../../../node_modules/capacitor-fcm",
     "@theory/apple": "file:../../../libs/apple",
     "@theory/bigdatacloud": "file:../../../libs/bigdatacloud",
     "@theory/capacitor": "file:../../../libs/capacitor",
