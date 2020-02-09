@@ -54,6 +54,14 @@
   "page.auth.newUser"             : "New User?",
   "page.auth.signUp"              : "Sign up here",
 
+  "page.signup.finishButton"    : "Let's Go!",
+  "page.signup.slide-1.message" : "Welcome to the Firefly community!",
+  "page.signup.slide-2.message" : "Subscribe to different interests in your area.",
+  "page.signup.slide-3.message" : "Receive notifications when new events are added to your interests.",
+  "page.signup.slide-4.message" : "Easily get directions or add events to your calendar.",
+  "page.signup.slide-5.message" : "Manage your subscriptions with ease.",
+  "page.signup.slide-6.message" : "Contribute to the community by publishing your own events and interests.",
+
   "page.stream.title"      : "Discover",
   "page.stream.subscribe"  : "Subscribe",
   "page.stream.subscribed" : "Subscribed",

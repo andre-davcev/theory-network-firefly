@@ -68,11 +68,20 @@ $cpt-slide-padding: 30px;
         line-height: 17px;
         color: rgba(0, 0, 0, 0.54);
     }
+
     .cpt-image
     {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      background-size: cover;
+      object-fit: cover;
+
+      border-radius: var(--cpt-image-border-radius);
         flex: 1;
         width: 100%;
         background-size: cover;
+        object-fit: cover;
         border-radius: var(--cpt-border-radius);
     }
 
