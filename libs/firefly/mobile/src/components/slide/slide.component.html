@@ -4,8 +4,8 @@
         <h2 class="cpt-short">{{ slide.description }}</h2>
     </section>
 
-    <div class="cpt-image" [style.background-image]="'url(' + slide.metadata.urlMedium + ')'"></div>
-    <div class="cpt-button">{{ buttonText }}</div>
+    <div class="cpt-image" (click)="clickedAlertDetail()" [style.background-image]="'url(' + slide.metadata.urlMedium + ')'"></div>
+    <div class="cpt-button" (click)="clickedAlertGo()">{{ buttonText }}</div>
 
     <span class="cpt-date">{{ slide.metadata.dateTimeDate | date:'short' }}</span>
 </div>

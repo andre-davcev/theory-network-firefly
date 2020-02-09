@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 import { Alert } from '@firefly/cloud';
 
@@ -15,4 +15,17 @@ export class ComponentSlide
     @Input() slide:      Alert;
     @Input() buttonText: string;
     @Input() routerLink: string;
+
+    @Output() alertGoClicked: EventEmitter<void> = new EventEmitter();
+    @Output() alertDetailClicked: EventEmitter<void> = new EventEmitter();
+
+    public clickedAlertGo(): void
+    {
+      this.alertGoClicked.next();
+    }
+
+    public clickedAlertDetail(): void
+    {
+      this.alertDetailClicked.next();
+    }
 }

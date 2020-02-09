@@ -9,14 +9,11 @@ app (keyboard) - fix ios ionic/capacitor keyboard bug
 app (splash) - android splash screen
 app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
 app (infra) - upgrade ionic to v5
-app (notifications) - implement capacitor-fcm plugin
-+alerts (detail) - add go action sheet workflow (add to calendar, get directions)
-+alerts (detail) - implement detail screen
-alerts (functions) - push notifications grouped together by day
-alerts (functions) - change timeNotify to day from day time
++app (notifications) - implement capacitor-fcm plugin
++alerts (detail) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
++alerts (detail) - cleanup styling on detail screen
 alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime > events > timeNotify
-+alerts (list) - add go action sheet workflow (add to calendar, get directions)
-+alerts (list) - on click navigate to detail
++alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
