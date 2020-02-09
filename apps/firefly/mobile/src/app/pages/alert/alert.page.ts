@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { IonSlides } from '@ionic/angular';
+import { tap, switchMap } from 'rxjs/operators';
+import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUserAlerts } from '@firefly/core';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
+import { PageAlertDetail } from '../alert-detail/alert-detail.page';
 @Component
 ({
     selector    : 'app-page-alert',
@@ -26,13 +27,30 @@ export class PageAlert
     public Pages: any = Pages;
     public slideOptions: any = { zoom: false };
 
-    constructor(private store: Store) { }
+    constructor(private store: Store, private modal: ModalController) { }
 
     public slideChanged(): void
     {
         from(this.slides.getActiveIndex()).
 
         pipe(tap((index: number) => console.log('Slide Changed: ' + index)));
+    }
+
+    public alertDetail(alert:Alert): void
+    {
+      this.store.dispatch(new ActionEventGet(alert.eventId)).pipe
+      (
+        switchMap(() =>
+          from(this.modal.create({
+            component: PageAlertDetail
+          }))
+        )
+      ).subscribe((modal: HTMLIonModalElement) => modal.present());
+    }
+
+    public alertGo()
+    {
+      this.store.dispatch(new ActionUserAlertsGo()).subscribe();
     }
 
     public navigate(): void

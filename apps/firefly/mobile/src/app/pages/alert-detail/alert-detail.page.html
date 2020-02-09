@@ -1,0 +1,47 @@
+<ion-header color="white">
+  <ion-toolbar>
+      <ion-title>
+          {{ 'page.alert.detail.title' | translate}}
+      </ion-title>
+
+      <ion-buttons slot="start">
+          <ion-button color="dark" (click)="cancel()">
+              {{ 'general.cancel' | translate }}
+          </ion-button>
+      </ion-buttons>
+
+      <ion-buttons slot="end">
+        <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+            <ion-icon name="person" color="dark" size="large"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+    <div class="cpt-background"></div>
+    <div class="cnt-image">
+      <img class="cpt-image" [src]="imageUrl$ | async">
+    </div>
+    <div class="cnt-name">
+      <div class="name">|{{ (event$ | async).name  }}|</div>
+    </div>
+    <div class="cnt-tagline">
+      <div class="tagline">{{ (event$ | async).tagline }}</div>
+    </div>
+    <div class="cnt-description">
+      <div class="description">{{(event$ | async).description}}</div>
+    </div>
+
+    <div class="cnt-map">
+      <app-item-map>
+      </app-item-map>
+      <div class="cpt-button">Coupon</div>
+    </div>
+
+    <!--div class="cnt-button"-->
+    <!--/!--div-->
+
+</ion-content>
