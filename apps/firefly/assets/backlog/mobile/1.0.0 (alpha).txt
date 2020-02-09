@@ -1,9 +1,6 @@
-*+admin (accounting) - setup joint esl theory network checking
 *admin (accounting) - setup auto payments with esl account
 admin (content) - event/interest spreadsheet
 admin (content) - mock.function.ts cloud function (mock data)
-*admin (design) - download sketch resources
-*admin (design) - find category icons
 admin (store) - ios app store prep
 admin (store) - android app store prep
 admin (store) - install android version on amy's phone
@@ -12,26 +9,28 @@ app (keyboard) - fix ios ionic/capacitor keyboard bug
 app (splash) - android splash screen
 app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
 app (infra) - upgrade ionic to v5
-app (notifications) - implement capacitor-fcm plugin
-+alerts (detail) - add go action sheet workflow (add to calendar, get directions)
++app (notifications) - implement capacitor-fcm plugin
++alerts (detail) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (detail) - cleanup styling on detail screen
-+alerts (list) - add go action sheet workflow (add to calendar, get directions)
+alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime > events > timeNotify
++alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (list) - on delete click (delete alert, update list, update unread count)
+alerts (list) - keep cards as unread alerts
+alerts (list) - add alert list icon
+alerts (list) - implement alert list screen
 alerts (funtions create) - send push notifications for each alert token
+*auth - on logout navigate to /home/stream
 auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
+*sign-up (component) - create <app-button-action>
+*sign-up (slide 1) - select font awesome icons for categories
 *sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
-sign-up (slide 2) - email/password
-sign-up (slide 3) - Welcome to the Firefly community!
-sign-up (slide 4) - Subscribe to different interests in your area
-sign-up (slide 5) - Receive notifications when new events are added to your interests
-sign-up (slide 6) - Easily get directions or add events to your calendar
-sign-up (slide 7) - Manage your subscriptions with ease
-sign-up (slide 8) - Contribute to the community by publishing your own interests and events
-slides (intro 1) - Where life comes to you
-slides (intro 2) - Subscribe to community interests
-slides (intro 3) - Be notified when new events are posted to your interests
-slides (intro 4) - Add these events to you calendar and get directions
+sign-up (slides) - replace slide images
+intro (slide 1) - Where life comes to you
+intro (slide 2) - Subscribe to community interests
+intro (slide 3) - Be notified when new events are posted to your interests
+intro (slide 4) - Add these events to you calendar and get directions
+intro (slides) - replace slide images
 interests (all) - migrate clusters collection to interests
 interests (detail) - add interest-events query state
 interests (detail) - add ability to add/remove events via query state
@@ -81,3 +80,14 @@ subscriptions (list) - on quick toggles/updates stack updates and put spinner
 +dave
 ^cathy
 #amy
+
+tasks:
+jan-30 - 79
+feb-06 -
+feb-13 -
+feb-20 -
+feb-27 -
+mar-05 -
+mar-12 -
+mar-19 -
+mar-26 -

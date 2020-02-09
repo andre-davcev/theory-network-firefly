@@ -1,8 +1,12 @@
 export enum Pages
 {
     Auth   = 'auth',
-    Login  = 'login',
-    SignUp = 'sign-up',
+
+    Login            = 'login',
+    SignUp           = 'sign-up',
+    SignUpCategories = 'sign-up-categories',
+    SignUpSlides     = 'sign-up-slides',
+
     Home   = 'home',
     Stream = 'stream',
     Alert  = 'alerts',

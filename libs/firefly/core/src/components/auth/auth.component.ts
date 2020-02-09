@@ -7,9 +7,8 @@ import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { Credentials } from '@theory/core';
 import { Store } from '@ngxs/store';
 import { ActionUserLoginEmail, ActionUserCreate } from '@firefly/core/state';
-import { switchMap, tap } from 'rxjs/operators';
-import { ModalController } from '@ionic/angular';
-import { from } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component
 ({
@@ -26,6 +25,9 @@ export class ComponentAuth
     @Input()
     public login: boolean = true;
 
+    @Output()
+    public finished: EventEmitter<boolean> = new EventEmitter();
+
     public faEnvelope: IconDefinition = faEnvelope;
     public faLock:     IconDefinition = faLock;
 
@@ -34,8 +36,7 @@ export class ComponentAuth
     constructor
     (
         private formBuilder : FormBuilder,
-        private store       : Store,
-        private modal       : ModalController
+        private store       : Store
     )
     {
         this.form = this.formBuilder.group
@@ -73,11 +74,14 @@ export class ComponentAuth
         this.store.dispatch(action).
         pipe
         (
-            switchMap(() =>
-                from(this.modal.dismiss())
-            ),
             tap(() =>
                 this.authenticating = false
+            ),
+            tap(() =>
+                this.finished.emit(true)
+            ),
+            catchError(() =>
+                of(this.finished.emit(false))
             )
         ).
         subscribe();
