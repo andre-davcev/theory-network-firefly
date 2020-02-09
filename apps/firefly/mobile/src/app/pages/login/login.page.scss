@@ -31,4 +31,12 @@
         color: red;
         text-align: center;
     }
+
+    ion-slides {
+        height: 100%;
+        width: 100%;
+
+        --bullet-background: #{$fire-color-white};
+        --bullet-background-active: #{$fire-color-white};
+    }
 }
