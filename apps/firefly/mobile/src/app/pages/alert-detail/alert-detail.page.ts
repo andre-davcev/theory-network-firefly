@@ -5,7 +5,7 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent } from '@firefly/core';
+import { StateEvent, ActionUserAlertsGo } from '@firefly/core';
 import { Pages } from '@firefly/mobile';
 import { BaseComponent } from '@theory/core';
 
@@ -39,6 +39,11 @@ export class PageAlertDetail extends BaseComponent implements OnInit
     public ionViewWillEnter(): void
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light }));
+    }
+
+    public alertGo()
+    {
+      this.store.dispatch(new ActionUserAlertsGo()).subscribe();
     }
 
     public cancel(): void
