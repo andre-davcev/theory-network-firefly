@@ -12,43 +12,38 @@ export class DirectiveElevation {
     @HostBinding('style.box-shadow') get getBoxShadow(): SafeStyle
     {
         const elevations: Array<string> = this.elevation.split(',');
-        const styles: Array<string> = [];
-        let style: string = '';
 
-        elevations.forEach((elevation: string) =>
-        {
-            if (elevation[0] === 'i')
-            {
-                style = 'inset ';
-                elevation = elevation.slice(1);
-            }
+        const styles: Array<string> = elevations.map((elevation: string) =>
+            this.getStyle(elevation)
+        );
 
-            styles.push(`${style}${this.getStyle(parseInt(elevation, 10))}`);
-        });
+        if (this.elevation === 'i2')
+          console.log(styles);
 
         return this.sanitizer.bypassSecurityTrustStyle(styles.join(','));
     }
 
     constructor(private sanitizer: DomSanitizer) { }
 
-    private getStyle(elevation: number): string
+    private getStyle(elev: string): string
     {
-        let key: string;
+        const inset:     boolean = elev[0] === 'i';
+        const elevation: number  = parseInt(inset ? elev.slice(1) : elev, 10);
 
-        if (elevation > 0 && elevation <= 14)
-        {
-            key = `Shadow${elevation}`;
-        }
-        else if (elevation < 0 && elevation >= -14)
-        {
-            elevation = Math.abs(elevation);
-            key = `ShadowUp${elevation}`;
-        }
-        else
-        {
-            key = 'None';
-        }
+        const key: string =
+            elevation > 0 && elevation <= 14 ?
+                `Shadow${elevation}` :
+            elevation < 0 && elevation >= -14 ?
+                `ShadowUp${elevation}` :
+            'None';
 
-        return Elevation[key];
+        const style: string = Elevation[key];
+
+        return style.
+            split('),').
+            map((shadow: string) =>
+                inset ? `inset ${shadow}` : shadow
+            ).
+            join('),');
     }
 }

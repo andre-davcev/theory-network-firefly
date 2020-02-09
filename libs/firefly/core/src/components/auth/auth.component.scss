@@ -7,7 +7,7 @@
     .cpt-inputs
     {
         position: relative;
-        padding: calc(var(--border-radius) / 2);
+        padding: 2px;
         border-radius: var(--border-radius);
         background-color: $fire-color-white;
         padding-left: 16px;
@@ -40,7 +40,7 @@
         --background-activated: #{$fire-color-primary-light};
         --background-focused: #{$fire-color-primary-light};
         --background-hover: #{$fire-color-primary-light};
-        --border-radius: 4px;
+        --border-radius: 5px;
 
         margin: 0;
 
@@ -59,6 +59,6 @@
 
     [ng-reflect-classes=cpt-icon-email]
     {
-        padding-top: 2px;
+        padding-top: 3px;
     }
 }

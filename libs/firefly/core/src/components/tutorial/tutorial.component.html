@@ -1,0 +1,12 @@
+<section fxLayout="column"
+           fxLayoutAlign="center center"
+           [fxLayoutGap]="gap">
+    <div class="cpt-image"
+         [elevation]="elev"
+         [style.background-image]="'url(' + image + ')'">
+    </div>
+
+    <app-paragraph [text]="message"></app-paragraph>
+
+    <ion-button *ngIf="button" (click)="finish()">{{ button }}</ion-button>
+</section>

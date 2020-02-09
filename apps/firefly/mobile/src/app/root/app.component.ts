@@ -59,11 +59,8 @@ export class ComponentApp
             switchMap(({ page }: ActionMobileAuthSelected) =>
                 from(this.modal.create
                 ({
-                    component: PageLogin,
-                    componentProps:
-                    {
-                        signup: page === Pages.SignUp
-                    }
+                    component      : PageLogin,
+                    componentProps : { page }
                 }))
             ),
             switchMap((modal: HTMLIonModalElement) =>

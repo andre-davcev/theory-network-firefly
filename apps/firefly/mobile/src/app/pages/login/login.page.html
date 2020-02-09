@@ -1,5 +1,6 @@
 
-<ion-header mode="ios">
+<ion-header *ngIf="page !== Pages.SignUpSlides"
+            mode="ios">
     <ion-toolbar color="dark">
         <ion-buttons slot="start">
             <ion-button icon-only (click)="close()" *ngIf="!(userLoading$ | async)" >
@@ -9,10 +10,58 @@
     </ion-toolbar>
 </ion-header>
 
-<section class="cpt-container"
+<section *ngIf="page === Pages.Login || page === Pages.SignUp"
+         class="cpt-container"
          fxLayout="column"
          fxLayoutAlign="center"
          fxLayoutGap="2rem">
     <app-logo [loading]="userLoading$ | async"></app-logo>
-    <app-auth [login]="!signup"></app-auth>
+    <app-auth [login]="page === Pages.Login" (finished)="finishedAuth($event)"></app-auth>
 </section>
+
+<ion-slides *ngIf="page === Pages.SignUpSlides"
+            pager="true">
+    <ion-slide>
+        <app-tutorial image="assets/sign-up/slide-1.jpg"
+                      [message]="'page.signup.slide-1.message' | translate"
+                      elev="i2">
+        </app-tutorial>
+    </ion-slide>
+
+    <ion-slide>
+        <app-tutorial image="assets/sign-up/slide-2.png"
+                      [message]="'page.signup.slide-2.message' | translate"
+                      elev="i2">
+        </app-tutorial>
+    </ion-slide>
+
+    <ion-slide>
+        <app-tutorial image="assets/sign-up/slide-3.png"
+                      [message]="'page.signup.slide-3.message' | translate"
+                      elev="i2">
+        </app-tutorial>
+    </ion-slide>
+
+    <ion-slide>
+        <app-tutorial image="assets/sign-up/slide-4.png"
+                      [message]="'page.signup.slide-4.message' | translate"
+                      elev="i2">
+        </app-tutorial>
+    </ion-slide>
+
+    <ion-slide>
+        <app-tutorial image="assets/sign-up/slide-5.png"
+                      [message]="'page.signup.slide-5.message' | translate"
+                      elev="i2">
+        </app-tutorial>
+    </ion-slide>
+
+    <ion-slide>
+        <app-tutorial image="assets/sign-up/slide-6.png"
+                      [message]="'page.signup.slide-6.message' | translate"
+                      elev="i2"
+                      [button]="'page.signup.finishButton' | translate"
+                      (finished)="close()">
+        </app-tutorial>
+    </ion-slide>
+</ion-slides>
