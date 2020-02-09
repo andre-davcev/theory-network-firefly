@@ -8,5 +8,8 @@
 
     <app-paragraph [text]="message"></app-paragraph>
 
-    <ion-button *ngIf="button" (click)="finish()">{{ button }}</ion-button>
+    <app-button-action *ngIf="button"
+                       [text]="button"
+                       (click)="finish()">
+    </app-button-action>
 </section>

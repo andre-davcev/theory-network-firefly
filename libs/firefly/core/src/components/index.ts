@@ -1,4 +1,5 @@
 export * from './auth';
+export * from './button-action';
 export * from './icon';
 export * from './icon-firefly';
 export * from './icon-subscribe';

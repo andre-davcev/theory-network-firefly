@@ -25,14 +25,17 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class StateMobile
 {
-    @Selector() static isLoading(state: StateMobileModel)      : boolean                { return state.loadingElement != null;}
-    @Selector() static loadingElement(state: StateMobileModel) : any                    { return state.loadingElement; }
-    @Selector() static menuOpen(state: StateMobileModel)       : boolean                { return state.menuOpen; }
-    @Selector() static menuClosed(state: StateMobileModel)     : boolean                { return !state.menuOpen; }
-    @Selector() static pagesRoot(state: StateMobileModel)      : Record<string, Pages>  { return state.pagesRoot; }
-    @Selector() static pageRoot(state: StateMobileModel)       : string                 { return state.pageRoot; }
-    @Selector() static pageAlerts(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Alert}`;  }
-    @Selector() static pageStream(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
+    @Selector() static isLoading(state: StateMobileModel)         : boolean                { return state.loadingElement != null;}
+    @Selector() static loadingElement(state: StateMobileModel)    : any                    { return state.loadingElement; }
+    @Selector() static menuOpen(state: StateMobileModel)          : boolean                { return state.menuOpen; }
+    @Selector() static menuClosed(state: StateMobileModel)        : boolean                { return !state.menuOpen; }
+    @Selector() static pagesRoot(state: StateMobileModel)         : Record<string, Pages>  { return state.pagesRoot; }
+    @Selector() static pageRoot(state: StateMobileModel)          : string                 { return state.pageRoot; }
+    @Selector() static pageAlerts(state: StateMobileModel)        : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Alert}`; }
+    @Selector() static pageStream(state: StateMobileModel)        : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
+    @Selector() static pageHome(state: StateMobileModel)          : boolean                { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
+    @Selector() static pageSubscriptions(state: StateMobileModel) : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
+    @Selector() static pagePublisher(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Publisher}`; }
 
     constructor
     (

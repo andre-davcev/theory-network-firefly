@@ -36,15 +36,10 @@
         border-radius: var(--cpt-image-border-radius);
     }
 
-    ion-button {
-      --background-active: var(--cpt-color-button);
-      --padding-start: 0;
-      --padding-end: 0;
-    }
-
     app-paragraph {
         --cpt-font-color: var(--cpt-color-body);
         --cpt-font-color-special: var(--cpt-color-heading);
+
         margin-left: calc(var(--cpt-padding));
         margin-right: calc(var(--cpt-padding));
     }
