@@ -20,6 +20,7 @@ automation (ci) - setup ionic appflow
 automation (dev) - dockerize dev environment
 automation (dev) - setup automated code formatting via prettier
 automation (dev) - setup schematics
+auth - add password recovery
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firebase (admin) - setup billing/usage alert triggers
 firebase (all) - follow best practices

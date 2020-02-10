@@ -39,7 +39,7 @@ export class PageLogin
     {
         if (successful)
         {
-            if (this.page === Pages.SignUp)
+            if (this.page === Pages.Login)
             {
                 this.close();
             }
