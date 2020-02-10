@@ -19,8 +19,11 @@ alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
 alerts (funtions create) - send push notifications for each alert token
+auth - add login/sign up validation and error messages
 auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
+*sign-up (auth) - test sign up user flow
+*sign-up (auth) - move slides to sign up workflow
 sign-up (slides) - replace slide images
 interests (all) - migrate clusters collection to interests
 interests (detail) - add interest-events query state

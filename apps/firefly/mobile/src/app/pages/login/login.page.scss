@@ -7,6 +7,7 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
+    background-color: $fire-color-dark;
 
     ion-icon {
       font-size: 4rem;
@@ -35,6 +36,7 @@
     ion-slides {
         height: 100%;
         width: 100%;
+        margin-bottom: 1rem;
 
         --bullet-background: #{$fire-color-white};
         --bullet-background-active: #{$fire-color-white};
