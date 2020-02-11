@@ -17,9 +17,6 @@ export class DirectiveElevation {
             this.getStyle(elevation)
         );
 
-        if (this.elevation === 'i2')
-          console.log(styles);
-
         return this.sanitizer.bypassSecurityTrustStyle(styles.join(','));
     }
 

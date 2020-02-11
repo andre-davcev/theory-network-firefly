@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentParagraph } from '@theory/core';
 
+import { ModuleComponentButtonAction } from '../button-action';
+
 @NgModule
 ({
     imports:
@@ -15,7 +17,8 @@ import { ModuleComponentParagraph } from '@theory/core';
         FlexLayoutModule,
         IonicModule,
         ModuleDirectiveElevation,
-        ModuleComponentParagraph
+        ModuleComponentParagraph,
+        ModuleComponentButtonAction
     ],
     declarations: [ComponentTutorial],
     exports: [ComponentTutorial]
