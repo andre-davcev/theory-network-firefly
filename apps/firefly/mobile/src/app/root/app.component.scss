@@ -22,6 +22,11 @@
     ion-item {
         --color: #{$fire-color-primary};
         cursor: pointer;
+
+        &.cpt-selected
+        {
+            --background: #{$fire-color-dark-lighter}
+        }
     }
 
     ion-list {

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Platform, MenuController, ModalController } from '@ionic/angular';
 import { from, Observable } from 'rxjs';
-import { delay, switchMap, filter } from 'rxjs/operators';
+import { delay, switchMap } from 'rxjs/operators';
 import { Actions, ofActionSuccessful, Store, Select } from '@ngxs/store';
-import { RouterNavigation, Navigate } from '@ngxs/router-plugin';
+import { RouterNavigation } from '@ngxs/router-plugin';
 
 import { PlatformEnum } from '@theory/ionic';
 
-import { Pages, ActionMobileAuthSelected, ActionMobileAuthSelect } from '@firefly/mobile';
+import { Pages, ActionMobileAuthSelected, StateMobile } from '@firefly/mobile';
 import { ActionUserLogout, StateUser } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
 import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
@@ -23,7 +23,10 @@ const { SplashScreen } = Plugins;
 })
 export class ComponentApp
 {
-    @Select(StateUser.found()) userFound$: Observable<boolean>;
+    @Select(StateUser.found())             userFound$:          Observable<boolean>;
+    @Select(StateMobile.pageHome)          pageHome$:          Observable<boolean>;
+    @Select(StateMobile.pageSubscriptions) pageSubscriptions$: Observable<boolean>;
+    @Select(StateMobile.pagePublisher)     pagePublisher$:     Observable<boolean>;
 
     public Pages: any = Pages;
 
@@ -59,11 +62,8 @@ export class ComponentApp
             switchMap(({ page }: ActionMobileAuthSelected) =>
                 from(this.modal.create
                 ({
-                    component: PageLogin,
-                    componentProps:
-                    {
-                        signup: page === Pages.SignUp
-                    }
+                    component      : PageLogin,
+                    componentProps : { page }
                 }))
             ),
             switchMap((modal: HTMLIonModalElement) =>
@@ -89,7 +89,7 @@ export class ComponentApp
             switchMap(() =>
                 this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream))
             )
-        );
+        ).subscribe();
     }
 
     public menuOpened(): void

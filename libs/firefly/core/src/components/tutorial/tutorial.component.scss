@@ -1,0 +1,47 @@
+@import 'variables';
+
+:host
+{
+    --cpt-color-background:        #{$fire-color-dark};
+    --cpt-color-body:              #{$fire-color-white};
+    --cpt-color-heading:           #{$fire-color-primary};
+    --cpt-padding:                 2rem;
+    --cpt-image-border-radius:     0.75rem;
+    --cpt-color-button:            #{$fire-color-primary};
+
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+
+    padding: var(--cpt-padding);
+    padding-top: calc(var(--cpt-padding) * 2);
+    padding-bottom: calc(var(--cpt-padding) * 1.75);
+
+    background-color: var(--cpt-color-background);
+
+    section
+    {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .cpt-image
+    {
+        position: relative;
+        width: 100%;
+        flex: 1;
+        background-size: cover;
+        object-fit: cover;
+
+        border-radius: var(--cpt-image-border-radius);
+    }
+
+    app-paragraph {
+        --cpt-font-color: var(--cpt-color-body);
+        --cpt-font-color-special: var(--cpt-color-heading);
+
+        margin-left: calc(var(--cpt-padding));
+        margin-right: calc(var(--cpt-padding));
+    }
+}

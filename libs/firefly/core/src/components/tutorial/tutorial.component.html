@@ -1,0 +1,15 @@
+<section fxLayout="column"
+           fxLayoutAlign="center center"
+           [fxLayoutGap]="gap">
+    <div class="cpt-image"
+         [elevation]="elev"
+         [style.background-image]="'url(' + image + ')'">
+    </div>
+
+    <app-paragraph [text]="message"></app-paragraph>
+
+    <app-button-action *ngIf="button"
+                       [text]="button"
+                       (click)="finish()">
+    </app-button-action>
+</section>
