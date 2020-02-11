@@ -7,11 +7,11 @@ import { PushNotification } from '@theory/firebase';
 import { StateNotificationsModel } from './notifications.state.model';
 import { StateNotificationsOptions } from './notifications.state.options';
 import { ActionNotificationsWatch } from './notifications.actions';
-//import { Plugins, PushNotification as CapPushNotification } from '@capacitor/core';
-//import { FCM } from 'capacitor-fcm';
+import { Plugins, PushNotification as CapPushNotification } from '@capacitor/core';
+import { FCM } from 'capacitor-fcm';
 
-//const fcm = new FCM();
-//const { PushNotifications } = Plugins;
+const fcm = new FCM();
+const { PushNotifications } = Plugins;
 @State<StateNotificationsModel>(StateNotificationsOptions)
 
 export class StateNotifications
@@ -23,18 +23,19 @@ export class StateNotifications
 
     @Selector() static hasPushNotifications(state: StateNotificationsModel)  {return state.notifications.length > 0;}
 
-   /*ngxsOnInit(context: StateContext<StateNotificationsModel>)
+   ngxsOnInit(context: StateContext<StateNotificationsModel>)
     {
       context.dispatch(new ActionNotificationsWatch());
-    }*/
+    }
 
     @Action(ActionNotificationsWatch)
     notificationsWatch({ patchState, getState, dispatch }: StateContext<StateNotificationsModel>)
     {
+      alert('notifications watch');
      //
         // external required step
         // register for push
-        /*PushNotifications.register()
+        PushNotifications.register()
         .then(() => {
           //
           // Subscribe to a specific topic
@@ -50,8 +51,8 @@ export class StateNotifications
         // Get FCM token instead the APN one returned by Capacitor
         fcm
         .getToken()
-        .then(r => alert(`Token ${r.token}`))
-        .catch(err => console.log(err));*/
+        .then(r => console.log(`Token ${r.token}`))
+        .catch(err => console.log(err));
         /*
         this.firebaseNative.onNotificationOpen().pipe
         (
