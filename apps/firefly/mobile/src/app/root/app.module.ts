@@ -14,11 +14,11 @@ import { ModulePageLogin } from '../pages';
     imports :
     [
         CoreModule,
+        BrowserAnimationsModule,
 
         ModulePage,
         ModuleRoutingApp,
         ModuleComponentIcon,
-        BrowserAnimationsModule,
         ModulePageLogin
     ],
 

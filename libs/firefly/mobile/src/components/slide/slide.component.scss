@@ -44,23 +44,6 @@ $cpt-slide-padding: 30px;
         color: rgba(0, 0, 0, 0.54);
     }
 
-    .cpt-button
-    {
-        position: relative;
-        width: auto;
-        padding: 0;
-        margin: 0;
-        text-transform: uppercase;
-        background-color: $fire-color-primary;
-        color: rgb(252, 253, 252);
-        font-size: 1rem;
-        line-height: 1rem;
-        font-weight: 900;
-        padding: 1rem 2rem;
-        border-radius: 1.5rem;
-        letter-spacing: 1px;
-    }
-
     .cpt-paragraph
     {
         margin: 0;
@@ -68,11 +51,29 @@ $cpt-slide-padding: 30px;
         line-height: 17px;
         color: rgba(0, 0, 0, 0.54);
     }
+
+    .cnt-image
+    {
+      flex: 1;
+      height: 100%;
+    }
+
     .cpt-image
     {
+      position: relative;
+      width: 100%;
+        flex: 1;
+      background-size: cover;
+      object-fit: cover;
+
+      border-radius: var(--cpt-image-border-radius);
         flex: 1;
         width: 100%;
         background-size: cover;
+        //object-fit: cover;
+        //max-height: 318px;
+        height: 100%;
+        object-fit: cover;
         border-radius: var(--cpt-border-radius);
     }
 

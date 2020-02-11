@@ -26,7 +26,9 @@
 
     ion-card {
         --background: #{$fire-color-white};
-        font-family: $fire-font-markerfelt;
+        //font-family: $fire-font-markerfelt;
+        //font-family: $fire-font-playfair;
+        font-family: $fire-font-opensans;
         width: 100%;
         margin-bottom: 2px;
     }
@@ -51,7 +53,8 @@
     }
 
     .app-description {
-        font-family: serif;
+        //font-family: serif;
+        font-family: $fire-font-opensans;
         font-size: 14px;
     }
 
@@ -63,7 +66,9 @@
 
     .tagline {
         font-size: 20px;
-        font-family: $fire-font-americantypewriter;
+        //font-family: $fire-font-americantypewriter;
+        font-family: $fire-font-playfair;
+        font-weight: 600;
     }
 
     .name {
@@ -111,18 +116,20 @@
 
     .wrapper div{
       flex-basis: 100%;
-      font-family: $fire-font-markerfelt;
+      //font-family: $fire-font-markerfelt;
     }
 
     .eventWrapper {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      font-family: serif;
+      //font-family: serif;
+      font-family: $fire-font-opensans
     }
 
     .eventInfo {
-      font-family: serif;
+      //font-family: serif;
+      font-family: $fire-font-opensans
     }
 
     .dateTimeWrapper {
@@ -130,11 +137,13 @@
     }
 
     .date {
-      font-family: serif;
+      //font-family: serif;
+      font-family: $fire-font-opensans
     }
 
     .time {
-      font-family: serif;
+      //font-family: serif;
+      font-family: $fire-font-opensans;
       font-size: 20px;
     }
 

@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ComponentSlide } from './slide.component';
+import { ModuleComponentButtonAction } from '@firefly/core';
 
 @NgModule
 ({
@@ -18,7 +19,8 @@ import { ComponentSlide } from './slide.component';
         FlexLayoutModule,
         RouterModule,
         TranslateModule,
-        ModuleDirectiveElevation
+        ModuleDirectiveElevation,
+        ModuleComponentButtonAction
     ],
 
     declarations : [ComponentSlide],

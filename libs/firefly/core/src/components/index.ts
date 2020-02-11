@@ -1,4 +1,5 @@
 export * from './auth';
+export * from './button-action';
 export * from './icon';
 export * from './icon-firefly';
 export * from './icon-subscribe';
@@ -8,3 +9,4 @@ export * from './map';
 export * from './map-annotation';
 export * from './map-orb';
 export * from './map-pin';
+export * from './tutorial';
