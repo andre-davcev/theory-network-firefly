@@ -13,7 +13,7 @@
   "general.go"            : "Go",
   "general.starts"         : "Starts",
   "general.ends"           : "Ends",
-  "general.heroImage"      : "Hero Image",
+  "general.heroImage"      : "Notification Image",
   "general.publish"        : "Publish",
   "general.update"         : "Update",
   "general.subscribers"    : "Subscribers",
@@ -56,7 +56,6 @@
   "page.auth.newUser"             : "New User?",
   "page.auth.signUp"              : "Sign up here",
 
-  "page.signup.finishButton"    : "Let's Go!",
   "page.signup.slide-1.message" : "Welcome to the Firefly community!",
   "page.signup.slide-2.message" : "Subscribe to different interests in your area.",
   "page.signup.slide-3.message" : "Receive notifications when new events are added to your interests.",

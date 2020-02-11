@@ -20,13 +20,20 @@ automation (ci) - setup ionic appflow
 automation (dev) - dockerize dev environment
 automation (dev) - setup automated code formatting via prettier
 automation (dev) - setup schematics
+auth - add password recovery
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firebase (admin) - setup billing/usage alert triggers
 firebase (all) - follow best practices
 firebase (analytics) - implement firebase analytics (google)
 firebase (security) - prevent hackers from querying past limit size
 firebase (security) - prevent hackers from writing to database too quickly
+intro (slide 1) - Where life comes to you
+intro (slide 2) - Subscribe to community interests
+intro (slide 3) - Be notified when new events are posted to your interests
+intro (slide 4) - Add these events to you calendar and get directions
 security (routing) - setup router guards
+sign-up (slide 1) - select font awesome icons for categories
+sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
 streams (detail) - implement stream detail screen
 testing (coverage) - setup code coverage
 testing (e2e) - setup cypress tests
