@@ -50,13 +50,13 @@
       left: 0;
       height: 100px;
       width: 100%;
-      background-color: #80d623;
+     // background-color: #80d623;
     }
 
     .cpt-image
     {
-        height: 167px;
-        width: 182px;
+        //height: 167px;
+        width: 70%;
         object-fit: cover;
         margin: auto;
     }
@@ -75,11 +75,12 @@
     {
       position: relative;
       display: flex;
-      font-family: $fire-font-americantypewriter;
+      font-family: $fire-font-opensans;
     }
 
     .cnt-name
     {
+      font-family: $fire-font-americantypewriter;
       height: 26px;
       opacity: 0.7;
       font-size: 20px;
@@ -89,6 +90,8 @@
 
     .cnt-tagline
     {
+      font-family: $fire-font-playfair;
+      font-weight: 600;
       margin-top: 8px;
       padding-left: 28px;
       padding-right: 28px;
@@ -100,7 +103,7 @@
 
     .cnt-description
     {
-      font-family: serif;
+      font-family: $fire-font-opensans;
       margin-top: 16px;
       padding-left: 28px;
       padding-right: 28px;
@@ -109,7 +112,7 @@
     }
 
     .cnt-image{
-      margin-top: 64px;
+      margin-top: 10%;
     }
 
     .name,
@@ -121,12 +124,13 @@
 
     .cpt-button
     {
-        position: absolute;
-        top: 65%;
-        left: 33%;
-        width: auto;
+        position: relative;
+        //top: 65%;
+        //left: 30%;
+        //width: auto;
         padding: 0;
         margin: auto;
+        margin-top: 16px;
         text-transform: uppercase;
         background-color: $fire-color-primary;
         color: rgb(252, 253, 252);
