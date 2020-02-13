@@ -1,0 +1,40 @@
+@import 'variables';
+@import '../../../../../apple/src/sass/variables';
+@import '../../../../../web/src/sass/variables';
+
+:host
+{
+    --cpt-icon-color: #{$fire-color-grey-middle};
+    --cpt-icon-size: 6rem;
+
+    --cpt-message-text-align:              center;
+    --cpt-message-line-height:             #{$tn-golden-ratio-em};
+    --cpt-message-font-family:             #{$apple-font-family};
+    --cpt-message-font-color:            #000000;
+    --cpt-message-font-size:               1rem;
+    --cpt-message-font-weight:             normal;
+    --cpt-message-font-letter-spacing:     0px;
+
+    fa-icon {
+        stroke: var(--cpt-icon-color);
+        color: var(--cpt-icon-color);
+    }
+
+    ion-icon {
+        font-size: 4rem;
+        color: var(--cpt-icon-color);
+    }
+
+    .cpt-paragraph
+    {
+        margin: 0;
+        padding: 0;
+        text-align: var(--cpt-message-text-align);
+        font-family: var(--cpt-mesage-font-family);
+        color: var(--cpt-message-font-color);
+        font-size: var(--cpt-message-font-size);
+        font-weight: var(--cpt-message-font-weight);
+        letter-spacing: var(--cpt-mesage-font-letter-spacing);
+        line-height: var(--cpt-message-line-height);
+    }
+}

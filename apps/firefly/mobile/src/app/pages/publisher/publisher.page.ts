@@ -8,6 +8,7 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages, StateMobile } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
+import { IconType, IconSize, Color } from '@firefly/core';
 
 @Component
 ({
@@ -21,6 +22,10 @@ export class PagePublisher
     @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
 
     public Pages : any = Pages;
+
+    public IconType : any = IconType;
+    public IconSize : any = IconSize;
+    public Color    : any = Color;
 
     constructor
     (
