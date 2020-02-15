@@ -2,17 +2,32 @@
 
 :host
 {
-    --cpt-font-family: #{$fire-font-firefly};
-    --cpt-font-size: 12px;
-    --cpt-line-height: 1;
     --cpt-color: black;
 
+    --cpt-font-size-tiny:   1rem;
+    --cpt-font-size-small:  2rem;
+    --cpt-font-size-medium: 2.4rem;
+    --cpt-font-size-large:  4rem;
+    --cpt-font-size-huge:   6rem;
+
+    --cpt-font-size: var(--cpt-font-size-small);
+
+    &.cpt-size-tiny   { --cpt-font-size: var(--cpt-font-size-tiny); }
+    &.cpt-size-small  { --cpt-font-size: var(--cpt-font-size-small); }
+    &.cpt-size-medium { --cpt-font-size: var(--cpt-font-size-medium); }
+    &.cpt-size-large  { --cpt-font-size: var(--cpt-font-size-large); }
+    &.cpt-size-huge   { --cpt-font-size: var(--cpt-font-size-huge); }
+
+    &.cpt-color-primary   { --cpt-color: #{$fire-color-primary}; }
+    &.cpt-color-secondary { --cpt-color: #{$fire-color-accent}; }
+    &.cpt-color-white     { --cpt-color: #{$fire-color-white}; }
+    &.cpt-color-black     { --cpt-color: #{$fire-color-black}; }
+    &.cpt-color-dark      { --cpt-color: #{$fire-color-dark}; }
+    &.cpt-color-medium    { --cpt-color: #{$fire-color-grey-lightest}; }
+
     position: relative;
-    width: var(--cpt-font-size);
-    height: var(--cpt-font-size);
     display: inline-block;
     opacity: 0;
-    color: var(--cpt-color);
 
     &.cpt-visible
     {
@@ -22,8 +37,12 @@
     .cpt-icon
     {
         position: relative;
+        font-family: #{$fire-font-firefly};
+        color: var(--cpt-color);
         height: var(--cpt-font-size);
         width: var(--cpt-font-size);
+        font-size: var(--cpt-font-size);
+        line-height: 1;
 
         &:before
         {
@@ -33,7 +52,7 @@
             font-variant: normal;
             text-transform: none;
             text-rendering: auto;
-            line-height: var(--cpt-line-height);
+            line-height: 1;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             font-family: var(--cpt-font-family);
@@ -41,5 +60,14 @@
         }
     }
 
-    &.cpt-firefly > .cpt-icon:before { content: 'b'; }
+    &.cpt-name-interests > .cpt-icon:before { content: 'b'; }
+
+    ion-icon {
+        position: relative;
+        font-size: var(--cpt-font-size);
+    }
+
+    fa-icon {
+        position: relative;
+    }
 }
