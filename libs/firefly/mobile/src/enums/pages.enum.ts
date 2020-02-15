@@ -32,7 +32,6 @@ export enum Pages
 
     EventLocation = 'event-location',
 
-    UserAssets   = 'user-assets',
     UserProfile  = 'user-profile',
     UserSettings = 'user-settings',
 

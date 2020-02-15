@@ -1,1 +1,13 @@
-<div class="cpt-icon"></div>
+<div *ngIf="family === IconFamily.Custom"
+     class="cpt-icon">
+</div>
+
+<ion-icon *ngIf="family === IconFamily.Ionic"
+          [name]="icon"
+          [color]="color"
+          [slot]="slot">
+</ion-icon>
+
+<fa-icon *ngIf="family === IconFamily.FontAwesome"
+         [icon]="definition">
+</fa-icon>
