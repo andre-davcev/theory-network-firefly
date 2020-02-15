@@ -1,5 +1,5 @@
 
-import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 import { Platform } from '@ionic/angular';
 
 import { PushNotification } from '@theory/firebase';
@@ -9,6 +9,8 @@ import { StateNotificationsOptions } from './notifications.state.options';
 import { ActionNotificationsWatch } from './notifications.actions';
 import { Plugins, PushNotification as CapPushNotification } from '@capacitor/core';
 import { FCM } from 'capacitor-fcm';
+import { ActionUserAddToken } from '@firefly/core';
+import { StateUser } from '@firefly/core';
 
 const fcm = new FCM();
 const { PushNotifications } = Plugins;
@@ -16,22 +18,20 @@ const { PushNotifications } = Plugins;
 
 export class StateNotifications
 {
-    constructor(private platform: Platform) {}
+    constructor(
+      private platform: Platform,
+      private store   : Store
+    ) {}
 
     @Selector() static pushNotifications(state: StateNotificationsModel): Array<PushNotification> {return state.notifications;}
     @Selector() static pushNotification(state: StateNotificationsModel): PushNotification {return state.notification;}
 
     @Selector() static hasPushNotifications(state: StateNotificationsModel)  {return state.notifications.length > 0;}
 
-   ngxsOnInit(context: StateContext<StateNotificationsModel>)
-    {
-      context.dispatch(new ActionNotificationsWatch());
-    }
-
     @Action(ActionNotificationsWatch)
     notificationsWatch({ patchState, getState, dispatch }: StateContext<StateNotificationsModel>)
     {
-      alert('notifications watch');
+      let tokens : Array<string> = this.store.selectSnapshot(StateUser.tokens);
      //
         // external required step
         // register for push
@@ -51,7 +51,11 @@ export class StateNotifications
         // Get FCM token instead the APN one returned by Capacitor
         fcm
         .getToken()
-        .then(r => console.log(`Token ${r.token}`))
+        .then(r => {
+            //console.log(`Token ${r.token}`);
+            if(!tokens.includes(r.token))
+              dispatch(new ActionUserAddToken(r.token));
+        })
         .catch(err => console.log(err));
         /*
         this.firebaseNative.onNotificationOpen().pipe
