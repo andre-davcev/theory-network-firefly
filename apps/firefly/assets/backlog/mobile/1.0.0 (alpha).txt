@@ -6,19 +6,19 @@ admin (store) - android app store prep
 admin (store) - install android version on amy's phone
 admin (store) - install ios version on cathy's phone
 app (keyboard) - fix ios ionic/capacitor keyboard bug
-app (splash) - android splash screen
++app (splash) - android splash screen
 app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
 app (infra) - upgrade ionic to v5
 +app (notifications) - implement capacitor-fcm plugin
 +alerts (detail) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (detail) - cleanup styling on detail screen
-alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime < events < timeNotify
++alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime < events < timeNotify
 +alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
-alerts (funtions create) - send push notifications for each alert token
++alerts (funtions create) - send push notifications for each alert token
 auth - add login/sign up validation and error messages
 auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
@@ -37,8 +37,8 @@ empty (events) - Looks like you haven't created any Events yet. Feel free to cre
 empty (icons) - You haven't published any icons yet. Icons are used as branding for your Interests.
 empty (images) - You haven't published any images yet. Images can be used for event notifcations as well as the main image on the Discover Interests screen.
 +events (all) - migrate timeNotify to day from hourly
-events (function cron) - implement daily cron which groups alerts for user and sends push notifcation (grouped)
-events (function subscribe) - with delay add user alerts which have passed timeNotify but are greater than today
++events (function cron) - implement daily cron which groups alerts for user and sends push notifcation (grouped)
++events (function subscribe) - with delay add user alerts which have passed timeNotify but are greater than today
 +events (detail) - move select cluster to select icon
 events (detail) - add url/phone field
 events (detail) - add create/edit
@@ -64,7 +64,7 @@ library (mapbox) - add back tokenized mapbox access token in search service
 login (auth) - error handling
 map (component) - limit mapbox search types to [address, poi]
 streams (list) - add heart subscribe animation
-streams (list) - fix subscriptions add/remove from streams/manage subscriptions
++streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner
 streams (state) - user.state.ts uncomment interest.userId !== userId
 subscriptions (list) - on quick toggles/updates stack updates and put spinner
