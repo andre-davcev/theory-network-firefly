@@ -52,6 +52,7 @@ import { DocumentSnapshot } from '@angular/fire/firestore';
 import { StateUserSubscriptions } from '../../child/user-subscriptions';
 import { StateInterestOptions } from '../interest/interest.state.options';
 import { ActionStorageUrlGet } from '@theory/firebase';
+import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
 
 @State<StateUserModel>(StateUserOptions)
 export class StateUser extends StateDocument<User, StateUserModel> implements NgxsOnInit
@@ -133,6 +134,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : user.subscriptionsStatus; }
     @Selector() static subscriptionsUnfiltered(state: StateUserModel) : Record<string, string> { return state.subscriptionsUnfiltered; }
+    @Selector() static tokens(state:StateUserModel)                  : Array<string>{ const user: User = StateUser.dataState(state); return user == null ? null : user.tokens; }
 
     @Selector([StateUserStream.data()])
     public static stream(state: StateUserModel, stream: Array<StreamInterest>): Array<StreamInterest>
@@ -180,7 +182,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ([
                     new ActionUserWatchLocation(),
                     new ActionUserWatchLanguage(),
-                    new ActionUserWatchCity()
+                    new ActionUserWatchCity(),
+                    new ActionNotificationsWatch()
                 ])
             ),
             switchMap(() =>
@@ -423,11 +426,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
 
         const tokens : Array<string> = user.tokens == null ? [token] : [...user.tokens, token];
 
-        return dispatch(new ActionUserPatch({ tokens })).
-        pipe
-        (
-            switchMap(() => dispatch(new ActionUserSave()))
-        );
+        return dispatch(new ActionUserPatch({ tokens }, true));
     }
 
     @Action(ActionUserLoginEmail)
