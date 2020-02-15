@@ -24,6 +24,8 @@ auth - add password recovery
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firebase (admin) - setup billing/usage alert triggers
 firebase (all) - follow best practices
+firebase (functions) - manual testing
+firebase (functions) - automated testing
 firebase (analytics) - implement firebase analytics (google)
 firebase (security) - prevent hackers from querying past limit size
 firebase (security) - prevent hackers from writing to database too quickly
