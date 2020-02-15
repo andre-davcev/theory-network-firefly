@@ -1,14 +1,16 @@
 *admin (accounting) - setup auto payments with esl account
+*admin (accounting) - setup demo meeting with matt/max and get credits (google, stripe, microsoft, aws, apple)
 admin (content) - event/interest spreadsheet
 admin (content) - mock.function.ts cloud function (mock data)
 admin (store) - ios app store prep
 admin (store) - android app store prep
 admin (store) - install android version on amy's phone
 admin (store) - install ios version on cathy's phone
+*app (component) - empty list messages (icon black > dark, margins, center, found$)
+*app (component) - change fab color to primary
 app (keyboard) - fix ios ionic/capacitor keyboard bug
 app (splash) - android splash screen
-app (icons) - icon components (alerts, stream, subscriptions interests, events, icons, images)
-app (infra) - upgrade ionic to v5
+*app (infra) - upgrade ionic to v5
 +app (notifications) - implement capacitor-fcm plugin
 +alerts (detail) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (detail) - cleanup styling on detail screen
@@ -19,7 +21,7 @@ alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
 alerts (funtions create) - send push notifications for each alert token
-auth - add login/sign up validation and error messages
+auth - add login up validation and error messages
 auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
 *sign-up (auth) - test sign up user flow
@@ -28,17 +30,7 @@ sign-up (slides) - replace slide images
 interests (all) - migrate clusters collection to interests
 interests (detail) - add interest-events query state
 interests (detail) - add ability to add/remove events via query state
-*empty (component) - empty list component
-empty (alerts) - Looks like you have no notifications right now. Subscribe to new Interests to find new events in your area.
-empty (stream) - Our swarm of fireflies are busy building your Interest recommendations. Check back later!
-empty (subscriptions) - You have no Subscriptions right now. Go to the home Discover Interests screen to find new interests in your area!
-empty (interests) - Help support the Firefly community by publishing your own public Interests here.
-empty (events) - Looks like you haven't created any Events yet. Feel free to create public or private Events to be added to Interest streams.
-empty (icons) - You haven't published any icons yet. Icons are used as branding for your Interests.
-empty (images) - You haven't published any images yet. Images can be used for event notifcations as well as the main image on the Discover Interests screen.
-+events (all) - migrate timeNotify to day from hourly
-events (function cron) - implement daily cron which groups alerts for user and sends push notifcation (grouped)
-events (function subscribe) - with delay add user alerts which have passed timeNotify but are greater than today
+events (function cron) - implement hourlu cron which groups alerts for user and sends push notifcation (grouped)
 +events (detail) - move select cluster to select icon
 events (detail) - add url/phone field
 events (detail) - add create/edit
@@ -53,9 +45,10 @@ firebase (security) - create firestore database rules to allow unauth'd users to
 firebase (security) - upload and test security rules
 firebase (security) - create storage security rules
 home - fix header disappear when ion-badge shown
+*library (elevation) - class list read and save
 library (mapbox) - add back tokenized mapbox access token in search service
-login (auth) - error handling
 map (component) - limit mapbox search types to [address, poi]
+*stream (list) - change "Discover" to "Discover Interests <icon>"
 streams (list) - add heart subscribe animation
 streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner
