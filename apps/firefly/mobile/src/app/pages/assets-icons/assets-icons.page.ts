@@ -7,7 +7,7 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateStorage, StorageImage } from '@theory/firebase'
 import { BaseComponent } from '@theory/core';
 import { Store, Select } from '@ngxs/store';
-import { StateUserIcons } from '@firefly/core';
+import { StateUserIcons, IconType } from '@firefly/core';
 import { Icon } from '@firefly/cloud';
 import { Pages } from '@firefly/mobile';
 import { StateMobile } from '@firefly/mobile';
@@ -30,8 +30,12 @@ export class PageAssetsIcons extends BaseComponent implements OnInit
     ];*/
 
     @Select(StateUserIcons.data()) userIcons$: Observable<Array<Icon>>;
+    @Select(StateUserIcons.found()) found$:    Observable<boolean>;
+    @Select(StateUserIcons.empty()) empty$:    Observable<boolean>;
     @Select(StateStorage.images)   images$:    Observable<Record<string, StorageImage>>;
     @Select(StateMobile.menuOpen)  menuOpen$:  Observable<boolean>;
+
+    public IconType: any = IconType;
 
     public images: Record<string, StorageImage> = {};
     public userIcons: Array<Icon>;

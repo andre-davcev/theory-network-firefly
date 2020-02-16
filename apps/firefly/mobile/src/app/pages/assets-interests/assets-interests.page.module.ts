@@ -4,13 +4,15 @@ import { ModulePage } from '@firefly/app/modules';
 import { ModuleDirectiveElevation } from '@theory/google';
 
 import { PageAssetsInterests } from './assets-interests.page';
+import { ModuleComponentIconMessage } from '@firefly/core';
 
 @NgModule
 ({
     imports :
     [
         ModulePage,
-        ModuleDirectiveElevation
+        ModuleDirectiveElevation,
+        ModuleComponentIconMessage
     ],
 
     declarations    : [PageAssetsInterests],

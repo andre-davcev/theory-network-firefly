@@ -112,7 +112,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                     ActionUserEventsReset,
                     ActionUserIconsReset,
                     ActionUserImagesReset,
-                    ActionUserStreamReset,
                     ActionUserSubscriptionsReset
                 ],
 
@@ -148,6 +147,18 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             filter((interest: StreamInterest) =>
                 (subscriptions[interest.id] == null || unfiltered[interest.id] != null) // && interest.userId !== userId
             );
+    }
+
+    @Selector([StateUserStream.data()])
+    public static streamFound(state: StateUserModel, stream: Array<StreamInterest>): boolean
+    {
+        return StateUser.stream(state, stream).length > 0;
+    }
+
+    @Selector([StateUserStream.data()])
+    public static streamEmpty(state: StateUserModel, stream: Array<StreamInterest>): boolean
+    {
+        return StateUser.stream(state, stream).length === 0;
     }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
@@ -443,19 +454,22 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserLogout)
-    logout({ patchState }: StateContext<StateUserModel>)
+    logout(context: StateContext<StateUserModel>)
     {
+        const { patchState } = context;
+
         const defaults: StateUserModel = CoreUtil.clone<StateUserModel>(StateUserOptions.defaults);
         patchState(defaults);
+
         return of(this.auth.auth.signOut()).pipe
         (
-            tap(() =>
-                patchState
-                ({
-                    ...CoreUtil.clone<StateUserModel>(StateUserOptions.defaults),
-                    initialized: true
-                })
+            switchMap(() =>
+                super.reset(context)
             ),
+            tap(() =>
+                patchState({ initialized: true })
+            ),
+
             catchError((error: Error) =>
                 of(patchState({ error }))
             )

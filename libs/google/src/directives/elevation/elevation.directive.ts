@@ -31,7 +31,7 @@ export class DirectiveElevation {
             elevation > 0 && elevation <= 14 ?
                 `Shadow${elevation}` :
             elevation < 0 && elevation >= -14 ?
-                `ShadowUp${elevation}` :
+                `ShadowUp${Math.abs(elevation)}` :
             'None';
 
         const style: string = Elevation[key];

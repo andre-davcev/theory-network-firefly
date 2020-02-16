@@ -96,6 +96,14 @@
   "page.interest.iconPlaceholder"        : "select interest",
   "page.interest.descriptionPlaceholder" : "Write a description ...",
 
+  "page.alerts.empty"        : "Looks like you have no notifications right now. Subscribe to new Interests to find new events in your area.",
+  "page.stream.empty"        : "Our swarm of fireflies are busy building your Interest recommendations. Check back later!",
+  "page.subscriptions.empty" : "You have no Subscriptions right now. Go to the home Discover Interests screen to find new interests in your area!",
+  "page.interests.empty"     : "Help support the Firefly community by publishing your own public Interests here.",
+  "page.events.empty"        : "Looks like you haven't created any Events yet. Feel free to create public or private Events to be added to Interest streams",
+  "page.icons.empty"         : "You haven't published any icons yet. Icons are used as branding for your Interests.",
+  "page.images.empty"        : "You haven't published any images yet. Images can be used for event notifcations as well as the main image on the Discover Interests screen",
+
   "page.assets.title"               : "Assets",
   "page.assets.add"                 : "Add Asset",
   "page.assets.icon"                : "Icon",

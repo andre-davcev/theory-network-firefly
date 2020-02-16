@@ -43,13 +43,14 @@
     </ion-item>
   </ion-list>
 
-    <!--div *ngIf="!(found$ | async)" class="container">
-      <p>Create a new Event?</p>
-    </!--div-->
+    <app-icon-message *ngIf="empty$ | async"
+                      [icon]="IconType.Events"
+                      [message]="'page.events.empty' | translate">
+    </app-icon-message>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button color="secondary" mode="md" (click)="add()">
-          <ion-icon name="md-add"></ion-icon>
-      </ion-fab-button>
-  </ion-fab>
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button color="primary" mode="md" (click)="add()">
+            <ion-icon name="md-add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

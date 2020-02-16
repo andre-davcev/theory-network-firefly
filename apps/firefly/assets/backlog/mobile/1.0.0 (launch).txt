@@ -2,6 +2,7 @@ admin (accounting) - apply for corporate credit card
 admin (blog) - add cathy/amy as publishers to medium
 admin (blog) - "Creating a tech company organically"
 admin (financing) - create pitch deck
+admin (marketing) - implement spanish translations
 admin (marketing) - research pipedrive & trello
 admin (marketing) - create lead generation strategy
 admin (marketing) - research julian.com marketing strategies
