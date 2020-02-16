@@ -1,21 +1,15 @@
 <ion-header color="white">
-  <ion-toolbar>
-      <ion-title>
-          {{ 'page.alert.detail.title' | translate}}
-      </ion-title>
+    <ion-toolbar>
+        <ion-title>
+            {{ 'page.alert.detail.title' | translate}}
+        </ion-title>
 
-      <ion-buttons slot="start">
-          <ion-button color="dark" (click)="cancel()">
-              {{ 'general.cancel' | translate }}
-          </ion-button>
-      </ion-buttons>
-
-      <ion-buttons slot="end">
-        <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
-            <ion-icon name="person" color="dark" size="large"></ion-icon>
-        </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button color="dark" (click)="cancel()">
+                {{ 'general.cancel' | translate }}
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
