@@ -2,6 +2,7 @@ export * from './auth';
 export * from './button-action';
 export * from './icon';
 export * from './icon-firefly';
+export * from './icon-message';
 export * from './icon-subscribe';
 export * from './loading';
 export * from './logo';

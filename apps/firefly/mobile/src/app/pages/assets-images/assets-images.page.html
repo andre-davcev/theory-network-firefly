@@ -15,9 +15,18 @@
 </ion-header>
 
 <ion-content>
-    <app-image-grid [urls]="urls$ | async" [square]="false"></app-image-grid>
+    <app-image-grid *ngIf="found$ | async"
+                    [urls]="urls$ | async"
+                    [square]="false">
+    </app-image-grid>
+
+    <app-icon-message *ngIf="empty$ | async"
+                      [icon]="IconType.Images"
+                      [message]="'page.images.empty' | translate">
+    </app-icon-message>
+
     <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="add()">
-        <ion-fab-button color="secondary" mode="md" (click)="navigate()">
+        <ion-fab-button color="primary" mode="md" (click)="navigate()">
             <ion-icon name="md-add"></ion-icon>
         </ion-fab-button>
     </ion-fab>

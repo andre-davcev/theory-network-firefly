@@ -7,7 +7,7 @@ import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateInterest } from '@firefly/core';
+import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateInterest, IconType, Color, IconSlot } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
@@ -38,7 +38,10 @@ export class PageAssetEvent
     @Select(StateEvent.imageUrl)        imageUrl$:        Observable<string>;
     @Select(StateInterest.iconUrl)       iconUrl$:         Observable<string>;
 
-    public Pages: any = Pages;
+    public Pages    : any = Pages;
+    public IconType : any = IconType;
+    public IconSlot : any = IconSlot;
+    public Color    : any = Color;
 
     constructor
     (

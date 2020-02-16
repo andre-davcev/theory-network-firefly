@@ -16,7 +16,9 @@
 </ion-header>
 
 <ion-content>
-	<ion-list lines="none" elevation="1">
+  <ion-list *ngIf="found$ | async"
+            lines="none"
+            elevation="1">
     <ion-item *ngFor="let subscription of subscriptions$ | async">
         <ion-avatar (click)="select(subscription)" slot="start">
             <img *ngIf="images[subscription.bucketPath]" [src]="images[subscription.bucketPath].small">
@@ -30,4 +32,9 @@
         <ion-toggle (ionChange)="toggle($event,subscription)" checked={{subscription.on}}  color="primary"></ion-toggle>
     </ion-item>
   </ion-list>
+
+    <app-icon-message *ngIf="empty$ | async"
+                      [icon]="IconType.Subscriptions"
+                      [message]="'page.subscriptions.empty' | translate">
+    </app-icon-message>
 </ion-content>

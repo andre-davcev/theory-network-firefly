@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-list *ngIf="images">
+  <ion-list *ngIf="images && (found$ | async)">
     <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">
         <ion-card *ngIf="images[interest.bucketPath]" elevation="1">
 
@@ -80,4 +80,9 @@
           </ion-card>
     </ion-item>
   </ion-list>
+
+    <app-icon-message *ngIf="empty$ | async"
+                      [icon]="IconType.Stream"
+                      [message]="'page.stream.empty' | translate">
+    </app-icon-message>
 </ion-content>

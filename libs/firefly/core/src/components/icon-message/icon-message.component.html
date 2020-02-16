@@ -1,8 +1,14 @@
 <section fxLayout="column"
-         fxLayout="start center"
+         fxLayoutAlign="center center"
          [fxLayoutGap]="gap">
-    <div class="cpt-icon">
-        <ng-content></ng-content>
+    <div class="cpt-icon"
+         elevation="i-1,i1"
+         fxLayout="column"
+         fxLayoutAlign="center center">
+        <app-icon [name]="icon"
+                  [size]="IconSize.Huge"
+                  [color]="Color.Black">
+        </app-icon>
     </div>
 
     <p class="cpt-message">

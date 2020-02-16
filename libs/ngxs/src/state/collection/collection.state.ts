@@ -35,6 +35,7 @@ export class StateCollection<T extends FirebaseDocument, M extends StateCollecti
     protected static dataLookupState(state: any):       Record<string, any>                        { return state.dataLookup; }
     protected static countState(state: any):            number                                     { return StateCollection.snapshotsState(state).length; }
     protected static foundState(state: any):            boolean                                    { return StateCollection.countState(state) > 0; }
+    protected static emptyState(state: any):            boolean                                    { return StateCollection.countState(state) === 0; }
     protected static canPageState(state: any):          boolean                                    { return StateCollection.pageSizeState(state) !== PageSize.None; }
     protected static keysState(state: any):             Array<string>                              { return Object.keys(StateCollection.snapshotLookupState(state));}
     protected static noDataState(state: any):           boolean                                    { return StateCollection.initializedState(state) && !StateCollection.loadingState(state) && !StateCollection.foundState(state); }
@@ -52,6 +53,7 @@ export class StateCollection<T extends FirebaseDocument, M extends StateCollecti
     public static dataLookup()       { return createSelector([this], StateCollection.dataLookupState); }
     public static count()            { return createSelector([this], StateCollection.countState); }
     public static found()            { return createSelector([this], StateCollection.foundState); }
+    public static empty()            { return createSelector([this], StateCollection.emptyState); }
     public static canPage()          { return createSelector([this], StateCollection.canPageState); }
     public static keys()             { return createSelector([this], StateCollection.keysState); }
     public static noData()           { return createSelector([this], StateCollection.noData); }

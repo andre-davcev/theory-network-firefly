@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { StateUserEvents, ActionEventSetId } from '@firefly/core';
+import { StateUserEvents, ActionEventSetId, IconType } from '@firefly/core';
 import { Event } from '@firefly/cloud';
 import { Observable } from 'rxjs';
 import { Navigate } from '@ngxs/router-plugin';
@@ -22,12 +22,15 @@ import { takeUntil } from 'rxjs/operators';
 
 export class PageAssetsEvents extends BaseComponent implements OnInit
 {
-    @Select(StateUserEvents.data())  events$:     Observable<Array<Event>>;
-    @Select(StateUserEvents.found()) found:     Observable<boolean>;
+    @Select(StateUserEvents.data())  events$:   Observable<Array<Event>>;
+    @Select(StateUserEvents.found()) found$:    Observable<boolean>;
+    @Select(StateUserEvents.empty()) empty$:    Observable<boolean>;
     @Select(StateStorage.images)     images$:   Observable<Record<string, StorageImage>>;
     @Select(StateMobile.menuOpen)    menuOpen$: Observable<boolean>
 
     public images: Record<string, StorageImage> = {};
+
+    public IconType: any = IconType;
 
     constructor
     (
@@ -54,7 +57,7 @@ export class PageAssetsEvents extends BaseComponent implements OnInit
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     public select(object: Event): void

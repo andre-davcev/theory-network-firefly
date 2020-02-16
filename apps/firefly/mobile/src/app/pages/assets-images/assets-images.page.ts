@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { StateMobile, Pages } from '@firefly/mobile';
-import { StateUserImages } from '@firefly/core';
+import { StateUserImages, IconType } from '@firefly/core';
 import { Image } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { Observable, of } from 'rxjs';
 import { MenuController } from '@ionic/angular';
 import { BaseComponent } from '@theory/core';
-import { takeUntil } from 'rxjs/operators';
 import { Navigate } from '@ngxs/router-plugin';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { StatusBarStyle } from '@capacitor/core';
 
 @Component
 ({
@@ -19,9 +20,13 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageAssetsImages extends BaseComponent implements OnInit
 {
-    @Select(StateUserImages.data()) userImages$: Observable<Array<Image>>;
-    @Select(StateStorage.images)   images$:    Observable<Record<string, StorageImage>>;
-    @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+    @Select(StateUserImages.data())  userImages$: Observable<Array<Image>>;
+    @Select(StateUserImages.found()) found$:      Observable<boolean>;
+    @Select(StateUserImages.empty()) empty$:      Observable<boolean>;
+    @Select(StateStorage.images)     images$:     Observable<Record<string, StorageImage>>;
+    @Select(StateMobile.menuOpen)    menuOpen$:   Observable<boolean>;
+
+    public IconType: any = IconType;
 
     public images: Record<string, StorageImage> = {};
     public userImages: Array<Image>;
@@ -47,6 +52,11 @@ export class PageAssetsImages extends BaseComponent implements OnInit
         })
 
         this.urls$ = of(this.urls);
+    }
+
+    ionViewWillEnter()
+    {
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     navigate(): void{

@@ -5,12 +5,14 @@ import { ModulePage } from '@firefly/app/modules';
 
 import { PageSubscriptions } from './subscriptions.page';
 import { RoutesPageSubscriptions } from './subscriptions.page.routes';
+import { ModuleComponentIconMessage } from '@firefly/core';
 
 @NgModule
 ({
     imports :
     [
         ModulePage,
+        ModuleComponentIconMessage,
         RouterModule.forChild(RoutesPageSubscriptions)
     ],
 
