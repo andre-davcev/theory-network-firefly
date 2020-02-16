@@ -9,18 +9,18 @@ admin (store) - install ios version on cathy's phone
 *app (component) - empty list messages (icon black > dark, margins, center, found$)
 *app (component) - change fab color to primary
 app (keyboard) - fix ios ionic/capacitor keyboard bug
-app (splash) - android splash screen
++app (splash) - android splash screen
 *app (infra) - upgrade ionic to v5
 +app (notifications) - implement capacitor-fcm plugin
 +alerts (detail) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (detail) - cleanup styling on detail screen
-alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime < events < timeNotify
++alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime < events < timeNotify
 +alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (list) - on delete click (delete alert, update list, update unread count)
 alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
-alerts (funtions create) - send push notifications for each alert token
++alerts (funtions create) - send push notifications for each alert token
 auth - add login up validation and error messages
 auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
@@ -50,7 +50,7 @@ library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
 *stream (list) - change "Discover" to "Discover Interests <icon>"
 streams (list) - add heart subscribe animation
-streams (list) - fix subscriptions add/remove from streams/manage subscriptions
++streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner
 streams (state) - user.state.ts uncomment interest.userId !== userId
 subscriptions (list) - on quick toggles/updates stack updates and put spinner
