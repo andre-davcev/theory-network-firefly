@@ -62,7 +62,7 @@ subscriptions (list) - on quick toggles/updates stack updates and put spinner
 
 tasks:
 jan-30 - 79
-feb-06 -
+feb-06 - 56
 feb-13 -
 feb-20 -
 feb-27 -

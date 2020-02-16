@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { StateUserEvents, ActionEventSetId } from '@firefly/core';
+import { StateUserEvents, ActionEventSetId, IconType } from '@firefly/core';
 import { Event } from '@firefly/cloud';
 import { Observable } from 'rxjs';
 import { Navigate } from '@ngxs/router-plugin';
@@ -28,6 +28,8 @@ export class PageAssetsEvents extends BaseComponent implements OnInit
     @Select(StateMobile.menuOpen)    menuOpen$: Observable<boolean>
 
     public images: Record<string, StorageImage> = {};
+
+    public IconType: any = IconType;
 
     constructor
     (
