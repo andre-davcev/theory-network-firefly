@@ -5,7 +5,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateUserInterests, ActionInterestSetId, ActionEventInterestAdd } from '@firefly/core';
+import { StateUserInterests, ActionInterestSetId, ActionEventInterestAdd, IconType } from '@firefly/core';
 import { Interest } from '@firefly/cloud';
 
 import { Pages } from '@firefly/mobile';
@@ -26,10 +26,13 @@ export class PageAssetsInterests extends BaseComponent implements OnInit
 {
     @Select(StateUserInterests.data())  list$:     Observable<Array<Interest>>;
     @Select(StateUserInterests.found()) found$:    Observable<boolean>;
+    @Select(StateUserInterests.empty()) empty$:    Observable<boolean>;
     @Select(StateStorage.images)       images$:   Observable<Record<string, StorageImage>>;
     @Select(StateMobile.menuOpen)      menuOpen$: Observable<boolean>
 
     @Input() modal: boolean = false;
+
+    public IconType: any = IconType;
 
     public images: Record<string, StorageImage> = {};
 
@@ -54,7 +57,7 @@ export class PageAssetsInterests extends BaseComponent implements OnInit
 
     public ionViewWillEnter()
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     public add(): void

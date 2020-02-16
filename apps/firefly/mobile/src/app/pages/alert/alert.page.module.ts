@@ -6,6 +6,7 @@ import { PageAlert } from './alert.page';
 import { RoutesPageAlert } from './alert.page.routes';
 import { ModuleComponentSlide } from '@firefly/mobile';
 import { ModulePageAlertDetail } from '../alert-detail';
+import { ModuleComponentIconMessage } from '@firefly/core';
 @NgModule
 ({
     imports :
@@ -13,7 +14,8 @@ import { ModulePageAlertDetail } from '../alert-detail';
         ModulePage,
         RouterModule.forChild(RoutesPageAlert),
         ModuleComponentSlide,
-        ModulePageAlertDetail
+        ModulePageAlertDetail,
+        ModuleComponentIconMessage
     ],
 
     declarations : [PageAlert],

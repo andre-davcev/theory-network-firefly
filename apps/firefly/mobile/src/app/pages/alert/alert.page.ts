@@ -4,7 +4,7 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo } from '@firefly/core';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages } from '@firefly/mobile';
@@ -20,12 +20,16 @@ import { PageAlertDetail } from '../alert-detail/alert-detail.page';
 export class PageAlert
 {
     @Select(StateUserAlerts.data()) alerts$: Observable<Array<Alert>>;
+    @Select(StateUserAlerts.found()) found$: Observable<boolean>;
+    @Select(StateUserAlerts.empty()) empty$: Observable<boolean>;
 
     @ViewChild(IonSlides, { static: true }) slides: IonSlides;
 
     public segment: string = 'fired';
     public Pages: any = Pages;
     public slideOptions: any = { zoom: false };
+
+    public IconType : any = IconType;
 
     constructor(private store: Store, private modal: ModalController) { }
 

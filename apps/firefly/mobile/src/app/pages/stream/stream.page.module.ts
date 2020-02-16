@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
 
-import { ModuleComponentIconSubscribe } from '@firefly/core';
+import { ModuleComponentIconSubscribe, ModuleComponentIconMessage } from '@firefly/core';
 import { ModulePage } from '@firefly/app/modules';
 
 import { RoutesPageStream } from './stream.page.routes';
@@ -20,6 +20,7 @@ import { MatExpansionModule } from '@angular/material';
         ModuleComponentItemHeader,
         ModuleComponentIconSubscribe,
         MatExpansionModule,
+        ModuleComponentIconMessage,
         RouterModule.forChild(RoutesPageStream)
     ],
 
