@@ -1,14 +1,19 @@
 admin (accounting) - apply for corporate credit card
 admin (blog) - add cathy/amy as publishers to medium
 admin (blog) - "Creating a tech company organically"
+admin (content) - event/interest spreadsheet
+admin (content) - mock.function.ts cloud function (mock data)
 admin (financing) - create pitch deck
 admin (marketing) - implement spanish translations
 admin (marketing) - research pipedrive & trello
 admin (marketing) - create lead generation strategy
 admin (marketing) - research julian.com marketing strategies
 admin (marketing) - submit firefly to ionic showcase
+admin (store) - ios app store prep
+admin (store) - android app store prep
 admin (store) - release v1 on android
 admin (store) - release v1 on ios
+app (keyboard) - fix ios ionic/capacitor keyboard bug
 app (all) - refine styling
 app (all) - merge ios/android styles
 app (all) - required fields styling (icon/popover)
@@ -21,6 +26,7 @@ automation (ci) - setup ionic appflow
 automation (dev) - dockerize dev environment
 automation (dev) - setup automated code formatting via prettier
 automation (dev) - setup schematics
+auth - fix anonymous initial load time
 auth - add password recovery
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firebase (admin) - setup billing/usage alert triggers
@@ -30,11 +36,19 @@ firebase (functions) - automated testing
 firebase (analytics) - implement firebase analytics (google)
 firebase (security) - prevent hackers from querying past limit size
 firebase (security) - prevent hackers from writing to database too quickly
+firebase (functions) - migrate to use firebase transactions
+firebase (functions) - minimize cold start time
+firebase (functions) - refactor to use try/catch async/await
+firebase (functions) - enable retry on failure
+firebase (security) - create firestore database rules to allow unauth'd users to query stream
+firebase (security) - upload and test security rules
+firebase (security) - create storage security rules
 intro (slide 1) - Where life comes to you
 intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
 intro (slide 4) - Add these events to you calendar and get directions
 security (routing) - setup router guards
+sign-up (slides) - replace slide images
 sign-up (slide 1) - select font awesome icons for categories
 sign-up (slide 1) - Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater
 streams (detail) - implement stream detail screen

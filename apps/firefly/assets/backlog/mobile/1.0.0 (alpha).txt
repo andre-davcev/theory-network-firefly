@@ -1,14 +1,9 @@
 *admin (accounting) - setup auto payments with esl account
 *admin (accounting) - setup demo meeting with matt/max and get credits (google, stripe, microsoft, aws, apple)
-admin (content) - event/interest spreadsheet
-admin (content) - mock.function.ts cloud function (mock data)
-admin (store) - ios app store prep
-admin (store) - android app store prep
 admin (store) - install android version on amy's phone
 admin (store) - install ios version on cathy's phone
-*app (component) - create fab button add button
+*app (component) - create fab add button
 *app (lists) - put app messages and publisher outside of <ion-content>
-app (keyboard) - fix ios ionic/capacitor keyboard bug
 +app (splash) - android splash screen
 *app (infra) - upgrade ionic to v5
 +app (notifications) - implement capacitor-fcm plugin
@@ -17,17 +12,15 @@ app (keyboard) - fix ios ionic/capacitor keyboard bug
 +alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime < events < timeNotify
 +alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (list) - on delete click (delete alert, update list, update unread count)
+*alerts (notifications) - setup ios push notifications
 alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
-+alerts (funtions create) - send push notifications for each alert token
-auth - on logout/login with new user, clear other user data
++alerts (functions create) - send push notifications for each alert token
 auth - add login up validation and error messages
-auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
 *sign-up (auth) - test sign up user flow
 sign-up (auth) - error handling
-sign-up (slides) - replace slide images
 interests (all) - migrate clusters collection to interests
 interests (detail) - add interest-events query state
 interests (detail) - add ability to add/remove events via query state
@@ -38,18 +31,10 @@ events (detail) - add create/edit
 events (detail) - reverse geocode
 events (detail) - fix redux payload too big warning
 +firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
-firebase (functions) - migrate to use firebase transactions
-firebase (functions) - minimize cold start time
-firebase (functions) - refactor to use try/catch async/await
-firebase (functions) - enable retry on failure
-firebase (security) - create firestore database rules to allow unauth'd users to query stream
-firebase (security) - upload and test security rules
-firebase (security) - create storage security rules
 home - fix header disappear when ion-badge shown
 *library (elevation) - class list read and save
 library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
-*stream (list) - change "Discover" to "Discover Interests <icon>"
 streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner
