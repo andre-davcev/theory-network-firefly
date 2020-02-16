@@ -6,7 +6,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { StateMobile, Pages, ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 import { MenuController } from '@ionic/angular';
-import { StateUserSubscriptions, ActionUserSubscriptionToggle, ActionUserSubscriptionsReset, ActionUserWatchSubscriptionsStatus, ActionInterestSetId, StateUserInterests, ActionUserInterestsGetData } from '@firefly/core';
+import { StateUserSubscriptions, ActionUserSubscriptionToggle, ActionUserSubscriptionsReset, ActionUserWatchSubscriptionsStatus, ActionInterestSetId, StateUserInterests, ActionUserInterestsGetData, IconType } from '@firefly/core';
 import { Subscription } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage } from '@theory/firebase';
@@ -22,12 +22,16 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageSubscriptions extends BaseComponent implements OnInit
 {
-    @Select(StateUserSubscriptions.data()) subscriptions$: Observable<Array<Subscription>>;
-    @Select(StateStorage.images)           images$:   Observable<Record<string, StorageImage>>;
-    @Select(StateMobile.menuOpen)          menuOpen$: Observable<boolean>;
+    @Select(StateUserSubscriptions.data())    subscriptions$:        Observable<Array<Subscription>>;
+    @Select(StateUserSubscriptions.found())   found$:                Observable<boolean>;
+    @Select(StateUserSubscriptions.empty())   empty$:                Observable<boolean>;
+    @Select(StateStorage.images)              images$:               Observable<Record<string, StorageImage>>;
+    @Select(StateMobile.menuOpen)             menuOpen$:             Observable<boolean>;
     @Select(StateUserInterests.initialized()) interestsInitialized$: Observable<boolean>;
 
     public images: Record<string, StorageImage> = {};
+
+    public IconType: any = IconType;
 
     constructor
     (

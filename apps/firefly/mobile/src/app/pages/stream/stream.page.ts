@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUserStream, StateUser, ActionUserSubscriptionToggle, ActionInterestSetId, ActionInterestEventsGet, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest } from '@firefly/core';
+import { StateUserStream, StateUser, ActionUserSubscriptionToggle, ActionInterestSetId, ActionInterestEventsGet, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType } from '@firefly/core';
 import { StreamInterest, Interest, Event } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
@@ -19,6 +19,8 @@ import { ActionMobileAuthSelect } from '@firefly/mobile';
 export class PageStream extends BaseComponent implements OnInit
 {
     @Select(StateUser.stream)        stream$:        Observable<Array<StreamInterest>>;
+    @Select(StateUser.streamFound)   found$:         Observable<boolean>;
+    @Select(StateUser.streamEmpty)   empty$:         Observable<boolean>;
     @Select(StateStorage.images)     images$:        Observable<Record<string, StorageImage>>;
     @Select(StateUser.authenticated) authenticated$: Observable<boolean>;
     @Select(StateInterest.events)    events$:        Observable<Event[]>;
@@ -28,6 +30,8 @@ export class PageStream extends BaseComponent implements OnInit
     public currentlyOpenedItems = [];
     public interestEvents: Array<Array<Event>> = [];
     public spinner: Array<boolean> = [];
+
+    public IconType: any = IconType;
 
     constructor(private store: Store) { super(); }
 

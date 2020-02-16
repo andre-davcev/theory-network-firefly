@@ -6,8 +6,8 @@ admin (store) - ios app store prep
 admin (store) - android app store prep
 admin (store) - install android version on amy's phone
 admin (store) - install ios version on cathy's phone
-*app (component) - empty list messages (icon black > dark, margins, center, found$)
-*app (component) - change fab color to primary
+*app (component) - create fab button add button
+*app (lists) - put app messages and publisher outside of <ion-content>
 app (keyboard) - fix ios ionic/capacitor keyboard bug
 +app (splash) - android splash screen
 *app (infra) - upgrade ionic to v5
@@ -21,6 +21,7 @@ alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
 +alerts (funtions create) - send push notifications for each alert token
+auth - on logout/login with new user, clear other user data
 auth - add login up validation and error messages
 auth - fix anonymous initial load time
 auth - on unauthenticated login save city so you can grab city stream
