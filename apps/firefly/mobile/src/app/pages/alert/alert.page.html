@@ -5,6 +5,7 @@
 </ion-slides>
 
 <app-icon-message *ngIf="empty$ | async"
+                  slot="fixed"
                   [icon]="IconType.Alerts"
                   [message]="'page.alerts.empty' | translate">
 </app-icon-message>

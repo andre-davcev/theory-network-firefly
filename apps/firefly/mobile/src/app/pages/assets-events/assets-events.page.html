@@ -44,9 +44,10 @@
   </ion-list>
 
     <app-icon-message *ngIf="empty$ | async"
+                      slot="fixed"
                       [icon]="IconType.Events"
                       [message]="'page.events.empty' | translate">
     </app-icon-message>
 
-    <app-button-add (clicked)="add()"></app-button-add>
+    <app-button-add (clicked)="add()" slot="fixed"></app-button-add>
 </ion-content>

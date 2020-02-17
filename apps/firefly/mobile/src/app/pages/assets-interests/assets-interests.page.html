@@ -40,11 +40,13 @@
     </ion-list>
 
     <app-icon-message *ngIf="empty$ | async"
+                      slot="fixed"
                       [icon]="IconType.Interests"
                       [message]="'page.interests.empty' | translate">
     </app-icon-message>
 
     <app-button-add *ngIf="!modal"
-                    (clicked)="add()">
+                    (clicked)="add()"
+                    slot="fixed">
     </app-button-add>
 </ion-content>
