@@ -34,6 +34,7 @@
   </ion-list>
 
     <app-icon-message *ngIf="empty$ | async"
+                      slot="fixed"
                       [icon]="IconType.Subscriptions"
                       [message]="'page.subscriptions.empty' | translate">
     </app-icon-message>
