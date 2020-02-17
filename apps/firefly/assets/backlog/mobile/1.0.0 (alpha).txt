@@ -12,7 +12,7 @@ admin (store) - install ios version on cathy's phone
 +alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime < events < timeNotify
 +alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (list) - on delete click (delete alert, update list, update unread count)
-*alerts (notifications) - setup ios push notifications
+alerts (notifications) - setup ios push notifications
 alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
@@ -30,9 +30,8 @@ events (detail) - add url/phone field
 events (detail) - add create/edit
 events (detail) - reverse geocode
 events (detail) - fix redux payload too big warning
-+firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
+*firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
 home - fix header disappear when ion-badge shown
-*library (elevation) - class list read and save
 library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
 streams (list) - add heart subscribe animation

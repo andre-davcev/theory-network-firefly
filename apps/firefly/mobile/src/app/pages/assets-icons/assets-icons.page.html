@@ -28,10 +28,5 @@
                       [message]="'page.icons.empty' | translate">
     </app-icon-message>
 
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-        <ion-fab-button color="primary" mode="md" (click)="navigate()">
-            <ion-icon name="md-add"></ion-icon>
-        </ion-fab-button>
-  </ion-fab>
-
+    <app-button-add (clicked)="navigate()"></app-button-add>
 </ion-content>

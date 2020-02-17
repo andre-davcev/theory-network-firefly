@@ -3,28 +3,30 @@
 
 :host
 {
+    --cpt-margin: 1.5rem;
+
     ion-fab {
         &.fab-vertical-top {
-            top: 1rem;
+            top: var(--cpt-margin);
         }
 
         &.fab-vertical-bottom {
-            bottom: 1rem;
+            bottom: var(--cpt-margin);
         }
 
         &.fab-horizontal-start {
-            left: 1rem;
+            left: var(--cpt-margin);
         }
 
         &.fab-horizontal-end {
-            right: 1rem;
+            right: var(--cpt-margin);
         }
     }
 
   ion-fab-button {
-    &.ion-color-secondary {
-      --background-activated: #{$fire-color-accent-darkest};
-      --ion-color-shade: #{$fire-color-primary} !important;
-    }
+      &.ion-color-primary {
+        --background-activated: #{$fire-color-accent-darkest};
+        --ion-color-shade: #{$fire-color-primary} !important;
+      }
   }
 }

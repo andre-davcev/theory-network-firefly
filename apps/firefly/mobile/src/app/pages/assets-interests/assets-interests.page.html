@@ -44,9 +44,7 @@
                       [message]="'page.interests.empty' | translate">
     </app-icon-message>
 
-    <ion-fab *ngIf="!modal" slot="fixed" vertical="bottom" horizontal="end">
-        <ion-fab-button color="primary" mode="md" (click)="add()">
-            <ion-icon name="md-add"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
+    <app-button-add *ngIf="!modal"
+                    (clicked)="add()">
+    </app-button-add>
 </ion-content>
