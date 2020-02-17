@@ -6,7 +6,7 @@ import { ModulePage } from '@firefly/app/modules';
 import { PageAssetsImages } from './assets-images.page';
 import { RoutesPageAssetsImages } from './assets-images.page.routes';
 import { ModuleComponentImageGrid } from '@theory/ionic';
-import { ModuleComponentIconMessage } from '@firefly/core';
+import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
 
 @NgModule
 ({
@@ -15,6 +15,7 @@ import { ModuleComponentIconMessage } from '@firefly/core';
         ModulePage,
         ModuleComponentImageGrid,
         ModuleComponentIconMessage,
+        ModuleComponentButtonAdd,
         RouterModule.forChild(RoutesPageAssetsImages)
     ],
 
