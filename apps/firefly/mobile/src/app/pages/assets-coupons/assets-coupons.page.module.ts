@@ -5,12 +5,14 @@ import { ModulePage } from '@firefly/app/modules';
 
 import { PageAssetsCoupons } from './assets-coupons.page';
 import { RoutesPageAssetsCoupons } from './assets-coupons.page.routes';
+import { ModuleComponentButtonAdd } from '@firefly/core';
 
 @NgModule
 ({
     imports :
     [
         ModulePage,
+        ModuleComponentButtonAdd,
         RouterModule.forChild(RoutesPageAssetsCoupons)
     ],
 

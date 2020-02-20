@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase-admin';
 initializeApp();
 
 import { InterestsCreate, InterestsDelete } from './interests';
-import { EventsCreate, EventsUpdate } from './events';
+import { EventsCreate, EventsUpdate, EventsCron } from './events';
 import { IconsCreate, IconsDelete } from './icons';
 import { ImagesCreate, ImagesDelete } from './images';
 import { StorageResize } from './storage';
@@ -25,6 +25,7 @@ export
 
     EventsCreate,
     EventsUpdate,
+    EventsCron,
 
     IconsCreate,
     IconsDelete,

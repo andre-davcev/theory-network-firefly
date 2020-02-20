@@ -2,13 +2,9 @@
 
 :host
 {
-    ion-content {
-        --background: #{$fire-color-dark-lighter};
+    > section {
         height: 100%;
-    }
-
-    section {
-        height: 100%;
+        background-color: #{$fire-color-dark-lighter};
     }
 
     .cpt-interests

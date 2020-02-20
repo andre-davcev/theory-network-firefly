@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostBinding, Input, ChangeDetectionStrategy, ElementRef, Renderer2, OnInit } from '@angular/core';
 import { Color } from '@firefly/core/enums';
 
 import { IconType } from './icon-type.enum';
@@ -14,8 +14,9 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
     styleUrls       : ['./icon.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
 })
-export class ComponentIcon
+export class ComponentIcon implements OnInit
 {
+
     @Input()
     public active: boolean = true;
 
@@ -39,14 +40,32 @@ export class ComponentIcon
 
     public icon       : string;
     public definition : IconDefinition;
-    public family     : IconFamily = IconFamily.Custom;
+    public family     : IconFamily    = IconFamily.Custom;
+    public classes    : Array<string> = [];
 
     public IconFamily: any = IconFamily;
+
+    constructor
+    (
+        private element : ElementRef
+    )
+    { }
+
+    public ngOnInit(): void
+    {
+        this.element.nativeElement.classList.forEach((name: string) =>
+            this.classes.push(name)
+        );
+    }
 
     @HostBinding('class')
     public get class(): string
     {
         const classes: Array<string> = [];
+
+        this.classes.forEach((name: string) =>
+            classes.push(name)
+        );
 
         if (this.active)
         {
@@ -77,5 +96,5 @@ export class ComponentIcon
         return classes.join(' ');
     }
 
-    constructor() { }
+    public
 }

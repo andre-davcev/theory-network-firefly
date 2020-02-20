@@ -4,7 +4,7 @@ import { ModulePage } from '@firefly/app/modules';
 
 import { PageAssetsEvents } from './assets-events.page';
 import { ModuleDirectiveElevation } from '@theory/google';
-import { ModuleComponentIconMessage } from '@firefly/core';
+import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
 
 @NgModule
 ({
@@ -12,7 +12,8 @@ import { ModuleComponentIconMessage } from '@firefly/core';
     [
         ModulePage,
         ModuleDirectiveElevation,
-        ModuleComponentIconMessage
+        ModuleComponentIconMessage,
+        ModuleComponentButtonAdd
     ],
 
     declarations    : [PageAssetsEvents],
