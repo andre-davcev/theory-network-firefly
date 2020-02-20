@@ -26,6 +26,7 @@ automation (ci) - setup ionic appflow
 automation (dev) - dockerize dev environment
 automation (dev) - setup automated code formatting via prettier
 automation (dev) - setup schematics
+automation (dev) - scrape events from google (pupeteer)
 auth - fix anonymous initial load time
 auth - add password recovery
 library (firebase) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
