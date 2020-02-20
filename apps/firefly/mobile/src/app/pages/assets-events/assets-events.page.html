@@ -44,13 +44,10 @@
   </ion-list>
 
     <app-icon-message *ngIf="empty$ | async"
+                      slot="fixed"
                       [icon]="IconType.Events"
                       [message]="'page.events.empty' | translate">
     </app-icon-message>
 
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-        <ion-fab-button color="primary" mode="md" (click)="add()">
-            <ion-icon name="md-add"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
+    <app-button-add (clicked)="add()" slot="fixed"></app-button-add>
 </ion-content>

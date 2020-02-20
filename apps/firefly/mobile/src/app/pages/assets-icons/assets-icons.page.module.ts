@@ -5,7 +5,7 @@ import { ModulePage } from '@firefly/app/modules';
 
 import { PageAssetsIcons } from './assets-icons.page';
 import { RoutesPageAssetsIcons } from './assets-icons.page.routes';
-import { ModuleComponentIconMessage } from '@firefly/core';
+import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
 
 @NgModule
 ({
@@ -13,7 +13,8 @@ import { ModuleComponentIconMessage } from '@firefly/core';
     [
         ModulePage,
         RouterModule.forChild(RoutesPageAssetsIcons),
-        ModuleComponentIconMessage
+        ModuleComponentIconMessage,
+        ModuleComponentButtonAdd
     ],
 
     declarations : [PageAssetsIcons],

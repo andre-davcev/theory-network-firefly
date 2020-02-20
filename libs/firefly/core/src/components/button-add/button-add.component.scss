@@ -1,0 +1,32 @@
+@import 'variables';
+@import '../../../../../apple/src/sass/variables';
+
+:host
+{
+    --cpt-margin: 1.5rem;
+
+    ion-fab {
+        &.fab-vertical-top {
+            top: var(--cpt-margin);
+        }
+
+        &.fab-vertical-bottom {
+            bottom: var(--cpt-margin);
+        }
+
+        &.fab-horizontal-start {
+            left: var(--cpt-margin);
+        }
+
+        &.fab-horizontal-end {
+            right: var(--cpt-margin);
+        }
+    }
+
+  ion-fab-button {
+      &.ion-color-primary {
+        --background-activated: #{$fire-color-accent-darkest};
+        --ion-color-shade: #{$fire-color-primary} !important;
+      }
+  }
+}

@@ -24,14 +24,10 @@
     </ion-grid>
 
     <app-icon-message *ngIf="empty$ | async"
+                      slot="fixed"
                       [icon]="IconType.Icons"
                       [message]="'page.icons.empty' | translate">
     </app-icon-message>
 
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-        <ion-fab-button color="primary" mode="md" (click)="navigate()">
-            <ion-icon name="md-add"></ion-icon>
-        </ion-fab-button>
-  </ion-fab>
-
+    <app-button-add (clicked)="navigate()" slot="fixed"></app-button-add>
 </ion-content>

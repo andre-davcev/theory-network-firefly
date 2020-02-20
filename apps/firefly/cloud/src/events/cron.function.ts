@@ -1,6 +1,8 @@
-
-
 import { runWith, EventContext } from 'firebase-functions';
+import { firestore } from 'firebase-admin';
+import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult, FieldValue } from '@google-cloud/firestore';
+import { Event, Alert } from '../library';
+import { AlertsCreate } from '../alerts';
 
 const EventsCron =
 
@@ -19,7 +21,38 @@ onRun(async (context: EventContext) =>
             create alert with alert.userId and with alert.tokens
     set event.timeNotifyComplete = true
 */
-    return null;
+const database            : Firestore                                     = firestore();
+const collection : firestore.CollectionReference = database.collection('alerts');
+const updates    : Array<Promise<WriteResult>>   = [];
+
+let query  : QuerySnapshot = await database.collection('events').where('notifyComplete', '==', false).get();
+let id     : string;
+
+query.forEach((snapshot: QueryDocumentSnapshot) =>
+{
+    let alert = {} as Alert;
+    let event : Event = snapshot.data() as Event;
+    id                     = snapshot.id;
+
+    console.log(JSON.stringify(event));
+
+    alert.bucketPath = event.bucketPath;
+    alert.description = event.description;
+    alert.eventId = event.id;
+    alert.interestId = event.interests[0];
+    alert.dateTime = FieldValue.serverTimestamp(),
+    alert.name = event.name;
+    alert.userId = event.userId;
+    alert.version = '1.0.0';
+    alert.read = false;
+
+    event.notifyComplete = true;
+
+    updates.push(collection.doc().set(alert));
+    updates.push(snapshot.ref.update(event));
+});
+
+return Promise.all(updates);
 });
 
 export { EventsCron };
