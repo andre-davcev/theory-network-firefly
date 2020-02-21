@@ -8,7 +8,7 @@ import { IconsCreate, IconsDelete } from './icons';
 import { ImagesCreate, ImagesDelete } from './images';
 import { StorageResize } from './storage';
 import { StreamsCron } from './streams';
-import { AlertsCreate } from './alerts';
+import { AlertsCreate, AlertsCron } from './alerts';
 import { CitiesCreate } from './cities';
 import { UsersCreate, UsersDelete, UsersUpdate } from './users';
 import { UserProfilesCreate } from './user-profiles';
@@ -16,6 +16,7 @@ import { UserProfilesCreate } from './user-profiles';
 export
 {
     AlertsCreate,
+    AlertsCron,
 
     CitiesCreate,
 
