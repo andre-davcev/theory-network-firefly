@@ -12,7 +12,7 @@ import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';
 import { StateDocumentModel } from './document.model';
 import { ActionsDocument } from './document.actions';
-import { DocumentSnapshot, Action } from '@angular/fire/firestore';
+import { DocumentSnapshot } from '@angular/fire/firestore';
 
 export class StateDocument<T extends FirebaseDocument, M extends StateDocumentModel>
 {
@@ -205,12 +205,12 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
     {
         const { getState, dispatch } = context;
 
-        const state:      M          = getState();
-        const data: T      = StateDocument.dataState(state);
-        const formGroup:  FormGroup  = StateDocument.formGroupState(state);
-        const changed:    Partial<T> = this.service.formFieldsChanged(formGroup);
-        const hasChanged: boolean    = Object.keys(changed).length > 0;
-        const value:   T          = { ...data};
+        const state      : M          = getState();
+        const data       : T          = StateDocument.dataState(state);
+        const formGroup  : FormGroup  = StateDocument.formGroupState(state);
+        const changed    : Partial<T> = this.service.formFieldsChanged(formGroup);
+        const hasChanged : boolean    = Object.keys(changed).length > 0;
+        const value      : T          = { ...data };
 
         const update$: Observable<any> = !hasChanged ?
             of(null) :
