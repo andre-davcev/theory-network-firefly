@@ -1,5 +1,4 @@
 *admin (accounting) - setup auto payments with esl account
-*admin (accounting) - setup demo meeting with matt/max and get credits (google, stripe, microsoft, aws, apple)
 admin (store) - install android version on amy's phone
 admin (store) - install ios version on cathy's phone
 +app (splash) - android splash screen
@@ -15,11 +14,16 @@ alerts (list) - keep cards as unread alerts
 alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
 +alerts (functions create) - send push notifications for each alert token
+alerts (go) - implement add to calendar workflow
+alerts (go) - implement get directions workflow
+alerts (list) - initial alert errors on click through
 auth - add login up validation and error messages
+auth - switch user data cleanup and screen testing
 auth - on unauthenticated login save city so you can grab city stream
-*sign-up (auth) - test sign up user flow
+auth - on sign up, send initial notification 30 seconds later
 sign-up (auth) - error handling
 interests (all) - migrate clusters collection to interests
+interests (list) - empty list shows storage errors
 interests (detail) - add interest-events query state
 interests (detail) - add ability to add/remove events via query state
 events (function cron) - implement hourlu cron which groups alerts for user and sends push notifcation (grouped)
@@ -28,7 +32,8 @@ events (detail) - add url/phone field
 events (detail) - add create/edit
 events (detail) - reverse geocode
 events (detail) - fix redux payload too big warning
-*firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
+events (list) - empty list show errors with orderBy and sort
+firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
 home - fix header disappear when ion-badge shown
 library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
@@ -36,6 +41,7 @@ streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner
 streams (state) - user.state.ts uncomment interest.userId !== userId
+subscriptions (list) - bug when no subscriptions found
 subscriptions (list) - on quick toggles/updates stack updates and put spinner
 
 *andre
@@ -46,7 +52,7 @@ subscriptions (list) - on quick toggles/updates stack updates and put spinner
 tasks:
 jan-30 - 79
 feb-06 - 56
-feb-13 -
+feb-13 - 40
 feb-20 -
 feb-27 -
 mar-05 -

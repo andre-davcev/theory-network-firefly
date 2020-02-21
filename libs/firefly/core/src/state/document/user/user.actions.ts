@@ -9,7 +9,7 @@ export class ActionUserGet    { static readonly type = ActionsUser.Get;     cons
 export class ActionUserSet    { static readonly type = ActionsUser.Set;     constructor(public snapshot: firestore.DocumentSnapshot, public data?: User) { } }
 export class ActionUserPatch  { static readonly type = ActionsUser.Patch;   constructor(public partial: Partial<User>, public save: boolean = false) { } }
 export class ActionUserCreate { static readonly type = ActionsUser.Create;  constructor(public credentials: Credentials) { } }
-export class ActionUserUpdate { static readonly type = ActionsUser.Create;  constructor() { } }
+export class ActionUserUpdate { static readonly type = ActionsUser.Update;  constructor() { } }
 export class ActionUserSave   { static readonly type = ActionsUser.Save;    constructor() { } }
 export class ActionUserDelete { static readonly type = ActionsUser.Delete;  constructor() { } }
 export class ActionUserWatch  { static readonly type = ActionsUser.Watch;   constructor(public id: string) {} }
