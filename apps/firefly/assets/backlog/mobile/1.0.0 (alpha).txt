@@ -6,12 +6,12 @@ admin (store) - install ios version on cathy's phone
 +app (notifications) - implement capacitor-fcm plugin
 +alerts (detail) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (detail) - cleanup styling on detail screen
-+alerts (functions) - on interest subscribe wait 3 mins, check if still subscribed, send all currentTime < events < timeNotify
++alerts (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 +alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 +alerts (list) - on delete click (delete alert, update list, update unread count)
-alerts (notifications) - setup ios push notifications
+*alerts (notifications) - setup ios push notifications
 alerts (list) - keep cards as unread alerts
-alerts (list) - add alert list icon
+*alerts (list) - add alert list icon
 alerts (list) - implement alert list screen
 +alerts (functions create) - send push notifications for each alert token
 alerts (go) - implement add to calendar workflow
@@ -22,25 +22,24 @@ auth - switch user data cleanup and screen testing
 auth - on unauthenticated login save city so you can grab city stream
 auth - on sign up, send initial notification 30 seconds later
 sign-up (auth) - error handling
-interests (all) - migrate clusters collection to interests
+*interests (all) - migrate clusters collection to interests
 interests (list) - empty list shows storage errors
 interests (detail) - add interest-events query state
 interests (detail) - add ability to add/remove events via query state
-events (function cron) - implement hourlu cron which groups alerts for user and sends push notifcation (grouped)
 +events (detail) - move select cluster to select icon
-events (detail) - add url/phone field
-events (detail) - add create/edit
-events (detail) - reverse geocode
-events (detail) - fix redux payload too big warning
+*events (detail) - add url/phone field
+*events (detail) - add create/edit
+*events (detail) - reverse geocode
+*events (detail) - fix redux payload too big warning
 events (list) - empty list show errors with orderBy and sort
-firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
+*firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
 home - fix header disappear when ion-badge shown
-library (mapbox) - add back tokenized mapbox access token in search service
+*library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
-streams (list) - add heart subscribe animation
+*streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner
-streams (state) - user.state.ts uncomment interest.userId !== userId
+*streams (state) - user.state.ts uncomment interest.userId !== userId
 subscriptions (list) - bug when no subscriptions found
 subscriptions (list) - on quick toggles/updates stack updates and put spinner
 
