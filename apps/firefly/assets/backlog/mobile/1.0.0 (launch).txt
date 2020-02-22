@@ -1,4 +1,6 @@
 admin (accounting) - apply for corporate credit card
+admin (accounting) - renew sketch license
+admin (accounting) - migrate apple account to organization
 admin (blog) - add cathy/amy as publishers to medium
 admin (blog) - "Creating a tech company organically"
 admin (content) - event/interest spreadsheet
