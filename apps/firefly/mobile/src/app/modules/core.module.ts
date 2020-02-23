@@ -19,6 +19,7 @@ import {
   MapboxEnvironment,
   StateInterest,
   StateEvent,
+  StateAlert,
   StateIcon,
   StateImage,
   StateSubscription,
@@ -92,6 +93,7 @@ export function createTranslateLoader(http: HttpClient)
 
             StateInterest,
             StateEvent,
+            StateAlert,
             StateIcon,
             StateImage,
             StateSubscription,
