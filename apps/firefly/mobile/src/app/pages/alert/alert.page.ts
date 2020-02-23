@@ -4,7 +4,7 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionUserAlertsRemove, ActionAlertSetId, ActionAlertDelete } from '@firefly/core';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionUserAlertsRemove, ActionAlertSetId, ActionAlertDelete, ActionUserAlertsMarkRead } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages } from '@firefly/mobile';
@@ -64,6 +64,9 @@ export class PageAlert
       (
         switchMap(() =>
           this.store.dispatch(new ActionAlertDelete())
+        ),
+        switchMap(() =>
+          this.store.dispatch(new ActionUserAlertsMarkRead())
         )
       ).subscribe();
     }

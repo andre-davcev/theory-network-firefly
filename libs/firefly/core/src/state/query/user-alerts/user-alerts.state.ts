@@ -13,7 +13,8 @@ import {
     ActionUserAlertsGetData,
     ActionUserAlertsGet,
     ActionUserAlertsSync,
-    ActionUserAlertsGo
+    ActionUserAlertsGo,
+    ActionUserAlertsMarkRead
 } from './user-alerts.actions';
 import { StateUser } from '../../document/user';
 import { Query } from '@angular/fire/firestore';
@@ -23,6 +24,7 @@ import { firestore } from 'firebase/app';
 import { TranslateService } from '@ngx-translate/core';
 import { from, of } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
+import { StateAlert } from '../../document';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 
@@ -152,4 +154,15 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
             )
         );
     }
+
+    @Action(ActionUserAlertsMarkRead)
+    markRead({ patchState }: StateContext<StateUserAlertsModel>)
+    {
+      let unread : number = this.store.selectSnapshot(StateUserAlerts.unread);
+      if(unread > 0)
+        unread--;
+
+        patchState({ unread })
+    }
+
 }
