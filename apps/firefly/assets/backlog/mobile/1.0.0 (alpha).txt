@@ -8,7 +8,6 @@ admin (store) - install ios version on cathy's phone
 +alerts (detail) - cleanup styling on detail screen
 +alerts (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 +alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
-+alerts (list) - on delete click (delete alert, update list, update unread count)
 *alerts (notifications) - setup ios push notifications
 alerts (list) - keep cards as unread alerts
 *alerts (list) - add alert list icon
