@@ -10,3 +10,4 @@ export class ActionUserAlertsAdd     { static readonly type = ActionsUserAlerts.
 export class ActionUserAlertsRemove  { static readonly type = ActionsUserAlerts.Remove;  constructor(public id: string) { } }
 export class ActionUserAlertsSync    { static readonly type = ActionsUserAlerts.Sync;    constructor(public object: Alert) { } }
 export class ActionUserAlertsGo      { static readonly type = ActionsUserAlerts.Go;     constructor() { } }
+export class ActionUserAlertsMarkRead { static readonly type = ActionsUserAlerts.MarkRead;    constructor() { } }

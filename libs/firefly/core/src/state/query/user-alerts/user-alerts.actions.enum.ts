@@ -6,5 +6,6 @@ export enum ActionsUserAlerts
     Add     = '[User Alerts] Add',
     Remove  = '[User Alerts] Remove',
     Sync    = '[User Alerts] Sync',
-    Go      = '[User Alerts] Go'
+    Go      = '[User Alerts] Go',
+    MarkRead = '[User Alerts] MarkRead'
 }

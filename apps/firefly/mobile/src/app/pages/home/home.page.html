@@ -9,9 +9,9 @@
 
             <ion-button *ngIf="((pageStream$ | async) && (authenticated$ | async))" icon-only (click)="go(Pages.Alert)" class="cpt-notifications" [disabled]="menuOpen$ | async">
                 <ion-icon name="notifications" color="dark" size="large"></ion-icon>
-<!--
+
                 <ion-badge slot="end" *ngIf="hasUnread$ | async" color="secondary">{{ unread$ | async }}</ion-badge>
--->
+
             </ion-button>
 
             <ion-button *ngIf="((pageAlerts$ | async) && (authenticated$ | async))" icon-only (click)="go(Pages.Stream)" [disabled]="menuOpen$ | async">
