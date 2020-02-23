@@ -1,6 +1,6 @@
 <ion-slides *ngIf="found$ | async" pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
     <ion-slide *ngFor="let alert of alerts$ | async">
-        <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (alertGoClicked)="alertGo()" (alertDetailClicked)="alertDetail(alert)"></app-slide>
+        <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (alertDeleteClicked)="alertDelete(alert)" (alertGoClicked)="alertGo()" (alertDetailClicked)="alertDetail(alert)"></app-slide>
     </ion-slide>
 </ion-slides>
 

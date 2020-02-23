@@ -18,6 +18,7 @@ export class ComponentSlide
 
     @Output() alertGoClicked: EventEmitter<void> = new EventEmitter();
     @Output() alertDetailClicked: EventEmitter<void> = new EventEmitter();
+    @Output() alertDeleteClicked: EventEmitter<void> = new EventEmitter();
 
     public clickedAlertGo(): void
     {
@@ -27,5 +28,10 @@ export class ComponentSlide
     public clickedAlertDetail(): void
     {
       this.alertDetailClicked.next();
+    }
+
+    public clickedAlertDelete(): void
+    {
+      this.alertDeleteClicked.next();
     }
 }

@@ -13,6 +13,5 @@ export interface Alert extends FirebaseDocument
     read        : boolean;
     tokens      : Array<string>;
     url?        : string;
-
-    metadata? : MetadataAlert;
+    metadata?   : MetadataAlert;
 }
