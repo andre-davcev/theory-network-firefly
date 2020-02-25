@@ -5,6 +5,16 @@
     736px height
     */
 
+    ion-fab {
+        &.fab-vertical-bottom {
+            bottom: 0;
+        }
+
+        &.fab-horizontal-start {
+            left: 0;
+        }
+    }
+
     --background: #{$fire-color-transparent};
 
     position: relative;

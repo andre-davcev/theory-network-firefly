@@ -4,6 +4,12 @@
     </ion-slide>
 </ion-slides>
 
+<ion-fab vertical="bottom" horizontal="start">
+    <ion-button color="transparent" mode="ios">
+        <ion-icon name="list" color="dark"></ion-icon>
+    </ion-button>
+</ion-fab>
+
 <app-icon-message *ngIf="empty$ | async"
                   slot="fixed"
                   [icon]="IconType.Alerts"
