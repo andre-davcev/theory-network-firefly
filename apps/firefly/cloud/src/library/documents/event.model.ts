@@ -19,6 +19,8 @@ export interface Event extends FirebaseDocument
     timeNotify     : string;
     timeStart      : string;
     timeEnd        : string;
+    phone?         : string;
+    website?       : string;
 
     metadata?: MetadataEvent;
 }

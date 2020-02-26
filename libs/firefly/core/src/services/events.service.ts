@@ -109,7 +109,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
             timeStart   : [event.timeStart,   [ServiceEvents.validateTime()]],
             timeEnd     : [event.timeEnd,     [ServiceEvents.validateTime()]],
             timeNotify  : [event.timeNotify,  [ServiceEvents.validateTimeNotify()]],
-            interests    : [event.interests,    []]
+            interests   : [event.interests,   []]
         });
     }
 }

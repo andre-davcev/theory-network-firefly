@@ -44,7 +44,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     (
         private store: Store,
         private location: ServiceLocation,
-        service: ServiceEvents
+        public service: ServiceEvents
     )
     {
         super
@@ -72,7 +72,9 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 tagline        : null,
                 timeNotify     : null,
                 timeStart      : null,
-                timeEnd        : null
+                timeEnd        : null,
+                phone          : null,
+                website        : null
             },
             {
                 ActionReset:  ActionEventReset,
