@@ -26,6 +26,8 @@
   "general.authenticate"   : "Authenticate",
   "general.calendar"       : "Add To Calendar",
   "general.map"            : "Open Map",
+  "general.website"        : "Website",
+  "general.phone"          : "Phone Number",
 
   "menu.title"           : "Menu",
   "menu.home"            : "Home",
@@ -90,7 +92,7 @@
   "page.event.iconPlaceholder"        : "select interest",
   "page.event.imagePlaceholder"       : "select image",
   "page.event.descriptionPlaceholder" : "Write a description ...",
-  "page.event.timeNotify"             : "Notifaction Time",
+  "page.event.timeNotify"             : "Notification Time",
 
   "page.event-categories.title"    : "Categories",
 

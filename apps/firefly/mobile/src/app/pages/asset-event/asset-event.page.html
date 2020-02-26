@@ -88,6 +88,24 @@
                         <ion-toggle formControlName="private" color="primary"></ion-toggle>
                     </ion-item>
 
+                    <ion-item>
+                        <ion-icon name="link" slot="start" color="medium"></ion-icon>
+                        <ion-label>{{ 'general.website' | translate }} </ion-label>
+                        <ion-input type="url"
+                                   inputmode="url"
+                                   formControlName="website">
+                        </ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-icon name="call" slot="start" color="medium"></ion-icon>
+                        <ion-label>{{ 'general.phone' | translate }}</ion-label>
+                        <ion-input type="tel"
+                                   inputmode="tel"
+                                   formControlName="phone">
+                        </ion-input>
+                    </ion-item>
+
                     <app-item-description [form]="form$ | async"
                                           [title]="'general.description' | translate"
                                           description="description"
