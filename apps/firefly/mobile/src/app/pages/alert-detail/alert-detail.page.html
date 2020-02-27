@@ -28,9 +28,9 @@
     <div class="cnt-description">
       <div class="description">{{(event$ | async).description}}</div>
     </div>
-    <div class="cnt-button">
-      <div class="cpt-button" (click)="alertGo()">Go</div>
-    </div>
+    <app-button-action [text]="'general.go' | translate"
+                       (click)="alertGo()">
+    </app-button-action>
     <div class="cnt-map">
       <app-item-map>
       </app-item-map>

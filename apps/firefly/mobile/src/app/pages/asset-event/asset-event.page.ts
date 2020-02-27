@@ -36,7 +36,7 @@ export class PageAssetEvent
     @Select(StateEvent.notifyComplete)  notifyComplete$:  Observable<boolean>;
     @Select(StateDevice.device)         device$:          Observable<boolean>;
     @Select(StateEvent.imageUrl)        imageUrl$:        Observable<string>;
-    @Select(StateInterest.iconUrl)       iconUrl$:         Observable<string>;
+    @Select(StateInterest.iconUrl)      iconUrl$:         Observable<string>;
 
     public Pages    : any = Pages;
     public IconType : any = IconType;

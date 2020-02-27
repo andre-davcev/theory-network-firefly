@@ -46,6 +46,7 @@ firebase (functions) - enable retry on failure
 firebase (security) - create firestore database rules to allow unauth'd users to query stream
 firebase (security) - upload and test security rules
 firebase (security) - create storage security rules
+interests (all) - migrate clusters collection to interests
 intro (slide 1) - Where life comes to you
 intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
