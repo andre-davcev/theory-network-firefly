@@ -1,11 +1,14 @@
-<ion-slides *ngIf="found$ | async" pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
-    <ion-slide *ngFor="let alert of alerts$ | async">
+<form novalidate
+      [formGroup]="form$ | async"
+      ngxsForm="alerts.form"></form>
+<ion-slides #sliderRef  pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
+    <ion-slide #status *ngFor="let alert of alerts">
         <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (alertDeleteClicked)="alertDelete(alert)" (alertGoClicked)="alertGo()" (alertDetailClicked)="alertDetail(alert)"></app-slide>
     </ion-slide>
 </ion-slides>
-
 <app-icon-message *ngIf="empty$ | async"
                   slot="fixed"
                   [icon]="IconType.Alerts"
                   [message]="'page.alerts.empty' | translate">
 </app-icon-message>
+
