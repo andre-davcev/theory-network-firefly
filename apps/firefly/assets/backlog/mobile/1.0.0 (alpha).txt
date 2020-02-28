@@ -1,5 +1,3 @@
-organize package.json alphabetically
-
 admin (store) - install android version on amy's phone
 admin (store) - install ios version on cathy's phone
 +app (splash) - android splash screen
