@@ -88,7 +88,7 @@
     "zone.js": "~0.10.2",
     "@angular/cdk": "^8.2.3",
     "@angular/fire": "^5.1.2",
-    "@angular/flex-layout": "^8.0.0-beta.27",
+    "@angular/flex-layout": "^9.0.0-beta.29",
     "@angular/material": "^8.2.3",
     "@capacitor/android": "^1.4.0",
     "@capacitor/cli": "^1.4.0",
