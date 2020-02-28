@@ -27,18 +27,18 @@
         text-transform: var(--cpt-font-transform);
         letter-spacing: var(--cpt-font-spacing);
 
-        --background: var(--cpt-color-background);
-        --background-active: var(--cpt-color-background);
-        --background-focused: var(--cpt-color-background);
-        --background-hover: var(--cpt-color-background);
+        --button-background: var(--cpt-color-background);
+        --button-background-active: var(--cpt-color-background);
+        --button-background-focused: var(--cpt-color-background);
+        --button-background-hover: var(--cpt-color-background);
 
         --border-radius: var(--cpt-border-radius);
         --border-width: 0;
         --box-shadow: none;
-        --color: var(--cpt-color-text);
-        --color-activated: var(--cpt-color-text);
-        --color-focused: var(--cpt-color-text);
-        --color-hover: var(--cpt-color-text);
+        --button-color: var(--cpt-color-text);
+        --button-color-activated: var(--cpt-color-text);
+        --button-color-focused: var(--cpt-color-text);
+        --button-color-hover: var(--cpt-color-text);
 
         --padding-top: var(--cpt-padding-vertical);
         --padding-bottom: var(--cpt-padding-vertical);
