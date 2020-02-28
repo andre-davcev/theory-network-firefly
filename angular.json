@@ -21,7 +21,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/firefly/core/tsconfig.lib.json",
             "project": "libs/firefly/core/ng-package.json"
@@ -42,7 +42,7 @@
               "libs/firefly/core/tsconfig.lib.json",
               "libs/firefly/core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/firefly/core/**"]
           }
         }
       }
@@ -54,7 +54,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/firefly/mobile/tsconfig.lib.json",
             "project": "libs/firefly/mobile/ng-package.json"
@@ -75,7 +75,7 @@
               "libs/firefly/mobile/tsconfig.lib.json",
               "libs/firefly/mobile/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/firefly/mobile/**"]
           }
         }
       }
@@ -87,7 +87,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/core/tsconfig.lib.json",
             "project": "libs/core/ng-package.json"
@@ -108,7 +108,7 @@
               "libs/core/tsconfig.lib.json",
               "libs/core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/core/**"]
           }
         }
       }
@@ -120,7 +120,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/firebase/tsconfig.lib.json",
             "project": "libs/firebase/ng-package.json"
@@ -141,7 +141,7 @@
               "libs/firebase/tsconfig.lib.json",
               "libs/firebase/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/firebase/**"]
           }
         }
       }
@@ -153,7 +153,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/capacitor/tsconfig.lib.json",
             "project": "libs/capacitor/ng-package.json"
@@ -174,7 +174,7 @@
               "libs/capacitor/tsconfig.lib.json",
               "libs/capacitor/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/capacitor/**"]
           }
         }
       }
@@ -186,7 +186,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/ionic/tsconfig.lib.json",
             "project": "libs/ionic/ng-package.json"
@@ -207,7 +207,7 @@
               "libs/ionic/tsconfig.lib.json",
               "libs/ionic/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/ionic/**"]
           }
         }
       }
@@ -219,7 +219,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/web/tsconfig.lib.json",
             "project": "libs/web/ng-package.json"
@@ -240,7 +240,7 @@
               "libs/web/tsconfig.lib.json",
               "libs/web/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/web/**"]
           }
         }
       }
@@ -252,7 +252,7 @@
       "prefix": "theory",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/mapbox/tsconfig.lib.json",
             "project": "libs/mapbox/ng-package.json"
@@ -273,7 +273,7 @@
               "libs/mapbox/tsconfig.lib.json",
               "libs/mapbox/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/mapbox/**"]
           }
         }
       }
@@ -285,7 +285,7 @@
       "prefix": "theory",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/google/tsconfig.lib.json",
             "project": "libs/google/ng-package.json"
@@ -306,7 +306,7 @@
               "libs/google/tsconfig.lib.json",
               "libs/google/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/google/**"]
           }
         }
       }
@@ -318,7 +318,7 @@
       "prefix": "theory",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/ngxs/tsconfig.lib.json",
             "project": "libs/ngxs/ng-package.json"
@@ -331,7 +331,7 @@
               "libs/ngxs/tsconfig.lib.json",
               "libs/ngxs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/ngxs/**"]
           }
         },
         "test": {
@@ -381,7 +381,7 @@
       "prefix": "theory",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/bigdatacloud/tsconfig.lib.json",
             "project": "libs/bigdatacloud/ng-package.json"
