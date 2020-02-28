@@ -123,12 +123,12 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.803.14",
-    "@angular-devkit/build-angular": "^0.803.14",
-    "@angular-devkit/build-ng-packagr": "~0.803.14",
-    "@angular-devkit/core": "^8.3.14",
-    "@angular-devkit/schematics": "^8.3.14",
-    "@angular/cli": "~8.3.14",
+    "@angular-devkit/architect": "0.900.4",
+    "@angular-devkit/build-angular": "0.900.4",
+    "@angular-devkit/build-ng-packagr": "0.900.4",
+    "@angular-devkit/core": "9.0.4",
+    "@angular-devkit/schematics": "9.0.4",
+    "@angular/cli": "9.0.4",
     "@angular/compiler": "~8.2.12",
     "@angular/compiler-cli": "~8.2.12",
     "@angular/language-service": "~8.2.12",
@@ -152,7 +152,7 @@
     "jasmine-marbles": "0.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "jest": "^23.0.0",
-    "jest-preset-angular": "6.0.1",
+    "jest-preset-angular": "8.0.0",
     "karma": "~4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.4",
@@ -168,8 +168,8 @@
     "tsickle": "^0.37.0",
     "tslib": "^1.9.0",
     "tslint": "~5.12.1",
-    "typescript": "3.5.3",
-    "@nrwl/jest": "8.7.0",
+    "typescript": "3.7.5",
+    "@nrwl/jest": "9.0.4",
     "ts-jest": "24.0.0"
   }
 }
