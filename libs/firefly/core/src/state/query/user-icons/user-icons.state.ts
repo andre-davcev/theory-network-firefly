@@ -15,9 +15,10 @@ import {
 } from './user-icons.actions';
 import { StateUser } from '../../document/user';
 import { Query } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
 
 @State<StateUserIconsModel>(StateUserIconsOptions)
-
+@Injectable()
 export class StateUserIcons extends StateQuery<Icon, StateUserIconsModel>
 {
     constructor

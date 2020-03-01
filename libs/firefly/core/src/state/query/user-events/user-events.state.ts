@@ -18,9 +18,10 @@ import { ServiceEvents } from '@firefly/core/services';
 import { Query } from '@angular/fire/firestore';
 import { tap } from 'rxjs/operators';
 import { StateLanguage } from '@theory/capacitor';
+import { Injectable } from '@angular/core';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
-
+@Injectable()
 export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
 {
     constructor

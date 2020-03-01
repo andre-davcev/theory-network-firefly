@@ -18,11 +18,11 @@ import { switchMap, tap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
-import { NgZone } from '@angular/core';
+import { NgZone, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @State<StateMobileModel>(StateMobileOptions)
-
+@Injectable()
 export class StateMobile
 {
     @Selector() static isLoading(state: StateMobileModel)         : boolean                { return state.loadingElement != null;}

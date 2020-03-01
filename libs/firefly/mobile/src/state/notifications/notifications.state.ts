@@ -11,11 +11,12 @@ import { Plugins, PushNotification as CapPushNotification } from '@capacitor/cor
 import { FCM } from 'capacitor-fcm';
 import { ActionUserAddToken } from '@firefly/core';
 import { StateUser } from '@firefly/core';
+import { Injectable } from '@angular/core';
 
 const fcm = new FCM();
 const { PushNotifications } = Plugins;
 @State<StateNotificationsModel>(StateNotificationsOptions)
-
+@Injectable()
 export class StateNotifications
 {
     constructor(

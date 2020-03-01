@@ -16,9 +16,10 @@ import {
     ActionUserStreamSetData
 } from './user-stream.actions';
 import { StateInterestOptions } from '../../document/interest/interest.state.options';
+import { Injectable } from '@angular/core';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
-
+@Injectable()
 export class StateUserStream extends StateChild<StreamInterest, StateUserStreamModel>
 {
     constructor

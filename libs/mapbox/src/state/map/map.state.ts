@@ -11,9 +11,10 @@ import { GeolocationPosition } from '@capacitor/core';
 import { StateMapModel } from './map.state.model';
 import { StateMapOptions } from './map.state.options';
 import { ActionMapLocationWatch, ActionMapSearchResultSet, ActionMapSearchResultClear, ActionMapPlaceSet, ActionMapPlaceSetWithSearchResult, ActionMapPlaceClear, ActionMapSearchResultSetWithPlace } from './map.actions';
+import { Injectable } from '@angular/core';
 
 @State<StateMapModel>(StateMapOptions)
-
+@Injectable()
 export class StateMap
 {
     @Select(StateLocation.location) location$: Observable<GeolocationPosition>;

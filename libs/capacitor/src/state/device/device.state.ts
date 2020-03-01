@@ -10,9 +10,10 @@ import { Platform } from '../../enums';
 import { StateDeviceModel } from './device.state.model';
 import { StateDeviceOptions } from './device.state.options';
 import { ActionDeviceInitialize, ActionDeviceStatusBarSet, ActionDeviceStatusBarShow, ActionDeviceStatusBarHide } from './device.actions';
+import { Injectable } from '@angular/core';
 
 @State<StateDeviceModel>(StateDeviceOptions)
-
+@Injectable()
 export class StateDevice
 {
     @Selector() static platform(state: StateDeviceModel): Platform {return state.platform;}

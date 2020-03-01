@@ -26,9 +26,10 @@ import {
 } from './image.actions';
 import { ActionUserImagesAdd, ActionUserImagesRemove, StateUserImages, ActionUserImagesSync, ActionUserImagesReset } from '../../query/user-images';
 import { firestore } from 'firebase/app';
+import { Injectable } from '@angular/core';
 
 @State<StateImageModel>(StateImageOptions)
-
+@Injectable()
 export class StateImage extends StateDocument<Image, StateImageModel>
 {
     @Selector() static dataUri(state: StateImageModel): string { return state.dataUri; }

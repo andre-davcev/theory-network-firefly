@@ -103,7 +103,7 @@
     "@ngrx/store": "8.3.0",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
-    "@ngxs/devtools-plugin": "^3.4.3",
+    "@ngxs/devtools-plugin": "^3.6.2",
     "@ngxs/form-plugin": "^3.6.2",
     "@ngxs/logger-plugin": "^3.6.2",
     "@ngxs/router-plugin": "^3.6.2",

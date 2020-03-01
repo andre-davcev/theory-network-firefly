@@ -53,8 +53,10 @@ import { StateUserSubscriptions } from '../../child/user-subscriptions';
 import { StateInterestOptions } from '../interest/interest.state.options';
 import { ActionStorageUrlGet } from '@theory/firebase';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
+import { Injectable } from '@angular/core';
 
 @State<StateUserModel>(StateUserOptions)
+@Injectable()
 export class StateUser extends StateDocument<User, StateUserModel> implements NgxsOnInit
 {
     @Select(StateLanguage.language)        language$    : Observable<string>;
