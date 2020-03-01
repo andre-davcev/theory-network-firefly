@@ -1,0 +1,63 @@
+@import 'variables';
+
+:host {
+    /*
+    736px height
+    */
+
+    ion-fab {
+        &.fab-vertical-bottom {
+            bottom: 0;
+        }
+
+        &.fab-horizontal-start {
+            left: 0;
+        }
+    }
+
+    ion-list {
+      --background: #{$fire-color-transparent};
+      background: #{$fire-color-transparent};
+      margin-bottom: 2px;
+  }
+
+  ion-item {
+    --padding-start: 8px;
+    --background: #{$fire-color-transparent};
+    --border-color: #333;
+    margin-bottom: 7px;
+
+    &:first {
+      ion-card {
+          margin-top: 6px;
+      }
+  }
+
+    &:last-child {
+        ion-card {
+            margin-bottom: 24px;
+        }
+    }
+}
+
+    --background: #{$fire-color-transparent};
+
+    position: relative;
+    height: 100%;
+
+    .eventWrapper {
+      margin-bottom: 7px;
+    }
+
+    .eventInfo {
+      font-family: $fire-font-opensans
+    }
+
+    .date {
+      font-family: $fire-font-opensans
+    }
+
+    .time {
+      font-family: $fire-font-opensans;
+    }
+}

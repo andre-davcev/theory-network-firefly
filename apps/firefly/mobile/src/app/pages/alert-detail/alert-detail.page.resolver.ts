@@ -3,7 +3,9 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { ActionEventSetId } from '@firefly/core';
+import { ActionEventSetId, ActionAlertSetId } from '@firefly/core';
+import { switchMap } from 'rxjs/operators';
+import { ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAlertDetail implements Resolve<void>
@@ -12,6 +14,8 @@ export class ResolverPageAlertDetail implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-        return this.store.dispatch(new ActionEventSetId(route.params.id));
+      return this.store.dispatch(new ActionAlertSetId(route.params.id)).pipe(
+        switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
+      )
     }
 }
