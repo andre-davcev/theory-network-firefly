@@ -25,6 +25,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { from, of } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
+import { StateAlert } from '../../document';
+import { StateLanguage } from '@theory/capacitor';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()
@@ -54,6 +56,7 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
 
     @Selector() static unread(state: StateUserAlertsModel)    : number  { return state.unread; }
     @Selector() static hasUnread(state: StateUserAlertsModel) : boolean { return StateUserAlerts.unread(state) > 0; }
+    @Selector() static alertsRead(state: StateUserAlertsModel): Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => alert.read) }
 
     @Action(ActionUserAlertsReset)
     reset(context: StateContext<StateUserAlertsModel>)
@@ -84,17 +87,34 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
                 const images : Record<string, StorageImage> = this.store.selectSnapshot(StateStorage.images);
                 const data   : Array<Alert>                 = StateUserAlerts.dataState(state);
 
+                const language: string = this.store.selectSnapshot(StateLanguage.language);
+                const options: any = { weekday: 'long',
+                year: 'numeric', month: 'long', day: 'numeric'};
+
+                let timeStart: Date;
+                let timeStartPrevious: Date;
+                let timeStartFormatted: string;
+
                 let unread : number = StateUserAlerts.unread(state);
 
                 data.forEach((alert: Alert) =>
                 {
                     unread += alert.read ? 0 : 1;
 
+                    timeStart = (alert.dateTime as firestore.Timestamp).toDate();
+                    timeStartFormatted = timeStart.toLocaleDateString(language, options);
+
                     alert.metadata =
                     {
                         urlMedium:    images[alert.bucketPath].medium,
                         dateTimeDate: (alert.dateTime as firestore.Timestamp).toDate()
                     };
+
+                    if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
+                    alert.metadata.timeStartFormatted = timeStartFormatted;
+
+                    alert.metadata.timeStartDate = timeStart;
+                    timeStartPrevious = timeStart;
                 });
 
                 patchState({ unread })
@@ -162,7 +182,7 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
       if(unread > 0)
         unread--;
 
-        patchState({ unread })
+        patchState({ unread });
     }
 
 }

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewChildren, OnInit } from '@angular/core';
-import { tap, switchMap, takeUntil, filter } from 'rxjs/operators';
+import { tap, switchMap, takeUntil, filter, map } from 'rxjs/operators';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
@@ -43,7 +43,10 @@ export class PageAlert extends BaseComponent implements OnInit
     public ngOnInit(): void
     {
       this.alerts$
-      .pipe(takeUntil(this.destroy$)).
+      .pipe(
+        takeUntil(this.destroy$),
+        map((alerts: Array<Alert>) => alerts.filter(alert => !alert.read)
+      )).
         subscribe((alerts: Array<Alert>) =>
           this.alerts = alerts
       )
@@ -53,7 +56,7 @@ export class PageAlert extends BaseComponent implements OnInit
     {
       const index = await this.sliderRef.getActiveIndex();
 
-      if(this.alerts[index].read)
+      if(!this.alerts[index] || this.alerts[index].read)
         return;
 
         this.store.dispatch(new ActionAlertSetId(this.alerts[index].id)).pipe
@@ -66,6 +69,11 @@ export class PageAlert extends BaseComponent implements OnInit
           )
         ).subscribe();
     }
+
+    /*public ionViewWillExit(): Promise<void>
+    {
+
+    }*/
 
     public async slideChanged(): Promise<void>
     {
@@ -130,8 +138,14 @@ export class PageAlert extends BaseComponent implements OnInit
       ).subscribe();
     }
 
-    public navigate(): void
+    public navigate(page: Pages.AlertsList | Pages.AlertDetail, object: Alert): void
     {
-        this.store.dispatch(new Navigate([Pages.AssetEvent]));
+      if(page === Pages.AlertsList)
+        this.store.dispatch(new Navigate([page]));
+      else
+        this.store.dispatch(new ActionEventGet(object.eventId)).pipe
+        (
+          switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
+        ).subscribe();
     }
 }

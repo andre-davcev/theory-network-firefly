@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title color="dark">
+          {{ 'page.alerts-list.title' | translate}}
+      </ion-title>
+
+      <ion-buttons slot="start">
+          <ion-back-button color="dark"></ion-back-button>
+      </ion-buttons>
+
+      <ion-buttons slot="end">
+        <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+            <ion-icon name="person" color="dark" size="large"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let alert of alerts$ | async">
+    <ion-item (click)="navigate(Pages.AlertDetail, alert)">
+      <div fxLayout="column">
+        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="none center">
+          <ion-avatar slot="start">
+            <img *ngIf="alert.metadata.urlMedium" [src]="alert.metadata.urlMedium">
+          </ion-avatar>
+          <ion-label class="eventInfo">
+            <h2>{{ alert.name }}</h2>
+          </ion-label>
+        </div>
+
+        <div  fxFlexFill fxLayout="row" fxLayoutGap="5px">
+          <ion-label class="date">
+            {{ alert.metadata.timeStartDate | date:'shortTime' }}
+          </ion-label>
+          <ion-label class="time">
+            | {{ alert.metadata.timeStartFormatted }}
+        </ion-label>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <app-icon-message *ngIf="empty$ | async"
+                    slot="fixed"
+                    [icon]="IconType.Events"
+                    [message]="'page.events.empty' | translate">
+  </app-icon-message>
+
+</ion-content>
