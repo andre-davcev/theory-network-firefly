@@ -147,6 +147,7 @@
   "page.assets-interests.title-modal" : "Select Interest",
 
   "page.alert.title" : "Alert",
+  "page.alerts-list.title" : "Read Alerts",
 
   "page.event-location.title"             : "Event Location",
   "page.event-location.searchPlaceholder" : "Search Locations",
