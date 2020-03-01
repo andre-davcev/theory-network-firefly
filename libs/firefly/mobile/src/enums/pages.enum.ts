@@ -10,6 +10,8 @@ export enum Pages
     Home   = 'home',
     Stream = 'stream',
     Alert  = 'alerts',
+    AlertsList  = 'alerts-list',
+    AlertDetail = 'alert-detail',
 
     Search        = 'search',
     Subscriptions = 'subscriptions',

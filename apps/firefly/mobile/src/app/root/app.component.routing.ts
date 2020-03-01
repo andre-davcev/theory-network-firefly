@@ -24,6 +24,9 @@ export const routes: Routes =
     { path: Pages.IconSelector,   loadChildren: '@firefly/page/icon-selector#ModulePageIconSelector' },
     //{ path: Pages.ImageSelector,   loadChildren: '@firefly/page/image-selector#ModulePageImageSelector' },
 
+    { path: Pages.AlertsList,    loadChildren: '@firefly/page/alerts-list#ModulePageAlertsList' },
+    { path: Pages.AlertDetail,   loadChildren: '@firefly/page/alert-detail#ModulePageAlertDetail' },
+
     { path: Pages.Search,        loadChildren: '@firefly/page/search#ModulePageSearch' },
     { path: Pages.Subscriptions, loadChildren: '@firefly/page/subscriptions#ModulePageSubscriptions' },
     { path: Pages.AssetEvent,    loadChildren: '@firefly/page/asset-event#ModulePageAssetEvent' },
