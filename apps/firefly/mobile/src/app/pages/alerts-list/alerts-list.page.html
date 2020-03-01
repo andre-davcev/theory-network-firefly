@@ -15,11 +15,11 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
+<section>
 <ion-content>
   <ion-list *ngFor="let alert of alerts$ | async">
     <ion-item (click)="navigate(Pages.AlertDetail, alert)">
-      <div fxLayout="column">
+      <div fxLayout="column" class="alertWrapper">
         <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="none center">
           <ion-avatar slot="start">
             <img *ngIf="alert.metadata.urlMedium" [src]="alert.metadata.urlMedium">
@@ -29,12 +29,12 @@
           </ion-label>
         </div>
 
-        <div  fxFlexFill fxLayout="row" fxLayoutGap="5px">
-          <ion-label class="date">
+        <div class="timeWrapper" fxFlexFill fxLayout="row" fxLayoutGap="5px">
+          <ion-label>
             {{ alert.metadata.timeStartDate | date:'shortTime' }}
           </ion-label>
-          <ion-label class="time">
-            | {{ alert.metadata.timeStartFormatted }}
+          <ion-label>
+            | {{ alert.metadata.timeStartFormattedShort }}
         </ion-label>
         </div>
       </div>
@@ -48,3 +48,4 @@
   </app-icon-message>
 
 </ion-content>
+</section>
