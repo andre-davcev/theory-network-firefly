@@ -27,11 +27,12 @@
     --border-color: #333;
     margin-bottom: 7px;
 
-    &:first {
-      ion-card {
-          margin-top: 6px;
+    /*&:first-child {
+
+      ion-item {
+          margin-top: 20px;
       }
-  }
+  }*/
 
     &:last-child {
         ion-card {
@@ -40,24 +41,30 @@
     }
 }
 
-    --background: #{$fire-color-transparent};
 
-    position: relative;
-    height: 100%;
+    section
+    {
+        position: relative;
+        height: 100%;
+        margin-top: 7px;
+        background-color: $fire-color-grey-lightest;
+    }
+
+    .alertWrapper {
+      width: 100%;
+    }
 
     .eventWrapper {
       margin-bottom: 7px;
     }
 
     .eventInfo {
-      font-family: $fire-font-opensans
+      font-family: $fire-font-playfair;
     }
 
-    .date {
-      font-family: $fire-font-opensans
-    }
-
-    .time {
+    .timeWrapper {
       font-family: $fire-font-opensans;
+      padding-left: 18%;
+      margin-bottom: 5px;
     }
 }
