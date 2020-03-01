@@ -35,9 +35,10 @@ import { switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ActionIconReset } from '../icon/icon.actions';
 import { LocationCity } from '@firefly/core/interfaces';
+import { Injectable } from '@angular/core';
 
 @State<StateEventModel>(StateEventOptions)
-
+@Injectable()
 export class StateEvent extends StateDocument<Event, StateEventModel>
 {
     constructor

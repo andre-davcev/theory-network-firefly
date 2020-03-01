@@ -24,10 +24,10 @@ import { firestore } from 'firebase/app';
 import { TranslateService } from '@ngx-translate/core';
 import { from, of } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
-import { StateAlert } from '../../document';
+import { Injectable } from '@angular/core';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
-
+@Injectable()
 export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
 {
     constructor

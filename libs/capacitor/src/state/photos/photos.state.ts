@@ -1,13 +1,13 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { PhotosResult, PhotosAlbumsResult, PhotoAsset, PhotosAlbum } from '@capacitor/core';
-import { from, of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { PhotoAsset, PhotosAlbum } from '@capacitor/core';
 
 import { StatePhotosModel } from './photos.state.model';
 import { StatePhotosOptions } from './photos.state.options';
 import { ActionPhotosGet, ActionPhotosGetAlbums } from './photos.actions';
+import { Injectable } from '@angular/core';
 
 @State<StatePhotosModel>(StatePhotosOptions)
+@Injectable()
 export class StatePhotos
 {
     @Selector() static photos(state: StatePhotosModel): Array<PhotoAsset>

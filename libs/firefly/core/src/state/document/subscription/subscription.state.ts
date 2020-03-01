@@ -21,9 +21,10 @@ import {
 } from './subscription.actions';
 import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions';
 import { firestore } from 'firebase/app';
+import { Injectable } from '@angular/core';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)
-
+@Injectable()
 export class StateSubscription extends StateDocument<Subscription, StateSubscriptionModel>
 {
     constructor

@@ -40,9 +40,10 @@ import { of, from } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
 import { StateLanguage } from '@theory/capacitor';
 import { StateUserStream } from '@firefly/core/state/child/user-stream';
+import { Injectable } from '@angular/core';
 
 @State<StateInterestModel>(StateInterestOptions)
-
+@Injectable()
 export class StateInterest extends StateDocument<Interest, StateInterestModel>
 {
     constructor

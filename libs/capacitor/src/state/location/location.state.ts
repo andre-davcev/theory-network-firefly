@@ -7,11 +7,12 @@ import { tap, catchError } from 'rxjs/operators';
 import { StateLocationModel } from './location.state.model';
 import { StateLocationOptions } from './location.state.options';
 import { ActionLocationWatch } from './location.actions';
+import { Injectable } from '@angular/core';
 
 const { Geolocation } = Plugins;
 
 @State<StateLocationModel>(StateLocationOptions)
-
+@Injectable()
 export class StateLocation
 {
     constructor() { }

@@ -8,11 +8,12 @@ import { Plugins } from '@capacitor/core';
 import { StateLanguageModel } from './language.state.model';
 import { StateLanguageOptions } from './language.state.options';
 import { ActionLanguageInitialize, ActionLanguageGet, ActionLanguageSet } from './language.actions';
+import { Injectable } from '@angular/core';
 
 const { Device } = Plugins;
 
 @State<StateLanguageModel>(StateLanguageOptions)
-
+@Injectable()
 export class StateLanguage
 {
     constructor(private translate: TranslateService) {}

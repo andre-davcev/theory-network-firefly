@@ -15,9 +15,10 @@ import {
 } from './user-images.actions';
 import { StateUser } from '../../document/user';
 import { Query } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
 
 @State<StateUserImagesModel>(StateUserImagesOptions)
-
+@Injectable()
 export class StateUserImages extends StateQuery<Image, StateUserImagesModel>
 {
     constructor

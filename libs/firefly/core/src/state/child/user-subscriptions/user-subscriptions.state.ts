@@ -16,9 +16,10 @@ import {
 } from './user-subscriptions.actions';
 import { StateChild } from '@theory/ngxs';
 import { StateInterestOptions } from '../../document/interest/interest.state.options';
+import { Injectable } from '@angular/core';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
-
+@Injectable()
 export class StateUserSubscriptions extends StateChild<Subscription, StateUserSubscriptionsModel>
 {
     constructor

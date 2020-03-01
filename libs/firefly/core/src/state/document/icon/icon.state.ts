@@ -26,9 +26,10 @@ import {
 } from './icon.actions';
 import { ActionUserIconsAdd, ActionUserIconsRemove, StateUserIcons, ActionUserIconsSync, ActionUserIconsReset } from '../../query/user-icons';
 import { firestore } from 'firebase/app';
+import { Injectable } from '@angular/core';
 
 @State<StateIconModel>(StateIconOptions)
-
+@Injectable()
 export class StateIcon extends StateDocument<Icon, StateIconModel>
 {
     @Selector() static dataUri(state: StateIconModel): string { return state.dataUri; }

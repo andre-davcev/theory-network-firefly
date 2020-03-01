@@ -9,7 +9,7 @@ import { PageStream } from './stream.page';
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentItemHeader } from '@firefly/mobile';
 
-import { MatExpansionModule } from '@angular/material';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule
 ({

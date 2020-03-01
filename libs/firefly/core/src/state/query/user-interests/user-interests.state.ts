@@ -16,9 +16,10 @@ import {
 } from './user-interests.actions';
 import { StateUser } from '../../document/user/user.state';
 import { Query } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
 
 @State<StateUserInterestsModel>(StateUserInterestsOptions)
-
+@Injectable()
 export class StateUserInterests extends StateQuery<Interest, StateUserInterestsModel>
 {
     constructor

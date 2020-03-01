@@ -19,15 +19,12 @@ import {
   ActionAlertDirty
 } from './alert.actions';
 import { ActionUserAlertsAdd, ActionUserAlertsRemove, StateUserAlerts, ActionUserAlertsSync } from '../../query/user-alerts';
-import { ActionInterestReset } from '../interest';
 import { firestore } from 'firebase/app';
 import { ServiceAlerts } from '@firefly/core/services';
-import { of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { FormGroup } from '@angular/forms';
+import { Injectable } from '@angular/core';
 
 @State<StateAlertModel>(StateAlertOptions)
-
+@Injectable()
 export class StateAlert extends StateDocument<Alert, StateAlertModel>
 {
     constructor
