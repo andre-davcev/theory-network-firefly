@@ -15,6 +15,7 @@
 </ion-header>
 <ion-content>
     <form novalidate
+          *ngIf="form$ | async"
           [formGroup]="form$ | async"
           ngxsForm="images.form">
           <app-item-image [url]="imageUrl$ | async"

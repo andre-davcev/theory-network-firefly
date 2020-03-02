@@ -18,6 +18,7 @@
 
 <ion-content>
     <form novalidate
+          *ngIf="form$ | async"
           [formGroup]="form$  | async"
           ngxsForm="clusters.form">
         <app-item-header [form]="form$ | async"
