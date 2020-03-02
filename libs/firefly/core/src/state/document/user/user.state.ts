@@ -207,7 +207,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ])
             ),
             switchMap(() =>
-                this.streamReady$.pipe
+                this.store.select(StateUserStream.initialized()).pipe
                 (
                     filter((ready: boolean) => ready),
                     take(1)
@@ -299,7 +299,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ])
             ),
             switchMap(() =>
-                this.streamReady$.pipe
+                this.store.select(StateUserStream.initialized()).pipe
                 (
                     filter((ready: boolean) => ready),
                     take(1)
