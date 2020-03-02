@@ -24,7 +24,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         name            : 'Your first interest!',
         tagline         : 'Come enjoy my first event interest',
         description     : `This is your first interest. When you're ready to publish to the global catalog, flip off the private switch and join the Firefly community of publishers!`,
-        bucketPath      : 'baLysAd71cRyZjh0hr6poxR8an13_icons_CASwQmcg46JQYZqGmC3e.png',
+        bucketPath      : 'baLysAd71cRyZjh0hr6poxR8an13/icons/CASwQmcg46JQYZqGmC3e.png',
         private         : true,
         subscriberCount : 0
     };
