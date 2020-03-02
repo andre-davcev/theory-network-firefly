@@ -9,16 +9,16 @@ export enum IconType
     Places        = 'pin',
     Coupons       = 'pricetags',
     Alerts        = 'notifications',
-    Stream        = 'md-paper',
+    Stream        = 'newspaper',
     Publisher     = 'logo-rss',
 
     Menu      = 'person',
-    Private   = 'lock',
+    Private   = 'lock-closed',
     Add       = 'add',
     Search    = 'search',
     Close     = 'close',
-    Logout    = 'unlock',
+    Logout    = 'lock-open',
     Profile   = 'contact',
     Subscribe = 'heart',
-    Trash     = 'md-trash'
+    Trash     = 'trash'
 }
