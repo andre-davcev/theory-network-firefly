@@ -1,6 +1,6 @@
 import { User as FirebaseUser, auth, firestore } from 'firebase/app';
 
-import { State, Selector, Action, StateContext, Select, NgxsOnInit, Store} from '@ngxs/store';
+import { State, Selector, Action, StateContext, NgxsOnInit, Store} from '@ngxs/store';
 import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map, finalize } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -59,10 +59,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StateUser extends StateDocument<User, StateUserModel> implements NgxsOnInit
 {
-    @Select(StateLanguage.language)        language$    : Observable<string>;
-    @Select(StateLocation.location)        location$    : Observable<GeolocationPosition>;
-    @Select(StateUserStream.initialized()) streamReady$ : Observable<boolean>;
-
     constructor
     (
         private auth         : AngularFireAuth,
@@ -366,7 +362,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserWatchLocation, { cancelUncompleted: true })
     watchLocation({ dispatch, getState }: StateContext<StateUserModel>, { save }: ActionUserWatchLocation)
     {
-        return this.location$.pipe
+        return this.store.select(StateLocation.location).pipe
         (
             filter((location: GeolocationPosition) =>
                 location != null
@@ -420,7 +416,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserWatchLanguage, { cancelUncompleted: true })
     watchLanguage({ dispatch, getState }: StateContext<StateUserModel>)
     {
-        return this.language$.pipe
+        return this.store.select(StateLanguage.language).pipe
         (
             filter((language: string) =>
                 language != null && StateUser.language(getState()) !== language

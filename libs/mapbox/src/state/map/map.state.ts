@@ -1,7 +1,6 @@
 
-import { State, Selector, Action, StateContext, Select } from '@ngxs/store';
+import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 
-import { Observable } from 'rxjs';
 import { StateLocation } from '@theory/capacitor';
 import { LngLatLike } from 'mapbox-gl';
 import { LngLatLiteral, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
@@ -17,9 +16,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StateMap
 {
-    @Select(StateLocation.location) location$: Observable<GeolocationPosition>;
-
-    constructor() {}
+    constructor
+    (
+        private store: Store
+    ) {}
 
     private static position(state: StateMapModel): GeolocationPosition { return state.position; }
 
@@ -97,7 +97,7 @@ export class StateMap
     @Action(ActionMapLocationWatch)
     locationWatch({ patchState })
     {
-        return this.location$.pipe
+        return this.store.select(StateLocation.location).pipe
         (
             tap((position: GeolocationPosition) => patchState({ position }))
         );
