@@ -34,16 +34,16 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
     protected static bucketPathState(state: any): string                     { return StateDocument.dataState(state).bucketPath; }
     protected static foundState(state: any):      boolean                    { return StateDocument.dataState(state) != null; }
 
-    public static snapshot()   { return createSelector([this], StateDocument.snapshotState); }
-    public static form()       { return createSelector([this], StateDocument.formState); }
-    public static formGroup()  { return createSelector([this], StateDocument.formGroupState); }
-    public static isForm()     { return createSelector([this], StateDocument.isFormState); }
-    public static data()       { return createSelector([this], StateDocument.dataState); }
-    public static id()         { return createSelector([this], StateDocument.idState); }
-    public static isNew()      { return createSelector([this], StateDocument.isNewState); }
-    public static canUpdate()  { return createSelector([this], StateDocument.canUpdateState); }
-    public static bucketPath() { return createSelector([this], StateDocument.bucketPathState); }
-    public static found()      { return createSelector([this], StateDocument.foundState); }
+    public static snapshot()   { return createSelector([this], (state: any) => StateDocument.snapshotState(state)); }
+    public static form()       { return createSelector([this], (state: any) => StateDocument.formState(state)); }
+    public static formGroup()  { return createSelector([this], (state: any) => StateDocument.formGroupState(state)); }
+    public static isForm()     { return createSelector([this], (state: any) => StateDocument.isFormState(state)); }
+    public static data()       { return createSelector([this], (state: any) => StateDocument.dataState(state)); }
+    public static id()         { return createSelector([this], (state: any) => StateDocument.idState(state)); }
+    public static isNew()      { return createSelector([this], (state: any) => StateDocument.isNewState(state)); }
+    public static canUpdate()  { return createSelector([this], (state: any) => StateDocument.canUpdateState(state)); }
+    public static bucketPath() { return createSelector([this], (state: any) => StateDocument.bucketPathState(state)); }
+    public static found()      { return createSelector([this], (state: any) => StateDocument.foundState(state)); }
 
     constructor
     (

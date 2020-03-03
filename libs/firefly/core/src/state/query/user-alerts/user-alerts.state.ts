@@ -25,7 +25,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { from, of } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
-import { StateAlert } from '../../document';
 import { StateLanguage } from '@theory/capacitor';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
@@ -57,6 +56,7 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
     @Selector() static unread(state: StateUserAlertsModel)    : number  { return state.unread; }
     @Selector() static hasUnread(state: StateUserAlertsModel) : boolean { return StateUserAlerts.unread(state) > 0; }
     @Selector() static alertsRead(state: StateUserAlertsModel): Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => alert.read) }
+    @Selector() static alertsUnread(state: StateUserAlertsModel): Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read) }
 
     @Action(ActionUserAlertsReset)
     reset(context: StateContext<StateUserAlertsModel>)

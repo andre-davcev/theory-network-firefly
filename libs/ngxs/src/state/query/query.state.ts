@@ -8,7 +8,7 @@ import { ImageSize, FirebaseDocument, ActionStorageUrlsGet } from '@theory/fireb
 
 import { StateCollection, ActionsCollection, StateCollectionModel } from '../collection';
 
-export class StateQuery<T extends FirebaseDocument, M extends StateCollectionModel<T>> extends StateCollection<T, M>
+export abstract class StateQuery<T extends FirebaseDocument, M extends StateCollectionModel<T>> extends StateCollection<T, M>
 {
     public query: Query;
 
