@@ -1,6 +1,6 @@
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext, Store } from '@ngxs/store';
 import { CoreEnum } from '@theory/core';
-import { StateDocument, FormNgxs } from '@theory/ngxs';
+import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
 import { Alert } from '@firefly/cloud';
 import { StateAlertModel } from './alert.state.model';

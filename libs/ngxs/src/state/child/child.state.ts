@@ -30,18 +30,17 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         this.collection = collection;
     }
 
-    protected static keysState(state: any): Array<string> { return state.keysSorted ; }
-
+    protected static keysState(state: any):        Array<string>                 { return state.keysSorted ; }
     protected static idState(state: any):          string                        { return state.id; }
     protected static childLookupState(state: any): Record<string, Partial<any>>  { return state.childLookup; }
     protected static sortFieldsState(state: any):  Record<string, SortField>     { return state.sortFields; }
     protected static offsetState(state: any):      number                        { return state.offset; }
     protected static countState(state: any):       number                        { return StateChild.keysState(state).length; }
 
-    public static id()          { return createSelector([this], StateChild.idState); }
-    public static childLookup() { return createSelector([this], StateChild.childLookupState); }
-    public static sortFields()  { return createSelector([this], StateChild.sortFieldsState); }
-    public static offset()      { return createSelector([this], StateChild.offsetState); }
+    public static id()          { return createSelector([this], (state: any) => StateChild.idState(state)); }
+    public static childLookup() { return createSelector([this], (state: any) => StateChild.childLookupState(state)); }
+    public static sortFields()  { return createSelector([this], (state: any) => StateChild.sortFieldsState(state)); }
+    public static offset()      { return createSelector([this], (state: any) => StateChild.offsetState(state)); }
 
     public getData(context: StateContext<M>, action: any): Observable<any>
     {

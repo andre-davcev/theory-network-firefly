@@ -1,5 +1,5 @@
-import { Component, ViewChild, ViewChildren, OnInit } from '@angular/core';
-import { tap, switchMap, takeUntil, filter, map } from 'rxjs/operators';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { switchMap, takeUntil, filter, map } from 'rxjs/operators';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
@@ -23,6 +23,7 @@ export class PageAlert extends BaseComponent implements OnInit
 {
     @Select(StateAlert.formGroup())  form$:   Observable<FormGroup>;
     @Select(StateUserAlerts.data())  alerts$: Observable<Array<Alert>>;
+    @Select(StateUserAlerts.alertsUnread) alertsUnread$: Observable<Array<Alert>>;
     @Select(StateUserAlerts.found()) found$:  Observable<boolean>;
     @Select(StateUserAlerts.empty()) empty$:  Observable<boolean>;
 
