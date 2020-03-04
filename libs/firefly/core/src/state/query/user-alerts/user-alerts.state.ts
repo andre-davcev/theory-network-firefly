@@ -55,6 +55,7 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
 
     @Selector() static unread(state: StateUserAlertsModel)    : number  { return state.unread; }
     @Selector() static hasUnread(state: StateUserAlertsModel) : boolean { return StateUserAlerts.unread(state) > 0; }
+    @Selector() static hasNoUnread(state: StateUserAlertsModel) : boolean { return StateUserAlerts.unread(state) === 0; }
     @Selector() static alertsRead(state: StateUserAlertsModel): Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => alert.read) }
     @Selector() static alertsUnread(state: StateUserAlertsModel): Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read) }
 
