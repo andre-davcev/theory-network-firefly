@@ -2,7 +2,7 @@ import { Action, State, StateContext, Store } from '@ngxs/store';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
-import { Alert } from '@firefly/cloud';
+import { Alert, MetadataAlert } from '@firefly/cloud';
 import { StateAlertModel } from './alert.state.model';
 import { StateAlertOptions } from './alert.state.options';
 import {
@@ -146,9 +146,12 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
     }
 
     @Action(ActionAlertMarkRead)
-    markRead({ dispatch, patchState }: StateContext<StateAlertModel>)
+    markRead({ dispatch, getState }: StateContext<StateAlertModel>)
     {
-      let read : boolean = true;
-      return dispatch(new ActionAlertPatch({ read }, true));
+        const metadata: MetadataAlert = StateAlert.metadataState(getState());
+
+        metadata.sessionRead = true;
+
+        return dispatch(new ActionAlertPatch({ read: true, metadata }, true));
     }
 }

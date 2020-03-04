@@ -1,16 +1,14 @@
-import { Component, ViewChild, ViewChildren, OnInit } from '@angular/core';
-import { tap, switchMap, takeUntil, filter, map } from 'rxjs/operators';
-import { IonSlides, ModalController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { switchMap, takeUntil, map } from 'rxjs/operators';
+import { ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, from, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionUserAlertsRemove, ActionAlertSetId, ActionAlertDelete, ActionUserAlertsMarkRead, ActionAlertMarkRead, StateAlert } from '@firefly/core';
+import { StateUserAlerts, ActionEventGet, IconType } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages, ActionMobileLoadingShow } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
-import { PageAlertDetail } from '../alert-detail/alert-detail.page';
-import { FormGroup } from '@angular/forms';
 import { BaseComponent } from '@theory/core';
 @Component
 ({
@@ -21,7 +19,7 @@ import { BaseComponent } from '@theory/core';
 
 export class PageAlertsList extends BaseComponent implements OnInit
 {
-    @Select(StateUserAlerts.alertsRead) alerts$: Observable<Array<Alert>>;
+    @Select(StateUserAlerts.read) alerts$: Observable<Array<Alert>>;
 
     public Pages: any = Pages;
     public alerts: Array<Alert>;

@@ -13,8 +13,7 @@ import {
     ActionUserAlertsGetData,
     ActionUserAlertsGet,
     ActionUserAlertsSync,
-    ActionUserAlertsGo,
-    ActionUserAlertsMarkRead
+    ActionUserAlertsGo
 } from './user-alerts.actions';
 import { StateUser } from '../../document/user';
 import { Query } from '@angular/fire/firestore';
@@ -33,8 +32,8 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
 {
     constructor
     (
-        private store:   Store,
-        private service: ServiceAlerts,
+        private store       : Store,
+        private service     : ServiceAlerts,
         private translate   : TranslateService,
         private actionSheet : ActionSheetController
     )
@@ -53,11 +52,12 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
         );
     }
 
-    @Selector() static unread(state: StateUserAlertsModel)    : number  { return state.unread; }
-    @Selector() static hasUnread(state: StateUserAlertsModel) : boolean { return StateUserAlerts.unread(state) > 0; }
-    @Selector() static hasNoUnread(state: StateUserAlertsModel) : boolean { return StateUserAlerts.unread(state) === 0; }
-    @Selector() static alertsRead(state: StateUserAlertsModel): Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => alert.read) }
-    @Selector() static alertsUnread(state: StateUserAlertsModel): Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read) }
+    @Selector() static read(state: StateUserAlertsModel)        : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => alert.read); }
+    @Selector() static unread(state: StateUserAlertsModel)      : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read || alert.metadata?.sessionRead); }
+    @Selector() static readCount(state: StateUserAlertsModel)   : number       { return StateUserAlerts.read(state).length; }
+    @Selector() static unreadCount(state: StateUserAlertsModel) : number       { return StateUserAlerts.unread(state).length; }
+    @Selector() static hasRead(state: StateUserAlertsModel)     : boolean      { return StateUserAlerts.readCount(state) > 0; }
+    @Selector() static hasUnread(state: StateUserAlertsModel)   : boolean      { return StateUserAlerts.unreadCount(state) > 0; }
 
     @Action(ActionUserAlertsReset)
     reset(context: StateContext<StateUserAlertsModel>)
@@ -99,7 +99,7 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
                 let timeStartFormatted: string;
                 let timeStartFormattedShort: string;
 
-                let unread : number = StateUserAlerts.unread(state);
+                let unread: number = StateUserAlerts.unreadCount(state);
 
                 data.forEach((alert: Alert) =>
                 {
@@ -180,15 +180,4 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
             )
         );
     }
-
-    @Action(ActionUserAlertsMarkRead)
-    markRead({ patchState }: StateContext<StateUserAlertsModel>)
-    {
-      let unread : number = this.store.selectSnapshot(StateUserAlerts.unread);
-      if(unread > 0)
-        unread--;
-
-        patchState({ unread });
-    }
-
 }

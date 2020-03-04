@@ -23,12 +23,12 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class PageHome extends BaseComponent
 {
-    @Select(StateMobile.menuOpen)      menuOpen$      : Observable<boolean>;
-    @Select(StateMobile.pageAlerts)    pageAlerts$    : Observable<boolean>;
-    @Select(StateMobile.pageStream)    pageStream$    : Observable<boolean>;
-    @Select(StateUserAlerts.unread)    unread$        : Observable<number>;
-    @Select(StateUserAlerts.hasUnread) hasUnread$     : Observable<boolean>;
-    @Select(StateUser.authenticated)   authenticated$ : Observable<boolean>;
+    @Select(StateMobile.menuOpen)        menuOpen$      : Observable<boolean>;
+    @Select(StateMobile.pageAlerts)      pageAlerts$    : Observable<boolean>;
+    @Select(StateMobile.pageStream)      pageStream$    : Observable<boolean>;
+    @Select(StateUserAlerts.unreadCount) unread$        : Observable<number>;
+    @Select(StateUserAlerts.hasUnread)   hasUnread$     : Observable<boolean>;
+    @Select(StateUser.authenticated)     authenticated$ : Observable<boolean>;
 
     public Pages : any = Pages;
 

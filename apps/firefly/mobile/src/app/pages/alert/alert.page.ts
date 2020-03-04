@@ -1,10 +1,10 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { switchMap, takeUntil, filter, map } from 'rxjs/operators';
+import { Component, ViewChild } from '@angular/core';
+import { switchMap, filter, map } from 'rxjs/operators';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionUserAlertsRemove, ActionAlertSetId, ActionAlertDelete, ActionUserAlertsMarkRead, ActionAlertMarkRead, StateAlert } from '@firefly/core';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, ActionAlertMarkRead, StateAlert } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages } from '@firefly/mobile';
@@ -19,38 +19,24 @@ import { BaseComponent } from '@theory/core';
     styleUrls   : ['./alert.page.scss']
 })
 
-export class PageAlert extends BaseComponent implements OnInit
+export class PageAlert extends BaseComponent
 {
-    @Select(StateAlert.formGroup())    form$:   Observable<FormGroup>;
-    @Select(StateUserAlerts.data())    alerts$: Observable<Array<Alert>>;
-    @Select(StateUserAlerts.found())   found$:  Observable<boolean>;
-    @Select(StateUserAlerts.hasUnread) hasUnread$:  Observable<boolean>;
-    @Select(StateUserAlerts.hasNoUnread) empty$:  Observable<boolean>;
+    @Select(StateAlert.formGroup())    form$:      Observable<FormGroup>;
+    @Select(StateUserAlerts.unread)    unread$:    Observable<Array<Alert>>;
+    @Select(StateUserAlerts.found())   found$:     Observable<boolean>;
+    @Select(StateUserAlerts.hasUnread) hasUnread$: Observable<boolean>;
 
     @ViewChild('sliderRef', { static: true }) protected sliderRef: IonSlides;
 
     public segment: string = 'fired';
     public Pages: any = Pages;
     public slideOptions: any = { zoom: false };
-    public alerts: Array<Alert> = [];
 
     public IconType : any = IconType;
 
     constructor(private store: Store, private modal: ModalController)
     {
-      super();
-    }
-
-    public ngOnInit(): void
-    {
-      this.alerts$
-      .pipe(
-        takeUntil(this.destroy$),
-        map((alerts: Array<Alert>) => alerts.filter(alert => !alert.read)
-      )).
-        subscribe((alerts: Array<Alert>) =>
-          this.alerts = alerts
-      )
+        super();
     }
 
     public ionViewWillEnter(): void
@@ -95,13 +81,6 @@ export class PageAlert extends BaseComponent implements OnInit
       (
         switchMap(() =>
           this.store.dispatch(new ActionAlertDelete())
-        ),
-        switchMap(() =>
-          of(alert)
-        ),
-        filter((alert) => !alert.read),
-        switchMap(() =>
-          this.store.dispatch(new ActionUserAlertsMarkRead())
         )
       ).subscribe();
     }
@@ -121,29 +100,39 @@ export class PageAlert extends BaseComponent implements OnInit
     {
         const alert$: Observable<Alert> = alert != null ?
             of(alert) :
-            this.sliderRef == null ? of(null) : from(this.sliderRef.getActiveIndex()).
-            pipe
-            (
-                map((index: number) =>
-                    this.alerts[index]
-                )
-            );
+            this.sliderRef == null ?
+                of(null) :
+                this.unread$.
+                pipe
+                (
+                    switchMap((alerts: Array<Alert>) =>
+                        from(this.sliderRef.getActiveIndex()).
+                        pipe
+                        (
+                            map((index: number) =>
+                                alerts[index]
+                            )
+                        )
+                    )
+                );
 
         return alert$.
         pipe
         (
             filter((a: Alert) =>
-                a != null && !a.read
+                a != null
             ),
             switchMap((a: Alert) =>
-                this.store.dispatch(new ActionAlertSetId(a.id))
-            ),
-            switchMap(() =>
-                this.store.dispatch
-                ([
-                    new ActionAlertMarkRead(),
-                    new ActionUserAlertsMarkRead()
-                ])
+                this.store.dispatch(new ActionAlertSetId(a.id)).
+                pipe
+                (
+                    filter((a: Alert) =>
+                        !a.read
+                    ),
+                    switchMap(() =>
+                        this.store.dispatch(new ActionAlertMarkRead())
+                    )
+                )
             )
         );
     }
