@@ -2,10 +2,7 @@
   <ion-list *ngIf="images && (found$ | async)">
     <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">
         <ion-card *ngIf="images[interest.bucketPath]" elevation="1">
-
-            <div >
-              <img class="image-cnt" [src]="images[interest.bucketPath].medium">
-            </div>
+            <img class="image-cnt" [src]="images[interest.bucketPath].medium">
 
             <ion-card-header>
               <ion-card-title class="name">|{{ interest.name }}|</ion-card-title>
