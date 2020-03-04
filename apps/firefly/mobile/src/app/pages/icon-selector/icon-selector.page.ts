@@ -34,6 +34,8 @@ export class PageIconSelector
     public segmentChanged(event: any): void
     {
         this.segment = event.target.value;
+        if(event.target.value === Pages.IconLibrary)
+          this.selectFromCamera();
     }
 
     public selectFromCamera()
