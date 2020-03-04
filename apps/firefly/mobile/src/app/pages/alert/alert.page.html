@@ -3,8 +3,12 @@
       [formGroup]="form$ | async"
       ngxsForm="alerts.form">
 </form>
-<ion-slides #sliderRef  pager="true" (ionSlideDidChange)="slideChanged()" [options]="slideOptions">
-    <ion-slide #status *ngFor="let alert of alertsUnread$ | async">
+<ion-slides *ngIf="hasUnread$ | async"
+           #sliderRef
+           pager="true"
+           (ionSlideDidChange)="slideChanged()"
+           [options]="slideOptions">
+    <ion-slide #status *ngFor="let alert of alerts">
         <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (alertDeleteClicked)="alertDelete(alert)" (alertGoClicked)="alertGo()" (alertDetailClicked)="alertDetail(Page.AlertDetail,alert)"></app-slide>
     </ion-slide>
 </ion-slides>

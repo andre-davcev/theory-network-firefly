@@ -21,18 +21,18 @@ import { BaseComponent } from '@theory/core';
 
 export class PageAlert extends BaseComponent implements OnInit
 {
-    @Select(StateAlert.formGroup())  form$:   Observable<FormGroup>;
-    @Select(StateUserAlerts.data())  alerts$: Observable<Array<Alert>>;
-    @Select(StateUserAlerts.alertsUnread) alertsUnread$: Observable<Array<Alert>>;
-    @Select(StateUserAlerts.found()) found$:  Observable<boolean>;
-    @Select(StateUserAlerts.empty()) empty$:  Observable<boolean>;
+    @Select(StateAlert.formGroup())    form$:   Observable<FormGroup>;
+    @Select(StateUserAlerts.data())    alerts$: Observable<Array<Alert>>;
+    @Select(StateUserAlerts.found())   found$:  Observable<boolean>;
+    @Select(StateUserAlerts.hasUnread) hasUnread$:  Observable<boolean>;
+    @Select(StateUserAlerts.hasNoUnread) empty$:  Observable<boolean>;
 
     @ViewChild('sliderRef', { static: true }) protected sliderRef: IonSlides;
 
     public segment: string = 'fired';
     public Pages: any = Pages;
     public slideOptions: any = { zoom: false };
-    public alerts: Array<Alert>;
+    public alerts: Array<Alert> = [];
 
     public IconType : any = IconType;
 
@@ -53,71 +53,38 @@ export class PageAlert extends BaseComponent implements OnInit
       )
     }
 
-    public async ionViewWillEnter(): Promise<void>
+    public ionViewWillEnter(): void
     {
-      const index = await this.sliderRef.getActiveIndex();
-
-      if(!this.alerts[index] || this.alerts[index].read)
-        return;
-
-        this.store.dispatch(new ActionAlertSetId(this.alerts[index].id)).pipe
-        (
-          switchMap(() =>
-            this.store.dispatch(new ActionAlertMarkRead())
-          ),
-          switchMap(() =>
-            this.store.dispatch(new ActionUserAlertsMarkRead())
-          )
-        ).subscribe();
+        this.markRead().subscribe();
     }
-
-    /*public ionViewWillExit(): Promise<void>
-    {
-
-    }*/
 
     public async slideChanged(): Promise<void>
     {
-      const index = await this.sliderRef.getActiveIndex();
-
-      if(this.alerts[index].read)
-        return;
-
-      this.store.dispatch(new ActionAlertSetId(this.alerts[index].id)).pipe
-      (
-        switchMap(() =>
-          this.store.dispatch(new ActionAlertMarkRead())
-        ),
-        switchMap(() =>
-          this.store.dispatch(new ActionUserAlertsMarkRead())
-        )
-      ).subscribe();
+        this.markRead().subscribe();
     }
 
-    public alertDetail(alert:Alert): void
+    public alertDetail(alert: Alert): void
     {
-      this.store.dispatch(new ActionEventGet(alert.eventId)).pipe
-      (
-        switchMap(() =>
-          this.store.dispatch(new ActionAlertSetId(alert.id))
-        ),
-        switchMap(() =>
-          this.store.dispatch(new ActionAlertMarkRead())
-        ),
-        switchMap(() =>
-        this.store.dispatch(new ActionUserAlertsMarkRead())
-        ),
-        switchMap(() =>
-          from(this.modal.create({
-            component: PageAlertDetail
-          }))
-        )
-      ).subscribe((modal: HTMLIonModalElement) => modal.present());
+        this.store.dispatch(new ActionEventGet(alert.eventId)).
+        pipe
+        (
+            switchMap(() =>
+                this.markRead(alert)
+            ),
+            switchMap(() =>
+                from(this.modal.create({
+                    component: PageAlertDetail
+                }))
+            )
+        ).
+        subscribe((modal: HTMLIonModalElement) =>
+            modal.present()
+        );
     }
 
     public alertGo()
     {
-      this.store.dispatch(new ActionUserAlertsGo()).subscribe();
+        this.store.dispatch(new ActionUserAlertsGo());
     }
 
     public alertDelete(alert:Alert): void
@@ -148,5 +115,36 @@ export class PageAlert extends BaseComponent implements OnInit
         (
           switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
         ).subscribe();
+    }
+
+    private markRead(alert?: Alert): Observable<any>
+    {
+        const alert$: Observable<Alert> = alert != null ?
+            of(alert) :
+            this.sliderRef == null ? of(null) : from(this.sliderRef.getActiveIndex()).
+            pipe
+            (
+                map((index: number) =>
+                    this.alerts[index]
+                )
+            );
+
+        return alert$.
+        pipe
+        (
+            filter((a: Alert) =>
+                a != null && !a.read
+            ),
+            switchMap((a: Alert) =>
+                this.store.dispatch(new ActionAlertSetId(a.id))
+            ),
+            switchMap(() =>
+                this.store.dispatch
+                ([
+                    new ActionAlertMarkRead(),
+                    new ActionUserAlertsMarkRead()
+                ])
+            )
+        );
     }
 }
