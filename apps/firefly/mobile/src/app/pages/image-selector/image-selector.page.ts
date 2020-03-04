@@ -34,6 +34,8 @@ export class PageImageSelector
     public segmentChanged(event: any): void
     {
         this.segment = event.target.value;
+        if(event.target.value === Pages.ImageLibrary)
+          this.selectFromCamera();
     }
 
     public cancel(): void
