@@ -1,16 +1,10 @@
-admin (store) - install android version on amy's phone
-admin (store) - install ios version on cathy's phone
+admin (store) - install on amy/cathy's phones
 +app (splash) - android splash screen
-*app (infra) - upgrade ionic to v5
-+app (notifications) - implement capacitor-fcm plugin
-+alerts (detail) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
-+alerts (detail) - cleanup styling on detail screen
+*app (ionic-5) - determine ionic 5 bugs
 +alerts (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
-+alerts (list) - add go action sheet workflow (add to calendar, get directions) (action sheet has been added, next the flow has to be implemented)
 *alerts (notifications) - setup ios push notifications
-alerts (list) - keep cards as unread alerts
-alerts (list) - implement alert list screen
-+alerts (functions create) - send push notifications for each alert token
+*alerts (list) - add pink dots for unred alerts
+*alerts (list) - for list view show read/unread
 alerts (go) - implement add to calendar workflow
 alerts (go) - implement get directions workflow
 alerts (list) - initial alert errors on click through
@@ -26,12 +20,11 @@ interests (detail) - add ability to add/remove events via query state
 *events (detail) - move select cluster to select icon
 *events (detail) - add edit functionality
 *events (detail) - reverse geocode
-*events (detail) - fix redux payload too big warning
 events (list) - empty list show errors with orderBy and sort
 *firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
-home - fix header disappear when ion-badge shown
+*home - fix header disappear when ion-badge shown
 *library (mapbox) - add back tokenized mapbox access token in search service
-*library (button action) - pressed button change to primary
+*library (button action) - pressed button change to primary/universal styling
 map (component) - limit mapbox search types to [address, poi]
 *streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
@@ -48,8 +41,6 @@ tasks:
 jan-30 - 79
 feb-06 - 56
 feb-13 - 40
-feb-20 -
-feb-27 -
 mar-05 -
 mar-12 -
 mar-19 -
