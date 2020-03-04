@@ -48,8 +48,10 @@
     }
 
     .image-cnt {
-      height: 167px;
-      object-fit: cover;
+        height: 167px;
+        object-fit: cover;
+        width: 100%;
+        background-size: cover;
     }
 
     .app-description {
