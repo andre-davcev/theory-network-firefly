@@ -101,6 +101,8 @@ export class ServiceFirestore<T extends FirebaseDocument>
 
     public formCreate(controlsConfig: Record<string, any>): FormGroup
     {
+        controlsConfig.metadata = controlsConfig.metadata == null ? {} : controlsConfig.metadata;
+
         return this.formBuilder.group(controlsConfig);
     }
 

@@ -33,6 +33,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
     protected static canUpdateState(state: any):  boolean                    { return StateDocument.formState(state).status === FormNgxsStatus.Valid && StateDocument.formState(state).dirty; }
     protected static bucketPathState(state: any): string                     { return StateDocument.dataState(state).bucketPath; }
     protected static foundState(state: any):      boolean                    { return StateDocument.dataState(state) != null; }
+    protected static metadataState(state: any):   any                        { return StateDocument.dataState(state).metadata; }
 
     public static snapshot()   { return createSelector([this], (state: any) => StateDocument.snapshotState(state)); }
     public static form()       { return createSelector([this], (state: any) => StateDocument.formState(state)); }
@@ -44,6 +45,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
     public static canUpdate()  { return createSelector([this], (state: any) => StateDocument.canUpdateState(state)); }
     public static bucketPath() { return createSelector([this], (state: any) => StateDocument.bucketPathState(state)); }
     public static found()      { return createSelector([this], (state: any) => StateDocument.foundState(state)); }
+    public static metadata()   { return createSelector([this], (state: any) => StateDocument.metadataState(state)); }
 
     constructor
     (
@@ -126,8 +128,9 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
 
         const snapshot:   firestore.DocumentSnapshot = action.snapshot;
         const data:       T                          = action.data == null ? snapshot.data() : action.data;
-        const bucketPath: string                     = data['bucketPath'];
-        const formGroup:  FormGroup                  = this.service.formCreate(data);
+
+        const bucketPath: string    = data['bucketPath'];
+        const formGroup:  FormGroup = this.service.formCreate(data);
 
         return dispatch(new ActionReset()).
         pipe
