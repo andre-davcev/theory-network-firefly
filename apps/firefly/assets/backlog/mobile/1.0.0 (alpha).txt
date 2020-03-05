@@ -1,10 +1,11 @@
 admin (store) - install on amy/cathy's phones
 +app (splash) - android splash screen
-*app (ionic-5) - determine ionic 5 bugs
 +alerts (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 *alerts (notifications) - setup ios push notifications
-*alerts (list) - add pink dots for unred alerts
+*alerts (list) - add pink dots for unread alerts
+*alerts (list) - keep active slide index on route change
 *alerts (list) - for list view show read/unread
+*alerts (list) - change go button to ios height
 alerts (go) - implement add to calendar workflow
 alerts (go) - implement get directions workflow
 alerts (list) - initial alert errors on click through

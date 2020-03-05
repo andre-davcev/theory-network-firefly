@@ -21,10 +21,10 @@ import { BaseComponent } from '@theory/core';
 
 export class PageAlert extends BaseComponent implements AfterViewInit
 {
-    @Select(StateAlert.formGroup())     form$:      Observable<FormGroup>;
-    @Select(StateUserAlerts.unreadList) unread$:    Observable<Array<Alert>>;
-    @Select(StateUserAlerts.found())    found$:     Observable<boolean>;
-    @Select(StateUserAlerts.hasUnread)  hasUnread$: Observable<boolean>;
+    @Select(StateAlert.formGroup())        form$:      Observable<FormGroup>;
+    @Select(StateUserAlerts.unreadList)    unread$:    Observable<Array<Alert>>;
+    @Select(StateUserAlerts.found())       found$:     Observable<boolean>;
+    @Select(StateUserAlerts.hasUnreadList) hasUnread$: Observable<boolean>;
 
     @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
 
@@ -54,7 +54,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         this.markRead().subscribe();
     }
 
-    public async slideChanged(): Promise<void>
+    public slideChanged(): void
     {
         this.markRead().subscribe();
     }
