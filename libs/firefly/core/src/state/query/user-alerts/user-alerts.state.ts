@@ -52,13 +52,14 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
         );
     }
 
-    @Selector() static read(state: StateUserAlertsModel)        : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => alert.read); }
-    @Selector() static unread(state: StateUserAlertsModel)      : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read); }
-    @Selector() static unreadList(state: StateUserAlertsModel)  : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read || alert.metadata?.sessionRead); }
-    @Selector() static readCount(state: StateUserAlertsModel)   : number       { return StateUserAlerts.read(state).length; }
-    @Selector() static unreadCount(state: StateUserAlertsModel) : number       { return StateUserAlerts.unread(state).length; }
-    @Selector() static hasRead(state: StateUserAlertsModel)     : boolean      { return StateUserAlerts.readCount(state) > 0; }
-    @Selector() static hasUnread(state: StateUserAlertsModel)   : boolean      { return StateUserAlerts.unreadCount(state) > 0; }
+    @Selector() static read(state: StateUserAlertsModel)          : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => alert.read); }
+    @Selector() static unread(state: StateUserAlertsModel)        : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read); }
+    @Selector() static unreadList(state: StateUserAlertsModel)    : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read || alert.metadata?.sessionRead); }
+    @Selector() static readCount(state: StateUserAlertsModel)     : number       { return StateUserAlerts.read(state).length; }
+    @Selector() static unreadCount(state: StateUserAlertsModel)   : number       { return StateUserAlerts.unread(state).length; }
+    @Selector() static hasRead(state: StateUserAlertsModel)       : boolean      { return StateUserAlerts.readCount(state) > 0; }
+    @Selector() static hasUnread(state: StateUserAlertsModel)     : boolean      { return StateUserAlerts.unreadCount(state) > 0; }
+    @Selector() static hasUnreadList(state: StateUserAlertsModel) : boolean      { return StateUserAlerts.unreadList(state).length > 0; }
 
     @Action(ActionUserAlertsReset)
     reset(context: StateContext<StateUserAlertsModel>)
