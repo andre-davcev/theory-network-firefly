@@ -26,8 +26,8 @@ export class StateNotifications
       private store: Store
     ) {}
 
-    @Selector() static pushNotifications(state: StateNotificationsModel): Array<PushNotification> {return state.notifications;}
-    @Selector() static pushNotification(state: StateNotificationsModel): PushNotification {return state.notification;}
+    @Selector() static pushNotifications(state: StateNotificationsModel) : Array<PushNotification> {return state.notifications;}
+    @Selector() static pushNotification(state: StateNotificationsModel)  : PushNotification {return state.notification;}
 
     @Selector() static hasPushNotifications(state: StateNotificationsModel)  {return state.notifications.length > 0;}
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController, ActionSheetController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
@@ -12,7 +12,6 @@ import { StateMobile } from '@firefly/mobile';
 import { Observable, from } from 'rxjs';
 import { StateUserAlerts, StateUser } from '@firefly/core';
 import { take, switchMap } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component
 ({
@@ -34,10 +33,8 @@ export class PageHome extends BaseComponent
 
     constructor
     (
-        private menu        : MenuController,
-        private actionSheet : ActionSheetController,
-        private store       : Store,
-        private translate   : TranslateService
+        private menu  : MenuController,
+        private store : Store
     )
     {
         super();
@@ -57,45 +54,9 @@ export class PageHome extends BaseComponent
 
     public go(type: Pages.Alert | Pages.Stream): void
     {
-        this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, type))
-    }
+        const child: string = type === Pages.Alert ? `${type}/0` : type;
 
-    deleteConfirm()
-    {
-        /*
-        let confirm = this.alertController.create
-        ({
-            title   : dictionary.deleteConfirmTitle,
-            message : dictionary.deleteConfirmMessage,
-            buttons :
-            [
-                {
-                    text    : dictionary.deleteConfirmDisagree,
-                    handler : () => {}
-                },
-
-                {
-                    text    : dictionary.deleteConfirmAgree,
-                    handler : () =>
-                    {
-                        let
-                        index = this.slides.getActiveIndex();
-
-                        this.alertsObject.delete(index);
-
-                        if (this.slides.isEnd())
-                        {
-                            this.slides.slideTo(index - 1);
-                        }
-
-                        this.slides.update();
-                    }
-                }
-            ]
-        });
-
-        confirm.present();
-*/
+        this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, child));
     }
 
     public menuOpen(): void
