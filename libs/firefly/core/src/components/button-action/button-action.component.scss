@@ -27,10 +27,11 @@
         text-transform: var(--cpt-font-transform);
         letter-spacing: var(--cpt-font-spacing);
 
-        --button-background: var(--cpt-color-background);
-        --button-background-active: var(--cpt-color-background);
-        --button-background-focused: var(--cpt-color-background);
-        --button-background-hover: var(--cpt-color-background);
+        --background: var(--cpt-color-background);
+        --background-activated: var(--cpt-color-background);
+        --background-activated-opacity: var(--cpt-color-background);
+        --background-focused: var(--cpt-color-background);
+        --background-hover: var(--cpt-color-background);
 
         --border-radius: var(--cpt-border-radius);
         --border-width: 0;
