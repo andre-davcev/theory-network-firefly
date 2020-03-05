@@ -8,8 +8,9 @@ export const RoutesPageHome: Routes =
 [
     { path : '', component : PageHome, resolve: { loader: ResolverPageHome },
       children: [
-        { path: '',           redirectTo: Pages.Stream, pathMatch: 'full' },
-        { path: Pages.Stream, loadChildren: '@firefly/page/stream#ModulePageStream' },
-        { path: Pages.Alert,  loadChildren: '@firefly/page/alert#ModulePageAlert' }
+        { path: '', redirectTo: Pages.Stream, pathMatch: 'full' },
+
+        { path: Pages.Stream,                 loadChildren: '@firefly/page/stream#ModulePageStream' },
+        { path: `${Pages.Alert}/:slideIndex`, loadChildren: '@firefly/page/alert#ModulePageAlert' }
     ]}
 ];

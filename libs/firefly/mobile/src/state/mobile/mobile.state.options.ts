@@ -11,17 +11,6 @@ export const StateMobileOptions: StoreOptions<StateMobileModel> =
     {
         loadingElement : undefined,
         menuOpen       : false,
-        pageRoot       : `/${Pages.Home}/${Pages.Stream}`,
-
-        pagesRoot :
-        {
-            [Pages.Home]           : Pages.Stream,
-            [Pages.Subscriptions]  : Pages.Subscriptions,
-            [Pages.Publisher]      : Pages.Publisher,
-            [Pages.AssetsInterests] : Pages.AssetsInterests,
-            [Pages.AssetsEvents]   : Pages.AssetsEvents,
-            [Pages.AssetsIcons]    : Pages.AssetsIcons,
-            [Pages.AssetsImages]   : Pages.AssetsImages
-        }
+        pageRoot       : `/${Pages.Home}/${Pages.Stream}`
     }
 };
