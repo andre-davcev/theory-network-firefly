@@ -5,7 +5,6 @@ admin (store) - install on amy/cathy's phones
 *alerts (list) - add pink dots for unread alerts
 *alerts (list) - keep active slide index on route change
 *alerts (list) - for list view show read/unread
-*alerts (list) - change go button to ios height
 alerts (go) - implement add to calendar workflow
 alerts (go) - implement get directions workflow
 alerts (list) - initial alert errors on click through
@@ -25,7 +24,6 @@ events (list) - empty list show errors with orderBy and sort
 *firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
 *home - fix header disappear when ion-badge shown
 *library (mapbox) - add back tokenized mapbox access token in search service
-*library (button action) - pressed button change to primary/universal styling
 map (component) - limit mapbox search types to [address, poi]
 *streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
