@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { switchMap, filter, map, take } from 'rxjs/operators';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { switchMap, filter, map, take, tap } from 'rxjs/operators';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
@@ -19,24 +19,34 @@ import { BaseComponent } from '@theory/core';
     styleUrls   : ['./alert.page.scss']
 })
 
-export class PageAlert extends BaseComponent
+export class PageAlert extends BaseComponent implements AfterViewInit
 {
-    @Select(StateAlert.formGroup())    form$:      Observable<FormGroup>;
-    @Select(StateUserAlerts.unread)    unread$:    Observable<Array<Alert>>;
-    @Select(StateUserAlerts.found())   found$:     Observable<boolean>;
-    @Select(StateUserAlerts.hasUnread) hasUnread$: Observable<boolean>;
+    @Select(StateAlert.formGroup())     form$:      Observable<FormGroup>;
+    @Select(StateUserAlerts.unreadList) unread$:    Observable<Array<Alert>>;
+    @Select(StateUserAlerts.found())    found$:     Observable<boolean>;
+    @Select(StateUserAlerts.hasUnread)  hasUnread$: Observable<boolean>;
 
-    @ViewChild('sliderRef', { static: true }) protected sliderRef: IonSlides;
+    @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
 
     public segment: string = 'fired';
     public Pages: any = Pages;
     public slideOptions: any = { zoom: false };
 
-    public IconType : any = IconType;
+    public IconType: any = IconType;
+
+    // https://github.com/ionic-team/ionic/issues/20356
+    public didInit: boolean = false;
 
     constructor(private store: Store, private modal: ModalController)
     {
         super();
+    }
+
+    public ngAfterViewInit(): void
+    {
+        // https://github.com/ionic-team/ionic/issues/20356
+        this.didInit = true;
+        this.markRead().subscribe();
     }
 
     public ionViewWillEnter(): void
