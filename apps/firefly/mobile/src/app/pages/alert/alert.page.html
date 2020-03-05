@@ -8,7 +8,7 @@
            (ionSlideDidChange)="slideChanged()"
            [options]="slideOptions">
     <ion-slide #status *ngFor="let alert of unread$ | async">
-        <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (alertDeleteClicked)="alertDelete(alert)" (alertGoClicked)="alertGo()" (alertDetailClicked)="alertDetail(Page.AlertDetail,alert)"></app-slide>
+        <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (alertDeleteClicked)="alertDelete(alert)" (alertGoClicked)="alertGo()" (alertDetailClicked)="navigate(Pages.AlertDetail, alert)"></app-slide>
     </ion-slide>
 </ion-slides>
 <ion-fab vertical="bottom" horizontal="start">
