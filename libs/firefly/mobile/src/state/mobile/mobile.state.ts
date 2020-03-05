@@ -13,7 +13,7 @@ import {
     ActionMobileAuthSelected
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
-import { LoadingController, ToastController, NavController, ActionSheetController, MenuController } from '@ionic/angular';
+import { LoadingController, ToastController, NavController, ActionSheetController } from '@ionic/angular';
 import { switchMap, tap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { LoadingOptions, ToastOptions } from '@ionic/core';
@@ -25,17 +25,16 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class StateMobile
 {
-    @Selector() static isLoading(state: StateMobileModel)         : boolean                { return state.loadingElement != null;}
-    @Selector() static loadingElement(state: StateMobileModel)    : any                    { return state.loadingElement; }
-    @Selector() static menuOpen(state: StateMobileModel)          : boolean                { return state.menuOpen; }
-    @Selector() static menuClosed(state: StateMobileModel)        : boolean                { return !state.menuOpen; }
-    @Selector() static pagesRoot(state: StateMobileModel)         : Record<string, Pages>  { return state.pagesRoot; }
-    @Selector() static pageRoot(state: StateMobileModel)          : string                 { return state.pageRoot; }
-    @Selector() static pageAlerts(state: StateMobileModel)        : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Alert}`; }
-    @Selector() static pageStream(state: StateMobileModel)        : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
-    @Selector() static pageHome(state: StateMobileModel)          : boolean                { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
-    @Selector() static pageSubscriptions(state: StateMobileModel) : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
-    @Selector() static pagePublisher(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Publisher}`; }
+    @Selector() static isLoading(state: StateMobileModel)         : boolean { return state.loadingElement != null;}
+    @Selector() static loadingElement(state: StateMobileModel)    : any     { return state.loadingElement; }
+    @Selector() static menuOpen(state: StateMobileModel)          : boolean { return state.menuOpen; }
+    @Selector() static menuClosed(state: StateMobileModel)        : boolean { return !state.menuOpen; }
+    @Selector() static pageRoot(state: StateMobileModel)          : string  { return state.pageRoot; }
+    @Selector() static pageAlerts(state: StateMobileModel)        : boolean { return StateMobile.pageRoot(state).startsWith(`/${Pages.Home}/${Pages.Alert}`); }
+    @Selector() static pageStream(state: StateMobileModel)        : boolean { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
+    @Selector() static pageHome(state: StateMobileModel)          : boolean { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
+    @Selector() static pageSubscriptions(state: StateMobileModel) : boolean { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
+    @Selector() static pagePublisher(state: StateMobileModel)     : boolean { return StateMobile.pageRoot(state) === `/${Pages.Publisher}`; }
 
     constructor
     (
@@ -107,12 +106,8 @@ export class StateMobile
     }
 
     @Action(ActionMobileNavigateRoot)
-    navigateRoot({ patchState, getState }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
+    navigateRoot({ patchState }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
     {
-        const pagesRoot : Record<string, Pages> = StateMobile.pagesRoot(getState());
-
-        pagesRoot[page] = child = child == null ? pagesRoot[page] : child;
-
         const parts: Array<string> = page === child ?
             [ page ] :
             [
@@ -125,11 +120,7 @@ export class StateMobile
         pipe
         (
             tap(() =>
-                patchState
-                ({
-                    pagesRoot,
-                    pageRoot
-                })
+                patchState({ pageRoot })
             )
         );
     }
