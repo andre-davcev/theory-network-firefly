@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { switchMap, filter, map } from 'rxjs/operators';
+import { switchMap, filter, map, take } from 'rxjs/operators';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
@@ -105,6 +105,7 @@ export class PageAlert extends BaseComponent
                 this.unread$.
                 pipe
                 (
+                    take(1),
                     switchMap((alerts: Array<Alert>) =>
                         from(this.sliderRef.getActiveIndex()).
                         pipe
