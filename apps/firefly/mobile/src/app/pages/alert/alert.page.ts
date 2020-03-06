@@ -7,7 +7,7 @@ import { Observable, from, of } from 'rxjs';
 import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, ActionAlertMarkRead, StateAlert } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
-import { Pages } from '@firefly/mobile';
+import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { PageAlertDetail } from '../alert-detail/alert-detail.page';
 import { FormGroup } from '@angular/forms';
@@ -46,17 +46,26 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     {
         // https://github.com/ionic-team/ionic/issues/20356
         this.didInit = true;
-        this.markRead().subscribe();
     }
 
     public ionViewWillEnter(): void
     {
-        this.markRead().subscribe();
+        this.store.dispatch(new ActionMobileSlideAlertRestore(this.sliderRef));
     }
 
     public slideChanged(): void
     {
-        this.markRead().subscribe();
+        from(this.sliderRef.getActiveIndex()).
+        pipe
+        (
+            filter((index: number) =>
+                index !== this.store.selectSnapshot(StateMobile.indexAlerts)
+            ),
+            switchMap((index: number) =>
+                this.store.dispatch(new ActionMobileSlideAlertIndex(index))
+            )
+        ).
+        subscribe();
     }
 
     public alertDetail(alert: Alert): void
@@ -64,9 +73,6 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         this.store.dispatch(new ActionEventGet(alert.eventId)).
         pipe
         (
-            switchMap(() =>
-                this.markRead(alert)
-            ),
             switchMap(() =>
                 from(this.modal.create({
                     component: PageAlertDetail
@@ -104,47 +110,5 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         (
           switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
         ).subscribe();
-    }
-
-    private markRead(alert?: Alert): Observable<any>
-    {
-        const alert$: Observable<Alert> = alert != null ?
-            of(alert) :
-            this.sliderRef == null ?
-                of(null) :
-                this.unread$.
-                pipe
-                (
-                    take(1),
-                    switchMap((alerts: Array<Alert>) =>
-                        from(this.sliderRef.getActiveIndex()).
-                        pipe
-                        (
-                            map((index: number) =>
-                                alerts[index]
-                            )
-                        )
-                    )
-                );
-
-        return alert$.
-        pipe
-        (
-            filter((a: Alert) =>
-                a != null
-            ),
-            switchMap((a: Alert) =>
-                this.store.dispatch(new ActionAlertSetId(a.id)).
-                pipe
-                (
-                    filter((a: Alert) =>
-                        !a.read
-                    ),
-                    switchMap(() =>
-                        this.store.dispatch(new ActionAlertMarkRead())
-                    )
-                )
-            )
-        );
     }
 }

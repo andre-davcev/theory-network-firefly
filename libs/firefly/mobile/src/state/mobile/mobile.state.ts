@@ -1,5 +1,5 @@
 
-import { Action, StateContext, State, Selector } from '@ngxs/store';
+import { Action, StateContext, State, Selector, Store } from '@ngxs/store';
 
 import { StateMobileModel } from './mobile.state.model';
 import {
@@ -10,16 +10,20 @@ import {
     ActionMobileMenuClosed,
     ActionMobileNavigateRoot,
     ActionMobileAuthSelect,
-    ActionMobileAuthSelected
+    ActionMobileAuthSelected,
+    ActionMobileSlideAlertIndex,
+    ActionMobileSlideAlertRestore
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
 import { LoadingController, ToastController, NavController, ActionSheetController } from '@ionic/angular';
-import { switchMap, tap } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { switchMap, tap, map, filter } from 'rxjs/operators';
+import { from, of } from 'rxjs';
 import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
 import { NgZone, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Alert } from '@firefly/cloud';
+import { StateUserAlerts, ActionAlertSetId, ActionAlertMarkRead, StateAlert } from '@firefly/core';
 
 @State<StateMobileModel>(StateMobileOptions)
 @Injectable()
@@ -35,6 +39,7 @@ export class StateMobile
     @Selector() static pageHome(state: StateMobileModel)          : boolean { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
     @Selector() static pageSubscriptions(state: StateMobileModel) : boolean { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
     @Selector() static pagePublisher(state: StateMobileModel)     : boolean { return StateMobile.pageRoot(state) === `/${Pages.Publisher}`; }
+    @Selector() static indexAlerts(state: StateMobileModel)       : number  { return state.indexAlerts; }
 
     constructor
     (
@@ -43,7 +48,8 @@ export class StateMobile
         private nav         : NavController,
         private actionSheet : ActionSheetController,
         private translate   : TranslateService,
-        private ngZone      : NgZone
+        private ngZone      : NgZone,
+        private store       : Store
     ) { }
 
     @Action(ActionMobileLoadingShow)
@@ -165,5 +171,53 @@ export class StateMobile
     authSelected(context: StateContext<StateMobileModel>, { page }: ActionMobileAuthSelected)
     {
 
+    }
+
+    @Action(ActionMobileSlideAlertRestore)
+    slideAlertRestore({ dispatch }: StateContext<StateMobileModel>, { slides }: ActionMobileSlideAlertRestore)
+    {
+        return slides == null ?
+            of(null) :
+            this.store.selectOnce(StateMobile.indexAlerts).
+            pipe
+            (
+                switchMap((index: number) =>
+                    from(slides.slideTo(index, 0)).
+                    pipe
+                    (
+                        switchMap(() =>
+                            dispatch(new ActionMobileSlideAlertIndex(index))
+                        )
+                    )
+                )
+            );
+    }
+
+    @Action(ActionMobileSlideAlertIndex)
+    slideAlertIndex({ patchState, dispatch }: StateContext<StateMobileModel>, { index }: ActionMobileSlideAlertIndex)
+    {
+        patchState({ indexAlerts: index });
+
+        return this.store.selectOnce(StateUserAlerts.unreadList).
+        pipe
+        (
+            map((unread: Array<Alert>) =>
+                unread[index]
+            ),
+            filter((alert: Alert) =>
+                alert != null
+            ),
+            switchMap((alert: Alert) =>
+                dispatch(new ActionAlertSetId(alert.id)).
+                pipe
+                (
+                    switchMap(() =>
+                        alert.read ?
+                            of(null) :
+                            dispatch(new ActionAlertMarkRead())
+                    )
+                )
+            )
+        );
     }
 }

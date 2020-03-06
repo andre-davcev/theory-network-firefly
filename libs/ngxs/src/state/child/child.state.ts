@@ -127,8 +127,10 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                     const object: T =
                     {
                         ...childLookup[id],
-                        ...(document.data() as T)
+                        ...(document.data() as T),
                     };
+
+                    object.metadata = object.metadata == null ? {} : object.metadata;
 
                     snapshotLookup[document.id] = document;
                     dataLookup[document.id]     = object;

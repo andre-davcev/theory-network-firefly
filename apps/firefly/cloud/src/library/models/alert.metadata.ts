@@ -7,4 +7,5 @@ export interface MetadataAlert extends MetadataUrl
     timeStartFormattedShort? : string
     timeStartDate?           : Date;
     sessionRead?             : boolean;
+    index?                   : number;
 }

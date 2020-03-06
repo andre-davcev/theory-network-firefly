@@ -94,6 +94,8 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
                         snapshots.push(document);
                         snapshotLookup[document.id] = document;
 
+                        object.metadata = object.metadata == null ? {} : object.metadata;
+
                         data.push(object);
                         dataLookup[document.id] = object;
                     })
