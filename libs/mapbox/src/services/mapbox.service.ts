@@ -3,6 +3,8 @@ import { MapboxEndpoint } from '../enums';
 import { Observable } from 'rxjs';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { ParamsForwardGeocode } from '../api';
+import { EnvironmentMapbox } from '../interfaces';
+import { MapboxEnvironment } from '@firefly/core/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceMapbox
@@ -12,7 +14,7 @@ export class ServiceMapbox
     constructor
     (
         private http: HttpClient,
-        // @Inject('MapboxEnvironment') private environment: EnvironmentMapbox
+        @Inject(MapboxEnvironment) private environment: EnvironmentMapbox
     ) { }
 
     /**
@@ -28,8 +30,7 @@ export class ServiceMapbox
 
         const url: string = `${this.api}/${endpoint}/${searchText}.json`;
 
-        // const params: HttpParams = new HttpParams().set('access_token', this.environment.accessToken);
-        let params: HttpParams = new HttpParams().set('access_token', 'pk.eyJ1IjoidGhlb3J5bmV0d29yayIsImEiOiJjamdwem04eGwwMXVsMnZwaGR2YzZxdGxvIn0.1mwIacOT0bTANo6lueSQmg');
+        let params: HttpParams = new HttpParams().set('access_token', this.environment.accessToken);
 
         Object.keys(options).forEach((param: string) =>
             params = params.set(param, Array.isArray(options[param]) ? options[param].join(',') : `${options[param]}`)
