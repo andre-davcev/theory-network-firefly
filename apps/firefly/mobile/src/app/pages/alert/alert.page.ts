@@ -89,16 +89,16 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         this.store.dispatch(new ActionUserAlertsGo());
     }
 
-    public alertDelete(alert:Alert): void
+    public alertDelete(alert: Alert): void
     {
-      const id: string = alert.id;
-
-      this.store.dispatch(new ActionAlertSetId(id)).pipe
-      (
-        switchMap(() =>
-          this.store.dispatch(new ActionAlertDelete())
-        )
-      ).subscribe();
+        this.store.dispatch(new ActionAlertSetId(alert.id)).
+        pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new ActionAlertDelete())
+            )
+        ).
+        subscribe();
     }
 
     public navigate(page: Pages.AlertsList | Pages.AlertDetail, object: Alert): void
