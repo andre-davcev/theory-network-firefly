@@ -54,9 +54,7 @@ export class PageHome extends BaseComponent
 
     public go(type: Pages.Alert | Pages.Stream): void
     {
-        const child: string = type === Pages.Alert ? `${type}/0` : type;
-
-        this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, child));
+        this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, type));
     }
 
     public menuOpen(): void

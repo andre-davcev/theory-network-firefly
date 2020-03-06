@@ -52,9 +52,21 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
         );
     }
 
-    @Selector() static read(state: StateUserAlertsModel)          : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => alert.read); }
-    @Selector() static unread(state: StateUserAlertsModel)        : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read); }
-    @Selector() static unreadList(state: StateUserAlertsModel)    : Array<Alert> { return StateUserAlerts.dataState(state).filter((alert: Alert) => !alert.read || alert.metadata?.sessionRead); }
+    @Selector() static alerts(state: StateUserAlertsModel) : Array<Alert>
+    {
+        return StateUserAlerts.
+            dataState(state).
+            map((alert: Alert, index: number) =>
+            {
+                alert.metadata.index = index;
+
+                return alert;
+            });
+    }
+
+    @Selector() static read(state: StateUserAlertsModel)          : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => alert.read); }
+    @Selector() static unread(state: StateUserAlertsModel)        : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read); }
+    @Selector() static unreadList(state: StateUserAlertsModel)    : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read || alert.metadata?.sessionRead); }
     @Selector() static readCount(state: StateUserAlertsModel)     : number       { return StateUserAlerts.read(state).length; }
     @Selector() static unreadCount(state: StateUserAlertsModel)   : number       { return StateUserAlerts.unread(state).length; }
     @Selector() static hasRead(state: StateUserAlertsModel)       : boolean      { return StateUserAlerts.readCount(state) > 0; }
