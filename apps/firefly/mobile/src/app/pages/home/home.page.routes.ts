@@ -10,7 +10,7 @@ export const RoutesPageHome: Routes =
       children: [
         { path: '', redirectTo: Pages.Stream, pathMatch: 'full' },
 
-        { path: Pages.Stream,                 loadChildren: '@firefly/page/stream#ModulePageStream' },
-        { path: `${Pages.Alert}/:slideIndex`, loadChildren: '@firefly/page/alert#ModulePageAlert' }
+        { path: Pages.Stream, loadChildren: '@firefly/page/stream#ModulePageStream' },
+        { path: Pages.Alert,  loadChildren: '@firefly/page/alert#ModulePageAlert' }
     ]}
 ];
