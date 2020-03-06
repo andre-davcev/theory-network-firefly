@@ -114,7 +114,7 @@ export class StateMobile
     @Action(ActionMobileNavigateRoot)
     navigateRoot({ patchState }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
     {
-        const parts: Array<string> = page === child ?
+        const parts: Array<string> = page === child || child == null ?
             [ page ] :
             [
                 ...page.split('/'),

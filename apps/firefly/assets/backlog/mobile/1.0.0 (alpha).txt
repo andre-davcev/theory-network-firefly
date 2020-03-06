@@ -20,7 +20,6 @@ events (detail) - add edit functionality
 events (detail) - reverse geocode
 events (list) - empty list show errors with orderBy and sort
 firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
-library (mapbox) - add back tokenized mapbox access token in search service
 map (component) - limit mapbox search types to [address, poi]
 streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
