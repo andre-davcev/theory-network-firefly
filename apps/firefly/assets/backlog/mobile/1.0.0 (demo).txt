@@ -1,7 +1,9 @@
 app (splash) - android splash screen
 app (all) - bug searching
 auth - switch user data cleanup and screen testing
+auth - reduce unauthenticated user initial render time
 alerts (detail) - fix background transition
+demo - create app demo steps/script
 *interests (list) - empty list shows storage errors
 interests (detail) - add ability to add/remove events via query state
 events (detail) - fix publish workflow
