@@ -1,0 +1,14 @@
+app (splash) - android splash screen
+app (all) - bug searching
+auth - switch user data cleanup and screen testing
+alerts (detail) - fix background transition
+*interests (list) - empty list shows storage errors
+interests (detail) - add ability to add/remove events via query state
+events (detail) - fix publish workflow
+events (detail) - move select cluster to select icon
+events (detail) - add edit functionality
+events (detail) - reverse geocode
+*events (list) - empty list show errors with orderBy and sort
+streams (list) - add heart subscribe animation
++streams (list) - fix subscriptions add/remove from streams/manage subscriptions
+subscriptions (list) - bug when no subscriptions found
