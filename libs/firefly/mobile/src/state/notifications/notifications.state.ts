@@ -52,7 +52,7 @@ export class StateNotifications
                 ])
             ),
             switchMap(([token, tokens]) =>
-                tokens && tokens.includes[token] ?
+                tokens && tokens.includes(token) ?
                     of(null) :
                     dispatch(new ActionUserAddToken(token))
             )
