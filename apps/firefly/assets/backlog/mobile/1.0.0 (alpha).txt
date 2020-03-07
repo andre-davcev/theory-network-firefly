@@ -3,6 +3,7 @@ alerts (functions) - on interest subscribe wait 1 min, check if still subscribed
 alerts (list) - add pink dots for unread alerts
 alerts (go) - implement add to calendar workflow
 alerts (go) - implement get directions workflow
+alerts (notification) - on notification click nav to alert detail
 auth - add login up validation and error messages
 auth - on unauthenticated login save city so you can grab city stream
 auth - on sign up, send initial notification 30 seconds later
