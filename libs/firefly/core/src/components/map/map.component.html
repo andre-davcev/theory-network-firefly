@@ -28,6 +28,7 @@
                  [proximity]="locationLiteral$ | async"
                  [bbox]="bbox"
                  [zoom]="zoom"
+                 [types]="types.join(',')"
                  [minLength]="minLength"
                  (clear)="eventClear($event)"
                  (loading)="eventLoading($event)"

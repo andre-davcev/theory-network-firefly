@@ -33,6 +33,7 @@ export class PageEventLocation extends BaseComponent implements OnInit
     public placeTypes: Array<MapboxPlaceType> =
     [
         MapboxPlaceType.PointOfInterest,
+        MapboxPlaceType.PointOfInterestLandmark,
         MapboxPlaceType.Address
     ];
 
