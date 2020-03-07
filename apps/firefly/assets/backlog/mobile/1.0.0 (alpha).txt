@@ -20,11 +20,10 @@ events (detail) - add edit functionality
 events (detail) - reverse geocode
 *events (list) - empty list show errors with orderBy and sort
 firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
-*map (component) - limit mapbox search types to [address, poi]
 streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner
-*subscriptions (list) - bug when no subscriptions found
+subscriptions (list) - bug when no subscriptions found
 subscriptions (list) - on quick toggles/updates stack updates and put spinner
 
 *andre

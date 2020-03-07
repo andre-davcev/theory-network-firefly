@@ -1,7 +1,7 @@
 PODS:
-  - Capacitor (1.5.0):
-    - CapacitorCordova (= 1.5.0)
-  - CapacitorCordova (1.5.0)
+  - Capacitor (1.5.1):
+    - CapacitorCordova (= 1.5.1)
+  - CapacitorCordova (1.5.1)
   - CapacitorFcm (1.0.0):
     - Capacitor
     - Firebase
@@ -123,8 +123,8 @@ EXTERNAL SOURCES:
     :path: "../../../../../node_modules/capacitor-fcm"
 
 SPEC CHECKSUMS:
-  Capacitor: 667658ab58e5a2e8465238eef7c6c5df46738688
-  CapacitorCordova: 5b03f0b903bf066a8f3187e848252227190b681a
+  Capacitor: 373adb05f4591a70c22adfe979b5a443ac1e9b0a
+  CapacitorCordova: 169792fba40cc325d70b3cbca49d0563acdf5924
   CapacitorFcm: 724469021af66f26eaec85bd4ad035214d45f804
   Firebase: 2672e5636b42f977177716317e68346ae5e9de25
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
