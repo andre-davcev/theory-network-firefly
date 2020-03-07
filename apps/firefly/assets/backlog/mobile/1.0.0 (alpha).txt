@@ -1,29 +1,15 @@
 admin (store) - install on amy/cathy's phones
-app (splash) - android splash screen
 alerts (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
-*alerts (notifications) - setup ios push notifications
 alerts (list) - add pink dots for unread alerts
 alerts (go) - implement add to calendar workflow
 alerts (go) - implement get directions workflow
-*alerts (list) - initial alert errors on click through
 auth - add login up validation and error messages
-auth - switch user data cleanup and screen testing
 auth - on unauthenticated login save city so you can grab city stream
 auth - on sign up, send initial notification 30 seconds later
 sign-up (auth) - error handling
-*interests (list) - empty list shows storage errors
 interests (detail) - add interest-events query state
-interests (detail) - add ability to add/remove events via query state
-events (detail) - fix publish workflow
-events (detail) - move select cluster to select icon
-events (detail) - add edit functionality
-events (detail) - reverse geocode
-*events (list) - empty list show errors with orderBy and sort
 firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
-streams (list) - add heart subscribe animation
-+streams (list) - fix subscriptions add/remove from streams/manage subscriptions
 streams (list) - on quick toggles/updates stack updates and put spinner
-subscriptions (list) - bug when no subscriptions found
 subscriptions (list) - on quick toggles/updates stack updates and put spinner
 
 *andre
