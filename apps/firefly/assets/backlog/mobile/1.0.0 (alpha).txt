@@ -6,6 +6,7 @@ alerts (go) - implement get directions workflow
 auth - add login up validation and error messages
 auth - on unauthenticated login save city so you can grab city stream
 auth - on sign up, send initial notification 30 seconds later
+security - fix database read rules for anonymous login
 sign-up (auth) - error handling
 interests (detail) - add interest-events query state
 firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
