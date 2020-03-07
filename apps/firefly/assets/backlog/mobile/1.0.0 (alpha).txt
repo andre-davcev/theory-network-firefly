@@ -12,6 +12,7 @@ sign-up (auth) - error handling
 interests (detail) - add interest-events query state
 firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
 streams (list) - on quick toggles/updates stack updates and put spinner
+subscriptions (list) - implement slide to delete
 subscriptions (list) - on quick toggles/updates stack updates and put spinner
 
 *andre
