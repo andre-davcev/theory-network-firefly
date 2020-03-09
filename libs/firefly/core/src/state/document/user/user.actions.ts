@@ -25,4 +25,4 @@ export class ActionUserLoginEmail         { static readonly type = ActionsUser.L
 export class ActionUserLogout             { static readonly type = ActionsUser.Logout;             constructor() { } }
 
 export class ActionUserWatchSubscriptionsStatus { static readonly type = ActionsUser.WatchSubscriptionsStatus; constructor() { } }
-export class ActionUserSubscriptionToggle       { static readonly type = ActionsUser.SubscriptionToggle;       constructor(public id: string, public filter: boolean = true) { } }
+export class ActionUserSubscriptionToggle       { static readonly type = ActionsUser.SubscriptionToggle;       constructor(public id: string, public filter: boolean = true, public deleteSubscription: boolean = false) { } }

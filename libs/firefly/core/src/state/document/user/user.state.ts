@@ -41,8 +41,8 @@ import { ActionUserInterestsReset } from '../../query/user-interests/user-intere
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
-import { ActionUserStreamSetData, ActionUserStreamSync } from '../../child/user-stream/user-stream.actions';
-import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsSync, ActionUserSubscriptionsAdd } from '../../child/user-subscriptions/user-subscriptions.actions';
+import { ActionUserStreamSetData, ActionUserStreamSync, ActionUserStreamRemove } from '../../child/user-stream/user-stream.actions';
+import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsSync, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { GeolocationPosition } from '@capacitor/core';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
 import { LocationCity } from '@firefly/core/interfaces';
@@ -475,7 +475,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserSubscriptionToggle)
-    subscriptionToggle({ dispatch, getState, patchState }: StateContext<StateUserModel>, { id, filter }: ActionUserSubscriptionToggle)
+    subscriptionToggle({ dispatch, getState, patchState }: StateContext<StateUserModel>, { id, filter, deleteSubscription }: ActionUserSubscriptionToggle)
     {
         const state               : StateUserModel                      = getState();
         const subscriptionsStatus : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
@@ -508,6 +508,22 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         if (streamInterest != null)
         {
             streamInterest.on = subscriptionsStatus[id].on;
+        }
+
+        if(subscriptionsStatus[id] && !subscriptionsStatus[id].on && deleteSubscription)
+        {
+          delete subscriptionsStatus[id];
+
+          return dispatch
+          ([
+              new ActionUserPatch({ subscriptionsStatus }, true)
+          ]).
+          pipe
+          (
+            switchMap(() =>
+              dispatch(new ActionUserSubscriptionsRemove(streamInterest.id))
+            )
+          )
         }
 
         return dispatch
