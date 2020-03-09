@@ -52,7 +52,7 @@ export class PageStream extends BaseComponent implements OnInit
             take(1),
             switchMap((authenticated: boolean) =>
                 authenticated ?
-                    this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, false)) :
+                    this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, false, true)) :
                     this.store.dispatch(new ActionMobileAuthSelect())
             )
         ).
