@@ -9,6 +9,5 @@ events (detail) - fix publish workflow
 events (detail) - move select cluster to select icon
 events (detail) - add edit functionality
 events (detail) - reverse geocode
-streams (list) - on unsubscribe delete subscription
 streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
