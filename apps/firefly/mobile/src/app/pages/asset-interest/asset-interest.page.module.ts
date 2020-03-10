@@ -10,6 +10,7 @@ import { RoutesPageAssetInterest } from './asset-interest.page.routes';
 import { ModulePageIconSelector } from '../icon-selector';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { ModuleComponentButtonAdd } from '@firefly/core';
+import { ModulePageEventSelector } from '../event-selector';
 @NgModule
 ({
     imports :
@@ -23,6 +24,7 @@ import { ModuleComponentButtonAdd } from '@firefly/core';
         ModuleComponentButtonAdd,
         RouterModule.forChild(RoutesPageAssetInterest),
         ModulePageIconSelector,
+        ModulePageEventSelector,
         NgxsFormPluginModule
     ],
 

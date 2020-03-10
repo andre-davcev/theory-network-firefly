@@ -22,6 +22,7 @@ export const routes: Routes =
     { path: Pages.AssetsPlaces,   loadChildren: '@firefly/page/assets-places#ModulePageAssetsPlaces' },
 
     { path: Pages.IconSelector,   loadChildren: '@firefly/page/icon-selector#ModulePageIconSelector' },
+    { path: Pages.EventSelector,  loadChildren: '@firefly/page/event-selector#ModulePageEventSelector' },
     //{ path: Pages.ImageSelector,   loadChildren: '@firefly/page/image-selector#ModulePageImageSelector' },
 
     { path: Pages.AlertsList,    loadChildren: '@firefly/page/alerts-list#ModulePageAlertsList' },

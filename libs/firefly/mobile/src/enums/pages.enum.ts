@@ -42,6 +42,10 @@ export enum Pages
     IconAssets   = 'icon-assets',
     IconLibrary  = 'icon-library',
 
+    EventSelector = 'event-selector',
+    EventLibrary  = 'event-library',
+    EventAssets   = 'event-assets',
+
     ImageSelector = 'image-selector',
     ImageCatalog  = 'image-catalog',
     ImageAssets   = 'image-assets',
