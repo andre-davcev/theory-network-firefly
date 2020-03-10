@@ -36,9 +36,12 @@
 
     <section class="cpt-buttons"
              fxLayout="column">
-        <ion-button [disabled]="form.invalid || authenticating"
+        <ion-button mode="ios"
+                    [disabled]="form.invalid || authenticating"
                     (click)="clicked()">
-            <span>{{ (login ? 'general.login' : 'general.signup') | translate}}</span>
+            <span class="cpt-button-text">
+                {{ (login ? 'general.login' : 'general.signup') | translate}}
+            </span>
         </ion-button>
     </section>
 </form>
