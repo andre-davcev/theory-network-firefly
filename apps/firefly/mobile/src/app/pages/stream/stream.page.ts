@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUserStream, StateUser, ActionUserSubscriptionToggle, ActionInterestSetId, ActionInterestEventsGet, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType } from '@firefly/core';
 import { StreamInterest, Interest, Event } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
@@ -52,7 +52,7 @@ export class PageStream extends BaseComponent implements OnInit
             take(1),
             switchMap((authenticated: boolean) =>
                 authenticated ?
-                    this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, false, true)) :
+                    this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, true)) :
                     this.store.dispatch(new ActionMobileAuthSelect())
             )
         ).
