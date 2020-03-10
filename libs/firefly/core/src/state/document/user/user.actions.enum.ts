@@ -22,5 +22,8 @@ export enum ActionsUser
     Logout            = '[User] Logout',
 
     WatchSubscriptionsStatus = '[User] Watch SubscriptionsStatus',
-    SubscriptionToggle       = '[User] Subscription Toggle'
+    SubscriptionToggle       = '[User] Subscription Toggle',
+    SubscriptionAdd          = '[User] Subscription Add',
+    SubscriptionRemove       = '[User] Subscription Remove',
+    SubscriptionOnOff        = '[User] Subscription On/Off'
 }
