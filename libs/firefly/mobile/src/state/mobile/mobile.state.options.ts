@@ -12,6 +12,11 @@ export const StateMobileOptions: StoreOptions<StateMobileModel> =
         loadingElement : undefined,
         menuOpen       : false,
         pageRoot       : `/${Pages.Home}/${Pages.Stream}`,
-        indexAlerts    : 0
+        indexAlerts    : 0,
+
+        pageChild :
+        {
+            [Pages.Home]: Pages.Stream
+        }
     }
 };

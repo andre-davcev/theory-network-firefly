@@ -141,7 +141,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
 
         return stream.
             filter((interest: StreamInterest) =>
-                (subscriptions[interest.id] == null || interest.on != null) //&& interest.userId !== StateUser.idState(state)
+                (subscriptions[interest.id] == null || interest.on != null) && interest.userId !== StateUser.idState(state)
             );
     }
 
