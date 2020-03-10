@@ -9,10 +9,10 @@ import {
     ActionMobileMenuOpened,
     ActionMobileMenuClosed,
     ActionMobileNavigateRoot,
-    ActionMobileAuthSelect,
     ActionMobileAuthSelected,
     ActionMobileSlideAlertIndex,
-    ActionMobileSlideAlertRestore
+    ActionMobileSlideAlertRestore,
+    ActionMobileAuthSelect
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
 import { LoadingController, ToastController, NavController, ActionSheetController } from '@ionic/angular';
@@ -22,24 +22,25 @@ import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
 import { NgZone, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { StateUserAlerts, ActionAlertSetId, ActionAlertMarkRead } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
-import { StateUserAlerts, ActionAlertSetId, ActionAlertMarkRead, StateAlert } from '@firefly/core';
 
 @State<StateMobileModel>(StateMobileOptions)
 @Injectable()
 export class StateMobile
 {
-    @Selector() static isLoading(state: StateMobileModel)         : boolean { return state.loadingElement != null;}
-    @Selector() static loadingElement(state: StateMobileModel)    : any     { return state.loadingElement; }
-    @Selector() static menuOpen(state: StateMobileModel)          : boolean { return state.menuOpen; }
-    @Selector() static menuClosed(state: StateMobileModel)        : boolean { return !state.menuOpen; }
-    @Selector() static pageRoot(state: StateMobileModel)          : string  { return state.pageRoot; }
-    @Selector() static pageAlerts(state: StateMobileModel)        : boolean { return StateMobile.pageRoot(state).startsWith(`/${Pages.Home}/${Pages.Alert}`); }
-    @Selector() static pageStream(state: StateMobileModel)        : boolean { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
-    @Selector() static pageHome(state: StateMobileModel)          : boolean { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
-    @Selector() static pageSubscriptions(state: StateMobileModel) : boolean { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
-    @Selector() static pagePublisher(state: StateMobileModel)     : boolean { return StateMobile.pageRoot(state) === `/${Pages.Publisher}`; }
-    @Selector() static indexAlerts(state: StateMobileModel)       : number  { return state.indexAlerts; }
+    @Selector() static isLoading(state: StateMobileModel)         : boolean                { return state.loadingElement != null;}
+    @Selector() static loadingElement(state: StateMobileModel)    : any                    { return state.loadingElement; }
+    @Selector() static menuOpen(state: StateMobileModel)          : boolean                { return state.menuOpen; }
+    @Selector() static menuClosed(state: StateMobileModel)        : boolean                { return !state.menuOpen; }
+    @Selector() static pageRoot(state: StateMobileModel)          : string                 { return state.pageRoot; }
+    @Selector() static pageChild(state: StateMobileModel)         : Record<string, string> { return state.pageChild; }
+    @Selector() static pageAlerts(state: StateMobileModel)        : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Alert}`; }
+    @Selector() static pageStream(state: StateMobileModel)        : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
+    @Selector() static pageHome(state: StateMobileModel)          : boolean                { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
+    @Selector() static pageSubscriptions(state: StateMobileModel) : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
+    @Selector() static pagePublisher(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Publisher}`; }
+    @Selector() static indexAlerts(state: StateMobileModel)       : number                 { return state.indexAlerts; }
 
     constructor
     (
@@ -112,21 +113,27 @@ export class StateMobile
     }
 
     @Action(ActionMobileNavigateRoot)
-    navigateRoot({ patchState }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
+    navigateRoot({ patchState, getState }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
     {
-        const parts: Array<string> = page === child || child == null ?
-            [ page ] :
-            [
-                ...page.split('/'),
-                ...child.split('/')
-            ];
+        const pageChild: Record<string, string> = StateMobile.pageChild(getState());
+        const parts: Array<string> = [ ...page.split('/') ];
+
+        child = child == null ? pageChild[page] : child;
+
+        if (child != null)
+        {
+            parts.push(...child.split('/'));
+
+            pageChild[page] = child;
+        }
+
         const pageRoot: string = `/${parts.join('/')}`;
 
         return from(this.ngZone.run(() => this.nav.navigateRoot(pageRoot))).
         pipe
         (
             tap(() =>
-                patchState({ pageRoot })
+                patchState({ pageRoot, pageChild })
             )
         );
     }
