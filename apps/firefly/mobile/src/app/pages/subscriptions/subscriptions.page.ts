@@ -6,7 +6,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { StateMobile, Pages, ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 import { MenuController } from '@ionic/angular';
-import { StateUserSubscriptions, ActionUserSubscriptionToggle, ActionUserSubscriptionsReset, ActionUserWatchSubscriptionsStatus, ActionInterestSetId, StateUserInterests, ActionUserInterestsGetData, IconType } from '@firefly/core';
+import { StateUserSubscriptions, ActionUserSubscriptionToggle, StateUserInterests, ActionUserInterestsGetData, IconType } from '@firefly/core';
 import { Subscription } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage } from '@theory/firebase';
@@ -63,7 +63,7 @@ export class PageSubscriptions extends BaseComponent implements OnInit
 
     public toggle(event, subscription: Subscription)
     {
-      this.store.dispatch(new ActionUserSubscriptionToggle(subscription.id));
+      this.store.dispatch(new ActionUserSubscriptionToggle(subscription.id, false));
     }
 
     public select(subscription: Subscription): void

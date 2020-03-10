@@ -7,6 +7,9 @@ alerts (notification) - on notification click nav to alert detail
 auth - add login up validation and error messages
 auth - on unauthenticated login save city so you can grab city stream
 auth - on sign up, send initial notification 30 seconds later
+events (detail) - move select cluster to select icon
+events (detail) - add edit functionality
+events (detail) - reverse geocode
 security - fix database read rules for anonymous login
 sign-up (auth) - error handling
 interests (detail) - add interest-events query state
