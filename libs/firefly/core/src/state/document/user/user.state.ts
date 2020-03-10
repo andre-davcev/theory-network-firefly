@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
-import { User, Location, StreamInterest, Subscription, SubscriptionPartial } from '@firefly/cloud';
+import { User, Location, StreamInterest, SubscriptionPartial, Subscription } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -30,7 +30,10 @@ import {
     ActionUserWatchCity,
     ActionUserWatchSubscriptionsStatus,
     ActionUserSubscriptionToggle,
-    ActionUserNotLoggedIn
+    ActionUserNotLoggedIn,
+    ActionUserSubscriptionAdd,
+    ActionUserSubscriptionRemove,
+    ActionUserSubscriptionOnOff
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -42,18 +45,17 @@ import { ActionUserEventsReset } from '../../query/user-events/user-events.actio
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
 import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
 import { ActionUserStreamSetData, ActionUserStreamSync } from '../../child/user-stream/user-stream.actions';
-import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsSync, ActionUserSubscriptionsAdd } from '../../child/user-subscriptions/user-subscriptions.actions';
+import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { GeolocationPosition } from '@capacitor/core';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
 import { LocationCity } from '@firefly/core/interfaces';
 import { StateUserStreamOptions } from '../../child/user-stream/user-stream.state.options';
 import { StateUserStream } from '../../child/user-stream/user-stream.state';
 import { DocumentSnapshot } from '@angular/fire/firestore';
-import { StateUserSubscriptions } from '../../child/user-subscriptions';
-import { StateInterestOptions } from '../interest/interest.state.options';
-import { ActionStorageUrlGet } from '@theory/firebase';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
 import { Injectable } from '@angular/core';
+import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
+import { ActionStorageUrlGet } from '@theory/firebase';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()
@@ -130,20 +132,16 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static error(state: StateUserModel)                  : Error        { return state.error; }
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : !user.subscriptionsStatus ? {} : user.subscriptionsStatus; }
-    @Selector() static subscriptionsUnfiltered(state: StateUserModel) : Record<string, string> { return state.subscriptionsUnfiltered; }
     @Selector() static tokens(state:StateUserModel)                  : Array<string>{ const user: User = StateUser.dataState(state); return user == null ? null : user.tokens; }
 
     @Selector([StateUserStream.data()])
     public static stream(state: StateUserModel, stream: Array<StreamInterest>): Array<StreamInterest>
     {
-        const unfiltered    : Record<string, string>              = StateUser.subscriptionsUnfiltered(state);
         const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
 
-        return !subscriptions ?
-            stream :
-            stream.
+        return stream.
             filter((interest: StreamInterest) =>
-                (subscriptions[interest.id] == null || unfiltered[interest.id] != null) && interest.userId !== StateUser.idState(state)
+                (subscriptions[interest.id] == null || interest.on != null) //&& interest.userId !== StateUser.idState(state)
             );
     }
 
@@ -475,65 +473,79 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserSubscriptionToggle)
-    subscriptionToggle({ dispatch, getState, patchState }: StateContext<StateUserModel>, { id, filter }: ActionUserSubscriptionToggle)
+    subscriptionToggle({ dispatch, getState }: StateContext<StateUserModel>, { id, permanent }: ActionUserSubscriptionToggle)
     {
-        const state               : StateUserModel                      = getState();
+        const subscription : SubscriptionPartial = StateUser.subscriptionsStatus(getState())[id];
+
+        return !permanent ?
+                  dispatch(new ActionUserSubscriptionOnOff(id, !subscription.on)) :
+                  (subscription == null ?
+                      dispatch(new ActionUserSubscriptionAdd(id)) :
+                      dispatch(new ActionUserSubscriptionRemove(id))
+                  );
+    }
+
+    @Action(ActionUserSubscriptionAdd)
+    subscriptionAdd({ dispatch, getState }: StateContext<StateUserModel>, { id }: ActionUserSubscriptionAdd)
+    {
+        const state: StateUserModel = getState();
+
+        const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
+        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
+        const streamInterestSnapshot : firestore.DocumentSnapshot          = this.store.selectSnapshot(StateUserStream.snapshotLookup())[id];
+
+        subscriptionsStatus[id] = { on : true };
+        streamInterest.on       = true;
+
+        return dispatch
+        ([
+            new ActionUserPatch({ subscriptionsStatus }, true),
+            new ActionUserStreamSync(streamInterest),
+            new ActionUserSubscriptionsAdd(streamInterestSnapshot, streamInterest),
+            new ActionStorageUrlGet(streamInterest.bucketPath)
+        ]);
+    }
+
+    @Action(ActionUserSubscriptionRemove)
+    subscriptionRemove({ dispatch, getState }: StateContext<StateUserModel>, { id }: ActionUserSubscriptionRemove)
+    {
+        const state: StateUserModel = getState();
+
         const subscriptionsStatus : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
+        const streamInterest      : StreamInterest                      = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
 
-        if (!filter)
+        delete subscriptionsStatus[id];
+        delete streamInterest.on;
+
+        return dispatch
+        ([
+            new ActionUserPatch({ subscriptionsStatus }, true),
+            new ActionUserStreamSync(streamInterest),
+            new ActionUserSubscriptionsRemove(id)
+        ]);
+    }
+
+    @Action(ActionUserSubscriptionOnOff)
+    subscriptionOnOff({ dispatch, getState }: StateContext<StateUserModel>, { id, on }: ActionUserSubscriptionOnOff)
+    {
+        const state: StateUserModel = getState();
+
+        const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
+        const subscription           : Subscription                        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
+        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
+
+        subscription.on = subscriptionsStatus[id].on = on;
+
+        if (streamInterest != null && streamInterest.on != null)
         {
-            const subscriptionsUnfiltered: Record<string, string> = StateUser.subscriptionsUnfiltered(getState());
-
-            subscriptionsUnfiltered[id] = id;
-
-            patchState({ subscriptionsUnfiltered });
-        }
-
-        let subscriptionPartial : SubscriptionPartial = subscriptionsStatus[id];
-        let subscription        : Subscription        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
-
-        const subscriptionIsNew : boolean       = subscription == null;
-        const streamInterest     : StreamInterest = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
-
-        subscriptionPartial = subscriptionsStatus[id] =
-        {
-            on: subscriptionIsNew ? true : !subscriptionPartial.on
-        };
-
-        if (!subscriptionIsNew)
-        {
-            subscription.on = subscriptionPartial.on;
-        }
-
-        if (streamInterest != null)
-        {
-            streamInterest.on = subscriptionsStatus[id].on;
+            streamInterest.on = on;
         }
 
         return dispatch
         ([
             new ActionUserPatch({ subscriptionsStatus }, true),
-            new ActionUserStreamSync(streamInterest)
-        ]).
-        pipe
-        (
-            switchMap(() =>
-                !subscriptionIsNew ?
-                    dispatch(new ActionUserSubscriptionsSync(subscription)) :
-                    this.service.documentGet(StateInterestOptions.name as string, id).
-                    pipe
-                    (
-                        switchMap((snapshot: firestore.DocumentSnapshot) =>
-                            dispatch(new ActionUserSubscriptionsAdd(snapshot, { ...snapshot.data() as Subscription, on: subscriptionPartial.on })).
-                            pipe
-                            (
-                                switchMap(() =>
-                                    dispatch(new ActionStorageUrlGet((snapshot.data() as Subscription).bucketPath))
-                                )
-                            )
-                        )
-                    )
-            )
-        );
+            new ActionUserStreamSync(streamInterest),
+            new ActionUserSubscriptionsSync(subscription)
+        ]);
     }
 }

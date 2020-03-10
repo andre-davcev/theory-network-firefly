@@ -1,4 +1,4 @@
 export interface StreamInterestPartial
 {
-    score: number;
+    score : number;
 }

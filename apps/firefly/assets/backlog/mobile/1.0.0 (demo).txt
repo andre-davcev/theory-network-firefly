@@ -1,14 +1,12 @@
 app (splash) - android splash screen
-app (all) - bug searching
 auth - switch user data cleanup and screen testing
 auth - reduce unauthenticated user initial render time
 alerts (detail) - fix background transition
-demo - create app demo steps/script
+home (stream) - switch to and back from manage subscriptions, notification are gone
 interests (detail) - add ability to add/remove events via query state
-events (detail) - fix publish workflow
-events (detail) - move select cluster to select icon
-events (detail) - add edit functionality
-events (detail) - reverse geocode
+location (bigdatacloud) - take out temp fix for missing principalSubdivision
+menu - highlight home row
 streams (list) - on unsubscribe delete subscription
 streams (list) - add heart subscribe animation
 +streams (list) - fix subscriptions add/remove from streams/manage subscriptions
+subscriptions (list) - empty state to filled list

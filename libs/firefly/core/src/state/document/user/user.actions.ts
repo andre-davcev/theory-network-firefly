@@ -25,4 +25,7 @@ export class ActionUserLoginEmail         { static readonly type = ActionsUser.L
 export class ActionUserLogout             { static readonly type = ActionsUser.Logout;             constructor() { } }
 
 export class ActionUserWatchSubscriptionsStatus { static readonly type = ActionsUser.WatchSubscriptionsStatus; constructor() { } }
-export class ActionUserSubscriptionToggle       { static readonly type = ActionsUser.SubscriptionToggle;       constructor(public id: string, public filter: boolean = true) { } }
+export class ActionUserSubscriptionToggle       { static readonly type = ActionsUser.SubscriptionToggle;       constructor(public id: string, public permanent: boolean = false) { } }
+export class ActionUserSubscriptionAdd          { static readonly type = ActionsUser.SubscriptionAdd;          constructor(public id: string) { } }
+export class ActionUserSubscriptionRemove       { static readonly type = ActionsUser.SubscriptionRemove;       constructor(public id: string) { } }
+export class ActionUserSubscriptionOnOff        { static readonly type = ActionsUser.SubscriptionOnOff;        constructor(public id: string, public on: boolean) { } }
