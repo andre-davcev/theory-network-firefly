@@ -8,6 +8,7 @@
     "workbench.iconTheme": "material-icon-theme",
 		"workbench.colorCustomizations": {
 			"activityBar.background": "#99e14b",
+			"activityBar.activeBackground": "#99e14b",
 			"activityBar.activeBorder": "#4093df",
 			"activityBar.foreground": "#15202b",
 			"activityBar.inactiveForeground": "#15202b99",
