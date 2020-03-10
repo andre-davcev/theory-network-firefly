@@ -14,6 +14,7 @@ import { NavController, ModalController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
+import { PageEventSelector } from '../event-selector';
 
 const { Camera } = Plugins;
 
@@ -62,12 +63,22 @@ export class PageAssetInterest extends BaseComponent implements OnInit
         this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Light }));
     }
 
-    public navigate(page: Pages.IconSelector)
+    public navigate(page: Pages.IconSelector | Pages.EventSelector)
     {
+      if(page === Pages.IconSelector)
+      {
         from(this.modal.create({
           component: PageIconSelector
         })).
         subscribe((modal: HTMLIonModalElement) => modal.present());
+      }
+      else{
+        from(this.modal.create({
+          component: PageEventSelector
+        })).
+        subscribe((modal: HTMLIonModalElement) => modal.present());
+      }
+
     }
 
     public save(): void
@@ -106,6 +117,6 @@ export class PageAssetInterest extends BaseComponent implements OnInit
     }
 
     public addEvent(): void{
-        this.store.dispatch(new Navigate([Pages.AssetEvent, CoreEnum.IdNew]));
+        this.store.dispatch(new Navigate([Pages.EventSelector]));
     }
 }

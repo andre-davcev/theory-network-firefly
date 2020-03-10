@@ -1,0 +1,31 @@
+<!--app-image-grid [urls]="urls$ | async" [square]="true" (clicked)="imageClicked($event)"></app-image-grid-->
+<ion-content>
+  <ion-list *ngFor="let event of events$ | async">
+    <ion-item-divider *ngIf="event.metadata.timeStartFormatted">
+        <ion-label>
+            {{ event.metadata.timeStartFormatted }}
+        </ion-label>
+    </ion-item-divider>
+
+    <ion-item (click)="eventClicked(event)">
+        <ion-avatar slot="start">
+          <img *ngIf="images[event.bucketPath]" [src]="images[event.bucketPath].small">
+        </ion-avatar>
+        <ion-label>
+            {{ event.metadata.timeStartDate | date:'shortTime' }}
+        </ion-label>
+        <ion-label>
+            <h2>{{ event.name }}</h2>
+            <p>{{ event.tagline }}</p>
+        </ion-label>
+    </ion-item>
+  </ion-list>
+
+    <app-icon-message *ngIf="empty$ | async"
+                      slot="fixed"
+                      [icon]="IconType.Events"
+                      [message]="'page.events.empty' | translate">
+    </app-icon-message>
+
+    <app-button-add (clicked)="add()" slot="fixed"></app-button-add>
+</ion-content>

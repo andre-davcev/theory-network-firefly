@@ -12,6 +12,7 @@ export * from './asset-image';
 export * from './assets-places';
 export * from './auth';
 export * from './event-location';
+export * from './event-selector';
 export * from './home';
 export * from './login';
 export * from './publisher-beacon';
