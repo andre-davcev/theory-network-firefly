@@ -4,7 +4,7 @@ auth - switch user data cleanup and screen testing
 auth - reduce unauthenticated user initial render time
 alerts (detail) - fix background transition
 demo - create app demo steps/script
-interests (detail) - add ability to add/remove events via query state
+interests (detail) - add ability to add/remove events via query state (done for assets)
 events (detail) - fix publish workflow
 events (detail) - move select cluster to select icon
 events (detail) - add edit functionality
