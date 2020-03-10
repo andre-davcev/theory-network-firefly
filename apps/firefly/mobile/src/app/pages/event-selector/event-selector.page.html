@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-segment (ionChange)="segmentChanged($event)" [value]="Pages.EventAssets" color="dark">
+          <ion-segment-button [value]="Pages.EventAssets">
+              <ion-label>{{'page.event-assets.title' | translate}}</ion-label>
+          </ion-segment-button>
+
+          <ion-segment-button [value]="Pages.EventLibrary">
+              <ion-label>{{'page.event-library.title' | translate}}</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [ngSwitch]="segment">
+    <app-page-event-assets *ngSwitchCase="Pages.EventAssets"></app-page-event-assets>
+    <app-page-event-library *ngSwitchCase="Pages.ImageLibrary"></app-page-event-library>
+</ion-content>

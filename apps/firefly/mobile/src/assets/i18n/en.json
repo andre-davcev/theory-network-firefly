@@ -167,6 +167,9 @@
   "page.image-library.title" : "Camera",
   "page.image-assets.title"  : "Assets",
 
+  "page.event-assets.title"  : "Assets",
+  "page.event-library.title" : "Library",
+
   "component.map-loading": "Loading Map...",
 
   "data.day-of-week.sunday"    : "Sunday",
