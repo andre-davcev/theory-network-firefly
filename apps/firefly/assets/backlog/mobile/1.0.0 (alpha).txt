@@ -1,28 +1,47 @@
 admin (store) - install on amy/cathy's phones
-app (splash) - android splash screen
-auth - switch user data cleanup and screen testing
-auth - reduce unauthenticated user initial render time
+app (ionic) - upgrade to 5.0.5
+app (load) - regression/style review
+app (load) - android splash screen
+auth (login) - regression/style review
+auth (login) - switch user data cleanup and screen testing
+auth (logout) - regression/style review
+auth (signup) - regression/style review
+auth (unauth) - reduce unauthenticated user initial render time
 *alerts (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
-alerts (detail) - transparent background transition
 *alerts (list) - image flash on unread pushing to read
 alerts (list) - add pink dots for unread alerts
 alerts (go) - implement add to calendar workflow
 alerts (go) - implement get directions workflow
-alerts (notification) - on notification click nav to alert detail
 auth - add login up validation and error messages
 auth - on unauthenticated login save city so you can grab city stream
 auth - on sign up, send initial notification 30 seconds later
 events (detail) - move select cluster to select icon
 events (detail) - add edit functionality
 events (detail) - reverse geocode
+firestore (function crons) - regression/style review
+firestore (function triggers) - regression review
 firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
 interests (detail) - add interest-events query state
+interests (stream) - regression/style review
 location (bigdatacloud) - take out temp fix for missing principalSubdivision
+notifications (detail) - regression/style review
+notifications (old) - regression/style review
+notifications (slides) - regression/style review
+publisher (dashboard) - regression/style review
+publisher (interests) - regression/style review
+publisher (interest detail) - regression/style review
+publisher (events) - regression/style review
+publisher (event detail) - regression/style review
+publisher (icons) - regression/style review
+publisher (icon detail) - regression/style review
+publisher (images) - regression/style review
+publisher (image detail) - regression/style revie
 security - fix database read rules for anonymous login
 sign-up (auth) - error handling
-streams (list) - on quick toggles/updates stack updates and put spinner
+subscriptions (list) - regression/style review
 subscriptions (list) - implement slide to delete
-subscriptions (list) - on quick toggles/updates stack updates and put spinner
+subscriptions (all) - debounce quick updates
+subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
 
 *andre
 +dave
