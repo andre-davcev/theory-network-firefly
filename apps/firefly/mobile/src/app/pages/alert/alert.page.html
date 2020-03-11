@@ -12,6 +12,7 @@
         <app-slide [slide]="alert" [buttonText]="'general.go' | translate" (alertDeleteClicked)="alertDelete(alert)" (alertGoClicked)="alertGo()" (alertDetailClicked)="navigate(Pages.AlertDetail, alert)"></app-slide>
     </ion-slide>
 </ion-slides>
+
 <ion-fab vertical="bottom" horizontal="start">
     <ion-button (click)="navigate(Pages.AlertsList)" color="transparent" mode="ios">
         <ion-icon name="list" color="dark"></ion-icon>

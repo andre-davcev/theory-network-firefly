@@ -98,7 +98,7 @@
   "page.interest.iconPlaceholder"        : "select interest",
   "page.interest.descriptionPlaceholder" : "Write a description ...",
 
-  "page.alerts.empty"        : "Looks like you have no notifications right now. Subscribe to new Interests to find new events in your area.",
+  "page.alerts.empty"        : "Looks like you have no notifications right now. Subscribe to new Interests or check out your old notifications below.",
   "page.stream.empty"        : "Our swarm of fireflies are busy building your Interest recommendations. Check back later!",
   "page.subscriptions.empty" : "You have no Subscriptions right now. Go to the home Discover Interests screen to find new interests in your area!",
   "page.interests.empty"     : "Help support the Firefly community by publishing your own public Interests here.",
@@ -147,7 +147,7 @@
   "page.assets-interests.title-modal" : "Select Interest",
 
   "page.alert.title" : "Alert",
-  "page.alerts-list.title" : "Read Alerts",
+  "page.alerts-list.title" : "Old Notifications",
 
   "page.event-location.title"             : "Event Location",
   "page.event-location.searchPlaceholder" : "Search Locations",
