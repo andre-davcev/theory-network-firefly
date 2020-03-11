@@ -1,7 +1,5 @@
 app (splash) - android splash screen
 auth - switch user data cleanup and screen testing
 auth - reduce unauthenticated user initial render time
-alerts (detail) - fix background transition
-interests (detail) - add ability to add/remove events via query state (done for assets)
 location (bigdatacloud) - take out temp fix for missing principalSubdivision
 subscriptions (list) - empty state to filled list delay

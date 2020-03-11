@@ -7,6 +7,7 @@ import { ModulePageAlertDetail } from '../alert-detail';
 import { ModuleComponentIconMessage } from '@firefly/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { ModuleDirectiveElevation } from '@theory/google';
 @NgModule
 ({
     imports :
@@ -16,7 +17,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
         RouterModule.forChild(RoutesPageAlertsList),
         ModulePageAlertDetail,
         ModuleComponentIconMessage,
-        NgxsFormPluginModule
+        NgxsFormPluginModule,
+        ModuleDirectiveElevation
     ],
 
     declarations : [PageAlertsList],

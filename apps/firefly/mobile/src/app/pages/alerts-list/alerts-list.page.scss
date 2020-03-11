@@ -1,10 +1,6 @@
 @import 'variables';
 
 :host {
-    /*
-    736px height
-    */
-
     ion-fab {
         &.fab-vertical-bottom {
             bottom: 0;
@@ -16,55 +12,9 @@
     }
 
     ion-list {
-      --background: #{$fire-color-transparent};
-      background: #{$fire-color-transparent};
-      margin-bottom: 2px;
-  }
-
-  ion-item {
-    --padding-start: 8px;
-    --background: #{$fire-color-transparent};
-    --border-color: #333;
-    margin-bottom: 7px;
-
-    /*&:first-child {
-
-      ion-item {
-          margin-top: 20px;
-      }
-  }*/
-
-    &:last-child {
-        ion-card {
-            margin-bottom: 24px;
+        ion-avatar {
+            height: 3rem;
+            width: 3rem;
         }
-    }
-}
-
-
-    section
-    {
-        position: relative;
-        height: 100%;
-        margin-top: 7px;
-        background-color: $fire-color-grey-lightest;
-    }
-
-    .alertWrapper {
-      width: 100%;
-    }
-
-    .eventWrapper {
-      margin-bottom: 7px;
-    }
-
-    .eventInfo {
-      font-family: $fire-font-playfair;
-    }
-
-    .timeWrapper {
-      font-family: $fire-font-opensans;
-      padding-left: 18%;
-      margin-bottom: 5px;
     }
 }
