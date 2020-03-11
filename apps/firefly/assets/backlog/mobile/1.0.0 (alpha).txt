@@ -3,6 +3,7 @@ app (splash) - android splash screen
 auth - switch user data cleanup and screen testing
 auth - reduce unauthenticated user initial render time
 alerts (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
+alerts (list) - image flash on unread pushing to read
 alerts (list) - add pink dots for unread alerts
 alerts (go) - implement add to calendar workflow
 alerts (go) - implement get directions workflow
