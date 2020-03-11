@@ -408,7 +408,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     watchSubscriptions({ dispatch }: StateContext<StateUserModel>)
     {
         const subscriptions: Record<string, SubscriptionPartial> = this.store.selectSnapshot(StateUser.subscriptionsStatus);
-        dispatch(new ActionUserSubscriptionsSetData(subscriptions, true));
+
+        return dispatch(new ActionUserSubscriptionsSetData(subscriptions, true));
     }
 
     @Action(ActionUserWatchLanguage, { cancelUncompleted: true })
