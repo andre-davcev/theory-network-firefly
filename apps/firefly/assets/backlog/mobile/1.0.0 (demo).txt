@@ -1,0 +1,27 @@
+user (unauthenticated)
+  show action sheet on menu/heart click
+user (sign up)
+  sign up
+  show welcome slides
+  show interests
+  show subscribe/unsubscribe from interests
+  show subscribe/unsubscribe manage subscriptions
+  show notifications empty state
+  show empty publisher states
+user (publisher)
+  login with andre.davcev@gmail.com
+  show filtered stream (because this user created most)
+  show unread notifications
+  show notification detail
+  show go menu
+  show old notifications
+  show publisher
+  show publisher interests
+  show publisher interest create new
+  show publisher events
+  show publisher event create new
+  show publisher icons
+  show publisher icon create new
+  show publisher images
+  show publisher image create new
+  show logout
