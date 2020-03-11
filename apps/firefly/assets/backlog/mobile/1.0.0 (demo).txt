@@ -1,4 +1,0 @@
-app (splash) - android splash screen
-auth - switch user data cleanup and screen testing
-auth - reduce unauthenticated user initial render time
-location (bigdatacloud) - take out temp fix for missing principalSubdivision

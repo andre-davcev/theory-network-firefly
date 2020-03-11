@@ -1,4 +1,7 @@
 admin (store) - install on amy/cathy's phones
+app (splash) - android splash screen
+auth - switch user data cleanup and screen testing
+auth - reduce unauthenticated user initial render time
 alerts (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 alerts (list) - add pink dots for unread alerts
 alerts (go) - implement add to calendar workflow
@@ -10,11 +13,11 @@ auth - on sign up, send initial notification 30 seconds later
 events (detail) - move select cluster to select icon
 events (detail) - add edit functionality
 events (detail) - reverse geocode
+firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
+interests (detail) - add interest-events query state
+location (bigdatacloud) - take out temp fix for missing principalSubdivision
 security - fix database read rules for anonymous login
 sign-up (auth) - error handling
-interests (detail) - add interest-events query state
-firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
-streams (list) - add heart subscribe animation
 streams (list) - on quick toggles/updates stack updates and put spinner
 subscriptions (list) - implement slide to delete
 subscriptions (list) - on quick toggles/updates stack updates and put spinner
