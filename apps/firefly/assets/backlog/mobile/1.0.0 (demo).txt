@@ -1,5 +1,4 @@
 app (splash) - android splash screen
-auth - normalize login button
 auth - switch user data cleanup and screen testing
 auth - reduce unauthenticated user initial render time
 alerts (detail) - fix background transition

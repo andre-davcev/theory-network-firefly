@@ -32,23 +32,29 @@
     }
 
     ion-button {
-        --button-color: #{$fire-color-dark};
-        --button-color-activated: #{$fire-color-dark};
-        --button-color-focused: #{$fire-color-dark};
-        --button-color-hover: #{$fire-color-dark};
-        --button-background-color: #{$fire-color-primary};
-        --button-background-activated: #{$fire-color-primary-light};
-        --button-background-focused: #{$fire-color-primary-light};
-        --button-background-hover: #{$fire-color-primary-light};
+        --color: #{$fire-color-dark};
+        --color-activated: #{$fire-color-dark};
+        --color-focused: #{$fire-color-dark};
+        --color-hover: #{$fire-color-dark};
+
+        --background: #{$fire-color-primary};
+        --background-activated: #{$fire-color-primary-light};
+        --background-activated-opacity: #{$fire-color-primary-light};
+        --background-focused: #{$fire-color-primary-light};
+        --background-focused-opacity: #{$fire-color-primary-light};
+        --background-hover: #{$fire-color-primary-light};
+        --background-hover-opacity: #{$fire-color-primary-light};
         --border-radius: 5px;
 
         margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
 
         &:active,
         &:hover,
         &:focus
         {
-            --button-color: #{$fire-color-dark};
+            --color: #{$fire-color-dark};
         }
     }
 
