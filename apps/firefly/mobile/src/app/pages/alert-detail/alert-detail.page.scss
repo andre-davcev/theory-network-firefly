@@ -2,10 +2,6 @@
 
 :host
 {
-    ion-content {
-        --background: #{$fire-color-transparent};
-    }
-
     app-item-map,
     app-item-description {
         padding-left: 1rem;
