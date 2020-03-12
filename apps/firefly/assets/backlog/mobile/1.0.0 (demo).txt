@@ -18,6 +18,8 @@ user (publisher)
   show publisher
   show publisher interests
   show publisher interest create new
+  show publisher interest selected
+  show adding event to interest
   show publisher events
   show publisher event create new
   show publisher icons
