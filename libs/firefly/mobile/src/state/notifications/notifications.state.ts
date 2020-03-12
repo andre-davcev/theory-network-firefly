@@ -21,8 +21,9 @@ const { PushNotifications } = Plugins;
 @Injectable()
 export class StateNotifications
 {
-    constructor(
-      private store: Store
+    constructor
+    (
+        private store: Store
     ) {}
 
     @Selector() static pushNotifications(state: StateNotificationsModel) : Array<PushNotification> {return state.notifications;}
