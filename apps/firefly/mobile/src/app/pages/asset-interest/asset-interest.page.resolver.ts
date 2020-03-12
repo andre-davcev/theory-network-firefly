@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 
 import { ActionInterestSetId, ActionUserIconsReset, ActionInterestEventsGet, ActionInterestEventsReset } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
+import { ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetInterest implements Resolve<void>
@@ -23,15 +24,17 @@ export class ResolverPageAssetInterest implements Resolve<void>
             switchMap(() => this.store.dispatch([
                 new ActionInterestSetId(route.queryParams.id)/*,
                 new ActionUserEventsGetData()*/
-              ]))
+              ])),
+              switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
           )
         }
-        else
-          return this.store.dispatch(new ActionInterestSetId(route.queryParams.id)).
+        else{
+          return this.store.dispatch(new ActionInterestSetId(route.queryParams.id)).
           pipe(
-          //switchMap(() => this.store.dispatch(new ActionUserIconsGetData()))
-            switchMap(() => this.store.dispatch(new ActionInterestEventsGet()))
-        );
+            switchMap(() => this.store.dispatch(new ActionInterestEventsGet())),
+            switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
+          );
+        }   
 
     }
 }

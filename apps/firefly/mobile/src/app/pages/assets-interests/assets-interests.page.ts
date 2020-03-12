@@ -8,11 +8,11 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateUserInterests, ActionInterestSetId, ActionEventInterestAdd, IconType } from '@firefly/core';
 import { Interest } from '@firefly/cloud';
 
-import { Pages } from '@firefly/mobile';
+import { Pages, ActionMobileLoadingShow } from '@firefly/mobile';
 import { ModalController, MenuController } from '@ionic/angular';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, switchMap } from 'rxjs/operators';
 import { StateMobile } from '@firefly/mobile';
 
 @Component
@@ -87,7 +87,12 @@ export class PageAssetsInterests extends BaseComponent implements OnInit
             this.modalController.dismiss();
         }
         else
-          this.store.dispatch(new Navigate([Pages.AssetInterest], {id: interest.id}, {state: {isInterestDetail:true}}));
+        {
+          this.store.dispatch([
+            new ActionMobileLoadingShow(),
+            new Navigate([Pages.AssetInterest], {id: interest.id}, {state: {isInterestDetail:true}})
+          ])
+        }
     }
 
     public menuOpen(): void
