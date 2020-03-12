@@ -3,7 +3,7 @@ user (unauthenticated)
 user (sign up)
   sign up
   show welcome slides
-  show interests
+  show interests (point out ranking by city/town)
   show subscribe/unsubscribe from interests
   show subscribe/unsubscribe manage subscriptions
   show notifications empty state
