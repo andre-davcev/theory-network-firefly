@@ -4,6 +4,8 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 import { ActionEventSetId } from '@firefly/core';
+import { switchMap } from 'rxjs/operators';
+import { ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetEvent implements Resolve<void>
@@ -12,6 +14,8 @@ export class ResolverPageAssetEvent implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-        return this.store.dispatch(new ActionEventSetId(route.params.id));
+        return this.store.dispatch(new ActionEventSetId(route.params.id)).pipe(
+          switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
+        );
     }
 }
