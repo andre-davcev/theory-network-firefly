@@ -1,3 +1,64 @@
+interests (detail) - create interests detail
+interests (detail) - allow public interests to allow other user to add event (via plus button)
+interests (stream) - show subscribed interests at top
+interests (stream) - add filter button
+menu (subscriptions) - change wording to "My Interests"
+menu (publisher) - change wording to "Create Interests"
+menu (create interests) - move publisher interests
+notifications (slide) - add more interest branding to slide (icon)
+notifications (detail) - cleanup styling and change to "Notification Detail"
+publisher (interest detail) - plus button navigates to create new event
+publisher (interest detail) - event click navigates to edit event
+publisher (interest detail) - add outside event review (accept/reject)
+publisher (event edit) - move icon cluster to icon select from photo library
+publisher (event edit) - move image to image select from photo library
+publisher (event edit) - move icon path to <event-id>/icon.<ext>
+publisher (event edit) - move image path to <event-id>/image.<ext>
+publisher (event edit) - delete old icon/image paths
+
+admin (store) - install on amy/cathy's phones
+admin (design) - research fiverr logo redesign
+app (ionic) - upgrade to 5.0.5
+app (load) - regression/style review
+app (load) - android splash screen
+auth (login) - regression/style review
+auth (login) - switch user data cleanup and screen testing
+auth (logout) - regression/style review
+auth (signup) - regression/style review
+auth (unauth) - reduce unauthenticated user initial render time
+*alerts (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
+*alerts (list) - image flash on unread pushing to read
+alerts (list) - add pink dots for unread alerts
+alerts (go) - implement add to calendar workflow
+alerts (go) - implement get directions workflow
+auth - add login up validation and error messages
+auth - on unauthenticated login save city so you can grab city stream
+auth - on sign up, send initial notification 30 seconds later
+events (detail) - move select cluster to select icon
+events (detail) - add edit functionality
+events (detail) - reverse geocode
+firestore (function crons) - regression/style review
+firestore (function triggers) - regression review
+firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
+interests (detail) - add interest-events query state
+interests (stream) - regression/style review
+location (bigdatacloud) - take out temp fix for missing principalSubdivision
+notifications (detail) - regression/style review
+notifications (old) - regression/style review
+notifications (slides) - regression/style review
+publisher (dashboard) - regression/style review
+publisher (interests) - regression/style review
+publisher (interests) - subscribe from publisher for interest owner
+publisher (interest detail) - regression/style review
+publisher (events) - regression/style review
+publisher (event detail) - regression/style review
+security - fix database read rules for anonymous login
+sign-up (auth) - error handling
+subscriptions (list) - regression/style review
+subscriptions (list) - implement slide to delete
+subscriptions (all) - debounce quick updates
+subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
+
 admin (accounting) - apply for corporate credit card
 admin (accounting) - renew sketch license
 admin (blog) - add cathy/amy as publishers to medium
@@ -63,3 +124,26 @@ testing (security) - setup firestore security testing
 testing (security) - setup firestore storage testing
 testing (unit) - setup jest unit tests
 testing (user) - setup app user testing
+
+*andre
++dave
+^cathy
+#amy
+
+mar-11
+mar-18 - ?
+mar-25 - ?
+apr-01 - ?
+apr-08 - ?
+apr-15 - ?
+apr-22 - ?
+apr-29 - ?
+may-06 - ?
+may-13 - ?
+may-20 - ?
+may-27 - ?
+jun-03 - ?
+jun-10 - ?
+jun-17 - ?
+jun-24 - ?
+jul-01 - ?
