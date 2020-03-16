@@ -27,8 +27,8 @@
 
   "menu.title"                : "Menu",
   "menu.home"                 : "Home",
-  "menu.subscriptions"        : "Subscriptions",
-  "menu.publisher"            : "Publisher",
+  "menu.subscriptions"        : "My Interests",
+  "menu.publisher"            : "Create Interests",
   "menu.assets.interests"      : "Interests",
   "menu.assets.events"        : "Events",
   "menu.assets.icons"         : "Icons",
@@ -65,9 +65,9 @@
   "page.stream.subscribe"  : "Subscribe",
   "page.stream.subscribed" : "Subscribed",
 
-  "page.alert.detail.title": "Alert Detail",
+  "page.alert.detail.title": "Notification Detail",
 
-  "page.notifications.title"                 : "Notifications",
+  "page.notifications.title"                 : "New Notifications",
   "page.notifications.tabFired"              : "Fired",
   "page.notifications.tabSubscriptions"      : "Subscriptions",
   "page.notifications.addCoupon"             : "Add Coupon",
@@ -76,7 +76,7 @@
   "page.notifications.deleteConfirmAgree"    : "Delete",
   "page.notifications.deleteConfirmDisagree" : "Cancel",
 
-  "page.subscriptions.title" : "Manage Subscriptions",
+  "page.subscriptions.title" : "My Interests",
 
   "page.event.title"                  : "Event",
   "page.event.title.edit"             : "Edit Event",
@@ -98,7 +98,7 @@
   "page.interest.iconPlaceholder"        : "select interest",
   "page.interest.descriptionPlaceholder" : "Write a description ...",
 
-  "page.alerts.empty"        : "Looks like you have no notifications right now. Subscribe to new Interests or check out your old notifications below.",
+  "page.alerts.empty"        : "Looks like you have no new notifications right now. Subscribe to new Interests or check out your old notifications below.",
   "page.stream.empty"        : "Our swarm of fireflies are busy building your Interest recommendations. Check back later!",
   "page.subscriptions.empty" : "You have no Subscriptions right now. Go to the home Discover Interests screen to find new interests in your area!",
   "page.interests.empty"     : "Help support the Firefly community by publishing your own public Interests here.",
@@ -147,7 +147,7 @@
   "page.assets-interests.title-modal" : "Select Interest",
 
   "page.alert.title" : "Alert",
-  "page.alerts-list.title" : "Old Notifications",
+  "page.alerts-list.title" : "All Notifications",
 
   "page.event-location.title"             : "Event Location",
   "page.event-location.searchPlaceholder" : "Search Locations",

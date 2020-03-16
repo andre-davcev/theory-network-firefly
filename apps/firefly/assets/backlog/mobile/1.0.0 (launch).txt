@@ -21,7 +21,7 @@ admin (store) - release v1 on ios
 app (analytics) - implement google tag manager
 app (errors) - required fields styling (icon/popover)
 app (errors) - setup error handling strategy
-*app (ionic) - upgrade to 5.0.5
+*app (organize) - create unused page folder
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
 app (logging) - create logging strategy
@@ -42,7 +42,7 @@ auth (sign-up) - select font awesome icons for categories
 auth (sign-up) - add categories slide (Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater)
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
-firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
+*firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
 firestore (all) - follow best practices articles
 firestore (functions) - manual testing
 firestore (functions) - automated testing
@@ -62,34 +62,32 @@ interests (detail) - create interests detail
 interests (detail) - allow public interests to enable other users to add event (via plus button)
 interests (stream) - show subscribed interests at top
 interests (stream) - add filter/sort button (subscribed, unsubscribed, sort, popular, hot, ...)
-interests (firestore) - migrate clusters collection to interests
+*interests (firestore) - migrate clusters collection to interests
 intro (slide 1) - Where life comes to you
 intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
 intro (slide 4) - Add these events to you calendar and get directions
 location (bigdatacloud) - take out temp fix for missing principalSubdivision
-menu (subscriptions) - change wording to "My Interests"
-menu (publisher) - change wording to "Create Interests"
-menu (create interests) - move publisher interests here
+*menu (create interests) - move publisher interests here
 notifications (slide) - add more interest branding to slide (icon)
-notifications (detail) - cleanup styling and change to "Notification Detail"
+*notifications (detail) - cleanup styling/alignment
 notifications (detail) - reverse geocode map
 notifications (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
-notifications (list) - image flash bug on unread pushing to read
+*notifications (list) - image flash bug on unread pushing to read
 notifications (list) - add pink dots for unread alerts
 notifications (go) - implement add to calendar workflow
 notifications (go) - implement get directions workflow
-publisher (interest detail) - plus button navigates to create new event
-publisher (interest detail) - event click navigates to edit event
+*publisher (interest detail) - plus button navigates to create new event
+*publisher (interest detail) - event click navigates to edit event
 publisher (interest detail) - add outside event review (accept/reject)
 publisher (interest detail) - subscribe from publisher for interest owner
-publisher (interest detail edit) - add image for interest stream
-publisher (event edit) - move icon cluster to icon select from photo library
-publisher (event edit) - move image to image select from photo library
+*publisher (interest detail edit) - add image for interest stream
+*publisher (event edit) - move icon cluster to icon select from photo library
+*publisher (event edit) - move image to image select from photo library
 publisher (event edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
 publisher (event edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
 publisher (event edit) - delete old icon/image paths
-publisher (event edit) - move select cluster to select icon
+*publisher (event edit) - move select cluster to select icon
 publisher (event edit) - fix edit functionality
 publisher (event edit) - reverse geocode map
 subscriptions (list) - implement slide to delete
