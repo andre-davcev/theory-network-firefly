@@ -1,0 +1,56 @@
+<ion-header color="white">
+    <ion-toolbar >
+        <ion-title>
+            {{ 'page.interest.title' | translate }}
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button color="dark"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+        <img class="image-cnt" [src]="iconUrl$ | async">
+
+        <div class="cpt-detail" fxLayout="column">
+            <div class="cnt-name">
+              <div class="name">| {{ (interest$ | async).name }} |</div>
+            </div>
+            <div class="cnt-tagline">
+              <div class="tagline">| {{ (interest$ | async).tagline }} |</div>
+            </div>
+            <div class="cnt-description">
+              <p class="description">{{ (interest$ | async).description }}</p>
+            </div>
+            <ion-list>
+                <ion-item-group>
+                    <ion-item-divider></ion-item-divider>
+                    <ion-list *ngFor="let event of events$ | async">
+                      <ion-item-divider *ngIf="event.metadata.timeStartFormatted">
+                          <ion-label>
+                              {{ event.metadata.timeStartFormatted }}
+                          </ion-label>
+                      </ion-item-divider>
+
+                      <ion-item (click)="select(event)">
+                          <ion-avatar slot="start">
+                              <img *ngIf="images[event.bucketPath]" [src]="images[event.bucketPath].small">
+                          </ion-avatar>
+                          <ion-label>
+                              {{ event.metadata.timeStartDate | date:'shortTime' }}
+                          </ion-label>
+                          <ion-label>
+                              <h2>{{ event.name }}</h2>
+                              <p>{{ event.tagline }}</p>
+                          </ion-label>
+                      </ion-item>
+                    </ion-list>
+
+                    <ion-item-divider></ion-item-divider>
+                </ion-item-group>
+            </ion-list>
+        </div>
+
+    <app-button-add (clicked)="navigate(Pages.AssetEvent)" slot="fixed"></app-button-add>
+</ion-content>
