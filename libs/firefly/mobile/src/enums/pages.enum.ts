@@ -34,6 +34,8 @@ export enum Pages
 
     EventLocation = 'event-location',
 
+    InterestDetail = 'interest-detail',
+
     UserProfile  = 'user-profile',
     UserSettings = 'user-settings',
 
