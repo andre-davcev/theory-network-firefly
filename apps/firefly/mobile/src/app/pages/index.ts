@@ -1,7 +1,6 @@
 export * from './alert';
 export * from './asset-interest';
 export * from './asset-event';
-export * from './assets-beacons';
 export * from './assets-interests';
 export * from './assets-coupons';
 export * from './assets-events';
