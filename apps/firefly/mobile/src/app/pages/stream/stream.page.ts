@@ -7,7 +7,8 @@ import { StreamInterest, Interest, Event } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
-import { ActionMobileAuthSelect } from '@firefly/mobile';
+import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow } from '@firefly/mobile';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component
 ({
@@ -82,5 +83,13 @@ export class PageStream extends BaseComponent implements OnInit
         {
             this.currentlyOpenedItemIndex = -1;
         }
+    }
+
+    public selectInterest(interest: Interest)
+    {
+      this.store.dispatch([
+        new ActionMobileLoadingShow(),
+        new Navigate([Pages.InterestDetail], {id: interest.id})
+      ])
     }
 }

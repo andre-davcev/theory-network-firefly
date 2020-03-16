@@ -1,10 +1,10 @@
 <ion-content>
   <ion-list *ngIf="images && (found$ | async)">
     <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">
-        <ion-card *ngIf="images[interest.bucketPath]" elevation="1">
-            <img class="image-cnt" [src]="images[interest.bucketPath].medium">
+        <ion-card  *ngIf="images[interest.bucketPath]" elevation="1">
+            <img (click)="selectInterest(interest)" class="image-cnt" [src]="images[interest.bucketPath].medium">
 
-            <ion-card-header>
+            <ion-card-header (click)="selectInterest(interest)">
               <ion-card-title class="name">|{{ interest.name }}|</ion-card-title>
               <ion-card-subtitle class="tagline">{{ interest.tagline }}</ion-card-subtitle>
             </ion-card-header>

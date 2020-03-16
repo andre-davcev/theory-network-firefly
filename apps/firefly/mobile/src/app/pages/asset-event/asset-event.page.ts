@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
@@ -38,6 +38,8 @@ export class PageAssetEvent
     @Select(StateEvent.imageUrl)        imageUrl$:        Observable<string>;
     @Select(StateInterest.iconUrl)      iconUrl$:         Observable<string>;
 
+    @Input() modal: boolean = false;
+
     public Pages    : any = Pages;
     public IconType : any = IconType;
     public IconSlot : any = IconSlot;
@@ -46,7 +48,7 @@ export class PageAssetEvent
     constructor
     (
         private store:         Store,
-        private modal:         ModalController,
+        private modalController:         ModalController,
         private resolver:      ResolverPageAssetsInterests,
         public  navController: NavController
     ) { }
@@ -65,23 +67,23 @@ export class PageAssetEvent
             pipe
             (
                 switchMap(() =>
-                    from(this.modal.create
+                    from(this.modalController.create
                     ({
                         component: PageAssetsInterests,
                         componentProps: { modal: true }
                     }))
                 )
             ).
-            subscribe((modal: HTMLIonModalElement) =>
-                modal.present()
+            subscribe((modalController: HTMLIonModalElement) =>
+                modalController.present()
             );
         }
         else if (page === Pages.ImageSelector)
         {
-          from(this.modal.create({
+          from(this.modalController.create({
             component: PageImageSelector
           })).
-          subscribe((modal: HTMLIonModalElement) => modal.present());
+          subscribe((modalController: HTMLIonModalElement) => modalController.present());
            /* if (this.store.selectSnapshot(StateDevice.device))
             {
                 const options: CameraOptions =
@@ -113,8 +115,8 @@ export class PageAssetEvent
         }
         else if (page === Pages.EventLocation)
         {
-            from(this.modal.create({ component: PageEventLocation })).
-            subscribe((modal: HTMLIonModalElement) => modal.present());
+            from(this.modalController.create({ component: PageEventLocation })).
+            subscribe((modalController: HTMLIonModalElement) => modalController.present());
         }
     }
 
@@ -146,4 +148,10 @@ export class PageAssetEvent
             this.navController.back();
         });
     }
+
+    public cancel(): void
+    {
+        this.modalController.dismiss();
+    }
+
 }

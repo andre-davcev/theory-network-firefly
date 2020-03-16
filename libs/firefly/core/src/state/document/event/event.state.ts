@@ -87,7 +87,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
-                ActionsReset:  [ActionInterestReset, ActionImageReset, ActionIconReset, ActionMapSearchResultClear],
+                ActionsReset:  [ActionImageReset, ActionIconReset, ActionMapSearchResultClear],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
