@@ -7,7 +7,7 @@ import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateInterest, IconType, Color, IconSlot } from '@firefly/core';
+import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateInterest, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
@@ -136,6 +136,7 @@ export class PageAssetEvent
         ]).
         pipe
         (
+            switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous())),
             map(() => 'Event was successfully created!'),
             catchError(() => of('An error occurred creating the event!')),
             finalize(() =>
@@ -145,7 +146,13 @@ export class PageAssetEvent
         subscribe((message: string) =>
         {
             this.store.dispatch(new ActionMobileToast(message));
-            this.navController.back();
+
+            if(this.modal)
+            {
+              this.modalController.dismiss();
+            }
+            else
+              this.navController.back();
         });
     }
 
