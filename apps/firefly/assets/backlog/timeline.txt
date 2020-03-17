@@ -1,5 +1,5 @@
-2020-mar - cathy & amy join theory network
-2020-apr - april 2nd release of firefly 1.0.0 alpha
+2020-mar - release of firefly 1.0.0 alpha
+2020-apr - cathy & amy join theory network
 2020-may - test users (nextcorps, cathy, andre, sofia, karin, dave, amy)
 2020-jun - firefly 1.0.0 web
 2020-jul - firefly 1.0.0 launch

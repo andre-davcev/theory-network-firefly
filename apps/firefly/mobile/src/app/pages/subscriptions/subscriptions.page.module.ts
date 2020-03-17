@@ -6,6 +6,7 @@ import { ModulePage } from '@firefly/app/modules';
 import { PageSubscriptions } from './subscriptions.page';
 import { RoutesPageSubscriptions } from './subscriptions.page.routes';
 import { ModuleComponentIconMessage } from '@firefly/core';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 @NgModule
 ({
@@ -13,6 +14,7 @@ import { ModuleComponentIconMessage } from '@firefly/core';
     [
         ModulePage,
         ModuleComponentIconMessage,
+        ModuleDirectiveElevation,
         RouterModule.forChild(RoutesPageSubscriptions)
     ],
 
