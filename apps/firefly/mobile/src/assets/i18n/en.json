@@ -133,7 +133,7 @@
   "page.assets.events"              : "Events",
   "page.assets.eventsDescription"   : "All of your public and private events",
   "page.assets.interest"             : "Interest",
-  "page.assets.interests"            : "Firefly Interests",
+  "page.assets.interests"            : "Created Interests",
   "page.assets.interestsDescription" : "Locations and events which users subscribe to",
 
   "page.assets-icon.title"                  : "Icon Details",
@@ -149,7 +149,7 @@
   "page.assets-beacons.title"        : "Beacons",
   "page.assets-places.title"         : "Places",
   "page.assets-events.title"         : "Events",
-  "page.assets-interests.title"       : "Firefly Interests",
+  "page.assets-interests.title"       : "Created Interests",
   "page.assets-interests.title-modal" : "Select Interest",
 
   "page.alert.title" : "Alert",

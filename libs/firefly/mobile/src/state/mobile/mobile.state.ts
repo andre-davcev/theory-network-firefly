@@ -39,7 +39,7 @@ export class StateMobile
     @Selector() static pageStream(state: StateMobileModel)        : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
     @Selector() static pageHome(state: StateMobileModel)          : boolean                { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
     @Selector() static pageSubscriptions(state: StateMobileModel) : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
-    @Selector() static pagePublisher(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Publisher}`; }
+    @Selector() static pagePublisher(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.AssetsInterests}`; }
     @Selector() static indexAlerts(state: StateMobileModel)       : number                 { return state.indexAlerts; }
 
     constructor

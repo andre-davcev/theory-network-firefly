@@ -67,7 +67,6 @@ intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
 intro (slide 4) - Add these events to you calendar and get directions
 location (bigdatacloud) - take out temp fix for missing principalSubdivision
-*menu (create interests) - move publisher interests here
 notifications (slide) - add more interest branding to slide (icon)
 *notifications (detail) - cleanup styling/alignment
 notifications (detail) - reverse geocode map
