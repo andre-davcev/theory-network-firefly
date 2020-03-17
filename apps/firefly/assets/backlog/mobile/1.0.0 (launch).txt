@@ -14,6 +14,8 @@ admin (marketing) - research pipedrive & trello
 admin (marketing) - create lead generation strategy
 admin (marketing) - research julian.com marketing strategies
 admin (marketing) - submit firefly to ionic showcase
+*admin (staffing) - talk with marik about nextcorps interns
+*+^#admin (strategy) - theory network strategy meeting
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
@@ -42,6 +44,7 @@ auth (sign-up) - select font awesome icons for categories
 auth (sign-up) - add categories slide (Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater)
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
+design (photoshop) - change main photo to firefly color
 *firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
 firestore (all) - follow best practices articles
 firestore (functions) - manual testing
@@ -105,6 +108,7 @@ testing (user) - setup app user testing
 +dave
 ^cathy
 #amy
+-nextcorps
 
 mar-11 - 104
 mar-18 - ?
