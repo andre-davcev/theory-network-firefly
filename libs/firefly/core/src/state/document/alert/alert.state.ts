@@ -47,7 +47,6 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 metadata    : {},
 
                 bucketPath     : null,
-                bucketPaths    : {},
                 interestId     : null,
                 description    : null,
                 eventId        : null,

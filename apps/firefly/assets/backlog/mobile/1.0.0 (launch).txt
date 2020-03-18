@@ -14,8 +14,6 @@ admin (marketing) - research pipedrive & trello
 admin (marketing) - create lead generation strategy
 admin (marketing) - research julian.com marketing strategies
 admin (marketing) - submit firefly to ionic showcase
-*admin (staffing) - talk with marik about nextcorps interns
-*+^#admin (strategy) - theory network strategy meeting
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
@@ -60,35 +58,35 @@ firestore (security) - fix database read rules for anonymous login
 firestore (security) - upload and test security rules
 firestore (security) - create storage security rules
 firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
-*icons (all) - remove all references
-*images (all) - remove all references
-*interests (model) - migrate from bucketPath to bucketPaths
-*interests (my/created) - experiment with dark theme
+icons (all) - remove all references
+images (all) - remove all references
+interests (model) - migrate from bucketPath to bucketPaths
+interests (my/created) - experiment with dark theme
 interests (detail) - add interest-events query state
 +interests (detail) - create interests detail
 +interests (detail) - allow public interests to enable other users to add event (via plus button)
 interests (stream) - show subscribed interests at top
 interests (stream) - add filter/sort button (subscribed, unsubscribed, sort, popular, hot, ...)
-*interests (firestore) - migrate clusters collection to interests
+interests (firestore) - migrate clusters collection to interests
 intro (slide 1) - Where life comes to you
 intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
 intro (slide 4) - Add these events to you calendar and get directions
 location (bigdatacloud) - take out temp fix for missing principalSubdivision
-*notifications (model) - migrate from bucketPath to bucketPaths
+notifications (model) - migrate from bucketPath to bucketPaths
 notifications (slide) - add more interest branding to slide (icon)
-*notifications (detail) - cleanup styling/alignment
+notifications (detail) - cleanup styling/alignment
 notifications (detail) - reverse geocode map
 notifications (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
-*notifications (list) - image flash bug on unread pushing to read
+notifications (list) - image flash bug on unread pushing to read
 notifications (list) - add pink dots for unread alerts
 notifications (go) - implement add to calendar workflow
 notifications (go) - implement get directions workflow
-*publisher (interest detail) - plus button navigates to create new event
-*publisher (interest detail) - event click navigates to edit event
+publisher (interest detail) - plus button navigates to create new event
+publisher (interest detail) - event click navigates to edit event
 publisher (interest detail) - add outside event review (accept/reject)
 publisher (interest detail) - subscribe from publisher for interest owner
-*publisher (interest detail edit) - add image for interest stream
+publisher (interest detail edit) - add image for interest stream
 *publisher (event edit) - move icon cluster to icon select from photo library
 *publisher (event edit) - move image to image select from photo library
 *publisher (event edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
