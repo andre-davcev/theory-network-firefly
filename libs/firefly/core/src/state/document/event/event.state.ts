@@ -27,7 +27,6 @@ import {
   ActionEventInterestAdd
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
-import { ActionInterestReset } from '../interest';
 import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
@@ -43,9 +42,9 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 {
     constructor
     (
-        private store: Store,
+        private store:    Store,
         private location: ServiceLocation,
-        public service: ServiceEvents
+        public  service:  ServiceEvents
     )
     {
         super
@@ -64,9 +63,11 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 bucketPath     : null,
                 cityId         : null,
                 city           : null,
-                interests       : [],
                 description    : null,
                 geopoint       : null,
+                icon           : null,
+                image          : null,
+                interests      : [],
                 name           : null,
                 notifyComplete : false,
                 private        : true,
