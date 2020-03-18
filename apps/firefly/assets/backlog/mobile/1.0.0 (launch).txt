@@ -6,7 +6,7 @@ admin (content) - event/interest spreadsheet
 admin (content) - mock.function.ts cloud function (mock data)
 admin (design) - research fiverr logo redesign
 admin (design) - create design system
-*admin (financing) - apply for rg&e innovation zone ignition grant
+admin (financing) - apply for rg&e innovation zone ignition grant
 admin (financing) - create pitch deck
 admin (firestore) - setup billing/usage alert triggers
 admin (marketing) - implement spanish translations
@@ -45,7 +45,7 @@ auth (sign-up) - add categories slide (Art, Activism, Business, Comedy, Culture,
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 design (photoshop) - change main photo to firefly color
-*firestore (models) - change bucketPath: string to bucketPaths: Record<string, string>
+*event (model) - migrate from bucketPath to bucketPaths
 firestore (all) - follow best practices articles
 firestore (functions) - manual testing
 firestore (functions) - automated testing
@@ -60,6 +60,9 @@ firestore (security) - fix database read rules for anonymous login
 firestore (security) - upload and test security rules
 firestore (security) - create storage security rules
 firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
+*icons (all) - remove all references
+*images (all) - remove all references
+*interests (model) - migrate from bucketPath to bucketPaths
 *interests (my/created) - experiment with dark theme
 interests (detail) - add interest-events query state
 +interests (detail) - create interests detail
@@ -72,6 +75,7 @@ intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
 intro (slide 4) - Add these events to you calendar and get directions
 location (bigdatacloud) - take out temp fix for missing principalSubdivision
+*notifications (model) - migrate from bucketPath to bucketPaths
 notifications (slide) - add more interest branding to slide (icon)
 *notifications (detail) - cleanup styling/alignment
 notifications (detail) - reverse geocode map
@@ -87,9 +91,9 @@ publisher (interest detail) - subscribe from publisher for interest owner
 *publisher (interest detail edit) - add image for interest stream
 *publisher (event edit) - move icon cluster to icon select from photo library
 *publisher (event edit) - move image to image select from photo library
-publisher (event edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
-publisher (event edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
-publisher (event edit) - delete old icon/image paths
+*publisher (event edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
+*publisher (event edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
+*publisher (event edit) - delete old icon/image paths
 *publisher (event edit) - move select cluster to select icon
 publisher (event edit) - fix edit functionality
 publisher (event edit) - reverse geocode map
