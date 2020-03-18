@@ -5,6 +5,7 @@ import { MetadataAlert } from '../models/alert.metadata';
 export interface Alert extends FirebaseDocument
 {
     bucketPath  : string;
+    bucketPaths : Record<string, string>;
     interestId  : string;
     dateTime    : firestore.FieldValue;
     description : string;

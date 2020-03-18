@@ -7,6 +7,7 @@ import { MetadataEvent } from '../models/event.metadata';
 export interface Event extends FirebaseDocument
 {
     bucketPath     : string;
+    bucketPaths    : Record<string, string>;
     cityId         : string;
     city           : Location;
     interests      : Array<string>;
