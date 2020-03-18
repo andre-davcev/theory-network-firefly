@@ -62,7 +62,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 metadata    : {},
 
                 bucketPath     : null,
-                bucketPaths    : {},
                 cityId         : null,
                 city           : null,
                 interests       : [],

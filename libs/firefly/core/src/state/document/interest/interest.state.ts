@@ -66,7 +66,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                 metadata    : {},
 
                 bucketPath      : null,
-                bucketPaths     : {},
                 description     : null,
                 name            : null,
                 private         : true,
