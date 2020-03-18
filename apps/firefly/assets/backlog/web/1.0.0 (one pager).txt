@@ -1,3 +1,4 @@
+design - create one pager
 web (all) - implement design
 infra (ci) - setup circle ci
 infra (pwa) - implement progressive web app
