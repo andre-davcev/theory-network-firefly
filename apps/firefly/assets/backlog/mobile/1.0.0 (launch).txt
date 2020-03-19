@@ -66,7 +66,6 @@ interests (my/created) - experiment with dark theme
 interests (detail) - add interest-events query state
 +interests (detail) - create interests detail
 +interests (detail) - allow public interests to enable other users to add event (via plus button)
-+interests (detail) - add draft flag to model
 interests (stream) - show subscribed interests at top
 interests (stream) - add filter/sort button (subscribed, unsubscribed, sort, popular, hot, ...)
 interests (firestore) - migrate clusters collection to interests
