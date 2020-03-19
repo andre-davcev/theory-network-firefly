@@ -10,8 +10,10 @@ export interface Event extends FirebaseDocument
     cityId         : string;
     city           : Location;
     description    : string;
+    draft          : boolean;
     geopoint       : firestore.GeoPoint;
     icon           : string;
+    interestId     : string;
     interests      : Array<string>;
     image          : string;
     name           : string;
