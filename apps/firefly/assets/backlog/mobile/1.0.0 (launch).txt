@@ -82,7 +82,6 @@ notifications (list) - image flash bug on unread pushing to read
 notifications (list) - add pink dots for unread alerts
 notifications (go) - implement add to calendar workflow
 notifications (go) - implement get directions workflow
-publisher (interest detail) - plus button navigates to create new event
 publisher (interest detail) - event click navigates to edit event
 publisher (interest detail) - add outside event review (accept/reject)
 publisher (interest detail) - subscribe from publisher for interest owner
