@@ -69,18 +69,6 @@ export class ServiceEvents extends ServiceFirestore<Event>
         return validator;
     }
 
-    public static validateImage(): ValidatorFn
-    {
-        const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
-        {
-            const url: string = control.value;
-
-            return url != null ? null : { imageUrlInvalid: true };
-        };
-
-        return validator;
-    }
-
     public formDataNew(userId: string, defaults: Event): Event
     {
         const event: Event =
@@ -101,15 +89,17 @@ export class ServiceEvents extends ServiceFirestore<Event>
         ({
             ...event,
 
+            bucketPath  : [event.bucketPath,  [Validators.required]],
+            description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
+            geopoint    : [event.geopoint,    [Validators.required]],
+            icon        : [event.icon,        [Validators.required]],
+            image       : [event.image,       [Validators.required]],
+            interests   : [event.interests,   []],
             name        : [event.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
             tagline     : [event.tagline,     [Validators.required, ValidatorsExtended.minLength(1)]],
-            description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
-            bucketPath  : [event.bucketPath,  [ServiceEvents.validateImage()]],
-            geopoint    : [event.geopoint,    [Validators.required]],
             timeStart   : [event.timeStart,   [ServiceEvents.validateTime()]],
             timeEnd     : [event.timeEnd,     [ServiceEvents.validateTime()]],
-            timeNotify  : [event.timeNotify,  [ServiceEvents.validateTimeNotify()]],
-            interests   : [event.interests,   []]
+            timeNotify  : [event.timeNotify,  [ServiceEvents.validateTimeNotify()]]
         });
     }
 }
