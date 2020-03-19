@@ -42,6 +42,7 @@ auth (sign-up) - select font awesome icons for categories
 auth (sign-up) - add categories slide (Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater)
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
+auth (unauth) - implement anonymous login
 design (photoshop) - change main photo to firefly color
 *event (model) - migrate from bucketPath to bucketPaths
 firestore (all) - follow best practices articles
@@ -58,6 +59,7 @@ firestore (security) - fix database read rules for anonymous login
 firestore (security) - upload and test security rules
 firestore (security) - create storage security rules
 firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
+firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
 images (all) - remove all references
 interests (model) - migrate from bucketPath to bucketPaths
