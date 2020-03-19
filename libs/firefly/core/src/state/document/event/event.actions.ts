@@ -21,5 +21,6 @@ export class ActionEventImageClear   { static readonly type = ActionsEvent.Image
 export class ActionEventImageUriSet  { static readonly type = ActionsEvent.ImageUriSet;  constructor(public dataUri: string) { } }
 export class ActionEventImagePathSet { static readonly type = ActionsEvent.ImagePathSet; constructor(public bucketPath: string = MockImagePath) { } }
 export class ActionEventImageCreate  { static readonly type = ActionsEvent.ImageCreate;  constructor() { } }
+
 export class ActionEventLocationSet  { static readonly type = ActionsEvent.LocationSet;  constructor(public result: Result) { } }
 export class ActionEventInterestAdd  { static readonly type = ActionsEvent.InterestAdd;  constructor(public interest: Interest) { }}

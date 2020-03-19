@@ -16,9 +16,10 @@ import { StateUser } from '../../document/user';
 import { StateQuery } from '@theory/ngxs';
 import { ServiceEvents } from '@firefly/core/services';
 import { Query } from '@angular/fire/firestore';
-import { tap } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
 import { StateLanguage } from '@theory/capacitor';
 import { Injectable } from '@angular/core';
+import { ActionStorageUrlsGet, ImageSize } from '@theory/firebase';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 @Injectable()
@@ -63,34 +64,53 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     @Action(ActionUserEventsGet)
     get(context: StateContext<StateUserEventsModel>)
     {
-        return super.get(context).pipe(
-          tap(() =>
-          {
-            const language: string = this.store.selectSnapshot(StateLanguage.language);
-            const events: Array<Event>  = StateUserEvents.dataState(context.getState());
-            const options: any = { weekday: 'long',
-              year: 'numeric', month: 'long', day: 'numeric'};
+        const { dispatch, getState } = context;
 
-              let timeStart: Date;
-              let timeStartPrevious: Date;
-              let timeStartFormatted: string;
+        return super.get(context).pipe
+        (
+            map(() =>
+                StateUserEvents.dataState(getState())
+            ),
+            tap((data: Array<Event>) =>
+            {
+                const language: string = this.store.selectSnapshot(StateLanguage.language);
 
-              events.forEach((event: Event) =>
-              {
-                timeStart = new Date(event.timeStart);
-                timeStartFormatted = timeStart.toLocaleDateString(language, options);
+                const options: any =
+                {
+                    weekday : 'long',
+                    year    : 'numeric',
+                    month   : 'long',
+                    day     : 'numeric'
+                };
 
-                if(event.metadata === undefined)
-                  event.metadata = {};
+                let timeStartDate     : Date;
+                let timeStartPrevious : Date;
 
-                if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
-                  event.metadata.timeStartFormatted = timeStartFormatted;
+                data.forEach((event: Event) =>
+                {
+                    timeStartDate = new Date(event.timeStart);
 
-                event.metadata.timeStartDate = timeStart;
-                timeStartPrevious = timeStart;
+                    event.metadata =
+                    {
+                        ...event.metadata,
 
-              });
-          })
+                        timeStartDate,
+                        timeStartFormatted: timeStartPrevious == null || timeStartDate.getTime() != timeStartPrevious.getTime() ?
+                            timeStartDate.toLocaleDateString(language, options) :
+                            null
+                    };
+
+                    timeStartPrevious = timeStartDate;
+                });
+            }),
+            map((data: Array<Event>) =>
+                data.map((item: Event) =>
+                    item.icon
+                )
+            ),
+            switchMap((bucketPaths: Array<string>) =>
+                dispatch(new ActionStorageUrlsGet(bucketPaths, ImageSize.Small))
+            )
         );
     }
 

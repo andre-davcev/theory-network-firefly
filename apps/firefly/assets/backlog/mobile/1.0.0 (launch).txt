@@ -86,7 +86,8 @@ publisher (interest detail) - event click navigates to edit event
 publisher (interest detail) - add outside event review (accept/reject)
 publisher (interest detail) - subscribe from publisher for interest owner
 publisher (interest detail edit) - add image for interest stream
-*publisher (event edit) - migrate from bucketPath to bucketPaths
+*publisher (event edit) - migrate from bucketPath to icon/image
+*publisher (event edit) - migrate user-events to cluster-events
 *publisher (event edit) - move icon cluster to icon select from photo library
 *publisher (event edit) - move image to image select from photo library
 *publisher (event edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
