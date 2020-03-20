@@ -3,6 +3,7 @@ augmented reality
 beacons
 calendar
 categories
+event management/sharing
 google assistant
 external api
 external widgets

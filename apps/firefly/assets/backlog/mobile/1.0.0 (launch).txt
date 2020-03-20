@@ -66,6 +66,7 @@ interests (my/created) - experiment with dark theme
 interests (detail) - add interest-events query state
 +interests (detail) - create interests detail
 +interests (detail) - allow public interests to enable other users to add event (via plus button)
+interests (detail) - if publisher show plus button
 interests (stream) - show subscribed interests at top
 interests (stream) - add filter/sort button (subscribed, unsubscribed, sort, popular, hot, ...)
 interests (firestore) - migrate clusters collection to interests
@@ -74,6 +75,8 @@ intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
 intro (slide 4) - Add these events to you calendar and get directions
 location (bigdatacloud) - take out temp fix for missing principalSubdivision
+menu - if publisher show "Create" "Interests" and "Events"
+menu - add "Manage" grouping to "My Interests"
 notifications (model) - migrate from bucketPath to bucketPaths
 notifications (slide) - add more interest branding to slide (icon)
 notifications (detail) - cleanup styling/alignment
@@ -83,12 +86,15 @@ notifications (list) - image flash bug on unread pushing to read
 notifications (list) - add pink dots for unread alerts
 notifications (go) - implement add to calendar workflow
 notifications (go) - implement get directions workflow
+pending-events (list) - events list with approve deny buttons
+pending-events (detail) - event detail but read only and with approve/deny button
+publisher (interest detail) - add "Pending Events" row
 publisher (interest detail) - event click navigates to edit event
 publisher (interest detail) - add outside event review (accept/reject)
 publisher (interest detail) - subscribe from publisher for interest owner
 publisher (interest detail edit) - add image for interest stream
-*publisher (event edit) - migrate from bucketPath to icon/image
 *publisher (event edit) - migrate user-events to cluster-events
+*publisher (event edit) - migrate from bucketPath to icon/image
 *publisher (event edit) - move icon cluster to icon select from photo library
 *publisher (event edit) - move image to image select from photo library
 *publisher (event edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
@@ -107,6 +113,10 @@ testing (security) - setup firestore security testing
 testing (security) - setup firestore storage testing
 testing (unit) - setup jest unit tests
 testing (user) - setup app user testing
+user-profile (menu) - add menu item
+user-profile (page) - setup user profile
+user-profile (page) - add profile picture
+user-profile (page) - add "publishing enabled" switch
 
 *andre
 +dave

@@ -13,7 +13,6 @@ export interface Event extends FirebaseDocument
     draft          : boolean;
     geopoint       : firestore.GeoPoint;
     icon           : string;
-    interestId     : string;
     interests      : Array<string>;
     image          : string;
     name           : string;

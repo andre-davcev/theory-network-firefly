@@ -94,7 +94,6 @@ export class ServiceEvents extends ServiceFirestore<Event>
             geopoint    : [event.geopoint,    [Validators.required]],
             icon        : [event.icon,        [Validators.required]],
             image       : [event.image,       [Validators.required]],
-            interestId  : [event.interestId,  [Validators.required]],
             interests   : [event.interests,   []],
             name        : [event.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
             tagline     : [event.tagline,     [Validators.required, ValidatorsExtended.minLength(1)]],
