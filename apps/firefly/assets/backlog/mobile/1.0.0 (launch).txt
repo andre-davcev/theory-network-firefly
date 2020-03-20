@@ -9,6 +9,8 @@ admin (design) - create design system
 admin (financing) - apply for rg&e innovation zone ignition grant
 admin (financing) - create pitch deck
 admin (firestore) - setup billing/usage alert triggers
+admin (marketing) - prioritize work for nextcorps interns
+admin (marketing) - communicate and assign tasks to nextcorps interns
 admin (marketing) - implement spanish translations
 admin (marketing) - research pipedrive & trello
 admin (marketing) - create lead generation strategy
@@ -17,8 +19,7 @@ admin (marketing) - submit firefly to ionic showcase
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
-admin (store) - release v1 on android
-admin (store) - release v1 on ios
+admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - required fields styling (icon/popover)
 app (errors) - setup error handling strategy
@@ -26,6 +27,8 @@ app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
 app (logging) - create logging strategy
 app (security) - setup router guards
+app (store) - release v1 on android
+app (store) - release v1 on ios
 automation (ci) - setup continuous integration (github actions)
 automation (ci) - setup ionic appflow
 automation (dev) - dockerize dev environment
