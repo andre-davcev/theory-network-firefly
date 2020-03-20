@@ -68,7 +68,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 geopoint       : null,
                 icon           : null,
                 image          : null,
-                interestId     : null,
                 interests      : [],
                 name           : null,
                 notifyComplete : false,

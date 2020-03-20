@@ -1,4 +1,3 @@
 coupons (all) - add coupons feature
 coupons (stripe) - setup metered stripe billing
 coupons (paypal) - setup paypal billing
-user-profile (all) - setup user profile

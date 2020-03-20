@@ -27,6 +27,7 @@ scroll to updated
 scroll vanish directive
 skeleton text
 sortable lists
+staggered animated lists
 swipe to archive
 toast html template
 translate push notifications
