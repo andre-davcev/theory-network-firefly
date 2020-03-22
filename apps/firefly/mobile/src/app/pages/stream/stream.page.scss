@@ -24,6 +24,10 @@
         }
     }
 
+    ion-segment-button {
+      --margin-end: 5px;
+    }
+
     ion-card {
         --background: #{$fire-color-white};
         //font-family: $fire-font-markerfelt;
