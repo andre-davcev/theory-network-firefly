@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream } from '@firefly/core';
 import { StreamInterest, Interest, Event } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
@@ -19,7 +19,7 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageStream extends BaseComponent implements OnInit
 {
-    @Select(StateUser.stream)        stream$:        Observable<Array<StreamInterest>>;
+    @Select(StateUserStream.data())  data$:          Observable<Array<StreamInterest>>;
     @Select(StateUser.streamFound)   found$:         Observable<boolean>;
     @Select(StateUser.streamEmpty)   empty$:         Observable<boolean>;
     @Select(StateStorage.images)     images$:        Observable<Record<string, StorageImage>>;
@@ -27,6 +27,7 @@ export class PageStream extends BaseComponent implements OnInit
     @Select(StateInterest.events)    events$:        Observable<Event[]>;
 
     public images: Record<string, StorageImage>;
+    public stream: Array<StreamInterest>;
     public currentlyOpenedItemIndex = -1;
     public currentlyOpenedItems = [];
     public interestEvents: Array<Array<Event>> = [];
@@ -42,6 +43,13 @@ export class PageStream extends BaseComponent implements OnInit
         pipe(takeUntil(this.destroy$)).
         subscribe((images: Record<string, StorageImage>) =>
             this.images = images
+        );
+
+        this.data$.pipe
+        (
+          takeUntil(this.destroy$))
+          .subscribe((interests: Array<StreamInterest>) =>{
+            this.stream = interests}
         );
     }
 
@@ -91,5 +99,21 @@ export class PageStream extends BaseComponent implements OnInit
         new ActionMobileLoadingShow(),
         new Navigate([Pages.InterestDetail], {id: interest.id})
       ])
+    }
+
+    public filterChanged(event: any): void
+    {
+      if(event.target.value === 'all')
+      {
+        this.stream = this.store.selectSnapshot(StateUserStream.data());
+      }
+      else if(event.target.value === 'unsubscribed')
+      {
+        this.stream = this.store.selectSnapshot(StateUser.stream);
+      }
+      else if(event.target.value === 'subscribed')
+      {
+        this.stream = this.store.selectSnapshot(StateUser.subscribedStream);
+      }
     }
 }

@@ -1,6 +1,6 @@
 import { User as FirebaseUser, auth, firestore } from 'firebase/app';
 
-import { State, Selector, Action, StateContext, NgxsOnInit, Store} from '@ngxs/store';
+import { State, Selector, Action, StateContext, NgxsOnInit, Store, Select} from '@ngxs/store';
 import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map, finalize } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -56,6 +56,7 @@ import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/no
 import { Injectable } from '@angular/core';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { ActionStorageUrlGet } from '@theory/firebase';
+import { Stream } from 'stream';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()
@@ -146,15 +147,26 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Selector([StateUserStream.data()])
+    public static subscribedStream(state: StateUserModel, stream: Array<StreamInterest>): Array<StreamInterest>
+    {
+      const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
+
+      return stream.
+            filter((interest: StreamInterest) =>
+                (subscriptions[interest.id] != null) && interest.userId !== StateUser.idState(state)
+            );
+    }
+
+    @Selector([StateUserStream.data()])
     public static streamFound(state: StateUserModel, stream: Array<StreamInterest>): boolean
     {
-        return StateUser.stream(state, stream).length > 0;
+        return stream.length > 0;
     }
 
     @Selector([StateUserStream.data()])
     public static streamEmpty(state: StateUserModel, stream: Array<StreamInterest>): boolean
     {
-        return StateUser.stream(state, stream).length === 0;
+        return stream.length === 0;
     }
 
     ngxsOnInit(context: StateContext<StateUserModel>)

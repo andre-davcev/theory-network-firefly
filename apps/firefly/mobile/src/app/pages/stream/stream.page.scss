@@ -47,6 +47,10 @@
         margin-bottom: 5px;
     }
 
+    .filter-buttons {
+      --padding-start: 8px;
+    }
+
     .image-cnt {
         height: 167px;
         object-fit: cover;
