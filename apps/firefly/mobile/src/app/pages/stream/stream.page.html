@@ -1,6 +1,23 @@
 <ion-content>
+  <ion-item lines="none">
+    <ion-card>
+      <ion-toolbar>
+        <ion-segment (ionChange)="filterChanged($event)">
+          <ion-segment-button value="all" checked>
+            All
+          </ion-segment-button>
+          <ion-segment-button value="subscribed">
+            Subscribed
+          </ion-segment-button>
+          <ion-segment-button value="unsubscribed">
+            Unsubscribed
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+    </ion-card>
+  </ion-item>
   <ion-list *ngIf="images && (found$ | async)">
-    <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">
+    <ion-item lines="none" *ngFor="let interest of stream; let i = index">
         <ion-card  *ngIf="images[interest.bucketPath]" elevation="1">
             <img (click)="selectInterest(interest)" class="image-cnt" [src]="images[interest.bucketPath].medium">
 
