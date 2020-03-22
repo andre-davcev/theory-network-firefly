@@ -8,7 +8,7 @@ import { RouterNavigation } from '@ngxs/router-plugin';
 import { PlatformEnum } from '@theory/ionic';
 
 import { Pages, ActionMobileAuthSelected, StateMobile } from '@firefly/mobile';
-import { ActionUserLogout, StateUser } from '@firefly/core';
+import { ActionUserLogout, StateUser, IconType, Color, IconSize } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
 import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
 import { PageLogin } from '../pages';
@@ -23,12 +23,17 @@ const { SplashScreen } = Plugins;
 })
 export class ComponentApp
 {
-    @Select(StateUser.found())             userFound$:          Observable<boolean>;
-    @Select(StateMobile.pageHome)          pageHome$:          Observable<boolean>;
-    @Select(StateMobile.pageSubscriptions) pageSubscriptions$: Observable<boolean>;
-    @Select(StateMobile.pagePublisher)     pagePublisher$:     Observable<boolean>;
+    @Select(StateUser.found())                userFound$:            Observable<boolean>;
+    @Select(StateMobile.pageHome)             pageHome$:             Observable<boolean>;
+    @Select(StateMobile.pageSubscriptions)    pageSubscriptions$:    Observable<boolean>;
+    @Select(StateMobile.pagePublishInterests) pagePublishInterests$: Observable<boolean>;
+    @Select(StateMobile.pagePublishEvents)    pagePublishEvents$:    Observable<boolean>;
+    @Select(StateMobile.pageUserProfile)      pageUserProfile$:      Observable<boolean>;
 
-    public Pages: any = Pages;
+    public Pages    : any = Pages;
+    public IconType : any = IconType;
+    public IconSize : any = IconSize;
+    public Color    : any = Color;
 
     constructor
     (

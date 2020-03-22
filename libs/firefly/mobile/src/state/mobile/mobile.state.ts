@@ -29,18 +29,21 @@ import { Alert } from '@firefly/cloud';
 @Injectable()
 export class StateMobile
 {
-    @Selector() static isLoading(state: StateMobileModel)         : boolean                { return state.loadingElement != null;}
-    @Selector() static loadingElement(state: StateMobileModel)    : any                    { return state.loadingElement; }
-    @Selector() static menuOpen(state: StateMobileModel)          : boolean                { return state.menuOpen; }
-    @Selector() static menuClosed(state: StateMobileModel)        : boolean                { return !state.menuOpen; }
-    @Selector() static pageRoot(state: StateMobileModel)          : string                 { return state.pageRoot; }
-    @Selector() static pageChild(state: StateMobileModel)         : Record<string, string> { return state.pageChild; }
-    @Selector() static pageAlerts(state: StateMobileModel)        : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Alert}`; }
-    @Selector() static pageStream(state: StateMobileModel)        : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
-    @Selector() static pageHome(state: StateMobileModel)          : boolean                { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
-    @Selector() static pageSubscriptions(state: StateMobileModel) : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
-    @Selector() static pagePublisher(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.AssetsInterests}`; }
-    @Selector() static indexAlerts(state: StateMobileModel)       : number                 { return state.indexAlerts; }
+    @Selector() static isLoading(state: StateMobileModel)            : boolean                { return state.loadingElement != null;}
+    @Selector() static loadingElement(state: StateMobileModel)       : any                    { return state.loadingElement; }
+    @Selector() static menuOpen(state: StateMobileModel)             : boolean                { return state.menuOpen; }
+    @Selector() static menuClosed(state: StateMobileModel)           : boolean                { return !state.menuOpen; }
+    @Selector() static pageRoot(state: StateMobileModel)             : string                 { return state.pageRoot; }
+    @Selector() static pageChild(state: StateMobileModel)            : Record<string, string> { return state.pageChild; }
+    @Selector() static pageAlerts(state: StateMobileModel)           : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Alert}`; }
+    @Selector() static pageStream(state: StateMobileModel)           : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
+    @Selector() static pageHome(state: StateMobileModel)             : boolean                { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
+    @Selector() static pageSubscriptions(state: StateMobileModel)    : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
+    @Selector() static pagePublishInterests(state: StateMobileModel) : boolean                { return StateMobile.pageRoot(state) === `/${Pages.AssetsInterests}`; }
+    @Selector() static pagePublishEvents(state: StateMobileModel)    : boolean                { return StateMobile.pageRoot(state) === `/${Pages.AssetsEvents}`; }
+    @Selector() static pageUserProfile(state: StateMobileModel)      : boolean                { return StateMobile.pageRoot(state) === `/${Pages.UserProfile}`; }
+    @Selector() static pageUserSettings(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.UserSettings}`; }
+    @Selector() static indexAlerts(state: StateMobileModel)          : number                 { return state.indexAlerts; }
 
     constructor
     (
