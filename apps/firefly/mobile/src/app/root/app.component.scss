@@ -25,11 +25,15 @@
 
         &.cpt-selected
         {
-            --background: #{$fire-color-dark-lighter}
+            --background: #{$fire-color-dark-lighter};
+        }
+
+        app-icon {
+            margin-right: 1rem;
         }
     }
 
     ion-list {
-        --ion-item-background: #{$fire-color-dark}
+        --ion-item-background: #{$fire-color-dark};
     }
 }

@@ -64,9 +64,15 @@ firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
 images (all) - remove all references
-interests (model) - migrate from bucketPath to bucketPaths
+interests (list) - add search bar placeholder
+interests (list) - add filter button
+interests (list) - implement ionic popover on filter button press
+interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
+interests (list) - add old on/off toggle logic to interests toggle
+interests (list) - show/hide plus button to interests screen if user is publisher
 interests (my/created) - experiment with dark theme
 interests (detail) - add interest-events query state
+interests (list) - implement simple interest search
 +interests (detail) - create interests detail
 +interests (detail) - allow public interests to enable other users to add event (via plus button)
 interests (detail) - if publisher show plus button
@@ -78,8 +84,7 @@ intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
 intro (slide 4) - Add these events to you calendar and get directions
 location (bigdatacloud) - take out temp fix for missing principalSubdivision
-menu - if publisher show "Create" "Interests" and "Events"
-menu - add "Manage" grouping to "My Interests"
+menu - if user is publisher show/hide "Events"
 notifications (model) - migrate from bucketPath to bucketPaths
 notifications (slide) - add more interest branding to slide (icon)
 notifications (detail) - cleanup styling/alignment
@@ -116,10 +121,8 @@ testing (security) - setup firestore security testing
 testing (security) - setup firestore storage testing
 testing (unit) - setup jest unit tests
 testing (user) - setup app user testing
-user-profile (menu) - add menu item
-user-profile (page) - setup user profile
-user-profile (page) - add profile picture
-user-profile (page) - add "publishing enabled" switch
+user-profile (page) - add profile picture, first name, last name
+user-profile (page) - add "Become A Publisher" switch
 
 *andre
 +dave

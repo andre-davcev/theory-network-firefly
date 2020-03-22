@@ -3,37 +3,34 @@
         <ion-content color="dark">
             <ion-list lines="none">
                 <ion-item-group>
-                    <ion-item-divider color="dark">
-                        <ion-label color="medium">{{ 'menu.title' | translate }}</ion-label>
-                    </ion-item-divider>
-
                     <ion-item [class.cpt-selected]="pageHome$ | async"
                               (click)="go(Pages.Home)">
                         <ion-icon name="home" slot="start" color="primary"></ion-icon>
                         <ion-label color="medium">{{ 'menu.home' | translate }}</ion-label>
                     </ion-item>
-
+<!--
                     <ion-item [class.cpt-selected]="pageSubscriptions$ | async"
                               (click)="go(Pages.Subscriptions)">
                         <ion-icon name="options" slot="start" color="primary"></ion-icon>
                         <ion-label color="medium">{{ 'menu.subscriptions' | translate }}</ion-label>
                     </ion-item>
-
-                    <ion-item [class.cpt-selected]="pagePublisher$ | async"
-                              (click)="go(Pages.AssetsInterests)">
-                        <ion-icon name="logo-rss" slot="start" color="primary"></ion-icon>
-                        <ion-label color="medium">{{ 'menu.publisher' | translate }}</ion-label>
-                    </ion-item>
-
-<!--
-                    <ion-item>
-                        <ion-icon name="contact" slot="start" color="primary"></ion-icon>
-                        <ion-label color="medium">{{'menu.account.profile' | translate}}</ion-label>
-                    </ion-item>
 -->
+
+                    <ion-item [class.cpt-selected]="pageUserProfile$ | async"
+                              (click)="go(Pages.UserProfile)">
+                        <ion-icon name="settings" slot="start" color="primary"></ion-icon>
+                        <ion-label color="medium">{{ 'menu.account.profile' | translate }}</ion-label>
+                    </ion-item>
+
+                    <ion-item [class.cpt-selected]="pagePublishEvents$ | async"
+                    (click)="go(Pages.AssetsEvents)">
+                        <ion-icon [name]="IconType.Events" slot="start" color="primary"></ion-icon>
+                        <ion-label color="medium">{{ 'menu.assets.events' | translate }}</ion-label>
+                    </ion-item>
+
                     <ion-item (click)="logout()">
                         <ion-icon name="lock-open" slot="start" color="primary"></ion-icon>
-                        <ion-label color="medium">{{'menu.account.log-out' | translate}}</ion-label>
+                        <ion-label color="medium">{{ 'menu.account.log-out' | translate }}</ion-label>
                     </ion-item>
                 </ion-item-group>
             </ion-list>

@@ -1,0 +1,16 @@
+<ion-header elevation="1">
+  <ion-toolbar color="light">
+      <ion-title>{{ 'page.user-profile.title' | translate }}</ion-title>
+
+      <ion-buttons slot="end">
+          <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+              <app-icon [name]="IconType.Menu"
+                        [color]="Color.Dark">
+              </app-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+</ion-content>
