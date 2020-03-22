@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-item lines="none">
+  <ion-item  *ngIf="(stream && (authenticated$ | async))" lines="none">
     <ion-card>
       <ion-toolbar>
         <ion-segment (ionChange)="filterChanged($event)">
