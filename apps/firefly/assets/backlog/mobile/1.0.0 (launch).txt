@@ -16,6 +16,7 @@ admin (marketing) - research pipedrive & trello
 admin (marketing) - create lead generation strategy
 admin (marketing) - research julian.com marketing strategies
 admin (marketing) - submit firefly to ionic showcase
+admin (marketing) - read the 4 hour workweek
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
@@ -36,7 +37,7 @@ automation (dev) - setup automated code formatting via prettier
 automation (dev) - setup page schematics
 automation (dev) - scrape events from google (pupeteer)
 auth (login) - switch user data cleanup and screen testing
-auth (login) - add login up validation and error messages
+auth (login) - add login validation and error messages
 auth (login) - add password recovery
 auth (sign-up) - error handling
 auth (sign-up) - on sign up, send initial notifications 30 seconds later
@@ -111,7 +112,6 @@ publisher (interest detail edit) - add image for interest stream
 *publisher (event edit) - move select cluster to select icon
 *publisher (event edit) - fix edit functionality
 *publisher (event edit) - reverse geocode map
-subscriptions (list) - implement slide to delete
 subscriptions (all) - debounce quick updates
 subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
 testing (coverage) - setup code coverage
@@ -121,8 +121,7 @@ testing (security) - setup firestore security testing
 testing (security) - setup firestore storage testing
 testing (unit) - setup jest unit tests
 testing (user) - setup app user testing
-user-profile (page) - add profile picture, first name, last name
-user-profile (page) - add "Become A Publisher" switch
+*user-profile (page) - implement save/update
 
 *andre
 +dave
