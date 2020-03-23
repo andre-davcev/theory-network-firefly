@@ -161,7 +161,12 @@
   "page.event-location.title"             : "Event Location",
   "page.event-location.searchPlaceholder" : "Search Locations",
 
-  "page.user-profile.title"  : "User Profile",
+  "page.user-profile.title"               : "User Profile",
+  "page.user-profile.isPublisher"         : "Become A Publisher",
+  "page.user-profile.iconPlaceholder"     : "profile picture",
+  "page.user-profile.titlePlaceholder"    : "First Name",
+  "page.user-profile.subtitlePlaceholder" : "Last Name",
+
   "page.user-settings.title" : "Settings",
 
   "page.icon-library.title" : "Camera",

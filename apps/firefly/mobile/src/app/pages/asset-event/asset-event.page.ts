@@ -47,10 +47,10 @@ export class PageAssetEvent
 
     constructor
     (
-        private store:         Store,
-        private modalController:         ModalController,
-        private resolver:      ResolverPageAssetsInterests,
-        public  navController: NavController
+        private store:           Store,
+        private modalController: ModalController,
+        private resolver:        ResolverPageAssetsInterests,
+        public  navController:   NavController
     ) { }
 
     public ionViewWillEnter(): void

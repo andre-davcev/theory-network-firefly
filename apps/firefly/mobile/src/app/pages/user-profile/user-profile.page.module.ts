@@ -7,6 +7,9 @@ import { ModuleDirectiveElevation } from '@theory/google';
 import { RoutesPageUserProfile } from './user-profile.page.routes';
 import { RouterModule } from '@angular/router';
 import { ModuleComponentIcon } from '@firefly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ModuleComponentItemHeader } from '@firefly/mobile';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 @NgModule
 ({
@@ -15,7 +18,10 @@ import { ModuleComponentIcon } from '@firefly/core';
         ModulePage,
         RouterModule.forChild(RoutesPageUserProfile),
         ModuleDirectiveElevation,
-        ModuleComponentIcon
+        ModuleComponentIcon,
+        ReactiveFormsModule,
+        ModuleComponentItemHeader,
+        NgxsFormPluginModule
     ],
 
     declarations : [PageUserProfile],

@@ -11,6 +11,35 @@
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
 
+<ion-content>
+  <form novalidate
+        *ngIf="form$ | async"
+        [formGroup]="form$ | async"
+        ngxsForm="user-profiles.form">
+      <app-item-header [form]="form$ | async"
+                       [iconUrl]="iconUrl$ | async"
+                       title="nameFirst"
+                       subtitle="nameLast"
+                       iconUrlEmpty="assets/icons/avatar-empty.svg"
+                       [titlePlaceholder]="'page.user-profile.titlePlaceholder' | translate"
+                       [subtitlePlaceholder]="'page.user-profile.subtitlePlaceholder' | translate"
+                       [iconPlaceholder]="'page.user-profile.iconPlaceholder' | translate"
+                       (iconClicked)="selectIcon()">
+      </app-item-header>
+
+      <ion-list>
+          <ion-item-group>
+              <ion-item-divider></ion-item-divider>
+
+              <ion-item>
+                  <ion-icon name="lock" slot="start" color="medium"></ion-icon>
+                  <ion-label>{{ 'page.user-profile.isPublisher' | translate }}</ion-label>
+                  <ion-toggle formControlName="isPublisher" color="primary"></ion-toggle>
+              </ion-item>
+
+              <ion-item-divider></ion-item-divider>
+          </ion-item-group>
+      </ion-list>
+  </form>
 </ion-content>

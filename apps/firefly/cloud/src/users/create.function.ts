@@ -11,15 +11,15 @@ firestore.
 document('users/{id}').
 onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
 {
-    const id   : string = snapshot.id;
-    const user : User   = ServiceFirestore.create<User>(snapshot, Version.Users);
+    const userId : string = snapshot.id;
+    const user   : User   = ServiceFirestore.create<User>(snapshot, Version.Users);
 
     const documentInterest : DocumentReference = database.collection('clusters').doc();
     const documentAlert    : DocumentReference = database.collection('alerts').doc();
 
     const interest: Partial<Interest> =
     {
-        userId : id,
+        userId,
 
         name            : 'Your first interest!',
         tagline         : 'Come enjoy my first event interest',
@@ -31,7 +31,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
 
     const alert: Partial<Alert> =
     {
-        userId : id,
+        userId,
 
         name        : 'Your first alert!',
         description : `This is your first alert. Once you subscribe to Firefly Interests found on the home Discover screen, you will receive alerts when new events are posted in each interest!`,
@@ -46,19 +46,20 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
 
     const userProfile: Partial<UserProfile> =
     {
-        userId: id,
+        userId,
 
         nameFirst   : '',
         nameLast    : '',
-        bucketPath  : '',
+        icon        : '',
         companyName : '',
-        isCompany   : false
+        isCompany   : false,
+        isPublisher : false
     };
 
     return Promise.all
     ([
         snapshot.ref.update(user),
-        database.collection('user-profiles').doc(id).create(userProfile),
+        database.collection('user-profiles').doc(userId).create(userProfile),
         documentInterest.set(interest),
         documentAlert.set(alert),
         ServiceCities.createIfNew(database, user)

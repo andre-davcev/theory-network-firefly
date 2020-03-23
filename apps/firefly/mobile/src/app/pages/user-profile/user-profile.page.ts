@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
-import { IconType, Color } from '@firefly/core';
+import { Component } from '@angular/core';
+import { IconType, Color, StateUserProfile } from '@firefly/core';
 import { Select, Store } from '@ngxs/store';
 import { StateMobile } from '@firefly/mobile';
 import { Observable } from 'rxjs';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
 import { MenuController } from '@ionic/angular';
+import { FormGroup } from '@angular/forms';
 
 @Component
 ({
@@ -16,7 +17,8 @@ import { MenuController } from '@ionic/angular';
 
 export class PageUserProfile
 {
-    @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+    @Select(StateUserProfile.formGroup()) form$:     Observable<FormGroup>
+    @Select(StateMobile.menuOpen)         menuOpen$: Observable<boolean>;
 
     public IconType : any = IconType;
     public Color    : any = Color;
@@ -36,5 +38,10 @@ export class PageUserProfile
     public menuOpen(): void
     {
         this.menu.open();
+    }
+
+    public selectIcon(): void
+    {
+
     }
 }

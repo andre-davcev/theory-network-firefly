@@ -29,7 +29,8 @@ import {
   StateUserIcons,
   StateUserImages,
   StateUserStream,
-  StateUserSubscriptions
+  StateUserSubscriptions,
+  StateUserProfile
 } from '@firefly/core';
 import { StateNotifications } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
@@ -105,7 +106,8 @@ export function createTranslateLoader(http: HttpClient)
             StateUserIcons,
             StateUserImages,
             StateUserStream,
-            StateUserSubscriptions
+            StateUserSubscriptions,
+            StateUserProfile
         ]),
 
         NgxsRouterPluginModule.forRoot(),

@@ -6,5 +6,6 @@ export * from './images.service';
 export * from './location.service';
 export * from './streams.service';
 export * from './subscriptions.service';
+export * from './user-profiles.service';
 export * from './users.service';
 export * from './util.service';
