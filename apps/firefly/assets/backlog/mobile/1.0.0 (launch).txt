@@ -70,7 +70,7 @@ interests (list) - add filter button
 interests (list) - implement ionic popover on filter button press
 interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
 interests (list) - add old on/off toggle logic to interests toggle
-interests (list) - show/hide plus button to interests screen if user is publisher
+*interests (list) - show/hide plus button to interests screen if user is publisher
 interests (my/created) - experiment with dark theme
 interests (detail) - add interest-events query state
 interests (list) - implement simple interest search
@@ -85,7 +85,6 @@ intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
 intro (slide 4) - Add these events to you calendar and get directions
 location (bigdatacloud) - take out temp fix for missing principalSubdivision
-menu - if user is publisher show/hide "Events"
 notifications (model) - migrate from bucketPath to bucketPaths
 notifications (slide) - add more interest branding to slide (icon)
 notifications (detail) - cleanup styling/alignment
@@ -102,16 +101,16 @@ publisher (interest detail) - event click navigates to edit event
 publisher (interest detail) - add outside event review (accept/reject)
 publisher (interest detail) - subscribe from publisher for interest owner
 publisher (interest detail edit) - add image for interest stream
-*publisher (event edit) - migrate user-events to cluster-events
-*publisher (event edit) - migrate from bucketPath to icon/image
-*publisher (event edit) - move icon cluster to icon select from photo library
-*publisher (event edit) - move image to image select from photo library
-*publisher (event edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
-*publisher (event edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
-*publisher (event edit) - delete old icon/image paths
-*publisher (event edit) - move select cluster to select icon
-*publisher (event edit) - fix edit functionality
-*publisher (event edit) - reverse geocode map
+publisher (event edit) - migrate user-events to cluster-events
+publisher (event edit) - migrate from bucketPath to icon/image
+publisher (event edit) - move icon cluster to icon select from photo library
+publisher (event edit) - move image to image select from photo library
+publisher (event edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
+publisher (event edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
+publisher (event edit) - delete old icon/image paths
+publisher (event edit) - move select cluster to select icon
+publisher (event edit) - fix edit functionality
+publisher (event edit) - reverse geocode map
 subscriptions (all) - debounce quick updates
 subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
 testing (coverage) - setup code coverage

@@ -1,4 +1,4 @@
-import { State, Action, StateContext, Store } from '@ngxs/store';
+import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 import { of } from 'rxjs';
 
 import { UserProfile } from '@firefly/cloud';
@@ -67,6 +67,8 @@ export class StateUserProfile extends StateDocument<UserProfile, StateUserProfil
             }
         );
     }
+
+    @Selector() static isPublisher(state: StateUserProfileModel) : boolean { return StateUser.dataState(state).isPublisher; }
 
     @Action(ActionUserProfileReset)
     reset(context: StateContext<StateUserProfileModel>)
