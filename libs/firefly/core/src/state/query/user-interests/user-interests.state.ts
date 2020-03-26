@@ -60,7 +60,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
                     return {
                         ...interest,
                         score : 0,
-                        on    : subscriptions[interest.id] == null ? false : subscriptions[interest.id].on
+                        on    : subscriptions[interest.id] == null ? false : true
                     };
                 }) :
             stream.

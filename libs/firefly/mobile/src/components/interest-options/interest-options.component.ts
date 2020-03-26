@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, OnDestroy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { InterestType, ActionUserInterestTypeSet } from '@firefly/core';
 import { Store } from '@ngxs/store';
+import { PopoverController } from '@ionic/angular';
 
 @Component
 ({
@@ -11,7 +12,7 @@ import { Store } from '@ngxs/store';
     changeDetection : ChangeDetectionStrategy.OnPush
 })
 
-export class ComponentInterestOptions implements OnDestroy
+export class ComponentInterestOptions
 {
     public InterestType: any = InterestType;
 
@@ -19,17 +20,15 @@ export class ComponentInterestOptions implements OnDestroy
 
     constructor
     (
-        private store: Store
+        private store:   Store,
+        private popover: PopoverController
     )
     { }
 
     public filterChanged(event: CustomEvent): void
     {
-        this.interestType = event.detail.value;
-    }
+        this.store.dispatch(new ActionUserInterestTypeSet(event.detail.value));
 
-    public ngOnDestroy(): void
-    {
-        this.store.dispatch(new ActionUserInterestTypeSet(this.interestType));
+        this.popover.dismiss();
     }
 }
