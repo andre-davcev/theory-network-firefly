@@ -3,7 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests } from '@firefly/core';
-import { StreamInterest, Interest, Event } from '@firefly/cloud';
+import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
@@ -24,12 +24,14 @@ export class PageStream extends BaseComponent implements OnInit
     @Select(StateInterest.events)           events$:        Observable<Event[]>;
     @Select(StateUserInterests.stream)      stream$:        Observable<Array<StreamInterest>>;
     @Select(StateUserInterests.streamFound) found$:         Observable<boolean>;
+    @Select(StateUser.subscriptionsStatus)  subscriptions$: Observable<Record<string, SubscriptionPartial>>;
 
     public images: Record<string, StorageImage>;
     public currentlyOpenedItemIndex = -1;
     public currentlyOpenedItems = [];
     public interestEvents: Array<Array<Event>> = [];
     public spinner: Array<boolean> = [];
+    public subscriptions: Record<string, SubscriptionPartial> = {};
 
     public IconType: any = IconType;
 
@@ -42,6 +44,12 @@ export class PageStream extends BaseComponent implements OnInit
         subscribe((images: Record<string, StorageImage>) =>
             this.images = images
         );
+
+        this.subscriptions$.
+        pipe(takeUntil(this.destroy$)).
+        subscribe((subscriptions: Record<string, SubscriptionPartial>) =>
+            this.subscriptions = subscriptions
+        )
     }
 
     public toggle(subscribed: boolean, stream: StreamInterest): void

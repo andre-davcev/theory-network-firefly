@@ -20,8 +20,8 @@ admin (marketing) - read the 4 hour workweek
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
-*admin (staffing) - screenshots of current app
-*admin (staffing) - current firefly screenshot flow
+admin (staffing) - screenshots of current app
+admin (staffing) - current firefly screenshot flow
 admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - required fields styling (icon/popover)
@@ -67,12 +67,12 @@ firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
 images (all) - remove all references
-interests (list) - add search bar placeholder
-interests (list) - add filter button
-interests (list) - implement ionic popover on filter button press
+*interests (list) - on search click hide other buttons and show search bar
 interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
-interests (list) - add old on/off toggle logic to interests toggle
-*interests (list) - show/hide plus button to interests screen if user is publisher
+*interests (list) - add on/off toggle to subscribed
+*interests (list) - show/hide plus button to interests screen if user is publisher and filtered by created
+*interests (list) - for empty created interests show different message for publisher
+*interests (list) - for empty created interests show different message for non publisher
 interests (my/created) - experiment with dark theme
 interests (detail) - add interest-events query state
 interests (list) - implement simple interest search
@@ -123,6 +123,7 @@ testing (security) - setup firestore storage testing
 testing (unit) - setup jest unit tests
 testing (user) - setup app user testing
 *user-profile (page) - implement save/update
+*user-profile (page) - add read only user email
 
 *andre
 +dave
