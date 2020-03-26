@@ -1,7 +1,7 @@
 <ion-content>
     <ion-card>
         <ion-segment mode="ios"
-                    [value]="InterestType.Unsubscribed"
+                    [value]="interestType"
                     (ionChange)="filterChanged($event)">
             <ion-segment-button [value]="InterestType.Unsubscribed">{{ 'page.interest.filter.unsubscribed' | translate }}</ion-segment-button>
             <ion-segment-button [value]="InterestType.Subscribed">{{ 'page.interest.filter.subscribed' | translate }}</ion-segment-button>

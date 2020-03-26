@@ -3,6 +3,7 @@ import { Credentials } from '@theory/core';
 
 import { User } from '@firefly/cloud';
 import { ActionsUser } from './user.actions.enum';
+import { InterestType } from '@firefly/core/enums';
 
 export class ActionUserReset  { static readonly type = ActionsUser.Reset;   constructor() { } }
 export class ActionUserGet    { static readonly type = ActionsUser.Get;     constructor(public id: string) { } }
@@ -29,3 +30,5 @@ export class ActionUserSubscriptionToggle       { static readonly type = Actions
 export class ActionUserSubscriptionAdd          { static readonly type = ActionsUser.SubscriptionAdd;          constructor(public id: string) { } }
 export class ActionUserSubscriptionRemove       { static readonly type = ActionsUser.SubscriptionRemove;       constructor(public id: string) { } }
 export class ActionUserSubscriptionOnOff        { static readonly type = ActionsUser.SubscriptionOnOff;        constructor(public id: string, public on: boolean) { } }
+
+export class ActionUserInterestTypeSet { static readonly type = ActionsUser.InterestTypeSet; constructor(public interestType: InterestType) { } }
