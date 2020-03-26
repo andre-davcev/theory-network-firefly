@@ -1,3 +1,4 @@
+export * from './interest-options';
 export * from './item-description';
 export * from './item-image';
 export * from './item-header';

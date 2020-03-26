@@ -42,3 +42,9 @@ ion-toast {
 ion-modal {
     --background: #{$fire-color-dark};
 }
+
+:root {
+  ion-popover {
+      --width: calc(100% - 1.5rem);
+  }
+}

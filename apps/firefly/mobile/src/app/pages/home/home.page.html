@@ -36,7 +36,8 @@
 
             <ion-button *ngIf="(pageStream$ | async)"
                         icon-only
-                        [disabled]="menuOpen$ | async">
+                        [disabled]="menuOpen$ | async"
+                        (click)="showPopover($event)">
                 <ion-icon name="options" color="dark" size="large"></ion-icon>
             </ion-button>
 

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, PopoverController } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
-import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect } from '@firefly/mobile';
+import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentInterestOptions } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
@@ -33,8 +33,9 @@ export class PageHome extends BaseComponent
 
     constructor
     (
-        private menu  : MenuController,
-        private store : Store
+        private menu    : MenuController,
+        private store   : Store,
+        private popover : PopoverController
     )
     {
         super();
@@ -69,5 +70,17 @@ export class PageHome extends BaseComponent
             )
         ).
         subscribe();
+    }
+
+    public async showPopover(event: any): Promise<void>
+    {
+        const popover: HTMLIonPopoverElement = await this.popover.create
+        ({
+            component: ComponentInterestOptions,
+            event,
+            translucent: true
+        });
+
+        return await popover.present();
     }
 }
