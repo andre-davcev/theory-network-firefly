@@ -1,7 +1,5 @@
 <ion-content>
-<!--
   <ion-item  *ngIf="(stream && (authenticated$ | async))" lines="none">
-
     <ion-card>
       <ion-toolbar>
         <ion-segment (ionChange)="filterChanged($event)">
@@ -18,7 +16,7 @@
       </ion-toolbar>
     </ion-card>
   </ion-item>
--->
+
   <ion-list *ngIf="images && (found$ | async)">
     <ion-item lines="none" *ngFor="let interest of stream; let i = index">
         <ion-card  *ngIf="images[interest.bucketPath]" elevation="1">
