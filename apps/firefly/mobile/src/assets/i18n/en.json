@@ -74,7 +74,7 @@
 
   "page.alert.detail.title": "Notification Detail",
 
-  "page.notifications.title"                 : "Notifications",
+  "page.notifications.title"                 : "Events",
   "page.notifications.tabFired"              : "Fired",
   "page.notifications.tabSubscriptions"      : "Subscriptions",
   "page.notifications.addCoupon"             : "Add Coupon",
