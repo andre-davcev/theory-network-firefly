@@ -1,11 +1,21 @@
 <ion-content>
     <ion-card>
-        <ion-segment mode="ios"
-                    [value]="interestType"
-                    (ionChange)="filterChanged($event)">
+        <ion-segment *ngIf="isStream"
+                     mode="ios"
+                     [value]="interestType"
+                     (ionChange)="filterChanged($event)">
             <ion-segment-button [value]="InterestType.Unsubscribed">{{ 'page.interest.filter.unsubscribed' | translate }}</ion-segment-button>
             <ion-segment-button [value]="InterestType.Subscribed">{{ 'page.interest.filter.subscribed' | translate }}</ion-segment-button>
             <ion-segment-button [value]="InterestType.Created">{{ 'page.interest.filter.created' | translate }}</ion-segment-button>
+        </ion-segment>
+
+        <ion-segment *ngIf="!isStream"
+                     mode="ios"
+                     [value]="eventType"
+                     (ionChange)="filterChanged($event)">
+            <ion-segment-button [value]="EventType.New">{{ 'page.event.filter.new' | translate }}</ion-segment-button>
+            <ion-segment-button [value]="EventType.Upcoming">{{ 'page.event.filter.upcoming' | translate }}</ion-segment-button>
+            <ion-segment-button [value]="EventType.Created">{{ 'page.event.filter.created' | translate }}</ion-segment-button>
         </ion-segment>
     </ion-card>
 </ion-content>

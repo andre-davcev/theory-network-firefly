@@ -105,6 +105,10 @@
   "page.interest.filter.subscribed"   : "Subscribed",
   "page.interest.filter.created"      : "Created",
 
+  "page.event.filter.new"      : "New",
+  "page.event.filter.upcoming" : "Upcoming",
+  "page.event.filter.created"  : "Created",
+
   "page.alerts.empty"        : "Looks like you have no new notifications right now. Subscribe to new Interests or check out your old notifications below.",
   "page.stream.empty"        : "Our swarm of fireflies are busy building your Interest recommendations. Check back later!",
   "page.subscriptions.empty" : "You have no Subscriptions right now. Go to the home Discover Interests screen to find new interests in your area!",

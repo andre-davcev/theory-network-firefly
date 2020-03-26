@@ -79,7 +79,9 @@ export class PageHome extends BaseComponent
             component: ComponentInterestOptions,
             componentProps:
             {
-                interestType: this.store.selectSnapshot(StateUser.interestType)
+                interestType : this.store.selectSnapshot(StateUser.interestType),
+                eventType    : this.store.selectSnapshot(StateUser.eventType),
+                isStream     : this.store.selectSnapshot(StateMobile.pageStream)
             },
             event,
             translucent: true

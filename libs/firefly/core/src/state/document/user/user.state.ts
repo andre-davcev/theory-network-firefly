@@ -34,7 +34,8 @@ import {
     ActionUserSubscriptionAdd,
     ActionUserSubscriptionRemove,
     ActionUserSubscriptionOnOff,
-    ActionUserInterestTypeSet
+    ActionUserInterestTypeSet,
+    ActionUserEventTypeSet
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -58,7 +59,7 @@ import { Injectable } from '@angular/core';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { ActionStorageUrlGet } from '@theory/firebase';
 import { StateUserInterests } from '../../query';
-import { InterestType } from '@firefly/core/enums';
+import { InterestType, EventType } from '@firefly/core/enums';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()
@@ -137,6 +138,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : !user.subscriptionsStatus ? {} : user.subscriptionsStatus; }
     @Selector() static tokens(state:StateUserModel)                  : Array<string>{ const user: User = StateUser.dataState(state); return user == null ? null : user.tokens; }
     @Selector() static interestType(state:StateUserModel)            : InterestType { return state.interestType; }
+    @Selector() static eventType(state:StateUserModel)               : EventType    { return state.eventType; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
@@ -535,5 +537,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     interestTypeSet({ patchState }: StateContext<StateUserModel>, { interestType }: ActionUserInterestTypeSet)
     {
         patchState({ interestType });
+    }
+
+    @Action(ActionUserEventTypeSet)
+    eventTypeSet({ patchState }: StateContext<StateUserModel>, { eventType }: ActionUserEventTypeSet)
+    {
+        patchState({ eventType });
     }
 }
