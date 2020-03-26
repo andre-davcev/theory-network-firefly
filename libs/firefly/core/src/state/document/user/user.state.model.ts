@@ -1,4 +1,5 @@
 import { StateDocumentModel } from '@theory/ngxs';
+import { InterestType } from '@firefly/core/enums';
 
 export interface StateUserModel extends StateDocumentModel
 {
@@ -7,4 +8,5 @@ export interface StateUserModel extends StateDocumentModel
     authenticated  : boolean;
     authenticating : boolean;
     initialized    : boolean;
+    interestType   : InterestType;
 }

@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy, Input } from '@angular/core';
 
-import { InterestType } from '@firefly/core';
+import { InterestType, ActionUserInterestTypeSet } from '@firefly/core';
+import { Store } from '@ngxs/store';
 
 @Component
 ({
@@ -10,12 +11,25 @@ import { InterestType } from '@firefly/core';
     changeDetection : ChangeDetectionStrategy.OnPush
 })
 
-export class ComponentInterestOptions
+export class ComponentInterestOptions implements OnDestroy
 {
     public InterestType: any = InterestType;
 
+    @Input() interestType: InterestType;
+
+    constructor
+    (
+        private store: Store
+    )
+    { }
+
     public filterChanged(event: CustomEvent): void
     {
-        console.log(event.detail.value);
+        this.interestType = event.detail.value;
+    }
+
+    public ngOnDestroy(): void
+    {
+        this.store.dispatch(new ActionUserInterestTypeSet(this.interestType));
     }
 }

@@ -77,6 +77,10 @@ export class PageHome extends BaseComponent
         const popover: HTMLIonPopoverElement = await this.popover.create
         ({
             component: ComponentInterestOptions,
+            componentProps:
+            {
+                interestType: this.store.selectSnapshot(StateUser.interestType)
+            },
             event,
             translucent: true
         });

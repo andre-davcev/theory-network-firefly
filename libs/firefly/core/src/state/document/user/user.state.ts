@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
-import { User, Location, StreamInterest, SubscriptionPartial, Subscription } from '@firefly/cloud';
+import { User, Location, StreamInterest, SubscriptionPartial, Subscription, Interest } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -33,7 +33,8 @@ import {
     ActionUserNotLoggedIn,
     ActionUserSubscriptionAdd,
     ActionUserSubscriptionRemove,
-    ActionUserSubscriptionOnOff
+    ActionUserSubscriptionOnOff,
+    ActionUserInterestTypeSet
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -56,6 +57,8 @@ import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/no
 import { Injectable } from '@angular/core';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { ActionStorageUrlGet } from '@theory/firebase';
+import { StateUserInterests } from '../../query';
+import { InterestType } from '@firefly/core/enums';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()
@@ -133,40 +136,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : !user.subscriptionsStatus ? {} : user.subscriptionsStatus; }
     @Selector() static tokens(state:StateUserModel)                  : Array<string>{ const user: User = StateUser.dataState(state); return user == null ? null : user.tokens; }
-
-    @Selector([StateUserStream.data()])
-    public static stream(state: StateUserModel, stream: Array<StreamInterest>): Array<StreamInterest>
-    {
-        const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-
-        return stream.
-            filter((interest: StreamInterest) =>
-                (subscriptions[interest.id] == null || interest.on != null) && interest.userId !== StateUser.idState(state)
-            );
-    }
-
-    @Selector([StateUserStream.data()])
-    public static subscribedStream(state: StateUserModel, stream: Array<StreamInterest>): Array<StreamInterest>
-    {
-      const subscriptions : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-
-      return stream.
-            filter((interest: StreamInterest) =>
-                (subscriptions[interest.id] != null) && interest.userId !== StateUser.idState(state)
-            );
-    }
-
-    @Selector([StateUserStream.data()])
-    public static streamFound(state: StateUserModel, stream: Array<StreamInterest>): boolean
-    {
-        return stream.length > 0;
-    }
-
-    @Selector([StateUserStream.data()])
-    public static streamEmpty(state: StateUserModel, stream: Array<StreamInterest>): boolean
-    {
-        return stream.length === 0;
-    }
+    @Selector() static interestType(state:StateUserModel)            : InterestType { return state.interestType; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
@@ -559,5 +529,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             new ActionUserStreamSync(streamInterest),
             new ActionUserSubscriptionsSync(subscription)
         ]);
+    }
+
+    @Action(ActionUserInterestTypeSet)
+    interestTypeSet({ patchState }: StateContext<StateUserModel>, { interestType }: ActionUserInterestTypeSet)
+    {
+        patchState({ interestType });
     }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests } from '@firefly/core';
 import { StreamInterest, Interest, Event } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
@@ -19,15 +19,13 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageStream extends BaseComponent implements OnInit
 {
-    @Select(StateUserStream.data())  data$:          Observable<Array<StreamInterest>>;
-    @Select(StateUser.streamFound)   found$:         Observable<boolean>;
-    @Select(StateUser.streamEmpty)   empty$:         Observable<boolean>;
-    @Select(StateStorage.images)     images$:        Observable<Record<string, StorageImage>>;
-    @Select(StateUser.authenticated) authenticated$: Observable<boolean>;
-    @Select(StateInterest.events)    events$:        Observable<Event[]>;
+    @Select(StateStorage.images)            images$:        Observable<Record<string, StorageImage>>;
+    @Select(StateUser.authenticated)        authenticated$: Observable<boolean>;
+    @Select(StateInterest.events)           events$:        Observable<Event[]>;
+    @Select(StateUserInterests.stream)      stream$:        Observable<Array<StreamInterest>>;
+    @Select(StateUserInterests.streamFound) found$:         Observable<boolean>;
 
     public images: Record<string, StorageImage>;
-    public stream: Array<StreamInterest>;
     public currentlyOpenedItemIndex = -1;
     public currentlyOpenedItems = [];
     public interestEvents: Array<Array<Event>> = [];
@@ -43,13 +41,6 @@ export class PageStream extends BaseComponent implements OnInit
         pipe(takeUntil(this.destroy$)).
         subscribe((images: Record<string, StorageImage>) =>
             this.images = images
-        );
-
-        this.data$.pipe
-        (
-          takeUntil(this.destroy$))
-          .subscribe((interests: Array<StreamInterest>) =>{
-            this.stream = interests}
         );
     }
 
@@ -100,7 +91,7 @@ export class PageStream extends BaseComponent implements OnInit
         new Navigate([Pages.InterestDetail], {id: interest.id})
       ])
     }
-
+/*
     public filterChanged(event: any): void
     {
       if(event.target.value === 'all')
@@ -116,4 +107,5 @@ export class PageStream extends BaseComponent implements OnInit
         this.stream = this.store.selectSnapshot(StateUser.subscribedStream);
       }
     }
+*/
 }
