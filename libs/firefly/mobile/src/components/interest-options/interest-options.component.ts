@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { InterestType, ActionUserInterestTypeSet } from '@firefly/core';
+import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet } from '@firefly/core';
 import { Store } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 
@@ -14,9 +14,12 @@ import { PopoverController } from '@ionic/angular';
 
 export class ComponentInterestOptions
 {
-    public InterestType: any = InterestType;
+    public InterestType : any = InterestType;
+    public EventType    : any = EventType;
 
-    @Input() interestType: InterestType;
+    @Input() interestType : InterestType;
+    @Input() eventType    : EventType;
+    @Input() isStream     : boolean;
 
     constructor
     (
@@ -27,7 +30,14 @@ export class ComponentInterestOptions
 
     public filterChanged(event: CustomEvent): void
     {
-        this.store.dispatch(new ActionUserInterestTypeSet(event.detail.value));
+        if (this.isStream)
+        {
+            this.store.dispatch(new ActionUserInterestTypeSet(event.detail.value));
+        }
+        else
+        {
+            this.store.dispatch(new ActionUserEventTypeSet(event.detail.value));
+        }
 
         this.popover.dismiss();
     }

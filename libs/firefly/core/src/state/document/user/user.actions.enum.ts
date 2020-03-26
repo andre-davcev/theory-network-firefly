@@ -27,5 +27,6 @@ export enum ActionsUser
     SubscriptionRemove       = '[User] Subscription Remove',
     SubscriptionOnOff        = '[User] Subscription On/Off',
 
-    InterestTypeSet = '[User] Interest Type Set'
+    InterestTypeSet = '[User] Interest Type Set',
+    EventTypeSet    = '[User] Event Type Set'
 }

@@ -3,7 +3,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { StateUserModel } from './user.state.model';
 import { CoreUtil } from '@theory/core';
 import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
-import { InterestType } from '@firefly/core/enums';
+import { InterestType, EventType } from '@firefly/core/enums';
 
 export const StateUserOptions: StoreOptions<StateUserModel> =
 {
@@ -20,6 +20,7 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         authenticated  : false,
         authenticating : false,
         initialized    : false,
-        interestType   : InterestType.Unsubscribed
+        interestType   : InterestType.Unsubscribed,
+        eventType      : EventType.New
     }
 };
