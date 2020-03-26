@@ -17,6 +17,10 @@
         }
     }
 
+    ion-searchbar {
+        --box-shadow: none;
+    }
+
     ion-slides {
         --background: #{$fire-color-grey-light};
         --bullet-background: #{$fire-color-black};
