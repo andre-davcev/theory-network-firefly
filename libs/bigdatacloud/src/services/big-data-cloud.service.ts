@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { ResponseReverseGeocode } from '../responses';
 import { Injectable } from '@angular/core';
@@ -24,8 +23,6 @@ export class ServiceBigDataCloud
             set('longitude',        `${longitude}`).
             set('localityLanguage', `${localityLanguage}`);
 
-        return this.http.get<ResponseReverseGeocode>(url, { params })
-        // ToDo: DELETE THIS
-        .pipe(map(response => ({...response, principalSubdivision: 'New York'})));
+        return this.http.get<ResponseReverseGeocode>(url, { params });
     }
 }
