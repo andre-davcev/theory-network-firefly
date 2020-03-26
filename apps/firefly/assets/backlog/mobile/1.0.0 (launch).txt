@@ -67,12 +67,15 @@ firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
 images (all) - remove all references
+*interests (list) - hide filter button when logged out
+*interests (list) - on first click of created add spinner and show created interests
 *interests (list) - on search click hide other buttons and show search bar
-interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
+*interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
 *interests (list) - add on/off toggle to subscribed
 *interests (list) - show/hide plus button to interests screen if user is publisher and filtered by created
 *interests (list) - for empty created interests show different message for publisher
 *interests (list) - for empty created interests show different message for non publisher
+*interests (list) - migrate clusters collection to interests
 interests (my/created) - experiment with dark theme
 interests (detail) - add interest-events query state
 interests (list) - implement simple interest search
@@ -81,7 +84,6 @@ interests (list) - implement simple interest search
 interests (detail) - if publisher show plus button
 +interests (stream) - show subscribed interests at top
 +interests (stream) - add filter/sort button (subscribed, unsubscribed, sort, popular, hot, ...)
-interests (firestore) - migrate clusters collection to interests
 intro (slide 1) - Where life comes to you
 intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Be notified when new events are posted to your interests
