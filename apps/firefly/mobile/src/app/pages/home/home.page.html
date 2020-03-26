@@ -23,7 +23,23 @@
           {{ ((pageAlerts$ | async) ? 'page.notifications.title' : 'page.stream.title') | translate}}
         </ion-title>
 
+<!--
+        <ion-searchbar showCancelButton="focus"></ion-searchbar>
+-->
+
         <ion-buttons slot="end">
+            <ion-button *ngIf="(pageStream$ | async)"
+                        icon-only
+                        [disabled]="menuOpen$ | async">
+                <ion-icon name="search" color="dark" size="large"></ion-icon>
+            </ion-button>
+
+            <ion-button *ngIf="(pageStream$ | async)"
+                        icon-only
+                        [disabled]="menuOpen$ | async">
+                <ion-icon name="options" color="dark" size="large"></ion-icon>
+            </ion-button>
+
             <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
                 <ion-icon name="person" color="dark" size="large"></ion-icon>
             </ion-button>

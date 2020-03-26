@@ -68,13 +68,13 @@
   "page.signup.slide-5.message" : "Manage your subscriptions with ease.",
   "page.signup.slide-6.message" : "Contribute to the community by publishing your own events and interests.",
 
-  "page.stream.title"      : "Discover Interests",
+  "page.stream.title"      : "Interests",
   "page.stream.subscribe"  : "Subscribe",
   "page.stream.subscribed" : "Subscribed",
 
   "page.alert.detail.title": "Notification Detail",
 
-  "page.notifications.title"                 : "New Notifications",
+  "page.notifications.title"                 : "Notifications",
   "page.notifications.tabFired"              : "Fired",
   "page.notifications.tabSubscriptions"      : "Subscriptions",
   "page.notifications.addCoupon"             : "Add Coupon",

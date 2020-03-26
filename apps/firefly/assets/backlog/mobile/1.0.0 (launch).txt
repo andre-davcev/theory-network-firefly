@@ -20,6 +20,8 @@ admin (marketing) - read the 4 hour workweek
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
+*admin (staffing) - screenshots of current app
+*admin (staffing) - current firefly screenshot flow
 admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - required fields styling (icon/popover)
