@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconType, Color, StateUserProfile, ActionUserIsPublisherSet } from '@firefly/core';
+import { IconType, Color, StateUserProfile, ActionUserIsPublisherSet, StateUser } from '@firefly/core';
 import { Select, Store } from '@ngxs/store';
 import { StateMobile } from '@firefly/mobile';
 import { Observable } from 'rxjs';
@@ -17,7 +17,8 @@ import { FormGroup } from '@angular/forms';
 
 export class PageUserProfile
 {
-    @Select(StateUserProfile.formGroup()) form$:     Observable<FormGroup>
+    @Select(StateUserProfile.formGroup()) form$:     Observable<FormGroup>;
+    @Select(StateUser.formGroup())        formUser$: Observable<FormGroup>;
     @Select(StateMobile.menuOpen)         menuOpen$: Observable<boolean>;
 
     public IconType : any = IconType;
