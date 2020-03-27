@@ -33,3 +33,4 @@ export class ActionUserSubscriptionOnOff        { static readonly type = Actions
 
 export class ActionUserInterestTypeSet { static readonly type = ActionsUser.InterestTypeSet; constructor(public interestType: InterestType) { } }
 export class ActionUserEventTypeSet    { static readonly type = ActionsUser.EventTypeSet;    constructor(public eventType:    EventType) { } }
+export class ActionUserIsPublisherSet  { static readonly type = ActionsUser.IsPublisherSet;  constructor(public isPublisher:  boolean) { } }

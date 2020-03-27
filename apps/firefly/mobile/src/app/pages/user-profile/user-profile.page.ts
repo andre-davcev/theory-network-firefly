@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconType, Color, StateUserProfile } from '@firefly/core';
+import { IconType, Color, StateUserProfile, ActionUserIsPublisherSet } from '@firefly/core';
 import { Select, Store } from '@ngxs/store';
 import { StateMobile } from '@firefly/mobile';
 import { Observable } from 'rxjs';
@@ -43,5 +43,12 @@ export class PageUserProfile
     public selectIcon(): void
     {
 
+    }
+
+    public toggleIsPublisher(event: any): void
+    {
+        const isPublisher: boolean = event.detail.checked;
+
+        this.store.dispatch(new ActionUserIsPublisherSet(isPublisher));
     }
 }

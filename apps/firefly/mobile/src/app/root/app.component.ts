@@ -24,7 +24,6 @@ const { SplashScreen } = Plugins;
 export class ComponentApp
 {
     @Select(StateUser.found())                userFound$:            Observable<boolean>;
-    @Select(StateUserProfile.isPublisher)     isPublisher$:          Observable<boolean>;
     @Select(StateMobile.pageHome)             pageHome$:             Observable<boolean>;
     @Select(StateMobile.pageSubscriptions)    pageSubscriptions$:    Observable<boolean>;
     @Select(StateMobile.pagePublishInterests) pagePublishInterests$: Observable<boolean>;

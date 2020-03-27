@@ -48,8 +48,7 @@ export class StateUserProfile extends StateDocument<UserProfile, StateUserProfil
                 companyName : '',
                 isCompany   : false,
                 nameFirst   : '',
-                nameLast    : '',
-                isPublisher : false
+                nameLast    : ''
             },
             {
                 ActionReset  : ActionUserProfileReset,
@@ -67,8 +66,6 @@ export class StateUserProfile extends StateDocument<UserProfile, StateUserProfil
             }
         );
     }
-
-    @Selector() static isPublisher(state: StateUserProfileModel) : boolean { return StateUser.dataState(state).isPublisher; }
 
     @Action(ActionUserProfileReset)
     reset(context: StateContext<StateUserProfileModel>)

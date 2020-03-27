@@ -1,13 +1,13 @@
 import { User as FirebaseUser, auth, firestore } from 'firebase/app';
 
-import { State, Selector, Action, StateContext, NgxsOnInit, Store, Select} from '@ngxs/store';
+import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { Observable, of, from } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map, finalize } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
-import { User, Location, StreamInterest, SubscriptionPartial, Subscription, Interest } from '@firefly/cloud';
+import { User, Location, StreamInterest, SubscriptionPartial, Subscription } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -35,7 +35,8 @@ import {
     ActionUserSubscriptionRemove,
     ActionUserSubscriptionOnOff,
     ActionUserInterestTypeSet,
-    ActionUserEventTypeSet
+    ActionUserEventTypeSet,
+    ActionUserIsPublisherSet
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -58,7 +59,6 @@ import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/no
 import { Injectable } from '@angular/core';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { ActionStorageUrlGet } from '@theory/firebase';
-import { StateUserInterests } from '../../query';
 import { InterestType, EventType } from '@firefly/core/enums';
 
 @State<StateUserModel>(StateUserOptions)
@@ -90,6 +90,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 cityId              : null,
                 city                : null,
                 email               : '',
+                isPublisher         : false,
                 language            : 'en',
                 geopoint            : null,
                 phoneNumber         : '',
@@ -139,6 +140,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static tokens(state:StateUserModel)                  : Array<string>{ const user: User = StateUser.dataState(state); return user == null ? null : user.tokens; }
     @Selector() static interestType(state:StateUserModel)            : InterestType { return state.interestType; }
     @Selector() static eventType(state:StateUserModel)               : EventType    { return state.eventType; }
+    @Selector() static isPublisher(state: StateUserModel)            : boolean      { return StateUser.dataState(state).isPublisher; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
@@ -543,5 +545,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     eventTypeSet({ patchState }: StateContext<StateUserModel>, { eventType }: ActionUserEventTypeSet)
     {
         patchState({ eventType });
+    }
+
+    @Action(ActionUserIsPublisherSet)
+    isPublisherSet({ dispatch }: StateContext<StateUserModel>, { isPublisher }: ActionUserIsPublisherSet)
+    {
+        return dispatch(new ActionUserPatch({ isPublisher }, true));
     }
 }

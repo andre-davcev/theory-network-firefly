@@ -8,6 +8,7 @@ export interface User extends FirebaseDocument
     cityId              : string;
     city                : Location;
     email               : string;
+    isPublisher         : boolean;
     language            : string;
     geopoint            : firestore.GeoPoint;
     phoneNumber         : string;

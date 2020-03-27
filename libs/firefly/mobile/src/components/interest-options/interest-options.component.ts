@@ -1,8 +1,9 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet } from '@firefly/core';
-import { Store } from '@ngxs/store';
+import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet, StateUser } from '@firefly/core';
+import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component
 ({
@@ -14,6 +15,8 @@ import { PopoverController } from '@ionic/angular';
 
 export class ComponentInterestOptions
 {
+    @Select(StateUser.isPublisher) isPublisher$: Observable<boolean>;
+
     public InterestType : any = InterestType;
     public EventType    : any = EventType;
 
