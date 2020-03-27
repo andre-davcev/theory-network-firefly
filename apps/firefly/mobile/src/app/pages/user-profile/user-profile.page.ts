@@ -19,6 +19,7 @@ export class PageUserProfile
 {
     @Select(StateUserProfile.formGroup()) form$:     Observable<FormGroup>;
     @Select(StateUser.formGroup())        formUser$: Observable<FormGroup>;
+    @Select(StateUser.email)              email$:    Observable<string>;
     @Select(StateMobile.menuOpen)         menuOpen$: Observable<boolean>;
 
     public IconType : any = IconType;

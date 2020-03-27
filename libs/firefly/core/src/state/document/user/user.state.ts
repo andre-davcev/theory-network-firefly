@@ -141,6 +141,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static interestType(state:StateUserModel)            : InterestType { return state.interestType; }
     @Selector() static eventType(state:StateUserModel)               : EventType    { return state.eventType; }
     @Selector() static isPublisher(state: StateUserModel)            : boolean      { return StateUser.dataState(state).isPublisher; }
+    @Selector() static email(state: StateUserModel)                  : string       { return StateUser.dataState(state).email; }
 
     ngxsOnInit(context: StateContext<StateUserModel>)
     {
