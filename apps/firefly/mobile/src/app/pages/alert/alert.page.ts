@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { switchMap, filter, map, take, tap } from 'rxjs/operators';
+import { switchMap, filter } from 'rxjs/operators';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
@@ -25,7 +25,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     @Select(StateUserAlerts.unreadList)    unread$:    Observable<Array<Alert>>;
     @Select(StateUserAlerts.found())       found$:     Observable<boolean>;
     @Select(StateUserAlerts.hasUnreadList) hasUnread$: Observable<boolean>;
-    @Select(StateUser.eventType)           eventType$: Observable<boolean>;
+    @Select(StateUser.eventType)           eventType$: Observable<EventType>;
 
     @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
 
