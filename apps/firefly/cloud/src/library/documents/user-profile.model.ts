@@ -7,5 +7,4 @@ export interface UserProfile extends FirebaseDocument
     isCompany   : boolean;
     nameFirst   : string;
     nameLast    : string;
-    isPublisher : boolean;
 }
