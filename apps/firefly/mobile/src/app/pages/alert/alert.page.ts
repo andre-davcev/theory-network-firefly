@@ -4,7 +4,7 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, ActionAlertMarkRead, StateAlert } from '@firefly/core';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, ActionAlertMarkRead, StateAlert, StateUser, EventType } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
@@ -25,6 +25,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     @Select(StateUserAlerts.unreadList)    unread$:    Observable<Array<Alert>>;
     @Select(StateUserAlerts.found())       found$:     Observable<boolean>;
     @Select(StateUserAlerts.hasUnreadList) hasUnread$: Observable<boolean>;
+    @Select(StateUser.eventType)           eventType$: Observable<boolean>;
 
     @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
 
@@ -32,7 +33,8 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     public Pages: any = Pages;
     public slideOptions: any = { zoom: false };
 
-    public IconType: any = IconType;
+    public IconType  : any = IconType;
+    public EventType : any = EventType;
 
     // https://github.com/ionic-team/ionic/issues/20356
     public didInit: boolean = false;

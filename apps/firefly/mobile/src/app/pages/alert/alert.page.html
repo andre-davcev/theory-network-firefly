@@ -3,7 +3,7 @@
       [formGroup]="form$ | async"
       ngxsForm="alerts.form">
 </form>
-<ion-slides *ngIf="didInit && (hasUnread$ | async)"
+<ion-slides *ngIf="didInit && ((eventType$ | async) === EventType.New) && (hasUnread$ | async)"
             #sliderRef
             pager="true"
             (ionSlideDidChange)="slideChanged()"
@@ -18,6 +18,7 @@
     </ion-slide>
 </ion-slides>
 
+<!--
 <ion-fab [class.cpt-empty]="!(hasUnread$ | async)"
          vertical="bottom"
          horizontal="start">
@@ -34,7 +35,7 @@
         <ion-icon name="list" color="dark"></ion-icon>
     </ion-fab-button>
 </ion-fab>
-
+-->
 <app-icon-message *ngIf="!(hasUnread$ | async)"
                   slot="fixed"
                   [icon]="IconType.Alerts"
