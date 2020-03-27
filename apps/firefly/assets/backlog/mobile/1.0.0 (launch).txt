@@ -127,7 +127,6 @@ testing (security) - setup firestore storage testing
 testing (unit) - setup jest unit tests
 testing (user) - setup app user testing
 *user-profile (page) - implement save/update
-*user-profile (page) - add read only user email
 
 *andre
 +dave
@@ -137,7 +136,7 @@ testing (user) - setup app user testing
 
 mar-11 - 104
 mar-18 - 110
-mar-25 - ?
+mar-25 - 129
 apr-01 - ?
 apr-08 - ?
 apr-15 - ?

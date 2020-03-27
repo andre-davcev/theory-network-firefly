@@ -38,6 +38,11 @@
                 <ion-item-divider></ion-item-divider>
 
                 <ion-item>
+                    <ion-icon name="mail" slot="start"></ion-icon>
+                    <ion-label>{{ email$ | async }}</ion-label>
+                </ion-item>
+
+                <ion-item>
                     <ion-icon name="lock" slot="start" color="medium"></ion-icon>
                     <ion-label>{{ 'page.user-profile.isPublisher' | translate }}</ion-label>
 
