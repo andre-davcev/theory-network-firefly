@@ -32,7 +32,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
     protected static isNewState(state: any):      boolean                    { return StateDocument.idState(state) === CoreEnum.IdNew; }
     protected static canUpdateState(state: any):  boolean                    { return StateDocument.formState(state).status === FormNgxsStatus.Valid && StateDocument.formState(state).dirty; }
     protected static bucketPathState(state: any): string                     { return StateDocument.dataState(state).bucketPath; }
-    protected static foundState(state: any):      boolean                    { return StateDocument.dataState(state) != null; }
+    protected static foundState(state: any):      boolean                    { return StateDocument.formGroupState(state) != null; }
     protected static metadataState(state: any):   any                        { return StateDocument.dataState(state).metadata; }
 
     public static snapshot()   { return createSelector([this], (state: any) => StateDocument.snapshotState(state)); }

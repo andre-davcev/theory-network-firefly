@@ -29,20 +29,26 @@
         </app-item-header>
     </form>
 
-    <ion-list>
-        <ion-item-group>
-            <ion-item-divider></ion-item-divider>
+    <form novalidate
+          *ngIf="formUser$ | async"
+          [formGroup]="formUser$ | async"
+          ngxsForm="user.form">
+        <ion-list>
+            <ion-item-group>
+                <ion-item-divider></ion-item-divider>
 
-            <ion-item>
-                <ion-icon name="lock" slot="start" color="medium"></ion-icon>
-                <ion-label>{{ 'page.user-profile.isPublisher' | translate }}</ion-label>
+                <ion-item>
+                    <ion-icon name="lock" slot="start" color="medium"></ion-icon>
+                    <ion-label>{{ 'page.user-profile.isPublisher' | translate }}</ion-label>
 
-                <ion-toggle color="primary"
-                            (ionChange)="toggleIsPublisher($event)">
-                </ion-toggle>
-            </ion-item>
+                    <ion-toggle color="primary"
+                                formControlName="isPublisher"
+                                (ionChange)="toggleIsPublisher($event)">
+                    </ion-toggle>
+                </ion-item>
 
-            <ion-item-divider></ion-item-divider>
-        </ion-item-group>
-    </ion-list>
+                <ion-item-divider></ion-item-divider>
+            </ion-item-group>
+        </ion-list>
+    </form>
 </ion-content>
