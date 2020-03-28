@@ -109,8 +109,8 @@ interests (list) - implement simple interest search
 interests (detail) - if publisher show plus button
 +interests (stream) - show subscribed interests at top
 +interests (stream) - add filter/sort button (subscribed, unsubscribed, sort, popular, hot, ...)
-interests (publish detail) - add "Pending Events" row
-interests (publish detail) - event click navigates to edit event
++interests (publish detail) - add "Pending Events" row
++interests (publish detail) - event click navigates to edit event
 interests (publish detail) - add outside event review (accept/reject)
 interests (publish detail) - subscribe from publisher for interest owner
 interests (publish detail) - add image for interest stream
