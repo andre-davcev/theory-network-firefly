@@ -5,7 +5,7 @@ import { switchMap, catchError, map, finalize, takeUntil, take, tap } from 'rxjs
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionEventSetId, ActionEventInterestAdd, StateUser } from '@firefly/core';
+import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet } from '@firefly/core';
 import { PageIconSelector } from '../icon-selector';
 import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
@@ -108,15 +108,15 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         });
     }
 
-    public select(object: Event): void
+    public select(event: Event): void
     {
         this.store.dispatch(new ActionMobileLoadingShow()).
         pipe
         (
-            switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
+            switchMap(() => this.store.dispatch(new ActionEventGet(event.id))),
             switchMap(() => this.store.dispatch([
               new ActionMobileLoadingHide(),
-              new Navigate([Pages.AssetEvent, object.id])
+              new Navigate([Pages.EventDetail, event.id])
             ]))
         ).subscribe();
     }
