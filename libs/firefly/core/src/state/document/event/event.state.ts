@@ -109,6 +109,10 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static timeNotify(state: StateEventModel):      string  { return StateEvent.dataState(state).timeNotify; }
     @Selector() static timeNotifyValid(state: StateEventModel): boolean { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
 
+    @Selector([StateUser.userId]) static canEdit(state: StateEventModel, userId: string): boolean
+    {
+      return StateEvent.dataState(state).userId === userId;
+    }
     @Selector([StateImage.dataUri, StateStorage.images])
     public static imageUrl(state: StateEventModel, dataUri: string, images: Record<string, StorageImage>)
     {
