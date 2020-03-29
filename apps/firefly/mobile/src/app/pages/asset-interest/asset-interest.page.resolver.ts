@@ -16,7 +16,7 @@ export class ResolverPageAssetInterest implements Resolve<void>
     {
 
         if(route.queryParams.id == null)
-        {
+        {          
           return this.store.dispatch([
             new ActionUserIconsReset(),
             new ActionInterestEventsReset()
@@ -29,12 +29,10 @@ export class ResolverPageAssetInterest implements Resolve<void>
           )
         }
         else{
-          return this.store.dispatch(new ActionInterestSetId(route.queryParams.id)).
-          pipe(
-            switchMap(() => this.store.dispatch(new ActionInterestEventsGet())),
-            switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
-          );
+          return this.store.dispatch([
+            new ActionInterestEventsGet(),
+            new ActionMobileLoadingHide()
+          ]);
         }   
-
     }
 }
