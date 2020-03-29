@@ -16,7 +16,7 @@ admin (marketing) - research pipedrive & trello
 admin (marketing) - create lead generation strategy
 admin (marketing) - research julian.com marketing strategies
 admin (marketing) - submit firefly to ionic showcase
-admin (marketing) - read the 4 hour workweek
+*admin (marketing) - read the 4 hour workweek (tim ferris)
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
@@ -26,6 +26,7 @@ admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - required fields styling (icon/popover)
 app (errors) - setup error handling strategy
+*app (ionic) - install capacitor 1.5.2
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
 app (logging) - create logging strategy
