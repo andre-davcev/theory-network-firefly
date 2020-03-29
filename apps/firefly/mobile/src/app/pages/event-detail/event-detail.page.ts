@@ -6,8 +6,10 @@ import { ModalController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
 import { StateEvent } from '@firefly/core';
+import { Event } from '@firefly/cloud';
 import { Pages } from '@firefly/mobile';
 import { BaseComponent } from '@theory/core';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component
 ({
@@ -20,6 +22,7 @@ export class PageEventDetail extends BaseComponent implements OnInit
 {
     @Select(StateEvent.imageUrl)        imageUrl$:        Observable<string>;
     @Select(StateEvent.data())          event$:           Observable<any>;
+    @Select(StateEvent.canEdit)         canEdit$:         Observable<boolean>;
     public Pages: any = Pages;
 
     constructor
@@ -44,5 +47,13 @@ export class PageEventDetail extends BaseComponent implements OnInit
     public cancel(): void
     {
         this.modal.dismiss();
+    }
+
+    public edit(): void
+    {
+      const event: Event = this.store.selectSnapshot(StateEvent.data());
+      this.store.dispatch([
+        new Navigate([Pages.AssetEvent, event.id])
+      ]).subscribe();
     }
 }

@@ -6,6 +6,12 @@
           <ion-buttons slot="start">
             <ion-back-button color="dark"></ion-back-button>
         </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="edit()" *ngIf="canEdit$ | async"
+                      icon-only>
+                      <ion-icon name="create-outline" color="dark"></ion-icon>
+          </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
