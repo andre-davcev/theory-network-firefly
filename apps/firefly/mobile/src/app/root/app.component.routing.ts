@@ -27,6 +27,8 @@ export const routes: Routes =
     { path: Pages.IconSelector,   loadChildren: '@firefly/page/icon-selector#ModulePageIconSelector' },
     { path: Pages.EventSelector,  loadChildren: '@firefly/page/event-selector#ModulePageEventSelector' },
 
+    { path: Pages.EventDetail,  loadChildren: '@firefly/page/event-detail#ModulePageEventDetail' },
+
     { path: Pages.InterestDetail, loadChildren: '@firefly/page/interest-detail#ModulePageInterestDetail' },
 
     { path: Pages.Search,        loadChildren: '@firefly/page/search#ModulePageSearch' },

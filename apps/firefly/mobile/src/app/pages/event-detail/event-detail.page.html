@@ -1,0 +1,36 @@
+<ion-header color="white">
+    <ion-toolbar>
+        <ion-title>
+            {{ 'page.event.detail.title' | translate}}
+        </ion-title>
+          <ion-buttons slot="start">
+            <ion-back-button color="dark"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="cpt-background"></div>
+    <div class="cnt-image">
+      <img class="cpt-image" [src]="imageUrl$ | async">
+    </div>
+    <div class="cnt-name">
+      <div class="name">|{{ (event$ | async).name  }}|</div>
+    </div>
+    <div class="cnt-tagline">
+      <div class="tagline">{{ (event$ | async).tagline }}</div>
+    </div>
+    <div class="cnt-description">
+      <div class="description">{{(event$ | async).description}}</div>
+    </div>
+
+    <div class="cnt-map">
+      <app-item-map>
+      </app-item-map>
+    </div>
+
+    <!--div class="cnt-button"-->
+    <!--/!--div-->
+
+</ion-content>
