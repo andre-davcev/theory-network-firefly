@@ -93,6 +93,10 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     }
 
     @Selector() static events(state: StateInterestModel): Event[] { return state.events; }
+    @Selector([StateUser.userId]) static canEdit(state: StateInterestModel, userId: string): boolean
+    {
+      return StateInterest.dataState(state).userId === userId;
+    }
     @Selector([StateIcon.dataUri, StateStorage.images])
     public static iconUrl(state: StateInterestModel, dataUri: string, images: Record<string, StorageImage>)
     {

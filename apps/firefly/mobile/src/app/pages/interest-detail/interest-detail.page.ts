@@ -5,17 +5,18 @@ import { switchMap, catchError, map, finalize, takeUntil, take, tap } from 'rxjs
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionEventSetId, ActionEventInterestAdd } from '@firefly/core';
+import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionEventSetId, ActionEventInterestAdd, StateUser } from '@firefly/core';
 import { PageIconSelector } from '../icon-selector';
 import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
-import { BaseComponent, CoreEnum } from '@theory/core';
+import { BaseComponent, CoreEnum, CoreUtil } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { PageEventSelector } from '../event-selector';
 import { PageAssetEvent } from '..';
+import { PageAssetInterest } from '../asset-interest';
 
 const { Camera } = Plugins;
 
@@ -34,9 +35,12 @@ export class PageInterestDetail extends BaseComponent implements OnInit
     @Select(StateInterest.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateInterest.iconUrl)     iconUrl$:      Observable<string>;
     @Select(StateInterest.events)      events$:       Observable<Event[]>;
-    @Select(StateStorage.images)      images$:       Observable<Record<string, StorageImage>>;
-    @Select(StateDevice.device)       device$:       Observable<boolean>;
+    @Select(StateStorage.images)       images$:       Observable<Record<string, StorageImage>>;
+    @Select(StateDevice.device)        device$:       Observable<boolean>;
     @Select(StateUserEvents.initialized()) stateUserInitialized$: Observable<boolean>;
+    @Select(StateUser.userId)          userId$:       Observable<string>;
+    @Select(StateInterest.canEdit)     canEdit$:      Observable<boolean>;
+    @Select(StateUser.isPublisher)     isPublisher$:  Observable<boolean>;
 
     public Pages: any = Pages;
     public images: Record<string, StorageImage> = {};
@@ -119,5 +123,13 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public addEvent(): void{
         this.store.dispatch(new Navigate([Pages.EventSelector]));
+    }
+
+    public edit(): void
+    {
+      const interest: Interest = this.store.selectSnapshot(StateInterest.data());
+      this.store.dispatch([
+        new Navigate([Pages.AssetInterest], {id: interest.id}, {state: {isInterestDetail:true}})
+      ]).subscribe();
     }
 }
