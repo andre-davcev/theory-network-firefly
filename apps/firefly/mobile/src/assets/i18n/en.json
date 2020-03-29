@@ -97,6 +97,8 @@
   "page.event.descriptionPlaceholder" : "Write a description ...",
   "page.event.timeNotify"             : "Notification Time",
 
+  "page.event.detail.title"                  : "Event Detail",
+
   "page.event-categories.title"    : "Categories",
 
   "page.interest.title"                  : "Interest",
