@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ComponentInterestOptions } from './interest-options.component';
+import { ComponentHomeOptions } from './home-options.component';
 
 @NgModule
 ({
@@ -16,7 +16,7 @@ import { ComponentInterestOptions } from './interest-options.component';
         TranslateModule
     ],
 
-    declarations : [ComponentInterestOptions],
-    exports      : [ComponentInterestOptions]
+    declarations : [ComponentHomeOptions],
+    exports      : [ComponentHomeOptions]
 })
-export class ModuleComponentInterestOptions { }
+export class ModuleComponentHomeOptions { }
