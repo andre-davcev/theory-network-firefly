@@ -5,7 +5,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
-import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentInterestOptions } from '@firefly/mobile';
+import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentHomeOptions } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
@@ -76,7 +76,7 @@ export class PageHome extends BaseComponent
     {
         const popover: HTMLIonPopoverElement = await this.popover.create
         ({
-            component: ComponentInterestOptions,
+            component: ComponentHomeOptions,
             componentProps:
             {
                 interestType : this.store.selectSnapshot(StateUser.interestType),
