@@ -100,6 +100,6 @@
     <app-icon-message *ngIf="empty$ | async"
                       slot="fixed"
                       [icon]="IconType.Stream"
-                      [message]="'page.stream.empty' | translate">
+                      [message]="(emptyMessage$ | async) | translate">
     </app-icon-message>
 </ion-content>

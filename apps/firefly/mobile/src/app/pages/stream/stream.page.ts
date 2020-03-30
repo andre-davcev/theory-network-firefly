@@ -24,7 +24,9 @@ export class PageStream extends BaseComponent implements OnInit
     @Select(StateInterest.events)           events$:        Observable<Event[]>;
     @Select(StateUserInterests.stream)      stream$:        Observable<Array<StreamInterest>>;
     @Select(StateUserInterests.streamFound) found$:         Observable<boolean>;
+    @Select(StateUserInterests.streamEmpty) empty$:         Observable<boolean>;
     @Select(StateUser.subscriptionsStatus)  subscriptions$: Observable<Record<string, SubscriptionPartial>>;
+    @Select(StateUser.streamEmptyMessage)   emptyMessage$:  Observable<string>;
 
     public images: Record<string, StorageImage>;
     public currentlyOpenedItemIndex = -1;
