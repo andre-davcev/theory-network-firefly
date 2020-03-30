@@ -9,19 +9,17 @@ admin (design) - create design system
 admin (financing) - apply for rg&e innovation zone ignition grant
 admin (financing) - create pitch deck
 admin (firestore) - setup billing/usage alert triggers
-admin (marketing) - prioritize work for nextcorps interns
-admin (marketing) - communicate and assign tasks to nextcorps interns
 admin (marketing) - implement spanish translations
 admin (marketing) - research pipedrive & trello
 admin (marketing) - create lead generation strategy
 admin (marketing) - research julian.com marketing strategies
 admin (marketing) - submit firefly to ionic showcase
-*admin (marketing) - read the 4 hour workweek (tim ferris)
+^admin (marketing) - read the 4 hour workweek (tim ferris)
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
-admin (staffing) - screenshots of current app
-admin (staffing) - current firefly screenshot flow
+*admin (staffing) - screenshots of current app
+*admin (staffing) - current firefly screenshot flow
 admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - required fields styling (icon/popover)
@@ -51,8 +49,8 @@ auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 auth (unauth) - implement anonymous login
 design (photoshop) - change main photo to firefly color
-*events (list) - implement filters
-*events (list) - implement empty events messages
+events (list) - implement filters
+events (list) - implement empty events messages
 events (list) - implement search
 events (detail) - cleanup styling/alignment
 events (detail) - reverse geocode map
@@ -63,7 +61,6 @@ events (edit) - move image to image select from photo library
 events (edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
 events (edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
 events (edit) - delete old icon/image paths
-events (edit) - move select cluster to select icon
 events (edit) - fix edit functionality
 events (edit) - reverse geocode map
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
@@ -71,9 +68,6 @@ events (go) - implement add to calendar workflow
 events (go) - implement get directions workflow
 events (list) - image flash bug on unread pushing to read
 events (list) - add pink dots for unread alerts
-events (model) - migrate from bucketPath to bucketPaths
-events (pending) - events list with approve deny buttons
-events (pending) - event detail but read only and with approve/deny button
 events (slide) - add more interest branding to slide (icon)
 firestore (all) - follow best practices articles
 firestore (functions) - manual testing
@@ -92,7 +86,6 @@ firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
 images (all) - remove all references
-*interests (list) - implement empty interests screens/messages
 *interests (list) - on first click of created add spinner and show created interests
 *interests (list) - on search click hide other buttons and show search bar
 *interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
@@ -102,10 +95,12 @@ images (all) - remove all references
 *interests (list) - for empty created interests show different message for non publisher
 *interests (list) - migrate clusters collection to interests
 interests (my/created) - experiment with dark theme
-interests (detail) - add interest-events query state
 interests (list) - implement simple interest search
+interests (detail) - add interest-events query state
 +interests (detail) - create interests detail
 +interests (detail) - allow public interests to enable other users to add event (via plus button)
++interests (pending) - events list with approve deny buttons
++interests (pending) - event detail but read only and with approve/deny button
 interests (detail) - if publisher show plus button
 +interests (stream) - show subscribed interests at top
 +interests (stream) - add filter/sort button (subscribed, unsubscribed, sort, popular, hot, ...)
