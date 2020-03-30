@@ -117,13 +117,13 @@
   "page.event.filter.upcoming" : "Upcoming",
   "page.event.filter.created"  : "Created",
 
-  "page.alerts.empty"              : "Looks like you have no new notifications right now. Subscribe to new Interests or check out your old notifications below.",
   "page.stream.empty.unsubscribed" : "Our swarm of fireflies are busy building your Interest recommendations. Check back later!",
   "page.stream.empty.subscribed"   : "It looks like your haven't subscribed to any Interests yet!",
   "page.stream.empty.created"      : "As a valuable part of the Firefly community, feel free to create your own Interest streams using the Add button below.",
-  "page.subscriptions.empty"       : "You have no Subscriptions right now. Go to the home Discover Interests screen to find new interests in your area!",
   "page.interests.empty"           : "Help support the Firefly community by publishing your own public Interests here.",
-  "page.events.empty"              : "Looks like you haven't created any Events yet. Feel free to create public or private Events to be added to Interest streams",
+  "page.events.empty.new"          : "Looks like you have no new event notifications right now. Check out your upcoming events using the above filter.",
+  "page.events.empty.upcoming"     : "Looks like you no upcoming events right now.",
+  "page.events.empty.created"      : "Looks like you haven't created any Events yet. Feel free to create Events to be added to Interest streams.",
   "page.icons.empty"               : "You haven't published any icons yet. Icons are used as branding for your Interests.",
   "page.images.empty"              : "You haven't published any images yet. Images can be used for event notifcations as well as the main image on the Discover Interests screen",
 

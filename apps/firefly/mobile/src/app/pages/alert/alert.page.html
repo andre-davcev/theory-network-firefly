@@ -39,6 +39,6 @@
 <app-icon-message *ngIf="!(hasUnread$ | async)"
                   slot="fixed"
                   [icon]="IconType.Alerts"
-                  [message]="'page.alerts.empty' | translate">
+                  [message]="(emptyMessage$ | async) | translate">
 </app-icon-message>
 

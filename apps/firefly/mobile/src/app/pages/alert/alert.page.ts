@@ -26,6 +26,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     @Select(StateUserAlerts.found())       found$:     Observable<boolean>;
     @Select(StateUserAlerts.hasUnreadList) hasUnread$: Observable<boolean>;
     @Select(StateUser.eventType)           eventType$: Observable<EventType>;
+    @Select(StateUser.eventsEmptyMessage)  emptyMessage$:  Observable<string>;
 
     @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
 

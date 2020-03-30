@@ -49,8 +49,7 @@ auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 auth (unauth) - implement anonymous login
 design (photoshop) - change main photo to firefly color
-events (list) - implement filters
-events (list) - implement empty events messages
+*events (list) - implement filters
 events (list) - implement search
 events (detail) - cleanup styling/alignment
 events (detail) - reverse geocode map
@@ -86,7 +85,7 @@ firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
 images (all) - remove all references
-*interests (list) - on first click of created add spinner and show created interests
+*interests (list) - fix created interests broken image links
 *interests (list) - on search click hide other buttons and show search bar
 *interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
 *interests (list) - add on/off toggle to subscribed
