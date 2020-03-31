@@ -97,6 +97,11 @@
     </ion-item>
   </ion-list>
 
+    <app-button-add *ngIf="add$ | async"
+                    (clicked)="add()"
+                    slot="fixed">
+    </app-button-add>
+
     <app-icon-message *ngIf="empty$ | async"
                       slot="fixed"
                       [icon]="IconType.Stream"

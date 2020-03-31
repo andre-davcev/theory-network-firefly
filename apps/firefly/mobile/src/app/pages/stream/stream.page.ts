@@ -25,6 +25,7 @@ export class PageStream extends BaseComponent implements OnInit
     @Select(StateUserInterests.stream)      stream$:        Observable<Array<StreamInterest>>;
     @Select(StateUserInterests.streamFound) found$:         Observable<boolean>;
     @Select(StateUserInterests.streamEmpty) empty$:         Observable<boolean>;
+    @Select(StateUserInterests.streamAdd)   add$:           Observable<boolean>;
     @Select(StateUser.subscriptionsStatus)  subscriptions$: Observable<Record<string, SubscriptionPartial>>;
     @Select(StateUser.streamEmptyMessage)   emptyMessage$:  Observable<string>;
 
@@ -100,6 +101,11 @@ export class PageStream extends BaseComponent implements OnInit
         new ActionMobileLoadingShow(),
         new Navigate([Pages.InterestDetail], {id: interest.id})
       ])
+    }
+
+    public add(): void
+    {
+        this.store.dispatch(new Navigate([Pages.AssetInterest]));
     }
 /*
     public filterChanged(event: any): void
