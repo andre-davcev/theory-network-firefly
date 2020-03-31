@@ -9,7 +9,7 @@
         <ion-buttons slot="end">
           <ion-button (click)="edit()" *ngIf="canEdit$ | async"
                       icon-only>
-                      <ion-icon name="create-outline" color="dark"></ion-icon>
+                      <ion-icon name="create-outline" size="large" color="dark"></ion-icon>
           </ion-button>
         </ion-buttons>
     </ion-toolbar>
@@ -24,7 +24,7 @@
               <div class="name">| {{ (interest$ | async).name }} |</div>
             </div>
             <div class="cnt-tagline">
-              <div class="tagline">| {{ (interest$ | async).tagline }} |</div>
+              <div class="tagline">{{ (interest$ | async).tagline }}</div>
             </div>
             <div class="cnt-description">
               <p class="description">{{ (interest$ | async).description }}</p>
