@@ -83,6 +83,18 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     }
 
     @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType])
+    public static streamAdd
+    (
+        state         : StateUserInterestsModel,
+        stream        : Array<StreamInterest>,
+        subscriptions : Record<string, SubscriptionPartial>,
+        interestType  : InterestType
+    ): boolean
+    {
+        return StateUserInterests.streamFound(state, stream, subscriptions, interestType) && interestType === InterestType.Created;
+    }
+
+    @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType])
     public static streamEmpty
     (
         state         : StateUserInterestsModel,
