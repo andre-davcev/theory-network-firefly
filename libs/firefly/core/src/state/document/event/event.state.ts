@@ -35,6 +35,7 @@ import { of } from 'rxjs';
 import { ActionIconReset } from '../icon/icon.actions';
 import { LocationCity } from '@firefly/core/interfaces';
 import { Injectable } from '@angular/core';
+import { StateInterest } from '../interest';
 
 @State<StateEventModel>(StateEventOptions)
 @Injectable()
@@ -76,6 +77,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 timeNotify     : null,
                 timeStart      : null,
                 timeEnd        : null,
+                pending        : true,
                 phone          : null,
                 website        : null
             },
@@ -179,6 +181,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     setId({ dispatch }: StateContext<StateEventModel>, { id }: ActionEventSetId)
     {
         const isNew: boolean = id === CoreEnum.IdNew;
+        const isInterestOwner: boolean = this.store.selectSnapshot(StateInterest.canEdit);
+
+        if(isInterestOwner)
+        {
+          this.empty.pending = false;
+        }
 
         const userId:   string                     = this.store.selectSnapshot(StateUser.id());
         const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserEvents.snapshotLookup())[id];

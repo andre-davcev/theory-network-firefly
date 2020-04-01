@@ -22,6 +22,7 @@ export interface Event extends FirebaseDocument
     timeNotify     : string;
     timeStart      : string;
     timeEnd        : string;
+    pending        : boolean;
     phone?         : string;
     website?       : string;
 
