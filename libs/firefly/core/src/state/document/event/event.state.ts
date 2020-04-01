@@ -187,6 +187,10 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         {
           this.empty.pending = false;
         }
+        else
+        {
+          this.empty.pending = true;
+        }
 
         const userId:   string                     = this.store.selectSnapshot(StateUser.id());
         const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserEvents.snapshotLookup())[id];
