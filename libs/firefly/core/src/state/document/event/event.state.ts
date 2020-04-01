@@ -77,7 +77,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 timeNotify     : null,
                 timeStart      : null,
                 timeEnd        : null,
-                pending        : true,
                 phone          : null,
                 website        : null
             },
@@ -185,11 +184,11 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 
         if(isInterestOwner)
         {
-          this.empty.pending = false;
+          this.empty.draft = false;
         }
         else
         {
-          this.empty.pending = true;
+          this.empty.draft = true;
         }
 
         const userId:   string                     = this.store.selectSnapshot(StateUser.id());
