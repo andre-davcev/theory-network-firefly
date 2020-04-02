@@ -29,6 +29,8 @@ export class PageHome extends BaseComponent
     @Select(StateUserAlerts.hasUnread)   hasUnread$     : Observable<boolean>;
     @Select(StateUser.authenticated)     authenticated$ : Observable<boolean>;
 
+    public searching: boolean = false;
+
     public Pages : any = Pages;
 
     constructor
@@ -88,5 +90,15 @@ export class PageHome extends BaseComponent
         });
 
         return await popover.present();
+    }
+
+    public searchShow(show: boolean): void
+    {
+        this.searching = show;
+    }
+
+    public search(event: CustomEvent): void
+    {
+        console.log(`ToDo (Implement Search): ${event.detail.value}`);
     }
 }
