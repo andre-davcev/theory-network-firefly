@@ -99,6 +99,7 @@ export class PageHome extends BaseComponent
 
     public search(event: CustomEvent): void
     {
-        console.log(`ToDo (Implement Search): ${event.detail.value}`);
+        console.log(`ToDo: implement simple search/filter`)
+        console.log(`      ${event.detail.value}`);
     }
 }

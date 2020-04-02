@@ -52,6 +52,7 @@ auth (unauth) - implement anonymous login
 design (photoshop) - change main photo to firefly color
 *events (list) - implement filters
 events (list) - implement simple event search filter
+events (list) - show/hide add button if on created filter
 events (detail) - cleanup styling/alignment
 events (detail) - reverse geocode map
 events (edit) - migrate user-events to cluster-events
@@ -89,7 +90,6 @@ images (all) - remove all references
 *interests (list) - fix created interests broken image links
 *interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
 *interests (list) - add on/off toggle to subscribed
-*interests (list) - show/hide plus button to interests screen if user is publisher and filtered by created
 *interests (list) - migrate clusters collection to interests
 interests (my/created) - experiment with dark theme
 interests (list) - implement simple interest search filter
@@ -119,7 +119,7 @@ testing (security) - setup firestore security testing
 testing (security) - setup firestore storage testing
 testing (unit) - setup jest unit tests
 testing (user) - setup app user testing
-*user-profile (page) - implement save/update
+user-profile (page) - implement save/update
 
 *andre
 +dave
