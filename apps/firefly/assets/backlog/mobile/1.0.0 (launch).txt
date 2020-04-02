@@ -18,13 +18,12 @@ admin (marketing) - submit firefly to ionic showcase
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
-*admin (staffing) - screenshots of current app
-*admin (staffing) - current firefly screenshot flow
 admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - required fields styling (icon/popover)
 app (errors) - setup error handling strategy
 *app (ionic) - install capacitor 1.5.2
+*app (ionic) - install @angular/angularfire 6.0.0
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (loading) - fix home screen loading styles
 app (load) - android splash screen
@@ -88,8 +87,7 @@ firestore (functions) - implement callable function to populate stream for new c
 icons (all) - remove all references
 images (all) - remove all references
 *interests (list) - fix created interests broken image links
-*interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
-*interests (list) - add on/off toggle to subscribed
+*interests (list) - fix ActionUserSubscriptionOnOff null pointer
 *interests (list) - migrate clusters collection to interests
 interests (my/created) - experiment with dark theme
 interests (list) - implement simple interest search filter

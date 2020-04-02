@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
@@ -68,6 +68,11 @@ export class PageStream extends BaseComponent implements OnInit
             )
         ).
         subscribe();
+    }
+
+    public toggleOn(on: boolean, interest: StreamInterest): void
+    {
+        this.store.dispatch(new ActionUserSubscriptionOnOff(interest.id, on));
     }
 
     public setOpened(itemIndex, interest: Interest): void

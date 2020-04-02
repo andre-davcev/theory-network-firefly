@@ -88,9 +88,12 @@
                     </span>
                   </mat-expansion-panel>
                 </mat-accordion>
+
                 <app-icon-subscribe [subscribed]="subscriptions[interest.id] != null"
                                     [count]="interest.subscriberCount + (subscriptions[interest.id] == null ? 0 : 1)"
-                                    (clicked)="toggle($event, interest)">
+                                    [on]="subscriptions[interest.id] != null && subscriptions[interest.id].on"
+                                    (clicked)="toggle($event, interest)"
+                                    (clickedOn)="toggleOn($event, interest)">
                 </app-icon-subscribe>
             </ion-card-content>
           </ion-card>
