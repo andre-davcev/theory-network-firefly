@@ -91,8 +91,6 @@ images (all) - remove all references
 *interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
 *interests (list) - add on/off toggle to subscribed
 *interests (list) - show/hide plus button to interests screen if user is publisher and filtered by created
-*interests (list) - for empty created interests show different message for publisher
-*interests (list) - for empty created interests show different message for non publisher
 *interests (list) - migrate clusters collection to interests
 interests (my/created) - experiment with dark theme
 interests (list) - implement simple interest search
