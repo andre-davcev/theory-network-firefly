@@ -18,8 +18,14 @@ export class ComponentIconSubscribe
     @Input()
     public count: number;
 
+    @Input()
+    public on: boolean = false;
+
     @Output()
     public clicked: EventEmitter<boolean> = new EventEmitter();
+
+    @Output()
+    public clickedOn: EventEmitter<boolean> = new EventEmitter();
 
     public faThumbtack: IconDefinition = faThumbtack;
 
@@ -30,5 +36,10 @@ export class ComponentIconSubscribe
         // this.subscribed = !this.subscribed;
 
         this.clicked.next(this.subscribed);
+    }
+
+    public toggleOn(): void
+    {
+        this.clickedOn.next(this.on);
     }
 }
