@@ -51,7 +51,7 @@ auth (unauth) - on unauthenticated login save city so you can grab city stream
 auth (unauth) - implement anonymous login
 design (photoshop) - change main photo to firefly color
 *events (list) - implement filters
-events (list) - implement search
+events (list) - implement simple event search filter
 events (detail) - cleanup styling/alignment
 events (detail) - reverse geocode map
 events (edit) - migrate user-events to cluster-events
@@ -87,13 +87,12 @@ firestore (functions) - implement callable function to populate stream for new c
 icons (all) - remove all references
 images (all) - remove all references
 *interests (list) - fix created interests broken image links
-*interests (list) - on search click hide other buttons and show search bar
 *interests (list) - toggle showing on/off switch on interest subscribe/unsubscribe (bottom right)
 *interests (list) - add on/off toggle to subscribed
 *interests (list) - show/hide plus button to interests screen if user is publisher and filtered by created
 *interests (list) - migrate clusters collection to interests
 interests (my/created) - experiment with dark theme
-interests (list) - implement simple interest search
+interests (list) - implement simple interest search filter
 interests (detail) - add interest-events query state
 +interests (detail) - create interests detail
 +interests (detail) - allow public interests to enable other users to add event (via plus button)
