@@ -63,6 +63,25 @@ export class PageAssetInterest extends BaseComponent implements OnInit
         this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Light }));
     }
 
+    public add(page: Pages.IconSelector | Pages.EventSelector)
+    {
+        //this.store.dispatch(new Navigate([ Pages.AssetEvent, CoreEnum.IdNew ]));
+
+      if(page === Pages.IconSelector)
+      {
+        from(this.modal.create({
+          component: PageIconSelector
+        })).
+        subscribe((modal: HTMLIonModalElement) => modal.present());
+      }
+      else{
+        from(this.modal.create({
+          component: PageEventSelector
+        })).
+        subscribe((modal: HTMLIonModalElement) => modal.present());
+      }
+    }
+
     public save(): void
     {
         this.store.dispatch
