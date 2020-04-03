@@ -47,14 +47,13 @@ auth (sign-up) - select font awesome icons for categories
 auth (sign-up) - add categories slide (Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater)
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
-auth (unauth) - implement anonymous login
 design (photoshop) - change main photo to firefly color
 *events (list) - implement filters
 events (list) - implement simple event search filter
 events (list) - show/hide add button if on created filter
 events (detail) - cleanup styling/alignment
 events (detail) - reverse geocode map
-events (edit) - migrate user-events to cluster-events
+events (edit) - migrate user-events to interest-events
 events (edit) - migrate from bucketPath to icon/image
 events (edit) - move icon cluster to icon select from photo library
 events (edit) - move image to image select from photo library
@@ -89,20 +88,15 @@ images (all) - remove all references
 *interests (list) - fix created interests broken image links
 *interests (list) - fix ActionUserSubscriptionOnOff null pointer
 *interests (list) - migrate clusters collection to interests
-interests (my/created) - experiment with dark theme
 interests (list) - implement simple interest search filter
-interests (detail) - add interest-events query state
 +interests (detail) - create interests detail
 +interests (detail) - allow public interests to enable other users to add event (via plus button)
 +interests (pending) - events list with approve deny buttons
 +interests (pending) - event detail but read only and with approve/deny button
 interests (detail) - if publisher show plus button
-+interests (stream) - show subscribed interests at top
-+interests (stream) - add filter/sort button (subscribed, unsubscribed, sort, popular, hot, ...)
 +interests (publish detail) - add "Pending Events" row
 +interests (publish detail) - event click navigates to edit event
 interests (publish detail) - add outside event review (accept/reject)
-interests (publish detail) - subscribe from publisher for interest owner
 interests (publish detail) - add image for interest stream
 intro (slide 1) - Where life comes to you
 intro (slide 2) - Subscribe to community interests
@@ -128,7 +122,7 @@ user-profile (page) - implement save/update
 mar-11 - 104
 mar-18 - 110
 mar-25 - 129
-apr-01 - ?
+apr-01 - 114
 apr-08 - ?
 apr-15 - ?
 apr-22 - ?
