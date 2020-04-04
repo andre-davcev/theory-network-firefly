@@ -39,20 +39,32 @@
                   <ion-label>
                       {{ event.metadata.timeStartFormatted }}
                   </ion-label>
-              </ion-item-divider>
+                </ion-item-divider>
 
-              <ion-item (click)="select(event)">
-                  <ion-avatar slot="start">
+                <ion-item>
+                  <ion-avatar (click)="select(event)" slot="start">
                       <img *ngIf="images[event.bucketPath]" [src]="images[event.bucketPath].small">
                   </ion-avatar>
-                  <ion-label>
+                  <ion-label (click)="select(event)">
                       {{ event.metadata.timeStartDate | date:'shortTime' }}
                   </ion-label>
-                  <ion-label>
+                  <ion-label (click)="select(event)">
                       <h2>{{ event.name }}</h2>
                       <p>{{ event.tagline }}</p>
                   </ion-label>
-              </ion-item>
+                  <div *ngIf="canEdit$ | async" fxLayout="row">
+                  <ion-label >
+                    <ion-button (click)="acceptEvent(event)" icon-only>
+                      <ion-icon color="dark" name="checkmark-outline"></ion-icon>
+                    </ion-button>
+                  </ion-label>
+                  <ion-label>
+                    <ion-button icon-only>
+                      <ion-icon color="dark" name="close-outline"></ion-icon>
+                    </ion-button>
+                  </ion-label>
+                </div>
+                </ion-item>
               </ion-list>
             </div>
             <ion-list>

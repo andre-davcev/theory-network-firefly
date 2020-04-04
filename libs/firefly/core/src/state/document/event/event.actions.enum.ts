@@ -10,10 +10,13 @@ export enum ActionsEvent
     Update = '[Event] Update',
     Delete = '[Event] Delete',
 
+    SetIdAnonymous = '[Event] SetIdAnonymous',
     ImageClear   = '[Event] Image Clear',
     ImageUriSet  = '[Event] Image Uri Set',
     ImagePathSet = '[Event] Image Path Set',
     ImageCreate  = '[Event] Image Create',
     LocationSet  = '[Event] Location Set',
-    InterestAdd   = '[Event] Interest Add'
+    InterestAdd  = '[Event] Interest Add',
+    AcceptEvent  = '[Event] Accept Event',
+    DenyEvent    = '[Event] Deny Event'
 }

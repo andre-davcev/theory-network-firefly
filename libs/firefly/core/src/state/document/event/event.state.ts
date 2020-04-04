@@ -24,18 +24,22 @@ import {
   ActionEventSetId,
   ActionEventUpdate,
   ActionEventImageCreate,
-  ActionEventInterestAdd
+  ActionEventInterestAdd,
+  ActionEventAccept,
+  ActionEventDeny,
+  ActionEventSetIdAnonymous
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
-import { switchMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { switchMap, tap, map } from 'rxjs/operators';
+import { of, from } from 'rxjs';
 import { ActionIconReset } from '../icon/icon.actions';
 import { LocationCity } from '@firefly/core/interfaces';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
+import { Query } from '@angular/fire/firestore';
 
 @State<StateEventModel>(StateEventOptions)
 @Injectable()
@@ -201,6 +205,28 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         return dispatch(new ActionEventSet(snapshot, data));
     }
 
+    @Action(ActionEventSetIdAnonymous)
+    actionSetIdAnonymous({ dispatch }: StateContext<StateEventModel>, { id }: ActionEventSetIdAnonymous)
+    {
+      const pendingEvents: Event[] = this.store.selectSnapshot(StateInterest.pendingEvents);
+      const pendingEvent: Event[] = pendingEvents.filter((event) => event.id = id);
+
+      const query: Query   = this.service.collection('events').ref
+          .where('id', '==', pendingEvent[0].id);
+
+      return from(query.get()).pipe
+      (
+        map((snapshot: firestore.QuerySnapshot) =>
+            snapshot.docs
+        ),
+        switchMap((snapshot: Array<firestore.QueryDocumentSnapshot>) =>
+        {
+          const event: Event = snapshot[0].data() as Event;
+          return this.store.dispatch(new ActionEventSet(snapshot[0], event))
+        }
+      ))
+    }
+
     @Action(ActionEventImageClear)
     imageClear({ dispatch }: StateContext<StateEventModel>)
     {
@@ -292,5 +318,17 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     interestAdd({ dispatch }: StateContext<StateEventModel>, { interest }: ActionEventInterestAdd)
     {
         return dispatch(new ActionEventPatch({ interests: [interest.id]}));
+    }
+
+    @Action(ActionEventAccept)
+    eventAccept({ dispatch }: StateContext<StateEventModel>)
+    {
+        return dispatch(new ActionEventPatch({ draft: false }, true))
+    }
+
+    @Action(ActionEventDeny)
+    eventDeny({ dispatch }: StateContext<StateEventModel>)
+    {
+      return dispatch(new ActionEventDelete())
     }
 }
