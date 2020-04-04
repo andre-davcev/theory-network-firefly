@@ -35,6 +35,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
     @Select(StateInterest.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateInterest.iconUrl)     iconUrl$:      Observable<string>;
     @Select(StateInterest.events)      events$:       Observable<Event[]>;
+    @Select(StateInterest.pendingEvents) pendingEvents$: Observable<Event[]>;
     @Select(StateStorage.images)       images$:       Observable<Record<string, StorageImage>>;
     @Select(StateDevice.device)        device$:       Observable<boolean>;
     @Select(StateUserEvents.initialized()) stateUserInitialized$: Observable<boolean>;
