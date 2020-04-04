@@ -5,7 +5,7 @@ import { switchMap, catchError, map, finalize, takeUntil, take, tap } from 'rxjs
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous } from '@firefly/core';
+import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous, ActionEventDeny } from '@firefly/core';
 import { PageIconSelector } from '../icon-selector';
 import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
@@ -139,6 +139,15 @@ export class PageInterestDetail extends BaseComponent implements OnInit
       this.store.dispatch(new ActionEventSetIdAnonymous(event.id)).pipe
       (
         switchMap(() => this.store.dispatch(new ActionEventAccept())),
+        switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
+      ).subscribe();
+    }
+
+    public denyEvent(event: Event): void
+    {
+      this.store.dispatch(new ActionEventSetIdAnonymous(event.id)).pipe
+      (
+        switchMap(() => this.store.dispatch(new ActionEventDeny())),
         switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
       ).subscribe();
     }

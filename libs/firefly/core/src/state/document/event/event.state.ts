@@ -4,7 +4,7 @@ import { ActionMapSearchResultClear, MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
-import { Event, Image } from '@firefly/cloud';
+import { Event, Image, Interest } from '@firefly/cloud';
 import { ActionImageCreate, ActionImagePatch, ActionImageSetId, StateImage, ActionImageClear, ActionImageUriSet, ActionImageReset } from '@firefly/core/state/document/image';
 
 import { StateEventModel } from './event.state.model';
@@ -114,6 +114,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static timeNotify(state: StateEventModel):      string  { return StateEvent.dataState(state).timeNotify; }
     @Selector() static timeNotifyValid(state: StateEventModel): boolean { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
 
+    @Selector() static interests(state: StateEvent): Array<string> { return StateEvent.dataState(state).interests; }
     @Selector([StateUser.userId]) static canEdit(state: StateEventModel, userId: string): boolean
     {
       return StateEvent.dataState(state).userId === userId;
@@ -329,6 +330,9 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventDeny)
     eventDeny({ dispatch }: StateContext<StateEventModel>)
     {
-      return dispatch(new ActionEventDelete())
+      const interestId: Interest = this.store.selectSnapshot(StateInterest.data());
+      const interests = this.store.selectSnapshot(StateEvent.interests).filter((interest) => !interest.includes(interestId.id));
+
+      return dispatch(new ActionEventPatch({ interests }, true))
     }
 }
