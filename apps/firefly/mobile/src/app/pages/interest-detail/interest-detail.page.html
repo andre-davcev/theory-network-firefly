@@ -29,11 +29,43 @@
             <div class="cnt-description">
               <p class="description">{{ (interest$ | async).description }}</p>
             </div>
-            <div *ngIf="(userId$ | async) === (interest$ | async).userId">
+            <div *ngIf="(pendingEvents$ | async).length > 0">
               <ion-item-divider></ion-item-divider>
               <ion-item>
                 <ion-label>Pending Events:</ion-label>
               </ion-item>
+              <ion-list *ngFor="let event of pendingEvents$ | async">
+                <ion-item-divider *ngIf="event.metadata.timeStartFormatted">
+                  <ion-label>
+                      {{ event.metadata.timeStartFormatted }}
+                  </ion-label>
+                </ion-item-divider>
+
+                <ion-item>
+                  <ion-avatar (click)="select(event)" slot="start">
+                      <img *ngIf="images[event.bucketPath]" [src]="images[event.bucketPath].small">
+                  </ion-avatar>
+                  <ion-label (click)="select(event)">
+                      {{ event.metadata.timeStartDate | date:'shortTime' }}
+                  </ion-label>
+                  <ion-label (click)="select(event)">
+                      <h2>{{ event.name }}</h2>
+                      <p>{{ event.tagline }}</p>
+                  </ion-label>
+                  <div *ngIf="canEdit$ | async" fxLayout="row">
+                  <ion-label >
+                    <ion-button (click)="acceptEvent(event)" icon-only>
+                      <ion-icon color="dark" name="checkmark-outline"></ion-icon>
+                    </ion-button>
+                  </ion-label>
+                  <ion-label>
+                    <ion-button (click)="denyEvent(event)" icon-only>
+                      <ion-icon color="dark" name="close-outline"></ion-icon>
+                    </ion-button>
+                  </ion-label>
+                </div>
+                </ion-item>
+              </ion-list>
             </div>
             <ion-list>
                 <ion-item-group>

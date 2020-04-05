@@ -17,10 +17,13 @@ export class ActionEventSave   { static readonly type = ActionsEvent.Save;    co
 export class ActionEventDelete { static readonly type = ActionsEvent.Delete;  constructor() { } }
 export class ActionEventSetId  { static readonly type = ActionsEvent.SetId;   constructor(public id: string = CoreEnum.IdNew) { } }
 
+export class ActionEventSetIdAnonymous { static readonly type = ActionsEvent.SetIdAnonymous;   constructor(public id: string) { } }
 export class ActionEventImageClear   { static readonly type = ActionsEvent.ImageClear;   constructor() { } }
 export class ActionEventImageUriSet  { static readonly type = ActionsEvent.ImageUriSet;  constructor(public dataUri: string) { } }
 export class ActionEventImagePathSet { static readonly type = ActionsEvent.ImagePathSet; constructor(public bucketPath: string = MockImagePath) { } }
 export class ActionEventImageCreate  { static readonly type = ActionsEvent.ImageCreate;  constructor() { } }
 
 export class ActionEventLocationSet  { static readonly type = ActionsEvent.LocationSet;  constructor(public result: Result) { } }
-export class ActionEventInterestAdd  { static readonly type = ActionsEvent.InterestAdd;  constructor(public interest: Interest) { }}
+export class ActionEventInterestAdd  { static readonly type = ActionsEvent.InterestAdd;  constructor(public interest: Interest) { } }
+export class ActionEventAccept       { static readonly type = ActionsEvent.AcceptEvent;  constructor() { } }
+export class ActionEventDeny         { static readonly type = ActionsEvent.DenyEvent;    constructor() { } }

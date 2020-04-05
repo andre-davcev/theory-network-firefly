@@ -92,7 +92,8 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         );
     }
 
-    @Selector() static events(state: StateInterestModel): Event[] { return state.events; }
+    @Selector() static events(state: StateInterestModel): Event[] { return state.events.filter((event: Event) => !event.draft); }
+    @Selector([StateUser.userId]) static pendingEvents(state: StateInterestModel, userId: string): Event[] { return state.events.filter((event: Event) => event.draft && (StateInterest.dataState(state).userId === userId || event.userId === userId)) }
     @Selector([StateUser.userId]) static canEdit(state: StateInterestModel, userId: string): boolean
     {
       return StateInterest.dataState(state).userId === userId;

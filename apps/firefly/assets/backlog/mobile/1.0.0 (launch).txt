@@ -89,11 +89,6 @@ images (all) - remove all references
 *interests (list) - fix ActionUserSubscriptionOnOff null pointer
 *interests (list) - migrate clusters collection to interests
 interests (list) - implement simple interest search filter
-+interests (detail) - create interests detail
-+interests (detail) - allow public interests to enable other users to add event (via plus button)
-+interests (pending) - events list with approve deny buttons
-+interests (pending) - event detail but read only and with approve/deny button
-interests (detail) - if publisher show plus button
 +interests (publish detail) - add "Pending Events" row
 +interests (publish detail) - event click navigates to edit event
 interests (publish detail) - add outside event review (accept/reject)

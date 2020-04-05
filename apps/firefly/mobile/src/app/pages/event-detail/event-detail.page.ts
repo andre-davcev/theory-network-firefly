@@ -5,11 +5,12 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent } from '@firefly/core';
+import { StateEvent, ActionEventAccept, ActionEventDeny, ActionInterestEventsGetAnonymous, StateInterest } from '@firefly/core';
 import { Event } from '@firefly/cloud';
 import { Pages } from '@firefly/mobile';
 import { BaseComponent } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
+import { switchMap } from 'rxjs/operators';
 
 @Component
 ({
@@ -23,6 +24,7 @@ export class PageEventDetail extends BaseComponent implements OnInit
     @Select(StateEvent.imageUrl)        imageUrl$:        Observable<string>;
     @Select(StateEvent.data())          event$:           Observable<any>;
     @Select(StateEvent.canEdit)         canEdit$:         Observable<boolean>;
+    @Select(StateInterest.canEdit)      canEditInterest$: Observable<boolean>;
     public Pages: any = Pages;
 
     constructor
@@ -55,5 +57,21 @@ export class PageEventDetail extends BaseComponent implements OnInit
       this.store.dispatch([
         new Navigate([Pages.AssetEvent, event.id])
       ]).subscribe();
+    }
+
+    public acceptEvent(): void
+    {
+      this.store.dispatch(new ActionEventAccept()).pipe
+      (
+        switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
+      ).subscribe();
+    }
+
+    public denyEvent(): void
+    {
+      this.store.dispatch(new ActionEventDeny()).pipe
+      (
+        switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
+      ).subscribe();
     }
 }
