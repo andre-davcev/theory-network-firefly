@@ -22,7 +22,7 @@ admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - required fields styling (icon/popover)
 app (errors) - setup error handling strategy
-*app (ionic) - install capacitor 1.5.2
+*app (ionic) - install capacitor 2.0.0
 *app (ionic) - install @angular/angularfire 6.0.0
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (loading) - fix home screen loading styles
