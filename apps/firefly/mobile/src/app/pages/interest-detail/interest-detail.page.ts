@@ -5,7 +5,7 @@ import { switchMap, catchError, map, finalize, takeUntil, take, tap } from 'rxjs
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet } from '@firefly/core';
+import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous, ActionEventDeny } from '@firefly/core';
 import { PageIconSelector } from '../icon-selector';
 import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
@@ -35,6 +35,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
     @Select(StateInterest.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateInterest.iconUrl)     iconUrl$:      Observable<string>;
     @Select(StateInterest.events)      events$:       Observable<Event[]>;
+    @Select(StateInterest.pendingEvents) pendingEvents$: Observable<Event[]>;
     @Select(StateStorage.images)       images$:       Observable<Record<string, StorageImage>>;
     @Select(StateDevice.device)        device$:       Observable<boolean>;
     @Select(StateUserEvents.initialized()) stateUserInitialized$: Observable<boolean>;
@@ -131,5 +132,23 @@ export class PageInterestDetail extends BaseComponent implements OnInit
       this.store.dispatch([
         new Navigate([Pages.AssetInterest], {id: interest.id}, {state: {isInterestDetail:true}})
       ]).subscribe();
+    }
+
+    public acceptEvent(event: Event): void
+    {
+      this.store.dispatch(new ActionEventSetIdAnonymous(event.id)).pipe
+      (
+        switchMap(() => this.store.dispatch(new ActionEventAccept())),
+        switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
+      ).subscribe();
+    }
+
+    public denyEvent(event: Event): void
+    {
+      this.store.dispatch(new ActionEventSetIdAnonymous(event.id)).pipe
+      (
+        switchMap(() => this.store.dispatch(new ActionEventDeny())),
+        switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
+      ).subscribe();
     }
 }
