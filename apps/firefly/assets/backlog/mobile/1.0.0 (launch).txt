@@ -52,6 +52,7 @@ auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 design (photoshop) - change main photo to firefly color
 *events (list) - implement filters
+*events (list) - add search placeholders for interests/events
 events (list) - implement simple event search filter
 events (list) - show/hide add button if on created filter
 events (detail) - cleanup styling/alignment
