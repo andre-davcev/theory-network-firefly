@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MenuController, PopoverController } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { MenuController, PopoverController, IonSearchbar } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
@@ -28,6 +28,9 @@ export class PageHome extends BaseComponent
     @Select(StateUserAlerts.unreadCount) unread$        : Observable<number>;
     @Select(StateUserAlerts.hasUnread)   hasUnread$     : Observable<boolean>;
     @Select(StateUser.authenticated)     authenticated$ : Observable<boolean>;
+
+    @ViewChild(IonSearchbar, { static: false })
+    private searchbar: IonSearchbar;
 
     public searching: boolean = false;
 
@@ -95,6 +98,8 @@ export class PageHome extends BaseComponent
     public searchShow(show: boolean): void
     {
         this.searching = show;
+
+        this.searchbar.setFocus();
     }
 
     public search(event: CustomEvent): void
