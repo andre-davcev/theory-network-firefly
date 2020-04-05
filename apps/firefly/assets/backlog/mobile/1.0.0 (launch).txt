@@ -6,9 +6,11 @@ admin (content) - event/interest spreadsheet
 admin (content) - mock.function.ts cloud function (mock data)
 admin (design) - research fiverr logo redesign
 admin (design) - create design system
-admin (financing) - apply for rg&e innovation zone ignition grant
+-admin (financing) - apply for rg&e innovation zone ignition grant
 admin (financing) - create pitch deck
 admin (firestore) - setup billing/usage alert triggers
+-admin (marketing) - setup online marketing strategy for v1 and beyond
+-admin (marketing) - research businesses to market to for v1
 admin (marketing) - implement spanish translations
 admin (marketing) - research pipedrive & trello
 admin (marketing) - create lead generation strategy
@@ -22,8 +24,8 @@ admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - required fields styling (icon/popover)
 app (errors) - setup error handling strategy
-*app (ionic) - install capacitor 2.0.0
-*app (ionic) - install @angular/angularfire 6.0.0
+app (ionic) - install capacitor 2.0.0
+app (ionic) - install @angular/angularfire 6.0.0
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (loading) - fix home screen loading styles
 app (load) - android splash screen
@@ -31,6 +33,7 @@ app (logging) - create logging strategy
 app (security) - setup router guards
 app (store) - release v1 on android
 app (store) - release v1 on ios
+app (lists) - implement infinite scrolling for lists
 automation (ci) - setup continuous integration (github actions)
 automation (ci) - setup ionic appflow
 automation (dev) - dockerize dev environment
