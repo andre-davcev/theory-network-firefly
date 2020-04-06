@@ -4,4 +4,6 @@ export interface MetadataEvent
     timeStartFormatted?      : string;
     timeStartFormattedShort? : string
     timeStartDate?           : Date;
+    icon?                    : string;
+    image?                   : string;
 }

@@ -18,4 +18,3 @@ export * from './stream';
 export * from './subscriptions';
 export * from './user';
 export * from './user-profile';
-export * from './user-settings';

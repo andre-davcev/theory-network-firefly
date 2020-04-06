@@ -47,14 +47,27 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 metadata    : {},
 
                 bucketPath     : null,
-                interestId     : null,
+                cityId         : null,
+                city           : null,
                 description    : null,
-                eventId        : null,
+                draft          : null,
+                geopoint       : null,
                 name           : null,
-                read           : null,
-                tokens         : null,
-                url            : null,
-                dateTime       : null
+                icon           : null,
+                interests      : [],
+                image          : null,
+                notifyComplete : null,
+                private        : null,
+                tagline        : null,
+                timeNotify     : null,
+                timeStart      : null,
+                timeEnd        : null,
+                phone          : null,
+                website        : null,
+
+                eventId : null,
+                read    : null,
+                tokens  : null
             },
             {
                 ActionReset:  ActionAlertReset,

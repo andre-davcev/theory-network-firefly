@@ -5,6 +5,12 @@
     736px height
     */
 
+    .cpt-events
+    {
+        height: 100%;
+        width: 100%;
+    }
+
     ion-fab {
         &.fab-vertical-bottom  { bottom: 0; }
         &.fab-horizontal-start { left: 0; }

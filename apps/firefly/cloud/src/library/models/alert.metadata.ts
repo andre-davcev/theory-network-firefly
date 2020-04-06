@@ -1,11 +1,8 @@
-import { MetadataUrl } from '../interfaces';
+import { MetadataEvent } from './event.metadata';
 
-export interface MetadataAlert extends MetadataUrl
+export interface MetadataAlert extends MetadataEvent
 {
-    dateTimeDate?            : Date;
-    timeStartFormatted?      : string;
-    timeStartFormattedShort? : string
-    timeStartDate?           : Date;
-    sessionRead?             : boolean;
-    index?                   : number;
+    dateTimeDate? : Date;
+    sessionRead?  : boolean;
+    index?        : number;
 }

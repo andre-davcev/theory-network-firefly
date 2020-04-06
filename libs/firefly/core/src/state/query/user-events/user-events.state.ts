@@ -1,6 +1,6 @@
-import { State, Action, StateContext, Store } from '@ngxs/store';
+import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 
-import { Event } from '@firefly/cloud';
+import { Event, DateEvents, Alert } from '@firefly/cloud';
 
 import { StateUserEventsModel } from './user-events.state.model';
 import { StateUserEventsOptions } from './user-events.state.options';
@@ -44,7 +44,34 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
             }
         );
     }
-
+/*
+    // ToDo: HERE
+    @Selector([StateUserEvents.data(), StateUser.subscriptionsStatus, StateUser.interestType])
+    public static events
+    (
+        state         : StateUserEventsModel,
+        stream        : Array<StreamInterest>,
+        subscriptions : Record<string, SubscriptionPartial>,
+        interestType  : EventType
+    ) : Array<Alert> | Array<DateEvents>
+    {
+        return interestType === InterestType.Created ?
+            StateUserInterests.
+                dataState(state).
+                map((interest: Interest) => {
+                    return {
+                        ...interest,
+                        score : 0,
+                        on    : subscriptions[interest.id] == null ? false : true
+                    };
+                }) :
+            stream.
+                filter((interest: StreamInterest) =>
+                    (interestType === InterestType.Subscribed && subscriptions[interest.id] != null) ||
+                    (interestType === InterestType.Unsubscribed && (subscriptions[interest.id] == null || interest.on != null))
+                );
+    }
+*/
     @Action(ActionUserEventsReset)
     reset(context: StateContext<StateUserEventsModel>)
     {
