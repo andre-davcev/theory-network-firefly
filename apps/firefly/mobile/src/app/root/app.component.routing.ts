@@ -31,7 +31,6 @@ export const routes: Routes =
 
     { path: Pages.InterestDetail, loadChildren: '@firefly/page/interest-detail#ModulePageInterestDetail' },
 
-    { path: Pages.Search,        loadChildren: '@firefly/page/search#ModulePageSearch' },
     { path: Pages.Subscriptions, loadChildren: '@firefly/page/subscriptions#ModulePageSubscriptions' },
     { path: Pages.AssetEvent,    loadChildren: '@firefly/page/asset-event#ModulePageAssetEvent' },
 

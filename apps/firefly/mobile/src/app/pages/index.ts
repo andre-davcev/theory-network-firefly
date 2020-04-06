@@ -14,7 +14,6 @@ export * from './event-location';
 export * from './event-selector';
 export * from './home';
 export * from './login';
-export * from './search';
 export * from './stream';
 export * from './subscriptions';
 export * from './user';
