@@ -1,17 +1,11 @@
-import { FirebaseDocument } from '../interfaces';
-import { firestore } from 'firebase/app';
-import { MetadataAlert } from '../models/alert.metadata';
+import { Event } from './event.model';
+import { MetadataAlert } from '../models';
 
-export interface Alert extends FirebaseDocument
+export interface Alert extends Event
 {
-    bucketPath  : string;
-    interestId  : string;
-    dateTime    : firestore.FieldValue;
-    description : string;
-    eventId     : string;
-    name        : string;
-    read        : boolean;
-    tokens      : Array<string>;
-    url?        : string;
-    metadata?   : MetadataAlert;
+    eventId : string;
+    read    : boolean;
+    tokens  : Array<string>;
+
+    metadata? : MetadataAlert;
 }

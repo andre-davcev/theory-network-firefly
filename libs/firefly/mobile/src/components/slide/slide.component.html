@@ -7,13 +7,13 @@
     <!--div class="cnt-image" (click)="clickedAlertDetail()">
       <img class="cpt-image" [src]="slide.metadata.urlMedium">
     </!--div-->
-    <div class="cpt-image" (click)="clickedAlertDetail()" [style.background-image]="'url(' + slide.metadata.urlMedium + ')'"></div>
+    <div class="cpt-image" (click)="clickedAlertDetail()" [style.background-image]="'url(' + slide.metadata.image + ')'"></div>
 
     <app-button-action [text]="'general.go' | translate"
                        (click)="clickedAlertGo()">
     </app-button-action>
 
-    <span class="cpt-date">{{ slide.metadata.dateTimeDate | date:'short' }}</span>
+    <span class="cpt-date">{{ slide.timeStart | date:'short' }}</span>
 </div>
 
 <ion-button fill="clear" (click)="clickedAlertDelete()">

@@ -92,7 +92,7 @@ export class PageStream extends BaseComponent implements OnInit
         ).subscribe();
     }
 
-    public setClosed(itemIndex): void
+    public setClosed(itemIndex: number): void
     {
         if(this.currentlyOpenedItemIndex === itemIndex)
         {

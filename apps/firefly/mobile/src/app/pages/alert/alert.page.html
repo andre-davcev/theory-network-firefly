@@ -1,22 +1,23 @@
 <form novalidate
-      *ngIf="form$ | async"
+      class="cpt-events"
+      *ngIf="(eventType$ | async) === EventType.New && (form$ | async)"
       [formGroup]="form$ | async"
       ngxsForm="alerts.form">
+    <ion-slides *ngIf="didInit && ((eventType$ | async) === EventType.New) && (hasUnread$ | async)"
+                #sliderRef
+                pager="true"
+                (ionSlideDidChange)="slideChanged()"
+                [options]="slideOptions">
+        <ion-slide #status *ngFor="let alert of unread$ | async">
+            <app-slide [slide]="alert"
+                      [buttonText]="'general.go' | translate"
+                      (alertDeleteClicked)="alertDelete(alert)"
+                      (alertGoClicked)="alertGo()"
+                      (alertDetailClicked)="navigate(Pages.AlertDetail, alert)">
+            </app-slide>
+        </ion-slide>
+    </ion-slides>
 </form>
-<ion-slides *ngIf="didInit && ((eventType$ | async) === EventType.New) && (hasUnread$ | async)"
-            #sliderRef
-            pager="true"
-            (ionSlideDidChange)="slideChanged()"
-            [options]="slideOptions">
-    <ion-slide #status *ngFor="let alert of unread$ | async">
-        <app-slide [slide]="alert"
-                   [buttonText]="'general.go' | translate"
-                   (alertDeleteClicked)="alertDelete(alert)"
-                   (alertGoClicked)="alertGo()"
-                   (alertDetailClicked)="navigate(Pages.AlertDetail, alert)">
-        </app-slide>
-    </ion-slide>
-</ion-slides>
 
 <!--
 <ion-fab [class.cpt-empty]="!(hasUnread$ | async)"

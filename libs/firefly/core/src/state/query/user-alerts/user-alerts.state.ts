@@ -119,14 +119,13 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
                 {
                     unread += alert.read ? 0 : 1;
 
-                    timeStart = (alert.dateTime as firestore.Timestamp).toDate();
+                    timeStart = new Date(alert.timeStart);
                     timeStartFormatted = timeStart.toLocaleDateString(language, options);
                     timeStartFormattedShort = timeStart.toLocaleDateString(language, optionsShort);
 
                     alert.metadata =
                     {
-                        urlMedium:    images[alert.bucketPath].medium,
-                        dateTimeDate: (alert.dateTime as firestore.Timestamp).toDate()
+                        image: images[alert.bucketPath].medium
                     };
 
                     if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
