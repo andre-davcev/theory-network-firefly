@@ -102,11 +102,9 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
                 const images : Record<string, StorageImage> = this.store.selectSnapshot(StateStorage.images);
                 const data   : Array<Alert>                 = StateUserAlerts.dataState(state);
 
-                const language: string = this.store.selectSnapshot(StateLanguage.language);
-                const options: any = { weekday: 'long',
-                year: 'numeric', month: 'long', day: 'numeric'};
-                const optionsShort: any = { weekday: 'short',
-                year: 'numeric', month: 'short', day: 'numeric'};
+                const language     : string = this.store.selectSnapshot(StateLanguage.language);
+                const options      : any    = { weekday: 'long',  year: 'numeric', month: 'long',  day: 'numeric'};
+                const optionsShort : any    = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
 
                 let timeStart: Date;
                 let timeStartPrevious: Date;
