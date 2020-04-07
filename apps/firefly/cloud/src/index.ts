@@ -2,10 +2,9 @@ import { initializeApp } from 'firebase-admin';
 
 initializeApp();
 
-import { InterestsCreate, InterestsDelete } from './interests';
+import { InterestsCreate, InterestsCron, InterestsDelete } from './interests';
 import { EventsCreate, EventsUpdate, EventsCron } from './events';
 import { StorageResize } from './storage';
-import { StreamsCron } from './streams';
 import { AlertsCreate, AlertsCron } from './alerts';
 import { CitiesCreate } from './cities';
 import { UsersCreate, UsersDelete, UsersUpdate } from './users';
@@ -19,6 +18,7 @@ export
     CitiesCreate,
 
     InterestsCreate,
+    InterestsCron,
     InterestsDelete,
 
     EventsCreate,
@@ -26,8 +26,6 @@ export
     EventsCron,
 
     StorageResize,
-
-    StreamsCron,
 
     UserProfilesCreate,
 

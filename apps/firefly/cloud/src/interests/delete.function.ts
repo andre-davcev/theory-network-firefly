@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, FieldValue, WriteResult, QuerySnapshot, QueryDocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { User, Subscription, SubscriptionPartial } from '../library';
+import { User, Subscription, SubscriptionPartial, Collection } from '../library';
 
 const database: Firestore = db();
 
@@ -15,8 +15,8 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 
     const queries: Array<Promise<QuerySnapshot>> =
     [
-        database.collection('events').where('interests',    'array-contains', id).get(),
-        database.collection('users').where('subscriptions', 'array-contains', id).get()
+        database.collection(Collection.Events).where('interests',    'array-contains', id).get(),
+        database.collection(Collection.Users).where('subscriptions', 'array-contains', id).get()
     ];
     const updates: Array<Promise<WriteResult>> = [];
 

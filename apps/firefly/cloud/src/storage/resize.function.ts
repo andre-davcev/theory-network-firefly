@@ -13,23 +13,19 @@ storage.
 object().
 onFinalize(async (object: storage.ObjectMetadata, context: EventContext) =>
 {
-    const bucket:   any           = gcs.bucket(object.bucket);
-    const filePath: string        = object.name;
-    const segments: Array<string> = filePath.split('/');
-    const fileType: string        = segments[1];
-    const fileName: string        = segments[2];
+    const bucket:   any          = gcs.bucket(object.bucket);
+    const filePath: string       = object.name;
+    const [aspect, id, fileName] = filePath.split('/');
 
-    if (fileName.includes('@small.') || fileName.includes('@medium.'))
-    {
-        return false;
-    }
+    if (aspect == null || id == null || fileName == null || fileName.includes('@small.') || fileName.includes('@medium.')) { return false; }
 
-    const filePathTemp :  string       = join(tmpdir(), fileName);
-    const fileNameParts: Array<string> = fileName.split('.');
+    const [name, extension] = fileName.split('.');
+
+    const filePathTemp: string = join(tmpdir(), fileName);
 
     await bucket.file(filePath).download({ destination: filePathTemp });
 
-    const fileSmallName:        string = `${fileNameParts[0]}@small.${fileNameParts[1]}`;
+    const fileSmallName:        string = `${name}@small.${extension}`;
     const fileSmallPath:        string = join(tmpdir(), fileSmallName);
     const fileSmallWidth:       number = 100;
     const fileSmallDestination: string = join(dirname(filePath), fileSmallName);
@@ -37,9 +33,9 @@ onFinalize(async (object: storage.ObjectMetadata, context: EventContext) =>
     await sharp(filePathTemp).resize({ width: fileSmallWidth, withoutEnlargement: true }).toFile(fileSmallPath);
     await bucket.upload(fileSmallPath, { destination: fileSmallDestination });
 
-    const fileMediumName:        string = `${fileNameParts[0]}@medium.${fileNameParts[1]}`;
+    const fileMediumName:        string = `${name}@medium.${extension}`;
     const fileMediumPath:        string = join(tmpdir(), fileMediumName);
-    const fileMediumWidth:       number = fileType === 'images' ? 500 : 500;
+    const fileMediumWidth:       number = 500;
     const fileMediumDestination: string = join(dirname(filePath), fileMediumName);
 
     await sharp(filePathTemp).resize({ width: fileMediumWidth, withoutEnlargement: true }).toFile(fileMediumPath);
