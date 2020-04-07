@@ -9,10 +9,8 @@ export const routes: Routes =
     { path: Pages.Auth, loadChildren: '@firefly/page/auth#ModulePageAuth' },
     { path: Pages.Home, loadChildren: '@firefly/page/home#ModulePageHome' },
 
-    { path: Pages.Publisher,      loadChildren: '@firefly/page/publisher#ModulePagePublisher' },
     { path: Pages.AssetsInterests, loadChildren: '@firefly/page/assets-interests#ModulePageAssetsInterestsRoute' },
     { path: Pages.AssetInterest,    loadChildren: '@firefly/page/asset-interest#ModulePageAssetInterest'},
-    { path: Pages.AssetsCoupons,    loadChildren: '@firefly/page/assets-coupons#ModulePageAssetsCoupons' },
     { path: Pages.AssetsEvents,     loadChildren: '@firefly/page/assets-events#ModulePageAssetsEventsRoute' },
     { path: Pages.AssetEvent,       loadChildren: '@firefly/page/asset-event#ModulePageAssetEvent' },
     // { path: Pages.AssetsBeacons,  loadChildren: '@firefly/page/assets-beacons#ModulePageAssetsBeacons' },
