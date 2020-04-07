@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, DocumentReference, FieldValue } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version, Interest, Alert, User, UserProfile, ServiceCities } from '../library';
+import { ServiceFirestore, Version, Interest, Alert, User, UserProfile, ServiceCities, Collection } from '../library';
 
 const database: Firestore = db();
 
@@ -14,20 +14,9 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
     const userId : string = snapshot.id;
     const user   : User   = ServiceFirestore.create<User>(snapshot, Version.Users);
 
-    const documentInterest : DocumentReference = database.collection('clusters').doc();
-    const documentAlert    : DocumentReference = database.collection('alerts').doc();
+    user.isPublisher = false;
 
-    const interest: Partial<Interest> =
-    {
-        userId,
-
-        name            : 'Your first interest!',
-        tagline         : 'Come enjoy my first event interest',
-        description     : `This is your first interest. When you're ready to publish to the global catalog, flip off the private switch and join the Firefly community of publishers!`,
-        bucketPath      : 'baLysAd71cRyZjh0hr6poxR8an13/icons/CASwQmcg46JQYZqGmC3e.png',
-        private         : true,
-        subscriberCount : 0
-    };
+    const documentAlert    : DocumentReference = database.collection(Collection.Alerts).doc();
 
     const alert: Partial<Alert> =
     {
@@ -36,12 +25,11 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         name        : 'Your first alert!',
         description : `This is your first alert. Once you subscribe to Firefly Interests found on the home Discover screen, you will receive alerts when new events are posted in each interest!`,
         bucketPath  : 'baLysAd71cRyZjh0hr6poxR8an13/images/nA8wxI4UIhEU0YjfwWPe.jpeg',
-        eventId     : null, // ToDo: Add default eventId here
-        interestId   : documentInterest.id,
-        dateTime    : FieldValue.serverTimestamp(),
+        eventId     : null,
+        interests   : [],
+        timeStart   : new Date().getMilliseconds().toString(),
         read        : false,
-        tokens      : [],
-        url         : 'https://firefly.im'
+        website     : 'https://firefly.im'
     };
 
     const userProfile: Partial<UserProfile> =
@@ -52,15 +40,13 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         nameLast    : '',
         icon        : '',
         companyName : '',
-        isCompany   : false,
-        isPublisher : false
+        isCompany   : false
     };
 
     return Promise.all
     ([
         snapshot.ref.update(user),
-        database.collection('user-profiles').doc(userId).create(userProfile),
-        documentInterest.set(interest),
+        database.collection(Collection.UserProfiles).doc(userId).create(userProfile),
         documentAlert.set(alert),
         ServiceCities.createIfNew(database, user)
     ]);

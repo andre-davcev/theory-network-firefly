@@ -1,7 +1,7 @@
 import { runWith, EventContext } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore } from '@google-cloud/firestore';
-import { User, Alert } from '../library';
+import { User, Alert, Collection } from '../library';
 import admin = require('firebase-admin');
 
 const storage = admin.storage();
@@ -16,7 +16,7 @@ onRun(async (context: EventContext) =>
     const userAlerts          : Record<string, Array<Alert>>   = {};
 
     let id     : string;
-    let query  : QuerySnapshot = await database.collection('alerts').get();
+    let query  : QuerySnapshot = await database.collection(Collection.Alerts).get();
 
     query.forEach((snapshot: QueryDocumentSnapshot) =>
     {
@@ -31,7 +31,7 @@ onRun(async (context: EventContext) =>
 
     Object.keys(userAlerts).forEach(async (userId: string) => {
       console.log('getting userID: ' + userId);
-      query = await database.collection('users').where('userId', '==', userId).get();
+      query = await database.collection(Collection.Users).where('userId', '==', userId).get();
 
       query.forEach((snapshot: QueryDocumentSnapshot) => {
         const user = snapshot.data() as User;

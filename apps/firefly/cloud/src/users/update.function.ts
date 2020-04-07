@@ -1,6 +1,6 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { FieldValue, DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { Status, User, Subscription, ServiceCities, SubscriptionPartial } from '../library';
+import { Status, User, Subscription, ServiceCities, SubscriptionPartial, Collection } from '../library';
 import { firestore as db } from 'firebase-admin';
 
 const database: Firestore = db();
@@ -54,12 +54,12 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
 
     if (status === Status.Added)
     {
-        updates.push(database.collection('clusters').doc(interestId).update({ subscriberCount: FieldValue.increment(1) }));
+        updates.push(database.collection(Collection.Interests).doc(interestId).update({ subscriberCount: FieldValue.increment(1) }));
         updates.push(change.after.ref.update({ subscriptions: FieldValue.arrayUnion(interestId) }));
     }
     else if (status === Status.Removed)
     {
-        updates.push(database.collection('clusters').doc(interestId).update({ subscriberCount: FieldValue.increment(-1) }));
+        updates.push(database.collection(Collection.Interests).doc(interestId).update({ subscriberCount: FieldValue.increment(-1) }));
         updates.push(change.after.ref.update({ subscriptions: FieldValue.arrayRemove(interestId) }));
     }
 

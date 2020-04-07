@@ -66,8 +66,7 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 website        : null,
 
                 eventId : null,
-                read    : null,
-                tokens  : null
+                read    : null
             },
             {
                 ActionReset:  ActionAlertReset,

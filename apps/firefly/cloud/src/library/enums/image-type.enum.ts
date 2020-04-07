@@ -1,4 +1,4 @@
-export enum BucketPath
+export enum ImageType
 {
     Icon  = 'icon',
     Image = 'image'

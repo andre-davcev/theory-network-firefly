@@ -3,7 +3,7 @@ import { firestore } from 'firebase-admin';
 import { Location } from '../models';
 import { Event, User, StreamInterest, Interest, City } from '../documents';
 import { ServiceStreams } from './stream.service';
-import { GlobalVariable } from '../enums';
+import { GlobalVariable, Collection } from '../enums';
 
 export class ServiceCities
 {
@@ -17,7 +17,7 @@ export class ServiceCities
     public static async createIfNew(database: Firestore, document: Event | User): Promise<WriteResult>
     {
         const location: Location         = document.city;
-        const cityDoc:  DocumentSnapshot = await database.collection('cities').doc(location.cityId).get();
+        const cityDoc:  DocumentSnapshot = await database.collection(Collection.Cities).doc(location.cityId).get();
 
         if (cityDoc.exists) { return null; }
 
@@ -52,7 +52,7 @@ export class ServiceCities
 
     public static async generateStream(database: Firestore, city: City): Promise<any>
     {
-        const debugDoc            : firestore.DocumentReference                   = database.collection('debug').doc('stream-city');
+        const debugDoc            : firestore.DocumentReference                   = database.collection(Collection.Debug).doc('stream-city');
         const debug               : boolean                                       = true
         const citiesNearby        : Record<string, number>                        = city.nearby;
         const cityIdsNearby       : Array<string>                                 = Object.keys(citiesNearby);
@@ -61,8 +61,8 @@ export class ServiceCities
         const cityInterests       : Record<string, Array<string>>                 = {};
         const distanceScores      : Record<string, number>                        = {};
         const interestCityEvents  : Record<string, Record<string, Array<string>>> = {};
-        const interestCollection  : CollectionReference                           = database.collection('clusters');
-        const eventCollection     : CollectionReference                           = database.collection('events');
+        const interestCollection  : CollectionReference                           = database.collection(Collection.Interests);
+        const eventCollection     : CollectionReference                           = database.collection(Collection.Events);
         const eventQuery          : Array<Promise<QuerySnapshot>>                 = [];
         const interestQuery       : Array<Promise<QuerySnapshot>>                 = [];
         const interestIds         : Record<string, string>                        = {};
@@ -187,6 +187,6 @@ export class ServiceCities
             });
         }
 
-        return database.collection('streams').doc(cityId).set(stream);
+        return database.collection(Collection.Streams).doc(cityId).set(stream);
     }
 }
