@@ -6,8 +6,8 @@ import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StatusBarStyle, Plugins, CameraOptions, CameraResultType, CameraSource, CameraPhoto } from '@capacitor/core';
-import { StateEvent, ActionEventImageUriSet, ActionEventPatch, ActionEventImagePathSet, ActionEventSave, StateInterest, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous } from '@firefly/core';
+import { StatusBarStyle, Plugins } from '@capacitor/core';
+import { StateEvent, ActionEventPatch, ActionEventSave, StateInterest, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
