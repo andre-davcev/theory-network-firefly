@@ -93,6 +93,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 isPublisher         : false,
                 language            : 'en',
                 geopoint            : null,
+                notifications       : {},
                 phoneNumber         : '',
                 providerId          : undefined,
                 subscriptions       : [],
