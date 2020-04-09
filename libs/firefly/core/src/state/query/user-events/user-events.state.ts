@@ -132,7 +132,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
             }),
             map((data: Array<Event>) =>
                 data.map((item: Event) =>
-                    item.icon
+                    item.bucketPath
                 )
             ),
             switchMap((bucketPaths: Array<string>) =>

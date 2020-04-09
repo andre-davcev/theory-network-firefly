@@ -1,10 +1,4 @@
 import { Event } from './event.model';
-import { MetadataAlert } from '../models';
+import { MetadataAlert, AlertPartial } from '../models';
 
-export interface Alert extends Event
-{
-    eventId : string;
-    read    : boolean;
-
-    metadata? : MetadataAlert;
-}
+export type Alert = Event & AlertPartial & { metadata?: MetadataAlert };

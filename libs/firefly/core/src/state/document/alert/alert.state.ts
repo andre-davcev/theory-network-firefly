@@ -44,7 +44,6 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 userId      : undefined,
                 dateCreated : undefined,
                 dateUpdated : undefined,
-                metadata    : {},
 
                 bucketPath     : null,
                 cityId         : null,
@@ -53,9 +52,7 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 draft          : null,
                 geopoint       : null,
                 name           : null,
-                icon           : null,
                 interests      : [],
-                image          : null,
                 notifyComplete : null,
                 private        : null,
                 tagline        : null,
@@ -65,8 +62,13 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 phone          : null,
                 website        : null,
 
-                eventId : null,
-                read    : null
+                read : null,
+
+                metadata:
+                {
+                    icon  : null,
+                    image : null
+                }
             },
             {
                 ActionReset:  ActionAlertReset,

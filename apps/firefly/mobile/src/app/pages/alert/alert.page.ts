@@ -73,7 +73,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
 
     public alertDetail(alert: Alert): void
     {
-        this.store.dispatch(new ActionEventGet(alert.eventId)).
+        this.store.dispatch(new ActionEventGet(alert.id)).
         pipe
         (
             switchMap(() =>
@@ -109,7 +109,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
       if(page === Pages.AlertsList)
         this.store.dispatch(new Navigate([page]));
       else
-        this.store.dispatch(new ActionEventGet(object.eventId)).pipe
+        this.store.dispatch(new ActionEventGet(object.id)).pipe
         (
           switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
         ).subscribe();

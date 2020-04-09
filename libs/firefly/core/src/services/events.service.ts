@@ -89,17 +89,17 @@ export class ServiceEvents extends ServiceFirestore<Event>
         ({
             ...event,
 
-            bucketPath  : [event.bucketPath,  [Validators.required]],
-            description : [event.description, [Validators.required, ValidatorsExtended.minLength(1)]],
-            geopoint    : [event.geopoint,    [Validators.required]],
-            icon        : [event.icon,        [Validators.required]],
-            image       : [event.image,       [Validators.required]],
-            interests   : [event.interests,   []],
-            name        : [event.name,        [Validators.required, ValidatorsExtended.minLength(1)]],
-            tagline     : [event.tagline,     [Validators.required, ValidatorsExtended.minLength(1)]],
-            timeStart   : [event.timeStart,   [ServiceEvents.validateTime()]],
-            timeEnd     : [event.timeEnd,     [ServiceEvents.validateTime()]],
-            timeNotify  : [event.timeNotify,  [ServiceEvents.validateTimeNotify()]]
+            bucketPath  : [event.bucketPath,     [Validators.required]],
+            description : [event.description,    [Validators.required, ValidatorsExtended.minLength(1)]],
+            geopoint    : [event.geopoint,       [Validators.required]],
+            icon        : [event.metadata.icon,  [Validators.required]],
+            image       : [event.metadata.image, [Validators.required]],
+            interests   : [event.interests,      []],
+            name        : [event.name,           [Validators.required, ValidatorsExtended.minLength(1)]],
+            tagline     : [event.tagline,        [Validators.required, ValidatorsExtended.minLength(1)]],
+            timeStart   : [event.timeStart,      [ServiceEvents.validateTime()]],
+            timeEnd     : [event.timeEnd,        [ServiceEvents.validateTime()]],
+            timeNotify  : [event.timeNotify,     [ServiceEvents.validateTimeNotify()]]
         });
     }
 }

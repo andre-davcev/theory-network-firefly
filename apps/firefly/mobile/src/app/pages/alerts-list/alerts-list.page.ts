@@ -35,7 +35,7 @@ export class PageAlertsList extends BaseComponent
         this.store.dispatch
         ([
             new ActionMobileLoadingShow(),
-            new ActionEventGet(object.eventId)
+            new ActionEventGet(object.id)
         ]).
         pipe
         (

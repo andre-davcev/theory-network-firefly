@@ -1,4 +1,5 @@
 export * from './alert.metadata';
+export * from './alert.partial';
 export * from './date-events.model';
 export * from './event.metadata';
 export * from './location.model';

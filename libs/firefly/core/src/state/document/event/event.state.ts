@@ -63,7 +63,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 userId      : undefined,
                 dateCreated : undefined,
                 dateUpdated : undefined,
-                metadata    : {},
 
                 bucketPath     : null,
                 cityId         : null,
@@ -71,8 +70,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 description    : null,
                 draft          : false,
                 geopoint       : null,
-                icon           : null,
-                image          : null,
                 interests      : [],
                 name           : null,
                 notifyComplete : false,
@@ -82,7 +79,13 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 timeStart      : null,
                 timeEnd        : null,
                 phone          : null,
-                website        : null
+                website        : null,
+
+                metadata:
+                {
+                    icon  : null,
+                    image : null
+                }
             },
             {
                 ActionReset:  ActionEventReset,

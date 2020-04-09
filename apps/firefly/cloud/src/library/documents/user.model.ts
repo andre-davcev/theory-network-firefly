@@ -1,7 +1,7 @@
 import { FirebaseDocument } from '../interfaces';
 import { firestore } from 'firebase';
 
-import { Location, SubscriptionPartial } from '../models';
+import { Location, SubscriptionPartial, AlertPartial } from '../models';
 
 export interface User extends FirebaseDocument
 {
@@ -11,6 +11,7 @@ export interface User extends FirebaseDocument
     isPublisher         : boolean;
     language            : string;
     geopoint            : firestore.GeoPoint;
+    notifications       : Record<string, AlertPartial>;
     phoneNumber         : string;
     providerId          : string;
     subscriptions       : Array<string>;
