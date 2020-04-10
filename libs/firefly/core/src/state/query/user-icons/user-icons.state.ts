@@ -16,6 +16,7 @@ import {
 import { StateUser } from '../../document/user';
 import { Query } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
+import { ServiceStorage } from '@theory/firebase';
 
 @State<StateUserIconsModel>(StateUserIconsOptions)
 @Injectable()
@@ -24,7 +25,8 @@ export class StateUserIcons extends StateQuery<Icon, StateUserIconsModel>
     constructor
     (
         private store:   Store,
-        private service: ServiceIcons
+        private service: ServiceIcons,
+                storage: ServiceStorage
     )
     {
         super
@@ -37,7 +39,8 @@ export class StateUserIcons extends StateQuery<Icon, StateUserIconsModel>
                 ActionAdd     : ActionUserIconsAdd,
                 ActionRemove  : ActionUserIconsRemove,
                 ActionSync    : ActionUserIconsSync
-            }
+            },
+            storage
         );
     }
 

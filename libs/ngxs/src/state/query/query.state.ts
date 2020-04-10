@@ -4,7 +4,7 @@ import { firestore } from 'firebase/app';
 import { Observable, from, of } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 
-import { ImageSize, FirebaseDocument, ActionStorageUrlsGet } from '@theory/firebase';
+import { ImageSize, FirebaseDocument, ActionStorageUrlsGet, ServiceStorage } from '@theory/firebase';
 
 import { StateCollection, ActionsCollection, StateCollectionModel } from '../collection';
 
@@ -14,11 +14,12 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
 
     constructor
     (
-        defaults: M,
-        actions:  ActionsCollection
+        defaults : M,
+        actions  : ActionsCollection,
+        storage  : ServiceStorage
     )
     {
-        super(defaults, actions);
+        super(defaults, actions, storage);
     }
 
     public reset(context: StateContext<M>, action: any): Observable<any>

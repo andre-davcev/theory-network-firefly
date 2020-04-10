@@ -1,8 +1,16 @@
+import { Injectable } from '@angular/core';
+import { Query } from '@angular/fire/firestore';
+
 import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
+import { of, Observable, forkJoin } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+
+import { StateQuery } from '@theory/ngxs';
+import { ImageSize, ServiceStorage } from '@theory/firebase';
 
 import { Interest, StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ServiceInterests } from '@firefly/core/services';
-import { StateQuery } from '@theory/ngxs';
+import { InterestType, Collection } from '@firefly/core/enums';
 
 import { StateUserInterestsModel } from './user-interests.state.model';
 import { StateUserInterestsOptions } from './user-interests.state.options';
@@ -15,10 +23,8 @@ import {
     ActionUserInterestsReset
 } from './user-interests.actions';
 import { StateUser } from '../../document/user/user.state';
-import { Query } from '@angular/fire/firestore';
-import { Injectable } from '@angular/core';
 import { StateUserStream } from '../../child/user-stream/user-stream.state';
-import { InterestType } from '@firefly/core/enums';
+import { ImageType } from '../../../enums';
 
 @State<StateUserInterestsModel>(StateUserInterestsOptions)
 @Injectable()
@@ -27,7 +33,8 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     constructor
     (
         private store:   Store,
-        private service: ServiceInterests
+        private service: ServiceInterests,
+                storage: ServiceStorage
     )
     {
         super
@@ -40,7 +47,8 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
                 ActionAdd     : ActionUserInterestsAdd,
                 ActionRemove  : ActionUserInterestsRemove,
                 ActionSync    : ActionUserInterestsSync
-            }
+            },
+            storage
         );
     }
 
@@ -124,7 +132,13 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     @Action(ActionUserInterestsGet)
     get(context: StateContext<StateUserInterestsModel>)
     {
-        return super.get(context);
+        return super.get(context).
+        pipe
+        (
+            switchMap(() =>
+                super.getMedia(context, 'interests', ImageType.Image)
+            )
+        );
     }
 
     @Action(ActionUserInterestsAdd)

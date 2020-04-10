@@ -23,5 +23,5 @@ export interface Event extends FirebaseDocument
     phone?         : string;
     website?       : string;
 
-    metadata?: MetadataEvent;
+    metadata: MetadataEvent;
 }

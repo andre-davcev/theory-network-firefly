@@ -1,5 +1,5 @@
 import { FirebaseDocument } from '../interfaces';
-import { firestore } from 'firebase';
+import { firestore } from 'firebase/app';
 
 import { Location, SubscriptionPartial, AlertPartial } from '../models';
 

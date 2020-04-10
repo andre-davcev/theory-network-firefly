@@ -19,7 +19,7 @@ import { Query } from '@angular/fire/firestore';
 import { tap, map, switchMap } from 'rxjs/operators';
 import { StateLanguage } from '@theory/capacitor';
 import { Injectable } from '@angular/core';
-import { ActionStorageUrlsGet, ImageSize } from '@theory/firebase';
+import { ActionStorageUrlsGet, ImageSize, ServiceStorage } from '@theory/firebase';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 @Injectable()
@@ -28,7 +28,8 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     constructor
     (
         private store:   Store,
-        private service: ServiceEvents
+        private service: ServiceEvents,
+                storage: ServiceStorage
     )
     {
         super
@@ -41,7 +42,8 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
                 ActionAdd     : ActionUserEventsAdd,
                 ActionRemove  : ActionUserEventsRemove,
                 ActionSync    : ActionUserEventsSync
-            }
+            },
+            storage
         );
     }
 /*
