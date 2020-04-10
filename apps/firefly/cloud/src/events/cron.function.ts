@@ -25,7 +25,6 @@ onRun(async (context: EventContext) =>
             ...event,
 
             version : Version.Alerts,
-            eventId : event.id,
             read    : false
         };
 
