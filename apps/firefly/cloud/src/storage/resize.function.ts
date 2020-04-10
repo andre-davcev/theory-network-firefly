@@ -21,7 +21,7 @@ onFinalize(async (object: storage.ObjectMetadata, context: EventContext) =>
 
     const [name, extension] = fileName.split('.');
 
-    const filePathTemp: string = join(tmpdir(), fileName);
+    const filePathTemp: string = join(tmpdir(), `${aspect}-${id}-${fileName}`);
 
     await bucket.file(filePath).download({ destination: filePathTemp });
 

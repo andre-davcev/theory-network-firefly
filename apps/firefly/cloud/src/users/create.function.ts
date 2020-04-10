@@ -25,7 +25,6 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         name        : 'Your first alert!',
         description : `This is your first alert. Once you subscribe to Firefly Interests found on the home Discover screen, you will receive alerts when new events are posted in each interest!`,
         bucketPath  : 'baLysAd71cRyZjh0hr6poxR8an13/images/nA8wxI4UIhEU0YjfwWPe.jpeg',
-        eventId     : null,
         interests   : [],
         timeStart   : new Date().getMilliseconds().toString(),
         read        : false,
