@@ -1,25 +1,29 @@
-import { OrderBy, ImageSize, FirebaseDocument } from '@theory/firebase';
+import { OrderBy, ImageSize, FirebaseDocument, ServiceStorage } from '@theory/firebase';
 import { firestore } from 'firebase/app';
 import { createSelector, StateContext } from '@ngxs/store';
 import { ActionsCollection } from './collection.actions';
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, forkJoin } from 'rxjs';
 import { PageSize } from '../../enums';
 import { StateCollectionModel } from './collection.model';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 export abstract class StateCollection<T extends FirebaseDocument, M extends StateCollectionModel<T>>
 {
     protected defaults: M;
     protected actions:  ActionsCollection;
+    protected storage:  ServiceStorage;
 
     constructor
     (
-        defaults: M,
-        actions:  ActionsCollection
+        defaults : M,
+        actions  : ActionsCollection,
+        storage  : ServiceStorage
     )
     {
         this.defaults = CoreUtil.clone<M>(defaults);
         this.actions  = actions;
+        this.storage  = storage;
     }
 
     protected static initializedState(state: any):      boolean                                    { return state.initialized; }
@@ -213,5 +217,60 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
             indexOld,
             indexNew
         });
+    }
+
+    public get(context: StateContext<M>): Observable<any>
+    {
+        return of(null);
+    }
+
+    public getMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
+    {
+        const { getState, patchState } = context;
+
+        const dataLookup: Record<string, T> = {};
+
+        return of(StateCollection.dataState(getState())).
+        pipe
+        (
+            map((data: Array<T>) =>
+                data.map((item: T) =>
+                    of(item).
+                    pipe
+                    (
+                        map(() =>
+                            `${collection}/${item.id}/${imageType}.jpeg`
+                        ),
+                        switchMap((bucketPath: string) =>
+                            this.storage.downloadUrl(bucketPath, ImageSize.Medium)
+                        ),
+                        map((image: string) =>
+                            ({
+                                ...item,
+                                metadata : { image }
+                            })
+                        )
+                    )
+                )
+            ),
+            switchMap((items$: Array<Observable<T>>) =>
+                forkJoin(items$).
+                pipe
+                (
+                    tap((data: Array<T>) =>
+                        data.forEach((document: T) =>
+                            dataLookup[document.id] = document
+                        )
+                    ),
+                    tap((data: Array<T>) =>
+                        patchState
+                        ({
+                            data,
+                            dataLookup
+                        } as M)
+                    )
+                )
+            )
+        );
     }
 }

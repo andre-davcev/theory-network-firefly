@@ -99,7 +99,13 @@ export class ServiceEvents extends ServiceFirestore<Event>
             tagline     : [event.tagline,        [Validators.required, ValidatorsExtended.minLength(1)]],
             timeStart   : [event.timeStart,      [ServiceEvents.validateTime()]],
             timeEnd     : [event.timeEnd,        [ServiceEvents.validateTime()]],
-            timeNotify  : [event.timeNotify,     [ServiceEvents.validateTimeNotify()]]
+            timeNotify  : [event.timeNotify,     [ServiceEvents.validateTimeNotify()]],
+
+            metadata : this.formBuilder.group
+            ({
+                icon  : [event.metadata.icon,  [Validators.required]],
+                image : [event.metadata.image, [Validators.required]]
+            })
         });
     }
 }

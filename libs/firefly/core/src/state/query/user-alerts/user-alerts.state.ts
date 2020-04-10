@@ -18,8 +18,7 @@ import {
 import { StateUser } from '../../document/user';
 import { Query } from '@angular/fire/firestore';
 import { tap, switchMap } from 'rxjs/operators';
-import { StorageImage, StateStorage } from '@theory/firebase';
-import { firestore } from 'firebase/app';
+import { StorageImage, StateStorage, ServiceStorage } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
 import { from, of } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
@@ -35,7 +34,8 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
         private store       : Store,
         private service     : ServiceAlerts,
         private translate   : TranslateService,
-        private actionSheet : ActionSheetController
+        private actionSheet : ActionSheetController,
+                storage     : ServiceStorage,
     )
     {
         super
@@ -48,7 +48,8 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
                 ActionAdd     : ActionUserAlertsAdd,
                 ActionRemove  : ActionUserAlertsRemove,
                 ActionSync    : ActionUserAlertsSync
-            }
+            },
+            storage
         );
     }
 

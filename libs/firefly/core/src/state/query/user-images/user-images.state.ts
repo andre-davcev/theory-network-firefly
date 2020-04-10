@@ -16,6 +16,7 @@ import {
 import { StateUser } from '../../document/user';
 import { Query } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
+import { ServiceStorage } from '@theory/firebase';
 
 @State<StateUserImagesModel>(StateUserImagesOptions)
 @Injectable()
@@ -24,7 +25,8 @@ export class StateUserImages extends StateQuery<Image, StateUserImagesModel>
     constructor
     (
         private store:   Store,
-        private service: ServiceImages
+        private service: ServiceImages,
+                storage: ServiceStorage
     )
     {
         super
@@ -37,7 +39,8 @@ export class StateUserImages extends StateQuery<Image, StateUserImagesModel>
                 ActionAdd     : ActionUserImagesAdd,
                 ActionRemove  : ActionUserImagesRemove,
                 ActionSync    : ActionUserImagesSync
-            }
+            },
+            storage
         );
     }
 

@@ -63,14 +63,16 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                 id          : undefined,
                 dateCreated : undefined,
                 dateUpdated : undefined,
-                metadata    : {},
 
                 bucketPath      : null,
                 description     : null,
                 name            : null,
                 private         : true,
                 subscriberCount : 0,
-                tagline         : null
+                tagline         : null,
+
+
+                metadata : { image: null }
             },
             {
                 ActionReset:  ActionInterestReset,

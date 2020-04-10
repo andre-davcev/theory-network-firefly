@@ -17,6 +17,9 @@ import {
 import { StateChild } from '@theory/ngxs';
 import { StateInterestOptions } from '../../document/interest/interest.state.options';
 import { Injectable } from '@angular/core';
+import { ServiceStorage } from '@theory/firebase';
+import { switchMap } from 'rxjs/operators';
+import { ImageType } from '@firefly/core/enums';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 @Injectable()
@@ -24,8 +27,9 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
 {
     constructor
     (
-        private store: Store,
-                service: ServiceSubscriptions
+        private store   : Store,
+                service : ServiceSubscriptions,
+                storage : ServiceStorage
     )
     {
         super
@@ -41,6 +45,7 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
                 ActionRemove  : ActionUserSubscriptionsRemove,
                 ActionSync    : ActionUserSubscriptionsSync
             },
+            storage,
             service,
             StateInterestOptions.name as string
         );
@@ -67,7 +72,13 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
     @Action(ActionUserSubscriptionsGet)
     get(context: StateContext<StateUserSubscriptionsModel>)
     {
-        return super.get(context);
+        return super.get(context).
+        pipe
+        (
+            switchMap(() =>
+                super.getMedia(context, 'interests', ImageType.Image)
+            )
+        );
     }
 
     @Action(ActionUserSubscriptionsAdd)

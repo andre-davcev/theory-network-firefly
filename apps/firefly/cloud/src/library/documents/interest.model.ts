@@ -1,4 +1,5 @@
 import { FirebaseDocument } from '../interfaces';
+import { MetadataInterest } from '../models';
 
 export interface Interest extends FirebaseDocument
 {
@@ -8,4 +9,6 @@ export interface Interest extends FirebaseDocument
     private         : boolean;
     subscriberCount : number;
     tagline         : string;
+
+    metadata : MetadataInterest;
 }

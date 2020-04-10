@@ -1,4 +1,4 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { State, Action, StateContext } from '@ngxs/store';
 
 import { StreamInterest } from '@firefly/cloud';
 import { ServiceStreams } from '@firefly/core/services';
@@ -17,6 +17,9 @@ import {
 } from './user-stream.actions';
 import { StateInterestOptions } from '../../document/interest/interest.state.options';
 import { Injectable } from '@angular/core';
+import { ServiceStorage } from '@theory/firebase';
+import { switchMap } from 'rxjs/operators';
+import { ImageType } from '@firefly/core/enums';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
 @Injectable()
@@ -24,7 +27,8 @@ export class StateUserStream extends StateChild<StreamInterest, StateUserStreamM
 {
     constructor
     (
-        service : ServiceStreams
+        service : ServiceStreams,
+        storage : ServiceStorage
     )
     {
         super
@@ -39,6 +43,7 @@ export class StateUserStream extends StateChild<StreamInterest, StateUserStreamM
                 ActionRemove  : ActionUserStreamRemove,
                 ActionSync    : ActionUserStreamSync
             },
+            storage,
             service,
             StateInterestOptions.name as string
         );
@@ -65,7 +70,13 @@ export class StateUserStream extends StateChild<StreamInterest, StateUserStreamM
     @Action(ActionUserStreamGet)
     get(context: StateContext<StateUserStreamModel>)
     {
-        return super.get(context);
+        return super.get(context).
+        pipe
+        (
+            switchMap(() =>
+                super.getMedia(context, 'interests', ImageType.Image)
+            )
+        );
     }
 
     @Action(ActionUserStreamAdd)
