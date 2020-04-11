@@ -36,7 +36,8 @@ import {
     ActionUserSubscriptionOnOff,
     ActionUserInterestTypeSet,
     ActionUserEventTypeSet,
-    ActionUserIsPublisherSet
+    ActionUserIsPublisherSet,
+    ActionUserAnonymousLogin
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -302,6 +303,9 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ])
             ),
             switchMap(() =>
+                this.store.dispatch(new ActionUserAnonymousLogin())
+            ),
+            switchMap(() =>
                 this.store.select(StateUserStream.initialized()).pipe
                 (
                     filter((ready: boolean) => ready),
@@ -309,6 +313,12 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 )
             )
         )
+    }
+
+    @Action(ActionUserAnonymousLogin)
+    anonymousLogin({ patchState, dispatch }: StateContext<StateUserModel>)
+    {
+      return this.auth.auth.signInAnonymously();
     }
 
     @Action(ActionUserAuthenticate)
@@ -321,10 +331,10 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             take(1),
 
             tap((authData: FirebaseUser) =>
-                patchState({ authData, authenticated: authData != null})
+                patchState({ authData, authenticated: authData != null && !authData.isAnonymous})
             ),
             switchMap((authData: FirebaseUser) =>
-                authData == null ?
+                authData == null || authData.isAnonymous ?
                     dispatch(new ActionUserNotLoggedIn()) :
                     dispatch(new ActionUserGet(authData.uid))
             ),
@@ -475,7 +485,9 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             tap(() =>
                 patchState({ initialized: true })
             ),
-
+            switchMap(() =>
+              this.store.dispatch(new ActionUserAnonymousLogin())
+            ),
             catchError((error: Error) =>
                 of(patchState({ error }))
             )
