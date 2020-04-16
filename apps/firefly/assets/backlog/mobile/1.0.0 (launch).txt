@@ -1,3 +1,4 @@
+model-refactor - debug InterestsCron
 model-refactor - re-run cron to populate streams
 model-refactor - remove legacy interest id's from events/<id>/interests
 

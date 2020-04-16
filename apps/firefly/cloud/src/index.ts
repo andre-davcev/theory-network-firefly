@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase-admin';
 initializeApp();
 
 import { InterestsCreate, InterestsCron, InterestsDelete } from './interests';
+import { ClustersCreate, ClustersCron, ClustersDelete } from './clusters';
 import { EventsCreate, EventsUpdate, EventsCron } from './events';
 import { StorageResize } from './storage';
 import { AlertsCreate, AlertsCron } from './alerts';
@@ -20,6 +21,10 @@ export
     InterestsCreate,
     InterestsCron,
     InterestsDelete,
+
+    ClustersCreate,
+    ClustersCron,
+    ClustersDelete,
 
     EventsCreate,
     EventsUpdate,
