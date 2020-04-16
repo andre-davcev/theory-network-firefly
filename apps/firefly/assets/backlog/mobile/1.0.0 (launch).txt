@@ -1,3 +1,6 @@
+model-refactor - re-run cron to populate streams
+model-refactor - remove legacy interest id's from events/<id>/interests
+
 admin (accounting) - apply for corporate credit card
 admin (accounting) - renew sketch license
 admin (blog) - add cathy/amy as publishers to medium

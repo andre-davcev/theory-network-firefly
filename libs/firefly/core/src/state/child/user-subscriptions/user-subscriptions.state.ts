@@ -19,7 +19,7 @@ import { StateInterestOptions } from '../../document/interest/interest.state.opt
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
 import { switchMap } from 'rxjs/operators';
-import { ImageType } from '@firefly/core/enums';
+import { ImageType, Collection } from '@firefly/core/enums';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 @Injectable()
@@ -76,7 +76,7 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
         pipe
         (
             switchMap(() =>
-                super.getMedia(context, 'interests', ImageType.Image)
+                super.getMedia(context, Collection.Interests, ImageType.Image)
             )
         );
     }

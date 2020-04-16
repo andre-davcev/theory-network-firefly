@@ -1,0 +1,29 @@
+Cluster ID            Interest ID
+---------------------------------------------------
+17up8rRZJtbFrpDLQzJM  CQiW0HGRLB7HEDYfn88Q
+2EU8BVZ5p098GqbO5W7W  aLFA2auUuemeis4TliQx
+3sypkLWKm9zDosS1lZpx  20tqcfKvOn5CDRNh1KNM
+5WxiALkv7QLQ4HEviKX3  AAhMIz2cl29XJtPwKKB0
+CAtftYqrhRPikZ9zixs5  ZVfWtyD0aiBabbT5MFbX
+CMxJPXe9QD5GD8GS1cvG  IYrVZ8nopeRKiVwmgsc5
+Mbq4ywydsCarI0mkc3AM  VgQArQTFAYFvNupivGvm
+PpDEPC27ktNa6XTM4v2Z  Dr4H2VkXlj3srhromapH
+bVv5MJGBESGPi4i31NEH  MhdOokDIiomGRkf7KjcA
+mvW9Q3UMu0iSnhVhMrg6  LzSU9NWm08Uh2LVfXPXG
+zgAkey6aV7iKfT72uy2B  9yl3O2wZ7bfCS3I7i5kz
+---------------------------------------------------
+
+Event ID              Interest ID's
+---------------------------------------------------
+27BzQWKt3tmUsuLNMGTu  17up8rRZJtbFrpDLQzJM
+8JrdOpQZRxx7DBeptg8w  17up8rRZJtbFrpDLQzJM  3sypkLWKm9zDosS1lZpx
+9wbpRfOg9rTiOGRJF5ip  zgAkey6aV7iKfT72uy2B  3sypkLWKm9zDosS1lZpx
+K5xcglCfA63w50YbmFKq  CMxJPXe9QD5GD8GS1cvG  CAtftYqrhRPikZ9zixs5
+OPqMzxTgmKWnAIu8UoT1  2EU8BVZ5p098GqbO5W7W
+Ry1CpMCF5kYqml7C9lFs  17up8rRZJtbFrpDLQzJM
+SJE0kR61MNIIpFSHPt1D  bVv5MJGBESGPi4i31NEH
+czpoQUQHsnB0dLBiBJZN  17up8rRZJtbFrpDLQzJM
+iftkpUIx0VQSYC8CjHTg  2EU8BVZ5p098GqbO5W7W
+ozW9QJ6rxCsUwmPFsI5h  bVv5MJGBESGPi4i31NEH
+txxvegT7rLySeLGxB2ZU  PpDEPC27ktNa6XTM4v2Z
+---------------------------------------------------
