@@ -5,18 +5,18 @@ import { User, Subscription, SubscriptionPartial, Collection } from '../library'
 
 const database: Firestore = db();
 
-const InterestsDelete: CloudFunction<DocumentSnapshot> =
+const ClustersDelete: CloudFunction<DocumentSnapshot> =
 
 firestore.
-document(`${Collection.Interests}/{id}`).
+document(`clusters/{id}`).
 onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
     const id: string = snapshot.id;
 
     const queries: Array<Promise<QuerySnapshot>> =
     [
-        database.collection(Collection.Events).where(Collection.Interests,    'array-contains', id).get(),
-        database.collection(Collection.Users).where(Collection.Subscriptions, 'array-contains', id).get()
+        database.collection(Collection.Events).where('interests',    'array-contains', id).get(),
+        database.collection(Collection.Users).where('subscriptions', 'array-contains', id).get()
     ];
     const updates: Array<Promise<WriteResult>> = [];
 
@@ -51,4 +51,4 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     return Promise.all(updates);
 });
 
-export { InterestsDelete };
+export { ClustersDelete };

@@ -4,7 +4,7 @@ import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@g
 import { ServiceStreams, Interest, Event, GlobalVariable, StreamInterest, Collection } from '../library';
 import { City } from '../library';
 
-const InterestsCron =
+const ClustersCron =
 
 runWith( { memory: '2GB', timeoutSeconds: 540 }).
 pubsub.
@@ -12,7 +12,7 @@ schedule('0 2 * * 1'). // Monday's @ 2AM
 onRun(async (context: EventContext) =>
 {
     const database            : Firestore                                     = firestore();
-    const debugDoc            : firestore.DocumentReference                   = database.collection(Collection.Debug).doc(Collection.Streams);
+    const debugDoc            : firestore.DocumentReference                   = database.collection(Collection.Debug).doc('streams');
     const debug               : boolean                                       = true;
     const citiesNearby        : Record<string, Record<string, number>>        = {};
     const interestSubscribers : Record<string, number>                        = {};
@@ -24,7 +24,7 @@ onRun(async (context: EventContext) =>
     const citiesCollection    : Record<string, Record<string, StreamInterest>> = {};
 
     let id     : string;
-    let query  : QuerySnapshot = await database.collection(Collection.Interests).where('private', '==', false).get();
+    let query  : QuerySnapshot = await database.collection('clusters').where('private', '==', false).get();
     let nearby : Record<string, number>;
 
     query.forEach((snapshot: QueryDocumentSnapshot) =>
@@ -87,7 +87,7 @@ onRun(async (context: EventContext) =>
 
     query = null;
 
-    const collection : firestore.CollectionReference = database.collection(Collection.Streams);
+    const collection : firestore.CollectionReference = database.collection('cluster-streams');
     const updates    : Array<Promise<WriteResult>>   = [];
 
     let score            : number;
@@ -151,4 +151,4 @@ onRun(async (context: EventContext) =>
     return Promise.all(updates);
 });
 
-export { InterestsCron };
+export { ClustersCron };
