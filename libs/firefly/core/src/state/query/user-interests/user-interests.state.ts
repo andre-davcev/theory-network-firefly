@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { Query } from '@angular/fire/firestore';
 
 import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
-import { of, Observable, forkJoin } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 import { StateQuery } from '@theory/ngxs';
-import { ImageSize, ServiceStorage } from '@theory/firebase';
 
 import { Interest, StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ServiceInterests } from '@firefly/core/services';
@@ -25,6 +23,7 @@ import {
 import { StateUser } from '../../document/user/user.state';
 import { StateUserStream } from '../../child/user-stream/user-stream.state';
 import { ImageType } from '../../../enums';
+import { ServiceStorage } from '@theory/firebase';
 
 @State<StateUserInterestsModel>(StateUserInterestsOptions)
 @Injectable()
@@ -136,7 +135,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
         pipe
         (
             switchMap(() =>
-                super.getMedia(context, 'interests', ImageType.Image)
+                super.getMedia(context, Collection.Interests, ImageType.Image)
             )
         );
     }

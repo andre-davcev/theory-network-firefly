@@ -1,14 +1,14 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceCities, Event } from '../library';
+import { ServiceCities, Event, Collection } from '../library';
 
 const database: Firestore = db();
 
 const EventsUpdate : CloudFunction<Change<DocumentSnapshot>> =
 
 firestore.
-document('events/{id}').
+document(`${Collection.Events}/{id}`).
 onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
 {
     const before: Event = change.before.data() as Event;

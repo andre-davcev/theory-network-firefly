@@ -8,7 +8,7 @@ const database: Firestore = db();
 const UsersCreate: CloudFunction<DocumentSnapshot> =
 
 firestore.
-document('users/{id}').
+document(`${Collection.Users}/{id}`).
 onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
 {
     const userId : string = snapshot.id;
@@ -16,7 +16,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
 
     user.isPublisher = false;
 
-    const documentAlert    : DocumentReference = database.collection(Collection.Alerts).doc();
+    const documentAlert : DocumentReference = database.collection(Collection.Alerts).doc();
 
     const alert: Partial<Alert> =
     {

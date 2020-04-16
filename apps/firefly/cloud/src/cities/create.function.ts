@@ -8,7 +8,7 @@ const database: Firestore = db();
 const CitiesCreate: CloudFunction<DocumentSnapshot> =
 
 firestore.
-document('cities/{id}').
+document(`${Collection.Cities}/{id}`).
 onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
     const object: City = ServiceFirestore.create<City>(snapshot, Version.Cities);

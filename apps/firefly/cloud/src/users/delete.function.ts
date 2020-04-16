@@ -8,7 +8,7 @@ const database: Firestore = db();
 const UsersDelete: CloudFunction<DocumentSnapshot> =
 
 firestore.
-document('users/{id}').
+document(`${Collection.Users}/{id}`).
 onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
     const interests : CollectionReference = database.collection(Collection.Interests);

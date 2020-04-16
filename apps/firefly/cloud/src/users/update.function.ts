@@ -8,7 +8,7 @@ const database: Firestore = db();
 const UsersUpdate : CloudFunction<Change<DocumentSnapshot>> =
 
 firestore.
-document('users/{id}').
+document(`${Collection.Users}/{id}`).
 onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
 {
     const updates: Array<Promise<WriteResult>> = [];

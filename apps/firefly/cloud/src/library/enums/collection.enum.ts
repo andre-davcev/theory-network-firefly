@@ -4,7 +4,7 @@ export enum Collection
     Cities       = 'cities',
     Debug        = 'debug',
     Events       = 'events',
-    Interests    = 'clusters',
+    Interests    = 'interests',
     Streams      = 'streams',
     UserProfiles = 'user-profiles',
     Users        = 'users'
