@@ -109,6 +109,8 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         patchState({ finishedPaging } as M);
 
+        console.log(this.getKeys(context));
+
         return finishedPaging ? of(null) : of(null).
         pipe
         (
@@ -132,6 +134,8 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                     };
 
                     object.metadata = object.metadata == null ? {} : object.metadata;
+
+                    object.id = id;
 
                     snapshotLookup[document.id] = document;
                     dataLookup[document.id]     = object;

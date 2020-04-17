@@ -67,7 +67,7 @@ export class ServiceCities
         const interestQuery       : Array<Promise<QuerySnapshot>>                 = [];
         const interestIds         : Record<string, string>                        = {};
         const events              : Array<Event>                                  = [];
-        const stream              : Record<string, StreamInterest>                 = {};
+        const stream              : Record<string, StreamInterest>                = {};
 
         let id              : string;
         let cityId          : string;
@@ -123,7 +123,11 @@ export class ServiceCities
             eventScores[id] = ServiceStreams.scoreEvent(event, nowInMillis);
             cityId          = event.cityId;
 
-            event.interests.forEach((interestId: string) =>
+            event.interests.
+            filter((interestId: string) =>
+                interestCityEvents[interestId] != null
+            ).
+            forEach((interestId: string) =>
             {
                 subscriberCount = interestSubscribers[interestId];
 

@@ -53,14 +53,13 @@ import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUse
 import { GeolocationPosition } from '@capacitor/core';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
 import { LocationCity } from '@firefly/core/interfaces';
-import { StateUserStreamOptions } from '../../child/user-stream/user-stream.state.options';
 import { StateUserStream } from '../../child/user-stream/user-stream.state';
 import { DocumentSnapshot } from '@angular/fire/firestore';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
 import { Injectable } from '@angular/core';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { ActionStorageUrlGet } from '@theory/firebase';
-import { InterestType, EventType } from '@firefly/core/enums';
+import { InterestType, EventType, Collection } from '@firefly/core/enums';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()
@@ -410,7 +409,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 cityId != null
             ),
             switchMap((cityId: string) =>
-                this.service.documentWatch<Record<string, StreamInterest>>(StateUserStreamOptions.name as string, cityId)
+                this.service.documentWatch<Record<string, StreamInterest>>(Collection.Streams, cityId)
             ),
             filter((snapshot: DocumentSnapshot<Record<string, StreamInterest>>) =>
                 snapshot.exists
