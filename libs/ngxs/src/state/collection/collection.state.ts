@@ -233,6 +233,7 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
         return of(StateCollection.dataState(getState())).
         pipe
         (
+            tap(data => console.log(data)),
             map((data: Array<T>) =>
                 data.map((item: T) =>
                     of(item).

@@ -66,7 +66,11 @@ onRun(async (context: EventContext) =>
         eventScores[id] = ServiceStreams.scoreEvent(event, nowInMillis);
         city            = event.city.cityId;
 
-        event.interests.forEach((interestId: string) =>
+        event.interests.
+        filter((interestId: string) =>
+            interestCityEvents[interestId] != null
+        ).
+        forEach((interestId: string) =>
         {
             subscriberCount = interestSubscribers[interestId];
 
