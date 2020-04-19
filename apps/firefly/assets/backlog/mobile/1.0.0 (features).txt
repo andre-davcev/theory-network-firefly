@@ -36,6 +36,7 @@ events (go) - implement get directions workflow
 events (list) - add pink dots for unread alerts
 events (list) - add virtual event filter toggle
 events (slide) - add more interest branding to slide (icon)
+events (security) - when timeNotify set make uneditable
 firestore (all) - follow best practices articles
 firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
@@ -47,7 +48,6 @@ interests (publish detail) - add image for interest stream
 interests (list) - add virtual event filter toggle
 intro (slides) - add slides when app installed
 *notifications (all) - migrate to user.notifications & delete alerts collection
-streams (all) - remove clusters/streams collections & clusters references
 subscriptions (all) - debounce quick updates
 subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
 user-profile (page) - implement save/update

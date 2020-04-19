@@ -5,7 +5,7 @@ import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 export const StateInterestOptions: StoreOptions<StateInterestModel> =
 {
-    name : 'clusters',
+    name : 'interests',
 
     defaults :
     {
