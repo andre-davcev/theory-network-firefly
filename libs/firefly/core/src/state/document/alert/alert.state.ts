@@ -18,7 +18,7 @@ import {
   ActionAlertMarkRead,
   ActionAlertDirty
 } from './alert.actions';
-import { ActionUserAlertsAdd, ActionUserAlertsRemove, StateUserAlerts, ActionUserAlertsSync } from '../../query/user-alerts';
+import { ActionUserAlertsAdd, ActionUserAlertsRemove, StateUserAlerts, ActionUserAlertsSync } from '../../child/user-alerts';
 import { firestore } from 'firebase/app';
 import { ServiceAlerts } from '@firefly/core/services';
 import { Injectable } from '@angular/core';
