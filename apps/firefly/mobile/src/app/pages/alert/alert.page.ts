@@ -2,7 +2,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { switchMap, filter } from 'rxjs/operators';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, from, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
 import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType } from '@firefly/core';
 import { Alert } from '@firefly/cloud';

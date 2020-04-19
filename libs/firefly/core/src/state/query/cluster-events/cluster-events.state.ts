@@ -17,6 +17,7 @@ import {
 import { StateUser } from '../../document/user/user.state';
 import { Query } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
+import { Collection } from '@firefly/core/enums';
 
 @State<StateUserInterestsModel>(StateUserInterestsOptions)
 @Injectable()
@@ -46,7 +47,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     reset(context: StateContext<StateUserInterestsModel>)
     {
         const userId: string = this.store.selectSnapshot(StateUser.id());
-        const query: Query   = userId == null ? undefined : this.service.collection('clusters').ref.where('userId', '==', userId);
+        const query: Query   = userId == null ? undefined : this.service.collection(Collection.Interests).ref.where('userId', '==', userId);
 
         return super.reset(context, { query });
     }
