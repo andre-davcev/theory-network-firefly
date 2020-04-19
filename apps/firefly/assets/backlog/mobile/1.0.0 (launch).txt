@@ -46,8 +46,6 @@ auth (login) - add password recovery
 auth (sign-up) - error handling
 auth (sign-up) - on sign up, send initial notifications 30 seconds later
 auth (sign-up) - limit sign up slides to 3
-auth (sign-up) - select font awesome icons for categories
-auth (sign-up) - add categories slide (Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater)
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 design (photoshop) - change main photo to firefly color
@@ -99,6 +97,7 @@ interests (list) - add virtual event filter toggle
 intro (slide 1) - Where life comes to you
 intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Get notified when new events are posted to your interests
+streams (all) - remove clusters/streams collections & clusters references
 subscriptions (all) - debounce quick updates
 subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
 testing (coverage) - setup code coverage
