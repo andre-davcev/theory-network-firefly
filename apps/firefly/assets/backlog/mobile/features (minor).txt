@@ -4,6 +4,7 @@ alert parallax effect
 button to page transition
 card flip
 custom notification background colors
+docker dev environment
 don't leave directive
 drag & drop lists
 edit in place
@@ -20,6 +21,7 @@ migrate to appsync
 migrate to bit
 modal transition animations
 page decorators
+page schematics
 parallax header
 pwa
 schematics
