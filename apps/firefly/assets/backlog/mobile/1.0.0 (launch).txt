@@ -20,58 +20,17 @@ admin (marketing) - submit firefly to ionic showcase
 admin (store) - install on amy/cathy's phones
 admin (store) - ios app store prep
 admin (store) - android app store prep
-+*admin (strategy) - setup virtual events meeting with matt/max
 admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
-app (errors) - required fields styling (icon/popover)
 app (errors) - setup error handling strategy
-app (ionic) - install capacitor 2.0.0
-app (ionic) - install @angular/angularfire 6.0.0
-app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
-app (loading) - fix home screen loading styles
-app (load) - android splash screen
 app (logging) - create logging strategy
-app (security) - setup router guards
-app (storage) - cleanup image storage
 app (store) - release v1 on android
 app (store) - release v1 on ios
-app (lists) - implement infinite scrolling for lists
 automation (ci) - setup continuous integration (github actions)
 automation (ci) - setup ionic appflow
 automation (dev) - setup automated code formatting via prettier
 automation (dev) - scrape events from google (pupeteer)
-auth (login) - switch user data cleanup and screen testing
-auth (login) - add login validation and error messages
-auth (login) - add password recovery
-auth (sign-up) - error handling
-auth (sign-up) - on sign up, send initial notifications 30 seconds later
-auth (sign-up) - limit sign up slides to 3
-auth (unauth) - reduce unauthenticated user initial render time
-auth (unauth) - on unauthenticated login save city so you can grab city stream
 design (photoshop) - change main photo to firefly color
-*events (list) - implement filters
-*events (list) - add search placeholders for interests/events
-events (list) - implement simple event search filter
-events (list) - show/hide add button if on created filter
-events (detail) - cleanup styling/alignment
-events (detail) - reverse geocode map
-events (edit) - migrate user-events to interest-events
-events (edit) - migrate from bucketPath to icon/image
-events (edit) - move icon cluster to icon select from photo library
-events (edit) - move image to image select from photo library
-events (edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
-events (edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
-events (edit) - delete old icon/image bucketPath's
-events (edit) - fix edit functionality
-events (edit) - reverse geocode map
-events (edit) - add virtual event flag
-events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
-events (go) - implement add to calendar workflow
-events (go) - implement get directions workflow
-events (list) - add pink dots for unread alerts
-events (list) - add virtual event filter toggle
-events (slide) - add more interest branding to slide (icon)
-firestore (all) - follow best practices articles
 firestore (functions) - manual testing
 firestore (functions) - unit tests
 firestore (analytics) - implement firebase analytics
@@ -86,25 +45,10 @@ firestore (security) - test firestore security rules
 firestore (security) - create storage security rules
 firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firestore (storage) - setup storage tests
-firestore (functions) - implement callable function to populate stream for new city
-icons (all) - remove all references
-images (all) - remove all references
-*interests (list) - fix ActionUserSubscriptionOnOff null pointer
-interests (list) - implement simple interest search filter
-+interests (publish detail) - event click navigates to edit event
-interests (publish detail) - add image for interest stream
-interests (list) - add virtual event filter toggle
-intro (slide 1) - Where life comes to you
-intro (slide 2) - Subscribe to community interests
-intro (slide 3) - Get notified when new events are posted to your interests
-streams (all) - remove clusters/streams collections & clusters references
-subscriptions (all) - debounce quick updates
-subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
 testing (coverage) - setup code coverage
 testing (performance) - performance testing
 testing (unit) - setup jest unit tests
 testing (user) - setup app user testing
-user-profile (page) - implement save/update
 
 *andre
 +dave
@@ -112,11 +56,7 @@ user-profile (page) - implement save/update
 #amy
 -nextcorps
 
-mar-11 - 104
-mar-18 - 110
-mar-25 - 129
-apr-01 - 114
-apr-15 - 118
+apr-15 - 54
 apr-22 - ?
 apr-29 - ?
 may-06 - ?

@@ -1,0 +1,73 @@
+app (errors) - required fields styling (icon/popover)
+app (ionic) - ng update @nrwl/nx & npm outdated
+app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
+app (loading) - fix home screen loading styles
+app (load) - android splash screen
+app (security) - setup router guards
+app (storage) - cleanup image storage
+app (lists) - implement infinite scrolling for lists
+auth (login) - switch user data cleanup and screen testing
+auth (login) - add login validation and error messages
+auth (login) - add password recovery
+auth (sign-up) - error handling
+auth (sign-up) - on sign up, send initial notifications 30 seconds later
+auth (sign-up) - limit sign up slides to 3
+auth (unauth) - reduce unauthenticated user initial render time
+auth (unauth) - on unauthenticated login save city so you can grab city stream
+*events (list) - implement filters
+*events (list) - add search placeholders for interests/events
+events (list) - implement simple event search filter
+events (list) - show/hide add button if on created filter
+events (detail) - cleanup styling/alignment
+events (detail) - reverse geocode map
+events (edit) - migrate user-events to interest-events
+events (edit) - migrate from bucketPath to icon/image
+events (edit) - move icon cluster to icon select from photo library
+events (edit) - move image to image select from photo library
+events (edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
+events (edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
+events (edit) - delete old icon/image bucketPath's
+events (edit) - fix edit functionality
+events (edit) - reverse geocode map
+events (edit) - add virtual event flag
+events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
+events (go) - implement add to calendar workflow
+events (go) - implement get directions workflow
+events (list) - add pink dots for unread alerts
+events (list) - add virtual event filter toggle
+events (slide) - add more interest branding to slide (icon)
+firestore (all) - follow best practices articles
+firestore (functions) - implement callable function to populate stream for new city
+icons (all) - remove all references
+images (all) - remove all references
+*interests (list) - fix ActionUserSubscriptionOnOff null pointer
+interests (list) - implement simple interest search filter
++interests (publish detail) - event click navigates to edit event
+interests (publish detail) - add image for interest stream
+interests (list) - add virtual event filter toggle
+intro (slide 1) - Where life comes to you
+intro (slide 2) - Subscribe to community interests
+intro (slide 3) - Get notified when new events are posted to your interests
+streams (all) - remove clusters/streams collections & clusters references
+subscriptions (all) - debounce quick updates
+subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
+user-profile (page) - implement save/update
+
+*andre
++dave
+^cathy
+#amy
+-nextcorps
+
+apr-15 - 54
+apr-22 - ?
+apr-29 - ?
+may-06 - ?
+may-13 - ?
+may-20 - ?
+may-27 - ?
+jun-03 - ?
+jun-10 - ?
+jun-17 - ?
+jun-24 - ?
+jul-01 - ?
