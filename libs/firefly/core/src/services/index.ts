@@ -1,4 +1,4 @@
-export * from './alert.service';
+export * from './alerts.service';
 export * from './interests.service';
 export * from './events.service';
 export * from './icons.service';

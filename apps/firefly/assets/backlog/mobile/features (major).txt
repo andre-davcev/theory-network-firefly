@@ -2,7 +2,6 @@
 augmented reality
 beacons
 calendar
-categories
 cypress (e2e)
 event management/sharing
 google assistant
