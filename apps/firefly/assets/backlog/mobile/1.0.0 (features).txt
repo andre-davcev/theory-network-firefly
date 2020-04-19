@@ -5,7 +5,7 @@ app (loading) - fix home screen loading styles
 app (load) - android splash screen
 app (security) - setup router guards
 app (storage) - cleanup image storage
-app (lists) - implement infinite scrolling for lists
++app (lists) - implement infinite scrolling for lists
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
 auth (login) - add password recovery
@@ -48,6 +48,7 @@ interests (list) - add virtual event filter toggle
 intro (slide 1) - Where life comes to you
 intro (slide 2) - Subscribe to community interests
 intro (slide 3) - Get notified when new events are posted to your interests
+*notifications (all) - migrate to user.notifications & delete alerts collection
 streams (all) - remove clusters/streams collections & clusters references
 subscriptions (all) - debounce quick updates
 subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
