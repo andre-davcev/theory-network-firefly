@@ -109,8 +109,6 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         patchState({ finishedPaging } as M);
 
-        console.log(this.getKeys(context));
-
         return finishedPaging ? of(null) : of(null).
         pipe
         (

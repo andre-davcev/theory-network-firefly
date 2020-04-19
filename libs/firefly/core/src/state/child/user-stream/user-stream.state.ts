@@ -17,7 +17,7 @@ import {
 } from './user-stream.actions';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { ImageType, Collection } from '@firefly/core/enums';
 
 @State<StateUserStreamModel>(StateUserStreamOptions)
@@ -44,7 +44,7 @@ export class StateUserStream extends StateChild<StreamInterest, StateUserStreamM
             },
             storage,
             service,
-            Collection.Streams
+            Collection.Interests
         );
     }
 
@@ -72,7 +72,6 @@ export class StateUserStream extends StateChild<StreamInterest, StateUserStreamM
         return super.get(context).
         pipe
         (
-            tap(() => console.log(context.getState())),
             switchMap(() =>
                 super.getMedia(context, Collection.Interests, ImageType.Image)
             )
