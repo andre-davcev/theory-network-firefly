@@ -45,9 +45,7 @@ interests (list) - implement simple interest search filter
 +interests (publish detail) - event click navigates to edit event
 interests (publish detail) - add image for interest stream
 interests (list) - add virtual event filter toggle
-intro (slide 1) - Where life comes to you
-intro (slide 2) - Subscribe to community interests
-intro (slide 3) - Get notified when new events are posted to your interests
+intro (slides) - add slides when app installed
 *notifications (all) - migrate to user.notifications & delete alerts collection
 streams (all) - remove clusters/streams collections & clusters references
 subscriptions (all) - debounce quick updates

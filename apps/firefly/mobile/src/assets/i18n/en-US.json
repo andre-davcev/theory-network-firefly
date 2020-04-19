@@ -64,6 +64,10 @@
   "page.signup.slide-5.message" : "Manage your subscriptions with ease.",
   "page.signup.slide-6.message" : "Contribute to the community by publishing your own events and interests.",
 
+  "page.intro.slide-1.message" : "Where life comes to you",
+  "page.intro.slide-2.message" : "Subscribe to community interests",
+  "page.intro.slide-3.message" : "Get notified when new events are posted to your interests",
+
   "page.stream.title"      : "Interests",
   "page.stream.subscribe"  : "Subscribe",
   "page.stream.subscribed" : "Subscribed",
