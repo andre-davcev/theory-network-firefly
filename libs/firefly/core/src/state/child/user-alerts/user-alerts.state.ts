@@ -2,7 +2,7 @@ import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 
 import { Alert } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
-import { StateQuery } from '@theory/ngxs';
+import { StateChild } from '@theory/ngxs';
 
 import { StateUserAlertsModel } from './user-alerts.state.model';
 import { StateUserAlertsOptions } from './user-alerts.state.options';
@@ -13,10 +13,9 @@ import {
     ActionUserAlertsGetData,
     ActionUserAlertsGet,
     ActionUserAlertsSync,
-    ActionUserAlertsGo
+    ActionUserAlertsGo,
+    ActionUserAlertsSetData
 } from './user-alerts.actions';
-import { StateUser } from '../../document/user';
-import { Query } from '@angular/fire/firestore';
 import { tap, switchMap } from 'rxjs/operators';
 import { StorageImage, StateStorage, ServiceStorage } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,15 +23,16 @@ import { from, of } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { StateLanguage } from '@theory/capacitor';
+import { Collection } from '@firefly/core/enums';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()
-export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
+export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
 {
     constructor
     (
         private store       : Store,
-        private service     : ServiceAlerts,
+                service     : ServiceAlerts,
         private translate   : TranslateService,
         private actionSheet : ActionSheetController,
                 storage     : ServiceStorage,
@@ -44,12 +44,15 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
             {
                 ActionReset   : ActionUserAlertsReset,
                 ActionGetData : ActionUserAlertsGetData,
+                ActionSetData : ActionUserAlertsSetData,
                 ActionGet     : ActionUserAlertsGet,
                 ActionAdd     : ActionUserAlertsAdd,
                 ActionRemove  : ActionUserAlertsRemove,
                 ActionSync    : ActionUserAlertsSync
             },
-            storage
+            storage,
+            service,
+            Collection.Events
         );
     }
 
@@ -75,18 +78,21 @@ export class StateUserAlerts extends StateQuery<Alert, StateUserAlertsModel>
     @Selector() static hasUnreadList(state: StateUserAlertsModel) : boolean      { return StateUserAlerts.unreadList(state).length > 0; }
 
     @Action(ActionUserAlertsReset)
-    reset(context: StateContext<StateUserAlertsModel>)
+    reset(context: StateContext<StateUserAlertsModel>, action: ActionUserAlertsReset)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id());
-        const query: Query   = userId == null ? undefined : this.service.collection('alerts').ref.where('userId', '==', userId);
-
-        return super.reset(context, { query });
+        return super.reset(context, action);
     }
 
     @Action(ActionUserAlertsGetData)
-    getData(context: StateContext<StateUserAlertsModel>)
+    getData(context: StateContext<StateUserAlertsModel>, action: ActionUserAlertsGetData)
     {
-        return super.getData(context);
+        return super.getData(context, action);
+    }
+
+    @Action(ActionUserAlertsSetData)
+    setData(context: StateContext<StateUserAlertsModel>, action: ActionUserAlertsSetData)
+    {
+        return super.setData(context, action);
     }
 
     @Action(ActionUserAlertsGet)

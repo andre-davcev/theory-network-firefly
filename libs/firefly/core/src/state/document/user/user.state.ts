@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
-import { User, Location, StreamInterest, SubscriptionPartial, Subscription } from '@firefly/cloud';
+import { User, Location, StreamInterest, SubscriptionPartial, Subscription, AlertPartial } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -28,7 +28,6 @@ import {
     ActionUserUpdate,
     ActionUserWatchLocation,
     ActionUserWatchCity,
-    ActionUserWatchSubscriptionsStatus,
     ActionUserSubscriptionToggle,
     ActionUserNotLoggedIn,
     ActionUserSubscriptionAdd,
@@ -37,13 +36,15 @@ import {
     ActionUserInterestTypeSet,
     ActionUserEventTypeSet,
     ActionUserIsPublisherSet,
-    ActionUserAnonymousLogin
+    ActionUserAnonymousLogin,
+    ActionUserSubscriptionsSet,
+    ActionUserNotificationsSet
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 
-import { ActionUserAlertsReset, ActionUserAlertsGetData } from '../../child/user-alerts/user-alerts.actions';
+import { ActionUserAlertsReset, ActionUserAlertsSetData } from '../../child/user-alerts/user-alerts.actions';
 import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
@@ -76,7 +77,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     {
         super
         (
-            StateUserOptions.name as string,
+            Collection.Users,
             StateUserOptions.defaults,
             service,
             {
@@ -138,6 +139,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static error(state: StateUserModel)                  : Error        { return state.error; }
     @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : !user.subscriptionsStatus ? {} : user.subscriptionsStatus; }
+    @Selector() static notifications(state: StateUserModel)          : Record<string, AlertPartial>        { const user: User = StateUser.dataState(state); return user == null ? null : !user.notifications ? {} : user.notifications; }
     @Selector() static tokens(state:StateUserModel)                  : Array<string>{ const user: User = StateUser.dataState(state); return user == null ? null : user.tokens; }
     @Selector() static interestType(state:StateUserModel)            : InterestType { return state.interestType; }
     @Selector() static eventType(state:StateUserModel)               : EventType    { return state.eventType; }
@@ -206,7 +208,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             switchMap(() =>
                 dispatch
                 ([
-                    new ActionUserAlertsGetData(),
+                    new ActionUserNotificationsSet(),
                     new ActionLanguageSet(StateUser.language(getState()))
                 ])
             ),
@@ -423,14 +425,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         );
     }
 
-    @Action(ActionUserWatchSubscriptionsStatus)
-    watchSubscriptions({ dispatch }: StateContext<StateUserModel>)
-    {
-        const subscriptions: Record<string, SubscriptionPartial> = this.store.selectSnapshot(StateUser.subscriptionsStatus);
-
-        return dispatch(new ActionUserSubscriptionsSetData(subscriptions, true));
-    }
-
     @Action(ActionUserWatchLanguage, { cancelUncompleted: true })
     watchLanguage({ dispatch, getState }: StateContext<StateUserModel>)
     {
@@ -492,6 +486,14 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 of(patchState({ error }))
             )
         );
+    }
+
+    @Action(ActionUserSubscriptionsSet)
+    subscriptionsGet({ dispatch }: StateContext<StateUserModel>)
+    {
+        const subscriptions: Record<string, SubscriptionPartial> = this.store.selectSnapshot(StateUser.subscriptionsStatus);
+
+        return dispatch(new ActionUserSubscriptionsSetData(subscriptions, true));
     }
 
     @Action(ActionUserSubscriptionToggle)
@@ -569,6 +571,14 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             new ActionUserStreamSync(streamInterest),
             new ActionUserSubscriptionsSync(subscription)
         ]);
+    }
+
+    @Action(ActionUserNotificationsSet)
+    notificationsGet({ dispatch }: StateContext<StateUserModel>)
+    {
+        const notifications: Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
+
+        return dispatch(new ActionUserAlertsSetData(notifications, true));
     }
 
     @Action(ActionUserInterestTypeSet)

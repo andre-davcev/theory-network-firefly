@@ -22,6 +22,7 @@ import {
 import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions';
 import { firestore } from 'firebase/app';
 import { Injectable } from '@angular/core';
+import { Collection } from '@firefly/core/enums';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)
 @Injectable()
@@ -35,7 +36,7 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
     {
         super
         (
-            StateSubscriptionOptions.name as string,
+            Collection.Subscriptions,
             StateSubscriptionOptions.defaults,
             service,
             {

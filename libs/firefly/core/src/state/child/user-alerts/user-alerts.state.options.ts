@@ -4,6 +4,7 @@ import { PageSize } from '@theory/ngxs';
 
 import { StateUserAlertsModel } from './user-alerts.state.model';
 import { OrderBy, ImageSize } from '@theory/firebase';
+import { TypeOf } from '@theory/core';
 
 export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
 {
@@ -12,7 +13,7 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
     defaults :
     {
         pageSize:         PageSize.Default,
-        orderBy:          'dateCreated',
+        orderBy:          'timeStart',
         orderByDirection: OrderBy.Descending,
 
         initialized:    false,
@@ -24,6 +25,17 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         snapshotLookup: {},
         data:           [],
         dataLookup:     {},
+
+        childLookup : {},
+        keysSorted  : [],
+        offset      : 0,
+        id          : undefined,
+
+        sortFields:
+        {
+            name      : TypeOf.String,
+            timeStart : TypeOf.String
+        },
 
         unread: 0
     }

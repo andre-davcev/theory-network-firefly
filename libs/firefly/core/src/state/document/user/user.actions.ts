@@ -26,11 +26,13 @@ export class ActionUserAddToken           { static readonly type = ActionsUser.A
 export class ActionUserLoginEmail         { static readonly type = ActionsUser.LoginEmail;         constructor(public payload: Credentials) { } }
 export class ActionUserLogout             { static readonly type = ActionsUser.Logout;             constructor() { } }
 
-export class ActionUserWatchSubscriptionsStatus { static readonly type = ActionsUser.WatchSubscriptionsStatus; constructor() { } }
-export class ActionUserSubscriptionToggle       { static readonly type = ActionsUser.SubscriptionToggle;       constructor(public id: string, public permanent: boolean = false) { } }
-export class ActionUserSubscriptionAdd          { static readonly type = ActionsUser.SubscriptionAdd;          constructor(public id: string) { } }
-export class ActionUserSubscriptionRemove       { static readonly type = ActionsUser.SubscriptionRemove;       constructor(public id: string) { } }
-export class ActionUserSubscriptionOnOff        { static readonly type = ActionsUser.SubscriptionOnOff;        constructor(public id: string, public on: boolean) { } }
+export class ActionUserSubscriptionsSet   { static readonly type = ActionsUser.SubscriptionsSet;   constructor() { } }
+export class ActionUserSubscriptionToggle { static readonly type = ActionsUser.SubscriptionToggle; constructor(public id: string, public permanent: boolean = false) { } }
+export class ActionUserSubscriptionAdd    { static readonly type = ActionsUser.SubscriptionAdd;    constructor(public id: string) { } }
+export class ActionUserSubscriptionRemove { static readonly type = ActionsUser.SubscriptionRemove; constructor(public id: string) { } }
+export class ActionUserSubscriptionOnOff  { static readonly type = ActionsUser.SubscriptionOnOff;  constructor(public id: string, public on: boolean) { } }
+
+export class ActionUserNotificationsSet { static readonly type = ActionsUser.NotificationsSet; constructor() { } }
 
 export class ActionUserInterestTypeSet { static readonly type = ActionsUser.InterestTypeSet; constructor(public interestType: InterestType) { } }
 export class ActionUserEventTypeSet    { static readonly type = ActionsUser.EventTypeSet;    constructor(public eventType:    EventType) { } }

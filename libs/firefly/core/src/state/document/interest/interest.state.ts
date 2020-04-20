@@ -41,6 +41,7 @@ import { Query } from '@angular/fire/firestore';
 import { StateLanguage } from '@theory/capacitor';
 import { StateUserStream } from '@firefly/core/state/child/user-stream';
 import { Injectable } from '@angular/core';
+import { Collection } from '@firefly/core/enums';
 
 @State<StateInterestModel>(StateInterestOptions)
 @Injectable()
@@ -54,7 +55,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     {
         super
         (
-            StateInterestOptions.name as string,
+            Collection.Interests,
             StateInterestOptions.defaults,
             service,
             {
