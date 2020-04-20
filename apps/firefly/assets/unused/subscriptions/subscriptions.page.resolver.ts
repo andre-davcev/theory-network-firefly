@@ -4,7 +4,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { StateUserSubscriptions, ActionUserWatchSubscriptionsStatus } from '@firefly/core';
+import { StateUserSubscriptions, ActionUserSubscriptionsSet } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })
@@ -26,7 +26,7 @@ export class ResolverPageSubscriptions implements Resolve<void>
                     this.store.dispatch(new ActionMobileLoadingShow()).
                     pipe
                     (
-                        switchMap(() => this.store.dispatch(new ActionUserWatchSubscriptionsStatus())),
+                        switchMap(() => this.store.dispatch(new ActionUserSubscriptionsSet())),
                         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
                     )
             )

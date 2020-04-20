@@ -1,4 +1,4 @@
-import { State, Action, StateContext, Store } from '@ngxs/store';
+import { State, Action, StateContext } from '@ngxs/store';
 
 import { Subscription } from '@firefly/cloud';
 import { ServiceSubscriptions } from '@firefly/core/services';
@@ -15,7 +15,6 @@ import {
     ActionUserSubscriptionsSetData
 } from './user-subscriptions.actions';
 import { StateChild } from '@theory/ngxs';
-import { StateInterestOptions } from '../../document/interest/interest.state.options';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
 import { switchMap } from 'rxjs/operators';
@@ -27,14 +26,12 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
 {
     constructor
     (
-        private store   : Store,
-                service : ServiceSubscriptions,
-                storage : ServiceStorage
+        service : ServiceSubscriptions,
+        storage : ServiceStorage
     )
     {
         super
         (
-
             StateUserSubscriptionsOptions.defaults,
             {
                 ActionReset   : ActionUserSubscriptionsReset,
@@ -47,7 +44,7 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
             },
             storage,
             service,
-            StateInterestOptions.name as string
+            Collection.Interests
         );
     }
 

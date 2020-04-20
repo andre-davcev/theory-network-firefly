@@ -40,6 +40,7 @@ import { LocationCity } from '@firefly/core/interfaces';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
 import { Query } from '@angular/fire/firestore';
+import { Collection } from '@firefly/core/enums';
 
 @State<StateEventModel>(StateEventOptions)
 @Injectable()
@@ -54,7 +55,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     {
         super
         (
-            StateEventOptions.name as string,
+            Collection.Events,
             StateEventOptions.defaults,
             service,
             {

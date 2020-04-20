@@ -1,8 +1,8 @@
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { StateUser } from '@firefly/core/state/document/user';
-import { Alert, MetadataAlert } from '@firefly/cloud';
+import { StateUser } from '@firefly/core/state/document/user/user.state';
+import { Alert, MetadataAlert, AlertPartial } from '@firefly/cloud';
 import { StateAlertModel } from './alert.state.model';
 import { StateAlertOptions } from './alert.state.options';
 import {
@@ -15,13 +15,15 @@ import {
   ActionAlertSave,
   ActionAlertSetId,
   ActionAlertUpdate,
-  ActionAlertMarkRead,
-  ActionAlertDirty
+  ActionAlertDirty,
+  ActionAlertMarkRead
 } from './alert.actions';
 import { ActionUserAlertsAdd, ActionUserAlertsRemove, StateUserAlerts, ActionUserAlertsSync } from '../../child/user-alerts';
 import { firestore } from 'firebase/app';
 import { ServiceAlerts } from '@firefly/core/services';
 import { Injectable } from '@angular/core';
+import { Collection } from '@firefly/core/enums';
+import { ActionUserPatch } from '../user/user.actions';
 
 @State<StateAlertModel>(StateAlertOptions)
 @Injectable()
@@ -35,7 +37,7 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
     {
         super
         (
-            StateAlertOptions.name as string,
+            Collection.Alerts,
             StateAlertOptions.defaults,
             service,
             {
@@ -162,10 +164,17 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
     @Action(ActionAlertMarkRead)
     markRead({ dispatch, getState }: StateContext<StateAlertModel>)
     {
-        const metadata: MetadataAlert = StateAlert.metadataState(getState());
+        const notifications : Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
+        const notification  : Alert                        = StateAlert.dataState(getState());
+        const metadata      : MetadataAlert                = notification.metadata;
 
         metadata.sessionRead = true;
+        notifications[notification.id].read = true;
 
-        return dispatch(new ActionAlertPatch({ read: true, metadata }, true));
+        return dispatch
+        ([
+            new ActionAlertPatch({ read: true, metadata }),
+            new ActionUserPatch({ notifications }, true)
+        ]);
     }
 }

@@ -22,11 +22,14 @@ export enum ActionsUser
     LoginEmail        = '[User] Login Email',
     Logout            = '[User] Logout',
 
-    WatchSubscriptionsStatus = '[User] Watch SubscriptionsStatus',
-    SubscriptionToggle       = '[User] Subscription Toggle',
-    SubscriptionAdd          = '[User] Subscription Add',
-    SubscriptionRemove       = '[User] Subscription Remove',
-    SubscriptionOnOff        = '[User] Subscription On/Off',
+    SubscriptionsSet    = '[User] Subscriptions Set',
+    SubscriptionToggle  = '[User] Subscription Toggle',
+    SubscriptionAdd     = '[User] Subscription Add',
+    SubscriptionRemove  = '[User] Subscription Remove',
+    SubscriptionOnOff   = '[User] Subscription On/Off',
+
+    NotificationsSet = '[User] Notifications Set',
+    NotificationRead = '[User] Notification Read',
 
     InterestTypeSet = '[User] Interest Type Set',
     EventTypeSet    = '[User] Event Type Set',
