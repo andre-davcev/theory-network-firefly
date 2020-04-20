@@ -47,8 +47,7 @@ interests (list) - implement simple interest search filter
 interests (publish detail) - add image for interest stream
 interests (list) - add virtual event filter toggle
 intro (slides) - add slides when app installed
-*notifications (firestore) - delete alerts collection
-*notifications (functions) - update cron to update user.notifications & not alerts
+notifications (functions) - update cron to update user.notifications & not alerts
 subscriptions (all) - debounce quick updates
 subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
 user-profile (page) - implement save/update
