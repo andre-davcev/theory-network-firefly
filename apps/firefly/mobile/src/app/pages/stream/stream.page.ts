@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionUserStreamGet } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
 import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component
 ({
@@ -37,6 +38,8 @@ export class PageStream extends BaseComponent implements OnInit
     public subscriptions: Record<string, SubscriptionPartial> = {};
 
     public IconType: any = IconType;
+
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
     constructor(private store: Store) { super(); }
 
@@ -111,6 +114,20 @@ export class PageStream extends BaseComponent implements OnInit
     public add(): void
     {
         this.store.dispatch(new Navigate([Pages.AssetInterest]));
+    }
+
+    public loadData(event): void{
+      const finishedPaging : boolean = this.store.selectSnapshot(StateUserStream.finishedPaging());
+      if(finishedPaging)
+      {
+        this.infiniteScroll.complete();
+        this.infiniteScroll.disabled = true;
+        return;
+      }
+
+      this.store.dispatch(new ActionUserStreamGet()).pipe(
+        switchMap(() => from(this.infiniteScroll.complete())
+      )).subscribe();
     }
 /*
     public filterChanged(event: any): void

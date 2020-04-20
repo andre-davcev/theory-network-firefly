@@ -10,7 +10,7 @@ export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
 
     defaults :
     {
-        pageSize:         10,
+        pageSize:         3,
         orderBy:          'score',
         orderByDirection: OrderBy.Ascending,
 
