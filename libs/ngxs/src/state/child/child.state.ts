@@ -182,7 +182,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
                     loading: false,
                     offset: data.length + 1,
-                    finishedPaging: data.length === Object.keys(childLookup).length
+                    finishedPaging: data.length === Object.keys(childLookup).length - 1
                 } as M)
             )
         );
