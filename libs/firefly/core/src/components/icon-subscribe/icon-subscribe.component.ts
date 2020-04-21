@@ -38,8 +38,12 @@ export class ComponentIconSubscribe
         this.clicked.next(this.subscribed);
     }
 
-    public toggleOn(): void
+    public toggleOn(event: any): void
     {
+        const on: boolean = event.detail.checked;
+
+        this.on = on;
+
         this.clickedOn.next(this.on);
     }
 }

@@ -555,22 +555,31 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         const state: StateUserModel = getState();
 
         const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-        const subscription           : Subscription                        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
         const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
+        const subscription           : Subscription                        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
 
-        subscription.on = subscriptionsStatus[id].on = on;
+        subscriptionsStatus[id].on = on;
+
+        const actions: Array<any> =
+        [
+            new ActionUserPatch({ subscriptionsStatus }, true)
+        ];
 
         if (streamInterest != null && streamInterest.on != null)
         {
             streamInterest.on = on;
+
+            actions.push(new ActionUserStreamSync(streamInterest));
         }
 
-        return dispatch
-        ([
-            new ActionUserPatch({ subscriptionsStatus }, true),
-            new ActionUserStreamSync(streamInterest),
-            new ActionUserSubscriptionsSync(subscription)
-        ]);
+        if (subscription != null)
+        {
+            subscription.on = on;
+
+            actions.push(new ActionUserSubscriptionsSync(subscription))
+        }
+
+        return dispatch(actions);
     }
 
     @Action(ActionUserNotificationsSet)

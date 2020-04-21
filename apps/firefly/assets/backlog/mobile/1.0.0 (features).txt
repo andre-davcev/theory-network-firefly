@@ -1,3 +1,5 @@
++admin (marketing) - digital marketing questionnaire
+*admin (marketing) - personas worksheet
 app (errors) - required fields styling (icon/popover)
 app (ionic) - ng update @nrwl/nx & npm outdated
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
@@ -41,7 +43,6 @@ firestore (all) - follow best practices articles
 firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
 images (all) - remove all references
-*interests (list) - fix ActionUserSubscriptionOnOff null pointer
 interests (list) - implement simple interest search filter
 +interests (publish detail) - event click navigates to edit event
 interests (publish detail) - add image for interest stream
