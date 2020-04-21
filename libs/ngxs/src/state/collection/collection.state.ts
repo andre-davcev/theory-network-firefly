@@ -7,6 +7,7 @@ import { Observable, of, forkJoin } from 'rxjs';
 import { PageSize } from '../../enums';
 import { StateCollectionModel } from './collection.model';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { ImageType } from '@firefly/core/enums';
 
 export abstract class StateCollection<T extends FirebaseDocument, M extends StateCollectionModel<T>>
 {
@@ -229,12 +230,17 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
         const { getState, patchState } = context;
 
         const dataLookup: Record<string, T> = {};
+        const imageSize:  ImageSize         = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
 
         return of(StateCollection.dataState(getState())).
         pipe
         (
             map((data: Array<T>) =>
-                data.map((item: T) =>
+                data.
+                filter((item: T) =>
+                    item.metadata[imageType] == null
+                ).
+                map((item: T) =>
                     of(item).
                     pipe
                     (
@@ -242,12 +248,12 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
                             `${collection}/${item.id}/${imageType}.jpeg`
                         ),
                         switchMap((bucketPath: string) =>
-                            this.storage.downloadUrl(bucketPath, ImageSize.Medium)
+                            this.storage.downloadUrl(bucketPath, imageSize)
                         ),
                         map((image: string) =>
                             ({
                                 ...item,
-                                metadata : { image }
+                                metadata : { [imageType]: image }
                             })
                         )
                     )
