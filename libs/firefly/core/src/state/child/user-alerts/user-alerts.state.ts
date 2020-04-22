@@ -1,6 +1,6 @@
-import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
+import { State, Action, StateContext, Selector } from '@ngxs/store';
 
-import { Alert, DateEvents } from '@firefly/cloud';
+import { Alert, DateEvents, Event } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
 import { StateChild } from '@theory/ngxs';
 
@@ -16,15 +16,16 @@ import {
     ActionUserAlertsGo,
     ActionUserAlertsSetData
 } from './user-alerts.actions';
-import { tap, switchMap } from 'rxjs/operators';
-import { StorageImage, StateStorage, ServiceStorage } from '@theory/firebase';
+import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
-import { from, of } from 'rxjs';
+import { from, of, forkJoin, Observable } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { StateLanguage } from '@theory/capacitor';
-import { Collection, EventType } from '@firefly/core/enums';
+import { Collection, EventType, ImageType } from '@firefly/core/enums';
 import { StateUser } from '../../document/user/user.state';
+import { StateUserEvents } from '../../query/user-events/user-events.state';
+import { switchMap, map, tap } from 'rxjs/operators';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()
@@ -32,7 +33,6 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
 {
     constructor
     (
-        private store       : Store,
                 service     : ServiceAlerts,
         private translate   : TranslateService,
         private actionSheet : ActionSheetController,
@@ -79,12 +79,13 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Selector() static hasUnread(state: StateUserAlertsModel)     : boolean      { return StateUserAlerts.unreadCount(state) > 0; }
     @Selector() static hasUnreadList(state: StateUserAlertsModel) : boolean      { return StateUserAlerts.unreadList(state).length > 0; }
 
-    @Selector([StateLanguage.language, StateUser.eventType])
+    @Selector([StateLanguage.language, StateUser.eventType, StateUserEvents.data()])
     public static eventsList
     (
-        state     : StateUserAlertsModel,
-        language  : string,
-        eventType : EventType
+        state      : StateUserAlertsModel,
+        language   : string,
+        eventType  : EventType,
+        userEvents : Array<Event>
     ) : Array<Alert> | Array<DateEvents>
     {
         if (eventType === EventType.New)
@@ -93,7 +94,11 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         }
         else
         {
-            const eventsList : Array<DateEvents>= [];
+            const eventsList : Array<DateEvents> = [];
+
+            const events : Array<Event> = eventType === EventType.Upcoming ?
+                StateUserAlerts.alerts(state) :
+                userEvents;
 
             const options      : any = { weekday: 'long',  year: 'numeric', month: 'long',  day: 'numeric'};
             const optionsShort : any = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
@@ -103,9 +108,8 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             let timeStartPrevious  : Date;
             let timeStartFormatted : string;
 
-            StateUserAlerts.
-                readList(state).
-                forEach((alert: Alert) =>
+            events.
+                forEach((alert: Event) =>
                 {
                     timeStart = new Date(alert.timeStart);
 
@@ -137,19 +141,20 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                 eventsList.push(current);
             }
 
-            return eventsList
+            return eventsList.reverse();
         }
     }
 
-    @Selector([StateLanguage.language, StateUser.eventType])
+    @Selector([StateLanguage.language, StateUser.eventType, StateUserEvents.data()])
     public static eventsListEmpty
     (
-        state     : StateUserAlertsModel,
-        language  : string,
-        eventType : EventType
+        state      : StateUserAlertsModel,
+        language   : string,
+        eventType  : EventType,
+        userEvents : Array<Event>
     ) : boolean
     {
-        return StateUserAlerts.eventsList(state, language, eventType).length === 0;
+        return StateUserAlerts.eventsList(state, language, eventType, userEvents).length === 0;
     }
 
     @Action(ActionUserAlertsReset)
@@ -173,7 +178,16 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Action(ActionUserAlertsGet)
     get(context: StateContext<StateUserAlertsModel>)
     {
-        return super.get(context);
+        return super.get(context).
+        pipe
+        (
+            switchMap(() =>
+                forkJoin
+                (
+                    this.getMediaNew(context)
+                )
+            )
+        );
     }
 
     @Action(ActionUserAlertsAdd)
@@ -225,6 +239,58 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             ),
             switchMap((actionSheet: HTMLIonActionSheetElement) =>
                 actionSheet.present()
+            )
+        );
+    }
+
+    public getMediaNew(context: StateContext<StateUserAlertsModel>): Observable<any>
+    {
+        const { getState, patchState } = context;
+
+        const state      : StateUserAlertsModel  = getState();
+        const dataLookup : Record<string, Alert> = StateUserAlerts.dataLookupState(state);
+        const items      : Array<Alert>          = StateUserAlerts.dataState(getState());
+
+        return of(items).
+        pipe
+        (
+            map((data: Array<Alert>) =>
+                data.
+                map((item: Alert) =>
+                    of(item).
+                    pipe
+                    (
+                        switchMap(() =>
+                            !item.read ?
+                                this.storage.downloadUrl(`${Collection.Events}/${item.id}/${ImageType.Image}.jpeg`, ImageSize.Medium) :
+                                of(item.metadata.image)
+                        ),
+                        map((image: string) =>
+                            ({
+                                ...item,
+                                metadata : { ...item.metadata, image }
+                            })
+                        )
+                    )
+                )
+            ),
+            switchMap((items$: Array<Observable<Alert>>) =>
+                forkJoin(items$).
+                pipe
+                (
+                    tap((data: Array<Alert>) =>
+                        data.forEach((document: Alert) =>
+                            dataLookup[document.id] = document
+                        )
+                    ),
+                    tap((data: Array<Alert>) =>
+                        patchState
+                        ({
+                            data,
+                            dataLookup
+                        })
+                    )
+                )
             )
         );
     }
