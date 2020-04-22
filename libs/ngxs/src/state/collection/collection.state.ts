@@ -229,10 +229,12 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     {
         const { getState, patchState } = context;
 
-        const dataLookup: Record<string, T> = {};
-        const imageSize:  ImageSize         = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
+        const state      : M                 = getState();
+        const dataLookup : Record<string, T> = StateCollection.dataLookupState(state);
+        const imageSize  : ImageSize         = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
+        const items      : Array<T>          = StateCollection.dataState(state);
 
-        return of(StateCollection.dataState(getState())).
+        return of(items).
         pipe
         (
             map((data: Array<T>) =>
@@ -242,14 +244,12 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
                     pipe
                     (
                         switchMap(() =>
-                            item.metadata[imageType] == null ?
-                                this.storage.downloadUrl(`${collection}/${item.id}/${imageType}.jpeg`, imageSize) :
-                                of(item.metadata[imageType])
+                            this.storage.downloadUrl(`${collection}/${item.id}/${imageType}.jpeg`, imageSize)
                         ),
                         map((image: string) =>
                             ({
                                 ...item,
-                                metadata : { [imageType]: image }
+                                metadata : { ...item.metadata, [imageType]: image }
                             })
                         )
                     )
