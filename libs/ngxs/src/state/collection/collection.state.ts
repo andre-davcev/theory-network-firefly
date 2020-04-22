@@ -237,18 +237,14 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
         (
             map((data: Array<T>) =>
                 data.
-                filter((item: T) =>
-                    item.metadata[imageType] == null
-                ).
                 map((item: T) =>
                     of(item).
                     pipe
                     (
-                        map(() =>
-                            `${collection}/${item.id}/${imageType}.jpeg`
-                        ),
-                        switchMap((bucketPath: string) =>
-                            this.storage.downloadUrl(bucketPath, imageSize)
+                        switchMap(() =>
+                            item.metadata[imageType] == null ?
+                                this.storage.downloadUrl(`${collection}/${item.id}/${imageType}.jpeg`, imageSize) :
+                                of(item.metadata[imageType])
                         ),
                         map((image: string) =>
                             ({
