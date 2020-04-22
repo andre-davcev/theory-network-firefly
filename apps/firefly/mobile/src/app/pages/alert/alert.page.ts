@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
 import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType } from '@firefly/core';
-import { Alert } from '@firefly/cloud';
+import { Alert, DateEvents } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
@@ -21,12 +21,12 @@ import { BaseComponent } from '@theory/core';
 
 export class PageAlert extends BaseComponent implements AfterViewInit
 {
-    @Select(StateAlert.formGroup())        form$:      Observable<FormGroup>;
-    @Select(StateUserAlerts.unreadList)    unread$:    Observable<Array<Alert>>;
-    @Select(StateUserAlerts.found())       found$:     Observable<boolean>;
-    @Select(StateUserAlerts.hasUnreadList) hasUnread$: Observable<boolean>;
-    @Select(StateUser.eventType)           eventType$: Observable<EventType>;
-    @Select(StateUser.eventsEmptyMessage)  emptyMessage$:  Observable<string>;
+    @Select(StateAlert.formGroup())            form$:      Observable<FormGroup>;
+    @Select(StateUserAlerts.eventsList)        events$:    Observable<Array<DateEvents> | Array<Alert>>;
+    @Select(StateUserAlerts.eventsListEmpty)   empty$:     Observable<boolean>;
+    @Select(StateUserAlerts.hasUnreadList)     hasUnread$: Observable<boolean>;
+    @Select(StateUser.eventType)               eventType$: Observable<EventType>;
+    @Select(StateUser.eventsEmptyMessage)      emptyMessage$:  Observable<string>;
 
     @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
 
@@ -113,5 +113,10 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         (
           switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
         ).subscribe();
+    }
+
+    public selectEvent(event: Event): void
+    {
+        console.log(event);
     }
 }

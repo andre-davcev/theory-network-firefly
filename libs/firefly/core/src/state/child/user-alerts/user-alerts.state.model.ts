@@ -3,5 +3,5 @@ import { Alert } from '@firefly/cloud';
 
 export interface StateUserAlertsModel extends StateChildModel<Alert>
 {
-    unread: number;
+
 }

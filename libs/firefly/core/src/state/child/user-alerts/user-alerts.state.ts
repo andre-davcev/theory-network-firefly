@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 
-import { Alert } from '@firefly/cloud';
+import { Alert, DateEvents } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
 import { StateChild } from '@theory/ngxs';
 
@@ -23,7 +23,8 @@ import { from, of } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { StateLanguage } from '@theory/capacitor';
-import { Collection } from '@firefly/core/enums';
+import { Collection, EventType } from '@firefly/core/enums';
+import { StateUser } from '../../document/user/user.state';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()
@@ -69,6 +70,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     }
 
     @Selector() static read(state: StateUserAlertsModel)          : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => alert.read); }
+    @Selector() static readList(state: StateUserAlertsModel)      : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => alert.read && !alert.metadata?.sessionRead); }
     @Selector() static unread(state: StateUserAlertsModel)        : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read); }
     @Selector() static unreadList(state: StateUserAlertsModel)    : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read || alert.metadata?.sessionRead); }
     @Selector() static readCount(state: StateUserAlertsModel)     : number       { return StateUserAlerts.read(state).length; }
@@ -76,6 +78,79 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Selector() static hasRead(state: StateUserAlertsModel)       : boolean      { return StateUserAlerts.readCount(state) > 0; }
     @Selector() static hasUnread(state: StateUserAlertsModel)     : boolean      { return StateUserAlerts.unreadCount(state) > 0; }
     @Selector() static hasUnreadList(state: StateUserAlertsModel) : boolean      { return StateUserAlerts.unreadList(state).length > 0; }
+
+    @Selector([StateLanguage.language, StateUser.eventType])
+    public static eventsList
+    (
+        state     : StateUserAlertsModel,
+        language  : string,
+        eventType : EventType
+    ) : Array<Alert> | Array<DateEvents>
+    {
+        if (eventType === EventType.New)
+        {
+            return StateUserAlerts.unreadList(state);
+        }
+        else
+        {
+            const eventsList : Array<DateEvents>= [];
+
+            const options      : any = { weekday: 'long',  year: 'numeric', month: 'long',  day: 'numeric'};
+            const optionsShort : any = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
+
+            let current            : DateEvents;
+            let timeStart          : Date;
+            let timeStartPrevious  : Date;
+            let timeStartFormatted : string;
+
+            StateUserAlerts.
+                readList(state).
+                forEach((alert: Alert) =>
+                {
+                    timeStart = new Date(alert.timeStart);
+
+                    if (timeStartPrevious != null)
+                    {
+                        eventsList.push(current);
+                    }
+
+                    if (timeStartPrevious == null || timeStart.getTime() != timeStartPrevious.getTime())
+                    {
+                        current =
+                        {
+                            date   : timeStart.toLocaleDateString(language, options),
+                            events : []
+                        };
+                    }
+
+                    alert.metadata.timeStartFormatted      = timeStartFormatted;
+                    alert.metadata.timeStartFormattedShort = timeStart.toLocaleDateString(language, optionsShort);
+                    alert.metadata.timeStartDate           = timeStart;
+
+                    current.events.push(alert);
+
+                    timeStartPrevious = timeStart;
+                });
+
+            if (eventsList.length > 0)
+            {
+                eventsList.push(current);
+            }
+
+            return eventsList
+        }
+    }
+
+    @Selector([StateLanguage.language, StateUser.eventType])
+    public static eventsListEmpty
+    (
+        state     : StateUserAlertsModel,
+        language  : string,
+        eventType : EventType
+    ) : boolean
+    {
+        return StateUserAlerts.eventsList(state, language, eventType).length === 0;
+    }
 
     @Action(ActionUserAlertsReset)
     reset(context: StateContext<StateUserAlertsModel>, action: ActionUserAlertsReset)
@@ -98,52 +173,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Action(ActionUserAlertsGet)
     get(context: StateContext<StateUserAlertsModel>)
     {
-        return super.get(context).
-        pipe
-        (
-            tap(() =>
-            {
-                const { getState, patchState } = context;
-
-                const state  : StateUserAlertsModel         = getState();
-                const images : Record<string, StorageImage> = this.store.selectSnapshot(StateStorage.images);
-                const data   : Array<Alert>                 = StateUserAlerts.dataState(state);
-
-                const language     : string = this.store.selectSnapshot(StateLanguage.language);
-                const options      : any    = { weekday: 'long',  year: 'numeric', month: 'long',  day: 'numeric'};
-                const optionsShort : any    = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
-
-                let timeStart: Date;
-                let timeStartPrevious: Date;
-                let timeStartFormatted: string;
-                let timeStartFormattedShort: string;
-
-                let unread: number = StateUserAlerts.unreadCount(state);
-
-                data.forEach((alert: Alert) =>
-                {
-                    unread += alert.read ? 0 : 1;
-
-                    timeStart = new Date(alert.timeStart);
-                    timeStartFormatted = timeStart.toLocaleDateString(language, options);
-                    timeStartFormattedShort = timeStart.toLocaleDateString(language, optionsShort);
-
-                    alert.metadata =
-                    {
-                        image: images[alert.bucketPath].medium
-                    };
-
-                    if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
-                    alert.metadata.timeStartFormatted = timeStartFormatted;
-
-                    alert.metadata.timeStartFormattedShort = timeStartFormattedShort;
-                    alert.metadata.timeStartDate = timeStart;
-                    timeStartPrevious = timeStart;
-                });
-
-                patchState({ unread })
-            })
-        );
+        return super.get(context);
     }
 
     @Action(ActionUserAlertsAdd)

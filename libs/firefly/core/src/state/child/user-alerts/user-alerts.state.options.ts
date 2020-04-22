@@ -35,8 +35,6 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         {
             name      : TypeOf.String,
             timeStart : TypeOf.String
-        },
-
-        unread: 0
+        }
     }
 };

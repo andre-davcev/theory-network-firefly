@@ -8,7 +8,7 @@
                 pager="true"
                 (ionSlideDidChange)="slideChanged()"
                 [options]="slideOptions">
-        <ion-slide #status *ngFor="let alert of unread$ | async">
+        <ion-slide #status *ngFor="let alert of events$ | async">
             <app-slide [slide]="alert"
                       [buttonText]="'general.go' | translate"
                       (alertDeleteClicked)="alertDelete(alert)"
@@ -18,6 +18,15 @@
         </ion-slide>
     </ion-slides>
 </form>
+
+<ion-content *ngIf="(eventType$ | async) !== EventType.New">
+    <ion-list>
+        <app-item-events *ngFor="let events of events$ | async"
+                         [dateEvents]="events"
+                         (selected)="selectEvent($event)">
+        </app-item-events>
+    </ion-list>
+</ion-content>
 
 <!--
 <ion-fab [class.cpt-empty]="!(hasUnread$ | async)"
@@ -37,7 +46,7 @@
     </ion-fab-button>
 </ion-fab>
 -->
-<app-icon-message *ngIf="!(hasUnread$ | async)"
+<app-icon-message *ngIf="empty$ | async"
                   slot="fixed"
                   [icon]="IconType.Alerts"
                   [message]="(emptyMessage$ | async) | translate">
