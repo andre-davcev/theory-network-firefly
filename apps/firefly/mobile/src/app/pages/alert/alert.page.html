@@ -26,6 +26,11 @@
                          (selected)="selectEvent($event)">
         </app-item-events>
     </ion-list>
+
+    <app-button-add *ngIf="add$ | async"
+                    (clicked)="add()"
+                    slot="fixed">
+    </app-button-add>
 </ion-content>
 
 <!--

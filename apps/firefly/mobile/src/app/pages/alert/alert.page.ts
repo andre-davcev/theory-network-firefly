@@ -27,6 +27,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     @Select(StateUserAlerts.hasUnreadList)     hasUnread$: Observable<boolean>;
     @Select(StateUser.eventType)               eventType$: Observable<EventType>;
     @Select(StateUser.eventsEmptyMessage)      emptyMessage$:  Observable<string>;
+    @Select(StateUserAlerts.eventsAdd)          add$:           Observable<boolean>;
 
     @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
 
@@ -106,17 +107,27 @@ export class PageAlert extends BaseComponent implements AfterViewInit
 
     public navigate(page: Pages.AlertsList | Pages.AlertDetail, object: Alert): void
     {
-      if(page === Pages.AlertsList)
-        this.store.dispatch(new Navigate([page]));
-      else
-        this.store.dispatch(new ActionEventGet(object.id)).pipe
-        (
-          switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
-        ).subscribe();
+        if (page === Pages.AlertsList)
+        {
+            this.store.dispatch(new Navigate([page]));
+        }
+        else
+        {
+            this.store.dispatch(new ActionEventGet(object.id)).pipe
+            (
+              switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
+            ).
+            subscribe();
+        }
     }
 
     public selectEvent(event: Event): void
     {
         console.log(event);
+    }
+
+    public add(): void
+    {
+        this.store.dispatch(new Navigate([Pages.AssetEvent]));
     }
 }

@@ -6,7 +6,7 @@ import { PageAlert } from './alert.page';
 import { RoutesPageAlert } from './alert.page.routes';
 import { ModuleComponentSlide, ModuleComponentItemEvents } from '@firefly/mobile';
 import { ModulePageAlertDetail } from '../alert-detail';
-import { ModuleComponentIconMessage } from '@firefly/core';
+import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 @NgModule
@@ -20,7 +20,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
         ModulePageAlertDetail,
         ModuleComponentIconMessage,
         NgxsFormPluginModule,
-        ModuleComponentItemEvents
+        ModuleComponentItemEvents,
+        ModuleComponentButtonAdd
     ],
 
     declarations : [PageAlert],

@@ -89,16 +89,15 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
         return StateUserInterests.stream(state, stream, subscriptions, interestType).length > 0;
     }
 
-    @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType])
+    @Selector([StateUser.interestType, StateUser.isPublisher])
     public static streamAdd
     (
         state         : StateUserInterestsModel,
-        stream        : Array<StreamInterest>,
-        subscriptions : Record<string, SubscriptionPartial>,
-        interestType  : InterestType
+        interestType  : InterestType,
+        isPublisher   : boolean
     ): boolean
     {
-        return StateUserInterests.streamFound(state, stream, subscriptions, interestType) && interestType === InterestType.Created;
+        return isPublisher && interestType === InterestType.Created;
     }
 
     @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType])
