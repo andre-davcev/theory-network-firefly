@@ -20,6 +20,7 @@ export interface Event extends FirebaseDocument
     timeStart      : string;
     timeEnd        : string;
     phone?         : string;
+    virtual        : boolean;
     website?       : string;
 
     metadata: MetadataEvent;

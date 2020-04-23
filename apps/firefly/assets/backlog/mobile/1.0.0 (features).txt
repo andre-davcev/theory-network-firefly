@@ -18,7 +18,10 @@ events (list) - sort/group dates correctly
 events (list) - implement simple event search filter
 events (detail) - cleanup styling/alignment
 events (detail) - reverse geocode map
-events (detail) - if event owner show publish/edit
+*events (detail) - if event owner show publish/edit
+*events (detail) - if event owner & timeNotify is null disable edit
+*events (detail) - add icons for private/virtual
+events (security) - when timeNotify set make uneditable
 events (edit) - migrate user-events to interest-events
 events (edit) - move icon cluster to icon select from photo library
 events (edit) - move image to image select from photo library
@@ -26,15 +29,12 @@ events (edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext
 events (edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
 events (edit) - fix edit functionality
 events (edit) - reverse geocode map
-events (edit) - add virtual event flag
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 events (go) - implement add to calendar workflow
 events (go) - implement get directions workflow
 events (list) - add pink dots for unread alerts
 events (list) - hide events in the past
-events (list) - add virtual event filter toggle
 events (slide) - add more interest branding to slide (icon)
-events (security) - when timeNotify set make uneditable
 firestore (all) - follow best practices articles
 firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
