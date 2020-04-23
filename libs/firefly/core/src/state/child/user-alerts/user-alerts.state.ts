@@ -147,6 +147,18 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     }
 
     @Selector([StateLanguage.language, StateUser.eventType, StateUserEvents.data()])
+    public static eventsListFound
+    (
+        state      : StateUserAlertsModel,
+        language   : string,
+        eventType  : EventType,
+        userEvents : Array<Event>
+    ) : boolean
+    {
+        return StateUserAlerts.eventsList(state, language, eventType, userEvents).length > 0;
+    }
+
+    @Selector([StateLanguage.language, StateUser.eventType, StateUserEvents.data()])
     public static eventsListEmpty
     (
         state      : StateUserAlertsModel,
@@ -156,6 +168,17 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     ) : boolean
     {
         return StateUserAlerts.eventsList(state, language, eventType, userEvents).length === 0;
+    }
+
+    @Selector([StateUser.eventType, StateUser.isPublisher])
+    public static eventsAdd
+    (
+        state       : StateUserAlertsModel,
+        eventType   : EventType,
+        isPublisher : boolean
+    ): boolean
+    {
+        return isPublisher && eventType === EventType.Created;
     }
 
     @Action(ActionUserAlertsReset)

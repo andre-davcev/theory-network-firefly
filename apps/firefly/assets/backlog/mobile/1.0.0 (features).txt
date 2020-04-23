@@ -5,7 +5,6 @@ app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (loading) - fix home screen loading styles
 app (load) - android splash screen
 app (security) - setup router guards
-app (storage) - cleanup image storage
 +app (lists) - implement infinite scrolling for lists
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
@@ -15,18 +14,16 @@ auth (sign-up) - on sign up, send initial notifications 30 seconds later
 auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
-*events (list) - sort/group dates correctly
+events (list) - sort/group dates correctly
 events (list) - implement simple event search filter
-events (list) - show/hide add button if on created filter
 events (detail) - cleanup styling/alignment
 events (detail) - reverse geocode map
+events (detail) - if event owner show publish/edit
 events (edit) - migrate user-events to interest-events
-events (edit) - migrate from bucketPath to icon/image
 events (edit) - move icon cluster to icon select from photo library
 events (edit) - move image to image select from photo library
 events (edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
 events (edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
-events (edit) - delete old icon/image bucketPath's
 events (edit) - fix edit functionality
 events (edit) - reverse geocode map
 events (edit) - add virtual event flag
@@ -34,6 +31,7 @@ events (functions) - on interest subscribe wait 1 min, check if still subscribed
 events (go) - implement add to calendar workflow
 events (go) - implement get directions workflow
 events (list) - add pink dots for unread alerts
+events (list) - hide events in the past
 events (list) - add virtual event filter toggle
 events (slide) - add more interest branding to slide (icon)
 events (security) - when timeNotify set make uneditable
