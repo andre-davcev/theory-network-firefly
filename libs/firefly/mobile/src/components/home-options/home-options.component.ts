@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet, StateUser, StateUserInterests, ActionUserInterestsGetData, StateUserEvents } from '@firefly/core';
+import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet, StateUser, StateUserInterests, ActionUserInterestsGetData, StateUserEvents, StateUserAlerts, ActionUserAlertsGetIcons, ActionUserEventsGetData } from '@firefly/core';
 import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 import { Observable } from 'rxjs';
@@ -59,22 +59,46 @@ export class ComponentHomeOptions
         {
             const eventType: EventType = event.detail.value;
 
-            if (eventType !== EventType.Created || this.store.selectSnapshot(StateUserEvents.initialized()))
+            if (eventType === EventType.New)
             {
                 this.store.dispatch(new ActionUserEventTypeSet(eventType));
             }
-            else
+            else if (eventType === EventType.Upcoming)
             {
-                this.store.dispatch(new ActionMobileLoadingShow()).
-                pipe
-                (
-                    switchMap(() => this.store.dispatch(new ActionUserInterestsGetData())),
-                    switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
-                    switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
-                ).
-                subscribe();
+                if (this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.alerts)[0].metadata.icon != null)
+                {
+                    this.store.dispatch(new ActionUserEventTypeSet(eventType));
+                }
+                else
+                {
+                    this.store.dispatch(new ActionMobileLoadingShow()).
+                    pipe
+                    (
+                        switchMap(() => this.store.dispatch(new ActionUserAlertsGetIcons())),
+                        switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
+                        switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
+                    ).
+                    subscribe();
+                }
             }
-            this.store.dispatch(new ActionUserEventTypeSet(eventType));
+            else if (eventType === EventType.Created)
+            {
+                if (this.store.selectSnapshot(StateUserEvents.initialized()))
+                {
+                    this.store.dispatch(new ActionUserEventTypeSet(eventType));
+                }
+                else
+                {
+                    this.store.dispatch(new ActionMobileLoadingShow()).
+                    pipe
+                    (
+                        switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
+                        switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
+                        switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
+                    ).
+                    subscribe();
+                }
+            }
         }
 
         this.popover.dismiss();

@@ -20,6 +20,7 @@ import { tap, map, switchMap } from 'rxjs/operators';
 import { StateLanguage } from '@theory/capacitor';
 import { Injectable } from '@angular/core';
 import { ActionStorageUrlsGet, ImageSize, ServiceStorage } from '@theory/firebase';
+import { Collection, ImageType } from '@firefly/core/enums';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 @Injectable()
@@ -78,8 +79,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     reset(context: StateContext<StateUserEventsModel>)
     {
         const userId: string = this.store.selectSnapshot(StateUser.id());
-        const query: Query   = userId == null ? undefined : this.service.collection('events').ref.where('userId', '==', userId)
-          .where('notifyComplete', '==', false);
+        const query: Query   = userId == null ? undefined : this.service.collection('events').ref.where('userId', '==', userId);
 
         return super.reset(context, { query });
     }
@@ -93,52 +93,11 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     @Action(ActionUserEventsGet)
     get(context: StateContext<StateUserEventsModel>)
     {
-        const { dispatch, getState } = context;
-
-        return super.get(context).pipe
+        return super.get(context).
+        pipe
         (
-            map(() =>
-                StateUserEvents.dataState(getState())
-            ),
-            tap((data: Array<Event>) =>
-            {
-                const language: string = this.store.selectSnapshot(StateLanguage.language);
-
-                const options: any =
-                {
-                    weekday : 'long',
-                    year    : 'numeric',
-                    month   : 'long',
-                    day     : 'numeric'
-                };
-
-                let timeStartDate     : Date;
-                let timeStartPrevious : Date;
-
-                data.forEach((event: Event) =>
-                {
-                    timeStartDate = new Date(event.timeStart);
-
-                    event.metadata =
-                    {
-                        ...event.metadata,
-
-                        timeStartDate,
-                        timeStartFormatted: timeStartPrevious == null || timeStartDate.getTime() != timeStartPrevious.getTime() ?
-                            timeStartDate.toLocaleDateString(language, options) :
-                            null
-                    };
-
-                    timeStartPrevious = timeStartDate;
-                });
-            }),
-            map((data: Array<Event>) =>
-                data.map((item: Event) =>
-                    item.bucketPath
-                )
-            ),
-            switchMap((bucketPaths: Array<string>) =>
-                dispatch(new ActionStorageUrlsGet(bucketPaths, ImageSize.Small))
+            switchMap(() =>
+                super.getMedia(context, Collection.Events, ImageType.Icon)
             )
         );
     }
