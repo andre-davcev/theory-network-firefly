@@ -5,7 +5,8 @@
                  (ionCancel)="searchShow(false)"
                  (ionChange)="search($event)">
         <ion-searchbar #searchBar
-                       showCancelButton="focus">
+                       showCancelButton="focus"
+                       [placeholder]="'general.search' | translate">
         </ion-searchbar>
     </ion-toolbar>
 
