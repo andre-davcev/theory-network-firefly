@@ -31,6 +31,7 @@ automation (ci) - setup ionic appflow
 automation (dev) - setup automated code formatting via prettier
 automation (dev) - scrape events from google (pupeteer)
 design (photoshop) - change main photo to firefly color
+firestore (all) - follow best practices articles
 firestore (functions) - manual testing
 firestore (functions) - unit tests
 firestore (analytics) - implement firebase analytics
