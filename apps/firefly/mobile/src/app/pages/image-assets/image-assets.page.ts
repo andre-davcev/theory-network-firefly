@@ -52,15 +52,17 @@ export class PageImageAssets
         const id: string = this.userImages[index].id;
         const bucketPath = this.userImages[index].bucketPath;
 
+/*
         this.store.dispatch(new ActionImageSetId(id)).pipe
         (
             switchMap(() => this.store.dispatch
             ([
-                new ActionEventPatch({ bucketPath })/*,
-                new ActionInterestDirty()*/
+                new ActionEventPatch({ bucketPath }),
+                // new ActionInterestDirty()
             ])),
             switchMap(() => {
               return this.modalController.dismiss()})
         ).subscribe();
+*/
     }
 }

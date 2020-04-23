@@ -321,7 +321,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
             })
           ),
           map(() =>
-            events.map((item: Event) => item.bucketPath)
+            events.map((item: Event) => item.metadata.icon)
           ),
           switchMap((bucketPaths: Array<string>) =>
               dispatch(new ActionStorageUrlsGet(bucketPaths, ImageSize.Small))
@@ -386,7 +386,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
             })
           ),
           map(() =>
-            events.map((item: Event) => item.bucketPath)
+            events.map((item: Event) => item.metadata.icon)
           ),
           switchMap((bucketPaths: Array<string>) =>
               dispatch(new ActionStorageUrlsGet(bucketPaths, ImageSize.Small))

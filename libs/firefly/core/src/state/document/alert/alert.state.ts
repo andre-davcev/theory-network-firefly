@@ -47,7 +47,6 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 dateCreated : undefined,
                 dateUpdated : undefined,
 
-                bucketPath     : null,
                 cityId         : null,
                 city           : null,
                 description    : null,
@@ -101,7 +100,7 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
     @Action(ActionAlertDirty)
     dirty(context: StateContext<StateAlertModel>)
     {
-      return super.dirty(context)
+        return super.dirty(context)
     }
 
     @Action(ActionAlertGet)

@@ -28,7 +28,7 @@ export class PageEventAssets
 
     public ngOnInit(): void
     {
-
+/*
       this.store.dispatch(new ActionUserEventsGetData()).pipe(
         switchMap(() => {
 
@@ -42,6 +42,7 @@ export class PageEventAssets
             return this.urls$ = of(this.urls);
         })
       ).subscribe();
+*/
     }
 
     public ionViewWillEnter(): void
@@ -55,7 +56,7 @@ export class PageEventAssets
         //const id: string = this.userEvents[index].id;
         //const bucketPath = this.userEvents[index].bucketPath;
         const id: string = event.id;
-        const bucketPath = event.bucketPath;
+        // const bucketPath = event.bucketPath;
 
         let interests: string[] = event.interests;
 

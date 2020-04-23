@@ -89,7 +89,6 @@ export class ServiceEvents extends ServiceFirestore<Event>
         ({
             ...event,
 
-            bucketPath  : [event.bucketPath,     [Validators.required]],
             description : [event.description,    [Validators.required, ValidatorsExtended.minLength(1)]],
             geopoint    : [event.geopoint,       [Validators.required]],
             icon        : [event.metadata.icon,  [Validators.required]],

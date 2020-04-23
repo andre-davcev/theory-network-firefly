@@ -65,7 +65,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 dateCreated : undefined,
                 dateUpdated : undefined,
 
-                bucketPath     : null,
                 cityId         : null,
                 city           : null,
                 description    : null,
@@ -238,7 +237,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         return dispatch
         ([
             new ActionImageClear(),
-            new ActionEventPatch({ bucketPath: null }),
+            // new ActionEventPatch({ bucketPath: null }),
         ]);
     }
 
@@ -247,7 +246,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     {
         return dispatch
         ([
-            new ActionEventPatch({ bucketPath: CoreEnum.IdNew }),
+            // new ActionEventPatch({ bucketPath: CoreEnum.IdNew }),
             new ActionImageUriSet(dataUri)
         ]);
     }
@@ -262,7 +261,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
             switchMap(() =>
                 dispatch
                 ([
-                    new ActionEventPatch({ bucketPath }),
+                    // new ActionEventPatch({ bucketPath }),
                     new ActionImagePatch({ bucketPath })
                 ])
             )
@@ -300,7 +299,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 dispatch
                 ([
                     new ActionImageClear(),
-                    new ActionEventPatch({ bucketPath: this.store.selectSnapshot(StateImage.bucketPath()) })
+                    // new ActionEventPatch({ bucketPath: this.store.selectSnapshot(StateImage.bucketPath()) })
                 ])
             )
         );

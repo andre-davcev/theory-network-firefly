@@ -97,8 +97,6 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         {
             const eventsList : Array<DateEvents> = [];
 
-            console.log(userEvents);
-
             const events : Array<Event> = eventType === EventType.Upcoming ?
                 StateUserAlerts.alerts(state) :
                 userEvents;
