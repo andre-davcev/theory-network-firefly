@@ -11,7 +11,7 @@ import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, Stat
 import { Navigate } from '@ngxs/router-plugin';
 import { PageAlertDetail } from '../alert-detail/alert-detail.page';
 import { FormGroup } from '@angular/forms';
-import { BaseComponent } from '@theory/core';
+import { BaseComponent, CoreEnum } from '@theory/core';
 @Component
 ({
     selector    : 'app-page-alert',
@@ -128,6 +128,6 @@ export class PageAlert extends BaseComponent implements AfterViewInit
 
     public add(): void
     {
-        this.store.dispatch(new Navigate([Pages.AssetEvent]));
+        this.store.dispatch(new Navigate([Pages.AssetEvent, CoreEnum.IdNew]));
     }
 }
