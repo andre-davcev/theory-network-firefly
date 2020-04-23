@@ -79,6 +79,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 timeStart      : null,
                 timeEnd        : null,
                 phone          : null,
+                virtual        : false,
                 website        : null,
 
                 metadata:

@@ -88,8 +88,14 @@
 
                     <ion-item>
                         <ion-icon name="lock" slot="start" color="medium"></ion-icon>
-                        <ion-label>Is Private</ion-label>
+                        <ion-label>{{ 'general.isPrivate' | translate }}</ion-label>
                         <ion-toggle formControlName="private" color="primary"></ion-toggle>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-icon name="lock" slot="start" color="medium"></ion-icon>
+                        <ion-label>{{ 'general.isVirtual' | translate }}</ion-label>
+                        <ion-toggle formControlName="virtual" color="primary"></ion-toggle>
                     </ion-item>
 
                     <ion-item>

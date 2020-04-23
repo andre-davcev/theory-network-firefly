@@ -25,6 +25,7 @@
   "general.website"        : "Website",
   "general.phone"          : "Phone Number",
   "general.search"         : "Search",
+  "general.isVirtual"      : "Is Virtual",
 
   "menu.title"                : "Menu",
   "menu.home"                 : "Home",

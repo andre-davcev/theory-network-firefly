@@ -61,6 +61,7 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 timeStart      : null,
                 timeEnd        : null,
                 phone          : null,
+                virtual        : false,
                 website        : null,
 
                 read : null,
