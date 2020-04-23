@@ -1,7 +1,7 @@
 import { runWith, EventContext } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore } from '@google-cloud/firestore';
-import { User, Alert, Collection } from '../library';
+import { User, Alert, Collection, ImageType } from '../library';
 import admin = require('firebase-admin');
 
 const storage = admin.storage();
@@ -41,7 +41,7 @@ onRun(async (context: EventContext) =>
         alerts.forEach(async alert => {
           console.log('before bucket:');
           const bucket = storage.bucket('project-4334231676697990915.appspot.com');
-          const file = bucket.file(alert.bucketPath);
+          const file = bucket.file(`${Collection.Events}/${alert.id}/${ImageType.Icon}.jpeg`);
 
           let fileUrl = await file.getSignedUrl({
             action: 'read',
@@ -52,7 +52,7 @@ onRun(async (context: EventContext) =>
             notification: {
               title: alert.name,
               body: alert.description,
-              icon: 'https://firebasestorage.googleapis.com/v0/b/project-4334231676697990915.appspot.com/o/FCMImages%2Flogo%402x.png?alt=media&token=1046a940-9018-4184-976f-c192da3e236c',
+              icon: 'https://firebasestorage.googleapis.com/v0/b/project-4334231676697990915.appspot.com/o/fcm%2Flogo%402x.png?alt=media&token=1046a940-9018-4184-976f-c192da3e236c',
               image: fileUrl[0]
             }
           }
