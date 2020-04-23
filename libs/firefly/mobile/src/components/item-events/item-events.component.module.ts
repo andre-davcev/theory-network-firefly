@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { ComponentItemEvents } from './item-events.component';
 import { IonicModule } from '@ionic/angular';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule
 ({
     imports :
     [
         CommonModule,
-        IonicModule
+        IonicModule,
+        FlexLayoutModule
     ],
 
     declarations : [ComponentItemEvents],

@@ -14,7 +14,8 @@ import {
     ActionUserAlertsGet,
     ActionUserAlertsSync,
     ActionUserAlertsGo,
-    ActionUserAlertsSetData
+    ActionUserAlertsSetData,
+    ActionUserAlertsGetIcons
 } from './user-alerts.actions';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
@@ -95,6 +96,8 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         else
         {
             const eventsList : Array<DateEvents> = [];
+
+            console.log(userEvents);
 
             const events : Array<Event> = eventType === EventType.Upcoming ?
                 StateUserAlerts.alerts(state) :
@@ -293,5 +296,11 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                 )
             )
         );
+    }
+
+    @Action(ActionUserAlertsGetIcons)
+    getIcons(context: StateContext<StateUserAlertsModel>)
+    {
+        return super.getMedia(context, Collection.Events, ImageType.Icon);
     }
 }
