@@ -1,10 +1,11 @@
 +admin (marketing) - digital marketing questionnaire
+alerts (detail) - cleanup styling/alignment
 app (errors) - required fields styling (icon/popover)
 app (ionic) - ng update @nrwl/nx & npm outdated
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
-app (loading) - fix home screen loading styles
+*app (loading) - fix home screen loading styles
 app (load) - android splash screen
-app (security) - setup router guards
+*app (security) - setup router guards
 +app (lists) - implement infinite scrolling for lists
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
@@ -14,35 +15,32 @@ auth (sign-up) - on sign up, send initial notifications 30 seconds later
 auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
-events (list) - sort/group dates correctly
+*events (list) - sort/group dates correctly
 events (list) - implement simple event search filter
-events (detail) - cleanup styling/alignment
+events (list) - click event navigates to event detail
 events (detail) - reverse geocode map
 *events (detail) - if event owner show publish/edit
 *events (detail) - if event owner & timeNotify is null disable edit
 *events (detail) - add icons for private/virtual
-events (security) - when timeNotify set make uneditable
-events (edit) - migrate user-events to interest-events
-events (edit) - move icon cluster to icon select from photo library
+*events (edit) - migrate user-events to interest-events
+*events (edit) - move icon cluster to icon select from photo library
 events (edit) - move image to image select from photo library
-events (edit) - move icon path to <event-id>/icon.<ext>, <interest-id>/icon.<ext>
-events (edit) - move image path to <event-id>/image.<ext>, <interest-id>/image.<ext>
 events (edit) - fix edit functionality
 events (edit) - reverse geocode map
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 events (go) - implement add to calendar workflow
 events (go) - implement get directions workflow
 events (list) - add pink dots for unread alerts
-events (list) - hide events in the past
-events (slide) - add more interest branding to slide (icon)
-firestore (all) - follow best practices articles
+*events (list) - hide events in the past
 firestore (functions) - implement callable function to populate stream for new city
+*home (header) - change news icon to firefly icon
 icons (all) - remove all references
 images (all) - remove all references
 interests (list) - implement simple interest search filter
 +interests (publish detail) - event click navigates to edit event
 interests (publish detail) - add image for interest stream
 interests (list) - add virtual event filter toggle
+interests (list) - replace event styling with <app-item-events>
 intro (slides) - add slides when app installed
 notifications (functions) - update cron to update user.notifications & not alerts
 subscriptions (all) - debounce quick updates
