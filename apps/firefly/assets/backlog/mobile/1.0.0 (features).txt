@@ -1,5 +1,4 @@
 +admin (marketing) - digital marketing questionnaire
-*admin (marketing) - personas worksheet
 app (errors) - required fields styling (icon/popover)
 app (ionic) - ng update @nrwl/nx & npm outdated
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
@@ -16,11 +15,7 @@ auth (sign-up) - on sign up, send initial notifications 30 seconds later
 auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
-*events (list) - add getMedia to StateUserAlerts/StateUserEvents
 *events (list) - sort/group dates correctly
-*events (list) - don't change to "Created" until finished loading
-*events (list) - add "Created" events filter
-*events (list) - add search placeholders for interests/events
 events (list) - implement simple event search filter
 events (list) - show/hide add button if on created filter
 events (detail) - cleanup styling/alignment
