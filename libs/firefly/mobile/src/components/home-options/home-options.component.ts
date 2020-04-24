@@ -5,7 +5,7 @@ import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile/state';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, delay } from 'rxjs/operators';
 
 @Component
 ({
@@ -92,6 +92,7 @@ export class ComponentHomeOptions
                     this.store.dispatch(new ActionMobileLoadingShow()).
                     pipe
                     (
+                        delay(100000),
                         switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
                         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
                         switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))

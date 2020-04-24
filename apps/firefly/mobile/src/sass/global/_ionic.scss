@@ -14,6 +14,10 @@ ion-app {
         &.cpt-loading {
             --background: #{$fire-color-transparent};
 
+            .loading-wrapper {
+                box-shadow: none;
+            }
+
             ion-spinner {
                 --spinner-color: #{$fire-color-white};
                 transform: scale(2);
@@ -23,9 +27,9 @@ ion-app {
 }
 
 ion-item {
-  ion-icon {
-      color: #{$fire-color-grey-lighter};
-  }
+    ion-icon {
+        color: #{$fire-color-grey-lighter};
+    }
 }
 
 ion-action-sheet {
