@@ -24,6 +24,7 @@ admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - setup error handling strategy
 app (logging) - create logging strategy
+app (security) - setup router guards
 app (store) - release v1 on android
 app (store) - release v1 on ios
 automation (ci) - setup continuous integration (github actions)
