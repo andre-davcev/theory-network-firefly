@@ -4,7 +4,7 @@ import { Observable, from } from 'rxjs';
 
 import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionUserStreamGet } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
-import { StateStorage, StorageImage } from '@theory/firebase';
+import { StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
 import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow } from '@firefly/mobile';
@@ -20,7 +20,6 @@ import { IonInfiniteScroll } from '@ionic/angular';
 
 export class PageStream extends BaseComponent implements OnInit
 {
-    @Select(StateStorage.images)            images$:        Observable<Record<string, StorageImage>>;
     @Select(StateUser.authenticated)        authenticated$: Observable<boolean>;
     @Select(StateInterest.events)           events$:        Observable<Event[]>;
     @Select(StateUserInterests.stream)      stream$:        Observable<Array<StreamInterest>>;
@@ -30,7 +29,6 @@ export class PageStream extends BaseComponent implements OnInit
     @Select(StateUser.subscriptionsStatus)  subscriptions$: Observable<Record<string, SubscriptionPartial>>;
     @Select(StateUser.streamEmptyMessage)   emptyMessage$:  Observable<string>;
 
-    public images: Record<string, StorageImage>;
     public currentlyOpenedItemIndex = -1;
     public currentlyOpenedItems = [];
     public interestEvents: Array<Array<Event>> = [];
@@ -45,12 +43,6 @@ export class PageStream extends BaseComponent implements OnInit
 
     public ngOnInit(): void
     {
-        this.images$.
-        pipe(takeUntil(this.destroy$)).
-        subscribe((images: Record<string, StorageImage>) =>
-            this.images = images
-        );
-
         this.subscriptions$.
         pipe(takeUntil(this.destroy$)).
         subscribe((subscriptions: Record<string, SubscriptionPartial>) =>

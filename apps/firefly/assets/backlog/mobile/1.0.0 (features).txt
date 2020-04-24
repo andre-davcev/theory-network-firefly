@@ -21,7 +21,6 @@ events (list) - click event navigates to event detail
 events (detail) - reverse geocode map
 *events (detail) - if event owner show publish/edit
 *events (detail) - if event owner & timeNotify is null disable edit
-*events (edit) - migrate user-events to interest-events
 *events (edit) - move icon cluster to icon select from photo library
 events (edit) - move image to image select from photo library
 events (edit) - fix edit functionality
@@ -37,6 +36,7 @@ images (all) - remove all references
 interests (list) - implement simple interest search filter
 +interests (publish detail) - event click navigates to edit event
 interests (publish detail) - add image for interest stream
+*interests (list) - fix event icons missing
 interests (list) - add virtual event filter toggle
 interests (list) - replace event styling with <app-item-events>
 intro (slides) - add slides when app installed

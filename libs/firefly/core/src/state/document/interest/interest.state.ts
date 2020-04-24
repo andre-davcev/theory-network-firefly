@@ -104,11 +104,14 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Selector([StateIcon.dataUri, StateStorage.images])
     public static iconUrl(state: StateInterestModel, dataUri: string, images: Record<string, StorageImage>)
     {
+/*
         const bucketPath: string = StateInterest.bucketPathState(state);
 
         return bucketPath == null || bucketPath === CoreEnum.IdNew || images[bucketPath] == null ?
             dataUri :
             images[bucketPath][ImageSize.Medium];
+*/
+        return null;
     }
 
     @Action(ActionInterestReset)
@@ -237,7 +240,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         {
             name : interest.name
         };
-
+/*
         return dispatch(new ActionIconSetId()).
         pipe
         (
@@ -255,6 +258,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                 dispatch(new ActionInterestPatch({ bucketPath: this.store.selectSnapshot(StateIcon.bucketPath()) }))
             )
         );
+*/
     }
 
     @Action(ActionInterestEventsReset)

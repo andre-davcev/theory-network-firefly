@@ -1,7 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserStreamModel } from './user-stream.state.model';
-import { OrderBy, ImageSize } from '@theory/firebase';
+import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
 
 export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
@@ -17,7 +17,6 @@ export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
         initialized:    false,
         loading:        false,
         finishedPaging: false,
-        imageSize:      ImageSize.Medium,
 
         snapshots:      [],
         snapshotLookup: {},

@@ -1,4 +1,4 @@
-import { ImageSize, OrderBy } from '@theory/firebase';
+import { OrderBy } from '@theory/firebase';
 import { firestore } from 'firebase/app';
 
 export interface StateCollectionModel<T>
@@ -10,7 +10,6 @@ export interface StateCollectionModel<T>
     initialized:    boolean;
     loading:        boolean;
     finishedPaging: boolean;
-    imageSize:      ImageSize;
 
     snapshots:      Array<firestore.DocumentSnapshot>;
     snapshotLookup: Record<string, firestore.DocumentSnapshot>;
