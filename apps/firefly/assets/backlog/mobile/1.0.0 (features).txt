@@ -7,7 +7,6 @@ app (ionic) - ng update @nrwl/nx & npm outdated
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
 +app (lists) - implement infinite scrolling for lists
-app (security) - setup router guards
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
 auth (login) - add password recovery
@@ -18,10 +17,10 @@ auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 events (list) - sort/group dates correctly
 events (list) - implement simple event search filter
-events (list) - click event navigates to event detail
+*events (list) - click event navigates to event detail
 events (detail) - reverse geocode map
 *events (edit) - move icon cluster to icon select from photo library
-events (edit) - move image to image select from photo library
+*events (edit) - move image to image select from photo library
 events (edit) - fix edit functionality
 events (edit) - reverse geocode map
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
@@ -37,7 +36,7 @@ interests (list) - implement simple interest search filter
 interests (publish detail) - add image for interest stream
 *interests (list) - fix event icons missing
 interests (list) - add virtual event filter toggle
-interests (list) - replace event styling with <app-item-events>
+*interests (list) - replace event styling with <app-item-events>
 intro (slides) - add slides when app installed
 notifications (functions) - update cron to update user.notifications & not alerts
 subscriptions (all) - debounce quick updates
