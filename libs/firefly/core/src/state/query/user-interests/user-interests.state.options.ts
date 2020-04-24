@@ -18,7 +18,6 @@ export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
         initialized:    false,
         loading:        false,
         finishedPaging: false,
-        imageSize:      ImageSize.Small,
 
         snapshots:      [],
         snapshotLookup: {},

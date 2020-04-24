@@ -18,9 +18,9 @@
     </ion-card>
   </ion-item>
 -->
-  <ion-list *ngIf="images && (found$ | async)">
+  <ion-list *ngIf="found$ | async">
     <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">
-        <ion-card  *ngIf="images[interest.bucketPath]" elevation="1">
+        <ion-card  elevation="1">
             <img (click)="selectInterest(interest)" class="image-cnt" [src]="interest.metadata.image">
 
             <ion-card-header (click)="selectInterest(interest)">
@@ -49,7 +49,7 @@
                               <ion-col class="ion-align-self-center" size=3>
                                 <div>
                                   <ion-avatar class="avatar" slot="start">
-                                    <img *ngIf="images[event.bucketPath]" [src]="images[event.bucketPath].small">
+                                    <img [src]="event.metadata.icon">
                                   </ion-avatar>
                                 </div>
                               </ion-col>

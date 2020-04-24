@@ -36,12 +36,15 @@ export class StateImage extends StateDocument<Image, StateImageModel>
     @Selector([StateStorage.images])
     public static iconUrl(state: StateImageModel, images: Record<string, StorageImage>)
     {
+/*
         const dataUri:    string = StateImage.dataUri(state);
         const bucketPath: string = StateImage.bucketPathState(state);
 
         return bucketPath == null || bucketPath === CoreEnum.IdNew || images[bucketPath] == null ?
             dataUri :
             images[bucketPath][ImageSize.Medium];
+*/
+        return null
     }
 
     constructor
@@ -133,6 +136,7 @@ export class StateImage extends StateDocument<Image, StateImageModel>
     @Action(ActionImageUpdate)
     update(context: StateContext<StateImageModel>)
     {
+/*
         const { getState } = context;
 
         const state:      StateImageModel = getState();
@@ -146,6 +150,9 @@ export class StateImage extends StateDocument<Image, StateImageModel>
                 super.update(context)
             )
         );
+*/
+
+        return super.update(context);
     }
 
     @Action(ActionImageSave)

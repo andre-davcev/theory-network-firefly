@@ -3,7 +3,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { PageSize } from '@theory/ngxs';
 
 import { StateUserIconsModel } from './user-icons.state.model';
-import { OrderBy, ImageSize } from '@theory/firebase';
+import { OrderBy } from '@theory/firebase';
 
 export const StateUserIconsOptions: StoreOptions<StateUserIconsModel> =
 {
@@ -18,7 +18,6 @@ export const StateUserIconsOptions: StoreOptions<StateUserIconsModel> =
         initialized:    false,
         loading:        false,
         finishedPaging: false,
-        imageSize:      ImageSize.Small,
 
         snapshots:      [],
         snapshotLookup: {},

@@ -4,7 +4,7 @@ import { firestore } from 'firebase/app';
 import { Observable, from, of } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 
-import { ImageSize, FirebaseDocument, ActionStorageUrlsGet, ServiceStorage } from '@theory/firebase';
+import { FirebaseDocument, ServiceStorage } from '@theory/firebase';
 
 import { StateCollection, ActionsCollection, StateCollectionModel } from '../collection';
 
@@ -46,7 +46,7 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
 
     public get(context: StateContext<M>): Observable<any>
     {
-        const { getState, patchState, dispatch } = context;
+        const { getState, patchState } = context;
 
         const state : M = getState();
 
@@ -57,7 +57,6 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
             data,
             dataLookup,
             finishedPaging,
-            imageSize,
             initialized,
             pageSize
         } = state;
@@ -109,14 +108,6 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
                         data,
                         dataLookup
                     } as M)
-                ),
-                map(() =>
-                    imageSize === ImageSize.None ?
-                        [] :
-                        data.map((item: T) => item['bucketPath'])
-                ),
-                switchMap((bucketPaths: Array<string>) =>
-                    dispatch(new ActionStorageUrlsGet(bucketPaths, imageSize))
                 ),
                 tap(() =>
                     patchState({ loading: false } as M)

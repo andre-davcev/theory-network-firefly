@@ -18,7 +18,6 @@ export const StateUserImagesOptions: StoreOptions<StateUserImagesModel> =
         initialized:    false,
         loading:        false,
         finishedPaging: false,
-        imageSize:      ImageSize.Medium,
 
         snapshots:      [],
         snapshotLookup: {},

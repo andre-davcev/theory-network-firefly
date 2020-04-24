@@ -19,7 +19,6 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         initialized:    false,
         loading:        false,
         finishedPaging: false,
-        imageSize:      ImageSize.Medium,
 
         snapshots:      [],
         snapshotLookup: {},

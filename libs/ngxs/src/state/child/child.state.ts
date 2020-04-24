@@ -1,7 +1,7 @@
 import { StateContext, createSelector } from '@ngxs/store';
 import { Observable, of, forkJoin } from 'rxjs';
 
-import { ImageSize, FirebaseDocument, OrderBy, ServiceFirestore, ActionStorageUrlsGet, ServiceStorage } from '@theory/firebase';
+import { FirebaseDocument, OrderBy, ServiceFirestore, ServiceStorage } from '@theory/firebase';
 import { firestore } from 'firebase/app';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
@@ -103,7 +103,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const canPage: boolean = StateChild.canPageState(state);
         const count:   number  = StateChild.countState(state);
 
-        const { data, snapshots, snapshotLookup, dataLookup, childLookup, imageSize } = state;
+        const { data, snapshots, snapshotLookup, dataLookup, childLookup } = state;
 
         const finishedPaging = StateChild.finishedPagingState(state) || count === data.length;
 
@@ -162,15 +162,6 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                     data.push(dataLookup[key]);
                     snapshots.push(snapshotLookup[key]);
                 })
-            ),
-
-            map(() =>
-                imageSize === ImageSize.None ?
-                    [] :
-                    data.map((item: T) => item['bucketPath'])
-            ),
-            switchMap((bucketPaths: Array<string>) =>
-                dispatch(new ActionStorageUrlsGet(bucketPaths, imageSize))
             ),
             tap(() =>
                 patchState

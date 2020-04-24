@@ -127,11 +127,14 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector([StateImage.dataUri, StateStorage.images])
     public static imageUrl(state: StateEventModel, dataUri: string, images: Record<string, StorageImage>)
     {
+/*
         const bucketPath: string = StateEvent.bucketPathState(state);
 
         return bucketPath == null || bucketPath === CoreEnum.IdNew || images[bucketPath] == null ?
             dataUri :
             images[bucketPath][ImageSize.Medium];
+*/
+        return null;
     }
 
     @Action(ActionEventReset)

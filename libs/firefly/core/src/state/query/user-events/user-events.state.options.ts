@@ -17,7 +17,6 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
         initialized:    false,
         loading:        false,
         finishedPaging: false,
-        imageSize:      ImageSize.Small,
 
         snapshots:      [],
         snapshotLookup: {},

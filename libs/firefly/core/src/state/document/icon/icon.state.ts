@@ -36,12 +36,15 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
     @Selector([StateStorage.images])
     public static iconUrl(state: StateIconModel, images: Record<string, StorageImage>)
     {
+/*
         const dataUri:    string = StateIcon.dataUri(state);
         const bucketPath: string = StateIcon.bucketPathState(state);
 
         return bucketPath == null || bucketPath === CoreEnum.IdNew || images[bucketPath] == null ?
             dataUri :
             images[bucketPath][ImageSize.Medium];
+*/
+        return null;
     }
 
     constructor
@@ -137,6 +140,7 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
     @Action(ActionIconUpdate)
     update(context: StateContext<StateIconModel>)
     {
+/*
         const { getState } = context;
 
         const state:      StateIconModel = getState();
@@ -150,6 +154,8 @@ export class StateIcon extends StateDocument<Icon, StateIconModel>
                 super.update(context)
             )
         );
+*/
+        return super.update(context);
     }
 
     @Action(ActionIconSave)

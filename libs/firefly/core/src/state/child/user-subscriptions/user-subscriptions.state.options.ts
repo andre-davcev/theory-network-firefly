@@ -3,7 +3,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { PageSize } from '@theory/ngxs';
 
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
-import { OrderBy, ImageSize } from '@theory/firebase';
+import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
 
 export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsModel> =
@@ -19,7 +19,6 @@ export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsM
         initialized:    false,
         loading:        false,
         finishedPaging: false,
-        imageSize:      ImageSize.Small,
 
         snapshots:      [],
         snapshotLookup: {},
