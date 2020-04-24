@@ -12,7 +12,10 @@
         </ion-buttons>
 
         <ion-buttons slot="end">
-            <ion-button color="dark" (click)="save()" [disabled]="!(canUpdate$ | async)">
+            <ion-button *ngIf="canEdit$ | async"
+                        color="dark"
+                        (click)="save()"
+                        [disabled]="!(canUpdate$ | async)">
                 {{ ((isNew$ | async) ? 'general.publish' : 'general.update') | translate }}
             </ion-button>
         </ion-buttons>
