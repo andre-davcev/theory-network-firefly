@@ -1,5 +1,7 @@
 +admin (marketing) - digital marketing questionnaire
 alerts (detail) - cleanup styling/alignment
+app (cleanup) - cleanup folders/pages
+app (cleanup) - remove references to bucketPath
 app (errors) - required fields styling (icon/popover)
 app (ionic) - ng update @nrwl/nx & npm outdated
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
@@ -19,8 +21,6 @@ auth (unauth) - on unauthenticated login save city so you can grab city stream
 events (list) - implement simple event search filter
 events (list) - click event navigates to event detail
 events (detail) - reverse geocode map
-*events (detail) - if event owner show publish/edit
-*events (detail) - if event owner & timeNotify is null disable edit
 *events (edit) - move icon cluster to icon select from photo library
 events (edit) - move image to image select from photo library
 events (edit) - fix edit functionality

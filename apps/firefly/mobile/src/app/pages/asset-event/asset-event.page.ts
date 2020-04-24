@@ -27,6 +27,7 @@ export class PageAssetEvent
 {
     @Select(StateEvent.formGroup())     form$:            Observable<FormGroup>;
     @Select(StateEvent.isNew())         isNew$:           Observable<boolean>;
+    @Select(StateEvent.canEdit)         canEdit$:         Observable<boolean>;
     @Select(StateEvent.canUpdate())     canUpdate$:       Observable<boolean>;
     @Select(StateEvent.timeStart)       timeStart$:       Observable<string>;
     @Select(StateEvent.timeEnd)         timeEnd$:         Observable<string>;

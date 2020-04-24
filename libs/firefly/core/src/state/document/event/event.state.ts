@@ -32,7 +32,7 @@ import {
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
-import { ActionStorageUrlGet, StateStorage, ImageSize, StorageImage } from '@theory/firebase';
+import { ActionStorageUrlGet, StateStorage, StorageImage } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { ActionIconReset } from '../icon/icon.actions';
@@ -114,16 +114,17 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static timeEnd(state: StateEventModel):         string                 { return StateEvent.dataState(state).timeEnd; }
     @Selector() static timeEndValid(state: StateEventModel):    boolean                { return StateEvent.formGroupState(state).get('timeEnd').errors == null; }
     @Selector() static private(state: StateEventModel):         boolean                { return StateEvent.dataState(state).private; }
-
-    @Selector() static notifyComplete(state: StateEventModel):  boolean { return StateEvent.dataState(state).notifyComplete; }
-    @Selector() static timeNotify(state: StateEventModel):      string  { return StateEvent.dataState(state).timeNotify; }
-    @Selector() static timeNotifyValid(state: StateEventModel): boolean { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
+    @Selector() static notifyComplete(state: StateEventModel):  boolean                { return StateEvent.dataState(state).notifyComplete; }
+    @Selector() static timeNotify(state: StateEventModel):      string                 { return StateEvent.dataState(state).timeNotify; }
+    @Selector() static timeNotifyValid(state: StateEventModel): boolean                { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
 
     @Selector() static interests(state: StateEvent): Array<string> { return StateEvent.dataState(state).interests; }
+
     @Selector([StateUser.userId]) static canEdit(state: StateEventModel, userId: string): boolean
     {
-      return StateEvent.dataState(state).userId === userId;
+        return StateEvent.dataState(state).userId === userId && !StateEvent.notifyComplete(state);
     }
+
     @Selector([StateImage.dataUri, StateStorage.images])
     public static imageUrl(state: StateEventModel, dataUri: string, images: Record<string, StorageImage>)
     {
