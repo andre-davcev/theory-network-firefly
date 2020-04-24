@@ -87,19 +87,19 @@
                     <ion-item-divider></ion-item-divider>
 
                     <ion-item>
-                        <ion-icon name="lock" slot="start" color="medium"></ion-icon>
+                        <ion-icon [name]="(private$ | async) ? 'lock-closed' : 'lock-open'" slot="start" color="grey"></ion-icon>
                         <ion-label>{{ 'general.isPrivate' | translate }}</ion-label>
                         <ion-toggle formControlName="private" color="primary"></ion-toggle>
                     </ion-item>
 
                     <ion-item>
-                        <ion-icon name="lock" slot="start" color="medium"></ion-icon>
+                        <ion-icon name="cloud" slot="start" color="grey"></ion-icon>
                         <ion-label>{{ 'general.isVirtual' | translate }}</ion-label>
                         <ion-toggle formControlName="virtual" color="primary"></ion-toggle>
                     </ion-item>
 
                     <ion-item>
-                        <ion-icon name="link" slot="start" color="medium"></ion-icon>
+                        <ion-icon name="link" slot="start" color="grey"></ion-icon>
                         <ion-label>{{ 'general.website' | translate }} </ion-label>
                         <ion-input type="url"
                                    inputmode="url"
@@ -108,7 +108,7 @@
                     </ion-item>
 
                     <ion-item>
-                        <ion-icon name="call" slot="start" color="medium"></ion-icon>
+                        <ion-icon name="call" slot="start" color="grey"></ion-icon>
                         <ion-label>{{ 'general.phone' | translate }}</ion-label>
                         <ion-input type="tel"
                                    inputmode="tel"
