@@ -14,4 +14,5 @@ roles
 rule engine
 social
 stream search
+twilio video virtual events
 video support

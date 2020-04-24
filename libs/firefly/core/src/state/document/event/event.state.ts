@@ -113,6 +113,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static timeStart(state: StateEventModel):       string                 { return StateEvent.dataState(state).timeStart; }
     @Selector() static timeEnd(state: StateEventModel):         string                 { return StateEvent.dataState(state).timeEnd; }
     @Selector() static timeEndValid(state: StateEventModel):    boolean                { return StateEvent.formGroupState(state).get('timeEnd').errors == null; }
+    @Selector() static private(state: StateEventModel):         boolean                { return StateEvent.dataState(state).private; }
 
     @Selector() static notifyComplete(state: StateEventModel):  boolean { return StateEvent.dataState(state).notifyComplete; }
     @Selector() static timeNotify(state: StateEventModel):      string  { return StateEvent.dataState(state).timeNotify; }
