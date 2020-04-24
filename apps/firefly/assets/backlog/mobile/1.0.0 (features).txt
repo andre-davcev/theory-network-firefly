@@ -5,7 +5,6 @@ app (cleanup) - remove references to bucketPath
 app (errors) - required fields styling (icon/popover)
 app (ionic) - ng update @nrwl/nx & npm outdated
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
-app (loading) - fix home screen loading styles
 app (load) - android splash screen
 +app (lists) - implement infinite scrolling for lists
 app (security) - setup router guards
@@ -17,7 +16,7 @@ auth (sign-up) - on sign up, send initial notifications 30 seconds later
 auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
-*events (list) - sort/group dates correctly
+events (list) - sort/group dates correctly
 events (list) - implement simple event search filter
 events (list) - click event navigates to event detail
 events (detail) - reverse geocode map
