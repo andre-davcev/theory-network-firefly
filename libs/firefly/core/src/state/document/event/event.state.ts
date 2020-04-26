@@ -32,7 +32,7 @@ import {
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
-import { ActionStorageUrlGet, StateStorage, StorageImage } from '@theory/firebase';
+import { ActionStorageUrlGet, StateStorage, StorageImage, ServiceStorage, ImageSize } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { ActionIconReset } from '../icon/icon.actions';
@@ -40,7 +40,7 @@ import { LocationCity } from '@firefly/core/interfaces';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
 import { Query } from '@angular/fire/firestore';
-import { Collection } from '@firefly/core/enums';
+import { Collection, ImageType } from '@firefly/core/enums';
 
 @State<StateEventModel>(StateEventOptions)
 @Injectable()
@@ -49,6 +49,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     constructor
     (
         private store:    Store,
+        private storage:  ServiceStorage,
         private location: ServiceLocation,
         public  service:  ServiceEvents
     )
@@ -153,7 +154,23 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventSet)
     set(context: StateContext<StateEventModel>, action: ActionEventSet)
     {
-        return super.set(context, action);
+        const { getState, dispatch } = context;
+
+        return super.set(context, action).
+        pipe
+        (
+            map(() =>
+                StateEvent.dataState(getState())
+            ),
+            switchMap((document: Event) =>
+                document.metadata.image == null ?
+                    this.storage.downloadUrl(`${Collection.Events}/${document.id}/${ImageType.Image}.jpeg`, ImageSize.Medium) :
+                    of(document.metadata.image)
+            ),
+            switchMap((url: string) =>
+                dispatch(new ActionEventPatch({ metadata: { ...StateEvent.metadataState(getState()), image: url }}))
+            )
+        );
     }
 
     @Action(ActionEventPatch)
