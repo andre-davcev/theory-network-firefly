@@ -117,6 +117,8 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
     @Action(ActionAlertSet)
     set(context: StateContext<StateAlertModel>, action: ActionAlertSet)
     {
+        return super.set(context, action);
+/*
         const { getState, dispatch } = context;
 
         return super.set(context, action).
@@ -134,6 +136,7 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 dispatch(new ActionAlertPatch({ metadata: { ...StateAlert.metadataState(getState()), image: url }}))
             )
         );
+*/
     }
 
     @Action(ActionAlertPatch)
