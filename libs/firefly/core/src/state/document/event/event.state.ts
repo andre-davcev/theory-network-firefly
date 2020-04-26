@@ -154,6 +154,8 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventSet)
     set(context: StateContext<StateEventModel>, action: ActionEventSet)
     {
+        return super.set(context, action);
+/*
         const { getState, dispatch } = context;
 
         return super.set(context, action).
@@ -171,6 +173,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 dispatch(new ActionEventPatch({ metadata: { ...StateEvent.metadataState(getState()), image: url }}))
             )
         );
+*/
     }
 
     @Action(ActionEventPatch)
