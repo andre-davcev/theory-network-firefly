@@ -22,8 +22,11 @@ import { ActionUserAlertsAdd, ActionUserAlertsRemove, StateUserAlerts, ActionUse
 import { firestore } from 'firebase/app';
 import { ServiceAlerts } from '@firefly/core/services';
 import { Injectable } from '@angular/core';
-import { Collection } from '@firefly/core/enums';
+import { Collection, ImageType } from '@firefly/core/enums';
 import { ActionUserPatch } from '../user/user.actions';
+import { ServiceStorage, ImageSize } from '@theory/firebase';
+import { switchMap, map } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
 
 @State<StateAlertModel>(StateAlertOptions)
 @Injectable()
@@ -31,8 +34,9 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
 {
     constructor
     (
-        private store: Store,
-        service: ServiceAlerts
+        private store   : Store,
+        private storage : ServiceStorage,
+                service : ServiceAlerts
     )
     {
         super
@@ -113,7 +117,23 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
     @Action(ActionAlertSet)
     set(context: StateContext<StateAlertModel>, action: ActionAlertSet)
     {
-        return super.set(context, action);
+        const { getState, dispatch } = context;
+
+        return super.set(context, action).
+        pipe
+        (
+            map(() =>
+                StateAlert.dataState(getState())
+            ),
+            switchMap((document: Alert) =>
+                document.metadata.image == null ?
+                    this.storage.downloadUrl(`${Collection.Events}/${document.id}/${ImageType.Image}.jpeg`, ImageSize.Medium) :
+                    of(document.metadata.image)
+            ),
+            switchMap((url: string) =>
+                dispatch(new ActionAlertPatch({ metadata: { ...StateAlert.metadataState(getState()), image: url }}))
+            )
+        );
     }
 
     @Action(ActionAlertPatch)
