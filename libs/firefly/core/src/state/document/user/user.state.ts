@@ -242,7 +242,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
 
         patchState({ authenticating: true });
 
-        return from(this.auth.auth.createUserWithEmailAndPassword(credentials.id, credentials.password)).
+        return from(this.auth.createUserWithEmailAndPassword(credentials.id, credentials.password)).
         pipe
         (
             map((userCredential: auth.UserCredential) =>
@@ -327,7 +327,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserAnonymousLogin)
     anonymousLogin({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-      return this.auth.auth.signInAnonymously();
+      return this.auth.signInAnonymously();
     }
 
     @Action(ActionUserAuthenticate)
@@ -462,7 +462,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     {
         patchState({ authenticating: true });
 
-        return from(this.auth.auth.signInWithEmailAndPassword(payload.id, payload.password)).pipe
+        return from(this.auth.signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             map((userCredential: firebase.auth.UserCredential) => userCredential.user),
             switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
@@ -478,7 +478,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         const defaults: StateUserModel = CoreUtil.clone<StateUserModel>(StateUserOptions.defaults);
         patchState(defaults);
 
-        return of(this.auth.auth.signOut()).pipe
+        return of(this.auth.signOut()).pipe
         (
             switchMap(() =>
                 super.reset(context)
