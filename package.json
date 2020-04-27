@@ -138,7 +138,7 @@
     "@ionic/schematics-angular": "~1.0.7",
     "@nrwl/cypress": "9.2.3",
     "@nrwl/jest": "9.2.3",
-    "@nrwl/schematics": "^8.12.9",
+    "@nrwl/schematics": "^8.12.11",
     "@ngrx/effects": "9.0.0",
     "@ngrx/router-store": "9.0.0",
     "@ngrx/store": "9.0.0",
