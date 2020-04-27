@@ -42,6 +42,9 @@ export class StateNotifications
                 device
             ),
             switchMap(() =>
+                from(PushNotifications.requestPermission())
+            ),
+            switchMap(() =>
                 from(PushNotifications.register())
             ),
             switchMap(() =>

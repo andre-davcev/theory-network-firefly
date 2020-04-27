@@ -3,7 +3,6 @@ alerts (detail) - cleanup styling/alignment
 app (cleanup) - cleanup folders/pages
 app (cleanup) - remove references to bucketPath
 app (errors) - required fields styling (icon/popover)
-app (ionic) - ng update @nrwl/nx & npm outdated
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
 +app (lists) - implement infinite scrolling for lists
