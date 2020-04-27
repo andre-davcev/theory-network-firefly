@@ -98,7 +98,7 @@
   "page.event.title.edit.new"         : "Create New Event",
   "page.event.titlePlaceholder"       : "Add your title",
   "page.event.subtitlePlaceholder"    : "Add your subtitle",
-  "page.event.iconPlaceholder"        : "select interest",
+  "page.event.iconPlaceholder"        : "select icon",
   "page.event.imagePlaceholder"       : "select image",
   "page.event.descriptionPlaceholder" : "Write a description ...",
   "page.event.timeNotify"             : "Notification Time",

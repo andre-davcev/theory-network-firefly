@@ -16,7 +16,8 @@ import {
   ActionAlertSetId,
   ActionAlertUpdate,
   ActionAlertDirty,
-  ActionAlertMarkRead
+  ActionAlertMarkRead,
+  ActionAlertPatchMetadata
 } from './alert.actions';
 import { ActionUserAlertsAdd, ActionUserAlertsRemove, StateUserAlerts, ActionUserAlertsSync } from '../../child/user-alerts';
 import { firestore } from 'firebase/app';
@@ -143,6 +144,12 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
     patch(context : StateContext<StateAlertModel>, action: ActionAlertPatch)
     {
         return super.patch(context, action);
+    }
+
+    @Action(ActionAlertPatchMetadata)
+    patchMetadata(context : StateContext<StateAlertModel>, action: ActionAlertPatchMetadata)
+    {
+        return super.patchMetadata(context, action);
     }
 
     @Action(ActionAlertCreate)

@@ -29,13 +29,14 @@
           ngxsForm="events.form">
         <app-item-header [form]="form$ | async"
                          [iconUrl]="iconUrl$ | async"
+                         iconModel="metadata.icon"
                          title="name"
                          subtitle="tagline"
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
-                         [titlePlaceholder]="'page.interest.titlePlaceholder' | translate"
-                         [subtitlePlaceholder]="'page.interest.subtitlePlaceholder' | translate"
-                         [iconPlaceholder]="'page.interest.iconPlaceholder' | translate"
-                         (iconClicked)="navigate(Pages.AssetsInterests)">
+                         [titlePlaceholder]="'page.event.titlePlaceholder' | translate"
+                         [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate"
+                         [iconPlaceholder]="'page.event.iconPlaceholder' | translate"
+                         (iconClicked)="selectIcon()">
         </app-item-header>
 
         <app-item-map [title]="'general.location' | translate"
@@ -85,7 +86,6 @@
                                       [class.cpt-invalid]="!(timeNotifyValid$ | async)">
                         </ion-datetime>
                     </ion-item>
-
 
                     <ion-item-divider></ion-item-divider>
 

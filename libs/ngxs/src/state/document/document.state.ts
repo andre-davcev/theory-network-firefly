@@ -170,6 +170,19 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         );
     }
 
+    public patchMetadata(context: StateContext<M>, action: any): Observable<any>
+    {
+        const { getState } = context;
+
+        const metadata: Record<string, any> =
+        {
+            ...StateDocument.metadataState(getState()),
+            ...action.metadata
+        }
+
+        return this.patch(context, { metadata });
+    }
+
     public create(context: StateContext<M>, action?: any)
     {
         const { getState, patchState, dispatch } = context;

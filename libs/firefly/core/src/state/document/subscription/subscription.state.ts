@@ -17,7 +17,8 @@ import {
   ActionSubscriptionSave,
   ActionSubscriptionDelete,
   ActionSubscriptionSetId,
-  ActionSubscriptionUpdate
+  ActionSubscriptionUpdate,
+  ActionSubscriptionPatchMetadata
 } from './subscription.actions';
 import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions';
 import { firestore } from 'firebase/app';
@@ -97,6 +98,12 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
     patch(context : StateContext<StateSubscriptionModel>, action: ActionSubscriptionPatch)
     {
         return super.patch(context, action);
+    }
+
+    @Action(ActionSubscriptionPatchMetadata)
+    patchMetadata(context : StateContext<StateSubscriptionModel>, action: ActionSubscriptionPatchMetadata)
+    {
+        return super.patchMetadata(context, action);
     }
 
     @Action(ActionSubscriptionCreate)
