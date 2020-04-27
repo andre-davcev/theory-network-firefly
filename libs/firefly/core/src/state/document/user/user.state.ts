@@ -327,7 +327,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserAnonymousLogin)
     anonymousLogin({ patchState, dispatch }: StateContext<StateUserModel>)
     {
-      return this.auth.signInAnonymously();
+        return this.auth.signInAnonymously();
     }
 
     @Action(ActionUserAuthenticate)
