@@ -5,16 +5,14 @@ import { Select, Store } from '@ngxs/store';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { ModalController, NavController } from '@ionic/angular';
 
-import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StatusBarStyle, Plugins } from '@capacitor/core';
-import { StateEvent, ActionEventPatch, ActionEventSave, StateInterest, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous } from '@firefly/core';
+import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
+import { StatusBarStyle } from '@capacitor/core';
+import { StateEvent, ActionEventPatch, ActionEventSave, StateInterest, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
 import { PageImageSelector } from '../image-selector';
-
-const { Camera } = Plugins;
 
 @Component
 ({
@@ -50,6 +48,7 @@ export class PageAssetEvent
     constructor
     (
         private store:           Store,
+        private camera:          ServiceCamera,
         private modalController: ModalController,
         private resolver:        ResolverPageAssetsInterests,
         public  navController:   NavController
@@ -122,6 +121,23 @@ export class PageAssetEvent
         }
     }
 
+    public selectIcon(): void
+    {
+        this.camera.getPhoto().
+        pipe
+        (
+            switchMap((icon: string) =>
+                this.store.dispatch(new ActionEventPatchMetadata({ icon }))
+            )
+        ).
+        subscribe();
+    }
+
+    public selectImage(): void
+    {
+
+    }
+
     public timeChanged(event: CustomEvent, key: string): void
     {
         const time: string = event.detail.value;
@@ -162,5 +178,4 @@ export class PageAssetEvent
     {
         this.modalController.dismiss();
     }
-
 }

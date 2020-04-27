@@ -27,7 +27,8 @@ import {
   ActionEventInterestAdd,
   ActionEventAccept,
   ActionEventDeny,
-  ActionEventSetIdAnonymous
+  ActionEventSetIdAnonymous,
+  ActionEventPatchMetadata
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { firestore } from 'firebase/app';
@@ -180,6 +181,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     patch(context : StateContext<StateEventModel>, action: ActionEventPatch)
     {
         return super.patch(context, action);
+    }
+
+    @Action(ActionEventPatchMetadata)
+    patchMetadata(context : StateContext<StateEventModel>, action: ActionEventPatchMetadata)
+    {
+        return super.patchMetadata(context, action);
     }
 
     @Action(ActionEventCreate)

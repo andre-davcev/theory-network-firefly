@@ -38,7 +38,8 @@ import {
     ActionUserIsPublisherSet,
     ActionUserAnonymousLogin,
     ActionUserSubscriptionsSet,
-    ActionUserNotificationsSet
+    ActionUserNotificationsSet,
+    ActionUserPatchMetadata
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -226,6 +227,12 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     patch(context: StateContext<StateUserModel>, action: ActionUserPatch)
     {
         return super.patch(context, action);
+    }
+
+    @Action(ActionUserPatchMetadata)
+    patchMetadata(context : StateContext<StateUserModel>, action: ActionUserPatchMetadata)
+    {
+        return super.patchMetadata(context, action);
     }
 
     @Action(ActionUserCreate)

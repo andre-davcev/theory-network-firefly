@@ -2,7 +2,7 @@ import { firestore } from 'firebase/app';
 
 import { FirebaseDocument } from '../interfaces';
 import { Location } from '../models';
-import { MetadataEvent } from '../models/event.metadata';
+import { MetadataEvent } from '../metadata/event.metadata';
 
 export interface Event extends FirebaseDocument
 {

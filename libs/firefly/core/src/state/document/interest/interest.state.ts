@@ -28,7 +28,8 @@ import {
     ActionInterestEventsGet,
     ActionInterestEventsReset,
     ActionInterestSetIdAnonymous,
-    ActionInterestEventsGetAnonymous
+    ActionInterestEventsGetAnonymous,
+    ActionInterestPatchMetadata
 } from './interest.actions';
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, StateUserInterests, ActionUserInterestsSync } from '../..//query/user-interests';
 import { ActionUserStreamRemove } from '../../child/user-stream/user-stream.actions';
@@ -142,6 +143,12 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     patch(context : StateContext<StateInterestModel>, action: ActionInterestPatch)
     {
         return super.patch(context, action);
+    }
+
+    @Action(ActionInterestPatchMetadata)
+    patchMetadata(context : StateContext<StateInterestModel>, action: ActionInterestPatchMetadata)
+    {
+        return super.patchMetadata(context, action);
     }
 
     @Action(ActionInterestCreate)

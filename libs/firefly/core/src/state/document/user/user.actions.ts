@@ -1,19 +1,20 @@
 import { User as FirebaseUser, firestore } from 'firebase/app'
 import { Credentials } from '@theory/core';
 
-import { User } from '@firefly/cloud';
+import { User, MetadataUser } from '@firefly/cloud';
 import { ActionsUser } from './user.actions.enum';
 import { InterestType, EventType } from '@firefly/core/enums';
 
-export class ActionUserReset  { static readonly type = ActionsUser.Reset;   constructor() { } }
-export class ActionUserGet    { static readonly type = ActionsUser.Get;     constructor(public id: string) { } }
-export class ActionUserSet    { static readonly type = ActionsUser.Set;     constructor(public snapshot: firestore.DocumentSnapshot, public data?: User) { } }
-export class ActionUserPatch  { static readonly type = ActionsUser.Patch;   constructor(public partial: Partial<User>, public save: boolean = false) { } }
-export class ActionUserCreate { static readonly type = ActionsUser.Create;  constructor(public credentials: Credentials) { } }
-export class ActionUserUpdate { static readonly type = ActionsUser.Update;  constructor() { } }
-export class ActionUserSave   { static readonly type = ActionsUser.Save;    constructor() { } }
-export class ActionUserDelete { static readonly type = ActionsUser.Delete;  constructor() { } }
-export class ActionUserWatch  { static readonly type = ActionsUser.Watch;   constructor(public id: string) {} }
+export class ActionUserReset         { static readonly type = ActionsUser.Reset;         constructor() { } }
+export class ActionUserGet           { static readonly type = ActionsUser.Get;           constructor(public id: string) { } }
+export class ActionUserSet           { static readonly type = ActionsUser.Set;           constructor(public snapshot: firestore.DocumentSnapshot, public data?: User) { } }
+export class ActionUserPatch         { static readonly type = ActionsUser.Patch;         constructor(public partial: Partial<User>, public save: boolean = false) { } }
+export class ActionUserPatchMetadata { static readonly type = ActionsUser.PatchMetadata; constructor(public partial: Partial<MetadataUser>) { } }
+export class ActionUserCreate        { static readonly type = ActionsUser.Create;        constructor(public credentials: Credentials) { } }
+export class ActionUserUpdate        { static readonly type = ActionsUser.Update;        constructor() { } }
+export class ActionUserSave          { static readonly type = ActionsUser.Save;          constructor() { } }
+export class ActionUserDelete        { static readonly type = ActionsUser.Delete;        constructor() { } }
+export class ActionUserWatch         { static readonly type = ActionsUser.Watch;         constructor(public id: string) {} }
 
 export class ActionUserAuthenticate       { static readonly type = ActionsUser.Authenticate;       constructor() { } }
 export class ActionUserAuthenticateCheck  { static readonly type = ActionsUser.AuthenticateCheck;  constructor(public payload: FirebaseUser) {} }

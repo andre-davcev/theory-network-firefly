@@ -14,7 +14,8 @@ import {
     ActionUserProfileDelete,
     ActionUserProfileUpdate,
     ActionUserProfileCreate,
-    ActionUserProfileSetId
+    ActionUserProfileSetId,
+    ActionUserProfilePatchMetadata
 } from './user-profile.actions';
 import { ServiceUsersProfiles } from '@firefly/core/services';
 import { StateDocument } from '@theory/ngxs';
@@ -89,6 +90,12 @@ export class StateUserProfile extends StateDocument<UserProfile, StateUserProfil
     patch(context: StateContext<StateUserProfileModel>, action: ActionUserProfilePatch)
     {
         return super.patch(context, action);
+    }
+
+    @Action(ActionUserProfilePatchMetadata)
+    patchMetadata(context : StateContext<StateUserProfileModel>, action: ActionUserProfilePatchMetadata)
+    {
+        return super.patchMetadata(context, action);
     }
 
     @Action(ActionUserProfileUpdate)

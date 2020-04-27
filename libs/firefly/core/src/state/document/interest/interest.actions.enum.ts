@@ -1,15 +1,16 @@
 export enum ActionsInterest
 {
-    Reset  = '[Interest] Reset',
-    Dirty  = '[Interest] Dirty',
-    Get    = '[Interest] Get',
-    SetId  = '[Interest] SetId',
-    Set    = '[Interest] Set',
-    Patch  = '[Interest] Patch',
-    Create = '[Interest] Create',
-    Update = '[Interest] Update',
-    Save   = '[Interest] Save',
-    Delete = '[Interest] Delete',
+    Reset         = '[Interest] Reset',
+    Dirty         = '[Interest] Dirty',
+    Get           = '[Interest] Get',
+    SetId         = '[Interest] SetId',
+    Set           = '[Interest] Set',
+    Patch         = '[Interest] Patch',
+    PatchMetadata = '[Interest] Patch Metadata',
+    Create        = '[Interest] Create',
+    Update        = '[Interest] Update',
+    Save          = '[Interest] Save',
+    Delete        = '[Interest] Delete',
 
     SetIdAnonymous = '[Interest] SetIdAnonymous',
 
