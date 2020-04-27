@@ -79,7 +79,8 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const { dispatch, patchState } = context;
         const { ActionGet } = this.actions;
 
-        return of(patchState({ childLookup } as M)).
+        return Object.keys(childLookup).length === 0 ? of(null) :
+        of(patchState({ childLookup } as M)).
         pipe
         (
             tap(() =>
