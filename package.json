@@ -106,7 +106,7 @@
     "@ngxs/logger-plugin": "^3.6.2",
     "@ngxs/router-plugin": "^3.6.2",
     "@ngxs/store": "^3.6.2",
-    "@nrwl/angular": "^9.0.4",
+    "@nrwl/angular": "^9.2.3",
     "@nrwl/workspace": "9.2.3",
     "capacitor-fcm": "^1.0.0",
     "core-js": "^2.5.7",
