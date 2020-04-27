@@ -113,7 +113,7 @@ export function createTranslateLoader(http: HttpClient)
         NgxsRouterPluginModule.forRoot(),
         NgxsFormPluginModule.forRoot(),
         NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
-        // NgxsLoggerPluginModule.forRoot(),
+        NgxsLoggerPluginModule.forRoot(),
 
         NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken})
     ],
