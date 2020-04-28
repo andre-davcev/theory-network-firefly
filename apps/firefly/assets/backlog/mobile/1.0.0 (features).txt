@@ -5,6 +5,7 @@ app (cleanup) - remove references to bucketPath
 app (errors) - required fields styling (icon/popover)
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
+app (statusbar) - fix missing statusbar on ios
 +app (lists) - implement infinite scrolling for lists
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
@@ -36,6 +37,7 @@ interests (publish detail) - add image for interest stream
 interests (list) - fix event icons missing
 interests (list) - add virtual event filter toggle
 interests (list) - replace event styling with <app-item-events>
+interests (list) - prevent image flash when paging/infinite scroll
 intro (slides) - add slides when app installed
 notifications (functions) - update cron to update user.notifications & not alerts
 subscriptions (all) - debounce quick updates

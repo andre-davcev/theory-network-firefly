@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
 import { StateUser } from '@firefly/core';
@@ -26,7 +26,7 @@ export class PageAuth implements OnInit
 
     public ngOnInit(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarShow()).
+        from(this.store.dispatch(new ActionDeviceStatusBarShow())).
         pipe
         (
             switchMap(() =>
