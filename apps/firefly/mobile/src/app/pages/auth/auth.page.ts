@@ -42,6 +42,6 @@ export class PageAuth implements OnInit
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Dark }));
+        this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Light }));
     }
 }

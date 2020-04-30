@@ -1,5 +1,5 @@
 <ion-header elevation="1">
-    <ion-toolbar [hidden]="!searching"
+    <ion-toolbar *ngIf="searching"
                  color="light"
                  (ionBlur)="searchShow(false)"
                  (ionCancel)="searchShow(false)"
