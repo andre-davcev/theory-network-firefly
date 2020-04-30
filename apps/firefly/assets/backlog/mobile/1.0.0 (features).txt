@@ -15,6 +15,7 @@ auth (sign-up) - on sign up, send initial notifications 30 seconds later
 auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
+home (search) - auto focus search bar on show [hidden]
 events (list) - sort/group dates correctly
 events (list) - implement simple event search filter
 events (list) - click event navigates to event detail
@@ -52,7 +53,7 @@ user-profile (page) - implement save/update
 
 apr-15 - 54
 apr-22 - 48
-apr-29 - ?
+apr-29 - 46
 may-06 - ?
 may-13 - ?
 may-20 - ?

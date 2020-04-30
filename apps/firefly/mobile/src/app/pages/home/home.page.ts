@@ -99,7 +99,10 @@ export class PageHome extends BaseComponent
     {
         this.searching = show;
 
-        this.searchbar.setFocus();
+        if (show)
+        {
+            this.searchbar.setFocus();
+        }
     }
 
     public search(event: CustomEvent): void
