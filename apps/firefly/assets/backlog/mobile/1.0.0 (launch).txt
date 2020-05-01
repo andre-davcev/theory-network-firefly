@@ -1,7 +1,8 @@
 admin (accounting) - apply for corporate credit card
 admin (accounting) - renew sketch license
 admin (blog) - add cathy/amy as publishers to medium
-admin (blog) - start a theory network blog
+admin (blog) - change theory network to firefly blog
+admin (blog) - create first blog post (virtual events guide)
 admin (content) - event/interest spreadsheet
 admin (content) - mock.function.ts cloud function (mock data)
 admin (design) - research fiverr logo redesign
