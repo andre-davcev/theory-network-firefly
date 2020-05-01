@@ -1,4 +1,7 @@
 +admin (marketing) - digital marketing questionnaire
+*+admin (staffing) - linkedin recommendation for matt
+*+admin (staffing) - linkedin recommendation for hannah
+*+admin (staffing) - linkedin recommendation for akshay
 alerts (detail) - cleanup styling/alignment
 app (cleanup) - cleanup folders/pages
 app (cleanup) - remove references to bucketPath
@@ -49,7 +52,6 @@ user-profile (page) - implement save/update
 +dave
 ^cathy
 #amy
--nextcorps
 
 apr-15 - 54
 apr-22 - 48
