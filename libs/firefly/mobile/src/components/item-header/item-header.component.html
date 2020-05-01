@@ -1,22 +1,42 @@
 <img class="cpt-background-image" [src]="url">
 <div class="cpt-background"></div>
 
-<div class="cpt-icon-container" (click)="clickedIcon()">
-    <img class="cpt-icon" [src]="url">
-    <p class="cpt-icon-placeholder" *ngIf="!iconUrl">{{ iconPlaceholder }}</p>
+<div class="cpt-icon-container"
+     (click)="clickedIcon()">
+    <img class="cpt-icon"
+         [src]="url">
+
+    <p *ngIf="!iconUrl"
+        class="cpt-icon-placeholder">
+        {{ iconPlaceholder }}
+    </p>
 </div>
-<form novalidate class="cpt-container" [formGroup]="form" *ngIf="edit">
-    <input class="cpt-title"  type="text" [formControlName]="title" [placeholder]="titlePlaceholder">
-    <div  class="error-messages" *ngIf="!iconUrl && edit && hasError(title)">
+
+<form *ngIf="edit"
+      novalidate
+      class="cpt-container"
+      [formGroup]="form">
+    <input class="cpt-title"
+           type="text"
+           [formControlName]="title"
+           [placeholder]="titlePlaceholder">
+    <div *ngIf="!iconUrl && edit && hasError(title)"
+         class="error-messages">
         Please add a name
     </div>
-    <input class="cpt-subtitle" type="text" [formControlName]="subtitle" [placeholder]="subtitlePlaceholder">
-    <div  class="error-messages" *ngIf="!iconUrl && edit && hasError(subtitle)">
+
+    <input class="cpt-subtitle"
+           type="text"
+           [formControlName]="subtitle"
+           [placeholder]="subtitlePlaceholder">
+    <div *ngIf="!iconUrl && edit && hasError(subtitle)"
+         class="error-messages" >
         Please add a tagline
     </div>
 </form>
 
-<div class="cpt-container" *ngIf="!edit">
+<div *ngIf="!edit"
+     class="cpt-container">
     <h3 class="cpt-title">{{ title }}</h3>
     <h4 class="cpt-subtitle">{{ subtitle }}</h4>
 </div>

@@ -10,7 +10,7 @@ export class ActionInterestDirty         { static readonly type = ActionsInteres
 export class ActionInterestGet           { static readonly type = ActionsInterest.Get;           constructor(public id: string) { } }
 export class ActionInterestSet           { static readonly type = ActionsInterest.Set;           constructor(public snapshot: firestore.DocumentSnapshot, public data?: Interest) { } }
 export class ActionInterestPatch         { static readonly type = ActionsInterest.Patch;         constructor(public partial: Partial<Interest>, public save: boolean = false) { } }
-export class ActionInterestPatchMetadata { static readonly type = ActionsInterest.PatchMetadata; constructor(public partial: Partial<MetadataInterest>) { } }
+export class ActionInterestPatchMetadata { static readonly type = ActionsInterest.PatchMetadata; constructor(public metadata: Partial<MetadataInterest>) { } }
 export class ActionInterestCreate        { static readonly type = ActionsInterest.Create;        constructor() { } }
 export class ActionInterestUpdate        { static readonly type = ActionsInterest.Update;        constructor() { } }
 export class ActionInterestSave          { static readonly type = ActionsInterest.Save;          constructor() { } }

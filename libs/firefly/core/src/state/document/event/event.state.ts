@@ -119,8 +119,9 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static notifyComplete(state: StateEventModel):  boolean                { return StateEvent.dataState(state).notifyComplete; }
     @Selector() static timeNotify(state: StateEventModel):      string                 { return StateEvent.dataState(state).timeNotify; }
     @Selector() static timeNotifyValid(state: StateEventModel): boolean                { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
-
-    @Selector() static interests(state: StateEvent): Array<string> { return StateEvent.dataState(state).interests; }
+    @Selector() static interests(state: StateEvent):            Array<string>          { return StateEvent.dataState(state).interests; }
+    @Selector() static icon(state: StateEvent):                 string                 { console.log(StateEvent.metadataState(state).icon); return StateEvent.metadataState(state).icon; }
+    @Selector() static image(state: StateEvent):                string                 { return StateEvent.metadataState(state).image; }
 
     @Selector([StateUser.userId]) static canEdit(state: StateEventModel, userId: string): boolean
     {
