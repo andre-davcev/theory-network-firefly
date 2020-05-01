@@ -11,7 +11,7 @@ export class ActionEventReset         { static readonly type = ActionsEvent.Rese
 export class ActionEventGet           { static readonly type = ActionsEvent.Get;           constructor(public id: string) { } }
 export class ActionEventSet           { static readonly type = ActionsEvent.Set;           constructor(public snapshot: firestore.DocumentSnapshot, public data?: Event) { } }
 export class ActionEventPatch         { static readonly type = ActionsEvent.Patch;         constructor(public partial: Partial<Event>, public save: boolean = false) { } }
-export class ActionEventPatchMetadata { static readonly type = ActionsEvent.PatchMetadata; constructor(public partial: Partial<MetadataEvent>) { } }
+export class ActionEventPatchMetadata { static readonly type = ActionsEvent.PatchMetadata; constructor(public metadata: Partial<MetadataEvent>) { } }
 export class ActionEventCreate        { static readonly type = ActionsEvent.Create;        constructor() { } }
 export class ActionEventUpdate        { static readonly type = ActionsEvent.Update;        constructor() { } }
 export class ActionEventSave          { static readonly type = ActionsEvent.Save;          constructor() { } }

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { map, catchError, switchMap, finalize } from 'rxjs/operators';
+import { map, catchError, switchMap, finalize, tap } from 'rxjs/operators';
 import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
@@ -35,8 +35,8 @@ export class PageAssetEvent
     @Select(StateEvent.private)         private$:         Observable<boolean>;
     @Select(StateEvent.notifyComplete)  notifyComplete$:  Observable<boolean>;
     @Select(StateDevice.device)         device$:          Observable<boolean>;
-    @Select(StateEvent.imageUrl)        imageUrl$:        Observable<string>;
-    @Select(StateInterest.iconUrl)      iconUrl$:         Observable<string>;
+    @Select(StateEvent.image)           image$:           Observable<string>;
+    @Select(StateEvent.icon)            icon$:            Observable<string>;
 
     @Input() modal: boolean = false;
 

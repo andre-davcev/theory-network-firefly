@@ -3,7 +3,7 @@ import { SetFormPristine, UpdateFormValue, SetFormDirty } from '@ngxs/form-plugi
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { firestore } from 'firebase/app';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { CoreUtil, CoreEnum } from '@theory/core';
 import { ServiceFirestore, FirebaseDocument, ActionStorageUrlGet } from '@theory/firebase';
@@ -170,17 +170,17 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         );
     }
 
-    public patchMetadata(context: StateContext<M>, action: any): Observable<any>
+    public patchMetadata(context: StateContext<M>, action: any): void
     {
         const { getState } = context;
 
-        const metadata: Record<string, any> =
-        {
-            ...StateDocument.metadataState(getState()),
-            ...action.metadata
-        }
+        const formGroup    : FormGroup           = StateDocument.formGroupState(getState());
+        const metadata     : Record<string, any> = action.metadata;
+        const metadataForm : AbstractControl     = formGroup.get('metadata');
 
-        return this.patch(context, { metadata });
+        Object.keys(metadata).forEach((key: string) =>
+            metadataForm.get(key).setValue(metadata[key])
+        );
     }
 
     public create(context: StateContext<M>, action?: any)

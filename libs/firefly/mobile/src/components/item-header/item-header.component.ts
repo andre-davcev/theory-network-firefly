@@ -13,7 +13,6 @@ export class ComponentItemHeader
 {
     @Input() form: FormGroup;
 
-    @Input() iconModel:       string = 'bucketPath';
     @Input() iconUrl:         string;
     @Input() iconUrlEmpty:    string;
     @Input() iconPlaceholder: string;
@@ -32,7 +31,6 @@ export class ComponentItemHeader
 
     public clickedIcon(): void
     {
-        this.form.controls[this.iconModel].markAsDirty();
         this.iconClicked.next();
     }
 
