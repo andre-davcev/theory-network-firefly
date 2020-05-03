@@ -24,8 +24,6 @@ events (list) - sort/group dates correctly
 events (list) - implement simple event search filter
 events (list) - click event navigates to event detail
 events (detail) - reverse geocode map
-*events (edit) - move icon cluster to icon select from photo library
-*events (edit) - move image to image select from photo library
 events (edit) - fix edit functionality
 events (edit) - reverse geocode map
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
