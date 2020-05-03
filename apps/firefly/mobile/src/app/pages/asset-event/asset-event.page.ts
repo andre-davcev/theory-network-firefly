@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { map, catchError, switchMap, finalize, tap } from 'rxjs/operators';
+import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
@@ -123,11 +123,17 @@ export class PageAssetEvent
 
     public selectIcon(): void
     {
-        this.camera.getPhoto().
+        this.store.dispatch(new ActionMobileLoadingShow()).
         pipe
         (
+            switchMap(() =>
+                this.camera.getPhoto()
+            ),
             switchMap((icon: string) =>
                 this.store.dispatch(new ActionEventPatchMetadata({ icon }))
+            ),
+            finalize(() =>
+                this.store.dispatch(new ActionMobileLoadingHide())
             )
         ).
         subscribe();
@@ -135,7 +141,20 @@ export class PageAssetEvent
 
     public selectImage(): void
     {
-
+        this.store.dispatch(new ActionMobileLoadingShow()).
+        pipe
+        (
+            switchMap(() =>
+                this.camera.getPhoto()
+            ),
+            switchMap((image: string) =>
+                this.store.dispatch(new ActionEventPatchMetadata({ image }))
+            ),
+            finalize(() =>
+                this.store.dispatch(new ActionMobileLoadingHide())
+            )
+        ).
+        subscribe();
     }
 
     public timeChanged(event: CustomEvent, key: string): void
