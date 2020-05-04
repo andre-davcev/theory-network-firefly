@@ -273,11 +273,13 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventImagesUpdate)
     imagesUpdate(context : StateContext<StateEventModel>)
     {
-        return forkJoin
-        ([
-            super.updateMedia(context, ImageType.Icon),
-            super.updateMedia(context, ImageType.Image)
-        ]);
+        return super.updateMedia(context, ImageType.Icon).
+        pipe
+        (
+            switchMap(() =>
+                super.updateMedia(context, ImageType.Image)
+            )
+        );
     }
 
     @Action(ActionEventLocationSet)

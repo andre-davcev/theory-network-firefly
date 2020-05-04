@@ -26,6 +26,7 @@ events (list) - click event navigates to event detail
 events (detail) - reverse geocode map
 events (edit) - fix edit functionality
 events (edit) - reverse geocode map
+events (functions) - on delete event, delete storage
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 events (go) - implement add to calendar workflow
 events (go) - implement get directions workflow
@@ -34,6 +35,7 @@ events (list) - hide events where time > event.timeEnd
 firestore (functions) - implement callable function to populate stream for new city
 icons (all) - remove all references
 images (all) - remove all references
+interests (functions) - on delete interest, delete storage
 interests (list) - implement simple interest search filter
 +interests (publish detail) - event click navigates to edit event
 interests (publish detail) - add image for interest stream

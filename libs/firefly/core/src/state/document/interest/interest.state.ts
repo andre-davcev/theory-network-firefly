@@ -346,9 +346,13 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestEventsGetAnonymous)
     eventsGetAnonymous({ patchState, getState, dispatch}: StateContext<StateInterestModel>)
     {
+        const interestId: string = StateInterest.idState(getState());
+
+        if (interestId == null) { return of(null); }
+
         const currentDate = Date();
         const query: Query   = this.service.collection('events').ref
-          .where('interests', 'array-contains', StateInterest.idState(getState()))
+          .where('interests', 'array-contains', interestId)
           .where('timeStart', "<", currentDate.toString())
           .orderBy('timeStart', 'asc')
           .limit(5);
@@ -398,12 +402,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
             ({
               events
             })
-          ),
-          map(() =>
-            events.map((item: Event) => item.metadata.icon)
-          ),
-          switchMap((bucketPaths: Array<string>) =>
-              dispatch(new ActionStorageUrlsGet(bucketPaths, ImageSize.Small))
           )
       )
     }
