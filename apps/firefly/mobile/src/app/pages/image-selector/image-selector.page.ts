@@ -6,7 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { Pages, ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 import { switchMap, map, finalize } from 'rxjs/operators';
-import { ActionUserImagesReset, ActionEventImageUriSet, ActionEventImagePathSet } from '@firefly/core';
+import { ActionUserImagesReset } from '@firefly/core';
 import { from } from 'rxjs';
 
 const { Camera } = Plugins;
@@ -52,6 +52,7 @@ export class PageImageSelector
 
     public selectFromCamera()
     {
+/*
         if (this.store.selectSnapshot(StateDevice.device))
         {
             const options: CameraOptions =
@@ -69,8 +70,8 @@ export class PageImageSelector
                 map((photo: CameraPhoto) => photo.dataUrl),
                 switchMap((imageData: string) =>
                     this.store.dispatch([
-                      new ActionEventImageUriSet(imageData)/*,
-                      new ActionInterestDirty()*/
+                      new ActionEventImageUriSet(imageData),
+                      // new ActionInterestDirty()
                     ])
                 ),
                 finalize(() => {
@@ -86,5 +87,6 @@ export class PageImageSelector
             this.store.dispatch(new ActionEventImagePathSet()).
             subscribe();
         }
+*/
     }
 }
