@@ -5,7 +5,7 @@ import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
 import { Event, Image, Interest } from '@firefly/cloud';
-import { ActionImageCreate, ActionImagePatch, ActionImageSetId, StateImage, ActionImageClear, ActionImageUriSet, ActionImageReset } from '@firefly/core/state/document/image';
+import { StateImage, ActionImageReset } from '@firefly/core/state/document/image';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -18,24 +18,21 @@ import {
   ActionEventReset,
   ActionEventSet,
   ActionEventSave,
-  ActionEventImageUriSet,
-  ActionEventImagePathSet,
-  ActionEventImageClear,
   ActionEventSetId,
   ActionEventUpdate,
-  ActionEventImageCreate,
   ActionEventInterestAdd,
   ActionEventAccept,
   ActionEventDeny,
   ActionEventSetIdAnonymous,
-  ActionEventPatchMetadata
+  ActionEventPatchMetadata,
+  ActionEventImagesUpdate
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
-import { ActionStorageUrlGet, StateStorage, StorageImage, ServiceStorage, ImageSize } from '@theory/firebase';
-import { switchMap, tap, map } from 'rxjs/operators';
-import { of, from } from 'rxjs';
+import { StateStorage, StorageImage, ServiceStorage } from '@theory/firebase';
+import { switchMap, map } from 'rxjs/operators';
+import { from, forkJoin } from 'rxjs';
 import { ActionIconReset } from '../icon/icon.actions';
 import { LocationCity } from '@firefly/core/interfaces';
 import { Injectable } from '@angular/core';
@@ -119,9 +116,9 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static notifyComplete(state: StateEventModel):  boolean                { return StateEvent.dataState(state).notifyComplete; }
     @Selector() static timeNotify(state: StateEventModel):      string                 { return StateEvent.dataState(state).timeNotify; }
     @Selector() static timeNotifyValid(state: StateEventModel): boolean                { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
-    @Selector() static interests(state: StateEvent):            Array<string>          { return StateEvent.dataState(state).interests; }
-    @Selector() static icon(state: StateEvent):                 string                 { return StateEvent.metadataState(state).icon; }
-    @Selector() static image(state: StateEvent):                string                 { return StateEvent.metadataState(state).image; }
+    @Selector() static interests(state: StateEventModel):       Array<string>          { return StateEvent.dataState(state).interests; }
+    @Selector() static icon(state: StateEventModel):            string                 { return StateEvent.metadataState(state).icon; }
+    @Selector() static image(state: StateEventModel):           string                 { return StateEvent.metadataState(state).image; }
 
     @Selector([StateUser.userId]) static canEdit(state: StateEventModel, userId: string): boolean
     {
@@ -193,17 +190,25 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventCreate)
     create(context: StateContext<StateEventModel>)
     {
-        return context.dispatch(new ActionEventImageCreate()).
+        return super.create(context).
         pipe
         (
-            switchMap(() => super.create(context))
+            switchMap(() =>
+                context.dispatch(new ActionEventImagesUpdate())
+            )
         );
     }
 
     @Action(ActionEventUpdate)
     update(context: StateContext<StateEventModel>)
     {
-        return super.update(context);
+        return context.dispatch(new ActionEventImagesUpdate()).
+        pipe
+        (
+            switchMap(() =>
+                super.update(context)
+            )
+        );
     }
 
     @Action(ActionEventSave)
@@ -265,78 +270,14 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
       ))
     }
 
-    @Action(ActionEventImageClear)
-    imageClear({ dispatch }: StateContext<StateEventModel>)
+    @Action(ActionEventImagesUpdate)
+    imagesUpdate(context : StateContext<StateEventModel>)
     {
-        return dispatch
+        return forkJoin
         ([
-            new ActionImageClear(),
-            // new ActionEventPatch({ bucketPath: null }),
+            super.updateMedia(context, ImageType.Icon),
+            super.updateMedia(context, ImageType.Image)
         ]);
-    }
-
-    @Action(ActionEventImageUriSet)
-    imageUriSet({ dispatch }: StateContext<StateEventModel>, { dataUri }: ActionEventImageUriSet)
-    {
-        return dispatch
-        ([
-            // new ActionEventPatch({ bucketPath: CoreEnum.IdNew }),
-            new ActionImageUriSet(dataUri)
-        ]);
-    }
-
-    @Action(ActionEventImagePathSet)
-    imageSetPath({ dispatch }: StateContext<StateEventModel>, { bucketPath }: ActionEventImagePathSet)
-    {
-        return dispatch(new ActionStorageUrlGet(bucketPath)).
-        pipe
-        (
-            switchMap(() => dispatch(new ActionEventImageClear())),
-            switchMap(() =>
-                dispatch
-                ([
-                    // new ActionEventPatch({ bucketPath }),
-                    new ActionImagePatch({ bucketPath })
-                ])
-            )
-        );
-    }
-
-    @Action(ActionEventImageCreate)
-    imageCreate({ dispatch, getState }: StateContext<StateEventModel>)
-    {
-        const dataUri: string = this.store.selectSnapshot(StateImage.dataUri);
-
-        if (dataUri == null) { return of(null); }
-
-        const event: Event = StateEvent.dataState(getState());
-
-        const partial: Partial<Image> =
-        {
-            name : event.name
-        };
-
-        return dispatch(new ActionImageSetId()).
-        pipe
-        (
-            switchMap(() =>
-                dispatch
-                ([
-                    new ActionImageUriSet(dataUri),
-                    new ActionImagePatch(partial)
-                ])
-            ),
-            switchMap(() =>
-                dispatch(new ActionImageCreate())
-            ),
-            tap(() =>
-                dispatch
-                ([
-                    new ActionImageClear(),
-                    // new ActionEventPatch({ bucketPath: this.store.selectSnapshot(StateImage.bucketPath()) })
-                ])
-            )
-        );
     }
 
     @Action(ActionEventLocationSet)

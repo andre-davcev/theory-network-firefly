@@ -200,6 +200,9 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserStream.snapshotLookup())[id];
         const data: Interest = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
 
+        console.log(data);
+        console.log('here');
+
         return dispatch(new ActionInterestSet(snapshot, data));
     }
 

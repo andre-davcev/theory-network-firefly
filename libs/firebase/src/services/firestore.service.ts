@@ -117,4 +117,9 @@ export class ServiceFirestore<T extends FirebaseDocument>
 
         return object;
     }
+
+    public createId(): string
+    {
+        return this.firestore.createId();
+    }
 }

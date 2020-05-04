@@ -6,13 +6,14 @@ import { firestore } from 'firebase/app';
 import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { ServiceFirestore, FirebaseDocument, ActionStorageUrlGet } from '@theory/firebase';
+import { ServiceFirestore, FirebaseDocument, ActionStorageUrlGet, ActionStorageUpload } from '@theory/firebase';
 
 import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';
 import { StateDocumentModel } from './document.model';
 import { ActionsDocument } from './document.actions';
 import { DocumentSnapshot } from '@angular/fire/firestore';
+import { ImageType, Collection } from '@firefly/core/enums';
 
 export class StateDocument<T extends FirebaseDocument, M extends StateDocumentModel>
 {
@@ -178,12 +179,15 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         const metadata     : Record<string, any> = action.metadata;
         const metadataForm : AbstractControl     = formGroup.get('metadata');
 
-        Object.keys(metadata).forEach((key: string) =>
-            metadataForm.get(key).setValue(metadata[key])
-        );
+        Object.keys(metadata).
+        forEach((key: string) =>
+        {
+            metadataForm.get(key).setValue(metadata[key]);
+            metadataForm.get(key).markAsDirty();
+        });
     }
 
-    public create(context: StateContext<M>, action?: any)
+    public create(context: StateContext<M>, action?: any): Observable<any>
     {
         const { getState, patchState, dispatch } = context;
 
@@ -200,7 +204,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
             switchMap((snapshot: firestore.DocumentSnapshot) =>
                 dispatch
                 ([
-                    new UpdateFormValue({ value, path }),
+                    new UpdateFormValue({ value: snapshot.data(), path }),
                     ...this.ActionsCreate(),
                     ...this.ActionsQueryAdd(snapshot)
                 ])
@@ -277,6 +281,27 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
                 !isNew
             )
         );
+    }
+
+    protected updateMedia
+    (
+        context    : StateContext<M>,
+        imageType  : ImageType
+    ): Observable<any>
+    {
+        const { dispatch, getState } = context;
+
+        const state   : M               = getState();
+        const form    : FormGroup       = StateDocument.formGroupState(state);
+        const control : AbstractControl = form.get('metadata').get(imageType);
+
+        if (control.invalid || control.pristine) { return of(null); }
+
+        const id      : string = StateDocument.idState(state);
+        const path    : string = `${this.collection}/${id}/${imageType}.jpeg`;
+        const dataUri : string = control.value;
+
+        return dispatch(new ActionStorageUpload(dataUri, path));
     }
 
     private ActionsReset(): Array<any>
