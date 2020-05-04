@@ -4,7 +4,7 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType } from '@firefly/core';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType, ActionInterestReset } from '@firefly/core';
 import { Alert, DateEvents } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
@@ -128,6 +128,10 @@ export class PageAlert extends BaseComponent implements AfterViewInit
 
     public add(): void
     {
-        this.store.dispatch(new Navigate([Pages.AssetEvent, CoreEnum.IdNew]));
+        this.store.dispatch
+        ([
+            new ActionInterestReset(),
+            new Navigate([Pages.AssetEvent, CoreEnum.IdNew])
+        ]);
     }
 }
