@@ -3,9 +3,9 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet, StateUser, StateUserInterests, ActionUserInterestsGetData, StateUserEvents, StateUserAlerts, ActionUserAlertsGetIcons, ActionUserEventsGetData } from '@firefly/core';
 import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile/state';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, delay } from 'rxjs/operators';
 
 @Component
 ({
@@ -41,13 +41,22 @@ export class ComponentHomeOptions
 
             if (interestType !== InterestType.Created || this.store.selectSnapshot(StateUserInterests.initialized()))
             {
-                this.store.dispatch(new ActionUserInterestTypeSet(interestType));
+                this.store.dispatch(new ActionUserInterestTypeSet(interestType)).
+                pipe
+                (
+                    delay(1),
+                    switchMap(() =>
+                        from(this.popover.dismiss())
+                    )
+                ).
+                subscribe();
             }
             else
             {
                 this.store.dispatch(new ActionMobileLoadingShow()).
                 pipe
                 (
+                    switchMap(() => from(this.popover.dismiss())),
                     switchMap(() => this.store.dispatch(new ActionUserInterestsGetData())),
                     switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
                     switchMap(() => this.store.dispatch(new ActionUserInterestTypeSet(interestType)))
@@ -61,19 +70,36 @@ export class ComponentHomeOptions
 
             if (eventType === EventType.New)
             {
-                this.store.dispatch(new ActionUserEventTypeSet(eventType));
+                this.store.dispatch(new ActionUserEventTypeSet(eventType)).
+                pipe
+                (
+                    delay(1),
+                    switchMap(() =>
+                        from(this.popover.dismiss())
+                    )
+                ).
+                subscribe();
             }
             else if (eventType === EventType.Upcoming)
             {
                 if (this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.alerts)[0].metadata.icon != null)
                 {
-                    this.store.dispatch(new ActionUserEventTypeSet(eventType));
+                    this.store.dispatch(new ActionUserEventTypeSet(eventType)).
+                    pipe
+                    (
+                        delay(1),
+                        switchMap(() =>
+                            from(this.popover.dismiss())
+                        )
+                    ).
+                    subscribe();
                 }
                 else
                 {
                     this.store.dispatch(new ActionMobileLoadingShow()).
                     pipe
                     (
+                        switchMap(() => from(this.popover.dismiss())),
                         switchMap(() => this.store.dispatch(new ActionUserAlertsGetIcons())),
                         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
                         switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
@@ -85,13 +111,22 @@ export class ComponentHomeOptions
             {
                 if (this.store.selectSnapshot(StateUserEvents.initialized()))
                 {
-                    this.store.dispatch(new ActionUserEventTypeSet(eventType));
+                    this.store.dispatch(new ActionUserEventTypeSet(eventType)).
+                    pipe
+                    (
+                        delay(1),
+                        switchMap(() =>
+                            from(this.popover.dismiss())
+                        )
+                    ).
+                    subscribe();
                 }
                 else
                 {
                     this.store.dispatch(new ActionMobileLoadingShow()).
                     pipe
                     (
+                        switchMap(() => from(this.popover.dismiss())),
                         switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
                         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
                         switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
@@ -100,7 +135,5 @@ export class ComponentHomeOptions
                 }
             }
         }
-
-        this.popover.dismiss();
     }
 }

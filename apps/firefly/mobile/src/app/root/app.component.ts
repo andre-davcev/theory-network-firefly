@@ -8,7 +8,7 @@ import { RouterNavigation } from '@ngxs/router-plugin';
 import { PlatformEnum } from '@theory/ionic';
 
 import { Pages, ActionMobileAuthSelected, StateMobile } from '@firefly/mobile';
-import { ActionUserLogout, StateUser, IconType, Color, IconSize, StateUserProfile } from '@firefly/core';
+import { ActionUserLogout, StateUser, IconType, Color, IconSize } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
 import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
 import { PageLogin } from '../pages';
