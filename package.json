@@ -108,6 +108,7 @@
     "@ngxs/store": "^3.6.2",
     "@nrwl/angular": "^9.2.3",
     "@nrwl/workspace": "9.2.3",
+    "algoliasearch": "^4.2.0",
     "capacitor-fcm": "^2.0.0",
     "core-js": "^2.5.7",
     "firebase": "^7.14.2",
