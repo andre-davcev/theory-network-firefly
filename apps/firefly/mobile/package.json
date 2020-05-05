@@ -41,6 +41,7 @@
     "@capacitor/cli": "^2.0.2",
     "@capacitor/core": "^2.0.2",
     "@capacitor/ios": "^2.0.2",
+    "algoliasearch": "file:../../../node_modules/algoliasearch",
     "@firefly/core": "file:../../../libs/firefly/core",
     "@firefly/mobile": "file:../../../libs/firefly/mobile",
     "@fortawesome/angular-fontawesome": "file:../../../node_modules/@fortawesome/angular-fontawesome",
