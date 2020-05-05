@@ -1,8 +1,3 @@
-+admin (marketing) - digital marketing questionnaire
-*+admin (staffing) - linkedin recommendation for matt
-*+admin (staffing) - linkedin recommendation for hannah
-*+admin (staffing) - linkedin recommendation for akshay
-+admin (networking) - nextcorps client advisory board question
 alerts (detail) - cleanup styling/alignment
 app (cleanup) - cleanup folders/pages
 app (cleanup) - remove references to bucketPath
@@ -38,7 +33,7 @@ images (all) - remove all references
 interests (functions) - on delete interest, delete storage
 interests (list) - implement simple interest search filter
 +interests (publish detail) - event click navigates to edit event
-interests (publish detail) - add image for interest stream
+*interests (publish detail) - add image for interest stream
 interests (list) - fix event icons missing
 interests (list) - add virtual event filter toggle
 interests (list) - replace event styling with <app-item-events>
