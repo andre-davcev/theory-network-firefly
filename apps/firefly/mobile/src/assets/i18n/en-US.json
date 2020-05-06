@@ -13,7 +13,6 @@
   "general.go"            : "Go",
   "general.starts"         : "Starts",
   "general.ends"           : "Ends",
-  "general.heroImage"      : "Notification Image",
   "general.publish"        : "Publish",
   "general.update"         : "Update",
   "general.subscribers"    : "Subscribers",
@@ -94,6 +93,7 @@
   "page.event.subtitlePlaceholder"    : "Add your subtitle",
   "page.event.iconPlaceholder"        : "select icon",
   "page.event.imagePlaceholder"       : "select image",
+  "page.event.imageTitlePlaceholder"  : "Notification Image",
   "page.event.descriptionPlaceholder" : "Write a description ...",
   "page.event.timeNotify"             : "Notification Time",
 
@@ -106,7 +106,9 @@
   "page.interest.title.edit.new"         : "Create New Interest",
   "page.interest.titlePlaceholder"       : "Add your name",
   "page.interest.subtitlePlaceholder"    : "Add your tagline",
-  "page.interest.iconPlaceholder"        : "select interest",
+  "page.interest.iconPlaceholder"        : "select icon",
+  "page.interest.imagePlaceholder"       : "select image",
+  "page.interest.imageTitlePlaceholder"  : "Main Image",
   "page.interest.descriptionPlaceholder" : "Write a description ...",
 
   "page.interest.filter.unsubscribed" : "Unsubscribed",

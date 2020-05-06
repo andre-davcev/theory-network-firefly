@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ModuleComponentItemHeader, ModuleComponentItemDescription, ModuleComponentItemMap } from '@firefly/mobile';
+import { ModuleComponentItemHeader, ModuleComponentItemDescription, ModuleComponentItemMap, ModuleComponentItemImage } from '@firefly/mobile';
 import { ModulePage } from '@firefly/app/modules';
 
 import { PageAssetInterest } from './asset-interest.page';
@@ -20,6 +20,7 @@ import { ModulePageEventSelector } from '../event-selector';
         ModulePage,
         ModuleComponentItemHeader,
         ModuleComponentItemMap,
+        ModuleComponentItemImage,
         ModuleComponentItemDescription,
         ModuleComponentButtonAdd,
         RouterModule.forChild(RoutesPageAssetInterest),
