@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, catchError, map, finalize, takeUntil, take } from 'rxjs/operators';
+import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
-import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
-import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData } from '@firefly/core';
+import { StatusBarStyle, Plugins } from '@capacitor/core';
+import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata } from '@firefly/core';
 import { PageIconSelector } from '../icon-selector';
 import { Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
-import { BaseComponent, CoreEnum } from '@theory/core';
+import { BaseComponent } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { PageEventSelector } from '../event-selector';
-
-const { Camera } = Plugins;
 
 @Component
 ({
@@ -30,9 +28,9 @@ export class PageAssetInterest extends BaseComponent implements OnInit
     @Select(StateInterest.formGroup()) form$:         Observable<FormGroup>;
     @Select(StateInterest.isNew())     isNew$:        Observable<boolean>;
     @Select(StateInterest.canUpdate()) canUpdate$:    Observable<boolean>;
-    @Select(StateInterest.iconUrl)     iconUrl$:      Observable<string>;
     @Select(StateInterest.events)      events$:       Observable<Event[]>;
     @Select(StateInterest.private)     private$:      Observable<boolean>;
+    @Select(StateInterest.image)       image$:        Observable<string>;
     @Select(StateStorage.images)       images$:       Observable<Record<string, StorageImage>>;
     @Select(StateDevice.device)        device$:       Observable<boolean>;
     @Select(StateUserEvents.initialized()) stateUserInitialized$: Observable<boolean>;
@@ -45,6 +43,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
       private store:         Store,
       private navController: NavController,
       private modal:         ModalController,
+      private camera:        ServiceCamera
     )
     {
       super();
@@ -120,5 +119,23 @@ export class PageAssetInterest extends BaseComponent implements OnInit
 
     public addEvent(): void{
         this.store.dispatch(new Navigate([Pages.EventSelector]));
+    }
+
+    public selectImage(): void
+    {
+        this.store.dispatch(new ActionMobileLoadingShow()).
+        pipe
+        (
+            switchMap(() =>
+                this.camera.getPhoto()
+            ),
+            switchMap((image: string) =>
+                this.store.dispatch(new ActionInterestPatchMetadata({ image }))
+            ),
+            finalize(() =>
+                this.store.dispatch(new ActionMobileLoadingHide())
+            )
+        ).
+        subscribe();
     }
 }

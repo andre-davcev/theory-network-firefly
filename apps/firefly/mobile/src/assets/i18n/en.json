@@ -13,7 +13,6 @@
   "general.go"            : "Go",
   "general.starts"         : "Starts",
   "general.ends"           : "Ends",
-  "general.heroImage"      : "Notification Image",
   "general.publish"        : "Publish",
   "general.update"         : "Update",
   "general.subscribers"    : "Subscribers",
@@ -113,6 +112,7 @@
   "page.interest.titlePlaceholder"       : "Add your name",
   "page.interest.subtitlePlaceholder"    : "Add your tagline",
   "page.interest.iconPlaceholder"        : "select interest",
+  "page.interest.imagePlaceholder"       : "select image",
   "page.interest.descriptionPlaceholder" : "Write a description ...",
 
   "page.interest.filter.unsubscribed" : "Unsubscribed",

@@ -35,7 +35,7 @@ import { ActionUserInterestsAdd, ActionUserInterestsRemove, StateUserInterests, 
 import { ActionUserStreamRemove } from '../../child/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { firestore } from 'firebase/app';
-import { ActionStorageUrlGet, StateStorage, StorageImage, ImageSize, ActionStorageUrlsGet } from '@theory/firebase';
+import { ActionStorageUrlGet, ImageSize, ActionStorageUrlsGet } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
@@ -103,18 +103,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     {
       return StateInterest.dataState(state).userId === userId;
     }
-    @Selector([StateIcon.dataUri, StateStorage.images])
-    public static iconUrl(state: StateInterestModel, dataUri: string, images: Record<string, StorageImage>)
-    {
-/*
-        const bucketPath: string = StateInterest.bucketPathState(state);
-
-        return bucketPath == null || bucketPath === CoreEnum.IdNew || images[bucketPath] == null ?
-            dataUri :
-            images[bucketPath][ImageSize.Medium];
-*/
-        return null;
-    }
+    @Selector() static image(state: StateInterestModel): string { return StateInterest.metadataState(state).image; }
 
     @Action(ActionInterestReset)
     reset(context: StateContext<StateInterestModel>)

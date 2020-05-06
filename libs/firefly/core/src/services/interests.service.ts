@@ -41,7 +41,11 @@ export class ServiceInterests extends ServiceFirestore<Interest>
             description : [interest.description, [Validators.required, ValidatorsExtended.minLength(1)]],
 
             tagline    : [interest.tagline,    [Validators.required, ValidatorsExtended.minLength(1)]],
-            bucketPath : [interest.bucketPath, [ServiceInterests.validateIcon()]]
+
+            metadata : this.formBuilder.group
+            ({
+                image : [interest.metadata.image, [Validators.required]]
+            })
         });
     }
 }

@@ -21,8 +21,17 @@
           *ngIf="form$ | async"
           [formGroup]="form$  | async"
           ngxsForm="interests.form">
+
+        <app-item-image [url]="image$ | async"
+                        [form]="form$ | async"
+                        [placeholder]="'page.interest.imagePlaceholder' | translate"
+                        [title]="'page.interest.imageTitlePlaceholder' | translate"
+                        [edit]="true"
+                        (clicked)="selectImage()">
+        </app-item-image>
+
         <app-item-header [form]="form$ | async"
-                         [iconUrl]="iconUrl$ | async"
+                         [iconUrl]="image$ | async"
                          title="name"
                          subtitle="tagline"
                          iconUrlEmpty="assets/icons/avatar-empty.svg"
@@ -39,7 +48,7 @@
 
                     <ion-item>
                         <ion-icon [name]="(private$ | async) ? 'lock-closed' : 'lock-open'" slot="start" color="grey"></ion-icon>
-                        <ion-label>Is Private</ion-label>
+                        <ion-label>{{ 'general.isPrivate' | translate }}</ion-label>
                         <ion-toggle formControlName="private" color="primary"></ion-toggle>
                     </ion-item>
 
