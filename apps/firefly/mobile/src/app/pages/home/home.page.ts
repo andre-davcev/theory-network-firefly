@@ -12,6 +12,7 @@ import { StateMobile } from '@firefly/mobile';
 import { Observable, from } from 'rxjs';
 import { StateUserAlerts, StateUser } from '@firefly/core';
 import { take, switchMap } from 'rxjs/operators';
+import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 
 @Component
 ({
@@ -36,6 +37,10 @@ export class PageHome extends BaseComponent
 
     public Pages : any = Pages;
 
+    public searchClient = algoliaSearch('8NDQ1FNIDU','45b11751dc7e276f781a85f719abda66');
+    public index: SearchIndex = this.searchClient.initIndex('interests');
+
+
     constructor
     (
         private menu    : MenuController,
@@ -48,6 +53,7 @@ export class PageHome extends BaseComponent
 
     public ionViewWillEnter(): void
     {
+
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
@@ -105,9 +111,14 @@ export class PageHome extends BaseComponent
         }
     }
 
-    public search(event: CustomEvent): void
+    public async search(event: CustomEvent)
     {
         console.log(`ToDo: implement simple search/filter`)
         console.log(`      ${event.detail.value}`);
+
+        let hits = [];
+        const result = await this.index.search(event.detail.value);
+        hits = result.hits;
+        console.log(hits);
     }
 }
