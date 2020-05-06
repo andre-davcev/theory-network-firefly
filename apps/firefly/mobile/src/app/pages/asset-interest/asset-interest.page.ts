@@ -32,8 +32,9 @@ export class PageAssetInterest extends BaseComponent implements OnInit
     @Select(StateInterest.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateInterest.iconUrl)     iconUrl$:      Observable<string>;
     @Select(StateInterest.events)      events$:       Observable<Event[]>;
-    @Select(StateStorage.images)      images$:       Observable<Record<string, StorageImage>>;
-    @Select(StateDevice.device)       device$:       Observable<boolean>;
+    @Select(StateInterest.private)     private$:      Observable<boolean>;
+    @Select(StateStorage.images)       images$:       Observable<Record<string, StorageImage>>;
+    @Select(StateDevice.device)        device$:       Observable<boolean>;
     @Select(StateUserEvents.initialized()) stateUserInitialized$: Observable<boolean>;
 
     public Pages: any = Pages;
