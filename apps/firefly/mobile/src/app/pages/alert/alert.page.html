@@ -33,24 +33,6 @@
     </app-button-add>
 </ion-content>
 
-<!--
-<ion-fab [class.cpt-empty]="!(hasUnread$ | async)"
-         vertical="bottom"
-         horizontal="start">
-    <ion-button *ngIf="hasUnread$ | async"
-                (click)="navigate(Pages.AlertsList)"
-                color="transparent">
-        <ion-icon name="list" color="dark"></ion-icon>
-    </ion-button>
-
-    <ion-fab-button *ngIf="!(hasUnread$ | async)"
-                    (click)="navigate(Pages.AlertsList)"
-                    color="primary"
-                    mode="md">
-        <ion-icon name="list" color="dark"></ion-icon>
-    </ion-fab-button>
-</ion-fab>
--->
 <app-icon-message *ngIf="empty$ | async"
                   slot="fixed"
                   [icon]="IconType.Alerts"

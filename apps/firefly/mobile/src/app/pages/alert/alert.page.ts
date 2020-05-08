@@ -105,20 +105,13 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         subscribe();
     }
 
-    public navigate(page: Pages.AlertsList | Pages.AlertDetail, object: Alert): void
+    public navigate(page: Pages.AlertDetail, object: Alert): void
     {
-        if (page === Pages.AlertsList)
-        {
-            this.store.dispatch(new Navigate([page]));
-        }
-        else
-        {
-            this.store.dispatch(new ActionEventGet(object.id)).pipe
-            (
-              switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
-            ).
-            subscribe();
-        }
+        this.store.dispatch(new ActionEventGet(object.id)).pipe
+        (
+          switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
+        ).
+        subscribe();
     }
 
     public selectEvent(event: Event): void
