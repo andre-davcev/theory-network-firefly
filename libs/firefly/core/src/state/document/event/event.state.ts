@@ -32,7 +32,6 @@ import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ServiceStorage } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';
 import { from } from 'rxjs';
-import { ActionIconReset } from '../icon/icon.actions';
 import { LocationCity } from '@firefly/core/interfaces';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
@@ -96,7 +95,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
-                ActionsReset:  [ ActionIconReset, ActionMapSearchResultClear ],
+                ActionsReset:  [ ActionMapSearchResultClear ],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
