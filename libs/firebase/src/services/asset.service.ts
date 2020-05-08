@@ -27,20 +27,7 @@ export class ServiceAsset<T> extends ServiceBase<T>
 
     public addMetadata(asset: T): T
     {
-        const url: string = asset['url'];
-
-        asset['id']        = this.firestore.createId();
-        asset['mediaType'] = this.name === 'images' ? 'jpeg' : 'png';
-
-        if (url != null)
-        {
-            const start: number = url.indexOf('/') + 1;
-            const end:   number = url.indexOf(';');
-
-            asset['mediaType'] = url.substring(start, end);
-        }
-
-        asset['bucketPath'] = `${asset['userId']}/${this.name}/${asset['id']}.${asset['mediaType']}`;
+        asset['id'] = this.firestore.createId();
 
         return asset;
     }

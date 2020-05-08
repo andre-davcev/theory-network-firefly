@@ -48,7 +48,6 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
                 dateUpdated : undefined,
                 metadata    : {},
 
-                bucketPath      : null,
                 description     : null,
                 name            : null,
                 private         : true,

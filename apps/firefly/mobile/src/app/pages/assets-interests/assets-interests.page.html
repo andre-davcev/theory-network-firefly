@@ -27,7 +27,7 @@
         <ion-item *ngFor="let interest of list$ | async"
                   (click)="select(interest)">
             <ion-avatar slot="start">
-                <img *ngIf="images[interest.bucketPath]" [src]="images[interest.bucketPath].small">
+                <img [src]="interest.metadata.image">
             </ion-avatar>
 
             <ion-label>

@@ -20,10 +20,6 @@ import {
     ActionInterestDelete,
     ActionInterestSetId,
     ActionInterestUpdate,
-    ActionInterestIconClear,
-    ActionInterestIconCreate,
-    ActionInterestIconUriSet,
-    ActionInterestIconPathSet,
     ActionInterestEventsGet,
     ActionInterestEventsReset,
     ActionInterestSetIdAnonymous,
@@ -65,7 +61,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                 dateCreated : undefined,
                 dateUpdated : undefined,
 
-                bucketPath      : null,
                 description     : null,
                 name            : null,
                 private         : true,
@@ -143,11 +138,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestCreate)
     create(context: StateContext<StateInterestModel>)
     {
-        return context.dispatch(new ActionInterestIconCreate()).
-        pipe
-        (
-            switchMap(() => super.create(context))
-        );
+        return super.create(context);
     }
 
     @Action(ActionInterestUpdate)
@@ -190,41 +181,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         const data: Interest = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
 
         return dispatch(new ActionInterestSet(snapshot, data));
-    }
-
-    @Action(ActionInterestIconClear)
-    imageClear({ dispatch }: StateContext<StateInterestModel>)
-    {
-        return dispatch
-        ([
-            new ActionInterestPatch({ bucketPath: null }),
-        ]);
-    }
-
-    @Action(ActionInterestIconUriSet)
-    imageUriSet({ dispatch }: StateContext<StateInterestModel>, { dataUri }: ActionInterestIconUriSet)
-    {
-        return dispatch
-        ([
-            new ActionInterestPatch({ bucketPath: CoreEnum.IdNew })
-        ]);
-    }
-
-    @Action(ActionInterestIconPathSet)
-    imageSetPath({ dispatch }: StateContext<StateInterestModel>, { bucketPath }: ActionInterestIconPathSet)
-    {
-        return dispatch(new ActionStorageUrlGet(bucketPath)).
-        pipe
-        (
-            switchMap(() => dispatch(new ActionInterestIconClear())),
-            switchMap(() => dispatch(new ActionInterestPatch({ bucketPath })))
-        );
-    }
-
-    @Action(ActionInterestIconCreate)
-    imageCreate({ dispatch, getState }: StateContext<StateInterestModel>)
-    {
-
     }
 
     @Action(ActionInterestEventsReset)
