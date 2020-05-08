@@ -9,7 +9,7 @@
 
     <ion-item (click)="eventClicked(event)">
         <ion-avatar slot="start">
-          <img *ngIf="images[event.bucketPath]" [src]="images[event.bucketPath].small">
+          <img [src]="event.metadata.image">
         </ion-avatar>
         <ion-label>
             {{ event.metadata.timeStartDate | date:'shortTime' }}

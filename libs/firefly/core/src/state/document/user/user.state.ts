@@ -528,8 +528,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         ([
             new ActionUserPatch({ subscriptionsStatus }, true),
             new ActionUserStreamSync(streamInterest),
-            new ActionUserSubscriptionsAdd(streamInterestSnapshot, streamInterest),
-            new ActionStorageUrlGet(streamInterest.bucketPath)
+            new ActionUserSubscriptionsAdd(streamInterestSnapshot, streamInterest)
         ]);
     }
 
