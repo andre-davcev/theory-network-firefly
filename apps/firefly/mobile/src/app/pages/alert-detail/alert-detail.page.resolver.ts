@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { ActionEventSetId, ActionAlertSetId } from '@firefly/core';
+import { ActionAlertSetId } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
 import { ActionMobileLoadingHide } from '@firefly/mobile';
 

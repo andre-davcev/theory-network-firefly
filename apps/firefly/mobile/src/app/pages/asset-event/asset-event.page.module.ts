@@ -8,7 +8,6 @@ import { ModulePage } from '@firefly/app/modules';
 import { PageAssetEvent } from './asset-event.page';
 import { RoutesPageAssetEvent } from './asset-event.page.routes';
 import { PageEventLocation, ModulePageEventLocation } from '../event-location';
-import { PageImageSelector, ModulePageImageSelector } from '../image-selector';
 import { ModulePageAssetsInterests } from '../assets-interests';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
@@ -25,7 +24,6 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
         RouterModule.forChild(RoutesPageAssetEvent),
         ModulePageEventLocation,
         ModulePageAssetsInterests,
-        ModulePageImageSelector,
         NgxsFormPluginModule
     ],
 
@@ -33,8 +31,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
     exports : [PageAssetEvent],
     entryComponents:
     [
-        PageEventLocation,
-        PageImageSelector
+        PageEventLocation
     ]
 })
 

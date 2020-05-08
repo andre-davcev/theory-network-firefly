@@ -18,8 +18,8 @@ import { BaseComponent } from '@theory/core';
 
 export class PageAlertDetail extends BaseComponent implements OnInit
 {
-    @Select(StateEvent.imageUrl)        imageUrl$:        Observable<string>;
-    @Select(StateEvent.data())          event$:           Observable<any>;
+    @Select(StateEvent.image)  image$: Observable<string>;
+    @Select(StateEvent.data()) event$: Observable<any>;
     public Pages: any = Pages;
 
     constructor

@@ -3,10 +3,9 @@ import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
-import { StatusBarStyle, Plugins } from '@capacitor/core';
+import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata } from '@firefly/core';
-import { PageIconSelector } from '../icon-selector';
 import { Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
@@ -67,6 +66,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
     {
         //this.store.dispatch(new Navigate([ Pages.AssetEvent, CoreEnum.IdNew ]));
 
+/*
       if(page === Pages.IconSelector)
       {
         from(this.modal.create({
@@ -80,6 +80,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
         })).
         subscribe((modal: HTMLIonModalElement) => modal.present());
       }
+*/
     }
 
     public save(): void

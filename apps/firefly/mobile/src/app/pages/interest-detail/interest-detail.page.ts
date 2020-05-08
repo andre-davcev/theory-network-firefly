@@ -1,24 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, catchError, map, finalize, takeUntil, take, tap } from 'rxjs/operators';
+import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
-import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
+import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestIconUriSet, ActionInterestIconPathSet, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous, ActionEventDeny } from '@firefly/core';
-import { PageIconSelector } from '../icon-selector';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous, ActionEventDeny } from '@firefly/core';
 import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
-import { BaseComponent, CoreEnum, CoreUtil } from '@theory/core';
+import { BaseComponent, CoreEnum } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
-import { PageEventSelector } from '../event-selector';
 import { PageAssetEvent } from '..';
-import { PageAssetInterest } from '../asset-interest';
-
-const { Camera } = Plugins;
 
 @Component
 ({
