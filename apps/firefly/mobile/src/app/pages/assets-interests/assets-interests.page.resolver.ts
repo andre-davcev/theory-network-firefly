@@ -4,7 +4,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { ActionUserInterestsGetData, ActionUserIconsGetData, StateUserInterests } from '@firefly/core';
+import { ActionUserInterestsGetData, StateUserInterests } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })

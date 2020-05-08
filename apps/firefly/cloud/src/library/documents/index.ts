@@ -3,8 +3,6 @@ export * from './beacon.model';
 export * from './city.model';
 export * from './interest.model';
 export * from './event.model';
-export * from './icon.model';
-export * from './image.model';
 export * from './stream-interest.model';
 export * from './subscription.model';
 export * from './user-profile.model';

@@ -24,8 +24,6 @@ import {
   StateUserAlerts,
   StateUserInterests,
   StateUserEvents,
-  StateUserIcons,
-  StateUserImages,
   StateUserStream,
   StateUserSubscriptions,
   StateUserProfile
@@ -99,8 +97,6 @@ export function createTranslateLoader(http: HttpClient)
             StateUserAlerts,
             StateUserInterests,
             StateUserEvents,
-            StateUserIcons,
-            StateUserImages,
             StateUserStream,
             StateUserSubscriptions,
             StateUserProfile
