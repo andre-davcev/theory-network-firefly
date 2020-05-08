@@ -12,12 +12,12 @@ import { IconType, IconSize, Color } from '@firefly/core';
 
 @Component
 ({
-    selector    : 'app-page-publisher',
-    templateUrl : 'publisher.page.html',
-    styleUrls   : ['./publisher.page.scss']
+    selector    : 'app-page-categories',
+    templateUrl : 'categories.page.html',
+    styleUrls   : ['./categories.page.scss']
 })
 
-export class PagePublisher
+export class PageCategories
 {
     @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
 

@@ -5,8 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ModulePage } from '@firefly/app/modules';
 
-import { RoutesPagePublisher } from './publisher.page.routes';
-import { PagePublisher } from './publisher.page';
+import { RoutesPageCategories } from './categories.page.routes';
+import { PageCategories } from './categories.page';
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentIcon } from '@firefly/core';
 
@@ -16,13 +16,13 @@ import { ModuleComponentIcon } from '@firefly/core';
     [
         ModulePage,
         CommonModule,
-        RouterModule.forChild(RoutesPagePublisher),
+        RouterModule.forChild(RoutesPageCategories),
         TranslateModule,
         ModuleDirectiveElevation,
         ModuleComponentIcon
     ],
 
-    declarations : [PagePublisher],
-    exports : [PagePublisher]
+    declarations : [PageCategories],
+    exports : [PageCategories]
 })
 export class ModulePagePublisher {}
