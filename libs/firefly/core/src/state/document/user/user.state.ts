@@ -48,8 +48,6 @@ import { StateDocument } from '@theory/ngxs';
 import { ActionUserAlertsReset, ActionUserAlertsSetData } from '../../child/user-alerts/user-alerts.actions';
 import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
-import { ActionUserIconsReset } from '../../query/user-icons/user-icons.actions';
-import { ActionUserImagesReset } from '../../query/user-images/user-images.actions';
 import { ActionUserStreamSetData, ActionUserStreamSync } from '../../child/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { GeolocationPosition } from '@capacitor/core';
@@ -118,8 +116,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                     ActionUserAlertsReset,
                     ActionUserInterestsReset,
                     ActionUserEventsReset,
-                    ActionUserIconsReset,
-                    ActionUserImagesReset,
                     ActionUserSubscriptionsReset
                 ],
 
