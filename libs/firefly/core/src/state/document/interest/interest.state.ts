@@ -3,10 +3,9 @@ import { Action, State, StateContext, Store, Selector } from '@ngxs/store';
 
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { Interest, Icon, Event } from '@firefly/cloud';
+import { Interest, Event } from '@firefly/cloud';
 import { ServiceInterests } from '@firefly/core/services';
 import { StateUser } from '@firefly/core/state/document/user';
-import { ActionIconCreate, ActionIconPatch, ActionIconClear, ActionIconUriSet, StateIcon, ActionIconSetId } from '@firefly/core/state/document/icon';
 
 import { StateInterestModel } from './interest.state.model';
 import { StateInterestOptions } from './interest.state.options';
@@ -86,7 +85,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                 ActionSave:   ActionInterestSave,
                 ActionDelete: ActionInterestDelete,
 
-                ActionsReset:  [ActionIconClear],
+                ActionsReset:  [],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserInterestsAdd],
@@ -198,7 +197,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     {
         return dispatch
         ([
-            new ActionIconClear(),
             new ActionInterestPatch({ bucketPath: null }),
         ]);
     }
@@ -208,8 +206,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     {
         return dispatch
         ([
-            new ActionInterestPatch({ bucketPath: CoreEnum.IdNew }),
-            new ActionIconUriSet(dataUri)
+            new ActionInterestPatch({ bucketPath: CoreEnum.IdNew })
         ]);
     }
 
@@ -227,35 +224,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestIconCreate)
     imageCreate({ dispatch, getState }: StateContext<StateInterestModel>)
     {
-        const dataUri: string = this.store.selectSnapshot(StateIcon.dataUri);
 
-        if (dataUri == null) { return of(null); }
-
-        const interest: Interest  = StateInterest.dataState(getState());
-
-        const partial: Partial<Icon> =
-        {
-            name : interest.name
-        };
-/*
-        return dispatch(new ActionIconSetId()).
-        pipe
-        (
-            switchMap(() =>
-                dispatch
-                ([
-                    new ActionIconUriSet(dataUri),
-                    new ActionIconPatch(partial)
-                ])
-            ),
-            switchMap(() =>
-                dispatch(new ActionIconCreate())
-            ),
-            tap(() =>
-                dispatch(new ActionInterestPatch({ bucketPath: this.store.selectSnapshot(StateIcon.bucketPath()) }))
-            )
-        );
-*/
     }
 
     @Action(ActionInterestEventsReset)

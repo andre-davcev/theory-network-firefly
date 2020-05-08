@@ -25,8 +25,6 @@ events (go) - implement get directions workflow
 events (list) - add pink dots for unread alerts
 events (list) - hide events where time > event.timeEnd
 firestore (functions) - implement callable function to populate stream for new city
-*icons (all) - remove all references
-*images (all) - remove all references
 interests (functions) - on delete interest, delete storage
 interests (list) - implement simple interest search filter
 +interests (publish detail) - event click navigates to edit event
