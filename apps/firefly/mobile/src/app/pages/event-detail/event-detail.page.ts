@@ -21,10 +21,10 @@ import { switchMap } from 'rxjs/operators';
 
 export class PageEventDetail extends BaseComponent implements OnInit
 {
-    @Select(StateEvent.imageUrl)        imageUrl$:        Observable<string>;
-    @Select(StateEvent.data())          event$:           Observable<any>;
-    @Select(StateEvent.canEdit)         canEdit$:         Observable<boolean>;
-    @Select(StateInterest.canEdit)      canEditInterest$: Observable<boolean>;
+    @Select(StateEvent.image)      image$:           Observable<string>;
+    @Select(StateEvent.data())     event$:           Observable<any>;
+    @Select(StateEvent.canEdit)    canEdit$:         Observable<boolean>;
+    @Select(StateInterest.canEdit) canEditInterest$: Observable<boolean>;
     public Pages: any = Pages;
 
     constructor

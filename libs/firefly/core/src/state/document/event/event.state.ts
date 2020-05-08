@@ -4,8 +4,7 @@ import { ActionMapSearchResultClear, MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
-import { Event, Image, Interest } from '@firefly/cloud';
-import { StateImage, ActionImageReset } from '@firefly/core/state/document/image';
+import { Event, Interest } from '@firefly/cloud';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -30,9 +29,9 @@ import {
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
-import { StateStorage, StorageImage, ServiceStorage } from '@theory/firebase';
+import { ServiceStorage } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';
-import { from, forkJoin } from 'rxjs';
+import { from } from 'rxjs';
 import { ActionIconReset } from '../icon/icon.actions';
 import { LocationCity } from '@firefly/core/interfaces';
 import { Injectable } from '@angular/core';
@@ -97,7 +96,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
-                ActionsReset:  [ActionImageReset, ActionIconReset, ActionMapSearchResultClear],
+                ActionsReset:  [ ActionIconReset, ActionMapSearchResultClear ],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
@@ -123,19 +122,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector([StateUser.userId]) static canEdit(state: StateEventModel, userId: string): boolean
     {
         return StateEvent.dataState(state).userId === userId && !StateEvent.notifyComplete(state);
-    }
-
-    @Selector([StateImage.dataUri, StateStorage.images])
-    public static imageUrl(state: StateEventModel, dataUri: string, images: Record<string, StorageImage>)
-    {
-/*
-        const bucketPath: string = StateEvent.bucketPathState(state);
-
-        return bucketPath == null || bucketPath === CoreEnum.IdNew || images[bucketPath] == null ?
-            dataUri :
-            images[bucketPath][ImageSize.Medium];
-*/
-        return null;
     }
 
     @Action(ActionEventReset)
