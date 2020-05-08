@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class ResolverPagePublisher implements Resolve<boolean>
+export class ResolverPageCategories implements Resolve<boolean>
 {
     constructor() {}
 
