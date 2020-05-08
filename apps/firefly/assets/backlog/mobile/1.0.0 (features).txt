@@ -1,5 +1,4 @@
 alerts (detail) - cleanup styling/alignment
-*app (cleanup) - cleanup folders/pages
 app (errors) - required fields styling (icon/popover)
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
