@@ -7,7 +7,7 @@ import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/c
 import { StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
-import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow } from '@firefly/mobile';
+import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow, StateSearch } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { IonInfiniteScroll } from '@ionic/angular';
 
@@ -28,6 +28,8 @@ export class PageStream extends BaseComponent implements OnInit
     @Select(StateUserInterests.streamAdd)   add$:           Observable<boolean>;
     @Select(StateUser.subscriptionsStatus)  subscriptions$: Observable<Record<string, SubscriptionPartial>>;
     @Select(StateUser.streamEmptyMessage)   emptyMessage$:  Observable<string>;
+    @Select(StateSearch.searchResults)      searchResults$:      Observable<Array<Object>>;
+    @Select(StateSearch.searchResultsFound) searchResultsFound$: Observable<boolean>;
 
     public currentlyOpenedItemIndex = -1;
     public currentlyOpenedItems = [];

@@ -28,7 +28,7 @@ import {
   StateUserSubscriptions,
   StateUserProfile
 } from '@firefly/core';
-import { StateNotifications } from '@firefly/mobile';
+import { StateNotifications, StateSearch } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
@@ -86,6 +86,7 @@ export function createTranslateLoader(http: HttpClient)
             StateLanguage,
             StateMobile,
             StateNotifications,
+            StateSearch,
             StateMap,
             StateStorage,
 

@@ -5,7 +5,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
-import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentHomeOptions } from '@firefly/mobile';
+import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentHomeOptions, ActionSearchAll, StateSearch } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
@@ -111,14 +111,11 @@ export class PageHome extends BaseComponent
         }
     }
 
-    public async search(event: CustomEvent)
+    public search(event: CustomEvent)
     {
         console.log(`ToDo: implement simple search/filter`)
         console.log(`      ${event.detail.value}`);
 
-        let hits = [];
-        const result = await this.index.search(event.detail.value);
-        hits = result.hits;
-        console.log(hits);
+        return this.store.dispatch(new ActionSearchAll(event.detail.value));
     }
 }

@@ -18,6 +18,11 @@
     </ion-card>
   </ion-item>
 -->
+  <ion-list *ngIf="searchResultsFound$ | async">
+    <ion-item *ngFor="let searchResult of searchResults$ | async">
+      {{searchResult.name}}
+    </ion-item>
+  </ion-list>
   <ion-list *ngIf="found$ | async">
     <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">
         <ion-card  elevation="1">
