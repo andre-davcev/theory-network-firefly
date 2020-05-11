@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionUserStreamGet } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionUserStreamGet, ActionInterestGet, ActionUserStreamGetData, ActionUserStreamSync, ActionUserInterestsGet, ActionUserInterestsGetData } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
@@ -28,7 +28,7 @@ export class PageStream extends BaseComponent implements OnInit
     @Select(StateUserInterests.streamAdd)   add$:           Observable<boolean>;
     @Select(StateUser.subscriptionsStatus)  subscriptions$: Observable<Record<string, SubscriptionPartial>>;
     @Select(StateUser.streamEmptyMessage)   emptyMessage$:  Observable<string>;
-    @Select(StateSearch.searchResults)      searchResults$:      Observable<Array<Object>>;
+    @Select(StateSearch.searchResults)      searchResults$:      Observable<Array<Interest>>;
     @Select(StateSearch.searchResultsFound) searchResultsFound$: Observable<boolean>;
 
     public currentlyOpenedItemIndex = -1;
@@ -103,6 +103,19 @@ export class PageStream extends BaseComponent implements OnInit
         new ActionMobileLoadingShow(),
         new Navigate([Pages.InterestDetail], {id: interest.id})
       ])
+    }
+
+    public selectSearchInterest(interest: Interest)
+    {
+      this.store.dispatch(new ActionInterestGet(interest.id)).pipe
+      (
+        switchMap(() =>
+          this.store.dispatch([
+            new ActionMobileLoadingShow(),
+            new Navigate([Pages.InterestDetail], {id: interest.id})
+          ])
+        )
+      )
     }
 
     public add(): void

@@ -6,12 +6,13 @@ import { ActionSearchAll } from './search.actions';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { of, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { Interest } from '@firefly/cloud';
 
 @State<StateSearchModel>(StateSearchOptions)
 @Injectable()
 export class StateSearch
 {
-  @Selector() static searchResults(state: StateSearchModel) : Array<Object>  { return state.searchResults; }
+  @Selector() static searchResults(state: StateSearchModel) : Array<Interest>  { return state.searchResults; }
   @Selector() static searchResultsFound(state: StateSearchModel) : boolean { return state.searchResults.length > 0 }
 
   public searchClient = algoliaSearch('8NDQ1FNIDU','45b11751dc7e276f781a85f719abda66');
