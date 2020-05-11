@@ -1,4 +1,6 @@
+import { Interest } from '@firefly/cloud';
+
 export interface StateSearchModel
 {
-    searchResults : Array<Object>;
+    searchResults : Array<Interest>;
 }
