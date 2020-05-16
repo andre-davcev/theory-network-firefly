@@ -117,16 +117,24 @@ export class PageHome extends BaseComponent
         console.log(`ToDo: implement simple search/filter`)
         console.log(`      ${event.detail.value}`);
 
+        if(event.detail.value.length < 3)
+          return;
+
         this.store.dispatch(new ActionSearchAll(event.detail.value)).pipe(
           switchMap(() =>
             from(this.popover.create({
               component: PageSearch,
               event,
-              translucent: true
+              keyboardClose: false,
+              translucent: true,
+              showBackdrop: false
             }))
           )
-        ).subscribe((popover: HTMLIonPopoverElement) =>
-            popover.present()
+        ).subscribe((popover: HTMLIonPopoverElement) =>{
+
+          //popover.present();
+          //this.searchbar.setFocus();
+        }
         );
     }
 }

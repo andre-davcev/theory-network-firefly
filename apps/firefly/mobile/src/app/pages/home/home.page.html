@@ -5,6 +5,7 @@
                  (ionCancel)="searchShow(false)"
                  (ionChange)="search($event)">
         <ion-searchbar #searchBar
+                       debounce="600"
                        showCancelButton="focus"
                        [placeholder]="'general.search' | translate">
         </ion-searchbar>
