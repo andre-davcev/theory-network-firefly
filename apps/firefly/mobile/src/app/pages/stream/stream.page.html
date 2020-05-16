@@ -23,7 +23,7 @@
     </ion-card>
   </ion-item>
 -->
-  <ion-list *ngIf="found$ | async">
+  <ion-list (click)="resetSearchResults()" *ngIf="found$ | async">
     <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">
         <ion-card  elevation="1">
             <img (click)="selectInterest(interest)" class="image-cnt" [src]="interest.metadata.image">

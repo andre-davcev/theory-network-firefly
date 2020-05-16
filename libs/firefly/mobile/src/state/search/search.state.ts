@@ -2,7 +2,7 @@ import { StateSearchModel } from "./search.state.model";
 import { StateSearchOptions } from './search.state.options';
 import { Injectable } from '@angular/core';
 import { State, Store, StateContext, Action, Selector } from '@ngxs/store';
-import { ActionSearchAll } from './search.actions';
+import { ActionSearchAll, ActionReset, ActionSearchReset } from './search.actions';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { of, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -22,6 +22,12 @@ export class StateSearch
   (
     private store : Store
   ){}
+
+  @Action(ActionSearchReset)
+  reset({ patchState }: StateContext<StateSearchModel>)
+  {
+      return patchState({ searchResults: []})
+  }
 
   @Action(ActionSearchAll)
   searchAll({ patchState }: StateContext<StateSearchModel>, { searchString } : ActionSearchAll)

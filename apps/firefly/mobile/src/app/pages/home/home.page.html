@@ -2,7 +2,7 @@
     <ion-toolbar *ngIf="searching"
                  color="light"
                  (ionBlur)="searchShow(false)"
-                 (ionCancel)="searchShow(false)"
+                 (ionCancel)="cancel()"
                  (ionChange)="search($event)">
         <ion-searchbar #searchBar
                        debounce="600"
