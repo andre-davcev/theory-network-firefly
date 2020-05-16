@@ -9,10 +9,11 @@ import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentHomeO
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { StateUserAlerts, StateUser } from '@firefly/core';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
+import { ModulePageSearch, PageSearch } from '../search';
 
 @Component
 ({
@@ -116,6 +117,16 @@ export class PageHome extends BaseComponent
         console.log(`ToDo: implement simple search/filter`)
         console.log(`      ${event.detail.value}`);
 
-        return this.store.dispatch(new ActionSearchAll(event.detail.value));
+        this.store.dispatch(new ActionSearchAll(event.detail.value)).pipe(
+          switchMap(() =>
+            from(this.popover.create({
+              component: PageSearch,
+              event,
+              translucent: true
+            }))
+          )
+        ).subscribe((popover: HTMLIonPopoverElement) =>
+            popover.present()
+        );
     }
 }

@@ -105,19 +105,6 @@ export class PageStream extends BaseComponent implements OnInit
       ])
     }
 
-    public selectSearchInterest(interest: Interest)
-    {
-      this.store.dispatch(new ActionInterestGet(interest.id)).pipe
-      (
-        switchMap(() =>
-          this.store.dispatch([
-            new ActionMobileLoadingShow(),
-            new Navigate([Pages.InterestDetail], {id: interest.id})
-          ])
-        )
-      )
-    }
-
     public add(): void
     {
         this.store.dispatch(new Navigate([Pages.AssetInterest]));

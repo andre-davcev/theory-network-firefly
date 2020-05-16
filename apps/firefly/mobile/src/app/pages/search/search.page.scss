@@ -1,0 +1,36 @@
+@import 'variables';
+
+:host
+{
+    ion-content {
+        --background: #{$fire-color-transparent};
+    }
+
+    ion-list {
+        --background: #{$fire-color-transparent};
+        background: #{$fire-color-transparent};
+        margin-bottom: 0;
+    }
+
+    ion-item {
+        --padding-start: 8px;
+        --background: #{$fire-color-transparent};
+        --border-color: #333;
+
+        &:last-child {
+            ion-card {
+                margin-bottom: 24px;
+            }
+        }
+    }
+
+    ion-segment-button {
+      --margin-end: 5px;
+    }
+
+
+    hr {
+      margin-bottom: -5px;
+      background-color: #b3b2b2;
+    }
+}
