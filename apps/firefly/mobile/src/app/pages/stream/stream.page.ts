@@ -7,7 +7,7 @@ import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/c
 import { StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
-import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow, StateSearch } from '@firefly/mobile';
+import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow, StateSearch, ActionSearchReset } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { IonInfiniteScroll } from '@ionic/angular';
 
@@ -51,6 +51,7 @@ export class PageStream extends BaseComponent implements OnInit
             this.subscriptions = subscriptions
         )
     }
+
 
     public toggle(subscribed: boolean, stream: StreamInterest): void
     {
@@ -107,15 +108,22 @@ export class PageStream extends BaseComponent implements OnInit
 
     public selectSearchInterest(interest: Interest)
     {
-      this.store.dispatch(new ActionInterestGet(interest.id)).pipe
+      this.store.dispatch(new ActionSearchReset()).pipe
       (
+        switchMap(() =>
+          this.store.dispatch(new ActionInterestGet(interest.id))),
         switchMap(() =>
           this.store.dispatch([
             new ActionMobileLoadingShow(),
+            new ActionSearchReset(),
             new Navigate([Pages.InterestDetail], {id: interest.id})
-          ])
-        )
-      )
+          ]))
+      ).subscribe();
+    }
+
+    public resetSearchResults()
+    {
+      this.store.dispatch(new ActionSearchReset()).subscribe();
     }
 
     public add(): void

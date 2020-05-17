@@ -22,6 +22,7 @@ export enum ActionsUser
     AddToken          = '[User] Add Token',
     LoginEmail        = '[User] Login Email',
     Logout            = '[User] Logout',
+    ResetPassword     = '[User] Reset Password',
 
     SubscriptionsSet    = '[User] Subscriptions Set',
     SubscriptionToggle  = '[User] Subscription Toggle',

@@ -1,4 +1,9 @@
 <ion-content>
+  <ion-list class="searchResults"  style="position: absolute;z-index:1;width:100%;">
+    <ion-item lines="none" (click)="selectSearchInterest(searchResult)" *ngFor="let searchResult of searchResults$ | async"  >
+      {{searchResult.name}}
+    </ion-item>
+  </ion-list>
 <!--
   <ion-item  *ngIf="(stream && (authenticated$ | async))" lines="none">
     <ion-card>
@@ -18,12 +23,7 @@
     </ion-card>
   </ion-item>
 -->
-  <ion-list *ngIf="searchResultsFound$ | async">
-    <ion-item (click)="selectSearchInterest(searchResult)" *ngFor="let searchResult of searchResults$ | async">
-      {{searchResult.name}}
-    </ion-item>
-  </ion-list>
-  <ion-list *ngIf="found$ | async">
+  <ion-list (click)="resetSearchResults()" *ngIf="found$ | async">
     <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">
         <ion-card  elevation="1">
             <img (click)="selectInterest(interest)" class="image-cnt" [src]="interest.metadata.image">

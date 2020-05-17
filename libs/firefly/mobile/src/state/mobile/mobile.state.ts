@@ -149,7 +149,8 @@ export class StateMobile
         ([
             'general.authenticate',
             'general.login',
-            'general.signup'
+            'general.signup',
+            'general.resetPassword'
         ]).
         pipe
         (
@@ -167,6 +168,10 @@ export class StateMobile
                           {
                               text    : translations['general.signup'],
                               handler : () => { dispatch(new ActionMobileAuthSelected(Pages.SignUp)); }
+                          },
+                          {
+                              text    : translations['general.resetPassword'],
+                              handler : () => { dispatch(new ActionMobileAuthSelected(Pages.ResetPassword)); }
                           }
                       ]
                   }))

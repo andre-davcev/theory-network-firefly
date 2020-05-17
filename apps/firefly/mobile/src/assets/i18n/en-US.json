@@ -18,6 +18,7 @@
   "general.subscribers"    : "Subscribers",
   "general.login"          : "Login",
   "general.signup"         : "Sign Up",
+  "general.resetPassword"  : "Reset Password",
   "general.authenticate"   : "Authenticate",
   "general.calendar"       : "Add To Calendar",
   "general.map"            : "Get Directions",
