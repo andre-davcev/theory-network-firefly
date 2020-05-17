@@ -4,6 +4,7 @@ export enum Pages
 
     Login            = 'login',
     SignUp           = 'sign-up',
+    ResetPassword    = 'reset-password',
     SignUpCategories = 'sign-up-categories',
     SignUpSlides     = 'sign-up-slides',
 

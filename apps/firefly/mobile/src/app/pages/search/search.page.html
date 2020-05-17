@@ -1,0 +1,7 @@
+<ion-content>
+  <ion-list *ngIf="searchResultsFound$ | async">
+    <ion-item lines="none" (click)="selectSearchInterest(searchResult)" *ngFor="let searchResult of searchResults$ | async">
+      {{searchResult.name}}
+    </ion-item>
+  </ion-list>
+</ion-content>

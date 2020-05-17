@@ -5,14 +5,16 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
-import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentHomeOptions, ActionSearchAll, StateSearch } from '@firefly/mobile';
+import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentHomeOptions, ActionSearchAll, StateSearch, ActionSearchReset } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { StateUserAlerts, StateUser } from '@firefly/core';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
+import { ModulePageSearch, PageSearch } from '../search';
+import { ActionMapSearchResultSet } from '@theory/mapbox';
 
 @Component
 ({
@@ -111,11 +113,29 @@ export class PageHome extends BaseComponent
         }
     }
 
+    public cancel(): void
+    {
+      this.store.dispatch(new ActionSearchReset()).subscribe();
+    }
+
     public search(event: CustomEvent)
     {
         console.log(`ToDo: implement simple search/filter`)
         console.log(`      ${event.detail.value}`);
 
-        return this.store.dispatch(new ActionSearchAll(event.detail.value));
+        if(event.detail.value.length < 3)
+          return;
+
+        this.store.dispatch(new ActionSearchAll(event.detail.value)).pipe(
+          switchMap(() =>
+            from(this.popover.create({
+              component: PageSearch,
+              event,
+              keyboardClose: false,
+              translucent: true,
+              showBackdrop: false
+            }))
+          )
+        ).subscribe();
     }
 }
