@@ -39,7 +39,8 @@ import {
     ActionUserAnonymousLogin,
     ActionUserSubscriptionsSet,
     ActionUserNotificationsSet,
-    ActionUserPatchMetadata
+    ActionUserPatchMetadata,
+    ActionUserResetPassword
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -457,7 +458,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserLoginEmail)
     {
         patchState({ authenticating: true });
-
         return from(this.auth.signInWithEmailAndPassword(payload.id, payload.password)).pipe
         (
             map((userCredential: firebase.auth.UserCredential) => userCredential.user),
@@ -489,6 +489,12 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 of(patchState({ error }))
             )
         );
+    }
+
+    @Action(ActionUserResetPassword)
+    resetPassord({ dispatch }: StateContext<StateUserModel>, {payload}: ActionUserResetPassword)
+    {
+      return of(this.auth.sendPasswordResetEmail(payload.id));
     }
 
     @Action(ActionUserSubscriptionsSet)

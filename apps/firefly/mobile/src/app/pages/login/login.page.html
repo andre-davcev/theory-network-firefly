@@ -10,13 +10,13 @@
     </ion-toolbar>
 </ion-header>
 
-<section *ngIf="page === Pages.Login || page === Pages.SignUp"
+<section *ngIf="page === Pages.Login || page === Pages.SignUp || page === Pages.ResetPassword"
          class="cpt-container"
          fxLayout="column"
          fxLayoutAlign="center"
          fxLayoutGap="2rem">
     <app-logo [loading]="userLoading$ | async"></app-logo>
-    <app-auth [login]="page === Pages.Login" (finished)="finishedAuth($event)"></app-auth>
+    <app-auth [login]="page === Pages.Login" [resetPassword]="page === Pages.ResetPassword" (finished)="finishedAuth($event)"></app-auth>
 </section>
 
 <ion-slides *ngIf="page === Pages.SignUpSlides"

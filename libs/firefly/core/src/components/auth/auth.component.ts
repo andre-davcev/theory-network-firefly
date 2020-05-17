@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -6,7 +6,7 @@ import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 import { Credentials } from '@theory/core';
 import { Store } from '@ngxs/store';
-import { ActionUserLoginEmail, ActionUserCreate } from '@firefly/core/state';
+import { ActionUserLoginEmail, ActionUserCreate, ActionUserResetPassword } from '@firefly/core/state';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -24,6 +24,9 @@ export class ComponentAuth
 
     @Input()
     public login: boolean = true;
+
+    @Input()
+    public resetPassword: boolean = false;
 
     @Output()
     public finished: EventEmitter<boolean> = new EventEmitter();
@@ -59,14 +62,42 @@ export class ComponentAuth
         });
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+      for (let propName in changes) {
+        let chng = changes[propName];
+        if(propName === 'resetPassword')
+        {
+          if(chng.currentValue)
+          {
+            this.form = this.formBuilder.group
+            ({
+                password: new FormControl('', Validators.compose
+                ([
+                  Validators.minLength(0),
+                  Validators.maxLength(30),
+                ])),
+                id: new FormControl('', Validators.compose
+                ([
+                    Validators.required,
+                    Validators.minLength(6),
+                    Validators.maxLength(50),
+                    Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+                ]))
+            });
+          }
+        }
+      }
+    }
+
     public clicked(): void
     {
         const credentials: Credentials = this.form.value;
 
         console.log(credentials);
 
-        const action: ActionUserLoginEmail | ActionUserCreate = this.login ?
+        const action: ActionUserLoginEmail | ActionUserCreate | ActionUserResetPassword = this.login ?
             new ActionUserLoginEmail(credentials) :
+            this.resetPassword ? new ActionUserResetPassword(credentials) :
             new ActionUserCreate(credentials);
 
         this.authenticating = true;

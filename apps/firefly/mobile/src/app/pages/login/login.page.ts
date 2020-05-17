@@ -20,7 +20,7 @@ export class PageLogin
     @Select(StateUser.loading) userLoading$: Observable<boolean>;
     @Select(StateUser.error)   error$:       Observable<Error>;
 
-    @Input() page: Pages.Login | Pages.SignUp | Pages.SignUpCategories | Pages.SignUpSlides = Pages.Login;
+    @Input() page: Pages.Login | Pages.SignUp | Pages.ResetPassword | Pages.SignUpCategories | Pages.SignUpSlides = Pages.Login;
 
     public Pages : any = Pages;
 
@@ -39,7 +39,7 @@ export class PageLogin
     {
         if (successful)
         {
-            if (this.page === Pages.Login)
+            if (this.page === Pages.Login || this.page === Pages.ResetPassword)
             {
                 this.close();
             }

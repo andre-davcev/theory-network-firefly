@@ -26,6 +26,7 @@ export class ActionUserWatchLanguage      { static readonly type = ActionsUser.W
 export class ActionUserAddToken           { static readonly type = ActionsUser.AddToken;           constructor(public payload: string) { } }
 export class ActionUserLoginEmail         { static readonly type = ActionsUser.LoginEmail;         constructor(public payload: Credentials) { } }
 export class ActionUserLogout             { static readonly type = ActionsUser.Logout;             constructor() { } }
+export class ActionUserResetPassword      { static readonly type = ActionsUser.ResetPassword;      constructor(public payload: Credentials) { } }
 
 export class ActionUserSubscriptionsSet   { static readonly type = ActionsUser.SubscriptionsSet;   constructor() { } }
 export class ActionUserSubscriptionToggle { static readonly type = ActionsUser.SubscriptionToggle; constructor(public id: string, public permanent: boolean = false) { } }

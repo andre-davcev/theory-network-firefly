@@ -2,10 +2,10 @@ import { StateSearchModel } from "./search.state.model";
 import { StateSearchOptions } from './search.state.options';
 import { Injectable } from '@angular/core';
 import { State, Store, StateContext, Action, Selector } from '@ngxs/store';
-import { ActionSearchAll, ActionReset, ActionSearchReset } from './search.actions';
+import { ActionSearchAll, ActionSearchReset } from './search.actions';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { of, from } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Interest } from '@firefly/cloud';
 
 @State<StateSearchModel>(StateSearchOptions)
@@ -26,7 +26,7 @@ export class StateSearch
   @Action(ActionSearchReset)
   reset({ patchState }: StateContext<StateSearchModel>)
   {
-      return patchState({ searchResults: []})
+      patchState({ searchResults: []})
   }
 
   @Action(ActionSearchAll)
