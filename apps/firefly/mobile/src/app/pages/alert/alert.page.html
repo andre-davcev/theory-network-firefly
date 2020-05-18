@@ -12,7 +12,7 @@
             <app-slide [slide]="alert"
                       [buttonText]="'general.go' | translate"
                       (alertDeleteClicked)="alertDelete(alert)"
-                      (alertGoClicked)="alertGo()"
+                      (alertGoClicked)="alertGo(alert)"
                       (alertDetailClicked)="navigate(Pages.AlertDetail, alert)">
             </app-slide>
         </ion-slide>
