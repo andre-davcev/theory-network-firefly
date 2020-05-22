@@ -97,6 +97,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@ionic-native/calendar": "^5.26.0",
     "@ionic-native/core": "^5.26.0",
+    "@ionic-native/launch-navigator": "^5.26.0",
     "@ionic/angular": "^5.1.0",
     "@ionic/core": "^5.1.0",
     "@ionic/ng-toolkit": "~1.1.0",
@@ -125,6 +126,7 @@
     "rxfire": "^3.12.2",
     "rxjs": "~6.5.5",
     "tslib": "^1.10.0",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "^5.0.4",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
