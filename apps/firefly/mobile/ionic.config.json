@@ -1,8 +1,9 @@
 {
-  "id": "com.theorynetwork.Firefly",
   "name": "Firefly",
-  "type": "angular",
   "integrations": {
-    "capacitor": {}
-  }
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "com.theorynetwork.Firefly"
 }

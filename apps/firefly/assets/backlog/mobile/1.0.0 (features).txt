@@ -19,8 +19,6 @@ events (list) - click event navigates to event detail
 events (detail) - reverse geocode map
 events (functions) - on delete event, delete storage
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
-+events (go) - implement add to calendar workflow
-events (go) - implement get directions workflow
 events (list) - add pink dots for unread alerts
 events (list) - hide events where time > event.timeEnd
 firestore (functions) - implement callable function to populate stream for new city
