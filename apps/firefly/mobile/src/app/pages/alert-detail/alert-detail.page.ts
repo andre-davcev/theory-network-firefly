@@ -8,6 +8,7 @@ import { StatusBarStyle } from '@capacitor/core';
 import { StateEvent, ActionUserAlertsGo } from '@firefly/core';
 import { Pages } from '@firefly/mobile';
 import { BaseComponent } from '@theory/core';
+import { Alert } from '@firefly/cloud';
 
 @Component
 ({
@@ -41,9 +42,9 @@ export class PageAlertDetail extends BaseComponent implements OnInit
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light }));
     }
 
-    public alertGo()
+    public alertGo(alert: Alert)
     {
-      this.store.dispatch(new ActionUserAlertsGo()).subscribe();
+      this.store.dispatch(new ActionUserAlertsGo(alert)).subscribe();
     }
 
     public cancel(): void
