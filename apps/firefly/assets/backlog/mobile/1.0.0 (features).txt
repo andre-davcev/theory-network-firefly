@@ -2,6 +2,7 @@ alerts (detail) - cleanup styling/alignment
 app (errors) - required fields styling (icon/popover)
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (library) - upgrade @ionic & @capacitor
+app (firestore) - upgrade functions to use nodejs 10
 app (load) - android splash screen
 +app (lists) - implement infinite scrolling for lists
 auth (login) - switch user data cleanup and screen testing
