@@ -15,7 +15,8 @@ import {
     ActionUserAlertsSync,
     ActionUserAlertsGo,
     ActionUserAlertsSetData,
-    ActionUserAlertsGetIcons
+    ActionUserAlertsGetIcons,
+    ActionUserAlertsAddToCalendar
 } from './user-alerts.actions';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,6 +28,7 @@ import { Collection, EventType, ImageType } from '@firefly/core/enums';
 import { StateUser } from '../../document/user/user.state';
 import { StateUserEvents } from '../../query/user-events/user-events.state';
 import { switchMap, map, tap } from 'rxjs/operators';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()
@@ -38,6 +40,8 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         private translate   : TranslateService,
         private actionSheet : ActionSheetController,
                 storage     : ServiceStorage,
+        private calendar    : Calendar
+
     )
     {
         super
@@ -233,7 +237,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     }
 
     @Action(ActionUserAlertsGo)
-    authSelect({ dispatch }: StateContext<StateUserAlertsModel>)
+    alertsGo({ dispatch }: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsGo)
     {
         return this.translate.
         get
@@ -252,7 +256,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                       [
                           {
                               text : translations['general.calendar'],
-                              handler : () => { dispatch(of(null)); }
+                              handler : () => { dispatch(new ActionUserAlertsAddToCalendar(alert)); }
                           },
                           {
                               text    : translations['general.map'],
@@ -323,5 +327,16 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     getIcons(context: StateContext<StateUserAlertsModel>)
     {
         return super.getMedia(context, Collection.Events, ImageType.Icon);
+    }
+
+    @Action(ActionUserAlertsAddToCalendar)
+    addToCalendar(context: StateContext<StateUserAlertsModel>, { alert } : ActionUserAlertsAddToCalendar)
+    {
+        const start = new Date(alert.timeStart);
+        const end = new Date(alert.timeEnd)
+
+        return from(
+          this.calendar.createEventInteractively(alert.name, alert.city.city, alert.tagline, start, end)
+        )
     }
 }

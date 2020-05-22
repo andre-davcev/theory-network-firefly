@@ -88,9 +88,9 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         );
     }
 
-    public alertGo()
+    public alertGo(alert: Alert)
     {
-        this.store.dispatch(new ActionUserAlertsGo());
+        this.store.dispatch(new ActionUserAlertsGo(alert));
     }
 
     public alertDelete(alert: Alert): void

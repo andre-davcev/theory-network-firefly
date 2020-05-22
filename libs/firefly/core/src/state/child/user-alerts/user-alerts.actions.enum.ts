@@ -9,5 +9,6 @@ export enum ActionsUserAlerts
     Sync    = '[User Alerts] Sync',
 
     Go       = '[User Alerts] Go',
-    GetIcons = '[User Alerts] Get Icons'
+    GetIcons = '[User Alerts] Get Icons',
+    AddToCalendar = '[User Alerts] Add to Calendar'
 }

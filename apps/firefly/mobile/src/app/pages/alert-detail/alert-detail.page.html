@@ -25,7 +25,7 @@
       <div class="description">{{(event$ | async).description}}</div>
     </div>
     <app-button-action [text]="'general.go' | translate"
-                       (click)="alertGo()">
+                       (click)="alertGo($event)">
     </app-button-action>
     <div class="cnt-map">
       <app-item-map>

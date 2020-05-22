@@ -11,5 +11,6 @@ export class ActionUserAlertsAdd     { static readonly type = ActionsUserAlerts.
 export class ActionUserAlertsRemove  { static readonly type = ActionsUserAlerts.Remove;  constructor(public id: string) { } }
 export class ActionUserAlertsSync    { static readonly type = ActionsUserAlerts.Sync;    constructor(public object: Alert) { } }
 
-export class ActionUserAlertsGo       { static readonly type = ActionsUserAlerts.Go;       constructor() { } }
+export class ActionUserAlertsGo       { static readonly type = ActionsUserAlerts.Go;       constructor(public alert: Alert) { } }
 export class ActionUserAlertsGetIcons { static readonly type = ActionsUserAlerts.GetIcons; constructor() { } }
+export class ActionUserAlertsAddToCalendar { static readonly type = ActionsUserAlerts.AddToCalendar; constructor(public alert: Alert) { } }
