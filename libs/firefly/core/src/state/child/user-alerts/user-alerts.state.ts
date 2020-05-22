@@ -16,7 +16,8 @@ import {
     ActionUserAlertsGo,
     ActionUserAlertsSetData,
     ActionUserAlertsGetIcons,
-    ActionUserAlertsAddToCalendar
+    ActionUserAlertsAddToCalendar,
+    ActionUserAlertsLaunchNavigation
 } from './user-alerts.actions';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
@@ -29,6 +30,7 @@ import { StateUser } from '../../document/user/user.state';
 import { StateUserEvents } from '../../query/user-events/user-events.state';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Calendar } from '@ionic-native/calendar/ngx';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()
@@ -260,7 +262,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                           },
                           {
                               text    : translations['general.map'],
-                              handler : () => { dispatch(of(null)); }
+                              handler : () => { dispatch(new ActionUserAlertsLaunchNavigation(alert)); }
                           }
                       ]
                   }))
@@ -338,5 +340,11 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         return from(
           this.calendar.createEventInteractively(alert.name, alert.city.city, alert.tagline, start, end)
         )
+    }
+
+    @Action(ActionUserAlertsLaunchNavigation)
+    launchNavigation(context: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsLaunchNavigation)
+    {
+      return from(LaunchNavigator.navigate([alert.geopoint.latitude, alert.geopoint.longitude]));
     }
 }
