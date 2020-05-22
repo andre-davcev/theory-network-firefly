@@ -14,3 +14,4 @@ export class ActionUserAlertsSync    { static readonly type = ActionsUserAlerts.
 export class ActionUserAlertsGo       { static readonly type = ActionsUserAlerts.Go;       constructor(public alert: Alert) { } }
 export class ActionUserAlertsGetIcons { static readonly type = ActionsUserAlerts.GetIcons; constructor() { } }
 export class ActionUserAlertsAddToCalendar { static readonly type = ActionsUserAlerts.AddToCalendar; constructor(public alert: Alert) { } }
+export class ActionUserAlertsLaunchNavigation { static readonly type = ActionsUserAlerts.LaunchNavigation; constructor(public alert: Alert) { } }
