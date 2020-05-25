@@ -5,7 +5,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
-import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentHomeOptions, ActionSearchAll, StateSearch, ActionSearchReset } from '@firefly/mobile';
+import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentHomeOptions, ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
@@ -126,16 +126,11 @@ export class PageHome extends BaseComponent
         if(event.detail.value.length < 3)
           return;
 
-        this.store.dispatch(new ActionSearchAll(event.detail.value)).pipe(
-          switchMap(() =>
-            from(this.popover.create({
-              component: PageSearch,
-              event,
-              keyboardClose: false,
-              translucent: true,
-              showBackdrop: false
-            }))
-          )
-        ).subscribe();
+        const pageStream : boolean = this.store.selectSnapshot(StateMobile.pageStream);
+        const pageAlerts : boolean = this.store.selectSnapshot(StateMobile.pageAlerts);
+
+        return pageStream ? this.store.dispatch(new ActionSearchInterests(event.detail.value)).subscribe()
+          : pageAlerts ? this.store.dispatch(new ActionSearchEvents(event.detail.value)).subscribe()
+          : of(null);
     }
 }
