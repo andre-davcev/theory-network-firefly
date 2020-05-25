@@ -1,3 +1,9 @@
+<ion-list class="searchResults"  style="position: absolute;z-index:1;width:100%;">
+  <ion-item lines="none" (click)="selectSearchInterest(searchResult)" *ngFor="let searchResult of searchResults$ | async"  >
+    {{searchResult.name}}
+  </ion-item>
+</ion-list>
+
 <form novalidate
       class="cpt-events"
       *ngIf="(eventType$ | async) === EventType.New && (form$ | async)"

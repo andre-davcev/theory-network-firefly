@@ -1,5 +1,7 @@
 export enum ActionsSearch
 {
-    SearchAll       = '[Search] SearchAll',
+
+  SearchInterests   = '[Search] Search Interests',
+  SearchEvents      = '[Search] Search Events',
     Reset           = '[Search] Reset',
 }

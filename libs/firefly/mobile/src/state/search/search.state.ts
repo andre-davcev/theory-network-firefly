@@ -2,11 +2,12 @@ import { StateSearchModel } from "./search.state.model";
 import { StateSearchOptions } from './search.state.options';
 import { Injectable } from '@angular/core';
 import { State, Store, StateContext, Action, Selector } from '@ngxs/store';
-import { ActionSearchAll, ActionSearchReset } from './search.actions';
+import { ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from './search.actions';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { of, from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Interest } from '@firefly/cloud';
+import { StateMobile } from '../mobile';
 
 @State<StateSearchModel>(StateSearchOptions)
 @Injectable()
@@ -16,7 +17,9 @@ export class StateSearch
   @Selector() static searchResultsFound(state: StateSearchModel) : boolean { return state.searchResults.length > 0 }
 
   public searchClient = algoliaSearch('8NDQ1FNIDU','45b11751dc7e276f781a85f719abda66');
-  public index: SearchIndex = this.searchClient.initIndex('interests');
+
+  public interestsIndex: SearchIndex = this.searchClient.initIndex('interests');
+  public eventsIndex: SearchIndex = this.searchClient.initIndex('events');
 
   constructor
   (
@@ -29,29 +32,42 @@ export class StateSearch
       patchState({ searchResults: []})
   }
 
-  @Action(ActionSearchAll)
-  searchAll({ patchState }: StateContext<StateSearchModel>, { searchString } : ActionSearchAll)
+  @Action(ActionSearchInterests)
+  searchInterests({ patchState }: StateContext<StateSearchModel>, { searchString } : ActionSearchInterests)
   {
-        let hits = [];
-        console.log('search: ' + searchString);
+      let hits = [];
 
-        if(searchString.length<3)
-        {
-          return of(patchState({ searchResults : []}))
-        }
-        //const result = await this.index.search(searchString);
-        return from(this.index.search(searchString)).pipe
-        (
-          tap((result) => {
-            console.log('returned');
+      if(searchString.length<3)
+      {
+        return of(patchState({ searchResults : []}))
+      }
 
-            hits = result.hits;
-            console.log(hits);
-            patchState({ searchResults : hits});
-            console.log(hits);
-          })
-        )
-        //hits = result.hits;
-        //console.log(hits);
+      return from(this.interestsIndex.search(searchString)).pipe
+      (
+        tap((result) => {
+          hits = result.hits;
+          patchState({ searchResults : hits});
+        })
+      )
   }
+
+  @Action(ActionSearchEvents)
+  searchEvents({ patchState }: StateContext<StateSearchModel>, { searchString } : ActionSearchEvents)
+  {
+      let hits = [];
+
+      if(searchString.length<3)
+      {
+        return of(patchState({ searchResults : []}))
+      }
+
+      return from(this.eventsIndex.search(searchString)).pipe
+      (
+        tap((result) => {
+          hits = result.hits;
+          patchState({ searchResults : hits});
+        })
+      )
+  }
+
 }

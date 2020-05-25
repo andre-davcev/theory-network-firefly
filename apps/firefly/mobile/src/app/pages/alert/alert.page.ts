@@ -4,10 +4,10 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType, ActionInterestReset } from '@firefly/core';
-import { Alert, DateEvents } from '@firefly/cloud';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType, ActionInterestReset, ActionInterestGet } from '@firefly/core';
+import { Alert, DateEvents, Interest } from '@firefly/cloud';
 
-import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
+import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile, StateSearch, ActionSearchReset, ActionMobileLoadingShow } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { PageAlertDetail } from '../alert-detail/alert-detail.page';
 import { FormGroup } from '@angular/forms';
@@ -28,6 +28,8 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     @Select(StateUser.eventType)               eventType$: Observable<EventType>;
     @Select(StateUser.eventsEmptyMessage)      emptyMessage$:  Observable<string>;
     @Select(StateUserAlerts.eventsAdd)          add$:           Observable<boolean>;
+    @Select(StateSearch.searchResults)      searchResults$:      Observable<Array<Interest>>;
+    @Select(StateSearch.searchResultsFound) searchResultsFound$: Observable<boolean>;
 
     @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
 
@@ -126,5 +128,26 @@ export class PageAlert extends BaseComponent implements AfterViewInit
             new ActionInterestReset(),
             new Navigate([Pages.AssetEvent, CoreEnum.IdNew])
         ]);
+    }
+
+    public resetSearchResults()
+    {
+      this.store.dispatch(new ActionSearchReset()).subscribe();
+    }
+
+
+    public selectSearchInterest(interest: Interest)
+    {
+      this.store.dispatch(new ActionSearchReset()).pipe
+      (
+        switchMap(() =>
+          this.store.dispatch(new ActionInterestGet(interest.id))),
+        switchMap(() =>
+          this.store.dispatch([
+            new ActionMobileLoadingShow(),
+            new ActionSearchReset(),
+            new Navigate([Pages.InterestDetail], {id: interest.id})
+          ]))
+      ).subscribe();
     }
 }
