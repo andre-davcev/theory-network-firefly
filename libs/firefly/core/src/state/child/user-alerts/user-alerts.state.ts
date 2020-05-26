@@ -104,7 +104,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             const eventsList : Array<DateEvents> = [];
 
             const events : Array<Event> = eventType === EventType.Upcoming ?
-                StateUserAlerts.alerts(state) :
+                StateUserAlerts.alerts(state).filter((alert: Alert) => new Date(alert.timeEnd) > new Date()) :
                 userEvents;
 
             const options      : any = { weekday: 'long',  year: 'numeric', month: 'long',  day: 'numeric'};
@@ -143,7 +143,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                     timeStartPrevious = timeStart;
                 });
 
-            if (eventsList.length > 0)
+            if (eventsList.length > 0 || events.length === 1)
             {
                 eventsList.push(current);
             }
