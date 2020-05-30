@@ -7,6 +7,7 @@
             <ion-segment-button [value]="InterestType.Unsubscribed">{{ 'page.interest.filter.unsubscribed' | translate }}</ion-segment-button>
             <ion-segment-button [value]="InterestType.Subscribed">{{ 'page.interest.filter.subscribed' | translate }}</ion-segment-button>
             <ion-segment-button [value]="InterestType.Created" *ngIf="isPublisher$ | async">{{ 'page.interest.filter.created' | translate }}</ion-segment-button>
+            <ion-segment-button [value]="InterestType.Virtual">{{ 'page.interest.filter.virtual' | translate }}</ion-segment-button>
         </ion-segment>
 
         <ion-segment *ngIf="!isStream"
@@ -16,6 +17,7 @@
             <ion-segment-button [value]="EventType.New">{{ 'page.event.filter.new' | translate }}</ion-segment-button>
             <ion-segment-button [value]="EventType.Upcoming">{{ 'page.event.filter.upcoming' | translate }}</ion-segment-button>
             <ion-segment-button [value]="EventType.Created" *ngIf="isPublisher$ | async">{{ 'page.event.filter.created' | translate }}</ion-segment-button>
+            <ion-segment-button [value]="EventType.Virtual">{{ 'page.event.filter.virtual' | translate }}</ion-segment-button>
         </ion-segment>
     </ion-card>
 </ion-content>

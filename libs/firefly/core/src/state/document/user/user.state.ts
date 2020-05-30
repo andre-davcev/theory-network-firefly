@@ -153,6 +153,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             'page.stream.empty.unsubscribed' :
             interestType === InterestType.Subscribed ?
             'page.stream.empty.subscribed' :
+            interestType === InterestType.Virtual ?
+            'page.stream.empty.virtual' :
             'page.stream.empty.created';
     }
 

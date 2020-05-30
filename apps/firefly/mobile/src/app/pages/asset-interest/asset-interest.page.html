@@ -52,6 +52,12 @@
                         <ion-toggle formControlName="private" color="primary"></ion-toggle>
                     </ion-item>
 
+                    <ion-item>
+                      <ion-icon name="cloud" slot="start" color="grey"></ion-icon>
+                      <ion-label>{{ 'general.isVirtual' | translate }}</ion-label>
+                      <ion-toggle formControlName="virtual" color="primary"></ion-toggle>
+                    </ion-item>
+
                     <ion-item-divider></ion-item-divider>
 
                     <app-item-description [form]="form$ | async"

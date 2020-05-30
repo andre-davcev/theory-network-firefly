@@ -8,6 +8,7 @@ export interface Interest extends FirebaseDocument
     private         : boolean;
     subscriberCount : number;
     tagline         : string;
+    virtual         : boolean;
 
     metadata : MetadataInterest;
 }

@@ -66,6 +66,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                 private         : true,
                 subscriberCount : 0,
                 tagline         : null,
+                virtual         : false,
 
 
                 metadata : { image: null }
