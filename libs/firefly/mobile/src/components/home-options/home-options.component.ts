@@ -107,6 +107,33 @@ export class ComponentHomeOptions
                     subscribe();
                 }
             }
+            else if (eventType === EventType.Virtual)
+            {
+                if (this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.alerts)[0].metadata.icon != null)
+                {
+                    this.store.dispatch(new ActionUserEventTypeSet(eventType)).
+                    pipe
+                    (
+                        delay(1),
+                        switchMap(() =>
+                            from(this.popover.dismiss())
+                        )
+                    ).
+                    subscribe();
+                }
+                else
+                {
+                    this.store.dispatch(new ActionMobileLoadingShow()).
+                    pipe
+                    (
+                        switchMap(() => from(this.popover.dismiss())),
+                        switchMap(() => this.store.dispatch(new ActionUserAlertsGetIcons())),
+                        switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
+                        switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
+                    ).
+                    subscribe();
+                }
+            }
             else if (eventType === EventType.Created)
             {
                 if (this.store.selectSnapshot(StateUserEvents.initialized()))

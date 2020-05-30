@@ -166,6 +166,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             'page.events.empty.new' :
             eventType === EventType.Upcoming ?
             'page.events.empty.upcoming' :
+            eventType === EventType.Virtual ?
+            'page.events.empty.virtual' :
             'page.events.empty.created';
     }
 
