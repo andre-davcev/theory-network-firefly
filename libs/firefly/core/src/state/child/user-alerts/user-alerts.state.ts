@@ -105,6 +105,9 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
 
             const events : Array<Event> = eventType === EventType.Upcoming ?
                 StateUserAlerts.alerts(state).filter((alert: Alert) => new Date(alert.timeEnd) > new Date()) :
+                eventType === EventType.Virtual ?
+                StateUserAlerts.alerts(state).filter((alert: Alert) => new Date(alert.timeEnd) > new Date())
+                  .filter((alert: Alert) => alert.virtual) :
                 userEvents;
 
             const options      : any = { weekday: 'long',  year: 'numeric', month: 'long',  day: 'numeric'};
