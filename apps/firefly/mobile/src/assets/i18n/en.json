@@ -119,14 +119,17 @@
   "page.interest.filter.unsubscribed" : "Unsubscribed",
   "page.interest.filter.subscribed"   : "Subscribed",
   "page.interest.filter.created"      : "Created",
+  "page.interest.filter.virtual"      : "Virtual",
 
   "page.event.filter.new"      : "New",
   "page.event.filter.upcoming" : "Upcoming",
   "page.event.filter.created"  : "Created",
+  "page.event.filter.virtual"  : "Virtual",
 
   "page.stream.empty.unsubscribed" : "Our swarm of fireflies are busy building your Interest recommendations. Check back later!",
   "page.stream.empty.subscribed"   : "It looks like your haven't subscribed to any Interests yet!",
   "page.stream.empty.created"      : "As a valuable part of the Firefly community, feel free to create your own Interest streams using the Add button below.",
+  "page.stream.empty.virtual"      : "Our swarm of fireflies are busy building your Virtual Interest recommendations. Check back later!",
   "page.interests.empty"           : "Help support the Firefly community by publishing your own public Interests here.",
   "page.events.empty.new"          : "Looks like you have no new event notifications right now. Check out your upcoming events using the above filter.",
   "page.events.empty.upcoming"     : "Looks like you no upcoming events right now.",

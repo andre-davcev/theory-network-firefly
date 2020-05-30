@@ -53,6 +53,7 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
                 private         : true,
                 subscriberCount : 0,
                 tagline         : null,
+                virtual         : false,
                 on              : false
             },
             {

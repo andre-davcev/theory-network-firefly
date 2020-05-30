@@ -72,6 +72,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
                 }) :
             stream.
                 filter((interest: StreamInterest) =>
+                    (interestType === InterestType.Virtual && interest.virtual && (subscriptions[interest.id] == null || interest.on != null)) ||
                     (interestType === InterestType.Subscribed && subscriptions[interest.id] != null) ||
                     (interestType === InterestType.Unsubscribed && (subscriptions[interest.id] == null || interest.on != null))
                 );

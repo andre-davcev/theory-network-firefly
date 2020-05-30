@@ -85,6 +85,15 @@ export class ServiceEvents extends ServiceFirestore<Event>
 
     public formCreate(event: Event): FormGroup
     {
+        //temporary
+        if(!event.metadata)
+        {
+          event.metadata = {
+            icon : '',
+            image : ''
+          }
+        }
+
         return super.formCreate
         ({
             ...event,
