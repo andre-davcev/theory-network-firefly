@@ -1,7 +1,9 @@
 3d maps
+algolia places
 augmented reality
 beacons
 calendar
+chart.js dashboards
 cypress (e2e)
 event management/sharing
 google assistant
@@ -14,5 +16,6 @@ roles
 rule engine
 social
 stream search
+tensor flow
 twilio video virtual events
 video support
