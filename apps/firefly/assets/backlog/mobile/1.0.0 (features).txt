@@ -4,7 +4,7 @@ app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (library) - upgrade @ionic & @capacitor
 app (firestore) - upgrade functions to use nodejs 10
 app (load) - android splash screen
-+app (lists) - implement infinite scrolling for lists
+app (lists) - implement infinite scrolling for lists
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
 auth (sign-up) - error handling
@@ -13,10 +13,12 @@ auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (search) - auto focus search bar on show [hidden]
+home (bug) - won't load when logging in from new city
 *events (list) - sort/group dates correctly
 +events (list) - implement simple event search filter
-events (list) - click event navigates to event detail
-events (detail) - reverse geocode map
+*events (list) - click event navigates to event detail
+*events (list) - add delete event
+*events (detail) - reverse geocode map
 events (functions) - on delete event, delete storage
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 events (list) - add pink dots for unread alerts
@@ -26,8 +28,7 @@ interests (functions) - on delete interest, delete storage
 +interests (list) - implement simple interest search filter
 +interests (publish detail) - event click navigates to edit event
 *interests (publish detail) - add image for interest stream <app-item-interest>
-interests (list) - fix event icons missing
-interests (list) - add virtual event filter toggle
++interests (list) - add virtual event filter toggle
 interests (list) - replace event styling with <app-item-events>
 interests (list) - prevent image flash when paging/infinite scroll
 intro (slides) - add slides when app installed
@@ -45,9 +46,7 @@ apr-15 - 54
 apr-22 - 48
 apr-29 - 46
 may-06 - 42
-may-20 - 37
-may-27 - ?
-jun-03 - ?
+jun-03 - 37
 jun-10 - ?
 jun-17 - ?
 jun-24 - ?

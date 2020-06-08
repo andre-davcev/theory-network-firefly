@@ -30,14 +30,14 @@ import { ActionUserInterestsAdd, ActionUserInterestsRemove, StateUserInterests, 
 import { ActionUserStreamRemove } from '../../child/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { firestore } from 'firebase/app';
-import { ActionStorageUrlGet, ImageSize, ActionStorageUrlsGet } from '@theory/firebase';
+import { ImageSize, ActionStorageUrlsGet, ServiceStorage } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
-import { of, from } from 'rxjs';
+import { of, from, forkJoin } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
 import { StateLanguage } from '@theory/capacitor';
 import { StateUserStream } from '@firefly/core/state/child/user-stream';
 import { Injectable } from '@angular/core';
-import { Collection } from '@firefly/core/enums';
+import { Collection, ImageType } from '@firefly/core/enums';
 
 @State<StateInterestModel>(StateInterestOptions)
 @Injectable()
@@ -46,6 +46,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     constructor
     (
         private store: Store,
+        private storage: ServiceStorage,
         service: ServiceInterests
     )
     {
@@ -310,6 +311,26 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
               events.push(event);
             })
           }),
+          switchMap(() =>
+              forkJoin
+              (
+                  events.
+                      map((item: Event) =>
+                          of(item).
+                          pipe
+                          (
+                              switchMap(() =>
+                                  item.metadata.icon ?
+                                      of(item.metadata.icon) :
+                                      this.storage.downloadUrl(`${Collection.Events}/${item.id}/${ImageType.Image}.jpeg`, ImageSize.Small)
+                              ),
+                              map((icon: string) =>
+                                  item.metadata.icon = icon
+                              )
+                          )
+                )
+              )
+          ),
           tap(() =>
             patchState
             ({
