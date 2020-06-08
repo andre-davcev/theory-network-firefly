@@ -1,6 +1,6 @@
-import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
+import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { Event, DateEvents, Alert } from '@firefly/cloud';
+import { Event } from '@firefly/cloud';
 
 import { StateUserEventsModel } from './user-events.state.model';
 import { StateUserEventsOptions } from './user-events.state.options';
@@ -16,10 +16,9 @@ import { StateUser } from '../../document/user';
 import { StateQuery } from '@theory/ngxs';
 import { ServiceEvents } from '@firefly/core/services';
 import { Query } from '@angular/fire/firestore';
-import { tap, map, switchMap } from 'rxjs/operators';
-import { StateLanguage } from '@theory/capacitor';
+import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { ActionStorageUrlsGet, ImageSize, ServiceStorage } from '@theory/firebase';
+import { ServiceStorage } from '@theory/firebase';
 import { Collection, ImageType } from '@firefly/core/enums';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
