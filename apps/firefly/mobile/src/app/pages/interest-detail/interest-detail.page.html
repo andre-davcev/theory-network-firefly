@@ -17,7 +17,7 @@
 
 <ion-content>
 
-        <img class="image-cnt" [src]="iconUrl$ | async">
+        <img class="image-cnt" [src]="(interest$ | async).metadata.image">
 
         <div class="cpt-detail" fxLayout="column">
             <div class="cnt-name">
@@ -79,7 +79,7 @@
 
                       <ion-item (click)="select(event)">
                           <ion-avatar slot="start">
-                              <img [src]="event.metadata.image">
+                              <img [src]="event.metadata.icon">
                           </ion-avatar>
                           <ion-label>
                               {{ event.metadata.timeStartDate | date:'shortTime' }}
