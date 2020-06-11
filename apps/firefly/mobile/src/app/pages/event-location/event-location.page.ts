@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle, Plugins } from '@capacitor/core';
@@ -11,6 +11,7 @@ import { StateMap, ActionMapPlaceSetWithSearchResult, ActionMapSearchResultSetWi
 import { BaseComponent } from '@theory/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 import { switchMap, tap } from 'rxjs/operators';
+import { Map } from 'mapbox-gl';
 
 const { Keyboard } = Plugins;
 
@@ -23,6 +24,7 @@ const { Keyboard } = Plugins;
 
 export class PageEventLocation extends BaseComponent implements OnInit
 {
+
     @Select(StateEvent.locationDefined)      locationDefined$:     Observable<boolean>;
     @Select(StateMap.searchResult)           searchResult$:        Observable<Result>;
     @Select(StateMap.searchResultDefined)    searchResultDefined$: Observable<boolean>;
@@ -30,12 +32,23 @@ export class PageEventLocation extends BaseComponent implements OnInit
     public disableDone$: Observable<boolean>;
     public result: Result;
 
-    public placeTypes: Array<MapboxPlaceType> =
+    @Input() virtual: boolean = false;
+
+    public placeTypesPOI: Array<MapboxPlaceType> =
     [
         MapboxPlaceType.PointOfInterest,
         MapboxPlaceType.PointOfInterestLandmark,
         MapboxPlaceType.Address
     ];
+
+    public placeTypesCity: Array<MapboxPlaceType> =
+    [
+        MapboxPlaceType.Place,
+        MapboxPlaceType.Region,
+        MapboxPlaceType.District
+    ];
+
+    public placeTypes: Array<MapboxPlaceType> = null;
 
     constructor
     (
@@ -58,6 +71,15 @@ export class PageEventLocation extends BaseComponent implements OnInit
 
     public ionViewWillEnter(): void
     {
+        if(this.virtual)
+        {
+          this.placeTypes = this.placeTypesCity;
+        }
+        else
+        {
+          this.placeTypes = this.placeTypesPOI;
+        }
+
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
 
         // Keyboard.setScroll({ isDisabled: true });
