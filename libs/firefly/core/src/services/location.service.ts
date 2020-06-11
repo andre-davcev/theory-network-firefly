@@ -86,6 +86,7 @@ export class ServiceLocation
 
     public locationCityFromResult(result: Result): Observable<LocationCity>
     {
+        let text = '';
         const contextItem: ContextItem = result.
             context.
             find((item: ContextItem) =>
@@ -105,7 +106,16 @@ export class ServiceLocation
             types:        [MapboxPlaceType.Place]
         };
 
-        return this.mapbox.forwardGeocode(contextItem.text, options).pipe
+        if(!contextItem)
+        {
+          text = result.text;
+        }
+        else
+        {
+          text = contextItem.text;
+        }
+
+        return this.mapbox.forwardGeocode(text, options).pipe
         (
             map((response: ResponseGeocode) =>
                 response.features[0].center
