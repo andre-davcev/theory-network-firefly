@@ -117,7 +117,9 @@ export class PageAssetEvent
         }
         else if (page === Pages.EventLocation)
         {
-            from(this.modalController.create({ component: PageEventLocation })).
+            const virtual: boolean = this.store.selectSnapshot(StateEvent.data()).virtual;
+            from(this.modalController.create({ component: PageEventLocation,
+                                               componentProps: { virtual }})).
             subscribe((modalController: HTMLIonModalElement) => modalController.present());
         }
     }
