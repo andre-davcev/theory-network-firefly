@@ -7,11 +7,13 @@ import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata } from '@firefly/core';
+import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventLocationSet } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
+import { ActionMapSearchResultClear } from '@theory/mapbox';
+import { analytics } from 'firebase';
 
 @Component
 ({
@@ -165,6 +167,15 @@ export class PageAssetEvent
         const time: string = event.detail.value;
 
         this.store.dispatch(new ActionEventPatch({ [key]: time }));
+    }
+
+    public virtualChanged(event: any): void
+    {
+      this.store.dispatch(new ActionEventLocationSet(null)).pipe
+      (
+        switchMap(() => this.store.dispatch(new ActionMapSearchResultClear())),
+        switchMap(() => this.store.dispatch(new ActionEventPatch({virtual: event.detail.checked})))
+      ).subscribe();
     }
 
     public save(): void
