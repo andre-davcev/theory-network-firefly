@@ -43,9 +43,9 @@ export class PageEventLocation extends BaseComponent implements OnInit
 
     public placeTypesCity: Array<MapboxPlaceType> =
     [
-        MapboxPlaceType.Place,
+        MapboxPlaceType.Place/*,
         MapboxPlaceType.Region,
-        MapboxPlaceType.District
+        MapboxPlaceType.District*/
     ];
 
     public placeTypes: Array<MapboxPlaceType> = null;
