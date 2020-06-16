@@ -15,12 +15,14 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
         formGroup : null,
 
-        authData       : null,
-        error          : null,
-        authenticated  : false,
-        authenticating : false,
-        initialized    : false,
-        interestType   : InterestType.Unsubscribed,
-        eventType      : EventType.New
+        authData        : null,
+        error           : null,
+        authenticated   : false,
+        authenticating  : false,
+        initialized     : false,
+        interestType    : InterestType.Unsubscribed,
+        interestVirtual : false,
+        eventType       : EventType.New,
+        eventVirtual    : false
     }
 };

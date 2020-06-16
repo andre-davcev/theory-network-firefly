@@ -33,8 +33,10 @@ export enum ActionsUser
     NotificationsSet = '[User] Notifications Set',
     NotificationRead = '[User] Notification Read',
 
-    InterestTypeSet = '[User] Interest Type Set',
-    EventTypeSet    = '[User] Event Type Set',
+    InterestTypeSet    = '[User] Interest Type Set',
+    InterestVirtualSet = '[User] Interest Virtual Set',
+    EventTypeSet       = '[User] Event Type Set',
+    EventVirtualSet    = '[User] Event Virtual Set',
 
     IsPublisherSet = '[User] Is Publisher Set'
 }

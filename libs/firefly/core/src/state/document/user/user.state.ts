@@ -40,7 +40,9 @@ import {
     ActionUserSubscriptionsSet,
     ActionUserNotificationsSet,
     ActionUserPatchMetadata,
-    ActionUserResetPassword
+    ActionUserResetPassword,
+    ActionUserInterestVirtualSet,
+    ActionUserEventVirtualSet
 } from './user.actions';
 import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
 import { CoreUtil } from '@theory/core';
@@ -59,7 +61,6 @@ import { DocumentSnapshot } from '@angular/fire/firestore';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
 import { Injectable } from '@angular/core';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
-import { ActionStorageUrlGet } from '@theory/firebase';
 import { InterestType, EventType, Collection } from '@firefly/core/enums';
 
 @State<StateUserModel>(StateUserOptions)
@@ -140,34 +141,36 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static notifications(state: StateUserModel)          : Record<string, AlertPartial>        { const user: User = StateUser.dataState(state); return user == null ? null : !user.notifications ? {} : user.notifications; }
     @Selector() static tokens(state:StateUserModel)                  : Array<string>{ const user: User = StateUser.dataState(state); return user == null ? null : user.tokens; }
     @Selector() static interestType(state:StateUserModel)            : InterestType { return state.interestType; }
+    @Selector() static interestVirtual(state:StateUserModel)         : boolean      { return state.interestVirtual; }
     @Selector() static eventType(state:StateUserModel)               : EventType    { return state.eventType; }
+    @Selector() static eventVirtual(state: StateUserModel)           : boolean      { return state.eventVirtual; }
     @Selector() static isPublisher(state: StateUserModel)            : boolean      { return StateUser.dataState(state).isPublisher; }
     @Selector() static email(state: StateUserModel)                  : string       { return StateUser.dataState(state).email; }
     @Selector() static userId(state: StateUserModel)                 : string       { return StateUser.dataState(state).userId; }
 
     @Selector() static streamEmptyMessage(state: StateUserModel) : string
     {
-        const interestType: InterestType = StateUser.interestType(state);
+        const type: InterestType = StateUser.interestType(state);
 
-        return interestType === InterestType.Unsubscribed ?
-            'page.stream.empty.unsubscribed' :
-            interestType === InterestType.Subscribed ?
-            'page.stream.empty.subscribed' :
-            interestType === InterestType.Virtual ?
+        return StateUser.interestVirtual(state) ?
             'page.stream.empty.virtual' :
+            type === InterestType.Unsubscribed ?
+            'page.stream.empty.unsubscribed' :
+            type === InterestType.Subscribed ?
+            'page.stream.empty.subscribed' :
             'page.stream.empty.created';
     }
 
     @Selector() static eventsEmptyMessage(state: StateUserModel) : string
     {
-        const eventType: EventType = StateUser.eventType(state);
+        const type: EventType = StateUser.eventType(state);
 
-        return eventType === EventType.New ?
-            'page.events.empty.new' :
-            eventType === EventType.Upcoming ?
-            'page.events.empty.upcoming' :
-            eventType === EventType.Virtual ?
+        return StateUser.eventVirtual(state) ?
             'page.events.empty.virtual' :
+            type === EventType.New ?
+            'page.events.empty.new' :
+            type === EventType.Upcoming ?
+            'page.events.empty.upcoming' :
             'page.events.empty.created';
     }
 
@@ -608,10 +611,22 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         patchState({ interestType });
     }
 
+    @Action(ActionUserInterestVirtualSet)
+    interestVirtualSet({ patchState }: StateContext<StateUserModel>, { virtual }: ActionUserInterestVirtualSet)
+    {
+        patchState({ interestVirtual: virtual });
+    }
+
     @Action(ActionUserEventTypeSet)
     eventTypeSet({ patchState }: StateContext<StateUserModel>, { eventType }: ActionUserEventTypeSet)
     {
         patchState({ eventType });
+    }
+
+    @Action(ActionUserEventVirtualSet)
+    eventVirtualSet({ patchState }: StateContext<StateUserModel>, { virtual }: ActionUserEventVirtualSet)
+    {
+        patchState({ eventVirtual: virtual });
     }
 
     @Action(ActionUserIsPublisherSet)

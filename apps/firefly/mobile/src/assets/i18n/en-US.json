@@ -26,6 +26,7 @@
   "general.phone"          : "Phone Number",
   "general.search"         : "Search",
   "general.isVirtual"      : "Is Virtual",
+  "general.virtualOnly"    : "Virtual Only",
 
   "menu.title"                : "Menu",
   "menu.home"                 : "Home",
@@ -115,12 +116,10 @@
   "page.interest.filter.unsubscribed" : "Unsubscribed",
   "page.interest.filter.subscribed"   : "Subscribed",
   "page.interest.filter.created"      : "Created",
-  "page.interest.filter.virtual"      : "Virtual",
 
   "page.event.filter.new"      : "New",
   "page.event.filter.upcoming" : "Upcoming",
   "page.event.filter.created"  : "Created",
-  "page.event.filter.virtual"  : "Virtual",
 
   "page.stream.empty.unsubscribed" : "Our swarm of fireflies are busy building your Interest recommendations. Check back later!",
   "page.stream.empty.subscribed"   : "It looks like your haven't subscribed to any Interests yet!",

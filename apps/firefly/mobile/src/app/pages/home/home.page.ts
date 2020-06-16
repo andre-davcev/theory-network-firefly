@@ -55,7 +55,6 @@ export class PageHome extends BaseComponent
 
     public ionViewWillEnter(): void
     {
-
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
@@ -87,6 +86,8 @@ export class PageHome extends BaseComponent
 
     public async showPopover(event: any): Promise<void>
     {
+        const isStream: boolean = this.store.selectSnapshot(StateMobile.pageStream);
+
         const popover: HTMLIonPopoverElement = await this.popover.create
         ({
             component: ComponentHomeOptions,
@@ -94,7 +95,11 @@ export class PageHome extends BaseComponent
             {
                 interestType : this.store.selectSnapshot(StateUser.interestType),
                 eventType    : this.store.selectSnapshot(StateUser.eventType),
-                isStream     : this.store.selectSnapshot(StateMobile.pageStream)
+                isStream,
+                virtual      : isStream ?
+                                  this.store.selectSnapshot(StateUser.interestVirtual) :
+                                  this.store.selectSnapshot(StateUser.eventVirtual)
+
             },
             event,
             translucent: true

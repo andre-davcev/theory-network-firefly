@@ -51,13 +51,20 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
         );
     }
 
-    @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType])
+    @Selector
+    ([
+        StateUserStream.data(),
+        StateUser.subscriptionsStatus,
+        StateUser.interestType,
+        StateUser.interestVirtual
+    ])
     public static stream
     (
         state         : StateUserInterestsModel,
         stream        : Array<StreamInterest>,
         subscriptions : Record<string, SubscriptionPartial>,
-        interestType  : InterestType
+        interestType  : InterestType,
+        virtual       : boolean
     ) : Array<StreamInterest>
     {
         return interestType === InterestType.Created ?
@@ -72,22 +79,23 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
                 }) :
             stream.
                 filter((interest: StreamInterest) =>
-                    (interestType === InterestType.Virtual && interest.virtual && (subscriptions[interest.id] == null || interest.on != null)) ||
-                    (interestType === InterestType.Subscribed && subscriptions[interest.id] != null) ||
-                    (interestType === InterestType.Unsubscribed && (subscriptions[interest.id] == null || interest.on != null))
+                    (!virtual || (interest.virtual && (subscriptions[interest.id] == null || interest.on != null))) &&
+                    ((interestType === InterestType.Subscribed && subscriptions[interest.id] != null) ||
+                     (interestType === InterestType.Unsubscribed && (subscriptions[interest.id] == null || interest.on != null)))
                 );
     }
 
-    @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType])
+    @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType, StateUser.interestVirtual])
     public static streamFound
     (
         state         : StateUserInterestsModel,
         stream        : Array<StreamInterest>,
         subscriptions : Record<string, SubscriptionPartial>,
-        interestType  : InterestType
+        interestType  : InterestType,
+        virtual       : boolean
     ): boolean
     {
-        return StateUserInterests.stream(state, stream, subscriptions, interestType).length > 0;
+        return StateUserInterests.stream(state, stream, subscriptions, interestType, virtual).length > 0;
     }
 
     @Selector([StateUser.interestType, StateUser.isPublisher])
@@ -101,16 +109,17 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
         return isPublisher && interestType === InterestType.Created;
     }
 
-    @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType])
+    @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType, StateUser.interestVirtual])
     public static streamEmpty
     (
         state         : StateUserInterestsModel,
         stream        : Array<StreamInterest>,
         subscriptions : Record<string, SubscriptionPartial>,
-        interestType  : InterestType
+        interestType  : InterestType,
+        virtual       : boolean
     ): boolean
     {
-        return !StateUserInterests.streamFound(state, stream, subscriptions, interestType);
+        return !StateUserInterests.streamFound(state, stream, subscriptions, interestType, virtual);
     }
 
     @Action(ActionUserInterestsReset)
