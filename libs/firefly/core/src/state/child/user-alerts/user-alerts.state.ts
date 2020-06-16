@@ -86,18 +86,29 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Selector() static hasUnread(state: StateUserAlertsModel)     : boolean      { return StateUserAlerts.unreadCount(state) > 0; }
     @Selector() static hasUnreadList(state: StateUserAlertsModel) : boolean      { return StateUserAlerts.unreadList(state).length > 0; }
 
-    @Selector([StateLanguage.language, StateUser.eventType, StateUserEvents.data()])
+    @Selector
+    ([
+        StateLanguage.language,
+        StateUser.eventType,
+        StateUserEvents.data(),
+        StateUser.eventVirtual
+    ])
     public static eventsList
     (
         state      : StateUserAlertsModel,
         language   : string,
         eventType  : EventType,
-        userEvents : Array<Event>
+        userEvents : Array<Event>,
+        virtual    : boolean
     ) : Array<Alert> | Array<DateEvents>
     {
         if (eventType === EventType.New)
         {
-            return StateUserAlerts.unreadList(state);
+            return StateUserAlerts.
+              unreadList(state).
+              filter((alert: Alert) =>
+                  !virtual || alert.virtual
+              );
         }
         else
         {
@@ -105,7 +116,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
 
             const events : Array<Event> = eventType === EventType.Upcoming ?
                 StateUserAlerts.alerts(state).filter((alert: Alert) => new Date(alert.timeEnd) > new Date()) :
-                eventType === EventType.Virtual ?
+                virtual ?
                 StateUserAlerts.alerts(state).filter((alert: Alert) => new Date(alert.timeEnd) > new Date())
                   .filter((alert: Alert) => alert.virtual) :
                 userEvents;
@@ -155,28 +166,42 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         }
     }
 
-    @Selector([StateLanguage.language, StateUser.eventType, StateUserEvents.data()])
+    @Selector
+    ([
+        StateLanguage.language,
+        StateUser.eventType,
+        StateUserEvents.data(),
+        StateUser.eventVirtual
+    ])
     public static eventsListFound
     (
         state      : StateUserAlertsModel,
         language   : string,
         eventType  : EventType,
-        userEvents : Array<Event>
+        userEvents : Array<Event>,
+        virtual    : boolean
     ) : boolean
     {
-        return StateUserAlerts.eventsList(state, language, eventType, userEvents).length > 0;
+        return StateUserAlerts.eventsList(state, language, eventType, userEvents, virtual).length > 0;
     }
 
-    @Selector([StateLanguage.language, StateUser.eventType, StateUserEvents.data()])
+    @Selector
+    ([
+        StateLanguage.language,
+        StateUser.eventType,
+        StateUserEvents.data(),
+        StateUser.eventVirtual
+    ])
     public static eventsListEmpty
     (
         state      : StateUserAlertsModel,
         language   : string,
         eventType  : EventType,
-        userEvents : Array<Event>
+        userEvents : Array<Event>,
+        virtual    : boolean
     ) : boolean
     {
-        return StateUserAlerts.eventsList(state, language, eventType, userEvents).length === 0;
+        return StateUserAlerts.eventsList(state, language, eventType, userEvents, virtual).length === 0;
     }
 
     @Selector([StateUser.eventType, StateUser.isPublisher])

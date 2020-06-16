@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet, StateUser, StateUserInterests, ActionUserInterestsGetData, StateUserEvents, StateUserAlerts, ActionUserAlertsGetIcons, ActionUserEventsGetData } from '@firefly/core';
+import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet, StateUser, StateUserInterests, ActionUserInterestsGetData, StateUserEvents, StateUserAlerts, ActionUserAlertsGetIcons, ActionUserEventsGetData, ActionUserEventVirtualSet, ActionUserInterestVirtualSet } from '@firefly/core';
 import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 import { Observable, from } from 'rxjs';
@@ -25,6 +25,7 @@ export class ComponentHomeOptions
     @Input() interestType : InterestType;
     @Input() eventType    : EventType;
     @Input() isStream     : boolean;
+    @Input() virtual      : boolean;
 
     constructor
     (
@@ -107,33 +108,6 @@ export class ComponentHomeOptions
                     subscribe();
                 }
             }
-            else if (eventType === EventType.Virtual)
-            {
-                if (this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.alerts)[0].metadata.icon != null)
-                {
-                    this.store.dispatch(new ActionUserEventTypeSet(eventType)).
-                    pipe
-                    (
-                        delay(1),
-                        switchMap(() =>
-                            from(this.popover.dismiss())
-                        )
-                    ).
-                    subscribe();
-                }
-                else
-                {
-                    this.store.dispatch(new ActionMobileLoadingShow()).
-                    pipe
-                    (
-                        switchMap(() => from(this.popover.dismiss())),
-                        switchMap(() => this.store.dispatch(new ActionUserAlertsGetIcons())),
-                        switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
-                        switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
-                    ).
-                    subscribe();
-                }
-            }
             else if (eventType === EventType.Created)
             {
                 if (this.store.selectSnapshot(StateUserEvents.initialized()))
@@ -163,4 +137,15 @@ export class ComponentHomeOptions
             }
         }
     }
+
+    public virtualChanged(event: CustomEvent): void
+    {
+        const virtual: boolean = event.detail.checked;
+
+        this.store.dispatch(this.isStream ?
+            new ActionUserInterestVirtualSet(virtual) :
+            new ActionUserEventVirtualSet(virtual)
+        );
+    }
+
 }

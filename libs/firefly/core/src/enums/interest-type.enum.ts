@@ -2,6 +2,5 @@ export enum InterestType
 {
     Unsubscribed = 'unsubscribed',
     Subscribed   = 'subscribed',
-    Created      = 'created',
-    Virtual      = 'virtual',
+    Created      = 'created'
 }
