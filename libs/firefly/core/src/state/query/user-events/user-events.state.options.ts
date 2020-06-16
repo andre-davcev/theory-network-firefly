@@ -2,7 +2,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { PageSize } from '@theory/ngxs';
 
 import { StateUserEventsModel } from './user-events.state.model';
-import { ImageSize, OrderBy } from '@theory/firebase';
+import { OrderBy } from '@theory/firebase';
 
 export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 {

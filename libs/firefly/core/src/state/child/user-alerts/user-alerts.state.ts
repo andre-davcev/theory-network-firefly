@@ -114,12 +114,13 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         {
             const eventsList : Array<DateEvents> = [];
 
-            const events : Array<Event> = eventType === EventType.Upcoming ?
-                StateUserAlerts.alerts(state).filter((alert: Alert) => new Date(alert.timeEnd) > new Date()) :
-                virtual ?
-                StateUserAlerts.alerts(state).filter((alert: Alert) => new Date(alert.timeEnd) > new Date())
-                  .filter((alert: Alert) => alert.virtual) :
-                userEvents;
+            const timestamp: number = new Date().getTime();
+
+            const events : Array<Event> = (eventType === EventType.Upcoming ? StateUserAlerts.alerts(state) : userEvents).
+                filter((event: Event) =>
+                    (!virtual || event.virtual) &&
+                    new Date(event.timeEnd).getTime() > timestamp
+                );
 
             const options      : any = { weekday: 'long',  year: 'numeric', month: 'long',  day: 'numeric'};
             const optionsShort : any = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
@@ -128,18 +129,24 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             let timeStart          : Date;
             let timeStartPrevious  : Date;
             let timeStartFormatted : string;
+            let datesAreEqual      : boolean = true;
 
             events.
                 forEach((alert: Event) =>
                 {
-                    timeStart = new Date(alert.timeStart);
-
-                    if (timeStartPrevious != null)
+                    if (!datesAreEqual)
                     {
                         eventsList.push(current);
                     }
 
-                    if (timeStartPrevious == null || timeStart.getTime() != timeStartPrevious.getTime())
+                    timeStart = new Date(alert.timeStart);
+
+                    datesAreEqual = timeStartPrevious != null &&
+                                    timeStart.getFullYear() === timeStartPrevious.getFullYear() &&
+                                    timeStart.getMonth()    === timeStartPrevious.getMonth() &&
+                                    timeStart.getDate()     === timeStartPrevious.getDate();
+
+                    if (!datesAreEqual)
                     {
                         current =
                         {
@@ -160,9 +167,20 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             if (eventsList.length > 0 || events.length === 1)
             {
                 eventsList.push(current);
-            }
+            };
 
-            return eventsList.reverse();
+            return eventsList.sort((a: DateEvents, b: DateEvents) =>
+            {
+                const timeA: number = new Date(a.date).getTime();
+                const timeB: number = new Date(b.date).getTime();
+
+                if (timeA < timeB)
+                    return -1;
+                if (timeA > timeB)
+                    return 1;
+
+                return 0;
+            });
         }
     }
 
