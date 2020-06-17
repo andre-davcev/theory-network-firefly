@@ -24,6 +24,7 @@ admin (store) - android app store prep
 admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - setup error handling strategy
+app (firestore) - upgrade functions to use nodejs 10
 app (logging) - create logging strategy
 app (security) - setup router guards
 app (store) - release v1 on android
