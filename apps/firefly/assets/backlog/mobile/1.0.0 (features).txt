@@ -14,8 +14,9 @@ auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (search) - auto focus search bar on show [hidden]
 home (bug) - won't load when logging in from new city
 events (list) - click event navigates to event detail
-*events (list) - add delete event
-*events (detail) - reverse geocode map
+events (list) - add delete "Created" event
+events (list) - fix "Upcoming" events grouping
+events (detail) - reverse geocode map
 events (functions) - on delete event, delete storage
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 firestore (functions) - implement callable function to populate stream for new city
