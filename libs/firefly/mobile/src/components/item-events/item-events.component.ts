@@ -15,12 +15,20 @@ export class ComponentItemEvents
     public dateEvents: DateEvents;
 
     @Output()
-    public selected: EventEmitter<Event> = new EventEmitter()
+    public selected: EventEmitter<Event> = new EventEmitter();
+
+    @Output()
+    public deleted: EventEmitter<Event> = new EventEmitter();
 
     constructor() { }
 
     public select(event: Event): void
     {
         this.selected.next(event);
+    }
+
+    public deleteClicked(event: Event): void
+    {
+        this.deleted.next(event);
     }
 }

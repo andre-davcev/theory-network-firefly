@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ComponentItemEvents } from './item-events.component';
 import { IonicModule } from '@ionic/angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule
 ({
@@ -11,7 +12,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     [
         CommonModule,
         IonicModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        TranslateModule
     ],
 
     declarations : [ComponentItemEvents],

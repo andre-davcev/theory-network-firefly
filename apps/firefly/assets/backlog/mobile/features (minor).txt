@@ -1,6 +1,7 @@
 animate list items
 animate on scroll
 alert parallax effect
+alert pink dots for unread alerts
 button to page transition
 card flip
 custom notification background colors

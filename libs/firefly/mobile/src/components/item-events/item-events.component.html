@@ -3,19 +3,32 @@
         <ion-label>{{ dateEvents.date }}</ion-label>
     </ion-item-divider>
 
-    <ion-item *ngFor="let event of dateEvents.events"
-              (click)="select(event)">
-        <ion-avatar slot="start">
-            <img [src]="event.metadata.icon">
-        </ion-avatar>
+    <ion-item-sliding *ngFor="let event of dateEvents.events"
+                      (click)="select(event)">
+        <ion-item>
+            <ion-avatar slot="start">
+                <img [src]="event.metadata.icon">
+            </ion-avatar>
 
-        <ion-label class="cpt-time">
-            {{ event.metadata.timeStartDate | date:'shortTime' }}
-        </ion-label>
+            <ion-label class="cpt-time">
+                {{ event.metadata.timeStartDate | date:'shortTime' }}
+            </ion-label>
 
-        <ion-label>
-            <h2>{{ event.name }}</h2>
-            <p>{{ event.tagline }}</p>
-        </ion-label>
-    </ion-item>
+            <ion-label>
+                <h2>{{ event.name }}</h2>
+                <p>{{ event.tagline }}</p>
+            </ion-label>
+        </ion-item>
+
+        <ion-item-options side="end">
+            <ion-item-option color="secondary"
+                             (click)="deleteClicked(event)">
+                {{ 'general.delete' | translate }}
+            </ion-item-option>
+        </ion-item-options>
+    </ion-item-sliding>
+
+
 </ion-item-group>
+
+

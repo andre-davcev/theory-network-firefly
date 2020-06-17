@@ -2,7 +2,6 @@ alerts (detail) - cleanup styling/alignment
 app (errors) - required fields styling (icon/popover)
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (library) - upgrade @ionic & @capacitor
-app (firestore) - upgrade functions to use nodejs 10
 app (load) - android splash screen
 app (lists) - implement infinite scrolling for lists
 auth (login) - switch user data cleanup and screen testing
@@ -14,17 +13,16 @@ auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (search) - auto focus search bar on show [hidden]
 home (bug) - won't load when logging in from new city
-+events (list) - implement simple event search filter
 events (list) - click event navigates to event detail
-events (list) - add delete event
-events (detail) - reverse geocode map
+*events (list) - add delete event
+*events (detail) - reverse geocode map
 events (functions) - on delete event, delete storage
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
-events (list) - add pink dots for unread alerts
 firestore (functions) - implement callable function to populate stream for new city
 interests (functions) - on delete interest, delete storage
-+interests (publish detail) - event click navigates to edit event
-interests (publish detail) - add image for interest stream <app-item-interest>
++interests (detail) - event click navigates to edit event
+interests (detail) - add image for interest stream <app-item-interest>
+interests (detail) - add delete button for created interests
 interests (list) - replace event styling with <app-item-events>
 interests (list) - prevent image flash when paging/infinite scroll
 intro (slides) - add slides when app installed
