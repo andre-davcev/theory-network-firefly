@@ -29,7 +29,8 @@
     <ion-list>
         <app-item-events *ngFor="let events of events$ | async"
                          [dateEvents]="events"
-                         (selected)="selectEvent($event)">
+                         (selected)="selectEvent($event)"
+                         (deleted)="alertDelete($event)">
         </app-item-events>
     </ion-list>
 

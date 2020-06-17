@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
 import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType, ActionInterestReset, ActionInterestGet } from '@firefly/core';
-import { Alert, DateEvents, Interest } from '@firefly/cloud';
+import { Alert, Event, DateEvents, Interest } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile, StateSearch, ActionSearchReset, ActionMobileLoadingShow } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
@@ -95,7 +95,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         this.store.dispatch(new ActionUserAlertsGo(alert));
     }
 
-    public alertDelete(alert: Alert): void
+    public alertDelete(alert: Event): void
     {
         this.store.dispatch(new ActionAlertSetId(alert.id)).
         pipe
@@ -105,6 +105,20 @@ export class PageAlert extends BaseComponent implements AfterViewInit
             )
         ).
         subscribe();
+    }
+
+    public eventDelete(event: Event): void
+    {
+        const eventType: EventType = this.store.selectSnapshot(StateUser.eventType);
+
+        if (eventType === EventType.Upcoming)
+        {
+            this.alertDelete(event);
+        }
+        else
+        {
+
+        }
     }
 
     public navigate(page: Pages.AlertDetail, object: Alert): void
