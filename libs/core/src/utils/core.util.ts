@@ -12,7 +12,7 @@ export class CoreUtil
         key.
         split('.').
         forEach((k: string) =>
-            value == null ? undefined : value[k]
+            value = value == null ? undefined : value[k]
         );
 
         return value;

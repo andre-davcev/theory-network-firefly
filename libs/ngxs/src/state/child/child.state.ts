@@ -265,7 +265,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         const state: M = getState();
 
-        const { dataLookup, childLookup, orderBy, orderByDirection, sortFields } = state;
+        const { childLookup, orderBy, orderByDirection, sortFields } = state;
 
         const lookup: Record<string, Partial<T>> = childLookup;
 
@@ -281,8 +281,8 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             keys(lookup).
             sort((keyA: string, keyB: string) =>
             {
-                a = CoreUtil.deepValue(orderBy, dataLookup[keyA]);
-                b = CoreUtil.deepValue(orderBy, dataLookup[keyB]);
+                a = CoreUtil.deepValue(orderBy, lookup[keyA]);
+                b = CoreUtil.deepValue(orderBy, lookup[keyB]);
 
                 return sort(a, b, ascending);
             });
