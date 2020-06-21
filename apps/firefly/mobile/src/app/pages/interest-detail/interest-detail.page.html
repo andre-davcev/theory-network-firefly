@@ -43,7 +43,7 @@
 
                 <ion-item>
                   <ion-avatar (click)="select(event)" slot="start">
-                      <img [src]="event.metadata.image">
+                      <img [src]="event.metadata.icon">
                   </ion-avatar>
                   <ion-label (click)="select(event)">
                       {{ event.metadata.timeStartDate | date:'shortTime' }}
