@@ -16,6 +16,7 @@ export enum ActionsEvent
     ImagePathSet = '[Event] Image Path Set',
     ImageCreate  = '[Event] Image Create',
     ImagesUpdate = '[Event] Images Update',
+    ImageSet     = '[Event] Image Set',
 
     SetIdAnonymous = '[Event] SetIdAnonymous',
 
