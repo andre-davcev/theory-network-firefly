@@ -24,14 +24,15 @@ import {
   ActionEventDeny,
   ActionEventSetIdAnonymous,
   ActionEventPatchMetadata,
-  ActionEventImagesUpdate
+  ActionEventImagesUpdate,
+  ActionEventImageSet
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
-import { ServiceStorage } from '@theory/firebase';
+import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { from, of } from 'rxjs';
 import { LocationCity } from '@firefly/core/interfaces';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
@@ -139,25 +140,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     set(context: StateContext<StateEventModel>, action: ActionEventSet)
     {
         return super.set(context, action);
-/*
-        const { getState, dispatch } = context;
-
-        return super.set(context, action).
-        pipe
-        (
-            map(() =>
-                StateEvent.dataState(getState())
-            ),
-            switchMap((document: Event) =>
-                document.metadata.image == null ?
-                    this.storage.downloadUrl(`${Collection.Events}/${document.id}/${ImageType.Image}.jpeg`, ImageSize.Medium) :
-                    of(document.metadata.image)
-            ),
-            switchMap((url: string) =>
-                dispatch(new ActionEventPatch({ metadata: { ...StateEvent.metadataState(getState()), image: url }}))
-            )
-        );
-*/
     }
 
     @Action(ActionEventPatch)
@@ -265,6 +247,22 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 super.updateMedia(context, ImageType.Image)
             )
         );
+    }
+
+    @Action(ActionEventImageSet)
+    imageSet(context : StateContext<StateEventModel>)
+    {
+      const { getState, dispatch } = context;
+      const event = StateEvent.dataState(getState());
+
+      return dispatch(new ActionEventPatchMetadata({})).
+      pipe
+      (
+          switchMap(() => this.storage.downloadUrl(`${Collection.Events}/${event.id}/${ImageType.Image}.jpeg`, ImageSize.Medium)),
+          switchMap((image: string) =>
+              dispatch(new ActionEventPatchMetadata( { image} ))
+          )
+      );
     }
 
     @Action(ActionEventLocationSet)
