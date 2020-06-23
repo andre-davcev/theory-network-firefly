@@ -6,14 +6,14 @@ import { firestore } from 'firebase/app';
 import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { ServiceFirestore, FirebaseDocument, ActionStorageUrlGet, ActionStorageUpload } from '@theory/firebase';
+import { ServiceFirestore, FirebaseDocument, ActionStorageUpload } from '@theory/firebase';
 
 import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';
 import { StateDocumentModel } from './document.model';
 import { ActionsDocument } from './document.actions';
 import { DocumentSnapshot } from '@angular/fire/firestore';
-import { ImageType, Collection } from '@firefly/core/enums';
+import { ImageType } from '@firefly/core/enums';
 
 export class StateDocument<T extends FirebaseDocument, M extends StateDocumentModel>
 {
@@ -171,20 +171,21 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         );
     }
 
-    public patchMetadata(context: StateContext<M>, action: any): void
+    public patchMetadata(context: StateContext<M>, action: any): Observable<void>
     {
-        const { getState } = context;
+        const { getState, dispatch } = context;
 
-        const formGroup    : FormGroup           = StateDocument.formGroupState(getState());
-        const metadata     : Record<string, any> = action.metadata;
-        const metadataForm : AbstractControl     = formGroup.get('metadata');
+        const state : M      = getState();
+        const path  : string = this.formPath;
+        const value : T      = StateDocument.dataState(state);
 
-        Object.keys(metadata).
-        forEach((key: string) =>
+        value.metadata =
         {
-            metadataForm.get(key).setValue(metadata[key]);
-            metadataForm.get(key).markAsDirty();
-        });
+            ...StateDocument.metadataState(state),
+            ...action.metadata
+        };
+
+        return dispatch(new UpdateFormValue({ value, path }));
     }
 
     public create(context: StateContext<M>, action?: any): Observable<any>
