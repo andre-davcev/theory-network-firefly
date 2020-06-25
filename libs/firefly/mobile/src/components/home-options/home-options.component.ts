@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet, StateUser, StateUserInterests, ActionUserInterestsGetData, StateUserEvents, StateUserAlerts, ActionUserAlertsGetIcons, ActionUserEventsGetData, ActionUserEventVirtualSet, ActionUserInterestVirtualSet } from '@firefly/core';
+import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet, StateUser, StateUserInterests, ActionUserInterestsGetData, StateUserEvents, StateUserAlerts, ActionUserAlertsGetImages, ActionUserEventsGetData, ActionUserEventVirtualSet, ActionUserInterestVirtualSet } from '@firefly/core';
 import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 import { Observable, from } from 'rxjs';
@@ -101,7 +101,7 @@ export class ComponentHomeOptions
                     pipe
                     (
                         switchMap(() => from(this.popover.dismiss())),
-                        switchMap(() => this.store.dispatch(new ActionUserAlertsGetIcons())),
+                        switchMap(() => this.store.dispatch(new ActionUserAlertsGetImages())),
                         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
                         switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
                     ).
