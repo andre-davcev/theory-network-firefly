@@ -83,7 +83,7 @@ export class ComponentHomeOptions
             }
             else if (eventType === EventType.Upcoming)
             {
-                if (this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.alerts)[0].metadata.icon != null)
+                if (this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.alerts)[0].metadata.image != null)
                 {
                     this.store.dispatch(new ActionUserEventTypeSet(eventType)).
                     pipe
