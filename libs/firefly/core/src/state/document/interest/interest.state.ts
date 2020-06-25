@@ -251,12 +251,12 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                           pipe
                           (
                               switchMap(() =>
-                                  item.metadata.icon ?
-                                      of(item.metadata.icon) :
+                                  item.metadata.image ?
+                                      of(item.metadata.image) :
                                       this.storage.downloadUrl(`${Collection.Events}/${item.id}/${ImageType.Image}.jpeg`, ImageSize.Small)
                               ),
-                              map((icon: string) =>
-                                  item.metadata.icon = icon
+                              map((image: string) =>
+                                  item.metadata.image = image
                               )
                           )
                 )
@@ -334,12 +334,12 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                           pipe
                           (
                               switchMap(() =>
-                                  item.metadata.icon ?
-                                      of(item.metadata.icon) :
+                                  item.metadata.image ?
+                                      of(item.metadata.image) :
                                       this.storage.downloadUrl(`${Collection.Events}/${item.id}/${ImageType.Image}.jpeg`, ImageSize.Small)
                               ),
-                              map((icon: string) =>
-                                  item.metadata.icon = icon
+                              map((image: string) =>
+                                  item.metadata.image = image
                               )
                           )
                 )
