@@ -96,7 +96,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
         pipe
         (
             switchMap(() =>
-                super.getMedia(context, Collection.Events, ImageType.Icon)
+                super.getMedia(context, Collection.Events, ImageType.Image)
             )
         );
     }
