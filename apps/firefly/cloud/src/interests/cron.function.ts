@@ -114,7 +114,7 @@ onRun(async (context: EventContext) =>
             {
                 subscriberCount = interestSubscribers[interestId];
                 cityEvents      = interestCityEvents[interestId];
-                interestScore    = 0;
+                interestScore   = 0;
 
                 Object.keys(cityEvents).forEach((cityIdEvent: string) =>
                 {

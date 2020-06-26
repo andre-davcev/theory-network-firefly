@@ -79,86 +79,70 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const { dispatch, patchState } = context;
         const { ActionGet } = this.actions;
 
-        return Object.keys(childLookup).length === 0 ? of(null) :
-        of(patchState({ childLookup } as M)).
-        pipe
-        (
-            tap(() =>
-                patchState({ keysSorted: this.sort(context) } as M)
-            ),
-            switchMap(() =>
-                fetch ? dispatch(new ActionGet()) : of(patchState({ loading: false } as M))
-            ),
-            map(() =>
-                patchState({ initialized: true } as M)
-            )
-        );
+        return Object.keys(childLookup).length === 0 ?
+            of(null) :
+            of(patchState({ childLookup } as M)).
+            pipe
+            (
+                tap(() =>
+                    patchState({ keysSorted: this.sort(context) } as M)
+                ),
+                switchMap(() =>
+                    fetch ?
+                        dispatch(new ActionGet()) :
+                        of(patchState({ loading: false } as M))
+                ),
+                map(() =>
+                    patchState({ initialized: true } as M)
+                )
+            );
     }
 
     public get(context: StateContext<M>): Observable<any>
     {
-        const { getState, patchState, dispatch } = context;
+        const { getState, patchState } = context;
 
-        const state: M = getState();
-
-        const canPage: boolean = StateChild.canPageState(state);
-        const count:   number  = StateChild.countState(state);
+        const state: M      = getState();
+        const count: number = StateChild.countState(state);
 
         const { data, snapshots, snapshotLookup, dataLookup, childLookup } = state;
 
-        const finishedPaging = StateChild.finishedPagingState(state) || count === data.length;
+        const finishedPaging : boolean = StateChild.finishedPagingState(state) || count === data.length;
+        const keys           : Array<string> = this.getKeys(context);
 
         patchState({ finishedPaging } as M);
 
-        return finishedPaging ? of(null) : of(null).
+        return finishedPaging ? of(null) :
+        of(null).
         pipe
         (
-            map(() =>
-                this.getKeys(context)
-            ),
-            map((slice: Array<string>) =>
-                slice.map((id: string) => this.service.documentGet(this.collection, id))
+            map(() =>
+                keys.map((id: string) =>
+                    this.service.documentGet(this.collection, id)
+                )
             ),
             switchMap((slice$: Array<Observable<firestore.DocumentSnapshot>>) =>
                 forkJoin(slice$)
             ),
             map((page: Array<firestore.QueryDocumentSnapshot>) =>
-                page.map((document: firestore.QueryDocumentSnapshot) =>
+                page.forEach((document: firestore.QueryDocumentSnapshot) =>
                 {
                     const id: string = document.id;
                     const object: T =
                     {
                         ...childLookup[id],
-                        ...(document.data() as T),
+                        ...(document.data() as T)
                     };
 
                     object.metadata = object.metadata == null ? {} : object.metadata;
 
-                    object.id = id;
-
-                    snapshotLookup[document.id] = document;
-                    dataLookup[document.id]     = object;
-
-                    return id;
+                    snapshotLookup[id] = document;
+                    dataLookup[id]     = object;
                 })
             ),
 
-            switchMap((keys: Array<string>) =>
-                canPage ?
-                    of(keys) :
-                    of(this.sort(context)).
-                    pipe
-                    (
-                        tap((keysSorted: Array<string>) =>
-                            patchState({ keysSorted } as M)
-                        ),
-                        map((keysSorted: Array<string>) =>
-                            keysSorted
-                        )
-                    )
-            ),
-            tap((keysSorted: Array<string>) =>
-                keysSorted.forEach((key: string) =>
+            tap(() =>
+                keys.forEach((key: string) =>
                 {
                     data.push(dataLookup[key]);
                     snapshots.push(snapshotLookup[key]);
@@ -272,20 +256,28 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const type:      TypeOf  = sortFields[orderBy];
         const ascending: boolean = orderByDirection === OrderBy.Ascending;
 
-        const sort: any = type === TypeOf.String ? this.sortString : type === TypeOf.Number ? this.sortNumber : this.sortBoolean;
+        const sort: any = type === TypeOf.String ?
+            this.sortString :
+            type === TypeOf.Number ?
+            this.sortNumber :
+            type === TypeOf.Date ?
+            this.sortDate :
+            this.sortBoolean;
 
         let a: any;
         let b: any;
 
-        return Object.
-            keys(lookup).
-            sort((keyA: string, keyB: string) =>
-            {
-                a = CoreUtil.deepValue(orderBy, lookup[keyA]);
-                b = CoreUtil.deepValue(orderBy, lookup[keyB]);
+        let keys: Array<string> = Object.
+        keys(lookup).
+        sort((keyA: string, keyB: string) =>
+        {
+            a = CoreUtil.deepValue(orderBy, childLookup[keyA]);
+            b = CoreUtil.deepValue(orderBy, childLookup[keyB]);
 
-                return sort(a, b, ascending);
-            });
+            return sort(a, b, ascending);
+        });
+
+        return keys;
     }
 
     private getKeys(context: StateContext<M>): Array<string>
@@ -315,7 +307,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         b = b == null ? '' : b.toLowerCase().trim();
 
         if (a > b)      { return ascending ?  1 : -1; }
-        else if (b < a) { return ascending ? -1 : 1; }
+        else if (a < b) { return ascending ? -1 : 1; }
 
         return 0;
     }
@@ -323,7 +315,18 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     private sortNumber(a: number, b: number, ascending: boolean): number
     {
         if (a > b)      { return ascending ?  1 : -1; }
-        else if (b < a) { return ascending ? -1 : 1; }
+        else if (a < b) { return ascending ? -1 : 1; }
+
+        return 0;
+    }
+
+    private sortDate(aString: string, bString: string, ascending: boolean): number
+    {
+        const a: number = Date.parse(aString);
+        const b: number = Date.parse(bString);
+
+        if (a > b)      { return ascending ?  1 : -1; }
+        else if (a < b) { return ascending ? -1 : 1; }
 
         return 0;
     }
