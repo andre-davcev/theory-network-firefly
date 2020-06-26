@@ -121,11 +121,17 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         }
     }
 
-    public navigate(page: Pages.AlertDetail, object: Alert): void
+    public navigate(object: Alert): void
     {
+        const page: Pages = object.read == null ?
+            Pages.EventDetail :
+            Pages.AlertDetail;
+
         this.store.dispatch(new ActionEventGet(object.id)).pipe
         (
-          switchMap(() => this.store.dispatch(new Navigate([page, object.id])))
+            switchMap(() =>
+                this.store.dispatch(new Navigate([page, object.id]))
+            )
         ).
         subscribe();
     }

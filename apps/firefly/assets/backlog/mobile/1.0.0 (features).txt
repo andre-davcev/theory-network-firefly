@@ -13,8 +13,9 @@ auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (search) - auto focus search bar on show [hidden]
 home (bug) - won't load when logging in from new city
+*events (list) - fix alertDetailClicked click area
 *events (list) - add delete "Created" event
-*events (list) - click alert navigates to alert detail
+*events (list) - click "Created" event, navigate to event create/edit
 *events (detail) - cleanup alert detail styling/alignment
 *events (detail) - reverse geocode map
 *events (detail) - prevent timeStart changes when timeNotify set

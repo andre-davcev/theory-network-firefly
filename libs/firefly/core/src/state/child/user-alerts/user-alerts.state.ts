@@ -105,8 +105,6 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     {
         if (eventType === EventType.New)
         {
-            console.log(StateUserAlerts.unreadList(state));
-
             return StateUserAlerts.
               unreadList(state).
               filter((alert: Alert) =>

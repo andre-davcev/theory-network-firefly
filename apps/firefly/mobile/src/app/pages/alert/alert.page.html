@@ -19,7 +19,7 @@
                       [buttonText]="'general.go' | translate"
                       (alertDeleteClicked)="alertDelete(alert)"
                       (alertGoClicked)="alertGo(alert)"
-                      (alertDetailClicked)="navigate(Pages.AlertDetail, alert)">
+                      (alertDetailClicked)="navigate( alert)">
             </app-slide>
         </ion-slide>
     </ion-slides>
@@ -29,7 +29,7 @@
     <ion-list>
         <app-item-events *ngFor="let events of events$ | async"
                          [dateEvents]="events"
-                         (selected)="selectEvent($event)"
+                         (selected)="navigate($event)"
                          (deleted)="alertDelete($event)">
         </app-item-events>
     </ion-list>
