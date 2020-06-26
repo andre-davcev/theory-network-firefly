@@ -17,7 +17,8 @@ import {
     ActionUserAlertsSetData,
     ActionUserAlertsGetIcons,
     ActionUserAlertsAddToCalendar,
-    ActionUserAlertsLaunchNavigation
+    ActionUserAlertsLaunchNavigation,
+    ActionUserAlertsGetImages
 } from './user-alerts.actions';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
@@ -368,6 +369,13 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     {
         return super.getMedia(context, Collection.Events, ImageType.Icon);
     }
+
+    @Action(ActionUserAlertsGetImages)
+    getImages(context: StateContext<StateUserAlertsModel>)
+    {
+        return super.getMedia(context, Collection.Events, ImageType.Image);
+    }
+
 
     @Action(ActionUserAlertsAddToCalendar)
     addToCalendar(context: StateContext<StateUserAlertsModel>, { alert } : ActionUserAlertsAddToCalendar)
