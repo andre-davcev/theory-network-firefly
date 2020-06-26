@@ -5,5 +5,6 @@ export enum TypeOf
     Number	  = 'number',
     String	  = 'string',
     Object    = 'object',
-    Function  = 'function'
+    Function  = 'function',
+    Date      = 'date'
 }

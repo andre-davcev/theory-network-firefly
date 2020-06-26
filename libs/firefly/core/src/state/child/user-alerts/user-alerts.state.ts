@@ -104,6 +104,8 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     {
         if (eventType === EventType.New)
         {
+            console.log(StateUserAlerts.unreadList(state));
+
             return StateUserAlerts.
               unreadList(state).
               filter((alert: Alert) =>
@@ -114,12 +116,12 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         {
             const eventsList : Array<DateEvents> = [];
 
-            const timestamp: number = new Date().getTime();
+            const timestamp: number = new Date().getMilliseconds();
 
             const events : Array<Event> = (eventType === EventType.Upcoming ? StateUserAlerts.alerts(state) : userEvents).
                 filter((event: Event) =>
                     (!virtual || event.virtual) &&
-                    new Date(event.timeEnd).getTime() > timestamp
+                    Date.parse(event.timeEnd) > timestamp
                 );
 
             const options      : any = { weekday: 'long',  year: 'numeric', month: 'long',  day: 'numeric'};
@@ -134,6 +136,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             events.
                 forEach((alert: Event) =>
                 {
+                    console.log(alert);
                     if (!datesAreEqual)
                     {
                         eventsList.push(current);
@@ -169,18 +172,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                 eventsList.push(current);
             };
 
-            return eventsList.sort((a: DateEvents, b: DateEvents) =>
-            {
-                const timeA: number = new Date(a.date).getTime();
-                const timeB: number = new Date(b.date).getTime();
-
-                if (timeA < timeB)
-                    return -1;
-                if (timeA > timeB)
-                    return 1;
-
-                return 0;
-            });
+            return eventsList;
         }
     }
 
