@@ -10,7 +10,8 @@ import {
     ActionUserEventsGet,
     ActionUserEventsSync,
     ActionUserEventsGetData,
-    ActionUserEventsReset
+    ActionUserEventsReset,
+    ActionUserEventsDelete
 } from './user-events.actions';
 import { StateUser } from '../../document/user';
 import { StateQuery } from '@theory/ngxs';
@@ -20,6 +21,11 @@ import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
 import { Collection, ImageType } from '@firefly/core/enums';
+import { ActionEventSetId, ActionEventDelete } from '../../document/event/event.actions';
+import { firestore } from 'firebase/app';
+import { Observable, of } from 'rxjs';
+import { CoreEnum } from '@theory/core';
+import { deepEqual } from 'assert';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 @Injectable()
@@ -46,34 +52,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
             storage
         );
     }
-/*
-    // ToDo: HERE
-    @Selector([StateUserEvents.data(), StateUser.subscriptionsStatus, StateUser.interestType])
-    public static events
-    (
-        state         : StateUserEventsModel,
-        stream        : Array<StreamInterest>,
-        subscriptions : Record<string, SubscriptionPartial>,
-        interestType  : EventType
-    ) : Array<Alert> | Array<DateEvents>
-    {
-        return interestType === InterestType.Created ?
-            StateUserInterests.
-                dataState(state).
-                map((interest: Interest) => {
-                    return {
-                        ...interest,
-                        score : 0,
-                        on    : subscriptions[interest.id] == null ? false : true
-                    };
-                }) :
-            stream.
-                filter((interest: StreamInterest) =>
-                    (interestType === InterestType.Subscribed && subscriptions[interest.id] != null) ||
-                    (interestType === InterestType.Unsubscribed && (subscriptions[interest.id] == null || interest.on != null))
-                );
-    }
-*/
+
     @Action(ActionUserEventsReset)
     reset(context: StateContext<StateUserEventsModel>)
     {
@@ -117,5 +96,23 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     sync(context: StateContext<StateUserEventsModel>, action: ActionUserEventsSync)
     {
         return super.sync(context, action);
+    }
+
+    @Action(ActionUserEventsDelete)
+    delete({ dispatch, getState }: StateContext<StateUserEventsModel>, { id }: ActionUserEventsDelete)
+    {
+        const snapshot: firestore.DocumentSnapshot = StateUserEvents.snapshotLookupState(getState())[id];
+
+        const delete$: Observable<any> = id === CoreEnum.IdNew ?
+            of(null) :
+            this.service.documentDelete(snapshot).pipe();
+
+        return delete$.
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new ActionUserEventsRemove(id))
+            )
+        )
     }
 }

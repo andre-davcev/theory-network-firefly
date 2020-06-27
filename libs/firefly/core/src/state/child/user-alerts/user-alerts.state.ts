@@ -138,11 +138,6 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             events.
                 forEach((alert: Event) =>
                 {
-                    if (!datesAreEqual)
-                    {
-                        eventsList.push(current);
-                    }
-
                     timeStart = new Date(alert.timeStart);
 
                     datesAreEqual = timeStartPrevious != null &&
@@ -152,6 +147,11 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
 
                     if (!datesAreEqual)
                     {
+                        if (timeStartPrevious != null)
+                        {
+                            eventsList.push(current);
+                        }
+
                         current =
                         {
                             date   : timeStart.toLocaleDateString(language, options),
