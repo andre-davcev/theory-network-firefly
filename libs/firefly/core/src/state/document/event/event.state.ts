@@ -196,14 +196,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         const isNew: boolean = id === CoreEnum.IdNew;
         const isInterestOwner: boolean = this.store.selectSnapshot(StateInterest.canEdit);
 
-        if(isInterestOwner)
-        {
-          this.empty.draft = false;
-        }
-        else
-        {
-          this.empty.draft = true;
-        }
+        this.empty.draft = !isInterestOwner;
 
         const userId:   string                     = this.store.selectSnapshot(StateUser.id());
         const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserEvents.snapshotLookup())[id];

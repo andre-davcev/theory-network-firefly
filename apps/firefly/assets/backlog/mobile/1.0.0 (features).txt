@@ -13,9 +13,9 @@ auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (search) - auto focus search bar on show [hidden]
 home (search) - change .searchResults to transparent when not searching
 home (bug) - won't load when logging in from new city
-*events (list) - fix duplicate events in "Upcoming" when last grouping has more than 1
-*events (list) - add delete "Created" event if timeNotify not fired
-*events (functions) - on delete event, delete storage
+*events (list) - fix delete "Created" event errors after delete
+*events (list) - only allow delete "Created" event if timeNotify not fired
+*events (functions) - on delete "Created" event, delete storage
 *events (list) - click "Created" event, navigate to event create/edit
 *events (detail) - cleanup alert detail styling/alignment
 *events (detail) - reverse geocode map
