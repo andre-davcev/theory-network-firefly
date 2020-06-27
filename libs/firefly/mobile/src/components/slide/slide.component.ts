@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, HostListener } from '@angular/core';
 
 import { Alert } from '@firefly/cloud';
 
@@ -20,18 +20,34 @@ export class ComponentSlide
     @Output() alertDetailClicked: EventEmitter<void> = new EventEmitter();
     @Output() alertDeleteClicked: EventEmitter<void> = new EventEmitter();
 
-    public clickedAlertGo(): void
-    {
-      this.alertGoClicked.next();
-    }
+    private inProgress: boolean = false;
 
+    @HostListener('click')
     public clickedAlertDetail(): void
     {
-      this.alertDetailClicked.next();
+        if (this.inProgress)
+        {
+            this.inProgress = false;
+        }
+        else
+        {
+            this.alertDetailClicked.next();
+        }
     }
+
+    public clickedAlertGo(): void
+    {
+        this.inProgress = true;
+
+        this.alertGoClicked.next();
+    }
+
+
 
     public clickedAlertDelete(): void
     {
-      this.alertDeleteClicked.next();
+        this.inProgress = true;
+
+        this.alertDeleteClicked.next();
     }
 }

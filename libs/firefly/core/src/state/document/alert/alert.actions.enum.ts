@@ -10,7 +10,5 @@ export enum ActionsAlert
     Save          = '[Alert] Save',
     Create        = '[Alert] Create',
     Update        = '[Alert] Update',
-    Delete        = '[Alert] Delete',
-
-    MarkRead = '[Alert] MarkRead',
+    Delete        = '[Alert] Delete'
 }

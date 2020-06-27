@@ -97,6 +97,8 @@ export class PageAlert extends BaseComponent implements AfterViewInit
 
     public alertDelete(alert: Event): void
     {
+        console.log('DELETE HERE');
+/*
         this.store.dispatch(new ActionAlertSetId(alert.id)).
         pipe
         (
@@ -105,6 +107,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
             )
         ).
         subscribe();
+*/
     }
 
     public eventDelete(event: Event): void
@@ -134,11 +137,6 @@ export class PageAlert extends BaseComponent implements AfterViewInit
             )
         ).
         subscribe();
-    }
-
-    public selectEvent(event: Event): void
-    {
-        console.log(event);
     }
 
     public add(): void

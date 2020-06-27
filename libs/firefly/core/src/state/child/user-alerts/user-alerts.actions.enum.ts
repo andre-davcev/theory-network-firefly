@@ -8,9 +8,11 @@ export enum ActionsUserAlerts
     Remove  = '[User Alerts] Remove',
     Sync    = '[User Alerts] Sync',
 
-    Go       = '[User Alerts] Go',
-    GetIcons = '[User Alerts] Get Icons',
-    GetImages = '[User Alerts] Get Images',
-    AddToCalendar = '[User Alerts] Add to Calendar',
-    LaunchNavigation = '[User Alerts] Launch Navigation'
+    Go               = '[User Alerts] Go',
+    GetIcons         = '[User Alerts] Get Icons',
+    GetImages        = '[User Alerts] Get Images',
+    AddToCalendar    = '[User Alerts] Add to Calendar',
+    LaunchNavigation = '[User Alerts] Launch Navigation',
+    MarkRead         = '[User Alerts] Mark Read',
+    Delete           = '[User Alerts] Delete'
 }

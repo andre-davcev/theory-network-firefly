@@ -22,7 +22,7 @@ import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
 import { NgZone, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { StateUserAlerts, ActionAlertSetId, ActionAlertMarkRead } from '@firefly/core';
+import { StateUserAlerts, ActionAlertSetId, ActionUserAlertsAdd, ActionUserAlertsMarkRead } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 @State<StateMobileModel>(StateMobileOptions)
@@ -223,15 +223,7 @@ export class StateMobile
                 alert != null
             ),
             switchMap((alert: Alert) =>
-                dispatch(new ActionAlertSetId(alert.id)).
-                pipe
-                (
-                    switchMap(() =>
-                        alert.read ?
-                            of(null) :
-                            dispatch(new ActionAlertMarkRead())
-                    )
-                )
+                dispatch(new ActionUserAlertsMarkRead(alert.id))
             )
         );
     }

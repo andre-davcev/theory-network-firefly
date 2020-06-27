@@ -1,4 +1,3 @@
-
 app (errors) - required fields styling (icon/popover)
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (library) - upgrade @ionic & @capacitor
@@ -12,14 +11,15 @@ auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (search) - auto focus search bar on show [hidden]
+home (search) - change .searchResults to transparent when not searching
 home (bug) - won't load when logging in from new city
-*events (list) - fix alertDetailClicked click area
-*events (list) - add delete "Created" event
+*events (list) - create ActionUserAlertsDelete and use for "New/Upcoming" alert
+*events (list) - add delete "Created" event if timeNotify not fired
+*events (functions) - on delete event, delete storage
 *events (list) - click "Created" event, navigate to event create/edit
 *events (detail) - cleanup alert detail styling/alignment
 *events (detail) - reverse geocode map
 *events (detail) - prevent timeStart changes when timeNotify set
-*events (functions) - on delete event, delete storage
 *events (functions) - update cron to update user.notifications & not alerts
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 firestore (functions) - implement callable function to populate stream for new city

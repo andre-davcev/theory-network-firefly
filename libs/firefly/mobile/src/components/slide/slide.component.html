@@ -1,13 +1,16 @@
-<div class="cpt-card" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1.25rem">
-    <section fxLayout="column" fxLayoutGap="0.5rem">
+<div class="cpt-card"
+     fxLayout="column"
+     fxLayoutAlign="start center"
+     fxLayoutGap="1.25rem">
+    <section fxLayout="column"
+             fxLayoutGap="0.5rem">
         <h1 class="cpt-title">{{ slide.name }}</h1>
         <h2 class="cpt-short">{{ slide.description }}</h2>
     </section>
 
-    <!--div class="cnt-image" (click)="clickedAlertDetail()">
-      <img class="cpt-image" [src]="slide.metadata.urlMedium">
-    </!--div-->
-    <div class="cpt-image" (click)="clickedAlertDetail()" [style.background-image]="'url(' + slide.metadata.image + ')'"></div>
+    <div class="cpt-image"
+         [style.background-image]="'url(' + slide.metadata.image + ')'">
+    </div>
 
     <app-button-action [text]="'general.go' | translate"
                        (click)="clickedAlertGo()">
@@ -16,6 +19,10 @@
     <span class="cpt-date">{{ slide.timeStart | date:'short' }}</span>
 </div>
 
-<ion-button fill="clear" (click)="clickedAlertDelete()">
-    <ion-icon name="trash" color="tertiary" size="large"></ion-icon>
+<ion-button fill="clear"
+            (click)="clickedAlertDelete()">
+    <ion-icon name="trash"
+              color="tertiary"
+              size="large">
+    </ion-icon>
 </ion-button>
