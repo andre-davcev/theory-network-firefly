@@ -31,7 +31,6 @@ export enum ActionsUser
     SubscriptionOnOff   = '[User] Subscription On/Off',
 
     NotificationsSet = '[User] Notifications Set',
-    NotificationRead = '[User] Notification Read',
 
     InterestTypeSet    = '[User] Interest Type Set',
     InterestVirtualSet = '[User] Interest Virtual Set',

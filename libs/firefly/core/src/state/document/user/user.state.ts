@@ -598,7 +598,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserNotificationsSet)
-    notificationsGet({ dispatch }: StateContext<StateUserModel>)
+    notificationsSet({ dispatch }: StateContext<StateUserModel>)
     {
         const notifications: Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
 

@@ -2,7 +2,7 @@ import { Action, State, StateContext, Store } from '@ngxs/store';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user/user.state';
-import { Alert, MetadataAlert, AlertPartial } from '@firefly/cloud';
+import { Alert } from '@firefly/cloud';
 import { StateAlertModel } from './alert.state.model';
 import { StateAlertOptions } from './alert.state.options';
 import {
@@ -16,18 +16,13 @@ import {
   ActionAlertSetId,
   ActionAlertUpdate,
   ActionAlertDirty,
-  ActionAlertMarkRead,
   ActionAlertPatchMetadata
 } from './alert.actions';
 import { ActionUserAlertsAdd, ActionUserAlertsRemove, StateUserAlerts, ActionUserAlertsSync } from '../../child/user-alerts';
 import { firestore } from 'firebase/app';
 import { ServiceAlerts } from '@firefly/core/services';
 import { Injectable } from '@angular/core';
-import { Collection, ImageType } from '@firefly/core/enums';
-import { ActionUserPatch } from '../user/user.actions';
-import { ServiceStorage, ImageSize } from '@theory/firebase';
-import { switchMap, map } from 'rxjs/operators';
-import { forkJoin, of } from 'rxjs';
+import { Collection } from '@firefly/core/enums';
 
 @State<StateAlertModel>(StateAlertOptions)
 @Injectable()
@@ -36,7 +31,6 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
     constructor
     (
         private store   : Store,
-        private storage : ServiceStorage,
                 service : ServiceAlerts
     )
     {
@@ -189,22 +183,5 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
             this.store.selectSnapshot(StateUserAlerts.dataLookup())[id];
 
         return dispatch(new ActionAlertSet(snapshot, data));
-    }
-
-    @Action(ActionAlertMarkRead)
-    markRead({ dispatch, getState }: StateContext<StateAlertModel>)
-    {
-        const notifications : Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
-        const notification  : Alert                        = StateAlert.dataState(getState());
-        const metadata      : MetadataAlert                = notification.metadata;
-
-        metadata.sessionRead = true;
-        notifications[notification.id].read = true;
-
-        return dispatch
-        ([
-            new ActionAlertPatch({ read: true, metadata }),
-            new ActionUserPatch({ notifications }, true)
-        ]);
     }
 }

@@ -1,6 +1,6 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
 
-import { Alert, DateEvents, Event } from '@firefly/cloud';
+import { Alert, DateEvents, Event, AlertPartial, MetadataAlert } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
 import { StateChild } from '@theory/ngxs';
 
@@ -18,7 +18,9 @@ import {
     ActionUserAlertsGetIcons,
     ActionUserAlertsAddToCalendar,
     ActionUserAlertsLaunchNavigation,
-    ActionUserAlertsGetImages
+    ActionUserAlertsGetImages,
+    ActionUserAlertsMarkRead,
+    ActionUserAlertsDelete
 } from './user-alerts.actions';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,6 +34,7 @@ import { StateUserEvents } from '../../query/user-events/user-events.state';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { ActionUserPatch } from '../../document/user/user.actions';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()
@@ -43,8 +46,8 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         private translate   : TranslateService,
         private actionSheet : ActionSheetController,
                 storage     : ServiceStorage,
-        private calendar    : Calendar
-
+        private calendar    : Calendar,
+        private store       : Store
     )
     {
         super
@@ -135,7 +138,6 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             events.
                 forEach((alert: Event) =>
                 {
-                    console.log(alert);
                     if (!datesAreEqual)
                     {
                         eventsList.push(current);
@@ -390,5 +392,29 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     launchNavigation(context: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsLaunchNavigation)
     {
       return from(LaunchNavigator.navigate([alert.geopoint.latitude, alert.geopoint.longitude]));
+    }
+
+    @Action(ActionUserAlertsMarkRead)
+    markRead({ dispatch, getState }: StateContext<StateUserAlertsModel>, { id }: ActionUserAlertsMarkRead)
+    {
+        const notifications : Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
+        const alert         : Alert                        = StateUserAlerts.dataLookupState(getState())[id];
+
+        alert.read                 = true;
+        alert.metadata.sessionRead = true;
+
+        notifications[id].read = true;
+
+        return dispatch
+        ([
+            new ActionUserAlertsSync(alert),
+            new ActionUserPatch({ notifications }, true)
+        ]);
+    }
+
+    @Action(ActionUserAlertsDelete)
+    delete({ dispatch, getState }: StateContext<StateUserAlertsModel>, { id }: ActionUserAlertsDelete)
+    {
+
     }
 }

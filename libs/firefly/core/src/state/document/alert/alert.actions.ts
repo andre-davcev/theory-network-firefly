@@ -17,4 +17,3 @@ export class ActionAlertUpdate        { static readonly type = ActionsAlert.Upda
 export class ActionAlertSave          { static readonly type = ActionsAlert.Save;          constructor() { } }
 export class ActionAlertDelete        { static readonly type = ActionsAlert.Delete;        constructor() { } }
 export class ActionAlertSetId         { static readonly type = ActionsAlert.SetId;         constructor(public id: string = CoreEnum.IdNew) { } }
-export class ActionAlertMarkRead      { static readonly type = ActionsAlert.MarkRead;      constructor() { } }
