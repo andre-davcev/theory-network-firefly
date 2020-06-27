@@ -17,7 +17,7 @@
         <ion-slide #status *ngFor="let alert of events$ | async">
             <app-slide [slide]="alert"
                       [buttonText]="'general.go' | translate"
-                      (alertDeleteClicked)="alertDelete(alert)"
+                      (alertDeleteClicked)="eventDelete(alert)"
                       (alertGoClicked)="alertGo(alert)"
                       (alertDetailClicked)="navigate( alert)">
             </app-slide>
@@ -30,7 +30,7 @@
         <app-item-events *ngFor="let events of events$ | async"
                          [dateEvents]="events"
                          (selected)="navigate($event)"
-                         (deleted)="alertDelete($event)">
+                         (deleted)="eventDelete($event)">
         </app-item-events>
     </ion-list>
 

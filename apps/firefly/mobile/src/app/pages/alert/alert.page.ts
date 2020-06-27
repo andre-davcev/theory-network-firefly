@@ -4,7 +4,7 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType, ActionInterestReset, ActionInterestGet } from '@firefly/core';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType, ActionInterestReset, ActionInterestGet, ActionUserAlertsDelete } from '@firefly/core';
 import { Alert, Event, DateEvents, Interest } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile, StateSearch, ActionSearchReset, ActionMobileLoadingShow } from '@firefly/mobile';
@@ -95,33 +95,23 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         this.store.dispatch(new ActionUserAlertsGo(alert));
     }
 
-    public alertDelete(alert: Event): void
-    {
-        console.log('DELETE HERE');
-/*
-        this.store.dispatch(new ActionAlertSetId(alert.id)).
-        pipe
-        (
-            switchMap(() =>
-                this.store.dispatch(new ActionAlertDelete())
-            )
-        ).
-        subscribe();
-*/
-    }
-
     public eventDelete(event: Event): void
     {
         const eventType: EventType = this.store.selectSnapshot(StateUser.eventType);
 
-        if (eventType === EventType.Upcoming)
+        if (eventType !== EventType.Created)
         {
-            this.alertDelete(event);
+            this.store.dispatch(new ActionUserAlertsDelete(event.id));
         }
         else
         {
 
         }
+/*
+27BzQWKt3tmUsuLNMGTu
+read      false
+timeStart 2021-05-30T19:00:00-05:00
+*/
     }
 
     public navigate(object: Alert): void

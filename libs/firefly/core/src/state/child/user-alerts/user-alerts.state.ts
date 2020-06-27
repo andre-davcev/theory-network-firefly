@@ -413,8 +413,16 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     }
 
     @Action(ActionUserAlertsDelete)
-    delete({ dispatch, getState }: StateContext<StateUserAlertsModel>, { id }: ActionUserAlertsDelete)
+    delete({ dispatch }: StateContext<StateUserAlertsModel>, { id }: ActionUserAlertsDelete)
     {
+        const notifications : Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
 
+        delete notifications[id];
+
+        return dispatch
+        ([
+            new ActionUserAlertsRemove(id),
+            new ActionUserPatch({ notifications }, true)
+        ]);
     }
 }
