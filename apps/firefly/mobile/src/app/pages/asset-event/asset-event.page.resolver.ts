@@ -14,6 +14,10 @@ export class ResolverPageAssetEvent implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-        return this.store.dispatch(new ActionMobileLoadingHide());
+        return this.store.dispatch(new ActionEventSetId(route.params.id)).
+        pipe
+        (
+            switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
+        );
     }
 }
