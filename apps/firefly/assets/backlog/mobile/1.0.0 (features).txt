@@ -18,7 +18,6 @@ home (bug) - won't load when logging in from new city
 *events (list) - click "Created" event, navigate to event create/edit
 *events (detail) - cleanup alert detail styling/alignment
 *events (detail) - reverse geocode map
-*events (detail) - prevent timeStart changes when timeNotify set
 *events (functions) - update cron to update user.notifications & not alerts
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 firestore (functions) - implement callable function to populate stream for new city
