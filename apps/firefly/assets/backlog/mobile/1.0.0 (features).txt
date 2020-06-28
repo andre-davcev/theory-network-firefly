@@ -15,11 +15,9 @@ home (search) - change .searchResults to transparent when not searching
 home (bug) - won't load when logging in from new city
 *events (list) - fix delete "Created" event errors after delete
 *events (list) - only allow delete "Created" event if timeNotify not fired
-*events (functions) - on delete "Created" event, delete storage
 *events (list) - click "Created" event, navigate to event create/edit
 *events (detail) - cleanup alert detail styling/alignment
 *events (detail) - reverse geocode map
-*events (detail) - prevent timeStart changes when timeNotify set
 *events (functions) - update cron to update user.notifications & not alerts
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 firestore (functions) - implement callable function to populate stream for new city

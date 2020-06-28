@@ -4,7 +4,8 @@
     </ion-item-divider>
 
     <ion-item-sliding *ngFor="let event of dateEvents.events"
-                      (click)="select(event)">
+                      (click)="select(event)"
+                      [disabled]="event.timeNotify">
         <ion-item>
             <ion-avatar slot="start">
                 <img [src]="event.metadata.image">

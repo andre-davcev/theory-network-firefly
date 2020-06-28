@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, FieldValue, WriteResult, QuerySnapshot, QueryDocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { User, Subscription, SubscriptionPartial, Collection } from '../library';
+import { User, SubscriptionPartial, Collection, ImageType, ServiceStorage } from '../library';
 
 const database: Firestore = db();
 
@@ -18,6 +18,7 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
         database.collection(Collection.Events).where(Collection.Interests,    'array-contains', id).get(),
         database.collection(Collection.Users).where(Collection.Subscriptions, 'array-contains', id).get()
     ];
+
     const updates: Array<Promise<WriteResult>> = [];
 
     const query: Array<QuerySnapshot> = await Promise.all(queries);
@@ -28,7 +29,7 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
     let user: User;
 
     events.forEach((snapshot: QueryDocumentSnapshot) =>
-        updates.push(snapshot.ref.update({ interests: FieldValue.arrayRemove(id)}))
+        updates.push(snapshot.ref.update({ interests: FieldValue.arrayRemove(id) }))
     );
 
     users.forEach((snapshot: QueryDocumentSnapshot) =>
@@ -48,7 +49,11 @@ onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
         }))
     });
 
-    return Promise.all(updates);
+    await Promise.all(updates);
+
+    const bucketPath: string = `${Collection.Interests}/${id}/${ImageType.Image}.jpeg`;
+
+    return ServiceStorage.delete(bucketPath);
 });
 
 export { InterestsDelete };
