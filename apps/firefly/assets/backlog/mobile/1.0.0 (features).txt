@@ -15,7 +15,6 @@ home (search) - change .searchResults to transparent when not searching
 home (bug) - won't load when logging in from new city
 *events (list) - fix delete "Created" event errors after delete
 *events (list) - only allow delete "Created" event if timeNotify not fired
-*events (functions) - on delete "Created" event, delete storage
 *events (list) - click "Created" event, navigate to event create/edit
 *events (detail) - cleanup alert detail styling/alignment
 *events (detail) - reverse geocode map
