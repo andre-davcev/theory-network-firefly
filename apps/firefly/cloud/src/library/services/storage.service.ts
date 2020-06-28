@@ -1,3 +1,5 @@
+import { storage } from 'firebase-admin';
+
 export class ServiceStorage
 {
     public static bucketPaths(bucketPath: string, includeMedium: boolean = true): Array<string>
@@ -20,5 +22,18 @@ export class ServiceStorage
         bucketPaths.push(bucketPath);
 
         return bucketPaths;
+    }
+
+    public static delete(bucketPath: string): Promise<any>
+    {
+        const store: storage.Storage = storage();
+
+        const deletes: Array<Promise<any>> = ServiceStorage.
+            bucketPaths(bucketPath, false).
+            map((path: string) =>
+                store.bucket().file(path).delete()
+            );
+
+        return Promise.all(deletes);
     }
 }
