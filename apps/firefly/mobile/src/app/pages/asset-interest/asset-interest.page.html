@@ -30,16 +30,21 @@
                         (clicked)="selectImage()">
         </app-item-image>
 
-        <app-item-header [form]="form$ | async"
-                         [iconUrl]="image$ | async"
-                         title="name"
-                         subtitle="tagline"
-                         iconUrlEmpty="assets/icons/avatar-empty.svg"
-                         [titlePlaceholder]="'page.event.titlePlaceholder' | translate"
-                         [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate"
-                         [iconPlaceholder]="'page.event.iconPlaceholder' | translate"
-                         (iconClicked)="add(Pages.IconSelector)">
-        </app-item-header>
+        <ion-item>
+          <ion-input type="text"
+                     inputmode="text"
+                     formControlName="name"
+                     [placeholder]="'page.event.titlePlaceholder' | translate">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text"
+                    inputmode="text"
+                    formControlName="tagline"
+                    [placeholder]="'page.event.subtitlePlaceholder' | translate">
+          </ion-input>
+        </ion-item>
 
         <div class="cpt-detail" fxLayout="column">
             <ion-list>
