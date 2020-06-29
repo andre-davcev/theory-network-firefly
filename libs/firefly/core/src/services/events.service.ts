@@ -109,7 +109,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
 
             metadata : this.formBuilder.group
             ({
-                icon  : [event.metadata.icon,  [Validators.required]],
+                icon  : [event.metadata.icon,  []],
                 image : [event.metadata.image, [Validators.required]]
             })
         });
