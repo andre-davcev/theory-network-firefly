@@ -11,8 +11,8 @@ auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (search) - auto focus search bar on show [hidden]
-home (search) - change .searchResults to transparent when not searching
 home (bug) - won't load when logging in from new city
+*events (detail) - fix create new event
 *events (list) - fix delete "Created" event errors after delete
 *events (list) - only allow delete "Created" event if timeNotify not fired
 *events (list) - click "Created" event, navigate to event create/edit
