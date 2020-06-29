@@ -27,16 +27,30 @@
           *ngIf="form$ | async"
           [formGroup]="form$ | async"
           ngxsForm="events.form">
-        <app-item-header [form]="form$ | async"
-                         [iconUrl]="icon$ | async"
-                         title="name"
-                         subtitle="tagline"
-                         iconUrlEmpty="assets/icons/avatar-empty.svg"
-                         [titlePlaceholder]="'page.event.titlePlaceholder' | translate"
-                         [subtitlePlaceholder]="'page.event.subtitlePlaceholder' | translate"
-                         [iconPlaceholder]="'page.event.iconPlaceholder' | translate"
-                         (iconClicked)="selectIcon()">
-        </app-item-header>
+
+        <app-item-image [url]="image$ | async"
+                        [form]="form$ | async"
+                        [placeholder]="'page.event.imagePlaceholder' | translate"
+                        [title]="'page.event.imageTitlePlaceholder' | translate"
+                        [edit]="true"
+                        (clicked)="selectImage()">
+        </app-item-image>
+
+        <ion-item>
+          <ion-input type="text"
+                      inputmode="text"
+                      formControlName="name"
+                      [placeholder]="'page.event.titlePlaceholder' | translate">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text"
+                    inputmode="text"
+                    formControlName="tagline"
+                    [placeholder]="'page.event.subtitlePlaceholder' | translate">
+          </ion-input>
+        </ion-item>
 
         <app-item-map [title]="'general.location' | translate"
                       (click)="navigate(Pages.EventLocation)">
@@ -128,13 +142,5 @@
                 </ion-item-group>
             </ion-list>
         </div>
-
-        <app-item-image [url]="image$ | async"
-                        [form]="form$ | async"
-                        [placeholder]="'page.event.imagePlaceholder' | translate"
-                        [title]="'page.event.imageTitlePlaceholder' | translate"
-                        [edit]="true"
-                        (clicked)="selectImage()">
-        </app-item-image>
     </form>
 </ion-content>
