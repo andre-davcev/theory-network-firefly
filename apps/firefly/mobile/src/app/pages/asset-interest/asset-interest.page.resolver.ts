@@ -14,23 +14,29 @@ export class ResolverPageAssetInterest implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-
-        if(route.queryParams.id == null)
+        if (route.params.id == null)
         {
-          return this.store.dispatch([
-            new ActionInterestEventsReset()
-          ]).pipe(
-            switchMap(() => this.store.dispatch([
-                new ActionInterestSetId(route.queryParams.id)/*,
-                new ActionUserEventsGetData()*/
-              ])),
-              switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
-          )
+            return this.store.dispatch([new ActionInterestEventsReset()]).
+            pipe
+            (
+                switchMap(() =>
+                    this.store.dispatch
+                    ([
+                        new ActionInterestSetId(route.queryParams.id),
+                        // new ActionUserEventsGetData()
+                    ])
+                ),
+                switchMap(() =>
+                    this.store.dispatch(new ActionMobileLoadingHide())
+                )
+            )
         }
-        else{
-          return this.store.dispatch([
-            new ActionInterestEventsGet(),
-            new ActionMobileLoadingHide()
+        else
+        {
+          return this.store.dispatch
+          ([
+              new ActionInterestEventsGet(),
+              new ActionMobileLoadingHide()
           ]);
         }   
     }

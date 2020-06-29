@@ -13,7 +13,6 @@ import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
 import { ActionMapSearchResultClear } from '@theory/mapbox';
-import { analytics } from 'firebase';
 
 @Component
 ({
