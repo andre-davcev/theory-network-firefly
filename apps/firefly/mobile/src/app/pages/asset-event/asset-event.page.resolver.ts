@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { ActionEventSetId } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
@@ -15,16 +15,16 @@ export class ResolverPageAssetEvent implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-        if(route.queryParams.id == CoreEnum.IdNew)
-        {
-          return this.store.dispatch(new ActionEventSetId(route.params.id)).
-          pipe
-          (
-              switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
-          );
-        }
-        else{
-          this.store.dispatch(new ActionMobileLoadingHide());
-        }
+        const setId$: Observable<any> = route.params.id == CoreEnum.IdNew ?
+            this.store.dispatch(new ActionEventSetId(route.params.id)) :
+            of(null);
+
+        return setId$.
+        pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new ActionMobileLoadingHide())
+            )
+        );
     }
 }
