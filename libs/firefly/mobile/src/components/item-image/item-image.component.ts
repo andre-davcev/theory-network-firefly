@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 
 @Component
 ({
@@ -24,6 +24,8 @@ export class ComponentItemImage
     public clickedImage(): void
     {
         this.form.markAsDirty();
+        let control : AbstractControl = this.form.get(['metadata', 'image']);
+        control.markAsDirty();
         this.clicked.next();
     }
 
