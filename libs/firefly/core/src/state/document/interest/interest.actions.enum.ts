@@ -19,6 +19,10 @@ export enum ActionsInterest
     IconPathSet = '[Interest] Icon Path Set',
     IconCreate  = '[Interest] Icon Create',
 
+    ImageClear   = '[Interest] Image Clear',
+    ImagesUpdate = '[Interest] Images Update',
+    ImageSet     = '[Interest] Image Set',
+
     EventsGet = '[Interest] Events Get',
     EventsReset = '[Interest] Events Reset',
 

@@ -24,13 +24,15 @@ import {
     ActionInterestEventsReset,
     ActionInterestSetIdAnonymous,
     ActionInterestEventsGetAnonymous,
-    ActionInterestPatchMetadata
+    ActionInterestPatchMetadata,
+    ActionInterestImagesUpdate,
+    ActionInterestImageSet
 } from './interest.actions';
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, StateUserInterests, ActionUserInterestsSync } from '../..//query/user-interests';
 import { ActionUserStreamRemove } from '../../child/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { firestore } from 'firebase/app';
-import { ImageSize, ActionStorageUrlsGet, ServiceStorage } from '@theory/firebase';
+import { ImageSize, ServiceStorage } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from, forkJoin } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
@@ -140,13 +142,25 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestCreate)
     create(context: StateContext<StateInterestModel>)
     {
-        return super.create(context);
+        return super.create(context).
+        pipe
+        (
+            switchMap(() =>
+              context.dispatch(new ActionInterestImagesUpdate())
+            )
+        );
     }
 
     @Action(ActionInterestUpdate)
     update(context: StateContext<StateInterestModel>)
     {
-        return super.update(context);
+        return context.dispatch(new ActionInterestImagesUpdate()).
+        pipe
+        (
+            switchMap(() =>
+                super.update(context)
+            )
+        );
     }
 
     @Action(ActionInterestSave)
@@ -352,5 +366,27 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
             })
           )
       )
+    }
+
+    @Action(ActionInterestImagesUpdate)
+    imagesUpdate(context : StateContext<StateInterestModel>)
+    {
+        return super.updateMedia(context, ImageType.Image);
+    }
+
+    @Action(ActionInterestImageSet)
+    imageSet(context : StateContext<StateInterestModel>)
+    {
+      const { getState, dispatch } = context;
+      const interest = StateInterest.dataState(getState());
+
+      return dispatch(new ActionInterestPatchMetadata({})).
+      pipe
+      (
+          switchMap(() => this.storage.downloadUrl(`${Collection.Interests}/${interest.id}/${ImageType.Image}.jpeg`, ImageSize.Medium)),
+          switchMap((image: string) =>
+              dispatch(new ActionInterestPatchMetadata( { image } ))
+          )
+      );
     }
 }
