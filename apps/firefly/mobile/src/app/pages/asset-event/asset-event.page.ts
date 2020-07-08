@@ -7,12 +7,13 @@ import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventLocationSet } from '@firefly/core';
+import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventLocationSet, ActionEventTimeSet } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
 import { ActionMapSearchResultClear } from '@theory/mapbox';
+import { firestore } from 'firebase';
 
 @Component
 ({
@@ -27,10 +28,10 @@ export class PageAssetEvent
     @Select(StateEvent.isNew())         isNew$:           Observable<boolean>;
     @Select(StateEvent.canEdit)         canEdit$:         Observable<boolean>;
     @Select(StateEvent.canUpdate())     canUpdate$:       Observable<boolean>;
-    @Select(StateEvent.timeStart)       timeStart$:       Observable<string>;
-    @Select(StateEvent.timeEnd)         timeEnd$:         Observable<string>;
+    @Select(StateEvent.timeStart)       timeStart$:       Observable<firestore.Timestamp>;
+    @Select(StateEvent.timeEnd)         timeEnd$:         Observable<firestore.Timestamp>;
     @Select(StateEvent.timeEndValid)    timeEndValid$:    Observable<boolean>;
-    @Select(StateEvent.timeNotify)      timeNotify$:      Observable<string>;
+    @Select(StateEvent.timeNotify)      timeNotify$:      Observable<firestore.Timestamp>;
     @Select(StateEvent.timeNotifyValid) timeNotifyValid$: Observable<boolean>;
     @Select(StateEvent.private)         private$:         Observable<boolean>;
     @Select(StateEvent.notifyComplete)  notifyComplete$:  Observable<boolean>;
@@ -163,9 +164,9 @@ export class PageAssetEvent
 
     public timeChanged(event: CustomEvent, key: string): void
     {
-        const time: string = event.detail.value;
+        const value: string = event.detail.value;
 
-        this.store.dispatch(new ActionEventPatch({ [key]: time }));
+        this.store.dispatch(new ActionEventTimeSet(key, value));
     }
 
     public virtualChanged(event: any): void

@@ -4,13 +4,15 @@ import { ModuleComponentImageGrid } from '@theory/ionic';
 import { ModulePage } from '@firefly/app/modules';
 
 import { PageEventAssets } from './event-assets.page';
+import { ModulePipeTimestamp } from '@theory/firebase';
 
 @NgModule
 ({
     imports :
     [
         ModulePage,
-        ModuleComponentImageGrid
+        ModuleComponentImageGrid,
+        ModulePipeTimestamp
     ],
 
     declarations : [PageEventAssets],

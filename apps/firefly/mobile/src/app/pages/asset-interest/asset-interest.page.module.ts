@@ -10,6 +10,7 @@ import { RoutesPageAssetInterest } from './asset-interest.page.routes';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { ModuleComponentButtonAdd } from '@firefly/core';
 import { ModulePageEventSelector } from '../event-selector';
+import { ModulePipeTimestamp } from '@theory/firebase';
 @NgModule
 ({
     imports :
@@ -24,14 +25,15 @@ import { ModulePageEventSelector } from '../event-selector';
         ModuleComponentButtonAdd,
         RouterModule.forChild(RoutesPageAssetInterest),
         ModulePageEventSelector,
-        NgxsFormPluginModule
+        NgxsFormPluginModule,
+        ModulePipeTimestamp
     ],
 
     declarations : [PageAssetInterest],
     exports : [PageAssetInterest],
     entryComponents:
     [
-      PageAssetInterest
+        PageAssetInterest
     ]
 })
 

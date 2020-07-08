@@ -24,3 +24,4 @@ export class ActionEventLocationSet    { static readonly type = ActionsEvent.Loc
 export class ActionEventInterestAdd    { static readonly type = ActionsEvent.InterestAdd;    constructor(public interest: Interest) { } }
 export class ActionEventAccept         { static readonly type = ActionsEvent.AcceptEvent;    constructor() { } }
 export class ActionEventDeny           { static readonly type = ActionsEvent.DenyEvent;      constructor() { } }
+export class ActionEventTimeSet        { static readonly type = ActionsEvent.TimeSet;        constructor(public key: string, public value: string) { } }

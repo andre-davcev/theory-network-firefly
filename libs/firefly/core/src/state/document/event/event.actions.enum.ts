@@ -23,5 +23,6 @@ export enum ActionsEvent
     LocationSet  = '[Event] Location Set',
     InterestAdd  = '[Event] Interest Add',
     AcceptEvent  = '[Event] Accept Event',
-    DenyEvent    = '[Event] Deny Event'
+    DenyEvent    = '[Event] Deny Event',
+    TimeSet      = '[Event] Time Set'
 }

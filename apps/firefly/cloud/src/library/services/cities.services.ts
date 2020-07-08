@@ -80,7 +80,7 @@ export class ServiceCities
         );
 
         const eventSnapshots : Array<QuerySnapshot> = await Promise.all(eventQuery);
-        const nowInMillis    : number               = (new Date()).getMilliseconds();
+        const time           : number               = (new Date()).getTime();
 
         eventSnapshots.forEach((query: QuerySnapshot) =>
             query.forEach((snapshot: QueryDocumentSnapshot) =>
@@ -120,7 +120,7 @@ export class ServiceCities
         events.forEach((event: Event) =>
         {
             id              = event.id;
-            eventScores[id] = ServiceStreams.scoreEvent(event, nowInMillis);
+            eventScores[id] = ServiceStreams.scoreEvent(event, time);
             cityId          = event.cityId;
 
             event.interests.

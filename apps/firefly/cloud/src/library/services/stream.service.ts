@@ -18,8 +18,8 @@ export class ServiceStreams
 
     public static scoreEvent(event: Event, nowInMillis: number): number
     {
-        const timeNotify: number = new Date(event.timeNotify).getMilliseconds();
-        const timeStart:  number = new Date(event.timeStart).getMilliseconds();
+        const timeNotify : number = event.timeNotify.toDate().getTime();
+        const timeStart  : number = event.timeStart.toDate().getTime();
 
         if (event.notifyComplete || timeNotify <= nowInMillis || timeStart <= nowInMillis) { return GlobalVariable.EventUpcomingMin; }
 
@@ -39,7 +39,7 @@ export class ServiceStreams
      */
     public static scoreEventRecentlyAdded(event: Event, nowInMillis: number): number
     {
-        const dateCreated: number = (event.dateCreated as firestore.Timestamp).toDate().getMilliseconds();
+        const dateCreated: number = (event.dateCreated as firestore.Timestamp).toDate().getTime();
         const millisDiff:  number = nowInMillis - dateCreated;
 
         const segments: number = Math.floor(millisDiff / GlobalVariable.EventRecentlyAddedSegmentMillis);
@@ -65,10 +65,10 @@ export class ServiceStreams
     */
     public static scoreEventUpcoming(event: Event, nowInMillis: number): number
     {
-        const timeStart: number = new Date(event.timeStart).getMilliseconds();
+        const timeStart: number = event.timeStart.toDate().getTime();
 
-        const millisDiff:  number = timeStart - nowInMillis;
-        const segments: number = Math.floor(millisDiff / GlobalVariable.EventRecentlyAddedSegmentMillis);
+        const millisDiff : number = timeStart - nowInMillis;
+        const segments   : number = Math.floor(millisDiff / GlobalVariable.EventRecentlyAddedSegmentMillis);
 
         return event.notifyComplete ?
             GlobalVariable.EventUpcomingMin :

@@ -10,6 +10,7 @@ import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentItemHeader } from '@firefly/mobile';
 
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ModulePipeTimestamp } from '@theory/firebase';
 
 @NgModule
 ({
@@ -22,7 +23,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatExpansionModule,
         ModuleComponentIconMessage,
         RouterModule.forChild(RoutesPageStream),
-        ModuleComponentButtonAdd
+        ModuleComponentButtonAdd,
+        ModulePipeTimestamp
     ],
 
     declarations : [PageStream],

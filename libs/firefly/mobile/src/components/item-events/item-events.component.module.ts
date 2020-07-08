@@ -5,6 +5,7 @@ import { ComponentItemEvents } from './item-events.component';
 import { IonicModule } from '@ionic/angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
+import { ModulePipeTimestamp } from '@theory/firebase';
 
 @NgModule
 ({
@@ -13,7 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
         CommonModule,
         IonicModule,
         FlexLayoutModule,
-        TranslateModule
+        TranslateModule,
+        ModulePipeTimestamp
     ],
 
     declarations : [ComponentItemEvents],

@@ -51,7 +51,7 @@ onRun(async (context: EventContext) =>
         );
     });
 
-    const nowInMillis: number = (new Date()).getMilliseconds();
+    const time: number = (new Date()).getTime();
 
     let city            : string;
     let event           : Event;
@@ -63,7 +63,7 @@ onRun(async (context: EventContext) =>
     {
         id              = snapshot.id;
         event           = snapshot.data() as Event;
-        eventScores[id] = ServiceStreams.scoreEvent(event, nowInMillis);
+        eventScores[id] = ServiceStreams.scoreEvent(event, time);
         city            = event.city.cityId;
 
         event.interests.

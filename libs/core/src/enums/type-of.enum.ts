@@ -6,5 +6,6 @@ export enum TypeOf
     String	  = 'string',
     Object    = 'object',
     Function  = 'function',
-    Date      = 'date'
+    Date      = 'date',
+    Timestamp = 'timestamp'
 }

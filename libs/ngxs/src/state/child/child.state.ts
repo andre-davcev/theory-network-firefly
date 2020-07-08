@@ -262,6 +262,8 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             this.sortNumber :
             type === TypeOf.Date ?
             this.sortDate :
+            type === TypeOf.Timestamp ?
+            this.sortTimestamp :
             this.sortBoolean;
 
         let a: any;
@@ -324,6 +326,17 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     {
         const a: number = Date.parse(aString);
         const b: number = Date.parse(bString);
+
+        if (a > b)      { return ascending ?  1 : -1; }
+        else if (a < b) { return ascending ? -1 : 1; }
+
+        return 0;
+    }
+
+    private sortTimestamp(aTimestamp: firestore.Timestamp, bTimestamp: firestore.Timestamp, ascending: boolean): number
+    {
+        const a: number = aTimestamp.toDate().getTime();
+        const b: number = bTimestamp.toDate().getTime();
 
         if (a > b)      { return ascending ?  1 : -1; }
         else if (a < b) { return ascending ? -1 : 1; }

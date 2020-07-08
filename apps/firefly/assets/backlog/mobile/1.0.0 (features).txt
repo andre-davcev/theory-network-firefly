@@ -12,17 +12,18 @@ auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (search) - auto focus search bar on show [hidden]
 home (bug) - won't load when logging in from new city
-*events (detail) - fix create new event
-*events (list) - fix delete "Created" event errors after delete
-*events (list) - only allow delete "Created" event if timeNotify not fired
-*events (list) - click "Created" event, navigate to event create/edit
-*events (detail) - cleanup alert detail styling/alignment
-*events (detail) - reverse geocode map
+events (detail) - fix create new event form errors
+events (list) - fix newly created event not uploading image and being put on list
+events (list) - fix delete "Created" event errors after delete
+events (list) - only allow delete "Created" event if timeNotify not fired
+events (list) - click "Created" event, navigate to event create/edit
+events (detail) - cleanup alert detail styling/alignment
+events (detail) - reverse geocode map
 *events (functions) - update cron to update user.notifications & not alerts
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
 firestore (functions) - implement callable function to populate stream for new city
 interests (functions) - on delete interest, delete storage
-+interests (detail) - event click navigates to edit event
+interests (detail) - event click navigates to edit event
 interests (detail) - add image for interest stream <app-item-interest>
 interests (detail) - add delete button for created interests
 interests (list) - replace event styling with <app-item-events>
