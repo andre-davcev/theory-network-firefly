@@ -6,6 +6,7 @@ import { Event } from '@firefly/cloud';
 import { ServiceFirestore } from '@theory/firebase';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, ValidatorsExtended } from '@theory/core';
+import { firestore } from 'firebase/app';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceEvents extends ServiceFirestore<Event>
@@ -29,13 +30,13 @@ export class ServiceEvents extends ServiceFirestore<Event>
 
             if (form != null)
             {
-                const start: string    = form.get('timeStart').value;
-                const end:   string    = form.get('timeEnd').value;
+                const start: firestore.Timestamp = form.get('timeStart').value;
+                const end:   firestore.Timestamp = form.get('timeEnd').value;
 
                 if (start != null && end != null)
                 {
-                    const timeStart: Date = new Date(start);
-                    const timeEnd:   Date = new Date(end);
+                    const timeStart: Date = start.toDate();
+                    const timeEnd:   Date = end.toDate();
 
                     valid = timeEnd.getTime() > timeStart.getTime();
                 }
@@ -51,13 +52,13 @@ export class ServiceEvents extends ServiceFirestore<Event>
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
         {
-            const value: string = control.value;
+            const value: firestore.Timestamp = control.value;
 
             let valid: boolean = false;
 
             if (value != null)
             {
-                const timeNotify: Date = new Date(value);
+                const timeNotify: Date = value.toDate();
                 const threshold:  Date = DateUtil.atHourNext(new Date(), 2);
 
                 valid = timeNotify.getTime() >= threshold.getTime();
@@ -75,9 +76,9 @@ export class ServiceEvents extends ServiceFirestore<Event>
         {
             ...super.formDataNew(userId, defaults),
 
-            timeStart:  DateUtil.atHourNext().toISOString(),
-            timeEnd:    DateUtil.atHourNext(new Date(), 2).toISOString(),
-            timeNotify: DateUtil.atHourNext(new Date(), 2).toISOString()
+            timeStart:  firestore.Timestamp.fromDate(DateUtil.atHourNext()),
+            timeEnd:    firestore.Timestamp.fromDate(DateUtil.atHourNext(new Date(), 2)),
+            timeNotify: firestore.Timestamp.fromDate(DateUtil.atHourNext(new Date(), 2))
         };
 
         return event;

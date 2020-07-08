@@ -10,6 +10,7 @@ import { RoutesPageAssetEvent } from './asset-event.page.routes';
 import { PageEventLocation, ModulePageEventLocation } from '../event-location';
 import { ModulePageAssetsInterests } from '../assets-interests';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { ModulePipeTimestamp } from '@theory/firebase';
 
 @NgModule
 ({
@@ -24,7 +25,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
         RouterModule.forChild(RoutesPageAssetEvent),
         ModulePageEventLocation,
         ModulePageAssetsInterests,
-        NgxsFormPluginModule
+        NgxsFormPluginModule,
+        ModulePipeTimestamp
     ],
 
     declarations : [PageAssetEvent],

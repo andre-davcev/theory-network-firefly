@@ -1,9 +1,9 @@
 <!--app-image-grid [urls]="urls$ | async" [square]="true" (clicked)="imageClicked($event)"></app-image-grid-->
 <ion-content>
   <ion-list *ngFor="let event of events$ | async">
-    <ion-item-divider *ngIf="event.metadata.timeStartFormatted">
+    <ion-item-divider>
         <ion-label>
-            {{ event.metadata.timeStartFormatted }}
+            {{ event.timeStart | timestamp:'dateLong' }}
         </ion-label>
     </ion-item-divider>
 
@@ -12,7 +12,7 @@
           <img [src]="event.metadata.image">
         </ion-avatar>
         <ion-label>
-            {{ event.metadata.timeStartDate | date:'shortTime' }}
+            {{ event.timeStart | timestamp:'shortTime' }}
         </ion-label>
         <ion-label>
             <h2>{{ event.name }}</h2>

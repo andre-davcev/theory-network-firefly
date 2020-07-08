@@ -33,7 +33,7 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         sortFields:
         {
             name      : TypeOf.String,
-            timeStart : TypeOf.Date
+            timeStart : TypeOf.Timestamp
         }
     }
 };

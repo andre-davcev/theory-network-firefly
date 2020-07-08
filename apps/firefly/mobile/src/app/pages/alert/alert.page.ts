@@ -107,11 +107,6 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         {
             this.store.dispatch(new ActionUserEventsDelete(event.id));
         }
-/*
-27BzQWKt3tmUsuLNMGTu
-read      false
-timeStart 2021-05-30T19:00:00-05:00
-*/
     }
 
     public navigate(object: Alert): void

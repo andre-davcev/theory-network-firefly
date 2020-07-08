@@ -36,7 +36,6 @@ import { ImageSize, ServiceStorage } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from, forkJoin } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
-import { StateLanguage } from '@theory/capacitor';
 import { StateUserStream } from '@firefly/core/state/child/user-stream';
 import { Injectable } from '@angular/core';
 import { Collection, ImageType } from '@firefly/core/enums';
@@ -212,50 +211,32 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestEventsGet)
     eventsGet({ patchState, getState, dispatch}: StateContext<StateInterestModel>)
     {
-        const userId: string = this.store.selectSnapshot(StateUser.id());
-        const query: Query   = userId == null ? undefined : this.service.collection('events').ref
-          .where('userId', '==', userId).where('interests', 'array-contains', StateInterest.idState(getState()));
-        var events: Event[] = new Array();
+        const userId : string = this.store.selectSnapshot(StateUser.id());
+
+        const query : Query = userId == null ?
+            undefined :
+            this.service.
+                collection('events').
+                ref.
+                where('userId', '==', userId).
+                where('interests', 'array-contains', StateInterest.idState(getState()));
+
+        const events: Array<Event> = [];
 
         return from(query.get()).pipe
         (
-          map((snapshot: firestore.QuerySnapshot) =>
-            snapshot.docs
-          ),
-          tap((page: Array<firestore.QueryDocumentSnapshot>) =>
-          {
-            const language: string = this.store.selectSnapshot(StateLanguage.language);
-            const options: any = { weekday: 'long',
-              year: 'numeric', month: 'long', day: 'numeric'};
-            const optionsShort: any = { weekday: 'short',
-              year: 'numeric', month: 'short', day: 'numeric'};
-
-            let timeStart: Date;
-            let timeStartPrevious: Date;
-            let timeStartFormatted: string;
-            let timeStartFormattedShort: string;
-
-            page.forEach((document: firestore.QueryDocumentSnapshot) =>
-            {
-              const event: Event = document.data() as Event;
-
-              timeStart = new Date(event.timeStart);
-              timeStartFormatted = timeStart.toLocaleDateString(language, options);
-              timeStartFormattedShort = timeStart.toLocaleDateString(language, optionsShort);
-
-              if(event.metadata === undefined)
-                event.metadata = {};
-
-              if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
-                event.metadata.timeStartFormatted = timeStartFormatted;
-
-              event.metadata.timeStartFormattedShort = timeStartFormattedShort;
-              event.metadata.timeStartDate = timeStart;
-              timeStartPrevious = timeStart;
-
-              events.push(event);
-            })
-          }),
+            map((snapshot: firestore.QuerySnapshot) =>
+                snapshot.docs
+            ),
+            tap((page: Array<firestore.QueryDocumentSnapshot>) =>
+                page.forEach((document: firestore.QueryDocumentSnapshot) =>
+                    events.push
+                    ({
+                        ...document.data() as Event,
+                        metadata: {}
+                    })
+                )
+            ),
           switchMap(() =>
               forkJoin
               (
@@ -277,10 +258,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
               )
           ),
           tap(() =>
-            patchState
-            ({
-              events
-            })
+              patchState({ events })
           )
       )
     }
@@ -292,80 +270,53 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
 
         if (interestId == null) { return of(null); }
 
-        const currentDate = Date();
-        const query: Query   = this.service.collection('events').ref
-          .where('interests', 'array-contains', interestId)
-          .where('timeStart', "<", currentDate.toString())
-          .orderBy('timeStart', 'asc')
-          .limit(5);
-        var events: Event[] = new Array();
+        const query: Query = this.service.
+            collection('events').
+            ref.
+            where('interests', 'array-contains', interestId).
+            where('timeStart', '<', new Date()).
+            orderBy('timeStart', 'asc').
+            limit(5);
+
+        const events: Array<Event> = [];
 
         return from(query.get()).pipe
         (
-          map((snapshot: firestore.QuerySnapshot) =>
-            snapshot.docs
-          ),
-          tap((page: Array<firestore.QueryDocumentSnapshot>) =>
-          {
-            const language: string = this.store.selectSnapshot(StateLanguage.language);
-            const options: any = { weekday: 'long',
-              year: 'numeric', month: 'long', day: 'numeric'};
-            const optionsShort: any = { weekday: 'short',
-              year: 'numeric', month: 'short', day: 'numeric'};
-
-            let timeStart: Date;
-            let timeStartPrevious: Date;
-            let timeStartFormatted: string;
-            let timeStartFormattedShort: string;
-
-            page.forEach((document: firestore.QueryDocumentSnapshot) =>
-            {
-              const event: Event = document.data() as Event;
-
-              timeStart = new Date(event.timeStart);
-              timeStartFormatted = timeStart.toLocaleDateString(language, options);
-              timeStartFormattedShort = timeStart.toLocaleDateString(language, optionsShort);
-
-              if(event.metadata === undefined)
-                event.metadata = {};
-
-              if(timeStartPrevious === undefined || timeStart.getTime() != timeStartPrevious.getTime())
-                event.metadata.timeStartFormatted = timeStartFormatted;
-
-              event.metadata.timeStartFormattedShort = timeStartFormattedShort;
-              event.metadata.timeStartDate = timeStart;
-              timeStartPrevious = timeStart;
-
-              events.push(event);
-            })
-          }),
-          switchMap(() =>
-              forkJoin
-              (
-                  events.
-                      map((item: Event) =>
-                          of(item).
-                          pipe
-                          (
-                              switchMap(() =>
-                                  item.metadata.image ?
-                                      of(item.metadata.image) :
-                                      this.storage.downloadUrl(`${Collection.Events}/${item.id}/${ImageType.Image}.jpeg`, ImageSize.Small)
-                              ),
-                              map((image: string) =>
-                                  item.metadata.image = image
-                              )
-                          )
+            map((snapshot: firestore.QuerySnapshot) =>
+                snapshot.docs
+            ),
+            tap((page: Array<firestore.QueryDocumentSnapshot>) =>
+                page.forEach((document: firestore.QueryDocumentSnapshot) =>
+                    events.push
+                    ({
+                        ...document.data() as Event,
+                        metadata: {}
+                    })
+            )),
+            switchMap(() =>
+                forkJoin
+                (
+                    events.
+                        map((item: Event) =>
+                            of(item).
+                            pipe
+                            (
+                                switchMap(() =>
+                                    item.metadata.image ?
+                                        of(item.metadata.image) :
+                                        this.storage.downloadUrl(`${Collection.Events}/${item.id}/${ImageType.Image}.jpeg`, ImageSize.Small)
+                                ),
+                                map((image: string) =>
+                                    item.metadata.image = image
+                                )
+                            )
+                  )
                 )
-              )
-          ),
-          tap(() =>
-            patchState
-            ({
-              events
-            })
-          )
-      )
+            ),
+            tap(() =>
+                patchState({ events })
+            )
+        )
     }
 
     @Action(ActionInterestImagesUpdate)

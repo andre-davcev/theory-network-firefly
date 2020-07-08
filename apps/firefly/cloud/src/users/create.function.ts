@@ -2,7 +2,7 @@ import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, DocumentReference, FieldValue } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
 import { ServiceFirestore, Version, Interest, Alert, User, UserProfile, ServiceCities, Collection } from '../library';
-
+import { firestore as fire } from ''
 const database: Firestore = db();
 
 const UsersCreate: CloudFunction<DocumentSnapshot> =
@@ -25,7 +25,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         name        : 'Your first alert!',
         description : `This is your first alert. Once you subscribe to Firefly Interests found on the home Discover screen, you will receive alerts when new events are posted in each interest!`,
         interests   : [],
-        timeStart   : new Date().getMilliseconds().toString(),
+        timeStart   : FieldValue.serverTimestamp() as db.Timestamp,
         read        : false,
         website     : 'https://firefly.im'
     };

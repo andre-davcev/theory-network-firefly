@@ -1,6 +1,6 @@
 <ion-item-group>
     <ion-item-divider>
-        <ion-label>{{ dateEvents.date }}</ion-label>
+        <ion-label>{{ dateEvents.date | timestamp:'dateLong' }}</ion-label>
     </ion-item-divider>
 
     <ion-item-sliding *ngFor="let event of dateEvents.events"
@@ -12,7 +12,7 @@
             </ion-avatar>
 
             <ion-label class="cpt-time">
-                {{ event.metadata.timeStartDate | date:'shortTime' }}
+                {{ event.timeStart | timestamp:'shortTime' }}
             </ion-label>
 
             <ion-label>

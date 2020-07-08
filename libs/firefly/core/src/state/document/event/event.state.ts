@@ -25,7 +25,8 @@ import {
   ActionEventSetIdAnonymous,
   ActionEventPatchMetadata,
   ActionEventImagesUpdate,
-  ActionEventImageSet
+  ActionEventImageSet,
+  ActionEventTimeSet
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { firestore } from 'firebase/app';
@@ -108,12 +109,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 
     @Selector() static locationTypes(state: StateEventModel):   Array<MapboxPlaceType> { return StateEvent.dataState(state).locationTypes; }
     @Selector() static locationDefined(state: StateEventModel): boolean                { return StateEvent.locationTypes(state) != null; }
-    @Selector() static timeStart(state: StateEventModel):       string                 { return StateEvent.dataState(state).timeStart; }
-    @Selector() static timeEnd(state: StateEventModel):         string                 { return StateEvent.dataState(state).timeEnd; }
+    @Selector() static timeStart(state: StateEventModel):       firestore.Timestamp    { return StateEvent.dataState(state).timeStart; }
+    @Selector() static timeEnd(state: StateEventModel):         firestore.Timestamp    { return StateEvent.dataState(state).timeEnd; }
     @Selector() static timeEndValid(state: StateEventModel):    boolean                { return StateEvent.formGroupState(state).get('timeEnd').errors == null; }
     @Selector() static private(state: StateEventModel):         boolean                { return StateEvent.dataState(state).private; }
     @Selector() static notifyComplete(state: StateEventModel):  boolean                { return StateEvent.dataState(state).notifyComplete; }
-    @Selector() static timeNotify(state: StateEventModel):      string                 { return StateEvent.dataState(state).timeNotify; }
+    @Selector() static timeNotify(state: StateEventModel):      firestore.Timestamp    { return StateEvent.dataState(state).timeNotify; }
     @Selector() static timeNotifyValid(state: StateEventModel): boolean                { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
     @Selector() static interests(state: StateEventModel):       Array<string>          { return StateEvent.dataState(state).interests; }
     @Selector() static icon(state: StateEventModel):            string                 { return StateEvent.metadataState(state).icon; }
@@ -284,5 +285,16 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
       const interests = this.store.selectSnapshot(StateEvent.interests).filter((interest) => !interest.includes(interestId.id));
 
       return dispatch(new ActionEventPatch({ interests }, true))
+    }
+
+    @Action(ActionEventTimeSet)
+    timeStartSet({ dispatch }: StateContext<StateEventModel>, { key, value }: ActionEventTimeSet)
+    {
+        const timestamp: firestore.FieldValue = firestore.Timestamp.fromDate(new Date(value));
+
+        return dispatch
+        ([
+            new ActionEventPatch({ [key]: timestamp })
+        ]);
     }
 }

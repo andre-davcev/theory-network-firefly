@@ -16,9 +16,9 @@ export interface Event extends FirebaseDocument
     notifyComplete : boolean;
     private        : boolean;
     tagline        : string;
-    timeNotify     : string;
-    timeStart      : string;
-    timeEnd        : string;
+    timeNotify     : firestore.Timestamp;
+    timeStart      : firestore.Timestamp;
+    timeEnd        : firestore.Timestamp;
     phone?         : string;
     virtual        : boolean;
     website?       : string;

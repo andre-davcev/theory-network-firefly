@@ -9,6 +9,7 @@ import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ComponentSlide } from './slide.component';
 import { ModuleComponentButtonAction } from '@firefly/core';
+import { ModulePipeTimestamp } from '@theory/firebase';
 
 @NgModule
 ({
@@ -20,7 +21,8 @@ import { ModuleComponentButtonAction } from '@firefly/core';
         RouterModule,
         TranslateModule,
         ModuleDirectiveElevation,
-        ModuleComponentButtonAction
+        ModuleComponentButtonAction,
+        ModulePipeTimestamp
     ],
 
     declarations : [ComponentSlide],

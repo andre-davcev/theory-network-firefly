@@ -155,9 +155,9 @@ service cloud.firestore {
                data.city.city       is string &&
                data.city.region     is string &&
                data.city.country    is string &&
-               data.timeStart       is string &&
-               data.timeEnd         is string &&
-               data.timeNotify      is string &&
+               data.timeStart       is timestamp &&
+               data.timeEnd         is timestamp &&
+               data.timeNotify      is timestamp &&
                data.interests        is array  &&
                data.interests.size() == 1      &&
                !data.notifyComplete;
@@ -177,10 +177,10 @@ service cloud.firestore {
                dataNew.city.city       is string                  &&
                dataNew.city.region     is string                  &&
                dataNew.city.country    is string                  &&
-               dataNew.timeStart       is string                  &&
-               dataNew.timeEnd         is string                  &&
-               dataNew.timeNotify      is string                  &&
-               dataNew.interests        is array                   &&
+               dataNew.timeStart       is timestamp               &&
+               dataNew.timeEnd         is timestamp               &&
+               dataNew.timeNotify      is timestamp               &&
+               dataNew.interests       is array                   &&
                dataNew.interests.size() == dataOld.interests.size() &&
                !data.notifyComplete;
     }

@@ -92,7 +92,6 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
 
     @Selector
     ([
-        StateLanguage.language,
         StateUser.eventType,
         StateUserEvents.data(),
         StateUser.eventVirtual
@@ -100,7 +99,6 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     public static eventsList
     (
         state      : StateUserAlertsModel,
-        language   : string,
         eventType  : EventType,
         userEvents : Array<Event>,
         virtual    : boolean
@@ -118,27 +116,23 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         {
             const eventsList : Array<DateEvents> = [];
 
-            const timestamp: number = new Date().getMilliseconds();
+            const time: number = new Date().getTime();
 
             const events : Array<Event> = (eventType === EventType.Upcoming ? StateUserAlerts.alerts(state) : userEvents).
                 filter((event: Event) =>
                     (!virtual || event.virtual) &&
-                    Date.parse(event.timeEnd) > timestamp
+                    event.timeEnd.toDate().getTime() > time
                 );
 
-            const options      : any = { weekday: 'long',  year: 'numeric', month: 'long',  day: 'numeric'};
-            const optionsShort : any = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
-
-            let current            : DateEvents;
-            let timeStart          : Date;
-            let timeStartPrevious  : Date;
-            let timeStartFormatted : string;
-            let datesAreEqual      : boolean = true;
+            let current           : DateEvents;
+            let timeStart         : Date;
+            let timeStartPrevious : Date;
+            let datesAreEqual     : boolean = true;
 
             events.
-                forEach((alert: Event) =>
+                forEach((event: Event) =>
                 {
-                    timeStart = new Date(alert.timeStart);
+                    timeStart = event.timeStart.toDate();
 
                     datesAreEqual = timeStartPrevious != null &&
                                     timeStart.getFullYear() === timeStartPrevious.getFullYear() &&
@@ -154,16 +148,12 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
 
                         current =
                         {
-                            date   : timeStart.toLocaleDateString(language, options),
+                            date   : event.timeStart,
                             events : []
                         };
                     }
 
-                    alert.metadata.timeStartFormatted      = timeStartFormatted;
-                    alert.metadata.timeStartFormattedShort = timeStart.toLocaleDateString(language, optionsShort);
-                    alert.metadata.timeStartDate           = timeStart;
-
-                    current.events.push(alert);
+                    current.events.push(event);
 
                     timeStartPrevious = timeStart;
                 });
@@ -187,18 +177,16 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     public static eventsListFound
     (
         state      : StateUserAlertsModel,
-        language   : string,
         eventType  : EventType,
         userEvents : Array<Event>,
         virtual    : boolean
     ) : boolean
     {
-        return StateUserAlerts.eventsList(state, language, eventType, userEvents, virtual).length > 0;
+        return StateUserAlerts.eventsList(state, eventType, userEvents, virtual).length > 0;
     }
 
     @Selector
     ([
-        StateLanguage.language,
         StateUser.eventType,
         StateUserEvents.data(),
         StateUser.eventVirtual
@@ -206,13 +194,12 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     public static eventsListEmpty
     (
         state      : StateUserAlertsModel,
-        language   : string,
         eventType  : EventType,
         userEvents : Array<Event>,
         virtual    : boolean
     ) : boolean
     {
-        return StateUserAlerts.eventsList(state, language, eventType, userEvents, virtual).length === 0;
+        return StateUserAlerts.eventsList(state, eventType, userEvents, virtual).length === 0;
     }
 
     @Selector([StateUser.eventType, StateUser.isPublisher])
@@ -380,11 +367,8 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Action(ActionUserAlertsAddToCalendar)
     addToCalendar(context: StateContext<StateUserAlertsModel>, { alert } : ActionUserAlertsAddToCalendar)
     {
-        const start = new Date(alert.timeStart);
-        const end = new Date(alert.timeEnd)
-
         return from(
-          this.calendar.createEventInteractively(alert.name, alert.city.city, alert.tagline, start, end)
+          this.calendar.createEventInteractively(alert.name, alert.city.city, alert.tagline, alert.timeStart.toDate(), alert.timeEnd.toDate())
         )
     }
 

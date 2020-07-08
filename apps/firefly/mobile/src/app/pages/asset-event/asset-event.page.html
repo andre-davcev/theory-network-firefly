@@ -64,7 +64,7 @@
                     <ion-item>
                         <ion-label>{{ 'general.starts' | translate }}</ion-label>
                         <ion-datetime name="start"
-                                      [value]="timeStart$ | async"
+                                      [value]="timeStart$ | async | timestamp:'isoString'"
                                       [displayFormat]="'date-time.displayFormat' | translate"
                                       [pickerFormat]="'date-time.pickerFormat' | translate"
                                       [cancelText]="'general.cancel' |  translate"
@@ -76,7 +76,7 @@
                     <ion-item>
                         <ion-label>{{ 'general.ends' |  translate }}</ion-label>
                         <ion-datetime name="end"
-                                      [value]="timeEnd$ | async"
+                                      [value]="timeEnd$ | async | timestamp:'isoString'"
                                       [displayFormat]="'date-time.displayFormat' | translate"
                                       [pickerFormat]="'date-time.pickerFormat' | translate"
                                       [cancelText]="'general.cancel' |  translate"
@@ -90,7 +90,7 @@
                         <ion-label>{{ 'page.event.timeNotify' | translate }}</ion-label>
                         <ion-datetime name="notify"
                                       [disabled]="notifyComplete$ | async"
-                                      [value]="timeNotify$ | async"
+                                      [value]="timeNotify$ | async | timestamp:'isoString'"
                                       [displayFormat]="'date-time.displayFormat' | translate"
                                       [pickerFormat]="'date-time.pickerFormatHourly' | translate"
                                       [cancelText]="'general.cancel' |  translate"

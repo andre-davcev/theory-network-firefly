@@ -10,6 +10,7 @@ import { RoutesPageInterestDetail } from './interest-detail.page.routes';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { ModuleComponentButtonAdd } from '@firefly/core';
 import { ModulePageEventSelector } from '../event-selector';
+import { ModulePipeTimestamp } from '@theory/firebase';
 @NgModule
 ({
     imports :
@@ -23,7 +24,8 @@ import { ModulePageEventSelector } from '../event-selector';
         ModuleComponentButtonAdd,
         RouterModule.forChild(RoutesPageInterestDetail),
         ModulePageEventSelector,
-        NgxsFormPluginModule
+        NgxsFormPluginModule,
+        ModulePipeTimestamp
     ],
 
     declarations : [PageInterestDetail],
