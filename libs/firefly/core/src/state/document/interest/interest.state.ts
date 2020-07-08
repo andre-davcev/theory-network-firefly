@@ -264,17 +264,18 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     }
 
     @Action(ActionInterestEventsGetAnonymous)
-    eventsGetAnonymous({ patchState, getState, dispatch}: StateContext<StateInterestModel>)
+    eventsGetAnonymous({ patchState, getState}: StateContext<StateInterestModel>)
     {
         const interestId: string = StateInterest.idState(getState());
 
         if (interestId == null) { return of(null); }
 
+        console.log('here');
         const query: Query = this.service.
             collection('events').
             ref.
             where('interests', 'array-contains', interestId).
-            where('timeStart', '<', new Date()).
+            where('timeStart', '>', new Date()).
             orderBy('timeStart', 'asc').
             limit(5);
 
