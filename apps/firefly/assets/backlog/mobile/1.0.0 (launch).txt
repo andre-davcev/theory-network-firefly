@@ -49,6 +49,8 @@ firestore (security) - test firestore security rules
 firestore (security) - create storage security rules
 firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firestore (storage) - setup storage tests
+subscriptions (all) - debounce quick updates
+subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
 testing (coverage) - setup code coverage
 testing (performance) - performance testing
 testing (unit) - setup jest unit tests
