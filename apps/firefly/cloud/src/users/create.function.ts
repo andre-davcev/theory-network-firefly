@@ -1,8 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, DocumentReference, FieldValue } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version, Interest, Alert, User, UserProfile, ServiceCities, Collection } from '../library';
-import { firestore as fire } from ''
+import { ServiceFirestore, Version, Alert, User, UserProfile, ServiceCities, Collection } from '../library';
 const database: Firestore = db();
 
 const UsersCreate: CloudFunction<DocumentSnapshot> =
