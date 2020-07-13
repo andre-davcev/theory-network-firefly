@@ -1,6 +1,7 @@
 app (errors) - required fields styling (icon/popover)
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
+app (library) - upgrade @ionic & @capacitor
 app (lists) - implement infinite scrolling for lists
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
@@ -11,8 +12,6 @@ auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (search) - auto focus search bar on show [hidden]
 home (bug) - won't load when logging in from new city
-*app (library) - upgrade @ionic & @capacitor
-*events (functions) - deploy to phone & test push notifications
 *users (functions) - update create to add user.notifications using default event
 *events (detail) - fix create new event form & date errors
 events (list) - fix newly created event not uploading image and being put on list
