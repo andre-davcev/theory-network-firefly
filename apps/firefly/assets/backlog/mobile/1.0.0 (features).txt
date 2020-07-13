@@ -20,8 +20,10 @@ events (list) - fix delete "Created" event errors after delete
 events (list) - only allow delete "Created" event if timeNotify not fired
 events (list) - click "Created" event, navigate to event create/edit
 events (detail) - cleanup alert detail styling/alignment
+events (detail) - prevent timeStart change when interests populated
 events (detail) - reverse geocode map
 events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
+events (functions) - find a way to do dynamic storage bucket for events cron (dev/prod)
 firestore (functions) - implement callable function to populate stream for new city
 interests (functions) - on delete interest, delete storage
 interests (detail) - event click navigates to edit event
