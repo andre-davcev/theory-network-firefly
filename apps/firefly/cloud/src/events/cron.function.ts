@@ -1,7 +1,7 @@
 import { runWith, EventContext } from 'firebase-functions';
 import { firestore, storage, messaging } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { Event, Collection, User, ImageType, ImageSize, AlertPartial } from '../library';
+import { Event, Collection, User, ImageType, ImageSize, AlertPartial, ServiceStorage, Project } from '../library';
 import { GetSignedUrlResponse, GetSignedUrlConfig } from '@google-cloud/storage';
 
 const EventsCron =
@@ -13,7 +13,7 @@ onRun(async (context: EventContext) =>
 {
     const database  : Firestore                   = firestore();
     const updates   : Array<Promise<WriteResult>> = [];
-    const bucket    : any                         = storage().bucket('project-4334231676697990915.appspot.com');
+    const bucket    : any                         = storage().bucket(ServiceStorage.bucket(Project.Dev));
     const push      : messaging.Messaging         = messaging();
 
     const debugDoc : firestore.DocumentReference = database.collection(Collection.Debug).doc(Collection.Events);
