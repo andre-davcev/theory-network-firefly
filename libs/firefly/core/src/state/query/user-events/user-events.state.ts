@@ -21,11 +21,9 @@ import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
 import { Collection, ImageType } from '@firefly/core/enums';
-import { ActionEventSetId, ActionEventDelete } from '../../document/event/event.actions';
 import { firestore } from 'firebase/app';
 import { Observable, of } from 'rxjs';
 import { CoreEnum } from '@theory/core';
-import { deepEqual } from 'assert';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 @Injectable()
@@ -57,7 +55,9 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     reset(context: StateContext<StateUserEventsModel>)
     {
         const userId: string = this.store.selectSnapshot(StateUser.id());
-        const query: Query   = userId == null ? undefined : this.service.collection('events').ref.where('userId', '==', userId);
+        const query: Query   = userId == null ? undefined : this.service.
+            collection(Collection.Events).ref.
+            where('userId', '==', userId);
 
         return super.reset(context, { query });
     }
@@ -105,7 +105,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
 
         const delete$: Observable<any> = id === CoreEnum.IdNew ?
             of(null) :
-            this.service.documentDelete(snapshot).pipe();
+            this.service.documentDelete(snapshot);
 
         return delete$.
         pipe

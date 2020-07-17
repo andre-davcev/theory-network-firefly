@@ -125,9 +125,6 @@ export class PageHome extends BaseComponent
 
     public search(event: CustomEvent)
     {
-        console.log(`ToDo: implement simple search/filter`)
-        console.log(`      ${event.detail.value}`);
-
         if(event.detail.value.length < 3)
           return;
 

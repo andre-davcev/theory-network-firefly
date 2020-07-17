@@ -33,7 +33,7 @@ import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';
-import { from, of } from 'rxjs';
+import { from } from 'rxjs';
 import { LocationCity } from '@firefly/core/interfaces';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
