@@ -1,12 +1,10 @@
 app (errors) - required fields styling (icon/popover)
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
-app (library) - upgrade @ionic & @capacitor
 app (lists) - implement infinite scrolling for lists
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
 auth (sign-up) - error handling
-auth (sign-up) - on sign up, send initial notifications 30 seconds later
 auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
@@ -16,18 +14,17 @@ events (detail) - fix time change ExpressionChangedAfterItHasBeenCheckedError
 events (detail) - prevent timeStart change when interests populated
 events (list) - fix newly created event not uploading image and being put on list
 events (list) - fix delete "Created" event errors after delete
+events (list) - fix empty query not returning "Created" events
 events (list) - only allow delete "Created" event if timeNotify not fired
 events (list) - click "Created" event, navigate to event create/edit
 events (detail) - cleanup alert detail styling/alignment
 events (detail) - reverse geocode map
-events (functions) - on interest subscribe wait 1 min, check if still subscribed, send all currentTime < events < timeNotify
+events (functions) - fix push notifications
 events (functions) - find a way to do dynamic storage bucket for events cron (dev/prod)
 firestore (functions) - implement callable function to populate stream for new city
 interests (detail) - event click navigates to edit event
 interests (detail) - add image for interest stream <app-item-interest>
 interests (detail) - add delete button for created interests
-interests (list) - replace event styling with <app-item-events>
-interests (list) - prevent image flash when paging/infinite scroll
 intro (slides) - add slides when app installed
 user-profile (page) - implement save/update
 

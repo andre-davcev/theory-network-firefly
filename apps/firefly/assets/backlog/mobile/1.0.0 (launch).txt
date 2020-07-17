@@ -25,6 +25,7 @@ admin (strategy) - research firefly competitors
 app (analytics) - implement google tag manager
 app (errors) - setup error handling strategy
 app (firestore) - upgrade functions to use nodejs 10
+app (library) - upgrade @ionic & @capacitor
 app (logging) - create logging strategy
 app (security) - setup router guards
 app (store) - release v1 on android
@@ -49,6 +50,8 @@ firestore (security) - test firestore security rules
 firestore (security) - create storage security rules
 firestore (state) - StateFirestore (ActionPersistenceOn, ActionPersistenceOff)
 firestore (storage) - setup storage tests
+interests (list) - replace event styling with <app-item-events>
+interests (list) - prevent image flash when paging/infinite scroll
 subscriptions (all) - debounce quick updates
 subscriptions (all) - stack quick updates in queue (2 max) and put spinner until both are complete
 testing (coverage) - setup code coverage

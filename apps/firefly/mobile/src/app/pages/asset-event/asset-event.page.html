@@ -5,10 +5,10 @@
         </ion-title>
 
         <ion-buttons slot="start">
-          <ion-back-button *ngIf="!modal" color="dark"></ion-back-button>
-          <ion-button *ngIf="modal" color="dark" (click)="cancel()">
-            {{ 'general.cancel' | translate }}
-        </ion-button>
+            <ion-back-button *ngIf="!modal" color="dark"></ion-back-button>
+            <ion-button *ngIf="modal" color="dark" (click)="cancel()">
+                {{ 'general.cancel' | translate }}
+            </ion-button>
         </ion-buttons>
 
         <ion-buttons slot="end">
@@ -93,7 +93,7 @@
                                       [value]="timeNotify$ | async | timestamp:'isoString'"
                                       [displayFormat]="'date-time.displayFormat' | translate"
                                       [pickerFormat]="'date-time.pickerFormatHourly' | translate"
-                                      [cancelText]="'general.cancel' |  translate"
+                                      [cancelText]="'general.cancel' | translate"
                                       [doneText]="'general.done' | translate"
                                       (ionChange)="timeChanged($event, 'timeNotify')"
                                       [class.cpt-invalid]="!(timeNotifyValid$ | async)">

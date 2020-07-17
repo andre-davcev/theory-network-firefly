@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore, DocumentReference, FieldValue } from '@google-cloud/firestore';
+import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version, Alert, User, UserProfile, ServiceCities, Collection } from '../library';
+import { ServiceFirestore, Version, User, UserProfile, ServiceCities, Collection } from '../library';
 const database: Firestore = db();
 
 const UsersCreate: CloudFunction<DocumentSnapshot> =
@@ -15,18 +15,13 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
 
     user.isPublisher = false;
 
-    const documentAlert : DocumentReference = database.collection(Collection.Alerts).doc();
-
-    const alert: Partial<Alert> =
+    user.notifications =
     {
-        userId,
-
-        name        : 'Your first alert!',
-        description : `This is your first alert. Once you subscribe to Firefly Interests found on the home Discover screen, you will receive alerts when new events are posted in each interest!`,
-        interests   : [],
-        timeStart   : FieldValue.serverTimestamp() as db.Timestamp,
-        read        : false,
-        website     : 'https://firefly.im'
+        default :
+        {
+            read:      false,
+            timeStart: db.Timestamp.fromDate(new Date('1776-07-04'))
+        }
     };
 
     const userProfile: Partial<UserProfile> =
@@ -44,7 +39,6 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
     ([
         snapshot.ref.update(user),
         database.collection(Collection.UserProfiles).doc(userId).create(userProfile),
-        documentAlert.set(alert),
         ServiceCities.createIfNew(database, user)
     ]);
 });
