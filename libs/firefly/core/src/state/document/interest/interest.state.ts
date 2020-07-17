@@ -95,7 +95,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
 
     @Selector() static events(state: StateInterestModel):  Array<Event> { return state.events.filter((event: Event) => !event.draft); }
     @Selector() static private(state: StateInterestModel): boolean      { return StateInterest.dataState(state).private; }
-    @Selector([StateUser.userId]) static pendingEvents(state: StateInterestModel, userId: string): Event[] { return state.events.filter((event: Event) => event.draft && (StateInterest.dataState(state).userId === userId || event.userId === userId)) }
+    @Selector([StateUser.userId]) static pendingEvents(state: StateInterestModel, userId: string): Event[] { return !state.events ? [] : state.events.filter((event: Event) => event.draft && (StateInterest.dataState(state).userId === userId || event.userId === userId)) }
     @Selector([StateUser.userId]) static canEdit(state: StateInterestModel, userId: string): boolean
     {
       return StateInterest.dataState(state).userId === userId;
@@ -295,7 +295,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                     })
             )),
             switchMap(() =>
-                forkJoin
+                events.length === 0 ? of(null) : forkJoin
                 (
                     events.
                         map((item: Event) =>
