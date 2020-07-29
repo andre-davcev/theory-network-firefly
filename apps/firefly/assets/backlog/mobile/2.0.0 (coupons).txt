@@ -1,7 +1,0 @@
-auth (sign-up) - select font awesome icons for categories
-auth (sign-up) - add categories slide (Art, Activism, Business, Comedy, Culture, Dance, Festivals, Film, Food, Kids, Holiday, Music, Recreation, Sports, Theater)
-coupons (all) - add coupons feature
-coupons (stripe) - setup metered stripe billing
-coupons (paypal) - setup paypal billing
-interests (detail) - add categories row/model
-interests (detail) - add categories selector modal
