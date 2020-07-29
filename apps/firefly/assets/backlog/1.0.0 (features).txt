@@ -2,13 +2,14 @@ app (errors) - required fields styling (icon/popover)
 app (keyboard) - fix ios ionic/capacitor/mapbox keyboard bug
 app (load) - android splash screen
 app (lists) - implement infinite scrolling for lists
+app (store) - release v1 on android
+app (store) - release v1 on ios
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
 auth (sign-up) - error handling
 auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
-home (search) - auto focus search bar on show [hidden]
 home (bug) - won't load when logging in from new city
 events (detail) - fix time change ExpressionChangedAfterItHasBeenCheckedError
 events (detail) - prevent timeStart change when interests populated
@@ -22,11 +23,11 @@ events (detail) - reverse geocode map
 events (functions) - fix push notifications
 events (functions) - find a way to do dynamic storage bucket for events cron (dev/prod)
 firestore (functions) - implement callable function to populate stream for new city
+firestore (security) - fix database read rules for anonymous login
 interests (detail) - event click navigates to edit event
 interests (detail) - add image for interest stream <app-item-interest>
 interests (detail) - add delete button for created interests
 intro (slides) - add slides when app installed
-user-profile (page) - implement save/update
 
 *andre
 +dave
@@ -41,7 +42,7 @@ jun-03 - 37
 jun-17 - 34
 jun-24 - 33
 jul-09 - 35
-jul-23 - ?
+jul-23 - 28
 aug-06 - ?
 aug-20 - ?
 sep-03 - ?

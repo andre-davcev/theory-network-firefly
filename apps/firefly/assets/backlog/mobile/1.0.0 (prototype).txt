@@ -1,3 +1,0 @@
-
-alerts (detail) - cleanup styling/alignment
-app (errors) - required fields styling (icon/popover)
