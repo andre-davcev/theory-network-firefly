@@ -270,7 +270,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
 
         if (interestId == null) { return of(null); }
 
-        console.log('here');
         const query: Query = this.service.
             collection('events').
             ref.
