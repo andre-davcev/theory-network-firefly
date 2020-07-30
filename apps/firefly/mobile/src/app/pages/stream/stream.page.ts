@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionUserStreamGet, ActionInterestGet, ActionUserStreamGetData, ActionUserStreamSync, ActionUserInterestsGet, ActionUserInterestsGetData } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionUserStreamGet, ActionInterestGet, ActionUserStreamGetData, ActionUserStreamSync, ActionUserInterestsGet, ActionUserInterestsGetData, ActionEventGet } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
@@ -143,6 +143,25 @@ export class PageStream extends BaseComponent implements OnInit
       this.store.dispatch(new ActionUserStreamGet()).pipe(
         switchMap(() => from(this.infiniteScroll.complete())
       )).subscribe();
+    }
+
+    public select(event: Event): void
+    {
+        this.store.dispatch(new ActionMobileLoadingShow()).
+        pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new ActionEventGet(event.id))
+            ),
+            switchMap(() =>
+                this.store.dispatch
+                ([
+                    new ActionMobileLoadingShow(),
+                    new Navigate([Pages.EventDetail, event.id])
+                ])
+            )
+        ).
+        subscribe();
     }
 /*
     public filterChanged(event: any): void

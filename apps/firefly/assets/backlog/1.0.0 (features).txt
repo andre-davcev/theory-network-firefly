@@ -24,7 +24,6 @@ events (functions) - fix push notifications
 events (functions) - find a way to do dynamic storage bucket for events cron (dev/prod)
 firestore (functions) - implement callable function to populate stream for new city
 firestore (security) - fix database read rules for anonymous login
-interests (detail) - event click navigates to edit event
 interests (detail) - add image for interest stream <app-item-interest>
 interests (detail) - add delete button for created interests
 intro (slides) - add slides when app installed
