@@ -7,7 +7,6 @@ app (store) - release v1 on ios
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
 auth (sign-up) - error handling
-*auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (bug) - won't load when logging in from new city
