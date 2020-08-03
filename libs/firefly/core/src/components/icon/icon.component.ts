@@ -90,11 +90,10 @@ export class ComponentIcon implements OnInit
             IconFamily.Custom :
             IconFamily.Ionic;
 
+        classes.push(`cpt-family-${this.family}`);
         classes.push(`cpt-color-${this.color}`);
         classes.push(`cpt-size-${this.size}`);
 
         return classes.join(' ');
     }
-
-    public
 }

@@ -3,8 +3,6 @@
 
 :host
 {
-    --cpt-color-background:   #{$fire-color-primary};
-    --cpt-color-text:         rgb(252, 253, 252);
     --cpt-font-size:          1rem;
     --cpt-font-family:        #{$apple-font-family};
     --cpt-font-transform:     uppercase;
@@ -17,6 +15,24 @@
     position: relative;
     display: flex;
     justify-content: center;
+
+    &.cpt-color-primary             { --cpt-color-background: #{$fire-color-primary}; }
+    &.cpt-color-secondary           { --cpt-color-background: #{$fire-color-accent}; }
+    &.cpt-color-white               { --cpt-color-background: #{$fire-color-white}; }
+    &.cpt-color-white-translucent   { --cpt-color-background: #{$fire-color-white-translucent}; }
+    &.cpt-color-black-translucent   { --cpt-color-background: #{$fire-color-black-translucent}; }
+    &.cpt-color-black               { --cpt-color-background: #{$fire-color-black}; }
+    &.cpt-color-dark                { --cpt-color-background: #{$fire-color-dark}; }
+    &.cpt-color-medium              { --cpt-color-background: #{$fire-color-grey-lightest}; }
+
+    &.cpt-text-color-primary           ion-button { --color: #{$fire-color-primary}; }
+    &.cpt-text-color-secondary         ion-button { --color: #{$fire-color-accent}; }
+    &.cpt-text-color-white             ion-button { --color: #{$fire-color-white}; }
+    &.cpt-text-color-white-translucent ion-button { --color: #{$fire-color-white-translucent}; }
+    &.cpt-text-color-black             ion-button { --color: #{$fire-color-black}; }
+    &.cpt-text-color-black-translucent ion-button { --color: #{$fire-color-black-translucent}; }
+    &.cpt-text-color-dark              ion-button { --color: #{$fire-color-dark}; }
+    &.cpt-text-color-medium            ion-button { --color: #{$fire-color-grey-lightest}; }
 
     ion-button {
         position: relative;

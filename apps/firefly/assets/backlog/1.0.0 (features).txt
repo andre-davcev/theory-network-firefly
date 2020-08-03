@@ -7,7 +7,7 @@ app (store) - release v1 on ios
 auth (login) - switch user data cleanup and screen testing
 auth (login) - add login validation and error messages
 auth (sign-up) - error handling
-auth (sign-up) - limit sign up slides to 3
+*auth (sign-up) - limit sign up slides to 3
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (bug) - won't load when logging in from new city
@@ -26,7 +26,6 @@ firestore (functions) - implement callable function to populate stream for new c
 firestore (security) - fix database read rules for anonymous login
 interests (detail) - add image for interest stream <app-item-interest>
 interests (detail) - add delete button for created interests
-intro (slides) - add slides when app installed
 
 *andre
 +dave

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ModuleComponentLogo, ModuleComponentAuth, ModuleComponentTutorial } from '@firefly/core';
+import { ModuleComponentLogo, ModuleComponentAuth, ModuleComponentTutorial, ModuleComponentIconMessage, ModuleComponentButtonAction } from '@firefly/core';
 import { ModulePage } from '@firefly/app/modules';
 
 import { PageLogin } from './login.page';
@@ -14,7 +14,9 @@ import { PageLogin } from './login.page';
         ReactiveFormsModule,
         ModuleComponentLogo,
         ModuleComponentAuth,
-        ModuleComponentTutorial
+        ModuleComponentTutorial,
+        ModuleComponentIconMessage,
+        ModuleComponentButtonAction
     ],
 
     declarations    : [PageLogin],

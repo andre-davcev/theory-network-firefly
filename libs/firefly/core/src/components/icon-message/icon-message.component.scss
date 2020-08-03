@@ -4,14 +4,9 @@
 
 :host
 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-
     --cpt-icon-color: #{$fire-color-grey-middle};
     --cpt-icon-size: 6rem;
+    --cpt-icon-color-background: #{$fire-color-primary};
 
     --cpt-margin: 3rem;
 
@@ -23,11 +18,44 @@
     --cpt-message-font-weight:             normal;
     --cpt-message-font-letter-spacing:     0px;
 
+    font-size: var(--cpt-message-font-size);
+
+    position: relative;
+
     section {
+        position: relative;
+    }
+
+    &.cpt-fill
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+        section
+        {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .cpt-content
+    {
         position: relative;
         height: 100%;
         width: 100%;
     }
+
+    &.cpt-background-primary             { --cpt-icon-color-background: #{$fire-color-primary}; }
+    &.cpt-background-secondary           { --cpt-icon-color-background: #{$fire-color-accent}; }
+    &.cpt-background-white               { --cpt-icon-color-background: #{$fire-color-white}; }
+    &.cpt-background-white-translucent   { --cpt-icon-color-background: rgba(255, 255, 255, 0.8); }
+    &.cpt-background-black-translucent   { --cpt-icon-color-background: rgba(0, 0, 0, 0.5); }
+    &.cpt-background-black               { --cpt-icon-color-background: #{$fire-color-black}; }
+    &.cpt-background-dark                { --cpt-icon-color-background: #{$fire-color-dark}; }
+    &.cpt-background-medium              { --cpt-icon-color-background: #{$fire-color-grey-lightest}; }
 
     .cpt-icon
     {
@@ -36,21 +64,43 @@
         width: 8rem;
         height: 8rem;
         border-radius: 4rem;
-        background-color: $fire-color-primary;
+        background-color: var(--cpt-icon-color-background);
     }
+
+    &.cpt-message-primary             { --cpt-message-font-color: #{$fire-color-primary}; }
+    &.cpt-message-secondary           { --cpt-message-font-color: #{$fire-color-accent}; }
+    &.cpt-message-white               { --cpt-message-font-color: #{$fire-color-white}; }
+    &.cpt-message-white-translucent   { --cpt-message-font-color: rgba(255, 255, 255, 0.8); }
+    &.cpt-message-black-translucent   { --cpt-message-font-color: rgba(0, 0, 0, 0.5); }
+    &.cpt-message-black               { --cpt-message-font-color: #{$fire-color-black}; }
+    &.cpt-message-dark                { --cpt-message-font-color: #{$fire-color-dark}; }
+    &.cpt-message-medium              { --cpt-message-font-color: #{$fire-color-grey-lightest}; }
 
     .cpt-message
     {
+        position: relative;
+        width: 100%;
         margin: 0;
-        margin-left: var(--cpt-margin);
-        margin-right: var(--cpt-margin);
         padding: 0;
+        padding-left: var(--cpt-margin);
+        padding-right: var(--cpt-margin);
         text-align: var(--cpt-message-text-align);
         font-family: var(--cpt-mesage-font-family);
         color: var(--cpt-message-font-color);
-        font-size: var(--cpt-message-font-size);
         font-weight: var(--cpt-message-font-weight);
         letter-spacing: var(--cpt-mesage-font-letter-spacing);
         line-height: var(--cpt-message-line-height);
+    }
+
+    &.cpt-message-translucent
+    {
+        .cpt-message
+        {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            margin-top: 0.75rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            line-height: 1.4em;
+        }
     }
 }

@@ -1,4 +1,5 @@
-import { Component, Input, ChangeDetectionStrategy, OnInit, HostBinding } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, HostBinding, ElementRef } from '@angular/core';
+import { Color } from '@firefly/core/enums';
 
 @Component
 ({
@@ -9,7 +10,42 @@ import { Component, Input, ChangeDetectionStrategy, OnInit, HostBinding } from '
 })
 export class ComponentButtonAction
 {
-    @Input() text: string = '';
+    @Input()
+    public text: string = '';
 
-    constructor() { }
+    @Input()
+    public textColor: Color = Color.White;
+
+    @Input()
+    public color: Color = Color.Primary;
+
+    public classes: Array<string> = [];
+
+    constructor
+    (
+        private element : ElementRef
+    )
+    { }
+
+    public ngOnInit(): void
+    {
+        this.element.nativeElement.classList.forEach((name: string) =>
+            this.classes.push(name)
+        );
+    }
+
+    @HostBinding('class')
+    public get class(): string
+    {
+        const classes: Array<string> = [];
+
+        this.classes.forEach((name: string) =>
+            classes.push(name)
+        );
+
+        classes.push(`cpt-color-${this.color}`);
+        classes.push(`cpt-text-color-${this.textColor}`);
+
+        return classes.join(' ');
+    }
 }

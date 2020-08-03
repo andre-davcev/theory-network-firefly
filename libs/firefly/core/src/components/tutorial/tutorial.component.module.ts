@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 
-import { ComponentTutorial } from './tuturial.component';
+import { ComponentTutorial } from './tutorial.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { ModuleDirectiveElevation } from '@theory/google';
-import { ModuleComponentParagraph } from '@theory/core';
 
 import { ModuleComponentButtonAction } from '../button-action';
 
@@ -16,8 +14,6 @@ import { ModuleComponentButtonAction } from '../button-action';
         CommonModule,
         FlexLayoutModule,
         IonicModule,
-        ModuleDirectiveElevation,
-        ModuleComponentParagraph,
         ModuleComponentButtonAction
     ],
     declarations: [ComponentTutorial],
