@@ -33,8 +33,6 @@ export class PageLogin
 
     public ionViewWillEnter(): void
     {
-        this.page = Pages.SignUpSlides;
-
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 
