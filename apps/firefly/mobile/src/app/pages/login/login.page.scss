@@ -36,9 +36,12 @@
     ion-slides {
         height: 100%;
         width: 100%;
-        margin-bottom: 1rem;
 
         --bullet-background: #{$fire-color-white};
         --bullet-background-active: #{$fire-color-white};
+    }
+
+    app-button-action {
+        margin-top: 2rem;
     }
 }

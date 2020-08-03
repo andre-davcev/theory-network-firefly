@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StateUser } from '@firefly/core';
+import { StateUser, Color } from '@firefly/core';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '@firefly/mobile';
 
@@ -23,6 +23,7 @@ export class PageLogin
     @Input() page: Pages.Login | Pages.SignUp | Pages.ResetPassword | Pages.SignUpCategories | Pages.SignUpSlides = Pages.Login;
 
     public Pages : any = Pages;
+    public Color : any = Color;
 
     constructor
     (
@@ -32,6 +33,8 @@ export class PageLogin
 
     public ionViewWillEnter(): void
     {
+        this.page = Pages.SignUpSlides;
+
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
     }
 

@@ -6,9 +6,9 @@
     --cpt-color-body:              #{$fire-color-white};
     --cpt-color-heading:           #{$fire-color-primary};
     --cpt-padding:                 2rem;
-    --cpt-image-border-radius:     0.75rem;
     --cpt-color-button:            #{$fire-color-primary};
 
+    position: relative;
     height: 100vh;
     width: 100vw;
     flex-direction: column;
@@ -16,6 +16,11 @@
     padding: var(--cpt-padding);
     padding-top: calc(var(--cpt-padding) * 2);
     padding-bottom: calc(var(--cpt-padding) * 1.75);
+
+    &.cpt-has-image
+    {
+        padding: 0;
+    }
 
     background-color: var(--cpt-color-background);
 
@@ -28,13 +33,18 @@
 
     .cpt-image
     {
-        position: relative;
+        position: absolute;
         width: 100%;
-        flex: 1;
+        height: 100%;
         background-size: cover;
         object-fit: cover;
+    }
 
-        border-radius: var(--cpt-image-border-radius);
+    .cpt-content
+    {
+        position: relative;
+        height: 100%;
+        width: 100%;
     }
 
     app-paragraph {
