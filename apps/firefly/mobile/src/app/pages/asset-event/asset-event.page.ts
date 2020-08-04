@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
@@ -19,7 +19,8 @@ import { firestore } from 'firebase';
 ({
     selector    : 'app-page-asset-event',
     templateUrl : 'asset-event.page.html',
-    styleUrls   : ['./asset-event.page.scss']
+    styleUrls   : ['./asset-event.page.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class PageAssetEvent

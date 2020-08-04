@@ -15,16 +15,8 @@ export class ResolverPageAssetEvent implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-        const setId$: Observable<any> = route.params.id == CoreEnum.IdNew ?
+        return route.params.id == CoreEnum.IdNew ?
             this.store.dispatch(new ActionEventSetId(route.params.id)) :
             of(null);
-
-        return setId$.
-        pipe
-        (
-            switchMap(() =>
-                this.store.dispatch(new ActionMobileLoadingHide())
-            )
-        );
     }
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StateUser, Color } from '@firefly/core';
+import { StateUser, Color, IconType } from '@firefly/core';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '@firefly/mobile';
 
@@ -22,8 +22,9 @@ export class PageLogin
 
     @Input() page: Pages.Login | Pages.SignUp | Pages.ResetPassword | Pages.SignUpCategories | Pages.SignUpSlides = Pages.Login;
 
-    public Pages : any = Pages;
-    public Color : any = Color;
+    public Pages    : any = Pages;
+    public Color    : any = Color;
+    public IconType : any = IconType;
 
     constructor
     (
