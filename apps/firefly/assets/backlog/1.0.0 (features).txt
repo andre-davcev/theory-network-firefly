@@ -10,7 +10,6 @@ auth (sign-up) - error handling
 auth (unauth) - reduce unauthenticated user initial render time
 auth (unauth) - on unauthenticated login save city so you can grab city stream
 home (bug) - won't load when logging in from new city
-events (detail) - fix time change ExpressionChangedAfterItHasBeenCheckedError
 events (detail) - prevent timeStart change when interests populated
 events (list) - fix newly created event not uploading image and being put on list
 events (list) - fix delete "Created" event errors after delete

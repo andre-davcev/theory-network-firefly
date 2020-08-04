@@ -23,7 +23,7 @@
             pager="true">
     <ion-slide>
               <app-tutorial image="assets/sign-up/slide-1.jpg">
-                  <app-icon-message icon="interests"
+                  <app-icon-message [icon]="IconType.Interests"
                                     [iconColor]="Color.White"
                                     [iconBackground]="Color.BlackTranslucent"
                                     [message]="'page.signup.slide-1.message' | translate"
@@ -36,7 +36,7 @@
 
           <ion-slide>
               <app-tutorial image="assets/sign-up/slide-2.jpg">
-                  <app-icon-message icon="newspaper"
+                  <app-icon-message [icon]="IconType.Stream"
                                     [iconColor]="Color.White"
                                     [iconBackground]="Color.BlackTranslucent"
                                     [message]="'page.signup.slide-2.message' | translate"
@@ -50,7 +50,7 @@
           <ion-slide>
               <app-tutorial image="assets/sign-up/slide-3.jpg">
                   <app-icon-message [fill]="false"
-                                    icon="notifications"
+                                    [icon]="IconType.Alerts"
                                     [iconColor]="Color.White"
                                     [iconBackground]="Color.BlackTranslucent"
                                     [message]="'page.signup.slide-3.message' | translate"
