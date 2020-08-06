@@ -16,12 +16,12 @@ events (list) - fix delete "Created" event errors after delete
 events (list) - fix empty query not returning "Created" events
 events (list) - only allow delete "Created" event if timeNotify not fired
 events (list) - click "Created" event, navigate to event create/edit
+events (list) - upcoming events sorting issues
 events (detail) - cleanup alert detail styling/alignment
 events (detail) - reverse geocode map
 events (functions) - fix push notifications
 events (functions) - find a way to do dynamic storage bucket for events cron (dev/prod)
 firestore (functions) - implement callable function to populate stream for new city
-firestore (security) - fix database read rules for anonymous login
 interests (detail) - add image for interest stream <app-item-interest>
 interests (detail) - add delete button for created interests
 
@@ -39,6 +39,6 @@ jun-17 - 34
 jun-24 - 33
 jul-09 - 35
 jul-23 - 28
-aug-06 - ?
+aug-06 - 26
 aug-20 - ?
 sep-03 - ?
