@@ -1,5 +1,63 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /cities/{id} {
+      allow get:    if isAuthenticated(uid());
+      allow list:   if true;
+      allow create: if isAuthenticated(uid());
+      allow update: if isAuthenticated(uid());
+      allow delete: if isAuthenticated(uid());
+    }
+    match /debug/** {
+      allow get:    if false;
+      allow list:   if false;
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+    match /events/{id} {
+      allow get:    if isAuthenticated(uid());
+      allow list:   if true;
+      allow create: if isAuthenticated(uid());
+      allow update: if isAuthenticated(uid());
+      allow delete: if isAuthenticated(uid());
+    }
+    match /interest-streams/{id} {
+      allow get:    if true;
+      allow list:   if isAuthenticated(uid());
+      allow create: if isAuthenticated(uid());
+      allow update: if isAuthenticated(uid());
+      allow delete: if isAuthenticated(uid());
+    }
+    match /interests/{id} {
+      allow get:    if isAuthenticated(uid());
+      allow list:   if true;
+      allow create: if isAuthenticated(uid());
+      allow update: if isAuthenticated(uid());
+      allow delete: if isAuthenticated(uid());
+    }
+    match /user-profiles/{id} {
+      allow get:    if isAuthenticated(uid());
+      allow list:   if isAuthenticated(uid());
+      allow create: if isAuthenticated(uid());
+      allow update: if isAuthenticated(uid());
+      allow delete: if isAuthenticated(uid());
+    }
+    match /users/{id} {
+      allow get:    if isAuthenticated(uid());
+      allow list:   if isAuthenticated(uid());
+      allow create: if isAuthenticated(uid());
+      allow update: if isAuthenticated(uid());
+      allow delete: if isAuthenticated(uid());
+    }
+
+    function auth()                             { return request.auth; }
+    function uid()                              { return auth().uid; }
+    function isAuthenticated(uid)               { return uid != null; }
+  }
+}
+
+service cloud.firestore {
+  match /databases/{database}/documents {
     match /alerts/{alertId} {
       allow get:    alertCanGet(uid(),    dataNew());
       allow list:   alertCanList(uid(),   dataNew());
