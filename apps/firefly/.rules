@@ -1,11 +1,11 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /cities/{id} {
-      allow get:    if isAuthenticated(uid());
-      allow list:   if true;
-      allow create: if isAuthenticated(uid());
-      allow update: if isAuthenticated(uid());
-      allow delete: if isAuthenticated(uid());
+		match /cities/{id} {
+      allow get:    if isUser(uid());
+      allow list:   if isAuthenticated(auth());
+      allow create: if isUser(uid());
+      allow update: if isUser(uid());
+      allow delete: if isUser(uid());
     }
     match /debug/** {
       allow get:    if false;
@@ -14,45 +14,46 @@ service cloud.firestore {
       allow update: if false;
       allow delete: if false;
     }
-    match /events/{id} {
-      allow get:    if isAuthenticated(uid());
-      allow list:   if true;
-      allow create: if isAuthenticated(uid());
-      allow update: if isAuthenticated(uid());
-      allow delete: if isAuthenticated(uid());
+		match /events/{id} {
+      allow get:    if isUser(uid());
+      allow list:   if isAuthenticated(auth());
+      allow create: if isUser(uid());
+      allow update: if isUser(uid());
+      allow delete: if isUser(uid());
     }
-    match /interest-streams/{id} {
-      allow get:    if true;
-      allow list:   if isAuthenticated(uid());
-      allow create: if isAuthenticated(uid());
-      allow update: if isAuthenticated(uid());
-      allow delete: if isAuthenticated(uid());
+		match /interest-streams/{id} {
+      allow get:    if isAuthenticated(auth());
+      allow list:   if isUser(uid());
+      allow create: if isUser(uid());
+      allow update: if isUser(uid());
+      allow delete: if isUser(uid());
     }
     match /interests/{id} {
-      allow get:    if isAuthenticated(uid());
-      allow list:   if true;
-      allow create: if isAuthenticated(uid());
-      allow update: if isAuthenticated(uid());
-      allow delete: if isAuthenticated(uid());
+      allow get:    if isUser(uid());
+      allow list:   if isAuthenticated(auth());
+      allow create: if isUser(uid());
+      allow update: if isUser(uid());
+      allow delete: if isUser(uid());
     }
     match /user-profiles/{id} {
-      allow get:    if isAuthenticated(uid());
-      allow list:   if isAuthenticated(uid());
-      allow create: if isAuthenticated(uid());
-      allow update: if isAuthenticated(uid());
-      allow delete: if isAuthenticated(uid());
+      allow get:    if isUser(uid());
+      allow list:   if isUser(uid());
+      allow create: if isUser(uid());
+      allow update: if isUser(uid());
+      allow delete: if isUser(uid());
     }
     match /users/{id} {
-      allow get:    if isAuthenticated(uid());
-      allow list:   if isAuthenticated(uid());
-      allow create: if isAuthenticated(uid());
-      allow update: if isAuthenticated(uid());
-      allow delete: if isAuthenticated(uid());
+      allow get:    if isUser(uid());
+      allow list:   if isUser(uid());
+      allow create: if isUser(uid());
+      allow update: if isUser(uid());
+      allow delete: if isUser(uid());
     }
 
     function auth()                             { return request.auth; }
     function uid()                              { return auth().uid; }
-    function isAuthenticated(uid)               { return uid != null; }
+    function isUser(uid)               					{ return uid != null; }
+    function isAuthenticated(auth)              { return isUser(auth.uid) || auth.token.firebase.sign_in_provider == 'anonymous'; }
   }
 }
 
