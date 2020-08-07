@@ -15,7 +15,6 @@ events (list) - fix newly created event not uploading image and being put on lis
 events (list) - fix delete "Created" event errors after delete
 events (list) - fix empty query not returning "Created" events
 events (list) - only allow delete "Created" event if timeNotify not fired
-events (list) - click "Created" event, navigate to event create/edit
 events (list) - upcoming events sorting issues
 events (detail) - cleanup alert detail styling/alignment
 events (detail) - reverse geocode map

@@ -112,7 +112,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     public navigate(object: Alert): void
     {
         const page: Pages = object.read == null ?
-            Pages.EventDetail :
+            Pages.AssetEvent :
             Pages.AlertDetail;
 
         this.store.dispatch(new ActionUserEventsReset()).pipe
