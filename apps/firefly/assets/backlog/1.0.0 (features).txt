@@ -18,7 +18,6 @@ events (list) - fix empty query not returning "Created" events
 events (list) - only allow delete "Created" event if timeNotify not fired
 events (list) - upcoming events sorting issues
 events (detail) - cleanup alert detail styling/alignment
-events (detail) - reverse geocode map
 events (functions) - fix push notifications
 events (functions) - find a way to do dynamic storage bucket for events cron (dev/prod)
 firestore (functions) - implement callable function to populate stream for new city

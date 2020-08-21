@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 
-import { User, Location, StreamInterest, SubscriptionPartial, Subscription, AlertPartial } from '@firefly/cloud';
+import { User, Place, StreamInterest, SubscriptionPartial, Subscription, AlertPartial, CityInfo } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -55,7 +55,6 @@ import { ActionUserStreamSetData, ActionUserStreamSync } from '../../child/user-
 import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { GeolocationPosition } from '@capacitor/core';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
-import { LocationCity } from '@firefly/core/interfaces';
 import { StateUserStream } from '../../child/user-stream/user-stream.state';
 import { DocumentSnapshot } from '@angular/fire/firestore';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
@@ -89,7 +88,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 dateUpdated : undefined,
                 metadata    : {},
 
-                cityId              : null,
                 city                : null,
                 email               : '',
                 isPublisher         : false,
@@ -130,8 +128,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static initialized(state: StateUserModel)            : boolean      { return state.initialized; }
     @Selector() static authenticated(state: StateUserModel)          : boolean      { return state.authenticated; }
     @Selector() static authenticating(state: StateUserModel)         : boolean      { return state.authenticating; }
-    @Selector() static city(state: StateUserModel)                   : Location     { const user: User = StateUser.dataState(state); return user == null ? null : user.city; }
-    @Selector() static cityId(state: StateUserModel)                 : string       { const city: Location = StateUser.city(state); return city == null ? null : city.cityId; }
+    @Selector() static city(state: StateUserModel)                   : CityInfo     { const user: User = StateUser.dataState(state); return user == null ? null : user.city;}
+    @Selector() static cityId(state: StateUserModel)                 : string       { const city: CityInfo = StateUser.city(state); return city == null ? null : city.id; }
     @Selector() static language(state: StateUserModel)               : string       { const user: User = StateUser.dataState(state); return user == null ? null : user.language; }
     @Selector() static loading(state: StateUserModel)                : boolean      { return state.authenticating || !state.initialized; }
     @Selector() static loadedNotAuthenticated(state: StateUserModel) : boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
@@ -397,6 +395,12 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             filter((location: GeolocationPosition) =>
                 location != null
             ),
+            tap((location: GeolocationPosition) =>
+                new ActionUserPatch
+                ({
+                    geopoint: new firestore.GeoPoint(location.coords.latitude, location.coords.longitude)
+                })
+            ),
             switchMap((location: GeolocationPosition) =>
                 this.bigdatacloud.reverseGeocode(location.coords.latitude, location.coords.longitude)
             ),
@@ -404,10 +408,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 StateUser.cityId(getState()) !== ServiceLocation.cityIdFromResponse(response)
             ),
             switchMap((response: ResponseReverseGeocode) =>
-                this.location.locationCityFromResponse(response)
+                this.location.cityInfo(response)
             ),
-            switchMap((locationCity: LocationCity) =>
-                dispatch(new ActionUserPatch(locationCity, save))
+            switchMap((city: CityInfo) =>
+                dispatch(
+                    new ActionUserPatch({ city }, save))
             )
         );
     }

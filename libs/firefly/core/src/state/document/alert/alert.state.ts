@@ -46,7 +46,6 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 dateCreated : undefined,
                 dateUpdated : undefined,
 
-                cityId         : null,
                 city           : null,
                 description    : null,
                 draft          : null,
@@ -54,6 +53,7 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 name           : null,
                 interests      : [],
                 notifyComplete : null,
+                placeType      : null,
                 private        : null,
                 tagline        : null,
                 timeNotify     : null,
@@ -68,7 +68,8 @@ export class StateAlert extends StateDocument<Alert, StateAlertModel>
                 metadata:
                 {
                     icon  : null,
-                    image : null
+                    image : null,
+                    place : null
                 }
             },
             {

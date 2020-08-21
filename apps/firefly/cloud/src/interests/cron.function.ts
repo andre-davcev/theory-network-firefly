@@ -64,7 +64,7 @@ onRun(async (context: EventContext) =>
         id              = snapshot.id;
         event           = snapshot.data() as Event;
         eventScores[id] = ServiceStreams.scoreEvent(event, time);
-        city            = event.city.cityId;
+        city            = event.city.id;
 
         event.interests.
         filter((interestId: string) =>

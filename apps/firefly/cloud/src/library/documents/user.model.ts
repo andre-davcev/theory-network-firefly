@@ -1,12 +1,12 @@
-import { FirebaseDocument } from '../interfaces';
+import { FirebaseDocument, CityInfo } from '../interfaces';
 import { firestore } from 'firebase/app';
 
-import { Location, SubscriptionPartial, AlertPartial } from '../models';
+import { SubscriptionPartial, AlertPartial } from '../models';
+import { MetadataUser } from '../metadata';
 
 export interface User extends FirebaseDocument
 {
-    cityId              : string;
-    city                : Location;
+    city                : CityInfo;
     email               : string;
     isPublisher         : boolean;
     language            : string;
@@ -17,4 +17,6 @@ export interface User extends FirebaseDocument
     subscriptions       : Array<string>;
     subscriptionsStatus : Record<string, SubscriptionPartial>;
     tokens              : Array<string>;
+
+    metadata: MetadataUser;
 }

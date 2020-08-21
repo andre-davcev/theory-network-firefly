@@ -1,19 +1,19 @@
 import { firestore } from 'firebase/app';
 
-import { FirebaseDocument } from '../interfaces';
-import { Location } from '../models';
-import { MetadataEvent } from '../metadata/event.metadata';
+import { FirebaseDocument, CityInfo } from '../interfaces';
+import { MetadataEvent } from '../metadata';
+import { MapboxPlaceType } from '../enums';
 
 export interface Event extends FirebaseDocument
 {
-    cityId         : string;
-    city           : Location;
+    city           : CityInfo;
     description    : string;
     draft          : boolean;
     geopoint       : firestore.GeoPoint;
     interests      : Array<string>;
     name           : string;
     notifyComplete : boolean;
+    placeType      : MapboxPlaceType;
     private        : boolean;
     tagline        : string;
     timeNotify     : firestore.Timestamp;

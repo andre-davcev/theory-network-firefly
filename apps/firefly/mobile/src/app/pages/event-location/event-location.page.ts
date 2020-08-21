@@ -1,19 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { StatusBarStyle, Plugins } from '@capacitor/core';
+import { StatusBarStyle } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
-import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateEvent, ActionEventLocationSet } from '@firefly/core';
-import { StateMap, ActionMapPlaceSetWithSearchResult, ActionMapSearchResultSetWithPlace, MapboxPlaceType } from '@theory/mapbox';
+import { StateEvent, ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/core';
+import { MapboxPlaceType } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 import { switchMap, tap } from 'rxjs/operators';
-import { Map } from 'mapbox-gl';
-
-const { Keyboard } = Plugins;
+import { Place } from '@firefly/cloud';
+import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 @Component
 ({
@@ -25,35 +23,22 @@ const { Keyboard } = Plugins;
 export class PageEventLocation extends BaseComponent implements OnInit
 {
 
-    @Select(StateEvent.locationDefined)      locationDefined$:     Observable<boolean>;
-    @Select(StateMap.searchResult)           searchResult$:        Observable<Result>;
-    @Select(StateMap.searchResultDefined)    searchResultDefined$: Observable<boolean>;
+    @Select(StateEvent.locationDefined) locationDefined$ : Observable<boolean>;
+    @Select(StateEvent.place)             place$           : Observable<Place>;
+    @Select(StateEvent.placeDefined)      placeDefined$    : Observable<boolean>;
 
-    public disableDone$: Observable<boolean>;
-    public result: Result;
+    public disableDone$ : Observable<boolean>;
 
-    @Input() virtual: boolean = false;
-
-    public placeTypesPOI: Array<MapboxPlaceType> =
-    [
-        MapboxPlaceType.PointOfInterest,
-        MapboxPlaceType.PointOfInterestLandmark,
-        MapboxPlaceType.Address
-    ];
-
-    public placeTypesCity: Array<MapboxPlaceType> =
-    [
-        MapboxPlaceType.Place/*,
-        MapboxPlaceType.Region,
-        MapboxPlaceType.District*/
-    ];
+    @Input() virtual : boolean = false;
+    @Input() place   : Place;
 
     public placeTypes: Array<MapboxPlaceType> = null;
 
     constructor
     (
-        private store: Store,
-        private modalController: ModalController
+        private store:    Store,
+        private modal:    ModalController,
+        private location: ServiceLocation
     )
     {
         super();
@@ -64,21 +49,16 @@ export class PageEventLocation extends BaseComponent implements OnInit
         this.disableDone$ = combineLatest
         (
             this.locationDefined$,
-            this.searchResultDefined$,
-            (locationDefined, searchResultDefined) => !locationDefined && !searchResultDefined
+            this.placeDefined$,
+            (locationDefined, placeDefined) => !locationDefined && !placeDefined
         );
     }
 
     public ionViewWillEnter(): void
     {
-        if(this.virtual)
-        {
-          this.placeTypes = this.placeTypesCity;
-        }
-        else
-        {
-          this.placeTypes = this.placeTypesPOI;
-        }
+        this.placeTypes = this.virtual ?
+            PlaceTypes.virtual :
+            PlaceTypes.physical;
 
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
 
@@ -92,32 +72,30 @@ export class PageEventLocation extends BaseComponent implements OnInit
         // Keyboard.setScroll({ isDisabled: false });
     }
 
-    public locationFound(result: Result): void
+    public resultFound(result: Result): void
     {
-        this.result = result;
+        this.place = ServiceLocation.place(result);
     }
 
     public cancel(): void
     {
         this.store.dispatch
-        ([
-            new ActionMapSearchResultSetWithPlace(),
+        (
             new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
-        ]);
+        );
 
-        this.modalController.dismiss();
+        this.modal.dismiss();
     }
 
-    public save(): void
+    public done(): void
     {
         this.store.dispatch(new ActionMobileLoadingShow()).pipe
         (
             switchMap(() =>
-                this.store.dispatch
-                ([
-                    new ActionEventLocationSet(this.result),
-                    new ActionMapPlaceSetWithSearchResult()
-                ])
+                this.location.addCity(this.place)
+            ),
+            switchMap((place: Place) =>
+                this.store.dispatch(new ActionEventPlaceSet(place))
             ),
             switchMap(() =>
                 this.store.dispatch
@@ -127,8 +105,9 @@ export class PageEventLocation extends BaseComponent implements OnInit
                 ])
             ),
             tap(() =>
-                this.modalController.dismiss()
+                this.modal.dismiss()
             )
-        ).subscribe();
+        ).
+        subscribe();
     }
 }

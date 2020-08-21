@@ -1,9 +1,10 @@
 import { WriteResult, Firestore, DocumentSnapshot, QuerySnapshot, QueryDocumentSnapshot, CollectionReference } from '@google-cloud/firestore';
 import { firestore } from 'firebase-admin';
-import { Location } from '../models';
+import { Place } from '../models';
 import { Event, User, StreamInterest, Interest, City } from '../documents';
 import { ServiceStreams } from './stream.service';
 import { GlobalVariable, Collection } from '../enums';
+import { CityInfo } from '../interfaces';
 
 export class ServiceCities
 {
@@ -16,17 +17,14 @@ export class ServiceCities
 
     public static async createIfNew(database: Firestore, document: Event | User): Promise<WriteResult>
     {
-        const location: Location         = document.city;
-        const cityDoc:  DocumentSnapshot = await database.collection(Collection.Cities).doc(location.cityId).get();
+        const info    : CityInfo         = document.city;
+        const cityDoc : DocumentSnapshot = await database.collection(Collection.Cities).doc(info.id).get();
 
         if (cityDoc.exists) { return null; }
 
         return cityDoc.ref.create
         ({
-            geopoint:  location.geopoint,
-            city:      location.city,
-            region:    location.region,
-            country:   location.country,
+            ...info,
 
             nearby: {}
         });
@@ -121,7 +119,7 @@ export class ServiceCities
         {
             id              = event.id;
             eventScores[id] = ServiceStreams.scoreEvent(event, time);
-            cityId          = event.cityId;
+            cityId          = event.city.id;
 
             event.interests.
             filter((interestId: string) =>

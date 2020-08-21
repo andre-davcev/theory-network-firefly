@@ -118,10 +118,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         this.store.dispatch(new ActionUserEventsReset()).pipe
         (
             switchMap(() =>
-               this.store.dispatch(new ActionEventGet(object.id))
-            ),
-            switchMap(() =>
-                this.store.dispatch(new ActionEventImageSet())
+                this.store.dispatch(new ActionEventGet(object.id))
             ),
             switchMap(() =>
                 this.store.dispatch(new Navigate([page, object.id]))

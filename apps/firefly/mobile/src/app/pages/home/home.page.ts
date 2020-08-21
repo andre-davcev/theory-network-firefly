@@ -13,8 +13,6 @@ import { Observable, from, of } from 'rxjs';
 import { StateUserAlerts, StateUser } from '@firefly/core';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
-import { ModulePageSearch, PageSearch } from '../search';
-import { ActionMapSearchResultSet } from '@theory/mapbox';
 
 @Component
 ({

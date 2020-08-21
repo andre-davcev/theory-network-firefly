@@ -3,10 +3,11 @@ import { Select } from '@ngxs/store';
 import { StateLocation } from '@theory/capacitor';
 import { Observable } from 'rxjs';
 import { Color } from '@firefly/core/enums';
-import { DirectiveLoadingOptions } from '@firefly/core';
+import { DirectiveLoadingOptions, StateEvent } from '@firefly/core';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, filter } from 'rxjs/operators';
 import { MapMovingMethod } from '@theory/mapbox';
+import { Place } from '@firefly/cloud';
 
 @Component
 ({
@@ -20,7 +21,8 @@ export class ComponentItemMap extends BaseComponent implements OnInit
     @Input() title : string;
     @Input() interactive: boolean = false;
 
-    @Select(StateLocation.locationValid) locationValid$: Observable<boolean>;
+    @Select(StateLocation.isValid) locationValid$ : Observable<boolean>;
+    @Select(StateEvent.place)      place$         : Observable<Place>;
 
     public Color: any = Color;
     public MapMovingMethod: any = MapMovingMethod;

@@ -1,11 +1,7 @@
-import { firestore } from 'firebase/app';
-import { FirebaseDocument } from '../interfaces';
 
-export interface City extends FirebaseDocument
+import { FirebaseDocument, CityInfo } from '../interfaces';
+
+export interface City extends FirebaseDocument, CityInfo
 {
-    city:     string;
-    country:  string;
-    geopoint: firestore.GeoPoint;
-    nearby:   Record<string, number>;
-    region:   string;
+    nearby: Record<string, number>;
 }

@@ -7,13 +7,13 @@ import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventLocationSet, ActionEventTimeSet } from '@firefly/core';
+import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
-import { ActionMapSearchResultClear } from '@theory/mapbox';
 import { firestore } from 'firebase';
+import { Place } from '@firefly/cloud';
 
 @Component
 ({
@@ -120,10 +120,17 @@ export class PageAssetEvent
         }
         else if (page === Pages.EventLocation)
         {
-            const virtual: boolean = this.store.selectSnapshot(StateEvent.data()).virtual;
-            from(this.modalController.create({ component: PageEventLocation,
-                                               componentProps: { virtual }})).
-            subscribe((modalController: HTMLIonModalElement) => modalController.present());
+            const virtual : boolean = this.store.selectSnapshot(StateEvent.virtual);
+            const place   : Place   = this.store.selectSnapshot(StateEvent.place);
+
+            from(this.modalController.create
+            ({
+                component: PageEventLocation,
+                componentProps: { virtual, place }}
+            )).
+            subscribe((modalController: HTMLIonModalElement) =>
+                modalController.present()
+            );
         }
     }
 
@@ -172,11 +179,13 @@ export class PageAssetEvent
 
     public virtualChanged(event: any): void
     {
-      this.store.dispatch(new ActionEventLocationSet(null)).pipe
-      (
-        switchMap(() => this.store.dispatch(new ActionMapSearchResultClear())),
-        switchMap(() => this.store.dispatch(new ActionEventPatch({virtual: event.detail.checked})))
-      ).subscribe();
+        this.store.dispatch(new ActionEventPlaceSet()).pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new ActionEventPatch({ virtual: event.detail.checked }))
+            )
+        ).
+        subscribe();
     }
 
     public save(): void
