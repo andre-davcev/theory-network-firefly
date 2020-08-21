@@ -1,22 +1,24 @@
-import { ServiceMapbox, ContextItem, MapboxPlaceType, ParamsForwardGeocode, ResponseGeocode } from '@theory/mapbox';
+import { ServiceMapbox, ContextItem, MapboxPlaceType, ParamsForwardGeocode, ResponseGeocode, ParamsReverseGeocode } from '@theory/mapbox';
 import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { firestore } from 'firebase/app';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
-import { LocationCity } from '../interfaces';
-import { Location } from '@firefly/cloud';
+import { ReverseMode } from '@theory/mapbox';
+import { Place, CityInfo, Event } from '@firefly/cloud';
 import { Injectable } from '@angular/core';
+import { PlaceTypes } from '../constants';
+import { LngLatLike } from 'mapbox-gl';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceLocation
 {
     constructor
     (
-      private mapbox:       ServiceMapbox,
-      private bigdatacloud: ServiceBigDataCloud
+        private mapbox:       ServiceMapbox,
+        private bigdatacloud: ServiceBigDataCloud
     ) { }
 
     public static cityId(countryCode: string, region: string, city: string): string
@@ -33,28 +35,51 @@ export class ServiceLocation
         return ServiceLocation.cityId(response.countryCode, response.principalSubdivision, response.locality);
     }
 
-    public static locationFromResponse(response: ResponseReverseGeocode): Location
+    public static place(result: Result): Place
+    {
+        const address     : Array<string>      = result.place_name.split(', ');
+        const context     : ContextItem        = result.context[0];
+        const type        : MapboxPlaceType    = context.id.split('.')[0] as MapboxPlaceType;
+        const text        : string             = context.text == null ? result.text : context.text;
+        const title       : string             = address[0];
+        const description : string             = address[1];
+        const center      : Array<number>      = result.center;
+        const geopoint    : firestore.GeoPoint = new firestore.GeoPoint(center[1], center[0]);
+        const centerLike  : LngLatLike         = { lat: geopoint.latitude, lng: geopoint.longitude };
+
+        return {
+            center,
+            centerLike,
+            description,
+            geopoint,
+            text,
+            title,
+            type
+        };
+    }
+
+    public static city(response: ResponseReverseGeocode): CityInfo
     {
         return {
             geopoint : new firestore.GeoPoint(response.latitude, response.longitude),
-            cityId   : ServiceLocation.cityId(response.countryCode, response.principalSubdivision, response.locality),
-            city     : response.locality,
+            id       : ServiceLocation.cityId(response.countryCode, response.principalSubdivision, response.locality),
+            name     : response.locality,
             region   : response.principalSubdivision,
             country  : response.countryCode
         };
     }
 
-    public locationCityFromResponse(response: ResponseReverseGeocode): Observable<LocationCity>
+    public cityInfo(response: ResponseReverseGeocode): Observable<CityInfo>
     {
-        const geopoint: firestore.GeoPoint = new firestore.GeoPoint(response.latitude, response.longitude);
-        const search:   string             = `${response.locality} ${response.principalSubdivision}`;
+        const city   : CityInfo = ServiceLocation.city(response);
+        const search : string   = `${city.name} ${city.region}`;
 
         const options: ParamsForwardGeocode =
         {
             autocomplete: false,
             fuzzyMatch:   false,
             limit:        1,
-            proximity:    [response.longitude, response.latitude],
+            proximity:    [city.geopoint.longitude, city.geopoint.latitude],
             routing:      false,
             types:        [MapboxPlaceType.Place]
         };
@@ -66,56 +91,27 @@ export class ServiceLocation
             ),
             map((center: [number, number]) =>
                 ({
-                    ...response,
-                    latitude:  center[1],
-                    longitude: center[0]
-                })
-            ),
-            map((response: ResponseReverseGeocode) =>
-                ServiceLocation.locationFromResponse(response)
-            ),
-            map((city: Location) =>
-                ({
-                    geopoint,
-                    cityId: city.cityId,
-                    city
+                    ...city,
+
+                    geopoint: new firestore.GeoPoint(center[1], center[0])
                 })
             )
         );
     }
 
-    public locationCityFromResult(result: Result): Observable<LocationCity>
+    public addCity(place: Place): Observable<Place>
     {
-        let text = '';
-        const contextItem: ContextItem = result.
-            context.
-            find((item: ContextItem) =>
-                item.id.split('.')[0] === MapboxPlaceType.Place
-            );
-
-        const center:   [number, number]   = [result.center[0], result.center[1]];
-        const geopoint: firestore.GeoPoint = new firestore.GeoPoint(center[1], center[0]);
-
         const options: ParamsForwardGeocode =
         {
             autocomplete: false,
             fuzzyMatch:   false,
             limit:        1,
-            proximity:    center,
+            proximity:    [place.geopoint.longitude, place.geopoint.latitude],
             routing:      false,
-            types:        [MapboxPlaceType.Place]
+            types:        PlaceTypes.physical
         };
 
-        if(!contextItem)
-        {
-          text = result.text;
-        }
-        else
-        {
-          text = contextItem.text;
-        }
-
-        return this.mapbox.forwardGeocode(text, options).pipe
+        return this.mapbox.forwardGeocode(place.text, options).pipe
         (
             map((response: ResponseGeocode) =>
                 response.features[0].center
@@ -124,14 +120,47 @@ export class ServiceLocation
                 this.bigdatacloud.reverseGeocode(center[1], center[0])
             ),
             map((response: ResponseReverseGeocode) =>
-                ServiceLocation.locationFromResponse(response)
-            ),
-            map((city: Location) =>
+              ({
+                  ...place,
+                  city: ServiceLocation.city(response)
+              })
+            )
+        );
+    }
+
+    public placeFromEvent(event: Event, language: string = 'en'): Observable<Place>
+    {
+        if (event == null)
+        {
+            return of(null);
+        }
+
+        const geopoint  : firestore.GeoPoint = event.geopoint;
+        const latitude  : number             = geopoint.latitude;
+        const longitude : number             = geopoint.longitude;
+
+        const options: ParamsReverseGeocode =
+        {
+            language,
+            limit       : 1,
+            reverseMode : ReverseMode.Distance,
+            routing     : false,
+            types       : [event.placeType]
+        };
+
+        return this.mapbox.reverseGeocode(latitude, longitude, options).
+        pipe
+        (
+            tap(r => console.log(r)),
+            map((response: ResponseGeocode) =>
                 ({
-                    geopoint,
-                    cityId: city.cityId,
-                    city
-                })
+                    place_name: response.features[0].place_name,
+                    center : [longitude, latitude],
+                    context : response.features[0].context,
+                } as Result)
+            ),
+            map((result: Result) =>
+                ServiceLocation.place(result)
             )
         );
     }

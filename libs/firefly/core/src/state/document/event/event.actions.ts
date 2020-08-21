@@ -1,7 +1,5 @@
-import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
-
 import { CoreEnum } from '@theory/core';
-import { Event, Interest, MetadataEvent } from '@firefly/cloud';
+import { Event, Interest, MetadataEvent, Place } from '@firefly/cloud';
 
 import { ActionsEvent } from './event.actions.enum';
 import { firestore } from 'firebase';
@@ -20,7 +18,7 @@ export class ActionEventSetId         { static readonly type = ActionsEvent.SetI
 export class ActionEventImagesUpdate   { static readonly type = ActionsEvent.ImagesUpdate;   constructor() { } }
 export class ActionEventImageSet       { static readonly type = ActionsEvent.ImageSet;       constructor() { } }
 export class ActionEventSetIdAnonymous { static readonly type = ActionsEvent.SetIdAnonymous; constructor(public id: string) { } }
-export class ActionEventLocationSet    { static readonly type = ActionsEvent.LocationSet;    constructor(public result: Result) { } }
+export class ActionEventPlaceSet       { static readonly type = ActionsEvent.PlaceSet;       constructor(public place?: Place) { } }
 export class ActionEventInterestAdd    { static readonly type = ActionsEvent.InterestAdd;    constructor(public interest: Interest) { } }
 export class ActionEventAccept         { static readonly type = ActionsEvent.AcceptEvent;    constructor() { } }
 export class ActionEventDeny           { static readonly type = ActionsEvent.DenyEvent;      constructor() { } }

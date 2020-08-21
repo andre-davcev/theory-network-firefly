@@ -8,7 +8,7 @@
         </ion-buttons>
 
         <ion-buttons slot="end">
-            <ion-button color="primary" (click)="save()" [disabled]="disableDone$ | async">
+            <ion-button color="primary" (click)="done()" [disabled]="disableDone$ | async">
                 {{ 'general.done' | translate }}
             </ion-button>
         </ion-buttons>
@@ -16,11 +16,12 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true">
-    <app-map [geocode]="true"
+    <app-map [place]="place"
+             [geocode]="true"
              [types]="placeTypes"
              [placeholder]="'page.event-location.searchPlaceholder' | translate"
              [mapLoadingText]="'component.map-loading' | translate"
-             (result)="locationFound($event)">
+             (result)="resultFound($event)">
     </app-map>
 </ion-content>
 

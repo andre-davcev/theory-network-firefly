@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
 
-import { Alert, DateEvents, Event, AlertPartial, MetadataAlert } from '@firefly/cloud';
+import { Alert, DateEvents, Event, AlertPartial } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
 import { StateChild } from '@theory/ngxs';
 
@@ -368,7 +368,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     addToCalendar(context: StateContext<StateUserAlertsModel>, { alert } : ActionUserAlertsAddToCalendar)
     {
         return from(
-          this.calendar.createEventInteractively(alert.name, alert.city.city, alert.tagline, alert.timeStart.toDate(), alert.timeEnd.toDate())
+          this.calendar.createEventInteractively(alert.name, alert.city.name, alert.tagline, alert.timeStart.toDate(), alert.timeEnd.toDate())
         )
     }
 

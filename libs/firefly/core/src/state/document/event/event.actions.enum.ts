@@ -20,7 +20,7 @@ export enum ActionsEvent
 
     SetIdAnonymous = '[Event] SetIdAnonymous',
 
-    LocationSet  = '[Event] Location Set',
+    PlaceSet     = '[Event] Place Set',
     InterestAdd  = '[Event] Interest Add',
     AcceptEvent  = '[Event] Accept Event',
     DenyEvent    = '[Event] Deny Event',

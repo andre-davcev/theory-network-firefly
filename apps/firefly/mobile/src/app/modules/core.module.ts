@@ -32,7 +32,6 @@ import { StateNotifications, StateSearch } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { StateMap } from '@theory/mapbox';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
@@ -88,7 +87,6 @@ export function createTranslateLoader(http: HttpClient)
             StateMobile,
             StateNotifications,
             StateSearch,
-            StateMap,
             StateStorage,
 
             StateInterest,

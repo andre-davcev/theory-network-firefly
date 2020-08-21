@@ -1,6 +1,11 @@
 <div fxLayout="column">
     <h4 class="cpt-title" fxFlexAlign="center" *ngIf="title">{{title}}</h4>
     <div class="cpt-map-window">
-        <app-map [interactive]="interactive" [mapMovingMethod]="MapMovingMethod.JumpTo" height="155px" *loading="loading"></app-map>
+        <app-map [place]="place$ | async"
+                 [interactive]="interactive"
+                 [mapMovingMethod]="MapMovingMethod.JumpTo"
+                 height="155px"
+                 *loading="loading">
+        </app-map>
     </div>
 </div>

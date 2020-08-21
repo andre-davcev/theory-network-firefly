@@ -7,7 +7,7 @@
 <mgl-map *ngIf="mapReady$ | async"
          [style]="style"
          [zoom]="[10]"
-         [center]="searchResultCenter$ | async"
+         [center]="place.centerLike"
          [interactive]="interactive"
          [movingMethod]="mapMovingMethod"
          #map>
@@ -37,8 +37,8 @@
                  (error)="eventError($event)">
     </mgl-control>
 
-    <ng-container *ngIf="searchResult$ | async as searchResult">
-        <mgl-marker [lngLat]="searchResult.center"
+    <ng-container>
+        <mgl-marker [lngLat]="place.center"
                     [draggable]="false"
                     [anchor]="MapboxMarkerAnchor.Bottom"
                     #marker>
@@ -50,8 +50,8 @@
                    [closeButton]="false"
                    [anchor]="MapboxMarkerAnchor.BottomLeft"
                    [offset]="annotationOffset">
-            <app-map-annotation [title]="annotationTitle"
-                                [description]="annotationDescription">
+            <app-map-annotation [title]="place.title"
+                                [description]="place.description">
             </app-map-annotation>
         </mgl-popup>
     </ng-container>

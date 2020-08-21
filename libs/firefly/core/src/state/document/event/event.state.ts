@@ -1,16 +1,16 @@
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 
-import { ActionMapSearchResultClear, MapboxPlaceType } from '@theory/mapbox';
+import { MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
-import { Event, Interest } from '@firefly/cloud';
+import { Event, Interest, Place } from '@firefly/cloud';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
 import {
   ActionEventGet,
-  ActionEventLocationSet,
+  ActionEventPlaceSet,
   ActionEventCreate,
   ActionEventPatch,
   ActionEventDelete,
@@ -33,12 +33,13 @@ import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';
-import { from } from 'rxjs';
-import { LocationCity } from '@firefly/core/interfaces';
+import { from, of, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
 import { Query } from '@angular/fire/firestore';
 import { Collection, ImageType } from '@firefly/core/enums';
+import { SetFormPristine } from '@ngxs/form-plugin';
+import { LngLatLike } from 'mapbox-gl';
 
 @State<StateEventModel>(StateEventOptions)
 @Injectable()
@@ -64,7 +65,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 dateCreated : undefined,
                 dateUpdated : undefined,
 
-                cityId         : null,
                 city           : null,
                 description    : null,
                 draft          : false,
@@ -72,6 +72,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 interests      : [],
                 name           : null,
                 notifyComplete : false,
+                placeType      : null,
                 private        : true,
                 tagline        : null,
                 timeNotify     : null,
@@ -84,7 +85,8 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 metadata:
                 {
                     icon  : null,
-                    image : null
+                    image : null,
+                    place : null
                 }
             },
             {
@@ -97,7 +99,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 ActionSave:   ActionEventSave,
                 ActionDelete: ActionEventDelete,
 
-                ActionsReset:  [ ActionMapSearchResultClear ],
+                ActionsReset:  [],
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserEventsAdd],
@@ -119,6 +121,22 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static interests(state: StateEventModel):       Array<string>          { return StateEvent.dataState(state).interests; }
     @Selector() static icon(state: StateEventModel):            string                 { return StateEvent.metadataState(state).icon; }
     @Selector() static image(state: StateEventModel):           string                 { return StateEvent.metadataState(state).image; }
+    @Selector() static place(state: StateEventModel):           Place                  { return StateEvent.metadataState(state).place; }
+    @Selector() static virtual(state: StateEventModel):         boolean                { return StateEvent.dataState(state).virtual}
+
+    @Selector() static placeCenter(state: StateEventModel): LngLatLike
+    {
+        const place: Place = StateEvent.place(state);
+
+        return place == null ?
+            null :
+            place.centerLike;
+    }
+
+    @Selector() static placeDefined(state: StateEventModel): boolean
+    {
+        return StateEvent.place(state) != null;
+    }
 
     @Selector([StateUser.userId]) static canEdit(state: StateEventModel, userId: string): boolean
     {
@@ -140,7 +158,35 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventSet)
     set(context: StateContext<StateEventModel>, action: ActionEventSet)
     {
-        return super.set(context, action);
+        const { getState, dispatch } = context;
+
+        const event: Event = action.data ?
+            action.data :
+            action.snapshot.data() as Event;
+
+        return super.set(context, action).
+        pipe
+        (
+            switchMap(() =>
+                event == null || StateEvent.isNewState(getState()) ?
+                    of(null) :
+                    this.location.placeFromEvent(event).
+                    pipe
+                    (
+                        switchMap((place: Place) =>
+                            dispatch(new ActionEventPlaceSet(place))
+                        )
+                    )
+            ),
+            switchMap(() =>
+                StateEvent.image(getState()) == null ?
+                    of(null) :
+                    this.store.dispatch(new ActionEventImageSet())
+            ),
+            switchMap(() =>
+                dispatch(new SetFormPristine(this.formPath))
+            )
+        );
     }
 
     @Action(ActionEventPatch)
@@ -210,7 +256,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Action(ActionEventSetIdAnonymous)
-    actionSetIdAnonymous({ dispatch }: StateContext<StateEventModel>, { id }: ActionEventSetIdAnonymous)
+    actionSetIdAnonymous(context: StateContext<StateEventModel>, { id }: ActionEventSetIdAnonymous)
     {
       const pendingEvents: Event[] = this.store.selectSnapshot(StateInterest.pendingEvents);
       const pendingEvent: Event[] = pendingEvents.filter((event) => event.id = id);
@@ -253,17 +299,27 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
       );
     }
 
-    @Action(ActionEventLocationSet)
-    setLocation({ dispatch } : StateContext<StateEventModel>, { result }: ActionEventLocationSet)
+    @Action(ActionEventPlaceSet)
+    placeSet({ dispatch } : StateContext<StateEventModel>, { place }: ActionEventPlaceSet)
     {
-        return result == null ?
-            dispatch(new ActionEventPatch({ geopoint: null, city: null, cityId: null })) :
-            this.location.locationCityFromResult(result).pipe
-            (
-                switchMap((locationCity: LocationCity) =>
-                    dispatch(new ActionEventPatch(locationCity))
-                )
-            );
+        const partial: Partial<Event> = place == null ?
+        {
+            geopoint  : null,
+            city      : null,
+            placeType : null
+        } :
+        {
+            geopoint  : place.geopoint,
+            city      : place.city,
+            placeType : place.type
+        };
+
+
+        return dispatch
+        ([
+            new ActionEventPatch(partial),
+            new ActionEventPatchMetadata({ place })
+        ]);
     }
 
     @Action(ActionEventInterestAdd)

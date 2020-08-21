@@ -1,6 +1,6 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { FieldValue, DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { Status, User, Subscription, ServiceCities, SubscriptionPartial, Collection } from '../library';
+import { Status, User, ServiceCities, SubscriptionPartial, Collection } from '../library';
 import { firestore as db } from 'firebase-admin';
 
 const database: Firestore = db();
@@ -28,8 +28,8 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
     let status: Status = Status.Unchanged;
     let interestId: string;
 
-    const cityIdBefore: string = before.cityId == null ? '' : before.cityId;
-    const cityIdAfter:  string = after.cityId  == null ? '' : after.cityId;
+    const cityIdBefore: string = before.id == null ? '' : before.id;
+    const cityIdAfter:  string = after.id  == null ? '' : after.id;
 
     if (cityIdBefore !== cityIdAfter)
     {
