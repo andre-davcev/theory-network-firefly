@@ -8,7 +8,7 @@
         </ion-buttons>
 
         <ion-buttons slot="end">
-            <ion-button color="primary" (click)="done()" [disabled]="disableDone$ | async">
+            <ion-button color="primary" (click)="done()" [disabled]="!place">
                 {{ 'general.done' | translate }}
             </ion-button>
         </ion-buttons>

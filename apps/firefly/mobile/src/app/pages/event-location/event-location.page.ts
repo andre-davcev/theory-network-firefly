@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable, combineLatest } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
@@ -20,14 +20,12 @@ import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
     styleUrls   : ['./event-location.page.scss']
 })
 
-export class PageEventLocation extends BaseComponent implements OnInit
+export class PageEventLocation extends BaseComponent
 {
 
     @Select(StateEvent.locationDefined) locationDefined$ : Observable<boolean>;
     @Select(StateEvent.place)             place$           : Observable<Place>;
     @Select(StateEvent.placeDefined)      placeDefined$    : Observable<boolean>;
-
-    public disableDone$ : Observable<boolean>;
 
     @Input() virtual : boolean = false;
     @Input() place   : Place;
@@ -42,16 +40,6 @@ export class PageEventLocation extends BaseComponent implements OnInit
     )
     {
         super();
-    }
-
-    public ngOnInit(): void
-    {
-        this.disableDone$ = combineLatest
-        (
-            this.locationDefined$,
-            this.placeDefined$,
-            (locationDefined, placeDefined) => !locationDefined && !placeDefined
-        );
     }
 
     public ionViewWillEnter(): void

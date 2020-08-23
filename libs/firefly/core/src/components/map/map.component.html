@@ -7,7 +7,7 @@
 <mgl-map *ngIf="mapReady$ | async"
          [style]="style"
          [zoom]="[10]"
-         [center]="place.centerLike"
+         [center]="place?.centerLike || (locationLike$ | async)"
          [interactive]="interactive"
          [movingMethod]="mapMovingMethod"
          #map>
@@ -37,7 +37,7 @@
                  (error)="eventError($event)">
     </mgl-control>
 
-    <ng-container>
+    <ng-container *ngIf="place">
         <mgl-marker [lngLat]="place.center"
                     [draggable]="false"
                     [anchor]="MapboxMarkerAnchor.Bottom"
