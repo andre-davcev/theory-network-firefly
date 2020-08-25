@@ -1,0 +1,142 @@
+@import 'variables';
+
+:host-context(.ios) {
+    ion-toolbar {
+        ion-title {
+            padding-top: 3px;
+        }
+    }
+}
+
+:host {
+    --background: #{$fire-color-white};
+
+    ion-header {
+        &.header-md::after {
+            background-image: none;
+        }
+    }
+
+    ion-searchbar {
+        --box-shadow: none;
+    }
+
+    ion-slides {
+        --background: #{$fire-color-grey-light};
+        --bullet-background: #{$fire-color-black};
+        --bullet-background-active: #{$fire-color-dark};
+
+        background-color: $fire-color-grey-light;
+        position: relative;
+        width: 100%;
+    }
+
+    ion-slide {
+        width: 100%;
+        margin: 0;
+        margin-top: 28px;
+        margin-bottom: 28px;
+    }
+
+    ion-footer {
+        ion-toolbar {
+            padding-bottom: 1.375rem;
+        }
+    }
+
+    section
+    {
+        position: relative;
+        height: 100%;
+        background-color: $fire-color-grey-lightest;
+    }
+
+    .cpt-notifications
+    {
+        width: 48px;
+        height: 50px;
+
+        padding-top: 2px;
+
+        ion-badge {
+            margin-left: -12px;
+            margin-top: -18px;
+        }
+    }
+}
+
+
+@import 'variables';
+
+:host {
+    /*
+    736px height
+    */
+
+    .cpt-events
+    {
+        height: 100%;
+        width: 100%;
+    }
+
+    ion-fab {
+        &.fab-vertical-bottom  { bottom: 0; }
+        &.fab-horizontal-start { left: 0; }
+
+        &.cpt-empty
+        {
+            &.fab-vertical-bottom  { bottom: 1.5rem; }
+            &.fab-horizontal-start { left: 1.5rem; }
+        }
+
+        ion-button {
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+
+        ion-icon {
+            font-size: 2rem;
+        }
+    }
+
+    --background: #{$fire-color-transparent};
+
+    position: relative;
+    height: 100%;
+
+    ion-slides {
+        --background: #{$fire-color-transparent};
+        --bullet-background: #{$fire-color-black};
+        --bullet-background-active: #{$fire-color-dark};
+
+        background-color: $fire-color-transparent;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 8px;
+
+        .swiper-pagination-bullets
+        {
+            bottom: 14px;
+        }
+    }
+
+    ion-slide {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding-top: 44px;
+        padding-bottom: 38px;
+    }
+
+    app-slide {
+        height: 100%;
+    }
+
+    .searchResults {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        background-color: white;
+    }
+}

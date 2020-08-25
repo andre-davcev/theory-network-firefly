@@ -25,7 +25,7 @@ export class ComponentApp
 {
     @Select(StateUser.found())                userFound$:            Observable<boolean>;
     @Select(StateMobile.pageHome)             pageHome$:             Observable<boolean>;
-    @Select(StateMobile.pageSubscriptions)    pageSubscriptions$:    Observable<boolean>;
+    @Select(StateMobile.pageCalendar)         pageCalendar$:         Observable<boolean>;
     @Select(StateMobile.pagePublishInterests) pagePublishInterests$: Observable<boolean>;
     @Select(StateMobile.pagePublishEvents)    pagePublishEvents$:    Observable<boolean>;
     @Select(StateMobile.pageUserProfile)      pageUserProfile$:      Observable<boolean>;

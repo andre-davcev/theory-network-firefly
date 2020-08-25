@@ -6,8 +6,9 @@ export const routes: Routes =
 [
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
 
-    { path: Pages.Auth, loadChildren: '@firefly/page/auth#ModulePageAuth' },
-    { path: Pages.Home, loadChildren: '@firefly/page/home#ModulePageHome' },
+    { path: Pages.Auth,     loadChildren: '@firefly/page/auth#ModulePageAuth' },
+    { path: Pages.Home,     loadChildren: '@firefly/page/home#ModulePageHome' },
+    { path: Pages.Calendar, loadChildren: '@firefly/page/calendar#ModulePageCalendar' },
 
     { path: Pages.AssetsInterests,  loadChildren: '@firefly/page/assets-interests#ModulePageAssetsInterestsRoute' },
     { path: Pages.AssetInterest,    loadChildren: '@firefly/page/asset-interest#ModulePageAssetInterest'},

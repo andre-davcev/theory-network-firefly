@@ -34,6 +34,7 @@
 
   "menu.title"                : "Menu",
   "menu.home"                 : "Home",
+  "menu.calendar"             : "Calendar",
   "menu.subscriptions"        : "My Interests",
   "menu.publisher"            : "Create Interests",
   "menu.assets"               : "Publish",

@@ -9,6 +9,7 @@ export enum Pages
     SignUpSlides     = 'sign-up-slides',
 
     Home        = 'home',
+    Calendar    = 'calendar',
     Stream      = 'stream',
     Alert       = 'alerts',
     AlertDetail = 'alert-detail',
