@@ -38,7 +38,7 @@ export class StateMobile
     @Selector() static pageAlerts(state: StateMobileModel)           : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Alert}`; }
     @Selector() static pageStream(state: StateMobileModel)           : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
     @Selector() static pageHome(state: StateMobileModel)             : boolean                { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
-    @Selector() static pageSubscriptions(state: StateMobileModel)    : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Subscriptions}`; }
+    @Selector() static pageCalendar(state: StateMobileModel)         : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Calendar}`; }
     @Selector() static pagePublishInterests(state: StateMobileModel) : boolean                { return StateMobile.pageRoot(state) === `/${Pages.AssetsInterests}`; }
     @Selector() static pagePublishEvents(state: StateMobileModel)    : boolean                { return StateMobile.pageRoot(state) === `/${Pages.AssetsEvents}`; }
     @Selector() static pageUserProfile(state: StateMobileModel)      : boolean                { return StateMobile.pageRoot(state) === `/${Pages.UserProfile}`; }

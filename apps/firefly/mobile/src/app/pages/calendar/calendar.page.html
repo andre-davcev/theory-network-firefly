@@ -1,0 +1,73 @@
+<ion-header elevation="1">
+    <ion-toolbar *ngIf="searching"
+                color="light"
+                (ionBlur)="searchShow(false)"
+                (ionCancel)="cancel()"
+                (ionChange)="search($event)">
+        <ion-searchbar #searchBar
+                      debounce="600"
+                      showCancelButton="focus"
+                      [placeholder]="'general.search' | translate">
+        </ion-searchbar>
+    </ion-toolbar>
+
+    <ion-toolbar *ngIf="!searching"
+                 color="light">
+        <ion-title color="dark">
+            {{ 'page.notifications.title' | translate}}
+        </ion-title>
+
+        <ion-buttons slot="end">
+            <ion-button icon-only
+                        [disabled]="menuOpen$ | async"
+                        (click)="searchShow(true)">
+                <ion-icon name="search" color="dark" size="large"></ion-icon>
+            </ion-button>
+
+            <ion-button *ngIf="authenticated$ | async"
+                        icon-only
+                        [disabled]="menuOpen$ | async"
+                        (click)="showPopover($event)">
+                <ion-icon name="options" color="dark" size="large"></ion-icon>
+            </ion-button>
+
+            <ion-button icon-only
+                        (click)="menuOpen()"
+                        [disabled]="menuOpen$ | async">
+                <ion-icon name="person" color="dark" size="large"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<section fxLayout="column" fxLayoutAlign="center">
+    <ion-list *ngIf="searchResultsFound$ | async"
+              class="searchResults">
+        <ion-item *ngFor="let searchResult of searchResults$ | async"
+                  lines="none"
+                  (click)="selectSearchInterest(searchResult)">
+            {{searchResult.name}}
+        </ion-item>
+    </ion-list>
+
+    <ion-content>
+        <ion-list>
+            <app-item-events *ngFor="let events of events$ | async"
+                            [dateEvents]="events"
+                            (selected)="navigate($event)"
+                            (deleted)="eventDelete($event)">
+            </app-item-events>
+        </ion-list>
+
+        <app-button-add *ngIf="add$ | async"
+                    (clicked)="add()"
+                    slot="fixed">
+        </app-button-add>
+    </ion-content>
+
+    <app-icon-message *ngIf="empty$ | async"
+              slot="fixed"
+              [icon]="IconType.Alerts"
+              [message]="(emptyMessage$ | async) | translate">
+    </app-icon-message>
+</section>

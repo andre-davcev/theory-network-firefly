@@ -4,6 +4,7 @@ export * from './asset-event';
 export * from './assets-interests';
 export * from './asset-interest';
 export * from './auth';
+export * from './calendar';
 export * from './event-location';
 export * from './event-selector';
 export * from './home';
