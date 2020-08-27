@@ -4,14 +4,14 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, StateAlert, StateUser, EventType, ActionInterestReset, ActionInterestGet, ActionUserAlertsDelete, ActionUserEventsDelete, ActionEventImageSet, ActionUserEventsReset } from '@firefly/core';
-import { Alert, Event, Interest } from '@firefly/cloud';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionUserAlertsDelete, ActionUserEventsReset } from '@firefly/core';
+import { Alert } from '@firefly/cloud';
 
-import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile, StateSearch, ActionSearchReset, ActionMobileLoadingShow } from '@firefly/mobile';
+import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { PageAlertDetail } from '../alert-detail/alert-detail.page';
-import { FormGroup } from '@angular/forms';
-import { BaseComponent, CoreEnum } from '@theory/core';
+import { BaseComponent } from '@theory/core';
+
 @Component
 ({
     selector    : 'app-page-alert',
@@ -21,22 +21,17 @@ import { BaseComponent, CoreEnum } from '@theory/core';
 
 export class PageAlert extends BaseComponent implements AfterViewInit
 {
-    @Select(StateUserAlerts.list)           events$:             Observable<Array<Alert>>;
-    @Select(StateUserAlerts.listEmpty)      empty$:              Observable<boolean>;
-    @Select(StateUserAlerts.hasUnreadList)  hasUnread$:          Observable<boolean>;
-    @Select(StateUser.eventType)            eventType$:          Observable<EventType>;
-    @Select(StateUser.eventsEmptyMessage)   emptyMessage$:       Observable<string>;
-    @Select(StateSearch.searchResults)      searchResults$:      Observable<Array<Interest>>;
-    @Select(StateSearch.searchResultsFound) searchResultsFound$: Observable<boolean>;
+    @Select(StateUserAlerts.list)          alerts$    : Observable<Array<Alert>>;
+    @Select(StateUserAlerts.listEmpty)     empty$     : Observable<boolean>;
+    @Select(StateUserAlerts.hasUnreadList) hasUnread$ : Observable<boolean>;
 
-    @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
+    @ViewChild('sliderRef', { static: false })
+    protected sliderRef: IonSlides;
 
-    public segment: string = 'fired';
     public slideOptions: any = { zoom: false };
 
-    public Pages     : any = Pages;
-    public IconType  : any = IconType;
-    public EventType : any = EventType;
+    public Pages    : any = Pages;
+    public IconType : any = IconType;
 
     // https://github.com/ionic-team/ionic/issues/20356
     public didInit: boolean = false;
@@ -76,87 +71,26 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         subscribe();
     }
 
-    public alertDetail(alert: Alert): void
-    {
-        this.store.dispatch(new ActionEventGet(alert.id)).
-        pipe
-        (
-            switchMap(() =>
-                from(this.modal.create({
-                    component: PageAlertDetail
-                }))
-            )
-        ).
-        subscribe((modal: HTMLIonModalElement) =>
-            modal.present()
-        );
-    }
-
-    public alertGo(alert: Alert)
+    public go(alert: Alert)
     {
         this.store.dispatch(new ActionUserAlertsGo(alert));
     }
 
-    public eventDelete(event: Event): void
+    public delete(alert: Alert): void
     {
-        const eventType: EventType = this.store.selectSnapshot(StateUser.eventType);
-
-        if (eventType !== EventType.Created)
-        {
-            this.store.dispatch(new ActionUserAlertsDelete(event.id));
-        }
-        else
-        {
-            this.store.dispatch(new ActionUserEventsDelete(event.id));
-        }
+        this.store.dispatch(new ActionUserAlertsDelete(alert.id));
     }
 
     public navigate(object: Alert): void
     {
-        const page: Pages = object.read == null ?
-            Pages.AssetEvent :
-            Pages.AlertDetail;
-
         this.store.dispatch(new ActionUserEventsReset()).pipe
         (
             switchMap(() =>
                 this.store.dispatch(new ActionEventGet(object.id))
             ),
             switchMap(() =>
-                this.store.dispatch(new Navigate([page, object.id]))
+                this.store.dispatch(new Navigate([Pages.AlertDetail, object.id]))
             )
-        ).
-        subscribe();
-    }
-
-    public add(): void
-    {
-        this.store.dispatch
-        ([
-            new ActionInterestReset(),
-            new Navigate([Pages.AssetEvent, CoreEnum.IdNew])
-        ]);
-    }
-
-    public resetSearchResults()
-    {
-      this.store.dispatch(new ActionSearchReset()).subscribe();
-    }
-
-
-    public selectSearchInterest(interest: Interest): void
-    {
-        this.store.dispatch(new ActionSearchReset()).pipe
-        (
-            switchMap(() =>
-                this.store.dispatch(new ActionInterestGet(interest.id))),
-            switchMap(() =>
-                this.store.dispatch
-                ([
-                    new ActionMobileLoadingShow(),
-                    new ActionSearchReset(),
-                    new Navigate([Pages.InterestDetail], {id: interest.id})
-                ]))
         ).
         subscribe();
     }
