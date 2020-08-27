@@ -18,7 +18,8 @@ import {
     ActionInterestReset,
     ActionInterestGet,
     ActionUserEventsDelete,
-    ActionUserEventsReset
+    ActionUserEventsReset,
+    StateUserEvents
 } from '@firefly/core';
 import {
     ActionMobileAuthSelect,
@@ -41,9 +42,10 @@ import algoliaSearch, { SearchIndex, SearchClient } from 'algoliasearch/lite';
 
 export class PageCalendar extends BaseComponent
 {
-    @Select(StateUserAlerts.eventsList)      events$             : Observable<Array<DateEvents> | Array<Alert>>;
-    @Select(StateUserAlerts.eventsListEmpty) empty$              : Observable<boolean>;
-    @Select(StateUserAlerts.eventsAdd)       add$                : Observable<boolean>;
+    @Select(StateUser.isPublisher)           isPublisher$        : Observable<boolean>;
+    @Select(StateUserEvents.list)            events$             : Observable<Array<DateEvents>>;
+    @Select(StateUserEvents.listEmpty)       empty$              : Observable<boolean>;
+    @Select(StateUserEvents.add)             add$                : Observable<boolean>;
     @Select(StateUser.eventType)             eventType$          : Observable<EventType>;
     @Select(StateUser.eventsEmptyMessage)    emptyMessage$       : Observable<string>;
     @Select(StateSearch.searchResults)       searchResults$      : Observable<Array<Interest>>;

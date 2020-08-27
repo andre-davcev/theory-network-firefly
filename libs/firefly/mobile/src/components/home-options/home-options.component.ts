@@ -69,19 +69,7 @@ export class ComponentHomeOptions
         {
             const eventType: EventType = event.detail.value;
 
-            if (eventType === EventType.New)
-            {
-                this.store.dispatch(new ActionUserEventTypeSet(eventType)).
-                pipe
-                (
-                    delay(1),
-                    switchMap(() =>
-                        from(this.popover.dismiss())
-                    )
-                ).
-                subscribe();
-            }
-            else if (eventType === EventType.Upcoming)
+            if (eventType === EventType.Upcoming)
             {
                 if (this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.alerts)[0].metadata.image != null)
                 {

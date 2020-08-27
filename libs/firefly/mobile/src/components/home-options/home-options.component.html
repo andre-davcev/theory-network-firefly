@@ -13,7 +13,6 @@
                 mode="ios"
                 [value]="eventType"
                 (ionChange)="filterChanged($event)">
-        <ion-segment-button [value]="EventType.New">{{ 'page.event.filter.new' | translate }}</ion-segment-button>
         <ion-segment-button [value]="EventType.Upcoming">{{ 'page.event.filter.upcoming' | translate }}</ion-segment-button>
         <ion-segment-button [value]="EventType.Created" *ngIf="isPublisher$ | async">{{ 'page.event.filter.created' | translate }}</ion-segment-button>
     </ion-segment>

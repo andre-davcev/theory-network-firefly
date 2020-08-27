@@ -22,7 +22,7 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         initialized     : false,
         interestType    : InterestType.Unsubscribed,
         interestVirtual : false,
-        eventType       : EventType.New,
+        eventType       : EventType.Upcoming,
         eventVirtual    : false
     }
 };

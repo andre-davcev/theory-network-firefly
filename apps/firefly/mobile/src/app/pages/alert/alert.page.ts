@@ -4,8 +4,8 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionAlertSetId, ActionAlertDelete, StateAlert, StateUser, EventType, ActionInterestReset, ActionInterestGet, ActionUserAlertsDelete, ActionUserEventsDelete, ActionEventImageSet, ActionUserEventsReset } from '@firefly/core';
-import { Alert, Event, DateEvents, Interest } from '@firefly/cloud';
+import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, StateAlert, StateUser, EventType, ActionInterestReset, ActionInterestGet, ActionUserAlertsDelete, ActionUserEventsDelete, ActionEventImageSet, ActionUserEventsReset } from '@firefly/core';
+import { Alert, Event, Interest } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile, StateSearch, ActionSearchReset, ActionMobileLoadingShow } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
@@ -21,29 +21,31 @@ import { BaseComponent, CoreEnum } from '@theory/core';
 
 export class PageAlert extends BaseComponent implements AfterViewInit
 {
-    @Select(StateAlert.formGroup())            form$:      Observable<FormGroup>;
-    @Select(StateUserAlerts.eventsList)        events$:    Observable<Array<DateEvents> | Array<Alert>>;
-    @Select(StateUserAlerts.eventsListEmpty)   empty$:     Observable<boolean>;
-    @Select(StateUserAlerts.hasUnreadList)     hasUnread$: Observable<boolean>;
-    @Select(StateUser.eventType)               eventType$: Observable<EventType>;
-    @Select(StateUser.eventsEmptyMessage)      emptyMessage$:  Observable<string>;
-    @Select(StateUserAlerts.eventsAdd)          add$:           Observable<boolean>;
+    @Select(StateUserAlerts.list)           events$:             Observable<Array<Alert>>;
+    @Select(StateUserAlerts.listEmpty)      empty$:              Observable<boolean>;
+    @Select(StateUserAlerts.hasUnreadList)  hasUnread$:          Observable<boolean>;
+    @Select(StateUser.eventType)            eventType$:          Observable<EventType>;
+    @Select(StateUser.eventsEmptyMessage)   emptyMessage$:       Observable<string>;
     @Select(StateSearch.searchResults)      searchResults$:      Observable<Array<Interest>>;
     @Select(StateSearch.searchResultsFound) searchResultsFound$: Observable<boolean>;
 
     @ViewChild('sliderRef', { static: false }) protected sliderRef: IonSlides;
 
     public segment: string = 'fired';
-    public Pages: any = Pages;
     public slideOptions: any = { zoom: false };
 
+    public Pages     : any = Pages;
     public IconType  : any = IconType;
     public EventType : any = EventType;
 
     // https://github.com/ionic-team/ionic/issues/20356
     public didInit: boolean = false;
 
-    constructor(private store: Store, private modal: ModalController)
+    constructor
+    (
+        private store: Store,
+        private modal: ModalController
+    )
     {
         super();
     }
@@ -142,18 +144,25 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     }
 
 
-    public selectSearchInterest(interest: Interest)
+    public selectSearchInterest(interest: Interest): void
     {
-      this.store.dispatch(new ActionSearchReset()).pipe
-      (
-        switchMap(() =>
-          this.store.dispatch(new ActionInterestGet(interest.id))),
-        switchMap(() =>
-          this.store.dispatch([
-            new ActionMobileLoadingShow(),
-            new ActionSearchReset(),
-            new Navigate([Pages.InterestDetail], {id: interest.id})
-          ]))
-      ).subscribe();
+        this.store.dispatch(new ActionSearchReset()).pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new ActionInterestGet(interest.id))),
+            switchMap(() =>
+                this.store.dispatch
+                ([
+                    new ActionMobileLoadingShow(),
+                    new ActionSearchReset(),
+                    new Navigate([Pages.InterestDetail], {id: interest.id})
+                ]))
+        ).
+        subscribe();
+    }
+
+    public done(): void
+    {
+        this.modal.dismiss();
     }
 }
