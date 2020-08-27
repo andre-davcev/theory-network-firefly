@@ -1,39 +1,19 @@
 @import 'variables';
 
 :host {
+    --background: #{$fire-color-transparent};
+
+    position: relative;
     height: 100%;
     width: 100%;
+
+    background-color: $fire-color-grey-lightest;
 
     .cpt-events
     {
         height: 100%;
         width: 100%;
     }
-
-    ion-fab {
-        &.fab-vertical-bottom  { bottom: 0; }
-        &.fab-horizontal-start { left: 0; }
-
-        &.cpt-empty
-        {
-            &.fab-vertical-bottom  { bottom: 1.5rem; }
-            &.fab-horizontal-start { left: 1.5rem; }
-        }
-
-        ion-button {
-            margin-bottom: 10px;
-            margin-left: 20px;
-        }
-
-        ion-icon {
-            font-size: 2rem;
-        }
-    }
-
-    --background: #{$fire-color-transparent};
-
-    position: relative;
-    height: 100%;
 
     ion-slides {
         --background: #{$fire-color-transparent};

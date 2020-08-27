@@ -20,11 +20,11 @@
                 pager="true"
                 (ionSlideDidChange)="slideChanged()"
                 [options]="slideOptions">
-        <ion-slide #status *ngFor="let alert of events$ | async">
+        <ion-slide #status *ngFor="let alert of alerts$ | async">
             <app-slide [slide]="alert"
                         [buttonText]="'general.go' | translate"
-                        (alertDeleteClicked)="eventDelete(alert)"
-                        (alertGoClicked)="alertGo(alert)"
+                        (alertDeleteClicked)="delete(alert)"
+                        (alertGoClicked)="go(alert)"
                         (alertDetailClicked)="navigate( alert)">
             </app-slide>
         </ion-slide>
@@ -33,7 +33,7 @@
     <app-icon-message *ngIf="empty$ | async"
                       slot="fixed"
                       [icon]="IconType.Alerts"
-                      [message]="(emptyMessage$ | async) | translate">
+                      [message]="'page.events.empty.new' | translate">
     </app-icon-message>
 </section>
 
