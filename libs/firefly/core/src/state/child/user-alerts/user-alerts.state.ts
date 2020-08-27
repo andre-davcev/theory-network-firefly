@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
 
-import { Alert, DateEvents, Event, AlertPartial } from '@firefly/cloud';
+import { Alert, AlertPartial } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
 import { StateChild } from '@theory/ngxs';
 
@@ -27,10 +27,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { from, of, forkJoin, Observable } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
-import { StateLanguage } from '@theory/capacitor';
-import { Collection, EventType, ImageType } from '@firefly/core/enums';
+import { Collection, ImageType } from '@firefly/core/enums';
 import { StateUser } from '../../document/user/user.state';
-import { StateUserEvents } from '../../query/user-events/user-events.state';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
@@ -68,6 +66,18 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         );
     }
 
+
+
+    @Selector() static read(state: StateUserAlertsModel)          : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => alert.read); }
+    @Selector() static readList(state: StateUserAlertsModel)      : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => alert.read && !alert.metadata?.sessionRead); }
+    @Selector() static unread(state: StateUserAlertsModel)        : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read); }
+    @Selector() static unreadList(state: StateUserAlertsModel)    : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read || alert.metadata?.sessionRead); }
+    @Selector() static readCount(state: StateUserAlertsModel)     : number       { return StateUserAlerts.read(state).length; }
+    @Selector() static unreadCount(state: StateUserAlertsModel)   : number       { return StateUserAlerts.unread(state).length; }
+    @Selector() static hasRead(state: StateUserAlertsModel)       : boolean      { return StateUserAlerts.readCount(state) > 0; }
+    @Selector() static hasUnread(state: StateUserAlertsModel)     : boolean      { return StateUserAlerts.unreadCount(state) > 0; }
+    @Selector() static hasUnreadList(state: StateUserAlertsModel) : boolean      { return StateUserAlerts.unreadList(state).length > 0; }
+
     @Selector() static alerts(state: StateUserAlertsModel) : Array<Alert>
     {
         return StateUserAlerts.
@@ -80,137 +90,38 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             });
     }
 
-    @Selector() static read(state: StateUserAlertsModel)          : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => alert.read); }
-    @Selector() static readList(state: StateUserAlertsModel)      : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => alert.read && !alert.metadata?.sessionRead); }
-    @Selector() static unread(state: StateUserAlertsModel)        : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read); }
-    @Selector() static unreadList(state: StateUserAlertsModel)    : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read || alert.metadata?.sessionRead); }
-    @Selector() static readCount(state: StateUserAlertsModel)     : number       { return StateUserAlerts.read(state).length; }
-    @Selector() static unreadCount(state: StateUserAlertsModel)   : number       { return StateUserAlerts.unread(state).length; }
-    @Selector() static hasRead(state: StateUserAlertsModel)       : boolean      { return StateUserAlerts.readCount(state) > 0; }
-    @Selector() static hasUnread(state: StateUserAlertsModel)     : boolean      { return StateUserAlerts.unreadCount(state) > 0; }
-    @Selector() static hasUnreadList(state: StateUserAlertsModel) : boolean      { return StateUserAlerts.unreadList(state).length > 0; }
-
-    @Selector
-    ([
-        StateUser.eventType,
-        StateUserEvents.data(),
-        StateUser.eventVirtual
-    ])
-    public static eventsList
+    @Selector([StateUser.eventVirtual])
+    public static list
     (
-        state      : StateUserAlertsModel,
-        eventType  : EventType,
-        userEvents : Array<Event>,
-        virtual    : boolean
-    ) : Array<Alert> | Array<DateEvents>
+        state   : StateUserAlertsModel,
+        virtual : boolean
+    ) : Array<Alert>
     {
-        if (eventType === EventType.New)
-        {
-            return StateUserAlerts.
-              unreadList(state).
-              filter((alert: Alert) =>
-                  !virtual || alert.virtual
-              );
-        }
-        else
-        {
-            const eventsList : Array<DateEvents> = [];
-
-            const time: number = new Date().getTime();
-
-            const events : Array<Event> = (eventType === EventType.Upcoming ? StateUserAlerts.alerts(state) : userEvents).
-                filter((event: Event) =>
-                    (!virtual || event.virtual) &&
-                    event.timeEnd.toDate().getTime() > time
-                );
-
-            let current           : DateEvents;
-            let timeStart         : Date;
-            let timeStartPrevious : Date;
-            let datesAreEqual     : boolean = true;
-
-            events.
-                forEach((event: Event) =>
-                {
-                    timeStart = event.timeStart.toDate();
-
-                    datesAreEqual = timeStartPrevious != null &&
-                                    timeStart.getFullYear() === timeStartPrevious.getFullYear() &&
-                                    timeStart.getMonth()    === timeStartPrevious.getMonth() &&
-                                    timeStart.getDate()     === timeStartPrevious.getDate();
-
-                    if (!datesAreEqual)
-                    {
-                        if (timeStartPrevious != null)
-                        {
-                            eventsList.push(current);
-                        }
-
-                        current =
-                        {
-                            date   : event.timeStart,
-                            events : []
-                        };
-                    }
-
-                    current.events.push(event);
-
-                    timeStartPrevious = timeStart;
-                });
-
-            if (eventsList.length > 0 || events.length === 1)
-            {
-                eventsList.push(current);
-            };
-
-            return eventsList;
-        }
+        return StateUserAlerts.
+            unreadList(state).
+            filter((alert: Alert) =>
+                !virtual || alert.virtual
+            );
     }
 
-    @Selector
-    ([
-        StateLanguage.language,
-        StateUser.eventType,
-        StateUserEvents.data(),
-        StateUser.eventVirtual
-    ])
-    public static eventsListFound
+    @Selector([StateUser.eventVirtual])
+    public static listFound
     (
-        state      : StateUserAlertsModel,
-        eventType  : EventType,
-        userEvents : Array<Event>,
-        virtual    : boolean
+        state   : StateUserAlertsModel,
+        virtual : boolean
     ) : boolean
     {
-        return StateUserAlerts.eventsList(state, eventType, userEvents, virtual).length > 0;
+        return StateUserAlerts.list(state, virtual).length > 0;
     }
 
-    @Selector
-    ([
-        StateUser.eventType,
-        StateUserEvents.data(),
-        StateUser.eventVirtual
-    ])
-    public static eventsListEmpty
+    @Selector([StateUser.eventVirtual])
+    public static listEmpty
     (
-        state      : StateUserAlertsModel,
-        eventType  : EventType,
-        userEvents : Array<Event>,
-        virtual    : boolean
+        state   : StateUserAlertsModel,
+        virtual : boolean
     ) : boolean
     {
-        return StateUserAlerts.eventsList(state, eventType, userEvents, virtual).length === 0;
-    }
-
-    @Selector([StateUser.eventType, StateUser.isPublisher])
-    public static eventsAdd
-    (
-        state       : StateUserAlertsModel,
-        eventType   : EventType,
-        isPublisher : boolean
-    ): boolean
-    {
-        return isPublisher && eventType === EventType.Created;
+        return StateUserAlerts.list(state, virtual).length === 0;
     }
 
     @Action(ActionUserAlertsReset)

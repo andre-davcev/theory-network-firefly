@@ -14,24 +14,16 @@
     <ion-toolbar *ngIf="!searching"
                  color="light">
         <ion-buttons slot="start">
-            <ion-button *ngIf="((pageStream$ | async) && (authenticated$ | async))" icon-only (click)="go(Pages.Alert)" class="cpt-notifications" [disabled]="menuOpen$ | async">
+            <ion-button *ngIf="authenticated$ | async" icon-only (click)="go(Pages.Alert)" class="cpt-notifications" [disabled]="menuOpen$ | async">
                 <ion-icon name="notifications" color="dark" size="large"></ion-icon>
 
                 <ion-badge slot="end" *ngIf="hasUnread$ | async" color="secondary">{{ unread$ | async }}</ion-badge>
             </ion-button>
-
-            <ion-button *ngIf="((pageAlerts$ | async) && (authenticated$ | async))" icon-only (click)="go(Pages.Stream)" [disabled]="menuOpen$ | async">
-                <ion-icon name="newspaper" color="dark" size="large"></ion-icon>
-            </ion-button>
         </ion-buttons>
 
         <ion-title color="dark">
-          {{ ((pageAlerts$ | async) ? 'page.notifications.title' : 'page.stream.title') | translate}}
+            {{ 'page.stream.title' | translate}}
         </ion-title>
-
-<!--
-        <ion-searchbar ></ion-searchbar>
--->
 
         <ion-buttons slot="end">
             <ion-button icon-only

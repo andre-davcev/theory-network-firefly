@@ -13,18 +13,20 @@
 
     <ion-toolbar *ngIf="!searching"
                  color="light">
-        <ion-title color="dark">
-            {{ 'page.notifications.title' | translate}}
-        </ion-title>
-
-        <ion-buttons slot="end">
+        <ion-buttons slot="start">
             <ion-button icon-only
                         [disabled]="menuOpen$ | async"
                         (click)="searchShow(true)">
                 <ion-icon name="search" color="dark" size="large"></ion-icon>
             </ion-button>
+        </ion-buttons>
 
-            <ion-button *ngIf="authenticated$ | async"
+        <ion-title color="dark">
+            {{ 'page.notifications.title' | translate}}
+        </ion-title>
+
+        <ion-buttons slot="end">
+            <ion-button *ngIf="(isPublisher$ | async) && (authenticated$ | async)"
                         icon-only
                         [disabled]="menuOpen$ | async"
                         (click)="showPopover($event)">

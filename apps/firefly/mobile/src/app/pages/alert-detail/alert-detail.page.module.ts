@@ -19,11 +19,7 @@ import { ModuleComponentButtonAction } from '@firefly/core';
     ],
 
     declarations : [PageAlertDetail],
-    exports : [PageAlertDetail],
-    entryComponents:
-    [
-
-    ]
+    exports : [PageAlertDetail]
 })
 
 export class ModulePageAlertDetail { }

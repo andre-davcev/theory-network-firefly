@@ -22,7 +22,7 @@ import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
 import { NgZone, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { StateUserAlerts, ActionAlertSetId, ActionUserAlertsAdd, ActionUserAlertsMarkRead } from '@firefly/core';
+import { StateUserAlerts, ActionUserAlertsMarkRead } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 @State<StateMobileModel>(StateMobileOptions)
@@ -79,7 +79,6 @@ export class StateMobile
     loadingHide({ getState, patchState }: StateContext<StateMobileModel>)
     {
         const loading: HTMLIonLoadingElement = StateMobile.loadingElement(getState());
-
 
         if (loading != null)
         {

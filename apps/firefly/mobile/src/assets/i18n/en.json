@@ -75,7 +75,7 @@
 
   "page.alert.detail.title": "Notification Detail",
 
-  "page.notifications.title"                 : "Events",
+  "page.notifications.title"                 : "Calendar",
   "page.notifications.tabFired"              : "Fired",
   "page.notifications.tabSubscriptions"      : "Subscriptions",
   "page.notifications.addCoupon"             : "Add Coupon",
@@ -171,7 +171,7 @@
   "page.assets-interests.title"       : "Created Interests",
   "page.assets-interests.title-modal" : "Select Interest",
 
-  "page.alert.title" : "Alert",
+  "page.alerts.title" : "Notifications",
   "page.alerts-list.title" : "All Notifications",
 
   "page.event-location.title"             : "Event Location",

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, PopoverController, IonSearchbar } from '@ionic/angular';
+import { MenuController, PopoverController, IonSearchbar, ModalController } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 
@@ -13,6 +13,7 @@ import { Observable, from, of } from 'rxjs';
 import { StateUserAlerts, StateUser } from '@firefly/core';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
+import { PageAlert } from '../alert';
 
 @Component
 ({
@@ -24,8 +25,6 @@ import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 export class PageHome extends BaseComponent
 {
     @Select(StateMobile.menuOpen)        menuOpen$      : Observable<boolean>;
-    @Select(StateMobile.pageAlerts)      pageAlerts$    : Observable<boolean>;
-    @Select(StateMobile.pageStream)      pageStream$    : Observable<boolean>;
     @Select(StateUserAlerts.unreadCount) unread$        : Observable<number>;
     @Select(StateUserAlerts.hasUnread)   hasUnread$     : Observable<boolean>;
     @Select(StateUser.authenticated)     authenticated$ : Observable<boolean>;
@@ -45,7 +44,8 @@ export class PageHome extends BaseComponent
     (
         private menu    : MenuController,
         private store   : Store,
-        private popover : PopoverController
+        private popover : PopoverController,
+        private modal   : ModalController
     )
     {
         super();
@@ -65,7 +65,17 @@ export class PageHome extends BaseComponent
 
     public go(type: Pages.Alert | Pages.Stream): void
     {
-        this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, type));
+        if (type === Pages.Alert)
+        {
+            from(this.modal.create({ component: PageAlert })).
+            subscribe((modal: HTMLIonModalElement) =>
+                modal.present()
+            );
+        }
+        else
+        {
+            this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, type));
+        }
     }
 
     public menuOpen(): void
