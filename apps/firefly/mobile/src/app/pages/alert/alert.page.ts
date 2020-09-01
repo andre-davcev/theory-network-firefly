@@ -1,8 +1,8 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { switchMap, filter } from 'rxjs/operators';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, from } from 'rxjs';
+import { Observable, from, BehaviorSubject } from 'rxjs';
 
 import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionUserAlertsDelete, ActionUserEventsReset } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
@@ -19,13 +19,13 @@ import { BaseComponent } from '@theory/core';
     styleUrls   : ['./alert.page.scss']
 })
 
-export class PageAlert extends BaseComponent implements AfterViewInit
+export class PageAlert extends BaseComponent
 {
     @Select(StateUserAlerts.list)          alerts$    : Observable<Array<Alert>>;
     @Select(StateUserAlerts.listEmpty)     empty$     : Observable<boolean>;
     @Select(StateUserAlerts.hasUnreadList) hasUnread$ : Observable<boolean>;
 
-    @ViewChild('sliderRef', { static: false })
+    @ViewChild('slider', { static: false })
     protected sliderRef: IonSlides;
 
     public slideOptions: any = { zoom: false };
@@ -34,7 +34,7 @@ export class PageAlert extends BaseComponent implements AfterViewInit
     public IconType : any = IconType;
 
     // https://github.com/ionic-team/ionic/issues/20356
-    public didInit: boolean = false;
+    public didInit$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     constructor
     (
@@ -45,14 +45,11 @@ export class PageAlert extends BaseComponent implements AfterViewInit
         super();
     }
 
-    public ngAfterViewInit(): void
-    {
-        // https://github.com/ionic-team/ionic/issues/20356
-        this.didInit = true;
-    }
-
     public ionViewWillEnter(): void
     {
+        // https://github.com/ionic-team/ionic/issues/20356
+        this.didInit$.next(true);
+
         this.store.dispatch(new ActionMobileSlideAlertRestore(this.sliderRef));
     }
 

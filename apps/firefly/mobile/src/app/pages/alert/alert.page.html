@@ -1,22 +1,23 @@
 <ion-header elevation="1">
     <ion-toolbar color="light">
-        <ion-title color="dark">
-            {{ 'page.alerts.title' | translate }}
-        </ion-title>
-
-        <ion-buttons slot="end">
+        <ion-buttons slot="start">
             <ion-button color="dark" (click)="done()">
                 {{ 'general.done' | translate }}
             </ion-button>
         </ion-buttons>
+
+        <ion-title color="dark">
+            {{ 'page.alerts.title' | translate }}
+        </ion-title>
+
     </ion-toolbar>
 </ion-header>
 
 <section class="cpt-events"
          fxLayout="column"
          fxLayoutAlign="center">
-    <ion-slides *ngIf="hasUnread$ | async"
-                #sliderRef
+    <ion-slides *ngIf="(didInit$ | async) && (hasUnread$ | async)"
+                #slider
                 pager="true"
                 (ionSlideDidChange)="slideChanged()"
                 [options]="slideOptions">
