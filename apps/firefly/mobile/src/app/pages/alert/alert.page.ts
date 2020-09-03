@@ -50,7 +50,9 @@ export class PageAlert extends BaseComponent
         // https://github.com/ionic-team/ionic/issues/20356
         this.didInit$.next(true);
 
-        this.store.dispatch(new ActionMobileSlideAlertRestore(this.sliderRef));
+        setTimeout(() =>
+            this.store.dispatch(new ActionMobileSlideAlertRestore(this.sliderRef))
+        );
     }
 
     public slideChanged(): void
