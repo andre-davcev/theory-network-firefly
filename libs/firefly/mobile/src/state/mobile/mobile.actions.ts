@@ -3,6 +3,7 @@
 import { ActionsMobile } from './mobile.actions.enum';
 import { Pages } from '@firefly/mobile/enums';
 import { IonSlides } from '@ionic/angular';
+import { InterestType, EventType } from '@firefly/core';
 
 export class ActionMobileLoadingShow       { static readonly type = ActionsMobile.LoadingShow;       constructor() {} }
 export class ActionMobileLoadingHide       { static readonly type = ActionsMobile.LoadingHide;       constructor() {} }
@@ -14,3 +15,8 @@ export class ActionMobileAuthSelect        { static readonly type = ActionsMobil
 export class ActionMobileAuthSelected      { static readonly type = ActionsMobile.AuthSelected;      constructor(public page: Pages.Login | Pages.SignUp | Pages.ResetPassword ) {} }
 export class ActionMobileSlideAlertRestore { static readonly type = ActionsMobile.SlideAlertRestore; constructor(public slides: IonSlides) { } }
 export class ActionMobileSlideAlertIndex   { static readonly type = ActionsMobile.SlideAlertIndex;   constructor(public index: number) { } }
+
+export class ActionMobileFilterInterests      { static readonly type = ActionsMobile.FilterInterests;      constructor(public type?: InterestType) { } }
+export class ActionMobileFilterEvents         { static readonly type = ActionsMobile.FilterEvents;         constructor(public type?: EventType) { } }
+export class ActionMobileFilterEventsUpcoming { static readonly type = ActionsMobile.FilterEventsUpcoming; constructor() { } }
+export class ActionMobileFilterEventsCreated  { static readonly type = ActionsMobile.FilterEventsCreated;  constructor() { } }

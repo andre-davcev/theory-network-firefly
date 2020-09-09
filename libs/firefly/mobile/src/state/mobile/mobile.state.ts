@@ -12,7 +12,11 @@ import {
     ActionMobileAuthSelected,
     ActionMobileSlideAlertIndex,
     ActionMobileSlideAlertRestore,
-    ActionMobileAuthSelect
+    ActionMobileAuthSelect,
+    ActionMobileFilterInterests,
+    ActionMobileFilterEvents,
+    ActionMobileFilterEventsUpcoming,
+    ActionMobileFilterEventsCreated
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
 import { LoadingController, ToastController, NavController, ActionSheetController } from '@ionic/angular';
@@ -22,7 +26,7 @@ import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
 import { NgZone, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { StateUserAlerts, ActionUserAlertsMarkRead } from '@firefly/core';
+import { StateUserAlerts, ActionUserAlertsMarkRead, ActionUserInterestTypeSet, InterestType, StateUserInterests, ActionUserInterestsGetData, EventType, ActionUserEventTypeSet, ActionUserAlertsGetImages, StateUserEvents, ActionUserEventsGetData, StateUser } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 @State<StateMobileModel>(StateMobileOptions)
@@ -225,5 +229,59 @@ export class StateMobile
                 dispatch(new ActionUserAlertsMarkRead(alert.id))
             )
         );
+    }
+
+    @Action(ActionMobileFilterInterests)
+    filterInterests({ dispatch }: StateContext<StateMobileModel>, { type }: ActionMobileFilterInterests)
+    {
+        type = type || this.store.selectSnapshot(StateUser.interestType);
+
+        return type !== InterestType.Created || this.store.selectSnapshot(StateUserInterests.initialized()) ?
+            dispatch(new ActionUserInterestTypeSet(type)) :
+            dispatch(new ActionMobileLoadingShow()).
+            pipe
+            (
+                switchMap(() => dispatch(new ActionUserInterestsGetData())),
+                switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
+                switchMap(() => this.store.dispatch(new ActionUserInterestTypeSet(type)))
+            );
+    }
+
+    @Action(ActionMobileFilterEvents)
+    filterEvents({ dispatch }: StateContext<StateMobileModel>, { type }: ActionMobileFilterEvents)
+    {
+        type = type || this.store.selectSnapshot(StateUser.eventType);
+
+        return type === EventType.Upcoming ?
+            dispatch(new ActionMobileFilterEventsUpcoming()) :
+            dispatch(new ActionMobileFilterEventsCreated());
+    }
+
+    @Action(ActionMobileFilterEventsUpcoming)
+    filterEventsUpcoming({ dispatch }: StateContext<StateMobileModel>)
+    {
+        return this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.alerts)[0].metadata.image != null ?
+            dispatch(new ActionUserEventTypeSet(EventType.Upcoming)) :
+            dispatch(new ActionMobileLoadingShow()).
+            pipe
+            (
+                switchMap(() => this.store.dispatch(new ActionUserAlertsGetImages())),
+                switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
+                switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(EventType.Upcoming)))
+            );
+    }
+
+    @Action(ActionMobileFilterEventsCreated)
+    filterEventsCreated({ dispatch }: StateContext<StateMobileModel>)
+    {
+        return this.store.selectSnapshot(StateUserEvents.initialized()) ?
+            dispatch(new ActionUserEventTypeSet(EventType.Created)) :
+            dispatch(new ActionMobileLoadingShow()).
+            pipe
+            (
+                switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
+                switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
+                switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(EventType.Created)))
+            )
     }
 }
