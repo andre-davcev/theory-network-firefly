@@ -4,7 +4,7 @@ import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventType
 import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 import { Observable, from } from 'rxjs';
-import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile/state';
+import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileFilterInterests, ActionMobileFilterEvents } from '@firefly/mobile/state';
 import { switchMap, delay } from 'rxjs/operators';
 
 @Component
@@ -36,94 +36,17 @@ export class ComponentHomeOptions
 
     public filterChanged(event: CustomEvent): void
     {
-        if (this.isStream)
-        {
-            const interestType: InterestType = event.detail.value;
+        const action: any = this.isStream ?
+            new ActionMobileFilterInterests(event.detail.value) :
+            new ActionMobileFilterEvents(event.detail.value);
 
-            if (interestType !== InterestType.Created || this.store.selectSnapshot(StateUserInterests.initialized()))
-            {
-                this.store.dispatch(new ActionUserInterestTypeSet(interestType)).
-                pipe
-                (
-                    delay(1),
-                    switchMap(() =>
-                        from(this.popover.dismiss())
-                    )
-                ).
-                subscribe();
-            }
-            else
-            {
-                this.store.dispatch(new ActionMobileLoadingShow()).
-                pipe
-                (
-                    switchMap(() => from(this.popover.dismiss())),
-                    switchMap(() => this.store.dispatch(new ActionUserInterestsGetData())),
-                    switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
-                    switchMap(() => this.store.dispatch(new ActionUserInterestTypeSet(interestType)))
-                ).
-                subscribe();
-            }
-        }
-        else
-        {
-            const eventType: EventType = event.detail.value;
-
-            if (eventType === EventType.Upcoming)
-            {
-                if (this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.alerts)[0].metadata.image != null)
-                {
-                    this.store.dispatch(new ActionUserEventTypeSet(eventType)).
-                    pipe
-                    (
-                        delay(1),
-                        switchMap(() =>
-                            from(this.popover.dismiss())
-                        )
-                    ).
-                    subscribe();
-                }
-                else
-                {
-                    this.store.dispatch(new ActionMobileLoadingShow()).
-                    pipe
-                    (
-                        switchMap(() => from(this.popover.dismiss())),
-                        switchMap(() => this.store.dispatch(new ActionUserAlertsGetImages())),
-                        switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
-                        switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
-                    ).
-                    subscribe();
-                }
-            }
-            else if (eventType === EventType.Created)
-            {
-                if (this.store.selectSnapshot(StateUserEvents.initialized()))
-                {
-                    this.store.dispatch(new ActionUserEventTypeSet(eventType)).
-                    pipe
-                    (
-                        delay(1),
-                        switchMap(() =>
-                            from(this.popover.dismiss())
-                        )
-                    ).
-                    subscribe();
-                }
-                else
-                {
-                    this.store.dispatch(new ActionMobileLoadingShow()).
-                    pipe
-                    (
-                        switchMap(() => from(this.popover.dismiss())),
-                        switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
-                        switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
-                        switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(eventType)))
-                    ).
-                    subscribe();
-                }
-            }
-        }
+        this.store.dispatch(action).
+        pipe
+        (
+            delay(1),
+            switchMap(() => from(this.popover.dismiss()))
+        ).
+        subscribe();
     }
 
     public virtualChanged(event: CustomEvent): void

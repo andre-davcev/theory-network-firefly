@@ -7,7 +7,7 @@ import { RouterNavigation } from '@ngxs/router-plugin';
 
 import { PlatformEnum } from '@theory/ionic';
 
-import { Pages, ActionMobileAuthSelected, StateMobile } from '@firefly/mobile';
+import { Pages, ActionMobileAuthSelected, StateMobile, ActionMobileFilterEvents } from '@firefly/mobile';
 import { ActionUserLogout, StateUser, IconType, Color, IconSize } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
 import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
@@ -82,7 +82,21 @@ export class ComponentApp
     {
         this.menu.close();
 
-        this.store.dispatch(new ActionMobileNavigateRoot(page));
+        if (page === Pages.Calendar)
+        {
+            this.store.dispatch(new ActionMobileFilterEvents()).
+            pipe
+            (
+                switchMap(() =>
+                    this.store.dispatch(new ActionMobileNavigateRoot(page))
+                )
+            ).
+            subscribe();
+        }
+        else
+        {
+            this.store.dispatch(new ActionMobileNavigateRoot(page));
+        }
     }
 
     public logout(): void
