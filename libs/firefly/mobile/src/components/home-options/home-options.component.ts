@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { InterestType, ActionUserInterestTypeSet, EventType, ActionUserEventTypeSet, StateUser, StateUserInterests, ActionUserInterestsGetData, StateUserEvents, StateUserAlerts, ActionUserAlertsGetImages, ActionUserEventsGetData, ActionUserEventVirtualSet, ActionUserInterestVirtualSet } from '@firefly/core';
+import { InterestType, EventType, StateUser, ActionUserEventVirtualSet, ActionUserInterestVirtualSet } from '@firefly/core';
 import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 import { Observable, from } from 'rxjs';
-import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileFilterInterests, ActionMobileFilterEvents } from '@firefly/mobile/state';
+import { ActionMobileFilterInterests, ActionMobileFilterEvents } from '@firefly/mobile/state';
 import { switchMap, delay } from 'rxjs/operators';
 
 @Component

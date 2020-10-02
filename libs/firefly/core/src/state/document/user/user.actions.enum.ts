@@ -13,12 +13,11 @@ export enum ActionsUser
 
     Authenticate      = '[User] Authenticate',
     AuthenticateCheck = '[User] Authenticate Check',
-    NotLoggedIn       = '[User] Not Logged In',
     AnonymousLogin    = '[User] Anonymous Log In',
     Watch             = '[User] Watch',
+    WatchLanguage     = '[User] Watch Language',
     WatchLocation     = '[User] Watch Location',
     WatchCity         = '[User] Watch City',
-    WatchLanguage     = '[User] Watch Language',
     AddToken          = '[User] Add Token',
     LoginEmail        = '[User] Login Email',
     Logout            = '[User] Logout',

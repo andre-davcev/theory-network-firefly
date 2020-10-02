@@ -232,7 +232,8 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
         const imageSize  : ImageSize         = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
         const items      : Array<T>          = StateCollection.dataState(state);
 
-        return of(items).
+        return items.length === 0 ? of(null) :
+        of(items).
         pipe
         (
             map((data: Array<T>) =>

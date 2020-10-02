@@ -23,6 +23,11 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
         interestType    : InterestType.Unsubscribed,
         interestVirtual : false,
         eventType       : EventType.Upcoming,
-        eventVirtual    : false
+        eventVirtual    : false,
+        isAnonymous     : true,
+
+        city      : null,
+        cityIsNew : false,
+        geopoint  : null
     }
 };

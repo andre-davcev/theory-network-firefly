@@ -1,5 +1,7 @@
 import { StateDocumentModel } from '@theory/ngxs';
 import { InterestType, EventType } from '@firefly/core/enums';
+import { CityInfo } from '@firefly/cloud';
+import { firestore } from 'firebase/app';
 
 export interface StateUserModel extends StateDocumentModel
 {
@@ -12,4 +14,9 @@ export interface StateUserModel extends StateDocumentModel
     interestVirtual : boolean;
     eventType       : EventType;
     eventVirtual    : boolean;
+    isAnonymous     : boolean;
+
+    city      : CityInfo;
+    cityIsNew : boolean;
+    geopoint  : firestore.GeoPoint;
 }
