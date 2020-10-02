@@ -36,12 +36,14 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     protected static childLookupState(state: any): Record<string, Partial<any>>  { return state.childLookup; }
     protected static sortFieldsState(state: any):  Record<string, SortField>     { return state.sortFields; }
     protected static offsetState(state: any):      number                        { return state.offset; }
+    protected static initializedState(state: any): boolean                       { return state.initialized; }
     protected static countState(state: any):       number                        { return StateChild.keysState(state).length; }
 
     public static id()          { return createSelector([this], (state: any) => StateChild.idState(state)); }
     public static childLookup() { return createSelector([this], (state: any) => StateChild.childLookupState(state)); }
     public static sortFields()  { return createSelector([this], (state: any) => StateChild.sortFieldsState(state)); }
     public static offset()      { return createSelector([this], (state: any) => StateChild.offsetState(state)); }
+    public static initialized() { return createSelector([this], (state: any) => StateChild.initializedState(state)); }
 
     public getData(context: StateContext<M>, action: any): Observable<any>
     {
