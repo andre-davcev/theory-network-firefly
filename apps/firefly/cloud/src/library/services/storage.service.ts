@@ -1,6 +1,5 @@
 import { storage } from 'firebase-admin';
-import { Project } from '../enums';
-import { Bucket } from '@google-cloud/storage';
+import { FIREBASE_CONFIG } from '../constants';
 
 export class ServiceStorage
 {
@@ -25,7 +24,7 @@ export class ServiceStorage
 
     public static delete(bucketPath: string): Promise<any>
     {
-        const bucket: any = storage().bucket(ServiceStorage.bucket(Project.Dev));
+        const bucket: any = storage().bucket(FIREBASE_CONFIG.storageBucket);
 
         const deletes: Array<Promise<any>> = ServiceStorage.
             bucketPaths(bucketPath).
