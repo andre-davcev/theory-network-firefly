@@ -28,6 +28,7 @@ export class PageHome extends BaseComponent
     @Select(StateUserAlerts.unreadCount) unread$        : Observable<number>;
     @Select(StateUserAlerts.hasUnread)   hasUnread$     : Observable<boolean>;
     @Select(StateUser.authenticated)     authenticated$ : Observable<boolean>;
+    @Select(StateUser.isUser)            isUser$        : Observable<boolean>;
 
     @ViewChild(IonSearchbar, { static: false })
     private searchbar: IonSearchbar;
@@ -80,11 +81,11 @@ export class PageHome extends BaseComponent
 
     public menuOpen(): void
     {
-        this.authenticated$.pipe
+        this.isUser$.pipe
         (
             take(1),
-            switchMap((authenticated: boolean) =>
-                authenticated ?
+            switchMap((isUser: boolean) =>
+                isUser ?
                     from(this.menu.open()) :
                     this.store.dispatch(new ActionMobileAuthSelect())
             )

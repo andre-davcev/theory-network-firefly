@@ -18,6 +18,7 @@ export enum ActionsUser
     WatchLanguage     = '[User] Watch Language',
     WatchLocation     = '[User] Watch Location',
     WatchCity         = '[User] Watch City',
+    CreateCity        = '[User] Create City',
     AddToken          = '[User] Add Token',
     LoginEmail        = '[User] Login Email',
     Logout            = '[User] Logout',

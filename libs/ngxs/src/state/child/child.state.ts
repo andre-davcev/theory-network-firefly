@@ -82,7 +82,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const { ActionGet } = this.actions;
 
         return Object.keys(childLookup).length === 0 ?
-            of(null) :
+            of(patchState({ initialized: true } as M)) :
             of(patchState({ childLookup } as M)).
             pipe
             (
@@ -124,7 +124,9 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 )
             ),
             switchMap((slice$: Array<Observable<firestore.DocumentSnapshot>>) =>
-                forkJoin(slice$)
+                slice$.length === 0 ?
+                    of([]) :
+                    forkJoin(slice$)
             ),
             map((page: Array<firestore.QueryDocumentSnapshot>) =>
                 page.forEach((document: firestore.QueryDocumentSnapshot) =>

@@ -14,7 +14,7 @@
     <ion-toolbar *ngIf="!searching"
                  color="light">
         <ion-buttons slot="start">
-            <ion-button *ngIf="authenticated$ | async" icon-only (click)="go(Pages.Alert)" class="cpt-notifications" [disabled]="menuOpen$ | async">
+            <ion-button *ngIf="isUser$ | async" icon-only (click)="go(Pages.Alert)" class="cpt-notifications" [disabled]="menuOpen$ | async">
                 <ion-icon name="notifications" color="dark" size="large"></ion-icon>
 
                 <ion-badge slot="end" *ngIf="hasUnread$ | async" color="secondary">{{ unread$ | async }}</ion-badge>
@@ -26,13 +26,14 @@
         </ion-title>
 
         <ion-buttons slot="end">
-            <ion-button icon-only
+            <ion-button *ngIf="isUser$ | async"
+                        icon-only
                         [disabled]="menuOpen$ | async"
                         (click)="searchShow(true)">
                 <ion-icon name="search" color="dark" size="large"></ion-icon>
             </ion-button>
 
-            <ion-button *ngIf="authenticated$ | async"
+            <ion-button *ngIf="isUser$ | async"
                         icon-only
                         [disabled]="menuOpen$ | async"
                         (click)="showPopover($event)">
