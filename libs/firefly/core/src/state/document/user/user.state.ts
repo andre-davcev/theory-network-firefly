@@ -412,9 +412,9 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserWatchCity, { cancelUncompleted: true })
     watchCity({ dispatch, patchState }: StateContext<StateUserModel>)
     {
-        const authData$      : Observable<firebase.User>      = this.store.select(StateUser.authData);
-        const city$          : Observable<CityInfo>           = this.store.select(StateUser.city);
-        const geopoint$      : Observable<firestore.GeoPoint> = this.store.select(StateUser.geopoint);
+        const authData$ : Observable<firebase.User>      = this.store.select(StateUser.authData);
+        const city$     : Observable<CityInfo>           = this.store.select(StateUser.city);
+        const geopoint$ : Observable<firestore.GeoPoint> = this.store.select(StateUser.geopoint);
 
         return combineLatest([authData$, city$, geopoint$]).
         pipe
@@ -423,7 +423,20 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 authData != null && city != null && geopoint != null
             ),
             switchMap(([authData, city, geopoint]) =>
-                (authData.isAnonymous ? of(null) : dispatch(new ActionUserPatch({ city, geopoint }, true))).
+                (authData.isAnonymous ?
+                    of(null) :
+                    this.store.select(StateUser.data()).
+                    pipe
+                    (
+                        filter((user: User) =>
+                            user != null
+                        ),
+                        take(1),
+                        switchMap(() =>
+                            dispatch(new ActionUserPatch({ city, geopoint }, true))
+                        )
+                    )
+                ).
                 pipe
                 (
                     switchMap(() =>
