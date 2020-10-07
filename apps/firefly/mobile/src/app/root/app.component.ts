@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Platform, MenuController, ModalController } from '@ionic/angular';
 import { from, Observable } from 'rxjs';
-import { delay, switchMap } from 'rxjs/operators';
+import { delay, finalize, switchMap } from 'rxjs/operators';
 import { Actions, ofActionSuccessful, Store, Select } from '@ngxs/store';
 import { RouterNavigation } from '@ngxs/router-plugin';
 
 import { PlatformEnum } from '@theory/ionic';
 
-import { Pages, ActionMobileAuthSelected, StateMobile, ActionMobileFilterEvents } from '@firefly/mobile';
+import { Pages, ActionMobileAuthSelected, StateMobile, ActionMobileFilterEvents, ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 import { ActionUserLogout, StateUser, IconType, Color, IconSize } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
 import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
@@ -93,6 +93,10 @@ export class ComponentApp
             ).
             subscribe();
         }
+        else if (page === Pages.Home)
+        {
+            this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream));
+        }
         else
         {
             this.store.dispatch(new ActionMobileNavigateRoot(page));
@@ -103,12 +107,20 @@ export class ComponentApp
     {
         this.menu.close();
 
-        this.store.dispatch(new ActionUserLogout()).pipe
+        this.store.dispatch(new ActionMobileLoadingShow()).
+        pipe
         (
             switchMap(() =>
+                this.store.dispatch(new ActionUserLogout())
+            ),
+            switchMap(() =>
                 this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream))
+            ),
+            finalize(() =>
+                this.store.dispatch(new ActionMobileLoadingHide())
             )
-        ).subscribe();
+        ).
+        subscribe();
     }
 
     public menuOpened(): void
