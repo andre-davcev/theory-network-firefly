@@ -1,3 +1,4 @@
+@import 'variables';
 
 app-item-description {
     padding-left: 1rem;
@@ -10,5 +11,5 @@ ion-list {
 }
 
 .invalid {
-  border: 1px solid #ea6153;
+  border: 1px solid $fire-color-accent-light;
 }
