@@ -22,8 +22,8 @@ service cloud.firestore {
       allow delete: if isUser(uid());
     }
 		match /interest-streams/{id} {
-      allow get:    if isAuthenticated(auth());
-      allow list:   if isUser(uid());
+      allow get:    if isUser(auth());
+      allow list:   if isAuthenticated(uid());
       allow create: if isUser(uid());
       allow update: if isUser(uid());
       allow delete: if isUser(uid());
