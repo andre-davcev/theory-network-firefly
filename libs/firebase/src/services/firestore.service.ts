@@ -1,11 +1,11 @@
 import { FirebaseDocument } from '../interfaces';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, Action, DocumentSnapshot } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { firestore } from 'firebase/app';
 import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
-import { switchMap, map } from 'rxjs/operators';
+import { ServiceFirestoreBase } from './firestore-base.service';
 
 @Injectable({ providedIn: 'root'})
 export class ServiceFirestore<T extends FirebaseDocument>
@@ -18,62 +18,32 @@ export class ServiceFirestore<T extends FirebaseDocument>
 
     public collection(collection: string): AngularFirestoreCollection<T>
     {
-        return this.firestore.collection(collection);
+        return ServiceFirestoreBase.collection<T>(this.firestore, collection);
     }
 
     public documentGet(collection: string, id: string): Observable<firestore.DocumentSnapshot>
     {
-        const document: AngularFirestoreDocument<T> = this.firestore.collection<T>(collection).doc(id);
-
-        return from(document.get());
+        return ServiceFirestoreBase.documentGet<T>(this.firestore, collection, id);
     }
 
     public documentWatch<T>(collection: string, id: string): Observable<DocumentSnapshot<T>>
     {
-        return this.firestore.
-            collection<T>(collection).
-            doc<T>(id).
-            snapshotChanges().
-            pipe
-            (
-                map((actions: Action<DocumentSnapshot<T>>) =>
-                    actions.payload
-                )
-            );
+        return ServiceFirestoreBase.documentWatch<T>(this.firestore, collection, id);
     }
 
     public documentCreate(collection: string, entity: T): Observable<firestore.DocumentSnapshot>
     {
-        let { metadata, ...object } = entity;
-
-        const id: string = object.id == null || object.id === CoreEnum.IdNew ? this.firestore.createId() : object.id;
-
-        const timestamp: firebase.firestore.FieldValue = firestore.FieldValue.serverTimestamp();
-
-        object.dateCreated = timestamp;
-        object.dateUpdated = timestamp;
-        object.id          = id;
-
-        const document: AngularFirestoreDocument<T> = this.firestore.collection<T>(collection).doc(object.id);
-
-        return from(document.set(object as T)).pipe
-        (
-            switchMap(() => from(document.get()))
-        );
+        return ServiceFirestoreBase.documentCreate<T>(this.firestore, collection, entity);
     }
 
     public documentUpdate(snapshot: firestore.DocumentSnapshot, object: Partial<T>)
     {
-        const { metadata, ...partial } = object;
-
-        partial.dateUpdated = firestore.FieldValue.serverTimestamp();
-
-        return from(snapshot.ref.update(partial));
+        return ServiceFirestoreBase.documentUpdate<T>(snapshot, object);
     }
 
     public documentDelete(snapshot: firestore.DocumentSnapshot): Observable<void>
     {
-        return from(snapshot.ref.delete());
+        return ServiceFirestoreBase.documentDelete(snapshot);
     }
 
     public formPatch(form: FormGroup, key: string, value: any): void

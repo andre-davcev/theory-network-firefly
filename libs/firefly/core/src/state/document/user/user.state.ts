@@ -5,7 +5,7 @@ import { Observable, of, from, combineLatest } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map, finalize } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
+import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
 import { User, StreamInterest, SubscriptionPartial, Subscription, AlertPartial, CityInfo } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
@@ -26,7 +26,6 @@ import {
     ActionUserDelete,
     ActionUserCreate,
     ActionUserUpdate,
-    ActionUserWatchLocation,
     ActionUserSubscriptionToggle,
     ActionUserSubscriptionAdd,
     ActionUserSubscriptionRemove,
@@ -40,25 +39,24 @@ import {
     ActionUserPatchMetadata,
     ActionUserResetPassword,
     ActionUserInterestVirtualSet,
-    ActionUserEventVirtualSet, ActionUserWatchCity, ActionUserCreateCity
+    ActionUserEventVirtualSet,
+    ActionUserWatchCity, ActionUserResetAll
 } from './user.actions';
-import { ServiceUsers, ServiceLocation } from '@firefly/core/services';
-import { CoreUtil } from '@theory/core';
+import { ServiceUsers } from '@firefly/core/services';
 import { StateDocument } from '@theory/ngxs';
 
 import { ActionUserAlertsReset, ActionUserAlertsSetData } from '../../child/user-alerts/user-alerts.actions';
 import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
-import { ActionUserStreamReset, ActionUserStreamSetData, ActionUserStreamSync } from '../../child/user-stream/user-stream.actions';
+import { ActionUserStreamSync } from '../../child/user-stream/user-stream.actions';
 import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { GeolocationPosition } from '@capacitor/core';
-import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdatacloud';
 import { StateUserStream } from '../../child/user-stream/user-stream.state';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
 import { Injectable } from '@angular/core';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { InterestType, EventType, Collection } from '@firefly/core/enums';
-import { AngularFirestore, AngularFirestoreDocument, DocumentSnapshot } from '@angular/fire/firestore';
+import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
+import { StateCity } from '../city';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()
@@ -66,12 +64,9 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
 {
     constructor
     (
-        private auth         : AngularFireAuth,
-        private bigdatacloud : ServiceBigDataCloud,
-        private location     : ServiceLocation,
-        private store        : Store,
-        private angularfire  : AngularFirestore,
-                service      : ServiceUsers
+        private auth    : AngularFireAuth,
+        private store   : Store,
+                service : ServiceUsers
     )
     {
         super
@@ -113,10 +108,12 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ActionsReset:
                 [
                     ActionUserAlertsReset,
-                    ActionUserInterestsReset,
-                    ActionUserEventsReset,
                     ActionUserSubscriptionsReset,
-                    ActionUserStreamReset
+
+                    ActionUserProfileReset,
+
+                    ActionUserEventsReset,
+                    ActionUserInterestsReset,
                 ],
 
                 ActionsCreate: []
@@ -125,15 +122,10 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Selector() static authData(state: StateUserModel)               : FirebaseUser { return state.authData; }
-    @Selector() static isAnonymous(state: StateUserModel)            : boolean      { return StateUser.authData(state) != null && StateUser.authData(state).isAnonymous; }
-    @Selector() static isUser(state: StateUserModel)                 : boolean      { return !StateUser.isAnonymous(state); }
     @Selector() static authenticated(state: StateUserModel)          : boolean      { return state.authData != null; }
+    @Selector() static isAnonymous(state: StateUserModel)            : boolean      { return StateUser.authenticated(state) && StateUser.authData(state).isAnonymous; }
+    @Selector() static isUser(state: StateUserModel)                 : boolean      { return StateUser.authenticated(state) && !StateUser.isAnonymous(state); }
     @Selector() static authenticating(state: StateUserModel)         : boolean      { return state.authenticating; }
-    @Selector() static city(state: StateUserModel)                   : CityInfo     { return state.city; }
-    @Selector() static cityId(state: StateUserModel)                 : string       { const city: CityInfo = StateUser.city(state); return city == null ? null : city.id; }
-    @Selector() static cityFound(state: StateUserModel)              : boolean      { return StateUser.city(state) != null; }
-    @Selector() static cityIsNew(state: StateUserModel)              : boolean      { return state.cityIsNew; }
-    @Selector() static geopoint(state: StateUserModel)               : firestore.GeoPoint { return state.geopoint; }
     @Selector() static language(state: StateUserModel)               : string       { const user: User = StateUser.dataState(state); return user == null ? null : user.language; }
     @Selector() static loading(state: StateUserModel)                : boolean      { return state.authenticating || !state.initialized; }
     @Selector() static loadedNotAuthenticated(state: StateUserModel) : boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
@@ -176,18 +168,21 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             'page.events.empty.created';
     }
 
-    @Selector([StateUserStream.initialized()])
-    static initialized(state: StateUserModel, streamInitialized: boolean) : boolean
+    @Selector
+    ([
+        StateCity.found,
+        StateUserStream.initialized()
+    ])
+    static initialized(state: StateUserModel, cityFound: boolean, streamInitialized: boolean) : boolean
     {
-        return state.initialized && StateUser.cityFound(state) && streamInitialized;
+        return state.initialized && cityFound && streamInitialized;
     }
 
-    ngxsOnInit(context: StateContext<StateUserModel>)
+    public ngxsOnInit(context: StateContext<StateUserModel>)
     {
         context.dispatch
         ([
             new ActionUserAuthenticate(),
-            new ActionUserWatchLocation(),
             new ActionUserWatchCity()
         ]);
     }
@@ -196,6 +191,12 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     reset(context: StateContext<StateUserModel>)
     {
         return of(null);
+    }
+
+    @Action(ActionUserResetAll)
+    resetAll(context: StateContext<StateUserModel>)
+    {
+        return super.reset(context);
     }
 
     @Action(ActionUserGet)
@@ -252,11 +253,13 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     {
         const { patchState, dispatch } = context;
 
-        patchState({ authenticating: true });
-
-        return from(this.auth.createUserWithEmailAndPassword(credentials.id, credentials.password)).
+        return dispatch(new ActionUserResetAll()).
         pipe
         (
+            tap(() => patchState({ authenticating: true })),
+            switchMap(() =>
+                from(this.auth.createUserWithEmailAndPassword(credentials.id, credentials.password))
+            ),
             map((userCredential: auth.UserCredential) =>
                 userCredential.user
             ),
@@ -313,7 +316,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserAnonymousLogin)
     anonymousLogin({ dispatch, patchState }: StateContext<StateUserModel>)
     {
-        return dispatch(new ActionUserReset()).
+        return dispatch(new ActionUserResetAll()).
         pipe
         (
             switchMap(() =>
@@ -380,101 +383,31 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         );
     }
 
-    @Action(ActionUserWatchLocation, { cancelUncompleted: true })
-    watchLocation({ patchState }: StateContext<StateUserModel>)
-    {
-        return this.store.select(StateLocation.location).pipe
-        (
-            filter((location: GeolocationPosition) =>
-                location != null
-            ),
-            map((location: GeolocationPosition) =>
-                new firestore.GeoPoint(location.coords.latitude, location.coords.longitude)
-            ),
-            tap((geopoint: firestore.GeoPoint) =>
-                patchState({ geopoint })
-            ),
-            switchMap((geopoint: firestore.GeoPoint) =>
-                this.bigdatacloud.reverseGeocode(geopoint.latitude, geopoint.longitude).
-                pipe
-                (
-                    switchMap((response: ResponseReverseGeocode) =>
-                        this.location.cityInfo(response)
-                    ),
-                    tap((city: CityInfo) =>
-                        patchState(({ geopoint, city }))
-                    )
-                )
-            )
-        );
-    }
-
     @Action(ActionUserWatchCity, { cancelUncompleted: true })
-    watchCity({ dispatch, patchState }: StateContext<StateUserModel>)
+    watchCity({ dispatch }: StateContext<StateUserModel>)
     {
         const authData$ : Observable<firebase.User>      = this.store.select(StateUser.authData);
-        const city$     : Observable<CityInfo>           = this.store.select(StateUser.city);
-        const geopoint$ : Observable<firestore.GeoPoint> = this.store.select(StateUser.geopoint);
+        const city$     : Observable<CityInfo>           = this.store.select(StateCity.city);
+        const geopoint$ : Observable<firestore.GeoPoint> = this.store.select(StateCity.geopoint);
 
         return combineLatest([authData$, city$, geopoint$]).
         pipe
         (
             filter(([authData, city, geopoint]) =>
-                authData != null && city != null && geopoint != null
+                authData != null && !authData.isAnonymous && city != null && geopoint != null
             ),
             switchMap(([authData, city, geopoint]) =>
-                (authData.isAnonymous ?
-                    of(null) :
-                    this.store.select(StateUser.data()).
-                    pipe
-                    (
-                        filter((user: User) =>
-                            user != null
-                        ),
-                        take(1),
-                        switchMap(() =>
-                            dispatch(new ActionUserPatch({ city, geopoint }, true))
-                        )
-                    )
-                ).
+                this.store.select(StateUser.found()).
                 pipe
                 (
+                    filter((userFound: boolean) =>
+                        userFound
+                    ),
+                    take(1),
                     switchMap(() =>
-                        this.service.documentGet(Collection.Streams, city.id).
-                        pipe
-                        (
-                            tap((snapshot: firestore.DocumentSnapshot) =>
-                                patchState(({ cityIsNew: !snapshot.exists }))
-                            ),
-                            switchMap((snapshot: firestore.DocumentSnapshot) =>
-                                snapshot.exists ?
-                                    dispatch(new ActionUserStreamSetData(snapshot.data(), true)) :
-                                    dispatch(new ActionUserCreateCity(city))
-                                )
-                        )
+                        dispatch(new ActionUserPatch({ city, geopoint }, true))
                     )
                 )
-            )
-        );
-    }
-
-    @Action(ActionUserCreateCity)
-    createCity({ dispatch }: StateContext<StateUserModel>, { city }: ActionUserCreateCity)
-    {
-        const documentRef: AngularFirestoreDocument = this.angularfire.collection(Collection.Cities).doc(city.id);
-
-        return from(documentRef.set(city)).
-        pipe
-        (
-            switchMap(() =>
-                this.service.documentWatch<Record<string, StreamInterest>>(Collection.Streams, city.id)
-            ),
-            filter((snapshot: DocumentSnapshot<Record<string, StreamInterest>>) =>
-                snapshot.exists
-            ),
-            take(1),
-            switchMap((snapshot: DocumentSnapshot<Record<string, StreamInterest>>) =>
-                dispatch(new ActionUserStreamSetData(snapshot.data(), true))
             )
         );
     }
@@ -507,9 +440,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserLoginEmail)
     loginEmail({ patchState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserLoginEmail)
     {
-        patchState({ authenticating: true });
-        return from(this.auth.signInWithEmailAndPassword(payload.id, payload.password)).pipe
+        return dispatch(new ActionUserResetAll()).
+        pipe
         (
+            tap(() => patchState({ authenticating: true })),
+            switchMap(() => from(this.auth.signInWithEmailAndPassword(payload.id, payload.password))),
             map((userCredential: firebase.auth.UserCredential) => userCredential.user),
             switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
             catchError((error: Error) => of(patchState({ error, authenticating: false })))
@@ -520,9 +455,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     logout(context: StateContext<StateUserModel>)
     {
         const { patchState } = context;
-
-        const defaults: StateUserModel = CoreUtil.clone<StateUserModel>(StateUserOptions.defaults);
-        patchState(defaults);
 
         return of(this.auth.signOut()).
         pipe

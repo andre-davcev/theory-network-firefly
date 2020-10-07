@@ -1,7 +1,7 @@
 import { User as FirebaseUser, firestore } from 'firebase/app'
 import { Credentials } from '@theory/core';
 
-import { User, MetadataUser, CityInfo } from '@firefly/cloud';
+import { User, MetadataUser } from '@firefly/cloud';
 import { ActionsUser } from './user.actions.enum';
 import { InterestType, EventType } from '@firefly/core/enums';
 
@@ -20,13 +20,12 @@ export class ActionUserAuthenticate       { static readonly type = ActionsUser.A
 export class ActionUserAuthenticateCheck  { static readonly type = ActionsUser.AuthenticateCheck;  constructor(public payload: FirebaseUser) {} }
 export class ActionUserAnonymousLogin     { static readonly type = ActionsUser.AnonymousLogin;     constructor() { } }
 export class ActionUserWatchLanguage      { static readonly type = ActionsUser.WatchLanguage;      constructor() { } }
-export class ActionUserWatchLocation      { static readonly type = ActionsUser.WatchLocation;      constructor() { } }
 export class ActionUserWatchCity          { static readonly type = ActionsUser.WatchCity;          constructor() { } }
-export class ActionUserCreateCity         { static readonly type = ActionsUser.CreateCity;         constructor(public city: CityInfo) { } }
 export class ActionUserAddToken           { static readonly type = ActionsUser.AddToken;           constructor(public payload: string) { } }
 export class ActionUserLoginEmail         { static readonly type = ActionsUser.LoginEmail;         constructor(public payload: Credentials) { } }
 export class ActionUserLogout             { static readonly type = ActionsUser.Logout;             constructor() { } }
 export class ActionUserResetPassword      { static readonly type = ActionsUser.ResetPassword;      constructor(public payload: Credentials) { } }
+export class ActionUserResetAll           { static readonly type = ActionsUser.ResetAll;           constructor() { } }
 
 export class ActionUserSubscriptionsSet   { static readonly type = ActionsUser.SubscriptionsSet;   constructor() { } }
 export class ActionUserSubscriptionToggle { static readonly type = ActionsUser.SubscriptionToggle; constructor(public id: string, public permanent: boolean = false) { } }

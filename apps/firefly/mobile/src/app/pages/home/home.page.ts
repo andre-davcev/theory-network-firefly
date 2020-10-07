@@ -40,7 +40,6 @@ export class PageHome extends BaseComponent
     public searchClient = algoliaSearch('8NDQ1FNIDU','45b11751dc7e276f781a85f719abda66');
     public index: SearchIndex = this.searchClient.initIndex('interests');
 
-
     constructor
     (
         private menu    : MenuController,
