@@ -67,7 +67,7 @@
                     <ion-item-divider></ion-item-divider>
 
                     <app-item-description [form]="form$ | async"
-                    [class.invalid]="!(form$ | async).controls.description.valid && (form$ | async).controls.description.dirty"
+                                          [class.invalid]="!(form$ | async).controls.description.valid && (form$ | async).controls.description.dirty"
                                           [title]="'general.description' | translate"
                                           description="description"
                                           [descriptionPlaceholder]="'page.interest.descriptionPlaceholder' | translate">
