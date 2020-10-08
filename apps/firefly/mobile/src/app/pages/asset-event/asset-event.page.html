@@ -37,7 +37,8 @@
         </app-item-image>
 
         <ion-item>
-          <ion-input type="text"
+          <ion-input  [class.invalid]="!(form$ | async).controls.name.valid && (form$ | async).controls.name.dirty"
+                      type="text"
                       inputmode="text"
                       formControlName="name"
                       [placeholder]="'page.event.titlePlaceholder' | translate">
@@ -45,10 +46,11 @@
         </ion-item>
 
         <ion-item>
-          <ion-input type="text"
-                    inputmode="text"
-                    formControlName="tagline"
-                    [placeholder]="'page.event.subtitlePlaceholder' | translate">
+          <ion-input  [class.invalid]="!(form$ | async).controls.tagline.valid && (form$ | async).controls.tagline.dirty"
+                      type="text"
+                      inputmode="text"
+                      formControlName="tagline"
+                      [placeholder]="'page.event.subtitlePlaceholder' | translate">
           </ion-input>
         </ion-item>
 
@@ -135,6 +137,7 @@
                     </ion-item>
 
                     <app-item-description [form]="form$ | async"
+                                          [class.invalid]="!(form$ | async).controls.description.valid && (form$ | async).controls.description.dirty"
                                           [title]="'general.description' | translate"
                                           description="description"
                                           [descriptionPlaceholder]="'page.event.descriptionPlaceholder' | translate">

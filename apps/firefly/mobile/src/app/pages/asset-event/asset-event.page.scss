@@ -1,3 +1,5 @@
+@import 'variables';
+
 app-item-map,
 app-item-description {
     padding-left: 1rem;
@@ -24,4 +26,8 @@ ion-datetime {
   &.cpt-invalid {
     text-decoration: line-through;
   }
+}
+
+.invalid {
+  border: 1px solid $fire-color-accent-light;
 }
