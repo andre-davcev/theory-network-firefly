@@ -34,6 +34,7 @@ export class PageAssetEvent
     @Select(StateEvent.timeEndValid)    timeEndValid$:    Observable<boolean>;
     @Select(StateEvent.timeNotify)      timeNotify$:      Observable<firestore.Timestamp>;
     @Select(StateEvent.timeNotifyValid) timeNotifyValid$: Observable<boolean>;
+    @Select(StateEvent.timeIsLocked)    timeIsLocked$:    Observable<boolean>;
     @Select(StateEvent.private)         private$:         Observable<boolean>;
     @Select(StateEvent.notifyComplete)  notifyComplete$:  Observable<boolean>;
     @Select(StateDevice.device)         device$:          Observable<boolean>;
