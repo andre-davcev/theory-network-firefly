@@ -5,8 +5,8 @@ import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous, ActionEventDeny } from '@firefly/core';
-import { Pages } from '@firefly/mobile';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete } from '@firefly/core';
+import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
@@ -126,6 +126,15 @@ export class PageInterestDetail extends BaseComponent implements OnInit
       this.store.dispatch([
         new Navigate([Pages.AssetInterest], {id: interest.id}, {state: {isInterestDetail:true}})
       ]).subscribe();
+    }
+
+    public delete(): void
+    {
+      const interest: Interest = this.store.selectSnapshot(StateInterest.data());
+      this.store.dispatch(new ActionInterestDelete()).pipe
+      (
+        switchMap(() => this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream)))
+      ).subscribe();
     }
 
     public acceptEvent(event: Event): void

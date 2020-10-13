@@ -7,6 +7,10 @@
             <ion-back-button color="dark"></ion-back-button>
         </ion-buttons>
         <ion-buttons slot="end">
+          <ion-button (click)="delete()" *ngIf="canEdit$ | async"
+                      icon-only>
+                      <ion-icon name="trash" color="dark" size="large"></ion-icon>
+          </ion-button>
           <ion-button (click)="edit()" *ngIf="canEdit$ | async"
                       icon-only>
                       <ion-icon name="create-outline" size="large" color="dark"></ion-icon>
