@@ -3,7 +3,7 @@
             mode="ios">
     <ion-toolbar color="dark">
         <ion-buttons slot="start">
-            <ion-button icon-only (click)="close()" *ngIf="!(userLoading$ | async)" >
+            <ion-button icon-only (click)="close()" *ngIf="!(authenticating$ | async)" >
                 <ion-icon name="close" color="primary"></ion-icon>
             </ion-button>
         </ion-buttons>
@@ -15,8 +15,11 @@
          fxLayout="column"
          fxLayoutAlign="center"
          fxLayoutGap="2rem">
-    <app-logo [loading]="userLoading$ | async"></app-logo>
-    <app-auth [login]="page === Pages.Login" [resetPassword]="page === Pages.ResetPassword" (finished)="finishedAuth($event)"></app-auth>
+    <app-logo [loading]="authenticating$ | async"></app-logo>
+    <app-auth [type]="page"
+              [authenticating]="authenticating$ | async"
+              (finished)="finishedAuth($event)">
+    </app-auth>
 </section>
 
 <ion-slides *ngIf="page === Pages.SignUpSlides"

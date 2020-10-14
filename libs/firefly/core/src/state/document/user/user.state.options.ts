@@ -17,6 +17,7 @@ export const StateUserOptions: StoreOptions<StateUserModel> =
 
         authData        : null,
         error           : null,
+        errorAuth       : null,
         authenticating  : false,
         initialized     : false,
         interestType    : InterestType.Unsubscribed,

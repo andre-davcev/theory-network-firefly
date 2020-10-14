@@ -24,6 +24,10 @@
         }
     }
 
+    ion-icon {
+        font-size: 1.375rem;
+    }
+
     ion-input {
         --padding-start: 14px;
         --padding-top: 13px;
@@ -58,13 +62,36 @@
         }
     }
 
-    fa-icon {
+    ::ng-deep fa-icon {
         stroke: $fire-color-grey-middle;
         color: $fire-color-grey-middle;
+
+        .cpt-icon-email
+        {
+            padding-top: 3px;
+        }
+
+        .cpt-highlight
+        {
+            stroke: $fire-color-accent-light;
+            color: $fire-color-accent-light;
+        }
     }
 
-    [ng-reflect-classes=cpt-icon-email]
+    .cpt-validation-errors
     {
-        padding-top: 3px;
+        position: relative;
+        height: 0;
+        color: $fire-color-white;
+
+        .cpt-error-message
+        {
+            position: relative;
+        }
+
+        .cpt-message
+        {
+            line-height: 1.4em;
+        }
     }
 }

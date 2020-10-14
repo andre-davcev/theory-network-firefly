@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { StatusBarStyle } from '@capacitor/core';
 
-import { StateUser, Color, IconType } from '@firefly/core';
+import { StateUser, Color, IconType, AuthType } from '@firefly/core';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '@firefly/mobile';
+import { FirebaseError } from 'firebase/app';
 
 @Component
 ({
@@ -17,14 +18,15 @@ import { Pages } from '@firefly/mobile';
 
 export class PageLogin
 {
-    @Select(StateUser.loading) userLoading$: Observable<boolean>;
-    @Select(StateUser.error)   error$:       Observable<Error>;
+    @Select(StateUser.authenticating) authenticating$ : Observable<boolean>;
+    @Select(StateUser.errorAuth)      error$          : Observable<FirebaseError>;
 
     @Input() page: Pages.Login | Pages.SignUp | Pages.ResetPassword | Pages.SignUpCategories | Pages.SignUpSlides = Pages.Login;
 
     public Pages    : any = Pages;
     public Color    : any = Color;
     public IconType : any = IconType;
+    public AuthType : any = AuthType;
 
     constructor
     (

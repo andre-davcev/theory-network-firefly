@@ -65,6 +65,23 @@
   "page.auth.newUser"             : "New User?",
   "page.auth.signUp"              : "Sign up here",
 
+  "page.auth.errors.id.required"                  : "Email address is required.",
+  "page.auth.errors.id.minlength"                 : "Email address must be at least 6 characters long.",
+  "page.auth.errors.id.maxlength"                 : "Email address cannot be more than 50 characters long.",
+  "page.auth.errors.id.pattern"                   : "Email address must be in a valid format.",
+  "page.auth.errors.id.auth/invalid-email"        : "Your email address is not valid.",
+  "page.auth.errors.id.auth/user-disabled"        : "Your user email has been disabled.",
+  "page.auth.errors.id.auth/user-not-found"       : "Your email address is not registered.",
+  "page.auth.errors.id.auth/email-already-in-use" : "Your email address has already been registered",
+
+  "page.auth.errors.password.required"               : "Password is required.",
+  "page.auth.errors.password.minlength"              : "Password must be at least 6 characters long.",
+  "page.auth.errors.password.maxlength"              : "Password cannot be more than 30 characters long.",
+  "page.auth.errors.password.pattern"                : "Password must contain letters (both uppercase and lowercase) and numbers.",
+  "page.auth.errors.password.auth/wrong-password"    : "Your password is not correct.",
+  "page.auth.errors.password.auth/weak-password"     : "The password you have chose is not secure enough",
+  "page.auth.errors.password.auth/too-many-requests" : "Too many invalid password requests. Try to reset your password first.",
+
   "page.signup.slide-1.message" : "Welcome to the Firefly community!",
   "page.signup.slide-2.message" : "Subscribe to community Interests",
   "page.signup.slide-3.message" : "Be notified when new Events are added to your Interests",
