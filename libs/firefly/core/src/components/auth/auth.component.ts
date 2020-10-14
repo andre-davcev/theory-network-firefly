@@ -1,92 +1,136 @@
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 import { Credentials } from '@theory/core';
-import { Store } from '@ngxs/store';
-import { ActionUserLoginEmail, ActionUserCreate, ActionUserResetPassword } from '@firefly/core/state';
-import { tap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { ActionUserLoginEmail, ActionUserCreate, ActionUserResetPassword, ActionUserSetErrorAuth, StateUser } from '@firefly/core/state';
+import { tap, catchError, filter, map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { AuthError } from './auth-error.interface';
+import { TranslateService } from '@ngx-translate/core';
+import { AuthType } from './auth-type.enum';
+import { AuthErrorId } from './auth-error-id.enum';
+import { AuthErrorType } from './auth-error-type.enum';
+import { AuthControl } from './auth-control.enum';
+import { AuthErrorPassword } from './auth-error-password.enum';
 
 @Component
 ({
     selector        : 'app-auth',
     templateUrl     : './auth.component.html',
-    styleUrls       : ['./auth.component.scss'],
-    changeDetection : ChangeDetectionStrategy.OnPush
+    styleUrls       : ['./auth.component.scss']
 })
-export class ComponentAuth
+export class ComponentAuth implements OnInit
 {
     @Input()
     public authenticating: boolean = false;
 
     @Input()
-    public login: boolean = true;
-
-    @Input()
-    public resetPassword: boolean = false;
+    public type: AuthType = AuthType.Login;
 
     @Output()
     public finished: EventEmitter<boolean> = new EventEmitter();
 
+    @Select(StateUser.errorAuthCode)
+    private errorCode$: Observable<AuthErrorType>;
+
     public faEnvelope: IconDefinition = faEnvelope;
     public faLock:     IconDefinition = faLock;
 
-    public form: FormGroup;
+    public form : FormGroup;
+
+    public AuthType    : any = AuthType;
+    public AuthControl : any = AuthControl;
+
+    public focused: Record<string, BehaviorSubject<boolean>> =
+    {
+        [AuthControl.Id]       : new BehaviorSubject(false),
+        [AuthControl.Password] : new BehaviorSubject(false)
+    };
+
+    public errorDefinitions: Record<AuthControl, Record<string, AuthError>> =
+    {
+        [AuthControl.Id]       : {},
+        [AuthControl.Password] : {}
+    };
+
+    public errors$:    Record<string, Observable<Array<string>>> = {};
+    public hasErrors$: Record<string, Observable<boolean>>       = {};
+
+    private id: FormControl = new FormControl('', Validators.compose
+    ([
+        Validators.required,
+        Validators.maxLength(50),
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+    ]));
+
+    private passwordLogin: FormControl = new FormControl('', Validators.compose
+    ([
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(30)
+    ]));
+
+    private passwordSignUp: FormControl = new FormControl('', Validators.compose
+    ([
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(30),
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') // Upper/Lower/Numbers
+    ]));
 
     constructor
     (
         private formBuilder : FormBuilder,
-        private store       : Store
+        private store       : Store,
+        private translate   : TranslateService
     )
     {
-        this.form = this.formBuilder.group
-        ({
-            password: new FormControl('', Validators.compose
+        this.store.dispatch(new ActionUserSetErrorAuth()).
+        pipe
+        this.translate.
+            get
             ([
-                Validators.required,
-                Validators.minLength(6),
-                Validators.maxLength(30),
-                //Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]+$')
-            ])),
+                ...Object.values(AuthErrorId).map((value: string) => `page.auth.errors.${AuthControl.Id}.${value}`),
+                ...Object.values(AuthErrorPassword).map((value: string) => `page.auth.errors.${AuthControl.Password}.${value}`)
+            ]).
+            subscribe((translations: Record<string, string>) =>
+                Object.
+                    keys(translations).
+                    forEach((id: AuthErrorId) =>
+                    {
+                        const parts   : Array<string> = id.split('.');
+                        const control : AuthControl   = parts[3] as AuthControl;
+                        const type    : AuthErrorType = parts[4] as AuthErrorType;
 
-            id: new FormControl('', Validators.compose
-            ([
-                Validators.required,
-                Validators.minLength(6),
-                Validators.maxLength(50),
-                Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-            ]))
-        });
+                        this.errorDefinitions[control][type] =
+                        {
+                            control,
+                            id,
+                            message: translations[id],
+                            type
+                        };
+                    })
+            );
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-      for (let propName in changes) {
-        let chng = changes[propName];
-        if(propName === 'resetPassword')
+    public ngOnInit(): void
+    {
+        this.form = this.type === AuthType.Login ?
+                this.formBuilder.group({ id: this.id, password: this.passwordLogin}) :
+            this.type === AuthType.SignUp ?
+                this.formBuilder.group({ id: this.id, password: this.passwordSignUp }) :
+                this.formBuilder.group({ id: this.id});
+
+        this.setErrorObservable(AuthControl.Id);
+
+        if (this.type !== AuthType.ResetPassword)
         {
-          if(chng.currentValue)
-          {
-            this.form = this.formBuilder.group
-            ({
-                password: new FormControl('', Validators.compose
-                ([
-                  Validators.minLength(0),
-                  Validators.maxLength(30),
-                ])),
-                id: new FormControl('', Validators.compose
-                ([
-                    Validators.required,
-                    Validators.minLength(6),
-                    Validators.maxLength(50),
-                    Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-                ]))
-            });
-          }
+            this.setErrorObservable(AuthControl.Password);
         }
-      }
     }
 
     public clicked(): void
@@ -95,18 +139,18 @@ export class ComponentAuth
 
         console.log(credentials);
 
-        const action: ActionUserLoginEmail | ActionUserCreate | ActionUserResetPassword = this.login ?
-            new ActionUserLoginEmail(credentials) :
-            this.resetPassword ? new ActionUserResetPassword(credentials) :
-            new ActionUserCreate(credentials);
-
-        this.authenticating = true;
+        const action: ActionUserLoginEmail | ActionUserCreate | ActionUserResetPassword =
+            this.type === AuthType.Login ?
+                new ActionUserLoginEmail(credentials) :
+            this.type === AuthType.ResetPassword ?
+                new ActionUserResetPassword(credentials) :
+                new ActionUserCreate(credentials);
 
         this.store.dispatch(action).
         pipe
         (
-            tap(() =>
-                this.authenticating = false
+            filter(() =>
+                !this.store.selectSnapshot(StateUser.erroredAuth)
             ),
             tap(() =>
                 this.finished.emit(true)
@@ -116,5 +160,49 @@ export class ComponentAuth
             )
         ).
         subscribe();
+    }
+
+    public focus(key: string, focused: boolean): void
+    {
+        this.focused[key].next(focused);
+
+        this.store.dispatch(new ActionUserSetErrorAuth());
+    }
+
+    private setErrorObservable(control: AuthControl): void
+    {
+        this.errors$[control] =
+        combineLatest
+        ([
+            this.errorCode$,
+            this.focused[control],
+            this.form.get(control).valueChanges
+        ]).
+        pipe
+        (
+            map(([errorCode, focused]) =>
+                [
+                    ...(
+                          (!focused && this.form.get(control).errors != null)
+                              ? Object.keys(this.form.get(control).errors) :
+                              []
+                    ),
+                    ...(this.errorDefinitions[control][errorCode] == null ? [] : [errorCode])
+                ]
+            ),
+            map((errors: Array<string>) =>
+                errors.map((error: string) =>
+                    this.errorDefinitions[control][error].message
+                )
+            )
+        );
+
+        this.hasErrors$[control] = this.errors$[control].
+        pipe
+        (
+            map((errors: Array<string>) =>
+                errors.length > 0
+            )
+        );
     }
 }

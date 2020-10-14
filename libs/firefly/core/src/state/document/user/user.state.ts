@@ -1,4 +1,4 @@
-import { User as FirebaseUser, auth, firestore } from 'firebase/app';
+import { User as FirebaseUser, auth, firestore, FirebaseError } from 'firebase/app';
 
 import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';
@@ -40,7 +40,7 @@ import {
     ActionUserResetPassword,
     ActionUserInterestVirtualSet,
     ActionUserEventVirtualSet,
-    ActionUserWatchCity, ActionUserResetAll
+    ActionUserWatchCity, ActionUserResetAll, ActionUserSetErrorAuth
 } from './user.actions';
 import { ServiceUsers } from '@firefly/core/services';
 import { StateDocument } from '@theory/ngxs';
@@ -129,8 +129,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static language(state: StateUserModel)               : string       { const user: User = StateUser.dataState(state); return user == null ? null : user.language; }
     @Selector() static loading(state: StateUserModel)                : boolean      { return state.authenticating || !state.initialized; }
     @Selector() static loadedNotAuthenticated(state: StateUserModel) : boolean      { return !StateUser.loading(state) && !StateUser.authenticated(state); }
-    @Selector() static error(state: StateUserModel)                  : Error        { return state.error; }
-    @Selector() static errored(state: StateUserModel)                : boolean      { return state.error != null; }
+    @Selector() static error(state: StateUserModel)                  : Error         { return state.error; }
+    @Selector() static errored(state: StateUserModel)                : boolean       { return StateUser.error(state) != null; }
+    @Selector() static errorAuth(state: StateUserModel)              : FirebaseError { return state.errorAuth; }
+    @Selector() static errorAuthCode(state: StateUserModel)          : string        { return StateUser.errorAuth(state)?.code; }
+    @Selector() static erroredAuth(state: StateUserModel)            : boolean       { return StateUser.errorAuth(state) != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : !user.subscriptionsStatus ? {} : user.subscriptionsStatus; }
     @Selector() static notifications(state: StateUserModel)          : Record<string, AlertPartial>        { const user: User = StateUser.dataState(state); return user == null ? null : !user.notifications ? {} : user.notifications; }
     @Selector() static tokens(state:StateUserModel)                  : Array<string>{ const user: User = StateUser.dataState(state); return user == null ? null : user.tokens; }
@@ -256,7 +259,9 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         return dispatch(new ActionUserResetAll()).
         pipe
         (
-            tap(() => patchState({ authenticating: true })),
+            tap(() =>
+                patchState({ errorAuth: null, authenticating: true })
+            ),
             switchMap(() =>
                 from(this.auth.createUserWithEmailAndPassword(credentials.id, credentials.password))
             ),
@@ -283,8 +288,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                     )
                 )
             ),
-            catchError((error: Error) =>
-                of(patchState({ error, authenticating: false }))
+            catchError((errorAuth: FirebaseError) =>
+                of(patchState({ errorAuth, authenticating: false }))
             )
         );
     }
@@ -319,11 +324,17 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         return dispatch(new ActionUserResetAll()).
         pipe
         (
+            tap(() =>
+                dispatch(new ActionUserSetErrorAuth())
+            ),
             switchMap(() =>
                 this.auth.signInAnonymously()
             ),
             tap(() =>
                 patchState({ initialized: true })
+            ),
+            catchError((errorAuth: FirebaseError) =>
+                dispatch(new ActionUserSetErrorAuth(errorAuth))
             )
         );
     }
@@ -431,7 +442,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     {
         const user   : User   = StateUser.dataState(getState());
         const token  : string = payload;
-
         const tokens : Array<string> = user.tokens == null ? [token] : [...user.tokens, token];
 
         return dispatch(new ActionUserPatch({ tokens }, true));
@@ -443,11 +453,15 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         return dispatch(new ActionUserResetAll()).
         pipe
         (
-            tap(() => patchState({ authenticating: true })),
-            switchMap(() => from(this.auth.signInWithEmailAndPassword(payload.id, payload.password))),
+            tap(() => patchState({ errorAuth: null, authenticating: true })),
+            switchMap(() =>
+                from(this.auth.signInWithEmailAndPassword(payload.id, payload.password))
+            ),
             map((userCredential: firebase.auth.UserCredential) => userCredential.user),
             switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
-            catchError((error: Error) => of(patchState({ error, authenticating: false })))
+            catchError((errorAuth: FirebaseError) =>
+                of(patchState({ errorAuth, authenticating: false }))
+            )
         );
     }
 
@@ -455,6 +469,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     logout(context: StateContext<StateUserModel>)
     {
         const { patchState } = context;
+
+        patchState({ error: null });
 
         return of(this.auth.signOut()).
         pipe
@@ -469,9 +485,17 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserResetPassword)
-    resetPassord({ dispatch }: StateContext<StateUserModel>, { payload }: ActionUserResetPassword)
+    resetPassord({ dispatch, patchState }: StateContext<StateUserModel>, { payload }: ActionUserResetPassword)
     {
-      return of(this.auth.sendPasswordResetEmail(payload.id));
+        patchState({ errorAuth: null });
+
+        return from(this.auth.sendPasswordResetEmail(payload.id)).
+        pipe
+        (
+            catchError((errorAuth: FirebaseError) =>
+                dispatch(new ActionUserSetErrorAuth(errorAuth))
+            )
+        );
     }
 
     @Action(ActionUserSubscriptionsSet)
@@ -603,5 +627,11 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     isPublisherSet({ dispatch }: StateContext<StateUserModel>, { isPublisher }: ActionUserIsPublisherSet)
     {
         return dispatch(new ActionUserPatch({ isPublisher }, true));
+    }
+
+    @Action(ActionUserSetErrorAuth)
+    setErrorAuth({ patchState }: StateContext<StateUserModel>, { errorAuth }: ActionUserSetErrorAuth)
+    {
+        patchState({ errorAuth });
     }
 }

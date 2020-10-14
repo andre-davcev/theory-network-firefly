@@ -1,4 +1,4 @@
-import { User as FirebaseUser, firestore } from 'firebase/app'
+import { User as FirebaseUser, firestore, FirebaseError } from 'firebase/app'
 import { Credentials } from '@theory/core';
 
 import { User, MetadataUser } from '@firefly/cloud';
@@ -26,6 +26,7 @@ export class ActionUserLoginEmail         { static readonly type = ActionsUser.L
 export class ActionUserLogout             { static readonly type = ActionsUser.Logout;             constructor() { } }
 export class ActionUserResetPassword      { static readonly type = ActionsUser.ResetPassword;      constructor(public payload: Credentials) { } }
 export class ActionUserResetAll           { static readonly type = ActionsUser.ResetAll;           constructor() { } }
+export class ActionUserSetErrorAuth       { static readonly type = ActionsUser.SetErrorAuth;       constructor(public errorAuth: FirebaseError = null) { } }
 
 export class ActionUserSubscriptionsSet   { static readonly type = ActionsUser.SubscriptionsSet;   constructor() { } }
 export class ActionUserSubscriptionToggle { static readonly type = ActionsUser.SubscriptionToggle; constructor(public id: string, public permanent: boolean = false) { } }
