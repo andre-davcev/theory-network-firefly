@@ -29,14 +29,14 @@ import {
     ActionInterestImageSet
 } from './interest.actions';
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, StateUserInterests, ActionUserInterestsSync } from '../..//query/user-interests';
-import { ActionUserStreamRemove } from '../../child/user-stream/user-stream.actions';
+import { ActionCityStreamRemove } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { firestore } from 'firebase/app';
 import { ImageSize, ServiceStorage } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from, forkJoin } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
-import { StateUserStream } from '@firefly/core/state/child/user-stream';
+import { StateCityStream } from '@firefly/core/state/child/city-stream';
 import { Injectable } from '@angular/core';
 import { Collection, ImageType } from '@firefly/core/enums';
 
@@ -87,7 +87,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                 ActionsCreate: [],
 
                 ActionsQueryAdd:    [ActionUserInterestsAdd],
-                ActionsQueryRemove: [ActionUserInterestsRemove, ActionUserStreamRemove, ActionUserSubscriptionsRemove],
+                ActionsQueryRemove: [ActionUserInterestsRemove, ActionCityStreamRemove, ActionUserSubscriptionsRemove],
                 ActionsQuerySync:   [ActionUserInterestsSync]
             }
         );
@@ -192,8 +192,8 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestSetIdAnonymous)
     setIdAnonymous({ dispatch }: StateContext<StateInterestModel>, { id }: ActionInterestSetIdAnonymous)
     {
-        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserStream.snapshotLookup())[id];
-        const data: Interest = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
+        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
+        const data: Interest = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
 
         return dispatch(new ActionInterestSet(snapshot, data));
     }
