@@ -109,6 +109,23 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
         return isPublisher && interestType === InterestType.Created;
     }
 
+    @Selector
+    ([
+        StateUser.interestType,
+        StateUserStream.finishedPaging()
+    ])
+    public static pageFinished
+    (
+        state          : StateUserInterestsModel,
+        interestType   : InterestType,
+        finishedPaging : boolean
+    ) : boolean
+    {
+        return interestType === InterestType.Created ?
+            StateUserInterests.finishedPagingState(state) :
+            finishedPaging;
+    }
+
     @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType, StateUser.interestVirtual])
     public static streamEmpty
     (

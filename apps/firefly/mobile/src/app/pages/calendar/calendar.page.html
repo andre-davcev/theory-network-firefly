@@ -65,6 +65,13 @@
                     (clicked)="add()"
                     slot="fixed">
         </app-button-add>
+
+        <ion-infinite-scroll threshold="100px"
+                             (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                         [loadingText]="'page.calendar.loading' | translate">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
     </ion-content>
 
     <app-icon-message *ngIf="empty$ | async"
@@ -72,11 +79,4 @@
               [icon]="IconType.Alerts"
               [message]="(emptyMessage$ | async) | translate">
     </app-icon-message>
-
-    <ion-infinite-scroll threshold="100px"
-                         (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles"
-                                     [loadingText]="'page.stream.loading' | translate">
-        </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
 </section>
