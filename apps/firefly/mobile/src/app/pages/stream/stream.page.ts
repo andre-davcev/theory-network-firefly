@@ -134,10 +134,7 @@ export class PageStream extends BaseComponent implements OnInit
     public loadData(event: any): void
     {
         const interestType   : InterestType = this.store.selectSnapshot(StateUser.interestType);
-        const finishedPaging : boolean      = this.store.selectSnapshot(interestType === InterestType.Created ?
-            StateUserInterests.finishedPaging() :
-            StateUserStream.finishedPaging()
-        );
+        const finishedPaging : boolean      = this.store.selectSnapshot(StateUserInterests.pageFinished);
 
         if (finishedPaging)
         {
