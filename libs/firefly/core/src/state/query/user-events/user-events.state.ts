@@ -145,6 +145,23 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
         return isPublisher && eventType === EventType.Created;
     }
 
+    @Selector
+    ([
+        StateUser.eventType,
+        StateUserAlerts.finishedPaging()
+    ])
+    public static pageFinished
+    (
+        state          : StateUserEventsModel,
+        eventType      : EventType,
+        finishedPaging : boolean
+    ) : boolean
+    {
+        return eventType === EventType.Created ?
+            StateUserEvents.finishedPagingState(state) :
+            finishedPaging;
+    }
+
     constructor
     (
         private store:   Store,

@@ -10,7 +10,6 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { Alert, Event, DateEvents, Interest } from '@firefly/cloud';
 import {
-    StateUserAlerts,
     ActionEventGet,
     IconType,
     StateUser,
@@ -19,7 +18,8 @@ import {
     ActionInterestGet,
     ActionUserEventsDelete,
     ActionUserEventsReset,
-    StateUserEvents
+    StateUserEvents,
+    ActionUserEventsGet
 } from '@firefly/core';
 import {
     ActionMobileAuthSelect,
@@ -193,25 +193,24 @@ export class PageCalendar extends BaseComponent
 
     public loadData(event): void
     {
-/*
-        const finishedPaging: boolean = this.store.selectSnapshot(StateUserStream.finishedPaging());
+      const eventType      : EventType = this.store.selectSnapshot(StateUser.eventType);
+      const finishedPaging : boolean   = this.store.selectSnapshot(StateUserEvents.pageFinished);
 
-        if (finishedPaging)
-        {
-            this.infiniteScroll.complete();
-            this.infiniteScroll.disabled = true;
+      if (finishedPaging || eventType === EventType.Upcoming)
+      {
+          this.infiniteScroll.complete();
+          this.infiniteScroll.disabled = true;
 
-            return;
-        }
+          return;
+      }
 
-        this.store.dispatch(new ActionUserStreamGet()).
-        pipe
-        (
-            switchMap(() =>
-                from(this.infiniteScroll.complete())
-            )
-        ).
-        subscribe();
-*/
+      this.store.dispatch(new ActionUserEventsGet()).
+      pipe
+      (
+          switchMap(() =>
+              from(this.infiniteScroll.complete())
+          )
+      ).
+      subscribe();
     }
 }
