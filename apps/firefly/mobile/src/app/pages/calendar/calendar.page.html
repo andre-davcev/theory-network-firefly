@@ -72,4 +72,11 @@
               [icon]="IconType.Alerts"
               [message]="(emptyMessage$ | async) | translate">
     </app-icon-message>
+
+    <ion-infinite-scroll threshold="100px"
+                         (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                     [loadingText]="'page.stream.loading' | translate">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </section>

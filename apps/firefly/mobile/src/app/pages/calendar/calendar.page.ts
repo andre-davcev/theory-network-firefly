@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { MenuController, PopoverController, IonSearchbar } from '@ionic/angular';
+import { MenuController, PopoverController, IonSearchbar, IonInfiniteScroll } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable, from } from 'rxjs';
@@ -58,6 +58,9 @@ export class PageCalendar extends BaseComponent
 
     @ViewChild(IonSearchbar, { static: false })
     private searchbar : IonSearchbar;
+
+    @ViewChild(IonInfiniteScroll)
+    private infiniteScroll: IonInfiniteScroll;
 
     public  searching    : boolean = false;
     public  searchClient : SearchClient = algoliaSearch('8NDQ1FNIDU','45b11751dc7e276f781a85f719abda66');
@@ -186,5 +189,29 @@ export class PageCalendar extends BaseComponent
             return;
 
         this.store.dispatch(new ActionSearchEvents(event.detail.value));
+    }
+
+    public loadData(event): void
+    {
+/*
+        const finishedPaging: boolean = this.store.selectSnapshot(StateUserStream.finishedPaging());
+
+        if (finishedPaging)
+        {
+            this.infiniteScroll.complete();
+            this.infiniteScroll.disabled = true;
+
+            return;
+        }
+
+        this.store.dispatch(new ActionUserStreamGet()).
+        pipe
+        (
+            switchMap(() =>
+                from(this.infiniteScroll.complete())
+            )
+        ).
+        subscribe();
+*/
     }
 }

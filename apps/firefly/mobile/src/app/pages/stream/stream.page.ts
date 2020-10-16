@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionUserStreamGet, ActionInterestGet, ActionUserStreamGetData, ActionUserStreamSync, ActionUserInterestsGet, ActionUserInterestsGetData, ActionEventGet } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionUserStreamGet, ActionInterestGet, ActionUserStreamGetData, ActionUserStreamSync, ActionUserInterestsGet, ActionUserInterestsGetData, ActionEventGet, InterestType } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
@@ -38,7 +38,8 @@ export class PageStream extends BaseComponent implements OnInit
 
     public IconType: any = IconType;
 
-    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild(IonInfiniteScroll)
+    public infiniteScroll: IonInfiniteScroll;
 
     constructor(private store: Store) { super(); }
 
@@ -130,18 +131,30 @@ export class PageStream extends BaseComponent implements OnInit
         this.store.dispatch(new Navigate([Pages.AssetInterest]));
     }
 
-    public loadData(event): void{
-      const finishedPaging : boolean = this.store.selectSnapshot(StateUserStream.finishedPaging());
-      if(finishedPaging)
-      {
-        this.infiniteScroll.complete();
-        this.infiniteScroll.disabled = true;
-        return;
-      }
+    public loadData(event: any): void
+    {
+        const interestType   : InterestType = this.store.selectSnapshot(StateUser.interestType);
+        const finishedPaging : boolean      = this.store.selectSnapshot(interestType === InterestType.Created ?
+            StateUserInterests.finishedPaging() :
+            StateUserStream.finishedPaging()
+        );
 
-      this.store.dispatch(new ActionUserStreamGet()).pipe(
-        switchMap(() => from(this.infiniteScroll.complete())
-      )).subscribe();
+        if (finishedPaging)
+        {
+            this.infiniteScroll.complete();
+            this.infiniteScroll.disabled = true;
+
+            return;
+        }
+
+        this.store.dispatch(interestType === InterestType.Created ? new ActionUserInterestsGet() : new ActionUserStreamGet()).
+        pipe
+        (
+            switchMap(() =>
+                from(this.infiniteScroll.complete())
+            )
+        ).
+        subscribe();
     }
 
     public select(event: Event): void
