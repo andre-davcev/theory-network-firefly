@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-list class="searchResults"  style="position: absolute;z-index:1;width:100%;">
+  <ion-list class="searchResults">
     <ion-item lines="none" (click)="selectSearchInterest(searchResult)" *ngFor="let searchResult of searchResults$ | async"  >
       {{searchResult.name}}
     </ion-item>
@@ -116,10 +116,10 @@
                       [message]="(emptyMessage$ | async) | translate">
     </app-icon-message>
 
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Loading more interests...">
-      </ion-infinite-scroll-content>
+    <ion-infinite-scroll threshold="100px"
+                         (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                     [loadingText]="'page.stream.loading' | translate">
+        </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

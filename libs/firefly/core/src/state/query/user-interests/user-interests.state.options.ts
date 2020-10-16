@@ -1,7 +1,5 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { PageSize } from '@theory/ngxs';
-
 import { StateUserInterestsModel } from './user-interests.state.model';
 import { OrderBy } from '@theory/firebase';
 
@@ -11,7 +9,7 @@ export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
 
     defaults :
     {
-        pageSize:         PageSize.Default,
+        pageSize:         3,
         orderBy:          'name',
         orderByDirection: OrderBy.Ascending,
 

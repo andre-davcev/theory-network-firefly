@@ -89,6 +89,7 @@
   "page.stream.title"      : "Interests",
   "page.stream.subscribe"  : "Subscribe",
   "page.stream.subscribed" : "Subscribed",
+  "page.stream.loading"    : "Loading more interests...",
 
   "page.alert.detail.title": "Notification Detail",
 
@@ -193,6 +194,8 @@
 
   "page.event-location.title"             : "Event Location",
   "page.event-location.searchPlaceholder" : "Search Locations",
+
+  "page.calendar.loading" : "Loading more events...",
 
   "page.user-profile.title"               : "User Profile",
   "page.user-profile.isPublisher"         : "Become A Publisher",
