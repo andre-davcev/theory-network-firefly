@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionUserStreamGet, ActionInterestGet, ActionUserStreamGetData, ActionUserStreamSync, ActionUserInterestsGet, ActionUserInterestsGetData, ActionEventGet, InterestType } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateCityStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionCityStreamGet, ActionInterestGet, ActionCityStreamGetData, ActionCityStreamSync, ActionUserInterestsGet, ActionUserInterestsGetData, ActionEventGet, InterestType } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
@@ -144,7 +144,7 @@ export class PageStream extends BaseComponent implements OnInit
             return;
         }
 
-        this.store.dispatch(interestType === InterestType.Created ? new ActionUserInterestsGet() : new ActionUserStreamGet()).
+        this.store.dispatch(interestType === InterestType.Created ? new ActionUserInterestsGet() : new ActionCityStreamGet()).
         pipe
         (
             switchMap(() =>

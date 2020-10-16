@@ -48,9 +48,9 @@ import { StateDocument } from '@theory/ngxs';
 import { ActionUserAlertsReset, ActionUserAlertsSetData } from '../../child/user-alerts/user-alerts.actions';
 import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
-import { ActionUserStreamSync } from '../../child/user-stream/user-stream.actions';
+import { ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { StateUserStream } from '../../child/user-stream/user-stream.state';
+import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
 import { Injectable } from '@angular/core';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
@@ -174,7 +174,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector
     ([
         StateCity.found,
-        StateUserStream.initialized()
+        StateCityStream.initialized()
     ])
     static initialized(state: StateUserModel, cityFound: boolean, streamInitialized: boolean) : boolean
     {
@@ -230,7 +230,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ])
             ),
             switchMap(() =>
-                this.store.select(StateUserStream.initialized()).pipe
+                this.store.select(StateCityStream.initialized()).pipe
                 (
                     filter((ready: boolean) => ready),
                     take(1)
@@ -525,8 +525,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         const state: StateUserModel = getState();
 
         const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
-        const streamInterestSnapshot : firestore.DocumentSnapshot          = this.store.selectSnapshot(StateUserStream.snapshotLookup())[id];
+        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
+        const streamInterestSnapshot : firestore.DocumentSnapshot          = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
 
         subscriptionsStatus[id] = { on : true };
         streamInterest.on       = true;
@@ -534,7 +534,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         return dispatch
         ([
             new ActionUserPatch({ subscriptionsStatus }, true),
-            new ActionUserStreamSync(streamInterest),
+            new ActionCityStreamSync(streamInterest),
             new ActionUserSubscriptionsAdd(streamInterestSnapshot, streamInterest)
         ]);
     }
@@ -545,7 +545,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         const state: StateUserModel = getState();
 
         const subscriptionsStatus : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-        const streamInterest      : StreamInterest                      = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
+        const streamInterest      : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
 
         delete subscriptionsStatus[id];
         delete streamInterest.on;
@@ -553,7 +553,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         return dispatch
         ([
             new ActionUserPatch({ subscriptionsStatus }, true),
-            new ActionUserStreamSync(streamInterest),
+            new ActionCityStreamSync(streamInterest),
             new ActionUserSubscriptionsRemove(id)
         ]);
     }
@@ -564,7 +564,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         const state: StateUserModel = getState();
 
         const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateUserStream.dataLookup())[id];
+        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
         const subscription           : Subscription                        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
 
         subscriptionsStatus[id].on = on;
@@ -578,7 +578,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         {
             streamInterest.on = on;
 
-            actions.push(new ActionUserStreamSync(streamInterest));
+            actions.push(new ActionCityStreamSync(streamInterest));
         }
 
         if (subscription != null)

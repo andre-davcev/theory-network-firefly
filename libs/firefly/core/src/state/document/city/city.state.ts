@@ -14,7 +14,7 @@ import { GeolocationPosition } from '@capacitor/core';
 import { CityInfo, StreamInterest } from '@firefly/cloud';
 import { ServiceLocation } from '@firefly/core/services';
 import { Collection } from '@firefly/core/enums';
-import { ActionUserStreamSetData } from '../../child/user-stream/user-stream.actions';
+import { ActionCityStreamSetData } from '../../child/city-stream/city-stream.actions';
 import { ServiceFirestoreBase } from '@theory/firebase';
 
 @State<StateCityModel>(StateCityOptions)
@@ -74,7 +74,7 @@ export class StateCity implements NgxsOnInit
                             ),
                             switchMap((snapshot: firestore.DocumentSnapshot) =>
                                 snapshot.exists ?
-                                    dispatch(new ActionUserStreamSetData(snapshot.data(), true)) :
+                                    dispatch(new ActionCityStreamSetData(snapshot.data(), true)) :
                                     dispatch(new ActionCityCreate(city))
                                 )
                         )
@@ -98,7 +98,7 @@ export class StateCity implements NgxsOnInit
             ),
             take(1),
             switchMap((snapshot: DocumentSnapshot<Record<string, StreamInterest>>) =>
-                dispatch(new ActionUserStreamSetData(snapshot.data(), true))
+                dispatch(new ActionCityStreamSetData(snapshot.data(), true))
             )
         );
     }

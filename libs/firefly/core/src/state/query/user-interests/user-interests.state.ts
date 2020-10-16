@@ -21,7 +21,7 @@ import {
     ActionUserInterestsReset
 } from './user-interests.actions';
 import { StateUser } from '../../document/user/user.state';
-import { StateUserStream } from '../../child/user-stream/user-stream.state';
+import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { ImageType } from '../../../enums';
 import { ServiceStorage } from '@theory/firebase';
 
@@ -53,7 +53,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
 
     @Selector
     ([
-        StateUserStream.data(),
+        StateCityStream.data(),
         StateUser.subscriptionsStatus,
         StateUser.interestType,
         StateUser.interestVirtual
@@ -85,7 +85,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
                 );
     }
 
-    @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType, StateUser.interestVirtual])
+    @Selector([StateCityStream.data(), StateUser.subscriptionsStatus, StateUser.interestType, StateUser.interestVirtual])
     public static streamFound
     (
         state         : StateUserInterestsModel,
@@ -112,7 +112,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     @Selector
     ([
         StateUser.interestType,
-        StateUserStream.finishedPaging()
+        StateCityStream.finishedPaging()
     ])
     public static pageFinished
     (
@@ -126,7 +126,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
             finishedPaging;
     }
 
-    @Selector([StateUserStream.data(), StateUser.subscriptionsStatus, StateUser.interestType, StateUser.interestVirtual])
+    @Selector([StateCityStream.data(), StateUser.subscriptionsStatus, StateUser.interestType, StateUser.interestVirtual])
     public static streamEmpty
     (
         state         : StateUserInterestsModel,

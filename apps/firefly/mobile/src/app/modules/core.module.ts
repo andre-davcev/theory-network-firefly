@@ -24,7 +24,7 @@ import {
   StateUserAlerts,
   StateUserInterests,
   StateUserEvents,
-  StateUserStream,
+  StateCityStream,
   StateUserSubscriptions,
   StateUserProfile, StateCity
 } from '@firefly/core';
@@ -98,7 +98,7 @@ export function createTranslateLoader(http: HttpClient)
             StateUserAlerts,
             StateUserInterests,
             StateUserEvents,
-            StateUserStream,
+            StateCityStream,
             StateUserSubscriptions,
             StateUserProfile
         ]),
