@@ -1,5 +1,4 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
-import { PageSize } from '@theory/ngxs';
 
 import { StateUserEventsModel } from './user-events.state.model';
 import { OrderBy } from '@theory/firebase';
@@ -10,7 +9,7 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 
     defaults :
     {
-        pageSize:         PageSize.Default,
+        pageSize:         12,
         orderBy:          'timeStart',
         orderByDirection: OrderBy.Ascending,
 
