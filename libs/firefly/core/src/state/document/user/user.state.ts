@@ -499,7 +499,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserSubscriptionsSet)
-    subscriptionsGet({ dispatch }: StateContext<StateUserModel>)
+    subscriptionsSet({ dispatch }: StateContext<StateUserModel>)
     {
         const subscriptions: Record<string, SubscriptionPartial> = this.store.selectSnapshot(StateUser.subscriptionsStatus);
 
