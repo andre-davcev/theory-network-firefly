@@ -88,11 +88,9 @@ export class PageCalendar extends BaseComponent
 
     public navigate(object: Alert): void
     {
-        this.store.dispatch(new ActionUserEventsReset()).pipe
+        this.store.dispatch(new ActionEventGet(object.id)).
+        pipe
         (
-            switchMap(() =>
-                this.store.dispatch(new ActionEventGet(object.id))
-            ),
             switchMap(() =>
                 this.store.dispatch(new Navigate([Pages.AssetEvent, object.id]))
             )

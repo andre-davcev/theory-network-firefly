@@ -21,7 +21,7 @@ export class PageLogin
     @Select(StateUser.authenticating) authenticating$ : Observable<boolean>;
     @Select(StateUser.errorAuth)      error$          : Observable<FirebaseError>;
 
-    @Input() page: Pages.Login | Pages.SignUp | Pages.ResetPassword | Pages.SignUpCategories | Pages.SignUpSlides = Pages.Login;
+    @Input() page: Pages.Login | Pages.SignUp | Pages.ResetPassword | Pages.SignUpSlides = Pages.Login;
 
     public Pages    : any = Pages;
     public Color    : any = Color;

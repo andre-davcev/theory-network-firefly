@@ -51,7 +51,6 @@ export class StateMobile
     @Selector() static pagePublishInterests(state: StateMobileModel) : boolean                { return StateMobile.pageRoot(state) === `/${Pages.AssetsInterests}`; }
     @Selector() static pagePublishEvents(state: StateMobileModel)    : boolean                { return StateMobile.pageRoot(state) === `/${Pages.AssetsEvents}`; }
     @Selector() static pageUserProfile(state: StateMobileModel)      : boolean                { return StateMobile.pageRoot(state) === `/${Pages.UserProfile}`; }
-    @Selector() static pageUserSettings(state: StateMobileModel)     : boolean                { return StateMobile.pageRoot(state) === `/${Pages.UserSettings}`; }
     @Selector() static indexAlerts(state: StateMobileModel)          : number                 { return state.indexAlerts; }
 
     constructor
