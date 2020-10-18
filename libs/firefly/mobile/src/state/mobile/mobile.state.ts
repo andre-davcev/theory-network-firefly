@@ -16,7 +16,12 @@ import {
     ActionMobileFilterInterests,
     ActionMobileFilterEvents,
     ActionMobileFilterEventsUpcoming,
-    ActionMobileFilterEventsCreated
+    ActionMobileFilterEventsCreated,
+    ActionMobilePageInterests,
+    ActionMobilePageEvents,
+    ActionMobileFilterInterestsUnsubscribed,
+    ActionMobileFilterInterestsSubscribed,
+    ActionMobileFilterInterestsCreated
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
 import { LoadingController, ToastController, NavController, ActionSheetController } from '@ionic/angular';
@@ -26,7 +31,7 @@ import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
 import { NgZone, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { StateUserAlerts, ActionUserAlertsMarkRead, ActionUserInterestTypeSet, InterestType, StateUserInterests, ActionUserInterestsGetData, EventType, ActionUserEventTypeSet, ActionUserAlertsGetImages, StateUserEvents, ActionUserEventsGetData, StateUser } from '@firefly/core';
+import { StateUserAlerts, ActionUserAlertsMarkRead, ActionUserInterestTypeSet, InterestType, StateUserInterests, ActionUserInterestsGetData, EventType, ActionUserEventTypeSet, ActionUserAlertsGetImages, StateUserEvents, ActionUserEventsGetData, StateUser, ActionUserSubscriptionsGet, ActionUserEventsGet, ActionUserAlertsGet, StateCityStream, StateUserSubscriptions, ActionUserInterestsGet, ActionCityStreamGet, ActionUserSubscriptionsSet } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 @State<StateMobileModel>(StateMobileOptions)
@@ -236,14 +241,44 @@ export class StateMobile
     {
         type = type || this.store.selectSnapshot(StateUser.interestType);
 
-        return type !== InterestType.Created || this.store.selectSnapshot(StateUserInterests.initialized()) ?
-            dispatch(new ActionUserInterestTypeSet(type)) :
+        return type === InterestType.Unsubscribed ?
+                dispatch(new ActionMobileFilterInterestsUnsubscribed()) :
+            type === InterestType.Subscribed ?
+                dispatch(new ActionMobileFilterInterestsSubscribed()) :
+                dispatch(new ActionMobileFilterInterestsCreated());
+    }
+
+    @Action(ActionMobileFilterInterestsUnsubscribed)
+    filterInterestsUnsubscribed({ dispatch }: StateContext<StateMobileModel>)
+    {
+        return dispatch(new ActionUserInterestTypeSet(InterestType.Unsubscribed));
+    }
+
+    @Action(ActionMobileFilterInterestsSubscribed)
+    filterInterestsSubscribed({ dispatch }: StateContext<StateMobileModel>)
+    {
+        return this.store.selectSnapshot(StateUserSubscriptions.initialized()) ?
+            dispatch(new ActionUserInterestTypeSet(InterestType.Subscribed)) :
             dispatch(new ActionMobileLoadingShow()).
             pipe
             (
-                switchMap(() => dispatch(new ActionUserInterestsGetData())),
+                switchMap(() => this.store.dispatch(new ActionUserSubscriptionsSet())),
                 switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
-                switchMap(() => this.store.dispatch(new ActionUserInterestTypeSet(type)))
+                switchMap(() => this.store.dispatch(new ActionUserInterestTypeSet(InterestType.Subscribed)))
+            );
+    }
+
+    @Action(ActionMobileFilterInterestsCreated)
+    filterInterestsCreated({ dispatch }: StateContext<StateMobileModel>)
+    {
+        return this.store.selectSnapshot(StateUserInterests.initialized()) ?
+            dispatch(new ActionUserInterestTypeSet(InterestType.Created)) :
+            dispatch(new ActionMobileLoadingShow()).
+            pipe
+            (
+                switchMap(() => this.store.dispatch(new ActionUserInterestsGetData())),
+                switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
+                switchMap(() => this.store.dispatch(new ActionUserInterestTypeSet(InterestType.Created)))
             );
     }
 
@@ -282,6 +317,80 @@ export class StateMobile
                 switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
                 switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
                 switchMap(() => this.store.dispatch(new ActionUserEventTypeSet(EventType.Created)))
-            )
+            );
+    }
+
+    @Action(ActionMobilePageInterests)
+    pageInterests({ dispatch }: StateContext<StateMobileModel>, { infiniteScroll }: ActionMobilePageInterests)
+    {
+        const interestType: InterestType = this.store.selectSnapshot(StateUser.interestType);
+
+        const finishedPaging : boolean = this.store.selectSnapshot
+        (
+            interestType === InterestType.Unsubscribed ?
+                StateCityStream.finishedPaging() :
+            interestType === InterestType.Subscribed ?
+                StateUserSubscriptions.finishedPaging() :
+                StateUserEvents.finishedPaging()
+        );
+
+        return finishedPaging ?
+            from(infiniteScroll.complete()).
+            pipe
+            (
+                tap(() =>
+                    infiniteScroll.disabled = true
+                )
+            ):
+
+            dispatch
+            (
+                interestType === InterestType.Unsubscribed ?
+                    new ActionCityStreamGet() :
+                interestType === InterestType.Subscribed ?
+                    new ActionUserSubscriptionsGet() :
+                    new ActionUserInterestsGet()
+            ).
+            pipe
+            (
+                switchMap(() =>
+                    from(infiniteScroll.complete())
+                )
+            );
+    }
+
+    @Action(ActionMobilePageEvents)
+    pageEvents({ dispatch }: StateContext<StateMobileModel>, { infiniteScroll }: ActionMobilePageEvents)
+    {
+        const eventType : EventType = this.store.selectSnapshot(StateUser.eventType);
+
+        const finishedPaging : boolean = this.store.selectSnapshot
+        (
+            eventType === EventType.Upcoming ?
+                StateUserAlerts.finishedPaging() :
+                StateUserEvents.finishedPaging()
+        );
+
+        return finishedPaging ?
+            from(infiniteScroll.complete()).
+            pipe
+            (
+                tap(() =>
+                    infiniteScroll.disabled = true
+                )
+            ):
+
+            dispatch
+            (
+                eventType === EventType.Upcoming ?
+                    new ActionUserAlertsGet() :
+                    new ActionUserEventsGet()
+            ).
+            pipe
+            (
+                switchMap(() =>
+                    from(infiniteScroll.complete())
+                )
+            );
     }
 }

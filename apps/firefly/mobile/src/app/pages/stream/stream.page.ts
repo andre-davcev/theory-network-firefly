@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable, from } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateCityStream, StateUserInterests, ActionUserSubscriptionOnOff, ActionCityStreamGet, ActionInterestGet, ActionCityStreamGetData, ActionCityStreamSync, ActionUserInterestsGet, ActionUserInterestsGetData, ActionEventGet, InterestType } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserInterests, ActionUserSubscriptionOnOff, ActionInterestGet, ActionEventGet } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
-import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow, StateSearch, ActionSearchReset } from '@firefly/mobile';
+import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow, StateSearch, ActionSearchReset, ActionMobilePageInterests } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { IonInfiniteScroll } from '@ionic/angular';
 
@@ -133,25 +133,7 @@ export class PageStream extends BaseComponent implements OnInit
 
     public loadData(event: any): void
     {
-        const interestType   : InterestType = this.store.selectSnapshot(StateUser.interestType);
-        const finishedPaging : boolean      = this.store.selectSnapshot(StateUserInterests.pageFinished);
-
-        if (finishedPaging)
-        {
-            this.infiniteScroll.complete();
-            this.infiniteScroll.disabled = true;
-
-            return;
-        }
-
-        this.store.dispatch(interestType === InterestType.Created ? new ActionUserInterestsGet() : new ActionCityStreamGet()).
-        pipe
-        (
-            switchMap(() =>
-                from(this.infiniteScroll.complete())
-            )
-        ).
-        subscribe();
+        this.store.dispatch(new ActionMobilePageInterests(this.infiniteScroll));
     }
 
     public select(event: Event): void

@@ -18,8 +18,7 @@ import {
     ActionInterestGet,
     ActionUserEventsDelete,
     ActionUserEventsReset,
-    StateUserEvents,
-    ActionUserEventsGet
+    StateUserEvents
 } from '@firefly/core';
 import {
     ActionMobileAuthSelect,
@@ -29,7 +28,8 @@ import {
     StateMobile,
     StateSearch,
     ActionSearchReset,
-    ActionMobileLoadingShow
+    ActionMobileLoadingShow,
+    ActionMobilePageEvents
 } from '@firefly/mobile';
 import algoliaSearch, { SearchIndex, SearchClient } from 'algoliasearch/lite';
 
@@ -193,24 +193,6 @@ export class PageCalendar extends BaseComponent
 
     public loadData(event): void
     {
-      const eventType      : EventType = this.store.selectSnapshot(StateUser.eventType);
-      const finishedPaging : boolean   = this.store.selectSnapshot(StateUserEvents.pageFinished);
-
-      if (finishedPaging || eventType === EventType.Upcoming)
-      {
-          this.infiniteScroll.complete();
-          this.infiniteScroll.disabled = true;
-
-          return;
-      }
-
-      this.store.dispatch(new ActionUserEventsGet()).
-      pipe
-      (
-          switchMap(() =>
-              from(this.infiniteScroll.complete())
-          )
-      ).
-      subscribe();
+        this.store.dispatch(new ActionMobilePageEvents(this.infiniteScroll));
     }
 }
