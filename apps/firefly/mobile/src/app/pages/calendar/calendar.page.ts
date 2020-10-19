@@ -18,7 +18,8 @@ import {
     ActionInterestGet,
     ActionUserEventsDelete,
     ActionUserEventsReset,
-    StateUserEvents
+    StateUserEvents,
+    ActionEventSet
 } from '@firefly/core';
 import {
     ActionMobileAuthSelect,
@@ -81,21 +82,18 @@ export class PageCalendar extends BaseComponent
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
-    public eventDelete(event: Event): void
+    public delete(event: Event): void
     {
         this.store.dispatch(new ActionUserEventsDelete(event.id));
     }
 
     public navigate(object: Alert): void
     {
-        this.store.dispatch(new ActionEventGet(object.id)).
-        pipe
-        (
-            switchMap(() =>
-                this.store.dispatch(new Navigate([Pages.AssetEvent, object.id]))
-            )
-        ).
-        subscribe();
+        const page: Pages = object.read == null ?
+            Pages.AssetEvent :
+            Pages.EventDetail;
+
+        this.store.dispatch(new Navigate([page, object.id]));
     }
 
     public add(): void

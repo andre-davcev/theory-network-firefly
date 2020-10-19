@@ -12,7 +12,19 @@
         </ion-buttons>
 
         <ion-buttons slot="end">
-            <ion-button *ngIf="canEdit$ | async"
+            <ion-button *ngIf="canAccept$ | async"
+                        (click)="acceptEvent()"
+                        icon-only>
+                <ion-icon color="dark" name="checkmark-outline"></ion-icon>
+            </ion-button>
+
+            <ion-button *ngIf="canAccept$ | async"
+                        (click)="denyEvent()"
+                        icon-only>
+                <ion-icon color="dark" name="close-outline"></ion-icon>
+            </ion-button>
+
+            <ion-button *ngIf="(canEdit$ | async) && !(canAccept$ | async)"
                         color="dark"
                         (click)="save()"
                         [disabled]="!(canUpdate$ | async)">

@@ -3,9 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { switchMap } from 'rxjs/operators';
-import { ActionMobileLoadingHide } from '@firefly/mobile';
-import { ActionEventSetId, ActionEventImageSet } from '@firefly/core';
+import { ActionEventSetId } from '@firefly/core';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageEventDetail implements Resolve<void>
@@ -14,9 +12,6 @@ export class ResolverPageEventDetail implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-      console.log('in resolver');
-      return this.store.dispatch(new ActionMobileLoadingHide()).pipe(
-        switchMap(() => this.store.dispatch(new ActionEventImageSet()))
-      )
+        return this.store.dispatch(new ActionEventSetId(route.params.id, true));
     }
 }

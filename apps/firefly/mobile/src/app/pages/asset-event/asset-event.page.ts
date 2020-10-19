@@ -7,7 +7,7 @@ import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet } from '@firefly/core';
+import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, StateInterest, ActionEventAccept, ActionEventDeny } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
@@ -40,6 +40,7 @@ export class PageAssetEvent
     @Select(StateDevice.device)         device$:          Observable<boolean>;
     @Select(StateEvent.image)           image$:           Observable<string>;
     @Select(StateEvent.icon)            icon$:            Observable<string>;
+    @Select(StateEvent.canAccept)       canAccept$:       Observable<boolean>;
 
     @Input() modal: boolean = false;
 
@@ -221,5 +222,28 @@ export class PageAssetEvent
     public cancel(): void
     {
         this.modalController.dismiss();
+    }
+
+
+    public acceptEvent(): void
+    {
+        this.store.dispatch(new ActionEventAccept()).pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new ActionInterestEventsGetAnonymous())
+            )
+        ).
+        subscribe();
+    }
+
+    public denyEvent(): void
+    {
+        this.store.dispatch(new ActionEventDeny()).pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new ActionInterestEventsGetAnonymous())
+            )
+        ).
+        subscribe();
     }
 }

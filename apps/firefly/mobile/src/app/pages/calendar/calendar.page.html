@@ -57,7 +57,7 @@
             <app-item-events *ngFor="let events of events$ | async"
                             [dateEvents]="events"
                             (selected)="navigate($event)"
-                            (deleted)="eventDelete($event)">
+                            (deleted)="delete($event)">
             </app-item-events>
         </ion-list>
 

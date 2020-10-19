@@ -4,7 +4,7 @@ import { ModulePage } from '@firefly/app/modules';
 import { PageEventDetail } from './event-detail.page';
 import { RoutesPageEventDetail } from './event-detail.page.routes';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { ModuleComponentItemMap } from '@firefly/mobile';
+import { ModuleComponentItemMap, ModuleComponentSlide } from '@firefly/mobile';
 import { ModuleComponentButtonAction } from '@firefly/core';
 
 @NgModule
@@ -14,6 +14,7 @@ import { ModuleComponentButtonAction } from '@firefly/core';
         ModulePage,
         ModuleComponentItemMap,
         ModuleComponentButtonAction,
+        ModuleComponentSlide,
         RouterModule.forChild(RoutesPageEventDetail),
         NgxsFormPluginModule
     ],

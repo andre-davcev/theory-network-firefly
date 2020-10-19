@@ -4,12 +4,10 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, BehaviorSubject } from 'rxjs';
 
-import { StateUserAlerts, ActionEventGet, ActionUserAlertsGo, IconType, ActionUserAlertsDelete, ActionUserEventsReset } from '@firefly/core';
+import { StateUserAlerts, ActionUserAlertsGo, IconType, ActionUserAlertsDelete } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
-import { Navigate } from '@ngxs/router-plugin';
-import { PageAlertDetail } from '../alert-detail/alert-detail.page';
 import { BaseComponent } from '@theory/core';
 
 @Component
@@ -78,20 +76,6 @@ export class PageAlert extends BaseComponent
     public delete(alert: Alert): void
     {
         this.store.dispatch(new ActionUserAlertsDelete(alert.id));
-    }
-
-    public navigate(object: Alert): void
-    {
-        this.store.dispatch(new ActionUserEventsReset()).pipe
-        (
-            switchMap(() =>
-                this.store.dispatch(new ActionEventGet(object.id))
-            ),
-            switchMap(() =>
-                this.store.dispatch(new Navigate([Pages.AlertDetail, object.id]))
-            )
-        ).
-        subscribe();
     }
 
     public done(): void
