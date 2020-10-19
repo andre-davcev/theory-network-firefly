@@ -5,21 +5,20 @@ import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventAccept, ActionEventDeny, ActionInterestEventsGetAnonymous, StateInterest, ActionUserAlertsGo, ActionUserAlertsDelete } from '@firefly/core';
+import { StateEvent, ActionUserAlertsGo, ActionUserAlertsDelete } from '@firefly/core';
 import { Alert, Event } from '@firefly/cloud';
 import { Pages } from '@firefly/mobile';
 import { BaseComponent } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
-import { switchMap } from 'rxjs/operators';
 
 @Component
 ({
-    selector    : 'app-page-event-detail',
-    templateUrl : 'event-detail.page.html',
-    styleUrls   : ['./event-detail.page.scss']
+    selector    : 'app-page-notification-detail',
+    templateUrl : 'notification-detail.page.html',
+    styleUrls   : ['./notification-detail.page.scss']
 })
 
-export class PageEventDetail extends BaseComponent
+export class PageNotificationDetail extends BaseComponent
 {
     @Select(StateEvent.image)      image$:           Observable<string>;
     @Select(StateEvent.data())     event$:           Observable<any>;
