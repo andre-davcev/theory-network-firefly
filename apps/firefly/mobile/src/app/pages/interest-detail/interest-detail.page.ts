@@ -13,7 +13,7 @@ import { NavController, ModalController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
-import { PageAssetEvent } from '..';
+import { PageEventDetail } from '../event-detail';
 
 @Component
 ({
@@ -64,7 +64,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Light }));
     }
 
-    public navigate(page: Pages.AssetEvent)
+    public navigate(page: Pages.EventDetail)
     {
       const interest: Interest = this.store.selectSnapshot(StateInterest.data());
 
@@ -75,7 +75,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         switchMap(() => this.store.dispatch(new ActionEventInterestAdd(interest))),
         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
         switchMap(() => from(this.modal.create({
-          component: PageAssetEvent,
+          component: PageEventDetail,
           componentProps: { modal: true }
         })))
       ).subscribe((modal: HTMLIonModalElement) => modal.present());

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { ActionEventSetId } from '@firefly/core';
 
 @Injectable({ providedIn: 'root' })
-export class ResolverPageAssetEvent implements Resolve<void>
+export class ResolverPageEventDetail implements Resolve<void>
 {
     constructor(private store: Store) {}
 

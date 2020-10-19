@@ -52,7 +52,7 @@ export class PageAssetsEvents extends BaseComponent implements OnInit
 
     add(): void
     {
-        this.store.dispatch(new Navigate([ Pages.AssetEvent, CoreEnum.IdNew ]));
+        this.store.dispatch(new Navigate([ Pages.EventDetail, CoreEnum.IdNew ]));
     }
 
     public ionViewWillEnter(): void
@@ -64,7 +64,7 @@ export class PageAssetsEvents extends BaseComponent implements OnInit
     {
         this.store.dispatch([
           new ActionMobileLoadingShow(),
-          new Navigate([Pages.AssetEvent, object.id])
+          new Navigate([Pages.EventDetail, object.id])
         ]);
         //this.store.dispatch(new ActionEventSetId(object.id));
     }

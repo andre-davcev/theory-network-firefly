@@ -17,13 +17,13 @@ import { Place } from '@firefly/cloud';
 
 @Component
 ({
-    selector    : 'app-page-asset-event',
-    templateUrl : 'asset-event.page.html',
-    styleUrls   : ['./asset-event.page.scss'],
+    selector    : 'app-page-event-detail',
+    templateUrl : 'event-detail.page.html',
+    styleUrls   : ['./event-detail.page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class PageAssetEvent
+export class PageEventDetail
 {
     @Select(StateEvent.formGroup())     form$:            Observable<FormGroup>;
     @Select(StateEvent.isNew())         isNew$:           Observable<boolean>;
