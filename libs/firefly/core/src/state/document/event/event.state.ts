@@ -126,9 +126,9 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static place(state: StateEventModel):           Place                  { return StateEvent.metadataState(state).place; }
     @Selector() static virtual(state: StateEventModel):         boolean                { return StateEvent.dataState(state).virtual; }
     @Selector() static website(state: StateEventModel):         string                 { return StateEvent.dataState(state).website; }
-    @Selector() static websiteIsSet(state: StateEventModel):    boolean                { return StateEvent.website(state) != null; }
+    @Selector() static websiteIsSet(state: StateEventModel):    boolean                { return (StateEvent.website(state) || '').trim().length > 0; }
     @Selector() static phone(state: StateEventModel):           string                 { return StateEvent.dataState(state).phone; }
-    @Selector() static phoneIsSet(state: StateEventModel):      boolean                { return StateEvent.phone(state) != null; }
+    @Selector() static phoneIsSet(state: StateEventModel):      boolean                { return (StateEvent.phone(state) || '').trim().length > 0; }
     @Selector() static draft(state: StateEventModel):           boolean                { return StateEvent.dataState(state).draft; }
 
     @Selector() static placeCenter(state: StateEventModel): LngLatLike

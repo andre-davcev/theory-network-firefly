@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { ActionAlertSetId } from '@firefly/core';
 
 @Injectable({ providedIn: 'root' })
-export class ResolverPageAlert implements Resolve<void>
+export class ResolverPageNotifications implements Resolve<void>
 {
     constructor(private store: Store) {}
 

@@ -148,7 +148,7 @@ export class PageStream extends BaseComponent implements OnInit
                 this.store.dispatch
                 ([
                     new ActionMobileLoadingShow(),
-                    new Navigate([Pages.EventDetail, event.id])
+                    new Navigate([Pages.NotificationDetail, event.id])
                 ])
             )
         ).
