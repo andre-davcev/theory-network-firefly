@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ModulePage } from '@firefly/app/modules';
-import { PageEventDetail } from './event-detail.page';
-import { RoutesPageEventDetail } from './event-detail.page.routes';
+import { PageNotificationDetail } from './notification-detail.page';
+import { RoutesPageNotificationDetail } from './notification-detail.page.routes';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { ModuleComponentItemMap, ModuleComponentSlide } from '@firefly/mobile';
 import { ModuleComponentButtonAction } from '@firefly/core';
@@ -15,16 +15,16 @@ import { ModuleComponentButtonAction } from '@firefly/core';
         ModuleComponentItemMap,
         ModuleComponentButtonAction,
         ModuleComponentSlide,
-        RouterModule.forChild(RoutesPageEventDetail),
+        RouterModule.forChild(RoutesPageNotificationDetail),
         NgxsFormPluginModule
     ],
 
-    declarations : [PageEventDetail],
-    exports : [PageEventDetail],
+    declarations : [PageNotificationDetail],
+    exports : [PageNotificationDetail],
     entryComponents:
     [
 
     ]
 })
 
-export class ModulePageEventDetail { }
+export class ModulePageNotificationDetail { }

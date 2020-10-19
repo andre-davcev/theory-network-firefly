@@ -16,7 +16,7 @@ export const routes: Routes =
     { path: Pages.AssetEvent,       loadChildren: '@firefly/page/asset-event#ModulePageAssetEvent' },
 
     { path: Pages.EventSelector,      loadChildren: '@firefly/page/event-selector#ModulePageEventSelector' },
-    { path: Pages.NotificationDetail, loadChildren: '@firefly/page/event-detail#ModulePageEventDetail' },
+    { path: Pages.NotificationDetail, loadChildren: '@firefly/page/notification-detail#ModulePageNotificationDetail' },
     { path: Pages.InterestDetail,     loadChildren: '@firefly/page/interest-detail#ModulePageInterestDetail' },
     { path: Pages.UserProfile,        loadChildren: '@firefly/page/user-profile#ModulePageUserProfile' }
 ];

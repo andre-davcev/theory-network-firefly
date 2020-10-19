@@ -1,6 +1,5 @@
 export enum Pages
 {
-    Notifications       = 'notifications',
     AssetEvent          = 'asset-event',
     AssetInterest       = 'asset-interest',
     AssetsEvents        = 'assets-events',
@@ -9,6 +8,7 @@ export enum Pages
     Calendar            = 'calendar',
     EventAssets         = 'event-assets',
     NotificationDetail  = 'notification-detail',
+    Notifications       = 'notifications',
     EventLibrary        = 'event-library',
     EventLocation       = 'event-location',
     Home                = 'home',
