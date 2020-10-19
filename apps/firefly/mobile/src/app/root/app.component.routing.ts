@@ -16,7 +16,6 @@ export const routes: Routes =
     { path: Pages.AssetEvent,       loadChildren: '@firefly/page/asset-event#ModulePageAssetEvent' },
     // { path: Pages.AssetsBeacons,  loadChildren: '@firefly/page/assets-beacons#ModulePageAssetsBeacons' },
 
-    { path: Pages.AlertDetail,    loadChildren: '@firefly/page/alert-detail#ModulePageAlertDetail' },
     { path: Pages.EventSelector,  loadChildren: '@firefly/page/event-selector#ModulePageEventSelector' },
     { path: Pages.EventDetail,    loadChildren: '@firefly/page/event-detail#ModulePageEventDetail' },
     { path: Pages.InterestDetail, loadChildren: '@firefly/page/interest-detail#ModulePageInterestDetail' },

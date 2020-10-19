@@ -1,51 +1,27 @@
 <ion-header color="white">
     <ion-toolbar>
         <ion-title>
-            {{ 'page.event.detail.title' | translate}}
+            {{ 'page.event.detail.title' | translate }}
         </ion-title>
-          <ion-buttons slot="start">
+
+        <ion-buttons slot="start">
             <ion-back-button color="dark"></ion-back-button>
         </ion-buttons>
+
         <ion-buttons slot="end">
-          <ion-button (click)="edit()" *ngIf="canEdit$ | async"
-                      icon-only>
-                      <ion-icon size="large" name="create-outline" color="dark"></ion-icon>
-          </ion-button>
+            <ion-button *ngIf="canEdit$ | async"
+                        (click)="edit()"
+                        icon-only>
+                <ion-icon size="large" name="create-outline" color="dark"></ion-icon>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-    <div class="cpt-background"></div>
-    <div class="cnt-image">
-      <img class="cpt-image" [src]="image$ | async">
-    </div>
-    <div class="cnt-name">
-      <div class="name">|{{ (event$ | async).name  }}|</div>
-    </div>
-    <div class="cnt-tagline">
-      <div class="tagline">{{ (event$ | async).tagline }}</div>
-    </div>
-    <div class="cnt-description">
-      <div class="description">{{(event$ | async).description}}</div>
-    </div>
-
-    <div class="cnt-map">
-      <app-item-map>
-      </app-item-map>
-    </div>
-
-    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="((canEditInterest$ | async) && (event$ | async).draft)" fxLayout="row">
-      <ion-label >
-        <ion-button (click)="acceptEvent()" icon-only>
-          <ion-icon color="dark" name="checkmark-outline"></ion-icon>
-        </ion-button>
-      </ion-label>
-      <ion-label>
-        <ion-button (click)="denyEvent()" icon-only>
-          <ion-icon color="dark" name="close-outline"></ion-icon>
-        </ion-button>
-      </ion-label>
-    </div>
+    <app-slide [slide]="event$ | async"
+               [buttonText]="'general.go' | translate"
+               (alertDeleteClicked)="delete()"
+               (alertGoClicked)="go()">
+    </app-slide>
 </ion-content>

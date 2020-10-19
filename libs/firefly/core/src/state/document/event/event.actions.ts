@@ -13,7 +13,7 @@ export class ActionEventCreate        { static readonly type = ActionsEvent.Crea
 export class ActionEventUpdate        { static readonly type = ActionsEvent.Update;        constructor() { } }
 export class ActionEventSave          { static readonly type = ActionsEvent.Save;          constructor() { } }
 export class ActionEventDelete        { static readonly type = ActionsEvent.Delete;        constructor() { } }
-export class ActionEventSetId         { static readonly type = ActionsEvent.SetId;         constructor(public id: string = CoreEnum.IdNew) { } }
+export class ActionEventSetId         { static readonly type = ActionsEvent.SetId;         constructor(public id: string = CoreEnum.IdNew, public isAlert: boolean = false) { } }
 
 export class ActionEventImagesUpdate   { static readonly type = ActionsEvent.ImagesUpdate;   constructor() { } }
 export class ActionEventImageSet       { static readonly type = ActionsEvent.ImageSet;       constructor() { } }

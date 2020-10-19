@@ -33,13 +33,14 @@ import { firestore } from 'firebase/app';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';
-import { from, of, Observable } from 'rxjs';
+import { from, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
 import { Query } from '@angular/fire/firestore';
 import { Collection, ImageType } from '@firefly/core/enums';
 import { SetFormPristine } from '@ngxs/form-plugin';
 import { LngLatLike } from 'mapbox-gl';
+import { StateUserAlerts } from '../../child';
 
 @State<StateEventModel>(StateEventOptions)
 @Injectable()
@@ -123,7 +124,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static icon(state: StateEventModel):            string                 { return StateEvent.metadataState(state).icon; }
     @Selector() static image(state: StateEventModel):           string                 { return StateEvent.metadataState(state).image; }
     @Selector() static place(state: StateEventModel):           Place                  { return StateEvent.metadataState(state).place; }
-    @Selector() static virtual(state: StateEventModel):         boolean                { return StateEvent.dataState(state).virtual}
+    @Selector() static virtual(state: StateEventModel):         boolean                { return StateEvent.dataState(state).virtual; }
+    @Selector() static website(state: StateEventModel):         string                 { return StateEvent.dataState(state).website; }
+    @Selector() static websiteIsSet(state: StateEventModel):    boolean                { return StateEvent.website(state) != null; }
+    @Selector() static phone(state: StateEventModel):           string                 { return StateEvent.dataState(state).phone; }
+    @Selector() static phoneIsSet(state: StateEventModel):      boolean                { return StateEvent.phone(state) != null; }
+    @Selector() static draft(state: StateEventModel):           boolean                { return StateEvent.dataState(state).draft; }
 
     @Selector() static placeCenter(state: StateEventModel): LngLatLike
     {
@@ -139,9 +145,16 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         return StateEvent.place(state) != null;
     }
 
+    @Selector([StateInterest.canEdit])
+    static canAccept(state: StateEventModel, canEditInterest: boolean): boolean
+    {
+        return StateEvent.draft(state) && canEditInterest;
+    }
+
     @Selector([StateUser.userId]) static canEdit(state: StateEventModel, userId: string): boolean
     {
-        return StateEvent.dataState(state).userId === userId && !StateEvent.notifyComplete(state);
+        return StateEvent.dataState(state).userId === userId &&
+            !StateEvent.notifyComplete(state);
     }
 
     @Action(ActionEventReset)
@@ -160,6 +173,8 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     set(context: StateContext<StateEventModel>, action: ActionEventSet)
     {
         const { getState, dispatch } = context;
+
+        console.log(action);
 
         const event: Event = action.data ?
             action.data :
@@ -239,19 +254,29 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Action(ActionEventSetId)
-    setId({ dispatch }: StateContext<StateEventModel>, { id }: ActionEventSetId)
+    setId({ dispatch }: StateContext<StateEventModel>, { id, isAlert }: ActionEventSetId)
     {
-        const isNew: boolean = id === CoreEnum.IdNew;
-        const isInterestOwner: boolean = this.store.selectSnapshot(StateInterest.canEdit);
+        const isNew           : boolean = id === CoreEnum.IdNew;
+        const isInterestOwner : boolean = this.store.selectSnapshot(StateInterest.canEdit);
+        const userId          : string  = this.store.selectSnapshot(StateUser.id());
 
         this.empty.draft = !isInterestOwner;
 
-        const userId:   string                     = this.store.selectSnapshot(StateUser.id());
-        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserEvents.snapshotLookup())[id];
+        const snapshot : firestore.DocumentSnapshot = this.store.selectSnapshot
+        (
+            isAlert ?
+                StateUserAlerts.snapshotLookup() :
+                StateUserEvents.snapshotLookup()
+        )[id];
 
         const data: Event = isNew ?
             this.service.formDataNew(userId, this.empty) :
-            this.store.selectSnapshot(StateUserEvents.dataLookup())[id];
+            this.store.selectSnapshot
+            (
+                isAlert ?
+                    StateUserAlerts.dataLookup() :
+                    StateUserEvents.dataLookup()
+            )[id];
 
         return dispatch(new ActionEventSet(snapshot, data));
     }
@@ -293,9 +318,11 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
       return dispatch(new ActionEventPatchMetadata({})).
       pipe
       (
-          switchMap(() => this.storage.downloadUrl(`${Collection.Events}/${event.id}/${ImageType.Image}.jpeg`, ImageSize.Medium)),
+          switchMap(() =>
+              this.storage.downloadUrl(`${Collection.Events}/${event.id}/${ImageType.Image}.jpeg`, ImageSize.Medium)
+          ),
           switchMap((image: string) =>
-              dispatch(new ActionEventPatchMetadata( { image} ))
+              dispatch(new ActionEventPatchMetadata({ image }))
           )
       );
     }
