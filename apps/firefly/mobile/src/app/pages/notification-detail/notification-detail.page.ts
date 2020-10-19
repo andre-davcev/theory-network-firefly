@@ -49,7 +49,7 @@ export class PageNotificationDetail extends BaseComponent
     {
         const event: Event = this.store.selectSnapshot(StateEvent.data());
 
-        this.store.dispatch(new Navigate([Pages.AssetEvent, event.id]));
+        this.store.dispatch(new Navigate([Pages.EventDetail, event.id]));
     }
 
 

@@ -58,7 +58,7 @@ export class PageHome extends BaseComponent
 
     public navigate(type: Pages): void
     {
-        const url: Array<any> = type === Pages.AssetEvent ? [ type, CoreEnum.IdNew ] : [ type ];
+        const url: Array<any> = type === Pages.EventDetail ? [ type, CoreEnum.IdNew ] : [ type ];
 
         this.store.dispatch(new Navigate(url));
     }

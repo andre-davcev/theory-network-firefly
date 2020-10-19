@@ -13,7 +13,7 @@ export const routes: Routes =
     { path: Pages.AssetsInterests,  loadChildren: '@firefly/page/assets-interests#ModulePageAssetsInterestsRoute' },
     { path: Pages.AssetInterest,    loadChildren: '@firefly/page/asset-interest#ModulePageAssetInterest'},
     { path: Pages.AssetsEvents,     loadChildren: '@firefly/page/assets-events#ModulePageAssetsEventsRoute' },
-    { path: Pages.AssetEvent,       loadChildren: '@firefly/page/asset-event#ModulePageAssetEvent' },
+    { path: Pages.EventDetail,      loadChildren: '@firefly/page/event-detail#ModulePageEventDetail' },
 
     { path: Pages.EventSelector,      loadChildren: '@firefly/page/event-selector#ModulePageEventSelector' },
     { path: Pages.NotificationDetail, loadChildren: '@firefly/page/notification-detail#ModulePageNotificationDetail' },

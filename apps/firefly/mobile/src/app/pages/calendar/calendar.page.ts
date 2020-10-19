@@ -90,7 +90,7 @@ export class PageCalendar extends BaseComponent
     public navigate(object: Alert): void
     {
         const page: Pages = object.read == null ?
-            Pages.AssetEvent :
+            Pages.EventDetail :
             Pages.NotificationDetail;
 
         this.store.dispatch(new Navigate([page, object.id]));
@@ -101,7 +101,7 @@ export class PageCalendar extends BaseComponent
         this.store.dispatch
         ([
             new ActionInterestReset(),
-            new Navigate([Pages.AssetEvent, CoreEnum.IdNew])
+            new Navigate([Pages.EventDetail, CoreEnum.IdNew])
         ]);
     }
 
