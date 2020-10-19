@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ModulePage } from '@firefly/app/modules';
-import { PageAlert } from './alert.page';
-import { RoutesPageAlert } from './alert.page.routes';
+import { PageNotifications } from './notifications.page';
+import { RoutesPageNotifications } from './notifications.page.routes';
 import { ModuleComponentSlide, ModuleComponentItemEvents } from '@firefly/mobile';
 import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { ModuleDirectiveElevation } from '@theory/google';
     [
         ReactiveFormsModule,
         ModulePage,
-        RouterModule.forChild(RoutesPageAlert),
+        RouterModule.forChild(RoutesPageNotifications),
         ModuleComponentSlide,
         ModuleComponentIconMessage,
         NgxsFormPluginModule,
@@ -24,11 +24,11 @@ import { ModuleDirectiveElevation } from '@theory/google';
         ModuleDirectiveElevation
     ],
 
-    declarations : [PageAlert],
-    exports: [PageAlert]
+    declarations : [PageNotifications],
+    exports: [PageNotifications]
 })
 
-export class ModulePageAlert
+export class ModulePageNotifications
 {
 
 }

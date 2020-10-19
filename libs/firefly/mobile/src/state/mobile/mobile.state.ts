@@ -44,7 +44,7 @@ export class StateMobile
     @Selector() static menuClosed(state: StateMobileModel)           : boolean                { return !state.menuOpen; }
     @Selector() static pageRoot(state: StateMobileModel)             : string                 { return state.pageRoot; }
     @Selector() static pageChild(state: StateMobileModel)            : Record<string, string> { return state.pageChild; }
-    @Selector() static pageAlerts(state: StateMobileModel)           : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Alert}`; }
+    @Selector() static pageAlerts(state: StateMobileModel)           : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Notifications}`; }
     @Selector() static pageStream(state: StateMobileModel)           : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`; }
     @Selector() static pageHome(state: StateMobileModel)             : boolean                { return StateMobile.pageStream(state) || StateMobile.pageAlerts(state); }
     @Selector() static pageCalendar(state: StateMobileModel)         : boolean                { return StateMobile.pageRoot(state) === `/${Pages.Calendar}`; }

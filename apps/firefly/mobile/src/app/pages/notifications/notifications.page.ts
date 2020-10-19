@@ -12,12 +12,12 @@ import { BaseComponent } from '@theory/core';
 
 @Component
 ({
-    selector    : 'app-page-alert',
-    templateUrl : 'alert.page.html',
-    styleUrls   : ['./alert.page.scss']
+    selector    : 'app-page-notifications',
+    templateUrl : 'notifications.page.html',
+    styleUrls   : ['./notifications.page.scss']
 })
 
-export class PageAlert extends BaseComponent
+export class PageNotifications extends BaseComponent
 {
     @Select(StateUserAlerts.list)          alerts$    : Observable<Array<Alert>>;
     @Select(StateUserAlerts.listEmpty)     empty$     : Observable<boolean>;

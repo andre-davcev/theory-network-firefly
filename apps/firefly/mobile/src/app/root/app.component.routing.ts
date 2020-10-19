@@ -14,12 +14,11 @@ export const routes: Routes =
     { path: Pages.AssetInterest,    loadChildren: '@firefly/page/asset-interest#ModulePageAssetInterest'},
     { path: Pages.AssetsEvents,     loadChildren: '@firefly/page/assets-events#ModulePageAssetsEventsRoute' },
     { path: Pages.AssetEvent,       loadChildren: '@firefly/page/asset-event#ModulePageAssetEvent' },
-    // { path: Pages.AssetsBeacons,  loadChildren: '@firefly/page/assets-beacons#ModulePageAssetsBeacons' },
 
-    { path: Pages.EventSelector,  loadChildren: '@firefly/page/event-selector#ModulePageEventSelector' },
-    { path: Pages.EventDetail,    loadChildren: '@firefly/page/event-detail#ModulePageEventDetail' },
-    { path: Pages.InterestDetail, loadChildren: '@firefly/page/interest-detail#ModulePageInterestDetail' },
-    { path: Pages.UserProfile,    loadChildren: '@firefly/page/user-profile#ModulePageUserProfile' }
+    { path: Pages.EventSelector,      loadChildren: '@firefly/page/event-selector#ModulePageEventSelector' },
+    { path: Pages.NotificationDetail, loadChildren: '@firefly/page/event-detail#ModulePageEventDetail' },
+    { path: Pages.InterestDetail,     loadChildren: '@firefly/page/interest-detail#ModulePageInterestDetail' },
+    { path: Pages.UserProfile,        loadChildren: '@firefly/page/user-profile#ModulePageUserProfile' }
 ];
 
 @NgModule

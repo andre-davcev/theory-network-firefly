@@ -8,7 +8,7 @@ import { RoutesPageHome } from './home.page.routes';
 import { PageHome } from './home.page';
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ModulePageLogin } from '../login';
-import { ModulePageAlert } from '../alert';
+import { ModulePageNotifications } from '../notifications';
 
 @NgModule
 ({
@@ -19,7 +19,7 @@ import { ModulePageAlert } from '../alert';
         ModuleComponentSlide,
         ModuleDirectiveElevation,
         ModulePageLogin,
-        ModulePageAlert
+        ModulePageNotifications
     ],
 
     declarations : [PageHome],

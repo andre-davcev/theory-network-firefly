@@ -13,7 +13,7 @@ import { Observable, from, of } from 'rxjs';
 import { StateUserAlerts, StateUser } from '@firefly/core';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
-import { PageAlert } from '../alert';
+import { PageNotifications } from '../notifications';
 
 @Component
 ({
@@ -63,11 +63,11 @@ export class PageHome extends BaseComponent
         this.store.dispatch(new Navigate(url));
     }
 
-    public go(type: Pages.Alert | Pages.Stream): void
+    public go(type: Pages.Notifications | Pages.Stream): void
     {
-        if (type === Pages.Alert)
+        if (type === Pages.Notifications)
         {
-            from(this.modal.create({ component: PageAlert })).
+            from(this.modal.create({ component: PageNotifications })).
             subscribe((modal: HTMLIonModalElement) =>
                 modal.present()
             );
