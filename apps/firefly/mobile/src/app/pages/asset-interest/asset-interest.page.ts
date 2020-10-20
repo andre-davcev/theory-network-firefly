@@ -5,8 +5,8 @@ import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata } from '@firefly/core';
-import { Pages } from '@firefly/mobile';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, StateUser, InterestType } from '@firefly/core';
+import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
@@ -85,6 +85,8 @@ export class PageAssetInterest extends BaseComponent implements OnInit
 
     public save(): void
     {
+      const interestType = this.store.selectSnapshot(StateUser.interestType);
+
         this.store.dispatch
         ([
             new ActionMobileLoadingShow(),
@@ -95,13 +97,19 @@ export class PageAssetInterest extends BaseComponent implements OnInit
             map(() => 'Interest was successfully created!'),
             catchError(() => of('An error occurred creating the interest!')),
             finalize(() =>
-                this.store.dispatch(new ActionMobileLoadingHide())
+                ([
+                  this.store.dispatch(new ActionCityStreamGet()),
+                  this.store.dispatch(new ActionMobileLoadingHide())
+                ])
             )
         ).
         subscribe((message: string) =>
         {
             this.store.dispatch(new ActionMobileToast(message));
-            this.navController.back();
+            if(interestType === InterestType.Created)
+              this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream));
+            else
+              this.navController.back();
         });
     }
 
