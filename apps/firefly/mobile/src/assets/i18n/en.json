@@ -24,8 +24,6 @@
   "general.signup"         : "Sign Up",
   "general.resetPassword"  : "Reset Password",
   "general.authenticate"   : "Authenticate",
-  "general.calendar"       : "Add To Calendar",
-  "general.map"            : "Open Map",
   "general.website"        : "Website",
   "general.phone"          : "Phone Number",
   "general.search"         : "Search",
@@ -46,6 +44,11 @@
   "menu.account.profile"      : "Profile",
   "menu.account.settings"     : "Settings",
   "menu.account.log-out"      : "Log Out",
+
+  "action.go.calendar" : "Add To Calendar",
+  "action.go.map"      : "Get Directions",
+  "action.go.call"     : "Call",
+  "action.go.website"  : "Open Website",
 
   "date-time.displayFormat"      : "MMM D, YYYY h:mm A",
   "date-time.pickerFormat"       : "MMM D h:m A",
