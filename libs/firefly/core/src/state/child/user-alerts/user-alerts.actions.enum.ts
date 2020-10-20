@@ -11,8 +11,12 @@ export enum ActionsUserAlerts
     Go               = '[User Alerts] Go',
     GetIcons         = '[User Alerts] Get Icons',
     GetImages        = '[User Alerts] Get Images',
+    MarkRead         = '[User Alerts] Mark Read',
+    Delete           = '[User Alerts] Delete',
+
+
     AddToCalendar    = '[User Alerts] Add to Calendar',
     LaunchNavigation = '[User Alerts] Launch Navigation',
-    MarkRead         = '[User Alerts] Mark Read',
-    Delete           = '[User Alerts] Delete'
+    PhoneCall        = '[User Alerts] Phone Call',
+    OpenWebsite      = '[User Alerts] Open Website'
 }

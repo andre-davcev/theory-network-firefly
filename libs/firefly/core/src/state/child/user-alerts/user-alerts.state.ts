@@ -20,7 +20,9 @@ import {
     ActionUserAlertsLaunchNavigation,
     ActionUserAlertsGetImages,
     ActionUserAlertsMarkRead,
-    ActionUserAlertsDelete
+    ActionUserAlertsDelete,
+    ActionUserAlertsPhoneCall,
+    ActionUserAlertsOpenWebsite
 } from './user-alerts.actions';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
@@ -33,6 +35,10 @@ import { switchMap, map, tap } from 'rxjs/operators';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { ActionUserPatch } from '../../document/user/user.actions';
+
+import { Plugins } from '@capacitor/core';
+
+const { Browser } = Plugins;
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()
@@ -149,10 +155,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         pipe
         (
             switchMap(() =>
-                forkJoin
-                (
-                    this.getMediaNew(context)
-                )
+                this.getMediaNew(context)
             )
         );
     }
@@ -178,11 +181,16 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Action(ActionUserAlertsGo)
     alertsGo({ dispatch }: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsGo)
     {
+        const openWebsite : boolean = (alert.website || '').trim().length > 0;
+        const makeCall    : boolean = (alert.phone   || '').trim().length > 0;
+
         return this.translate.
         get
         ([
-            'general.calendar',
-            'general.map'
+            'action.go.calendar',
+            'action.go.map',
+            'action.go.call',
+            'action.go.website'
         ]).
         pipe
         (
@@ -193,14 +201,32 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
 
                       buttons:
                       [
-                          {
-                              text : translations['general.calendar'],
-                              handler : () => { dispatch(new ActionUserAlertsAddToCalendar(alert)); }
-                          },
-                          {
-                              text    : translations['general.map'],
-                              handler : () => { dispatch(new ActionUserAlertsLaunchNavigation(alert)); }
-                          }
+                          ...[
+                              {
+                                  text : translations['action.go.calendar'],
+                                  handler : () => { dispatch(new ActionUserAlertsAddToCalendar(alert)); }
+                              },
+                              {
+                                  text    : translations['action.go.map'],
+                                  handler : () => { dispatch(new ActionUserAlertsLaunchNavigation(alert)); }
+                              }
+                          ],
+                          ... !makeCall ? [] :
+                          [
+
+                              {
+                                  text    : translations['action.go.call'],
+                                  handler : () => { dispatch(new ActionUserAlertsPhoneCall(alert)); }
+                              }
+                          ],
+                          ... !openWebsite ? [] :
+                          [
+
+                              {
+                                  text    : translations['action.go.website'],
+                                  handler : () => { dispatch(new ActionUserAlertsOpenWebsite(alert)); }
+                              }
+                          ]
                       ]
                   }))
             ),
@@ -210,7 +236,83 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         );
     }
 
-    public getMediaNew(context: StateContext<StateUserAlertsModel>): Observable<any>
+    @Action(ActionUserAlertsGetIcons)
+    getIcons(context: StateContext<StateUserAlertsModel>)
+    {
+        return super.getMedia(context, Collection.Events, ImageType.Icon);
+    }
+
+    @Action(ActionUserAlertsGetImages)
+    getImages(context: StateContext<StateUserAlertsModel>)
+    {
+        return super.getMedia(context, Collection.Events, ImageType.Image);
+    }
+
+    @Action(ActionUserAlertsAddToCalendar)
+    addToCalendar(context: StateContext<StateUserAlertsModel>, { alert } : ActionUserAlertsAddToCalendar)
+    {
+        return from(
+            this.calendar.createEventInteractively(
+                alert.name,
+                alert.city.name,
+                alert.tagline,
+                alert.timeStart.toDate(),
+                alert.timeEnd.toDate()
+            )
+        );
+    }
+
+    @Action(ActionUserAlertsLaunchNavigation)
+    launchNavigation(context: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsLaunchNavigation)
+    {
+        return from(LaunchNavigator.navigate([alert.geopoint.latitude, alert.geopoint.longitude]));
+    }
+
+    @Action(ActionUserAlertsPhoneCall)
+    phoneCall(context: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsPhoneCall)
+    {
+
+    }
+
+    @Action(ActionUserAlertsOpenWebsite)
+    openWebsite(context: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsOpenWebsite)
+    {
+        return from(Browser.open({ url: alert.website }));
+    }
+
+    @Action(ActionUserAlertsMarkRead)
+    markRead({ dispatch, getState }: StateContext<StateUserAlertsModel>, { id }: ActionUserAlertsMarkRead)
+    {
+        const notifications : Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
+        const alert         : Alert                        = StateUserAlerts.dataLookupState(getState())[id];
+
+        alert.read                 = true;
+        alert.metadata.sessionRead = true;
+
+        notifications[id].read = true;
+
+        return dispatch
+        ([
+            new ActionUserAlertsSync(alert),
+            new ActionUserPatch({ notifications }, true)
+        ]);
+    }
+
+    @Action(ActionUserAlertsDelete)
+    delete({ dispatch }: StateContext<StateUserAlertsModel>, { id }: ActionUserAlertsDelete)
+    {
+        const notifications : Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
+
+        delete notifications[id];
+
+        return dispatch
+        ([
+            new ActionUserAlertsRemove(id),
+            new ActionUserPatch({ notifications }, true)
+        ]);
+    }
+
+    private getMediaNew(context: StateContext<StateUserAlertsModel>): Observable<any>
     {
         const { getState, patchState } = context;
 
@@ -260,64 +362,5 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                 )
             )
         );
-    }
-
-    @Action(ActionUserAlertsGetIcons)
-    getIcons(context: StateContext<StateUserAlertsModel>)
-    {
-        return super.getMedia(context, Collection.Events, ImageType.Icon);
-    }
-
-    @Action(ActionUserAlertsGetImages)
-    getImages(context: StateContext<StateUserAlertsModel>)
-    {
-        return super.getMedia(context, Collection.Events, ImageType.Image);
-    }
-
-
-    @Action(ActionUserAlertsAddToCalendar)
-    addToCalendar(context: StateContext<StateUserAlertsModel>, { alert } : ActionUserAlertsAddToCalendar)
-    {
-        return from(
-          this.calendar.createEventInteractively(alert.name, alert.city.name, alert.tagline, alert.timeStart.toDate(), alert.timeEnd.toDate())
-        )
-    }
-
-    @Action(ActionUserAlertsLaunchNavigation)
-    launchNavigation(context: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsLaunchNavigation)
-    {
-      return from(LaunchNavigator.navigate([alert.geopoint.latitude, alert.geopoint.longitude]));
-    }
-
-    @Action(ActionUserAlertsMarkRead)
-    markRead({ dispatch, getState }: StateContext<StateUserAlertsModel>, { id }: ActionUserAlertsMarkRead)
-    {
-        const notifications : Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
-        const alert         : Alert                        = StateUserAlerts.dataLookupState(getState())[id];
-
-        alert.read                 = true;
-        alert.metadata.sessionRead = true;
-
-        notifications[id].read = true;
-
-        return dispatch
-        ([
-            new ActionUserAlertsSync(alert),
-            new ActionUserPatch({ notifications }, true)
-        ]);
-    }
-
-    @Action(ActionUserAlertsDelete)
-    delete({ dispatch }: StateContext<StateUserAlertsModel>, { id }: ActionUserAlertsDelete)
-    {
-        const notifications : Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
-
-        delete notifications[id];
-
-        return dispatch
-        ([
-            new ActionUserAlertsRemove(id),
-            new ActionUserPatch({ notifications }, true)
-        ]);
     }
 }
