@@ -1,4 +1,3 @@
-export * from './alert';
 export * from './city';
 export * from './event';
 export * from './interest';
