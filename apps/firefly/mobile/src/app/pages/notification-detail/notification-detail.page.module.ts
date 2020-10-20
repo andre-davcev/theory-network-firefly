@@ -6,6 +6,7 @@ import { RoutesPageNotificationDetail } from './notification-detail.page.routes'
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { ModuleComponentItemMap, ModuleComponentSlide } from '@firefly/mobile';
 import { ModuleComponentButtonAction } from '@firefly/core';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 @NgModule
 ({
@@ -16,7 +17,8 @@ import { ModuleComponentButtonAction } from '@firefly/core';
         ModuleComponentButtonAction,
         ModuleComponentSlide,
         RouterModule.forChild(RoutesPageNotificationDetail),
-        NgxsFormPluginModule
+        NgxsFormPluginModule,
+        ModuleDirectiveElevation
     ],
 
     declarations : [PageNotificationDetail],
