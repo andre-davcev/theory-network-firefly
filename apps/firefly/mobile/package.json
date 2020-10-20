@@ -73,6 +73,7 @@
     "@theory/ngxs": "file:../../../libs/ngxs",
     "@theory/web": "file:../../../libs/web",
     "algoliasearch": "file:../../../node_modules/algoliasearch",
+    "call-number": "^1.0.1",
     "capacitor-fcm": "file:../../../node_modules/capacitor-fcm",
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-calendar": "5.1.5",
@@ -110,7 +111,8 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-calendar": {}
+      "cordova-plugin-calendar": {},
+      "mx.ferreyra.callnumber": {}
     }
   }
 }
