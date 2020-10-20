@@ -38,6 +38,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StateStorage } from '@theory/firebase';
 import { Calendar } from '@ionic-native/calendar/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 export function createTranslateLoader(http: HttpClient)
 {
@@ -114,7 +115,8 @@ export function createTranslateLoader(http: HttpClient)
         { provide: RouteReuseStrategy,  useClass: IonicRouteStrategy },
         { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
         { provide: MapboxEnvironment,   useValue: environment.apis.mapbox },
-        Calendar
+        Calendar,
+        CallNumber,
         // { provide: ErrorHandler,       useClass: ErrorHandlerApp }
     ]
 })

@@ -37,6 +37,7 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { ActionUserPatch } from '../../document/user/user.actions';
 
 import { Plugins } from '@capacitor/core';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 const { Browser } = Plugins;
 
@@ -51,6 +52,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         private actionSheet : ActionSheetController,
                 storage     : ServiceStorage,
         private calendar    : Calendar,
+        private callNumber  : CallNumber,
         private store       : Store
     )
     {
@@ -271,7 +273,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Action(ActionUserAlertsPhoneCall)
     phoneCall(context: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsPhoneCall)
     {
-
+        return from(this.callNumber.callNumber(alert.website, true));
     }
 
     @Action(ActionUserAlertsOpenWebsite)
