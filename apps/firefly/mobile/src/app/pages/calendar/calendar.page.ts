@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { MenuController, PopoverController, IonSearchbar, IonInfiniteScroll } from '@ionic/angular';
+import { MenuController, PopoverController, IonSearchbar, IonInfiniteScroll, AlertController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable, from } from 'rxjs';
@@ -10,16 +10,14 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { Alert, Event, DateEvents, Interest } from '@firefly/cloud';
 import {
-    ActionEventGet,
     IconType,
     StateUser,
     EventType,
     ActionInterestReset,
     ActionInterestGet,
     ActionUserEventsDelete,
-    ActionUserEventsReset,
     StateUserEvents,
-    ActionEventSet
+    Translation
 } from '@firefly/core';
 import {
     ActionMobileAuthSelect,
@@ -33,6 +31,7 @@ import {
     ActionMobilePageEvents
 } from '@firefly/mobile';
 import algoliaSearch, { SearchIndex, SearchClient } from 'algoliasearch/lite';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component
 ({
@@ -69,9 +68,11 @@ export class PageCalendar extends BaseComponent
 
     constructor
     (
-        private store   : Store,
-        private menu    : MenuController,
-        private popover : PopoverController
+        private store     : Store,
+        private menu      : MenuController,
+        private popover   : PopoverController,
+        private translate : TranslateService,
+        private alert     : AlertController
     )
     {
         super();
@@ -84,7 +85,42 @@ export class PageCalendar extends BaseComponent
 
     public delete(event: Event): void
     {
-        this.store.dispatch(new ActionUserEventsDelete(event.id));
+        // ToDo
+        this.translate.get
+        ([
+              Translation.AlertConfirmDeleteHeader,
+              Translation.AlertConfirmDeleteMessage,
+              Translation.AlertConfirmDeleteCancel,
+              Translation.AlertConfirmDeleteConfirm,
+              Translation.AlertConfirmDeleteEvent
+        ]).
+        pipe
+        (
+            switchMap((translations: Record<string, string>) =>
+                this.alert.create
+                ({
+                    cssClass : 'cpt-alert',
+                    header   : `${translations[Translation.AlertConfirmDeleteHeader]} ${translations[Translation.AlertConfirmDeleteEvent]}?`,
+                    message  : translations[Translation.AlertConfirmDeleteMessage],
+
+                    buttons:
+                    [
+                        {
+                            text : translations[Translation.AlertConfirmDeleteCancel],
+                            role : 'cancel'
+                        },
+                        {
+                            text    : translations[Translation.AlertConfirmDeleteConfirm],
+                            handler : () => this.store.dispatch(new ActionUserEventsDelete(event.id))
+                        }
+                    ]
+                })
+            ),
+            switchMap((alert: HTMLIonAlertElement) =>
+                from(alert.present())
+            )
+        ).
+        subscribe();
     }
 
     public navigate(object: Alert): void

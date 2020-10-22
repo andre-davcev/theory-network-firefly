@@ -594,9 +594,22 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserNotificationsSet)
     notificationsSet({ dispatch }: StateContext<StateUserModel>)
     {
-        const notifications: Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
+        const notifications : Record<string, AlertPartial> = this.store.selectSnapshot(StateUser.notifications);
+        const alerts        : Record<string, AlertPartial> = {};
 
-        return dispatch(new ActionUserAlertsSetData(notifications, true));
+        const dateCutoff: Date = new Date();
+        dateCutoff.setDate(dateCutoff.getDate() + 1); // Add 1 day
+        const timeCutoff: number = dateCutoff.getTime();
+
+        Object.keys(notifications).forEach((id: string) =>
+        {
+            if (notifications[id].timeStart.toDate().getTime() > timeCutoff)
+            {
+                alerts[id] = notifications[id];
+            }
+        });
+
+        return dispatch(new ActionUserAlertsSetData(alerts, true));
     }
 
     @Action(ActionUserInterestTypeSet)

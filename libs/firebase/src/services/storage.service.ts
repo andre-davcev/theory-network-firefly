@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ImageSize } from '../enums';
-import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
-import { map, switchMap } from 'rxjs/operators';
+import { ImageSize, StorageFormat } from '../enums';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { catchError, filter, last, map, switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceStorage
@@ -42,12 +42,38 @@ export class ServiceStorage
                 this.bucketPath(path, size)
             ),
             map((bucketPath: string) => this.storage.ref(bucketPath)),
-            switchMap((ref: AngularFireStorageReference) => ref.getDownloadURL())
+            switchMap((ref: AngularFireStorageReference) => ref.getDownloadURL()),
+            catchError(() =>
+                this.storage.ref(path).getDownloadURL()
+            )
         );
     }
 
     public static idFromPath(bucketPath): string
     {
         return bucketPath.split('/').pop().split('.')[0];
+    }
+
+    public storageUpload(dataUri: string, bucketPath: string): Observable<string>
+    {
+        if (dataUri == null) { return of(null); }
+
+        const ref  : AngularFireStorageReference = this.storage.ref(bucketPath);
+        const task : AngularFireUploadTask       = ref.putString(dataUri, StorageFormat.DataUrl);
+
+        return task.percentageChanges().
+        pipe
+        (
+            filter((uploadProgress: number) =>
+                uploadProgress === 100
+            ),
+            switchMap(() =>
+                task.snapshotChanges()
+            ),
+            last(),
+            switchMap(() =>
+                ref.getDownloadURL()
+            )
+        );
     }
 }

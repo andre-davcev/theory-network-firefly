@@ -7,7 +7,6 @@ import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { of, from } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Interest } from '@firefly/cloud';
-import { StateMobile } from '../mobile';
 
 @State<StateSearchModel>(StateSearchOptions)
 @Injectable()

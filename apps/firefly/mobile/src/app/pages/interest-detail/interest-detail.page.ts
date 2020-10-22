@@ -5,15 +5,16 @@ import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete } from '@firefly/core';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation } from '@firefly/core';
 import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { PageEventDetail } from '../event-detail';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component
 ({
@@ -42,9 +43,11 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     constructor
     (
-      private store:         Store,
-      private navController: NavController,
-      private modal:         ModalController,
+        private store         : Store,
+        private navController : NavController,
+        private modal         : ModalController,
+        private translate     : TranslateService,
+        private alert         : AlertController
     )
     {
       super();
@@ -130,11 +133,49 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public delete(): void
     {
-      const interest: Interest = this.store.selectSnapshot(StateInterest.data());
-      this.store.dispatch(new ActionInterestDelete()).pipe
-      (
-        switchMap(() => this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream)))
-      ).subscribe();
+        // ToDo
+        this.translate.get
+        ([
+              Translation.AlertConfirmDeleteHeader,
+              Translation.AlertConfirmDeleteMessage,
+              Translation.AlertConfirmDeleteCancel,
+              Translation.AlertConfirmDeleteConfirm,
+              Translation.AlertConfirmDeleteInterest
+        ]).
+        pipe
+        (
+            switchMap((translations: Record<string, string>) =>
+                this.alert.create
+                ({
+                    cssClass : 'cpt-alert',
+                    header   : `${translations[Translation.AlertConfirmDeleteHeader]} ${translations[Translation.AlertConfirmDeleteInterest]}?`,
+                    message  : translations[Translation.AlertConfirmDeleteMessage],
+
+                    buttons:
+                    [
+                        {
+                            text : translations[Translation.AlertConfirmDeleteCancel],
+                            role : 'cancel'
+                        },
+                        {
+                            text    : translations[Translation.AlertConfirmDeleteConfirm],
+                            handler : () =>
+                                this.store.dispatch(new ActionInterestDelete()).pipe
+                                (
+                                    switchMap(() =>
+                                        this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream))
+                                    )
+                                ).
+                                subscribe()
+                        }
+                    ]
+                })
+            ),
+            switchMap((alert: HTMLIonAlertElement) =>
+                from(alert.present())
+            )
+        ).
+        subscribe();
     }
 
     public acceptEvent(event: Event): void

@@ -145,7 +145,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         pipe
         (
             switchMap(() =>
-              context.dispatch(new ActionInterestImagesUpdate())
+                context.dispatch(new ActionInterestImagesUpdate())
             )
         );
     }
@@ -322,7 +322,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestImagesUpdate)
     imagesUpdate(context : StateContext<StateInterestModel>)
     {
-        return super.updateMedia(context, ImageType.Image);
+        return super.updateMedia(context, ImageType.Image, this.storage);
     }
 
     @Action(ActionInterestImageSet)

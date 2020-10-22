@@ -174,8 +174,6 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     {
         const { getState, dispatch } = context;
 
-        console.log(action);
-
         const event: Event = action.data ?
             action.data :
             action.snapshot.data() as Event;
@@ -306,7 +304,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventImagesUpdate)
     imagesUpdate(context : StateContext<StateEventModel>)
     {
-        return super.updateMedia(context, ImageType.Image);
+        return super.updateMedia(context, ImageType.Image, this.storage);
     }
 
     @Action(ActionEventImageSet)
@@ -372,7 +370,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Action(ActionEventTimeSet)
-    timeStartSet({ dispatch }: StateContext<StateEventModel>, { key, value }: ActionEventTimeSet)
+    timeSet({ dispatch }: StateContext<StateEventModel>, { key, value }: ActionEventTimeSet)
     {
         const timestamp: firestore.FieldValue = firestore.Timestamp.fromDate(new Date(value));
 
