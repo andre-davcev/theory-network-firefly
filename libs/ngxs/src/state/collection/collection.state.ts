@@ -2,7 +2,7 @@ import { OrderBy, ImageSize, FirebaseDocument, ServiceStorage } from '@theory/fi
 import { firestore } from 'firebase/app';
 import { createSelector, StateContext } from '@ngxs/store';
 import { ActionsCollection } from './collection.actions';
-import { CoreUtil, CoreEnum } from '@theory/core';
+import { CoreUtil, CoreEnum, TypeOf } from '@theory/core';
 import { Observable, of, forkJoin } from 'rxjs';
 import { PageSize } from '../../enums';
 import { StateCollectionModel } from './collection.model';
@@ -61,6 +61,13 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     public static keys()             { return createSelector([this], (state: any) => StateCollection.keysState(state)); }
     public static noData()           { return createSelector([this], (state: any) => StateCollection.noDataState(state)); }
 
+    public getValue(value: any, type: TypeOf = TypeOf.String): any
+    {
+        return type === TypeOf.Timestamp ?
+            value.toDate().getTime() :
+            value;
+    }
+
     public reset(context: StateContext<M>, action: any): Observable<any>
     {
         const { patchState } = context;
@@ -73,44 +80,26 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     public add(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState } = context;
-        const { snapshots, snapshotLookup, data, dataLookup, orderBy, orderByDirection, initialized } = getState();
+        const { snapshots, snapshotLookup, data, dataLookup, orderBy, orderByDirection, orderByType, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
         const snapshot: firestore.DocumentSnapshot = action.snapshot;
 
-        const id:     string = snapshot.id;
         const entity: T      = action.entity == null ? snapshot.data() : action.entity;
+        const id:     string = entity.id;
         const count:  number = data.length;
-        const value:  any    = entity[orderBy];
+        const value:  any    = this.getValue(entity[orderBy], orderByType);
 
-        let sortIndex = 0;
+        let sortIndex: number = data.findIndex((object: T) =>
+            ((orderByDirection === OrderBy.Ascending  && this.getValue(object[orderBy], orderByType) > value) ||
+             (orderByDirection === OrderBy.Descending && this.getValue(object[orderBy], orderByType) < value))
+        );
 
-        if ((count === 0) ||
-            (orderByDirection === OrderBy.Ascending  && value > data[count-1][orderBy]) ||
-            (orderByDirection === OrderBy.Descending && value < data[count-1][orderBy]))
-        {
-            snapshots.push(snapshot);
-            data.push(entity);
-        }
-        else
-        {
-            if ((orderByDirection === OrderBy.Ascending  && value < data[0][orderBy]) ||
-                (orderByDirection === OrderBy.Descending && value > data[0][orderBy]))
-            {
-                sortIndex = 0;
-            }
-            else
-            {
-                sortIndex = data.findIndex((object: T) =>
-                    (orderByDirection === OrderBy.Ascending  && value > object[orderBy]) ||
-                    (orderByDirection === OrderBy.Descending && value < object[orderBy])
-                ) + 1;
-            }
+        sortIndex = sortIndex === -1 ? count : sortIndex;
 
-            snapshots.splice(sortIndex, 0, snapshot);
-            data.splice(sortIndex, 0, entity);
-        }
+        snapshots.splice(sortIndex, 0, snapshot);
+        data.splice(sortIndex, 0, entity);
 
         snapshotLookup[id] = snapshot;
         dataLookup[id]     = entity;
@@ -181,20 +170,21 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
 
             if (changedOrderBy)
             {
-                const { snapshots, snapshotLookup, orderByDirection } = state;
+                const { snapshots, snapshotLookup, orderByDirection, orderByType } = state;
 
                 const snapshot : firestore.DocumentSnapshot = snapshotLookup[id];
                 const count    : number = data.length;
-                const value    : any    = after[orderBy];
-
-                indexNew = data.findIndex((object: T, index: number) =>
-                    (orderByDirection === OrderBy.Ascending  && value > object[orderBy]) ||
-                    (orderByDirection === OrderBy.Descending && value < object[orderBy]) ||
-                    index === count
-                );
+                const value    : any    = this.getValue(after[orderBy], orderByType);
 
                 snapshots.splice(indexOld, 1);
                 data.splice(indexOld, 1);
+
+                indexNew = data.findIndex((object: T) =>
+                    ((orderByDirection === OrderBy.Ascending  && this.getValue(object[orderBy], orderByType) > value) ||
+                     (orderByDirection === OrderBy.Descending && this.getValue(object[orderBy], orderByType) < value))
+                );
+
+                indexNew = indexNew === -1 ? count : indexNew;
 
                 snapshots.splice(indexNew, 0, snapshot);
                 data.splice(indexNew, 0, after);

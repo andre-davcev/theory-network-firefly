@@ -6,7 +6,7 @@ import { firestore } from 'firebase/app';
 import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { ServiceFirestore, FirebaseDocument, ActionStorageUpload } from '@theory/firebase';
+import { ServiceFirestore, FirebaseDocument, ServiceStorage } from '@theory/firebase';
 
 import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';
@@ -202,12 +202,21 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
             tap((snapshot: firestore.DocumentSnapshot) =>
                 patchState({ snapshot } as M)
             ),
-            switchMap((snapshot: firestore.DocumentSnapshot) =>
+
+            map((snapshot: firestore.DocumentSnapshot) =>
+                ({
+                    ...snapshot.data(),
+
+                    id: snapshot.id,
+                    metadata: { ...value.metadata }
+                }) as T
+            ),
+            switchMap((object: T) =>
                 dispatch
                 ([
-                    new UpdateFormValue({ value: snapshot.data(), path }),
+                    new UpdateFormValue({ value: object, path }),
                     ...this.ActionsCreate(),
-                    ...this.ActionsQueryAdd(snapshot)
+                    ...this.ActionsQueryAdd(null, object)
                 ])
             ),
             map(() =>
@@ -287,10 +296,11 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
     protected updateMedia
     (
         context    : StateContext<M>,
-        imageType  : ImageType
+        imageType  : ImageType,
+        storage    : ServiceStorage
     ): Observable<any>
     {
-        const { dispatch, getState } = context;
+        const { getState } = context;
 
         const state   : M               = getState();
         const form    : FormGroup       = StateDocument.formGroupState(state);
@@ -302,7 +312,13 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         const path    : string = `${this.collection}/${id}/${imageType}.jpeg`;
         const dataUri : string = control.value;
 
-        return dispatch(new ActionStorageUpload(dataUri, path));
+        return storage.storageUpload(dataUri, path).
+        pipe
+        (
+            tap((url: string) =>
+                this.patchMetadata(context, { [imageType]: url })
+            )
+        );
     }
 
     private ActionsReset(): Array<any>

@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { switchMap, filter } from 'rxjs/operators';
-import { IonSlides, ModalController } from '@ionic/angular';
+import { AlertController, IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, BehaviorSubject } from 'rxjs';
 
-import { StateUserAlerts, ActionUserAlertsGo, IconType, ActionUserAlertsDelete } from '@firefly/core';
+import { StateUserAlerts, ActionUserAlertsGo, IconType, ActionUserAlertsDelete, Translation } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
 import { BaseComponent } from '@theory/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component
 ({
@@ -36,8 +37,10 @@ export class PageNotifications extends BaseComponent
 
     constructor
     (
-        private store: Store,
-        private modal: ModalController
+        private store     : Store,
+        private modal     : ModalController,
+        private translate : TranslateService,
+        private alert     : AlertController
     )
     {
         super();
@@ -75,7 +78,42 @@ export class PageNotifications extends BaseComponent
 
     public delete(alert: Alert): void
     {
-        this.store.dispatch(new ActionUserAlertsDelete(alert.id));
+        // ToDo
+        this.translate.get
+        ([
+              Translation.AlertConfirmDeleteHeader,
+              Translation.AlertConfirmDeleteMessage,
+              Translation.AlertConfirmDeleteCancel,
+              Translation.AlertConfirmDeleteConfirm,
+              Translation.AlertConfirmDeleteEvent
+        ]).
+        pipe
+        (
+            switchMap((translations: Record<string, string>) =>
+                this.alert.create
+                ({
+                    cssClass : 'cpt-alert',
+                    header   : `${translations[Translation.AlertConfirmDeleteHeader]} ${translations[Translation.AlertConfirmDeleteEvent]}?`,
+                    message  : translations[Translation.AlertConfirmDeleteMessage],
+
+                    buttons:
+                    [
+                        {
+                            text : translations[Translation.AlertConfirmDeleteCancel],
+                            role : 'cancel'
+                        },
+                        {
+                            text    : translations[Translation.AlertConfirmDeleteConfirm],
+                            handler : () => this.store.dispatch(new ActionUserAlertsDelete(alert.id))
+                        }
+                    ]
+                })
+            ),
+            switchMap((alert: HTMLIonAlertElement) =>
+                from(alert.present())
+            )
+        ).
+        subscribe();
     }
 
     public done(): void

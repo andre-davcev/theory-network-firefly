@@ -46,12 +46,10 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     {
         const userEvents : Array<Event>      = StateUserEvents.dataState(state);
         const eventsList : Array<DateEvents> = [];
-        const time       : number            = new Date().getTime();
 
         const events : Array<Event> = (eventType === EventType.Upcoming ? alerts : userEvents).
             filter((event: Event) =>
-                (!virtual || event.virtual) &&
-                event.timeEnd.toDate().getTime() > time
+                (!virtual || event.virtual)
             );
 
         let current           : DateEvents;
@@ -187,10 +185,14 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     @Action(ActionUserEventsReset)
     reset(context: StateContext<StateUserEventsModel>)
     {
+        const dateCutoff: Date = new Date();
+        dateCutoff.setDate(dateCutoff.getDate() + 1); // Add 1 day
+
         const userId: string = this.store.selectSnapshot(StateUser.id());
         const query: Query   = userId == null ? undefined : this.service.
             collection(Collection.Events).ref.
-            where('userId', '==', userId);
+            where('userId', '==', userId).
+            where('timeStart', '>', dateCutoff);
 
         return super.reset(context, { query });
     }

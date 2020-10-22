@@ -50,6 +50,14 @@
   "action.go.call"     : "Call",
   "action.go.website"  : "Open Website",
 
+  "alert.confirm.delete.header"   : "Would you like to delete this",
+  "alert.confirm.delete.message"  : "You cannot undo this action.",
+  "alert.confirm.delete.cancel"   : "Cancel",
+  "alert.confirm.delete.confirm"  : "Confirm",
+
+  "alert.confirm.delete.event"    : "Event",
+  "alert.confirm.delete.interest" : "Interest",
+
   "date-time.displayFormat"      : "MMM D, YYYY h:mm A",
   "date-time.pickerFormat"       : "MMM D h:m A",
   "date-time.pickerFormatHourly" : "MMM D h A",
