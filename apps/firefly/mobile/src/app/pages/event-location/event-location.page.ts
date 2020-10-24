@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateEvent, ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/core';
+import { ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/core';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
@@ -22,11 +21,6 @@ import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 export class PageEventLocation extends BaseComponent
 {
-
-    @Select(StateEvent.locationDefined) locationDefined$ : Observable<boolean>;
-    @Select(StateEvent.place)             place$           : Observable<Place>;
-    @Select(StateEvent.placeDefined)      placeDefined$    : Observable<boolean>;
-
     @Input() virtual : boolean = false;
     @Input() place   : Place;
 

@@ -78,7 +78,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
 
     public dirty({dispatch}: StateContext<M>): Observable<any>
     {
-      return dispatch(new SetFormDirty(this.formPath));
+        return dispatch(new SetFormDirty(this.formPath));
     }
 
     public get(context: StateContext<M>, action: any): Observable<any>
@@ -181,7 +181,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
 
         value.metadata =
         {
-            ...StateDocument.metadataState(state),
+            ...value.metadata,
             ...action.metadata
         };
 

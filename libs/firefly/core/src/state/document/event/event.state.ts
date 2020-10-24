@@ -4,7 +4,7 @@ import { MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { StateUser } from '@firefly/core/state/document/user';
-import { Event, Interest, Place } from '@firefly/cloud';
+import { Event, Interest, MetadataEvent, Place } from '@firefly/cloud';
 
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
@@ -326,7 +326,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Action(ActionEventPlaceSet)
-    placeSet({ dispatch } : StateContext<StateEventModel>, { place }: ActionEventPlaceSet)
+    placeSet({ dispatch, getState } : StateContext<StateEventModel>, { place }: ActionEventPlaceSet)
     {
         const partial: Partial<Event> = place == null ?
         {
@@ -340,12 +340,11 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
             placeType : place.type
         };
 
+        const metadata: MetadataEvent = StateEvent.metadataState(getState());
 
-        return dispatch
-        ([
-            new ActionEventPatch(partial),
-            new ActionEventPatchMetadata({ place })
-        ]);
+        metadata.place = place;
+
+        return dispatch(new ActionEventPatch(partial));
     }
 
     @Action(ActionEventInterestAdd)

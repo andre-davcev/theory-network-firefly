@@ -66,7 +66,8 @@
           </ion-input>
         </ion-item>
 
-        <app-item-map [title]="'general.location' | translate"
+        <app-item-map [place]="place$ | async"
+                      [title]="'general.location' | translate"
                       (click)="navigate(Pages.EventLocation)">
         </app-item-map>
 

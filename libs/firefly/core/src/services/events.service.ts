@@ -89,10 +89,12 @@ export class ServiceEvents extends ServiceFirestore<Event>
         //temporary
         if(!event.metadata)
         {
-          event.metadata = {
-            icon : '',
-            image : ''
-          }
+            event.metadata =
+            {
+                icon : '',
+                image : '',
+                place : null
+            }
         }
 
         return super.formCreate
@@ -111,7 +113,8 @@ export class ServiceEvents extends ServiceFirestore<Event>
             metadata : this.formBuilder.group
             ({
                 icon  : [event.metadata.icon,  []],
-                image : [event.metadata.image, [Validators.required]]
+                image : [event.metadata.image, [Validators.required]],
+                place : [event.metadata.place, []]
             })
         });
     }
