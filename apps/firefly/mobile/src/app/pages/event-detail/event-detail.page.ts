@@ -7,7 +7,7 @@ import { ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, StateInterest, ActionEventAccept, ActionEventDeny } from '@firefly/core';
+import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, ActionEventAccept, ActionEventDeny } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
@@ -41,6 +41,7 @@ export class PageEventDetail
     @Select(StateEvent.image)           image$:           Observable<string>;
     @Select(StateEvent.icon)            icon$:            Observable<string>;
     @Select(StateEvent.canAccept)       canAccept$:       Observable<boolean>;
+    @Select(StateEvent.place)           place$:           Observable<boolean>;
 
     @Input() modal: boolean = false;
 
