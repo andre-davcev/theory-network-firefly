@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Event } from '@firefly/cloud';
 import { ServiceFirestore } from '@theory/firebase';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { DateUtil, ValidatorsExtended } from '@theory/core';
+import { DateUtil, Regex, ValidatorsExtended } from '@theory/core';
 import { firestore } from 'firebase/app';
 
 @Injectable({ providedIn: 'root' })
@@ -109,6 +109,8 @@ export class ServiceEvents extends ServiceFirestore<Event>
             timeStart   : [event.timeStart,      [ServiceEvents.validateTime()]],
             timeEnd     : [event.timeEnd,        [ServiceEvents.validateTime()]],
             timeNotify  : [event.timeNotify,     [ServiceEvents.validateTimeNotify()]],
+            phone       : [event.phone,          [Validators.pattern(Regex.Numbers)]],
+            website     : [event.website,        [Validators.pattern(Regex.WebsiteSecure)]],
 
             metadata : this.formBuilder.group
             ({

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-import { Credentials } from '@theory/core';
+import { Credentials, Regex } from '@theory/core';
 import { Select, Store } from '@ngxs/store';
 import { ActionUserLoginEmail, ActionUserCreate, ActionUserResetPassword, ActionUserSetErrorAuth, StateUser } from '@firefly/core/state';
 import { tap, catchError, filter, map } from 'rxjs/operators';
@@ -64,7 +64,7 @@ export class ComponentAuth implements OnInit
     ([
         Validators.required,
         Validators.maxLength(50),
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        Validators.pattern(Regex.Email)
     ]));
 
     private passwordLogin: FormControl = new FormControl('', Validators.compose
@@ -79,7 +79,7 @@ export class ComponentAuth implements OnInit
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(30),
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') // Upper/Lower/Numbers
+        Validators.pattern(Regex.PasswordUpperLowerNumbers)
     ]));
 
     constructor
