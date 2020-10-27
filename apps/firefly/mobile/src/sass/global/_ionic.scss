@@ -51,3 +51,10 @@ ion-modal {
       --width: calc(100% - 1.5rem);
   }
 }
+
+.alert-button-group {
+    .alert-button {
+      color: #{$fire-color-dark};
+    }
+}
+
