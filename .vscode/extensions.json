@@ -28,6 +28,7 @@
     "angular.ng-template",
     "johnpapa.vscode-peacock",
     "ms-vscode-remote.remote-containers",
-    "GitHub.vscode-pull-request-github"
+    "GitHub.vscode-pull-request-github",
+    "firsttris.vscode-jest-runner"
   ]
 }

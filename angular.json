@@ -24,7 +24,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/firefly/core/tsconfig.lib.json",
-            "project": "libs/firefly/core/ng-package.json"
+            "project": "libs/firefly/core/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
@@ -42,7 +43,7 @@
               "libs/firefly/core/tsconfig.lib.json",
               "libs/firefly/core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/firefly/core/**"]
+            "exclude": ["**/node_modules/**", "!libs/firefly/core/**/*"]
           }
         }
       }
@@ -57,7 +58,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/firefly/mobile/tsconfig.lib.json",
-            "project": "libs/firefly/mobile/ng-package.json"
+            "project": "libs/firefly/mobile/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
@@ -75,7 +77,7 @@
               "libs/firefly/mobile/tsconfig.lib.json",
               "libs/firefly/mobile/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/firefly/mobile/**"]
+            "exclude": ["**/node_modules/**", "!libs/firefly/mobile/**/*"]
           }
         }
       }
@@ -90,7 +92,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/core/tsconfig.lib.json",
-            "project": "libs/core/ng-package.json"
+            "project": "libs/core/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
@@ -108,7 +111,7 @@
               "libs/core/tsconfig.lib.json",
               "libs/core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/core/**"]
+            "exclude": ["**/node_modules/**", "!libs/core/**/*"]
           }
         }
       }
@@ -123,7 +126,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/firebase/tsconfig.lib.json",
-            "project": "libs/firebase/ng-package.json"
+            "project": "libs/firebase/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
@@ -141,7 +145,7 @@
               "libs/firebase/tsconfig.lib.json",
               "libs/firebase/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/firebase/**"]
+            "exclude": ["**/node_modules/**", "!libs/firebase/**/*"]
           }
         }
       }
@@ -156,7 +160,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/capacitor/tsconfig.lib.json",
-            "project": "libs/capacitor/ng-package.json"
+            "project": "libs/capacitor/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
@@ -174,7 +179,7 @@
               "libs/capacitor/tsconfig.lib.json",
               "libs/capacitor/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/capacitor/**"]
+            "exclude": ["**/node_modules/**", "!libs/capacitor/**/*"]
           }
         }
       }
@@ -189,7 +194,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/ionic/tsconfig.lib.json",
-            "project": "libs/ionic/ng-package.json"
+            "project": "libs/ionic/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
@@ -207,7 +213,7 @@
               "libs/ionic/tsconfig.lib.json",
               "libs/ionic/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ionic/**"]
+            "exclude": ["**/node_modules/**", "!libs/ionic/**/*"]
           }
         }
       }
@@ -222,7 +228,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/web/tsconfig.lib.json",
-            "project": "libs/web/ng-package.json"
+            "project": "libs/web/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
@@ -240,7 +247,7 @@
               "libs/web/tsconfig.lib.json",
               "libs/web/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/web/**"]
+            "exclude": ["**/node_modules/**", "!libs/web/**/*"]
           }
         }
       }
@@ -255,7 +262,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/mapbox/tsconfig.lib.json",
-            "project": "libs/mapbox/ng-package.json"
+            "project": "libs/mapbox/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
@@ -273,7 +281,7 @@
               "libs/mapbox/tsconfig.lib.json",
               "libs/mapbox/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/mapbox/**"]
+            "exclude": ["**/node_modules/**", "!libs/mapbox/**/*"]
           }
         }
       }
@@ -288,7 +296,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/google/tsconfig.lib.json",
-            "project": "libs/google/ng-package.json"
+            "project": "libs/google/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
@@ -306,7 +315,7 @@
               "libs/google/tsconfig.lib.json",
               "libs/google/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/google/**"]
+            "exclude": ["**/node_modules/**", "!libs/google/**/*"]
           }
         }
       }
@@ -321,7 +330,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/ngxs/tsconfig.lib.json",
-            "project": "libs/ngxs/ng-package.json"
+            "project": "libs/ngxs/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -331,7 +341,7 @@
               "libs/ngxs/tsconfig.lib.json",
               "libs/ngxs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ngxs/**"]
+            "exclude": ["**/node_modules/**", "!libs/ngxs/**/*"]
           }
         },
         "test": {
@@ -362,14 +372,13 @@
               "libs/apple/tsconfig.lib.json",
               "libs/apple/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/apple/**"]
+            "exclude": ["**/node_modules/**", "!libs/apple/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/apple/jest.config.js",
-            "tsConfig": "libs/apple/tsconfig.spec.json"
+            "jestConfig": "libs/apple/jest.config.js"
           }
         }
       }
@@ -384,7 +393,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/bigdatacloud/tsconfig.lib.json",
-            "project": "libs/bigdatacloud/ng-package.json"
+            "project": "libs/bigdatacloud/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "lint": {
@@ -394,15 +404,13 @@
               "libs/bigdatacloud/tsconfig.lib.json",
               "libs/bigdatacloud/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/bigdatacloud/**"]
+            "exclude": ["**/node_modules/**", "!libs/bigdatacloud/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/bigdatacloud/jest.config.js",
-            "tsConfig": "libs/bigdatacloud/tsconfig.spec.json",
-            "setupFile": "libs/bigdatacloud/src/test-setup.ts"
+            "jestConfig": "libs/bigdatacloud/jest.config.js"
           }
         }
       },
