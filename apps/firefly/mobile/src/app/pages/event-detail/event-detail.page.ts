@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { map, catchError, switchMap, finalize } from 'rxjs/operators';
+import { map, catchError, switchMap, finalize, tap } from 'rxjs/operators';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
@@ -171,7 +171,7 @@ export class PageEventDetail
                         },
                         {
                             text    : translations[Translation.AlertConfirmDeleteConfirm],
-                            handler : () => this.store.dispatch(new ActionUserEventsDelete(id))
+                            handler : () => this.deleteConfirm(id)
                         }
                     ]
                 })
@@ -179,8 +179,16 @@ export class PageEventDetail
             switchMap((alert: HTMLIonAlertElement) =>
                 from(alert.present())
             )
-      ).
-      subscribe();
+        ).
+        subscribe();
+    }
+
+    private deleteConfirm(id: string): void
+    {
+        this.store.dispatch(new ActionUserEventsDelete(id)).
+        subscribe(() =>
+            this.navController.back()
+        );
     }
 
     public selectIcon(): void
