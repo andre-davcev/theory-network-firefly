@@ -2,12 +2,11 @@
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
 
 import { PushNotification } from '@theory/firebase';
-
+import { FCM } from '@capacitor-community/fcm';
 import { StateNotificationsModel } from './notifications.state.model';
 import { StateNotificationsOptions } from './notifications.state.options';
 import { ActionNotificationsWatch } from './notifications.actions';
 import { Plugins } from '@capacitor/core';
-import { FCM } from 'capacitor-fcm';
 import { ActionUserAddToken } from '@firefly/core';
 import { StateUser } from '@firefly/core';
 import { Injectable } from '@angular/core';
