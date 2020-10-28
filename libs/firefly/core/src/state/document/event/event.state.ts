@@ -145,15 +145,44 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         return StateEvent.place(state) != null;
     }
 
+    @Selector([StateUser.userId])
+    static isOwner(state: StateEventModel, userId: string): boolean
+    {
+        return StateEvent.dataState(state).userId === userId;
+    }
+
     @Selector([StateInterest.canEdit])
     static canAccept(state: StateEventModel, canEditInterest: boolean): boolean
     {
         return StateEvent.draft(state) && canEditInterest;
     }
 
-    @Selector([StateUser.userId]) static canEdit(state: StateEventModel, userId: string): boolean
+    @Selector([StateUser.userId, StateInterest.canEdit])
+    static canEditShow(state: StateEventModel, userId: string, canEditInterest: boolean): boolean
     {
-        return StateEvent.dataState(state).userId === userId &&
+        return (StateEvent.isOwner(state, userId) || StateEvent.isNewState(state)) &&
+            !StateEvent.canAccept(state, canEditInterest);
+    }
+
+    @Selector([StateUser.userId, StateInterest.canEdit])
+    static canEdit(state: StateEventModel, userId: string, canEditInterest: boolean): boolean
+    {
+        return StateEvent.canEditShow(state, userId, canEditInterest) &&
+            StateEvent.canUpdateState(state) &&
+            !StateEvent.notifyComplete(state);
+    }
+
+    @Selector([StateUser.userId])
+    static canDeleteShow(state: StateEventModel, userId: string): boolean
+    {
+        return StateEvent.isOwner(state, userId) &&
+            !StateEvent.isNewState(state);
+    }
+
+    @Selector([StateUser.userId])
+    static canDelete(state: StateEventModel, userId: string): boolean
+    {
+        return StateEvent.canDeleteShow(state, userId) &&
             !StateEvent.notifyComplete(state);
     }
 

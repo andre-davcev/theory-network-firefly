@@ -85,7 +85,6 @@ export class PageCalendar extends BaseComponent
 
     public delete(event: Event): void
     {
-        // ToDo
         this.translate.get
         ([
               Translation.AlertConfirmDeleteHeader,

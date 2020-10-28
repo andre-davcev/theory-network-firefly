@@ -7,5 +7,4 @@ export enum Translation
 
     AlertConfirmDeleteEvent     = 'alert.confirm.delete.event',
     AlertConfirmDeleteInterest  = 'alert.confirm.delete.interest'
-
 }

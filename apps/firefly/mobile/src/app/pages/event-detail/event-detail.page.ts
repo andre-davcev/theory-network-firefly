@@ -3,17 +3,18 @@ import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
-import { ModalController, NavController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, ActionEventAccept, ActionEventDeny } from '@firefly/core';
+import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, ActionEventAccept, ActionEventDeny, Translation, ActionUserEventsDelete } from '@firefly/core';
 import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
 import { firestore } from 'firebase';
 import { Place } from '@firefly/cloud';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component
 ({
@@ -27,8 +28,6 @@ export class PageEventDetail
 {
     @Select(StateEvent.formGroup())     form$:            Observable<FormGroup>;
     @Select(StateEvent.isNew())         isNew$:           Observable<boolean>;
-    @Select(StateEvent.canEdit)         canEdit$:         Observable<boolean>;
-    @Select(StateEvent.canUpdate())     canUpdate$:       Observable<boolean>;
     @Select(StateEvent.timeStart)       timeStart$:       Observable<firestore.Timestamp>;
     @Select(StateEvent.timeEnd)         timeEnd$:         Observable<firestore.Timestamp>;
     @Select(StateEvent.timeEndValid)    timeEndValid$:    Observable<boolean>;
@@ -42,6 +41,10 @@ export class PageEventDetail
     @Select(StateEvent.icon)            icon$:            Observable<string>;
     @Select(StateEvent.canAccept)       canAccept$:       Observable<boolean>;
     @Select(StateEvent.place)           place$:           Observable<boolean>;
+    @Select(StateEvent.canEditShow)     canEditShow$:     Observable<boolean>;
+    @Select(StateEvent.canEdit)         canEdit$:         Observable<boolean>;
+    @Select(StateEvent.canDeleteShow)   canDeleteShow$:   Observable<boolean>;
+    @Select(StateEvent.canDelete)       canDelete$:       Observable<boolean>;
 
     @Input() modal: boolean = false;
 
@@ -56,7 +59,9 @@ export class PageEventDetail
         private camera:          ServiceCamera,
         private modalController: ModalController,
         private resolver:        ResolverPageAssetsInterests,
-        public  navController:   NavController
+        public  navController:   NavController,
+        private translate:       TranslateService,
+        private alert:           AlertController
     ) { }
 
     public ionViewWillEnter(): void
@@ -135,6 +140,47 @@ export class PageEventDetail
                 modalController.present()
             );
         }
+    }
+
+    public delete(): void
+    {
+        const id: string = this.store.selectSnapshot(StateEvent.id());
+
+        this.translate.get
+        ([
+              Translation.AlertConfirmDeleteHeader,
+              Translation.AlertConfirmDeleteMessage,
+              Translation.AlertConfirmDeleteCancel,
+              Translation.AlertConfirmDeleteConfirm,
+              Translation.AlertConfirmDeleteEvent
+        ]).
+        pipe
+        (
+            switchMap((translations: Record<string, string>) =>
+                this.alert.create
+                ({
+                    cssClass : 'cpt-alert',
+                    header   : `${translations[Translation.AlertConfirmDeleteHeader]} ${translations[Translation.AlertConfirmDeleteEvent]}?`,
+                    message  : translations[Translation.AlertConfirmDeleteMessage],
+
+                    buttons:
+                    [
+                        {
+                            text : translations[Translation.AlertConfirmDeleteCancel],
+                            role : 'cancel'
+                        },
+                        {
+                            text    : translations[Translation.AlertConfirmDeleteConfirm],
+                            handler : () => this.store.dispatch(new ActionUserEventsDelete(id))
+                        }
+                    ]
+                })
+            ),
+            switchMap((alert: HTMLIonAlertElement) =>
+                from(alert.present())
+            )
+      ).
+      subscribe();
     }
 
     public selectIcon(): void
