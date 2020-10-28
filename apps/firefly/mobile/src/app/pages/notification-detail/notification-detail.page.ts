@@ -66,7 +66,6 @@ export class PageNotificationDetail extends BaseComponent
 
     public delete(): void
     {
-        // ToDo
         this.translate.get
         ([
               Translation.AlertConfirmDeleteHeader,

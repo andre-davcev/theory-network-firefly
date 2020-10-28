@@ -133,7 +133,6 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public delete(): void
     {
-        // ToDo
         this.translate.get
         ([
               Translation.AlertConfirmDeleteHeader,

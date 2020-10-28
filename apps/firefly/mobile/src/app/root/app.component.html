@@ -1,5 +1,10 @@
 <ion-app>
-    <ion-menu side="end" type="reveal" content-id="main" (ionDidClose)="menuClosed()" (ionWillOpen)="menuOpened()">
+    <ion-menu side="end"
+              type="reveal"
+              content-id="main"
+              [swipeGesture]="false"
+              (ionDidClose)="menuClosed()"
+              (ionWillOpen)="menuOpened()">
         <ion-content color="dark">
             <ion-list lines="none">
                 <ion-item-group>

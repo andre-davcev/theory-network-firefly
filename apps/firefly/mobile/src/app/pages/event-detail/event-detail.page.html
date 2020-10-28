@@ -24,10 +24,17 @@
                 <ion-icon color="dark" name="close-outline"></ion-icon>
             </ion-button>
 
-            <ion-button *ngIf="(canEdit$ | async) && !(canAccept$ | async)"
+            <ion-button *ngIf="canDeleteShow$ | async"
+                        [disabled]="!(canDelete$ | async)"
+                        (click)="delete()"
+                        icon-only>
+                <ion-icon name="trash" color="dark" size="large"></ion-icon>
+            </ion-button>
+
+            <ion-button *ngIf="canEditShow$ | async"
+                        [disabled]="!(canEdit$ | async)"
                         color="dark"
-                        (click)="save()"
-                        [disabled]="!(canUpdate$ | async)">
+                        (click)="save()">
                 {{ ((isNew$ | async) ? 'general.publish' : 'general.update') | translate }}
             </ion-button>
         </ion-buttons>
