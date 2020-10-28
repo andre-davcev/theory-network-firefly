@@ -164,6 +164,9 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         pipe
         (
             switchMap(() =>
+                dispatch(new SetFormDirty(path))
+            ),
+            switchMap(() =>
                 save ?
                     this.service.documentUpdate(StateDocument.snapshotState(state), partial) :
                     of(null)

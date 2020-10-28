@@ -86,17 +86,39 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public save(): void
     {
-        this.store.dispatch
+        const isNew : boolean = this.store.selectSnapshot(StateInterest.isNew());
+
+        this.translate.get
         ([
-            new ActionMobileLoadingShow(),
-            new ActionInterestSave()
+            Translation.PageInterestCreatedSuccess,
+            Translation.PageInterestCreatedError,
+            Translation.PageInterestUpdateSuccess,
+            Translation.PageInterestUpdateError
         ]).
         pipe
         (
-            map(() => 'Interest was successfully created!'),
-            catchError(() => of('An error occurred creating the interest!')),
-            finalize(() =>
-                this.store.dispatch(new ActionMobileLoadingHide())
+            switchMap((translations: Record<string, string>) =>
+                this.store.dispatch
+                ([
+                    new ActionMobileLoadingShow(),
+                    new ActionInterestSave()
+                ]).
+                pipe
+                (
+                    map(() =>
+                        isNew ?
+                            translations[Translation.PageInterestCreatedSuccess] :
+                            translations[Translation.PageInterestUpdateSuccess]
+                    ),
+                    catchError(() =>
+                        isNew ?
+                            of(translations[Translation.PageInterestCreatedError]) :
+                            of(translations[Translation.PageInterestUpdateError])
+                    ),
+                    finalize(() =>
+                        this.store.dispatch(new ActionMobileLoadingHide())
+                    )
+                )
             )
         ).
         subscribe((message: string) =>

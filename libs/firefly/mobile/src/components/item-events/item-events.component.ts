@@ -47,9 +47,4 @@ export class ComponentItemEvents
             this.deleted.next(event);
         }
     }
-
-    public swipe(event): void
-    {
-        console.log(event);
-    }
 }
