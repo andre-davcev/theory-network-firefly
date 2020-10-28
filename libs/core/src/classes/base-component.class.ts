@@ -1,8 +1,9 @@
-import { OnDestroy, HostListener } from '@angular/core';
+import { OnDestroy, HostListener, Directive } from '@angular/core';
 
 // libs
 import { Subject } from 'rxjs';
 
+@Directive()
 export abstract class BaseComponent implements OnDestroy {
   public destroy$: Subject<any> = new Subject();
 
