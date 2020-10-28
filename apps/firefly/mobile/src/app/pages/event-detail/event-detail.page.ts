@@ -247,18 +247,40 @@ export class PageEventDetail
 
     public save(): void
     {
-        this.store.dispatch
+        const isNew : boolean = this.store.selectSnapshot(StateEvent.isNew());
+
+        this.translate.get
         ([
-            new ActionMobileLoadingShow(),
-            new ActionEventSave()
+            Translation.PageEventCreatedSuccess,
+            Translation.PageEventCreatedError,
+            Translation.PageEventUpdateSuccess,
+            Translation.PageEventUpdateError
         ]).
         pipe
         (
-            switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous())),
-            map(() => 'Event was successfully created!'),
-            catchError(() => of('An error occurred creating the event!')),
-            finalize(() =>
-                this.store.dispatch(new ActionMobileLoadingHide())
+            switchMap((translations: Record<string, string>) =>
+                this.store.dispatch
+                ([
+                    new ActionMobileLoadingShow(),
+                    new ActionEventSave()
+                ]).
+                pipe
+                (
+                    switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous())),
+                    map(() =>
+                        isNew ?
+                            translations[Translation.PageEventCreatedSuccess] :
+                            translations[Translation.PageEventUpdateSuccess]
+                    ),
+                    catchError(() =>
+                        isNew ?
+                            of(translations[Translation.PageEventCreatedError]) :
+                            of(translations[Translation.PageEventUpdateError])
+                    ),
+                    finalize(() =>
+                        this.store.dispatch(new ActionMobileLoadingHide())
+                    )
+                )
             )
         ).
         subscribe((message: string) =>

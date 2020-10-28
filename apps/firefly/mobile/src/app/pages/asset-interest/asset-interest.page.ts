@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, from, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, StateUser, InterestType } from '@firefly/core';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, StateUser, InterestType, Translation } from '@firefly/core';
 import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
 import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
@@ -13,7 +13,7 @@ import { NavController, ModalController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
-import { PageEventSelector } from '../event-selector';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component
 ({
@@ -42,7 +42,8 @@ export class PageAssetInterest extends BaseComponent implements OnInit
       private store:         Store,
       private navController: NavController,
       private modal:         ModalController,
-      private camera:        ServiceCamera
+      private camera:        ServiceCamera,
+      private translate:     TranslateService
     )
     {
       super();
@@ -85,22 +86,43 @@ export class PageAssetInterest extends BaseComponent implements OnInit
 
     public save(): void
     {
-      const interestType = this.store.selectSnapshot(StateUser.interestType);
+        const interestType : InterestType = this.store.selectSnapshot(StateUser.interestType);
+        const isNew        : boolean      = this.store.selectSnapshot(StateInterest.isNew());
 
-        this.store.dispatch
+        this.translate.get
         ([
-            new ActionMobileLoadingShow(),
-            new ActionInterestSave()
+            Translation.PageInterestCreatedSuccess,
+            Translation.PageInterestCreatedError,
+            Translation.PageInterestUpdateSuccess,
+            Translation.PageInterestUpdateError
         ]).
         pipe
         (
-            map(() => 'Interest was successfully created!'),
-            catchError(() => of('An error occurred creating the interest!')),
-            finalize(() =>
+            switchMap((translations: Record<string, string>) =>
+                this.store.dispatch
                 ([
-                  this.store.dispatch(new ActionCityStreamGet()),
-                  this.store.dispatch(new ActionMobileLoadingHide())
-                ])
+                    new ActionMobileLoadingShow(),
+                    new ActionInterestSave()
+                ]).
+                pipe
+                (
+                    map(() =>
+                        isNew ?
+                            translations[Translation.PageInterestCreatedSuccess] :
+                            translations[Translation.PageInterestUpdateSuccess]
+                    ),
+                    catchError(() =>
+                        isNew ?
+                            of(translations[Translation.PageInterestCreatedError]) :
+                            of(translations[Translation.PageInterestUpdateError])
+                    ),
+                    finalize(() =>
+                        ([
+                          this.store.dispatch(new ActionCityStreamGet()),
+                          this.store.dispatch(new ActionMobileLoadingHide())
+                        ])
+                    )
+                )
             )
         ).
         subscribe((message: string) =>

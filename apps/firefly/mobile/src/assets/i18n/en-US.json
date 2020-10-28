@@ -121,6 +121,10 @@
   "page.event.imageTitlePlaceholder"  : "Notification Image",
   "page.event.descriptionPlaceholder" : "Write a description ...",
   "page.event.timeNotify"             : "Notification Time",
+  "page.event.createdSuccess"         : "Event was successfully created!",
+  "page.event.createdError"           : "An error occurred creating the event!",
+  "page.event.updateSuccess"          : "Event was successfully updated!",
+  "page.event.updateError"            : "An error occurred updating the event!",
 
   "page.event.detail.title"                  : "Event Detail",
 
@@ -135,6 +139,10 @@
   "page.interest.imagePlaceholder"       : "select image",
   "page.interest.imageTitlePlaceholder"  : "Main Image",
   "page.interest.descriptionPlaceholder" : "Write a description ...",
+  "page.interest.createdSuccess"         : "Interest was successfully created!",
+  "page.interest.createdError"           : "An error occurred creating the interest!",
+  "page.interest.updateSuccess"          : "Interest was successfully updated!",
+  "page.interest.updateError"            : "An error occurred updating the interest!",
 
   "page.interest.filter.unsubscribed" : "Unsubscribed",
   "page.interest.filter.subscribed"   : "Subscribed",

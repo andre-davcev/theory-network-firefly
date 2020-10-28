@@ -186,7 +186,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     reset(context: StateContext<StateUserEventsModel>)
     {
         const dateCutoff: Date = new Date();
-        dateCutoff.setDate(dateCutoff.getDate() + 1); // Add 1 day
+        dateCutoff.setHours(dateCutoff.getHours() - 6);
 
         const userId: string = this.store.selectSnapshot(StateUser.id());
         const query: Query   = userId == null ? undefined : this.service.
