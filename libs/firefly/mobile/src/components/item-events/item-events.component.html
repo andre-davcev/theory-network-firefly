@@ -4,8 +4,8 @@
     </ion-item-divider>
 
     <ion-item-sliding *ngFor="let event of dateEvents.events"
-                      (click)="select(event)"
-                      [disabled]="event.timeNotify">
+                      #sliding
+                      (click)="select(event, sliding)">
         <ion-item>
             <ion-avatar slot="start">
                 <img [src]="event.metadata.image">
@@ -22,8 +22,9 @@
         </ion-item>
 
         <ion-item-options side="end">
-            <ion-item-option color="secondary"
-                             (click)="deleteClicked(event)">
+            <ion-item-option [color]="event.notifyComplete ? 'grey' : 'secondary'"
+                             [class.cpt-disabled]="event.notifyComplete"
+                             (click)="delete(event)">
                 {{ 'general.delete' | translate }}
             </ion-item-option>
         </ion-item-options>
