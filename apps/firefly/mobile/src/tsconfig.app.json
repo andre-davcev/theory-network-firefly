@@ -2,8 +2,8 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "module": "es2015",
     "baseUrl": "./",
+    "types": [],
     "paths": {
       "@theory/apple": ["../../../../libs/apple/index.ts"],
       "@theory/apple/*": ["../../../../libs/apple/src/*"],
@@ -51,5 +51,13 @@
       "@firefly/page/*": ["./app/pages/*"]
     }
   },
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.d.ts"
+  ],
   "exclude": ["test.ts", "**/*.spec.ts"]
 }
