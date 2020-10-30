@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentSnapshot } from '@angular/fire/firestore';
-import { Action, NgxsOnInit, Selector, State, StateContext, Store } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { firestore } from 'firebase/app';
 
 import { ResponseReverseGeocode, ServiceBigDataCloud } from '@theory/bigdatacloud';
@@ -19,7 +19,7 @@ import { ServiceFirestoreBase } from '@theory/firebase';
 
 @State<StateCityModel>(StateCityOptions)
 @Injectable()
-export class StateCity implements NgxsOnInit
+export class StateCity
 {
     @Selector() static city(state: StateCityModel)     : CityInfo           { return state.city; }
     @Selector() static cityId(state: StateCityModel)   : string             { const city: CityInfo = StateCity.city(state); return city == null ? null : city.id; }
@@ -34,11 +34,6 @@ export class StateCity implements NgxsOnInit
         private store        : Store,
         private angularfire  : AngularFirestore
     ) { }
-
-    public ngxsOnInit(context: StateContext<StateCityModel>)
-    {
-        context.dispatch(new ActionCityWatch());
-    }
 
     @Action(ActionCityWatch, { cancelUncompleted: true })
     watchLocation({ dispatch, patchState }: StateContext<StateCityModel>)
