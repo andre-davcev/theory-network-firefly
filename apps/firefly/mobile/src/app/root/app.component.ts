@@ -68,6 +68,14 @@ export class ComponentApp
             ).
             subscribe();
         }
+        else
+        {
+            this.store.dispatch
+            ([
+                new ActionCityWatch(),
+                new ActionUserAuthenticate()
+            ]);
+        }
 
         this.actions$.
         pipe(ofActionSuccessful(RouterNavigation)).
