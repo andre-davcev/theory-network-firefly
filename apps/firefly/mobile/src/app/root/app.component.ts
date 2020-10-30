@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Platform, MenuController, ModalController } from '@ionic/angular';
 import { from, Observable } from 'rxjs';
-import { delay, finalize, switchMap } from 'rxjs/operators';
+import { delay, finalize, switchMap, tap } from 'rxjs/operators';
 import { Actions, ofActionSuccessful, Store, Select } from '@ngxs/store';
 import { RouterNavigation } from '@ngxs/router-plugin';
 
 import { PlatformEnum } from '@theory/ionic';
 
 import { Pages, ActionMobileAuthSelected, StateMobile, ActionMobileFilterEvents, ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
-import { ActionUserLogout, StateUser, IconType, Color, IconSize } from '@firefly/core';
+import { ActionUserLogout, StateUser, IconType, Color, IconSize, ActionCityWatch, ActionUserAuthenticate } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
 import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
 import { PageLogin } from '../pages';
@@ -52,8 +52,21 @@ export class ComponentApp
         if (this.platform.is(PlatformEnum.Cordova))
         {
             from(this.platform.ready()).
-            pipe(delay(100)).
-            subscribe(() => SplashScreen.hide());
+            pipe
+            (
+                delay(100),
+                tap(() =>
+                    SplashScreen.hide()
+                ),
+                switchMap(() =>
+                    this.store.dispatch
+                    ([
+                        new ActionCityWatch(),
+                        new ActionUserAuthenticate()
+                    ])
+                )
+            ).
+            subscribe();
         }
 
         this.actions$.

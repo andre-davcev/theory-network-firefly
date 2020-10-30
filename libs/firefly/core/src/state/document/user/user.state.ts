@@ -185,7 +185,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     {
         context.dispatch
         ([
-            new ActionUserAuthenticate(),
             new ActionUserWatchCity()
         ]);
     }
