@@ -113,7 +113,7 @@
                     <ion-item>
                         <ion-label>{{ 'page.event.timeNotify' | translate }}</ion-label>
                         <ion-datetime name="notify"
-                                      [disabled]="(timeIsLocked$ | async) || (notifyComplete$ | async)"
+                                      [disabled]="timeIsLocked$ | async"
                                       [value]="timeNotify$ | async | timestamp:'isoString'"
                                       [displayFormat]="'date-time.displayFormat' | translate"
                                       [pickerFormat]="'date-time.pickerFormatHourly' | translate"
