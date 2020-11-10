@@ -120,7 +120,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Selector() static timeNotify(state: StateEventModel):      firestore.Timestamp    { return StateEvent.dataState(state).timeNotify; }
     @Selector() static timeNotifyValid(state: StateEventModel): boolean                { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
     @Selector() static interests(state: StateEventModel):       Array<string>          { return StateEvent.dataState(state).interests; }
-    @Selector() static timeIsLocked(state: StateEventModel):    boolean                { return StateEvent.interests(state).length > 0; }
+    @Selector() static timeIsLocked(state: StateEventModel):    boolean                { return StateEvent.notifyComplete(state); }
     @Selector() static icon(state: StateEventModel):            string                 { return StateEvent.metadataState(state).icon; }
     @Selector() static image(state: StateEventModel):           string                 { return StateEvent.metadataState(state).image; }
     @Selector() static place(state: StateEventModel):           Place                  { return StateEvent.metadataState(state).place; }

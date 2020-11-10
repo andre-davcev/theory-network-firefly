@@ -76,9 +76,6 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         new ActionMobileLoadingShow()
       ]).pipe(
         switchMap(() => this.store.dispatch(new ActionEventInterestAdd(interest))),
-        switchMap(() =>
-            this.store.dispatch(new ActionEventSetId(CoreEnum.IdNew))
-        ),
         switchMap(() => this.store.dispatch(new ActionMobileLoadingHide())),
         switchMap(() => from(this.modal.create({
           component: PageEventDetail,
