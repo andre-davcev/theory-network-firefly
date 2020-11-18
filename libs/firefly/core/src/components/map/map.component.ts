@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, takeUntil, delay, switchMap, map, tap } from 'rxjs/operators';
@@ -20,7 +20,7 @@ import { Place } from '@firefly/cloud';
     templateUrl : './map.component.html',
     styleUrls   : ['./map.component.scss']
 })
-export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
+export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit, OnChanges
 {
     @Select(StateLocation.isValid)          locationValid$      : Observable<boolean>;
     @Select(StateLocation.locationLike)     locationLike$       : Observable<LngLatLike>;
@@ -86,6 +86,8 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @Output() result:  EventEmitter<Result>  = new EventEmitter<Result>();
     @Output() error:   EventEmitter<any>     = new EventEmitter<any>();
 
+    private map: mapboxgl.Map;
+
     constructor()
     {
         super();
@@ -114,6 +116,22 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         );
     }
 
+    public ngOnChanges(changes: SimpleChanges): void
+    {
+        if (changes.place?.currentValue)
+        {
+            this.openPopup();
+        }
+    }
+
+
+    public onLoad(map: mapboxgl.Map): void
+    {
+        this.map = map;
+
+        this.resizeMap();
+    }
+
     public ngAfterViewInit(): void
     {
         this.contentInitiated$.next(true);
@@ -122,6 +140,8 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     public eventClear(): void
     {
         this.clear.next();
+
+        this.resizeMap();
     }
 
     public eventLoading(event: { query: string })
@@ -132,16 +152,22 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     public eventResults(results: Results): void
     {
         this.results.next(results);
+
+        this.resizeMap();
     }
 
     public eventResult(event: { result: Result }): void
     {
         this.result.next(event.result);
+
+        this.resizeMap();
     }
 
     public eventError(error: any): void
     {
         this.error.next(error);
+
+        this.resizeMap();
     }
 
     public openPopup(): void
@@ -161,5 +187,12 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
                 }
             }
         });
+    }
+
+    private resizeMap(): void
+    {
+        setTimeout(() =>
+            this.map.resize()
+        );
     }
 }
