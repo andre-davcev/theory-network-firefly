@@ -65,3 +65,6 @@ apps/**/app/src/main/assets/public/*
 
 # functions
 apps/*/cloud/lib
+
+# custom
+algolia.txt
