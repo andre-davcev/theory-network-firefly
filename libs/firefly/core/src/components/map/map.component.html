@@ -10,6 +10,9 @@
          [center]="place?.centerLike || (locationLike$ | async)"
          [interactive]="interactive"
          [movingMethod]="mapMovingMethod"
+         [trackResize]="false"
+         [keyboard]="false"
+         (load)="onLoad($event)"
          #map>
     <mgl-control mglNavigation position="bottom-left" *ngIf="web$ | async"></mgl-control>
 

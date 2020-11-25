@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, takeUntil, delay, switchMap, map, tap } from 'rxjs/operators';
 import { LngLatLike, Point, Popup } from 'mapbox-gl';
@@ -186,13 +186,16 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
                     popup.addTo(this.maps.first.mapInstance);
                 }
             }
+
+            this.resizeMap();
         });
     }
 
     private resizeMap(): void
     {
-        setTimeout(() =>
-            this.map.resize()
-        );
+        if (this.map)
+        {
+            this.map.resize();
+        }
     }
 }
