@@ -15,13 +15,10 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true">
-    <app-map [place]="place"
-             [geocode]="true"
-             [types]="placeTypes"
-             [placeholder]="'page.event-location.searchPlaceholder' | translate"
-             [mapLoadingText]="'component.map-loading' | translate"
-             (result)="resultFound($event)">
-    </app-map>
-</ion-content>
-
+<app-map [place]="place"
+          [geocode]="true"
+          [types]="placeTypes"
+          [placeholder]="'page.event-location.searchPlaceholder' | translate"
+          [mapLoadingText]="'component.map-loading' | translate"
+          (result)="resultFound($event)">
+</app-map>

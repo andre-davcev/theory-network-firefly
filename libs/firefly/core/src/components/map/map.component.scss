@@ -30,7 +30,6 @@
     mgl-map {
         height: var(--cpt-height);
         width: var(--cpt-width);
-        display: block;
 
         ::ng-deep .mapboxgl-canvas-container
         {
@@ -43,19 +42,8 @@
             border-bottom-left-radius: var(--cpt-map-border-radius-bottom);
             border-bottom-right-radius: var(--cpt-map-border-radius-bottom);
 
-            /* this fixes the overflow:hidden in Chrome/Opera */
+            // this fixes the overflow:hidden in Chrome/Opera
             -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
-
-            .mapboxgl-canvas
-            {
-                position: absolute;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                right: 0;
-                width: 100%;
-                height: 100%;
-            }
         }
 
         ::ng-deep .mapboxgl-popup
