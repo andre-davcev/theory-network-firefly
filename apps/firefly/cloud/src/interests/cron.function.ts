@@ -16,6 +16,7 @@ onRun(async (context: EventContext) =>
     const debug               : boolean                                       = true;
     const citiesNearby        : Record<string, Record<string, number>>        = {};
     const interestSubscribers : Record<string, number>                        = {};
+    const interestVirtual     : Record<string, boolean>                       = {};
     const eventScores         : Record<string, number>                        = {};
     const cityInterests       : Record<string, Array<string>>                 = {};
     const citySubscriberMax   : Record<string, number>                        = {};
@@ -23,14 +24,17 @@ onRun(async (context: EventContext) =>
     const interestCityEvents  : Record<string, Record<string, Array<string>>> = {};
     const citiesCollection    : Record<string, Record<string, StreamInterest>> = {};
 
-    let id     : string;
-    let query  : QuerySnapshot = await database.collection(Collection.Interests).where('private', '==', false).get();
-    let nearby : Record<string, number>;
+    let id       : string;
+    let query    : QuerySnapshot = await database.collection(Collection.Interests).where('private', '==', false).get();
+    let nearby   : Record<string, number>;
+    let interest : Interest;
 
     query.forEach((snapshot: QueryDocumentSnapshot) =>
     {
-        id                     = snapshot.id;
-        interestSubscribers[id] = (snapshot.data() as Interest).subscriberCount;
+        interest                = snapshot.data() as Interest;
+        id                      = snapshot.id;
+        interestSubscribers[id] = interest.subscriberCount;
+        interestVirtual[id]     = interest.virtual;
         interestCityEvents[id]  = {};
     });
 
@@ -128,7 +132,7 @@ onRun(async (context: EventContext) =>
                 score = (interestScore * GlobalVariable.InterestScoreWeightRaw) +
                         (interestScore * GlobalVariable.InterestScoreWeightSubscribers * (subscriberCount / subscriberMax));
 
-                cityStream[interestId] = { score } as StreamInterest;
+                cityStream[interestId] = { score, virtual: interestVirtual[interestId] } as StreamInterest;
             });
         });
 
