@@ -36,7 +36,7 @@ export class StateCity
     ) { }
 
     @Action(ActionCityWatch, { cancelUncompleted: true })
-    watchLocation({ dispatch, patchState }: StateContext<StateCityModel>)
+    cityWatch({ dispatch, patchState }: StateContext<StateCityModel>)
     {
         return this.store.select(StateLocation.location).
         pipe
