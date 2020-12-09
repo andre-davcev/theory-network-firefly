@@ -26,7 +26,7 @@ export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsM
         dataLookup:     {},
 
         childLookup : {},
-        keysSorted  : [],
+        keys        : [],
         offset      : 0,
         id          : undefined,
 
