@@ -4,7 +4,7 @@ import { StreamInterest } from '@firefly/cloud';
 import { ServiceStreams } from '@firefly/core/services';
 import { StateChild } from '@theory/ngxs';
 
-import { StateUserStreamModel } from './city-stream.state.model';
+import { StateCityStreamModel } from './city-stream.state.model';
 import { StateUserStreamOptions } from './city-stream.state.options';
 import {
     ActionCityStreamAdd,
@@ -20,9 +20,9 @@ import { ServiceStorage } from '@theory/firebase';
 import { switchMap } from 'rxjs/operators';
 import { ImageType, Collection } from '@firefly/core/enums';
 
-@State<StateUserStreamModel>(StateUserStreamOptions)
+@State<StateCityStreamModel>(StateUserStreamOptions)
 @Injectable()
-export class StateCityStream extends StateChild<StreamInterest, StateUserStreamModel>
+export class StateCityStream extends StateChild<StreamInterest, StateCityStreamModel>
 {
     constructor
     (
@@ -49,25 +49,25 @@ export class StateCityStream extends StateChild<StreamInterest, StateUserStreamM
     }
 
     @Action(ActionCityStreamReset)
-    reset(context: StateContext<StateUserStreamModel>, action: ActionCityStreamReset)
+    reset(context: StateContext<StateCityStreamModel>, action: ActionCityStreamReset)
     {
         return super.reset(context, action);
     }
 
     @Action(ActionCityStreamGetData)
-    getData(context: StateContext<StateUserStreamModel>, action: ActionCityStreamGetData)
+    getData(context: StateContext<StateCityStreamModel>, action: ActionCityStreamGetData)
     {
         return super.getData(context, action);
     }
 
     @Action(ActionCityStreamSetData)
-    setData(context: StateContext<StateUserStreamModel>, action: ActionCityStreamSetData)
+    setData(context: StateContext<StateCityStreamModel>, action: ActionCityStreamSetData)
     {
         return super.setData(context, action);
     }
 
     @Action(ActionCityStreamGet)
-    get(context: StateContext<StateUserStreamModel>)
+    get(context: StateContext<StateCityStreamModel>)
     {
         return super.get(context).
         pipe
@@ -79,19 +79,19 @@ export class StateCityStream extends StateChild<StreamInterest, StateUserStreamM
     }
 
     @Action(ActionCityStreamAdd)
-    add(context: StateContext<StateUserStreamModel>, action: ActionCityStreamAdd)
+    add(context: StateContext<StateCityStreamModel>, action: ActionCityStreamAdd)
     {
         return super.add(context, action);
     }
 
     @Action(ActionCityStreamRemove)
-    remove(context: StateContext<StateUserStreamModel>, action: ActionCityStreamRemove)
+    remove(context: StateContext<StateCityStreamModel>, action: ActionCityStreamRemove)
     {
         return super.remove(context, action);
     }
 
     @Action(ActionCityStreamSync)
-    sync(context: StateContext<StateUserStreamModel>, action: ActionCityStreamSync)
+    sync(context: StateContext<StateCityStreamModel>, action: ActionCityStreamSync)
     {
         return super.sync(context, action);
     }
