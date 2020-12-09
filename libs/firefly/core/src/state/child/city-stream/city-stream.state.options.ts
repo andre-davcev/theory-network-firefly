@@ -24,7 +24,7 @@ export const StateUserStreamOptions: StoreOptions<StateCityStreamModel> =
         dataLookup:     {},
 
         childLookup : {},
-        keysSorted  : [],
+        keys        : [],
         offset      : 0,
         id          : undefined,
 

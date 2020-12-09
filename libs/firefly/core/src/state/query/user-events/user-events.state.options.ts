@@ -19,6 +19,7 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
         loading:        false,
         finishedPaging: false,
 
+        keys:           [],
         snapshots:      [],
         snapshotLookup: {},
         data:           [],

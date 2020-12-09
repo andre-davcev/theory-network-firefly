@@ -31,7 +31,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         this.collection = collection;
     }
 
-    protected static keysState(state: any):        Array<string>                 { return state.keysSorted ; }
+    protected static keysState(state: any):        Array<string>                 { return state.keys; }
     protected static idState(state: any):          string                        { return state.id; }
     protected static childLookupState(state: any): Record<string, Partial<any>>  { return state.childLookup; }
     protected static sortFieldsState(state: any):  Record<string, SortField>     { return state.sortFields; }
@@ -87,7 +87,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             pipe
             (
                 tap(() =>
-                    patchState({ keysSorted: this.sort(context) } as M)
+                    patchState({ keys: this.sort(context) } as M)
                 ),
                 switchMap(() =>
                     fetch ?
@@ -171,7 +171,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public add(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState } = context;
-        const { keysSorted, offset, initialized } = getState();
+        const { keys, offset, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
@@ -183,11 +183,11 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         (
             tap((index: number) =>
             {
-                keysSorted.splice(index, 0, id);
+                keys.splice(index, 0, id);
 
                 patchState
                 ({
-                    keysSorted,
+                    keys,
                     offset: offset + 1
                 } as M);
             })
@@ -198,7 +198,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     {
         const { getState, patchState } = context;
 
-        const { childLookup, keysSorted, offset, initialized }: M = getState();
+        const { childLookup, keys, offset, initialized }: M = getState();
 
         if (!initialized) { return of(null); }
 
@@ -210,12 +210,12 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             tap((index: number) =>
             {
                 delete childLookup[id];
-                keysSorted.splice(index, 1);
+                keys.splice(index, 1);
 
                 patchState
                 ({
                     childLookup,
-                    keysSorted,
+                    keys,
                     offset: offset - 1
                 } as M);
             })
@@ -225,7 +225,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public sync(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState }  = context;
-        const { keysSorted, initialized } = getState();
+        const { keys, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
@@ -238,10 +238,10 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             {
                 if (result.sync && result.changedOrderBy)
                 {
-                    keysSorted.splice(result.indexOld, 1);
-                    keysSorted.splice(result.indexNew, 0, id);
+                    keys.splice(result.indexOld, 1);
+                    keys.splice(result.indexNew, 0, id);
 
-                    patchState({ keysSorted } as M);
+                    patchState({ keys } as M);
                 }
             })
         );
