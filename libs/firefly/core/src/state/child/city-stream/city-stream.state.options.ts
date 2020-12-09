@@ -1,10 +1,10 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateUserStreamModel } from './city-stream.state.model';
+import { StateCityStreamModel } from './city-stream.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
 
-export const StateUserStreamOptions: StoreOptions<StateUserStreamModel> =
+export const StateUserStreamOptions: StoreOptions<StateCityStreamModel> =
 {
     name : 'streams',
 
