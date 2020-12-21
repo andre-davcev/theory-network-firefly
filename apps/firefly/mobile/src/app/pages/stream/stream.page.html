@@ -1,27 +1,10 @@
 <ion-content>
+<!--
   <ion-list class="searchResults">
     <ion-item lines="none" (click)="selectSearchInterest(searchResult)" *ngFor="let searchResult of searchResults$ | async"  >
       {{searchResult.name}}
     </ion-item>
   </ion-list>
-<!--
-  <ion-item  *ngIf="(stream && (authenticated$ | async))" lines="none">
-    <ion-card>
-      <ion-toolbar>
-        <ion-segment (ionChange)="filterChanged($event)">
-          <ion-segment-button value="all" checked>
-            All
-          </ion-segment-button>
-          <ion-segment-button value="subscribed">
-            Subscribed
-          </ion-segment-button>
-          <ion-segment-button value="unsubscribed">
-            Unsubscribed
-          </ion-segment-button>
-        </ion-segment>
-      </ion-toolbar>
-    </ion-card>
-  </ion-item>
 -->
   <ion-list (click)="resetSearchResults()" *ngIf="found$ | async">
     <ion-item lines="none" *ngFor="let interest of stream$ | async; let i = index">

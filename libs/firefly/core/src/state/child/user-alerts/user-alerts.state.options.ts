@@ -20,14 +20,11 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         loading:        false,
         finishedPaging: false,
 
-        snapshots:      [],
         snapshotLookup: {},
-        data:           [],
         dataLookup:     {},
 
         childLookup : {},
         keys        : [],
-        offset      : 0,
         id          : undefined,
 
         sortFields:

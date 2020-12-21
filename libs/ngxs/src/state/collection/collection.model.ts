@@ -14,8 +14,6 @@ export interface StateCollectionModel<T>
     finishedPaging: boolean;
 
     keys:           Array<string>;
-    snapshots:      Array<firestore.DocumentSnapshot>;
     snapshotLookup: Record<string, firestore.DocumentSnapshot>;
-    data:           Array<T>;
     dataLookup:     Record<string, T>;
 }

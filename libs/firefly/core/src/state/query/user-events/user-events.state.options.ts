@@ -20,9 +20,7 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
         finishedPaging: false,
 
         keys:           [],
-        snapshots:      [],
         snapshotLookup: {},
-        data:           [],
         dataLookup:     {}
     }
 };

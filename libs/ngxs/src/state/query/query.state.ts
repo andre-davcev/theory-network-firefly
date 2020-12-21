@@ -52,9 +52,8 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
 
         const
         {
-            snapshots,
             snapshotLookup,
-            data,
+            keys,
             dataLookup,
             finishedPaging,
             initialized,
@@ -71,7 +70,7 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
         }
         else if (!finishedPaging)
         {
-            this.query = this.query.startAfter(snapshots[snapshots.length - 1]);
+            this.query = this.query.startAfter(keys[keys.length - 1]);
         }
 
         patchState({ loading: true } as M);
@@ -91,21 +90,18 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
                     {
                         const object: T = document.data() as T;
 
-                        snapshots.push(document);
+                        keys.push(document.id);
                         snapshotLookup[document.id] = document;
 
                         object.metadata = object.metadata == null ? {} : object.metadata;
 
-                        data.push(object);
                         dataLookup[document.id] = object;
                     })
                 ),
                 tap(() =>
                     patchState
                     ({
-                        snapshots,
                         snapshotLookup,
-                        data,
                         dataLookup
                     } as M)
                 ),

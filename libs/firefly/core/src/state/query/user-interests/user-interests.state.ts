@@ -53,7 +53,102 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
 
     @Selector
     ([
-        StateCityStream.data(),
+        StateCityStream.keys(),
+        StateUser.subscriptionsStatus
+    ])
+    public static streamSubscribedKeys
+    (
+        state         : StateUserInterestsModel,
+        keys          : Array<string>,
+        subscriptions : Record<string, SubscriptionPartial>
+    ) : Array<string>
+    {
+        return keys.
+            filter((id: string) =>
+                subscriptions[id] != null
+            );
+    };
+
+    @Selector
+    ([
+        StateCityStream.dataLookup(),
+        StateCityStream.keys(),
+        StateUser.subscriptionsStatus
+    ])
+    public static streamSubscribed
+    (
+        state         : StateUserInterestsModel,
+        lookup        : Record<string, StreamInterest>,
+        keys          : Array<string>,
+        subscriptions : Record<string, SubscriptionPartial>
+    ) : Array<StreamInterest>
+    {
+        const keysFiltered : Array<string> = StateUserInterests.streamSubscribedKeys(state, keys, subscriptions);
+
+        if (keysFiltered.length === 0) { return []; }
+
+        const offset : number = keysFiltered.findIndex((id: string) => lookup[id] == null);
+        const end    : number = offset === -1 ? keys.length : offset;
+
+        return keysFiltered.
+            splice(0, end).
+            map((id: string) =>
+                lookup[id]
+            );
+    };
+
+    @Selector
+    ([
+        StateCityStream.dataLookup(),
+        StateCityStream.keys(),
+        StateUser.subscriptionsStatus
+    ])
+    public static streamUnsubscribedKeys
+    (
+        state         : StateUserInterestsModel,
+        lookup        : Record<string, StreamInterest>,
+        keys          : Array<string>,
+        subscriptions : Record<string, SubscriptionPartial>
+    ) : Array<string>
+    {
+        return keys.
+            filter((id: string) =>
+                subscriptions[id] == null || lookup[id]?.on != null
+            );
+    };
+
+    @Selector
+    ([
+        StateCityStream.dataLookup(),
+        StateCityStream.keys(),
+        StateUser.subscriptionsStatus
+    ])
+    public static streamUnsubscribed
+    (
+        state         : StateUserInterestsModel,
+        lookup        : Record<string, StreamInterest>,
+        keys          : Array<string>,
+        subscriptions : Record<string, SubscriptionPartial>
+    ) : Array<StreamInterest>
+    {
+        const keysFiltered : Array<string> = StateUserInterests.streamUnsubscribedKeys(state, lookup, keys, subscriptions);
+
+        if (keysFiltered.length === 0) { return []; }
+
+        const offset : number = keysFiltered.findIndex((id: string) => lookup[id] == null);
+        const end    : number = offset === -1 ? keys.length : offset;
+
+        return keysFiltered.
+            slice(0, end).
+            map((id: string) =>
+                lookup[id]
+            );
+    };
+
+    @Selector
+    ([
+        StateCityStream.dataLookup(),
+        StateCityStream.keys(),
         StateUser.subscriptionsStatus,
         StateUser.interestType,
         StateUser.interestVirtual
@@ -61,7 +156,8 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     public static stream
     (
         state         : StateUserInterestsModel,
-        stream        : Array<StreamInterest>,
+        lookup        : Record<string, StreamInterest>,
+        keys          : Array<string>,
         subscriptions : Record<string, SubscriptionPartial>,
         interestType  : InterestType,
         virtual       : boolean
@@ -77,25 +173,30 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
                         on    : subscriptions[interest.id] == null ? false : true
                     };
                 }) :
-            stream.
-                filter((interest: StreamInterest) =>
-                    (!virtual || interest.virtual) &&
-                    ((interestType === InterestType.Subscribed && subscriptions[interest.id] != null) ||
-                     (interestType === InterestType.Unsubscribed && (subscriptions[interest.id] == null || interest.on != null)))
-                );
+        interestType === InterestType.Subscribed ?
+            StateUserInterests.streamSubscribed(state, lookup, keys, subscriptions) :
+            StateUserInterests.streamUnsubscribed(state, lookup, keys, subscriptions);
     }
 
-    @Selector([StateCityStream.data(), StateUser.subscriptionsStatus, StateUser.interestType, StateUser.interestVirtual])
+    @Selector
+    ([
+        StateCityStream.dataLookup(),
+        StateCityStream.keys(),
+        StateUser.subscriptionsStatus,
+        StateUser.interestType,
+        StateUser.interestVirtual
+    ])
     public static streamFound
     (
         state         : StateUserInterestsModel,
-        stream        : Array<StreamInterest>,
+        lookup        : Record<string, StreamInterest>,
+        keys          : Array<string>,
         subscriptions : Record<string, SubscriptionPartial>,
         interestType  : InterestType,
         virtual       : boolean
     ): boolean
     {
-        return StateUserInterests.stream(state, stream, subscriptions, interestType, virtual).length > 0;
+        return StateUserInterests.stream(state, lookup, keys, subscriptions, interestType, virtual).length > 0;
     }
 
     @Selector([StateUser.interestType, StateUser.isPublisher])
@@ -111,32 +212,37 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
 
     @Selector
     ([
-        StateUser.interestType,
         StateCityStream.finishedPaging()
     ])
     public static pageFinished
     (
         state          : StateUserInterestsModel,
-        interestType   : InterestType,
         finishedPaging : boolean
     ) : boolean
     {
-        return interestType === InterestType.Created ?
-            StateUserInterests.finishedPagingState(state) :
+        return StateUserInterests.finishedPagingState(state) &&
             finishedPaging;
     }
 
-    @Selector([StateCityStream.data(), StateUser.subscriptionsStatus, StateUser.interestType, StateUser.interestVirtual])
+    @Selector
+    ([
+        StateCityStream.dataLookup(),
+        StateCityStream.keys(),
+        StateUser.subscriptionsStatus,
+        StateUser.interestType,
+        StateUser.interestVirtual
+    ])
     public static streamEmpty
     (
         state         : StateUserInterestsModel,
-        stream        : Array<StreamInterest>,
+        lookup        : Record<string, StreamInterest>,
+        keys          : Array<string>,
         subscriptions : Record<string, SubscriptionPartial>,
         interestType  : InterestType,
         virtual       : boolean
     ): boolean
     {
-        return !StateUserInterests.streamFound(state, stream, subscriptions, interestType, virtual);
+        return !StateUserInterests.streamFound(state, lookup, keys, subscriptions, interestType, virtual);
     }
 
     @Action(ActionUserInterestsReset)

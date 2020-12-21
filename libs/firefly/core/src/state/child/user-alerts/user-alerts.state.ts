@@ -357,7 +357,6 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                     tap((data: Array<Alert>) =>
                         patchState
                         ({
-                            data,
                             dataLookup
                         })
                     )
