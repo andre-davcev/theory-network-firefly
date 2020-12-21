@@ -322,16 +322,8 @@ export class StateMobile
     @Action(ActionMobilePageInterests)
     pageInterests({ dispatch }: StateContext<StateMobileModel>, { infiniteScroll }: ActionMobilePageInterests)
     {
-        const interestType: InterestType = this.store.selectSnapshot(StateUser.interestType);
-
-        const finishedPaging : boolean = this.store.selectSnapshot
-        (
-            interestType === InterestType.Unsubscribed ?
-                StateCityStream.finishedPaging() :
-            interestType === InterestType.Subscribed ?
-                StateUserSubscriptions.finishedPaging() :
-                StateUserEvents.finishedPaging()
-        );
+        const interestType   : InterestType = this.store.selectSnapshot(StateUser.interestType);
+        const finishedPaging : boolean      = this.store.selectSnapshot(StateUserInterests.pageFinished);
 
         return finishedPaging ?
             from(infiniteScroll.complete()).

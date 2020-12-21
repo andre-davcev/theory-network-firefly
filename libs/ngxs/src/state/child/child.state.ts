@@ -31,19 +31,50 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         this.collection = collection;
     }
 
-    protected static keysState(state: any):        Array<string>                 { return state.keys; }
     protected static idState(state: any):          string                        { return state.id; }
     protected static childLookupState(state: any): Record<string, Partial<any>>  { return state.childLookup; }
     protected static sortFieldsState(state: any):  Record<string, SortField>     { return state.sortFields; }
-    protected static offsetState(state: any):      number                        { return state.offset; }
-    protected static initializedState(state: any): boolean                       { return state.initialized; }
-    protected static countState(state: any):       number                        { return StateChild.keysState(state).length; }
 
     public static id()          { return createSelector([this], (state: any) => StateChild.idState(state)); }
     public static childLookup() { return createSelector([this], (state: any) => StateChild.childLookupState(state)); }
     public static sortFields()  { return createSelector([this], (state: any) => StateChild.sortFieldsState(state)); }
-    public static offset()      { return createSelector([this], (state: any) => StateChild.offsetState(state)); }
-    public static initialized() { return createSelector([this], (state: any) => StateChild.initializedState(state)); }
+
+    protected static dataState(state: any): Array<any>
+    {
+        const dataLookup: Record<string, any> = StateCollection.dataLookupState(state);
+
+        return StateChild.
+            keysState(state).
+            map((id: string) =>
+                dataLookup[id]
+            ).
+            filter((item: any) =>
+                item != null
+            );
+    }
+
+    protected static offsetState(state: any): number
+    {
+        const dataLookup: Record<string, any> = StateCollection.dataLookupState(state);
+
+        return StateChild.
+            keysState(state).
+            findIndex((id: string) =>
+                dataLookup[id] == null
+            );
+    }
+
+    public static finishedPagingState(state: any): boolean
+    {
+        return StateChild.initializedState(state) &&
+            StateChild.dataState(state).length === StateChild.keysState(state).length;
+    }
+
+    public static data()           { return createSelector([this], (state: any) => StateChild.dataState(state)); }
+    public static offset()         { return createSelector([this], (state: any) => StateChild.offsetState(state)); }
+    public static finishedPaging() { return createSelector([this], (state: any) => StateChild.finishedPagingState(state)); }
+
+
 
     public getData(context: StateContext<M>, action: any): Observable<any>
     {
@@ -104,22 +135,19 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     {
         const { getState, patchState } = context;
 
-        const state: M      = getState();
-        const count: number = StateChild.countState(state);
+        const state: M = getState();
 
-        const { data, snapshots, snapshotLookup, dataLookup, childLookup } = state;
+        const { snapshotLookup, dataLookup, childLookup } = state;
 
-        const finishedPaging : boolean = StateChild.finishedPagingState(state) || count === data.length;
-        const keys           : Array<string> = this.getKeys(context);
-
-        patchState({ finishedPaging } as M);
+        const finishedPaging : boolean  = StateChild.finishedPagingState(state);
 
         return finishedPaging ? of(null) :
         of(null).
         pipe
         (
             map(() =>
-                keys.map((id: string) =>
+                this.getKeys(context).
+                map((id: string) =>
                     this.service.documentGet(this.collection, id)
                 )
             ),
@@ -146,23 +174,12 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             ),
 
             tap(() =>
-                keys.forEach((key: string) =>
-                {
-                    data.push(dataLookup[key]);
-                    snapshots.push(snapshotLookup[key]);
-                })
-            ),
-            tap(() =>
                 patchState
                 ({
-                    snapshots,
                     snapshotLookup,
-                    data,
                     dataLookup,
 
-                    loading: false,
-                    offset: data.length + 1,
-                    finishedPaging: data.length === Object.keys(childLookup).length - 1
+                    loading: false
                 } as M)
             )
         );
@@ -171,7 +188,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public add(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState } = context;
-        const { keys, offset, initialized } = getState();
+        const { keys, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
@@ -185,11 +202,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             {
                 keys.splice(index, 0, id);
 
-                patchState
-                ({
-                    keys,
-                    offset: offset + 1
-                } as M);
+                patchState({ keys } as M);
             })
         );
     }
@@ -198,7 +211,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     {
         const { getState, patchState } = context;
 
-        const { childLookup, keys, offset, initialized }: M = getState();
+        const { childLookup, keys, initialized }: M = getState();
 
         if (!initialized) { return of(null); }
 
@@ -215,8 +228,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 patchState
                 ({
                     childLookup,
-                    keys,
-                    offset: offset - 1
+                    keys
                 } as M);
             })
         );
@@ -286,6 +298,11 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         return keys;
     }
 
+    public getMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
+    {
+        return this.getMediaWithData(context, collection, imageType, StateChild.dataState(context.getState()));
+    }
+
     private getKeys(context: StateContext<M>): Array<string>
     {
         const { getState } = context;
@@ -295,10 +312,10 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         if (StateChild.canPageState(state))
         {
-            const { pageSize, offset } = state;
+            const { pageSize } = state;
 
             const count: number = keys.length;
-            const start: number = offset;
+            const start: number = StateChild.offsetState(state);
             const end:   number = (start + pageSize) > count ? count : (start + pageSize);
 
             return keys.slice(start, end);

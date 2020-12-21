@@ -20,9 +20,7 @@ export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
         finishedPaging: false,
 
         keys:           [],
-        snapshots:      [],
         snapshotLookup: {},
-        data:           [],
         dataLookup:     {}
     }
 };

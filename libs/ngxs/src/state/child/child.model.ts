@@ -6,5 +6,4 @@ export interface StateChildModel<T> extends StateCollectionModel<T>
     id          : string;
     sortFields  : Record<string, TypeOf>;
     childLookup : Record<string, Partial<T>>;
-    offset      : number;
 }

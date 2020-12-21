@@ -34,15 +34,24 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     protected static orderByState(state: any):          string                                     { return state.orderBy; }
     protected static orderByDirectionState(state: any): OrderBy                                    { return state.orderByDirection; }
     protected static keysState(state: any):             Array<string>                              { return state.keys; }
-    protected static snapshotsState(state: any):        Array<firestore.DocumentSnapshot>          { return state.snapshots; }
     protected static snapshotLookupState(state: any):   Record<string, firestore.DocumentSnapshot> { return state.snapshotLookup; }
-    protected static dataState(state: any):             Array<any>                                 { return state.data; }
     protected static dataLookupState(state: any):       Record<string, any>                        { return state.dataLookup; }
-    protected static countState(state: any):            number                                     { return StateCollection.snapshotsState(state).length; }
+    protected static countState(state: any):            number                                     { return StateCollection.keysState(state).length; }
     protected static foundState(state: any):            boolean                                    { return StateCollection.countState(state) > 0; }
     protected static emptyState(state: any):            boolean                                    { return StateCollection.countState(state) === 0; }
     protected static canPageState(state: any):          boolean                                    { return StateCollection.pageSizeState(state) !== PageSize.None; }
     protected static noDataState(state: any):           boolean                                    { return StateCollection.initializedState(state) && !StateCollection.loadingState(state) && !StateCollection.foundState(state); }
+
+    protected static dataState(state: any): Array<any>
+    {
+        const dataLookup: Record<string, any> = StateCollection.dataLookupState(state);
+
+        return StateCollection.
+            keysState(state).
+            map((id: string) =>
+                dataLookup[id]
+            );
+    }
 
     public static initialized()      { return createSelector([this], (state: any) => StateCollection.initializedState(state)); }
     public static loading()          { return createSelector([this], (state: any) => StateCollection.loadingState(state)); }
@@ -51,7 +60,6 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     public static orderBy()          { return createSelector([this], (state: any) => StateCollection.orderByState(state)); }
     public static orderByDirection() { return createSelector([this], (state: any) => StateCollection.orderByDirectionState(state)); }
     public static keys()             { return createSelector([this], (state: any) => StateCollection.keysState(state)); }
-    public static snapshots()        { return createSelector([this], (state: any) => StateCollection.snapshotsState(state)); }
     public static snapshotLookup()   { return createSelector([this], (state: any) => StateCollection.snapshotLookupState(state)); }
     public static data()             { return createSelector([this], (state: any) => StateCollection.dataState(state)); }
     public static dataLookup()       { return createSelector([this], (state: any) => StateCollection.dataLookupState(state)); }
@@ -80,7 +88,8 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     public add(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState } = context;
-        const { snapshots, snapshotLookup, data, dataLookup, orderBy, orderByDirection, orderByType, initialized } = getState();
+        const state: M = getState();
+        const { keys, snapshotLookup, dataLookup, orderBy, orderByDirection, orderByType, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
@@ -88,27 +97,27 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
 
         const entity: T      = action.entity == null ? snapshot.data() : action.entity;
         const id:     string = entity.id;
-        const count:  number = data.length;
+        const count:  number = StateCollection.countState(state);
         const value:  any    = this.getValue(entity[orderBy], orderByType);
 
-        let sortIndex: number = data.findIndex((object: T) =>
-            ((orderByDirection === OrderBy.Ascending  && this.getValue(object[orderBy], orderByType) > value) ||
-             (orderByDirection === OrderBy.Descending && this.getValue(object[orderBy], orderByType) < value))
-        );
+        let sortIndex: number = StateCollection.
+            dataState(state).
+            findIndex((object: T) =>
+                ((orderByDirection === OrderBy.Ascending  && this.getValue(object[orderBy], orderByType) > value) ||
+                (orderByDirection === OrderBy.Descending && this.getValue(object[orderBy], orderByType) < value))
+            );
 
         sortIndex = sortIndex === -1 ? count : sortIndex;
 
-        snapshots.splice(sortIndex, 0, snapshot);
-        data.splice(sortIndex, 0, entity);
+        keys.splice(sortIndex, 0, id);
 
         snapshotLookup[id] = snapshot;
         dataLookup[id]     = entity;
 
         patchState
         ({
-            snapshots,
+            keys,
             snapshotLookup,
-            data,
             dataLookup
         } as M)
 
@@ -119,24 +128,22 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     {
         const { getState, patchState } = context;
 
-        const { snapshots, snapshotLookup, data, dataLookup, initialized } = getState();
+        const { keys, snapshotLookup, dataLookup, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
         const id:    string = action.id;
-        const index: number = data.findIndex((entity: T) => entity.id === id);
+        const index: number = keys.findIndex((key: string) => key === id);
 
         delete snapshotLookup[id];
         delete dataLookup[id];
 
-        snapshots.splice(index, 1);
-        data.splice(index, 1);
+        keys.splice(index, 1);
 
         patchState
         ({
-            snapshots,
+            keys,
             snapshotLookup,
-            data,
             dataLookup
         } as M);
 
@@ -160,43 +167,36 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
 
         if (sync)
         {
-            const { data, dataLookup, orderBy } = getState();
+            const { keys, dataLookup, orderBy } = getState();
 
             const before : T = dataLookup[id];
 
-            indexOld       = data.findIndex((entity: T) => entity.id === id);
+            indexOld       = keys.findIndex((key: string) => key === id);
             changedOrderBy = before == null ||  before[orderBy] !== after[orderBy];
             dataLookup[id] = after;
 
             if (changedOrderBy)
             {
-                const { snapshots, snapshotLookup, orderByDirection, orderByType } = state;
+                const { orderByDirection, orderByType } = state;
 
-                const snapshot : firestore.DocumentSnapshot = snapshotLookup[id];
-                const count    : number = data.length;
-                const value    : any    = this.getValue(after[orderBy], orderByType);
+                const count : number = keys.length;
+                const value : any    = this.getValue(after[orderBy], orderByType);
 
-                snapshots.splice(indexOld, 1);
-                data.splice(indexOld, 1);
+                keys.splice(indexOld, 1);
 
-                indexNew = data.findIndex((object: T) =>
+                indexNew = StateCollection.dataState(state).findIndex((object: T) =>
                     ((orderByDirection === OrderBy.Ascending  && this.getValue(object[orderBy], orderByType) > value) ||
                      (orderByDirection === OrderBy.Descending && this.getValue(object[orderBy], orderByType) < value))
                 );
 
                 indexNew = indexNew === -1 ? count : indexNew;
 
-                snapshots.splice(indexNew, 0, snapshot);
-                data.splice(indexNew, 0, after);
+                keys.splice(indexNew, 0, id);
 
-                patchState({ snapshots } as M);
-            }
-            else
-            {
-                data[indexOld] = after;
+                patchState({ keys } as M);
             }
 
-            patchState({ data, dataLookup } as M);
+            patchState({ keys, dataLookup } as M);
         }
 
         return of
@@ -215,12 +215,16 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
 
     public getMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
     {
+        return this.getMediaWithData(context, collection, imageType, StateCollection.dataState(context.getState()));
+    }
+
+    protected getMediaWithData(context: StateContext<M>, collection: string, imageType: string, items: Array<T>): Observable<any>
+    {
         const { getState, patchState } = context;
 
         const state      : M                 = getState();
         const dataLookup : Record<string, T> = StateCollection.dataLookupState(state);
         const imageSize  : ImageSize         = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
-        const items      : Array<T>          = StateCollection.dataState(state);
 
         return items.length === 0 ? of(null) :
         of(items).
@@ -254,11 +258,7 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
                         )
                     ),
                     tap((data: Array<T>) =>
-                        patchState
-                        ({
-                            data,
-                            dataLookup
-                        } as M)
+                        patchState({ dataLookup } as M)
                     )
                 )
             )
