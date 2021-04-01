@@ -1,5 +1,5 @@
 
-import { Action, StateContext, State, Selector, Store } from '@ngxs/store';
+import { Action, StateContext, State, Selector, Store, Actions, ofActionSuccessful, NgxsOnInit } from '@ngxs/store';
 
 import { StateMobileModel } from './mobile.state.model';
 import {
@@ -31,12 +31,12 @@ import { LoadingOptions, ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
 import { NgZone, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { StateUserAlerts, ActionUserAlertsMarkRead, ActionUserInterestTypeSet, InterestType, StateUserInterests, ActionUserInterestsGetData, EventType, ActionUserEventTypeSet, ActionUserAlertsGetImages, StateUserEvents, ActionUserEventsGetData, StateUser, ActionUserSubscriptionsGet, ActionUserEventsGet, ActionUserAlertsGet, StateCityStream, StateUserSubscriptions, ActionUserInterestsGet, ActionCityStreamGet, ActionUserSubscriptionsSet } from '@firefly/core';
+import { StateUserAlerts, ActionUserAlertsMarkRead, ActionUserInterestTypeSet, InterestType, StateUserInterests, ActionUserInterestsGetData, EventType, ActionUserEventTypeSet, ActionUserAlertsGetImages, StateUserEvents, ActionUserEventsGetData, StateUser, ActionUserSubscriptionsGet, ActionUserEventsGet, ActionUserAlertsGet, StateUserSubscriptions, ActionUserInterestsGet, ActionCityStreamGet, ActionUserSubscriptionsSet, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 @State<StateMobileModel>(StateMobileOptions)
 @Injectable()
-export class StateMobile
+export class StateMobile implements NgxsOnInit
 {
     @Selector() static isLoading(state: StateMobileModel)            : boolean                { return state.loadingElement != null;}
     @Selector() static loadingElement(state: StateMobileModel)       : any                    { return state.loadingElement; }
@@ -61,11 +61,21 @@ export class StateMobile
         private actionSheet : ActionSheetController,
         private translate   : TranslateService,
         private ngZone      : NgZone,
-        private store       : Store
+        private store       : Store,
+        private actions$    : Actions
     ) { }
 
-    @Action(ActionMobileLoadingShow)
-    loadingShow({ dispatch, patchState }: StateContext<StateMobileModel>)
+    public ngxsOnInit({ dispatch }: StateContext<StateMobileModel>)
+    {
+        dispatch
+        ([
+            new ActionMobileLoadingShow(),
+            new ActionMobileLoadingHide()
+        ]);
+    }
+
+    @Action(ActionMobileLoadingShow, { cancelUncompleted: true })
+    loadingShow({ patchState, getState }: StateContext<StateMobileModel>)
     {
         const options: LoadingOptions =
         {
@@ -74,26 +84,45 @@ export class StateMobile
             cssClass:    'cpt-loading'
         };
 
-        return dispatch(new ActionMobileLoadingHide()).
+        return this.actions$.
         pipe
         (
-            switchMap(() =>  from(this.loading.create(options))),
-            tap((loadingElement: HTMLIonLoadingElement) => patchState({ loadingElement })),
-            switchMap((loadingElement: HTMLIonLoadingElement) => from(loadingElement.present()))
+            ofActionSuccessful(ActionAppLoadingShow),
+            filter(() =>
+                StateMobile.loadingElement(getState()) == null
+            ),
+            switchMap(() =>
+                from(this.loading.create(options))
+            ),
+            tap((loadingElement: HTMLIonLoadingElement) =>
+                patchState({ loadingElement })
+            ),
+            switchMap((loadingElement: HTMLIonLoadingElement) =>
+                from(loadingElement.present())
+            )
         );
     }
 
-    @Action(ActionMobileLoadingHide)
+    @Action(ActionMobileLoadingHide, { cancelUncompleted: true })
     loadingHide({ getState, patchState }: StateContext<StateMobileModel>)
     {
-        const loading: HTMLIonLoadingElement = StateMobile.loadingElement(getState());
-
-        if (loading != null)
-        {
-            loading.dismiss();
-        }
-
-        patchState({ loadingElement: undefined });
+        return this.actions$.
+        pipe
+        (
+            ofActionSuccessful(ActionAppLoadingHide),
+            map(() =>
+                StateMobile.loadingElement(getState())
+            ),
+            tap((loading: HTMLIonLoadingElement) =>
+              patchState({ loadingElement: undefined })
+            ),
+            filter((loading: HTMLIonLoadingElement) =>
+                loading != null
+            ),
+            tap((loading: HTMLIonLoadingElement) =>
+                loading.dismiss()
+            )
+        );
     }
 
     @Action(ActionMobileToast)
