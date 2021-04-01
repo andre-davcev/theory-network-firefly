@@ -2,14 +2,15 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { InterestType, EventType } from '@firefly/core/enums';
 
-import { StateFilterModel } from './filter.state.model';
+import { StateAppModel } from './app.state.model';
 
-export const StateFilterOptions: StoreOptions<StateFilterModel> =
+export const StateAppOptions: StoreOptions<StateAppModel> =
 {
-    name : 'filter',
+    name : 'app',
 
     defaults :
     {
+        loading         : false,
         interestType    : InterestType.Unsubscribed,
         interestVirtual : false,
         eventType       : EventType.Upcoming,

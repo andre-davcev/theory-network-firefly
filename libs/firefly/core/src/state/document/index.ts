@@ -1,6 +1,6 @@
+export * from './app';
 export * from './city';
 export * from './event';
-export * from './filter';
 export * from './interest';
 export * from './subscription';
 export * from './user';
