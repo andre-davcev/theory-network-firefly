@@ -56,7 +56,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                     ...item,
                     metadata:
                     {
-                        ...item.metatada,
+                        ...item.metadata,
                         index
                     }
                 })
