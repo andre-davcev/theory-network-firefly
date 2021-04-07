@@ -10,7 +10,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
 import { Observable, from, of } from 'rxjs';
-import { StateUserAlerts, StateUser } from '@firefly/core';
+import { StateUser, StateApp } from '@firefly/core';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { PageNotifications } from '../notifications';
@@ -24,11 +24,11 @@ import { PageNotifications } from '../notifications';
 
 export class PageHome extends BaseComponent
 {
-    @Select(StateMobile.menuOpen)        menuOpen$      : Observable<boolean>;
-    @Select(StateUserAlerts.unreadCount) unread$        : Observable<number>;
-    @Select(StateUserAlerts.hasUnread)   hasUnread$     : Observable<boolean>;
-    @Select(StateUser.authenticated)     authenticated$ : Observable<boolean>;
-    @Select(StateUser.isUser)            isUser$        : Observable<boolean>;
+    @Select(StateMobile.menuOpen)               menuOpen$                  : Observable<boolean>;
+    @Select(StateApp.notificationsUnreadCount)  notificationsUnreadCount$  : Observable<number>;
+    @Select(StateApp.notificationsUnreadExists) notificationsUnreadExists$ : Observable<boolean>;
+    @Select(StateUser.authenticated)            authenticated$             : Observable<boolean>;
+    @Select(StateUser.isUser)                   isUser$                    : Observable<boolean>;
 
     @ViewChild(IonSearchbar, { static: false })
     private searchbar: IonSearchbar;
@@ -101,12 +101,12 @@ export class PageHome extends BaseComponent
             component: ComponentHomeOptions,
             componentProps:
             {
-                interestType : this.store.selectSnapshot(StateUser.interestType),
-                eventType    : this.store.selectSnapshot(StateUser.eventType),
+                interestType : this.store.selectSnapshot(StateApp.interestType),
+                eventType    : this.store.selectSnapshot(StateApp.eventType),
                 isStream,
                 virtual      : isStream ?
-                                  this.store.selectSnapshot(StateUser.interestVirtual) :
-                                  this.store.selectSnapshot(StateUser.eventVirtual)
+                                  this.store.selectSnapshot(StateApp.interestVirtual) :
+                                  this.store.selectSnapshot(StateApp.eventVirtual)
 
             },
             event,

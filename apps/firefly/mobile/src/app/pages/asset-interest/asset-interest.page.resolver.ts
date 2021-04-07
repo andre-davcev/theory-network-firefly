@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { ActionInterestSetId, ActionInterestEventsGet, ActionInterestEventsReset } from '@firefly/core';
+import { ActionInterestSetId, ActionInterestEventsGet, ActionInterestEventsReset, ActionAppLoadingHide } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
 import { ActionMobileLoadingHide } from '@firefly/mobile';
 
@@ -27,7 +27,7 @@ export class ResolverPageAssetInterest implements Resolve<void>
                     ])
                 ),
                 switchMap(() =>
-                    this.store.dispatch(new ActionMobileLoadingHide())
+                    this.store.dispatch(new ActionAppLoadingHide())
                 )
             )
         }

@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserInterests, ActionUserSubscriptionOnOff, ActionInterestGet, ActionEventGet } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, StateUserInterests, ActionUserSubscriptionOnOff, ActionInterestGet, ActionEventGet, ActionAppPageInterests, ActionAppLoadingShow, StateApp } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
-import { ActionMobileAuthSelect, Pages, ActionMobileLoadingShow, StateSearch, ActionSearchReset, ActionMobilePageInterests } from '@firefly/mobile';
+import { ActionMobileAuthSelect, Pages, StateSearch, ActionSearchReset } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { IonInfiniteScroll } from '@ionic/angular';
 
@@ -19,14 +19,14 @@ import { IonInfiniteScroll } from '@ionic/angular';
 
 export class PageStream extends BaseComponent implements OnInit
 {
-    @Select(StateUser.authenticated)        authenticated$: Observable<boolean>;
-    @Select(StateInterest.events)           events$:        Observable<Event[]>;
-    @Select(StateUserInterests.stream)      stream$:        Observable<Array<StreamInterest>>;
-    @Select(StateUserInterests.streamFound) found$:         Observable<boolean>;
-    @Select(StateUserInterests.streamEmpty) empty$:         Observable<boolean>;
-    @Select(StateUserInterests.streamAdd)   add$:           Observable<boolean>;
-    @Select(StateUser.subscriptionsStatus)  subscriptions$: Observable<Record<string, SubscriptionPartial>>;
-    @Select(StateUser.streamEmptyMessage)   emptyMessage$:  Observable<string>;
+    @Select(StateUser.authenticated)        authenticated$:      Observable<boolean>;
+    @Select(StateInterest.events)           events$:             Observable<Event[]>;
+    @Select(StateApp.stream)                stream$:             Observable<Array<StreamInterest>>;
+    @Select(StateApp.streamFound)           found$:              Observable<boolean>;
+    @Select(StateApp.streamEmpty)           empty$:              Observable<boolean>;
+    @Select(StateApp.streamAdd)             add$:                Observable<boolean>;
+    @Select(StateUser.subscriptionsStatus)  subscriptions$:      Observable<Record<string, SubscriptionPartial>>;
+    @Select(StateApp.streamEmptyMessage)    emptyMessage$:       Observable<string>;
     @Select(StateSearch.searchResults)      searchResults$:      Observable<Array<Interest>>;
     @Select(StateSearch.searchResultsFound) searchResultsFound$: Observable<boolean>;
 
@@ -101,7 +101,7 @@ export class PageStream extends BaseComponent implements OnInit
     public selectInterest(interest: Interest)
     {
       this.store.dispatch([
-        new ActionMobileLoadingShow(),
+        new ActionAppLoadingShow(),
         new Navigate([Pages.InterestDetail], {id: interest.id})
       ])
     }
@@ -114,7 +114,7 @@ export class PageStream extends BaseComponent implements OnInit
           this.store.dispatch(new ActionInterestGet(interest.id))),
         switchMap(() =>
           this.store.dispatch([
-            new ActionMobileLoadingShow(),
+            new ActionAppLoadingShow(),
             new ActionSearchReset(),
             new Navigate([Pages.InterestDetail], {id: interest.id})
           ]))
@@ -133,12 +133,12 @@ export class PageStream extends BaseComponent implements OnInit
 
     public loadData(event: any): void
     {
-        this.store.dispatch(new ActionMobilePageInterests(this.infiniteScroll));
+        this.store.dispatch(new ActionAppPageInterests(this.infiniteScroll));
     }
 
     public select(event: Event): void
     {
-        this.store.dispatch(new ActionMobileLoadingShow()).
+        this.store.dispatch(new ActionAppLoadingShow()).
         pipe
         (
             switchMap(() =>
@@ -147,7 +147,7 @@ export class PageStream extends BaseComponent implements OnInit
             switchMap(() =>
                 this.store.dispatch
                 ([
-                    new ActionMobileLoadingShow(),
+                    new ActionAppLoadingShow(),
                     new Navigate([Pages.NotificationDetail, event.id])
                 ])
             )

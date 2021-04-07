@@ -5,14 +5,14 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateUserInterests, ActionInterestSetId, ActionEventInterestAdd, IconType } from '@firefly/core';
+import { StateUserInterests, ActionInterestSetId, ActionEventInterestAdd, IconType, ActionAppLoadingShow } from '@firefly/core';
 import { Interest } from '@firefly/cloud';
 
-import { Pages, ActionMobileLoadingShow } from '@firefly/mobile';
+import { Pages } from '@firefly/mobile';
 import { ModalController, MenuController } from '@ionic/angular';
 import { StateStorage, StorageImage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
-import { takeUntil, switchMap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { StateMobile } from '@firefly/mobile';
 
 @Component
@@ -89,7 +89,7 @@ export class PageAssetsInterests extends BaseComponent implements OnInit
         else
         {
           this.store.dispatch([
-            new ActionMobileLoadingShow(),
+            new ActionAppLoadingShow(),
             new Navigate([Pages.AssetInterest], {id: interest.id}, {state: {isInterestDetail:true}})
           ])
         }

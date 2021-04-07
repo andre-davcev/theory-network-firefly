@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { StateUserEvents, ActionEventSetId, IconType } from '@firefly/core';
+import { StateUserEvents, ActionEventSetId, IconType, ActionAppLoadingShow } from '@firefly/core';
 import { Event } from '@firefly/cloud';
 import { Observable } from 'rxjs';
 import { Navigate } from '@ngxs/router-plugin';
-import { Pages, ActionMobileLoadingShow } from '@firefly/mobile';
+import { Pages } from '@firefly/mobile';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
 import { StateMobile } from '@firefly/mobile';
@@ -63,7 +63,7 @@ export class PageAssetsEvents extends BaseComponent implements OnInit
     public select(object: Event): void
     {
         this.store.dispatch([
-          new ActionMobileLoadingShow(),
+          new ActionAppLoadingShow(),
           new Navigate([Pages.EventDetail, object.id])
         ]);
         //this.store.dispatch(new ActionEventSetId(object.id));

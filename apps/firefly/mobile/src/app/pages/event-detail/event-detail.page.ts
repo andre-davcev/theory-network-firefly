@@ -7,8 +7,8 @@ import { AlertController, ModalController, NavController } from '@ionic/angular'
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, ActionEventAccept, ActionEventDeny, Translation, ActionUserEventsDelete } from '@firefly/core';
-import { ActionMobileLoadingShow, ActionMobileToast, ActionMobileLoadingHide } from '@firefly/mobile';
+import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, ActionEventAccept, ActionEventDeny, Translation, ActionUserEventsDelete, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
+import { ActionMobileToast } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
@@ -106,7 +106,7 @@ export class PageEventDetail
                     source:     CameraSource.Photos
                 };
 
-                this.store.dispatch(new ActionMobileLoadingShow()).
+                this.store.dispatch(new ActionAppLoadingShow()).
                 pipe
                 (
                     switchMap(() => from(Camera.getPhoto(options))),
@@ -193,7 +193,7 @@ export class PageEventDetail
 
     public selectIcon(): void
     {
-        this.store.dispatch(new ActionMobileLoadingShow()).
+        this.store.dispatch(new ActionAppLoadingShow()).
         pipe
         (
             switchMap(() =>
@@ -203,7 +203,7 @@ export class PageEventDetail
                 this.store.dispatch(new ActionEventPatchMetadata({ icon }))
             ),
             finalize(() =>
-                this.store.dispatch(new ActionMobileLoadingHide())
+                this.store.dispatch(new ActionAppLoadingHide())
             )
         ).
         subscribe();
@@ -211,7 +211,7 @@ export class PageEventDetail
 
     public selectImage(): void
     {
-        this.store.dispatch(new ActionMobileLoadingShow()).
+        this.store.dispatch(new ActionAppLoadingShow()).
         pipe
         (
             switchMap(() =>
@@ -221,7 +221,7 @@ export class PageEventDetail
                 this.store.dispatch(new ActionEventPatchMetadata({ image }))
             ),
             finalize(() =>
-                this.store.dispatch(new ActionMobileLoadingHide())
+                this.store.dispatch(new ActionAppLoadingHide())
             )
         ).
         subscribe();
@@ -261,7 +261,7 @@ export class PageEventDetail
             switchMap((translations: Record<string, string>) =>
                 this.store.dispatch
                 ([
-                    new ActionMobileLoadingShow(),
+                    new ActionAppLoadingShow(),
                     new ActionEventSave()
                 ]).
                 pipe
@@ -278,7 +278,7 @@ export class PageEventDetail
                             of(translations[Translation.PageEventUpdateError])
                     ),
                     finalize(() =>
-                        this.store.dispatch(new ActionMobileLoadingHide())
+                        this.store.dispatch(new ActionAppLoadingHide())
                     )
                 )
             )

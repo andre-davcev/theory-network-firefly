@@ -3,9 +3,8 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 
-import { ActionUserProfileSetId, StateUserProfile } from '@firefly/core';
+import { ActionAppLoadingHide, ActionAppLoadingShow, ActionUserProfileSetId, StateUserProfile } from '@firefly/core';
 import { switchMap, take } from 'rxjs/operators';
-import { ActionMobileLoadingHide, ActionMobileLoadingShow } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageUserProfile implements Resolve<void>
@@ -23,11 +22,11 @@ export class ResolverPageUserProfile implements Resolve<void>
             switchMap((initialized: boolean) =>
                 initialized ?
                     of(null) :
-                    this.store.dispatch(new ActionMobileLoadingShow()).
+                    this.store.dispatch(new ActionAppLoadingShow()).
                     pipe
                     (
                         switchMap(() => this.store.dispatch(new ActionUserProfileSetId())),
-                        switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
+                        switchMap(() => this.store.dispatch(new ActionAppLoadingHide()))
                     )
             )
         );

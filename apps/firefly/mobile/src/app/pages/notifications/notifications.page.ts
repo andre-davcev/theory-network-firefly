@@ -4,7 +4,7 @@ import { AlertController, IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, BehaviorSubject } from 'rxjs';
 
-import { StateUserAlerts, ActionUserAlertsGo, IconType, ActionUserAlertsDelete, Translation } from '@firefly/core';
+import { StateUserAlerts, ActionUserAlertsGo, IconType, ActionUserAlertsDelete, Translation, StateApp } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
@@ -20,9 +20,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class PageNotifications extends BaseComponent
 {
-    @Select(StateUserAlerts.list)          alerts$    : Observable<Array<Alert>>;
-    @Select(StateUserAlerts.listEmpty)     empty$     : Observable<boolean>;
-    @Select(StateUserAlerts.hasUnreadList) hasUnread$ : Observable<boolean>;
+    @Select(StateApp.notifications)      notifications$      : Observable<Array<Alert>>;
+    @Select(StateApp.notificationsExist) notificationsExist$ : Observable<boolean>;
 
     @ViewChild('slider', { static: false })
     protected sliderRef: IonSlides;
