@@ -3,7 +3,6 @@ import { Credentials } from '@theory/core';
 
 import { User, MetadataUser } from '@firefly/cloud';
 import { ActionsUser } from './user.actions.enum';
-import { InterestType, EventType } from '@firefly/core/enums';
 
 export class ActionUserReset         { static readonly type = ActionsUser.Reset;         constructor() { } }
 export class ActionUserGet           { static readonly type = ActionsUser.Get;           constructor(public id: string) { } }

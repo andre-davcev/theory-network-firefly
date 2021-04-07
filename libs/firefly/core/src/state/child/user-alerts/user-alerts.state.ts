@@ -74,64 +74,6 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         );
     }
 
-
-
-    @Selector() static read(state: StateUserAlertsModel)          : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => alert.read); }
-    @Selector() static readList(state: StateUserAlertsModel)      : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => alert.read && !alert.metadata?.sessionRead); }
-    @Selector() static unread(state: StateUserAlertsModel)        : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read); }
-    @Selector() static unreadList(state: StateUserAlertsModel)    : Array<Alert> { return StateUserAlerts.alerts(state).filter((alert: Alert) => !alert.read || alert.metadata?.sessionRead); }
-    @Selector() static readCount(state: StateUserAlertsModel)     : number       { return StateUserAlerts.read(state).length; }
-    @Selector() static unreadCount(state: StateUserAlertsModel)   : number       { return StateUserAlerts.unread(state).length; }
-    @Selector() static hasRead(state: StateUserAlertsModel)       : boolean      { return StateUserAlerts.readCount(state) > 0; }
-    @Selector() static hasUnread(state: StateUserAlertsModel)     : boolean      { return StateUserAlerts.unreadCount(state) > 0; }
-    @Selector() static hasUnreadList(state: StateUserAlertsModel) : boolean      { return StateUserAlerts.unreadList(state).length > 0; }
-
-    @Selector() static alerts(state: StateUserAlertsModel) : Array<Alert>
-    {
-        return StateUserAlerts.
-            dataState(state).
-            map((alert: Alert, index: number) =>
-            {
-                alert.metadata.index = index;
-
-                return alert;
-            });
-    }
-
-    @Selector([StateUser.eventVirtual])
-    public static list
-    (
-        state   : StateUserAlertsModel,
-        virtual : boolean
-    ) : Array<Alert>
-    {
-        return StateUserAlerts.
-            unreadList(state).
-            filter((alert: Alert) =>
-                !virtual || alert.virtual
-            );
-    }
-
-    @Selector([StateUser.eventVirtual])
-    public static listFound
-    (
-        state   : StateUserAlertsModel,
-        virtual : boolean
-    ) : boolean
-    {
-        return StateUserAlerts.list(state, virtual).length > 0;
-    }
-
-    @Selector([StateUser.eventVirtual])
-    public static listEmpty
-    (
-        state   : StateUserAlertsModel,
-        virtual : boolean
-    ) : boolean
-    {
-        return StateUserAlerts.list(state, virtual).length === 0;
-    }
-
     @Action(ActionUserAlertsReset)
     reset(context: StateContext<StateUserAlertsModel>, action: ActionUserAlertsReset)
     {

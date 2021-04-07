@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { ActionInterestSetId, ActionInterestEventsReset, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateUser, InterestType } from '@firefly/core';
+import { ActionInterestSetId, ActionInterestEventsReset, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, InterestType, StateApp } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
 import { ActionMobileLoadingHide } from '@firefly/mobile';
 
@@ -14,7 +14,7 @@ export class ResolverPageInterestDetail implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-        const interestType = this.store.selectSnapshot(StateUser.interestType);
+        const interestType = this.store.selectSnapshot(StateApp.interestType);
 
         if(route.queryParams.id == null)
         {

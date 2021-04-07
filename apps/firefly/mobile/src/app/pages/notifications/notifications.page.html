@@ -16,21 +16,21 @@
 <section class="cpt-events"
          fxLayout="column"
          fxLayoutAlign="center">
-    <ion-slides *ngIf="(didInit$ | async) && (hasUnread$ | async)"
+    <ion-slides *ngIf="(didInit$ | async) && (notificationsExist$ | async)"
                 #slider
                 pager="true"
                 (ionSlideDidChange)="slideChanged()"
                 [options]="slideOptions">
-        <ion-slide #status *ngFor="let alert of alerts$ | async">
-            <app-slide [slide]="alert"
+        <ion-slide #status *ngFor="let notification of notifications$ | async">
+            <app-slide [slide]="notification"
                         [buttonText]="'general.go' | translate"
-                        (alertDeleteClicked)="delete(alert)"
-                        (alertGoClicked)="go(alert)">
+                        (alertDeleteClicked)="delete(notification)"
+                        (alertGoClicked)="go(notification)">
             </app-slide>
         </ion-slide>
     </ion-slides>
 
-    <app-icon-message *ngIf="empty$ | async"
+    <app-icon-message *ngIf="!(notificationsExist$ | async)"
                       slot="fixed"
                       [icon]="IconType.Alerts"
                       [message]="'page.events.empty.new' | translate">
