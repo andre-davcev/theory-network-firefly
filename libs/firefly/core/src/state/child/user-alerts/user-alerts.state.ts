@@ -1,4 +1,4 @@
-import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
+import { State, Action, StateContext, Store } from '@ngxs/store';
 
 import { Alert, AlertPartial } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
@@ -274,7 +274,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                     pipe
                     (
                         switchMap(() =>
-                            !item.read ?
+                            item.metadata?.image == null ?
                                 this.storage.downloadUrl(`${Collection.Events}/${item.id}/${ImageType.Image}.jpeg`, ImageSize.Medium) :
                                 of(item.metadata.image)
                         ),
