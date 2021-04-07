@@ -78,7 +78,6 @@ export class StateApp
         return StateApp.notificationsUnreadCount(state, alerts) > 0
     }
 
-    // START StateUserEvents.list
     @Selector
     ([
         StateUserAlerts.data(),
@@ -156,7 +155,6 @@ export class StateApp
         return StateApp.calendar(state, alerts, events).length > 0;
     }
 
-    // StateUserEvents.add
     @Selector([StateUser.isPublisher])
     public static calendarCanAdd
     (
@@ -181,7 +179,6 @@ export class StateApp
             'page.events.empty.created';
     }
 
-    // StateApp.pageFinished
     @Selector
     ([
         StateApp.eventType,
@@ -201,8 +198,6 @@ export class StateApp
             finishedPagingAlerts;
     }
 
-
-    // START StateUserInterests
     @Selector()
     static streamEmptyMessage(state: StateAppModel) : string
     {
@@ -325,8 +320,6 @@ export class StateApp
     {
         return finishedUserInterests && finishedStream;
     }
-
-
 
     @Selector
     ([
