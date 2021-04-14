@@ -29,6 +29,7 @@ onRun(async (context: EventContext) =>
     let nearby   : Record<string, number>;
     let interest : Interest;
 
+    // Process and save all public interests
     query.forEach((snapshot: QueryDocumentSnapshot) =>
     {
         interest                = snapshot.data() as Interest;
@@ -40,11 +41,12 @@ onRun(async (context: EventContext) =>
 
     query = await database.collection(Collection.Cities).get();
 
+    // Process and save all cities
     query.forEach((snapshot: QueryDocumentSnapshot) =>
     {
         id                    = snapshot.id;
         citySubscriberMax[id] = 0;
-        cityInterests[id]      = [];
+        cityInterests[id]     = [];
         cityDistanceScore[id] = {};
         nearby                = (snapshot.data() as City).nearby;
 
@@ -61,8 +63,9 @@ onRun(async (context: EventContext) =>
     let event           : Event;
     let subscriberCount : number;
 
-    query = await database.collection(Collection.Events).get();
+    query = await database.collection(Collection.Events).where('private', '==', false).get();
 
+    // Process and save all events
     query.forEach((snapshot: QueryDocumentSnapshot) =>
     {
         id              = snapshot.id;
@@ -105,6 +108,7 @@ onRun(async (context: EventContext) =>
     let cityEvents       : Record<string, Array<string>>;
     let cityStream       : Record<string, StreamInterest>;
 
+    // Process all cities and cities nearby
     Object.keys(citiesNearby).forEach((cityId: string) =>
     {
         nearby         = citiesNearby[cityId];
