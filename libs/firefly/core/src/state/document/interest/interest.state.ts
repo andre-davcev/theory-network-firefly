@@ -38,7 +38,7 @@ import { of, from, forkJoin } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
 import { StateCityStream } from '@firefly/core/state/child/city-stream';
 import { Injectable } from '@angular/core';
-import { Collection, ImageType } from '@firefly/core/enums';
+import { Collection, ImageType, InterestType } from '@firefly/core/enums';
 
 @State<StateInterestModel>(StateInterestOptions)
 @Injectable()
@@ -193,7 +193,12 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     setIdAnonymous({ dispatch }: StateContext<StateInterestModel>, { id }: ActionInterestSetIdAnonymous)
     {
         const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
-        const data: Interest = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
+        const type:String =  this.store.selectSnapshot(StateUser.interestType);
+
+        const data:Interest =  type === InterestType.Created ?
+         this.store.selectSnapshot(StateUserInterests.dataLookup())[id]:
+         this.store.selectSnapshot(StateCityStream.dataLookup())[id];
+
 
         return dispatch(new ActionInterestSet(snapshot, data));
     }
