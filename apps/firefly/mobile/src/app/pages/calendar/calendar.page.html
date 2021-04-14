@@ -56,14 +56,14 @@
 
     <ion-content>
         <ion-list>
-            <app-item-events *ngFor="let events of events$ | async"
+            <app-item-events *ngFor="let events of calendar$ | async"
                             [dateEvents]="events"
                             (selected)="navigate($event)"
                             (deleted)="delete($event)">
             </app-item-events>
         </ion-list>
 
-        <app-button-add *ngIf="add$ | async"
+        <app-button-add *ngIf="calendarCanAdd$ | async"
                     (clicked)="add()"
                     slot="fixed">
         </app-button-add>
@@ -76,7 +76,7 @@
         </ion-infinite-scroll>
     </ion-content>
 
-    <app-icon-message *ngIf="empty$ | async"
+    <app-icon-message *ngIf="!(calendarExists$ | async)"
               slot="fixed"
               [icon]="IconType.Alerts"
               [message]="(emptyMessage$ | async) | translate">

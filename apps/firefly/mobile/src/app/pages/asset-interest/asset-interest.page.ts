@@ -5,10 +5,10 @@ import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, StateUser, InterestType, Translation } from '@firefly/core';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, InterestType, Translation, StateApp, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
 import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
-import { ActionMobileLoadingShow, ActionMobileLoadingHide, ActionMobileToast } from '@firefly/mobile';
+import { ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
@@ -86,7 +86,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
 
     public save(): void
     {
-        const interestType : InterestType = this.store.selectSnapshot(StateUser.interestType);
+        const interestType : InterestType = this.store.selectSnapshot(StateApp.interestType);
         const isNew        : boolean      = this.store.selectSnapshot(StateInterest.isNew());
 
         this.translate.get
@@ -101,7 +101,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
             switchMap((translations: Record<string, string>) =>
                 this.store.dispatch
                 ([
-                    new ActionMobileLoadingShow(),
+                    new ActionAppLoadingShow(),
                     new ActionInterestSave()
                 ]).
                 pipe
@@ -119,7 +119,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
                     finalize(() =>
                         ([
                           this.store.dispatch(new ActionCityStreamGet()),
-                          this.store.dispatch(new ActionMobileLoadingHide())
+                          this.store.dispatch(new ActionAppLoadingHide())
                         ])
                     )
                 )
@@ -137,12 +137,12 @@ export class PageAssetInterest extends BaseComponent implements OnInit
 
     public select(object: Event): void
     {
-        this.store.dispatch(new ActionMobileLoadingShow()).
+        this.store.dispatch(new ActionAppLoadingShow()).
         pipe
         (
             switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
             switchMap(() => this.store.dispatch([
-              new ActionMobileLoadingHide(),
+              new ActionAppLoadingHide(),
               new Navigate([Pages.EventDetail, object.id])
             ]))
         ).subscribe();
@@ -154,7 +154,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
 
     public selectImage(): void
     {
-        this.store.dispatch(new ActionMobileLoadingShow()).
+        this.store.dispatch(new ActionAppLoadingShow()).
         pipe
         (
             switchMap(() =>
@@ -164,7 +164,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
                 this.store.dispatch(new ActionInterestPatchMetadata({ image }))
             ),
             finalize(() =>
-                this.store.dispatch(new ActionMobileLoadingHide())
+                this.store.dispatch(new ActionAppLoadingHide())
             )
         ).
         subscribe();

@@ -30,12 +30,6 @@ export enum ActionsUser
     SubscriptionRemove  = '[User] Subscription Remove',
     SubscriptionOnOff   = '[User] Subscription On/Off',
 
-    NotificationsSet = '[User] Notifications Set',
-
-    InterestTypeSet    = '[User] Interest Type Set',
-    InterestVirtualSet = '[User] Interest Virtual Set',
-    EventTypeSet       = '[User] Event Type Set',
-    EventVirtualSet    = '[User] Event Virtual Set',
-
-    IsPublisherSet = '[User] Is Publisher Set'
+    NotificationsSet  = '[User] Notifications Set',
+    IsPublisherSet    = '[User] Is Publisher Set'
 }

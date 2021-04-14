@@ -4,10 +4,9 @@ import { StatusBarStyle } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/core';
+import { ActionAppLoadingHide, ActionAppLoadingShow, ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/core';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
-import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
 import { switchMap, tap } from 'rxjs/operators';
 import { Place } from '@firefly/cloud';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
@@ -71,7 +70,7 @@ export class PageEventLocation extends BaseComponent
 
     public done(): void
     {
-        this.store.dispatch(new ActionMobileLoadingShow()).pipe
+        this.store.dispatch(new ActionAppLoadingShow()).pipe
         (
             switchMap(() =>
                 this.location.addCity(this.place)
@@ -83,7 +82,7 @@ export class PageEventLocation extends BaseComponent
                 this.store.dispatch
                 ([
                     new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}),
-                    new ActionMobileLoadingHide()
+                    new ActionAppLoadingHide()
                 ])
             ),
             tap(() =>

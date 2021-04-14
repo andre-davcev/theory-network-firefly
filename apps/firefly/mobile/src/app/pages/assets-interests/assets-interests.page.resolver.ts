@@ -4,8 +4,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { ActionUserInterestsGetData, StateUserInterests } from '@firefly/core';
-import { ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
+import { ActionAppLoadingHide, ActionAppLoadingShow, ActionUserInterestsGetData, StateUserInterests } from '@firefly/core';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetsInterests implements Resolve<void>
@@ -23,12 +22,12 @@ export class ResolverPageAssetsInterests implements Resolve<void>
             switchMap((initialized: boolean) =>
                 initialized ?
                     of(null) :
-                    this.store.dispatch(new ActionMobileLoadingShow()).
+                    this.store.dispatch(new ActionAppLoadingShow()).
                     pipe
                     (
                         switchMap(() => this.store.dispatch(new ActionUserInterestsGetData())),
                         //switchMap(() => this.store.dispatch(new ActionUserIconsGetData())),
-                        switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
+                        switchMap(() => this.store.dispatch(new ActionAppLoadingHide()))
                     )
             )
         )

@@ -50,6 +50,16 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             ).
             filter((item: any) =>
                 item != null
+            ).
+            map((item: any, index: number) =>
+                ({
+                    ...item,
+                    metadata:
+                    {
+                        ...item.metadata,
+                        index
+                    }
+                })
             );
     }
 

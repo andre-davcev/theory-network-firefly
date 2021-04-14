@@ -25,7 +25,7 @@ import {
   StateUserEvents,
   StateCityStream,
   StateUserSubscriptions,
-  StateUserProfile, StateCity
+  StateUserProfile, StateCity, StateApp
 } from '@firefly/core';
 import { StateNotifications, StateSearch } from '@firefly/mobile';
 import { environment } from '@firefly/app/env';
@@ -91,6 +91,7 @@ export function createTranslateLoader(http: HttpClient)
 
             StateInterest,
             StateEvent,
+            StateApp,
             StateSubscription,
             StateUser,
             StateCity,
