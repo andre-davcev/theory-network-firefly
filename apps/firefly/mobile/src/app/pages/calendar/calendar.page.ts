@@ -17,7 +17,10 @@ import {
     ActionInterestGet,
     ActionUserEventsDelete,
     StateUserEvents,
-    Translation
+    Translation,
+    StateApp,
+    ActionAppLoadingShow,
+    ActionAppPageEvents
 } from '@firefly/core';
 import {
     ActionMobileAuthSelect,
@@ -26,9 +29,7 @@ import {
     Pages,
     StateMobile,
     StateSearch,
-    ActionSearchReset,
-    ActionMobileLoadingShow,
-    ActionMobilePageEvents
+    ActionSearchReset
 } from '@firefly/mobile';
 import algoliaSearch, { SearchIndex, SearchClient } from 'algoliasearch/lite';
 import { TranslateService } from '@ngx-translate/core';
@@ -42,16 +43,16 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class PageCalendar extends BaseComponent
 {
-    @Select(StateUser.isPublisher)           isPublisher$        : Observable<boolean>;
-    @Select(StateUserEvents.list)            events$             : Observable<Array<DateEvents>>;
-    @Select(StateUserEvents.listEmpty)       empty$              : Observable<boolean>;
-    @Select(StateUserEvents.add)             add$                : Observable<boolean>;
-    @Select(StateUser.eventType)             eventType$          : Observable<EventType>;
-    @Select(StateUser.eventsEmptyMessage)    emptyMessage$       : Observable<string>;
-    @Select(StateSearch.searchResults)       searchResults$      : Observable<Array<Interest>>;
-    @Select(StateSearch.searchResultsFound)  searchResultsFound$ : Observable<boolean>;
-    @Select(StateMobile.menuOpen)            menuOpen$           : Observable<boolean>;
-    @Select(StateUser.authenticated)         authenticated$      : Observable<boolean>;
+    @Select(StateUser.isPublisher)           isPublisher$          : Observable<boolean>;
+    @Select(StateApp.calendar)               calendar$             : Observable<Array<DateEvents>>;
+    @Select(StateApp.calendarExists)         calendarExists$       : Observable<boolean>;
+    @Select(StateApp.calendarCanAdd)         calendarCanAdd$       : Observable<boolean>;
+    @Select(StateApp.calendarEmptyMessage)   calendarEmptyMessage$ : Observable<string>;
+    @Select(StateApp.eventType)              eventType$            : Observable<EventType>;
+    @Select(StateSearch.searchResults)       searchResults$        : Observable<Array<Interest>>;
+    @Select(StateSearch.searchResultsFound)  searchResultsFound$   : Observable<boolean>;
+    @Select(StateMobile.menuOpen)            menuOpen$             : Observable<boolean>;
+    @Select(StateUser.authenticated)         authenticated$        : Observable<boolean>;
 
     public Pages     : any = Pages;
     public IconType  : any = IconType;
@@ -155,7 +156,7 @@ export class PageCalendar extends BaseComponent
             switchMap(() =>
                 this.store.dispatch
                 ([
-                    new ActionMobileLoadingShow(),
+                    new ActionAppLoadingShow(),
                     new ActionSearchReset(),
                     new Navigate([Pages.InterestDetail], {id: interest.id})
                 ]))
@@ -186,10 +187,10 @@ export class PageCalendar extends BaseComponent
             component: ComponentHomeOptions,
             componentProps:
             {
-                interestType : this.store.selectSnapshot(StateUser.interestType),
-                eventType    : this.store.selectSnapshot(StateUser.eventType),
+                interestType : this.store.selectSnapshot(StateApp.interestType),
+                eventType    : this.store.selectSnapshot(StateApp.eventType),
                 isStream     : false,
-                virtual      : this.store.selectSnapshot(StateUser.eventVirtual)
+                virtual      : this.store.selectSnapshot(StateApp.eventVirtual)
 
             },
             event,
@@ -224,6 +225,6 @@ export class PageCalendar extends BaseComponent
 
     public loadData(event): void
     {
-        this.store.dispatch(new ActionMobilePageEvents(this.infiniteScroll));
+        this.store.dispatch(new ActionAppPageEvents(this.infiniteScroll));
     }
 }

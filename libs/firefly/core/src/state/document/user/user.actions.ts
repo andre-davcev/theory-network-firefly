@@ -3,7 +3,6 @@ import { Credentials } from '@theory/core';
 
 import { User, MetadataUser } from '@firefly/cloud';
 import { ActionsUser } from './user.actions.enum';
-import { InterestType, EventType } from '@firefly/core/enums';
 
 export class ActionUserReset         { static readonly type = ActionsUser.Reset;         constructor() { } }
 export class ActionUserGet           { static readonly type = ActionsUser.Get;           constructor(public id: string) { } }
@@ -35,11 +34,4 @@ export class ActionUserSubscriptionRemove { static readonly type = ActionsUser.S
 export class ActionUserSubscriptionOnOff  { static readonly type = ActionsUser.SubscriptionOnOff;  constructor(public id: string, public on: boolean) { } }
 
 export class ActionUserNotificationsSet { static readonly type = ActionsUser.NotificationsSet; constructor() { } }
-
-export class ActionUserInterestTypeSet    { static readonly type = ActionsUser.InterestTypeSet;    constructor(public interestType: InterestType) { } }
-export class ActionUserInterestVirtualSet { static readonly type = ActionsUser.InterestVirtualSet; constructor(public virtual: boolean) { } }
-
-export class ActionUserEventTypeSet    { static readonly type = ActionsUser.EventTypeSet;    constructor(public eventType:    EventType) { } }
-export class ActionUserEventVirtualSet { static readonly type = ActionsUser.EventVirtualSet; constructor(public virtual: boolean) { } }
-
-export class ActionUserIsPublisherSet  { static readonly type = ActionsUser.IsPublisherSet;  constructor(public isPublisher:  boolean) { } }
+export class ActionUserIsPublisherSet   { static readonly type = ActionsUser.IsPublisherSet;  constructor(public isPublisher:  boolean) { } }

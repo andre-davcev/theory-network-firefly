@@ -7,8 +7,8 @@ import { RouterNavigation } from '@ngxs/router-plugin';
 
 import { PlatformEnum } from '@theory/ionic';
 
-import { Pages, ActionMobileAuthSelected, StateMobile, ActionMobileFilterEvents, ActionMobileLoadingShow, ActionMobileLoadingHide } from '@firefly/mobile';
-import { ActionUserLogout, StateUser, IconType, Color, IconSize, ActionCityWatch, ActionUserAuthenticate } from '@firefly/core';
+import { Pages, ActionMobileAuthSelected, StateMobile } from '@firefly/mobile';
+import { ActionUserLogout, StateUser, IconType, Color, IconSize, ActionCityWatch, ActionUserAuthenticate, ActionAppFilterEvents, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
 import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
 import { PageLogin } from '../pages';
@@ -105,7 +105,7 @@ export class ComponentApp
 
         if (page === Pages.Calendar)
         {
-            this.store.dispatch(new ActionMobileFilterEvents()).
+            this.store.dispatch(new ActionAppFilterEvents()).
             pipe
             (
                 switchMap(() =>
@@ -128,7 +128,7 @@ export class ComponentApp
     {
         this.menu.close();
 
-        this.store.dispatch(new ActionMobileLoadingShow()).
+        this.store.dispatch(new ActionAppLoadingShow()).
         pipe
         (
             switchMap(() =>
@@ -138,7 +138,7 @@ export class ComponentApp
                 this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream))
             ),
             finalize(() =>
-                this.store.dispatch(new ActionMobileLoadingHide())
+                this.store.dispatch(new ActionAppLoadingHide())
             )
         ).
         subscribe();
