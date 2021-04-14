@@ -78,6 +78,7 @@ export class PageStream extends BaseComponent implements OnInit
         this.currentlyOpenedItemIndex = itemIndex;
         this.currentlyOpenedItems[itemIndex] = true;
         this.spinner[itemIndex] = true;
+        console.log('item opened' + itemIndex);
 
         this.store.dispatch(new ActionInterestSetIdAnonymous(interest.id)).pipe
         (
@@ -92,6 +93,7 @@ export class PageStream extends BaseComponent implements OnInit
 
     public setClosed(itemIndex: number): void
     {
+        this.interestEvents[itemIndex] = null;
         if(this.currentlyOpenedItemIndex === itemIndex)
         {
             this.currentlyOpenedItemIndex = -1;
