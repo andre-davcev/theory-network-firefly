@@ -1,0 +1,16 @@
+{
+
+  "defaultProject": "ionic-firefly",
+  "projects": {
+    "ionic-firefly": {
+      "root": "apps/firefly/mobile",
+      "name": "Firefly",
+      "integrations": {
+        "capacitor": {},
+        "cordova": {}
+      },
+      "type": "angular",
+      "id": "com.theorynetwork.Firefly"
+    }
+  }
+}
