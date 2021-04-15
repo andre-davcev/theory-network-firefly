@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ComponentMapAnnotation } from './map-annotation.component';
 
@@ -6,7 +6,7 @@ describe('ComponentMapAnnotation', () => {
   let component: ComponentMapAnnotation;
   let fixture: ComponentFixture<ComponentMapAnnotation>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ComponentMapAnnotation ]
     })

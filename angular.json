@@ -34,7 +34,10 @@
             "main": "libs/firefly/core/src/test.ts",
             "tsConfig": "libs/firefly/core/tsconfig.spec.json",
             "karmaConfig": "libs/firefly/core/karma.conf.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/firefly/core"
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -43,7 +46,10 @@
               "libs/firefly/core/tsconfig.lib.json",
               "libs/firefly/core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/firefly/core/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/firefly/core/**/*"
+            ]
           }
         }
       }
@@ -68,7 +74,10 @@
             "main": "libs/firefly/mobile/src/test.ts",
             "tsConfig": "libs/firefly/mobile/tsconfig.spec.json",
             "karmaConfig": "libs/firefly/mobile/karma.conf.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/firefly/mobile"
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -77,7 +86,10 @@
               "libs/firefly/mobile/tsconfig.lib.json",
               "libs/firefly/mobile/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/firefly/mobile/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/firefly/mobile/**/*"
+            ]
           }
         }
       }
@@ -102,7 +114,10 @@
             "main": "libs/core/src/test.ts",
             "tsConfig": "libs/core/tsconfig.spec.json",
             "karmaConfig": "libs/core/karma.conf.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/core"
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -111,7 +126,10 @@
               "libs/core/tsconfig.lib.json",
               "libs/core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/core/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/core/**/*"
+            ]
           }
         }
       }
@@ -136,7 +154,10 @@
             "main": "libs/firebase/src/test.ts",
             "tsConfig": "libs/firebase/tsconfig.spec.json",
             "karmaConfig": "libs/firebase/karma.conf.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/firebase"
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -145,7 +166,10 @@
               "libs/firebase/tsconfig.lib.json",
               "libs/firebase/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/firebase/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/firebase/**/*"
+            ]
           }
         }
       }
@@ -170,7 +194,10 @@
             "main": "libs/capacitor/src/test.ts",
             "tsConfig": "libs/capacitor/tsconfig.spec.json",
             "karmaConfig": "libs/capacitor/karma.conf.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/capacitor"
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -179,7 +206,10 @@
               "libs/capacitor/tsconfig.lib.json",
               "libs/capacitor/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/capacitor/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/capacitor/**/*"
+            ]
           }
         }
       }
@@ -204,7 +234,10 @@
             "main": "libs/ionic/src/test.ts",
             "tsConfig": "libs/ionic/tsconfig.spec.json",
             "karmaConfig": "libs/ionic/karma.conf.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/ionic"
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -213,7 +246,10 @@
               "libs/ionic/tsconfig.lib.json",
               "libs/ionic/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ionic/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/ionic/**/*"
+            ]
           }
         }
       }
@@ -238,7 +274,10 @@
             "main": "libs/web/src/test.ts",
             "tsConfig": "libs/web/tsconfig.spec.json",
             "karmaConfig": "libs/web/karma.conf.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/web"
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -247,7 +286,10 @@
               "libs/web/tsconfig.lib.json",
               "libs/web/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/web/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/web/**/*"
+            ]
           }
         }
       }
@@ -272,7 +314,10 @@
             "main": "libs/mapbox/src/test.ts",
             "tsConfig": "libs/mapbox/tsconfig.spec.json",
             "karmaConfig": "libs/mapbox/karma.conf.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/mapbox"
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -281,7 +326,10 @@
               "libs/mapbox/tsconfig.lib.json",
               "libs/mapbox/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/mapbox/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/mapbox/**/*"
+            ]
           }
         }
       }
@@ -306,7 +354,10 @@
             "main": "libs/google/src/test.ts",
             "tsConfig": "libs/google/tsconfig.spec.json",
             "karmaConfig": "libs/google/karma.conf.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/google"
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -315,7 +366,10 @@
               "libs/google/tsconfig.lib.json",
               "libs/google/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/google/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/google/**/*"
+            ]
           }
         }
       }
@@ -341,7 +395,10 @@
               "libs/ngxs/tsconfig.lib.json",
               "libs/ngxs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ngxs/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/ngxs/**/*"
+            ]
           }
         },
         "test": {
@@ -372,14 +429,20 @@
               "libs/apple/tsconfig.lib.json",
               "libs/apple/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/apple/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/apple/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/apple/jest.config.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/apple"
+          ]
         }
       }
     },
@@ -404,14 +467,20 @@
               "libs/bigdatacloud/tsconfig.lib.json",
               "libs/bigdatacloud/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/bigdatacloud/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/bigdatacloud/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/bigdatacloud/jest.config.js"
-          }
+          },
+          "outputs": [
+            "coverage/libs/bigdatacloud"
+          ]
         }
       },
       "schematics": {
