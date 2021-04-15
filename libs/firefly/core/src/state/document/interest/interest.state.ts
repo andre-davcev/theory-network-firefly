@@ -39,7 +39,7 @@ import { Query } from '@angular/fire/firestore';
 import { StateCityStream } from '@firefly/core/state/child/city-stream';
 import { Injectable } from '@angular/core';
 import { Collection, ImageType, InterestType } from '@firefly/core/enums';
-import { StateApp } from '@firefly/core';
+import { StateApp } from '../app';
 
 @State<StateInterestModel>(StateInterestOptions)
 @Injectable()
