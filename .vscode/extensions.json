@@ -1,16 +1,15 @@
 {
   "recommendations": [
-    "Angular.ng-template",
-    "EditorConfig.editorconfig",
-    "eg2.tslint",
+    "angular.ng-template",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
     "msjsdiag.debugger-for-chrome",
     "christian-kohler.path-intellisense",
     "natewallace.angular2-inline",
-    "glen-84.sass-lint",
-    "PKief.material-icon-theme",
+    "pkief.material-icon-theme",
     "johnpapa.winteriscoming",
     "eamodio.gitlens",
-    "CoenraadS.bracket-pair-colorizer",
+    "coenraads.bracket-pair-colorizer",
     "oderwat.indent-rainbow",
     "esbenp.prettier-vscode",
     "quicktype.quicktype",
@@ -24,11 +23,9 @@
     "vincaslt.highlight-matching-tag",
     "cssho.vscode-svgviewer",
     "donjayamanne.githistory",
-    "Orta.vscode-jest",
-    "angular.ng-template",
+    "orta.vscode-jest",
     "johnpapa.vscode-peacock",
     "ms-vscode-remote.remote-containers",
-    "GitHub.vscode-pull-request-github",
     "firsttris.vscode-jest-runner"
   ]
 }
