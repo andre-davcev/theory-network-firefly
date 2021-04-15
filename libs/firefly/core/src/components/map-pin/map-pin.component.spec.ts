@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ComponentMapPin } from './map-pin.component';
 
@@ -6,7 +6,7 @@ describe('ComponentMapPin', () => {
   let component: ComponentMapPin;
   let fixture: ComponentFixture<ComponentMapPin>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ComponentMapPin ]
     })
