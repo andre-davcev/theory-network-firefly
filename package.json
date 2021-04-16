@@ -59,7 +59,7 @@
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "help": "./node_modules/.bin/nx help",
     "clean": "npx rimraf -- hooks node_modules package-lock.json && npm i",
-    "build.ionic.firefly": "ionic build ios --project=ionic-firefly",
+    "build.ionic.firefly": "ionic cordova build ios --project=ionic-firefly",
     "prepare.ionic.firefly": "npm run clean && npm run clean.ionic.firefly && npm run build.ionic.firefly",
     "prepare.ionic.firefly.ios": "npm run prepare.ionic.firefly && npm run clean.ionic.firefly.ios && cd apps/firefly/mobile && npm run cap.add.ios",
     "prepare.ionic.firefly.android": "npm run prepare.ionic.firefly && npm run clean.ionic.firefly.android && cd apps/firefly/mobile && npm run cap.add.android",
