@@ -1,4 +1,5 @@
 {
+  "extends": "../../../tsconfig.base.json",
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
@@ -29,10 +30,10 @@
   "include": [],
   "references": [
     {
-      "path": "./src/tsconfig.app.json"
+      "path": "./tsconfig.app.json"
     },
     {
-      "path": "./src/tsconfig.spec.json"
+      "path": "./tsconfig.spec.json"
     }
   ],
   "angularCompilerOptions": {

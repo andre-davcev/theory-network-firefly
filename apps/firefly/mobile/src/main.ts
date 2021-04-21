@@ -1,8 +1,8 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AppModule } from '@firefly/app/root';
-import { environment } from '@firefly/app/env';
+import { AppModule } from './app/root';
+import { environment } from './environments/environment';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 if (environment.production) {
