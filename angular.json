@@ -4,13 +4,165 @@
   "newProjectRoot": "",
   "projects": {
     "ionic-firefly": {
+      "projectType": "application",
       "root": "apps/firefly/mobile/",
       "sourceRoot": "apps/firefly/mobile/src",
-      "projectType": "application",
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "apps/firefly/mobile/www",
+            "index": "apps/firefly/mobile/src/index.html",
+            "main": "apps/firefly/mobile/src/main.ts",
+            "polyfills": "apps/firefly/mobile/src/polyfills.ts",
+            "tsConfig": "apps/firefly/mobile/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "apps/firefly/mobile/src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules",
+                "apps/firefly/mobile/src/sass"
+              ]
+            },
+            "styles": [
+              {
+                "input": "apps/firefly/mobile/src/sass/_properties.scss"
+              },
+              {
+                "input": "apps/firefly/mobile/src/sass/_global.scss"
+              }
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/firefly/mobile/src/environments/environment.ts",
+                  "with": "apps/firefly/mobile/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "ci": {
+              "progress": false
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ionic-firefly:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ionic-firefly:build:production"
+            },
+            "ci": {
+              "progress": false
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ionic-firefly:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/firefly/mobile/src/test.ts",
+            "polyfills": "apps/firefly/mobile/src/polyfills.ts",
+            "tsConfig": "apps/firefly/mobile/tsconfig.spec.json",
+            "karmaConfig": "apps/firefly/mobile/karma.conf.js",
+            "styles": [],
+            "scripts": [],
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "apps/firefly/mobile/src/",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "apps/firefly/mobile/src/assets",
+                "output": "/assets"
+              }
+            ]
+          },
+          "configurations": {
+            "ci": {
+              "progress": false,
+              "watch": false
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/firefly/mobile/tsconfig.app.json",
+              "apps/firefly/mobile/tsconfig.spec.json",
+              "apps/firefly/mobile/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "ionic-firefly:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ionic-firefly:build:production"
+            }
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "ionic-firefly:ionic-cordova-build",
+            "devServerTarget": "ionic-firefly:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "ionic-firefly:ionic-cordova-build:production",
+              "devServerTarget": "ionic-firefly:serve:production"
+            }
+          }
         }
       }
     },

@@ -5,5 +5,5 @@
     "cordova": {}
   },
   "type": "angular",
-  "id": "com.theorynetwork.Firefly"
+  "app_id": "com.theorynetwork.Firefly"
 }
