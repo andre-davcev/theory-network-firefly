@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { firestore } from 'firebase';
+import { Timestamp } from '@theory/firebase';
 import { TimestampFormat } from './timestamp-format.enum';
 import { Store } from '@ngxs/store';
 import { StateLanguage } from '@theory/capacitor';
@@ -19,7 +19,7 @@ export class PipeTimestamp implements PipeTransform
         );
     }
 
-    public transform(value: firestore.Timestamp, name: TimestampFormat = TimestampFormat.MediumDate, timezone: string = 'GMT'): string
+    public transform(value: Timestamp, name: TimestampFormat = TimestampFormat.MediumDate, timezone: string = 'GMT'): string
     {
         if (value == null) { return ''; }
 

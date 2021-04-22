@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { StatusBarStyle, CameraOptions, CameraResultType, CameraSource, Plugins, CameraPhoto } from '@capacitor/core';
+import { StatusBarStyle } from '@capacitor/core';
 import { Store } from '@ngxs/store';
-import { ModalController } from '@ionic/angular';
-import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '@firefly/mobile';
 
 
@@ -19,7 +18,7 @@ export class PageEventSelector
     public segment: Pages = Pages.EventAssets;
     public translations: Array<string> = [];
 
-    constructor(private store: Store, private modal: ModalController) { }
+    constructor(private store: Store) { }
 
     ionViewWillEnter()
     {

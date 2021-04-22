@@ -3,10 +3,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Event } from '@firefly/cloud';
-import { ServiceFirestore } from '@theory/firebase';
+import { fromDate, ServiceFirestore, Timestamp } from '@theory/firebase';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, Regex, ValidatorsExtended } from '@theory/core';
-import { firestore } from 'firebase/app';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceEvents extends ServiceFirestore<Event>
@@ -30,8 +29,8 @@ export class ServiceEvents extends ServiceFirestore<Event>
 
             if (form != null)
             {
-                const start: firestore.Timestamp = form.get('timeStart').value;
-                const end:   firestore.Timestamp = form.get('timeEnd').value;
+                const start: Timestamp = form.get('timeStart').value;
+                const end:   Timestamp = form.get('timeEnd').value;
 
                 if (start != null && end != null)
                 {
@@ -52,7 +51,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
         {
-            const value: firestore.Timestamp = control.value;
+            const value: Timestamp = control.value;
 
             let valid: boolean = false;
 
@@ -76,9 +75,9 @@ export class ServiceEvents extends ServiceFirestore<Event>
         {
             ...super.formDataNew(userId, defaults),
 
-            timeStart:  firestore.Timestamp.fromDate(DateUtil.atHourNext()),
-            timeEnd:    firestore.Timestamp.fromDate(DateUtil.atHourNext(new Date(), 2)),
-            timeNotify: firestore.Timestamp.fromDate(DateUtil.atHourNext(new Date(), 2))
+            timeStart:  fromDate(DateUtil.atHourNext()),
+            timeEnd:    fromDate(DateUtil.atHourNext(new Date(), 2)),
+            timeNotify: fromDate(DateUtil.atHourNext(new Date(), 2))
         };
 
         return event;

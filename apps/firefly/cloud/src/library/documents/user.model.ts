@@ -1,5 +1,6 @@
+import { GeoPoint } from '@theory/firebase';
+
 import { FirebaseDocument, CityInfo } from '../interfaces';
-import { firestore } from 'firebase/app';
 
 import { SubscriptionPartial, AlertPartial } from '../models';
 import { MetadataUser } from '../metadata';
@@ -10,7 +11,7 @@ export interface User extends FirebaseDocument
     email               : string;
     isPublisher         : boolean;
     language            : string;
-    geopoint            : firestore.GeoPoint;
+    geopoint            : GeoPoint;
     notifications       : Record<string, AlertPartial>;
     phoneNumber         : string;
     providerId          : string;

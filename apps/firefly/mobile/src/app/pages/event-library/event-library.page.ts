@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 
 @Component
@@ -13,7 +12,7 @@ export class PageEventLibrary implements OnInit
 {
     public eventLibrary$: Observable<Array<string>> = of([]);
 
-    constructor(private store: Store) { }
+    constructor() { }
 
     public ngOnInit(): void
     {

@@ -29,7 +29,7 @@ import {
   ActionEventTimeSet
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
-import { firestore } from 'firebase/app';
+import { DocumentSnapshot, FieldValue, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '@theory/firebase';
 import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';
@@ -112,12 +112,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 
     @Selector() static locationTypes(state: StateEventModel):   Array<MapboxPlaceType> { return StateEvent.dataState(state).locationTypes; }
     @Selector() static locationDefined(state: StateEventModel): boolean                { return StateEvent.locationTypes(state) != null; }
-    @Selector() static timeStart(state: StateEventModel):       firestore.Timestamp    { return StateEvent.dataState(state).timeStart; }
-    @Selector() static timeEnd(state: StateEventModel):         firestore.Timestamp    { return StateEvent.dataState(state).timeEnd; }
+    @Selector() static timeStart(state: StateEventModel):       Timestamp    { return StateEvent.dataState(state).timeStart; }
+    @Selector() static timeEnd(state: StateEventModel):         Timestamp    { return StateEvent.dataState(state).timeEnd; }
     @Selector() static timeEndValid(state: StateEventModel):    boolean                { return StateEvent.formGroupState(state).get('timeEnd').errors == null; }
     @Selector() static private(state: StateEventModel):         boolean                { return StateEvent.dataState(state).private; }
     @Selector() static notifyComplete(state: StateEventModel):  boolean                { return StateEvent.dataState(state).notifyComplete; }
-    @Selector() static timeNotify(state: StateEventModel):      firestore.Timestamp    { return StateEvent.dataState(state).timeNotify; }
+    @Selector() static timeNotify(state: StateEventModel):      Timestamp    { return StateEvent.dataState(state).timeNotify; }
     @Selector() static timeNotifyValid(state: StateEventModel): boolean                { return StateEvent.formGroupState(state).get('timeNotify').errors == null; }
     @Selector() static interests(state: StateEventModel):       Array<string>          { return StateEvent.dataState(state).interests; }
     @Selector() static timeIsLocked(state: StateEventModel):    boolean                { return StateEvent.notifyComplete(state); }
@@ -289,7 +289,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 
         this.empty.draft = !isInterestOwner;
 
-        const snapshot : firestore.DocumentSnapshot = this.store.selectSnapshot
+        const snapshot : DocumentSnapshot = this.store.selectSnapshot
         (
             isAlert ?
                 StateUserAlerts.snapshotLookup() :
@@ -319,10 +319,10 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 
       return from(query.get()).pipe
       (
-        map((snapshot: firestore.QuerySnapshot) =>
+        map((snapshot: QuerySnapshot) =>
             snapshot.docs
         ),
-        switchMap((snapshot: Array<firestore.QueryDocumentSnapshot>) =>
+        switchMap((snapshot: Array<QueryDocumentSnapshot>) =>
         {
           const event: Event = snapshot[0].data() as Event;
           return this.store.dispatch(new ActionEventSet(snapshot[0], event))
@@ -400,7 +400,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventTimeSet)
     timeSet({ dispatch }: StateContext<StateEventModel>, { key, value }: ActionEventTimeSet)
     {
-        const timestamp: firestore.FieldValue = firestore.Timestamp.fromDate(new Date(value));
+        const timestamp: FieldValue = Timestamp.fromDate(new Date(value));
 
         return dispatch
         ([

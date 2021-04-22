@@ -3,7 +3,7 @@ import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdataclou
 
 import { Observable, of } from 'rxjs';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
-import { firestore } from 'firebase/app';
+import { GeoPoint } from '@theory/firebase';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { ReverseMode } from '@theory/mapbox';
@@ -44,7 +44,7 @@ export class ServiceLocation
         const title       : string             = address[0];
         const description : string             = address[1];
         const center      : Array<number>      = result.center;
-        const geopoint    : firestore.GeoPoint = new firestore.GeoPoint(center[1], center[0]);
+        const geopoint    : GeoPoint           = new GeoPoint(center[1], center[0]);
         const centerLike  : LngLatLike         = { lat: geopoint.latitude, lng: geopoint.longitude };
 
         return {
@@ -61,7 +61,7 @@ export class ServiceLocation
     public static city(response: ResponseReverseGeocode): CityInfo
     {
         return {
-            geopoint : new firestore.GeoPoint(response.latitude, response.longitude),
+            geopoint : new GeoPoint(response.latitude, response.longitude),
             id       : ServiceLocation.cityId(response.countryCode, response.principalSubdivision, response.locality),
             name     : response.locality,
             region   : response.principalSubdivision,
@@ -93,7 +93,7 @@ export class ServiceLocation
                 ({
                     ...city,
 
-                    geopoint: new firestore.GeoPoint(center[1], center[0])
+                    geopoint: new GeoPoint(center[1], center[0])
                 })
             )
         );
@@ -135,7 +135,7 @@ export class ServiceLocation
             return of(null);
         }
 
-        const geopoint  : firestore.GeoPoint = event.geopoint;
+        const geopoint  : GeoPoint = event.geopoint;
         const latitude  : number             = geopoint.latitude;
         const longitude : number             = geopoint.longitude;
 

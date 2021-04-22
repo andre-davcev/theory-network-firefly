@@ -1,6 +1,6 @@
 import { GlobalVariable } from '../enums';
 import { Event } from '../documents';
-import { firestore } from 'firebase-admin';
+import { Timestamp } from '@theory/firebase';
 
 export class ServiceStreams
 {
@@ -39,7 +39,7 @@ export class ServiceStreams
      */
     public static scoreEventRecentlyAdded(event: Event, nowInMillis: number): number
     {
-        const dateCreated: number = (event.dateCreated as firestore.Timestamp).toDate().getTime();
+        const dateCreated: number = (event.dateCreated as Timestamp).toDate().getTime();
         const millisDiff:  number = nowInMillis - dateCreated;
 
         const segments: number = Math.floor(millisDiff / GlobalVariable.EventRecentlyAddedSegmentMillis);

@@ -8,7 +8,7 @@ import { StateLocationModel } from './location.state.model';
 import { StateLocationOptions } from './location.state.options';
 import { ActionLocationWatch } from './location.actions';
 import { Injectable } from '@angular/core';
-import { LngLatLiteral } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
+import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder';
 import { LngLatLike } from 'mapbox-gl';
 
 const { Geolocation } = Plugins;

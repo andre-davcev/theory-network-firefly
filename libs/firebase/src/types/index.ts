@@ -1,1 +1,1 @@
-export * from './firestore-timestamp.type';
+export * from './firebase.types';

@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { firestore } from 'firebase/app';
+import { DocumentSnapshot } from '@theory/firebase';
 
 import { FormNgxs } from '../../interfaces';
 
@@ -7,5 +7,5 @@ export interface StateDocumentModel
 {
     form      : FormNgxs;
     formGroup : FormGroup;
-    snapshot  : firestore.DocumentSnapshot;
+    snapshot  : DocumentSnapshot;
 }

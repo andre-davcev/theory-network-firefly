@@ -7,7 +7,7 @@ import { StatusBarStyle } from '@capacitor/core';
 import { StateUser, Color, IconType, AuthType } from '@firefly/core';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '@firefly/mobile';
-import { FirebaseError } from 'firebase/app';
+import { FirebaseError } from '@theory/firebase';
 
 @Component
 ({

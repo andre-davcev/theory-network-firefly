@@ -1,16 +1,16 @@
 import { WriteResult, Firestore, DocumentSnapshot, QuerySnapshot, QueryDocumentSnapshot, CollectionReference } from '@google-cloud/firestore';
 import { firestore } from 'firebase-admin';
-import { Place } from '../models';
 import { Event, User, StreamInterest, Interest, City } from '../documents';
 import { ServiceStreams } from './stream.service';
 import { GlobalVariable, Collection } from '../enums';
 import { CityInfo } from '../interfaces';
+import { GeoPoint } from '@theory/firebase';
 
 export class ServiceCities
 {
     private static earthRadius: number = 6371;
 
-    public static distanceBetweenPoints(geopoint1: firestore.GeoPoint, geopoint2: firestore.GeoPoint)
+    public static distanceBetweenPoints(geopoint1: GeoPoint, geopoint2: GeoPoint)
     {
         return ServiceCities.distanceBetween(geopoint1.latitude, geopoint1.longitude, geopoint2.latitude, geopoint2.longitude);
     }

@@ -1,7 +1,7 @@
-import { firestore } from 'firebase/app';
+import { Timestamp } from '@theory/firebase';
 
 export interface AlertPartial
 {
     read:      boolean;
-    timeStart: firestore.Timestamp;
+    timeStart: Timestamp;
 }

@@ -21,9 +21,9 @@ import {
   ActionSubscriptionPatchMetadata
 } from './subscription.actions';
 import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions';
-import { firestore } from 'firebase/app';
 import { Injectable } from '@angular/core';
 import { Collection } from '@firefly/core/enums';
+import { DocumentSnapshot } from '@theory/firebase';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)
 @Injectable()
@@ -136,7 +136,7 @@ export class StateSubscription extends StateDocument<Subscription, StateSubscrip
         const isNew: boolean = id === CoreEnum.IdNew;
 
         const userId:   string                     = this.store.selectSnapshot(StateUser.id());
-        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserSubscriptions.snapshotLookup()[id]);
+        const snapshot: DocumentSnapshot = this.store.selectSnapshot(StateUserSubscriptions.snapshotLookup()[id]);
 
         const data: Subscription = isNew ?
             this.service.formDataNew(userId, this.empty) :

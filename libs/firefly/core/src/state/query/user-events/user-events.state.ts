@@ -19,9 +19,8 @@ import { ServiceEvents } from '@firefly/core/services';
 import { Query } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { ServiceStorage } from '@theory/firebase';
+import { DocumentSnapshot, ServiceStorage } from '@theory/firebase';
 import { Collection, ImageType } from '@firefly/core/enums';
-import { firestore } from 'firebase/app';
 import { Observable, of } from 'rxjs';
 import { CoreEnum } from '@theory/core';
 
@@ -106,7 +105,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     @Action(ActionUserEventsDelete)
     delete({ dispatch, getState }: StateContext<StateUserEventsModel>, { id }: ActionUserEventsDelete)
     {
-        const snapshot: firestore.DocumentSnapshot = StateUserEvents.snapshotLookupState(getState())[id];
+        const snapshot: DocumentSnapshot = StateUserEvents.snapshotLookupState(getState())[id];
 
         const delete$: Observable<any> = id === CoreEnum.IdNew ?
             of(null) :

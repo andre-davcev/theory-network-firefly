@@ -1,13 +1,14 @@
 import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { filter, takeUntil, delay, switchMap, map, tap } from 'rxjs/operators';
+import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
 import { LngLatLike, Point, Popup } from 'mapbox-gl';
 
 import { StateDevice, StateLanguage, StateLocation } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
 import { MapboxPlaceType, MapboxMapStyle, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
-import { LngLatLiteral, Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
+import { Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
+import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder'
 import { Color } from '@firefly/core/enums';
 import { MapMovingMethod } from '@theory/mapbox';
 import { MapComponent } from 'ngx-mapbox-gl';

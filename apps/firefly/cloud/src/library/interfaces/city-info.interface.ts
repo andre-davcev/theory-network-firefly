@@ -1,10 +1,10 @@
-import { firestore } from 'firebase/app';
+import { GeoPoint } from '@theory/firebase';
 
 export interface CityInfo
 {
     id       : string;
     name     : string;
     country  : string;
-    geopoint : firestore.GeoPoint;
+    geopoint : GeoPoint;
     region   : string;
 }

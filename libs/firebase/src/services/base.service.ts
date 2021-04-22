@@ -3,8 +3,8 @@ import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument 
 import { FirebaseDocument } from '@theory/firebase/interfaces';
 import { map, take } from 'rxjs/operators';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
-import { firestore } from 'firebase/app';
 import { CoreEnum, CoreUtil } from '@theory/core';
+import { FieldValue, serverTimestamp } from '../types';
 
 export class ServiceBase<T extends FirebaseDocument | Record<string, any>>
 {
@@ -40,7 +40,7 @@ export class ServiceBase<T extends FirebaseDocument | Record<string, any>>
     {
         if (!this.reference)
         {
-            partial['dateUpdated'] = firestore.FieldValue.serverTimestamp();
+            partial['dateUpdated'] = serverTimestamp();
         }
 
         return from(this.document(id).update(partial));
@@ -50,8 +50,8 @@ export class ServiceBase<T extends FirebaseDocument | Record<string, any>>
     {
         if (!this.reference)
         {
-            const id:        string                        = object.id == null || object.id === CoreEnum.IdNew ? this.firestore.createId() : object.id;
-            const timestamp: firebase.firestore.FieldValue = firestore.FieldValue.serverTimestamp();
+            const id:        string     = object.id == null || object.id === CoreEnum.IdNew ? this.firestore.createId() : object.id;
+            const timestamp: FieldValue = serverTimestamp();
 
             object =
             {

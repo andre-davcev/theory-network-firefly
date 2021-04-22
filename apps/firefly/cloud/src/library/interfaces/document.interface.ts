@@ -1,9 +1,9 @@
-import { firestore } from 'firebase/app';
+import { FieldValue } from '@theory/firebase';
 
 export interface FirebaseDocument
 {
-    dateCreated : firestore.FieldValue;
-    dateUpdated : firestore.FieldValue;
+    dateCreated : FieldValue;
+    dateUpdated : FieldValue;
     id          : string;
     userId      : string;
     version     : string;

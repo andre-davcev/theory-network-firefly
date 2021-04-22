@@ -1,5 +1,4 @@
-import { OrderBy, ImageSize, FirebaseDocument, ServiceStorage } from '@theory/firebase';
-import { firestore } from 'firebase/app';
+import { OrderBy, ImageSize, FirebaseDocument, ServiceStorage, DocumentSnapshot } from '@theory/firebase';
 import { createSelector, StateContext } from '@ngxs/store';
 import { ActionsCollection } from './collection.actions';
 import { CoreUtil, CoreEnum, TypeOf } from '@theory/core';
@@ -34,7 +33,7 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     protected static orderByState(state: any):          string                                     { return state.orderBy; }
     protected static orderByDirectionState(state: any): OrderBy                                    { return state.orderByDirection; }
     protected static keysState(state: any):             Array<string>                              { return state.keys; }
-    protected static snapshotLookupState(state: any):   Record<string, firestore.DocumentSnapshot> { return state.snapshotLookup; }
+    protected static snapshotLookupState(state: any):   Record<string, DocumentSnapshot> { return state.snapshotLookup; }
     protected static dataLookupState(state: any):       Record<string, any>                        { return state.dataLookup; }
     protected static countState(state: any):            number                                     { return StateCollection.keysState(state).length; }
     protected static foundState(state: any):            boolean                                    { return StateCollection.countState(state) > 0; }
@@ -93,7 +92,7 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
 
         if (!initialized) { return of(null); }
 
-        const snapshot: firestore.DocumentSnapshot = action.snapshot;
+        const snapshot: DocumentSnapshot = action.snapshot;
 
         const entity: T      = action.entity == null ? snapshot.data() : action.entity;
         const id:     string = entity.id;
