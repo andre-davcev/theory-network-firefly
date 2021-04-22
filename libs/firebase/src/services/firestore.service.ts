@@ -1,7 +1,7 @@
 import { FirebaseDocument } from '../interfaces';
 import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs';
-import { firestore } from 'firebase/app';
+import { Observable } from 'rxjs';
+import { DocumentSnapshot as FirestoreDocumentSnapshot } from '@theory/firebase';
 import { CoreEnum, CoreUtil } from '@theory/core';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
@@ -21,7 +21,7 @@ export class ServiceFirestore<T extends FirebaseDocument>
         return ServiceFirestoreBase.collection<T>(this.firestore, collection);
     }
 
-    public documentGet(collection: string, id: string): Observable<firestore.DocumentSnapshot>
+    public documentGet(collection: string, id: string): Observable<FirestoreDocumentSnapshot>
     {
         return ServiceFirestoreBase.documentGet<T>(this.firestore, collection, id);
     }
@@ -31,17 +31,17 @@ export class ServiceFirestore<T extends FirebaseDocument>
         return ServiceFirestoreBase.documentWatch<T>(this.firestore, collection, id);
     }
 
-    public documentCreate(collection: string, entity: T): Observable<firestore.DocumentSnapshot>
+    public documentCreate(collection: string, entity: T): Observable<FirestoreDocumentSnapshot>
     {
         return ServiceFirestoreBase.documentCreate<T>(this.firestore, collection, entity);
     }
 
-    public documentUpdate(snapshot: firestore.DocumentSnapshot, object: Partial<T>)
+    public documentUpdate(snapshot: FirestoreDocumentSnapshot, object: Partial<T>)
     {
         return ServiceFirestoreBase.documentUpdate<T>(snapshot, object);
     }
 
-    public documentDelete(snapshot: firestore.DocumentSnapshot): Observable<void>
+    public documentDelete(snapshot: FirestoreDocumentSnapshot): Observable<void>
     {
         return ServiceFirestoreBase.documentDelete(snapshot);
     }

@@ -1,5 +1,6 @@
-import { firestore } from 'firebase-admin';
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
+import { FieldValue, serverTimestamp } from '@theory/firebase';
+
 import { FirebaseDocument } from '../interfaces';
 import { Version } from '../enums';
 
@@ -14,7 +15,7 @@ export class ServiceFirestore
     {
         const id        : string               = snapshot.id;
         const object    : T                    = snapshot.data() as T;
-        const timestamp : firestore.FieldValue = firestore.FieldValue.serverTimestamp();
+        const timestamp : FieldValue = serverTimestamp();
 
         object.id          = id;
         object.dateCreated = timestamp;

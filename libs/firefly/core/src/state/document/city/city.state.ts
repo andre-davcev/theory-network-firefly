@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentSnapshot } from '@angular/fire/firestore';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { firestore } from 'firebase/app';
+import { GeoPoint, DocumentSnapshot as FirestoreDocumentSnapshot } from '@theory/firebase';
 
 import { ResponseReverseGeocode, ServiceBigDataCloud } from '@theory/bigdatacloud';
 
@@ -25,7 +25,7 @@ export class StateCity
     @Selector() static cityId(state: StateCityModel)   : string             { const city: CityInfo = StateCity.city(state); return city == null ? null : city.id; }
     @Selector() static found(state: StateCityModel)    : boolean            { return StateCity.city(state) != null; }
     @Selector() static isNew(state: StateCityModel)    : boolean            { return state.isNew; }
-    @Selector() static geopoint(state: StateCityModel) : firestore.GeoPoint { return state.geopoint; }
+    @Selector() static geopoint(state: StateCityModel) : GeoPoint { return state.geopoint; }
 
     constructor
     (
@@ -45,12 +45,12 @@ export class StateCity
                 location != null
             ),
             map((location: GeolocationPosition) =>
-                new firestore.GeoPoint(location.coords.latitude, location.coords.longitude)
+                new GeoPoint(location.coords.latitude, location.coords.longitude)
             ),
-            tap((geopoint: firestore.GeoPoint) =>
+            tap((geopoint: GeoPoint) =>
                 patchState({ geopoint })
             ),
-            switchMap((geopoint: firestore.GeoPoint) =>
+            switchMap((geopoint: GeoPoint) =>
                 this.bigdatacloud.reverseGeocode(geopoint.latitude, geopoint.longitude).
                 pipe
                 (
@@ -64,10 +64,10 @@ export class StateCity
                         ServiceFirestoreBase.documentGet(this.angularfire, Collection.Streams, city.id).
                         pipe
                         (
-                            tap((snapshot: firestore.DocumentSnapshot) =>
+                            tap((snapshot: FirestoreDocumentSnapshot) =>
                                 patchState(({ isNew: !snapshot.exists }))
                             ),
-                            switchMap((snapshot: firestore.DocumentSnapshot) =>
+                            switchMap((snapshot: FirestoreDocumentSnapshot) =>
                                 snapshot.exists ?
                                     dispatch(new ActionCityStreamSetData(snapshot.data(), true)) :
                                     dispatch(new ActionCityCreate(city))

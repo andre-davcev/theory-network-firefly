@@ -16,7 +16,6 @@ import {
     ActionInterestReset,
     ActionInterestGet,
     ActionUserEventsDelete,
-    StateUserEvents,
     Translation,
     StateApp,
     ActionAppLoadingShow,
@@ -180,7 +179,7 @@ export class PageCalendar extends BaseComponent
 
     public async showPopover(event: any): Promise<void>
     {
-        const isStream: boolean = this.store.selectSnapshot(StateMobile.pageStream);
+        // const isStream: boolean = this.store.selectSnapshot(StateMobile.pageStream);
 
         const popover: HTMLIonPopoverElement = await this.popover.create
         ({

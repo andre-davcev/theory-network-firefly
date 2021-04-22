@@ -1,6 +1,5 @@
 import { TypeOf } from '@theory/core';
-import { OrderBy } from '@theory/firebase';
-import { firestore } from 'firebase/app';
+import { DocumentSnapshot, OrderBy } from '@theory/firebase';
 
 export interface StateCollectionModel<T>
 {
@@ -14,6 +13,6 @@ export interface StateCollectionModel<T>
     finishedPaging: boolean;
 
     keys:           Array<string>;
-    snapshotLookup: Record<string, firestore.DocumentSnapshot>;
+    snapshotLookup: Record<string, DocumentSnapshot>;
     dataLookup:     Record<string, T>;
 }

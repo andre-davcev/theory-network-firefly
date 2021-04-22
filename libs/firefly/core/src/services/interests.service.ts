@@ -19,6 +19,7 @@ export class ServiceInterests extends ServiceFirestore<Interest>
         super(firestore, formBuilder);
     }
 
+/*
     private static validateIcon(): ValidatorFn
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
@@ -30,6 +31,7 @@ export class ServiceInterests extends ServiceFirestore<Interest>
 
         return validator;
     }
+*/
 
     public formCreate(interest: Interest): FormGroup
     {

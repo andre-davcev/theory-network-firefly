@@ -23,7 +23,6 @@ import { Pages } from '@firefly/mobile/enums';
 import { NgZone, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  StateUserAlerts,
   ActionUserAlertsMarkRead,
   ActionAppLoadingShow,
   ActionAppLoadingHide,

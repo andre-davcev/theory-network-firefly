@@ -1,8 +1,8 @@
 import { Event } from '../documents';
-import { firestore } from 'firebase/app';
+import { Timestamp } from '@theory/firebase';
 
 export interface DateEvents
 {
-    date   : firestore.Timestamp;
+    date   : Timestamp;
     events : Array<Event>;
 }

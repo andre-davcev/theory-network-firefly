@@ -17,14 +17,7 @@
       "es2018",
       "dom"
     ],
-    "typeRoots": ["node_modules/@types"],
-    "paths": {
-      "@firefly/app/env": ["./src/environments/environment.ts"],
-      "@firefly/app/*": ["./src/app/*"],
-      "@firefly/page": ["./src/app/pages"],
-      "@firefly/page/*": ["./src/app/pages/*"],
-      "@firefly/cloud": ["../cloud/src/library/index.ts"]
-    }
+    "typeRoots": ["node_modules/@types"]
   },
   "files": [],
   "include": [],

@@ -1,10 +1,9 @@
 import { StateContext } from '@ngxs/store';
 import { Query } from '@angular/fire/firestore';
-import { firestore } from 'firebase/app';
 import { Observable, from, of } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 
-import { FirebaseDocument, ServiceStorage } from '@theory/firebase';
+import { FirebaseDocument, QueryDocumentSnapshot, QuerySnapshot, ServiceStorage } from '@theory/firebase';
 
 import { StateCollection, ActionsCollection, StateCollectionModel } from '../collection';
 
@@ -79,14 +78,14 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
             of(null) :
             from(this.query.get()).pipe
             (
-                map((snapshot: firestore.QuerySnapshot) =>
+                map((snapshot: QuerySnapshot) =>
                     snapshot.docs
                 ),
-                tap((page: Array<firestore.QueryDocumentSnapshot>) =>
+                tap((page: Array<QueryDocumentSnapshot>) =>
                     patchState({ finishedPaging: page.length < pageSize } as M)
                 ),
-                tap((page: Array<firestore.QueryDocumentSnapshot>) =>
-                    page.forEach((document: firestore.QueryDocumentSnapshot) =>
+                tap((page: Array<QueryDocumentSnapshot>) =>
+                    page.forEach((document: QueryDocumentSnapshot) =>
                     {
                         const object: T = document.data() as T;
 

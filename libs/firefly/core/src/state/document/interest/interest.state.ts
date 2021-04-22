@@ -31,7 +31,7 @@ import {
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, StateUserInterests, ActionUserInterestsSync } from '../..//query/user-interests';
 import { ActionCityStreamRemove } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { firestore } from 'firebase/app';
+import { DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
 import { ImageSize, ServiceStorage } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from, forkJoin } from 'rxjs';
@@ -181,7 +181,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         const isNew: boolean = id === CoreEnum.IdNew;
 
         const userId:   string                     = this.store.selectSnapshot(StateUser.id());
-        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateUserInterests.snapshotLookup())[id];
+        const snapshot: DocumentSnapshot = this.store.selectSnapshot(StateUserInterests.snapshotLookup())[id];
 
         const data: Interest = isNew ?
             this.service.formDataNew(userId, this.empty) :
@@ -193,7 +193,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestSetIdAnonymous)
     setIdAnonymous({ dispatch }: StateContext<StateInterestModel>, { id }: ActionInterestSetIdAnonymous)
     {
-        const snapshot: firestore.DocumentSnapshot = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
+        const snapshot: DocumentSnapshot = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
         const type:String =  this.store.selectSnapshot(StateApp.interestType);
 
         const data:Interest =  type === InterestType.Created ?
@@ -231,11 +231,11 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
 
         return from(query.get()).pipe
         (
-            map((snapshot: firestore.QuerySnapshot) =>
+            map((snapshot: QuerySnapshot) =>
                 snapshot.docs
             ),
-            tap((page: Array<firestore.QueryDocumentSnapshot>) =>
-                page.forEach((document: firestore.QueryDocumentSnapshot) =>
+            tap((page: Array<QueryDocumentSnapshot>) =>
+                page.forEach((document: QueryDocumentSnapshot) =>
                     events.push
                     ({
                         ...document.data() as Event,
@@ -288,11 +288,11 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
 
         return from(query.get()).pipe
         (
-            map((snapshot: firestore.QuerySnapshot) =>
+            map((snapshot: QuerySnapshot) =>
                 snapshot.docs
             ),
-            tap((page: Array<firestore.QueryDocumentSnapshot>) =>
-                page.forEach((document: firestore.QueryDocumentSnapshot) =>
+            tap((page: Array<QueryDocumentSnapshot>) =>
+                page.forEach((document: QueryDocumentSnapshot) =>
                     events.push
                     ({
                         ...document.data() as Event,

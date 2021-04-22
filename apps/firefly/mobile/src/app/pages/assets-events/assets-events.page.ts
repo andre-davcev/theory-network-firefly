@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { StateUserEvents, ActionEventSetId, IconType, ActionAppLoadingShow } from '@firefly/core';
+import { StateUserEvents, IconType, ActionAppLoadingShow } from '@firefly/core';
 import { Event } from '@firefly/cloud';
 import { Observable } from 'rxjs';
 import { Navigate } from '@ngxs/router-plugin';

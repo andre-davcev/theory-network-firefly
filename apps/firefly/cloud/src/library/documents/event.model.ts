@@ -1,4 +1,4 @@
-import { firestore } from 'firebase/app';
+import { GeoPoint, Timestamp } from '@theory/firebase';
 
 import { FirebaseDocument, CityInfo } from '../interfaces';
 import { MetadataEvent } from '../metadata';
@@ -9,16 +9,16 @@ export interface Event extends FirebaseDocument
     city           : CityInfo;
     description    : string;
     draft          : boolean;
-    geopoint       : firestore.GeoPoint;
+    geopoint       : GeoPoint;
     interests      : Array<string>;
     name           : string;
     notifyComplete : boolean;
     placeType      : MapboxPlaceType;
     private        : boolean;
     tagline        : string;
-    timeNotify     : firestore.Timestamp;
-    timeStart      : firestore.Timestamp;
-    timeEnd        : firestore.Timestamp;
+    timeNotify     : Timestamp;
+    timeStart      : Timestamp;
+    timeEnd        : Timestamp;
     phone?         : string;
     virtual        : boolean;
     website?       : string;

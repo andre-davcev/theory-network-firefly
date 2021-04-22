@@ -1,4 +1,4 @@
-import { firestore } from 'firebase';
+import { FieldValue } from '@theory/firebase';
 
 
 export interface FirebaseDocument
@@ -6,7 +6,7 @@ export interface FirebaseDocument
     version     : string;
     id          : string;
     userId      : string;
-    dateCreated : firestore.FieldValue;
-    dateUpdated : firestore.FieldValue;
+    dateCreated : FieldValue;
+    dateUpdated : FieldValue;
     metadata?   : Record<string, any>;
 }

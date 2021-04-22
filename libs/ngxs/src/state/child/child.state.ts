@@ -1,8 +1,7 @@
 import { StateContext, createSelector } from '@ngxs/store';
 import { Observable, of, forkJoin } from 'rxjs';
 
-import { FirebaseDocument, OrderBy, ServiceFirestore, ServiceStorage } from '@theory/firebase';
-import { firestore } from 'firebase/app';
+import { DocumentSnapshot, FirebaseDocument, OrderBy, QueryDocumentSnapshot, ServiceFirestore, ServiceStorage, Timestamp } from '@theory/firebase';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 
@@ -105,7 +104,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 switchMap(() =>
                     this.service.documentGet(this.collectionChild, id)
                 ),
-                map((snapshot: firestore.DocumentSnapshot) =>
+                map((snapshot: DocumentSnapshot) =>
                     snapshot.data()
                 ),
                 switchMap((childLookup: Record<string, Partial<T>>) =>
@@ -161,13 +160,13 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                     this.service.documentGet(this.collection, id)
                 )
             ),
-            switchMap((slice$: Array<Observable<firestore.DocumentSnapshot>>) =>
+            switchMap((slice$: Array<Observable<DocumentSnapshot>>) =>
                 slice$.length === 0 ?
                     of([]) :
                     forkJoin(slice$)
             ),
-            map((page: Array<firestore.QueryDocumentSnapshot>) =>
-                page.forEach((document: firestore.QueryDocumentSnapshot) =>
+            map((page: Array<QueryDocumentSnapshot>) =>
+                page.forEach((document: QueryDocumentSnapshot) =>
                 {
                     const id: string = document.id;
                     const object: T =
@@ -202,7 +201,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         if (!initialized) { return of(null); }
 
-        const snapshot: firestore.DocumentSnapshot = action.snapshot;
+        const snapshot: DocumentSnapshot = action.snapshot;
         const id:       string                     = snapshot.id;
 
         return super.add(context, action).
@@ -364,7 +363,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         return 0;
     }
 
-    private sortTimestamp(aTimestamp: firestore.Timestamp, bTimestamp: firestore.Timestamp, ascending: boolean): number
+    private sortTimestamp(aTimestamp: Timestamp, bTimestamp: Timestamp, ascending: boolean): number
     {
         const a: number = aTimestamp.toDate().getTime();
         const b: number = bTimestamp.toDate().getTime();

@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { map, catchError, switchMap, finalize, tap } from 'rxjs/operators';
+import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
@@ -12,9 +12,9 @@ import { ActionMobileToast } from '@firefly/mobile';
 import { Pages } from '@firefly/mobile';
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
-import { firestore } from 'firebase';
 import { Place } from '@firefly/cloud';
 import { TranslateService } from '@ngx-translate/core';
+import { Timestamp } from '@theory/firebase';
 
 @Component
 ({
@@ -28,10 +28,10 @@ export class PageEventDetail
 {
     @Select(StateEvent.formGroup())     form$:            Observable<FormGroup>;
     @Select(StateEvent.isNew())         isNew$:           Observable<boolean>;
-    @Select(StateEvent.timeStart)       timeStart$:       Observable<firestore.Timestamp>;
-    @Select(StateEvent.timeEnd)         timeEnd$:         Observable<firestore.Timestamp>;
+    @Select(StateEvent.timeStart)       timeStart$:       Observable<Timestamp>;
+    @Select(StateEvent.timeEnd)         timeEnd$:         Observable<Timestamp>;
     @Select(StateEvent.timeEndValid)    timeEndValid$:    Observable<boolean>;
-    @Select(StateEvent.timeNotify)      timeNotify$:      Observable<firestore.Timestamp>;
+    @Select(StateEvent.timeNotify)      timeNotify$:      Observable<Timestamp>;
     @Select(StateEvent.timeNotifyValid) timeNotifyValid$: Observable<boolean>;
     @Select(StateEvent.timeIsLocked)    timeIsLocked$:    Observable<boolean>;
     @Select(StateEvent.private)         private$:         Observable<boolean>;

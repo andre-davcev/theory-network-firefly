@@ -62,7 +62,6 @@
     "postinstall": "ngcc --properties es2015 browser module main && node ./decorate-angular-cli.js",
     "install-exact": "npm ci",
     "workspace-generator": "nx workspace-generator",
-
     "clean": "npx rimraf hooks node_modules package-lock.json && npm i --legacy-peer-deps",
     "clean.ionic.firefly": "cd apps/firefly/mobile && npx rimraf hooks node_modules platforms www plugins package-lock.json && npm i --legacy-peer-deps && npx rimraf -- package-lock.json",
     "build.ionic.firefly": "nx build ionic-firefly",
@@ -87,6 +86,7 @@
     "@angular/platform-browser": "11.2.9",
     "@angular/platform-browser-dynamic": "11.2.9",
     "@angular/router": "11.2.9",
+    "@capacitor-community/fcm": "^1.1.0",
     "@capacitor/core": "~2.4.5",
     "@fortawesome/angular-fontawesome": "^0.8.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",

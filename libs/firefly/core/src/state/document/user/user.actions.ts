@@ -1,4 +1,4 @@
-import { User as FirebaseUser, firestore, FirebaseError } from 'firebase/app'
+import { User as FirebaseUser, FirebaseError, DocumentSnapshot } from '@theory/firebase'
 import { Credentials } from '@theory/core';
 
 import { User, MetadataUser } from '@firefly/cloud';
@@ -6,7 +6,7 @@ import { ActionsUser } from './user.actions.enum';
 
 export class ActionUserReset         { static readonly type = ActionsUser.Reset;         constructor() { } }
 export class ActionUserGet           { static readonly type = ActionsUser.Get;           constructor(public id: string) { } }
-export class ActionUserSet           { static readonly type = ActionsUser.Set;           constructor(public snapshot: firestore.DocumentSnapshot, public data?: User) { } }
+export class ActionUserSet           { static readonly type = ActionsUser.Set;           constructor(public snapshot: DocumentSnapshot, public data?: User) { } }
 export class ActionUserPatch         { static readonly type = ActionsUser.Patch;         constructor(public partial: Partial<User>, public save: boolean = false) { } }
 export class ActionUserPatchMetadata { static readonly type = ActionsUser.PatchMetadata; constructor(public metadata: Partial<MetadataUser>) { } }
 export class ActionUserCreate        { static readonly type = ActionsUser.Create;        constructor(public credentials: Credentials) { } }

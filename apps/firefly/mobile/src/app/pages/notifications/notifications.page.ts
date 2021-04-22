@@ -4,7 +4,7 @@ import { AlertController, IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, BehaviorSubject } from 'rxjs';
 
-import { StateUserAlerts, ActionUserAlertsGo, IconType, ActionUserAlertsDelete, Translation, StateApp } from '@firefly/core';
+import { ActionUserAlertsGo, IconType, ActionUserAlertsDelete, Translation, StateApp } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
 import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';

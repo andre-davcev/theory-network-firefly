@@ -1,4 +1,4 @@
-import { User as FirebaseUser, auth, firestore, FirebaseError } from 'firebase/app';
+import { User as FirebaseUser, FirebaseError, UserCredential, GeoPoint, DocumentSnapshot } from '@theory/firebase';
 
 import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';
@@ -233,7 +233,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             switchMap(() =>
                 from(this.auth.createUserWithEmailAndPassword(credentials.id, credentials.password))
             ),
-            map((userCredential: auth.UserCredential) =>
+            map((userCredential: UserCredential) =>
                 userCredential.user
             ),
             switchMap((authData: FirebaseUser) =>
@@ -365,9 +365,9 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserWatchCity, { cancelUncompleted: true })
     watchCity({ dispatch }: StateContext<StateUserModel>)
     {
-        const authData$ : Observable<firebase.User>      = this.store.select(StateUser.authData);
+        const authData$ : Observable<FirebaseUser>       = this.store.select(StateUser.authData);
         const city$     : Observable<CityInfo>           = this.store.select(StateCity.city);
-        const geopoint$ : Observable<firestore.GeoPoint> = this.store.select(StateCity.geopoint);
+        const geopoint$ : Observable<GeoPoint> = this.store.select(StateCity.geopoint);
 
         return combineLatest([authData$, city$, geopoint$]).
         pipe
@@ -425,7 +425,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             switchMap(() =>
                 from(this.auth.signInWithEmailAndPassword(payload.id, payload.password))
             ),
-            map((userCredential: firebase.auth.UserCredential) => userCredential.user),
+            map((userCredential: UserCredential) => userCredential.user),
             switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
             catchError((errorAuth: FirebaseError) =>
                 of(patchState({ errorAuth, authenticating: false }))
@@ -494,7 +494,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
 
         const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
         const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
-        const streamInterestSnapshot : firestore.DocumentSnapshot          = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
+        const streamInterestSnapshot : DocumentSnapshot          = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
 
         subscriptionsStatus[id] = { on : true };
         streamInterest.on       = true;

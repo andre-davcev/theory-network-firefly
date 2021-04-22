@@ -1,4 +1,4 @@
-import { firestore } from 'firebase/app';
+import { GeoPoint } from '@theory/firebase';
 import { LngLatLike } from 'mapbox-gl';
 
 import { CityInfo } from '../interfaces';
@@ -9,7 +9,7 @@ export interface Place
     center      : Array<number>;
     centerLike  : LngLatLike;
     description : string;
-    geopoint    : firestore.GeoPoint;
+    geopoint    : GeoPoint;
     text        : string;
     title       : string;
     type        : MapboxPlaceType;

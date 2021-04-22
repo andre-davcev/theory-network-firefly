@@ -6,8 +6,6 @@ import { ModulePage } from '@firefly/app/modules';
 import { PageEventSelector } from './event-selector.page';
 import { ModulePageEventAssets } from '../event-assets';
 import { ModulePageEventLibrary } from '../event-library';
-import { RoutesPageEventSelector } from './event-selector.page.routes';
-import { RouterModule } from '@angular/router';
 
 @NgModule
 ({

@@ -9,7 +9,7 @@ import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGet
 import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
 import { ActionMobileToast } from '@firefly/mobile';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
@@ -41,7 +41,6 @@ export class PageAssetInterest extends BaseComponent implements OnInit
     (
       private store:         Store,
       private navController: NavController,
-      private modal:         ModalController,
       private camera:        ServiceCamera,
       private translate:     TranslateService
     )

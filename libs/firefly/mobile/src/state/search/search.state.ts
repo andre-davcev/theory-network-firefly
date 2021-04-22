@@ -1,7 +1,7 @@
-import { StateSearchModel } from "./search.state.model";
+import { StateSearchModel } from './search.state.model';
 import { StateSearchOptions } from './search.state.options';
 import { Injectable } from '@angular/core';
-import { State, Store, StateContext, Action, Selector } from '@ngxs/store';
+import { State, StateContext, Action, Selector } from '@ngxs/store';
 import { ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from './search.actions';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { of, from } from 'rxjs';
@@ -20,10 +20,7 @@ export class StateSearch
   public interestsIndex: SearchIndex = this.searchClient.initIndex('interests');
   public eventsIndex: SearchIndex = this.searchClient.initIndex('events');
 
-  constructor
-  (
-    private store : Store
-  ){}
+  constructor(){}
 
   @Action(ActionSearchReset)
   reset({ patchState }: StateContext<StateSearchModel>)

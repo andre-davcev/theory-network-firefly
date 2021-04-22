@@ -1,9 +1,9 @@
-import { Observable, of } from 'rxjs'
+import { Observable } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
-import { StateUserEvents, ActionEventSetId, ActionUserEventsGetData, ActionInterestPatch, ActionInterestDirty, StateInterest, ActionEventPatch, ActionInterestEventsGet } from '@firefly/core';
+import { StateUserEvents, ActionEventSetId, StateInterest, ActionEventPatch, ActionInterestEventsGet } from '@firefly/core';
 import { Event, Interest } from '@firefly/cloud';
 import { StateStorage, StorageImage } from '@theory/firebase';
 

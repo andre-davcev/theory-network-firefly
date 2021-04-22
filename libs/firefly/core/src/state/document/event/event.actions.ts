@@ -2,11 +2,11 @@ import { CoreEnum } from '@theory/core';
 import { Event, Interest, MetadataEvent, Place } from '@firefly/cloud';
 
 import { ActionsEvent } from './event.actions.enum';
-import { firestore } from 'firebase';
+import { DocumentSnapshot } from '@theory/firebase';
 
 export class ActionEventReset         { static readonly type = ActionsEvent.Reset;         constructor() { } }
 export class ActionEventGet           { static readonly type = ActionsEvent.Get;           constructor(public id: string) { } }
-export class ActionEventSet           { static readonly type = ActionsEvent.Set;           constructor(public snapshot: firestore.DocumentSnapshot, public data?: Event) { } }
+export class ActionEventSet           { static readonly type = ActionsEvent.Set;           constructor(public snapshot: DocumentSnapshot, public data?: Event) { } }
 export class ActionEventPatch         { static readonly type = ActionsEvent.Patch;         constructor(public partial: Partial<Event>, public save: boolean = false) { } }
 export class ActionEventPatchMetadata { static readonly type = ActionsEvent.PatchMetadata; constructor(public metadata: Partial<MetadataEvent>) { } }
 export class ActionEventCreate        { static readonly type = ActionsEvent.Create;        constructor() { } }
