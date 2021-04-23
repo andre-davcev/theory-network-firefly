@@ -20,7 +20,8 @@
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-calendar": "5.1.5",
     "cordova-plugin-dialogs": "^2.0.2",
-    "uk.co.workingedge.phonegap.plugin.launchnavigator": "^5.0.4"
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "^5.0.4",
+    "rxjs": "6.5.5"
   },
   "devDependencies": {
     "@capacitor/cli": "^2.4.7"
