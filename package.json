@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "fire-ionic-build": "npm run build.ionic.firefly",
-    "fire-ionic-watch": "cd apps/firefly/mobile && ng build --watch",
-    "fire-ionic-serve": "cd apps/firefly/mobile && npm run watch",
-    "fire-ionic-serve-lab": "cd apps/firefly/mobile && npm run watch-lab",
+    "fire-ionic-watch": "ng build ionic-firefly --watch",
+    "fire-ionic-serve": "ionic serve ionic-firefly --watch",
+    "fire-ionic-serve-lab": "ionic serve ionic-firefly --watch --lab",
     "fire-ionic-sync": "npm run sync.ionic.firefly",
     "fire-ionic-update-ios": "npm run prepare.ionic.firefly.ios",
     "fire-ionic-update-android": "npm run prepare.ionic.firefly.android",
