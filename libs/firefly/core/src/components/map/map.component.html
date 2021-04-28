@@ -43,14 +43,13 @@
     <ng-container *ngIf="place">
         <mgl-marker [lngLat]="place.center"
                     [draggable]="false"
-                    [anchor]="MapboxMarkerAnchor.Bottom"
-                    #marker>
+                    [anchor]="MapboxMarkerAnchor.Bottom">
             <app-map-pin [added]="true"></app-map-pin>
         </mgl-marker>
 
-        <mgl-popup [marker]="marker"
-                   [closeOnClick]="false"
+        <mgl-popup [closeOnClick]="false"
                    [closeButton]="false"
+                   [lngLat]="place.center"
                    [anchor]="MapboxMarkerAnchor.BottomLeft"
                    [offset]="annotationOffset">
             <app-map-annotation [title]="place.title"
