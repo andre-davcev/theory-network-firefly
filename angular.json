@@ -22,6 +22,9 @@
             "main": "apps/firefly/mobile/src/main.ts",
             "polyfills": "apps/firefly/mobile/src/polyfills.ts",
             "tsConfig": "apps/firefly/mobile/tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "@mapbox/mapbox-gl-geocoder"
+            ],
             "assets": [
               {
                 "glob": "**/*",
