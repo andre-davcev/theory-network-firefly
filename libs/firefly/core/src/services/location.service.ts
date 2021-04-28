@@ -111,7 +111,9 @@ export class ServiceLocation
             types:        PlaceTypes.physical
         };
 
-        return this.mapbox.forwardGeocode(place.text, options).pipe
+        const search: string = place.title || place.text;
+
+        return this.mapbox.forwardGeocode(search, options).pipe
         (
             map((response: ResponseGeocode) =>
                 response.features[0].center
