@@ -9,10 +9,8 @@ export const StateMobileOptions: StoreOptions<StateMobileModel> =
 
     defaults :
     {
-        loadingElement : undefined,
         menuOpen       : false,
         pageRoot       : `/${Pages.Home}/${Pages.Stream}`,
-        indexAlerts    : 0,
 
         pageChild :
         {

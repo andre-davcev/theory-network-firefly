@@ -11,9 +11,11 @@ export const StateAppOptions: StoreOptions<StateAppModel> =
     defaults :
     {
         loading         : false,
+        loadingElement  : null,
         interestType    : InterestType.Unsubscribed,
         interestVirtual : false,
         eventType       : EventType.Upcoming,
-        eventVirtual    : false
+        eventVirtual    : false,
+        indexAlerts     : 0
     }
 };

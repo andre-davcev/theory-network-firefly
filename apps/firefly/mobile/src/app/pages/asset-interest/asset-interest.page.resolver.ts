@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 
 import { ActionInterestSetId, ActionInterestEventsGet, ActionInterestEventsReset, ActionAppLoadingHide } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
-import { ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetInterest implements Resolve<void>
@@ -33,11 +32,11 @@ export class ResolverPageAssetInterest implements Resolve<void>
         }
         else
         {
-          return this.store.dispatch
-          ([
-              new ActionInterestEventsGet(),
-              new ActionMobileLoadingHide()
-          ]);
+            return this.store.dispatch
+            ([
+                new ActionInterestEventsGet(),
+                new ActionAppLoadingHide()
+            ]);
         }   
     }
 }

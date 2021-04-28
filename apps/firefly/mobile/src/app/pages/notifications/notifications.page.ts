@@ -4,10 +4,10 @@ import { AlertController, IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable, from, BehaviorSubject } from 'rxjs';
 
-import { ActionUserAlertsGo, IconType, ActionUserAlertsDelete, Translation, StateApp } from '@firefly/core';
+import { ActionUserAlertsGo, IconType, ActionUserAlertsDelete, Translation, StateApp, ActionAppSlideAlertRestore, ActionAppSlideAlertIndex } from '@firefly/core';
 import { Alert } from '@firefly/cloud';
 
-import { Pages, ActionMobileSlideAlertIndex, ActionMobileSlideAlertRestore, StateMobile } from '@firefly/mobile';
+import { Pages } from '@firefly/mobile';
 import { BaseComponent } from '@theory/core';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -51,7 +51,7 @@ export class PageNotifications extends BaseComponent
         this.didInit$.next(true);
 
         setTimeout(() =>
-            this.store.dispatch(new ActionMobileSlideAlertRestore(this.sliderRef))
+            this.store.dispatch(new ActionAppSlideAlertRestore(this.sliderRef))
         );
     }
 
@@ -61,10 +61,10 @@ export class PageNotifications extends BaseComponent
         pipe
         (
             filter((index: number) =>
-                index !== this.store.selectSnapshot(StateMobile.indexAlerts)
+                index !== this.store.selectSnapshot(StateApp.indexAlerts)
             ),
             switchMap((index: number) =>
-                this.store.dispatch(new ActionMobileSlideAlertIndex(index))
+                this.store.dispatch(new ActionAppSlideAlertIndex(index))
             )
         ).
         subscribe();

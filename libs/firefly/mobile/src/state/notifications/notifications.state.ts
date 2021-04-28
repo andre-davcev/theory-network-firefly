@@ -16,6 +16,7 @@ import { filter, switchMap, take, map } from 'rxjs/operators';
 
 const fcm = new FCM();
 const { PushNotifications } = Plugins;
+
 @State<StateNotificationsModel>(StateNotificationsOptions)
 @Injectable()
 export class StateNotifications

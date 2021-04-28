@@ -1,8 +1,8 @@
 
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { from } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { from, of } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { EventType, InterestType } from '@firefly/core/enums';
 
@@ -24,23 +24,30 @@ import {
     ActionAppPageEvents,
     ActionAppLoadingShow,
     ActionAppLoadingHide,
+    ActionAppSlideAlertIndex,
+    ActionAppSlideAlertRestore,
 } from './app.actions';
 
-import { ActionCityStreamGet, ActionUserAlertsGet, ActionUserAlertsGetImages, ActionUserSubscriptionsGet, StateCityStream, StateUserAlerts, StateUserSubscriptions } from '../../child';
+import { ActionCityStreamGet, ActionUserAlertsGet, ActionUserAlertsGetImages, ActionUserAlertsMarkRead, ActionUserSubscriptionsGet, StateCityStream, StateUserAlerts, StateUserSubscriptions } from '../../child';
 import { ActionUserSubscriptionsSet } from '../user/user.actions';
 import { ActionUserEventsGet, ActionUserEventsGetData, ActionUserInterestsGet, ActionUserInterestsGetData, StateUserEvents, StateUserInterests } from '../../query';
 import { Alert, DateEvents, Event, Interest, StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { StateUser } from '../user';
+import { LoadingOptions } from '@ionic/core';
+import { LoadingController } from '@ionic/angular';
 
 @State<StateAppModel>(StateAppOptions)
 @Injectable()
 export class StateApp
 {
     @Selector() static loading(state: StateAppModel)         : boolean      { return state.loading; }
+    @Selector() static isLoading(state: StateAppModel)       : boolean      { return state.loadingElement != null;}
+    @Selector() static loadingElement(state: StateAppModel)  : any          { return state.loadingElement; }
     @Selector() static interestType(state: StateAppModel)    : InterestType { return state.interestType; }
     @Selector() static interestVirtual(state: StateAppModel) : boolean      { return state.interestVirtual; }
     @Selector() static eventType(state: StateAppModel)       : EventType    { return state.eventType; }
     @Selector() static eventVirtual(state: StateAppModel)    : boolean      { return state.eventVirtual; }
+    @Selector() static indexAlerts(state: StateAppModel)     : number       { return state.indexAlerts; }
 
     @Selector([StateUserAlerts.data()])
     public static notifications(state: StateAppModel, alerts: Array<Alert>): Array<Alert>
@@ -418,26 +425,98 @@ export class StateApp
 
     constructor
     (
-        private store: Store
+        private store   : Store,
+        private loading : LoadingController
     )
     { }
 
     @Action(ActionAppLoadingShow)
-    loadingShow({ patchState, getState }: StateContext<StateAppModel>)
+    loadingShow({ patchState, getState, dispatch }: StateContext<StateAppModel>)
     {
-        if (!StateApp.loading(getState()))
+        patchState({ loading: true });
+
+        const options: LoadingOptions =
         {
-            patchState({ loading: true });
-        }
+            spinner:     'crescent',
+            translucent: false,
+            cssClass:    'cpt-loading'
+        };
+
+        return of(StateApp.loadingElement(getState())).
+        pipe
+        (
+            filter((loadingElement: HTMLIonLoadingElement) =>
+                loadingElement == null
+            ),
+            switchMap(() =>
+                from(this.loading.create(options))
+            ),
+            tap((loadingElement: HTMLIonLoadingElement) =>
+                patchState({ loadingElement })
+            ),
+            switchMap((loadingElement: HTMLIonLoadingElement) =>
+                from(loadingElement.present())
+            )
+        );
     }
 
     @Action(ActionAppLoadingHide)
-    loadingHide({ patchState, getState }: StateContext<StateAppModel>)
+    loadingHide({ patchState, getState, dispatch }: StateContext<StateAppModel>)
     {
-        if (StateApp.loading(getState()))
-        {
-            patchState({ loading: false });
-        }
+        patchState({ loading: false });
+        return of(StateApp.loadingElement(getState())).
+        pipe
+        (
+            tap((loading: HTMLIonLoadingElement) =>
+              patchState({ loadingElement: null })
+            ),
+            filter((loading: HTMLIonLoadingElement) =>
+                loading != null
+            ),
+            tap((loading: HTMLIonLoadingElement) =>
+                loading.dismiss()
+            )
+        );
+    }
+
+    @Action(ActionAppSlideAlertRestore)
+    slideAlertRestore({ dispatch }: StateContext<StateAppModel>, { slides }: ActionAppSlideAlertRestore)
+    {
+        return slides == null ?
+            of(null) :
+            this.store.selectOnce(StateApp.indexAlerts).
+            pipe
+            (
+                switchMap((index: number) =>
+                    from(slides.slideTo(index, 0)).
+                    pipe
+                    (
+                        switchMap(() =>
+                            dispatch(new ActionAppSlideAlertIndex(index))
+                        )
+                    )
+                )
+            );
+    }
+
+    @Action(ActionAppSlideAlertIndex)
+    slideAlertIndex({ patchState, dispatch }: StateContext<StateAppModel>, { index }: ActionAppSlideAlertIndex)
+    {
+        patchState({ indexAlerts: index });
+
+        return this.store.selectOnce(StateApp.notifications).
+        pipe
+        (
+            map((unread: Array<Alert>) =>
+                unread[index]
+            ),
+            filter((alert: Alert) =>
+                alert != null
+            ),
+            switchMap((alert: Alert) =>
+                dispatch(new ActionUserAlertsMarkRead(alert.id))
+            )
+        );
     }
 
     @Action(ActionAppInterestTypeSet)
