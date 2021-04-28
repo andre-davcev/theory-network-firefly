@@ -2,8 +2,5 @@
   "appId": "com.theorynetwork.Firefly",
   "appName": "Firefly",
   "bundledWebRuntime": false,
-  "webDir": "www",
-  "plugins": {
-
-  }
+  "webDir": "www"
 }

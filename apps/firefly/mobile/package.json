@@ -4,12 +4,12 @@
   "version": "1.0.0",
   "scripts": {
     "postinstall": "node scripts/version.js",
-    "cap.add.ios": "npx ionic capacitor add ios",
-    "cap.add.android": "npx ionic capacitor add android",
-    "cap.ios": "npx ionic capacitor open ios",
-    "cap.android": "npx ionic capacitor open android",
-    "cap.copy": "npx ionic capacitor copy",
-    "cap.update": "npx ionic capacitor update"
+    "cap.add.ios": "npx cap add ios",
+    "cap.add.android": "npx cap add android",
+    "cap.ios": "npx cap open ios",
+    "cap.android": "npx cap open android",
+    "cap.copy": "npx cap copy",
+    "cap.update": "npx cap update"
   },
   "dependencies": {
     "@capacitor/android": "^2.4.6",
