@@ -1,4 +1,4 @@
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, IonSlides } from '@ionic/angular';
 
 import { InterestType, EventType } from '@firefly/core/enums';
 
@@ -6,6 +6,9 @@ import { ActionsApp } from './app.actions.enum';
 
 export class ActionAppLoadingShow       { static readonly type = ActionsApp.LoadingShow; constructor() {} }
 export class ActionAppLoadingHide       { static readonly type = ActionsApp.LoadingHide; constructor() {} }
+
+export class ActionAppSlideAlertRestore { static readonly type = ActionsApp.SlideAlertRestore; constructor(public slides: IonSlides) { } }
+export class ActionAppSlideAlertIndex   { static readonly type = ActionsApp.SlideAlertIndex;   constructor(public index: number) { } }
 
 export class ActionAppInterestTypeSet    { static readonly type = ActionsApp.InterestTypeSet;    constructor(public interestType: InterestType) { } }
 export class ActionAppInterestVirtualSet { static readonly type = ActionsApp.InterestVirtualSet; constructor(public virtual: boolean) { } }

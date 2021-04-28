@@ -3,6 +3,9 @@ export enum ActionsApp
     LoadingShow         = '[App] Loading Show',
     LoadingHide         = '[App] Loading Hide',
 
+    SlideAlertRestore = '[App] Slide Alert Restore',
+    SlideAlertIndex   = '[App] Slide Alert Index',
+
     InterestTypeSet     = '[App] Interest Type Set',
     InterestVirtualSet  = '[App] Interest Virtual Set',
 

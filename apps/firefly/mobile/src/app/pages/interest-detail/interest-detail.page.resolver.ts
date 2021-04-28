@@ -3,9 +3,8 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { ActionInterestSetId, ActionInterestEventsReset, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, InterestType, StateApp } from '@firefly/core';
+import { ActionInterestSetId, ActionInterestEventsReset, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, InterestType, StateApp, ActionAppLoadingHide } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
-import { ActionMobileLoadingHide } from '@firefly/mobile';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageInterestDetail implements Resolve<void>
@@ -25,7 +24,7 @@ export class ResolverPageInterestDetail implements Resolve<void>
                 new ActionInterestSetId(route.queryParams.id)/*,
                 new ActionUserEventsGetData()*/
               ])),
-              switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
+              switchMap(() => this.store.dispatch(new ActionAppLoadingHide()))
           )
         }
         else if(interestType === InterestType.Created)
@@ -33,14 +32,14 @@ export class ResolverPageInterestDetail implements Resolve<void>
           return this.store.dispatch(new ActionInterestSetId(route.queryParams.id)).
           pipe(
             switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous())),
-            switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
+            switchMap(() => this.store.dispatch(new ActionAppLoadingHide()))
           );
         }
         else{
           return this.store.dispatch(new ActionInterestSetIdAnonymous(route.queryParams.id)).
           pipe(
             switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous())),
-            switchMap(() => this.store.dispatch(new ActionMobileLoadingHide()))
+            switchMap(() => this.store.dispatch(new ActionAppLoadingHide()))
           );
         }   
 
