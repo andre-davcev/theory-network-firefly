@@ -357,23 +357,11 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventPlaceSet)
     placeSet({ dispatch, getState } : StateContext<StateEventModel>, { place }: ActionEventPlaceSet)
     {
-        const partial: Partial<Event> = place == null ?
-        {
-            geopoint  : null,
-            city      : null,
-            placeType : null
-        } :
-        {
-            geopoint  : place.geopoint,
-            city      : place.city,
-            placeType : place.type
-        };
-
         const metadata: MetadataEvent = StateEvent.metadataState(getState());
 
         metadata.place = place;
 
-        return dispatch(new ActionEventPatch(partial));
+        return dispatch(new ActionEventPatchMetadata(metadata));
     }
 
     @Action(ActionEventInterestAdd)

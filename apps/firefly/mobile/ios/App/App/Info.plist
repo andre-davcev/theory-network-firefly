@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Allows Firefly to add Events to your Calendar</string>
+  <key>NSContactsUsageDescription</key>
+  <string>We don't save your Contacts but we need this permission to allow you to pick from your Shared Calendars</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>CFBundleDevelopmentRegion</key>

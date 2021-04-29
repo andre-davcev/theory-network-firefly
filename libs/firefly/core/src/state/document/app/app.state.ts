@@ -431,7 +431,7 @@ export class StateApp
     { }
 
     @Action(ActionAppLoadingShow)
-    loadingShow({ patchState, getState, dispatch }: StateContext<StateAppModel>)
+    loadingShow({ patchState, getState }: StateContext<StateAppModel>)
     {
         patchState({ loading: true });
 
@@ -461,7 +461,7 @@ export class StateApp
     }
 
     @Action(ActionAppLoadingHide)
-    loadingHide({ patchState, getState, dispatch }: StateContext<StateAppModel>)
+    loadingHide({ patchState, getState }: StateContext<StateAppModel>)
     {
         patchState({ loading: false });
         return of(StateApp.loadingElement(getState())).

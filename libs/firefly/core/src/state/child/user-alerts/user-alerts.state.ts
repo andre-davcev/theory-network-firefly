@@ -38,6 +38,7 @@ import { ActionUserPatch } from '../../document/user/user.actions';
 
 import { Plugins } from '@capacitor/core';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 
 const { Browser } = Plugins;
 
@@ -193,15 +194,22 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     }
 
     @Action(ActionUserAlertsAddToCalendar)
-    addToCalendar(context: StateContext<StateUserAlertsModel>, { alert } : ActionUserAlertsAddToCalendar)
+    addToCalendar({ dispatch }: StateContext<StateUserAlertsModel>, { alert } : ActionUserAlertsAddToCalendar)
     {
-        return from(
-            this.calendar.createEventInteractively(
-                alert.name,
-                alert.city.name,
-                alert.tagline,
-                alert.timeStart.toDate(),
-                alert.timeEnd.toDate()
+        return dispatch(new ActionAppLoadingShow()).
+        pipe
+        (
+            switchMap(() =>
+                from(this.calendar.createEventInteractively(
+                    alert.name,
+                    alert.city.name,
+                    alert.tagline,
+                    alert.timeStart.toDate(),
+                    alert.timeEnd.toDate()
+                ))
+            ),
+            switchMap(() =>
+                dispatch(new ActionAppLoadingHide())
             )
         );
     }
@@ -213,9 +221,18 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     }
 
     @Action(ActionUserAlertsPhoneCall)
-    phoneCall(context: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsPhoneCall)
+    phoneCall({ dispatch }: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsPhoneCall)
     {
-        return from(this.callNumber.callNumber(alert.phone, true));
+      return dispatch(new ActionAppLoadingShow()).
+      pipe
+      (
+          switchMap(() =>
+              from(this.callNumber.callNumber(alert.phone, true))
+          ),
+          switchMap(() =>
+              dispatch(new ActionAppLoadingHide())
+          )
+      );
     }
 
     @Action(ActionUserAlertsOpenWebsite)
