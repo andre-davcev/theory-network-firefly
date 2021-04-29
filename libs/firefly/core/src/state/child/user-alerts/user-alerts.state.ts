@@ -215,7 +215,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Action(ActionUserAlertsPhoneCall)
     phoneCall(context: StateContext<StateUserAlertsModel>, { alert }: ActionUserAlertsPhoneCall)
     {
-        return from(this.callNumber.callNumber(alert.website, true));
+        return from(this.callNumber.callNumber(alert.phone, true));
     }
 
     @Action(ActionUserAlertsOpenWebsite)
