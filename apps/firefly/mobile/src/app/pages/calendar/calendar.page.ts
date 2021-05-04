@@ -46,7 +46,7 @@ export class PageCalendar extends BaseComponent
     @Select(StateApp.calendar)               calendar$             : Observable<Array<DateEvents>>;
     @Select(StateApp.calendarExists)         calendarExists$       : Observable<boolean>;
     @Select(StateApp.calendarCanAdd)         calendarCanAdd$       : Observable<boolean>;
-    @Select(StateApp.calendarEmptyMessage)   calendarEmptyMessage$ : Observable<string>;
+    @Select(StateApp.calendarEmptyMessage)   emptyMessage$         : Observable<string>;
     @Select(StateApp.eventType)              eventType$            : Observable<EventType>;
     @Select(StateSearch.searchResults)       searchResults$        : Observable<Array<Interest>>;
     @Select(StateSearch.searchResultsFound)  searchResultsFound$   : Observable<boolean>;
