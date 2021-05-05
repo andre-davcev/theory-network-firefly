@@ -18,6 +18,7 @@ export enum ActionsEvent
     ImagesUpdate = '[Event] Images Update',
     ImageSet     = '[Event] Image Set',
 
+    SetIdAnonymousPending = '[Event] SetIdAnonymousPending',
     SetIdAnonymous = '[Event] SetIdAnonymous',
 
     PlaceSet     = '[Event] Place Set',

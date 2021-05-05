@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { ActionEventSetId } from '@firefly/core';
+import { ActionEventSetIdAnonymous } from '@firefly/core';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageNotificationDetail implements Resolve<void>
@@ -12,6 +12,6 @@ export class ResolverPageNotificationDetail implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-        return this.store.dispatch(new ActionEventSetId(route.params.id, true));
+        this.store.dispatch(new ActionEventSetIdAnonymous(route.params.id))
     }
 }

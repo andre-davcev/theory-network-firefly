@@ -17,6 +17,7 @@ export class ActionEventSetId         { static readonly type = ActionsEvent.SetI
 
 export class ActionEventImagesUpdate   { static readonly type = ActionsEvent.ImagesUpdate;   constructor() { } }
 export class ActionEventImageSet       { static readonly type = ActionsEvent.ImageSet;       constructor() { } }
+export class ActionEventSetIdAnonymousPending { static readonly type = ActionsEvent.SetIdAnonymousPending; constructor(public id: string) { } }
 export class ActionEventSetIdAnonymous { static readonly type = ActionsEvent.SetIdAnonymous; constructor(public id: string) { } }
 export class ActionEventPlaceSet       { static readonly type = ActionsEvent.PlaceSet;       constructor(public place?: Place) { } }
 export class ActionEventInterestAdd    { static readonly type = ActionsEvent.InterestAdd;    constructor(public interest: Interest) { } }
