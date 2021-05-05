@@ -5,7 +5,7 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
-import { Pages, ActionMobileNavigateRoot, ActionMobileAuthSelect, ComponentHomeOptions, ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from '@firefly/mobile';
+import { Pages, ActionMobileAuthSelect, ComponentHomeOptions, ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
@@ -74,7 +74,7 @@ export class PageHome extends BaseComponent
         }
         else
         {
-            this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, type));
+            this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
         }
     }
 

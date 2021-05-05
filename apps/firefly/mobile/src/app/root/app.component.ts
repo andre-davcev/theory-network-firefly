@@ -3,14 +3,14 @@ import { Platform, MenuController, ModalController } from '@ionic/angular';
 import { from, Observable } from 'rxjs';
 import { delay, finalize, switchMap, tap } from 'rxjs/operators';
 import { Actions, ofActionSuccessful, Store, Select } from '@ngxs/store';
-import { RouterNavigation } from '@ngxs/router-plugin';
+import { Navigate, RouterNavigation } from '@ngxs/router-plugin';
 
 import { PlatformEnum } from '@theory/ionic';
 
-import { Pages, ActionMobileAuthSelected, StateMobile } from '@firefly/mobile';
-import { ActionUserLogout, StateUser, IconType, Color, IconSize, ActionCityWatch, ActionUserAuthenticate, ActionAppFilterEvents, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
+import { Pages, ActionMobileAuthSelected } from '@firefly/mobile';
+import { ActionUserLogout, StateUser, IconType, Color, IconSize, ActionCityWatch, ActionUserAuthenticate, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
 import { Plugins } from '@capacitor/core';
-import { ActionMobileMenuOpened, ActionMobileMenuClosed, ActionMobileNavigateRoot } from '@firefly/mobile';
+import { ActionMobileMenuOpened, ActionMobileMenuClosed } from '@firefly/mobile';
 import { PageLogin } from '../pages';
 
 const { SplashScreen } = Plugins;
@@ -23,12 +23,7 @@ const { SplashScreen } = Plugins;
 })
 export class ComponentApp
 {
-    @Select(StateUser.found())                userFound$:            Observable<boolean>;
-    @Select(StateMobile.pageHome)             pageHome$:             Observable<boolean>;
-    @Select(StateMobile.pageCalendar)         pageCalendar$:         Observable<boolean>;
-    @Select(StateMobile.pagePublishInterests) pagePublishInterests$: Observable<boolean>;
-    @Select(StateMobile.pagePublishEvents)    pagePublishEvents$:    Observable<boolean>;
-    @Select(StateMobile.pageUserProfile)      pageUserProfile$:      Observable<boolean>;
+    @Select(StateUser.found()) userFound$: Observable<boolean>;
 
     public Pages    : any = Pages;
     public IconType : any = IconType;
@@ -99,29 +94,9 @@ export class ComponentApp
         subscribe();
     }
 
-    public go(page: Pages): void
+    public go(): void
     {
         this.menu.close();
-
-        if (page === Pages.Calendar)
-        {
-            this.store.dispatch(new ActionAppFilterEvents()).
-            pipe
-            (
-                switchMap(() =>
-                    this.store.dispatch(new ActionMobileNavigateRoot(page))
-                )
-            ).
-            subscribe();
-        }
-        else if (page === Pages.Home)
-        {
-            this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream));
-        }
-        else
-        {
-            this.store.dispatch(new ActionMobileNavigateRoot(page));
-        }
     }
 
     public logout(): void
@@ -135,7 +110,7 @@ export class ComponentApp
                 this.store.dispatch(new ActionUserLogout())
             ),
             switchMap(() =>
-                this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream))
+                this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]))
             ),
             finalize(() =>
                 this.store.dispatch(new ActionAppLoadingHide())

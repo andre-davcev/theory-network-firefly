@@ -6,17 +6,16 @@ import {
     ActionMobileToast,
     ActionMobileMenuOpened,
     ActionMobileMenuClosed,
-    ActionMobileNavigateRoot,
     ActionMobileAuthSelected,
     ActionMobileAuthSelect
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
-import { ToastController, NavController, ActionSheetController } from '@ionic/angular';
-import { switchMap, tap } from 'rxjs/operators';
+import { ToastController, ActionSheetController } from '@ionic/angular';
+import { switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { ToastOptions } from '@ionic/core';
 import { Pages } from '@firefly/mobile/enums';
-import { NgZone, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @State<StateMobileModel>(StateMobileOptions)
@@ -38,10 +37,8 @@ export class StateMobile
     constructor
     (
         private toast       : ToastController,
-        private nav         : NavController,
         private actionSheet : ActionSheetController,
-        private translate   : TranslateService,
-        private ngZone      : NgZone
+        private translate   : TranslateService
     ) { }
 
     @Action(ActionMobileToast)
@@ -68,32 +65,6 @@ export class StateMobile
     menuClosed({ patchState }: StateContext<StateMobileModel>)
     {
         patchState({ menuOpen: false });
-    }
-
-    @Action(ActionMobileNavigateRoot)
-    navigateRoot({ patchState, getState }: StateContext<StateMobileModel>, { page, child }: ActionMobileNavigateRoot)
-    {
-        const pageChild: Record<string, string> = StateMobile.pageChild(getState());
-        const parts: Array<string> = [ ...page.split('/') ];
-
-        child = child == null ? pageChild[page] : child;
-
-        if (child != null)
-        {
-            parts.push(...child.split('/'));
-
-            pageChild[page] = child;
-        }
-
-        const pageRoot: string = `/${parts.join('/')}`;
-
-        return from(this.ngZone.run(() => this.nav.navigateRoot(pageRoot))).
-        pipe
-        (
-            tap(() =>
-                patchState({ pageRoot, pageChild })
-            )
-        );
     }
 
     @Action(ActionMobileAuthSelect)

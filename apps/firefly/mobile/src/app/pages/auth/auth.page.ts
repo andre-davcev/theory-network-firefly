@@ -5,8 +5,9 @@ import { filter, switchMap } from 'rxjs/operators';
 
 import { StateUser } from '@firefly/core';
 import { ActionDeviceStatusBarShow, ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
+import { Pages } from '@firefly/mobile';
 import { StatusBarStyle } from '@capacitor/core';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component
 ({
@@ -34,7 +35,7 @@ export class PageAuth implements OnInit
             ),
             filter((initialized: boolean) => initialized),
             switchMap(() =>
-                this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream))
+                this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]))
             )
         ).
         subscribe();
