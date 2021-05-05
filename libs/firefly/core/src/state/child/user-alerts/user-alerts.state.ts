@@ -31,7 +31,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { Collection, ImageType } from '@firefly/core/enums';
 import { StateUser } from '../../document/user/user.state';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map, tap, delay } from 'rxjs/operators';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { ActionUserPatch } from '../../document/user/user.actions';
@@ -199,6 +199,21 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
         return dispatch(new ActionAppLoadingShow()).
         pipe
         (
+            map(() =>
+                this.calendar.createEventInteractively(
+                    alert.name,
+                    alert.city.name,
+                    alert.tagline,
+                    alert.timeStart.toDate(),
+                    alert.timeEnd.toDate()
+                )
+            ),
+            delay(1000),
+            switchMap(() =>
+                dispatch(new ActionAppLoadingHide())
+            )
+/*
+// ToDo: When clicking cancel, promise doesn't resolve
             switchMap(() =>
                 from(this.calendar.createEventInteractively(
                     alert.name,
@@ -208,9 +223,10 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                     alert.timeEnd.toDate()
                 ))
             ),
-            switchMap(() =>
+            finalize(() =>
                 dispatch(new ActionAppLoadingHide())
             )
+*/
         );
     }
 

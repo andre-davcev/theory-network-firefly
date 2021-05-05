@@ -6,7 +6,7 @@ import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, InterestType, Translation, StateApp, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
-import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
+import { Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
 import { ActionMobileToast } from '@firefly/mobile';
 import { NavController } from '@ionic/angular';
@@ -128,7 +128,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
         {
             this.store.dispatch(new ActionMobileToast(message));
             if(interestType === InterestType.Created)
-              this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream));
+              this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
             else
               this.navController.back();
         });

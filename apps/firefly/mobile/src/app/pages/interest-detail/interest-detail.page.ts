@@ -6,7 +6,7 @@ import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymousPending, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
-import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
+import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController, AlertController } from '@ionic/angular';
@@ -184,7 +184,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
                                 this.store.dispatch(new ActionInterestDelete()).pipe
                                 (
                                     switchMap(() =>
-                                        this.store.dispatch(new ActionMobileNavigateRoot(Pages.Home, Pages.Stream))
+                                        this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]))
                                     )
                                 ).
                                 subscribe()
