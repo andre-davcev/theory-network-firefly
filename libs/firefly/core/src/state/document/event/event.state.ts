@@ -22,6 +22,7 @@ import {
   ActionEventInterestAdd,
   ActionEventAccept,
   ActionEventDeny,
+  ActionEventSetIdAnonymousPending,
   ActionEventSetIdAnonymous,
   ActionEventPatchMetadata,
   ActionEventImagesUpdate,
@@ -308,14 +309,33 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         return dispatch(new ActionEventSet(snapshot, data));
     }
 
-    @Action(ActionEventSetIdAnonymous)
-    actionSetIdAnonymous(context: StateContext<StateEventModel>, { id }: ActionEventSetIdAnonymous)
+    @Action(ActionEventSetIdAnonymousPending)
+    actionSetIdAnonymousPending(context: StateContext<StateEventModel>, { id }: ActionEventSetIdAnonymous)
     {
       const pendingEvents: Event[] = this.store.selectSnapshot(StateInterest.pendingEvents);
       const pendingEvent: Event[] = pendingEvents.filter((event) => event.id = id);
 
       const query: Query   = this.service.collection('events').ref
           .where('id', '==', pendingEvent[0].id);
+
+      return from(query.get()).pipe
+      (
+        map((snapshot: QuerySnapshot) =>
+            snapshot.docs
+        ),
+        switchMap((snapshot: Array<QueryDocumentSnapshot>) =>
+        {
+          const event: Event = snapshot[0].data() as Event;
+          return this.store.dispatch(new ActionEventSet(snapshot[0], event))
+        }
+      ))
+    }
+
+    @Action(ActionEventSetIdAnonymous)
+    actionSetIdAnonymous(context: StateContext<StateEventModel>, { id }: ActionEventSetIdAnonymous)
+    {
+      const query: Query   = this.service.collection('events').ref
+          .where('id', '==', id);
 
       return from(query.get()).pipe
       (

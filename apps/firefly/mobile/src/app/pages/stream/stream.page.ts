@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionUserSubscriptionOnOff, ActionInterestGet, ActionEventGet, ActionAppPageInterests, ActionAppLoadingShow, StateApp } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionUserSubscriptionOnOff, ActionInterestGet, ActionAppPageInterests, ActionAppLoadingShow, StateApp } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
@@ -139,21 +139,7 @@ export class PageStream extends BaseComponent implements OnInit
 
     public select(event: Event): void
     {
-        this.store.dispatch(new ActionAppLoadingShow()).
-        pipe
-        (
-            switchMap(() =>
-                this.store.dispatch(new ActionEventGet(event.id))
-            ),
-            switchMap(() =>
-                this.store.dispatch
-                ([
-                    new ActionAppLoadingShow(),
-                    new Navigate([Pages.NotificationDetail, event.id])
-                ])
-            )
-        ).
-        subscribe();
+      this.store.dispatch(new Navigate([Pages.NotificationDetail, event.id])).subscribe();
     }
 /*
     public filterChanged(event: any): void

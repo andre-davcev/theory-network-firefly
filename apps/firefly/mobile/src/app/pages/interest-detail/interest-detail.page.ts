@@ -5,7 +5,7 @@ import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymous, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymousPending, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
 import { ActionMobileNavigateRoot, Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileToast } from '@firefly/mobile';
@@ -201,7 +201,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public acceptEvent(event: Event): void
     {
-      this.store.dispatch(new ActionEventSetIdAnonymous(event.id)).pipe
+      this.store.dispatch(new ActionEventSetIdAnonymousPending(event.id)).pipe
       (
         switchMap(() => this.store.dispatch(new ActionEventAccept())),
         switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
@@ -210,7 +210,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public denyEvent(event: Event): void
     {
-      this.store.dispatch(new ActionEventSetIdAnonymous(event.id)).pipe
+      this.store.dispatch(new ActionEventSetIdAnonymousPending(event.id)).pipe
       (
         switchMap(() => this.store.dispatch(new ActionEventDeny())),
         switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
