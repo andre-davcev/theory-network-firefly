@@ -11,7 +11,7 @@ import { StateCityOptions } from './city.state.options';
 import { StateLocation } from '@theory/capacitor';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { GeolocationPosition } from '@capacitor/core';
-import { CityInfo, StreamInterest } from '@firefly/cloud';
+import { CityInfo, StreamInterest, User } from '@firefly/cloud';
 import { ServiceLocation } from '@firefly/core/services';
 import { Collection } from '@firefly/core/enums';
 import { ActionCityStreamSetData } from '../../child/city-stream/city-stream.actions';
@@ -82,7 +82,9 @@ export class StateCity
     @Action(ActionCityCreate)
     createCity({ dispatch }: StateContext<StateCityModel>, { city }: ActionCityCreate)
     {
-        return ServiceFirestoreBase.documentGet<CityInfo>(this.angularfire, Collection.Cities, city.id).
+        const user: User = { id: 'anonymous', city } as User;
+
+        return ServiceFirestoreBase.documentPatch<User>(this.angularfire, Collection.Users, user).
         pipe
         (
             switchMap(() =>

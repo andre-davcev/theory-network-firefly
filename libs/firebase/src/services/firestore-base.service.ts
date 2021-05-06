@@ -45,6 +45,18 @@ export class ServiceFirestoreBase
         );
     }
 
+    public static documentPatch<T extends FirebaseDocument>(service: AngularFirestore, collection: string, entity: T): Observable<FirestoreDocumentSnapshot>
+    {
+        const document: AngularFirestoreDocument<T> = service.collection<T>(collection).doc(entity.id);
+
+        return from(document.update(entity)).pipe
+        (
+            switchMap(() =>
+                from(document.get())
+            )
+        );
+    }
+
     public static documentCreate<T extends FirebaseDocument>(service: AngularFirestore, collection: string, entity: T): Observable<FirestoreDocumentSnapshot>
     {
         let { metadata, ...object } = entity;

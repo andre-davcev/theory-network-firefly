@@ -1,9 +1,9 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+import { DocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
 import { ServiceStorage, Collection, ImageType } from '../library';
 
-const database: Firestore = db();
+db();
 
 const EventsDelete: CloudFunction<DocumentSnapshot> =
 
