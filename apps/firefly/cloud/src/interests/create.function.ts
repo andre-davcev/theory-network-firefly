@@ -1,5 +1,5 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+import { DocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
 import { Version, ServiceFirestore, Interest, Collection } from '../library';
 import algoliasearch from 'algoliasearch';
@@ -10,7 +10,7 @@ const env = functions.config();
 const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
 const index = client.initIndex('interests');
 
-const database: Firestore = db();
+db();
 
 const InterestsCreate: CloudFunction<DocumentSnapshot> =
 

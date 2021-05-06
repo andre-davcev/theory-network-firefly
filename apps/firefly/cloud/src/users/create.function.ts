@@ -13,7 +13,8 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
     const userId : string = snapshot.id;
     const user   : User   = ServiceFirestore.create<User>(snapshot, Version.Users);
 
-    user.isPublisher = false;
+    user.isPublisher         = false;
+    user.subscriptionsStatus = {};
 
     user.notifications =
     {

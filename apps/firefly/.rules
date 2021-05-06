@@ -1,11 +1,11 @@
 service cloud.firestore {
   match /databases/{database}/documents {
 		match /cities/{id} {
-      allow get:    if true;
-      allow list:   if true;
-      allow create: if isAuthenticated(auth()) && resource == null;
-      allow update: if true;
-      allow delete: if true;
+      allow get:    if false;
+      allow list:   if false;
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
     }
     match /debug/** {
       allow get:    if false;
@@ -49,11 +49,19 @@ service cloud.firestore {
       allow update: if isUser(uid());
       allow delete: if isUser(uid());
     }
+    match /users/anonymous {
+      allow get:    if false;
+      allow list:   if false;
+      allow create: if isAnonymous(auth());
+      allow update: if isAnonymous(auth());
+      allow delete: if false;
+    }
 
     function auth()                             { return request.auth; }
     function uid()                              { return auth().uid; }
     function isUser(uid)               					{ return uid != null; }
-    function isAuthenticated(auth)              { return isUser(auth.uid) || auth.token.firebase.sign_in_provider == 'anonymous'; }
+    function isAuthenticated(auth)              { return isUser(auth.uid) || isAnonymous(auth); }
+    function isAnonymous(auth)                  { return auth.token.firebase.sign_in_provider == 'anonymous'; }
   }
 }
 
