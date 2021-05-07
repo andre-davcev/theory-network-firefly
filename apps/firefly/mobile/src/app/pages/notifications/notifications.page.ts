@@ -61,7 +61,7 @@ export class PageNotifications extends BaseComponent
         pipe
         (
             filter((index: number) =>
-                index !== this.store.selectSnapshot(StateApp.indexAlerts)
+                index !== this.store.selectSnapshot(StateApp.notificationsIndex)
             ),
             switchMap((index: number) =>
                 this.store.dispatch(new ActionAppSlideAlertIndex(index))

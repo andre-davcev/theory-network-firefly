@@ -39,22 +39,14 @@ import { LoadingController } from '@ionic/angular';
 @Injectable()
 export class StateApp
 {
-    @Selector() static loading(state: StateAppModel)         : boolean      { return state.loading; }
-    @Selector() static isLoading(state: StateAppModel)       : boolean      { return state.loadingElement != null;}
-    @Selector() static loadingElement(state: StateAppModel)  : any          { return state.loadingElement; }
-    @Selector() static interestType(state: StateAppModel)    : InterestType { return state.interestType; }
-    @Selector() static interestVirtual(state: StateAppModel) : boolean      { return state.interestVirtual; }
-    @Selector() static eventType(state: StateAppModel)       : EventType    { return state.eventType; }
-    @Selector() static eventVirtual(state: StateAppModel)    : boolean      { return state.eventVirtual; }
-    @Selector() static indexAlerts(state: StateAppModel)     : number       { return state.indexAlerts; }
-
-
-
-    @Selector([StateUserAlerts.data()])
-    public static notificationsUnreadExists(state: StateAppModel, alerts: Array<Alert>): boolean
-    {
-        return StateApp.notificationsUnreadCount(state, alerts) > 0
-    }
+    @Selector() static loading(state: StateAppModel)            : boolean      { return state.loading; }
+    @Selector() static isLoading(state: StateAppModel)          : boolean      { return state.loadingElement != null;}
+    @Selector() static loadingElement(state: StateAppModel)     : any          { return state.loadingElement; }
+    @Selector() static interestType(state: StateAppModel)       : InterestType { return state.interestType; }
+    @Selector() static interestVirtual(state: StateAppModel)    : boolean      { return state.interestVirtual; }
+    @Selector() static eventType(state: StateAppModel)          : EventType    { return state.eventType; }
+    @Selector() static eventVirtual(state: StateAppModel)       : boolean      { return state.eventVirtual; }
+    @Selector() static notificationsIndex(state: StateAppModel) : number       { return state.notificationsIndex; }
 
     @Selector
     ([
@@ -419,6 +411,12 @@ export class StateApp
             length;
     }
 
+    @Selector([StateUserAlerts.data()])
+    public static notificationsUnreadExists(state: StateAppModel, alerts: Array<Alert>): boolean
+    {
+        return StateApp.notificationsUnreadCount(state, alerts) > 0
+    }
+
     constructor
     (
         private store   : Store,
@@ -480,7 +478,7 @@ export class StateApp
     {
         return slides == null ?
             of(null) :
-            this.store.selectOnce(StateApp.indexAlerts).
+            this.store.selectOnce(StateApp.notificationsIndex).
             pipe
             (
                 switchMap((index: number) =>
@@ -498,7 +496,7 @@ export class StateApp
     @Action(ActionAppSlideAlertIndex)
     slideAlertIndex({ patchState, dispatch }: StateContext<StateAppModel>, { index }: ActionAppSlideAlertIndex)
     {
-        patchState({ indexAlerts: index });
+        patchState({ notificationsIndex: index });
 
         return this.store.selectOnce(StateApp.notifications).
         pipe
