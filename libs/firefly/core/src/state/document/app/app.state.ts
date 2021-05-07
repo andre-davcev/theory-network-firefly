@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { from, of } from 'rxjs';
@@ -49,35 +48,7 @@ export class StateApp
     @Selector() static eventVirtual(state: StateAppModel)    : boolean      { return state.eventVirtual; }
     @Selector() static indexAlerts(state: StateAppModel)     : number       { return state.indexAlerts; }
 
-    @Selector([StateUserAlerts.data()])
-    public static notifications(state: StateAppModel, alerts: Array<Alert>): Array<Alert>
-    {
-        return alerts.
-            filter((alert: Alert) =>
-                !alert.read || alert.metadata?.sessionRead
-            );
-    }
 
-    @Selector([StateUserAlerts.data()])
-    public static notificationsCount(state: StateAppModel, alerts: Array<Alert>): number
-    {
-        return StateApp.notifications(state, alerts).length;
-    }
-
-    @Selector([StateUserAlerts.data()])
-    public static notificationsExist(state: StateAppModel, alerts: Array<Alert>): boolean
-    {
-        return StateApp.notificationsCount(state, alerts) > 0;
-    }
-
-    @Selector([StateUserAlerts.data()])
-    public static notificationsUnreadCount(state: StateAppModel, alerts: Array<Alert>): number
-    {
-        return alerts.
-            filter((alert: Alert) =>
-                !alert.read
-            ).length;
-    }
 
     @Selector([StateUserAlerts.data()])
     public static notificationsUnreadExists(state: StateAppModel, alerts: Array<Alert>): boolean
@@ -421,6 +392,31 @@ export class StateApp
     ): boolean
     {
         return !StateApp.streamFound(state, userInterests, lookup, keys, subscriptions, interestType, virtual);
+    }
+
+    @Selector([StateUserAlerts.data()])
+    public static notifications(state: StateAppModel, alerts: Array<Alert>): Array<Alert>
+    {
+        return alerts.
+            filter((alert: Alert) =>
+                !alert.read || alert.metadata?.sessionRead
+            );
+    }
+
+    @Selector([StateUserAlerts.data()])
+    public static notificationsExist(state: StateAppModel, alerts: Array<Alert>): boolean
+    {
+        return StateApp.notifications(state, alerts).length > 0;
+    }
+
+    @Selector([StateUserAlerts.data()])
+    public static notificationsUnreadCount(state: StateAppModel, alerts: Array<Alert>): number
+    {
+        return alerts.
+            filter((alert: Alert) =>
+                !alert.read
+            ).
+            length;
     }
 
     constructor
