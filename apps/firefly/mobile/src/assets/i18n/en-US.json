@@ -152,7 +152,7 @@
   "page.event.filter.upcoming" : "Upcoming",
   "page.event.filter.created"  : "Created",
 
-  "page.stream.empty.unsubscribed" : "Our swarm of fireflies are busy building your Interest recommendations. Check back later!",
+  "page.stream.empty.unsubscribed" : "Oh no! Our swarm of Fireflies have come up empty in your city. Join our community by creating new Interests in your area or check back later!",
   "page.stream.empty.subscribed"   : "It looks like your haven't subscribed to any Interests yet!",
   "page.stream.empty.created"      : "As a valuable part of the Firefly community, feel free to create your own Interest streams using the Add button below.",
   "page.stream.empty.virtual"      : "Our swarm of fireflies are busy building your Virtual Interest recommendations. Check back later!",
