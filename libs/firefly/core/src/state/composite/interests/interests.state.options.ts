@@ -6,7 +6,7 @@ import { StateInterestsModel } from './interests.state.model';
 
 export const StateInterestsOptions: StoreOptions<StateInterestsModel> =
 {
-    name : 'interests',
+    name : 'interestsStream',
 
     defaults :
     {

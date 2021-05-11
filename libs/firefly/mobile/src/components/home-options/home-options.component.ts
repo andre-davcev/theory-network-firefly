@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { InterestType, EventType, StateUser, ActionAppFilterInterests, ActionAppFilterEvents, ActionAppInterestVirtualSet, ActionAppEventVirtualSet } from '@firefly/core';
+import { InterestType, EventType, StateUser, ActionInterestsSetVirtual, ActionCalendarSetVirtual, ActionInterestsFilter, ActionCalendarFilter } from '@firefly/core';
 import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 import { Observable, from } from 'rxjs';
@@ -36,8 +36,8 @@ export class ComponentHomeOptions
     public filterChanged(event: CustomEvent): void
     {
         const action: any = this.isStream ?
-            new ActionAppFilterInterests(event.detail.value) :
-            new ActionAppFilterEvents(event.detail.value);
+            new ActionInterestsFilter(event.detail.value) :
+            new ActionCalendarFilter(event.detail.value)
 
         this.store.dispatch(action).
         pipe
@@ -53,8 +53,8 @@ export class ComponentHomeOptions
         const virtual: boolean = event.detail.checked;
 
         this.store.dispatch(this.isStream ?
-            new ActionAppInterestVirtualSet(virtual) :
-            new ActionAppEventVirtualSet(virtual)
+            new ActionInterestsSetVirtual(virtual) :
+            new ActionCalendarSetVirtual(virtual)
         );
     }
 }

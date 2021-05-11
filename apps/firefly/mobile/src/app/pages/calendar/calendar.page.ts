@@ -17,9 +17,10 @@ import {
     ActionInterestGet,
     ActionUserEventsDelete,
     Translation,
-    StateApp,
     ActionAppLoadingShow,
-    ActionAppPageEvents
+    ActionCalendarPage,
+    StateCalendar,
+    StateInterests
 } from '@firefly/core';
 import {
     ActionMobileAuthSelect,
@@ -43,11 +44,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class PageCalendar extends BaseComponent
 {
     @Select(StateUser.isPublisher)           isPublisher$          : Observable<boolean>;
-    @Select(StateApp.calendar)               calendar$             : Observable<Array<DateEvents>>;
-    @Select(StateApp.calendarExists)         calendarExists$       : Observable<boolean>;
-    @Select(StateApp.calendarCanAdd)         calendarCanAdd$       : Observable<boolean>;
-    @Select(StateApp.calendarEmptyMessage)   emptyMessage$         : Observable<string>;
-    @Select(StateApp.eventType)              eventType$            : Observable<EventType>;
+    @Select(StateCalendar.data)              data$                 : Observable<Array<DateEvents>>;
+    @Select(StateCalendar.exists)            exists$               : Observable<boolean>;
+    @Select(StateCalendar.canAdd)            canAdd$               : Observable<boolean>;
+    @Select(StateCalendar.emptyMessage)      emptyMessage$         : Observable<string>;
+    @Select(StateCalendar.type)              eventType$            : Observable<EventType>;
     @Select(StateSearch.searchResults)       searchResults$        : Observable<Array<Interest>>;
     @Select(StateSearch.searchResultsFound)  searchResultsFound$   : Observable<boolean>;
     @Select(StateMobile.menuOpen)            menuOpen$             : Observable<boolean>;
@@ -186,10 +187,10 @@ export class PageCalendar extends BaseComponent
             component: ComponentHomeOptions,
             componentProps:
             {
-                interestType : this.store.selectSnapshot(StateApp.interestType),
-                eventType    : this.store.selectSnapshot(StateApp.eventType),
+                interestType : this.store.selectSnapshot(StateInterests.type),
+                eventType    : this.store.selectSnapshot(StateCalendar.type),
                 isStream     : false,
-                virtual      : this.store.selectSnapshot(StateApp.eventVirtual)
+                virtual      : this.store.selectSnapshot(StateCalendar.virtual)
 
             },
             event,
@@ -224,6 +225,6 @@ export class PageCalendar extends BaseComponent
 
     public loadData(event): void
     {
-        this.store.dispatch(new ActionAppPageEvents(this.infiniteScroll));
+        this.store.dispatch(new ActionCalendarPage(this.infiniteScroll));
     }
 }

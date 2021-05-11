@@ -16,12 +16,12 @@
 <section class="cpt-events"
          fxLayout="column"
          fxLayoutAlign="center">
-    <ion-slides *ngIf="(didInit$ | async) && (notificationsExist$ | async)"
+    <ion-slides *ngIf="(didInit$ | async) && (exists$ | async)"
                 #slider
                 pager="true"
                 (ionSlideDidChange)="slideChanged()"
                 [options]="slideOptions">
-        <ion-slide #status *ngFor="let notification of notifications$ | async">
+        <ion-slide #status *ngFor="let notification of data$ | async">
             <app-slide [slide]="notification"
                         [buttonText]="'general.go' | translate"
                         (alertDeleteClicked)="delete(notification)"
@@ -30,7 +30,7 @@
         </ion-slide>
     </ion-slides>
 
-    <app-icon-message *ngIf="!(notificationsExist$ | async)"
+    <app-icon-message *ngIf="!(exists$ | async)"
                       slot="fixed"
                       [icon]="IconType.Alerts"
                       [message]="'page.events.empty.new' | translate">

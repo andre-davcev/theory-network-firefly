@@ -5,7 +5,7 @@ import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, InterestType, Translation, StateApp, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, InterestType, Translation, ActionAppLoadingShow, ActionAppLoadingHide, StateInterests } from '@firefly/core';
 import { Pages } from '@firefly/mobile';
 import { Event } from '@firefly/cloud';
 import { ActionMobileToast } from '@firefly/mobile';
@@ -85,7 +85,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
 
     public save(): void
     {
-        const interestType : InterestType = this.store.selectSnapshot(StateApp.interestType);
+        const interestType : InterestType = this.store.selectSnapshot(StateInterests.type);
         const isNew        : boolean      = this.store.selectSnapshot(StateInterest.isNew());
 
         this.translate.get

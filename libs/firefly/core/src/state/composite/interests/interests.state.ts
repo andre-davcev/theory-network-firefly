@@ -21,7 +21,8 @@ import { ActionCityStreamGet, ActionUserSubscriptionsGet, StateCityStream, State
 import { ActionUserSubscriptionsSet } from '../../document/user/user.actions';
 import { ActionUserInterestsGet, ActionUserInterestsGetData, StateUserInterests } from '../../query';
 import { Interest, StreamInterest, SubscriptionPartial } from '@firefly/cloud';
-import { ActionAppLoadingHide, ActionAppLoadingShow, StateUser } from '../../document';
+import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
+import { StateUser } from '../../document/user';
 
 @State<StateInterestsModel>(StateInterestsOptions)
 @Injectable()
