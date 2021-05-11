@@ -20,7 +20,7 @@ export class StateAlerts
     @Selector() static index(state: StateAlertsModel) : number { return state.index; }
 
     @Selector([StateUserAlerts.data()])
-    public static notifications(state: StateAlertsModel, alerts: Array<Alert>): Array<Alert>
+    public static data(state: StateAlertsModel, alerts: Array<Alert>): Array<Alert>
     {
         return alerts.
             filter((alert: Alert) =>
@@ -29,13 +29,13 @@ export class StateAlerts
     }
 
     @Selector([StateUserAlerts.data()])
-    public static notificationsExist(state: StateAlertsModel, alerts: Array<Alert>): boolean
+    public static exists(state: StateAlertsModel, alerts: Array<Alert>): boolean
     {
-        return StateAlerts.notifications(state, alerts).length > 0;
+        return StateAlerts.data(state, alerts).length > 0;
     }
 
     @Selector([StateUserAlerts.data()])
-    public static notificationsUnreadCount(state: StateAlertsModel, alerts: Array<Alert>): number
+    public static unreadCount(state: StateAlertsModel, alerts: Array<Alert>): number
     {
         return alerts.
             filter((alert: Alert) =>
@@ -45,9 +45,9 @@ export class StateAlerts
     }
 
     @Selector([StateUserAlerts.data()])
-    public static notificationsUnreadExists(state: StateAlertsModel, alerts: Array<Alert>): boolean
+    public static unreadExists(state: StateAlertsModel, alerts: Array<Alert>): boolean
     {
-        return StateAlerts.notificationsUnreadCount(state, alerts) > 0
+        return StateAlerts.unreadCount(state, alerts) > 0
     }
 
     constructor
@@ -81,7 +81,7 @@ export class StateAlerts
     {
         patchState({ index: index });
 
-        return this.store.selectOnce(StateAlerts.notifications).
+        return this.store.selectOnce(StateAlerts.data).
         pipe
         (
             map((unread: Array<Alert>) =>

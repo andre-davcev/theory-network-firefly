@@ -17,7 +17,7 @@
             <ion-button *ngIf="isUser$ | async" icon-only (click)="go(Pages.Notifications)" class="cpt-notifications" [disabled]="menuOpen$ | async">
                 <ion-icon name="notifications" color="dark" size="large"></ion-icon>
 
-                <ion-badge slot="end" *ngIf="notificationsUnreadExists$ | async" color="secondary">{{ notificationsUnreadCount$ | async }}</ion-badge>
+                <ion-badge slot="end" *ngIf="unreadExists$ | async" color="secondary">{{ unreadCount$ | async }}</ion-badge>
             </ion-button>
         </ion-buttons>
 

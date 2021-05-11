@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionUserSubscriptionOnOff, ActionInterestGet, ActionAppPageInterests, ActionAppLoadingShow, StateApp } from '@firefly/core';
+import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionUserSubscriptionOnOff, ActionInterestGet, ActionAppLoadingShow, ActionInterestsPage, StateInterests } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
@@ -21,12 +21,12 @@ export class PageStream extends BaseComponent implements OnInit
 {
     @Select(StateUser.authenticated)        authenticated$:      Observable<boolean>;
     @Select(StateInterest.events)           events$:             Observable<Event[]>;
-    @Select(StateApp.stream)                stream$:             Observable<Array<StreamInterest>>;
-    @Select(StateApp.streamFound)           found$:              Observable<boolean>;
-    @Select(StateApp.streamEmpty)           empty$:              Observable<boolean>;
-    @Select(StateApp.streamAdd)             add$:                Observable<boolean>;
+    @Select(StateInterests.data)            data$:             Observable<Array<StreamInterest>>;
+    @Select(StateInterests.found)           found$:              Observable<boolean>;
+    @Select(StateInterests.empty)           empty$:              Observable<boolean>;
+    @Select(StateInterests.add)             add$:                Observable<boolean>;
     @Select(StateUser.subscriptionsStatus)  subscriptions$:      Observable<Record<string, SubscriptionPartial>>;
-    @Select(StateApp.streamEmptyMessage)    emptyMessage$:       Observable<string>;
+    @Select(StateInterests.emptyMessage)    emptyMessage$:       Observable<string>;
     @Select(StateSearch.searchResults)      searchResults$:      Observable<Array<Interest>>;
     @Select(StateSearch.searchResultsFound) searchResultsFound$: Observable<boolean>;
 
@@ -134,7 +134,7 @@ export class PageStream extends BaseComponent implements OnInit
 
     public loadData(event: any): void
     {
-        this.store.dispatch(new ActionAppPageInterests(this.infiniteScroll));
+        this.store.dispatch(new ActionInterestsPage(this.infiniteScroll));
     }
 
     public select(event: Event): void
