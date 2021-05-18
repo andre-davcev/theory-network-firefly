@@ -29,6 +29,7 @@ export enum ActionsUser
     SubscriptionAdd     = '[User] Subscription Add',
     SubscriptionRemove  = '[User] Subscription Remove',
     SubscriptionOnOff   = '[User] Subscription On/Off',
+    SubscriptionFilter  = '[User] Filter',
 
     NotificationsSet  = '[User] Notifications Set',
     IsPublisherSet    = '[User] Is Publisher Set'

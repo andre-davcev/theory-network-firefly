@@ -10,3 +10,5 @@ export class ActionUserSubscriptionsGet     { static readonly type = ActionsUser
 export class ActionUserSubscriptionsAdd     { static readonly type = ActionsUserSubscriptions.Add;     constructor(public snapshot: DocumentSnapshot, public entity?: Subscription) { } }
 export class ActionUserSubscriptionsRemove  { static readonly type = ActionsUserSubscriptions.Remove;  constructor(public id: string) { } }
 export class ActionUserSubscriptionsSync    { static readonly type = ActionsUserSubscriptions.Sync;    constructor(public object: Subscription) { } }
+
+export class ActionUserSubscriptionsSetSubscriptions { static readonly type = ActionsUserSubscriptions.SetSubscriptions; constructor(public subscriptions: Record<string, SubscriptionPartial>) { } }

@@ -12,6 +12,9 @@ import {
 
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController } from '@ionic/angular';
+import { StateCity } from '../city';
+import { StateCityStream } from '../../child';
+import { StateUser } from '../user';
 
 @State<StateAppModel>(StateAppOptions)
 @Injectable()
@@ -20,6 +23,17 @@ export class StateApp
     @Selector() static loading(state: StateAppModel)        : boolean { return state.loading; }
     @Selector() static isLoading(state: StateAppModel)      : boolean { return state.loadingElement != null;}
     @Selector() static loadingElement(state: StateAppModel) : any     { return state.loadingElement; }
+
+    @Selector
+    ([
+        StateUser.initialized,
+        StateCity.found,
+        StateCityStream.initialized(),
+    ])
+    static initialized(userInitialized: boolean, cityFound: boolean, streamInitialized: boolean) : boolean
+    {
+        return userInitialized && cityFound && streamInitialized;
+    }
 
     constructor
     (

@@ -13,6 +13,7 @@ export interface StateCollectionModel<T>
     finishedPaging: boolean;
 
     keys:           Array<string>;
+    keysFiltered?:  Array<string>;
     snapshotLookup: Record<string, DocumentSnapshot>;
     dataLookup:     Record<string, T>;
 }

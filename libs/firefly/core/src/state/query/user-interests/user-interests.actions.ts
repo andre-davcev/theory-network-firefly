@@ -11,3 +11,5 @@ export class ActionUserInterestsGet     { static readonly type = ActionsUserInte
 export class ActionUserInterestsAdd     { static readonly type = ActionsUserInterests.Add;     constructor(public snapshot: DocumentSnapshot, public entity?: Interest) { } }
 export class ActionUserInterestsRemove  { static readonly type = ActionsUserInterests.Remove;  constructor(public id: string) { } }
 export class ActionUserInterestsSync    { static readonly type = ActionsUserInterests.Sync;    constructor(public object: Interest) { } }
+
+export class ActionUserInterestsFilter { static readonly type = ActionsUserInterests.Filter; constructor() { } }

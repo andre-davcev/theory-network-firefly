@@ -31,6 +31,8 @@ export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsM
         {
             name        : TypeOf.String,
             dateCreated : TypeOf.String
-        }
+        },
+
+        subscriptions: {}
     }
 };

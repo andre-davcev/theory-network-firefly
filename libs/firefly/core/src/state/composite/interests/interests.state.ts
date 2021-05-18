@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { from } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Action, NgxsOnInit, Selector, State, StateContext, Store } from '@ngxs/store';
+import { from, of } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
 
 import { InterestType } from '@firefly/core/enums';
 
@@ -11,127 +11,38 @@ import {
     ActionInterestsSetType,
     ActionInterestsSetVirtual,
     ActionInterestsFilter,
-    ActionInterestsFilterUnsubscribed,
-    ActionInterestsFilterSubscribed,
-    ActionInterestsFilterCreated,
-    ActionInterestsPage
+    ActionInterestsPage,
+    ActionInterestsWatchSubscriptions
 } from './interests.actions';
 
-import { ActionCityStreamGet, ActionUserSubscriptionsGet, StateCityStream, StateUserSubscriptions } from '../../child';
-import { ActionUserSubscriptionsSet } from '../../document/user/user.actions';
-import { ActionUserInterestsGet, ActionUserInterestsGetData, StateUserInterests } from '../../query';
+import { ActionCityStreamGet, ActionCityStreamSetSubscriptions, ActionCityStreamFilter, ActionUserSubscriptionsGet, ActionUserSubscriptionsSetSubscriptions, StateCityStream } from '../../child';
+import { ActionUserInterestsFilter, ActionUserInterestsGet, StateUserInterests } from '../../query';
 import { Interest, StreamInterest, SubscriptionPartial } from '@firefly/cloud';
-import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
-import { StateUser } from '../../document/user';
+import { ActionUserSubscriptionsFilter, StateUser } from '../../document/user';
 
 @State<StateInterestsModel>(StateInterestsOptions)
 @Injectable()
-export class StateInterests
+export class StateInterests implements NgxsOnInit
 {
     @Selector() static type(state: StateInterestsModel)    : InterestType { return state.type; }
     @Selector() static virtual(state: StateInterestsModel) : boolean      { return state.virtual; }
 
-
-    @Selector()
-    static emptyMessage(state: StateInterestsModel) : string
-    {
-        const type: InterestType = StateInterests.type(state);
-
-        return StateInterests.virtual(state) ?
-                'page.stream.empty.virtual' :
-            type === InterestType.Unsubscribed ?
-                'page.stream.empty.unsubscribed' :
-            type === InterestType.Subscribed ?
-                'page.stream.empty.subscribed' :
-                'page.stream.empty.created';
-    }
-
-    @Selector
-    ([
-        StateCityStream.keys(),
-        StateUser.subscriptionsStatus
-    ])
-    public static subscribedKeys
-    (
-        state         : StateInterestsModel,
-        keys          : Array<string>,
-        subscriptions : Record<string, SubscriptionPartial>
-    ) : Array<string>
-    {
-        return keys.
-            filter((id: string) =>
-                subscriptions[id] != null
-            );
-    };
-
     @Selector
     ([
         StateCityStream.dataLookup(),
-        StateCityStream.keys(),
-        StateUser.subscriptionsStatus
+        StateCityStream.keysFiltered()
     ])
-    public static subscribed
+    public static dataStream
     (
         state         : StateInterestsModel,
         lookup        : Record<string, StreamInterest>,
-        keys          : Array<string>,
-        subscriptions : Record<string, SubscriptionPartial>
+        keysFiltered  : Array<string>
     ) : Array<StreamInterest>
     {
-        const keysFiltered : Array<string> = StateInterests.subscribedKeys(state, keys, subscriptions);
-
         if (keysFiltered.length === 0) { return []; }
 
         const offset : number = keysFiltered.findIndex((id: string) => lookup[id] == null);
-        const end    : number = offset === -1 ? keys.length : offset;
-
-        return keysFiltered.
-            splice(0, end).
-            map((id: string) =>
-                lookup[id]
-            );
-    };
-
-    @Selector
-    ([
-        StateCityStream.dataLookup(),
-        StateCityStream.keys(),
-        StateUser.subscriptionsStatus
-    ])
-    public static unsubscribedKeys
-    (
-        state         : StateInterestsModel,
-        lookup        : Record<string, StreamInterest>,
-        keys          : Array<string>,
-        subscriptions : Record<string, SubscriptionPartial>
-    ) : Array<string>
-    {
-        return keys.
-            filter((id: string) =>
-                subscriptions[id] == null || lookup[id]?.on != null
-            );
-    };
-
-    @Selector
-    ([
-        StateCityStream.dataLookup(),
-        StateCityStream.keys(),
-        StateUser.subscriptionsStatus
-    ])
-    public static unsubscribed
-    (
-        state         : StateInterestsModel,
-        lookup        : Record<string, StreamInterest>,
-        keys          : Array<string>,
-        subscriptions : Record<string, SubscriptionPartial>
-    ) : Array<StreamInterest>
-    {
-        const keysFiltered : Array<string> = StateInterests.unsubscribedKeys(state, lookup, keys, subscriptions);
-
-        if (keysFiltered.length === 0) { return []; }
-
-        const offset : number = keysFiltered.findIndex((id: string) => lookup[id] == null);
-        const end    : number = offset === -1 ? keys.length : offset;
+        const end    : number = offset === -1 ? keysFiltered.length : offset;
 
         return keysFiltered.
             slice(0, end).
@@ -142,24 +53,31 @@ export class StateInterests
 
     @Selector
     ([
-        StateUserInterests.finishedPaging(),
-        StateCityStream.finishedPaging()
+        StateUserInterests.data(),
+        StateUser.subscriptionsStatus
     ])
-    public static pageFinished
+    public static dataCreated
     (
-        state                 : StateInterestsModel,
-        finishedUserInterests : boolean,
-        finishedStream        : boolean
-    ) : boolean
+        state         : StateInterestsModel,
+        userInterests : Array<Interest>,
+        subscriptions : Record<string, SubscriptionPartial>
+    ) : Array<StreamInterest>
     {
-        return finishedUserInterests && finishedStream;
+        return userInterests.
+            map((interest: Interest) => {
+                return {
+                    ...interest,
+                    score : 0,
+                    on    : subscriptions[interest.id] == null ? false : true
+                };
+            });
     }
 
     @Selector
     ([
         StateUserInterests.data(),
         StateCityStream.dataLookup(),
-        StateCityStream.keys(),
+        StateCityStream.keysFiltered(),
         StateUser.subscriptionsStatus
     ])
     public static data
@@ -167,31 +85,41 @@ export class StateInterests
         state         : StateInterestsModel,
         userInterests : Array<Interest>,
         lookup        : Record<string, StreamInterest>,
-        keys          : Array<string>,
+        keysFiltered  : Array<string>,
         subscriptions : Record<string, SubscriptionPartial>
     ) : Array<StreamInterest>
     {
         const type: InterestType = StateInterests.type(state);
 
         return type === InterestType.Created ?
-            userInterests.
-                map((interest: Interest) => {
-                    return {
-                        ...interest,
-                        score : 0,
-                        on    : subscriptions[interest.id] == null ? false : true
-                    };
-                }) :
-        type === InterestType.Subscribed ?
-            StateInterests.subscribed(state, lookup, keys, subscriptions) :
-            StateInterests.unsubscribed(state, lookup, keys, subscriptions);
+            StateInterests.dataCreated(state, userInterests, subscriptions) :
+            StateInterests.dataStream(state, lookup, keysFiltered);
+    }
+
+    @Selector
+    ([
+        StateCityStream.dataLookup(),
+        StateCityStream.keysFiltered(),
+        StateUserInterests.finishedPaging()
+    ])
+    public static pageFinished
+    (
+        state                 : StateInterestsModel,
+        lookup                : Record<string, StreamInterest>,
+        keysFiltered          : Array<string>,
+        finishedPagingCreated : boolean
+    ) : boolean
+    {
+        return StateInterests.type(state) === InterestType.Created ?
+            finishedPagingCreated :
+            StateInterests.dataStream(state, lookup, keysFiltered).length === keysFiltered.length;
     }
 
     @Selector
     ([
         StateUserInterests.data(),
         StateCityStream.dataLookup(),
-        StateCityStream.keys(),
+        StateCityStream.keysFiltered(),
         StateUser.subscriptionsStatus
     ])
     public static found
@@ -199,11 +127,30 @@ export class StateInterests
         state         : StateInterestsModel,
         userInterests : Array<Interest>,
         lookup        : Record<string, StreamInterest>,
-        keys          : Array<string>,
+        keysFiltered  : Array<string>,
         subscriptions : Record<string, SubscriptionPartial>
     ): boolean
     {
-        return StateInterests.data(state, userInterests, lookup, keys, subscriptions).length > 0;
+        return StateInterests.data(state, userInterests, lookup, keysFiltered, subscriptions).length > 0;
+    }
+
+    @Selector
+    ([
+        StateUserInterests.data(),
+        StateCityStream.dataLookup(),
+        StateCityStream.keysFiltered(),
+        StateUser.subscriptionsStatus
+    ])
+    public static empty
+    (
+        state         : StateInterestsModel,
+        userInterests : Array<Interest>,
+        lookup        : Record<string, StreamInterest>,
+        keysFiltered  : Array<string>,
+        subscriptions : Record<string, SubscriptionPartial>
+    ): boolean
+    {
+        return !StateInterests.found(state, userInterests, lookup, keysFiltered, subscriptions);
     }
 
     @Selector
@@ -219,23 +166,18 @@ export class StateInterests
         return isPublisher && StateInterests.type(state) === InterestType.Created;
     }
 
-    @Selector
-    ([
-        StateUserInterests.data(),
-        StateCityStream.dataLookup(),
-        StateCityStream.keys(),
-        StateUser.subscriptionsStatus
-    ])
-    public static empty
-    (
-        state         : StateInterestsModel,
-        userInterests : Array<Interest>,
-        lookup        : Record<string, StreamInterest>,
-        keys          : Array<string>,
-        subscriptions : Record<string, SubscriptionPartial>
-    ): boolean
+    @Selector()
+    static emptyMessage(state: StateInterestsModel) : string
     {
-        return !StateInterests.found(state, userInterests, lookup, keys, subscriptions);
+        const type: InterestType = StateInterests.type(state);
+
+        return StateInterests.virtual(state) ?
+                'page.stream.empty.virtual' :
+            type === InterestType.Unsubscribed ?
+                'page.stream.empty.unsubscribed' :
+            type === InterestType.Subscribed ?
+                'page.stream.empty.subscribed' :
+                'page.stream.empty.created';
     }
 
     constructor
@@ -243,6 +185,14 @@ export class StateInterests
         private store : Store
     )
     { }
+
+    public ngxsOnInit({ dispatch }: StateContext<StateInterestsModel>)
+    {
+        dispatch
+        ([
+            new ActionInterestsWatchSubscriptions()
+        ]);
+    }
 
     @Action(ActionInterestsSetType)
     setType({ patchState }: StateContext<StateInterestsModel>, { type }: ActionInterestsSetType)
@@ -257,71 +207,44 @@ export class StateInterests
     }
 
     @Action(ActionInterestsFilter)
-    filter({ dispatch, getState }: StateContext<StateInterestsModel>, { type }: ActionInterestsFilter)
+    filter({ dispatch, getState, patchState }: StateContext<StateInterestsModel>, { type }: ActionInterestsFilter)
     {
         type = type || StateInterests.type(getState());
 
+        patchState({ type });
+
         return type === InterestType.Unsubscribed ?
-                dispatch(new ActionInterestsFilterUnsubscribed()) :
+                dispatch(new ActionCityStreamFilter(type)) :
             type === InterestType.Subscribed ?
-                dispatch(new ActionInterestsFilterSubscribed()) :
-                dispatch(new ActionInterestsFilterCreated());
-    }
-
-    @Action(ActionInterestsFilterUnsubscribed)
-    filterUnsubscribed({ dispatch }: StateContext<StateInterestsModel>)
-    {
-        return dispatch(new ActionInterestsSetType(InterestType.Unsubscribed));
-    }
-
-    @Action(ActionInterestsFilterSubscribed)
-    filterSubscribed({ dispatch }: StateContext<StateInterestsModel>)
-    {
-        return this.store.selectSnapshot(StateUserSubscriptions.initialized()) ?
-            dispatch(new ActionInterestsSetType(InterestType.Subscribed)) :
-            dispatch(new ActionAppLoadingShow()).
-            pipe
-            (
-                switchMap(() => this.store.dispatch(new ActionUserSubscriptionsSet())),
-                switchMap(() => this.store.dispatch(new ActionAppLoadingHide())),
-                switchMap(() => this.store.dispatch(new ActionInterestsSetType(InterestType.Subscribed)))
-            );
-    }
-
-    @Action(ActionInterestsFilterCreated)
-    filterCreated({ dispatch }: StateContext<StateInterestsModel>)
-    {
-        return this.store.selectSnapshot(StateUserInterests.initialized()) ?
-            dispatch(new ActionInterestsSetType(InterestType.Created)) :
-            dispatch(new ActionAppLoadingShow()).
-            pipe
-            (
-                switchMap(() => this.store.dispatch(new ActionUserInterestsGetData())),
-                switchMap(() => this.store.dispatch(new ActionAppLoadingHide())),
-                switchMap(() => this.store.dispatch(new ActionInterestsSetType(InterestType.Created)))
-            );
+                dispatch(new ActionUserSubscriptionsFilter(type)) :
+                dispatch(new ActionUserInterestsFilter());
     }
 
     @Action(ActionInterestsPage)
     page({ dispatch, getState }: StateContext<StateInterestsModel>, { infiniteScroll }: ActionInterestsPage)
     {
-        const interestType   : InterestType = StateInterests.type(getState());
+        const type           : InterestType = StateInterests.type(getState());
         const finishedPaging : boolean      = this.store.selectSnapshot(StateInterests.pageFinished);
 
+        dispatch(new ActionCityStreamFilter(type));
+
         return finishedPaging ?
-            from(infiniteScroll.complete()).
+            of(null).
             pipe
             (
-                tap(() =>
-                    infiniteScroll.disabled = true
+                // tap(() =>
+                //     infiniteScroll.disabled = true
+                // ),
+                switchMap(() =>
+                    from(infiniteScroll.complete())
                 )
             ):
 
             dispatch
             (
-                interestType === InterestType.Unsubscribed ?
+                type === InterestType.Unsubscribed ?
                     new ActionCityStreamGet() :
-                interestType === InterestType.Subscribed ?
+                type === InterestType.Subscribed ?
                     new ActionUserSubscriptionsGet() :
                     new ActionUserInterestsGet()
             ).
@@ -331,5 +254,24 @@ export class StateInterests
                     from(infiniteScroll.complete())
                 )
             );
+    }
+
+    @Action(ActionInterestsWatchSubscriptions, { cancelUncompleted: true })
+    watchSubscriptions({ dispatch }: StateContext<StateInterestsModel>)
+    {
+        return this.store.select(StateUser.subscriptionsStatus).
+        pipe
+        (
+            filter((subscriptions: Record<string, SubscriptionPartial>) =>
+                subscriptions != null
+            ),
+            switchMap((subscriptions: Record<string, SubscriptionPartial>) =>
+                dispatch
+                ([
+                    new ActionCityStreamSetSubscriptions(subscriptions),
+                    new ActionUserSubscriptionsSetSubscriptions(subscriptions)
+                ])
+            )
+        );
     }
 }
