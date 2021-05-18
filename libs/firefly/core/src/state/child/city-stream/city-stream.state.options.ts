@@ -3,8 +3,9 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { StateCityStreamModel } from './city-stream.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
+import { InterestType } from '@firefly/core/enums';
 
-export const StateUserStreamOptions: StoreOptions<StateCityStreamModel> =
+export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =
 {
     name : 'streams',
 
@@ -21,13 +22,17 @@ export const StateUserStreamOptions: StoreOptions<StateCityStreamModel> =
         snapshotLookup: {},
         dataLookup:     {},
 
-        childLookup : {},
-        keys        : [],
-        id          : undefined,
+        childLookup  : {},
+        keys         : [],
+        keysFiltered : [],
+        id           : undefined,
 
         sortFields:
         {
             score : TypeOf.Number
-        }
+        },
+
+        subscriptions : {},
+        type          : InterestType.Unsubscribed
     }
 };

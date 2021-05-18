@@ -3,7 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
-import { StateUser } from '@firefly/core';
+import { StateApp } from '@firefly/core';
 import { ActionDeviceStatusBarShow, ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '@firefly/mobile';
 import { StatusBarStyle } from '@capacitor/core';
@@ -18,7 +18,7 @@ import { Navigate } from '@ngxs/router-plugin';
 
 export class PageAuth implements OnInit
 {
-    @Select(StateUser.initialized) initialized$: Observable<boolean>;
+    @Select(StateApp.initialized) initialized$: Observable<boolean>;
 
     constructor
     (

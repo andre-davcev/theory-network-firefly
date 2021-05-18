@@ -1,11 +1,11 @@
-import { State, Action, StateContext } from '@ngxs/store';
+import { State, Action, StateContext, Selector } from '@ngxs/store';
 
-import { StreamInterest } from '@firefly/cloud';
+import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ServiceStreams } from '@firefly/core/services';
 import { StateChild } from '@theory/ngxs';
 
 import { StateCityStreamModel } from './city-stream.state.model';
-import { StateUserStreamOptions } from './city-stream.state.options';
+import { StateCityStreamOptions } from './city-stream.state.options';
 import {
     ActionCityStreamAdd,
     ActionCityStreamReset,
@@ -13,17 +13,22 @@ import {
     ActionCityStreamGetData,
     ActionCityStreamGet,
     ActionCityStreamSync,
-    ActionCityStreamSetData
+    ActionCityStreamSetData,
+    ActionCityStreamSetSubscriptions,
+    ActionCityStreamFilter
 } from './city-stream.actions';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
 import { switchMap } from 'rxjs/operators';
-import { ImageType, Collection } from '@firefly/core/enums';
+import { ImageType, Collection, InterestType } from '@firefly/core/enums';
 
-@State<StateCityStreamModel>(StateUserStreamOptions)
+@State<StateCityStreamModel>(StateCityStreamOptions)
 @Injectable()
 export class StateCityStream extends StateChild<StreamInterest, StateCityStreamModel>
 {
+    @Selector() static subscriptions(state: StateCityStreamModel) : Record<string, SubscriptionPartial> {return state.subscriptions; }
+    @Selector() static type(state: StateCityStreamModel)          : InterestType                        {return state.type; }
+
     constructor
     (
         service : ServiceStreams,
@@ -32,7 +37,7 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     {
         super
         (
-            StateUserStreamOptions.defaults,
+            StateCityStreamOptions.defaults,
             {
                 ActionReset   : ActionCityStreamReset,
                 ActionGetData : ActionCityStreamGetData,
@@ -94,5 +99,36 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     sync(context: StateContext<StateCityStreamModel>, action: ActionCityStreamSync)
     {
         return super.sync(context, action);
+    }
+
+    @Action(ActionCityStreamSetSubscriptions)
+    setSubscriptions({ patchState }: StateContext<StateCityStreamModel>, { subscriptions }: ActionCityStreamSetSubscriptions)
+    {
+        patchState({ subscriptions });
+    }
+
+    @Action(ActionCityStreamFilter)
+    filter({ patchState }: StateContext<StateCityStreamModel>, { type }: ActionCityStreamFilter)
+    {
+        patchState({ type });
+    }
+
+    public keysFilter(context: StateContext<StateCityStreamModel>): Array<string>
+    {
+        const { getState } = context;
+
+        const state         : StateCityStreamModel                = getState();
+        const lookup        : Record<string, StreamInterest>      = StateCityStream.dataLookupState(state);
+        const keys          : Array<string>                       = StateCityStream.keysState(state);
+        const subscriptions : Record<string, SubscriptionPartial> = StateCityStream.subscriptions(state);
+        const type          : InterestType                        = StateCityStream.type(state);
+
+        return type === InterestType.Unsubscribed ?
+            keys.filter((id: string) =>
+                subscriptions[id] == null || lookup[id]?.on != null
+            ) :
+            keys.filter((id: string) =>
+                subscriptions[id] != null
+            );
     }
 }

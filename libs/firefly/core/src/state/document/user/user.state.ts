@@ -36,7 +36,7 @@ import {
     ActionUserNotificationsSet,
     ActionUserPatchMetadata,
     ActionUserResetPassword,
-    ActionUserWatchCity, ActionUserResetAll, ActionUserSetErrorAuth
+    ActionUserWatchCity, ActionUserResetAll, ActionUserSetErrorAuth, ActionUserSubscriptionsFilter
 } from './user.actions';
 import { ServiceUsers } from '@firefly/core/services';
 import { StateDocument } from '@theory/ngxs';
@@ -44,7 +44,7 @@ import { StateDocument } from '@theory/ngxs';
 import { ActionUserAlertsReset, ActionUserAlertsSetData } from '../../child/user-alerts/user-alerts.actions';
 import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
-import { ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
+import { ActionCityStreamFilter, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
@@ -54,6 +54,7 @@ import { Collection } from '@firefly/core/enums';
 
 import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
 import { StateCity } from '../city';
+import { ActionAppLoadingHide, ActionAppLoadingShow } from '../app/app.actions';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()
@@ -137,18 +138,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static isPublisher(state: StateUserModel)            : boolean      { return StateUser.dataState(state).isPublisher; }
     @Selector() static email(state: StateUserModel)                  : string       { return StateUser.dataState(state).email; }
     @Selector() static userId(state: StateUserModel)                 : string       { return StateUser.dataState(state).userId; }
-
-
-
-    @Selector
-    ([
-        StateCity.found,
-        StateCityStream.initialized()
-    ])
-    static initialized(state: StateUserModel, cityFound: boolean, streamInitialized: boolean) : boolean
-    {
-        return state.initialized && cityFound && streamInitialized;
-    }
+    @Selector() static initialized(state: StateUserModel)            : boolean      { return state.initialized; }
 
     public ngxsOnInit(context: StateContext<StateUserModel>)
     {
@@ -557,6 +547,22 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         }
 
         return dispatch(actions);
+    }
+
+    @Action(ActionUserSubscriptionsFilter)
+    subscriptionsFilter({ dispatch }: StateContext<StateUserModel>, { type }: ActionUserSubscriptionsFilter)
+    {
+        const initialized: boolean = this.store.selectSnapshot(StateUserSubscriptions.initialized());
+
+        return initialized ?
+            dispatch(new ActionCityStreamFilter(type)) :
+            dispatch(new ActionAppLoadingShow()).
+            pipe
+            (
+                switchMap(() => dispatch(new ActionUserSubscriptionsSet())),
+                switchMap(() => dispatch(new ActionAppLoadingHide())),
+                switchMap(() => dispatch(new ActionCityStreamFilter(type)))
+            );
     }
 
     @Action(ActionUserNotificationsSet)

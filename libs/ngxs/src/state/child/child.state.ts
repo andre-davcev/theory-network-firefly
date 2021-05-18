@@ -43,7 +43,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const dataLookup: Record<string, any> = StateCollection.dataLookupState(state);
 
         return StateChild.
-            keysState(state).
+            keysFilteredState(state).
             map((id: string) =>
                 dataLookup[id]
             ).
@@ -67,7 +67,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const dataLookup: Record<string, any> = StateCollection.dataLookupState(state);
 
         return StateChild.
-            keysState(state).
+            keysFilteredState(state).
             findIndex((id: string) =>
                 dataLookup[id] == null
             );
@@ -76,14 +76,12 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public static finishedPagingState(state: any): boolean
     {
         return StateChild.initializedState(state) &&
-            StateChild.dataState(state).length === StateChild.keysState(state).length;
+            StateChild.dataState(state).length === StateChild.keysFilteredState(state).length;
     }
 
     public static data()           { return createSelector([this], (state: any) => StateChild.dataState(state)); }
     public static offset()         { return createSelector([this], (state: any) => StateChild.offsetState(state)); }
     public static finishedPaging() { return createSelector([this], (state: any) => StateChild.finishedPagingState(state)); }
-
-
 
     public getData(context: StateContext<M>, action: any): Observable<any>
     {
@@ -148,14 +146,15 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         const { snapshotLookup, dataLookup, childLookup } = state;
 
-        const finishedPaging : boolean  = StateChild.finishedPagingState(state);
+        const finishedPaging : boolean       = StateChild.finishedPagingState(state);
+        const keysFiltered   : Array<string> = this.keysFilter(context);
 
         return finishedPaging ? of(null) :
         of(null).
         pipe
         (
             map(() =>
-                this.getKeys(context).
+                this.keysGet(context, keysFiltered).
                 map((id: string) =>
                     this.service.documentGet(this.collection, id)
                 )
@@ -187,6 +186,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 ({
                     snapshotLookup,
                     dataLookup,
+                    keysFiltered,
 
                     loading: false
                 } as M)
@@ -312,20 +312,20 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         return this.getMediaWithData(context, collection, imageType, StateChild.dataState(context.getState()));
     }
 
-    private getKeys(context: StateContext<M>): Array<string>
+    private keysGet(context: StateContext<M>, keysFiltered?: Array<string>): Array<string>
     {
         const { getState } = context;
 
         const state : M             = getState();
-        const keys  : Array<string> = StateChild.keysState(state);
+        const keys  : Array<string> = keysFiltered || StateChild.keysFilteredState(state);
 
         if (StateChild.canPageState(state))
         {
             const { pageSize } = state;
 
-            const count: number = keys.length;
-            const start: number = StateChild.offsetState(state);
-            const end:   number = (start + pageSize) > count ? count : (start + pageSize);
+            const offset : number = StateChild.offsetState(state);
+            const start  : number = offset === -1 ? 0 : offset;
+            const end    : number = start + pageSize;
 
             return keys.slice(start, end);
         }

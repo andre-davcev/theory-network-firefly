@@ -1,6 +1,6 @@
-import { State, Action, StateContext } from '@ngxs/store';
+import { State, Action, StateContext, Selector } from '@ngxs/store';
 
-import { Subscription } from '@firefly/cloud';
+import { Subscription, SubscriptionPartial } from '@firefly/cloud';
 import { ServiceSubscriptions } from '@firefly/core/services';
 
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
@@ -12,7 +12,8 @@ import {
     ActionUserSubscriptionsGetData,
     ActionUserSubscriptionsGet,
     ActionUserSubscriptionsSync,
-    ActionUserSubscriptionsSetData
+    ActionUserSubscriptionsSetData,
+    ActionUserSubscriptionsSetSubscriptions
 } from './user-subscriptions.actions';
 import { StateChild } from '@theory/ngxs';
 import { Injectable } from '@angular/core';
@@ -24,6 +25,8 @@ import { ImageType, Collection } from '@firefly/core/enums';
 @Injectable()
 export class StateUserSubscriptions extends StateChild<Subscription, StateUserSubscriptionsModel>
 {
+    @Selector()static subscriptions(state: StateUserSubscriptionsModel) {return state.subscriptions; }
+
     constructor
     (
         service : ServiceSubscriptions,
@@ -94,5 +97,26 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
     sync(context: StateContext<StateUserSubscriptionsModel>, action: ActionUserSubscriptionsSync)
     {
         return super.sync(context, action);
+    }
+
+    @Action(ActionUserSubscriptionsSetSubscriptions)
+    setSubscriptions({ patchState }: StateContext<StateUserSubscriptionsModel>, { subscriptions }: ActionUserSubscriptionsSetSubscriptions)
+    {
+        patchState({ subscriptions });
+    }
+
+    public keysFilter(context: StateContext<StateUserSubscriptionsModel>): Array<string>
+    {
+
+      const { getState } = context;
+
+      const state         : StateUserSubscriptionsModel         = getState();
+      const keys          : Array<string>                       = StateUserSubscriptions.keysState(state);
+      const subscriptions : Record<string, SubscriptionPartial> = StateUserSubscriptions.subscriptions(state);
+
+      return keys.
+          filter((id: string) =>
+              subscriptions[id] != null
+          );
     }
 }

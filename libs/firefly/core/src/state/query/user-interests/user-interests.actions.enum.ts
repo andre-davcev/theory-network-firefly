@@ -5,5 +5,7 @@ export enum ActionsUserInterests
     Get     = '[UserInterests] Get',
     Add     = '[UserInterests] Add',
     Remove  = '[UserInterests] Remove',
-    Sync    = '[UserInterests] Sync'
+    Sync    = '[UserInterests] Sync',
+
+    Filter = '[UserInterests] Filter'
 }

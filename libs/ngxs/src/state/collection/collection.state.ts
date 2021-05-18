@@ -26,20 +26,21 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
         this.storage  = storage;
     }
 
-    protected static initializedState(state: any):      boolean                                    { return state.initialized; }
-    protected static loadingState(state: any):          boolean                                    { return state.loading; }
-    protected static pageSizeState(state: any):         number                                     { return state.pageSize; }
-    protected static finishedPagingState(state: any):   boolean                                    { return state.finishedPaging; }
-    protected static orderByState(state: any):          string                                     { return state.orderBy; }
-    protected static orderByDirectionState(state: any): OrderBy                                    { return state.orderByDirection; }
-    protected static keysState(state: any):             Array<string>                              { return state.keys; }
+    protected static initializedState(state: any):      boolean                          { return state.initialized; }
+    protected static loadingState(state: any):          boolean                          { return state.loading; }
+    protected static pageSizeState(state: any):         number                           { return state.pageSize; }
+    protected static finishedPagingState(state: any):   boolean                          { return state.finishedPaging; }
+    protected static orderByState(state: any):          string                           { return state.orderBy; }
+    protected static orderByDirectionState(state: any): OrderBy                          { return state.orderByDirection; }
+    protected static keysState(state: any):             Array<string>                    { return state.keys; }
+    protected static keysFilteredState(state: any):     Array<string>                    { return state.keysFiltered || state.keys; }
     protected static snapshotLookupState(state: any):   Record<string, DocumentSnapshot> { return state.snapshotLookup; }
-    protected static dataLookupState(state: any):       Record<string, any>                        { return state.dataLookup; }
-    protected static countState(state: any):            number                                     { return StateCollection.keysState(state).length; }
-    protected static foundState(state: any):            boolean                                    { return StateCollection.countState(state) > 0; }
-    protected static emptyState(state: any):            boolean                                    { return StateCollection.countState(state) === 0; }
-    protected static canPageState(state: any):          boolean                                    { return StateCollection.pageSizeState(state) !== PageSize.None; }
-    protected static noDataState(state: any):           boolean                                    { return StateCollection.initializedState(state) && !StateCollection.loadingState(state) && !StateCollection.foundState(state); }
+    protected static dataLookupState(state: any):       Record<string, any>              { return state.dataLookup; }
+    protected static countState(state: any):            number                           { return StateCollection.keysState(state).length; }
+    protected static foundState(state: any):            boolean                          { return StateCollection.countState(state) > 0; }
+    protected static emptyState(state: any):            boolean                          { return StateCollection.countState(state) === 0; }
+    protected static canPageState(state: any):          boolean                          { return StateCollection.pageSizeState(state) !== PageSize.None; }
+    protected static noDataState(state: any):           boolean                          { return StateCollection.initializedState(state) && !StateCollection.loadingState(state) && !StateCollection.foundState(state); }
 
     protected static dataState(state: any): Array<any>
     {
@@ -59,6 +60,7 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     public static orderBy()          { return createSelector([this], (state: any) => StateCollection.orderByState(state)); }
     public static orderByDirection() { return createSelector([this], (state: any) => StateCollection.orderByDirectionState(state)); }
     public static keys()             { return createSelector([this], (state: any) => StateCollection.keysState(state)); }
+    public static keysFiltered()     { return createSelector([this], (state: any) => StateCollection.keysFilteredState(state)); }
     public static snapshotLookup()   { return createSelector([this], (state: any) => StateCollection.snapshotLookupState(state)); }
     public static data()             { return createSelector([this], (state: any) => StateCollection.dataState(state)); }
     public static dataLookup()       { return createSelector([this], (state: any) => StateCollection.dataLookupState(state)); }
@@ -210,6 +212,11 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     public get(context: StateContext<M>): Observable<any>
     {
         return of(null);
+    }
+
+    public keysFilter({ getState }: StateContext<M>): Array<string>
+    {
+        return getState().keys;
     }
 
     public getMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>

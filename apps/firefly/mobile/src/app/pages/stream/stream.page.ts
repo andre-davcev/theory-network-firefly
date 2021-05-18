@@ -21,7 +21,7 @@ export class PageStream extends BaseComponent implements OnInit
 {
     @Select(StateUser.authenticated)        authenticated$:      Observable<boolean>;
     @Select(StateInterest.events)           events$:             Observable<Event[]>;
-    @Select(StateInterests.data)            data$:             Observable<Array<StreamInterest>>;
+    @Select(StateInterests.data)            data$:               Observable<Array<StreamInterest>>;
     @Select(StateInterests.found)           found$:              Observable<boolean>;
     @Select(StateInterests.empty)           empty$:              Observable<boolean>;
     @Select(StateInterests.add)             add$:                Observable<boolean>;

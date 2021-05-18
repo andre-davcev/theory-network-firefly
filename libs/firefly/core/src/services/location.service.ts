@@ -4,7 +4,7 @@ import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdataclou
 import { Observable, of } from 'rxjs';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { GeoPoint } from '@theory/firebase';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { ReverseMode } from '@theory/mapbox';
 import { Place, CityInfo, Event } from '@firefly/cloud';
@@ -153,7 +153,6 @@ export class ServiceLocation
         return this.mapbox.reverseGeocode(latitude, longitude, options).
         pipe
         (
-            tap(r => console.log(r)),
             map((response: ResponseGeocode) =>
                 ({
                     place_name: response.features[0].place_name,

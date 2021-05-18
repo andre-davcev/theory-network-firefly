@@ -18,11 +18,14 @@ import {
     ActionUserInterestsGetData,
     ActionUserInterestsGet,
     ActionUserInterestsSync,
-    ActionUserInterestsReset
+    ActionUserInterestsReset,
+    ActionUserInterestsFilter
 } from './user-interests.actions';
 import { StateUser } from '../../document/user/user.state';
 import { ImageType } from '../../../enums';
 import { ServiceStorage } from '@theory/firebase';
+import { of } from 'rxjs';
+import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 
 @State<StateUserInterestsModel>(StateUserInterestsOptions)
 @Injectable()
@@ -93,5 +96,20 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     sync(context: StateContext<StateUserInterestsModel>, action: ActionUserInterestsSync)
     {
         return super.sync(context, action);
+    }
+
+    @Action(ActionUserInterestsFilter)
+    filter({ dispatch, getState }: StateContext<StateUserInterestsModel>)
+    {
+        const initialized: boolean = StateUserInterests.initializedState(getState());
+
+        return initialized ?
+            of(null) :
+            dispatch(new ActionAppLoadingShow()).
+            pipe
+            (
+                switchMap(() => this.store.dispatch(new ActionUserInterestsGetData())),
+                switchMap(() => this.store.dispatch(new ActionAppLoadingHide()))
+            );
     }
 }
