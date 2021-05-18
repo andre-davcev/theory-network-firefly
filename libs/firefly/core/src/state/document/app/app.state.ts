@@ -79,7 +79,7 @@ export class StateApp
         pipe
         (
             tap((loading: HTMLIonLoadingElement) =>
-              patchState({ loadingElement: null })
+                patchState({ loadingElement: null })
             ),
             filter((loading: HTMLIonLoadingElement) =>
                 loading != null

@@ -107,7 +107,6 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
 
     public keysFilter(context: StateContext<StateUserSubscriptionsModel>): Array<string>
     {
-
       const { getState } = context;
 
       const state         : StateUserSubscriptionsModel         = getState();

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@angular/fire/firestore';
 
-import { State, Action, StateContext, Store } from '@ngxs/store';
+import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 import { switchMap } from 'rxjs/operators';
 
 import { StateQuery } from '@theory/ngxs';
 
-import { Interest } from '@firefly/cloud';
+import { Interest, StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ServiceInterests } from '@firefly/core/services';
 import { Collection } from '@firefly/core/enums';
 
@@ -31,6 +31,26 @@ import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/a
 @Injectable()
 export class StateUserInterests extends StateQuery<Interest, StateUserInterestsModel>
 {
+    @Selector
+    ([
+        StateUser.subscriptionsStatus
+    ])
+    public static dataCreated
+    (
+        state         : StateUserInterestsModel,
+        subscriptions : Record<string, SubscriptionPartial>
+    ) : Array<StreamInterest>
+    {
+        return StateUserInterests.dataState(state).
+            map((interest: Interest) => {
+                return {
+                    ...interest,
+                    score : 0,
+                    on    : subscriptions[interest.id] == null ? false : true
+                };
+            });
+    }
+
     constructor
     (
         private store:   Store,

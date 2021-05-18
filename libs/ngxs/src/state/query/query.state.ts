@@ -59,6 +59,8 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
             pageSize
         } = state;
 
+        console.log(state)
+
         if (!initialized)
         {
             const { pageSize, orderBy, orderByDirection } = state;
