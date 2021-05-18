@@ -457,9 +457,9 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserSubscriptionsSet)
-    subscriptionsSet({ dispatch }: StateContext<StateUserModel>)
+    subscriptionsSet({ dispatch, getState }: StateContext<StateUserModel>)
     {
-        const subscriptions: Record<string, SubscriptionPartial> = this.store.selectSnapshot(StateUser.subscriptionsStatus);
+        const subscriptions: Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(getState());
 
         return dispatch(new ActionUserSubscriptionsSetData(subscriptions, true));
     }
@@ -484,7 +484,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
 
         const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
         const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
-        const streamInterestSnapshot : DocumentSnapshot          = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
+        const streamInterestSnapshot : DocumentSnapshot                    = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
 
         subscriptionsStatus[id] = { on : true };
         streamInterest.on       = true;

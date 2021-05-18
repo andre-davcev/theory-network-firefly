@@ -108,9 +108,15 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     }
 
     @Action(ActionCityStreamFilter)
-    filter({ patchState }: StateContext<StateCityStreamModel>, { type }: ActionCityStreamFilter)
+    filter(context: StateContext<StateCityStreamModel>, { type }: ActionCityStreamFilter)
     {
+        const { patchState } = context;
+
         patchState({ type });
+
+        const keysFiltered: Array<string> = this.keysFilter(context);
+
+        patchState({ keysFiltered });
     }
 
     public keysFilter(context: StateContext<StateCityStreamModel>): Array<string>

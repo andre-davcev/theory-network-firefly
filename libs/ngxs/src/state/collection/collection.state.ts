@@ -47,7 +47,7 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
         const dataLookup: Record<string, any> = StateCollection.dataLookupState(state);
 
         return StateCollection.
-            keysState(state).
+            keysFilteredState(state).
             map((id: string) =>
                 dataLookup[id]
             );

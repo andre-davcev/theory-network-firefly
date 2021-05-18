@@ -40,15 +40,18 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
     protected static dataState(state: any): Array<any>
     {
-        const dataLookup: Record<string, any> = StateCollection.dataLookupState(state);
+        const lookup: Record<string, any> = StateCollection.dataLookupState(state);
+        const keysFiltered: Array<string> = StateCollection.keysFilteredState(state);
 
-        return StateChild.
-            keysFilteredState(state).
+        if (keysFiltered.length === 0) { return []; }
+
+        const offset : number = keysFiltered.findIndex((id: string) => lookup[id] == null);
+        const end    : number = offset === -1 ? keysFiltered.length : offset;
+
+        return keysFiltered.
+            slice(0, end).
             map((id: string) =>
-                dataLookup[id]
-            ).
-            filter((item: any) =>
-                item != null
+                lookup[id]
             ).
             map((item: any, index: number) =>
                 ({
@@ -73,7 +76,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             );
     }
 
-    public static finishedPagingState(state: any): boolean
+    protected static finishedPagingState(state: any): boolean
     {
         return StateChild.initializedState(state) &&
             StateChild.dataState(state).length === StateChild.keysFilteredState(state).length;
@@ -197,7 +200,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public add(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState } = context;
-        const { keys, initialized } = getState();
+        const { keys: keys, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
@@ -211,7 +214,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             {
                 keys.splice(index, 0, id);
 
-                patchState({ keys } as M);
+                patchState({ keys: keys } as M);
             })
         );
     }
@@ -220,7 +223,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     {
         const { getState, patchState } = context;
 
-        const { childLookup, keys, initialized }: M = getState();
+        const { childLookup, keys: keys, initialized }: M = getState();
 
         if (!initialized) { return of(null); }
 
@@ -237,7 +240,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 patchState
                 ({
                     childLookup,
-                    keys
+                    keys: keys
                 } as M);
             })
         );
@@ -246,7 +249,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public sync(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState }  = context;
-        const { keys, initialized } = getState();
+        const { keys: keys, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
@@ -262,7 +265,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                     keys.splice(result.indexOld, 1);
                     keys.splice(result.indexNew, 0, id);
 
-                    patchState({ keys } as M);
+                    patchState({ keys: keys } as M);
                 }
             })
         );
