@@ -59,7 +59,7 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
             pageSize
         } = state;
 
-        console.log(state)
+        console.log(state);
 
         if (!initialized)
         {
@@ -71,7 +71,7 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
         }
         else if (!finishedPaging)
         {
-            this.query = this.query.startAfter(keys[keys.length - 1]);
+            this.query = this.query.startAfter(snapshotLookup[keys[keys.length - 1]]);
         }
 
         patchState({ loading: true } as M);

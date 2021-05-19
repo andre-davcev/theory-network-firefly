@@ -152,7 +152,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const finishedPaging : boolean       = StateChild.finishedPagingState(state);
         const keysFiltered   : Array<string> = this.keysFilter(context);
 
-        return finishedPaging ? of(null) :
+        return finishedPaging ? of(null) :
         of(null).
         pipe
         (
