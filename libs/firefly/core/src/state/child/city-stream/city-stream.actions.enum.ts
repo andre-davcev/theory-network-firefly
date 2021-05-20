@@ -8,6 +8,5 @@ export enum ActionsCityStream
     Remove  = '[CityStream] Remove',
     Sync    = '[CityStream] Sync',
 
-    Filter           = '[CityStream] Filter',
-    SetSubscriptions = '[CityStream] Set Subscriptions'
+    Filter = '[CityStream] Filter'
 }

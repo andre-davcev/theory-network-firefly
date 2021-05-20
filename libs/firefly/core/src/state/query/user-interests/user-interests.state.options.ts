@@ -2,6 +2,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserInterestsModel } from './user-interests.state.model';
 import { OrderBy } from '@theory/firebase';
+import { InterestType } from '@firefly/core/enums';
 
 export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
 {
@@ -19,6 +20,13 @@ export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
 
         keys:           [],
         snapshotLookup: {},
-        dataLookup:     {}
+        dataLookup:     {},
+
+        filter :
+        {
+            type          : InterestType.Unsubscribed,
+            virtual       : false,
+            subscriptions : {}
+        }
     }
 };

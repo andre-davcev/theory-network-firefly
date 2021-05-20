@@ -5,6 +5,7 @@ import { PageSize } from '@theory/ngxs';
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
+import { InterestType } from '@firefly/core/enums';
 
 export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsModel> =
 {
@@ -33,6 +34,11 @@ export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsM
             dateCreated : TypeOf.String
         },
 
-        subscriptions: {}
+        filter :
+        {
+            type          : InterestType.Unsubscribed,
+            virtual       : false,
+            subscriptions : {}
+        }
     }
 };

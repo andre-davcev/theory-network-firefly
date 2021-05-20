@@ -24,13 +24,7 @@ export enum ActionsUser
     ResetAll          = '[User] Reset All',
     SetErrorAuth      = '[User] Set Error Auth',
 
-    SubscriptionsSet    = '[User] Subscriptions Set',
-    SubscriptionToggle  = '[User] Subscription Toggle',
-    SubscriptionAdd     = '[User] Subscription Add',
-    SubscriptionRemove  = '[User] Subscription Remove',
-    SubscriptionOnOff   = '[User] Subscription On/Off',
-    SubscriptionFilter  = '[User] Filter',
-
+    SubscriptionsSet  = '[User] Subscriptions Set',
     NotificationsSet  = '[User] Notifications Set',
     IsPublisherSet    = '[User] Is Publisher Set'
 }

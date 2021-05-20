@@ -32,7 +32,11 @@ export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =
             score : TypeOf.Number
         },
 
-        subscriptions : {},
-        type          : InterestType.Unsubscribed
+        filter :
+        {
+            type          : InterestType.Unsubscribed,
+            virtual       : false,
+            subscriptions : {}
+        }
     }
 };

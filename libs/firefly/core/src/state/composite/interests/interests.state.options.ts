@@ -10,7 +10,11 @@ export const StateInterestsOptions: StoreOptions<StateInterestsModel> =
 
     defaults :
     {
-        type    : InterestType.Unsubscribed,
-        virtual : false
+        filter :
+        {
+            type          : InterestType.Unsubscribed,
+            virtual       : false,
+            subscriptions : {}
+        }
     }
 };

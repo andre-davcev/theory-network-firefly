@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUser, ActionUserSubscriptionToggle, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionUserSubscriptionOnOff, ActionInterestGet, ActionAppLoadingShow, ActionInterestsPage, StateInterests } from '@firefly/core';
+import { StateUser, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionInterestGet, ActionAppLoadingShow, ActionInterestsPage, StateInterests, ActionInterestsSubscriptionToggle, ActionInterestsSubscriptionOnOff } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
@@ -61,7 +61,7 @@ export class PageStream extends BaseComponent implements OnInit
             take(1),
             switchMap((authenticated: boolean) =>
                 authenticated ?
-                    this.store.dispatch(new ActionUserSubscriptionToggle(stream.id, true)) :
+                    this.store.dispatch(new ActionInterestsSubscriptionToggle(stream.id, true)) :
                     this.store.dispatch(new ActionMobileAuthSelect())
             )
         ).
@@ -70,7 +70,7 @@ export class PageStream extends BaseComponent implements OnInit
 
     public toggleOn(on: boolean, interest: StreamInterest): void
     {
-        this.store.dispatch(new ActionUserSubscriptionOnOff(interest.id, on));
+        this.store.dispatch(new ActionInterestsSubscriptionOnOff(interest.id, on));
     }
 
     public setOpened(itemIndex, interest: Interest): void

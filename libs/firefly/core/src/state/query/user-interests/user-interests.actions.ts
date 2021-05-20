@@ -4,6 +4,7 @@ import { DocumentSnapshot } from '@theory/firebase';
 import { Interest } from '@firefly/cloud';
 
 import { ActionsUserInterests } from './user-interests.actions.enum';
+import { InterestsFilter } from '../../composite';
 
 export class ActionUserInterestsReset   { static readonly type = ActionsUserInterests.Reset;   constructor() { } }
 export class ActionUserInterestsGetData { static readonly type = ActionsUserInterests.GetData; constructor() { } }
@@ -12,4 +13,4 @@ export class ActionUserInterestsAdd     { static readonly type = ActionsUserInte
 export class ActionUserInterestsRemove  { static readonly type = ActionsUserInterests.Remove;  constructor(public id: string) { } }
 export class ActionUserInterestsSync    { static readonly type = ActionsUserInterests.Sync;    constructor(public object: Interest) { } }
 
-export class ActionUserInterestsFilter { static readonly type = ActionsUserInterests.Filter; constructor() { } }
+export class ActionUserInterestsFilter { static readonly type = ActionsUserInterests.Filter; constructor(public filter: InterestsFilter) { } }

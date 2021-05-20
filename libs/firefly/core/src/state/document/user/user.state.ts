@@ -1,4 +1,4 @@
-import { User as FirebaseUser, FirebaseError, UserCredential, GeoPoint, DocumentSnapshot } from '@theory/firebase';
+import { User as FirebaseUser, FirebaseError, UserCredential, GeoPoint } from '@theory/firebase';
 
 import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';
@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, StreamInterest, SubscriptionPartial, Subscription, AlertPartial, CityInfo } from '@firefly/cloud';
+import { User, SubscriptionPartial, AlertPartial, CityInfo } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -26,17 +26,13 @@ import {
     ActionUserDelete,
     ActionUserCreate,
     ActionUserUpdate,
-    ActionUserSubscriptionToggle,
-    ActionUserSubscriptionAdd,
-    ActionUserSubscriptionRemove,
-    ActionUserSubscriptionOnOff,
     ActionUserIsPublisherSet,
     ActionUserAnonymousLogin,
     ActionUserSubscriptionsSet,
     ActionUserNotificationsSet,
     ActionUserPatchMetadata,
     ActionUserResetPassword,
-    ActionUserWatchCity, ActionUserResetAll, ActionUserSetErrorAuth, ActionUserSubscriptionsFilter
+    ActionUserWatchCity, ActionUserResetAll, ActionUserSetErrorAuth
 } from './user.actions';
 import { ServiceUsers } from '@firefly/core/services';
 import { StateDocument } from '@theory/ngxs';
@@ -44,17 +40,15 @@ import { StateDocument } from '@theory/ngxs';
 import { ActionUserAlertsReset, ActionUserAlertsSetData } from '../../child/user-alerts/user-alerts.actions';
 import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
-import { ActionCityStreamFilter, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
-import { ActionUserSubscriptionsReset, ActionUserSubscriptionsSetData, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
+import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
 import { Injectable } from '@angular/core';
-import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { Collection } from '@firefly/core/enums';
 
 import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
-import { StateCity } from '../city';
-import { ActionAppLoadingHide, ActionAppLoadingShow } from '../app/app.actions';
+import { StateCity } from '../city/city.state';
+import { ActionInterestsSetSubscriptions } from '../../composite/interests/interests.actions';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()
@@ -184,7 +178,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 dispatch
                 ([
                     new ActionUserNotificationsSet(),
-                    new ActionLanguageSet(StateUser.language(getState()))
+                    new ActionLanguageSet(StateUser.language(getState())),
+                    new ActionUserSubscriptionsSet()
                 ])
             ),
             switchMap(() =>
@@ -459,110 +454,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserSubscriptionsSet)
     subscriptionsSet({ dispatch, getState }: StateContext<StateUserModel>)
     {
-        const subscriptions: Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(getState());
-
-        return dispatch(new ActionUserSubscriptionsSetData(subscriptions, true));
-    }
-
-    @Action(ActionUserSubscriptionToggle)
-    subscriptionToggle({ dispatch, getState }: StateContext<StateUserModel>, { id, permanent }: ActionUserSubscriptionToggle)
-    {
-        const subscription : SubscriptionPartial = StateUser.subscriptionsStatus(getState())[id];
-
-        return !permanent ?
-                  dispatch(new ActionUserSubscriptionOnOff(id, !subscription.on)) :
-                  (subscription == null ?
-                      dispatch(new ActionUserSubscriptionAdd(id)) :
-                      dispatch(new ActionUserSubscriptionRemove(id))
-                  );
-    }
-
-    @Action(ActionUserSubscriptionAdd)
-    subscriptionAdd({ dispatch, getState }: StateContext<StateUserModel>, { id }: ActionUserSubscriptionAdd)
-    {
-        const state: StateUserModel = getState();
-
-        const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
-        const streamInterestSnapshot : DocumentSnapshot                    = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
-
-        subscriptionsStatus[id] = { on : true };
-        streamInterest.on       = true;
-
-        return dispatch
-        ([
-            new ActionUserPatch({ subscriptionsStatus }, true),
-            new ActionCityStreamSync(streamInterest),
-            new ActionUserSubscriptionsAdd(streamInterestSnapshot, streamInterest)
-        ]);
-    }
-
-    @Action(ActionUserSubscriptionRemove)
-    subscriptionRemove({ dispatch, getState }: StateContext<StateUserModel>, { id }: ActionUserSubscriptionRemove)
-    {
-        const state: StateUserModel = getState();
-
-        const subscriptionsStatus : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-        const streamInterest      : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
-
-        delete subscriptionsStatus[id];
-        delete streamInterest.on;
-
-        return dispatch
-        ([
-            new ActionUserPatch({ subscriptionsStatus }, true),
-            new ActionCityStreamSync(streamInterest),
-            new ActionUserSubscriptionsRemove(id)
-        ]);
-    }
-
-    @Action(ActionUserSubscriptionOnOff)
-    subscriptionOnOff({ dispatch, getState }: StateContext<StateUserModel>, { id, on }: ActionUserSubscriptionOnOff)
-    {
-        const state: StateUserModel = getState();
-
-        const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateUser.subscriptionsStatus(state);
-        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
-        const subscription           : Subscription                        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
-
-        subscriptionsStatus[id].on = on;
-
-        const actions: Array<any> =
-        [
-            new ActionUserPatch({ subscriptionsStatus }, true)
-        ];
-
-        if (streamInterest != null && streamInterest.on != null)
-        {
-            streamInterest.on = on;
-
-            actions.push(new ActionCityStreamSync(streamInterest));
-        }
-
-        if (subscription != null)
-        {
-            subscription.on = on;
-
-            actions.push(new ActionUserSubscriptionsSync(subscription))
-        }
-
-        return dispatch(actions);
-    }
-
-    @Action(ActionUserSubscriptionsFilter)
-    subscriptionsFilter({ dispatch }: StateContext<StateUserModel>, { type }: ActionUserSubscriptionsFilter)
-    {
-        const initialized: boolean = this.store.selectSnapshot(StateUserSubscriptions.initialized());
-
-        return initialized ?
-            dispatch(new ActionCityStreamFilter(type)) :
-            dispatch(new ActionAppLoadingShow()).
-            pipe
-            (
-                switchMap(() => dispatch(new ActionUserSubscriptionsSet())),
-                switchMap(() => dispatch(new ActionAppLoadingHide())),
-                switchMap(() => dispatch(new ActionCityStreamFilter(type)))
-            );
+        return dispatch(new ActionInterestsSetSubscriptions(StateUser.subscriptionsStatus(getState())));
     }
 
     @Action(ActionUserNotificationsSet)

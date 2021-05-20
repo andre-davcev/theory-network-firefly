@@ -12,9 +12,9 @@ import {
 
 import { LoadingOptions } from '@ionic/core';
 import { LoadingController } from '@ionic/angular';
-import { StateCity } from '../city';
-import { StateCityStream } from '../../child';
-import { StateUser } from '../user';
+import { StateCity } from '../city/city.state';
+import { StateCityStream } from '../../child/city-stream/city-stream.state';
+import { StateUser } from '../user/user.state';
 
 @State<StateAppModel>(StateAppOptions)
 @Injectable()

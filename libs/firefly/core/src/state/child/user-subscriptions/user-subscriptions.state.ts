@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 
-import { Subscription, SubscriptionPartial } from '@firefly/cloud';
+import { StreamInterest, Subscription, SubscriptionPartial } from '@firefly/cloud';
 import { ServiceSubscriptions } from '@firefly/core/services';
 
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
@@ -13,19 +13,25 @@ import {
     ActionUserSubscriptionsGet,
     ActionUserSubscriptionsSync,
     ActionUserSubscriptionsSetData,
-    ActionUserSubscriptionsSetSubscriptions
+    ActionUserSubscriptionsFilter
 } from './user-subscriptions.actions';
 import { StateChild } from '@theory/ngxs';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
 import { switchMap } from 'rxjs/operators';
-import { ImageType, Collection } from '@firefly/core/enums';
+import { ImageType, Collection, InterestType } from '@firefly/core/enums';
+import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
+import { of } from 'rxjs';
+import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 @Injectable()
 export class StateUserSubscriptions extends StateChild<Subscription, StateUserSubscriptionsModel>
 {
-    @Selector()static subscriptions(state: StateUserSubscriptionsModel) {return state.subscriptions; }
+    @Selector() static filter(state: StateUserSubscriptionsModel)        : InterestsFilter                     { return state.filter; }
+    @Selector() static type(state: StateUserSubscriptionsModel)          : InterestType                        { return StateUserSubscriptions.filter(state).type; }
+    @Selector() static virtual(state: StateUserSubscriptionsModel)       : boolean                             { return StateUserSubscriptions.filter(state).virtual; }
+    @Selector() static subscriptions(state: StateUserSubscriptionsModel) : Record<string, SubscriptionPartial> { return StateUserSubscriptions.filter(state).subscriptions; }
 
     constructor
     (
@@ -99,23 +105,41 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
         return super.sync(context, action);
     }
 
-    @Action(ActionUserSubscriptionsSetSubscriptions)
-    setSubscriptions({ patchState }: StateContext<StateUserSubscriptionsModel>, { subscriptions }: ActionUserSubscriptionsSetSubscriptions)
+    @Action(ActionUserSubscriptionsFilter)
+    filter(context: StateContext<StateUserSubscriptionsModel>, { filter }: ActionUserSubscriptionsFilter)
     {
-        patchState({ subscriptions });
+        const { patchState, dispatch, getState } = context;
+
+        patchState({ filter });
+
+        const state         : StateUserSubscriptionsModel         = getState();
+        const initialized   : boolean                             = StateUserSubscriptions.initializedState(state);
+        const subscriptions : Record<string, SubscriptionPartial> = filter.subscriptions;
+
+        return initialized ?
+            of(patchState({ keysFiltered: this.keysFilter(context) })) :
+            dispatch(new ActionAppLoadingShow()).
+            pipe
+            (
+                switchMap(() => dispatch(new ActionUserSubscriptionsSetData(subscriptions, true))),
+                switchMap(() => dispatch(new ActionAppLoadingHide()))
+            );
     }
 
     public keysFilter(context: StateContext<StateUserSubscriptionsModel>): Array<string>
     {
-      const { getState } = context;
+        const { getState } = context;
 
-      const state         : StateUserSubscriptionsModel         = getState();
-      const keys          : Array<string>                       = StateUserSubscriptions.keysState(state);
-      const subscriptions : Record<string, SubscriptionPartial> = StateUserSubscriptions.subscriptions(state);
+        const state         : StateUserSubscriptionsModel         = getState();
+        const lookup        : Record<string, StreamInterest>      = StateUserSubscriptions.dataLookupState(state);
+        const keys          : Array<string>                       = StateUserSubscriptions.keysState(state);
+        const subscriptions : Record<string, SubscriptionPartial> = StateUserSubscriptions.subscriptions(state);
+        const virtual       : boolean                             = StateUserSubscriptions.virtual(state);
 
-      return keys.
-          filter((id: string) =>
-              subscriptions[id] != null
-          );
+        return keys.
+            filter((id: string) =>
+                (!virtual || lookup[id]?.virtual) &&
+                subscriptions[id] != null
+            );
     }
 }
