@@ -3,7 +3,6 @@ import { Credentials } from '@theory/core';
 
 import { User, MetadataUser } from '@firefly/cloud';
 import { ActionsUser } from './user.actions.enum';
-import { InterestType } from '@firefly/core/enums';
 
 export class ActionUserReset         { static readonly type = ActionsUser.Reset;         constructor() { } }
 export class ActionUserGet           { static readonly type = ActionsUser.Get;           constructor(public id: string) { } }
@@ -28,12 +27,6 @@ export class ActionUserResetPassword      { static readonly type = ActionsUser.R
 export class ActionUserResetAll           { static readonly type = ActionsUser.ResetAll;           constructor() { } }
 export class ActionUserSetErrorAuth       { static readonly type = ActionsUser.SetErrorAuth;       constructor(public errorAuth: FirebaseError = null) { } }
 
-export class ActionUserSubscriptionsSet    { static readonly type = ActionsUser.SubscriptionsSet;   constructor() { } }
-export class ActionUserSubscriptionToggle  { static readonly type = ActionsUser.SubscriptionToggle; constructor(public id: string, public permanent: boolean = false) { } }
-export class ActionUserSubscriptionAdd     { static readonly type = ActionsUser.SubscriptionAdd;    constructor(public id: string) { } }
-export class ActionUserSubscriptionRemove  { static readonly type = ActionsUser.SubscriptionRemove; constructor(public id: string) { } }
-export class ActionUserSubscriptionOnOff   { static readonly type = ActionsUser.SubscriptionOnOff;  constructor(public id: string, public on: boolean) { } }
-export class ActionUserSubscriptionsFilter { static readonly type = ActionsUser.SubscriptionFilter; constructor(public type: InterestType) { } }
-
+export class ActionUserSubscriptionsSet { static readonly type = ActionsUser.SubscriptionsSet; constructor() { } }
 export class ActionUserNotificationsSet { static readonly type = ActionsUser.NotificationsSet; constructor() { } }
-export class ActionUserIsPublisherSet   { static readonly type = ActionsUser.IsPublisherSet;  constructor(public isPublisher:  boolean) { } }
+export class ActionUserIsPublisherSet   { static readonly type = ActionsUser.IsPublisherSet;   constructor(public isPublisher:  boolean) { } }

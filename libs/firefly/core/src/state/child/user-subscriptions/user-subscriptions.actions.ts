@@ -2,6 +2,7 @@ import { Subscription, SubscriptionPartial } from '@firefly/cloud';
 
 import { ActionsUserSubscriptions } from './user-subscriptions.actions.enum';
 import { DocumentSnapshot } from '@theory/firebase';
+import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 
 export class ActionUserSubscriptionsReset   { static readonly type = ActionsUserSubscriptions.Reset;   constructor() { } }
 export class ActionUserSubscriptionsGetData { static readonly type = ActionsUserSubscriptions.GetData; constructor() { } }
@@ -11,4 +12,4 @@ export class ActionUserSubscriptionsAdd     { static readonly type = ActionsUser
 export class ActionUserSubscriptionsRemove  { static readonly type = ActionsUserSubscriptions.Remove;  constructor(public id: string) { } }
 export class ActionUserSubscriptionsSync    { static readonly type = ActionsUserSubscriptions.Sync;    constructor(public object: Subscription) { } }
 
-export class ActionUserSubscriptionsSetSubscriptions { static readonly type = ActionsUserSubscriptions.SetSubscriptions; constructor(public subscriptions: Record<string, SubscriptionPartial>) { } }
+export class ActionUserSubscriptionsFilter { static readonly type = ActionsUserSubscriptions.Filter; constructor(public filter: InterestsFilter) { } }

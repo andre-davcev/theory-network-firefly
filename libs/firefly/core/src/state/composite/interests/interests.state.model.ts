@@ -1,7 +1,6 @@
-import { InterestType } from '@firefly/core/enums';
+import { InterestsFilter } from './interests.filter.model';
 
 export interface StateInterestsModel
 {
-    type    : InterestType;
-    virtual : boolean;
+    filter: InterestsFilter;
 }

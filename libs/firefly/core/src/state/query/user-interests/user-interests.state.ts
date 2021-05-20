@@ -119,8 +119,10 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     }
 
     @Action(ActionUserInterestsFilter)
-    filter({ dispatch, getState }: StateContext<StateUserInterestsModel>)
+    filter({ dispatch, getState, patchState }: StateContext<StateUserInterestsModel>, { filter }: ActionUserInterestsFilter)
     {
+        // patchState({ filter });
+
         const initialized: boolean = StateUserInterests.initializedState(getState());
 
         return initialized ?

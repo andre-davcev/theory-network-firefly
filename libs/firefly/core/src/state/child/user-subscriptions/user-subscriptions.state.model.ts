@@ -1,7 +1,8 @@
-import { Subscription, SubscriptionPartial } from '@firefly/cloud';
+import { Subscription } from '@firefly/cloud';
 import { StateChildModel } from '@theory/ngxs';
+import { InterestsFilter } from '../../composite';
 
 export interface StateUserSubscriptionsModel extends StateChildModel<Subscription>
 {
-    subscriptions: Record<string, SubscriptionPartial>;
+    filter: InterestsFilter;
 }
