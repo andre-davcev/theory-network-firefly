@@ -8,7 +8,7 @@ import { SubscriptionPartial } from '@firefly/cloud';
 
 export class ActionInterestsSetType            { static readonly type = ActionsInterests.SetType;            constructor(public type: InterestType) { } }
 export class ActionInterestsSetVirtual         { static readonly type = ActionsInterests.SetVirtual;         constructor(public virtual: boolean) { } }
-export class ActionInterestsSetSubscriptions   { static readonly type = ActionsInterests.SetSubscriptions;   constructor(public subscriptions: Record<string, SubscriptionPartial>) { } }
+export class ActionInterestsSetSubscriptions   { static readonly type = ActionsInterests.SetSubscriptions;   constructor(public subscriptions: Record<string, SubscriptionPartial>, public save?: boolean) { } }
 export class ActionInterestsFilter             { static readonly type = ActionsInterests.Filter;             constructor(public filter?: InterestsFilter) { } }
 export class ActionInterestsPage               { static readonly type = ActionsInterests.Page;               constructor(public infiniteScroll: IonInfiniteScroll) { } }
 
