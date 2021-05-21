@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { from, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
 
 import { InterestType } from '@firefly/core/enums';
 
@@ -25,7 +25,7 @@ import { InterestsFilter } from './interests.filter.model';
 import { DocumentSnapshot } from '@theory/firebase';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
-import { ActionUserSubscriptionsAdd, ActionUserSubscriptionsFilter, ActionUserSubscriptionsGet, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
+import { ActionUserSubscriptionsAdd, ActionUserSubscriptionsFilter, ActionUserSubscriptionsGet, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { ActionCityStreamFilter, ActionCityStreamGet, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
 import { StateUser } from '../../document/user/user.state';
 import { StateUserInterests } from '../../query/user-interests/user-interests.state';
@@ -174,13 +174,22 @@ export class StateInterests
     }
 
     @Action(ActionInterestsSetSubscriptions)
-    setSubscriptions({ getState, dispatch }: StateContext<StateInterestsModel>, { subscriptions }: ActionInterestsSetSubscriptions)
+    setSubscriptions({ getState, dispatch }: StateContext<StateInterestsModel>, { subscriptions, save }: ActionInterestsSetSubscriptions)
     {
         const filter: InterestsFilter = StateInterests.filter(getState());
 
         filter.subscriptions = subscriptions;
 
-        return dispatch(new ActionInterestsFilter(filter));
+        return dispatch(new ActionInterestsFilter(filter)).
+        pipe
+        (
+            takeWhile(() =>
+                save
+            ),
+            switchMap(() =>
+                dispatch(new ActionUserPatch({ subscriptionsStatus: subscriptions }, true))
+            )
+        );
     }
 
     @Action(ActionInterestsFilter)
@@ -274,20 +283,25 @@ export class StateInterests
     @Action(ActionInterestsSubscriptionRemove)
     subscriptionRemove({ dispatch, getState }: StateContext<StateInterestsModel>, { id }: ActionInterestsSubscriptionRemove)
     {
-        const state: StateInterestsModel = getState();
-
-        const subscriptionsStatus : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
-        const streamInterest      : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
-
+        const subscriptionsStatus : Record<string, SubscriptionPartial> = StateInterests.subscriptions(getState());
         delete subscriptionsStatus[id];
-        delete streamInterest.on;
 
-        return dispatch
-        ([
-            new ActionUserPatch({ subscriptionsStatus }, true),
-            new ActionCityStreamSync(streamInterest),
-            new ActionUserSubscriptionsRemove(id)
-        ]);
+        return dispatch(new ActionInterestsSetSubscriptions(subscriptionsStatus, true)).
+        pipe
+        (
+            map(() =>
+                this.store.selectSnapshot(StateCityStream.dataLookup())[id]
+            ),
+            takeWhile((streamInterest : StreamInterest) =>
+                streamInterest != null
+            ),
+            tap((streamInterest : StreamInterest) =>
+                delete streamInterest.on
+            ),
+            switchMap((streamInterest: StreamInterest) =>
+                dispatch(new ActionCityStreamSync(streamInterest))
+            )
+        );
     }
 
     @Action(ActionInterestsSubscriptionOnOff)
