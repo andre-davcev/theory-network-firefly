@@ -2,7 +2,7 @@ import { StateContext, createSelector } from '@ngxs/store';
 import { Observable, of, forkJoin } from 'rxjs';
 
 import { DocumentSnapshot, FirebaseDocument, OrderBy, QueryDocumentSnapshot, ServiceFirestore, ServiceStorage, Timestamp } from '@theory/firebase';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { map, tap, switchMap, takeWhile } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 
 import { StateChildModel } from './child.model';
@@ -200,21 +200,24 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public add(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState } = context;
-        const { keys: keys, initialized } = getState();
+        const { keys, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
         const snapshot: DocumentSnapshot = action.snapshot;
-        const id:       string                     = snapshot.id;
+        const id:       string           = snapshot.id;
 
         return super.add(context, action).
         pipe
         (
+            takeWhile((index: number) =>
+                index >= 0
+            ),
             tap((index: number) =>
             {
                 keys.splice(index, 0, id);
 
-                patchState({ keys: keys } as M);
+                patchState({ keys } as M);
             })
         );
     }
@@ -249,7 +252,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public sync(context: StateContext<M>, action: any): Observable<any>
     {
         const { getState, patchState }  = context;
-        const { keys: keys, initialized } = getState();
+        const { keys, initialized } = getState();
 
         if (!initialized) { return of(null); }
 
@@ -265,7 +268,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                     keys.splice(result.indexOld, 1);
                     keys.splice(result.indexNew, 0, id);
 
-                    patchState({ keys: keys } as M);
+                    patchState({keys } as M);
                 }
             })
         );

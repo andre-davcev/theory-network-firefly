@@ -96,21 +96,29 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
 
         const snapshot: DocumentSnapshot = action.snapshot;
 
-        const entity: T      = action.entity == null ? snapshot.data() : action.entity;
-        const id:     string = entity.id;
-        const count:  number = StateCollection.countState(state);
-        const value:  any    = this.getValue(entity[orderBy], orderByType);
+        const entity   : T       = action.entity == null ? snapshot.data() : action.entity;
+        const id       : string  = entity.id;
+        const inKeys   : boolean = keys.findIndex((key: string) => key === id) !== -1;
+        const inLookup : boolean = StateCollection.dataLookupState(state)[id] != null;
 
-        let sortIndex: number = StateCollection.
-            dataState(state).
-            findIndex((object: T) =>
-                ((orderByDirection === OrderBy.Ascending  && this.getValue(object[orderBy], orderByType) > value) ||
-                (orderByDirection === OrderBy.Descending && this.getValue(object[orderBy], orderByType) < value))
-            );
+        let sortIndex: number = -1;
 
-        sortIndex = sortIndex === -1 ? count : sortIndex;
+        if (!(inKeys && !inLookup))
+        {
+          const count:  number = StateCollection.countState(state);
+          const value:  any    = this.getValue(entity[orderBy], orderByType);
 
-        keys.splice(sortIndex, 0, id);
+          sortIndex = StateCollection.
+              dataState(state).
+              findIndex((object: T) =>
+                  ((orderByDirection === OrderBy.Ascending  && this.getValue(object[orderBy], orderByType) > value) ||
+                  (orderByDirection === OrderBy.Descending && this.getValue(object[orderBy], orderByType) < value))
+              );
+
+          sortIndex = sortIndex === -1 ? count : sortIndex;
+
+          keys.splice(sortIndex, 0, id);
+        }
 
         snapshotLookup[id] = snapshot;
         dataLookup[id]     = entity;
