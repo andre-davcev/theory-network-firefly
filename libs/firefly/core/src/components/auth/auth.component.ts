@@ -137,8 +137,6 @@ export class ComponentAuth implements OnInit
     {
         const credentials: Credentials = this.form.value;
 
-        console.log(credentials);
-
         const action: ActionUserLoginEmail | ActionUserCreate | ActionUserResetPassword =
             this.type === AuthType.Login ?
                 new ActionUserLoginEmail(credentials) :

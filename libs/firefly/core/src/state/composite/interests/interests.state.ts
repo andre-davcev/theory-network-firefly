@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { from, of } from 'rxjs';
-import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { switchMap, takeWhile, tap } from 'rxjs/operators';
 
 import { InterestType } from '@firefly/core/enums';
 
@@ -26,7 +26,7 @@ import { DocumentSnapshot } from '@theory/firebase';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { ActionUserSubscriptionsAdd, ActionUserSubscriptionsFilter, ActionUserSubscriptionsGet, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { ActionCityStreamFilter, ActionCityStreamGet, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
+import { ActionCityStreamAdd, ActionCityStreamFilter, ActionCityStreamGet, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
 import { StateUser } from '../../document/user/user.state';
 import { StateUserInterests } from '../../query/user-interests/user-interests.state';
 import { ActionUserInterestsFilter, ActionUserInterestsGet } from '../../query/user-interests/user-interests.actions';
@@ -218,33 +218,22 @@ export class StateInterests
     @Action(ActionInterestsPage)
     page({ dispatch, getState }: StateContext<StateInterestsModel>, { infiniteScroll }: ActionInterestsPage)
     {
-        const type           : InterestType = StateInterests.type(getState());
-        const finishedPaging : boolean      = this.store.selectSnapshot(StateInterests.pageFinished);
+        const type: InterestType = StateInterests.type(getState());
 
-        return finishedPaging ?
-            of(null).
-            pipe
-            (
-                // tap(() => infiniteScroll.disabled = true),
-                switchMap(() =>
-                    from(infiniteScroll.complete())
-                )
-            ):
-
-            dispatch
-            (
-                type === InterestType.Unsubscribed ?
-                    new ActionCityStreamGet() :
-                type === InterestType.Subscribed ?
-                    new ActionUserSubscriptionsGet() :
-                    new ActionUserInterestsGet()
-            ).
-            pipe
-            (
-                switchMap(() =>
-                    from(infiniteScroll.complete())
-                )
-            );
+        return dispatch
+        (
+            type === InterestType.Unsubscribed ?
+                new ActionCityStreamGet() :
+            type === InterestType.Subscribed ?
+                new ActionUserSubscriptionsGet() :
+                new ActionUserInterestsGet()
+        ).
+        pipe
+        (
+            switchMap(() =>
+                from(infiniteScroll.complete())
+            )
+        );
     }
 
     @Action(ActionInterestsSubscriptionToggle)
@@ -265,6 +254,8 @@ export class StateInterests
     {
         const state: StateInterestsModel = getState();
 
+        // ToDo: Compare to ActionInterestsSubscriptionRemove
+
         const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
         const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
         const streamInterestSnapshot : DocumentSnapshot                    = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
@@ -283,23 +274,45 @@ export class StateInterests
     @Action(ActionInterestsSubscriptionRemove)
     subscriptionRemove({ dispatch, getState }: StateContext<StateInterestsModel>, { id }: ActionInterestsSubscriptionRemove)
     {
-        const subscriptionsStatus : Record<string, SubscriptionPartial> = StateInterests.subscriptions(getState());
+        const state: StateInterestsModel = getState();
+
+        const subscriptionsStatus : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
         delete subscriptionsStatus[id];
 
-        return dispatch(new ActionInterestsSetSubscriptions(subscriptionsStatus, true)).
+        const hasStreamKey : boolean = this.store.selectSnapshot(StateCityStream.keys()).findIndex((key: string) => key === id) != -1;
+        let action$: Observable<any> = of(null);
+
+        if (hasStreamKey)
+        {
+            const type              : InterestType = StateInterests.type(state);
+            const hasStreamSnapshot : boolean      = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id] != null;
+
+            const data: StreamInterest =
+                type === InterestType.Unsubscribed ?
+                    this.store.selectSnapshot(StateCityStream.dataLookup())[id] :
+                type === InterestType.Subscribed ?
+                    this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id] :
+                    this.store.selectSnapshot(StateUserInterests.dataLookup())[id];
+
+            const snapshot: DocumentSnapshot =
+                type === InterestType.Unsubscribed ?
+                    this.store.selectSnapshot(StateCityStream.snapshotLookup())[id] :
+                type === InterestType.Subscribed ?
+                    this.store.selectSnapshot(StateUserSubscriptions.snapshotLookup())[id] :
+                    this.store.selectSnapshot(StateUserInterests.snapshotLookup())[id];
+
+            delete data.on;
+
+            action$ = hasStreamSnapshot ?
+                dispatch(new ActionCityStreamSync(data)) :
+                dispatch(new ActionCityStreamAdd(snapshot, data));
+        }
+
+        return action$.
         pipe
         (
-            map(() =>
-                this.store.selectSnapshot(StateCityStream.dataLookup())[id]
-            ),
-            takeWhile((streamInterest : StreamInterest) =>
-                streamInterest != null
-            ),
-            tap((streamInterest : StreamInterest) =>
-                delete streamInterest.on
-            ),
-            switchMap((streamInterest: StreamInterest) =>
-                dispatch(new ActionCityStreamSync(streamInterest))
+            switchMap(() =>
+                dispatch(new ActionInterestsSetSubscriptions(subscriptionsStatus, true))
             )
         );
     }

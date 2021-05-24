@@ -31,7 +31,6 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     @Selector() static virtual(state: StateCityStreamModel)       : boolean                             { return StateCityStream.filter(state).virtual; }
     @Selector() static subscriptions(state: StateCityStreamModel) : Record<string, SubscriptionPartial> { return StateCityStream.filter(state).subscriptions; }
 
-
     constructor
     (
         service : ServiceStreams,
