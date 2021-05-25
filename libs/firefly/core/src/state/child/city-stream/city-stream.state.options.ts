@@ -37,6 +37,8 @@ export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =
             type          : InterestType.Unsubscribed,
             virtual       : false,
             subscriptions : {}
-        }
+        },
+
+        subscriptionsNew: {}
     }
 };

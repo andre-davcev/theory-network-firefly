@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { from, Observable, of } from 'rxjs';
+import { from } from 'rxjs';
 import { switchMap, takeWhile, tap } from 'rxjs/operators';
 
 import { InterestType } from '@firefly/core/enums';
@@ -19,14 +19,14 @@ import {
     ActionInterestsSubscriptionRemove
 } from './interests.actions';
 
-import { StreamInterest, Subscription, SubscriptionPartial } from '@firefly/cloud';
+import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ActionUserPatch } from '../../document/user/user.actions';
 import { InterestsFilter } from './interests.filter.model';
 import { DocumentSnapshot } from '@theory/firebase';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
-import { ActionUserSubscriptionsAdd, ActionUserSubscriptionsFilter, ActionUserSubscriptionsGet, ActionUserSubscriptionsSync } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { ActionCityStreamAdd, ActionCityStreamFilter, ActionCityStreamGet, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
+import { ActionUserSubscriptionsAdd, ActionUserSubscriptionsFilter, ActionUserSubscriptionsGet, ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
+import { ActionCityStreamFilter, ActionCityStreamGet, ActionCityStreamSubscriptionNew } from '../../child/city-stream/city-stream.actions';
 import { StateUser } from '../../document/user/user.state';
 import { StateUserInterests } from '../../query/user-interests/user-interests.state';
 import { ActionUserInterestsFilter, ActionUserInterestsGet } from '../../query/user-interests/user-interests.actions';
@@ -42,8 +42,8 @@ export class StateInterests
 
     @Selector
     ([
-        StateCityStream.data(),
-        StateUserSubscriptions.data(),
+        StateCityStream.dataUnsubscribed,
+        StateUserSubscriptions.dataSubscribed,
         StateUserInterests.dataCreated
     ])
     public static data
@@ -254,20 +254,30 @@ export class StateInterests
     {
         const state: StateInterestsModel = getState();
 
-        // ToDo: Compare to ActionInterestsSubscriptionRemove
+        const type          : InterestType                        = StateInterests.type(state);
+        const subscriptions : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
 
-        const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
-        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
-        const streamInterestSnapshot : DocumentSnapshot                    = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
+        const data: StreamInterest =
+            type === InterestType.Unsubscribed ?
+                this.store.selectSnapshot(StateCityStream.dataLookup())[id] :
+            type === InterestType.Subscribed ?
+                this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id] :
+                this.store.selectSnapshot(StateUserInterests.dataLookup())[id];
 
-        subscriptionsStatus[id] = { on : true };
-        streamInterest.on       = true;
+        const snapshot: DocumentSnapshot =
+            type === InterestType.Unsubscribed ?
+                this.store.selectSnapshot(StateCityStream.snapshotLookup())[id] :
+            type === InterestType.Subscribed ?
+                this.store.selectSnapshot(StateUserSubscriptions.snapshotLookup())[id] :
+                this.store.selectSnapshot(StateUserInterests.snapshotLookup())[id];
+
+        subscriptions[id] = { on : true };
 
         return dispatch
         ([
-            new ActionUserPatch({ subscriptionsStatus }, true),
-            new ActionCityStreamSync(streamInterest),
-            new ActionUserSubscriptionsAdd(streamInterestSnapshot, streamInterest)
+            new ActionInterestsSetSubscriptions(subscriptions, true),
+            new ActionUserSubscriptionsAdd(snapshot, data),
+            new ActionCityStreamSubscriptionNew(id)
         ]);
     }
 
@@ -276,45 +286,14 @@ export class StateInterests
     {
         const state: StateInterestsModel = getState();
 
-        const subscriptionsStatus : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
-        delete subscriptionsStatus[id];
+        const subscriptions : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
+        delete subscriptions[id];
 
-        const hasStreamKey : boolean = this.store.selectSnapshot(StateCityStream.keys()).findIndex((key: string) => key === id) != -1;
-        let action$: Observable<any> = of(null);
-
-        if (hasStreamKey)
-        {
-            const type              : InterestType = StateInterests.type(state);
-            const hasStreamSnapshot : boolean      = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id] != null;
-
-            const data: StreamInterest =
-                type === InterestType.Unsubscribed ?
-                    this.store.selectSnapshot(StateCityStream.dataLookup())[id] :
-                type === InterestType.Subscribed ?
-                    this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id] :
-                    this.store.selectSnapshot(StateUserInterests.dataLookup())[id];
-
-            const snapshot: DocumentSnapshot =
-                type === InterestType.Unsubscribed ?
-                    this.store.selectSnapshot(StateCityStream.snapshotLookup())[id] :
-                type === InterestType.Subscribed ?
-                    this.store.selectSnapshot(StateUserSubscriptions.snapshotLookup())[id] :
-                    this.store.selectSnapshot(StateUserInterests.snapshotLookup())[id];
-
-            delete data.on;
-
-            action$ = hasStreamSnapshot ?
-                dispatch(new ActionCityStreamSync(data)) :
-                dispatch(new ActionCityStreamAdd(snapshot, data));
-        }
-
-        return action$.
-        pipe
-        (
-            switchMap(() =>
-                dispatch(new ActionInterestsSetSubscriptions(subscriptionsStatus, true))
-            )
-        );
+        return dispatch
+        ([
+            new ActionInterestsSetSubscriptions(subscriptions, true),
+            new ActionUserSubscriptionsRemove(id)
+        ]);
     }
 
     @Action(ActionInterestsSubscriptionOnOff)
@@ -322,31 +301,10 @@ export class StateInterests
     {
         const state: StateInterestsModel = getState();
 
-        const subscriptionsStatus    : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
-        const streamInterest         : StreamInterest                      = this.store.selectSnapshot(StateCityStream.dataLookup())[id];
-        const subscription           : Subscription                        = this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
+        const subscriptions: Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
 
-        subscriptionsStatus[id].on = on;
+        subscriptions[id].on = on;
 
-        const actions: Array<any> =
-        [
-            new ActionUserPatch({ subscriptionsStatus }, true)
-        ];
-
-        if (streamInterest != null && streamInterest.on != null)
-        {
-            streamInterest.on = on;
-
-            actions.push(new ActionCityStreamSync(streamInterest));
-        }
-
-        if (subscription != null)
-        {
-            subscription.on = on;
-
-            actions.push(new ActionUserSubscriptionsSync(subscription))
-        }
-
-        return dispatch(actions);
+        return dispatch(new ActionInterestsSetSubscriptions(subscriptions, true));
     }
 }

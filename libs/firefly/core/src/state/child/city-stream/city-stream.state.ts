@@ -14,7 +14,8 @@ import {
     ActionCityStreamGet,
     ActionCityStreamSync,
     ActionCityStreamSetData,
-    ActionCityStreamFilter
+    ActionCityStreamFilter,
+    ActionCityStreamSubscriptionNew
 } from './city-stream.actions';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
@@ -26,10 +27,24 @@ import { InterestsFilter } from '../../composite/interests/interests.filter.mode
 @Injectable()
 export class StateCityStream extends StateChild<StreamInterest, StateCityStreamModel>
 {
-    @Selector() static filter(state: StateCityStreamModel)        : InterestsFilter                     { return state.filter; }
-    @Selector() static type(state: StateCityStreamModel)          : InterestType                        { return StateCityStream.filter(state).type; }
-    @Selector() static virtual(state: StateCityStreamModel)       : boolean                             { return StateCityStream.filter(state).virtual; }
-    @Selector() static subscriptions(state: StateCityStreamModel) : Record<string, SubscriptionPartial> { return StateCityStream.filter(state).subscriptions; }
+    @Selector() static filter(state: StateCityStreamModel)           : InterestsFilter                     { return state.filter; }
+    @Selector() static type(state: StateCityStreamModel)             : InterestType                        { return StateCityStream.filter(state).type; }
+    @Selector() static virtual(state: StateCityStreamModel)          : boolean                             { return StateCityStream.filter(state).virtual; }
+    @Selector() static subscriptions(state: StateCityStreamModel)    : Record<string, SubscriptionPartial> { return StateCityStream.filter(state).subscriptions; }
+    @Selector() static subscriptionsNew(state: StateCityStreamModel) : Record<string, string>              { return state.subscriptionsNew; }
+
+    @Selector() static dataUnsubscribed(state: StateCityStreamModel): Array<StreamInterest>
+    {
+        const subscriptions: Record<string, SubscriptionPartial> = StateCityStream.subscriptions(state);
+
+        return StateCityStream.dataState(state).
+            map((item: StreamInterest) =>
+                ({
+                    ...item,
+                    on: subscriptions[item.id]?.on
+                })
+            );
+    }
 
     constructor
     (
@@ -103,6 +118,16 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
         return super.sync(context, action);
     }
 
+    @Action(ActionCityStreamSubscriptionNew)
+    subscriptionNew({ patchState, getState }: StateContext<StateCityStreamModel>, { id }: ActionCityStreamSubscriptionNew)
+    {
+        const subscriptionsNew: Record<string, string> = StateCityStream.subscriptionsNew(getState());
+
+        subscriptionsNew[id] = id;
+
+        patchState({ subscriptionsNew });
+    }
+
     @Action(ActionCityStreamFilter)
     filter(context: StateContext<StateCityStreamModel>, { filter }: ActionCityStreamFilter)
     {
@@ -119,15 +144,16 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     {
         const { getState } = context;
 
-        const state         : StateCityStreamModel                = getState();
-        const lookup        : Record<string, StreamInterest>      = StateCityStream.dataLookupState(state);
-        const keys          : Array<string>                       = StateCityStream.keysState(state);
-        const subscriptions : Record<string, SubscriptionPartial> = StateCityStream.subscriptions(state);
-        const virtual       : boolean                             = StateCityStream.virtual(state);
+        const state            : StateCityStreamModel                = getState();
+        const lookup           : Record<string, StreamInterest>      = StateCityStream.dataLookupState(state);
+        const keys             : Array<string>                       = StateCityStream.keysState(state);
+        const subscriptions    : Record<string, SubscriptionPartial> = StateCityStream.subscriptions(state);
+        const subscriptionsNew : Record<string, string>              = StateCityStream.subscriptionsNew(state);
+        const virtual          : boolean                             = StateCityStream.virtual(state);
 
         return keys.filter((id: string) =>
             (!virtual || lookup[id]?.virtual) &&
-            (subscriptions[id] == null || lookup[id]?.on != null)
+            (subscriptions[id]?.on == null || subscriptionsNew[id] != null)
         );
     }
 }
