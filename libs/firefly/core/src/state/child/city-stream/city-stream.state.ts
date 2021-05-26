@@ -153,7 +153,7 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
 
         return keys.filter((id: string) =>
             (!virtual || lookup[id]?.virtual) &&
-            (subscriptions[id]?.on == null || subscriptionsNew[id] != null)
+            (!(subscriptions[id]?.on) || subscriptionsNew[id] != null)
         );
     }
 }
