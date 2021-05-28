@@ -1,9 +1,10 @@
-export enum ActionsUserInterests
+export enum ActionsClusterEvents
 {
-    Reset   = '[ClusterInterests] Reset',
-    GetData = '[ClusterInterests] Get Data',
-    Get     = '[ClusterInterests] Get',
-    Add     = '[ClusterInterests] Add',
-    Remove  = '[ClusterInterests] Remove',
-    Sync    = '[ClusterInterests] Sync'
+    Reset   = '[ClusterEvents] Reset',
+    GetData = '[ClusterEvents] Get Data',
+    Get     = '[ClusterEvents] Get',
+    Add     = '[ClusterEvents] Add',
+    Remove  = '[ClusterEvents] Remove',
+    Sync    = '[ClusterEvents] Sync',
+    Filter  = '[ClusterEvents] Filter'
 }

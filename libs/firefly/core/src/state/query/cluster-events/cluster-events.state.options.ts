@@ -2,10 +2,10 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { PageSize } from '@theory/ngxs';
 
-import { StateUserInterestsModel } from './cluster-events.state.model';
+import { StateClusterInterestsModel } from './cluster-events.state.model';
 import { OrderBy } from '@theory/firebase';
 
-export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
+export const StateClusterInterestsOptions: StoreOptions<StateClusterInterestsModel> =
 {
     name : 'userInterests',
 
@@ -21,6 +21,7 @@ export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
 
         keys:           [],
         snapshotLookup: {},
-        dataLookup:     {}
+        dataLookup:     {},
+        data:           []
     }
 };

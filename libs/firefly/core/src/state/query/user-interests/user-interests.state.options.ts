@@ -21,6 +21,7 @@ export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
         keys:           [],
         snapshotLookup: {},
         dataLookup:     {},
+        data:           [],
 
         filter :
         {

@@ -22,7 +22,8 @@ import {
     ActionUserAlertsMarkRead,
     ActionUserAlertsDelete,
     ActionUserAlertsPhoneCall,
-    ActionUserAlertsOpenWebsite
+    ActionUserAlertsOpenWebsite,
+    ActionUserAlertsFilter
 } from './user-alerts.actions';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { TranslateService } from '@ngx-translate/core';
@@ -67,7 +68,8 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                 ActionGet     : ActionUserAlertsGet,
                 ActionAdd     : ActionUserAlertsAdd,
                 ActionRemove  : ActionUserAlertsRemove,
-                ActionSync    : ActionUserAlertsSync
+                ActionSync    : ActionUserAlertsSync,
+                ActionFilter  : ActionUserAlertsFilter
             },
             storage,
             service,
@@ -121,6 +123,12 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     sync(context: StateContext<StateUserAlertsModel>, action: ActionUserAlertsSync)
     {
         return super.sync(context, action);
+    }
+
+    @Action(ActionUserAlertsFilter)
+    filter(context: StateContext<StateUserAlertsModel>, action: ActionUserAlertsFilter)
+    {
+        return super.filter(context, action);
     }
 
     @Action(ActionUserAlertsGo)

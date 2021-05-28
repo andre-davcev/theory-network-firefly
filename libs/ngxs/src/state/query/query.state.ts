@@ -43,7 +43,7 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
             );
     }
 
-    public get(context: StateContext<M>): Observable<any>
+    public get(context: StateContext<M>, action?: any): Observable<any>
     {
         const { getState, patchState } = context;
 
@@ -106,6 +106,9 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
                 ),
                 tap(() =>
                     patchState({ loading: false } as M)
+                ),
+                switchMap(() =>
+                    super.filter(context)
                 )
             );
     }

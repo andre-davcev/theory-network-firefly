@@ -38,33 +38,6 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
     public static childLookup() { return createSelector([this], (state: any) => StateChild.childLookupState(state)); }
     public static sortFields()  { return createSelector([this], (state: any) => StateChild.sortFieldsState(state)); }
 
-    protected static dataState(state: any): Array<any>
-    {
-        const lookup: Record<string, any> = StateCollection.dataLookupState(state);
-        const keysFiltered: Array<string> = StateCollection.keysFilteredState(state);
-
-        if (keysFiltered.length === 0) { return []; }
-
-        const offset : number = keysFiltered.findIndex((id: string) => lookup[id] == null);
-        const end    : number = offset === -1 ? keysFiltered.length : offset;
-
-        return keysFiltered.
-            slice(0, end).
-            map((id: string) =>
-                lookup[id]
-            ).
-            map((item: any, index: number) =>
-                ({
-                    ...item,
-                    metadata:
-                    {
-                        ...item.metadata,
-                        index
-                    }
-                })
-            );
-    }
-
     protected static offsetState(state: any): number
     {
         const dataLookup: Record<string, any> = StateCollection.dataLookupState(state);
@@ -141,7 +114,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             );
     }
 
-    public get(context: StateContext<M>): Observable<any>
+    public get(context: StateContext<M>, action?: any): Observable<any>
     {
         const { getState, patchState } = context;
 
@@ -150,7 +123,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const { snapshotLookup, dataLookup, childLookup } = state;
 
         const finishedPaging : boolean       = StateChild.finishedPagingState(state);
-        const keysFiltered   : Array<string> = this.keysFilter(context);
+        const keysFiltered   : Array<string> = this.keys(context);
 
         return finishedPaging ? of(null) :
         of(null).
@@ -193,6 +166,9 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
                     loading: false
                 } as M)
+            ),
+            switchMap(() =>
+                super.filter(context)
             )
         );
     }
@@ -243,7 +219,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 patchState
                 ({
                     childLookup,
-                    keys: keys
+                    keys
                 } as M);
             })
         );
@@ -311,6 +287,36 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         });
 
         return keys;
+    }
+
+    public data(context: StateContext<M>): Array<any>
+    {
+        const { getState } = context;
+
+        const state        : M                   = getState();
+        const lookup       : Record<string, any> = StateCollection.dataLookupState(state);
+        const keysFiltered : Array<string>       = StateCollection.keysFilteredState(state);
+
+        if (keysFiltered.length === 0) { return []; }
+
+        const offset : number = keysFiltered.findIndex((id: string) => lookup[id] == null);
+        const end    : number = offset === -1 ? keysFiltered.length : offset;
+
+        return keysFiltered.
+            slice(0, end).
+            map((id: string) =>
+                lookup[id]
+            ).
+            map((item: any, index: number) =>
+                ({
+                    ...item,
+                    metadata:
+                    {
+                        ...item.metadata,
+                        index
+                    }
+                })
+            );
     }
 
     public getMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>

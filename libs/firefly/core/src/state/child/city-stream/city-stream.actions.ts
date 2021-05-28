@@ -11,6 +11,6 @@ export class ActionCityStreamGet     { static readonly type = ActionsCityStream.
 export class ActionCityStreamAdd     { static readonly type = ActionsCityStream.Add;     constructor(public snapshot: DocumentSnapshot, public entity?: StreamInterest) { } }
 export class ActionCityStreamRemove  { static readonly type = ActionsCityStream.Remove;  constructor(public id: string) { } }
 export class ActionCityStreamSync    { static readonly type = ActionsCityStream.Sync;    constructor(public object: StreamInterest) { } }
+export class ActionCityStreamFilter  { static readonly type = ActionsCityStream.Filter;  constructor(public filter: InterestsFilter) { } }
 
 export class ActionCityStreamSubscriptionNew { static readonly type = ActionsCityStream.SubscriptionNew; constructor(public id: string) { } }
-export class ActionCityStreamFilter          { static readonly type = ActionsCityStream.Filter;          constructor(public filter: InterestsFilter) { } }

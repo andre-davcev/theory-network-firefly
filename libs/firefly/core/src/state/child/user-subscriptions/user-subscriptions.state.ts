@@ -21,7 +21,6 @@ import { ServiceStorage } from '@theory/firebase';
 import { switchMap } from 'rxjs/operators';
 import { ImageType, Collection, InterestType } from '@firefly/core/enums';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
-import { of } from 'rxjs';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
@@ -62,7 +61,8 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
                 ActionGet     : ActionUserSubscriptionsGet,
                 ActionAdd     : ActionUserSubscriptionsAdd,
                 ActionRemove  : ActionUserSubscriptionsRemove,
-                ActionSync    : ActionUserSubscriptionsSync
+                ActionSync    : ActionUserSubscriptionsSync,
+                ActionFilter  : ActionUserSubscriptionsFilter
             },
             storage,
             service,
@@ -123,23 +123,27 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
     {
         const { patchState, dispatch, getState } = context;
 
+        const state : StateUserSubscriptionsModel = getState();
+
+        filter = filter || StateUserSubscriptions.filter(state);
+
         patchState({ filter });
 
-        const state         : StateUserSubscriptionsModel         = getState();
         const initialized   : boolean                             = StateUserSubscriptions.initializedState(state);
         const subscriptions : Record<string, SubscriptionPartial> = filter.subscriptions;
 
         return initialized ?
-            of(patchState({ keysFiltered: this.keysFilter(context) })) :
+            super.filter(context) :
             dispatch(new ActionAppLoadingShow()).
             pipe
             (
+                // ToDo: Fix infinite loop
                 switchMap(() => dispatch(new ActionUserSubscriptionsSetData(subscriptions, true))),
                 switchMap(() => dispatch(new ActionAppLoadingHide()))
             );
     }
 
-    public keysFilter(context: StateContext<StateUserSubscriptionsModel>): Array<string>
+    public keys(context: StateContext<StateUserSubscriptionsModel>): Array<string>
     {
         const { getState } = context;
 

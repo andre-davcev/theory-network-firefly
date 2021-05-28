@@ -4,47 +4,52 @@ import { Interest } from '@firefly/cloud';
 import { ServiceInterests } from '@firefly/core/services';
 import { StateQuery } from '@theory/ngxs';
 
-import { StateUserInterestsModel } from './cluster-events.state.model';
-import { StateUserInterestsOptions } from './cluster-events.state.options';
+import { StateClusterInterestsModel } from './cluster-events.state.model';
+import { StateClusterInterestsOptions } from './cluster-events.state.options';
 import {
-    ActionUserInterestsAdd,
-    ActionUserInterestsRemove,
-    ActionUserInterestsGetData,
-    ActionUserInterestsGet,
-    ActionUserInterestsSync,
-    ActionUserInterestsReset
+    ActionClusterEventsAdd,
+    ActionClusterEventsRemove,
+    ActionClusterEventsGetData,
+    ActionClusterEventsGet,
+    ActionClusterEventsSync,
+    ActionClusterEventsReset,
+    ActionClusterEventsFilter
 } from './cluster-events.actions';
 import { StateUser } from '../../document/user/user.state';
 import { Query } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Collection } from '@firefly/core/enums';
+import { ServiceStorage } from '@theory/firebase';
 
-@State<StateUserInterestsModel>(StateUserInterestsOptions)
+@State<StateClusterInterestsModel>(StateClusterInterestsOptions)
 @Injectable()
-export class StateUserInterests extends StateQuery<Interest, StateUserInterestsModel>
+export class StateClusterInterests extends StateQuery<Interest, StateClusterInterestsModel>
 {
     constructor
     (
         private store:   Store,
-        private service: ServiceInterests
+        private service: ServiceInterests,
+                storage: ServiceStorage
     )
     {
         super
         (
-            StateUserInterestsOptions.defaults,
+            StateClusterInterestsOptions.defaults,
             {
-                ActionReset   : ActionUserInterestsReset,
-                ActionGetData : ActionUserInterestsGetData,
-                ActionGet     : ActionUserInterestsGet,
-                ActionAdd     : ActionUserInterestsAdd,
-                ActionRemove  : ActionUserInterestsRemove,
-                ActionSync    : ActionUserInterestsSync
-            }
+                ActionReset   : ActionClusterEventsReset,
+                ActionGetData : ActionClusterEventsGetData,
+                ActionGet     : ActionClusterEventsGet,
+                ActionAdd     : ActionClusterEventsAdd,
+                ActionRemove  : ActionClusterEventsRemove,
+                ActionSync    : ActionClusterEventsSync,
+                ActionFilter  : ActionClusterEventsFilter
+            },
+            storage
         );
     }
 
-    @Action(ActionUserInterestsReset)
-    reset(context: StateContext<StateUserInterestsModel>)
+    @Action(ActionClusterEventsReset)
+    reset(context: StateContext<StateClusterInterestsModel>)
     {
         const userId: string = this.store.selectSnapshot(StateUser.id());
         const query: Query   = userId == null ? undefined : this.service.collection(Collection.Interests).ref.where('userId', '==', userId);
@@ -52,33 +57,39 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
         return super.reset(context, { query });
     }
 
-    @Action(ActionUserInterestsGetData)
-    getData(context: StateContext<StateUserInterestsModel>)
+    @Action(ActionClusterEventsGetData)
+    getData(context: StateContext<StateClusterInterestsModel>)
     {
         return super.getData(context);
     }
 
-    @Action(ActionUserInterestsGet)
-    get(context: StateContext<StateUserInterestsModel>)
+    @Action(ActionClusterEventsGet)
+    get(context: StateContext<StateClusterInterestsModel>)
     {
         return super.get(context);
     }
 
-    @Action(ActionUserInterestsAdd)
-    add(context: StateContext<StateUserInterestsModel>, action: ActionUserInterestsAdd)
+    @Action(ActionClusterEventsAdd)
+    add(context: StateContext<StateClusterInterestsModel>, action: ActionClusterEventsAdd)
     {
         return super.add(context, action);
     }
 
-    @Action(ActionUserInterestsRemove)
-    remove(context: StateContext<StateUserInterestsModel>, action: ActionUserInterestsRemove)
+    @Action(ActionClusterEventsRemove)
+    remove(context: StateContext<StateClusterInterestsModel>, action: ActionClusterEventsRemove)
     {
         return super.remove(context, action);
     }
 
-    @Action(ActionUserInterestsSync)
-    sync(context: StateContext<StateUserInterestsModel>, action: ActionUserInterestsSync)
+    @Action(ActionClusterEventsSync)
+    sync(context: StateContext<StateClusterInterestsModel>, action: ActionClusterEventsSync)
     {
         return super.sync(context, action);
+    }
+
+    @Action(ActionClusterEventsFilter)
+    filter(context: StateContext<StateClusterInterestsModel>, action: ActionClusterEventsFilter)
+    {
+        return super.filter(context, action);
     }
 }

@@ -26,6 +26,7 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         childLookup : {},
         keys        : [],
         id          : undefined,
+        data        : [],
 
         sortFields:
         {
