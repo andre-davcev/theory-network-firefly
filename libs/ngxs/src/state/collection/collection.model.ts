@@ -16,4 +16,6 @@ export interface StateCollectionModel<T>
     keysFiltered?:  Array<string>;
     snapshotLookup: Record<string, DocumentSnapshot>;
     dataLookup:     Record<string, T>;
+
+    data: Array<T>;
 }

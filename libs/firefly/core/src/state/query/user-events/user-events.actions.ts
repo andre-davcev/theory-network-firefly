@@ -9,5 +9,6 @@ export class ActionUserEventsGet     { static readonly type = ActionsUserEvents.
 export class ActionUserEventsAdd     { static readonly type = ActionsUserEvents.Add;     constructor(public snapshot: DocumentSnapshot, public entity?: Event) { } }
 export class ActionUserEventsRemove  { static readonly type = ActionsUserEvents.Remove;  constructor(public id: string) { } }
 export class ActionUserEventsSync    { static readonly type = ActionsUserEvents.Sync;    constructor(public object: Event) { } }
+export class ActionUserEventsFilter  { static readonly type = ActionsUserEvents.Filter;  constructor() { } }
 
 export class ActionUserEventsDelete { static readonly type = ActionsUserEvents.Delete; constructor(public id: string) { } }

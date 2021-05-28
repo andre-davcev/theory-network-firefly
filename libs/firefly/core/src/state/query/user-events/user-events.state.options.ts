@@ -21,6 +21,7 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 
         keys:           [],
         snapshotLookup: {},
-        dataLookup:     {}
+        dataLookup:     {},
+        data:           []
     }
 };

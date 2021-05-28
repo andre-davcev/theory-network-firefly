@@ -10,6 +10,7 @@ export class ActionUserAlertsGet     { static readonly type = ActionsUserAlerts.
 export class ActionUserAlertsAdd     { static readonly type = ActionsUserAlerts.Add;     constructor(public snapshot: DocumentSnapshot, public entity?: Alert) { } }
 export class ActionUserAlertsRemove  { static readonly type = ActionsUserAlerts.Remove;  constructor(public id: string) { } }
 export class ActionUserAlertsSync    { static readonly type = ActionsUserAlerts.Sync;    constructor(public object: Alert) { } }
+export class ActionUserAlertsFilter  { static readonly type = ActionsUserAlerts.Filter;  constructor() { } }
 
 export class ActionUserAlertsGo               { static readonly type = ActionsUserAlerts.Go;               constructor(public alert: Alert) { } }
 export class ActionUserAlertsGetIcons         { static readonly type = ActionsUserAlerts.GetIcons;         constructor() { } }

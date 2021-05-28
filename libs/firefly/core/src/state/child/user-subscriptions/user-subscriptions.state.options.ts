@@ -27,6 +27,7 @@ export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsM
         childLookup : {},
         keys        : [],
         id          : undefined,
+        data        : [],
 
         sortFields:
         {

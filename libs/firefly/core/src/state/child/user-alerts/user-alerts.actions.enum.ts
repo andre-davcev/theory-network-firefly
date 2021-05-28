@@ -7,6 +7,7 @@ export enum ActionsUserAlerts
     Add     = '[User Alerts] Add',
     Remove  = '[User Alerts] Remove',
     Sync    = '[User Alerts] Sync',
+    Filter  = '[User Alerts] Filter',
 
     Go               = '[User Alerts] Go',
     GetIcons         = '[User Alerts] Get Icons',

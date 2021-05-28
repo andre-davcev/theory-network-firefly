@@ -6,6 +6,5 @@ export enum ActionsUserInterests
     Add     = '[UserInterests] Add',
     Remove  = '[UserInterests] Remove',
     Sync    = '[UserInterests] Sync',
-
-    Filter = '[UserInterests] Filter'
+    Filter  = '[UserInterests] Filter'
 }

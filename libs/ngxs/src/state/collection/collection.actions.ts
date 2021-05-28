@@ -7,4 +7,5 @@ export interface ActionsCollection
     ActionAdd      : any;
     ActionRemove   : any;
     ActionSync     : any;
+    ActionFilter   : any;
 }

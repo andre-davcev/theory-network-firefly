@@ -11,7 +11,8 @@ import {
     ActionUserEventsSync,
     ActionUserEventsGetData,
     ActionUserEventsReset,
-    ActionUserEventsDelete
+    ActionUserEventsDelete,
+    ActionUserEventsFilter
 } from './user-events.actions';
 import { StateUser } from '../../document/user';
 import { StateQuery } from '@theory/ngxs';
@@ -45,7 +46,8 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
                 ActionGet     : ActionUserEventsGet,
                 ActionAdd     : ActionUserEventsAdd,
                 ActionRemove  : ActionUserEventsRemove,
-                ActionSync    : ActionUserEventsSync
+                ActionSync    : ActionUserEventsSync,
+                ActionFilter  : ActionUserEventsFilter
             },
             storage
         );
@@ -118,5 +120,11 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
                 dispatch(new ActionUserEventsRemove(id))
             )
         )
+    }
+
+    @Action(ActionUserEventsFilter)
+    filter(context: StateContext<StateUserEventsModel>, action: ActionUserEventsFilter)
+    {
+        return super.filter(context, action);
     }
 }

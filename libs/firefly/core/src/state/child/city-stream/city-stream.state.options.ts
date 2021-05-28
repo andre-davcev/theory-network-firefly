@@ -26,6 +26,7 @@ export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =
         keys         : [],
         keysFiltered : [],
         id           : undefined,
+        data         : [],
 
         sortFields:
         {

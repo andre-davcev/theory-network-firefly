@@ -62,7 +62,8 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
                 ActionGet     : ActionCityStreamGet,
                 ActionAdd     : ActionCityStreamAdd,
                 ActionRemove  : ActionCityStreamRemove,
-                ActionSync    : ActionCityStreamSync
+                ActionSync    : ActionCityStreamSync,
+                ActionFilter  : ActionCityStreamFilter
             },
             storage,
             service,
@@ -131,16 +132,16 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     @Action(ActionCityStreamFilter)
     filter(context: StateContext<StateCityStreamModel>, { filter }: ActionCityStreamFilter)
     {
-        const { patchState } = context;
+        const { patchState, getState } = context;
+
+        filter = filter || StateCityStream.filter(getState());
 
         patchState({ filter });
 
-        const keysFiltered: Array<string> = this.keysFilter(context);
-
-        patchState({ keysFiltered });
+        return super.filter(context);
     }
 
-    public keysFilter(context: StateContext<StateCityStreamModel>): Array<string>
+    public keys(context: StateContext<StateCityStreamModel>): Array<string>
     {
         const { getState } = context;
 

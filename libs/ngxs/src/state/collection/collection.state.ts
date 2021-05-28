@@ -36,22 +36,12 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     protected static keysFilteredState(state: any):     Array<string>                    { return state.keysFiltered || state.keys; }
     protected static snapshotLookupState(state: any):   Record<string, DocumentSnapshot> { return state.snapshotLookup; }
     protected static dataLookupState(state: any):       Record<string, any>              { return state.dataLookup; }
+    protected static dataState(state: any):             Array<any>                       { return state.data; }
     protected static countState(state: any):            number                           { return StateCollection.keysState(state).length; }
     protected static foundState(state: any):            boolean                          { return StateCollection.countState(state) > 0; }
     protected static emptyState(state: any):            boolean                          { return StateCollection.countState(state) === 0; }
     protected static canPageState(state: any):          boolean                          { return StateCollection.pageSizeState(state) !== PageSize.None; }
     protected static noDataState(state: any):           boolean                          { return StateCollection.initializedState(state) && !StateCollection.loadingState(state) && !StateCollection.foundState(state); }
-
-    protected static dataState(state: any): Array<any>
-    {
-        const dataLookup: Record<string, any> = StateCollection.dataLookupState(state);
-
-        return StateCollection.
-            keysFilteredState(state).
-            map((id: string) =>
-                dataLookup[id]
-            );
-    }
 
     public static initialized()      { return createSelector([this], (state: any) => StateCollection.initializedState(state)); }
     public static loading()          { return createSelector([this], (state: any) => StateCollection.loadingState(state)); }
@@ -222,9 +212,36 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
         return of(null);
     }
 
-    public keysFilter({ getState }: StateContext<M>): Array<string>
+    public filter(context: StateContext<M>, action?: any): Observable<any>
+    {
+        const { patchState } = context;
+
+        const keysFiltered: Array<string> = this.keys(context);
+
+        patchState({ keysFiltered } as M);
+
+        const data: Array<T> = this.data(context);
+
+        return of(patchState({ data } as M));
+    }
+
+    public keys({ getState }: StateContext<M>): Array<string>
     {
         return getState().keys;
+    }
+
+    public data(context: StateContext<M>): Array<any>
+    {
+        const { getState } = context;
+
+        const state        : M                 = getState();
+        const keysFiltered : Array<string>     = StateCollection.keysFilteredState(state);
+        const dataLookup   : Record<string, T> = StateCollection.dataLookupState(state);
+
+        return keysFiltered.
+            map((id: string) =>
+                dataLookup[id]
+            );
     }
 
     public getMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
@@ -232,7 +249,7 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
         return this.getMediaWithData(context, collection, imageType, StateCollection.dataState(context.getState()));
     }
 
-    protected getMediaWithData(context: StateContext<M>, collection: string, imageType: string, items: Array<T>): Observable<any>
+    protected getMediaWithData(context: StateContext<M>, collection: string, imageType: string, data: Array<T>): Observable<any>
     {
         const { getState, patchState } = context;
 
@@ -240,8 +257,8 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
         const dataLookup : Record<string, T> = StateCollection.dataLookupState(state);
         const imageSize  : ImageSize         = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
 
-        return items.length === 0 ? of(null) :
-        of(items).
+        return data.length === 0 ? of(null) :
+        of(data).
         pipe
         (
             map((data: Array<T>) =>
@@ -251,7 +268,9 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
                     pipe
                     (
                         switchMap(() =>
-                            this.storage.downloadUrl(`${collection}/${item.id}/${imageType}.jpeg`, imageSize)
+                            item.metadata[imageType] ?
+                                of(item.metadata[imageType]) :
+                                this.storage.downloadUrl(`${collection}/${item.id}/${imageType}.jpeg`, imageSize)
                         ),
                         map((image: string) =>
                             ({
@@ -272,7 +291,7 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
                         )
                     ),
                     tap((data: Array<T>) =>
-                        patchState({ dataLookup } as M)
+                        patchState({ dataLookup, data } as M)
                     )
                 )
             )

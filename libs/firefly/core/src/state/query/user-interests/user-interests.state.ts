@@ -23,10 +23,10 @@ import {
 } from './user-interests.actions';
 import { ImageType } from '../../../enums';
 import { ServiceStorage } from '@theory/firebase';
-import { of } from 'rxjs';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 import { StateUser } from '../../document/user/user.state';
+import { Observable, of } from 'rxjs';
 
 @State<StateUserInterestsModel>(StateUserInterestsOptions)
 @Injectable()
@@ -67,7 +67,8 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
                 ActionGet     : ActionUserInterestsGet,
                 ActionAdd     : ActionUserInterestsAdd,
                 ActionRemove  : ActionUserInterestsRemove,
-                ActionSync    : ActionUserInterestsSync
+                ActionSync    : ActionUserInterestsSync,
+                ActionFilter  : ActionUserInterestsFilter
             },
             storage
         );
@@ -119,19 +120,33 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     }
 
     @Action(ActionUserInterestsFilter)
-    filter({ dispatch, getState, patchState }: StateContext<StateUserInterestsModel>, { filter }: ActionUserInterestsFilter)
+    filter(context: StateContext<StateUserInterestsModel>, { filter }: ActionUserInterestsFilter)
     {
-        // patchState({ filter });
+        const { dispatch, getState, patchState } = context;
 
-        const initialized: boolean = StateUserInterests.initializedState(getState());
+        const state : StateUserInterestsModel = getState();
 
-        return initialized ?
+        filter = filter || StateUserInterests.filter(state);
+
+        patchState({ filter });
+
+        const initialized : boolean = StateUserInterests.initializedState(state);
+
+        const action$: Observable<any> = initialized ?
             of(null) :
             dispatch(new ActionAppLoadingShow()).
             pipe
             (
-                switchMap(() => this.store.dispatch(new ActionUserInterestsGetData())),
-                switchMap(() => this.store.dispatch(new ActionAppLoadingHide()))
+                switchMap(() => dispatch(new ActionUserInterestsGetData())),
+                switchMap(() => dispatch(new ActionAppLoadingHide()))
             );
+
+        return action$.
+        pipe
+        (
+            switchMap(() =>
+                super.filter(context)
+            )
+        );
     }
 }
