@@ -192,13 +192,13 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     @Action(ActionUserAlertsGetIcons)
     getIcons(context: StateContext<StateUserAlertsModel>)
     {
-        return super.getMedia(context, Collection.Events, ImageType.Icon);
+        return super.setMedia(context, Collection.Events, ImageType.Icon);
     }
 
     @Action(ActionUserAlertsGetImages)
     getImages(context: StateContext<StateUserAlertsModel>)
     {
-        return super.getMedia(context, Collection.Events, ImageType.Image);
+        return super.setMedia(context, Collection.Events, ImageType.Image);
     }
 
     @Action(ActionUserAlertsAddToCalendar)

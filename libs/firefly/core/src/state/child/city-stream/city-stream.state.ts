@@ -96,7 +96,7 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
         pipe
         (
             switchMap(() =>
-                super.getMedia(context, Collection.Interests, ImageType.Image)
+                super.setMedia(context, Collection.Interests, ImageType.Image)
             )
         );
     }

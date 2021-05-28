@@ -95,7 +95,7 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
         pipe
         (
             switchMap(() =>
-                super.getMedia(context, Collection.Interests, ImageType.Image)
+                super.setMedia(context, Collection.Interests, ImageType.Image)
             )
         );
     }

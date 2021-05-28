@@ -96,7 +96,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
         pipe
         (
             switchMap(() =>
-                super.getMedia(context, Collection.Interests, ImageType.Image)
+                super.setMedia(context, Collection.Interests, ImageType.Image)
             )
         );
     }
