@@ -319,7 +319,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
             );
     }
 
-    public getMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
+    public setMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
     {
         return this.getMediaWithData(context, collection, imageType, StateChild.dataState(context.getState()));
     }

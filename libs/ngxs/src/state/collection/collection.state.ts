@@ -5,7 +5,7 @@ import { CoreUtil, CoreEnum, TypeOf } from '@theory/core';
 import { Observable, of, forkJoin } from 'rxjs';
 import { PageSize } from '../../enums';
 import { StateCollectionModel } from './collection.model';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { ImageType } from '@firefly/core/enums';
 
 export abstract class StateCollection<T extends FirebaseDocument, M extends StateCollectionModel<T>>
@@ -244,56 +244,41 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
             );
     }
 
-    public getMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
+    public setMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
     {
         return this.getMediaWithData(context, collection, imageType, StateCollection.dataState(context.getState()));
     }
 
     protected getMediaWithData(context: StateContext<M>, collection: string, imageType: string, data: Array<T>): Observable<any>
     {
-        const { getState, patchState } = context;
+        const imageSize: ImageSize = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
 
-        const state      : M                 = getState();
-        const dataLookup : Record<string, T> = StateCollection.dataLookupState(state);
-        const imageSize  : ImageSize         = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
-
-        return data.length === 0 ? of(null) :
-        of(data).
+        return of(data).
         pipe
         (
-            map((data: Array<T>) =>
-                data.
-                map((item: T) =>
-                    of(item).
-                    pipe
-                    (
-                        switchMap(() =>
-                            item.metadata[imageType] ?
-                                of(item.metadata[imageType]) :
-                                this.storage.downloadUrl(`${collection}/${item.id}/${imageType}.jpeg`, imageSize)
-                        ),
-                        map((image: string) =>
-                            ({
-                                ...item,
-                                metadata : { ...item.metadata, [imageType]: image }
-                            })
-                        )
-                    )
-                )
+            takeWhile((list: Array<T>) =>
+                list.length > 0
             ),
-            switchMap((items$: Array<Observable<T>>) =>
-                forkJoin(items$).
-                pipe
-                (
-                    tap((data: Array<T>) =>
-                        data.forEach((document: T) =>
-                            dataLookup[document.id] = document
+            map((list: Array<T>) =>
+                list.
+                    filter((item: T) =>
+                        item.metadata[imageType] == null
+                    ).
+                    map((item: T) =>
+                        of(item).
+                        pipe
+                        (
+                            switchMap(() =>
+                                this.storage.downloadUrl(`${collection}/${item.id}/${imageType}.jpeg`, imageSize)
+                            ),
+                            tap((image: string) =>
+                                item.metadata[imageType] = image
+                            )
                         )
-                    ),
-                    tap((data: Array<T>) =>
-                        patchState({ dataLookup, data } as M)
                     )
-                )
+            ),
+            switchMap((items$: Array<Observable<string>>) =>
+                forkJoin(items$)
             )
         );
     }
