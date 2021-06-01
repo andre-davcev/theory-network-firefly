@@ -1,7 +1,6 @@
-import { EventType } from '@firefly/core/enums';
+import { CalendarFilter } from './calendar.filter.model';
 
 export interface StateCalendarModel
 {
-    type    : EventType;
-    virtual : boolean;
+    filter: CalendarFilter;
 }

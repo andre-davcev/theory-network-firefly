@@ -5,6 +5,7 @@ import { PageSize } from '@theory/ngxs';
 import { StateUserAlertsModel } from './user-alerts.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
+import { EventType } from '@firefly/core/enums';
 
 export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
 {
@@ -32,6 +33,12 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
         {
             name      : TypeOf.String,
             timeStart : TypeOf.Timestamp
+        },
+
+        filter :
+        {
+            type    : EventType.Upcoming,
+            virtual : false
         }
     }
 };

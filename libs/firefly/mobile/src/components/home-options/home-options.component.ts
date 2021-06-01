@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { InterestType, EventType, StateUser, ActionInterestsSetVirtual, ActionCalendarSetVirtual, ActionCalendarFilter, ActionInterestsSetType } from '@firefly/core';
+import { InterestType, EventType, StateUser, ActionInterestsSetVirtual, ActionCalendarSetVirtual, ActionInterestsSetType, ActionCalendarSetType } from '@firefly/core';
 import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 import { Observable, from } from 'rxjs';
@@ -37,7 +37,7 @@ export class ComponentHomeOptions
     {
         const action: any = this.isStream ?
             new ActionInterestsSetType(event.detail.value) :
-            new ActionCalendarFilter(event.detail.value)
+            new ActionCalendarSetType(event.detail.value)
 
         this.store.dispatch(action).
         pipe

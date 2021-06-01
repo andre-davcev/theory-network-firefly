@@ -10,7 +10,10 @@ export const StateCalendarOptions: StoreOptions<StateCalendarModel> =
 
     defaults :
     {
-        type    : EventType.Upcoming,
-        virtual : false
+        filter :
+        {
+            type    : EventType.Upcoming,
+            virtual : false
+        }
     }
 };

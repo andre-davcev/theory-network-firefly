@@ -33,19 +33,6 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     @Selector() static subscriptions(state: StateCityStreamModel)    : Record<string, SubscriptionPartial> { return StateCityStream.filter(state).subscriptions; }
     @Selector() static subscriptionsNew(state: StateCityStreamModel) : Record<string, string>              { return state.subscriptionsNew; }
 
-    @Selector() static dataUnsubscribed(state: StateCityStreamModel): Array<StreamInterest>
-    {
-        const subscriptions: Record<string, SubscriptionPartial> = StateCityStream.subscriptions(state);
-
-        return StateCityStream.dataState(state).
-            map((item: StreamInterest) =>
-                ({
-                    ...item,
-                    on: subscriptions[item.id]?.on
-                })
-            );
-    }
-
     constructor
     (
         service : ServiceStreams,

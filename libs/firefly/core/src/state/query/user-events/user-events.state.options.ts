@@ -3,6 +3,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { StateUserEventsModel } from './user-events.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
+import { EventType } from '@firefly/core/enums';
 
 export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 {
@@ -22,6 +23,12 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
         keys:           [],
         snapshotLookup: {},
         dataLookup:     {},
-        data:           []
+        data:           [],
+
+        filter :
+        {
+            type    : EventType.Upcoming,
+            virtual : false
+        }
     }
 };
