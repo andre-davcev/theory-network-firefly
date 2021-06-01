@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 
 import { StateQuery } from '@theory/ngxs';
 
-import { Interest, StreamInterest, SubscriptionPartial } from '@firefly/cloud';
+import { Interest, SubscriptionPartial } from '@firefly/cloud';
 import { ServiceInterests } from '@firefly/core/services';
 import { Collection, InterestType } from '@firefly/core/enums';
 
@@ -36,20 +36,6 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     @Selector() static type(state: StateUserInterestsModel)          : InterestType                        { return StateUserInterests.filter(state).type; }
     @Selector() static virtual(state: StateUserInterestsModel)       : boolean                             { return StateUserInterests.filter(state).virtual; }
     @Selector() static subscriptions(state: StateUserInterestsModel) : Record<string, SubscriptionPartial> { return StateUserInterests.filter(state).subscriptions; }
-
-    @Selector() static dataCreated(state: StateUserInterestsModel): Array<StreamInterest>
-    {
-        const subscriptions: Record<string, SubscriptionPartial> = StateUserInterests.subscriptions(state);
-
-        return StateUserInterests.dataState(state).
-            map((item: StreamInterest) =>
-                ({
-                    ...item,
-                    score: 0,
-                    on: subscriptions[item.id]?.on
-                })
-            );
-    }
 
     constructor
     (

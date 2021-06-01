@@ -1,4 +1,4 @@
-import { State, Action, StateContext, Store } from '@ngxs/store';
+import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 
 import { Alert, AlertPartial } from '@firefly/cloud';
 import { ServiceAlerts } from '@firefly/core/services';
@@ -30,7 +30,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { from, of, forkJoin, Observable } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
-import { Collection, ImageType } from '@firefly/core/enums';
+import { Collection, EventType, ImageType } from '@firefly/core/enums';
 import { StateUser } from '../../document/user/user.state';
 import { switchMap, map, tap, delay } from 'rxjs/operators';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -40,6 +40,7 @@ import { ActionUserPatch } from '../../document/user/user.actions';
 import { Plugins } from '@capacitor/core';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
+import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';
 
 const { Browser } = Plugins;
 
@@ -47,6 +48,10 @@ const { Browser } = Plugins;
 @Injectable()
 export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
 {
+    @Selector() static filter(state: StateUserAlertsModel)  : CalendarFilter { return state.filter; }
+    @Selector() static type(state: StateUserAlertsModel)    : EventType      { return StateUserAlerts.filter(state).type; }
+    @Selector() static virtual(state: StateUserAlertsModel) : boolean        { return StateUserAlerts.filter(state).virtual; }
+
     constructor
     (
                 service     : ServiceAlerts,
@@ -126,9 +131,26 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
     }
 
     @Action(ActionUserAlertsFilter)
-    filter(context: StateContext<StateUserAlertsModel>, action: ActionUserAlertsFilter)
+    filter(context: StateContext<StateUserAlertsModel>, { filter }: ActionUserAlertsFilter)
     {
-        return super.filter(context, action);
+        const { patchState, dispatch, getState } = context;
+
+        const state : StateUserAlertsModel = getState();
+
+        filter = filter || StateUserAlerts.filter(state);
+
+        patchState({ filter });
+
+        const initialized : boolean = StateUserAlerts.initializedState(state);
+
+        return initialized ?
+            super.filter(context) :
+            dispatch(new ActionAppLoadingShow()).
+            pipe
+            (
+                switchMap(() => dispatch(new ActionUserAlertsGetImages())),
+                switchMap(() => dispatch(new ActionAppLoadingHide()))
+            );
     }
 
     @Action(ActionUserAlertsGo)
@@ -295,6 +317,20 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
             new ActionUserAlertsRemove(id),
             new ActionUserPatch({ notifications }, true)
         ]);
+    }
+
+    public keys(context: StateContext<StateUserAlertsModel>): Array<string>
+    {
+        const { getState } = context;
+
+        const state            : StateUserAlertsModel  = getState();
+        const lookup           : Record<string, Alert> = StateUserAlerts.dataLookupState(state);
+        const keys             : Array<string>         = StateUserAlerts.keysState(state);
+        const virtual          : boolean               = StateUserAlerts.virtual(state);
+
+        return keys.filter((id: string) =>
+            (!virtual || lookup[id]?.virtual)
+        );
     }
 
     private getMediaNew(context: StateContext<StateUserAlertsModel>): Observable<any>

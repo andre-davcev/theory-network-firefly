@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { from } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { Alert, Event, DateEvents } from '@firefly/cloud';
 import { EventType } from '@firefly/core/enums';
-import { ActionUserAlertsGet, ActionUserAlertsGetImages, StateUserAlerts } from '@firefly/core/state/child';
-import { ActionUserEventsGet, ActionUserEventsGetData, StateUserEvents } from '@firefly/core/state/query';
-import { ActionAppLoadingHide, ActionAppLoadingShow, StateUser } from '@firefly/core/state/document';
+import { ActionUserAlertsFilter, ActionUserAlertsGet, StateUserAlerts } from '@firefly/core/state/child';
+import { ActionUserEventsFilter, ActionUserEventsGet, StateUserEvents } from '@firefly/core/state/query';
+import { StateUser } from '@firefly/core/state/document';
 
 import { StateCalendarModel } from './calendar.state.model';
 import { StateCalendarOptions } from './calendar.state.options';
 import {
   ActionCalendarFilter,
-  ActionCalendarFilterCreated,
-  ActionCalendarFilterUpcoming,
   ActionCalendarPage,
   ActionCalendarSetType,
   ActionCalendarSetVirtual
 } from './calendar.actions';
+import { CalendarFilter } from './calendar.filter.model';
 
 @State<StateCalendarModel>(StateCalendarOptions)
 @Injectable()
 export class StateCalendar
 {
-    @Selector() static type(state: StateCalendarModel)    : EventType { return state.type; }
-    @Selector() static virtual(state: StateCalendarModel) : boolean   { return state.virtual; }
+    @Selector() static filter(state: StateCalendarModel)  : CalendarFilter { return state.filter; }
+    @Selector() static type(state: StateCalendarModel)    : EventType      { return StateCalendar.filter(state).type; }
+    @Selector() static virtual(state: StateCalendarModel) : boolean        { return StateCalendar.filter(state).virtual; }
 
     @Selector
     ([
@@ -39,7 +39,6 @@ export class StateCalendar
         events : Array<Event>
     ) : Array<DateEvents>
     {
-        const virtual    : boolean           = StateCalendar.virtual(state);
         const type       : EventType         = StateCalendar.type(state);
         const list       : Array<Event>      = type === EventType.Upcoming ? alerts : events;
         const eventsList : Array<DateEvents> = [];
@@ -50,9 +49,6 @@ export class StateCalendar
         let datesAreEqual     : boolean = true;
 
         list.
-            filter((event: Event) =>
-                !virtual || event.virtual
-            ).
             forEach((event: Event) =>
             {
                 timeStart = event.timeStart.toDate();
@@ -147,94 +143,65 @@ export class StateCalendar
             finishedPagingAlerts;
     }
 
-    constructor
-    (
-        private store : Store
-    )
-    { }
+    constructor() { }
 
     @Action(ActionCalendarSetType)
-    setType({ patchState }: StateContext<StateCalendarModel>, { type }: ActionCalendarSetType)
+    setType({ dispatch, getState }: StateContext<StateCalendarModel>, { type }: ActionCalendarSetType)
     {
-        patchState({ type });
+        const filter: CalendarFilter = StateCalendar.filter(getState());
+
+        filter.type = type;
+
+        return dispatch(new ActionCalendarFilter(filter));
     }
 
     @Action(ActionCalendarSetVirtual)
-    setVirtual({ patchState }: StateContext<StateCalendarModel>, { virtual }: ActionCalendarSetVirtual)
+    setVirtual({ dispatch, getState }: StateContext<StateCalendarModel>, { virtual }: ActionCalendarSetVirtual)
     {
-        patchState({ virtual });
+        const filter: CalendarFilter = StateCalendar.filter(getState());
+
+        filter.virtual = virtual;
+
+        return dispatch(new ActionCalendarFilter(filter));
     }
 
     @Action(ActionCalendarFilter)
-    filter({ dispatch, getState }: StateContext<StateCalendarModel>, { type }: ActionCalendarFilter)
+    filter({ dispatch, getState, patchState }: StateContext<StateCalendarModel>, { filter }: ActionCalendarFilter)
     {
-        type = type || StateCalendar.type(getState());
+        filter = filter || StateCalendar.filter(getState());
 
-        return type === EventType.Upcoming ?
-            dispatch(new ActionCalendarFilterUpcoming()) :
-            dispatch(new ActionCalendarFilterCreated());
-    }
+        const type: EventType = filter.type;
 
-    @Action(ActionCalendarFilterUpcoming)
-    filterUpcoming({ dispatch }: StateContext<StateCalendarModel>)
-    {
-        return this.store.selectSnapshot(StateUserAlerts.empty()) || this.store.selectSnapshot(StateUserAlerts.data())[0].metadata.image != null ?
-            dispatch(new ActionCalendarSetType(EventType.Upcoming)) :
-            dispatch(new ActionAppLoadingShow()).
-            pipe
-            (
-                switchMap(() => this.store.dispatch(new ActionUserAlertsGetImages())),
-                switchMap(() => this.store.dispatch(new ActionAppLoadingHide())),
-                switchMap(() => this.store.dispatch(new ActionCalendarSetType(EventType.Upcoming)))
-            );
-    }
-
-    @Action(ActionCalendarFilterCreated)
-    filterCreated({ dispatch }: StateContext<StateCalendarModel>)
-    {
-        return this.store.selectSnapshot(StateUserEvents.initialized()) ?
-            dispatch(new ActionCalendarSetType(EventType.Created)) :
-            dispatch(new ActionAppLoadingShow()).
-            pipe
-            (
-                switchMap(() => this.store.dispatch(new ActionUserEventsGetData())),
-                switchMap(() => this.store.dispatch(new ActionAppLoadingHide())),
-                switchMap(() => this.store.dispatch(new ActionCalendarSetType(EventType.Created)))
-            );
+        return dispatch
+        (
+            type === EventType.Upcoming ?
+                new ActionUserAlertsFilter(filter) :
+                new ActionUserEventsFilter(filter)
+        ).
+        pipe
+        (
+            tap(() =>
+                patchState({ filter })
+            )
+        );
     }
 
     @Action(ActionCalendarPage)
     page({ dispatch, getState }: StateContext<StateCalendarModel>, { infiniteScroll }: ActionCalendarPage)
     {
-        const type : EventType = StateCalendar.type(getState());
+        const type: EventType = StateCalendar.type(getState());
 
-        const finishedPaging : boolean = this.store.selectSnapshot
+        return dispatch
         (
-            type === EventType.Upcoming ?
-                StateUserAlerts.finishedPaging() :
-                StateUserEvents.finishedPaging()
+          type === EventType.Upcoming ?
+              new ActionUserAlertsGet() :
+              new ActionUserEventsGet()
+        ).
+        pipe
+        (
+            switchMap(() =>
+                from(infiniteScroll.complete())
+            )
         );
-
-        return finishedPaging ?
-            from(infiniteScroll.complete()).
-            pipe
-            (
-                tap(() =>
-                    infiniteScroll.disabled = true
-                )
-            ):
-
-            dispatch
-            (
-                type === EventType.Upcoming ?
-                    new ActionUserAlertsGet() :
-                    new ActionUserEventsGet()
-            ).
-            pipe
-            (
-                switchMap(() =>
-                    from(infiniteScroll.complete())
-                )
-            );
     }
 }

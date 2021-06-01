@@ -32,19 +32,6 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
     @Selector() static virtual(state: StateUserSubscriptionsModel)       : boolean                             { return StateUserSubscriptions.filter(state).virtual; }
     @Selector() static subscriptions(state: StateUserSubscriptionsModel) : Record<string, SubscriptionPartial> { return StateUserSubscriptions.filter(state).subscriptions; }
 
-    @Selector() static dataSubscribed(state: StateUserSubscriptionsModel): Array<StreamInterest>
-    {
-        const subscriptions: Record<string, SubscriptionPartial> = StateUserSubscriptions.subscriptions(state);
-
-        return StateUserSubscriptions.dataState(state).
-            map((item: StreamInterest) =>
-                ({
-                    ...item,
-                    on: subscriptions[item.id]?.on
-                })
-            );
-    }
-
     constructor
     (
         service : ServiceSubscriptions,
@@ -137,7 +124,6 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
             dispatch(new ActionAppLoadingShow()).
             pipe
             (
-                // ToDo: Fix infinite loop
                 switchMap(() => dispatch(new ActionUserSubscriptionsSetData(subscriptions, true))),
                 switchMap(() => dispatch(new ActionAppLoadingHide()))
             );

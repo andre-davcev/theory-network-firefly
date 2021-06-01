@@ -42,9 +42,9 @@ export class StateInterests
 
     @Selector
     ([
-        StateCityStream.dataUnsubscribed,
-        StateUserSubscriptions.dataSubscribed,
-        StateUserInterests.dataCreated
+        StateCityStream.data(),
+        StateUserSubscriptions.data(),
+        StateUserInterests.data()
     ])
     public static data
     (
@@ -54,13 +54,24 @@ export class StateInterests
         dataCreated      : Array<StreamInterest>
     ) : Array<StreamInterest>
     {
-        const type: InterestType = StateInterests.type(state);
+        const type          : InterestType                        = StateInterests.type(state);
+        const subscriptions : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
 
-        return type === InterestType.Unsubscribed ?
+        const data: Array<StreamInterest> =
+            type === InterestType.Unsubscribed ?
                 dataUnsubscribed :
             type === InterestType.Subscribed ?
                 dataSubscribed :
                 dataCreated;
+
+        return data.
+            map((item: StreamInterest) =>
+                ({
+                    ...item,
+                    score: item.score || 0,
+                    on: subscriptions[item.id]?.on
+                })
+            );
     }
 
     @Selector
@@ -90,7 +101,7 @@ export class StateInterests
     ([
         StateCityStream.data(),
         StateUserSubscriptions.data(),
-        StateUserInterests.dataCreated
+        StateUserInterests.data()
     ])
     public static found
     (
@@ -107,7 +118,7 @@ export class StateInterests
     ([
         StateCityStream.data(),
         StateUserSubscriptions.data(),
-        StateUserInterests.dataCreated
+        StateUserInterests.data()
     ])
     public static empty
     (
