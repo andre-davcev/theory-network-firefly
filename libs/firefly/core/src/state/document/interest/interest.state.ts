@@ -28,7 +28,7 @@ import {
     ActionInterestImagesUpdate,
     ActionInterestImageSet
 } from './interest.actions';
-import { ActionUserInterestsAdd, ActionUserInterestsRemove, StateUserInterests, ActionUserInterestsSync } from '../..//query/user-interests';
+import { ActionUserInterestsAdd, ActionUserInterestsRemove, ActionUserInterestsSync } from '../..//query/user-interests';
 import { ActionCityStreamRemove } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
@@ -36,9 +36,8 @@ import { ImageSize, ServiceStorage } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from, forkJoin } from 'rxjs';
 import { Query } from '@angular/fire/firestore';
-import { StateCityStream } from '@firefly/core/state/child/city-stream';
 import { Injectable } from '@angular/core';
-import { Collection, ImageType, InterestType } from '@firefly/core/enums';
+import { Collection, ImageType } from '@firefly/core/enums';
 import { StateInterests } from '../../composite/interests/interests.state';
 
 @State<StateInterestModel>(StateInterestOptions)
@@ -180,12 +179,12 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     {
         const isNew: boolean = id === CoreEnum.IdNew;
 
-        const userId:   string                     = this.store.selectSnapshot(StateUser.id());
-        const snapshot: DocumentSnapshot = this.store.selectSnapshot(StateUserInterests.snapshotLookup())[id];
+        const userId:   string           = this.store.selectSnapshot(StateUser.id());
+        const snapshot: DocumentSnapshot = this.store.selectSnapshot(StateInterests.snapshotLookup)[id];
 
         const data: Interest = isNew ?
             this.service.formDataNew(userId, this.empty) :
-            this.store.selectSnapshot(StateUserInterests.dataLookup())[id];
+            this.store.selectSnapshot(StateInterests.dataLookup)[id];
 
         return dispatch(new ActionInterestSet(snapshot, data));
     }
@@ -193,13 +192,11 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestSetIdAnonymous)
     setIdAnonymous({ dispatch }: StateContext<StateInterestModel>, { id }: ActionInterestSetIdAnonymous)
     {
-        const snapshot: DocumentSnapshot = this.store.selectSnapshot(StateCityStream.snapshotLookup())[id];
-        const type:String =  this.store.selectSnapshot(StateInterests.type);
+        const snapshot: DocumentSnapshot = this.store.selectSnapshot(StateInterests.snapshotLookup)[id];
 
-        const data:Interest =  type === InterestType.Created ?
-         this.store.selectSnapshot(StateUserInterests.dataLookup())[id]:
-         this.store.selectSnapshot(StateCityStream.dataLookup())[id];
+        const data:Interest = this.store.selectSnapshot(StateInterests.dataLookup)[id];
 
+        console.log({ data, snapshot, type: this.store.selectSnapshot(StateInterests.type) });
 
         return dispatch(new ActionInterestSet(snapshot, data));
     }
