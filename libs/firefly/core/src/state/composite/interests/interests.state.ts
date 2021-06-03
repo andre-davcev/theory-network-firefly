@@ -19,7 +19,7 @@ import {
     ActionInterestsSubscriptionRemove
 } from './interests.actions';
 
-import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
+import { Interest, StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ActionUserPatch } from '../../document/user/user.actions';
 import { InterestsFilter } from './interests.filter.model';
 import { DocumentSnapshot } from '@theory/firebase';
@@ -72,6 +72,52 @@ export class StateInterests
                     on: subscriptions[item.id]?.on
                 })
             );
+    }
+
+    @Selector
+    ([
+        StateCityStream.snapshotLookup(),
+        StateUserSubscriptions.snapshotLookup(),
+        StateUserInterests.snapshotLookup()
+    ])
+    public static snapshotLookup
+    (
+        state              : StateInterestsModel,
+        lookupUnsubscribed : Record<string, DocumentSnapshot>,
+        lookupSubscribed   : Record<string, DocumentSnapshot>,
+        lookupCreated      : Record<string, DocumentSnapshot>
+    ) : Record<string, DocumentSnapshot>
+    {
+        const type : InterestType = StateInterests.type(state);
+
+        return type === InterestType.Unsubscribed ?
+                lookupUnsubscribed :
+            type === InterestType.Subscribed ?
+                lookupSubscribed :
+                lookupCreated;
+    }
+
+    @Selector
+    ([
+        StateCityStream.dataLookup(),
+        StateUserSubscriptions.dataLookup(),
+        StateUserInterests.dataLookup()
+    ])
+    public static dataLookup
+    (
+        state              : StateInterestsModel,
+        lookupUnsubscribed : Record<string, Interest>,
+        lookupSubscribed   : Record<string, Interest>,
+        lookupCreated      : Record<string, Interest>
+    ) : Record<string, Interest>
+    {
+        const type : InterestType = StateInterests.type(state);
+
+        return type === InterestType.Unsubscribed ?
+                lookupUnsubscribed :
+            type === InterestType.Subscribed ?
+                lookupSubscribed :
+                lookupCreated;
     }
 
     @Selector
