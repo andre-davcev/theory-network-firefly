@@ -321,7 +321,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
     public setMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
     {
-        return this.getMediaWithData(context, collection, imageType, StateChild.dataState(context.getState()));
+        return this.getMediaWithData(context, collection, imageType);
     }
 
     private keysGet(context: StateContext<M>, keysFiltered?: Array<string>): Array<string>

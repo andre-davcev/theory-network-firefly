@@ -196,8 +196,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
 
         const data:Interest = this.store.selectSnapshot(StateInterests.dataLookup)[id];
 
-        console.log({ data, snapshot, type: this.store.selectSnapshot(StateInterests.type) });
-
         return dispatch(new ActionInterestSet(snapshot, data));
     }
 
