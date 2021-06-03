@@ -246,12 +246,17 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
 
     public setMedia(context: StateContext<M>, collection: string, imageType: string): Observable<any>
     {
-        return this.getMediaWithData(context, collection, imageType, StateCollection.dataState(context.getState()));
+        return this.getMediaWithData(context, collection, imageType);
     }
 
-    protected getMediaWithData(context: StateContext<M>, collection: string, imageType: string, data: Array<T>): Observable<any>
+    protected getMediaWithData(context: StateContext<M>, collection: string, imageType: string): Observable<any>
     {
         const imageSize: ImageSize = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
+
+        const state: M = context.getState();
+
+        const data   : Array<T>          = StateCollection.dataState(state);
+        const lookup : Record<string, T> = StateCollection.dataLookupState(state);
 
         return of(data).
         pipe
@@ -273,6 +278,9 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
                             ),
                             tap((image: string) =>
                                 item.metadata[imageType] = image
+                            ),
+                            tap(() =>
+                                lookup[item.id] = item
                             )
                         )
                     )
