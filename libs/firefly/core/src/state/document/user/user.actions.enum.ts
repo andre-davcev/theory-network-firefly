@@ -24,7 +24,6 @@ export enum ActionsUser
     ResetAll          = '[User] Reset All',
     SetErrorAuth      = '[User] Set Error Auth',
 
-    SubscriptionsSet  = '[User] Subscriptions Set',
     NotificationsSet  = '[User] Notifications Set',
     IsPublisherSet    = '[User] Is Publisher Set'
 }

@@ -103,24 +103,26 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 tap(() =>
                     patchState({ keys: this.sort(context) } as M)
                 ),
+                map(() =>
+                    patchState({ initialized: true } as M)
+                ),
                 switchMap(() =>
                     fetch ?
                         dispatch(new ActionGet()) :
                         of(patchState({ loading: false } as M))
-                ),
-                map(() =>
-                    patchState({ initialized: true } as M)
                 )
             );
     }
 
     public get(context: StateContext<M>, action?: any): Observable<any>
     {
-        const { getState, patchState } = context;
+        const { getState, patchState, dispatch } = context;
 
         const state: M = getState();
 
         const { snapshotLookup, dataLookup, childLookup } = state;
+
+        const { ActionFilter } = this.actions;
 
         const finishedPaging : boolean       = StateChild.finishedPagingState(state);
         const keysFiltered   : Array<string> = this.keys(context);
@@ -162,13 +164,12 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 ({
                     snapshotLookup,
                     dataLookup,
-                    keysFiltered,
 
                     loading: false
                 } as M)
             ),
             switchMap(() =>
-                super.filter(context)
+                dispatch(new ActionFilter())
             )
         );
     }

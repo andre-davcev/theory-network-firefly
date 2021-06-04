@@ -28,7 +28,6 @@ import {
     ActionUserUpdate,
     ActionUserIsPublisherSet,
     ActionUserAnonymousLogin,
-    ActionUserSubscriptionsSet,
     ActionUserNotificationsSet,
     ActionUserPatchMetadata,
     ActionUserResetPassword,
@@ -165,7 +164,8 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     {
         const { dispatch, getState } = context;
 
-        return super.set(context, action).pipe
+        return super.set(context, action).
+        pipe
         (
             tap(() =>
                 dispatch
@@ -179,7 +179,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ([
                     new ActionUserNotificationsSet(),
                     new ActionLanguageSet(StateUser.language(getState())),
-                    new ActionUserSubscriptionsSet()
+                    new ActionInterestsSetSubscriptions(StateUser.subscriptionsStatus(getState()))
                 ])
             ),
             switchMap(() =>
@@ -449,12 +449,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 dispatch(new ActionUserSetErrorAuth(errorAuth))
             )
         );
-    }
-
-    @Action(ActionUserSubscriptionsSet)
-    subscriptionsSet({ dispatch, getState }: StateContext<StateUserModel>)
-    {
-        return dispatch(new ActionInterestsSetSubscriptions(StateUser.subscriptionsStatus(getState())));
     }
 
     @Action(ActionUserNotificationsSet)
