@@ -27,6 +27,5 @@ export class ActionUserResetPassword      { static readonly type = ActionsUser.R
 export class ActionUserResetAll           { static readonly type = ActionsUser.ResetAll;           constructor() { } }
 export class ActionUserSetErrorAuth       { static readonly type = ActionsUser.SetErrorAuth;       constructor(public errorAuth: FirebaseError = null) { } }
 
-export class ActionUserSubscriptionsSet { static readonly type = ActionsUser.SubscriptionsSet; constructor() { } }
 export class ActionUserNotificationsSet { static readonly type = ActionsUser.NotificationsSet; constructor() { } }
 export class ActionUserIsPublisherSet   { static readonly type = ActionsUser.IsPublisherSet;   constructor(public isPublisher:  boolean) { } }

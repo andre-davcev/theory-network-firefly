@@ -39,6 +39,7 @@ export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =
             virtual       : false,
             subscriptions : {}
         },
+        filterSet: false,
 
         subscriptionsNew: {}
     }

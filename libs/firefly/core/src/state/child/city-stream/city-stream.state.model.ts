@@ -4,7 +4,8 @@ import { InterestsFilter } from '../../composite';
 
 export interface StateCityStreamModel extends StateChildModel<StreamInterest>
 {
-    filter: InterestsFilter;
+    filter    : InterestsFilter;
+    filterSet : boolean;
 
     subscriptionsNew: Record<string, string>;
 }
