@@ -103,13 +103,13 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 tap(() =>
                     patchState({ keys: this.sort(context) } as M)
                 ),
-                map(() =>
-                    patchState({ initialized: true } as M)
-                ),
                 switchMap(() =>
                     fetch ?
                         dispatch(new ActionGet()) :
                         of(patchState({ loading: false } as M))
+                ),
+                map(() =>
+                    patchState({ initialized: true } as M)
                 )
             );
     }
@@ -165,6 +165,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                     snapshotLookup,
                     dataLookup,
 
+                    initialized: true,
                     loading: false
                 } as M)
             ),

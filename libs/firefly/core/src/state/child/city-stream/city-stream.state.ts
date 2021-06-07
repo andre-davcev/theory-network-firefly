@@ -1,4 +1,4 @@
-import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
+import { State, Action, StateContext, Selector } from '@ngxs/store';
 
 import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ServiceStreams } from '@firefly/core/services';
@@ -19,7 +19,7 @@ import {
 } from './city-stream.actions';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { ImageType, Collection, InterestType } from '@firefly/core/enums';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 
@@ -32,13 +32,11 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     @Selector() static virtual(state: StateCityStreamModel)          : boolean                             { return StateCityStream.filter(state).virtual; }
     @Selector() static subscriptions(state: StateCityStreamModel)    : Record<string, SubscriptionPartial> { return StateCityStream.filter(state).subscriptions; }
     @Selector() static subscriptionsNew(state: StateCityStreamModel) : Record<string, string>              { return state.subscriptionsNew; }
-    @Selector() static filterSet(state: StateCityStreamModel)        : boolean                             { return state.filterSet; }
 
     constructor
     (
         service : ServiceStreams,
-        storage : ServiceStorage,
-        private store: Store
+        storage : ServiceStorage
     )
     {
         super
@@ -75,17 +73,7 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     @Action(ActionCityStreamSetData)
     setData(context: StateContext<StateCityStreamModel>, action: ActionCityStreamSetData)
     {
-        return this.store.select(StateCityStream.filterSet).
-        pipe
-        (
-            filter((filterSet: boolean) =>
-                filterSet
-            ),
-            take(1),
-            switchMap(() =>
-                super.setData(context, action)
-            )
-        );
+        return super.setData(context, action);
     }
 
     @Action(ActionCityStreamGet)
@@ -135,7 +123,7 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
 
         filter = filter || StateCityStream.filter(getState());
 
-        patchState({ filter, filterSet: true });
+        patchState({ filter });
 
         return super.filter(context);
     }
