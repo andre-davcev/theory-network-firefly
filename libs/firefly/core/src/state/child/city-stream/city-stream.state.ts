@@ -1,4 +1,4 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
 
 import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ServiceStreams } from '@firefly/core/services';
@@ -15,12 +15,14 @@ import {
     ActionCityStreamSync,
     ActionCityStreamSetData,
     ActionCityStreamFilter,
-    ActionCityStreamSubscriptionNew
+    ActionCityStreamSubscriptionNew,
+    ActionCityStreamSubscriptionsSet
 } from './city-stream.actions';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
-import { switchMap } from 'rxjs/operators';
+import { filter, switchMap, take } from 'rxjs/operators';
 import { ImageType, Collection, InterestType } from '@firefly/core/enums';
+
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 
 @State<StateCityStreamModel>(StateCityStreamOptions)
@@ -32,11 +34,13 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     @Selector() static virtual(state: StateCityStreamModel)          : boolean                             { return StateCityStream.filter(state).virtual; }
     @Selector() static subscriptions(state: StateCityStreamModel)    : Record<string, SubscriptionPartial> { return StateCityStream.filter(state).subscriptions; }
     @Selector() static subscriptionsNew(state: StateCityStreamModel) : Record<string, string>              { return state.subscriptionsNew; }
+    @Selector() static subscriptionsSet(state: StateCityStreamModel) : boolean                             { return state.subscriptionsSet; }
 
     constructor
     (
         service : ServiceStreams,
-        storage : ServiceStorage
+        storage : ServiceStorage,
+        private store: Store
     )
     {
         super
@@ -73,7 +77,17 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     @Action(ActionCityStreamSetData)
     setData(context: StateContext<StateCityStreamModel>, action: ActionCityStreamSetData)
     {
-        return super.setData(context, action);
+        return this.store.select(StateCityStream.subscriptionsSet).
+        pipe
+        (
+            filter((set: boolean) =>
+                set
+            ),
+            take(1),
+            switchMap(() =>
+                super.setData(context, action)
+            )
+        );
     }
 
     @Action(ActionCityStreamGet)
@@ -114,6 +128,18 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
         subscriptionsNew[id] = id;
 
         patchState({ subscriptionsNew });
+    }
+
+    @Action(ActionCityStreamSubscriptionsSet)
+    subscriptionSet({ patchState, getState, dispatch }: StateContext<StateCityStreamModel>, { subscriptions }: ActionCityStreamSubscriptionsSet)
+    {
+        const filter: InterestsFilter = StateCityStream.filter(getState());
+
+        filter.subscriptions = subscriptions;
+
+        patchState({ subscriptionsSet: true });
+
+        return dispatch(new ActionCityStreamFilter(filter));
     }
 
     @Action(ActionCityStreamFilter)

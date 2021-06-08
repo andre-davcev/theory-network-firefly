@@ -26,7 +26,7 @@ import { DocumentSnapshot } from '@theory/firebase';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { ActionUserSubscriptionsAdd, ActionUserSubscriptionsFilter, ActionUserSubscriptionsGet, ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { ActionCityStreamFilter, ActionCityStreamGet, ActionCityStreamSubscriptionNew } from '../../child/city-stream/city-stream.actions';
+import { ActionCityStreamFilter, ActionCityStreamGet, ActionCityStreamSubscriptionNew, ActionCityStreamSubscriptionsSet } from '../../child/city-stream/city-stream.actions';
 import { StateUser } from '../../document/user/user.state';
 import { StateUserInterests } from '../../query/user-interests/user-interests.state';
 import { ActionUserInterestsFilter, ActionUserInterestsGet } from '../../query/user-interests/user-interests.actions';
@@ -233,11 +233,18 @@ export class StateInterests
     @Action(ActionInterestsSetSubscriptions)
     setSubscriptions({ getState, dispatch }: StateContext<StateInterestsModel>, { subscriptions, save }: ActionInterestsSetSubscriptions)
     {
-        const filter: InterestsFilter = StateInterests.filter(getState());
+        const state  : StateInterestsModel = getState();
+        const filter : InterestsFilter     = StateInterests.filter(state);
+        const type   : InterestType        = StateInterests.type(state);
 
         filter.subscriptions = subscriptions;
 
-        return dispatch(new ActionInterestsFilter(filter)).
+        return dispatch
+        (
+            type === InterestType.Unsubscribed ?
+                new ActionCityStreamSubscriptionsSet(subscriptions) :
+                new ActionInterestsFilter(filter)
+        ).
         pipe
         (
             takeWhile(() =>
