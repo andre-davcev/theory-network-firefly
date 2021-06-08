@@ -118,7 +118,10 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
             keys,
             snapshotLookup,
             dataLookup
-        } as M)
+        } as M);
+
+        patchState({ keysFiltered: this.keys(context) } as M);
+        patchState({ data: this.data(context) } as M);
 
         return of(sortIndex);
     }
@@ -145,6 +148,9 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
             snapshotLookup,
             dataLookup
         } as M);
+
+        patchState({ keysFiltered: this.keys(context) } as M);
+        patchState({ data: this.data(context) } as M);
 
         return of(index);
     }
