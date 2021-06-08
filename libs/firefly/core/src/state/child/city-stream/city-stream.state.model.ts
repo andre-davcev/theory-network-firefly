@@ -7,4 +7,5 @@ export interface StateCityStreamModel extends StateChildModel<StreamInterest>
     filter : InterestsFilter;
 
     subscriptionsNew: Record<string, string>;
+    subscriptionsSet: boolean;
 }

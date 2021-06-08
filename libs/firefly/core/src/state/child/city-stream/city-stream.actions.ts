@@ -1,4 +1,4 @@
-import { StreamInterest } from '@firefly/cloud';
+import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 
 import { ActionsCityStream } from './city-stream.actions.enum';
 import { DocumentSnapshot } from '@theory/firebase';
@@ -13,4 +13,5 @@ export class ActionCityStreamRemove  { static readonly type = ActionsCityStream.
 export class ActionCityStreamSync    { static readonly type = ActionsCityStream.Sync;    constructor(public object: StreamInterest) { } }
 export class ActionCityStreamFilter  { static readonly type = ActionsCityStream.Filter;  constructor(public filter: InterestsFilter) { } }
 
-export class ActionCityStreamSubscriptionNew { static readonly type = ActionsCityStream.SubscriptionNew; constructor(public id: string) { } }
+export class ActionCityStreamSubscriptionNew  { static readonly type = ActionsCityStream.SubscriptionNew;  constructor(public id: string) { } }
+export class ActionCityStreamSubscriptionsSet { static readonly type = ActionsCityStream.SubscriptionsSet; constructor(public subscriptions: Record<string, SubscriptionPartial> ) { } }
