@@ -19,14 +19,14 @@ import {
     ActionInterestsSubscriptionRemove
 } from './interests.actions';
 
-import { Interest, StreamInterest, SubscriptionPartial } from '@firefly/cloud';
+import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ActionUserPatch } from '../../document/user/user.actions';
 import { InterestsFilter } from './interests.filter.model';
 import { DocumentSnapshot } from '@theory/firebase';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { ActionUserSubscriptionsAdd, ActionUserSubscriptionsFilter, ActionUserSubscriptionsGet, ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { ActionCityStreamFilter, ActionCityStreamGet, ActionCityStreamSubscriptionNew, ActionCityStreamSubscriptionsSet } from '../../child/city-stream/city-stream.actions';
+import { ActionCityStreamAdd, ActionCityStreamFilter, ActionCityStreamGet, ActionCityStreamSubscriptionNew, ActionCityStreamSubscriptionsSet } from '../../child/city-stream/city-stream.actions';
 import { StateUser } from '../../document/user/user.state';
 import { StateUserInterests } from '../../query/user-interests/user-interests.state';
 import { ActionUserInterestsFilter, ActionUserInterestsGet } from '../../query/user-interests/user-interests.actions';
@@ -106,10 +106,10 @@ export class StateInterests
     public static dataLookup
     (
         state              : StateInterestsModel,
-        lookupUnsubscribed : Record<string, Interest>,
-        lookupSubscribed   : Record<string, Interest>,
-        lookupCreated      : Record<string, Interest>
-    ) : Record<string, Interest>
+        lookupUnsubscribed : Record<string, StreamInterest>,
+        lookupSubscribed   : Record<string, StreamInterest>,
+        lookupCreated      : Record<string, StreamInterest>
+    ) : Record<string, StreamInterest>
     {
         const type : InterestType = StateInterests.type(state);
 
@@ -318,31 +318,24 @@ export class StateInterests
     {
         const state: StateInterestsModel = getState();
 
-        const type          : InterestType                        = StateInterests.type(state);
         const subscriptions : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
 
-        const data: StreamInterest =
-            type === InterestType.Unsubscribed ?
-                this.store.selectSnapshot(StateCityStream.dataLookup())[id] :
-            type === InterestType.Subscribed ?
-                this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id] :
-                this.store.selectSnapshot(StateUserInterests.dataLookup())[id];
-
-        const snapshot: DocumentSnapshot =
-            type === InterestType.Unsubscribed ?
-                this.store.selectSnapshot(StateCityStream.snapshotLookup())[id] :
-            type === InterestType.Subscribed ?
-                this.store.selectSnapshot(StateUserSubscriptions.snapshotLookup())[id] :
-                this.store.selectSnapshot(StateUserInterests.snapshotLookup())[id];
+        const data     : StreamInterest   = this.store.selectSnapshot(StateInterests.dataLookup)[id];
+        const snapshot : DocumentSnapshot = this.store.selectSnapshot(StateInterests.snapshotLookup)[id];
 
         subscriptions[id] = { on : true };
 
-        return dispatch
-        ([
-            new ActionInterestsSetSubscriptions(subscriptions, true),
-            new ActionUserSubscriptionsAdd(snapshot, data),
-            new ActionCityStreamSubscriptionNew(id)
-        ]);
+        return dispatch(new ActionCityStreamSubscriptionNew(id)).
+        pipe
+        (
+            switchMap(() =>
+                dispatch
+                ([
+                    new ActionInterestsSetSubscriptions(subscriptions, true),
+                    new ActionUserSubscriptionsAdd(snapshot, data),
+                ])
+            )
+        );
     }
 
     @Action(ActionInterestsSubscriptionRemove)
@@ -353,11 +346,23 @@ export class StateInterests
         const subscriptions : Record<string, SubscriptionPartial> = StateInterests.subscriptions(state);
         delete subscriptions[id];
 
+        const data     : StreamInterest   = this.store.selectSnapshot(StateInterests.dataLookup)[id];
+        const snapshot : DocumentSnapshot = this.store.selectSnapshot(StateInterests.snapshotLookup)[id];
+
         return dispatch
         ([
             new ActionInterestsSetSubscriptions(subscriptions, true),
             new ActionUserSubscriptionsRemove(id)
-        ]);
+        ]).
+        pipe
+        (
+            takeWhile(() =>
+                this.store.selectSnapshot(StateCityStream.childLookup())[id] != null
+            ),
+            switchMap(() =>
+                dispatch(new ActionCityStreamAdd(snapshot, data))
+            )
+        );
     }
 
     @Action(ActionInterestsSubscriptionOnOff)

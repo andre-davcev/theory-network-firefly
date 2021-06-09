@@ -269,6 +269,8 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         const offset : number = keysFiltered.findIndex((id: string) => lookup[id] == null);
         const end    : number = offset === -1 ? keysFiltered.length : offset;
 
+        console.log({ keysFiltered, lookup, offset, end });
+
         return keysFiltered.
             slice(0, end).
             map((id: string) =>
