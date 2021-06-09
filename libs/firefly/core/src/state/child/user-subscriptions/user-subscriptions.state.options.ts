@@ -13,7 +13,7 @@ export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsM
 
     defaults :
     {
-        pageSize:         PageSize.Default,
+        pageSize:         PageSize.MobileCards,
         orderBy:          'name',
         orderByDirection: OrderBy.Ascending,
 
