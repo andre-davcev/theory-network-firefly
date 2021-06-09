@@ -4,6 +4,7 @@ import { StateCityStreamModel } from './city-stream.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
 import { InterestType } from '@firefly/core/enums';
+import { PageSize } from '@theory/ngxs';
 
 export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =
 {
@@ -11,7 +12,7 @@ export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =
 
     defaults :
     {
-        pageSize:         3,
+        pageSize:         PageSize.MobileCards,
         orderBy:          'score',
         orderByDirection: OrderBy.Descending,
 

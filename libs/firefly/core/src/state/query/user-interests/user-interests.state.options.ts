@@ -3,6 +3,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { StateUserInterestsModel } from './user-interests.state.model';
 import { OrderBy } from '@theory/firebase';
 import { InterestType } from '@firefly/core/enums';
+import { PageSize } from '@theory/ngxs';
 
 export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
 {
@@ -10,7 +11,7 @@ export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
 
     defaults :
     {
-        pageSize:         3,
+        pageSize:         PageSize.MobileCards,
         orderBy:          'name',
         orderByDirection: OrderBy.Ascending,
 
