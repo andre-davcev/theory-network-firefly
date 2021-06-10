@@ -19,7 +19,8 @@
     <span class="cpt-date">{{ slide.timeStart | timestamp:'short' }}</span>
 </div>
 
-<ion-button fill="clear"
+<ion-button *ngIf="deleteShow"
+            fill="clear"
             (click)="clickedAlertDelete()">
     <ion-icon name="trash"
               color="tertiary"

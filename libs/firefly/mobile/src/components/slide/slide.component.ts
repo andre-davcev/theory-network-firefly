@@ -15,6 +15,7 @@ export class ComponentSlide
     @Input() slide:      Alert;
     @Input() buttonText: string;
     @Input() routerLink: string;
+    @Input() deleteShow: boolean = false;
 
     @Output() alertGoClicked: EventEmitter<void> = new EventEmitter();
     @Output() alertDetailClicked: EventEmitter<void> = new EventEmitter();
