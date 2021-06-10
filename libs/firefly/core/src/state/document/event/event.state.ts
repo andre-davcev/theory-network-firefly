@@ -86,9 +86,10 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 
                 metadata:
                 {
-                    icon  : null,
-                    image : null,
-                    place : null
+                    icon    : null,
+                    image   : null,
+                    place   : null,
+                    isEvent : false
                 }
             },
             {
@@ -306,7 +307,13 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                     StateUserEvents.dataLookup()
             )[id];
 
-        return dispatch(new ActionEventSet(snapshot, data));
+        return dispatch(new ActionEventSet(snapshot, data)).
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new ActionEventPatchMetadata({ isEvent: false }))
+            )
+        );
     }
 
     @Action(ActionEventSetIdAnonymousPending)
@@ -334,6 +341,8 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventSetIdAnonymous)
     actionSetIdAnonymous(context: StateContext<StateEventModel>, { id }: ActionEventSetIdAnonymous)
     {
+        const { dispatch } = context;
+
       const query: Query   = this.service.collection('events').ref
           .where('id', '==', id);
 
@@ -345,9 +354,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         switchMap((snapshot: Array<QueryDocumentSnapshot>) =>
         {
           const event: Event = snapshot[0].data() as Event;
-          return this.store.dispatch(new ActionEventSet(snapshot[0], event))
-        }
-      ))
+          return dispatch(new ActionEventSet(snapshot[0], event))
+        }),
+            switchMap(() =>
+                dispatch(new ActionEventPatchMetadata({ isEvent: true }))
+            )
+      );
     }
 
     @Action(ActionEventImagesUpdate)

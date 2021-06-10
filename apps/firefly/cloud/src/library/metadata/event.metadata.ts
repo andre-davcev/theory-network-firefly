@@ -3,8 +3,9 @@ import { MetadataList } from './list.metadata';
 
 export interface MetadataEvent extends MetadataList
 {
-    score? : number;
-    icon?  : string;
-    image? : string;
-    place? : Place;
+    score?   : number;
+    icon?    : string;
+    image?   : string;
+    place?   : Place;
+    isEvent? : boolean;
 }

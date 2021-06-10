@@ -22,6 +22,7 @@
     <div class="cpt-container"
           slot="fixed">
         <app-slide [slide]="event$ | async"
+                   [deleteShow]="!((event$ | async)?.metadata.isEvent)"
                     [buttonText]="'general.go' | translate"
                     (alertDeleteClicked)="delete()"
                     (alertGoClicked)="go()">
