@@ -139,7 +139,8 @@ export class PageStream extends BaseComponent implements OnInit
 
     public select(event: Event): void
     {
-      this.store.dispatch(new Navigate([Pages.NotificationDetail, event.id])).subscribe();
+
+      this.store.dispatch(new Navigate([Pages.NotificationDetail, event.id], {isEvent: true})).subscribe();
     }
 /*
     public filterChanged(event: any): void
