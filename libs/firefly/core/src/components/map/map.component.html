@@ -12,7 +12,7 @@
          [movingMethod]="mapMovingMethod"
          [trackResize]="false"
          [keyboard]="false"
-         (load)="onLoad($event)"
+         (mapLoad)="onLoad($event)"
          #map>
     <mgl-control mglNavigation position="bottom-left" *ngIf="web$ | async"></mgl-control>
 
@@ -35,9 +35,9 @@
                  [minLength]="minLength"
                  (clear)="eventClear($event)"
                  (loading)="eventLoading($event)"
-                 (results)="eventResults($event)"
-                 (result)="eventResult($event)"
-                 (error)="eventError($event)">
+                 (geocoderResults)="eventResults($event)"
+                 (geocoderResult)="eventResult($event)"
+                 (geocoderError)="eventError($event)">
     </mgl-control>
 
     <ng-container *ngIf="place">
