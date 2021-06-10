@@ -136,7 +136,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
             switchMap(() => this.store.dispatch(new ActionEventGet(event.id))),
             switchMap(() => this.store.dispatch([
               new ActionAppLoadingHide(),
-              new Navigate([Pages.NotificationDetail, event.id])
+              new Navigate([Pages.NotificationDetail, event.id], {isEvent: true})
             ]))
         ).subscribe();
     }
