@@ -1,7 +1,7 @@
 import { runWith, EventContext } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { ServiceStreams, Interest, Event, GlobalVariable, StreamInterest, Collection } from '../library';
+import { ServiceStreams, Interest, Event, GlobalVariable, StreamInterest, Collection, CityInfo } from '../library';
 import { City } from '../library';
 
 const InterestsCron =
@@ -59,7 +59,8 @@ onRun(async (context: EventContext) =>
 
     const time: number = (new Date()).getTime();
 
-    let city            : string;
+    let city            : CityInfo;
+    let cityId          : string;
     let event           : Event;
     let subscriberCount : number;
 
@@ -71,29 +72,34 @@ onRun(async (context: EventContext) =>
         id              = snapshot.id;
         event           = snapshot.data() as Event;
         eventScores[id] = ServiceStreams.scoreEvent(event, time);
-        city            = event.city.id;
+        city            = event.city;
 
-        event.interests.
-        filter((interestId: string) =>
-            interestCityEvents[interestId] != null
-        ).
-        forEach((interestId: string) =>
+        if (city != null)
         {
-            subscriberCount = interestSubscribers[interestId];
+            cityId = city.id;
 
-            if (interestCityEvents[interestId][city] == null)
+            event.interests.
+            filter((interestId: string) =>
+                interestCityEvents[interestId] != null
+            ).
+            forEach((interestId: string) =>
             {
-                interestCityEvents[interestId][city] = [];
-            }
+                subscriberCount = interestSubscribers[interestId];
 
-            if (subscriberCount > citySubscriberMax[city])
-            {
-                citySubscriberMax[city] = subscriberCount;
-            }
+                if (interestCityEvents[interestId][cityId] == null)
+                {
+                    interestCityEvents[interestId][cityId] = [];
+                }
 
-            interestCityEvents[interestId][city].push(id);
-            cityInterests[city].push(interestId);
-        });
+                if (subscriberCount > citySubscriberMax[cityId])
+                {
+                    citySubscriberMax[cityId] = subscriberCount;
+                }
+
+                interestCityEvents[interestId][cityId].push(id);
+                cityInterests[cityId].push(interestId);
+            });
+        }
     });
 
     query = null;
