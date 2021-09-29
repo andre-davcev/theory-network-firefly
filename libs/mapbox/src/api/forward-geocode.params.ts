@@ -24,7 +24,7 @@ export interface ParamsForwardGeocode
       in minLon,minLat,maxLon,maxLat order. The bounding box cannot cross the
       180th meridian.
     */
-    bbox?: [number, number, number, number];
+    bbox?: string;
 
     /*
       Limit results to one or more countries. Permitted values are ISO 3166
@@ -71,7 +71,7 @@ export interface ParamsForwardGeocode
       Bias the response to favor results that are closer to this location,
       provided as two comma-separated coordinates in longitude,latitude order.
     */
-    proximity?: [number, number];
+    proximity?: string;
 
     /*
       Specify whether to request additional metadata about the recommended
