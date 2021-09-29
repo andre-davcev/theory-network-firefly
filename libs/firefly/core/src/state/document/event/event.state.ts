@@ -395,7 +395,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
 
         return dispatch
         ([
-            new ActionEventPatch({ geopoint: place.geopoint }),
+            new ActionEventPatch({ geopoint: place.geopoint, city: place.city }),
             new ActionEventPatchMetadata(metadata)
         ]);
     }

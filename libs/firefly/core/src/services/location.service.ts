@@ -69,6 +69,28 @@ export class ServiceLocation
         };
     }
 
+    public static proximity(place: Place | CityInfo): string
+    {
+        const longitude : number = place.geopoint.longitude;
+        const latitude  : number = place.geopoint.latitude;
+
+        return `${longitude},${latitude}`;
+    }
+
+    public static bbox(place: Place | CityInfo): string
+    {
+        const longitude : number = place.geopoint.longitude;
+        const latitude  : number = place.geopoint.latitude;
+
+        const area         : number = 1;
+        const longitudeMin : number = longitude - area;
+        const longitudeMax : number = longitude + area;
+        const latitudeMin  : number = latitude - area;
+        const latitudeMax  : number = latitude + area;
+
+        return `${longitudeMin},${latitudeMin},${longitudeMax},${latitudeMax}`;
+    }
+
     public cityInfo(response: ResponseReverseGeocode): Observable<CityInfo>
     {
         const city   : CityInfo = ServiceLocation.city(response);
@@ -79,9 +101,10 @@ export class ServiceLocation
             autocomplete: false,
             fuzzyMatch:   false,
             limit:        1,
-            proximity:    [city.geopoint.longitude, city.geopoint.latitude],
             routing:      false,
-            types:        [MapboxPlaceType.Place]
+            types:        [MapboxPlaceType.Place],
+            proximity:    ServiceLocation.proximity(city),
+            bbox:         ServiceLocation.bbox(city)
         };
 
         return this.mapbox.forwardGeocode(search, options).pipe
@@ -106,9 +129,10 @@ export class ServiceLocation
             autocomplete: false,
             fuzzyMatch:   false,
             limit:        1,
-            proximity:    [place.geopoint.longitude, place.geopoint.latitude],
             routing:      false,
-            types:        PlaceTypes.physical
+            types:        PlaceTypes.physical,
+            proximity:    ServiceLocation.proximity(place),
+            bbox:         ServiceLocation.bbox(place)
         };
 
         const search: string = place.title || place.text;
