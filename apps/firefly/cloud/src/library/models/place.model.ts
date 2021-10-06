@@ -1,4 +1,4 @@
-import { GeoPoint } from '@theory/firebase';
+import { GeoPoint } from '../types';
 import { LngLatLike } from 'mapbox-gl';
 
 import { CityInfo } from '../interfaces';

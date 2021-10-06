@@ -1,4 +1,4 @@
-import { Timestamp } from '@theory/firebase';
+import { Timestamp } from '../types';
 
 export interface AlertPartial
 {

@@ -1,5 +1,5 @@
 import { Event } from '../documents';
-import { Timestamp } from '@theory/firebase';
+import { Timestamp } from '../types';
 
 export interface DateEvents
 {

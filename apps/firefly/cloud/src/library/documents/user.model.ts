@@ -1,4 +1,4 @@
-import { GeoPoint } from '@theory/firebase';
+import { GeoPoint } from '../types';
 
 import { FirebaseDocument, CityInfo } from '../interfaces';
 

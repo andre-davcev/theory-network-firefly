@@ -1,4 +1,4 @@
-import { GeoPoint } from '@theory/firebase';
+import { GeoPoint } from '../types';
 
 export interface CityInfo
 {
