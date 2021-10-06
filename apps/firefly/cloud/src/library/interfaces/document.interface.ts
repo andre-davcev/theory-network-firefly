@@ -1,4 +1,4 @@
-import { FieldValue } from '@theory/firebase';
+import { FieldValue } from '../types';
 
 export interface FirebaseDocument
 {

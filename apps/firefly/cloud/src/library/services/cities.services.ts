@@ -4,7 +4,7 @@ import { Event, User, StreamInterest, Interest, City } from '../documents';
 import { ServiceStreams } from './stream.service';
 import { GlobalVariable, Collection } from '../enums';
 import { CityInfo } from '../interfaces';
-import { GeoPoint } from '@theory/firebase';
+import { GeoPoint } from '../types';
 
 export class ServiceCities
 {

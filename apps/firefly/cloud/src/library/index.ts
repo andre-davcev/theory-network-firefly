@@ -5,3 +5,4 @@ export * from './interfaces';
 export * from './metadata';
 export * from './models';
 export * from './services';
+export * from './types';

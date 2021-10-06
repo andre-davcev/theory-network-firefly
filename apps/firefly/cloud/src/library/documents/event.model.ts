@@ -1,4 +1,4 @@
-import { GeoPoint, Timestamp } from '@theory/firebase';
+import { GeoPoint, Timestamp } from '../types';
 
 import { FirebaseDocument, CityInfo } from '../interfaces';
 import { MetadataEvent } from '../metadata';
