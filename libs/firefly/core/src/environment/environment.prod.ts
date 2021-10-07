@@ -11,12 +11,13 @@ export const EnvironmentProd: Environment =
     {
         firebase :
         {
-            apiKey            : '***REMOVED-FIREBASE-API-KEY***',
-            authDomain        : 'firefly-b1072.firebaseapp.com',
-            databaseURL       : 'https://firefly-b1072.firebaseio.com',
-            projectId         : 'firefly-b1072',
-            storageBucket     : 'firefly-b1072.appspot.com',
-            messagingSenderId : '827673030572'
+            apiKey: '***REMOVED-FIREBASE-API-KEY***',
+            authDomain: 'firefly-b1072.firebaseapp.com',
+            databaseURL: 'https://firefly-b1072.firebaseio.com',
+            projectId: 'firefly-b1072',
+            storageBucket: 'firefly-b1072.appspot.com',
+            messagingSenderId: '827673030572',
+            appId: '1:827673030572:web:66d1846e8831e407c99409'
         },
 
         mapbox :

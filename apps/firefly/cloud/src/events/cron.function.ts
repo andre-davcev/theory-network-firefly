@@ -170,7 +170,6 @@ onRun(async (context: EventContext) =>
         ({
             interestNotifications,
             userNotifications,
-            userSnapshots,
             eventPayloads
         });
     }

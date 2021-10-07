@@ -6,4 +6,5 @@ export interface EnvironmentFirebase
     projectId: string;
     storageBucket: string;
     messagingSenderId: string;
+    appId: string;
 }
