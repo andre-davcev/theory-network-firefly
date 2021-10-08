@@ -53,6 +53,8 @@ export class PageEventDetail
     public IconSlot : any = IconSlot;
     public Color    : any = Color;
 
+    public now: string = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString()
+
     constructor
     (
         private store:           Store,
