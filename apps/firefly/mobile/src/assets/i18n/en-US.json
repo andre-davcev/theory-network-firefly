@@ -55,8 +55,9 @@
   "alert.confirm.delete.interest" : "Interest",
 
   "date-time.displayFormat"      : "MMM D, YYYY h:mm A",
-  "date-time.pickerFormat"       : "MMM D h:m A",
-  "date-time.pickerFormatHourly" : "MMM D h A",
+  "date-time.pickerFormat"       : "YYYY MMM D h:m A",
+  "date-time.pickerFormatHourly" : "YYYY MMM D h A",
+  "date-time.maxDate"            : "2099",
 
   "page.auth.title"               : "firefly",
   "page.auth.tagline"             : "Life comes to you",

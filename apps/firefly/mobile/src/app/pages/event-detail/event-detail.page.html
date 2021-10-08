@@ -86,6 +86,8 @@
                     <ion-item>
                         <ion-label>{{ 'general.starts' | translate }}</ion-label>
                         <ion-datetime name="start"
+                                      [min]="now"
+                                      [max]="'date-time.maxDate' | translate"
                                       [disabled]="timeIsLocked$ | async"
                                       [value]="timeStart$ | async | timestamp:'isoString'"
                                       [displayFormat]="'date-time.displayFormat' | translate"
@@ -99,6 +101,8 @@
                     <ion-item>
                         <ion-label>{{ 'general.ends' |  translate }}</ion-label>
                         <ion-datetime name="end"
+                                      [min]="now"
+                                      [max]="'date-time.maxDate' | translate"
                                       [disabled]="timeIsLocked$ | async"
                                       [value]="timeEnd$ | async | timestamp:'isoString'"
                                       [displayFormat]="'date-time.displayFormat' | translate"
@@ -113,6 +117,8 @@
                     <ion-item>
                         <ion-label>{{ 'page.event.timeNotify' | translate }}</ion-label>
                         <ion-datetime name="notify"
+                                      [min]="now"
+                                      [max]="'date-time.maxDate' | translate"
                                       [disabled]="timeIsLocked$ | async"
                                       [value]="timeNotify$ | async | timestamp:'isoString'"
                                       [displayFormat]="'date-time.displayFormat' | translate"
