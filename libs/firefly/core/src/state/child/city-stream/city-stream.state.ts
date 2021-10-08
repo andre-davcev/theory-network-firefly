@@ -20,7 +20,7 @@ import {
 } from './city-stream.actions';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { ImageType, Collection, InterestType } from '@firefly/core/enums';
 
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
@@ -35,6 +35,7 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
     @Selector() static subscriptions(state: StateCityStreamModel)    : Record<string, SubscriptionPartial> { return StateCityStream.filter(state).subscriptions; }
     @Selector() static subscriptionsNew(state: StateCityStreamModel) : Record<string, string>              { return state.subscriptionsNew; }
     @Selector() static subscriptionsSet(state: StateCityStreamModel) : boolean                             { return state.subscriptionsSet; }
+    @Selector() static cityStreamSet(state: StateCityStreamModel)    : boolean                             { return state.cityStreamSet; }
 
     constructor
     (
@@ -86,6 +87,9 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
             take(1),
             switchMap(() =>
                 super.setData(context, action)
+            ),
+            tap(() =>
+                context.patchState({ cityStreamSet: true})
             )
         );
     }

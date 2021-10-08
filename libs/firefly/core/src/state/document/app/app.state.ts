@@ -28,11 +28,11 @@ export class StateApp
     ([
         StateUser.initialized,
         StateCity.found,
-        StateCityStream.initialized(),
+        StateCityStream.cityStreamSet,
     ])
-    static initialized(userInitialized: boolean, cityFound: boolean, streamInitialized: boolean) : boolean
+    static initialized(userInitialized: boolean, cityFound: boolean, cityStreamSet: boolean) : boolean
     {
-        return userInitialized && cityFound && streamInitialized;
+        return userInitialized && cityFound && cityStreamSet;
     }
 
     constructor
