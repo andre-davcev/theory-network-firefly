@@ -42,6 +42,7 @@ export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =
         },
 
         subscriptionsNew: {},
-        subscriptionsSet: false
+        subscriptionsSet: false,
+        cityStreamSet   : false
     }
 };

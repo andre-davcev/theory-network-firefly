@@ -272,19 +272,25 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserAnonymousLogin)
-    anonymousLogin({ dispatch, patchState }: StateContext<StateUserModel>)
+    anonymousLogin({ dispatch, patchState, getState }: StateContext<StateUserModel>)
     {
-        return dispatch(new ActionUserResetAll()).
+        const initialized: boolean = StateUser.initialized(getState());
+
+        return (
+            initialized ?
+                dispatch(new ActionUserResetAll()) :
+                of(null)
+        ).
         pipe
         (
-            tap(() =>
-                dispatch(new ActionUserSetErrorAuth())
+            switchMap(() =>
+                dispatch([
+                  new ActionUserSetErrorAuth(),
+                  new ActionInterestsSetSubscriptions(StateUser.subscriptionsStatus(getState()))
+                ])
             ),
             switchMap(() =>
-                this.auth.signInAnonymously()
-            ),
-            tap(() =>
-                patchState({ initialized: true })
+                from(this.auth.signInAnonymously())
             ),
             catchError((errorAuth: FirebaseError) =>
                 dispatch(new ActionUserSetErrorAuth(errorAuth))
