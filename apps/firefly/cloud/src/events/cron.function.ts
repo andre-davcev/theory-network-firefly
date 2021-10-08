@@ -44,6 +44,7 @@ onRun(async (context: EventContext) =>
         collection(Collection.Events).
         where('notifyComplete', '==', false).
         where('timeNotify', '<=', cutoff).
+        where('draft', '==', false).
         get();
 
     await Promise.all

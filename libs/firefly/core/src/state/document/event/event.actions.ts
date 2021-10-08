@@ -21,6 +21,6 @@ export class ActionEventSetIdAnonymousPending { static readonly type = ActionsEv
 export class ActionEventSetIdAnonymous { static readonly type = ActionsEvent.SetIdAnonymous; constructor(public id: string) { } }
 export class ActionEventPlaceSet       { static readonly type = ActionsEvent.PlaceSet;       constructor(public place?: Place) { } }
 export class ActionEventInterestAdd    { static readonly type = ActionsEvent.InterestAdd;    constructor(public interest: Interest) { } }
-export class ActionEventAccept         { static readonly type = ActionsEvent.AcceptEvent;    constructor() { } }
+export class ActionEventAccept         { static readonly type = ActionsEvent.AcceptEvent;    constructor(public interest?: Interest) { } }
 export class ActionEventDeny           { static readonly type = ActionsEvent.DenyEvent;      constructor() { } }
 export class ActionEventTimeSet        { static readonly type = ActionsEvent.TimeSet;        constructor(public key: string, public value: string) { } }
