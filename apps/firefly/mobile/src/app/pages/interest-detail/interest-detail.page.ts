@@ -201,11 +201,13 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public acceptEvent(event: Event): void
     {
-      this.store.dispatch(new ActionEventSetIdAnonymousPending(event.id)).pipe
-      (
-        switchMap(() => this.store.dispatch(new ActionEventAccept())),
-        switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
-      ).subscribe();
+        const interest: Interest = this.store.selectSnapshot(StateInterest.data());
+
+        this.store.dispatch(new ActionEventSetIdAnonymousPending(event.id)).pipe
+        (
+            switchMap(() => this.store.dispatch(new ActionEventAccept(interest))),
+            switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
+        ).subscribe();
     }
 
     public denyEvent(event: Event): void

@@ -407,9 +407,20 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Action(ActionEventAccept)
-    eventAccept({ dispatch }: StateContext<StateEventModel>)
+    eventAccept({ dispatch, getState }: StateContext<StateEventModel>, { interest }: ActionEventInterestAdd)
     {
-        return dispatch(new ActionEventPatch({ draft: false }, true))
+        const patch: Record<string, any> = { draft: false };
+        const event: Event               = StateEvent.dataState(getState());
+
+        if (interest != null && !event.interests.includes(interest.id))
+        {
+            patch.interests = [
+                ...event.interests,
+                interest.id
+            ]
+        }
+
+        return dispatch(new ActionEventPatch(patch, true))
     }
 
     @Action(ActionEventDeny)
