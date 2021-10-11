@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "fire-ionic-build": "npm run build.ionic.firefly",
+    "fire-ionic-build-prod": "npm run build.ionic.firefly.prod",
     "fire-ionic-watch": "ng build ionic-firefly --watch",
     "fire-ionic-serve": "ionic serve ionic-firefly --watch",
     "fire-ionic-serve-lab": "ionic serve ionic-firefly --watch --lab",
@@ -65,6 +66,7 @@
     "clean": "npx rimraf hooks node_modules package-lock.json && npm i --legacy-peer-deps",
     "clean.ionic.firefly": "cd apps/firefly/mobile && npx rimraf hooks node_modules platforms www plugins package-lock.json && npm i --legacy-peer-deps && npx rimraf -- package-lock.json",
     "build.ionic.firefly": "nx build ionic-firefly",
+    "build.ionic.firefly.prod": "nx build ionic-firefly --prod",
     "prepare.ionic.firefly": "npm run clean && npm run clean.ionic.firefly && npm run build.ionic.firefly",
     "prepare.ionic.firefly.ios": "npm run prepare.ionic.firefly && cd apps/firefly/mobile && npx rimraf -- ios && npm run cap.add.ios",
     "prepare.ionic.firefly.android": "npm run prepare.ionic.firefly && cd apps/firefly/mobile && npx rimraf -- android && npm run cap.add.android",
