@@ -9,6 +9,7 @@ import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
 import { ActionMobileAuthSelect, Pages, StateSearch, ActionSearchReset } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { TimestampFormat } from '@theory/firebase';
 
 @Component
 ({
@@ -37,6 +38,7 @@ export class PageStream extends BaseComponent implements OnInit
     public subscriptions: Record<string, SubscriptionPartial> = {};
 
     public IconType: any = IconType;
+    public TimestampFormat: any = TimestampFormat;
 
     @ViewChild(IonInfiniteScroll)
     public infiniteScroll: IonInfiniteScroll;

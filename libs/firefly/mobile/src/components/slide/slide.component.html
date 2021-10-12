@@ -16,7 +16,7 @@
                        (click)="clickedAlertGo()">
     </app-button-action>
 
-    <span class="cpt-date">{{ slide.timeStart | timestamp:'short' }}</span>
+    <span class="cpt-date">{{ slide.timeStart | timestamp: TimestampFormat.Short }}</span>
 </div>
 
 <ion-button *ngIf="deleteShow"

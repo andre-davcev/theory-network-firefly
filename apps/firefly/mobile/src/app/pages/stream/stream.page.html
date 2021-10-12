@@ -59,10 +59,10 @@
                                     <div class="dateTimeOuterWrapper">
                                       <div class="dateTimeWrapper">
                                         <ion-label class="date">
-                                            {{ event.timeStart | timestamp:'dateShort' }}
+                                            {{ event.timeStart | timestamp: TimestampFormat.DateShort }}
                                         </ion-label>
                                         <ion-label  class="time" position="stacked">
-                                            {{ event.timeStart | timestamp:'shortTime' }}
+                                            {{ event.timeStart | timestamp: TimestampFormat.ShortTime }}
                                         </ion-label>
                                       </div>
                                     </div>

@@ -169,6 +169,10 @@ export class StateCityStream extends StateChild<StreamInterest, StateCityStreamM
         const subscriptionsNew : Record<string, string>              = StateCityStream.subscriptionsNew(state);
         const virtual          : boolean                             = StateCityStream.virtual(state);
 
+        // ToDo: On Logout figure out how to reset state partially
+        // ToDo: keysFiltered on log back in seems to have more keys than data in dataLookup
+        // console.log({state});
+
         return keys.filter((id: string) =>
             (!virtual || lookup[id]?.virtual) &&
             (!(subscriptions[id]?.on) || subscriptionsNew[id] != null)
