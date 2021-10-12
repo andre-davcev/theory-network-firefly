@@ -29,6 +29,7 @@ export class PageEventDetail
     @Select(StateEvent.formGroup())     form$:            Observable<FormGroup>;
     @Select(StateEvent.isNew())         isNew$:           Observable<boolean>;
     @Select(StateEvent.timeStart)       timeStart$:       Observable<Timestamp>;
+    @Select(StateEvent.timeStartValid)  timeStartValid$:  Observable<boolean>;
     @Select(StateEvent.timeEnd)         timeEnd$:         Observable<Timestamp>;
     @Select(StateEvent.timeEndValid)    timeEndValid$:    Observable<boolean>;
     @Select(StateEvent.timeNotify)      timeNotify$:      Observable<Timestamp>;

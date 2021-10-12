@@ -94,7 +94,8 @@
                                       [pickerFormat]="'date-time.pickerFormat' | translate"
                                       [cancelText]="'general.cancel' |  translate"
                                       [doneText]="'general.done' | translate"
-                                      (ionChange)="timeChanged($event, 'timeStart')">
+                                      (ionChange)="timeChanged($event, 'timeStart')"
+                                      [class.cpt-invalid]="!(timeStartValid$ | async)">
                         </ion-datetime>
                     </ion-item>
 

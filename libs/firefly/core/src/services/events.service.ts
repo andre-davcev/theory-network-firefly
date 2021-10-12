@@ -19,7 +19,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
         super(firestore, formBuilder);
     }
 
-    private static validateTime(): ValidatorFn
+    private static validateEndTime(): ValidatorFn
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
         {
@@ -69,6 +69,28 @@ export class ServiceEvents extends ServiceFirestore<Event>
         return validator;
     }
 
+    private static validateTimeStart(): ValidatorFn
+    {
+        const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
+        {
+            const value: Timestamp = control.value;
+
+            let valid: boolean = false;
+
+            if (value != null)
+            {
+                const timeStart: Date = value.toDate();
+                const now: Date = DateUtil.now();
+
+                valid = timeStart.getTime() > now.getTime();
+            }
+
+            return valid ? null : { timeStartInvalid: true };
+        };
+
+        return validator;
+    }
+
     public formDataNew(userId: string, defaults: Event): Event
     {
         const event: Event =
@@ -105,8 +127,8 @@ export class ServiceEvents extends ServiceFirestore<Event>
             interests   : [event.interests,      []],
             name        : [event.name,           [Validators.required, ValidatorsExtended.minLength(1)]],
             tagline     : [event.tagline,        [Validators.required, ValidatorsExtended.minLength(1)]],
-            timeStart   : [event.timeStart,      [ServiceEvents.validateTime()]],
-            timeEnd     : [event.timeEnd,        [ServiceEvents.validateTime()]],
+            timeStart   : [event.timeStart,      [ServiceEvents.validateEndTime(), ServiceEvents.validateTimeStart()]],
+            timeEnd     : [event.timeEnd,        [ServiceEvents.validateEndTime()]],
             timeNotify  : [event.timeNotify,     [ServiceEvents.validateTimeNotify()]],
             phone       : [event.phone,          [Validators.pattern(Regex.Numbers)]],
             website     : [event.website,        [Validators.pattern(Regex.WebsiteSecure)]],
