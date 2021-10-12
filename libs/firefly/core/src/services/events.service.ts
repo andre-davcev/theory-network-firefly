@@ -127,7 +127,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
             interests   : [event.interests,      []],
             name        : [event.name,           [Validators.required, ValidatorsExtended.minLength(1)]],
             tagline     : [event.tagline,        [Validators.required, ValidatorsExtended.minLength(1)]],
-            timeStart   : [event.timeStart,      [ServiceEvents.validateEndTime(), ServiceEvents.validateTimeStart()]],
+            timeStart   : [event.timeStart,      [ServiceEvents.validateTimeStart()]],
             timeEnd     : [event.timeEnd,        [ServiceEvents.validateEndTime()]],
             timeNotify  : [event.timeNotify,     [ServiceEvents.validateTimeNotify()]],
             phone       : [event.phone,          [Validators.pattern(Regex.Numbers)]],
