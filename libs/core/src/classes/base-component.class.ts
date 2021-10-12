@@ -1,7 +1,11 @@
-import { OnDestroy, HostListener } from '@angular/core';
+import { OnDestroy, HostListener, Component } from '@angular/core';
 
 import { Subject } from 'rxjs';
 
+@Component
+({
+    template: ''
+})
 export abstract class BaseComponent implements OnDestroy {
   public destroy$: Subject<any> = new Subject();
 

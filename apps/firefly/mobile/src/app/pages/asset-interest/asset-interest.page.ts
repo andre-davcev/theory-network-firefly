@@ -14,6 +14,7 @@ import { StorageImage, StateStorage } from '@theory/firebase';
 import { BaseComponent } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { TranslateService } from '@ngx-translate/core';
+import { TimestampFormat } from '@theory/firebase';
 
 @Component
 ({
@@ -35,6 +36,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
     @Select(StateUserEvents.initialized()) stateUserInitialized$: Observable<boolean>;
 
     public Pages: any = Pages;
+    public TimestampFormat: any = TimestampFormat;
     public images: Record<string, StorageImage> = {};
 
     constructor

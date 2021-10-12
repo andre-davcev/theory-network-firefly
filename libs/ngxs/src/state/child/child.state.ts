@@ -143,20 +143,24 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                     forkJoin(slice$)
             ),
             map((page: Array<QueryDocumentSnapshot>) =>
-                page.forEach((document: QueryDocumentSnapshot) =>
-                {
-                    const id: string = document.id;
-                    const object: T =
+                page.
+                    filter((document: QueryDocumentSnapshot) =>
+                        document.exists
+                    ).
+                    forEach((document: QueryDocumentSnapshot) =>
                     {
-                        ...childLookup[id],
-                        ...(document.data() as T)
-                    };
+                        const id: string = document.id;
+                        const object: T =
+                        {
+                            ...childLookup[id],
+                            ...(document.data() as T)
+                        };
 
-                    object.metadata = object.metadata == null ? {} : object.metadata;
+                        object.metadata = object.metadata == null ? {} : object.metadata;
 
-                    snapshotLookup[id] = document;
-                    dataLookup[id]     = object;
-                })
+                        snapshotLookup[id] = document;
+                        dataLookup[id]     = object;
+                    })
             ),
 
             tap(() =>

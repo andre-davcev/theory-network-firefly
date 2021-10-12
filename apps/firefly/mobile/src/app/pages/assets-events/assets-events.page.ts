@@ -12,6 +12,7 @@ import { MenuController } from '@ionic/angular';
 import { StorageImage, StateStorage } from '@theory/firebase';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { takeUntil } from 'rxjs/operators';
+import { TimestampFormat } from '@theory/firebase';
 
 @Component
 ({
@@ -31,6 +32,7 @@ export class PageAssetsEvents extends BaseComponent implements OnInit
     public images: Record<string, StorageImage> = {};
 
     public IconType: any = IconType;
+    public TimestampFormat: any = TimestampFormat;
 
     constructor
     (

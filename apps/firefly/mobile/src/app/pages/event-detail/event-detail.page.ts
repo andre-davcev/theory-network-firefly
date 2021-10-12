@@ -14,7 +14,7 @@ import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
 import { Place } from '@firefly/cloud';
 import { TranslateService } from '@ngx-translate/core';
-import { Timestamp } from '@theory/firebase';
+import { Timestamp, TimestampFormat } from '@theory/firebase';
 
 @Component
 ({
@@ -52,6 +52,8 @@ export class PageEventDetail
     public IconType : any = IconType;
     public IconSlot : any = IconSlot;
     public Color    : any = Color;
+
+    public TimestampFormat: any = TimestampFormat;
 
     public now: string = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString()
 

@@ -41,7 +41,7 @@
               <ion-list *ngFor="let event of pendingEvents$ | async">
                 <ion-item-divider>
                   <ion-label>
-                      {{ event.timeStart | timestamp:'dateLong' }}
+                      {{ event.timeStart | timestamp: TimestampFormat.DateLong }}
                   </ion-label>
                 </ion-item-divider>
 
@@ -50,7 +50,7 @@
                       <img [src]="event.metadata.image">
                   </ion-avatar>
                   <ion-label (click)="select(event)">
-                      {{ event.timeStart | timestamp:'shortTime' }}
+                      {{ event.timeStart | timestamp: TimestampFormat.ShortTime }}
                   </ion-label>
                   <ion-label (click)="select(event)">
                       <h2>{{ event.name }}</h2>
@@ -77,7 +77,7 @@
                     <ion-list *ngFor="let event of events$ | async">
                       <ion-item-divider>
                           <ion-label>
-                              {{ event.timeStart | timestamp:'dateLong' }}
+                              {{ event.timeStart | timestamp: TimestampFormat.DateLong }}
                           </ion-label>
                       </ion-item-divider>
 
@@ -86,7 +86,7 @@
                               <img [src]="event.metadata.image">
                           </ion-avatar>
                           <ion-label>
-                              {{ event.timeStart | timestamp:'shortTime' }}
+                              {{ event.timeStart | timestamp: TimestampFormat.ShortTime }}
                           </ion-label>
                           <ion-label>
                               <h2>{{ event.name }}</h2>

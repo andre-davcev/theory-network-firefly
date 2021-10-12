@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
 import { StateUserEvents, ActionEventSetId, StateInterest, ActionEventPatch, ActionInterestEventsGet } from '@firefly/core';
 import { Event, Interest } from '@firefly/cloud';
-import { StateStorage, StorageImage } from '@theory/firebase';
+import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
 
 @Component
 ({
@@ -18,6 +18,8 @@ export class PageEventAssets
 {
   @Select(StateUserEvents.data())    events$:  Observable<Array<Event>>;
   @Select(StateStorage.images)    images$: Observable<Record<string, StorageImage>>;
+
+  public TimestampFormat: any = TimestampFormat;
 
   public images: Record<string, StorageImage> = {};
   public userEvents: Array<Event>;

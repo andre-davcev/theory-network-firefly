@@ -1,6 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, HostListener } from '@angular/core';
 
 import { Alert } from '@firefly/cloud';
+import { TimestampFormat } from '@theory/firebase';
 
 @Component
 ({
@@ -22,6 +23,8 @@ export class ComponentSlide
     @Output() alertDeleteClicked: EventEmitter<void> = new EventEmitter();
 
     private inProgress: boolean = false;
+
+    public TimestampFormat: any = TimestampFormat;
 
     @HostListener('click')
     public clickedAlertDetail(): void

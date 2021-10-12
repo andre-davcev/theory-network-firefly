@@ -10,7 +10,7 @@ import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileToast } from '@firefly/mobile';
 import { NavController, ModalController, AlertController } from '@ionic/angular';
-import { StorageImage, StateStorage } from '@theory/firebase';
+import { StorageImage, StateStorage, TimestampFormat } from '@theory/firebase';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { PageEventDetail } from '../event-detail';
@@ -38,8 +38,9 @@ export class PageInterestDetail extends BaseComponent implements OnInit
     @Select(StateInterest.canEdit)     canEdit$:      Observable<boolean>;
     @Select(StateUser.isPublisher)     isPublisher$:  Observable<boolean>;
 
-    public Pages: any = Pages;
+    public Pages: typeof Pages = Pages;
     public images: Record<string, StorageImage> = {};
+    public TimestampFormat: any = TimestampFormat;
 
     constructor
     (
