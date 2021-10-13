@@ -198,8 +198,10 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
     public sync(context: StateContext<M>, action: any): Observable<any>
     {
-        const { getState, patchState }  = context;
+        const { getState, patchState, dispatch }  = context;
         const { keys, initialized } = getState();
+
+        const { ActionFilter } = this.actions;
 
         if (!initialized) { return of(null); }
 
@@ -217,7 +219,10 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
                     patchState({ keys } as M);
                 }
-            })
+            }),
+            switchMap(() =>
+                dispatch(new ActionFilter())
+            )
         );
     }
 
