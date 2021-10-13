@@ -79,7 +79,7 @@ export class StateAlerts
     @Action(ActionAlertsSlideIndex)
     slideIndex({ patchState, dispatch }: StateContext<StateAlertsModel>, { index }: ActionAlertsSlideIndex)
     {
-        patchState({ index: index });
+        patchState({ index });
 
         return this.store.selectOnce(StateAlerts.data).
         pipe
