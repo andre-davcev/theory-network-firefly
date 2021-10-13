@@ -325,6 +325,8 @@ export class StateInterests
 
         subscriptions[id] = { on : true };
 
+        data.subscriberCount += 1;
+
         return dispatch(new ActionCityStreamSubscriptionNew(id)).
         pipe
         (
@@ -348,6 +350,8 @@ export class StateInterests
 
         const data     : StreamInterest   = this.store.selectSnapshot(StateInterests.dataLookup)[id];
         const snapshot : DocumentSnapshot = this.store.selectSnapshot(StateInterests.snapshotLookup)[id];
+
+        data.subscriberCount -= 1;
 
         return dispatch
         ([
