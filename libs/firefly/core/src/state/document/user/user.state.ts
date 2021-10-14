@@ -43,11 +43,12 @@ import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/use
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
 import { Injectable } from '@angular/core';
-import { Collection } from '@firefly/core/enums';
+import { Collection, EventType, InterestType } from '@firefly/core/enums';
 
 import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
 import { StateCity } from '../city/city.state';
-import { ActionInterestsSetSubscriptions } from '../../composite/interests/interests.actions';
+import { ActionInterestsSetSubscriptions, ActionInterestsSetType } from '../../composite/interests/interests.actions';
+import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()
@@ -427,13 +428,20 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserLogout)
     logout(context: StateContext<StateUserModel>)
     {
-        const { patchState } = context;
+        const { patchState, dispatch } = context;
 
         patchState({ error: null });
 
         return of(this.auth.signOut()).
         pipe
         (
+            switchMap(() =>
+                dispatch
+                ([
+                    new ActionInterestsSetType(InterestType.Unsubscribed),
+                    new ActionCalendarSetType(EventType.Upcoming)
+                ])
+            ),
             switchMap(() =>
                 this.store.dispatch(new ActionUserAnonymousLogin())
             ),
@@ -481,7 +489,20 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserIsPublisherSet)
     isPublisherSet({ dispatch }: StateContext<StateUserModel>, { isPublisher }: ActionUserIsPublisherSet)
     {
-        return dispatch(new ActionUserPatch({ isPublisher }, true));
+        return dispatch(new ActionUserPatch({ isPublisher }, true)).
+        pipe
+        (
+            filter(() =>
+                !isPublisher
+            ),
+            switchMap(() =>
+                dispatch
+                ([
+                    new ActionInterestsSetType(InterestType.Unsubscribed),
+                    new ActionCalendarSetType(EventType.Upcoming)
+                ])
+            )
+        );
     }
 
     @Action(ActionUserSetErrorAuth)
