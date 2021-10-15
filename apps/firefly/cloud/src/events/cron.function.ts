@@ -1,7 +1,7 @@
 import { runWith, EventContext } from 'firebase-functions';
 import { firestore, storage, messaging } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { Event, Collection, User, ImageType, ImageSize, AlertPartial, FIREBASE_CONFIG } from '../library';
+import { Event, Collection, User, ImageType, ImageSize, AlertPartial, FIREBASE_CONFIG, Token } from '../library';
 import { GetSignedUrlResponse, GetSignedUrlConfig } from '@google-cloud/storage';
 
 const EventsCron =
@@ -129,7 +129,9 @@ onRun(async (context: EventContext) =>
         )
     );
 
-    let snapshot: QueryDocumentSnapshot;
+    let snapshot  : QueryDocumentSnapshot;
+    let tokens    : Record<string, Token>;
+    let tokenKeys : Array<string>;
 
     await Promise.all
     (
@@ -142,14 +144,16 @@ onRun(async (context: EventContext) =>
             snapshot      = userSnapshots[userId];
             user          = snapshot.data() as User;
             notifications = userNotifications[userId];
+            tokens        = user.tokens;
+            tokenKeys     = Object.keys(tokens);
 
             // If the user has tokens, then send push notifications to all the devices
-            if (user.tokens?.length > 0)
+            if (tokenKeys.length > 0)
             {
                 Object.
                     keys(notifications).
                     forEach((eventId: string) =>
-                        push.sendToDevice(user.tokens, eventPayloads[eventId])
+                        push.sendToDevice(tokenKeys, eventPayloads[eventId])
                     );
             }
 

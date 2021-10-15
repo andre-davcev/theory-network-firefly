@@ -308,7 +308,7 @@ service cloud.firestore {
                data.city.city           is string  &&
                data.city.region         is string  &&
                data.city.country        is string  &&
-               data.tokens              is array   &&
+               data.tokens              != null    &&
                data.subscriptions       is array   &&
                data.subscriptionsStatus != null;
     }
@@ -327,7 +327,7 @@ service cloud.firestore {
                dataNew.city.city           is string      &&
                dataNew.city.region         is string      &&
                dataNew.city.country        is string      &&
-               dataNew.tokens              is array       &&
+               dataNew.tokens              is map         &&
                dataNew.subscriptions       is array       &&
                dataNew.subscriptionsStatus is map;
     }

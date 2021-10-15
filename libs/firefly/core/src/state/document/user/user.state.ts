@@ -1,4 +1,4 @@
-import { User as FirebaseUser, FirebaseError, UserCredential, GeoPoint } from '@theory/firebase';
+import { User as FirebaseUser, FirebaseError, UserCredential, GeoPoint, FieldValue } from '@theory/firebase';
 
 import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';
@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, SubscriptionPartial, AlertPartial, CityInfo } from '@firefly/cloud';
+import { User, SubscriptionPartial, AlertPartial, CityInfo, Token, serverTimestamp } from '@firefly/cloud';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -84,7 +84,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 providerId          : undefined,
                 subscriptions       : [],
                 subscriptionsStatus : {},
-                tokens              : []
+                tokens              : {}
             },
             {
                 ActionReset  : ActionUserReset,
@@ -128,7 +128,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static erroredAuth(state: StateUserModel)            : boolean       { return StateUser.errorAuth(state) != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : !user.subscriptionsStatus ? {} : user.subscriptionsStatus; }
     @Selector() static notifications(state: StateUserModel)          : Record<string, AlertPartial>        { const user: User = StateUser.dataState(state); return user == null ? null : !user.notifications ? {} : user.notifications; }
-    @Selector() static tokens(state:StateUserModel)                  : Array<string>{ const user: User = StateUser.dataState(state); return user == null ? null : user.tokens; }
+    @Selector() static tokens(state:StateUserModel)                  : Record<string, Token> { return StateUser.dataState(state)?.tokens; }
     @Selector() static isPublisher(state: StateUserModel)            : boolean      { return StateUser.dataState(state).isPublisher; }
     @Selector() static email(state: StateUserModel)                  : string       { return StateUser.dataState(state).email; }
     @Selector() static userId(state: StateUserModel)                 : string       { return StateUser.dataState(state).userId; }
@@ -400,9 +400,24 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserAddToken)
     addToken({ getState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserAddToken)
     {
-        const user   : User   = StateUser.dataState(getState());
-        const token  : string = payload;
-        const tokens : Array<string> = user.tokens == null ? [token] : [...user.tokens, token];
+        // ToDo: Update these
+        // ToDo: Deploy to firebase dev
+        // ToDo: Update user.tokens models
+        const tokens   : Record<string, Token> = StateUser.tokens(getState());
+        const token    : string                = payload;
+        const existing : Token                 = tokens[token];
+        const now      : FieldValue            = serverTimestamp();
+
+        tokens[token] = existing == null ?
+        {
+            token,
+            usedFirst: now,
+            usedLast: now
+        } :
+        {
+            ...existing,
+            usedLast: now
+        };
 
         return dispatch(new ActionUserPatch({ tokens }, true));
     }

@@ -48,14 +48,10 @@ export class StateNotifications
                 from(PushNotifications.register())
             ),
             switchMap(() =>
-                forkJoin
-                ([
-                    from(fcm.getToken()).pipe(map((response: { token: string }) => response.token)),
-                    this.store.selectOnce(StateUser.tokens)
-                ])
+                from(fcm.getToken()).pipe(map((response: { token: string }) => response.token))
             ),
-            switchMap(([token, tokens]) =>
-                token && tokens && tokens.includes(token) ?
+            switchMap((token: string) =>
+                !token ?
                     of(null) :
                     dispatch(new ActionUserAddToken(token))
             )
