@@ -8,10 +8,9 @@ import { StateNotificationsOptions } from './notifications.state.options';
 import { ActionNotificationsWatch } from './notifications.actions';
 import { Plugins } from '@capacitor/core';
 import { ActionUserAddToken } from '@firefly/core';
-import { StateUser } from '@firefly/core';
 import { Injectable } from '@angular/core';
 import { StateDevice } from '@theory/capacitor';
-import { of, from, forkJoin } from 'rxjs';
+import { of, from } from 'rxjs';
 import { filter, switchMap, take, map } from 'rxjs/operators';
 
 const fcm = new FCM();
