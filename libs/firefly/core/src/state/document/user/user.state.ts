@@ -7,7 +7,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
-import { User, SubscriptionPartial, AlertPartial, CityInfo, Token, serverTimestamp } from '@firefly/cloud';
+import { User, SubscriptionPartial, AlertPartial, CityInfo, Token } from '@firefly/cloud';
+import { serverTimestamp } from '@theory/firebase';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
