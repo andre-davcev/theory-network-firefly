@@ -1,6 +1,6 @@
 import { GeoPoint } from '../types';
 
-import { FirebaseDocument, CityInfo } from '../interfaces';
+import { FirebaseDocument, CityInfo, Token } from '../interfaces';
 
 import { SubscriptionPartial, AlertPartial } from '../models';
 import { MetadataUser } from '../metadata';
@@ -17,7 +17,7 @@ export interface User extends FirebaseDocument
     providerId          : string;
     subscriptions       : Array<string>;
     subscriptionsStatus : Record<string, SubscriptionPartial>;
-    tokens              : Array<string>;
+    tokens              : Record<string, Token>;
 
     metadata: MetadataUser;
 }

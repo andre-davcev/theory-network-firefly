@@ -23,7 +23,7 @@ export class ServiceUsers extends ServiceFirestore<User>
         {
             ...object,
             subscriptions : [object.subscriptions],
-            tokens        : [object.tokens]
+            tokens        : object.tokens
         });
     }
 }
