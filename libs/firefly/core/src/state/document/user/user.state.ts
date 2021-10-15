@@ -401,9 +401,6 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Action(ActionUserAddToken)
     addToken({ getState, dispatch }: StateContext<StateUserModel>, { payload }: ActionUserAddToken)
     {
-        // ToDo: Update these
-        // ToDo: Deploy to firebase dev
-        // ToDo: Update user.tokens models
         const tokens   : Record<string, Token> = StateUser.tokens(getState());
         const token    : string                = payload;
         const existing : Token                 = tokens[token];
