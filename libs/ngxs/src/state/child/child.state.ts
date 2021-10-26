@@ -124,6 +124,11 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
 
         const { ActionFilter } = this.actions;
 
+        const collection: string = action?.collection;
+        const imageType:  string = action?.imageType;
+
+        const fetchMedia: boolean = collection != null && imageType != null;
+
         const finishedPaging : boolean       = StateChild.finishedPagingState(state);
         const keysFiltered   : Array<string> = this.keys(context);
 
@@ -167,15 +172,25 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
                 patchState
                 ({
                     snapshotLookup,
+                    dataLookup
+                } as M)
+            ),
+            tap(() =>
+                patchState
+                ({
                     dataLookup,
-
                     initialized: true,
                     loading: false
                 } as M)
             ),
             switchMap(() =>
                 dispatch(new ActionFilter())
-            )
+            ),
+            switchMap(() =>
+                !fetchMedia ?
+                    of(null) :
+                    this.setMedia(context, collection, imageType)
+            ),
         );
     }
 

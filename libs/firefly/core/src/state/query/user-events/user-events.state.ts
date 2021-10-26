@@ -82,13 +82,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel>
     @Action(ActionUserEventsGet)
     get(context: StateContext<StateUserEventsModel>)
     {
-        return super.get(context).
-        pipe
-        (
-            switchMap(() =>
-                super.setMedia(context, Collection.Events, ImageType.Image)
-            )
-        );
+        return super.get(context, { collection: Collection.Events, imageType: ImageType.Image });
     }
 
     @Action(ActionUserEventsAdd)

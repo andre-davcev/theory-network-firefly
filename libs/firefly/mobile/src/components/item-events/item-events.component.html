@@ -8,7 +8,7 @@
                       (click)="select(event, sliding)">
         <ion-item>
             <ion-avatar slot="start">
-                <img [src]="event.metadata.image">
+                <ion-img [src]="event.metadata?.image"></ion-img>
             </ion-avatar>
 
             <ion-label class="cpt-time">
