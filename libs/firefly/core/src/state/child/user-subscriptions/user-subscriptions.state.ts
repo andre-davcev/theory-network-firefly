@@ -78,13 +78,7 @@ export class StateUserSubscriptions extends StateChild<Subscription, StateUserSu
     @Action(ActionUserSubscriptionsGet)
     get(context: StateContext<StateUserSubscriptionsModel>)
     {
-        return super.get(context).
-        pipe
-        (
-            switchMap(() =>
-                super.setMedia(context, Collection.Interests, ImageType.Image)
-            )
-        );
+        return super.get(context, { collection: Collection.Interests, imageType: ImageType.Image});
     }
 
     @Action(ActionUserSubscriptionsAdd)

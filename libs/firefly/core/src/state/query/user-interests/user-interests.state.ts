@@ -78,13 +78,7 @@ export class StateUserInterests extends StateQuery<Interest, StateUserInterestsM
     @Action(ActionUserInterestsGet)
     get(context: StateContext<StateUserInterestsModel>)
     {
-        return super.get(context).
-        pipe
-        (
-            switchMap(() =>
-                super.setMedia(context, Collection.Interests, ImageType.Image)
-            )
-        );
+        return super.get(context, { collection: Collection.Interests, imageType: ImageType.Image });
     }
 
     @Action(ActionUserInterestsAdd)

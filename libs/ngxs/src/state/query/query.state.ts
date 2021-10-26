@@ -49,6 +49,11 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
 
         const state : M = getState();
 
+        const collection: string = action?.collection;
+        const imageType:  string = action?.imageType;
+
+        const fetchMedia: boolean = collection != null && imageType != null;
+
         const
         {
             snapshotLookup,
@@ -109,6 +114,11 @@ export abstract class StateQuery<T extends FirebaseDocument, M extends StateColl
                 ),
                 switchMap(() =>
                     super.filter(context)
+                ),
+                switchMap(() =>
+                    !fetchMedia ?
+                        of(null) :
+                        this.setMedia(context, collection, imageType)
                 )
             );
     }
