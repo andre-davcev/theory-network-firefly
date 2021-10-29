@@ -48,7 +48,7 @@ import { Collection, EventType, InterestType } from '@firefly/core/enums';
 
 import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
 import { StateCity } from '../city/city.state';
-import { ActionInterestsSetSubscriptions, ActionInterestsSetType } from '../../composite/interests/interests.actions';
+import { ActionInterestsPage, ActionInterestsSetSubscriptions, ActionInterestsSetType } from '../../composite/interests/interests.actions';
 import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
 
 @State<StateUserModel>(StateUserOptions)
@@ -430,8 +430,20 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             switchMap(() =>
                 from(this.auth.signInWithEmailAndPassword(payload.id, payload.password))
             ),
-            map((userCredential: UserCredential) => userCredential.user),
-            switchMap((authData: FirebaseUser) => dispatch(new ActionUserAuthenticateCheck(authData))),
+            map((userCredential: UserCredential) =>
+                userCredential.user
+            ),
+            switchMap((authData: FirebaseUser) =>
+                dispatch(new ActionUserAuthenticateCheck(authData)).
+                pipe
+                (
+                    switchMap(() =>
+                        authData == null ?
+                            of(null) :
+                            dispatch(new ActionInterestsPage())
+                    )
+                )
+            ),
             catchError((errorAuth: FirebaseError) =>
                 of(patchState({ errorAuth, authenticating: false }))
             )
@@ -456,7 +468,10 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ])
             ),
             switchMap(() =>
-                this.store.dispatch(new ActionUserAnonymousLogin())
+                dispatch(new ActionUserAnonymousLogin())
+            ),
+            switchMap(() =>
+                dispatch(new ActionInterestsPage())
             ),
             catchError((error: Error) =>
                 of(patchState({ error }))
