@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
@@ -30,10 +30,11 @@ export class PageNotificationDetail extends BaseComponent
 
     constructor
     (
-        private store     : Store,
-        private modal     : ModalController,
-        private translate : TranslateService,
-        private alert     : AlertController
+        private store         : Store,
+        private modal         : ModalController,
+        private translate     : TranslateService,
+        private alert         : AlertController,
+        public  navController : NavController,
     )
     {
         super();
@@ -91,7 +92,11 @@ export class PageNotificationDetail extends BaseComponent
                         },
                         {
                             text    : translations[Translation.AlertConfirmDeleteConfirm],
-                            handler : () => this.store.dispatch(new ActionUserAlertsDelete(this.store.selectSnapshot(StateEvent.id())))
+                            handler : () =>
+                              this.store.dispatch(new ActionUserAlertsDelete(this.store.selectSnapshot(StateEvent.id()))).
+                              subscribe(() =>
+                                  this.navController.back()
+                              )
                         }
                     ]
                 })
