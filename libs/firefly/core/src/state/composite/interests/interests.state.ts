@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { from } from 'rxjs';
+import { from, of } from 'rxjs';
 import { switchMap, takeWhile, tap } from 'rxjs/operators';
 
 import { InterestType } from '@firefly/core/enums';
@@ -295,7 +295,9 @@ export class StateInterests
         pipe
         (
             switchMap(() =>
-                from(infiniteScroll.complete())
+                infiniteScroll == null ?
+                    of(null) :
+                    from(infiniteScroll.complete())
             )
         );
     }
