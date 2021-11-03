@@ -22,6 +22,14 @@
             height: 1px;
             background-color: $fire-color-grey-light;
         }
+
+        &.reset-password
+        {
+            &:after
+            {
+                content: none;
+            }
+        }
     }
 
     ion-icon {
