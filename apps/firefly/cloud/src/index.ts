@@ -6,7 +6,7 @@ import { InterestsCreate, InterestsCron, InterestsDelete, InterestsUpdate } from
 import { EventsCreate, EventsDelete, EventsUpdate, EventsCron } from './events';
 import { StorageResize } from './storage';
 import { CitiesCreate } from './cities';
-import { UsersCreate, UsersDelete, UsersUpdate } from './users';
+import { UsersCreate, UsersCron, UsersDelete, UsersUpdate } from './users';
 import { UserProfilesCreate } from './user-profiles';
 
 export
@@ -28,6 +28,7 @@ export
     UserProfilesCreate,
 
     UsersCreate,
+    UsersCron,
     UsersDelete,
     UsersUpdate
 };
