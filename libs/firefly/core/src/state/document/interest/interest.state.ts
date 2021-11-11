@@ -21,8 +21,6 @@ import {
     ActionInterestSetId,
     ActionInterestUpdate,
     ActionInterestEventsGet,
-    ActionInterestEventsReset,
-    ActionInterestSetIdAnonymous,
     ActionInterestEventsGetAnonymous,
     ActionInterestPatchMetadata,
     ActionInterestImagesUpdate,
@@ -70,7 +68,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                 tagline         : null,
                 virtual         : false,
 
-
                 metadata : { image: null }
             },
             {
@@ -93,14 +90,21 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         );
     }
 
-    @Selector() static events(state: StateInterestModel):  Array<Event> { return state.events.filter((event: Event) => !event.draft); }
     @Selector() static private(state: StateInterestModel): boolean      { return StateInterest.dataState(state).private; }
-    @Selector([StateUser.userId]) static pendingEvents(state: StateInterestModel, userId: string): Event[] { return !state.events ? [] : state.events.filter((event: Event) => event.draft && (StateInterest.dataState(state).userId === userId || event.userId === userId)) }
     @Selector([StateUser.userId]) static canEdit(state: StateInterestModel, userId: string): boolean
     {
       return StateInterest.dataState(state).userId === userId;
     }
     @Selector() static image(state: StateInterestModel): string { return StateInterest.metadataState(state).image; }
+
+    @Selector() static events(state: StateInterestModel): Array<Event> { return state.events[StateInterest.idState(state)]; }
+    @Selector([StateUser.userId])
+    static pendingEvents(state: StateInterestModel, userId: string): Array<Event>
+    {
+        return StateInterest.dataState(state).userId === userId ?
+            state.eventsPending[StateInterest.idState(state)] :
+            [];
+    }
 
     @Action(ActionInterestReset)
     reset(context: StateContext<StateInterestModel>)
@@ -189,28 +193,8 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         return dispatch(new ActionInterestSet(snapshot, data));
     }
 
-    @Action(ActionInterestSetIdAnonymous)
-    setIdAnonymous({ dispatch }: StateContext<StateInterestModel>, { id }: ActionInterestSetIdAnonymous)
-    {
-        const snapshot: DocumentSnapshot = this.store.selectSnapshot(StateInterests.snapshotLookup)[id];
-
-        const data:Interest = this.store.selectSnapshot(StateInterests.dataLookup)[id];
-
-        return dispatch(new ActionInterestSet(snapshot, data));
-    }
-
-    @Action(ActionInterestEventsReset)
-    eventsReset({ patchState }: StateContext<StateInterestModel>)
-    {
-      patchState(
-        {
-          events: []
-        }
-      )
-    }
-
     @Action(ActionInterestEventsGet)
-    eventsGet({ patchState, getState, dispatch}: StateContext<StateInterestModel>)
+    eventsGet({ patchState, getState }: StateContext<StateInterestModel>)
     {
         const userId : string = this.store.selectSnapshot(StateUser.id());
 

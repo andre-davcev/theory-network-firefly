@@ -227,6 +227,8 @@ service cloud.firestore {
                data.timeNotify      is timestamp &&
                data.interests        is array  &&
                data.interests.size() == 1      &&
+               data.interestsPending        is array &&
+               data.interestsPending.size() == 1     &&
                !data.notifyComplete;
     }
 
@@ -248,7 +250,9 @@ service cloud.firestore {
                dataNew.timeEnd         is timestamp               &&
                dataNew.timeNotify      is timestamp               &&
                dataNew.interests       is array                   &&
-               dataNew.interests.size() == dataOld.interests.size() &&
+               dataNew.interests.size()        == dataOld.interests.size() &&
+               dataNew.interestsPending        is array                   &&
+               dataNew.interestsPending.size() == dataOld.interestsPending.size() &&
                !data.notifyComplete;
     }
 

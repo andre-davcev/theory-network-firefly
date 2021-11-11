@@ -243,7 +243,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel>
                 dispatch(new ActionAppLoadingHide())
             )
 /*
-// ToDo: When clicking cancel, promise doesn't resolve
+            // When clicking cancel, promise doesn't resolve
             switchMap(() =>
                 from(this.calendar.createEventInteractively(
                     alert.name,

@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { Store } from '@ngxs/store';
+import { ActionCalendarPage, ActionEventInterestAdd, ActionEventSetId, StateCalendar, StateInterest } from '@firefly/core';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { Select, Store } from '@ngxs/store';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Pages } from '@firefly/mobile';
-
+import { Observable } from 'rxjs';
+import { Alert, DateEvents, Interest } from '@firefly/cloud';
+import { switchMap } from 'rxjs/operators';
 
 @Component
 ({
@@ -14,19 +17,49 @@ import { Pages } from '@firefly/mobile';
 
 export class PageEventSelector
 {
-    public Pages: any = Pages;
-    public segment: Pages = Pages.EventAssets;
-    public translations: Array<string> = [];
+    @Select(StateCalendar.data) data$: Observable<Array<DateEvents>>;
 
-    constructor(private store: Store) { }
+    @ViewChild(IonInfiniteScroll)
+    private infiniteScroll: IonInfiniteScroll;
 
-    ionViewWillEnter()
+    constructor
+    (
+        private store: Store,
+        private modal: ModalController
+    ) { }
+
+    public ionViewWillEnter(): void
     {
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
-    public segmentChanged(event: any): void
+    public select(event: Alert): void
     {
-        this.segment = event.target.value;
+        const interest: Interest = this.store.selectSnapshot(StateInterest.data());
+
+        this.store.dispatch(new ActionEventSetId(event.id)).
+        pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new ActionEventInterestAdd(interest, true))
+            )
+        ).
+        subscribe(() =>
+            this.modal.dismiss()
+        );
+
+        // ToDo: Save the interest to the database?
+        // ToDo: Add confirm message here?
+        // ToDo: Also add new scenarios from new features
+    }
+
+    public cancel(): void
+    {
+        this.modal.dismiss();
+    }
+
+    public loadData(event: any): void
+    {
+        this.store.dispatch(new ActionCalendarPage(this.infiniteScroll));
     }
 }

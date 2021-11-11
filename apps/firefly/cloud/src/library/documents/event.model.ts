@@ -11,6 +11,7 @@ export interface Event extends FirebaseDocument
     draft          : boolean;
     geopoint       : GeoPoint;
     interests      : Array<string>;
+    interestsPending: Array<string>;
     name           : string;
     notifyComplete : boolean;
     placeType      : MapboxPlaceType;

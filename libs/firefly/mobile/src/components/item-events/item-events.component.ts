@@ -18,6 +18,9 @@ export class ComponentItemEvents
     @Input()
     public dateEvents: DateEvents;
 
+    @Input()
+    public showDelete: boolean = false;
+
     @Output()
     public selected: EventEmitter<Event> = new EventEmitter();
 
