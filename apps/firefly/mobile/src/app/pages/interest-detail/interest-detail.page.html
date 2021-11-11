@@ -33,12 +33,12 @@
             <div class="cnt-description">
               <p class="description">{{ (interest$ | async).description }}</p>
             </div>
-            <div *ngIf="(pendingEvents$ | async).length > 0">
+            <div *ngIf="(eventsPending$ | async).length > 0">
               <ion-item-divider></ion-item-divider>
               <ion-item>
                 <ion-label>Pending Events:</ion-label>
               </ion-item>
-              <ion-list *ngFor="let event of pendingEvents$ | async">
+              <ion-list *ngFor="let event of eventsPending$ | async">
                 <ion-item-divider>
                   <ion-label>
                       {{ event.timeStart | timestamp: TimestampFormat.DateLong }}

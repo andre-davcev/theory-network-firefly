@@ -27,7 +27,8 @@ import {
   ActionEventPatchMetadata,
   ActionEventImagesUpdate,
   ActionEventImageSet,
-  ActionEventTimeSet
+  ActionEventTimeSet,
+  ActionEventInterestRemove
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { DocumentSnapshot, FieldValue, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '@theory/firebase';
@@ -42,7 +43,6 @@ import { Collection, ImageType } from '@firefly/core/enums';
 import { SetFormPristine } from '@ngxs/form-plugin';
 import { LngLatLike } from 'mapbox-gl';
 import { StateUserAlerts } from '../../child';
-import { ActionEventInterestRemove } from '@firefly/core';
 
 @State<StateEventModel>(StateEventOptions)
 @Injectable()
@@ -322,7 +322,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventSetIdAnonymousPending)
     actionSetIdAnonymousPending(context: StateContext<StateEventModel>, { id }: ActionEventSetIdAnonymous)
     {
-      const pendingEvents: Event[] = this.store.selectSnapshot(StateInterest.pendingEvents);
+      const pendingEvents: Event[] = this.store.selectSnapshot(StateInterest.eventsPending);
       const pendingEvent: Event[] = pendingEvents.filter((event) => event.id = id);
 
       const query: Query   = this.service.collection('events').ref

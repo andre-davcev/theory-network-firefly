@@ -31,7 +31,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
     @Select(StateInterest.isNew())     isNew$:        Observable<boolean>;
     @Select(StateInterest.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateInterest.events)      events$:       Observable<Event[]>;
-    @Select(StateInterest.pendingEvents) pendingEvents$: Observable<Event[]>;
+    @Select(StateInterest.eventsPending) eventsPending$: Observable<Event[]>;
     @Select(StateStorage.images)       images$:       Observable<Record<string, StorageImage>>;
     @Select(StateDevice.device)        device$:       Observable<boolean>;
     @Select(StateUserEvents.initialized()) stateUserInitialized$: Observable<boolean>;
@@ -134,6 +134,11 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         subscribe((modal: HTMLIonModalElement) =>
             modal.present()
         );
+
+        // ToDo: Do modals allow return values?
+        // ToDo: Add to interest.state.ts (eventsPending if not owner) (events if owner)
+        // ToDo: Save the interest to the database?
+        // ToDo: Add confirm message here?
     }
 
     public addExisting(): void

@@ -24,7 +24,9 @@ import {
     ActionInterestEventsGetAnonymous,
     ActionInterestPatchMetadata,
     ActionInterestImagesUpdate,
-    ActionInterestImageSet
+    ActionInterestImageSet,
+    ActionInterestEventsSet,
+    ActionInterestEventsGetPending
 } from './interest.actions';
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, ActionUserInterestsSync } from '../..//query/user-interests';
 import { ActionCityStreamRemove, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
@@ -42,6 +44,18 @@ import { StateInterests } from '../../composite/interests/interests.state';
 @Injectable()
 export class StateInterest extends StateDocument<Interest, StateInterestModel>
 {
+    @Selector() static private(state: StateInterestModel)       : boolean      { return StateInterest.dataState(state).private; }
+    @Selector() static image(state: StateInterestModel)         : string       { return StateInterest.metadataState(state).image; }
+    @Selector() static events(state: StateInterestModel)        : Array<Event> { return state.events[StateInterest.idState(state)] || []; }
+    @Selector() static eventsPending(state: StateInterestModel) : Array<Event> { return state.eventsPending[StateInterest.idState(state)] || []; }
+
+
+    @Selector([StateUser.userId])
+    static canEdit(state: StateInterestModel, userId: string): boolean
+    {
+        return StateInterest.dataState(state).userId === userId;
+    }
+
     constructor
     (
         private store: Store,
@@ -90,21 +104,6 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         );
     }
 
-    @Selector() static private(state: StateInterestModel): boolean      { return StateInterest.dataState(state).private; }
-    @Selector([StateUser.userId]) static canEdit(state: StateInterestModel, userId: string): boolean
-    {
-      return StateInterest.dataState(state).userId === userId;
-    }
-    @Selector() static image(state: StateInterestModel): string { return StateInterest.metadataState(state).image; }
-
-    @Selector() static events(state: StateInterestModel): Array<Event> { return state.events[StateInterest.idState(state)]; }
-    @Selector([StateUser.userId])
-    static pendingEvents(state: StateInterestModel, userId: string): Array<Event>
-    {
-        return StateInterest.dataState(state).userId === userId ?
-            state.eventsPending[StateInterest.idState(state)] :
-            [];
-    }
 
     @Action(ActionInterestReset)
     reset(context: StateContext<StateInterestModel>)
@@ -194,39 +193,80 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     }
 
     @Action(ActionInterestEventsGet)
-    eventsGet({ patchState, getState }: StateContext<StateInterestModel>)
+    eventsGet({ getState, dispatch }: StateContext<StateInterestModel>)
     {
-        const userId : string = this.store.selectSnapshot(StateUser.id());
+        const query: Query = this.
+            service.
+            collection(Collection.Events).
+            ref.
+            where('interests', 'array-contains', StateInterest.idState(getState()));
 
-        const query : Query = userId == null ?
-            undefined :
-            this.service.
-                collection('events').
-                ref.
-                where('userId', '==', userId).
-                where('interests', 'array-contains', StateInterest.idState(getState()));
+        return dispatch(new ActionInterestEventsSet(query, 'events'));
+    }
 
-        const events: Array<Event> = [];
+    @Action(ActionInterestEventsGetPending)
+    eventsGetPending({ dispatch, getState}: StateContext<StateInterestModel>)
+    {
+        const id: string = StateInterest.idState(getState());
 
-        return from(query.get()).pipe
-        (
-            map((snapshot: QuerySnapshot) =>
-                snapshot.docs
-            ),
-            tap((page: Array<QueryDocumentSnapshot>) =>
-                page.forEach((document: QueryDocumentSnapshot) =>
-                    events.push
-                    ({
-                        ...document.data() as Event,
-                        metadata: {}
-                    })
-                )
-            ),
+        if (id == null) { return of(null); }
+
+        const query: Query = this.
+            service.
+            collection(Collection.Events).
+            ref.
+            where('interestsPending', 'array-contains', id).
+            where('timeStart', '>', new Date()).
+            orderBy('timeStart', 'asc');
+
+        return dispatch(new ActionInterestEventsSet(query, 'eventsPending'));
+    }
+
+    @Action(ActionInterestEventsGetAnonymous)
+    eventsGetAnonymous({ dispatch, getState}: StateContext<StateInterestModel>)
+    {
+        const id: string = StateInterest.idState(getState());
+
+        if (id == null) { return of(null); }
+
+        const query: Query = this.
+            service.
+            collection(Collection.Events).
+            ref.
+            where('interests', 'array-contains', id).
+            where('timeStart', '>', new Date()).
+            orderBy('timeStart', 'asc').
+            limit(5);
+
+        return dispatch(new ActionInterestEventsSet(query, 'events'));
+    }
+
+    @Action(ActionInterestEventsSet)
+    eventsSet({ patchState, getState }: StateContext<StateInterestModel>, { query, key }: ActionInterestEventsSet)
+    {
+      const list   : Array<Event>       = [];
+      const state  : StateInterestModel = getState();
+      const id     : string             = StateInterest.idState(state);
+
+      return from(query.get()).pipe
+      (
+          map((snapshot: QuerySnapshot) =>
+              snapshot.docs
+          ),
+          tap((page: Array<QueryDocumentSnapshot>) =>
+              page.forEach((document: QueryDocumentSnapshot) =>
+                  list.push
+                  ({
+                      ...document.data() as Event,
+                      metadata: {}
+                  })
+          )),
           switchMap(() =>
-              forkJoin
-              (
-                  events.
-                      map((item: Event) =>
+              list.length === 0 ?
+                  of(null) :
+                  forkJoin
+                  (
+                      list.map((item: Event) =>
                           of(item).
                           pipe
                           (
@@ -239,69 +279,16 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                                   item.metadata.image = image
                               )
                           )
-                )
-              )
+                      )
+                  )
           ),
           tap(() =>
-              patchState({ events })
+              patchState({ [key]: {
+                  ...StateInterest.dataState(getState())[key],
+                  [id]: list
+              }})
           )
       )
-    }
-
-    @Action(ActionInterestEventsGetAnonymous)
-    eventsGetAnonymous({ patchState, getState}: StateContext<StateInterestModel>)
-    {
-        const interestId: string = StateInterest.idState(getState());
-
-        if (interestId == null) { return of(null); }
-
-        const query: Query = this.service.
-            collection('events').
-            ref.
-            where('interests', 'array-contains', interestId).
-            where('timeStart', '>', new Date()).
-            orderBy('timeStart', 'asc').
-            limit(5);
-
-        const events: Array<Event> = [];
-
-        return from(query.get()).pipe
-        (
-            map((snapshot: QuerySnapshot) =>
-                snapshot.docs
-            ),
-            tap((page: Array<QueryDocumentSnapshot>) =>
-                page.forEach((document: QueryDocumentSnapshot) =>
-                    events.push
-                    ({
-                        ...document.data() as Event,
-                        metadata: {}
-                    })
-            )),
-            switchMap(() =>
-                events.length === 0 ? of(null) : forkJoin
-                (
-                    events.
-                        map((item: Event) =>
-                            of(item).
-                            pipe
-                            (
-                                switchMap(() =>
-                                    item.metadata.image ?
-                                        of(item.metadata.image) :
-                                        this.storage.downloadUrl(`${Collection.Events}/${item.id}/${ImageType.Image}.jpeg`, ImageSize.Small)
-                                ),
-                                map((image: string) =>
-                                    item.metadata.image = image
-                                )
-                            )
-                  )
-                )
-            ),
-            tap(() =>
-                patchState({ events })
-            )
-        )
     }
 
     @Action(ActionInterestImagesUpdate)

@@ -48,6 +48,7 @@ export class PageEventSelector
             this.modal.dismiss()
         );
 
+        // ToDo: Add to interest.state.ts (eventsPending if not owner) (events if owner)
         // ToDo: Save the interest to the database?
         // ToDo: Add confirm message here?
         // ToDo: Also add new scenarios from new features

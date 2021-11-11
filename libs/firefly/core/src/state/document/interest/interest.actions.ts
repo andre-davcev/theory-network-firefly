@@ -3,6 +3,7 @@ import { CoreEnum } from '@theory/core';
 
 import { ActionsInterest } from './interest.actions.enum';
 import { DocumentSnapshot } from '@theory/firebase';
+import { Query } from '@angular/fire/firestore';
 
 export class ActionInterestReset         { static readonly type = ActionsInterest.Reset;         constructor() { } }
 export class ActionInterestDirty         { static readonly type = ActionsInterest.Dirty;         constructor() { } }
@@ -18,5 +19,7 @@ export class ActionInterestSetId         { static readonly type = ActionsInteres
 export class ActionInterestImagesUpdate  { static readonly type = ActionsInterest.ImagesUpdate;   constructor() { } }
 export class ActionInterestImageSet      { static readonly type = ActionsInterest.ImageSet;       constructor() { } }
 
-export class ActionInterestEventsGet          { static readonly type = ActionsInterest.EventsGet; constructor() { } }
+export class ActionInterestEventsGet          { static readonly type = ActionsInterest.EventsGet;          constructor() { } }
+export class ActionInterestEventsGetPending   { static readonly type = ActionsInterest.EventsGetPending;   constructor() { } }
 export class ActionInterestEventsGetAnonymous { static readonly type = ActionsInterest.EventsGetAnonymous; constructor() { } }
+export class ActionInterestEventsSet          { static readonly type = ActionsInterest.EventsSet;          constructor(public query: Query, public key: string) { }}
