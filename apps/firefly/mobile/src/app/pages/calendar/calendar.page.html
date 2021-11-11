@@ -58,6 +58,7 @@
         <ion-list>
             <app-item-events *ngFor="let events of data$ | async"
                             [dateEvents]="events"
+                            [showDelete]="true"
                             (selected)="navigate($event)"
                             (deleted)="delete($event)">
             </app-item-events>

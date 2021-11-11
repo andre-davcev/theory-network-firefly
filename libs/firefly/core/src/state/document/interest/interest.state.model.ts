@@ -3,5 +3,6 @@ import { Event } from '@firefly/cloud';
 
 export interface StateInterestModel extends StateDocumentModel
 {
-  events: Event[]
+    events        : Record<string, Array<Event>>;
+    eventsPending : Record<string, Array<Event>>;
 }

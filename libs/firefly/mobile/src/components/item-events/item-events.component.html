@@ -21,7 +21,7 @@
             </ion-label>
         </ion-item>
 
-        <ion-item-options side="end">
+        <ion-item-options *ngIf="showDelete" side="end">
             <ion-item-option [color]="event.notifyComplete ? 'grey' : 'secondary'"
                              [class.cpt-disabled]="event.notifyComplete"
                              (click)="delete(event)">

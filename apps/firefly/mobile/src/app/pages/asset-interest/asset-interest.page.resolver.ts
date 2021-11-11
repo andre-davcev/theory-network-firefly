@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { ActionInterestSetId, ActionInterestEventsGet, ActionInterestEventsReset, ActionAppLoadingHide } from '@firefly/core';
+import { ActionInterestSetId, ActionInterestEventsGet, ActionAppLoadingHide } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
@@ -15,20 +15,13 @@ export class ResolverPageAssetInterest implements Resolve<void>
     {
         if (route.params.id == null)
         {
-            return this.store.dispatch([new ActionInterestEventsReset()]).
+            return this.store.dispatch(new ActionInterestSetId(route.queryParams.id)).
             pipe
             (
-                switchMap(() =>
-                    this.store.dispatch
-                    ([
-                        new ActionInterestSetId(route.queryParams.id),
-                        // new ActionUserEventsGetData()
-                    ])
-                ),
-                switchMap(() =>
-                    this.store.dispatch(new ActionAppLoadingHide())
-                )
-            )
+              switchMap(() =>
+                  this.store.dispatch(new ActionAppLoadingHide())
+              )
+            );
         }
         else
         {

@@ -5,16 +5,17 @@ import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymousPending, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/core';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymousPending, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide, ActionUserEventsFilter } from '@firefly/core';
 import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileToast } from '@firefly/mobile';
-import { NavController, ModalController, AlertController } from '@ionic/angular';
+import { NavController, ModalController, AlertController, ActionSheetController } from '@ionic/angular';
 import { StorageImage, StateStorage, TimestampFormat } from '@theory/firebase';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { PageEventDetail } from '../event-detail';
 import { TranslateService } from '@ngx-translate/core';
+import { PageEventSelector } from '../event-selector';
 
 @Component
 ({
@@ -48,7 +49,8 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         private navController : NavController,
         private modal         : ModalController,
         private translate     : TranslateService,
-        private alert         : AlertController
+        private alert         : AlertController,
+        private actionSheet   : ActionSheetController
     )
     {
       super();
@@ -68,21 +70,88 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Light }));
     }
 
-    public navigate(page: Pages.EventDetail)
+    public add(): void
     {
-      const interest: Interest = this.store.selectSnapshot(StateInterest.data());
+        this.translate.
+        get
+        ([
+            'action.go.interest.title',
+            'action.go.interest.new',
+            'action.go.interest.existing'
+        ]).
+        pipe
+        (
+            switchMap((translations: Record<string, string>) =>
+                from(this.actionSheet.create
+                  ({
+                      header: translations['action.go.interest.title'],
 
-      this.store.dispatch([
-        new ActionEventSetId(CoreEnum.IdNew),
-        new ActionAppLoadingShow()
-      ]).pipe(
-        switchMap(() => this.store.dispatch(new ActionEventInterestAdd(interest))),
-        switchMap(() => this.store.dispatch(new ActionAppLoadingHide())),
-        switchMap(() => from(this.modal.create({
-          component: PageEventDetail,
-          componentProps: { modal: true }
-        })))
-      ).subscribe((modal: HTMLIonModalElement) => modal.present());
+                      buttons:
+                      [
+                          {
+                              text : translations['action.go.interest.new'],
+                              handler : () => this.addNew()
+                          },
+                          {
+                              text    : translations['action.go.interest.existing'],
+                              handler : () => this.addExisting()
+                          }
+                      ]
+                  }))
+            ),
+            switchMap((actionSheet: HTMLIonActionSheetElement) =>
+                actionSheet.present()
+            )
+        ).
+        subscribe();
+    }
+
+    public addNew(): void
+    {
+        const interest: Interest = this.store.selectSnapshot(StateInterest.data());
+
+        this.store.dispatch
+        ([
+            new ActionEventSetId(CoreEnum.IdNew),
+            new ActionAppLoadingShow()
+        ]).
+        pipe
+        (
+            switchMap(() =>
+                this.store.dispatch(new ActionEventInterestAdd(interest))
+            ),
+            switchMap(() =>
+                this.store.dispatch(new ActionAppLoadingHide())
+            ),
+            switchMap(() =>
+                from(this.modal.create
+                ({
+                    component: PageEventDetail,
+                    componentProps: { modal: true }
+                }))
+            )
+        ).
+        subscribe((modal: HTMLIonModalElement) =>
+            modal.present()
+        );
+    }
+
+    public addExisting(): void
+    {
+        this.store.dispatch(new ActionUserEventsFilter()).
+        pipe
+        (
+            switchMap(() =>
+                from(this.modal.create
+                ({
+                    component: PageEventSelector,
+                    componentProps: { modal: true }
+                }))
+            )
+        ).
+        subscribe((modal: HTMLIonModalElement) =>
+            modal.present()
+        );
     }
 
     public save(): void
@@ -134,24 +203,25 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         this.store.dispatch(new ActionAppLoadingShow()).
         pipe
         (
-            switchMap(() => this.store.dispatch(new ActionEventGet(event.id))),
-            switchMap(() => this.store.dispatch([
-              new ActionAppLoadingHide(),
-              new Navigate([Pages.NotificationDetail, event.id], {isEvent: true})
-            ]))
-        ).subscribe();
-    }
-
-    public addEvent(): void{
-        this.store.dispatch(new Navigate([Pages.EventSelector]));
+            switchMap(() =>
+                this.store.dispatch(new ActionEventGet(event.id))
+            ),
+            switchMap(() =>
+                this.store.dispatch
+                ([
+                    new ActionAppLoadingHide(),
+                    new Navigate([Pages.NotificationDetail, event.id], {isEvent: true})
+                ])
+            )
+        ).
+        subscribe();
     }
 
     public edit(): void
     {
-      const interest: Interest = this.store.selectSnapshot(StateInterest.data());
-      this.store.dispatch([
-        new Navigate([Pages.AssetInterest], {id: interest.id}, {state: {isInterestDetail:true}})
-      ]).subscribe();
+        const interest: Interest = this.store.selectSnapshot(StateInterest.data());
+
+        this.store.dispatch(new Navigate([Pages.AssetInterest], {id: interest.id}, {state: {isInterestDetail:true}}));
     }
 
     public delete(): void
@@ -208,15 +278,17 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         (
             switchMap(() => this.store.dispatch(new ActionEventAccept(interest))),
             switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
-        ).subscribe();
+        ).
+        subscribe();
     }
 
     public denyEvent(event: Event): void
     {
-      this.store.dispatch(new ActionEventSetIdAnonymousPending(event.id)).pipe
-      (
-        switchMap(() => this.store.dispatch(new ActionEventDeny())),
-        switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
-      ).subscribe();
+        this.store.dispatch(new ActionEventSetIdAnonymousPending(event.id)).pipe
+        (
+          switchMap(() => this.store.dispatch(new ActionEventDeny())),
+          switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous()))
+        ).
+        subscribe();
     }
 }

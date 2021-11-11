@@ -42,6 +42,7 @@ import { Collection, ImageType } from '@firefly/core/enums';
 import { SetFormPristine } from '@ngxs/form-plugin';
 import { LngLatLike } from 'mapbox-gl';
 import { StateUserAlerts } from '../../child';
+import { ActionEventInterestRemove } from '@firefly/core';
 
 @State<StateEventModel>(StateEventOptions)
 @Injectable()
@@ -72,6 +73,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 draft          : false,
                 geopoint       : null,
                 interests      : [],
+                interestsPending : [],
                 name           : null,
                 notifyComplete : false,
                 placeType      : null,
@@ -402,35 +404,60 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Action(ActionEventInterestAdd)
-    interestAdd({ dispatch }: StateContext<StateEventModel>, { interest }: ActionEventInterestAdd)
+    interestAdd({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending }: ActionEventInterestAdd)
     {
-        return dispatch(new ActionEventPatch({ interests: [interest.id]}));
+        const key: string = pending ? 'interestsPending' : 'interests';
+
+        const interests: Array<string> = StateEvent.dataState(getState())[key];
+
+        interests.push(interest.id);
+
+        return dispatch(new ActionEventPatch({ [key]: interests }));
+    }
+
+    @Action(ActionEventInterestRemove)
+    interestRemove({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending }: ActionEventInterestRemove)
+    {
+        const key        : string = pending ? 'interestsPending' : 'interests';
+        const interestId : string = interest.id;
+
+        const interests: Array<string> = StateEvent.
+            dataState(getState())[key].
+            filter((id: string) =>
+                id !== interestId
+            );
+
+        return dispatch(new ActionEventPatch({ [key]: interests }));
     }
 
     @Action(ActionEventAccept)
     eventAccept({ dispatch, getState }: StateContext<StateEventModel>, { interest }: ActionEventInterestAdd)
     {
-        const patch: Record<string, any> = { draft: false };
-        const event: Event               = StateEvent.dataState(getState());
-
-        if (interest != null && !event.interests.includes(interest.id))
-        {
-            patch.interests = [
-                ...event.interests,
-                interest.id
-            ]
-        }
-
-        return dispatch(new ActionEventPatch(patch, true))
+        return dispatch
+        ([
+            new ActionEventInterestAdd(interest),
+            new ActionEventInterestRemove(interest, true)
+        ]).
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new ActionEventPatch(StateEvent.dataState(getState()), true))
+            )
+        );
     }
 
     @Action(ActionEventDeny)
-    eventDeny({ dispatch }: StateContext<StateEventModel>)
+    eventDeny({ dispatch, getState }: StateContext<StateEventModel>)
     {
-      const interestId: Interest = this.store.selectSnapshot(StateInterest.data());
-      const interests = this.store.selectSnapshot(StateEvent.interests).filter((interest) => !interest.includes(interestId.id));
+        const interest: Interest = this.store.selectSnapshot(StateInterest.data());
 
-      return dispatch(new ActionEventPatch({ interests }, true))
+        return dispatch(new ActionEventInterestRemove(interest, true)).
+        pipe
+        (
+            switchMap(() =>
+                dispatch(new ActionEventPatch(StateEvent.dataState(getState()), true))
+            )
+        );
     }
 
     @Action(ActionEventTimeSet)

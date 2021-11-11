@@ -19,7 +19,7 @@ export const routes: Routes =
     { path: Pages.EventSelector,      loadChildren: () => import('@firefly/page').then(m => ModulePageEventSelector) },
     { path: Pages.NotificationDetail, loadChildren: () => import('@firefly/page').then(m => ModulePageNotificationDetail) },
     { path: Pages.InterestDetail,     loadChildren: () => import('@firefly/page').then(m => ModulePageInterestDetail) },
-    { path: Pages.UserProfile,        loadChildren:() => import('@firefly/page').then(m => ModulePageUserProfile) }
+    { path: Pages.UserProfile,        loadChildren: () => import('@firefly/page').then(m => ModulePageUserProfile) }
 ];
 
 @NgModule

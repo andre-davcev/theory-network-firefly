@@ -50,6 +50,10 @@
   "action.go.call"     : "Call",
   "action.go.website"  : "Open Website",
 
+  "action.go.interest.title"    : "Add Event",
+  "action.go.interest.new"      : "Create New",
+  "action.go.interest.existing" : "Choose Existing",
+
   "alert.confirm.delete.header"   : "Would you like to delete this",
   "alert.confirm.delete.message"  : "You cannot undo this action.",
   "alert.confirm.delete.cancel"   : "Cancel",
@@ -133,6 +137,8 @@
   "page.event.updateError"            : "An error occurred updating the event!",
 
   "page.event.detail.title" : "Event Detail",
+
+  "page.event-selector.title" : "Select Event",
 
   "page.event-categories.title"    : "Categories",
 
