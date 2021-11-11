@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUser, ActionInterestSetIdAnonymous, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionInterestGet, ActionAppLoadingShow, ActionInterestsPage, StateInterests, ActionInterestsSubscriptionToggle, ActionInterestsSubscriptionOnOff } from '@firefly/core';
+import { StateUser, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionInterestGet, ActionAppLoadingShow, ActionInterestsPage, StateInterests, ActionInterestsSubscriptionToggle, ActionInterestsSubscriptionOnOff, ActionInterestSetId } from '@firefly/core';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
@@ -81,7 +81,7 @@ export class PageStream extends BaseComponent implements OnInit
         this.currentlyOpenedItems[itemIndex] = true;
         this.spinner[itemIndex] = true;
 
-        this.store.dispatch(new ActionInterestSetIdAnonymous(interest.id)).pipe
+        this.store.dispatch(new ActionInterestSetId(interest.id)).pipe
         (
           switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous())),
           tap(() => {

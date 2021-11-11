@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 
-import { ActionInterestSetId, ActionInterestEventsGetAnonymous, ActionAppLoadingHide } from '@firefly/core';
+import { ActionInterestSetId, ActionInterestEventsGetAnonymous, ActionAppLoadingHide, StateInterest, ActionInterestEventsGetPending } from '@firefly/core';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
@@ -19,7 +19,12 @@ export class ResolverPageInterestDetail implements Resolve<void>
             switchMap(() =>
                 route.queryParams.id == null ?
                     of(null) :
-                    this.store.dispatch(new ActionInterestEventsGetAnonymous())
+                    this.store.selectSnapshot(StateInterest.canEdit) ?
+                        this.store.dispatch([
+                            new ActionInterestEventsGetPending(),
+                            new ActionInterestEventsGetAnonymous()
+                        ]) :
+                        this.store.dispatch(new ActionInterestEventsGetAnonymous())
             ),
             switchMap(() =>
                 this.store.dispatch(new ActionAppLoadingHide())

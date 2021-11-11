@@ -23,8 +23,8 @@ export enum ActionsInterest
     ImagesUpdate = '[Interest] Images Update',
     ImageSet     = '[Interest] Image Set',
 
-    EventsGet = '[Interest] Events Get',
-    EventsReset = '[Interest] Events Reset',
-
+    EventsGet          = '[Interest] Events Get',
+    EventsGetPending   = '[Interest] Events Get Pending',
     EventsGetAnonymous = '[Interest] Events Get Anonymous',
+    EventsSet          = '[Interest] Events Set'
 }
