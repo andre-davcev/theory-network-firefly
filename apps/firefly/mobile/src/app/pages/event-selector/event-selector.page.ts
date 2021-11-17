@@ -1,12 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { ActionCalendarPage, ActionEventInterestAdd, ActionEventSetId, StateCalendar, StateInterest } from '@firefly/core';
+import { ActionCalendarPage, StateCalendar } from '@firefly/core';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Observable } from 'rxjs';
-import { Alert, DateEvents, Interest } from '@firefly/cloud';
-import { switchMap } from 'rxjs/operators';
+import { Alert, DateEvents } from '@firefly/cloud';
 
 @Component
 ({
@@ -35,23 +34,7 @@ export class PageEventSelector
 
     public select(event: Alert): void
     {
-        const interest: Interest = this.store.selectSnapshot(StateInterest.data());
-
-        this.store.dispatch(new ActionEventSetId(event.id)).
-        pipe
-        (
-            switchMap(() =>
-                this.store.dispatch(new ActionEventInterestAdd(interest, true))
-            )
-        ).
-        subscribe(() =>
-            this.modal.dismiss()
-        );
-
-        // ToDo: Add to interest.state.ts (eventsPending if not owner) (events if owner)
-        // ToDo: Save the interest to the database?
-        // ToDo: Add confirm message here?
-        // ToDo: Also add new scenarios from new features
+        this.modal.dismiss(event)
     }
 
     public cancel(): void

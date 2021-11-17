@@ -404,19 +404,22 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Action(ActionEventInterestAdd)
-    interestAdd({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending }: ActionEventInterestAdd)
+    interestAdd({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending, save }: ActionEventInterestAdd)
     {
         const key: string = pending ? 'interestsPending' : 'interests';
 
-        const interests: Array<string> = StateEvent.dataState(getState())[key];
+        const interests : Array<string> = StateEvent.dataState(getState())[key];
+        const id        : string        = interest.id;
+
+        if (interests.includes(id)) { return of(null); }
 
         interests.push(interest.id);
 
-        return dispatch(new ActionEventPatch({ [key]: interests }));
+        return dispatch(new ActionEventPatch({ [key]: interests }, save));
     }
 
     @Action(ActionEventInterestRemove)
-    interestRemove({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending }: ActionEventInterestRemove)
+    interestRemove({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending, save }: ActionEventInterestRemove)
     {
         const key        : string = pending ? 'interestsPending' : 'interests';
         const interestId : string = interest.id;
@@ -427,21 +430,18 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 id !== interestId
             );
 
-        return dispatch(new ActionEventPatch({ [key]: interests }));
+        return dispatch(new ActionEventPatch({ [key]: interests }, save));
     }
 
     @Action(ActionEventAccept)
-    eventAccept({ dispatch, getState }: StateContext<StateEventModel>, { interest }: ActionEventInterestAdd)
+    eventAccept({ dispatch }: StateContext<StateEventModel>, { interest }: ActionEventInterestAdd)
     {
-        return dispatch
-        ([
-            new ActionEventInterestAdd(interest),
-            new ActionEventInterestRemove(interest, true)
-        ]).
+
+        return dispatch(new ActionEventInterestRemove(interest, true)).
         pipe
         (
             switchMap(() =>
-                dispatch(new ActionEventPatch(StateEvent.dataState(getState()), true))
+                dispatch(new ActionEventInterestAdd(interest, false, true))
             )
         );
     }
