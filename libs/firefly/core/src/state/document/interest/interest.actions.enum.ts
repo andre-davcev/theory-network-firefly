@@ -26,5 +26,6 @@ export enum ActionsInterest
     EventsGet          = '[Interest] Events Get',
     EventsGetPending   = '[Interest] Events Get Pending',
     EventsGetAnonymous = '[Interest] Events Get Anonymous',
-    EventsSet          = '[Interest] Events Set'
+    EventsSet          = '[Interest] Events Set',
+    EventsAdd          = '[Interest] Events Add'
 }

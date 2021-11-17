@@ -294,7 +294,7 @@ export class PageEventDetail
 
             if(this.modal)
             {
-              this.modalController.dismiss();
+              this.modalController.dismiss(this.store.selectSnapshot(StateEvent.data()));
             }
             else
               this.navController.back();

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
-import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
+import { switchMap, catchError, map, finalize, takeUntil, tap, filter } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, ActionEventInterestAdd, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymousPending, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide, ActionUserEventsFilter } from '@firefly/core';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymousPending, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide, ActionInterestEventsAdd } from '@firefly/core';
 import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileToast } from '@firefly/mobile';
@@ -90,11 +90,11 @@ export class PageInterestDetail extends BaseComponent implements OnInit
                       [
                           {
                               text : translations['action.go.interest.new'],
-                              handler : () => this.addNew()
+                              handler : () => this.addEvent(false)
                           },
                           {
                               text    : translations['action.go.interest.existing'],
-                              handler : () => this.addExisting()
+                              handler : () => this.addEvent(true)
                           }
                       ]
                   }))
@@ -106,57 +106,44 @@ export class PageInterestDetail extends BaseComponent implements OnInit
         subscribe();
     }
 
-    public addNew(): void
+    public addEvent(existing: boolean): void
     {
-        const interest: Interest = this.store.selectSnapshot(StateInterest.data());
-
-        this.store.dispatch
-        ([
-            new ActionEventSetId(CoreEnum.IdNew),
-            new ActionAppLoadingShow()
-        ]).
+        (existing ?
+            of(null) :
+            this.store.dispatch(new ActionEventSetId(CoreEnum.IdNew))
+        ).
         pipe
         (
             switchMap(() =>
-                this.store.dispatch(new ActionEventInterestAdd(interest))
-            ),
-            switchMap(() =>
-                this.store.dispatch(new ActionAppLoadingHide())
+                this.store.dispatch(new ActionAppLoadingShow())
             ),
             switchMap(() =>
                 from(this.modal.create
                 ({
-                    component: PageEventDetail,
+                    component: existing ? PageEventSelector : PageEventDetail,
                     componentProps: { modal: true }
                 }))
+            ),
+            switchMap((modal: HTMLIonModalElement) =>
+                from(modal.present()).
+                pipe
+                (
+                    tap(() =>
+                        this.store.dispatch(new ActionAppLoadingHide())
+                    ),
+                    switchMap(() =>
+                        from(modal.onDidDismiss())
+                    ),
+                    filter((event: any) =>
+                        event != null
+                    ),
+                    switchMap((event: Event) =>
+                        this.store.dispatch(new ActionInterestEventsAdd(event))
+                    )
+                )
             )
         ).
-        subscribe((modal: HTMLIonModalElement) =>
-            modal.present()
-        );
-
-        // ToDo: Do modals allow return values?
-        // ToDo: Add to interest.state.ts (eventsPending if not owner) (events if owner)
-        // ToDo: Save the interest to the database?
-        // ToDo: Add confirm message here?
-    }
-
-    public addExisting(): void
-    {
-        this.store.dispatch(new ActionUserEventsFilter()).
-        pipe
-        (
-            switchMap(() =>
-                from(this.modal.create
-                ({
-                    component: PageEventSelector,
-                    componentProps: { modal: true }
-                }))
-            )
-        ).
-        subscribe((modal: HTMLIonModalElement) =>
-            modal.present()
-        );
+        subscribe();
     }
 
     public save(): void

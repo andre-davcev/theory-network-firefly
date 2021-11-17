@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 
 
 export class GeoPoint  extends firebase.default.firestore.GeoPoint  {};

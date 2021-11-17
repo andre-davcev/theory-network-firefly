@@ -26,7 +26,8 @@ import {
     ActionInterestImagesUpdate,
     ActionInterestImageSet,
     ActionInterestEventsSet,
-    ActionInterestEventsGetPending
+    ActionInterestEventsGetPending,
+    ActionInterestEventsAdd
 } from './interest.actions';
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, ActionUserInterestsSync } from '../..//query/user-interests';
 import { ActionCityStreamRemove, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
@@ -39,6 +40,7 @@ import { Query } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Collection, ImageType } from '@firefly/core/enums';
 import { StateInterests } from '../../composite/interests/interests.state';
+import { ActionEventInterestAdd, ActionEventSetId } from '../event/event.actions';
 
 @State<StateInterestModel>(StateInterestOptions)
 @Injectable()
@@ -291,6 +293,30 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
       )
     }
 
+    @Action(ActionInterestEventsAdd)
+    eventsAdd({ dispatch, getState, patchState }: StateContext<StateInterestModel>, { event }: ActionInterestEventsAdd)
+    {
+        const state     : StateInterestModel    = getState();
+        const interest  : Interest              = StateInterest.dataState(state);
+        const isOwner   : boolean               = event.userId == interest.userId;
+        const eventsKey : string                = isOwner ? 'events' : 'eventsPending';
+        const events    : Record<string, Event> = state[eventsKey];
+
+        events[event.id] = event;
+
+        return dispatch(new ActionEventSetId(event.id)).
+        pipe
+        (
+            map(() =>
+                patchState({ [eventsKey]: events })
+            ),
+            switchMap(() =>
+                dispatch(new ActionEventInterestAdd(interest, !isOwner, true))
+            )
+        );
+    }
+
+
     @Action(ActionInterestImagesUpdate)
     imagesUpdate(context : StateContext<StateInterestModel>)
     {
@@ -306,9 +332,11 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
       return dispatch(new ActionInterestPatchMetadata({})).
       pipe
       (
-          switchMap(() => this.storage.downloadUrl(`${Collection.Interests}/${interest.id}/${ImageType.Image}.jpeg`, ImageSize.Medium)),
+          switchMap(() =>
+              this.storage.downloadUrl(`${Collection.Interests}/${interest.id}/${ImageType.Image}.jpeg`, ImageSize.Medium)
+          ),
           switchMap((image: string) =>
-              dispatch(new ActionInterestPatchMetadata( { image } ))
+              dispatch(new ActionInterestPatchMetadata({ image }))
           )
       );
     }
