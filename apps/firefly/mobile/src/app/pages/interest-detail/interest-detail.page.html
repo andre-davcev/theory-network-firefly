@@ -100,5 +100,5 @@
             </ion-list>
         </div>
 
-    <app-button-add *ngIf="(isPublisher$ | async) && (canEdit$ | async)" (clicked)="add()" slot="fixed"></app-button-add>
+    <app-button-add *ngIf="isPublisher$ | async" (clicked)="add()" slot="fixed"></app-button-add>
 </ion-content>

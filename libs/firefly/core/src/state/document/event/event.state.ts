@@ -404,12 +404,14 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Action(ActionEventInterestAdd)
-    interestAdd({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending, save }: ActionEventInterestAdd)
+    interestAdd({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending }: ActionEventInterestAdd)
     {
         const key: string = pending ? 'interestsPending' : 'interests';
 
-        const interests : Array<string> = StateEvent.dataState(getState())[key];
+        const interests : Array<string> = StateEvent.dataState(getState())[key] || [];
         const id        : string        = interest.id;
+
+        const save: boolean = id !== CoreEnum.IdNew;
 
         if (interests.includes(id)) { return of(null); }
 
@@ -419,10 +421,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     }
 
     @Action(ActionEventInterestRemove)
-    interestRemove({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending, save }: ActionEventInterestRemove)
+    interestRemove({ dispatch, getState }: StateContext<StateEventModel>, { interest, pending }: ActionEventInterestRemove)
     {
         const key        : string = pending ? 'interestsPending' : 'interests';
         const interestId : string = interest.id;
+
+        const save: boolean = interestId !== CoreEnum.IdNew;
 
         const interests: Array<string> = StateEvent.
             dataState(getState())[key].
@@ -441,7 +445,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
         pipe
         (
             switchMap(() =>
-                dispatch(new ActionEventInterestAdd(interest, false, true))
+                dispatch(new ActionEventInterestAdd(interest, false))
             )
         );
     }

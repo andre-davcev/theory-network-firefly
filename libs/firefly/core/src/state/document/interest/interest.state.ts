@@ -41,6 +41,7 @@ import { Injectable } from '@angular/core';
 import { Collection, ImageType } from '@firefly/core/enums';
 import { StateInterests } from '../../composite/interests/interests.state';
 import { ActionEventInterestAdd, ActionEventSetId } from '../event/event.actions';
+import { InterestEvents } from './interest.events.enum';
 
 @State<StateInterestModel>(StateInterestOptions)
 @Injectable()
@@ -203,7 +204,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
             ref.
             where('interests', 'array-contains', StateInterest.idState(getState()));
 
-        return dispatch(new ActionInterestEventsSet(query, 'events'));
+        return dispatch(new ActionInterestEventsSet(query, InterestEvents.Confirmed));
     }
 
     @Action(ActionInterestEventsGetPending)
@@ -221,7 +222,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
             where('timeStart', '>', new Date()).
             orderBy('timeStart', 'asc');
 
-        return dispatch(new ActionInterestEventsSet(query, 'eventsPending'));
+        return dispatch(new ActionInterestEventsSet(query, InterestEvents.Pending));
     }
 
     @Action(ActionInterestEventsGetAnonymous)
@@ -240,7 +241,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
             orderBy('timeStart', 'asc').
             limit(5);
 
-        return dispatch(new ActionInterestEventsSet(query, 'events'));
+        return dispatch(new ActionInterestEventsSet(query, InterestEvents.Confirmed));
     }
 
     @Action(ActionInterestEventsSet)
@@ -296,13 +297,16 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
     @Action(ActionInterestEventsAdd)
     eventsAdd({ dispatch, getState, patchState }: StateContext<StateInterestModel>, { event }: ActionInterestEventsAdd)
     {
-        const state     : StateInterestModel    = getState();
-        const interest  : Interest              = StateInterest.dataState(state);
-        const isOwner   : boolean               = event.userId == interest.userId;
-        const eventsKey : string                = isOwner ? 'events' : 'eventsPending';
-        const events    : Record<string, Event> = state[eventsKey];
+        const state          : StateInterestModel           = getState();
+        const interest       : Interest                     = StateInterest.dataState(state);
+        const id             : string                       = StateInterest.idState(state);
+        const isOwner        : boolean                      = event.userId == interest.userId;
+        const eventsKey      : string                       = isOwner ? InterestEvents.Confirmed : InterestEvents.Pending;
+        const events         : Record<string, Array<Event>> = state[eventsKey];
+        const interestEvents : Array<Event>                 = events[id] || [];
 
-        events[event.id] = event;
+        interestEvents.unshift(event);
+        events[id]  = interestEvents;
 
         return dispatch(new ActionEventSetId(event.id)).
         pipe
@@ -311,7 +315,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
                 patchState({ [eventsKey]: events })
             ),
             switchMap(() =>
-                dispatch(new ActionEventInterestAdd(interest, !isOwner, true))
+                dispatch(new ActionEventInterestAdd(interest, !isOwner))
             )
         );
     }

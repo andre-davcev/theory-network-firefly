@@ -5,7 +5,7 @@ import { switchMap, catchError, map, finalize, takeUntil, tap, filter } from 'rx
 import { Select, Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionEventSetId, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymousPending, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide, ActionInterestEventsAdd } from '@firefly/core';
+import { StateInterest, ActionInterestSave, StateUserEvents, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymousPending, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide, ActionInterestEventsAdd, ActionEventSetId, ActionUserEventsGetData } from '@firefly/core';
 import { Pages } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
 import { ActionMobileToast } from '@firefly/mobile';
@@ -108,14 +108,16 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public addEvent(existing: boolean): void
     {
-        (existing ?
-            of(null) :
-            this.store.dispatch(new ActionEventSetId(CoreEnum.IdNew))
-        ).
+
+        this.store.dispatch(new ActionAppLoadingShow()).
         pipe
         (
-            switchMap(() =>
-                this.store.dispatch(new ActionAppLoadingShow())
+            map(() =>
+                !existing ?
+                    this.store.dispatch(new ActionEventSetId(CoreEnum.IdNew)) :
+                    this.store.selectSnapshot(StateUserEvents.initialized()) ?
+                        of(null) :
+                        this.store.dispatch(new ActionUserEventsGetData())
             ),
             switchMap(() =>
                 from(this.modal.create
@@ -134,7 +136,10 @@ export class PageInterestDetail extends BaseComponent implements OnInit
                     switchMap(() =>
                         from(modal.onDidDismiss())
                     ),
-                    filter((event: any) =>
+                    map((select: any) =>
+                        select.data
+                    ),
+                    filter((event: Event) =>
                         event != null
                     ),
                     switchMap((event: Event) =>

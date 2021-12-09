@@ -129,6 +129,7 @@
   "page.event.subtitlePlaceholder"    : "Add your subtitle",
   "page.event.iconPlaceholder"        : "select icon",
   "page.event.imagePlaceholder"       : "select image",
+  "page.event.imageTitlePlaceholder"  : "Notification Image",
   "page.event.descriptionPlaceholder" : "Write a description ...",
   "page.event.timeNotify"             : "Notification Time",
   "page.event.createdSuccess"         : "Event was successfully created!",
