@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { ActionCalendarPage, StateCalendar } from '@firefly/core';
+import { ActionCalendarPage, ActionCalendarSetType, EventType, StateCalendar } from '@firefly/core';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
@@ -21,6 +21,8 @@ export class PageEventSelector
     @ViewChild(IonInfiniteScroll)
     private infiniteScroll: IonInfiniteScroll;
 
+    private type: EventType;
+
     constructor
     (
         private store: Store,
@@ -29,16 +31,21 @@ export class PageEventSelector
 
     public ionViewWillEnter(): void
     {
+        this.type = this.store.selectSnapshot(StateCalendar.type);
+
+        this.store.dispatch(new ActionCalendarSetType(EventType.Created));
         this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
     }
 
     public select(event: Alert): void
     {
+        this.store.dispatch(new ActionCalendarSetType(this.type));
         this.modal.dismiss(event)
     }
 
     public cancel(): void
     {
+        this.store.dispatch(new ActionCalendarSetType(this.type));
         this.modal.dismiss();
     }
 
