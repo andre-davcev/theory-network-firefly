@@ -26,4 +26,10 @@
                                     [loadingText]="'page.calendar.loading' | translate">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
+
+    <app-icon-message *ngIf="!(exists$ | async)"
+        slot="fixed"
+        [icon]="IconType.Alerts"
+        [message]="'page.events.empty.created' | translate">
+    </app-icon-message>
 </ion-content>

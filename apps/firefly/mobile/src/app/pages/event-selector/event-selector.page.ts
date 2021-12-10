@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { ActionCalendarPage, ActionCalendarSetType, EventType, StateCalendar } from '@firefly/core';
+import { ActionCalendarPage, ActionCalendarSetType, EventType, IconType, StateCalendar } from '@firefly/core';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
@@ -16,12 +16,15 @@ import { Alert, DateEvents } from '@firefly/cloud';
 
 export class PageEventSelector
 {
-    @Select(StateCalendar.data) data$: Observable<Array<DateEvents>>;
+    @Select(StateCalendar.data)   data$   : Observable<Array<DateEvents>>;
+    @Select(StateCalendar.exists) exists$ : Observable<boolean>;
 
     @ViewChild(IonInfiniteScroll)
     private infiniteScroll: IonInfiniteScroll;
 
     private type: EventType;
+
+    public IconType: any = IconType;
 
     constructor
     (

@@ -40,7 +40,7 @@ import { Query } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Collection, ImageType } from '@firefly/core/enums';
 import { StateInterests } from '../../composite/interests/interests.state';
-import { ActionEventInterestAdd, ActionEventSetId } from '../event/event.actions';
+import { ActionEventInterestAdd } from '../event/event.actions';
 import { InterestEvents } from './interest.events.enum';
 
 @State<StateInterestModel>(StateInterestOptions)
@@ -308,14 +308,11 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
         interestEvents.unshift(event);
         events[id]  = interestEvents;
 
-        return dispatch(new ActionEventSetId(event.id)).
+        return dispatch(new ActionEventInterestAdd(interest, !isOwner)).
         pipe
         (
-            map(() =>
+            tap(() =>
                 patchState({ [eventsKey]: events })
-            ),
-            switchMap(() =>
-                dispatch(new ActionEventInterestAdd(interest, !isOwner))
             )
         );
     }
