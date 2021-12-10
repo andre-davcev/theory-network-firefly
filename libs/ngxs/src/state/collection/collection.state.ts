@@ -259,10 +259,11 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     {
         const imageSize: ImageSize = imageType === ImageType.Icon ? ImageSize.Small : ImageSize.Medium;
 
-        const state: M = context.getState();
+        const { getState, patchState } = context
+        const state: M = getState();
 
-        const data   : Array<T>          = StateCollection.dataState(state);
-        const lookup : Record<string, T> = StateCollection.dataLookupState(state);
+        const data       : Array<T>          = StateCollection.dataState(state);
+        const dataLookup : Record<string, T> = StateCollection.dataLookupState(state);
 
         return of(data).
         pipe
@@ -286,13 +287,16 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
                                 item.metadata[imageType] = image
                             ),
                             tap(() =>
-                                lookup[item.id] = item
+                                dataLookup[item.id] = item
                             )
                         )
                     )
             ),
             switchMap((items$: Array<Observable<string>>) =>
                 forkJoin(items$)
+            ),
+            map(() =>
+                patchState({ data, dataLookup } as M)
             )
         );
     }
