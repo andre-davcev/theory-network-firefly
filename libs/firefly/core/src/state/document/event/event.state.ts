@@ -252,11 +252,20 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventCreate)
     create(context: StateContext<StateEventModel>)
     {
+        const { getState, dispatch } = context;
+
         return super.create(context).
         pipe
         (
-            switchMap(() =>
-                context.dispatch(new ActionEventImagesUpdate())
+            map(() =>
+                StateEvent.snapshotState(getState())
+            ),
+            switchMap((snapshot: DocumentSnapshot) =>
+                dispatch
+                ([
+                    new ActionUserEventsAdd(snapshot),
+                    new ActionEventImagesUpdate()
+                ])
             )
         );
     }
