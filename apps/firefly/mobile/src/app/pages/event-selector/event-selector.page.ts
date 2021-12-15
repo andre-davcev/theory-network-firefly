@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { ActionCalendarPage, ActionCalendarSetType, EventType, IconType, StateCalendar } from '@firefly/core';
+import { ActionCalendarPage, ActionCalendarSetType, ActionEventSet, EventType, IconType, StateCalendar, StateUserEvents } from '@firefly/core';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { Alert, DateEvents } from '@firefly/cloud';
+import { switchMap } from 'rxjs/operators';
 
 @Component
 ({
@@ -42,8 +43,20 @@ export class PageEventSelector
 
     public select(event: Alert): void
     {
-        this.store.dispatch(new ActionCalendarSetType(this.type));
-        this.modal.dismiss(event)
+        const snapshot = this.store.selectSnapshot(StateUserEvents.snapshotLookup())[event.id];
+
+        this.store.dispatch
+        ([
+            new ActionCalendarSetType(this.type),
+            new ActionEventSet(snapshot)
+        ]).
+        pipe
+        (
+            switchMap(() =>
+                from(this.modal.dismiss(event))
+            )
+        ).
+        subscribe()
     }
 
     public cancel(): void
