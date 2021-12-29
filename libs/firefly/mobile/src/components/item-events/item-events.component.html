@@ -1,4 +1,4 @@
-<ion-item-group>
+<ion-item-group *ngIf="dateEvents?.date">
     <ion-item-divider>
         <ion-label>{{ dateEvents.date | timestamp: TimestampFormat.DateLong }}</ion-label>
     </ion-item-divider>

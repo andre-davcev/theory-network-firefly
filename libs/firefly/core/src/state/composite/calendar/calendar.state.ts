@@ -77,7 +77,16 @@ export class StateCalendar
                 timeStartPrevious = timeStart;
             });
 
-        if (eventsList.length > 0 || events.length === 1)
+        if (eventsList.length === 0 && events.length > 0)
+        {
+            current =
+            {
+                date   : events[0].timeStart,
+                events
+            };
+        }
+
+        if (current != null)
         {
             eventsList.push(current);
         };

@@ -205,22 +205,23 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
                 patchState({ snapshot } as M)
             ),
 
-            map((snapshot: FirestoreDocumentSnapshot) =>
+            switchMap((snapshot: FirestoreDocumentSnapshot) =>
+            {
+                const object: T =
                 ({
                     ...snapshot.data(),
 
                     id: snapshot.id,
                     metadata: { ...value.metadata }
-                }) as T
-            ),
-            switchMap((object: T) =>
-                dispatch
+                }) as T;
+
+                return dispatch
                 ([
                     new UpdateFormValue({ value: object, path }),
                     ...this.ActionsCreate(),
-                    ...this.ActionsQueryAdd(null, object)
-                ])
-            ),
+                    ...this.ActionsQueryAdd(snapshot, object)
+                ]);
+            }),
             map(() =>
                 true
             )
