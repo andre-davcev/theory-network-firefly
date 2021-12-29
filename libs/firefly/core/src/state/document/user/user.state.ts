@@ -274,7 +274,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     }
 
     @Action(ActionUserAnonymousLogin)
-    anonymousLogin({ dispatch, patchState, getState }: StateContext<StateUserModel>)
+    anonymousLogin({ dispatch, getState }: StateContext<StateUserModel>)
     {
         const initialized: boolean = StateUser.initialized(getState());
 
@@ -455,7 +455,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     {
         const { patchState, dispatch } = context;
 
-        patchState({ error: null });
+        patchState({ error: null, authData: null });
 
         return of(this.auth.signOut()).
         pipe
