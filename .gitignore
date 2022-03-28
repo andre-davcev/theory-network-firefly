@@ -68,3 +68,4 @@ apps/*/cloud/lib
 
 # custom
 algolia.txt
+.angular/
