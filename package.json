@@ -7,6 +7,8 @@
     "fire-ionic-build-prod": "npm run build.ionic.firefly.prod",
     "fire-ionic-watch": "ng build ionic-firefly --watch",
     "fire-ionic-serve": "ionic serve ionic-firefly --watch",
+    "fire-ionic-serve-ios": "ionic serve ionic-firefly --watch --platform ios",
+    "fire-ionic-serve-android": "ionic serve ionic-firefly --watch android",
     "fire-ionic-serve-prod": "npm run fire-ionic-build-prod && cd apps/firefly/mobile/www && npx serve -p 8100",
     "fire-ionic-serve-lab": "ionic serve ionic-firefly --watch --lab",
     "fire-ionic-sync": "npm run sync.ionic.firefly",
