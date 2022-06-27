@@ -153,8 +153,10 @@ onRun(async (context: EventContext) =>
 
     if (debug)
     {
+        const timestamp: string = (new Date()).toISOString();
+
         await debugDoc.set
-        ({
+        ({[timestamp] : {
             citiesNearby,
             citiesCollection,
             cityInterests,
@@ -163,7 +165,7 @@ onRun(async (context: EventContext) =>
             interestCityEvents,
             interestSubscribers,
             eventScores
-        });
+        }});
     }
 
     return Promise.all(updates);
