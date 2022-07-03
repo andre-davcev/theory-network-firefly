@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "fire-ionic-build": "npm run build.ionic.firefly",
+    "fire-ionic-build-dev": "npm run build.ionic.firefly",
     "fire-ionic-build-prod": "npm run build.ionic.firefly.prod",
+    "fire-ionic-ios-dev-config": "cp apps/firefly/mobile/config/ios/dev/GoogleService-Info.plist apps/firefly/mobile/ios/App && cp apps/firefly/mobile/config/ios/dev/App.entitlements apps/firefly/mobile/ios/App/App",
+    "fire-ionic-ios-prd-config": "cp apps/firefly/mobile/config/ios/prd/GoogleService-Info.plist apps/firefly/mobile/ios/App && cp apps/firefly/mobile/config/ios/prd/App.entitlements apps/firefly/mobile/ios/App/App",
+    "fire-ionic-ios-dev-build": "npm run fire-ionic-ios-dev-config && npm run build.ionic.firefly",
+    "fire-ionic-ios-prd-build": "npm run fire-ionic-ios-prd-config &&  npm run build.ionic.firefly.prod",
     "fire-ionic-watch": "ng build ionic-firefly --watch",
     "fire-ionic-serve": "ionic serve ionic-firefly --watch",
     "fire-ionic-serve-ios": "ionic serve ionic-firefly --watch --platform ios",
