@@ -77,7 +77,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
                 name           : null,
                 notifyComplete : false,
                 placeType      : null,
-                private        : true,
+                private        : false,
                 tagline        : null,
                 timeNotify     : null,
                 timeStart      : null,

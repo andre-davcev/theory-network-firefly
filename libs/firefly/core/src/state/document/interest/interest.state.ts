@@ -80,7 +80,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel>
 
                 description     : null,
                 name            : null,
-                private         : true,
+                private         : false,
                 subscriberCount : 0,
                 tagline         : null,
                 virtual         : false,
