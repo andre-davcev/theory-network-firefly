@@ -30,7 +30,7 @@ export class StateApp
         StateCity.found,
         StateCityStream.cityStreamSet,
     ])
-    static initialized(userInitialized: boolean, cityFound: boolean, cityStreamSet: boolean) : boolean
+    static initialized(state: StateAppModel, userInitialized: boolean, cityFound: boolean, cityStreamSet: boolean) : boolean
     {
         return userInitialized && cityFound && cityStreamSet;
     }
