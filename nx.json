@@ -8,55 +8,27 @@
     "tsconfig.base.json": "*"
   },
   "projects": {
-    "ionic-firefly": {
-      "tags": []
-    },
-    "firefly-core": {
-      "tags": []
-    },
-    "firefly-mobile": {
-      "tags": []
-    },
-    "core": {
-      "tags": []
-    },
-    "firebase": {
-      "tags": []
-    },
-    "capacitor": {
-      "tags": []
-    },
-    "ionic": {
-      "tags": []
-    },
-    "web": {
-      "tags": []
-    },
-    "mapbox": {
-      "tags": []
-    },
-    "google": {
-      "tags": []
-    },
-    "ngxs": {
-      "tags": []
-    },
-    "apple": {
-      "tags": []
-    },
-    "bigdatacloud": {
-      "tags": []
-    }
+    "ionic-firefly": { "tags": [] },
+    "firefly-core": { "tags": [] },
+    "firefly-mobile": { "tags": [] },
+    "core": { "tags": [] },
+    "firebase": { "tags": [] },
+    "capacitor": { "tags": [] },
+    "ionic": { "tags": [] },
+    "web-firefly": { "tags": [] },
+    "mapbox": { "tags": [] },
+    "google": { "tags": [] },
+    "ngxs": { "tags": [] },
+    "apple": { "tags": [] },
+    "bigdatacloud": { "tags": [] },
+    "firefly-web": { "tags": [] },
+    "firefly-web-e2e": { "tags": [], "implicitDependencies": ["firefly-web"] }
   },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
-  "affected": {
-    "defaultBase": "master"
-  }
+  "affected": { "defaultBase": "master" }
 }

@@ -22,9 +22,7 @@
             "main": "apps/firefly/mobile/src/main.ts",
             "polyfills": "apps/firefly/mobile/src/polyfills.ts",
             "tsConfig": "apps/firefly/mobile/tsconfig.app.json",
-            "allowedCommonJsDependencies": [
-              "@mapbox/mapbox-gl-geocoder"
-            ],
+            "allowedCommonJsDependencies": ["@mapbox/mapbox-gl-geocoder"],
             "assets": [
               {
                 "glob": "**/*",
@@ -191,9 +189,7 @@
             "tsConfig": "libs/firefly/core/tsconfig.spec.json",
             "karmaConfig": "libs/firefly/core/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/firefly/core"
-          ]
+          "outputs": ["coverage/libs/firefly/core"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -202,10 +198,7 @@
               "libs/firefly/core/tsconfig.lib.json",
               "libs/firefly/core/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/firefly/core/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/firefly/core/**/*"]
           }
         }
       }
@@ -231,9 +224,7 @@
             "tsConfig": "libs/firefly/mobile/tsconfig.spec.json",
             "karmaConfig": "libs/firefly/mobile/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/firefly/mobile"
-          ]
+          "outputs": ["coverage/libs/firefly/mobile"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -242,10 +233,7 @@
               "libs/firefly/mobile/tsconfig.lib.json",
               "libs/firefly/mobile/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/firefly/mobile/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/firefly/mobile/**/*"]
           }
         }
       }
@@ -271,9 +259,7 @@
             "tsConfig": "libs/core/tsconfig.spec.json",
             "karmaConfig": "libs/core/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/core"
-          ]
+          "outputs": ["coverage/libs/core"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -282,10 +268,7 @@
               "libs/core/tsconfig.lib.json",
               "libs/core/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/core/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/core/**/*"]
           }
         }
       }
@@ -311,9 +294,7 @@
             "tsConfig": "libs/firebase/tsconfig.spec.json",
             "karmaConfig": "libs/firebase/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/firebase"
-          ]
+          "outputs": ["coverage/libs/firebase"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -322,10 +303,7 @@
               "libs/firebase/tsconfig.lib.json",
               "libs/firebase/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/firebase/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/firebase/**/*"]
           }
         }
       }
@@ -351,9 +329,7 @@
             "tsConfig": "libs/capacitor/tsconfig.spec.json",
             "karmaConfig": "libs/capacitor/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/capacitor"
-          ]
+          "outputs": ["coverage/libs/capacitor"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -362,10 +338,7 @@
               "libs/capacitor/tsconfig.lib.json",
               "libs/capacitor/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/capacitor/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/capacitor/**/*"]
           }
         }
       }
@@ -391,9 +364,7 @@
             "tsConfig": "libs/ionic/tsconfig.spec.json",
             "karmaConfig": "libs/ionic/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/ionic"
-          ]
+          "outputs": ["coverage/libs/ionic"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -402,15 +373,12 @@
               "libs/ionic/tsconfig.lib.json",
               "libs/ionic/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ionic/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ionic/**/*"]
           }
         }
       }
     },
-    "web": {
+    "web-firefly": {
       "root": "libs/web",
       "sourceRoot": "libs/web/src",
       "projectType": "library",
@@ -431,9 +399,7 @@
             "tsConfig": "libs/web/tsconfig.spec.json",
             "karmaConfig": "libs/web/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/web"
-          ]
+          "outputs": ["coverage/libs/web"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -442,10 +408,7 @@
               "libs/web/tsconfig.lib.json",
               "libs/web/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/web/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/web/**/*"]
           }
         }
       }
@@ -471,9 +434,7 @@
             "tsConfig": "libs/mapbox/tsconfig.spec.json",
             "karmaConfig": "libs/mapbox/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/mapbox"
-          ]
+          "outputs": ["coverage/libs/mapbox"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -482,10 +443,7 @@
               "libs/mapbox/tsconfig.lib.json",
               "libs/mapbox/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/mapbox/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/mapbox/**/*"]
           }
         }
       }
@@ -511,9 +469,7 @@
             "tsConfig": "libs/google/tsconfig.spec.json",
             "karmaConfig": "libs/google/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/google"
-          ]
+          "outputs": ["coverage/libs/google"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -522,10 +478,7 @@
               "libs/google/tsconfig.lib.json",
               "libs/google/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/google/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/google/**/*"]
           }
         }
       }
@@ -551,10 +504,7 @@
               "libs/ngxs/tsconfig.lib.json",
               "libs/ngxs/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ngxs/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ngxs/**/*"]
           }
         },
         "test": {
@@ -585,10 +535,7 @@
               "libs/apple/tsconfig.lib.json",
               "libs/apple/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/apple/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/apple/**/*"]
           }
         },
         "test": {
@@ -596,9 +543,7 @@
           "options": {
             "jestConfig": "libs/apple/jest.config.js"
           },
-          "outputs": [
-            "coverage/libs/apple"
-          ]
+          "outputs": ["coverage/libs/apple"]
         }
       }
     },
@@ -623,10 +568,7 @@
               "libs/bigdatacloud/tsconfig.lib.json",
               "libs/bigdatacloud/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/bigdatacloud/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/bigdatacloud/**/*"]
           }
         },
         "test": {
@@ -634,14 +576,126 @@
           "options": {
             "jestConfig": "libs/bigdatacloud/jest.config.js"
           },
-          "outputs": [
-            "coverage/libs/bigdatacloud"
-          ]
+          "outputs": ["coverage/libs/bigdatacloud"]
         }
       },
       "schematics": {
         "@nrwl/angular:component": {
           "styleext": "scss"
+        }
+      }
+    },
+    "firefly-web": {
+      "projectType": "application",
+      "root": "apps/firefly/web",
+      "sourceRoot": "apps/firefly/web/src",
+      "prefix": "theory",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/firefly/web",
+            "index": "apps/firefly/web/src/index.html",
+            "main": "apps/firefly/web/src/main.ts",
+            "polyfills": "apps/firefly/web/src/polyfills.ts",
+            "tsConfig": "apps/firefly/web/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/firefly/web/src/favicon.ico",
+              "apps/firefly/web/src/assets"
+            ],
+            "styles": ["apps/firefly/web/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/firefly/web/src/environments/environment.ts",
+                  "with": "apps/firefly/web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "firefly-web:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "firefly-web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "firefly-web:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/firefly/web/src/**/*.ts",
+              "apps/firefly/web/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/firefly/web"],
+          "options": {
+            "jestConfig": "apps/firefly/web/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "firefly-web-e2e": {
+      "root": "apps/firefly/web-e2e",
+      "sourceRoot": "apps/firefly/web-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/firefly/web-e2e/cypress.json",
+            "tsConfig": "apps/firefly/web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "firefly-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "firefly-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/firefly/web-e2e/**/*.{js,ts}"]
+          }
         }
       }
     }
@@ -667,11 +721,18 @@
       "framework": "express"
     },
     "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
       "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   }
 }
