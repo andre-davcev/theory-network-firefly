@@ -15,7 +15,7 @@
     "firebase": { "tags": [] },
     "capacitor": { "tags": [] },
     "ionic": { "tags": [] },
-    "web-firefly": { "tags": [] },
+    "web": { "tags": [] },
     "mapbox": { "tags": [] },
     "google": { "tags": [] },
     "ngxs": { "tags": [] },
