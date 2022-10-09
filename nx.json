@@ -8,21 +8,21 @@
     "tsconfig.base.json": "*"
   },
   "projects": {
-    "ionic-firefly": { "tags": [] },
-    "firefly-core": { "tags": [] },
     "firefly-mobile": { "tags": [] },
-    "core": { "tags": [] },
-    "firebase": { "tags": [] },
-    "capacitor": { "tags": [] },
-    "ionic": { "tags": [] },
-    "web": { "tags": [] },
-    "mapbox": { "tags": [] },
-    "google": { "tags": [] },
-    "ngxs": { "tags": [] },
-    "apple": { "tags": [] },
-    "bigdatacloud": { "tags": [] },
     "firefly-web": { "tags": [] },
-    "firefly-web-e2e": { "tags": [], "implicitDependencies": ["firefly-web"] }
+    "firefly-web-e2e": { "tags": [], "implicitDependencies": ["firefly-web"] },
+    "lib-firefly-core": { "tags": [] },
+    "lib-firefly-mobile": { "tags": [] },
+    "lib-apple": { "tags": [] },
+    "lib-bigdatacloud": { "tags": [] },
+    "lib-capacitor": { "tags": [] },
+    "lib-core": { "tags": [] },
+    "lib-firebase": { "tags": [] },
+    "lib-google": { "tags": [] },
+    "lib-ionic": { "tags": [] },
+    "lib-mapbox": { "tags": [] },
+    "lib-ngxs": { "tags": [] },
+    "lib-web": { "tags": [] }
   },
   "tasksRunnerOptions": {
     "default": {

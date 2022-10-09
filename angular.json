@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "",
   "projects": {
-    "ionic-firefly": {
+    "firefly-mobile": {
       "projectType": "application",
       "root": "apps/firefly/mobile/",
       "sourceRoot": "apps/firefly/mobile/src",
@@ -85,11 +85,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ionic-firefly:build"
+            "browserTarget": "firefly-mobile:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ionic-firefly:build:production"
+              "browserTarget": "firefly-mobile:build:production"
             },
             "ci": {
               "progress": false
@@ -99,7 +99,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ionic-firefly:build"
+            "browserTarget": "firefly-mobile:build"
           }
         },
         "test": {
@@ -145,30 +145,30 @@
         "ionic-cordova-build": {
           "builder": "@ionic/angular-toolkit:cordova-build",
           "options": {
-            "browserTarget": "ionic-firefly:build"
+            "browserTarget": "firefly-mobile:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ionic-firefly:build:production"
+              "browserTarget": "firefly-mobile:build:production"
             }
           }
         },
         "ionic-cordova-serve": {
           "builder": "@ionic/angular-toolkit:cordova-serve",
           "options": {
-            "cordovaBuildTarget": "ionic-firefly:ionic-cordova-build",
-            "devServerTarget": "ionic-firefly:serve"
+            "cordovaBuildTarget": "firefly-mobile:ionic-cordova-build",
+            "devServerTarget": "firefly-mobile:serve"
           },
           "configurations": {
             "production": {
-              "cordovaBuildTarget": "ionic-firefly:ionic-cordova-build:production",
-              "devServerTarget": "ionic-firefly:serve:production"
+              "cordovaBuildTarget": "firefly-mobile:ionic-cordova-build:production",
+              "devServerTarget": "firefly-mobile:serve:production"
             }
           }
         }
       }
     },
-    "firefly-core": {
+    "lib-firefly-core": {
       "root": "libs/firefly/core",
       "sourceRoot": "libs/firefly/core/src",
       "projectType": "library",
@@ -203,7 +203,7 @@
         }
       }
     },
-    "firefly-mobile": {
+    "lib-firefly-mobile": {
       "root": "libs/firefly/mobile",
       "sourceRoot": "libs/firefly/mobile/src",
       "projectType": "library",
@@ -238,7 +238,7 @@
         }
       }
     },
-    "core": {
+    "lib-core": {
       "root": "libs/core",
       "sourceRoot": "libs/core/src",
       "projectType": "library",
@@ -273,7 +273,7 @@
         }
       }
     },
-    "firebase": {
+    "lib-firebase": {
       "root": "libs/firebase",
       "sourceRoot": "libs/firebase/src",
       "projectType": "library",
@@ -308,7 +308,7 @@
         }
       }
     },
-    "capacitor": {
+    "lib-capacitor": {
       "root": "libs/capacitor",
       "sourceRoot": "libs/capacitor/src",
       "projectType": "library",
@@ -343,7 +343,7 @@
         }
       }
     },
-    "ionic": {
+    "lib-ionic": {
       "root": "libs/ionic",
       "sourceRoot": "libs/ionic/src",
       "projectType": "library",
@@ -378,7 +378,7 @@
         }
       }
     },
-    "web": {
+    "lib-web": {
       "root": "libs/web",
       "sourceRoot": "libs/web/src",
       "projectType": "library",
@@ -413,7 +413,7 @@
         }
       }
     },
-    "mapbox": {
+    "lib-mapbox": {
       "root": "libs/mapbox",
       "sourceRoot": "libs/mapbox/src",
       "projectType": "library",
@@ -448,7 +448,7 @@
         }
       }
     },
-    "google": {
+    "lib-google": {
       "root": "libs/google",
       "sourceRoot": "libs/google/src",
       "projectType": "library",
@@ -483,7 +483,7 @@
         }
       }
     },
-    "ngxs": {
+    "lib-ngxs": {
       "root": "libs/ngxs",
       "sourceRoot": "libs/ngxs/src",
       "projectType": "library",
@@ -522,7 +522,7 @@
         }
       }
     },
-    "apple": {
+    "lib-apple": {
       "root": "libs/apple",
       "sourceRoot": "libs/apple/src",
       "projectType": "library",
@@ -547,7 +547,7 @@
         }
       }
     },
-    "bigdatacloud": {
+    "lib-bigdatacloud": {
       "projectType": "library",
       "root": "libs/bigdatacloud",
       "sourceRoot": "libs/bigdatacloud/src",
@@ -707,7 +707,7 @@
     },
     "defaultCollection": "@nstudio/xplat"
   },
-  "defaultProject": "ionic-firefly",
+  "defaultProject": "firefly-mobile",
   "schematics": {
     "@nrwl/schematics:library": {
       "unitTestRunner": "karma",
