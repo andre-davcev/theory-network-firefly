@@ -378,7 +378,7 @@
         }
       }
     },
-    "web-firefly": {
+    "web": {
       "root": "libs/web",
       "sourceRoot": "libs/web/src",
       "projectType": "library",
