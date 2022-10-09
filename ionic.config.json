@@ -1,8 +1,8 @@
 {
 
-  "defaultProject": "ionic-firefly",
+  "defaultProject": "firefly-mobile",
   "projects": {
-    "ionic-firefly": {
+    "firefly-mobile": {
       "root": "apps/firefly/mobile",
       "name": "Firefly",
       "integrations": {
