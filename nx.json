@@ -20,8 +20,7 @@
     "lib-google": { "tags": [] },
     "lib-ionic": { "tags": [] },
     "lib-mapbox": { "tags": [] },
-    "lib-ngxs": { "tags": [] },
-    "lib-web": { "tags": [] }
+    "lib-ngxs": { "tags": [] }
   },
   "tasksRunnerOptions": {
     "default": {

@@ -27,8 +27,6 @@
       "@theory/nativescript/*": ["../../../libs/nativescript/src/*"],
       "@theory/ngxs": ["../../../libs/ngxs/index.ts"],
       "@theory/ngxs/*": ["../../../libs/ngxs/src/*"],
-      "@theory/web": ["../../../libs/web/index.ts"],
-      "@theory/web/*": ["../../../libs/web/src/*"],
       "@firefly/core": ["../../../libs/firefly/core/index.ts"],
       "@firefly/core/*": ["../../../libs/firefly/core/src/*"],
       "@firefly/cloud": ["../../../apps/firefly/cloud/src/library/index.ts"],
