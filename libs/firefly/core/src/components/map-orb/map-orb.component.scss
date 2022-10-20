@@ -1,9 +1,9 @@
-@import '../../../../../apple/src/sass/variables';
+@use '../../../../../../styles/apple/variables' as apple;
 
 :host
 {
     --cpt-color:                       #80D623;
-    --cpt-color-border:                #{$ios-map-color-orb-border};
+    --cpt-color-border:                #{apple.$ios-map-color-orb-border};
     --cpt-color-pulse:               rgba(86, 199, 29, 0.5);
     --cpt-size:                        20px;
     --cpt-duration:                    3s;
