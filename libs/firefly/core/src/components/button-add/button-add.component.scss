@@ -1,5 +1,4 @@
-@import 'variables';
-@import '../../../../../apple/src/sass/variables';
+@use 'variables' as firefly;
 
 :host
 {
@@ -11,8 +10,8 @@
 
   ion-fab-button {
       &.ion-color-primary {
-        --background-activated: #{$fire-color-accent-darkest};
-        --ion-color-shade: #{$fire-color-primary} !important;
+        --background-activated: #{firefly.$fire-color-accent-darkest};
+        --ion-color-shade: #{firefly.$fire-color-primary} !important;
       }
   }
 }

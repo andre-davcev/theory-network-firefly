@@ -1,13 +1,13 @@
-@import '../../../../apple/src/sass/variables';
-@import '../../../../web/src/sass/variables';
+@use '../../../../../styles/apple/variables' as apple;
+@use '../../../../web/src/sass/variables' as web;
 
 :host
 {
     --cpt-margin:                  0;
     --cpt-text-align:              center;
-    --cpt-line-height:             #{$tn-golden-ratio-em};
+    --cpt-line-height:             #{web.$tn-golden-ratio-em};
 
-    --cpt-font-family:             #{$apple-font-family};
+    --cpt-font-family:             #{apple.$apple-font-family};
     --cpt-font-color:            #000000;
     --cpt-font-size:               1rem;
     --cpt-font-weight:             normal;

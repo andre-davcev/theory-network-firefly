@@ -13,7 +13,6 @@
     "firefly-web-e2e": { "tags": [], "implicitDependencies": ["firefly-web"] },
     "lib-firefly-core": { "tags": [] },
     "lib-firefly-mobile": { "tags": [] },
-    "lib-apple": { "tags": [] },
     "lib-bigdatacloud": { "tags": [] },
     "lib-capacitor": { "tags": [] },
     "lib-core": { "tags": [] },

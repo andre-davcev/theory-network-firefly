@@ -1,18 +1,18 @@
-@import 'variables';
-@import '../../../../../apple/src/sass/variables';
-@import '../../../../../web/src/sass/variables';
+@use 'variables' as firefly;
+@use '../../../../../../styles/apple/variables' as apple;
+@use '../../../../../web/src/sass/variables' as web;
 
 :host
 {
-    --cpt-icon-color: #{$fire-color-grey-middle};
+    --cpt-icon-color: #{firefly.$fire-color-grey-middle};
     --cpt-icon-size: 6rem;
-    --cpt-icon-color-background: #{$fire-color-primary};
+    --cpt-icon-color-background: #{firefly.$fire-color-primary};
 
     --cpt-margin: 3rem;
 
     --cpt-message-text-align:              center;
-    --cpt-message-line-height:             #{$tn-golden-ratio-em};
-    --cpt-message-font-family:             #{$apple-font-family};
+    --cpt-message-line-height:             #{web.$tn-golden-ratio-em};
+    --cpt-message-font-family:             #{apple.$apple-font-family};
     --cpt-message-font-color:            #000000;
     --cpt-message-font-size:               1rem;
     --cpt-message-font-weight:             normal;
@@ -48,14 +48,14 @@
         width: 100%;
     }
 
-    &.cpt-background-primary             { --cpt-icon-color-background: #{$fire-color-primary}; }
-    &.cpt-background-secondary           { --cpt-icon-color-background: #{$fire-color-accent}; }
-    &.cpt-background-white               { --cpt-icon-color-background: #{$fire-color-white}; }
+    &.cpt-background-primary             { --cpt-icon-color-background: #{firefly.$fire-color-primary}; }
+    &.cpt-background-secondary           { --cpt-icon-color-background: #{firefly.$fire-color-accent}; }
+    &.cpt-background-white               { --cpt-icon-color-background: #{firefly.$fire-color-white}; }
     &.cpt-background-white-translucent   { --cpt-icon-color-background: rgba(255, 255, 255, 0.8); }
     &.cpt-background-black-translucent   { --cpt-icon-color-background: rgba(0, 0, 0, 0.5); }
-    &.cpt-background-black               { --cpt-icon-color-background: #{$fire-color-black}; }
-    &.cpt-background-dark                { --cpt-icon-color-background: #{$fire-color-dark}; }
-    &.cpt-background-medium              { --cpt-icon-color-background: #{$fire-color-grey-lightest}; }
+    &.cpt-background-black               { --cpt-icon-color-background: #{firefly.$fire-color-black}; }
+    &.cpt-background-dark                { --cpt-icon-color-background: #{firefly.$fire-color-dark}; }
+    &.cpt-background-medium              { --cpt-icon-color-background: #{firefly.$fire-color-grey-lightest}; }
 
     .cpt-icon
     {
@@ -67,14 +67,14 @@
         background-color: var(--cpt-icon-color-background);
     }
 
-    &.cpt-message-primary             { --cpt-message-font-color: #{$fire-color-primary}; }
-    &.cpt-message-secondary           { --cpt-message-font-color: #{$fire-color-accent}; }
-    &.cpt-message-white               { --cpt-message-font-color: #{$fire-color-white}; }
+    &.cpt-message-primary             { --cpt-message-font-color: #{firefly.$fire-color-primary}; }
+    &.cpt-message-secondary           { --cpt-message-font-color: #{firefly.$fire-color-accent}; }
+    &.cpt-message-white               { --cpt-message-font-color: #{firefly.$fire-color-white}; }
     &.cpt-message-white-translucent   { --cpt-message-font-color: rgba(255, 255, 255, 0.8); }
     &.cpt-message-black-translucent   { --cpt-message-font-color: rgba(0, 0, 0, 0.5); }
-    &.cpt-message-black               { --cpt-message-font-color: #{$fire-color-black}; }
-    &.cpt-message-dark                { --cpt-message-font-color: #{$fire-color-dark}; }
-    &.cpt-message-medium              { --cpt-message-font-color: #{$fire-color-grey-lightest}; }
+    &.cpt-message-black               { --cpt-message-font-color: #{firefly.$fire-color-black}; }
+    &.cpt-message-dark                { --cpt-message-font-color: #{firefly.$fire-color-dark}; }
+    &.cpt-message-medium              { --cpt-message-font-color: #{firefly.$fire-color-grey-lightest}; }
 
     .cpt-message
     {
