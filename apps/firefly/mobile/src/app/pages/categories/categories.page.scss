@@ -1,10 +1,10 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
     > section {
         height: 100%;
-        background-color: #{$fire-color-dark-lighter};
+        background-color: #{firefly.$fire-color-dark-lighter};
     }
 
     .cpt-interests

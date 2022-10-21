@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
@@ -15,17 +15,17 @@
     }
 
     ion-menu {
-        --background: #{$fire-color-dark};
+        --background: #{firefly.$fire-color-dark};
         --max-width: 210px;
     }
 
     ion-item {
-        --color: #{$fire-color-primary};
+        --color: #{firefly.$fire-color-primary};
         cursor: pointer;
 
         &.cpt-selected
         {
-            --background: #{$fire-color-dark-lighter};
+            --background: #{firefly.$fire-color-dark-lighter};
         }
 
         app-icon {
@@ -34,6 +34,6 @@
     }
 
     ion-list {
-        --ion-item-background: #{$fire-color-dark};
+        --ion-item-background: #{firefly.$fire-color-dark};
     }
 }

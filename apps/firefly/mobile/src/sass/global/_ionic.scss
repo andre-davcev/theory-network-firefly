@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 ion-toolbar {
     --border-width: 0;
@@ -7,19 +7,19 @@ ion-toolbar {
 
 ion-app {
     ion-picker {
-        --ion-color-primary: #{$fire-color-black};
+        --ion-color-primary: #{firefly.$fire-color-black};
     }
 
     ion-loading {
         &.cpt-loading {
-            --background: #{$fire-color-transparent};
+            --background: #{firefly.$fire-color-transparent};
 
             .loading-wrapper {
                 box-shadow: none;
             }
 
             ion-spinner {
-                --spinner-color: #{$fire-color-white};
+                --spinner-color: #{firefly.$fire-color-white};
                 transform: scale(2);
             }
         }
@@ -28,7 +28,7 @@ ion-app {
 
 ion-item {
     ion-icon {
-        color: #{$fire-color-grey-lighter};
+        color: #{firefly.$fire-color-grey-lighter};
     }
 }
 
@@ -37,13 +37,13 @@ ion-action-sheet {
 }
 
 ion-toast {
-    --background: #{$fire-color-dark};
-    --color: #{$fire-color-white};
+    --background: #{firefly.$fire-color-dark};
+    --color: #{firefly.$fire-color-white};
     --box-shadow: rgba(0, 0, 0, 0.37) 0px 1px 4px 0px;
 }
 
 ion-modal {
-    --background: #{$fire-color-dark};
+    --background: #{firefly.$fire-color-dark};
 }
 
 :root {
@@ -54,7 +54,7 @@ ion-modal {
 
 .alert-button-group {
     .alert-button {
-      color: #{$fire-color-dark};
+      color: #{firefly.$fire-color-dark};
     }
 }
 

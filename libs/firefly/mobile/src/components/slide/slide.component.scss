@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 $cpt-slide-padding: 30px;
 
@@ -91,7 +91,7 @@ $cpt-slide-padding: 30px;
     }
 
     ion-button {
-        --background-active: #{$fire-color-transparent};
+        --background-active: #{firefly.$fire-color-transparent};
         --padding-start: 0;
         --padding-end: 0;
 

@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 app-item-description {
     padding-left: 1rem;
@@ -34,12 +34,12 @@ app-button-action
 {
   position: relative;
   display: flex;
-  font-family: $fire-font-opensans;
+  font-family: firefly.$fire-font-opensans;
 }
 
 .cnt-name
 {
-  font-family: $fire-font-americantypewriter;
+  font-family: firefly.$fire-font-americantypewriter;
   height: 26px;
   opacity: 0.7;
   font-size: 20px;
@@ -49,7 +49,7 @@ app-button-action
 
 .cnt-tagline
 {
-  font-family: $fire-font-playfair;
+  font-family: firefly.$fire-font-playfair;
   font-weight: 600;
   margin-top: 8px;
   padding-left: 28px;
@@ -62,7 +62,7 @@ app-button-action
 
 .cnt-description
 {
-  font-family: $fire-font-opensans;
+  font-family: firefly.$fire-font-opensans;
   margin-top: 16px;
   padding-left: 28px;
   padding-right: 28px;
@@ -91,7 +91,7 @@ app-button-action
     margin: auto;
     margin-top: 16px;
     text-transform: uppercase;
-    background-color: $fire-color-primary;
+    background-color: firefly.$fire-color-primary;
     color: rgb(252, 253, 252);
     font-size: 1rem;
     line-height: 1rem;

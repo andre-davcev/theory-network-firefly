@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
@@ -56,7 +56,7 @@
             .mapboxgl-popup-content
             {
                 padding: 0;
-                background-color: $fire-color-transparent;
+                background-color: firefly.$fire-color-transparent;
                 box-shadow: none;
             }
         }

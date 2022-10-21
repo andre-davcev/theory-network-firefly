@@ -1,8 +1,8 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
-    --cpt-font-color:           $fire-color-light-text;
+    --cpt-font-color:           firefly.$fire-color-light-text;
     --cpt-font-size:            17px;
     --cpt-line-height:          20px;
 
@@ -11,7 +11,7 @@
     --cpt-border-radius-top:    var(--cpt-border-radius);
     --cpt-border-radius-bottom: var(--cpt-border-radius);
 
-    --cpt-background-color: #{$fire-color-transparent};
+    --cpt-background-color: #{firefly.$fire-color-transparent};
 
     position: relative;
     display: flex;

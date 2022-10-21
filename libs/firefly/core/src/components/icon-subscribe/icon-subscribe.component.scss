@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 .md
 {
@@ -32,7 +32,7 @@
     .cpt-count
     {
         position: relative;
-        color: #{$fire-color-dark};
+        color: #{firefly.$fire-color-dark};
         font-size: 16px;
         line-height: 1em;
     }

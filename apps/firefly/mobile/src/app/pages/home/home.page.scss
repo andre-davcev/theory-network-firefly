@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host-context(.ios) {
     ion-toolbar {
@@ -9,7 +9,7 @@
 }
 
 :host {
-    --background: #{$fire-color-white};
+    --background: #{firefly.$fire-color-white};
 
     ion-header {
         &.header-md::after {
@@ -31,7 +31,7 @@
     {
         position: relative;
         height: 100%;
-        background-color: $fire-color-grey-lightest;
+        background-color: firefly.$fire-color-grey-lightest;
     }
 
     .cpt-notifications
