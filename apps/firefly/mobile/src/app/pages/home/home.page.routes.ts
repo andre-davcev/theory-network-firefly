@@ -10,7 +10,7 @@ export const RoutesPageHome: Routes =
       children: [
         { path: '', redirectTo: Pages.Stream, pathMatch: 'full' },
 
-        { path: Pages.Stream,        loadChildren: '@firefly/page/stream#ModulePageStream' },
-        { path: Pages.Notifications, loadChildren: '@firefly/page/notifications#ModulePageNotifications' }
+        { path: Pages.Stream,        loadChildren: '../stream#ModulePageStream' },
+        { path: Pages.Notifications, loadChildren: '../notifications#ModulePageNotifications' }
     ]}
 ];

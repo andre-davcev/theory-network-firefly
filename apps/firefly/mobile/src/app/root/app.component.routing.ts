@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Pages } from '@firefly/mobile';
-import { ModulePageAssetInterest, ModulePageAssetsEventsRoute, ModulePageAssetsInterestsRoute, ModulePageAuth, ModulePageCalendar, ModulePageEventDetail, ModulePageEventSelector, ModulePageHome, ModulePageNotificationDetail, ModulePageUserProfile, ModulePageInterestDetail } from '@firefly/page';
 
 export const routes: Routes =
 [
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
 
-    { path: Pages.Auth,     loadChildren: () => import('@firefly/page').then(m => ModulePageAuth) },
-    { path: Pages.Home,     loadChildren: () => import('@firefly/page').then(m => ModulePageHome) },
-    { path: Pages.Calendar, loadChildren: () => import('@firefly/page').then(m => ModulePageCalendar) },
+    { path: Pages.Auth,     loadChildren: () => import('../pages').then(m => m.ModulePageAuth) },
+    { path: Pages.Home,     loadChildren: () => import('../pages').then(m => m.ModulePageHome) },
+    { path: Pages.Calendar, loadChildren: () => import('../pages').then(m => m.ModulePageCalendar) },
 
-    { path: Pages.AssetsInterests,  loadChildren: () => import('@firefly/page').then(m => ModulePageAssetsInterestsRoute) },
-    { path: Pages.AssetInterest,    loadChildren: () => import('@firefly/page').then(m => ModulePageAssetInterest) },
-    { path: Pages.AssetsEvents,     loadChildren: () => import('@firefly/page').then(m => ModulePageAssetsEventsRoute) },
-    { path: Pages.EventDetail,      loadChildren: () => import('@firefly/page').then(m => ModulePageEventDetail) },
+    { path: Pages.AssetsInterests,  loadChildren: () => import('../pages').then(m => m.ModulePageAssetsInterestsRoute) },
+    { path: Pages.AssetInterest,    loadChildren: () => import('../pages').then(m => m.ModulePageAssetInterest) },
+    { path: Pages.AssetsEvents,     loadChildren: () => import('../pages').then(m => m.ModulePageAssetsEventsRoute) },
+    { path: Pages.EventDetail,      loadChildren: () => import('../pages').then(m => m.ModulePageEventDetail) },
 
-    { path: Pages.EventSelector,      loadChildren: () => import('@firefly/page').then(m => ModulePageEventSelector) },
-    { path: Pages.NotificationDetail, loadChildren: () => import('@firefly/page').then(m => ModulePageNotificationDetail) },
-    { path: Pages.InterestDetail,     loadChildren: () => import('@firefly/page').then(m => ModulePageInterestDetail) },
-    { path: Pages.UserProfile,        loadChildren: () => import('@firefly/page').then(m => ModulePageUserProfile) }
+    { path: Pages.EventSelector,      loadChildren: () => import('../pages').then(m => m.ModulePageEventSelector) },
+    { path: Pages.NotificationDetail, loadChildren: () => import('../pages').then(m => m.ModulePageNotificationDetail) },
+    { path: Pages.InterestDetail,     loadChildren: () => import('../pages').then(m => m.ModulePageInterestDetail) },
+    { path: Pages.UserProfile,        loadChildren: () => import('../pages').then(m => m.ModulePageUserProfile) }
 ];
 
 @NgModule

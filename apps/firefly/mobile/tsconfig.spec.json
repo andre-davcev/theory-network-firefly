@@ -31,9 +31,7 @@
       "@firefly/core/*": ["../../../libs/firefly/core/src/*"],
       "@firefly/cloud": ["../../../apps/firefly/cloud/src/library/index.ts"],
       "@firefly/mobile": ["../../../libs/firefly/mobile/index.ts"],
-      "@firefly/mobile/*": ["../../../libs/firefly/mobile/src/*"],
-      "@firefly/page": ["./src/app/pages"],
-      "@firefly/page/*": ["./src/app/pages/*"]
+      "@firefly/mobile/*": ["../../../libs/firefly/mobile/src/*"]
     }
   },
   "files": ["src/test.ts", "src/zone-flags.ts", "src/polyfills.ts"],
