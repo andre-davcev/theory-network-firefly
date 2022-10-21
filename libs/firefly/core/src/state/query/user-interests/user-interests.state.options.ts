@@ -2,7 +2,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StateUserInterestsModel } from './user-interests.state.model';
 import { OrderBy } from '@theory/firebase';
-import { InterestType } from '@firefly/core/enums';
+import { InterestType } from '@firefly/shared/enums';
 import { PageSize } from '@theory/ngxs';
 
 export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =

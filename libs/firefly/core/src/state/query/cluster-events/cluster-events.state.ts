@@ -1,7 +1,7 @@
 import { State, Action, StateContext, Store } from '@ngxs/store';
 
 import { Interest } from '@firefly/cloud';
-import { ServiceInterests } from '@firefly/core/services';
+import { ServiceInterests } from '@firefly/shared/services';
 import { StateQuery } from '@theory/ngxs';
 
 import { StateClusterInterestsModel } from './cluster-events.state.model';
@@ -18,7 +18,7 @@ import {
 import { StateUser } from '../../document/user/user.state';
 import { Query } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
-import { Collection } from '@firefly/core/enums';
+import { Collection } from '@firefly/shared/enums';
 import { ServiceStorage } from '@theory/firebase';
 
 @State<StateClusterInterestsModel>(StateClusterInterestsOptions)

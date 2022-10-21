@@ -1,4 +1,4 @@
-import { InterestType, EventType } from '@firefly/core/enums';
+import { InterestType, EventType } from '@firefly/shared/enums';
 
 export interface StateAppModel
 {

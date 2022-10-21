@@ -16,12 +16,12 @@ import {
 } from './user-events.actions';
 import { StateUser } from '../../document/user';
 import { StateQuery } from '@theory/ngxs';
-import { ServiceEvents } from '@firefly/core/services';
+import { ServiceEvents } from '@firefly/shared/services';
 import { Query } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { DocumentSnapshot, ServiceStorage } from '@theory/firebase';
-import { Collection, EventType, ImageType } from '@firefly/core/enums';
+import { Collection, EventType, ImageType } from '@firefly/shared/enums';
 import { Observable, of } from 'rxjs';
 import { CoreEnum } from '@theory/core';
 import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';

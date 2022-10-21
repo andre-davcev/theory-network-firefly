@@ -34,7 +34,7 @@ import {
     ActionUserResetPassword,
     ActionUserWatchCity, ActionUserResetAll, ActionUserSetErrorAuth
 } from './user.actions';
-import { ServiceUsers } from '@firefly/core/services';
+import { ServiceUsers } from '@firefly/shared/services';
 import { StateDocument } from '@theory/ngxs';
 
 import { ActionUserAlertsReset, ActionUserAlertsSetData } from '../../child/user-alerts/user-alerts.actions';
@@ -44,7 +44,7 @@ import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/use
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
 import { Injectable } from '@angular/core';
-import { Collection, EventType, InterestType } from '@firefly/core/enums';
+import { Collection, EventType, InterestType } from '@firefly/shared/enums';
 
 import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
 import { StateCity } from '../city/city.state';

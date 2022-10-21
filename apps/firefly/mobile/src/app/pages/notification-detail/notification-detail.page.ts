@@ -5,7 +5,7 @@ import { AlertController, ModalController, NavController } from '@ionic/angular'
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
-import { StateEvent, ActionUserAlertsGo, ActionUserAlertsDelete, Translation } from '@firefly/core';
+import { StateEvent, ActionUserAlertsGo, ActionUserAlertsDelete, Translation } from '@firefly/shared';
 import { Alert, Event } from '@firefly/cloud';
 import { Pages } from '@firefly/mobile';
 import { BaseComponent } from '@theory/core';

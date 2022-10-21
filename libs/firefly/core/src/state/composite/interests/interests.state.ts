@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { switchMap, takeWhile, tap } from 'rxjs/operators';
 
-import { InterestType } from '@firefly/core/enums';
+import { InterestType } from '@firefly/shared/enums';
 
 import { StateInterestsModel } from './interests.state.model';
 import { StateInterestsOptions } from './interests.state.options';

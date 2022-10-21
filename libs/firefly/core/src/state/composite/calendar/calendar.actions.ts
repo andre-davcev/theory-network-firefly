@@ -1,6 +1,6 @@
 import { IonInfiniteScroll } from '@ionic/angular';
 
-import { EventType } from '@firefly/core/enums';
+import { EventType } from '@firefly/shared/enums';
 
 import { ActionsCalendar } from './calendar.actions.enum';
 import { CalendarFilter } from './calendar.filter.model';

@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { ActionInterestSetId, ActionInterestEventsGet, ActionAppLoadingHide } from '@firefly/core';
+import { ActionInterestSetId, ActionInterestEventsGet, ActionAppLoadingHide } from '@firefly/shared';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
@@ -30,6 +30,6 @@ export class ResolverPageAssetInterest implements Resolve<void>
                 new ActionInterestEventsGet(),
                 new ActionAppLoadingHide()
             ]);
-        }   
+        }
     }
 }

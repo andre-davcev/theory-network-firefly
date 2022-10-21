@@ -3,7 +3,7 @@ import { switchMap } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'
-import { StateUserEvents, ActionEventSetId, StateInterest, ActionEventPatch, ActionInterestEventsGet } from '@firefly/core';
+import { StateUserEvents, ActionEventSetId, StateInterest, ActionEventPatch, ActionInterestEventsGet } from '@firefly/shared';
 import { Event, Interest } from '@firefly/cloud';
 import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
 

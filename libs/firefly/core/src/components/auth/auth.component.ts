@@ -6,7 +6,7 @@ import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 import { Credentials, Regex } from '@theory/core';
 import { Select, Store } from '@ngxs/store';
-import { ActionUserLoginEmail, ActionUserCreate, ActionUserResetPassword, ActionUserSetErrorAuth, StateUser } from '@firefly/core/state';
+import { ActionUserLoginEmail, ActionUserCreate, ActionUserResetPassword, ActionUserSetErrorAuth, StateUser } from '@firefly/shared/state';
 import { tap, catchError, filter, map } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { AuthError } from './auth-error.interface';

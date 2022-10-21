@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { StateUser } from '@firefly/core/state/document/user';
+import { StateUser } from '@firefly/shared/state/document/user';
 import { Event, Interest, MetadataEvent, Place } from '@firefly/cloud';
 
 import { StateEventModel } from './event.state.model';
@@ -32,14 +32,14 @@ import {
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { DocumentSnapshot, FieldValue, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '@theory/firebase';
-import { ServiceEvents, ServiceLocation } from '@firefly/core/services';
+import { ServiceEvents, ServiceLocation } from '@firefly/shared/services';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
 import { Query } from '@angular/fire/firestore';
-import { Collection, ImageType } from '@firefly/core/enums';
+import { Collection, ImageType } from '@firefly/shared/enums';
 import { SetFormPristine } from '@ngxs/form-plugin';
 import { LngLatLike } from 'mapbox-gl';
 import { StateUserAlerts } from '../../child';

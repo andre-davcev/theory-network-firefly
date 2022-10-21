@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ModuleComponentItemHeader, ModuleComponentItemDescription, ModuleComponentItemMap, ModuleComponentItemImage } from '@firefly/mobile';
 
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { ModuleComponentButtonAdd } from '@firefly/core';
+import { ModuleComponentButtonAdd } from '@firefly/shared';
 import { ModulePipeTimestamp } from '@theory/firebase';
 
 import { ModulePage } from '../../modules';

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { ModuleComponentMap, ModuleDirectiveLoading } from '@firefly/core';
+import { ModuleComponentMap, ModuleDirectiveLoading } from '@firefly/shared';
 
 import { ComponentItemMap } from './item-map.component';
 

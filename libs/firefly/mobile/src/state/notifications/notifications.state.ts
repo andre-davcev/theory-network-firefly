@@ -7,7 +7,7 @@ import { StateNotificationsModel } from './notifications.state.model';
 import { StateNotificationsOptions } from './notifications.state.options';
 import { ActionNotificationsWatch } from './notifications.actions';
 import { Plugins } from '@capacitor/core';
-import { ActionUserAddToken } from '@firefly/core';
+import { ActionUserAddToken } from '@firefly/shared';
 import { Injectable } from '@angular/core';
 import { StateDevice } from '@theory/capacitor';
 import { of, from } from 'rxjs';

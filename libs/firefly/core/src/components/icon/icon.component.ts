@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, ChangeDetectionStrategy, ElementRef, OnInit } from '@angular/core';
-import { Color } from '@firefly/core/enums';
+import { Color } from '@firefly/shared/enums';
 
 import { IconType } from './icon-type.enum';
 import { IconSize } from './icon-size.enum';

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { ActionCalendarPage, ActionCalendarSetType, ActionEventSet, EventType, IconType, StateCalendar, StateUserEvents } from '@firefly/core';
+import { ActionCalendarPage, ActionCalendarSetType, ActionEventSet, EventType, IconType, StateCalendar, StateUserEvents } from '@firefly/shared';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';

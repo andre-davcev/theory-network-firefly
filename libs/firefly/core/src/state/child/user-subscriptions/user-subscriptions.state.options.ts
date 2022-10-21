@@ -5,7 +5,7 @@ import { PageSize } from '@theory/ngxs';
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
-import { InterestType } from '@firefly/core/enums';
+import { InterestType } from '@firefly/shared/enums';
 
 export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsModel> =
 {

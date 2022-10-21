@@ -3,7 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
-import { StateApp } from '@firefly/core';
+import { StateApp } from '@firefly/shared';
 import { ActionDeviceStatusBarShow, ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '@firefly/mobile';
 import { StatusBarStyle } from '@capacitor/core';

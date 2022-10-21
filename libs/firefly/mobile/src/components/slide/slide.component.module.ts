@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ComponentSlide } from './slide.component';
-import { ModuleComponentButtonAction } from '@firefly/core';
+import { ModuleComponentButtonAction } from '@firefly/shared';
 import { ModulePipeTimestamp } from '@theory/firebase';
 
 @NgModule

@@ -10,7 +10,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
 import { Observable, from, of } from 'rxjs';
-import { StateAlerts, StateCalendar, StateInterests, StateUser } from '@firefly/core';
+import { StateAlerts, StateCalendar, StateInterests, StateUser } from '@firefly/shared';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { PageNotifications } from '../notifications';

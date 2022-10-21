@@ -1,5 +1,5 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { Color } from '@firefly/core/enums';
+import { Color } from '@firefly/shared/enums';
 
 @Component
 ({

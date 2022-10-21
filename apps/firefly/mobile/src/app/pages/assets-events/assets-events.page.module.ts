@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { ModuleDirectiveElevation } from '@theory/google';
-import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
+import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/shared';
 import { ModulePipeTimestamp } from '@theory/firebase';
 
 import { ModulePage } from '../../modules';

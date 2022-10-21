@@ -26,7 +26,7 @@ import {
   StateCityStream,
   StateUserSubscriptions,
   StateUserProfile, StateCity, StateApp, StateAlerts, StateInterests, StateCalendar
-} from '@firefly/core';
+} from '@firefly/shared';
 import { StateNotifications, StateSearch } from '@firefly/mobile';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';

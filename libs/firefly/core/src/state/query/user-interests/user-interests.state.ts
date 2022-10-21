@@ -7,8 +7,8 @@ import { switchMap } from 'rxjs/operators';
 import { StateQuery } from '@theory/ngxs';
 
 import { Interest, SubscriptionPartial } from '@firefly/cloud';
-import { ServiceInterests } from '@firefly/core/services';
-import { Collection, InterestType } from '@firefly/core/enums';
+import { ServiceInterests } from '@firefly/shared/services';
+import { Collection, InterestType } from '@firefly/shared/enums';
 
 import { StateUserInterestsModel } from './user-interests.state.model';
 import { StateUserInterestsOptions } from './user-interests.state.options';

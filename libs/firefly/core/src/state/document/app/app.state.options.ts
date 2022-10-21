@@ -1,6 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { InterestType, EventType } from '@firefly/core/enums';
+import { InterestType, EventType } from '@firefly/shared/enums';
 
 import { StateAppModel } from './app.state.model';
 
