@@ -1,20 +1,20 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
     ion-content {
-        --background: #{$fire-color-transparent};
+        --background: #{firefly.$fire-color-transparent};
     }
 
     ion-list {
-        --background: #{$fire-color-transparent};
-        background: #{$fire-color-transparent};
+        --background: #{firefly.$fire-color-transparent};
+        background: #{firefly.$fire-color-transparent};
         margin-bottom: 0;
     }
 
     ion-item {
         --padding-start: 8px;
-        --background: #{$fire-color-transparent};
+        --background: #{firefly.$fire-color-transparent};
         --border-color: #333;
 
         &:last-child {
@@ -29,10 +29,10 @@
     }
 
     ion-card {
-        --background: #{$fire-color-white};
-        //font-family: $fire-font-markerfelt;
-        //font-family: $fire-font-playfair;
-        font-family: $fire-font-opensans;
+        --background: #{firefly.$fire-color-white};
+        //font-family: firefly.$fire-font-markerfelt;
+        //font-family: firefly.$fire-font-playfair;
+        font-family: firefly.$fire-font-opensans;
         width: 100%;
         margin-bottom: 2px;
     }
@@ -64,7 +64,7 @@
 
     .app-description {
         //font-family: serif;
-        font-family: $fire-font-opensans;
+        font-family: firefly.$fire-font-opensans;
         font-size: 14px;
     }
 
@@ -76,14 +76,14 @@
 
     .tagline {
         font-size: 20px;
-        //font-family: $fire-font-americantypewriter;
-        font-family: $fire-font-playfair;
+        //font-family: firefly.$fire-font-americantypewriter;
+        font-family: firefly.$fire-font-playfair;
         font-weight: 600;
     }
 
     .name {
         font-size: 25px;
-        font-family: $fire-font-americantypewriter;
+        font-family: firefly.$fire-font-americantypewriter;
     }
 
 
@@ -126,7 +126,7 @@
 
     .wrapper div{
       flex-basis: 100%;
-      //font-family: $fire-font-markerfelt;
+      //font-family: firefly.$fire-font-markerfelt;
     }
 
     .eventWrapper {
@@ -134,12 +134,12 @@
       flex-direction: column;
       justify-content: center;
       //font-family: serif;
-      font-family: $fire-font-opensans
+      font-family: firefly.$fire-font-opensans
     }
 
     .eventInfo {
       //font-family: serif;
-      font-family: $fire-font-opensans
+      font-family: firefly.$fire-font-opensans
     }
 
     .dateTimeWrapper {
@@ -148,12 +148,12 @@
 
     .date {
       //font-family: serif;
-      font-family: $fire-font-opensans
+      font-family: firefly.$fire-font-opensans
     }
 
     .time {
       //font-family: serif;
-      font-family: $fire-font-opensans;
+      font-family: firefly.$fire-font-opensans;
       font-size: 20px;
     }
 

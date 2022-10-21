@@ -1,14 +1,14 @@
 
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
     --cpt-height:                 57px;
     --cpt-width:                  var(--cpt-height);
-    --cpt-transition-duration:    #{$fire-transition-duration-move};
+    --cpt-transition-duration:    #{firefly.$fire-transition-duration-move};
 
-    --cpt-color-fill-primary:           #{$fire-color-primary};
-    --cpt-color-fill-lighter-primary:   lighten($fire-color-primary, 10%);
+    --cpt-color-fill-primary:           #{firefly.$fire-color-primary};
+    --cpt-color-fill-lighter-primary:   lighten(firefly.$fire-color-primary, 10%);
     --cpt-color-stroke-primary:         #000000;
     --cpt-color-stroke-width-primary:   1px;
     --cpt-color-stroke-opacity-primary: 0.5;

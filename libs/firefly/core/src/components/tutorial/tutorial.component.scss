@@ -1,12 +1,12 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
-    --cpt-color-background:        #{$fire-color-dark};
-    --cpt-color-body:              #{$fire-color-white};
-    --cpt-color-heading:           #{$fire-color-primary};
+    --cpt-color-background:        #{firefly.$fire-color-dark};
+    --cpt-color-body:              #{firefly.$fire-color-white};
+    --cpt-color-heading:           #{firefly.$fire-color-primary};
     --cpt-padding:                 2rem;
-    --cpt-color-button:            #{$fire-color-primary};
+    --cpt-color-button:            #{firefly.$fire-color-primary};
 
     position: relative;
     height: 100vh;

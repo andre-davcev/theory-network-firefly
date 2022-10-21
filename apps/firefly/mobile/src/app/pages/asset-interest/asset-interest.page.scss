@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 app-item-description {
     padding-left: 1rem;
@@ -11,5 +11,5 @@ ion-list {
 }
 
 .invalid {
-  border: 1px solid $fire-color-accent-light;
+  border: 1px solid firefly.$fire-color-accent-light;
 }

@@ -1,49 +1,49 @@
-@import 'variables';
+@use 'variables' as firefly;
 
-$cpt-color:             $fire-color-dark;
+$cpt-color:             firefly.$fire-color-dark;
 $cpt-inner-font-size:   19px;
 
 :host
 {
     --cpt-icon:                      '\f041';
-    --cpt-font-family:               #{$fire-font-awesome};
+    --cpt-font-family:               #{firefly.$fire-font-awesome};
     --cpt-font-size:                 56px;
     --cpt-height:                    var(--cpt-font-size);
     --cpt-width:                     32px;
     --cpt-box-shadow:                0 1px 1px rgba(0, 0, 0, 0.10);
 
-    --cpt-inner-font-family:         #{$fire-font-awesome};
+    --cpt-inner-font-family:         #{firefly.$fire-font-awesome};
     --cpt-inner-font-size:           #{$cpt-inner-font-size};
-    --cpt-inner-color:               #{$gm-color-white};
+    --cpt-inner-color:               #{firefly.$gm-color-white};
 
     --cpt-inner-shadow-top:          0 -1px 0 rgba(0,    0,    0, 0.21);
     --cpt-inner-shadow-bottom:       0  1px 0 rgba(255, 255, 255, 0.21);
 
     --cpt-check:                     '\f058';
     --cpt-plus:                      '\f055';
-    --cpt-color:                     #{$fire-color-dark};
+    --cpt-color:                     #{firefly.$fire-color-dark};
 
     --cpt-border-color:           rgba(255, 255, 255, 0.11);
     --cpt-border-color-active:    rgba(35, 117, 80, 0.10);
     --cpt-border-width:             1px;
     --cpt-shadow-color:           rgba(0, 0, 0, 0.10);
 
-    --cpt-color-active:             #{$fire-color-primary};
+    --cpt-color-active:             #{firefly.$fire-color-primary};
 
     --cpt-inner-color:              var(--cpt-color-active);
     --cpt-inner-color-background:   var(--cpt-icon-color);
     --cpt-inner-shadow-top:         0 -1px 0 rgba(  0,   0,   0, 0.4);
     --cpt-inner-shadow-bottom:      0  1px 0 rgba(255, 255, 255, 0.3);
 
-    --cpt-inner-color-active:                $app-map-pin-icon-color;
-    --cpt-inner-color-background-active:     $gm-color-white;
+    --cpt-inner-color-active:                firefly.$app-map-pin-icon-color;
+    --cpt-inner-color-background-active:     firefly.$gm-color-white;
     --cpt-inner-shadow-top-active:           0 -1px 0 rgba(  0,   0,   0, 0.3);
     --cpt-inner-shadow-bottom-active:        0  1px 0 rgba(255, 255, 255, 0.4);
 
     position: relative;
     display: block;
     box-sizing: border-box;
-    background-color: #{$fire-color-transparent};
+    background-color: #{firefly.$fire-color-transparent};
     height: var(--cpt-height);
     width: var(--cpt-width);
 

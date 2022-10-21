@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
@@ -7,7 +7,7 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    background-color: $fire-color-dark;
+    background-color: firefly.$fire-color-dark;
 
     ion-icon {
       font-size: 3rem;
@@ -20,7 +20,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: $fire-color-dark;
+        background-color: firefly.$fire-color-dark;
 
         padding-left: 2.25rem;
         padding-right: 2.25rem;
@@ -37,8 +37,8 @@
         height: 100%;
         width: 100%;
 
-        --bullet-background: #{$fire-color-white};
-        --bullet-background-active: #{$fire-color-white};
+        --bullet-background: #{firefly.$fire-color-white};
+        --bullet-background-active: #{firefly.$fire-color-white};
     }
 
     app-button-action {

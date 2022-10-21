@@ -1,11 +1,11 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
     ion-searchbar {
-        --background: #{$fire-color-transparent};
+        --background: #{firefly.$fire-color-transparent};
 /*
-        --color: #{$fire-color-primary};
+        --color: #{firefly.$fire-color-primary};
         --icon-color: var(--color);
         --placeholder-color: var(--color);
         --placeholder-opacity: 0.9;

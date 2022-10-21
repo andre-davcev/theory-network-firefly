@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
@@ -18,25 +18,25 @@
     &.cpt-size-large  { --cpt-font-size: var(--cpt-font-size-large); }
     &.cpt-size-huge   { --cpt-font-size: var(--cpt-font-size-huge); }
 
-    &.cpt-color-primary             { --cpt-color: #{$fire-color-primary}; }
-    &.cpt-color-secondary           { --cpt-color: #{$fire-color-accent}; }
-    &.cpt-color-white               { --cpt-color: #{$fire-color-white}; }
-    &.cpt-color-white-translucent   { --cpt-color: #{$fire-color-white-translucent}; }
-    &.cpt-color-black               { --cpt-color: #{$fire-color-black}; }
-    &.cpt-color-black-translucent   { --cpt-color: #{$fire-color-black-translucent}; }
-    &.cpt-color-dark                { --cpt-color: #{$fire-color-dark}; }
-    &.cpt-color-medium              { --cpt-color: #{$fire-color-grey-lightest}; }
+    &.cpt-color-primary             { --cpt-color: #{firefly.$fire-color-primary}; }
+    &.cpt-color-secondary           { --cpt-color: #{firefly.$fire-color-accent}; }
+    &.cpt-color-white               { --cpt-color: #{firefly.$fire-color-white}; }
+    &.cpt-color-white-translucent   { --cpt-color: #{firefly.$fire-color-white-translucent}; }
+    &.cpt-color-black               { --cpt-color: #{firefly.$fire-color-black}; }
+    &.cpt-color-black-translucent   { --cpt-color: #{firefly.$fire-color-black-translucent}; }
+    &.cpt-color-dark                { --cpt-color: #{firefly.$fire-color-dark}; }
+    &.cpt-color-medium              { --cpt-color: #{firefly.$fire-color-grey-lightest}; }
 
     &.cpt-family-ionic
     {
-        &.cpt-color-primary             { color: #{$fire-color-primary}; }
-        &.cpt-color-secondary           { color: #{$fire-color-accent}; }
-        &.cpt-color-white               { color: #{$fire-color-white}; }
-        &.cpt-color-white-translucent   { color: #{$fire-color-white-translucent}; }
-        &.cpt-color-black               { color: #{$fire-color-black}; }
-        &.cpt-color-black-translucent   { color: #{$fire-color-black-translucent}; }
-        &.cpt-color-dark                { color: #{$fire-color-dark}; }
-        &.cpt-color-medium              { color: #{$fire-color-grey-lightest}; }
+        &.cpt-color-primary             { color: #{firefly.$fire-color-primary}; }
+        &.cpt-color-secondary           { color: #{firefly.$fire-color-accent}; }
+        &.cpt-color-white               { color: #{firefly.$fire-color-white}; }
+        &.cpt-color-white-translucent   { color: #{firefly.$fire-color-white-translucent}; }
+        &.cpt-color-black               { color: #{firefly.$fire-color-black}; }
+        &.cpt-color-black-translucent   { color: #{firefly.$fire-color-black-translucent}; }
+        &.cpt-color-dark                { color: #{firefly.$fire-color-dark}; }
+        &.cpt-color-medium              { color: #{firefly.$fire-color-grey-lightest}; }
     }
 
     position: relative;
@@ -51,7 +51,7 @@
     .cpt-icon
     {
         position: relative;
-        font-family: #{$fire-font-firefly};
+        font-family: #{firefly.$fire-font-firefly};
         color: var(--cpt-color);
         height: var(--cpt-font-size);
         width: var(--cpt-font-size);

@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
@@ -20,7 +20,7 @@
 
     &.cpt-color-background-dark
     {
-        background-color: #{$fire-color-dark};
+        background-color: #{firefly.$fire-color-dark};
     }
 
     &.cpt-color-background-grey

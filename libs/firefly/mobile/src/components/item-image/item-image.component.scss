@@ -1,8 +1,8 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
-    --cpt-title-font-color:                 #{$fire-color-light-text};
+    --cpt-title-font-color:                 #{firefly.$fire-color-light-text};
     --cpt-title-font-size:                  17px;
     --cpt-title-line-height:                20px;
     --cpt-title-letter-spacing:             -0.4px;
@@ -10,11 +10,11 @@
     --cpt-image-window-height-placeholder:  155px;
     --cpt-image-window-height:              551px;
     --cpt-image-border-radius:              5px;
-    --cpt-image-color-background:           #{$fire-color-grey-middle};
+    --cpt-image-color-background:           #{firefly.$fire-color-grey-middle};
     --cpt-image-placeholder-font-color:     white;
     --cpt-image-placeholder-font-size:      20px;
 
-//    --cpt-gutter:                           #{$fire-gutter};
+//    --cpt-gutter:                           #{firefly.$fire-gutter};
     --cpt-gutter:                           30px;
 
     position: relative;
@@ -22,7 +22,7 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 30px;
-    padding-top: #{$fire-gutter};
+    padding-top: #{firefly.$fire-gutter};
     padding-left: 27px;
     padding-right: 27px;
 

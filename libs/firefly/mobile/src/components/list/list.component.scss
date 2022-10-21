@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
@@ -10,7 +10,7 @@
     --cpt-subtitle-font-size:       14px;
     --cpt-subtitle-font-color:      rgba(0, 0, 0, 0.54);
 
-    --cpt-shadow:                   $app-list-box-shadow;
+    --cpt-shadow:                   firefly.$app-list-box-shadow;
 
     > .list
     {

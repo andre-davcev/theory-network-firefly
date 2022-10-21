@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
@@ -9,7 +9,7 @@
         position: relative;
         padding: 2px;
         border-radius: var(--border-radius);
-        background-color: $fire-color-white;
+        background-color: firefly.$fire-color-white;
         padding-left: 16px;
 
         &:after
@@ -20,7 +20,7 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background-color: $fire-color-grey-light;
+            background-color: firefly.$fire-color-grey-light;
         }
 
         &.reset-password
@@ -44,18 +44,18 @@
     }
 
     ion-button {
-        --color: #{$fire-color-dark};
-        --color-activated: #{$fire-color-dark};
-        --color-focused: #{$fire-color-dark};
-        --color-hover: #{$fire-color-dark};
+        --color: #{firefly.$fire-color-dark};
+        --color-activated: #{firefly.$fire-color-dark};
+        --color-focused: #{firefly.$fire-color-dark};
+        --color-hover: #{firefly.$fire-color-dark};
 
-        --background: #{$fire-color-primary};
-        --background-activated: #{$fire-color-primary-light};
-        --background-activated-opacity: #{$fire-color-primary-light};
-        --background-focused: #{$fire-color-primary-light};
-        --background-focused-opacity: #{$fire-color-primary-light};
-        --background-hover: #{$fire-color-primary-light};
-        --background-hover-opacity: #{$fire-color-primary-light};
+        --background: #{firefly.$fire-color-primary};
+        --background-activated: #{firefly.$fire-color-primary-light};
+        --background-activated-opacity: #{firefly.$fire-color-primary-light};
+        --background-focused: #{firefly.$fire-color-primary-light};
+        --background-focused-opacity: #{firefly.$fire-color-primary-light};
+        --background-hover: #{firefly.$fire-color-primary-light};
+        --background-hover-opacity: #{firefly.$fire-color-primary-light};
         --border-radius: 5px;
 
         margin: 0;
@@ -66,13 +66,13 @@
         &:hover,
         &:focus
         {
-            --color: #{$fire-color-dark};
+            --color: #{firefly.$fire-color-dark};
         }
     }
 
     ::ng-deep fa-icon {
-        stroke: $fire-color-grey-middle;
-        color: $fire-color-grey-middle;
+        stroke: firefly.$fire-color-grey-middle;
+        color: firefly.$fire-color-grey-middle;
 
         .cpt-icon-email
         {
@@ -81,8 +81,8 @@
 
         .cpt-highlight
         {
-            stroke: $fire-color-accent-light;
-            color: $fire-color-accent-light;
+            stroke: firefly.$fire-color-accent-light;
+            color: firefly.$fire-color-accent-light;
         }
     }
 
@@ -90,7 +90,7 @@
     {
         position: relative;
         height: 0;
-        color: $fire-color-white;
+        color: firefly.$fire-color-white;
 
         .cpt-error-message
         {

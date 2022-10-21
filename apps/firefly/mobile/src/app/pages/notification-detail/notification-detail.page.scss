@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as firefly;
 
 :host
 {
@@ -10,7 +10,7 @@
         padding-top: 34px;
         padding-bottom: 34px;
 
-        background-color: $fire-color-grey-lightest;
+        background-color: firefly.$fire-color-grey-lightest;
     }
 
     app-slide {
