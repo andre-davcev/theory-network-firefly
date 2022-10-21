@@ -40,9 +40,7 @@
       ],
       "@firefly/mobile/state/*": [
         "../../../libs/firefly/mobile/src/state/*"
-      ],
-      "@firefly/page": ["./src/app/pages"],
-      "@firefly/page/*": ["./src/app/pages/*"]
+      ]
     }
   },
   "files": [

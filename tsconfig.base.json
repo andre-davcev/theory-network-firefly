@@ -43,9 +43,7 @@
       "@firefly/mobile": ["libs/firefly/mobile/index.ts"],
       "@firefly/mobile/*": ["libs/firefly/mobile/src/*"],
       "@firefly/mobile/component/*": ["libs/firefly/mobile/src/components/*"],
-      "@firefly/mobile/state/*": ["libs/firefly/mobile/src/state/*"],
-      "@firefly/page": ["apps/firefly/mobile/src/app/pages"],
-      "@firefly/page/*": ["apps/firefly/mobile/src/app/pages/*"]
+      "@firefly/mobile/state/*": ["libs/firefly/mobile/src/state/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
