@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
-import { ModulePage } from '@firefly/app/modules';
-
-import { PageAssetsEvents } from './assets-events.page';
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
 import { ModulePipeTimestamp } from '@theory/firebase';
+
+import { ModulePage } from '../../modules';
+import { PageAssetsEvents } from './assets-events.page';
 
 @NgModule
 ({

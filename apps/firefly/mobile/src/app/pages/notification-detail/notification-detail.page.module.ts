@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ModulePage } from '@firefly/app/modules';
-import { PageNotificationDetail } from './notification-detail.page';
-import { RoutesPageNotificationDetail } from './notification-detail.page.routes';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+
 import { ModuleComponentItemMap, ModuleComponentSlide } from '@firefly/mobile';
 import { ModuleComponentButtonAction } from '@firefly/core';
 import { ModuleDirectiveElevation } from '@theory/google';
+
+import { ModulePage } from '../../modules';
+import { PageNotificationDetail } from './notification-detail.page';
+import { RoutesPageNotificationDetail } from './notification-detail.page.routes';
 
 @NgModule
 ({

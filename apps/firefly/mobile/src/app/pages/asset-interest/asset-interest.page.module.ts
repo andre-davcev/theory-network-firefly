@@ -3,14 +3,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { ModuleComponentItemHeader, ModuleComponentItemDescription, ModuleComponentItemMap, ModuleComponentItemImage } from '@firefly/mobile';
-import { ModulePage } from '@firefly/app/modules';
 
-import { PageAssetInterest } from './asset-interest.page';
-import { RoutesPageAssetInterest } from './asset-interest.page.routes';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { ModuleComponentButtonAdd } from '@firefly/core';
-import { ModulePageEventSelector } from '../event-selector';
 import { ModulePipeTimestamp } from '@theory/firebase';
+
+import { ModulePage } from '../../modules';
+import { ModulePageEventSelector } from '../event-selector';
+import { PageAssetInterest } from './asset-interest.page';
+import { RoutesPageAssetInterest } from './asset-interest.page.routes';
 @NgModule
 ({
     imports :

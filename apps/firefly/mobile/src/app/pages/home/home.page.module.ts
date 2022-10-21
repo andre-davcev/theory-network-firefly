@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentSlide } from '@firefly/mobile';
-import { ModulePage } from '@firefly/app/modules';
 
+import { ModulePage } from '../../modules';
 import { RoutesPageHome } from './home.page.routes';
 import { PageHome } from './home.page';
-import { ModuleDirectiveElevation } from '@theory/google';
 import { ModulePageLogin } from '../login';
 import { ModulePageNotifications } from '../notifications';
 

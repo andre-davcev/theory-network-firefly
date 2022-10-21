@@ -44,8 +44,6 @@
       "@firefly/mobile/*": ["libs/firefly/mobile/src/*"],
       "@firefly/mobile/component/*": ["libs/firefly/mobile/src/components/*"],
       "@firefly/mobile/state/*": ["libs/firefly/mobile/src/state/*"],
-      "@firefly/app/env": ["apps/firefly/mobile/src/environments/environment.ts"],
-      "@firefly/app/*": ["apps/firefly/mobile/src/app/*"],
       "@firefly/page": ["apps/firefly/mobile/src/app/pages"],
       "@firefly/page/*": ["apps/firefly/mobile/src/app/pages/*"]
     }
