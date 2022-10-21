@@ -1,5 +1,5 @@
 {
-  "name": "@firefly/core",
+  "name": "@firefly/shared",
   "version": "1.0.0-alpha.0",
   "main": "index.ts",
   "peerDependencies": {

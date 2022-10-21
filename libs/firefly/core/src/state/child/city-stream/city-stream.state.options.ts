@@ -3,7 +3,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { StateCityStreamModel } from './city-stream.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
-import { InterestType } from '@firefly/core/enums';
+import { InterestType } from '@firefly/shared/enums';
 import { PageSize } from '@theory/ngxs';
 
 export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =

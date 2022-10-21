@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 
-import { ActionInterestSetId, ActionInterestEventsGetAnonymous, ActionAppLoadingHide, StateInterest, ActionInterestEventsGetPending } from '@firefly/core';
+import { ActionInterestSetId, ActionInterestEventsGetAnonymous, ActionAppLoadingHide, StateInterest, ActionInterestEventsGetPending } from '@firefly/shared';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })

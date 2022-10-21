@@ -17,7 +17,7 @@ import {
     ActionUserProfileSetId,
     ActionUserProfilePatchMetadata
 } from './user-profile.actions';
-import { ServiceUsersProfiles } from '@firefly/core/services';
+import { ServiceUsersProfiles } from '@firefly/shared/services';
 import { StateDocument } from '@theory/ngxs';
 import { Injectable } from '@angular/core';
 import { StateUser } from '../user/user.state';

@@ -5,7 +5,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentSlide, ModuleComponentItemEvents } from '@firefly/mobile';
-import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
+import { ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/shared';
 
 import { ModulePage } from '../../modules';
 import { PageCalendar } from './calendar.page';

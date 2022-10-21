@@ -1,1 +1,1 @@
-export { EnvironmentProd as environment } from '@firefly/core';
+export { EnvironmentProd as environment } from '@firefly/shared';

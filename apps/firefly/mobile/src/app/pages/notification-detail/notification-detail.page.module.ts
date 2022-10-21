@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 import { ModuleComponentItemMap, ModuleComponentSlide } from '@firefly/mobile';
-import { ModuleComponentButtonAction } from '@firefly/core';
+import { ModuleComponentButtonAction } from '@firefly/shared';
 import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '../../modules';

@@ -3,8 +3,8 @@ import { State, Action, StateContext, Store } from '@ngxs/store';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { Subscription } from '@firefly/cloud';
-import { ServiceSubscriptions } from '@firefly/core/services';
-import { StateUser } from '@firefly/core/state/document/user';
+import { ServiceSubscriptions } from '@firefly/shared/services';
+import { StateUser } from '@firefly/shared/state/document/user';
 
 import { StateSubscriptionModel } from './subscription.state.model';
 import { StateSubscriptionOptions } from './subscription.state.options';
@@ -22,7 +22,7 @@ import {
 } from './subscription.actions';
 import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions';
 import { Injectable } from '@angular/core';
-import { Collection } from '@firefly/core/enums';
+import { Collection } from '@firefly/shared/enums';
 import { DocumentSnapshot } from '@theory/firebase';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)

@@ -4,7 +4,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { ActionAppLoadingHide, ActionAppLoadingShow, ActionUserEventsGetData, StateUserEvents } from '@firefly/core';
+import { ActionAppLoadingHide, ActionAppLoadingShow, ActionUserEventsGetData, StateUserEvents } from '@firefly/shared';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetsEvents implements Resolve<void>

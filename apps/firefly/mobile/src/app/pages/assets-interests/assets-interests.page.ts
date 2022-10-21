@@ -5,7 +5,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StateUserInterests, ActionInterestSetId, ActionEventInterestAdd, IconType, ActionAppLoadingShow } from '@firefly/core';
+import { StateUserInterests, ActionInterestSetId, ActionEventInterestAdd, IconType, ActionAppLoadingShow } from '@firefly/shared';
 import { Interest } from '@firefly/cloud';
 
 import { Pages } from '@firefly/mobile';

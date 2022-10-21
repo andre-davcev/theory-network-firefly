@@ -5,7 +5,7 @@ import { PageSize } from '@theory/ngxs';
 import { StateUserAlertsModel } from './user-alerts.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
-import { EventType } from '@firefly/core/enums';
+import { EventType } from '@firefly/shared/enums';
 
 export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
 {

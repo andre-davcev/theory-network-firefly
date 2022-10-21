@@ -4,10 +4,10 @@ import { from } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { Alert, Event, DateEvents } from '@firefly/cloud';
-import { EventType } from '@firefly/core/enums';
-import { ActionUserAlertsFilter, ActionUserAlertsGet, StateUserAlerts } from '@firefly/core/state/child';
-import { ActionUserEventsFilter, ActionUserEventsGet, StateUserEvents } from '@firefly/core/state/query';
-import { StateUser } from '@firefly/core/state/document';
+import { EventType } from '@firefly/shared/enums';
+import { ActionUserAlertsFilter, ActionUserAlertsGet, StateUserAlerts } from '@firefly/shared/state/child';
+import { ActionUserEventsFilter, ActionUserEventsGet, StateUserEvents } from '@firefly/shared/state/query';
+import { StateUser } from '@firefly/shared/state/document';
 
 import { StateCalendarModel } from './calendar.state.model';
 import { StateCalendarOptions } from './calendar.state.options';

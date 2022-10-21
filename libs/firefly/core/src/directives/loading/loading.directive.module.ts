@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { ModuleComponentLoading, ComponentLoading } from '@firefly/core/components';
+import { ModuleComponentLoading, ComponentLoading } from '@firefly/shared/components';
 
 import { DirectiveLoading } from './loading.directive';
 

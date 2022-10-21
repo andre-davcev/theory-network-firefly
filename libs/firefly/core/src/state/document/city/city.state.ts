@@ -12,8 +12,8 @@ import { StateLocation } from '@theory/capacitor';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { GeolocationPosition } from '@capacitor/core';
 import { CityInfo, StreamInterest, User } from '@firefly/cloud';
-import { ServiceLocation } from '@firefly/core/services';
-import { Collection } from '@firefly/core/enums';
+import { ServiceLocation } from '@firefly/shared/services';
+import { Collection } from '@firefly/shared/enums';
 import { ActionCityStreamSetData } from '../../child/city-stream/city-stream.actions';
 import { ServiceFirestoreBase } from '@theory/firebase';
 

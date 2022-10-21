@@ -6,7 +6,7 @@ import { Observable, of, forkJoin } from 'rxjs';
 import { PageSize } from '../../enums';
 import { StateCollectionModel } from './collection.model';
 import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
-import { ImageType } from '@firefly/core/enums';
+import { ImageType } from '@firefly/shared/enums';
 
 export abstract class StateCollection<T extends FirebaseDocument, M extends StateCollectionModel<T>>
 {

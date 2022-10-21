@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Store, Select } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 
-import { ActionAppLoadingHide, ActionAppLoadingShow, ActionUserProfileSetId, StateUserProfile } from '@firefly/core';
+import { ActionAppLoadingHide, ActionAppLoadingShow, ActionUserProfileSetId, StateUserProfile } from '@firefly/shared';
 import { switchMap, take } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })

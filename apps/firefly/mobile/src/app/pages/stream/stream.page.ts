@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateUser, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionInterestGet, ActionAppLoadingShow, ActionInterestsPage, StateInterests, ActionInterestsSubscriptionToggle, ActionInterestsSubscriptionOnOff, ActionInterestSetId } from '@firefly/core';
+import { StateUser, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionInterestGet, ActionAppLoadingShow, ActionInterestsPage, StateInterests, ActionInterestsSubscriptionToggle, ActionInterestsSubscriptionOnOff, ActionInterestSetId } from '@firefly/shared';
 import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, take, switchMap, tap } from 'rxjs/operators';

@@ -1,5 +1,5 @@
 import { SubscriptionPartial } from '@firefly/cloud';
-import { InterestType } from '@firefly/core';
+import { InterestType } from '@firefly/shared';
 
 export interface InterestsFilter
 {

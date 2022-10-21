@@ -8,7 +8,7 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages, StateMobile } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
-import { IconType, IconSize, Color } from '@firefly/core';
+import { IconType, IconSize, Color } from '@firefly/shared';
 
 @Component
 ({

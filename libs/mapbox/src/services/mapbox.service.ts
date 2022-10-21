@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { ParamsForwardGeocode, ParamsReverseGeocode } from '../api';
 import { EnvironmentMapbox } from '../interfaces';
-import { MapboxEnvironment } from '@firefly/core/environment';
+import { MapboxEnvironment } from '@firefly/shared/environment';
 import { ResponseGeocode } from '../responses';
 
 @Injectable({ providedIn: 'root' })

@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 import { ModuleDirectiveElevation } from '@theory/google';
-import { ModuleComponentIcon } from '@firefly/core';
+import { ModuleComponentIcon } from '@firefly/shared';
 import { ModuleComponentItemHeader } from '@firefly/mobile';
 
 import { ModulePage } from '../../modules';

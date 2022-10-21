@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconType, Color, StateUserProfile, ActionUserIsPublisherSet, StateUser } from '@firefly/core';
+import { IconType, Color, StateUserProfile, ActionUserIsPublisherSet, StateUser } from '@firefly/shared';
 import { Select, Store } from '@ngxs/store';
 import { StateMobile } from '@firefly/mobile';
 import { Observable } from 'rxjs';

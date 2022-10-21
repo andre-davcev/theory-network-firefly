@@ -1,7 +1,7 @@
 import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 
 import { Alert, AlertPartial } from '@firefly/cloud';
-import { ServiceAlerts } from '@firefly/core/services';
+import { ServiceAlerts } from '@firefly/shared/services';
 import { StateChild } from '@theory/ngxs';
 
 import { StateUserAlertsModel } from './user-alerts.state.model';
@@ -30,7 +30,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { from, of, forkJoin, Observable } from 'rxjs';
 import { ActionSheetController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
-import { Collection, EventType, ImageType } from '@firefly/core/enums';
+import { Collection, EventType, ImageType } from '@firefly/shared/enums';
 import { StateUser } from '../../document/user/user.state';
 import { switchMap, map, tap, delay } from 'rxjs/operators';
 import { Calendar } from '@ionic-native/calendar/ngx';

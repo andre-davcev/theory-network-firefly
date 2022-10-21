@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { Color } from '@firefly/core/enums';
-import { DirectiveLoadingOptions } from '@firefly/core';
+import { Color } from '@firefly/shared/enums';
+import { DirectiveLoadingOptions } from '@firefly/shared';
 import { BaseComponent } from '@theory/core';
 import { takeUntil, filter } from 'rxjs/operators';
 import { MapMovingMethod } from '@theory/mapbox';

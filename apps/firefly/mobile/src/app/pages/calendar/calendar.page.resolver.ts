@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { ActionCalendarFilter } from '@firefly/core';
+import { ActionCalendarFilter } from '@firefly/shared';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 

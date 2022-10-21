@@ -2,9 +2,9 @@ import { Directive, ComponentFactory, ComponentRef, Input, TemplateRef, Componen
 
 import { TypeOf } from '@theory/core';
 
-import { Color } from '@firefly/core/enums';
+import { Color } from '@firefly/shared/enums';
 import { DirectiveLoadingOptions } from './loading.directive.options';
-import { ComponentLoading } from '@firefly/core/components';
+import { ComponentLoading } from '@firefly/shared/components';
 
 @Directive
 ({

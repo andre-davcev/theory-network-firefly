@@ -1,6 +1,6 @@
 import { Component, Input, Output, OnChanges, SimpleChanges, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
 
-import { ServiceUtil } from '@firefly/core';
+import { ServiceUtil } from '@firefly/shared';
 
 @Component
 ({

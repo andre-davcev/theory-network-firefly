@@ -4,7 +4,7 @@ import { StatusBarStyle } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { ActionAppLoadingHide, ActionAppLoadingShow, ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/core';
+import { ActionAppLoadingHide, ActionAppLoadingShow, ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/shared';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
 import { switchMap, tap } from 'rxjs/operators';

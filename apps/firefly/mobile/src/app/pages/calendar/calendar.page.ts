@@ -21,7 +21,7 @@ import {
     ActionCalendarPage,
     StateCalendar,
     StateInterests
-} from '@firefly/core';
+} from '@firefly/shared';
 import {
     ActionMobileAuthSelect,
     ComponentHomeOptions,

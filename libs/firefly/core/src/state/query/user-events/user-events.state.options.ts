@@ -3,7 +3,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { StateUserEventsModel } from './user-events.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
-import { EventType } from '@firefly/core/enums';
+import { EventType } from '@firefly/shared/enums';
 
 export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 {

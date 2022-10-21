@@ -5,7 +5,7 @@ import { RouterModule} from '@angular/router';
 import { ModulePipeTimestamp } from '@theory/firebase';
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentItemHeader } from '@firefly/mobile';
-import { ModuleComponentIconSubscribe, ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
+import { ModuleComponentIconSubscribe, ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/shared';
 
 import { ModulePage } from '../../modules';
 import { RoutesPageStream } from './stream.page.routes';

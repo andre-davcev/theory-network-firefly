@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ModuleDirectiveElevation } from '@theory/google';
-import { ModuleComponentIcon } from '@firefly/core';
+import { ModuleComponentIcon } from '@firefly/shared';
 
 import { ModulePage } from '../../modules';
 import { RoutesPageCategories } from './categories.page.routes';

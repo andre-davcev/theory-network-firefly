@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ComponentIcon } from '@firefly/core';
+import { ComponentIcon } from '@firefly/shared';
 
 describe('ComponentIcon', () => {
   let component: ComponentIcon;

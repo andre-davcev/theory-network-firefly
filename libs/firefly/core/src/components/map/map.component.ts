@@ -9,7 +9,7 @@ import { BaseComponent } from '@theory/core';
 import { MapboxPlaceType, MapboxMapStyle, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
 import { Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder'
-import { Color } from '@firefly/core/enums';
+import { Color } from '@firefly/shared/enums';
 import { MapMovingMethod } from '@theory/mapbox';
 import { MapComponent } from 'ngx-mapbox-gl';
 import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
