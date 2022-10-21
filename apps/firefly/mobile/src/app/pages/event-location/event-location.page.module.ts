@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 //import { RouterModule } from '@angular/router';
 
 import { ModuleDirectiveElevation } from '@theory/google';
-import { ModulePage } from '@firefly/app/modules';
-
-//import { RoutesPageEventLocation } from './event-location.page.routes';
-import { PageEventLocation } from './event-location.page';
 import { ModuleComponentMap } from '@firefly/core';
-import { TranslateModule } from '@ngx-translate/core';
+
+import { ModulePage } from '../../modules';
+import { PageEventLocation } from './event-location.page';
+//import { RoutesPageEventLocation } from './event-location.page.routes';
+
 
 @NgModule
 ({

@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CoreModule, ModulePage } from '@firefly/app/modules';
+import { ModuleComponentIcon } from '@firefly/core';
 
 import { ModuleRoutingApp } from './app.component.routing';
 import { ComponentApp } from './app.component';
-import { ModuleComponentIcon } from '@firefly/core';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule, ModulePage } from '../modules';
 import { ModulePageLogin } from '../pages';
 
 @NgModule

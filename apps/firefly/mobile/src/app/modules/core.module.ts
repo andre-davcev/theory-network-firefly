@@ -28,7 +28,6 @@ import {
   StateUserProfile, StateCity, StateApp, StateAlerts, StateInterests, StateCalendar
 } from '@firefly/core';
 import { StateNotifications, StateSearch } from '@firefly/mobile';
-import { environment } from '@firefly/app/env';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -39,6 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StateStorage } from '@theory/firebase';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+
+import { environment } from '../../environments/environment';
 
 export function createTranslateLoader(http: HttpClient)
 {

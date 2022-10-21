@@ -1,15 +1,15 @@
 import {NgModule} from '@angular/core';
-
-import { ModulePage } from '@firefly/app/modules';
-
-import { PageUserProfile } from './user-profile.page';
-import { ModuleDirectiveElevation } from '@theory/google';
-import { RoutesPageUserProfile } from './user-profile.page.routes';
 import { RouterModule } from '@angular/router';
-import { ModuleComponentIcon } from '@firefly/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ModuleComponentItemHeader } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+
+import { ModuleDirectiveElevation } from '@theory/google';
+import { ModuleComponentIcon } from '@firefly/core';
+import { ModuleComponentItemHeader } from '@firefly/mobile';
+
+import { ModulePage } from '../../modules';
+import { PageUserProfile } from './user-profile.page';
+import { RoutesPageUserProfile } from './user-profile.page.routes';
 
 @NgModule
 ({

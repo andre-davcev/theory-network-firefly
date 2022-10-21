@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterModule} from '@angular/router';
 
-import { ModuleComponentIconSubscribe, ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
-import { ModulePage } from '@firefly/app/modules';
-
-import { RoutesPageStream } from './stream.page.routes';
-import { PageStream } from './stream.page';
+import { ModulePipeTimestamp } from '@theory/firebase';
 import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentItemHeader } from '@firefly/mobile';
+import { ModuleComponentIconSubscribe, ModuleComponentIconMessage, ModuleComponentButtonAdd } from '@firefly/core';
 
-import { MatExpansionModule } from '@angular/material/expansion';
-import { ModulePipeTimestamp } from '@theory/firebase';
+import { ModulePage } from '../../modules';
+import { RoutesPageStream } from './stream.page.routes';
+import { PageStream } from './stream.page';
+
 
 @NgModule
 ({

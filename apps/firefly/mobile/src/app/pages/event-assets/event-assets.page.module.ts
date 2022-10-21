@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 
 import { ModuleComponentImageGrid } from '@theory/ionic';
-import { ModulePage } from '@firefly/app/modules';
-
-import { PageEventAssets } from './event-assets.page';
 import { ModulePipeTimestamp } from '@theory/firebase';
+
+import { ModulePage } from '../../modules';
+import { PageEventAssets } from './event-assets.page';
 
 @NgModule
 ({

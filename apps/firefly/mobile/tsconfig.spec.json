@@ -32,8 +32,6 @@
       "@firefly/cloud": ["../../../apps/firefly/cloud/src/library/index.ts"],
       "@firefly/mobile": ["../../../libs/firefly/mobile/index.ts"],
       "@firefly/mobile/*": ["../../../libs/firefly/mobile/src/*"],
-      "@firefly/app/env": ["./src/environments/environment.ts"],
-      "@firefly/app/*": ["./src/app/*"],
       "@firefly/page": ["./src/app/pages"],
       "@firefly/page/*": ["./src/app/pages/*"]
     }

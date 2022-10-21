@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ModuleComponentLogo } from '@firefly/core';
-import { ModulePage } from '@firefly/app/modules';
 
+import { ModulePage } from '../../modules';
 import { PageAuth } from './auth.page';
 import { RoutesPageAuth } from './auth.page.routes';
 

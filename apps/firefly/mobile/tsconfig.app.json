@@ -41,8 +41,6 @@
       "@firefly/mobile/state/*": [
         "../../../libs/firefly/mobile/src/state/*"
       ],
-      "@firefly/app/env": ["./src/environments/environment.ts"],
-      "@firefly/app/*": ["./src/app/*"],
       "@firefly/page": ["./src/app/pages"],
       "@firefly/page/*": ["./src/app/pages/*"]
     }
