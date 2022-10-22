@@ -26,20 +26,20 @@
       "@theory/nativescript/*": ["../../../libs/nativescript/src/*"],
       "@theory/ngxs": ["../../../libs/ngxs/index.ts"],
       "@theory/ngxs/*": ["../../../libs/ngxs/src/*"],
-      "@firefly/shared": ["../../../libs/firefly/core/index.ts"],
-      "@firefly/shared/*": ["../../../libs/firefly/core/src/*"],
+      "@firefly/shared": ["../../../libs/firefly-shared/index.ts"],
+      "@firefly/shared/*": ["../../../libs/firefly-shared/src/*"],
       "@firefly/shared/component/*": [
-        "../../../libs/firefly/core/src/components/*"
+        "../../../libs/firefly-shared/src/components/*"
       ],
-      "@firefly/shared/state/*": ["../../../libs/firefly/core/src/state/*"],
+      "@firefly/shared/state/*": ["../../../libs/firefly-shared/src/state/*"],
       "@firefly/cloud": ["../../../apps/firefly/cloud/src/library/index.ts"],
-      "@firefly/mobile": ["../../../libs/firefly/mobile/index.ts"],
-      "@firefly/mobile/*": ["../../../libs/firefly/mobile/src/*"],
+      "@firefly/mobile": ["../../../libs/firefly-mobile/index.ts"],
+      "@firefly/mobile/*": ["../../../libs/firefly-mobile/src/*"],
       "@firefly/mobile/component/*": [
-        "../../../libs/firefly/mobile/src/components/*"
+        "../../../libs/firefly-mobile/src/components/*"
       ],
       "@firefly/mobile/state/*": [
-        "../../../libs/firefly/mobile/src/state/*"
+        "../../../libs/firefly-mobile/src/state/*"
       ]
     }
   },
