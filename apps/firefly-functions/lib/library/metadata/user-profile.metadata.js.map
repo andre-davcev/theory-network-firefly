@@ -1,0 +1,1 @@
+{"version":3,"file":"user-profile.metadata.js","sourceRoot":"","sources":["../../../src/library/metadata/user-profile.metadata.ts"],"names":[],"mappings":"","sourcesContent":["export interface MetadataUserProfile\n{\n\n}\n"]}

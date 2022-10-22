@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "module": "commonjs",
-    "types": ["jasmine", "node"],
+    "types": ["jest", "node"],
     "baseUrl": "./",
     "paths": {
       "@theory/bigdatacloud": ["../../libs/bigdatacloud/index.ts"],
@@ -29,7 +29,7 @@
       "@theory/ngxs/*": ["../../libs/ngxs/src/*"],
       "@firefly/shared": ["../../libs/firefly-shared/index.ts"],
       "@firefly/shared/*": ["../../libs/firefly-shared/src/*"],
-      "@firefly/cloud": ["../../apps/firefly/cloud/src/library/index.ts"],
+      "@firefly/cloud": ["../../apps/firefly-functions/src/library/index.ts"],
       "@firefly/mobile": ["../../libs/firefly-mobile/index.ts"],
       "@firefly/mobile/*": ["../../libs/firefly-mobile/src/*"]
     }

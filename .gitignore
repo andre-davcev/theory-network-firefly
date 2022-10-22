@@ -64,7 +64,7 @@ libs/**/*.ngsummary.json
 apps/**/app/src/main/assets/public/*
 
 # functions
-apps/*/cloud/lib
+apps/firefly-cloud/lib
 
 # custom
 algolia.txt

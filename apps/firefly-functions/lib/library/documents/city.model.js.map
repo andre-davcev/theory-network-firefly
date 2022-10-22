@@ -1,0 +1,1 @@
+{"version":3,"file":"city.model.js","sourceRoot":"","sources":["../../../src/library/documents/city.model.ts"],"names":[],"mappings":"","sourcesContent":["\nimport { FirebaseDocument, CityInfo } from '../interfaces';\n\nexport interface City extends FirebaseDocument, CityInfo\n{\n    nearby: Record<string, number>;\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"list.metadata.js","sourceRoot":"","sources":["../../../src/library/metadata/list.metadata.ts"],"names":[],"mappings":"","sourcesContent":["export interface MetadataList\n{\n    index?: number;\n}\n"]}

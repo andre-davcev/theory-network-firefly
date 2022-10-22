@@ -1,0 +1,1 @@
+{"version":3,"file":"subscription.model.js","sourceRoot":"","sources":["../../../src/library/documents/subscription.model.ts"],"names":[],"mappings":"","sourcesContent":["import { Interest } from './interest.model';\nimport { SubscriptionPartial } from '../models';\n\nexport type Subscription = Interest & SubscriptionPartial;\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"subscription.partial.js","sourceRoot":"","sources":["../../../src/library/models/subscription.partial.ts"],"names":[],"mappings":"","sourcesContent":["export interface SubscriptionPartial\n{\n    on: boolean;\n}\n"]}
