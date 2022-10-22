@@ -49,9 +49,6 @@ plugins/
 plugins/android.json
 plugins/ios.json
 
-# nativescript
-hooks
-
 # libs
 libs/**/*.js
 libs/**/*.map
