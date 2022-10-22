@@ -1,0 +1,1 @@
+{"version":3,"file":"project.enum.js","sourceRoot":"","sources":["../../../src/library/enums/project.enum.ts"],"names":[],"mappings":";;;AAAA,IAAY,OAIX;AAJD,WAAY,OAAO;IAEf,8CAAqC,CAAA;IACrC,kCAAuB,CAAA;AAC3B,CAAC,EAJW,OAAO,GAAP,eAAO,KAAP,eAAO,QAIlB","sourcesContent":["export enum Project\n{\n    Dev   = 'project-4334231676697990915',\n    Produ = 'firefly-b1072'\n}\n"]}

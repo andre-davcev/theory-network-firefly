@@ -1,0 +1,1 @@
+{"version":3,"file":"interest.metadata.js","sourceRoot":"","sources":["../../../src/library/metadata/interest.metadata.ts"],"names":[],"mappings":"","sourcesContent":["import { MetadataList } from './list.metadata';\n\nexport interface MetadataInterest extends MetadataList\n{\n    image?: string;\n}\n"]}

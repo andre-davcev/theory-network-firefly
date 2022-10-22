@@ -1,0 +1,1 @@
+{"version":3,"file":"alert.model.js","sourceRoot":"","sources":["../../../src/library/documents/alert.model.ts"],"names":[],"mappings":"","sourcesContent":["import { Event } from './event.model';\nimport { AlertPartial } from '../models';\nimport { MetadataAlert } from '../metadata';\n\nexport type Alert = Event & AlertPartial & { metadata: MetadataAlert };\n"]}
