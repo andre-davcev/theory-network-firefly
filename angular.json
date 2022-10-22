@@ -526,32 +526,32 @@
     },
     "firefly-web": {
       "projectType": "application",
-      "root": "apps/firefly/web",
-      "sourceRoot": "apps/firefly/web/src",
+      "root": "apps/firefly-web",
+      "sourceRoot": "apps/firefly-web/src",
       "prefix": "theory",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/firefly/web",
-            "index": "apps/firefly/web/src/index.html",
-            "main": "apps/firefly/web/src/main.ts",
-            "polyfills": "apps/firefly/web/src/polyfills.ts",
-            "tsConfig": "apps/firefly/web/tsconfig.app.json",
+            "outputPath": "dist/apps/firefly-web",
+            "index": "apps/firefly-web/src/index.html",
+            "main": "apps/firefly-web/src/main.ts",
+            "polyfills": "apps/firefly-web/src/polyfills.ts",
+            "tsConfig": "apps/firefly-web/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "apps/firefly/web/src/favicon.ico",
-              "apps/firefly/web/src/assets"
+              "apps/firefly-web/src/favicon.ico",
+              "apps/firefly-web/src/assets"
             ],
-            "styles": ["apps/firefly/web/src/styles.scss"],
+            "styles": ["apps/firefly-web/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/firefly/web/src/environments/environment.ts",
-                  "with": "apps/firefly/web/src/environments/environment.prod.ts"
+                  "replace": "apps/firefly-web/src/environments/environment.ts",
+                  "with": "apps/firefly-web/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -597,16 +597,16 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "apps/firefly/web/src/**/*.ts",
-              "apps/firefly/web/src/**/*.html"
+              "apps/firefly-web/src/**/*.ts",
+              "apps/firefly-web/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/firefly/web"],
+          "outputs": ["coverage/apps/firefly-web"],
           "options": {
-            "jestConfig": "apps/firefly/web/jest.config.js",
+            "jestConfig": "apps/firefly-web/jest.config.js",
             "passWithNoTests": true
           }
         }
