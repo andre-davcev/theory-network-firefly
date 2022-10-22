@@ -1,11 +1,11 @@
 {
-  "extends": ["plugin:cypress/recommended", "../../../.eslintrc.json"],
+  "extends": ["plugin:cypress/recommended", "../../.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
-        "project": "apps/firefly/web-e2e/tsconfig.*?.json"
+        "project": "e2e/firefly-web/tsconfig.*?.json"
       },
       "rules": {}
     },
