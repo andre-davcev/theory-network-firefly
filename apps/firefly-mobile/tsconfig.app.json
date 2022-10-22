@@ -1,0 +1,53 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "baseUrl": "./",
+    "types": [],
+    "paths": {
+      "@theory/bigdatacloud": ["../../libs/bigdatacloud/index.ts"],
+      "@theory/bigdatacloud/*": ["../../libs/bigdatacloud/src/*"],
+      "@theory/capacitor": ["../../libs/capacitor/index.ts"],
+      "@theory/capacitor/*": ["../../libs/capacitor/src/*"],
+      "@theory/cordova": ["../../libs/cordova/index.ts"],
+      "@theory/cordova/*": ["../../libs/cordova/src/*"],
+      "@theory/core": ["../../libs/core/index.ts"],
+      "@theory/core/*": ["../../libs/core/src/*"],
+      "@theory/core/feature/*": ["../../libs/core/src/features/*"],
+      "@theory/firebase": ["../../libs/firebase/index.ts"],
+      "@theory/firebase/*": ["../../libs/firebase/src/*"],
+      "@theory/google": ["../../libs/google/index.ts"],
+      "@theory/google/*": ["../../libs/google/src/*"],
+      "@theory/ionic": ["../../libs/ionic/index.ts"],
+      "@theory/ionic/*": ["../../libs/ionic/src/*"],
+      "@theory/mapbox": ["../../libs/mapbox/index.ts"],
+      "@theory/mapbox/*": ["../../libs/mapbox/src/*"],
+      "@theory/ngxs": ["../../libs/ngxs/index.ts"],
+      "@theory/ngxs/*": ["../../libs/ngxs/src/*"],
+      "@firefly/shared": ["../../libs/firefly-shared/index.ts"],
+      "@firefly/shared/*": ["../../libs/firefly-shared/src/*"],
+      "@firefly/shared/component/*": [
+        "../../libs/firefly-shared/src/components/*"
+      ],
+      "@firefly/shared/state/*": ["../../libs/firefly-shared/src/state/*"],
+      "@firefly/cloud": ["../../apps/firefly/cloud/src/library/index.ts"],
+      "@firefly/mobile": ["../../libs/firefly-mobile/index.ts"],
+      "@firefly/mobile/*": ["../../libs/firefly-mobile/src/*"],
+      "@firefly/mobile/component/*": [
+        "../../libs/firefly-mobile/src/components/*"
+      ],
+      "@firefly/mobile/state/*": [
+        "../../libs/firefly-mobile/src/state/*"
+      ]
+    }
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "**/*.ts",
+    "**/*.d.ts"
+  ],
+  "exclude": ["src/test.ts", "**/*.spec.ts"]
+}

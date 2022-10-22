@@ -3,7 +3,7 @@
   "defaultProject": "firefly-mobile",
   "projects": {
     "firefly-mobile": {
-      "root": "apps/firefly/mobile",
+      "root": "apps/firefly-mobile",
       "name": "Firefly",
       "integrations": {
         "capacitor": {},
