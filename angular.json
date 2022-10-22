@@ -136,8 +136,7 @@
           "options": {
             "tsConfig": [
               "apps/firefly/mobile/tsconfig.app.json",
-              "apps/firefly/mobile/tsconfig.spec.json",
-              "apps/firefly/mobile/e2e/tsconfig.json"
+              "apps/firefly/mobile/tsconfig.spec.json"
             ],
             "exclude": ["**/node_modules/**"]
           }
@@ -614,15 +613,15 @@
       }
     },
     "firefly-web-e2e": {
-      "root": "apps/firefly/web-e2e",
-      "sourceRoot": "apps/firefly/web-e2e/src",
+      "root": "e2e/firefly-web",
+      "sourceRoot": "e2e/firefly-web/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/firefly/web-e2e/cypress.json",
-            "tsConfig": "apps/firefly/web-e2e/tsconfig.e2e.json",
+            "cypressConfig": "e2e/firefly-web/cypress.json",
+            "tsConfig": "e2e/firefly-web/tsconfig.e2e.json",
             "devServerTarget": "firefly-web:serve"
           },
           "configurations": {
@@ -634,7 +633,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/firefly/web-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["e2e/firefly-web/**/*.{js,ts}"]
           }
         }
       }

@@ -6,7 +6,7 @@
   "pluginsFile": "./src/plugins/index",
   "supportFile": "./src/support/index.ts",
   "video": true,
-  "videosFolder": "../../../dist/cypress/apps/firefly/web-e2e/videos",
-  "screenshotsFolder": "../../../dist/cypress/apps/firefly/web-e2e/screenshots",
+  "videosFolder": "../../dist/cypress/e2e/firefly-web/videos",
+  "screenshotsFolder": "../../dist/cypress/e2e/firefly-web/screenshots",
   "chromeWebSecurity": false
 }
