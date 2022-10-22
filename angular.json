@@ -38,7 +38,7 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules",
-                "libs/firefly/core/src/sass",
+                "libs/firefly-shared/src/sass",
                 "apps/firefly/mobile/src/sass"
               ]
             },
@@ -168,71 +168,71 @@
       }
     },
     "lib-firefly-core": {
-      "root": "libs/firefly/core",
-      "sourceRoot": "libs/firefly/core/src",
+      "root": "libs/firefly-shared",
+      "sourceRoot": "libs/firefly-shared/src",
       "projectType": "library",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
           "options": {
-            "tsConfig": "libs/firefly/core/tsconfig.lib.json",
-            "project": "libs/firefly/core/ng-package.json",
+            "tsConfig": "libs/firefly-shared/tsconfig.lib.json",
+            "project": "libs/firefly-shared/ng-package.json",
             "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/firefly/core/src/test.ts",
-            "tsConfig": "libs/firefly/core/tsconfig.spec.json",
-            "karmaConfig": "libs/firefly/core/karma.conf.js"
+            "main": "libs/firefly-shared/src/test.ts",
+            "tsConfig": "libs/firefly-shared/tsconfig.spec.json",
+            "karmaConfig": "libs/firefly-shared/karma.conf.js"
           },
-          "outputs": ["coverage/libs/firefly/core"]
+          "outputs": ["coverage/libs/firefly-shared"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/firefly/core/tsconfig.lib.json",
-              "libs/firefly/core/tsconfig.spec.json"
+              "libs/firefly-shared/tsconfig.lib.json",
+              "libs/firefly-shared/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/firefly/core/**/*"]
+            "exclude": ["**/node_modules/**", "!libs/firefly-shared/**/*"]
           }
         }
       }
     },
     "lib-firefly-mobile": {
-      "root": "libs/firefly/mobile",
-      "sourceRoot": "libs/firefly/mobile/src",
+      "root": "libs/firefly-mobile",
+      "sourceRoot": "libs/firefly-mobile/src",
       "projectType": "library",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
           "options": {
-            "tsConfig": "libs/firefly/mobile/tsconfig.lib.json",
-            "project": "libs/firefly/mobile/ng-package.json",
+            "tsConfig": "libs/firefly-mobile/tsconfig.lib.json",
+            "project": "libs/firefly-mobile/ng-package.json",
             "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/firefly/mobile/src/test.ts",
-            "tsConfig": "libs/firefly/mobile/tsconfig.spec.json",
-            "karmaConfig": "libs/firefly/mobile/karma.conf.js"
+            "main": "libs/firefly-mobile/src/test.ts",
+            "tsConfig": "libs/firefly-mobile/tsconfig.spec.json",
+            "karmaConfig": "libs/firefly-mobile/karma.conf.js"
           },
-          "outputs": ["coverage/libs/firefly/mobile"]
+          "outputs": ["coverage/libs/firefly-mobile"]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/firefly/mobile/tsconfig.lib.json",
-              "libs/firefly/mobile/tsconfig.spec.json"
+              "libs/firefly-mobile/tsconfig.lib.json",
+              "libs/firefly-mobile/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/firefly/mobile/**/*"]
+            "exclude": ["**/node_modules/**", "!libs/firefly-mobile/**/*"]
           }
         }
       }

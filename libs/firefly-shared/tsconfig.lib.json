@@ -1,7 +1,7 @@
 {
-  "extends": "../../../tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "../../../dist/out-tsc/libs/firefly/core",
+    "outDir": "../../dist/out-tsc/libs/firefly-shared",
     "target": "es2015",
     "module": "es2015",
     "moduleResolution": "node",

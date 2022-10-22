@@ -29,7 +29,7 @@ import {
     ActionInterestEventsGetPending,
     ActionInterestEventsAdd
 } from './interest.actions';
-import { ActionUserInterestsAdd, ActionUserInterestsRemove, ActionUserInterestsSync } from '../..//query/user-interests';
+import { ActionUserInterestsAdd, ActionUserInterestsRemove, ActionUserInterestsSync } from '../../query/user-interests';
 import { ActionCityStreamRemove, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
