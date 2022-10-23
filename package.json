@@ -129,6 +129,7 @@
     "mapbox-gl": "^2.2.0",
     "moment": "^2.29.1",
     "ngx-mapbox-gl": "^6.0.4",
+    "normalize.css": "^8.0.1",
     "reflect-metadata": "^0.1.12",
     "rxfire": "^4.0.0",
     "rxjs": "6.5.5",

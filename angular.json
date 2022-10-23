@@ -543,7 +543,14 @@
               "apps/firefly-web/src/favicon.ico",
               "apps/firefly-web/src/assets"
             ],
-            "styles": ["apps/firefly-web/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules", "apps/firefly-web/src/styles"]
+            },
+            "styles": [
+              "node_modules/normalize.css/normalize.css",
+              "styles/web/_reset.scss",
+              "apps/firefly-web/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
