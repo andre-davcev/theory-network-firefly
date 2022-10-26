@@ -2,7 +2,7 @@ import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/s
 import { Observable, of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 
 import { ServiceBase } from './base.service';
 import { ImageSize } from '../enums';
@@ -15,7 +15,7 @@ export class ServiceAsset<T> extends ServiceBase<T>
     (
         name:        string,
         firestore:   AngularFirestore,
-        formBuilder: FormBuilder,
+        formBuilder: UntypedFormBuilder,
         storage:     AngularFireStorage,
         reference?:  boolean
     )

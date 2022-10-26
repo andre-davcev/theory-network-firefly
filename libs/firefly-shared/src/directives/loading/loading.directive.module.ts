@@ -6,23 +6,13 @@ import { DirectiveLoading } from './loading.directive';
 
 @NgModule
 ({
-    imports:
-    [
+    imports: [
         ModuleComponentLoading
     ],
-
-    declarations :
-    [
+    declarations: [
         DirectiveLoading
     ],
-
-    entryComponents:
-    [
-        ComponentLoading
-    ],
-
-    exports:
-    [
+    exports: [
         DirectiveLoading
     ]
 })

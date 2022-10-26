@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Event } from '@firefly/cloud';
 import { fromDate, ServiceFirestore, Timestamp } from '@theory/firebase';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, Regex, ValidatorsExtended } from '@theory/core';
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +13,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
     constructor
     (
         firestore:   AngularFirestore,
-        formBuilder: FormBuilder
+        formBuilder: UntypedFormBuilder
     )
     {
         super(firestore, formBuilder);
@@ -23,7 +23,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
         {
-            const form: FormGroup = control.parent as FormGroup;
+            const form: UntypedFormGroup = control.parent as UntypedFormGroup;
 
             let valid: boolean = false;
 
@@ -105,7 +105,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
         return event;
     }
 
-    public formCreate(event: Event): FormGroup
+    public formCreate(event: Event): UntypedFormGroup
     {
         //temporary
         if(!event.metadata)

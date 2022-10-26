@@ -8,8 +8,7 @@ import { PageLogin } from './login.page';
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         ModulePage,
         ReactiveFormsModule,
         ModuleComponentLogo,
@@ -18,10 +17,8 @@ import { PageLogin } from './login.page';
         ModuleComponentIconMessage,
         ModuleComponentButtonAction
     ],
-
-    declarations    : [PageLogin],
-    exports         : [PageLogin],
-    entryComponents : [PageLogin]
+    declarations: [PageLogin],
+    exports: [PageLogin]
 })
 
 export class ModulePageLogin { }

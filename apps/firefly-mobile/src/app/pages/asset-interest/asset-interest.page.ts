@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
@@ -25,7 +25,7 @@ import { TimestampFormat } from '@theory/firebase';
 
 export class PageAssetInterest extends BaseComponent implements OnInit
 {
-    @Select(StateInterest.formGroup()) form$:         Observable<FormGroup>;
+    @Select(StateInterest.formGroup()) form$:         Observable<UntypedFormGroup>;
     @Select(StateInterest.isNew())     isNew$:        Observable<boolean>;
     @Select(StateInterest.canUpdate()) canUpdate$:    Observable<boolean>;
     @Select(StateInterest.events)      events$:       Observable<Event[]>;

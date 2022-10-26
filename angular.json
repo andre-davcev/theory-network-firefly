@@ -95,7 +95,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/firefly-mobile/jest.config.js"
+            "jestConfig": "apps/firefly-mobile/jest.config.ts"
           }
         },
         "lint": {
@@ -105,7 +105,8 @@
               "apps/firefly-mobile/src/**/*.ts",
               "apps/firefly-mobile/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "ionic-cordova-build": {
           "builder": "@ionic/angular-toolkit:cordova-build",
@@ -216,12 +217,13 @@
               "apps/firefly-web/src/**/*.ts",
               "apps/firefly-web/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/firefly-web/jest.config.js"
+            "jestConfig": "apps/firefly-web/jest.config.ts"
           }
         }
       }
@@ -251,7 +253,8 @@
               "e2e/firefly-web/src/**/*.ts",
               "e2e/firefly-web/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -276,12 +279,13 @@
               "libs/bigdatacloud/src/**/*.ts",
               "libs/bigdatacloud/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/bigdatacloud/jest.config.js"
+            "jestConfig": "libs/bigdatacloud/jest.config.ts"
           }
         }
       },
@@ -308,7 +312,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/capacitor/jest.config.js"
+            "jestConfig": "libs/capacitor/jest.config.ts"
           }
         },
         "lint": {
@@ -318,7 +322,8 @@
               "libs/capacitor/src/**/*.ts",
               "libs/capacitor/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -339,7 +344,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/core/jest.config.js"
+            "jestConfig": "libs/core/jest.config.ts"
           }
         },
         "lint": {
@@ -349,7 +354,8 @@
               "libs/core/src/**/*.ts",
               "libs/core/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -370,7 +376,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/firebase/jest.config.js"
+            "jestConfig": "libs/firebase/jest.config.ts"
           }
         },
         "lint": {
@@ -380,7 +386,8 @@
               "libs/firebase/src/**/*.ts",
               "libs/firebase/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -401,7 +408,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/firefly-shared/jest.config.js"
+            "jestConfig": "libs/firefly-shared/jest.config.ts"
           }
         },
         "lint": {
@@ -411,7 +418,8 @@
               "libs/firefly-shared/src/**/*.ts",
               "libs/firefly-shared/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -432,7 +440,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/firefly-mobile/jest.config.js"
+            "jestConfig": "libs/firefly-mobile/jest.config.ts"
           }
         },
         "lint": {
@@ -442,7 +450,8 @@
               "libs/firefly-mobile/src/**/*.ts",
               "libs/firefly-mobile/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -463,7 +472,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/google/jest.config.js"
+            "jestConfig": "libs/google/jest.config.ts"
           }
         },
         "lint": {
@@ -473,7 +482,8 @@
               "libs/google/src/**/*.ts",
               "libs/google/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -494,7 +504,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ionic/jest.config.js"
+            "jestConfig": "libs/ionic/jest.config.ts"
           }
         },
         "lint": {
@@ -504,7 +514,8 @@
               "libs/ionic/src/**/*.ts",
               "libs/ionic/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -525,7 +536,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/mapbox/jest.config.js"
+            "jestConfig": "libs/mapbox/jest.config.ts"
           }
         },
         "lint": {
@@ -535,7 +546,8 @@
               "libs/mapbox/src/**/*.ts",
               "libs/mapbox/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
       }
     },
@@ -560,12 +572,13 @@
               "libs/ngxs/src/**/*.ts",
               "libs/ngxs/src/**/*.html"
             ]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ngxs/jest.config.js"
+            "jestConfig": "libs/ngxs/jest.config.ts"
           }
         }
       },

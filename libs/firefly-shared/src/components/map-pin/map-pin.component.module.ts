@@ -5,13 +5,10 @@ import { ComponentMapPin } from './map-pin.component';
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         CommonModule
     ],
-
-    declarations    : [ComponentMapPin],
-    exports         : [ComponentMapPin],
-    entryComponents : [ComponentMapPin]
+    declarations: [ComponentMapPin],
+    exports: [ComponentMapPin]
 })
 export class ModuleComponentMapPin { }

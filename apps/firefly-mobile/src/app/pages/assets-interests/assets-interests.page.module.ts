@@ -8,16 +8,13 @@ import { PageAssetsInterests } from './assets-interests.page';
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         ModulePage,
         ModuleDirectiveElevation,
         ModuleComponentIconMessage,
         ModuleComponentButtonAdd
     ],
-
-    declarations    : [PageAssetsInterests],
-    exports         : [PageAssetsInterests],
-    entryComponents : [PageAssetsInterests]
+    declarations: [PageAssetsInterests],
+    exports: [PageAssetsInterests]
 })
 export class ModulePageAssetsInterests { }

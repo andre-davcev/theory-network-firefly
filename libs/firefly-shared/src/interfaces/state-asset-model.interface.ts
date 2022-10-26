@@ -1,10 +1,10 @@
 import { FormNgxs } from '@theory/ngxs';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 export interface StateAssetModel<T>
 {
     empty     : T;
     form      : FormNgxs;
-    formGroup : FormGroup;
+    formGroup : UntypedFormGroup;
     formPath  : string;
 }

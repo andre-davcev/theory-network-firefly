@@ -14,8 +14,7 @@ import { PageAssetInterest } from './asset-interest.page';
 import { RoutesPageAssetInterest } from './asset-interest.page.routes';
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         ReactiveFormsModule,
         RouterModule,
         ModulePage,
@@ -29,13 +28,8 @@ import { RoutesPageAssetInterest } from './asset-interest.page.routes';
         NgxsFormPluginModule,
         ModulePipeTimestamp
     ],
-
-    declarations : [PageAssetInterest],
-    exports : [PageAssetInterest],
-    entryComponents:
-    [
-        PageAssetInterest
-    ]
+    declarations: [PageAssetInterest],
+    exports: [PageAssetInterest]
 })
 
 export class ModulePageAssetInterest { }

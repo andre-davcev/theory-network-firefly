@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Interest } from '@firefly/cloud';
 import { ServiceFirestore } from '@theory/firebase';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ValidatorsExtended } from '@theory/core';
 
 
@@ -13,7 +13,7 @@ export class ServiceInterests extends ServiceFirestore<Interest>
     constructor
     (
         firestore:   AngularFirestore,
-        formBuilder: FormBuilder
+        formBuilder: UntypedFormBuilder
     )
     {
         super(firestore, formBuilder);
@@ -33,7 +33,7 @@ export class ServiceInterests extends ServiceFirestore<Interest>
     }
 */
 
-    public formCreate(interest: Interest): FormGroup
+    public formCreate(interest: Interest): UntypedFormGroup
     {
         return super.formCreate
         ({

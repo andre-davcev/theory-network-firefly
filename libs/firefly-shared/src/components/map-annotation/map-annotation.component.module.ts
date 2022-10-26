@@ -7,15 +7,12 @@ import { ModuleDirectiveElevation } from '@theory/google';
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         CommonModule,
         FlexLayoutModule,
         ModuleDirectiveElevation
     ],
-
-    declarations    : [ComponentMapAnnotation],
-    exports         : [ComponentMapAnnotation],
-    entryComponents : [ComponentMapAnnotation]
+    declarations: [ComponentMapAnnotation],
+    exports: [ComponentMapAnnotation]
 })
 export class ModuleComponentMapAnnotation { }

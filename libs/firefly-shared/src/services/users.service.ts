@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ServiceFirestore } from '@theory/firebase';
 import { User } from '@firefly/cloud';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceUsers extends ServiceFirestore<User>
@@ -11,13 +11,13 @@ export class ServiceUsers extends ServiceFirestore<User>
     constructor
     (
         firestore:   AngularFirestore,
-        formBuilder: FormBuilder
+        formBuilder: UntypedFormBuilder
     )
     {
         super(firestore, formBuilder);
     }
 
-    public formCreate(object: User): FormGroup
+    public formCreate(object: User): UntypedFormGroup
     {
         return super.formCreate(
         {

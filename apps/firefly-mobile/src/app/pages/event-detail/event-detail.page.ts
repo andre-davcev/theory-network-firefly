@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
@@ -26,7 +26,7 @@ import { Timestamp, TimestampFormat } from '@theory/firebase';
 
 export class PageEventDetail
 {
-    @Select(StateEvent.formGroup())     form$:            Observable<FormGroup>;
+    @Select(StateEvent.formGroup())     form$:            Observable<UntypedFormGroup>;
     @Select(StateEvent.isNew())         isNew$:           Observable<boolean>;
     @Select(StateEvent.timeStart)       timeStart$:       Observable<Timestamp>;
     @Select(StateEvent.timeStartValid)  timeStartValid$:  Observable<boolean>;

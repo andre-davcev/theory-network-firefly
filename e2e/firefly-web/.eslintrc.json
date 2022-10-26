@@ -4,9 +4,6 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "parserOptions": {
-        "project": "e2e/firefly-web/tsconfig.*?.json"
-      },
       "rules": {}
     },
     {

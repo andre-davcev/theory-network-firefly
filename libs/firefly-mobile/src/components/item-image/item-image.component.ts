@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 
 @Component
 ({
@@ -11,7 +11,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 })
 export class ComponentItemImage
 {
-    @Input() form: FormGroup;
+    @Input() form: UntypedFormGroup;
     @Input() edit: boolean = false;
     @Input() url: string;
     @Input() placeholder: string;

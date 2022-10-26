@@ -36,18 +36,10 @@
       "@firefly/mobile/component/*": [
         "../../libs/firefly-mobile/src/components/*"
       ],
-      "@firefly/mobile/state/*": [
-        "../../libs/firefly-mobile/src/state/*"
-      ]
+      "@firefly/mobile/state/*": ["../../libs/firefly-mobile/src/state/*"]
     }
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "**/*.ts",
-    "**/*.d.ts"
-  ],
-  "exclude": ["src/test.ts", "**/*.spec.ts"]
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["**/*.ts", "**/*.d.ts"],
+  "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.test.ts", "jest.config.ts"]
 }

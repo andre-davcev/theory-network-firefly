@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component
 ({
@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class ComponentItemDescription
 {
-    @Input() form: FormGroup;
+    @Input() form: UntypedFormGroup;
 
     @Input() title: string;
 
