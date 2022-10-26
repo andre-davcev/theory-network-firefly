@@ -16,9 +16,7 @@
             "main": "apps/firefly-mobile/src/main.ts",
             "polyfills": "apps/firefly-mobile/src/polyfills.ts",
             "tsConfig": "apps/firefly-mobile/tsconfig.app.json",
-            "allowedCommonJsDependencies": [
-              "@mapbox/mapbox-gl-geocoder"
-            ],
+            "allowedCommonJsDependencies": ["@mapbox/mapbox-gl-geocoder"],
             "assets": [
               {
                 "glob": "**/*",
@@ -155,10 +153,7 @@
               "apps/firefly-web/src/assets"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "node_modules",
-                "apps/firefly-web/src/styles"
-              ]
+              "includePaths": ["node_modules", "apps/firefly-web/src/styles"]
             },
             "styles": [
               "node_modules/normalize.css/normalize.css",
@@ -418,165 +413,165 @@
             ]
           }
         }
-      },
-      "lib-firefly-mobile": {
-        "root": "libs/firefly-mobile",
-        "sourceRoot": "libs/firefly-mobile/src",
-        "projectType": "library",
-        "prefix": "app",
-        "architect": {
-          "build": {
-            "builder": "@nrwl/angular:package",
-            "options": {
-              "tsConfig": "libs/firefly-mobile/tsconfig.lib.json",
-              "project": "libs/firefly-mobile/ng-package.json",
-              "buildableProjectDepsInPackageJsonType": "dependencies"
-            }
-          },
-          "test": {
-            "builder": "@nrwl/jest:jest",
-            "options": {
-              "jestConfig": "libs/firefly-mobile/jest.config.js"
-            }
-          },
-          "lint": {
-            "builder": "@nrwl/linter:eslint",
-            "options": {
-              "lintFilePatterns": [
-                "libs/firefly-mobile/src/**/*.ts",
-                "libs/firefly-mobile/src/**/*.html"
-              ]
-            }
-          }
-        }
-      },
-      "lib-google": {
-        "root": "libs/google",
-        "sourceRoot": "libs/google/src",
-        "projectType": "library",
-        "prefix": "theory",
-        "architect": {
-          "build": {
-            "builder": "@nrwl/angular:package",
-            "options": {
-              "tsConfig": "libs/google/tsconfig.lib.json",
-              "project": "libs/google/ng-package.json",
-              "buildableProjectDepsInPackageJsonType": "dependencies"
-            }
-          },
-          "test": {
-            "builder": "@nrwl/jest:jest",
-            "options": {
-              "jestConfig": "libs/google/jest.config.js"
-            }
-          },
-          "lint": {
-            "builder": "@nrwl/linter:eslint",
-            "options": {
-              "lintFilePatterns": [
-                "libs/google/src/**/*.ts",
-                "libs/google/src/**/*.html"
-              ]
-            }
-          }
-        }
-      },
-      "lib-ionic": {
-        "root": "libs/ionic",
-        "sourceRoot": "libs/ionic/src",
-        "projectType": "library",
-        "prefix": "lib",
-        "architect": {
-          "build": {
-            "builder": "@nrwl/angular:package",
-            "options": {
-              "tsConfig": "libs/ionic/tsconfig.lib.json",
-              "project": "libs/ionic/ng-package.json",
-              "buildableProjectDepsInPackageJsonType": "dependencies"
-            }
-          },
-          "test": {
-            "builder": "@nrwl/jest:jest",
-            "options": {
-              "jestConfig": "libs/ionic/jest.config.js"
-            }
-          },
-          "lint": {
-            "builder": "@nrwl/linter:eslint",
-            "options": {
-              "lintFilePatterns": [
-                "libs/ionic/src/**/*.ts",
-                "libs/ionic/src/**/*.html"
-              ]
-            }
-          }
-        }
-      },
-      "lib-mapbox": {
-        "root": "libs/mapbox",
-        "sourceRoot": "libs/mapbox/src",
-        "projectType": "library",
-        "prefix": "theory",
-        "architect": {
-          "build": {
-            "builder": "@nrwl/angular:package",
-            "options": {
-              "tsConfig": "libs/mapbox/tsconfig.lib.json",
-              "project": "libs/mapbox/ng-package.json",
-              "buildableProjectDepsInPackageJsonType": "dependencies"
-            }
-          },
-          "test": {
-            "builder": "@nrwl/jest:jest",
-            "options": {
-              "jestConfig": "libs/mapbox/jest.config.js"
-            }
-          },
-          "lint": {
-            "builder": "@nrwl/linter:eslint",
-            "options": {
-              "lintFilePatterns": [
-                "libs/mapbox/src/**/*.ts",
-                "libs/mapbox/src/**/*.html"
-              ]
-            }
-          }
-        }
-      },
-      "lib-ngxs": {
-        "root": "libs/ngxs",
-        "sourceRoot": "libs/ngxs/src",
-        "projectType": "library",
-        "prefix": "theory",
-        "architect": {
-          "build": {
-            "builder": "@nrwl/angular:package",
-            "options": {
-              "tsConfig": "libs/ngxs/tsconfig.lib.json",
-              "project": "libs/ngxs/ng-package.json",
-              "buildableProjectDepsInPackageJsonType": "dependencies"
-            }
-          },
-          "lint": {
-            "builder": "@nrwl/linter:eslint",
-            "options": {
-              "lintFilePatterns": [
-                "libs/ngxs/src/**/*.ts",
-                "libs/ngxs/src/**/*.html"
-              ]
-            }
-          },
-          "test": {
-            "builder": "@nrwl/jest:jest",
-            "options": {
-              "jestConfig": "libs/ngxs/jest.config.js"
-            }
+      }
+    },
+    "lib-firefly-mobile": {
+      "root": "libs/firefly-mobile",
+      "sourceRoot": "libs/firefly-mobile/src",
+      "projectType": "library",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/firefly-mobile/tsconfig.lib.json",
+            "project": "libs/firefly-mobile/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
           }
         },
-        "schematics": {
-          "@nrwl/schematics:component": {
-            "styleext": "scss"
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/firefly-mobile/jest.config.js"
           }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/firefly-mobile/src/**/*.ts",
+              "libs/firefly-mobile/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "lib-google": {
+      "root": "libs/google",
+      "sourceRoot": "libs/google/src",
+      "projectType": "library",
+      "prefix": "theory",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/google/tsconfig.lib.json",
+            "project": "libs/google/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/google/jest.config.js"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/google/src/**/*.ts",
+              "libs/google/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "lib-ionic": {
+      "root": "libs/ionic",
+      "sourceRoot": "libs/ionic/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/ionic/tsconfig.lib.json",
+            "project": "libs/ionic/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ionic/jest.config.js"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ionic/src/**/*.ts",
+              "libs/ionic/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "lib-mapbox": {
+      "root": "libs/mapbox",
+      "sourceRoot": "libs/mapbox/src",
+      "projectType": "library",
+      "prefix": "theory",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/mapbox/tsconfig.lib.json",
+            "project": "libs/mapbox/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/mapbox/jest.config.js"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/mapbox/src/**/*.ts",
+              "libs/mapbox/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "lib-ngxs": {
+      "root": "libs/ngxs",
+      "sourceRoot": "libs/ngxs/src",
+      "projectType": "library",
+      "prefix": "theory",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/ngxs/tsconfig.lib.json",
+            "project": "libs/ngxs/ng-package.json",
+            "buildableProjectDepsInPackageJsonType": "dependencies"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ngxs/src/**/*.ts",
+              "libs/ngxs/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ngxs/jest.config.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
         }
       }
     }
