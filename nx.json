@@ -32,7 +32,7 @@
       "typescriptMismatch": false,
       "versionMismatch": false
     },
-    "defaultCollection": "@nstudio/xplat"
+    "defaultCollection": "@nrwl/workspace"
   },
   "defaultProject": "firefly-mobile",
   "generators": {
