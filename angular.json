@@ -570,7 +570,7 @@
         }
       },
       "schematics": {
-        "@nrwl/schematics:component": {
+        "@nrwl/workspace:component": {
           "styleext": "scss"
         }
       }
