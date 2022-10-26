@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 
 @Component
 ({
@@ -11,7 +11,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 
 export class ComponentItemHeader
 {
-    @Input() form: FormGroup;
+    @Input() form: UntypedFormGroup;
 
     @Input() iconUrl:         string;
     @Input() iconUrlEmpty:    string;

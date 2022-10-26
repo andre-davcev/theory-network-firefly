@@ -14,8 +14,7 @@ import { ModulePageAssetsInterests } from '../assets-interests';
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         ReactiveFormsModule,
         ModulePage,
         ModuleComponentItemHeader,
@@ -28,13 +27,8 @@ import { ModulePageAssetsInterests } from '../assets-interests';
         NgxsFormPluginModule,
         ModulePipeTimestamp
     ],
-
-    declarations : [PageEventDetail],
-    exports : [PageEventDetail],
-    entryComponents:
-    [
-        PageEventLocation
-    ]
+    declarations: [PageEventDetail],
+    exports: [PageEventDetail]
 })
 
 export class ModulePageEventDetail { }

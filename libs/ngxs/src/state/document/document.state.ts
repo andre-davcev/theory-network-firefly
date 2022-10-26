@@ -2,7 +2,7 @@ import { StateContext, createSelector } from '@ngxs/store';
 import { SetFormPristine, UpdateFormValue, SetFormDirty } from '@ngxs/form-plugin';
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 
 import { CoreUtil, CoreEnum } from '@theory/core';
 import { ServiceFirestore, FirebaseDocument, ServiceStorage, DocumentSnapshot as FirestoreDocumentSnapshot } from '@theory/firebase';
@@ -25,7 +25,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
 
     protected static snapshotState(state: any):   FirestoreDocumentSnapshot { return state.snapshot; }
     protected static formState(state: any):       FormNgxs                   { return state.form; }
-    protected static formGroupState(state: any):  FormGroup                  { return state.formGroup; }
+    protected static formGroupState(state: any):  UntypedFormGroup                  { return state.formGroup; }
     protected static isFormState(state: any):     boolean                    { return StateDocument.formGroupState(state) != null; }
     protected static dataState(state: any):       any                        { return StateDocument.formState(state).model; }
     protected static idState(state: any):         string                     { return StateDocument.dataState(state).id; }
@@ -127,7 +127,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         const snapshot:   FirestoreDocumentSnapshot = action.snapshot;
         const data:       T                          = action.data == null ? snapshot.data() : action.data;
 
-        const formGroup:  FormGroup = this.service.formCreate(data);
+        const formGroup:  UntypedFormGroup = this.service.formCreate(data);
 
         return dispatch(new ActionReset()).
         pipe
@@ -234,7 +234,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
 
         const state      : M          = getState();
         const data       : T          = StateDocument.dataState(state);
-        const formGroup  : FormGroup  = StateDocument.formGroupState(state);
+        const formGroup  : UntypedFormGroup  = StateDocument.formGroupState(state);
         const changed    : Partial<T> = this.service.formFieldsChanged(formGroup);
         const hasChanged : boolean    = Object.keys(changed).length > 0;
         const value      : T          = { ...data };
@@ -306,7 +306,7 @@ export class StateDocument<T extends FirebaseDocument, M extends StateDocumentMo
         const { getState } = context;
 
         const state   : M               = getState();
-        const form    : FormGroup       = StateDocument.formGroupState(state);
+        const form    : UntypedFormGroup       = StateDocument.formGroupState(state);
         const control : AbstractControl = form.get('metadata').get(imageType);
 
         if (control.invalid || control.pristine) { return of(null); }

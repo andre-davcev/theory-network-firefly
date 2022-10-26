@@ -12,8 +12,7 @@ import { RoutesPageNotificationDetail } from './notification-detail.page.routes'
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         ModulePage,
         ModuleComponentItemMap,
         ModuleComponentButtonAction,
@@ -22,13 +21,8 @@ import { RoutesPageNotificationDetail } from './notification-detail.page.routes'
         NgxsFormPluginModule,
         ModuleDirectiveElevation
     ],
-
-    declarations : [PageNotificationDetail],
-    exports : [PageNotificationDetail],
-    entryComponents:
-    [
-
-    ]
+    declarations: [PageNotificationDetail],
+    exports: [PageNotificationDetail]
 })
 
 export class ModulePageNotificationDetail { }

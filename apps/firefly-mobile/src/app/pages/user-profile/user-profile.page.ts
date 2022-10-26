@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
 import { MenuController } from '@ionic/angular';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component
 ({
@@ -17,8 +17,8 @@ import { FormGroup } from '@angular/forms';
 
 export class PageUserProfile
 {
-    @Select(StateUserProfile.formGroup()) form$:     Observable<FormGroup>;
-    @Select(StateUser.formGroup())        formUser$: Observable<FormGroup>;
+    @Select(StateUserProfile.formGroup()) form$:     Observable<UntypedFormGroup>;
+    @Select(StateUser.formGroup())        formUser$: Observable<UntypedFormGroup>;
     @Select(StateUser.email)              email$:    Observable<string>;
     @Select(StateMobile.menuOpen)         menuOpen$: Observable<boolean>;
 

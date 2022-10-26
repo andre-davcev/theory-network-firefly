@@ -9,17 +9,14 @@ import { PageAssetsEvents } from './assets-events.page';
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         ModulePage,
         ModuleDirectiveElevation,
         ModuleComponentIconMessage,
         ModuleComponentButtonAdd,
         ModulePipeTimestamp
     ],
-
-    declarations    : [PageAssetsEvents],
-    exports         : [PageAssetsEvents],
-    entryComponents : [PageAssetsEvents]
+    declarations: [PageAssetsEvents],
+    exports: [PageAssetsEvents]
 })
 export class ModulePageAssetsEvents { }

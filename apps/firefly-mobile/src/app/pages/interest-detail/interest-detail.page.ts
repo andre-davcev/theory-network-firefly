@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, catchError, map, finalize, takeUntil, tap, filter } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
@@ -26,7 +26,7 @@ import { PageEventSelector } from '../event-selector';
 
 export class PageInterestDetail extends BaseComponent implements OnInit
 {
-    @Select(StateInterest.formGroup()) form$:         Observable<FormGroup>;
+    @Select(StateInterest.formGroup()) form$:         Observable<UntypedFormGroup>;
     @Select(StateInterest.data())      interest$:     Observable<Interest>;
     @Select(StateInterest.isNew())     isNew$:        Observable<boolean>;
     @Select(StateInterest.canUpdate()) canUpdate$:    Observable<boolean>;

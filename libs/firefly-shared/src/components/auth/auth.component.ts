@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
@@ -40,7 +40,7 @@ export class ComponentAuth implements OnInit
     public faEnvelope: IconDefinition = faEnvelope;
     public faLock:     IconDefinition = faLock;
 
-    public form : FormGroup;
+    public form : UntypedFormGroup;
 
     public AuthType    : any = AuthType;
     public AuthControl : any = AuthControl;
@@ -60,21 +60,21 @@ export class ComponentAuth implements OnInit
     public errors$:    Record<string, Observable<Array<string>>> = {};
     public hasErrors$: Record<string, Observable<boolean>>       = {};
 
-    private id: FormControl = new FormControl('', Validators.compose
+    private id: UntypedFormControl = new UntypedFormControl('', Validators.compose
     ([
         Validators.required,
         Validators.maxLength(50),
         Validators.pattern(Regex.Email)
     ]));
 
-    private passwordLogin: FormControl = new FormControl('', Validators.compose
+    private passwordLogin: UntypedFormControl = new UntypedFormControl('', Validators.compose
     ([
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(30)
     ]));
 
-    private passwordSignUp: FormControl = new FormControl('', Validators.compose
+    private passwordSignUp: UntypedFormControl = new UntypedFormControl('', Validators.compose
     ([
         Validators.required,
         Validators.minLength(6),
@@ -84,7 +84,7 @@ export class ComponentAuth implements OnInit
 
     constructor
     (
-        private formBuilder : FormBuilder,
+        private formBuilder : UntypedFormBuilder,
         private store       : Store,
         private translate   : TranslateService
     )

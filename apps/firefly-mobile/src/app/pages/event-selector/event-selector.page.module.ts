@@ -9,17 +9,14 @@ import { PageEventSelector } from './event-selector.page';
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         ModulePage,
         ModuleDirectiveElevation,
         ModuleComponentItemEvents,
         ModuleComponentIconMessage
     ],
-
-    declarations : [PageEventSelector],
-    exports: [PageEventSelector],
-    entryComponents: [PageEventSelector]
+    declarations: [PageEventSelector],
+    exports: [PageEventSelector]
 })
 
 export class ModulePageEventSelector { }

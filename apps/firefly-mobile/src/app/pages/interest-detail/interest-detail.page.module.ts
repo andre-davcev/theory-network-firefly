@@ -13,8 +13,7 @@ import { RoutesPageInterestDetail } from './interest-detail.page.routes';
 import { ModulePageEventSelector } from '../event-selector';
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         ReactiveFormsModule,
         RouterModule,
         ModulePage,
@@ -27,13 +26,8 @@ import { ModulePageEventSelector } from '../event-selector';
         NgxsFormPluginModule,
         ModulePipeTimestamp
     ],
-
-    declarations : [PageInterestDetail],
-    exports : [PageInterestDetail],
-    entryComponents:
-    [
-      PageInterestDetail
-    ]
+    declarations: [PageInterestDetail],
+    exports: [PageInterestDetail]
 })
 
 export class ModulePageInterestDetail { }
