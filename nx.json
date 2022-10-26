@@ -11,12 +11,7 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "parallel": 3
       }
     }
@@ -41,15 +36,15 @@
   },
   "defaultProject": "firefly-mobile",
   "generators": {
-    "@nrwl/schematics:library": {
+    "@nrwl/workspace:library": {
       "unitTestRunner": "jest",
       "framework": "angular"
     },
-    "@nrwl/schematics:application": {
+    "@nrwl/workspace:application": {
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
-    "@nrwl/schematics:node-application": {
+    "@nrwl/workspace:node-application": {
       "framework": "express"
     },
     "@nrwl/angular:application": {
