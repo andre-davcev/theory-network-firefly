@@ -16,7 +16,9 @@
             "main": "apps/firefly-mobile/src/main.ts",
             "polyfills": "apps/firefly-mobile/src/polyfills.ts",
             "tsConfig": "apps/firefly-mobile/tsconfig.app.json",
-            "allowedCommonJsDependencies": ["@mapbox/mapbox-gl-geocoder"],
+            "allowedCommonJsDependencies": [
+              "@mapbox/mapbox-gl-geocoder"
+            ],
             "assets": [
               {
                 "glob": "**/*",
@@ -153,7 +155,10 @@
               "apps/firefly-web/src/assets"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules", "apps/firefly-web/src/styles"]
+              "includePaths": [
+                "node_modules",
+                "apps/firefly-web/src/styles"
+              ]
             },
             "styles": [
               "node_modules/normalize.css/normalize.css",

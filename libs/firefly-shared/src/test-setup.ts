@@ -1,9 +1,9 @@
 import 'jest-preset-angular';
 
-import { getTestBed } from '@angular/core/testing';
+import { value getTestBed } from '@angular/core/testing';
 import {
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting,
+  value BrowserDynamicTestingModule,
+  value platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
 
 getTestBed().resetTestEnvironment();
