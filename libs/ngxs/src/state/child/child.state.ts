@@ -8,7 +8,7 @@ import { CoreUtil, TypeOf } from '@theory/core';
 import { StateChildModel } from './child.model';
 import { ActionsCollection, StateCollection } from '../collection';
 import { SortField, SyncResult } from '../../interfaces';
-import { DocumentSnapshot, QueryDocumentSnapshot, Timestamp } from '@angular/fire/firestore';
+import { DocumentSnapshot, QueryDocumentSnapshot, Timestamp } from '@angular/fire/compat/firestore';
 
 export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>> extends StateCollection<T, M>
 {

@@ -1,5 +1,6 @@
 import { Observable, from } from 'rxjs';
-import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, FieldValue, serverTimestamp } from '@angular/fire/firestore';
+import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { FieldValue, serverTimestamp } from '@angular/fire/firestore';
 import { FirebaseDocument } from '@theory/firebase/interfaces';
 import { map, take } from 'rxjs/operators';
 import { UntypedFormGroup, UntypedFormBuilder, AbstractControl } from '@angular/forms';

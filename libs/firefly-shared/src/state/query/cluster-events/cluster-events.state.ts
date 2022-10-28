@@ -16,7 +16,7 @@ import {
     ActionClusterEventsFilter
 } from './cluster-events.actions';
 import { StateUser } from '../../document/user/user.state';
-import { Query } from '@angular/fire/firestore';
+import { Query } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { Collection } from '@firefly/shared/enums';
 import { ServiceStorage } from '@theory/firebase';

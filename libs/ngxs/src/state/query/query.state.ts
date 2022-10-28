@@ -1,5 +1,5 @@
 import { StateContext } from '@ngxs/store';
-import { Query, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/firestore';
+import { Query, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/firestore';
 import { Observable, from, of } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
 

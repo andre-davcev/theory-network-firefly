@@ -3,7 +3,8 @@ import { User as FirebaseUser } from '@angular/fire/auth';
 import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map, finalize } from 'rxjs/operators';
-import { AngularFireAuth, UserCredential } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UserCredential } from '@angular/fire/auth';
 
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
@@ -49,8 +50,8 @@ import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
 import { StateCity } from '../city/city.state';
 import { ActionInterestsPage, ActionInterestsSetSubscriptions, ActionInterestsSetType } from '../../composite/interests/interests.actions';
 import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
-import { FieldValue, GeoPoint, serverTimestamp } from '@angular/fire/firestore';
-import { FirebaseError } from '@angular/fire/app';
+import { FieldValue, GeoPoint, serverTimestamp } from '@angular/fire/compat/firestore';
+import { FirebaseError } from '@angular/fire/compat/app';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Query } from '@angular/fire/firestore';
+import { Query } from '@angular/fire/compat/firestore';
 
 import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 import { switchMap } from 'rxjs/operators';

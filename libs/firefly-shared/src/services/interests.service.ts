@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { Interest } from '@firefly/cloud';
 import { ServiceFirestore } from '@theory/firebase';
