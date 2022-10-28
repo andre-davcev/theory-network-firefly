@@ -17,4 +17,5 @@ export default {
     'jest-preset-angular/build/serializers/html-comment',
   ],
   transform: { '^.+\\.(ts|js|html)$': 'jest-preset-angular' },
+  transformIgnorePatterns: ['/node_modules/(?!@ionic/core|@stencil/core|ionicons)']
 };
