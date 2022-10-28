@@ -3,7 +3,7 @@ import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdataclou
 
 import { Observable, of } from 'rxjs';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
-import { GeoPoint } from '@theory/firebase';
+import { GeoPoint } from 'firebase/firestore';
 import { map, switchMap } from 'rxjs/operators';
 
 import { ReverseMode } from '@theory/mapbox';

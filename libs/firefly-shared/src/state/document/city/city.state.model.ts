@@ -1,4 +1,4 @@
-import { GeoPoint } from '@theory/firebase';
+import { GeoPoint } from 'firebase/firestore';
 
 import { CityInfo } from '@firefly/cloud';
 
