@@ -1,7 +1,8 @@
 import { StateContext, createSelector } from '@ngxs/store';
 import { Observable, of, forkJoin } from 'rxjs';
+import { Timestamp } from 'firebase/firestore';
 
-import { DocumentSnapshot, FirebaseDocument, OrderBy, QueryDocumentSnapshot, ServiceFirestore, ServiceStorage, Timestamp } from '@theory/firebase';
+import { DocumentSnapshot, FirebaseDocument, OrderBy, QueryDocumentSnapshot, ServiceFirestore, ServiceStorage } from '@theory/firebase';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { CoreUtil, TypeOf } from '@theory/core';
 

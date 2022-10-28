@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Event } from '@firefly/cloud';
-import { fromDate, ServiceFirestore, Timestamp } from '@theory/firebase';
+import { Timestamp } from 'firebase/firestore';
+import { fromDate, ServiceFirestore } from '@theory/firebase';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, Regex, ValidatorsExtended } from '@theory/core';
 
