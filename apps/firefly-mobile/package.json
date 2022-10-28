@@ -12,10 +12,10 @@
     "cap.update": "npx cap update"
   },
   "dependencies": {
-    "@capacitor/android": "^4.4.0",
-    "@capacitor/core": "^4.4.0",
-    "@capacitor/ios": "^4.4.0",
-    "@capacitor-community/fcm": "^3.0.0",
+    "@capacitor/android": "^2.5.0",
+    "@capacitor/core": "^2.5.0",
+    "@capacitor/ios": "^2.5.0",
+    "@capacitor-community/fcm": "^1.1.2",
     "call-number": "^1.0.1",
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-calendar": "5.1.6",
@@ -24,7 +24,7 @@
     "rxjs": "7.5.7"
   },
   "devDependencies": {
-    "@capacitor/cli": "^4.4.0"
+    "@capacitor/cli": "^2.5.0"
   },
   "cordova": {
     "plugins": {
