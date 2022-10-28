@@ -1,5 +1,4 @@
-import { GeoPoint } from 'firebase/firestore';
-import { User as FirebaseUser, FirebaseError, UserCredential, FieldValue } from '@theory/firebase';
+import { User as FirebaseUser, UserCredential } from '@theory/firebase';
 
 import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';
@@ -9,7 +8,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 
 import { User, SubscriptionPartial, AlertPartial, CityInfo, Token } from '@firefly/cloud';
-import { serverTimestamp } from '@theory/firebase';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -51,6 +49,8 @@ import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
 import { StateCity } from '../city/city.state';
 import { ActionInterestsPage, ActionInterestsSetSubscriptions, ActionInterestsSetType } from '../../composite/interests/interests.actions';
 import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
+import { FieldValue, GeoPoint, serverTimestamp } from '@angular/fire/firestore';
+import { FirebaseError } from '@angular/fire/app';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()

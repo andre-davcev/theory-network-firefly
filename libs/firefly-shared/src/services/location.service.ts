@@ -3,7 +3,6 @@ import { ServiceBigDataCloud, ResponseReverseGeocode } from '@theory/bigdataclou
 
 import { Observable, of } from 'rxjs';
 import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
-import { GeoPoint } from 'firebase/firestore';
 import { map, switchMap } from 'rxjs/operators';
 
 import { ReverseMode } from '@theory/mapbox';
@@ -11,6 +10,7 @@ import { Place, CityInfo, Event } from '@firefly/cloud';
 import { Injectable } from '@angular/core';
 import { PlaceTypes } from '../constants';
 import { LngLatLike } from 'mapbox-gl';
+import { GeoPoint } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceLocation
