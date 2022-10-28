@@ -14,8 +14,8 @@ import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
 import { Place } from '@firefly/cloud';
 import { TranslateService } from '@ngx-translate/core';
-import { Timestamp } from 'firebase/firestore';
 import { TimestampFormat } from '@theory/firebase';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component
 ({

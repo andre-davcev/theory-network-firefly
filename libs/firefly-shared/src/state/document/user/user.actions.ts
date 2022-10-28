@@ -1,8 +1,9 @@
-import { User as FirebaseUser, FirebaseError, DocumentSnapshot } from '@theory/firebase'
+import { User as FirebaseUser, DocumentSnapshot } from '@theory/firebase'
 import { Credentials } from '@theory/core';
 
 import { User, MetadataUser } from '@firefly/cloud';
 import { ActionsUser } from './user.actions.enum';
+import { FirebaseError } from '@angular/fire/app';
 
 export class ActionUserReset         { static readonly type = ActionsUser.Reset;         constructor() { } }
 export class ActionUserGet           { static readonly type = ActionsUser.Get;           constructor(public id: string) { } }

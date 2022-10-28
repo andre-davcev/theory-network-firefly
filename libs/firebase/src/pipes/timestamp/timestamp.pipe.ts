@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Timestamp } from 'firebase/firestore';
 import { TimestampFormat } from './timestamp-format.enum';
 import { Store } from '@ngxs/store';
 import { StateLanguage } from '@theory/capacitor';
 import * as moment from 'moment';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Pipe({ name: 'timestamp', pure: false })
 export class PipeTimestamp implements PipeTransform

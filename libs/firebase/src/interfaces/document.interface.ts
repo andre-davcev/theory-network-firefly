@@ -1,4 +1,4 @@
-import { FieldValue } from '@theory/firebase';
+import { FieldValue } from '@angular/fire/firestore';
 
 
 export interface FirebaseDocument

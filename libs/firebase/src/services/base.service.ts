@@ -1,10 +1,9 @@
 import { Observable, from } from 'rxjs';
-import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument, FieldValue, serverTimestamp } from '@angular/fire/firestore';
 import { FirebaseDocument } from '@theory/firebase/interfaces';
 import { map, take } from 'rxjs/operators';
 import { UntypedFormGroup, UntypedFormBuilder, AbstractControl } from '@angular/forms';
 import { CoreEnum, CoreUtil } from '@theory/core';
-import { FieldValue, serverTimestamp } from '../types';
 
 export class ServiceBase<T extends FirebaseDocument | Record<string, any>>
 {

@@ -31,15 +31,14 @@ import {
   ActionEventInterestRemove
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
-import { Timestamp } from 'firebase/firestore';
-import { DocumentSnapshot, FieldValue, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
+import { DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
 import { ServiceEvents, ServiceLocation } from '@firefly/shared/services';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { StateInterest } from '../interest';
-import { Query } from '@angular/fire/firestore';
+import { FieldValue, Query, Timestamp } from '@angular/fire/firestore';
 import { Collection, ImageType } from '@firefly/shared/enums';
 import { SetFormPristine } from '@ngxs/form-plugin';
 import { LngLatLike } from 'mapbox-gl';

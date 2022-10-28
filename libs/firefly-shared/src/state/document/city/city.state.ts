@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentSnapshot } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentSnapshot, GeoPoint } from '@angular/fire/firestore';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { GeoPoint } from 'firebase/firestore';
 
 import { DocumentSnapshot as FirestoreDocumentSnapshot } from '@theory/firebase';
 
