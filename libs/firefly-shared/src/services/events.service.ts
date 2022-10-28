@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, Timestamp } from '@angular/fire/firestore';
 
 import { Event } from '@firefly/cloud';
-import { fromDate, ServiceFirestore } from '@theory/firebase';
+import { ServiceFirestore } from '@theory/firebase';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DateUtil, Regex, ValidatorsExtended } from '@theory/core';
 
@@ -97,9 +97,9 @@ export class ServiceEvents extends ServiceFirestore<Event>
         {
             ...super.formDataNew(userId, defaults),
 
-            timeStart:  fromDate(DateUtil.atHourNext()),
-            timeEnd:    fromDate(DateUtil.atHourNext(new Date(), 2)),
-            timeNotify: fromDate(DateUtil.atHourNext(new Date(), 2))
+            timeStart:  Timestamp.fromDate(DateUtil.atHourNext()),
+            timeEnd:    Timestamp.fromDate(DateUtil.atHourNext(new Date(), 2)),
+            timeNotify: Timestamp.fromDate(DateUtil.atHourNext(new Date(), 2))
         };
 
         return event;
