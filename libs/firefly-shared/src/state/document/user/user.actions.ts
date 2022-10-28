@@ -1,5 +1,6 @@
-import { User as FirebaseUser, DocumentSnapshot } from '@theory/firebase'
+import { DocumentSnapshot } from '@theory/firebase'
 import { Credentials } from '@theory/core';
+import { User as FirebaseUser } from '@angular/fire/auth';
 
 import { User, MetadataUser } from '@firefly/cloud';
 import { ActionsUser } from './user.actions.enum';

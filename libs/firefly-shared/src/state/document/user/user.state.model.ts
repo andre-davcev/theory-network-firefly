@@ -1,6 +1,6 @@
 import { StateDocumentModel } from '@theory/ngxs';
-import { User } from '@theory/firebase';
 import { FirebaseError } from '@angular/fire/app';
+import { User } from '@angular/fire/auth';
 
 export interface StateUserModel extends StateDocumentModel
 {
