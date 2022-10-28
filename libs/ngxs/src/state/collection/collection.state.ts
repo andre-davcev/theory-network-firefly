@@ -1,4 +1,4 @@
-import { OrderBy, ImageSize, FirebaseDocument, ServiceStorage, DocumentSnapshot } from '@theory/firebase';
+import { OrderBy, ImageSize, FirebaseDocument, ServiceStorage } from '@theory/firebase';
 import { createSelector, StateContext } from '@ngxs/store';
 import { ActionsCollection } from './collection.actions';
 import { CoreUtil, CoreEnum, TypeOf } from '@theory/core';

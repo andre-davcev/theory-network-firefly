@@ -3,8 +3,6 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection,
 import { Observable, from } from 'rxjs';
 import { CoreEnum } from '@theory/core';
 import { switchMap, map } from 'rxjs/operators';
-import { DocumentSnapshot as FirestoreDocumentSnapshot } from '../types';
-
 export class ServiceFirestoreBase
 {
     public static collection<T>(firestore: AngularFirestore, collection: string): AngularFirestoreCollection<T>
@@ -12,7 +10,7 @@ export class ServiceFirestoreBase
         return firestore.collection(collection);
     }
 
-    public static documentGet<T>(service: AngularFirestore, collection: string, id: string): Observable<FirestoreDocumentSnapshot>
+    public static documentGet<T>(service: AngularFirestore, collection: string, id: string): Observable<DocumentSnapshot>
     {
         const document: AngularFirestoreDocument<T> = service.collection<T>(collection).doc(id);
 

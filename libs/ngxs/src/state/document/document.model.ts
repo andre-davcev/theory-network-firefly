@@ -1,5 +1,5 @@
+import { DocumentSnapshot } from '@angular/fire/firestore';
 import { UntypedFormGroup } from '@angular/forms';
-import { DocumentSnapshot } from '@theory/firebase';
 
 import { FormNgxs } from '../../interfaces';
 

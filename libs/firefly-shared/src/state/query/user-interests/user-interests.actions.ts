@@ -1,10 +1,9 @@
 
-import { DocumentSnapshot } from '@theory/firebase';
-
 import { Interest } from '@firefly/cloud';
 
 import { ActionsUserInterests } from './user-interests.actions.enum';
 import { InterestsFilter } from '../../composite';
+import { DocumentSnapshot } from '@angular/fire/firestore';
 
 export class ActionUserInterestsReset   { static readonly type = ActionsUserInterests.Reset;   constructor() { } }
 export class ActionUserInterestsGetData { static readonly type = ActionsUserInterests.GetData; constructor() { } }
