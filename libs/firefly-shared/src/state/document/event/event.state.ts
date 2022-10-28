@@ -31,7 +31,8 @@ import {
   ActionEventInterestRemove
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
-import { DocumentSnapshot, FieldValue, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '@theory/firebase';
+import { Timestamp } from 'firebase/firestore';
+import { DocumentSnapshot, FieldValue, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
 import { ServiceEvents, ServiceLocation } from '@firefly/shared/services';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { switchMap, map } from 'rxjs/operators';

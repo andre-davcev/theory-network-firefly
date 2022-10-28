@@ -1,8 +1,6 @@
 import * as firebase from 'firebase';
 
 
-export class Timestamp extends firebase.default.firestore.Timestamp {};
-
 export type FieldValue            = firebase.default.firestore.FieldValue;
 export type FirebaseError         = firebase.default.FirebaseError;
 export type DocumentSnapshot      = firebase.default.firestore.DocumentSnapshot;
