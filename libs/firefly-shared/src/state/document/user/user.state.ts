@@ -1,4 +1,5 @@
-import { User as FirebaseUser, FirebaseError, UserCredential, GeoPoint, FieldValue } from '@theory/firebase';
+import { GeoPoint } from 'firebase/firestore';
+import { User as FirebaseUser, FirebaseError, UserCredential, FieldValue } from '@theory/firebase';
 
 import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';

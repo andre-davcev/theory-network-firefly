@@ -1,7 +1,6 @@
 import * as firebase from 'firebase';
 
 
-export class GeoPoint  extends firebase.default.firestore.GeoPoint  {};
 export class Timestamp extends firebase.default.firestore.Timestamp {};
 
 export type FieldValue            = firebase.default.firestore.FieldValue;
