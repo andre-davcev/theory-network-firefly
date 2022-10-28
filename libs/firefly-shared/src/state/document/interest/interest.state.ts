@@ -32,11 +32,10 @@ import {
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, ActionUserInterestsSync } from '../../query/user-interests';
 import { ActionCityStreamRemove, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
 import { ImageSize, ServiceStorage } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from, forkJoin } from 'rxjs';
-import { Query } from '@angular/fire/firestore';
+import { DocumentSnapshot, Query, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Collection, ImageType } from '@firefly/shared/enums';
 import { StateInterests } from '../../composite/interests/interests.state';

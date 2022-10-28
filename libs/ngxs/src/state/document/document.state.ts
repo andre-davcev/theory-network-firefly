@@ -5,7 +5,7 @@ import { switchMap, map, tap } from 'rxjs/operators';
 import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 
 import { CoreUtil, CoreEnum } from '@theory/core';
-import { ServiceFirestore, FirebaseDocument, ServiceStorage, DocumentSnapshot as FirestoreDocumentSnapshot } from '@theory/firebase';
+import { ServiceFirestore, FirebaseDocument, ServiceStorage } from '@theory/firebase';
 
 import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';

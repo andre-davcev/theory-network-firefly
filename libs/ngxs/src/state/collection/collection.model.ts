@@ -1,5 +1,6 @@
+import { DocumentSnapshot } from '@angular/fire/firestore';
 import { TypeOf } from '@theory/core';
-import { DocumentSnapshot, OrderBy } from '@theory/firebase';
+import { OrderBy } from '@theory/firebase';
 
 export interface StateCollectionModel<T>
 {
