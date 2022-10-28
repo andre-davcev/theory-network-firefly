@@ -1,4 +1,4 @@
-import { DocumentSnapshot } from '@angular/fire/firestore';
+import { DocumentSnapshot } from '@angular/fire/compat/firestore';
 import { TypeOf } from '@theory/core';
 import { OrderBy } from '@theory/firebase';
 

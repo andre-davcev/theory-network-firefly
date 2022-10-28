@@ -3,7 +3,7 @@ import { CoreEnum } from '@theory/core';
 
 import { ActionsInterest } from './interest.actions.enum';
 import { DocumentSnapshot } from '@theory/firebase';
-import { Query } from '@angular/fire/firestore';
+import { Query } from '@angular/fire/compat/firestore';
 
 export class ActionInterestReset         { static readonly type = ActionsInterest.Reset;         constructor() { } }
 export class ActionInterestDirty         { static readonly type = ActionsInterest.Dirty;         constructor() { } }

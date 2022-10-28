@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
 import { NgxsModule } from '@ngxs/store';
@@ -8,8 +8,8 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 // import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';

@@ -11,7 +11,7 @@ import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';
 import { StateDocumentModel } from './document.model';
 import { ActionsDocument } from './document.actions';
-import { DocumentSnapshot } from '@angular/fire/firestore';
+import { DocumentSnapshot } from '@angular/fire/compat/firestore';
 import { ImageType } from '@firefly/shared/enums';
 
 export class StateDocument<T extends FirebaseDocument, M extends StateDocumentModel>

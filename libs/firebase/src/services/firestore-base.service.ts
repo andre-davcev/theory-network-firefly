@@ -1,8 +1,12 @@
 import { FirebaseDocument } from '../interfaces';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, Action, DocumentSnapshot, FieldValue, serverTimestamp } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, Action, DocumentSnapshot } from '@angular/fire/compat/firestore';
+import { DocumentSnapshot as FirestoreDocumentSnapshot} from '../types';
+import { FieldValue, serverTimestamp } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { CoreEnum } from '@theory/core';
 import { switchMap, map } from 'rxjs/operators';
+
+
 export class ServiceFirestoreBase
 {
     public static collection<T>(firestore: AngularFirestore, collection: string): AngularFirestoreCollection<T>
@@ -10,7 +14,7 @@ export class ServiceFirestoreBase
         return firestore.collection(collection);
     }
 
-    public static documentGet<T>(service: AngularFirestore, collection: string, id: string): Observable<DocumentSnapshot>
+    public static documentGet<T>(service: AngularFirestore, collection: string, id: string): Observable<FirestoreDocumentSnapshot>
     {
         const document: AngularFirestoreDocument<T> = service.collection<T>(collection).doc(id);
 
@@ -57,7 +61,7 @@ export class ServiceFirestoreBase
 
     public static documentCreate<T extends FirebaseDocument>(service: AngularFirestore, collection: string, entity: T): Observable<FirestoreDocumentSnapshot>
     {
-        let { metadata, ...object } = entity;
+        const { metadata, ...object } = entity;
 
         const id: string = object.id == null || object.id === CoreEnum.IdNew ? service.createId() : object.id;
 

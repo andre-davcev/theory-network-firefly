@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
-import { AngularFirestore, Timestamp } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Timestamp } from '@angular/fire/firestore';
 
 import { Event } from '@firefly/cloud';
 import { ServiceFirestore } from '@theory/firebase';

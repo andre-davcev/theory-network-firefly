@@ -17,7 +17,7 @@ import {
 import { StateUser } from '../../document/user';
 import { StateQuery } from '@theory/ngxs';
 import { ServiceEvents } from '@firefly/shared/services';
-import { DocumentSnapshot, Query } from '@angular/fire/firestore';
+import { DocumentSnapshot, Query } from '@angular/fire/compat/firestore';
 import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';

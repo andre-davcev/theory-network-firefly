@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ServiceFirestore } from '@theory/firebase';
 import { User } from '@firefly/cloud';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';

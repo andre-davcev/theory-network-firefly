@@ -15,7 +15,7 @@ import { tap, filter, map, withLatestFrom, switchMap, last, catchError } from 'r
 import { Observable, forkJoin, of } from 'rxjs';
 import { ServiceStorage } from '@theory/firebase/services';
 import { ImageSize, StorageFormat } from '@theory/firebase/enums';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { Injectable } from '@angular/core';
 
 @State<StateStorageModel>(StateStorageOptions)

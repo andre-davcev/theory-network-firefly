@@ -35,7 +35,7 @@ import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/us
 import { ImageSize, ServiceStorage } from '@theory/firebase';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { of, from, forkJoin } from 'rxjs';
-import { DocumentSnapshot, Query, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/firestore';
+import { DocumentSnapshot, Query, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { Collection, ImageType } from '@firefly/shared/enums';
 import { StateInterests } from '../../composite/interests/interests.state';
