@@ -107,6 +107,7 @@
     "@ionic/angular": "^6.3.2",
     "@ionic/core": "^6.3.2",
     "@ionic/pwa-elements": "^3.1.1",
+    "@mapbox/mapbox-gl-geocoder": "^5.0.1",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@ngxs/devtools-plugin": "^3.7.5",

@@ -1,4 +1,4 @@
-import 'jest-preset-angular/setup-jest';
+import 'jest-preset-angular';
 
 import { getTestBed } from '@angular/core/testing';
 import {

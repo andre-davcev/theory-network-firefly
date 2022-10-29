@@ -4,11 +4,11 @@ import { of, from } from 'rxjs';
 import { catchError, switchMap, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { Plugins } from '@capacitor/core';
+import { Injectable } from '@angular/core';
 
 import { StateLanguageModel } from './language.state.model';
 import { StateLanguageOptions } from './language.state.options';
 import { ActionLanguageInitialize, ActionLanguageGet, ActionLanguageSet } from './language.actions';
-import { Injectable } from '@angular/core';
 
 const { Device } = Plugins;
 
