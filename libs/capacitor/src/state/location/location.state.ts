@@ -1,15 +1,16 @@
 
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { from, of } from 'rxjs';
-import { GeolocationPosition, Plugins } from '@capacitor/core';
 import { tap, catchError } from 'rxjs/operators';
+import { GeolocationPosition, Plugins } from '@capacitor/core';
+import { Injectable } from '@angular/core';
+import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder';
+import { LngLatLike } from 'mapbox-gl';
 
 import { StateLocationModel } from './location.state.model';
 import { StateLocationOptions } from './location.state.options';
 import { ActionLocationWatch } from './location.actions';
-import { Injectable } from '@angular/core';
-import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder';
-import { LngLatLike } from 'mapbox-gl';
+
 
 const { Geolocation } = Plugins;
 

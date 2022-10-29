@@ -2,15 +2,14 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { DeviceInfo, StatusBarStyleOptions, Plugins } from '@capacitor/core';
-
-const { Device, StatusBar } = Plugins;
+import { Injectable } from '@angular/core';
 
 import { Platform } from '../../enums';
-
 import { StateDeviceModel } from './device.state.model';
 import { StateDeviceOptions } from './device.state.options';
 import { ActionDeviceInitialize, ActionDeviceStatusBarSet, ActionDeviceStatusBarShow, ActionDeviceStatusBarHide } from './device.actions';
-import { Injectable } from '@angular/core';
+
+const { Device, StatusBar } = Plugins;
 
 @State<StateDeviceModel>(StateDeviceOptions)
 @Injectable()
