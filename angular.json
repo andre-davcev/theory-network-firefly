@@ -138,7 +138,7 @@
       "projectType": "application",
       "root": "apps/firefly-web",
       "sourceRoot": "apps/firefly-web/src",
-      "prefix": "theory",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -262,7 +262,7 @@
       "projectType": "library",
       "root": "libs/bigdatacloud",
       "sourceRoot": "libs/bigdatacloud/src",
-      "prefix": "theory",
+      "prefix": "tn",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -299,7 +299,7 @@
       "root": "libs/capacitor",
       "sourceRoot": "libs/capacitor/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "tn",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -331,7 +331,7 @@
       "root": "libs/core",
       "sourceRoot": "libs/core/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "tn",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -363,7 +363,7 @@
       "root": "libs/firebase",
       "sourceRoot": "libs/firebase/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "tn",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -395,7 +395,7 @@
       "root": "libs/firefly-shared",
       "sourceRoot": "libs/firefly-shared/src",
       "projectType": "library",
-      "prefix": "app",
+      "prefix": "ff",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -427,7 +427,7 @@
       "root": "libs/firefly-mobile",
       "sourceRoot": "libs/firefly-mobile/src",
       "projectType": "library",
-      "prefix": "app",
+      "prefix": "ff",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -459,7 +459,7 @@
       "root": "libs/google",
       "sourceRoot": "libs/google/src",
       "projectType": "library",
-      "prefix": "theory",
+      "prefix": "tn",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -491,7 +491,7 @@
       "root": "libs/ionic",
       "sourceRoot": "libs/ionic/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "tn",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -523,7 +523,7 @@
       "root": "libs/mapbox",
       "sourceRoot": "libs/mapbox/src",
       "projectType": "library",
-      "prefix": "theory",
+      "prefix": "tn",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
@@ -555,7 +555,7 @@
       "root": "libs/ngxs",
       "sourceRoot": "libs/ngxs/src",
       "projectType": "library",
-      "prefix": "theory",
+      "prefix": "tn",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",

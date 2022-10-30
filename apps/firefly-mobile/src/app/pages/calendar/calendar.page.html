@@ -56,12 +56,12 @@
 
     <ion-content>
         <ion-list>
-            <app-item-events *ngFor="let events of data$ | async"
+            <ff-item-events *ngFor="let events of data$ | async"
                             [dateEvents]="events"
                             [showDelete]="true"
                             (selected)="navigate($event)"
                             (deleted)="delete($event)">
-            </app-item-events>
+            </ff-item-events>
         </ion-list>
 
         <app-button-add *ngIf="canAdd$ | async"

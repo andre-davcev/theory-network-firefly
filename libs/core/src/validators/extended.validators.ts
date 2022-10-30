@@ -12,7 +12,7 @@ export class ValidatorsExtended
 
             if (Validators.required(control) == null)
             {
-                const value: string | Object = typeof control.value === TypeOf.String ? control.value.trim() : control.value;
+                const value: string | any = typeof control.value === TypeOf.String ? control.value.trim() : control.value;
                 const length: number = typeof value === TypeOf.String ? (value as string).length : Object.keys(value).length;
 
                 validation = length < minLength ? { 'minlength': { 'requiredLength': minLength, 'actualLength': length } } : null;

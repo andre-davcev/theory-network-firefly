@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, OnInit, HostBinding } from '
 
 @Component
 ({
-    selector        : 'app-paragraph',
+    selector        : 'tn-paragraph',
     templateUrl     : './paragraph.component.html',
     styleUrls       : ['./paragraph.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
