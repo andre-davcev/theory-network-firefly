@@ -14,7 +14,7 @@
     height: var(--cpt-size);
     width: var(--cpt-size);
 
-    .app-map-orb
+    .ff-map-orb
     {
         position: absolute;
         top: 0;
@@ -30,7 +30,7 @@
         animation-iteration-count: infinite;
     }
 
-    .app-map-orb-pulse
+    .ff-map-orb-pulse
     {
         position: absolute;
         top: calc(var(--cpt-size) * -1);

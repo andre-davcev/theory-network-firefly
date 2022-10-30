@@ -2,7 +2,7 @@ import { Component, HostBinding, Input, ChangeDetectionStrategy } from '@angular
 
 @Component
 ({
-    selector        : 'app-logo',
+    selector        : 'ff-logo',
     templateUrl     : './logo.component.html',
     styleUrls       : ['./logo.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
@@ -15,6 +15,4 @@ export class ComponentLogo
 
     @Input()
     public tagline: boolean = false;
-
-    constructor() { }
 }

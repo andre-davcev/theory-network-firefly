@@ -1,9 +1,10 @@
 import { Component, Input, ChangeDetectionStrategy, HostBinding, ElementRef } from '@angular/core';
-import { Color } from '@firefly/shared/enums';
+
+import { Color } from '../..//enums';
 
 @Component
 ({
-    selector        : 'app-button-action',
+    selector        : 'ff-button-action',
     templateUrl     : './button-action.component.html',
     styleUrls       : ['./button-action.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush

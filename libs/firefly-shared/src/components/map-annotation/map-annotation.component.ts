@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
 
 @Component
 ({
-    selector        : 'app-map-annotation',
+    selector        : 'ff-map-annotation',
     templateUrl     : './map-annotation.component.html',
     styleUrls       : ['./map-annotation.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush

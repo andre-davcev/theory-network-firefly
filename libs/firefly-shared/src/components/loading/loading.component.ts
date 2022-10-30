@@ -1,9 +1,10 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { Color } from '@firefly/shared/enums';
+
+import { Color } from '../../enums';
 
 @Component
 ({
-    selector    : 'app-loading',
+    selector    : 'ff-loading',
     templateUrl : './loading.component.html',
     styleUrls   : ['./loading.component.scss']
 })
@@ -26,6 +27,4 @@ export class ComponentLoading
 
     @HostBinding('class.cpt-color-background-map')
     public get colorBackgroundMap(): boolean { return this.colorBackground === Color.Map; }
-
-    constructor() { }
 }

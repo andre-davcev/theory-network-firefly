@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-
-import { ComponentIcon } from './icon.component';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { ComponentIcon } from './icon.component';
 
 @NgModule
 ({

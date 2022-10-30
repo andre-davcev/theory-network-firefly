@@ -1,11 +1,11 @@
 import { Component, Input, ChangeDetectionStrategy, HostBinding, ElementRef } from '@angular/core';
 
 import { IconType, IconSize } from '../icon';
-import { Color } from '@firefly/shared/enums';
+import { Color } from '../../enums';
 
 @Component
 ({
-    selector        : 'app-icon-message',
+    selector        : 'ff-icon-message',
     templateUrl     : './icon-message.component.html',
     styleUrls       : ['./icon-message.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
