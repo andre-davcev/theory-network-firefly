@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { ComponentMapAnnotation } from './map-annotation.component';
 import { ModuleDirectiveElevation } from '@theory/google';
+
+import { ComponentMapAnnotation } from './map-annotation.component';
 
 @NgModule
 ({

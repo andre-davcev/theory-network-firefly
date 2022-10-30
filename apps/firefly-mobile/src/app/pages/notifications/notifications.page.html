@@ -31,10 +31,10 @@
         </ion-slide>
     </ion-slides>
 
-    <app-icon-message *ngIf="!(exists$ | async)"
+    <ff-icon-message *ngIf="!(exists$ | async)"
                       slot="fixed"
                       [icon]="IconType.Alerts"
                       [message]="'page.events.empty.new' | translate">
-    </app-icon-message>
+    </ff-icon-message>
 </section>
 

@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { ModuleDirectiveElevation } from '@theory/google';
+
 import { ComponentIconMessage } from './icon-message.component';
 import { ModuleComponentIcon } from '../icon/icon.component.module';
-import { ModuleDirectiveElevation } from '@theory/google';
 
 @NgModule
 ({

@@ -45,11 +45,11 @@
     </ion-item>
   </ion-list>
 
-    <app-icon-message *ngIf="empty$ | async"
+    <ff-icon-message *ngIf="empty$ | async"
                       slot="fixed"
                       [icon]="IconType.Events"
                       [message]="'page.events.empty' | translate">
-    </app-icon-message>
+    </ff-icon-message>
 
-    <app-button-add (clicked)="add()" slot="fixed"></app-button-add>
+    <ff-button-add (clicked)="add()" slot="fixed"></ff-button-add>
 </ion-content>

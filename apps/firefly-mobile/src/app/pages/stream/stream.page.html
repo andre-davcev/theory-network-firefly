@@ -77,27 +77,27 @@
                   </mat-expansion-panel>
                 </mat-accordion>
 
-                <app-icon-subscribe [subscribed]="subscriptions[interest.id] != null"
+                <ff-icon-subscribe [subscribed]="subscriptions[interest.id] != null"
                                     [count]="interest.subscriberCount"
                                     [on]="subscriptions[interest.id] != null && subscriptions[interest.id].on"
                                     (clicked)="toggle($event, interest)"
                                     (clickedOn)="toggleOn($event, interest)">
-                </app-icon-subscribe>
+                </ff-icon-subscribe>
             </ion-card-content>
           </ion-card>
     </ion-item>
   </ion-list>
 
-    <app-button-add *ngIf="add$ | async"
+    <ff-button-add *ngIf="add$ | async"
                     (clicked)="add()"
                     slot="fixed">
-    </app-button-add>
+    </ff-button-add>
 
-    <app-icon-message *ngIf="empty$ | async"
+    <ff-icon-message *ngIf="empty$ | async"
                       slot="fixed"
                       [icon]="IconType.Stream"
                       [message]="(emptyMessage$ | async) | translate">
-    </app-icon-message>
+    </ff-icon-message>
 
     <ion-infinite-scroll threshold="100px"
                          (ionInfinite)="loadData($event)">

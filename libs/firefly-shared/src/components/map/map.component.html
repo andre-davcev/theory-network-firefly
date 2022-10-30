@@ -1,8 +1,8 @@
-<app-loading *ngIf="!(mapReady$ | async)"
+<ff-loading *ngIf="(mapReady$ | async) === false"
              [color]="Color.Dark"
              [colorBackground]="Color.Map"
              [text]="mapLoadingText">
-</app-loading>
+</ff-loading>
 
 <mgl-map *ngIf="mapReady$ | async"
          [style]="style"
@@ -17,7 +17,7 @@
     <mgl-control mglNavigation position="bottom-left" *ngIf="web$ | async"></mgl-control>
 
     <mgl-marker [lngLat]="locationLike$ | async">
-        <app-map-orb></app-map-orb>
+        <ff-map-orb></ff-map-orb>
     </mgl-marker>
 
     <mgl-control *ngIf="geocode"
@@ -44,7 +44,7 @@
         <mgl-marker [lngLat]="place.center"
                     [draggable]="false"
                     [anchor]="MapboxMarkerAnchor.Bottom">
-            <app-map-pin [added]="true"></app-map-pin>
+            <ff-map-pin [added]="true"></ff-map-pin>
         </mgl-marker>
 
         <mgl-popup [closeOnClick]="false"
@@ -52,9 +52,9 @@
                    [lngLat]="place.center"
                    [anchor]="MapboxMarkerAnchor.BottomLeft"
                    [offset]="annotationOffset">
-            <app-map-annotation [title]="place.title"
+            <ff-map-annotation [title]="place.title"
                                 [description]="place.description">
-            </app-map-annotation>
+            </ff-map-annotation>
         </mgl-popup>
     </ng-container>
 </mgl-map>

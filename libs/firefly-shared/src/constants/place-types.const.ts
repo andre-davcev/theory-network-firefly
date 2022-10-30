@@ -1,5 +1,6 @@
-import { PlaceType } from '../enums';
 import { MapboxPlaceType } from '@theory/mapbox';
+
+import { PlaceType } from '../enums';
 
 export const PlaceTypes: Record<PlaceType, Array<MapboxPlaceType>> =
 {

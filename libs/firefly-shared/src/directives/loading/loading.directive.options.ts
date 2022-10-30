@@ -1,4 +1,4 @@
-import { Color } from '@firefly/shared/enums';
+import { Color } from '../../enums';
 
 export interface DirectiveLoadingOptions
 {

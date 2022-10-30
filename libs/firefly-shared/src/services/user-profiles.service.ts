@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ServiceFirestore } from '@theory/firebase';
 import { UserProfile } from '@firefly/cloud';
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
+import { ServiceFirestore } from '@theory/firebase';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })

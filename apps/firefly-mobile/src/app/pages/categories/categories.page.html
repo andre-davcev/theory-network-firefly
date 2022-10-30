@@ -4,9 +4,9 @@
 
         <ion-buttons slot="end">
             <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
-                <app-icon [name]="IconType.Menu"
+                <ff-icon [name]="IconType.Menu"
                           [color]="Color.Primary">
-                </app-icon>
+                </ff-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
@@ -21,20 +21,20 @@
                 <ion-row>
                     <ion-col (click)="navigate(Pages.AssetsInterests)">
                         <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
-                            <app-icon [name]="IconType.Interests"
+                            <ff-icon [name]="IconType.Interests"
                                       [size]="IconSize.Large"
                                       [color]="Color.Primary">
-                            </app-icon>
+                            </ff-icon>
                             <ion-label class="cpt-interests">{{ 'general.interests' | translate }}</ion-label>
                         </section>
                     </ion-col>
 
                     <ion-col (click)="navigate(Pages.AssetsEvents)">
                         <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
-                            <app-icon [name]="IconType.Events"
+                            <ff-icon [name]="IconType.Events"
                                       [size]="IconSize.Large"
                                       [color]="Color.Primary">
-                            </app-icon>
+                            </ff-icon>
                             <ion-label>{{ 'general.events' | translate }}</ion-label>
                         </section>
                     </ion-col>
@@ -43,20 +43,20 @@
                 <ion-row>
                     <ion-col (click)="navigate(Pages.AssetsIcons)">
                         <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
-                            <app-icon [name]="IconType.Icons"
+                            <ff-icon [name]="IconType.Icons"
                                       [size]="IconSize.Large"
                                       [color]="Color.Primary">
-                            </app-icon>
+                            </ff-icon>
                             <ion-label>{{ 'general.icons' | translate }}</ion-label>
                         </section>
                     </ion-col>
 
                     <ion-col (click)="navigate(Pages.AssetsImages)">
                         <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
-                            <app-icon [name]="IconType.Images"
+                            <ff-icon [name]="IconType.Images"
                                       [size]="IconSize.Large"
                                       [color]="Color.Primary">
-                            </app-icon>
+                            </ff-icon>
                             <ion-label>{{ 'general.images' | translate }}</ion-label>
                         </section>
                     </ion-col>

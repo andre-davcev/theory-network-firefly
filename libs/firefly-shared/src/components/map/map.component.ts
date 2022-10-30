@@ -3,21 +3,22 @@ import { Select } from '@ngxs/store';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
 import { LngLatLike, Point, Popup } from 'mapbox-gl';
+import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder';
+import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
+import { Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 import { StateDevice, StateLanguage, StateLocation } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
-import { MapboxPlaceType, MapboxMapStyle, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
-import { Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
-import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder'
-import { Color } from '@firefly/shared/enums';
 import { MapMovingMethod } from '@theory/mapbox';
+import { MapboxPlaceType, MapboxMapStyle, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
+
+import { Color } from '../../enums';
 import { MapComponent } from 'ngx-mapbox-gl';
-import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
 import { Place } from '@firefly/cloud';
 
 @Component
 ({
-    selector    : 'app-map',
+    selector    : 'ff-map',
     templateUrl : './map.component.html',
     styleUrls   : ['./map.component.scss']
 })
