@@ -1,4 +1,4 @@
-<app-image-grid [urls]="eventLibrary$ | async" [square]="true" (clicked)="imageClicked($event)"></app-image-grid>
+<tn-image-grid [urls]="eventLibrary$ | async" [square]="true" (clicked)="imageClicked($event)"></tn-image-grid>
 
 <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

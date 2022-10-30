@@ -1,5 +1,6 @@
-import { StateCollectionModel } from '../collection';
 import { TypeOf } from '@theory/core';
+
+import { StateCollectionModel } from '../collection';
 
 export interface StateChildModel<T> extends StateCollectionModel<T>
 {

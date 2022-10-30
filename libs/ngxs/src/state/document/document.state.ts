@@ -3,16 +3,15 @@ import { SetFormPristine, UpdateFormValue, SetFormDirty } from '@ngxs/form-plugi
 import { Observable, of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { UntypedFormGroup, AbstractControl } from '@angular/forms';
+import { DocumentSnapshot } from '@angular/fire/compat/firestore';
 
-import { CoreUtil, CoreEnum } from '@theory/core';
-import { ServiceFirestore, FirebaseDocument, ServiceStorage } from '@theory/firebase';
+import { CoreUtil, CoreEnum, ImageType } from '@theory/core';
+import { ServiceFirestore, FirebaseDocument, ServiceStorage, DocumentSnapshot as FirestoreDocumentSnapshot } from '@theory/firebase';
 
 import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';
 import { StateDocumentModel } from './document.model';
 import { ActionsDocument } from './document.actions';
-import { DocumentSnapshot } from '@angular/fire/compat/firestore';
-import { ImageType } from '@firefly/shared/enums';
 
 export class StateDocument<T extends FirebaseDocument, M extends StateDocumentModel>
 {

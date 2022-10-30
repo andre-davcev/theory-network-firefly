@@ -1,4 +1,4 @@
-import { GeocodeFeature } from '../interfaces/geocode-feature.interface';
+import { GeocodeFeature } from '../interfaces';
 
 export interface ResponseGeocode
 {

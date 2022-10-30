@@ -21,7 +21,7 @@ import {
     ActionUserInterestsReset,
     ActionUserInterestsFilter
 } from './user-interests.actions';
-import { ImageType } from '../../../enums';
+import { ImageType } from '@theory/core';
 import { ServiceStorage } from '@theory/firebase';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';

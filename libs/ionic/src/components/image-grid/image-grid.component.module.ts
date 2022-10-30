@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComponentImageGrid } from './image-grid.component';
 import { IonicModule } from '@ionic/angular';
+
+import { ComponentImageGrid } from './image-grid.component';
 
 @NgModule({
   imports: [

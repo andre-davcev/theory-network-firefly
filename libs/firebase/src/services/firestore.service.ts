@@ -1,10 +1,12 @@
-import { FirebaseDocument } from '../interfaces';
-import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { DocumentSnapshot as FirestoreDocumentSnapshot } from '../types';
-import { CoreEnum, CoreUtil } from '@theory/core';
 import { UntypedFormGroup, UntypedFormBuilder, AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+
+import { CoreEnum, CoreUtil } from '@theory/core';
+
+import { FirebaseDocument } from '../interfaces';
+import { DocumentSnapshot as FirestoreDocumentSnapshot } from '../types';
 import { ServiceFirestoreBase } from './firestore-base.service';
 
 @Injectable({ providedIn: 'root'})
