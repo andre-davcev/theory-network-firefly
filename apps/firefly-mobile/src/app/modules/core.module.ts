@@ -15,8 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
 import {
   StateUser,
-  FirebaseEnvironment,
-  MapboxEnvironment,
   StateInterest,
   StateEvent,
   StateSubscription,
@@ -27,6 +25,8 @@ import {
   StateUserSubscriptions,
   StateUserProfile, StateCity, StateApp, StateAlerts, StateInterests, StateCalendar
 } from '@firefly/shared';
+import { MapboxEnvironment } from '@theory/mapbox';
+import { FirebaseEnvironment  } from '@theory/firebase';
 import { StateNotifications, StateSearch } from '@firefly/mobile';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';

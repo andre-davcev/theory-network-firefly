@@ -1,12 +1,13 @@
-import { OrderBy, ImageSize, FirebaseDocument, ServiceStorage } from '@theory/firebase';
 import { createSelector, StateContext } from '@ngxs/store';
-import { ActionsCollection } from './collection.actions';
-import { CoreUtil, CoreEnum, TypeOf } from '@theory/core';
 import { Observable, of, forkJoin } from 'rxjs';
-import { PageSize } from '../../enums';
-import { StateCollectionModel } from './collection.model';
 import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
-import { ImageType } from '@firefly/shared/enums';
+
+import { CoreUtil, CoreEnum, TypeOf, ImageType } from '@theory/core';
+import { OrderBy, ImageSize, ServiceStorage, FirebaseDocument, DocumentSnapshot } from '@theory/firebase';
+
+import { PageSize } from '../../enums';
+import { ActionsCollection } from './collection.actions';
+import { StateCollectionModel } from './collection.model';
 
 export abstract class StateCollection<T extends FirebaseDocument, M extends StateCollectionModel<T>>
 {
@@ -47,12 +48,12 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     public static loading()          { return createSelector([this], (state: any) => StateCollection.loadingState(state)); }
     public static pageSize()         { return createSelector([this], (state: any) => StateCollection.pageSizeState(state)); }
     public static finishedPaging()   { return createSelector([this], (state: any) => StateCollection.finishedPagingState(state)); }
-    public static orderBy()          { return createSelector([this], (state: any) => StateCollection.orderByState(state)); }
+    public static orderBy()          { return createSelector([this], (state: any) => StateCollection.orderByState(state)); }
     public static orderByDirection() { return createSelector([this], (state: any) => StateCollection.orderByDirectionState(state)); }
     public static keys()             { return createSelector([this], (state: any) => StateCollection.keysState(state)); }
     public static keysFiltered()     { return createSelector([this], (state: any) => StateCollection.keysFilteredState(state)); }
     public static snapshotLookup()   { return createSelector([this], (state: any) => StateCollection.snapshotLookupState(state)); }
-    public static data()             { return createSelector([this], (state: any) => StateCollection.dataState(state)); }
+    public static data()             { return createSelector([this], (state: any) => StateCollection.dataState(state)); }
     public static dataLookup()       { return createSelector([this], (state: any) => StateCollection.dataLookupState(state)); }
     public static count()            { return createSelector([this], (state: any) => StateCollection.countState(state)); }
     public static found()            { return createSelector([this], (state: any) => StateCollection.foundState(state)); }

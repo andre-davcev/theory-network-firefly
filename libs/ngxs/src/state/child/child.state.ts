@@ -1,14 +1,15 @@
 import { StateContext, createSelector } from '@ngxs/store';
 import { Observable, of, forkJoin } from 'rxjs';
-
-import { FirebaseDocument, OrderBy, ServiceFirestore, ServiceStorage } from '@theory/firebase';
 import { map, tap, switchMap } from 'rxjs/operators';
+import { QueryDocumentSnapshot } from '@angular/fire/compat/firestore';
+import { Timestamp } from '@angular/fire/firestore';
+
 import { CoreUtil, TypeOf } from '@theory/core';
+import { FirebaseDocument, OrderBy, ServiceFirestore, ServiceStorage, DocumentSnapshot } from '@theory/firebase';
 
 import { StateChildModel } from './child.model';
 import { ActionsCollection, StateCollection } from '../collection';
 import { SortField, SyncResult } from '../../interfaces';
-import { DocumentSnapshot, QueryDocumentSnapshot, Timestamp } from '@angular/fire/compat/firestore';
 
 export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>> extends StateCollection<T, M>
 {
@@ -136,24 +137,24 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         return finishedPaging ? of(null) :
         of(null).
         pipe
-        (
-            map(() =>
-                this.keysGet(context, keysFiltered).
+        (
+            map(() =>
+                this.keysGet(context, keysFiltered).
                 map((id: string) =>
                     this.service.documentGet(this.collection, id)
                 )
             ),
-            switchMap((slice$: Array<Observable<DocumentSnapshot>>) =>
+            switchMap((slice$: Array<Observable<DocumentSnapshot>>) =>
                 slice$.length === 0 ?
                     of([]) :
-                    forkJoin(slice$)
-            ),
-            map((page: Array<QueryDocumentSnapshot>) =>
+                    forkJoin(slice$)
+            ),
+            map((page: Array<QueryDocumentSnapshot<any>>) =>
                 page.
-                    filter((document: QueryDocumentSnapshot) =>
+                    filter((document: QueryDocumentSnapshot<any>) =>
                         document.exists
                     ).
-                    forEach((document: QueryDocumentSnapshot) =>
+                    forEach((document: QueryDocumentSnapshot<any>) =>
                     {
                         const id: string = document.id;
                         const object: T =
@@ -268,7 +269,7 @@ export class StateChild<T extends FirebaseDocument, M extends StateChildModel<T>
         let a: any;
         let b: any;
 
-        let keys: Array<string> = Object.
+        const keys: Array<string> = Object.
         keys(lookup).
         sort((keyA: string, keyB: string) =>
         {

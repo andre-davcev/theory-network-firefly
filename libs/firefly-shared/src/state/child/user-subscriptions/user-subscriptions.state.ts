@@ -19,7 +19,8 @@ import { StateChild } from '@theory/ngxs';
 import { Injectable } from '@angular/core';
 import { ServiceStorage } from '@theory/firebase';
 import { switchMap } from 'rxjs/operators';
-import { ImageType, Collection, InterestType } from '@firefly/shared/enums';
+import { Collection, InterestType } from '../../../enums';
+import { ImageType } from '@theory/core';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 
