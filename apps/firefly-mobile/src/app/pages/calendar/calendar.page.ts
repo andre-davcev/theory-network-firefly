@@ -20,16 +20,16 @@ import {
     ActionAppLoadingShow,
     ActionCalendarPage,
     StateCalendar,
-    StateInterests
+    StateInterests,
+    ActionSearchEvents,
+    StateSearch,
+    ActionSearchReset
 } from '@firefly/shared';
 import {
     ActionMobileAuthSelect,
     ComponentHomeOptions,
-    ActionSearchEvents,
     Pages,
-    StateMobile,
-    StateSearch,
-    ActionSearchReset
+    StateMobile
 } from '@firefly/mobile';
 import algoliaSearch, { SearchIndex, SearchClient } from 'algoliasearch/lite';
 import { TranslateService } from '@ngx-translate/core';

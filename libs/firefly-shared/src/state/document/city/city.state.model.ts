@@ -1,6 +1,5 @@
 
-import { GeoPoint } from '@angular/fire/firestore';
-
+import { GeoPoint } from '@theory/firebase';
 import { CityInfo } from '@firefly/cloud';
 
 export interface StateCityModel

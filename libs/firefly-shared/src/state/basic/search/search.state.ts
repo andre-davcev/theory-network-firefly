@@ -12,15 +12,13 @@ import { Interest } from '@firefly/cloud';
 @Injectable()
 export class StateSearch
 {
-  @Selector() static searchResults(state: StateSearchModel) : Array<Interest>  { return state.searchResults; }
-  @Selector() static searchResultsFound(state: StateSearchModel) : boolean { return state.searchResults.length > 0 }
-
   public searchClient = algoliaSearch('8NDQ1FNIDU','45b11751dc7e276f781a85f719abda66');
 
   public interestsIndex: SearchIndex = this.searchClient.initIndex('interests');
   public eventsIndex: SearchIndex = this.searchClient.initIndex('events');
 
-  constructor(){}
+  @Selector() static searchResults(state: StateSearchModel) : Array<Interest>  { return state.searchResults; }
+  @Selector() static searchResultsFound(state: StateSearchModel) : boolean { return state.searchResults.length > 0 }
 
   @Action(ActionSearchReset)
   reset({ patchState }: StateContext<StateSearchModel>)

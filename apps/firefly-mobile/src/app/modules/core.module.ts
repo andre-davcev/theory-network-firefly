@@ -23,11 +23,11 @@ import {
   StateUserEvents,
   StateCityStream,
   StateUserSubscriptions,
-  StateUserProfile, StateCity, StateApp, StateAlerts, StateInterests, StateCalendar
+  StateUserProfile, StateCity, StateApp, StateAlerts, StateInterests, StateCalendar,
+  StateNotifications, StateSearch
 } from '@firefly/shared';
 import { MapboxEnvironment } from '@theory/mapbox';
 import { FirebaseEnvironment  } from '@theory/firebase';
-import { StateNotifications, StateSearch } from '@firefly/mobile';
 import { StateMobile } from '@firefly/mobile';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
