@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 
-import { PageHome } from './home.page';
 import { Pages } from '@firefly/mobile';
+
+import { PageHome } from './home.page';
 import { ResolverPageHome } from './home.page.resolver';
 
 export const RoutesPageHome: Routes =
@@ -10,7 +11,7 @@ export const RoutesPageHome: Routes =
       children: [
         { path: '', redirectTo: Pages.Stream, pathMatch: 'full' },
 
-        { path: Pages.Stream,        loadChildren: '../stream#ModulePageStream' },
-        { path: Pages.Notifications, loadChildren: '../notifications#ModulePageNotifications' }
+        { path: Pages.Stream,        loadChildren: () => import('../../pages').then(m => m.ModulePageStream)},
+        { path: Pages.Notifications, loadChildren: () => import('../../pages').then(m => m.ModulePageNotifications) }
     ]}
 ];

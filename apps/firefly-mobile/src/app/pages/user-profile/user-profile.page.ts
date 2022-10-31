@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { IconType, Color, StateUserProfile, ActionUserIsPublisherSet, StateUser } from '@firefly/shared';
+import { UntypedFormGroup } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
-import { StateMobile } from '@firefly/mobile';
 import { Observable } from 'rxjs';
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
 import { MenuController } from '@ionic/angular';
-import { UntypedFormGroup } from '@angular/forms';
+
+import { IconType, Color, StateUserProfile, ActionUserIsPublisherSet, StateUser } from '@firefly/shared';
+import { StateMobile } from '@firefly/mobile';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
 @Component
 ({
@@ -41,12 +42,12 @@ export class PageUserProfile
     {
         this.menu.open();
     }
-
+/*
     public selectIcon(): void
     {
 
     }
-
+*/
     public toggleIsPublisher(event: any): void
     {
         const isPublisher: boolean = event.detail.checked;

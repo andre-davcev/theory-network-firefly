@@ -1,18 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 import { MenuController, PopoverController, IonSearchbar, ModalController } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
-import { StatusBarStyle } from '@capacitor/core';
-
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-
-import { Pages, ActionMobileAuthSelect, ComponentHomeOptions } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
-import { CoreEnum, BaseComponent } from '@theory/core';
-import { StateMobile } from '@firefly/mobile';
+import { StatusBarStyle } from '@capacitor/core';
 import { Observable, from, of } from 'rxjs';
-import { StateAlerts, StateCalendar, StateInterests, StateUser, ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from '@firefly/shared';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
+
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { CoreEnum, BaseComponent } from '@theory/core';
+import { Pages, ActionMobileAuthSelect, ComponentHomeOptions, StateMobile } from '@firefly/mobile';
+import { StateAlerts, StateCalendar, StateInterests, StateUser, ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from '@firefly/shared';
+
 import { PageNotifications } from '../notifications';
 
 @Component

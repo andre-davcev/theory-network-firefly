@@ -3,16 +3,15 @@ import { StatusBarStyle } from '@capacitor/core';
 import { Select, Store } from '@ngxs/store'
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ModalController, MenuController } from '@ionic/angular';
 
+import { BaseComponent } from '@theory/core';
+import { StateStorage, StorageImage } from '@theory/firebase';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateUserInterests, ActionInterestSetId, ActionEventInterestAdd, IconType, ActionAppLoadingShow } from '@firefly/shared';
 import { Interest } from '@firefly/cloud';
-
 import { Pages } from '@firefly/mobile';
-import { ModalController, MenuController } from '@ionic/angular';
-import { StateStorage, StorageImage } from '@theory/firebase';
-import { BaseComponent } from '@theory/core';
-import { takeUntil } from 'rxjs/operators';
 import { StateMobile } from '@firefly/mobile';
 
 @Component

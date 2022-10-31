@@ -4,13 +4,12 @@ import { from, Observable } from 'rxjs';
 import { delay, finalize, switchMap, tap } from 'rxjs/operators';
 import { Actions, ofActionSuccessful, Store, Select } from '@ngxs/store';
 import { Navigate, RouterNavigation } from '@ngxs/router-plugin';
+import { Plugins } from '@capacitor/core';
 
 import { PlatformEnum } from '@theory/ionic';
-
-import { Pages, ActionMobileAuthSelected } from '@firefly/mobile';
+import { Pages, ActionMobileAuthSelected, ActionMobileMenuOpened, ActionMobileMenuClosed } from '@firefly/mobile';
 import { ActionUserLogout, StateUser, IconType, Color, IconSize, ActionCityWatch, ActionUserAuthenticate, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/shared';
-import { Plugins } from '@capacitor/core';
-import { ActionMobileMenuOpened, ActionMobileMenuClosed } from '@firefly/mobile';
+
 import { PageLogin } from '../pages';
 
 const { SplashScreen } = Plugins;

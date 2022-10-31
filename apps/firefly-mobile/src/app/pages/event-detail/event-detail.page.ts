@@ -1,21 +1,22 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { Timestamp } from '@angular/fire/firestore';
 import { Observable, from, of } from 'rxjs';
-import { Select, Store } from '@ngxs/store';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
+import { Select, Store } from '@ngxs/store';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
-
-import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
+import { TranslateService } from '@ngx-translate/core';
+
+import { TimestampFormat } from '@theory/firebase';
+import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, ActionEventAccept, ActionEventDeny, Translation, ActionUserEventsDelete, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/shared';
-import { ActionMobileToast } from '@firefly/mobile';
-import { Pages } from '@firefly/mobile';
+import { ActionMobileToast, Pages } from '@firefly/mobile';
+import { Place } from '@firefly/cloud';
+
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
-import { Place } from '@firefly/cloud';
-import { TranslateService } from '@ngx-translate/core';
-import { TimestampFormat } from '@theory/firebase';
-import { Timestamp } from '@angular/fire/firestore';
+
 
 @Component
 ({

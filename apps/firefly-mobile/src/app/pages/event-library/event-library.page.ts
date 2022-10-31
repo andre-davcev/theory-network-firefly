@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 @Component
@@ -8,16 +8,9 @@ import { Observable, of } from 'rxjs';
     styleUrls   : ['./event-library.page.scss']
 })
 
-export class PageEventLibrary implements OnInit
+export class PageEventLibrary
 {
     public eventLibrary$: Observable<Array<string>> = of([]);
-
-    constructor() { }
-
-    public ngOnInit(): void
-    {
-
-    }
 
     public imageClicked(index: number): void
     {
