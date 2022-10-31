@@ -1,11 +1,11 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { PageSize } from '@theory/ngxs';
-
-import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
-import { InterestType } from '@firefly/shared/enums';
+
+import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
+import { InterestType } from '../../../enums';
 
 export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsModel> =
 {

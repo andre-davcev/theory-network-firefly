@@ -1,7 +1,10 @@
+import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 
+import { StateDocument } from '@theory/ngxs';
 import { UserProfile } from '@firefly/cloud';
+
 import { StateUserProfileModel } from './user-profile.state.model';
 import { StateUserProfileOptions } from './user-profile.state.options';
 import {
@@ -17,9 +20,7 @@ import {
     ActionUserProfileSetId,
     ActionUserProfilePatchMetadata
 } from './user-profile.actions';
-import { ServiceUsersProfiles } from '@firefly/shared/services';
-import { StateDocument } from '@theory/ngxs';
-import { Injectable } from '@angular/core';
+import { ServiceUsersProfiles } from '../../../services';
 import { StateUser } from '../user/user.state';
 
 @State<StateUserProfileModel>(StateUserProfileOptions)

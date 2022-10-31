@@ -1,7 +1,11 @@
-import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
+import { State, Action, StateContext, Selector, Store } from '@ngxs/store'
+import { Injectable } from '@angular/core';
+import { filter, switchMap, take, tap } from 'rxjs/operators';;
 
-import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { StateChild } from '@theory/ngxs';
+import { ServiceStorage } from '@theory/firebase';
+import { ImageType } from '@theory/core';
+import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 
 import { StateCityStreamModel } from './city-stream.state.model';
 import { StateCityStreamOptions } from './city-stream.state.options';
@@ -17,12 +21,6 @@ import {
     ActionCityStreamSubscriptionNew,
     ActionCityStreamSubscriptionsSet
 } from './city-stream.actions';
-import { Injectable } from '@angular/core';
-import { filter, switchMap, take, tap } from 'rxjs/operators';
-
-import { ServiceStorage } from '@theory/firebase';
-import { ImageType } from '@theory/core';
-
 import { Collection, InterestType } from '../../../enums';
 import { ServiceStreams } from '../../../services';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';

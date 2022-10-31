@@ -1,8 +1,9 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateUserProfileModel } from './user-profile.state.model';
 import { CoreUtil } from '@theory/core';
 import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
+
+import { StateUserProfileModel } from './user-profile.state.model';
 
 export const StateUserProfileOptions: StoreOptions<StateUserProfileModel> =
 {

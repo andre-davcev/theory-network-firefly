@@ -3,15 +3,15 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 
+import { Alert } from '@firefly/cloud';
+
 import { StateAlertsModel } from './alerts.state.model';
 import { StateAlertsOptions } from './alerts.state.options';
 import {
     ActionAlertsSlideIndex,
     ActionAlertsSlideRestore,
 } from './alerts.actions';
-
 import { ActionUserAlertsMarkRead, StateUserAlerts } from '../../child';
-import { Alert } from '@firefly/cloud';
 
 @State<StateAlertsModel>(StateAlertsOptions)
 @Injectable()

@@ -1,7 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { EventType } from '@firefly/shared/enums';
-
+import { EventType } from '../../../enums';
 import { StateCalendarModel } from './calendar.state.model';
 
 export const StateCalendarOptions: StoreOptions<StateCalendarModel> =

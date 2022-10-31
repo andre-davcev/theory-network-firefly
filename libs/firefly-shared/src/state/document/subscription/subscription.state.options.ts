@@ -1,8 +1,9 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateSubscriptionModel } from './subscription.state.model';
 import { CoreUtil } from '@theory/core';
 import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
+
+import { StateSubscriptionModel } from './subscription.state.model';
 
 export const StateSubscriptionOptions: StoreOptions<StateSubscriptionModel> =
 {
