@@ -5,12 +5,12 @@ import { StatusBarStyle } from '@capacitor/core';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
-import { Pages, ActionMobileAuthSelect, ComponentHomeOptions, ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from '@firefly/mobile';
+import { Pages, ActionMobileAuthSelect, ComponentHomeOptions } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { StateMobile } from '@firefly/mobile';
 import { Observable, from, of } from 'rxjs';
-import { StateAlerts, StateCalendar, StateInterests, StateUser } from '@firefly/shared';
+import { StateAlerts, StateCalendar, StateInterests, StateUser, ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from '@firefly/shared';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { PageNotifications } from '../notifications';

@@ -1,17 +1,17 @@
-
+import { Injectable } from '@angular/core';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { Plugins } from '@capacitor/core';
+import { FCM } from '@capacitor-community/fcm';
+import { of, from } from 'rxjs';
+import { filter, switchMap, take, map } from 'rxjs/operators';
 
 import { PushNotification } from '@theory/firebase';
-import { FCM } from '@capacitor-community/fcm';
+import { StateDevice } from '@theory/capacitor';
+import { ActionUserAddToken } from '@firefly/shared';
+
 import { StateNotificationsModel } from './notifications.state.model';
 import { StateNotificationsOptions } from './notifications.state.options';
 import { ActionNotificationsWatch } from './notifications.actions';
-import { Plugins } from '@capacitor/core';
-import { ActionUserAddToken } from '@firefly/shared';
-import { Injectable } from '@angular/core';
-import { StateDevice } from '@theory/capacitor';
-import { of, from } from 'rxjs';
-import { filter, switchMap, take, map } from 'rxjs/operators';
 
 const fcm = new FCM();
 const { PushNotifications } = Plugins;
