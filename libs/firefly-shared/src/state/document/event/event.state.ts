@@ -4,14 +4,14 @@ import { LngLatLike } from 'mapbox-gl';
 import { switchMap, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { DocumentSnapshot, Query, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/firestore';
+import { Query } from '@angular/fire/compat/firestore';
 import { FieldValue, Timestamp } from '@angular/fire/firestore';
 
 import { ImageType } from '@theory/core';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { ServiceStorage, ImageSize } from '@theory/firebase';
+import { ServiceStorage, ImageSize, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
 import { Event, Interest, MetadataEvent, Place } from '@firefly/cloud';
 
 import { StateUser } from '../user';

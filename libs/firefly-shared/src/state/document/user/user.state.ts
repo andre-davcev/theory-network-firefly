@@ -6,10 +6,9 @@ import { FirebaseError } from '@angular/fire/app';
 import { FieldValue, serverTimestamp } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User as FirebaseUser } from '@angular/fire/auth';
-import { UserCredential } from '@angular/fire/auth';
 
 import { StateDocument } from '@theory/ngxs';
-import { GeoPoint } from '@theory/firebase';
+import { GeoPoint, UserCredential } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 import { User, SubscriptionPartial, AlertPartial, CityInfo, Token } from '@firefly/cloud';
 
