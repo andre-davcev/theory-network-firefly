@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { LoadingOptions } from '@ionic/core';
+import { LoadingController } from '@ionic/angular';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
@@ -9,9 +11,6 @@ import {
     ActionAppLoadingShow,
     ActionAppLoadingHide
 } from './app.actions';
-
-import { LoadingOptions } from '@ionic/core';
-import { LoadingController } from '@ionic/angular';
 import { StateCity } from '../city/city.state';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { StateUser } from '../user/user.state';

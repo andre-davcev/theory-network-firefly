@@ -1,9 +1,10 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateUserEventsModel } from './user-events.state.model';
 import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
-import { EventType } from '@firefly/shared/enums';
+
+import { EventType } from '../../../enums';
+import { StateUserEventsModel } from './user-events.state.model';
 
 export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 {
@@ -11,7 +12,7 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
 
     defaults :
     {
-        pageSize         : 12,
+        pageSize         : 12,
         orderBy          : 'timeStart',
         orderByDirection : OrderBy.Ascending,
         orderByType      : TypeOf.Timestamp,

@@ -1,8 +1,13 @@
+import { Injectable } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 
+import { ImageType } from '@theory/core';
+import { StateChild } from '@theory/ngxs';
+import { ServiceStorage } from '@theory/firebase';
 import { StreamInterest, Subscription, SubscriptionPartial } from '@firefly/cloud';
-import { ServiceSubscriptions } from '@firefly/shared/services';
 
+import { ServiceSubscriptions } from '../../../services';
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 import { StateUserSubscriptionsOptions } from './user-subscriptions.state.options';
 import {
@@ -15,12 +20,7 @@ import {
     ActionUserSubscriptionsSetData,
     ActionUserSubscriptionsFilter
 } from './user-subscriptions.actions';
-import { StateChild } from '@theory/ngxs';
-import { Injectable } from '@angular/core';
-import { ServiceStorage } from '@theory/firebase';
-import { switchMap } from 'rxjs/operators';
 import { Collection, InterestType } from '../../../enums';
-import { ImageType } from '@theory/core';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 

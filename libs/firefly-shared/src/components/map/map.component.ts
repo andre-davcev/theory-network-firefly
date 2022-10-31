@@ -4,17 +4,16 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
 import { LngLatLike, Point, Popup } from 'mapbox-gl';
 import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder';
-import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
-import { Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
+import { MapComponent, MarkerComponent } from 'ngx-mapbox-gl';
+import { Results, Result } from '@mapbox/mapbox-gl-geocoder';
 
 import { StateDevice, StateLanguage, StateLocation } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
 import { MapMovingMethod } from '@theory/mapbox';
 import { MapboxPlaceType, MapboxMapStyle, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
+import { Place } from '@firefly/cloud';
 
 import { Color } from '../../enums';
-import { MapComponent } from 'ngx-mapbox-gl';
-import { Place } from '@firefly/cloud';
 
 @Component
 ({
@@ -82,11 +81,11 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @Input() zoom?:      number;
     @Input() minLength?: number;
 
-    @Output() clear:   EventEmitter<void>    = new EventEmitter<void>();
-    @Output() loading: EventEmitter<string>  = new EventEmitter<string>();
-    @Output() results: EventEmitter<Results> = new EventEmitter<Results>();
-    @Output() result:  EventEmitter<Result>  = new EventEmitter<Result>();
-    @Output() error:   EventEmitter<any>     = new EventEmitter<any>();
+    @Output() clear         : EventEmitter<void>    = new EventEmitter<void>();
+    @Output() loading       : EventEmitter<string>  = new EventEmitter<string>();
+    @Output() searchResults : EventEmitter<Results> = new EventEmitter<Results>();
+    @Output() searchResult  : EventEmitter<Result>  = new EventEmitter<Result>();
+    @Output() searchError   : EventEmitter<any>     = new EventEmitter<any>();
 
     private map: mapboxgl.Map;
 
@@ -153,21 +152,21 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 
     public eventResults(results: Results): void
     {
-        this.results.next(results);
+        this.searchResults.next(results);
 
         this.resizeMap();
     }
 
     public eventResult(event: { result: Result }): void
     {
-        this.result.next(event.result);
+        this.searchResult.next(event.result);
 
         this.resizeMap();
     }
 
     public eventError(error: any): void
     {
-        this.error.next(error);
+        this.searchError.next(error);
 
         this.resizeMap();
     }

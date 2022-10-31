@@ -1,5 +1,13 @@
+import { Injectable } from '@angular/core';
+import { DocumentSnapshot, Query } from '@angular/fire/compat/firestore';
 import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
+import { StateQuery } from '@theory/ngxs';
+import { ImageType } from '@theory/core';
+import { ServiceStorage } from '@theory/firebase';
+import { CoreEnum } from '@theory/core';
 import { Event } from '@firefly/cloud';
 
 import { StateUserEventsModel } from './user-events.state.model';
@@ -15,16 +23,8 @@ import {
     ActionUserEventsFilter
 } from './user-events.actions';
 import { StateUser } from '../../document/user';
-import { StateQuery } from '@theory/ngxs';
-import { ServiceEvents } from '@firefly/shared/services';
-import { DocumentSnapshot, Query } from '@angular/fire/compat/firestore';
-import { switchMap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
-import { ServiceStorage } from '@theory/firebase';
-import { Collection, EventType } from '@firefly/shared/enums';
-import { ImageType } from '@theory/core';
-import { Observable, of } from 'rxjs';
-import { CoreEnum } from '@theory/core';
+import { ServiceEvents } from '../../../services';
+import { Collection, EventType } from '../../../enums';
 import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 

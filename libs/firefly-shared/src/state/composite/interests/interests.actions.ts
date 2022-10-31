@@ -1,6 +1,6 @@
 import { IonInfiniteScroll } from '@ionic/angular';
 
-import { InterestType } from '@firefly/shared/enums';
+import { InterestType } from '../../../enums';
 
 import { ActionsInterests } from './interests.actions.enum';
 import { InterestsFilter } from './interests.filter.model';
