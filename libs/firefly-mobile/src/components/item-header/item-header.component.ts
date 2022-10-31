@@ -3,7 +3,7 @@ import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 
 @Component
 ({
-    selector        : 'app-item-header',
+    selector        : 'ff-item-header',
     templateUrl     : './item-header.component.html',
     styleUrls       : ['./item-header.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush

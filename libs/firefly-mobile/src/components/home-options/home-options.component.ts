@@ -1,14 +1,14 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-
-import { InterestType, EventType, StateUser, ActionInterestsSetVirtual, ActionCalendarSetVirtual, ActionInterestsSetType, ActionCalendarSetType } from '@firefly/shared';
 import { Store, Select } from '@ngxs/store';
 import { PopoverController } from '@ionic/angular';
 import { Observable, from } from 'rxjs';
 import { switchMap, delay } from 'rxjs/operators';
 
+import { InterestType, EventType, StateUser, ActionInterestsSetVirtual, ActionCalendarSetVirtual, ActionInterestsSetType, ActionCalendarSetType } from '@firefly/shared';
+
 @Component
 ({
-    selector        : 'app-interest-options',
+    selector        : 'ff-interest-options',
     templateUrl     : './home-options.component.html',
     styleUrls       : ['./home-options.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush

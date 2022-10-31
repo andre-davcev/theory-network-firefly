@@ -6,10 +6,10 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ModuleDirectiveElevation } from '@theory/google';
+import { ModulePipeTimestamp } from '@theory/firebase';
+import { ModuleComponentButtonAction } from '@firefly/shared';
 
 import { ComponentSlide } from './slide.component';
-import { ModuleComponentButtonAction } from '@firefly/shared';
-import { ModulePipeTimestamp } from '@theory/firebase';
 
 @NgModule
 ({

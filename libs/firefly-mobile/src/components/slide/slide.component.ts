@@ -5,7 +5,7 @@ import { TimestampFormat } from '@theory/firebase';
 
 @Component
 ({
-    selector        : 'app-slide',
+    selector        : 'ff-slide',
     templateUrl     : './slide.component.html',
     styleUrls       : ['./slide.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush

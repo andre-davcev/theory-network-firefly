@@ -3,7 +3,7 @@ import { UntypedFormGroup } from '@angular/forms';
 
 @Component
 ({
-    selector        : 'app-item-description',
+    selector        : 'ff-item-description',
     templateUrl     : './item-description.component.html',
     styleUrls       : ['./item-description.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush

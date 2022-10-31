@@ -51,7 +51,7 @@
     [formGroup]="form$ | async"
     ngxsForm="events.form"
   >
-    <app-item-image
+    <ff-item-image
       [url]="image$ | async"
       [form]="form$ | async"
       [placeholder]="'page.event.imagePlaceholder' | translate"
@@ -59,7 +59,7 @@
       [edit]="true"
       (clicked)="selectImage()"
     >
-    </app-item-image>
+    </ff-item-image>
 
     <ion-item>
       <ion-input
@@ -83,12 +83,12 @@
       </ion-input>
     </ion-item>
 
-    <app-item-map
+    <ff-item-map
       [place]="place$ | async"
       [title]="'general.location' | translate"
       (click)="navigate(Pages.EventLocation)"
     >
-    </app-item-map>
+    </ff-item-map>
 
     <div class="cpt-detail" fxLayout="column">
       <ion-list>
@@ -193,14 +193,14 @@
             </ion-input>
           </ion-item>
 
-          <app-item-description
+          <ff-item-description
             [form]="form$ | async"
             [class.invalid]="!(form$ | async).controls.description.valid && (form$ | async).controls.description.dirty"
             [title]="'general.description' | translate"
             description="description"
             [descriptionPlaceholder]="'page.event.descriptionPlaceholder' | translate"
           >
-          </app-item-description>
+          </ff-item-description>
 
           <ion-item-divider></ion-item-divider>
         </ion-item-group>

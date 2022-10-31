@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { ModulePipeTimestamp } from '@theory/firebase';
 
 import { ComponentItemEvents } from './item-events.component';
-import { IonicModule } from '@ionic/angular';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { TranslateModule } from '@ngx-translate/core';
-import { ModulePipeTimestamp } from '@theory/firebase';
 
 @NgModule
 ({

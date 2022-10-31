@@ -1,5 +1,10 @@
-
+import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastOptions } from '@ionic/core';
+import { ToastController, ActionSheetController } from '@ionic/angular';
 import { Action, StateContext, State, Selector } from '@ngxs/store';
+import { from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { StateMobileModel } from './mobile.state.model';
 import {
@@ -10,13 +15,7 @@ import {
     ActionMobileAuthSelect
 } from './mobile.actions';
 import { StateMobileOptions } from './mobile.state.options';
-import { ToastController, ActionSheetController } from '@ionic/angular';
-import { switchMap } from 'rxjs/operators';
-import { from } from 'rxjs';
-import { ToastOptions } from '@ionic/core';
-import { Pages } from '@firefly/mobile/enums';
-import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Pages } from '../../enums';
 
 @State<StateMobileModel>(StateMobileOptions)
 @Injectable()
@@ -42,7 +41,7 @@ export class StateMobile
     ) { }
 
     @Action(ActionMobileToast)
-    toastShow({ }: StateContext<StateMobileModel>, { payload }: ActionMobileToast)
+    toastShow(context: StateContext<StateMobileModel>, { payload }: ActionMobileToast)
     {
         const message: string = payload;
 
@@ -111,6 +110,6 @@ export class StateMobile
     @Action(ActionMobileAuthSelected)
     authSelected(context: StateContext<StateMobileModel>, { page }: ActionMobileAuthSelected)
     {
-
+        console.log('NOOP')
     }
 }
