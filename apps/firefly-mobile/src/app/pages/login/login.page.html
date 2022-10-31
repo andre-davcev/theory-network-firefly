@@ -3,7 +3,7 @@
             mode="ios">
     <ion-toolbar color="dark">
         <ion-buttons slot="start">
-            <ion-button icon-only (click)="close()" *ngIf="!(authenticating$ | async)" >
+            <ion-button icon-only (click)="close()" *ngIf="(authenticating$ | async) === false" >
                 <ion-icon name="close" color="primary"></ion-icon>
             </ion-button>
         </ion-buttons>

@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-
-import { StateUser, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionInterestGet, ActionAppLoadingShow, ActionInterestsPage, StateInterests, ActionInterestsSubscriptionToggle, ActionInterestsSubscriptionOnOff, ActionInterestSetId, StateSearch, ActionSearchReset } from '@firefly/shared';
-import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
-import { BaseComponent } from '@theory/core';
-import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
-import { ActionMobileAuthSelect, Pages } from '@firefly/mobile';
 import { Navigate } from '@ngxs/router-plugin';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
+
 import { TimestampFormat } from '@theory/firebase';
+import { BaseComponent } from '@theory/core';
+import { StateUser, ActionInterestEventsGetAnonymous, StateInterest, IconType, ActionInterestGet, ActionAppLoadingShow, ActionInterestsPage, StateInterests, ActionInterestsSubscriptionToggle, ActionInterestsSubscriptionOnOff, ActionInterestSetId, StateSearch, ActionSearchReset } from '@firefly/shared';
+import { StreamInterest, Interest, Event, SubscriptionPartial } from '@firefly/cloud';
+import { ActionMobileAuthSelect, Pages } from '@firefly/mobile';
 
 @Component
 ({

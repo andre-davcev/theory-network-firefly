@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { ActionCalendarFilter } from '@firefly/shared';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+
+import { ActionCalendarFilter } from '@firefly/shared';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageCalendar implements Resolve<void>
@@ -14,6 +15,6 @@ export class ResolverPageCalendar implements Resolve<void>
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<void>
     {
-        return this.store.dispatch(new ActionCalendarFilter());
+        return this.store.dispatch(new ActionCalendarFilter());
     }
 }

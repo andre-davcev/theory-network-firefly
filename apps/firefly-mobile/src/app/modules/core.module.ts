@@ -1,17 +1,27 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { RouteReuseStrategy, RouterModule } from '@angular/router';
-import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 // import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
+import { Calendar } from '@ionic-native/calendar/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MapboxEnvironment } from '@theory/mapbox';
+import { FirebaseEnvironment, StateStorage  } from '@theory/firebase';
 import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
 import {
   StateUser,
@@ -26,18 +36,7 @@ import {
   StateUserProfile, StateCity, StateApp, StateAlerts, StateInterests, StateCalendar,
   StateNotifications, StateSearch
 } from '@firefly/shared';
-import { MapboxEnvironment } from '@theory/mapbox';
-import { FirebaseEnvironment  } from '@theory/firebase';
 import { StateMobile } from '@firefly/mobile';
-import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { BrowserModule } from '@angular/platform-browser';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { StateStorage } from '@theory/firebase';
-import { Calendar } from '@ionic-native/calendar/ngx';
-import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { environment } from '../../environments/environment';
 

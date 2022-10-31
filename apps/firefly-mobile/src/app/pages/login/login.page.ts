@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FirebaseError } from '@angular/fire/app';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
@@ -7,7 +8,6 @@ import { StatusBarStyle } from '@capacitor/core';
 import { StateUser, Color, IconType, AuthType } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '@firefly/mobile';
-import { FirebaseError } from '@angular/fire/app';
 
 @Component
 ({

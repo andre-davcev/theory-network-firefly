@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
 import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
-
-import { StateApp } from '@firefly/shared';
-import { ActionDeviceStatusBarShow, ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Pages } from '@firefly/mobile';
 import { StatusBarStyle } from '@capacitor/core';
-import { Navigate } from '@ngxs/router-plugin';
+
+import { ActionDeviceStatusBarShow, ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { StateApp } from '@firefly/shared';
+import { Pages } from '@firefly/mobile';
 
 @Component
 ({

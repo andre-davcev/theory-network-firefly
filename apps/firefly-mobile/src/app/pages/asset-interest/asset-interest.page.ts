@@ -3,18 +3,17 @@ import { UntypedFormGroup } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
-import { StatusBarStyle } from '@capacitor/core';
-import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
-import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, InterestType, Translation, ActionAppLoadingShow, ActionAppLoadingHide, StateInterests } from '@firefly/shared';
-import { Pages } from '@firefly/mobile';
-import { Event } from '@firefly/cloud';
-import { ActionMobileToast } from '@firefly/mobile';
-import { NavController } from '@ionic/angular';
-import { StorageImage, StateStorage } from '@theory/firebase';
-import { BaseComponent } from '@theory/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { TranslateService } from '@ngx-translate/core';
-import { TimestampFormat } from '@theory/firebase';
+import { StatusBarStyle } from '@capacitor/core';
+import { NavController } from '@ionic/angular';
+
+import { StorageImage, StateStorage, TimestampFormat } from '@theory/firebase';
+import { BaseComponent } from '@theory/core';
+import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
+import { StateInterest, ActionInterestSave, StateUserEvents, ActionUserEventsGetData, ActionInterestPatchMetadata, ActionCityStreamGet, InterestType, Translation, ActionAppLoadingShow, ActionAppLoadingHide, StateInterests } from '@firefly/shared';
+import { Pages, ActionMobileToast } from '@firefly/mobile';
+import { Event } from '@firefly/cloud';
 
 @Component
 ({

@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBarStyle } from '@capacitor/core';
-import { ActionCalendarPage, ActionCalendarSetType, ActionEventSet, EventType, IconType, StateCalendar, StateUserEvents } from '@firefly/shared';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { from, Observable } from 'rxjs';
-import { Alert, DateEvents } from '@firefly/cloud';
 import { switchMap } from 'rxjs/operators';
+
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { ActionCalendarPage, ActionCalendarSetType, ActionEventSet, EventType, IconType, StateCalendar, StateUserEvents } from '@firefly/shared';
+import { Alert, DateEvents } from '@firefly/cloud';
 
 @Component
 ({

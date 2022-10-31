@@ -2,10 +2,11 @@ import { Observable } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular'
+import { ModalController } from '@ionic/angular';
+
+import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
 import { StateUserEvents, ActionEventSetId, StateInterest, ActionEventPatch, ActionInterestEventsGet } from '@firefly/shared';
 import { Event, Interest } from '@firefly/cloud';
-import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
 
 @Component
 ({
@@ -28,9 +29,9 @@ export class PageEventAssets
 
   constructor(private store:Store, private modalController: ModalController){}
 
+/*
     public ngOnInit(): void
     {
-/*
       this.store.dispatch(new ActionUserEventsGetData()).pipe(
         switchMap(() => {
 
@@ -44,13 +45,14 @@ export class PageEventAssets
             return this.urls$ = of(this.urls);
         })
       ).subscribe();
-*/
     }
+*/
 
+/*
     public ionViewWillEnter(): void
     {
     }
-
+*/
     public eventClicked(event: Event): void
     {
         //console.log(`event ${index} clicked`);
@@ -60,9 +62,9 @@ export class PageEventAssets
         const id: string = event.id;
         // const bucketPath = event.bucketPath;
 
-        let interests: string[] = event.interests;
+        const interests: string[] = event.interests;
 
-        let interest: Interest = this.store.selectSnapshot(StateInterest.data());
+        const interest: Interest = this.store.selectSnapshot(StateInterest.data());
         if(!interests[interest.id])
         {
           interests.push(interest.id);
