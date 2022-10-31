@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { DocumentSnapshot, Query } from '@angular/fire/compat/firestore';
+import { Query } from '@angular/fire/compat/firestore';
 import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { StateQuery } from '@theory/ngxs';
 import { ImageType } from '@theory/core';
-import { ServiceStorage } from '@theory/firebase';
+import { ServiceStorage, DocumentSnapshot } from '@theory/firebase';
 import { CoreEnum } from '@theory/core';
 import { Event } from '@firefly/cloud';
 
