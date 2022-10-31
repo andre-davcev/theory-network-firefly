@@ -4,7 +4,7 @@ import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 
 @Component
 ({
-    selector        : 'app-item-image',
+    selector        : 'ff-item-image',
     templateUrl     : './item-image.component.html',
     styleUrls       : ['./item-image.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
@@ -24,7 +24,7 @@ export class ComponentItemImage
     public clickedImage(): void
     {
         this.form.markAsDirty();
-        let control : AbstractControl = this.form.get(['metadata', 'image']);
+        const control : AbstractControl = this.form.get(['metadata', 'image']);
         control.markAsDirty();
         this.clicked.next();
     }

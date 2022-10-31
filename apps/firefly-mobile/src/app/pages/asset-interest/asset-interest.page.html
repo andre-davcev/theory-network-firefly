@@ -22,13 +22,13 @@
           [formGroup]="form$  | async"
           ngxsForm="interests.form">
 
-        <app-item-image [url]="image$ | async"
+        <ff-item-image [url]="image$ | async"
                         [form]="form$ | async"
                         [placeholder]="'page.interest.imagePlaceholder' | translate"
                         [title]="'page.interest.imageTitlePlaceholder' | translate"
                         [edit]="true"
                         (clicked)="selectImage()">
-        </app-item-image>
+        </ff-item-image>
 
         <ion-item>
           <ion-input [class.invalid]="!(form$ | async).controls.name.valid && (form$ | async).controls.name.dirty" type="text"
@@ -66,12 +66,12 @@
 
                     <ion-item-divider></ion-item-divider>
 
-                    <app-item-description [form]="form$ | async"
+                    <ff-item-description [form]="form$ | async"
                                           [class.invalid]="!(form$ | async).controls.description.valid && (form$ | async).controls.description.dirty"
                                           [title]="'general.description' | translate"
                                           description="description"
                                           [descriptionPlaceholder]="'page.interest.descriptionPlaceholder' | translate">
-                    </app-item-description>
+                    </ff-item-description>
 
                     <ion-item-divider></ion-item-divider>
 

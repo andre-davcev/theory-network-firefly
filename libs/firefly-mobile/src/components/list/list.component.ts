@@ -4,7 +4,7 @@ import { ServiceUtil } from '@firefly/shared';
 
 @Component
 ({
-    selector        : 'app-list',
+    selector        : 'ff-list',
     templateUrl     : './list.component.html',
     styleUrls       : ['./list.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
