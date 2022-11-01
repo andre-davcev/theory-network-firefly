@@ -1,4 +1,5 @@
 import { storage } from 'firebase-admin';
+
 import { FIREBASE_CONFIG } from '../constants';
 
 export class ServiceStorage

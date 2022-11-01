@@ -1,7 +1,9 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
+import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+
 import { ServiceFirestore, Version, User, UserProfile, ServiceCities, Collection } from '../library';
+
 const database: Firestore = db();
 
 const UsersCreate: CloudFunction<DocumentSnapshot> =
@@ -38,7 +40,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
 
     return Promise.all
     ([
-        snapshot.ref.update(user),
+        snapshot.ref.update({ data: user}),
         database.collection(Collection.UserProfiles).doc(userId).create(userProfile),
         ServiceCities.createIfNew(database, user)
     ]);

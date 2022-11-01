@@ -1,7 +1,8 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { FieldValue, DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { Status, User, ServiceCities, SubscriptionPartial, Collection } from '../library';
 import { firestore as db } from 'firebase-admin';
+import { FieldValue, DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
+
+import { Status, User, ServiceCities, SubscriptionPartial, Collection } from '../library';
 
 const database: Firestore = db();
 

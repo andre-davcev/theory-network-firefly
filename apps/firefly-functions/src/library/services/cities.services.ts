@@ -1,5 +1,6 @@
 import { WriteResult, Firestore, DocumentSnapshot, QuerySnapshot, QueryDocumentSnapshot, CollectionReference } from '@google-cloud/firestore';
 import { firestore } from 'firebase-admin';
+
 import { Event, User, StreamInterest, Interest, City } from '../documents';
 import { ServiceStreams } from './stream.service';
 import { GlobalVariable, Collection } from '../enums';
