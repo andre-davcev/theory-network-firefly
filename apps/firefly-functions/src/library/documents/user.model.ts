@@ -1,7 +1,5 @@
 import { GeoPoint } from '../types';
-
 import { FirebaseDocument, CityInfo, Token } from '../interfaces';
-
 import { SubscriptionPartial, AlertPartial } from '../models';
 import { MetadataUser } from '../metadata';
 

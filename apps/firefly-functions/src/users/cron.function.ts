@@ -1,7 +1,6 @@
 
 import { runWith, EventContext } from 'firebase-functions';
 import { auth } from 'firebase-admin';
-
 import * as moment from 'moment';
 
 const UsersCron =

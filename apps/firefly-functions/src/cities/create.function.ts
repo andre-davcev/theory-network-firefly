@@ -1,6 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore, WriteResult, QueryDocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
+import { DocumentSnapshot, Firestore, WriteResult, QueryDocumentSnapshot } from '@google-cloud/firestore';
+
 import { Version, ServiceFirestore, ServiceCities, GlobalVariable, City, Collection } from '../library';
 
 const database: Firestore = db();
@@ -42,7 +43,7 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 
     return Promise.all
     ([
-        snapshot.ref.update(object),
+        snapshot.ref.update({data: object}),
         ServiceCities.generateStream(database, object)
     ]);
 });

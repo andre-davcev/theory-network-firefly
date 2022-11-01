@@ -1,6 +1,7 @@
-import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
-import { FieldValue, serverTimestamp } from '../types';
 
+import { DocumentSnapshot } from 'firebase/firestore';
+
+import { FieldValue, serverTimestamp } from '../types';
 import { FirebaseDocument } from '../interfaces';
 import { Version } from '../enums';
 

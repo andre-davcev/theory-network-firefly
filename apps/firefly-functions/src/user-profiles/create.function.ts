@@ -1,6 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
+import { DocumentSnapshot } from '@google-cloud/firestore';
+
 import { Version, ServiceFirestore, UserProfile, Collection } from '../library';
 
 db();
@@ -13,7 +14,7 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 {
     const object: UserProfile = ServiceFirestore.create<UserProfile>(snapshot, Version.UserProfiles);
 
-    return snapshot.ref.update(object);
+    return snapshot.ref.update({data: object});
 });
 
 export { UserProfilesCreate };

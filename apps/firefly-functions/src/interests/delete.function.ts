@@ -1,6 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore, FieldValue, WriteResult, QuerySnapshot, QueryDocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
+import { DocumentSnapshot, Firestore, FieldValue, WriteResult, QuerySnapshot, QueryDocumentSnapshot } from '@google-cloud/firestore';
+
 import { User, SubscriptionPartial, Collection, ImageType, ServiceStorage } from '../library';
 
 const database: Firestore = db();

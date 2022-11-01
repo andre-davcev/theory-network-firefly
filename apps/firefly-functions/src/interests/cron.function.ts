@@ -1,8 +1,8 @@
 import { runWith, EventContext } from 'firebase-functions';
 import { firestore } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
-import { ServiceStreams, Interest, Event, GlobalVariable, StreamInterest, Collection, CityInfo } from '../library';
-import { City } from '../library';
+
+import { ServiceStreams, Interest, Event, GlobalVariable, StreamInterest, Collection, CityInfo, City } from '../library';
 
 const InterestsCron =
 
