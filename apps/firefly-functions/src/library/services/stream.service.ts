@@ -1,6 +1,7 @@
+import { Timestamp } from '@angular/fire/firestore';
+
 import { GlobalVariable } from '../enums';
-import { Event } from '../documents';
-import { Timestamp } from '../types';
+import { Event } from '../../shared';
 
 export class ServiceStreams
 {

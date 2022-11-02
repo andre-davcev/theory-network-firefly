@@ -18,21 +18,21 @@ const StorageResize = firebase_functions_1.storage.
         return false;
     }
     const [name, extension] = fileName.split('.');
-    const filePathTemp = path_1.join(os_1.tmpdir(), `${aspect}-${id}-${fileName}`);
+    const filePathTemp = (0, path_1.join)((0, os_1.tmpdir)(), `${aspect}-${id}-${fileName}`);
     await bucket.file(filePath).download({ destination: filePathTemp });
     const fileSmallName = `${name}@small.${extension}`;
-    const fileSmallPath = path_1.join(os_1.tmpdir(), fileSmallName);
+    const fileSmallPath = (0, path_1.join)((0, os_1.tmpdir)(), fileSmallName);
     const fileSmallWidth = 100;
-    const fileSmallDestination = path_1.join(path_1.dirname(filePath), fileSmallName);
+    const fileSmallDestination = (0, path_1.join)((0, path_1.dirname)(filePath), fileSmallName);
     await sharp(filePathTemp).resize({ width: fileSmallWidth, withoutEnlargement: true }).toFile(fileSmallPath);
     await bucket.upload(fileSmallPath, { destination: fileSmallDestination });
     const fileMediumName = `${name}@medium.${extension}`;
-    const fileMediumPath = path_1.join(os_1.tmpdir(), fileMediumName);
+    const fileMediumPath = (0, path_1.join)((0, os_1.tmpdir)(), fileMediumName);
     const fileMediumWidth = 500;
-    const fileMediumDestination = path_1.join(path_1.dirname(filePath), fileMediumName);
+    const fileMediumDestination = (0, path_1.join)((0, path_1.dirname)(filePath), fileMediumName);
     await sharp(filePathTemp).resize({ width: fileMediumWidth, withoutEnlargement: true }).toFile(fileMediumPath);
     await bucket.upload(fileMediumPath, { destination: fileMediumDestination });
-    return fs_extra_1.remove(filePathTemp);
+    return (0, fs_extra_1.remove)(filePathTemp);
 });
 exports.StorageResize = StorageResize;
 //# sourceMappingURL=resize.function.js.map

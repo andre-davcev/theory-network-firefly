@@ -1,7 +1,7 @@
+import { GeoPoint } from '@angular/fire/firestore';
 
 import { LngLatLike } from 'mapbox-gl';
 
-import { GeoPoint } from '../types';
 import { CityInfo } from '../interfaces';
 import { MapboxPlaceType } from '../enums';
 

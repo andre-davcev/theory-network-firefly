@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersUpdate = exports.UsersDelete = exports.UsersCron = exports.UsersCreate = exports.UserProfilesCreate = exports.StorageResize = exports.EventsCron = exports.EventsUpdate = exports.EventsDelete = exports.EventsCreate = exports.InterestsUpdate = exports.InterestsDelete = exports.InterestsCron = exports.InterestsCreate = exports.CitiesCreate = void 0;
 const firebase_admin_1 = require("firebase-admin");
-firebase_admin_1.initializeApp();
+(0, firebase_admin_1.initializeApp)();
 const interests_1 = require("./interests");
 Object.defineProperty(exports, "InterestsCreate", { enumerable: true, get: function () { return interests_1.InterestsCreate; } });
 Object.defineProperty(exports, "InterestsCron", { enumerable: true, get: function () { return interests_1.InterestsCron; } });

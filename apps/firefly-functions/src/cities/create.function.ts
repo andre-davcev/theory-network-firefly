@@ -1,8 +1,10 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot, Firestore, WriteResult, QueryDocumentSnapshot } from '@google-cloud/firestore';
+import { GeoPoint } from '@angular/fire/firestore';
 
-import { Version, ServiceFirestore, ServiceCities, GlobalVariable, City, Collection } from '../library';
+import { Version, ServiceFirestore, ServiceCities, GlobalVariable, Collection } from '../library';
+import { City } from '../shared';
 
 const database: Firestore = db();
 
@@ -15,7 +17,7 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
     const object: City = ServiceFirestore.create<City>(snapshot, Version.Cities);
 
     const id:       string                      = object.id;
-    const geopoint: db.GeoPoint                 = object.geopoint;
+    const geopoint: GeoPoint                 = object.geopoint;
     const promises: Array<Promise<WriteResult>> = [];
     const cities:   db.QuerySnapshot            = await database.collection(Collection.Cities).get();
     const nearby:   Record<string, number>      = { [id]: 0 };

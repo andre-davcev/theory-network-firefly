@@ -1,4 +1,4 @@
 import { Interest } from './interest.model';
-import { SubscriptionPartial } from '../models';
+import { SubscriptionPartial } from '../../library/models';
 
 export type Subscription = Interest & SubscriptionPartial;

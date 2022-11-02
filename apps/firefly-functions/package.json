@@ -11,6 +11,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@angular/fire": "^7.4.1",
     "@google-cloud/storage": "^6.6.0",
     "algoliasearch": "^4.2.0",
     "firebase": "^9.13.0",

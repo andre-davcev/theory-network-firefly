@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServiceFirestore = void 0;
-const types_1 = require("../types");
+const firestore_1 = require("@angular/fire/firestore");
 class ServiceFirestore {
     static clone(object) {
         return JSON.parse(JSON.stringify(object));
@@ -9,11 +9,12 @@ class ServiceFirestore {
     static create(snapshot, version) {
         const id = snapshot.id;
         const object = snapshot.data();
-        const timestamp = types_1.serverTimestamp();
+        const timestamp = (0, firestore_1.serverTimestamp)();
         object.id = id;
         object.dateCreated = timestamp;
         object.dateUpdated = timestamp;
         object.version = version;
+        object.metadata = {};
         return object;
     }
 }

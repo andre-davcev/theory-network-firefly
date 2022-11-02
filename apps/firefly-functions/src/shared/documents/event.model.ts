@@ -1,8 +1,8 @@
-import { GeoPoint, Timestamp } from '../types';
+import { GeoPoint, Timestamp } from '@angular/fire/firestore';
 
-import { FirebaseDocument, CityInfo } from '../interfaces';
-import { MetadataEvent } from '../metadata';
-import { MapboxPlaceType } from '../enums';
+import { FirebaseDocument, CityInfo } from '../../library/interfaces';
+import { MetadataEvent } from '../../library/metadata';
+import { MapboxPlaceType } from '../../library/enums';
 
 export interface Event extends FirebaseDocument
 {

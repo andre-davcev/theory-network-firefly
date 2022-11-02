@@ -4,11 +4,11 @@ exports.InterestsCron = void 0;
 const firebase_functions_1 = require("firebase-functions");
 const firebase_admin_1 = require("firebase-admin");
 const library_1 = require("../library");
-const InterestsCron = firebase_functions_1.runWith({ memory: '2GB', timeoutSeconds: 540 }).
+const InterestsCron = (0, firebase_functions_1.runWith)({ memory: '2GB', timeoutSeconds: 540 }).
     pubsub.
     schedule('0 2 * * 1'). // Monday's @ 2AM
     onRun(async (context) => {
-    const database = firebase_admin_1.firestore();
+    const database = (0, firebase_admin_1.firestore)();
     const debugDoc = database.collection(library_1.Collection.Debug).doc(library_1.Collection.Streams);
     const debug = true;
     const citiesNearby = {};

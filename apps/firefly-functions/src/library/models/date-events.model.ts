@@ -1,5 +1,6 @@
-import { Event } from '../documents';
-import { Timestamp } from '../types';
+import { Timestamp } from '@angular/fire/firestore';
+
+import { Event } from '../../shared';
 
 export interface DateEvents
 {
