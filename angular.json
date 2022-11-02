@@ -16,7 +16,12 @@
             "main": "apps/firefly-mobile/src/main.ts",
             "polyfills": "apps/firefly-mobile/src/polyfills.ts",
             "tsConfig": "apps/firefly-mobile/tsconfig.app.json",
-            "allowedCommonJsDependencies": ["@mapbox/mapbox-gl-geocoder"],
+            "allowedCommonJsDependencies": [
+              "@mapbox/mapbox-gl-geocoder",
+              "algoliasearch/lite",
+              "mapbox-gl",
+              "moment"
+            ],
             "assets": [
               {
                 "glob": "**/*",
