@@ -1,4 +1,4 @@
-import { Interest } from './interest.model';
+import { Interest } from './interest.document';
 import { StreamInterestPartial, SubscriptionPartial } from '../../library/models';
 
 export type StreamInterest = Interest & StreamInterestPartial & SubscriptionPartial;
