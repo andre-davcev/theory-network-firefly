@@ -3,8 +3,8 @@ import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import algoliasearch from 'algoliasearch';
 
-import { ServiceFirestore, Version, ServiceCities, Collection } from '../library';
-import { Event } from '../shared';
+import { ServiceFirestore, Version, ServiceCities } from '../library';
+import { Event, Collection } from '../shared';
 
 const env = config();
 

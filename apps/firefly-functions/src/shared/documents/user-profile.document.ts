@@ -1,6 +1,6 @@
-import { FirebaseDocument } from '../../library/interfaces';
+import { DocumentBase } from './base.document';
 
-export interface UserProfile extends FirebaseDocument
+export interface UserProfile extends DocumentBase
 {
     icon        : string;
     companyName : string;

@@ -2,10 +2,9 @@ import { GeoPoint } from '@angular/fire/firestore';
 import { WriteResult, Firestore, DocumentSnapshot, QuerySnapshot, QueryDocumentSnapshot, CollectionReference } from '@google-cloud/firestore';
 import { firestore } from 'firebase-admin';
 
-import { Event, User, StreamInterest, Interest, City } from '../../shared';
+import { Event, User, StreamInterest, Interest, City, CityInfo, Collection } from '../../shared';
 import { ServiceStreams } from './stream.service';
-import { GlobalVariable, Collection } from '../enums';
-import { CityInfo } from '../interfaces';
+import { GlobalVariable } from '../enums';
 
 export class ServiceCities
 {

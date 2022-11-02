@@ -3,8 +3,8 @@ import { firestore, storage, messaging } from 'firebase-admin';
 import { QuerySnapshot, QueryDocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
 import { GetSignedUrlResponse, GetSignedUrlConfig } from '@google-cloud/storage';
 
-import { Collection, ImageType, ImageSize, AlertPartial, FIREBASE_CONFIG, Token } from '../library';
-import { Event, User } from '../shared';
+import { ImageType, ImageSize, FIREBASE_CONFIG, Token } from '../library';
+import { Event, User, Collection, AlertPartial } from '../shared';
 
 const EventsCron =
 

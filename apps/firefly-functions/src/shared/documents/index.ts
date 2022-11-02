@@ -1,4 +1,5 @@
 export * from './alert.document';
+export * from './base.document';
 export * from './beacon.document';
 export * from './city.document';
 export * from './interest.document';

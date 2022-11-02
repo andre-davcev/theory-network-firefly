@@ -1,6 +1,6 @@
-import { FirebaseDocument } from '../../library/interfaces';
+import { DocumentBase } from './base.document';
 
-export interface Beacon extends FirebaseDocument
+export interface Beacon extends DocumentBase
 {
     description : string;
     name        : string;

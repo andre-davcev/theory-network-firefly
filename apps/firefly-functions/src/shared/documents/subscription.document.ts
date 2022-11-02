@@ -1,4 +1,8 @@
 import { Interest } from './interest.document';
-import { SubscriptionPartial } from '../../library/models';
+
+export interface SubscriptionPartial
+{
+    on: boolean;
+}
 
 export type Subscription = Interest & SubscriptionPartial;
