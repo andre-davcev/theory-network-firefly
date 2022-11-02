@@ -1,5 +1,5 @@
-import { FirebaseDocument } from '../interfaces';
-import { MetadataInterest } from '../metadata';
+import { FirebaseDocument } from '../../library/interfaces';
+import { MetadataInterest } from '../../library/metadata';
 
 export interface Interest extends FirebaseDocument
 {

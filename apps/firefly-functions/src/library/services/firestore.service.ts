@@ -1,9 +1,9 @@
 
-import { DocumentSnapshot } from 'firebase/firestore';
+import { DocumentSnapshot } from '@google-cloud/firestore';
 
-import { FieldValue, serverTimestamp } from '../types';
 import { FirebaseDocument } from '../interfaces';
 import { Version } from '../enums';
+import { serverTimestamp, FieldValue } from '@angular/fire/firestore';
 
 export class ServiceFirestore
 {
@@ -22,6 +22,7 @@ export class ServiceFirestore
         object.dateCreated = timestamp;
         object.dateUpdated = timestamp;
         object.version     = version;
+        object.metadata    = {};
 
         return object;
     }

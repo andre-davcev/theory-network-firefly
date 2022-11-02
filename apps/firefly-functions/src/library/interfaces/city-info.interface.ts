@@ -1,4 +1,4 @@
-import { GeoPoint } from '../types';
+import { GeoPoint } from '@angular/fire/firestore';
 
 export interface CityInfo
 {

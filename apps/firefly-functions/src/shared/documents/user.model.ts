@@ -1,7 +1,9 @@
-import { GeoPoint } from '../types';
-import { FirebaseDocument, CityInfo, Token } from '../interfaces';
-import { SubscriptionPartial, AlertPartial } from '../models';
-import { MetadataUser } from '../metadata';
+
+import { GeoPoint } from '@angular/fire/firestore';
+
+import { FirebaseDocument, CityInfo, Token } from '../../library/interfaces';
+import { SubscriptionPartial, AlertPartial } from '../../library/models';
+import { MetadataUser } from '../../library/metadata';
 
 export interface User extends FirebaseDocument
 {

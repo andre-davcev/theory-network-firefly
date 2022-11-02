@@ -2,7 +2,8 @@ import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot } from '@google-cloud/firestore';
 
-import { Version, ServiceFirestore, UserProfile, Collection } from '../library';
+import { Version, ServiceFirestore, Collection } from '../library';
+import { UserProfile } from '../shared';
 
 db();
 

@@ -4,7 +4,7 @@ exports.CitiesCreate = void 0;
 const firebase_functions_1 = require("firebase-functions");
 const firebase_admin_1 = require("firebase-admin");
 const library_1 = require("../library");
-const database = firebase_admin_1.firestore();
+const database = (0, firebase_admin_1.firestore)();
 const CitiesCreate = firebase_functions_1.firestore.
     document(`${library_1.Collection.Cities}/{id}`).
     onCreate(async (snapshot, context) => {
@@ -28,7 +28,7 @@ const CitiesCreate = firebase_functions_1.firestore.
     object.nearby = nearby;
     object.userId = library_1.GlobalVariable.UserAdmin;
     return Promise.all([
-        snapshot.ref.update(object),
+        snapshot.ref.update({ data: object }),
         library_1.ServiceCities.generateStream(database, object)
     ]);
 });

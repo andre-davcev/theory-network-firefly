@@ -17,7 +17,7 @@ class ServiceStorage {
         return bucketPaths;
     }
     static delete(bucketPath) {
-        const bucket = firebase_admin_1.storage().bucket(constants_1.FIREBASE_CONFIG.storageBucket);
+        const bucket = (0, firebase_admin_1.storage)().bucket(constants_1.FIREBASE_CONFIG.storageBucket);
         const deletes = ServiceStorage.
             bucketPaths(bucketPath).
             map((path) => bucket.file(path).delete());

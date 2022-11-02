@@ -3,13 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EventsUpdate = void 0;
 const firebase_functions_1 = require("firebase-functions");
 const firebase_admin_1 = require("firebase-admin");
-const library_1 = require("../library");
-const functions = require("firebase-functions");
-const env = functions.config();
+const firebase_functions_2 = require("firebase-functions");
 const algoliasearch_1 = require("algoliasearch");
-const client = algoliasearch_1.default(env.algolia.appid, env.algolia.apikey);
+const library_1 = require("../library");
+const env = (0, firebase_functions_2.config)();
+const client = (0, algoliasearch_1.default)(env.algolia.appid, env.algolia.apikey);
 const index = client.initIndex('events');
-const database = firebase_admin_1.firestore();
+const database = (0, firebase_admin_1.firestore)();
 const EventsUpdate = firebase_functions_1.firestore.
     document(`${library_1.Collection.Events}/{id}`).
     onUpdate(async (change, context) => {

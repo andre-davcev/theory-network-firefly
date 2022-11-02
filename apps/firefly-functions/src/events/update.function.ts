@@ -4,7 +4,8 @@ import { firestore as db } from 'firebase-admin';
 import { config } from 'firebase-functions';
 import algoliasearch from 'algoliasearch';
 
-import { ServiceCities, Event, Collection } from '../library';
+import { ServiceCities, Collection } from '../library';
+import { Event } from '../shared';
 
 const env = config();
 const client = algoliasearch(env.algolia.appid, env.algolia.apikey);

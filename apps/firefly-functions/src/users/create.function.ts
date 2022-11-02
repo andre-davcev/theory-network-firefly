@@ -1,8 +1,10 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+import { Timestamp } from '@angular/fire/firestore';
 
-import { ServiceFirestore, Version, User, UserProfile, ServiceCities, Collection } from '../library';
+import { ServiceFirestore, Version, ServiceCities, Collection } from '../library';
+import { User, UserProfile } from '../shared';
 
 const database: Firestore = db();
 
@@ -23,7 +25,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         default :
         {
             read:      false,
-            timeStart: db.Timestamp.fromDate(new Date('1776-07-04'))
+            timeStart: Timestamp.fromDate(new Date('1776-07-04'))
         }
     };
 

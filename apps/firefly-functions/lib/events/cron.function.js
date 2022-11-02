@@ -4,14 +4,14 @@ exports.EventsCron = void 0;
 const firebase_functions_1 = require("firebase-functions");
 const firebase_admin_1 = require("firebase-admin");
 const library_1 = require("../library");
-const EventsCron = firebase_functions_1.runWith({ memory: '2GB', timeoutSeconds: 540 }).
+const EventsCron = (0, firebase_functions_1.runWith)({ memory: '2GB', timeoutSeconds: 540 }).
     pubsub.
     schedule('55 * * * *'). // Every hour @ 55 past the hour
     onRun(async (context) => {
-    const database = firebase_admin_1.firestore();
+    const database = (0, firebase_admin_1.firestore)();
     const updates = [];
-    const bucket = firebase_admin_1.storage().bucket(library_1.FIREBASE_CONFIG.storageBucket);
-    const push = firebase_admin_1.messaging();
+    const bucket = (0, firebase_admin_1.storage)().bucket(library_1.FIREBASE_CONFIG.storageBucket);
+    const push = (0, firebase_admin_1.messaging)();
     const debugDoc = database.collection(library_1.Collection.Debug).doc(library_1.Collection.Events);
     const debug = false;
     // Get the push notification icon url

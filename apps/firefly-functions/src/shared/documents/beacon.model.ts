@@ -1,4 +1,4 @@
-import { FirebaseDocument } from '../interfaces';
+import { FirebaseDocument } from '../../library/interfaces';
 
 export interface Beacon extends FirebaseDocument
 {

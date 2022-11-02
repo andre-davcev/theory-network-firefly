@@ -4,12 +4,12 @@ exports.UsersCron = void 0;
 const firebase_functions_1 = require("firebase-functions");
 const firebase_admin_1 = require("firebase-admin");
 const moment = require("moment");
-const UsersCron = firebase_functions_1.runWith({ memory: '2GB', timeoutSeconds: 540 }).
+const UsersCron = (0, firebase_functions_1.runWith)({ memory: '2GB', timeoutSeconds: 540 }).
     pubsub.
     schedule('0 3 * * *'). // Every Day @ 3AM
     onRun(async (context) => {
     let chunk;
-    const authenticated = firebase_admin_1.auth();
+    const authenticated = (0, firebase_admin_1.auth)();
     const list = await authenticated.listUsers(1000);
     const chunks = list.users.
         filter((user) => user.providerData.length === 0 && // A user is anonymous if there is no providerData
