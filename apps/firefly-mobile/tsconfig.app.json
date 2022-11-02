@@ -30,7 +30,7 @@
         "../../libs/firefly-shared/src/components/*"
       ],
       "@firefly/shared/state/*": ["../../libs/firefly-shared/src/state/*"],
-      "@firefly/cloud": ["../../apps/firefly-functions/src/library/index.ts"],
+      "@firefly/cloud": ["../../apps/firefly-functions/src/shared/index.ts"],
       "@firefly/mobile": ["../../libs/firefly-mobile/index.ts"],
       "@firefly/mobile/*": ["../../libs/firefly-mobile/src/*"],
       "@firefly/mobile/component/*": [
