@@ -1,7 +1,7 @@
+import { CityInfo } from '../interfaces';
+import { DocumentBase } from './base.document';
 
-import { FirebaseDocument, CityInfo } from '../../library/interfaces';
-
-export interface City extends FirebaseDocument, CityInfo
+export interface City extends DocumentBase, CityInfo
 {
     nearby: Record<string, number>;
 }

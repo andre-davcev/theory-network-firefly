@@ -2,8 +2,7 @@ import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot, Firestore, WriteResult, QuerySnapshot, QueryDocumentSnapshot, CollectionReference, FieldValue } from '@google-cloud/firestore';
 
-import { Collection } from '../library';
-import { User } from '../shared';
+import { User, Collection } from '../shared';
 
 const database: Firestore = db();
 

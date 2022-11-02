@@ -4,8 +4,8 @@ import { firestore as db } from 'firebase-admin';
 import { config } from 'firebase-functions';
 import algoliasearch from 'algoliasearch';
 
-import { Version, ServiceFirestore, Collection } from '../library';
-import { Interest } from '../shared';
+import { Version, ServiceFirestore } from '../library';
+import { Interest, Collection } from '../shared';
 
 const env = config();
 

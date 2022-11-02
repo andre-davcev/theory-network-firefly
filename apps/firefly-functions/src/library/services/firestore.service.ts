@@ -1,7 +1,7 @@
 
 import { DocumentSnapshot } from '@google-cloud/firestore';
 
-import { FirebaseDocument } from '../interfaces';
+import { DocumentBase } from '../../shared';
 import { Version } from '../enums';
 import { serverTimestamp, FieldValue } from '@angular/fire/firestore';
 
@@ -12,7 +12,7 @@ export class ServiceFirestore
         return JSON.parse(JSON.stringify(object));
     }
 
-    public static create<T extends FirebaseDocument>(snapshot: DocumentSnapshot, version: Version): T
+    public static create<T extends DocumentBase>(snapshot: DocumentSnapshot, version: Version): T
     {
         const id        : string               = snapshot.id;
         const object    : T                    = snapshot.data() as T;

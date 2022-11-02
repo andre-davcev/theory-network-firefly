@@ -1,1 +1,0 @@
-{"version":3,"file":"image-type.enum.js","sourceRoot":"","sources":["../../../src/library/enums/image-type.enum.ts"],"names":[],"mappings":";;;AAAA,IAAY,SAIX;AAJD,WAAY,SAAS;IAEjB,0BAAc,CAAA;IACd,4BAAe,CAAA;AACnB,CAAC,EAJW,SAAS,GAAT,iBAAS,KAAT,iBAAS,QAIpB","sourcesContent":["export enum ImageType\n{\n    Icon  = 'icon',\n    Image = 'image'\n}\n"]}

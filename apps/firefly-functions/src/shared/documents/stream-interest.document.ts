@@ -1,4 +1,10 @@
 import { Interest } from './interest.document';
-import { StreamInterestPartial, SubscriptionPartial } from '../../library/models';
+import { SubscriptionPartial } from './subscription.document';
+
+export interface StreamInterestPartial
+{
+    score : number;
+}
+
 
 export type StreamInterest = Interest & StreamInterestPartial & SubscriptionPartial;

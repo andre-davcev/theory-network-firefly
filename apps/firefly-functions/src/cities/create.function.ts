@@ -3,8 +3,8 @@ import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot, Firestore, WriteResult, QueryDocumentSnapshot } from '@google-cloud/firestore';
 import { GeoPoint } from '@angular/fire/firestore';
 
-import { Version, ServiceFirestore, ServiceCities, GlobalVariable, Collection } from '../library';
-import { City } from '../shared';
+import { Version, ServiceFirestore, ServiceCities, GlobalVariable } from '../library';
+import { City, Collection } from '../shared';
 
 const database: Firestore = db();
 

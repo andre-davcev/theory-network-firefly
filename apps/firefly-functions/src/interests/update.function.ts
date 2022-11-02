@@ -3,7 +3,7 @@ import { DocumentSnapshot} from '@google-cloud/firestore';
 import { config } from 'firebase-functions';
 import algoliasearch from 'algoliasearch';
 
-import { Collection } from '../library';
+import { Collection } from '../shared';
 
 const env = config();
 const client = algoliasearch(env.algolia.appid, env.algolia.apikey);

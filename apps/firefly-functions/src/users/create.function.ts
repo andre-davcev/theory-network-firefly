@@ -3,8 +3,8 @@ import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { Timestamp } from '@angular/fire/firestore';
 
-import { ServiceFirestore, Version, ServiceCities, Collection } from '../library';
-import { User, UserProfile } from '../shared';
+import { ServiceFirestore, Version, ServiceCities } from '../library';
+import { User, UserProfile, Collection } from '../shared';
 
 const database: Firestore = db();
 

@@ -1,11 +1,19 @@
 
-import { GeoPoint } from '@angular/fire/firestore';
+import { FieldValue, GeoPoint } from '@angular/fire/firestore';
 
-import { FirebaseDocument, CityInfo, Token } from '../../library/interfaces';
-import { SubscriptionPartial, AlertPartial } from '../../library/models';
-import { MetadataUser } from '../../library/metadata';
+import { CityInfo } from '../interfaces';
+import { AlertPartial } from './alert.document';
+import { DocumentBase } from './base.document';
+import { SubscriptionPartial } from './subscription.document';
 
-export interface User extends FirebaseDocument
+export interface Token
+{
+    token     : string;
+    usedFirst : FieldValue;
+    usedLast  : FieldValue;
+}
+
+export interface User extends DocumentBase
 {
     city                : CityInfo;
     email               : string;
@@ -18,6 +26,4 @@ export interface User extends FirebaseDocument
     subscriptions       : Array<string>;
     subscriptionsStatus : Record<string, SubscriptionPartial>;
     tokens              : Record<string, Token>;
-
-    metadata: MetadataUser;
 }

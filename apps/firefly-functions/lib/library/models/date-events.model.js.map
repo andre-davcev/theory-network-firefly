@@ -1,1 +1,0 @@
-{"version":3,"file":"date-events.model.js","sourceRoot":"","sources":["../../../src/library/models/date-events.model.ts"],"names":[],"mappings":"","sourcesContent":["import { Timestamp } from '@angular/fire/firestore';\n\nimport { Event } from '../../shared';\n\nexport interface DateEvents\n{\n    date   : Timestamp;\n    events : Array<Event>;\n}\n"]}

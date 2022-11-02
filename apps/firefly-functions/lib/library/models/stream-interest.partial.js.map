@@ -1,1 +1,0 @@
-{"version":3,"file":"stream-interest.partial.js","sourceRoot":"","sources":["../../../src/library/models/stream-interest.partial.ts"],"names":[],"mappings":"","sourcesContent":["export interface StreamInterestPartial\n{\n    score : number;\n}\n"]}
