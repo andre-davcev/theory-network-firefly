@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { GeoPoint } from '@angular/fire/firestore';
 import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
-import { GeoPoint } from '@theory/firebase';
 import { GeolocationPosition } from '@capacitor/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';

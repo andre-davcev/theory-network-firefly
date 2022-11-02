@@ -3,12 +3,12 @@ import { Observable, of, from, combineLatest } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map, finalize } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
-import { FieldValue, serverTimestamp } from '@angular/fire/firestore';
+import { FieldValue, GeoPoint, serverTimestamp } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User as FirebaseUser } from '@angular/fire/auth';
 
 import { StateDocument } from '@theory/ngxs';
-import { GeoPoint, UserCredential } from '@theory/firebase';
+import { UserCredential } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
 import { User, SubscriptionPartial, AlertPartial, CityInfo, Token } from '@firefly/cloud';
 
