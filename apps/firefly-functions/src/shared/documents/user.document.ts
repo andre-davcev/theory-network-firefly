@@ -13,6 +13,11 @@ export interface Token
     usedLast  : FieldValue;
 }
 
+export interface MetadataUser
+{
+
+}
+
 export interface User extends DocumentBase
 {
     city                : CityInfo;
@@ -26,4 +31,6 @@ export interface User extends DocumentBase
     subscriptions       : Array<string>;
     subscriptionsStatus : Record<string, SubscriptionPartial>;
     tokens              : Record<string, Token>;
+
+    metadata: MetadataUser;
 }

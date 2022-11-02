@@ -1,5 +1,9 @@
 import { DocumentBase } from './base.document';
 
+export interface MetadataUserProfile
+{
+
+}
 export interface UserProfile extends DocumentBase
 {
     icon        : string;
@@ -7,4 +11,6 @@ export interface UserProfile extends DocumentBase
     isCompany   : boolean;
     nameFirst   : string;
     nameLast    : string;
+
+    metadata: MetadataUserProfile;
 }
