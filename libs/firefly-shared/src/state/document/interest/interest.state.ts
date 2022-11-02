@@ -1,12 +1,16 @@
-
+import { switchMap, tap, map } from 'rxjs/operators';
+import { of, from, forkJoin } from 'rxjs';
+import { Query } from '@angular/fire/compat/firestore';
+import { Injectable } from '@angular/core';
 import { Action, State, StateContext, Store, Selector } from '@ngxs/store';
 
-import { CoreEnum } from '@theory/core';
+import { ImageSize, ServiceStorage, DocumentSnapshot, QuerySnapshot, QueryDocumentSnapshot } from '@theory/firebase';
+import { ImageType, CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { Interest, Event } from '@firefly/cloud';
-import { ServiceInterests } from '@firefly/shared/services';
-import { StateUser } from '@firefly/shared/state/document/user';
 
+import { ServiceInterests } from '../../../services';
+import { StateUser } from '../user';
 import { StateInterestModel } from './interest.state.model';
 import { StateInterestOptions } from './interest.state.options';
 import {
@@ -32,13 +36,7 @@ import {
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, ActionUserInterestsSync } from '../../query/user-interests';
 import { ActionCityStreamRemove, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { ImageSize, ServiceStorage } from '@theory/firebase';
-import { switchMap, tap, map } from 'rxjs/operators';
-import { of, from, forkJoin } from 'rxjs';
-import { DocumentSnapshot, Query, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/firestore';
-import { Injectable } from '@angular/core';
 import { Collection } from '../../../enums';
-import { ImageType } from '@theory/core';
 import { StateInterests } from '../../composite/interests/interests.state';
 import { ActionEventInterestAdd } from '../event/event.actions';
 import { InterestEvents } from './interest.events.enum';
