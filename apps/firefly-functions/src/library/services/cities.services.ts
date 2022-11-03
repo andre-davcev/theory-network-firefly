@@ -1,4 +1,4 @@
-import { GeoPoint } from '@angular/fire/firestore';
+import { GeoPoint } from 'firebase/firestore';
 import { WriteResult, Firestore, DocumentSnapshot, QuerySnapshot, QueryDocumentSnapshot, CollectionReference } from '@google-cloud/firestore';
 import { firestore } from 'firebase-admin';
 

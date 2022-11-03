@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Query } from '@angular/fire/compat/firestore';
 import { State, Action, StateContext, Store } from '@ngxs/store';
 
-import { Interest } from '@firefly/cloud';
+import { Interest, Collection } from '@firefly/cloud';
 import { StateQuery } from '@theory/ngxs';
 import { ServiceStorage } from '@theory/firebase';
 
@@ -19,7 +19,6 @@ import {
     ActionClusterEventsFilter
 } from './cluster-events.actions';
 import { StateUser } from '../../document/user/user.state';
-import { Collection } from '../../../enums';
 
 @State<StateClusterInterestsModel>(StateClusterInterestsOptions)
 @Injectable()

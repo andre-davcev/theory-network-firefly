@@ -8,13 +8,12 @@ import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { DocumentSnapshot as FirestoreDocumentSnapshot, ServiceFirestoreBase } from '@theory/firebase';
 import { StateLocation } from '@theory/capacitor';
 import { ResponseReverseGeocode, ServiceBigDataCloud } from '@theory/bigdatacloud';
-import { CityInfo, StreamInterest, User } from '@firefly/cloud';
+import { CityInfo, StreamInterest, User, Collection } from '@firefly/cloud';
 
 import { ActionCityCreate, ActionCityWatch } from './city.actions';
 import { StateCityModel } from './city.state.model';
 import { StateCityOptions } from './city.state.options';
 import { ServiceLocation } from '../../../services';
-import { Collection } from '../../../enums';
 import { ActionCityStreamSetData } from '../../child/city-stream/city-stream.actions';
 
 @State<StateCityModel>(StateCityOptions)

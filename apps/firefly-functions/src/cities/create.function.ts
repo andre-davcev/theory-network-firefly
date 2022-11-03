@@ -1,7 +1,7 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { firestore as db } from 'firebase-admin';
+import { GeoPoint } from 'firebase/firestore';
 import { DocumentSnapshot, Firestore, WriteResult, QueryDocumentSnapshot } from '@google-cloud/firestore';
-import { GeoPoint } from '@angular/fire/firestore';
 
 import { Version, ServiceFirestore, ServiceCities, GlobalVariable } from '../library';
 import { City, Collection } from '../shared';

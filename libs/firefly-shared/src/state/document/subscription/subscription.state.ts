@@ -4,7 +4,7 @@ import { State, Action, StateContext, Store } from '@ngxs/store';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { DocumentSnapshot } from '@theory/firebase';
-import { Subscription } from '@firefly/cloud';
+import { Subscription, Collection } from '@firefly/cloud';
 
 import { ServiceSubscriptions } from '../../../services';
 import { StateUser } from '../user';
@@ -23,7 +23,6 @@ import {
   ActionSubscriptionPatchMetadata
 } from './subscription.actions';
 import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions';
-import { Collection } from '../../../enums';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)
 @Injectable()

@@ -1,4 +1,4 @@
-import { GeoPoint, Timestamp } from '@angular/fire/firestore';
+import { GeoPoint, Timestamp } from 'firebase/firestore';
 
 import { MapboxPlaceType } from '../enums';
 import { CityInfo, MetadataList, Place } from '../interfaces';

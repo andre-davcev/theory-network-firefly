@@ -12,7 +12,7 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { ServiceStorage, ImageSize } from '@theory/firebase';
 import { StateChild } from '@theory/ngxs';
 import { ImageType } from '@theory/core';
-import { Alert, AlertPartial } from '@firefly/cloud';
+import { Alert, AlertPartial, Collection } from '@firefly/cloud';
 
 import { ServiceAlerts } from '../../../services';
 import { StateUserAlertsModel } from './user-alerts.state.model';
@@ -36,7 +36,7 @@ import {
     ActionUserAlertsOpenWebsite,
     ActionUserAlertsFilter
 } from './user-alerts.actions';
-import { Collection, EventType } from '../../../enums';
+import { EventType } from '../../../enums';
 import { StateUser } from '../../document/user/user.state';
 import { ActionUserPatch } from '../../document/user/user.actions';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';

@@ -12,7 +12,7 @@ import { MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { ServiceStorage, ImageSize, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
-import { Event, Interest, MetadataEvent, Place } from '@firefly/cloud';
+import { Event, Interest, MetadataEvent, Place, Collection } from '@firefly/cloud';
 
 import { StateUser } from '../user';
 import { StateEventModel } from './event.state.model';
@@ -42,7 +42,6 @@ import {
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
 import { ServiceEvents, ServiceLocation } from '../../../services';
 import { StateInterest } from '../interest';
-import { Collection } from '../../../enums';
 import { StateUserAlerts } from '../../child';
 
 @State<StateEventModel>(StateEventOptions)
