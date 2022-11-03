@@ -10,7 +10,7 @@ import { User as FirebaseUser } from '@angular/fire/auth';
 import { StateDocument } from '@theory/ngxs';
 import { UserCredential } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
-import { User, SubscriptionPartial, AlertPartial, CityInfo, Token } from '@firefly/cloud';
+import { User, SubscriptionPartial, AlertPartial, CityInfo, Token, Collection } from '@firefly/cloud';
 
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
@@ -44,7 +44,7 @@ import { ActionUserEventsReset } from '../../query/user-events/user-events.actio
 import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { ActionNotificationsWatch } from '../../basic/notifications/notifications.actions';
-import { Collection, EventType, InterestType } from '../../../enums';
+import { EventType, InterestType } from '../../../enums';
 
 import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
 import { StateCity } from '../city/city.state';

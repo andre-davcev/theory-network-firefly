@@ -5,7 +5,7 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { ImageType } from '@theory/core';
 import { StateChild } from '@theory/ngxs';
 import { ServiceStorage } from '@theory/firebase';
-import { StreamInterest, Subscription, SubscriptionPartial } from '@firefly/cloud';
+import { StreamInterest, Subscription, SubscriptionPartial, Collection } from '@firefly/cloud';
 
 import { ServiceSubscriptions } from '../../../services';
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
@@ -20,7 +20,7 @@ import {
     ActionUserSubscriptionsSetData,
     ActionUserSubscriptionsFilter
 } from './user-subscriptions.actions';
-import { Collection, InterestType } from '../../../enums';
+import { InterestType } from '../../../enums';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 

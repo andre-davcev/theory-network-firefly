@@ -3,7 +3,7 @@ import { DocumentSnapshot } from '@google-cloud/firestore';
 
 import { DocumentBase } from '../../shared';
 import { Version } from '../enums';
-import { serverTimestamp, FieldValue } from '@angular/fire/firestore';
+import { serverTimestamp, FieldValue } from 'firebase/firestore';
 
 export class ServiceFirestore
 {

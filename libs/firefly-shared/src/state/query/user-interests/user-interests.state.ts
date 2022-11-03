@@ -7,10 +7,10 @@ import { switchMap } from 'rxjs/operators';
 import { ImageType } from '@theory/core';
 import { ServiceStorage } from '@theory/firebase';
 import { StateQuery } from '@theory/ngxs';
-import { Interest, SubscriptionPartial } from '@firefly/cloud';
+import { Interest, SubscriptionPartial, Collection } from '@firefly/cloud';
 
 import { ServiceInterests } from '../../../services';
-import { Collection, InterestType } from '../../../enums';
+import { InterestType } from '../../../enums';
 import { StateUserInterestsModel } from './user-interests.state.model';
 import { StateUserInterestsOptions } from './user-interests.state.options';
 import {

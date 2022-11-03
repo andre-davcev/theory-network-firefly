@@ -1,6 +1,6 @@
-import { initializeApp } from 'firebase-admin';
+import * as admin from 'firebase-admin';
 
-initializeApp();
+admin.initializeApp();
 
 import { InterestsCreate, InterestsCron, InterestsDelete, InterestsUpdate } from './interests';
 import { EventsCreate, EventsDelete, EventsUpdate, EventsCron } from './events';

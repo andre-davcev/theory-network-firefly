@@ -8,7 +8,7 @@ import { StateQuery } from '@theory/ngxs';
 import { ImageType } from '@theory/core';
 import { ServiceStorage, DocumentSnapshot } from '@theory/firebase';
 import { CoreEnum } from '@theory/core';
-import { Event } from '@firefly/cloud';
+import { Collection, Event } from '@firefly/cloud';
 
 import { StateUserEventsModel } from './user-events.state.model';
 import { StateUserEventsOptions } from './user-events.state.options';
@@ -24,7 +24,7 @@ import {
 } from './user-events.actions';
 import { StateUser } from '../../document/user';
 import { ServiceEvents } from '../../../services';
-import { Collection, EventType } from '../../../enums';
+import { EventType } from '../../../enums';
 import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 

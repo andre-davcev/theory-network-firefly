@@ -17,8 +17,6 @@ export class ComponentParagraph implements OnInit
     public firstWord : string = '';
     public paragraph : string = '';
 
-    constructor() { }
-
     public ngOnInit(): void
     {
         const text:  string = this.text;

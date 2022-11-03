@@ -7,7 +7,7 @@ import { Action, State, StateContext, Store, Selector } from '@ngxs/store';
 import { ImageSize, ServiceStorage, DocumentSnapshot, QuerySnapshot, QueryDocumentSnapshot } from '@theory/firebase';
 import { ImageType, CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { Interest, Event } from '@firefly/cloud';
+import { Interest, Event, Collection } from '@firefly/cloud';
 
 import { ServiceInterests } from '../../../services';
 import { StateUser } from '../user';
@@ -36,7 +36,6 @@ import {
 import { ActionUserInterestsAdd, ActionUserInterestsRemove, ActionUserInterestsSync } from '../../query/user-interests';
 import { ActionCityStreamRemove, ActionCityStreamSync } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { Collection } from '../../../enums';
 import { StateInterests } from '../../composite/interests/interests.state';
 import { ActionEventInterestAdd } from '../event/event.actions';
 import { InterestEvents } from './interest.events.enum';

@@ -1,5 +1,5 @@
 
-import { FieldValue, GeoPoint } from '@angular/fire/firestore';
+import { FieldValue, GeoPoint } from 'firebase/firestore';
 
 import { CityInfo } from '../interfaces';
 import { AlertPartial } from './alert.document';
