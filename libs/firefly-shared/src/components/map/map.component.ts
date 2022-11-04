@@ -232,7 +232,8 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
             placeholder: this.placeholder,
             limit: this.limit,
             flyTo: this.flyTo,
-            types: this.types.join(',')
+            types: this.types.join(','),
+            marker: false
         };
 
         if (this.bbox)      { options.bbox = this.bbox; }
@@ -245,7 +246,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 
         geocoder.
           on('results', (event: MapboxGeocoder.Results) => this.zone.run(() => this.clear.emit(event))).
-          on('result', (event: { result: MapboxGeocoder.Result }) => this.zone.run(() => this.searchResult.emit(event))).
+          on('result', (event: { result: MapboxGeocoder.Result }) => this.zone.run(() => this.searchResult.emit(event.result))).
           on('error', (event: any) => this.zone.run(() => this.searchError.emit(event))).
           on('loading', (event: { query: string }) => this.zone.run(() => this.loading.emit(event.query))).
           on('clear', () => this.zone.run(() => this.clear.emit()));
