@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, OnInit, HostBinding } from '
 
 @Component
 ({
-    selector        : 'app-paragraph',
+    selector        : 'tn-paragraph',
     templateUrl     : './paragraph.component.html',
     styleUrls       : ['./paragraph.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
@@ -16,8 +16,6 @@ export class ComponentParagraph implements OnInit
 
     public firstWord : string = '';
     public paragraph : string = '';
-
-    constructor() { }
 
     public ngOnInit(): void
     {

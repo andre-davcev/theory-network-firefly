@@ -1,6 +1,7 @@
 import { Directive, Input, HostBinding } from '@angular/core';
-import { Elevation } from './elevation.enum';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+
+import { Elevation } from './elevation.enum';
 
 @Directive({
   selector: '[elevation]'

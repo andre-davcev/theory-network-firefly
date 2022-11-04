@@ -1,6 +1,6 @@
 {
   "name": "firefly",
-  "license": "SEE LICENSE IN <your-license-filename>",
+  "license": "SEE LICENSE IN LICENSE.md",
   "version": "1.0.0",
   "scripts": {
     "postinstall": "node scripts/version.js",
@@ -12,19 +12,19 @@
     "cap.update": "npx cap update"
   },
   "dependencies": {
-    "@capacitor/android": "^2.4.6",
-    "@capacitor/core": "^2.4.6",
-    "@capacitor/ios": "^2.4.6",
-    "@capacitor-community/fcm": "^1.0.8",
+    "@capacitor/android": "^2.5.0",
+    "@capacitor/core": "^2.5.0",
+    "@capacitor/ios": "^2.5.0",
+    "@capacitor-community/fcm": "^1.1.2",
     "call-number": "^1.0.1",
     "cordova-plugin-actionsheet": "^2.3.3",
-    "cordova-plugin-calendar": "5.1.5",
+    "cordova-plugin-calendar": "5.1.6",
     "cordova-plugin-dialogs": "^2.0.2",
     "uk.co.workingedge.phonegap.plugin.launchnavigator": "^5.0.4",
-    "rxjs": "6.5.5"
+    "rxjs": "7.5.7"
   },
   "devDependencies": {
-    "@capacitor/cli": "^2.4.7"
+    "@capacitor/cli": "^2.5.0"
   },
   "cordova": {
     "plugins": {

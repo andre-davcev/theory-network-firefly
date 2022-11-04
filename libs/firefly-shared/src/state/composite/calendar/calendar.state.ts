@@ -4,10 +4,11 @@ import { from } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { Alert, Event, DateEvents } from '@firefly/cloud';
-import { EventType } from '@firefly/shared/enums';
-import { ActionUserAlertsFilter, ActionUserAlertsGet, StateUserAlerts } from '@firefly/shared/state/child';
-import { ActionUserEventsFilter, ActionUserEventsGet, StateUserEvents } from '@firefly/shared/state/query';
-import { StateUser } from '@firefly/shared/state/document';
+
+import { EventType } from '../../../enums';
+import { ActionUserAlertsFilter, ActionUserAlertsGet, StateUserAlerts } from '../../child';
+import { ActionUserEventsFilter, ActionUserEventsGet, StateUserEvents } from '../../query';
+import { StateUser } from '../../document';
 
 import { StateCalendarModel } from './calendar.state.model';
 import { StateCalendarOptions } from './calendar.state.options';
@@ -151,8 +152,6 @@ export class StateCalendar
             finishedPagingEvents :
             finishedPagingAlerts;
     }
-
-    constructor() { }
 
     @Action(ActionCalendarSetType)
     setType({ dispatch, getState }: StateContext<StateCalendarModel>, { type }: ActionCalendarSetType)

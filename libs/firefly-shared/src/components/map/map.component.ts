@@ -1,23 +1,24 @@
-import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
-import { Select } from '@ngxs/store';
+import { Component, OnInit, Input, HostBinding, AfterViewInit, Output, EventEmitter, ViewChildren, QueryList, OnChanges, SimpleChanges, Inject, NgZone } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
-import { LngLatLike, Point, Popup } from 'mapbox-gl';
+import { LngLatLike, Point, Popup, Map } from 'mapbox-gl';
+import { MapComponent, MarkerComponent } from 'ngx-mapbox-gl';
+import { Results, Result } from '@mapbox/mapbox-gl-geocoder';
+import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import mapboxgl from 'mapbox-gl'
 
 import { StateDevice, StateLanguage, StateLocation } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
+import { EnvironmentMapbox, MapboxEnvironment, MapMovingMethod } from '@theory/mapbox';
 import { MapboxPlaceType, MapboxMapStyle, MapboxControlPosition, MapboxMarkerAnchor } from '@theory/mapbox';
-import { Results, Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
-import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder'
-import { Color } from '@firefly/shared/enums';
-import { MapMovingMethod } from '@theory/mapbox';
-import { MapComponent } from 'ngx-mapbox-gl';
-import { MarkerComponent } from 'ngx-mapbox-gl/lib/marker/marker.component';
 import { Place } from '@firefly/cloud';
+
+import { Color } from '../../enums';
 
 @Component
 ({
-    selector    : 'app-map',
+    selector    : 'ff-map',
     templateUrl : './map.component.html',
     styleUrls   : ['./map.component.scss']
 })
@@ -25,7 +26,6 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 {
     @Select(StateLocation.isValid)          locationValid$      : Observable<boolean>;
     @Select(StateLocation.locationLike)     locationLike$       : Observable<LngLatLike>;
-    @Select(StateLocation.locationLiteral)  locationLiteral$    : Observable<LngLatLiteral>;
     @Select(StateDevice.web)                web$                : Observable<boolean>;
     @Select(StateLanguage.languageIso639_1) language$           : Observable<string>;
 
@@ -43,6 +43,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     public mapReady$: Observable<boolean>;
     private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public Color: any = Color;
+    private geocoder: MapboxGeocoder;
 
     @ViewChildren('map')    maps:    QueryList<MapComponent>;
     @ViewChildren('marker') markers: QueryList<MarkerComponent>;
@@ -72,24 +73,27 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         MapboxPlaceType.Locality,
         MapboxPlaceType.Neighborhood,
         MapboxPlaceType.Address,
-        MapboxPlaceType.PointOfInterest,
-        MapboxPlaceType.PointOfInterestLandmark
+        MapboxPlaceType.PointOfInterest
     ];
 
-    @Input() proximity?: LngLatLiteral;
+    @Input() proximity?: string;
     @Input() bbox?:      [number, number, number, number];
     @Input() zoom?:      number;
     @Input() minLength?: number;
 
-    @Output() clear:   EventEmitter<void>    = new EventEmitter<void>();
-    @Output() loading: EventEmitter<string>  = new EventEmitter<string>();
-    @Output() results: EventEmitter<Results> = new EventEmitter<Results>();
-    @Output() result:  EventEmitter<Result>  = new EventEmitter<Result>();
-    @Output() error:   EventEmitter<any>     = new EventEmitter<any>();
+    @Output() clear         : EventEmitter<void>    = new EventEmitter<void>();
+    @Output() loading       : EventEmitter<string>  = new EventEmitter<string>();
+    @Output() searchResults : EventEmitter<Results> = new EventEmitter<Results>();
+    @Output() searchResult  : EventEmitter<Result>  = new EventEmitter<Result>();
+    @Output() searchError   : EventEmitter<any>     = new EventEmitter<any>();
 
-    private map: mapboxgl.Map;
+    private map: Map;
 
-    constructor()
+    constructor(
+      private store: Store,
+      private zone: NgZone,
+      @Inject(MapboxEnvironment) private environment: EnvironmentMapbox
+    )
     {
         super();
     }
@@ -126,8 +130,25 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     }
 
 
-    public onLoad(map: mapboxgl.Map): void
+    public onLoad(map: Map): void
     {
+        if (this.geocode)
+        {
+            this.geocoder = this.createGeocoder();
+
+            this.zone.runOutsideAngular(() => {
+              map.addControl(this.geocoder, this.geocodePosition);
+            });
+
+            this.language$.pipe(takeUntil(this.destroy$)).subscribe((language: string) =>
+              this.geocoder.setLanguage(language)
+            );
+
+            this.locationLike$.pipe(takeUntil(this.destroy$)).subscribe((proximity: LngLatLike) =>
+              this.geocoder.setProximity(proximity)
+            );
+        }
+
         this.map = map;
 
         this.resizeMap();
@@ -152,21 +173,21 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 
     public eventResults(results: Results): void
     {
-        this.results.next(results);
+        this.searchResults.next(results);
 
         this.resizeMap();
     }
 
     public eventResult(event: { result: Result }): void
     {
-        this.result.next(event.result);
+        this.searchResult.next(event.result);
 
         this.resizeMap();
     }
 
     public eventError(error: any): void
     {
-        this.error.next(error);
+        this.searchError.next(error);
 
         this.resizeMap();
     }
@@ -198,5 +219,38 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         {
             this.map.resize();
         }
+    }
+
+    private createGeocoder(): MapboxGeocoder
+    {
+        const language: string = this.store.selectSnapshot(StateLanguage.languageIso639_1);
+        const proximity: LngLatLike = this.store.selectSnapshot(StateLocation.locationLike);
+
+        const options: MapboxGeocoder.Options = {
+            mapboxgl,
+            accessToken: this.environment.accessToken,
+            placeholder: this.placeholder,
+            limit: this.limit,
+            flyTo: this.flyTo,
+            types: this.types.join(','),
+            marker: false
+        };
+
+        if (this.bbox)      { options.bbox = this.bbox; }
+        if (this.zoom)      { options.zoom = this.zoom; }
+        if (this.minLength) { options.minLength = this.minLength; }
+        if (proximity)      { options.proximity = proximity; }
+        if (language)       { options.language = language; }
+
+        const geocoder: MapboxGeocoder = new MapboxGeocoder(options);
+
+        geocoder.
+          on('results', (event: MapboxGeocoder.Results) => this.zone.run(() => this.clear.emit(event))).
+          on('result', (event: { result: MapboxGeocoder.Result }) => this.zone.run(() => this.searchResult.emit(event.result))).
+          on('error', (event: any) => this.zone.run(() => this.searchError.emit(event))).
+          on('loading', (event: { query: string }) => this.zone.run(() => this.loading.emit(event.query))).
+          on('clear', () => this.zone.run(() => this.clear.emit()));
+
+        return geocoder;
     }
 }

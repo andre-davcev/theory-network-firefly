@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Query } from '@angular/fire/firestore';
-
+import { Query } from '@angular/fire/compat/firestore';
 import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
+import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { ImageType } from '@theory/core';
+import { ServiceStorage } from '@theory/firebase';
 import { StateQuery } from '@theory/ngxs';
+import { Interest, SubscriptionPartial, Collection } from '@firefly/cloud';
 
-import { Interest, SubscriptionPartial } from '@firefly/cloud';
-import { ServiceInterests } from '@firefly/shared/services';
-import { Collection, InterestType } from '@firefly/shared/enums';
-
+import { ServiceInterests } from '../../../services';
+import { InterestType } from '../../../enums';
 import { StateUserInterestsModel } from './user-interests.state.model';
 import { StateUserInterestsOptions } from './user-interests.state.options';
 import {
@@ -21,12 +22,9 @@ import {
     ActionUserInterestsReset,
     ActionUserInterestsFilter
 } from './user-interests.actions';
-import { ImageType } from '../../../enums';
-import { ServiceStorage } from '@theory/firebase';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 import { StateUser } from '../../document/user/user.state';
-import { Observable, of } from 'rxjs';
 
 @State<StateUserInterestsModel>(StateUserInterestsOptions)
 @Injectable()

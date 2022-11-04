@@ -1,16 +1,16 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component
 ({
-    selector        : 'app-item-description',
+    selector        : 'ff-item-description',
     templateUrl     : './item-description.component.html',
     styleUrls       : ['./item-description.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class ComponentItemDescription
 {
-    @Input() form: FormGroup;
+    @Input() form: UntypedFormGroup;
 
     @Input() title: string;
 

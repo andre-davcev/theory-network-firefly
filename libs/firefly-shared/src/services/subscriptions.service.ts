@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { UntypedFormBuilder } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { ServiceFirestore } from '@theory/firebase';
 import { Subscription } from '@firefly/cloud';
-import { FormBuilder } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceSubscriptions extends ServiceFirestore<Subscription>
@@ -11,7 +11,7 @@ export class ServiceSubscriptions extends ServiceFirestore<Subscription>
     constructor
     (
         firestore:   AngularFirestore,
-        formBuilder: FormBuilder
+        formBuilder: UntypedFormBuilder
     )
     {
         super(firestore, formBuilder);

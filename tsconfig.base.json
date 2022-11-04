@@ -14,6 +14,15 @@
     "lib": ["es2017", "dom"],
     "baseUrl": ".",
     "paths": {
+      "@firefly/cloud": ["apps/firefly-functions/src/shared/index.ts"],
+      "@firefly/mobile": ["libs/firefly-mobile/index.ts"],
+      "@firefly/mobile/*": ["libs/firefly-mobile/src/*"],
+      "@firefly/mobile/component/*": ["libs/firefly-mobile/src/components/*"],
+      "@firefly/mobile/state/*": ["libs/firefly-mobile/src/state/*"],
+      "@firefly/shared": ["libs/firefly-shared/index.ts"],
+      "@firefly/shared/*": ["libs/firefly-shared/src/*"],
+      "@firefly/shared/component/*": ["libs/firefly-shared/src/components/*"],
+      "@firefly/shared/state/*": ["libs/firefly-shared/src/state/*"],
       "@theory/bigdatacloud": ["libs/bigdatacloud/index.ts"],
       "@theory/bigdatacloud/*": ["libs/bigdatacloud/src/*"],
       "@theory/capacitor": ["libs/capacitor/index.ts"],
@@ -32,16 +41,7 @@
       "@theory/mapbox": ["libs/mapbox/index.ts"],
       "@theory/mapbox/*": ["libs/mapbox/src/*"],
       "@theory/ngxs": ["libs/ngxs/index.ts"],
-      "@theory/ngxs/*": ["libs/ngxs/*"],
-      "@firefly/shared": ["libs/firefly-shared/index.ts"],
-      "@firefly/shared/*": ["libs/firefly-shared/src/*"],
-      "@firefly/shared/component/*": ["libs/firefly-shared/src/components/*"],
-      "@firefly/shared/state/*": ["libs/firefly-shared/src/state/*"],
-      "@firefly/cloud": ["apps/firefly-cloud/src/library/index.ts"],
-      "@firefly/mobile": ["libs/firefly-mobile/index.ts"],
-      "@firefly/mobile/*": ["libs/firefly-mobile/src/*"],
-      "@firefly/mobile/component/*": ["libs/firefly-mobile/src/components/*"],
-      "@firefly/mobile/state/*": ["libs/firefly-mobile/src/state/*"]
+      "@theory/ngxs/*": ["libs/ngxs/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

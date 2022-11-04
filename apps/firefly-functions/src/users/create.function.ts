@@ -1,7 +1,11 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceFirestore, Version, User, UserProfile, ServiceCities, Collection } from '../library';
+import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+import { Timestamp } from 'firebase/firestore';
+
+import { ServiceFirestore, Version, ServiceCities } from '../library';
+import { User, UserProfile, Collection } from '../shared';
+
 const database: Firestore = db();
 
 const UsersCreate: CloudFunction<DocumentSnapshot> =
@@ -21,7 +25,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
         default :
         {
             read:      false,
-            timeStart: db.Timestamp.fromDate(new Date('1776-07-04'))
+            timeStart: Timestamp.fromDate(new Date('1776-07-04'))
         }
     };
 
@@ -38,7 +42,7 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
 
     return Promise.all
     ([
-        snapshot.ref.update(user),
+        snapshot.ref.update({ data: user}),
         database.collection(Collection.UserProfiles).doc(userId).create(userProfile),
         ServiceCities.createIfNew(database, user)
     ]);

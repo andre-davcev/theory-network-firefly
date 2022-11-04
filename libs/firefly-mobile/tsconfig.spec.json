@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc/libs/firefly-mobile",
-    "types": ["jasmine", "node"]
+    "types": ["jest", "node"]
   },
   "files": ["src/test.ts"],
-  "include": ["**/*.spec.ts", "**/*.d.ts"]
+  "include": ["**/*.spec.ts", "**/*.test.ts", "**/*.d.ts"]
 }

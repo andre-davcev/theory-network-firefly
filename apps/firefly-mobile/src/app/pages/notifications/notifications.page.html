@@ -22,19 +22,19 @@
                 (ionSlideDidChange)="slideChanged()"
                 [options]="slideOptions">
         <ion-slide #status *ngFor="let notification of data$ | async">
-            <app-slide [slide]="notification"
+            <ff-slide [slide]="notification"
                         [deleteShow]="true"
                         [buttonText]="'general.go' | translate"
                         (alertDeleteClicked)="delete(notification)"
                         (alertGoClicked)="go(notification)">
-            </app-slide>
+            </ff-slide>
         </ion-slide>
     </ion-slides>
 
-    <app-icon-message *ngIf="!(exists$ | async)"
+    <ff-icon-message *ngIf="!(exists$ | async)"
                       slot="fixed"
                       [icon]="IconType.Alerts"
                       [message]="'page.events.empty.new' | translate">
-    </app-icon-message>
+    </ff-icon-message>
 </section>
 

@@ -19,6 +19,7 @@
 *.sublime-workspace
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
@@ -61,7 +62,7 @@ libs/**/*.ngsummary.json
 apps/**/app/src/main/assets/public/*
 
 # functions
-apps/firefly-cloud/lib
+apps/firefly-functions/lib
 
 # custom
 algolia.txt

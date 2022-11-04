@@ -1,1 +1,0 @@
-{"version":3,"file":"firebase-config.interface.js","sourceRoot":"","sources":["../../../src/library/interfaces/firebase-config.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface FirebaseConfig\n{\n    databaseURL   : string;\n    storageBucket : string;\n    projectId     : string;\n}\n"]}

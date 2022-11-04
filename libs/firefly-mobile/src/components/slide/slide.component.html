@@ -12,9 +12,9 @@
          [style.background-image]="'url(' + slide.metadata.image + ')'">
     </div>
 
-    <app-button-action [text]="'general.go' | translate"
+    <ff-button-action [text]="'general.go' | translate"
                        (click)="clickedAlertGo()">
-    </app-button-action>
+    </ff-button-action>
 
     <span class="cpt-date">{{ slide.timeStart | timestamp: TimestampFormat.Short }}</span>
 </div>

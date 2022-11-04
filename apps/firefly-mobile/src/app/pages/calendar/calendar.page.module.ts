@@ -11,6 +11,7 @@ import { ModulePage } from '../../modules';
 import { PageCalendar } from './calendar.page';
 import { RoutesPageCalendar } from './calendar.page.routes';
 import { ModulePageLogin } from '../login';
+
 @NgModule
 ({
     imports :

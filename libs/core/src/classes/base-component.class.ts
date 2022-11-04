@@ -1,5 +1,4 @@
 import { OnDestroy, HostListener, Component } from '@angular/core';
-
 import { Subject } from 'rxjs';
 
 @Component
@@ -7,7 +6,7 @@ import { Subject } from 'rxjs';
     template: ''
 })
 export abstract class BaseComponent implements OnDestroy {
-  public destroy$: Subject<any> = new Subject();
+  public destroy$: Subject<boolean> = new Subject<boolean>();
 
     @HostListener('window:beforeunload')
     public ngOnDestroy(): void {

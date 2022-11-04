@@ -11,7 +11,7 @@ import { StateLocation } from '@theory/capacitor';
 
 @Component
 ({
-    selector        : 'app-item-map',
+    selector        : 'ff-item-map',
     templateUrl     : './item-map.component.html',
     styleUrls       : ['./item-map.component.scss']
 

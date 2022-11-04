@@ -1,19 +1,20 @@
 import { Observable, from } from 'rxjs';
-import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { FirebaseDocument } from '@theory/firebase/interfaces';
+import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { FieldValue, serverTimestamp } from '@angular/fire/firestore';
 import { map, take } from 'rxjs/operators';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, AbstractControl } from '@angular/forms';
 import { CoreEnum, CoreUtil } from '@theory/core';
-import { FieldValue, serverTimestamp } from '../types';
+
+import { FirebaseDocument } from '../interfaces';
 
 export class ServiceBase<T extends FirebaseDocument | Record<string, any>>
 {
     public name:        string;
     public collection:  AngularFirestoreCollection<T>;
     public firestore:   AngularFirestore;
-    public formBuilder: FormBuilder;
+    public formBuilder: UntypedFormBuilder;
 
-    constructor(name: string, firestore: AngularFirestore, formBuilder: FormBuilder, private reference: boolean = false)
+    constructor(name: string, firestore: AngularFirestore, formBuilder: UntypedFormBuilder, private reference: boolean = false)
     {
         this.name        = name;
         this.firestore   = firestore;
@@ -84,7 +85,7 @@ export class ServiceBase<T extends FirebaseDocument | Record<string, any>>
         return this.valuesChanges(id).pipe(take(1));
     }
 
-    public patchValue(form: FormGroup, key: string, value: any): void
+    public patchValue(form: UntypedFormGroup, key: string, value: any): void
     {
         form.controls[key].patchValue(value);
     }
@@ -101,7 +102,7 @@ export class ServiceBase<T extends FirebaseDocument | Record<string, any>>
         return object;
     }
 
-    public changedFields(form: FormGroup): Partial<T>
+    public changedFields(form: UntypedFormGroup): Partial<T>
     {
         const data: Partial<T> = {};
 
@@ -119,7 +120,7 @@ export class ServiceBase<T extends FirebaseDocument | Record<string, any>>
         return data;
     }
 
-    public formCreate(controlsConfig: Record<string, any>): FormGroup
+    public formCreate(controlsConfig: Record<string, any>): UntypedFormGroup
     {
         return this.formBuilder.group(controlsConfig);
     }

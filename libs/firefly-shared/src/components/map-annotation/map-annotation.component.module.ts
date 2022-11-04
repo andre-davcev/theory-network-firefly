@@ -2,20 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { ComponentMapAnnotation } from './map-annotation.component';
 import { ModuleDirectiveElevation } from '@theory/google';
+
+import { ComponentMapAnnotation } from './map-annotation.component';
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         CommonModule,
         FlexLayoutModule,
         ModuleDirectiveElevation
     ],
-
-    declarations    : [ComponentMapAnnotation],
-    exports         : [ComponentMapAnnotation],
-    entryComponents : [ComponentMapAnnotation]
+    declarations: [ComponentMapAnnotation],
+    exports: [ComponentMapAnnotation]
 })
 export class ModuleComponentMapAnnotation { }

@@ -1,6 +1,6 @@
 @use 'variables' as firefly;
 
-app-item-description {
+ff-item-description {
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 1.25rem;
@@ -30,7 +30,7 @@ ion-list {
 .cnt-name,
 .cnt-tagline,
 .cnt-description,
-app-button-action
+ff-button-action
 {
   position: relative;
   display: flex;

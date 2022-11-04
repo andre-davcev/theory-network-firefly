@@ -1,7 +1,6 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { InterestType } from '@firefly/shared/enums';
-
+import { InterestType } from '../../../enums';
 import { StateInterestsModel } from './interests.state.model';
 
 export const StateInterestsOptions: StoreOptions<StateInterestsModel> =

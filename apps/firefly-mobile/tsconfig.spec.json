@@ -27,11 +27,16 @@
       "@theory/ngxs/*": ["../../libs/ngxs/src/*"],
       "@firefly/shared": ["../../libs/firefly-shared/index.ts"],
       "@firefly/shared/*": ["../../libs/firefly-shared/src/*"],
-      "@firefly/cloud": ["../../apps/firefly-functions/src/library/index.ts"],
+      "@firefly/cloud": ["../../apps/firefly-functions/src/shared/index.ts"],
       "@firefly/mobile": ["../../libs/firefly-mobile/index.ts"],
       "@firefly/mobile/*": ["../../libs/firefly-mobile/src/*"]
     }
   },
   "files": ["src/test.ts", "src/zone-flags.ts", "src/polyfills.ts"],
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/*.d.ts",
+    "jest.config.ts"
+  ]
 }

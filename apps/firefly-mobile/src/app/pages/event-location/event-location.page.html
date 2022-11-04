@@ -15,10 +15,10 @@
     </ion-toolbar>
 </ion-header>
 
-<app-map [place]="place"
+<ff-map [place]="place"
           [geocode]="true"
           [types]="placeTypes"
           [placeholder]="'page.event-location.searchPlaceholder' | translate"
           [mapLoadingText]="'component.map-loading' | translate"
-          (result)="resultFound($event)">
-</app-map>
+          (searchResult)="resultFound($event)">
+</ff-map>

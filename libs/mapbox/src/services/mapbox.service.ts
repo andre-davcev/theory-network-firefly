@@ -1,11 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
-import { MapboxEndpoint } from '../enums';
 import { Observable } from 'rxjs';
 import { HttpParams, HttpClient } from '@angular/common/http';
+
+import { MapboxEndpoint } from '../enums';
 import { ParamsForwardGeocode, ParamsReverseGeocode } from '../api';
 import { EnvironmentMapbox } from '../interfaces';
-import { MapboxEnvironment } from '@firefly/shared/environment';
 import { ResponseGeocode } from '../responses';
+import { MapboxEnvironment } from '../tokens';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceMapbox

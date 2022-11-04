@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentSnapshot } from '@angular/fire/firestore';
+import { GeoPoint } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
+import { GeolocationPosition } from '@capacitor/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { GeoPoint, DocumentSnapshot as FirestoreDocumentSnapshot } from '@theory/firebase';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 
+import { DocumentSnapshot as FirestoreDocumentSnapshot, ServiceFirestoreBase } from '@theory/firebase';
+import { StateLocation } from '@theory/capacitor';
 import { ResponseReverseGeocode, ServiceBigDataCloud } from '@theory/bigdatacloud';
+import { CityInfo, StreamInterest, User, Collection } from '@firefly/cloud';
 
 import { ActionCityCreate, ActionCityWatch } from './city.actions';
 import { StateCityModel } from './city.state.model';
 import { StateCityOptions } from './city.state.options';
-import { StateLocation } from '@theory/capacitor';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
-import { GeolocationPosition } from '@capacitor/core';
-import { CityInfo, StreamInterest, User } from '@firefly/cloud';
-import { ServiceLocation } from '@firefly/shared/services';
-import { Collection } from '@firefly/shared/enums';
+import { ServiceLocation } from '../../../services';
 import { ActionCityStreamSetData } from '../../child/city-stream/city-stream.actions';
-import { ServiceFirestoreBase } from '@theory/firebase';
 
 @State<StateCityModel>(StateCityOptions)
 @Injectable()

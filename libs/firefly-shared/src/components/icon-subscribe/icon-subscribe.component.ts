@@ -4,7 +4,7 @@ import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
 
 @Component
 ({
-    selector        : 'app-icon-subscribe',
+    selector        : 'ff-icon-subscribe',
     templateUrl     : './icon-subscribe.component.html',
     styleUrls       : ['./icon-subscribe.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
@@ -28,8 +28,6 @@ export class ComponentIconSubscribe
     public clickedOn: EventEmitter<boolean> = new EventEmitter();
 
     public faThumbtack: IconDefinition = faThumbtack;
-
-    constructor() { }
 
     public toggle(): void
     {

@@ -1,10 +1,10 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { PhotoAsset, PhotosAlbum } from '@capacitor/core';
+import { Injectable } from '@angular/core';
 
 import { StatePhotosModel } from './photos.state.model';
 import { StatePhotosOptions } from './photos.state.options';
 import { ActionPhotosGet, ActionPhotosGetAlbums } from './photos.actions';
-import { Injectable } from '@angular/core';
 
 @State<StatePhotosModel>(StatePhotosOptions)
 @Injectable()

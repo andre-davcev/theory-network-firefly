@@ -56,18 +56,18 @@
 
     <ion-content>
         <ion-list>
-            <app-item-events *ngFor="let events of data$ | async"
+            <ff-item-events *ngFor="let events of data$ | async"
                             [dateEvents]="events"
                             [showDelete]="true"
                             (selected)="navigate($event)"
                             (deleted)="delete($event)">
-            </app-item-events>
+            </ff-item-events>
         </ion-list>
 
-        <app-button-add *ngIf="canAdd$ | async"
+        <ff-button-add *ngIf="canAdd$ | async"
                     (clicked)="add()"
                     slot="fixed">
-        </app-button-add>
+        </ff-button-add>
 
         <ion-infinite-scroll threshold="100px"
                              (ionInfinite)="loadData($event)">
@@ -77,9 +77,9 @@
         </ion-infinite-scroll>
     </ion-content>
 
-    <app-icon-message *ngIf="!(exists$ | async)"
+    <ff-icon-message *ngIf="!(exists$ | async)"
               slot="fixed"
               [icon]="IconType.Alerts"
               [message]="(emptyMessage$ | async) | translate">
-    </app-icon-message>
+    </ff-icon-message>
 </section>

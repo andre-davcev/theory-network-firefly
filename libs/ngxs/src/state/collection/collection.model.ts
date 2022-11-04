@@ -1,9 +1,9 @@
 import { TypeOf } from '@theory/core';
-import { DocumentSnapshot, OrderBy } from '@theory/firebase';
+import { OrderBy, DocumentSnapshot } from '@theory/firebase';
 
 export interface StateCollectionModel<T>
 {
-    pageSize         : number;
+    pageSize         : number;
     orderBy          : string;
     orderByDirection : OrderBy;
     orderByType?     : TypeOf;

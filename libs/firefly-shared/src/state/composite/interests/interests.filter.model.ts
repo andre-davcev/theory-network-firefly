@@ -1,5 +1,6 @@
 import { SubscriptionPartial } from '@firefly/cloud';
-import { InterestType } from '@firefly/shared';
+
+import { InterestType } from '../../../enums';
 
 export interface InterestsFilter
 {

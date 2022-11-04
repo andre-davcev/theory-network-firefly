@@ -14,10 +14,10 @@
 
 <ion-content>
     <ion-list>
-        <app-item-events *ngFor="let events of data$ | async"
+        <ff-item-events *ngFor="let events of data$ | async"
                         [dateEvents]="events"
                         (selected)="select($event)">
-        </app-item-events>
+        </ff-item-events>
     </ion-list>
 
     <ion-infinite-scroll threshold="100px"
@@ -27,9 +27,9 @@
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
-    <app-icon-message *ngIf="!(exists$ | async)"
+    <ff-icon-message *ngIf="!(exists$ | async)"
         slot="fixed"
         [icon]="IconType.Alerts"
         [message]="'page.events.empty.created' | translate">
-    </app-icon-message>
+    </ff-icon-message>
 </ion-content>

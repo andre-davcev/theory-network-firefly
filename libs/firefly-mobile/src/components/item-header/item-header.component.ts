@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 
 @Component
 ({
-    selector        : 'app-item-header',
+    selector        : 'ff-item-header',
     templateUrl     : './item-header.component.html',
     styleUrls       : ['./item-header.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush
@@ -11,7 +11,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 
 export class ComponentItemHeader
 {
-    @Input() form: FormGroup;
+    @Input() form: UntypedFormGroup;
 
     @Input() iconUrl:         string;
     @Input() iconUrlEmpty:    string;

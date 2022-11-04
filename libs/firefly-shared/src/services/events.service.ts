@@ -1,11 +1,12 @@
 
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Timestamp } from '@angular/fire/firestore';
 
-import { Event } from '@firefly/cloud';
-import { fromDate, ServiceFirestore, Timestamp } from '@theory/firebase';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { ServiceFirestore } from '@theory/firebase';
 import { DateUtil, Regex, ValidatorsExtended } from '@theory/core';
+import { Event } from '@firefly/cloud';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceEvents extends ServiceFirestore<Event>
@@ -13,7 +14,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
     constructor
     (
         firestore:   AngularFirestore,
-        formBuilder: FormBuilder
+        formBuilder: UntypedFormBuilder
     )
     {
         super(firestore, formBuilder);
@@ -23,7 +24,7 @@ export class ServiceEvents extends ServiceFirestore<Event>
     {
         const validator: ValidatorFn = (control: AbstractControl): Record<string, any> =>
         {
-            const form: FormGroup = control.parent as FormGroup;
+            const form: UntypedFormGroup = control.parent as UntypedFormGroup;
 
             let valid: boolean = false;
 
@@ -97,15 +98,15 @@ export class ServiceEvents extends ServiceFirestore<Event>
         {
             ...super.formDataNew(userId, defaults),
 
-            timeStart:  fromDate(DateUtil.atHourNext()),
-            timeEnd:    fromDate(DateUtil.atHourNext(new Date(), 2)),
-            timeNotify: fromDate(DateUtil.atHourNext(new Date(), 2))
+            timeStart:  Timestamp.fromDate(DateUtil.atHourNext()),
+            timeEnd:    Timestamp.fromDate(DateUtil.atHourNext(new Date(), 2)),
+            timeNotify: Timestamp.fromDate(DateUtil.atHourNext(new Date(), 2))
         };
 
         return event;
     }
 
-    public formCreate(event: Event): FormGroup
+    public formCreate(event: Event): UntypedFormGroup
     {
         //temporary
         if(!event.metadata)

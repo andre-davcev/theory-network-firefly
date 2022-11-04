@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, catchError, map, finalize, takeUntil, tap, filter } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
+import { TranslateService } from '@ngx-translate/core';
 import { StatusBarStyle } from '@capacitor/core';
+import { NavController, ModalController, AlertController, ActionSheetController } from '@ionic/angular';
+
+import { BaseComponent, CoreEnum } from '@theory/core';
+import { StorageImage, StateStorage, TimestampFormat } from '@theory/firebase';
 import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { StateInterest, ActionInterestSave, StateUserEvents, StateUser, ActionEventGet, ActionEventAccept, ActionEventSetIdAnonymousPending, ActionInterestEventsGetAnonymous, ActionEventDeny, ActionInterestDelete, Translation, ActionAppLoadingShow, ActionAppLoadingHide, ActionInterestEventsAdd, ActionEventSetId, ActionUserEventsGetData } from '@firefly/shared';
-import { Pages } from '@firefly/mobile';
+import { Pages, ActionMobileToast } from '@firefly/mobile';
 import { Event, Interest } from '@firefly/cloud';
-import { ActionMobileToast } from '@firefly/mobile';
-import { NavController, ModalController, AlertController, ActionSheetController } from '@ionic/angular';
-import { StorageImage, StateStorage, TimestampFormat } from '@theory/firebase';
-import { BaseComponent, CoreEnum } from '@theory/core';
-import { Navigate } from '@ngxs/router-plugin';
+
 import { PageEventDetail } from '../event-detail';
-import { TranslateService } from '@ngx-translate/core';
 import { PageEventSelector } from '../event-selector';
 
 @Component
@@ -26,7 +27,7 @@ import { PageEventSelector } from '../event-selector';
 
 export class PageInterestDetail extends BaseComponent implements OnInit
 {
-    @Select(StateInterest.formGroup()) form$:         Observable<FormGroup>;
+    @Select(StateInterest.formGroup()) form$:         Observable<UntypedFormGroup>;
     @Select(StateInterest.data())      interest$:     Observable<Interest>;
     @Select(StateInterest.isNew())     isNew$:        Observable<boolean>;
     @Select(StateInterest.canUpdate()) canUpdate$:    Observable<boolean>;

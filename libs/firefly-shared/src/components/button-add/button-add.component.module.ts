@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 import { ComponentButtonAdd } from './button-add.component';
-import { IonicModule } from '@ionic/angular';
 
 @NgModule
 ({

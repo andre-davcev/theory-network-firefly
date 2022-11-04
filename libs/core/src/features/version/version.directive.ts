@@ -4,7 +4,7 @@ import { ServiceVersion } from './version.service';
 
 @Directive
 ({
-    selector: '[libVersion]'
+    selector: '[tnVersion]'
 })
 
 export class DirectiveVersion

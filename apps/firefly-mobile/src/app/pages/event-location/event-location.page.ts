@@ -2,14 +2,14 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { StatusBarStyle } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
+import { Result } from '@mapbox/mapbox-gl-geocoder';
+import { switchMap, tap } from 'rxjs/operators';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { ActionAppLoadingHide, ActionAppLoadingShow, ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/shared';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
-import { switchMap, tap } from 'rxjs/operators';
+import { ActionAppLoadingHide, ActionAppLoadingShow, ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/shared';
 import { Place } from '@firefly/cloud';
-import { Result } from 'ngx-mapbox-gl/lib/control/geocoder-control.directive';
 
 @Component
 ({

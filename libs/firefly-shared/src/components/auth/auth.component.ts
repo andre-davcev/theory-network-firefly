@@ -1,16 +1,16 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
+import { Select, Store } from '@ngxs/store';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { tap, catchError, filter, map } from 'rxjs/operators';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Credentials, Regex } from '@theory/core';
-import { Select, Store } from '@ngxs/store';
-import { ActionUserLoginEmail, ActionUserCreate, ActionUserResetPassword, ActionUserSetErrorAuth, StateUser } from '@firefly/shared/state';
-import { tap, catchError, filter, map } from 'rxjs/operators';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+
+import { ActionUserLoginEmail, ActionUserCreate, ActionUserResetPassword, ActionUserSetErrorAuth, StateUser } from '../../state';
 import { AuthError } from './auth-error.interface';
-import { TranslateService } from '@ngx-translate/core';
 import { AuthType } from './auth-type.enum';
 import { AuthErrorId } from './auth-error-id.enum';
 import { AuthErrorType } from './auth-error-type.enum';
@@ -19,7 +19,7 @@ import { AuthErrorPassword } from './auth-error-password.enum';
 
 @Component
 ({
-    selector        : 'app-auth',
+    selector        : 'ff-auth',
     templateUrl     : './auth.component.html',
     styleUrls       : ['./auth.component.scss']
 })
@@ -40,7 +40,7 @@ export class ComponentAuth implements OnInit
     public faEnvelope: IconDefinition = faEnvelope;
     public faLock:     IconDefinition = faLock;
 
-    public form : FormGroup;
+    public form : UntypedFormGroup;
 
     public AuthType    : any = AuthType;
     public AuthControl : any = AuthControl;
@@ -60,21 +60,21 @@ export class ComponentAuth implements OnInit
     public errors$:    Record<string, Observable<Array<string>>> = {};
     public hasErrors$: Record<string, Observable<boolean>>       = {};
 
-    private id: FormControl = new FormControl('', Validators.compose
+    private id: UntypedFormControl = new UntypedFormControl('', Validators.compose
     ([
         Validators.required,
         Validators.maxLength(50),
         Validators.pattern(Regex.Email)
     ]));
 
-    private passwordLogin: FormControl = new FormControl('', Validators.compose
+    private passwordLogin: UntypedFormControl = new UntypedFormControl('', Validators.compose
     ([
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(30)
     ]));
 
-    private passwordSignUp: FormControl = new FormControl('', Validators.compose
+    private passwordSignUp: UntypedFormControl = new UntypedFormControl('', Validators.compose
     ([
         Validators.required,
         Validators.minLength(6),
@@ -84,7 +84,7 @@ export class ComponentAuth implements OnInit
 
     constructor
     (
-        private formBuilder : FormBuilder,
+        private formBuilder : UntypedFormBuilder,
         private store       : Store,
         private translate   : TranslateService
     )

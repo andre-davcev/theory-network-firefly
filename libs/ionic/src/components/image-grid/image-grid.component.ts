@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, HostBi
 
 @Component
 ({
-    selector: 'app-image-grid',
+    selector: 'tn-image-grid',
     templateUrl: './image-grid.component.html',
     styleUrls: ['./image-grid.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

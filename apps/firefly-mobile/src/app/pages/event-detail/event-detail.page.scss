@@ -1,20 +1,20 @@
 @use 'variables' as firefly;
 
-app-item-map,
-app-item-description {
+ff-item-map,
+ff-item-description {
     padding-left: 1rem;
     padding-right: 1rem;
 }
 
-app-item-description {
+ff-item-description {
     padding-top: 1.25rem;
 }
 
-app-item-image {
+ff-item-image {
     --cpt-image-border-radius: 14px;
 }
 
-app-item-map {
+ff-item-map {
     margin-bottom: 1.5rem;
 }
 

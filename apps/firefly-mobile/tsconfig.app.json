@@ -30,24 +30,26 @@
         "../../libs/firefly-shared/src/components/*"
       ],
       "@firefly/shared/state/*": ["../../libs/firefly-shared/src/state/*"],
-      "@firefly/cloud": ["../../apps/firefly-functions/src/library/index.ts"],
+      "@firefly/cloud": ["../../apps/firefly-functions/src/shared/index.ts"],
       "@firefly/mobile": ["../../libs/firefly-mobile/index.ts"],
       "@firefly/mobile/*": ["../../libs/firefly-mobile/src/*"],
       "@firefly/mobile/component/*": [
         "../../libs/firefly-mobile/src/components/*"
       ],
-      "@firefly/mobile/state/*": [
-        "../../libs/firefly-mobile/src/state/*"
-      ]
+      "@firefly/mobile/state/*": ["../../libs/firefly-mobile/src/state/*"]
     }
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "**/*.ts",
-    "**/*.d.ts"
-  ],
-  "exclude": ["src/test.ts", "**/*.spec.ts"]
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["**/*.ts", "**/*.d.ts"],
+  "exclude": [
+    "src/test-setup.ts",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "jest.config.ts",
+    "**/pages/categories/**",
+    "**/pages/event-assets/**",
+    "**/pages/event-library/**",
+    "**/environments/environment.prod.ts",
+    "**/environments/version.ts"
+  ]
 }

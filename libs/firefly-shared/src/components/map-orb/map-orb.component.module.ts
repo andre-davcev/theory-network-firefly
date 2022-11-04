@@ -5,13 +5,10 @@ import { ComponentMapOrb } from './map-orb.component';
 
 @NgModule
 ({
-    imports :
-    [
+    imports: [
         CommonModule
     ],
-
-    declarations    : [ComponentMapOrb],
-    exports         : [ComponentMapOrb],
-    entryComponents : [ComponentMapOrb]
+    declarations: [ComponentMapOrb],
+    exports: [ComponentMapOrb]
 })
 export class ModuleComponentMapOrb { }

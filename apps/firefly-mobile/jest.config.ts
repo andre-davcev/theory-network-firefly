@@ -1,0 +1,21 @@
+/* eslint-disable */
+export default {
+  displayName: 'firefly-web',
+  preset: '../../jest.preset.js',
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  globals: {
+    'ts-jest': {
+      stringifyContentPathRegex: '\\.(html|svg)$',
+
+      tsconfig: '<rootDir>/tsconfig.spec.json',
+    },
+  },
+  coverageDirectory: '../../coverage/apps/firefly-mobile',
+  snapshotSerializers: [
+    'jest-preset-angular/build/serializers/no-ng-attributes',
+    'jest-preset-angular/build/serializers/ng-snapshot',
+    'jest-preset-angular/build/serializers/html-comment',
+  ],
+  transform: { '^.+\\.(ts|js|html)$': 'jest-preset-angular' },
+  transformIgnorePatterns: ['/node_modules/(?!@ionic/core|@stencil/core|ionicons)']
+};

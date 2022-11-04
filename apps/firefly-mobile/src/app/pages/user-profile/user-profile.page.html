@@ -4,9 +4,9 @@
 
       <ion-buttons slot="end">
           <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
-              <app-icon [name]="IconType.Menu"
+              <ff-icon [name]="IconType.Menu"
                         [color]="Color.Dark">
-              </app-icon>
+              </ff-icon>
           </ion-button>
       </ion-buttons>
   </ion-toolbar>
@@ -18,7 +18,7 @@
           *ngIf="form$ | async"
           [formGroup]="form$ | async"
           ngxsForm="user-profiles.form">
-        <app-item-header [form]="form$ | async"
+        <ff-item-header [form]="form$ | async"
                         [iconUrl]="iconUrl$ | async"
                         title="nameFirst"
                         subtitle="nameLast"
@@ -27,7 +27,7 @@
                         [subtitlePlaceholder]="'page.user-profile.subtitlePlaceholder' | translate"
                         [iconPlaceholder]="'page.user-profile.iconPlaceholder' | translate"
                         (iconClicked)="selectIcon()">
-        </app-item-header>
+        </ff-item-header>
     </form>
 -->
     <form novalidate

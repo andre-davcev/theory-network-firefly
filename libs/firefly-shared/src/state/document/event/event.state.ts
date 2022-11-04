@@ -1,11 +1,20 @@
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { SetFormPristine } from '@ngxs/form-plugin';
+import { LngLatLike } from 'mapbox-gl';
+import { switchMap, map } from 'rxjs/operators';
+import { from, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Query } from '@angular/fire/compat/firestore';
+import { FieldValue, Timestamp } from '@angular/fire/firestore';
 
+import { ImageType } from '@theory/core';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { StateUser } from '@firefly/shared/state/document/user';
-import { Event, Interest, MetadataEvent, Place } from '@firefly/cloud';
+import { ServiceStorage, ImageSize, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
+import { Event, Interest, MetadataEvent, Place, Collection } from '@firefly/cloud';
 
+import { StateUser } from '../user';
 import { StateEventModel } from './event.state.model';
 import { StateEventOptions } from './event.state.options';
 import {
@@ -31,17 +40,8 @@ import {
   ActionEventInterestRemove
 } from './event.actions';
 import { ActionUserEventsAdd, ActionUserEventsRemove, StateUserEvents, ActionUserEventsSync } from '../../query/user-events';
-import { DocumentSnapshot, FieldValue, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '@theory/firebase';
-import { ServiceEvents, ServiceLocation } from '@firefly/shared/services';
-import { ServiceStorage, ImageSize } from '@theory/firebase';
-import { switchMap, map } from 'rxjs/operators';
-import { from, of } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { ServiceEvents, ServiceLocation } from '../../../services';
 import { StateInterest } from '../interest';
-import { Query } from '@angular/fire/firestore';
-import { Collection, ImageType } from '@firefly/shared/enums';
-import { SetFormPristine } from '@ngxs/form-plugin';
-import { LngLatLike } from 'mapbox-gl';
 import { StateUserAlerts } from '../../child';
 
 @State<StateEventModel>(StateEventOptions)

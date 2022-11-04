@@ -1,4 +1,4 @@
-import { FieldValue } from '../types';
+import { FieldValue } from 'firebase/firestore';
 
 export interface Token
 {

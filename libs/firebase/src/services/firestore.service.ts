@@ -1,10 +1,12 @@
-import { FirebaseDocument } from '../interfaces';
-import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { DocumentSnapshot as FirestoreDocumentSnapshot } from '@theory/firebase';
-import { CoreEnum, CoreUtil } from '@theory/core';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+
+import { CoreEnum, CoreUtil } from '@theory/core';
+
+import { FirebaseDocument } from '../interfaces';
+import { DocumentSnapshot as FirestoreDocumentSnapshot } from '../types';
 import { ServiceFirestoreBase } from './firestore-base.service';
 
 @Injectable({ providedIn: 'root'})
@@ -13,7 +15,7 @@ export class ServiceFirestore<T extends FirebaseDocument>
     constructor
     (
         public firestore:   AngularFirestore,
-        public formBuilder: FormBuilder
+        public formBuilder: UntypedFormBuilder
     ) { }
 
     public collection(collection: string): AngularFirestoreCollection<T>
@@ -46,12 +48,12 @@ export class ServiceFirestore<T extends FirebaseDocument>
         return ServiceFirestoreBase.documentDelete(snapshot);
     }
 
-    public formPatch(form: FormGroup, key: string, value: any): void
+    public formPatch(form: UntypedFormGroup, key: string, value: any): void
     {
         form.controls[key].patchValue(value);
     }
 
-    public formFieldsChanged(form: FormGroup): Partial<T>
+    public formFieldsChanged(form: UntypedFormGroup): Partial<T>
     {
         const data: Partial<T> = {};
 
@@ -69,7 +71,7 @@ export class ServiceFirestore<T extends FirebaseDocument>
         return data;
     }
 
-    public formCreate(controlsConfig: Record<string, any>): FormGroup
+    public formCreate(controlsConfig: Record<string, any>): UntypedFormGroup
     {
         controlsConfig.metadata = controlsConfig.metadata == null ? {} : controlsConfig.metadata;
 

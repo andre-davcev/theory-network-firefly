@@ -1,14 +1,17 @@
-import { User as FirebaseUser, FirebaseError, UserCredential, GeoPoint, FieldValue } from '@theory/firebase';
-
 import { State, Selector, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
 import { Observable, of, from, combineLatest } from 'rxjs';
 import { catchError, switchMap, take, filter, tap, map, finalize } from 'rxjs/operators';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Injectable } from '@angular/core';
+import { FirebaseError } from '@angular/fire/app';
+import { FieldValue, GeoPoint, serverTimestamp } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { User as FirebaseUser } from '@angular/fire/auth';
 
+import { StateDocument } from '@theory/ngxs';
+import { UserCredential } from '@theory/firebase';
 import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
+import { User, SubscriptionPartial, AlertPartial, CityInfo, Token, Collection } from '@firefly/cloud';
 
-import { User, SubscriptionPartial, AlertPartial, CityInfo, Token } from '@firefly/cloud';
-import { serverTimestamp } from '@theory/firebase';
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 import {
@@ -34,17 +37,14 @@ import {
     ActionUserResetPassword,
     ActionUserWatchCity, ActionUserResetAll, ActionUserSetErrorAuth
 } from './user.actions';
-import { ServiceUsers } from '@firefly/shared/services';
-import { StateDocument } from '@theory/ngxs';
-
+import { ServiceUsers } from '../../../services';
 import { ActionUserAlertsReset, ActionUserAlertsSetData } from '../../child/user-alerts/user-alerts.actions';
 import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
-import { ActionNotificationsWatch } from '@firefly/mobile/state/notifications/notifications.actions';
-import { Injectable } from '@angular/core';
-import { Collection, EventType, InterestType } from '@firefly/shared/enums';
+import { ActionNotificationsWatch } from '../../basic/notifications/notifications.actions';
+import { EventType, InterestType } from '../../../enums';
 
 import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
 import { StateCity } from '../city/city.state';

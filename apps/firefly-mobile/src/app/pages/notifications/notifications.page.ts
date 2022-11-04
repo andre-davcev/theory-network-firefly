@@ -1,15 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
+import { Observable, from, BehaviorSubject } from 'rxjs';
 import { switchMap, filter } from 'rxjs/operators';
 import { AlertController, IonSlides, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { Observable, from, BehaviorSubject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
+import { BaseComponent } from '@theory/core';
 import { ActionUserAlertsGo, IconType, ActionUserAlertsDelete, Translation, ActionAlertsSlideRestore, ActionAlertsSlideIndex, StateAlerts } from '@firefly/shared';
 import { Alert } from '@firefly/cloud';
-
 import { Pages } from '@firefly/mobile';
-import { BaseComponent } from '@theory/core';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component
 ({

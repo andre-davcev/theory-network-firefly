@@ -1,11 +1,13 @@
 import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { ServiceCities, Event, Collection } from '../library';
-import * as functions from 'firebase-functions';
-const env = functions.config();
+import { config } from 'firebase-functions';
 import algoliasearch from 'algoliasearch';
 
+import { ServiceCities } from '../library';
+import { Event, Collection } from '../shared';
+
+const env = config();
 const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
 const index = client.initIndex('events');
 

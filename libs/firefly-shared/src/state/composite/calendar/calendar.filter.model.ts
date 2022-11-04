@@ -1,4 +1,4 @@
-import { EventType } from '@firefly/shared/enums';
+import { EventType } from '../../../enums';
 
 export interface CalendarFilter
 {

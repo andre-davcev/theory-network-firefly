@@ -1,1 +1,0 @@
-{"version":3,"file":"metadata-url.interface.js","sourceRoot":"","sources":["../../../src/library/interfaces/metadata-url.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface MetadataUrl\n{\n    urlSmall?  : string;\n    urlMedium? : string;\n    urlLarge?  : string;\n}\n"]}

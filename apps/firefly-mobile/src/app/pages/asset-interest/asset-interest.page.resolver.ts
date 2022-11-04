@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { ActionInterestSetId, ActionInterestEventsGet, ActionAppLoadingHide } from '@firefly/shared';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetInterest implements Resolve<void>

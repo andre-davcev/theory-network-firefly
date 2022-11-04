@@ -1,20 +1,22 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
+import { Timestamp } from '@angular/fire/firestore';
 import { Observable, from, of } from 'rxjs';
-import { Select, Store } from '@ngxs/store';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
+import { Select, Store } from '@ngxs/store';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
-
-import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StatusBarStyle } from '@capacitor/core';
+import { TranslateService } from '@ngx-translate/core';
+
+import { TimestampFormat } from '@theory/firebase';
+import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
 import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, ActionEventAccept, ActionEventDeny, Translation, ActionUserEventsDelete, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/shared';
-import { ActionMobileToast } from '@firefly/mobile';
-import { Pages } from '@firefly/mobile';
+import { ActionMobileToast, Pages } from '@firefly/mobile';
+import { Place } from '@firefly/cloud';
+
 import { PageEventLocation } from '../event-location';
 import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
-import { Place } from '@firefly/cloud';
-import { TranslateService } from '@ngx-translate/core';
-import { Timestamp, TimestampFormat } from '@theory/firebase';
+
 
 @Component
 ({
@@ -26,7 +28,7 @@ import { Timestamp, TimestampFormat } from '@theory/firebase';
 
 export class PageEventDetail
 {
-    @Select(StateEvent.formGroup())     form$:            Observable<FormGroup>;
+    @Select(StateEvent.formGroup())     form$:            Observable<UntypedFormGroup>;
     @Select(StateEvent.isNew())         isNew$:           Observable<boolean>;
     @Select(StateEvent.timeStart)       timeStart$:       Observable<Timestamp>;
     @Select(StateEvent.timeStartValid)  timeStartValid$:  Observable<boolean>;

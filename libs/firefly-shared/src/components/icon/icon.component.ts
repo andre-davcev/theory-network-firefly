@@ -1,15 +1,15 @@
 import { Component, HostBinding, Input, ChangeDetectionStrategy, ElementRef, OnInit } from '@angular/core';
-import { Color } from '@firefly/shared/enums';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
+import { Color } from '../../enums';
 import { IconType } from './icon-type.enum';
 import { IconSize } from './icon-size.enum';
 import { IconSlot } from './icon-slot.enum';
 import { IconFamily } from './icon-family.enum';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 @Component
 ({
-    selector        : 'app-icon',
+    selector        : 'ff-icon',
     templateUrl     : './icon.component.html',
     styleUrls       : ['./icon.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush

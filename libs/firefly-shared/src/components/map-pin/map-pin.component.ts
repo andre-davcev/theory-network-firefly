@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, HostBinding } from '@angular
 
 @Component
 ({
-    selector        : 'app-map-pin',
+    selector        : 'ff-map-pin',
     templateUrl     : './map-pin.component.html',
     styleUrls       : ['./map-pin.component.scss'],
     changeDetection : ChangeDetectionStrategy.OnPush

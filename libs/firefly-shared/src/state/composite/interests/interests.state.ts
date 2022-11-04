@@ -3,8 +3,10 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { switchMap, takeWhile, tap } from 'rxjs/operators';
 
-import { InterestType } from '@firefly/shared/enums';
+import { DocumentSnapshot } from '@theory/firebase';
+import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 
+import { InterestType } from '../../../enums';
 import { StateInterestsModel } from './interests.state.model';
 import { StateInterestsOptions } from './interests.state.options';
 import {
@@ -19,10 +21,8 @@ import {
     ActionInterestsSubscriptionRemove
 } from './interests.actions';
 
-import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 import { ActionUserPatch } from '../../document/user/user.actions';
 import { InterestsFilter } from './interests.filter.model';
-import { DocumentSnapshot } from '@theory/firebase';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
 import { ActionUserSubscriptionsAdd, ActionUserSubscriptionsFilter, ActionUserSubscriptionsGet, ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
