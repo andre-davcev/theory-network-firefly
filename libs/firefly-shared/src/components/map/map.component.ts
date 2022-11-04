@@ -4,7 +4,9 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
 import { LngLatLike, Point, Popup, Map } from 'mapbox-gl';
 import { MapComponent, MarkerComponent } from 'ngx-mapbox-gl';
-import { Results, Result, MapboxGeocoder, LngLatLiteral } from '@mapbox/mapbox-gl-geocoder';
+import { Results, Result } from '@mapbox/mapbox-gl-geocoder';
+import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import mapboxgl from 'mapbox-gl'
 
 import { StateDevice, StateLanguage, StateLocation } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
@@ -24,7 +26,6 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
 {
     @Select(StateLocation.isValid)          locationValid$      : Observable<boolean>;
     @Select(StateLocation.locationLike)     locationLike$       : Observable<LngLatLike>;
-    @Select(StateLocation.locationLiteral)  locationLiteral$    : Observable<LngLatLiteral>;
     @Select(StateDevice.web)                web$                : Observable<boolean>;
     @Select(StateLanguage.languageIso639_1) language$           : Observable<string>;
 
@@ -57,6 +58,7 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     @HostBinding('style.height')
     public height: string = '100%';
 
+    @Input() searchInput:  string  = '';
     @Input() placeholder?: string  = 'Search';
     @Input() limit:        number  = 5;
     @Input() flyTo:        boolean = true;
@@ -71,11 +73,10 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         MapboxPlaceType.Locality,
         MapboxPlaceType.Neighborhood,
         MapboxPlaceType.Address,
-        MapboxPlaceType.PointOfInterest,
-        MapboxPlaceType.PointOfInterestLandmark
+        MapboxPlaceType.PointOfInterest
     ];
 
-    @Input() proximity?: LngLatLiteral;
+    @Input() proximity?: string;
     @Input() bbox?:      [number, number, number, number];
     @Input() zoom?:      number;
     @Input() minLength?: number;
@@ -135,13 +136,15 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
         {
             this.geocoder = this.createGeocoder();
 
-            map.addControl(this.geocoder);
+            this.zone.runOutsideAngular(() => {
+              map.addControl(this.geocoder, this.geocodePosition);
+            });
 
             this.language$.pipe(takeUntil(this.destroy$)).subscribe((language: string) =>
               this.geocoder.setLanguage(language)
             );
 
-            this.locationLiteral$.pipe(takeUntil(this.destroy$)).subscribe((proximity: LngLatLiteral) =>
+            this.locationLike$.pipe(takeUntil(this.destroy$)).subscribe((proximity: LngLatLike) =>
               this.geocoder.setProximity(proximity)
             );
         }
@@ -221,21 +224,24 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
     private createGeocoder(): MapboxGeocoder
     {
         const language: string = this.store.selectSnapshot(StateLanguage.languageIso639_1);
-        const proximity: LngLatLiteral = this.store.selectSnapshot(StateLocation.locationLiteral);
+        const proximity: LngLatLike = this.store.selectSnapshot(StateLocation.locationLike);
 
-        const geocoder: MapboxGeocoder = new MapboxGeocoder({
-          accessToken: this.environment.accessToken,
-          position: this.geocodePosition,
-          placeholder: this.placeholder,
-          limit: this.limit,
-          flyTo: this.flyTo,
-          bbox: this.bbox,
-          zoom: this.zoom,
-          types: this.types.join(','),
-          minLength: this.minLength,
-          language,
-          proximity
-        });
+        const options: MapboxGeocoder.Options = {
+            mapboxgl,
+            accessToken: this.environment.accessToken,
+            placeholder: this.placeholder,
+            limit: this.limit,
+            flyTo: this.flyTo,
+            types: this.types.join(',')
+        };
+
+        if (this.bbox)      { options.bbox = this.bbox; }
+        if (this.zoom)      { options.zoom = this.zoom; }
+        if (this.minLength) { options.minLength = this.minLength; }
+        if (proximity)      { options.proximity = proximity; }
+        if (language)       { options.language = language; }
+
+        const geocoder: MapboxGeocoder = new MapboxGeocoder(options);
 
         geocoder.
           on('results', (event: MapboxGeocoder.Results) => this.zone.run(() => this.clear.emit(event))).
@@ -243,9 +249,6 @@ export class ComponentMap extends BaseComponent implements OnInit, AfterViewInit
           on('error', (event: any) => this.zone.run(() => this.searchError.emit(event))).
           on('loading', (event: { query: string }) => this.zone.run(() => this.loading.emit(event.query))).
           on('clear', () => this.zone.run(() => this.clear.emit()));
-
-        // [language]="language$ | async"
-        // [proximity]="locationLiteral$ | async"
 
         return geocoder;
     }
