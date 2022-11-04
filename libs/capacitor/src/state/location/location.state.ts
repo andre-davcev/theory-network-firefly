@@ -28,10 +28,10 @@ export class StateLocation
     {
         return !StateLocation.isValid(state) ?
             null :
-            {
-                lat: StateLocation.location(state).coords.latitude,
-                lng: StateLocation.location(state).coords.longitude
-            };
+            [
+                StateLocation.location(state).coords.longitude,
+                StateLocation.location(state).coords.latitude
+            ];
     }
 
     ngxsOnInit(context: StateContext<StateLocationModel>)
