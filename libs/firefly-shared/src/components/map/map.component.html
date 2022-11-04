@@ -20,10 +20,10 @@
         <ff-map-orb></ff-map-orb>
     </mgl-marker>
 
+<!--
     <mgl-control *ngIf="geocode"
                  mglGeocoder
                  [position]="geocodePosition"
-                 [searchInput]="searchInput"
                  [placeholder]="placeholder"
                  [limit]="limit"
                  [language]="language$ | async"
@@ -39,6 +39,7 @@
                  (geocoderResult)="eventResult($event)"
                  (geocoderError)="eventError($event)">
     </mgl-control>
+-->
 
     <ng-container *ngIf="place">
         <mgl-marker [lngLat]="place.center"
