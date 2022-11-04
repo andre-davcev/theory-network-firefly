@@ -4,7 +4,6 @@ import { from, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { GeolocationPosition, Plugins } from '@capacitor/core';
 import { Injectable } from '@angular/core';
-import { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder';
 import { LngLatLike } from 'mapbox-gl';
 
 import { StateLocationModel } from './location.state.model';
@@ -18,24 +17,11 @@ const { Geolocation } = Plugins;
 @Injectable()
 export class StateLocation
 {
-    constructor() { }
-
     @Selector() static location(state: StateLocationModel) : GeolocationPosition { return state.location; }
     @Selector() static error(state: StateLocationModel)    : Error               { return state.error; }
     @Selector() static loading(state: StateLocationModel)  : boolean             { return state.location == null; }
     @Selector() static errored(state: StateLocationModel)  : boolean             { return state.error != null; }
     @Selector() static isValid(state: StateLocationModel)  : boolean             { return state.location != null && state.location.coords != null; }
-
-    @Selector()
-    static locationLiteral(state: StateLocationModel): LngLatLiteral
-    {
-        return !StateLocation.isValid(state) ?
-            null :
-            {
-                latitude  : StateLocation.location(state).coords.latitude,
-                longitude : StateLocation.location(state).coords.longitude
-            };
-    }
 
     @Selector()
     static locationLike(state: StateLocationModel): LngLatLike

@@ -7,7 +7,6 @@ export const PlaceTypes: Record<PlaceType, Array<MapboxPlaceType>> =
     [PlaceType.Physical] :
     [
         MapboxPlaceType.PointOfInterest,
-        MapboxPlaceType.PointOfInterestLandmark,
         MapboxPlaceType.Address
     ],
 
