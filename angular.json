@@ -159,7 +159,9 @@
               "apps/firefly-web/src/assets"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules", "apps/firefly-web/src/styles"]
+              "includePaths": ["node_modules",
+              "libs/firefly-shared/src/sass",
+              "apps/firefly-web/src/styles"]
             },
             "styles": [
               "node_modules/normalize.css/normalize.css",

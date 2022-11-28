@@ -1,0 +1,5 @@
+@use 'app-variables' as app;
+
+html {
+  font-family: app.$font-source-sans-pro-regular;
+}

@@ -1,0 +1,8 @@
+@mixin font-face($font-name, $font-family, $fonts-path: '../../assets/fonts', $font-extension: 'ttf')
+{
+    @font-face
+    {
+        font-family: $font-family;
+        src: url($fonts-path + '/' + $font-name + '/' + $font-family + '.' + $font-extension);
+    }
+}
