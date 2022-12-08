@@ -23,6 +23,7 @@
       "@firefly/shared/*": ["libs/firefly-shared/src/*"],
       "@firefly/shared/component/*": ["libs/firefly-shared/src/components/*"],
       "@firefly/shared/state/*": ["libs/firefly-shared/src/state/*"],
+      "@firefly/web": ["libs/firefly-web/src/index.ts"],
       "@theory/bigdatacloud": ["libs/bigdatacloud/index.ts"],
       "@theory/bigdatacloud/*": ["libs/bigdatacloud/src/*"],
       "@theory/capacitor": ["libs/capacitor/index.ts"],

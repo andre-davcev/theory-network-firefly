@@ -67,3 +67,5 @@ apps/firefly-functions/lib
 # custom
 algolia.txt
 .angular/
+
+.angular
