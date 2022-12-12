@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { ModuleComponentLogo } from '@firefly/shared';
+
+import { Color, ModuleComponentIconFirefly } from '@firefly/shared';
 
 @Component({
   selector: 'ff-nav',
@@ -9,12 +10,13 @@ import { ModuleComponentLogo } from '@firefly/shared';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavComponent {
+  public Color: any = Color;
 }
 
 @NgModule
 ({
-    imports: [ CommonModule, ModuleComponentLogo],
+    imports: [ CommonModule, ModuleComponentIconFirefly ],
     declarations : [NavComponent],
     exports      : [NavComponent]
 })
-export class NavComponentModule { }
+export class NavComponentModule {}
