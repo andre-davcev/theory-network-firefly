@@ -11,7 +11,7 @@ export class ComponentLogo
 {
     @HostBinding('class.cpt-loading')
     @Input()
-    public loading: boolean = true;
+    public loading: boolean = false;
 
     @Input()
     public tagline: boolean = false;

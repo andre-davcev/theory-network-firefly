@@ -154,6 +154,12 @@
             "polyfills": "apps/firefly-web/src/polyfills.ts",
             "tsConfig": "apps/firefly-web/tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": [
+              "@mapbox/mapbox-gl-geocoder",
+              "algoliasearch/lite",
+              "mapbox-gl",
+              "moment"
+            ],
             "assets": [
               "apps/firefly-web/src/favicon.ico",
               "apps/firefly-web/src/assets"
@@ -468,7 +474,7 @@
       "projectType": "library",
       "root": "libs/firefly-web",
       "sourceRoot": "libs/firefly-web/src",
-      "prefix": "fi",
+      "prefix": "ff",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",

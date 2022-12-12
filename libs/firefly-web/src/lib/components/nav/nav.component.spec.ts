@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LibFireflyWebComponent } from './lib-firefly-web.component';
+import { NavComponent } from './nav.component';
 
-describe('LibFireflyWebComponent', () => {
-  let component: LibFireflyWebComponent;
-  let fixture: ComponentFixture<LibFireflyWebComponent>;
+describe('NavComponent', () => {
+  let component: NavComponent;
+  let fixture: ComponentFixture<NavComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LibFireflyWebComponent],
+      declarations: [NavComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LibFireflyWebComponent);
+    fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

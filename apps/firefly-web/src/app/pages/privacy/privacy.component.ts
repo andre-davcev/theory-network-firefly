@@ -13,8 +13,6 @@ export class PrivacyComponent {
 
 @NgModule({
   declarations: [PrivacyComponent],
-  imports: [CommonModule, RouterModule.forChild([{ path: '', component: PrivacyComponent}])],
-  providers: [],
-  bootstrap: [PrivacyComponent],
+  imports: [CommonModule, RouterModule.forChild([{ path: '', component: PrivacyComponent}])]
 })
 export class PrivacyComponentModule {}

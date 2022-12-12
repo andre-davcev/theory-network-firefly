@@ -1,1 +1,1 @@
-export * from './lib/lib-firefly-web/lib-firefly-web.component';
+export * from './lib/components';

@@ -13,9 +13,7 @@ export class HomeComponent {
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [CommonModule, RouterModule.forChild([{ path: '', component: HomeComponent}])],
-  providers: [],
-  bootstrap: [HomeComponent],
+  imports: [CommonModule,  RouterModule.forChild([{ path: '', component: HomeComponent}])]
 })
 export class HomeComponentModule {}
 
