@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, NgModule } from '@angular/core';
 
 import { Color, ModuleComponentIconFirefly } from '@firefly/shared';
 
@@ -11,6 +11,11 @@ import { Color, ModuleComponentIconFirefly } from '@firefly/shared';
 })
 export class NavComponent {
   public Color: any = Color;
+
+  @HostBinding('class')
+  public get classes(): string {
+    return 'w-full flex grow justify-between pt-16 pl-20 pr-20';
+  }
 }
 
 @NgModule

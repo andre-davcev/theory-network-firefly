@@ -25,6 +25,7 @@
     "orta.vscode-jest",
     "johnpapa.vscode-peacock",
     "ms-vscode-remote.remote-containers",
-    "firsttris.vscode-jest-runner"
+    "firsttris.vscode-jest-runner",
+    "hediet.vscode-drawio"
   ]
 }
