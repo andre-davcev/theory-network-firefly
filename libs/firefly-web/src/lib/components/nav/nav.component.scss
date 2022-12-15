@@ -1,6 +1,18 @@
 :host {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+
+  .cpt-icon {
+    position: relative;
+    display: block;
+    background-size: 100% auto;
+    overflow: hidden;
+    background-image: url(/assets/icons/firefly.png);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
