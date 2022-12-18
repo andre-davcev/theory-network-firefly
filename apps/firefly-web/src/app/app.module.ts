@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NavComponentModule } from '@firefly/web';
+import { HomeIconComponentModule, NavComponentModule } from '@firefly/web';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.component.routing';
@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app.component.routing';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HomeIconComponentModule,
     NavComponentModule
   ],
   providers: [],

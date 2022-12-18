@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, NgModule } from '@angular/core';
-
-import { Color, ModuleComponentIconFirefly } from '@firefly/shared';
+import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 
 @Component({
   selector: 'ff-nav',
@@ -10,17 +8,11 @@ import { Color, ModuleComponentIconFirefly } from '@firefly/shared';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavComponent {
-  public Color: any = Color;
-
-  @HostBinding('class')
-  public get classes(): string {
-    return 'w-full flex grow justify-between pt-16 pl-20 pr-20';
-  }
 }
 
 @NgModule
 ({
-    imports: [ CommonModule, ModuleComponentIconFirefly ],
+    imports: [ CommonModule ],
     declarations : [NavComponent],
     exports      : [NavComponent]
 })
