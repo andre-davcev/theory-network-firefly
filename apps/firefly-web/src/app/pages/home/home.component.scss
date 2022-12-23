@@ -1,5 +1,16 @@
+@use 'variables' as firefly;
+
 :host {
   .custom-img {
     background-image: url('/assets/backgrounds/shutterstock-204731431-1920x1285.jpg');
+  }
+
+  .cpt-title,
+  .cpt-description {
+    font-family: firefly.$font-source-sans-pro-light;
+  }
+
+  .cpt-subtitle {
+    font-family: firefly.$font-source-sans-pro-regular;
   }
 }
