@@ -3,4 +3,10 @@
   width: 231.642857142857143px; // 564px x 0.410714285714286
   background-image: url('/assets/icons/google-play-badge.png');
   background-size: cover;
+
+  a {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
 }

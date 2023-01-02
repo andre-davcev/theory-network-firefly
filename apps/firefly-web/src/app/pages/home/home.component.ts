@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostBinding, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavComponentModule } from '@firefly/web';
-import { AppStoreGoogleComponentModule, AppStoreIosComponentModule } from '@theory/core';
+import { AppStoreGoogleComponentModule, AppStoreIosComponentModule, DeviceIPhoneComponentModule } from '@theory/core';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +19,14 @@ export class HomeComponent {
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [CommonModule, NavComponentModule, AppStoreIosComponentModule, AppStoreGoogleComponentModule, RouterModule.forChild([{ path: '', component: HomeComponent}])]
+  imports: [
+    CommonModule,
+    NavComponentModule,
+    AppStoreIosComponentModule,
+    AppStoreGoogleComponentModule,
+    DeviceIPhoneComponentModule,
+    RouterModule.forChild([{ path: '', component: HomeComponent}])
+  ]
 })
 export class HomeComponentModule {}
 

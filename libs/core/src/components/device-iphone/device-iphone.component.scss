@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  position: relative;
+  height: 532px; // 1596px / 3
+  width: 253px; // 760px / 3
+  background-size: cover;
+  background-image: url('/assets/images/device-iphone.png');
+
+  img {
+    position: absolute;
+    left: 21px;
+    top: 78px;
+    height: 379px; // 1136px / 3
+    width: 213px; // 640px / 3
+  }
+}

@@ -3,4 +3,10 @@
   width: 206.36px; // 117.92px x 1.5
   background-image: url('/assets/icons/apple-app-store-badge.svg');
   background-size: cover;
+
+  a {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, NgModule } from '@angular/core';
+import { Component, ChangeDetectionStrategy, NgModule, Input } from '@angular/core';
 
 @Component
 ({
@@ -8,6 +8,8 @@ import { Component, ChangeDetectionStrategy, NgModule } from '@angular/core';
     changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class AppStoreIosComponent {
+  @Input()
+  public url: string;
 }
 
 
