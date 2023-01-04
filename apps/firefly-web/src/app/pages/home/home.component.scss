@@ -5,9 +5,12 @@
     background-image: url('/assets/backgrounds/shutterstock-204731431-1920x1285.jpg');
   }
 
-  .cpt-title,
+  .cpt-title {
+    font-family: firefly.$font-source-sans-pro-light-italic;
+  }
+
   .cpt-description {
-    font-family: firefly.$font-source-sans-pro-light;
+    font-family: firefly.$font-source-sans-pro-regular;
   }
 
   .cpt-subtitle {
