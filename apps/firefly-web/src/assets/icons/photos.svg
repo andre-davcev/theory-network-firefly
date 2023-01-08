@@ -8,10 +8,10 @@
             <g id="how-it-works-section" transform="translate(0.000000, 857.000000)">
                 <g id="Photos_1_" transform="translate(308.000000, 65.000000)">
                     <g id="Group">
-                        <g id="Circle_Shadow" transform="translate(0.000000, 2.000000)" fill="#61B10B">
+                        <g id="Circle_Shadow" transform="translate(0.000000, 2.000000)" fill="#DB477E">
                             <circle id="Oval" cx="31" cy="31" r="31"></circle>
                         </g>
-                        <g id="Circle" fill="#80D623">
+                        <g id="Circle" fill="#E76F9B">
                             <circle id="Oval" cx="31" cy="31" r="31"></circle>
                         </g>
                         <g id="Long_Shadow" transform="translate(10.000000, 17.000000)" fill="#000000" opacity="0.15">
@@ -27,7 +27,7 @@
                         <g id="Sky" transform="translate(15.000000, 19.000000)" fill="#344E5F">
                             <rect id="Rectangle-path" x="0" y="0" width="32" height="24"></rect>
                         </g>
-                        <g id="Grass" transform="translate(15.000000, 32.000000)" fill="#3DBB69">
+                        <g id="Grass" transform="translate(15.000000, 32.000000)" fill="#80D623">
                             <path d="M18,2 C14.9,0.2 8,-2 0,4 L0,11 L32,11 L32,3 C32,3 25,6 18,2 L18,2 Z" id="Shape"></path>
                         </g>
                         <g id="Sun" transform="translate(35.000000, 23.000000)" fill="#EDC03D">
