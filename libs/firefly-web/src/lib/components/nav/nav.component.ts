@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, NgModule } from '@angular/core';
+import { StyleColor, StyleSize } from '../../enums';
 
 @Component({
   selector: 'ff-nav',
@@ -8,6 +9,16 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavComponent {
+  @Input()
+  public size: StyleSize = StyleSize.Large;
+
+  @Input()
+  public color: StyleColor = StyleColor.Dark;
+
+  @HostBinding('class')
+  public get classes(): string {
+    return `cpt-style-size-${this.size} cpt-style-color-${this.color}`;
+  }
 }
 
 @NgModule

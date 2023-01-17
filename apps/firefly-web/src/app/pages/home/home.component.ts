@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostBinding, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavComponentModule } from '@firefly/web';
+import { HomeIconComponentModule, NavComponentModule } from '@firefly/web';
 import { AppStoreGoogleComponentModule, AppStoreIosComponentModule, DeviceIPhoneComponentModule } from '@theory/core';
 
 @Component({
@@ -22,6 +22,7 @@ export class HomeComponent {
   imports: [
     CommonModule,
     NavComponentModule,
+    HomeIconComponentModule,
     AppStoreIosComponentModule,
     AppStoreGoogleComponentModule,
     DeviceIPhoneComponentModule,

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule } from '@angular/core';
 
 @Component({
   selector: 'ff-home-icon',
@@ -8,7 +8,8 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeIconComponent {
-
+  @Input()
+  public link: boolean = false;
 }
 
 @NgModule

@@ -8,10 +8,10 @@
             <g id="how-it-works-section" transform="translate(0.000000, 857.000000)">
                 <g id="Photos_1_" transform="translate(308.000000, 65.000000)">
                     <g id="Group">
-                        <g id="Circle_Shadow" transform="translate(0.000000, 2.000000)" fill="#DB477E">
+                        <g id="Circle_Shadow" transform="translate(0.000000, 2.000000)" fill="#2C4251">
                             <circle id="Oval" cx="31" cy="31" r="31"></circle>
                         </g>
-                        <g id="Circle" fill="#E76F9B">
+                        <g id="Circle" fill="#344E5F">
                             <circle id="Oval" cx="31" cy="31" r="31"></circle>
                         </g>
                         <g id="Long_Shadow" transform="translate(10.000000, 17.000000)" fill="#000000" opacity="0.15">

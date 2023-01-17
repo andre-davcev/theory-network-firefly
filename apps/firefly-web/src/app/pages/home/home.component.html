@@ -2,6 +2,7 @@
   id="home"
   class="w-full h-full flex items-center justify-center h-screen bg-fixed bg-center bg-cover custom-img text-white"
 >
+  <ff-home-icon class="absolute top-16 left-20"></ff-home-icon>
   <div class="cpt-info h-full flex-1 flex flex-col justify-end pl-20 pb-28 gap-20">
     <div class="cpt-heading tracking-wide leading-none flex flex-col gap-2">
       <h1 class="cpt-title text-5xl">Firefly</h1>
@@ -61,4 +62,6 @@
     Parralax inline
   </div>
 </section>
-<section class="cpt-footer h-20 w-full"></section>
+<section class="cpt-footer h-20 w-full pt-20 flex flex-col items-center">
+  <ff-home-icon [link]="true"></ff-home-icon>
+</section>
