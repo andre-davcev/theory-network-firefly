@@ -15,6 +15,10 @@ export class HomeComponent {
   public get classes(): string {
     return 'w-full';
   }
+
+  public get year(): number {
+    return (new Date()).getFullYear();
+  }
 }
 
 @NgModule({
