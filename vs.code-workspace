@@ -5,7 +5,21 @@
     }
 	],
 	"settings": {
+    "html.format.enable": false,
+    "json.format.enable": false,
+    "typescript.format.enable": true,
+    "javascript.format.enable": true,
     "workbench.iconTheme": "material-icon-theme",
+
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "window.zoomLevel": 0,
+    "html.format.wrapAttributes": "force-aligned",
+    "html.format.wrapLineLength": 80,
+    "files.eol": "\n",
+    "search.exclude": {
+      "**/node_modules": true
+    },
 		"workbench.colorCustomizations": {
       "activityBar.background": "#99e14b",
       "activityBar.activeBackground": "#99e14b",
