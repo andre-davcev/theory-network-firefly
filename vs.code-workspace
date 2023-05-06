@@ -10,7 +10,6 @@
     "typescript.format.enable": true,
     "javascript.format.enable": true,
     "workbench.iconTheme": "material-icon-theme",
-
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "window.zoomLevel": 0,
