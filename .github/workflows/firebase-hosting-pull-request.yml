@@ -2,12 +2,11 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
-'on': pull_request'
-runs:
-  using: 'node16'
+'on': pull_request
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
+    using: 'node16'
     steps:
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
