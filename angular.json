@@ -162,7 +162,8 @@
             ],
             "assets": [
               "apps/firefly-web/src/favicon.ico",
-              "apps/firefly-web/src/assets"
+              "apps/firefly-web/src/assets",
+              "apps/firefly-web/tailwind.config.js"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
