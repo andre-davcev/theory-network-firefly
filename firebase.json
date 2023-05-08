@@ -1,7 +1,6 @@
 {
   "hosting": [{
     "target": "firefly-web",
-    "site": "firefly-web",
     "public": "dist/apps/firefly-web",
     "ignore": [
       "firebase.json",
