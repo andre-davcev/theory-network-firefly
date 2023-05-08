@@ -1,6 +1,7 @@
 {
-  "hosting": {
-    "public": "../../dist/apps/firefly-web",
+  "hosting": [{
+    "target": "firefly-web",
+    "public": "dist/apps/firefly-web",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -12,5 +13,5 @@
         "destination": "/index.html"
       }
     ]
-  }
+  }]
 }
