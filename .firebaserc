@@ -6,7 +6,7 @@
     "firefly-b1072": {
       "hosting": {
         "firefly-web": [
-          "firefly-web"
+          "firefly-b1072"
         ]
       }
     }
