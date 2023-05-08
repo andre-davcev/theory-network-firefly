@@ -69,3 +69,6 @@ algolia.txt
 .angular/
 
 .angular
+
+# tailwind
+!libs/**/tailwind.config.js
