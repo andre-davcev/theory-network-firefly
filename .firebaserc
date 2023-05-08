@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "firefly-b1072"
+  },
+  "targets": {
+    "firefly-b1072": {
+      "hosting": {
+        "firefly-web": [
+          "firefly-web"
+        ]
+      }
+    }
   }
 }
