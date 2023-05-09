@@ -44,22 +44,22 @@ export abstract class StateCollection<T extends FirebaseDocument, M extends Stat
     protected static canPageState(state: any):          boolean                          { return StateCollection.pageSizeState(state) !== PageSize.None; }
     protected static noDataState(state: any):           boolean                          { return StateCollection.initializedState(state) && !StateCollection.loadingState(state) && !StateCollection.foundState(state); }
 
-    public static initialized()      { return createSelector([this], (state: any) => StateCollection.initializedState(state)); }
-    public static loading()          { return createSelector([this], (state: any) => StateCollection.loadingState(state)); }
-    public static pageSize()         { return createSelector([this], (state: any) => StateCollection.pageSizeState(state)); }
-    public static finishedPaging()   { return createSelector([this], (state: any) => StateCollection.finishedPagingState(state)); }
-    public static orderBy()          { return createSelector([this], (state: any) => StateCollection.orderByState(state)); }
-    public static orderByDirection() { return createSelector([this], (state: any) => StateCollection.orderByDirectionState(state)); }
-    public static keys()             { return createSelector([this], (state: any) => StateCollection.keysState(state)); }
-    public static keysFiltered()     { return createSelector([this], (state: any) => StateCollection.keysFilteredState(state)); }
-    public static snapshotLookup()   { return createSelector([this], (state: any) => StateCollection.snapshotLookupState(state)); }
-    public static data()             { return createSelector([this], (state: any) => StateCollection.dataState(state)); }
-    public static dataLookup()       { return createSelector([this], (state: any) => StateCollection.dataLookupState(state)); }
-    public static count()            { return createSelector([this], (state: any) => StateCollection.countState(state)); }
-    public static found()            { return createSelector([this], (state: any) => StateCollection.foundState(state)); }
-    public static empty()            { return createSelector([this], (state: any) => StateCollection.emptyState(state)); }
-    public static canPage()          { return createSelector([this], (state: any) => StateCollection.canPageState(state)); }
-    public static noData()           { return createSelector([this], (state: any) => StateCollection.noDataState(state)); }
+    public static initialized()      { return createSelector([this as any], (state: any) => StateCollection.initializedState(state)); }
+    public static loading()          { return createSelector([this as any], (state: any) => StateCollection.loadingState(state)); }
+    public static pageSize()         { return createSelector([this as any], (state: any) => StateCollection.pageSizeState(state)); }
+    public static finishedPaging()   { return createSelector([this as any], (state: any) => StateCollection.finishedPagingState(state)); }
+    public static orderBy()          { return createSelector([this as any], (state: any) => StateCollection.orderByState(state)); }
+    public static orderByDirection() { return createSelector([this as any], (state: any) => StateCollection.orderByDirectionState(state)); }
+    public static keys()             { return createSelector([this as any], (state: any) => StateCollection.keysState(state)); }
+    public static keysFiltered()     { return createSelector([this as any], (state: any) => StateCollection.keysFilteredState(state)); }
+    public static snapshotLookup()   { return createSelector([this as any], (state: any) => StateCollection.snapshotLookupState(state)); }
+    public static data()             { return createSelector([this as any], (state: any) => StateCollection.dataState(state)); }
+    public static dataLookup()       { return createSelector([this as any], (state: any) => StateCollection.dataLookupState(state)); }
+    public static count()            { return createSelector([this as any], (state: any) => StateCollection.countState(state)); }
+    public static found()            { return createSelector([this as any], (state: any) => StateCollection.foundState(state)); }
+    public static empty()            { return createSelector([this as any], (state: any) => StateCollection.emptyState(state)); }
+    public static canPage()          { return createSelector([this as any], (state: any) => StateCollection.canPageState(state)); }
+    public static noData()           { return createSelector([this as any], (state: any) => StateCollection.noDataState(state)); }
 
     public getValue(value: any, type: TypeOf = TypeOf.String): any
     {
