@@ -3,7 +3,7 @@ import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { MenuController } from '@ionic/angular';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
@@ -58,7 +58,7 @@ export class PageAssetsEvents extends BaseComponent implements OnInit
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Light}));
     }
 
     public select(object: Event): void

@@ -5,7 +5,7 @@ import { switchMap, catchError, map, finalize, takeUntil, tap, filter } from 'rx
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { TranslateService } from '@ngx-translate/core';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { NavController, ModalController, AlertController, ActionSheetController } from '@ionic/angular';
 
 import { BaseComponent, CoreEnum } from '@theory/core';
@@ -68,7 +68,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Light }));
+        this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
     }
 
     public add(): void

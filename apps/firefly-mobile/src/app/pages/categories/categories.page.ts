@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { Observable } from 'rxjs';
 
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
@@ -35,7 +35,7 @@ export class PageCategories
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Dark}));
     }
 
     public navigate(page: Pages): void

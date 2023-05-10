@@ -5,7 +5,7 @@ import { Observable, from, of } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 
 import { TimestampFormat } from '@theory/firebase';
@@ -73,7 +73,7 @@ export class PageEventDetail
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light }));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Light }));
     }
 
     public navigate(page: Pages.AssetsInterests | Pages.ImageSelector | Pages.EventLocation)

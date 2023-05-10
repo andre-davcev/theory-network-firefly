@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { MenuController } from '@ionic/angular';
 
 import { IconType, Color, StateUserProfile, ActionUserIsPublisherSet, StateUser } from '@firefly/shared';
@@ -35,7 +35,7 @@ export class PageUserProfile
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Light}));
     }
 
     public menuOpen(): void

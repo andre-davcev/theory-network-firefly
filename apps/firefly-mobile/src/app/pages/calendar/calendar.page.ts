@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { MenuController, PopoverController, IonSearchbar, IonInfiniteScroll, AlertController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
@@ -81,7 +81,7 @@ export class PageCalendar extends BaseComponent
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Light}));
     }
 
     public delete(event: Event): void

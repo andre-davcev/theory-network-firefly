@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { Plugins } from '@capacitor/core';
+import { PushNotifications } from '@capacitor/push-notifications';
 import { FCM } from '@capacitor-community/fcm';
 import { of, from } from 'rxjs';
 import { filter, switchMap, take, map } from 'rxjs/operators';
 
 import { PushNotification } from '@theory/firebase';
 import { StateDevice } from '@theory/capacitor';
-import { ActionUserAddToken } from '@firefly/shared';
 
 import { StateNotificationsModel } from './notifications.state.model';
 import { StateNotificationsOptions } from './notifications.state.options';
 import { ActionNotificationsWatch } from './notifications.actions';
-
-const fcm = new FCM();
-const { PushNotifications } = Plugins;
+import { ActionUserAddToken } from '../../document/user/user.actions';
 
 @State<StateNotificationsModel>(StateNotificationsOptions)
 @Injectable()
@@ -41,13 +38,13 @@ export class StateNotifications
                 device
             ),
             switchMap(() =>
-                from(PushNotifications.requestPermission())
+                from(PushNotifications.requestPermissions())
             ),
             switchMap(() =>
                 from(PushNotifications.register())
             ),
             switchMap(() =>
-                from(fcm.getToken()).pipe(map((response: { token: string }) => response.token))
+                from(FCM.getToken()).pipe(map((response: { token: string }) => response.token))
             ),
             switchMap((token: string) =>
                 !token ?

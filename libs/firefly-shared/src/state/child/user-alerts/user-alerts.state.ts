@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { from, of, forkJoin, Observable } from 'rxjs';
 import { switchMap, map, tap, delay } from 'rxjs/operators';
 import { ActionSheetController } from '@ionic/angular';
-import { Plugins } from '@capacitor/core';
+import { Browser } from '@capacitor/browser';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
@@ -41,8 +41,6 @@ import { StateUser } from '../../document/user/user.state';
 import { ActionUserPatch } from '../../document/user/user.actions';
 import { ActionAppLoadingHide, ActionAppLoadingShow } from '../../document/app/app.actions';
 import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';
-
-const { Browser } = Plugins;
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()

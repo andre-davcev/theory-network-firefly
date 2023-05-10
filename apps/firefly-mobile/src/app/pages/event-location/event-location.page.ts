@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { ModalController } from '@ionic/angular';
 import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { switchMap, tap } from 'rxjs/operators';
@@ -41,7 +41,7 @@ export class PageEventLocation extends BaseComponent
             PlaceTypes.virtual :
             PlaceTypes.physical;
 
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Dark}));
 
         // Keyboard.setScroll({ isDisabled: true });
         // Keyboard.setResizeMode({ mode: KeyboardResize.None });
@@ -62,7 +62,7 @@ export class PageEventLocation extends BaseComponent
     {
         this.store.dispatch
         (
-            new ActionDeviceStatusBarSet({style: StatusBarStyle.Light})
+            new ActionDeviceStatusBarSet({style: Style.Light})
         );
 
         this.modal.dismiss();
@@ -81,7 +81,7 @@ export class PageEventLocation extends BaseComponent
             switchMap(() =>
                 this.store.dispatch
                 ([
-                    new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}),
+                    new ActionDeviceStatusBarSet({style: Style.Light}),
                     new ActionAppLoadingHide()
                 ])
             ),

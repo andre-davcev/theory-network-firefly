@@ -3,7 +3,7 @@ import { FirebaseError } from '@angular/fire/app';
 import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 
 import { StateUser, Color, IconType, AuthType } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
@@ -36,7 +36,7 @@ export class PageLogin
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Dark}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Dark}));
     }
 
     public finishedAuth(successful: boolean): void

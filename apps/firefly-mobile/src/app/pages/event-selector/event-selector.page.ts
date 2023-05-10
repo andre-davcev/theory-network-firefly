@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { from, Observable } from 'rxjs';
@@ -39,7 +39,7 @@ export class PageEventSelector
         this.type = this.store.selectSnapshot(StateCalendar.type);
 
         this.store.dispatch(new ActionCalendarSetType(EventType.Created));
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Light}));
     }
 
     public select(event: Alert): void

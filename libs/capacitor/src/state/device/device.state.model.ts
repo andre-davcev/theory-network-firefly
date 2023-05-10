@@ -1,4 +1,4 @@
-import { StatusBarStyleOptions } from '@capacitor/core';
+import { StyleOptions } from '@capacitor/status-bar';
 
 import { Platform } from '../../enums';
 
@@ -10,6 +10,6 @@ export interface StateDeviceModel
     ios      : boolean;
     android  : boolean;
 
-    statusBar: StatusBarStyleOptions;
+    statusBar: StyleOptions;
     statusBarVisible: boolean;
 }

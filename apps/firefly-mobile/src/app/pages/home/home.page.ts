@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MenuController, PopoverController, IonSearchbar, ModalController } from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { Observable, from, of } from 'rxjs';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
@@ -52,7 +52,7 @@ export class PageHome extends BaseComponent
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light}));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Light}));
     }
 
     public navigate(type: Pages): void

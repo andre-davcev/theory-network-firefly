@@ -3,14 +3,12 @@ import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { of, from } from 'rxjs';
 import { catchError, switchMap, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { Plugins } from '@capacitor/core';
+import { Device } from '@capacitor/device';
 import { Injectable } from '@angular/core';
 
 import { StateLanguageModel } from './language.state.model';
 import { StateLanguageOptions } from './language.state.options';
 import { ActionLanguageInitialize, ActionLanguageGet, ActionLanguageSet } from './language.actions';
-
-const { Device } = Plugins;
 
 @State<StateLanguageModel>(StateLanguageOptions)
 @Injectable()

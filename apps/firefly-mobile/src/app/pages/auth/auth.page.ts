@@ -3,7 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 
 import { ActionDeviceStatusBarShow, ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { StateApp } from '@firefly/shared';
@@ -43,6 +43,6 @@ export class PageAuth implements OnInit
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Light }));
+        this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
     }
 }

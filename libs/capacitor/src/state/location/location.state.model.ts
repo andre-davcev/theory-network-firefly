@@ -1,7 +1,7 @@
-import { GeolocationPosition } from '@capacitor/core';
+import { Position } from '@capacitor/geolocation';
 
 export interface StateLocationModel
 {
-    location : GeolocationPosition;
+    location : Position;
     error    : Error;
 }

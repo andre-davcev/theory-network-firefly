@@ -5,7 +5,7 @@ import { switchMap, catchError, map, finalize, takeUntil } from 'rxjs/operators'
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { TranslateService } from '@ngx-translate/core';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { NavController } from '@ionic/angular';
 
 import { StorageImage, StateStorage, TimestampFormat } from '@theory/firebase';
@@ -60,7 +60,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({ style: StatusBarStyle.Light }));
+        this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
     }
 
     public add(page: Pages.IconSelector | Pages.EventSelector)

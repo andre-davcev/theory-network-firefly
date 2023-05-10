@@ -1,16 +1,14 @@
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CameraResultType, CameraSource, CameraOptions, Plugins, CameraPhoto } from '@capacitor/core';
+import { Camera, CameraResultType, CameraSource, ImageOptions, Photo } from '@capacitor/camera';
 import { Injectable } from '@angular/core';
-
-const { Camera } = Plugins;
 
 @Injectable({ providedIn: 'root' })
 export class ServiceCamera
 {
     public getPhoto
     (
-        options: CameraOptions =
+        options: ImageOptions =
         {
             quality    : 100,
             resultType : CameraResultType.DataUrl,
@@ -21,7 +19,7 @@ export class ServiceCamera
         return from(Camera.getPhoto(options)).
         pipe
         (
-            map((photo: CameraPhoto) =>
+            map((photo: Photo) =>
                 photo.dataUrl
             )
         );

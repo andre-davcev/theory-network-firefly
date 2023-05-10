@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GeoPoint } from '@angular/fire/firestore';
 import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
-import { GeolocationPosition } from '@capacitor/core';
+import { Position } from '@capacitor/geolocation';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 
@@ -40,10 +40,10 @@ export class StateCity
         return this.store.select(StateLocation.location).
         pipe
         (
-            filter((location: GeolocationPosition) =>
+            filter((location: Position) =>
                 location != null
             ),
-            map((location: GeolocationPosition) =>
+            map((location: Position) =>
                 new GeoPoint(location.coords.latitude, location.coords.longitude)
             ),
             tap((geopoint: GeoPoint) =>

@@ -4,7 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
-import { StatusBarStyle } from '@capacitor/core';
+import { Style } from '@capacitor/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 
 import { BaseComponent } from '@theory/core';
@@ -42,7 +42,7 @@ export class PageNotificationDetail extends BaseComponent
 
     public ionViewWillEnter(): void
     {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: StatusBarStyle.Light }));
+        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Light }));
     }
 
     public cancel(): void

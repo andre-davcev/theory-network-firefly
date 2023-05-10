@@ -1,15 +1,14 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { DeviceInfo, StatusBarStyleOptions, Plugins } from '@capacitor/core';
+import { StatusBar, StyleOptions } from '@capacitor/status-bar';
+import { Device, DeviceInfo } from '@capacitor/device';
 import { Injectable } from '@angular/core';
 
 import { Platform } from '../../enums';
 import { StateDeviceModel } from './device.state.model';
 import { StateDeviceOptions } from './device.state.options';
 import { ActionDeviceInitialize, ActionDeviceStatusBarSet, ActionDeviceStatusBarShow, ActionDeviceStatusBarHide } from './device.actions';
-
-const { Device, StatusBar } = Plugins;
 
 @State<StateDeviceModel>(StateDeviceOptions)
 @Injectable()
@@ -24,10 +23,8 @@ export class StateDevice
     @Selector() static android(state: StateDeviceModel): boolean {return state.android;}
     @Selector() static ios(state: StateDeviceModel): boolean     {return state.ios;}
 
-    @Selector() static statusBar(state: StateDeviceModel): StatusBarStyleOptions {return state.statusBar;}
+    @Selector() static statusBar(state: StateDeviceModel): StyleOptions {return state.statusBar;}
     @Selector() static statusBarVisible(state: StateDeviceModel): boolean {return state.statusBarVisible;}
-
-    constructor() {}
 
     ngxsOnInit(context: StateContext<StateDeviceModel>)
     {
@@ -57,9 +54,9 @@ export class StateDevice
     @Action(ActionDeviceStatusBarSet)
     statusBarSet({ getState, patchState } : StateContext<StateDeviceModel>, { payload }: ActionDeviceStatusBarSet)
     {
-        const options: StatusBarStyleOptions = payload;
+        const options: StyleOptions = payload;
         const state: StateDeviceModel = getState();
-        const optionsPrevious: StatusBarStyleOptions = StateDevice.statusBar(state);
+        const optionsPrevious: StyleOptions = StateDevice.statusBar(state);
         const isDevice: boolean = StateDevice.device(state);
         const setStatusBarOptions: boolean = isDevice && (optionsPrevious == null || options.style !== optionsPrevious.style);
 

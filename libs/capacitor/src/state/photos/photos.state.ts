@@ -1,5 +1,5 @@
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { PhotoAsset, PhotosAlbum } from '@capacitor/core';
+import { MediaAsset, MediaAlbum } from '@capacitor-community/media';
 import { Injectable } from '@angular/core';
 
 import { StatePhotosModel } from './photos.state.model';
@@ -10,17 +10,15 @@ import { ActionPhotosGet, ActionPhotosGetAlbums } from './photos.actions';
 @Injectable()
 export class StatePhotos
 {
-    @Selector() static photos(state: StatePhotosModel): Array<PhotoAsset>
+    @Selector() static photos(state: StatePhotosModel): Array<MediaAsset>
     {
-        return state.photos == null ? [] : state.photos.photos;
+        return state.photos == null ? [] : state.photos.medias;
     }
 
-    @Selector() static albums(state: StatePhotosModel): Array<PhotosAlbum>
+    @Selector() static albums(state: StatePhotosModel): Array<MediaAlbum>
     {
         return state.albums == null ? [] : state.albums.albums;
     }
-
-    constructor() { }
 
     @Action(ActionPhotosGet)
     getLibrary({ patchState }: StateContext<StatePhotosModel>, { payload }: ActionPhotosGet)
@@ -35,7 +33,7 @@ export class StatePhotos
     }
 
     @Action(ActionPhotosGetAlbums)
-    getAlbums({ patchState }: StateContext<StatePhotosModel>, { payload }: ActionPhotosGetAlbums)
+    getAlbums({ patchState }: StateContext<StatePhotosModel>)
     {
       /*
         return from(Photos.getAlbums(payload)).pipe

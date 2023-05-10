@@ -1,5 +1,5 @@
 
-import { StatusBarStyleOptions } from '@capacitor/core';
+import { StyleOptions } from '@capacitor/status-bar';
 
 import { ActionsDevice } from './device.actions.enum';
 
@@ -12,7 +12,7 @@ export class ActionDeviceStatusBarSet
 {
     static readonly type = ActionsDevice.StatusBarSet;
 
-    constructor(public payload: StatusBarStyleOptions) {}
+    constructor(public payload: StyleOptions) {}
 }
 
 export class ActionDeviceStatusBarShow

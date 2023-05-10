@@ -1,7 +1,7 @@
-import { PhotosResult, PhotosAlbumsResult } from '@capacitor/core';
+import { MediaResponse, MediaAlbumResponse } from '@capacitor-community/media';
 
 export interface StatePhotosModel
 {
-    photos: PhotosResult;
-    albums: PhotosAlbumsResult;
+    photos: MediaResponse;
+    albums: MediaAlbumResponse;
 }
