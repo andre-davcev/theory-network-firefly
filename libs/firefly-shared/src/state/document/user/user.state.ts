@@ -129,7 +129,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static erroredAuth(state: StateUserModel)            : boolean       { return StateUser.errorAuth(state) != null; }
     @Selector() static subscriptionsStatus(state: StateUserModel)    : Record<string, SubscriptionPartial> { const user: User = StateUser.dataState(state); return user == null ? null : !user.subscriptionsStatus ? {} : user.subscriptionsStatus; }
     @Selector() static notifications(state: StateUserModel)          : Record<string, AlertPartial>        { const user: User = StateUser.dataState(state); return user == null ? null : !user.notifications ? {} : user.notifications; }
-    @Selector() static tokens(state:StateUserModel)                  : Record<string, Token> { return StateUser.dataState(state)?.tokens; }
+    @Selector() static tokens(state:StateUserModel)                  : Record<string, Token> { return StateUser.dataState(state)?.tokens || {}; }
     @Selector() static isPublisher(state: StateUserModel)            : boolean      { return StateUser.dataState(state).isPublisher; }
     @Selector() static email(state: StateUserModel)                  : string       { return StateUser.dataState(state).email; }
     @Selector() static userId(state: StateUserModel)                 : string       { return StateUser.dataState(state).userId; }
