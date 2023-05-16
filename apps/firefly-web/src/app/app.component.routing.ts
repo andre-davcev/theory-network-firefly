@@ -6,7 +6,6 @@ import { Page } from './shared';
 export const routes: Routes =
 [
     { path: Page.Home, loadChildren: () => import('./pages').then(m => m.HomeComponentModule) },
-    { path: Page.Privacy, loadChildren: () => import('./pages').then(m => m.PrivacyComponentModule) },
     { path: Page.Unknown, redirectTo: Page.Home}
 ];
 
