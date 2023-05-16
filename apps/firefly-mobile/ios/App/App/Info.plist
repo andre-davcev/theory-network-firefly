@@ -43,21 +43,17 @@
 		<true/>
 	</dict>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Allows Firefly to add Events to your Calendar</string>
+	<string>Allow access to add events to your Calendar</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Used to access photo library</string>
-	<key>NSContactsUsageDescription</key>
-	<string>We don't save your Contacts but we need this permission to allow you to pick from your Shared Calendars</string>
+	<string>Allow camera access to add photos to your Interests and Events</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Always allow Geolocation?</string>
+	<string>Allow access to your location to provide you with Interests and Events in your local area</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow Geolocation?</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>To Record Audio With Video</string>
+	<string>Allow access to your location to provide you with Interests and Events in your local area</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Store camera photos to camera</string>
+	<string>Allow access to save camera photos you take to your library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To Pick Photos from Library</string>
+	<string>Allow access to add photos to your Interests and Events</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
