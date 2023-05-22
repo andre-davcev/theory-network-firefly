@@ -44,7 +44,8 @@ onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
     ([
         snapshot.ref.update({ data: user}),
         database.collection(Collection.UserProfiles).doc(userId).create(userProfile),
-        ServiceCities.createIfNew(database, user)
+        ServiceCities.createCityIfNew(database, user),
+        ServiceCities.createStreamIfNew(database, user)
     ]);
 });
 

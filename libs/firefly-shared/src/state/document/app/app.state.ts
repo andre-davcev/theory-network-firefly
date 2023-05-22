@@ -31,6 +31,7 @@ export class StateApp
     ])
     static initialized(state: StateAppModel, userInitialized: boolean, cityFound: boolean, cityStreamSet: boolean) : boolean
     {
+        console.log({userInitialized, cityFound, cityStreamSet});
         return userInitialized && cityFound && cityStreamSet;
     }
 

@@ -18,8 +18,8 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
     const before : User = change.before.data() as User;
     const after  : User = change.after.data() as User;
 
-    const subscriptionsStatusBefore : Record<string, SubscriptionPartial> = before.subscriptionsStatus;
-    const subscriptionsStatusAfter  : Record<string, SubscriptionPartial> = after.subscriptionsStatus;
+    const subscriptionsStatusBefore : Record<string, SubscriptionPartial> = before.subscriptionsStatus || {};
+    const subscriptionsStatusAfter  : Record<string, SubscriptionPartial> = after.subscriptionsStatus || {};
 
     const subscriptionKeysBefore : Array<string> = Object.keys(subscriptionsStatusBefore);
     const subscriptionKeysAfter  : Array<string> = Object.keys(subscriptionsStatusAfter);
@@ -35,8 +35,10 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
 
     if (cityIdBefore !== cityIdAfter)
     {
-        updates.push(ServiceCities.createIfNew(database, after));
+        updates.push(ServiceCities.createCityIfNew(database, after));
+        updates.push(ServiceCities.createStreamIfNew(database, after));
     }
+
 
     if (subscriptionCountBefore === subscriptionCountAfter)
     {

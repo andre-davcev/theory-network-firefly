@@ -1,5 +1,4 @@
 import { GeoPoint } from 'firebase/firestore';
-import { LngLatLike } from 'mapbox-gl';
 
 import { MapboxPlaceType } from '../enums';
 import { CityInfo } from './city-info.interface';
@@ -7,7 +6,7 @@ import { CityInfo } from './city-info.interface';
 export interface Place
 {
     center      : Array<number>;
-    centerLike  : LngLatLike;
+    centerLike  : [number, number] | { lng: number; lat: number } | { lon: number; lat: number };
     description : string;
     geopoint    : GeoPoint;
     text        : string;

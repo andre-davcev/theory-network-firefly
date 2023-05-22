@@ -29,7 +29,8 @@ onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext
 
     if (before.city.id !== after.city.id)
     {
-        promises.push(ServiceCities.createIfNew(database, after));
+        promises.push(ServiceCities.createCityIfNew(database, after));
+        promises.push(ServiceCities.createStreamIfNew(database, after));
     }
 
     return Promise.all

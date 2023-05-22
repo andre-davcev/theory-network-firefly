@@ -15,7 +15,7 @@ export class ServiceCities
         return ServiceCities.distanceBetween(geopoint1.latitude, geopoint1.longitude, geopoint2.latitude, geopoint2.longitude);
     }
 
-    public static async createIfNew(database: Firestore, document: Event | User): Promise<WriteResult>
+    public static async createCityIfNew(database: Firestore, document: Event | User): Promise<WriteResult>
     {
         const info    : CityInfo         = document.city;
         const cityDoc : DocumentSnapshot = await database.collection(Collection.Cities).doc(info.id).get();
@@ -28,6 +28,16 @@ export class ServiceCities
 
             nearby: {}
         });
+    }
+
+    public static async createStreamIfNew(database: Firestore, document: Event | User): Promise<WriteResult>
+    {
+        const info      : CityInfo         = document.city;
+        const streamDoc : DocumentSnapshot = await database.collection(Collection.Streams).doc(info.id).get();
+
+        if (streamDoc.exists) { return null; }
+
+        return streamDoc.ref.create({});
     }
 
     private static degrees2Radians(degrees: number): number
