@@ -8,6 +8,8 @@
     bottom: calc(var(--cpt-size) + var(--cpt-margin));
     right: calc(var(--cpt-size) + var(--cpt-margin));
 
+    z-index: 1;
+
   ion-fab-button {
       &.ion-color-primary {
         --background-activated: #{firefly.$fire-color-accent-darkest};
