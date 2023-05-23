@@ -24,8 +24,8 @@ export class ServiceLocation
     public static cityId(countryCode: string, region: string, city: string): string
     {
         countryCode = countryCode.trim().toLowerCase();
-        region      = region.trim().toLowerCase().replace(' ', '-');
-        city        = city.trim().toLowerCase().replace(' ', '-');
+        region      = region.trim().toLowerCase().replace(/ /g, '-');
+        city        = city.trim().toLowerCase().replace(/ /g, '-');
 
         return `${countryCode}_${region}_${city}`;
     }
