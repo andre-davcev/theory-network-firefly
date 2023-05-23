@@ -66,7 +66,6 @@ export class StateCity
                             tap((snapshot: FirestoreDocumentSnapshot) =>
                                 patchState(({ isNew: !snapshot.exists }))
                             ),
-                            tap(snapshot => console.log({exists: snapshot.exists})),
                             switchMap((snapshot: FirestoreDocumentSnapshot) =>
                                 snapshot.exists ?
                                     dispatch(new ActionCityStreamSetData(snapshot.data(), true)) :

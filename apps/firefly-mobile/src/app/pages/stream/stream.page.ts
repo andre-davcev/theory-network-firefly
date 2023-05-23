@@ -20,7 +20,7 @@ import { ActionMobileAuthSelect, Pages } from '@firefly/mobile';
 
 export class PageStream extends BaseComponent implements OnInit
 {
-    @Select(StateUser.authenticated)        authenticated$:      Observable<boolean>;
+    @Select(StateUser.isUser)               isUser$:      Observable<boolean>;
     @Select(StateInterest.events)           events$:             Observable<Event[]>;
     @Select(StateInterests.data)            data$:               Observable<Array<StreamInterest>>;
     @Select(StateInterests.found)           found$:              Observable<boolean>;
@@ -57,7 +57,7 @@ export class PageStream extends BaseComponent implements OnInit
 
     public toggle(subscribed: boolean, stream: StreamInterest): void
     {
-        this.authenticated$.
+        this.isUser$.
         pipe
         (
             take(1),

@@ -77,9 +77,9 @@
                   </mat-expansion-panel>
                 </mat-accordion>
 
-                <ff-icon-subscribe [subscribed]="subscriptions[interest.id] != null"
+                <ff-icon-subscribe [subscribed]="subscriptions[interest.id]"
                                     [count]="interest.subscriberCount"
-                                    [on]="subscriptions[interest.id] != null && subscriptions[interest.id].on"
+                                    [on]="subscriptions[interest.id]?.on"
                                     (clicked)="toggle($event, interest)"
                                     (clickedOn)="toggleOn($event, interest)">
                 </ff-icon-subscribe>
