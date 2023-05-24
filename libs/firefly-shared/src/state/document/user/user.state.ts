@@ -185,7 +185,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
                 ])
             ),
             switchMap(() =>
-                this.store.select(StateCityStream.initialized()).pipe
+                this.store.select(StateCityStream.cityStreamSet).pipe
                 (
                     filter((ready: boolean) => ready),
                     take(1)
