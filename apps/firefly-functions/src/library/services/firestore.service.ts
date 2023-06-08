@@ -1,9 +1,8 @@
 
-import { DocumentSnapshot } from '@google-cloud/firestore';
+import { DocumentSnapshot, FieldValue } from '@google-cloud/firestore';
 
 import { DocumentBase } from '../../shared';
 import { Version } from '../enums';
-import { serverTimestamp, FieldValue } from 'firebase/firestore';
 
 export class ServiceFirestore
 {
@@ -16,7 +15,7 @@ export class ServiceFirestore
     {
         const id        : string               = snapshot.id;
         const object    : T                    = snapshot.data() as T;
-        const timestamp : FieldValue = serverTimestamp();
+        const timestamp : FieldValue = FieldValue.serverTimestamp();
 
         object.id          = id;
         object.dateCreated = timestamp;

@@ -1,4 +1,4 @@
-import { FieldValue } from 'firebase/firestore';
+import { FieldValue } from '@google-cloud/firestore';
 
 export interface Token
 {
