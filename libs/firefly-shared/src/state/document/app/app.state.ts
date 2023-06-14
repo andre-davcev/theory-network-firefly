@@ -14,6 +14,7 @@ import {
 import { StateCity } from '../city/city.state';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { StateUser } from '../user/user.state';
+import { StateLocation } from '@theory/capacitor';
 
 @State<StateAppModel>(StateAppOptions)
 @Injectable()
@@ -28,10 +29,11 @@ export class StateApp
         StateUser.initialized,
         StateCity.found,
         StateCityStream.cityStreamSet,
+        StateLocation.permissionDenied
     ])
-    static initialized(state: StateAppModel, userInitialized: boolean, cityFound: boolean, cityStreamSet: boolean) : boolean
+    static initialized(state: StateAppModel, userInitialized: boolean, cityFound: boolean, cityStreamSet: boolean, locationDenied: boolean) : boolean
     {
-        return userInitialized && cityFound && cityStreamSet;
+        return locationDenied || (userInitialized && cityFound && cityStreamSet);
     }
 
     constructor

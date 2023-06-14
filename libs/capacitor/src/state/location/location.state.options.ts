@@ -8,7 +8,8 @@ export const StateLocationOptions: StoreOptions<StateLocationModel> =
 
     defaults :
     {
-        location : null,
-        error    : null
+        location        : null,
+        permissionState : 'prompt',
+        error           : null
     }
 };

@@ -9,7 +9,7 @@ import { User as FirebaseUser } from '@angular/fire/auth';
 
 import { StateDocument } from '@theory/ngxs';
 import { UserCredential } from '@theory/firebase';
-import { StateLanguage, ActionLanguageSet } from '@theory/capacitor';
+import { StateLanguage, ActionLanguageSet, StateLocation } from '@theory/capacitor';
 import { User, SubscriptionPartial, AlertPartial, CityInfo, Token, Collection } from '@firefly/cloud';
 
 import { StateUserModel } from './user.state.model';
@@ -117,7 +117,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
     @Selector() static authData(state: StateUserModel)               : FirebaseUser { return state.authData; }
     @Selector() static authenticated(state: StateUserModel)          : boolean      { return state.authData != null; }
     @Selector() static isAnonymous(state: StateUserModel)            : boolean      { return StateUser.authenticated(state) && StateUser.authData(state).isAnonymous; }
-    @Selector() static isUser(state: StateUserModel)                 : boolean      { return StateUser.authenticated(state) && !StateUser.isAnonymous(state); }
+    @Selector([StateLocation.permissionDenied]) static isUser(state: StateUserModel, permissionDenied: boolean) : boolean { return StateUser.authenticated(state) && !StateUser.isAnonymous(state) && !permissionDenied; }
     @Selector() static authenticating(state: StateUserModel)         : boolean      { return state.authenticating; }
     @Selector() static language(state: StateUserModel)               : string       { const user: User = StateUser.dataState(state); return user == null ? null : user.language; }
     @Selector() static loading(state: StateUserModel)                : boolean      { return state.authenticating || !state.initialized; }
@@ -366,7 +366,7 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
         pipe
         (
             filter(([authData, city, geopoint]) =>
-                authData != null && !authData.isAnonymous && city != null && geopoint != null
+                authData != null && city != null && geopoint != null
             ),
             switchMap(([authData, city, geopoint]) =>
                 this.store.select(StateUser.found()).

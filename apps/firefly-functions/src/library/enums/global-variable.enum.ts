@@ -1,6 +1,6 @@
 export enum GlobalVariable
 {
-    UserAdmin = 'baLysAd71cRyZjh0hr6poxR8an13',
+    UserAdmin = 'default',
 
     DistanceThreshold  = 200,
     DistanceScorePower = 4,

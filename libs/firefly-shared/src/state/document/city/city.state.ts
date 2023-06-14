@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GeoPoint } from '@angular/fire/firestore';
+import { GeoPoint, serverTimestamp } from '@angular/fire/firestore';
 import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
 import { Position } from '@capacitor/geolocation';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
@@ -81,7 +81,7 @@ export class StateCity
     @Action(ActionCityCreate)
     createCity({ dispatch }: StateContext<StateCityModel>, { city }: ActionCityCreate)
     {
-        const user: User = { id: 'anonymous', city } as User;
+        const user: User = { id: 'anonymous', city, dateUpdated: serverTimestamp() } as User;
 
         return ServiceFirestoreBase.documentPatch<User>(this.angularfire, Collection.Users, user).
         pipe

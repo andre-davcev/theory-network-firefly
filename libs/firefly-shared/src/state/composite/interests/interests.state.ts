@@ -30,6 +30,7 @@ import { ActionCityStreamAdd, ActionCityStreamFilter, ActionCityStreamGet, Actio
 import { StateUser } from '../../document/user/user.state';
 import { StateUserInterests } from '../../query/user-interests/user-interests.state';
 import { ActionUserInterestsFilter, ActionUserInterestsGet } from '../../query/user-interests/user-interests.actions';
+import { StateLocation } from '@theory/capacitor';
 
 @State<StateInterestsModel>(StateInterestsOptions)
 @Injectable()
@@ -190,12 +191,14 @@ export class StateInterests
         return isPublisher && StateInterests.type(state) === InterestType.Created;
     }
 
-    @Selector()
-    static emptyMessage(state: StateInterestsModel) : string
+    @Selector([StateLocation.permissionDenied])
+    static emptyMessage(state: StateInterestsModel, permissionDenied: boolean) : string
     {
         const type: InterestType = StateInterests.type(state);
 
-        return StateInterests.virtual(state) ?
+        return permissionDenied ?
+            'page.stream.empty.locationDenied':
+            StateInterests.virtual(state) ?
                 'page.stream.empty.virtual' :
             type === InterestType.Unsubscribed ?
                 'page.stream.empty.unsubscribed' :

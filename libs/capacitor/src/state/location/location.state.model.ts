@@ -1,7 +1,9 @@
+import { PermissionState } from '@capacitor/core';
 import { Position } from '@capacitor/geolocation';
 
 export interface StateLocationModel
 {
-    location : Position;
-    error    : Error;
+    location        : Position;
+    permissionState : PermissionState;
+    error           : Error;
 }

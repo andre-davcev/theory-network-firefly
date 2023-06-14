@@ -7,7 +7,7 @@ import { Observable, from, of } from 'rxjs';
 import { take, switchMap } from 'rxjs/operators';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { ActionDeviceStatusBarSet, StateLocation } from '@theory/capacitor';
 import { CoreEnum, BaseComponent } from '@theory/core';
 import { Pages, ActionMobileAuthSelect, ComponentHomeOptions, StateMobile } from '@firefly/mobile';
 import { StateAlerts, StateCalendar, StateInterests, StateUser, ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from '@firefly/shared';
@@ -28,6 +28,7 @@ export class PageHome extends BaseComponent
     @Select(StateAlerts.unreadExists) unreadExists$  : Observable<boolean>;
     @Select(StateUser.authenticated)  authenticated$ : Observable<boolean>;
     @Select(StateUser.isUser)         isUser$        : Observable<boolean>;
+    @Select(StateLocation.permissionDenied) locationDenied$ : Observable<boolean>;
 
     @ViewChild(IonSearchbar, { static: false })
     private searchbar: IonSearchbar;

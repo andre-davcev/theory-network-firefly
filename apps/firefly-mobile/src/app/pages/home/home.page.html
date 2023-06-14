@@ -41,7 +41,8 @@
                 <ion-icon name="options" color="dark" size="large"></ion-icon>
             </ion-button>
 
-            <ion-button icon-only
+            <ion-button *ngIf="(locationDenied$ | async) === false"
+                        icon-only
                         (click)="menuOpen()"
                         [disabled]="menuOpen$ | async">
                 <ion-icon name="person" color="dark" size="large"></ion-icon>
