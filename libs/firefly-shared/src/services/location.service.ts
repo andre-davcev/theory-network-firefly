@@ -39,7 +39,7 @@ export class ServiceLocation
     {
         const address     : Array<string>      = result.place_name.split(', ');
         const context     : ContextItem        = result.context[0];
-        const type        : MapboxPlaceType    = result.id.split('.')[0] as MapboxPlaceType;
+        const type        : MapboxPlaceType    = context.id.split('.')[0] as MapboxPlaceType;
         const text        : string             = result.title || context.text || result.text;
         const title       : string             = address[0];
         const description : string             = address[1];
