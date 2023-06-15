@@ -24,6 +24,7 @@ export class ActionUserAuthenticateCheck  { static readonly type = ActionsUser.A
 export class ActionUserAnonymousLogin     { static readonly type = ActionsUser.AnonymousLogin; }
 export class ActionUserWatchLanguage      { static readonly type = ActionsUser.WatchLanguage; }
 export class ActionUserWatchCity          { static readonly type = ActionsUser.WatchCity; }
+export class ActionUserAddTokenAfterLogin { static readonly type = ActionsUser.AddTokenAfterLogin; constructor(public token: string) { } }
 export class ActionUserAddToken           { static readonly type = ActionsUser.AddToken;           constructor(public payload: string) { } }
 export class ActionUserLoginEmail         { static readonly type = ActionsUser.LoginEmail;         constructor(public payload: Credentials) { } }
 export class ActionUserLogout             { static readonly type = ActionsUser.Logout; }

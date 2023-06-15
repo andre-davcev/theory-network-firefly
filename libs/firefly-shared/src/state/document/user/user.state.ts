@@ -35,7 +35,7 @@ import {
     ActionUserNotificationsSet,
     ActionUserPatchMetadata,
     ActionUserResetPassword,
-    ActionUserWatchCity, ActionUserResetAll, ActionUserSetErrorAuth
+    ActionUserWatchCity, ActionUserResetAll, ActionUserSetErrorAuth, ActionUserAddTokenAfterLogin
 } from './user.actions';
 import { ServiceUsers } from '../../../services';
 import { ActionUserAlertsReset, ActionUserAlertsSetData } from '../../child/user-alerts/user-alerts.actions';
@@ -395,6 +395,17 @@ export class StateUser extends StateDocument<User, StateUserModel> implements Ng
             switchMap((language: string) =>
                 dispatch(new ActionUserPatch({ language }, true))
             )
+        );
+    }
+
+    @Action(ActionUserAddTokenAfterLogin)
+    addTokenAfterLogin({ getState, dispatch }: StateContext<StateUserModel>, { token }: ActionUserAddTokenAfterLogin)
+    {
+        return this.store.select(StateUser.authenticated).pipe
+        (
+            filter((authenticated: boolean) => authenticated),
+            take(1),
+            switchMap(() => dispatch(new ActionUserAddToken(token)))
         );
     }
 

@@ -10,6 +10,10 @@ import { Component, ChangeDetectionStrategy, NgModule, Input } from '@angular/co
 export class AppStoreIosComponent {
   @Input()
   public url: string;
+
+  public navigate(url: string): void {
+    window.open(url)
+  }
 }
 
 

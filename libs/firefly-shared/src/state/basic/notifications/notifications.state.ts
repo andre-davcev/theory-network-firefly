@@ -11,7 +11,7 @@ import { StateDevice } from '@theory/capacitor';
 import { StateNotificationsModel } from './notifications.state.model';
 import { StateNotificationsOptions } from './notifications.state.options';
 import { ActionNotificationsWatch } from './notifications.actions';
-import { ActionUserAddToken } from '../../document/user/user.actions';
+import { ActionUserAddTokenAfterLogin } from '../../document/user/user.actions';
 
 @State<StateNotificationsModel>(StateNotificationsOptions)
 @Injectable()
@@ -49,7 +49,7 @@ export class StateNotifications
             switchMap((token: string) =>
                 !token ?
                     of(null) :
-                    dispatch(new ActionUserAddToken(token))
+                    dispatch(new ActionUserAddTokenAfterLogin(token))
             )
         );
     }
