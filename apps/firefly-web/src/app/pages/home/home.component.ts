@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, NgModule } from '@angu
 import { RouterModule } from '@angular/router';
 import { HomeIconComponentModule, NavComponentModule } from '@firefly/web';
 import { AppStoreGoogleComponentModule, AppStoreIosComponentModule, DeviceIPhoneComponentModule } from '@theory/core';
+import { Link } from '../../shared';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,8 @@ export class HomeComponent {
   public get classes(): string {
     return 'w-full';
   }
+
+  public Link = Link;
 
   public get year(): number {
     return (new Date()).getFullYear();

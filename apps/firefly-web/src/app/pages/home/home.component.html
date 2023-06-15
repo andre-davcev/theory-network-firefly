@@ -12,8 +12,10 @@
       <p>Engaging your community through a fun and lightweight eventing app.</p>
     </div>
     <div class="cpt-app-stores flex flex-row align-between gap-16">
-      <tn-app-store-ios></tn-app-store-ios>
-      <tn-app-store-google></tn-app-store-google>
+      <tn-app-store-ios [url]="Link.AppStoreApple"></tn-app-store-ios>
+<!--
+      <tn-app-store-google [url]="Link.AppStoreGoogle"></tn-app-store-google>
+-->
     </div>
   </div>
   <div class="cpt-phone flex-1 h-full flex flex-col justify-between pt-16 pb-28">
@@ -51,7 +53,9 @@
   </div>
   <div class="cpt-app-stores flex flex-row align-between gap-16">
     <tn-app-store-ios></tn-app-store-ios>
+<!--
     <tn-app-store-google></tn-app-store-google>
+-->
   </div>
 </div>
 <section
