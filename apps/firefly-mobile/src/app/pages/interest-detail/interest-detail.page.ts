@@ -109,7 +109,6 @@ export class PageInterestDetail extends BaseComponent implements OnInit
 
     public addEvent(existing: boolean): void
     {
-
         this.store.dispatch(new ActionAppLoadingShow()).
         pipe
         (

@@ -12,7 +12,7 @@ import { MapboxPlaceType } from '@theory/mapbox';
 import { CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
 import { ServiceStorage, ImageSize, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@theory/firebase';
-import { Event, Interest, MetadataEvent, Place, Collection } from '@firefly/cloud';
+import { Event, Interest, MetadataEvent, Place, Collection, CityInfo } from '@firefly/cloud';
 
 import { StateUser } from '../user';
 import { StateEventModel } from './event.state.model';
@@ -394,13 +394,15 @@ export class StateEvent extends StateDocument<Event, StateEventModel>
     @Action(ActionEventPlaceSet)
     placeSet({ dispatch, getState } : StateContext<StateEventModel>, { place }: ActionEventPlaceSet)
     {
-        const metadata: MetadataEvent = StateEvent.metadataState(getState());
+        const state: StateEventModel = getState();
+        const metadata: MetadataEvent = StateEvent.metadataState(state);
+        const city: CityInfo = place?.city || StateEvent.dataState(state).city;
 
         metadata.place = place;
 
         return dispatch
         ([
-            new ActionEventPatch({ geopoint: place.geopoint, city: place.city }),
+            new ActionEventPatch({ geopoint: place.geopoint, city }),
             new ActionEventPatchMetadata(metadata)
         ]);
     }
