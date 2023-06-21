@@ -32,11 +32,12 @@
 
   "menu.title"                : "Menu",
   "menu.home"                 : "Home",
-  "menu.calendar"             : "Calendar",
+  "menu.calendar"             : "Events",
   "menu.subscriptions"        : "My Interests",
   "menu.publisher"            : "Create Interests",
   "menu.assets"               : "Publish",
   "menu.assets.interests"     : "Interests",
+
   "menu.assets.events"        : "Events",
   "menu.assets.icons"         : "Icons",
   "menu.assets.images"        : "Images",
@@ -109,7 +110,7 @@
 
   "page.alert.detail.title": "Notification Detail",
 
-  "page.notifications.title"                 : "Calendar",
+  "page.notifications.title"                 : "Events",
   "page.notifications.tabFired"              : "Fired",
   "page.notifications.tabSubscriptions"      : "Subscriptions",
   "page.notifications.addCoupon"             : "Add Coupon",
