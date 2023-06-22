@@ -1,7 +1,7 @@
 import { storage, EventContext } from 'firebase-functions';
 import { tmpdir } from 'os';
 import { join, dirname } from 'path';
-import { Storage} from '@google-cloud/storage';
+import { Bucket, Storage, File} from '@google-cloud/storage';
 import * as sharp from 'sharp';
 import { remove } from 'fs-extra';
 
@@ -13,7 +13,7 @@ storage.
 object().
 onFinalize(async (object: storage.ObjectMetadata, context: EventContext) =>
 {
-    const bucket:   any          = gcs.bucket(object.bucket);
+    const bucket:   Bucket       = gcs.bucket(object.bucket);
     const filePath: string       = object.name;
     const [aspect, id, fileName] = filePath.split('/');
 
@@ -22,8 +22,9 @@ onFinalize(async (object: storage.ObjectMetadata, context: EventContext) =>
     const [name, extension] = fileName.split('.');
 
     const filePathTemp: string = join(tmpdir(), `${aspect}-${id}-${fileName}`);
+    const file: File = bucket.file(filePath);
 
-    await bucket.file(filePath).download({ destination: filePathTemp });
+    await file.download({ destination: filePathTemp });
 
     const fileSmallName:        string = `${name}@small.${extension}`;
     const fileSmallPath:        string = join(tmpdir(), fileSmallName);
@@ -40,6 +41,7 @@ onFinalize(async (object: storage.ObjectMetadata, context: EventContext) =>
 
     await sharp(filePathTemp).resize({ width: fileMediumWidth, withoutEnlargement: true }).toFile(fileMediumPath);
     await bucket.upload(fileMediumPath, { destination: fileMediumDestination });
+    await file.delete();
 
     return remove(filePathTemp);
 });

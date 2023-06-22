@@ -25,7 +25,7 @@ onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
 
     return Promise.all
     ([
-        snapshot.ref.update({data: object}),
+        snapshot.ref.update({object}),
         ServiceCities.createCityIfNew(database, object),
         ServiceCities.createStreamIfNew(database, object),
         index.saveObject({ ...data, objectID})
