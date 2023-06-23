@@ -95,6 +95,85 @@
         <ion-item-group>
           <ion-item-divider></ion-item-divider>
 
+          <ion-item id="time-start-trigger">
+            <ion-label>{{ 'general.starts' | translate }}</ion-label>
+            <ion-label>{{ timeStart$ | async | timestamp: TimestampFormat.Short }}</ion-label>
+            <ion-popover trigger="time-start-trigger" triggerAction="click">
+              <ng-template>
+                <ion-datetime
+                  name="start"
+                  [min]="now"
+                  [max]="'date-time.maxDate' | translate"
+                  [disabled]="timeIsLocked$ | async"
+                  [value]="timeStart$ | async | timestamp: TimestampFormat.IsoString"
+                  presentation="date-time"
+                  [cancelText]="'general.cancel' |  translate"
+                  [doneText]="'general.done' | translate"
+                  (ionChange)="timeChanged($event, 'timeStart')"
+                  [class.cpt-invalid]="(timeStartValid$ | async) === false"
+                >
+                </ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+
+          <ion-item id="time-ends-trigger">
+            <ion-label>{{ 'general.ends' | translate }}</ion-label>
+            <ion-label>{{ timeEnd$ | async | timestamp: TimestampFormat.Short }}</ion-label>
+            <ion-popover trigger="time-ends-trigger" triggerAction="click">
+              <ng-template>
+                <ion-datetime
+                  name="end"
+                  [min]="now"
+                  [max]="'date-time.maxDate' | translate"
+                  [disabled]="timeIsLocked$ | async"
+                  [value]="timeEnd$ | async | timestamp: TimestampFormat.IsoString"
+                  presentation="date-time"
+                  [cancelText]="'general.cancel' |  translate"
+                  [doneText]="'general.done' | translate"
+                  (ionChange)="timeChanged($event, 'timeEnd')"
+                  [class.cpt-invalid]="(timeEndValid$ | async) === false"
+                >
+                </ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+<!--
+          <ion-item id="time-notify-trigger">
+            <ion-label>{{ 'page.event.timeNotify' | translate }}</ion-label>
+            <ion-label>{{ timeNotify$ | async | timestamp: TimestampFormat.Short }}</ion-label>
+            <ion-popover trigger="time-notify-trigger" triggerAction="click" side="top">
+              <ng-template>
+                <ion-datetime
+                  name="notify"
+                  [min]="now"
+                  [max]="'date-time.maxDate' | translate"
+                  [disabled]="timeIsLocked$ | async"
+                  [value]="timeNotify$ | async | timestamp: TimestampFormat.IsoString"
+                  presentation="date-time"
+                  [cancelText]="'general.cancel' | translate"
+                  [doneText]="'general.done' | translate"
+                  (ionChange)="timeChanged($event, 'timeNotify')"
+                  [class.cpt-invalid]="(timeNotifyValid$ | async) === false"
+                >
+                </ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+-->
+          <ion-item-divider></ion-item-divider>
+
+          <ff-item-description
+            [form]="form$ | async"
+            [class.invalid]="!(form$ | async).controls.description.valid && (form$ | async).controls.description.dirty"
+            [title]="'general.description' | translate"
+            description="description"
+            [descriptionPlaceholder]="'page.event.descriptionPlaceholder' | translate"
+          >
+          </ff-item-description>
+
+          <ion-item-divider></ion-item-divider>
+
           <ion-item>
             <ion-icon
               [name]="(private$ | async) ? 'lock-closed' : 'lock-open'"
@@ -135,74 +214,6 @@
 
             <ion-input type="tel" inputmode="tel" formControlName="phone">
             </ion-input>
-          </ion-item>
-
-          <ff-item-description
-            [form]="form$ | async"
-            [class.invalid]="!(form$ | async).controls.description.valid && (form$ | async).controls.description.dirty"
-            [title]="'general.description' | translate"
-            description="description"
-            [descriptionPlaceholder]="'page.event.descriptionPlaceholder' | translate"
-          >
-          </ff-item-description>
-
-          <ion-item-divider></ion-item-divider>
-
-          <ion-item>
-            <ion-label>{{ 'general.starts' | translate }}</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-datetime
-              name="start"
-              [min]="now"
-              [max]="'date-time.maxDate' | translate"
-              [disabled]="timeIsLocked$ | async"
-              [value]="timeStart$ | async | timestamp: TimestampFormat.IsoString"
-              presentation="date-time"
-              [cancelText]="'general.cancel' |  translate"
-              [doneText]="'general.done' | translate"
-              (ionChange)="timeChanged($event, 'timeStart')"
-              [class.cpt-invalid]="(timeStartValid$ | async) === false"
-            >
-            </ion-datetime>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>{{ 'general.ends' | translate }}</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-datetime
-              name="end"
-              [min]="now"
-              [max]="'date-time.maxDate' | translate"
-              [disabled]="timeIsLocked$ | async"
-              [value]="timeEnd$ | async | timestamp: TimestampFormat.IsoString"
-              presentation="date-time"
-              [cancelText]="'general.cancel' |  translate"
-              [doneText]="'general.done' | translate"
-              (ionChange)="timeChanged($event, 'timeEnd')"
-              [class.cpt-invalid]="(timeEndValid$ | async) === false"
-            >
-            </ion-datetime>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>{{ 'page.event.timeNotify' | translate }}</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-datetime
-              name="notify"
-              [min]="now"
-              [max]="'date-time.maxDate' | translate"
-              [disabled]="timeIsLocked$ | async"
-              [value]="timeNotify$ | async | timestamp: TimestampFormat.IsoString"
-              presentation="date-time"
-              [cancelText]="'general.cancel' | translate"
-              [doneText]="'general.done' | translate"
-              (ionChange)="timeChanged($event, 'timeNotify')"
-              [class.cpt-invalid]="(timeNotifyValid$ | async) === false"
-            >
-            </ion-datetime>
           </ion-item>
 
           <ion-item-divider></ion-item-divider>
