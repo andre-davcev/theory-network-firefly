@@ -1,4 +1,3 @@
-export interface StateAlertsModel
-{
-    index : number;
+export interface StateAlertsModel {
+  index: number;
 }

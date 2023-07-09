@@ -1,7 +1,6 @@
 import { EventType } from '../../../enums';
 
-export interface CalendarFilter
-{
-    type    : EventType;
-    virtual : boolean;
+export interface CalendarFilter {
+  type: EventType;
+  virtual: boolean;
 }

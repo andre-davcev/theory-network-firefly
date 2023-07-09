@@ -3,7 +3,9 @@
   class="w-full h-full flex items-center justify-center h-screen bg-fixed bg-center bg-cover custom-img text-white"
 >
   <ff-home-icon class="absolute top-16 left-20"></ff-home-icon>
-  <div class="cpt-info h-full flex-1 flex flex-col justify-end pl-20 pb-28 gap-20">
+  <div
+    class="cpt-info h-full flex-1 flex flex-col justify-end pl-20 pb-28 gap-20"
+  >
     <div class="cpt-heading tracking-wide leading-none flex flex-col gap-2">
       <h1 class="cpt-title text-5xl">Firefly</h1>
       <h1 class="cpt-subtitle text-4xl">Life comes to you</h1>
@@ -13,18 +15,22 @@
     </div>
     <div class="cpt-app-stores flex flex-row align-between gap-16">
       <tn-app-store-ios [url]="Link.AppStoreApple"></tn-app-store-ios>
-<!--
+      <!--
       <tn-app-store-google [url]="Link.AppStoreGoogle"></tn-app-store-google>
 -->
     </div>
   </div>
-  <div class="cpt-phone flex-1 h-full flex flex-col justify-between pt-16 pb-28">
+  <div
+    class="cpt-phone flex-1 h-full flex flex-col justify-between pt-16 pb-28"
+  >
     <div class="w-full flex flex-row justify-center">
       <ff-nav class="top-16 right-20"></ff-nav>
     </div>
 
     <div class="w-full flex flex-row justify-center">
-      <tn-device-iphone url="/assets/images/device-iphone-screenshot.png"></tn-device-iphone>
+      <tn-device-iphone
+        url="/assets/images/device-iphone-screenshot.png"
+      ></tn-device-iphone>
     </div>
   </div>
 </header>
@@ -35,25 +41,25 @@
   <div class="text-5xl">Features</div>
   <div class="w-full flex flex-row justify-between">
     <div class="cpt-feature flex flex-col gap-4 w-52">
-      <img class="cpt-img h-32" src="/assets/icons/heart.svg">
+      <img class="cpt-img h-32" src="/assets/icons/heart.svg" />
       <p class="cpt-desc text-2xl text-center">Follow interests</p>
     </div>
     <div class="cpt-feature flex flex-col gap-4 w-52">
-      <img class="cpt-img h-32" src="/assets/icons/location.svg">
+      <img class="cpt-img h-32" src="/assets/icons/location.svg" />
       <p class="cpt-desc text-2xl text-center">Find events in your area</p>
     </div>
     <div class="cpt-feature flex flex-col gap-4 w-52">
-      <img class="cpt-img h-32" src="/assets/icons/calendar.svg">
+      <img class="cpt-img h-32" src="/assets/icons/calendar.svg" />
       <p class="cpt-desc text-2xl text-center">Add to calendar</p>
     </div>
     <div class="cpt-feature flex flex-col gap-4 w-52">
-      <img class="cpt-img h-32" src="/assets/icons/photos.svg">
+      <img class="cpt-img h-32" src="/assets/icons/photos.svg" />
       <p class="cpt-desc text-2xl text-center">Live your best life</p>
     </div>
   </div>
   <div class="cpt-app-stores flex flex-row align-between gap-16">
     <tn-app-store-ios></tn-app-store-ios>
-<!--
+    <!--
     <tn-app-store-google></tn-app-store-google>
 -->
   </div>
@@ -69,20 +75,27 @@
   </a>
 </section>
 
-<section id="support" class="cpt-support relative w-full pt-20 flex flex-col items-center gap-8">
+<section
+  id="support"
+  class="cpt-support relative w-full pt-20 flex flex-col items-center gap-8"
+>
   <div class="text-5xl">Support</div>
   <p class="relative block text-2xl leading-8 pl-60 pr-60">
-    Send all your inquiries, feedback, and questions regarding app issues and feature enhancement
-    requests to: <a
-    href="mailto:support@theorynetwork.com"
-    class="cpt-email tracking-wide pb-6 text-gray-400 pl-2">
-    support@theorynetwork.com
-  </a>
+    Send all your inquiries, feedback, and questions regarding app issues and
+    feature enhancement requests to:
+    <a
+      href="mailto:support@theorynetwork.com"
+      class="cpt-email tracking-wide pb-6 text-gray-400 pl-2"
+    >
+      support@theorynetwork.com
+    </a>
   </p>
 </section>
 
 <section class="cpt-footer relative w-full pt-20 flex flex-col items-center">
   <ff-home-icon [link]="true"></ff-home-icon>
   <ff-nav class="text-black"></ff-nav>
-  <div class="cpt-copyright text-xl tracking-wide pb-6 text-gray-400">Copyright {{ year }} Theory Network LLC. All Rights Reserved.</div>
+  <div class="cpt-copyright text-xl tracking-wide pb-6 text-gray-400">
+    Copyright {{ year }} Theory Network LLC. All Rights Reserved.
+  </div>
 </section>

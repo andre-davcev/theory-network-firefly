@@ -10,19 +10,17 @@ import { ModulePage } from '../../modules';
 import { PageNotificationDetail } from './notification-detail.page';
 import { RoutesPageNotificationDetail } from './notification-detail.page.routes';
 
-@NgModule
-({
-    imports: [
-        ModulePage,
-        ModuleComponentItemMap,
-        ModuleComponentButtonAction,
-        ModuleComponentSlide,
-        RouterModule.forChild(RoutesPageNotificationDetail),
-        NgxsFormPluginModule,
-        ModuleDirectiveElevation
-    ],
-    declarations: [PageNotificationDetail],
-    exports: [PageNotificationDetail]
+@NgModule({
+  imports: [
+    ModulePage,
+    ModuleComponentItemMap,
+    ModuleComponentButtonAction,
+    ModuleComponentSlide,
+    RouterModule.forChild(RoutesPageNotificationDetail),
+    NgxsFormPluginModule,
+    ModuleDirectiveElevation
+  ],
+  declarations: [PageNotificationDetail],
+  exports: [PageNotificationDetail]
 })
-
-export class ModulePageNotificationDetail { }
+export class ModulePageNotificationDetail {}

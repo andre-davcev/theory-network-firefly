@@ -10,19 +10,17 @@ import { PageHome } from './home.page';
 import { ModulePageLogin } from '../login';
 import { ModulePageNotifications } from '../notifications';
 
-@NgModule
-({
-    imports :
-    [
-        ModulePage,
-        RouterModule.forChild(RoutesPageHome),
-        ModuleComponentSlide,
-        ModuleDirectiveElevation,
-        ModulePageLogin,
-        ModulePageNotifications
-    ],
+@NgModule({
+  imports: [
+    ModulePage,
+    RouterModule.forChild(RoutesPageHome),
+    ModuleComponentSlide,
+    ModuleDirectiveElevation,
+    ModulePageLogin,
+    ModulePageNotifications
+  ],
 
-    declarations : [PageHome],
-    exports      : [PageHome]
+  declarations: [PageHome],
+  exports: [PageHome]
 })
 export class ModulePageHome {}

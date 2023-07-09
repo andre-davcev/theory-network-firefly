@@ -1,24 +1,28 @@
 <ion-header>
-    <ion-toolbar color="dark" elevation="2">
-        <ion-title color="primary">{{'page.event-location.title' | translate}}</ion-title>
-        <ion-buttons slot="start">
-            <ion-button color="primary" (click)="cancel()">
-                {{ 'general.cancel' | translate }}
-            </ion-button>
-        </ion-buttons>
+  <ion-toolbar color="dark" elevation="2">
+    <ion-title color="primary"
+      >{{'page.event-location.title' | translate}}</ion-title
+    >
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="cancel()">
+        {{ 'general.cancel' | translate }}
+      </ion-button>
+    </ion-buttons>
 
-        <ion-buttons slot="end">
-            <ion-button color="primary" (click)="done()" [disabled]="!place">
-                {{ 'general.done' | translate }}
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="done()" [disabled]="!place">
+        {{ 'general.done' | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ff-map [place]="place"
-          [geocode]="true"
-          [types]="placeTypes"
-          [placeholder]="'page.event-location.searchPlaceholder' | translate"
-          [mapLoadingText]="'component.map-loading' | translate"
-          (searchResult)="resultFound($event)">
+<ff-map
+  [place]="place"
+  [geocode]="true"
+  [types]="placeTypes"
+  [placeholder]="'page.event-location.searchPlaceholder' | translate"
+  [mapLoadingText]="'component.map-loading' | translate"
+  (searchResult)="resultFound($event)"
+>
 </ff-map>

@@ -1,4 +1,3 @@
-export enum CoreEnum
-{
-    IdNew = 'new'
+export enum CoreEnum {
+  IdNew = 'new'
 }

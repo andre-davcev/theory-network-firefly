@@ -1,45 +1,42 @@
 @use 'variables' as firefly;
 
-:host
-{
-    --cpt-font-color:           firefly.$fire-color-light-text;
-    --cpt-font-size:            17px;
-    --cpt-line-height:          20px;
+:host {
+  --cpt-font-color: firefly.$fire-color-light-text;
+  --cpt-font-size: 17px;
+  --cpt-line-height: 20px;
 
-    --cpt-window-height:        155px;
-    --cpt-border-radius:        5px;
-    --cpt-border-radius-top:    var(--cpt-border-radius);
-    --cpt-border-radius-bottom: var(--cpt-border-radius);
+  --cpt-window-height: 155px;
+  --cpt-border-radius: 5px;
+  --cpt-border-radius-top: var(--cpt-border-radius);
+  --cpt-border-radius-bottom: var(--cpt-border-radius);
 
-    --cpt-background-color: #{firefly.$fire-color-transparent};
+  --cpt-background-color: #{firefly.$fire-color-transparent};
 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .cpt-title {
+    color: var(--cpt-font-color);
+    font-size: var(--cpt-font-size);
+    font-weight: normal;
+    line-height: var(--cpt-line-height);
+    margin-bottom: 0.5rem;
+  }
+
+  .cpt-map-window {
     position: relative;
-    display: flex;
-    flex-direction: column;
     width: 100%;
+    height: var(--cpt-window-height);
+    border-radius: var(--cpt-border-radius);
+    background-color: var(--cpt-background-color);
+    overflow: hidden;
+  }
 
-    .cpt-title
-    {
-        color: var(--cpt-font-color);
-        font-size: var(--cpt-font-size);
-        font-weight: normal;
-        line-height: var(--cpt-line-height);
-        margin-bottom: 0.5rem;
-    }
-
-    .cpt-map-window
-    {
-        position: relative;
-        width: 100%;
-        height: var(--cpt-window-height);
-        border-radius: var(--cpt-border-radius);
-        background-color: var(--cpt-background-color);
-        overflow: hidden;
-    }
-
-    ff-map {
-        --cpt-map-border-radius-top: var(--cpt-border-radius-top);
-        --cpt-map-border-radius-bottom: var(--cpt-border-radius-bottom);
-        --cpt-loading-icon-size: 28px;
-    }
+  ff-map {
+    --cpt-map-border-radius-top: var(--cpt-border-radius-top);
+    --cpt-map-border-radius-bottom: var(--cpt-border-radius-bottom);
+    --cpt-loading-icon-size: 28px;
+  }
 }

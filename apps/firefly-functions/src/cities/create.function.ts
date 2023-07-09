@@ -1,54 +1,64 @@
 import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { firestore as db } from 'firebase-admin';
 import { GeoPoint } from 'firebase/firestore';
-import { DocumentSnapshot, Firestore, WriteResult, QueryDocumentSnapshot } from '@google-cloud/firestore';
+import {
+  DocumentSnapshot,
+  Firestore,
+  WriteResult,
+  QueryDocumentSnapshot
+} from '@google-cloud/firestore';
 
-import { Version, ServiceFirestore, ServiceCities, GlobalVariable } from '../library';
+import {
+  Version,
+  ServiceFirestore,
+  ServiceCities,
+  GlobalVariable
+} from '../library';
 import { City, Collection } from '../shared';
 
 const database: Firestore = db();
 
-const CitiesCreate: CloudFunction<DocumentSnapshot> =
+const CitiesCreate: CloudFunction<DocumentSnapshot> = firestore
+  .document(`${Collection.Cities}/{id}`)
+  .onCreate(async (snapshot: DocumentSnapshot, context: EventContext) => {
+    const object: City = ServiceFirestore.create<City>(
+      snapshot,
+      Version.Cities
+    );
 
-firestore.
-document(`${Collection.Cities}/{id}`).
-onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
-{
-    const object: City = ServiceFirestore.create<City>(snapshot, Version.Cities);
-
-    const id:       string                      = object.id;
-    const geopoint: GeoPoint                 = object.geopoint;
+    const id: string = object.id;
+    const geopoint: GeoPoint = object.geopoint;
     const promises: Array<Promise<WriteResult>> = [];
-    const cities:   db.QuerySnapshot            = await database.collection(Collection.Cities).get();
-    const nearby:   Record<string, number>      = { [id]: 0 };
+    const cities: db.QuerySnapshot = await database
+      .collection(Collection.Cities)
+      .get();
+    const nearby: Record<string, number> = { [id]: 0 };
 
-    cities.forEach((snapshot: QueryDocumentSnapshot) =>
-    {
-        const city: City = snapshot.data() as City;
+    cities.forEach((snapshot: QueryDocumentSnapshot) => {
+      const city: City = snapshot.data() as City;
 
-        if (id !== snapshot.id)
-        {
-            const distance: number = ServiceCities.distanceBetweenPoints(geopoint, city.geopoint);
+      if (id !== snapshot.id) {
+        const distance: number = ServiceCities.distanceBetweenPoints(
+          geopoint,
+          city.geopoint
+        );
 
-            if (distance <= GlobalVariable.DistanceThreshold)
-            {
-                nearby[city.id] = distance;
-                city.nearby[id] = distance;
+        if (distance <= GlobalVariable.DistanceThreshold) {
+          nearby[city.id] = distance;
+          city.nearby[id] = distance;
 
-                promises.push(snapshot.ref.update({ nearby: city.nearby }));
-            }
+          promises.push(snapshot.ref.update({ nearby: city.nearby }));
         }
+      }
     });
 
     object.nearby = nearby;
     object.userId = GlobalVariable.UserAdmin;
 
-    return Promise.all
-    ([
-        snapshot.ref.update({data: object}),
-        ServiceCities.generateStream(database, object)
+    return Promise.all([
+      snapshot.ref.update({ data: object }),
+      ServiceCities.generateStream(database, object)
     ]);
-});
+  });
 
 export { CitiesCreate };
-

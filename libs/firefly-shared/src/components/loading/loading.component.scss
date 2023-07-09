@@ -1,46 +1,41 @@
 @use 'variables' as firefly;
 
-:host
-{
-    --cpt-size: 28px;
+:host {
+  --cpt-size: 28px;
 
-    --cpt-text-font-size: 1.25rem;
+  --cpt-text-font-size: 1.25rem;
 
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-    &.cpt-color-background-dark
-    {
-        background-color: #{firefly.$fire-color-dark};
-    }
+  &.cpt-color-background-dark {
+    background-color: #{firefly.$fire-color-dark};
+  }
 
-    &.cpt-color-background-grey
-    {
-        background-color: rgba(0, 0, 0, 0.4);
-    }
+  &.cpt-color-background-grey {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 
-    &.cpt-color-background-map
-    {
-        background-color: rgb(238, 233, 225);
-    }
+  &.cpt-color-background-map {
+    background-color: rgb(238, 233, 225);
+  }
 
-    ion-spinner {
-        height: var(--cpt-size);
-        width: var(--cpt-size);
-    }
+  ion-spinner {
+    height: var(--cpt-size);
+    width: var(--cpt-size);
+  }
 
-    .cpt-text
-    {
-        margin-top: 1rem;
-        font-size: var(--cpt-text-font-size);
-    }
+  .cpt-text {
+    margin-top: 1rem;
+    font-size: var(--cpt-text-font-size);
+  }
 }

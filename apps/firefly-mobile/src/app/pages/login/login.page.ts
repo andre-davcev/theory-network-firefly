@@ -9,53 +9,43 @@ import { StateUser, Color, IconType, AuthType } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages } from '@firefly/mobile';
 
-@Component
-({
-    selector    : 'app-page-login',
-    templateUrl : 'login.page.html',
-    styleUrls   : ['./login.page.scss']
+@Component({
+  selector: 'app-page-login',
+  templateUrl: 'login.page.html',
+  styleUrls: ['./login.page.scss']
 })
+export class PageLogin {
+  @Select(StateUser.authenticating) authenticating$: Observable<boolean>;
+  @Select(StateUser.errorAuth) error$: Observable<FirebaseError>;
 
-export class PageLogin
-{
-    @Select(StateUser.authenticating) authenticating$ : Observable<boolean>;
-    @Select(StateUser.errorAuth)      error$          : Observable<FirebaseError>;
+  @Input() page:
+    | Pages.Login
+    | Pages.SignUp
+    | Pages.ResetPassword
+    | Pages.SignUpSlides = Pages.Login;
 
-    @Input() page: Pages.Login | Pages.SignUp | Pages.ResetPassword | Pages.SignUpSlides = Pages.Login;
+  public Pages: any = Pages;
+  public Color: any = Color;
+  public IconType: any = IconType;
+  public AuthType: any = AuthType;
 
-    public Pages    : any = Pages;
-    public Color    : any = Color;
-    public IconType : any = IconType;
-    public AuthType : any = AuthType;
+  constructor(private store: Store, private modal: ModalController) {}
 
-    constructor
-    (
-        private store : Store,
-        private modal : ModalController
-    ) { }
+  public ionViewWillEnter(): void {
+    this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Dark }));
+  }
 
-    public ionViewWillEnter(): void
-    {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Dark}));
+  public finishedAuth(successful: boolean): void {
+    if (successful) {
+      if (this.page === Pages.Login || this.page === Pages.ResetPassword) {
+        this.close();
+      } else {
+        this.page = Pages.SignUpSlides;
+      }
     }
+  }
 
-    public finishedAuth(successful: boolean): void
-    {
-        if (successful)
-        {
-            if (this.page === Pages.Login || this.page === Pages.ResetPassword)
-            {
-                this.close();
-            }
-            else
-            {
-                this.page = Pages.SignUpSlides;
-            }
-        }
-    }
-
-    public close(): void
-    {
-        this.modal.dismiss();
-    }
+  public close(): void {
+    this.modal.dismiss();
+  }
 }

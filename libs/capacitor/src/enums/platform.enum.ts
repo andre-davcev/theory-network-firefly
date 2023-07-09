@@ -1,6 +1,5 @@
-export enum Platform
-{
-    Web     = 'web',
-    iOS     = 'ios',
-    Android = 'android'
+export enum Platform {
+  Web = 'web',
+  iOS = 'ios',
+  Android = 'android'
 }

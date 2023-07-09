@@ -11,21 +11,19 @@ import { ModuleComponentButtonAction } from '@firefly/shared';
 
 import { ComponentSlide } from './slide.component';
 
-@NgModule
-({
-    imports:
-    [
-        CommonModule,
-        IonicModule,
-        FlexLayoutModule,
-        RouterModule,
-        TranslateModule,
-        ModuleDirectiveElevation,
-        ModuleComponentButtonAction,
-        ModulePipeTimestamp
-    ],
+@NgModule({
+  imports: [
+    CommonModule,
+    IonicModule,
+    FlexLayoutModule,
+    RouterModule,
+    TranslateModule,
+    ModuleDirectiveElevation,
+    ModuleComponentButtonAction,
+    ModulePipeTimestamp
+  ],
 
-    declarations : [ComponentSlide],
-    exports      : [ComponentSlide]
+  declarations: [ComponentSlide],
+  exports: [ComponentSlide]
 })
-export class ModuleComponentSlide { }
+export class ModuleComponentSlide {}

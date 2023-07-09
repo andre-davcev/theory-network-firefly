@@ -1,5 +1,4 @@
-export interface StateLanguageModel
-{
-    language : string;
-    error    : Error;
+export interface StateLanguageModel {
+  language: string;
+  error: Error;
 }

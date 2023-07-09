@@ -8,18 +8,16 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ComponentAuth } from './auth.component';
 
-@NgModule
-({
-    imports:
-    [
-        CommonModule,
-        TranslateModule,
-        FlexLayoutModule,
-        ReactiveFormsModule,
-        IonicModule,
-        FontAwesomeModule
-    ],
-    declarations: [ComponentAuth],
-    exports: [ComponentAuth]
+@NgModule({
+  imports: [
+    CommonModule,
+    TranslateModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    IonicModule,
+    FontAwesomeModule
+  ],
+  declarations: [ComponentAuth],
+  exports: [ComponentAuth]
 })
-export class ModuleComponentAuth { }
+export class ModuleComponentAuth {}

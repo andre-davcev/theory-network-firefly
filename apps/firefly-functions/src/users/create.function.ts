@@ -8,45 +8,41 @@ import { User, UserProfile, Collection } from '../shared';
 
 const database: Firestore = db();
 
-const UsersCreate: CloudFunction<DocumentSnapshot> =
+const UsersCreate: CloudFunction<DocumentSnapshot> = firestore
+  .document(`${Collection.Users}/{id}`)
+  .onCreate(async (snapshot: DocumentSnapshot, context: EventContext) => {
+    const userId: string = snapshot.id;
+    const user: User = ServiceFirestore.create<User>(snapshot, Version.Users);
 
-firestore.
-document(`${Collection.Users}/{id}`).
-onCreate(async (snapshot: DocumentSnapshot, context: EventContext) =>
-{
-    const userId : string = snapshot.id;
-    const user   : User   = ServiceFirestore.create<User>(snapshot, Version.Users);
-
-    user.isPublisher         = false;
+    user.isPublisher = false;
     user.subscriptionsStatus = {};
 
-    user.notifications =
-    {
-        default :
-        {
-            read:      false,
-            timeStart: Timestamp.fromDate(new Date('1776-07-04'))
-        }
+    user.notifications = {
+      default: {
+        read: false,
+        timeStart: Timestamp.fromDate(new Date('1776-07-04'))
+      }
     };
 
-    const userProfile: Partial<UserProfile> =
-    {
-        userId,
+    const userProfile: Partial<UserProfile> = {
+      userId,
 
-        nameFirst   : '',
-        nameLast    : '',
-        icon        : '',
-        companyName : '',
-        isCompany   : false
+      nameFirst: '',
+      nameLast: '',
+      icon: '',
+      companyName: '',
+      isCompany: false
     };
 
-    return Promise.all
-    ([
-        snapshot.ref.update({ data: user}),
-        database.collection(Collection.UserProfiles).doc(userId).create(userProfile),
-        ServiceCities.createCityIfNew(database, user),
-        ServiceCities.createStreamIfNew(database, user)
+    return Promise.all([
+      snapshot.ref.update({ data: user }),
+      database
+        .collection(Collection.UserProfiles)
+        .doc(userId)
+        .create(userProfile),
+      ServiceCities.createCityIfNew(database, user),
+      ServiceCities.createStreamIfNew(database, user)
     ]);
-});
+  });
 
 export { UsersCreate };

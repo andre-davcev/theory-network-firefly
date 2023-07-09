@@ -4,31 +4,34 @@ import { RouterModule } from '@angular/router';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 import { ModulePipeTimestamp } from '@theory/firebase';
-import { ModuleComponentItemHeader, ModuleComponentItemDescription, ModuleComponentItemMap, ModuleComponentItemImage } from '@firefly/mobile';
+import {
+  ModuleComponentItemHeader,
+  ModuleComponentItemDescription,
+  ModuleComponentItemMap,
+  ModuleComponentItemImage
+} from '@firefly/mobile';
 import { ModuleComponentButtonAdd } from '@firefly/shared';
 
 import { ModulePage } from '../../modules';
 import { ModulePageEventSelector } from '../event-selector';
 import { PageAssetInterest } from './asset-interest.page';
 import { RoutesPageAssetInterest } from './asset-interest.page.routes';
-@NgModule
-({
-    imports: [
-        ReactiveFormsModule,
-        RouterModule,
-        ModulePage,
-        ModuleComponentItemHeader,
-        ModuleComponentItemMap,
-        ModuleComponentItemImage,
-        ModuleComponentItemDescription,
-        ModuleComponentButtonAdd,
-        RouterModule.forChild(RoutesPageAssetInterest),
-        ModulePageEventSelector,
-        NgxsFormPluginModule,
-        ModulePipeTimestamp
-    ],
-    declarations: [PageAssetInterest],
-    exports: [PageAssetInterest]
+@NgModule({
+  imports: [
+    ReactiveFormsModule,
+    RouterModule,
+    ModulePage,
+    ModuleComponentItemHeader,
+    ModuleComponentItemMap,
+    ModuleComponentItemImage,
+    ModuleComponentItemDescription,
+    ModuleComponentButtonAdd,
+    RouterModule.forChild(RoutesPageAssetInterest),
+    ModulePageEventSelector,
+    NgxsFormPluginModule,
+    ModulePipeTimestamp
+  ],
+  declarations: [PageAssetInterest],
+  exports: [PageAssetInterest]
 })
-
-export class ModulePageAssetInterest { }
+export class ModulePageAssetInterest {}

@@ -4,11 +4,10 @@ import { StreamInterest } from '@firefly/cloud';
 
 import { InterestsFilter } from '../../composite';
 
-export interface StateCityStreamModel extends StateChildModel<StreamInterest>
-{
-    filter : InterestsFilter;
+export interface StateCityStreamModel extends StateChildModel<StreamInterest> {
+  filter: InterestsFilter;
 
-    subscriptionsNew: Record<string, string>;
-    subscriptionsSet: boolean;
-    cityStreamSet: boolean;
+  subscriptionsNew: Record<string, string>;
+  subscriptionsSet: boolean;
+  cityStreamSet: boolean;
 }

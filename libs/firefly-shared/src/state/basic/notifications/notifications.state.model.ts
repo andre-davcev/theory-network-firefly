@@ -1,7 +1,6 @@
 import { PushNotification } from '@theory/firebase';
 
-export interface StateNotificationsModel
-{
-    notifications : Array<PushNotification>;
-    notification  : PushNotification;
+export interface StateNotificationsModel {
+  notifications: Array<PushNotification>;
+  notification: PushNotification;
 }

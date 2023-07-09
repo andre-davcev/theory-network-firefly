@@ -5,19 +5,10 @@ import { ModuleComponentImageGrid } from '@theory/ionic';
 import { ModulePage } from '../../modules';
 import { PageEventLibrary } from './event-library.page';
 
-@NgModule
-({
-    imports :
-    [
-        ModulePage,
-        ModuleComponentImageGrid
-    ],
+@NgModule({
+  imports: [ModulePage, ModuleComponentImageGrid],
 
-    declarations : [PageEventLibrary],
-    exports: [PageEventLibrary]
+  declarations: [PageEventLibrary],
+  exports: [PageEventLibrary]
 })
-
-export class ModulePageEventLibrary
-{
-
-}
+export class ModulePageEventLibrary {}

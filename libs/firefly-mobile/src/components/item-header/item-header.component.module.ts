@@ -4,15 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ComponentItemHeader } from './item-header.component';
 
-@NgModule
-({
-    imports :
-    [
-        CommonModule,
-        ReactiveFormsModule
-    ],
+@NgModule({
+  imports: [CommonModule, ReactiveFormsModule],
 
-    declarations : [ComponentItemHeader],
-    exports      : [ComponentItemHeader]
+  declarations: [ComponentItemHeader],
+  exports: [ComponentItemHeader]
 })
-export class ModuleComponentItemHeader { }
+export class ModuleComponentItemHeader {}

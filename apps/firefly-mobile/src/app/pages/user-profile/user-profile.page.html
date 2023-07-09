@@ -1,19 +1,17 @@
 <ion-header elevation="1">
   <ion-toolbar color="light">
-      <ion-title>{{ 'page.user-profile.title' | translate }}</ion-title>
+    <ion-title>{{ 'page.user-profile.title' | translate }}</ion-title>
 
-      <ion-buttons slot="end">
-          <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
-              <ff-icon [name]="IconType.Menu"
-                        [color]="Color.Dark">
-              </ff-icon>
-          </ion-button>
-      </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+        <ff-icon [name]="IconType.Menu" [color]="Color.Dark"> </ff-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<!--
+  <!--
     <form novalidate
           *ngIf="form$ | async"
           [formGroup]="form$ | async"
@@ -30,31 +28,37 @@
         </ff-item-header>
     </form>
 -->
-    <form novalidate
-          *ngIf="formUser$ | async"
-          [formGroup]="formUser$ | async"
-          ngxsForm="user.form">
-        <ion-list>
-            <ion-item-group>
-                <ion-item-divider></ion-item-divider>
+  <form
+    novalidate
+    *ngIf="formUser$ | async"
+    [formGroup]="formUser$ | async"
+    ngxsForm="user.form"
+  >
+    <ion-list>
+      <ion-item-group>
+        <ion-item-divider></ion-item-divider>
 
-                <ion-item>
-                    <ion-icon name="mail" slot="start"></ion-icon>
-                    <ion-label>{{ email$ | async }}</ion-label>
-                </ion-item>
+        <ion-item>
+          <ion-icon name="mail" slot="start"></ion-icon>
+          <ion-label>{{ email$ | async }}</ion-label>
+        </ion-item>
 
-                <ion-item>
-                    <ion-icon name="logo-rss" slot="start"></ion-icon>
-                    <ion-label>{{ 'page.user-profile.isPublisher' | translate }}</ion-label>
+        <ion-item>
+          <ion-icon name="logo-rss" slot="start"></ion-icon>
+          <ion-label
+            >{{ 'page.user-profile.isPublisher' | translate }}</ion-label
+          >
 
-                    <ion-toggle color="primary"
-                                formControlName="isPublisher"
-                                (ionChange)="toggleIsPublisher($event)">
-                    </ion-toggle>
-                </ion-item>
+          <ion-toggle
+            color="primary"
+            formControlName="isPublisher"
+            (ionChange)="toggleIsPublisher($event)"
+          >
+          </ion-toggle>
+        </ion-item>
 
-                <ion-item-divider></ion-item-divider>
-            </ion-item-group>
-        </ion-list>
-    </form>
+        <ion-item-divider></ion-item-divider>
+      </ion-item-group>
+    </ion-list>
+  </form>
 </ion-content>

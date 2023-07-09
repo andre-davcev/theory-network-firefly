@@ -6,17 +6,15 @@ import { ModuleComponentMap, ModuleDirectiveLoading } from '@firefly/shared';
 
 import { ComponentItemMap } from './item-map.component';
 
-@NgModule
-({
-    imports :
-    [
-        CommonModule,
-        FlexLayoutModule,
-        ModuleComponentMap,
-        ModuleDirectiveLoading
-    ],
+@NgModule({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    ModuleComponentMap,
+    ModuleDirectiveLoading
+  ],
 
-    declarations : [ComponentItemMap],
-    exports      : [ComponentItemMap]
+  declarations: [ComponentItemMap],
+  exports: [ComponentItemMap]
 })
-export class ModuleComponentItemMap { }
+export class ModuleComponentItemMap {}

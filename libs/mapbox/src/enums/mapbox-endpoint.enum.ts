@@ -1,5 +1,4 @@
-export enum MapboxEndpoint
-{
-    Places          = 'mapbox.places',
-    PlacesPermanent = 'mapbox.places-permanent'
+export enum MapboxEndpoint {
+  Places = 'mapbox.places',
+  PlacesPermanent = 'mapbox.places-permanent'
 }

@@ -1,26 +1,23 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 
-@Component
-({
-    selector        : 'ff-item-description',
-    templateUrl     : './item-description.component.html',
-    styleUrls       : ['./item-description.component.scss'],
-    changeDetection : ChangeDetectionStrategy.OnPush
+@Component({
+  selector: 'ff-item-description',
+  templateUrl: './item-description.component.html',
+  styleUrls: ['./item-description.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComponentItemDescription
-{
-    @Input() form: UntypedFormGroup;
+export class ComponentItemDescription {
+  @Input() form: UntypedFormGroup;
 
-    @Input() title: string;
+  @Input() title: string;
 
-    @Input() description:            string;
-    @Input() descriptionPlaceholder: string;
+  @Input() description: string;
+  @Input() descriptionPlaceholder: string;
 
-    constructor() { }
+  constructor() {}
 
-    public get edit(): boolean
-    {
-        return this.form != null;
-    }
+  public get edit(): boolean {
+    return this.form != null;
+  }
 }

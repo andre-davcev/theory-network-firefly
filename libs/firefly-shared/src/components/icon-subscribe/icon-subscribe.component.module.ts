@@ -7,28 +7,17 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ComponentIconSubscribe } from './icon-subscribe.component';
 
-@NgModule
-({
-    imports :
-    [
-        CommonModule,
-        IonicModule,
-        FontAwesomeModule,
-        FlexLayoutModule,
-        TranslateModule
-    ],
+@NgModule({
+  imports: [
+    CommonModule,
+    IonicModule,
+    FontAwesomeModule,
+    FlexLayoutModule,
+    TranslateModule
+  ],
 
-    declarations :
-    [
-        ComponentIconSubscribe
-    ],
+  declarations: [ComponentIconSubscribe],
 
-    exports :
-    [
-        ComponentIconSubscribe
-    ]
+  exports: [ComponentIconSubscribe]
 })
-export class ModuleComponentIconSubscribe
-{
-
-}
+export class ModuleComponentIconSubscribe {}

@@ -1,7 +1,5 @@
 {
   "name": "@theory/bigdatacloud",
   "version": "0.0.1",
-  "peerDependencies": {
-
-  }
+  "peerDependencies": {}
 }

@@ -6,16 +6,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ComponentLogo } from './logo.component';
 import { ModuleComponentIconFirefly } from '../icon-firefly';
 
-@NgModule
-({
-    imports:
-    [
-        CommonModule,
-        TranslateModule,
-        FlexLayoutModule,
-        ModuleComponentIconFirefly
-    ],
-    declarations: [ComponentLogo],
-    exports: [ComponentLogo]
+@NgModule({
+  imports: [
+    CommonModule,
+    TranslateModule,
+    FlexLayoutModule,
+    ModuleComponentIconFirefly
+  ],
+  declarations: [ComponentLogo],
+  exports: [ComponentLogo]
 })
-export class ModuleComponentLogo { }
+export class ModuleComponentLogo {}

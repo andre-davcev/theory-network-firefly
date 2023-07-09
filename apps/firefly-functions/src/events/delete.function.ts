@@ -7,15 +7,12 @@ import { Collection } from '../shared';
 
 db();
 
-const EventsDelete: CloudFunction<DocumentSnapshot> =
-
-firestore.
-document(`${Collection.Events}/{id}`).
-onDelete(async(snapshot: DocumentSnapshot, context: EventContext) =>
-{
+const EventsDelete: CloudFunction<DocumentSnapshot> = firestore
+  .document(`${Collection.Events}/{id}`)
+  .onDelete(async (snapshot: DocumentSnapshot, context: EventContext) => {
     const bucketPath: string = `${Collection.Events}/${snapshot.id}/${ImageType.Image}.jpeg`;
 
     return ServiceStorage.delete(bucketPath);
-});
+  });
 
 export { EventsDelete };

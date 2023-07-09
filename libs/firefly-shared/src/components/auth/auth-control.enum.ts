@@ -1,5 +1,4 @@
-export enum AuthControl
-{
-    Id       = 'id',
-    Password = 'password'
+export enum AuthControl {
+  Id = 'id',
+  Password = 'password'
 }

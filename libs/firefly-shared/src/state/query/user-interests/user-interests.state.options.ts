@@ -7,29 +7,27 @@ import { StateUserInterestsModel } from './user-interests.state.model';
 import { InterestType } from '../../../enums';
 
 export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
-{
-    name : 'userInterests',
+  {
+    name: 'userInterests',
 
-    defaults :
-    {
-        pageSize:         PageSize.MobileCards,
-        orderBy:          'name',
-        orderByDirection: OrderBy.Ascending,
+    defaults: {
+      pageSize: PageSize.MobileCards,
+      orderBy: 'name',
+      orderByDirection: OrderBy.Ascending,
 
-        initialized:    false,
-        loading:        false,
-        finishedPaging: false,
+      initialized: false,
+      loading: false,
+      finishedPaging: false,
 
-        keys:           [],
-        snapshotLookup: {},
-        dataLookup:     {},
-        data:           [],
+      keys: [],
+      snapshotLookup: {},
+      dataLookup: {},
+      data: [],
 
-        filter :
-        {
-            type          : InterestType.Unsubscribed,
-            virtual       : false,
-            subscriptions : {}
-        }
+      filter: {
+        type: InterestType.Unsubscribed,
+        virtual: false,
+        subscriptions: {}
+      }
     }
-};
+  };

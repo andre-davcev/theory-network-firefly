@@ -1,7 +1,14 @@
 <ion-grid>
-    <ion-row>
-        <ion-col [size]="square ? 3 : 6" *ngFor="let url of urls; let i = index" (click)="click(i)">
-            <div class="cpt-image" [style.background-image]="'url(' + url + ')'"></div>
-        </ion-col>
-    </ion-row>
+  <ion-row>
+    <ion-col
+      [size]="square ? 3 : 6"
+      *ngFor="let url of urls; let i = index"
+      (click)="click(i)"
+    >
+      <div
+        class="cpt-image"
+        [style.background-image]="'url(' + url + ')'"
+      ></div>
+    </ion-col>
+  </ion-row>
 </ion-grid>

@@ -6,16 +6,14 @@ import { IonicModule } from '@ionic/angular';
 import { ModuleComponentButtonAction } from '../button-action';
 import { ComponentTutorial } from './tutorial.component';
 
-@NgModule
-({
-    imports:
-    [
-        CommonModule,
-        FlexLayoutModule,
-        IonicModule,
-        ModuleComponentButtonAction
-    ],
-    declarations: [ComponentTutorial],
-    exports: [ComponentTutorial]
+@NgModule({
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    IonicModule,
+    ModuleComponentButtonAction
+  ],
+  declarations: [ComponentTutorial],
+  exports: [ComponentTutorial]
 })
-export class ModuleComponentTutorial { }
+export class ModuleComponentTutorial {}

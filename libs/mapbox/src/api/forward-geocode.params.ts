@@ -1,8 +1,7 @@
-import { MapboxPlaceType } from '../enums'
+import { MapboxPlaceType } from '../enums';
 
-export interface ParamsForwardGeocode
-{
-    /*
+export interface ParamsForwardGeocode {
+  /*
       Specify whether to return autocomplete results (true, default) or not (false).
       When autocomplete is enabled, results will be included that start with the
       requested string, rather than just responses that match it exactly. For
@@ -16,32 +15,32 @@ export interface ParamsForwardGeocode
       specific number of characters are typed.
 
     */
-    autocomplete?: boolean;
+  autocomplete?: boolean;
 
-    /*
+  /*
       Limit results to only those contained within the supplied bounding box.
       Bounding boxes should be supplied as four numbers separated by commas,
       in minLon,minLat,maxLon,maxLat order. The bounding box cannot cross the
       180th meridian.
     */
-    bbox?: string;
+  bbox?: string;
 
-    /*
+  /*
       Limit results to one or more countries. Permitted values are ISO 3166
       alpha 2 country codes separated by commas.
     */
-    country?: string;
+  country?: string;
 
-    /*
+  /*
       Specify whether the Geocoding API should attempt approximate, as well
       as exact, matching when performing searches (true, default), or whether
       it should opt out of this behavior and only attempt exact matching (false).
       For example, the default setting might return Washington, DC for a query
       of wahsington, even though the query was misspelled.
     */
-    fuzzyMatch?: boolean;
+  fuzzyMatch?: boolean;
 
-    /*
+  /*
       Specify the user’s language. This parameter controls the language of the
       text supplied in responses, and also affects result scoring, with results
       matching the user’s query in the requested language being preferred over
@@ -59,21 +58,21 @@ export interface ParamsForwardGeocode
       For more information on which specific languages are supported, see the
       language coverage section.
     */
-    language?: string;
+  language?: string;
 
-    /*
+  /*
       Specify the maximum number of results to return. The default is 5 and the
       maximum supported is 10.
     */
-    limit?: number;
+  limit?: number;
 
-    /*
+  /*
       Bias the response to favor results that are closer to this location,
       provided as two comma-separated coordinates in longitude,latitude order.
     */
-    proximity?: string;
+  proximity?: string;
 
-    /*
+  /*
       Specify whether to request additional metadata about the recommended
       navigation destination corresponding to the feature (true) or not
       (false, default). Only applicable for address features.
@@ -86,9 +85,9 @@ export interface ParamsForwardGeocode
       routable point is not returned.
     */
 
-    routing?: boolean;
+  routing?: boolean;
 
-    /*
+  /*
       Filter results to include only a subset (one or more) of the available
       feature types. Options are country, region, postcode, district, place,
       locality, neighborhood, address, and poi. Multiple options can be
@@ -98,5 +97,5 @@ export interface ParamsForwardGeocode
 
       For more information on the available types, see the data types section.
     */
-    types?: Array<MapboxPlaceType>;
+  types?: Array<MapboxPlaceType>;
 }

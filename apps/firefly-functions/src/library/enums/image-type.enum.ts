@@ -1,5 +1,4 @@
-export enum ImageType
-{
-    Icon  = 'icon',
-    Image = 'image'
+export enum ImageType {
+  Icon = 'icon',
+  Image = 'image'
 }

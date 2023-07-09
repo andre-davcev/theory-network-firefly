@@ -14,25 +14,25 @@
 // element in the app.
 
 // Ionic (http://ionicframework.com/docs/theming)
-@import "~@ionic/angular/css/core.css";
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
 
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
 
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 // Mapbox
-@import "~mapbox-gl/dist/mapbox-gl.css";
+@import '~mapbox-gl/dist/mapbox-gl.css';
 @import '~@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 // Font Awesome
-@import "~font-awesome/css/font-awesome.min.css";
+@import '~font-awesome/css/font-awesome.min.css';
 
 @import url('https://fonts.googleapis.com/css?family=Acme|Open+Sans|Playfair+Display:400,500,600&display=swap');
 

@@ -14,6 +14,6 @@ import { AppRoutingModule } from './app.component.routing';
     NavComponentModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

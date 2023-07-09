@@ -1,53 +1,51 @@
 @use 'variables' as firefly;
 
 :host {
-    --background: #{firefly.$fire-color-transparent};
+  --background: #{firefly.$fire-color-transparent};
 
-    position: relative;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  background-color: firefly.$fire-color-grey-lightest;
+
+  .cpt-events {
     height: 100%;
     width: 100%;
+  }
 
-    background-color: firefly.$fire-color-grey-lightest;
+  ion-slides {
+    --background: #{firefly.$fire-color-transparent};
+    --bullet-background: #{firefly.$fire-color-black};
+    --bullet-background-active: #{firefly.$fire-color-dark};
 
-    .cpt-events
-    {
-        height: 100%;
-        width: 100%;
+    background-color: firefly.$fire-color-transparent;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 8px;
+
+    .swiper-pagination-bullets {
+      bottom: 14px;
     }
+  }
 
-    ion-slides {
-        --background: #{firefly.$fire-color-transparent};
-        --bullet-background: #{firefly.$fire-color-black};
-        --bullet-background-active: #{firefly.$fire-color-dark};
+  ion-slide {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding-top: 44px;
+    padding-bottom: 38px;
+  }
 
-        background-color: firefly.$fire-color-transparent;
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin-bottom: 8px;
+  ff-slide {
+    height: 100%;
+  }
 
-        .swiper-pagination-bullets
-        {
-            bottom: 14px;
-        }
-    }
-
-    ion-slide {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding-top: 44px;
-        padding-bottom: 38px;
-    }
-
-    ff-slide {
-        height: 100%;
-    }
-
-    .searchResults {
-        position: absolute;
-        z-index: 1;
-        width: 100%;
-        background-color: white;
-    }
+  .searchResults {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: white;
+  }
 }

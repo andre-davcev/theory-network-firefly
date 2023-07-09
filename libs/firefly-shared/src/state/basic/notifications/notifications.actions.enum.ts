@@ -1,4 +1,3 @@
-export enum ActionsNotifications
-{
-    NotificationsWatch = '[Notifications] Watch'
+export enum ActionsNotifications {
+  NotificationsWatch = '[Notifications] Watch'
 }

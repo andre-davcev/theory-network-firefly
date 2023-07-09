@@ -1,87 +1,126 @@
 @use 'variables' as firefly;
 
-:host
-{
-    --cpt-color: black;
+:host {
+  --cpt-color: black;
 
-    --cpt-font-size-tiny:   1rem;
-    --cpt-font-size-small:  2rem;
-    --cpt-font-size-medium: 2.4rem;
-    --cpt-font-size-large:  4rem;
-    --cpt-font-size-huge:   6rem;
+  --cpt-font-size-tiny: 1rem;
+  --cpt-font-size-small: 2rem;
+  --cpt-font-size-medium: 2.4rem;
+  --cpt-font-size-large: 4rem;
+  --cpt-font-size-huge: 6rem;
 
+  --cpt-font-size: var(--cpt-font-size-small);
+
+  &.cpt-size-tiny {
+    --cpt-font-size: var(--cpt-font-size-tiny);
+  }
+  &.cpt-size-small {
     --cpt-font-size: var(--cpt-font-size-small);
+  }
+  &.cpt-size-medium {
+    --cpt-font-size: var(--cpt-font-size-medium);
+  }
+  &.cpt-size-large {
+    --cpt-font-size: var(--cpt-font-size-large);
+  }
+  &.cpt-size-huge {
+    --cpt-font-size: var(--cpt-font-size-huge);
+  }
 
-    &.cpt-size-tiny   { --cpt-font-size: var(--cpt-font-size-tiny); }
-    &.cpt-size-small  { --cpt-font-size: var(--cpt-font-size-small); }
-    &.cpt-size-medium { --cpt-font-size: var(--cpt-font-size-medium); }
-    &.cpt-size-large  { --cpt-font-size: var(--cpt-font-size-large); }
-    &.cpt-size-huge   { --cpt-font-size: var(--cpt-font-size-huge); }
+  &.cpt-color-primary {
+    --cpt-color: #{firefly.$fire-color-primary};
+  }
+  &.cpt-color-secondary {
+    --cpt-color: #{firefly.$fire-color-accent};
+  }
+  &.cpt-color-white {
+    --cpt-color: #{firefly.$fire-color-white};
+  }
+  &.cpt-color-white-translucent {
+    --cpt-color: #{firefly.$fire-color-white-translucent};
+  }
+  &.cpt-color-black {
+    --cpt-color: #{firefly.$fire-color-black};
+  }
+  &.cpt-color-black-translucent {
+    --cpt-color: #{firefly.$fire-color-black-translucent};
+  }
+  &.cpt-color-dark {
+    --cpt-color: #{firefly.$fire-color-dark};
+  }
+  &.cpt-color-medium {
+    --cpt-color: #{firefly.$fire-color-grey-lightest};
+  }
 
-    &.cpt-color-primary             { --cpt-color: #{firefly.$fire-color-primary}; }
-    &.cpt-color-secondary           { --cpt-color: #{firefly.$fire-color-accent}; }
-    &.cpt-color-white               { --cpt-color: #{firefly.$fire-color-white}; }
-    &.cpt-color-white-translucent   { --cpt-color: #{firefly.$fire-color-white-translucent}; }
-    &.cpt-color-black               { --cpt-color: #{firefly.$fire-color-black}; }
-    &.cpt-color-black-translucent   { --cpt-color: #{firefly.$fire-color-black-translucent}; }
-    &.cpt-color-dark                { --cpt-color: #{firefly.$fire-color-dark}; }
-    &.cpt-color-medium              { --cpt-color: #{firefly.$fire-color-grey-lightest}; }
-
-    &.cpt-family-ionic
-    {
-        &.cpt-color-primary             { color: #{firefly.$fire-color-primary}; }
-        &.cpt-color-secondary           { color: #{firefly.$fire-color-accent}; }
-        &.cpt-color-white               { color: #{firefly.$fire-color-white}; }
-        &.cpt-color-white-translucent   { color: #{firefly.$fire-color-white-translucent}; }
-        &.cpt-color-black               { color: #{firefly.$fire-color-black}; }
-        &.cpt-color-black-translucent   { color: #{firefly.$fire-color-black-translucent}; }
-        &.cpt-color-dark                { color: #{firefly.$fire-color-dark}; }
-        &.cpt-color-medium              { color: #{firefly.$fire-color-grey-lightest}; }
+  &.cpt-family-ionic {
+    &.cpt-color-primary {
+      color: #{firefly.$fire-color-primary};
     }
+    &.cpt-color-secondary {
+      color: #{firefly.$fire-color-accent};
+    }
+    &.cpt-color-white {
+      color: #{firefly.$fire-color-white};
+    }
+    &.cpt-color-white-translucent {
+      color: #{firefly.$fire-color-white-translucent};
+    }
+    &.cpt-color-black {
+      color: #{firefly.$fire-color-black};
+    }
+    &.cpt-color-black-translucent {
+      color: #{firefly.$fire-color-black-translucent};
+    }
+    &.cpt-color-dark {
+      color: #{firefly.$fire-color-dark};
+    }
+    &.cpt-color-medium {
+      color: #{firefly.$fire-color-grey-lightest};
+    }
+  }
 
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+
+  &.cpt-visible {
+    opacity: 1;
+  }
+
+  .cpt-icon {
     position: relative;
-    display: inline-block;
-    opacity: 0;
+    font-family: #{firefly.$fire-font-firefly};
+    color: var(--cpt-color);
+    height: var(--cpt-font-size);
+    width: var(--cpt-font-size);
+    font-size: var(--cpt-font-size);
+    line-height: 1;
 
-    &.cpt-visible
-    {
-        opacity: 1;
+    &:before {
+      display: inline-block;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      text-rendering: auto;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: var(--cpt-font-family);
+      font-size: var(--cpt-font-size);
     }
+  }
 
-    .cpt-icon
-    {
-        position: relative;
-        font-family: #{firefly.$fire-font-firefly};
-        color: var(--cpt-color);
-        height: var(--cpt-font-size);
-        width: var(--cpt-font-size);
-        font-size: var(--cpt-font-size);
-        line-height: 1;
+  &.cpt-name-interests > .cpt-icon:before {
+    content: 'b';
+  }
 
-        &:before
-        {
-            display: inline-block;
-            font-style: normal;
-            font-weight: normal;
-            font-variant: normal;
-            text-transform: none;
-            text-rendering: auto;
-            line-height: 1;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            font-family: var(--cpt-font-family);
-            font-size: var(--cpt-font-size);
-        }
-    }
+  ion-icon {
+    position: relative;
+    font-size: var(--cpt-font-size);
+  }
 
-    &.cpt-name-interests > .cpt-icon:before { content: 'b'; }
-
-    ion-icon {
-        position: relative;
-        font-size: var(--cpt-font-size);
-    }
-
-    fa-icon {
-        position: relative;
-    }
+  fa-icon {
+    position: relative;
+  }
 }

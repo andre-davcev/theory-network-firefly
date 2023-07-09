@@ -1,10 +1,9 @@
-<div *ngIf="image"
-     class="cpt-image"
-     [style.background-image]="'url(' + image + ')'">
-</div>
+<div
+  *ngIf="image"
+  class="cpt-image"
+  [style.background-image]="'url(' + image + ')'"
+></div>
 
-<section fxLayout="column"
-         fxLayoutAlign="center center"
-         class="cpt-content">
-    <ng-content></ng-content>
+<section fxLayout="column" fxLayoutAlign="center center" class="cpt-content">
+  <ng-content></ng-content>
 </section>

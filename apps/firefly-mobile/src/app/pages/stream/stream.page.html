@@ -1,5 +1,5 @@
 <ion-content>
-<!--
+  <!--
   <ion-list class="searchResults">
     <ion-item lines="none" (click)="selectSearchInterest(searchResult)" *ngFor="let searchResult of searchResults$ | async"  >
       {{searchResult.name}}
@@ -7,102 +7,131 @@
   </ion-list>
 -->
   <ion-list (click)="resetSearchResults()" *ngIf="found$ | async">
-    <ion-item lines="none" *ngFor="let interest of data$ | async; let i = index">
-        <ion-card  elevation="1">
-            <img (click)="selectInterest(interest)" class="image-cnt" [src]="interest.metadata.image">
+    <ion-item
+      lines="none"
+      *ngFor="let interest of data$ | async; let i = index"
+    >
+      <ion-card elevation="1">
+        <img
+          (click)="selectInterest(interest)"
+          class="image-cnt"
+          [src]="interest.metadata.image"
+        />
 
-            <ion-card-header (click)="selectInterest(interest)">
-              <ion-card-title class="name">|{{ interest.name }}|</ion-card-title>
-              <ion-card-subtitle class="tagline">{{ interest.tagline }}</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content fxLayout="column"
-                              fxLayoutGap="10px">
-                <mat-accordion>
-                  <mat-expansion-panel  (opened)="setOpened(i, interest)"
-                  (closed)="setClosed(i)"  class="mat-elevation-z0" class="mat-elevation-z0">
-                    <mat-expansion-panel-header [expandedHeight]="'0px'" [collapsedHeight]="'20px'">
-                      <mat-panel-description  class="mat-expansion-panel-header-description">
-                      <!--span class="app-description"-->
-                        <div *ngIf="!currentlyOpenedItems[i]" class="app-description">{{ interest.description }} | {{ currentlyOpenedItemIndex === i ? 'Close' : 'Open' }}</div>
-                      <!--/!--span-->
-                    </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <span class="app-description">
-                      {{ interest.description }}
-                      <ion-spinner class="spinner" *ngIf="spinner[i]" name="crescent"></ion-spinner>
-                      <ion-list *ngFor="let event of interestEvents[i]">
-                        <ion-item (click)="select(event)">
-                          <ion-grid>
-                            <ion-row>
-                              <ion-col class="ion-align-self-center" size=3>
-                                <div>
-                                  <ion-avatar class="avatar" slot="start">
-                                    <img [src]="event.metadata.image">
-                                  </ion-avatar>
+        <ion-card-header (click)="selectInterest(interest)">
+          <ion-card-title class="name">|{{ interest.name }}|</ion-card-title>
+          <ion-card-subtitle class="tagline"
+            >{{ interest.tagline }}</ion-card-subtitle
+          >
+        </ion-card-header>
+        <ion-card-content fxLayout="column" fxLayoutGap="10px">
+          <mat-accordion>
+            <mat-expansion-panel
+              (opened)="setOpened(i, interest)"
+              (closed)="setClosed(i)"
+              class="mat-elevation-z0"
+              class="mat-elevation-z0"
+            >
+              <mat-expansion-panel-header
+                [expandedHeight]="'0px'"
+                [collapsedHeight]="'20px'"
+              >
+                <mat-panel-description
+                  class="mat-expansion-panel-header-description"
+                >
+                  <!--span class="app-description"-->
+                  <div *ngIf="!currentlyOpenedItems[i]" class="app-description">
+                    {{ interest.description }} | {{ currentlyOpenedItemIndex ===
+                    i ? 'Close' : 'Open' }}
+                  </div>
+                  <!--/!--span-->
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <span class="app-description">
+                {{ interest.description }}
+                <ion-spinner
+                  class="spinner"
+                  *ngIf="spinner[i]"
+                  name="crescent"
+                ></ion-spinner>
+                <ion-list *ngFor="let event of interestEvents[i]">
+                  <ion-item (click)="select(event)">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col class="ion-align-self-center" size="3">
+                          <div>
+                            <ion-avatar class="avatar" slot="start">
+                              <img [src]="event.metadata.image" />
+                            </ion-avatar>
+                          </div>
+                        </ion-col>
+                        <ion-col size="9">
+                          <ion-row>
+                            <ion-col class="ion-align-self-center">
+                              <div class="eventWrapper">
+                                <div class="eventInfo">
+                                  <h2>{{ event.name }}</h2>
+                                  <p>{{ event.tagline }}</p>
+                                  <hr size="1" noshade />
                                 </div>
-                              </ion-col>
-                              <ion-col size="9">
-                                <ion-row>
-                                  <ion-col class="ion-align-self-center">
-                                    <div class="eventWrapper">
-                                      <div class="eventInfo">
-                                        <h2>{{ event.name }}</h2>
-                                        <p>{{ event.tagline }}</p>
-                                        <hr  size="1" noshade>
-                                      </div>
-                                      <hr>
-                                    </div>
-                                  </ion-col>
-                                </ion-row>
-                                <ion-row>
-                                  <ion-col>
-                                    <div class="dateTimeOuterWrapper">
-                                      <div class="dateTimeWrapper">
-                                        <ion-label class="date">
-                                            {{ event.timeStart | timestamp: TimestampFormat.DateShort }}
-                                        </ion-label>
-                                        <ion-label  class="time" position="stacked">
-                                            {{ event.timeStart | timestamp: TimestampFormat.ShortTime }}
-                                        </ion-label>
-                                      </div>
-                                    </div>
-                                  </ion-col>
-                                </ion-row>
-                              </ion-col>
-                            </ion-row>
-                          </ion-grid>
-                        </ion-item>
-                      </ion-list>
-                    </span>
-                  </mat-expansion-panel>
-                </mat-accordion>
+                                <hr />
+                              </div>
+                            </ion-col>
+                          </ion-row>
+                          <ion-row>
+                            <ion-col>
+                              <div class="dateTimeOuterWrapper">
+                                <div class="dateTimeWrapper">
+                                  <ion-label class="date">
+                                    {{ event.timeStart | timestamp:
+                                    TimestampFormat.DateShort }}
+                                  </ion-label>
+                                  <ion-label class="time" position="stacked">
+                                    {{ event.timeStart | timestamp:
+                                    TimestampFormat.ShortTime }}
+                                  </ion-label>
+                                </div>
+                              </div>
+                            </ion-col>
+                          </ion-row>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-list>
+              </span>
+            </mat-expansion-panel>
+          </mat-accordion>
 
-                <ff-icon-subscribe [subscribed]="subscriptions[interest.id]"
-                                    [count]="interest.subscriberCount"
-                                    [on]="subscriptions[interest.id]?.on"
-                                    (clicked)="toggle($event, interest)"
-                                    (clickedOn)="toggleOn($event, interest)">
-                </ff-icon-subscribe>
-            </ion-card-content>
-          </ion-card>
+          <ff-icon-subscribe
+            [subscribed]="subscriptions[interest.id]"
+            [count]="interest.subscriberCount"
+            [on]="subscriptions[interest.id]?.on"
+            (clicked)="toggle($event, interest)"
+            (clickedOn)="toggleOn($event, interest)"
+          >
+          </ff-icon-subscribe>
+        </ion-card-content>
+      </ion-card>
     </ion-item>
   </ion-list>
 
-    <ff-button-add *ngIf="add$ | async"
-                    (clicked)="add()"
-                    slot="fixed">
-    </ff-button-add>
+  <ff-button-add *ngIf="add$ | async" (clicked)="add()" slot="fixed">
+  </ff-button-add>
 
-    <ff-icon-message *ngIf="empty$ | async"
-                      slot="fixed"
-                      [icon]="IconType.Stream"
-                      [message]="(emptyMessage$ | async) | translate">
-    </ff-icon-message>
+  <ff-icon-message
+    *ngIf="empty$ | async"
+    slot="fixed"
+    [icon]="IconType.Stream"
+    [message]="(emptyMessage$ | async) | translate"
+  >
+  </ff-icon-message>
 
-    <ion-infinite-scroll threshold="100px"
-                         (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles"
-                                     [loadingText]="'page.stream.loading' | translate">
-        </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      [loadingText]="'page.stream.loading' | translate"
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

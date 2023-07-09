@@ -1,18 +1,16 @@
 @use 'variables' as firefly;
 
-:host
-{
-    > section {
-        height: 100%;
-        background-color: #{firefly.$fire-color-dark-lighter};
-    }
+:host {
+  > section {
+    height: 100%;
+    background-color: #{firefly.$fire-color-dark-lighter};
+  }
 
-    .cpt-interests
-    {
-        margin-top: 5px;
-    }
+  .cpt-interests {
+    margin-top: 5px;
+  }
 
-    ion-col {
-        width: 90px;
-    }
+  ion-col {
+    width: 90px;
+  }
 }

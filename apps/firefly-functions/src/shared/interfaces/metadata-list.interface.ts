@@ -1,4 +1,3 @@
-export interface MetadataList
-{
-    index?: number;
+export interface MetadataList {
+  index?: number;
 }

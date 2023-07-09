@@ -1,5 +1,4 @@
-export enum InterestEvents
-{
-    Confirmed = 'events',
-    Pending   = 'eventsPending'
+export enum InterestEvents {
+  Confirmed = 'events',
+  Pending = 'eventsPending'
 }

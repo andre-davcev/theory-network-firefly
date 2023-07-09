@@ -1,5 +1,14 @@
-import { Change, firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { DocumentSnapshot, Firestore, WriteResult } from '@google-cloud/firestore';
+import {
+  Change,
+  firestore,
+  EventContext,
+  CloudFunction
+} from 'firebase-functions';
+import {
+  DocumentSnapshot,
+  Firestore,
+  WriteResult
+} from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
 import { config } from 'firebase-functions';
 import algoliasearch from 'algoliasearch';
@@ -13,31 +22,28 @@ const index = client.initIndex('events');
 
 const database: Firestore = db();
 
-const EventsUpdate : CloudFunction<Change<DocumentSnapshot>> =
+const EventsUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
+  .document(`${Collection.Events}/{id}`)
+  .onUpdate(
+    async (
+      change: Change<firestore.DocumentSnapshot>,
+      context: EventContext
+    ) => {
+      const before: Event = change.before.data() as Event;
+      const after: Event = change.after.data() as Event;
 
-firestore.
-document(`${Collection.Events}/{id}`).
-onUpdate(async(change: Change<firestore.DocumentSnapshot>, context: EventContext) =>
-{
-    const before: Event = change.before.data() as Event;
-    const after:  Event = change.after.data()  as Event;
+      const data = after;
+      const objectID = change.after.id;
 
-    const data = after
-    const objectID = change.after.id;
+      const promises: Array<Promise<WriteResult>> = [];
 
-    const promises: Array<Promise<WriteResult>> = [];
-
-    if (before.city.id !== after.city.id)
-    {
+      if (before.city.id !== after.city.id) {
         promises.push(ServiceCities.createCityIfNew(database, after));
         promises.push(ServiceCities.createStreamIfNew(database, after));
-    }
+      }
 
-    return Promise.all
-    ([
-        promises,
-        index.saveObject({ ...data, objectID})
-    ]);
-});
+      return Promise.all([promises, index.saveObject({ ...data, objectID })]);
+    }
+  );
 
 export { EventsUpdate };

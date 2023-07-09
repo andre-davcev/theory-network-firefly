@@ -3,12 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ComponentMapOrb } from './map-orb.component';
 
-@NgModule
-({
-    imports: [
-        CommonModule
-    ],
-    declarations: [ComponentMapOrb],
-    exports: [ComponentMapOrb]
+@NgModule({
+  imports: [CommonModule],
+  declarations: [ComponentMapOrb],
+  exports: [ComponentMapOrb]
 })
-export class ModuleComponentMapOrb { }
+export class ModuleComponentMapOrb {}

@@ -1,40 +1,40 @@
 <ion-header elevation="1">
-    <ion-toolbar color="light">
-        <ion-buttons slot="start">
-            <ion-button color="dark" (click)="done()">
-                {{ 'general.done' | translate }}
-            </ion-button>
-        </ion-buttons>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="done()">
+        {{ 'general.done' | translate }}
+      </ion-button>
+    </ion-buttons>
 
-        <ion-title color="dark">
-            {{ 'page.alerts.title' | translate }}
-        </ion-title>
-
-    </ion-toolbar>
+    <ion-title color="dark"> {{ 'page.alerts.title' | translate }} </ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<section class="cpt-events"
-         fxLayout="column"
-         fxLayoutAlign="center">
-    <ion-slides *ngIf="(didInit$ | async) && (exists$ | async)"
-                #slider
-                pager="true"
-                (ionSlideDidChange)="slideChanged()"
-                [options]="slideOptions">
-        <ion-slide #status *ngFor="let notification of data$ | async">
-            <ff-slide [slide]="notification"
-                        [deleteShow]="true"
-                        [buttonText]="'general.go' | translate"
-                        (alertDeleteClicked)="delete(notification)"
-                        (alertGoClicked)="go(notification)">
-            </ff-slide>
-        </ion-slide>
-    </ion-slides>
+<section class="cpt-events" fxLayout="column" fxLayoutAlign="center">
+  <ion-slides
+    *ngIf="(didInit$ | async) && (exists$ | async)"
+    #slider
+    pager="true"
+    (ionSlideDidChange)="slideChanged()"
+    [options]="slideOptions"
+  >
+    <ion-slide #status *ngFor="let notification of data$ | async">
+      <ff-slide
+        [slide]="notification"
+        [deleteShow]="true"
+        [buttonText]="'general.go' | translate"
+        (alertDeleteClicked)="delete(notification)"
+        (alertGoClicked)="go(notification)"
+      >
+      </ff-slide>
+    </ion-slide>
+  </ion-slides>
 
-    <ff-icon-message *ngIf="!(exists$ | async)"
-                      slot="fixed"
-                      [icon]="IconType.Alerts"
-                      [message]="'page.events.empty.new' | translate">
-    </ff-icon-message>
+  <ff-icon-message
+    *ngIf="!(exists$ | async)"
+    slot="fixed"
+    [icon]="IconType.Alerts"
+    [message]="'page.events.empty.new' | translate"
+  >
+  </ff-icon-message>
 </section>
-

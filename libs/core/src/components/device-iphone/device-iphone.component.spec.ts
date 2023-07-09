@@ -8,7 +8,7 @@ describe('HomeIconComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeIconComponent],
+      declarations: [HomeIconComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeIconComponent);

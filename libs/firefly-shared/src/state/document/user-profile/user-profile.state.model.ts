@@ -1,6 +1,3 @@
 import { StateDocumentModel } from '@theory/ngxs';
 
-export interface StateUserProfileModel extends StateDocumentModel
-{
-
-}
+export interface StateUserProfileModel extends StateDocumentModel {}

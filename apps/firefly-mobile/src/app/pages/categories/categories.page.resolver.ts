@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {
+  Resolve,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class ResolverPageCategories implements Resolve<boolean>
-{
-    constructor() {}
+export class ResolverPageCategories implements Resolve<boolean> {
+  constructor() {}
 
-    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>
-    {
-        return of(true);
-    }
+  public resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> {
+    return of(true);
+  }
 }

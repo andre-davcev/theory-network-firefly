@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { IonItemSliding } from '@ionic/angular';
 import { from } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
@@ -6,49 +12,39 @@ import { filter, tap } from 'rxjs/operators';
 import { TimestampFormat } from '@theory/firebase';
 import { Event, DateEvents } from '@firefly/cloud';
 
-@Component
-({
-    selector        : 'ff-item-events',
-    templateUrl     : './item-events.component.html',
-    styleUrls       : ['./item-events.component.scss'],
-    changeDetection : ChangeDetectionStrategy.OnPush
+@Component({
+  selector: 'ff-item-events',
+  templateUrl: './item-events.component.html',
+  styleUrls: ['./item-events.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComponentItemEvents
-{
-    @Input()
-    public dateEvents: DateEvents;
+export class ComponentItemEvents {
+  @Input()
+  public dateEvents: DateEvents;
 
-    @Input()
-    public showDelete: boolean = false;
+  @Input()
+  public showDelete: boolean = false;
 
-    @Output()
-    public selected: EventEmitter<Event> = new EventEmitter();
+  @Output()
+  public selected: EventEmitter<Event> = new EventEmitter();
 
-    @Output()
-    public deleted: EventEmitter<Event> = new EventEmitter();
+  @Output()
+  public deleted: EventEmitter<Event> = new EventEmitter();
 
-    public TimestampFormat: any = TimestampFormat;
+  public TimestampFormat: any = TimestampFormat;
 
-    public select(event: Event, sliding: IonItemSliding): void
-    {
-        from(sliding.closeOpened()).
-        pipe
-        (
-            filter((closed: boolean) =>
-                !closed
-            ),
-            tap(() =>
-                this.selected.next(event)
-            )
-        ).
-        subscribe()
+  public select(event: Event, sliding: IonItemSliding): void {
+    from(sliding.closeOpened())
+      .pipe(
+        filter((closed: boolean) => !closed),
+        tap(() => this.selected.next(event))
+      )
+      .subscribe();
+  }
+
+  public delete(event: Event): void {
+    if (!event.notifyComplete) {
+      this.deleted.next(event);
     }
-
-    public delete(event: Event): void
-    {
-        if (!event.notifyComplete)
-        {
-            this.deleted.next(event);
-        }
-    }
+  }
 }

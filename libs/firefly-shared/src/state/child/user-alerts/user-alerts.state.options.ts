@@ -7,38 +7,34 @@ import { TypeOf } from '@theory/core';
 import { StateUserAlertsModel } from './user-alerts.state.model';
 import { EventType } from '../../../enums';
 
-export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> =
-{
-    name : 'userAlerts',
+export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> = {
+  name: 'userAlerts',
 
-    defaults :
-    {
-        pageSize:         PageSize.Default,
-        orderBy:          'timeStart',
-        orderByDirection: OrderBy.Ascending,
+  defaults: {
+    pageSize: PageSize.Default,
+    orderBy: 'timeStart',
+    orderByDirection: OrderBy.Ascending,
 
-        initialized:    false,
-        loading:        false,
-        finishedPaging: false,
+    initialized: false,
+    loading: false,
+    finishedPaging: false,
 
-        snapshotLookup: {},
-        dataLookup:     {},
+    snapshotLookup: {},
+    dataLookup: {},
 
-        childLookup : {},
-        keys        : [],
-        id          : undefined,
-        data        : [],
+    childLookup: {},
+    keys: [],
+    id: undefined,
+    data: [],
 
-        sortFields:
-        {
-            name      : TypeOf.String,
-            timeStart : TypeOf.Timestamp
-        },
+    sortFields: {
+      name: TypeOf.String,
+      timeStart: TypeOf.Timestamp
+    },
 
-        filter :
-        {
-            type    : EventType.Upcoming,
-            virtual : false
-        }
+    filter: {
+      type: EventType.Upcoming,
+      virtual: false
     }
+  }
 };

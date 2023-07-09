@@ -1,9 +1,8 @@
-import { FormNgxs } from '../interfaces'
+import { FormNgxs } from '../interfaces';
 
-export const FormNgxsDefaults: FormNgxs =
-{
-    model  : {},
-    dirty  : false,
-    status : '',
-    errors : {}
-}
+export const FormNgxsDefaults: FormNgxs = {
+  model: {},
+  dirty: false,
+  status: '',
+  errors: {}
+};

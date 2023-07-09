@@ -1,23 +1,24 @@
-<div class="cpt-container"
-     fxLayout="row"
-     fxLayoutAlign="space-between center">
+<div class="cpt-container" fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutGap="0.25rem" fxLayoutAlign="start center">
+    <ion-icon
+      name="heart"
+      size="large"
+      [color]="subscribed ? 'secondary' : 'dark'"
+      (click)="toggle()"
+    >
+    </ion-icon>
 
-     <div fxLayout="row"
-          fxLayoutGap="0.25rem"
-          fxLayoutAlign="start center">
-        <ion-icon name="heart"
-                  size="large"
-                  [color]="subscribed ? 'secondary' : 'dark'"
-                  (click)="toggle()">
-        </ion-icon>
+    <span class="cpt-count"
+      >{{ count | number: '.0' }} {{ 'general.subscribers' | translate }}</span
+    >
+  </div>
 
-        <span class="cpt-count">{{ count | number: '.0' }} {{ 'general.subscribers' | translate }}</span>
-    </div>
-
-    <ion-toggle *ngIf="subscribed"
-                (ionChange)="toggleOn($event)"
-                [checked]="on"
-                color="primary"
-                fxFlexAlign="end">
-    </ion-toggle>
+  <ion-toggle
+    *ngIf="subscribed"
+    (ionChange)="toggleOn($event)"
+    [checked]="on"
+    color="primary"
+    fxFlexAlign="end"
+  >
+  </ion-toggle>
 </div>

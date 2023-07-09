@@ -1,17 +1,15 @@
-<section fxLayout="column"
-         fxLayoutAlign="center center"
-         [fxLayoutGap]="gap">
-    <div class="cpt-icon"
-         elevation="i-1,i1"
-         fxLayout="column"
-         fxLayoutAlign="center center">
-        <ff-icon [name]="icon"
-                  [size]="IconSize.Huge"
-                  [color]="iconColor">
-        </ff-icon>
-    </div>
+<section fxLayout="column" fxLayoutAlign="center center" [fxLayoutGap]="gap">
+  <div
+    class="cpt-icon"
+    elevation="i-1,i1"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <ff-icon [name]="icon" [size]="IconSize.Huge" [color]="iconColor">
+    </ff-icon>
+  </div>
 
-    <p class="cpt-message">
-        {{ message }}
-    </p>
+  <p class="cpt-message">
+    {{ message }}
+  </p>
 </section>

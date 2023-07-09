@@ -1,5 +1,4 @@
-export enum DataUri
-{
-    Png = 'data:image/png;base64,',
-    Jpg = 'data:image/jpeg;base64,'
+export enum DataUri {
+  Png = 'data:image/png;base64,',
+  Jpg = 'data:image/jpeg;base64,'
 }

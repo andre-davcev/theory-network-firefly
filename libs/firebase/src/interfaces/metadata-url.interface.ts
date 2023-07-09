@@ -1,6 +1,5 @@
-export interface MetadataUrl
-{
-    urlSmall?  : string;
-    urlMedium? : string;
-    urlLarge?  : string;
+export interface MetadataUrl {
+  urlSmall?: string;
+  urlMedium?: string;
+  urlLarge?: string;
 }

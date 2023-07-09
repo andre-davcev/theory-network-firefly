@@ -1,6 +1,14 @@
-import { UntypedFormGroup, UntypedFormBuilder, AbstractControl } from '@angular/forms';
+import {
+  UntypedFormGroup,
+  UntypedFormBuilder,
+  AbstractControl
+} from '@angular/forms';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, DocumentSnapshot } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  DocumentSnapshot
+} from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
 import { CoreEnum, CoreUtil } from '@theory/core';
@@ -9,89 +17,91 @@ import { FirebaseDocument } from '../interfaces';
 import { DocumentSnapshot as FirestoreDocumentSnapshot } from '../types';
 import { ServiceFirestoreBase } from './firestore-base.service';
 
-@Injectable({ providedIn: 'root'})
-export class ServiceFirestore<T extends FirebaseDocument>
-{
-    constructor
-    (
-        public firestore:   AngularFirestore,
-        public formBuilder: UntypedFormBuilder
-    ) { }
+@Injectable({ providedIn: 'root' })
+export class ServiceFirestore<T extends FirebaseDocument> {
+  constructor(
+    public firestore: AngularFirestore,
+    public formBuilder: UntypedFormBuilder
+  ) {}
 
-    public collection(collection: string): AngularFirestoreCollection<T>
-    {
-        return ServiceFirestoreBase.collection<T>(this.firestore, collection);
-    }
+  public collection(collection: string): AngularFirestoreCollection<T> {
+    return ServiceFirestoreBase.collection<T>(this.firestore, collection);
+  }
 
-    public documentGet(collection: string, id: string): Observable<FirestoreDocumentSnapshot>
-    {
-        return ServiceFirestoreBase.documentGet<T>(this.firestore, collection, id);
-    }
+  public documentGet(
+    collection: string,
+    id: string
+  ): Observable<FirestoreDocumentSnapshot> {
+    return ServiceFirestoreBase.documentGet<T>(this.firestore, collection, id);
+  }
 
-    public documentWatch<T>(collection: string, id: string): Observable<DocumentSnapshot<T>>
-    {
-        return ServiceFirestoreBase.documentWatch<T>(this.firestore, collection, id);
-    }
+  public documentWatch<T>(
+    collection: string,
+    id: string
+  ): Observable<DocumentSnapshot<T>> {
+    return ServiceFirestoreBase.documentWatch<T>(
+      this.firestore,
+      collection,
+      id
+    );
+  }
 
-    public documentCreate(collection: string, entity: T): Observable<FirestoreDocumentSnapshot>
-    {
-        return ServiceFirestoreBase.documentCreate<T>(this.firestore, collection, entity);
-    }
+  public documentCreate(
+    collection: string,
+    entity: T
+  ): Observable<FirestoreDocumentSnapshot> {
+    return ServiceFirestoreBase.documentCreate<T>(
+      this.firestore,
+      collection,
+      entity
+    );
+  }
 
-    public documentUpdate(snapshot: FirestoreDocumentSnapshot, object: Partial<T>)
-    {
-        return ServiceFirestoreBase.documentUpdate<T>(snapshot, object);
-    }
+  public documentUpdate(
+    snapshot: FirestoreDocumentSnapshot,
+    object: Partial<T>
+  ) {
+    return ServiceFirestoreBase.documentUpdate<T>(snapshot, object);
+  }
 
-    public documentDelete(snapshot: FirestoreDocumentSnapshot): Observable<void>
-    {
-        return ServiceFirestoreBase.documentDelete(snapshot);
-    }
+  public documentDelete(snapshot: FirestoreDocumentSnapshot): Observable<void> {
+    return ServiceFirestoreBase.documentDelete(snapshot);
+  }
 
-    public formPatch(form: UntypedFormGroup, key: string, value: any): void
-    {
-        form.controls[key].patchValue(value);
-    }
+  public formPatch(form: UntypedFormGroup, key: string, value: any): void {
+    form.controls[key].patchValue(value);
+  }
 
-    public formFieldsChanged(form: UntypedFormGroup): Partial<T>
-    {
-        const data: Partial<T> = {};
+  public formFieldsChanged(form: UntypedFormGroup): Partial<T> {
+    const data: Partial<T> = {};
 
-        const controls: Record<string, AbstractControl> = form.controls;
+    const controls: Record<string, AbstractControl> = form.controls;
 
-        Object.
-            keys(controls).
-            filter((key: string) =>
-                controls[key].dirty && controls[key].valid
-            ).
-            forEach((key: string) =>
-                data[key] = controls[key].value
-            );
+    Object.keys(controls)
+      .filter((key: string) => controls[key].dirty && controls[key].valid)
+      .forEach((key: string) => (data[key] = controls[key].value));
 
-        return data;
-    }
+    return data;
+  }
 
-    public formCreate(controlsConfig: Record<string, any>): UntypedFormGroup
-    {
-        controlsConfig.metadata = controlsConfig.metadata == null ? {} : controlsConfig.metadata;
+  public formCreate(controlsConfig: Record<string, any>): UntypedFormGroup {
+    controlsConfig.metadata =
+      controlsConfig.metadata == null ? {} : controlsConfig.metadata;
 
-        return this.formBuilder.group(controlsConfig);
-    }
+    return this.formBuilder.group(controlsConfig);
+  }
 
-    public formDataNew(userId: string, defaults: T): T
-    {
-        const object: T =
-        {
-            ...CoreUtil.clone<T>(defaults),
-            id: CoreEnum.IdNew,
-            userId
-        };
+  public formDataNew(userId: string, defaults: T): T {
+    const object: T = {
+      ...CoreUtil.clone<T>(defaults),
+      id: CoreEnum.IdNew,
+      userId
+    };
 
-        return object;
-    }
+    return object;
+  }
 
-    public createId(): string
-    {
-        return this.firestore.createId();
-    }
+  public createId(): string {
+    return this.firestore.createId();
+  }
 }

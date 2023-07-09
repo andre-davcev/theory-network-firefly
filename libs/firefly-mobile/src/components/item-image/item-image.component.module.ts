@@ -4,15 +4,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ComponentItemImage } from './item-image.component';
 
-@NgModule
-({
-    imports :
-    [
-        CommonModule,
-        FlexLayoutModule
-    ],
+@NgModule({
+  imports: [CommonModule, FlexLayoutModule],
 
-    declarations : [ComponentItemImage],
-    exports      : [ComponentItemImage]
+  declarations: [ComponentItemImage],
+  exports: [ComponentItemImage]
 })
-export class ModuleComponentItemImage { }
+export class ModuleComponentItemImage {}

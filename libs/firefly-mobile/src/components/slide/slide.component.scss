@@ -2,101 +2,93 @@
 
 $cpt-slide-padding: 30px;
 
-:host
-{
-    --cpt-border-radius: 12px;
+:host {
+  --cpt-border-radius: 12px;
 
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 28px;
+  margin-top: 0;
+  background-color: white;
+  box-shadow: 0 15px 25px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 14px;
+  padding: $cpt-slide-padding;
+  padding-top: $cpt-slide-padding + 8px;
+  padding-bottom: $cpt-slide-padding + 10px;
+
+  .cpt-card {
     position: relative;
-    display: flex;
+    height: 100%;
     width: 100%;
-    margin: 28px;
-    margin-top: 0;
-    background-color: white;
-    box-shadow: 0 15px 25px 0 rgba(0,0,0,0.20);
-    border-radius: 14px;
-    padding: $cpt-slide-padding;
-    padding-top: $cpt-slide-padding + 8px;
-    padding-bottom: $cpt-slide-padding + 10px;
+  }
 
-    .cpt-card
-    {
-        position: relative;
-        height: 100%;
-        width: 100%;
-    }
+  .cpt-title {
+    margin: 0;
+    line-height: 26px;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.7);
+  }
 
-    .cpt-title
-    {
-        margin: 0;
-        line-height: 26px;
-        font-size: 20px;
-        font-weight: 400;
-        text-transform: uppercase;
-        color: rgba(0, 0, 0, 0.7);
-    }
+  .cpt-short {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: rgba(0, 0, 0, 0.54);
+  }
 
-    .cpt-short
-    {
-        margin: 0;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 21px;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        color: rgba(0, 0, 0, 0.54);
-    }
+  .cpt-paragraph {
+    margin: 0;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(0, 0, 0, 0.54);
+  }
 
-    .cpt-paragraph
-    {
-        margin: 0;
-        font-size: 14px;
-        line-height: 17px;
-        color: rgba(0, 0, 0, 0.54);
-    }
+  .cnt-image {
+    flex: 1;
+    height: 100%;
+  }
 
-    .cnt-image
-    {
-      flex: 1;
-      height: 100%;
-    }
+  .cpt-image {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    background-size: cover;
+    object-fit: cover;
 
-    .cpt-image
-    {
-      position: relative;
-      width: 100%;
-        flex: 1;
-      background-size: cover;
-      object-fit: cover;
+    border-radius: var(--cpt-image-border-radius);
+    flex: 1;
+    width: 100%;
+    background-size: cover;
+    //object-fit: cover;
+    //max-height: 318px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--cpt-border-radius);
+  }
 
-      border-radius: var(--cpt-image-border-radius);
-        flex: 1;
-        width: 100%;
-        background-size: cover;
-        //object-fit: cover;
-        //max-height: 318px;
-        height: 100%;
-        object-fit: cover;
-        border-radius: var(--cpt-border-radius);
-    }
+  .cpt-date {
+    display: block;
+    overflow: hidden;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 15px;
+    line-height: 1em;
+  }
 
-    .cpt-date
-    {
-        display: block;
-        overflow: hidden;
-        color: rgba(0, 0, 0, 0.54);
-        font-size: 15px;
-        line-height: 1em;
-    }
+  ion-button {
+    --background-active: #{firefly.$fire-color-transparent};
+    --padding-start: 0;
+    --padding-end: 0;
 
-    ion-button {
-        --background-active: #{firefly.$fire-color-transparent};
-        --padding-start: 0;
-        --padding-end: 0;
-
-        position: absolute;
-        right: $cpt-slide-padding - 7px;
-        bottom: $cpt-slide-padding - 4px;
-    }
+    position: absolute;
+    right: $cpt-slide-padding - 7px;
+    bottom: $cpt-slide-padding - 4px;
+  }
 }

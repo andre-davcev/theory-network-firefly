@@ -8,9 +8,8 @@ describe('ComponentMapOrb', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComponentMapOrb ]
-    })
-    .compileComponents();
+      declarations: [ComponentMapOrb]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

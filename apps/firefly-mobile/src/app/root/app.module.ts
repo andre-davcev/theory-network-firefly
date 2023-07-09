@@ -8,21 +8,19 @@ import { ComponentApp } from './app.component';
 import { CoreModule, ModulePage } from '../modules';
 import { ModulePageLogin } from '../pages';
 
-@NgModule
-({
-    imports :
-    [
-        CoreModule,
-        BrowserAnimationsModule,
+@NgModule({
+  imports: [
+    CoreModule,
+    BrowserAnimationsModule,
 
-        ModulePage,
-        ModuleRoutingApp,
-        ModuleComponentIcon,
-        ModulePageLogin
-    ],
+    ModulePage,
+    ModuleRoutingApp,
+    ModuleComponentIcon,
+    ModulePageLogin
+  ],
 
-    declarations : [ComponentApp],
+  declarations: [ComponentApp],
 
-    bootstrap: [ComponentApp]
+  bootstrap: [ComponentApp]
 })
-export class AppModule { }
+export class AppModule {}

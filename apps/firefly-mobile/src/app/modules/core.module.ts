@@ -21,7 +21,7 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 import { MapboxEnvironment } from '@theory/mapbox';
-import { FirebaseEnvironment, StateStorage  } from '@theory/firebase';
+import { FirebaseEnvironment, StateStorage } from '@theory/firebase';
 import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
 import {
   StateUser,
@@ -33,96 +33,96 @@ import {
   StateUserEvents,
   StateCityStream,
   StateUserSubscriptions,
-  StateUserProfile, StateCity, StateApp, StateAlerts, StateInterests, StateCalendar,
-  StateNotifications, StateSearch
+  StateUserProfile,
+  StateCity,
+  StateApp,
+  StateAlerts,
+  StateInterests,
+  StateCalendar,
+  StateNotifications,
+  StateSearch
 } from '@firefly/shared';
 import { StateMobile } from '@firefly/mobile';
 
 import { environment } from '../../environments/environment';
 
-export function createTranslateLoader(http: HttpClient)
-{
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-@NgModule
-({
-    imports :
-    [
-        RouterModule,
-        ReactiveFormsModule,
+@NgModule({
+  imports: [
+    RouterModule,
+    ReactiveFormsModule,
 
-        BrowserModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
 
-        TranslateModule.forRoot
-        ({
-            defaultLanguage: 'en',
-            loader:
-            {
-                provide:    TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps:       [HttpClient]
-            }
-        }),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
 
-        IonicModule.forRoot
-        ({
-            swipeBackEnabled: false,
-            scrollAssist:     true,
-            scrollPadding:    true
-        }),
+    IonicModule.forRoot({
+      swipeBackEnabled: false,
+      scrollAssist: true,
+      scrollPadding: true
+    }),
 
-        AngularFireModule.initializeApp(environment.apis.firebase),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.apis.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
 
-        NgxsModule.forRoot
-        ([
-            StateDevice,
-            StateLocation,
-            StateLanguage,
-            StateMobile,
-            StateNotifications,
-            StateSearch,
-            StateStorage,
+    NgxsModule.forRoot([
+      StateDevice,
+      StateLocation,
+      StateLanguage,
+      StateMobile,
+      StateNotifications,
+      StateSearch,
+      StateStorage,
 
-            StateInterest,
-            StateEvent,
-            StateApp,
-            StateSubscription,
-            StateUser,
-            StateCity,
-            StateUserAlerts,
-            StateUserInterests,
-            StateUserEvents,
-            StateCityStream,
-            StateUserSubscriptions,
-            StateUserProfile,
+      StateInterest,
+      StateEvent,
+      StateApp,
+      StateSubscription,
+      StateUser,
+      StateCity,
+      StateUserAlerts,
+      StateUserInterests,
+      StateUserEvents,
+      StateCityStream,
+      StateUserSubscriptions,
+      StateUserProfile,
 
-            StateAlerts,
-            StateCalendar,
-            StateInterests
-        ]),
+      StateAlerts,
+      StateCalendar,
+      StateInterests
+    ]),
 
-        NgxsRouterPluginModule.forRoot(),
-        NgxsFormPluginModule.forRoot(),
-        NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
-        // NgxsLoggerPluginModule.forRoot(),
+    NgxsRouterPluginModule.forRoot(),
+    NgxsFormPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
+    // NgxsLoggerPluginModule.forRoot(),
 
-        NgxMapboxGLModule.withConfig({accessToken: environment.apis.mapbox.accessToken})
-    ],
+    NgxMapboxGLModule.withConfig({
+      accessToken: environment.apis.mapbox.accessToken
+    })
+  ],
 
-    providers :
-    [
-        { provide: RouteReuseStrategy,  useClass: IonicRouteStrategy },
-        { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
-        { provide: MapboxEnvironment,   useValue: environment.apis.mapbox },
-        Calendar,
-        CallNumber,
-        // { provide: ErrorHandler,       useClass: ErrorHandlerApp }
-    ]
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
+    { provide: MapboxEnvironment, useValue: environment.apis.mapbox },
+    Calendar,
+    CallNumber
+    // { provide: ErrorHandler,       useClass: ErrorHandlerApp }
+  ]
 })
-export class CoreModule { }
+export class CoreModule {}

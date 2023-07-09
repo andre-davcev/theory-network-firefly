@@ -3,12 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ComponentMapPin } from './map-pin.component';
 
-@NgModule
-({
-    imports: [
-        CommonModule
-    ],
-    declarations: [ComponentMapPin],
-    exports: [ComponentMapPin]
+@NgModule({
+  imports: [CommonModule],
+  declarations: [ComponentMapPin],
+  exports: [ComponentMapPin]
 })
-export class ModuleComponentMapPin { }
+export class ModuleComponentMapPin {}

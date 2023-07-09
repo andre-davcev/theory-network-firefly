@@ -1,60 +1,59 @@
 @use 'variables' as firefly;
 
 ion-toolbar {
-    --border-width: 0;
-    --min-height: 56px;
+  --border-width: 0;
+  --min-height: 56px;
 }
 
 ion-app {
-    ion-picker {
-        --ion-color-primary: #{firefly.$fire-color-black};
+  ion-picker {
+    --ion-color-primary: #{firefly.$fire-color-black};
+  }
+
+  ion-loading {
+    &.cpt-loading {
+      --background: #{firefly.$fire-color-transparent};
+
+      .loading-wrapper {
+        box-shadow: none;
+      }
+
+      ion-spinner {
+        --spinner-color: #{firefly.$fire-color-white};
+        transform: scale(2);
+      }
     }
-
-    ion-loading {
-        &.cpt-loading {
-            --background: #{firefly.$fire-color-transparent};
-
-            .loading-wrapper {
-                box-shadow: none;
-            }
-
-            ion-spinner {
-                --spinner-color: #{firefly.$fire-color-white};
-                transform: scale(2);
-            }
-        }
-    }
+  }
 }
 
 ion-item {
-    ion-icon {
-        color: #{firefly.$fire-color-grey-lighter};
-    }
+  ion-icon {
+    color: #{firefly.$fire-color-grey-lighter};
+  }
 }
 
 ion-action-sheet {
-  --ion-color-primary: var( --ion-color-dark);
+  --ion-color-primary: var(--ion-color-dark);
 }
 
 ion-toast {
-    --background: #{firefly.$fire-color-dark};
-    --color: #{firefly.$fire-color-white};
-    --box-shadow: rgba(0, 0, 0, 0.37) 0px 1px 4px 0px;
+  --background: #{firefly.$fire-color-dark};
+  --color: #{firefly.$fire-color-white};
+  --box-shadow: rgba(0, 0, 0, 0.37) 0px 1px 4px 0px;
 }
 
 ion-modal {
-    --background: #{firefly.$fire-color-dark};
+  --background: #{firefly.$fire-color-dark};
 }
 
 :root {
   ion-popover {
-      --width: calc(100% - 1.5rem);
+    --width: calc(100% - 1.5rem);
   }
 }
 
 .alert-button-group {
-    .alert-button {
-      color: #{firefly.$fire-color-dark};
-    }
+  .alert-button {
+    color: #{firefly.$fire-color-dark};
+  }
 }
-

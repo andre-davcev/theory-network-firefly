@@ -1,29 +1,30 @@
-<div class="cpt-card"
-     fxLayout="column"
-     fxLayoutAlign="start center"
-     fxLayoutGap="1.25rem">
-    <section fxLayout="column"
-             fxLayoutGap="0.5rem">
-        <h1 class="cpt-title">{{ slide.name }}</h1>
-        <h2 class="cpt-short">{{ slide.description }}</h2>
-    </section>
+<div
+  class="cpt-card"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="1.25rem"
+>
+  <section fxLayout="column" fxLayoutGap="0.5rem">
+    <h1 class="cpt-title">{{ slide.name }}</h1>
+    <h2 class="cpt-short">{{ slide.description }}</h2>
+  </section>
 
-    <div class="cpt-image"
-         [style.background-image]="'url(' + slide.metadata.image + ')'">
-    </div>
+  <div
+    class="cpt-image"
+    [style.background-image]="'url(' + slide.metadata.image + ')'"
+  ></div>
 
-    <ff-button-action [text]="'general.go' | translate"
-                       (click)="clickedAlertGo()">
-    </ff-button-action>
+  <ff-button-action
+    [text]="'general.go' | translate"
+    (click)="clickedAlertGo()"
+  >
+  </ff-button-action>
 
-    <span class="cpt-date">{{ slide.timeStart | timestamp: TimestampFormat.Short }}</span>
+  <span class="cpt-date">{{
+    slide.timeStart | timestamp: TimestampFormat.Short
+  }}</span>
 </div>
 
-<ion-button *ngIf="deleteShow"
-            fill="clear"
-            (click)="clickedAlertDelete()">
-    <ion-icon name="trash"
-              color="tertiary"
-              size="large">
-    </ion-icon>
+<ion-button *ngIf="deleteShow" fill="clear" (click)="clickedAlertDelete()">
+  <ion-icon name="trash" color="tertiary" size="large"> </ion-icon>
 </ion-button>

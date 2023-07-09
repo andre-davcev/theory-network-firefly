@@ -1,39 +1,37 @@
 @use 'variables' as firefly;
 
-:host
-{
-      .ios {
-          ion-list {
-              margin-top: 46px;
-          }
-    }
-
-    .md {
-        ff-icon {
-            margin-right: 22px;
-        }
-    }
-
-    ion-menu {
-        --background: #{firefly.$fire-color-dark};
-        --max-width: 210px;
-    }
-
-    ion-item {
-        --color: #{firefly.$fire-color-primary};
-        cursor: pointer;
-
-        &.cpt-selected
-        {
-            --background: #{firefly.$fire-color-dark-lighter};
-        }
-
-        ff-icon {
-            margin-right: 1rem;
-        }
-    }
-
+:host {
+  .ios {
     ion-list {
-        --ion-item-background: #{firefly.$fire-color-dark};
+      margin-top: 46px;
     }
+  }
+
+  .md {
+    ff-icon {
+      margin-right: 22px;
+    }
+  }
+
+  ion-menu {
+    --background: #{firefly.$fire-color-dark};
+    --max-width: 210px;
+  }
+
+  ion-item {
+    --color: #{firefly.$fire-color-primary};
+    cursor: pointer;
+
+    &.cpt-selected {
+      --background: #{firefly.$fire-color-dark-lighter};
+    }
+
+    ff-icon {
+      margin-right: 1rem;
+    }
+  }
+
+  ion-list {
+    --ion-item-background: #{firefly.$fire-color-dark};
+  }
 }

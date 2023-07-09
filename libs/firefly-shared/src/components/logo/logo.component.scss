@@ -1,36 +1,33 @@
+$cpt-tagline-color: white;
+$cpt-tagline-font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light',
+  'Helvetica Neue', Helvetica, Arial, sans-serif;
+$cpt-tagline-font-size: 12px;
+$cpt-tagline-text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.28);
 
-$cpt-tagline-color:               white;
-$cpt-tagline-font-family:           "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$cpt-tagline-font-size:             12px;
-$cpt-tagline-text-shadow:           0px 2px 3px rgba(0, 0, 0, 0.28);
+:host {
+  width: 100%;
+  transform: translate3d(0, 0, 0);
 
-:host
-{
+  .cpt-title {
+    position: relative;
+    position: relative;
+    display: block;
+    margin-top: 18px;
+
     width: 100%;
-    transform: translate3d(0, 0, 0);
+  }
 
-    .cpt-title
-    {
-        position: relative;
-        position: relative;
-        display: block;
-        margin-top: 18px;
+  .cpt-tagline {
+    position: relative;
+    display: block;
+    margin-top: 8px;
+    line-height: 1em;
+    text-align: center;
+    letter-spacing: 1px;
 
-        width: 100%;
-    }
-
-    .cpt-tagline
-    {
-        position: relative;
-        display: block;
-        margin-top: 8px;
-        line-height: 1em;
-        text-align: center;
-        letter-spacing: 1px;
-
-        color: $cpt-tagline-color;
-        font-family: $cpt-tagline-font-family;
-        font-size: $cpt-tagline-font-size;
-        text-shadow: $cpt-tagline-text-shadow;
-    }
+    color: $cpt-tagline-color;
+    font-family: $cpt-tagline-font-family;
+    font-size: $cpt-tagline-font-size;
+    text-shadow: $cpt-tagline-text-shadow;
+  }
 }

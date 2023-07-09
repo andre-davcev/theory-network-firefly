@@ -1,5 +1,4 @@
-export enum PlaceType
-{
-    Physical = 'physical',
-    Virtual  = 'virtual'
-};
+export enum PlaceType {
+  Physical = 'physical',
+  Virtual = 'virtual'
+}

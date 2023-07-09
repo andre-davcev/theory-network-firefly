@@ -1,16 +1,14 @@
-@use "variables" as firefly;
+@use 'variables' as firefly;
 
-:host
-{
-    section
-    {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: firefly.$fire-color-dark;
-        padding-left: 3rem;
-        padding-right: 3rem;
-    }
+:host {
+  section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: firefly.$fire-color-dark;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 }

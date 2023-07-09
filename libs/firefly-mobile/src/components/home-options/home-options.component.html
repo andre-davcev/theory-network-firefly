@@ -1,22 +1,39 @@
-<section fxLayout="column"
-          fxLayoutGap="1rem">
-    <ion-segment *ngIf="isStream"
-                mode="ios"
-                [value]="interestType"
-                (ionChange)="filterChanged($event)">
-        <ion-segment-button [value]="InterestType.Unsubscribed">{{ 'page.interest.filter.unsubscribed' | translate }}</ion-segment-button>
-        <ion-segment-button [value]="InterestType.Subscribed">{{ 'page.interest.filter.subscribed' | translate }}</ion-segment-button>
-        <ion-segment-button [value]="InterestType.Created" *ngIf="isPublisher$ | async">{{ 'page.interest.filter.created' | translate }}</ion-segment-button>
-    </ion-segment>
+<section fxLayout="column" fxLayoutGap="1rem">
+  <ion-segment
+    *ngIf="isStream"
+    mode="ios"
+    [value]="interestType"
+    (ionChange)="filterChanged($event)"
+  >
+    <ion-segment-button [value]="InterestType.Unsubscribed">{{
+      'page.interest.filter.unsubscribed' | translate
+    }}</ion-segment-button>
+    <ion-segment-button [value]="InterestType.Subscribed">{{
+      'page.interest.filter.subscribed' | translate
+    }}</ion-segment-button>
+    <ion-segment-button
+      [value]="InterestType.Created"
+      *ngIf="isPublisher$ | async"
+      >{{ 'page.interest.filter.created' | translate }}</ion-segment-button
+    >
+  </ion-segment>
 
-    <ion-segment *ngIf="!isStream"
-                mode="ios"
-                [value]="eventType"
-                (ionChange)="filterChanged($event)">
-        <ion-segment-button [value]="EventType.Upcoming">{{ 'page.event.filter.upcoming' | translate }}</ion-segment-button>
-        <ion-segment-button [value]="EventType.Created" *ngIf="isPublisher$ | async">{{ 'page.event.filter.created' | translate }}</ion-segment-button>
-    </ion-segment>
-<!--
+  <ion-segment
+    *ngIf="!isStream"
+    mode="ios"
+    [value]="eventType"
+    (ionChange)="filterChanged($event)"
+  >
+    <ion-segment-button [value]="EventType.Upcoming">{{
+      'page.event.filter.upcoming' | translate
+    }}</ion-segment-button>
+    <ion-segment-button
+      [value]="EventType.Created"
+      *ngIf="isPublisher$ | async"
+      >{{ 'page.event.filter.created' | translate }}</ion-segment-button
+    >
+  </ion-segment>
+  <!--
     <section fxLayout="row"
              fxLayoutGap="1rem"
              fxLayoutAlign="center center">
@@ -26,5 +43,4 @@
                     (ionChange)="virtualChanged($event)">
         </ion-toggle>
     </section>
--->
-</section>
+--></section>

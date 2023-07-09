@@ -8,9 +8,8 @@ describe('ComponentIconSubscribe', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComponentIconSubscribe ]
-    })
-    .compileComponents();
+      declarations: [ComponentIconSubscribe]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

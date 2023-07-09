@@ -1,67 +1,91 @@
 <ion-header elevation="1">
-    <ion-toolbar color="dark">
-        <ion-title color="primary">{{ 'page.publisher.title' | translate}}</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title color="primary"
+      >{{ 'page.publisher.title' | translate}}</ion-title
+    >
 
-        <ion-buttons slot="end">
-            <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
-                <ff-icon [name]="IconType.Menu"
-                          [color]="Color.Primary">
-                </ff-icon>
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+        <ff-icon [name]="IconType.Menu" [color]="Color.Primary"> </ff-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<section fxLayout="row"
-          fxLayoutAlign="center center">
-    <ion-card elevation="1"
-              color="dark">
-        <ion-card-content>
-            <ion-grid>
-                <ion-row>
-                    <ion-col (click)="navigate(Pages.AssetsInterests)">
-                        <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
-                            <ff-icon [name]="IconType.Interests"
-                                      [size]="IconSize.Large"
-                                      [color]="Color.Primary">
-                            </ff-icon>
-                            <ion-label class="cpt-interests">{{ 'general.interests' | translate }}</ion-label>
-                        </section>
-                    </ion-col>
+<section fxLayout="row" fxLayoutAlign="center center">
+  <ion-card elevation="1" color="dark">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col (click)="navigate(Pages.AssetsInterests)">
+            <section
+              fxLayout="column"
+              fxLayoutGap="4px"
+              fxLayoutAlign="start center"
+            >
+              <ff-icon
+                [name]="IconType.Interests"
+                [size]="IconSize.Large"
+                [color]="Color.Primary"
+              >
+              </ff-icon>
+              <ion-label class="cpt-interests"
+                >{{ 'general.interests' | translate }}</ion-label
+              >
+            </section>
+          </ion-col>
 
-                    <ion-col (click)="navigate(Pages.AssetsEvents)">
-                        <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
-                            <ff-icon [name]="IconType.Events"
-                                      [size]="IconSize.Large"
-                                      [color]="Color.Primary">
-                            </ff-icon>
-                            <ion-label>{{ 'general.events' | translate }}</ion-label>
-                        </section>
-                    </ion-col>
-                </ion-row>
+          <ion-col (click)="navigate(Pages.AssetsEvents)">
+            <section
+              fxLayout="column"
+              fxLayoutGap="4px"
+              fxLayoutAlign="start center"
+            >
+              <ff-icon
+                [name]="IconType.Events"
+                [size]="IconSize.Large"
+                [color]="Color.Primary"
+              >
+              </ff-icon>
+              <ion-label>{{ 'general.events' | translate }}</ion-label>
+            </section>
+          </ion-col>
+        </ion-row>
 
-                <ion-row>
-                    <ion-col (click)="navigate(Pages.AssetsIcons)">
-                        <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
-                            <ff-icon [name]="IconType.Icons"
-                                      [size]="IconSize.Large"
-                                      [color]="Color.Primary">
-                            </ff-icon>
-                            <ion-label>{{ 'general.icons' | translate }}</ion-label>
-                        </section>
-                    </ion-col>
+        <ion-row>
+          <ion-col (click)="navigate(Pages.AssetsIcons)">
+            <section
+              fxLayout="column"
+              fxLayoutGap="4px"
+              fxLayoutAlign="start center"
+            >
+              <ff-icon
+                [name]="IconType.Icons"
+                [size]="IconSize.Large"
+                [color]="Color.Primary"
+              >
+              </ff-icon>
+              <ion-label>{{ 'general.icons' | translate }}</ion-label>
+            </section>
+          </ion-col>
 
-                    <ion-col (click)="navigate(Pages.AssetsImages)">
-                        <section fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start center">
-                            <ff-icon [name]="IconType.Images"
-                                      [size]="IconSize.Large"
-                                      [color]="Color.Primary">
-                            </ff-icon>
-                            <ion-label>{{ 'general.images' | translate }}</ion-label>
-                        </section>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-content>
-    </ion-card>
+          <ion-col (click)="navigate(Pages.AssetsImages)">
+            <section
+              fxLayout="column"
+              fxLayoutGap="4px"
+              fxLayoutAlign="start center"
+            >
+              <ff-icon
+                [name]="IconType.Images"
+                [size]="IconSize.Large"
+                [color]="Color.Primary"
+              >
+              </ff-icon>
+              <ion-label>{{ 'general.images' | translate }}</ion-label>
+            </section>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </section>

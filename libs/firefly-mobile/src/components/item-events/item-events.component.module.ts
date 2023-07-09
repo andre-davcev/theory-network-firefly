@@ -8,18 +8,16 @@ import { ModulePipeTimestamp } from '@theory/firebase';
 
 import { ComponentItemEvents } from './item-events.component';
 
-@NgModule
-({
-    imports :
-    [
-        CommonModule,
-        IonicModule,
-        FlexLayoutModule,
-        TranslateModule,
-        ModulePipeTimestamp
-    ],
+@NgModule({
+  imports: [
+    CommonModule,
+    IonicModule,
+    FlexLayoutModule,
+    TranslateModule,
+    ModulePipeTimestamp
+  ],
 
-    declarations : [ComponentItemEvents],
-    exports      : [ComponentItemEvents]
+  declarations: [ComponentItemEvents],
+  exports: [ComponentItemEvents]
 })
-export class ModuleComponentItemEvents { }
+export class ModuleComponentItemEvents {}

@@ -1,14 +1,50 @@
 @import './variables';
 
-@font-face {font-family: $font-source-sans-pro-black; src: url($font-source-sans-pro-black + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-black-italic; src: url($font-source-sans-pro-black-italic + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-bold; src: url($font-source-sans-pro-bold + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-bold-italic; src: url($font-source-sans-pro-bold-italic + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-extra-light; src: url($font-source-sans-pro-extra-light + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-extra-light-italic; src: url($font-source-sans-pro-extra-light-italic + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-italic; src: url($font-source-sans-pro-italic + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-light; src: url($font-source-sans-pro-light + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-light-italic; src: url($font-source-sans-pro-light-italic + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-regular; src: url($font-source-sans-pro-regular + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-semi-bold; src: url($font-source-sans-pro-semi-bold + '.ttf'); }
-@font-face {font-family: $font-source-sans-pro-semi-bold-italic; src: url($font-source-sans-pro-semi-bold-italic + '.ttf'); }
+@font-face {
+  font-family: $font-source-sans-pro-black;
+  src: url($font-source-sans-pro-black + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-black-italic;
+  src: url($font-source-sans-pro-black-italic + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-bold;
+  src: url($font-source-sans-pro-bold + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-bold-italic;
+  src: url($font-source-sans-pro-bold-italic + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-extra-light;
+  src: url($font-source-sans-pro-extra-light + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-extra-light-italic;
+  src: url($font-source-sans-pro-extra-light-italic + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-italic;
+  src: url($font-source-sans-pro-italic + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-light;
+  src: url($font-source-sans-pro-light + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-light-italic;
+  src: url($font-source-sans-pro-light-italic + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-regular;
+  src: url($font-source-sans-pro-regular + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-semi-bold;
+  src: url($font-source-sans-pro-semi-bold + '.ttf');
+}
+@font-face {
+  font-family: $font-source-sans-pro-semi-bold-italic;
+  src: url($font-source-sans-pro-semi-bold-italic + '.ttf');
+}

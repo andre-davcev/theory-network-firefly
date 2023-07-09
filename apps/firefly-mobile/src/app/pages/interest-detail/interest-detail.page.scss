@@ -1,13 +1,13 @@
 @use 'variables' as firefly;
 
 ff-item-description {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 1.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.25rem;
 }
 
 ion-list {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .image-cnt {
@@ -17,28 +17,25 @@ ion-list {
   background-size: cover;
 }
 
-.cpt-container
-{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
+.cpt-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 
 .cnt-image,
 .cnt-name,
 .cnt-tagline,
 .cnt-description,
-ff-button-action
-{
+ff-button-action {
   position: relative;
   display: flex;
   font-family: firefly.$fire-font-opensans;
 }
 
-.cnt-name
-{
+.cnt-name {
   font-family: firefly.$fire-font-americantypewriter;
   height: 26px;
   opacity: 0.7;
@@ -47,8 +44,7 @@ ff-button-action
   margin-top: 20px;
 }
 
-.cnt-tagline
-{
+.cnt-tagline {
   font-family: firefly.$fire-font-playfair;
   font-weight: 600;
   margin-top: 8px;
@@ -60,8 +56,7 @@ ff-button-action
   color: #000000;
 }
 
-.cnt-description
-{
+.cnt-description {
   font-family: firefly.$fire-font-opensans;
   margin-top: 16px;
   padding-left: 28px;
@@ -70,33 +65,31 @@ ff-button-action
   color: #41464b;
 }
 
-.cnt-image{
+.cnt-image {
   margin-top: 10%;
 }
 
 .name,
 .tagline,
-.description
-{
+.description {
   margin: auto;
 }
 
-.cpt-button
-{
-    position: relative;
-    //top: 65%;
-    //left: 30%;
-    //width: auto;
-    padding: 0;
-    margin: auto;
-    margin-top: 16px;
-    text-transform: uppercase;
-    background-color: firefly.$fire-color-primary;
-    color: rgb(252, 253, 252);
-    font-size: 1rem;
-    line-height: 1rem;
-    font-weight: 900;
-    padding: 1rem 2rem;
-    border-radius: 1.5rem;
-    letter-spacing: 1px;
+.cpt-button {
+  position: relative;
+  //top: 65%;
+  //left: 30%;
+  //width: auto;
+  padding: 0;
+  margin: auto;
+  margin-top: 16px;
+  text-transform: uppercase;
+  background-color: firefly.$fire-color-primary;
+  color: rgb(252, 253, 252);
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 900;
+  padding: 1rem 2rem;
+  border-radius: 1.5rem;
+  letter-spacing: 1px;
 }

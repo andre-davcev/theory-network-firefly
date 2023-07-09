@@ -1,64 +1,59 @@
 @use 'variables' as firefly;
 
-:host
-{
-    --cpt-height: 100%;
-    --cpt-width: 100%;
+:host {
+  --cpt-height: 100%;
+  --cpt-width: 100%;
 
-    --cpt-loading-icon-size: 40px;
+  --cpt-loading-icon-size: 40px;
 
-    --cpt-map-border-radius: 0;
-    --cpt-map-border-radius-top: var(--cpt-map-border-radius);
-    --cpt-map-border-radius-bottom: var(--cpt-map-border-radius);
+  --cpt-map-border-radius: 0;
+  --cpt-map-border-radius-top: var(--cpt-map-border-radius);
+  --cpt-map-border-radius-bottom: var(--cpt-map-border-radius);
 
-    position: relative;
-    display: block;
+  position: relative;
+  display: block;
 
+  height: var(--cpt-height);
+  width: var(--cpt-width);
+
+  border-top-left-radius: var(--cpt-map-border-radius-top);
+  border-top-right-radius: var(--cpt-map-border-radius-top);
+
+  border-bottom-left-radius: var(--cpt-map-border-radius-bottom);
+  border-bottom-right-radius: var(--cpt-map-border-radius-bottom);
+
+  ff-loading {
+    --cpt-size: var(--cpt-loading-icon-size);
+  }
+
+  mgl-map {
     height: var(--cpt-height);
     width: var(--cpt-width);
 
-    border-top-left-radius: var(--cpt-map-border-radius-top);
-    border-top-right-radius: var(--cpt-map-border-radius-top);
+    ::ng-deep .mapboxgl-canvas-container {
+      overflow: hidden;
+      height: var(--cpt-height);
 
-    border-bottom-left-radius: var(--cpt-map-border-radius-bottom);
-    border-bottom-right-radius: var(--cpt-map-border-radius-bottom);
+      border-top-left-radius: var(--cpt-map-border-radius-top);
+      border-top-right-radius: var(--cpt-map-border-radius-top);
 
-    ff-loading {
-        --cpt-size: var(--cpt-loading-icon-size);
+      border-bottom-left-radius: var(--cpt-map-border-radius-bottom);
+      border-bottom-right-radius: var(--cpt-map-border-radius-bottom);
+
+      // this fixes the overflow:hidden in Chrome/Opera
+      -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
     }
 
-    mgl-map {
-        height: var(--cpt-height);
-        width: var(--cpt-width);
+    ::ng-deep .mapboxgl-popup {
+      .mapboxgl-popup-tip {
+        display: none;
+      }
 
-        ::ng-deep .mapboxgl-canvas-container
-        {
-            overflow: hidden;
-            height: var(--cpt-height);
-
-            border-top-left-radius: var(--cpt-map-border-radius-top);
-            border-top-right-radius: var(--cpt-map-border-radius-top);
-
-            border-bottom-left-radius: var(--cpt-map-border-radius-bottom);
-            border-bottom-right-radius: var(--cpt-map-border-radius-bottom);
-
-            // this fixes the overflow:hidden in Chrome/Opera
-            -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
-        }
-
-        ::ng-deep .mapboxgl-popup
-        {
-            .mapboxgl-popup-tip
-            {
-                display: none;
-            }
-
-            .mapboxgl-popup-content
-            {
-                padding: 0;
-                background-color: firefly.$fire-color-transparent;
-                box-shadow: none;
-            }
-        }
+      .mapboxgl-popup-content {
+        padding: 0;
+        background-color: firefly.$fire-color-transparent;
+        box-shadow: none;
+      }
     }
+  }
 }

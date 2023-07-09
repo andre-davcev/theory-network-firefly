@@ -1,29 +1,54 @@
-$gm-elevated-1:   0  1px  4px 0 rgba(0, 0, 0, 0.37);
-$gm-elevated-2:   0  2px  2px 0 rgba(0, 0, 0, 0.2),  0  6px  10px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-3:   0 11px  7px 0 rgba(0, 0, 0, 0.19), 0 13px  25px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-4:   0 14px 12px 0 rgba(0, 0, 0, 0.17), 0 20px  40px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-5:   0 17px 17px 0 rgba(0, 0, 0, 0.15), 0 27px  55px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-6:   0 20px 22px 0 rgba(0, 0, 0, 0.13), 0 34px  70px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-7:   0 23px 27px 0 rgba(0, 0, 0, 0.11), 0 41px  85px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-8:   0 26px 32px 0 rgba(0, 0, 0, 0.09), 0 48px 100px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-9:   0 29px 37px 0 rgba(0, 0, 0, 0.08), 0 55px 115px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-10:  0 32px 42px 0 rgba(0, 0, 0, 0.07), 0 62px 130px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-11:  0 35px 47px 0 rgba(0, 0, 0, 0.06), 0 69px 145px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-12:  0 38px 52px 0 rgba(0, 0, 0, 0.05), 0 76px 160px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-13:  0 41px 57px 0 rgba(0, 0, 0, 0.04), 0 83px 175px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-14:  0 44px 62px 0 rgba(0, 0, 0, 0.03), 0 90px 190px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-1: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+$gm-elevated-2: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-3: 0 11px 7px 0 rgba(0, 0, 0, 0.19),
+  0 13px 25px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-4: 0 14px 12px 0 rgba(0, 0, 0, 0.17),
+  0 20px 40px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-5: 0 17px 17px 0 rgba(0, 0, 0, 0.15),
+  0 27px 55px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-6: 0 20px 22px 0 rgba(0, 0, 0, 0.13),
+  0 34px 70px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-7: 0 23px 27px 0 rgba(0, 0, 0, 0.11),
+  0 41px 85px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-8: 0 26px 32px 0 rgba(0, 0, 0, 0.09),
+  0 48px 100px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-9: 0 29px 37px 0 rgba(0, 0, 0, 0.08),
+  0 55px 115px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-10: 0 32px 42px 0 rgba(0, 0, 0, 0.07),
+  0 62px 130px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-11: 0 35px 47px 0 rgba(0, 0, 0, 0.06),
+  0 69px 145px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-12: 0 38px 52px 0 rgba(0, 0, 0, 0.05),
+  0 76px 160px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-13: 0 41px 57px 0 rgba(0, 0, 0, 0.04),
+  0 83px 175px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-14: 0 44px 62px 0 rgba(0, 0, 0, 0.03),
+  0 90px 190px 0 rgba(0, 0, 0, 0.3);
 
-$gm-elevated-1-up:   0  -1px  4px 0 rgba(0, 0, 0, 0.37);
-$gm-elevated-2-up:   0  -2px  2px 0 rgba(0, 0, 0, 0.2),  0  -6px  10px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-3-up:   0 -11px  7px 0 rgba(0, 0, 0, 0.19), 0 -13px  25px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-4-up:   0 -14px 12px 0 rgba(0, 0, 0, 0.17), 0 -20px  40px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-5-up:   0 -17px 17px 0 rgba(0, 0, 0, 0.15), 0 -27px  55px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-6-up:   0 -20px 22px 0 rgba(0, 0, 0, 0.13), 0 -34px  70px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-7-up:   0 -23px 27px 0 rgba(0, 0, 0, 0.11), 0 -41px  85px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-8-up:   0 -26px 32px 0 rgba(0, 0, 0, 0.09), 0 -48px 100px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-9-up:   0 -29px 37px 0 rgba(0, 0, 0, 0.08), 0 -55px 115px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-10-up:  0 -32px 42px 0 rgba(0, 0, 0, 0.07), 0 -62px 130px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-11-up:  0 -35px 47px 0 rgba(0, 0, 0, 0.06), 0 -69px 145px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-12-up:  0 -38px 52px 0 rgba(0, 0, 0, 0.05), 0 -76px 160px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-13-up:  0 -41px 57px 0 rgba(0, 0, 0, 0.04), 0 -83px 175px 0 rgba(0, 0, 0, 0.3);
-$gm-elevated-14-up:  0 -44px 62px 0 rgba(0, 0, 0, 0.03), 0 -90px 190px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-1-up: 0 -1px 4px 0 rgba(0, 0, 0, 0.37);
+$gm-elevated-2-up: 0 -2px 2px 0 rgba(0, 0, 0, 0.2),
+  0 -6px 10px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-3-up: 0 -11px 7px 0 rgba(0, 0, 0, 0.19),
+  0 -13px 25px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-4-up: 0 -14px 12px 0 rgba(0, 0, 0, 0.17),
+  0 -20px 40px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-5-up: 0 -17px 17px 0 rgba(0, 0, 0, 0.15),
+  0 -27px 55px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-6-up: 0 -20px 22px 0 rgba(0, 0, 0, 0.13),
+  0 -34px 70px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-7-up: 0 -23px 27px 0 rgba(0, 0, 0, 0.11),
+  0 -41px 85px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-8-up: 0 -26px 32px 0 rgba(0, 0, 0, 0.09),
+  0 -48px 100px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-9-up: 0 -29px 37px 0 rgba(0, 0, 0, 0.08),
+  0 -55px 115px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-10-up: 0 -32px 42px 0 rgba(0, 0, 0, 0.07),
+  0 -62px 130px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-11-up: 0 -35px 47px 0 rgba(0, 0, 0, 0.06),
+  0 -69px 145px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-12-up: 0 -38px 52px 0 rgba(0, 0, 0, 0.05),
+  0 -76px 160px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-13-up: 0 -41px 57px 0 rgba(0, 0, 0, 0.04),
+  0 -83px 175px 0 rgba(0, 0, 0, 0.3);
+$gm-elevated-14-up: 0 -44px 62px 0 rgba(0, 0, 0, 0.03),
+  0 -90px 190px 0 rgba(0, 0, 0, 0.3);

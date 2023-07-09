@@ -1,5 +1,4 @@
-export enum ActionPhotos
-{
-    Get       = '[Photos] Get',
-    GetAlbums = '[Photos] Get Albums'
+export enum ActionPhotos {
+  Get = '[Photos] Get',
+  GetAlbums = '[Photos] Get Albums'
 }

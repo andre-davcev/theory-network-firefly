@@ -1,39 +1,32 @@
 @use 'variables' as firefly;
 
-.md
-{
-    :host
-    {
-        > .cpt-container
-        {
-            &:before
-            {
-                z-index: 0;
-            }
-        }
+.md {
+  :host {
+    > .cpt-container {
+      &:before {
+        z-index: 0;
+      }
     }
+  }
 }
 
-:host
-{
+:host {
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  > .cpt-container {
     position: relative;
-    display: block;
-    cursor: pointer;
+  }
 
-    > .cpt-container
-    {
-        position: relative;
-    }
+  ion-icon {
+    position: relative;
+  }
 
-    ion-icon {
-        position: relative;
-    }
-
-    .cpt-count
-    {
-        position: relative;
-        color: #{firefly.$fire-color-dark};
-        font-size: 16px;
-        line-height: 1em;
-    }
+  .cpt-count {
+    position: relative;
+    color: #{firefly.$fire-color-dark};
+    font-size: 16px;
+    line-height: 1em;
+  }
 }

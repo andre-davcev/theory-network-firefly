@@ -8,7 +8,7 @@ describe('AppStoreGoogleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppStoreGoogleComponent],
+      imports: [AppStoreGoogleComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppStoreGoogleComponent);

@@ -1,6 +1,5 @@
-export enum ImageSize
-{
-    Small  = 'small',
-    Medium = 'medium',
-    Large  = 'large'
+export enum ImageSize {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large'
 }

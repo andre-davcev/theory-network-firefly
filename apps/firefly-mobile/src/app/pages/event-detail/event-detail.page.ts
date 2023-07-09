@@ -4,107 +4,129 @@ import { Timestamp } from '@angular/fire/firestore';
 import { Observable, from, of } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
-import { AlertController, ModalController, NavController } from '@ionic/angular';
+import {
+  AlertController,
+  ModalController,
+  NavController
+} from '@ionic/angular';
 import { Style } from '@capacitor/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 
 import { TimestampFormat } from '@theory/firebase';
-import { ActionDeviceStatusBarSet, StateDevice, ServiceCamera } from '@theory/capacitor';
-import { StateEvent, ActionEventPatch, ActionEventSave, IconType, Color, IconSlot, ActionInterestEventsGetAnonymous, ActionEventPatchMetadata, ActionEventPlaceSet, ActionEventTimeSet, ActionEventAccept, ActionEventDeny, Translation, ActionUserEventsDelete, ActionAppLoadingShow, ActionAppLoadingHide } from '@firefly/shared';
+import {
+  ActionDeviceStatusBarSet,
+  StateDevice,
+  ServiceCamera
+} from '@theory/capacitor';
+import {
+  StateEvent,
+  ActionEventPatch,
+  ActionEventSave,
+  IconType,
+  Color,
+  IconSlot,
+  ActionInterestEventsGetAnonymous,
+  ActionEventPatchMetadata,
+  ActionEventPlaceSet,
+  ActionEventTimeSet,
+  ActionEventAccept,
+  ActionEventDeny,
+  Translation,
+  ActionUserEventsDelete,
+  ActionAppLoadingShow,
+  ActionAppLoadingHide
+} from '@firefly/shared';
 import { ActionMobileToast, Pages } from '@firefly/mobile';
 import { Place } from '@firefly/cloud';
 
 import { PageEventLocation } from '../event-location';
-import { PageAssetsInterests, ResolverPageAssetsInterests } from '../assets-interests';
+import {
+  PageAssetsInterests,
+  ResolverPageAssetsInterests
+} from '../assets-interests';
 
-
-@Component
-({
-    selector    : 'app-page-event-detail',
-    templateUrl : 'event-detail.page.html',
-    styleUrls   : ['./event-detail.page.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+@Component({
+  selector: 'app-page-event-detail',
+  templateUrl: 'event-detail.page.html',
+  styleUrls: ['./event-detail.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+export class PageEventDetail {
+  @Select(StateEvent.formGroup()) form$: Observable<UntypedFormGroup>;
+  @Select(StateEvent.isNew()) isNew$: Observable<boolean>;
+  @Select(StateEvent.timeStart) timeStart$: Observable<Timestamp>;
+  @Select(StateEvent.timeStartValid) timeStartValid$: Observable<boolean>;
+  @Select(StateEvent.timeEnd) timeEnd$: Observable<Timestamp>;
+  @Select(StateEvent.timeEndValid) timeEndValid$: Observable<boolean>;
+  @Select(StateEvent.timeNotify) timeNotify$: Observable<Timestamp>;
+  @Select(StateEvent.timeNotifyValid) timeNotifyValid$: Observable<boolean>;
+  @Select(StateEvent.timeIsLocked) timeIsLocked$: Observable<boolean>;
+  @Select(StateEvent.private) private$: Observable<boolean>;
+  @Select(StateEvent.notifyComplete) notifyComplete$: Observable<boolean>;
+  @Select(StateDevice.device) device$: Observable<boolean>;
+  @Select(StateEvent.image) image$: Observable<string>;
+  @Select(StateEvent.icon) icon$: Observable<string>;
+  @Select(StateEvent.canAccept) canAccept$: Observable<boolean>;
+  @Select(StateEvent.place) place$: Observable<boolean>;
+  @Select(StateEvent.canEditShow) canEditShow$: Observable<boolean>;
+  @Select(StateEvent.canEdit) canEdit$: Observable<boolean>;
+  @Select(StateEvent.canDeleteShow) canDeleteShow$: Observable<boolean>;
+  @Select(StateEvent.canDelete) canDelete$: Observable<boolean>;
 
-export class PageEventDetail
-{
-    @Select(StateEvent.formGroup())     form$:            Observable<UntypedFormGroup>;
-    @Select(StateEvent.isNew())         isNew$:           Observable<boolean>;
-    @Select(StateEvent.timeStart)       timeStart$:       Observable<Timestamp>;
-    @Select(StateEvent.timeStartValid)  timeStartValid$:  Observable<boolean>;
-    @Select(StateEvent.timeEnd)         timeEnd$:         Observable<Timestamp>;
-    @Select(StateEvent.timeEndValid)    timeEndValid$:    Observable<boolean>;
-    @Select(StateEvent.timeNotify)      timeNotify$:      Observable<Timestamp>;
-    @Select(StateEvent.timeNotifyValid) timeNotifyValid$: Observable<boolean>;
-    @Select(StateEvent.timeIsLocked)    timeIsLocked$:    Observable<boolean>;
-    @Select(StateEvent.private)         private$:         Observable<boolean>;
-    @Select(StateEvent.notifyComplete)  notifyComplete$:  Observable<boolean>;
-    @Select(StateDevice.device)         device$:          Observable<boolean>;
-    @Select(StateEvent.image)           image$:           Observable<string>;
-    @Select(StateEvent.icon)            icon$:            Observable<string>;
-    @Select(StateEvent.canAccept)       canAccept$:       Observable<boolean>;
-    @Select(StateEvent.place)           place$:           Observable<boolean>;
-    @Select(StateEvent.canEditShow)     canEditShow$:     Observable<boolean>;
-    @Select(StateEvent.canEdit)         canEdit$:         Observable<boolean>;
-    @Select(StateEvent.canDeleteShow)   canDeleteShow$:   Observable<boolean>;
-    @Select(StateEvent.canDelete)       canDelete$:       Observable<boolean>;
+  @Input() modal: boolean = false;
 
-    @Input() modal: boolean = false;
+  public Pages: any = Pages;
+  public IconType: any = IconType;
+  public IconSlot: any = IconSlot;
+  public Color: any = Color;
 
-    public Pages    : any = Pages;
-    public IconType : any = IconType;
-    public IconSlot : any = IconSlot;
-    public Color    : any = Color;
+  public TimestampFormat: any = TimestampFormat;
 
-    public TimestampFormat: any = TimestampFormat;
+  public now: string = new Date(
+    new Date().getTime() - new Date().getTimezoneOffset() * 60000
+  ).toISOString();
 
-    public now: string = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString()
+  constructor(
+    private store: Store,
+    private camera: ServiceCamera,
+    private modalController: ModalController,
+    private resolver: ResolverPageAssetsInterests,
+    public navController: NavController,
+    private translate: TranslateService,
+    private alert: AlertController
+  ) {}
 
-    constructor
-    (
-        private store:           Store,
-        private camera:          ServiceCamera,
-        private modalController: ModalController,
-        private resolver:        ResolverPageAssetsInterests,
-        public  navController:   NavController,
-        private translate:       TranslateService,
-        private alert:           AlertController
-    ) { }
+  public ionViewWillEnter(): void {
+    this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
+  }
 
-    public ionViewWillEnter(): void
-    {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Light }));
-    }
-
-    public navigate(page: Pages.AssetsInterests | Pages.ImageSelector | Pages.EventLocation)
-    {
-        if (page === Pages.AssetsInterests)
-        {
-            this.resolver.
-            resolve(null, null).
-            pipe
-            (
-                switchMap(() =>
-                    from(this.modalController.create
-                    ({
-                        component: PageAssetsInterests,
-                        componentProps: { modal: true }
-                    }))
-                )
-            ).
-            subscribe((modalController: HTMLIonModalElement) =>
-                modalController.present()
-            );
-        }
-        else if (page === Pages.ImageSelector)
-        {
-/*
+  public navigate(
+    page: Pages.AssetsInterests | Pages.ImageSelector | Pages.EventLocation
+  ) {
+    if (page === Pages.AssetsInterests) {
+      this.resolver
+        .resolve(null, null)
+        .pipe(
+          switchMap(() =>
+            from(
+              this.modalController.create({
+                component: PageAssetsInterests,
+                componentProps: { modal: true }
+              })
+            )
+          )
+        )
+        .subscribe((modalController: HTMLIonModalElement) =>
+          modalController.present()
+        );
+    } else if (page === Pages.ImageSelector) {
+      /*
           from(this.modalController.create({
             component: PageImageSelector
           })).
           subscribe((modalController: HTMLIonModalElement) => modalController.present());
 */
-           /* if (this.store.selectSnapshot(StateDevice.device))
+      /* if (this.store.selectSnapshot(StateDevice.device))
             {
                 const options: CameraOptions =
                 {
@@ -132,202 +154,175 @@ export class PageEventDetail
                 this.store.dispatch(new ActionEventImagePathSet()).
                 subscribe();
             }*/
-        }
-        else if (page === Pages.EventLocation)
-        {
-            const virtual : boolean = this.store.selectSnapshot(StateEvent.virtual);
-            const place   : Place   = this.store.selectSnapshot(StateEvent.place);
+    } else if (page === Pages.EventLocation) {
+      const virtual: boolean = this.store.selectSnapshot(StateEvent.virtual);
+      const place: Place = this.store.selectSnapshot(StateEvent.place);
 
-            from(this.modalController.create
-            ({
-                component: PageEventLocation,
-                componentProps: { virtual, place }}
-            )).
-            subscribe((modalController: HTMLIonModalElement) =>
-                modalController.present()
-            );
-        }
+      from(
+        this.modalController.create({
+          component: PageEventLocation,
+          componentProps: { virtual, place }
+        })
+      ).subscribe((modalController: HTMLIonModalElement) =>
+        modalController.present()
+      );
     }
+  }
 
-    public delete(): void
-    {
-        const id: string = this.store.selectSnapshot(StateEvent.id());
+  public delete(): void {
+    const id: string = this.store.selectSnapshot(StateEvent.id());
 
-        this.translate.get
-        ([
-              Translation.AlertConfirmDeleteHeader,
-              Translation.AlertConfirmDeleteMessage,
-              Translation.AlertConfirmDeleteCancel,
-              Translation.AlertConfirmDeleteConfirm,
-              Translation.AlertConfirmDeleteEvent
-        ]).
-        pipe
-        (
-            switchMap((translations: Record<string, string>) =>
-                this.alert.create
-                ({
-                    cssClass : 'cpt-alert',
-                    header   : `${translations[Translation.AlertConfirmDeleteHeader]} ${translations[Translation.AlertConfirmDeleteEvent]}?`,
-                    message  : translations[Translation.AlertConfirmDeleteMessage],
+    this.translate
+      .get([
+        Translation.AlertConfirmDeleteHeader,
+        Translation.AlertConfirmDeleteMessage,
+        Translation.AlertConfirmDeleteCancel,
+        Translation.AlertConfirmDeleteConfirm,
+        Translation.AlertConfirmDeleteEvent
+      ])
+      .pipe(
+        switchMap((translations: Record<string, string>) =>
+          this.alert.create({
+            cssClass: 'cpt-alert',
+            header: `${translations[Translation.AlertConfirmDeleteHeader]} ${
+              translations[Translation.AlertConfirmDeleteEvent]
+            }?`,
+            message: translations[Translation.AlertConfirmDeleteMessage],
 
-                    buttons:
-                    [
-                        {
-                            text : translations[Translation.AlertConfirmDeleteCancel],
-                            role : 'cancel'
-                        },
-                        {
-                            text    : translations[Translation.AlertConfirmDeleteConfirm],
-                            handler : () => this.deleteConfirm(id)
-                        }
-                    ]
-                })
-            ),
-            switchMap((alert: HTMLIonAlertElement) =>
-                from(alert.present())
-            )
-        ).
-        subscribe();
-    }
+            buttons: [
+              {
+                text: translations[Translation.AlertConfirmDeleteCancel],
+                role: 'cancel'
+              },
+              {
+                text: translations[Translation.AlertConfirmDeleteConfirm],
+                handler: () => this.deleteConfirm(id)
+              }
+            ]
+          })
+        ),
+        switchMap((alert: HTMLIonAlertElement) => from(alert.present()))
+      )
+      .subscribe();
+  }
 
-    private deleteConfirm(id: string): void
-    {
-        this.store.dispatch(new ActionUserEventsDelete(id)).
-        subscribe(() =>
-            this.navController.back()
-        );
-    }
+  private deleteConfirm(id: string): void {
+    this.store
+      .dispatch(new ActionUserEventsDelete(id))
+      .subscribe(() => this.navController.back());
+  }
 
-    public selectIcon(): void
-    {
-        this.store.dispatch(new ActionAppLoadingShow()).
-        pipe
-        (
-            switchMap(() =>
-                this.camera.getPhoto()
-            ),
-            switchMap((icon: string) =>
-                this.store.dispatch(new ActionEventPatchMetadata({ icon }))
-            ),
-            finalize(() =>
-                this.store.dispatch(new ActionAppLoadingHide())
-            )
-        ).
-        subscribe();
-    }
+  public selectIcon(): void {
+    this.store
+      .dispatch(new ActionAppLoadingShow())
+      .pipe(
+        switchMap(() => this.camera.getPhoto()),
+        switchMap((icon: string) =>
+          this.store.dispatch(new ActionEventPatchMetadata({ icon }))
+        ),
+        finalize(() => this.store.dispatch(new ActionAppLoadingHide()))
+      )
+      .subscribe();
+  }
 
-    public selectImage(): void
-    {
-        this.store.dispatch(new ActionAppLoadingShow()).
-        pipe
-        (
-            switchMap(() =>
-                this.camera.getPhoto()
-            ),
-            switchMap((image: string) =>
-                this.store.dispatch(new ActionEventPatchMetadata({ image }))
-            ),
-            finalize(() =>
-                this.store.dispatch(new ActionAppLoadingHide())
-            )
-        ).
-        subscribe();
-    }
+  public selectImage(): void {
+    this.store
+      .dispatch(new ActionAppLoadingShow())
+      .pipe(
+        switchMap(() => this.camera.getPhoto()),
+        switchMap((image: string) =>
+          this.store.dispatch(new ActionEventPatchMetadata({ image }))
+        ),
+        finalize(() => this.store.dispatch(new ActionAppLoadingHide()))
+      )
+      .subscribe();
+  }
 
-    public timeChanged(event: CustomEvent, key: string): void
-    {
-        const value: string = event.detail.value;
+  public timeChanged(event: CustomEvent, key: string): void {
+    const value: string = event.detail.value;
 
-        this.store.dispatch(new ActionEventTimeSet(key, value));
-    }
+    this.store.dispatch(new ActionEventTimeSet(key, value));
+  }
 
-    public virtualChanged(event: any): void
-    {
-        this.store.dispatch(new ActionEventPlaceSet()).pipe
-        (
-            switchMap(() =>
-                this.store.dispatch(new ActionEventPatch({ virtual: event.detail.checked }))
-            )
-        ).
-        subscribe();
-    }
+  public virtualChanged(event: any): void {
+    this.store
+      .dispatch(new ActionEventPlaceSet())
+      .pipe(
+        switchMap(() =>
+          this.store.dispatch(
+            new ActionEventPatch({ virtual: event.detail.checked })
+          )
+        )
+      )
+      .subscribe();
+  }
 
-    public save(): void
-    {
-        const isNew : boolean = this.store.selectSnapshot(StateEvent.isNew());
+  public save(): void {
+    const isNew: boolean = this.store.selectSnapshot(StateEvent.isNew());
 
-        this.translate.get
-        ([
-            Translation.PageEventCreatedSuccess,
-            Translation.PageEventCreatedError,
-            Translation.PageEventUpdateSuccess,
-            Translation.PageEventUpdateError
-        ]).
-        pipe
-        (
-            switchMap((translations: Record<string, string>) =>
-                this.store.dispatch
-                ([
-                    new ActionAppLoadingShow(),
-                    new ActionEventSave()
-                ]).
-                pipe
-                (
-                    switchMap(() => this.store.dispatch(new ActionInterestEventsGetAnonymous())),
-                    map(() =>
-                        isNew ?
-                            translations[Translation.PageEventCreatedSuccess] :
-                            translations[Translation.PageEventUpdateSuccess]
-                    ),
-                    catchError(() =>
-                        isNew ?
-                            of(translations[Translation.PageEventCreatedError]) :
-                            of(translations[Translation.PageEventUpdateError])
-                    ),
-                    finalize(() =>
-                        this.store.dispatch(new ActionAppLoadingHide())
-                    )
-                )
-            )
-        ).
-        subscribe((message: string) =>
-        {
-            this.store.dispatch(new ActionMobileToast(message));
-
-            if(this.modal)
-            {
-              this.modalController.dismiss(this.store.selectSnapshot(StateEvent.data()));
-            }
-            else
-              this.navController.back();
-        });
-    }
-
-    public cancel(): void
-    {
-        this.modalController.dismiss();
-    }
-
-
-    public acceptEvent(): void
-    {
-        this.store.dispatch(new ActionEventAccept()).pipe
-        (
-            switchMap(() =>
+    this.translate
+      .get([
+        Translation.PageEventCreatedSuccess,
+        Translation.PageEventCreatedError,
+        Translation.PageEventUpdateSuccess,
+        Translation.PageEventUpdateError
+      ])
+      .pipe(
+        switchMap((translations: Record<string, string>) =>
+          this.store
+            .dispatch([new ActionAppLoadingShow(), new ActionEventSave()])
+            .pipe(
+              switchMap(() =>
                 this.store.dispatch(new ActionInterestEventsGetAnonymous())
+              ),
+              map(() =>
+                isNew
+                  ? translations[Translation.PageEventCreatedSuccess]
+                  : translations[Translation.PageEventUpdateSuccess]
+              ),
+              catchError(() =>
+                isNew
+                  ? of(translations[Translation.PageEventCreatedError])
+                  : of(translations[Translation.PageEventUpdateError])
+              ),
+              finalize(() => this.store.dispatch(new ActionAppLoadingHide()))
             )
-        ).
-        subscribe();
-    }
+        )
+      )
+      .subscribe((message: string) => {
+        this.store.dispatch(new ActionMobileToast(message));
 
-    public denyEvent(): void
-    {
-        this.store.dispatch(new ActionEventDeny()).pipe
-        (
-            switchMap(() =>
-                this.store.dispatch(new ActionInterestEventsGetAnonymous())
-            )
-        ).
-        subscribe();
-    }
+        if (this.modal) {
+          this.modalController.dismiss(
+            this.store.selectSnapshot(StateEvent.data())
+          );
+        } else this.navController.back();
+      });
+  }
+
+  public cancel(): void {
+    this.modalController.dismiss();
+  }
+
+  public acceptEvent(): void {
+    this.store
+      .dispatch(new ActionEventAccept())
+      .pipe(
+        switchMap(() =>
+          this.store.dispatch(new ActionInterestEventsGetAnonymous())
+        )
+      )
+      .subscribe();
+  }
+
+  public denyEvent(): void {
+    this.store
+      .dispatch(new ActionEventDeny())
+      .pipe(
+        switchMap(() =>
+          this.store.dispatch(new ActionInterestEventsGetAnonymous())
+        )
+      )
+      .subscribe();
+  }
 }

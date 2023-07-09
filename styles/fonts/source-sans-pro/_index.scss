@@ -1,3 +1,6 @@
 @import './variables';
 
-@font-face {font-family: $font-source-sans-pro-regular; src: url($font-source-sans-pro-regular + '.ttf'); }
+@font-face {
+  font-family: $font-source-sans-pro-regular;
+  src: url($font-source-sans-pro-regular + '.ttf');
+}

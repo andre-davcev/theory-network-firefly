@@ -1,38 +1,40 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 
-@Component
-({
-    selector        : 'ff-item-image',
-    templateUrl     : './item-image.component.html',
-    styleUrls       : ['./item-image.component.scss'],
-    changeDetection : ChangeDetectionStrategy.OnPush
+@Component({
+  selector: 'ff-item-image',
+  templateUrl: './item-image.component.html',
+  styleUrls: ['./item-image.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComponentItemImage
-{
-    @Input() form: UntypedFormGroup;
-    @Input() edit: boolean = false;
-    @Input() url: string;
-    @Input() placeholder: string;
-    @Input() title: string;
+export class ComponentItemImage {
+  @Input() form: UntypedFormGroup;
+  @Input() edit: boolean = false;
+  @Input() url: string;
+  @Input() placeholder: string;
+  @Input() title: string;
 
-    @Output() clicked: EventEmitter<void> = new EventEmitter();
+  @Output() clicked: EventEmitter<void> = new EventEmitter();
 
-    constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer) {}
 
-    public clickedImage(): void
-    {
-        this.form.markAsDirty();
-        const control : AbstractControl = this.form.get(['metadata', 'image']);
-        control.markAsDirty();
-        this.clicked.next();
-    }
+  public clickedImage(): void {
+    this.form.markAsDirty();
+    const control: AbstractControl = this.form.get(['metadata', 'image']);
+    control.markAsDirty();
+    this.clicked.next();
+  }
 
-    public urlSafe(): SafeStyle
-    {
-        const url: string = this.url == null ? '' : this.url;
+  public urlSafe(): SafeStyle {
+    const url: string = this.url == null ? '' : this.url;
 
-        return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
-    }
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
+  }
 }

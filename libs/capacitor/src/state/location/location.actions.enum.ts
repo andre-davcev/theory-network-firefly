@@ -1,4 +1,3 @@
-export enum ActionsLocation
-{
-    LocationWatch  = '[Location] Location Watch'
+export enum ActionsLocation {
+  LocationWatch = '[Location] Location Watch'
 }

@@ -97,7 +97,10 @@
 
           <ion-item id="time-start-trigger">
             <ion-label>{{ 'general.starts' | translate }}</ion-label>
-            <ion-label>{{ timeStart$ | async | timestamp: TimestampFormat.Short }}</ion-label>
+            <ion-label
+              >{{ timeStart$ | async | timestamp: TimestampFormat.Short
+              }}</ion-label
+            >
             <ion-popover trigger="time-start-trigger" triggerAction="click">
               <ng-template>
                 <ion-datetime
@@ -119,7 +122,10 @@
 
           <ion-item id="time-ends-trigger">
             <ion-label>{{ 'general.ends' | translate }}</ion-label>
-            <ion-label>{{ timeEnd$ | async | timestamp: TimestampFormat.Short }}</ion-label>
+            <ion-label
+              >{{ timeEnd$ | async | timestamp: TimestampFormat.Short
+              }}</ion-label
+            >
             <ion-popover trigger="time-ends-trigger" triggerAction="click">
               <ng-template>
                 <ion-datetime
@@ -138,7 +144,7 @@
               </ng-template>
             </ion-popover>
           </ion-item>
-<!--
+          <!--
           <ion-item id="time-notify-trigger">
             <ion-label>{{ 'page.event.timeNotify' | translate }}</ion-label>
             <ion-label>{{ timeNotify$ | async | timestamp: TimestampFormat.Short }}</ion-label>

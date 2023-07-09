@@ -1,47 +1,44 @@
 @use 'variables' as firefly;
 
-:host
-{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: firefly.$fire-color-dark;
+
+  ion-icon {
+    font-size: 3rem;
+  }
+
+  .cpt-container {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
+    height: 100%;
     background-color: firefly.$fire-color-dark;
 
-    ion-icon {
-      font-size: 3rem;
-    }
+    padding-left: 2.25rem;
+    padding-right: 2.25rem;
+  }
 
-    .cpt-container
-    {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: firefly.$fire-color-dark;
+  .error-messages {
+    font-size: 0.7em;
+    color: red;
+    text-align: center;
+  }
 
-        padding-left: 2.25rem;
-        padding-right: 2.25rem;
-    }
+  ion-slides {
+    height: 100%;
+    width: 100%;
 
-    .error-messages
-    {
-        font-size: 0.7em;
-        color: red;
-        text-align: center;
-    }
+    --bullet-background: #{firefly.$fire-color-white};
+    --bullet-background-active: #{firefly.$fire-color-white};
+  }
 
-    ion-slides {
-        height: 100%;
-        width: 100%;
-
-        --bullet-background: #{firefly.$fire-color-white};
-        --bullet-background-active: #{firefly.$fire-color-white};
-    }
-
-    ff-button-action {
-        margin-top: 2rem;
-    }
+  ff-button-action {
+    margin-top: 2rem;
+  }
 }

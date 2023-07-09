@@ -7,15 +7,15 @@ import { UserProfile, Collection } from '../shared';
 
 db();
 
-const UserProfilesCreate: CloudFunction<DocumentSnapshot> =
+const UserProfilesCreate: CloudFunction<DocumentSnapshot> = firestore
+  .document(`${Collection.UserProfiles}/{id}`)
+  .onCreate(async (snapshot: DocumentSnapshot, context: EventContext) => {
+    const object: UserProfile = ServiceFirestore.create<UserProfile>(
+      snapshot,
+      Version.UserProfiles
+    );
 
-firestore.
-document(`${Collection.UserProfiles}/{id}`).
-onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
-{
-    const object: UserProfile = ServiceFirestore.create<UserProfile>(snapshot, Version.UserProfiles);
-
-    return snapshot.ref.update({data: object});
-});
+    return snapshot.ref.update({ data: object });
+  });
 
 export { UserProfilesCreate };

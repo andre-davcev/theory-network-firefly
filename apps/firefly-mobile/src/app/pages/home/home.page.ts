@@ -1,5 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuController, PopoverController, IonSearchbar, ModalController } from '@ionic/angular';
+import {
+  MenuController,
+  PopoverController,
+  IonSearchbar,
+  ModalController
+} from '@ionic/angular';
 import { Store, Select } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { Style } from '@capacitor/status-bar';
@@ -9,138 +14,143 @@ import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 
 import { ActionDeviceStatusBarSet, StateLocation } from '@theory/capacitor';
 import { CoreEnum, BaseComponent } from '@theory/core';
-import { Pages, ActionMobileAuthSelect, ComponentHomeOptions, StateMobile } from '@firefly/mobile';
-import { StateAlerts, StateCalendar, StateInterests, StateUser, ActionSearchReset, ActionSearchInterests, ActionSearchEvents } from '@firefly/shared';
+import {
+  Pages,
+  ActionMobileAuthSelect,
+  ComponentHomeOptions,
+  StateMobile
+} from '@firefly/mobile';
+import {
+  StateAlerts,
+  StateCalendar,
+  StateInterests,
+  StateUser,
+  ActionSearchReset,
+  ActionSearchInterests,
+  ActionSearchEvents
+} from '@firefly/shared';
 
 import { PageNotifications } from '../notifications';
 
-@Component
-({
-    selector    : 'app-page-home',
-    templateUrl : 'home.page.html',
-    styleUrls   : ['./home.page.scss']
+@Component({
+  selector: 'app-page-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['./home.page.scss']
 })
+export class PageHome extends BaseComponent {
+  @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+  @Select(StateAlerts.unreadCount) unreadCount$: Observable<number>;
+  @Select(StateAlerts.unreadExists) unreadExists$: Observable<boolean>;
+  @Select(StateUser.authenticated) authenticated$: Observable<boolean>;
+  @Select(StateUser.isUser) isUser$: Observable<boolean>;
+  @Select(StateLocation.permissionDenied) locationDenied$: Observable<boolean>;
 
-export class PageHome extends BaseComponent
-{
-    @Select(StateMobile.menuOpen)     menuOpen$      : Observable<boolean>;
-    @Select(StateAlerts.unreadCount)  unreadCount$   : Observable<number>;
-    @Select(StateAlerts.unreadExists) unreadExists$  : Observable<boolean>;
-    @Select(StateUser.authenticated)  authenticated$ : Observable<boolean>;
-    @Select(StateUser.isUser)         isUser$        : Observable<boolean>;
-    @Select(StateLocation.permissionDenied) locationDenied$ : Observable<boolean>;
+  @ViewChild(IonSearchbar, { static: false })
+  private searchbar: IonSearchbar;
 
-    @ViewChild(IonSearchbar, { static: false })
-    private searchbar: IonSearchbar;
+  public searching: boolean = false;
 
-    public searching: boolean = false;
+  public Pages: any = Pages;
 
-    public Pages : any = Pages;
+  public searchClient = algoliaSearch(
+    '8NDQ1FNIDU',
+    '45b11751dc7e276f781a85f719abda66'
+  );
+  public index: SearchIndex = this.searchClient.initIndex('interests');
 
-    public searchClient = algoliaSearch('8NDQ1FNIDU','45b11751dc7e276f781a85f719abda66');
-    public index: SearchIndex = this.searchClient.initIndex('interests');
+  constructor(
+    private menu: MenuController,
+    private store: Store,
+    private popover: PopoverController,
+    private modal: ModalController
+  ) {
+    super();
+  }
 
-    constructor
-    (
-        private menu    : MenuController,
-        private store   : Store,
-        private popover : PopoverController,
-        private modal   : ModalController
-    )
-    {
-        super();
+  public ionViewWillEnter(): void {
+    this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
+  }
+
+  public navigate(type: Pages): void {
+    const url: Array<any> =
+      type === Pages.EventDetail ? [type, CoreEnum.IdNew] : [type];
+
+    this.store.dispatch(new Navigate(url));
+  }
+
+  public go(type: Pages.Notifications | Pages.Stream): void {
+    if (type === Pages.Notifications) {
+      from(this.modal.create({ component: PageNotifications })).subscribe(
+        (modal: HTMLIonModalElement) => modal.present()
+      );
+    } else {
+      this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
     }
+  }
 
-    public ionViewWillEnter(): void
-    {
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Light}));
+  public menuOpen(): void {
+    this.isUser$
+      .pipe(
+        take(1),
+        switchMap((isUser: boolean) =>
+          isUser
+            ? from(this.menu.open())
+            : this.store.dispatch(new ActionMobileAuthSelect())
+        )
+      )
+      .subscribe();
+  }
+
+  public async showPopover(event: any): Promise<void> {
+    const isStream: boolean = this.store.selectSnapshot(StateMobile.pageStream);
+
+    const popover: HTMLIonPopoverElement = await this.popover.create({
+      component: ComponentHomeOptions,
+      componentProps: {
+        interestType: this.store.selectSnapshot(StateInterests.type),
+        eventType: this.store.selectSnapshot(StateCalendar.type),
+        isStream,
+        virtual: isStream
+          ? this.store.selectSnapshot(StateInterests.virtual)
+          : this.store.selectSnapshot(StateCalendar.virtual)
+      },
+      event,
+      translucent: true
+    });
+
+    return await popover.present();
+  }
+
+  public searchShow(show: boolean): void {
+    this.searching = show;
+
+    if (show) {
+      this.searchbar.setFocus();
     }
+  }
 
-    public navigate(type: Pages): void
-    {
-        const url: Array<any> = type === Pages.EventDetail ? [ type, CoreEnum.IdNew ] : [ type ];
+  public cancel(): void {
+    this.store.dispatch(new ActionSearchReset()).subscribe();
+  }
 
-        this.store.dispatch(new Navigate(url));
-    }
+  public search(event: CustomEvent) {
+    if (event.detail.value.length < 3) return;
 
-    public go(type: Pages.Notifications | Pages.Stream): void
-    {
-        if (type === Pages.Notifications)
-        {
-            from(this.modal.create({ component: PageNotifications })).
-            subscribe((modal: HTMLIonModalElement) =>
-                modal.present()
-            );
-        }
-        else
-        {
-            this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
-        }
-    }
+    const pageStream: boolean = this.store.selectSnapshot(
+      StateMobile.pageStream
+    );
+    const pageAlerts: boolean = this.store.selectSnapshot(
+      StateMobile.pageAlerts
+    );
 
-    public menuOpen(): void
-    {
-        this.isUser$.pipe
-        (
-            take(1),
-            switchMap((isUser: boolean) =>
-                isUser ?
-                    from(this.menu.open()) :
-                    this.store.dispatch(new ActionMobileAuthSelect())
-            )
-        ).
-        subscribe();
-    }
-
-    public async showPopover(event: any): Promise<void>
-    {
-        const isStream: boolean = this.store.selectSnapshot(StateMobile.pageStream);
-
-        const popover: HTMLIonPopoverElement = await this.popover.create
-        ({
-            component: ComponentHomeOptions,
-            componentProps:
-            {
-                interestType : this.store.selectSnapshot(StateInterests.type),
-                eventType    : this.store.selectSnapshot(StateCalendar.type),
-                isStream,
-                virtual      : isStream ?
-                                  this.store.selectSnapshot(StateInterests.virtual) :
-                                  this.store.selectSnapshot(StateCalendar.virtual)
-
-            },
-            event,
-            translucent: true
-        });
-
-        return await popover.present();
-    }
-
-    public searchShow(show: boolean): void
-    {
-        this.searching = show;
-
-        if (show)
-        {
-            this.searchbar.setFocus();
-        }
-    }
-
-    public cancel(): void
-    {
-      this.store.dispatch(new ActionSearchReset()).subscribe();
-    }
-
-    public search(event: CustomEvent)
-    {
-        if(event.detail.value.length < 3)
-          return;
-
-        const pageStream : boolean = this.store.selectSnapshot(StateMobile.pageStream);
-        const pageAlerts : boolean = this.store.selectSnapshot(StateMobile.pageAlerts);
-
-        return pageStream ? this.store.dispatch(new ActionSearchInterests(event.detail.value)).subscribe()
-          : pageAlerts ? this.store.dispatch(new ActionSearchEvents(event.detail.value)).subscribe()
-          : of(null);
-    }
+    return pageStream
+      ? this.store
+          .dispatch(new ActionSearchInterests(event.detail.value))
+          .subscribe()
+      : pageAlerts
+      ? this.store
+          .dispatch(new ActionSearchEvents(event.detail.value))
+          .subscribe()
+      : of(null);
+  }
 }

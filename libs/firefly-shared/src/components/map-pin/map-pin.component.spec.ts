@@ -8,9 +8,8 @@ describe('ComponentMapPin', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComponentMapPin ]
-    })
-    .compileComponents();
+      declarations: [ComponentMapPin]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

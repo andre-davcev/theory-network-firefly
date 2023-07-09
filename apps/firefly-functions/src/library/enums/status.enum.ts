@@ -1,7 +1,6 @@
-export enum Status
-{
-    Added,
-    Removed,
-    Changed,
-    Unchanged
+export enum Status {
+  Added,
+  Removed,
+  Changed,
+  Unchanged
 }

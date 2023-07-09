@@ -1,23 +1,26 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 
-@Component
-({
-    selector        : 'ff-map-annotation',
-    templateUrl     : './map-annotation.component.html',
-    styleUrls       : ['./map-annotation.component.scss'],
-    changeDetection : ChangeDetectionStrategy.OnPush
+@Component({
+  selector: 'ff-map-annotation',
+  templateUrl: './map-annotation.component.html',
+  styleUrls: ['./map-annotation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComponentMapAnnotation
-{
-    @Input() title: string = '';
-    @Input() description: string;
+export class ComponentMapAnnotation {
+  @Input() title: string = '';
+  @Input() description: string;
 
-    @Input() disclosure: boolean;
+  @Input() disclosure: boolean;
 
-    @Output() clicked: EventEmitter<void> = new EventEmitter();
+  @Output() clicked: EventEmitter<void> = new EventEmitter();
 
-    public click(): void
-    {
-        this.clicked.next();
-    }
+  public click(): void {
+    this.clicked.next();
+  }
 }

@@ -1,6 +1,5 @@
-export enum MapMovingMethod
-{
-    JumpTo = 'jumpTo',
-    EaseTo = 'easeTo',
-    FlyTo  = 'flyTo'
+export enum MapMovingMethod {
+  JumpTo = 'jumpTo',
+  EaseTo = 'easeTo',
+  FlyTo = 'flyTo'
 }

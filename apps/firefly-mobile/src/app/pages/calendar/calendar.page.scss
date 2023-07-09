@@ -1,23 +1,22 @@
 @use 'variables' as firefly;
 
 :host {
-    --background: #{firefly.$fire-color-white};
+  --background: #{firefly.$fire-color-white};
 
-    ion-searchbar {
-        --box-shadow: none;
-    }
+  ion-searchbar {
+    --box-shadow: none;
+  }
 
-    section
-    {
-        position: relative;
-        height: 100%;
-        background-color: firefly.$fire-color-grey-lightest;
-    }
+  section {
+    position: relative;
+    height: 100%;
+    background-color: firefly.$fire-color-grey-lightest;
+  }
 
-    .searchResults {
-      position: absolute;
-      z-index: 1;
-      width: 100%;
-      background-color: white;
-    }
+  .searchResults {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: white;
+  }
 }

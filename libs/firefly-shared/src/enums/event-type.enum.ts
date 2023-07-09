@@ -1,6 +1,5 @@
-export enum EventType
-{
-    New      = 'new',
-    Upcoming = 'upcoming',
-    Created  = 'created'
+export enum EventType {
+  New = 'new',
+  Upcoming = 'upcoming',
+  Created = 'created'
 }

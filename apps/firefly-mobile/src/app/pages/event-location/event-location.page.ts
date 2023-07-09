@@ -8,87 +8,74 @@ import { switchMap, tap } from 'rxjs/operators';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { MapboxPlaceType } from '@theory/mapbox';
 import { BaseComponent } from '@theory/core';
-import { ActionAppLoadingHide, ActionAppLoadingShow, ActionEventPlaceSet, PlaceTypes, ServiceLocation } from '@firefly/shared';
+import {
+  ActionAppLoadingHide,
+  ActionAppLoadingShow,
+  ActionEventPlaceSet,
+  PlaceTypes,
+  ServiceLocation
+} from '@firefly/shared';
 import { Place } from '@firefly/cloud';
 
-@Component
-({
-    selector    : 'app-page-event-location',
-    templateUrl : 'event-location.page.html',
-    styleUrls   : ['./event-location.page.scss']
+@Component({
+  selector: 'app-page-event-location',
+  templateUrl: 'event-location.page.html',
+  styleUrls: ['./event-location.page.scss']
 })
+export class PageEventLocation extends BaseComponent {
+  @Input() virtual: boolean = false;
+  @Input() place: Place;
 
-export class PageEventLocation extends BaseComponent
-{
-    @Input() virtual : boolean = false;
-    @Input() place   : Place;
+  public placeTypes: Array<MapboxPlaceType> = null;
 
-    public placeTypes: Array<MapboxPlaceType> = null;
+  constructor(
+    private store: Store,
+    private modal: ModalController,
+    private location: ServiceLocation
+  ) {
+    super();
+  }
 
-    constructor
-    (
-        private store:    Store,
-        private modal:    ModalController,
-        private location: ServiceLocation
-    )
-    {
-        super();
-    }
+  public ionViewWillEnter(): void {
+    this.placeTypes = this.virtual ? PlaceTypes.virtual : PlaceTypes.physical;
 
-    public ionViewWillEnter(): void
-    {
-        this.placeTypes = this.virtual ?
-            PlaceTypes.virtual :
-            PlaceTypes.physical;
+    this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Dark }));
 
-        this.store.dispatch(new ActionDeviceStatusBarSet({style: Style.Dark}));
+    // Keyboard.setScroll({ isDisabled: true });
+    // Keyboard.setResizeMode({ mode: KeyboardResize.None });
+  }
 
-        // Keyboard.setScroll({ isDisabled: true });
-        // Keyboard.setResizeMode({ mode: KeyboardResize.None });
-    }
+  public ionViewWillLeave(): void {
+    // Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
+    // Keyboard.setScroll({ isDisabled: false });
+  }
 
-    public ionViewWillLeave(): void
-    {
-        // Keyboard.setResizeMode({ mode: KeyboardResize.Ionic });
-        // Keyboard.setScroll({ isDisabled: false });
-    }
+  public resultFound(result: Result): void {
+    this.place = ServiceLocation.place(result);
+  }
 
-    public resultFound(result: Result): void
-    {
-        this.place = ServiceLocation.place(result);
-    }
+  public cancel(): void {
+    this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
 
-    public cancel(): void
-    {
-        this.store.dispatch
-        (
-            new ActionDeviceStatusBarSet({style: Style.Light})
-        );
+    this.modal.dismiss();
+  }
 
-        this.modal.dismiss();
-    }
-
-    public done(): void
-    {
-        this.store.dispatch(new ActionAppLoadingShow()).pipe
-        (
-            switchMap(() =>
-                this.location.addCity(this.place)
-            ),
-            switchMap((place: Place) =>
-                this.store.dispatch(new ActionEventPlaceSet(place))
-            ),
-            switchMap(() =>
-                this.store.dispatch
-                ([
-                    new ActionDeviceStatusBarSet({style: Style.Light}),
-                    new ActionAppLoadingHide()
-                ])
-            ),
-            tap(() =>
-                this.modal.dismiss()
-            )
-        ).
-        subscribe();
-    }
+  public done(): void {
+    this.store
+      .dispatch(new ActionAppLoadingShow())
+      .pipe(
+        switchMap(() => this.location.addCity(this.place)),
+        switchMap((place: Place) =>
+          this.store.dispatch(new ActionEventPlaceSet(place))
+        ),
+        switchMap(() =>
+          this.store.dispatch([
+            new ActionDeviceStatusBarSet({ style: Style.Light }),
+            new ActionAppLoadingHide()
+          ])
+        ),
+        tap(() => this.modal.dismiss())
+      )
+      .subscribe();
+  }
 }

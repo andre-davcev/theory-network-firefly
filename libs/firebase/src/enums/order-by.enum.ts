@@ -1,5 +1,4 @@
-export enum OrderBy
-{
-    Ascending  = 'asc',
-    Descending = 'desc'
+export enum OrderBy {
+  Ascending = 'asc',
+  Descending = 'desc'
 }

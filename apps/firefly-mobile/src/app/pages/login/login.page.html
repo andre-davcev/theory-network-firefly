@@ -1,72 +1,85 @@
-
-<ion-header *ngIf="page !== Pages.SignUpSlides"
-            mode="ios">
-    <ion-toolbar color="dark">
-        <ion-buttons slot="start">
-            <ion-button icon-only (click)="close()" *ngIf="(authenticating$ | async) === false" >
-                <ion-icon name="close" color="primary"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
+<ion-header *ngIf="page !== Pages.SignUpSlides" mode="ios">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-button
+        icon-only
+        (click)="close()"
+        *ngIf="(authenticating$ | async) === false"
+      >
+        <ion-icon name="close" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<section *ngIf="page === Pages.Login || page === Pages.SignUp || page === Pages.ResetPassword"
-         class="cpt-container"
-         fxLayout="column"
-         fxLayoutAlign="center"
-         fxLayoutGap="2rem">
-    <ff-logo [loading]="authenticating$ | async"></ff-logo>
-    <ff-auth [type]="page"
-              [authenticating]="authenticating$ | async"
-              (finished)="finishedAuth($event)">
-    </ff-auth>
+<section
+  *ngIf="page === Pages.Login || page === Pages.SignUp || page === Pages.ResetPassword"
+  class="cpt-container"
+  fxLayout="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="2rem"
+>
+  <ff-logo [loading]="authenticating$ | async"></ff-logo>
+  <ff-auth
+    [type]="page"
+    [authenticating]="authenticating$ | async"
+    (finished)="finishedAuth($event)"
+  >
+  </ff-auth>
 </section>
 
-<ion-slides *ngIf="page === Pages.SignUpSlides"
-            pager="true">
-    <ion-slide>
-              <ff-tutorial image="assets/sign-up/slide-1.jpg">
-                  <ff-icon-message [icon]="IconType.Interests"
-                                    [iconColor]="Color.White"
-                                    [iconBackground]="Color.BlackTranslucent"
-                                    [message]="'page.signup.slide-1.message' | translate"
-                                    [messageColor]="Color.White"
-                                    messageFontSize="1.25rem"
-                                    [messageTranslucent]="true">
-                  </ff-icon-message>
-              </ff-tutorial>
-          </ion-slide>
+<ion-slides *ngIf="page === Pages.SignUpSlides" pager="true">
+  <ion-slide>
+    <ff-tutorial image="assets/sign-up/slide-1.jpg">
+      <ff-icon-message
+        [icon]="IconType.Interests"
+        [iconColor]="Color.White"
+        [iconBackground]="Color.BlackTranslucent"
+        [message]="'page.signup.slide-1.message' | translate"
+        [messageColor]="Color.White"
+        messageFontSize="1.25rem"
+        [messageTranslucent]="true"
+      >
+      </ff-icon-message>
+    </ff-tutorial>
+  </ion-slide>
 
-          <ion-slide>
-              <ff-tutorial image="assets/sign-up/slide-2.jpg">
-                  <ff-icon-message [icon]="IconType.Stream"
-                                    [iconColor]="Color.White"
-                                    [iconBackground]="Color.BlackTranslucent"
-                                    [message]="'page.signup.slide-2.message' | translate"
-                                    [messageColor]="Color.White"
-                                    messageFontSize="1.25rem"
-                                    [messageTranslucent]="true">
-                  </ff-icon-message>
-              </ff-tutorial>
-          </ion-slide>
+  <ion-slide>
+    <ff-tutorial image="assets/sign-up/slide-2.jpg">
+      <ff-icon-message
+        [icon]="IconType.Stream"
+        [iconColor]="Color.White"
+        [iconBackground]="Color.BlackTranslucent"
+        [message]="'page.signup.slide-2.message' | translate"
+        [messageColor]="Color.White"
+        messageFontSize="1.25rem"
+        [messageTranslucent]="true"
+      >
+      </ff-icon-message>
+    </ff-tutorial>
+  </ion-slide>
 
-          <ion-slide>
-              <ff-tutorial image="assets/sign-up/slide-3.jpg">
-                  <ff-icon-message [fill]="false"
-                                    [icon]="IconType.Alerts"
-                                    [iconColor]="Color.White"
-                                    [iconBackground]="Color.BlackTranslucent"
-                                    [message]="'page.signup.slide-3.message' | translate"
-                                    [messageColor]="Color.White"
-                                    messageFontSize="1.25rem"
-                                    [messageTranslucent]="true">
-                  </ff-icon-message>
+  <ion-slide>
+    <ff-tutorial image="assets/sign-up/slide-3.jpg">
+      <ff-icon-message
+        [fill]="false"
+        [icon]="IconType.Alerts"
+        [iconColor]="Color.White"
+        [iconBackground]="Color.BlackTranslucent"
+        [message]="'page.signup.slide-3.message' | translate"
+        [messageColor]="Color.White"
+        messageFontSize="1.25rem"
+        [messageTranslucent]="true"
+      >
+      </ff-icon-message>
 
-                  <ff-button-action [text]="'general.go' | translate"
-                                     [textColor]="Color.Black"
-                                     [color]="Color.White"
-                                     (click)="close()">
-                  </ff-button-action>
-              </ff-tutorial>
-          </ion-slide>
+      <ff-button-action
+        [text]="'general.go' | translate"
+        [textColor]="Color.Black"
+        [color]="Color.White"
+        (click)="close()"
+      >
+      </ff-button-action>
+    </ff-tutorial>
+  </ion-slide>
 </ion-slides>

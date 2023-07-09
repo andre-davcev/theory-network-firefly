@@ -8,9 +8,8 @@ describe('ComponentMapAnnotation', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComponentMapAnnotation ]
-    })
-    .compileComponents();
+      declarations: [ComponentMapAnnotation]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

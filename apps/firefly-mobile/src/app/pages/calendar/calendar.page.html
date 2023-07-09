@@ -1,19 +1,22 @@
 <ion-header elevation="1">
-    <ion-toolbar *ngIf="searching"
-                color="light"
-                (ionBlur)="searchShow(false)"
-                (ionCancel)="cancel()"
-                (ionChange)="search($event)">
-        <ion-searchbar #searchBar
-                      debounce="600"
-                      showCancelButton="focus"
-                      [placeholder]="'general.search' | translate">
-        </ion-searchbar>
-    </ion-toolbar>
+  <ion-toolbar
+    *ngIf="searching"
+    color="light"
+    (ionBlur)="searchShow(false)"
+    (ionCancel)="cancel()"
+    (ionChange)="search($event)"
+  >
+    <ion-searchbar
+      #searchBar
+      debounce="600"
+      showCancelButton="focus"
+      [placeholder]="'general.search' | translate"
+    >
+    </ion-searchbar>
+  </ion-toolbar>
 
-    <ion-toolbar *ngIf="!searching"
-                 color="light">
-<!--
+  <ion-toolbar *ngIf="!searching" color="light">
+    <!--
         <ion-buttons slot="start">
             <ion-button icon-only
                         [disabled]="menuOpen$ | async"
@@ -23,63 +26,67 @@
         </ion-buttons>
 -->
 
-        <ion-title color="dark">
-            {{ 'page.notifications.title' | translate}}
-        </ion-title>
+    <ion-title color="dark">
+      {{ 'page.notifications.title' | translate}}
+    </ion-title>
 
-        <ion-buttons slot="end">
-            <ion-button *ngIf="(isPublisher$ | async) && (authenticated$ | async)"
-                        icon-only
-                        [disabled]="menuOpen$ | async"
-                        (click)="showPopover($event)">
-                <ion-icon name="options" color="dark" size="large"></ion-icon>
-            </ion-button>
+    <ion-buttons slot="end">
+      <ion-button
+        *ngIf="(isPublisher$ | async) && (authenticated$ | async)"
+        icon-only
+        [disabled]="menuOpen$ | async"
+        (click)="showPopover($event)"
+      >
+        <ion-icon name="options" color="dark" size="large"></ion-icon>
+      </ion-button>
 
-            <ion-button icon-only
-                        (click)="menuOpen()"
-                        [disabled]="menuOpen$ | async">
-                <ion-icon name="person" color="dark" size="large"></ion-icon>
-            </ion-button>
-        </ion-buttons>
+      <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+        <ion-icon name="person" color="dark" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <section fxLayout="column" fxLayoutAlign="center">
-    <ion-list *ngIf="searchResultsFound$ | async"
-              class="searchResults">
-        <ion-item *ngFor="let searchResult of searchResults$ | async"
-                  lines="none"
-                  (click)="selectSearchInterest(searchResult)">
-            {{searchResult.name}}
-        </ion-item>
+  <ion-list *ngIf="searchResultsFound$ | async" class="searchResults">
+    <ion-item
+      *ngFor="let searchResult of searchResults$ | async"
+      lines="none"
+      (click)="selectSearchInterest(searchResult)"
+    >
+      {{searchResult.name}}
+    </ion-item>
+  </ion-list>
+
+  <ion-content>
+    <ion-list>
+      <ff-item-events
+        *ngFor="let events of data$ | async"
+        [dateEvents]="events"
+        [showDelete]="true"
+        (selected)="navigate($event)"
+        (deleted)="delete($event)"
+      >
+      </ff-item-events>
     </ion-list>
 
-    <ion-content>
-        <ion-list>
-            <ff-item-events *ngFor="let events of data$ | async"
-                            [dateEvents]="events"
-                            [showDelete]="true"
-                            (selected)="navigate($event)"
-                            (deleted)="delete($event)">
-            </ff-item-events>
-        </ion-list>
+    <ff-button-add *ngIf="canAdd$ | async" (clicked)="add()" slot="fixed">
+    </ff-button-add>
 
-        <ff-button-add *ngIf="canAdd$ | async"
-                    (clicked)="add()"
-                    slot="fixed">
-        </ff-button-add>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        [loadingText]="'page.calendar.loading' | translate"
+      >
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
 
-        <ion-infinite-scroll threshold="100px"
-                             (ionInfinite)="loadData($event)">
-            <ion-infinite-scroll-content loadingSpinner="bubbles"
-                                         [loadingText]="'page.calendar.loading' | translate">
-            </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-    </ion-content>
-
-    <ff-icon-message *ngIf="!(exists$ | async)"
-              slot="fixed"
-              [icon]="IconType.Alerts"
-              [message]="(emptyMessage$ | async) | translate">
-    </ff-icon-message>
+  <ff-icon-message
+    *ngIf="!(exists$ | async)"
+    slot="fixed"
+    [icon]="IconType.Alerts"
+    [message]="(emptyMessage$ | async) | translate"
+  >
+  </ff-icon-message>
 </section>

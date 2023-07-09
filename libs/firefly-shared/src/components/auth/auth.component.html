@@ -1,77 +1,102 @@
-<form [formGroup]="form"
-      fxLayout="column"
-      fxLayoutGap="1.125rem">
-    <section class="cpt-inputs"
-             [ngClass]="type"
-             fxLayout="column">
-        <section fxLayout="row"
-                 fxLayoutAlign="start center">
-            <fa-icon [icon]="faEnvelope"
-                     [classes]="['cpt-icon-email', (hasErrors$[AuthControl.Id] | async) ? 'cpt-highlight' : '']">
-            </fa-icon>
-            <ion-input [formControlName]="AuthControl.Id"
-                       mode="ios"
-                       type="email"
-                       inputmode="email"
-                       clearInput="true"
-                       clearOnEdit="true"
-                       [placeholder]="'page.auth.placeholderEmail' | translate"
-                       required="true"
-                       (ionFocus)="focus(AuthControl.Id, true)"
-                       (ionBlur)="focus(AuthControl.Id, false)">
-            </ion-input>
-        </section>
-
-        <section *ngIf="type !== AuthType.ResetPassword" fxLayout="row"
-                 fxLayoutAlign="start center">
-            <fa-icon [icon]="faLock"
-                     [classes]="[(hasErrors$[AuthControl.Password] | async) ? 'cpt-highlight' : '']">
-            </fa-icon>
-            <ion-input [formControlName]="AuthControl.Password"
-                       mode="ios"
-                       type="password"
-                       inputmode="password"
-                       clearInput="true"
-                       clearOnEdit="true"
-                       [placeholder]="'page.auth.placeholderPassword' | translate"
-                       (ionFocus)="focus(AuthControl.Password, true)"
-                       (ionBlur)="focus(AuthControl.Password, false)">
-            </ion-input>
-        </section>
+<form [formGroup]="form" fxLayout="column" fxLayoutGap="1.125rem">
+  <section class="cpt-inputs" [ngClass]="type" fxLayout="column">
+    <section fxLayout="row" fxLayoutAlign="start center">
+      <fa-icon
+        [icon]="faEnvelope"
+        [classes]="[
+          'cpt-icon-email',
+          (hasErrors$[AuthControl.Id] | async) ? 'cpt-highlight' : ''
+        ]"
+      >
+      </fa-icon>
+      <ion-input
+        [formControlName]="AuthControl.Id"
+        mode="ios"
+        type="email"
+        inputmode="email"
+        clearInput="true"
+        clearOnEdit="true"
+        [placeholder]="'page.auth.placeholderEmail' | translate"
+        required="true"
+        (ionFocus)="focus(AuthControl.Id, true)"
+        (ionBlur)="focus(AuthControl.Id, false)"
+      >
+      </ion-input>
     </section>
 
-    <section class="cpt-buttons"
-             fxLayout="column">
-        <ion-button mode="ios"
-                    [disabled]="form.invalid || authenticating"
-                    (click)="clicked()">
-            <span class="cpt-button-text">
-                {{ (type === AuthType.Login ? 'general.login' : type === AuthType.ResetPassword ? 'general.resetPassword' : 'general.signup') | translate}}
-            </span>
-        </ion-button>
+    <section
+      *ngIf="type !== AuthType.ResetPassword"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+    >
+      <fa-icon
+        [icon]="faLock"
+        [classes]="[
+          (hasErrors$[AuthControl.Password] | async) ? 'cpt-highlight' : ''
+        ]"
+      >
+      </fa-icon>
+      <ion-input
+        [formControlName]="AuthControl.Password"
+        mode="ios"
+        type="password"
+        inputmode="password"
+        clearInput="true"
+        clearOnEdit="true"
+        [placeholder]="'page.auth.placeholderPassword' | translate"
+        (ionFocus)="focus(AuthControl.Password, true)"
+        (ionBlur)="focus(AuthControl.Password, false)"
+      >
+      </ion-input>
     </section>
+  </section>
 
-    <section class="cpt-validation-errors"
-             fxLayout="column"
-             fxLayoutGap="0.625rem">
-        <ng-container *ngFor="let error of errors$[AuthControl.Id] | async">
-            <div class="cpt-error-message"
-                 fxLayout="row"
-                 fxLayoutGap="0.5rem"
-                 fxLayoutAlign="start center">
-                <div><ion-icon name="alert-circle" color="secondary"></ion-icon></div>
-                <span class="cpt-message">{{ error }}</span>
-            </div>
-        </ng-container>
+  <section class="cpt-buttons" fxLayout="column">
+    <ion-button
+      mode="ios"
+      [disabled]="form.invalid || authenticating"
+      (click)="clicked()"
+    >
+      <span class="cpt-button-text">
+        {{
+          (type === AuthType.Login
+            ? 'general.login'
+            : type === AuthType.ResetPassword
+            ? 'general.resetPassword'
+            : 'general.signup'
+          ) | translate
+        }}
+      </span>
+    </ion-button>
+  </section>
 
-        <ng-container *ngFor="let error of errors$[AuthControl.Password] | async">
-            <div class="cpt-error-message"
-                 fxLayout="row"
-                 fxLayoutGap="0.5rem"
-                 fxLayoutAlign="start center">
-                 <div><ion-icon name="alert-circle" color="secondary"></ion-icon></div>
-                 <span class="cpt-message">{{ error }}</span>
-            </div>
-      </ng-container>
-    </section>
+  <section
+    class="cpt-validation-errors"
+    fxLayout="column"
+    fxLayoutGap="0.625rem"
+  >
+    <ng-container *ngFor="let error of errors$[AuthControl.Id] | async">
+      <div
+        class="cpt-error-message"
+        fxLayout="row"
+        fxLayoutGap="0.5rem"
+        fxLayoutAlign="start center"
+      >
+        <div><ion-icon name="alert-circle" color="secondary"></ion-icon></div>
+        <span class="cpt-message">{{ error }}</span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngFor="let error of errors$[AuthControl.Password] | async">
+      <div
+        class="cpt-error-message"
+        fxLayout="row"
+        fxLayoutGap="0.5rem"
+        fxLayoutAlign="start center"
+      >
+        <div><ion-icon name="alert-circle" color="secondary"></ion-icon></div>
+        <span class="cpt-message">{{ error }}</span>
+      </div>
+    </ng-container>
+  </section>
 </form>

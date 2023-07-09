@@ -22,125 +22,133 @@ import {
   ActionSubscriptionUpdate,
   ActionSubscriptionPatchMetadata
 } from './subscription.actions';
-import { StateUserSubscriptions, ActionUserSubscriptionsAdd, ActionUserSubscriptionsRemove, ActionUserSubscriptionsSync } from '../../child/user-subscriptions';
+import {
+  StateUserSubscriptions,
+  ActionUserSubscriptionsAdd,
+  ActionUserSubscriptionsRemove,
+  ActionUserSubscriptionsSync
+} from '../../child/user-subscriptions';
 
 @State<StateSubscriptionModel>(StateSubscriptionOptions)
 @Injectable()
-export class StateSubscription extends StateDocument<Subscription, StateSubscriptionModel>
-{
-    constructor
-    (
-        private store: Store,
-        service: ServiceSubscriptions
-    )
-    {
-        super
-        (
-            Collection.Subscriptions,
-            StateSubscriptionOptions.defaults,
-            service,
-            {
-                version     : undefined,
-                userId      : undefined,
-                id          : undefined,
-                dateCreated : undefined,
-                dateUpdated : undefined,
-                metadata    : {},
+export class StateSubscription extends StateDocument<
+  Subscription,
+  StateSubscriptionModel
+> {
+  constructor(private store: Store, service: ServiceSubscriptions) {
+    super(
+      Collection.Subscriptions,
+      StateSubscriptionOptions.defaults,
+      service,
+      {
+        version: undefined,
+        userId: undefined,
+        id: undefined,
+        dateCreated: undefined,
+        dateUpdated: undefined,
+        metadata: {},
 
-                description     : null,
-                name            : null,
-                private         : true,
-                subscriberCount : 0,
-                tagline         : null,
-                virtual         : false,
-                on              : false
-            },
-            {
-                ActionReset:  ActionSubscriptionReset,
-                ActionGet:    ActionSubscriptionGet,
-                ActionSet:    ActionSubscriptionSet,
-                ActionPatch:  ActionSubscriptionPatch,
-                ActionCreate: ActionSubscriptionCreate,
-                ActionUpdate: ActionSubscriptionUpdate,
-                ActionSave:   ActionSubscriptionSave,
-                ActionDelete: ActionSubscriptionDelete,
+        description: null,
+        name: null,
+        private: true,
+        subscriberCount: 0,
+        tagline: null,
+        virtual: false,
+        on: false
+      },
+      {
+        ActionReset: ActionSubscriptionReset,
+        ActionGet: ActionSubscriptionGet,
+        ActionSet: ActionSubscriptionSet,
+        ActionPatch: ActionSubscriptionPatch,
+        ActionCreate: ActionSubscriptionCreate,
+        ActionUpdate: ActionSubscriptionUpdate,
+        ActionSave: ActionSubscriptionSave,
+        ActionDelete: ActionSubscriptionDelete,
 
-                ActionsReset:  [],
-                ActionsCreate: [],
+        ActionsReset: [],
+        ActionsCreate: [],
 
-                ActionsQueryAdd:    [ActionUserSubscriptionsAdd],
-                ActionsQueryRemove: [ActionUserSubscriptionsRemove],
-                ActionsQuerySync:   [ActionUserSubscriptionsSync]
-            }
-        );
-    }
+        ActionsQueryAdd: [ActionUserSubscriptionsAdd],
+        ActionsQueryRemove: [ActionUserSubscriptionsRemove],
+        ActionsQuerySync: [ActionUserSubscriptionsSync]
+      }
+    );
+  }
 
-    @Action(ActionSubscriptionReset)
-    reset(context: StateContext<StateSubscriptionModel>)
-    {
-        return super.reset(context)
-    }
+  @Action(ActionSubscriptionReset)
+  reset(context: StateContext<StateSubscriptionModel>) {
+    return super.reset(context);
+  }
 
-    @Action(ActionSubscriptionGet)
-    get(context: StateContext<StateSubscriptionModel>, action: ActionSubscriptionGet)
-    {
-        return super.get(context, action);
-    }
+  @Action(ActionSubscriptionGet)
+  get(
+    context: StateContext<StateSubscriptionModel>,
+    action: ActionSubscriptionGet
+  ) {
+    return super.get(context, action);
+  }
 
-    @Action(ActionSubscriptionSet)
-    set(context: StateContext<StateSubscriptionModel>, action: ActionSubscriptionSet)
-    {
-        return super.set(context, action);
-    }
+  @Action(ActionSubscriptionSet)
+  set(
+    context: StateContext<StateSubscriptionModel>,
+    action: ActionSubscriptionSet
+  ) {
+    return super.set(context, action);
+  }
 
-    @Action(ActionSubscriptionPatch)
-    patch(context : StateContext<StateSubscriptionModel>, action: ActionSubscriptionPatch)
-    {
-        return super.patch(context, action);
-    }
+  @Action(ActionSubscriptionPatch)
+  patch(
+    context: StateContext<StateSubscriptionModel>,
+    action: ActionSubscriptionPatch
+  ) {
+    return super.patch(context, action);
+  }
 
-    @Action(ActionSubscriptionPatchMetadata)
-    patchMetadata(context : StateContext<StateSubscriptionModel>, action: ActionSubscriptionPatchMetadata)
-    {
-        return super.patchMetadata(context, action);
-    }
+  @Action(ActionSubscriptionPatchMetadata)
+  patchMetadata(
+    context: StateContext<StateSubscriptionModel>,
+    action: ActionSubscriptionPatchMetadata
+  ) {
+    return super.patchMetadata(context, action);
+  }
 
-    @Action(ActionSubscriptionCreate)
-    create(context: StateContext<StateSubscriptionModel>)
-    {
-        return super.create(context);
-    }
+  @Action(ActionSubscriptionCreate)
+  create(context: StateContext<StateSubscriptionModel>) {
+    return super.create(context);
+  }
 
-    @Action(ActionSubscriptionUpdate)
-    update(context: StateContext<StateSubscriptionModel>)
-    {
-        return super.update(context);
-    }
+  @Action(ActionSubscriptionUpdate)
+  update(context: StateContext<StateSubscriptionModel>) {
+    return super.update(context);
+  }
 
-    @Action(ActionSubscriptionSave)
-    save(context: StateContext<StateSubscriptionModel>)
-    {
-        return super.save(context);
-    }
+  @Action(ActionSubscriptionSave)
+  save(context: StateContext<StateSubscriptionModel>) {
+    return super.save(context);
+  }
 
-    @Action(ActionSubscriptionDelete)
-    delete(context: StateContext<StateSubscriptionModel>)
-    {
-        return super.delete(context);
-    }
+  @Action(ActionSubscriptionDelete)
+  delete(context: StateContext<StateSubscriptionModel>) {
+    return super.delete(context);
+  }
 
-    @Action(ActionSubscriptionSetId)
-    setId({ dispatch }: StateContext<StateSubscriptionModel>, { id }: ActionSubscriptionSetId)
-    {
-        const isNew: boolean = id === CoreEnum.IdNew;
+  @Action(ActionSubscriptionSetId)
+  setId(
+    { dispatch }: StateContext<StateSubscriptionModel>,
+    { id }: ActionSubscriptionSetId
+  ) {
+    const isNew: boolean = id === CoreEnum.IdNew;
 
-        const userId:   string                     = this.store.selectSnapshot(StateUser.id());
-        const snapshot: DocumentSnapshot = this.store.selectSnapshot(StateUserSubscriptions.snapshotLookup()[id]);
+    const userId: string = this.store.selectSnapshot(StateUser.id());
+    const snapshot: DocumentSnapshot = this.store.selectSnapshot(
+      StateUserSubscriptions.snapshotLookup()[id]
+    );
 
-        const data: Subscription = isNew ?
-            this.service.formDataNew(userId, this.empty) :
-            this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
+    const data: Subscription = isNew
+      ? this.service.formDataNew(userId, this.empty)
+      : this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
 
-        return dispatch(new ActionSubscriptionSet(snapshot, data));
-    }
+    return dispatch(new ActionSubscriptionSet(snapshot, data));
+  }
 }

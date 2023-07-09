@@ -1,14 +1,13 @@
-import { MapboxPlaceType, ReverseMode } from '../enums'
+import { MapboxPlaceType, ReverseMode } from '../enums';
 
-export interface ParamsReverseGeocode
-{
-    /*
+export interface ParamsReverseGeocode {
+  /*
       Limit results to one or more countries. Permitted values are ISO 3166 alpha
       2 country codes separated by commas.
     */
-    country?: string;
+  country?: string;
 
-    /*
+  /*
       Specify the user’s language. This parameter controls the language of the
       text supplied in responses.
 
@@ -21,9 +20,9 @@ export interface ParamsReverseGeocode
       For more information on which specific languages are supported, see the
       language coverage section.
     */
-    language?: string;
+  language?: string;
 
-    /*
+  /*
       Specify the maximum number of results to return. The default is 1 and the
       maximum supported is 5.
 
@@ -34,17 +33,17 @@ export interface ParamsReverseGeocode
       multiple address results). Consequently, setting limit to a higher-than-default
       value requires specifying exactly one types parameter.
     */
-    limit?: number;
+  limit?: number;
 
-    /*
+  /*
       Decides how results are sorted in a reverse geocoding query if multiple results
       are requested using a limit other than 1. Options are distance (default), which
       causes the closest feature to always be returned first, and score, which allows
       high-prominence features to be sorted higher than nearer, lower-prominence features.
     */
-    reverseMode?: ReverseMode;
+  reverseMode?: ReverseMode;
 
-    /*
+  /*
       Specify whether to request additional metadata about the recommended navigation
       destination corresponding to the feature (true) or not (false, default). Only
       applicable for address features.
@@ -55,15 +54,14 @@ export interface ParamsReverseGeocode
       Consuming applications should fall back to using the feature’s normal geometry
       for routing if a separate routable point is not returned.
     */
-    routing?: boolean;
+  routing?: boolean;
 
-    /*
+  /*
       Filter results to include only a subset (one or more) of the available feature
       types. Options are country, region, postcode, district, place, locality,
       neighborhood, address, and poi. Multiple options can be comma-separated. Note
       that poi.landmark is a deprecated type that, while still supported, returns the
       same data as is returned using the poi type.
     */
-    types?: Array<MapboxPlaceType>;
-};
-
+  types?: Array<MapboxPlaceType>;
+}

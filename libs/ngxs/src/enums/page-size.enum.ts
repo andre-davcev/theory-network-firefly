@@ -1,6 +1,5 @@
-export enum PageSize
-{
-    None        = -1,
-    Default     = 20,
-    MobileCards = 3
+export enum PageSize {
+  None = -1,
+  Default = 20,
+  MobileCards = 3
 }

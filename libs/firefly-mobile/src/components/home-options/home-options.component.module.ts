@@ -6,17 +6,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ComponentHomeOptions } from './home-options.component';
 
-@NgModule
-({
-    imports:
-    [
-        CommonModule,
-        IonicModule,
-        FlexLayoutModule,
-        TranslateModule
-    ],
+@NgModule({
+  imports: [CommonModule, IonicModule, FlexLayoutModule, TranslateModule],
 
-    declarations : [ComponentHomeOptions],
-    exports      : [ComponentHomeOptions]
+  declarations: [ComponentHomeOptions],
+  exports: [ComponentHomeOptions]
 })
-export class ModuleComponentHomeOptions { }
+export class ModuleComponentHomeOptions {}

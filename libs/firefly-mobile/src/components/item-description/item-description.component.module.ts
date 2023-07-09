@@ -6,17 +6,10 @@ import { IonicModule } from '@ionic/angular';
 
 import { ComponentItemDescription } from './item-description.component';
 
-@NgModule
-({
-    imports :
-    [
-        CommonModule,
-        FlexLayoutModule,
-        ReactiveFormsModule,
-        IonicModule
-    ],
+@NgModule({
+  imports: [CommonModule, FlexLayoutModule, ReactiveFormsModule, IonicModule],
 
-    declarations : [ComponentItemDescription],
-    exports      : [ComponentItemDescription]
+  declarations: [ComponentItemDescription],
+  exports: [ComponentItemDescription]
 })
-export class ModuleComponentItemDescription { }
+export class ModuleComponentItemDescription {}

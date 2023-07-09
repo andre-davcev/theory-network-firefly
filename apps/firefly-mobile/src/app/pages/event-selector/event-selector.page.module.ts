@@ -7,16 +7,14 @@ import { ModuleComponentIconMessage } from '@firefly/shared';
 import { ModulePage } from '../../modules';
 import { PageEventSelector } from './event-selector.page';
 
-@NgModule
-({
-    imports: [
-        ModulePage,
-        ModuleDirectiveElevation,
-        ModuleComponentItemEvents,
-        ModuleComponentIconMessage
-    ],
-    declarations: [PageEventSelector],
-    exports: [PageEventSelector]
+@NgModule({
+  imports: [
+    ModulePage,
+    ModuleDirectiveElevation,
+    ModuleComponentItemEvents,
+    ModuleComponentIconMessage
+  ],
+  declarations: [PageEventSelector],
+  exports: [PageEventSelector]
 })
-
-export class ModulePageEventSelector { }
+export class ModulePageEventSelector {}

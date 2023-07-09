@@ -10,19 +10,17 @@ import { ModulePage } from '../../modules';
 import { RoutesPageCategories } from './categories.page.routes';
 import { PageCategories } from './categories.page';
 
-@NgModule
-({
-    imports :
-    [
-        ModulePage,
-        CommonModule,
-        RouterModule.forChild(RoutesPageCategories),
-        TranslateModule,
-        ModuleDirectiveElevation,
-        ModuleComponentIcon
-    ],
+@NgModule({
+  imports: [
+    ModulePage,
+    CommonModule,
+    RouterModule.forChild(RoutesPageCategories),
+    TranslateModule,
+    ModuleDirectiveElevation,
+    ModuleComponentIcon
+  ],
 
-    declarations : [PageCategories],
-    exports : [PageCategories]
+  declarations: [PageCategories],
+  exports: [PageCategories]
 })
 export class ModulePagePublisher {}

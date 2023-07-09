@@ -2,13 +2,11 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { StatePhotosModel } from './photos.state.model';
 
-export const StatePhotosOptions: StoreOptions<StatePhotosModel> =
-{
-    name: 'photos',
+export const StatePhotosOptions: StoreOptions<StatePhotosModel> = {
+  name: 'photos',
 
-    defaults:
-    {
-        photos: undefined,
-        albums: undefined
-    }
+  defaults: {
+    photos: undefined,
+    albums: undefined
+  }
 };

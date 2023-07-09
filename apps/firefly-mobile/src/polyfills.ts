@@ -42,19 +42,19 @@
  *
  */
 
- import './zone-flags.ts';
+import './zone-flags.ts';
 
- /***************************************************************************************************
-  * Zone JS is required by default for Angular itself.
-  */
+/***************************************************************************************************
+ * Zone JS is required by default for Angular itself.
+ */
 
- import 'zone.js/dist/zone'; // Included with Angular CLI.
+import 'zone.js/dist/zone'; // Included with Angular CLI.
 
- /***************************************************************************************************
-  * APPLICATION IMPORTS
-  */
+/***************************************************************************************************
+ * APPLICATION IMPORTS
+ */
 
-  import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
+import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
 
-  // https://github.com/Wykks/ngx-mapbox-gl/issues/136
-  (window as any).global = window;
+// https://github.com/Wykks/ngx-mapbox-gl/issues/136
+(window as any).global = window;

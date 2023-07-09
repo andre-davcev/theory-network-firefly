@@ -1,31 +1,28 @@
 <ion-header elevation="1">
-    <ion-toolbar>
-        <ion-title>
-            {{ 'page.event.detail.title' | translate }}
-        </ion-title>
+  <ion-toolbar>
+    <ion-title> {{ 'page.event.detail.title' | translate }} </ion-title>
 
-        <ion-buttons slot="start">
-            <ion-back-button color="dark"></ion-back-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
 
-        <ion-buttons slot="end">
-            <ion-button *ngIf="canEdit$ | async"
-                        (click)="edit()"
-                        icon-only>
-                <ion-icon size="large" name="create-outline" color="dark"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="canEdit$ | async" (click)="edit()" icon-only>
+        <ion-icon size="large" name="create-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <div class="cpt-container"
-          slot="fixed">
-        <ff-slide [slide]="event$ | async"
-                   [deleteShow]="!((event$ | async)?.metadata.isEvent)"
-                    [buttonText]="'general.go' | translate"
-                    (alertDeleteClicked)="delete()"
-                    (alertGoClicked)="go()">
-        </ff-slide>
-    </div>
+  <div class="cpt-container" slot="fixed">
+    <ff-slide
+      [slide]="event$ | async"
+      [deleteShow]="!((event$ | async)?.metadata.isEvent)"
+      [buttonText]="'general.go' | translate"
+      (alertDeleteClicked)="delete()"
+      (alertGoClicked)="go()"
+    >
+    </ff-slide>
+  </div>
 </ion-content>

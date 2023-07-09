@@ -5,44 +5,36 @@ import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { Style } from '@capacitor/status-bar';
 
-import { ActionDeviceStatusBarShow, ActionDeviceStatusBarSet } from '@theory/capacitor';
+import {
+  ActionDeviceStatusBarShow,
+  ActionDeviceStatusBarSet
+} from '@theory/capacitor';
 import { StateApp } from '@firefly/shared';
 import { Pages } from '@firefly/mobile';
 
-@Component
-({
-    selector    : 'app-page-auth',
-    templateUrl : 'auth.page.html',
-    styleUrls   : ['./auth.page.scss']
+@Component({
+  selector: 'app-page-auth',
+  templateUrl: 'auth.page.html',
+  styleUrls: ['./auth.page.scss']
 })
+export class PageAuth implements OnInit {
+  @Select(StateApp.initialized) initialized$: Observable<boolean>;
 
-export class PageAuth implements OnInit
-{
-    @Select(StateApp.initialized) initialized$: Observable<boolean>;
+  constructor(private store: Store) {}
 
-    constructor
-    (
-        private store : Store,
-    ) { }
+  public ngOnInit(): void {
+    from(this.store.dispatch(new ActionDeviceStatusBarShow()))
+      .pipe(
+        switchMap(() => this.initialized$),
+        filter((initialized: boolean) => initialized),
+        switchMap(() =>
+          this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]))
+        )
+      )
+      .subscribe();
+  }
 
-    public ngOnInit(): void
-    {
-        from(this.store.dispatch(new ActionDeviceStatusBarShow())).
-        pipe
-        (
-            switchMap(() =>
-                this.initialized$
-            ),
-            filter((initialized: boolean) => initialized),
-            switchMap(() =>
-                this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]))
-            )
-        ).
-        subscribe();
-    }
-
-    public ionViewWillEnter(): void
-    {
-        this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
-    }
+  public ionViewWillEnter(): void {
+    this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
+  }
 }

@@ -1,5 +1,4 @@
-export enum FormNgxsStatus
-{
-    Valid   = 'VALID',
-    Invalid = 'INVALID'
+export enum FormNgxsStatus {
+  Valid = 'VALID',
+  Invalid = 'INVALID'
 }

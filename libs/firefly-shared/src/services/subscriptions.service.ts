@@ -6,15 +6,8 @@ import { ServiceFirestore } from '@theory/firebase';
 import { Subscription } from '@firefly/cloud';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceSubscriptions extends ServiceFirestore<Subscription>
-{
-    constructor
-    (
-        firestore:   AngularFirestore,
-        formBuilder: UntypedFormBuilder
-    )
-    {
-        super(firestore, formBuilder);
-    }
+export class ServiceSubscriptions extends ServiceFirestore<Subscription> {
+  constructor(firestore: AngularFirestore, formBuilder: UntypedFormBuilder) {
+    super(firestore, formBuilder);
+  }
 }
-

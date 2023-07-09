@@ -5,14 +5,12 @@ import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 import { StateSubscriptionModel } from './subscription.state.model';
 
-export const StateSubscriptionOptions: StoreOptions<StateSubscriptionModel> =
-{
-    name : 'subscriptions',
+export const StateSubscriptionOptions: StoreOptions<StateSubscriptionModel> = {
+  name: 'subscriptions',
 
-    defaults :
-    {
-        snapshot  : undefined,
-        form      : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
-        formGroup : undefined,
-    }
+  defaults: {
+    snapshot: undefined,
+    form: CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
+    formGroup: undefined
+  }
 };

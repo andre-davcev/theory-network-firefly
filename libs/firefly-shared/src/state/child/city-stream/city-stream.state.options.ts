@@ -7,43 +7,39 @@ import { PageSize } from '@theory/ngxs';
 import { InterestType } from '../../../enums';
 import { StateCityStreamModel } from './city-stream.state.model';
 
-export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> =
-{
-    name : 'streams',
+export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> = {
+  name: 'streams',
 
-    defaults :
-    {
-        pageSize:         PageSize.MobileCards,
-        orderBy:          'score',
-        orderByDirection: OrderBy.Descending,
+  defaults: {
+    pageSize: PageSize.MobileCards,
+    orderBy: 'score',
+    orderByDirection: OrderBy.Descending,
 
-        initialized:    false,
-        loading:        false,
-        finishedPaging: false,
+    initialized: false,
+    loading: false,
+    finishedPaging: false,
 
-        snapshotLookup: {},
-        dataLookup:     {},
+    snapshotLookup: {},
+    dataLookup: {},
 
-        childLookup  : {},
-        keys         : [],
-        keysFiltered : [],
-        id           : undefined,
-        data         : [],
+    childLookup: {},
+    keys: [],
+    keysFiltered: [],
+    id: undefined,
+    data: [],
 
-        sortFields:
-        {
-            score : TypeOf.Number
-        },
+    sortFields: {
+      score: TypeOf.Number
+    },
 
-        filter :
-        {
-            type          : InterestType.Unsubscribed,
-            virtual       : false,
-            subscriptions : {}
-        },
+    filter: {
+      type: InterestType.Unsubscribed,
+      virtual: false,
+      subscriptions: {}
+    },
 
-        subscriptionsNew: {},
-        subscriptionsSet: false,
-        cityStreamSet   : false
-    }
+    subscriptionsNew: {},
+    subscriptionsSet: false,
+    cityStreamSet: false
+  }
 };

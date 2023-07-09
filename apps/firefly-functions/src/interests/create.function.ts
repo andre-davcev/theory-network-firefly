@@ -14,21 +14,20 @@ const index = client.initIndex('interests');
 
 db();
 
-const InterestsCreate: CloudFunction<DocumentSnapshot> =
-
-firestore.
-document(`${Collection.Interests}/{id}`).
-onCreate(async(snapshot: DocumentSnapshot, context: EventContext) =>
-{
+const InterestsCreate: CloudFunction<DocumentSnapshot> = firestore
+  .document(`${Collection.Interests}/{id}`)
+  .onCreate(async (snapshot: DocumentSnapshot, context: EventContext) => {
     const data = snapshot.data();
     const objectID = snapshot.id;
-    const object: Interest = ServiceFirestore.create<Interest>(snapshot, Version.Interests);
+    const object: Interest = ServiceFirestore.create<Interest>(
+      snapshot,
+      Version.Interests
+    );
 
-    return Promise.all
-    ([
-        snapshot.ref.update({data: object}),
-        index.saveObject({ ...data, objectID})
+    return Promise.all([
+      snapshot.ref.update({ data: object }),
+      index.saveObject({ ...data, objectID })
     ]);
-});
+  });
 
 export { InterestsCreate };

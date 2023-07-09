@@ -5,16 +5,14 @@ import { FormNgxs, FormNgxsDefaults } from '@theory/ngxs';
 
 import { StateInterestModel } from './interest.state.model';
 
-export const StateInterestOptions: StoreOptions<StateInterestModel> =
-{
-    name : 'interests',
+export const StateInterestOptions: StoreOptions<StateInterestModel> = {
+  name: 'interests',
 
-    defaults :
-    {
-        snapshot      : undefined,
-        form          : CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
-        formGroup     : undefined,
-        events        : {},
-        eventsPending : {}
-    }
+  defaults: {
+    snapshot: undefined,
+    form: CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
+    formGroup: undefined,
+    events: {},
+    eventsPending: {}
+  }
 };

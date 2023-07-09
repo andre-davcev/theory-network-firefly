@@ -1,26 +1,14 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 import { ComponentLoading } from './loading.component';
 
-@NgModule
-({
-    imports:
-    [
-        CommonModule,
-        IonicModule
-    ],
+@NgModule({
+  imports: [CommonModule, IonicModule],
 
-    declarations :
-    [
-        ComponentLoading,
-    ],
+  declarations: [ComponentLoading],
 
-    exports:
-    [
-        ComponentLoading
-    ]
+  exports: [ComponentLoading]
 })
-export class ModuleComponentLoading { }
+export class ModuleComponentLoading {}

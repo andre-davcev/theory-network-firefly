@@ -6,13 +6,11 @@ describe('ComponentIconFirefly', () => {
   let component: ComponentIconFirefly;
   let fixture: ComponentFixture<ComponentIconFirefly>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ComponentIconFirefly]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ComponentIconFirefly]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComponentIconFirefly);

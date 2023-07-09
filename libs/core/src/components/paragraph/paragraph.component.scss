@@ -1,48 +1,45 @@
 @use '../../../../../styles/apple/variables' as apple;
 @use '../../../../../styles/web/variables' as web;
 
-:host
-{
-    --cpt-margin:                  0;
-    --cpt-text-align:              center;
-    --cpt-line-height:             #{web.$tn-golden-ratio-em};
+:host {
+  --cpt-margin: 0;
+  --cpt-text-align: center;
+  --cpt-line-height: #{web.$tn-golden-ratio-em};
 
-    --cpt-font-family:             #{apple.$apple-font-family};
-    --cpt-font-color:            #000000;
-    --cpt-font-size:               1rem;
-    --cpt-font-weight:             normal;
-    --cpt-font-letter-spacing:     0px;
+  --cpt-font-family: #{apple.$apple-font-family};
+  --cpt-font-color: #000000;
+  --cpt-font-size: 1rem;
+  --cpt-font-weight: normal;
+  --cpt-font-letter-spacing: 0px;
 
-    --cpt-font-family-special:          var(--cpt-font-family-special);
-    --cpt-font-color-special:           var(--cpt-font-color);
-    --cpt-font-size-special:            calc(var(--cpt-font-size) * 1.75);
-    --cpt-font-weight-special:          bold;
-    --cpt-font-letter-spacing-special:  var(--cpt-font-letter-spacing);
+  --cpt-font-family-special: var(--cpt-font-family-special);
+  --cpt-font-color-special: var(--cpt-font-color);
+  --cpt-font-size-special: calc(var(--cpt-font-size) * 1.75);
+  --cpt-font-weight-special: bold;
+  --cpt-font-letter-spacing-special: var(--cpt-font-letter-spacing);
 
-    margin: 0;
-    padding: 0;
-    text-align: var(--cpt-text-align);
-    font-family: var(--cpt-font-family);
-    color: var(--cpt-font-color);
-    font-size: var(--cpt-font-size);
-    font-weight: var(--cpt-font-weight);
-    letter-spacing: var(--cpt-font-letter-spacing);
+  margin: 0;
+  padding: 0;
+  text-align: var(--cpt-text-align);
+  font-family: var(--cpt-font-family);
+  color: var(--cpt-font-color);
+  font-size: var(--cpt-font-size);
+  font-weight: var(--cpt-font-weight);
+  letter-spacing: var(--cpt-font-letter-spacing);
 
-    &.cpt-first-letter .cpt-first-word:first-letter,
-    &:not(.cpt-first-letter) .cpt-first-word
-    {
-        margin-right: 1px;
+  &.cpt-first-letter .cpt-first-word:first-letter,
+  &:not(.cpt-first-letter) .cpt-first-word {
+    margin-right: 1px;
 
-        font-family: var(--cpt-font-family-special);
-        color: var(--cpt-font-color-special);
-        font-size: var(--cpt-font-size-special);
-        font-weight: var(--cpt-font-weight-special);
-        letter-spacing: var(--cpt-font-letter-spacing-special);
-    }
+    font-family: var(--cpt-font-family-special);
+    color: var(--cpt-font-color-special);
+    font-size: var(--cpt-font-size-special);
+    font-weight: var(--cpt-font-weight-special);
+    letter-spacing: var(--cpt-font-letter-spacing-special);
+  }
 
-    p
-    {
-        margin: var(--cpt-margin);
-        line-height: var(--cpt-line-height);
-    }
+  p {
+    margin: var(--cpt-margin);
+    line-height: var(--cpt-line-height);
+  }
 }

@@ -1,20 +1,19 @@
 @use 'variables' as firefly;
 
-:host
-{
-    ion-searchbar {
-        --background: #{firefly.$fire-color-transparent};
-/*
+:host {
+  ion-searchbar {
+    --background: #{firefly.$fire-color-transparent};
+    /*
         --color: #{firefly.$fire-color-primary};
         --icon-color: var(--color);
         --placeholder-color: var(--color);
         --placeholder-opacity: 0.9;
         --clear-button-color: var(--color);
 */
-    }
+  }
 
-    ff-map {
-        height: 100%;
-        width: 100%;
-    }
+  ff-map {
+    height: 100%;
+    width: 100%;
+  }
 }

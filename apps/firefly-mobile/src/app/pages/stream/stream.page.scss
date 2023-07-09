@@ -1,171 +1,169 @@
 @use 'variables' as firefly;
 
-:host
-{
-    ion-content {
-        --background: #{firefly.$fire-color-transparent};
-    }
-
-    ion-list {
-        --background: #{firefly.$fire-color-transparent};
-        background: #{firefly.$fire-color-transparent};
-        margin-bottom: 0;
-    }
-
-    ion-item {
-        --padding-start: 8px;
-        --background: #{firefly.$fire-color-transparent};
-        --border-color: #333;
-
-        &:last-child {
-            ion-card {
-                margin-bottom: 24px;
-            }
-        }
-    }
-
-    ion-segment-button {
-      --margin-end: 5px;
-    }
-
-    ion-card {
-        --background: #{firefly.$fire-color-white};
-        //font-family: firefly.$fire-font-markerfelt;
-        //font-family: firefly.$fire-font-playfair;
-        font-family: firefly.$fire-font-opensans;
-        width: 100%;
-        margin-bottom: 2px;
-    }
-
-    ion-card-content {
-        padding-top: 0px;
-        padding-bottom: 5px;
-    }
-
-    ion-icon {
-      font-size: 30px;
-      padding-right: 5px;
+:host {
+  ion-content {
+    --background: #{firefly.$fire-color-transparent};
   }
 
-    ff-icon-subscribe {
-        margin-bottom: 5px;
-    }
+  ion-list {
+    --background: #{firefly.$fire-color-transparent};
+    background: #{firefly.$fire-color-transparent};
+    margin-bottom: 0;
+  }
 
-    .filter-buttons {
-      --padding-start: 8px;
-    }
+  ion-item {
+    --padding-start: 8px;
+    --background: #{firefly.$fire-color-transparent};
+    --border-color: #333;
 
-    .image-cnt {
-        height: 167px;
-        object-fit: cover;
-        width: 100%;
-        background-size: cover;
+    &:last-child {
+      ion-card {
+        margin-bottom: 24px;
+      }
     }
+  }
 
-    .app-description {
-        //font-family: serif;
-        font-family: firefly.$fire-font-opensans;
-        font-size: 14px;
-    }
+  ion-segment-button {
+    --margin-end: 5px;
+  }
 
-    .tagline,
-    .name,
-    .app-description {
-        text-align: center;
-    }
+  ion-card {
+    --background: #{firefly.$fire-color-white};
+    //font-family: firefly.$fire-font-markerfelt;
+    //font-family: firefly.$fire-font-playfair;
+    font-family: firefly.$fire-font-opensans;
+    width: 100%;
+    margin-bottom: 2px;
+  }
 
-    .tagline {
-        font-size: 20px;
-        //font-family: firefly.$fire-font-americantypewriter;
-        font-family: firefly.$fire-font-playfair;
-        font-weight: 600;
-    }
+  ion-card-content {
+    padding-top: 0px;
+    padding-bottom: 5px;
+  }
 
-    .name {
-        font-size: 25px;
-        font-family: firefly.$fire-font-americantypewriter;
-    }
+  ion-icon {
+    font-size: 30px;
+    padding-right: 5px;
+  }
 
+  ff-icon-subscribe {
+    margin-bottom: 5px;
+  }
 
-    ::ng-deep .mat-expansion-panel-body{
-        padding: 0px 0px 5px 0px !important;
-    }
+  .filter-buttons {
+    --padding-start: 8px;
+  }
 
-    .mat-expansion-panel-header-title {
-        flex: 0 0 auto; /* make this not grow or shrink */
-        margin-right: 16px;
-    }
+  .image-cnt {
+    height: 167px;
+    object-fit: cover;
+    width: 100%;
+    background-size: cover;
+  }
 
-    .mat-expansion-panel-header-description {
-        flex: 1 1 auto; /* make this grow and shrink */
-        min-width: 0; /* see link to see why this is needed */
-        margin-right: 16px;
-    }
+  .app-description {
+    //font-family: serif;
+    font-family: firefly.$fire-font-opensans;
+    font-size: 14px;
+  }
 
-    .mat-expansion-panel-header-description > div {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
+  .tagline,
+  .name,
+  .app-description {
+    text-align: center;
+  }
 
-    .spinner {
-      display: block;
-      margin: auto;
-    }
+  .tagline {
+    font-size: 20px;
+    //font-family: firefly.$fire-font-americantypewriter;
+    font-family: firefly.$fire-font-playfair;
+    font-weight: 600;
+  }
 
-    .outer-wrapper {
-      display: flex;
-      flex-direction: column;
-      margin: 10px 0 10px 0px;
-    }
-    .wrapper {
-      display: flex;
-      width: 100%;
-      height: 140px;
-    }
+  .name {
+    font-size: 25px;
+    font-family: firefly.$fire-font-americantypewriter;
+  }
 
-    .wrapper div{
-      flex-basis: 100%;
-      //font-family: firefly.$fire-font-markerfelt;
-    }
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0px 0px 5px 0px !important;
+  }
 
-    .eventWrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      //font-family: serif;
-      font-family: firefly.$fire-font-opensans
-    }
+  .mat-expansion-panel-header-title {
+    flex: 0 0 auto; /* make this not grow or shrink */
+    margin-right: 16px;
+  }
 
-    .eventInfo {
-      //font-family: serif;
-      font-family: firefly.$fire-font-opensans
-    }
+  .mat-expansion-panel-header-description {
+    flex: 1 1 auto; /* make this grow and shrink */
+    min-width: 0; /* see link to see why this is needed */
+    margin-right: 16px;
+  }
 
-    .dateTimeWrapper {
-      width: 200px;
-    }
+  .mat-expansion-panel-header-description > div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 
-    .date {
-      //font-family: serif;
-      font-family: firefly.$fire-font-opensans
-    }
+  .spinner {
+    display: block;
+    margin: auto;
+  }
 
-    .time {
-      //font-family: serif;
-      font-family: firefly.$fire-font-opensans;
-      font-size: 20px;
-    }
+  .outer-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 10px 0px;
+  }
+  .wrapper {
+    display: flex;
+    width: 100%;
+    height: 140px;
+  }
 
-    .searchResults {
-      background-color: white;
-      position: absolute;
-      z-index:1;
-      width:100%;
-    }
+  .wrapper div {
+    flex-basis: 100%;
+    //font-family: firefly.$fire-font-markerfelt;
+  }
 
-    hr {
-      margin-bottom: -5px;
-      background-color: #b3b2b2;
-    }
+  .eventWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //font-family: serif;
+    font-family: firefly.$fire-font-opensans;
+  }
+
+  .eventInfo {
+    //font-family: serif;
+    font-family: firefly.$fire-font-opensans;
+  }
+
+  .dateTimeWrapper {
+    width: 200px;
+  }
+
+  .date {
+    //font-family: serif;
+    font-family: firefly.$fire-font-opensans;
+  }
+
+  .time {
+    //font-family: serif;
+    font-family: firefly.$fire-font-opensans;
+    font-size: 20px;
+  }
+
+  .searchResults {
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+  }
+
+  hr {
+    margin-bottom: -5px;
+    background-color: #b3b2b2;
+  }
 }

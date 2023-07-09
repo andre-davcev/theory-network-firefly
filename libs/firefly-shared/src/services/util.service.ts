@@ -1,29 +1,22 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUtil
-{
-    public static property(value: any, property: string)
-    {
-        if (value == null || property == null)
-        {
-            return null;
+export class ServiceUtil {
+  public static property(value: any, property: string) {
+    if (value == null || property == null) {
+      return null;
+    } else {
+      const keys: Array<string> = property.split('.');
+
+      for (const key of keys) {
+        value = value[key];
+
+        if (value == null) {
+          return value;
         }
-        else
-        {
-            const keys: Array<string> = property.split('.');
+      }
 
-            for (const key of keys)
-            {
-                value = value[key];
-
-                if (value == null)
-                {
-                    return value;
-                }
-            }
-
-            return value;
-        }
+      return value;
     }
+  }
 }

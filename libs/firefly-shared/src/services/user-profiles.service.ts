@@ -6,22 +6,14 @@ import { ServiceFirestore } from '@theory/firebase';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
-export class ServiceUsersProfiles extends ServiceFirestore<UserProfile>
-{
-    constructor
-    (
-        firestore:   AngularFirestore,
-        formBuilder: UntypedFormBuilder
-    )
-    {
-        super(firestore, formBuilder);
-    }
+export class ServiceUsersProfiles extends ServiceFirestore<UserProfile> {
+  constructor(firestore: AngularFirestore, formBuilder: UntypedFormBuilder) {
+    super(firestore, formBuilder);
+  }
 
-    public formCreate(object: UserProfile): UntypedFormGroup
-    {
-        return super.formCreate(
-        {
-            ...object
-        });
-    }
+  public formCreate(object: UserProfile): UntypedFormGroup {
+    return super.formCreate({
+      ...object
+    });
+  }
 }

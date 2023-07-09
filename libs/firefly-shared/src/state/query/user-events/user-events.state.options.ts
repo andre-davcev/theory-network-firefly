@@ -6,30 +6,27 @@ import { TypeOf } from '@theory/core';
 import { EventType } from '../../../enums';
 import { StateUserEventsModel } from './user-events.state.model';
 
-export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> =
-{
-    name : 'userEvents',
+export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> = {
+  name: 'userEvents',
 
-    defaults :
-    {
-        pageSize         : 12,
-        orderBy          : 'timeStart',
-        orderByDirection : OrderBy.Ascending,
-        orderByType      : TypeOf.Timestamp,
+  defaults: {
+    pageSize: 12,
+    orderBy: 'timeStart',
+    orderByDirection: OrderBy.Ascending,
+    orderByType: TypeOf.Timestamp,
 
-        initialized:    false,
-        loading:        false,
-        finishedPaging: false,
+    initialized: false,
+    loading: false,
+    finishedPaging: false,
 
-        keys:           [],
-        snapshotLookup: {},
-        dataLookup:     {},
-        data:           [],
+    keys: [],
+    snapshotLookup: {},
+    dataLookup: {},
+    data: [],
 
-        filter :
-        {
-            type    : EventType.Upcoming,
-            virtual : false
-        }
+    filter: {
+      type: EventType.Upcoming,
+      virtual: false
     }
+  }
 };

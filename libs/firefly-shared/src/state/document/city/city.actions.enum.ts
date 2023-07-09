@@ -1,5 +1,4 @@
-export enum ActionsCity
-{
-    Watch  = '[City] Watch',
-    Create = '[City] Create'
+export enum ActionsCity {
+  Watch = '[City] Watch',
+  Create = '[City] Create'
 }

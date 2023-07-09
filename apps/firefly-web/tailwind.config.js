@@ -5,7 +5,7 @@ const { join } = require('path');
 module.exports = {
   content: [
     join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}'),
-    ...createGlobPatternsForDependencies(__dirname),
+    ...createGlobPatternsForDependencies(__dirname)
   ],
   theme: {
     extend: {
@@ -13,15 +13,15 @@ module.exports = {
         primary: {
           light: '#9AE449',
           DEFAULT: '#80D623',
-          dark: '#61B10B',
+          dark: '#61B10B'
         },
         secondary: {
           light: '#DB477E',
           DEFAULT: '#CE2262',
-          dark: '#AA0B46',
+          dark: '#AA0B46'
         },
         white: '#ffffff',
-        black: '#000000',
+        black: '#000000'
       },
       fontFamily: {
         sans: [
@@ -39,7 +39,7 @@ module.exports = {
           '"Apple Color Emoji"',
           '"Segoe UI Emoji"',
           '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
+          '"Noto Color Emoji"'
         ],
         serif: [
           'ui-serif',
@@ -57,10 +57,10 @@ module.exports = {
           'Consolas',
           '"Liberation Mono"',
           '"Courier New"',
-          'monospace',
-        ],
+          'monospace'
+        ]
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 };

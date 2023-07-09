@@ -1,4 +1,1 @@
-export class StateAsset<T, M>
-{
-
-}
+export class StateAsset<T, M> {}

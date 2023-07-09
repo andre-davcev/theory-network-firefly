@@ -1,26 +1,34 @@
-<ff-loading *ngIf="(mapReady$ | async) === false"
-             [color]="Color.Dark"
-             [colorBackground]="Color.Map"
-             [text]="mapLoadingText">
+<ff-loading
+  *ngIf="(mapReady$ | async) === false"
+  [color]="Color.Dark"
+  [colorBackground]="Color.Map"
+  [text]="mapLoadingText"
+>
 </ff-loading>
 
-<mgl-map *ngIf="mapReady$ | async"
-         [style]="style"
-         [zoom]="[10]"
-         [center]="place?.centerLike || (locationLike$ | async)"
-         [interactive]="interactive"
-         [movingMethod]="mapMovingMethod"
-         [trackResize]="false"
-         [keyboard]="false"
-         (mapLoad)="onLoad($event)"
-         #map>
-    <mgl-control mglNavigation position="bottom-left" *ngIf="web$ | async"></mgl-control>
+<mgl-map
+  *ngIf="mapReady$ | async"
+  [style]="style"
+  [zoom]="[10]"
+  [center]="place?.centerLike || (locationLike$ | async)"
+  [interactive]="interactive"
+  [movingMethod]="mapMovingMethod"
+  [trackResize]="false"
+  [keyboard]="false"
+  (mapLoad)="onLoad($event)"
+  #map
+>
+  <mgl-control
+    mglNavigation
+    position="bottom-left"
+    *ngIf="web$ | async"
+  ></mgl-control>
 
-    <mgl-marker [lngLat]="locationLike$ | async">
-        <ff-map-orb></ff-map-orb>
-    </mgl-marker>
+  <mgl-marker [lngLat]="locationLike$ | async">
+    <ff-map-orb></ff-map-orb>
+  </mgl-marker>
 
-<!--
+  <!--
     <mgl-control *ngIf="geocode"
                  mglGeocoder
                  [position]="geocodePosition"
@@ -41,21 +49,27 @@
     </mgl-control>
 -->
 
-    <ng-container *ngIf="place">
-        <mgl-marker [lngLat]="place.center"
-                    [draggable]="false"
-                    [anchor]="MapboxMarkerAnchor.Bottom">
-            <ff-map-pin [added]="true"></ff-map-pin>
-        </mgl-marker>
+  <ng-container *ngIf="place">
+    <mgl-marker
+      [lngLat]="place.center"
+      [draggable]="false"
+      [anchor]="MapboxMarkerAnchor.Bottom"
+    >
+      <ff-map-pin [added]="true"></ff-map-pin>
+    </mgl-marker>
 
-        <mgl-popup [closeOnClick]="false"
-                   [closeButton]="false"
-                   [lngLat]="place.center"
-                   [anchor]="MapboxMarkerAnchor.BottomLeft"
-                   [offset]="annotationOffset">
-            <ff-map-annotation [title]="place.title"
-                                [description]="place.description">
-            </ff-map-annotation>
-        </mgl-popup>
-    </ng-container>
+    <mgl-popup
+      [closeOnClick]="false"
+      [closeButton]="false"
+      [lngLat]="place.center"
+      [anchor]="MapboxMarkerAnchor.BottomLeft"
+      [offset]="annotationOffset"
+    >
+      <ff-map-annotation
+        [title]="place.title"
+        [description]="place.description"
+      >
+      </ff-map-annotation>
+    </mgl-popup>
+  </ng-container>
 </mgl-map>

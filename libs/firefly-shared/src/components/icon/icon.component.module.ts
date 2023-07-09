@@ -5,16 +5,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { ComponentIcon } from './icon.component';
 
-@NgModule
-({
-    imports:
-    [
-        CommonModule,
-        IonicModule,
-        FontAwesomeModule
-    ],
+@NgModule({
+  imports: [CommonModule, IonicModule, FontAwesomeModule],
 
-    declarations: [ComponentIcon],
-    exports: [ComponentIcon]
+  declarations: [ComponentIcon],
+  exports: [ComponentIcon]
 })
-export class ModuleComponentIcon { }
+export class ModuleComponentIcon {}

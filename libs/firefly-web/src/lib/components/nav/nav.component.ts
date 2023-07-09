@@ -1,12 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, Input, NgModule } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+  NgModule
+} from '@angular/core';
 import { StyleColor, StyleSize } from '../../enums';
 
 @Component({
   selector: 'ff-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavComponent {
   @Input()
@@ -21,10 +27,9 @@ export class NavComponent {
   }
 }
 
-@NgModule
-({
-    imports: [ CommonModule ],
-    declarations : [NavComponent],
-    exports      : [NavComponent]
+@NgModule({
+  imports: [CommonModule],
+  declarations: [NavComponent],
+  exports: [NavComponent]
 })
 export class NavComponentModule {}

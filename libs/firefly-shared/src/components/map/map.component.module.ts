@@ -8,19 +8,17 @@ import { ModuleComponentMapPin } from '../map-pin';
 import { ModuleComponentMapAnnotation } from '../map-annotation';
 import { ModuleComponentLoading } from '../loading';
 
-@NgModule
-({
-    imports :
-    [
-        CommonModule,
-        ModuleComponentMapOrb,
-        NgxMapboxGLModule,
-        ModuleComponentMapPin,
-        ModuleComponentMapAnnotation,
-        ModuleComponentLoading
-    ],
+@NgModule({
+  imports: [
+    CommonModule,
+    ModuleComponentMapOrb,
+    NgxMapboxGLModule,
+    ModuleComponentMapPin,
+    ModuleComponentMapAnnotation,
+    ModuleComponentLoading
+  ],
 
-    declarations: [ComponentMap],
-    exports: [ComponentMap]
+  declarations: [ComponentMap],
+  exports: [ComponentMap]
 })
-export class ModuleComponentMap { }
+export class ModuleComponentMap {}

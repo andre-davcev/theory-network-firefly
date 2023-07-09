@@ -5,16 +5,10 @@ import { IonicModule } from '@ionic/angular';
 
 import { ComponentList } from './list.component';
 
-@NgModule
-({
-    imports:
-    [
-        CommonModule,
-        IonicModule,
-        TranslateModule
-    ],
+@NgModule({
+  imports: [CommonModule, IonicModule, TranslateModule],
 
-    declarations : [ComponentList],
-    exports      : [ComponentList]
+  declarations: [ComponentList],
+  exports: [ComponentList]
 })
-export class ModuleComponentList { }
+export class ModuleComponentList {}
