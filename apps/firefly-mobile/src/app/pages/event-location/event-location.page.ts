@@ -1,13 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { Store } from '@ngxs/store';
 import { Style } from '@capacitor/status-bar';
 import { ModalController } from '@ionic/angular';
 import { Result } from '@mapbox/mapbox-gl-geocoder';
+import { Store } from '@ngxs/store';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { MapboxPlaceType } from '@theory/mapbox';
-import { BaseComponent } from '@theory/core';
+import { Place } from '@firefly/cloud';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow,
@@ -15,7 +13,9 @@ import {
   PlaceTypes,
   ServiceLocation
 } from '@firefly/shared';
-import { Place } from '@firefly/cloud';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { BaseComponent } from '@theory/core';
+import { MapboxPlaceType } from '@theory/mapbox';
 
 @Component({
   selector: 'app-page-event-location',

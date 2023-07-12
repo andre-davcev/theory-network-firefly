@@ -34,11 +34,9 @@
       "@theory/firebase/*": ["libs/firebase/src/*"],
       "@theory/google": ["libs/google/index.ts"],
       "@theory/google/*": ["libs/google/src/*"],
-      "@theory/ionic": ["libs/ionic/index.ts"],
-      "@theory/ionic/*": ["libs/ionic/src/*"],
-      "@theory/mapbox": ["libs/mapbox/index.ts"],
-      "@theory/mapbox/*": ["libs/mapbox/src/*"],
-      "@theory/ngxs": ["libs/ngxs/index.ts"]
+      "@theory/ionic": ["libs/ionic/src/index.ts"],
+      "@theory/mapbox": ["libs/mapbox/src/index.ts"],
+      "@theory/ngxs": ["libs/ngxs/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

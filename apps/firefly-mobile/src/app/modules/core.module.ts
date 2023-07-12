@@ -1,48 +1,48 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { NgxsModule } from '@ngxs/store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsModule } from '@ngxs/store';
 // import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
-import { MapboxEnvironment } from '@theory/mapbox';
-import { FirebaseEnvironment, StateStorage } from '@theory/firebase';
-import { StateLanguage, StateLocation, StateDevice } from '@theory/capacitor';
-import {
-  StateUser,
-  StateInterest,
-  StateEvent,
-  StateSubscription,
-  StateUserAlerts,
-  StateUserInterests,
-  StateUserEvents,
-  StateCityStream,
-  StateUserSubscriptions,
-  StateUserProfile,
-  StateCity,
-  StateApp,
-  StateAlerts,
-  StateInterests,
-  StateCalendar,
-  StateNotifications,
-  StateSearch
-} from '@firefly/shared';
 import { StateMobile } from '@firefly/mobile';
+import {
+  StateAlerts,
+  StateApp,
+  StateCalendar,
+  StateCity,
+  StateCityStream,
+  StateEvent,
+  StateInterest,
+  StateInterests,
+  StateNotifications,
+  StateSearch,
+  StateSubscription,
+  StateUser,
+  StateUserAlerts,
+  StateUserEvents,
+  StateUserInterests,
+  StateUserProfile,
+  StateUserSubscriptions
+} from '@firefly/shared';
+import { StateDevice, StateLanguage, StateLocation } from '@theory/capacitor';
+import { FirebaseEnvironment, StateStorage } from '@theory/firebase';
+import { MapboxEnvironment } from '@theory/mapbox';
 
 import { environment } from '../../environments/environment';
 

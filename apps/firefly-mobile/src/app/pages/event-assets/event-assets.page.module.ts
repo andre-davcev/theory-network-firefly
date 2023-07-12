@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { ModuleComponentImageGrid } from '@theory/ionic';
 import { ModulePipeTimestamp } from '@theory/firebase';
+import { ModuleComponentImageGrid } from '@theory/ionic';
 
 import { ModulePage } from '../../modules';
 import { PageEventAssets } from './event-assets.page';

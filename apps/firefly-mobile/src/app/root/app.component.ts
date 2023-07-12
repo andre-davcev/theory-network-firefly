@@ -1,29 +1,29 @@
 import { Component } from '@angular/core';
-import { Platform, MenuController, ModalController } from '@ionic/angular';
-import { from, Observable } from 'rxjs';
-import { delay, finalize, switchMap, tap } from 'rxjs/operators';
-import { Actions, ofActionSuccessful, Store, Select } from '@ngxs/store';
-import { Navigate, RouterNavigation } from '@ngxs/router-plugin';
 import { SplashScreen } from '@capacitor/splash-screen';
+import { MenuController, ModalController, Platform } from '@ionic/angular';
+import { Navigate, RouterNavigation } from '@ngxs/router-plugin';
+import { Actions, Select, Store, ofActionSuccessful } from '@ngxs/store';
+import { Observable, from } from 'rxjs';
+import { delay, finalize, switchMap, tap } from 'rxjs/operators';
 
-import { PlatformEnum } from '@theory/ionic';
 import {
-  Pages,
   ActionMobileAuthSelected,
+  ActionMobileMenuClosed,
   ActionMobileMenuOpened,
-  ActionMobileMenuClosed
+  Pages
 } from '@firefly/mobile';
 import {
-  ActionUserLogout,
-  StateUser,
-  IconType,
-  Color,
-  IconSize,
+  ActionAppLoadingHide,
+  ActionAppLoadingShow,
   ActionCityWatch,
   ActionUserAuthenticate,
-  ActionAppLoadingShow,
-  ActionAppLoadingHide
+  ActionUserLogout,
+  Color,
+  IconSize,
+  IconType,
+  StateUser
 } from '@firefly/shared';
+import { PlatformEnum } from '@theory/ionic';
 
 import { PageLogin } from '../pages';
 

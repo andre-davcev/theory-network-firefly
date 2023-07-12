@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { GeoPoint } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
 import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { LngLatLike } from 'mapbox-gl';
+import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
+import { CityInfo, Event, Place } from '@firefly/cloud';
 import {
-  ServiceMapbox,
+  ResponseReverseGeocode,
+  ServiceBigDataCloud
+} from '@theory/bigdatacloud';
+import {
   ContextItem,
   MapboxPlaceType,
   ParamsForwardGeocode,
+  ParamsReverseGeocode,
   ResponseGeocode,
-  ParamsReverseGeocode
+  ReverseMode,
+  ServiceMapbox
 } from '@theory/mapbox';
-import {
-  ServiceBigDataCloud,
-  ResponseReverseGeocode
-} from '@theory/bigdatacloud';
-import { ReverseMode } from '@theory/mapbox';
-import { Place, CityInfo, Event } from '@firefly/cloud';
 
 import { PlaceTypes } from '../constants';
 
