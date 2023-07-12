@@ -1,6 +1,11 @@
 {
   "name": "@firefly/shared",
-  "version": "1.0.0-alpha.0",
-  "main": "index.ts",
-  "peerDependencies": {}
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
 }

@@ -1,5 +1,11 @@
 {
   "name": "@theory/ngxs",
   "version": "0.0.1",
-  "peerDependencies": {}
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
 }

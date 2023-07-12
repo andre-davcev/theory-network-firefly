@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'core',
+  displayName: 'bigdatacloud',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +9,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$'
     }
   },
-  coverageDirectory: '../../coverage/libs/core',
+  coverageDirectory: '../../coverage/libs/bigdatacloud',
   coverageThreshold: {
     global: {
       statements: 95,

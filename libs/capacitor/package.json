@@ -1,8 +1,11 @@
 {
   "name": "@theory/capacitor",
-  "version": "1.0.0-alpha.0",
-  "main": "index.ts",
+  "version": "0.0.1",
   "peerDependencies": {
-    "@capacitor/core": "file:../../node_modules/@capacitor/core"
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
   }
 }
