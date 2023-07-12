@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
-import { GeoPoint, serverTimestamp } from '@angular/fire/firestore';
 import {
   AngularFirestore,
   DocumentSnapshot
 } from '@angular/fire/compat/firestore';
+import { GeoPoint, serverTimestamp } from '@angular/fire/firestore';
 import { Position } from '@capacitor/geolocation';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 
-import {
-  DocumentSnapshot as FirestoreDocumentSnapshot,
-  ServiceFirestoreBase
-} from '@theory/firebase';
-import { StateLocation } from '@theory/capacitor';
+import { CityInfo, Collection, StreamInterest, User } from '@firefly/cloud';
 import {
   ResponseReverseGeocode,
   ServiceBigDataCloud
 } from '@theory/bigdatacloud';
-import { CityInfo, StreamInterest, User, Collection } from '@firefly/cloud';
+import { StateLocation } from '@theory/capacitor';
+import {
+  DocumentSnapshot as FirestoreDocumentSnapshot,
+  ServiceFirestoreBase
+} from '@theory/firebase';
 
+import { ServiceLocation } from '../../../services';
+import { ActionCityStreamSetData } from '../../child/city-stream/city-stream.actions';
 import { ActionCityCreate, ActionCityWatch } from './city.actions';
 import { StateCityModel } from './city.state.model';
 import { StateCityOptions } from './city.state.options';
-import { ServiceLocation } from '../../../services';
-import { ActionCityStreamSetData } from '../../child/city-stream/city-stream.actions';
 
 @State<StateCityModel>(StateCityOptions)
 @Injectable()

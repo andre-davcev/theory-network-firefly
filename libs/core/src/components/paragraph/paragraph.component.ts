@@ -1,9 +1,9 @@
 import {
-  Component,
-  Input,
   ChangeDetectionStrategy,
-  OnInit,
-  HostBinding
+  Component,
+  HostBinding,
+  Input,
+  OnInit
 } from '@angular/core';
 
 @Component({
@@ -17,7 +17,7 @@ export class ComponentParagraph implements OnInit {
 
   @HostBinding('class.cpt-first-letter')
   @Input()
-  firstLetter: boolean = false;
+  public firstLetter: boolean = false;
 
   public firstWord: string = '';
   public paragraph: string = '';

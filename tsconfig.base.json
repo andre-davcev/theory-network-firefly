@@ -25,7 +25,6 @@
       "@firefly/shared/state/*": ["libs/firefly-shared/src/state/*"],
       "@firefly/web": ["libs/firefly-web/src/index.ts"],
       "@theory/bigdatacloud": ["libs/bigdatacloud/index.ts"],
-      "@theory/bigdatacloud/*": ["libs/bigdatacloud/src/*"],
       "@theory/capacitor": ["libs/capacitor/index.ts"],
       "@theory/capacitor/*": ["libs/capacitor/src/*"],
       "@theory/cordova": ["libs/cordova/index.ts"],
@@ -39,8 +38,7 @@
       "@theory/ionic/*": ["libs/ionic/src/*"],
       "@theory/mapbox": ["libs/mapbox/index.ts"],
       "@theory/mapbox/*": ["libs/mapbox/src/*"],
-      "@theory/ngxs": ["libs/ngxs/index.ts"],
-      "@theory/ngxs/*": ["libs/ngxs/*"]
+      "@theory/ngxs": ["libs/ngxs/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
