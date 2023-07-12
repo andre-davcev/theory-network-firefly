@@ -36,5 +36,4 @@ export class ActionStorageUpload {
 }
 export class ActionStorageUploadClear {
   static readonly type = ActionsStorage.UploadClear;
-  constructor() {}
 }

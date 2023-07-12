@@ -37,7 +37,7 @@ export class ServiceBase<T extends FirebaseDocument | Record<string, any>> {
     return this.collection.doc(id);
   }
 
-  public get(id: string): Observable<T> {
+  public get(id: string): Observable<T | undefined> {
     return this.valuesChanges(id).pipe(take(1));
   }
 
@@ -77,11 +77,11 @@ export class ServiceBase<T extends FirebaseDocument | Record<string, any>> {
     return from(this.document(object.id).delete());
   }
 
-  public valuesChanges(id: string): Observable<T> {
+  public valuesChanges(id: string): Observable<T | undefined> {
     return this.document(id).valueChanges();
   }
 
-  public snapshot(id: string): Observable<T> {
+  public snapshot(id: string): Observable<T | undefined> {
     return this.valuesChanges(id).pipe(take(1));
   }
 
@@ -106,7 +106,7 @@ export class ServiceBase<T extends FirebaseDocument | Record<string, any>> {
 
     Object.keys(controls)
       .filter((key: string) => controls[key].dirty && controls[key].valid)
-      .forEach((key: string) => (data[key] = controls[key].value));
+      .forEach((key: string) => ((data as any)[key] = controls[key].value));
 
     return data;
   }

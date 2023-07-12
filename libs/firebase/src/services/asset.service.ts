@@ -1,16 +1,17 @@
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   AngularFireStorage,
   AngularFireStorageReference
 } from '@angular/fire/compat/storage';
-import { Observable, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UntypedFormBuilder } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
-import { ServiceBase } from './base.service';
 import { ImageSize } from '../enums';
+import { FirebaseDocument } from '../interfaces';
+import { ServiceBase } from './base.service';
 
-export class ServiceAsset<T> extends ServiceBase<T> {
+export class ServiceAsset<T extends FirebaseDocument> extends ServiceBase<T> {
   public storage: AngularFireStorage;
 
   constructor(
@@ -26,7 +27,7 @@ export class ServiceAsset<T> extends ServiceBase<T> {
   }
 
   public addMetadata(asset: T): T {
-    asset['id'] = this.firestore.createId();
+    asset.id = this.firestore.createId();
 
     return asset;
   }

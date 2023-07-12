@@ -31,7 +31,7 @@ export class ServiceFirestore<T extends FirebaseDocument> {
   public documentGet(
     collection: string,
     id: string
-  ): Observable<FirestoreDocumentSnapshot> {
+  ): Observable<FirestoreDocumentSnapshot<T>> {
     return ServiceFirestoreBase.documentGet<T>(this.firestore, collection, id);
   }
 
@@ -49,7 +49,7 @@ export class ServiceFirestore<T extends FirebaseDocument> {
   public documentCreate(
     collection: string,
     entity: T
-  ): Observable<FirestoreDocumentSnapshot> {
+  ): Observable<FirestoreDocumentSnapshot<T>> {
     return ServiceFirestoreBase.documentCreate<T>(
       this.firestore,
       collection,
@@ -58,13 +58,15 @@ export class ServiceFirestore<T extends FirebaseDocument> {
   }
 
   public documentUpdate(
-    snapshot: FirestoreDocumentSnapshot,
+    snapshot: FirestoreDocumentSnapshot<T>,
     object: Partial<T>
   ) {
     return ServiceFirestoreBase.documentUpdate<T>(snapshot, object);
   }
 
-  public documentDelete(snapshot: FirestoreDocumentSnapshot): Observable<void> {
+  public documentDelete(
+    snapshot: FirestoreDocumentSnapshot<T>
+  ): Observable<void> {
     return ServiceFirestoreBase.documentDelete(snapshot);
   }
 
@@ -79,14 +81,14 @@ export class ServiceFirestore<T extends FirebaseDocument> {
 
     Object.keys(controls)
       .filter((key: string) => controls[key].dirty && controls[key].valid)
-      .forEach((key: string) => (data[key] = controls[key].value));
+      .forEach((key: string) => ((data as any)[key] = controls[key].value));
 
     return data;
   }
 
   public formCreate(controlsConfig: Record<string, any>): UntypedFormGroup {
-    controlsConfig.metadata =
-      controlsConfig.metadata == null ? {} : controlsConfig.metadata;
+    controlsConfig['metadata'] =
+      controlsConfig['metadata'] == null ? {} : controlsConfig['metadata'];
 
     return this.formBuilder.group(controlsConfig);
   }

@@ -4,5 +4,5 @@ export interface StateStorageModel {
   images: Record<string, StorageImage>;
 
   uploadProgress: number;
-  uploadError: string;
+  uploadError: string | null | undefined;
 }

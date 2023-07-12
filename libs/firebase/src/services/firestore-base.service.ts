@@ -25,12 +25,12 @@ export class ServiceFirestoreBase {
     service: AngularFirestore,
     collection: string,
     id: string
-  ): Observable<FirestoreDocumentSnapshot> {
+  ): Observable<FirestoreDocumentSnapshot<T>> {
     const document: AngularFirestoreDocument<T> = service
       .collection<T>(collection)
       .doc(id);
 
-    return from(document.get());
+    return document.get();
   }
 
   public static documentWatch<T>(
@@ -49,7 +49,7 @@ export class ServiceFirestoreBase {
     service: AngularFirestore,
     collection: string,
     entity: T
-  ): Observable<FirestoreDocumentSnapshot> {
+  ): Observable<FirestoreDocumentSnapshot<T>> {
     const document: AngularFirestoreDocument<T> = service
       .collection<T>(collection)
       .doc(entity.id);
@@ -63,7 +63,7 @@ export class ServiceFirestoreBase {
     service: AngularFirestore,
     collection: string,
     entity: T
-  ): Observable<FirestoreDocumentSnapshot> {
+  ): Observable<FirestoreDocumentSnapshot<T>> {
     const document: AngularFirestoreDocument<T> = service
       .collection<T>(collection)
       .doc(entity.id);
@@ -77,7 +77,7 @@ export class ServiceFirestoreBase {
     service: AngularFirestore,
     collection: string,
     entity: T
-  ): Observable<FirestoreDocumentSnapshot> {
+  ): Observable<FirestoreDocumentSnapshot<T>> {
     const { metadata, ...object } = entity;
 
     const id: string =
@@ -91,11 +91,15 @@ export class ServiceFirestoreBase {
     object.dateUpdated = timestamp;
     object.id = id;
 
-    return ServiceFirestoreBase.documentSet(service, collection, object);
+    return ServiceFirestoreBase.documentSet<T>(
+      service,
+      collection,
+      object as T
+    );
   }
 
   public static documentUpdate<T extends FirebaseDocument>(
-    snapshot: FirestoreDocumentSnapshot,
+    snapshot: FirestoreDocumentSnapshot<T>,
     object: Partial<T>
   ) {
     const { metadata, ...partial } = object;
@@ -105,8 +109,8 @@ export class ServiceFirestoreBase {
     return from(snapshot.ref.update(partial));
   }
 
-  public static documentDelete(
-    snapshot: FirestoreDocumentSnapshot
+  public static documentDelete<T extends FirebaseDocument>(
+    snapshot: FirestoreDocumentSnapshot<T>
   ): Observable<void> {
     return from(snapshot.ref.delete());
   }

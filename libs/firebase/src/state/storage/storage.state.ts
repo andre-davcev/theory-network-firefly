@@ -41,7 +41,9 @@ export class StateStorage {
   @Selector() static uploadProgress(state: StateStorageModel): number {
     return state.uploadProgress;
   }
-  @Selector() static uploadError(state: StateStorageModel): string {
+  @Selector() static uploadError(
+    state: StateStorageModel
+  ): string | null | undefined {
     return state.uploadError;
   }
   @Selector() static uploadErrored(state: StateStorageModel): boolean {
@@ -77,8 +79,8 @@ export class StateStorage {
       : this.service.downloadUrl(bucketPath, size).pipe(
           withLatestFrom(of(StateStorage.images(getState()))),
           map(([url, images]) => {
-            images[bucketPath][size] = url;
-            images[bucketPath][ImageSize.Small] = url;
+            images[bucketPath][size] = url || '';
+            images[bucketPath][ImageSize.Small] = url || '';
 
             return images;
           }),
@@ -89,13 +91,13 @@ export class StateStorage {
   @Action(ActionStorageUrlsGet)
   getUrls(
     { getState, patchState }: StateContext<StateStorageModel>,
-    { bucketPaths, size, cached }
+    { bucketPaths, size, cached }: ActionStorageUrlsGet
   ) {
     const images: Record<string, StorageImage> = StateStorage.images(
       getState()
     );
 
-    const urls$: Array<Observable<string>> = bucketPaths
+    const urls$: Array<Observable<string | null>> = bucketPaths
       .filter(
         (bucketPath: string) =>
           !cached ||
@@ -105,7 +107,7 @@ export class StateStorage {
       .map((bucketPath: string) =>
         this.service.downloadUrl(bucketPath, size).pipe(
           tap(
-            (url: string) =>
+            (url: string | null) =>
               (images[bucketPath] = {
                 ...images[bucketPath],
                 [size]: url
@@ -158,7 +160,9 @@ export class StateStorage {
 
     return dispatch(new ActionStorageUploadClear()).pipe(
       switchMap(() => task.percentageChanges()),
-      tap((uploadProgress: number) => patchState({ uploadProgress })),
+      tap((uploadProgress: number | undefined) =>
+        patchState({ uploadProgress })
+      ),
       filter(() => StateStorage.uploadCompleted(getState())),
       switchMap(() => task.snapshotChanges()),
       last(),
