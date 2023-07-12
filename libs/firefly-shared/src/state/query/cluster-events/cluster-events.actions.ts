@@ -1,5 +1,5 @@
-import { DocumentSnapshot } from '@theory/firebase';
 import { Interest } from '@firefly/cloud';
+import { DocumentSnapshot } from '@theory/firebase';
 
 import { ActionsClusterEvents } from './cluster-events.actions.enum';
 

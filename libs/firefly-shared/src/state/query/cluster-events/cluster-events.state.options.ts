@@ -1,7 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { PageSize } from '@theory/ngxs';
 import { OrderBy } from '@theory/firebase';
+import { PageSize } from '@theory/ngxs';
 
 import { StateClusterInterestsModel } from './cluster-events.state.model';
 

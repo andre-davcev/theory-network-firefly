@@ -1,8 +1,8 @@
 import { Alert, AlertPartial } from '@firefly/cloud';
 import { DocumentSnapshot } from '@theory/firebase';
 
-import { ActionsUserAlerts } from './user-alerts.actions.enum';
 import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';
+import { ActionsUserAlerts } from './user-alerts.actions.enum';
 
 export class ActionUserAlertsReset {
   static readonly type = ActionsUserAlerts.Reset;

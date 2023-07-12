@@ -1,9 +1,9 @@
-import { UserProfile } from '@firefly/cloud';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UserProfile } from '@firefly/cloud';
 
-import { ServiceFirestore } from '@theory/firebase';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { ServiceFirestore } from '@theory/firebase';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceUsersProfiles extends ServiceFirestore<UserProfile> {

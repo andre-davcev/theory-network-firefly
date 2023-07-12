@@ -1,33 +1,33 @@
-import { Action, StateContext, State, Selector } from '@ngxs/store';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { StateStorageModel } from './storage.state.model';
-import {
-  ActionStorageUrlGet,
-  ActionStorageUrlsGet,
-  ActionStorageUploadClear,
-  ActionStorageUpload,
-  ActionStorageUrlSet
-} from './storage.actions';
-import { StateStorageOptions } from './storage.state.options';
-import { StorageImage } from '@theory/firebase/interfaces';
-import {
-  tap,
-  filter,
-  map,
-  withLatestFrom,
-  switchMap,
-  last,
-  catchError
-} from 'rxjs/operators';
-import { Observable, forkJoin, of } from 'rxjs';
-import { ServiceStorage } from '@theory/firebase/services';
-import { ImageSize, StorageFormat } from '@theory/firebase/enums';
+import { Injectable } from '@angular/core';
 import {
   AngularFireStorage,
   AngularFireStorageReference,
   AngularFireUploadTask
 } from '@angular/fire/compat/storage';
-import { Injectable } from '@angular/core';
+import { Observable, forkJoin, of } from 'rxjs';
+import {
+  catchError,
+  filter,
+  last,
+  map,
+  switchMap,
+  tap,
+  withLatestFrom
+} from 'rxjs/operators';
+import { ImageSize, StorageFormat } from '../../enums';
+import { StorageImage } from '../../interfaces';
+import { ServiceStorage } from '../../services';
+import {
+  ActionStorageUpload,
+  ActionStorageUploadClear,
+  ActionStorageUrlGet,
+  ActionStorageUrlSet,
+  ActionStorageUrlsGet
+} from './storage.actions';
+import { StateStorageModel } from './storage.state.model';
+import { StateStorageOptions } from './storage.state.options';
 
 @State<StateStorageModel>(StateStorageOptions)
 @Injectable()

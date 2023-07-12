@@ -1,5 +1,5 @@
+import { MetadataUserProfile, UserProfile } from '@firefly/cloud';
 import { DocumentSnapshot } from '@theory/firebase';
-import { UserProfile, MetadataUserProfile } from '@firefly/cloud';
 
 import { ActionsUserProfile } from './user-profile.actions.enum';
 

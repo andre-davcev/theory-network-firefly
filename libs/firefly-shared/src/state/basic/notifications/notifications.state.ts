@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
-import { PushNotifications } from '@capacitor/push-notifications';
 import { FCM } from '@capacitor-community/fcm';
-import { of, from } from 'rxjs';
-import { filter, switchMap, take, map } from 'rxjs/operators';
+import { PushNotifications } from '@capacitor/push-notifications';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { from, of } from 'rxjs';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 
-import { PushNotification } from '@theory/firebase';
 import { StateDevice } from '@theory/capacitor';
+import { PushNotification } from '@theory/firebase';
 
+import { ActionUserAddTokenAfterLogin } from '../../document/user/user.actions';
+import { ActionNotificationsWatch } from './notifications.actions';
 import { StateNotificationsModel } from './notifications.state.model';
 import { StateNotificationsOptions } from './notifications.state.options';
-import { ActionNotificationsWatch } from './notifications.actions';
-import { ActionUserAddTokenAfterLogin } from '../../document/user/user.actions';
 
 @State<StateNotificationsModel>(StateNotificationsOptions)
 @Injectable()

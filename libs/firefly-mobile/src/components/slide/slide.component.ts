@@ -1,10 +1,10 @@
 import {
-  Component,
-  Input,
   ChangeDetectionStrategy,
-  Output,
+  Component,
   EventEmitter,
-  HostListener
+  HostListener,
+  Input,
+  Output
 } from '@angular/core';
 
 import { Alert } from '@firefly/cloud';

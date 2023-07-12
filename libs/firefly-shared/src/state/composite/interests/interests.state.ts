@@ -3,34 +3,25 @@ import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { switchMap, takeWhile, tap } from 'rxjs/operators';
 
-import { DocumentSnapshot } from '@theory/firebase';
 import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
+import { DocumentSnapshot } from '@theory/firebase';
 
 import { InterestType } from '../../../enums';
-import { StateInterestsModel } from './interests.state.model';
-import { StateInterestsOptions } from './interests.state.options';
 import {
-  ActionInterestsSetType,
-  ActionInterestsSetVirtual,
   ActionInterestsFilter,
   ActionInterestsPage,
   ActionInterestsSetSubscriptions,
-  ActionInterestsSubscriptionToggle,
-  ActionInterestsSubscriptionOnOff,
+  ActionInterestsSetType,
+  ActionInterestsSetVirtual,
   ActionInterestsSubscriptionAdd,
-  ActionInterestsSubscriptionRemove
+  ActionInterestsSubscriptionOnOff,
+  ActionInterestsSubscriptionRemove,
+  ActionInterestsSubscriptionToggle
 } from './interests.actions';
+import { StateInterestsModel } from './interests.state.model';
+import { StateInterestsOptions } from './interests.state.options';
 
-import { ActionUserPatch } from '../../document/user/user.actions';
-import { InterestsFilter } from './interests.filter.model';
-import { StateCityStream } from '../../child/city-stream/city-stream.state';
-import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
-import {
-  ActionUserSubscriptionsAdd,
-  ActionUserSubscriptionsFilter,
-  ActionUserSubscriptionsGet,
-  ActionUserSubscriptionsRemove
-} from '../../child/user-subscriptions/user-subscriptions.actions';
+import { StateLocation } from '@theory/capacitor';
 import {
   ActionCityStreamAdd,
   ActionCityStreamFilter,
@@ -38,13 +29,22 @@ import {
   ActionCityStreamSubscriptionNew,
   ActionCityStreamSubscriptionsSet
 } from '../../child/city-stream/city-stream.actions';
+import { StateCityStream } from '../../child/city-stream/city-stream.state';
+import {
+  ActionUserSubscriptionsAdd,
+  ActionUserSubscriptionsFilter,
+  ActionUserSubscriptionsGet,
+  ActionUserSubscriptionsRemove
+} from '../../child/user-subscriptions/user-subscriptions.actions';
+import { StateUserSubscriptions } from '../../child/user-subscriptions/user-subscriptions.state';
+import { ActionUserPatch } from '../../document/user/user.actions';
 import { StateUser } from '../../document/user/user.state';
-import { StateUserInterests } from '../../query/user-interests/user-interests.state';
 import {
   ActionUserInterestsFilter,
   ActionUserInterestsGet
 } from '../../query/user-interests/user-interests.actions';
-import { StateLocation } from '@theory/capacitor';
+import { StateUserInterests } from '../../query/user-interests/user-interests.state';
+import { InterestsFilter } from './interests.filter.model';
 
 @State<StateInterestsModel>(StateInterestsOptions)
 @Injectable()

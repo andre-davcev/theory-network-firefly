@@ -1,4 +1,4 @@
-import { StorageImage } from '@theory/firebase/interfaces';
+import { StorageImage } from '../../interfaces';
 
 export interface StateStorageModel {
   images: Record<string, StorageImage>;

@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore';
 import { Store } from '@ngxs/store';
 import { StateLanguage } from '@theory/capacitor';
 import * as moment from 'moment';
-import { Timestamp } from '@angular/fire/firestore';
 
 import { TimestampFormat } from './timestamp-format.enum';
 

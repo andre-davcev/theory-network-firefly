@@ -1,18 +1,18 @@
-import { StateContext } from '@ngxs/store';
 import { Query } from '@angular/fire/compat/firestore';
+import { StateContext } from '@ngxs/store';
 import { Observable, from, of } from 'rxjs';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import {
   FirebaseDocument,
-  ServiceStorage,
   QueryDocumentSnapshot,
-  QuerySnapshot
+  QuerySnapshot,
+  ServiceStorage
 } from '@theory/firebase';
 
 import {
-  StateCollection,
   ActionsCollection,
+  StateCollection,
   StateCollectionModel
 } from '../collection';
 

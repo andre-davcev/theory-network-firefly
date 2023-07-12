@@ -1,5 +1,5 @@
+import { ImageSize } from '../../enums';
 import { ActionsStorage } from './storage.actions.enum';
-import { ImageSize } from '@theory/firebase/enums';
 
 export class ActionStorageUrlGet {
   static readonly type = ActionsStorage.UrlGet;

@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@angular/fire/compat/firestore';
-import { State, Action, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext, Store } from '@ngxs/store';
 
-import { Interest, Collection } from '@firefly/cloud';
-import { StateQuery } from '@theory/ngxs';
+import { Collection, Interest } from '@firefly/cloud';
 import { ServiceStorage } from '@theory/firebase';
+import { StateQuery } from '@theory/ngxs';
 
 import { ServiceInterests } from '../../../services';
-import { StateClusterInterestsModel } from './cluster-events.state.model';
-import { StateClusterInterestsOptions } from './cluster-events.state.options';
+import { StateUser } from '../../document/user/user.state';
 import {
   ActionClusterEventsAdd,
-  ActionClusterEventsRemove,
-  ActionClusterEventsGetData,
+  ActionClusterEventsFilter,
   ActionClusterEventsGet,
-  ActionClusterEventsSync,
+  ActionClusterEventsGetData,
+  ActionClusterEventsRemove,
   ActionClusterEventsReset,
-  ActionClusterEventsFilter
+  ActionClusterEventsSync
 } from './cluster-events.actions';
-import { StateUser } from '../../document/user/user.state';
+import { StateClusterInterestsModel } from './cluster-events.state.model';
+import { StateClusterInterestsOptions } from './cluster-events.state.options';
 
 @State<StateClusterInterestsModel>(StateClusterInterestsOptions)
 @Injectable()

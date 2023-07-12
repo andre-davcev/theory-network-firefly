@@ -2,8 +2,8 @@ import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
 
 import { DocumentSnapshot } from '@theory/firebase';
 
-import { ActionsCityStream } from './city-stream.actions.enum';
 import { InterestsFilter } from '../../composite';
+import { ActionsCityStream } from './city-stream.actions.enum';
 
 export class ActionCityStreamReset {
   static readonly type = ActionsCityStream.Reset;

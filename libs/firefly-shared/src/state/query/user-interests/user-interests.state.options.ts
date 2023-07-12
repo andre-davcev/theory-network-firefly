@@ -3,8 +3,8 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { OrderBy } from '@theory/firebase';
 import { PageSize } from '@theory/ngxs';
 
-import { StateUserInterestsModel } from './user-interests.state.model';
 import { InterestType } from '../../../enums';
+import { StateUserInterestsModel } from './user-interests.state.model';
 
 export const StateUserInterestsOptions: StoreOptions<StateUserInterestsModel> =
   {

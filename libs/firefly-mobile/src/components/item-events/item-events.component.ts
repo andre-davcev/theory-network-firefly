@@ -1,16 +1,16 @@
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
   Input,
-  Output,
-  EventEmitter
+  Output
 } from '@angular/core';
 import { IonItemSliding } from '@ionic/angular';
 import { from } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
+import { DateEvents, Event } from '@firefly/cloud';
 import { TimestampFormat } from '@theory/firebase';
-import { Event, DateEvents } from '@firefly/cloud';
 
 @Component({
   selector: 'ff-item-events',

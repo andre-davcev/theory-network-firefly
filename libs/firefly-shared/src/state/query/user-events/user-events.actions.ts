@@ -1,8 +1,8 @@
-import { DocumentSnapshot } from '@theory/firebase';
 import { Event } from '@firefly/cloud';
+import { DocumentSnapshot } from '@theory/firebase';
 
-import { ActionsUserEvents } from './user-events.actions.enum';
 import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';
+import { ActionsUserEvents } from './user-events.actions.enum';
 
 export class ActionUserEventsReset {
   static readonly type = ActionsUserEvents.Reset;

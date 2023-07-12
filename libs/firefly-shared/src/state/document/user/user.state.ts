@@ -1,91 +1,91 @@
-import {
-  State,
-  Selector,
-  Action,
-  StateContext,
-  NgxsOnInit,
-  Store
-} from '@ngxs/store';
-import { Observable, of, from, combineLatest } from 'rxjs';
-import {
-  catchError,
-  switchMap,
-  take,
-  filter,
-  tap,
-  map,
-  finalize
-} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
-import { FieldValue, GeoPoint, serverTimestamp } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User as FirebaseUser } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FieldValue, GeoPoint, serverTimestamp } from '@angular/fire/firestore';
+import {
+  Action,
+  NgxsOnInit,
+  Selector,
+  State,
+  StateContext,
+  Store
+} from '@ngxs/store';
+import { Observable, combineLatest, from, of } from 'rxjs';
+import {
+  catchError,
+  filter,
+  finalize,
+  map,
+  switchMap,
+  take,
+  tap
+} from 'rxjs/operators';
 
-import { StateDocument } from '@theory/ngxs';
-import { UserCredential } from '@theory/firebase';
 import {
-  StateLanguage,
-  ActionLanguageSet,
-  StateLocation
-} from '@theory/capacitor';
-import {
-  User,
-  SubscriptionPartial,
   AlertPartial,
   CityInfo,
+  Collection,
+  SubscriptionPartial,
   Token,
-  Collection
+  User
 } from '@firefly/cloud';
-
-import { StateUserModel } from './user.state.model';
-import { StateUserOptions } from './user.state.options';
 import {
-  ActionUserAuthenticate,
-  ActionUserWatch,
-  ActionUserAuthenticateCheck,
-  ActionUserAddToken,
-  ActionUserLoginEmail,
-  ActionUserLogout,
-  ActionUserWatchLanguage,
-  ActionUserReset,
-  ActionUserGet,
-  ActionUserSet,
-  ActionUserPatch,
-  ActionUserSave,
-  ActionUserDelete,
-  ActionUserCreate,
-  ActionUserUpdate,
-  ActionUserIsPublisherSet,
-  ActionUserAnonymousLogin,
-  ActionUserNotificationsSet,
-  ActionUserPatchMetadata,
-  ActionUserResetPassword,
-  ActionUserWatchCity,
-  ActionUserResetAll,
-  ActionUserSetErrorAuth,
-  ActionUserAddTokenAfterLogin
-} from './user.actions';
+  ActionLanguageSet,
+  StateLanguage,
+  StateLocation
+} from '@theory/capacitor';
+import { UserCredential } from '@theory/firebase';
+import { StateDocument } from '@theory/ngxs';
+
+import { EventType, InterestType } from '../../../enums';
 import { ServiceUsers } from '../../../services';
+import { ActionNotificationsWatch } from '../../basic/notifications/notifications.actions';
+import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import {
   ActionUserAlertsReset,
   ActionUserAlertsSetData
 } from '../../child/user-alerts/user-alerts.actions';
-import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
-import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
 import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/user-subscriptions.actions';
-import { StateCityStream } from '../../child/city-stream/city-stream.state';
-import { ActionNotificationsWatch } from '../../basic/notifications/notifications.actions';
-import { EventType, InterestType } from '../../../enums';
+import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
+import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
+import {
+  ActionUserAddToken,
+  ActionUserAddTokenAfterLogin,
+  ActionUserAnonymousLogin,
+  ActionUserAuthenticate,
+  ActionUserAuthenticateCheck,
+  ActionUserCreate,
+  ActionUserDelete,
+  ActionUserGet,
+  ActionUserIsPublisherSet,
+  ActionUserLoginEmail,
+  ActionUserLogout,
+  ActionUserNotificationsSet,
+  ActionUserPatch,
+  ActionUserPatchMetadata,
+  ActionUserReset,
+  ActionUserResetAll,
+  ActionUserResetPassword,
+  ActionUserSave,
+  ActionUserSet,
+  ActionUserSetErrorAuth,
+  ActionUserUpdate,
+  ActionUserWatch,
+  ActionUserWatchCity,
+  ActionUserWatchLanguage
+} from './user.actions';
+import { StateUserModel } from './user.state.model';
+import { StateUserOptions } from './user.state.options';
 
-import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
-import { StateCity } from '../city/city.state';
+import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
 import {
   ActionInterestsPage,
   ActionInterestsSetSubscriptions,
   ActionInterestsSetType
 } from '../../composite/interests/interests.actions';
-import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
+import { StateCity } from '../city/city.state';
+import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
 
 @State<StateUserModel>(StateUserOptions)
 @Injectable()

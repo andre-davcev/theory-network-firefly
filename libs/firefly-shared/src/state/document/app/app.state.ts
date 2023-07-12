@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { LoadingOptions } from '@ionic/core';
 import { LoadingController } from '@ionic/angular';
+import { LoadingOptions } from '@ionic/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
 
+import { StateLocation } from '@theory/capacitor';
+import { StateCityStream } from '../../child/city-stream/city-stream.state';
+import { StateCity } from '../city/city.state';
+import { StateUser } from '../user/user.state';
+import { ActionAppLoadingHide, ActionAppLoadingShow } from './app.actions';
 import { StateAppModel } from './app.state.model';
 import { StateAppOptions } from './app.state.options';
-import { ActionAppLoadingShow, ActionAppLoadingHide } from './app.actions';
-import { StateCity } from '../city/city.state';
-import { StateCityStream } from '../../child/city-stream/city-stream.state';
-import { StateUser } from '../user/user.state';
-import { StateLocation } from '@theory/capacitor';
 
 @State<StateAppModel>(StateAppOptions)
 @Injectable()

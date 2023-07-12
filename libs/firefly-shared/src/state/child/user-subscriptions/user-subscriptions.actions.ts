@@ -1,8 +1,8 @@
-import { DocumentSnapshot } from '@theory/firebase';
 import { Subscription, SubscriptionPartial } from '@firefly/cloud';
+import { DocumentSnapshot } from '@theory/firebase';
 
-import { ActionsUserSubscriptions } from './user-subscriptions.actions.enum';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
+import { ActionsUserSubscriptions } from './user-subscriptions.actions.enum';
 
 export class ActionUserSubscriptionsReset {
   static readonly type = ActionsUserSubscriptions.Reset;
