@@ -1,4 +1,4 @@
-import { ValidatorFn, AbstractControl, Validators } from '@angular/forms';
+import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 
 import { TypeOf } from '../enums';
 
@@ -6,8 +6,8 @@ export class ValidatorsExtended {
   static minLength(minLength: number): ValidatorFn {
     const validator: ValidatorFn = (
       control: AbstractControl
-    ): Record<string, any> => {
-      let validation: Record<string, any> = null;
+    ): Record<string, any> | null => {
+      let validation: Record<string, any> | null = null;
 
       if (Validators.required(control) == null) {
         const value: string | any =

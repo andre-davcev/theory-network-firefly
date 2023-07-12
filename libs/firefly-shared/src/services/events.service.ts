@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import {
-  UntypedFormGroup,
-  UntypedFormBuilder,
-  Validators,
-  ValidatorFn,
-  AbstractControl
-} from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Timestamp } from '@angular/fire/firestore';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 
-import { ServiceFirestore } from '@theory/firebase';
-import { DateUtil, Regex, ValidatorsExtended } from '@theory/core';
 import { Event } from '@firefly/cloud';
+import { DateUtil, Regex, ValidatorsExtended } from '@theory/core';
+import { ServiceFirestore } from '@theory/firebase';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceEvents extends ServiceFirestore<Event> {

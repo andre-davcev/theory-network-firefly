@@ -1,49 +1,49 @@
 import { Injectable } from '@angular/core';
-import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
-import { TranslateService } from '@ngx-translate/core';
-import { from, of, forkJoin, Observable } from 'rxjs';
-import { switchMap, map, tap, delay } from 'rxjs/operators';
-import { ActionSheetController } from '@ionic/angular';
 import { Browser } from '@capacitor/browser';
-import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { ActionSheetController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { Observable, forkJoin, from, of } from 'rxjs';
+import { delay, map, switchMap, tap } from 'rxjs/operators';
 
-import { ServiceStorage, ImageSize } from '@theory/firebase';
-import { StateChild } from '@theory/ngxs';
-import { ImageType } from '@theory/core';
 import { Alert, AlertPartial, Collection } from '@firefly/cloud';
+import { ImageType } from '@theory/core';
+import { ImageSize, ServiceStorage } from '@theory/firebase';
+import { StateChild } from '@theory/ngxs';
 
-import { ServiceAlerts } from '../../../services';
-import { StateUserAlertsModel } from './user-alerts.state.model';
-import { StateUserAlertsOptions } from './user-alerts.state.options';
-import {
-  ActionUserAlertsAdd,
-  ActionUserAlertsReset,
-  ActionUserAlertsRemove,
-  ActionUserAlertsGetData,
-  ActionUserAlertsGet,
-  ActionUserAlertsSync,
-  ActionUserAlertsGo,
-  ActionUserAlertsSetData,
-  ActionUserAlertsGetIcons,
-  ActionUserAlertsAddToCalendar,
-  ActionUserAlertsLaunchNavigation,
-  ActionUserAlertsGetImages,
-  ActionUserAlertsMarkRead,
-  ActionUserAlertsDelete,
-  ActionUserAlertsPhoneCall,
-  ActionUserAlertsOpenWebsite,
-  ActionUserAlertsFilter
-} from './user-alerts.actions';
 import { EventType } from '../../../enums';
-import { StateUser } from '../../document/user/user.state';
-import { ActionUserPatch } from '../../document/user/user.actions';
+import { ServiceAlerts } from '../../../services';
+import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow
 } from '../../document/app/app.actions';
-import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';
+import { ActionUserPatch } from '../../document/user/user.actions';
+import { StateUser } from '../../document/user/user.state';
+import {
+  ActionUserAlertsAdd,
+  ActionUserAlertsAddToCalendar,
+  ActionUserAlertsDelete,
+  ActionUserAlertsFilter,
+  ActionUserAlertsGet,
+  ActionUserAlertsGetData,
+  ActionUserAlertsGetIcons,
+  ActionUserAlertsGetImages,
+  ActionUserAlertsGo,
+  ActionUserAlertsLaunchNavigation,
+  ActionUserAlertsMarkRead,
+  ActionUserAlertsOpenWebsite,
+  ActionUserAlertsPhoneCall,
+  ActionUserAlertsRemove,
+  ActionUserAlertsReset,
+  ActionUserAlertsSetData,
+  ActionUserAlertsSync
+} from './user-alerts.actions';
+import { StateUserAlertsModel } from './user-alerts.state.model';
+import { StateUserAlertsOptions } from './user-alerts.state.options';
 
 @State<StateUserAlertsModel>(StateUserAlertsOptions)
 @Injectable()

@@ -1,26 +1,26 @@
-import { StateContext, createSelector } from '@ngxs/store';
-import {
-  SetFormPristine,
-  UpdateFormValue,
-  SetFormDirty
-} from '@ngxs/form-plugin';
-import { Observable, of } from 'rxjs';
-import { switchMap, map, tap } from 'rxjs/operators';
-import { UntypedFormGroup, AbstractControl } from '@angular/forms';
 import { DocumentSnapshot } from '@angular/fire/compat/firestore';
-
-import { CoreUtil, CoreEnum, ImageType } from '@theory/core';
+import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 import {
-  ServiceFirestore,
+  SetFormDirty,
+  SetFormPristine,
+  UpdateFormValue
+} from '@ngxs/form-plugin';
+import { StateContext, createSelector } from '@ngxs/store';
+import { Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+
+import { CoreEnum, CoreUtil, ImageType } from '@theory/core';
+import {
   FirebaseDocument,
-  ServiceStorage,
-  DocumentSnapshot as FirestoreDocumentSnapshot
+  DocumentSnapshot as FirestoreDocumentSnapshot,
+  ServiceFirestore,
+  ServiceStorage
 } from '@theory/firebase';
 
 import { FormNgxsStatus } from '../../enums';
 import { FormNgxs } from '../../interfaces';
-import { StateDocumentModel } from './document.model';
 import { ActionsDocument } from './document.actions';
+import { StateDocumentModel } from './document.model';
 
 export class StateDocument<
   T extends FirebaseDocument,

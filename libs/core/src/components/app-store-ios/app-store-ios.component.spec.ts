@@ -1,22 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { AppStoreIosComponent } from './app-store-ios.component';
+import {
+  AppStoreIosComponent,
+  AppStoreIosComponentModule
+} from './app-store-ios.component';
 
 describe('AppStoreIosComponent', () => {
-  let component: AppStoreIosComponent;
-  let fixture: ComponentFixture<AppStoreIosComponent>;
+  let spectator: Spectator<AppStoreIosComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppStoreIosComponent]
-    }).compileComponents();
+  const createComponent = createComponentFactory({
+    component: AppStoreIosComponent,
+    imports: [AppStoreIosComponentModule],
+    declareComponent: false
+  });
 
-    fixture = TestBed.createComponent(AppStoreIosComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator).toBeTruthy();
   });
 });

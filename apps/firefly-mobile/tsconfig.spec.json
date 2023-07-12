@@ -13,8 +13,6 @@
       "@theory/cordova": ["../../libs/cordova/index.ts"],
       "@theory/cordova/*": ["../../libs/cordova/src/*"],
       "@theory/core": ["../../libs/core/index.ts"],
-      "@theory/core/*": ["../../libs/core/src/*"],
-      "@theory/core/feature/*": ["../../libs/core/src/features/*"],
       "@theory/firebase": ["../../libs/firebase/index.ts"],
       "@theory/firebase/*": ["../../libs/firebase/src/*"],
       "@theory/google": ["../../libs/google/index.ts"],

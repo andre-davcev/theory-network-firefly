@@ -4,9 +4,7 @@ import { Version } from './version.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceVersion {
-  private _version: Version;
-
-  constructor() {}
+  private _version!: Version;
 
   static parse(version: string): Version {
     const parts: Array<string> = version.trim().split('-');

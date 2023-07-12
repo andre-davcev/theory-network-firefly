@@ -1,9 +1,9 @@
-import { User as FirebaseUser } from '@angular/fire/auth';
 import { FirebaseError } from '@angular/fire/app';
+import { User as FirebaseUser } from '@angular/fire/auth';
 
-import { DocumentSnapshot } from '@theory/firebase';
+import { MetadataUser, User } from '@firefly/cloud';
 import { Credentials } from '@theory/core';
-import { User, MetadataUser } from '@firefly/cloud';
+import { DocumentSnapshot } from '@theory/firebase';
 
 import { ActionsUser } from './user.actions.enum';
 

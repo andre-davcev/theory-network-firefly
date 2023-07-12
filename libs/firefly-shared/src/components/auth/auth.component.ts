@@ -1,32 +1,32 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   UntypedFormBuilder,
-  UntypedFormGroup,
   UntypedFormControl,
+  UntypedFormGroup,
   Validators
 } from '@angular/forms';
-import { Select, Store } from '@ngxs/store';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { tap, catchError, filter, map } from 'rxjs/operators';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { Select, Store } from '@ngxs/store';
+import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
+import { catchError, filter, map, tap } from 'rxjs/operators';
 
 import { Credentials, Regex } from '@theory/core';
 
 import {
-  ActionUserLoginEmail,
   ActionUserCreate,
+  ActionUserLoginEmail,
   ActionUserResetPassword,
   ActionUserSetErrorAuth,
   StateUser
 } from '../../state';
+import { AuthControl } from './auth-control.enum';
+import { AuthErrorId } from './auth-error-id.enum';
+import { AuthErrorPassword } from './auth-error-password.enum';
+import { AuthErrorType } from './auth-error-type.enum';
 import { AuthError } from './auth-error.interface';
 import { AuthType } from './auth-type.enum';
-import { AuthErrorId } from './auth-error-id.enum';
-import { AuthErrorType } from './auth-error-type.enum';
-import { AuthControl } from './auth-control.enum';
-import { AuthErrorPassword } from './auth-error-password.enum';
 
 @Component({
   selector: 'ff-auth',

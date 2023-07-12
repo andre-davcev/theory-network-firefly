@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { Color } from '@firefly/shared/enums';
-import { DirectiveLoadingOptions } from '@firefly/shared';
-import { BaseComponent } from '@theory/core';
-import { takeUntil, filter } from 'rxjs/operators';
-import { MapMovingMethod } from '@theory/mapbox';
 import { Place } from '@firefly/cloud';
+import { DirectiveLoadingOptions } from '@firefly/shared';
+import { Color } from '@firefly/shared/enums';
+import { Select } from '@ngxs/store';
 import { StateLocation } from '@theory/capacitor';
+import { BaseComponent } from '@theory/core';
+import { MapMovingMethod } from '@theory/mapbox';
+import { Observable } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'ff-item-map',

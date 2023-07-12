@@ -1,22 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { HomeIconComponent } from './device-iphone.component';
+import {
+  DeviceIPhoneComponent,
+  DeviceIPhoneComponentModule
+} from './device-iphone.component';
 
-describe('HomeIconComponent', () => {
-  let component: HomeIconComponent;
-  let fixture: ComponentFixture<HomeIconComponent>;
+describe('DeviceIPhoneComponent', () => {
+  let spectator: Spectator<DeviceIPhoneComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [HomeIconComponent]
-    }).compileComponents();
+  const createComponent = createComponentFactory({
+    component: DeviceIPhoneComponent,
+    imports: [DeviceIPhoneComponentModule],
+    declareComponent: false
+  });
 
-    fixture = TestBed.createComponent(HomeIconComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator).toBeTruthy();
   });
 });

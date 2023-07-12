@@ -1,6 +1,6 @@
+import { MetadataInterest, Subscription } from '@firefly/cloud';
 import { CoreEnum } from '@theory/core';
 import { DocumentSnapshot } from '@theory/firebase';
-import { Subscription, MetadataInterest } from '@firefly/cloud';
 
 import { ActionsSubscription } from './subscription.actions.enum';
 

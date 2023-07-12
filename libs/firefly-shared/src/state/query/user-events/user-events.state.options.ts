@@ -1,7 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { OrderBy } from '@theory/firebase';
 import { TypeOf } from '@theory/core';
+import { OrderBy } from '@theory/firebase';
 
 import { EventType } from '../../../enums';
 import { StateUserEventsModel } from './user-events.state.model';

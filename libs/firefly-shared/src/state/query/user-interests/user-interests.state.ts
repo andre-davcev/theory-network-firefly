@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@angular/fire/compat/firestore';
-import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+import { Collection, Interest, SubscriptionPartial } from '@firefly/cloud';
 import { ImageType } from '@theory/core';
 import { ServiceStorage } from '@theory/firebase';
 import { StateQuery } from '@theory/ngxs';
-import { Interest, SubscriptionPartial, Collection } from '@firefly/cloud';
 
-import { ServiceInterests } from '../../../services';
 import { InterestType } from '../../../enums';
-import { StateUserInterestsModel } from './user-interests.state.model';
-import { StateUserInterestsOptions } from './user-interests.state.options';
-import {
-  ActionUserInterestsAdd,
-  ActionUserInterestsRemove,
-  ActionUserInterestsGetData,
-  ActionUserInterestsGet,
-  ActionUserInterestsSync,
-  ActionUserInterestsReset,
-  ActionUserInterestsFilter
-} from './user-interests.actions';
+import { ServiceInterests } from '../../../services';
+import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow
 } from '../../document/app/app.actions';
-import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 import { StateUser } from '../../document/user/user.state';
+import {
+  ActionUserInterestsAdd,
+  ActionUserInterestsFilter,
+  ActionUserInterestsGet,
+  ActionUserInterestsGetData,
+  ActionUserInterestsRemove,
+  ActionUserInterestsReset,
+  ActionUserInterestsSync
+} from './user-interests.actions';
+import { StateUserInterestsModel } from './user-interests.state.model';
+import { StateUserInterestsOptions } from './user-interests.state.options';
 
 @State<StateUserInterestsModel>(StateUserInterestsOptions)
 @Injectable()

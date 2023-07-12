@@ -14,7 +14,7 @@ import {
 })
 export class DeviceIPhoneComponent {
   @Input()
-  public url: string;
+  public url!: string;
 }
 
 @NgModule({

@@ -1,8 +1,8 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  NgModule,
-  Input
+  Component,
+  Input,
+  NgModule
 } from '@angular/core';
 
 @Component({
@@ -13,7 +13,7 @@ import {
 })
 export class AppStoreGoogleComponent {
   @Input()
-  public url: string;
+  public url!: string;
 
   public navigate(url: string): void {
     window.open(url);

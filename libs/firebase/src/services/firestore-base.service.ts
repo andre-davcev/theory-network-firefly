@@ -1,17 +1,17 @@
 import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-  AngularFirestoreCollection,
   Action,
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
   DocumentSnapshot
 } from '@angular/fire/compat/firestore';
 import { FieldValue, serverTimestamp } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs';
 import { CoreEnum } from '@theory/core';
-import { switchMap, map } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
-import { DocumentSnapshot as FirestoreDocumentSnapshot } from '../types';
 import { FirebaseDocument } from '../interfaces';
+import { DocumentSnapshot as FirestoreDocumentSnapshot } from '../types';
 
 export class ServiceFirestoreBase {
   public static collection<T>(

@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { switchMap } from 'rxjs/operators';
-import { State, Action, StateContext, Selector } from '@ngxs/store';
 
-import { ImageType } from '@theory/core';
-import { StateChild } from '@theory/ngxs';
-import { ServiceStorage } from '@theory/firebase';
 import {
+  Collection,
   StreamInterest,
   Subscription,
-  SubscriptionPartial,
-  Collection
+  SubscriptionPartial
 } from '@firefly/cloud';
+import { ImageType } from '@theory/core';
+import { ServiceStorage } from '@theory/firebase';
+import { StateChild } from '@theory/ngxs';
 
-import { ServiceSubscriptions } from '../../../services';
-import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
-import { StateUserSubscriptionsOptions } from './user-subscriptions.state.options';
-import {
-  ActionUserSubscriptionsAdd,
-  ActionUserSubscriptionsReset,
-  ActionUserSubscriptionsRemove,
-  ActionUserSubscriptionsGetData,
-  ActionUserSubscriptionsGet,
-  ActionUserSubscriptionsSync,
-  ActionUserSubscriptionsSetData,
-  ActionUserSubscriptionsFilter
-} from './user-subscriptions.actions';
 import { InterestType } from '../../../enums';
+import { ServiceSubscriptions } from '../../../services';
+import { InterestsFilter } from '../../composite/interests/interests.filter.model';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow
 } from '../../document/app/app.actions';
-import { InterestsFilter } from '../../composite/interests/interests.filter.model';
+import {
+  ActionUserSubscriptionsAdd,
+  ActionUserSubscriptionsFilter,
+  ActionUserSubscriptionsGet,
+  ActionUserSubscriptionsGetData,
+  ActionUserSubscriptionsRemove,
+  ActionUserSubscriptionsReset,
+  ActionUserSubscriptionsSetData,
+  ActionUserSubscriptionsSync
+} from './user-subscriptions.actions';
+import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
+import { StateUserSubscriptionsOptions } from './user-subscriptions.state.options';
 
 @State<StateUserSubscriptionsModel>(StateUserSubscriptionsOptions)
 @Injectable()

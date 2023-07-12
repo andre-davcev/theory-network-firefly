@@ -1,33 +1,33 @@
-import { State, Action, StateContext, Selector, Store } from '@ngxs/store';
 import { Injectable } from '@angular/core';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 
-import { StateChild } from '@theory/ngxs';
-import { ServiceStorage } from '@theory/firebase';
-import { ImageType } from '@theory/core';
 import {
+  Collection,
   StreamInterest,
-  SubscriptionPartial,
-  Collection
+  SubscriptionPartial
 } from '@firefly/cloud';
+import { ImageType } from '@theory/core';
+import { ServiceStorage } from '@theory/firebase';
+import { StateChild } from '@theory/ngxs';
 
-import { StateCityStreamModel } from './city-stream.state.model';
-import { StateCityStreamOptions } from './city-stream.state.options';
-import {
-  ActionCityStreamAdd,
-  ActionCityStreamReset,
-  ActionCityStreamRemove,
-  ActionCityStreamGetData,
-  ActionCityStreamGet,
-  ActionCityStreamSync,
-  ActionCityStreamSetData,
-  ActionCityStreamFilter,
-  ActionCityStreamSubscriptionNew,
-  ActionCityStreamSubscriptionsSet
-} from './city-stream.actions';
 import { InterestType } from '../../../enums';
 import { ServiceStreams } from '../../../services';
 import { InterestsFilter } from '../../composite/interests/interests.filter.model';
+import {
+  ActionCityStreamAdd,
+  ActionCityStreamFilter,
+  ActionCityStreamGet,
+  ActionCityStreamGetData,
+  ActionCityStreamRemove,
+  ActionCityStreamReset,
+  ActionCityStreamSetData,
+  ActionCityStreamSubscriptionNew,
+  ActionCityStreamSubscriptionsSet,
+  ActionCityStreamSync
+} from './city-stream.actions';
+import { StateCityStreamModel } from './city-stream.state.model';
+import { StateCityStreamOptions } from './city-stream.state.options';
 
 @State<StateCityStreamModel>(StateCityStreamOptions)
 @Injectable()

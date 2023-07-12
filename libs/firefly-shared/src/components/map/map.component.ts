@@ -1,41 +1,38 @@
 import {
-  Component,
-  OnInit,
-  Input,
-  HostBinding,
   AfterViewInit,
-  Output,
+  Component,
   EventEmitter,
-  ViewChildren,
-  QueryList,
-  OnChanges,
-  SimpleChanges,
+  HostBinding,
   Inject,
-  NgZone
+  Input,
+  NgZone,
+  OnChanges,
+  OnInit,
+  Output,
+  QueryList,
+  SimpleChanges,
+  ViewChildren
 } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { filter, takeUntil, delay, switchMap, map } from 'rxjs/operators';
-import { LngLatLike, Point, Popup, Map } from 'mapbox-gl';
-import { MapComponent, MarkerComponent } from 'ngx-mapbox-gl';
-import { Results, Result } from '@mapbox/mapbox-gl-geocoder';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import mapboxgl from 'mapbox-gl';
+import { Result, Results } from '@mapbox/mapbox-gl-geocoder';
+import { Select, Store } from '@ngxs/store';
+import mapboxgl, { LngLatLike, Map, Point, Popup } from 'mapbox-gl';
+import { MapComponent, MarkerComponent } from 'ngx-mapbox-gl';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { delay, filter, map, switchMap, takeUntil } from 'rxjs/operators';
 
+import { Place } from '@firefly/cloud';
 import { StateDevice, StateLanguage, StateLocation } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
 import {
   EnvironmentMapbox,
-  MapboxEnvironment,
-  MapMovingMethod
-} from '@theory/mapbox';
-import {
-  MapboxPlaceType,
-  MapboxMapStyle,
+  MapMovingMethod,
   MapboxControlPosition,
-  MapboxMarkerAnchor
+  MapboxEnvironment,
+  MapboxMapStyle,
+  MapboxMarkerAnchor,
+  MapboxPlaceType
 } from '@theory/mapbox';
-import { Place } from '@firefly/cloud';
 
 import { Color } from '../../enums';
 

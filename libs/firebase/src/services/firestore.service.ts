@@ -1,14 +1,14 @@
-import {
-  UntypedFormGroup,
-  UntypedFormBuilder,
-  AbstractControl
-} from '@angular/forms';
 import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
   DocumentSnapshot
 } from '@angular/fire/compat/firestore';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormGroup
+} from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { CoreEnum, CoreUtil } from '@theory/core';

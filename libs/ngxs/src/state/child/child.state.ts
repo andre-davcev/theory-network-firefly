@@ -1,21 +1,21 @@
-import { StateContext, createSelector } from '@ngxs/store';
-import { Observable, of, forkJoin } from 'rxjs';
-import { map, tap, switchMap } from 'rxjs/operators';
 import { QueryDocumentSnapshot } from '@angular/fire/compat/firestore';
 import { Timestamp } from '@angular/fire/firestore';
+import { StateContext, createSelector } from '@ngxs/store';
+import { Observable, forkJoin, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CoreUtil, TypeOf } from '@theory/core';
 import {
+  DocumentSnapshot,
   FirebaseDocument,
   OrderBy,
   ServiceFirestore,
-  ServiceStorage,
-  DocumentSnapshot
+  ServiceStorage
 } from '@theory/firebase';
 
-import { StateChildModel } from './child.model';
-import { ActionsCollection, StateCollection } from '../collection';
 import { SortField, SyncResult } from '../../interfaces';
+import { ActionsCollection, StateCollection } from '../collection';
+import { StateChildModel } from './child.model';
 
 export class StateChild<
   T extends FirebaseDocument,

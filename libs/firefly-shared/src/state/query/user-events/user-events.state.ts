@@ -1,35 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@angular/fire/compat/firestore';
-import { State, Action, StateContext, Store, Selector } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { StateQuery } from '@theory/ngxs';
-import { ImageType } from '@theory/core';
-import { ServiceStorage, DocumentSnapshot } from '@theory/firebase';
-import { CoreEnum } from '@theory/core';
 import { Collection, Event } from '@firefly/cloud';
+import { CoreEnum, ImageType } from '@theory/core';
+import { DocumentSnapshot, ServiceStorage } from '@theory/firebase';
+import { StateQuery } from '@theory/ngxs';
 
-import { StateUserEventsModel } from './user-events.state.model';
-import { StateUserEventsOptions } from './user-events.state.options';
-import {
-  ActionUserEventsAdd,
-  ActionUserEventsRemove,
-  ActionUserEventsGet,
-  ActionUserEventsSync,
-  ActionUserEventsGetData,
-  ActionUserEventsReset,
-  ActionUserEventsDelete,
-  ActionUserEventsFilter
-} from './user-events.actions';
-import { StateUser } from '../../document/user';
-import { ServiceEvents } from '../../../services';
 import { EventType } from '../../../enums';
+import { ServiceEvents } from '../../../services';
 import { CalendarFilter } from '../../composite/calendar/calendar.filter.model';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow
 } from '../../document/app/app.actions';
+import { StateUser } from '../../document/user';
+import {
+  ActionUserEventsAdd,
+  ActionUserEventsDelete,
+  ActionUserEventsFilter,
+  ActionUserEventsGet,
+  ActionUserEventsGetData,
+  ActionUserEventsRemove,
+  ActionUserEventsReset,
+  ActionUserEventsSync
+} from './user-events.actions';
+import { StateUserEventsModel } from './user-events.state.model';
+import { StateUserEventsOptions } from './user-events.state.options';
 
 @State<StateUserEventsModel>(StateUserEventsOptions)
 @Injectable()

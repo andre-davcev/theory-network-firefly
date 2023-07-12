@@ -1,8 +1,8 @@
-import { CoreEnum } from '@theory/core';
 import { Event, Interest, MetadataEvent, Place } from '@firefly/cloud';
+import { CoreEnum } from '@theory/core';
 
-import { ActionsEvent } from './event.actions.enum';
 import { DocumentSnapshot } from '@theory/firebase';
+import { ActionsEvent } from './event.actions.enum';
 
 export class ActionEventReset {
   static readonly type = ActionsEvent.Reset;

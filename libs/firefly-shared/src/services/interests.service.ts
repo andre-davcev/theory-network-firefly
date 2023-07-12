@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import {
-  UntypedFormGroup,
-  Validators,
-  UntypedFormBuilder
-} from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators
+} from '@angular/forms';
 
-import { ServiceFirestore } from '@theory/firebase';
-import { ValidatorsExtended } from '@theory/core';
 import { Interest } from '@firefly/cloud';
+import { ValidatorsExtended } from '@theory/core';
+import { ServiceFirestore } from '@theory/firebase';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceInterests extends ServiceFirestore<Interest> {

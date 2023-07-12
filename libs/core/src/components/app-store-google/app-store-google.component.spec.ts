@@ -1,22 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-import { AppStoreGoogleComponent } from './app-store-google.component';
+import {
+  AppStoreGoogleComponent,
+  AppStoreGoogleComponentModule
+} from './app-store-google.component';
 
 describe('AppStoreGoogleComponent', () => {
-  let component: AppStoreGoogleComponent;
-  let fixture: ComponentFixture<AppStoreGoogleComponent>;
+  let spectator: Spectator<AppStoreGoogleComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppStoreGoogleComponent]
-    }).compileComponents();
+  const createComponent = createComponentFactory({
+    component: AppStoreGoogleComponent,
+    imports: [AppStoreGoogleComponentModule],
+    declareComponent: false
+  });
 
-    fixture = TestBed.createComponent(AppStoreGoogleComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator).toBeTruthy();
   });
 });

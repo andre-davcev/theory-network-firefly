@@ -1,17 +1,17 @@
 import {
-  Directive,
   ComponentFactory,
+  ComponentFactoryResolver,
   ComponentRef,
+  Directive,
   Input,
   TemplateRef,
-  ComponentFactoryResolver,
   ViewContainerRef
 } from '@angular/core';
 
 import { TypeOf } from '@theory/core';
 
-import { Color } from '../../enums';
 import { ComponentLoading } from '../../components';
+import { Color } from '../../enums';
 import { DirectiveLoadingOptions } from './loading.directive.options';
 
 @Directive({

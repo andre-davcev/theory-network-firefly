@@ -1,57 +1,57 @@
-import { switchMap, tap, map } from 'rxjs/operators';
-import { of, from, forkJoin } from 'rxjs';
-import { Query } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
-import { Action, State, StateContext, Store, Selector } from '@ngxs/store';
+import { Query } from '@angular/fire/compat/firestore';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { forkJoin, from, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
+import { Collection, Event, Interest } from '@firefly/cloud';
+import { CoreEnum, ImageType } from '@theory/core';
 import {
-  ImageSize,
-  ServiceStorage,
   DocumentSnapshot,
+  ImageSize,
+  QueryDocumentSnapshot,
   QuerySnapshot,
-  QueryDocumentSnapshot
+  ServiceStorage
 } from '@theory/firebase';
-import { ImageType, CoreEnum } from '@theory/core';
 import { StateDocument } from '@theory/ngxs';
-import { Interest, Event, Collection } from '@firefly/cloud';
 
 import { ServiceInterests } from '../../../services';
-import { StateUser } from '../user';
-import { StateInterestModel } from './interest.state.model';
-import { StateInterestOptions } from './interest.state.options';
-import {
-  ActionInterestReset,
-  ActionInterestDirty,
-  ActionInterestGet,
-  ActionInterestSet,
-  ActionInterestPatch,
-  ActionInterestCreate,
-  ActionInterestSave,
-  ActionInterestDelete,
-  ActionInterestSetId,
-  ActionInterestUpdate,
-  ActionInterestEventsGet,
-  ActionInterestEventsGetAnonymous,
-  ActionInterestPatchMetadata,
-  ActionInterestImagesUpdate,
-  ActionInterestImageSet,
-  ActionInterestEventsSet,
-  ActionInterestEventsGetPending,
-  ActionInterestEventsAdd
-} from './interest.actions';
-import {
-  ActionUserInterestsAdd,
-  ActionUserInterestsRemove,
-  ActionUserInterestsSync
-} from '../../query/user-interests';
 import {
   ActionCityStreamRemove,
   ActionCityStreamSync
 } from '../../child/city-stream/city-stream.actions';
 import { ActionUserSubscriptionsRemove } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { StateInterests } from '../../composite/interests/interests.state';
+import {
+  ActionUserInterestsAdd,
+  ActionUserInterestsRemove,
+  ActionUserInterestsSync
+} from '../../query/user-interests';
 import { ActionEventInterestAdd } from '../event/event.actions';
+import { StateUser } from '../user';
+import {
+  ActionInterestCreate,
+  ActionInterestDelete,
+  ActionInterestDirty,
+  ActionInterestEventsAdd,
+  ActionInterestEventsGet,
+  ActionInterestEventsGetAnonymous,
+  ActionInterestEventsGetPending,
+  ActionInterestEventsSet,
+  ActionInterestGet,
+  ActionInterestImageSet,
+  ActionInterestImagesUpdate,
+  ActionInterestPatch,
+  ActionInterestPatchMetadata,
+  ActionInterestReset,
+  ActionInterestSave,
+  ActionInterestSet,
+  ActionInterestSetId,
+  ActionInterestUpdate
+} from './interest.actions';
 import { InterestEvents } from './interest.events.enum';
+import { StateInterestModel } from './interest.state.model';
+import { StateInterestOptions } from './interest.state.options';
 
 @State<StateInterestModel>(StateInterestOptions)
 @Injectable()

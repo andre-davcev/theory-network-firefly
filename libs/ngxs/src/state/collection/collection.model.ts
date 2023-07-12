@@ -1,5 +1,5 @@
 import { TypeOf } from '@theory/core';
-import { OrderBy, DocumentSnapshot } from '@theory/firebase';
+import { DocumentSnapshot, OrderBy } from '@theory/firebase';
 
 export interface StateCollectionModel<T> {
   pageSize: number;

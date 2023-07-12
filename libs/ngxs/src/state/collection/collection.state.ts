@@ -1,14 +1,14 @@
 import { createSelector, StateContext } from '@ngxs/store';
-import { Observable, of, forkJoin } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { map, switchMap, takeWhile, tap } from 'rxjs/operators';
 
-import { CoreUtil, CoreEnum, TypeOf, ImageType } from '@theory/core';
+import { CoreEnum, CoreUtil, ImageType, TypeOf } from '@theory/core';
 import {
-  OrderBy,
-  ImageSize,
-  ServiceStorage,
+  DocumentSnapshot,
   FirebaseDocument,
-  DocumentSnapshot
+  ImageSize,
+  OrderBy,
+  ServiceStorage
 } from '@theory/firebase';
 
 import { PageSize } from '../../enums';

@@ -1,8 +1,8 @@
 import { Query } from '@angular/fire/compat/firestore';
 
+import { Event, Interest, MetadataInterest } from '@firefly/cloud';
 import { CoreEnum } from '@theory/core';
 import { DocumentSnapshot } from '@theory/firebase';
-import { Event, Interest, MetadataInterest } from '@firefly/cloud';
 
 import { ActionsInterest } from './interest.actions.enum';
 

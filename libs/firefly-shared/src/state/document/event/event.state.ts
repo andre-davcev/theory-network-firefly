@@ -1,66 +1,65 @@
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { SetFormPristine } from '@ngxs/form-plugin';
-import { LngLatLike } from 'mapbox-gl';
-import { switchMap, map } from 'rxjs/operators';
-import { from, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Query } from '@angular/fire/compat/firestore';
 import { FieldValue, Timestamp } from '@angular/fire/firestore';
+import { SetFormPristine } from '@ngxs/form-plugin';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { LngLatLike } from 'mapbox-gl';
+import { from, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
-import { ImageType } from '@theory/core';
-import { MapboxPlaceType } from '@theory/mapbox';
-import { CoreEnum } from '@theory/core';
-import { StateDocument } from '@theory/ngxs';
 import {
-  ServiceStorage,
-  ImageSize,
-  DocumentSnapshot,
-  QueryDocumentSnapshot,
-  QuerySnapshot
-} from '@theory/firebase';
-import {
+  CityInfo,
+  Collection,
   Event,
   Interest,
   MetadataEvent,
-  Place,
-  Collection,
-  CityInfo
+  Place
 } from '@firefly/cloud';
-
-import { StateUser } from '../user';
-import { StateEventModel } from './event.state.model';
-import { StateEventOptions } from './event.state.options';
+import { CoreEnum, ImageType } from '@theory/core';
 import {
-  ActionEventGet,
-  ActionEventPlaceSet,
-  ActionEventCreate,
-  ActionEventPatch,
-  ActionEventDelete,
-  ActionEventReset,
-  ActionEventSet,
-  ActionEventSave,
-  ActionEventSetId,
-  ActionEventUpdate,
-  ActionEventInterestAdd,
-  ActionEventAccept,
-  ActionEventDeny,
-  ActionEventSetIdAnonymousPending,
-  ActionEventSetIdAnonymous,
-  ActionEventPatchMetadata,
-  ActionEventImagesUpdate,
-  ActionEventImageSet,
-  ActionEventTimeSet,
-  ActionEventInterestRemove
-} from './event.actions';
+  DocumentSnapshot,
+  ImageSize,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+  ServiceStorage
+} from '@theory/firebase';
+import { MapboxPlaceType } from '@theory/mapbox';
+import { StateDocument } from '@theory/ngxs';
+
+import { ServiceEvents, ServiceLocation } from '../../../services';
+import { StateUserAlerts } from '../../child';
 import {
   ActionUserEventsAdd,
   ActionUserEventsRemove,
-  StateUserEvents,
-  ActionUserEventsSync
+  ActionUserEventsSync,
+  StateUserEvents
 } from '../../query/user-events';
-import { ServiceEvents, ServiceLocation } from '../../../services';
 import { StateInterest } from '../interest';
-import { StateUserAlerts } from '../../child';
+import { StateUser } from '../user';
+import {
+  ActionEventAccept,
+  ActionEventCreate,
+  ActionEventDelete,
+  ActionEventDeny,
+  ActionEventGet,
+  ActionEventImageSet,
+  ActionEventImagesUpdate,
+  ActionEventInterestAdd,
+  ActionEventInterestRemove,
+  ActionEventPatch,
+  ActionEventPatchMetadata,
+  ActionEventPlaceSet,
+  ActionEventReset,
+  ActionEventSave,
+  ActionEventSet,
+  ActionEventSetId,
+  ActionEventSetIdAnonymous,
+  ActionEventSetIdAnonymousPending,
+  ActionEventTimeSet,
+  ActionEventUpdate
+} from './event.actions';
+import { StateEventModel } from './event.state.model';
+import { StateEventOptions } from './event.state.options';
 
 @State<StateEventModel>(StateEventOptions)
 @Injectable()
