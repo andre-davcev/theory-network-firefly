@@ -1,4 +1,4 @@
-import { Directive, Input, HostBinding } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 import { Elevation } from './elevation.enum';
@@ -32,7 +32,7 @@ export class DirectiveElevation {
         ? `ShadowUp${Math.abs(elevation)}`
         : 'None';
 
-    const style: string = Elevation[key];
+    const style: string = Elevation[key as keyof typeof Elevation];
 
     return style
       .split('),')

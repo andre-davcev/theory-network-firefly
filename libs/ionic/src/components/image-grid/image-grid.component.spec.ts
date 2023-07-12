@@ -1,24 +1,22 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { ComponentImageGrid } from './image-grid.component';
+import { ModuleComponentImageGrid } from './image-grid.component.module';
 
-describe('ComponentImageGrid', () => {
-  let component: ComponentImageGrid;
-  let fixture: ComponentFixture<ComponentImageGrid>;
+describe('AppStoreIosComponent', () => {
+  let spectator: Spectator<ComponentImageGrid>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ComponentImageGrid]
-    }).compileComponents();
-  }));
+  const createComponent = createComponentFactory({
+    component: ComponentImageGrid,
+    imports: [ModuleComponentImageGrid],
+    declareComponent: false
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComponentImageGrid);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator).toBeTruthy();
   });
 });
