@@ -1,44 +1,44 @@
 import { Component, ViewChild } from '@angular/core';
 import { Style } from '@capacitor/status-bar';
 import {
-  MenuController,
-  PopoverController,
-  IonSearchbar,
+  AlertController,
   IonInfiniteScroll,
-  AlertController
+  IonSearchbar,
+  MenuController,
+  PopoverController
 } from '@ionic/angular';
-import { Select, Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
+import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { BaseComponent, CoreEnum } from '@theory/core';
-import { Alert, Event, DateEvents, Interest } from '@firefly/cloud';
-import {
-  IconType,
-  StateUser,
-  EventType,
-  ActionInterestReset,
-  ActionInterestGet,
-  ActionUserEventsDelete,
-  Translation,
-  ActionAppLoadingShow,
-  ActionCalendarPage,
-  StateCalendar,
-  StateInterests,
-  ActionSearchEvents,
-  StateSearch,
-  ActionSearchReset
-} from '@firefly/shared';
+import { Alert, DateEvents, Event, Interest } from '@firefly/cloud';
 import {
   ActionMobileAuthSelect,
   ComponentHomeOptions,
   Pages,
   StateMobile
 } from '@firefly/mobile';
-import algoliaSearch, { SearchIndex, SearchClient } from 'algoliasearch/lite';
+import {
+  ActionAppLoadingShow,
+  ActionCalendarPage,
+  ActionInterestGet,
+  ActionInterestReset,
+  ActionSearchEvents,
+  ActionSearchReset,
+  ActionUserEventsDelete,
+  EventType,
+  IconType,
+  StateCalendar,
+  StateInterests,
+  StateSearch,
+  StateUser,
+  Translation
+} from '@firefly/shared';
 import { TranslateService } from '@ngx-translate/core';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { BaseComponent, CoreEnum } from '@theory/core';
+import algoliaSearch, { SearchClient, SearchIndex } from 'algoliasearch/lite';
 
 @Component({
   selector: 'app-page-calendar',

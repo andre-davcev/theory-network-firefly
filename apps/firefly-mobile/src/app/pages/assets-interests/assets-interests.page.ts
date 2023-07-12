@@ -1,24 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Style } from '@capacitor/status-bar';
-import { Select, Store } from '@ngxs/store';
+import { MenuController, ModalController } from '@ionic/angular';
 import { Navigate } from '@ngxs/router-plugin';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ModalController, MenuController } from '@ionic/angular';
 
+import { Interest } from '@firefly/cloud';
+import { Pages, StateMobile } from '@firefly/mobile';
+import {
+  ActionAppLoadingShow,
+  ActionEventInterestAdd,
+  ActionInterestSetId,
+  IconType,
+  StateUserInterests
+} from '@firefly/shared';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage } from '@theory/firebase';
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import {
-  StateUserInterests,
-  ActionInterestSetId,
-  ActionEventInterestAdd,
-  IconType,
-  ActionAppLoadingShow
-} from '@firefly/shared';
-import { Interest } from '@firefly/cloud';
-import { Pages } from '@firefly/mobile';
-import { StateMobile } from '@firefly/mobile';
 
 @Component({
   selector: 'app-page-assets-interests',

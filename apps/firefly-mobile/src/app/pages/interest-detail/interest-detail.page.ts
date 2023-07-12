@@ -1,49 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { Observable, from, of } from 'rxjs';
-import {
-  switchMap,
-  catchError,
-  map,
-  finalize,
-  takeUntil,
-  tap,
-  filter
-} from 'rxjs/operators';
-import { Select, Store } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
-import { TranslateService } from '@ngx-translate/core';
 import { Style } from '@capacitor/status-bar';
 import {
-  NavController,
-  ModalController,
+  ActionSheetController,
   AlertController,
-  ActionSheetController
+  ModalController,
+  NavController
 } from '@ionic/angular';
-
-import { BaseComponent, CoreEnum } from '@theory/core';
-import { StorageImage, StateStorage, TimestampFormat } from '@theory/firebase';
-import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
+import { TranslateService } from '@ngx-translate/core';
+import { Navigate } from '@ngxs/router-plugin';
+import { Select, Store } from '@ngxs/store';
+import { Observable, from, of } from 'rxjs';
 import {
-  StateInterest,
-  ActionInterestSave,
-  StateUserEvents,
-  StateUser,
-  ActionEventGet,
-  ActionEventAccept,
-  ActionEventSetIdAnonymousPending,
-  ActionInterestEventsGetAnonymous,
-  ActionEventDeny,
-  ActionInterestDelete,
-  Translation,
-  ActionAppLoadingShow,
-  ActionAppLoadingHide,
-  ActionInterestEventsAdd,
-  ActionEventSetId,
-  ActionUserEventsGetData
-} from '@firefly/shared';
-import { Pages, ActionMobileToast } from '@firefly/mobile';
+  catchError,
+  filter,
+  finalize,
+  map,
+  switchMap,
+  takeUntil,
+  tap
+} from 'rxjs/operators';
+
 import { Event, Interest } from '@firefly/cloud';
+import { ActionMobileToast, Pages } from '@firefly/mobile';
+import {
+  ActionAppLoadingHide,
+  ActionAppLoadingShow,
+  ActionEventAccept,
+  ActionEventDeny,
+  ActionEventGet,
+  ActionEventSetId,
+  ActionEventSetIdAnonymousPending,
+  ActionInterestDelete,
+  ActionInterestEventsAdd,
+  ActionInterestEventsGetAnonymous,
+  ActionInterestSave,
+  ActionUserEventsGetData,
+  StateInterest,
+  StateUser,
+  StateUserEvents,
+  Translation
+} from '@firefly/shared';
+import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
+import { BaseComponent, CoreEnum } from '@theory/core';
+import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
 
 import { PageEventDetail } from '../event-detail';
 import { PageEventSelector } from '../event-selector';

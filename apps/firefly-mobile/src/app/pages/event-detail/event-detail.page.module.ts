@@ -3,19 +3,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
-import { ModulePipeTimestamp } from '@theory/firebase';
 import {
-  ModuleComponentItemHeader,
   ModuleComponentItemDescription,
+  ModuleComponentItemHeader,
   ModuleComponentItemImage,
   ModuleComponentItemMap
 } from '@firefly/mobile';
+import { ModulePipeTimestamp } from '@theory/firebase';
 
 import { ModulePage } from '../../modules';
+import { ModulePageAssetsInterests } from '../assets-interests';
+import { ModulePageEventLocation } from '../event-location';
 import { PageEventDetail } from './event-detail.page';
 import { RoutesPageEventDetail } from './event-detail.page.routes';
-import { ModulePageEventLocation } from '../event-location';
-import { ModulePageAssetsInterests } from '../assets-interests';
 
 @NgModule({
   imports: [

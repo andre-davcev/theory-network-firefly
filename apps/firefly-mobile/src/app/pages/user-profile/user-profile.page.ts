@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
 import { Style } from '@capacitor/status-bar';
 import { MenuController } from '@ionic/angular';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
-import {
-  IconType,
-  Color,
-  StateUserProfile,
-  ActionUserIsPublisherSet,
-  StateUser
-} from '@firefly/shared';
 import { StateMobile } from '@firefly/mobile';
+import {
+  ActionUserIsPublisherSet,
+  Color,
+  IconType,
+  StateUser,
+  StateUserProfile
+} from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
 @Component({

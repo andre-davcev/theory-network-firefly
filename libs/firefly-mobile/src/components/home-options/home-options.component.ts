@@ -1,17 +1,17 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
+import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
-import { switchMap, delay } from 'rxjs/operators';
+import { delay, switchMap } from 'rxjs/operators';
 
 import {
-  InterestType,
-  EventType,
-  StateUser,
-  ActionInterestsSetVirtual,
+  ActionCalendarSetType,
   ActionCalendarSetVirtual,
   ActionInterestsSetType,
-  ActionCalendarSetType
+  ActionInterestsSetVirtual,
+  EventType,
+  InterestType,
+  StateUser
 } from '@firefly/shared';
 
 @Component({

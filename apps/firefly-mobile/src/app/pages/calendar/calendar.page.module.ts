@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
-import { ModuleDirectiveElevation } from '@theory/google';
 import {
-  ModuleComponentSlide,
-  ModuleComponentItemEvents
+  ModuleComponentItemEvents,
+  ModuleComponentSlide
 } from '@firefly/mobile';
 import {
-  ModuleComponentIconMessage,
-  ModuleComponentButtonAdd
+  ModuleComponentButtonAdd,
+  ModuleComponentIconMessage
 } from '@firefly/shared';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '../../modules';
+import { ModulePageLogin } from '../login';
 import { PageCalendar } from './calendar.page';
 import { RoutesPageCalendar } from './calendar.page.routes';
-import { ModulePageLogin } from '../login';
 
 @NgModule({
   imports: [

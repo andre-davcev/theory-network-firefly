@@ -1,18 +1,18 @@
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { Select, Store } from '@ngxs/store';
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
-import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
-import {
-  StateUserEvents,
-  ActionEventSetId,
-  StateInterest,
-  ActionEventPatch,
-  ActionInterestEventsGet
-} from '@firefly/shared';
 import { Event, Interest } from '@firefly/cloud';
+import {
+  ActionEventPatch,
+  ActionEventSetId,
+  ActionInterestEventsGet,
+  StateInterest,
+  StateUserEvents
+} from '@firefly/shared';
+import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
 
 @Component({
   selector: 'app-page-event-assets',

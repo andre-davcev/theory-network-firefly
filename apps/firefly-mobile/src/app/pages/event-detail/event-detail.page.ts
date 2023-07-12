@@ -1,49 +1,49 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
-import { Observable, from, of } from 'rxjs';
-import { map, catchError, switchMap, finalize } from 'rxjs/operators';
-import { Select, Store } from '@ngxs/store';
+import { UntypedFormGroup } from '@angular/forms';
+import { Style } from '@capacitor/status-bar';
 import {
   AlertController,
   ModalController,
   NavController
 } from '@ionic/angular';
-import { Style } from '@capacitor/status-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable, from, of } from 'rxjs';
+import { catchError, finalize, map, switchMap } from 'rxjs/operators';
 
-import { TimestampFormat } from '@theory/firebase';
+import { Place } from '@firefly/cloud';
+import { ActionMobileToast, Pages } from '@firefly/mobile';
 import {
-  ActionDeviceStatusBarSet,
-  StateDevice,
-  ServiceCamera
-} from '@theory/capacitor';
-import {
-  StateEvent,
-  ActionEventPatch,
-  ActionEventSave,
-  IconType,
-  Color,
-  IconSlot,
-  ActionInterestEventsGetAnonymous,
-  ActionEventPatchMetadata,
-  ActionEventPlaceSet,
-  ActionEventTimeSet,
+  ActionAppLoadingHide,
+  ActionAppLoadingShow,
   ActionEventAccept,
   ActionEventDeny,
-  Translation,
+  ActionEventPatch,
+  ActionEventPatchMetadata,
+  ActionEventPlaceSet,
+  ActionEventSave,
+  ActionEventTimeSet,
+  ActionInterestEventsGetAnonymous,
   ActionUserEventsDelete,
-  ActionAppLoadingShow,
-  ActionAppLoadingHide
+  Color,
+  IconSlot,
+  IconType,
+  StateEvent,
+  Translation
 } from '@firefly/shared';
-import { ActionMobileToast, Pages } from '@firefly/mobile';
-import { Place } from '@firefly/cloud';
+import {
+  ActionDeviceStatusBarSet,
+  ServiceCamera,
+  StateDevice
+} from '@theory/capacitor';
+import { TimestampFormat } from '@theory/firebase';
 
-import { PageEventLocation } from '../event-location';
 import {
   PageAssetsInterests,
   ResolverPageAssetsInterests
 } from '../assets-interests';
+import { PageEventLocation } from '../event-location';
 
 @Component({
   selector: 'app-page-event-detail',

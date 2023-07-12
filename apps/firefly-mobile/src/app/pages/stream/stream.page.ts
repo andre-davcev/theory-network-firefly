@@ -1,34 +1,34 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { Navigate } from '@ngxs/router-plugin';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { takeUntil, take, switchMap, tap } from 'rxjs/operators';
+import { switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
-import { TimestampFormat } from '@theory/firebase';
-import { BaseComponent } from '@theory/core';
 import {
-  StateUser,
-  ActionInterestEventsGetAnonymous,
-  StateInterest,
-  IconType,
-  ActionInterestGet,
-  ActionAppLoadingShow,
-  ActionInterestsPage,
-  StateInterests,
-  ActionInterestsSubscriptionToggle,
-  ActionInterestsSubscriptionOnOff,
-  ActionInterestSetId,
-  StateSearch,
-  ActionSearchReset
-} from '@firefly/shared';
-import {
-  StreamInterest,
-  Interest,
   Event,
+  Interest,
+  StreamInterest,
   SubscriptionPartial
 } from '@firefly/cloud';
 import { ActionMobileAuthSelect, Pages } from '@firefly/mobile';
+import {
+  ActionAppLoadingShow,
+  ActionInterestEventsGetAnonymous,
+  ActionInterestGet,
+  ActionInterestSetId,
+  ActionInterestsPage,
+  ActionInterestsSubscriptionOnOff,
+  ActionInterestsSubscriptionToggle,
+  ActionSearchReset,
+  IconType,
+  StateInterest,
+  StateInterests,
+  StateSearch,
+  StateUser
+} from '@firefly/shared';
+import { BaseComponent } from '@theory/core';
+import { TimestampFormat } from '@theory/firebase';
 
 @Component({
   selector: 'app-page-stream',

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
-import { Store, Select } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
 import { Style } from '@capacitor/status-bar';
+import { MenuController } from '@ionic/angular';
+import { Navigate } from '@ngxs/router-plugin';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { Pages, StateMobile } from '@firefly/mobile';
-import { IconType, IconSize, Color } from '@firefly/shared';
+import { Color, IconSize, IconType } from '@firefly/shared';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
 @Component({
   selector: 'app-page-categories',

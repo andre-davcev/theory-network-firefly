@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 //import { RouterModule } from '@angular/router';
 
-import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentMap } from '@firefly/shared';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '../../modules';
 import { PageEventLocation } from './event-location.page';

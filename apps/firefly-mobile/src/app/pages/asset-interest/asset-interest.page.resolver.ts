@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
-  Resolve,
   ActivatedRouteSnapshot,
+  Resolve,
   RouterStateSnapshot
 } from '@angular/router';
 import { Store } from '@ngxs/store';
@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import {
-  ActionInterestSetId,
+  ActionAppLoadingHide,
   ActionInterestEventsGet,
-  ActionAppLoadingHide
+  ActionInterestSetId
 } from '@firefly/shared';
 
 @Injectable({ providedIn: 'root' })

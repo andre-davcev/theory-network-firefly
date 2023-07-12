@@ -1,22 +1,22 @@
 import { Component, ViewChild } from '@angular/core';
-import { Observable, from, BehaviorSubject } from 'rxjs';
-import { switchMap, filter } from 'rxjs/operators';
 import { AlertController, IonSlides, ModalController } from '@ionic/angular';
-import { Select, Store } from '@ngxs/store';
 import { TranslateService } from '@ngx-translate/core';
+import { Select, Store } from '@ngxs/store';
+import { BehaviorSubject, Observable, from } from 'rxjs';
+import { filter, switchMap } from 'rxjs/operators';
 
-import { BaseComponent } from '@theory/core';
-import {
-  ActionUserAlertsGo,
-  IconType,
-  ActionUserAlertsDelete,
-  Translation,
-  ActionAlertsSlideRestore,
-  ActionAlertsSlideIndex,
-  StateAlerts
-} from '@firefly/shared';
 import { Alert } from '@firefly/cloud';
 import { Pages } from '@firefly/mobile';
+import {
+  ActionAlertsSlideIndex,
+  ActionAlertsSlideRestore,
+  ActionUserAlertsDelete,
+  ActionUserAlertsGo,
+  IconType,
+  StateAlerts,
+  Translation
+} from '@firefly/shared';
+import { BaseComponent } from '@theory/core';
 
 @Component({
   selector: 'app-page-notifications',

@@ -2,10 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { Style } from '@capacitor/status-bar';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
-import { from, Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { Alert, DateEvents } from '@firefly/cloud';
 import {
   ActionCalendarPage,
   ActionCalendarSetType,
@@ -15,7 +15,7 @@ import {
   StateCalendar,
   StateUserEvents
 } from '@firefly/shared';
-import { Alert, DateEvents } from '@firefly/cloud';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 
 @Component({
   selector: 'app-page-event-selector',

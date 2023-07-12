@@ -13,24 +13,13 @@
       "@theory/core": ["../../libs/core/index.ts"],
       "@theory/firebase": ["../../libs/firebase/index.ts"],
       "@theory/firebase/*": ["../../libs/firebase/src/*"],
-      "@theory/google": ["../../libs/google/index.ts"],
-      "@theory/google/*": ["../../libs/google/src/*"],
+      "@theory/google": ["../../libs/google/src/index.ts"],
       "@theory/ionic": ["../../libs/ionic/src/index.ts"],
       "@theory/mapbox": ["../../libs/mapbox/src/index.ts"],
       "@theory/ngxs": ["../../libs/ngxs/src/index.ts"],
-      "@firefly/shared": ["../../libs/firefly-shared/index.ts"],
-      "@firefly/shared/*": ["../../libs/firefly-shared/src/*"],
-      "@firefly/shared/component/*": [
-        "../../libs/firefly-shared/src/components/*"
-      ],
-      "@firefly/shared/state/*": ["../../libs/firefly-shared/src/state/*"],
       "@firefly/cloud": ["../../apps/firefly-functions/src/shared/index.ts"],
-      "@firefly/mobile": ["../../libs/firefly-mobile/index.ts"],
-      "@firefly/mobile/*": ["../../libs/firefly-mobile/src/*"],
-      "@firefly/mobile/component/*": [
-        "../../libs/firefly-mobile/src/components/*"
-      ],
-      "@firefly/mobile/state/*": ["../../libs/firefly-mobile/src/state/*"]
+      "@firefly/mobile": ["../../libs/firefly-mobile/src/index.ts"],
+      "@firefly/shared": ["../../libs/firefly-shared/src/index.ts"]
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
-import { ModuleDirectiveElevation } from '@theory/google';
 import {
-  ModuleComponentSlide,
-  ModuleComponentItemEvents
+  ModuleComponentItemEvents,
+  ModuleComponentSlide
 } from '@firefly/mobile';
 import {
-  ModuleComponentIconMessage,
-  ModuleComponentButtonAdd
+  ModuleComponentButtonAdd,
+  ModuleComponentIconMessage
 } from '@firefly/shared';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '../../modules';
 import { PageNotifications } from './notifications.page';

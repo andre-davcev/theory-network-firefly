@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { Select, Store } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
+import { Style } from '@capacitor/status-bar';
 import {
   AlertController,
   ModalController,
   NavController
 } from '@ionic/angular';
-import { Style } from '@capacitor/status-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { Navigate } from '@ngxs/router-plugin';
+import { Select, Store } from '@ngxs/store';
+import { Observable, from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
-import { BaseComponent } from '@theory/core';
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import {
-  StateEvent,
-  ActionUserAlertsGo,
-  ActionUserAlertsDelete,
-  Translation
-} from '@firefly/shared';
 import { Alert, Event } from '@firefly/cloud';
 import { Pages } from '@firefly/mobile';
+import {
+  ActionUserAlertsDelete,
+  ActionUserAlertsGo,
+  StateEvent,
+  Translation
+} from '@firefly/shared';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { BaseComponent } from '@theory/core';
 
 @Component({
   selector: 'app-page-notification-detail',

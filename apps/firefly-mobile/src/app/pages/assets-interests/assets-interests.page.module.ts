@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { ModuleDirectiveElevation } from '@theory/google';
 import {
-  ModuleComponentIconMessage,
-  ModuleComponentButtonAdd
+  ModuleComponentButtonAdd,
+  ModuleComponentIconMessage
 } from '@firefly/shared';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '../../modules';
 import { PageAssetsInterests } from './assets-interests.page';

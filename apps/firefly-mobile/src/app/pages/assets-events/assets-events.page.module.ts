@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
-import { ModuleDirectiveElevation } from '@theory/google';
-import { ModulePipeTimestamp } from '@theory/firebase';
 import {
-  ModuleComponentIconMessage,
-  ModuleComponentButtonAdd
+  ModuleComponentButtonAdd,
+  ModuleComponentIconMessage
 } from '@firefly/shared';
+import { ModulePipeTimestamp } from '@theory/firebase';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '../../modules';
 import { PageAssetsEvents } from './assets-events.page';

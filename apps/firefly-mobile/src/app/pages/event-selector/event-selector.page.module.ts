@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentItemEvents } from '@firefly/mobile';
 import { ModuleComponentIconMessage } from '@firefly/shared';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '../../modules';
 import { PageEventSelector } from './event-selector.page';

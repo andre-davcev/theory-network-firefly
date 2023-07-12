@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
+import { Style } from '@capacitor/status-bar';
 import { Navigate } from '@ngxs/router-plugin';
+import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
-import { Style } from '@capacitor/status-bar';
 
-import {
-  ActionDeviceStatusBarShow,
-  ActionDeviceStatusBarSet
-} from '@theory/capacitor';
-import { StateApp } from '@firefly/shared';
 import { Pages } from '@firefly/mobile';
+import { StateApp } from '@firefly/shared';
+import {
+  ActionDeviceStatusBarSet,
+  ActionDeviceStatusBarShow
+} from '@theory/capacitor';
 
 @Component({
   selector: 'app-page-auth',

@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
-import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { Style } from '@capacitor/status-bar';
 import { MenuController } from '@ionic/angular';
+import { Navigate } from '@ngxs/router-plugin';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { StorageImage, StateStorage, TimestampFormat } from '@theory/firebase';
-import { BaseComponent, CoreEnum } from '@theory/core';
-import {
-  StateUserEvents,
-  IconType,
-  ActionAppLoadingShow
-} from '@firefly/shared';
 import { Event } from '@firefly/cloud';
 import { Pages, StateMobile } from '@firefly/mobile';
+import {
+  ActionAppLoadingShow,
+  IconType,
+  StateUserEvents
+} from '@firefly/shared';
+import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { BaseComponent, CoreEnum } from '@theory/core';
+import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
 
 @Component({
   selector: 'app-page-assets-events',

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {
-  ModuleComponentLogo,
   ModuleComponentAuth,
-  ModuleComponentTutorial,
+  ModuleComponentButtonAction,
   ModuleComponentIconMessage,
-  ModuleComponentButtonAction
+  ModuleComponentLogo,
+  ModuleComponentTutorial
 } from '@firefly/shared';
 
 import { ModulePage } from '../../modules';

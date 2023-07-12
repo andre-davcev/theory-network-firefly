@@ -1,14 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModuleDirectiveElevation } from '@theory/google';
 import { ModuleComponentIcon } from '@firefly/shared';
+import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModulePage } from '../../modules';
-import { RoutesPageCategories } from './categories.page.routes';
 import { PageCategories } from './categories.page';
+import { RoutesPageCategories } from './categories.page.routes';
 
 @NgModule({
   imports: [

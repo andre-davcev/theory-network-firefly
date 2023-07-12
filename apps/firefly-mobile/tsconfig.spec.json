@@ -14,16 +14,13 @@
       "@theory/core": ["../../libs/core/index.ts"],
       "@theory/firebase": ["../../libs/firebase/index.ts"],
       "@theory/firebase/*": ["../../libs/firebase/src/*"],
-      "@theory/google": ["../../libs/google/index.ts"],
-      "@theory/google/*": ["../../libs/google/src/*"],
+      "@theory/google": ["../../libs/google/src/index.ts"],
       "@theory/ionic": ["../../libs/ionic/src/index.ts"],
       "@theory/mapbox": ["../../libs/mapbox/index.ts"],
       "@theory/ngxs": ["../../libs/ngxs/src/index.ts"],
-      "@firefly/shared": ["../../libs/firefly-shared/index.ts"],
-      "@firefly/shared/*": ["../../libs/firefly-shared/src/*"],
       "@firefly/cloud": ["../../apps/firefly-functions/src/shared/index.ts"],
-      "@firefly/mobile": ["../../libs/firefly-mobile/index.ts"],
-      "@firefly/mobile/*": ["../../libs/firefly-mobile/src/*"]
+      "@firefly/mobile": ["../../libs/firefly-mobile/src/index.ts"],
+      "@firefly/shared": ["../../libs/firefly-shared/src/index.ts"]
     }
   },
   "files": ["src/test.ts", "src/zone-flags.ts", "src/polyfills.ts"],
