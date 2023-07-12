@@ -9,6 +9,6 @@ export interface StateDeviceModel {
   ios: boolean;
   android: boolean;
 
-  statusBar: StyleOptions;
+  statusBar: StyleOptions | null;
   statusBarVisible: boolean;
 }

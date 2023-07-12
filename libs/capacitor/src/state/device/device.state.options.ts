@@ -1,7 +1,7 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
-import { StateDeviceModel } from './device.state.model';
 import { Platform } from '../../enums';
+import { StateDeviceModel } from './device.state.model';
 
 export const StateDeviceOptions: StoreOptions<StateDeviceModel> = {
   name: 'device',
@@ -13,7 +13,7 @@ export const StateDeviceOptions: StoreOptions<StateDeviceModel> = {
     ios: false,
     android: false,
 
-    statusBar: undefined,
+    statusBar: null,
     statusBarVisible: false
   }
 };

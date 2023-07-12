@@ -1,10 +1,10 @@
-import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { MediaAsset, MediaAlbum } from '@capacitor-community/media';
 import { Injectable } from '@angular/core';
+import { MediaAlbum, MediaAsset } from '@capacitor-community/media';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
+import { ActionPhotosGet, ActionPhotosGetAlbums } from './photos.actions';
 import { StatePhotosModel } from './photos.state.model';
 import { StatePhotosOptions } from './photos.state.options';
-import { ActionPhotosGet, ActionPhotosGetAlbums } from './photos.actions';
 
 @State<StatePhotosModel>(StatePhotosOptions)
 @Injectable()

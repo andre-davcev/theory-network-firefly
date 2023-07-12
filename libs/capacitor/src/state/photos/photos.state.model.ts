@@ -1,6 +1,6 @@
-import { MediaResponse, MediaAlbumResponse } from '@capacitor-community/media';
+import { MediaAlbumResponse, MediaResponse } from '@capacitor-community/media';
 
 export interface StatePhotosModel {
-  photos: MediaResponse;
-  albums: MediaAlbumResponse;
+  photos: MediaResponse | null;
+  albums: MediaAlbumResponse | null;
 }

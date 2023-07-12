@@ -1,4 +1,4 @@
 export interface StateLanguageModel {
-  language: string;
-  error: Error;
+  language: string | null;
+  error: Error | null;
 }

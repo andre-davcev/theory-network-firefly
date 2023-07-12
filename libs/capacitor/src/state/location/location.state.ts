@@ -1,26 +1,26 @@
-import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { from, of } from 'rxjs';
-import { tap, catchError, switchMap, filter } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import {
   Geolocation,
   PermissionStatus,
   Position
 } from '@capacitor/geolocation';
-import { Injectable } from '@angular/core';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { LngLatLike } from 'mapbox-gl';
+import { from, of } from 'rxjs';
+import { catchError, filter, switchMap, tap } from 'rxjs/operators';
 
+import { PermissionState } from '@capacitor/core';
+import { ActionLocationWatch } from './location.actions';
 import { StateLocationModel } from './location.state.model';
 import { StateLocationOptions } from './location.state.options';
-import { ActionLocationWatch } from './location.actions';
-import { PermissionState } from '@capacitor/core';
 
 @State<StateLocationModel>(StateLocationOptions)
 @Injectable()
 export class StateLocation {
-  @Selector() static location(state: StateLocationModel): Position {
+  @Selector() static location(state: StateLocationModel): Position | null {
     return state.location;
   }
-  @Selector() static error(state: StateLocationModel): Error {
+  @Selector() static error(state: StateLocationModel): Error | null {
     return state.error;
   }
   @Selector() static loading(state: StateLocationModel): boolean {
@@ -42,12 +42,12 @@ export class StateLocation {
   }
 
   @Selector()
-  static locationLike(state: StateLocationModel): LngLatLike {
+  static locationLike(state: StateLocationModel): LngLatLike | null {
     return !StateLocation.isValid(state)
       ? null
       : [
-          StateLocation.location(state).coords.longitude,
-          StateLocation.location(state).coords.latitude
+          StateLocation.location(state)?.coords.longitude || 0,
+          StateLocation.location(state)?.coords.latitude || 0
         ];
   }
 
@@ -69,7 +69,7 @@ export class StateLocation {
       ),
       filter((status: PermissionStatus) => status.location === 'granted'),
       switchMap(() => from(Geolocation.getCurrentPosition())),
-      tap((location: GeolocationPosition) => patchState({ location })),
+      tap((location: Position | null | undefined) => patchState({ location })),
       catchError((error: any) => of(error))
     );
   }

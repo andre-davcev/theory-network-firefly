@@ -1,17 +1,17 @@
-import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { of, from } from 'rxjs';
-import { catchError, switchMap, map } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
-import { Device } from '@capacitor/device';
 import { Injectable } from '@angular/core';
+import { Device } from '@capacitor/device';
+import { TranslateService } from '@ngx-translate/core';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { from, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
-import { StateLanguageModel } from './language.state.model';
-import { StateLanguageOptions } from './language.state.options';
 import {
-  ActionLanguageInitialize,
   ActionLanguageGet,
+  ActionLanguageInitialize,
   ActionLanguageSet
 } from './language.actions';
+import { StateLanguageModel } from './language.state.model';
+import { StateLanguageOptions } from './language.state.options';
 
 @State<StateLanguageModel>(StateLanguageOptions)
 @Injectable()
@@ -19,7 +19,7 @@ export class StateLanguage {
   constructor(private translate: TranslateService) {}
 
   @Selector() static language(state: StateLanguageModel): string {
-    return state.language;
+    return state.language || 'en-us';
   }
 
   @Selector() static error(state: StateLanguageModel): any {
@@ -33,9 +33,7 @@ export class StateLanguage {
   @Selector() static languageIso639_1(state: StateLanguageModel): string {
     const language: string = StateLanguage.language(state);
 
-    return language == null || language.length === 0
-      ? undefined
-      : language.split('-')[0].toLowerCase();
+    return language.split('-')[0].toLowerCase();
   }
 
   ngxsOnInit(context: StateContext<StateLanguageModel>) {

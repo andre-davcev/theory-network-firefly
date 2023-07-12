@@ -6,7 +6,7 @@ export const StatePhotosOptions: StoreOptions<StatePhotosModel> = {
   name: 'photos',
 
   defaults: {
-    photos: undefined,
-    albums: undefined
+    photos: null,
+    albums: null
   }
 };

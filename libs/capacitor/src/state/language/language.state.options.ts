@@ -6,7 +6,7 @@ export const StateLanguageOptions: StoreOptions<StateLanguageModel> = {
   name: 'language',
 
   defaults: {
-    language: undefined,
-    error: undefined
+    language: null,
+    error: null
   }
 };

@@ -1,19 +1,19 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { Injectable } from '@angular/core';
+import { Device, DeviceInfo } from '@capacitor/device';
+import { StatusBar, StyleOptions } from '@capacitor/status-bar';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { from, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { StatusBar, StyleOptions } from '@capacitor/status-bar';
-import { Device, DeviceInfo } from '@capacitor/device';
-import { Injectable } from '@angular/core';
 
 import { Platform } from '../../enums';
-import { StateDeviceModel } from './device.state.model';
-import { StateDeviceOptions } from './device.state.options';
 import {
   ActionDeviceInitialize,
+  ActionDeviceStatusBarHide,
   ActionDeviceStatusBarSet,
-  ActionDeviceStatusBarShow,
-  ActionDeviceStatusBarHide
+  ActionDeviceStatusBarShow
 } from './device.actions';
+import { StateDeviceModel } from './device.state.model';
+import { StateDeviceOptions } from './device.state.options';
 
 @State<StateDeviceModel>(StateDeviceOptions)
 @Injectable()
@@ -39,7 +39,7 @@ export class StateDevice {
     return state.ios;
   }
 
-  @Selector() static statusBar(state: StateDeviceModel): StyleOptions {
+  @Selector() static statusBar(state: StateDeviceModel): StyleOptions | null {
     return state.statusBar;
   }
   @Selector() static statusBarVisible(state: StateDeviceModel): boolean {
@@ -73,7 +73,7 @@ export class StateDevice {
   ) {
     const options: StyleOptions = payload;
     const state: StateDeviceModel = getState();
-    const optionsPrevious: StyleOptions = StateDevice.statusBar(state);
+    const optionsPrevious: StyleOptions | null = StateDevice.statusBar(state);
     const isDevice: boolean = StateDevice.device(state);
     const setStatusBarOptions: boolean =
       isDevice &&
