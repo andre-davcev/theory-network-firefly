@@ -13,7 +13,7 @@ export interface StateCollectionModel<T> {
 
   keys: Array<string>;
   keysFiltered?: Array<string>;
-  snapshotLookup: Record<string, DocumentSnapshot>;
+  snapshotLookup: Record<string, DocumentSnapshot<any>>;
   dataLookup: Record<string, T>;
 
   data: Array<T>;

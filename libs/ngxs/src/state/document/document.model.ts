@@ -7,5 +7,5 @@ import { FormNgxs } from '../../interfaces';
 export interface StateDocumentModel {
   form: FormNgxs;
   formGroup: UntypedFormGroup;
-  snapshot: DocumentSnapshot;
+  snapshot: DocumentSnapshot<any>;
 }

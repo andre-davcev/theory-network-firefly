@@ -20,7 +20,7 @@ export abstract class StateQuery<
   T extends FirebaseDocument,
   M extends StateCollectionModel<T>
 > extends StateCollection<T, M> {
-  public query: Query;
+  public query!: Query;
 
   constructor(
     defaults: M,
@@ -30,7 +30,10 @@ export abstract class StateQuery<
     super(defaults, actions, storage);
   }
 
-  public reset(context: StateContext<M>, action: any): Observable<any> {
+  public override reset(
+    context: StateContext<M>,
+    action: any
+  ): Observable<any> {
     this.query = action.query == null ? this.query : action.query;
 
     return super.reset(context, action);
@@ -48,7 +51,7 @@ export abstract class StateQuery<
         );
   }
 
-  public get(context: StateContext<M>, action?: any): Observable<any> {
+  public override get(context: StateContext<M>, action?: any): Observable<any> {
     const { getState, patchState } = context;
 
     const state: M = getState();

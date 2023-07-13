@@ -33,7 +33,7 @@ export class StateDocument<
   protected actions: ActionsDocument;
   protected formPath: string;
 
-  protected static snapshotState(state: any): FirestoreDocumentSnapshot {
+  protected static snapshotState(state: any): FirestoreDocumentSnapshot<any> {
     return state.snapshot;
   }
   protected static formState(state: any): FormNgxs {
@@ -56,8 +56,9 @@ export class StateDocument<
   }
   protected static canUpdateState(state: any): boolean {
     return (
-      StateDocument.formState(state).status === FormNgxsStatus.Valid &&
-      StateDocument.formState(state).dirty
+      (StateDocument.formState(state).status === FormNgxsStatus.Valid &&
+        StateDocument.formState(state).dirty) ||
+      false
     );
   }
   protected static foundState(state: any): boolean {
@@ -155,7 +156,7 @@ export class StateDocument<
     return this.service
       .documentGet(this.collection, id)
       .pipe(
-        switchMap((snapshot: FirestoreDocumentSnapshot) =>
+        switchMap((snapshot: FirestoreDocumentSnapshot<any>) =>
           dispatch([new ActionSet(snapshot), ...this.ActionsQueryAdd(snapshot)])
         )
       );
@@ -167,7 +168,7 @@ export class StateDocument<
 
     const id: string = action.id;
 
-    return this.service.documentWatch(this.collection, id).pipe(
+    return this.service.documentWatch<T>(this.collection, id).pipe(
       tap((snapshot: DocumentSnapshot<T>) => dispatch(new ActionSet(snapshot))),
       map((snapshot: DocumentSnapshot<T>) => snapshot.data())
     );
@@ -177,7 +178,7 @@ export class StateDocument<
     const { patchState, dispatch } = context;
     const { ActionReset } = this.actions;
 
-    const snapshot: FirestoreDocumentSnapshot = action.snapshot;
+    const snapshot: FirestoreDocumentSnapshot<any> = action.snapshot;
     const data: T = action.data == null ? snapshot.data() : action.data;
 
     const formGroup: UntypedFormGroup = this.service.formCreate(data);
@@ -246,11 +247,11 @@ export class StateDocument<
     const path: string = this.formPath;
 
     return this.service.documentCreate(this.collection, value).pipe(
-      tap((snapshot: FirestoreDocumentSnapshot) =>
+      tap((snapshot: FirestoreDocumentSnapshot<any>) =>
         patchState({ snapshot } as M)
       ),
 
-      switchMap((snapshot: FirestoreDocumentSnapshot) => {
+      switchMap((snapshot: FirestoreDocumentSnapshot<any>) => {
         const object: T = {
           ...snapshot.data(),
 
@@ -307,7 +308,7 @@ export class StateDocument<
     const { ActionReset } = this.actions;
 
     const state: M = getState();
-    const snapshot: FirestoreDocumentSnapshot =
+    const snapshot: FirestoreDocumentSnapshot<T> =
       StateDocument.snapshotState(state);
     const isNew: boolean = StateDocument.isNewState(state);
     const id: string = StateDocument.idState(state);
@@ -333,7 +334,9 @@ export class StateDocument<
 
     const state: M = getState();
     const form: UntypedFormGroup = StateDocument.formGroupState(state);
-    const control: AbstractControl = form.get('metadata').get(imageType);
+    const control: AbstractControl = form
+      .get('metadata')
+      ?.get(imageType) as AbstractControl;
 
     if (control.invalid || control.pristine) {
       return of(null);
@@ -365,7 +368,7 @@ export class StateDocument<
   }
 
   private ActionsQueryAdd(
-    snapshot: FirestoreDocumentSnapshot,
+    snapshot: FirestoreDocumentSnapshot<any>,
     data?: T
   ): Array<any> {
     const actions: Array<any> =

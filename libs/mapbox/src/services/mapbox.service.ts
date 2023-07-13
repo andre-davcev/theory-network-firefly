@@ -1,9 +1,9 @@
-import { Injectable, Inject } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpParams, HttpClient } from '@angular/common/http';
 
-import { MapboxEndpoint } from '../enums';
 import { ParamsForwardGeocode, ParamsReverseGeocode } from '../api';
+import { MapboxEndpoint } from '../enums';
 import { EnvironmentMapbox } from '../interfaces';
 import { ResponseGeocode } from '../responses';
 import { MapboxEnvironment } from '../tokens';
@@ -26,7 +26,7 @@ export class ServiceMapbox {
    */
   public forwardGeocode(
     searchText: string,
-    options?: ParamsForwardGeocode,
+    options: ParamsForwardGeocode = {},
     endpoint: MapboxEndpoint = MapboxEndpoint.Places
   ): Observable<ResponseGeocode> {
     searchText = new HttpParams()
@@ -41,15 +41,17 @@ export class ServiceMapbox {
       this.environment.accessToken
     );
 
-    Object.keys(options).forEach(
-      (param: string) =>
-        (params = params.set(
-          param,
-          Array.isArray(options[param])
-            ? options[param].join(',')
-            : `${options[param]}`
-        ))
-    );
+    Object.keys(options || {})
+      .map((param: string) => param as keyof ParamsForwardGeocode)
+      .forEach(
+        (param: keyof ParamsForwardGeocode) =>
+          (params = params.set(
+            param,
+            Array.isArray(options[param])
+              ? (options[param] as []).join(',')
+              : `${options[param]}`
+          ))
+      );
 
     return this.http.get<ResponseGeocode>(url, { params });
   }
@@ -61,7 +63,7 @@ export class ServiceMapbox {
   public reverseGeocode(
     latitude: number,
     longitude: number,
-    options?: ParamsReverseGeocode,
+    options: ParamsReverseGeocode = {},
     endpoint: MapboxEndpoint = MapboxEndpoint.Places
   ): Observable<ResponseGeocode> {
     const url: string = `${this.api}/${endpoint}/${longitude},${latitude}.json`;
@@ -71,15 +73,17 @@ export class ServiceMapbox {
       this.environment.accessToken
     );
 
-    Object.keys(options).forEach(
-      (param: string) =>
-        (params = params.set(
-          param,
-          Array.isArray(options[param])
-            ? options[param].join(',')
-            : `${options[param]}`
-        ))
-    );
+    Object.keys(options)
+      .map((param: string) => param as keyof ParamsReverseGeocode)
+      .forEach(
+        (param: keyof ParamsReverseGeocode) =>
+          (params = params.set(
+            param,
+            Array.isArray(options[param])
+              ? (options[param] as []).join(',')
+              : `${options[param]}`
+          ))
+      );
 
     return this.http.get<ResponseGeocode>(url, { params });
   }

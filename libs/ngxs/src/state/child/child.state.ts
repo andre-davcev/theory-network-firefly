@@ -22,7 +22,7 @@ export class StateChild<
   M extends StateChildModel<T>
 > extends StateCollection<T, M> {
   protected collection: string;
-  protected collectionChild: string;
+  protected collectionChild!: string;
   protected service: ServiceFirestore<T>;
 
   constructor(
@@ -71,7 +71,7 @@ export class StateChild<
     );
   }
 
-  protected static finishedPagingState(state: any): boolean {
+  protected static override finishedPagingState(state: any): boolean {
     return (
       StateChild.initializedState(state) &&
       StateChild.dataState(state).length ===
@@ -79,7 +79,7 @@ export class StateChild<
     );
   }
 
-  public static data() {
+  public static override data() {
     return createSelector([this], (state: any) => StateChild.dataState(state));
   }
   public static offset() {
@@ -87,7 +87,7 @@ export class StateChild<
       StateChild.offsetState(state)
     );
   }
-  public static finishedPaging() {
+  public static override finishedPaging() {
     return createSelector([this], (state: any) =>
       StateChild.finishedPagingState(state)
     );
@@ -107,8 +107,8 @@ export class StateChild<
       ? of(null)
       : dispatch(new ActionReset()).pipe(
           switchMap(() => this.service.documentGet(this.collectionChild, id)),
-          map((snapshot: DocumentSnapshot) => snapshot.data()),
-          switchMap((childLookup: Record<string, Partial<T>>) =>
+          map((snapshot: DocumentSnapshot<T>) => snapshot.data()),
+          switchMap((childLookup: T | undefined) =>
             dispatch(new ActionSetData(childLookup, fetch))
           )
         );
@@ -134,7 +134,7 @@ export class StateChild<
         );
   }
 
-  public get(context: StateContext<M>, action?: any): Observable<any> {
+  public override get(context: StateContext<M>, action?: any): Observable<any> {
     const { getState, patchState, dispatch } = context;
 
     const state: M = getState();
@@ -159,7 +159,7 @@ export class StateChild<
               this.service.documentGet(this.collection, id)
             )
           ),
-          switchMap((slice$: Array<Observable<DocumentSnapshot>>) =>
+          switchMap((slice$: Array<Observable<DocumentSnapshot<T>>>) =>
             slice$.length === 0 ? of([]) : forkJoin(slice$)
           ),
           map((page: Array<QueryDocumentSnapshot<any>>) =>
@@ -202,7 +202,10 @@ export class StateChild<
         );
   }
 
-  public remove(context: StateContext<M>, action: any): Observable<any> {
+  public override remove(
+    context: StateContext<M>,
+    action: any
+  ): Observable<any> {
     const { getState, patchState } = context;
 
     const { childLookup, initialized }: M = getState();
@@ -220,7 +223,7 @@ export class StateChild<
     return super.remove(context, action);
   }
 
-  public sync(context: StateContext<M>, action: any): Observable<any> {
+  public override sync(context: StateContext<M>, action: any): Observable<any> {
     const { getState, patchState, dispatch } = context;
     const { keys, initialized } = getState();
 
@@ -235,8 +238,8 @@ export class StateChild<
     return super.sync(context, action).pipe(
       tap((result: SyncResult) => {
         if (result.sync && result.changedOrderBy) {
-          keys.splice(result.indexOld, 1);
-          keys.splice(result.indexNew, 0, id);
+          keys.splice(result.indexOld || 0, 1);
+          keys.splice(result.indexNew || 0, 0, id);
 
           patchState({ keys } as M);
         }
@@ -283,7 +286,7 @@ export class StateChild<
     return keys;
   }
 
-  public data(context: StateContext<M>): Array<any> {
+  public override data(context: StateContext<M>): Array<any> {
     const { getState } = context;
 
     const state: M = getState();
@@ -312,7 +315,7 @@ export class StateChild<
       }));
   }
 
-  public setMedia(
+  public override setMedia(
     context: StateContext<M>,
     collection: string,
     imageType: string

@@ -59,7 +59,7 @@ export abstract class StateCollection<
   }
   protected static snapshotLookupState(
     state: any
-  ): Record<string, DocumentSnapshot> {
+  ): Record<string, DocumentSnapshot<any>> {
     return state.snapshotLookup;
   }
   protected static dataLookupState(state: any): Record<string, any> {
@@ -198,7 +198,7 @@ export abstract class StateCollection<
       return of(null);
     }
 
-    const snapshot: DocumentSnapshot = action.snapshot;
+    const snapshot: DocumentSnapshot<T> = action.snapshot;
 
     const entity: T = action.entity == null ? snapshot.data() : action.entity;
     const id: string = entity.id;
@@ -210,14 +210,14 @@ export abstract class StateCollection<
 
     if (!(inKeys && !inLookup)) {
       const count: number = StateCollection.countState(state);
-      const value: any = this.getValue(entity[orderBy], orderByType);
+      const value: any = this.getValue(entity[orderBy as keyof T], orderByType);
 
       sortIndex = StateCollection.dataState(state).findIndex(
         (object: T) =>
           (orderByDirection === OrderBy.Ascending &&
-            this.getValue(object[orderBy], orderByType) > value) ||
+            this.getValue(object[orderBy as keyof T], orderByType) > value) ||
           (orderByDirection === OrderBy.Descending &&
-            this.getValue(object[orderBy], orderByType) < value)
+            this.getValue(object[orderBy as keyof T], orderByType) < value)
       );
 
       sortIndex = sortIndex === -1 ? count : sortIndex;
@@ -291,23 +291,28 @@ export abstract class StateCollection<
       const before: T = dataLookup[id];
 
       indexOld = keys.findIndex((key: string) => key === id);
-      changedOrderBy = before == null || before[orderBy] !== after[orderBy];
+      changedOrderBy =
+        before == null ||
+        before[orderBy as keyof T] !== after[orderBy as keyof T];
       dataLookup[id] = after;
 
       if (changedOrderBy) {
         const { orderByDirection, orderByType } = state;
 
         const count: number = keys.length;
-        const value: any = this.getValue(after[orderBy], orderByType);
+        const value: any = this.getValue(
+          after[orderBy as keyof T],
+          orderByType
+        );
 
         keys.splice(indexOld, 1);
 
         indexNew = StateCollection.dataState(state).findIndex(
           (object: T) =>
             (orderByDirection === OrderBy.Ascending &&
-              this.getValue(object[orderBy], orderByType) > value) ||
+              this.getValue(object[orderBy as keyof T], orderByType) > value) ||
             (orderByDirection === OrderBy.Descending &&
-              this.getValue(object[orderBy], orderByType) < value)
+              this.getValue(object[orderBy as keyof T], orderByType) < value)
         );
 
         indexNew = indexNew === -1 ? count : indexNew;
@@ -387,7 +392,7 @@ export abstract class StateCollection<
       takeWhile((list: Array<T>) => list.length > 0),
       map((list: Array<T>) =>
         list
-          .filter((item: T) => item.metadata[imageType] == null)
+          .filter((item: T) => item?.metadata?.[imageType] == null)
           .map((item: T) =>
             of(item).pipe(
               switchMap(() =>
@@ -396,7 +401,10 @@ export abstract class StateCollection<
                   imageSize
                 )
               ),
-              tap((image: string) => (item.metadata[imageType] = image)),
+              map((image: string | null) => image || ''),
+              tap(
+                (image: string) => ((item.metadata || {})[imageType] = image)
+              ),
               tap(() => (dataLookup[item.id] = item))
             )
           )
