@@ -2,8 +2,8 @@ import { DocumentSnapshot } from '@angular/fire/firestore';
 
 import { Interest } from '@firefly/cloud';
 
-import { ActionsUserInterests } from './user-interests.actions.enum';
 import { InterestsFilter } from '../../composite';
+import { ActionsUserInterests } from './user-interests.actions.enum';
 
 export class ActionUserInterestsReset {
   static readonly type = ActionsUserInterests.Reset;
@@ -16,7 +16,10 @@ export class ActionUserInterestsGet {
 }
 export class ActionUserInterestsAdd {
   static readonly type = ActionsUserInterests.Add;
-  constructor(public snapshot: DocumentSnapshot, public entity?: Interest) {}
+  constructor(
+    public snapshot: DocumentSnapshot<Interest>,
+    public entity?: Interest
+  ) {}
 }
 export class ActionUserInterestsRemove {
   static readonly type = ActionsUserInterests.Remove;

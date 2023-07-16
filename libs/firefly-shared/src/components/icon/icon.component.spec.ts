@@ -1,24 +1,22 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { ComponentIcon } from './icon.component';
+import { ModuleComponentIcon } from './icon.component.module';
 
-describe('ComponentIcon', () => {
-  let component: ComponentIcon;
-  let fixture: ComponentFixture<ComponentIcon>;
+describe('', () => {
+  let spectator: Spectator<ComponentIcon>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ComponentIcon]
-    }).compileComponents();
-  }));
+  const createComponent = createComponentFactory({
+    component: ComponentIcon,
+    imports: [ModuleComponentIcon],
+    declareComponent: false
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComponentIcon);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator).toBeTruthy();
   });
 });

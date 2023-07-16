@@ -9,8 +9,8 @@ export const StateEventOptions: StoreOptions<StateEventModel> = {
   name: 'events',
 
   defaults: {
-    snapshot: undefined,
+    snapshot: null,
     form: CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
-    formGroup: undefined
+    formGroup: null
   }
 };

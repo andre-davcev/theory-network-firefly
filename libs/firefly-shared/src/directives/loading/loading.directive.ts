@@ -19,7 +19,7 @@ import { DirectiveLoadingOptions } from './loading.directive.options';
 })
 export class DirectiveLoading {
   private componentFactory: ComponentFactory<ComponentLoading>;
-  private componentRef: ComponentRef<ComponentLoading>;
+  private componentRef!: ComponentRef<ComponentLoading>;
 
   @Input()
   set loading(loading: DirectiveLoadingOptions | boolean) {
@@ -51,8 +51,9 @@ export class DirectiveLoading {
         this.componentFactory
       );
 
-      this.componentRef.instance.color = options.color;
-      this.componentRef.instance.colorBackground = options.colorBackground;
+      this.componentRef.instance.color = options.color || Color.Primary;
+      this.componentRef.instance.colorBackground =
+        options.colorBackground || Color.Black;
     } else {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
     }

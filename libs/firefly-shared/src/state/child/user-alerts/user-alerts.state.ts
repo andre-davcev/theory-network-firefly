@@ -68,7 +68,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
     private store: Store
   ) {
     super(
-      StateUserAlertsOptions.defaults,
+      StateUserAlertsOptions.defaults as StateUserAlertsModel,
       {
         ActionReset: ActionUserAlertsReset,
         ActionGetData: ActionUserAlertsGetData,
@@ -86,7 +86,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
   }
 
   @Action(ActionUserAlertsReset)
-  reset(
+  public override reset(
     context: StateContext<StateUserAlertsModel>,
     action: ActionUserAlertsReset
   ) {
@@ -94,7 +94,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
   }
 
   @Action(ActionUserAlertsGetData)
-  getData(
+  public override getData(
     context: StateContext<StateUserAlertsModel>,
     action: ActionUserAlertsGetData
   ) {
@@ -102,7 +102,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
   }
 
   @Action(ActionUserAlertsSetData)
-  setData(
+  public override setData(
     context: StateContext<StateUserAlertsModel>,
     action: ActionUserAlertsSetData
   ) {
@@ -110,12 +110,12 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
   }
 
   @Action(ActionUserAlertsGet)
-  get(context: StateContext<StateUserAlertsModel>) {
+  public override get(context: StateContext<StateUserAlertsModel>) {
     return super.get(context).pipe(switchMap(() => this.getMediaNew(context)));
   }
 
   @Action(ActionUserAlertsAdd)
-  add(
+  public override add(
     context: StateContext<StateUserAlertsModel>,
     action: ActionUserAlertsAdd
   ) {
@@ -123,7 +123,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
   }
 
   @Action(ActionUserAlertsRemove)
-  remove(
+  public override remove(
     context: StateContext<StateUserAlertsModel>,
     action: ActionUserAlertsRemove
   ) {
@@ -131,7 +131,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
   }
 
   @Action(ActionUserAlertsSync)
-  sync(
+  public override sync(
     context: StateContext<StateUserAlertsModel>,
     action: ActionUserAlertsSync
   ) {
@@ -139,7 +139,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
   }
 
   @Action(ActionUserAlertsFilter)
-  filter(
+  public override filter(
     context: StateContext<StateUserAlertsModel>,
     { filter }: ActionUserAlertsFilter
   ) {
@@ -228,17 +228,17 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
   }
 
   @Action(ActionUserAlertsGetIcons)
-  getIcons(context: StateContext<StateUserAlertsModel>) {
+  public getIcons(context: StateContext<StateUserAlertsModel>) {
     return super.setMedia(context, Collection.Events, ImageType.Icon);
   }
 
   @Action(ActionUserAlertsGetImages)
-  getImages(context: StateContext<StateUserAlertsModel>) {
+  public getImages(context: StateContext<StateUserAlertsModel>) {
     return super.setMedia(context, Collection.Events, ImageType.Image);
   }
 
   @Action(ActionUserAlertsAddToCalendar)
-  addToCalendar(
+  public addToCalendar(
     { dispatch }: StateContext<StateUserAlertsModel>,
     { alert }: ActionUserAlertsAddToCalendar
   ) {
@@ -291,7 +291,9 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
     { alert }: ActionUserAlertsPhoneCall
   ) {
     return dispatch(new ActionAppLoadingShow()).pipe(
-      switchMap(() => from(this.callNumber.callNumber(alert.phone, true))),
+      switchMap(() =>
+        from(this.callNumber.callNumber(alert.phone || '', true))
+      ),
       switchMap(() => dispatch(new ActionAppLoadingHide()))
     );
   }
@@ -301,7 +303,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
     context: StateContext<StateUserAlertsModel>,
     { alert }: ActionUserAlertsOpenWebsite
   ) {
-    return from(Browser.open({ url: alert.website }));
+    return from(Browser.open({ url: alert.website || '' }));
   }
 
   @Action(ActionUserAlertsMarkRead)
@@ -340,7 +342,9 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
     ]);
   }
 
-  public keys(context: StateContext<StateUserAlertsModel>): Array<string> {
+  public override keys(
+    context: StateContext<StateUserAlertsModel>
+  ): Array<string> {
     const { getState } = context;
 
     const state: StateUserAlertsModel = getState();
@@ -374,6 +378,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
                   )
                 : of(item.metadata.image)
             ),
+            map((image: string | null) => image || ''),
             map((image: string) => ({
               ...item,
               metadata: { ...item.metadata, image }

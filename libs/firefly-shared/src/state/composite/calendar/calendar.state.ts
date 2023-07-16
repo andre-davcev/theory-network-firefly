@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { from } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { Alert, Event, DateEvents } from '@firefly/cloud';
+import { Alert, DateEvents, Event } from '@firefly/cloud';
 
 import { EventType } from '../../../enums';
 import {
@@ -11,15 +11,13 @@ import {
   ActionUserAlertsGet,
   StateUserAlerts
 } from '../../child';
+import { StateUser } from '../../document';
 import {
   ActionUserEventsFilter,
   ActionUserEventsGet,
   StateUserEvents
 } from '../../query';
-import { StateUser } from '../../document';
 
-import { StateCalendarModel } from './calendar.state.model';
-import { StateCalendarOptions } from './calendar.state.options';
 import {
   ActionCalendarFilter,
   ActionCalendarPage,
@@ -27,6 +25,8 @@ import {
   ActionCalendarSetVirtual
 } from './calendar.actions';
 import { CalendarFilter } from './calendar.filter.model';
+import { StateCalendarModel } from './calendar.state.model';
+import { StateCalendarOptions } from './calendar.state.options';
 
 @State<StateCalendarModel>(StateCalendarOptions)
 @Injectable()
@@ -86,10 +86,10 @@ export class StateCalendar {
         date: events[0].timeStart,
         events
       };
-    }
 
-    if (current != null) {
-      eventsList.push(current);
+      if (current != null) {
+        eventsList.push(current);
+      }
     }
 
     return eventsList;

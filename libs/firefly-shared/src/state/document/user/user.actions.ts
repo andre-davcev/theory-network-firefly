@@ -1,10 +1,8 @@
-import { FirebaseError } from '@angular/fire/app';
-import { User as FirebaseUser } from '@angular/fire/auth';
-
 import { MetadataUser, User } from '@firefly/cloud';
 import { Credentials } from '@theory/core';
-import { DocumentSnapshot } from '@theory/firebase';
+import { DocumentSnapshot, User as FirebaseUser } from '@theory/firebase';
 
+import { FirebaseError } from '@angular/fire/app';
 import { ActionsUser } from './user.actions.enum';
 
 export class ActionUserReset {
@@ -16,7 +14,7 @@ export class ActionUserGet {
 }
 export class ActionUserSet {
   static readonly type = ActionsUser.Set;
-  constructor(public snapshot: DocumentSnapshot, public data?: User) {}
+  constructor(public snapshot: DocumentSnapshot<User>, public data?: User) {}
 }
 export class ActionUserPatch {
   static readonly type = ActionsUser.Patch;
@@ -49,7 +47,7 @@ export class ActionUserAuthenticate {
 }
 export class ActionUserAuthenticateCheck {
   static readonly type = ActionsUser.AuthenticateCheck;
-  constructor(public payload: FirebaseUser) {}
+  constructor(public payload: FirebaseUser | null) {}
 }
 export class ActionUserAnonymousLogin {
   static readonly type = ActionsUser.AnonymousLogin;
@@ -84,7 +82,7 @@ export class ActionUserResetAll {
 }
 export class ActionUserSetErrorAuth {
   static readonly type = ActionsUser.SetErrorAuth;
-  constructor(public errorAuth: FirebaseError = null) {}
+  constructor(public errorAuth: FirebaseError | null = null) {}
 }
 
 export class ActionUserNotificationsSet {

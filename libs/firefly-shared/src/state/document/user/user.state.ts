@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { FirebaseError } from '@angular/fire/app';
-import { User as FirebaseUser } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FieldValue, GeoPoint, serverTimestamp } from '@angular/fire/firestore';
 import {
@@ -35,7 +34,7 @@ import {
   StateLanguage,
   StateLocation
 } from '@theory/capacitor';
-import { UserCredential } from '@theory/firebase';
+import { User as FirebaseUser, UserCredential } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
 
 import { EventType, InterestType } from '../../../enums';
@@ -100,14 +99,14 @@ export class StateUser
   ) {
     super(
       Collection.Users,
-      StateUserOptions.defaults,
+      StateUserOptions.defaults as StateUserModel,
       service,
       {
-        version: undefined,
-        id: undefined,
-        userId: undefined,
-        dateCreated: undefined,
-        dateUpdated: undefined,
+        version: null,
+        id: null,
+        userId: null,
+        dateCreated: null,
+        dateUpdated: null,
         metadata: {},
 
         city: null,
@@ -117,7 +116,7 @@ export class StateUser
         geopoint: null,
         notifications: {},
         phoneNumber: '',
-        providerId: undefined,
+        providerId: null,
         subscriptions: [],
         subscriptionsStatus: {},
         tokens: {}
@@ -148,7 +147,7 @@ export class StateUser
     );
   }
 
-  @Selector() static authData(state: StateUserModel): FirebaseUser {
+  @Selector() static authData(state: StateUserModel): FirebaseUser | null {
     return state.authData;
   }
   @Selector() static authenticated(state: StateUserModel): boolean {
@@ -156,7 +155,9 @@ export class StateUser
   }
   @Selector() static isAnonymous(state: StateUserModel): boolean {
     return (
-      StateUser.authenticated(state) && StateUser.authData(state).isAnonymous
+      (StateUser.authenticated(state) &&
+        StateUser.authData(state)?.isAnonymous) ||
+      false
     );
   }
   @Selector([StateLocation.permissionDenied]) static isUser(
@@ -172,8 +173,9 @@ export class StateUser
   @Selector() static authenticating(state: StateUserModel): boolean {
     return state.authenticating;
   }
-  @Selector() static language(state: StateUserModel): string {
+  @Selector() static language(state: StateUserModel): string | null {
     const user: User = StateUser.dataState(state);
+
     return user == null ? null : user.language;
   }
   @Selector() static loading(state: StateUserModel): boolean {
@@ -182,16 +184,16 @@ export class StateUser
   @Selector() static loadedNotAuthenticated(state: StateUserModel): boolean {
     return !StateUser.loading(state) && !StateUser.authenticated(state);
   }
-  @Selector() static error(state: StateUserModel): Error {
+  @Selector() static error(state: StateUserModel): Error | null {
     return state.error;
   }
   @Selector() static errored(state: StateUserModel): boolean {
     return StateUser.error(state) != null;
   }
-  @Selector() static errorAuth(state: StateUserModel): FirebaseError {
+  @Selector() static errorAuth(state: StateUserModel): FirebaseError | null {
     return state.errorAuth;
   }
-  @Selector() static errorAuthCode(state: StateUserModel): string {
+  @Selector() static errorAuthCode(state: StateUserModel): string | undefined {
     return StateUser.errorAuth(state)?.code;
   }
   @Selector() static erroredAuth(state: StateUserModel): boolean {
@@ -199,7 +201,7 @@ export class StateUser
   }
   @Selector() static subscriptionsStatus(
     state: StateUserModel
-  ): Record<string, SubscriptionPartial> {
+  ): Record<string, SubscriptionPartial> | null {
     const user: User = StateUser.dataState(state);
     return user == null
       ? null
@@ -209,7 +211,7 @@ export class StateUser
   }
   @Selector() static notifications(
     state: StateUserModel
-  ): Record<string, AlertPartial> {
+  ): Record<string, AlertPartial> | null {
     const user: User = StateUser.dataState(state);
     return user == null ? null : !user.notifications ? {} : user.notifications;
   }
@@ -234,22 +236,28 @@ export class StateUser
   }
 
   @Action(ActionUserReset)
-  reset(context: StateContext<StateUserModel>) {
+  public override reset() {
     return of(null);
   }
 
   @Action(ActionUserResetAll)
-  resetAll(context: StateContext<StateUserModel>) {
+  public resetAll(context: StateContext<StateUserModel>) {
     return super.reset(context);
   }
 
   @Action(ActionUserGet)
-  get(context: StateContext<StateUserModel>, action: ActionUserGet) {
+  public override get(
+    context: StateContext<StateUserModel>,
+    action: ActionUserGet
+  ) {
     return super.get(context, action);
   }
 
   @Action(ActionUserSet)
-  set(context: StateContext<StateUserModel>, action: ActionUserSet) {
+  public override set(
+    context: StateContext<StateUserModel>,
+    action: ActionUserSet
+  ) {
     const { dispatch, getState } = context;
 
     return super.set(context, action).pipe(
@@ -262,7 +270,7 @@ export class StateUser
       switchMap(() =>
         dispatch([
           new ActionUserNotificationsSet(),
-          new ActionLanguageSet(StateUser.language(getState())),
+          new ActionLanguageSet(StateUser.language(getState()) || 'en-us'),
           new ActionInterestsSetSubscriptions(
             StateUser.subscriptionsStatus(getState())
           )
@@ -278,12 +286,15 @@ export class StateUser
   }
 
   @Action(ActionUserPatch)
-  patch(context: StateContext<StateUserModel>, action: ActionUserPatch) {
+  public override patch(
+    context: StateContext<StateUserModel>,
+    action: ActionUserPatch
+  ) {
     return super.patch(context, action);
   }
 
   @Action(ActionUserPatchMetadata)
-  patchMetadata(
+  public override patchMetadata(
     context: StateContext<StateUserModel>,
     action: ActionUserPatchMetadata
   ) {
@@ -291,7 +302,7 @@ export class StateUser
   }
 
   @Action(ActionUserCreate)
-  create(
+  public override create(
     context: StateContext<StateUserModel>,
     { credentials }: ActionUserCreate
   ): Observable<any> {
@@ -308,16 +319,18 @@ export class StateUser
         )
       ),
       map((userCredential: UserCredential) => userCredential.user),
-      switchMap((authData: FirebaseUser) =>
+      switchMap((authData: FirebaseUser | null) =>
         dispatch([
           new ActionUserPatch({
-            id: authData.uid,
-            userId: authData.uid,
-            email: authData.email
+            id: authData?.uid,
+            userId: authData?.uid,
+            email: authData?.email || undefined
           })
         ]).pipe(
           switchMap(() => super.create(context)),
-          switchMap(() => dispatch(new ActionUserAuthenticateCheck(authData)))
+          switchMap(() =>
+            dispatch(new ActionUserAuthenticateCheck(authData as FirebaseUser))
+          )
         )
       ),
       catchError((errorAuth: FirebaseError) =>
@@ -327,30 +340,36 @@ export class StateUser
   }
 
   @Action(ActionUserUpdate)
-  update(context: StateContext<StateUserModel>) {
+  public override update(context: StateContext<StateUserModel>) {
     return super.update(context);
   }
 
   @Action(ActionUserSave)
-  save(context: StateContext<StateUserModel>) {
+  public override save(context: StateContext<StateUserModel>) {
     return super.save(context);
   }
 
   @Action(ActionUserDelete)
-  delete(context: StateContext<StateUserModel>) {
+  public override delete(context: StateContext<StateUserModel>) {
     return super.delete(context);
   }
 
   @Action(ActionUserWatch, { cancelUncompleted: true })
-  watch(context: StateContext<StateUserModel>, action: ActionUserWatch) {
+  public override watch(
+    context: StateContext<StateUserModel>,
+    action: ActionUserWatch
+  ) {
     return super.watch(context, action);
   }
 
   @Action(ActionUserAnonymousLogin)
-  anonymousLogin({ dispatch, getState }: StateContext<StateUserModel>) {
+  public anonymousLogin({ dispatch, getState }: StateContext<StateUserModel>) {
     const initialized: boolean = StateUser.initialized(getState());
 
-    return (initialized ? dispatch(new ActionUserResetAll()) : of(null)).pipe(
+    return of(null).pipe(
+      switchMap(() =>
+        initialized ? dispatch(new ActionUserResetAll()) : of(null)
+      ),
       switchMap(() =>
         dispatch([
           new ActionUserSetErrorAuth(),
@@ -372,9 +391,8 @@ export class StateUser
 
     return this.auth.authState.pipe(
       take(1),
-
-      tap((authData: FirebaseUser) => patchState({ authData })),
-      switchMap((authData: FirebaseUser) =>
+      tap((authData: FirebaseUser | null) => patchState({ authData })),
+      switchMap((authData: FirebaseUser | null) =>
         authData == null || authData.isAnonymous
           ? dispatch(new ActionUserAnonymousLogin())
           : dispatch(new ActionUserGet(authData.uid))
@@ -392,7 +410,7 @@ export class StateUser
     { patchState, dispatch }: StateContext<StateUserModel>,
     { payload }: ActionUserAuthenticateCheck
   ) {
-    const authData: FirebaseUser = payload;
+    const authData: FirebaseUser | null = payload;
     const authenticated: boolean = authData != null;
 
     return of(null).pipe(
@@ -406,32 +424,41 @@ export class StateUser
         })
       ),
       switchMap(() =>
-        authenticated ? dispatch(new ActionUserGet(authData.uid)) : of(null)
+        authenticated
+          ? dispatch(new ActionUserGet(authData?.uid as string))
+          : of(null)
       )
     );
   }
 
   @Action(ActionUserWatchCity, { cancelUncompleted: true })
   watchCity({ dispatch }: StateContext<StateUserModel>) {
-    const authData$: Observable<FirebaseUser> = this.store.select(
+    const authData$: Observable<FirebaseUser | null> = this.store.select(
       StateUser.authData
     );
-    const city$: Observable<CityInfo> = this.store.select(StateCity.city);
-    const geopoint$: Observable<GeoPoint> = this.store.select(
+    const city$: Observable<CityInfo | null> = this.store.select(
+      StateCity.city
+    );
+    const geopoint$: Observable<GeoPoint | null> = this.store.select(
       StateCity.geopoint
     );
 
-    return combineLatest([authData$, city$, geopoint$]).pipe(
+    return combineLatest([city$, geopoint$, authData$]).pipe(
       filter(
-        ([authData, city, geopoint]) =>
+        ([city, geopoint, authData]) =>
           authData != null && city != null && geopoint != null
       ),
-      switchMap(([authData, city, geopoint]) =>
+      switchMap(([city, geopoint]) =>
         this.store.select(StateUser.found()).pipe(
           filter((userFound: boolean) => userFound),
           take(1),
           switchMap(() =>
-            dispatch(new ActionUserPatch({ city, geopoint }, true))
+            dispatch(
+              new ActionUserPatch(
+                { city: city || undefined, geopoint: geopoint || undefined },
+                true
+              )
+            )
           )
         )
       )
@@ -499,7 +526,7 @@ export class StateUser
         from(this.auth.signInWithEmailAndPassword(payload.id, payload.password))
       ),
       map((userCredential: UserCredential) => userCredential.user),
-      switchMap((authData: FirebaseUser) =>
+      switchMap((authData: FirebaseUser | null) =>
         dispatch(new ActionUserAuthenticateCheck(authData)).pipe(
           switchMap(() =>
             authData == null ? of(null) : dispatch(new ActionInterestsPage())
@@ -548,7 +575,7 @@ export class StateUser
   @Action(ActionUserNotificationsSet)
   notificationsSet({ dispatch }: StateContext<StateUserModel>) {
     const notifications: Record<string, AlertPartial> =
-      this.store.selectSnapshot(StateUser.notifications);
+      this.store.selectSnapshot(StateUser.notifications) || {};
     const alerts: Record<string, AlertPartial> = {};
 
     const dateCutoff: Date = new Date();

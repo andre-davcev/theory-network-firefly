@@ -81,14 +81,14 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
   ) {
     super(
       Collection.Interests,
-      StateInterestOptions.defaults,
+      StateInterestOptions.defaults as StateInterestModel,
       service,
       {
-        version: undefined,
-        userId: undefined,
-        id: undefined,
-        dateCreated: undefined,
-        dateUpdated: undefined,
+        version: null,
+        userId: null,
+        id: null,
+        dateCreated: null,
+        dateUpdated: null,
 
         description: null,
         name: null,
@@ -124,27 +124,33 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
   }
 
   @Action(ActionInterestReset)
-  reset(context: StateContext<StateInterestModel>) {
+  public override reset(context: StateContext<StateInterestModel>) {
     return super.reset(context);
   }
 
   @Action(ActionInterestDirty)
-  dirty(context: StateContext<StateInterestModel>) {
+  public override dirty(context: StateContext<StateInterestModel>) {
     return super.dirty(context);
   }
 
   @Action(ActionInterestGet)
-  get(context: StateContext<StateInterestModel>, action: ActionInterestGet) {
+  public override get(
+    context: StateContext<StateInterestModel>,
+    action: ActionInterestGet
+  ) {
     return super.get(context, action);
   }
 
   @Action(ActionInterestSet)
-  set(context: StateContext<StateInterestModel>, action: ActionInterestSet) {
+  public override set(
+    context: StateContext<StateInterestModel>,
+    action: ActionInterestSet
+  ) {
     return super.set(context, action);
   }
 
   @Action(ActionInterestPatch)
-  patch(
+  public override patch(
     context: StateContext<StateInterestModel>,
     action: ActionInterestPatch
   ) {
@@ -152,7 +158,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
   }
 
   @Action(ActionInterestPatchMetadata)
-  patchMetadata(
+  public override patchMetadata(
     context: StateContext<StateInterestModel>,
     action: ActionInterestPatchMetadata
   ) {
@@ -160,7 +166,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
   }
 
   @Action(ActionInterestCreate)
-  create(context: StateContext<StateInterestModel>) {
+  public override create(context: StateContext<StateInterestModel>) {
     return super
       .create(context)
       .pipe(
@@ -169,19 +175,19 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
   }
 
   @Action(ActionInterestUpdate)
-  update(context: StateContext<StateInterestModel>) {
+  public override update(context: StateContext<StateInterestModel>) {
     return context
       .dispatch(new ActionInterestImagesUpdate())
       .pipe(switchMap(() => super.update(context)));
   }
 
   @Action(ActionInterestSave)
-  save(context: StateContext<StateInterestModel>) {
+  public override save(context: StateContext<StateInterestModel>) {
     return super.save(context);
   }
 
   @Action(ActionInterestDelete)
-  delete(context: StateContext<StateInterestModel>) {
+  public override delete(context: StateContext<StateInterestModel>) {
     return super.delete(context);
   }
 
@@ -193,12 +199,12 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
     const isNew: boolean = id === CoreEnum.IdNew;
 
     const userId: string = this.store.selectSnapshot(StateUser.id());
-    const snapshot: DocumentSnapshot = this.store.selectSnapshot(
+    const snapshot: DocumentSnapshot<Interest> = this.store.selectSnapshot(
       StateInterests.snapshotLookup
     )[id];
 
     const data: Interest = isNew
-      ? this.service.formDataNew(userId, this.empty)
+      ? this.service.formDataNew(userId, this.empty as Interest)
       : this.store.selectSnapshot(StateInterests.dataLookup)[id];
 
     return dispatch(new ActionInterestSet(snapshot, data));
@@ -289,6 +295,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
                           ImageSize.Small
                         )
                   ),
+                  map((image: string | null) => image as string),
                   map((image: string) => (item.metadata.image = image))
                 )
               )
@@ -317,7 +324,9 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
     const eventsKey: string = isOwner
       ? InterestEvents.Confirmed
       : InterestEvents.Pending;
-    const events: Record<string, Array<Event>> = state[eventsKey];
+    const events: Record<string, Array<Event>> = isOwner
+      ? state.events
+      : state.eventsPending;
     const interestEvents: Array<Event> = events[id] || [];
 
     interestEvents.unshift(event);
@@ -345,6 +354,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
           ImageSize.Medium
         )
       ),
+      map((image: string | null) => image as string),
       switchMap((image: string) =>
         dispatch(new ActionInterestPatchMetadata({ image }))
       )

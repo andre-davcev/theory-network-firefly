@@ -1,12 +1,12 @@
 import { FirebaseError } from '@angular/fire/app';
-import { User } from '@angular/fire/auth';
 
+import { User } from '@theory/firebase';
 import { StateDocumentModel } from '@theory/ngxs';
 
 export interface StateUserModel extends StateDocumentModel {
-  authData: User;
-  error: Error;
-  errorAuth: FirebaseError;
+  authData: User | null;
+  error: Error | null;
+  errorAuth: FirebaseError | null;
   authenticating: boolean;
   initialized: boolean;
 }

@@ -4,7 +4,7 @@ import { MapboxPlaceType } from '../enums';
 import { CityInfo } from './city-info.interface';
 
 export interface Place {
-  center: Array<number>;
+  center: [number, number];
   centerLike:
     | [number, number]
     | { lng: number; lat: number }

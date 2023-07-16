@@ -1,13 +1,13 @@
 import {
-  Component,
-  Input,
   ChangeDetectionStrategy,
+  Component,
+  ElementRef,
   HostBinding,
-  ElementRef
+  Input
 } from '@angular/core';
 
-import { IconType, IconSize } from '../icon';
 import { Color } from '../../enums';
+import { IconSize, IconType } from '../icon';
 
 @Component({
   selector: 'ff-icon-message',
@@ -23,7 +23,7 @@ export class ComponentIconMessage {
   public fill: boolean = true;
 
   @Input()
-  public icon: IconType;
+  public icon!: IconType;
 
   @Input()
   public iconColor: Color = Color.Black;
@@ -32,7 +32,7 @@ export class ComponentIconMessage {
   public iconBackground: Color = Color.Primary;
 
   @Input()
-  public message: string;
+  public message!: string;
 
   @Input()
   public messageColor: Color = Color.Black;

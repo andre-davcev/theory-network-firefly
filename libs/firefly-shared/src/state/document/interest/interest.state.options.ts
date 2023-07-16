@@ -9,9 +9,9 @@ export const StateInterestOptions: StoreOptions<StateInterestModel> = {
   name: 'interests',
 
   defaults: {
-    snapshot: undefined,
+    snapshot: null,
     form: CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
-    formGroup: undefined,
+    formGroup: null,
     events: {},
     eventsPending: {}
   }

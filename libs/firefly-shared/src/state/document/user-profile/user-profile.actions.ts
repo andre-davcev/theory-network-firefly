@@ -12,7 +12,10 @@ export class ActionUserProfileGet {
 }
 export class ActionUserProfileSet {
   static readonly type = ActionsUserProfile.Set;
-  constructor(public snapshot: DocumentSnapshot, public data?: UserProfile) {}
+  constructor(
+    public snapshot: DocumentSnapshot<UserProfile>,
+    public data?: UserProfile
+  ) {}
 }
 export class ActionUserProfilePatch {
   static readonly type = ActionsUserProfile.Patch;

@@ -23,7 +23,7 @@ export class ActionUserSubscriptionsGet {
 export class ActionUserSubscriptionsAdd {
   static readonly type = ActionsUserSubscriptions.Add;
   constructor(
-    public snapshot: DocumentSnapshot,
+    public snapshot: DocumentSnapshot<Subscription>,
     public entity?: Subscription
   ) {}
 }

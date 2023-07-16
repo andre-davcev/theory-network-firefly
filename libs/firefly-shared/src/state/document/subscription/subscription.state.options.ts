@@ -9,8 +9,8 @@ export const StateSubscriptionOptions: StoreOptions<StateSubscriptionModel> = {
   name: 'subscriptions',
 
   defaults: {
-    snapshot: undefined,
+    snapshot: null,
     form: CoreUtil.clone<FormNgxs>(FormNgxsDefaults),
-    formGroup: undefined
+    formGroup: null
   }
 };

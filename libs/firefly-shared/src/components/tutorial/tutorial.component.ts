@@ -1,10 +1,10 @@
 import {
-  Component,
-  Input,
   ChangeDetectionStrategy,
-  Output,
+  Component,
   EventEmitter,
-  HostBinding
+  HostBinding,
+  Input,
+  Output
 } from '@angular/core';
 
 @Component({
@@ -16,10 +16,10 @@ import {
 export class ComponentTutorial {
   @HostBinding('class.cpt-has-image')
   @Input()
-  public image: string;
+  public image!: string;
 
-  @Input() public message: string;
-  @Input() public button: string;
+  @Input() public message!: string;
+  @Input() public button!: string;
   @Input() public gap: string = '1.25rem';
   @Output() public finished: EventEmitter<void> = new EventEmitter();
 

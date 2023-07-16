@@ -56,7 +56,7 @@ export class StateUserInterests extends StateQuery<
     storage: ServiceStorage
   ) {
     super(
-      StateUserInterestsOptions.defaults,
+      StateUserInterestsOptions.defaults as StateUserInterestsModel,
       {
         ActionReset: ActionUserInterestsReset,
         ActionGetData: ActionUserInterestsGetData,
@@ -71,9 +71,9 @@ export class StateUserInterests extends StateQuery<
   }
 
   @Action(ActionUserInterestsReset)
-  reset(context: StateContext<StateUserInterestsModel>) {
+  public override reset(context: StateContext<StateUserInterestsModel>) {
     const userId: string = this.store.selectSnapshot(StateUser.id());
-    const query: Query =
+    const query: Query | undefined =
       userId == null
         ? undefined
         : this.service
@@ -84,12 +84,12 @@ export class StateUserInterests extends StateQuery<
   }
 
   @Action(ActionUserInterestsGetData)
-  getData(context: StateContext<StateUserInterestsModel>) {
+  public override getData(context: StateContext<StateUserInterestsModel>) {
     return super.getData(context);
   }
 
   @Action(ActionUserInterestsGet)
-  get(context: StateContext<StateUserInterestsModel>) {
+  public override get(context: StateContext<StateUserInterestsModel>) {
     return super.get(context, {
       collection: Collection.Interests,
       imageType: ImageType.Image
@@ -97,7 +97,7 @@ export class StateUserInterests extends StateQuery<
   }
 
   @Action(ActionUserInterestsAdd)
-  add(
+  public override add(
     context: StateContext<StateUserInterestsModel>,
     action: ActionUserInterestsAdd
   ) {
@@ -105,7 +105,7 @@ export class StateUserInterests extends StateQuery<
   }
 
   @Action(ActionUserInterestsRemove)
-  remove(
+  public override remove(
     context: StateContext<StateUserInterestsModel>,
     action: ActionUserInterestsRemove
   ) {
@@ -113,7 +113,7 @@ export class StateUserInterests extends StateQuery<
   }
 
   @Action(ActionUserInterestsSync)
-  sync(
+  public override sync(
     context: StateContext<StateUserInterestsModel>,
     action: ActionUserInterestsSync
   ) {
@@ -121,7 +121,7 @@ export class StateUserInterests extends StateQuery<
   }
 
   @Action(ActionUserInterestsFilter)
-  filter(
+  public override filter(
     context: StateContext<StateUserInterestsModel>,
     { filter }: ActionUserInterestsFilter
   ) {

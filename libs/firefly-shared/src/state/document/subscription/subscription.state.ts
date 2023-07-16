@@ -38,14 +38,14 @@ export class StateSubscription extends StateDocument<
   constructor(private store: Store, service: ServiceSubscriptions) {
     super(
       Collection.Subscriptions,
-      StateSubscriptionOptions.defaults,
+      StateSubscriptionOptions.defaults as StateSubscriptionModel,
       service,
       {
-        version: undefined,
-        userId: undefined,
-        id: undefined,
-        dateCreated: undefined,
-        dateUpdated: undefined,
+        version: null,
+        userId: null,
+        id: null,
+        dateCreated: null,
+        dateUpdated: null,
         metadata: {},
 
         description: null,
@@ -77,12 +77,12 @@ export class StateSubscription extends StateDocument<
   }
 
   @Action(ActionSubscriptionReset)
-  reset(context: StateContext<StateSubscriptionModel>) {
+  public override reset(context: StateContext<StateSubscriptionModel>) {
     return super.reset(context);
   }
 
   @Action(ActionSubscriptionGet)
-  get(
+  public override get(
     context: StateContext<StateSubscriptionModel>,
     action: ActionSubscriptionGet
   ) {
@@ -90,7 +90,7 @@ export class StateSubscription extends StateDocument<
   }
 
   @Action(ActionSubscriptionSet)
-  set(
+  public override set(
     context: StateContext<StateSubscriptionModel>,
     action: ActionSubscriptionSet
   ) {
@@ -98,7 +98,7 @@ export class StateSubscription extends StateDocument<
   }
 
   @Action(ActionSubscriptionPatch)
-  patch(
+  public override patch(
     context: StateContext<StateSubscriptionModel>,
     action: ActionSubscriptionPatch
   ) {
@@ -106,7 +106,7 @@ export class StateSubscription extends StateDocument<
   }
 
   @Action(ActionSubscriptionPatchMetadata)
-  patchMetadata(
+  public override patchMetadata(
     context: StateContext<StateSubscriptionModel>,
     action: ActionSubscriptionPatchMetadata
   ) {
@@ -114,22 +114,22 @@ export class StateSubscription extends StateDocument<
   }
 
   @Action(ActionSubscriptionCreate)
-  create(context: StateContext<StateSubscriptionModel>) {
+  public override create(context: StateContext<StateSubscriptionModel>) {
     return super.create(context);
   }
 
   @Action(ActionSubscriptionUpdate)
-  update(context: StateContext<StateSubscriptionModel>) {
+  public override update(context: StateContext<StateSubscriptionModel>) {
     return super.update(context);
   }
 
   @Action(ActionSubscriptionSave)
-  save(context: StateContext<StateSubscriptionModel>) {
+  public override save(context: StateContext<StateSubscriptionModel>) {
     return super.save(context);
   }
 
   @Action(ActionSubscriptionDelete)
-  delete(context: StateContext<StateSubscriptionModel>) {
+  public override delete(context: StateContext<StateSubscriptionModel>) {
     return super.delete(context);
   }
 
@@ -141,12 +141,12 @@ export class StateSubscription extends StateDocument<
     const isNew: boolean = id === CoreEnum.IdNew;
 
     const userId: string = this.store.selectSnapshot(StateUser.id());
-    const snapshot: DocumentSnapshot = this.store.selectSnapshot(
-      StateUserSubscriptions.snapshotLookup()[id]
-    );
+    const snapshot: DocumentSnapshot<Subscription> = this.store.selectSnapshot(
+      StateUserSubscriptions.snapshotLookup()
+    )[id];
 
     const data: Subscription = isNew
-      ? this.service.formDataNew(userId, this.empty)
+      ? this.service.formDataNew(userId, this.empty as Subscription)
       : this.store.selectSnapshot(StateUserSubscriptions.dataLookup())[id];
 
     return dispatch(new ActionSubscriptionSet(snapshot, data));

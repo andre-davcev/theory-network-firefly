@@ -45,12 +45,14 @@ export class ComponentMap
   extends BaseComponent
   implements OnInit, AfterViewInit, OnChanges
 {
-  @Select(StateLocation.isValid) locationValid$: Observable<boolean>;
-  @Select(StateLocation.locationLike) locationLike$: Observable<LngLatLike>;
-  @Select(StateDevice.web) web$: Observable<boolean>;
-  @Select(StateLanguage.languageIso639_1) language$: Observable<string>;
+  @Select(StateLocation.isValid) locationValid$!: Observable<boolean>;
+  @Select(StateLocation.locationLike) locationLike$!: Observable<LngLatLike>;
+  @Select(StateLocation.locationLiteral)
+  locationLiteral$!: Observable<MapboxGeocoder.LngLatLiteral>;
+  @Select(StateDevice.web) web$!: Observable<boolean>;
+  @Select(StateLanguage.languageIso639_1) language$!: Observable<string>;
 
-  @Input() place: Place;
+  @Input() place!: Place;
   @Input() geocodePosition: MapboxControlPosition =
     MapboxControlPosition.TopLeft;
 
@@ -58,19 +60,19 @@ export class ComponentMap
   @Input() geocode: boolean = false;
   @Input() style: MapboxMapStyle = MapboxMapStyle.Streets;
 
-  @Input() mapLoadingText: string;
+  @Input() mapLoadingText!: string;
   @Input() mapMovingMethod: MapMovingMethod = MapMovingMethod.FlyTo;
 
   public MapboxMarkerAnchor: any = MapboxMarkerAnchor;
-  public mapReady$: Observable<boolean>;
+  public mapReady$!: Observable<boolean>;
   private contentInitiated$: BehaviorSubject<boolean> = new BehaviorSubject(
     false
   );
   public Color: any = Color;
-  private geocoder: MapboxGeocoder;
+  private geocoder!: MapboxGeocoder;
 
-  @ViewChildren('map') maps: QueryList<MapComponent>;
-  @ViewChildren('marker') markers: QueryList<MarkerComponent>;
+  @ViewChildren('map') maps!: QueryList<MapComponent>;
+  @ViewChildren('marker') markers!: QueryList<MarkerComponent>;
 
   public annotationOffset: Point = new Point(22, 2);
 
@@ -110,7 +112,7 @@ export class ComponentMap
   @Output() searchResult: EventEmitter<Result> = new EventEmitter<Result>();
   @Output() searchError: EventEmitter<any> = new EventEmitter<any>();
 
-  private map: Map;
+  private map!: Map;
 
   constructor(
     private store: Store,
@@ -138,7 +140,7 @@ export class ComponentMap
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.place?.currentValue) {
+    if (changes['place']?.currentValue) {
       this.openPopup();
     }
   }
@@ -155,9 +157,9 @@ export class ComponentMap
         .pipe(takeUntil(this.destroy$))
         .subscribe((language: string) => this.geocoder.setLanguage(language));
 
-      this.locationLike$
+      this.locationLiteral$
         .pipe(takeUntil(this.destroy$))
-        .subscribe((proximity: LngLatLike) =>
+        .subscribe((proximity: MapboxGeocoder.LngLatLiteral) =>
           this.geocoder.setProximity(proximity)
         );
     }
@@ -230,11 +232,10 @@ export class ComponentMap
     const language: string = this.store.selectSnapshot(
       StateLanguage.languageIso639_1
     );
-    const proximity: LngLatLike = this.store.selectSnapshot(
-      StateLocation.locationLike
-    );
+    const proximity: MapboxGeocoder.LngLatLiteral | null =
+      this.store.selectSnapshot(StateLocation.locationLiteral);
 
-    const options: MapboxGeocoder.Options = {
+    const options: MapboxGeocoder.GeocoderOptions = {
       mapboxgl,
       accessToken: this.environment.accessToken,
       placeholder: this.placeholder,
@@ -264,7 +265,7 @@ export class ComponentMap
 
     geocoder
       .on('results', (event: MapboxGeocoder.Results) =>
-        this.zone.run(() => this.clear.emit(event))
+        this.zone.run(() => this.clear.emit())
       )
       .on('result', (event: { result: MapboxGeocoder.Result }) =>
         this.zone.run(() => this.searchResult.emit(event.result))

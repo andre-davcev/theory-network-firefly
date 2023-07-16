@@ -1,8 +1,8 @@
-import { InterestType, EventType } from '../../../enums';
+import { EventType, InterestType } from '../../../enums';
 
 export interface StateAppModel {
   loading: boolean;
-  loadingElement: HTMLIonLoadingElement;
+  loadingElement: HTMLIonLoadingElement | null;
   interestType: InterestType;
   interestVirtual: boolean;
   eventType: EventType;

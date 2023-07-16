@@ -2,9 +2,9 @@ import { IonInfiniteScroll } from '@ionic/angular';
 
 import { InterestType } from '../../../enums';
 
+import { SubscriptionPartial } from '@firefly/cloud';
 import { ActionsInterests } from './interests.actions.enum';
 import { InterestsFilter } from './interests.filter.model';
-import { SubscriptionPartial } from '@firefly/cloud';
 
 export class ActionInterestsSetType {
   static readonly type = ActionsInterests.SetType;
@@ -17,7 +17,7 @@ export class ActionInterestsSetVirtual {
 export class ActionInterestsSetSubscriptions {
   static readonly type = ActionsInterests.SetSubscriptions;
   constructor(
-    public subscriptions: Record<string, SubscriptionPartial>,
+    public subscriptions: Record<string, SubscriptionPartial> | null,
     public save?: boolean
   ) {}
 }

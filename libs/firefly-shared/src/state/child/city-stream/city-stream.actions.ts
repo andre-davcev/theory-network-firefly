@@ -25,7 +25,7 @@ export class ActionCityStreamGet {
 export class ActionCityStreamAdd {
   static readonly type = ActionsCityStream.Add;
   constructor(
-    public snapshot: DocumentSnapshot,
+    public snapshot: DocumentSnapshot<StreamInterest>,
     public entity?: StreamInterest
   ) {}
 }

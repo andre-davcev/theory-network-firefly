@@ -10,7 +10,7 @@
   *ngIf="mapReady$ | async"
   [style]="style"
   [zoom]="[10]"
-  [center]="place?.centerLike || (locationLike$ | async)"
+  [center]="place?.centerLike || (locationLike$ | async) || undefined"
   [interactive]="interactive"
   [movingMethod]="mapMovingMethod"
   [trackResize]="false"
@@ -24,7 +24,7 @@
     *ngIf="web$ | async"
   ></mgl-control>
 
-  <mgl-marker [lngLat]="locationLike$ | async">
+  <mgl-marker [lngLat]="(locationLike$ | async) || undefined">
     <ff-map-orb></ff-map-orb>
   </mgl-marker>
 

@@ -8,11 +8,9 @@ import { ActionsInterest } from './interest.actions.enum';
 
 export class ActionInterestReset {
   static readonly type = ActionsInterest.Reset;
-  constructor() {}
 }
 export class ActionInterestDirty {
   static readonly type = ActionsInterest.Dirty;
-  constructor() {}
 }
 export class ActionInterestGet {
   static readonly type = ActionsInterest.Get;
@@ -20,7 +18,10 @@ export class ActionInterestGet {
 }
 export class ActionInterestSet {
   static readonly type = ActionsInterest.Set;
-  constructor(public snapshot: DocumentSnapshot, public data?: Interest) {}
+  constructor(
+    public snapshot: DocumentSnapshot<Interest>,
+    public data?: Interest
+  ) {}
 }
 export class ActionInterestPatch {
   static readonly type = ActionsInterest.Patch;

@@ -1,16 +1,16 @@
+import { Injectable } from '@angular/core';
+import { Interest } from '@firefly/cloud';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
+import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
+import { from, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import {
+  ActionSearchEvents,
+  ActionSearchInterests,
+  ActionSearchReset
+} from './search.actions';
 import { StateSearchModel } from './search.state.model';
 import { StateSearchOptions } from './search.state.options';
-import { Injectable } from '@angular/core';
-import { State, StateContext, Action, Selector } from '@ngxs/store';
-import {
-  ActionSearchReset,
-  ActionSearchInterests,
-  ActionSearchEvents
-} from './search.actions';
-import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
-import { of, from } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { Interest } from '@firefly/cloud';
 
 @State<StateSearchModel>(StateSearchOptions)
 @Injectable()

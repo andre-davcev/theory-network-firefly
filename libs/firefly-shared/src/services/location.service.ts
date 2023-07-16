@@ -53,10 +53,10 @@ export class ServiceLocation {
     const address: Array<string> = result.place_name.split(', ');
     const context: ContextItem = result.context[0];
     const type: MapboxPlaceType = context.id.split('.')[0] as MapboxPlaceType;
-    const text: string = result.title || context.text || result.text;
+    const text: string = context.text || result.text;
     const title: string = address[0];
     const description: string = address[1];
-    const center: Array<number> = result.center;
+    const center: [number, number] = result.center as [number, number];
     const geopoint: GeoPoint = new GeoPoint(center[1], center[0]);
     const centerLike: LngLatLike = {
       lat: geopoint.latitude,
@@ -160,7 +160,7 @@ export class ServiceLocation {
   public placeFromEvent(
     event: Event,
     language: string = 'en'
-  ): Observable<Place> {
+  ): Observable<Place | null> {
     if (event == null) {
       return of(null);
     }

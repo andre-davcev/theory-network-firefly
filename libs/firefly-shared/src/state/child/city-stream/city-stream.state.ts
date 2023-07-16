@@ -67,7 +67,7 @@ export class StateCityStream extends StateChild<
     private store: Store
   ) {
     super(
-      StateCityStreamOptions.defaults,
+      StateCityStreamOptions.defaults as StateCityStreamModel,
       {
         ActionReset: ActionCityStreamReset,
         ActionGetData: ActionCityStreamGetData,
@@ -85,7 +85,7 @@ export class StateCityStream extends StateChild<
   }
 
   @Action(ActionCityStreamReset)
-  reset(
+  public override reset(
     context: StateContext<StateCityStreamModel>,
     action: ActionCityStreamReset
   ) {
@@ -93,7 +93,7 @@ export class StateCityStream extends StateChild<
   }
 
   @Action(ActionCityStreamGetData)
-  getData(
+  public override getData(
     context: StateContext<StateCityStreamModel>,
     action: ActionCityStreamGetData
   ) {
@@ -101,7 +101,7 @@ export class StateCityStream extends StateChild<
   }
 
   @Action(ActionCityStreamSetData)
-  setData(
+  public override setData(
     context: StateContext<StateCityStreamModel>,
     action: ActionCityStreamSetData
   ) {
@@ -114,7 +114,7 @@ export class StateCityStream extends StateChild<
   }
 
   @Action(ActionCityStreamGet)
-  get(context: StateContext<StateCityStreamModel>) {
+  public override get(context: StateContext<StateCityStreamModel>) {
     return super.get(context, {
       collection: Collection.Interests,
       imageType: ImageType.Image
@@ -122,7 +122,7 @@ export class StateCityStream extends StateChild<
   }
 
   @Action(ActionCityStreamAdd)
-  add(
+  public override add(
     context: StateContext<StateCityStreamModel>,
     action: ActionCityStreamAdd
   ) {
@@ -130,7 +130,7 @@ export class StateCityStream extends StateChild<
   }
 
   @Action(ActionCityStreamRemove)
-  remove(
+  public override remove(
     context: StateContext<StateCityStreamModel>,
     action: ActionCityStreamRemove
   ) {
@@ -138,7 +138,7 @@ export class StateCityStream extends StateChild<
   }
 
   @Action(ActionCityStreamSync)
-  sync(
+  public override sync(
     context: StateContext<StateCityStreamModel>,
     action: ActionCityStreamSync
   ) {
@@ -173,7 +173,7 @@ export class StateCityStream extends StateChild<
   }
 
   @Action(ActionCityStreamFilter)
-  filter(
+  public override filter(
     context: StateContext<StateCityStreamModel>,
     { filter }: ActionCityStreamFilter
   ) {
@@ -186,7 +186,9 @@ export class StateCityStream extends StateChild<
     return super.filter(context);
   }
 
-  public keys(context: StateContext<StateCityStreamModel>): Array<string> {
+  public override keys(
+    context: StateContext<StateCityStreamModel>
+  ): Array<string> {
     const { getState } = context;
 
     const state: StateCityStreamModel = getState();

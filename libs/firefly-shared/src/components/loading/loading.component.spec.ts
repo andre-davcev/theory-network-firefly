@@ -1,24 +1,22 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { ComponentLoading } from './loading.component';
+import { ModuleComponentLoading } from './loading.component.module';
 
-describe('ComponentLoading', () => {
-  let component: ComponentLoading;
-  let fixture: ComponentFixture<ComponentLoading>;
+describe('', () => {
+  let spectator: Spectator<ComponentLoading>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ComponentLoading]
-    }).compileComponents();
-  }));
+  const createComponent = createComponentFactory({
+    component: ComponentLoading,
+    imports: [ModuleComponentLoading],
+    declareComponent: false
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComponentLoading);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator).toBeTruthy();
   });
 });

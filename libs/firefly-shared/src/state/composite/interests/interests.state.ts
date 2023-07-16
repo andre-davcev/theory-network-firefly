@@ -100,10 +100,10 @@ export class StateInterests {
   ])
   public static snapshotLookup(
     state: StateInterestsModel,
-    lookupUnsubscribed: Record<string, DocumentSnapshot>,
-    lookupSubscribed: Record<string, DocumentSnapshot>,
-    lookupCreated: Record<string, DocumentSnapshot>
-  ): Record<string, DocumentSnapshot> {
+    lookupUnsubscribed: Record<string, DocumentSnapshot<StreamInterest>>,
+    lookupSubscribed: Record<string, DocumentSnapshot<StreamInterest>>,
+    lookupCreated: Record<string, DocumentSnapshot<StreamInterest>>
+  ): Record<string, DocumentSnapshot<StreamInterest>> {
     const type: InterestType = StateInterests.type(state);
 
     return type === InterestType.Unsubscribed
@@ -254,7 +254,7 @@ export class StateInterests {
         ? new ActionCityStreamSubscriptionsSet(subscriptions)
         : new ActionInterestsFilter(filter)
     ).pipe(
-      takeWhile(() => save),
+      takeWhile(() => save || false),
       switchMap(() =>
         dispatch(
           new ActionUserPatch({ subscriptionsStatus: subscriptions }, true)
@@ -330,9 +330,8 @@ export class StateInterests {
     const data: StreamInterest = this.store.selectSnapshot(
       StateInterests.dataLookup
     )[id];
-    const snapshot: DocumentSnapshot = this.store.selectSnapshot(
-      StateInterests.snapshotLookup
-    )[id];
+    const snapshot: DocumentSnapshot<StreamInterest> =
+      this.store.selectSnapshot(StateInterests.snapshotLookup)[id];
 
     subscriptions[id] = { on: true };
 
@@ -362,9 +361,8 @@ export class StateInterests {
     const data: StreamInterest = this.store.selectSnapshot(
       StateInterests.dataLookup
     )[id];
-    const snapshot: DocumentSnapshot = this.store.selectSnapshot(
-      StateInterests.snapshotLookup
-    )[id];
+    const snapshot: DocumentSnapshot<StreamInterest> =
+      this.store.selectSnapshot(StateInterests.snapshotLookup)[id];
 
     data.subscriberCount -= 1;
 

@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
-import { State, Action, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext, Store } from '@ngxs/store';
 import { of } from 'rxjs';
 
-import { StateDocument } from '@theory/ngxs';
 import { UserProfile } from '@firefly/cloud';
+import { StateDocument } from '@theory/ngxs';
 
-import { StateUserProfileModel } from './user-profile.state.model';
-import { StateUserProfileOptions } from './user-profile.state.options';
-import {
-  ActionUserProfileWatch,
-  ActionUserProfileReset,
-  ActionUserProfileGet,
-  ActionUserProfileSet,
-  ActionUserProfilePatch,
-  ActionUserProfileSave,
-  ActionUserProfileDelete,
-  ActionUserProfileUpdate,
-  ActionUserProfileCreate,
-  ActionUserProfileSetId,
-  ActionUserProfilePatchMetadata
-} from './user-profile.actions';
 import { ServiceUsersProfiles } from '../../../services';
 import { StateUser } from '../user/user.state';
+import {
+  ActionUserProfileCreate,
+  ActionUserProfileDelete,
+  ActionUserProfileGet,
+  ActionUserProfilePatch,
+  ActionUserProfilePatchMetadata,
+  ActionUserProfileReset,
+  ActionUserProfileSave,
+  ActionUserProfileSet,
+  ActionUserProfileSetId,
+  ActionUserProfileUpdate,
+  ActionUserProfileWatch
+} from './user-profile.actions';
+import { StateUserProfileModel } from './user-profile.state.model';
+import { StateUserProfileOptions } from './user-profile.state.options';
 
 @State<StateUserProfileModel>(StateUserProfileOptions)
 @Injectable()
@@ -29,17 +29,20 @@ export class StateUserProfile extends StateDocument<
   UserProfile,
   StateUserProfileModel
 > {
-  constructor(private store: Store, public service: ServiceUsersProfiles) {
+  constructor(
+    private store: Store,
+    public override service: ServiceUsersProfiles
+  ) {
     super(
       'user-profiles',
-      StateUserProfileOptions.defaults,
+      StateUserProfileOptions.defaults as StateUserProfileModel,
       service,
       {
-        version: undefined,
-        id: undefined,
-        userId: undefined,
-        dateCreated: undefined,
-        dateUpdated: undefined,
+        version: null,
+        id: null,
+        userId: null,
+        dateCreated: null,
+        dateUpdated: null,
         metadata: {},
 
         icon: '',
@@ -66,12 +69,12 @@ export class StateUserProfile extends StateDocument<
   }
 
   @Action(ActionUserProfileReset)
-  reset(context: StateContext<StateUserProfileModel>) {
+  public override reset(context: StateContext<StateUserProfileModel>) {
     return of(null);
   }
 
   @Action(ActionUserProfileGet)
-  get(
+  public override get(
     context: StateContext<StateUserProfileModel>,
     action: ActionUserProfileGet
   ) {
@@ -79,7 +82,7 @@ export class StateUserProfile extends StateDocument<
   }
 
   @Action(ActionUserProfileSet)
-  set(
+  public override set(
     context: StateContext<StateUserProfileModel>,
     action: ActionUserProfileSet
   ) {
@@ -87,7 +90,7 @@ export class StateUserProfile extends StateDocument<
   }
 
   @Action(ActionUserProfilePatch)
-  patch(
+  public override patch(
     context: StateContext<StateUserProfileModel>,
     action: ActionUserProfilePatch
   ) {
@@ -95,7 +98,7 @@ export class StateUserProfile extends StateDocument<
   }
 
   @Action(ActionUserProfilePatchMetadata)
-  patchMetadata(
+  public override patchMetadata(
     context: StateContext<StateUserProfileModel>,
     action: ActionUserProfilePatchMetadata
   ) {
@@ -103,22 +106,22 @@ export class StateUserProfile extends StateDocument<
   }
 
   @Action(ActionUserProfileUpdate)
-  update(context: StateContext<StateUserProfileModel>) {
+  public override update(context: StateContext<StateUserProfileModel>) {
     return super.update(context);
   }
 
   @Action(ActionUserProfileSave)
-  save(context: StateContext<StateUserProfileModel>) {
+  public override save(context: StateContext<StateUserProfileModel>) {
     return super.save(context);
   }
 
   @Action(ActionUserProfileDelete)
-  delete(context: StateContext<StateUserProfileModel>) {
+  public override delete(context: StateContext<StateUserProfileModel>) {
     return super.delete(context);
   }
 
   @Action(ActionUserProfileWatch, { cancelUncompleted: true })
-  watch(
+  public override watch(
     context: StateContext<StateUserProfileModel>,
     action: ActionUserProfileWatch
   ) {

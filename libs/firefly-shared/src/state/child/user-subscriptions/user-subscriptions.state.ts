@@ -57,7 +57,7 @@ export class StateUserSubscriptions extends StateChild<
 
   constructor(service: ServiceSubscriptions, storage: ServiceStorage) {
     super(
-      StateUserSubscriptionsOptions.defaults,
+      StateUserSubscriptionsOptions.defaults as StateUserSubscriptionsModel,
       {
         ActionReset: ActionUserSubscriptionsReset,
         ActionGetData: ActionUserSubscriptionsGetData,
@@ -75,7 +75,7 @@ export class StateUserSubscriptions extends StateChild<
   }
 
   @Action(ActionUserSubscriptionsReset)
-  reset(
+  public override reset(
     context: StateContext<StateUserSubscriptionsModel>,
     action: ActionUserSubscriptionsReset
   ) {
@@ -83,7 +83,7 @@ export class StateUserSubscriptions extends StateChild<
   }
 
   @Action(ActionUserSubscriptionsGetData)
-  getData(
+  public override getData(
     context: StateContext<StateUserSubscriptionsModel>,
     action: ActionUserSubscriptionsGetData
   ) {
@@ -91,7 +91,7 @@ export class StateUserSubscriptions extends StateChild<
   }
 
   @Action(ActionUserSubscriptionsSetData)
-  setData(
+  public override setData(
     context: StateContext<StateUserSubscriptionsModel>,
     action: ActionUserSubscriptionsSetData
   ) {
@@ -99,7 +99,7 @@ export class StateUserSubscriptions extends StateChild<
   }
 
   @Action(ActionUserSubscriptionsGet)
-  get(context: StateContext<StateUserSubscriptionsModel>) {
+  public override get(context: StateContext<StateUserSubscriptionsModel>) {
     return super.get(context, {
       collection: Collection.Interests,
       imageType: ImageType.Image
@@ -107,7 +107,7 @@ export class StateUserSubscriptions extends StateChild<
   }
 
   @Action(ActionUserSubscriptionsAdd)
-  add(
+  public override add(
     context: StateContext<StateUserSubscriptionsModel>,
     action: ActionUserSubscriptionsAdd
   ) {
@@ -115,7 +115,7 @@ export class StateUserSubscriptions extends StateChild<
   }
 
   @Action(ActionUserSubscriptionsRemove)
-  remove(
+  public override remove(
     context: StateContext<StateUserSubscriptionsModel>,
     action: ActionUserSubscriptionsRemove
   ) {
@@ -123,7 +123,7 @@ export class StateUserSubscriptions extends StateChild<
   }
 
   @Action(ActionUserSubscriptionsSync)
-  sync(
+  public override sync(
     context: StateContext<StateUserSubscriptionsModel>,
     action: ActionUserSubscriptionsSync
   ) {
@@ -131,7 +131,7 @@ export class StateUserSubscriptions extends StateChild<
   }
 
   @Action(ActionUserSubscriptionsFilter)
-  filter(
+  public override filter(
     context: StateContext<StateUserSubscriptionsModel>,
     { filter }: ActionUserSubscriptionsFilter
   ) {
@@ -157,7 +157,7 @@ export class StateUserSubscriptions extends StateChild<
         );
   }
 
-  public keys(
+  public override keys(
     context: StateContext<StateUserSubscriptionsModel>
   ): Array<string> {
     const { getState } = context;

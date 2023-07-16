@@ -25,7 +25,7 @@ export class StateNotifications {
   }
   @Selector() static pushNotification(
     state: StateNotificationsModel
-  ): PushNotification {
+  ): PushNotification | null | undefined {
     return state.notification;
   }
 

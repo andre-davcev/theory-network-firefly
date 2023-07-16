@@ -1,5 +1,6 @@
 import { GeoPoint, Timestamp } from 'firebase/firestore';
 
+import { Nullable } from '@theory/core';
 import { MapboxPlaceType } from '../enums';
 import { CityInfo, MetadataList, Place } from '../interfaces';
 import { DocumentBase } from './base.document';
@@ -31,5 +32,5 @@ export interface Event extends DocumentBase {
   virtual: boolean;
   website?: string;
 
-  metadata: MetadataEvent;
+  metadata: Nullable<MetadataEvent>;
 }

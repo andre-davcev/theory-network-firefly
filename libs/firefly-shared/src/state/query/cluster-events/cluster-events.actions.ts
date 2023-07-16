@@ -14,7 +14,10 @@ export class ActionClusterEventsGet {
 }
 export class ActionClusterEventsAdd {
   static readonly type = ActionsClusterEvents.Add;
-  constructor(public snapshot: DocumentSnapshot, public entity?: Interest) {}
+  constructor(
+    public snapshot: DocumentSnapshot<Interest>,
+    public entity?: Interest
+  ) {}
 }
 export class ActionClusterEventsRemove {
   static readonly type = ActionsClusterEvents.Remove;

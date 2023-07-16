@@ -13,7 +13,7 @@ export class ActionEventGet {
 }
 export class ActionEventSet {
   static readonly type = ActionsEvent.Set;
-  constructor(public snapshot: DocumentSnapshot, public data?: Event) {}
+  constructor(public snapshot: DocumentSnapshot<Event>, public data?: Event) {}
 }
 export class ActionEventPatch {
   static readonly type = ActionsEvent.Patch;

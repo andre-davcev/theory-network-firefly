@@ -22,14 +22,14 @@ export class ServiceEvents extends ServiceFirestore<Event> {
   private static validateEndTime(): ValidatorFn {
     const validator: ValidatorFn = (
       control: AbstractControl
-    ): Record<string, any> => {
+    ): { timeEndInvalid: true } | null => {
       const form: UntypedFormGroup = control.parent as UntypedFormGroup;
 
       let valid: boolean = false;
 
       if (form != null) {
-        const start: Timestamp = form.get('timeStart').value;
-        const end: Timestamp = form.get('timeEnd').value;
+        const start: Timestamp | undefined = form.get('timeStart')?.value;
+        const end: Timestamp | undefined = form.get('timeEnd')?.value;
 
         if (start != null && end != null) {
           const timeStart: Date = start.toDate();
@@ -48,7 +48,7 @@ export class ServiceEvents extends ServiceFirestore<Event> {
   private static validateTimeNotify(): ValidatorFn {
     const validator: ValidatorFn = (
       control: AbstractControl
-    ): Record<string, any> => {
+    ): { timeNotifyInvalid: true } | null => {
       const value: Timestamp = control.value;
 
       let valid: boolean = false;
@@ -69,7 +69,7 @@ export class ServiceEvents extends ServiceFirestore<Event> {
   private static validateTimeStart(): ValidatorFn {
     const validator: ValidatorFn = (
       control: AbstractControl
-    ): Record<string, any> => {
+    ): { timeStartInvalid: true } | null => {
       const value: Timestamp = control.value;
 
       let valid: boolean = false;
@@ -87,7 +87,7 @@ export class ServiceEvents extends ServiceFirestore<Event> {
     return validator;
   }
 
-  public formDataNew(userId: string, defaults: Event): Event {
+  public override formDataNew(userId: string, defaults: Event): Event {
     const event: Event = {
       ...super.formDataNew(userId, defaults),
 
@@ -99,13 +99,12 @@ export class ServiceEvents extends ServiceFirestore<Event> {
     return event;
   }
 
-  public formCreate(event: Event): UntypedFormGroup {
+  public override formCreate(event: Event): UntypedFormGroup {
     //temporary
     if (!event.metadata) {
       event.metadata = {
         icon: '',
-        image: '',
-        place: null
+        image: ''
       };
     }
 

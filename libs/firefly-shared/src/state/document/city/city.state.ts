@@ -28,11 +28,11 @@ import { StateCityOptions } from './city.state.options';
 @State<StateCityModel>(StateCityOptions)
 @Injectable()
 export class StateCity {
-  @Selector() static city(state: StateCityModel): CityInfo {
+  @Selector() static city(state: StateCityModel): CityInfo | null {
     return state.city;
   }
-  @Selector() static cityId(state: StateCityModel): string {
-    const city: CityInfo = StateCity.city(state);
+  @Selector() static cityId(state: StateCityModel): string | null {
+    const city: CityInfo | null = StateCity.city(state);
     return city == null ? null : city.id;
   }
   @Selector() static found(state: StateCityModel): boolean {
@@ -41,7 +41,7 @@ export class StateCity {
   @Selector() static isNew(state: StateCityModel): boolean {
     return state.isNew;
   }
-  @Selector() static geopoint(state: StateCityModel): GeoPoint {
+  @Selector() static geopoint(state: StateCityModel): GeoPoint | null {
     return state.geopoint;
   }
 
@@ -55,7 +55,8 @@ export class StateCity {
   @Action(ActionCityWatch, { cancelUncompleted: true })
   cityWatch({ dispatch, patchState }: StateContext<StateCityModel>) {
     return this.store.select(StateLocation.location).pipe(
-      filter((location: Position) => location != null),
+      filter((location: Position | null) => location != null),
+      map((location: Position | null) => location as Position),
       map(
         (location: Position) =>
           new GeoPoint(location.coords.latitude, location.coords.longitude)
@@ -70,20 +71,32 @@ export class StateCity {
             ),
             tap((city: CityInfo) => patchState({ geopoint, city })),
             switchMap((city: CityInfo) =>
-              ServiceFirestoreBase.documentGet(
+              ServiceFirestoreBase.documentGet<Record<string, StreamInterest>>(
                 this.angularfire,
                 Collection.Streams,
                 city.id
               ).pipe(
-                tap((snapshot: FirestoreDocumentSnapshot) =>
-                  patchState({ isNew: !snapshot.exists })
+                tap(
+                  (
+                    snapshot: FirestoreDocumentSnapshot<
+                      Record<string, StreamInterest>
+                    >
+                  ) => patchState({ isNew: !snapshot.exists })
                 ),
-                switchMap((snapshot: FirestoreDocumentSnapshot) =>
-                  snapshot.exists
-                    ? dispatch(
-                        new ActionCityStreamSetData(snapshot.data(), true)
-                      )
-                    : dispatch(new ActionCityCreate(city))
+                switchMap(
+                  (
+                    snapshot: FirestoreDocumentSnapshot<
+                      Record<string, StreamInterest>
+                    >
+                  ) =>
+                    snapshot.exists
+                      ? dispatch(
+                          new ActionCityStreamSetData(
+                            snapshot.data() as Record<string, StreamInterest>,
+                            true
+                          )
+                        )
+                      : dispatch(new ActionCityCreate(city))
                 )
               )
             )
@@ -121,7 +134,12 @@ export class StateCity {
       ),
       take(1),
       switchMap((snapshot: DocumentSnapshot<Record<string, StreamInterest>>) =>
-        dispatch(new ActionCityStreamSetData(snapshot.data(), true))
+        dispatch(
+          new ActionCityStreamSetData(
+            snapshot.data() as Record<string, StreamInterest>,
+            true
+          )
+        )
       )
     );
   }

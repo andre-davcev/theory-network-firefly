@@ -1,18 +1,18 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  ElementRef,
   HostBinding,
   Input,
-  ChangeDetectionStrategy,
-  ElementRef,
   OnInit
 } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 import { Color } from '../../enums';
-import { IconType } from './icon-type.enum';
+import { IconFamily } from './icon-family.enum';
 import { IconSize } from './icon-size.enum';
 import { IconSlot } from './icon-slot.enum';
-import { IconFamily } from './icon-family.enum';
+import { IconType } from './icon-type.enum';
 
 @Component({
   selector: 'ff-icon',
@@ -28,7 +28,7 @@ export class ComponentIcon implements OnInit {
   public visible: boolean = true;
 
   @Input()
-  public name: IconType;
+  public name!: IconType;
 
   @Input()
   public color: Color = Color.Black;
@@ -40,10 +40,10 @@ export class ComponentIcon implements OnInit {
   public outline: boolean = false;
 
   @Input()
-  public slot: IconSlot;
+  public slot!: IconSlot;
 
-  public icon: string;
-  public definition: IconDefinition;
+  public icon!: string;
+  public definition!: IconDefinition;
   public family: IconFamily = IconFamily.Custom;
   public classes: Array<string> = [];
 

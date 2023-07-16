@@ -11,7 +11,7 @@ export class ServiceAlerts extends ServiceFirestore<Alert> {
     super(firestore, formBuilder);
   }
 
-  public formCreate(object: Alert): UntypedFormGroup {
+  public override formCreate(object: Alert): UntypedFormGroup {
     return super.formCreate({
       ...object,
 

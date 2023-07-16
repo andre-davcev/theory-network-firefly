@@ -9,7 +9,7 @@ import { StateContext, createSelector } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { CoreEnum, CoreUtil, ImageType } from '@theory/core';
+import { CoreEnum, CoreUtil, ImageType, Nullable } from '@theory/core';
 import {
   FirebaseDocument,
   DocumentSnapshot as FirestoreDocumentSnapshot,
@@ -28,7 +28,7 @@ export class StateDocument<
 > {
   protected collection: string;
   protected defaults: M;
-  protected empty: T;
+  protected empty: Nullable<T>;
   protected service: ServiceFirestore<T>;
   protected actions: ActionsDocument;
   protected formPath: string;
@@ -121,7 +121,7 @@ export class StateDocument<
     collection: string,
     defaults: M,
     service: ServiceFirestore<T>,
-    empty: T,
+    empty: Nullable<T>,
     actions: ActionsDocument
   ) {
     this.collection = collection;

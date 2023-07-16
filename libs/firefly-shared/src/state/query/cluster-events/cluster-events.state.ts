@@ -32,7 +32,7 @@ export class StateClusterInterests extends StateQuery<
     storage: ServiceStorage
   ) {
     super(
-      StateClusterInterestsOptions.defaults,
+      StateClusterInterestsOptions.defaults as StateClusterInterestsModel,
       {
         ActionReset: ActionClusterEventsReset,
         ActionGetData: ActionClusterEventsGetData,
@@ -47,9 +47,9 @@ export class StateClusterInterests extends StateQuery<
   }
 
   @Action(ActionClusterEventsReset)
-  reset(context: StateContext<StateClusterInterestsModel>) {
+  public override reset(context: StateContext<StateClusterInterestsModel>) {
     const userId: string = this.store.selectSnapshot(StateUser.id());
-    const query: Query =
+    const query: Query | undefined =
       userId == null
         ? undefined
         : this.service
@@ -60,17 +60,17 @@ export class StateClusterInterests extends StateQuery<
   }
 
   @Action(ActionClusterEventsGetData)
-  getData(context: StateContext<StateClusterInterestsModel>) {
+  public override getData(context: StateContext<StateClusterInterestsModel>) {
     return super.getData(context);
   }
 
   @Action(ActionClusterEventsGet)
-  get(context: StateContext<StateClusterInterestsModel>) {
+  public override get(context: StateContext<StateClusterInterestsModel>) {
     return super.get(context);
   }
 
   @Action(ActionClusterEventsAdd)
-  add(
+  public override add(
     context: StateContext<StateClusterInterestsModel>,
     action: ActionClusterEventsAdd
   ) {
@@ -78,7 +78,7 @@ export class StateClusterInterests extends StateQuery<
   }
 
   @Action(ActionClusterEventsRemove)
-  remove(
+  public override remove(
     context: StateContext<StateClusterInterestsModel>,
     action: ActionClusterEventsRemove
   ) {
@@ -86,7 +86,7 @@ export class StateClusterInterests extends StateQuery<
   }
 
   @Action(ActionClusterEventsSync)
-  sync(
+  public override sync(
     context: StateContext<StateClusterInterestsModel>,
     action: ActionClusterEventsSync
   ) {
@@ -94,7 +94,7 @@ export class StateClusterInterests extends StateQuery<
   }
 
   @Action(ActionClusterEventsFilter)
-  filter(
+  public override filter(
     context: StateContext<StateClusterInterestsModel>,
     action: ActionClusterEventsFilter
   ) {

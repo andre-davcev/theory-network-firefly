@@ -11,7 +11,7 @@ export class ServiceUsers extends ServiceFirestore<User> {
     super(firestore, formBuilder);
   }
 
-  public formCreate(object: User): UntypedFormGroup {
+  public override formCreate(object: User): UntypedFormGroup {
     return super.formCreate({
       ...object,
       subscriptions: [object.subscriptions],

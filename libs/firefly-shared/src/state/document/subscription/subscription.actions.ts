@@ -13,7 +13,10 @@ export class ActionSubscriptionGet {
 }
 export class ActionSubscriptionSet {
   static readonly type = ActionsSubscription.Set;
-  constructor(public snapshot: DocumentSnapshot, public data?: Subscription) {}
+  constructor(
+    public snapshot: DocumentSnapshot<Subscription>,
+    public data?: Subscription
+  ) {}
 }
 export class ActionSubscriptionPatch {
   static readonly type = ActionsSubscription.Patch;

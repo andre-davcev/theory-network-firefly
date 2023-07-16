@@ -30,7 +30,7 @@ export class ServiceInterests extends ServiceFirestore<Interest> {
     }
 */
 
-  public formCreate(interest: Interest): UntypedFormGroup {
+  public override formCreate(interest: Interest): UntypedFormGroup {
     return super.formCreate({
       ...interest,
 

@@ -1,10 +1,10 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  HostBinding,
-  Output,
   EventEmitter,
-  ChangeDetectionStrategy
+  HostBinding,
+  Input,
+  Output
 } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,7 @@ export class ComponentIconSubscribe {
   public subscribed: boolean = false;
 
   @Input()
-  public count: number;
+  public count!: number;
 
   @Input()
   public on: boolean = false;

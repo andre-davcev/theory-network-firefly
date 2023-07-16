@@ -1,5 +1,18 @@
+const esModules = [
+  'nanoid',
+  '@angular',
+  '@ngneat',
+  '@fortawesome',
+  '@ngx-translate'
+];
+const ignoreModules = esModules.map((mod) => mod.replace('-', '\\-')).join('|');
+const transformIgnorePatterns = [
+  `node_modules/(?!${ignoreModules}.*.(mjs|js)$)`
+];
+
 /* eslint-disable */
 export default {
+  transformIgnorePatterns,
   displayName: 'firefly-shared',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
@@ -21,7 +34,6 @@ export default {
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular'
   },
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

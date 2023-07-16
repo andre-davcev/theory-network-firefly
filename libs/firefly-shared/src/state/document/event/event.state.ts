@@ -68,18 +68,18 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     private store: Store,
     private storage: ServiceStorage,
     private location: ServiceLocation,
-    public service: ServiceEvents
+    public override service: ServiceEvents
   ) {
     super(
       Collection.Events,
-      StateEventOptions.defaults,
+      StateEventOptions.defaults as StateEventModel,
       service,
       {
-        version: undefined,
-        id: undefined,
-        userId: undefined,
-        dateCreated: undefined,
-        dateUpdated: undefined,
+        version: null,
+        id: null,
+        userId: null,
+        dateCreated: null,
+        dateUpdated: null,
 
         city: null,
         description: null,
@@ -141,10 +141,10 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     return StateEvent.dataState(state).timeEnd;
   }
   @Selector() static timeEndValid(state: StateEventModel): boolean {
-    return StateEvent.formGroupState(state).get('timeEnd').errors == null;
+    return StateEvent.formGroupState(state)?.get('timeEnd')?.errors == null;
   }
   @Selector() static timeStartValid(state: StateEventModel): boolean {
-    return StateEvent.formGroupState(state).get('timeStart').errors == null;
+    return StateEvent.formGroupState(state)?.get('timeStart')?.errors == null;
   }
   @Selector() static private(state: StateEventModel): boolean {
     return StateEvent.dataState(state).private;
@@ -156,7 +156,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     return StateEvent.dataState(state).timeNotify;
   }
   @Selector() static timeNotifyValid(state: StateEventModel): boolean {
-    return StateEvent.formGroupState(state).get('timeNotify').errors == null;
+    return StateEvent.formGroupState(state)?.get('timeNotify')?.errors == null;
   }
   @Selector() static interests(state: StateEventModel): Array<string> {
     return StateEvent.dataState(state).interests;
@@ -192,7 +192,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     return StateEvent.dataState(state).draft;
   }
 
-  @Selector() static placeCenter(state: StateEventModel): LngLatLike {
+  @Selector() static placeCenter(state: StateEventModel): LngLatLike | null {
     const place: Place = StateEvent.place(state);
 
     return place == null ? null : place.centerLike;
@@ -251,17 +251,23 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
   }
 
   @Action(ActionEventReset)
-  reset(context: StateContext<StateEventModel>) {
+  public override reset(context: StateContext<StateEventModel>) {
     return super.reset(context);
   }
 
   @Action(ActionEventGet)
-  get(context: StateContext<StateEventModel>, action: ActionEventGet) {
+  public override get(
+    context: StateContext<StateEventModel>,
+    action: ActionEventGet
+  ) {
     return super.get(context, action);
   }
 
   @Action(ActionEventSet)
-  set(context: StateContext<StateEventModel>, action: ActionEventSet) {
+  public override set(
+    context: StateContext<StateEventModel>,
+    action: ActionEventSet
+  ) {
     const { getState, dispatch } = context;
 
     const event: Event = action.data
@@ -272,13 +278,12 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
       switchMap(() =>
         event == null || StateEvent.isNewState(getState())
           ? of(null)
-          : this.location
-              .placeFromEvent(event)
-              .pipe(
-                switchMap((place: Place) =>
-                  dispatch(new ActionEventPlaceSet(place))
-                )
+          : this.location.placeFromEvent(event).pipe(
+              map((place: Place | null) => place as Place),
+              switchMap((place: Place) =>
+                dispatch(new ActionEventPlaceSet(place))
               )
+            )
       ),
       switchMap(() =>
         StateEvent.image(getState()) == null
@@ -290,12 +295,15 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
   }
 
   @Action(ActionEventPatch)
-  patch(context: StateContext<StateEventModel>, action: ActionEventPatch) {
+  public override patch(
+    context: StateContext<StateEventModel>,
+    action: ActionEventPatch
+  ) {
     return super.patch(context, action);
   }
 
   @Action(ActionEventPatchMetadata)
-  patchMetadata(
+  public override patchMetadata(
     context: StateContext<StateEventModel>,
     action: ActionEventPatchMetadata
   ) {
@@ -303,7 +311,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
   }
 
   @Action(ActionEventCreate)
-  create(context: StateContext<StateEventModel>) {
+  public override create(context: StateContext<StateEventModel>) {
     const { dispatch } = context;
 
     return super
@@ -312,24 +320,24 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
   }
 
   @Action(ActionEventUpdate)
-  update(context: StateContext<StateEventModel>) {
+  public override update(context: StateContext<StateEventModel>) {
     return context
       .dispatch(new ActionEventImagesUpdate())
       .pipe(switchMap(() => super.update(context)));
   }
 
   @Action(ActionEventSave)
-  save(context: StateContext<StateEventModel>) {
+  public override save(context: StateContext<StateEventModel>) {
     return super.save(context);
   }
 
   @Action(ActionEventDelete)
-  delete(context: StateContext<StateEventModel>) {
+  public override delete(context: StateContext<StateEventModel>) {
     return super.delete(context);
   }
 
   @Action(ActionEventSetId)
-  setId(
+  public setId(
     { dispatch }: StateContext<StateEventModel>,
     { id, isAlert }: ActionEventSetId
   ) {
@@ -341,14 +349,14 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
 
     this.empty.draft = !isInterestOwner;
 
-    const snapshot: DocumentSnapshot = this.store.selectSnapshot(
+    const snapshot: DocumentSnapshot<Event> = this.store.selectSnapshot(
       isAlert
         ? StateUserAlerts.snapshotLookup()
         : StateUserEvents.snapshotLookup()
     )[id];
 
     const data: Event = isNew
-      ? this.service.formDataNew(userId, this.empty)
+      ? this.service.formDataNew(userId, this.empty as Event)
       : this.store.selectSnapshot(
           isAlert ? StateUserAlerts.dataLookup() : StateUserEvents.dataLookup()
         )[id];
@@ -380,7 +388,9 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
       map((snapshot: QuerySnapshot) => snapshot.docs),
       switchMap((snapshot: Array<QueryDocumentSnapshot>) => {
         const event: Event = snapshot[0].data() as Event;
-        return this.store.dispatch(new ActionEventSet(snapshot[0], event));
+        return this.store.dispatch(
+          new ActionEventSet(snapshot[0] as DocumentSnapshot<Event>, event)
+        );
       })
     );
   }
@@ -400,7 +410,9 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
       map((snapshot: QuerySnapshot) => snapshot.docs),
       switchMap((snapshot: Array<QueryDocumentSnapshot>) => {
         const event: Event = snapshot[0].data() as Event;
-        return dispatch(new ActionEventSet(snapshot[0], event));
+        return dispatch(
+          new ActionEventSet(snapshot[0] as DocumentSnapshot<Event>, event)
+        );
       }),
       switchMap(() => dispatch(new ActionEventPatchMetadata({ isEvent: true })))
     );
@@ -423,6 +435,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
           ImageSize.Medium
         )
       ),
+      map((image: string | null | undefined) => image as string),
       switchMap((image: string) =>
         dispatch(new ActionEventPatchMetadata({ image }))
       )
@@ -441,7 +454,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     metadata.place = place;
 
     return dispatch([
-      new ActionEventPatch({ geopoint: place.geopoint, city }),
+      new ActionEventPatch({ geopoint: place?.geopoint, city }),
       new ActionEventPatchMetadata(metadata)
     ]);
   }

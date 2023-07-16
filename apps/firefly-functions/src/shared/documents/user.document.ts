@@ -15,7 +15,7 @@ export interface MetadataUser {}
 
 export interface User extends DocumentBase {
   city: CityInfo;
-  email: string;
+  email?: string;
   isPublisher: boolean;
   language: string;
   geopoint: GeoPoint;

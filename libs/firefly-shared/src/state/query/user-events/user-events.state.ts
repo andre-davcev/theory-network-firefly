@@ -49,7 +49,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
     storage: ServiceStorage
   ) {
     super(
-      StateUserEventsOptions.defaults,
+      StateUserEventsOptions.defaults as StateUserEventsModel,
       {
         ActionReset: ActionUserEventsReset,
         ActionGetData: ActionUserEventsGetData,
@@ -64,12 +64,12 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
   }
 
   @Action(ActionUserEventsReset)
-  reset(context: StateContext<StateUserEventsModel>) {
+  public override reset(context: StateContext<StateUserEventsModel>) {
     const dateCutoff: Date = new Date();
     dateCutoff.setHours(dateCutoff.getHours() - 6);
 
     const userId: string = this.store.selectSnapshot(StateUser.id());
-    const query: Query =
+    const query: Query | undefined =
       userId == null
         ? undefined
         : this.service
@@ -81,12 +81,12 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
   }
 
   @Action(ActionUserEventsGetData)
-  getData(context: StateContext<StateUserEventsModel>) {
+  public override getData(context: StateContext<StateUserEventsModel>) {
     return super.getData(context);
   }
 
   @Action(ActionUserEventsGet)
-  get(context: StateContext<StateUserEventsModel>) {
+  public override get(context: StateContext<StateUserEventsModel>) {
     return super.get(context, {
       collection: Collection.Events,
       imageType: ImageType.Image
@@ -94,7 +94,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
   }
 
   @Action(ActionUserEventsAdd)
-  add(
+  public override add(
     context: StateContext<StateUserEventsModel>,
     action: ActionUserEventsAdd
   ) {
@@ -102,7 +102,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
   }
 
   @Action(ActionUserEventsRemove)
-  remove(
+  public override remove(
     context: StateContext<StateUserEventsModel>,
     action: ActionUserEventsRemove
   ) {
@@ -110,7 +110,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
   }
 
   @Action(ActionUserEventsSync)
-  sync(
+  public override sync(
     context: StateContext<StateUserEventsModel>,
     action: ActionUserEventsSync
   ) {
@@ -122,9 +122,8 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
     { dispatch, getState }: StateContext<StateUserEventsModel>,
     { id }: ActionUserEventsDelete
   ) {
-    const snapshot: DocumentSnapshot = StateUserEvents.snapshotLookupState(
-      getState()
-    )[id];
+    const snapshot: DocumentSnapshot<Event> =
+      StateUserEvents.snapshotLookupState(getState())[id];
 
     const delete$: Observable<any> =
       id === CoreEnum.IdNew ? of(null) : this.service.documentDelete(snapshot);
@@ -135,7 +134,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
   }
 
   @Action(ActionUserEventsFilter)
-  filter(
+  public override filter(
     context: StateContext<StateUserEventsModel>,
     { filter }: ActionUserEventsFilter
   ) {
@@ -157,7 +156,9 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
         );
   }
 
-  public keys(context: StateContext<StateUserEventsModel>): Array<string> {
+  public override keys(
+    context: StateContext<StateUserEventsModel>
+  ): Array<string> {
     const { getState } = context;
 
     const state: StateUserEventsModel = getState();

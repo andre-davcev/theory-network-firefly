@@ -22,7 +22,10 @@ export class ActionUserAlertsGet {
 }
 export class ActionUserAlertsAdd {
   static readonly type = ActionsUserAlerts.Add;
-  constructor(public snapshot: DocumentSnapshot, public entity?: Alert) {}
+  constructor(
+    public snapshot: DocumentSnapshot<Alert>,
+    public entity?: Alert
+  ) {}
 }
 export class ActionUserAlertsRemove {
   static readonly type = ActionsUserAlerts.Remove;

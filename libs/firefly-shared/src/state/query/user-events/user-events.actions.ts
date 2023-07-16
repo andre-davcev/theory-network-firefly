@@ -15,7 +15,10 @@ export class ActionUserEventsGet {
 }
 export class ActionUserEventsAdd {
   static readonly type = ActionsUserEvents.Add;
-  constructor(public snapshot: DocumentSnapshot, public entity?: Event) {}
+  constructor(
+    public snapshot: DocumentSnapshot<Event>,
+    public entity?: Event
+  ) {}
 }
 export class ActionUserEventsRemove {
   static readonly type = ActionsUserEvents.Remove;

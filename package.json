@@ -167,6 +167,7 @@
     "@nrwl/linter": "15.0.2",
     "@types/jest": "28.1.1",
     "@types/jquery": "^3.3.35",
+    "@types/mapbox__mapbox-gl-geocoder": "^4.7.3",
     "@types/mapbox-gl": "^2.1.1",
     "@types/node": "16.11.7",
     "@types/supercluster": "^5.0.1",

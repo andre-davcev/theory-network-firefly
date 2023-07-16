@@ -42,13 +42,27 @@ export class StateLocation {
   }
 
   @Selector()
-  static locationLike(state: StateLocationModel): LngLatLike | null {
+  static locationLike(
+    state: StateLocationModel
+  ): LngLatLike | null | undefined {
     return !StateLocation.isValid(state)
       ? null
       : [
           StateLocation.location(state)?.coords.longitude || 0,
           StateLocation.location(state)?.coords.latitude || 0
         ];
+  }
+
+  @Selector()
+  static locationLiteral(
+    state: StateLocationModel
+  ): MapboxGeocoder.LngLatLiteral | null {
+    return !StateLocation.isValid(state)
+      ? null
+      : {
+          longitude: StateLocation.location(state)?.coords.longitude || 0,
+          latitude: StateLocation.location(state)?.coords.latitude || 0
+        };
   }
 
   ngxsOnInit(context: StateContext<StateLocationModel>) {

@@ -44,12 +44,12 @@ export class ComponentAuth implements OnInit {
   public finished: EventEmitter<boolean> = new EventEmitter();
 
   @Select(StateUser.errorAuthCode)
-  private errorCode$: Observable<AuthErrorType>;
+  private errorCode$!: Observable<AuthErrorType>;
 
   public faEnvelope: IconDefinition = faEnvelope;
   public faLock: IconDefinition = faLock;
 
-  public form: UntypedFormGroup;
+  public form!: UntypedFormGroup;
 
   public AuthType: any = AuthType;
   public AuthControl: any = AuthControl;
@@ -111,18 +111,20 @@ export class ComponentAuth implements OnInit {
         )
       ])
       .subscribe((translations: Record<string, string>) =>
-        Object.keys(translations).forEach((id: AuthErrorId) => {
-          const parts: Array<string> = id.split('.');
-          const control: AuthControl = parts[3] as AuthControl;
-          const type: AuthErrorType = parts[4] as AuthErrorType;
+        Object.keys(translations)
+          .map((id: string) => id as AuthErrorId)
+          .forEach((id: AuthErrorId) => {
+            const parts: Array<string> = id.split('.');
+            const control: AuthControl = parts[3] as AuthControl;
+            const type: AuthErrorType = parts[4] as AuthErrorType;
 
-          this.errorDefinitions[control][type] = {
-            control,
-            id,
-            message: translations[id],
-            type
-          };
-        })
+            this.errorDefinitions[control][type] = {
+              control,
+              id,
+              message: translations[id],
+              type
+            };
+          })
       );
   }
 
@@ -174,11 +176,11 @@ export class ComponentAuth implements OnInit {
     this.errors$[control] = combineLatest([
       this.errorCode$,
       this.focused[control],
-      this.form.get(control).valueChanges
+      this.form?.get(control)?.valueChanges || of(null)
     ]).pipe(
       map(([errorCode, focused]) => [
-        ...(!focused && this.form.get(control).errors != null
-          ? Object.keys(this.form.get(control).errors)
+        ...(!focused && this.form?.get(control)?.errors != null
+          ? Object.keys(this.form?.get(control)?.errors || {})
           : []),
         ...(this.errorDefinitions[control][errorCode] == null
           ? []

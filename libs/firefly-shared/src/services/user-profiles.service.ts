@@ -11,7 +11,7 @@ export class ServiceUsersProfiles extends ServiceFirestore<UserProfile> {
     super(firestore, formBuilder);
   }
 
-  public formCreate(object: UserProfile): UntypedFormGroup {
+  public override formCreate(object: UserProfile): UntypedFormGroup {
     return super.formCreate({
       ...object
     });

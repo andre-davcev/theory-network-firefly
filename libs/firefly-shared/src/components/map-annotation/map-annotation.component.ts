@@ -1,9 +1,9 @@
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
   Input,
-  Output,
-  EventEmitter
+  Output
 } from '@angular/core';
 
 @Component({
@@ -14,9 +14,9 @@ import {
 })
 export class ComponentMapAnnotation {
   @Input() title: string = '';
-  @Input() description: string;
+  @Input() description!: string;
 
-  @Input() disclosure: boolean;
+  @Input() disclosure!: boolean;
 
   @Output() clicked: EventEmitter<void> = new EventEmitter();
 

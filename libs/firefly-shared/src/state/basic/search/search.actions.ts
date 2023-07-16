@@ -10,5 +10,4 @@ export class ActionSearchEvents {
 }
 export class ActionSearchReset {
   static readonly type = ActionsSearch.Reset;
-  constructor() {}
 }

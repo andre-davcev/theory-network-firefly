@@ -1,3 +1,5 @@
+import { Nullable } from '@theory/core';
+
 import { MetadataList } from '../interfaces';
 import { DocumentBase } from './base.document';
 
@@ -13,5 +15,5 @@ export interface Interest extends DocumentBase {
   tagline: string;
   virtual: boolean;
 
-  metadata: MetadataInterest;
+  metadata: Nullable<MetadataInterest>;
 }

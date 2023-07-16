@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 import { Color } from '../../enums';
 
@@ -15,7 +15,7 @@ export class ComponentLoading {
   public colorBackground: Color = Color.Dark;
 
   @Input()
-  public text: string;
+  public text!: string;
 
   @HostBinding('class.cpt-color-background-dark')
   public get colorBackgroundPrimary(): boolean {
