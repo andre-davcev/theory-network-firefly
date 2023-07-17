@@ -8,55 +8,58 @@ export const routes: Routes = [
 
   {
     path: Pages.Auth,
-    loadChildren: () => import('../pages').then((m) => m.ModulePageAuth)
+    loadChildren: () => import('@firefly/mobile').then((m) => m.ModulePageAuth)
   },
   {
     path: Pages.Home,
-    loadChildren: () => import('../pages').then((m) => m.ModulePageHome)
+    loadChildren: () => import('@firefly/mobile').then((m) => m.ModulePageHome)
   },
   {
     path: Pages.Calendar,
-    loadChildren: () => import('../pages').then((m) => m.ModulePageCalendar)
+    loadChildren: () =>
+      import('@firefly/mobile').then((m) => m.ModulePageCalendar)
   },
 
   {
     path: Pages.AssetsInterests,
     loadChildren: () =>
-      import('../pages').then((m) => m.ModulePageAssetsInterestsRoute)
+      import('@firefly/mobile').then((m) => m.ModulePageAssetsInterestsRoute)
   },
   {
     path: Pages.AssetInterest,
     loadChildren: () =>
-      import('../pages').then((m) => m.ModulePageAssetInterest)
+      import('@firefly/mobile').then((m) => m.ModulePageAssetInterest)
   },
   {
     path: Pages.AssetsEvents,
     loadChildren: () =>
-      import('../pages').then((m) => m.ModulePageAssetsEventsRoute)
+      import('@firefly/mobile').then((m) => m.ModulePageAssetsEventsRoute)
   },
   {
     path: Pages.EventDetail,
-    loadChildren: () => import('../pages').then((m) => m.ModulePageEventDetail)
+    loadChildren: () =>
+      import('@firefly/mobile').then((m) => m.ModulePageEventDetail)
   },
 
   {
     path: Pages.EventSelector,
     loadChildren: () =>
-      import('../pages').then((m) => m.ModulePageEventSelector)
+      import('@firefly/mobile').then((m) => m.ModulePageEventSelector)
   },
   {
     path: Pages.NotificationDetail,
     loadChildren: () =>
-      import('../pages').then((m) => m.ModulePageNotificationDetail)
+      import('@firefly/mobile').then((m) => m.ModulePageNotificationDetail)
   },
   {
     path: Pages.InterestDetail,
     loadChildren: () =>
-      import('../pages').then((m) => m.ModulePageInterestDetail)
+      import('@firefly/mobile').then((m) => m.ModulePageInterestDetail)
   },
   {
     path: Pages.UserProfile,
-    loadChildren: () => import('../pages').then((m) => m.ModulePageUserProfile)
+    loadChildren: () =>
+      import('@firefly/mobile').then((m) => m.ModulePageUserProfile)
   }
 ];
 

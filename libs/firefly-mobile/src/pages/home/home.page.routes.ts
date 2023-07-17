@@ -15,13 +15,11 @@ export const RoutesPageHome: Routes = [
 
       {
         path: Pages.Stream,
-        loadChildren: () =>
-          import('../../pages').then((m) => m.ModulePageStream)
+        loadChildren: () => import('..').then((m) => m.ModulePageStream)
       },
       {
         path: Pages.Notifications,
-        loadChildren: () =>
-          import('../../pages').then((m) => m.ModulePageNotifications)
+        loadChildren: () => import('..').then((m) => m.ModulePageNotifications)
       }
     ]
   }
