@@ -247,6 +247,8 @@ export class StateInterests {
     const filter: InterestsFilter = StateInterests.filter(state);
     const type: InterestType = StateInterests.type(state);
 
+    subscriptions = subscriptions || {};
+
     filter.subscriptions = subscriptions;
 
     return dispatch(
@@ -257,7 +259,15 @@ export class StateInterests {
       takeWhile(() => save || false),
       switchMap(() =>
         dispatch(
-          new ActionUserPatch({ subscriptionsStatus: subscriptions }, true)
+          new ActionUserPatch(
+            {
+              subscriptionsStatus: subscriptions as Record<
+                string,
+                SubscriptionPartial
+              >
+            },
+            true
+          )
         )
       )
     );

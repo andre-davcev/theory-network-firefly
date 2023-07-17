@@ -312,7 +312,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
     { id }: ActionUserAlertsMarkRead
   ) {
     const notifications: Record<string, AlertPartial> =
-      this.store.selectSnapshot(StateUser.notifications);
+      this.store.selectSnapshot(StateUser.notifications) || {};
     const alert: Alert = StateUserAlerts.dataLookupState(getState())[id];
 
     alert.read = true;
@@ -332,7 +332,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
     { id }: ActionUserAlertsDelete
   ) {
     const notifications: Record<string, AlertPartial> =
-      this.store.selectSnapshot(StateUser.notifications);
+      this.store.selectSnapshot(StateUser.notifications) || {};
 
     delete notifications[id];
 
