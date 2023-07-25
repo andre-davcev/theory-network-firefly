@@ -9,7 +9,7 @@ import { IonItemSliding } from '@ionic/angular';
 import { from } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
-import { DateEvents, Event } from '@firefly/cloud';
+import { Alert, DateEvents, Event } from '@firefly/cloud';
 import { TimestampFormat } from '@theory/firebase';
 
 @Component({
@@ -20,20 +20,20 @@ import { TimestampFormat } from '@theory/firebase';
 })
 export class ComponentItemEvents {
   @Input()
-  public dateEvents: DateEvents;
+  public dateEvents!: DateEvents;
 
   @Input()
   public showDelete: boolean = false;
 
   @Output()
-  public selected: EventEmitter<Event> = new EventEmitter();
+  public selected: EventEmitter<Event | Alert> = new EventEmitter();
 
   @Output()
-  public deleted: EventEmitter<Event> = new EventEmitter();
+  public deleted: EventEmitter<Event | Alert> = new EventEmitter();
 
   public TimestampFormat: any = TimestampFormat;
 
-  public select(event: Event, sliding: IonItemSliding): void {
+  public select(event: Event | Alert, sliding: IonItemSliding): void {
     from(sliding.closeOpened())
       .pipe(
         filter((closed: boolean) => !closed),

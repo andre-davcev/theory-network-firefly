@@ -24,11 +24,11 @@ import { BaseComponent } from '@theory/core';
   styleUrls: ['./notifications.page.scss']
 })
 export class PageNotifications extends BaseComponent {
-  @Select(StateAlerts.data) data$: Observable<Array<Alert>>;
-  @Select(StateAlerts.exists) exists$: Observable<boolean>;
+  @Select(StateAlerts.data) data$!: Observable<Array<Alert>>;
+  @Select(StateAlerts.exists) exists$!: Observable<boolean>;
 
   @ViewChild('slider', { static: false })
-  protected sliderRef: IonSlides;
+  protected sliderRef!: IonSlides;
 
   public slideOptions: any = { zoom: false };
 

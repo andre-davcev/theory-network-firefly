@@ -54,21 +54,21 @@ import { PageEventSelector } from '../event-selector';
   styleUrls: ['./interest-detail.page.scss']
 })
 export class PageInterestDetail extends BaseComponent implements OnInit {
-  @Select(StateInterest.formGroup()) form$: Observable<UntypedFormGroup>;
-  @Select(StateInterest.data()) interest$: Observable<Interest>;
-  @Select(StateInterest.isNew()) isNew$: Observable<boolean>;
-  @Select(StateInterest.canUpdate()) canUpdate$: Observable<boolean>;
-  @Select(StateInterest.events) events$: Observable<Event[]>;
-  @Select(StateInterest.eventsPending) eventsPending$: Observable<Event[]>;
-  @Select(StateStorage.images) images$: Observable<
+  @Select(StateInterest.formGroup()) form$!: Observable<UntypedFormGroup>;
+  @Select(StateInterest.data()) interest$!: Observable<Interest>;
+  @Select(StateInterest.isNew()) isNew$!: Observable<boolean>;
+  @Select(StateInterest.canUpdate()) canUpdate$!: Observable<boolean>;
+  @Select(StateInterest.events) events$!: Observable<Event[]>;
+  @Select(StateInterest.eventsPending) eventsPending$!: Observable<Event[]>;
+  @Select(StateStorage.images) images$!: Observable<
     Record<string, StorageImage>
   >;
-  @Select(StateDevice.device) device$: Observable<boolean>;
+  @Select(StateDevice.device) device$!: Observable<boolean>;
   @Select(StateUserEvents.initialized())
-  stateUserInitialized$: Observable<boolean>;
-  @Select(StateUser.userId) userId$: Observable<string>;
-  @Select(StateInterest.canEdit) canEdit$: Observable<boolean>;
-  @Select(StateUser.isPublisher) isPublisher$: Observable<boolean>;
+  stateUserInitialized$!: Observable<boolean>;
+  @Select(StateUser.userId) userId$!: Observable<string>;
+  @Select(StateInterest.canEdit) canEdit$!: Observable<boolean>;
+  @Select(StateUser.isPublisher) isPublisher$!: Observable<boolean>;
 
   public Pages: typeof Pages = Pages;
   public images: Record<string, StorageImage> = {};

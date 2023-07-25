@@ -16,19 +16,19 @@
 </ion-header>
 
 <ion-content>
-  <img class="image-cnt" [src]="(interest$ | async).metadata.image" />
+  <img class="image-cnt" [src]="(interest$ | async)?.metadata?.image" />
 
   <div class="cpt-detail" fxLayout="column">
     <div class="cnt-name">
-      <div class="name">| {{ (interest$ | async).name }} |</div>
+      <div class="name">| {{ (interest$ | async)?.name }} |</div>
     </div>
     <div class="cnt-tagline">
-      <div class="tagline">{{ (interest$ | async).tagline }}</div>
+      <div class="tagline">{{ (interest$ | async)?.tagline }}</div>
     </div>
     <div class="cnt-description">
-      <p class="description">{{ (interest$ | async).description }}</p>
+      <p class="description">{{ (interest$ | async)?.description }}</p>
     </div>
-    <div *ngIf="(eventsPending$ | async).length > 0">
+    <div *ngIf="(eventsPending$ | async)?.length || 0 > 0">
       <ion-item-divider></ion-item-divider>
       <ion-item>
         <ion-label>Pending Events:</ion-label>

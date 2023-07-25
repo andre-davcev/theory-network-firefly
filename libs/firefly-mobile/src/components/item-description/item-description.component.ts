@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
@@ -8,12 +8,12 @@ import { UntypedFormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentItemDescription {
-  @Input() form: UntypedFormGroup;
+  @Input() form!: UntypedFormGroup | null | undefined;
 
-  @Input() title: string;
+  @Input() title!: string;
 
-  @Input() description: string;
-  @Input() descriptionPlaceholder: string;
+  @Input() description!: string;
+  @Input() descriptionPlaceholder!: string;
 
   constructor() {}
 

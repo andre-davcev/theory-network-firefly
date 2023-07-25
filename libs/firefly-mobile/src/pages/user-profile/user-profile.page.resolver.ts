@@ -17,7 +17,7 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageUserProfile implements Resolve<void> {
-  @Select(StateUserProfile.found()) initialized$: Observable<boolean>;
+  @Select(StateUserProfile.found()) initialized$!: Observable<boolean>;
 
   constructor(private store: Store) {}
 

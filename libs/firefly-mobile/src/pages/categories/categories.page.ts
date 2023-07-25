@@ -15,7 +15,7 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
   styleUrls: ['./categories.page.scss']
 })
 export class PageCategories {
-  @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+  @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
 
   public Pages: any = Pages;
 

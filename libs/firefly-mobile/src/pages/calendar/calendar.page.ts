@@ -46,28 +46,28 @@ import algoliaSearch, { SearchClient, SearchIndex } from 'algoliasearch/lite';
   styleUrls: ['./calendar.page.scss']
 })
 export class PageCalendar extends BaseComponent {
-  @Select(StateUser.isPublisher) isPublisher$: Observable<boolean>;
-  @Select(StateCalendar.data) data$: Observable<Array<DateEvents>>;
-  @Select(StateCalendar.exists) exists$: Observable<boolean>;
-  @Select(StateCalendar.canAdd) canAdd$: Observable<boolean>;
-  @Select(StateCalendar.emptyMessage) emptyMessage$: Observable<string>;
-  @Select(StateCalendar.type) eventType$: Observable<EventType>;
-  @Select(StateSearch.searchResults) searchResults$: Observable<
+  @Select(StateUser.isPublisher) isPublisher$!: Observable<boolean>;
+  @Select(StateCalendar.data) data$!: Observable<Array<DateEvents>>;
+  @Select(StateCalendar.exists) exists$!: Observable<boolean>;
+  @Select(StateCalendar.canAdd) canAdd$!: Observable<boolean>;
+  @Select(StateCalendar.emptyMessage) emptyMessage$!: Observable<string>;
+  @Select(StateCalendar.type) eventType$!: Observable<EventType>;
+  @Select(StateSearch.searchResults) searchResults$!: Observable<
     Array<Interest>
   >;
   @Select(StateSearch.searchResultsFound)
-  searchResultsFound$: Observable<boolean>;
-  @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
-  @Select(StateUser.authenticated) authenticated$: Observable<boolean>;
+  searchResultsFound$!: Observable<boolean>;
+  @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
+  @Select(StateUser.authenticated) authenticated$!: Observable<boolean>;
 
   public Pages: any = Pages;
   public IconType: any = IconType;
 
   @ViewChild(IonSearchbar, { static: false })
-  private searchbar: IonSearchbar;
+  private searchbar!: IonSearchbar;
 
   @ViewChild(IonInfiniteScroll)
-  private infiniteScroll: IonInfiniteScroll;
+  private infiniteScroll!: IonInfiniteScroll;
 
   public searching: boolean = false;
   public searchClient: SearchClient = algoliaSearch(
@@ -126,9 +126,10 @@ export class PageCalendar extends BaseComponent {
       .subscribe();
   }
 
-  public navigate(object: Alert): void {
-    const page: Pages =
-      object.read == null ? Pages.EventDetail : Pages.NotificationDetail;
+  public navigate(object: Alert | Event): void {
+    const page: Pages = !object.hasOwnProperty('read')
+      ? Pages.EventDetail
+      : Pages.NotificationDetail;
 
     this.store.dispatch(new Navigate([page, object.id]));
   }
@@ -211,7 +212,7 @@ export class PageCalendar extends BaseComponent {
     this.store.dispatch(new ActionSearchEvents(event.detail.value));
   }
 
-  public loadData(event): void {
+  public loadData(): void {
     this.store.dispatch(new ActionCalendarPage(this.infiniteScroll));
   }
 }

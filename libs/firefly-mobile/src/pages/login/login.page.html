@@ -19,10 +19,10 @@
   fxLayoutAlign="center"
   fxLayoutGap="2rem"
 >
-  <ff-logo [loading]="authenticating$ | async"></ff-logo>
+  <ff-logo [loading]="(authenticating$ | async)!"></ff-logo>
   <ff-auth
-    [type]="page"
-    [authenticating]="authenticating$ | async"
+    [type]="authType"
+    [authenticating]="(authenticating$ | async)!"
     (finished)="finishedAuth($event)"
   >
   </ff-auth>

@@ -8,6 +8,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 import {
   catchError,
+  filter,
   finalize,
   map,
   switchMap,
@@ -43,18 +44,20 @@ import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
   styleUrls: ['./asset-interest.page.scss']
 })
 export class PageAssetInterest extends BaseComponent implements OnInit {
-  @Select(StateInterest.formGroup()) form$: Observable<UntypedFormGroup>;
-  @Select(StateInterest.isNew()) isNew$: Observable<boolean>;
-  @Select(StateInterest.canUpdate()) canUpdate$: Observable<boolean>;
-  @Select(StateInterest.events) events$: Observable<Event[]>;
-  @Select(StateInterest.private) private$: Observable<boolean>;
-  @Select(StateInterest.image) image$: Observable<string>;
-  @Select(StateStorage.images) images$: Observable<
+  @Select(StateInterest.formGroup()) form$!: Observable<
+    UntypedFormGroup | null | undefined
+  >;
+  @Select(StateInterest.isNew()) isNew$!: Observable<boolean>;
+  @Select(StateInterest.canUpdate()) canUpdate$!: Observable<boolean>;
+  @Select(StateInterest.events) events$!: Observable<Event[]>;
+  @Select(StateInterest.private) private$!: Observable<boolean>;
+  @Select(StateInterest.image) image$!: Observable<string>;
+  @Select(StateStorage.images) images$!: Observable<
     Record<string, StorageImage>
   >;
-  @Select(StateDevice.device) device$: Observable<boolean>;
+  @Select(StateDevice.device) device$!: Observable<boolean>;
   @Select(StateUserEvents.initialized())
-  stateUserInitialized$: Observable<boolean>;
+  stateUserInitialized$!: Observable<boolean>;
 
   public Pages: any = Pages;
   public TimestampFormat: any = TimestampFormat;
@@ -167,6 +170,8 @@ export class PageAssetInterest extends BaseComponent implements OnInit {
       .dispatch(new ActionAppLoadingShow())
       .pipe(
         switchMap(() => this.camera.getPhoto()),
+        filter((image: string | undefined) => image != null),
+        map((image: string | undefined) => image as string),
         switchMap((image: string) =>
           this.store.dispatch(new ActionInterestPatchMetadata({ image }))
         ),

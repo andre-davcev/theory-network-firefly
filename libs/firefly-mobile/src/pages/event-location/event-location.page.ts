@@ -24,9 +24,9 @@ import { MapboxPlaceType } from '@theory/mapbox';
 })
 export class PageEventLocation extends BaseComponent {
   @Input() virtual: boolean = false;
-  @Input() place: Place;
+  @Input() place!: Place;
 
-  public placeTypes: Array<MapboxPlaceType> = null;
+  public placeTypes!: Array<MapboxPlaceType>;
 
   constructor(
     private store: Store,

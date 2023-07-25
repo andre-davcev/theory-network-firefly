@@ -18,7 +18,7 @@ import {
   styleUrls: ['./auth.page.scss']
 })
 export class PageAuth implements OnInit {
-  @Select(StateApp.initialized) initialized$: Observable<boolean>;
+  @Select(StateApp.initialized) initialized$!: Observable<boolean>;
 
   constructor(private store: Store) {}
 

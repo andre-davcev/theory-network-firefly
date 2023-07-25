@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { ActionSheetController, ToastController } from '@ionic/angular';
 import { ToastOptions } from '@ionic/core';
-import { ToastController, ActionSheetController } from '@ionic/angular';
-import { Action, StateContext, State, Selector } from '@ngxs/store';
+import { TranslateService } from '@ngx-translate/core';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { StateMobileModel } from './mobile.state.model';
-import {
-  ActionMobileToast,
-  ActionMobileMenuOpened,
-  ActionMobileMenuClosed,
-  ActionMobileAuthSelected,
-  ActionMobileAuthSelect
-} from './mobile.actions';
-import { StateMobileOptions } from './mobile.state.options';
 import { Pages } from '../../enums';
+import {
+  ActionMobileAuthSelect,
+  ActionMobileAuthSelected,
+  ActionMobileMenuClosed,
+  ActionMobileMenuOpened,
+  ActionMobileToast
+} from './mobile.actions';
+import { StateMobileModel } from './mobile.state.model';
+import { StateMobileOptions } from './mobile.state.options';
 
 @State<StateMobileModel>(StateMobileOptions)
 @Injectable()

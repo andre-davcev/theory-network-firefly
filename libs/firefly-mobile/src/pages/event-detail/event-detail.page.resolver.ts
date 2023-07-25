@@ -17,6 +17,6 @@ export class ResolverPageEventDetail implements Resolve<void> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<void> {
-    return this.store.dispatch(new ActionEventSetId(route.params.id));
+    return this.store.dispatch(new ActionEventSetId(route.params['id']));
   }
 }

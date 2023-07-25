@@ -23,13 +23,13 @@ import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
   styleUrls: ['./assets-events.page.scss']
 })
 export class PageAssetsEvents extends BaseComponent implements OnInit {
-  @Select(StateUserEvents.data()) events$: Observable<Array<Event>>;
-  @Select(StateUserEvents.found()) found$: Observable<boolean>;
-  @Select(StateUserEvents.empty()) empty$: Observable<boolean>;
-  @Select(StateStorage.images) images$: Observable<
+  @Select(StateUserEvents.data()) events$!: Observable<Array<Event>>;
+  @Select(StateUserEvents.found()) found$!: Observable<boolean>;
+  @Select(StateUserEvents.empty()) empty$!: Observable<boolean>;
+  @Select(StateStorage.images) images$!: Observable<
     Record<string, StorageImage>
   >;
-  @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+  @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
 
   public images: Record<string, StorageImage> = {};
 

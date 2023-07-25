@@ -48,7 +48,7 @@
   <form
     novalidate
     *ngIf="form$ | async"
-    [formGroup]="form$ | async"
+    [formGroup]="(form$ | async)!"
     ngxsForm="events.form"
   >
     <ff-item-image
@@ -63,7 +63,7 @@
 
     <ion-item>
       <ion-input
-        [class.invalid]="!(form$ | async).controls.name.valid && (form$ | async).controls.name.dirty"
+        [class.invalid]="!(form$ | async)?.controls?.['name']?.valid && (form$ | async)?.controls?.['name']?.dirty"
         type="text"
         inputmode="text"
         formControlName="name"
@@ -74,7 +74,7 @@
 
     <ion-item>
       <ion-input
-        [class.invalid]="!(form$ | async).controls.tagline.valid && (form$ | async).controls.tagline.dirty"
+        [class.invalid]="!(form$ | async)?.controls?.['tagline']?.valid && (form$ | async)?.controls?.['tagline']?.dirty"
         type="text"
         inputmode="text"
         formControlName="tagline"
@@ -84,7 +84,7 @@
     </ion-item>
 
     <ff-item-map
-      [place]="place$ | async"
+      [place]="(place$ | async)!"
       [title]="'general.location' | translate"
       (click)="navigate(Pages.EventLocation)"
     >
@@ -98,7 +98,7 @@
           <ion-item id="time-start-trigger">
             <ion-label>{{ 'general.starts' | translate }}</ion-label>
             <ion-label
-              >{{ timeStart$ | async | timestamp: TimestampFormat.Short
+              >{{ (timeStart$ | async)! | timestamp: TimestampFormat.Short
               }}</ion-label
             >
             <ion-popover trigger="time-start-trigger" triggerAction="click">
@@ -108,7 +108,7 @@
                   [min]="now"
                   [max]="'date-time.maxDate' | translate"
                   [disabled]="timeIsLocked$ | async"
-                  [value]="timeStart$ | async | timestamp: TimestampFormat.IsoString"
+                  [value]="(timeStart$ | async)! | timestamp: TimestampFormat.IsoString"
                   presentation="date-time"
                   [cancelText]="'general.cancel' |  translate"
                   [doneText]="'general.done' | translate"
@@ -123,7 +123,7 @@
           <ion-item id="time-ends-trigger">
             <ion-label>{{ 'general.ends' | translate }}</ion-label>
             <ion-label
-              >{{ timeEnd$ | async | timestamp: TimestampFormat.Short
+              >{{ (timeEnd$ | async)! | timestamp: TimestampFormat.Short
               }}</ion-label
             >
             <ion-popover trigger="time-ends-trigger" triggerAction="click">
@@ -133,7 +133,7 @@
                   [min]="now"
                   [max]="'date-time.maxDate' | translate"
                   [disabled]="timeIsLocked$ | async"
-                  [value]="timeEnd$ | async | timestamp: TimestampFormat.IsoString"
+                  [value]="(timeEnd$ | async)! | timestamp: TimestampFormat.IsoString"
                   presentation="date-time"
                   [cancelText]="'general.cancel' |  translate"
                   [doneText]="'general.done' | translate"
@@ -171,7 +171,7 @@
 
           <ff-item-description
             [form]="form$ | async"
-            [class.invalid]="!(form$ | async).controls.description.valid && (form$ | async).controls.description.dirty"
+            [class.invalid]="!(form$ | async)?.controls?.['description']?.valid && (form$ | async)?.controls?.['description']?.dirty"
             [title]="'general.description' | translate"
             description="description"
             [descriptionPlaceholder]="'page.event.descriptionPlaceholder' | translate"

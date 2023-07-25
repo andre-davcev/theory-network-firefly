@@ -21,15 +21,15 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentHomeOptions {
-  @Select(StateUser.isPublisher) isPublisher$: Observable<boolean>;
+  @Select(StateUser.isPublisher) isPublisher$!: Observable<boolean>;
 
   public InterestType: any = InterestType;
   public EventType: any = EventType;
 
-  @Input() interestType: InterestType;
-  @Input() eventType: EventType;
-  @Input() isStream: boolean;
-  @Input() virtual: boolean;
+  @Input() interestType!: InterestType;
+  @Input() eventType!: EventType;
+  @Input() isStream!: boolean;
+  @Input() virtual!: boolean;
 
   constructor(private store: Store, private popover: PopoverController) {}
 

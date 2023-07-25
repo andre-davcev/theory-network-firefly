@@ -25,8 +25,8 @@
 <ion-content>
   <form
     novalidate
-    *ngIf="form$ | async"
-    [formGroup]="form$  | async"
+    *ngIf="form$ | async as form"
+    [formGroup]="form"
     ngxsForm="interests.form"
   >
     <ff-item-image
@@ -41,7 +41,7 @@
 
     <ion-item>
       <ion-input
-        [class.invalid]="!(form$ | async).controls.name.valid && (form$ | async).controls.name.dirty"
+        [class.invalid]="!(form$ | async)?.controls?.['name']?.valid && (form$ | async)?.controls?.['name']?.dirty"
         type="text"
         inputmode="text"
         formControlName="name"
@@ -52,7 +52,7 @@
 
     <ion-item>
       <ion-input
-        [class.invalid]="!(form$ | async).controls.tagline.valid && (form$ | async).controls.tagline.dirty"
+        [class.invalid]="!(form$ | async)?.controls?.['tagline']?.valid && (form$ | async)?.controls?.['tagline']?.dirty"
         type="text"
         inputmode="text"
         formControlName="tagline"
@@ -86,7 +86,7 @@
 
           <ff-item-description
             [form]="form$ | async"
-            [class.invalid]="!(form$ | async).controls.description.valid && (form$ | async).controls.description.dirty"
+            [class.invalid]="!(form$ | async)?.controls?.['description']?.valid && (form$ | async)?.controls?.['description']?.dirty"
             [title]="'general.description' | translate"
             description="description"
             [descriptionPlaceholder]="'page.interest.descriptionPlaceholder' | translate"

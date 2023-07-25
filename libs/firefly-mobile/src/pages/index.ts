@@ -1,6 +1,6 @@
+export * from './asset-interest';
 export * from './assets-events';
 export * from './assets-interests';
-export * from './asset-interest';
 export * from './auth';
 export * from './calendar';
 export * from './event-detail';

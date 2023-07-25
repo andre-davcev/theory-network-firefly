@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Place } from '@firefly/cloud';
-import { DirectiveLoadingOptions } from '@firefly/shared';
-import { Color } from '@firefly/shared/enums';
+import { Color, DirectiveLoadingOptions } from '@firefly/shared';
 import { Select } from '@ngxs/store';
 import { StateLocation } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
@@ -15,11 +14,11 @@ import { filter, takeUntil } from 'rxjs/operators';
   styleUrls: ['./item-map.component.scss']
 })
 export class ComponentItemMap extends BaseComponent implements OnInit {
-  @Input() title: string;
+  @Input() title!: string;
   @Input() interactive: boolean = false;
-  @Input() place: Place;
+  @Input() place!: Place;
 
-  @Select(StateLocation.isValid) locationValid$: Observable<boolean>;
+  @Select(StateLocation.isValid) locationValid$!: Observable<boolean>;
 
   public Color: any = Color;
   public MapMovingMethod: any = MapMovingMethod;

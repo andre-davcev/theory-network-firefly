@@ -22,9 +22,9 @@ export class ResolverPageAssetInterest implements Resolve<void> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<void> {
-    if (route.params.id == null) {
+    if (route.params['id'] == null) {
       return this.store
-        .dispatch(new ActionInterestSetId(route.queryParams.id))
+        .dispatch(new ActionInterestSetId(route.queryParams['id']))
         .pipe(switchMap(() => this.store.dispatch(new ActionAppLoadingHide())));
     } else {
       return this.store.dispatch([

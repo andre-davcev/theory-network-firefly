@@ -25,13 +25,13 @@ import { StateStorage, StorageImage } from '@theory/firebase';
   styleUrls: ['./assets-interests.page.scss']
 })
 export class PageAssetsInterests extends BaseComponent implements OnInit {
-  @Select(StateUserInterests.data()) list$: Observable<Array<Interest>>;
-  @Select(StateUserInterests.found()) found$: Observable<boolean>;
-  @Select(StateUserInterests.empty()) empty$: Observable<boolean>;
-  @Select(StateStorage.images) images$: Observable<
+  @Select(StateUserInterests.data()) list$!: Observable<Array<Interest>>;
+  @Select(StateUserInterests.found()) found$!: Observable<boolean>;
+  @Select(StateUserInterests.empty()) empty$!: Observable<boolean>;
+  @Select(StateStorage.images) images$!: Observable<
     Record<string, StorageImage>
   >;
-  @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+  @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
 
   @Input() modal: boolean = false;
 

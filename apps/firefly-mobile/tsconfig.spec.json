@@ -1,29 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/spec",
+    "outDir": "../../dist/out-tsc",
     "module": "commonjs",
-    "types": ["jest", "node"],
-    "baseUrl": "./",
-    "paths": {
-      "@theory/bigdatacloud": ["../../libs/bigdatacloud/src/index.ts"],
-      "@theory/capacitor": ["../../libs/capacitor/src/index.ts"],
-      "@theory/core": ["../../libs/core/src/index.ts"],
-      "@theory/firebase": ["../../libs/firebase/src/index.ts"],
-      "@theory/google": ["../../libs/google/src/index.ts"],
-      "@theory/ionic": ["../../libs/ionic/src/index.ts"],
-      "@theory/mapbox": ["../../libs/mapbox/src/index.ts"],
-      "@theory/ngxs": ["../../libs/ngxs/src/index.ts"],
-      "@firefly/cloud": ["../../apps/firefly-functions/src/shared/index.ts"],
-      "@firefly/mobile": ["../../libs/firefly-mobile/src/index.ts"],
-      "@firefly/shared": ["../../libs/firefly-shared/src/index.ts"]
-    }
+    "types": ["jest", "node"]
   },
-  "files": ["src/test.ts", "src/zone-flags.ts", "src/polyfills.ts"],
-  "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts",
-    "src/**/*.d.ts",
-    "jest.config.ts"
-  ]
+  "files": ["src/test-setup.ts"],
+  "include": ["**/*.spec.ts", "**/*.test.ts", "**/*.d.ts", "jest.config.ts"]
 }

@@ -25,7 +25,7 @@ import {
 } from '@firefly/shared';
 import { PlatformEnum } from '@theory/ionic';
 
-import { PageLogin } from '../pages';
+import { PageLogin } from '@firefly/mobile';
 
 @Component({
   selector: 'app-root',
@@ -35,10 +35,10 @@ import { PageLogin } from '../pages';
 export class ComponentApp {
   @Select(StateUser.found()) userFound$: Observable<boolean>;
 
-  public Pages: any = Pages;
-  public IconType: any = IconType;
-  public IconSize: any = IconSize;
-  public Color: any = Color;
+  public Pages = Pages;
+  public IconType = IconType;
+  public IconSize = IconSize;
+  public Color = Color;
 
   constructor(
     private platform: Platform,

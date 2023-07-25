@@ -22,9 +22,9 @@ export class ComponentList implements OnChanges {
   @Input() data: Array<any> = [];
   @Input() delete: boolean = false;
 
-  @Input() icon: string;
-  @Input() title: string;
-  @Input() subtitle: string;
+  @Input() icon!: string;
+  @Input() title!: string;
+  @Input() subtitle!: string;
 
   @Output() deleted: EventEmitter<any> = new EventEmitter();
   @Output() clicked: EventEmitter<any> = new EventEmitter();
@@ -32,13 +32,13 @@ export class ComponentList implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.data && changes.data.currentValue) {
+    if (changes['data'] && changes['data'].currentValue) {
       const data: Array<any> = [];
       const icon: string = this.icon;
       const title: string = this.title;
       const subtitle: string = this.subtitle;
 
-      for (const row of changes.data.currentValue) {
+      for (const row of changes['data'].currentValue) {
         data.push({
           icon: ServiceUtil.property(row, icon),
           title: ServiceUtil.property(row, title),

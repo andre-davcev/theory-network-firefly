@@ -28,9 +28,9 @@ import { BaseComponent } from '@theory/core';
   styleUrls: ['./notification-detail.page.scss']
 })
 export class PageNotificationDetail extends BaseComponent {
-  @Select(StateEvent.image) image$: Observable<string>;
-  @Select(StateEvent.data()) event$: Observable<any>;
-  @Select(StateEvent.canEdit) canEdit$: Observable<boolean>;
+  @Select(StateEvent.image) image$!: Observable<string>;
+  @Select(StateEvent.data()) event$!: Observable<any>;
+  @Select(StateEvent.canEdit) canEdit$!: Observable<boolean>;
 
   public Pages: any = Pages;
 

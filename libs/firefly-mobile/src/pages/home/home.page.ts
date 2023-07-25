@@ -38,15 +38,15 @@ import { PageNotifications } from '../notifications';
   styleUrls: ['./home.page.scss']
 })
 export class PageHome extends BaseComponent {
-  @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
-  @Select(StateAlerts.unreadCount) unreadCount$: Observable<number>;
-  @Select(StateAlerts.unreadExists) unreadExists$: Observable<boolean>;
-  @Select(StateUser.authenticated) authenticated$: Observable<boolean>;
-  @Select(StateUser.isUser) isUser$: Observable<boolean>;
-  @Select(StateLocation.permissionDenied) locationDenied$: Observable<boolean>;
+  @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
+  @Select(StateAlerts.unreadCount) unreadCount$!: Observable<number>;
+  @Select(StateAlerts.unreadExists) unreadExists$!: Observable<boolean>;
+  @Select(StateUser.authenticated) authenticated$!: Observable<boolean>;
+  @Select(StateUser.isUser) isUser$!: Observable<boolean>;
+  @Select(StateLocation.permissionDenied) locationDenied$!: Observable<boolean>;
 
   @ViewChild(IonSearchbar, { static: false })
-  private searchbar: IonSearchbar;
+  private searchbar!: IonSearchbar;
 
   public searching: boolean = false;
 
@@ -133,8 +133,8 @@ export class PageHome extends BaseComponent {
     this.store.dispatch(new ActionSearchReset()).subscribe();
   }
 
-  public search(event: CustomEvent) {
-    if (event.detail.value.length < 3) return;
+  public search(event: Event) {
+    if ((event as CustomEvent).detail.value.length < 3) return;
 
     const pageStream: boolean = this.store.selectSnapshot(
       StateMobile.pageStream
@@ -145,11 +145,13 @@ export class PageHome extends BaseComponent {
 
     return pageStream
       ? this.store
-          .dispatch(new ActionSearchInterests(event.detail.value))
+          .dispatch(
+            new ActionSearchInterests((event as CustomEvent).detail.value)
+          )
           .subscribe()
       : pageAlerts
       ? this.store
-          .dispatch(new ActionSearchEvents(event.detail.value))
+          .dispatch(new ActionSearchEvents((event as CustomEvent).detail.value))
           .subscribe()
       : of(null);
   }

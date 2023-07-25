@@ -15,8 +15,8 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
   styleUrls: ['./login.page.scss']
 })
 export class PageLogin {
-  @Select(StateUser.authenticating) authenticating$: Observable<boolean>;
-  @Select(StateUser.errorAuth) error$: Observable<FirebaseError>;
+  @Select(StateUser.authenticating) authenticating$!: Observable<boolean>;
+  @Select(StateUser.errorAuth) error$!: Observable<FirebaseError>;
 
   @Input() page:
     | Pages.Login
@@ -30,6 +30,16 @@ export class PageLogin {
   public AuthType: any = AuthType;
 
   constructor(private store: Store, private modal: ModalController) {}
+
+  public get authType(): AuthType {
+    return this.page === Pages.Login
+      ? AuthType.Login
+      : this.page === Pages.SignUp
+      ? AuthType.SignUp
+      : this.page === Pages.ResetPassword
+      ? AuthType.ResetPassword
+      : AuthType.Login;
+  }
 
   public ionViewWillEnter(): void {
     this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Dark }));

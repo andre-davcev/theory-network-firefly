@@ -21,10 +21,10 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
   styleUrls: ['./user-profile.page.scss']
 })
 export class PageUserProfile {
-  @Select(StateUserProfile.formGroup()) form$: Observable<UntypedFormGroup>;
-  @Select(StateUser.formGroup()) formUser$: Observable<UntypedFormGroup>;
-  @Select(StateUser.email) email$: Observable<string>;
-  @Select(StateMobile.menuOpen) menuOpen$: Observable<boolean>;
+  @Select(StateUserProfile.formGroup()) form$!: Observable<UntypedFormGroup>;
+  @Select(StateUser.formGroup()) formUser$!: Observable<UntypedFormGroup>;
+  @Select(StateUser.email) email$!: Observable<string>;
+  @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
 
   public IconType: any = IconType;
   public Color: any = Color;

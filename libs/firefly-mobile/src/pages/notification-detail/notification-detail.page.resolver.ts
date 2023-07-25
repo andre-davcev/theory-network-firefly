@@ -17,12 +17,14 @@ export class ResolverPageNotificationDetail implements Resolve<void> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<void> {
-    if (route.queryParams.isEvent != null) {
+    if (route.queryParams['isEvent'] != null) {
       return this.store.dispatch(
-        new ActionEventSetIdAnonymous(route.params.id)
+        new ActionEventSetIdAnonymous(route.params['id'])
       );
     } else {
-      return this.store.dispatch(new ActionEventSetId(route.params.id, true));
+      return this.store.dispatch(
+        new ActionEventSetId(route.params['id'], true)
+      );
     }
   }
 }

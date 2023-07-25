@@ -1,11 +1,11 @@
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
   Input,
-  Output,
-  EventEmitter
+  Output
 } from '@angular/core';
-import { UntypedFormGroup, AbstractControl } from '@angular/forms';
+import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'ff-item-header',
@@ -14,19 +14,19 @@ import { UntypedFormGroup, AbstractControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentItemHeader {
-  @Input() form: UntypedFormGroup;
+  @Input() form!: UntypedFormGroup;
 
-  @Input() iconUrl: string;
-  @Input() iconUrlEmpty: string;
-  @Input() iconPlaceholder: string;
+  @Input() iconUrl!: string;
+  @Input() iconUrlEmpty!: string;
+  @Input() iconPlaceholder!: string;
 
-  @Input() title: string;
-  @Input() titlePlaceholder: string;
+  @Input() title!: string;
+  @Input() titlePlaceholder!: string;
 
-  @Input() subtitle: string;
-  @Input() subtitlePlaceholder: string;
+  @Input() subtitle!: string;
+  @Input() subtitlePlaceholder!: string;
 
-  @Input() iconOnly: boolean;
+  @Input() iconOnly!: boolean;
 
   @Output() iconClicked: EventEmitter<void> = new EventEmitter();
 
@@ -49,8 +49,8 @@ export class ComponentItemHeader {
   }
 
   public hasError(name: string): boolean {
-    const control: AbstractControl = this.form.get(name);
+    const control: AbstractControl | null = this.form.get(name);
 
-    return control.invalid && (control.dirty || control.touched);
+    return (control?.invalid || false) && (control?.dirty || control?.touched);
   }
 }

@@ -36,25 +36,25 @@ import { TimestampFormat } from '@theory/firebase';
   styleUrls: ['./stream.page.scss']
 })
 export class PageStream extends BaseComponent implements OnInit {
-  @Select(StateUser.isUser) isUser$: Observable<boolean>;
-  @Select(StateInterest.events) events$: Observable<Event[]>;
-  @Select(StateInterests.data) data$: Observable<Array<StreamInterest>>;
-  @Select(StateInterests.found) found$: Observable<boolean>;
-  @Select(StateInterests.empty) empty$: Observable<boolean>;
-  @Select(StateInterests.add) add$: Observable<boolean>;
-  @Select(StateUser.subscriptionsStatus) subscriptions$: Observable<
+  @Select(StateUser.isUser) isUser$!: Observable<boolean>;
+  @Select(StateInterest.events) events$!: Observable<Event[]>;
+  @Select(StateInterests.data) data$!: Observable<Array<StreamInterest>>;
+  @Select(StateInterests.found) found$!: Observable<boolean>;
+  @Select(StateInterests.empty) empty$!: Observable<boolean>;
+  @Select(StateInterests.add) add$!: Observable<boolean>;
+  @Select(StateUser.subscriptionsStatus) subscriptions$!: Observable<
     Record<string, SubscriptionPartial>
   >;
-  @Select(StateInterests.emptyMessage) emptyMessage$: Observable<string>;
-  @Select(StateSearch.searchResults) searchResults$: Observable<
+  @Select(StateInterests.emptyMessage) emptyMessage$!: Observable<string>;
+  @Select(StateSearch.searchResults) searchResults$!: Observable<
     Array<Interest>
   >;
   @Select(StateSearch.searchResultsFound)
-  searchResultsFound$: Observable<boolean>;
+  searchResultsFound$!: Observable<boolean>;
 
   public currentlyOpenedItemIndex = -1;
-  public currentlyOpenedItems = [];
-  public interestEvents: Array<Array<Event>> = [];
+  public currentlyOpenedItems: Array<boolean> = [];
+  public interestEvents: Array<Array<Event> | null> = [];
   public spinner: Array<boolean> = [];
   public subscriptions: Record<string, SubscriptionPartial> = {};
 
@@ -62,7 +62,7 @@ export class PageStream extends BaseComponent implements OnInit {
   public TimestampFormat: any = TimestampFormat;
 
   @ViewChild(IonInfiniteScroll)
-  public infiniteScroll: IonInfiniteScroll;
+  public infiniteScroll!: IonInfiniteScroll;
 
   constructor(private store: Store) {
     super();
@@ -96,7 +96,7 @@ export class PageStream extends BaseComponent implements OnInit {
     this.store.dispatch(new ActionInterestsSubscriptionOnOff(interest.id, on));
   }
 
-  public setOpened(itemIndex, interest: Interest): void {
+  public setOpened(itemIndex: number, interest: Interest): void {
     this.currentlyOpenedItemIndex = itemIndex;
     this.currentlyOpenedItems[itemIndex] = true;
     this.spinner[itemIndex] = true;

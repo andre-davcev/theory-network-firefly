@@ -1,12 +1,12 @@
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
   Input,
-  Output,
-  EventEmitter
+  Output
 } from '@angular/core';
-import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
-import { UntypedFormGroup, AbstractControl } from '@angular/forms';
+import { AbstractControl, UntypedFormGroup } from '@angular/forms';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
   selector: 'ff-item-image',
@@ -15,20 +15,24 @@ import { UntypedFormGroup, AbstractControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentItemImage {
-  @Input() form: UntypedFormGroup;
+  @Input() form!: UntypedFormGroup | null | undefined;
   @Input() edit: boolean = false;
-  @Input() url: string;
-  @Input() placeholder: string;
-  @Input() title: string;
+  @Input() url!: string | null;
+  @Input() placeholder!: string;
+  @Input() title!: string;
 
   @Output() clicked: EventEmitter<void> = new EventEmitter();
 
   constructor(private sanitizer: DomSanitizer) {}
 
   public clickedImage(): void {
-    this.form.markAsDirty();
-    const control: AbstractControl = this.form.get(['metadata', 'image']);
-    control.markAsDirty();
+    this.form?.markAsDirty();
+    const control: AbstractControl | null | undefined = this.form?.get([
+      'metadata',
+      'image'
+    ]);
+    control?.markAsDirty();
+
     this.clicked.next();
   }
 

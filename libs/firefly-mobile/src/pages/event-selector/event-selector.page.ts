@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { Alert, DateEvents } from '@firefly/cloud';
+import { Alert, DateEvents, Event } from '@firefly/cloud';
 import {
   ActionCalendarPage,
   ActionCalendarSetType,
@@ -23,13 +23,13 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
   styleUrls: ['./event-selector.page.scss']
 })
 export class PageEventSelector {
-  @Select(StateCalendar.data) data$: Observable<Array<DateEvents>>;
-  @Select(StateCalendar.exists) exists$: Observable<boolean>;
+  @Select(StateCalendar.data) data$!: Observable<Array<DateEvents>>;
+  @Select(StateCalendar.exists) exists$!: Observable<boolean>;
 
   @ViewChild(IonInfiniteScroll)
-  private infiniteScroll: IonInfiniteScroll;
+  private infiniteScroll!: IonInfiniteScroll;
 
-  private type: EventType;
+  private type!: EventType;
 
   public IconType: any = IconType;
 
@@ -42,7 +42,7 @@ export class PageEventSelector {
     this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
   }
 
-  public select(event: Alert): void {
+  public select(event: Alert | Event): void {
     const snapshot = this.store.selectSnapshot(
       StateUserEvents.snapshotLookup()
     )[event.id];

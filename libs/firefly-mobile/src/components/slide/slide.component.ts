@@ -17,9 +17,9 @@ import { TimestampFormat } from '@theory/firebase';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComponentSlide {
-  @Input() slide: Alert;
-  @Input() buttonText: string;
-  @Input() routerLink: string;
+  @Input() slide!: Alert;
+  @Input() buttonText!: string;
+  @Input() routerLink!: string;
   @Input() deleteShow: boolean = false;
 
   @Output() alertGoClicked: EventEmitter<void> = new EventEmitter();

@@ -25,10 +25,10 @@ export class ResolverPageInterestDetail implements Resolve<void> {
     state: RouterStateSnapshot
   ): Observable<void> {
     return this.store
-      .dispatch(new ActionInterestSetId(route.queryParams.id))
+      .dispatch(new ActionInterestSetId(route.queryParams['id']))
       .pipe(
         switchMap(() =>
-          route.queryParams.id == null
+          route.queryParams['id'] == null
             ? of(null)
             : this.store.selectSnapshot(StateInterest.canEdit)
             ? this.store.dispatch([

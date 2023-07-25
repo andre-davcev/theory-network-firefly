@@ -1,21 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2020",
-    "downlevelIteration": true,
-    "lib": ["es2018", "dom"],
-    "typeRoots": ["node_modules/@types"]
-  },
   "files": [],
   "include": [],
   "references": [
@@ -24,10 +8,13 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.editor.json"
     }
   ],
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "esnext"
   }
 }

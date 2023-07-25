@@ -1,5 +1,5 @@
 <tn-image-grid
-  [urls]="eventLibrary$ | async"
+  [urls]="(eventLibrary$ | async)!"
   [square]="true"
   (clicked)="imageClicked($event)"
 ></tn-image-grid>

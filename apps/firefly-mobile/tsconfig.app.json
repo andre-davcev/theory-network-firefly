@@ -1,34 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/app",
-    "baseUrl": "./",
+    "outDir": "../../dist/out-tsc",
     "types": [],
-    "paths": {
-      "@theory/bigdatacloud": ["../../libs/bigdatacloud/src/index.ts"],
-      "@theory/capacitor": ["../../libs/capacitor/src/index.ts"],
-      "@theory/core": ["../../libs/core/src/index.ts"],
-      "@theory/firebase": ["../../libs/firebase/src/index.ts"],
-      "@theory/google": ["../../libs/google/src/index.ts"],
-      "@theory/ionic": ["../../libs/ionic/src/index.ts"],
-      "@theory/mapbox": ["../../libs/mapbox/src/index.ts"],
-      "@theory/ngxs": ["../../libs/ngxs/src/index.ts"],
-      "@firefly/cloud": ["../../apps/firefly-functions/src/shared/index.ts"],
-      "@firefly/mobile": ["../../libs/firefly-mobile/src/index.ts"],
-      "@firefly/shared": ["../../libs/firefly-shared/src/index.ts"]
-    }
+    "module": "esnext"
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
-  "include": ["**/*.ts", "**/*.d.ts"],
-  "exclude": [
-    "src/test-setup.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts",
-    "jest.config.ts",
-    "**/pages/categories/**",
-    "**/pages/event-assets/**",
-    "**/pages/event-library/**",
-    "**/environments/environment.prod.ts",
-    "**/environments/version.ts"
-  ]
+  "exclude": ["jest.config.ts"]
 }

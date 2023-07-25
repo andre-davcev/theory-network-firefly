@@ -17,7 +17,7 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ResolverPageAssetsInterests implements Resolve<void> {
-  @Select(StateUserInterests.initialized()) initialized$: Observable<boolean>;
+  @Select(StateUserInterests.initialized()) initialized$!: Observable<boolean>;
 
   constructor(private store: Store) {}
 

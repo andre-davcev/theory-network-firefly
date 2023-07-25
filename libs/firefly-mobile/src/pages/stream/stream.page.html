@@ -104,9 +104,9 @@
           </mat-accordion>
 
           <ff-icon-subscribe
-            [subscribed]="subscriptions[interest.id]"
+            [subscribed]="subscriptions[interest.id] != null"
             [count]="interest.subscriberCount"
-            [on]="subscriptions[interest.id]?.on"
+            [on]="subscriptions[interest.id].on"
             (clicked)="toggle($event, interest)"
             (clickedOn)="toggleOn($event, interest)"
           >
@@ -123,7 +123,7 @@
     *ngIf="empty$ | async"
     slot="fixed"
     [icon]="IconType.Stream"
-    [message]="(emptyMessage$ | async) | translate"
+    [message]="(emptyMessage$ | async)! | translate"
   >
   </ff-icon-message>
 
