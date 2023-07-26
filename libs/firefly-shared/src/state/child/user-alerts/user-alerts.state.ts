@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
-import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
@@ -65,6 +65,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
     storage: ServiceStorage,
     private calendar: Calendar,
     private callNumber: CallNumber,
+    private launchNavigator: LaunchNavigator,
     private store: Store
   ) {
     super(
@@ -278,7 +279,7 @@ export class StateUserAlerts extends StateChild<Alert, StateUserAlertsModel> {
     { alert }: ActionUserAlertsLaunchNavigation
   ) {
     return from(
-      LaunchNavigator.navigate([
+      this.launchNavigator.navigate([
         alert.geopoint.latitude,
         alert.geopoint.longitude
       ])

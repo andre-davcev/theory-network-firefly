@@ -6,7 +6,6 @@ import { BehaviorSubject, Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
 import { Alert } from '@firefly/cloud';
-import { Pages } from '@firefly/mobile';
 import {
   ActionAlertsSlideIndex,
   ActionAlertsSlideRestore,
@@ -17,6 +16,7 @@ import {
   Translation
 } from '@firefly/shared';
 import { BaseComponent } from '@theory/core';
+import { Pages } from '../../enums';
 
 @Component({
   selector: 'app-page-notifications',

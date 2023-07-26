@@ -12,7 +12,6 @@ import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Alert, Event } from '@firefly/cloud';
-import { Pages } from '@firefly/mobile';
 import {
   ActionUserAlertsDelete,
   ActionUserAlertsGo,
@@ -21,6 +20,7 @@ import {
 } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
+import { Pages } from '../../enums';
 
 @Component({
   selector: 'app-page-notification-detail',

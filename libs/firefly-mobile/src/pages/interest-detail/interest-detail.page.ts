@@ -22,7 +22,6 @@ import {
 } from 'rxjs/operators';
 
 import { Event, Interest } from '@firefly/cloud';
-import { ActionMobileToast, Pages } from '@firefly/mobile';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow,
@@ -45,6 +44,8 @@ import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
 
+import { Pages } from '../../enums';
+import { ActionMobileToast } from '../../state';
 import { PageEventDetail } from '../event-detail';
 import { PageEventSelector } from '../event-selector';
 

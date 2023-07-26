@@ -16,7 +16,6 @@ import {
 } from 'rxjs/operators';
 
 import { Event } from '@firefly/cloud';
-import { ActionMobileToast, Pages } from '@firefly/mobile';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow,
@@ -37,6 +36,8 @@ import {
 } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
+import { Pages } from '../../enums';
+import { ActionMobileToast } from '../../state';
 
 @Component({
   selector: 'app-page-asset-interest',

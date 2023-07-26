@@ -4,15 +4,15 @@ import { RouterModule } from '@angular/router';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 import {
-  ModuleComponentItemEvents,
-  ModuleComponentSlide
-} from '@firefly/mobile';
-import {
   ModuleComponentButtonAdd,
   ModuleComponentIconMessage
 } from '@firefly/shared';
 import { ModuleDirectiveElevation } from '@theory/google';
 
+import {
+  ModuleComponentItemEvents,
+  ModuleComponentSlide
+} from '../../components';
 import { ModulePage } from '../../modules';
 import { ModulePageLogin } from '../login';
 import { PageCalendar } from './calendar.page';

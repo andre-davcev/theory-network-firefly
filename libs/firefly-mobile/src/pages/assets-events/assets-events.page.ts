@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { Event } from '@firefly/cloud';
-import { Pages, StateMobile } from '@firefly/mobile';
 import {
   ActionAppLoadingShow,
   IconType,
@@ -16,6 +15,8 @@ import {
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
+import { Pages } from '../../enums';
+import { StateMobile } from '../../state';
 
 @Component({
   selector: 'app-page-assets-events',

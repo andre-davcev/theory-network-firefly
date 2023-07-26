@@ -44,6 +44,7 @@ import { StateDevice, StateLanguage, StateLocation } from '@theory/capacitor';
 import { FirebaseEnvironment, StateStorage } from '@theory/firebase';
 import { MapboxEnvironment } from '@theory/mapbox';
 
+import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 import { environment } from '../../environments/environment';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -121,7 +122,8 @@ export function createTranslateLoader(http: HttpClient) {
     { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
     { provide: MapboxEnvironment, useValue: environment.apis.mapbox },
     Calendar,
-    CallNumber
+    CallNumber,
+    LaunchNavigator
     // { provide: ErrorHandler,       useClass: ErrorHandlerApp }
   ]
 })

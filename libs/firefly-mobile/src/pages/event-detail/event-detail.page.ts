@@ -13,7 +13,6 @@ import { Observable, from, of } from 'rxjs';
 import { catchError, finalize, map, switchMap } from 'rxjs/operators';
 
 import { Place } from '@firefly/cloud';
-import { ActionMobileToast, Pages } from '@firefly/mobile';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow,
@@ -40,6 +39,8 @@ import {
 import { TimestampFormat } from '@theory/firebase';
 
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Pages } from '../../enums';
+import { ActionMobileToast } from '../../state';
 import {
   PageAssetsInterests,
   ResolverPageAssetsInterests

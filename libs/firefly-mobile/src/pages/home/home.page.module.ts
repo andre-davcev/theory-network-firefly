@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ModuleComponentSlide } from '@firefly/mobile';
 import { ModuleDirectiveElevation } from '@theory/google';
 
+import { ModuleComponentSlide } from '../../components';
 import { ModulePage } from '../../modules';
 import { ModulePageLogin } from '../login';
 import { ModulePageNotifications } from '../notifications';

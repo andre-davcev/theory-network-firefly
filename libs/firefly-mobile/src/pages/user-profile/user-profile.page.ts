@@ -5,7 +5,6 @@ import { MenuController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { StateMobile } from '@firefly/mobile';
 import {
   ActionUserIsPublisherSet,
   Color,
@@ -14,6 +13,7 @@ import {
   StateUserProfile
 } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { StateMobile } from '../../state';
 
 @Component({
   selector: 'app-page-user-profile',

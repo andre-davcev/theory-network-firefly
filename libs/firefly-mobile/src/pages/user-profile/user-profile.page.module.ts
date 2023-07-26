@@ -3,10 +3,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
-import { ModuleComponentItemHeader } from '@firefly/mobile';
 import { ModuleComponentIcon } from '@firefly/shared';
 import { ModuleDirectiveElevation } from '@theory/google';
 
+import { ModuleComponentItemHeader } from '../../components';
 import { ModulePage } from '../../modules';
 import { PageUserProfile } from './user-profile.page';
 import { RoutesPageUserProfile } from './user-profile.page.routes';

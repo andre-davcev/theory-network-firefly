@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { Pages } from '@firefly/mobile';
-
+import { Pages } from '../../enums';
 import { PageHome } from './home.page';
 import { ResolverPageHome } from './home.page.resolver';
 
@@ -15,11 +14,12 @@ export const RoutesPageHome: Routes = [
 
       {
         path: Pages.Stream,
-        loadChildren: () => import('..').then((m) => m.ModulePageStream)
+        loadChildren: () => import('../stream').then((m) => m.ModulePageStream)
       },
       {
         path: Pages.Notifications,
-        loadChildren: () => import('..').then((m) => m.ModulePageNotifications)
+        loadChildren: () =>
+          import('../notifications').then((m) => m.ModulePageNotifications)
       }
     ]
   }

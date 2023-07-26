@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { Interest } from '@firefly/cloud';
-import { Pages, StateMobile } from '@firefly/mobile';
 import {
   ActionAppLoadingShow,
   ActionEventInterestAdd,
@@ -18,6 +17,8 @@ import {
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage } from '@theory/firebase';
+import { Pages } from '../../enums';
+import { StateMobile } from '../../state';
 
 @Component({
   selector: 'app-page-assets-interests',

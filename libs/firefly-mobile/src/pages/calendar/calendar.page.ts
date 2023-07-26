@@ -14,12 +14,6 @@ import { switchMap, take } from 'rxjs/operators';
 
 import { Alert, DateEvents, Event, Interest } from '@firefly/cloud';
 import {
-  ActionMobileAuthSelect,
-  ComponentHomeOptions,
-  Pages,
-  StateMobile
-} from '@firefly/mobile';
-import {
   ActionAppLoadingShow,
   ActionCalendarPage,
   ActionInterestGet,
@@ -39,6 +33,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import algoliaSearch, { SearchClient, SearchIndex } from 'algoliasearch/lite';
+import { ComponentHomeOptions } from '../../components';
+import { Pages } from '../../enums';
+import { ActionMobileAuthSelect, StateMobile } from '../../state';
 
 @Component({
   selector: 'app-page-calendar',

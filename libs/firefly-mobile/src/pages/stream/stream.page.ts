@@ -11,7 +11,6 @@ import {
   StreamInterest,
   SubscriptionPartial
 } from '@firefly/cloud';
-import { ActionMobileAuthSelect, Pages } from '@firefly/mobile';
 import {
   ActionAppLoadingShow,
   ActionInterestEventsGetAnonymous,
@@ -29,6 +28,8 @@ import {
 } from '@firefly/shared';
 import { BaseComponent } from '@theory/core';
 import { TimestampFormat } from '@theory/firebase';
+import { Pages } from '../../enums';
+import { ActionMobileAuthSelect } from '../../state';
 
 @Component({
   selector: 'app-page-stream',

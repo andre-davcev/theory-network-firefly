@@ -13,12 +13,6 @@ import { Observable, from, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
 import {
-  ActionMobileAuthSelect,
-  ComponentHomeOptions,
-  Pages,
-  StateMobile
-} from '@firefly/mobile';
-import {
   ActionSearchEvents,
   ActionSearchInterests,
   ActionSearchReset,
@@ -30,6 +24,9 @@ import {
 import { ActionDeviceStatusBarSet, StateLocation } from '@theory/capacitor';
 import { BaseComponent, CoreEnum } from '@theory/core';
 
+import { ComponentHomeOptions } from '../../components';
+import { Pages } from '../../enums';
+import { ActionMobileAuthSelect, StateMobile } from '../../state';
 import { PageNotifications } from '../notifications';
 
 @Component({

@@ -5,9 +5,10 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { Pages, StateMobile } from '@firefly/mobile';
 import { Color, IconSize, IconType } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+import { Pages } from '../../enums';
+import { StateMobile } from '../../state';
 
 @Component({
   selector: 'app-page-categories',
