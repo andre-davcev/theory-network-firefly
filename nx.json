@@ -23,8 +23,7 @@
     "warnings": {
       "typescriptMismatch": false,
       "versionMismatch": false
-    },
-    "defaultCollection": "@nrwl/workspace"
+    }
   },
   "defaultProject": "firefly-mobile",
   "generators": {
@@ -62,6 +61,15 @@
     },
     "lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    },
+    "build": {
+      "inputs": ["production", "^production"]
     }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": [],
+    "production": ["default"]
   }
 }
