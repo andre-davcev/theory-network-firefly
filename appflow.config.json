@@ -5,7 +5,7 @@
       "root": ".",
       "dependencyInstallCommand": "npm run fire-ionic-install",
       "webBuildCommand": "npm run fire-ionic-ios-prd-build",
-      "iosPath": "apps/firefly-mobile/ios",
+      "iosPath": "apps/firefly-mobile/ios/App",
       "androidPath": "apps/firefly-mobile/android"
     }
   ]
