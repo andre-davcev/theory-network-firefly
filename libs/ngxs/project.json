@@ -1,0 +1,33 @@
+{
+  "sourceRoot": "libs/ngxs/src",
+  "projectType": "library",
+  "prefix": "tn",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/ngxs/tsconfig.lib.json",
+        "project": "libs/ngxs/ng-package.json",
+        "buildableProjectDepsInPackageJsonType": "dependencies"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/ngxs/src/**/*.ts", "libs/ngxs/src/**/*.html"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/ngxs/jest.config.ts"
+      }
+    }
+  },
+  "generators": {
+    "@nrwl/angular:component": {
+      "styleext": "scss"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "sourceRoot": "e2e/firefly-web/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "e2e/firefly-web/cypress.json",
+        "tsConfig": "e2e/firefly-web/tsconfig.e2e.json",
+        "devServerTarget": "firefly-web:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "firefly-web:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "e2e/firefly-web/src/**/*.ts",
+          "e2e/firefly-web/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  }
+}

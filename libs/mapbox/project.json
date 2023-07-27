@@ -1,0 +1,31 @@
+{
+  "sourceRoot": "libs/mapbox/src",
+  "projectType": "library",
+  "prefix": "tn",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/mapbox/tsconfig.lib.json",
+        "project": "libs/mapbox/ng-package.json",
+        "buildableProjectDepsInPackageJsonType": "dependencies"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/mapbox/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/mapbox/src/**/*.ts",
+          "libs/mapbox/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  }
+}

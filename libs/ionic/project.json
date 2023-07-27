@@ -1,0 +1,31 @@
+{
+  "sourceRoot": "libs/ionic/src",
+  "projectType": "library",
+  "prefix": "tn",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/ionic/tsconfig.lib.json",
+        "project": "libs/ionic/ng-package.json",
+        "buildableProjectDepsInPackageJsonType": "dependencies"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/ionic/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/ionic/src/**/*.ts",
+          "libs/ionic/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  }
+}

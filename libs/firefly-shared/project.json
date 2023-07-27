@@ -1,0 +1,31 @@
+{
+  "sourceRoot": "libs/firefly-shared/src",
+  "projectType": "library",
+  "prefix": "ff",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/firefly-shared/tsconfig.lib.json",
+        "project": "libs/firefly-shared/ng-package.json",
+        "buildableProjectDepsInPackageJsonType": "dependencies"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/firefly-shared/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/firefly-shared/src/**/*.ts",
+          "libs/firefly-shared/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  }
+}

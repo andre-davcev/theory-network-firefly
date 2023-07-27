@@ -1,0 +1,136 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/firefly-mobile/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "apps/firefly-mobile/www",
+        "index": "apps/firefly-mobile/src/index.html",
+        "main": "apps/firefly-mobile/src/main.ts",
+        "polyfills": "apps/firefly-mobile/src/polyfills.ts",
+        "tsConfig": "apps/firefly-mobile/tsconfig.app.json",
+        "allowedCommonJsDependencies": [
+          "@mapbox/mapbox-gl-geocoder",
+          "algoliasearch/lite",
+          "mapbox-gl",
+          "moment"
+        ],
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/firefly-mobile/src/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "node_modules/ionicons/dist/ionicons/svg",
+            "output": "./svg"
+          }
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "node_modules",
+            "libs/firefly-shared/src/sass",
+            "apps/firefly-mobile/src/sass"
+          ]
+        },
+        "styles": [
+          {
+            "input": "apps/firefly-mobile/src/sass/_properties.scss"
+          },
+          {
+            "input": "apps/firefly-mobile/src/sass/_global.scss"
+          }
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/firefly-mobile/src/environments/environment.ts",
+              "with": "apps/firefly-mobile/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "aot": true,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            }
+          ]
+        },
+        "ci": {
+          "progress": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "firefly-mobile:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "firefly-mobile:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "firefly-mobile:build"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/firefly-mobile/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/firefly-mobile/src/**/*.ts",
+          "apps/firefly-mobile/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "ionic-cordova-build": {
+      "executor": "@ionic/angular-toolkit:cordova-build",
+      "options": {
+        "browserTarget": "firefly-mobile:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "firefly-mobile:build:production"
+        }
+      }
+    },
+    "ionic-cordova-serve": {
+      "executor": "@ionic/angular-toolkit:cordova-serve",
+      "options": {
+        "cordovaBuildTarget": "firefly-mobile:ionic-cordova-build",
+        "devServerTarget": "firefly-mobile:serve"
+      },
+      "configurations": {
+        "production": {
+          "cordovaBuildTarget": "firefly-mobile:ionic-cordova-build:production",
+          "devServerTarget": "firefly-mobile:serve:production"
+        }
+      }
+    }
+  }
+}

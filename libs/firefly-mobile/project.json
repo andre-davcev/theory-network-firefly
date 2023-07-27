@@ -1,0 +1,31 @@
+{
+  "sourceRoot": "libs/firefly-mobile/src",
+  "projectType": "library",
+  "prefix": "ff",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/firefly-mobile/tsconfig.lib.json",
+        "project": "libs/firefly-mobile/ng-package.json",
+        "buildableProjectDepsInPackageJsonType": "dependencies"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/firefly-mobile/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/firefly-mobile/src/**/*.ts",
+          "libs/firefly-mobile/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  }
+}

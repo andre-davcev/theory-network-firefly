@@ -1,0 +1,103 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/firefly-web/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/firefly-web",
+        "index": "apps/firefly-web/src/index.html",
+        "main": "apps/firefly-web/src/main.ts",
+        "polyfills": "apps/firefly-web/src/polyfills.ts",
+        "tsConfig": "apps/firefly-web/tsconfig.app.json",
+        "aot": true,
+        "allowedCommonJsDependencies": [
+          "@mapbox/mapbox-gl-geocoder",
+          "algoliasearch/lite",
+          "mapbox-gl",
+          "moment"
+        ],
+        "assets": [
+          "apps/firefly-web/src/favicon.ico",
+          "apps/firefly-web/src/assets"
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "node_modules",
+            "libs/firefly-shared/src/sass",
+            "apps/firefly-web/src/styles"
+          ]
+        },
+        "styles": [
+          "node_modules/normalize.css/normalize.css",
+          "styles/web/_reset.scss",
+          "apps/firefly-web/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/firefly-web/src/environments/environment.ts",
+              "with": "apps/firefly-web/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "firefly-web:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "firefly-web:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "firefly-web:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/firefly-web/src/**/*.ts",
+          "apps/firefly-web/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/firefly-web/jest.config.ts"
+      }
+    }
+  }
+}

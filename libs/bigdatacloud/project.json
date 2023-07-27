@@ -1,0 +1,36 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/bigdatacloud/src",
+  "prefix": "tn",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "options": {
+        "tsConfig": "libs/bigdatacloud/tsconfig.lib.json",
+        "project": "libs/bigdatacloud/ng-package.json",
+        "buildableProjectDepsInPackageJsonType": "dependencies"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/bigdatacloud/src/**/*.ts",
+          "libs/bigdatacloud/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/bigdatacloud/jest.config.ts"
+      }
+    }
+  },
+  "generators": {
+    "@nrwl/angular:component": {
+      "styleext": "scss"
+    }
+  }
+}
