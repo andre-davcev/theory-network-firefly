@@ -2,7 +2,8 @@
   "apps": [
     {
       "appId": "f6d82116",
-      "dependencyInstallCommand": "npm ci",
+      "root": "apps/firefly-mobile",
+      "dependencyInstallCommand": "npm run fire-ionic-install",
       "webBuildCommand": "npm run fire-ionic-ios-prd-build",
       "iosPath": "apps/firefly-mobile/ios",
       "androidPath": "apps/firefly-mobile/android"

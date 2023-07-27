@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "fire-ionic-install": "npm ci && cd apps/firefly-mobile && npm ci",
     "fire-ionic-build-dev": "npm run build.ionic.firefly",
     "fire-ionic-build-prod": "npm run build.ionic.firefly.prod",
     "fire-ionic-ios-dev-config": "cp apps/firefly-mobile/config/ios/dev/GoogleService-Info.plist apps/firefly-mobile/ios/App && cp apps/firefly-mobile/config/ios/dev/App.entitlements apps/firefly-mobile/ios/App/App",
