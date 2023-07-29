@@ -12,7 +12,7 @@ export const StateUserAlertsOptions: StoreOptions<StateUserAlertsModel> = {
 
   defaults: {
     pageSize: PageSize.Default,
-    orderBy: 'timeStart',
+    orderBy: 'timeEnd',
     orderByDirection: OrderBy.Ascending,
 
     initialized: false,

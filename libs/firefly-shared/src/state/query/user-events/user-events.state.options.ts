@@ -11,7 +11,7 @@ export const StateUserEventsOptions: StoreOptions<StateUserEventsModel> = {
 
   defaults: {
     pageSize: 12,
-    orderBy: 'timeStart',
+    orderBy: 'timeEnd',
     orderByDirection: OrderBy.Ascending,
     orderByType: TypeOf.Timestamp,
 

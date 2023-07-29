@@ -237,7 +237,7 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
       .collection(Collection.Events)
       .ref.where('interestsPending', 'array-contains', id)
       .where('timeEnd', '>', new Date())
-      .orderBy('timeStart', 'asc');
+      .orderBy('timeEnd', 'asc');
 
     return dispatch(new ActionInterestEventsSet(query, InterestEvents.Pending));
   }
@@ -253,8 +253,8 @@ export class StateInterest extends StateDocument<Interest, StateInterestModel> {
     const query: Query = this.service
       .collection(Collection.Events)
       .ref.where('interests', 'array-contains', id)
-      .where('timeStart', '>', new Date())
-      .orderBy('timeStart', 'asc')
+      .where('timeEnd', '>', new Date())
+      .orderBy('timeEnd', 'asc')
       .limit(5);
 
     return dispatch(
