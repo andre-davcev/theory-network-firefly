@@ -75,7 +75,7 @@ export class StateUserEvents extends StateQuery<Event, StateUserEventsModel> {
         : this.service
             .collection(Collection.Events)
             .ref.where('userId', '==', userId)
-            .where('timeStart', '>', dateCutoff);
+            .where('timeEnd', '>', dateCutoff);
 
     return super.reset(context, { query });
   }
