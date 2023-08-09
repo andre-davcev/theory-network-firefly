@@ -191,7 +191,7 @@ export class StateInterests {
 
   @Selector([StateUser.isPublisher])
   public static add(state: StateInterestsModel, isPublisher: boolean): boolean {
-    return isPublisher && StateInterests.type(state) === InterestType.Created;
+    return isPublisher;
   }
 
   @Selector([StateLocation.permissionDenied])

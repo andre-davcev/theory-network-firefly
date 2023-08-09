@@ -109,7 +109,7 @@ export class StateCalendar {
     state: StateCalendarModel,
     isPublisher: boolean
   ): boolean {
-    return isPublisher && StateCalendar.type(state) === EventType.Created;
+    return isPublisher;
   }
 
   @Selector()
