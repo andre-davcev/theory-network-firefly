@@ -22,10 +22,8 @@ ion-list {
   margin-bottom: 0;
 }
 
-ion-datetime {
-  &.cpt-invalid {
-    text-decoration: line-through;
-  }
+.cpt-invalid {
+  text-decoration: line-through;
 }
 
 .invalid {

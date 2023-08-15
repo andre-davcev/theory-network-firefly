@@ -123,6 +123,7 @@
           <ion-item id="time-ends-trigger">
             <ion-label>{{ 'general.ends' | translate }}</ion-label>
             <ion-label
+              [class.cpt-invalid]="!(form$ | async)?.controls?.['timeEnd']?.valid"
               >{{ (timeEnd$ | async)! | timestamp: TimestampFormat.Short
               }}</ion-label
             >
