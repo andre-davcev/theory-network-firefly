@@ -28,9 +28,9 @@ export class PipeTimestamp implements PipeTransform {
     if (name === TimestampFormat.ShortTime) {
       return moment(date).format('LT');
     } else if (name === TimestampFormat.MediumDate) {
-      return moment(date).format('MMM d, y');
+      return moment(date).format('MMM D, y');
     } else if (name === TimestampFormat.Short) {
-      return moment(date).format('M/d/yy, h:mm a');
+      return moment(date).format('M/D/yy, h:mm a');
     } else if (name === TimestampFormat.DateShort) {
       return moment(date).format('llll');
     } else if (name === TimestampFormat.DateLong) {
