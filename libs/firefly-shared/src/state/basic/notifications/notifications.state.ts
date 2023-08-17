@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { FCM } from '@capacitor-community/fcm';
 import {
   PermissionStatus,
-  PushNotificationSchema,
-  PushNotifications,
-  Token
+  PushNotifications
 } from '@capacitor/push-notifications';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { from, of } from 'rxjs';
