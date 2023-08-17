@@ -1,5 +1,4 @@
-import { Nullable } from '@theory/core';
-
+import { Nullable } from '../../library';
 import { MetadataList } from '../interfaces';
 import { DocumentBase } from './base.document';
 

@@ -1,18 +1,18 @@
-import { runWith, EventContext } from 'firebase-functions';
-import { firestore, storage, messaging } from 'firebase-admin';
 import {
-  QuerySnapshot,
-  QueryDocumentSnapshot,
   Firestore,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
   WriteResult
 } from '@google-cloud/firestore';
 import {
-  GetSignedUrlResponse,
-  GetSignedUrlConfig
+  GetSignedUrlConfig,
+  GetSignedUrlResponse
 } from '@google-cloud/storage';
+import { firestore, messaging, storage } from 'firebase-admin';
+import { EventContext, runWith } from 'firebase-functions';
 
-import { ImageType, ImageSize, FIREBASE_CONFIG, Token } from '../library';
-import { Event, User, Collection, AlertPartial } from '../shared';
+import { FIREBASE_CONFIG, ImageSize, ImageType, Token } from '../library';
+import { AlertPartial, Collection, Event, User } from '../shared';
 
 const EventsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
   .pubsub.schedule('55 * * * *') // Every hour @ 55 past the hour
@@ -25,7 +25,7 @@ const EventsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
     const debugDoc: firestore.DocumentReference = database
       .collection(Collection.Debug)
       .doc(Collection.Events);
-    const debug: boolean = false;
+    const debug: boolean = true;
 
     // Get the push notification icon url
     const signedUrlConfig: GetSignedUrlConfig = {
@@ -51,15 +51,16 @@ const EventsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
     let userId: string;
     let notifications: Record<string, AlertPartial>;
 
-    // Set the time notify cutoff to the next hour start
+    // Notify all events that are less than 2 weeks from now
+    const weeks: number = 2;
     const cutoff: Date = new Date();
-    cutoff.setHours(cutoff.getHours() + 1, 0, 0, 0);
+    cutoff.setDate(cutoff.getDate() + 7 * weeks);
 
     // Query for events that haven't notified and are less than the cutoff time
     const query: QuerySnapshot = await database
       .collection(Collection.Events)
       .where('notifyComplete', '==', false)
-      .where('timeNotify', '<=', cutoff)
+      .where('timeStart', '<=', cutoff)
       .where('draft', '==', false)
       .get();
 

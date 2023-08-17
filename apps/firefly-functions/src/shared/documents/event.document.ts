@@ -1,6 +1,6 @@
 import { GeoPoint, Timestamp } from 'firebase/firestore';
 
-import { Nullable } from '@theory/core';
+import { Nullable } from '../../library';
 import { MapboxPlaceType } from '../enums';
 import { CityInfo, MetadataList, Place } from '../interfaces';
 import { DocumentBase } from './base.document';

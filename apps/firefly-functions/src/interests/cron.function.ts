@@ -1,24 +1,24 @@
-import { runWith, EventContext } from 'firebase-functions';
-import { firestore } from 'firebase-admin';
 import {
-  QuerySnapshot,
-  QueryDocumentSnapshot,
   Firestore,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
   WriteResult
 } from '@google-cloud/firestore';
+import { firestore } from 'firebase-admin';
+import { EventContext, runWith } from 'firebase-functions';
 
-import { ServiceStreams, GlobalVariable } from '../library';
+import { GlobalVariable, ServiceStreams } from '../library';
 import {
-  Interest,
-  Event,
-  StreamInterest,
   City,
+  CityInfo,
   Collection,
-  CityInfo
+  Event,
+  Interest,
+  StreamInterest
 } from '../shared';
 
 const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
-  .pubsub.schedule('0 2 * * 1') // Monday's @ 2AM
+  .pubsub.schedule('0 2 * * *') // Every Day At 2AM
   .onRun(async (context: EventContext) => {
     const database: Firestore = firestore();
     const debugDoc: firestore.DocumentReference = database
