@@ -1,15 +1,15 @@
-import {
-  firestore,
-  EventContext,
-  CloudFunction,
-  config
-} from 'firebase-functions';
-import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import algoliasearch from 'algoliasearch';
+import { firestore as db } from 'firebase-admin';
+import {
+  CloudFunction,
+  EventContext,
+  config,
+  firestore
+} from 'firebase-functions';
 
-import { ServiceFirestore, Version, ServiceCities } from '../library';
-import { Event, Collection } from '../shared';
+import { ServiceCities, ServiceFirestore, Version } from '../library';
+import { Collection, Event } from '../shared';
 
 const env = config();
 
@@ -29,7 +29,7 @@ const EventsCreate: CloudFunction<DocumentSnapshot> = firestore
     const objectID = snapshot.id;
 
     return Promise.all([
-      snapshot.ref.update({ object }),
+      snapshot.ref.set(object),
       ServiceCities.createCityIfNew(database, object),
       ServiceCities.createStreamIfNew(database, object),
       index.saveObject({ ...data, objectID })

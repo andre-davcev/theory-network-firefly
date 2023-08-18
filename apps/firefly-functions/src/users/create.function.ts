@@ -1,10 +1,10 @@
-import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
+import { firestore as db } from 'firebase-admin';
+import { CloudFunction, EventContext, firestore } from 'firebase-functions';
 import { Timestamp } from 'firebase/firestore';
 
-import { ServiceFirestore, Version, ServiceCities } from '../library';
-import { User, UserProfile, Collection } from '../shared';
+import { ServiceCities, ServiceFirestore, Version } from '../library';
+import { Collection, User, UserProfile } from '../shared';
 
 const database: Firestore = db();
 
@@ -35,7 +35,7 @@ const UsersCreate: CloudFunction<DocumentSnapshot> = firestore
     };
 
     return Promise.all([
-      snapshot.ref.update({ data: user }),
+      snapshot.ref.set(user),
       database
         .collection(Collection.UserProfiles)
         .doc(userId)

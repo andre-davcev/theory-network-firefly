@@ -1,16 +1,16 @@
-import { firestore, EventContext, CloudFunction } from 'firebase-functions';
 import { DocumentSnapshot } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { config } from 'firebase-functions';
-import algoliasearch from 'algoliasearch';
+import { CloudFunction, EventContext, firestore } from 'firebase-functions';
+// import { config } from 'firebase-functions';
+// import algoliasearch from 'algoliasearch';
 
-import { Version, ServiceFirestore } from '../library';
-import { Interest, Collection } from '../shared';
+import { ServiceFirestore, Version } from '../library';
+import { Collection, Interest } from '../shared';
 
-const env = config();
+// const env = config();
 
-const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
-const index = client.initIndex('interests');
+// const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
+// const index = client.initIndex('interests');
 
 db();
 
@@ -25,8 +25,8 @@ const InterestsCreate: CloudFunction<DocumentSnapshot> = firestore
     );
 
     return Promise.all([
-      snapshot.ref.update({ data: object }),
-      index.saveObject({ ...data, objectID })
+      snapshot.ref.set(object)
+      // index.saveObject({ ...data, objectID })
     ]);
   });
 

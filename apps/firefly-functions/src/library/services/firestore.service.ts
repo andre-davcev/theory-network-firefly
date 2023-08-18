@@ -20,7 +20,6 @@ export class ServiceFirestore {
     object.dateCreated = timestamp;
     object.dateUpdated = timestamp;
     object.version = version;
-    object.metadata = {};
 
     return object;
   }

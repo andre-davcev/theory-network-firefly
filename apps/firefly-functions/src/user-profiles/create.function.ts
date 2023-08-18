@@ -1,9 +1,9 @@
-import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { firestore as db } from 'firebase-admin';
 import { DocumentSnapshot } from '@google-cloud/firestore';
+import { firestore as db } from 'firebase-admin';
+import { CloudFunction, EventContext, firestore } from 'firebase-functions';
 
-import { Version, ServiceFirestore } from '../library';
-import { UserProfile, Collection } from '../shared';
+import { ServiceFirestore, Version } from '../library';
+import { Collection, UserProfile } from '../shared';
 
 db();
 
@@ -15,7 +15,7 @@ const UserProfilesCreate: CloudFunction<DocumentSnapshot> = firestore
       Version.UserProfiles
     );
 
-    return snapshot.ref.update({ data: object });
+    return snapshot.ref.set(object);
   });
 
 export { UserProfilesCreate };

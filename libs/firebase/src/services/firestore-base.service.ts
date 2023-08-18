@@ -5,7 +5,7 @@ import {
   AngularFirestoreDocument,
   DocumentSnapshot
 } from '@angular/fire/compat/firestore';
-import { FieldValue, serverTimestamp } from '@angular/fire/firestore';
+import { serverTimestamp } from '@angular/fire/firestore';
 import { CoreEnum } from '@theory/core';
 import { Observable, from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -85,10 +85,6 @@ export class ServiceFirestoreBase {
         ? service.createId()
         : object.id;
 
-    const timestamp: FieldValue = serverTimestamp();
-
-    object.dateCreated = timestamp;
-    object.dateUpdated = timestamp;
     object.id = id;
 
     return ServiceFirestoreBase.documentSet<T>(

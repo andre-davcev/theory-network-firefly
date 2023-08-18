@@ -1,18 +1,18 @@
-import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { firestore as db } from 'firebase-admin';
-import { GeoPoint } from 'firebase/firestore';
 import {
   DocumentSnapshot,
   Firestore,
-  WriteResult,
-  QueryDocumentSnapshot
+  QueryDocumentSnapshot,
+  WriteResult
 } from '@google-cloud/firestore';
+import { firestore as db } from 'firebase-admin';
+import { CloudFunction, EventContext, firestore } from 'firebase-functions';
+import { GeoPoint } from 'firebase/firestore';
 
 import {
-  Version,
-  ServiceFirestore,
+  GlobalVariable,
   ServiceCities,
-  GlobalVariable
+  ServiceFirestore,
+  Version
 } from '../library';
 import { City, Collection } from '../shared';
 
@@ -56,7 +56,7 @@ const CitiesCreate: CloudFunction<DocumentSnapshot> = firestore
     object.userId = GlobalVariable.UserAdmin;
 
     return Promise.all([
-      snapshot.ref.update({ data: object }),
+      snapshot.ref.set(object),
       ServiceCities.generateStream(database, object)
     ]);
   });
