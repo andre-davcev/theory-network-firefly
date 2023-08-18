@@ -1,24 +1,23 @@
 import {
-  Change,
-  firestore,
-  EventContext,
-  CloudFunction
-} from 'firebase-functions';
-import {
   DocumentSnapshot,
   Firestore,
   WriteResult
 } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
-import { config } from 'firebase-functions';
-import algoliasearch from 'algoliasearch';
+import {
+  Change,
+  CloudFunction,
+  EventContext,
+  firestore
+} from 'firebase-functions';
+// import algoliasearch from 'algoliasearch';
 
 import { ServiceCities } from '../library';
-import { Event, Collection } from '../shared';
+import { Collection, Event } from '../shared';
 
-const env = config();
-const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
-const index = client.initIndex('events');
+// const env = config();
+// const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
+// const index = client.initIndex('events');
 
 const database: Firestore = db();
 
@@ -32,8 +31,8 @@ const EventsUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
       const before: Event = change.before.data() as Event;
       const after: Event = change.after.data() as Event;
 
-      const data = after;
-      const objectID = change.after.id;
+      // const data = after;
+      // const objectID = change.after.id;
 
       const promises: Array<Promise<WriteResult>> = [];
 
@@ -42,7 +41,8 @@ const EventsUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
         promises.push(ServiceCities.createStreamIfNew(database, after));
       }
 
-      return Promise.all([promises, index.saveObject({ ...data, objectID })]);
+      return Promise.all([promises]);
+      // return Promise.all([promises, index.saveObject({ ...data, objectID })]);
     }
   );
 
