@@ -40,8 +40,7 @@ const UsersCreate: CloudFunction<DocumentSnapshot> = firestore
         .collection(Collection.UserProfiles)
         .doc(userId)
         .create(userProfile),
-      ServiceCities.createCityIfNew(database, user),
-      ServiceCities.createStreamIfNew(database, user)
+      ServiceCities.createCityIfNew(database, user)
     ]);
   });
 

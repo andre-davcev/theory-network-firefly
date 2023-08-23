@@ -1,19 +1,19 @@
 import {
-  Change,
-  firestore,
-  EventContext,
-  CloudFunction
-} from 'firebase-functions';
-import { firestore as db } from 'firebase-admin';
-import {
-  FieldValue,
   DocumentSnapshot,
+  FieldValue,
   Firestore,
   WriteResult
 } from '@google-cloud/firestore';
+import { firestore as db } from 'firebase-admin';
+import {
+  Change,
+  CloudFunction,
+  EventContext,
+  firestore
+} from 'firebase-functions';
 
-import { Status, ServiceCities } from '../library';
-import { SubscriptionPartial, Collection, User } from '../shared';
+import { ServiceCities, Status } from '../library';
+import { Collection, SubscriptionPartial, User } from '../shared';
 
 const database: Firestore = db();
 
@@ -52,7 +52,6 @@ const UsersUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
 
       if (cityIdBefore !== cityIdAfter) {
         updates.push(ServiceCities.createCityIfNew(database, after));
-        updates.push(ServiceCities.createStreamIfNew(database, after));
       }
 
       if (subscriptionCountBefore === subscriptionCountAfter) {

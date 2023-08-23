@@ -38,7 +38,6 @@ const EventsUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
 
       if (before.city.id !== after.city.id) {
         promises.push(ServiceCities.createCityIfNew(database, after));
-        promises.push(ServiceCities.createStreamIfNew(database, after));
       }
 
       return Promise.all([promises]);

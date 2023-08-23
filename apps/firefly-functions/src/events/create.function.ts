@@ -31,7 +31,6 @@ const EventsCreate: CloudFunction<DocumentSnapshot> = firestore
     return Promise.all([
       snapshot.ref.set(object),
       ServiceCities.createCityIfNew(database, object),
-      ServiceCities.createStreamIfNew(database, object),
       index.saveObject({ ...data, objectID })
     ]);
   });
