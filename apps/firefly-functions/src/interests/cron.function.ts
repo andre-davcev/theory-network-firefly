@@ -39,15 +39,16 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
     const citiesCollection: Record<string, Record<string, StreamInterest>> = {};
 
     let id: string;
-    let query: QuerySnapshot = await database
-      .collection(Collection.Interests)
-      .where('private', '==', false)
-      .get();
     let nearby: Record<string, number>;
     let interest: Interest;
 
+    const interests: QuerySnapshot = await database
+      .collection(Collection.Interests)
+      .where('private', '==', false)
+      .get();
+
     // Process and save all public interests
-    query.forEach((snapshot: QueryDocumentSnapshot) => {
+    interests.forEach((snapshot: QueryDocumentSnapshot) => {
       interest = snapshot.data() as Interest;
       id = snapshot.id;
       interestSubscribers[id] = interest.subscriberCount;
@@ -55,10 +56,12 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
       interestCityEvents[id] = {};
     });
 
-    query = await database.collection(Collection.Cities).get();
+    const cities: QuerySnapshot = await database
+      .collection(Collection.Cities)
+      .get();
 
     // Process and save all cities
-    query.forEach((snapshot: QueryDocumentSnapshot) => {
+    cities.forEach((snapshot: QueryDocumentSnapshot) => {
       id = snapshot.id;
       citySubscriberMax[id] = 0;
       cityInterests[id] = [];
@@ -82,13 +85,13 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
     let event: Event;
     let subscriberCount: number;
 
-    query = await database
+    const events: QuerySnapshot = await database
       .collection(Collection.Events)
       .where('private', '==', false)
       .get();
 
     // Process and save all events
-    query.forEach((snapshot: QueryDocumentSnapshot) => {
+    events.forEach((snapshot: QueryDocumentSnapshot) => {
       id = snapshot.id;
       event = snapshot.data() as Event;
       eventScores[id] = ServiceStreams.scoreEvent(event, time);
@@ -117,8 +120,6 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
           });
       }
     });
-
-    query = null;
 
     const collection: firestore.CollectionReference = database.collection(
       Collection.Streams
