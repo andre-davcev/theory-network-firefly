@@ -7,9 +7,13 @@ import {
 import { firestore } from 'firebase-admin';
 import { EventContext, runWith } from 'firebase-functions';
 
-import { GlobalVariable, ServiceStreams } from '../library';
 import {
-  City,
+  CityInformation,
+  GlobalVariable,
+  InterestsService,
+  ServiceStreams
+} from '../library';
+import {
   CityInfo,
   Collection,
   Event,
@@ -25,13 +29,9 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
       .collection(Collection.Debug)
       .doc(Collection.Streams);
     const debug: boolean = true;
-    const citiesNearby: Record<string, Record<string, number>> = {};
     const interestSubscribers: Record<string, number> = {};
     const interestVirtual: Record<string, boolean> = {};
     const eventScores: Record<string, number> = {};
-    const cityInterests: Record<string, Array<string>> = {};
-    const citySubscriberMax: Record<string, number> = {};
-    const cityDistanceScore: Record<string, Record<string, number>> = {};
     const interestCityEvents: Record<
       string,
       Record<string, Array<string>>
@@ -56,27 +56,8 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
       interestCityEvents[id] = {};
     });
 
-    const cities: QuerySnapshot = await database
-      .collection(Collection.Cities)
-      .get();
-
-    // Process and save all cities
-    cities.forEach((snapshot: QueryDocumentSnapshot) => {
-      id = snapshot.id;
-      citySubscriberMax[id] = 0;
-      cityInterests[id] = [];
-      cityDistanceScore[id] = {};
-      nearby = (snapshot.data() as City).nearby;
-
-      citiesNearby[id] = nearby;
-
-      Object.keys(nearby).forEach(
-        (cityId: string) =>
-          (cityDistanceScore[id][cityId] = ServiceStreams.scoreCityDistance(
-            nearby[cityId]
-          ))
-      );
-    });
+    const cities: Record<string, CityInformation> =
+      await InterestsService.citiesInfoGet(database);
 
     const time: number = new Date().getTime();
 
@@ -111,12 +92,12 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
               interestCityEvents[interestId][cityId] = [];
             }
 
-            if (subscriberCount > citySubscriberMax[cityId]) {
-              citySubscriberMax[cityId] = subscriberCount;
+            if (subscriberCount > cities[cityId].subscriberMax) {
+              cities[cityId].subscriberMax = subscriberCount;
             }
 
             interestCityEvents[interestId][cityId].push(id);
-            cityInterests[cityId].push(interestId);
+            cities[cityId].interests.push(interestId);
           });
       }
     });
@@ -130,19 +111,20 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
     let interestScore: number;
     let subscriberMax: number;
     let distanceScores: Record<string, number>;
+    let cityInfo: CityInformation;
     let cityEvents: Record<string, Array<string>>;
     let cityStream: Record<string, StreamInterest>;
 
     // Process all cities and cities nearby
-    Object.keys(citiesNearby).forEach((cityId: string) => {
-      nearby = citiesNearby[cityId];
-      distanceScores = cityDistanceScore[cityId];
+    Object.keys(cities).forEach((cityId: string) => {
+      cityInfo = cities[cityId];
+      nearby = cityInfo.nearby;
+      distanceScores = cityInfo.distanceScore;
       cityStream = {};
-      subscriberMax =
-        citySubscriberMax[cityId] === 0 ? 1 : citySubscriberMax[cityId];
+      subscriberMax = cityInfo.subscriberMax === 0 ? 1 : cityInfo.subscriberMax;
 
       Object.keys(nearby).forEach((nearbyId: string) => {
-        cityInterests[nearbyId].forEach((interestId: string) => {
+        cities[nearbyId].interests.forEach((interestId: string) => {
           subscriberCount = interestSubscribers[interestId];
           cityEvents = interestCityEvents[interestId];
           interestScore = 0;
@@ -178,11 +160,8 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
 
       await debugDoc.set({
         [timestamp]: {
-          citiesNearby,
+          cities,
           citiesCollection,
-          cityInterests,
-          cityDistanceScore,
-          citySubscriberMax,
           interestCityEvents,
           interestSubscribers,
           eventScores
