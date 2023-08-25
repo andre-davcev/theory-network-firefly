@@ -12,6 +12,7 @@ import {
   GlobalVariable,
   ServiceCities,
   ServiceFirestore,
+  ServiceStreams,
   Version
 } from '../library';
 import { City, Collection } from '../shared';
@@ -57,7 +58,7 @@ const CitiesCreate: CloudFunction<DocumentSnapshot> = firestore
 
     return Promise.all([
       snapshot.ref.set(object),
-      ServiceCities.generateStream(database, object)
+      ServiceStreams.generateStream(database, object)
     ]);
   });
 

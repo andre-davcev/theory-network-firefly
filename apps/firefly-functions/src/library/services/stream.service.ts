@@ -1,6 +1,8 @@
 import { Timestamp } from 'firebase/firestore';
 
 import {
+  CollectionReference,
+  DocumentReference,
   Firestore,
   QueryDocumentSnapshot,
   QuerySnapshot
@@ -290,5 +292,153 @@ export class ServiceStreams {
     });
 
     return interestStreams;
+  }
+
+  public static async generateStream(
+    database: Firestore,
+    city: City
+  ): Promise<any> {
+    const debugDoc: DocumentReference = database
+      .collection(Collection.Debug)
+      .doc('stream-city');
+    const debug: boolean = true;
+    const citiesNearby: Record<string, number> = city.nearby;
+    const cityIdsNearby: Array<string> = Object.keys(citiesNearby);
+    const eventScores: Record<string, number> = {};
+    const interestSubscribers: Record<string, number> = {};
+    const cityInterests: Record<string, Array<string>> = {};
+    const distanceScores: Record<string, number> = {};
+    const interestCityEvents: Record<
+      string,
+      Record<string, Array<string>>
+    > = {};
+    const interestCollection: CollectionReference = database.collection(
+      Collection.Interests
+    );
+    const eventCollection: CollectionReference = database.collection(
+      Collection.Events
+    );
+    const eventQuery: Array<Promise<QuerySnapshot>> = [];
+    const interestQuery: Array<Promise<QuerySnapshot>> = [];
+    const interestIds: Record<string, string> = {};
+    const events: Array<Event> = [];
+    const stream: Record<string, StreamInterest> = {};
+
+    let id: string;
+    let cityId: string;
+    let event: Event;
+    let subscriberMax: number = 0;
+    let subscriberCount: number;
+
+    cityIdsNearby.forEach((nearbyId: string) =>
+      eventQuery.push(eventCollection.where('cityId', '==', nearbyId).get())
+    );
+
+    const eventSnapshots: Array<QuerySnapshot> = await Promise.all(eventQuery);
+    const time: number = new Date().getTime();
+
+    eventSnapshots.forEach((query: QuerySnapshot) =>
+      query.forEach((snapshot: QueryDocumentSnapshot) => {
+        id = snapshot.id;
+        event = snapshot.data() as Event;
+
+        event.interests.forEach(
+          (interestId: string) => (interestIds[interestId] = interestId)
+        );
+
+        events.push(event);
+      })
+    );
+
+    Object.keys(interestIds).forEach((interestId: string) =>
+      interestQuery.push(interestCollection.where('id', '==', interestId).get())
+    );
+
+    const interestSnapshots: Array<QuerySnapshot> = await Promise.all(
+      interestQuery
+    );
+
+    interestSnapshots.forEach((query: QuerySnapshot) =>
+      query.forEach((snapshot: QueryDocumentSnapshot) => {
+        id = snapshot.id;
+        interestSubscribers[id] = (snapshot.data() as Interest).subscriberCount;
+        interestCityEvents[id] = {};
+      })
+    );
+
+    cityIdsNearby.forEach((cityId: string) => {
+      cityInterests[cityId] = [];
+      distanceScores[cityId] = ServiceStreams.scoreCityDistance(
+        citiesNearby[cityId]
+      );
+    });
+
+    events.forEach((event: Event) => {
+      id = event.id;
+      eventScores[id] = ServiceStreams.scoreEvent(event, time);
+      cityId = event.city.id;
+
+      event.interests
+        .filter((interestId: string) => interestCityEvents[interestId] != null)
+        .forEach((interestId: string) => {
+          subscriberCount = interestSubscribers[interestId];
+
+          if (interestCityEvents[interestId][cityId] == null) {
+            interestCityEvents[interestId][cityId] = [];
+          }
+
+          if (subscriberCount > subscriberMax) {
+            subscriberMax = subscriberCount;
+          }
+
+          interestCityEvents[interestId][cityId].push(id);
+          cityInterests[cityId].push(interestId);
+        });
+    });
+
+    let score: number;
+    let interestScore: number;
+    let cityEvents: Record<string, Array<string>>;
+
+    cityId = city.id;
+    subscriberMax = subscriberMax === 0 ? 1 : subscriberMax;
+
+    cityIdsNearby.forEach((nearbyId: string) => {
+      cityInterests[nearbyId].forEach((interestId: string) => {
+        subscriberCount = interestSubscribers[interestId];
+        cityEvents = interestCityEvents[interestId];
+        interestScore = 0;
+
+        Object.keys(cityEvents).forEach((cityIdEvent: string) => {
+          cityEvents[cityIdEvent].forEach(
+            (eventId: string) => (interestScore += eventScores[eventId])
+          );
+
+          interestScore += interestScore * distanceScores[cityIdEvent];
+        });
+
+        score =
+          interestScore * GlobalVariable.InterestScoreWeightRaw +
+          interestScore *
+            GlobalVariable.InterestScoreWeightSubscribers *
+            (subscriberCount / subscriberMax);
+
+        stream[interestId] = { score } as StreamInterest;
+      });
+    });
+
+    if (debug) {
+      await debugDoc.set({
+        citiesNearby,
+        cityInterests,
+        distanceScores,
+        subscriberMax,
+        interestCityEvents,
+        interestSubscribers,
+        eventScores
+      });
+    }
+
+    return database.collection(Collection.Streams).doc(cityId).set(stream);
   }
 }
