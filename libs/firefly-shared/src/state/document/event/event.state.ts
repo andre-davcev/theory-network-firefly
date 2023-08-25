@@ -82,6 +82,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
         dateUpdated: null,
 
         city: null,
+        cityId: null,
         description: null,
         draft: false,
         geopoint: null,
@@ -454,7 +455,11 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     metadata.place = place;
 
     return dispatch([
-      new ActionEventPatch({ geopoint: place?.geopoint, city }),
+      new ActionEventPatch({
+        geopoint: place?.geopoint,
+        city,
+        cityId: city.id
+      }),
       new ActionEventPatchMetadata(metadata)
     ]);
   }

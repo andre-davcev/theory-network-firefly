@@ -15,6 +15,7 @@ export interface MetadataEvent extends MetadataList {
 
 export interface Event extends DocumentBase {
   city: CityInfo;
+  cityId: string;
   description: string;
   draft: boolean;
   geopoint: GeoPoint;
