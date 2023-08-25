@@ -2,7 +2,6 @@ import { Timestamp } from 'firebase/firestore';
 
 import {
   CollectionReference,
-  DocumentReference,
   Firestore,
   QueryDocumentSnapshot,
   QuerySnapshot
@@ -302,10 +301,6 @@ export class ServiceStreams {
     database: Firestore,
     city: City
   ): Promise<any> {
-    const debugDoc: DocumentReference = database
-      .collection(Collection.Debug)
-      .doc('stream-city');
-    const debug: boolean = true;
     const citiesNearby: Record<string, number> = city.nearby;
     const cityIdsNearby: Array<string> = Object.keys(citiesNearby);
     const eventScores: Record<string, number> = {};
@@ -431,8 +426,10 @@ export class ServiceStreams {
       });
     });
 
+    const debug: boolean = true;
+
     if (debug) {
-      await debugDoc.set({
+      await database.collection(Collection.Debug).doc('stream-city').set({
         citiesNearby,
         cityInterests,
         distanceScores,
