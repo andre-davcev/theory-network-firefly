@@ -15,10 +15,10 @@ const InterestsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
   .onRun(async (context: EventContext) => {
     const database: Firestore = firestore();
 
-    const interests: Record<string, InterestInformation> =
-      await ServiceStreams.interestsInfo(database);
     const cities: Record<string, CityInformation> =
       await ServiceStreams.citiesInfo(database);
+    const interests: Record<string, InterestInformation> =
+      await ServiceStreams.interestsInfo(database);
     const events: Record<string, EventInformation> =
       await ServiceStreams.eventsInfo(database, interests, cities);
 

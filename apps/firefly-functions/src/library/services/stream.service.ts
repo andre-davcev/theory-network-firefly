@@ -124,6 +124,25 @@ export class ServiceStreams {
       : (10 - segments) * 0.1;
   }
 
+  public static cityInfo(city: City): CityInformation {
+    const nearby: Record<string, number> = city.nearby;
+    const cityInfo: CityInformation = {
+      subscriberMax: 0,
+      interests: [],
+      distanceScore: {},
+      nearby
+    };
+
+    Object.keys(nearby).forEach(
+      (cityId: string) =>
+        (cityInfo.distanceScore[cityId] = ServiceStreams.scoreCityDistance(
+          nearby[cityId]
+        ))
+    );
+
+    return cityInfo;
+  }
+
   public static async citiesInfo(
     database: Firestore
   ): Promise<Record<string, CityInformation>> {
@@ -132,26 +151,12 @@ export class ServiceStreams {
       .collection(Collection.Cities)
       .get();
 
-    let id: string;
-    let nearby: Record<string, number>;
-
-    cities.forEach((snapshot: QueryDocumentSnapshot) => {
-      id = snapshot.id;
-      nearby = (snapshot.data() as City).nearby;
-
-      cityInfo[id] = {
-        subscriberMax: 0,
-        interests: [],
-        distanceScore: {},
-        nearby
-      };
-
-      Object.keys(nearby).forEach(
-        (cityId: string) =>
-          (cityInfo[id].distanceScore[cityId] =
-            ServiceStreams.scoreCityDistance(nearby[cityId]))
-      );
-    });
+    cities.forEach(
+      (snapshot: QueryDocumentSnapshot) =>
+        (cityInfo[snapshot.id] = ServiceStreams.cityInfo(
+          snapshot.data() as City
+        ))
+    );
 
     return cityInfo;
   }
@@ -262,7 +267,6 @@ export class ServiceStreams {
       Object.keys(cityInfo.nearby).forEach((nearbyId: string) => {
         cities[nearbyId].interests.forEach((interestId: string) => {
           interestInfo = interests[interestId];
-          // ToDo: TypeError: Cannot set property 'subscribers' of undefined
           subscriberCount = interestInfo.subscribers;
           cityEvents = interestInfo.cityEvents;
           interestScore = 0;
