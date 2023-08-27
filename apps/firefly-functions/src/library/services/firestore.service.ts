@@ -1,6 +1,15 @@
-import { DocumentSnapshot, FieldValue } from '@google-cloud/firestore';
+import {
+  DocumentReference,
+  DocumentSnapshot,
+  FieldValue,
+  Firestore,
+  Query,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+  WriteResult
+} from '@google-cloud/firestore';
 
-import { DocumentBase } from '../../shared';
+import { Collection, DocumentBase } from '../../shared';
 import { Version } from '../enums';
 
 export class ServiceFirestore {
@@ -22,5 +31,49 @@ export class ServiceFirestore {
     object.version = version;
 
     return object;
+  }
+
+  public static async debugWrite(
+    debug: boolean,
+    database: Firestore,
+    document: string,
+    object: Record<string, any>,
+    timestamp?: string
+  ): Promise<WriteResult | void> {
+    if (!debug) {
+      return Promise.resolve();
+    }
+
+    timestamp = timestamp || new Date().toISOString().split('.')[0];
+    const debugDoc: DocumentReference = database
+      .collection(Collection.Debug)
+      .doc(document);
+
+    return debugDoc.set({
+      [timestamp]: object
+    });
+  }
+
+  public static async toArrayQuery<T>(query: Query): Promise<Array<T>> {
+    const docs: QuerySnapshot = await query.get();
+
+    return docs.docs.map(
+      (snapshot: QueryDocumentSnapshot) => snapshot.data() as T
+    );
+  }
+
+  public static async toArrayQuerySnapshots<T>(
+    queries: Array<Promise<QuerySnapshot>>
+  ): Promise<Array<T>> {
+    const snapshots: Array<QuerySnapshot> = await Promise.all(queries);
+    const data: Array<T> = [];
+
+    snapshots.forEach((query: QuerySnapshot) =>
+      query.forEach((snapshot: QueryDocumentSnapshot) =>
+        data.push(snapshot.data() as T)
+      )
+    );
+
+    return data;
   }
 }

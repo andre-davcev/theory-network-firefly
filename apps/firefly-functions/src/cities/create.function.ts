@@ -58,7 +58,7 @@ const CitiesCreate: CloudFunction<DocumentSnapshot> = firestore
 
     return Promise.all([
       snapshot.ref.set(object),
-      ServiceStreams.generateStream(database, object)
+      ServiceStreams.streamCreate(database, object)
     ]);
   });
 
