@@ -5,8 +5,9 @@
   --cpt-width: var(--cpt-height);
   --cpt-transition-duration: #{firefly.$fire-transition-duration-move};
 
-  --cpt-color-fill-primary: #{firefly.$fire-color-primary};
-  --cpt-color-fill-lighter-primary: lighten(firefly.$fire-color-primary, 10%);
+  --cpt-color-fill-primary: rgba(128, 214, 35, 1);
+  --cpt-color-fill-primary-opacity: rgba(128, 214, 35, 0.3);
+  --cpt-color-fill-primary-lighter: rgb(154, 228, 73, 1);
   --cpt-color-stroke-primary: #000000;
   --cpt-color-stroke-width-primary: 1px;
   --cpt-color-stroke-opacity-primary: 0.5;
@@ -19,7 +20,8 @@
 
   &.cpt-color-primary {
     --cpt-color-fill: var(--cpt-color-fill-primary);
-    --cpt-color-fill-lighter: var(--cpt-color-fill-lighter-primary);
+    --cpt-color-fill-opacity: var(--cpt-color-fill-primary-opacity);
+    --cpt-color-fill-lighter: var(--cpt-color-fill-primary-lighter);
     --cpt-color-stroke: var(--cpt-color-stroke-primary);
     --cpt-color-stroke-width: var(--cpt-color-stroke-width-primary);
     --cpt-color-stroke-opacity: var(--cpt-color-stroke-opacity-primary);
@@ -29,6 +31,7 @@
     --cpt-color-fill: var(--cpt-color-fill-white);
     --cpt-color-fill-lighter: var(--cpt-color-fill-lighter-white);
     --cpt-color-stroke: var(--cpt-color-stroke-white);
+    --cpt-color-stroke-lighter: lighten(#000000, 10%)
     --cpt-color-stroke-width: var(--cpt-color-stroke-width-white);
     --cpt-color-stroke-opacity: var(--cpt-color-stroke-opacity-white);
   }
@@ -47,10 +50,10 @@
       fill: var(--cpt-color-fill);
     }
     75% {
-      opacity: 0.5;
+      fill: var(--cpt-color-fill-opacity);
     }
     100% {
-      opacity: 1;
+      fill: var(--cpt-color-fill);
     }
   }
 
@@ -68,10 +71,12 @@
       stroke: var(--cpt-color-fill);
     }
     75% {
-      opacity: 0.5;
+      fill: var(--cpt-color-fill-opacity);
+      stroke: var(--cpt-color-fill-opacity);
     }
     100% {
-      opacity: 1;
+      fill: var(--cpt-color-fill);
+      stroke: var(--cpt-color-fill);
     }
   }
 
@@ -80,9 +85,8 @@
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
     perspective: 1000;
-    transition-property: justify-content, align-items;
+    transition-property: justify-content, align-items, transform;
     transition-duration: var(--cpt-transition-duration);
-    transition-property: transform;
 
     > .cpt-firefly {
       .cpt-body {
@@ -90,6 +94,7 @@
         animation-duration: 1500ms;
         animation-timing-function: linear;
         animation-iteration-count: infinite;
+        transition-property: fill;
       }
 
       .cpt-tentacles.cpt-inside > .cpt-tentacle {
@@ -97,6 +102,7 @@
         animation-duration: 1500ms;
         animation-timing-function: linear;
         animation-iteration-count: infinite;
+        transition-property: fill, stroke;
       }
     }
   }
@@ -111,11 +117,10 @@
 
   > .cpt-group {
     > .cpt-part {
-      fill: var(--cpt-color-fill);
+      fill: var(--cpt-color-fill-primary-lighter);
       stroke: var(--cpt-color-stroke);
       stroke-opacity: var(--cpt-color-stroke-opacity);
       stroke-width: var(--cpt-color-stroke-width);
-      opacity: 1;
     }
 
     > .cpt-tentacles {
@@ -134,7 +139,6 @@
         fill: var(--cpt-color-fill);
         stroke: var(--cpt-color-fill);
         stroke-width: var(--cpt-color-stroke-width);
-        opacity: 1;
       }
     }
   }
