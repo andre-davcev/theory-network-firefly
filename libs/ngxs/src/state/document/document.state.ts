@@ -175,7 +175,7 @@ export class StateDocument<
   }
 
   public set(context: StateContext<M>, action: any): Observable<any> {
-    const { patchState, dispatch } = context;
+    const { patchState, dispatch, getState } = context;
     const { ActionReset } = this.actions;
 
     const snapshot: FirestoreDocumentSnapshot<any> = action.snapshot;
@@ -187,7 +187,11 @@ export class StateDocument<
       tap(() =>
         patchState({
           formGroup,
-          snapshot
+          snapshot,
+          form: {
+            ...StateDocument.formState(getState()),
+            model: data
+          }
         } as M)
       ),
       switchMap(() =>

@@ -30,8 +30,8 @@
 -->
   <form
     novalidate
-    *ngIf="formUser$ | async"
-    [formGroup]="(formUser$ | async)!"
+    *ngIf="formUser$ | async as formUser"
+    [formGroup]="formUser"
     ngxsForm="user.form"
   >
     <ion-list>
