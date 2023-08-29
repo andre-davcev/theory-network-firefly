@@ -11,13 +11,14 @@ import {
   ActionUserAlertsGet,
   StateUserAlerts
 } from '../../child';
-import { StateUser } from '../../document';
+import { StateInterest, StateUser } from '../../document';
 import {
   ActionUserEventsFilter,
   ActionUserEventsGet,
   StateUserEvents
 } from '../../query';
 
+import { ServiceEvents } from '../../../services';
 import {
   ActionCalendarFilter,
   ActionCalendarPage,
@@ -47,52 +48,32 @@ export class StateCalendar {
     alerts: Array<Alert>,
     events: Array<Event>
   ): Array<DateEvents> {
-    const type: EventType = StateCalendar.type(state);
-    const list: Array<Event> = type === EventType.Upcoming ? alerts : events;
-    const eventsList: Array<DateEvents> = [];
+    const list: Array<Event> =
+      StateCalendar.type(state) === EventType.Upcoming ? alerts : events;
 
-    let current: DateEvents;
-    let timeStart: Date;
-    let timeStartPrevious: Date;
-    let datesAreEqual: boolean = true;
+    return ServiceEvents.eventsList(list);
+  }
 
-    list.forEach((event: Event) => {
-      timeStart = event.timeStart.toDate();
+  @Selector([
+    StateUserEvents.data(),
+    StateInterest.events,
+    StateInterest.eventsPending
+  ])
+  public static eventsAvailable(
+    state: StateCalendarModel,
+    events: Array<Event>,
+    interestEvents: Array<Event>,
+    interestEventsPending: Array<Event>
+  ): Array<DateEvents> {
+    const existing: Record<string, string> = {};
 
-      datesAreEqual =
-        timeStartPrevious != null &&
-        timeStart.getFullYear() === timeStartPrevious.getFullYear() &&
-        timeStart.getMonth() === timeStartPrevious.getMonth() &&
-        timeStart.getDate() === timeStartPrevious.getDate();
+    interestEvents.forEach((event: Event) => (existing[event.id] = event.id));
+    interestEventsPending.forEach(
+      (event: Event) => (existing[event.id] = event.id)
+    );
+    events = events.filter((event: Event) => existing[event.id] == null);
 
-      if (!datesAreEqual) {
-        if (timeStartPrevious != null) {
-          eventsList.push(current);
-        }
-
-        current = {
-          date: event.timeStart,
-          events: []
-        };
-      }
-
-      current.events.push(event);
-
-      timeStartPrevious = timeStart;
-    });
-
-    if (eventsList.length === 0 && events.length > 0) {
-      current = {
-        date: events[0].timeStart,
-        events
-      };
-
-      if (current != null) {
-        eventsList.push(current);
-      }
-    }
-
-    return eventsList;
+    return ServiceEvents.eventsList(events);
   }
 
   @Selector([StateUserAlerts.data(), StateUserEvents.data()])
@@ -102,6 +83,27 @@ export class StateCalendar {
     events: Array<Event>
   ): boolean {
     return StateCalendar.data(state, alerts, events).length > 0;
+  }
+
+  @Selector([
+    StateUserEvents.data(),
+    StateInterest.events,
+    StateInterest.eventsPending
+  ])
+  public static existsAvailable(
+    state: StateCalendarModel,
+    events: Array<Event>,
+    interestEvents: Array<Event>,
+    interestEventsPending: Array<Event>
+  ): boolean {
+    return (
+      StateCalendar.eventsAvailable(
+        state,
+        events,
+        interestEvents,
+        interestEventsPending
+      ).length > 0
+    );
   }
 
   @Selector([StateUser.isPublisher])

@@ -23,8 +23,8 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
   styleUrls: ['./event-selector.page.scss']
 })
 export class PageEventSelector {
-  @Select(StateCalendar.data) data$!: Observable<Array<DateEvents>>;
-  @Select(StateCalendar.exists) exists$!: Observable<boolean>;
+  @Select(StateCalendar.eventsAvailable) data$!: Observable<Array<DateEvents>>;
+  @Select(StateCalendar.existsAvailable) exists$!: Observable<boolean>;
 
   @ViewChild(IonInfiniteScroll)
   private infiniteScroll!: IonInfiniteScroll;

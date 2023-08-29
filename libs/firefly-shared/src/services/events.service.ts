@@ -9,7 +9,7 @@ import {
   Validators
 } from '@angular/forms';
 
-import { Event } from '@firefly/cloud';
+import { DateEvents, Event } from '@firefly/cloud';
 import { DateUtil, Regex, ValidatorsExtended } from '@theory/core';
 import { ServiceFirestore } from '@theory/firebase';
 
@@ -85,6 +85,53 @@ export class ServiceEvents extends ServiceFirestore<Event> {
     };
 
     return validator;
+  }
+
+  public static eventsList(events: Array<Event>): Array<DateEvents> {
+    const eventsList: Array<DateEvents> = [];
+
+    let current: DateEvents;
+    let timeStart: Date;
+    let timeStartPrevious: Date;
+    let datesAreEqual: boolean = true;
+
+    events.forEach((event: Event) => {
+      timeStart = event.timeStart.toDate();
+
+      datesAreEqual =
+        timeStartPrevious != null &&
+        timeStart.getFullYear() === timeStartPrevious.getFullYear() &&
+        timeStart.getMonth() === timeStartPrevious.getMonth() &&
+        timeStart.getDate() === timeStartPrevious.getDate();
+
+      if (!datesAreEqual) {
+        if (timeStartPrevious != null) {
+          eventsList.push(current);
+        }
+
+        current = {
+          date: event.timeStart,
+          events: []
+        };
+      }
+
+      current.events.push(event);
+
+      timeStartPrevious = timeStart;
+    });
+
+    if (eventsList.length === 0 && events.length > 0) {
+      current = {
+        date: events[0].timeStart,
+        events
+      };
+
+      if (current != null) {
+        eventsList.push(current);
+      }
+    }
+
+    return eventsList;
   }
 
   public override formDataNew(userId: string, defaults: Event): Event {

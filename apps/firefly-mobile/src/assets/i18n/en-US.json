@@ -169,6 +169,7 @@
   "page.events.empty.upcoming": "Looks like you no upcoming events right now.",
   "page.events.empty.virtual": "Looks like you no upcoming virtual events right now.",
   "page.events.empty.created": "Looks like you haven't created any Events yet. Feel free to create Events to be added to Interest streams.",
+  "page.events.empty.available": "Looks like you haven't created any Events yet that aren't already added to this Interest.",
   "page.icons.empty": "You haven't published any icons yet. Icons are used as branding for your Interests.",
   "page.images.empty": "You haven't published any images yet. Images can be used for event notifcations as well as the main image on the Discover Interests screen",
 
