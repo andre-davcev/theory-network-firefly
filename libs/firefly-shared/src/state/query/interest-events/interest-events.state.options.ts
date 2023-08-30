@@ -3,11 +3,11 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { OrderBy } from '@theory/firebase';
 import { PageSize } from '@theory/ngxs';
 
-import { StateClusterInterestsModel } from './cluster-events.state.model';
+import { StateInterestEventsModel } from './interest-events.state.model';
 
-export const StateClusterInterestsOptions: StoreOptions<StateClusterInterestsModel> =
+export const StateInterestEventsOptions: StoreOptions<StateInterestEventsModel> =
   {
-    name: 'userInterests',
+    name: 'interestEvents',
 
     defaults: {
       pageSize: PageSize.Default,
