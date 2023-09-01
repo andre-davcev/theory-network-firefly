@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { Style } from '@capacitor/status-bar';
 import {
   ActionSheetController,
   AlertController,
+  IonInfiniteScroll,
   ModalController,
   NavController
 } from '@ionic/angular';
@@ -44,6 +45,7 @@ import { ActionDeviceStatusBarSet, StateDevice } from '@theory/capacitor';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
 
+import { PageSize } from '@theory/ngxs';
 import { Pages } from '../../enums';
 import { ActionMobileToast } from '../../state';
 import { PageEventDetail } from '../event-detail';
@@ -71,9 +73,15 @@ export class PageInterestDetail extends BaseComponent implements OnInit {
   @Select(StateInterest.canEdit) canEdit$!: Observable<boolean>;
   @Select(StateUser.isPublisher) isPublisher$!: Observable<boolean>;
 
+  @ViewChild(IonInfiniteScroll)
+  public infiniteScroll!: IonInfiniteScroll;
+
   public Pages: typeof Pages = Pages;
   public images: Record<string, StorageImage> = {};
   public TimestampFormat: any = TimestampFormat;
+
+  public events: Array<Event> = [];
+  public eventsPaged: Array<Event> = [];
 
   constructor(
     private store: Store,
@@ -92,6 +100,15 @@ export class PageInterestDetail extends BaseComponent implements OnInit {
       .subscribe(
         (images: Record<string, StorageImage>) => (this.images = images)
       );
+
+    this.events$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((events: Array<Event>) => {
+        this.events = events;
+        this.eventsPaged = [];
+
+        this.eventsPage();
+      });
   }
 
   public ionViewWillEnter(): void {
@@ -298,5 +315,21 @@ export class PageInterestDetail extends BaseComponent implements OnInit {
         )
       )
       .subscribe();
+  }
+
+  private eventsPage(): void {
+    const start: number = this.eventsPaged.length;
+    const end: number = start + PageSize.Default - 1;
+    const slice: Array<Event> = this.events.slice(start, end);
+
+    this.eventsPaged = [...this.eventsPaged, ...slice];
+  }
+
+  public loadData(): void {
+    if (this.events.length !== this.eventsPaged.length) {
+      this.eventsPage();
+    }
+
+    this.infiniteScroll.complete();
   }
 }

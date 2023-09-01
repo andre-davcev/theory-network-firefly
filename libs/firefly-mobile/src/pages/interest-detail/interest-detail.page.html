@@ -28,6 +28,7 @@
     <div class="cnt-description">
       <p class="description">{{ (interest$ | async)?.description }}</p>
     </div>
+    <!--
     <div *ngIf="(eventsPending$ | async)?.length || 0 > 0">
       <ion-item-divider></ion-item-divider>
       <ion-item>
@@ -66,10 +67,11 @@
         </ion-item>
       </ion-list>
     </div>
+  -->
     <ion-list>
       <ion-item-group>
         <ion-item-divider></ion-item-divider>
-        <ion-list *ngFor="let event of events$ | async">
+        <ion-list *ngFor="let event of events">
           <ion-item-divider>
             <ion-label>
               {{ event.timeStart | timestamp: TimestampFormat.DateLong }}
@@ -94,6 +96,14 @@
       </ion-item-group>
     </ion-list>
   </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData()">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      [loadingText]="'page.calendar.loading' | translate"
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <ff-button-add
     *ngIf="isPublisher$ | async"
