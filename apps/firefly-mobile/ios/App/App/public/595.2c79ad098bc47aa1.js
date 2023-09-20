@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkfirefly_mobile=self.webpackChunkfirefly_mobile||[]).push([[595],{595:(t,n,e)=>{e.r(n),e.d(n,{SplashScreenWeb:()=>r});var s=e(5861),o=e(4287);class r extends o.Uw{show(_){return(0,s.Z)(function*(){})()}hide(_){return(0,s.Z)(function*(){})()}}}}]);

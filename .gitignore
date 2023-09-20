@@ -43,7 +43,6 @@ Thumbs.db
 .tmp/
 .versions/
 coverage/
-www/
 temp/
 platforms/
 plugins/
@@ -57,9 +56,6 @@ libs/**/*.d.ts
 libs/**/*.metadata.json
 libs/**/*.ngfactory.ts
 libs/**/*.ngsummary.json
-
-# apps
-apps/**/app/src/main/assets/public/*
 
 # functions
 apps/firefly-functions/lib
