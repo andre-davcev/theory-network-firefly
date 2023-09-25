@@ -23,7 +23,7 @@ import { Link } from '../../shared';
 export class HomeComponent {
   @HostBinding('class')
   public get classes(): string {
-    return 'w-full';
+    return 'tw-w-full';
   }
 
   public Link = Link;
