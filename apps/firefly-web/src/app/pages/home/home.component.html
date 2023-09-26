@@ -1,14 +1,18 @@
 <header
   id="home"
-  class="tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center tw-h-screen tw-bg-fixed tw-bg-cover tw-custom-img tw-text-white"
+  class="tw-w-full tw-relative tw-h-full tw-flex tw-flex-col tw-h-screen tw-bg-fixed tw-bg-cover tw-custom-img tw-text-white tw-pl-20 tw-pt-16"
 >
-  <div
-    class="tw-cpt-info tw-h-full tw-flex tw-flex-1 tw-flex-col tw-pl-20 tw-pt-16 tw-pb-28"
-  >
+  <div class="cpt-nav-header tw-w-full tw-flex tw-flex-row">
     <ff-home-icon class="tw-flex-1"></ff-home-icon>
-
+    <div class="tw-flex tw-flex-1 tw-w-full tw-justify-center">
+      <ff-nav></ff-nav>
+    </div>
+  </div>
+  <div
+    class="cpt-nav--main tw-relative tw-h-full tw-w-full tw-flex tw-flex-row tw-justify-between"
+  >
     <div
-      class="cpt-header-section tw-flex tw-flex-1 tw-flex-col tw-grow tw-justify-between"
+      class="cpt-header-section tw-flex tw-flex-1 tw-flex-col tw-grow tw-justify-end tw-gap-20 tw-pt-16 tw-pb-28"
     >
       <div
         class="cpt-heading tw-tracking-wide tw-leading-none tw-flex tw-flex-col tw-gap-2"
@@ -32,18 +36,14 @@
 -->
       </div>
     </div>
-  </div>
-  <div
-    class="cpt-phone tw-flex-1 tw-h-full tw-flex tw-flex-col tw-justify-between tw-pt-16 tw-pb-28"
-  >
-    <div class="tw-w-full tw-flex tw-flex-row tw-justify-center">
-      <ff-nav class="tw-top-16 tw-left-20"></ff-nav>
-    </div>
-
-    <div class="tw-w-full tw-flex tw-flex-row tw-justify-center">
-      <tn-device-iphone
-        url="/assets/images/device-iphone-screenshot.png"
-      ></tn-device-iphone>
+    <div
+      class="cpt-phone tw-flex-1 tw-h-full tw-flex tw-flex-col tw-justify-between tw-pt-16 tw-pb-28"
+    >
+      <div class="tw-w-full tw-flex tw-flex-row tw-justify-center">
+        <tn-device-iphone
+          url="/assets/images/device-iphone-screenshot.png"
+        ></tn-device-iphone>
+      </div>
     </div>
   </div>
 </header>
