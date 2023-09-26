@@ -103,7 +103,7 @@
 </div>
 <section
   id="privacy"
-  class="tw-container tw-flex tw-items-center tw-justify-center tw-h-96 tw-m-auto tw-bg-fixed tw-bg-cover tw-rounded-xl tw-custom-img"
+  class="tw-flex tw-items-center tw-justify-center tw-h-80 sm:tw-h-96 tw-bg-fixed tw-bg-cover tw-rounded-xl tw-custom-img tw-mx-10 sm:tw-mx-16"
 >
   <a href="/assets/docs/Theory Network LLC - Online Privacy Policy.pdf">
     <div
@@ -116,28 +116,35 @@
 
 <section
   id="support"
-  class="cpt-support tw-relative tw-w-full tw-pt-20 tw-flex tw-flex-col tw-items-center tw-gap-8"
+  class="cpt-support tw-relative tw-w-full tw-pt-12 sm:tw-pt-20 tw-flex tw-flex-col tw-items-center tw-gap-6 sm:tw-gap-8"
 >
-  <div class="tw-text-5xl">Support</div>
-  <p class="tw-relative tw-block tw-text-2xl tw-leading-8 tw-pl-60 tw-pr-60">
-    Send all your inquiries, feedback, and questions regarding app issues and
-    feature enhancement requests to:
+  <div class="tw-text-4xl sm:tw-text-5xl">Support</div>
+  <div
+    class="cpt-support--description tw-flex tw-flex-col tw-items-center tw-gap-4 sm:tw-gap-6"
+  >
+    <p
+      class="tw-relative tw-block tw-text-base xxs:tw-text-xl sm:tw-text-2xl tw-leading-8 tw-px-12 xs:tw-px-24 sm:tw-px-32 md:tw-px-40 lg:tw-px-48"
+    >
+      Send all your inquiries, feedback, and questions regarding app issues and
+      feature enhancement requests to:
+    </p>
+
     <a
       href="mailto:support@theorynetwork.com"
-      class="cpt-email tw-tracking-wide tw-pb-6 tw-text-gray-400 tw-pl-2"
+      class="cpt-email tw-text-base xxs:tw-text-xl sm:tw-text-2xl tw-tracking-wide tw-pb-6 tw-text-gray-400 tw-pl-2"
     >
       support@theorynetwork.com
     </a>
-  </p>
+  </div>
 </section>
 
 <section
-  class="cpt-footer tw-relative tw-w-full tw-pt-20 tw-flex tw-flex-col tw-items-center"
+  class="cpt-footer tw-relative tw-w-full tw-pt-8 sm:tw-pt-20 tw-flex tw-flex-col tw-items-center"
 >
   <ff-home-icon [link]="true"></ff-home-icon>
   <ff-nav class="tw-text-black"></ff-nav>
   <div
-    class="cpt-copyright tw-text-xl tw-tracking-wide tw-pb-6 tw-text-gray-400"
+    class="cpt-copyright tw-text-xs xs:tw-text-lg sm:tw-text-xl tw-tracking-wide tw-pb-6 tw-text-gray-400"
   >
     Copyright {{ year }} Theory Network LLC. All Rights Reserved.
   </div>
