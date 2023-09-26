@@ -2,24 +2,35 @@
   id="home"
   class="tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center tw-h-screen tw-bg-fixed tw-bg-cover tw-custom-img tw-text-white"
 >
-  <ff-home-icon class="tw-absolute tw-top-16 tw-left-20"></ff-home-icon>
   <div
-    class="tw-cpt-info tw-h-full tw-flex-1 tw-flex tw-flex-col tw-justify-end tw-pl-20 tw-pb-28 tw-gap-20"
+    class="tw-cpt-info tw-h-full tw-flex tw-flex-1 tw-flex-col tw-pl-20 tw-pt-16 tw-pb-28"
   >
+    <ff-home-icon class="tw-flex-1"></ff-home-icon>
+
     <div
-      class="cpt-heading tw-tracking-wide tw-leading-none tw-flex tw-flex-col tw-gap-2"
+      class="cpt-header-section tw-flex tw-flex-1 tw-flex-col tw-grow tw-justify-between"
     >
-      <h1 class="cpt-title tw-text-5xl">Firefly</h1>
-      <h1 class="cpt-subtitle tw-text-4xl">Life comes to you</h1>
-    </div>
-    <div class="cpt-description tw-text-2xl tw-leading-tight tw-tracking-wide">
-      <p>Engaging your community through a fun and lightweight eventing app.</p>
-    </div>
-    <div class="cpt-app-stores tw-flex tw-flex-row tw-align-between tw-gap-16">
-      <tn-app-store-ios [url]="Link.AppStoreApple"></tn-app-store-ios>
-      <!--
+      <div
+        class="cpt-heading tw-tracking-wide tw-leading-none tw-flex tw-flex-col tw-gap-2"
+      >
+        <h1 class="cpt-title tw-text-5xl">Firefly</h1>
+        <h1 class="cpt-subtitle tw-text-4xl">Life comes to you</h1>
+      </div>
+      <div
+        class="cpt-description tw-text-2xl tw-leading-tight tw-tracking-wide"
+      >
+        <p>
+          Engaging your community through a fun and lightweight eventing app.
+        </p>
+      </div>
+      <div
+        class="cpt-app-stores tw-flex tw-flex-row tw-align-between tw-gap-16"
+      >
+        <tn-app-store-ios [url]="Link.AppStoreApple"></tn-app-store-ios>
+        <!--
       <tn-app-store-google [url]="Link.AppStoreGoogle"></tn-app-store-google>
 -->
+      </div>
     </div>
   </div>
   <div
@@ -92,7 +103,7 @@
 </div>
 <section
   id="privacy"
-  class="container tw-flex tw-items-center tw-justify-center tw-h-96 tw-m-auto tw-bg-fixed tw-bg-cover tw-rounded-xl tw-custom-img"
+  class="tw-container tw-flex tw-items-center tw-justify-center tw-h-96 tw-m-auto tw-bg-fixed tw-bg-cover tw-rounded-xl tw-custom-img"
 >
   <a href="/assets/docs/Theory Network LLC - Online Privacy Policy.pdf">
     <div
