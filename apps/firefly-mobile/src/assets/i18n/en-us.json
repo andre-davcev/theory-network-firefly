@@ -55,6 +55,11 @@
   "alert.confirm.delete.cancel": "Cancel",
   "alert.confirm.delete.confirm": "Confirm",
 
+  "alert.confirm.delete.header.user": "Delete Your Account",
+  "alert.confirm.delete.message.user": "WARNING: Once you delete your account, it cannot be recovered!",
+  "alert.confirm.delete.cancel.user": "Cancel",
+  "alert.confirm.delete.confirm.user": "DELETE",
+
   "alert.confirm.delete.event": "Event",
   "alert.confirm.delete.interest": "Interest",
 
@@ -226,6 +231,7 @@
   "page.user-profile.iconPlaceholder": "profile picture",
   "page.user-profile.titlePlaceholder": "First Name",
   "page.user-profile.subtitlePlaceholder": "Last Name",
+  "page.user-profile.deleteAccount": "Delete Account",
 
   "page.user-settings.title": "Settings",
 

@@ -106,7 +106,7 @@
           <ff-icon-subscribe
             [subscribed]="subscriptions[interest.id] != null"
             [count]="interest.subscriberCount"
-            [on]="subscriptions[interest.id].on"
+            [on]="subscriptions[interest.id]?.on || false"
             (clicked)="toggle($event, interest)"
             (clickedOn)="toggleOn($event, interest)"
           >

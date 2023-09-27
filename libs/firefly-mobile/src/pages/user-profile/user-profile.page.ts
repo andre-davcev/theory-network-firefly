@@ -1,18 +1,23 @@
 import { Component } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { Style } from '@capacitor/status-bar';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import {
+  ActionUserDelete,
   ActionUserIsPublisherSet,
   Color,
   IconType,
   StateUser,
-  StateUserProfile
+  StateUserProfile,
+  Translation
 } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
+
 import { StateMobile } from '../../state';
 
 @Component({
@@ -29,7 +34,12 @@ export class PageUserProfile {
   public IconType: any = IconType;
   public Color: any = Color;
 
-  constructor(private menu: MenuController, private store: Store) {}
+  constructor(
+    private menu: MenuController,
+    private store: Store,
+    private translate: TranslateService,
+    private alert: AlertController
+  ) {}
 
   public ionViewWillEnter(): void {
     this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Light }));
@@ -48,5 +58,37 @@ export class PageUserProfile {
     const isPublisher: boolean = event.detail.checked;
 
     this.store.dispatch(new ActionUserIsPublisherSet(isPublisher));
+  }
+
+  public deleteAccount(): void {
+    this.translate
+      .get([
+        Translation.AlertConfirmDeleteHeaderUser,
+        Translation.AlertConfirmDeleteMessageUser,
+        Translation.AlertConfirmDeleteCancelUser,
+        Translation.AlertConfirmDeleteConfirmUser
+      ])
+      .pipe(
+        switchMap((translations: Record<string, string>) =>
+          this.alert.create({
+            cssClass: 'cpt-alert',
+            header: translations[Translation.AlertConfirmDeleteHeaderUser],
+            message: translations[Translation.AlertConfirmDeleteMessageUser],
+
+            buttons: [
+              {
+                text: translations[Translation.AlertConfirmDeleteCancelUser],
+                role: 'cancel'
+              },
+              {
+                text: translations[Translation.AlertConfirmDeleteConfirmUser],
+                handler: () => this.store.dispatch(new ActionUserDelete())
+              }
+            ]
+          })
+        ),
+        switchMap((alert: HTMLIonAlertElement) => from(alert.present()))
+      )
+      .subscribe();
   }
 }

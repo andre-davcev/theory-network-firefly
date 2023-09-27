@@ -1,16 +1,14 @@
-import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { firestore as db } from 'firebase-admin';
 import {
-  DocumentSnapshot,
-  Firestore,
-  WriteResult,
-  QuerySnapshot,
-  QueryDocumentSnapshot,
   CollectionReference,
-  FieldValue
+  DocumentSnapshot,
+  FieldValue,
+  Firestore,
+  WriteResult
 } from '@google-cloud/firestore';
+import { auth, firestore as db } from 'firebase-admin';
+import { CloudFunction, EventContext, firestore } from 'firebase-functions';
 
-import { User, Collection } from '../shared';
+import { Collection, User } from '../shared';
 
 const database: Firestore = db();
 
@@ -23,19 +21,19 @@ const UsersDelete: CloudFunction<DocumentSnapshot> = firestore
     const id: string = snapshot.id;
     const user: User = snapshot.data() as User;
 
+    const authenticated: auth.Auth = auth();
+
+    // delete auth user
+    await authenticated.deleteUser(id);
+
     const deletes: Array<Promise<WriteResult>> = [
+      // user-profiles
       database.collection(Collection.UserProfiles).doc(id).delete()
     ];
 
+    /*
+    // interests
     let query: QuerySnapshot;
-
-    query = await database
-      .collection(Collection.Alerts)
-      .where('userId', '==', id)
-      .get();
-    query.forEach((snapshot: QueryDocumentSnapshot) =>
-      deletes.push(snapshot.ref.delete())
-    );
 
     query = await database
       .collection(Collection.Interests)
@@ -44,7 +42,10 @@ const UsersDelete: CloudFunction<DocumentSnapshot> = firestore
     query.forEach((snapshot: QueryDocumentSnapshot) =>
       deletes.push(snapshot.ref.delete())
     );
+*/
 
+    /*
+    // events
     query = await database
       .collection(Collection.Events)
       .where('userId', '==', id)
@@ -52,7 +53,8 @@ const UsersDelete: CloudFunction<DocumentSnapshot> = firestore
     query.forEach((snapshot: QueryDocumentSnapshot) =>
       deletes.push(snapshot.ref.delete())
     );
-
+*/
+    // interests/id/subscriberCount
     user.subscriptions.forEach((interestId: string) =>
       deletes.push(
         interests

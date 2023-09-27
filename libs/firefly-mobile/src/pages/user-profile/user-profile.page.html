@@ -57,6 +57,17 @@
           </ion-toggle>
         </ion-item>
 
+        <div class="cpt-delete--button" fxLayout="row" fxLayoutAlign="center">
+          <ion-button
+            color="secondary"
+            size="default"
+            (click)="deleteAccount()"
+          >
+            <ion-icon name="trash"></ion-icon>
+            {{ 'page.user-profile.deleteAccount' | translate }}
+          </ion-button>
+        </div>
+
         <ion-item-divider></ion-item-divider>
       </ion-item-group>
     </ion-list>
