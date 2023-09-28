@@ -324,7 +324,9 @@ export class StateUser
           new ActionUserPatch({
             id: authData?.uid,
             userId: authData?.uid,
-            email: authData?.email || undefined
+            email: authData?.email || undefined,
+            city: this.store.selectSnapshot(StateCity.city) || undefined,
+            geopoint: this.store.selectSnapshot(StateCity.geopoint) || undefined
           })
         ]).pipe(
           switchMap(() => super.create(context)),
@@ -351,7 +353,9 @@ export class StateUser
 
   @Action(ActionUserDelete)
   public override delete(context: StateContext<StateUserModel>) {
-    return super.delete(context);
+    return super
+      .delete(context)
+      .pipe(switchMap(() => context.dispatch(new ActionUserLogout())));
   }
 
   @Action(ActionUserWatch, { cancelUncompleted: true })
@@ -456,7 +460,7 @@ export class StateUser
             dispatch(
               new ActionUserPatch(
                 { city: city || undefined, geopoint: geopoint || undefined },
-                true
+                this.store.selectSnapshot(StateUser.authenticated)
               )
             )
           )

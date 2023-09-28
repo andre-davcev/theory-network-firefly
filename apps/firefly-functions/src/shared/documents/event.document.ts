@@ -1,4 +1,5 @@
-import { GeoPoint, Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase-admin/firestore';
+import { GeoPoint } from 'firebase/firestore';
 
 import { Nullable } from '../../library';
 import { MapboxPlaceType } from '../enums';

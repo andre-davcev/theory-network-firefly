@@ -1,7 +1,7 @@
 import { DocumentSnapshot, Firestore } from '@google-cloud/firestore';
 import { firestore as db } from 'firebase-admin';
+import { Timestamp } from 'firebase-admin/firestore';
 import { CloudFunction, EventContext, firestore } from 'firebase-functions';
-import { Timestamp } from 'firebase/firestore';
 
 import { ServiceCities, ServiceFirestore, Version } from '../library';
 import { Collection, User, UserProfile } from '../shared';
