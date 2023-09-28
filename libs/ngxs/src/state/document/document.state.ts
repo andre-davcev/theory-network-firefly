@@ -249,10 +249,11 @@ export class StateDocument<
     const state: M = getState();
     const value: T = StateDocument.dataState(state);
     const path: string = this.formPath;
+    const formGroup: UntypedFormGroup = this.service.formCreate(value);
 
     return this.service.documentCreate(this.collection, value).pipe(
       tap((snapshot: FirestoreDocumentSnapshot<any>) =>
-        patchState({ snapshot } as M)
+        patchState({ snapshot, formGroup } as M)
       ),
 
       switchMap((snapshot: FirestoreDocumentSnapshot<any>) => {
