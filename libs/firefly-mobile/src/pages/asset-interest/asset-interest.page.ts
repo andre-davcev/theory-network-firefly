@@ -24,6 +24,7 @@ import {
   ActionInterestSave,
   ActionUserEventsGetData,
   InterestType,
+  Pages,
   StateInterest,
   StateInterests,
   StateUserEvents,
@@ -36,7 +37,6 @@ import {
 } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
-import { Pages } from '../../enums';
 import { ActionMobileToast } from '../../state';
 
 @Component({

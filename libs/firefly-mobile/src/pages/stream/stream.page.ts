@@ -21,6 +21,7 @@ import {
   ActionInterestsSubscriptionToggle,
   ActionSearchReset,
   IconType,
+  Pages,
   StateInterest,
   StateInterests,
   StateSearch,
@@ -28,7 +29,7 @@ import {
 } from '@firefly/shared';
 import { BaseComponent } from '@theory/core';
 import { TimestampFormat } from '@theory/firebase';
-import { Pages } from '../../enums';
+
 import { ActionMobileAuthSelect } from '../../state';
 
 @Component({

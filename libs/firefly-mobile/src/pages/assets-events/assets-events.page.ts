@@ -10,12 +10,12 @@ import { Event } from '@firefly/cloud';
 import {
   ActionAppLoadingShow,
   IconType,
+  Pages,
   StateUserEvents
 } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import { StateStorage, StorageImage, TimestampFormat } from '@theory/firebase';
-import { Pages } from '../../enums';
 import { StateMobile } from '../../state';
 
 @Component({

@@ -12,12 +12,13 @@ import {
   ActionEventInterestAdd,
   ActionInterestSetId,
   IconType,
+  Pages,
   StateUserInterests
 } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
 import { StateStorage, StorageImage } from '@theory/firebase';
-import { Pages } from '../../enums';
+
 import { StateMobile } from '../../state';
 
 @Component({

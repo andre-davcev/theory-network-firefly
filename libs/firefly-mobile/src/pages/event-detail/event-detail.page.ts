@@ -28,6 +28,7 @@ import {
   Color,
   IconSlot,
   IconType,
+  Pages,
   StateEvent,
   Translation
 } from '@firefly/shared';
@@ -39,7 +40,6 @@ import {
 import { TimestampFormat } from '@theory/firebase';
 
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Pages } from '../../enums';
 import { ActionMobileToast } from '../../state';
 import {
   PageAssetsInterests,

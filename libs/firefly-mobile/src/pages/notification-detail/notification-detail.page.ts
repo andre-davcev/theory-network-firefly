@@ -15,12 +15,12 @@ import { Alert, Event } from '@firefly/cloud';
 import {
   ActionUserAlertsDelete,
   ActionUserAlertsGo,
+  Pages,
   StateEvent,
   Translation
 } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
-import { Pages } from '../../enums';
 
 @Component({
   selector: 'app-page-notification-detail',

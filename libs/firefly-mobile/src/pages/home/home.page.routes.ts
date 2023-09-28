@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
-import { Pages } from '../../enums';
+import { Pages } from '@firefly/shared';
+
 import { PageHome } from './home.page';
 import { ResolverPageHome } from './home.page.resolver';
 

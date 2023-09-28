@@ -37,7 +37,7 @@ import {
 import { User as FirebaseUser, UserCredential } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
 
-import { EventType, InterestType } from '../../../enums';
+import { EventType, InterestType, Pages } from '../../../enums';
 import { ServiceUsers } from '../../../services';
 import { ActionNotificationsWatch } from '../../basic/notifications/notifications.actions';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
@@ -77,6 +77,7 @@ import {
 import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 
+import { Navigate } from '@ngxs/router-plugin';
 import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
 import {
   ActionInterestsPage,
@@ -558,6 +559,7 @@ export class StateUser
       ),
       switchMap(() => dispatch(new ActionUserAnonymousLogin())),
       switchMap(() => dispatch(new ActionInterestsPage())),
+      switchMap(() => dispatch(new Navigate([Pages.Home, Pages.Stream]))),
       catchError((error: Error) => of(patchState({ error })))
     );
   }

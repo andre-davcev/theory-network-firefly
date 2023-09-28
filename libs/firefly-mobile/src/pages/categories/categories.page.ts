@@ -5,9 +5,8 @@ import { Navigate } from '@ngxs/router-plugin';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { Color, IconSize, IconType } from '@firefly/shared';
+import { Color, IconSize, IconType, Pages } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Pages } from '../../enums';
 import { StateMobile } from '../../state';
 
 @Component({

@@ -23,6 +23,7 @@ import {
   ActionUserEventsDelete,
   EventType,
   IconType,
+  Pages,
   StateCalendar,
   StateInterests,
   StateSearch,
@@ -34,7 +35,6 @@ import { ActionDeviceStatusBarSet } from '@theory/capacitor';
 import { BaseComponent, CoreEnum } from '@theory/core';
 import algoliaSearch, { SearchClient, SearchIndex } from 'algoliasearch/lite';
 import { ComponentHomeOptions } from '../../components';
-import { Pages } from '../../enums';
 import { ActionMobileAuthSelect, StateMobile } from '../../state';
 
 @Component({

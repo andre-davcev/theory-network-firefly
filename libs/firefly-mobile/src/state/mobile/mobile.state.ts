@@ -6,7 +6,8 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { Pages } from '../../enums';
+import { Pages } from '@firefly/shared';
+
 import {
   ActionMobileAuthSelect,
   ActionMobileAuthSelected,

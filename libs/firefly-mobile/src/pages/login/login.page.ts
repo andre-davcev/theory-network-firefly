@@ -5,9 +5,8 @@ import { ModalController } from '@ionic/angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { AuthType, Color, IconType, StateUser } from '@firefly/shared';
+import { AuthType, Color, IconType, Pages, StateUser } from '@firefly/shared';
 import { ActionDeviceStatusBarSet } from '@theory/capacitor';
-import { Pages } from '../../enums';
 
 @Component({
   selector: 'app-page-login',

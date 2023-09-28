@@ -5,12 +5,11 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
-import { StateApp } from '@firefly/shared';
+import { Pages, StateApp } from '@firefly/shared';
 import {
   ActionDeviceStatusBarSet,
   ActionDeviceStatusBarShow
 } from '@theory/capacitor';
-import { Pages } from '../../enums';
 
 @Component({
   selector: 'app-page-auth',

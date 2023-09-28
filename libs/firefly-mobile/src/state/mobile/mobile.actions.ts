@@ -1,5 +1,6 @@
+import { Pages } from '@firefly/shared';
+
 import { ActionsMobile } from './mobile.actions.enum';
-import { Pages } from '../../enums';
 
 export class ActionMobileToast {
   static readonly type = ActionsMobile.Toast;

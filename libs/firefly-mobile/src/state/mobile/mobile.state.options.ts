@@ -1,7 +1,8 @@
 import { StoreOptions } from '@ngxs/store/src/symbols';
 
+import { Pages } from '@firefly/shared';
+
 import { StateMobileModel } from './mobile.state.model';
-import { Pages } from '../../enums';
 
 export const StateMobileOptions: StoreOptions<StateMobileModel> = {
   name: 'mobile',

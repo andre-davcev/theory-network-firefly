@@ -9,8 +9,7 @@ import { delay, finalize, switchMap, tap } from 'rxjs/operators';
 import {
   ActionMobileAuthSelected,
   ActionMobileMenuClosed,
-  ActionMobileMenuOpened,
-  Pages
+  ActionMobileMenuOpened
 } from '@firefly/mobile';
 import {
   ActionAppLoadingHide,
@@ -21,6 +20,7 @@ import {
   Color,
   IconSize,
   IconType,
+  Pages,
   StateUser
 } from '@firefly/shared';
 import { PlatformEnum } from '@theory/ionic';

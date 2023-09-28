@@ -12,11 +12,11 @@ import {
   ActionUserAlertsDelete,
   ActionUserAlertsGo,
   IconType,
+  Pages,
   StateAlerts,
   Translation
 } from '@firefly/shared';
 import { BaseComponent } from '@theory/core';
-import { Pages } from '../../enums';
 
 @Component({
   selector: 'app-page-notifications',
