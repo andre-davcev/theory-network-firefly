@@ -8,6 +8,8 @@ import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import {
+  ActionAppLoadingHide,
+  ActionAppLoadingShow,
   ActionUserDelete,
   ActionUserIsPublisherSet,
   Color,
@@ -82,7 +84,18 @@ export class PageUserProfile {
               },
               {
                 text: translations[Translation.AlertConfirmDeleteConfirmUser],
-                handler: () => this.store.dispatch(new ActionUserDelete())
+                handler: () =>
+                  this.store
+                    .dispatch(new ActionAppLoadingShow())
+                    .pipe(
+                      switchMap(() =>
+                        this.store.dispatch(new ActionUserDelete())
+                      ),
+                      switchMap(() =>
+                        this.store.dispatch(new ActionAppLoadingHide())
+                      )
+                    )
+                    .subscribe()
               }
             ]
           })

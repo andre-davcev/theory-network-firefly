@@ -327,7 +327,9 @@ export class StateUser
             userId: authData?.uid,
             email: authData?.email || undefined,
             city: this.store.selectSnapshot(StateCity.city) || undefined,
-            geopoint: this.store.selectSnapshot(StateCity.geopoint) || undefined
+            geopoint:
+              this.store.selectSnapshot(StateCity.geopoint) || undefined,
+            isPublisher: false
           })
         ]).pipe(
           switchMap(() => super.create(context)),
@@ -478,7 +480,12 @@ export class StateUser
           language != null && StateUser.language(getState()) !== language
       ),
       switchMap((language: string) =>
-        dispatch(new ActionUserPatch({ language }, true))
+        dispatch(
+          new ActionUserPatch(
+            { language },
+            this.store.selectSnapshot(StateUser.authenticated)
+          )
+        )
       )
     );
   }
@@ -517,7 +524,12 @@ export class StateUser
             usedLast: now
           };
 
-    return dispatch(new ActionUserPatch({ tokens }, true));
+    return dispatch(
+      new ActionUserPatch(
+        { tokens },
+        this.store.selectSnapshot(StateUser.authenticated)
+      )
+    );
   }
 
   @Action(ActionUserLoginEmail)

@@ -29,8 +29,8 @@
     </form>
 -->
   <form
-    novalidate
     *ngIf="formUser$ | async as formUser"
+    novalidate
     [formGroup]="formUser"
     ngxsForm="users.form"
   >
