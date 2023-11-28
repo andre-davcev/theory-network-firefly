@@ -1,4 +1,7 @@
 export enum Translation {
+  GeneralConfirm = 'general.confirm',
+  GeneralCancel = 'general.cancel',
+
   AlertConfirmDeleteHeader = 'alert.confirm.delete.header',
   AlertConfirmDeleteMessage = 'alert.confirm.delete.message',
   AlertConfirmDeleteCancel = 'alert.confirm.delete.cancel',

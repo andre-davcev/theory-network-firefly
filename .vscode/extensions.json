@@ -16,7 +16,6 @@
     "infinity1207.angular2-switcher",
     "Ionic.ionic",
     "johnpapa.vscode-peacock",
-    "johnpapa.winteriscoming",
     "mhutchie.git-graph",
     "ms-vscode.js-debug",
     "MS-vsliveshare.vsliveshare",
@@ -30,6 +29,7 @@
     "vincaslt.highlight-matching-tag",
     "vscodevim.vim",
     "wayou.vscode-todo-highlight",
-    "wix.vscode-import-cost"
+    "wix.vscode-import-cost",
+    "ms-vscode-remote.remote-ssh"
   ]
 }
