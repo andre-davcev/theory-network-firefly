@@ -42,6 +42,12 @@
   "menu.account.settings": "Settings",
   "menu.account.log-out": "Log Out",
 
+  "tab.events": "Events",
+  "tab.lists": "Lists",
+  "tab.notifications": "Notifications",
+  "tab.calendar": "Calendar",
+  "tab.search": "Search",
+
   "action.go.calendar": "Add To Calendar",
   "action.go.map": "Get Directions",
   "action.go.call": "Call",

@@ -56,4 +56,34 @@
   </ion-menu>
 
   <ion-router-outlet id="main"></ion-router-outlet>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="location"></ion-icon>
+        {{ 'tab.events' | translate }}
+      </ion-tab-button>
+
+      <ion-tab-button tab="radio">
+        <ion-icon name="list-circle"></ion-icon>
+        {{ 'tab.lists' | translate }}
+      </ion-tab-button>
+
+      <ion-tab-button tab="library">
+        <ion-icon name="notifications"></ion-icon>
+        {{ 'tab.notifications' | translate }}
+      </ion-tab-button>
+
+      <ion-tab-button tab="library">
+        <ion-icon name="calendar-number"></ion-icon>
+        {{ 'tab.calendar' | translate }}
+      </ion-tab-button>
+      <!--
+      <ion-tab-button tab="search">
+        <ion-icon name="search"></ion-icon>
+        {{ 'tab.search' | translate }}
+      </ion-tab-button>
+-->
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-app>
