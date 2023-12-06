@@ -3,6 +3,7 @@
   "editor.guides.bracketPairs": "active",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
+  "typescript.preferences.importModuleSpecifier": "relative",
   "files.exclude": {
     "**/*.js": {
       "when": "$(basename).ts"

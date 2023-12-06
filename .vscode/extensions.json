@@ -30,6 +30,8 @@
     "vscodevim.vim",
     "wayou.vscode-todo-highlight",
     "wix.vscode-import-cost",
-    "ms-vscode-remote.remote-ssh"
+    "ms-vscode-remote.remote-ssh",
+    "mhutchie.git-graph",
+    "donjayamanne.githistory"
   ]
 }
