@@ -12,4 +12,5 @@ export * from './login';
 export * from './notification-detail';
 export * from './notifications';
 export * from './stream';
+export * from './tabs';
 export * from './user-profile';

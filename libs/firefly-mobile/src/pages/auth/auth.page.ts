@@ -26,9 +26,7 @@ export class PageAuth implements OnInit {
       .pipe(
         switchMap(() => this.initialized$),
         filter((initialized: boolean) => initialized),
-        switchMap(() =>
-          this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]))
-        )
+        switchMap(() => this.store.dispatch(new Navigate([Pages.Tabs])))
       )
       .subscribe();
   }

@@ -3,7 +3,6 @@
   "editor.guides.bracketPairs": "active",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
-  "typescript.preferences.importModuleSpecifier": "relative",
   "files.exclude": {
     "**/*.js": {
       "when": "$(basename).ts"
@@ -36,7 +35,7 @@
     "editor.rulers": [140],
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
+      "source.organizeImports": "explicit"
     }
   },
   "[yaml]": {

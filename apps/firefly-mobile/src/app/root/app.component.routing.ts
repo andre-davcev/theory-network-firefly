@@ -11,6 +11,10 @@ export const routes: Routes = [
     loadChildren: () => import('@firefly/mobile').then((m) => m.ModulePageAuth)
   },
   {
+    path: Pages.Tabs,
+    loadChildren: () => import('@firefly/mobile').then((m) => m.ModulePageTabs)
+  },
+  {
     path: Pages.Home,
     loadChildren: () => import('@firefly/mobile').then((m) => m.ModulePageHome)
   },

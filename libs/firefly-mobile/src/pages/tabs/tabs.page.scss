@@ -1,0 +1,11 @@
+@use 'variables' as firefly;
+
+:host {
+  ion-tab-button {
+    --color: #{firefly.$fire-color-dark};
+  }
+
+  .cpt-tab--title {
+    color: #{firefly.$fire-color-dark};
+  }
+}
