@@ -43,16 +43,17 @@ import { TimestampFormat } from '@theory/firebase';
 
 import { Style } from '@capacitor/status-bar';
 import { ActionDeviceStatusBarSet, StateLocation } from '@theory/capacitor';
+
 import { ComponentHomeOptions } from '../../components';
 import { ActionMobileAuthSelect, StateMobile } from '../../state';
 import { PageNotifications } from '../notifications';
 
 @Component({
-  selector: 'app-page-stream',
-  templateUrl: 'stream.page.html',
-  styleUrls: ['./stream.page.scss']
+  selector: 'app-page-lists',
+  templateUrl: 'lists.page.html',
+  styleUrls: ['./lists.page.scss']
 })
-export class PageStream extends BaseComponent implements OnInit {
+export class PageLists extends BaseComponent implements OnInit {
   @Select(StateUser.isUser) isUser$!: Observable<boolean>;
   @Select(StateInterest.events) events$!: Observable<Event[]>;
   @Select(StateInterests.data) data$!: Observable<Array<StreamInterest>>;

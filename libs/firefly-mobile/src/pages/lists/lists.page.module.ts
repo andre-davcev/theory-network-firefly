@@ -12,8 +12,8 @@ import { ModuleDirectiveElevation } from '@theory/google';
 
 import { ModuleComponentItemHeader } from '../../components';
 import { ModulePage } from '../../modules';
-import { PageStream } from './stream.page';
-import { RoutesPageStream } from './stream.page.routes';
+import { PageLists } from './lists.page';
+import { RoutesPageLists } from './lists.page.routes';
 
 @NgModule({
   imports: [
@@ -23,12 +23,12 @@ import { RoutesPageStream } from './stream.page.routes';
     ModuleComponentIconSubscribe,
     MatExpansionModule,
     ModuleComponentIconMessage,
-    RouterModule.forChild(RoutesPageStream),
+    RouterModule.forChild(RoutesPageLists),
     ModuleComponentButtonAdd,
     ModulePipeTimestamp
   ],
 
-  declarations: [PageStream],
-  exports: [PageStream]
+  declarations: [PageLists],
+  exports: [PageLists]
 })
-export class ModulePageStream {}
+export class ModulePageLists {}

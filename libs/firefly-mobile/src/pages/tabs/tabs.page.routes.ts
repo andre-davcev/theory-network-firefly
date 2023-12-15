@@ -12,7 +12,7 @@ export const RoutesPageTabs: Routes = [
     children: [
       {
         path: Pages.Lists,
-        loadChildren: () => import('../stream').then((m) => m.ModulePageStream)
+        loadChildren: () => import('../lists').then((m) => m.ModulePageLists)
       },
       {
         path: '',
