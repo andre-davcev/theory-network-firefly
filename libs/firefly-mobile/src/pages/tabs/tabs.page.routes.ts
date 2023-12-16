@@ -21,6 +21,11 @@ export const RoutesPageTabs: Routes = [
           import('../notifications').then((m) => m.ModulePageNotifications)
       },
       {
+        path: Pages.Calendar,
+        loadChildren: () =>
+          import('../calendar').then((m) => m.ModulePageCalendar)
+      },
+      {
         path: '',
         redirectTo: `/${Pages.Tabs}/${Pages.Lists}`,
         pathMatch: 'full'

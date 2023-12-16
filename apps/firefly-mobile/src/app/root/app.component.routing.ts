@@ -14,11 +14,6 @@ export const routes: Routes = [
     path: Pages.Tabs,
     loadChildren: () => import('@firefly/mobile').then((m) => m.ModulePageTabs)
   },
-  {
-    path: Pages.Calendar,
-    loadChildren: () =>
-      import('@firefly/mobile').then((m) => m.ModulePageCalendar)
-  },
 
   {
     path: Pages.AssetsInterests,
