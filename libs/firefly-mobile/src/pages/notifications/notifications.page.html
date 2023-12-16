@@ -1,12 +1,25 @@
 <ion-header elevation="1">
   <ion-toolbar color="light">
+    <!--
     <ion-buttons slot="start">
       <ion-button color="dark" (click)="done()">
         {{ 'general.done' | translate }}
       </ion-button>
     </ion-buttons>
+-->
 
     <ion-title color="dark"> {{ 'page.alerts.title' | translate }} </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button
+        *ngIf="(locationDenied$ | async) === false"
+        icon-only
+        (click)="menuOpen()"
+        [disabled]="menuOpen$ | async"
+      >
+        <ion-icon name="person" color="dark" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

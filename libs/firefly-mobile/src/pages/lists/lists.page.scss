@@ -1,10 +1,6 @@
 @use 'variables' as firefly;
 
 :host {
-  ion-content {
-    --background: #{firefly.$fire-color-transparent};
-  }
-
   ion-list {
     --background: #{firefly.$fire-color-transparent};
     background: #{firefly.$fire-color-transparent};

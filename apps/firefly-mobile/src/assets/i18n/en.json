@@ -184,7 +184,7 @@
   "page.stream.empty.virtual": "Our swarm of fireflies are busy building your Virtual Interest recommendations. Check back later!",
   "page.stream.empty.locationDenied": "Without your location we can't provide you with Interest recommendations. Please check your Location settings and allow Firefly location access.",
   "page.interests.empty": "Help support the Firefly community by publishing your own public Interests here.",
-  "page.events.empty.new": "Looks like you have no new event notifications right now.",
+  "page.events.empty.new": "Looks like you have no new notifications right now.",
   "page.events.empty.upcoming": "Looks like you no upcoming events right now.",
   "page.events.empty.created": "Looks like you haven't created any Events yet. Feel free to create Events to be added to Interest streams.",
   "page.events.empty.available": "Looks like you haven't created any Events yet that aren't already added to this Interest.",

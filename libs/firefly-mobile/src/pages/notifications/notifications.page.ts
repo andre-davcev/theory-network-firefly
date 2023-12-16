@@ -1,5 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, IonSlides, ModalController } from '@ionic/angular';
+import {
+  AlertController,
+  IonSlides,
+  MenuController,
+  ModalController
+} from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Select, Store } from '@ngxs/store';
 import { BehaviorSubject, Observable, from } from 'rxjs';
@@ -14,9 +19,12 @@ import {
   IconType,
   Pages,
   StateAlerts,
+  StateUser,
   Translation
 } from '@firefly/shared';
+import { StateLocation } from '@theory/capacitor';
 import { BaseComponent } from '@theory/core';
+import { ActionMobileAuthSelect, StateMobile } from '../../state';
 
 @Component({
   selector: 'app-page-notifications',
@@ -26,6 +34,8 @@ import { BaseComponent } from '@theory/core';
 export class PageNotifications extends BaseComponent {
   @Select(StateAlerts.data) data$!: Observable<Array<Alert>>;
   @Select(StateAlerts.exists) exists$!: Observable<boolean>;
+  @Select(StateLocation.permissionDenied) locationDenied$!: Observable<boolean>;
+  @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
 
   @ViewChild('slider', { static: false })
   protected sliderRef!: IonSlides;
@@ -42,7 +52,8 @@ export class PageNotifications extends BaseComponent {
     private store: Store,
     private modal: ModalController,
     private translate: TranslateService,
-    private alert: AlertController
+    private alert: AlertController,
+    private menu: MenuController
   ) {
     super();
   }
@@ -112,5 +123,15 @@ export class PageNotifications extends BaseComponent {
 
   public done(): void {
     this.modal.dismiss();
+  }
+
+  public menuOpen(): void {
+    const isUser: boolean = this.store.selectSnapshot(StateUser.isUser);
+
+    if (isUser) {
+      this.menu.open();
+    } else {
+      this.store.dispatch(new ActionMobileAuthSelect());
+    }
   }
 }
