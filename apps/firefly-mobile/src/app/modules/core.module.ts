@@ -10,7 +10,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import {
+  NgxsRouterPluginModule,
+  RouterStateSerializer
+} from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
 // import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -45,6 +48,7 @@ import { FirebaseEnvironment, StateStorage } from '@theory/firebase';
 import { MapboxEnvironment } from '@theory/mapbox';
 
 import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
+import { CustomRouterStateSerializer } from '@theory/ngxs';
 import { environment } from '../../environments/environment';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -121,6 +125,7 @@ export function createTranslateLoader(http: HttpClient) {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: FirebaseEnvironment, useValue: environment.apis.firebase },
     { provide: MapboxEnvironment, useValue: environment.apis.mapbox },
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
     Calendar,
     CallNumber,
     LaunchNavigator
