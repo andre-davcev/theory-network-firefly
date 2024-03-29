@@ -1,3 +1,4 @@
+import { RouterStateParams } from '@theory/ngxs';
 import { EventType, InterestType } from '../../../enums';
 
 export interface StateAppModel {
@@ -8,4 +9,5 @@ export interface StateAppModel {
   eventType: EventType;
   eventVirtual: boolean;
   notificationsIndex: number;
+  routerState: RouterStateParams;
 }

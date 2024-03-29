@@ -6,3 +6,7 @@ export class ActionAppLoadingShow {
 export class ActionAppLoadingHide {
   static readonly type = ActionsApp.LoadingHide;
 }
+
+export class ActionAppRouterWatch {
+  static readonly type = ActionsApp.RouterWatch;
+}

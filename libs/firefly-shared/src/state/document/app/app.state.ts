@@ -1,21 +1,38 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { LoadingOptions } from '@ionic/core';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { RouterState, RouterStateModel } from '@ngxs/router-plugin';
+import {
+  Action,
+  NgxsOnInit,
+  Selector,
+  State,
+  StateContext,
+  Store,
+  createSelector
+} from '@ngxs/store';
 import { from, of } from 'rxjs';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { StateLocation } from '@theory/capacitor';
+import { RouterStateParams } from '@theory/ngxs';
+
+import { CoreUtil } from '@theory/core';
+import { Pages } from '../../../enums';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
 import { StateCity } from '../city/city.state';
 import { StateUser } from '../user/user.state';
-import { ActionAppLoadingHide, ActionAppLoadingShow } from './app.actions';
+import {
+  ActionAppLoadingHide,
+  ActionAppLoadingShow,
+  ActionAppRouterWatch
+} from './app.actions';
 import { StateAppModel } from './app.state.model';
-import { StateAppOptions } from './app.state.options';
+import { DEFAULT_ROUTER_STATE, StateAppOptions } from './app.state.options';
 
 @State<StateAppModel>(StateAppOptions)
 @Injectable()
-export class StateApp {
+export class StateApp implements NgxsOnInit {
   @Selector() static loading(state: StateAppModel): boolean {
     return state.loading;
   }
@@ -24,6 +41,41 @@ export class StateApp {
   }
   @Selector() static loadingElement(state: StateAppModel): any {
     return state.loadingElement;
+  }
+
+  @Selector() static routerState(state: StateAppModel): RouterStateParams {
+    return state.routerState;
+  }
+
+  public static onPage(page: Pages) {
+    return createSelector(
+      [StateApp.routerState],
+      (routerState: RouterStateParams) => {
+        const url: string = routerState.url;
+        const parts: Array<string> = (url || '').split('/');
+        const token: string = parts[parts.length - 1];
+
+        const onPage: boolean = page === token;
+
+        return onPage;
+      }
+    );
+  }
+
+  public static onTab(page: Pages) {
+    return createSelector(
+      [StateApp.routerState],
+      (routerState: RouterStateParams) => {
+        const url: string = routerState.url;
+        const parts: Array<string> = (url || '').split('/');
+        const token1: string = parts.length < 3 ? '' : parts[1];
+        const token2: string = parts.length < 3 ? '' : parts[2];
+
+        const onTab: boolean = token1 === Pages.Tabs && token2 === page;
+
+        return onTab;
+      }
+    );
   }
 
   @Selector([
@@ -42,7 +94,11 @@ export class StateApp {
     return locationDenied || (userInitialized && cityFound && cityStreamSet);
   }
 
-  constructor(private loading: LoadingController) {}
+  constructor(private store: Store, private loading: LoadingController) {}
+
+  public ngxsOnInit({ dispatch }: StateContext<StateAppModel>): void {
+    dispatch(new ActionAppRouterWatch());
+  }
 
   @Action(ActionAppLoadingShow)
   loadingShow({ patchState, getState }: StateContext<StateAppModel>) {
@@ -75,6 +131,20 @@ export class StateApp {
       ),
       filter((loading: HTMLIonLoadingElement) => loading != null),
       tap((loading: HTMLIonLoadingElement) => loading.dismiss())
+    );
+  }
+
+  @Action(ActionAppRouterWatch)
+  routerWatch({ patchState }: StateContext<StateAppModel>) {
+    return this.store.select(RouterState).pipe(
+      map((state: RouterStateModel<RouterStateParams>) => state?.state),
+      tap((routerState: RouterStateParams | undefined) =>
+        patchState({
+          routerState:
+            routerState ||
+            CoreUtil.clone<RouterStateParams>(DEFAULT_ROUTER_STATE)
+        })
+      )
     );
   }
 }

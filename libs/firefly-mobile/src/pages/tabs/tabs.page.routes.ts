@@ -12,6 +12,10 @@ export const RoutesPageTabs: Routes = [
     resolve: { loader: ResolverPageTabs },
     children: [
       {
+        path: Pages.Events,
+        loadChildren: () => import('../lists').then((m) => m.ModulePageLists)
+      },
+      {
         path: Pages.Lists,
         loadChildren: () => import('../lists').then((m) => m.ModulePageLists)
       },

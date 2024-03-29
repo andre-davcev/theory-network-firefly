@@ -8,6 +8,7 @@ export enum Pages {
   Lists = 'lists',
   Notifications = 'notifications',
   Calendar = 'calendar',
+
   SignUp = 'sign-up',
   ResetPassword = 'reset-password',
   SignUpSlides = 'sign-up-slides',
