@@ -46,7 +46,6 @@ import { ActionDeviceStatusBarSet, StateLocation } from '@theory/capacitor';
 
 import { ComponentHomeOptions } from '../../components';
 import { ActionMobileAuthSelect, StateMobile } from '../../state';
-import { PageNotifications } from '../notifications';
 
 @Component({
   selector: 'app-page-lists',
@@ -129,14 +128,8 @@ export class PageLists extends BaseComponent implements OnInit {
     this.store.dispatch(new Navigate(url));
   }
 
-  public go(type: Pages.Notifications | Pages.Stream): void {
-    if (type === Pages.Notifications) {
-      from(this.modal.create({ component: PageNotifications })).subscribe(
-        (modal: HTMLIonModalElement) => modal.present()
-      );
-    } else {
-      this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
-    }
+  public go(type: Pages.Notifications | Pages.Events): void {
+    this.store.dispatch(new Navigate([Pages.Tabs, type]));
   }
 
   public menuOpen(): void {
@@ -153,7 +146,7 @@ export class PageLists extends BaseComponent implements OnInit {
   }
 
   public async showPopover(event: any): Promise<void> {
-    const isStream: boolean = this.store.selectSnapshot(StateMobile.pageStream);
+    const isStream: boolean = this.store.selectSnapshot(StateMobile.pageEvents);
 
     const popover: HTMLIonPopoverElement = await this.popover.create({
       component: ComponentHomeOptions,
@@ -188,10 +181,10 @@ export class PageLists extends BaseComponent implements OnInit {
     if (event.detail.value.length < 3) return;
 
     const pageStream: boolean = this.store.selectSnapshot(
-      StateMobile.pageStream
+      StateMobile.pageEvents
     );
     const pageAlerts: boolean = this.store.selectSnapshot(
-      StateMobile.pageAlerts
+      StateMobile.pageNotifications
     );
 
     return pageStream

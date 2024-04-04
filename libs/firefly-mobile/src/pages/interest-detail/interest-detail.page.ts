@@ -37,6 +37,7 @@ import {
   ActionInterestSave,
   ActionUserEventsGetData,
   Pages,
+  StateApp,
   StateInterest,
   StateUser,
   StateUserEvents,
@@ -277,7 +278,9 @@ export class PageInterestDetail extends BaseComponent implements OnInit {
                     .pipe(
                       switchMap(() =>
                         this.store.dispatch(
-                          new Navigate([Pages.Home, Pages.Stream])
+                          new Navigate(
+                            this.store.selectSnapshot(StateApp.homePath)
+                          )
                         )
                       )
                     )

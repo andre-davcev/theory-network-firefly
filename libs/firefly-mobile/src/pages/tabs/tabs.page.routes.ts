@@ -16,6 +16,11 @@ export const RoutesPageTabs: Routes = [
         loadChildren: () => import('../lists').then((m) => m.ModulePageLists)
       },
       {
+        path: `${Pages.Events}/${Pages.AssetsEvents}`,
+        loadChildren: () =>
+          import('@firefly/mobile').then((m) => m.ModulePageAssetsEventsRoute)
+      },
+      {
         path: Pages.Lists,
         loadChildren: () => import('../lists').then((m) => m.ModulePageLists)
       },
@@ -31,7 +36,7 @@ export const RoutesPageTabs: Routes = [
       },
       {
         path: '',
-        redirectTo: `/${Pages.Tabs}/${Pages.Lists}`,
+        redirectTo: `/${Pages.Tabs}/${Pages.Events}`,
         pathMatch: 'full'
       }
     ]

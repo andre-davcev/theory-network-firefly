@@ -9,5 +9,7 @@ export interface StateAppModel {
   eventType: EventType;
   eventVirtual: boolean;
   notificationsIndex: number;
+
   routerState: RouterStateParams;
+  tabPath: Array<string>;
 }

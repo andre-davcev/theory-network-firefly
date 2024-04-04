@@ -22,6 +22,7 @@ export const StateAppOptions: StoreOptions<StateAppModel> = {
     eventType: EventType.Upcoming,
     eventVirtual: false,
     notificationsIndex: 0,
-    routerState: CoreUtil.clone<RouterStateParams>(DEFAULT_ROUTER_STATE)
+    routerState: CoreUtil.clone<RouterStateParams>(DEFAULT_ROUTER_STATE),
+    tabPath: []
   }
 };

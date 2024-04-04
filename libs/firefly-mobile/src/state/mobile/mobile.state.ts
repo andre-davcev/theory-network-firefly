@@ -35,16 +35,18 @@ export class StateMobile {
   ): Record<string, string> {
     return state.pageChild;
   }
-  @Selector() static pageAlerts(state: StateMobileModel): boolean {
+  @Selector() static pageNotifications(state: StateMobileModel): boolean {
     return (
-      StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Notifications}`
+      StateMobile.pageRoot(state) === `/${Pages.Tabs}/${Pages.Notifications}`
     );
   }
-  @Selector() static pageStream(state: StateMobileModel): boolean {
-    return StateMobile.pageRoot(state) === `/${Pages.Home}/${Pages.Stream}`;
+  @Selector() static pageEvents(state: StateMobileModel): boolean {
+    return StateMobile.pageRoot(state) === `/${Pages.Tabs}/${Pages.Events}`;
   }
   @Selector() static pageHome(state: StateMobileModel): boolean {
-    return StateMobile.pageStream(state) || StateMobile.pageAlerts(state);
+    return (
+      StateMobile.pageEvents(state) || StateMobile.pageNotifications(state)
+    );
   }
   @Selector() static pageCalendar(state: StateMobileModel): boolean {
     return StateMobile.pageRoot(state) === `/${Pages.Calendar}`;

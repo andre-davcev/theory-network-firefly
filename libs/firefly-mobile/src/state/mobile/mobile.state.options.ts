@@ -9,10 +9,10 @@ export const StateMobileOptions: StoreOptions<StateMobileModel> = {
 
   defaults: {
     menuOpen: false,
-    pageRoot: `/${Pages.Home}/${Pages.Stream}`,
+    pageRoot: `/${Pages.Tabs}/${Pages.Events}`,
 
     pageChild: {
-      [Pages.Home]: Pages.Stream
+      [Pages.Tabs]: Pages.Events
     }
   }
 };

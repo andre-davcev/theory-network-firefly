@@ -25,6 +25,7 @@ import {
   ActionUserEventsGetData,
   InterestType,
   Pages,
+  StateApp,
   StateInterest,
   StateInterests,
   StateUserEvents,
@@ -142,7 +143,9 @@ export class PageAssetInterest extends BaseComponent implements OnInit {
       .subscribe((message: string) => {
         this.store.dispatch(new ActionMobileToast(message));
         if (interestType === InterestType.Created)
-          this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]));
+          this.store.dispatch(
+            new Navigate(this.store.selectSnapshot(StateApp.homePath))
+          );
         else this.navController.back();
       });
   }

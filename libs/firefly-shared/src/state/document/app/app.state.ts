@@ -47,6 +47,12 @@ export class StateApp implements NgxsOnInit {
     return state.routerState;
   }
 
+  @Selector() static homePath(state: StateAppModel): Array<string> {
+    return state.tabPath.length < 2
+      ? [Pages.Tabs, Pages.Events]
+      : state.tabPath;
+  }
+
   public static onPage(page: Pages) {
     return createSelector(
       [StateApp.routerState],
@@ -144,7 +150,15 @@ export class StateApp implements NgxsOnInit {
             routerState ||
             CoreUtil.clone<RouterStateParams>(DEFAULT_ROUTER_STATE)
         })
-      )
+      ),
+      map((routerState: RouterStateParams | undefined) =>
+        (routerState?.url || '').split('/')
+      ),
+      filter(
+        (routerPath: Array<string>) =>
+          routerPath.length >= 2 && routerPath[0] === Pages.Tabs
+      ),
+      tap((tabPath: Array<string>) => patchState({ tabPath }))
     );
   }
 }

@@ -21,6 +21,7 @@ import {
   IconSize,
   IconType,
   Pages,
+  StateApp,
   StateUser
 } from '@firefly/shared';
 import { PlatformEnum } from '@theory/ionic';
@@ -34,6 +35,7 @@ import { PageLogin } from '@firefly/mobile';
 })
 export class ComponentApp {
   @Select(StateUser.found()) userFound$: Observable<boolean>;
+  @Select(StateApp.homePath) homePath$: Observable<Array<string>>;
 
   public Pages = Pages;
   public IconType = IconType;
@@ -103,7 +105,9 @@ export class ComponentApp {
       .pipe(
         switchMap(() => this.store.dispatch(new ActionUserLogout())),
         switchMap(() =>
-          this.store.dispatch(new Navigate([Pages.Home, Pages.Stream]))
+          this.store.dispatch(
+            new Navigate(this.store.selectSnapshot(StateApp.homePath))
+          )
         ),
         finalize(() => this.store.dispatch(new ActionAppLoadingHide()))
       )

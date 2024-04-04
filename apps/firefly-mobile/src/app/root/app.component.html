@@ -12,7 +12,7 @@
         <ion-item-group>
           <ion-item
             routerDirection="root"
-            [routerLink]="[Pages.Home, Pages.Stream]"
+            [routerLink]="homePath$ | async"
             routerLinkActive="cpt-selected"
             (click)="go()"
           >

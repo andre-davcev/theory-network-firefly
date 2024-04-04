@@ -1,32 +1,37 @@
 export enum Pages {
+  // AUTH
   Auth = 'auth',
   Login = 'login',
+  SignUp = 'sign-up',
+  SignUpSlides = 'sign-up-slides',
+  ResetPassword = 'reset-password',
+
+  // MENU
+  Tabs = 'tabs',
   UserProfile = 'user-profile',
 
-  Tabs = 'tabs',
+  // TAB > EVENTS
   Events = 'events',
-  Lists = 'lists',
-  Notifications = 'notifications',
-  Calendar = 'calendar',
-
-  SignUp = 'sign-up',
-  ResetPassword = 'reset-password',
-  SignUpSlides = 'sign-up-slides',
-
-  AssetInterest = 'asset-interest',
   AssetsEvents = 'assets-events',
-  AssetsInterests = 'assets-interests',
-  EventAssets = 'event-assets',
   EventDetail = 'event-detail',
-  NotificationDetail = 'notification-detail',
-  EventLibrary = 'event-library',
   EventLocation = 'event-location',
-  Home = 'home',
-  InterestDetail = 'interest-detail',
-  Stream = 'stream',
 
-  IconSelector = 'icon-selector',
+  // TAB > LISTS
+  Lists = 'lists',
+  Stream = 'stream', // ToDo: REMOVE
+  AssetsInterests = 'assets-interests',
+  AssetInterest = 'asset-interest',
+  InterestDetail = 'interest-detail',
   EventSelector = 'event-selector',
 
+  // TAB > NOTIFICATIONS
+  Notifications = 'notifications',
+  NotificationDetail = 'notification-detail',
+
+  // TAB > CALENDAR
+  Calendar = 'calendar',
+
+  // SHARED
+  IconSelector = 'icon-selector',
   ImageSelector = 'image-selector'
 }
