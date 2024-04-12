@@ -87,7 +87,7 @@ export class PageAssetsInterests extends BaseComponent implements OnInit {
       this.store.dispatch([
         new ActionAppLoadingShow(),
         new Navigate(
-          [[Pages.Tabs, Pages.Lists, Pages.AssetInterest],
+          [Pages.Tabs, Pages.Lists, Pages.AssetInterest],
           { id: interest.id },
           { state: { isInterestDetail: true } }
         )

@@ -3,7 +3,6 @@ import {
   IonInfiniteScroll,
   IonSearchbar,
   MenuController,
-  ModalController,
   PopoverController
 } from '@ionic/angular';
 import { Navigate } from '@ngxs/router-plugin';
@@ -103,8 +102,7 @@ export class PageLists extends BaseComponent implements OnInit {
   constructor(
     private store: Store,
     private menu: MenuController,
-    private popover: PopoverController,
-    private modal: ModalController
+    private popover: PopoverController
   ) {
     super();
   }
