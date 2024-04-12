@@ -16,6 +16,7 @@ import {
   ActionUserAlertsDelete,
   ActionUserAlertsGo,
   Pages,
+  StateApp,
   StateEvent,
   Translation
 } from '@firefly/shared';
@@ -54,8 +55,13 @@ export class PageNotificationDetail extends BaseComponent {
 
   public edit(): void {
     const event: Event = this.store.selectSnapshot(StateEvent.data());
+    const homePath: Array<string> = this.store.selectSnapshot(
+      StateApp.homePath
+    );
 
-    this.store.dispatch(new Navigate([Pages.EventDetail, event.id]));
+    this.store.dispatch(
+      new Navigate([homePath[0], homePath[1], Pages.EventDetail, event.id])
+    );
   }
 
   public go() {

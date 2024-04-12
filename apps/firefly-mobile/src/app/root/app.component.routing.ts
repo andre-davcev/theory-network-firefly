@@ -14,43 +14,6 @@ export const routes: Routes = [
     path: Pages.Tabs,
     loadChildren: () => import('@firefly/mobile').then((m) => m.ModulePageTabs)
   },
-
-  {
-    path: Pages.AssetsInterests,
-    loadChildren: () =>
-      import('@firefly/mobile').then((m) => m.ModulePageAssetsInterestsRoute)
-  },
-  {
-    path: Pages.AssetInterest,
-    loadChildren: () =>
-      import('@firefly/mobile').then((m) => m.ModulePageAssetInterest)
-  },
-  {
-    path: Pages.AssetsEvents,
-    loadChildren: () =>
-      import('@firefly/mobile').then((m) => m.ModulePageAssetsEventsRoute)
-  },
-  {
-    path: Pages.EventDetail,
-    loadChildren: () =>
-      import('@firefly/mobile').then((m) => m.ModulePageEventDetail)
-  },
-
-  {
-    path: Pages.EventSelector,
-    loadChildren: () =>
-      import('@firefly/mobile').then((m) => m.ModulePageEventSelector)
-  },
-  {
-    path: Pages.NotificationDetail,
-    loadChildren: () =>
-      import('@firefly/mobile').then((m) => m.ModulePageNotificationDetail)
-  },
-  {
-    path: Pages.InterestDetail,
-    loadChildren: () =>
-      import('@firefly/mobile').then((m) => m.ModulePageInterestDetail)
-  },
   {
     path: Pages.UserProfile,
     loadChildren: () =>

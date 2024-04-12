@@ -87,7 +87,7 @@ export class PageAssetInterest extends BaseComponent implements OnInit {
   }
 
   public add(page: Pages.IconSelector | Pages.EventSelector) {
-    //this.store.dispatch(new Navigate([ Pages.EventDetail, CoreEnum.IdNew ]));
+    //this.store.dispatch(new Navigate([ Pages.Tabs, Pages.Lists, Pages.EventDetail, CoreEnum.IdNew ]));
     /*
       if(page === Pages.IconSelector)
       {
@@ -158,7 +158,12 @@ export class PageAssetInterest extends BaseComponent implements OnInit {
         switchMap(() =>
           this.store.dispatch([
             new ActionAppLoadingHide(),
-            new Navigate([Pages.EventDetail, object.id])
+            new Navigate([
+              Pages.Tabs,
+              Pages.Lists,
+              Pages.EventDetail,
+              object.id
+            ])
           ])
         )
       )
@@ -166,7 +171,9 @@ export class PageAssetInterest extends BaseComponent implements OnInit {
   }
 
   public addEvent(): void {
-    this.store.dispatch(new Navigate([Pages.EventSelector]));
+    this.store.dispatch(
+      new Navigate([Pages.Tabs, Pages.Lists, Pages.EventSelector])
+    );
   }
 
   public selectImage(): void {

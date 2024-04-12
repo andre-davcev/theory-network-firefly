@@ -27,39 +27,6 @@ export class StateMobile {
   @Selector() static menuClosed(state: StateMobileModel): boolean {
     return !state.menuOpen;
   }
-  @Selector() static pageRoot(state: StateMobileModel): string {
-    return state.pageRoot;
-  }
-  @Selector() static pageChild(
-    state: StateMobileModel
-  ): Record<string, string> {
-    return state.pageChild;
-  }
-  @Selector() static pageNotifications(state: StateMobileModel): boolean {
-    return (
-      StateMobile.pageRoot(state) === `/${Pages.Tabs}/${Pages.Notifications}`
-    );
-  }
-  @Selector() static pageEvents(state: StateMobileModel): boolean {
-    return StateMobile.pageRoot(state) === `/${Pages.Tabs}/${Pages.Events}`;
-  }
-  @Selector() static pageHome(state: StateMobileModel): boolean {
-    return (
-      StateMobile.pageEvents(state) || StateMobile.pageNotifications(state)
-    );
-  }
-  @Selector() static pageCalendar(state: StateMobileModel): boolean {
-    return StateMobile.pageRoot(state) === `/${Pages.Calendar}`;
-  }
-  @Selector() static pagePublishInterests(state: StateMobileModel): boolean {
-    return StateMobile.pageRoot(state) === `/${Pages.AssetsInterests}`;
-  }
-  @Selector() static pagePublishEvents(state: StateMobileModel): boolean {
-    return StateMobile.pageRoot(state) === `/${Pages.AssetsEvents}`;
-  }
-  @Selector() static pageUserProfile(state: StateMobileModel): boolean {
-    return StateMobile.pageRoot(state) === `/${Pages.UserProfile}`;
-  }
 
   constructor(
     private toast: ToastController,

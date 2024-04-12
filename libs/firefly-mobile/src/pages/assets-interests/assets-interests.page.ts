@@ -62,7 +62,9 @@ export class PageAssetsInterests extends BaseComponent implements OnInit {
   }
 
   public add(): void {
-    this.store.dispatch(new Navigate([Pages.AssetInterest]));
+    this.store.dispatch(
+      new Navigate([Pages.Tabs, Pages.Lists, Pages.AssetInterest])
+    );
   }
 
   public cancel(): void {
@@ -71,7 +73,7 @@ export class PageAssetsInterests extends BaseComponent implements OnInit {
 
   public select(interest: Interest): void {
     /*this.store.dispatch(new ActionInterestSetId(interest.id)).pipe(
-          switchMap(() => this.store.dispatch(new Navigate([Pages.AssetInterest], {queryParams: {id: interest.id}}, {state: {isInterestDetail:true}})))
+          switchMap(() => this.store.dispatch(new Navigate([Pages.Tabs, Pages.Lists, Pages.AssetInterest], {queryParams: {id: interest.id}}, {state: {isInterestDetail:true}})))
         );*/
 
     if (this.modal) {
@@ -85,7 +87,7 @@ export class PageAssetsInterests extends BaseComponent implements OnInit {
       this.store.dispatch([
         new ActionAppLoadingShow(),
         new Navigate(
-          [Pages.AssetInterest],
+          [[Pages.Tabs, Pages.Lists, Pages.AssetInterest],
           { id: interest.id },
           { state: { isInterestDetail: true } }
         )

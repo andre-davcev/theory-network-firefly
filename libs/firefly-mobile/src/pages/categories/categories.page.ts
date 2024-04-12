@@ -29,8 +29,11 @@ export class PageCategories {
     this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Dark }));
   }
 
-  public navigate(page: Pages): void {
-    this.store.dispatch(new Navigate([page]));
+  public navigate(page: Pages.AssetsEvents | Pages.AssetsInterests): void {
+    const tab: Pages.Events | Pages.Lists =
+      page === Pages.AssetsEvents ? Pages.Events : Pages.Lists;
+
+    this.store.dispatch(new Navigate([Pages.Tabs, tab, page]));
   }
 
   public menuOpen(): void {

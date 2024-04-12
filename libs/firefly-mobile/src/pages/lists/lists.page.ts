@@ -32,6 +32,7 @@ import {
   IconType,
   Pages,
   StateAlerts,
+  StateApp,
   StateCalendar,
   StateInterest,
   StateInterests,
@@ -125,7 +126,7 @@ export class PageLists extends BaseComponent implements OnInit {
     const url: Array<any> =
       type === Pages.EventDetail ? [type, CoreEnum.IdNew] : [type];
 
-    this.store.dispatch(new Navigate(url));
+    this.store.dispatch(new Navigate([Pages.Tabs, Pages.Lists, ...url]));
   }
 
   public go(type: Pages.Notifications | Pages.Events): void {
@@ -146,7 +147,9 @@ export class PageLists extends BaseComponent implements OnInit {
   }
 
   public async showPopover(event: any): Promise<void> {
-    const isStream: boolean = this.store.selectSnapshot(StateMobile.pageEvents);
+    const isStream: boolean = this.store.selectSnapshot(
+      StateApp.onTab(Pages.Lists)
+    );
 
     const popover: HTMLIonPopoverElement = await this.popover.create({
       component: ComponentHomeOptions,
@@ -181,10 +184,10 @@ export class PageLists extends BaseComponent implements OnInit {
     if (event.detail.value.length < 3) return;
 
     const pageStream: boolean = this.store.selectSnapshot(
-      StateMobile.pageEvents
+      StateApp.onTab(Pages.Lists)
     );
     const pageAlerts: boolean = this.store.selectSnapshot(
-      StateMobile.pageNotifications
+      StateApp.onTab(Pages.Notifications)
     );
 
     return pageStream
@@ -247,7 +250,9 @@ export class PageLists extends BaseComponent implements OnInit {
   public selectInterest(interest: Interest) {
     this.store.dispatch([
       new ActionAppLoadingShow(),
-      new Navigate([Pages.InterestDetail], { id: interest.id })
+      new Navigate([Pages.Tabs, Pages.Lists, Pages.InterestDetail], {
+        id: interest.id
+      })
     ]);
   }
 
@@ -262,7 +267,9 @@ export class PageLists extends BaseComponent implements OnInit {
           this.store.dispatch([
             new ActionAppLoadingShow(),
             new ActionSearchReset(),
-            new Navigate([Pages.InterestDetail], { id: interest.id })
+            new Navigate([Pages.Tabs, Pages.Lists, Pages.InterestDetail], {
+              id: interest.id
+            })
           ])
         )
       )
@@ -274,7 +281,9 @@ export class PageLists extends BaseComponent implements OnInit {
   }
 
   public add(): void {
-    this.store.dispatch(new Navigate([Pages.AssetInterest]));
+    this.store.dispatch(
+      new Navigate([Pages.Tabs, Pages.Lists, Pages.AssetInterest])
+    );
   }
 
   public loadData(event: any): void {
@@ -284,7 +293,10 @@ export class PageLists extends BaseComponent implements OnInit {
   public select(event: Event): void {
     this.store
       .dispatch(
-        new Navigate([Pages.NotificationDetail, event.id], { isEvent: true })
+        new Navigate(
+          [Pages.Tabs, Pages.Notifications, Pages.NotificationDetail, event.id],
+          { isEvent: true }
+        )
       )
       .subscribe();
   }

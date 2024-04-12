@@ -226,9 +226,17 @@ export class PageInterestDetail extends BaseComponent implements OnInit {
         switchMap(() =>
           this.store.dispatch([
             new ActionAppLoadingHide(),
-            new Navigate([Pages.NotificationDetail, event.id], {
-              isEvent: true
-            })
+            new Navigate(
+              [
+                Pages.Tabs,
+                Pages.Notifications,
+                Pages.NotificationDetail,
+                event.id
+              ],
+              {
+                isEvent: true
+              }
+            )
           ])
         )
       )
@@ -240,7 +248,7 @@ export class PageInterestDetail extends BaseComponent implements OnInit {
 
     this.store.dispatch(
       new Navigate(
-        [Pages.AssetInterest],
+        [Pages.Tabs, Pages.Lists, Pages.AssetInterest],
         { id: interest.id },
         { state: { isInterestDetail: true } }
       )

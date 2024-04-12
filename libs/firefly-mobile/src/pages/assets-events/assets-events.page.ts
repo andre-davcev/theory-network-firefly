@@ -50,7 +50,14 @@ export class PageAssetsEvents extends BaseComponent implements OnInit {
   }
 
   add(): void {
-    this.store.dispatch(new Navigate([Pages.EventDetail, CoreEnum.IdNew]));
+    this.store.dispatch(
+      new Navigate([
+        Pages.Tabs,
+        Pages.Events,
+        Pages.EventDetail,
+        CoreEnum.IdNew
+      ])
+    );
   }
 
   public ionViewWillEnter(): void {
@@ -60,7 +67,7 @@ export class PageAssetsEvents extends BaseComponent implements OnInit {
   public select(object: Event): void {
     this.store.dispatch([
       new ActionAppLoadingShow(),
-      new Navigate([Pages.EventDetail, object.id])
+      new Navigate([Pages.Tabs, Pages.Events, Pages.EventDetail, object.id])
     ]);
     //this.store.dispatch(new ActionEventSetId(object.id));
   }

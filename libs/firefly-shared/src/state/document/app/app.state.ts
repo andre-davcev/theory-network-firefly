@@ -68,7 +68,9 @@ export class StateApp implements NgxsOnInit {
     );
   }
 
-  public static onTab(page: Pages) {
+  public static onTab(
+    page: Pages.Events | Pages.Lists | Pages.Notifications | Pages.Calendar
+  ) {
     return createSelector(
       [StateApp.routerState],
       (routerState: RouterStateParams) => {

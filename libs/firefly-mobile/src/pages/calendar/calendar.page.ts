@@ -128,13 +128,20 @@ export class PageCalendar extends BaseComponent {
       ? Pages.EventDetail
       : Pages.NotificationDetail;
 
-    this.store.dispatch(new Navigate([page, object.id]));
+    this.store.dispatch(
+      new Navigate([Pages.Tabs, Pages.Calendar, page, object.id])
+    );
   }
 
   public add(): void {
     this.store.dispatch([
       new ActionInterestReset(),
-      new Navigate([Pages.EventDetail, CoreEnum.IdNew])
+      new Navigate([
+        Pages.Tabs,
+        Pages.Calendar,
+        Pages.EventDetail,
+        CoreEnum.IdNew
+      ])
     ]);
   }
 
@@ -153,7 +160,9 @@ export class PageCalendar extends BaseComponent {
           this.store.dispatch([
             new ActionAppLoadingShow(),
             new ActionSearchReset(),
-            new Navigate([Pages.InterestDetail], { id: interest.id })
+            new Navigate([Pages.Tabs, Pages.Lists, Pages.InterestDetail], {
+              id: interest.id
+            })
           ])
         )
       )
