@@ -93,11 +93,11 @@ export function createTranslateLoader(http: HttpClient) {
       StateSearch,
       StateStorage,
 
+      StateUser,
+      StateApp,
       StateInterest,
       StateEvent,
-      StateApp,
       StateSubscription,
-      StateUser,
       StateCity,
       StateUserAlerts,
       StateUserInterests,

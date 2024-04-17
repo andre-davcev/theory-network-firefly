@@ -34,8 +34,8 @@ import { PageLogin } from '@firefly/mobile';
   styleUrls: ['./app.component.scss']
 })
 export class ComponentApp {
-  @Select(StateUser.found()) userFound$: Observable<boolean>;
   @Select(StateApp.homePath) homePath$: Observable<Array<string>>;
+  @Select(StateUser.found()) userFound$: Observable<boolean>;
 
   public Pages = Pages;
   public IconType = IconType;

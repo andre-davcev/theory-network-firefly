@@ -14,20 +14,16 @@ import {
 import { from, of } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 
-import { StateLocation } from '@theory/capacitor';
 import { RouterStateParams } from '@theory/ngxs';
 
 import { CoreUtil } from '@theory/core';
 import { Pages } from '../../../enums';
-import { StateCityStream } from '../../child/city-stream/city-stream.state';
-import { StateCity } from '../city/city.state';
-import { StateUser } from '../user/user.state';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow,
   ActionAppRouterWatch
 } from './app.actions';
-import { StateAppModel } from './app.state.model';
+import { PATH_DEFAULT, StateAppModel } from './app.state.model';
 import { DEFAULT_ROUTER_STATE, StateAppOptions } from './app.state.options';
 
 @State<StateAppModel>(StateAppOptions)
@@ -48,9 +44,7 @@ export class StateApp implements NgxsOnInit {
   }
 
   @Selector() static homePath(state: StateAppModel): Array<string> {
-    return state.tabPath.length < 2
-      ? [Pages.Tabs, Pages.Events]
-      : state.tabPath;
+    return state.tabPath.length < 2 ? PATH_DEFAULT : state.tabPath;
   }
 
   public static onPage(page: Pages) {
@@ -84,22 +78,6 @@ export class StateApp implements NgxsOnInit {
         return onTab;
       }
     );
-  }
-
-  @Selector([
-    StateUser.initialized,
-    StateCity.found,
-    StateCityStream.cityStreamSet,
-    StateLocation.permissionDenied
-  ])
-  static initialized(
-    state: StateAppModel,
-    userInitialized: boolean,
-    cityFound: boolean,
-    cityStreamSet: boolean,
-    locationDenied: boolean
-  ): boolean {
-    return locationDenied || (userInitialized && cityFound && cityStreamSet);
   }
 
   constructor(private store: Store, private loading: LoadingController) {}

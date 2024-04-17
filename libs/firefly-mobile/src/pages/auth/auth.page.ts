@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
-import { Pages, StateApp } from '@firefly/shared';
+import { Pages, StateUser } from '@firefly/shared';
 import {
   ActionDeviceStatusBarSet,
   ActionDeviceStatusBarShow
@@ -17,7 +17,7 @@ import {
   styleUrls: ['./auth.page.scss']
 })
 export class PageAuth implements OnInit {
-  @Select(StateApp.initialized) initialized$!: Observable<boolean>;
+  @Select(StateUser.ready) initialized$!: Observable<boolean>;
 
   constructor(private store: Store) {}
 

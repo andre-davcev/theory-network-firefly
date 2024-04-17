@@ -233,6 +233,22 @@ export class StateUser
     return state.initialized;
   }
 
+  @Selector([
+    StateUser.initialized,
+    StateCity.found,
+    StateCityStream.cityStreamSet,
+    StateLocation.permissionDenied
+  ])
+  static ready(
+    state: StateUserModel,
+    userInitialized: boolean,
+    cityFound: boolean,
+    cityStreamSet: boolean,
+    locationDenied: boolean
+  ): boolean {
+    return locationDenied || (userInitialized && cityFound && cityStreamSet);
+  }
+
   public ngxsOnInit(context: StateContext<StateUserModel>) {
     context.dispatch([new ActionUserWatchCity()]);
   }

@@ -1,5 +1,8 @@
 import { RouterStateParams } from '@theory/ngxs';
-import { EventType, InterestType } from '../../../enums';
+
+import { EventType, InterestType, Pages } from '../../../enums';
+
+export const PATH_DEFAULT: Array<Pages> = [Pages.Tabs, Pages.Events];
 
 export interface StateAppModel {
   loading: boolean;
