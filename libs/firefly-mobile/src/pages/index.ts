@@ -6,6 +6,7 @@ export * from './calendar';
 export * from './event-detail';
 export * from './event-location';
 export * from './event-selector';
+export * from './events';
 export * from './interest-detail';
 export * from './lists';
 export * from './login';

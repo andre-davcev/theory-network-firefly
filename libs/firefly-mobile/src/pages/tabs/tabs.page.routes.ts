@@ -13,7 +13,7 @@ export const RoutesPageTabs: Routes = [
     children: [
       {
         path: Pages.Events,
-        loadChildren: () => import('../lists').then((m) => m.ModulePageLists)
+        loadChildren: () => import('../events').then((m) => m.ModulePageEvents)
       },
       {
         path: `${Pages.Events}/${Pages.AssetsEvents}`,

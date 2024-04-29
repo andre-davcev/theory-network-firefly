@@ -120,9 +120,11 @@
   "page.stream.subscribed": "Subscribed",
   "page.stream.loading": "Loading more interests...",
 
+  "page.events.title": "Events",
+
   "page.alert.detail.title": "Notification Detail",
 
-  "page.notifications.title": "Events",
+  "page.notifications.title": "Notifications",
   "page.notifications.tabFired": "Fired",
   "page.notifications.tabSubscriptions": "Subscriptions",
   "page.notifications.addCoupon": "Add Coupon",
