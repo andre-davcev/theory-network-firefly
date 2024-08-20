@@ -1,14 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   IonInfiniteScroll,
-  IonSearchbar,
   MenuController,
   PopoverController
 } from '@ionic/angular';
 import { Navigate } from '@ngxs/router-plugin';
 import { Select, Store } from '@ngxs/store';
-import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
-import { Observable, from, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
 import {
@@ -20,22 +18,16 @@ import {
 import {
   ActionAppLoadingShow,
   ActionInterestEventsGetAnonymous,
-  ActionInterestGet,
   ActionInterestSetId,
   ActionInterestsPage,
   ActionInterestsSubscriptionOnOff,
   ActionInterestsSubscriptionToggle,
-  ActionSearchEvents,
-  ActionSearchInterests,
-  ActionSearchReset,
   IconType,
   Pages,
-  StateAlerts,
   StateApp,
   StateCalendar,
   StateInterest,
   StateInterests,
-  StateSearch,
   StateUser
 } from '@firefly/shared';
 import { BaseComponent, CoreEnum } from '@theory/core';
@@ -63,29 +55,27 @@ export class PageLists extends BaseComponent implements OnInit {
     Record<string, SubscriptionPartial>
   >;
   @Select(StateInterests.emptyMessage) emptyMessage$!: Observable<string>;
-  @Select(StateSearch.searchResults) searchResults$!: Observable<
-    Array<Interest>
-  >;
-  @Select(StateSearch.searchResultsFound)
+  // @Select(StateSearch.searchResults) searchResults$!: Observable<
+  //   Array<Interest>
+  // >;
+  // @Select(StateSearch.searchResultsFound)
   searchResultsFound$!: Observable<boolean>;
   @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
-  @Select(StateAlerts.unreadCount) unreadCount$!: Observable<number>;
-  @Select(StateAlerts.unreadExists) unreadExists$!: Observable<boolean>;
   @Select(StateUser.authenticated) authenticated$!: Observable<boolean>;
   @Select(StateLocation.permissionDenied) locationDenied$!: Observable<boolean>;
 
-  @ViewChild(IonSearchbar, { static: false })
-  private searchbar!: IonSearchbar;
+  // @ViewChild(IonSearchbar, { static: false })
+  // private searchbar!: IonSearchbar;
 
-  public searching: boolean = false;
+  // public searching: boolean = false;
 
   public Pages: any = Pages;
 
-  public searchClient = algoliaSearch(
-    '8NDQ1FNIDU',
-    '45b11751dc7e276f781a85f719abda66'
-  );
-  public index: SearchIndex = this.searchClient.initIndex('interests');
+  // public searchClient = algoliaSearch(
+  //   '8NDQ1FNIDU',
+  //   '45b11751dc7e276f781a85f719abda66'
+  // );
+  // public index: SearchIndex = this.searchClient.initIndex('interests');
 
   public currentlyOpenedItemIndex = -1;
   public currentlyOpenedItems: Array<boolean> = [];
@@ -165,7 +155,7 @@ export class PageLists extends BaseComponent implements OnInit {
 
     return await popover.present();
   }
-
+  /*
   public searchShow(show: boolean): void {
     this.searching = show;
 
@@ -173,11 +163,15 @@ export class PageLists extends BaseComponent implements OnInit {
       this.searchbar.setFocus();
     }
   }
+*/
 
+  /*
   public cancel(): void {
     this.store.dispatch(new ActionSearchReset()).subscribe();
   }
+*/
 
+  /*
   public search(event: CustomEvent) {
     if (event.detail.value.length < 3) return;
 
@@ -198,6 +192,7 @@ export class PageLists extends BaseComponent implements OnInit {
           .subscribe()
       : of(null);
   }
+*/
 
   public toggle(subscribed: boolean, stream: StreamInterest): void {
     this.isUser$
@@ -254,6 +249,7 @@ export class PageLists extends BaseComponent implements OnInit {
     ]);
   }
 
+  /*
   public selectSearchInterest(interest: Interest) {
     this.store
       .dispatch(new ActionSearchReset())
@@ -273,10 +269,13 @@ export class PageLists extends BaseComponent implements OnInit {
       )
       .subscribe();
   }
+*/
 
+  /*
   public resetSearchResults() {
     this.store.dispatch(new ActionSearchReset()).subscribe();
   }
+*/
 
   public add(): void {
     this.store.dispatch(
