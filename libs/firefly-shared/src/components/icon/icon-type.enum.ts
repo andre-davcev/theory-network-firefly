@@ -10,7 +10,7 @@ export enum IconType {
   Alerts = 'notifications',
   Stream = 'newspaper',
   Publisher = 'logo-rss',
-  Calendar = 'calendar-number',
+  Calendar = 'calendar-clear-outline',
 
   Menu = 'person',
   Private = 'lock-closed',
