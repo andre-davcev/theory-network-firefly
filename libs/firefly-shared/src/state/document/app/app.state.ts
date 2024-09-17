@@ -23,7 +23,7 @@ import {
   ActionAppLoadingShow,
   ActionAppRouterWatch
 } from './app.actions';
-import { PATH_DEFAULT, StateAppModel } from './app.state.model';
+import { StateAppModel } from './app.state.model';
 import { DEFAULT_ROUTER_STATE, StateAppOptions } from './app.state.options';
 
 @State<StateAppModel>(StateAppOptions)
@@ -44,7 +44,7 @@ export class StateApp implements NgxsOnInit {
   }
 
   @Selector() static homePath(state: StateAppModel): Array<string> {
-    return state.tabPath.length < 2 ? PATH_DEFAULT : state.tabPath;
+    return state.tabPath;
   }
 
   public static onPage(page: Pages) {
@@ -136,7 +136,7 @@ export class StateApp implements NgxsOnInit {
       ),
       filter(
         (routerPath: Array<string>) =>
-          routerPath.length >= 2 && routerPath[0] === Pages.Tabs
+          routerPath.length > 0 && routerPath[1] === Pages.Tabs
       ),
       tap((tabPath: Array<string>) => patchState({ tabPath }))
     );
