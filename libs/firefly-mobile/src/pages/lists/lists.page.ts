@@ -241,12 +241,18 @@ export class PageLists extends BaseComponent implements OnInit {
   }
 
   public selectInterest(interest: Interest) {
-    this.store.dispatch([
-      new ActionAppLoadingShow(),
-      new Navigate([Pages.Tabs, Pages.Lists, Pages.InterestDetail], {
-        id: interest.id
-      })
-    ]);
+    const isUser: boolean = this.store.selectSnapshot(StateUser.isUser);
+
+    if (isUser) {
+      this.store.dispatch([
+        new ActionAppLoadingShow(),
+        new Navigate([Pages.Tabs, Pages.Lists, Pages.InterestDetail], {
+          id: interest.id
+        })
+      ]);
+    } else {
+      this.store.dispatch(new ActionMobileAuthSelect());
+    }
   }
 
   /*
@@ -288,14 +294,18 @@ export class PageLists extends BaseComponent implements OnInit {
   }
 
   public select(event: Event): void {
-    this.store
-      .dispatch(
+    const isUser: boolean = this.store.selectSnapshot(StateUser.isUser);
+
+    if (isUser) {
+      this.store.dispatch(
         new Navigate(
           [Pages.Tabs, Pages.Notifications, Pages.NotificationDetail, event.id],
           { isEvent: true }
         )
-      )
-      .subscribe();
+      );
+    } else {
+      this.store.dispatch(new ActionMobileAuthSelect());
+    }
   }
   /*
     public filterChanged(event: any): void
