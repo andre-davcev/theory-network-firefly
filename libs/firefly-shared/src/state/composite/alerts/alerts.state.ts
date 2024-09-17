@@ -5,13 +5,14 @@ import { filter, map, switchMap } from 'rxjs/operators';
 
 import { Alert } from '@firefly/cloud';
 
-import { StateAlertsModel } from './alerts.state.model';
-import { StateAlertsOptions } from './alerts.state.options';
+import { ActionUserAlertsMarkRead, StateUserAlerts } from '../../child';
+import { StateUser } from '../../document';
 import {
   ActionAlertsSlideIndex,
   ActionAlertsSlideRestore
 } from './alerts.actions';
-import { ActionUserAlertsMarkRead, StateUserAlerts } from '../../child';
+import { StateAlertsModel } from './alerts.state.model';
+import { StateAlertsOptions } from './alerts.state.options';
 
 @State<StateAlertsModel>(StateAlertsOptions)
 @Injectable()
@@ -33,6 +34,28 @@ export class StateAlerts {
   @Selector([StateUserAlerts.data()])
   public static exists(state: StateAlertsModel, alerts: Array<Alert>): boolean {
     return StateAlerts.data(state, alerts).length > 0;
+  }
+
+  @Selector([StateAlerts.exists, StateUser.isUser])
+  public static showEmpty(
+    state: StateAlertsModel,
+    exists: boolean,
+    isUser: boolean
+  ): boolean {
+    return !isUser || !exists;
+  }
+
+  @Selector([StateAlerts.exists, StateUser.isUser])
+  public static emptyMessage(
+    state: StateAlertsModel,
+    exists: boolean,
+    isUser: boolean
+  ): string {
+    return !isUser
+      ? 'page.alerts.empty.not-user'
+      : exists
+      ? 'page.events.empty.new'
+      : '';
   }
 
   @Selector([StateUserAlerts.data()])

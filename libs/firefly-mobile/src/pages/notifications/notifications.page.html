@@ -44,10 +44,10 @@
   </ion-slides>
 
   <ff-icon-message
-    *ngIf="!(exists$ | async)"
+    *ngIf="showEmpty$ | async"
     slot="fixed"
     [icon]="IconType.Alerts"
-    [message]="'page.events.empty.new' | translate"
+    [message]="((emptyMessage$ | async) || '') | translate"
   >
   </ff-icon-message>
 </section>

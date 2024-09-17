@@ -34,6 +34,8 @@ import { ActionMobileAuthSelect, StateMobile } from '../../state';
 export class PageNotifications extends BaseComponent {
   @Select(StateAlerts.data) data$!: Observable<Array<Alert>>;
   @Select(StateAlerts.exists) exists$!: Observable<boolean>;
+  @Select(StateAlerts.showEmpty) showEmpty$!: Observable<boolean>;
+  @Select(StateAlerts.emptyMessage) emptyMessage$!: Observable<string>;
   @Select(StateLocation.permissionDenied) locationDenied$!: Observable<boolean>;
   @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
 

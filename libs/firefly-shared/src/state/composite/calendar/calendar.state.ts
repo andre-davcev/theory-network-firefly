@@ -114,11 +114,22 @@ export class StateCalendar {
     return isPublisher;
   }
 
-  @Selector()
-  static emptyMessage(state: StateCalendarModel): string {
+  @Selector([StateCalendar.exists, StateUser.isUser])
+  public static showEmpty(
+    state: StateCalendarModel,
+    exists: boolean,
+    isUser: boolean
+  ): boolean {
+    return !isUser || !exists;
+  }
+
+  @Selector([StateUser.isUser])
+  static emptyMessage(state: StateCalendarModel, isUser: boolean): string {
     const type: EventType = StateCalendar.type(state);
 
-    return StateCalendar.virtual(state)
+    return !isUser
+      ? 'page.events.empty.not-user'
+      : StateCalendar.virtual(state)
       ? 'page.events.empty.virtual'
       : type === EventType.New
       ? 'page.events.empty.new'

@@ -70,7 +70,7 @@
   </ion-content>
 
   <ff-icon-message
-    *ngIf="!(exists$ | async)"
+    *ngIf="showEmpty$ | async"
     slot="fixed"
     [icon]="IconType.Alerts"
     [message]="(emptyMessage$ | async) || '' | translate"

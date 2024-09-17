@@ -47,6 +47,7 @@ export class PageCalendar extends BaseComponent {
   @Select(StateCalendar.data) data$!: Observable<Array<DateEvents>>;
   @Select(StateCalendar.exists) exists$!: Observable<boolean>;
   @Select(StateCalendar.canAdd) canAdd$!: Observable<boolean>;
+  @Select(StateCalendar.showEmpty) showEmpty$!: Observable<boolean>;
   @Select(StateCalendar.emptyMessage) emptyMessage$!: Observable<string>;
   @Select(StateCalendar.type) eventType$!: Observable<EventType>;
   @Select(StateSearch.searchResults) searchResults$!: Observable<
@@ -55,7 +56,7 @@ export class PageCalendar extends BaseComponent {
   @Select(StateSearch.searchResultsFound)
   searchResultsFound$!: Observable<boolean>;
   @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
-  @Select(StateUser.authenticated) authenticated$!: Observable<boolean>;
+  @Select(StateUser.isUser) isUser$!: Observable<boolean>;
 
   public Pages: any = Pages;
   public IconType: any = IconType;
@@ -170,11 +171,11 @@ export class PageCalendar extends BaseComponent {
   }
 
   public menuOpen(): void {
-    this.authenticated$
+    this.isUser$
       .pipe(
         take(1),
-        switchMap((authenticated: boolean) =>
-          authenticated
+        switchMap((isUser: boolean) =>
+          isUser
             ? from(this.menu.open())
             : this.store.dispatch(new ActionMobileAuthSelect())
         )
