@@ -12,6 +12,9 @@
 
     <ion-tab-button [tab]="Pages.Notifications">
       <ion-icon name="notifications"></ion-icon>
+      <ion-badge *ngIf="unreadExists$ | async" color="secondary"
+        >{{ unreadCount$ | async }}</ion-badge
+      >
       <div class="cpt-tab--title">{{ 'tab.notifications' | translate }}</div>
     </ion-tab-button>
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Pages } from '@firefly/shared';
+import { Pages, StateAlerts } from '@firefly/shared';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-page-tabs',
@@ -7,5 +9,8 @@ import { Pages } from '@firefly/shared';
   styleUrls: ['./tabs.page.scss']
 })
 export class PageTabs {
+  @Select(StateAlerts.unreadCount) unreadCount$!: Observable<number>;
+  @Select(StateAlerts.unreadExists) unreadExists$!: Observable<boolean>;
+
   public Pages = Pages;
 }
