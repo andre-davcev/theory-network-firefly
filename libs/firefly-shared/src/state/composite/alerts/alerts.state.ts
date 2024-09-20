@@ -53,7 +53,7 @@ export class StateAlerts {
   ): string {
     return !isUser
       ? 'page.alerts.empty.not-user'
-      : exists
+      : !exists
       ? 'page.events.empty.new'
       : '';
   }
