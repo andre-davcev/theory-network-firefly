@@ -10,6 +10,7 @@ import {
 import { ModulePipeTimestamp } from '@theory/firebase';
 import { ModuleDirectiveElevation } from '@theory/google';
 
+import { TagsComponentModule } from '@theory/ionic';
 import { ModuleComponentItemHeader } from '../../components';
 import { ModulePage } from '../../modules';
 import { PageLists } from './lists.page';
@@ -25,7 +26,8 @@ import { RoutesPageLists } from './lists.page.routes';
     ModuleComponentIconMessage,
     RouterModule.forChild(RoutesPageLists),
     ModuleComponentButtonAdd,
-    ModulePipeTimestamp
+    ModulePipeTimestamp,
+    TagsComponentModule
   ],
 
   declarations: [PageLists],

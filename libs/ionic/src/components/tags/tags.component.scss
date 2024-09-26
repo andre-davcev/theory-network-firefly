@@ -1,0 +1,15 @@
+:host {
+  display: block;
+
+  min-width: 100%;
+  padding: 0.5rem;
+
+  display: flex;
+  flex-wrap: no-wrap;
+  overflow-x: auto;
+
+  ion-chip {
+    flex: 0 0 auto;
+    width: auto;
+  }
+}
