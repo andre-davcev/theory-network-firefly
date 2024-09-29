@@ -49,6 +49,7 @@ import { MapboxEnvironment } from '@theory/mapbox';
 
 import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 import { CustomRouterStateSerializer } from '@theory/ngxs';
+import { StateTags } from 'libs/firefly-shared/src/state/basic/tags';
 import { environment } from '../../environments/environment';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -92,6 +93,7 @@ export function createTranslateLoader(http: HttpClient) {
       StateNotifications,
       StateSearch,
       StateStorage,
+      StateTags,
 
       StateUser,
       StateApp,

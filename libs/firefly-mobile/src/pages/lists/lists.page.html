@@ -23,10 +23,7 @@
   </ion-toolbar>
 </ion-header>
 
-<tn-tags
-  [edit]="true"
-  [tags]="[{display: 'First'}, {display: 'Second', disabled: true}, {display: 'Third'}, {display: 'Fourth'}, {display: 'Fifth'} ]"
-></tn-tags>
+<tn-tags [edit]="true" [tags]="tagsLists$ | async"></tn-tags>
 
 <ion-content>
   <!--

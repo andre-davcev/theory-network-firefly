@@ -36,6 +36,8 @@ import { TimestampFormat } from '@theory/firebase';
 import { Style } from '@capacitor/status-bar';
 import { ActionDeviceStatusBarSet, StateLocation } from '@theory/capacitor';
 
+import { Tag } from '@theory/ionic';
+import { StateTags } from 'libs/firefly-shared/src/state/basic/tags';
 import { ComponentHomeOptions } from '../../components';
 import { ActionMobileAuthSelect, StateMobile } from '../../state';
 
@@ -63,6 +65,7 @@ export class PageLists extends BaseComponent implements OnInit {
   @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
   @Select(StateUser.authenticated) authenticated$!: Observable<boolean>;
   @Select(StateLocation.permissionDenied) locationDenied$!: Observable<boolean>;
+  @Select(StateTags.tagsLists) tagsLists$!: Observable<Array<Tag>>;
 
   // @ViewChild(IonSearchbar, { static: false })
   // private searchbar!: IonSearchbar;

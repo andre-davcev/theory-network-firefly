@@ -5,8 +5,9 @@ import {
   EventEmitter,
   Input,
   NgModule,
-  OnInit,
-  Output
+  OnChanges,
+  Output,
+  SimpleChanges
 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { Tag, TagEvent } from './models';
@@ -17,7 +18,7 @@ import { Tag, TagEvent } from './models';
   styleUrls: ['./tags.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TagsComponent implements OnInit {
+export class TagsComponent implements OnChanges {
   @Input()
   public edit: boolean = false;
 
@@ -28,7 +29,7 @@ export class TagsComponent implements OnInit {
   public closeIcon: string = 'close-circle';
 
   @Input()
-  public tags: Array<Tag> = [];
+  public tags: Array<Tag> | null = [];
 
   @Output()
   public close: EventEmitter<TagEvent> = new EventEmitter();
@@ -38,28 +39,31 @@ export class TagsComponent implements OnInit {
 
   private closeClick: boolean = false;
 
-  public ngOnInit(): void {
-    const tagColors: Array<string> = ['primary', 'secondary', 'tertiary'];
-    const tagColorCount: number = tagColors.length;
-    let i: number = 0;
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['tags'].currentValue) {
+      const tagColors: Array<string> = ['primary', 'secondary', 'tertiary'];
+      const tagColorCount: number = tagColors.length;
+      let i: number = 0;
 
-    // Assign colors unless defined
-    this.tags.map((tag: Tag) => {
-      const colorDefined: boolean = tag.color != null;
+      // Assign colors unless defined
+      this.tags = (this.tags || []).map((tag: Tag, index: number) => {
+        const colorDefined: boolean = tag.color != null;
 
-      tag.disabled = tag.disabled || false;
+        tag.disabled = tag.disabled || false;
+        tag.index = tag.index || index;
 
-      if (!colorDefined) {
-        tag.color = tagColors[i];
-        i++;
+        if (!colorDefined) {
+          tag.color = tagColors[i];
+          i++;
 
-        if (i === tagColorCount) {
-          i = 0;
+          if (i === tagColorCount) {
+            i = 0;
+          }
         }
-      }
 
-      return tag;
-    });
+        return tag;
+      });
+    }
   }
 
   public closeClicked(index: number, tag: Tag): void {

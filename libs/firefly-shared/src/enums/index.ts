@@ -5,4 +5,7 @@ export * from './merge-type.enum';
 export * from './pages.enum';
 export * from './place-type.enum';
 export * from './repeat-type.enum';
+export * from './tag-event-default.enum';
+export * from './tag-event-type.enum';
+export * from './tag-list-default.enum';
 export * from './translation.enum';

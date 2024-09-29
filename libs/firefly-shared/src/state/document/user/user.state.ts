@@ -78,6 +78,7 @@ import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 
 import { Navigate } from '@ngxs/router-plugin';
+import { ActionTagsGet } from '../../basic/tags';
 import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
 import {
   ActionInterestsPage,
@@ -492,6 +493,7 @@ export class StateUser
   @Action(ActionUserWatchLanguage, { cancelUncompleted: true })
   watchLanguage({ dispatch, getState }: StateContext<StateUserModel>) {
     return this.store.select(StateLanguage.language).pipe(
+      tap(() => dispatch(new ActionTagsGet())),
       filter(
         (language: string) =>
           language != null && StateUser.language(getState()) !== language
