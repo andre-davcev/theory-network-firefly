@@ -47,7 +47,7 @@ export class StateLanguage {
 
   @Action(ActionLanguageGet)
   languageGet({ patchState, dispatch }: StateContext<StateLanguageModel>) {
-    from(Device.getLanguageCode()).pipe(
+    return from(Device.getLanguageCode()).pipe(
       map((language: { value: string }) => language.value),
       switchMap((language: string) =>
         dispatch(new ActionLanguageSet(language))

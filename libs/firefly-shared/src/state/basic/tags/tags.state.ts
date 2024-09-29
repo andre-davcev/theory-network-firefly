@@ -6,17 +6,38 @@ import { tap } from 'rxjs/operators';
 import { Tag } from '@theory/ionic';
 
 import { TagEventDefault, TagEventType, TagListDefault } from '../../../enums';
+import { StateUser } from '../../document';
 import { ActionTagsGet } from './tags.actions';
 import { StateTagsModel, StateTagsOptions } from './tags.state.model';
 
 @State<StateTagsModel>(StateTagsOptions)
 @Injectable()
 export class StateTags {
-  @Selector() static tagsEvents(state: StateTagsModel): Array<Tag> {
-    return state.tagsEvents;
+  @Selector([StateUser.isUser, StateUser.isPublisher]) static tagsEvents(
+    state: StateTagsModel,
+    isUser: boolean,
+    isPublisher: boolean
+  ): Array<Tag> {
+    return isUser && isPublisher
+      ? state.tagsEvents
+      : state.tagsEvents.filter(
+          (tag: Tag) =>
+            (isPublisher || tag.key !== TagEventDefault.Published) &&
+            (isUser || tag.key !== TagEventDefault.Saved)
+        );
   }
-  @Selector() static tagsLists(state: StateTagsModel): Array<Tag> {
-    return state.tagsLists;
+  @Selector([StateUser.isUser, StateUser.isPublisher]) static tagsLists(
+    state: StateTagsModel,
+    isUser: boolean,
+    isPublisher: boolean
+  ): Array<Tag> {
+    return isUser && isPublisher
+      ? state.tagsLists
+      : state.tagsLists.filter(
+          (tag: Tag) =>
+            (isPublisher || tag.key !== TagListDefault.Published) &&
+            (isUser || tag.key !== TagListDefault.Subscribed)
+        );
   }
 
   constructor(public translate: TranslateService) {}
@@ -50,8 +71,6 @@ export class StateTags {
           display: translations[`tag.${key}`],
           disabled: false
         }));
-
-        console.log({ tagsEvents, tagsLists, translations });
 
         patchState({ tagsEvents, tagsLists });
       })

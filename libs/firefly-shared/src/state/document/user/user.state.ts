@@ -78,7 +78,7 @@ import { StateUserModel } from './user.state.model';
 import { StateUserOptions } from './user.state.options';
 
 import { Navigate } from '@ngxs/router-plugin';
-import { ActionTagsGet } from '../../basic/tags';
+import { ActionTagsGet } from '../../basic/tags/tags.actions';
 import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
 import {
   ActionInterestsPage,
@@ -222,7 +222,7 @@ export class StateUser
     return StateUser.dataState(state)?.tokens || {};
   }
   @Selector() static isPublisher(state: StateUserModel): boolean {
-    return StateUser.dataState(state).isPublisher;
+    return StateUser.dataState(state).isPublisher || false;
   }
   @Selector() static email(state: StateUserModel): string {
     return StateUser.dataState(state).email;
@@ -395,6 +395,7 @@ export class StateUser
       switchMap(() =>
         initialized ? dispatch(new ActionUserResetAll()) : of(null)
       ),
+      tap(() => dispatch(new ActionUserWatchLanguage())),
       switchMap(() =>
         dispatch([
           new ActionUserSetErrorAuth(),
@@ -496,7 +497,9 @@ export class StateUser
       tap(() => dispatch(new ActionTagsGet())),
       filter(
         (language: string) =>
-          language != null && StateUser.language(getState()) !== language
+          language != null &&
+          StateUser.language(getState()) !== language &&
+          this.store.selectSnapshot(StateUser.isUser)
       ),
       switchMap((language: string) =>
         dispatch(

@@ -1,5 +1,5 @@
-<ion-header elevation="1">
-  <ion-toolbar color="light">
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light" elevation="1">
     <ion-title color="dark"> {{ 'page.stream.title' | translate}} </ion-title>
 
     <ion-buttons slot="end">
@@ -21,9 +21,9 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
 
-<tn-tags [edit]="true" [tags]="tagsLists$ | async"></tn-tags>
+  <tn-tags [edit]="true" [tags]="tagsLists$ | async"></tn-tags>
+</ion-header>
 
 <ion-content>
   <!--
