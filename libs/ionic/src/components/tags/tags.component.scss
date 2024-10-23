@@ -1,11 +1,27 @@
 :host {
   display: block;
+  width: 100%;
 
-  min-width: 100%;
-  padding: 0.5rem;
+  position: relative;
+  z-index: 10;
 
-  display: flex;
-  overflow-x: auto;
+  --padding-top: 0.5rem;
+  --padding-bottom: 0.5rem;
+  --padding-left: 0.5rem;
+  --padding-right: 0.5rem;
+
+  .cpt-container {
+    position: relative;
+    display: flex;
+    overflow-x: auto;
+    padding: 0.5rem;
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+    padding-left: var(--padding-left);
+    padding-right: var(--padding-right);
+
+    min-width: 100%;
+  }
 
   ion-chip {
     flex: 0 0 auto;

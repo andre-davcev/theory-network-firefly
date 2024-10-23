@@ -324,4 +324,13 @@
     margin-bottom: -5px;
     background-color: #b3b2b2;
   }
+
+  .cpt-toolbar--tags {
+    margin-top: 0.25rem;
+    --padding-top: 0;
+
+    tn-tags {
+      --padding-top: 0;
+    }
+  }
 }

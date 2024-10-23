@@ -22,12 +22,15 @@
     </ion-buttons>
   </ion-toolbar>
 
-  <tn-tags
-    [tags]="tagsLists$ | async"
-    [edit]="true"
-    [colors]="Colors"
-    [active]="1"
-  ></tn-tags>
+  <ion-toolbar class="cpt-toolbar--tags" color="light">
+    <tn-tags
+      [tags]="tagsLists$ | async"
+      [edit]="true"
+      [colors]="Colors"
+      [active]="1"
+      [outline]="false"
+    ></tn-tags>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>

@@ -85,18 +85,6 @@ export class TagsComponent implements OnChanges {
       this.closeClick = false;
     }
   }
-
-  public background(index: number, tag: Tag): string {
-    return `var(--ion-color-${tag.color}-tint)`;
-  }
-
-  public color(index: number): string {
-    return index === this.active ? '#FFF' : '#000';
-  }
-
-  public opacity(index: number): number {
-    return index === this.active ? 1 : 0.6;
-  }
 }
 
 @NgModule({
