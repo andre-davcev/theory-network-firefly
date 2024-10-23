@@ -22,6 +22,7 @@ import {
   ActionInterestsPage,
   ActionInterestsSubscriptionOnOff,
   ActionInterestsSubscriptionToggle,
+  Colors,
   IconType,
   Pages,
   StateApp,
@@ -73,6 +74,7 @@ export class PageLists extends BaseComponent implements OnInit {
   // public searching: boolean = false;
 
   public Pages: any = Pages;
+  public Colors: any = Colors;
 
   // public searchClient = algoliaSearch(
   //   '8NDQ1FNIDU',

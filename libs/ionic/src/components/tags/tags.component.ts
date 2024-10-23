@@ -10,6 +10,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { ColorsDefault } from './constants';
 import { Tag, TagEvent } from './models';
 
 @Component({
@@ -31,6 +32,11 @@ export class TagsComponent implements OnChanges {
   @Input()
   public tags: Array<Tag> | null = [];
 
+  @Input() colors: Array<string> = ColorsDefault;
+
+  @Input()
+  public active!: number | null;
+
   @Output()
   public close: EventEmitter<TagEvent> = new EventEmitter();
 
@@ -41,7 +47,7 @@ export class TagsComponent implements OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['tags'].currentValue) {
-      const tagColors: Array<string> = ['primary', 'secondary', 'tertiary'];
+      const tagColors: Array<string> = this.colors;
       const tagColorCount: number = tagColors.length;
       let i: number = 0;
 
@@ -78,6 +84,18 @@ export class TagsComponent implements OnChanges {
     } else {
       this.closeClick = false;
     }
+  }
+
+  public background(index: number, tag: Tag): string {
+    return `var(--ion-color-${tag.color}-tint)`;
+  }
+
+  public color(index: number): string {
+    return index === this.active ? '#FFF' : '#000';
+  }
+
+  public opacity(index: number): number {
+    return index === this.active ? 1 : 0.6;
   }
 }
 

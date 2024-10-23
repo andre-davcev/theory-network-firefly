@@ -32,11 +32,27 @@ $fire-color-grey-lightest: #eff2f1;
 $fire-color-grey-middle: rgba(146, 151, 149, 0.6);
 $fire-color-grey-dark: rgba(5, 24, 28, 0.8);
 
-$fire-color-primary-lightest: #b2ed72; // rgb(178, 237, 114)
-$fire-color-primary-light: #9ae449; // rgb(154, 228, 73)    google.$gm-color-green-light-a400
-$fire-color-primary: #80d623; // rgb(128, 214, 35)
-$fire-color-primary-dark: #61b10b; // rgb(97, 177, 11)     google.$gm-color-green-light-a700
-$fire-color-primary-darkest: #498c00; // rgb(73, 140, 0)
+$fire-color-primary-lightest: #b2ed72;
+$fire-color-primary-lightest-rgb: 178, 237, 114;
+$fire-color-primary-light: #9ae449;
+$fire-color-primary-light-rgb: 154, 228, 73;
+$fire-color-primary: #80d623;
+$fire-color-primary-rgb: 128, 214, 35;
+$fire-color-primary-dark: #61b10b;
+$fire-color-primary-dark-rgb: 97, 177, 11;
+$fire-color-primary-darkest: #498c00;
+$fire-color-primary-darkest-rgb: 73, 140, 0;
+
+$fire-color-accent-lightest: #e76f9b;
+$fire-color-accent-lightest-rgb: 231, 111, 155;
+$fire-color-accent-light: #db477e;
+$fire-color-accent-light-rgb: 219, 71, 126;
+$fire-color-accent: #ce2262;
+$fire-color-accent-rgb: 206, 34, 98;
+$fire-color-accent-dark: #aa0b46;
+$fire-color-accent-dark-rgb: 170, 11, 70;
+$fire-color-accent-darkest: #870032;
+$fire-color-accent-darkest-rgb: 135, 0, 50;
 
 $fire-color-accent-lightest: #e76f9b; // rgb(231, 111, 155)
 $fire-color-accent-light: #db477e; // rgb(219, 71, 126)    google.$gm-color-teal-a100

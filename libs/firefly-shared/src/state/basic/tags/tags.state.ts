@@ -26,6 +26,7 @@ export class StateTags {
             (isUser || tag.key !== TagEventDefault.Saved)
         );
   }
+
   @Selector([StateUser.isUser, StateUser.isPublisher]) static tagsLists(
     state: StateTagsModel,
     isUser: boolean,

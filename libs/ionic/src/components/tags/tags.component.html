@@ -1,10 +1,18 @@
 <ion-chip
   *ngFor="let tag of tags; let i = index"
-  [color]="tag.color"
   [disabled]="tag.disabled"
   [outline]="outline"
+  [class.ion-activated]="i === active"
+  [style.background]="background(i, tag)"
+  [style.color]="color(i)"
+  [style.opacity]="opacity(i)"
   (click)="chipClicked(i, tag)"
 >
   <ion-label>{{ tag.display }}</ion-label>
-  <ion-icon [name]="closeIcon" (click)="closeClicked(i, tag)"></ion-icon>
+  <ion-icon
+    *ngIf="edit"
+    [color]="i === active ? 'light' : 'dark'"
+    [name]="closeIcon"
+    (click)="closeClicked(i, tag)"
+  ></ion-icon>
 </ion-chip>
