@@ -10,6 +10,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { ModuleDirectiveElevation } from '@theory/google';
 import { ColorsDefault } from './constants';
 import { Tag, TagEvent } from './models';
 
@@ -44,6 +45,14 @@ export class TagsComponent implements OnChanges {
   public click: EventEmitter<TagEvent> = new EventEmitter();
 
   private closeClick: boolean = false;
+
+  public isActive(index: number): boolean {
+    return index === this.active;
+  }
+
+  public showOutline(index: number): boolean {
+    return this.outline || this.isActive(index);
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['tags'].currentValue) {
@@ -80,15 +89,32 @@ export class TagsComponent implements OnChanges {
 
   public chipClicked(index: number, tag: Tag): void {
     if (!this.closeClick) {
+      this.active = index;
       this.click.emit({ index, tag });
     } else {
       this.closeClick = false;
     }
   }
+
+  public background(index: number, tag: Tag): string {
+    return `var(--ion-color-${tag.color}-tint)`;
+  }
+
+  public color(index: number, tag: Tag): string {
+    return 'rgba(0,0,0,0.8)';
+  }
+
+  public borderColor(index: number, tag: Tag): string {
+    return this.isActive(index) ? `rgba(0,0,0,0.5)` : 'rgba(255,255,255,0)';
+  }
+
+  public elevation(index: number): string {
+    return this.isActive(index) ? '1' : '0';
+  }
 }
 
 @NgModule({
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, ModuleDirectiveElevation],
   declarations: [TagsComponent],
   exports: [TagsComponent]
 })

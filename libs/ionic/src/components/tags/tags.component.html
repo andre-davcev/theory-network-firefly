@@ -3,8 +3,10 @@
     *ngFor="let tag of tags; let i = index"
     [color]="tag.color"
     [disabled]="tag.disabled"
-    [class.ion-activated]="i === active"
-    [outline]="outline"
+    [style.background]="background(i, tag)"
+    [style.color]="color(i, tag)"
+    [style.border-color]="borderColor(i, tag)"
+    [elevation]="elevation(i)"
     (click)="chipClicked(i, tag)"
   >
     <ion-label>{{ tag.display }}</ion-label>
