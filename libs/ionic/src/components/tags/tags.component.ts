@@ -25,9 +25,6 @@ export class TagsComponent implements OnChanges {
   public edit: boolean = false;
 
   @Input()
-  public outline: boolean = false;
-
-  @Input()
   public closeIcon: string = 'close-circle';
 
   @Input()
@@ -48,10 +45,6 @@ export class TagsComponent implements OnChanges {
 
   public isActive(index: number): boolean {
     return index === this.active;
-  }
-
-  public showOutline(index: number): boolean {
-    return this.outline || this.isActive(index);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -96,20 +89,24 @@ export class TagsComponent implements OnChanges {
     }
   }
 
-  public background(index: number, tag: Tag): string {
+  public background(tag: Tag): string {
     return `var(--ion-color-${tag.color}-tint)`;
   }
 
-  public color(index: number, tag: Tag): string {
+  public color(): string {
     return 'rgba(0,0,0,0.8)';
   }
 
-  public borderColor(index: number, tag: Tag): string {
+  public borderColor(index: number): string {
     return this.isActive(index) ? `rgba(0,0,0,0.5)` : 'rgba(255,255,255,0)';
   }
 
   public elevation(index: number): string {
     return this.isActive(index) ? '1' : '0';
+  }
+
+  public opacity(index: number): string {
+    return this.isActive(index) ? '1' : '0.8';
   }
 }
 

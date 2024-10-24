@@ -3,9 +3,10 @@
     *ngFor="let tag of tags; let i = index"
     [color]="tag.color"
     [disabled]="tag.disabled"
-    [style.background]="background(i, tag)"
-    [style.color]="color(i, tag)"
-    [style.border-color]="borderColor(i, tag)"
+    [style.background]="background(tag)"
+    [style.color]="color()"
+    [style.border-color]="borderColor(i)"
+    [style.opacity]="opacity(i)"
     [elevation]="elevation(i)"
     (click)="chipClicked(i, tag)"
   >

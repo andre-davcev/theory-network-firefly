@@ -1,3 +1,5 @@
+@use 'variables' as firefly;
+
 :host {
   display: block;
   width: 100%;
@@ -27,5 +29,10 @@
     border-width: 1px;
     flex: 0 0 auto;
     width: auto;
+
+    transition-timing-function: ease-in;
+    transition-property: background-color, colordd, border-color, opacity,
+      box-shadow;
+    transition-duration: 0.2s;
   }
 }
