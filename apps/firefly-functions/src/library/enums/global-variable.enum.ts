@@ -16,6 +16,6 @@ export enum GlobalVariable {
   EventPopularityMultiplier = 3,
   EventUpcomingSegmentMillis = 604800000, // 1 Week
 
-  InterestScoreWeightRaw = 0.2,
-  InterestScoreWeightSubscribers = 0.8
+  ListScoreWeightRaw = 0.2,
+  ListScoreWeightSubscribers = 0.8
 }

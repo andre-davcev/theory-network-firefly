@@ -5,24 +5,21 @@ import { CloudFunction, EventContext, firestore } from 'firebase-functions';
 // import algoliasearch from 'algoliasearch';
 
 import { ServiceFirestore, Version } from '../library';
-import { Collection, Interest } from '../shared';
+import { Collection, List } from '../shared';
 
 // const env = config();
 
 // const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
-// const index = client.initIndex('interests');
+// const index = client.initIndex('lists');
 
 db();
 
-const InterestsCreate: CloudFunction<DocumentSnapshot> = firestore
-  .document(`${Collection.Interests}/{id}`)
+const ListsCreate: CloudFunction<DocumentSnapshot> = firestore
+  .document(`${Collection.Lists}/{id}`)
   .onCreate(async (snapshot: DocumentSnapshot, context: EventContext) => {
     const data = snapshot.data();
     const objectID = snapshot.id;
-    const object: Interest = ServiceFirestore.create<Interest>(
-      snapshot,
-      Version.Interests
-    );
+    const object: List = ServiceFirestore.create<List>(snapshot, Version.Lists);
 
     return Promise.all([
       snapshot.ref.set(object)
@@ -30,4 +27,4 @@ const InterestsCreate: CloudFunction<DocumentSnapshot> = firestore
     ]);
   });
 
-export { InterestsCreate };
+export { ListsCreate };

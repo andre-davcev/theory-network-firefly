@@ -36,6 +36,7 @@ import {
   StateNotifications,
   StateSearch,
   StateSubscription,
+  StateTags,
   StateUser,
   StateUserAlerts,
   StateUserEvents,
@@ -49,7 +50,6 @@ import { MapboxEnvironment } from '@theory/mapbox';
 
 import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 import { CustomRouterStateSerializer } from '@theory/ngxs';
-import { StateTags } from 'libs/firefly-shared/src/state/basic/tags';
 import { environment } from '../../environments/environment';
 
 export function createTranslateLoader(http: HttpClient) {

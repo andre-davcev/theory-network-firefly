@@ -1,28 +1,28 @@
-import { firestore, EventContext, CloudFunction } from 'firebase-functions';
-import { firestore as db } from 'firebase-admin';
 import {
   DocumentSnapshot,
-  Firestore,
   FieldValue,
-  WriteResult,
+  Firestore,
+  QueryDocumentSnapshot,
   QuerySnapshot,
-  QueryDocumentSnapshot
+  WriteResult
 } from '@google-cloud/firestore';
+import { firestore as db } from 'firebase-admin';
+import { CloudFunction, EventContext, firestore } from 'firebase-functions';
 
 import { ImageType, ServiceStorage } from '../library';
-import { SubscriptionPartial, Collection, User } from '../shared';
+import { Collection, SubscriptionPartial, User } from '../shared';
 
 const database: Firestore = db();
 
-const InterestsDelete: CloudFunction<DocumentSnapshot> = firestore
-  .document(`${Collection.Interests}/{id}`)
+const ListsDelete: CloudFunction<DocumentSnapshot> = firestore
+  .document(`${Collection.Lists}/{id}`)
   .onDelete(async (snapshot: DocumentSnapshot, context: EventContext) => {
     const id: string = snapshot.id;
 
     const queries: Array<Promise<QuerySnapshot>> = [
       database
         .collection(Collection.Events)
-        .where(Collection.Interests, 'array-contains', id)
+        .where(Collection.Lists, 'array-contains', id)
         .get(),
       database
         .collection(Collection.Users)
@@ -40,9 +40,7 @@ const InterestsDelete: CloudFunction<DocumentSnapshot> = firestore
     let user: User;
 
     events.forEach((snapshot: QueryDocumentSnapshot) =>
-      updates.push(
-        snapshot.ref.update({ interests: FieldValue.arrayRemove(id) })
-      )
+      updates.push(snapshot.ref.update({ lists: FieldValue.arrayRemove(id) }))
     );
 
     users.forEach((snapshot: QueryDocumentSnapshot) => {
@@ -65,9 +63,9 @@ const InterestsDelete: CloudFunction<DocumentSnapshot> = firestore
 
     await Promise.all(updates);
 
-    const bucketPath: string = `${Collection.Interests}/${id}/${ImageType.Image}.jpeg`;
+    const bucketPath: string = `${Collection.Lists}/${id}/${ImageType.Image}.jpeg`;
 
     return ServiceStorage.delete(bucketPath);
   });
 
-export { InterestsDelete };
+export { ListsDelete };

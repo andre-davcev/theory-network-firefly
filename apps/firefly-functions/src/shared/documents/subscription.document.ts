@@ -1,7 +1,7 @@
-import { Interest } from './interest.document';
+import { List } from './list.document';
 
 export interface SubscriptionPartial {
   on: boolean;
 }
 
-export type Subscription = Interest & SubscriptionPartial;
+export type Subscription = List & SubscriptionPartial;

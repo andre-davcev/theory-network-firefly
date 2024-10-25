@@ -3,10 +3,10 @@ import { GeoPoint } from 'firebase/firestore';
 
 import { Nullable } from '../../library';
 import { MapboxPlaceType } from '../enums';
-import { CityInfo, MetadataList, Place } from '../interfaces';
+import { CityInfo, MetadataArray, Place } from '../interfaces';
 import { DocumentBase } from './base.document';
 
-export interface MetadataEvent extends MetadataList {
+export interface MetadataEvent extends MetadataArray {
   score?: number;
   icon?: string;
   image?: string;
@@ -20,8 +20,8 @@ export interface Event extends DocumentBase {
   description: string;
   draft: boolean;
   geopoint: GeoPoint;
-  interests: Array<string>;
-  interestsPending: Array<string>;
+  lists: Array<string>;
+  listsPending: Array<string>;
   name: string;
   notifyComplete: boolean;
   placeType: MapboxPlaceType;

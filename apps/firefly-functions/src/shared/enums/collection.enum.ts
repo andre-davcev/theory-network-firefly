@@ -3,8 +3,8 @@ export enum Collection {
   Cities = 'cities',
   Debug = 'debug',
   Events = 'events',
-  Interests = 'interests',
-  Streams = 'interest-streams',
+  Lists = 'lists',
+  ListStreams = 'list-streams',
   Subscriptions = 'subscriptions',
   UserProfiles = 'user-profiles',
   Users = 'users'

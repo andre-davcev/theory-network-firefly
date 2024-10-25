@@ -45,7 +45,7 @@ const UsersUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
       const subscriptionCountAfter: number = subscriptionKeysAfter.length;
 
       let status: Status = Status.Unchanged;
-      let interestId: string;
+      let listId: string;
 
       const cityIdBefore: string = before.city?.id || '';
       const cityIdAfter: string = after.city?.id || '';
@@ -55,25 +55,25 @@ const UsersUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
       }
 
       if (subscriptionCountBefore === subscriptionCountAfter) {
-        interestId = subscriptionKeysAfter.find(
-          (interestId: string) =>
-            subscriptionsStatusAfter[interestId].on !==
-            subscriptionsStatusBefore[interestId].on
+        listId = subscriptionKeysAfter.find(
+          (listId: string) =>
+            subscriptionsStatusAfter[listId].on !==
+            subscriptionsStatusBefore[listId].on
         );
         status =
-          interestId == null
+          listId == null
             ? Status.Unchanged
-            : subscriptionsStatusAfter[interestId].on
+            : subscriptionsStatusAfter[listId].on
             ? Status.Added
             : Status.Removed;
       } else if (subscriptionCountBefore < subscriptionCountAfter) {
-        interestId = subscriptionKeysAfter.find(
-          (interestId: string) => subscriptionsStatusBefore[interestId] == null
+        listId = subscriptionKeysAfter.find(
+          (listId: string) => subscriptionsStatusBefore[listId] == null
         );
         status = Status.Added;
       } else if (subscriptionCountBefore > subscriptionCountAfter) {
-        interestId = subscriptionKeysBefore.find(
-          (interestId: string) => subscriptionsStatusAfter[interestId] == null
+        listId = subscriptionKeysBefore.find(
+          (listId: string) => subscriptionsStatusAfter[listId] == null
         );
         status = Status.Removed;
       }
@@ -81,25 +81,25 @@ const UsersUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
       if (status === Status.Added) {
         updates.push(
           database
-            .collection(Collection.Interests)
-            .doc(interestId)
+            .collection(Collection.Lists)
+            .doc(listId)
             .update({ subscriberCount: FieldValue.increment(1) })
         );
         updates.push(
           change.after.ref.update({
-            subscriptions: FieldValue.arrayUnion(interestId)
+            subscriptions: FieldValue.arrayUnion(listId)
           })
         );
       } else if (status === Status.Removed) {
         updates.push(
           database
-            .collection(Collection.Interests)
-            .doc(interestId)
+            .collection(Collection.Lists)
+            .doc(listId)
             .update({ subscriberCount: FieldValue.increment(-1) })
         );
         updates.push(
           change.after.ref.update({
-            subscriptions: FieldValue.arrayRemove(interestId)
+            subscriptions: FieldValue.arrayRemove(listId)
           })
         );
       }

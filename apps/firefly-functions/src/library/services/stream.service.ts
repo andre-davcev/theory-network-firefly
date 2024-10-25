@@ -12,20 +12,20 @@ import {
   CityInfo,
   Collection,
   Event,
-  Interest,
-  StreamInterest
+  List,
+  StreamList
 } from '../../shared';
 import { GlobalVariable } from '../enums';
 import { ServiceFirestore } from './firestore.service';
 
 export interface CityInformation {
-  interests: Array<string>;
+  lists: Array<string>;
   subscriberMax: number;
   distanceScore: Record<string, number>;
   nearby: Record<string, number>;
 }
 
-export interface InterestInformation {
+export interface ListInformation {
   subscribers: number;
   virtual: boolean;
   cityEvents: Record<string, Array<string>>;
@@ -99,9 +99,9 @@ export class ServiceStreams {
   }
 
   public static scoreEventPopularity(event: Event): number {
-    const interestCount: number = event.interests.length;
+    const listCount: number = event.lists.length;
     const segments: number =
-      Math.floor(interestCount / GlobalVariable.EventPopularityMultiplier) + 1;
+      Math.floor(listCount / GlobalVariable.EventPopularityMultiplier) + 1;
 
     return event.private || segments === 1
       ? GlobalVariable.EventPopularityMin
@@ -129,7 +129,7 @@ export class ServiceStreams {
     const nearby: Record<string, number> = city.nearby;
     const cityInfo: CityInformation = {
       subscriberMax: 0,
-      interests: [],
+      lists: [],
       distanceScore: {},
       nearby
     };
@@ -156,26 +156,24 @@ export class ServiceStreams {
     return cityInfo;
   }
 
-  public static interestsInfo(
-    interests: Array<Interest>
-  ): Record<string, InterestInformation> {
-    const interestInfo: Record<string, InterestInformation> = {};
+  public static listsInfo(lists: Array<List>): Record<string, ListInformation> {
+    const listInfo: Record<string, ListInformation> = {};
 
-    interests.forEach(
-      (interest: Interest) =>
-        (interestInfo[interest.id] = {
-          subscribers: interest.subscriberCount,
-          virtual: interest.virtual,
+    lists.forEach(
+      (list: List) =>
+        (listInfo[list.id] = {
+          subscribers: list.subscriberCount,
+          virtual: list.virtual,
           cityEvents: {}
         })
     );
 
-    return interestInfo;
+    return listInfo;
   }
 
   public static eventsInfo(
     events: Array<Event>,
-    interests: Record<string, InterestInformation>,
+    lists: Record<string, ListInformation>,
     cities: Record<string, CityInformation>
   ): Record<string, EventInformation> {
     const time: number = new Date().getTime();
@@ -183,7 +181,7 @@ export class ServiceStreams {
     let id: string;
     let city: CityInfo;
     let cityId: string;
-    let interestInfo: InterestInformation;
+    let listInfo: ListInformation;
     let subscriberCount: number;
 
     const eventsInfo: Record<string, EventInformation> = {};
@@ -197,23 +195,20 @@ export class ServiceStreams {
       if (city != null) {
         cityId = city.id;
 
-        event.interests
-          .filter(
-            (interestId: string) => interests[interestId].cityEvents != null
-          )
-          .forEach((interestId: string) => {
-            interestInfo = interests[interestId];
-            subscriberCount = interestInfo.subscribers;
+        event.lists
+          .filter((listId: string) => lists[listId].cityEvents != null)
+          .forEach((listId: string) => {
+            listInfo = lists[listId];
+            subscriberCount = listInfo.subscribers;
 
-            interestInfo.cityEvents[cityId] =
-              interestInfo.cityEvents?.[cityId] || [];
+            listInfo.cityEvents[cityId] = listInfo.cityEvents?.[cityId] || [];
 
             if (subscriberCount > cities[cityId].subscriberMax) {
               cities[cityId].subscriberMax = subscriberCount;
             }
 
-            interestInfo.cityEvents[cityId].push(id);
-            cities[cityId].interests.push(interestId);
+            listInfo.cityEvents[cityId].push(id);
+            cities[cityId].lists.push(listId);
           });
       }
     });
@@ -221,22 +216,22 @@ export class ServiceStreams {
     return eventsInfo;
   }
 
-  public static interestStreams(
-    interests: Record<string, InterestInformation>,
+  public static listStreams(
+    lists: Record<string, ListInformation>,
     cities: Record<string, CityInformation>,
     events: Record<string, EventInformation>
-  ): Record<string, Record<string, StreamInterest>> {
-    const interestStreams: Record<string, Record<string, StreamInterest>> = {};
+  ): Record<string, Record<string, StreamList>> {
+    const listStreams: Record<string, Record<string, StreamList>> = {};
 
     let score: number;
-    let interestScore: number;
+    let listScore: number;
     let subscriberMax: number;
     let subscriberCount: number;
     let distanceScores: Record<string, number>;
     let cityInfo: CityInformation;
-    let interestInfo: InterestInformation;
+    let listInfo: ListInformation;
     let cityEvents: Record<string, Array<string>>;
-    let cityStream: Record<string, StreamInterest>;
+    let cityStream: Record<string, StreamList>;
 
     // Process all cities and cities nearby
     Object.keys(cities).forEach((cityId: string) => {
@@ -246,37 +241,37 @@ export class ServiceStreams {
       subscriberMax = cityInfo.subscriberMax === 0 ? 1 : cityInfo.subscriberMax;
 
       Object.keys(cityInfo.nearby).forEach((nearbyId: string) => {
-        cities[nearbyId].interests.forEach((interestId: string) => {
-          interestInfo = interests[interestId];
-          subscriberCount = interestInfo.subscribers;
-          cityEvents = interestInfo.cityEvents;
-          interestScore = 0;
+        cities[nearbyId].lists.forEach((listId: string) => {
+          listInfo = lists[listId];
+          subscriberCount = listInfo.subscribers;
+          cityEvents = listInfo.cityEvents;
+          listScore = 0;
 
           Object.keys(cityEvents).forEach((cityIdEvent: string) => {
             cityEvents[cityIdEvent].forEach(
-              (eventId: string) => (interestScore += events[eventId].score)
+              (eventId: string) => (listScore += events[eventId].score)
             );
 
-            interestScore += interestScore * distanceScores[cityIdEvent];
+            listScore += listScore * distanceScores[cityIdEvent];
           });
 
           score =
-            interestScore * GlobalVariable.InterestScoreWeightRaw +
-            interestScore *
-              GlobalVariable.InterestScoreWeightSubscribers *
+            listScore * GlobalVariable.ListScoreWeightRaw +
+            listScore *
+              GlobalVariable.ListScoreWeightSubscribers *
               (subscriberCount / subscriberMax);
 
-          cityStream[interestId] = {
+          cityStream[listId] = {
             score,
-            virtual: interestInfo.virtual
-          } as StreamInterest;
+            virtual: listInfo.virtual
+          } as StreamList;
         });
       });
 
-      interestStreams[cityId] = cityStream;
+      listStreams[cityId] = cityStream;
     });
 
-    return interestStreams;
+    return listStreams;
   }
 
   public static async streamsCreate(
@@ -290,14 +285,15 @@ export class ServiceStreams {
     const citiesInfo: Record<string, CityInformation> =
       ServiceStreams.citiesInfo(cities);
 
-    // Get interests information
-    const interestsQuery: Query = database
-      .collection(Collection.Interests)
+    // Get lists information
+    const listsQuery: Query = database
+      .collection(Collection.Lists)
       .where('private', '==', false);
-    const interests: Array<Interest> =
-      await ServiceFirestore.toArrayQuery<Interest>(interestsQuery);
-    const interestsInfo: Record<string, InterestInformation> =
-      ServiceStreams.interestsInfo(interests);
+    const lists: Array<List> = await ServiceFirestore.toArrayQuery<List>(
+      listsQuery
+    );
+    const listsInfo: Record<string, ListInformation> =
+      ServiceStreams.listsInfo(lists);
 
     // Get events information
     const eventsQuery: Query = database
@@ -307,27 +303,25 @@ export class ServiceStreams {
       eventsQuery
     );
     const eventsInfo: Record<string, EventInformation> =
-      ServiceStreams.eventsInfo(events, interestsInfo, citiesInfo);
+      ServiceStreams.eventsInfo(events, listsInfo, citiesInfo);
 
     // Generate stream for cities and cities nearby
     const collection: CollectionReference = database.collection(
-      Collection.Streams
+      Collection.ListStreams
     );
-    const interestStreams: Record<
+    const listStreams: Record<
       string,
-      Record<string, StreamInterest>
-    > = ServiceStreams.interestStreams(interestsInfo, citiesInfo, eventsInfo);
-    const updates: Array<Promise<WriteResult>> = Object.keys(
-      interestStreams
-    ).map((cityId: string) =>
-      collection.doc(cityId).set(interestStreams[cityId])
+      Record<string, StreamList>
+    > = ServiceStreams.listStreams(listsInfo, citiesInfo, eventsInfo);
+    const updates: Array<Promise<WriteResult>> = Object.keys(listStreams).map(
+      (cityId: string) => collection.doc(cityId).set(listStreams[cityId])
     );
 
-    await ServiceFirestore.debugWrite(false, database, Collection.Streams, {
+    await ServiceFirestore.debugWrite(false, database, Collection.ListStreams, {
       citiesInfo,
-      interestsInfo,
+      listsInfo,
       eventsInfo,
-      interestStreams
+      listStreams
     });
 
     return Promise.all(updates);
@@ -364,66 +358,58 @@ export class ServiceStreams {
       (event: Event) => !event.private
     );
 
-    // Get interest info
-    const interestIds: Record<string, string> = {};
+    // Get list info
+    const listIds: Record<string, string> = {};
     events.forEach((event: Event) =>
-      event.interests.forEach(
-        (interestId: string) => (interestIds[interestId] = interestId)
-      )
+      event.lists.forEach((listId: string) => (listIds[listId] = listId))
     );
-    const interestsQuery: Array<Promise<QuerySnapshot>> = Object.keys(
-      interestIds
-    ).map((interestId: string) =>
-      database
-        .collection(Collection.Interests)
-        .where('id', '==', interestId)
-        .get()
+    const listsQuery: Array<Promise<QuerySnapshot>> = Object.keys(listIds).map(
+      (listId: string) =>
+        database.collection(Collection.Lists).where('id', '==', listId).get()
     );
-    const interestsAll: Array<Interest> =
-      await ServiceFirestore.toArrayQuerySnapshots<Interest>(interestsQuery);
-    const interests: Array<Interest> = interestsAll.filter(
-      (interest: Interest) => !interest.private
-    );
-    const interestsInfo: Record<string, InterestInformation> =
-      ServiceStreams.interestsInfo(interests);
+    const listsAll: Array<List> =
+      await ServiceFirestore.toArrayQuerySnapshots<List>(listsQuery);
+    const lists: Array<List> = listsAll.filter((list: List) => !list.private);
+    const listsInfo: Record<string, ListInformation> =
+      ServiceStreams.listsInfo(lists);
 
     // Get event info
     const eventsInfo: Record<string, EventInformation> =
-      ServiceStreams.eventsInfo(events, interestsInfo, citiesInfo);
+      ServiceStreams.eventsInfo(events, listsInfo, citiesInfo);
 
     // Generate stream for cities and cities nearby
     const collection: CollectionReference = database.collection(
-      Collection.Streams
+      Collection.ListStreams
     );
 
     await ServiceFirestore.debugWrite(
       true,
       database,
-      `${Collection.Streams}-city`,
+      `${Collection.ListStreams}-city`,
       {
         cityIds,
         citiesInfo,
-        interestsInfo,
+        listsInfo,
         eventsInfo
       }
     );
-    const interestStreams: Record<
+    const listStreams: Record<
       string,
-      Record<string, StreamInterest>
-    > = ServiceStreams.interestStreams(interestsInfo, citiesInfo, eventsInfo);
+      Record<string, StreamList>
+    > = ServiceStreams.listStreams(listsInfo, citiesInfo, eventsInfo);
     const updates: Array<Promise<WriteResult>> = [
-      collection.doc(cityId).set(interestStreams[cityId])
+      collection.doc(cityId).set(listStreams[cityId])
     ];
 
     await ServiceFirestore.debugWrite(
       false,
       database,
-      `${Collection.Streams}-city`,
+      `${Collection.ListStreams}-city`,
       {
         citiesInfo,
-        interestsInfo,
+        listsInfo,
         eventsInfo,
-        interestStreams
+        listStreams
       }
     );
 

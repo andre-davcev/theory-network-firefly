@@ -15,9 +15,7 @@ const database: Firestore = db();
 const UsersDelete: CloudFunction<DocumentSnapshot> = firestore
   .document(`${Collection.Users}/{id}`)
   .onDelete(async (snapshot: DocumentSnapshot, context: EventContext) => {
-    const interests: CollectionReference = database.collection(
-      Collection.Interests
-    );
+    const lists: CollectionReference = database.collection(Collection.Lists);
     const id: string = snapshot.id;
     const user: User = snapshot.data() as User;
 
@@ -32,11 +30,11 @@ const UsersDelete: CloudFunction<DocumentSnapshot> = firestore
     ];
 
     /*
-    // interests
+    // lists
     let query: QuerySnapshot;
 
     query = await database
-      .collection(Collection.Interests)
+      .collection(Collection.Lists)
       .where('userId', '==', id)
       .get();
     query.forEach((snapshot: QueryDocumentSnapshot) =>
@@ -54,12 +52,10 @@ const UsersDelete: CloudFunction<DocumentSnapshot> = firestore
       deletes.push(snapshot.ref.delete())
     );
 */
-    // interests/id/subscriberCount
-    user.subscriptions.forEach((interestId: string) =>
+    // lists/id/subscriberCount
+    user.subscriptions.forEach((listId: string) =>
       deletes.push(
-        interests
-          .doc(interestId)
-          .update({ subscriberCount: FieldValue.increment(-1) })
+        lists.doc(listId).update({ subscriberCount: FieldValue.increment(-1) })
       )
     );
 

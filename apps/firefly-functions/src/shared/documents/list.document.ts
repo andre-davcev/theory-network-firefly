@@ -1,12 +1,12 @@
 import { Nullable } from '../../library';
-import { MetadataList } from '../interfaces';
+import { MetadataArray } from '../interfaces';
 import { DocumentBase } from './base.document';
 
-export interface MetadataInterest extends MetadataList {
+export interface MetadataList extends MetadataArray {
   image?: string;
 }
 
-export interface Interest extends DocumentBase {
+export interface List extends DocumentBase {
   description: string;
   name: string;
   private: boolean;
@@ -14,5 +14,5 @@ export interface Interest extends DocumentBase {
   tagline: string;
   virtual: boolean;
 
-  metadata: Nullable<MetadataInterest>;
+  metadata: Nullable<MetadataArray>;
 }

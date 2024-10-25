@@ -49,7 +49,7 @@ export class ServiceCities {
   ): Promise<WriteResult> {
     const info: CityInfo = document.city;
     const streamDoc: DocumentSnapshot = await database
-      .collection(Collection.Streams)
+      .collection(Collection.ListStreams)
       .doc(info.id)
       .get();
 

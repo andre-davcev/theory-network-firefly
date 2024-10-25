@@ -1,21 +1,21 @@
+import { DocumentSnapshot } from '@google-cloud/firestore';
+import algoliasearch from 'algoliasearch';
 import {
   Change,
-  firestore,
+  CloudFunction,
+  config,
   EventContext,
-  CloudFunction
+  firestore
 } from 'firebase-functions';
-import { DocumentSnapshot } from '@google-cloud/firestore';
-import { config } from 'firebase-functions';
-import algoliasearch from 'algoliasearch';
 
 import { Collection } from '../shared';
 
 const env = config();
 const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
-const index = client.initIndex('interests');
+const index = client.initIndex('lists');
 
-const InterestsUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
-  .document(`${Collection.Interests}/{id}`)
+const ListsUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
+  .document(`${Collection.Lists}/{id}`)
   .onUpdate(
     async (
       change: Change<firestore.DocumentSnapshot>,
@@ -28,4 +28,4 @@ const InterestsUpdate: CloudFunction<Change<DocumentSnapshot>> = firestore
     }
   );
 
-export { InterestsUpdate };
+export { ListsUpdate };

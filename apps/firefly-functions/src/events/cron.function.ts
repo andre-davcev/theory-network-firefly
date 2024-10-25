@@ -37,10 +37,7 @@ const EventsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
       .getSignedUrl(signedUrlConfig);
     const icon: string = signedUrl[0];
 
-    const interestNotifications: Record<
-      string,
-      Record<string, AlertPartial>
-    > = {};
+    const listNotifications: Record<string, Record<string, AlertPartial>> = {};
     const userNotifications: Record<string, Record<string, AlertPartial>> = {};
     const userSnapshots: Record<string, QueryDocumentSnapshot> = {};
     const eventPayloads: Record<string, messaging.MessagingPayload> = {};
@@ -70,13 +67,12 @@ const EventsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
         event = snapshot.data() as Event;
         eventId = event.id;
 
-        // Iterate over the interest id's
-        event.interests.forEach((interestId: string) => {
-          interestNotifications[interestId] =
-            interestNotifications[interestId] || {};
+        // Iterate over the list id's
+        event.lists.forEach((listId: string) => {
+          listNotifications[listId] = listNotifications[listId] || {};
 
-          // Accumulate interest/event notification partials
-          interestNotifications[interestId][eventId] = {
+          // Accumulate list/event notification partials
+          listNotifications[listId][eventId] = {
             read: false,
             timeStart: event.timeStart
           };
@@ -112,15 +108,15 @@ const EventsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
     );
 
     await Promise.all(
-      // Iterate over the interests
-      Object.keys(interestNotifications).map((interestId: string) =>
-        // Query for users that have the interest subscription
+      // Iterate over the lists
+      Object.keys(listNotifications).map((listId: string) =>
+        // Query for users that have the list subscription
         usersCollection
-          .where(Collection.Subscriptions, 'array-contains', interestId)
+          .where(Collection.Subscriptions, 'array-contains', listId)
           .get()
           .then((snapshots: QuerySnapshot) => {
-            // Get the interest notifications
-            notifications = interestNotifications[interestId];
+            // Get the list notifications
+            notifications = listNotifications[listId];
 
             // Iterate over the user documents
             snapshots.docs.forEach((snapshot: QueryDocumentSnapshot) => {
@@ -174,7 +170,7 @@ const EventsCron = runWith({ memory: '2GB', timeoutSeconds: 540 })
 
     if (debug) {
       await debugDoc.set({
-        interestNotifications,
+        listNotifications,
         userNotifications,
         eventPayloads
       });
