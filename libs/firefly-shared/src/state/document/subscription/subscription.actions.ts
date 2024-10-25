@@ -1,4 +1,4 @@
-import { MetadataInterest, Subscription } from '@firefly/cloud';
+import { MetadataList, Subscription } from '@firefly/cloud';
 import { CoreEnum } from '@theory/core';
 import { DocumentSnapshot } from '@theory/firebase';
 
@@ -27,7 +27,7 @@ export class ActionSubscriptionPatch {
 }
 export class ActionSubscriptionPatchMetadata {
   static readonly type = ActionsSubscription.PatchMetadata;
-  constructor(public metadata: Partial<MetadataInterest>) {}
+  constructor(public metadata: Partial<MetadataList>) {}
 }
 export class ActionSubscriptionCreate {
   static readonly type = ActionsSubscription.Create;

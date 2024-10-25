@@ -1,4 +1,4 @@
-import { Event, Interest, MetadataEvent, Place } from '@firefly/cloud';
+import { Event, List, MetadataEvent, Place } from '@firefly/cloud';
 import { CoreEnum } from '@theory/core';
 
 import { DocumentSnapshot } from '@theory/firebase';
@@ -62,18 +62,18 @@ export class ActionEventPlaceSet {
   constructor(public place?: Place) {}
 }
 
-export class ActionEventInterestAdd {
-  static readonly type = ActionsEvent.InterestAdd;
-  constructor(public interest: Interest, public pending: boolean = false) {}
+export class ActionEventListAdd {
+  static readonly type = ActionsEvent.ListAdd;
+  constructor(public list: List, public pending: boolean = false) {}
 }
-export class ActionEventInterestRemove {
-  static readonly type = ActionsEvent.InterestRemove;
-  constructor(public interest: Interest, public pending: boolean = false) {}
+export class ActionEventListRemove {
+  static readonly type = ActionsEvent.ListRemove;
+  constructor(public list: List, public pending: boolean = false) {}
 }
 
 export class ActionEventAccept {
   static readonly type = ActionsEvent.AcceptEvent;
-  constructor(public interest?: Interest) {}
+  constructor(public list?: List) {}
 }
 export class ActionEventDeny {
   static readonly type = ActionsEvent.DenyEvent;

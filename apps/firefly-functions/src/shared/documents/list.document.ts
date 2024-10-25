@@ -14,5 +14,5 @@ export interface List extends DocumentBase {
   tagline: string;
   virtual: boolean;
 
-  metadata: Nullable<MetadataArray>;
+  metadata: Nullable<MetadataList>;
 }

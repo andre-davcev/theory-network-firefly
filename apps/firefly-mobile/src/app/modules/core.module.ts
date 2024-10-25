@@ -31,8 +31,8 @@ import {
   StateCity,
   StateCityStream,
   StateEvent,
-  StateInterest,
-  StateInterests,
+  StateList,
+  StateLists,
   StateNotifications,
   StateSearch,
   StateSubscription,
@@ -40,7 +40,7 @@ import {
   StateUser,
   StateUserAlerts,
   StateUserEvents,
-  StateUserInterests,
+  StateUserLists,
   StateUserProfile,
   StateUserSubscriptions
 } from '@firefly/shared';
@@ -97,12 +97,12 @@ export function createTranslateLoader(http: HttpClient) {
 
       StateUser,
       StateApp,
-      StateInterest,
+      StateList,
       StateEvent,
       StateSubscription,
       StateCity,
       StateUserAlerts,
-      StateUserInterests,
+      StateUserLists,
       StateUserEvents,
       StateCityStream,
       StateUserSubscriptions,
@@ -110,7 +110,7 @@ export function createTranslateLoader(http: HttpClient) {
 
       StateAlerts,
       StateCalendar,
-      StateInterests
+      StateLists
     ]),
 
     NgxsRouterPluginModule.forRoot(),

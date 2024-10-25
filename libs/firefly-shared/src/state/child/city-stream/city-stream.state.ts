@@ -2,18 +2,14 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 
-import {
-  Collection,
-  StreamInterest,
-  SubscriptionPartial
-} from '@firefly/cloud';
+import { Collection, StreamList, SubscriptionPartial } from '@firefly/cloud';
 import { ImageType } from '@theory/core';
 import { ServiceStorage } from '@theory/firebase';
 import { StateChild } from '@theory/ngxs';
 
-import { InterestType } from '../../../enums';
+import { ListType } from '../../../enums';
 import { ServiceStreams } from '../../../services';
-import { InterestsFilter } from '../../composite/interests/interests.filter.model';
+import { ListsFilter } from '../../composite/lists/lists.filter.model';
 import {
   ActionCityStreamAdd,
   ActionCityStreamFilter,
@@ -32,13 +28,13 @@ import { StateCityStreamOptions } from './city-stream.state.options';
 @State<StateCityStreamModel>(StateCityStreamOptions)
 @Injectable()
 export class StateCityStream extends StateChild<
-  StreamInterest,
+  StreamList,
   StateCityStreamModel
 > {
-  @Selector() static filter(state: StateCityStreamModel): InterestsFilter {
+  @Selector() static filter(state: StateCityStreamModel): ListsFilter {
     return state.filter;
   }
-  @Selector() static type(state: StateCityStreamModel): InterestType {
+  @Selector() static type(state: StateCityStreamModel): ListType {
     return StateCityStream.filter(state).type;
   }
   @Selector() static virtual(state: StateCityStreamModel): boolean {
@@ -80,7 +76,7 @@ export class StateCityStream extends StateChild<
       },
       storage,
       service,
-      Collection.Interests
+      Collection.Lists
     );
   }
 
@@ -116,7 +112,7 @@ export class StateCityStream extends StateChild<
   @Action(ActionCityStreamGet)
   public override get(context: StateContext<StateCityStreamModel>) {
     return super.get(context, {
-      collection: Collection.Interests,
+      collection: Collection.Lists,
       imageType: ImageType.Image
     });
   }
@@ -163,7 +159,7 @@ export class StateCityStream extends StateChild<
     { patchState, getState, dispatch }: StateContext<StateCityStreamModel>,
     { subscriptions }: ActionCityStreamSubscriptionsSet
   ) {
-    const filter: InterestsFilter = StateCityStream.filter(getState());
+    const filter: ListsFilter = StateCityStream.filter(getState());
 
     filter.subscriptions = subscriptions;
 
@@ -192,7 +188,7 @@ export class StateCityStream extends StateChild<
     const { getState } = context;
 
     const state: StateCityStreamModel = getState();
-    const lookup: Record<string, StreamInterest> =
+    const lookup: Record<string, StreamList> =
       StateCityStream.dataLookupState(state);
     const keys: Array<string> = StateCityStream.keysState(state);
     const subscriptions: Record<string, SubscriptionPartial> =

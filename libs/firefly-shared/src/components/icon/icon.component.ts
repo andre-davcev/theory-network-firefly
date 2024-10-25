@@ -80,7 +80,7 @@ export class ComponentIcon implements OnInit {
     }
 
     this.family =
-      this.name === IconType.Interests ? IconFamily.Custom : IconFamily.Ionic;
+      this.name === IconType.Lists ? IconFamily.Custom : IconFamily.Ionic;
 
     classes.push(`cpt-family-${this.family}`);
     classes.push(`cpt-color-${this.color}`);

@@ -4,7 +4,7 @@ import { TypeOf } from '@theory/core';
 import { OrderBy } from '@theory/firebase';
 import { PageSize } from '@theory/ngxs';
 
-import { InterestType } from '../../../enums';
+import { ListType } from '../../../enums';
 import { StateCityStreamModel } from './city-stream.state.model';
 
 export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> = {
@@ -33,7 +33,7 @@ export const StateCityStreamOptions: StoreOptions<StateCityStreamModel> = {
     },
 
     filter: {
-      type: InterestType.Unsubscribed,
+      type: ListType.Unsubscribed,
       virtual: false,
       subscriptions: {}
     },

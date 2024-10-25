@@ -13,15 +13,15 @@ export enum Translation {
   AlertConfirmDeleteConfirmUser = 'alert.confirm.delete.confirm.user',
 
   AlertConfirmDeleteEvent = 'alert.confirm.delete.event',
-  AlertConfirmDeleteInterest = 'alert.confirm.delete.interest',
+  AlertConfirmDeleteList = 'alert.confirm.delete.list',
 
   PageEventCreatedSuccess = 'page.event.createdSuccess',
   PageEventCreatedError = 'page.event.createdError',
   PageEventUpdateSuccess = 'page.event.updateSuccess',
   PageEventUpdateError = 'page.event.updateError',
 
-  PageInterestCreatedSuccess = 'page.interest.createdSuccess',
-  PageInterestCreatedError = 'page.interest.createdError',
-  PageInterestUpdateSuccess = 'page.interest.updateSuccess',
-  PageInterestUpdateError = 'page.interest.updateError'
+  PageListCreatedSuccess = 'page.list.createdSuccess',
+  PageListCreatedError = 'page.list.createdError',
+  PageListUpdateSuccess = 'page.list.updateSuccess',
+  PageListUpdateError = 'page.list.updateError'
 }

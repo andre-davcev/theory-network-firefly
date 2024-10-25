@@ -42,7 +42,7 @@
     <ion-item
       *ngFor="let searchResult of searchResults$ | async"
       lines="none"
-      (click)="selectSearchInterest(searchResult)"
+      (click)="selectSearchList(searchResult)"
     >
       {{searchResult.name}}
     </ion-item>

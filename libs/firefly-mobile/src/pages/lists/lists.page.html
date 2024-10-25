@@ -34,33 +34,30 @@
 <ion-content>
   <!--
   <ion-list class="searchResults">
-    <ion-item lines="none" (click)="selectSearchInterest(searchResult)" *ngFor="let searchResult of searchResults$ | async"  >
+    <ion-item lines="none" (click)="selectSearchList(searchResult)" *ngFor="let searchResult of searchResults$ | async"  >
       {{searchResult.name}}
     </ion-item>
   </ion-list>
 -->
   <ion-list *ngIf="found$ | async">
-    <ion-item
-      lines="none"
-      *ngFor="let interest of data$ | async; let i = index"
-    >
+    <ion-item lines="none" *ngFor="let list of data$ | async; let i = index">
       <ion-card elevation="1">
         <img
-          (click)="selectInterest(interest)"
+          (click)="selectList(list)"
           class="image-cnt"
-          [src]="interest.metadata.image"
+          [src]="list.metadata.image"
         />
 
-        <ion-card-header (click)="selectInterest(interest)">
-          <ion-card-title class="name">|{{ interest.name }}|</ion-card-title>
+        <ion-card-header (click)="selectList(list)">
+          <ion-card-title class="name">|{{ list.name }}|</ion-card-title>
           <ion-card-subtitle class="tagline"
-            >{{ interest.tagline }}</ion-card-subtitle
+            >{{ list.tagline }}</ion-card-subtitle
           >
         </ion-card-header>
         <ion-card-content fxLayout="column" fxLayoutGap="10px">
           <mat-accordion>
             <mat-expansion-panel
-              (opened)="setOpened(i, interest)"
+              (opened)="setOpened(i, list)"
               (closed)="setClosed(i)"
               class="mat-elevation-z0"
               class="mat-elevation-z0"
@@ -74,20 +71,20 @@
                 >
                   <!--span class="app-description"-->
                   <div *ngIf="!currentlyOpenedItems[i]" class="app-description">
-                    {{ interest.description }} | {{ currentlyOpenedItemIndex ===
-                    i ? 'Close' : 'Open' }}
+                    {{ list.description }} | {{ currentlyOpenedItemIndex === i ?
+                    'Close' : 'Open' }}
                   </div>
                   <!--/!--span-->
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <span class="app-description">
-                {{ interest.description }}
+                {{ list.description }}
                 <ion-spinner
                   class="spinner"
                   *ngIf="spinner[i]"
                   name="crescent"
                 ></ion-spinner>
-                <ion-list *ngFor="let event of interestEvents[i]">
+                <ion-list *ngFor="let event of listEvents[i]">
                   <ion-item (click)="select(event)">
                     <ion-grid>
                       <ion-row>
@@ -137,11 +134,11 @@
           </mat-accordion>
 
           <ff-icon-subscribe
-            [subscribed]="subscriptions[interest.id] != null"
-            [count]="interest.subscriberCount"
-            [on]="subscriptions[interest.id]?.on || false"
-            (clicked)="toggle($event, interest)"
-            (clickedOn)="toggleOn($event, interest)"
+            [subscribed]="subscriptions[list.id] != null"
+            [count]="list.subscriberCount"
+            [on]="subscriptions[list.id]?.on || false"
+            (clicked)="toggle($event, list)"
+            (clickedOn)="toggleOn($event, list)"
           >
           </ff-icon-subscribe>
         </ion-card-content>

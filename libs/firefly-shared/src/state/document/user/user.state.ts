@@ -37,7 +37,7 @@ import {
 import { User as FirebaseUser, UserCredential } from '@theory/firebase';
 import { StateDocument } from '@theory/ngxs';
 
-import { EventType, InterestType } from '../../../enums';
+import { EventType, ListType } from '../../../enums';
 import { ServiceUsers } from '../../../services';
 import { ActionNotificationsWatch } from '../../basic/notifications/notifications.actions';
 import { StateCityStream } from '../../child/city-stream/city-stream.state';
@@ -47,7 +47,7 @@ import {
 } from '../../child/user-alerts/user-alerts.actions';
 import { ActionUserSubscriptionsReset } from '../../child/user-subscriptions/user-subscriptions.actions';
 import { ActionUserEventsReset } from '../../query/user-events/user-events.actions';
-import { ActionUserInterestsReset } from '../../query/user-interests/user-interests.actions';
+import { ActionUserListsReset } from '../../query/user-lists/user-lists.actions';
 import {
   ActionUserAddToken,
   ActionUserAddTokenAfterLogin,
@@ -81,10 +81,10 @@ import { Navigate } from '@ngxs/router-plugin';
 import { ActionTagsGet } from '../../basic/tags/tags.actions';
 import { ActionCalendarSetType } from '../../composite/calendar/calendar.actions';
 import {
-  ActionInterestsPage,
-  ActionInterestsSetSubscriptions,
-  ActionInterestsSetType
-} from '../../composite/interests/interests.actions';
+  ActionListsPage,
+  ActionListsSetSubscriptions,
+  ActionListsSetType
+} from '../../composite/lists/lists.actions';
 import { StateApp } from '../app/app.state';
 import { StateCity } from '../city/city.state';
 import { ActionUserProfileReset } from '../user-profile/user-profile.actions';
@@ -142,7 +142,7 @@ export class StateUser
           ActionUserProfileReset,
 
           ActionUserEventsReset,
-          ActionUserInterestsReset
+          ActionUserListsReset
         ],
 
         ActionsCreate: []
@@ -290,7 +290,7 @@ export class StateUser
         dispatch([
           new ActionUserNotificationsSet(),
           new ActionLanguageSet(StateUser.language(getState()) || 'en-us'),
-          new ActionInterestsSetSubscriptions(
+          new ActionListsSetSubscriptions(
             StateUser.subscriptionsStatus(getState())
           )
         ])
@@ -399,7 +399,7 @@ export class StateUser
       switchMap(() =>
         dispatch([
           new ActionUserSetErrorAuth(),
-          new ActionInterestsSetSubscriptions(
+          new ActionListsSetSubscriptions(
             StateUser.subscriptionsStatus(getState())
           )
         ])
@@ -568,7 +568,7 @@ export class StateUser
       switchMap((authData: FirebaseUser | null) =>
         dispatch(new ActionUserAuthenticateCheck(authData)).pipe(
           switchMap(() =>
-            authData == null ? of(null) : dispatch(new ActionInterestsPage())
+            authData == null ? of(null) : dispatch(new ActionListsPage())
           )
         )
       ),
@@ -587,12 +587,12 @@ export class StateUser
     return of(this.auth.signOut()).pipe(
       switchMap(() =>
         dispatch([
-          new ActionInterestsSetType(InterestType.Unsubscribed),
+          new ActionListsSetType(ListType.Unsubscribed),
           new ActionCalendarSetType(EventType.Upcoming)
         ])
       ),
       switchMap(() => dispatch(new ActionUserAnonymousLogin())),
-      switchMap(() => dispatch(new ActionInterestsPage())),
+      switchMap(() => dispatch(new ActionListsPage())),
       switchMap(() =>
         dispatch(new Navigate(this.store.selectSnapshot(StateApp.homePath)))
       ),
@@ -642,7 +642,7 @@ export class StateUser
       filter(() => !isPublisher),
       switchMap(() =>
         dispatch([
-          new ActionInterestsSetType(InterestType.Unsubscribed),
+          new ActionListsSetType(ListType.Unsubscribed),
           new ActionCalendarSetType(EventType.Upcoming)
         ])
       )

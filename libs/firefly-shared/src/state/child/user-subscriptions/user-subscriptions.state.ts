@@ -4,7 +4,7 @@ import { switchMap } from 'rxjs/operators';
 
 import {
   Collection,
-  StreamInterest,
+  StreamList,
   Subscription,
   SubscriptionPartial
 } from '@firefly/cloud';
@@ -12,9 +12,9 @@ import { ImageType } from '@theory/core';
 import { ServiceStorage } from '@theory/firebase';
 import { StateChild } from '@theory/ngxs';
 
-import { InterestType } from '../../../enums';
+import { ListType } from '../../../enums';
 import { ServiceSubscriptions } from '../../../services';
-import { InterestsFilter } from '../../composite/interests/interests.filter.model';
+import { ListsFilter } from '../../composite/lists/lists.filter.model';
 import {
   ActionAppLoadingHide,
   ActionAppLoadingShow
@@ -38,12 +38,10 @@ export class StateUserSubscriptions extends StateChild<
   Subscription,
   StateUserSubscriptionsModel
 > {
-  @Selector() static filter(
-    state: StateUserSubscriptionsModel
-  ): InterestsFilter {
+  @Selector() static filter(state: StateUserSubscriptionsModel): ListsFilter {
     return state.filter;
   }
-  @Selector() static type(state: StateUserSubscriptionsModel): InterestType {
+  @Selector() static type(state: StateUserSubscriptionsModel): ListType {
     return StateUserSubscriptions.filter(state).type;
   }
   @Selector() static virtual(state: StateUserSubscriptionsModel): boolean {
@@ -70,7 +68,7 @@ export class StateUserSubscriptions extends StateChild<
       },
       storage,
       service,
-      Collection.Interests
+      Collection.Lists
     );
   }
 
@@ -101,7 +99,7 @@ export class StateUserSubscriptions extends StateChild<
   @Action(ActionUserSubscriptionsGet)
   public override get(context: StateContext<StateUserSubscriptionsModel>) {
     return super.get(context, {
-      collection: Collection.Interests,
+      collection: Collection.Lists,
       imageType: ImageType.Image
     });
   }
@@ -163,7 +161,7 @@ export class StateUserSubscriptions extends StateChild<
     const { getState } = context;
 
     const state: StateUserSubscriptionsModel = getState();
-    const lookup: Record<string, StreamInterest> =
+    const lookup: Record<string, StreamList> =
       StateUserSubscriptions.dataLookupState(state);
     const keys: Array<string> = StateUserSubscriptions.keysState(state);
     const subscriptions: Record<string, SubscriptionPartial> =

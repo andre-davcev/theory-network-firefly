@@ -8,7 +8,7 @@ import { Position } from '@capacitor/geolocation';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 
-import { CityInfo, Collection, StreamInterest, User } from '@firefly/cloud';
+import { CityInfo, Collection, StreamList, User } from '@firefly/cloud';
 import {
   ResponseReverseGeocode,
   ServiceBigDataCloud
@@ -71,28 +71,28 @@ export class StateCity {
             ),
             tap((city: CityInfo) => patchState({ geopoint, city })),
             switchMap((city: CityInfo) =>
-              ServiceFirestoreBase.documentGet<Record<string, StreamInterest>>(
+              ServiceFirestoreBase.documentGet<Record<string, StreamList>>(
                 this.angularfire,
-                Collection.Streams,
+                Collection.ListStreams,
                 city.id
               ).pipe(
                 tap(
                   (
                     snapshot: FirestoreDocumentSnapshot<
-                      Record<string, StreamInterest>
+                      Record<string, StreamList>
                     >
                   ) => patchState({ isNew: !snapshot.exists })
                 ),
                 switchMap(
                   (
                     snapshot: FirestoreDocumentSnapshot<
-                      Record<string, StreamInterest>
+                      Record<string, StreamList>
                     >
                   ) =>
                     snapshot.exists
                       ? dispatch(
                           new ActionCityStreamSetData(
-                            snapshot.data() as Record<string, StreamInterest>,
+                            snapshot.data() as Record<string, StreamList>,
                             true
                           )
                         )
@@ -122,21 +122,21 @@ export class StateCity {
       user
     ).pipe(
       switchMap(() =>
-        ServiceFirestoreBase.documentWatch<Record<string, StreamInterest>>(
+        ServiceFirestoreBase.documentWatch<Record<string, StreamList>>(
           this.angularfire,
-          Collection.Streams,
+          Collection.ListStreams,
           city.id
         )
       ),
       filter(
-        (snapshot: DocumentSnapshot<Record<string, StreamInterest>>) =>
+        (snapshot: DocumentSnapshot<Record<string, StreamList>>) =>
           snapshot.exists
       ),
       take(1),
-      switchMap((snapshot: DocumentSnapshot<Record<string, StreamInterest>>) =>
+      switchMap((snapshot: DocumentSnapshot<Record<string, StreamList>>) =>
         dispatch(
           new ActionCityStreamSetData(
-            snapshot.data() as Record<string, StreamInterest>,
+            snapshot.data() as Record<string, StreamList>,
             true
           )
         )

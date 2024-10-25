@@ -13,7 +13,7 @@ export const MockAlerts: Array<Alert> = [];
     description: 'Artpark',
     dateTime: 'July 25, 2016 at 6:30pm',
     eventId: 'oZsx53Fam5yr88PAnHAT',
-    interestId: 'jNUnMIY7QkAWFvr5fr0d',
+    listId: 'jNUnMIY7QkAWFvr5fr0d',
     url: 'https://www.blondie.net',
     read: false
   },
@@ -29,7 +29,7 @@ export const MockAlerts: Array<Alert> = [];
     description: 'Ommegang Brewery Cooperstown',
     dateTime: 'June 10, 2017 at 7:00pm',
     eventId: 'oZsx53Fam5yr88PAnHAT',
-    interestId: 'jNUnMIY7QkAWFvr5fr0d',
+    listId: 'jNUnMIY7QkAWFvr5fr0d',
     url: 'https://www.fosterthepeople.com',
     read: false
   },
@@ -45,7 +45,7 @@ export const MockAlerts: Array<Alert> = [];
     description: "Sahlen's Music Stage",
     dateTime: 'May 12, 2017 at 7:00pm',
     eventId: 'oZsx53Fam5yr88PAnHAT',
-    interestId: 'jNUnMIY7QkAWFvr5fr0d',
+    listId: 'jNUnMIY7QkAWFvr5fr0d',
     url: 'https://www.rustedroot.com/home',
     read: false
   }

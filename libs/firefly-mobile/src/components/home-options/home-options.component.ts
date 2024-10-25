@@ -7,15 +7,15 @@ import { delay, switchMap } from 'rxjs/operators';
 import {
   ActionCalendarSetType,
   ActionCalendarSetVirtual,
-  ActionInterestsSetType,
-  ActionInterestsSetVirtual,
+  ActionListsSetType,
+  ActionListsSetVirtual,
   EventType,
-  InterestType,
+  ListType,
   StateUser
 } from '@firefly/shared';
 
 @Component({
-  selector: 'ff-interest-options',
+  selector: 'ff-list-options',
   templateUrl: './home-options.component.html',
   styleUrls: ['./home-options.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -23,10 +23,10 @@ import {
 export class ComponentHomeOptions {
   @Select(StateUser.isPublisher) isPublisher$!: Observable<boolean>;
 
-  public InterestType: any = InterestType;
+  public ListType: any = ListType;
   public EventType: any = EventType;
 
-  @Input() interestType!: InterestType;
+  @Input() listType!: ListType;
   @Input() eventType!: EventType;
   @Input() isStream!: boolean;
   @Input() virtual!: boolean;
@@ -35,7 +35,7 @@ export class ComponentHomeOptions {
 
   public filterChanged(event: CustomEvent): void {
     const action: any = this.isStream
-      ? new ActionInterestsSetType(event.detail.value)
+      ? new ActionListsSetType(event.detail.value)
       : new ActionCalendarSetType(event.detail.value);
 
     this.store
@@ -52,7 +52,7 @@ export class ComponentHomeOptions {
 
     this.store.dispatch(
       this.isStream
-        ? new ActionInterestsSetVirtual(virtual)
+        ? new ActionListsSetVirtual(virtual)
         : new ActionCalendarSetVirtual(virtual)
     );
   }

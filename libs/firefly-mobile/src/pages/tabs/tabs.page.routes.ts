@@ -36,21 +36,19 @@ export const RoutesPageTabs: Routes = [
           import('@firefly/mobile').then((m) => m.ModulePageAssetsEventsRoute)
       },
       {
-        path: `${Pages.Lists}/${Pages.AssetsInterests}`,
+        path: `${Pages.Lists}/${Pages.AssetsLists}`,
         loadChildren: () =>
-          import('@firefly/mobile').then(
-            (m) => m.ModulePageAssetsInterestsRoute
-          )
+          import('@firefly/mobile').then((m) => m.ModulePageAssetsListsRoute)
       },
       {
-        path: `${Pages.Lists}/${Pages.AssetInterest}`,
+        path: `${Pages.Lists}/${Pages.AssetList}`,
         loadChildren: () =>
-          import('@firefly/mobile').then((m) => m.ModulePageAssetInterest)
+          import('@firefly/mobile').then((m) => m.ModulePageAssetList)
       },
       {
-        path: `${Pages.Lists}/${Pages.InterestDetail}`,
+        path: `${Pages.Lists}/${Pages.ListDetail}`,
         loadChildren: () =>
-          import('@firefly/mobile').then((m) => m.ModulePageInterestDetail)
+          import('@firefly/mobile').then((m) => m.ModulePageListDetail)
       },
       {
         path: `${Pages.Lists}/${Pages.EventSelector}`,

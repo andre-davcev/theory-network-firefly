@@ -29,7 +29,7 @@ export class PageCategories {
     this.store.dispatch(new ActionDeviceStatusBarSet({ style: Style.Dark }));
   }
 
-  public navigate(page: Pages.AssetsEvents | Pages.AssetsInterests): void {
+  public navigate(page: Pages.AssetsEvents | Pages.AssetsLists): void {
     const tab: Pages.Events | Pages.Lists =
       page === Pages.AssetsEvents ? Pages.Events : Pages.Lists;
 

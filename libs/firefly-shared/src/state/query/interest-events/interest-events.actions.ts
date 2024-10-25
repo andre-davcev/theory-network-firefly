@@ -1,32 +1,29 @@
-import { Interest } from '@firefly/cloud';
+import { List } from '@firefly/cloud';
 import { DocumentSnapshot } from '@theory/firebase';
 
-import { ActionsInterestEvents } from './interest-events.actions.enum';
+import { ActionsListEvents } from './list-events.actions.enum';
 
-export class ActionInterestEventsReset {
-  static readonly type = ActionsInterestEvents.Reset;
+export class ActionListEventsReset {
+  static readonly type = ActionsListEvents.Reset;
 }
 export class ActionClusterEventsGetData {
-  static readonly type = ActionsInterestEvents.GetData;
+  static readonly type = ActionsListEvents.GetData;
 }
-export class ActionInterestEventsGet {
-  static readonly type = ActionsInterestEvents.Get;
+export class ActionListEventsGet {
+  static readonly type = ActionsListEvents.Get;
 }
-export class ActionInterestEventsAdd {
-  static readonly type = ActionsInterestEvents.Add;
-  constructor(
-    public snapshot: DocumentSnapshot<Interest>,
-    public entity?: Interest
-  ) {}
+export class ActionListEventsAdd {
+  static readonly type = ActionsListEvents.Add;
+  constructor(public snapshot: DocumentSnapshot<List>, public entity?: List) {}
 }
-export class ActionInterestEventsRemove {
-  static readonly type = ActionsInterestEvents.Remove;
+export class ActionListEventsRemove {
+  static readonly type = ActionsListEvents.Remove;
   constructor(public id: string) {}
 }
-export class ActionInterestEventsSync {
-  static readonly type = ActionsInterestEvents.Sync;
-  constructor(public object: Interest) {}
+export class ActionListEventsSync {
+  static readonly type = ActionsListEvents.Sync;
+  constructor(public object: List) {}
 }
-export class ActionInterestEventsFilter {
-  static readonly type = ActionsInterestEvents.Filter;
+export class ActionListEventsFilter {
+  static readonly type = ActionsListEvents.Filter;
 }

@@ -11,7 +11,7 @@ import {
   CityInfo,
   Collection,
   Event,
-  Interest,
+  List,
   MetadataEvent,
   Place
 } from '@firefly/cloud';
@@ -34,7 +34,7 @@ import {
   ActionUserEventsSync,
   StateUserEvents
 } from '../../query/user-events';
-import { StateInterest } from '../interest';
+import { StateList } from '../list';
 import { StateUser } from '../user';
 import {
   ActionEventAccept,
@@ -44,8 +44,8 @@ import {
   ActionEventGet,
   ActionEventImageSet,
   ActionEventImagesUpdate,
-  ActionEventInterestAdd,
-  ActionEventInterestRemove,
+  ActionEventListAdd,
+  ActionEventListRemove,
   ActionEventPatch,
   ActionEventPatchMetadata,
   ActionEventPlaceSet,
@@ -86,8 +86,8 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
         description: null,
         draft: false,
         geopoint: null,
-        interests: [],
-        interestsPending: [],
+        lists: [],
+        listsPending: [],
         name: null,
         notifyComplete: false,
         placeType: null,
@@ -159,8 +159,8 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
   @Selector() static timeNotifyValid(state: StateEventModel): boolean {
     return StateEvent.formGroupState(state)?.get('timeNotify')?.errors == null;
   }
-  @Selector() static interests(state: StateEventModel): Array<string> {
-    return StateEvent.dataState(state).interests;
+  @Selector() static lists(state: StateEventModel): Array<string> {
+    return StateEvent.dataState(state).lists;
   }
   @Selector() static timeIsLocked(state: StateEventModel): boolean {
     return StateEvent.notifyComplete(state);
@@ -208,31 +208,31 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     return StateEvent.dataState(state).userId === userId;
   }
 
-  @Selector([StateInterest.canEdit])
-  static canAccept(state: StateEventModel, canEditInterest: boolean): boolean {
-    return StateEvent.draft(state) && canEditInterest;
+  @Selector([StateList.canEdit])
+  static canAccept(state: StateEventModel, canEditList: boolean): boolean {
+    return StateEvent.draft(state) && canEditList;
   }
 
-  @Selector([StateUser.userId, StateInterest.canEdit])
+  @Selector([StateUser.userId, StateList.canEdit])
   static canEditShow(
     state: StateEventModel,
     userId: string,
-    canEditInterest: boolean
+    canEditList: boolean
   ): boolean {
     return (
       (StateEvent.isOwner(state, userId) || StateEvent.isNewState(state)) &&
-      !StateEvent.canAccept(state, canEditInterest)
+      !StateEvent.canAccept(state, canEditList)
     );
   }
 
-  @Selector([StateUser.userId, StateInterest.canEdit])
+  @Selector([StateUser.userId, StateList.canEdit])
   static canEdit(
     state: StateEventModel,
     userId: string,
-    canEditInterest: boolean
+    canEditList: boolean
   ): boolean {
     return (
-      StateEvent.canEditShow(state, userId, canEditInterest) &&
+      StateEvent.canEditShow(state, userId, canEditList) &&
       StateEvent.canUpdateState(state) &&
       !StateEvent.notifyComplete(state)
     );
@@ -343,12 +343,10 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     { id, isAlert }: ActionEventSetId
   ) {
     const isNew: boolean = id === CoreEnum.IdNew;
-    const isInterestOwner: boolean = this.store.selectSnapshot(
-      StateInterest.canEdit
-    );
+    const isListOwner: boolean = this.store.selectSnapshot(StateList.canEdit);
     const userId: string = this.store.selectSnapshot(StateUser.id());
 
-    this.empty.draft = !isInterestOwner;
+    this.empty.draft = !isListOwner;
 
     const snapshot: DocumentSnapshot<Event> = this.store.selectSnapshot(
       isAlert
@@ -375,7 +373,7 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     { id }: ActionEventSetIdAnonymous
   ) {
     const pendingEvents: Event[] = this.store.selectSnapshot(
-      StateInterest.eventsPending
+      StateList.eventsPending
     );
     const pendingEvent: Event[] = pendingEvents.filter(
       (event) => (event.id = id)
@@ -464,60 +462,59 @@ export class StateEvent extends StateDocument<Event, StateEventModel> {
     ]);
   }
 
-  @Action(ActionEventInterestAdd)
-  interestAdd(
+  @Action(ActionEventListAdd)
+  listAdd(
     { dispatch, getState }: StateContext<StateEventModel>,
-    { interest, pending }: ActionEventInterestAdd
+    { list, pending }: ActionEventListAdd
   ) {
-    const key: string = pending ? 'interestsPending' : 'interests';
+    const key: string = pending ? 'listsPending' : 'lists';
 
-    const interests: Array<string> =
-      StateEvent.dataState(getState())[key] || [];
-    const id: string = interest.id;
+    const lists: Array<string> = StateEvent.dataState(getState())[key] || [];
+    const id: string = list.id;
 
     const save: boolean = id !== CoreEnum.IdNew;
 
-    if (interests.includes(id)) {
+    if (lists.includes(id)) {
       return of(null);
     }
 
-    interests.push(interest.id);
+    lists.push(list.id);
 
-    return dispatch(new ActionEventPatch({ [key]: interests }, save));
+    return dispatch(new ActionEventPatch({ [key]: lists }, save));
   }
 
-  @Action(ActionEventInterestRemove)
-  interestRemove(
+  @Action(ActionEventListRemove)
+  listRemove(
     { dispatch, getState }: StateContext<StateEventModel>,
-    { interest, pending }: ActionEventInterestRemove
+    { list, pending }: ActionEventListRemove
   ) {
-    const key: string = pending ? 'interestsPending' : 'interests';
-    const interestId: string = interest.id;
+    const key: string = pending ? 'listsPending' : 'lists';
+    const listId: string = list.id;
 
-    const save: boolean = interestId !== CoreEnum.IdNew;
+    const save: boolean = listId !== CoreEnum.IdNew;
 
-    const interests: Array<string> = StateEvent.dataState(getState())[
-      key
-    ].filter((id: string) => id !== interestId);
+    const lists: Array<string> = StateEvent.dataState(getState())[key].filter(
+      (id: string) => id !== listId
+    );
 
-    return dispatch(new ActionEventPatch({ [key]: interests }, save));
+    return dispatch(new ActionEventPatch({ [key]: lists }, save));
   }
 
   @Action(ActionEventAccept)
   eventAccept(
     { dispatch }: StateContext<StateEventModel>,
-    { interest }: ActionEventInterestAdd
+    { list }: ActionEventListAdd
   ) {
-    return dispatch(new ActionEventInterestRemove(interest, true)).pipe(
-      switchMap(() => dispatch(new ActionEventInterestAdd(interest, false)))
+    return dispatch(new ActionEventListRemove(list, true)).pipe(
+      switchMap(() => dispatch(new ActionEventListAdd(list, false)))
     );
   }
 
   @Action(ActionEventDeny)
   eventDeny({ dispatch, getState }: StateContext<StateEventModel>) {
-    const interest: Interest = this.store.selectSnapshot(StateInterest.data());
+    const list: List = this.store.selectSnapshot(StateList.data());
 
-    return dispatch(new ActionEventInterestRemove(interest, true)).pipe(
+    return dispatch(new ActionEventListRemove(list, true)).pipe(
       switchMap(() =>
         dispatch(new ActionEventPatch(StateEvent.dataState(getState()), true))
       )

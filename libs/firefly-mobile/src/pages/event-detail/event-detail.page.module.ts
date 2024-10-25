@@ -12,7 +12,7 @@ import {
   ModuleComponentItemMap
 } from '../../components';
 import { ModulePage } from '../../modules';
-import { ModulePageAssetsInterests } from '../assets-interests';
+import { ModulePageAssetsLists } from '../assets-lists';
 import { ModulePageEventLocation } from '../event-location';
 import { PageEventDetail } from './event-detail.page';
 import { RoutesPageEventDetail } from './event-detail.page.routes';
@@ -27,7 +27,7 @@ import { RoutesPageEventDetail } from './event-detail.page.routes';
     ModuleComponentItemImage,
     RouterModule.forChild(RoutesPageEventDetail),
     ModulePageEventLocation,
-    ModulePageAssetsInterests,
+    ModulePageAssetsLists,
     NgxsFormPluginModule,
     ModulePipeTimestamp
   ],

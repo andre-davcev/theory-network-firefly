@@ -1,11 +1,11 @@
 import { StateChildModel } from '@theory/ngxs';
 
-import { StreamInterest } from '@firefly/cloud';
+import { StreamList } from '@firefly/cloud';
 
-import { InterestsFilter } from '../../composite';
+import { ListsFilter } from '../../composite';
 
-export interface StateCityStreamModel extends StateChildModel<StreamInterest> {
-  filter: InterestsFilter;
+export interface StateCityStreamModel extends StateChildModel<StreamList> {
+  filter: ListsFilter;
 
   subscriptionsNew: Record<string, string>;
   subscriptionsSet: boolean;

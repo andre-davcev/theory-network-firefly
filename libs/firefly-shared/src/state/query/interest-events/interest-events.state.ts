@@ -2,101 +2,98 @@ import { Injectable } from '@angular/core';
 import { Query } from '@angular/fire/compat/firestore';
 import { Action, State, StateContext, Store } from '@ngxs/store';
 
-import { Collection, Interest } from '@firefly/cloud';
+import { Collection, List } from '@firefly/cloud';
 import { ServiceStorage } from '@theory/firebase';
 import { StateQuery } from '@theory/ngxs';
 
-import { ServiceInterests } from '../../../services';
+import { ServiceLists } from '../../../services';
 import { StateUser } from '../../document/user/user.state';
 import {
   ActionClusterEventsGetData,
-  ActionInterestEventsAdd,
-  ActionInterestEventsFilter,
-  ActionInterestEventsGet,
-  ActionInterestEventsRemove,
-  ActionInterestEventsReset,
-  ActionInterestEventsSync
-} from './interest-events.actions';
-import { StateInterestEventsModel } from './interest-events.state.model';
-import { StateInterestEventsOptions } from './interest-events.state.options';
+  ActionListEventsAdd,
+  ActionListEventsFilter,
+  ActionListEventsGet,
+  ActionListEventsRemove,
+  ActionListEventsReset,
+  ActionListEventsSync
+} from './list-events.actions';
+import { StateListEventsModel } from './list-events.state.model';
+import { StateListEventsOptions } from './list-events.state.options';
 
-@State<StateInterestEventsModel>(StateInterestEventsOptions)
+@State<StateListEventsModel>(StateListEventsOptions)
 @Injectable()
-export class StateInterestsEvents extends StateQuery<
-  Interest,
-  StateInterestEventsModel
-> {
+export class StateListsEvents extends StateQuery<List, StateListEventsModel> {
   constructor(
     private store: Store,
-    private service: ServiceInterests,
+    private service: ServiceLists,
     storage: ServiceStorage
   ) {
     super(
-      StateInterestEventsOptions.defaults as StateInterestEventsModel,
+      StateListEventsOptions.defaults as StateListEventsModel,
       {
-        ActionReset: ActionInterestEventsReset,
+        ActionReset: ActionListEventsReset,
         ActionGetData: ActionClusterEventsGetData,
-        ActionGet: ActionInterestEventsGet,
-        ActionAdd: ActionInterestEventsAdd,
-        ActionRemove: ActionInterestEventsRemove,
-        ActionSync: ActionInterestEventsSync,
-        ActionFilter: ActionInterestEventsFilter
+        ActionGet: ActionListEventsGet,
+        ActionAdd: ActionListEventsAdd,
+        ActionRemove: ActionListEventsRemove,
+        ActionSync: ActionListEventsSync,
+        ActionFilter: ActionListEventsFilter
       },
       storage
     );
   }
 
-  @Action(ActionInterestEventsReset)
-  public override reset(context: StateContext<StateInterestEventsModel>) {
+  @Action(ActionListEventsReset)
+  public override reset(context: StateContext<StateListEventsModel>) {
     const userId: string = this.store.selectSnapshot(StateUser.id());
     const query: Query | undefined =
       userId == null
         ? undefined
         : this.service
-            .collection(Collection.Interests)
+            .collection(Collection.Lists)
             .ref.where('userId', '==', userId);
 
     return super.reset(context, { query });
   }
 
   @Action(ActionClusterEventsGetData)
-  public override getData(context: StateContext<StateInterestEventsModel>) {
+  public override getData(context: StateContext<StateListEventsModel>) {
     return super.getData(context);
   }
 
-  @Action(ActionInterestEventsGet)
-  public override get(context: StateContext<StateInterestEventsModel>) {
+  @Action(ActionListEventsGet)
+  public override get(context: StateContext<StateListEventsModel>) {
     return super.get(context);
   }
 
-  @Action(ActionInterestEventsAdd)
+  @Action(ActionListEventsAdd)
   public override add(
-    context: StateContext<StateInterestEventsModel>,
-    action: ActionInterestEventsAdd
+    context: StateContext<StateListEventsModel>,
+    action: ActionListEventsAdd
   ) {
     return super.add(context, action);
   }
 
-  @Action(ActionInterestEventsRemove)
+  @Action(ActionListEventsRemove)
   public override remove(
-    context: StateContext<StateInterestEventsModel>,
-    action: ActionInterestEventsRemove
+    context: StateContext<StateListEventsModel>,
+    action: ActionListEventsRemove
   ) {
     return super.remove(context, action);
   }
 
-  @Action(ActionInterestEventsSync)
+  @Action(ActionListEventsSync)
   public override sync(
-    context: StateContext<StateInterestEventsModel>,
-    action: ActionInterestEventsSync
+    context: StateContext<StateListEventsModel>,
+    action: ActionListEventsSync
   ) {
     return super.sync(context, action);
   }
 
-  @Action(ActionInterestEventsFilter)
+  @Action(ActionListEventsFilter)
   public override filter(
-    context: StateContext<StateInterestEventsModel>,
-    action: ActionInterestEventsFilter
+    context: StateContext<StateListEventsModel>,
+    action: ActionListEventsFilter
   ) {
     return super.filter(context, action);
   }

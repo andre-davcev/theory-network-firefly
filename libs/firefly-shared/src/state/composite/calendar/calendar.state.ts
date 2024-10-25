@@ -11,7 +11,7 @@ import {
   ActionUserAlertsGet,
   StateUserAlerts
 } from '../../child';
-import { StateInterest, StateUser } from '../../document';
+import { StateList, StateUser } from '../../document';
 import {
   ActionUserEventsFilter,
   ActionUserEventsGet,
@@ -54,21 +54,17 @@ export class StateCalendar {
     return ServiceEvents.eventsList(list);
   }
 
-  @Selector([
-    StateUserEvents.data(),
-    StateInterest.events,
-    StateInterest.eventsPending
-  ])
+  @Selector([StateUserEvents.data(), StateList.events, StateList.eventsPending])
   public static eventsAvailable(
     state: StateCalendarModel,
     events: Array<Event>,
-    interestEvents: Array<Event>,
-    interestEventsPending: Array<Event>
+    listEvents: Array<Event>,
+    listEventsPending: Array<Event>
   ): Array<DateEvents> {
     const existing: Record<string, string> = {};
 
-    interestEvents.forEach((event: Event) => (existing[event.id] = event.id));
-    interestEventsPending.forEach(
+    listEvents.forEach((event: Event) => (existing[event.id] = event.id));
+    listEventsPending.forEach(
       (event: Event) => (existing[event.id] = event.id)
     );
     events = events.filter((event: Event) => existing[event.id] == null);
@@ -85,23 +81,19 @@ export class StateCalendar {
     return StateCalendar.data(state, alerts, events).length > 0;
   }
 
-  @Selector([
-    StateUserEvents.data(),
-    StateInterest.events,
-    StateInterest.eventsPending
-  ])
+  @Selector([StateUserEvents.data(), StateList.events, StateList.eventsPending])
   public static existsAvailable(
     state: StateCalendarModel,
     events: Array<Event>,
-    interestEvents: Array<Event>,
-    interestEventsPending: Array<Event>
+    listEvents: Array<Event>,
+    listEventsPending: Array<Event>
   ): boolean {
     return (
       StateCalendar.eventsAvailable(
         state,
         events,
-        interestEvents,
-        interestEventsPending
+        listEvents,
+        listEventsPending
       ).length > 0
     );
   }

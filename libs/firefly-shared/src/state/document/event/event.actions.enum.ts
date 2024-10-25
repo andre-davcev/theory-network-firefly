@@ -21,10 +21,10 @@ export enum ActionsEvent {
   SetIdAnonymous = '[Event] SetIdAnonymous',
 
   PlaceSet = '[Event] Place Set',
-  InterestAdd = '[Event] Interest Add',
-  InterestRemove = '[Event] Interest Remove',
-  InterestPendingAdd = '[Event] Interest Pending Add',
-  InterestPendingRemove = '[Event] Interest Pending Remove',
+  ListAdd = '[Event] List Add',
+  ListRemove = '[Event] List Remove',
+  ListPendingAdd = '[Event] List Pending Add',
+  ListPendingRemove = '[Event] List Pending Remove',
   AcceptEvent = '[Event] Accept Event',
   DenyEvent = '[Event] Deny Event',
   TimeSet = '[Event] Time Set'

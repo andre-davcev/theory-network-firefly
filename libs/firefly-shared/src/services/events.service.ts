@@ -163,7 +163,7 @@ export class ServiceEvents extends ServiceFirestore<Event> {
         [Validators.required, ValidatorsExtended.minLength(1)]
       ],
       geopoint: [event.geopoint, [Validators.required]],
-      interests: [event.interests, []],
+      lists: [event.lists, []],
       name: [
         event.name,
         [Validators.required, ValidatorsExtended.minLength(1)]

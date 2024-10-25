@@ -1,6 +1,6 @@
 export * from './alerts.service';
-export * from './interests.service';
 export * from './events.service';
+export * from './lists.service';
 export * from './location.service';
 export * from './streams.service';
 export * from './subscriptions.service';

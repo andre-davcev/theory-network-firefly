@@ -4,7 +4,7 @@ import { TypeOf } from '@theory/core';
 import { OrderBy } from '@theory/firebase';
 import { PageSize } from '@theory/ngxs';
 
-import { InterestType } from '../../../enums';
+import { ListType } from '../../../enums';
 import { StateUserSubscriptionsModel } from './user-subscriptions.state.model';
 
 export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsModel> =
@@ -34,7 +34,7 @@ export const StateUserSubscriptionsOptions: StoreOptions<StateUserSubscriptionsM
       },
 
       filter: {
-        type: InterestType.Unsubscribed,
+        type: ListType.Unsubscribed,
         virtual: false,
         subscriptions: {}
       }

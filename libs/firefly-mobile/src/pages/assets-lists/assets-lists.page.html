@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="dark">
+      {{ (modal ? 'page.assets-lists.title-modal' : 'page.assets-lists.title') |
+      translate}}
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="!modal" color="dark"></ion-back-button>
+
+      <ion-button *ngIf="modal" color="dark" (click)="cancel()">
+        {{ 'general.cancel' | translate }}
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button icon-only (click)="menuOpen()" [disabled]="menuOpen$ | async">
+        <ion-icon name="person" color="dark" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="found$ | async" lines="none" elevation="1">
+    <ion-item *ngFor="let list of list$ | async" (click)="select(list)">
+      <ion-avatar slot="start">
+        <img [src]="list.metadata.image" />
+      </ion-avatar>
+
+      <ion-label>
+        <h2>{{list.name}}</h2>
+        <p>{{list.tagline}}</p>
+      </ion-label>
+
+      <ion-icon *ngIf="!modal" name="chevron-forward" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ff-icon-message
+    *ngIf="empty$ | async"
+    slot="fixed"
+    [icon]="IconType.Lists"
+    [message]="'page.lists.empty' | translate"
+  >
+  </ff-icon-message>
+
+  <ff-button-add *ngIf="!modal" (clicked)="add()" slot="fixed"> </ff-button-add>
+</ion-content>

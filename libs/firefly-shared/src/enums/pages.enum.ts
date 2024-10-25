@@ -19,9 +19,9 @@ export enum Pages {
   // TAB > LISTS
   Lists = 'lists',
   Stream = 'stream', // ToDo: REMOVE
-  AssetsInterests = 'assets-interests',
-  AssetInterest = 'asset-interest',
-  InterestDetail = 'interest-detail',
+  AssetsLists = 'assets-lists',
+  AssetList = 'asset-list',
+  ListDetail = 'list-detail',
   EventSelector = 'event-selector',
 
   // TAB > NOTIFICATIONS

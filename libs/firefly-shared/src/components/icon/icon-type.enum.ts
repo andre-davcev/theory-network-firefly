@@ -1,6 +1,6 @@
 export enum IconType {
   Subscriptions = 'options',
-  Interests = 'interests',
+  Lists = 'lists',
   Events = 'ticket',
   Icons = 'aperture',
   Images = 'images',

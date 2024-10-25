@@ -3,24 +3,23 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 import { OrderBy } from '@theory/firebase';
 import { PageSize } from '@theory/ngxs';
 
-import { StateInterestEventsModel } from './interest-events.state.model';
+import { StateListEventsModel } from './list-events.state.model';
 
-export const StateInterestEventsOptions: StoreOptions<StateInterestEventsModel> =
-  {
-    name: 'interestEvents',
+export const StateListEventsOptions: StoreOptions<StateListEventsModel> = {
+  name: 'listEvents',
 
-    defaults: {
-      pageSize: PageSize.Default,
-      orderBy: 'name',
-      orderByDirection: OrderBy.Ascending,
+  defaults: {
+    pageSize: PageSize.Default,
+    orderBy: 'name',
+    orderByDirection: OrderBy.Ascending,
 
-      initialized: false,
-      loading: false,
-      finishedPaging: false,
+    initialized: false,
+    loading: false,
+    finishedPaging: false,
 
-      keys: [],
-      snapshotLookup: {},
-      dataLookup: {},
-      data: []
-    }
-  };
+    keys: [],
+    snapshotLookup: {},
+    dataLookup: {},
+    data: []
+  }
+};

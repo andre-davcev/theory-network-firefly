@@ -17,20 +17,20 @@
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-col (click)="navigate(Pages.AssetsInterests)">
+          <ion-col (click)="navigate(Pages.AssetsLists)">
             <section
               fxLayout="column"
               fxLayoutGap="4px"
               fxLayoutAlign="start center"
             >
               <ff-icon
-                [name]="IconType.Interests"
+                [name]="IconType.Lists"
                 [size]="IconSize.Large"
                 [color]="Color.Primary"
               >
               </ff-icon>
-              <ion-label class="cpt-interests"
-                >{{ 'general.interests' | translate }}</ion-label
+              <ion-label class="cpt-lists"
+                >{{ 'general.lists' | translate }}</ion-label
               >
             </section>
           </ion-col>

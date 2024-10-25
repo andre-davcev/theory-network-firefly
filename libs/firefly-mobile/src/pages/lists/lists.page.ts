@@ -9,26 +9,21 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { switchMap, take, takeUntil, tap } from 'rxjs/operators';
 
-import {
-  Event,
-  Interest,
-  StreamInterest,
-  SubscriptionPartial
-} from '@firefly/cloud';
+import { Event, List, StreamList, SubscriptionPartial } from '@firefly/cloud';
 import {
   ActionAppLoadingShow,
-  ActionInterestEventsGetAnonymous,
-  ActionInterestSetId,
-  ActionInterestsPage,
-  ActionInterestsSubscriptionOnOff,
-  ActionInterestsSubscriptionToggle,
+  ActionListEventsGetAnonymous,
+  ActionListSetId,
+  ActionListsPage,
+  ActionListsSubscriptionOnOff,
+  ActionListsSubscriptionToggle,
   Colors,
   IconType,
   Pages,
   StateApp,
   StateCalendar,
-  StateInterest,
-  StateInterests,
+  StateList,
+  StateLists,
   StateUser
 } from '@firefly/shared';
 import { BaseComponent, CoreEnum } from '@theory/core';
@@ -49,17 +44,17 @@ import { ActionMobileAuthSelect, StateMobile } from '../../state';
 })
 export class PageLists extends BaseComponent implements OnInit {
   @Select(StateUser.isUser) isUser$!: Observable<boolean>;
-  @Select(StateInterest.events) events$!: Observable<Event[]>;
-  @Select(StateInterests.data) data$!: Observable<Array<StreamInterest>>;
-  @Select(StateInterests.found) found$!: Observable<boolean>;
-  @Select(StateInterests.empty) empty$!: Observable<boolean>;
-  @Select(StateInterests.add) add$!: Observable<boolean>;
+  @Select(StateList.events) events$!: Observable<Event[]>;
+  @Select(StateLists.data) data$!: Observable<Array<StreamList>>;
+  @Select(StateLists.found) found$!: Observable<boolean>;
+  @Select(StateLists.empty) empty$!: Observable<boolean>;
+  @Select(StateLists.add) add$!: Observable<boolean>;
   @Select(StateUser.subscriptionsStatus) subscriptions$!: Observable<
     Record<string, SubscriptionPartial>
   >;
-  @Select(StateInterests.emptyMessage) emptyMessage$!: Observable<string>;
+  @Select(StateLists.emptyMessage) emptyMessage$!: Observable<string>;
   // @Select(StateSearch.searchResults) searchResults$!: Observable<
-  //   Array<Interest>
+  //   Array<List>
   // >;
   // @Select(StateSearch.searchResultsFound)
   searchResultsFound$!: Observable<boolean>;
@@ -80,11 +75,11 @@ export class PageLists extends BaseComponent implements OnInit {
   //   '8NDQ1FNIDU',
   //   '45b11751dc7e276f781a85f719abda66'
   // );
-  // public index: SearchIndex = this.searchClient.initIndex('interests');
+  // public index: SearchIndex = this.searchClient.initIndex('lists');
 
   public currentlyOpenedItemIndex = -1;
   public currentlyOpenedItems: Array<boolean> = [];
-  public interestEvents: Array<Array<Event> | null> = [];
+  public listEvents: Array<Array<Event> | null> = [];
   public spinner: Array<boolean> = [];
   public subscriptions: Record<string, SubscriptionPartial> = {};
 
@@ -147,11 +142,11 @@ export class PageLists extends BaseComponent implements OnInit {
     const popover: HTMLIonPopoverElement = await this.popover.create({
       component: ComponentHomeOptions,
       componentProps: {
-        interestType: this.store.selectSnapshot(StateInterests.type),
+        listType: this.store.selectSnapshot(StateLists.type),
         eventType: this.store.selectSnapshot(StateCalendar.type),
         isStream,
         virtual: isStream
-          ? this.store.selectSnapshot(StateInterests.virtual)
+          ? this.store.selectSnapshot(StateLists.virtual)
           : this.store.selectSnapshot(StateCalendar.virtual)
       },
       event,
@@ -189,7 +184,7 @@ export class PageLists extends BaseComponent implements OnInit {
 
     return pageStream
       ? this.store
-          .dispatch(new ActionSearchInterests(event.detail.value))
+          .dispatch(new ActionSearchLists(event.detail.value))
           .subscribe()
       : pageAlerts
       ? this.store
@@ -199,14 +194,14 @@ export class PageLists extends BaseComponent implements OnInit {
   }
 */
 
-  public toggle(subscribed: boolean, stream: StreamInterest): void {
+  public toggle(subscribed: boolean, stream: StreamList): void {
     this.isUser$
       .pipe(
         take(1),
         switchMap((authenticated: boolean) =>
           authenticated
             ? this.store.dispatch(
-                new ActionInterestsSubscriptionToggle(stream.id, true)
+                new ActionListsSubscriptionToggle(stream.id, true)
               )
             : this.store.dispatch(new ActionMobileAuthSelect())
         )
@@ -214,24 +209,24 @@ export class PageLists extends BaseComponent implements OnInit {
       .subscribe();
   }
 
-  public toggleOn(on: boolean, interest: StreamInterest): void {
-    this.store.dispatch(new ActionInterestsSubscriptionOnOff(interest.id, on));
+  public toggleOn(on: boolean, list: StreamList): void {
+    this.store.dispatch(new ActionListsSubscriptionOnOff(list.id, on));
   }
 
-  public setOpened(itemIndex: number, interest: Interest): void {
+  public setOpened(itemIndex: number, list: List): void {
     this.currentlyOpenedItemIndex = itemIndex;
     this.currentlyOpenedItems[itemIndex] = true;
     this.spinner[itemIndex] = true;
 
     this.store
-      .dispatch(new ActionInterestSetId(interest.id))
+      .dispatch(new ActionListSetId(list.id))
       .pipe(
         switchMap(() =>
-          this.store.dispatch(new ActionInterestEventsGetAnonymous())
+          this.store.dispatch(new ActionListEventsGetAnonymous())
         ),
         tap(() => {
-          const events = this.store.selectSnapshot(StateInterest.events);
-          this.interestEvents[itemIndex] = events;
+          const events = this.store.selectSnapshot(StateList.events);
+          this.listEvents[itemIndex] = events;
           this.spinner[itemIndex] = false;
         })
       )
@@ -239,20 +234,20 @@ export class PageLists extends BaseComponent implements OnInit {
   }
 
   public setClosed(itemIndex: number): void {
-    this.interestEvents[itemIndex] = null;
+    this.listEvents[itemIndex] = null;
     if (this.currentlyOpenedItemIndex === itemIndex) {
       this.currentlyOpenedItemIndex = -1;
     }
   }
 
-  public selectInterest(interest: Interest) {
+  public selectList(list: List) {
     const isUser: boolean = this.store.selectSnapshot(StateUser.isUser);
 
     if (isUser) {
       this.store.dispatch([
         new ActionAppLoadingShow(),
-        new Navigate([Pages.Tabs, Pages.Lists, Pages.InterestDetail], {
-          id: interest.id
+        new Navigate([Pages.Tabs, Pages.Lists, Pages.ListDetail], {
+          id: list.id
         })
       ]);
     } else {
@@ -261,19 +256,19 @@ export class PageLists extends BaseComponent implements OnInit {
   }
 
   /*
-  public selectSearchInterest(interest: Interest) {
+  public selectSearchList(list: List) {
     this.store
       .dispatch(new ActionSearchReset())
       .pipe(
         switchMap(() =>
-          this.store.dispatch(new ActionInterestGet(interest.id))
+          this.store.dispatch(new ActionListGet(list.id))
         ),
         switchMap(() =>
           this.store.dispatch([
             new ActionAppLoadingShow(),
             new ActionSearchReset(),
-            new Navigate([Pages.Tabs, Pages.Lists, Pages.InterestDetail], {
-              id: interest.id
+            new Navigate([Pages.Tabs, Pages.Lists, Pages.ListDetail], {
+              id: list.id
             })
           ])
         )
@@ -290,12 +285,12 @@ export class PageLists extends BaseComponent implements OnInit {
 
   public add(): void {
     this.store.dispatch(
-      new Navigate([Pages.Tabs, Pages.Lists, Pages.AssetInterest])
+      new Navigate([Pages.Tabs, Pages.Lists, Pages.AssetList])
     );
   }
 
   public loadData(event: any): void {
-    this.store.dispatch(new ActionInterestsPage(this.infiniteScroll));
+    this.store.dispatch(new ActionListsPage(this.infiniteScroll));
   }
 
   public select(event: Event): void {

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Interest } from '@firefly/cloud';
+import { List } from '@firefly/cloud';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import algoliaSearch, { SearchIndex } from 'algoliasearch/lite';
 import { from, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {
   ActionSearchEvents,
-  ActionSearchInterests,
+  ActionSearchLists,
   ActionSearchReset
 } from './search.actions';
 import { StateSearchModel } from './search.state.model';
@@ -20,10 +20,10 @@ export class StateSearch {
     '45b11751dc7e276f781a85f719abda66'
   );
 
-  public interestsIndex: SearchIndex = this.searchClient.initIndex('interests');
+  public listsIndex: SearchIndex = this.searchClient.initIndex('lists');
   public eventsIndex: SearchIndex = this.searchClient.initIndex('events');
 
-  @Selector() static searchResults(state: StateSearchModel): Array<Interest> {
+  @Selector() static searchResults(state: StateSearchModel): Array<List> {
     return state.searchResults;
   }
   @Selector() static searchResultsFound(state: StateSearchModel): boolean {
@@ -35,10 +35,10 @@ export class StateSearch {
     patchState({ searchResults: [] });
   }
 
-  @Action(ActionSearchInterests)
-  searchInterests(
+  @Action(ActionSearchLists)
+  searchLists(
     { patchState }: StateContext<StateSearchModel>,
-    { searchString }: ActionSearchInterests
+    { searchString }: ActionSearchLists
   ) {
     let hits = [];
 
@@ -46,7 +46,7 @@ export class StateSearch {
       return of(patchState({ searchResults: [] }));
     }
 
-    return from(this.interestsIndex.search(searchString)).pipe(
+    return from(this.listsIndex.search(searchString)).pipe(
       tap((result) => {
         hits = result.hits;
         patchState({ searchResults: hits });

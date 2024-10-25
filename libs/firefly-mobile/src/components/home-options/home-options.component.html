@@ -2,19 +2,19 @@
   <ion-segment
     *ngIf="isStream"
     mode="ios"
-    [value]="interestType"
+    [value]="listType"
     (ionChange)="filterChanged($event)"
   >
-    <ion-segment-button [value]="InterestType.Unsubscribed">{{
-      'page.interest.filter.unsubscribed' | translate
+    <ion-segment-button [value]="ListType.Unsubscribed">{{
+      'page.list.filter.unsubscribed' | translate
     }}</ion-segment-button>
-    <ion-segment-button [value]="InterestType.Subscribed">{{
-      'page.interest.filter.subscribed' | translate
+    <ion-segment-button [value]="ListType.Subscribed">{{
+      'page.list.filter.subscribed' | translate
     }}</ion-segment-button>
     <ion-segment-button
-      [value]="InterestType.Created"
+      [value]="ListType.Created"
       *ngIf="isPublisher$ | async"
-      >{{ 'page.interest.filter.created' | translate }}</ion-segment-button
+      >{{ 'page.list.filter.created' | translate }}</ion-segment-button
     >
   </ion-segment>
 

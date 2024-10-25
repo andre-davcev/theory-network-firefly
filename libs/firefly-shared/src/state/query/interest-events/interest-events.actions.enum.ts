@@ -1,9 +1,9 @@
-export enum ActionsInterestEvents {
-  Reset = '[InterestEvents] Reset',
-  GetData = '[InterestEvents] Get Data',
-  Get = '[InterestEvents] Get',
-  Add = '[InterestEvents] Add',
-  Remove = '[InterestEvents] Remove',
-  Sync = '[InterestEvents] Sync',
-  Filter = '[InterestEvents] Filter'
+export enum ActionsListEvents {
+  Reset = '[ListEvents] Reset',
+  GetData = '[ListEvents] Get Data',
+  Get = '[ListEvents] Get',
+  Add = '[ListEvents] Add',
+  Remove = '[ListEvents] Remove',
+  Sync = '[ListEvents] Sync',
+  Filter = '[ListEvents] Filter'
 }

@@ -23,7 +23,7 @@ import {
   ActionEventPlaceSet,
   ActionEventSave,
   ActionEventTimeSet,
-  ActionInterestEventsGetAnonymous,
+  ActionListEventsGetAnonymous,
   ActionUserEventsDelete,
   Color,
   IconSlot,
@@ -41,10 +41,7 @@ import { TimestampFormat } from '@theory/firebase';
 
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ActionMobileToast } from '../../state';
-import {
-  PageAssetsInterests,
-  ResolverPageAssetsInterests
-} from '../assets-interests';
+import { PageAssetsLists, ResolverPageAssetsLists } from '../assets-lists';
 import { PageEventLocation } from '../event-location';
 
 @Component({
@@ -92,7 +89,7 @@ export class PageEventDetail {
     private store: Store,
     private camera: ServiceCamera,
     private modalController: ModalController,
-    private resolver: ResolverPageAssetsInterests,
+    private resolver: ResolverPageAssetsLists,
     public navController: NavController,
     private translate: TranslateService,
     private alert: AlertController
@@ -103,16 +100,16 @@ export class PageEventDetail {
   }
 
   public navigate(
-    page: Pages.AssetsInterests | Pages.ImageSelector | Pages.EventLocation
+    page: Pages.AssetsLists | Pages.ImageSelector | Pages.EventLocation
   ) {
-    if (page === Pages.AssetsInterests) {
+    if (page === Pages.AssetsLists) {
       this.resolver
         .resolve({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot)
         .pipe(
           switchMap(() =>
             from(
               this.modalController.create({
-                component: PageAssetsInterests,
+                component: PageAssetsLists,
                 componentProps: { modal: true }
               })
             )
@@ -275,7 +272,7 @@ export class PageEventDetail {
             .dispatch([new ActionAppLoadingShow(), new ActionEventSave()])
             .pipe(
               switchMap(() =>
-                this.store.dispatch(new ActionInterestEventsGetAnonymous())
+                this.store.dispatch(new ActionListEventsGetAnonymous())
               ),
               map(() =>
                 isNew
@@ -310,9 +307,7 @@ export class PageEventDetail {
     this.store
       .dispatch(new ActionEventAccept())
       .pipe(
-        switchMap(() =>
-          this.store.dispatch(new ActionInterestEventsGetAnonymous())
-        )
+        switchMap(() => this.store.dispatch(new ActionListEventsGetAnonymous()))
       )
       .subscribe();
   }
@@ -321,9 +316,7 @@ export class PageEventDetail {
     this.store
       .dispatch(new ActionEventDeny())
       .pipe(
-        switchMap(() =>
-          this.store.dispatch(new ActionInterestEventsGetAnonymous())
-        )
+        switchMap(() => this.store.dispatch(new ActionListEventsGetAnonymous()))
       )
       .subscribe();
   }

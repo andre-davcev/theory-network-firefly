@@ -1,7 +1,7 @@
 import { Subscription, SubscriptionPartial } from '@firefly/cloud';
 import { DocumentSnapshot } from '@theory/firebase';
 
-import { InterestsFilter } from '../../composite/interests/interests.filter.model';
+import { ListsFilter } from '../../composite/lists/lists.filter.model';
 import { ActionsUserSubscriptions } from './user-subscriptions.actions.enum';
 
 export class ActionUserSubscriptionsReset {
@@ -37,5 +37,5 @@ export class ActionUserSubscriptionsSync {
 }
 export class ActionUserSubscriptionsFilter {
   static readonly type = ActionsUserSubscriptions.Filter;
-  constructor(public filter: InterestsFilter) {}
+  constructor(public filter: ListsFilter) {}
 }

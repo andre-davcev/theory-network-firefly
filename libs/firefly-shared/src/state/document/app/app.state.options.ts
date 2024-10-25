@@ -2,7 +2,7 @@ import { StoreOptions } from '@ngxs/store/src/symbols';
 
 import { CoreUtil } from '@theory/core';
 import { RouterStateParams } from '@theory/ngxs';
-import { EventType, InterestType } from '../../../enums';
+import { EventType, ListType } from '../../../enums';
 import { StateAppModel } from './app.state.model';
 
 export const DEFAULT_ROUTER_STATE: RouterStateParams = {
@@ -17,8 +17,8 @@ export const StateAppOptions: StoreOptions<StateAppModel> = {
   defaults: {
     loading: false,
     loadingElement: null,
-    interestType: InterestType.Unsubscribed,
-    interestVirtual: false,
+    listType: ListType.Unsubscribed,
+    listVirtual: false,
     eventType: EventType.Upcoming,
     eventVirtual: false,
     notificationsIndex: 0,

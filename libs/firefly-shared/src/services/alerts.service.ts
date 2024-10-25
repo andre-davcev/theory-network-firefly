@@ -15,7 +15,7 @@ export class ServiceAlerts extends ServiceFirestore<Alert> {
     return super.formCreate({
       ...object,
 
-      interests: [object.interests, []]
+      lists: [object.lists, []]
     });
   }
 }

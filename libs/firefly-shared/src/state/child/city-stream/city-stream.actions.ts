@@ -1,8 +1,8 @@
-import { StreamInterest, SubscriptionPartial } from '@firefly/cloud';
+import { StreamList, SubscriptionPartial } from '@firefly/cloud';
 
 import { DocumentSnapshot } from '@theory/firebase';
 
-import { InterestsFilter } from '../../composite';
+import { ListsFilter } from '../../composite';
 import { ActionsCityStream } from './city-stream.actions.enum';
 
 export class ActionCityStreamReset {
@@ -15,7 +15,7 @@ export class ActionCityStreamGetData {
 export class ActionCityStreamSetData {
   static readonly type = ActionsCityStream.SetData;
   constructor(
-    public data: Record<string, StreamInterest>,
+    public data: Record<string, StreamList>,
     public fetch: boolean = false
   ) {}
 }
@@ -25,8 +25,8 @@ export class ActionCityStreamGet {
 export class ActionCityStreamAdd {
   static readonly type = ActionsCityStream.Add;
   constructor(
-    public snapshot: DocumentSnapshot<StreamInterest>,
-    public entity?: StreamInterest
+    public snapshot: DocumentSnapshot<StreamList>,
+    public entity?: StreamList
   ) {}
 }
 export class ActionCityStreamRemove {
@@ -35,11 +35,11 @@ export class ActionCityStreamRemove {
 }
 export class ActionCityStreamSync {
   static readonly type = ActionsCityStream.Sync;
-  constructor(public object: StreamInterest) {}
+  constructor(public object: StreamList) {}
 }
 export class ActionCityStreamFilter {
   static readonly type = ActionsCityStream.Filter;
-  constructor(public filter: InterestsFilter) {}
+  constructor(public filter: ListsFilter) {}
 }
 
 export class ActionCityStreamSubscriptionNew {

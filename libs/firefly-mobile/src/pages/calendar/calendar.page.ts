@@ -12,12 +12,12 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
-import { Alert, DateEvents, Event, Interest } from '@firefly/cloud';
+import { Alert, DateEvents, Event, List } from '@firefly/cloud';
 import {
   ActionAppLoadingShow,
   ActionCalendarPage,
-  ActionInterestGet,
-  ActionInterestReset,
+  ActionListGet,
+  ActionListReset,
   ActionSearchEvents,
   ActionSearchReset,
   ActionUserEventsDelete,
@@ -25,7 +25,7 @@ import {
   IconType,
   Pages,
   StateCalendar,
-  StateInterests,
+  StateLists,
   StateSearch,
   StateUser,
   Translation
@@ -50,9 +50,7 @@ export class PageCalendar extends BaseComponent {
   @Select(StateCalendar.showEmpty) showEmpty$!: Observable<boolean>;
   @Select(StateCalendar.emptyMessage) emptyMessage$!: Observable<string>;
   @Select(StateCalendar.type) eventType$!: Observable<EventType>;
-  @Select(StateSearch.searchResults) searchResults$!: Observable<
-    Array<Interest>
-  >;
+  @Select(StateSearch.searchResults) searchResults$!: Observable<Array<List>>;
   @Select(StateSearch.searchResultsFound)
   searchResultsFound$!: Observable<boolean>;
   @Select(StateMobile.menuOpen) menuOpen$!: Observable<boolean>;
@@ -72,7 +70,7 @@ export class PageCalendar extends BaseComponent {
     '8NDQ1FNIDU',
     '45b11751dc7e276f781a85f719abda66'
   );
-  public index: SearchIndex = this.searchClient.initIndex('interests');
+  public index: SearchIndex = this.searchClient.initIndex('lists');
 
   constructor(
     private store: Store,
@@ -136,7 +134,7 @@ export class PageCalendar extends BaseComponent {
 
   public add(): void {
     this.store.dispatch([
-      new ActionInterestReset(),
+      new ActionListReset(),
       new Navigate([
         Pages.Tabs,
         Pages.Calendar,
@@ -150,19 +148,17 @@ export class PageCalendar extends BaseComponent {
     this.store.dispatch(new ActionSearchReset()).subscribe();
   }
 
-  public selectSearchInterest(interest: Interest) {
+  public selectSearchList(list: List) {
     this.store
       .dispatch(new ActionSearchReset())
       .pipe(
-        switchMap(() =>
-          this.store.dispatch(new ActionInterestGet(interest.id))
-        ),
+        switchMap(() => this.store.dispatch(new ActionListGet(list.id))),
         switchMap(() =>
           this.store.dispatch([
             new ActionAppLoadingShow(),
             new ActionSearchReset(),
-            new Navigate([Pages.Tabs, Pages.Lists, Pages.InterestDetail], {
-              id: interest.id
+            new Navigate([Pages.Tabs, Pages.Lists, Pages.ListDetail], {
+              id: list.id
             })
           ])
         )
@@ -189,7 +185,7 @@ export class PageCalendar extends BaseComponent {
     const popover: HTMLIonPopoverElement = await this.popover.create({
       component: ComponentHomeOptions,
       componentProps: {
-        interestType: this.store.selectSnapshot(StateInterests.type),
+        listType: this.store.selectSnapshot(StateLists.type),
         eventType: this.store.selectSnapshot(StateCalendar.type),
         isStream: false,
         virtual: this.store.selectSnapshot(StateCalendar.virtual)

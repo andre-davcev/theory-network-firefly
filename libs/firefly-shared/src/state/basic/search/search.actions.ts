@@ -1,7 +1,7 @@
 import { ActionsSearch } from './search.actions.enum';
 
-export class ActionSearchInterests {
-  static readonly type = ActionsSearch.SearchInterests;
+export class ActionSearchLists {
+  static readonly type = ActionsSearch.SearchLists;
   constructor(public searchString: string) {}
 }
 export class ActionSearchEvents {
